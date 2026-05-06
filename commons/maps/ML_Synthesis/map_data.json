@@ -1,0 +1,70 @@
+{
+  "map_info": {
+    "name": "ML Synthesis Arena",
+    "lookup_name": "ML_Synthesis",
+    "description": "Everything comes together â€” joint learning, explainability, and anomaly detection on floating platforms in an open arena. The synthesis of machine learning.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "machinelearning",
+      "estimated_time": "5-8 minutes",
+      "spatial_temperature": 0.7,
+      "design_notes": "Open arena with raised platforms (h3) scattered in a void-floor (h0) space. Walkways (h1) connect spawn to each platform. Three artifacts on separate platforms â€” synthesis requires visiting all. Player navigates between islands."
+    },
+    "title": "Agents That Question Themselves"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","0","0","0","0","2","2","2"],
+      ["1","1","1","0","0","0","0","2","2","2"],
+      ["1","1","1","2","0","0","0","0","2","2"],
+      ["2","0","2","0","0","0","0","0","0","0"],
+      ["2","0","2","0","0","2","2","0","0","0"],
+      ["2","0","2","0","0","2","2","0","0","0"],
+      ["2","0","2","2","2","2","2","2","0","0"],
+      ["2","0","0","0","0","0","0","1","1","1"],
+      ["2","2","2","0","0","0","0","1","0","1"],
+      ["2","2","2","0","0","0","0","1","1","1"]
+    ],
+    "utilities": [
+      ["s"," "," "," "," "," "," "," "," "," "],
+      [" ","an","tc:5:x"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","tc:5:z"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      ["wp"," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," ","sp"," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","joint_learn_walk:0:2:0.6"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","explainable_ai_xai_vr:0:2:0.6"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      ["anomaly_detection:0:2:0.6"," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

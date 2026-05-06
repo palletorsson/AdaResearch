@@ -1,0 +1,23 @@
+{
+  "id": "rd06_coral_pillars",
+  "preset": "coral",
+  "grid_size": 72,
+  "iterations": 4000,
+  "seed": 21,
+  "render_mode": "pillars",
+  "threshold": 0.22,
+  "color_lo": [
+    0.4,
+    0.2,
+    0.15
+  ],
+  "color_hi": [
+    0.95,
+    0.55,
+    0.3
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.4,
+  "layout": "rd_pillars",
+  "notes": "Coral pattern rendered as pillars \u00e2\u20ac\u201d 3D forest of polyps. Above-threshold cells become stubby columns, V concentration drives height."
+}

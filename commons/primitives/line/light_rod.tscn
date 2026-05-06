@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bmfemsd8pptdt"]
+
+[ext_resource type="Script" uid="uid://ilfsito53024" path="res://commons/primitives/line/light_rod.gd" id="1_lightrod"]
+
+[node name="LightRod" type="Node3D" unique_id=17845947]
+script = ExtResource("1_lightrod")

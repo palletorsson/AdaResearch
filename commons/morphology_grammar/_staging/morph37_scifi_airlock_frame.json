@@ -1,0 +1,101 @@
+{
+  "id": "morph37_scifi_airlock_frame",
+  "family": "scifi_props",
+  "notes": "Sci-fi props pass: a standing airlock or portal frame with a recessed front face and heavy side shoulders.",
+  "camera_yaw": 0.7,
+  "camera_pitch": 0.36,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.18,
+      1.64,
+      0.42
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "airlock_base",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.12,
+        "scale": 1.3
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "airlock_face",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 2,
+        "rows": 5,
+        "length": 0.1,
+        "scale": 0.72,
+        "door_col": 1,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "airlock_shoulders",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.34,
+        "scale": 0.28,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.18,
+          0.0
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "airlock_crown",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.28,
+        "scale": 0.6,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.18,
+          -0.04
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

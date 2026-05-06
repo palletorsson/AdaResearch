@@ -1,0 +1,55 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Vectors_1",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "VectorBasics and basis_vectors_rig anchor the coordinate context; dark_sphere continues the ambient presence throughout the sequence.",
+  "style": "bauhaus",
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.059,
+  "breath_zones": [
+    {
+      "size": 48,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0625,
+        3.1666666666666665
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 3,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

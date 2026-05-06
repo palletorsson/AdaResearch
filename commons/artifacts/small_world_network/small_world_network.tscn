@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/small_world_network/small_world_network.gd" id="1_script"]
+
+[node name="SmallWorldNetwork" type="Node3D"]
+script = ExtResource("1_script")

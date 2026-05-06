@@ -1,0 +1,24 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.tscn`.
+Your implementation must bring the `Random Walker Machine` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Random Walker Machine
+
+## Folder Summary
+
+The `Random Walker Machine` module provides a 3D sandbox for exploring the ideas behind the Random Walker Machine workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `randomwalkermachine.tscn` and the controller script `randomwalkermachine.gd`.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Implement the lifecycle helpers `_init()`, `update_position()`, `_ready()`, `setup_noise()`, `generate_target_points()`, `create_walker_agents()`.
+- Maintain state containers including `noise`, `circle_radius`, `target_points`, `walker_agents`, `num_walkers`, `learning_rate`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

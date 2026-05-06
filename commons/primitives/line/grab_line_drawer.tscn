@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpq8yl3drawer"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/line/grab_line_drawer.gd" id="2_drawer"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_highlight"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_handle"]
+size = Vector3(0.1, 0.06, 0.06)
+
+[sub_resource type="BoxMesh" id="BoxMesh_handle"]
+size = Vector3(0.1, 0.06, 0.06)
+
+[node name="GrabLineDrawer" instance=ExtResource("1_pickable")]
+script = ExtResource("2_drawer")
+line_length = 0.3
+line_thickness = 0.008
+min_length = 0.05
+max_length = 2.0
+line_color = Color(0.2, 0.6, 1, 1)
+show_length_label = false
+trail_color = Color(0.2, 0.8, 1, 0.9)
+trail_width = 0.02
+trail_length = 300
+min_draw_distance = 0.008
+fade_trail = true
+drawer_tip_color = Color(0.3, 0.9, 1, 1)
+drawer_tip_size = 0.015
+ranged_grab_method = 0
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_handle")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("BoxMesh_handle")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_highlight")]

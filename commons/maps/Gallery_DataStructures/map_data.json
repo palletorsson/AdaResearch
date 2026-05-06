@@ -1,0 +1,121 @@
+{
+  "map_info": {
+    "name": "Gallery: DataStructures",
+    "lookup_name": "Gallery_DataStructures",
+    "description": "Showcase of 15 unplaced artifacts from DataStructures. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 12,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "5-7 minutes",
+      "learning_objectives": [
+        "Browse 15 DataStructures artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "DataStructures Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" ","sp"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","request_note:0:1.5#text:binary trees"," ","request_note:0:1.5#text:bsp trees"," ","request_note:0:1.5#text:bst visualization"," ","request_note:0:1.5#text:btree visualization"," "," "],
+      [" "," ","binary_trees:0:-0.5"," ","bsp_trees:0:-0.5"," ","bst_visualization:0:-0.5"," ","btree_visualization:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:fenwick tree"," ","request_note:0:1.5#text:graph structures"," ","request_note:0:1.5#text:hash maps"," ","request_note:0:1.5#text:heap operations"," "," "],
+      [" "," ","fenwick_tree:0:-0.5"," ","graph_structures:0:-0.5"," ","hash_maps:0:-0.5"," ","heap_operations:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:linked lists"," ","request_note:0:1.5#text:quadtrees octrees"," ","request_note:0:1.5#text:redblack visualization"," ","request_note:0:1.5#text:segment tree"," "," "],
+      [" "," ","linked_lists:0:-0.5"," ","quadtrees_octrees:0:-0.5"," ","redblack_visualization:0:-0.5"," ","segment_tree:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:suffix array tree"," ","request_note:0:1.5#text:trie operations"," ","request_note:0:1.5#text:union find"," "," "," "," "],
+      [" "," ","suffix_array_tree:0:-0.5"," ","trie_operations:0:-0.5"," ","union_find:0:-0.5"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

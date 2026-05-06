@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://pylon_cables_artifact"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/line_builder_3d/pylon_cables.gd" id="1_script"]
+
+[node name="PylonCables" type="Node3D"]
+script = ExtResource("1_script")
+num_pylons = 4
+pylon_spacing = 8.0
+pylon_height = 6.0
+pylon_base_width = 1.5
+pylon_top_width = 0.5
+pylon_color = Color(0.4, 0.4, 0.45, 1)
+cables_per_span = 3
+cable_thickness = 0.03
+cable_sag = 0.8
+cable_color = Color(0.1, 0.1, 0.12, 1)
+cable_segments = 20
+box_size = Vector3(0.8, 0.6, 0.5)
+box_color = Color(0.3, 0.5, 0.3, 1)
+wind_enabled = true
+wind_strength = 0.3
+wind_speed = 1.5

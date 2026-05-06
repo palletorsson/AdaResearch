@@ -1,0 +1,35 @@
+{
+  "id": "sb04_cloth_tablecloth",
+  "topology": "cloth_grid",
+  "cols": 14,
+  "rows": 14,
+  "cell_size": 0.2,
+  "pin_mode": "four_corners",
+  "stiffness": 0.7,
+  "damping": 0.994,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -2.5,
+  "steps": 180,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "camera_yaw": 0.45,
+  "camera_pitch": 0.25,
+  "render": {
+    "color": [
+      0.95,
+      0.93,
+      0.88
+    ],
+    "roughness": 0.7,
+    "double_sided": true
+  },
+  "layout": "verlet_cloth",
+  "notes": "Square cloth held at all four corners \u2014 belly sags, edges scallop between pins."
+}

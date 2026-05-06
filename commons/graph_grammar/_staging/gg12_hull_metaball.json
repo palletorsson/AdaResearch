@@ -1,0 +1,44 @@
+{
+  "id": "gg12_hull_metaball",
+  "notes": "Hull + metaball \u00e2\u20ac\u201d organism fuses with its membrane into a single smooth shell.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.14
+  },
+  "iterations": 3,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.22,
+  "metaball_resolution": 72,
+  "materials": {
+    "default": [
+      0.72,
+      0.55,
+      0.4
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.5,
+        "spread_deg": 55,
+        "radius_decay": 0.72,
+        "jitter": 0.4
+      }
+    },
+    {
+      "op": "hull_shell",
+      "selector": "all",
+      "params": {
+        "shell_scale": 1.25,
+        "shell_radius": 0.05
+      }
+    }
+  ]
+}

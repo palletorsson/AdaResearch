@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Cycling demonstration of rotation, scaling, translation, and shearing applied to point, line, plane, and cube primitives
+# desire: To make matrix transformations visible: watch the same four operations reshape four geometric objects in sequence
+# critical_parameter: stage_interval — seconds per transformation type; controls the pace of the demonstration cycle
+# triggers: Each 3-second stage applies a new transformation; the four primitives deform together showing how transforms compose
+# emerges: Understanding that all mesh deformation reduces to four matrix operations applied to vertices
+# needs: Material setup [has], scene child references [has], VR interaction [missing — auto-cycling demo]
+# relationships: Core artifact across Meshes_One, Meshes_Three, and Meshes_Four. Foundation for all procedural geometry.
+# truth: A vertex does not know what shape it belongs to — it only knows the matrix that moves it.
+
 var time = 0.0
 var transformation_stage = 0
 var stage_timer = 0.0
@@ -15,11 +25,11 @@ enum TransformationType {
 
 var current_transformation = TransformationType.ROTATION
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	setup_initial_transforms()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Point material - bright white
 	var point_material = StandardMaterial3D.new()
 	point_material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
@@ -72,7 +82,7 @@ func setup_materials():
 	translation_material.emission = Color(0.05, 0.3, 0.2, 1.0)
 	$TransformationControls/TranslationIndicator.material_override = translation_material
 
-func setup_initial_transforms():
+func setup_initial_transforms() -> void:
 	# Reset all objects to base positions
 	$Point.position = Vector3(-6, 0, 0)
 	$Line.position = Vector3(-2, 0, 0)
@@ -90,7 +100,7 @@ func setup_initial_transforms():
 	$Plane.rotation = Vector3.ZERO
 	$Cube.rotation = Vector3.ZERO
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	stage_timer += delta
 	
@@ -106,7 +116,7 @@ func _process(delta):
 	apply_transformations()
 	animate_indicators()
 
-func apply_transformations():
+func apply_transformations() -> void:
 	var progress = stage_timer / stage_interval
 	var smooth_progress = smoothstep(0.0, 1.0, progress)
 	
@@ -123,7 +133,7 @@ func apply_transformations():
 		TransformationType.SHEARING:
 			apply_shearing_transformations(smooth_progress)
 
-func apply_rotation_transformations(progress):
+func apply_rotation_transformations(progress) -> void:
 	# Point: Simple pulsing (0D -> can't really rotate, so pulse instead)
 	var pulse = 1.0 + sin(time * 4.0) * 0.3
 	$Point.scale = Vector3.ONE * pulse
@@ -140,7 +150,7 @@ func apply_rotation_transformations(progress):
 	$Cube.rotation.y = progress * PI * 2.0
 	$Cube.rotation.z = progress * PI * 0.75
 
-func apply_scaling_transformations(progress):
+func apply_scaling_transformations(progress) -> void:
 	# Point: Scale uniformly
 	var scale_factor = 1.0 + progress * 2.0
 	$Point.scale = Vector3.ONE * scale_factor
@@ -157,7 +167,7 @@ func apply_scaling_transformations(progress):
 	$Cube.scale.y = 1.0 + cos(progress * PI) * 1.0
 	$Cube.scale.z = 1.0 + progress * 0.8
 
-func apply_translation_transformations(progress):
+func apply_translation_transformations(progress) -> void:
 	var base_positions = [Vector3(-6, 0, 0), Vector3(-2, 0, 0), Vector3(2, 0, 0), Vector3(6, 0, 0)]
 	
 	# Point: Linear motion
@@ -181,7 +191,7 @@ func apply_translation_transformations(progress):
 		sin(progress * PI * 4.0) * 0.6
 	)
 
-func apply_shearing_transformations(progress):
+func apply_shearing_transformations(progress) -> void:
 	# Create shearing effect using transform basis manipulation
 	var shear_amount = progress * 0.5
 	
@@ -219,7 +229,7 @@ func apply_shearing_transformations(progress):
 	cube_transform.origin = Vector3(6, 0, 0)
 	$Cube.transform = cube_transform
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Highlight current transformation indicator
 	var indicators = [
 		$TransformationControls/RotationIndicator,
@@ -258,3 +268,6 @@ func get_transformation_name() -> String:
 			return "Shearing"
 		_:
 			return "Unknown"
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

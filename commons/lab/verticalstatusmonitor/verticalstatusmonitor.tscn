@@ -2,7 +2,9 @@
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
- 
+
+var last_position_message: String = \"\"
+var position_label: Label3D
 
 func _ready():
 	# Connect to GameManager if available
@@ -10,13 +12,71 @@ func _ready():
 		GameManager.console_message_added.connect(_on_console_message_added)
 		GameManager.health_updated.connect(_on_health_updated)
 		GameManager.score_updated.connect(_on_score_updated)
-	
+
+	# Create label for displaying position
+	_create_position_display()
+
 	# Start screen animation
 	_animate_screen()
 
+func _create_position_display():
+	\"\"\"Create a Label3D to display player position on the screen\"\"\"
+	position_label = Label3D.new()
+	position_label.position = Vector3(0, 1.25, 0.36)  # In front of screen
+	position_label.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+	position_label.font_size = 20
+	position_label.modulate = Color(0, 1, 0.3)  # Green
+	position_label.text = \"\"
+	position_label.outline_size = 4
+	position_label.outline_modulate = Color.BLACK
+	add_child(position_label)
+
 func _on_console_message_added(message_data: Dictionary):
 	print(\"Monitor received: %s\" % message_data.text)
-	# Could flash screen or change colors based on message type
+
+	# Check if this is a player position message
+	if message_data.source == \"player_position\":
+		last_position_message = message_data.text
+		if position_label:
+			position_label.text = message_data.text
+			# Flash the screen green briefly
+			_flash_screen(Color.GREEN)
+
+	# Flash screen based on message type
+	if message_data.type == \"error\":
+		_flash_screen(Color.RED)
+	elif message_data.type == \"warning\":
+		_flash_screen(Color.YELLOW)
+
+func _flash_screen(color: Color):
+	\"\"\"Briefly flash the screen with a color\"\"\"
+	# Check if node is in tree
+	if not is_inside_tree():
+		return
+
+	var screen = $KioskBody/ScreenFrame/Screen
+	if not screen or not screen.material_override:
+		return
+
+	var mat = screen.material_override as StandardMaterial3D
+	if not mat:
+		return
+
+	var original_color = mat.emission
+	mat.emission = color * 0.5
+
+	# Check again before creating timer
+	if not is_inside_tree():
+		mat.emission = original_color
+		return
+
+	await get_tree().create_timer(0.2).timeout
+
+	# Check if still valid after await
+	if not is_inside_tree() or not screen or not mat:
+		return
+
+	mat.emission = original_color
 
 func _on_health_updated(new_health: float):
 	# Update screen color based on health

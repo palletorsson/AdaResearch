@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/audio/rack_controls/RackSliderH.gd" id="1"]
+
+[node name="RackSliderH" type="Control"]
+custom_minimum_size = Vector2(180, 50)
+script = ExtResource("1")

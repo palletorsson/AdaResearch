@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cckyacr2cyfvr"]
+
+[ext_resource type="Script" uid="uid://bgdkpsxr0roqx" path="res://tools/VRBrush.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://c7r5upmpm2rrm" path="res://commons/primitives/cubes/grab_long_stick.tscn" id="2_2odry"]
+
+[sub_resource type="StandardMaterial3D" id="3"]
+albedo_color = Color(0.4, 0.6, 0.8, 1)
+metallic = 0.2
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="2"]
+top_radius = 2.0
+bottom_radius = 2.0
+
+[sub_resource type="CylinderShape3D" id="4"]
+radius = 2.0
+
+[node name="VRBrush" type="Node3D"]
+script = ExtResource("1")
+brush_radius = 0.25
+smooth_strength = 0.4
+subdivide_interval = 0.08
+
+[node name="EditableMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0, 0)
+material_override = SubResource("3")
+mesh = SubResource("2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="EditableMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EditableMesh/StaticBody3D"]
+shape = SubResource("4")
+
+[node name="TheGrabStick" parent="." instance=ExtResource("2_2odry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53556705, 1.6531107)

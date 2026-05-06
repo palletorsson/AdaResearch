@@ -1,0 +1,69 @@
+{
+    "description": "Clean, high-tech, sterile but active science lab atmosphere (Half-Life inspired)",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+            "volume_db": -15,
+            "bus": "Ambient"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+            "volume_db": -20,
+            "bus": "Ambient"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_ELECTROMAGNETIC",
+            "volume_db": -25,
+            "bus": "Tech"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SCI_FI_DATA_CHIRPS",
+                "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+                "AudioSynthesizer.SHIELD_HIT"
+            ],
+            "interval_range": [
+                5.0,
+                15.0
+            ],
+            "volume_range": [
+                -20,
+                -12
+            ],
+            "bus": "Tech"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.2,
+                    "damping": 0.1
+                },
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 100
+                }
+            ]
+        },
+        "Tech": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.9,
+                    "tap1_delay_ms": 120,
+                    "tap1_level_db": -10.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.3
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,110 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Tutorial_2D_Color",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 7
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [
+    "color"
+  ],
+  "density": 0.292,
+  "breath_zones": [
+    {
+      "size": 34,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 7
+      },
+      "centroid": [
+        3.0294117647058822,
+        3.088235294117647
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 0,
+      "token": "xyz_coordinates"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 2,
+      "token": "floor_tiles"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "rotating_prisme"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "cube_with_shader"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "rotating_prisme"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "pick_up_cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 14,
+    "walkable_cells": 48,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

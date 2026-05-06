@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj8x32m5v1x8n"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_maze_office.gd" id="1_script"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.2, 0.4, 0.8, 1)
+sky_horizon_color = Color(0.6, 0.7, 0.8, 1)
+
+[sub_resource type="Sky" id="Sky_env"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_env"]
+background_mode = 2
+sky = SubResource("Sky_env")
+ambient_light_source = 3
+ambient_light_color = Color(0.8, 0.8, 0.9, 1)
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+
+[node name="WFCMazeOffice" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_env")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 15, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 10, 20, 25)
+
+[node name="OfficeGenerator" type="Node3D" parent="."]
+script = ExtResource("1_script")
+grid_width = 10
+grid_height = 10
+tiles_scene_path = "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/OfficeTiles.tscn"
+force_path_to_office = true

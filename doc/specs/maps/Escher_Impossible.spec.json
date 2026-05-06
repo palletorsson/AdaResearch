@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Escher_Impossible",
+  "home_sequence": "artmathematics",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": "escher_staircase demonstrates the impossible loop as a walkable structure; penrose_triangle shows the minimal three-edge impossibility; bifurcation_diagram connects visual paradox to mathematical bifurcation.",
+  "style": "escher",
+  "echoes": [],
+  "density": 0.032,
+  "breath_zones": [
+    {
+      "size": 61,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        4.327868852459017,
+        5.885245901639344
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 10,
+      "z": 7,
+      "token": "penrose_triangle"
+    },
+    {
+      "x": 5,
+      "z": 10,
+      "token": "magritte_pipe"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 63,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

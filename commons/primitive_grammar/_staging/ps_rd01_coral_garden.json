@@ -1,0 +1,20 @@
+{
+  "id": "ps_rd01_coral_garden",
+  "layout": "rd_scatter",
+  "rd": {
+    "preset": "coral",
+    "grid_size": 48,
+    "iterations": 3500,
+    "seed": 17,
+    "threshold": 0.28,
+    "cell_size": 0.07
+  },
+  "shape": "cylinder",
+  "palette": "wood",
+  "primitive_size": 0.04,
+  "height_from_v": true,
+  "height_amp": 0.6,
+  "camera_yaw": 0.55,
+  "camera_pitch": 0.45,
+  "notes": "DNA BRIDGE: Gray-Scott coral \u2192 cylinder garden. Above-threshold cells place beige/brown wood-palette cylinders, height scaled by V. Reads as a tree-stump forest following the coral ridges."
+}

@@ -1,0 +1,15 @@
+# The grid as shared authored surface — placement, traversal, and the politics of the absent catalyst
+
+Chamber_Arrays is the only catalyst chamber in the curriculum that does not hand the learner a projection tool. The interaction is observation and arrangement: the learner places obstacles on a grid, and a grid agent adapts its traversal in response. No projectiles are fired. No damage is dealt. The chamber's argument is that arrays hold state, and state responds to what is placed within it.
+
+Bruno Latour's actor-network theory treats artifacts and humans as co-participants in whatever practice is underway. A desk is not a passive support for work; it is a participant in the work, enforcing certain postures and foreclosing others. The grid agent in the chamber is Latour's participant made explicit. The learner does not command the agent; the learner places obstacles, and the agent's traversal is shaped by the placements. Both sides are participants in the composition the chamber stages.
+
+The chamber is small. A grid covers the floor, labelled by row and column. A grid_agent:copy moves through the grid according to a simple traversal rule — row-major scan, with detours around obstacles. The learner carries a set of small blocks they can place on any cell. Each placement forces the agent to find a new path.
+
+A science screen on the wall reads out the agent's current plan as a sequence of cell indices. As obstacles are added, the plan updates, and the screen highlights which indices changed. A second display tracks how many extra steps each new obstacle costs. The readouts convert placement into a measurable effect on the agent's work, so the learner can calibrate their obstacles rather than simply adding them.
+
+Latour's insight lands on the question of authorship. A grid with no obstacles is the agent's grid; its traversal is given. A grid with placed obstacles is a shared grid; its traversal is the product of the agent's rule and the learner's placements. Neither side is the sole author. The composition is a network, and the chamber makes the network legible by showing both sides' contributions in the same readout.
+
+The politics of the absent catalyst are in the refusal of projection. A catalyst chamber typically rewards the learner for emitting a projection that changes the creature's state. Chamber_Arrays refuses this structure. The learner changes the agent's behaviour by placing blocks on a shared surface, and the change is collaborative rather than coercive. The refusal of projection is a small statement about what the curriculum's catalyst practice can be.
+
+Within the sequence, Chamber_Arrays reframes the catalyst practice as arrangement rather than projection. The lesson is that arrays hold state, and state responds to what is placed within it. The chamber hands the learner back to the Lab with the array catalyst absent by design, and with a body-level sense that authorship is often a matter of what you let sit where rather than what you emit at whom.

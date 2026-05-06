@@ -1,0 +1,186 @@
+{
+	"sequences": {
+		"structure": {
+			"description": "Individual spatial formula examples extracted from the Structure Examples showcase. Each map demonstrates one proven pattern from architecture and game design.",
+			"difficulty": "beginner",
+			"layer": "proceduralgeneration",
+			"maps": [
+				"F1_Pedestal",
+				"F2_Corridor",
+				"F4_Amphitheater",
+				"F8_The_Drop",
+				"F9_Frame",
+				"F11_Comparison",
+				"F12_Cathedral",
+				"F13_Observation",
+				"F14_Lab_Bench",
+				"F17_Zen_Garden",
+				"F20_Well",
+				"F26_Portal_Chamber",
+				"F30_Ramp_Walkpath",
+				"F31_Transport_Cube",
+				"F32_Teleporter",
+				"F33_Bridge"
+			],
+			"name": "Structure Grammar: Spatial Formulas",
+			"prerequisites": [],
+			"truth": "Space is authored, not found. Every room is an argument.",
+			"unlocks": [],
+			"artifact_groups": [
+				{
+					"map": "F1_Pedestal",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Pedestal formula: elevated platform centering attention on a single object. The simplest spatial argument — elevation equals importance."
+				},
+				{
+					"map": "F2_Corridor",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Corridor formula: linear space channeling movement. Direction without choice — the spatial grammar of sequence and procession."
+				},
+				{
+					"map": "F4_Amphitheater",
+					"position": "intro",
+					"artifacts": [
+						"light_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Amphitheater formula: descending tiers focusing attention toward center stage. Light sphere as focal point — architecture as collective gaze."
+				},
+				{
+					"map": "F8_The_Drop",
+					"position": "foundation",
+					"artifacts": [
+						"unit_circle"
+					],
+					"size_budget": "environment",
+					"rationale": "The Drop formula: vertical reveal through descent. Unit circle as mathematical anchor in a space that uses height difference as dramatic device."
+				},
+				{
+					"map": "F9_Frame",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Frame formula: walls creating viewports that control what's visible. Architecture as editorial — inclusion and exclusion through structural framing."
+				},
+				{
+					"map": "F11_Comparison",
+					"position": "foundation",
+					"artifacts": [
+						"animated_cube",
+						"cube_scene"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Comparison formula: side-by-side placement forcing evaluation. Animated and static cubes paired — spatial design that makes difference visible."
+				},
+				{
+					"map": "F12_Cathedral",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Cathedral formula: vertical space producing awe through scale disparity. Height-to-width ratio as emotional architecture — the sublime through proportion."
+				},
+				{
+					"map": "F13_Observation",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Observation formula: elevated platform overlooking a scene below. The panopticon principle — spatial power through vantage point."
+				},
+				{
+					"map": "F14_Lab_Bench",
+					"position": "exploration",
+					"artifacts": [
+						"cube_scene",
+						"homagetothesquare",
+						"platonicsolids",
+						"rainbow"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Lab Bench formula: specimens arranged at working height for close inspection. Four mathematical artifacts — Albers squares, Platonic solids, rainbow, cube scene — as research objects."
+				},
+				{
+					"map": "F17_Zen_Garden",
+					"position": "exploration",
+					"artifacts": [
+						"fourier_transform",
+						"noisetorus",
+						"probability_sphere",
+						"unit_circle"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Zen Garden formula: open contemplative space with distributed focal points. Fourier, noise torus, probability sphere, unit circle as meditative mathematical objects."
+				},
+				{
+					"map": "F20_Well",
+					"position": "integration",
+					"artifacts": [
+						"spectrum_display"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Well formula: descent into contained vertical space. Spectrum display at the bottom — the well as spatial metaphor for focused, inward-looking analysis."
+				},
+				{
+					"map": "F26_Portal_Chamber",
+					"position": "integration",
+					"artifacts": [
+						"crystal_ball"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Portal Chamber formula: transitional space between worlds. Crystal ball as the focal artifact — architecture as threshold and transformation."
+				},
+				{
+					"map": "F30_Ramp_Walkpath",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Ramp Walkpath formula: gradual elevation change as spatial narrative. Movement through height without stairs — continuous accessibility as design principle."
+				},
+				{
+					"map": "F31_Transport_Cube",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Transport Cube formula: enclosed mobile platform. Spatial formula for vertical traversal — the elevator as room that moves through architecture."
+				},
+				{
+					"map": "F32_Teleporter",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Teleporter formula: instant spatial relocation. Non-Euclidean connectivity — the spatial formula that breaks physical continuity by design."
+				},
+				{
+					"map": "F33_Bridge",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Bridge formula: span connecting two separated volumes. Architecture as connection over void — the spatial grammar of crossing."
+				}
+			],
+			"content": [
+				"F1_Pedestal: Elevation as Importance",
+				"F2_Corridor: Directed Movement",
+				"F4_Amphitheater: Convergent Gaze",
+				"F8_The_Drop: Vertical Reveal",
+				"F9_Frame: Architecture as Viewport",
+				"F11_Comparison: Side-by-Side Evaluation",
+				"F12_Cathedral: Height as Emotion",
+				"F13_Observation: Vantage Without Contact",
+				"F14_Lab_Bench: Specimens at Working Height",
+				"F17_Zen_Garden: Contemplative Imbalance",
+				"F20_Well: Descent into Focus",
+				"F26_Portal_Chamber: Threshold as Event",
+				"F30_Ramp_Walkpath: Continuous Elevation",
+				"F31_Transport_Cube: Room That Moves",
+				"F32_Teleporter: Non-Euclidean Exit",
+				"F33_Bridge: Span over Void"
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
+}

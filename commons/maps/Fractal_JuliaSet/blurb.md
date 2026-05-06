@@ -1,0 +1,1 @@
+z squared plus c, iterated. The Julia set is the Mandelbrot's sibling—same formula, different perspective. Here, c is fixed and z varies. Each c value produces a different Julia: connected or dust, rabbit or dendrite. The parameter becomes the world.

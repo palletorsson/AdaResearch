@@ -1,0 +1,383 @@
+{
+  "id": "lab_items_horizontal",
+  "name": "Lab Items (Horizontal)",
+  "version": "1.0",
+  "description": "Horizontal lab instrument set using real-world scene scale defaults with XR-grabbable wrapping.",
+  "orientation": {
+    "plane": "XZ",
+    "up_axis": "Y",
+    "forward": "+Z",
+    "grid_size": 0.25,
+    "comment": "25cm per cell. X=left/right, Z=forward/back, Y=up."
+  },
+  "defaults": {
+    "scene_scale": [1.0, 1.0, 1.0],
+    "make_pickable": true,
+    "comment": "Elements keep authored scene scale and are wrapped in XR pickables unless overridden."
+  },
+  "categories": [
+    {"id": "measurement", "name": "Measurement", "color": "#4CAF50"},
+    {"id": "chem_bio", "name": "Chem and Bio", "color": "#2196F3"},
+    {"id": "wave_lab", "name": "Wave Lab", "color": "#FF9800"},
+    {"id": "advanced_registered", "name": "Advanced (Registered)", "color": "#9C27B0"},
+    {"id": "pending_registration", "name": "Pending Registration", "color": "#F44336"}
+  ],
+  "presets": [
+    {
+      "id": "bench_quickstart",
+      "name": "Bench Quickstart",
+      "description": "General-purpose bench with core measurement devices.",
+      "grid_size": [16, 12],
+      "placements": [
+        {"element": "microscope", "position": [0, 0], "rotation": 0},
+        {"element": "samplevialrack", "position": [2, 0], "rotation": 0},
+        {"element": "electronicscales", "position": [4, 0], "rotation": 0},
+        {"element": "multimeter", "position": [6, 0], "rotation": 0},
+        {"element": "oscilloscope", "position": [7, 0], "rotation": 0},
+        {"element": "datatablet", "position": [10, 0], "rotation": 0},
+        {"element": "atmosphericmonitoring", "position": [11, 0], "rotation": 0},
+        {"element": "seismograph", "position": [13, 0], "rotation": 0},
+        {"element": "terminal", "position": [0, 2], "rotation": 0},
+        {"element": "holographicdisplay", "position": [2, 2], "rotation": 0}
+      ]
+    },
+    {
+      "id": "wetlab_prep_lane",
+      "name": "Wet Lab Prep Lane",
+      "description": "Chemistry and biology prep line for specimen handling.",
+      "grid_size": [16, 12],
+      "placements": [
+        {"element": "chemicalapparatus", "position": [0, 0], "rotation": 0},
+        {"element": "samplevialrack", "position": [3, 0], "rotation": 0},
+        {"element": "pipettedispenser", "position": [5, 0], "rotation": 0},
+        {"element": "petri_dish_worms", "position": [6, 0], "rotation": 0},
+        {"element": "dna_specimen", "position": [8, 0], "rotation": 0},
+        {"element": "electronicscales", "position": [10, 0], "rotation": 0},
+        {"element": "microscope", "position": [12, 0], "rotation": 0},
+        {"element": "datatablet", "position": [14, 0], "rotation": 0},
+        {"element": "multimeter", "position": [15, 0], "rotation": 0},
+        {"element": "atmosphericmonitoring", "position": [3, 2], "rotation": 0},
+        {"element": "terminal", "position": [5, 2], "rotation": 0},
+        {"element": "holographicdisplay", "position": [7, 2], "rotation": 0}
+      ]
+    },
+    {
+      "id": "signal_diagnostics_station",
+      "name": "Signal Diagnostics Station",
+      "description": "Wave analysis setup anchored by additive synthesis and scope tools.",
+      "grid_size": [16, 12],
+      "placements": [
+        {"element": "additive_wave_demo", "position": [0, 0], "rotation": 0},
+        {"element": "oscilloscope", "position": [9, 0], "rotation": 0},
+        {"element": "multimeter", "position": [12, 0], "rotation": 0},
+        {"element": "circularradarmonitor", "position": [13, 0], "rotation": 0},
+        {"element": "datatablet", "position": [15, 0], "rotation": 0},
+        {"element": "terminal", "position": [0, 2], "rotation": 0},
+        {"element": "atmosphericmonitoring", "position": [2, 2], "rotation": 0},
+        {"element": "holographicdisplay", "position": [4, 2], "rotation": 0},
+        {"element": "seismograph", "position": [6, 2], "rotation": 0},
+        {"element": "biomagneticresonator", "position": [9, 2], "rotation": 0},
+        {"element": "quantumentanglementmeter", "position": [11, 2], "rotation": 0},
+        {"element": "fluxdetector", "position": [13, 2], "rotation": 0}
+      ]
+    },
+    {
+      "id": "automation_research_cell",
+      "name": "Automation Research Cell",
+      "description": "Large-instrument research layout with robotic and field systems.",
+      "grid_size": [16, 12],
+      "placements": [
+        {"element": "robotarm", "position": [0, 0], "rotation": 0},
+        {"element": "resonancechamber", "position": [4, 0], "rotation": 0},
+        {"element": "electromagneticfieldgenerator", "position": [8, 0], "rotation": 0},
+        {"element": "cryogenicpreservation", "position": [12, 0], "rotation": 0},
+        {"element": "terminal", "position": [0, 4], "rotation": 0},
+        {"element": "datatablet", "position": [2, 4], "rotation": 0},
+        {"element": "quantumentanglementmeter", "position": [3, 4], "rotation": 0},
+        {"element": "fluxdetector", "position": [5, 4], "rotation": 0},
+        {"element": "circularradarmonitor", "position": [7, 4], "rotation": 0},
+        {"element": "biomagneticresonator", "position": [9, 4], "rotation": 0},
+        {"element": "holographicdisplay", "position": [11, 4], "rotation": 0},
+        {"element": "seismograph", "position": [13, 4], "rotation": 0}
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "id": "microscope",
+      "name": "Microscope",
+      "category": "measurement",
+      "size": [2, 1],
+      "icon": "M",
+      "description": "Optical microscope. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/microscope/microscope.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "multimeter",
+      "name": "Multimeter",
+      "category": "measurement",
+      "size": [1, 1],
+      "icon": "V",
+      "description": "Portable electrical measurement tool. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/multimeter/multimeter.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "electronicscales",
+      "name": "Electronic Scales",
+      "category": "measurement",
+      "size": [2, 1],
+      "icon": "W",
+      "description": "Bench electronic scales. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/electronicscales/electronicscales.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "oscilloscope",
+      "name": "Oscilloscope",
+      "category": "measurement",
+      "size": [3, 2],
+      "icon": "~",
+      "description": "Waveform monitor with interactive controls. Registered in grid artifacts.",
+      "scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_grid_artifacts"
+    },
+    {
+      "id": "atmosphericmonitoring",
+      "name": "Atmospheric Monitor",
+      "category": "measurement",
+      "size": [2, 2],
+      "icon": "A",
+      "description": "Environmental monitoring station. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/atmosphericmonitoring/atmosphericmonitoring.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "seismograph",
+      "name": "Seismograph",
+      "category": "measurement",
+      "size": [3, 2],
+      "icon": "S",
+      "description": "Seismic recording instrument. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/seismograph/seismograph.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "chemicalapparatus",
+      "name": "Chemical Apparatus",
+      "category": "chem_bio",
+      "size": [3, 2],
+      "icon": "C",
+      "description": "Multi-vessel chemistry station. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/chemicalapparatus/chemicalapparatus.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "samplevialrack",
+      "name": "Sample Vial Rack",
+      "category": "chem_bio",
+      "size": [2, 1],
+      "icon": "R",
+      "description": "Rack of sample vials with animated signal. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/samplevialrack/samplevialrack.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "petri_dish_worms",
+      "name": "Petri Dish Worms",
+      "category": "chem_bio",
+      "size": [2, 2],
+      "icon": "P",
+      "description": "Biological motion specimen in petri dish. Registered in grid artifacts.",
+      "scene": "res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_grid_artifacts"
+    },
+    {
+      "id": "dna_specimen",
+      "name": "DNA Specimen",
+      "category": "chem_bio",
+      "size": [2, 2],
+      "icon": "D",
+      "description": "DNA helix specimen jar. Registered in grid artifacts.",
+      "scene": "res://commons/artifacts/dna_specimen/dna_specimen.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_grid_artifacts"
+    },
+    {
+      "id": "pipettedispenser",
+      "name": "Pipette Dispenser",
+      "category": "chem_bio",
+      "size": [1, 1],
+      "icon": "I",
+      "description": "Precision pipette dispenser. Registered in lab registry.",
+      "scene": "res://commons/lab/pipettedispenser/pipettedispenser.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "additive_wave_demo",
+      "name": "Additive Wave Demo",
+      "category": "wave_lab",
+      "size": [9, 2],
+      "icon": "F",
+      "description": "Fourier/additive wave synthesis station. Registered in grid artifacts.",
+      "scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_grid_artifacts"
+    },
+    {
+      "id": "holographicdisplay",
+      "name": "Holographic Display",
+      "category": "advanced_registered",
+      "size": [2, 2],
+      "icon": "H",
+      "description": "Holographic analyzer pedestal. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/holographicdisplay/holographicdisplay.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "biomagneticresonator",
+      "name": "Biomagnetic Resonator",
+      "category": "advanced_registered",
+      "size": [2, 2],
+      "icon": "B",
+      "description": "Resonance field demonstrator. Registered in wavefunctions registry.",
+      "scene": "res://commons/lab/biomagneticresonator/biomagneticresonator.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_wavefunctions"
+    },
+    {
+      "id": "quantumentanglementmeter",
+      "name": "Quantum Entanglement Meter",
+      "category": "pending_registration",
+      "size": [2, 2],
+      "icon": "Q",
+      "description": "Quantum diagnostics instrument. Registered in lab registry.",
+      "scene": "res://commons/lab/quantumentanglementmeter/quantumentanglementmeter.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "fluxdetector",
+      "name": "Flux Detector",
+      "category": "pending_registration",
+      "size": [2, 2],
+      "icon": "X",
+      "description": "Temporal and flux detector. Registered in lab registry.",
+      "scene": "res://commons/lab/fluxdetector/fluxdetector.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "resonancechamber",
+      "name": "Resonance Chamber",
+      "category": "pending_registration",
+      "size": [4, 4],
+      "icon": "N",
+      "description": "Large resonance chamber instrument. Registered in lab registry.",
+      "scene": "res://commons/lab/resonancechamber/resonancechamber.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "electromagneticfieldgenerator",
+      "name": "Electromagnetic Field Generator",
+      "category": "pending_registration",
+      "size": [4, 4],
+      "icon": "E",
+      "description": "High-power electromagnetic field generator. Registered in lab registry.",
+      "scene": "res://commons/lab/electromagneticfieldgenerator/electromagneticfieldgenerator.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "cryogenicpreservation",
+      "name": "Cryogenic Preservation",
+      "category": "pending_registration",
+      "size": [4, 3],
+      "icon": "Y",
+      "description": "Cryogenic preservation unit. Registered in lab registry.",
+      "scene": "res://commons/lab/cryogenicpreservation/cryogenicpreservation.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "robotarm",
+      "name": "Robot Arm",
+      "category": "pending_registration",
+      "size": [4, 3],
+      "icon": "R",
+      "description": "Lab robot arm station. Registered in lab registry.",
+      "scene": "res://commons/lab/robotarm/robotarm.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "terminal",
+      "name": "Lab Terminal",
+      "category": "pending_registration",
+      "size": [2, 2],
+      "icon": "T",
+      "description": "Computer terminal station. Registered in lab registry.",
+      "scene": "res://commons/lab/terminal/terminal.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "datatablet",
+      "name": "Data Tablet",
+      "category": "pending_registration",
+      "size": [1, 1],
+      "icon": "U",
+      "description": "Data tablet monitor. Registered in lab registry.",
+      "scene": "res://commons/lab/datatablet/datatablet.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    },
+    {
+      "id": "circularradarmonitor",
+      "name": "Circular Radar Monitor",
+      "category": "pending_registration",
+      "size": [2, 2],
+      "icon": "O",
+      "description": "Circular radar monitor. Registered in lab registry.",
+      "scene": "res://commons/lab/circularradarmonitor/circularradarmonitor.tscn",
+      "scene_scale": [1.0, 1.0, 1.0],
+      "make_pickable": true,
+      "registry_status": "registered_lab"
+    }
+  ]
+}

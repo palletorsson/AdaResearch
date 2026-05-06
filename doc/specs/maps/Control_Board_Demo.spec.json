@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Control_Board_Demo",
+  "home_sequence": "testmaps",
+  "dimensions": {
+    "w": 15,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.017,
+  "breath_zones": [
+    {
+      "size": 175,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 12
+      },
+      "centroid": [
+        7.0,
+        5.514285714285714
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 5,
+      "token": "control_board"
+    },
+    {
+      "x": 10,
+      "z": 5,
+      "token": "control_board"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "control_board"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 179,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

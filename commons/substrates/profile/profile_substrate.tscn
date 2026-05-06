@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://profile_substrate"]
+
+[ext_resource type="Script" path="res://commons/substrates/profile/profile_substrate.gd" id="1_substrate"]
+[ext_resource type="Script" path="res://commons/substrates/profile/profile_renderer.gd" id="2_renderer"]
+
+[node name="ProfileSubstrate" type="Node3D"]
+script = ExtResource("1_substrate")
+
+[node name="Renderer" type="Node3D" parent="."]
+script = ExtResource("2_renderer")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18, 0)
+pixel_size = 0.003
+font_size = 14
+text = ""
+horizontal_alignment = 1

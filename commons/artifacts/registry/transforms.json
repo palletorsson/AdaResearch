@@ -1,0 +1,2310 @@
+{
+	"artifacts": {
+		"axis_translation_cube": {
+			"category": "transforms",
+			"complexity": "advanced",
+			"description": "Configurable axis translation demonstration. Set axis export to 0 (X), 1 (Y), or 2 (Z) to change which axis the cube translates along. Shows start \u2192 wait \u2192 end \u2192 wait pattern with trail ghosts and live labels.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "axis_translation_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Axis Translation Cube",
+			"qfep_connection": "Translation preserves everything except position \u2014 entropy-neutral transformation. The object's internal F remains constant; only its relationship to the coordinate frame changes.",
+			"scene": "res://commons/artifacts/axis_translation_cube/axis_translation_cube.tscn",
+			"tags": [
+				"pattern",
+				"transforms"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"shared",
+					"script",
+					"x_translation_cube",
+					"y_translation_cube",
+					"z_translation_cube"
+				],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.29,
+					0.97,
+					0.66
+				],
+				"aabb_center": [
+					0.06,
+					0.09,
+					0.33
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"boolean_tunnel": {
+			"category": "transforms",
+			"complexity": "beginner",
+			"description": "Walk through a corridor built from repeated boolean cubes. Each segment rotates a little more than the last, so a local angular rule becomes an architectural twist you feel with your body. Burst and taper options show how composition changes the same base form into very different spatial experiences. It turns rotation into navigable structure.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"footprint": [
+				4,
+				4,
+				3
+			],
+			"include_in_map_data": true,
+			"lookup_name": "boolean_tunnel",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Boolean Tunnel",
+			"parameters": {
+				"burst_flat_count": "int - flat cubes between bursts (default 3)",
+				"burst_mode": "bool - alternate rotating and flat sections",
+				"burst_rotate_count": "int - cubes per rotating burst (default 3)",
+				"footprint": [
+					4,
+					4,
+					3
+				],
+				"num_segments": "int - total number of cubes",
+				"rotation_per_segment": "float - degrees of rotation per cube",
+				"size_group": "xlarge",
+				"tunnel_rotation_x": "float - rotate whole tunnel around X (-90 to stand up)",
+				"tunnel_rotation_z": "float - rotate whole tunnel around Z"
+			},
+			"scene": "res://algorithms/transformation/booleanTunnel/boolean_tunnel.tscn",
+			"sequence": "transformation",
+			"size_group": "xlarge",
+			"tags": [
+				"transformation",
+				"rotation",
+				"architecture",
+				"corridor",
+				"boolean_geometry",
+				"composition",
+				"transforms"
+			],
+			"qfep_connection": "Pure S through accumulated rotation: each segment changes orientation while the corridor stays continuous. Order and repetition make small local turns add up to a large state change.",
+			"gamwell_reference": "",
+			"capacity": "FEEL how accumulated rotation changes a corridor without breaking its continuity.",
+			"interactions": [
+				"walk through the rotating corridor",
+				"change rotation_per_segment to tighten or relax the twist",
+				"toggle burst_mode to alternate rotating and flat sections",
+				"reorient the whole tunnel with tunnel_rotation_x or tunnel_rotation_z"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			}
+		},
+		"carousel_cake": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Watch a stack of circular layers rotate at exponentially increasing speeds. Every layer obeys the same rule, but the multiplier compounds until the sculpture reads as interference, rhythm, and spectacle rather than a simple spin. The artifact makes scaling a motion parameter feel as dramatic as changing a shape. It stages rotation as geometric progression.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"footprint": [
+				1.0,
+				6.0,
+				9.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "carousel_cake",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "carousel_cake",
+			"parameters": {
+				"footprint": [
+					1.0,
+					6.0,
+					9.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/transformation/carousel_cake/carousel_cake.tscn",
+			"size_group": "environment",
+			"tags": [
+				"transformation",
+				"rotation",
+				"multimesh",
+				"geometric_progression",
+				"layered_motion",
+				"spectacle",
+				"transform"
+			],
+			"qfep_connection": "Transformation changes S while the layered form stays coherent. A single multiplicative speed rule preserves identity across many distinct motion states.",
+			"gamwell_reference": "",
+			"capacity": "COMPARE simple rotation rules against the complex interference they generate across layers.",
+			"interactions": [
+				"watch the layers rotate at different speeds",
+				"change rotation_speed_multiplier to widen or compress the speed ratios",
+				"adjust the layer structure to compare shallow and deep stacks",
+				"read the striped shader against the spinning geometry to track phase differences"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"stripe",
+					"shader",
+					"syncs",
+					"visually"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					5.65,
+					10.0
+				],
+				"aabb_center": [
+					0.0,
+					2.83,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"floor_tiles": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "floor_tiles",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"footprint": [
+				6.0,
+				5.0,
+				9.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "floor_tiles",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "floor_tiles",
+			"parameters": {
+				"footprint": [
+					6.0,
+					5.0,
+					9.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/transformation/floor_tiles.tscn",
+			"size_group": "environment",
+			"tags": [
+				"transform"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					11.79,
+					0.01,
+					6.13
+				],
+				"aabb_center": [
+					5.61,
+					0.0,
+					2.78
+				],
+				"grid_cells": [
+					12.0,
+					7.0
+				],
+				"max_dimension_m": 11.79,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"homogeneous_coordinates": {
+			"category": "transforms",
+			"complexity": "advanced",
+			"description": "Wall panel explaining why 4x4 matrices are used in 3D. Shows a color-coded 4x4 homogeneous transformation matrix: rotation/scale (blue), translation (green), projection (red), homogeneous row (gray). Demonstrates [x,y,z,1] \u2192 [x',y',z',1] via matrix multiplication with a 3D coordinate frame.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "homogeneous_coordinates",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Homogeneous Coordinates",
+			"qfep_connection": "4x4 matrices unify all affine transforms into one representation \u2014 the most compressed (F-minimal) description of spatial change. Adding a dimension to reduce complexity: higher-dimensional embedding as F-minimization strategy.",
+			"scene": "res://commons/artifacts/homogeneous_coordinates/homogeneous_coordinates.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"3d",
+				"color",
+				"linear_algebra",
+				"transforms"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"plane"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.85,
+					0.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.05
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"quantum_field": {
+			"category": "transforms",
+			"complexity": "advanced",
+			"description": "Quantum field theory visualization with three modes: scalar field dynamics (\u03c6\u2074 theory with Klein-Gordon equation on lattice), particle creation/annihilation (pair production, worldlines, charge conservation), and Feynman diagram rendering (QED scatter, pair production, gluon loop, Compton). VR controls for coupling strength and mass parameter.",
+			"dev_themes": [
+				"physics",
+				"quantum",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "quantum_field",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Quantum Field",
+			"scene": "res://algorithms/transformation/quantum_field/quantum_field.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"quantum",
+				"field-theory",
+				"feynman-diagrams",
+				"particle-physics",
+				"visualization"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.2,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					-0.99,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"rotatescalecubes": {
+			"category": "transforms",
+			"complexity": "intermediate",
+			"description": "Demonstration of combined rotation and scaling transformations on multiple cubes.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotatescalecubes",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Rotate Scale Cubes",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"transforms"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			}
+		},
+		"rotation_gimbal": {
+			"category": "transforms",
+			"complexity": "advanced",
+			"description": "Gimbal lock demonstrator with 3 nested rotation rings (X=red, Y=green, Z=blue). VR sliders control each Euler angle (0-360 degrees). When Y approaches 90 degrees, X and Z rings align and 'GIMBAL LOCK!' flashes \u2014 showing why Euler angles lose a degree of freedom and why quaternions matter. Displays live rotation matrix decomposition.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotation_gimbal",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Rotation Gimbal",
+			"qfep_connection": "Gimbal lock as a singularity where the system loses a degree of freedom \u2014 entropy collapse. Three rotations reduced to two. The representation's F-model fails at a specific configuration, requiring quaternions to restore full expressiveness.",
+			"scene": "res://commons/artifacts/rotation_gimbal/rotation_gimbal.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"linear_algebra",
+				"topology",
+				"transforms",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box",
+						"torus",
+						"plane"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "around",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.62,
+					0.81,
+					0.72
+				],
+				"aabb_center": [
+					0.0,
+					0.2,
+					0.07
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"scaleme": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "scaleme",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"footprint": [
+				1.0,
+				39.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "scaleme",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "scaleme",
+			"parameters": {
+				"footprint": [
+					1.0,
+					39.0,
+					1.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/transformation/scaleme/scaleme.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"transform"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					25.6,
+					51.0,
+					25.6
+				],
+				"aabb_center": [
+					0.0,
+					25.5,
+					0.0
+				],
+				"grid_cells": [
+					26.0,
+					26.0
+				],
+				"max_dimension_m": 51.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 76,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"shear_matrix_demo": {
+			"category": "transforms",
+			"complexity": "advanced",
+			"description": "Wall panel showing shearing transformation with the visible 2x2 matrix. A unit square (blue) gets sheared into a parallelogram (orange) with fixed shear factor k=0.5. Shows [[1,k],[0,1]] matrix and transformation arrow between original and sheared shapes.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shear_matrix_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Shear Matrix Demo",
+			"qfep_connection": "Shear breaks symmetry without changing area \u2014 a \u03bb-shift that preserves measure but distorts form. The determinant stays 1 (no information lost), but the shape's F-structure is altered.",
+			"scene": "res://commons/artifacts/shear_matrix_demo/shear_matrix_demo.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"linear_algebra",
+				"matrix",
+				"transforms"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.7,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"spin": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A MultiMesh sequence that translates, then rotates, then translates again. Because the rotation is inserted into the middle of the process, the final arrangement makes the order of operations visible instead of merely stating it. The artifact is less about spinning in place than about how composition bends a path. It teaches non-commutativity through form.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"footprint": [
+				6,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spin",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "spin",
+			"parameters": {
+				"footprint": [
+					6,
+					1,
+					1
+				],
+				"size_group": "large"
+			},
+			"scene": "res://algorithms/transformation/spin/spin.tscn",
+			"size_group": "large",
+			"tags": [
+				"transformation",
+				"rotation",
+				"composition",
+				"translation",
+				"noncommutative",
+				"multimesh",
+				"transform"
+			],
+			"qfep_connection": "Transformation changes S compositionally: translation and rotation preserve identity but not the same final state when reordered. The artifact isolates order as the key variable.",
+			"gamwell_reference": "",
+			"capacity": "EXPLAIN why translate-then-rotate differs from rotate-then-translate.",
+			"interactions": [
+				"walk along the three-phase arrangement",
+				"change z_rotation_degrees to tighten or loosen the bend",
+				"regenerate the pattern to compare different compositions",
+				"read the middle rotating section against the straight start and end phases"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"composition",
+					"sibling",
+					"carousel_cake"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.0,
+					0.25,
+					0.15
+				],
+				"aabb_center": [
+					0.0,
+					3.0,
+					0.03
+				],
+				"grid_cells": [
+					6.0,
+					1.0
+				],
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"toruscylinder": {
+			"category": "transforms",
+			"complexity": "beginner",
+			"description": "A torus rotates while a cylinder oscillates up and down, leaving a trail. Presented together, the two motions contrast continuous rotation against periodic translation without changing the scene's basic geometry. The artifact makes it easy to compare two transformation families in one glance. It teaches motion by juxtaposition.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"footprint": [
+				5,
+				3,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "toruscylinder",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Torus Cylinder",
+			"parameters": {
+				"footprint": [
+					5,
+					3,
+					4
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/transformation/toruscylinder/toruscylinder.tscn",
+			"sequence": "transformation",
+			"size_group": "xlarge",
+			"tags": [
+				"transformation",
+				"rotation",
+				"oscillation",
+				"sine_wave",
+				"trail",
+				"comparison",
+				"animation",
+				"transforms",
+				"visualization"
+			],
+			"qfep_connection": "Transformation here contrasts two ways S can change while identity persists: rotation about a center and oscillatory translation along an axis. The pair sharpens what each operation preserves.",
+			"gamwell_reference": "",
+			"capacity": "DISTINGUISH periodic translation from continuous rotation in a single scene.",
+			"interactions": [
+				"watch the torus rotate against the oscillating cylinder",
+				"inspect the trail that records the cylinder's sine-wave path",
+				"change oscillation speed or amplitude to compare motion profiles",
+				"use the side-by-side setup to contrast translation and rotation directly"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"carousel_cake"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.7,
+					1.2,
+					2.8
+				],
+				"aabb_center": [
+					0.45,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					3.0
+				],
+				"max_dimension_m": 3.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"transform_composition": {
+			"category": "transforms",
+			"complexity": "advanced",
+			"description": "Transform composition demonstrator showing that matrix multiplication order matters. A simple house shape undergoes Rotate-then-Translate (blue) vs Translate-then-Rotate (red) \u2014 landing in different places. Displays R\u00b7T \u2260 T\u00b7R with live 4x4 matrices. VR sliders control rotation angle and translation distance. Buttons toggle order A, order B, or both. Animated step-through shows intermediate states.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transform_composition",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Transform Composition",
+			"qfep_connection": "Non-commutativity as path-dependence \u2014 R\u00b7T \u2260 T\u00b7R means the order of entropy-operations matters. Composing transforms into one matrix IS F-minimization: simplifying a sequence of changes into a single description.",
+			"scene": "res://commons/artifacts/transform_composition/transform_composition.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"interactive",
+				"linear_algebra",
+				"transforms",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.86,
+					0.47
+				],
+				"aabb_center": [
+					0.0,
+					0.32,
+					0.19
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"transformation_workbench": {
+			"category": "transforms",
+			"complexity": "advanced",
+			"description": "Interactive VR learning tool for understanding transformations. Grabbable cube shows live 4x4 matrix updates, ghost position for comparison, and mode buttons to switch between Translate (T), Rotate (R), and Scale (S). Rotation snaps to 90\u00b0 increments and shows coordinate swap notation. Matrix cells highlight based on current transformation mode.",
+			"dev_themes": [
+				"biology",
+				"education",
+				"geometry",
+				"math"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transformation_workbench",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Transformation Workbench",
+			"parameters": {
+				"current_mode": "int - Starting mode: 0=Translate, 1=Rotate, 2=Scale",
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"show_ghost": "bool - Show ghost at original position (default true)",
+				"show_matrix": "bool - Show the 4x4 matrix display (default true)",
+				"show_vectors": "bool - Show transformation vector/info (default true)",
+				"size_group": "compact",
+				"snap_rotation_to_90": "bool - Snap rotations to 90\u00b0 increments (default true)"
+			},
+			"qfep_connection": "Making the F-model visible \u2014 the matrix IS the system's internal representation of spatial state. Grabbing and moving the cube while watching numbers change demonstrates how physical action maps to formal description.",
+			"scene": "res://algorithms/transformation/transformation_workbench/transformation_workbench.tscn",
+			"tags": [
+				"linear_algebra",
+				"transforms",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.39,
+					0.7,
+					0.4
+				],
+				"aabb_center": [
+					0.15,
+					0.2,
+					0.05
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.39,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"translation_cube_demo": {
+			"category": "transforms",
+			"complexity": "beginner",
+			"description": "A door-like puzzle that only permits movement along the currently allowed axis. The constraint makes translation legible by preventing every other kind of displacement, so the learner feels direction as part of the operation rather than as an afterthought. Completing the upward motion before the sideways motion also makes order matter. It is translation reduced to rule and resistance.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"include_in_map_data": false,
+			"lookup_name": "translation_cube_demo",
+			"map_ready": false,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Translation Cube Demo",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://commons/primitives/translation/translation_cube_demo.tscn",
+			"sequence": "transformation",
+			"size_group": "standard",
+			"tags": [
+				"transformation",
+				"translation",
+				"axis_constraint",
+				"door_puzzle",
+				"interaction",
+				"demonstration",
+				"3d",
+				"transforms"
+			],
+			"qfep_connection": "Pure S under constraint: the object can only change position along selected directions. Transformation becomes intelligible because the invariant is enforced rather than implied.",
+			"gamwell_reference": "",
+			"capacity": "DISCOVER how constrained translation depends on axis and order.",
+			"interactions": [
+				"grab the knobs and move them only along the allowed axis",
+				"complete the up movement before the sideways movement unlocks",
+				"observe how off-axis motion is projected back onto the valid direction",
+				"compare this constrained translation with the freer axis cube demos"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"precursor",
+					"axis_translation_cube",
+					"demonstrates",
+					"constrained",
+					"translation"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.57,
+					1.5,
+					1.5
+				],
+				"aabb_center": [
+					0.0,
+					0.75,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.57,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_field": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "vector_field",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vector_field",
+			"map_ready": true,
+			"map_sequences": [
+				"particles"
+			],
+			"name": "vector_field",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/transformation/vector_field/vector_field.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~96"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.42,
+					14.55,
+					14.42
+				],
+				"aabb_center": [
+					-0.5,
+					-0.5,
+					-0.5
+				],
+				"grid_cells": [
+					15.0,
+					15.0
+				],
+				"max_dimension_m": 14.55,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"x_translation_cube": {
+			"category": "transforms",
+			"complexity": "beginner",
+			"description": "An animated cube that moves only along the X axis. Ghosts and labels keep the motion explicit, so the learner can see that one coordinate changes while the others stay fixed. That isolation makes translation feel elementary instead of abstract. It is the cleanest single-axis version of state change in the sequence.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "x_translation_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "X-Translation Cube",
+			"scene": "res://commons/artifacts/axis_translation_cube/x_translation_cube.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"transformation",
+				"translation",
+				"x_axis",
+				"coordinates",
+				"ghost_trail",
+				"invariant",
+				"transforms",
+				"visualization"
+			],
+			"qfep_connection": "Pure S: only the X coordinate changes while shape, size, and orientation stay invariant. The artifact isolates one dimension of state change at a time.",
+			"gamwell_reference": "",
+			"capacity": "ISOLATE translation on the X axis and see that only one coordinate changes.",
+			"interactions": [
+				"adjust the speed slider to change the motion rate",
+				"watch the ghost trail mark previous X positions",
+				"compare X motion against the Y and Z variants",
+				"read the live label while the cube translates"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.57,
+					0.66
+				],
+				"aabb_center": [
+					0.08,
+					0.29,
+					0.33
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"y_translation_cube": {
+			"category": "transforms",
+			"complexity": "beginner",
+			"description": "An animated cube that moves only along the Y axis. Because the vertical coordinate changes alone, the artifact makes upward and downward displacement read differently from horizontal movement even though the operation is still translation. The result is a clean lesson in axis decomposition. It turns elevation into a coordinate fact.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "y_translation_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Y-Translation Cube",
+			"scene": "res://commons/artifacts/axis_translation_cube/y_translation_cube.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"transformation",
+				"translation",
+				"y_axis",
+				"coordinates",
+				"ghost_trail",
+				"invariant",
+				"animation",
+				"transforms",
+				"visualization"
+			],
+			"qfep_connection": "Pure S: only the Y coordinate changes while the rest of the object remains invariant. The artifact isolates vertical translation as a distinct state update.",
+			"gamwell_reference": "",
+			"capacity": "ISOLATE translation on the Y axis and see that only vertical position changes.",
+			"interactions": [
+				"adjust the speed slider to change the motion rate",
+				"watch the ghost trail mark previous Y positions",
+				"compare Y motion against the X and Z variants",
+				"read the live label while the cube translates"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 3,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.29,
+					0.97,
+					0.66
+				],
+				"aabb_center": [
+					0.06,
+					0.09,
+					0.33
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"z_translation_cube": {
+			"category": "transforms",
+			"complexity": "beginner",
+			"description": "An animated cube that moves only along the Z axis. Depth is often the hardest coordinate to read in 3D space, so isolating this motion helps the learner separate forward-back displacement from lateral shift or lift. Ghosts and labels keep the change visible as the cube moves. It turns depth translation into something concrete.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "z_translation_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Z-Translation Cube",
+			"scene": "res://commons/artifacts/axis_translation_cube/z_translation_cube.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"transformation",
+				"translation",
+				"z_axis",
+				"coordinates",
+				"ghost_trail",
+				"invariant",
+				"animation",
+				"transforms",
+				"visualization"
+			],
+			"qfep_connection": "Pure S: only the Z coordinate changes while all other properties stay invariant. The artifact isolates depth as its own dimension of state change.",
+			"gamwell_reference": "",
+			"capacity": "ISOLATE translation on the Z axis and see that only depth changes.",
+			"interactions": [
+				"adjust the speed slider to change the motion rate",
+				"watch the ghost trail mark previous Z positions",
+				"compare Z motion against the X and Y variants",
+				"read the live label while the cube translates"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.24,
+					0.57,
+					1.06
+				],
+				"aabb_center": [
+					0.03,
+					0.29,
+					0.13
+				],
+				"grid_cells": [
+					1,
+					2
+				],
+				"max_dimension_m": 1.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				2
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"matrix_4x4_viewer": {
+			"name": "Matrix 4x4 Viewer",
+			"lookup_name": "matrix_4x4_viewer",
+			"description": "Interactive 4x4 transformation matrix viewer. A wireframe cube is transformed live by sliders controlling translate X/Y/Z, rotate Y, and uniform scale. The 4x4 matrix values update in real time as a color-coded Label3D grid \u2014 rotation/scale in cyan, translation in green, homogeneous row in gray.",
+			"scene": "res://algorithms/transforms/matrix_viewer/matrix_4x4_viewer.tscn",
+			"category": "transforms",
+			"complexity": "intermediate",
+			"tags": [
+				"linear_algebra",
+				"matrix",
+				"transforms",
+				"interactive",
+				"4x4",
+				"visualization"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"qfep_connection": "The matrix IS the F-model of spatial state \u2014 16 numbers encode every possible affine transformation. Watching cells change as you slide makes the invisible scaffolding of geometry visible and manipulable.",
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"homogeneous_coordinates",
+					"transform_composition"
+				],
+				"preferred_zone": "teaching"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.51,
+					0.68,
+					0.26
+				],
+				"aabb_center": [
+					0.0,
+					0.22,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.68,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"invariants_demo": {
+			"category": "transforms",
+			"complexity": "intermediate",
+			"description": "A triangle with labeled measurements \u2014 side lengths, angles, area. Apply translation, rotation, scale, or shear and watch which properties survive. Preserved measurements glow green; changed ones glow red. Each transform has a signature: what it cannot touch defines it.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms",
+				"invariance"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "invariants_demo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Invariants Demo",
+			"qfep_connection": "Invariance is the core of identity under transformation \u2014 what remains when everything else changes is the essence. Translation preserves all F; shear destroys it. The invariant set IS the transformation's character.",
+			"scene": "res://algorithms/transforms/invariants/invariants_demo.tscn",
+			"tags": [
+				"transforms",
+				"invariance",
+				"geometry",
+				"linear_algebra"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "procedural_scripted",
+					"primitives": [
+						"cylinder",
+						"sphere"
+					],
+					"operations": [
+						"orient_between_points",
+						"recolor_by_invariance"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"albedo_color"
+					]
+				},
+				"animation": {
+					"type": "triggered",
+					"driven_by": "button_press",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "direct",
+				"vertex_estimate": "low"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"matrix_4x4_viewer",
+					"homogeneous_coordinates"
+				],
+				"preferred_zone": "teaching"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.32,
+					0.7,
+					0.21
+				],
+				"aabb_center": [
+					0.0,
+					0.27,
+					0.1
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
+			}
+		}
+	}
+}

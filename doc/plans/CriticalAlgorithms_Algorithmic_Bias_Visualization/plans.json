@@ -1,0 +1,38 @@
+{
+  "name": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+  "title": "Bias as Structural Incompleteness",
+  "description": "A divided room \u00e2\u20ac\u201d the left half is spacious, the right half cramped. The bias is spatial: unequal allocation of space.",
+  "dimensions": {
+    "rows": 9,
+    "cols": 8
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    8,
+    6
+  ],
+  "teleport": [
+    7,
+    6
+  ],
+  "artifacts": [
+    {
+      "name": "science_screen",
+      "row": 2,
+      "col": 7,
+      "family": "shaders"
+    },
+    {
+      "name": "bias_visualizer",
+      "row": 4,
+      "col": 2,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "bias_from_inside",
+      "row": 7,
+      "col": 7,
+      "family": "algorithms_misc"
+    }
+  ]
+}

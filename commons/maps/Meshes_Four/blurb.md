@@ -1,0 +1,1 @@
+Subdivision smooths harsh geometry. Take a low-poly mesh, split each face into four, smooth the new vertices. Repeat. Coarse control cage becomes curved surface. The artist sculpts rough forms; the algorithm delivers smoothness. Resolution on demand.

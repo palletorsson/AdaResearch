@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://5ce6yiky7f3a"]
+
+[ext_resource type="PackedScene" uid="uid://bmvkgaqk2hiue" path="res://commons/primitives/rockfactory/DynamicRock.tscn" id="1_vrvlo"]
+[ext_resource type="PackedScene" path="res://commons/primitives/rockfactory/RockFactory.tscn" id="2_u3woq"]
+[ext_resource type="PackedScene" uid="uid://csc10co35gsem" path="res://commons/primitives/rockfactory/FallingCube.tscn" id="3_u3woq"]
+[ext_resource type="PackedScene" path="res://commons/primitives/rockfactory/SimpleDynamicRock.tscn" id="4_vdxo1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vrvlo"]
+size = Vector3(4.257263, 0.2211914, 4.0861816)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vrvlo"]
+
+[node name="Ctest" type="Node3D"]
+
+[node name="DynamicRock" parent="." instance=ExtResource("1_vrvlo")]
+
+[node name="RockFactory" parent="." instance=ExtResource("2_u3woq")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48412818, -0.6365241, -0.739624)
+shape = SubResource("BoxShape3D_vrvlo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(3.2510374, 0, 0, 0, 1, 0, 0, 0, 2.5061255, 0, -1.0201988, 0)
+mesh = SubResource("BoxMesh_vrvlo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2112508)
+
+[node name="FallingCube" parent="." instance=ExtResource("3_u3woq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43976414, -1.3423135)
+
+[node name="SimpleDynamicRock" parent="." instance=ExtResource("4_vdxo1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1940347, 0)
+collision_mask = 1
+mass = 0.8
+wiggle_amount = 0.05
+rock_radius = 0.25

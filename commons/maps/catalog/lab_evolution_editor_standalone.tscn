@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/maps/catalog/LabEvolutionEditorStandalone.gd" id="1_launcher"]
+[ext_resource type="Script" path="res://commons/maps/catalog/LabEvolutionEditor.gd" id="2_editor"]
+
+[node name="LabEvolutionEditorApp" type="Node"]
+script = ExtResource("1_launcher")
+
+[node name="LabEvolutionEditor" type="CanvasLayer" parent="."]
+script = ExtResource("2_editor")

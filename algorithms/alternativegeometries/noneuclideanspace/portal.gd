@@ -12,7 +12,7 @@ var linked_portal: Portal
 var portal_mesh: MeshInstance3D
 var portal_material: Material  # Changed from ShaderMaterial to Material base class
 
-func _ready():
+func _ready() -> void:
 	# Set up collisions
 	collision_layer = 2  # Portal layer
 	collision_mask = 1   # Player layer
@@ -25,13 +25,13 @@ func _ready():
 	
 	# Link to another portal if specified
 	if !linked_portal_path.is_empty():
-		linked_portal = get_node(linked_portal_path)
-		
+		linked_portal = get_node_or_null(linked_portal_path)
+
 		# If two-way and the linked portal doesn't link back, set it up
-		if two_way and linked_portal and linked_portal.linked_portal != self:
+		if linked_portal and two_way and linked_portal.linked_portal != self:
 			linked_portal.linked_portal = self
 
-func create_portal_visuals():
+func create_portal_visuals() -> void:
 	# Create portal mesh
 	var portal_shape = BoxMesh.new()
 	portal_shape.size = Vector3(portal_width, portal_height, 0.1)
@@ -68,3 +68,12 @@ func create_portal_visuals():
 	shape.size = Vector3(portal_width, portal_height, 0.5)
 	collision_shape.shape = shape
 	add_child(collision_shape)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

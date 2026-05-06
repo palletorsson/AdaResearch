@@ -1,0 +1,80 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Gaussian",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 12,
+    "d": 21
+  },
+  "signature": "galton_board is the definitive physical model \u2014 individual chaos producing collective order; distribution_sampler provides interactive parameter exploration; GaussianBlurShader applies the distribution to image processing",
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.05,
+  "breath_zones": [
+    {
+      "size": 150,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 15
+      },
+      "centroid": [
+        5.48,
+        6.22
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "distribution_comparator"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 8,
+      "z": 5,
+      "token": "GaussianBlurCircle"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "GaussianPaintSplatter"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "GaussianBlurShader"
+    },
+    {
+      "x": 9,
+      "z": 8,
+      "token": "GaussianBlurShader"
+    },
+    {
+      "x": 3,
+      "z": 11,
+      "token": "gaussian_random"
+    },
+    {
+      "x": 6,
+      "z": 20,
+      "token": "random_bell_curve"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 8,
+    "walkable_cells": 159,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

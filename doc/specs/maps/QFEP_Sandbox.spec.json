@@ -1,0 +1,73 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "QFEP_Sandbox",
+  "home_sequence": "qfeplaboratory",
+  "dimensions": {
+    "w": 14,
+    "d": 14
+  },
+  "signature": "qfep_reactor is the responsive simulation engine; reactive_particles provide the visible system behavior; lambda_slider and phi_slider give full parameter control; qfep_formula_3d renders the live equation; tt for navigation.",
+  "style": null,
+  "echoes": [
+    "primitives",
+    "transformation",
+    "color",
+    "randomness"
+  ],
+  "density": 0.031,
+  "breath_zones": [
+    {
+      "size": 184,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 14
+      },
+      "centroid": [
+        6.5271739130434785,
+        6.342391304347826
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "lambda_slider"
+    },
+    {
+      "x": 10,
+      "z": 2,
+      "token": "phi_slider"
+    },
+    {
+      "x": 6,
+      "z": 5,
+      "token": "qfep_reactor"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "reactive_particles"
+    },
+    {
+      "x": 8,
+      "z": 7,
+      "token": "reactive_particles"
+    },
+    {
+      "x": 5,
+      "z": 12,
+      "token": "qfep_formula_3d"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 192,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

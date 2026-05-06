@@ -1,9 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce4tpftdfu75s"]
+[gd_scene load_steps=4 format=3 uid="uid://ce4tpftdfu75s"]
 
 [ext_resource type="Script" uid="uid://csjoqveyftn46" path="res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd" id="1"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_jo5ph"]
+size = Vector3(1.825, 0.255, 8.575)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vjvxj"]
+data = PackedVector3Array(-0.91249996, 0.1275, 4.2875, 0.91249996, 0.1275, 4.2875, -0.91249996, -0.1275, 4.2875, 0.91249996, 0.1275, 4.2875, 0.91249996, -0.1275, 4.2875, -0.91249996, -0.1275, 4.2875, 0.91249996, 0.1275, -4.2875, -0.91249996, 0.1275, -4.2875, 0.91249996, -0.1275, -4.2875, -0.91249996, 0.1275, -4.2875, -0.91249996, -0.1275, -4.2875, 0.91249996, -0.1275, -4.2875, 0.91249996, 0.1275, 4.2875, 0.91249996, 0.1275, -4.2875, 0.91249996, -0.1275, 4.2875, 0.91249996, 0.1275, -4.2875, 0.91249996, -0.1275, -4.2875, 0.91249996, -0.1275, 4.2875, -0.91249996, 0.1275, -4.2875, -0.91249996, 0.1275, 4.2875, -0.91249996, -0.1275, -4.2875, -0.91249996, 0.1275, 4.2875, -0.91249996, -0.1275, 4.2875, -0.91249996, -0.1275, -4.2875, 0.91249996, 0.1275, 4.2875, -0.91249996, 0.1275, 4.2875, 0.91249996, 0.1275, -4.2875, -0.91249996, 0.1275, 4.2875, -0.91249996, 0.1275, -4.2875, 0.91249996, 0.1275, -4.2875, -0.91249996, -0.1275, 4.2875, 0.91249996, -0.1275, 4.2875, -0.91249996, -0.1275, -4.2875, 0.91249996, -0.1275, 4.2875, 0.91249996, -0.1275, -4.2875, -0.91249996, -0.1275, -4.2875)
+
 [node name="SineCylinderStaircase" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0092692375, 0, 0)
 script = ExtResource("1")
+STEP_RISE = 0.11
+WAVE_AMPLITUDE = 0.45
+show_center_pole = false
+debug = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.8109)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3132296, 7.918831, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2292037, -0.14055824, 4.503149)
+mesh = SubResource("BoxMesh_jo5ph")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2292037, -0.14055824, 4.503149)
+shape = SubResource("ConcavePolygonShape3D_vjvxj")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4924178, 7.918831, -0.028613329)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2292037, -0.14055824, 4.503149)
+mesh = SubResource("BoxMesh_jo5ph")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2292037, -0.14055824, 4.503149)
+shape = SubResource("ConcavePolygonShape3D_vjvxj")

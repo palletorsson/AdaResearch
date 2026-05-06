@@ -1,0 +1,61 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_John_Cage",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": "john_cage_tech_noir implements the silence-as-composition environment; ruth_asawa_sculpture provides the visual analog \u2014 wire sculpture as frozen wave",
+  "style": null,
+  "echoes": [
+    "randomness",
+    "noise"
+  ],
+  "density": 0.031,
+  "breath_zones": [
+    {
+      "size": 129,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.48062015503876,
+        6.736434108527132
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 1,
+      "token": "dual_display_test"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "ruth_asawa_sculpture"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 12,
+      "token": "john_cage_tech_noir"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 131,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

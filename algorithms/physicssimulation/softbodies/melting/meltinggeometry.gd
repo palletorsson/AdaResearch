@@ -13,13 +13,13 @@ var temperature_grid: Array = []
 var mesh_instance: MeshInstance3D
 var bounds: AABB = AABB(Vector3(-2, -2, -2), Vector3(4, 4, 4))
 
-func _ready():
+func _ready() -> void:
 	setup_grids()
 	initialize_geometry()
 	create_mesh_instance()
 	update_mesh()
 
-func setup_grids():
+func setup_grids() -> void:
 	level_set_grid.clear()
 	temperature_grid.clear()
 	
@@ -34,7 +34,7 @@ func setup_grids():
 				level_set_grid[x][y].append(0.0)
 				temperature_grid[x][y].append(ambient_temperature)
 
-func initialize_geometry():
+func initialize_geometry() -> void:
 	# Create initial geometry (sphere in this example)
 	var center = Vector3(resolution/2, resolution/2, resolution/2)
 	var radius = resolution * 0.3
@@ -46,7 +46,7 @@ func initialize_geometry():
 				var distance = pos.distance_to(center) - radius
 				level_set_grid[x][y][z] = distance
 
-func create_mesh_instance():
+func create_mesh_instance() -> void:
 	mesh_instance = MeshInstance3D.new()
 	add_child(mesh_instance)
 	
@@ -57,12 +57,12 @@ func create_mesh_instance():
 	material.roughness = 0.7
 	mesh_instance.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	update_temperature(delta)
 	apply_melting(delta)
 	update_mesh()
 
-func update_temperature(delta: float):
+func update_temperature(delta: float) -> void:
 	# Heat diffusion using simple finite difference
 	var new_temp_grid = temperature_grid.duplicate(true)
 	var diffusion_rate = 0.1
@@ -95,7 +95,7 @@ func update_temperature(delta: float):
 	
 	temperature_grid = new_temp_grid
 
-func apply_heat_source(temp_grid: Array, center: Vector3i, intensity: float, radius: float):
+func apply_heat_source(temp_grid: Array, center: Vector3i, intensity: float, radius: float) -> void:
 	var start_x = max(0, int(center.x - radius))
 	var end_x = min(resolution - 1, int(center.x + radius))
 	var start_y = max(0, int(center.y - radius))
@@ -112,7 +112,7 @@ func apply_heat_source(temp_grid: Array, center: Vector3i, intensity: float, rad
 					var heat_factor = 1.0 - (distance / radius)
 					temp_grid[x][y][z] += intensity * heat_factor
 
-func apply_melting(delta: float):
+func apply_melting(delta: float) -> void:
 	# Apply level set evolution based on temperature
 	var new_level_set = level_set_grid.duplicate(true)
 	
@@ -141,7 +141,7 @@ func calculate_gradient(grid: Array, x: int, y: int, z: int) -> Vector3:
 	var dz = (grid[x][y][z+1] - grid[x][y][z-1]) * 0.5
 	return Vector3(dx, dy, dz)
 
-func reinitialize_level_set():
+func reinitialize_level_set() -> void:
 	# Simple fast marching method for reinitialization
 	var new_grid = level_set_grid.duplicate(true)
 	var iterations = 5
@@ -178,7 +178,7 @@ func calculate_upwind_diff(grid: Array, x: int, y: int, z: int, direction: Vecto
 	else:
 		return max(pos_diff, 0.0) if pos_diff > 0 else min(-neg_diff, 0.0)
 
-func update_mesh():
+func update_mesh() -> void:
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
@@ -192,7 +192,7 @@ func update_mesh():
 	var mesh = surface_tool.commit()
 	mesh_instance.mesh = mesh
 
-func march_cube(surface_tool: SurfaceTool, x: int, y: int, z: int):
+func march_cube(surface_tool: SurfaceTool, x: int, y: int, z: int) -> void:
 	# Get the 8 corner values
 	var corners = []
 	var positions = []
@@ -215,7 +215,7 @@ func march_cube(surface_tool: SurfaceTool, x: int, y: int, z: int):
 	if cube_config > 0 and cube_config < 255:
 		create_triangles_for_config(surface_tool, positions, corners, cube_config)
 
-func create_triangles_for_config(surface_tool: SurfaceTool, positions: Array, corners: Array, config: int):
+func create_triangles_for_config(surface_tool: SurfaceTool, positions: Array, corners: Array, config: int) -> void:
 	# Simplified triangle creation - this would be expanded with full marching cubes tables
 	if config == 1 or config == 254: # Single corner cases
 		var edge_vertices = []
@@ -251,14 +251,23 @@ func grid_to_world(grid_pos: Vector3) -> Vector3:
 	return bounds.position + normalized_pos * bounds.size
 
 # Public methods for interaction
-func add_heat_source(world_position: Vector3):
+func add_heat_source(world_position: Vector3) -> void:
 	heat_sources.append(world_position)
 
-func remove_heat_source(world_position: Vector3):
+func remove_heat_source(world_position: Vector3) -> void:
 	heat_sources.erase(world_position)
 
-func set_melt_speed(speed: float):
+func set_melt_speed(speed: float) -> void:
 	melt_speed = speed
 
-func set_melt_threshold(threshold: float):
+func set_melt_threshold(threshold: float) -> void:
 	melt_threshold = threshold
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

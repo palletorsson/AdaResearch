@@ -92,7 +92,7 @@ The system defines clear progression states that determine which artifacts are v
 
 #### **Post Randomness Exploration**
 - **Visible**: Previous artifacts + Probability sphere + Randomness portal
-- **Triggers**: Completing "randomness_exploration" sequence  
+- **Triggers**: Completing "randomness" sequence  
 - **Purpose**: Unlock probability/statistics content
 
 #### **All Sequences Complete**
@@ -251,8 +251,8 @@ SceneManager.print_scene_manager_status()
 
 ```gdscript
 {
-  "completed_sequences": ["array_tutorial", "randomness_exploration"],
-  "current_lab_state": "post_randomness_exploration", 
+  "completed_sequences": ["array_tutorial", "randomness"],
+  "current_lab_state": "post_randomness", 
   "timestamp": "2025-01-20T15:30:00"
 }
 ```

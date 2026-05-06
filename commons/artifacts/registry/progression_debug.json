@@ -1,0 +1,219 @@
+{
+	"registry_info": {
+		"name": "progression_debug",
+		"description": "Debug and scaffold artifacts for testing the soft-stage progression system \u2014 EcosystemManager, HazardManager, CatalystCapabilityManager.",
+		"category": "debug"
+	},
+	"artifacts": {
+		"soft_stage_dashboard": {
+			"lookup_name": "soft_stage_dashboard",
+			"name": "Soft Stage Dashboard",
+			"description": "Wall-mounted read-only panel showing live state from EcosystemManager, HazardManager, and CatalystCapabilityManager. Three-column layout with allow flags, hazard types and personalities, capacity level and hand verbs. Rolling signal log at the bottom captures all manager events with timestamps.",
+			"scene": "res://commons/artifacts/soft_stage_dashboard/soft_stage_dashboard.tscn",
+			"category": "debug",
+			"complexity": "intermediate",
+			"tags": [
+				"debug",
+				"progression",
+				"managers",
+				"scaffold",
+				"dashboard",
+				"monitor"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"dev_themes": [
+				"debug",
+				"progression"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.22,
+					0.92,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.22,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.231769Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"progression_driver": {
+			"lookup_name": "progression_driver",
+			"name": "Progression Driver",
+			"description": "Interactive VR control panel to advance through sequences, befriend hazards, and reset progression on all three managers. Slider selects sequence, buttons trigger force_advance_to or reset_progression. Dynamically generates befriend buttons for all hazard types found in soft_stages.json.",
+			"scene": "res://commons/artifacts/progression_driver/progression_driver.tscn",
+			"category": "debug",
+			"complexity": "intermediate",
+			"tags": [
+				"debug",
+				"progression",
+				"managers",
+				"scaffold",
+				"controller",
+				"driver"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"lab"
+			],
+			"dev_themes": [
+				"debug",
+				"progression"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.92,
+					0.67,
+					0.09
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.92,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.231769Z",
+				"derived_from": "aabb_size + category"
+			}
+		}
+	}
+}

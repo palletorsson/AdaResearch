@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://mg_color_variations"]
+
+[ext_resource type="Script" path="res://commons/primitives/math_gallery/color_variations_gallery.gd" id="1_script"]
+
+[node name="ColorVariationsGallery" type="Node3D"]
+script = ExtResource("1_script")
+row_spacing = 0.35
+col_spacing = 0.25
+show_labels = true

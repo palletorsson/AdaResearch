@@ -5,12 +5,16 @@
 extends Node
 class_name AdaSceneManager
 
+# Local debug flag to gate prints (default off)
+@export var debug: bool = false
+
 # Singleton instance
 static var instance: AdaSceneManager
 
 # Scene references and paths
 const GRID_SCENE_PATH = "res://commons/scenes/grid.tscn"
 const LAB_SCENE_PATH = "res://commons/scenes/lab.tscn"
+const LANDSCAPE_SCENE_PATH = "res://commons/scenes/landscape.tscn"
 
 # Transition types
 enum TransitionType {
@@ -35,6 +39,7 @@ var map_progression_manager_ref = null
 # Sequence data loaded from JSON
 var sequence_configs: Dictionary = {}
 const SEQUENCES_JSON_PATH = "res://commons/maps/map_sequences.json"
+const SEQUENCE_REGISTRY_PATH = "res://commons/maps/sequences/"
 
 # Signals
 signal scene_transition_started(from_scene: String, to_scene: String, transition_type: TransitionType)
@@ -46,17 +51,20 @@ func _init():
 	# Ensure singleton pattern
 	if instance == null:
 		instance = self
-		print("AdaSceneManager: Singleton instance created")
+		if debug:
+			print("AdaSceneManager: Singleton instance created")
 	else:
-		print("AdaSceneManager: ERROR - Multiple instances detected!")
+		if debug:
+			print("AdaSceneManager: ERROR - Multiple instances detected!")
 		queue_free()
 
 func _ready():
 	if instance != self:
 		return
 		
-	print("AdaSceneManager: Singleton initialized - Universal transition system ready")
-	print("AdaSceneManager: Handles artifact, teleporter, trigger, and sequence transitions")
+	if debug:
+		print("AdaSceneManager: Singleton initialized - Universal transition system ready")
+		print("AdaSceneManager: Handles artifact, teleporter, trigger, and sequence transitions")
 	
 	# Load sequence configurations from JSON (REQUIRED)
 	_load_sequence_configurations()
@@ -87,7 +95,8 @@ func _connect_to_managers():
 	# Connect to MapProgressionManager if available
 	map_progression_manager_ref = get_node_or_null("/root/MapProgressionManager")
 	if map_progression_manager_ref:
-		print("AdaSceneManager: Connected to MapProgressionManager")
+		if debug:
+			print("AdaSceneManager: Connected to MapProgressionManager")
 
 func connect_to_lab_manager(lab_manager: LabManager):
 	"""Connect to lab manager with progressive lab support"""
@@ -107,7 +116,8 @@ func connect_to_lab_manager(lab_manager: LabManager):
 		if lab_manager.has_signal("lab_map_transition_complete") and not lab_manager.lab_map_transition_complete.is_connected(_on_lab_map_transition_complete):
 			lab_manager.lab_map_transition_complete.connect(_on_lab_map_transition_complete)
 		
-		print("AdaSceneManager: ✅ Connected to LabManager with progressive lab support")
+		if debug:
+			print("AdaSceneManager: ✅ Connected to LabManager with progressive lab support")
 
 
 func connect_to_grid_system(grid_system: Node):
@@ -115,24 +125,60 @@ func connect_to_grid_system(grid_system: Node):
 	if grid_system and grid_system.has_signal("interactable_activated"):
 		if not grid_system.interactable_activated.is_connected(_on_interactable_activated):
 			grid_system.interactable_activated.connect(_on_interactable_activated)
-			print("AdaSceneManager: Connected to GridSystem")
+			if debug:
+				print("AdaSceneManager: Connected to GridSystem")
 
 # =============================================================================
 # SEQUENCE CONFIGURATION LOADING (REQUIRED - NO FALLBACK)
 # =============================================================================
 
 func _load_sequence_configurations():
-	"""Load sequence configurations from JSON file - REQUIRED"""
-	print("AdaSceneManager: Loading sequence configurations from JSON...")
+	"""Load sequence configurations from JSON file and registry directory - REQUIRED"""
+	if debug:
+		print("AdaSceneManager: Loading sequence configurations...")
 	
-	if not FileAccess.file_exists(SEQUENCES_JSON_PATH):
-		push_error("AdaSceneManager: CRITICAL - Sequences JSON file not found: %s" % SEQUENCES_JSON_PATH)
-		push_error("AdaSceneManager: Create the file with proper sequence definitions")
+	# 1. Load main sequence file (Base)
+	if FileAccess.file_exists(SEQUENCES_JSON_PATH):
+		_load_single_sequence_file(SEQUENCES_JSON_PATH)
+	else:
+		push_warning("AdaSceneManager: Main sequences file not found: %s" % SEQUENCES_JSON_PATH)
+		
+	# 2. Load individual sequence files from registry directory
+	var dir = DirAccess.open(SEQUENCE_REGISTRY_PATH)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir() and file_name.ends_with(".json"):
+				_load_single_sequence_file(SEQUENCE_REGISTRY_PATH + file_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	else:
+		if debug:
+			print("AdaSceneManager: No sequence registry directory found at %s" % SEQUENCE_REGISTRY_PATH)
+
+	if sequence_configs.is_empty():
+		push_error("AdaSceneManager: CRITICAL - No sequences found in any file")
 		return
 	
-	var file = FileAccess.open(SEQUENCES_JSON_PATH, FileAccess.READ)
+	if debug:
+		print("AdaSceneManager: ✅ Successfully loaded %d sequence configurations" % sequence_configs.size())
+	
+	# Log loaded sequences for verification
+	for sequence_name in sequence_configs.keys():
+		var config = sequence_configs[sequence_name]
+		var maps = config.get("maps", [])
+		if debug:
+			print("  → %s: %d maps" % [sequence_name, maps.size()])
+
+func _load_single_sequence_file(path: String):
+	"""Helper to load a single sequence JSON file"""
+	if debug:
+		print("AdaSceneManager: Loading sequence file: %s" % path)
+		
+	var file = FileAccess.open(path, FileAccess.READ)
 	if not file:
-		push_error("AdaSceneManager: CRITICAL - Could not open sequences file: %s" % SEQUENCES_JSON_PATH)
+		push_error("AdaSceneManager: Could not open sequence file: %s" % path)
 		return
 	
 	var json_text = file.get_as_text()
@@ -142,61 +188,83 @@ func _load_sequence_configurations():
 	var parse_result = json.parse(json_text)
 	
 	if parse_result != OK:
-		push_error("AdaSceneManager: CRITICAL - Failed to parse sequences JSON: %s" % json.get_error_message())
-		push_error("AdaSceneManager: Check JSON syntax in: %s" % SEQUENCES_JSON_PATH)
+		push_error("AdaSceneManager: Failed to parse sequence JSON: %s in %s" % [json.get_error_message(), path])
 		return
 	
 	var json_data = json.data
-	sequence_configs = json_data.get("sequences", {})
-	
-	if sequence_configs.is_empty():
-		push_error("AdaSceneManager: CRITICAL - No sequences found in JSON file")
-		push_error("AdaSceneManager: Check 'sequences' section in: %s" % SEQUENCES_JSON_PATH)
+	if not (json_data is Dictionary):
+		if debug:
+			print("AdaSceneManager: Skipping %s (root JSON is not a Dictionary)" % path)
 		return
-	
-	print("AdaSceneManager: ✅ Successfully loaded %d sequence configurations from JSON" % sequence_configs.size())
-	
-	# Log loaded sequences for verification
-	for sequence_name in sequence_configs.keys():
-		var config = sequence_configs[sequence_name]
-		var maps = config.get("maps", [])
-		print("  → %s: %d maps (%s)" % [sequence_name, maps.size(), str(maps)])
+
+	var sequences_data = json_data.get("sequences", {})
+
+	# Support both:
+	# 1) {"sequences": { "id": { ...maps... } } }
+	# 2) {"sequences": [ {"id":"...", ...maps...}, ... ] }
+	if sequences_data is Dictionary:
+		for seq_name in sequences_data.keys():
+			var seq_data = sequences_data[seq_name]
+			if not (seq_data is Dictionary):
+				if debug:
+					print("    Skipped sequence '%s' (entry is not a Dictionary)" % str(seq_name))
+				continue
+			sequence_configs[str(seq_name)] = seq_data
+			if debug:
+				print("    Loaded sequence: %s" % str(seq_name))
+	elif sequences_data is Array:
+		for entry_variant in sequences_data:
+			if not (entry_variant is Dictionary):
+				continue
+			var entry: Dictionary = entry_variant
+			var seq_id = str(entry.get("id", "")).strip_edges()
+			if seq_id.is_empty():
+				continue
+			# Only merge array entries that are actual runnable sequence configs.
+			if not entry.has("maps") or not (entry.get("maps", []) is Array):
+				if debug:
+					print("    Skipped sequence index entry: %s" % seq_id)
+				continue
+			sequence_configs[seq_id] = entry
+			if debug:
+				print("    Loaded sequence: %s" % seq_id)
+	else:
+		if debug:
+			print("AdaSceneManager: Skipping %s (\"sequences\" is neither Dictionary nor Array)" % path)
 
 # =============================================================================
 # ARTIFACT SEQUENCE MAPPING
 # =============================================================================
 
 func _get_sequence_for_artifact(artifact_id: String) -> String:
-	"""Get sequence name for artifact from grid_artifacts.json"""
-	const ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
-	
-	if not FileAccess.file_exists(ARTIFACTS_JSON_PATH):
-		print("AdaSceneManager: Artifacts JSON not found: %s" % ARTIFACTS_JSON_PATH)
+	"""Get sequence name for artifact from registry/*.json"""
+	const REGISTRY_DIR = "res://commons/artifacts/registry/"
+
+	var dir = DirAccess.open(REGISTRY_DIR)
+	if not dir:
+		if debug:
+			print("AdaSceneManager: Registry directory not found: %s" % REGISTRY_DIR)
 		return ""
-	
-	var file = FileAccess.open(ARTIFACTS_JSON_PATH, FileAccess.READ)
-	if not file:
-		print("AdaSceneManager: Could not open artifacts file")
-		return ""
-	
-	var json_text = file.get_as_text()
-	file.close()
-	
-	var json = JSON.new()
-	var parse_result = json.parse(json_text)
-	
-	if parse_result != OK:
-		print("AdaSceneManager: Failed to parse artifacts JSON")
-		return ""
-	
-	var artifacts_data = json.data.get("artifacts", {})
-	
-	if artifacts_data.has(artifact_id):
-		var artifact_info = artifacts_data[artifact_id]
-		var sequence = artifact_info.get("sequence", "")
-		if sequence and sequence != null:
-			return sequence
-	
+
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			var file = FileAccess.open(REGISTRY_DIR + file_name, FileAccess.READ)
+			if file:
+				var json = JSON.new()
+				if json.parse(file.get_as_text()) == OK:
+					var artifacts_data = json.data.get("artifacts", {})
+					if artifacts_data.has(artifact_id):
+						var artifact_info = artifacts_data[artifact_id]
+						var sequence = artifact_info.get("sequence", "")
+						if sequence and sequence != null:
+							dir.list_dir_end()
+							return sequence
+				file.close()
+		file_name = dir.get_next()
+	dir.list_dir_end()
+
 	return ""
 
 # =============================================================================
@@ -204,13 +272,15 @@ func _get_sequence_for_artifact(artifact_id: String) -> String:
 # =============================================================================
 
 func _on_artifact_activated(artifact_id: String):
-	print("AdaSceneManager: Artifact activated: %s" % artifact_id)
+	if debug:
+		print("AdaSceneManager: Artifact activated: %s" % artifact_id)
 	
 	# First, try to get sequence from artifacts registry
 	var sequence_name = _get_sequence_for_artifact(artifact_id)
 	
 	if sequence_name and not sequence_name.is_empty():
-		print("AdaSceneManager: Found sequence '%s' for artifact '%s'" % [sequence_name, artifact_id])
+		if debug:
+			print("AdaSceneManager: Found sequence '%s' for artifact '%s'" % [sequence_name, artifact_id])
 		request_transition({
 			"type": TransitionType.ARTIFACT_ACTIVATION,
 			"source": artifact_id,
@@ -230,10 +300,12 @@ func _on_artifact_activated(artifact_id: String):
 				"first_map": "Tutorial_Single"
 			})
 		_:
-			print("AdaSceneManager: No sequence mapping found for artifact: %s" % artifact_id)
+			if debug:
+				print("AdaSceneManager: No sequence mapping found for artifact: %s" % artifact_id)
 
 func _on_interactable_activated(object_id: String, position: Vector3, data: Dictionary):
-	print("AdaSceneManager: Interactable activated: %s" % object_id)
+	if debug:
+		print("AdaSceneManager: Interactable activated: %s" % object_id)
 	
 	if data.has("transition_trigger"):
 		var trigger_data = data["transition_trigger"]
@@ -242,7 +314,8 @@ func _on_interactable_activated(object_id: String, position: Vector3, data: Dict
 		request_transition(trigger_data)
 
 func _on_progression_event(event_name: String, event_data: Dictionary):
-	print("AdaSceneManager: Progression event: %s" % event_name)
+	if debug:
+		print("AdaSceneManager: Progression event: %s" % event_name)
 	
 	match event_name:
 		"sequence_triggered":
@@ -264,7 +337,8 @@ func _on_progression_event(event_name: String, event_data: Dictionary):
 # =============================================================================
 
 func request_transition(transition_request: Dictionary):
-	print("AdaSceneManager: Processing transition request: %s" % transition_request)
+	if debug:
+		print("AdaSceneManager: Processing transition request: %s" % transition_request)
 	
 	var transition_type = transition_request.get("type", TransitionType.MANUAL_LOAD)
 	var action = transition_request.get("action", "")
@@ -290,33 +364,68 @@ func request_transition(transition_request: Dictionary):
 			_handle_next_action(current_map)
 		"return_to_hub":
 			_return_to_hub(transition_request.get("completion_data", {}))
+		"load_landscape":
+			_load_landscape()
 		_:
-			print("AdaSceneManager: Unknown action: %s" % action)
+			if debug:
+				print("AdaSceneManager: Unknown action: %s" % action)
 
 func _start_sequence_from_request(request: Dictionary):
 	var sequence_name = request.get("sequence", "")
 	
 	if not sequence_configs.has(sequence_name):
 		push_error("AdaSceneManager: Unknown sequence: %s" % sequence_name)
-		print("AdaSceneManager: Available sequences: %s" % str(sequence_configs.keys()))
-		print("AdaSceneManager: Check your sequence configuration in: %s" % SEQUENCES_JSON_PATH)
+		if debug:
+			print("AdaSceneManager: Available sequences: %s" % str(sequence_configs.keys()))
+			print("AdaSceneManager: Check your sequence configuration in: %s" % SEQUENCES_JSON_PATH)
 		return
 	
 	var config = sequence_configs[sequence_name]
+	var maps = config.get("maps", [])
+	
+	# TESTPLUS: optionally exclude specific sequences entirely
+	if GameManager and GameManager.is_testplus_mode() and GameManager.is_sequence_excluded_in_testplus(sequence_name):
+		print("AdaSceneManager: TESTPLUS MODE - Sequence '%s' excluded by configuration, skipping launch" % sequence_name)
+		if GameManager.has_method("add_console_message"):
+			GameManager.add_console_message("TestPlus skipped sequence: %s" % sequence_name, "info", "testplus")
+		current_sequence_data.clear()
+		return
+	
 	current_sequence_data = {
 		"sequence_name": sequence_name,
-		"maps": config.get("maps", []),
+		"maps": maps,
 		"current_step": 0,
 		"return_to": config.get("return_to", "lab"),
 		"transition_source": request,
 		"sequence_info": {
 			"name": config.get("name", sequence_name),
 			"description": config.get("description", ""),
-			"total_maps": config.get("maps", []).size()
+			"total_maps": maps.size()
 		}
 	}
 	
-	print("AdaSceneManager: Starting sequence '%s' with %d maps" % [sequence_name, current_sequence_data.maps.size()])
+	if debug:
+		print("AdaSceneManager: Starting sequence '%s' with %d maps" % [sequence_name, current_sequence_data.maps.size()])
+	
+	# Debug: Print current game mode
+	print("AdaSceneManager: GameManager exists: %s" % (GameManager != null))
+	if GameManager:
+		print("AdaSceneManager: Current game mode: %s (is_test_mode=%s, is_testplus_mode=%s)" % [GameManager.get_game_mode_name(), GameManager.is_test_mode(), GameManager.is_testplus_mode()])
+	
+	# Check for TEST mode - skip to last map
+	if GameManager and GameManager.is_test_mode():
+		if maps.size() > 1:
+			current_sequence_data["current_step"] = maps.size() - 1
+			print("AdaSceneManager: TEST MODE - Skipping to last map: %s" % maps[maps.size() - 1])
+	elif GameManager and GameManager.is_testplus_mode():
+		if GameManager.should_testplus_sample_sequence(sequence_name):
+			if maps.size() > 1:
+				current_sequence_data["current_step"] = maps.size() - 1
+				print("AdaSceneManager: TESTPLUS MODE - Sample mode active, jumping to map: %s" % maps[maps.size() - 1])
+		else:
+			print("AdaSceneManager: TESTPLUS MODE - Full sequence active, starting from first map")
+	else:
+		print("AdaSceneManager: STORY MODE - Starting from first map")
 	
 	# Emit sequence started signal
 	sequence_started.emit(sequence_name, current_sequence_data)
@@ -328,7 +437,8 @@ func _load_specific_map(request: Dictionary):
 	var spawn_point = request.get("spawn_point", "default")
 	
 	if map_name.is_empty():
-		print("AdaSceneManager: No destination specified in request")
+		if debug:
+			print("AdaSceneManager: No destination specified in request")
 		return
 	
 	var scene_data = {
@@ -344,31 +454,38 @@ func _load_grid_scene_with_first_map():
 	if current_sequence_data.is_empty():
 		push_error("AdaSceneManager: ERROR - No sequence data")
 		return
-	
+
 	var maps = current_sequence_data.get("maps", [])
 	if maps.is_empty():
 		push_error("AdaSceneManager: ERROR - No maps in sequence")
 		return
+
+	# Use current_step (may be modified for test mode)
+	var step = current_sequence_data.get("current_step", 0)
+	var target_map = maps[step]
 	
-	var first_map = maps[0]
-	print("AdaSceneManager: Loading grid scene with map: %s" % first_map)
-	
+	if debug:
+		print("AdaSceneManager: Loading grid scene with map: %s (step %d/%d)" % [target_map, step + 1, maps.size()])
+
 	var grid_scene_data = {
 		"sequence_data": current_sequence_data,
-		"initial_map": first_map,
+		"map_name": target_map,  # vrStaging expects "map_name"
+		"initial_map": target_map,  # Keep for backwards compatibility
 		"scene_manager": self
 	}
-	
+
 	_load_scene_with_data(GRID_SCENE_PATH, grid_scene_data)
 
 func _restore_sequence_context(sequence_data: Dictionary):
 	"""Restore sequence context when transitioning between maps in a sequence"""
 	if sequence_data.is_empty():
-		print("AdaSceneManager: No sequence data to restore")
+		if debug:
+			print("AdaSceneManager: No sequence data to restore")
 		return
 		
 	current_sequence_data = sequence_data
-	print("AdaSceneManager: ✅ Restored sequence context: %s (step %d/%d)" % [
+	if debug:
+		print("AdaSceneManager: ✅ Restored sequence context: %s (step %d/%d)" % [
 		current_sequence_data.get("sequence_name", "unknown"),
 		current_sequence_data.get("current_step", 0) + 1,
 		current_sequence_data.get("maps", []).size()
@@ -376,31 +493,57 @@ func _restore_sequence_context(sequence_data: Dictionary):
 
 func _handle_next_action(current_map_name: String):
 	"""Handle 'next' action by analyzing current map against sequence configuration"""
-	print("AdaSceneManager: Handling 'next' action from map: %s" % current_map_name)
+	if debug:
+		print("AdaSceneManager: Handling 'next' action from map: %s" % current_map_name)
 	
 	# Find which sequence contains this map
 	var sequence_info = _find_sequence_containing_map(current_map_name)
 	
 	if sequence_info.is_empty():
-		print("AdaSceneManager: Map '%s' not found in any sequence - cannot advance" % current_map_name)
+		if debug:
+			print("AdaSceneManager: Map '%s' not found in any sequence - cannot advance" % current_map_name)
 		return
 	
 	var sequence_name = sequence_info["sequence_name"]
 	var maps = sequence_info["maps"]
 	var current_step = sequence_info["current_step"]
 	
-	print("AdaSceneManager: Found map in sequence '%s' at step %d/%d" % [sequence_name, current_step + 1, maps.size()])
+	if debug:
+		print("AdaSceneManager: Found map in sequence '%s' at step %d/%d" % [sequence_name, current_step + 1, maps.size()])
 	
 	# Set sequence context if not already active
 	if current_sequence_data.is_empty():
 		_activate_sequence_context(sequence_name, current_step)
 	
-	# Determine next action
-	if current_step + 1 >= maps.size():
-		# Last map in sequence - complete and return to lab
+	# Determine next action based on game mode
+	var is_last_map = current_step + 1 >= maps.size()
+	
+	# TEST mode: always complete after current map (already skipped to last on launch)
+	if GameManager and GameManager.is_test_mode():
+		_complete_sequence(sequence_name, maps)
+		return
+	
+	# TESTPLUS mode
+	if GameManager and GameManager.is_testplus_mode():
+		# Excluded: shouldn't be here, but complete anyway
+		if GameManager.is_sequence_excluded_in_testplus(sequence_name):
+			_complete_sequence(sequence_name, maps)
+			return
+		# Sample mode: complete after current map (already skipped to last on launch)
+		if GameManager.should_testplus_sample_sequence(sequence_name):
+			_complete_sequence(sequence_name, maps)
+			return
+		# Full sequence mode: play all maps, then lab
+		if is_last_map:
+			_complete_sequence(sequence_name, maps)
+		else:
+			_advance_to_next_map(sequence_name, maps, current_step)
+		return
+	
+	# STORY / EXPLORER mode: default behavior
+	if is_last_map:
 		_complete_sequence(sequence_name, maps)
 	else:
-		# Advance to next map in sequence
 		_advance_to_next_map(sequence_name, maps, current_step)
 
 func _find_sequence_containing_map(map_name: String) -> Dictionary:
@@ -434,11 +577,13 @@ func _activate_sequence_context(sequence_name: String, current_step: int):
 			"total_maps": config.get("maps", []).size()
 		}
 	}
-	print("AdaSceneManager: ✅ Activated sequence context: %s" % sequence_name)
+	if debug:
+		print("AdaSceneManager: ✅ Activated sequence context: %s" % sequence_name)
 
 func _complete_sequence(sequence_name: String, maps: Array):
 	"""Complete the sequence and return to lab"""
-	print("AdaSceneManager: Completing sequence: %s" % sequence_name)
+	if debug:
+		print("AdaSceneManager: Completing sequence: %s" % sequence_name)
 	
 	var completion_data = {
 		"sequence_completed": sequence_name,
@@ -455,7 +600,8 @@ func _advance_to_next_map(sequence_name: String, maps: Array, current_step: int)
 	current_sequence_data.current_step = current_step + 1
 	var next_map = maps[current_sequence_data.current_step]
 	
-	print("AdaSceneManager: Advancing sequence '%s' to map: %s (%d/%d)" % [sequence_name, next_map, current_step + 2, maps.size()])
+	if debug:
+		print("AdaSceneManager: Advancing sequence '%s' to map: %s (%d/%d)" % [sequence_name, next_map, current_step + 2, maps.size()])
 	
 	var scene_data = {
 		"sequence_data": current_sequence_data,
@@ -467,7 +613,8 @@ func _advance_to_next_map(sequence_name: String, maps: Array, current_step: int)
 
 func _advance_sequence():
 	if current_sequence_data.is_empty():
-		print("AdaSceneManager: No active sequence to advance")
+		if debug:
+			print("AdaSceneManager: No active sequence to advance")
 		return
 	
 	var maps = current_sequence_data.get("maps", [])
@@ -491,7 +638,8 @@ func _advance_sequence():
 	current_sequence_data.current_step = current_step + 1
 	var next_map = maps[current_sequence_data.current_step]
 	
-	print("AdaSceneManager: Advancing sequence to map: %s (%d/%d)" % [next_map, current_step + 2, maps.size()])
+	if debug:
+		print("AdaSceneManager: Advancing sequence to map: %s (%d/%d)" % [next_map, current_step + 2, maps.size()])
 	
 	var scene_data = {
 		"sequence_data": current_sequence_data,
@@ -503,8 +651,9 @@ func _advance_sequence():
 
 # Enhanced return to hub with lab state consideration
 func _return_to_hub(completion_data: Dictionary = {}):
-	print("AdaSceneManager: Returning to lab hub with completion data")
-	print("AdaSceneManager: Completion data: %s" % completion_data)
+	if debug:
+		print("AdaSceneManager: Returning to lab hub with completion data")
+		print("AdaSceneManager: Completion data: %s" % completion_data)
 	
 	# Extract sequence completion information
 	var completed_sequence = ""
@@ -516,7 +665,8 @@ func _return_to_hub(completion_data: Dictionary = {}):
 		completion_data["completion_timestamp"] = Time.get_datetime_string_from_system()
 		
 		# TODO: Skip sequence saving for now - just direct to correct lab map
-		print("AdaSceneManager: ⏭️ Skipping sequence saving - direct map transition for: %s" % completed_sequence)
+		if debug:
+			print("AdaSceneManager: ⏭️ Skipping sequence saving - direct map transition for: %s" % completed_sequence)
 		
 		# Notify MapProgressionManager if available
 		if map_progression_manager_ref and map_progression_manager_ref.has_method("complete_map"):
@@ -538,11 +688,22 @@ func _return_to_hub(completion_data: Dictionary = {}):
 		"lab_map_override": lab_map_name  # New: specify which lab map to load
 	}
 	
-	print("AdaSceneManager: 🎉 Sequence '%s' completed - returning to lab state: %s" % [completed_sequence, lab_map_name])
-	print("AdaSceneManager: 🔍 DEBUG - lab_scene_data = %s" % lab_scene_data)
+	if debug:
+		print("AdaSceneManager: 🎉 Sequence '%s' completed - returning to lab state: %s" % [completed_sequence, lab_map_name])
+		print("AdaSceneManager: 🔍 DEBUG - lab_scene_data = %s" % lab_scene_data)
 	
 	# Load lab scene
 	_load_scene_with_data(LAB_SCENE_PATH, lab_scene_data)
+
+
+func _load_landscape():
+	if debug:
+		print("AdaSceneManager: Loading open landscape scene")
+	var scene_data = {
+		"scene_manager": self,
+		"return_to": "lab",
+	}
+	_load_scene_with_data(LANDSCAPE_SCENE_PATH, scene_data)
 
 # Enhanced scene loading with lab map override support
 
@@ -553,18 +714,24 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 		return
 	
 	var from_scene = current_scene_type
-	var to_scene = "lab" if scene_path == LAB_SCENE_PATH else "grid"
+	var to_scene = "grid"
+	if scene_path == LAB_SCENE_PATH:
+		to_scene = "lab"
+	elif scene_path == LANDSCAPE_SCENE_PATH:
+		to_scene = "landscape"
 	
 	current_scene_type = to_scene
 	
-	print("🔍 DEBUG: AdaSceneManager._load_scene_with_data() called")
-	print("🔍 DEBUG: scene_path = %s" % scene_path)
-	print("🔍 DEBUG: to_scene = %s" % to_scene)
-	print("🔍 DEBUG: scene_data = %s" % scene_data)
+	if debug:
+		print("🔍 DEBUG: AdaSceneManager._load_scene_with_data() called")
+		print("🔍 DEBUG: scene_path = %s" % scene_path)
+		print("🔍 DEBUG: to_scene = %s" % to_scene)
+		print("🔍 DEBUG: scene_data = %s" % scene_data)
 	
 	# CRITICAL FIX: Set scene_data on staging BEFORE anything else
 	staging.set_meta("scene_data", scene_data)
-	print("🔍 DEBUG: ✅ Set staging scene_data")
+	if debug:
+		print("🔍 DEBUG: ✅ Set staging scene_data")
 	
 	# Handle lab map override for progressive loading - THIS IS THE KEY FIX!
 	if scene_data.has("lab_map_override") and to_scene == "lab":
@@ -575,12 +742,14 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 		scene_data["map_name"] = lab_override
 		staging.set_meta("scene_user_data", scene_data)
 		
-		print("🔍 DEBUG: ✅ Set lab_map_override = '%s'" % lab_override)
-		print("🔍 DEBUG: ✅ Set scene_user_data with map_name = '%s'" % lab_override)
+		if debug:
+			print("🔍 DEBUG: ✅ Set lab_map_override = '%s'" % lab_override)
+			print("🔍 DEBUG: ✅ Set scene_user_data with map_name = '%s'" % lab_override)
 	else:
 		# Make sure scene_user_data is set for non-lab scenes too
 		staging.set_meta("scene_user_data", scene_data)
-		print("🔍 DEBUG: ✅ Set scene_user_data for non-lab scene")
+		if debug:
+			print("🔍 DEBUG: ✅ Set scene_user_data for non-lab scene")
 	
 	var transition_type = scene_data.get("transition_source", {}).get("type", TransitionType.MANUAL_LOAD)
 	scene_transition_started.emit(from_scene, to_scene, transition_type)
@@ -588,7 +757,8 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	# Add completion data to staging metadata for lab to access
 	if scene_data.has("completion_data"):
 		staging.set_meta("completion_data", scene_data["completion_data"])
-		print("🔍 DEBUG: ✅ Set completion_data")
+		if debug:
+			print("🔍 DEBUG: ✅ Set completion_data")
 	
 	# Connect to staging signals for scene completion handling
 	if staging.has_signal("scene_loaded") and not staging.scene_loaded.is_connected(_on_staging_scene_loaded):
@@ -597,12 +767,14 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	if staging.has_signal("scene_visible") and not staging.scene_visible.is_connected(_on_staging_scene_visible):
 		staging.scene_visible.connect(_on_staging_scene_visible)
 	
-	print("🔍 DEBUG: About to call staging.load_scene()")
+	if debug:
+		print("🔍 DEBUG: About to call staging.load_scene()")
 	staging.load_scene(scene_path, scene_data)
 
 func _on_staging_scene_loaded(scene: Node, user_data: Dictionary):
 	"""Handle when staging has loaded a scene"""
-	print("AdaSceneManager: Scene loaded by staging: %s" % scene.name)
+	if debug:
+		print("AdaSceneManager: Scene loaded by staging: %s" % scene.name)
 	
 	# Emit our own signal
 	scene_transition_completed.emit(current_scene_type, user_data)
@@ -623,12 +795,14 @@ func _on_staging_scene_loaded(scene: Node, user_data: Dictionary):
 		# Also notify via reference if connected
 		if lab_manager_ref and completion_data.has("sequence_completed"):
 			var completed_sequence = completion_data["sequence_completed"]
-			print("AdaSceneManager: 🔄 Notifying LabManager of sequence completion: %s" % completed_sequence)
+			if debug:
+				print("AdaSceneManager: 🔄 Notifying LabManager of sequence completion: %s" % completed_sequence)
 			lab_manager_ref._on_sequence_completed(completed_sequence)
 
 func _on_staging_scene_visible(scene: Node, user_data: Dictionary):
 	"""Handle when staging scene becomes visible"""
-	print("AdaSceneManager: Scene visible: %s" % scene.name)
+	if debug:
+		print("AdaSceneManager: Scene visible: %s" % scene.name)
 
 func _get_vr_staging() -> Node:
 	if staging_ref:
@@ -647,7 +821,8 @@ func _get_vr_staging() -> Node:
 		staging_ref = tree_root
 		return staging_ref
 	
-	print("AdaSceneManager: WARNING - VR Staging not found")
+	if debug:
+		print("AdaSceneManager: WARNING - VR Staging not found")
 	return null
 
 # =============================================================================
@@ -696,7 +871,8 @@ func get_transition_history() -> Array:
 
 func set_staging_reference(staging: Node):
 	staging_ref = staging
-	print("AdaSceneManager: Staging reference set to: %s" % staging.name)
+	if debug:
+		print("AdaSceneManager: Staging reference set to: %s" % staging.name)
 
 # TODO: Implement _save_sequence_completion() later when needed
 
@@ -706,7 +882,8 @@ func set_staging_reference(staging: Node):
 
 func force_complete_sequence(sequence_name: String):
 	"""Force complete a sequence for testing progression"""
-	print("AdaSceneManager: 🔧 Force completing sequence: %s" % sequence_name)
+	if debug:
+		print("AdaSceneManager: 🔧 Force completing sequence: %s" % sequence_name)
 	
 	var completion_data = {
 		"sequence_completed": sequence_name,
@@ -727,7 +904,8 @@ func get_lab_manager() -> LabManager:
 
 func notify_sequence_completion(sequence_name: String, completion_data: Dictionary = {}):
 	"""Manually notify of sequence completion (for external integrations)"""
-	print("AdaSceneManager: Manual sequence completion notification: %s" % sequence_name)
+	if debug:
+		print("AdaSceneManager: Manual sequence completion notification: %s" % sequence_name)
 	
 	if lab_manager_ref:
 		lab_manager_ref._on_sequence_completed(sequence_name)
@@ -775,20 +953,23 @@ func get_available_sequences() -> Array:
 
 func print_scene_manager_status():
 	"""Print comprehensive status information"""
-	print("=== ADASCENEMANAGER STATUS ===")
-	print("Current scene type: %s" % current_scene_type)
-	print("In sequence: %s" % is_in_sequence())
+	if debug:
+		print("=== ADASCENEMANAGER STATUS ===")
+		print("Current scene type: %s" % current_scene_type)
+		print("In sequence: %s" % is_in_sequence())
 	if is_in_sequence():
-		print("Current sequence: %s" % current_sequence_data.get("sequence_name", "unknown"))
-		print("Sequence step: %d/%d" % [
+		if debug:
+			print("Current sequence: %s" % current_sequence_data.get("sequence_name", "unknown"))
+			print("Sequence step: %d/%d" % [
 			current_sequence_data.get("current_step", 0) + 1,
 			current_sequence_data.get("maps", []).size()
-		])
-	print("Lab manager connected: %s" % (lab_manager_ref != null))
-	print("Staging reference: %s" % (staging_ref != null))
-	print("Available sequences: %s" % str(sequence_configs.keys()))
-	print("Transition history entries: %d" % transition_history.size())
-	print("==============================")
+			])
+	if debug:
+		print("Lab manager connected: %s" % (lab_manager_ref != null))
+		print("Staging reference: %s" % (staging_ref != null))
+		print("Available sequences: %s" % str(sequence_configs.keys()))
+		print("Transition history entries: %d" % transition_history.size())
+		print("==============================")
 
 func get_debug_info() -> Dictionary:
 	"""Get debug information as dictionary"""
@@ -806,7 +987,8 @@ func get_debug_info() -> Dictionary:
 # Auto-connect methods for easy integration
 func auto_connect_to_scene():
 	"""Automatically connect to available systems in current scene"""
-	print("AdaSceneManager: Auto-connecting to scene systems...")
+	if debug:
+		print("AdaSceneManager: Auto-connecting to scene systems...")
 	
 	var current_scene = get_tree().current_scene
 	if not current_scene:
@@ -822,18 +1004,21 @@ func auto_connect_to_scene():
 	if grid_system:
 		connect_to_grid_system(grid_system)
 	
-	print("AdaSceneManager: Auto-connection complete")
+	if debug:
+		print("AdaSceneManager: Auto-connection complete")
 
 # Handle lab state changes
 func _on_lab_state_changed(new_state: String, unlocked_artifacts: Array):
 	"""Handle lab state transitions"""
-	print("AdaSceneManager: Lab state changed to: %s" % new_state)
-	print("AdaSceneManager: Newly unlocked artifacts: %s" % str(unlocked_artifacts))
+	if debug:
+		print("AdaSceneManager: Lab state changed to: %s" % new_state)
+		print("AdaSceneManager: Newly unlocked artifacts: %s" % str(unlocked_artifacts))
 
 # Handle lab map transition completion
 func _on_lab_map_transition_complete(new_state: String):
 	"""Handle completion of lab map transitions"""
-	print("AdaSceneManager: Lab map transition complete - new state: %s" % new_state)
+	if debug:
+		print("AdaSceneManager: Lab map transition complete - new state: %s" % new_state)
 
 
 
@@ -844,10 +1029,12 @@ func _determine_lab_map_for_return(completed_sequence: String) -> String:
 	if sequence_configs.has(completed_sequence):
 		var sequence = sequence_configs[completed_sequence]
 		var lab_map = sequence.get("lab_map", "Lab/map_data_init")
-		print("AdaSceneManager: 🎯 Sequence '%s' → lab map: %s" % [completed_sequence, lab_map])
+		if debug:
+			print("AdaSceneManager: 🎯 Sequence '%s' → lab map: %s" % [completed_sequence, lab_map])
 		return lab_map
 	
 	# Use consolidated fallback
 	var fallback = sequence_configs.get("fallback_lab_map", "Lab/map_data_init")
-	print("AdaSceneManager: ⚠️ No mapping for sequence '%s', using fallback: %s" % [completed_sequence, fallback])
+	if debug:
+		print("AdaSceneManager: ⚠️ No mapping for sequence '%s', using fallback: %s" % [completed_sequence, fallback])
 	return fallback

@@ -1,0 +1,39 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ML_Sequence_Memory",
+  "home_sequence": "machinelearning",
+  "dimensions": {
+    "w": 4,
+    "d": 12
+  },
+  "signature": "rnn_visualization provides an interactive recurrent network showing hidden state evolution over time",
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 45,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 4,
+        "d": 12
+      },
+      "centroid": [
+        1.511111111111111,
+        5.466666666666667
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 47,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

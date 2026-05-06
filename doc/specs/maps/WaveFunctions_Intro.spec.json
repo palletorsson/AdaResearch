@@ -1,0 +1,86 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_Intro",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 9,
+    "d": 22
+  },
+  "signature": "oscillation_controlled_cube demonstrates A\u00b7sin(\u03c9t+\u03c6) with adjustable parameters; control_pendulum bridges from Forces; rotating_cube_demo shows rotation as oscillation; y_oscillation_cube isolates vertical periodic motion; mario_cube_time_trace draws the oscillation history; dark_sphere anchors.",
+  "style": "bauhaus",
+  "echoes": [
+    "transformation",
+    "forces"
+  ],
+  "density": 0.046,
+  "breath_zones": [
+    {
+      "size": 176,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 22
+      },
+      "centroid": [
+        4.005681818181818,
+        10.613636363636363
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 1,
+      "token": "rotatescalecubes"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "pickup_cube_static"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "token": "y_oscillation_cube"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "rotating_cube_demo"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "pickup_cube_transforming"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "pickup_cube_rotating"
+    },
+    {
+      "x": 4,
+      "z": 9,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 18,
+      "token": "SphericalHarmonics"
+    },
+    {
+      "x": 7,
+      "z": 18,
+      "token": "SphericalHarmonics"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 9,
+    "walkable_cells": 197,
+    "breath_zone_count": 1,
+    "unique_tokens": 8
+  }
+}

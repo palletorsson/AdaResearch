@@ -1,0 +1,425 @@
+{
+  "id": "glass_rack",
+  "name": "Glass Rack",
+  "version": "1.2",
+  "description": "Laboratory glassware apparatus - vertical side view",
+
+  "orientation": {
+    "plane": "YZ",
+    "up_axis": "Y",
+    "forward": "+X",
+    "grid_size": 0.1,
+    "comment": "10cm per cell. Grid X→Z (horizontal), Grid Y→Y (vertical). Ports use cell-unit coords relative to element origin."
+  },
+
+  "defaults": {
+    "tube_radius": 0.015,
+    "comment": "15mm tube radius for all glass elements"
+  },
+
+  "categories": [
+    {"id": "vessels", "name": "Vessels", "color": "#4CAF50"},
+    {"id": "tubes", "name": "Tubes", "color": "#2196F3"},
+    {"id": "bends", "name": "Bends", "color": "#FF9800"},
+    {"id": "junctions", "name": "Junctions", "color": "#9C27B0"},
+    {"id": "condensers", "name": "Condensers", "color": "#00BCD4"},
+    {"id": "terminals", "name": "Terminals", "color": "#F44336"}
+  ],
+
+  "presets": [
+    {
+      "id": "empty",
+      "name": "Empty Grid",
+      "description": "Blank 16x12 grid. Place elements freely.",
+      "grid_size": [16, 12],
+      "placements": []
+    },
+    {
+      "id": "debug_tubes_bends",
+      "name": "DEBUG: 4 Corners Loop",
+      "description": "Rectangular loop using all 4 corner types connected by tubes. All ports should show green.",
+      "grid_size": [5, 5],
+      "placements": [
+        {"element": "corner_br",     "position": [0, 0], "rotation": 0},
+        {"element": "straight_h",    "position": [1, 0], "rotation": 0},
+        {"element": "corner_bl",     "position": [3, 0], "rotation": 0},
+        {"element": "straight",      "position": [0, 1], "rotation": 0},
+        {"element": "straight",      "position": [3, 1], "rotation": 0},
+        {"element": "corner_tr",     "position": [0, 3], "rotation": 0},
+        {"element": "straight_h",    "position": [1, 3], "rotation": 0},
+        {"element": "corner_tl",     "position": [3, 3], "rotation": 0}
+      ]
+    },
+    {
+      "id": "simple_distillation",
+      "name": "Simple Distillation",
+      "description": "Vertical distillation: flask → tube → condenser → drip → beaker. All centers aligned.",
+      "grid_size": [4, 14],
+      "placements": [
+        {"element": "flask",         "position": [0, 0], "rotation": 0},
+        {"element": "straight",      "position": [0.5, 3], "rotation": 0},
+        {"element": "condenser",     "position": [0.5, 5], "rotation": 0},
+        {"element": "drip",          "position": [0.5, 8], "rotation": 0},
+        {"element": "beaker",        "position": [0, 9], "rotation": 0}
+      ]
+    },
+    {
+      "id": "distillation_with_bend",
+      "name": "Distillation with Bend",
+      "description": "Flask → tube → corner → horizontal tube → corner → condenser → drip → beaker.",
+      "grid_size": [8, 14],
+      "placements": [
+        {"element": "flask",         "position": [0, 0], "rotation": 0},
+        {"element": "straight",      "position": [0.5, 3], "rotation": 0},
+        {"element": "corner_tr",     "position": [0.5, 5], "rotation": 0},
+        {"element": "straight_h",    "position": [1.5, 5], "rotation": 0},
+        {"element": "corner_tl",     "position": [3.5, 5], "rotation": 0},
+        {"element": "condenser",     "position": [3.5, 2], "rotation": 0},
+        {"element": "drip",          "position": [3.5, 1], "rotation": 0},
+        {"element": "beaker",        "position": [3, 0], "rotation": 0}
+      ]
+    },
+    {
+      "id": "reflux_condenser",
+      "name": "Reflux Condenser",
+      "description": "Vertical reflux tower: flask with spiral condenser returning liquid back down.",
+      "grid_size": [4, 12],
+      "placements": [
+        {"element": "flask",         "position": [0, 0], "rotation": 0},
+        {"element": "straight",      "position": [0.5, 3], "rotation": 0},
+        {"element": "spiral",        "position": [0.5, 5], "rotation": 0},
+        {"element": "cap",           "position": [0.5, 9], "rotation": 0}
+      ]
+    },
+    {
+      "id": "fractional_distillation",
+      "name": "Fractional Distillation",
+      "description": "Multi-stage apparatus with Y-splitter separating into two collection paths.",
+      "grid_size": [8, 14],
+      "placements": [
+        {"element": "flask",         "position": [3, 0], "rotation": 0},
+        {"element": "straight_long", "position": [3.5, 3], "rotation": 0},
+        {"element": "spiral",        "position": [3.5, 6], "rotation": 0},
+        {"element": "ypipe",         "position": [3.5, 10], "rotation": 0},
+        {"element": "corner_br",     "position": [2.5, 11], "rotation": 0},
+        {"element": "drip",          "position": [2.5, 12], "rotation": 0},
+        {"element": "beaker",        "position": [1, 13], "rotation": 0},
+        {"element": "corner_bl",     "position": [4.5, 11], "rotation": 0},
+        {"element": "drip",          "position": [4.5, 12], "rotation": 0},
+        {"element": "beaker",        "position": [4, 13], "rotation": 0}
+      ]
+    },
+    {
+      "id": "circulation_loop",
+      "name": "Circulation Loop",
+      "description": "Closed loop: flask → up → across → condenser → down → back.",
+      "grid_size": [8, 8],
+      "placements": [
+        {"element": "flask",         "position": [0, 0], "rotation": 0},
+        {"element": "straight",      "position": [0.5, 3], "rotation": 0},
+        {"element": "corner_tr",     "position": [0.5, 5], "rotation": 0},
+        {"element": "straight_h",    "position": [1.5, 5], "rotation": 0},
+        {"element": "condenser",     "position": [3.5, 5], "rotation": 0},
+        {"element": "corner_bl",     "position": [3.5, 4], "rotation": 0},
+        {"element": "straight",      "position": [3.5, 2], "rotation": 0},
+        {"element": "sbend",         "position": [2.5, 0], "rotation": 0}
+      ]
+    },
+    {
+      "id": "cascading_filter",
+      "name": "Cascading Filter",
+      "description": "Three-stage cascade: each stage has a flask with wobbly connector to the next.",
+      "grid_size": [14, 6],
+      "placements": [
+        {"element": "flask",         "position": [0, 0], "rotation": 0},
+        {"element": "straight_h",    "position": [2, 1], "rotation": 0},
+        {"element": "wobbly",        "position": [4, 0], "rotation": 0},
+        {"element": "flask",         "position": [6, 0], "rotation": 0},
+        {"element": "straight_h",    "position": [8, 1], "rotation": 0},
+        {"element": "wobbly",        "position": [10, 0], "rotation": 0},
+        {"element": "beaker",        "position": [11, 0], "rotation": 0}
+      ]
+    }
+  ],
+
+  "elements": [
+    {
+      "id": "flask",
+      "name": "Round Flask",
+      "category": "vessels",
+      "size": [2, 3],
+      "icon": "⚗",
+      "description": "Round bottom flask with neck. Bulb at bottom, opening at top.",
+      "segment_type": "flask",
+      "ports": [
+        {"id": "top", "cell": [1.0, 3.0], "dir": "up"}
+      ]
+    },
+    {
+      "id": "beaker",
+      "name": "Beaker",
+      "category": "vessels",
+      "size": [2, 2],
+      "icon": "🧪",
+      "description": "Open cylindrical vessel for collecting liquid.",
+      "segment_type": "beaker",
+      "ports": [
+        {"id": "top", "cell": [1.0, 2.0], "dir": "up"}
+      ]
+    },
+
+    {
+      "id": "straight",
+      "name": "Tube (2)",
+      "category": "tubes",
+      "size": [1, 2],
+      "icon": "│",
+      "description": "Vertical tube, 2 units tall. Connects top-to-bottom.",
+      "segment_type": "straight",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [0.5, 2.0], "dir": "up"}
+      ]
+    },
+    {
+      "id": "straight_long",
+      "name": "Tube (3)",
+      "category": "tubes",
+      "size": [1, 3],
+      "icon": "┃",
+      "description": "Vertical tube, 3 units tall.",
+      "segment_type": "straight",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [0.5, 3.0], "dir": "up"}
+      ]
+    },
+    {
+      "id": "straight_h",
+      "name": "Tube Horizontal",
+      "category": "tubes",
+      "size": [2, 1],
+      "icon": "─",
+      "description": "Horizontal tube, 2 units wide. Connects left-to-right.",
+      "segment_type": "straight_h",
+      "ports": [
+        {"id": "left",  "cell": [0.0, 0.5], "dir": "left"},
+        {"id": "right", "cell": [2.0, 0.5], "dir": "right"}
+      ]
+    },
+
+    {
+      "id": "wobbly",
+      "name": "Wobbly Tube",
+      "category": "tubes",
+      "size": [2, 3],
+      "icon": "~",
+      "description": "Curved sinusoidal tube for decorative and flow transitions.",
+      "segment_type": "wobbly",
+      "ports": [
+        {"id": "bottom", "cell": [1.0, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [1.0, 3.0], "dir": "up"}
+      ]
+    },
+    {
+      "id": "corner_bl",
+      "name": "Corner ╭",
+      "category": "bends",
+      "size": [1, 1],
+      "icon": "╭",
+      "description": "90° elbow: top to left. Top-center connects to left-center.",
+      "segment_type": "corner_bl",
+      "ports": [
+        {"id": "top",  "cell": [0.5, 1.0], "dir": "up"},
+        {"id": "left", "cell": [0.0, 0.5], "dir": "left"}
+      ]
+    },
+    {
+      "id": "corner_br",
+      "name": "Corner ╮",
+      "category": "bends",
+      "size": [1, 1],
+      "icon": "╮",
+      "description": "90° elbow: top to right. Top-center connects to right-center.",
+      "segment_type": "corner_br",
+      "ports": [
+        {"id": "top",   "cell": [0.5, 1.0], "dir": "up"},
+        {"id": "right", "cell": [1.0, 0.5], "dir": "right"}
+      ]
+    },
+    {
+      "id": "corner_tr",
+      "name": "Corner ╯",
+      "category": "bends",
+      "size": [1, 1],
+      "icon": "╯",
+      "description": "90° elbow: bottom to right. Bottom-center connects to right-center.",
+      "segment_type": "corner_tr",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "right",  "cell": [1.0, 0.5], "dir": "right"}
+      ]
+    },
+    {
+      "id": "corner_tl",
+      "name": "Corner ╰",
+      "category": "bends",
+      "size": [1, 1],
+      "icon": "╰",
+      "description": "90° elbow: bottom to left. Bottom-center connects to left-center.",
+      "segment_type": "corner_tl",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "left",   "cell": [0.0, 0.5], "dir": "left"}
+      ]
+    },
+    {
+      "id": "corner45",
+      "name": "Corner 45",
+      "category": "bends",
+      "size": [1, 1],
+      "icon": "/",
+      "description": "45-degree elbow segment for gentle direction changes.",
+      "segment_type": "corner45",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "diag",   "cell": [1.0, 0.5], "dir": "right"}
+      ]
+    },
+    {
+      "id": "sbend",
+      "name": "S-Bend",
+      "category": "bends",
+      "size": [1, 2],
+      "icon": "∿",
+      "description": "S-curve. Enters bottom-left, exits top-right offset by one cell.",
+      "segment_type": "sbend",
+      "ports": [
+        {"id": "bottom", "cell": [0.0, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [1.0, 2.0], "dir": "up"}
+      ]
+    },
+    {
+      "id": "ubend",
+      "name": "U-Bend",
+      "category": "bends",
+      "size": [2, 1],
+      "icon": "∪",
+      "description": "180° turn. Two vertical openings at top, curved bottom.",
+      "segment_type": "ubend",
+      "ports": [
+        {"id": "left_top",  "cell": [0.0, 0.5], "dir": "up"},
+        {"id": "right_top", "cell": [2.0, 0.5], "dir": "up"}
+      ]
+    },
+
+    {
+      "id": "reducer",
+      "name": "Reducer",
+      "category": "bends",
+      "size": [1, 1],
+      "icon": "><",
+      "description": "Diameter transition from larger tube to smaller tube.",
+      "segment_type": "reducer",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [0.5, 1.0], "dir": "up"}
+      ]
+    },
+    {
+      "id": "tee",
+      "name": "T-Junction",
+      "category": "junctions",
+      "size": [1, 1],
+      "icon": "┬",
+      "description": "T-junction. Vertical tube with side branch to the right.",
+      "segment_type": "junction",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [0.5, 1.0], "dir": "up"},
+        {"id": "right",  "cell": [1.0, 0.5], "dir": "right"}
+      ]
+    },
+    {
+      "id": "ypipe",
+      "name": "Y-Splitter",
+      "category": "junctions",
+      "size": [1, 1],
+      "icon": "⑂",
+      "description": "Y-junction. Single input splits to two diverging outputs.",
+      "segment_type": "ypipe",
+      "ports": [
+        {"id": "bottom",    "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "left_top",  "cell": [0.0, 1.0], "dir": "up"},
+        {"id": "right_top", "cell": [1.0, 1.0], "dir": "up"}
+      ]
+    },
+    {
+      "id": "cross",
+      "name": "Cross",
+      "category": "junctions",
+      "size": [1, 1],
+      "icon": "┼",
+      "description": "4-way cross junction.",
+      "segment_type": "cross",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [0.5, 1.0], "dir": "up"},
+        {"id": "left",   "cell": [0.0, 0.5], "dir": "left"},
+        {"id": "right",  "cell": [1.0, 0.5], "dir": "right"}
+      ]
+    },
+
+    {
+      "id": "spiral",
+      "name": "Spiral Condenser",
+      "category": "condensers",
+      "size": [1, 4],
+      "icon": "◎",
+      "description": "Helical coil condenser, 4 units tall.",
+      "segment_type": "spiral",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [0.5, 4.0], "dir": "up"}
+      ]
+    },
+    {
+      "id": "condenser",
+      "name": "Jacketed Condenser",
+      "category": "condensers",
+      "size": [1, 3],
+      "icon": "⫾",
+      "description": "Straight tube with outer cooling jacket.",
+      "segment_type": "condenser",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"},
+        {"id": "top",    "cell": [0.5, 3.0], "dir": "up"}
+      ]
+    },
+
+    {
+      "id": "cap",
+      "name": "Cap",
+      "category": "terminals",
+      "size": [1, 1],
+      "icon": "●",
+      "description": "Sealed end cap. Terminates a tube from below.",
+      "segment_type": "cap",
+      "ports": [
+        {"id": "bottom", "cell": [0.5, 0.0], "dir": "down"}
+      ]
+    },
+    {
+      "id": "drip",
+      "name": "Drip Tip",
+      "category": "terminals",
+      "size": [1, 1],
+      "icon": "▽",
+      "description": "Tapered drip tip for liquid output. Connects from above.",
+      "segment_type": "drip",
+      "ports": [
+        {"id": "top", "cell": [0.5, 1.0], "dir": "up"}
+      ]
+    }
+  ]
+}

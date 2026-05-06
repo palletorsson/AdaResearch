@@ -16,14 +16,14 @@ var particle_multi_mesh: MultiMeshInstance3D
 var scatter_positions: PackedVector3Array = []
 var scatter_normals: PackedVector3Array = []
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	create_surface_mesh()
 	generate_scatter_points()
 	create_instanced_objects()
 	start_animations()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -44,7 +44,7 @@ func setup_scene():
 	# Add multiple colored lights for ambiance
 	create_ambient_lights()
 
-func create_ambient_lights():
+func create_ambient_lights() -> void:
 	# Main directional light
 	var main_light = DirectionalLight3D.new()
 	main_light.position = Vector3(10, 15, 10)
@@ -64,7 +64,7 @@ func create_ambient_lights():
 		light.omni_range = 15.0
 		add_child(light)
 
-func create_surface_mesh():
+func create_surface_mesh() -> void:
 	# Create a complex surface for scattering - like terrain or organic shapes
 	var noise = FastNoiseLite.new()
 	noise.seed = 12345
@@ -114,10 +114,43 @@ func create_surface_mesh():
 	surface_material.metallic = 0.3
 	surface_material.roughness = 0.7
 	surface_mesh.set_surface_override_material(0, surface_material)
-	
+
 	add_child(surface_mesh)
 
-func generate_scatter_points():
+	# Add collision to terrain
+	create_terrain_collision()
+
+func create_terrain_collision() -> void:
+	# Create collision shape from terrain mesh
+	var static_body = StaticBody3D.new()
+	static_body.name = "TerrainCollision"
+
+	# Use ConcavePolygonShape3D for accurate terrain collision
+	var collision_shape = CollisionShape3D.new()
+	var shape = ConcavePolygonShape3D.new()
+
+	# Get the terrain mesh data
+	var arrays = surface_mesh.mesh.surface_get_arrays(0)
+	var vertices = arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
+	var indices = arrays[Mesh.ARRAY_INDEX] as PackedInt32Array
+
+	# Build face array for ConcavePolygonShape3D
+	var faces = PackedVector3Array()
+	for i in range(0, indices.size(), 3):
+		if i + 2 < indices.size():
+			faces.append(vertices[indices[i]])
+			faces.append(vertices[indices[i + 1]])
+			faces.append(vertices[indices[i + 2]])
+
+	shape.set_faces(faces)
+	collision_shape.shape = shape
+
+	static_body.add_child(collision_shape)
+	surface_mesh.add_child(static_body)
+
+	print("Terrain collision created with ", faces.size() / 3, " triangles")
+
+func generate_scatter_points() -> void:
 	# Sample points across the surface mesh
 	scatter_positions.clear()
 	scatter_normals.clear()
@@ -154,7 +187,7 @@ func generate_scatter_points():
 		scatter_positions.append(point)
 		scatter_normals.append(normal)
 
-func create_instanced_objects():
+func create_instanced_objects() -> void:
 	# Create crystals
 	create_crystal_instances()
 	
@@ -164,9 +197,13 @@ func create_instanced_objects():
 	# Create particle effects
 	create_particle_instances()
 
-func create_crystal_instances():
+func create_crystal_instances() -> void:
 	crystal_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
+	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
+
+	# Enable GPU instancing for better performance
+	crystal_multi_mesh.gi_mode = GeometryInstance3D.GI_MODE_STATIC
 	
 	# Create crystal geometry (diamond shape)
 	var crystal_mesh = create_crystal_mesh()
@@ -204,9 +241,14 @@ func create_crystal_instances():
 			
 			multi_mesh.set_instance_transform(i, transform)
 
-func create_flower_instances():
+func create_flower_instances() -> void:
 	flower_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
+	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
+
+	# Enable GPU instancing for better performance
+	flower_multi_mesh.gi_mode = GeometryInstance3D.GI_MODE_STATIC
+	flower_multi_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF  # Optimize shadows
 	
 	# Create flower geometry (simple petals)
 	var flower_mesh = create_flower_mesh()
@@ -234,9 +276,14 @@ func create_flower_instances():
 			
 			multi_mesh.set_instance_transform(i, transform)
 
-func create_particle_instances():
+func create_particle_instances() -> void:
 	particle_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
+	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
+
+	# Optimize particles - no shadows, static GI
+	particle_multi_mesh.gi_mode = GeometryInstance3D.GI_MODE_STATIC
+	particle_multi_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	
 	# Create small glowing spheres
 	var sphere_mesh = SphereMesh.new()
@@ -374,7 +421,7 @@ func create_flower_mesh() -> ArrayMesh:
 	
 	return mesh
 
-func start_animations():
+func start_animations() -> void:
 	# Gentle swaying animation for crystals
 	if crystal_multi_mesh and crystal_multi_mesh.multimesh:
 		var tween = create_tween()
@@ -387,7 +434,7 @@ func start_animations():
 		tween.set_loops()
 		tween.tween_method(animate_particles, 0.0, PI * 2.0, 6.0 / animation_speed)
 
-func animate_crystals(time: float):
+func animate_crystals(time: float) -> void:
 	if not crystal_multi_mesh or not crystal_multi_mesh.multimesh:
 		return
 		
@@ -398,7 +445,7 @@ func animate_crystals(time: float):
 		var new_transform = original_transform.rotated_local(Vector3.RIGHT, sway)
 		multi_mesh.set_instance_transform(i, new_transform)
 
-func animate_particles(time: float):
+func animate_particles(time: float) -> void:
 	if not particle_multi_mesh or not particle_multi_mesh.multimesh:
 		return
 		
@@ -418,3 +465,12 @@ func animate_particles(time: float):
 			transform = transform.scaled_local(Vector3(scale, scale, scale))
 			
 			multi_mesh.set_instance_transform(i, transform)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

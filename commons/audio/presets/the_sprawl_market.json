@@ -1,0 +1,59 @@
+{
+    "description": "Cyberpunk market: Chaotic, rhythmic, multi-cultural, busy",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.city_ambience",
+            "volume_db": -12,
+            "bus": "City"
+        },
+        {
+            "sound_id": "trap_beats.hihat_loop",
+            "volume_db": -24,
+            "bus": "Rhythm"
+        },
+        {
+            "sound_id": "SciFi.space_ambience",
+            "volume_db": -20,
+            "bus": "City"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SCI_FI_DATA_CHIRPS",
+                "techno_noir.distant_siren",
+                "AudioSynthesizer.FLYING_LOTUS_SAMPLER",
+                "techno_noir.static_burst"
+            ],
+            "interval_range": [
+                3.0,
+                10.0
+            ],
+            "volume_range": [
+                -18,
+                -12
+            ],
+            "bus": "Ads"
+        }
+    ],
+    "buses": {
+        "City": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 3000
+                }
+            ]
+        },
+        "Ads": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 120,
+                    "tap1_level_db": -12.0
+                }
+            ]
+        }
+    }
+}

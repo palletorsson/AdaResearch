@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://aalto_vase_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/design_classics/aalto_vase.gd" id="1_script"]
+
+[node name="AaltoVase" type="Node3D"]
+script = ExtResource("1_script")
+height = 1.0
+base_radius = 0.25
+rim_radius = 0.45
+radial_segments = 32
+height_segments = 16
+harmonics = [1.0, 0.3, 0.18, -0.12, 0.05]
+twist = 0.15

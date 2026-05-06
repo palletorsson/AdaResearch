@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy7k3navx2wpq"]
+
+[ext_resource type="Script" path="res://commons/agent/CubeAgentSpawner.gd" id="1_spawner"]
+
+[node name="AgentSpawner" type="Node3D"]
+script = ExtResource("1_spawner")
+agent_data_path = "res://commons/agent/agent_data.json"
+cube_size = 0.2
+spawn_on_ready = true
+auto_walk = true
+walk_direction = Vector3(0, 0, 1)

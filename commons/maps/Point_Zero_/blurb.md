@@ -1,0 +1,5 @@
+Vector3(0,0,0). The origin. Every coordinate system starts here — not because someone chose it, but because something must be first. A single point has no length, no area, no volume. Dimension zero. It exists only as address.
+
+A dark sphere pulses at the center of the grid. Purple light breathes against nothing. Pick up the point — a grab sphere, weightless, dimensionless in your hand. The renderer is already running. The frame loop already counting. Performance metrics scroll at the edges: draw calls, memory, time. The machine was working before you arrived.
+
+Heidegger called it thrownness — beginning inside conditions you did not choose. The coordinate system, the headset, the body that holds the controller. Zero is not emptiness. It is the inheritance that makes every other position possible.

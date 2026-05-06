@@ -1,0 +1,149 @@
+{
+  "id": "morph46_drag_avantgarde_folded_veil",
+  "family": "drag_avant_garde",
+  "notes": "Transform-led avant-garde look: a large rear veil is rotated into a folded plane, one arm becomes a hard frame, and the headpiece slips off-axis.",
+  "camera_yaw": 0.62,
+  "camera_pitch": 0.34,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.78,
+      1.36,
+      0.56
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "veil_back",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.86,
+        "scale": 1.38,
+        "normal_bias": 1.0,
+        "bitangent_bias": 0.42,
+        "world_bias": [
+          0.0,
+          -0.22,
+          -0.36
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.58
+    },
+    {
+      "id": "veil_fold",
+      "when": {
+        "role": "garment",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.22
+      },
+      "selector": "back|up",
+      "op": "rotate_panel",
+      "params": {
+        "axis": "bitangent",
+        "angle_deg": 22.0,
+        "tangent_offset": -0.12,
+        "normal_offset": 0.04
+      },
+      "child_role": "garment",
+      "budget_factor": 0.32
+    },
+    {
+      "id": "veil_major_frame",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left",
+      "op": "scale_panel",
+      "params": {
+        "scale_x": 0.62,
+        "scale_y": 1.28,
+        "normal_offset": 0.16
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.24
+    },
+    {
+      "id": "veil_minor_cut",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "right",
+      "op": "inset_panel",
+      "params": {
+        "scale": 0.72,
+        "depth": 0.06
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "veil_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.2,
+        "scale": 0.46
+      },
+      "child_role": "hair",
+      "budget_factor": 0.44
+    },
+    {
+      "id": "veil_headpiece",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.16
+      },
+      "selector": "up",
+      "op": "move_panel",
+      "params": {
+        "normal_offset": 0.12,
+        "tangent_offset": -0.22,
+        "bitangent_offset": 0.18
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "veil_heels",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.62,
+        "scale": 0.22
+      },
+      "child_role": "heel",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

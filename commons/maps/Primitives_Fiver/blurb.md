@@ -1,0 +1,5 @@
+One dimension is a line. Two dimensions is a world.
+
+A 7×10 grid of cells, each addressed by two numbers — X and Y. Columns of prism blocks frame the workspace like a hall of mirrors. At the center, a suspended diamond array floats at position (3,4), catching light. A dark sphere pulses slow purple beneath it, rotating, breathing. The grid is not decoration. It is the territory.
+
+Navigate both axes. Move east, move north — every step is a pair of coordinates, every coordinate a commitment to two simultaneous decisions. The 1D array was a sentence. The 2D array is a page. Same data, new topology. What changes when you add a dimension isn't size — it's the sudden existence of *neighbors*. Adjacency. Proximity. Relation. A point on a line has two neighbors. A cell in a grid has eight. Space becomes social.

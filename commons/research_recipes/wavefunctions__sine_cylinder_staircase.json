@@ -1,0 +1,52 @@
+{
+  "wait": 6,
+  "shots": [
+    {
+      "name": "orbit_front",
+      "rel_pos": [
+        2,
+        1,
+        2
+      ],
+      "rel_look_at": [
+        0,
+        0.5,
+        0
+      ],
+      "fov": 55,
+      "padding": 1.15
+    },
+    {
+      "name": "orbit_back",
+      "rel_pos": [
+        -2,
+        1,
+        -2
+      ],
+      "rel_look_at": [
+        0,
+        0.5,
+        0
+      ],
+      "fov": 55,
+      "padding": 1.15
+    },
+    {
+      "name": "top",
+      "rel_pos": [
+        0.05,
+        3,
+        0.05
+      ],
+      "rel_look_at": [
+        0,
+        0,
+        0
+      ],
+      "fov": 55,
+      "padding": 1.15
+    }
+  ],
+  "_saved_by": "research-loop self-eval",
+  "_saved_at": "2026-05-02T08:47:43.552Z"
+}

@@ -1,0 +1,76 @@
+{
+  "id": "capture-framing",
+  "title": "Capture Framing Guide",
+  "description": "How to get the right camera distance and angle for artifact screenshots. Three zoom levels, pick the best.",
+  "triggers": [
+    "capture framing",
+    "screenshot too far",
+    "screenshot too close",
+    "camera angle"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "capture pipeline fixes: 2.0x→1.0x, zoom sweep, camera override",
+  "nodes": [
+    {
+      "id": "run",
+      "type": "action",
+      "label": "Run capture_multi_angle.gd",
+      "detail": "Outputs 3 zoom levels per angle: _far (1.4x), _mid (1.0x), _close (0.65x). Default = far."
+    },
+    {
+      "id": "check",
+      "type": "decision",
+      "label": "Is the default (far) good?",
+      "detail": "Should fill 40-70% of frame. If artifact is tiny, something is wrong."
+    },
+    {
+      "id": "camera_bug",
+      "type": "action",
+      "label": "Check: artifact creating own Camera3D?",
+      "detail": "JointDemoBase, many demos create Camera3D with current=true. The capture script disables these — if not, the artifact camera overrides."
+    },
+    {
+      "id": "pick_zoom",
+      "type": "action",
+      "label": "Pick best from 3 zoom levels",
+      "detail": "far = catalog shot (whole artifact), mid = hero shot (fills frame), close = detail (texture/mechanism)"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Good screenshot captured"
+    }
+  ],
+  "edges": [
+    {
+      "from": "run",
+      "to": "check"
+    },
+    {
+      "from": "check",
+      "to": "pick_zoom",
+      "label": "yes — looks good"
+    },
+    {
+      "from": "check",
+      "to": "camera_bug",
+      "label": "no — artifact tiny"
+    },
+    {
+      "from": "camera_bug",
+      "to": "run"
+    },
+    {
+      "from": "pick_zoom",
+      "to": "done"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "3 zoom levels per angle. Default = far (1.4x). If artifact tiny, check camera override first.",
+  "links_to": [
+    "capture-debug"
+  ]
+}

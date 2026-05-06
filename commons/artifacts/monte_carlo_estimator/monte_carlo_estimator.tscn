@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4kx8mw7n3p5r"]
+
+[ext_resource type="Script" path="res://commons/artifacts/monte_carlo_estimator/monte_carlo_estimator.gd" id="1_main"]
+
+[node name="MonteCarloEstimator" type="Node3D"]
+script = ExtResource("1_main")

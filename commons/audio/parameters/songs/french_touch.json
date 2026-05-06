@@ -1,0 +1,30 @@
+{
+    "_metadata": {
+        "sound_type": "french_touch_song",
+        "display_name": "French Touch",
+        "description": "Daft Punk, Cassius, Stardust style. Filtered disco samples, phased synths, four-on-floor groove. The filter sweep as instrument.",
+        "category": "songs",
+        "tags": ["french_touch", "disco", "filter_house", "daft_punk", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Daft Punk", "Cassius", "Stardust", "Modjo"],
+        "reference_tracks": ["Around the World", "Music Sounds Better With You", "One More Time"]
+    },
+    "identity": {
+        "emotion": "euphoric_groove",
+        "era": "late_90s_paris",
+        "character": ["filtered", "funky", "disco", "robotic"]
+    },
+    "parameters": {
+        "bpm": { "min": 118, "max": 128, "value": 122, "step": 1 },
+        "key": { "options": ["Ebm", "Fm", "Gm", "Bbm"], "value": "Ebm" },
+        "filter_intensity": { "min": 0.0, "max": 1.0, "value": 0.8 }
+    },
+    "sound_design": {
+        "filter_bass": {
+            "style": "disco_sample_filtered",
+            "sidechain": true,
+            "filter_sweep": { "type": "lowpass", "range_hz": [200, 8000] }
+        },
+        "drums": { "style": "four_on_floor_disco", "tempo": 122 }
+    }
+}

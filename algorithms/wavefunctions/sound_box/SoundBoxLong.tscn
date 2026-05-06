@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8x7y605w4v3u"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/sound_box/SoundBox.gd" id="1_soundbox"]
+[ext_resource type="PackedScene" uid="uid://d3x7y6z5w4v3u" path="res://algorithms/wavefunctions/sound_box/SoundTriggerButton.tscn" id="2_trigger"]
+
+[node name="SoundBoxLong" type="Node3D"]
+script = ExtResource("1_soundbox")
+
+[node name="GridContainer" type="Node3D" parent="."]
+
+[node name="DroneLow" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.4, 0)
+sound_id = "techno_noir.drone_low"
+text = "DRONE LOW"
+color = Color(0.5, 0, 1, 1)
+
+[node name="DroneHigh" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+sound_id = "techno_noir.drone_high"
+text = "DRONE HIGH"
+color = Color(0.7, 0, 1, 1)
+
+[node name="Pad" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.4, 0)
+sound_id = "AudioSynthesizer.PPG_WAVE_METALLIC"
+text = "PAD"
+color = Color(0, 0.5, 1, 1)
+
+[node name="Whoosh" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+sound_id = "AudioSynthesizer.TELEPORT_WHOOSH"
+text = "WHOOSH"
+color = Color(1, 1, 1, 1)
+
+[node name="Ambience" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+sound_id = "SyntheticSoundGenerator.ambient_sound"
+text = "AMBIENCE"
+color = Color(0, 1, 1, 1)
+
+[node name="Warning" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+sound_id = "SyntheticSoundGenerator.warning_sound"
+text = "WARNING"
+color = Color(1, 0, 0, 1)
+
+[node name="LiftLoop" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, 0)
+sound_id = "SyntheticSoundGenerator.lift_loop_sound"
+text = "LIFT LOOP"
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="BassSustain" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+sound_id = "AudioSynthesizer.MOOG_MINIMOOG_BASS"
+text = "MOOG BASS"
+color = Color(0, 0, 0.8, 1)
+
+[node name="Cinematic" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, 0)
+sound_id = "Cinematic.tension_riser"
+text = "RISER"
+color = Color(1, 0.5, 0, 1)
+
+[node name="StopButton" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+sound_id = "STOP_ALL"
+text = "STOP ALL"
+color = Color(1, 0, 1, 1)

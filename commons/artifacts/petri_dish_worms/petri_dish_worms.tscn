@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpetri_dish_worms"]
+
+[ext_resource type="Script" path="res://commons/artifacts/petri_dish_worms/petri_dish_worms.gd" id="1_script"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dish"]
+top_radius = 0.16
+bottom_radius = 0.15
+height = 0.025
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_medium"]
+top_radius = 0.14
+bottom_radius = 0.14
+height = 0.015
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rim"]
+top_radius = 0.165
+bottom_radius = 0.16
+height = 0.008
+radial_segments = 32
+
+[node name="PetriDishWorms" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Dish" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0125, 0)
+mesh = SubResource("CylinderMesh_dish")
+
+[node name="Rim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.029, 0)
+mesh = SubResource("CylinderMesh_rim")
+
+[node name="Medium" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.008, 0)
+mesh = SubResource("CylinderMesh_medium")
+
+[node name="WormContainer" type="Node3D" parent="."]
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0.18)
+pixel_size = 0.001
+text = "C. ELEGANS
+Sine Motion"
+font_size = 10
+outline_size = 2
+horizontal_alignment = 1
+modulate = Color(0.6, 0.7, 0.8, 0.8)

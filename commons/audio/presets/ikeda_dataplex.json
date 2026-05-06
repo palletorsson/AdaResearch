@@ -1,0 +1,108 @@
+{
+    "name": "Ikeda Dataplex",
+    "description": "Ryoji Ikeda-inspired minimal data sonification. Pure sine tones, white noise, frequencies at perception limits, binary pulses, mathematical precision.",
+    "style_notes": {
+        "influences": ["Ryoji Ikeda", "dataplex", "test pattern", "supercodex", "+/-"],
+        "era": "1996-present",
+        "techniques": [
+            "Data-to-frequency mapping",
+            "Sine waves at perception edges",
+            "Beat frequencies from near-identical tones",
+            "Binary pulse patterns",
+            "Extreme frequency filtering"
+        ],
+        "philosophy": "Sound in raw states - sine tones, noise, the mathematics of perception"
+    },
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.DATA_PULSE_STREAM",
+            "volume_db": -8.0,
+            "bus": "Data"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SINE_BEAT_FREQUENCIES",
+            "volume_db": -14.0,
+            "bus": "Tone"
+        }
+    ],
+    "placeholder_layer": {
+        "sound_id": "AudioSynthesizer.PURE_SINE_440",
+        "volume_db": -18.0,
+        "bus": "Tone",
+        "fade_out_when_ready": true,
+        "fade_duration": 2.0
+    },
+    "random_events": [
+        {
+            "sound_id": "AudioSynthesizer.NOISE_BURST",
+            "interval_range": [2.0, 8.0],
+            "volume_db": -12.0,
+            "bus": "Noise"
+        },
+        {
+            "sound_id": "AudioSynthesizer.ULTRASONIC_SWEEP",
+            "interval_range": [10.0, 30.0],
+            "volume_db": -16.0,
+            "bus": "Tone"
+        },
+        {
+            "sound_id": "AudioSynthesizer.BINARY_CLICK_PATTERN",
+            "interval_range": [4.0, 12.0],
+            "volume_db": -10.0,
+            "bus": "Data"
+        }
+    ],
+    "buses": {
+        "Data": {
+            "effects": [
+                {
+                    "type": "Compressor",
+                    "threshold_db": -6.0,
+                    "ratio": 8.0
+                }
+            ]
+        },
+        "Tone": {
+            "effects": [
+                {
+                    "type": "EQ",
+                    "band_1_freq": 100,
+                    "band_1_gain_db": -6.0,
+                    "band_2_freq": 8000,
+                    "band_2_gain_db": 3.0
+                }
+            ]
+        },
+        "Noise": {
+            "effects": [
+                {
+                    "type": "Highpass",
+                    "cutoff_hz": 4000
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.2,
+                    "wet": 0.15
+                }
+            ]
+        }
+    },
+    "generation": {
+        "async": true,
+        "persist_across_maps": true
+    },
+    "synthesis_parameters": {
+        "data_source": "procedural_binary",
+        "frequency_range_hz": [20, 18000],
+        "sine_precision_hz": 0.1,
+        "beat_frequency_pairs": [
+            [440.0, 441.0],
+            [880.0, 882.0],
+            [1760.0, 1764.0]
+        ],
+        "pulse_rate_hz": 10,
+        "noise_type": "white",
+        "noise_filter_sweep_range": [2000, 16000],
+        "binary_bit_rate": 100
+    }
+}

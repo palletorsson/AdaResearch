@@ -14,7 +14,7 @@ var wood_stream: AudioStreamGeneratorPlayback
 var wood_generator: AudioStreamGenerator
 var sound_ready = false
 
-func _ready():
+func _ready() -> void:
 	if not base_cube:
 		push_error("Base cube not found!")
 		return
@@ -25,7 +25,7 @@ func _ready():
 	# Create and synthesize the wood sound
 	create_wood_sound()
 
-func create_wood_sound():
+func create_wood_sound() -> void:
 	# Create the generator stream
 	wood_generator = AudioStreamGenerator.new()
 	wood_generator.mix_rate = 44100  # CD quality
@@ -52,7 +52,7 @@ func create_wood_sound():
 	else:
 		push_error("Failed to get stream playback")
 
-func synthesize_wood_knock():
+func synthesize_wood_knock() -> void:
 	# Fill the buffer with a synthesized wooden knock sound
 	var buffer_size = wood_stream.get_frames_available()
 	
@@ -86,7 +86,7 @@ func synthesize_wood_knock():
 		wood_stream.push_frame(Vector2(sample, sample))
 	sound_ready = true
 
-func play_wood_sound(at_position: Vector3):
+func play_wood_sound(at_position: Vector3) -> void:
 	if sound_ready:
 		# Instead of creating a new AudioStreamPlayer, let's reuse the existing one
 		# This avoids potential initialization issues with the audio stream playback
@@ -128,7 +128,7 @@ func play_wood_sound(at_position: Vector3):
 			# Try to reinitialize the sound
 			create_wood_sound()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	spawn_timer += delta
 	if spawn_timer >= next_spawn_time:  # Spawn at randomized intervals
 		spawn_timer = 0.0  # Reset timer
@@ -141,7 +141,7 @@ func _process(delta):
 		else:
 			remove_random_cube_and_spawn()  # Remove random cube, then spawn new one
 
-func spawn_cube():
+func spawn_cube() -> void:
 	var total_size = cube_size + gutter
 	var new_cube = base_cube.duplicate()
 	new_cube.position = spawn_position  # Fixed position on table
@@ -155,7 +155,7 @@ func spawn_cube():
 	# Play wood sound at the spawned cube position
 	play_wood_sound(spawn_position)
 
-func remove_random_cube_and_spawn():
+func remove_random_cube_and_spawn() -> void:
 	if spawned_cubes.size() > 0:
 		# Remove a random cube
 		var random_index = randi() % spawned_cubes.size()
@@ -168,9 +168,18 @@ func remove_random_cube_and_spawn():
 		# Spawn a new cube in the same spot
 		spawn_cube()
 
-func exit_tree():
+func exit_tree() -> void:
 	# Clean up all spawned cubes when the node is removed
 	for cube in spawned_cubes:
 		if is_instance_valid(cube):
 			cube.queue_free()
 	spawned_cubes.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

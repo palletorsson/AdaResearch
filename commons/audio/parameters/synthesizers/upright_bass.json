@@ -1,0 +1,21 @@
+{
+  "upright_bass": {
+    "_metadata": {
+      "sound_type": "upright_bass",
+      "description": "Woody upright bass tone with body resonance and finger detail.",
+      "instrument": "Acoustic upright bass model",
+      "era": "Jazz/classic",
+      "tags": ["bass", "upright", "jazz", "acoustic"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 2.6, "min": 0.2, "max": 12.0, "step": 0.1 },
+      "frequency": { "value": 82.4, "min": 20.0, "max": 220.0, "step": 0.1 },
+      "body_resonance": { "value": 0.45, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "finger_noise": { "value": 0.14, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "string_tension": { "value": 0.62, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "warmth": { "value": 0.72, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "amplitude": { "value": 0.5, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

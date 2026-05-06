@@ -1,0 +1,23 @@
+{
+  "id": "rd04_coral_heightmap",
+  "preset": "coral",
+  "grid_size": 96,
+  "iterations": 4000,
+  "seed": 17,
+  "render_mode": "heightmap",
+  "height_amp": 1.0,
+  "color_lo": [
+    0.25,
+    0.15,
+    0.15
+  ],
+  "color_hi": [
+    0.95,
+    0.5,
+    0.35
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.55,
+  "layout": "rd_field",
+  "notes": "Coral pattern (F=0.062, K=0.061). Branching organic growth \u00e2\u20ac\u201d bleached-coral aesthetic."
+}

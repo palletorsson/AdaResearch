@@ -1,0 +1,19 @@
+{
+  "id": "ps05_lady_lamp",
+  "notes": "Lady Lamp \u00e2\u20ac\u201d tall black tapered pyramid with a single glowing glass sphere balanced at the apex. The primitive_stack grammar handles this as a 2-item vertical stack with big scale contrast.",
+  "layout": "vertical_stack",
+  "palette": "mono",
+  "base_scale": 0.6,
+  "sequence": [
+    {
+      "shape": "cone",
+      "color": "#14141a",
+      "scale": 3.2
+    },
+    {
+      "shape": "sphere",
+      "color": "#fff4d8",
+      "scale": 0.6
+    }
+  ]
+}

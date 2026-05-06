@@ -1,4 +1,4 @@
-# non_euclidean_spaces.gd - Main controller for non-Euclidean experiments
+﻿# non_euclidean_spaces.gd - Main controller for non-Euclidean experiments
 extends Node3D
 
 # Configuration
@@ -11,7 +11,7 @@ extends Node3D
 var debug_overlay: CanvasLayer
 var portal_manager: PortalManager
 
-func _ready():
+func _ready() -> void:
 	# Set up portal manager
 
 	if !portal_manager:
@@ -32,7 +32,7 @@ func _ready():
 	
 	print("Non-Euclidean Space Demo initialized")
 
-func _setup_debug_overlay():
+func _setup_debug_overlay() -> void:
 	debug_overlay = CanvasLayer.new()
 	debug_overlay.name = "DebugOverlay"
 	add_child(debug_overlay)
@@ -42,19 +42,31 @@ func _setup_debug_overlay():
 	debug_label.position = Vector2(20, 20)
 	debug_overlay.add_child(debug_label)
 
-func _on_portal_entered(portal: Portal, body: Node3D):
+func _on_portal_entered(portal: Portal, body: Node3D) -> void:
 	if body == player:
 		if debug_overlay:
-			var label = debug_overlay.get_node("DebugLabel")
-			label.text = "Entered portal: " + portal.name
+			var label = debug_overlay.get_node_or_null("DebugLabel")
+			if label:
+				label.text = "Entered portal: " + portal.name
 
-func _on_portal_exited(portal: Portal, body: Node3D):
+func _on_portal_exited(portal: Portal, body: Node3D) -> void:
 	if body == player:
 		if debug_overlay:
-			var label = debug_overlay.get_node("DebugLabel")
-			label.text = "Exited portal: " + portal.name
+			var label = debug_overlay.get_node_or_null("DebugLabel")
+			if label:
+				label.text = "Exited portal: " + portal.name
 
-func _process(delta):
+func _process(_delta):
 	if player and debug_overlay:
-		var label = debug_overlay.get_node("DebugLabel")
-		label.text += "\nPlayer position: " + str(player.global_position)
+		var label = debug_overlay.get_node_or_null("DebugLabel")
+		if label:
+			label.text += "\nPlayer position: " + str(player.global_position)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

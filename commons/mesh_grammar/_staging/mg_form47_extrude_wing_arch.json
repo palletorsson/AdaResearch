@@ -1,0 +1,51 @@
+{
+  "id": "mg_form47_extrude_wing_arch",
+  "notes": "EXTRUDE PASS: arch band is pushed forward in three stacked pulls. The aim is a camp portal that overprojects by extrusion alone, not just rotation or scale.",
+  "seed": "arch",
+  "generations": 1,
+  "camera_pitch": 0.3,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.1,
+        "inner_tag": "extrude_band",
+        "border_tag": "extrude_skin"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extrude_band",
+      "params": {
+        "distance": 0.14,
+        "scale": 1.02,
+        "top_tag": "extrude_mid",
+        "side_tag": "extrude_mid_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extrude_mid",
+      "params": {
+        "distance": 0.14,
+        "scale": 1.04,
+        "top_tag": "extrude_outer",
+        "side_tag": "extrude_outer_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extrude_outer",
+      "params": {
+        "distance": 0.12,
+        "scale": 1.02,
+        "top_tag": "extrude_tip",
+        "side_tag": "extrude_tip_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

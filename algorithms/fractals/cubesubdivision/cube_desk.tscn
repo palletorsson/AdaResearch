@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6cubedesk001"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/cubesubdivision/cube_desk.gd" id="1_desk"]
+
+[node name="CubeDesk" type="Node3D"]
+script = ExtResource("1_desk")
+desk_size = 2.0
+drawer_rows = 2
+drawer_cols = 3
+show_construction = true
+step_delay = 0.25

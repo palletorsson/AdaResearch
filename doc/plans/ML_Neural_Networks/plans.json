@@ -1,0 +1,38 @@
+{
+  "name": "ML_Neural_Networks",
+  "title": "Layers Learn Features",
+  "description": "Walk through a neural network \u00e2\u20ac\u201d each chamber is a layer, narrow corridors are connections. Data flows from input to output as you move deeper.",
+  "dimensions": {
+    "rows": 14,
+    "cols": 5
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    13,
+    3
+  ],
+  "teleport": [
+    12,
+    3
+  ],
+  "artifacts": [
+    {
+      "name": "neural_networks_vr",
+      "row": 1,
+      "col": 1,
+      "family": "machinelearning"
+    },
+    {
+      "name": "neural_network_visualization",
+      "row": 5,
+      "col": 2,
+      "family": "machinelearning"
+    },
+    {
+      "name": "learn_world_stacked",
+      "row": 10,
+      "col": 1,
+      "family": "machinelearning"
+    }
+  ]
+}

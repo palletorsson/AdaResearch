@@ -1,0 +1,141 @@
+{
+  "rack_info": {
+    "name": "Subtractive 12000",
+    "description": "VCO → VCF (cutoff 0-12000, res peak 0.85) → VCA with ADSR.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "archetype": "subtractive",
+    "seed": 590620971
+  },
+  "layout": {
+    "padding_px": 18,
+    "gap_px": 14,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "lbl_osc",
+      "lbl_flt",
+      "lbl_env"
+    ],
+    [
+      "pitch",
+      "cutoff",
+      "attack"
+    ],
+    [
+      "shape",
+      "reso",
+      "decay"
+    ],
+    [
+      "level",
+      "drive",
+      "sustain"
+    ],
+    [
+      "",
+      "",
+      "release"
+    ]
+  ],
+  "control_definitions": {
+    "lbl_osc": {
+      "type": "label",
+      "text": "VCO",
+      "font_size": 18
+    },
+    "lbl_flt": {
+      "type": "label",
+      "text": "VCF",
+      "font_size": 18
+    },
+    "lbl_env": {
+      "type": "label",
+      "text": "ADSR",
+      "font_size": 18
+    },
+    "pitch": {
+      "type": "slv",
+      "label": "PITCH",
+      "parameter": "pitch",
+      "min": 20.0,
+      "max": 2000.0,
+      "default": 440.0
+    },
+    "shape": {
+      "type": "sls",
+      "label": "SHAPE",
+      "parameter": "shape",
+      "min": -3.0,
+      "max": 3.0,
+      "default": 0.0
+    },
+    "level": {
+      "type": "knob",
+      "label": "LEVEL",
+      "parameter": "level",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.7
+    },
+    "cutoff": {
+      "type": "slv",
+      "label": "CUT",
+      "parameter": "cutoff",
+      "min": 50.0,
+      "max": 12000.0,
+      "default": 4000.0
+    },
+    "reso": {
+      "type": "knob",
+      "label": "RES",
+      "parameter": "resonance",
+      "min": 0.0,
+      "max": 0.85,
+      "default": 0.3
+    },
+    "drive": {
+      "type": "knob",
+      "label": "DRIVE",
+      "parameter": "drive",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.2
+    },
+    "attack": {
+      "type": "slv",
+      "label": "A",
+      "parameter": "attack",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.05
+    },
+    "decay": {
+      "type": "slv",
+      "label": "D",
+      "parameter": "decay",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.2
+    },
+    "sustain": {
+      "type": "knob",
+      "label": "S",
+      "parameter": "sustain",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.7
+    },
+    "release": {
+      "type": "slv",
+      "label": "R",
+      "parameter": "release",
+      "min": 0.001,
+      "max": 4.0,
+      "default": 0.3
+    }
+  }
+}

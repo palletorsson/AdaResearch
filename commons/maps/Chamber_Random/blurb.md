@@ -1,0 +1,3 @@
+Chaos shots scatter unpredictably. The octapod cannot predict you. Randomness levels the field.
+
+This is the catalyst chamber for the Randomness sequence — where entropy becomes encounter. You project chaos; the `octapod_crawler` has no reliable counter-strategy because your aim is governed by a PRNG seeded fresh each frame. The Science Screen scatters the interactions across a position axis so you can read the pattern of your own unpredictability. Neither player nor creature controls the outcome. This is equality through irreducibility: no strategy dominates when strategy itself is random. The catalyst transforms the player-creature boundary into a pair of noise sources, neither predicting the other, both responding to what the same entropy makes visible.

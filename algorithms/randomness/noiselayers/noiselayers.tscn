@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://hhp3sd1t024n"]
+[gd_scene load_steps=14 format=3 uid="uid://hhp3sd1t024n"]
 
 [ext_resource type="Script" uid="uid://kfo5rwna6ru5" path="res://algorithms/randomness/noiselayers/noiselayers.gd" id="1_u8d4v"]
 
@@ -36,6 +36,23 @@ seed = 12345
 frequency = 0.0175
 fractal_octaves = 3
 
+[sub_resource type="Shader" id="Shader_j8n6d"]
+code = "shader_type spatial;\nrender_mode blend_mix, unshaded, cull_disabled, depth_prepass_alpha;\n\nuniform vec4 base_color : source_color = vec4(0.02, 0.04, 0.08, 0.08);\nuniform vec4 minor_line_color : source_color = vec4(0.20, 0.78, 1.00, 0.22);\nuniform vec4 major_line_color : source_color = vec4(0.82, 0.98, 1.00, 0.62);\nuniform float minor_cells = 90.0;\nuniform float major_every = 6.0;\nuniform float minor_width = 1.0;\nuniform float major_width = 2.2;\nuniform float emission_strength = 0.65;\n\nfloat grid_line_mask(vec2 uv, float cells, float line_width) {\n\tvec2 scaled_uv = uv * max(cells, 1.0);\n\tvec2 grid = abs(fract(scaled_uv - 0.5) - 0.5) / fwidth(scaled_uv);\n\tfloat line = min(grid.x, grid.y);\n\treturn 1.0 - clamp(line / line_width, 0.0, 1.0);\n}\n\nvoid fragment() {\n\tfloat minor_mask = grid_line_mask(UV, minor_cells, minor_width);\n\tfloat major_mask = grid_line_mask(UV, minor_cells / max(major_every, 1.0), major_width);\n\tfloat line_mask = clamp(max(minor_mask * 0.7, major_mask), 0.0, 1.0);\n\n\tvec3 color = mix(base_color.rgb, minor_line_color.rgb, minor_mask * 0.65);\n\tcolor = mix(color, major_line_color.rgb, major_mask);\n\n\tALBEDO = color;\n\tEMISSION = mix(minor_line_color.rgb, major_line_color.rgb, major_mask) * line_mask * emission_strength;\n\tALPHA = clamp(base_color.a + minor_mask * minor_line_color.a + major_mask * major_line_color.a, 0.0, 0.9);\n}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4f1fw"]
+shader = SubResource("Shader_j8n6d")
+shader_parameter/minor_cells = 90.0
+shader_parameter/major_every = 6.0
+shader_parameter/minor_width = 1.0
+shader_parameter/major_width = 2.2
+shader_parameter/emission_strength = 0.65
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_owmql"]
+size = Vector2(200, 200)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5rlni"]
+size = Vector2(220, 60)
+
 [node name="Noiselayers" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.992206, -0.124606, 0, 0.124606, 0.992206, 0, 0, 0)
 
@@ -58,3 +75,21 @@ height_scale = 2.0
 low_freq_noise = SubResource("FastNoiseLite_aj0im")
 med_freq_noise = SubResource("FastNoiseLite_6eqya")
 high_freq_noise = SubResource("FastNoiseLite_pjiod")
+
+[node name="GridStructure" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+cast_shadow = 0
+material_override = SubResource("ShaderMaterial_4f1fw")
+mesh = SubResource("PlaneMesh_owmql")
+
+[node name="GridStructureCeiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.0, 0)
+cast_shadow = 0
+material_override = SubResource("ShaderMaterial_4f1fw")
+mesh = SubResource("PlaneMesh_owmql")
+
+[node name="GridStructureWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 30.0, -40.0)
+cast_shadow = 0
+material_override = SubResource("ShaderMaterial_4f1fw")
+mesh = SubResource("PlaneMesh_5rlni")

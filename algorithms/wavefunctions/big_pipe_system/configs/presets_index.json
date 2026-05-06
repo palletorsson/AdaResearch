@@ -1,0 +1,53 @@
+{
+	"version": 1,
+	"presets": [
+		{
+			"id": "default",
+			"name": "Default",
+			"file": "default.json",
+			"description": "Basic pipe run with S-bend and turns."
+		},
+		{
+			"id": "industrial_branch",
+			"name": "Industrial Branch",
+			"file": "industrial_branch.json",
+			"description": "Full demo of all pipe segments: S-bend, T-junction, cross, vertical up/down, end cap."
+		},
+		{
+			"id": "straight_run",
+			"name": "Straight Run",
+			"file": "straight_run.json",
+			"description": "Capped pipeline — simple industrial backbone."
+		},
+		{
+			"id": "l_bend",
+			"name": "L-Bend",
+			"file": "l_bend.json",
+			"description": "Right-angle corner routing with straight runs on each side."
+		},
+		{
+			"id": "t_distribution",
+			"name": "T-Distribution",
+			"file": "t_distribution.json",
+			"description": "Main line splits into two branches via T-junction."
+		},
+		{
+			"id": "serpentine",
+			"name": "Serpentine",
+			"file": "serpentine.json",
+			"description": "Back-and-forth pipe runs for cooling or heating pattern."
+		},
+		{
+			"id": "vertical_bypass",
+			"name": "Vertical Bypass",
+			"file": "vertical_bypass.json",
+			"description": "Main line with vertical up-and-over bypass loop."
+		},
+		{
+			"id": "cross_manifold",
+			"name": "Cross Manifold",
+			"file": "cross_manifold.json",
+			"description": "Central cross junction with four capped branches."
+		}
+	]
+}

@@ -1,0 +1,5 @@
+A 12×12 grid. Eight-by-eight interior. The arena where randomness performs.
+
+Walkers trace drunk paths across the surface — 128 steps, no memory, no destination. Gaussian distributions sculpt terrain into bell curves of probability made solid. Cubes rise, rotate, vanish. Height fields mutate through noise. Random profiles extrude geometry from nothing but a seed and a range. Every algorithm here takes the same input — a grid, a rule, a source of entropy — and produces something unpredictable but bounded.
+
+This is the workshop floor for procedural thinking. Remove a column at random. Scatter pickup cubes across valid positions. Watch a slope gradient animate through angles. The grid is the constraint; randomness is the material. What emerges is neither designed nor accidental — it is generated. Order that never repeats. Structure without authorship.

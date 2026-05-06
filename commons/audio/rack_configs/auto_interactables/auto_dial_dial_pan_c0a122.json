@@ -1,0 +1,33 @@
+{
+  "rack_info": {
+    "name": "auto_dial_dial_pan_c0a122",
+    "description": "DIAL — pan unit(0-1) step_3, color #ff8844",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "dial",
+      "label": "PAN",
+      "color": "#ff8844",
+      "parameter": "pan",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5,
+      "step": 0.333
+    }
+  }
+}

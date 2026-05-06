@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsdfrowdna_vari01"]
+
+[ext_resource type="Script" path="res://commons/morphology/sdf/gallery/sdf_gallery_row_artifact.gd" id="1_row"]
+
+[node name="SDFGalleryRow_dna_variance" type="Node3D"]
+script = ExtResource("1_row")
+row_name = "dna_variance"

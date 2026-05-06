@@ -1,0 +1,57 @@
+{
+    "description": "Solarpunk: Constant wind, chimes, high altitude",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -12,
+            "bus": "HighWind"
+        },
+        {
+            "sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
+            "volume_db": -22,
+            "bus": "Ether"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.KORG_M1_PIANO",
+                "AudioSynthesizer.DX7_ELECTRIC_PIANO"
+            ],
+            "interval_range": [
+                10.0,
+                30.0
+            ],
+            "volume_range": [
+                -20,
+                -15
+            ],
+            "bus": "Chimes"
+        }
+    ],
+    "buses": {
+        "HighWind": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 200
+                }
+            ]
+        },
+        "Chimes": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 300,
+                    "tap1_level_db": -10.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.4
+                }
+            ]
+        }
+    }
+}

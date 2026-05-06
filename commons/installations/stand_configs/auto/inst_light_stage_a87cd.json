@@ -1,0 +1,172 @@
+{
+  "installation_info": {
+    "name": "Light stage a87cd",
+    "description": "2m frame bay scaled into a stage truss with screen, arrays, and lighting line.",
+    "family": "light_stage",
+    "auto_generated": true,
+    "auto_score": 141.99,
+    "selection_rank": 2
+  },
+  "layout": {
+    "unit_m": 1.0,
+    "metal_color": [
+      0.66,
+      0.69,
+      0.74,
+      1.0
+    ],
+    "dark_color": [
+      0.06,
+      0.07,
+      0.08,
+      1.0
+    ],
+    "accent_color": [
+      0.35,
+      0.82,
+      1.0,
+      1.0
+    ],
+    "screen_color": [
+      0.04,
+      0.11,
+      0.17,
+      1.0
+    ],
+    "light_color": [
+      0.96,
+      0.97,
+      1.0,
+      1.0
+    ],
+    "floor_color": [
+      0.11,
+      0.12,
+      0.14,
+      1.0
+    ]
+  },
+  "platform": {
+    "width": 4.0,
+    "depth": 2.0,
+    "height": 0.18
+  },
+  "frame": {
+    "uprights": [
+      {
+        "x": -2.0,
+        "y": 2.25,
+        "z": -1.0,
+        "height": 4.5,
+        "thickness": 0.14
+      },
+      {
+        "x": 2.0,
+        "y": 2.25,
+        "z": -1.0,
+        "height": 4.5,
+        "thickness": 0.14
+      },
+      {
+        "x": -2.0,
+        "y": 2.25,
+        "z": 1.0,
+        "height": 4.5,
+        "thickness": 0.14
+      },
+      {
+        "x": 2.0,
+        "y": 2.25,
+        "z": 1.0,
+        "height": 4.5,
+        "thickness": 0.14
+      }
+    ],
+    "beams": [
+      {
+        "x": 0.0,
+        "y": 4.5,
+        "z": -1.0,
+        "width": 4.0,
+        "depth": 0.12,
+        "thickness": 0.12
+      },
+      {
+        "x": 0.0,
+        "y": 4.5,
+        "z": 1.0,
+        "width": 4.0,
+        "depth": 0.12,
+        "thickness": 0.12
+      },
+      {
+        "x": -2.0,
+        "y": 4.5,
+        "z": 0.0,
+        "width": 2.0,
+        "depth": 0.12,
+        "thickness": 0.12
+      },
+      {
+        "x": 2.0,
+        "y": 4.5,
+        "z": 0.0,
+        "width": 2.0,
+        "depth": 0.12,
+        "thickness": 0.12
+      }
+    ]
+  },
+  "screens": [
+    {
+      "x": 0.0,
+      "y": 1.7,
+      "z": -0.64,
+      "width": 3.0,
+      "height": 1.0,
+      "depth": 0.08,
+      "frame": 0.08
+    }
+  ],
+  "speakers": [
+    {
+      "x": -2.35,
+      "y": 1.8,
+      "z": 0.18,
+      "width": 0.42,
+      "height": 0.36,
+      "depth": 0.38,
+      "modules": 3,
+      "gap": 0.03
+    },
+    {
+      "x": 2.35,
+      "y": 1.8,
+      "z": 0.18,
+      "width": 0.42,
+      "height": 0.36,
+      "depth": 0.38,
+      "modules": 3,
+      "gap": 0.03
+    }
+  ],
+  "lights": [
+    {
+      "x": 0.0,
+      "y": 4.35,
+      "z": 0.0,
+      "width": 3.7,
+      "count": 10
+    }
+  ],
+  "boxes": [
+    {
+      "x": 0.0,
+      "y": 0.32,
+      "z": 0.56,
+      "width": 1.0,
+      "height": 0.24,
+      "depth": 0.35
+    }
+  ]
+}

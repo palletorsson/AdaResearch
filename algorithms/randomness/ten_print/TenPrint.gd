@@ -12,12 +12,12 @@ var maze_lines = []
 var grid_nodes = []
 var generation_speed = 1.0
 
-func _ready():
+func _ready() -> void:
 	create_grid()
 	setup_materials()
 	start_generation()
 
-func create_grid():
+func create_grid() -> void:
 	var grid_parent = $GridNodes
 	
 	for x in range(grid_size):
@@ -33,7 +33,7 @@ func create_grid():
 			grid_parent.add_child(grid_node)
 			grid_nodes[x].append(grid_node)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Grid node materials
 	var grid_material = StandardMaterial3D.new()
 	grid_material.albedo_color = Color(0.5, 0.5, 0.5, 0.3)
@@ -59,7 +59,7 @@ func setup_materials():
 	speed_material.emission = Color(0.05, 0.3, 0.2, 1.0)
 	$GenerationSpeed.material_override = speed_material
 
-func start_generation():
+func start_generation() -> void:
 	current_row = 0
 	current_col = 0
 	
@@ -68,7 +68,7 @@ func start_generation():
 		line.queue_free()
 	maze_lines.clear()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_timer += delta
 	
@@ -85,7 +85,7 @@ func _process(delta):
 	animate_ten_print()
 	animate_indicators()
 
-func generate_maze_step():
+func generate_maze_step() -> void:
 	if current_row >= grid_size:
 		# Reset and start over
 		start_generation()
@@ -104,7 +104,7 @@ func generate_maze_step():
 		current_col = 0
 		current_row += 1
 
-func create_maze_line(x: int, y: int, forward_slash: bool):
+func create_maze_line(x: int, y: int, forward_slash: bool) -> void:
 	var line = CSGCylinder3D.new()
 	line.radius = 0.02
 	
@@ -150,7 +150,7 @@ func create_maze_line(x: int, y: int, forward_slash: bool):
 	$MazeLines.add_child(line)
 	maze_lines.append(line)
 
-func highlight_current_position():
+func highlight_current_position() -> void:
 	# Reset all grid nodes
 	for row in grid_nodes:
 		for node in row:
@@ -168,7 +168,7 @@ func highlight_current_position():
 		highlight_material.emission = Color(0.5, 0.5, 0.1, 1.0)
 		current_node.material_override = highlight_material
 
-func animate_ten_print():
+func animate_ten_print() -> void:
 	# Animate maze lines with wave effect
 	for i in range(maze_lines.size()):
 		var line = maze_lines[i]
@@ -190,7 +190,7 @@ func animate_ten_print():
 				var pulse = sin(time * 2.0 + x * 0.3 + y * 0.2) * 0.1 + 0.5
 				node.scale = Vector3.ONE * pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Probability control
 	var prob_height = probability * 2.0 + 0.5
 	$ProbabilityControl.height = prob_height
@@ -228,3 +228,12 @@ func get_maze_pattern_info() -> String:
 			backward_count += 1
 	
 	return "Forward: %d, Backward: %d" % [forward_count, backward_count]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

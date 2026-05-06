@@ -1,0 +1,73 @@
+{
+    "description": "Arrival inspired: Minimalist, avant-garde, deep bass and strange textures",
+    "continuous_layers": [
+        {
+            "sound_id": "liturgical.string_atmosphere",
+            "volume_db": -18,
+            "bus": "Strings"
+        },
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -12,
+            "bus": "GravityBass"
+        },
+        {
+            "sound_id": "Fourier.nebula",
+            "volume_db": -18,
+            "bus": "Strings"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+                "AudioSynthesizer.GHOST_DRONE",
+                "Liturgical.divine_breath",
+                "Cinematic.vangelis_brass_lead"
+            ],
+            "interval_range": [
+                15.0,
+                45.0
+            ],
+            "volume_range": [
+                -15,
+                -10
+            ],
+            "bus": "AlienVocals"
+        }
+    ],
+    "buses": {
+        "Strings": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.7
+                }
+            ]
+        },
+        "GravityBass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 60
+                }
+            ]
+        },
+        "AlienVocals": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.6,
+                    "tap1_delay_ms": 800,
+                    "tap1_level_db": -5.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.8
+                }
+            ]
+        }
+    }
+}

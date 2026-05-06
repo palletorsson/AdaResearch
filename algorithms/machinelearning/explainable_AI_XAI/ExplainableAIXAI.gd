@@ -1,29 +1,51 @@
+## ============================================================================
+## ExplainableAIXAI.gd — Interactive Explainable AI (XAI) Visualization
+## Demonstrates how AI model decisions are explained through SHAP, LIME, and
+## GradCAM methods, with transparency and interpretability metrics.
+## ============================================================================
 extends Node3D
- 
 
+# ── Runtime UI Controls ──────────────────────────────────────────────────────
+@export_range(0.0, 1.0, 0.01) var explanation_progress: float = 0.0:
+	set(v):
+		explanation_progress = clamp(v, 0.0, 1.0)
+		_on_progress_changed()
+
+@export_range(0.0, 1.0, 0.01) var transparency_score: float = 0.0:
+	set(v):
+		transparency_score = clamp(v, 0.0, 1.0)
+
+@export_range(0.0, 1.0, 0.01) var interpretability_score: float = 0.0:
+	set(v):
+		interpretability_score = clamp(v, 0.0, 1.0)
+
+@export_range(5, 40, 1) var particle_count: int = 20
+@export_range(0.1, 3.0, 0.1) var animation_speed: float = 1.0
+@export var auto_progress: bool = true  ## Automatically advance progress over time
+
+# ── Internal State ───────────────────────────────────────────────────────────
 var time: float = 0.0
-var explanation_progress: float = 0.0
-var transparency_score: float = 0.0
-var interpretability_score: float = 0.0
-var particle_count: int = 20
 var flow_particles: Array = []
 var explanation_particles: Array = []
+var _stats_label: Label3D = null
 
-func _ready():
+func _ready() -> void:
 	# Initialize Explainable AI visualization
 	print("Explainable AI Visualization initialized")
 	create_input_particles()
 	create_explanation_particles()
 	create_flow_particles()
 	setup_explanation_metrics()
+	_create_stats_label()
 
-func _process(delta):
-	time += delta
+func _process(delta: float) -> void:
+	time += delta * animation_speed
 	
-	# Simulate explanation progress
-	explanation_progress = min(1.0, time * 0.1)
-	transparency_score = explanation_progress * 0.9
-	interpretability_score = explanation_progress * 0.85
+	# ── Auto-advance progress if enabled ─────────────────────────────────
+	if auto_progress:
+		explanation_progress = min(1.0, time * 0.1)
+		transparency_score = explanation_progress * 0.9
+		interpretability_score = explanation_progress * 0.85
 	
 	animate_input_data(delta)
 	animate_ai_model(delta)
@@ -31,17 +53,21 @@ func _process(delta):
 	animate_transparency_metrics(delta)
 	animate_data_flow(delta)
 	update_explanation_metrics(delta)
+	_update_stats_label()
 
-func create_input_particles():
-	# Create input data particles
+func create_input_particles() -> void:
+	## Create input data particles — gold spheres representing data fed to the AI model
 	var input_particles = $InputData/InputParticles
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.1
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
+		particle.material_override.albedo_color = Color(0.3, 0.5, 0.9, 1)  # Blue for input data
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.3
+		particle.material_override.emission = Color(0.3, 0.5, 0.9, 1) * 0.5
+		particle.material_override.emission_energy_multiplier = 1.5
+		particle.material_override.metallic = 0.4
+		particle.material_override.roughness = 0.3
 		
 		# Position particles in a cluster around input
 		var x = randf_range(-1.5, 1.5)
@@ -51,16 +77,19 @@ func create_input_particles():
 		
 		input_particles.add_child(particle)
 
-func create_explanation_particles():
-	# Create explanation output particles
+func create_explanation_particles() -> void:
+	## Create explanation output particles — green spheres representing model explanations
 	var explanation_particles_node = $OutputExplanation/ExplanationParticles
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.1
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.2, 0.8, 0.8, 1)
+		particle.material_override.albedo_color = Color(0.3, 0.85, 0.4, 1)  # Green for explanations
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.2, 0.8, 0.8, 1) * 0.3
+		particle.material_override.emission = Color(0.3, 0.85, 0.4, 1) * 0.6
+		particle.material_override.emission_energy_multiplier = 1.8
+		particle.material_override.metallic = 0.5
+		particle.material_override.roughness = 0.25
 		
 		# Position particles in a cluster around output
 		var x = randf_range(-1.5, 1.5)
@@ -71,16 +100,19 @@ func create_explanation_particles():
 		explanation_particles_node.add_child(particle)
 		explanation_particles.append(particle)
 
-func create_flow_particles():
-	# Create data flow particles
+func create_flow_particles() -> void:
+	## Create data flow particles — gold spheres tracing the explanation pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(25):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.05
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.2, 0.8, 1)
+		particle.material_override.albedo_color = Color(1.0, 0.85, 0.2, 1)  # Gold for flow
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.2, 0.8, 1) * 0.3
+		particle.material_override.emission = Color(1.0, 0.85, 0.2, 1) * 0.6
+		particle.material_override.emission_energy_multiplier = 2.0
+		particle.material_override.metallic = 0.6
+		particle.material_override.roughness = 0.2
 		
 		# Position particles along the explanation flow path
 		var progress = float(i) / 25
@@ -91,7 +123,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_explanation_metrics():
+func setup_explanation_metrics() -> void:
 	# Initialize explanation metrics
 	var transparency_indicator = $ExplanationMetrics/TransparencyMeter/TransparencyIndicator
 	var interpretability_indicator = $ExplanationMetrics/InterpretabilityMeter/InterpretabilityIndicator
@@ -100,7 +132,7 @@ func setup_explanation_metrics():
 	if interpretability_indicator:
 		interpretability_indicator.position.x = 0  # Start at middle
 
-func animate_input_data(delta):
+func animate_input_data(delta) -> void:
 	# Animate input particles
 	var input_particles = $InputData/InputParticles
 	for i in range(input_particles.get_child_count()):
@@ -119,7 +151,7 @@ func animate_input_data(delta):
 			var pulse = 1.0 + sin(time * 2.0 + i * 0.2) * 0.2 * explanation_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_ai_model(delta):
+func animate_ai_model(delta) -> void:
 	# Animate AI model core
 	var model_core = $AIModel/ModelCore
 	if model_core:
@@ -135,7 +167,7 @@ func animate_ai_model(delta):
 			var intensity = 0.3 + explanation_progress * 0.7
 			model_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_explanation_engine(delta):
+func animate_explanation_engine(delta) -> void:
 	# Animate explanation engine core
 	var explanation_core = $ExplanationEngine/ExplanationCore
 	if explanation_core:
@@ -191,7 +223,7 @@ func animate_explanation_engine(delta):
 			var intensity = 0.3 + gradcam_activation * 0.7
 			gradcam_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_transparency_metrics(delta):
+func animate_transparency_metrics(delta) -> void:
 	# Animate transparency metrics core
 	var transparency_core = $TransparencyMetrics/TransparencyCore
 	if transparency_core:
@@ -207,7 +239,7 @@ func animate_transparency_metrics(delta):
 			var intensity = 0.3 + transparency_score * 0.7
 			transparency_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -231,7 +263,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * explanation_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_explanation_metrics(delta):
+func update_explanation_metrics(delta) -> void:
 	# Update transparency meter
 	var transparency_indicator = $ExplanationMetrics/TransparencyMeter/TransparencyIndicator
 	if transparency_indicator:
@@ -254,13 +286,15 @@ func update_explanation_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - interpretability_score)
 		interpretability_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_explanation_progress(progress: float):
+# ── Public API ───────────────────────────────────────────────────────────────
+
+func set_explanation_progress(progress: float) -> void:
 	explanation_progress = clamp(progress, 0.0, 1.0)
 
-func set_transparency_score(transparency: float):
+func set_transparency_score(transparency: float) -> void:
 	transparency_score = clamp(transparency, 0.0, 1.0)
 
-func set_interpretability_score(interpretability: float):
+func set_interpretability_score(interpretability: float) -> void:
 	interpretability_score = clamp(interpretability, 0.0, 1.0)
 
 func get_explanation_progress() -> float:
@@ -272,8 +306,55 @@ func get_transparency_score() -> float:
 func get_interpretability_score() -> float:
 	return interpretability_score
 
-func reset_explanation():
+func reset_explanation() -> void:
 	time = 0.0
 	explanation_progress = 0.0
 	transparency_score = 0.0
 	interpretability_score = 0.0
+	var explanation_core = $ExplanationEngine/ExplanationCore
+	if explanation_core:
+		var tween = create_tween()
+		tween.tween_property(explanation_core, "scale", Vector3.ONE * 1.5, 0.15)
+		tween.tween_property(explanation_core, "scale", Vector3.ONE, 0.3)
+
+# ── Stats Label & Visual Feedback ────────────────────────────────────────────
+
+func _create_stats_label() -> void:
+	## Creates a floating 3D label showing live XAI stats
+	_stats_label = Label3D.new()
+	_stats_label.text = "Initializing..."
+	_stats_label.font_size = 48
+	_stats_label.modulate = Color(1.0, 0.85, 0.2, 1.0)
+	_stats_label.outline_modulate = Color(0, 0, 0, 0.8)
+	_stats_label.outline_size = 8
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_stats_label.position = Vector3(0, 4.5, 0)
+	_stats_label.no_depth_test = true
+	add_child(_stats_label)
+
+func _update_stats_label() -> void:
+	if _stats_label:
+		_stats_label.text = "Explainable AI (XAI)\nProgress: %d%%  |  Transparency: %.0f%%  |  Interpretability: %.0f%%" % [
+			explanation_progress * 100,
+			transparency_score * 100,
+			interpretability_score * 100
+		]
+
+func _on_progress_changed() -> void:
+	## Visual feedback — pulse explanation core with gold glow
+	var explanation_core = $ExplanationEngine/ExplanationCore
+	if explanation_core and explanation_core.material_override:
+		var tween = create_tween()
+		tween.tween_property(explanation_core.material_override, "emission",
+			Color(1.0, 0.85, 0.2) * 1.5, 0.15)
+		tween.tween_property(explanation_core.material_override, "emission",
+			Color(0.3, 0.85, 0.4) * (0.3 + explanation_progress * 0.7), 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

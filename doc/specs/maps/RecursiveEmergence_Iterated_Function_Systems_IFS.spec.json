@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "RecursiveEmergence_Iterated_Function_Systems_IFS",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 8,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "transformation"
+  ],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 78,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.4871794871794872,
+        4.461538461538462
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 4,
+      "token": "koch_curve_3d"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 79,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

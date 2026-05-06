@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: tiered network visualization — central hub nodes (high centrality), mid-tier cluster nodes, peripheral nodes — all orbiting with speed inversely proportional to centrality, connected by pulsing edges with flow particles
+# desire: to see a living network breathe — nodes orbit at different speeds based on their importance, edges pulse with data flow, and community boundaries glow like cell membranes
+# critical_parameter: analysis_progress — ramps from 0 to 1 over time, progressively amplifying all visual effects (node pulsing, edge glow, community alpha, particle trail intensity)
+# triggers: time drives orbital animation, edge pulse frequency, and community rotation; flow_particles traverse random edges continuously, creating a sense of constant network activity
+# emerges: the three-tier layout (central/cluster/peripheral) creates visual hierarchy without explicit label — centrality is expressed through node size, color, orbit radius, and glow intensity
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: appears in GT_Network_Analysis as the analytical complement to networkflow3d's algorithmic flow; provides qualitative network intuition before quantitative algorithms
+# truth: a network's structure is not in its nodes or edges alone — it is in the pattern of connections, and centrality measures which nodes the network would miss most
+
 class_name NetworkAnalysis
 
 var time: float = 0.0
@@ -12,7 +23,7 @@ var network_nodes: Array = []
 var network_edges: Array = []
 var communities: Array = []
 
-func _ready():
+func _ready() -> void:
 	print("Network Analysis Visualization initialized")
 	setup_scene()
 	create_network_nodes()
@@ -20,7 +31,7 @@ func _ready():
 	create_communities()
 	create_flow_particles()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Enhanced lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 0.8
@@ -46,7 +57,7 @@ func setup_scene():
 	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	analysis_progress = min(1.0, time * 0.1)
 	clustering_coefficient = 0.3 + analysis_progress * 0.5 + sin(time * 0.5) * 0.1
@@ -57,7 +68,7 @@ func _process(delta):
 	animate_flow_particles(delta)
 	animate_communities(delta)
 
-func create_network_nodes():
+func create_network_nodes() -> void:
 	# Central hub nodes
 	for i in range(5):
 		var node = create_node_sphere(0.18, Color(1.0, 0.3, 0.3))
@@ -126,7 +137,7 @@ func create_node_sphere(radius: float, color: Color) -> MeshInstance3D:
 	
 	return mesh_instance
 
-func create_network_edges():
+func create_network_edges() -> void:
 	# Connect central nodes to each other
 	for i in range(5):
 		for j in range(i + 1, 5):
@@ -151,7 +162,7 @@ func create_network_edges():
 		if n1 != n2:
 			create_edge(n1, n2, randf_range(0.2, 0.5))
 
-func create_edge(idx1: int, idx2: int, weight: float):
+func create_edge(idx1: int, idx2: int, weight: float) -> void:
 	var edge_container = Node3D.new()
 	add_child(edge_container)
 	
@@ -181,7 +192,7 @@ func create_edge(idx1: int, idx2: int, weight: float):
 		"weight": weight
 	})
 
-func update_network_edges(delta):
+func update_network_edges(_delta) -> void:
 	for edge_data in network_edges:
 		var node1_pos = network_nodes[edge_data["node1"]]["node"].global_position
 		var node2_pos = network_nodes[edge_data["node2"]]["node"].global_position
@@ -220,7 +231,7 @@ func update_network_edges(delta):
 		var material = line.material_override as StandardMaterial3D
 		material.emission_energy_multiplier = 1.0 + intensity * analysis_progress * 2.0
 
-func create_communities():
+func create_communities() -> void:
 	for i in range(3):
 		var torus = MeshInstance3D.new()
 		var torus_mesh = TorusMesh.new()
@@ -250,7 +261,7 @@ func create_communities():
 			"phase": float(i) / 3.0 * TAU
 		})
 
-func animate_communities(delta):
+func animate_communities(delta) -> void:
 	for comm_data in communities:
 		var comm = comm_data["mesh"]
 		var phase = comm_data["phase"]
@@ -273,11 +284,12 @@ func animate_communities(delta):
 		color.a = alpha
 		material.albedo_color = color
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	for i in range(40):
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.06
+		sphere.height = 0.12
 		particle.mesh = sphere
 		
 		var material = StandardMaterial3D.new()
@@ -295,7 +307,7 @@ func create_flow_particles():
 			"speed": randf_range(0.3, 0.8)
 		})
 
-func animate_flow_particles(delta):
+func animate_flow_particles(delta) -> void:
 	for particle_data in flow_particles:
 		var particle = particle_data["particle"]
 		var edge_idx = particle_data["edge_index"]
@@ -322,7 +334,7 @@ func animate_flow_particles(delta):
 		var material = particle.material_override as StandardMaterial3D
 		material.emission_energy_multiplier = 2.0 + trail_factor * 2.0 * analysis_progress
 
-func animate_network_nodes(delta):
+func animate_network_nodes(delta) -> void:
 	for i in range(network_nodes.size()):
 		var node_data = network_nodes[i]
 		var node = node_data["node"]
@@ -353,13 +365,13 @@ func animate_network_nodes(delta):
 		var intensity = 1.5 + centrality * analysis_progress * 2.0
 		material.emission_energy_multiplier = intensity
 
-func set_analysis_progress(progress: float):
+func set_analysis_progress(progress: float) -> void:
 	analysis_progress = clamp(progress, 0.0, 1.0)
 
-func set_clustering_coefficient(clustering: float):
+func set_clustering_coefficient(clustering: float) -> void:
 	clustering_coefficient = clamp(clustering, 0.0, 1.0)
 
-func set_connectivity_index(connectivity: float):
+func set_connectivity_index(connectivity: float) -> void:
 	connectivity_index = clamp(connectivity, 0.0, 1.0)
 
 func get_analysis_progress() -> float:
@@ -371,8 +383,17 @@ func get_clustering_coefficient() -> float:
 func get_connectivity_index() -> float:
 	return connectivity_index
 
-func reset_analysis():
+func reset_analysis() -> void:
 	time = 0.0
 	analysis_progress = 0.0
 	clustering_coefficient = 0.0
 	connectivity_index = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

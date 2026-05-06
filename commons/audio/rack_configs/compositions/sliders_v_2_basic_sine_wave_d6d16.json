@@ -1,0 +1,39 @@
+{
+  "rack_info": {
+    "name": "2x SLIDER V",
+    "description": "2x SLIDER V — auto-generated UVAC composition. sound_type=basic_sine_wave, composition_type=sliders_v.",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "composition_type": "sliders_v",
+    "composition_count": 2
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "sv_0",
+      "sv_1"
+    ]
+  ],
+  "control_definitions": {
+    "sv_0": {
+      "type": "slv",
+      "label": "AMP",
+      "parameter": "amp",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.7
+    },
+    "sv_1": {
+      "type": "slv",
+      "label": "DEPTH",
+      "parameter": "depth",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

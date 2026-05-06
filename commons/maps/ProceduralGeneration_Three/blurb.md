@@ -1,0 +1,5 @@
+Voronoi diagrams partition space by proximity. Drop seed points onto a plane; every other point belongs to whichever seed is closest. The result: irregular cells, organic boundaries, territories defined not by what they contain but by what they're nearest to. No grid. No symmetry. Just distance and allegiance.
+
+The 8x8 arena makes the process visible. Seeds scatter. Boundaries emerge — not drawn but implied, computed from the gaps between. Each cell is a region of influence, a jurisdiction of nearness. Move a single seed and the entire map reorganizes. Identity here is relational, not intrinsic.
+
+Voronoi appears everywhere structure must emerge without a blueprint — crystal growth, cell biology, urban planning, procedural terrain. Space doesn't need to be divided equally. It needs to be divided honestly. Proximity is the only authority.

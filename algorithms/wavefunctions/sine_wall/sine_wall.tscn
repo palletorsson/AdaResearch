@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctd7mdholmyjp"]
+
+[ext_resource type="Script" uid="uid://bl216habw5wb5" path="res://algorithms/wavefunctions/sine_wall/SineWall.gd" id="1"]
+
+[node name="SineWall" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9659258, -0.12940957, -0.22414373, 0.04750353, 0.93995625, -0.3379726, 0.25442228, 0.31580892, 0.91407543, 0, 2.41495, 10)
+current = true
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 6, 0)

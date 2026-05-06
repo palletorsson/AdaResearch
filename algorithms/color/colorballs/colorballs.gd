@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: N rigid spheres sampled from named color palettes — physics + palette = chromatic rain
+# desire: to toss, scatter, and watch colored balls pool and bounce, making palette differences visceral through physics
+# critical_parameter: current_palette_index — switches the entire chromatic vocabulary; same physics, different visual language
+# triggers: palette cycling recolors all balls instantly; falling below threshold respawns with new random palette color
+# emerges: balls cluster by momentum into accidental color groupings that look curated but are pure physics
+# needs: MultiMesh renderer [has]; palette cycling [has]; VR grab [missing]; turret integration [has]
+# relationships: depends on color_palettes.tres; colorballs group lets turret find and shoot at them; feeds into brick_wall_factory as color source contrast
+# truth: a color only becomes real when it has mass — palette theory means nothing until you can throw it
+
 # Random Color Rigidbody Balls - Sizes between handballs and golfballs
 # Creates physics-enabled balls with random colors from palette system
 
@@ -9,7 +19,7 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 @export var ball_count: int = 20
 @export var min_ball_radius: float = 0.1  # 10cm radius
 @export var max_ball_radius: float = 0.1   # 10cm radius
-@export var ball_mass: float = 0.1
+@export var ball_mass: float = 0.01
 @export var ball_bounce: float = 0.8
 @export var ball_friction: float = 0.3
 
@@ -33,13 +43,30 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 @export var linear_damp: float = 0.1
 @export var angular_damp: float = 0.1
 
+@export_category("Rendering")
+@export var use_multimesh_renderer: bool = true
+@export var multimesh_sync_rate: float = 30.0
+@export var debug_logs: bool = false
+
 # Internal variables
 var palette_keys: Array = []
 var current_palette_index: int = 0
 var balls: Array = []
+var ball_colors: Array[Color] = []
+var ball_bodies: Array = []
 var ball_scene: PackedScene
+var multimesh_instance: MultiMeshInstance3D
+var multimesh: MultiMesh
+var _sync_accumulator: float = 0.0
+
+func _log(message: String) -> void:
+	if debug_logs:
+		print(message)
 
 func _ready() -> void:
+	# Add to group so turret can find us
+	add_to_group("colorballs")
+	
 	_ensure_palette_resource()
 	palette_keys = _collect_palette_keys()
 	if palette_keys.is_empty():
@@ -50,6 +77,7 @@ func _ready() -> void:
 	current_palette_index = abs(name_hash) % palette_keys.size()
 	
 	create_ball_scene()
+	_setup_multimesh_renderer()
 	spawn_balls()
 
 func _ensure_palette_resource() -> void:
@@ -88,7 +116,7 @@ func _get_palette_colors(palette_name: String) -> Array:
 func create_ball_scene() -> void:
 	# We'll create balls directly instead of using PackedScene
 	# This avoids the packing/instantiation issues
-	print("Ball scene creation skipped - using direct creation")
+	_log("Ball scene creation skipped - using direct creation")
 
 func create_ball_directly(name: String) -> Node3D:
 	"""Create a ball directly without using PackedScene"""
@@ -116,28 +144,90 @@ func create_ball_directly(name: String) -> Node3D:
 	physics_material.friction = ball_friction
 	rigid_body.physics_material_override = physics_material
 	
-	# Create mesh instance
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.name = "MeshInstance3D"
-	
-	# Create sphere mesh
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = 0.1
-	sphere_mesh.height = 0.2
-	sphere_mesh.radial_segments = 48
-	sphere_mesh.rings = 24
-	mesh_instance.mesh = sphere_mesh
-	
 	# Assemble the scene
 	rigid_body.add_child(collision_shape)
-	rigid_body.add_child(mesh_instance)
+	
+	# Keep per-ball mesh only when MultiMesh rendering is disabled.
+	if not use_multimesh_renderer:
+		var mesh_instance = MeshInstance3D.new()
+		mesh_instance.name = "MeshInstance3D"
+		var sphere_mesh = SphereMesh.new()
+		sphere_mesh.radius = 0.1
+		sphere_mesh.height = 0.2
+		sphere_mesh.radial_segments = 48
+		sphere_mesh.rings = 24
+		mesh_instance.mesh = sphere_mesh
+		rigid_body.add_child(mesh_instance)
+	
 	root.add_child(rigid_body)
 	
-	print("Created ball directly: %s" % name)
-	print("Root children: ", root.get_children())
-	print("RigidBody children: ", rigid_body.get_children())
+	_log("Created ball directly: %s" % name)
+	_log("Root children: %s" % [str(root.get_children())])
+	_log("RigidBody children: %s" % [str(rigid_body.get_children())])
 	
 	return root
+
+func _setup_multimesh_renderer() -> void:
+	_clear_multimesh_renderer()
+	if not use_multimesh_renderer:
+		return
+
+	multimesh_instance = MultiMeshInstance3D.new()
+	multimesh_instance.name = "BallMultiMesh"
+	multimesh = MultiMesh.new()
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	multimesh.use_colors = true
+	multimesh.instance_count = 0
+
+	var sphere_mesh := SphereMesh.new()
+	sphere_mesh.radius = 0.1
+	sphere_mesh.height = 0.2
+	sphere_mesh.radial_segments = 24
+	sphere_mesh.rings = 12
+	multimesh.mesh = sphere_mesh
+
+	multimesh_instance.multimesh = multimesh
+	multimesh_instance.material_override = _build_multimesh_material()
+	add_child(multimesh_instance)
+
+func _clear_multimesh_renderer() -> void:
+	if is_instance_valid(multimesh_instance):
+		multimesh_instance.queue_free()
+	multimesh_instance = null
+	multimesh = null
+
+func _build_multimesh_material() -> Material:
+	var material := StandardMaterial3D.new()
+	material.vertex_color_use_as_albedo = true
+	material.emission_enabled = true
+	material.emission = Color.WHITE
+	material.emission_energy_multiplier = emission_strength
+	material.metallic = metallic_factor
+	material.roughness = roughness_factor
+	return material
+
+func _rebuild_multimesh() -> void:
+	if not use_multimesh_renderer or multimesh == null:
+		return
+
+	var instance_total := mini(ball_bodies.size(), ball_colors.size())
+	multimesh.instance_count = instance_total
+
+	for i in range(instance_total):
+		multimesh.set_instance_transform(i, Transform3D.IDENTITY)
+		multimesh.set_instance_color(i, ball_colors[i])
+
+func _sync_multimesh_transforms() -> void:
+	if not use_multimesh_renderer or multimesh == null or not is_instance_valid(multimesh_instance):
+		return
+
+	var instance_total := mini(multimesh.instance_count, ball_bodies.size())
+	var inverse_renderer_transform := multimesh_instance.global_transform.affine_inverse()
+	for i in range(instance_total):
+		var rigid_body = ball_bodies[i]
+		if not is_instance_valid(rigid_body):
+			continue
+		multimesh.set_instance_transform(i, inverse_renderer_transform * rigid_body.global_transform)
 
 func spawn_balls() -> void:
 	# Clear existing balls
@@ -145,14 +235,16 @@ func spawn_balls() -> void:
 		if is_instance_valid(ball):
 			ball.queue_free()
 	balls.clear()
+	ball_bodies.clear()
+	ball_colors.clear()
 	
 	# Spawn new balls
 	for i in range(ball_count):
 		var ball_instance = create_ball_directly("Ball_%d" % i)
 		
-		print("Created ball %d structure:" % i)
-		print("Ball instance children: ", ball_instance.get_children())
-		print("Ball instance name: ", ball_instance.name)
+		_log("Created ball %d structure:" % i)
+		_log("Ball instance children: %s" % [str(ball_instance.get_children())])
+		_log("Ball instance name: %s" % ball_instance.name)
 		
 		# Random position within spawn area
 		var random_pos = Vector3(
@@ -174,20 +266,28 @@ func spawn_balls() -> void:
 		
 		# Apply color
 		var color = get_random_color()
-		set_ball_color(ball_instance, color)
 		
 		# Add to scene
 		add_child(ball_instance)
 		balls.append(ball_instance)
+		var rigid_body = ball_instance.get_node_or_null("RigidBody3D")
+		ball_bodies.append(rigid_body)
+		ball_colors.append(color)
+		
+		if not use_multimesh_renderer:
+			set_ball_color(ball_instance, color)
 		
 		# Apply initial velocity after a short delay to ensure physics is ready
 		await get_tree().process_frame
-		var rigid_body = ball_instance.get_node_or_null("RigidBody3D")
 		if not rigid_body:
 			continue
 		rigid_body.linear_velocity = random_vel
 		
-		print("Created Ball_%d with radius: %.3f, color: %s" % [i, fixed_radius, color])
+		_log("Created Ball_%d with radius: %.3f, color: %s" % [i, fixed_radius, color])
+
+	if use_multimesh_renderer:
+		_rebuild_multimesh()
+		_sync_multimesh_transforms()
 
 func get_random_color() -> Color:
 	if palette_keys.is_empty():
@@ -202,8 +302,10 @@ func get_random_color() -> Color:
 	return random_color * color_intensity
 
 func set_ball_color(ball_instance: Node3D, color: Color) -> void:
-	var rigid_body = ball_instance.get_node("RigidBody3D")
-	var mesh_instance = rigid_body.get_node("MeshInstance3D")
+	var rigid_body = ball_instance.get_node_or_null("RigidBody3D")
+	if not rigid_body:
+		return
+	var mesh_instance = rigid_body.get_node_or_null("MeshInstance3D")
 	
 	if mesh_instance:
 		var material = StandardMaterial3D.new()
@@ -218,30 +320,56 @@ func set_ball_color(ball_instance: Node3D, color: Color) -> void:
 func _process(delta: float) -> void:
 	if respawn_on_fall:
 		check_and_respawn_fallen_balls()
+	if use_multimesh_renderer:
+		if multimesh_sync_rate <= 0.0:
+			_sync_multimesh_transforms()
+		else:
+			_sync_accumulator += delta
+			var sync_interval := 1.0 / multimesh_sync_rate
+			if _sync_accumulator >= sync_interval:
+				_sync_accumulator = 0.0
+				_sync_multimesh_transforms()
 
 func check_and_respawn_fallen_balls() -> void:
 	for i in range(balls.size()):
-		var ball = balls[i]
-		if is_instance_valid(ball) and ball.position.y < fall_threshold:
+		var ball: Node3D = balls[i] as Node3D
+		if ball == null or not is_instance_valid(ball):
+			continue
+		var rigid_body: RigidBody3D = null
+		if i < ball_bodies.size():
+			rigid_body = ball_bodies[i] as RigidBody3D
+		if rigid_body == null:
+			rigid_body = ball.get_node_or_null("RigidBody3D") as RigidBody3D
+		var y_position: float = ball.global_position.y
+		if is_instance_valid(rigid_body):
+			y_position = rigid_body.global_position.y
+		if y_position < fall_threshold:
 			# Respawn the ball
 			var new_pos = Vector3(
 				randf_range(-spawn_area_size.x/2, spawn_area_size.x/2),
 				spawn_height,
 				randf_range(-spawn_area_size.z/2, spawn_area_size.z/2)
 			)
-			ball.position = new_pos
+			if is_instance_valid(rigid_body):
+				rigid_body.global_position = new_pos
+			else:
+				ball.global_position = new_pos
 			
 			# Reset velocity
-			var rigid_body = ball.get_node("RigidBody3D")
-			if rigid_body:
+			if is_instance_valid(rigid_body):
 				rigid_body.linear_velocity = Vector3.ZERO
 				rigid_body.angular_velocity = Vector3.ZERO
 			
 			# New random color
 			var new_color = get_random_color()
-			set_ball_color(ball, new_color)
+			if i < ball_colors.size():
+				ball_colors[i] = new_color
+			if use_multimesh_renderer and multimesh and i < multimesh.instance_count:
+				multimesh.set_instance_color(i, new_color)
+			else:
+				set_ball_color(ball, new_color)
 			
-			print("Respawned Ball_%d with new color: %s" % [i, new_color])
+			_log("Respawned Ball_%d with new color: %s" % [i, new_color])
 
 func regenerate_balls() -> void:
 	spawn_balls()
@@ -257,9 +385,14 @@ func cycle_to_next_palette() -> void:
 		var ball = balls[i]
 		if is_instance_valid(ball):
 			var new_color = get_random_color()
-			set_ball_color(ball, new_color)
+			if i < ball_colors.size():
+				ball_colors[i] = new_color
+			if use_multimesh_renderer and multimesh and i < multimesh.instance_count:
+				multimesh.set_instance_color(i, new_color)
+			else:
+				set_ball_color(ball, new_color)
 	
-	print("Cycled to palette: %s" % get_current_palette_name())
+	_log("Cycled to palette: %s" % get_current_palette_name())
 
 func get_current_palette_name() -> String:
 	if palette_keys.is_empty():
@@ -284,20 +417,28 @@ func add_ball() -> void:
 	var fixed_radius := 0.1
 	
 	var color = get_random_color()
-	set_ball_color(ball_instance, color)
 	
 	add_child(ball_instance)
 	balls.append(ball_instance)
+	var rigid_body = ball_instance.get_node_or_null("RigidBody3D")
+	ball_bodies.append(rigid_body)
+	ball_colors.append(color)
+	if not use_multimesh_renderer:
+		set_ball_color(ball_instance, color)
+	else:
+		_rebuild_multimesh()
 	
 	await get_tree().process_frame
-	var rigid_body = ball_instance.get_node("RigidBody3D")
-	rigid_body.linear_velocity = Vector3(
-		randf_range(-initial_velocity_range, initial_velocity_range),
-		randf_range(0, initial_velocity_range * 0.5),
-		randf_range(-initial_velocity_range, initial_velocity_range)
-	)
+	if rigid_body:
+		rigid_body.linear_velocity = Vector3(
+			randf_range(-initial_velocity_range, initial_velocity_range),
+			randf_range(0, initial_velocity_range * 0.5),
+			randf_range(-initial_velocity_range, initial_velocity_range)
+		)
+	if use_multimesh_renderer:
+		_sync_multimesh_transforms()
 	
-	print("Added new ball with radius: %.3f, color: %s" % [fixed_radius, color])
+	_log("Added new ball with radius: %.3f, color: %s" % [fixed_radius, color])
 
 func remove_ball() -> void:
 	if balls.size() > 0:
@@ -305,14 +446,24 @@ func remove_ball() -> void:
 		if is_instance_valid(last_ball):
 			last_ball.queue_free()
 		balls.pop_back()
-		print("Removed ball. Remaining: %d" % balls.size())
+		if ball_bodies.size() > 0:
+			ball_bodies.pop_back()
+		if ball_colors.size() > 0:
+			ball_colors.pop_back()
+		if use_multimesh_renderer:
+			_rebuild_multimesh()
+		_log("Removed ball. Remaining: %d" % balls.size())
 
 func clear_all_balls() -> void:
 	for ball in balls:
 		if is_instance_valid(ball):
 			ball.queue_free()
 	balls.clear()
-	print("Cleared all balls")
+	ball_bodies.clear()
+	ball_colors.clear()
+	if use_multimesh_renderer:
+		_rebuild_multimesh()
+	_log("Cleared all balls")
 
 func create_ball_at_y(y_position: float = 7.0) -> void:
 	"""Create a single color ball at the specified y position"""
@@ -331,22 +482,30 @@ func create_ball_at_y(y_position: float = 7.0) -> void:
 	
 	# Random color
 	var color = get_random_color()
-	set_ball_color(ball_instance, color)
 	
 	# Add to scene
 	add_child(ball_instance)
 	balls.append(ball_instance)
+	var rigid_body = ball_instance.get_node_or_null("RigidBody3D")
+	ball_bodies.append(rigid_body)
+	ball_colors.append(color)
+	if not use_multimesh_renderer:
+		set_ball_color(ball_instance, color)
+	else:
+		_rebuild_multimesh()
 	
 	# Apply small initial velocity
 	await get_tree().process_frame
-	var rigid_body = ball_instance.get_node("RigidBody3D")
-	rigid_body.linear_velocity = Vector3(
-		randf_range(-1.0, 1.0),
-		0.0,
-		randf_range(-1.0, 1.0)
-	)
+	if rigid_body:
+		rigid_body.linear_velocity = Vector3(
+			randf_range(-1.0, 1.0),
+			0.0,
+			randf_range(-1.0, 1.0)
+		)
+	if use_multimesh_renderer:
+		_sync_multimesh_transforms()
 	
-	print("Created ball at y=%.1f with radius: %.3f, color: %s" % [y_position, fixed_radius, color])
+	_log("Created ball at y=%.1f with radius: %.3f, color: %s" % [y_position, fixed_radius, color])
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
@@ -361,3 +520,12 @@ func _input(event: InputEvent) -> void:
 		clear_all_balls()
 	elif event.is_action_pressed("ui_page_up"):  # Page Up key
 		create_ball_at_y(7.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

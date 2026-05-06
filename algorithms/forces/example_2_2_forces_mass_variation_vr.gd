@@ -5,11 +5,20 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Wind and drag applied to many balls of different masses — F=ma made visible as different responses to identical force
+# desire: To turn the equation F=ma into a perceptual event — same wind pushes large and small differently, mass becomes legible as motion
+# critical_parameter: wind_strength and drag_coefficient — together they decide whether mass differences read as separation or noise
+# triggers: Zero wind makes mass invisible; strong wind separates masses by acceleration; high drag erases the differences over time
+# emerges: A row of objects of varying mass under one wind becomes a histogram of inertia, sorted by acceleration response
+# needs: per-ball mass [has], wind force application [has], drag force [has], VR sliders [has]
+# relationships: Direct successor to example_2_1_forces_vr (adds mass). Anchor artifact in forces/Newton's_Laws map
+# truth: Mass is not a number on a scale — it is the resistance that makes one body's response to a force differ from another's.
 # ===========================================================================
 
 extends Node3D
 
-const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const DEFAULT_WIND_STRENGTH := 0.4
 const DEFAULT_DRAG_COEFFICIENT := 0.02
 const ARROW_LENGTH_SCALE := 0.6
@@ -25,14 +34,17 @@ var wind_strength: float = DEFAULT_WIND_STRENGTH
 var drag_coefficient: float = DEFAULT_DRAG_COEFFICIENT
 var show_force_vectors: bool = true
 
-var info_label: Label3D
-var instructions_label: Label3D
-var wind_controller: ParameterController3D
-var drag_controller: ParameterController3D
+# UI — Ada rack panel
+var _panel: ForcesRackPanel
+var _wind_slider: Node3D
+var _drag_slider: Node3D
 var auto_reset_timer: Timer
 
 func _ready() -> void:
-	create_ui()
+	# Scale down for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
+	_create_panel()
 	spawn_movers()
 	setup_auto_reset()
 	print("Example 2.2: Forces with mass variation")
@@ -45,7 +57,7 @@ func setup_auto_reset() -> void:
 	add_child(auto_reset_timer)
 
 func _process(_delta: float) -> void:
-	update_info_label()
+	_update_panel_info()
 
 func _physics_process(_delta: float) -> void:
 	for mover in movers:
@@ -72,49 +84,24 @@ func _input(event: InputEvent) -> void:
 			KEY_F:
 				toggle_force_vectors()
 
-func create_ui() -> void:
-	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 28
-	info_label.outline_size = 4
-	info_label.modulate = Color(1.0, 0.9, 1.0)
-	info_label.position = Vector3(0, 0.65, 0)
-	add_child(info_label)
+func _create_panel() -> void:
+	_panel = ForcesRackPanel.new()
+	_panel.setup("2.2  Mass Variation", 2, 3)
+	_panel.set_instructions("[F] Force arrows  [R] Reset")
 
-	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.9)
-	instructions_label.position = Vector3(0, 0.55, 0)
-	instructions_label.text = "[F] Force arrows  |  [R] Reset"
-	add_child(instructions_label)
+	_wind_slider = _panel.add_slider("Wind", -1.0, 1.0, wind_strength, 0.05)
+	_wind_slider.slider_moved.connect(_on_wind_slider_moved)
 
-	create_parameter_controls()
+	_drag_slider = _panel.add_slider("Drag", 0.0, 0.1, drag_coefficient, 0.005)
+	_drag_slider.slider_moved.connect(_on_drag_slider_moved)
 
-func create_parameter_controls() -> void:
-	wind_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	wind_controller.parameter_name = "Wind"
-	wind_controller.min_value = -1.0
-	wind_controller.max_value = 1.0
-	wind_controller.default_value = wind_strength
-	wind_controller.step_size = 0.05
-	wind_controller.position = Vector3(-0.45, 0.45, 0.12)
-	wind_controller.rotation_degrees = Vector3(0, 35, 0)
-	add_child(wind_controller)
-	wind_controller.value_changed.connect(_on_wind_changed)
-	wind_controller.set_value(wind_strength)
+	# Position panel to the left, at chest height, angled toward viewer
+	_panel.position = Vector3(-0.5, 0.35, 0.15)
+	_panel.rotation_degrees = Vector3(0, 30, 0)
+	add_child(_panel)
 
-	drag_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	drag_controller.parameter_name = "Drag"
-	drag_controller.min_value = 0.0
-	drag_controller.max_value = 0.1
-	drag_controller.default_value = drag_coefficient
-	drag_controller.step_size = 0.005
-	drag_controller.position = Vector3(0.45, 0.45, 0.12)
-	drag_controller.rotation_degrees = Vector3(0, -35, 0)
-	add_child(drag_controller)
-	drag_controller.value_changed.connect(_on_drag_changed)
-	drag_controller.set_value(drag_coefficient)
+func _update_panel_info() -> void:
+	pass  # Slider labels auto-update via slider_smooth.gd
 
 func spawn_movers() -> void:
 	clear_existing_movers()
@@ -173,7 +160,7 @@ func create_force_arrow() -> Node3D:
 	shaft.mesh = shaft_mesh
 	shaft.position = Vector3(0, 0, 0.5)
 	shaft.rotation_degrees = Vector3(-90, 0, 0)
-	shaft.material_override = create_arrow_material()
+	shaft.material_override = _create_arrow_material()
 	arrow_root.add_child(shaft)
 
 	var head := MeshInstance3D.new()
@@ -185,33 +172,20 @@ func create_force_arrow() -> Node3D:
 	head.mesh = head_mesh
 	head.position = Vector3(0, 0, 1.0)
 	head.rotation_degrees = Vector3(-90, 0, 0)
-	head.material_override = create_arrow_material()
+	head.material_override = _create_arrow_material()
 	arrow_root.add_child(head)
 
 	return arrow_root
 
-func create_arrow_material() -> StandardMaterial3D:
+func _create_arrow_material() -> StandardMaterial3D:
+	# Use Ada accent_blue for general force arrows
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.6, 1.0, 0.2)
+	mat.albedo_color = Color(0.20, 0.55, 0.95, 0.25)
 	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.6, 1.0) * 0.3
-	mat.emission_energy_multiplier = 0.5
+	mat.emission = Color(0.20, 0.55, 0.95)
+	mat.emission_energy_multiplier = 0.4
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	return mat
-
-func update_info_label() -> void:
-	if info_label:
-		info_label.text = "Example 2.2: Forces with mass\nWind %.2f  |  Drag %.3f" % [wind_strength, drag_coefficient]
-
-
-func compute_drag_force(mover: Mover) -> Vector3:
-	var speed: float = mover.velocity.length()
-	if speed <= 0.01:
-		return Vector3.ZERO
-
-	var drag_magnitude: float = drag_coefficient * speed * speed
-	var drag_direction: Vector3 = -mover.velocity.normalized()
-	return drag_direction * drag_magnitude
 
 func update_force_visual(mover: Mover, force: Vector3) -> void:
 	var arrow: Node3D = force_visuals.get(mover, null)
@@ -243,13 +217,22 @@ func update_force_visual(mover: Mover, force: Vector3) -> void:
 	var basis := Basis().looking_at(-direction, up_vector)
 	arrow.transform = Transform3D(basis, Vector3.ZERO)
 
+
+func compute_drag_force(mover: Mover) -> Vector3:
+	var speed: float = mover.velocity.length()
+	if speed <= 0.01:
+		return Vector3.ZERO
+
+	var drag_magnitude: float = drag_coefficient * speed * speed
+	var drag_direction: Vector3 = -mover.velocity.normalized()
+	return drag_direction * drag_magnitude
+
 func reset_scene() -> void:
 	wind_strength = DEFAULT_WIND_STRENGTH
 	drag_coefficient = DEFAULT_DRAG_COEFFICIENT
-	if wind_controller:
-		wind_controller.set_value(wind_strength)
-	if drag_controller:
-		drag_controller.set_value(drag_coefficient)
+	if _panel:
+		_panel.set_slider_value(0, wind_strength)
+		_panel.set_slider_value(1, drag_coefficient)
 	spawn_movers()
 
 func toggle_force_vectors() -> void:
@@ -258,8 +241,18 @@ func toggle_force_vectors() -> void:
 		if is_instance_valid(arrow):
 			arrow.visible = show_force_vectors
 
-func _on_wind_changed(value: float) -> void:
-	wind_strength = value
+func _on_wind_slider_moved(_position) -> void:
+	# Read the logical value from the panel helper
+	wind_strength = _panel.get_slider_value(0)
 
-func _on_drag_changed(value: float) -> void:
-	drag_coefficient = value
+func _on_drag_slider_moved(_position) -> void:
+	drag_coefficient = _panel.get_slider_value(1)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

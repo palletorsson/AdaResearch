@@ -1,0 +1,37 @@
+{
+  "id": "mg_form34_side_shift_bastion",
+  "notes": "SELECT-TRANSFORM-ARTICULATE PASS: side faces are inset and scaled before only the transformed side cells are extruded. This aims for mass allocation by side-bias rather than symmetric top growth.",
+  "seed": "cube",
+  "seed_scale": 0.66,
+  "generations": 2,
+  "camera_pitch": 0.3,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "side",
+      "params": {
+        "amount": 0.16,
+        "inner_tag": "flank_core",
+        "border_tag": "flank_rim"
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:flank_core",
+      "params": {
+        "scale": 0.86
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:flank_core",
+      "params": {
+        "distance": 0.1,
+        "scale": 0.98,
+        "top_tag": "flank_face",
+        "side_tag": "flank_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

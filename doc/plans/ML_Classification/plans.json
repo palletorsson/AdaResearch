@@ -1,0 +1,38 @@
+{
+  "name": "ML_Classification",
+  "title": "Drawing Boundaries in Data",
+  "description": "Three classification algorithms, three distinct zones \u00e2\u20ac\u201d K-means clusters, SVM hyperplanes, and random forest regions. Walk the decision boundaries between them.",
+  "dimensions": {
+    "rows": 8,
+    "cols": 10
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    7,
+    8
+  ],
+  "teleport": [
+    6,
+    8
+  ],
+  "artifacts": [
+    {
+      "name": "enhanced_kmeans",
+      "row": 1,
+      "col": 1,
+      "family": "machinelearning"
+    },
+    {
+      "name": "svm_visualization",
+      "row": 2,
+      "col": 4,
+      "family": "machinelearning"
+    },
+    {
+      "name": "random_forest_visualization",
+      "row": 3,
+      "col": 8,
+      "family": "machinelearning"
+    }
+  ]
+}

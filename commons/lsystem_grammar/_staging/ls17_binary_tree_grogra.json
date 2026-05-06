@@ -1,0 +1,33 @@
+{
+  "id": "ls17_binary_tree_grogra",
+  "axiom": "X",
+  "rules": {
+    "X": "F[+X][-X]",
+    "F": "FF"
+  },
+  "iterations": 6,
+  "angle_deg": 25,
+  "step_len": 0.03,
+  "step_shrink": 0.78,
+  "interpretation": "tubes",
+  "base_width": 0.011,
+  "width_shrink": 0.8,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.34,
+    0.22,
+    0.12
+  ],
+  "color_tip": [
+    0.36,
+    0.72,
+    0.28
+  ],
+  "camera_yaw": 0.28,
+  "camera_pitch": 0.22,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Simple binary tree adapted from the Grogra L-systems page: X->F[+X][-X]. X is non-drawing, F doubles trunk length."
+}

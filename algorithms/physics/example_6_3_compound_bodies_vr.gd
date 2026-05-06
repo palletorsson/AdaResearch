@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 6.3: Compound Bodies
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -30,7 +30,7 @@ var type_label: Label3D
 var current_type: int = 0
 var type_names: Array[String] = ["Dumbbell", "T-Shape", "L-Shape", "Cross"]
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_ui_labels()
@@ -45,7 +45,7 @@ func _ready():
 
 	print("Example 6.3: Compound Bodies - Multi-shape objects")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_spawn and compound_objects.size() < max_objects:
 		spawn_timer += delta
 		if spawn_timer >= spawn_interval:
@@ -57,7 +57,7 @@ func _process(delta):
 
 	update_ui()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			spawn_random_compound()
@@ -66,7 +66,7 @@ func _input(event):
 		elif event.keycode == KEY_R:
 			reset()
 
-func create_ui_labels():
+func create_ui_labels() -> void:
 	"""Create UI labels"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -84,12 +84,12 @@ func create_ui_labels():
 	type_label.text = "[SPACE] Spawn | [C] Cycle Type | [R] Reset"
 	add_child(type_label)
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI labels"""
 	if info_label:
 		info_label.text = "Compound Bodies\n%s (%d/%d)" % [type_names[current_type], compound_objects.size(), max_objects]
 
-func create_ground():
+func create_ground() -> void:
 	"""Create static ground plane"""
 	ground = StaticBody3D.new()
 	ground.position = Vector3(0, -0.45, 0)
@@ -113,7 +113,7 @@ func create_ground():
 
 	add_child(ground)
 
-func spawn_random_compound():
+func spawn_random_compound() -> void:
 	"""Spawn random compound object at top"""
 	var x = randf_range(-0.25, 0.25)
 	var z = randf_range(-0.25, 0.25)
@@ -125,7 +125,7 @@ func spawn_random_compound():
 		2: spawn_l_shape(pos)
 		3: spawn_cross(pos)
 
-func spawn_dumbbell(pos: Vector3):
+func spawn_dumbbell(pos: Vector3) -> void:
 	"""Create dumbbell shape (sphere-cylinder-sphere)"""
 	var dumbbell = VRRigidBody.new()
 	dumbbell.position = pos
@@ -152,6 +152,7 @@ func spawn_dumbbell(pos: Vector3):
 	var left_mesh = MeshInstance3D.new()
 	var left_sphere = SphereMesh.new()
 	left_sphere.radius = 0.05
+	left_sphere.height = 0.1
 	left_mesh.mesh = left_sphere
 	left_mesh.position = Vector3(-0.075, 0, 0)
 	dumbbell.add_child(left_mesh)
@@ -193,7 +194,7 @@ func spawn_dumbbell(pos: Vector3):
 	add_child(dumbbell)
 	compound_objects.append(dumbbell)
 
-func spawn_t_shape(pos: Vector3):
+func spawn_t_shape(pos: Vector3) -> void:
 	"""Create T-shape (vertical bar + horizontal bar)"""
 	var t_shape = VRRigidBody.new()
 	t_shape.position = pos
@@ -238,7 +239,7 @@ func spawn_t_shape(pos: Vector3):
 	add_child(t_shape)
 	compound_objects.append(t_shape)
 
-func spawn_l_shape(pos: Vector3):
+func spawn_l_shape(pos: Vector3) -> void:
 	"""Create L-shape (two perpendicular bars)"""
 	var l_shape = VRRigidBody.new()
 	l_shape.position = pos
@@ -283,7 +284,7 @@ func spawn_l_shape(pos: Vector3):
 	add_child(l_shape)
 	compound_objects.append(l_shape)
 
-func spawn_cross(pos: Vector3):
+func spawn_cross(pos: Vector3) -> void:
 	"""Create cross shape (3 perpendicular bars)"""
 	var cross = VRRigidBody.new()
 	cross.position = pos
@@ -338,16 +339,16 @@ func spawn_cross(pos: Vector3):
 	add_child(cross)
 	compound_objects.append(cross)
 
-func _on_collision(body: Node):
+func _on_collision(_body: Node) -> void:
 	"""Handle collision"""
 	pass  # Collision feedback in VRRigidBody
 
-func cycle_spawn_type():
+func cycle_spawn_type() -> void:
 	"""Cycle through spawn types"""
 	current_type = (current_type + 1) % type_names.size()
 	update_ui()
 
-func cleanup_fallen_objects():
+func cleanup_fallen_objects() -> void:
 	"""Remove objects that fell too far"""
 	var to_remove: Array[VRRigidBody] = []
 
@@ -359,7 +360,7 @@ func cleanup_fallen_objects():
 		compound_objects.erase(obj)
 		obj.queue_free()
 
-func reset():
+func reset() -> void:
 	"""Reset scene"""
 	for obj in compound_objects:
 		obj.queue_free()
@@ -372,3 +373,12 @@ func reset():
 	spawn_dumbbell(Vector3(-0.2, 0.2, 0))
 	spawn_t_shape(Vector3(0.2, 0.2, 0))
 	spawn_l_shape(Vector3(0, 0.3, 0.2))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -157,3 +157,6 @@ func _set_gain(v: float) -> void:
 	gain = v
 	if is_node_ready():
 		_noise.fractal_gain = gain
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

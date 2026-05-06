@@ -1,0 +1,505 @@
+{
+    "_metadata": {
+        "sound_type": "chromatic_story_song",
+        "display_name": "Chromatic Story",
+        "description": "A musical journey through all 12 chromatic tones, moving from minor uncertainty through jazz exploration to major resolution. The emotional arc mirrors a story of searching, discovery, and celebration.",
+        "category": "songs",
+        "tags": ["chromatic", "jazz", "pop", "emotional_journey", "full_song", "interactive", "storytelling"],
+        "is_interactive_song": true,
+        "reference_artists": ["Steely Dan", "Herbie Hancock", "Pat Metheny", "Bill Evans"],
+        "reference_tracks": ["Take Five", "Chameleon", "My Favorite Things", "Blue in Green"]
+    },
+    "identity": {
+        "emotion": "emotional_journey",
+        "era": "timeless_fusion",
+        "character": ["searching", "hopeful", "triumphant", "chromatic"]
+    },
+    "parameters": {
+        "duration": { "min": 120.0, "max": 480.0, "value": 240.0, "step": 30.0, "description": "Song duration in seconds" },
+        "bpm": { "min": 90, "max": 110, "value": 100, "step": 1, "description": "Moderate tempo for storytelling" },
+        "key": { "options": ["Am", "C"], "value": "Am", "description": "Starts in Am, resolves to C major" },
+        "chromatic_density": { "min": 0.0, "max": 1.0, "value": 0.6, "step": 0.1, "description": "How many chromatic passing tones (higher = more jazz)" }
+    },
+    "theory": {
+        "tonal_center": "Am → C",
+        "mode_shift": "Aeolian → Ionian (relative major resolution)",
+        "chromatic_completion": {
+            "description": "All 12 chromatic tones appear across the journey",
+            "diatonic_pool": ["C", "D", "E", "F", "G", "A", "B"],
+            "chromatic_introductions": {
+                "G#": { "first_appearance": "bar 7", "chord": "E7", "function": "leading tone to Am" },
+                "F#": { "first_appearance": "bar 14", "chord": "bass walk", "function": "chromatic approach to G" },
+                "C#": { "first_appearance": "bar 37", "chord": "A7alt", "function": "secondary dominant 3rd" },
+                "Bb": { "first_appearance": "bar 37", "chord": "A7alt", "function": "altered b9" },
+                "Eb": { "first_appearance": "bar 37", "chord": "A7alt", "function": "altered b5" }
+            },
+            "total_unique_pitches": 12,
+            "verification": ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb", "B"]
+        }
+    },
+    "sound_design": {
+        "pads": {
+            "oscillators": 4,
+            "waveform": "sawtooth",
+            "detune_cents": { "min": -6, "max": 6 },
+            "filter_type": "lowpass",
+            "filter_cutoff_hz": { "min": 1000, "max": 3500 },
+            "filter_lfo_rate_hz": { "min": 0.05, "max": 0.15 },
+            "attack_ms": 400,
+            "release_ms": 1500,
+            "character": "warm_expressive"
+        },
+        "drums": {
+            "style": "light_jazzy",
+            "kick": { "punch_hz": 70, "character": "soft_acoustic" },
+            "snare": { "character": "brush_warm", "velocity": 0.5 },
+            "hihats": { "style": "swung_8ths", "velocity": 0.4 },
+            "rimshot": { "character": "woody", "velocity": 0.45 },
+            "processing": ["light_compression", "room_reverb"]
+        },
+        "bass": {
+            "style": "walking_jazz",
+            "waveform": "sine_triangle",
+            "pattern": "chromatic_walk",
+            "filter_cutoff_hz": 600,
+            "character": "upright_warm"
+        },
+        "piano": {
+            "style": "rhodes_ep",
+            "velocity_curve": "expressive",
+            "voicings": "jazz_extended",
+            "character": "warm_bell"
+        },
+        "sequence": {
+            "style": "gentle_arpeggio",
+            "pattern": "chord_tones_chromatic",
+            "octave_range": 2,
+            "velocity": 0.4,
+            "delay_mix": 0.3,
+            "character": "shimmering_hopeful"
+        }
+    },
+    "chord_progressions": {
+        "uncertainty": {
+            "bars": [1, 2, 3, 4, 5, 6, 7, 8],
+            "chords": [
+                {
+                    "symbol": "Am",
+                    "roman": "i",
+                    "midi_voicing": [45, 48, 52, 57],
+                    "notes": ["A2", "C3", "E3", "A3"],
+                    "bars": [1, 2]
+                },
+                {
+                    "symbol": "Am/G",
+                    "roman": "i7 (3rd inv)",
+                    "midi_voicing": [43, 45, 48, 52],
+                    "notes": ["G2", "A2", "C3", "E3"],
+                    "voice_leading": "bass descends A→G (whole step)",
+                    "bars": [3, 4]
+                },
+                {
+                    "symbol": "Fmaj7",
+                    "roman": "bVImaj7",
+                    "midi_voicing": [41, 45, 48, 52],
+                    "notes": ["F2", "A2", "C3", "E3"],
+                    "voice_leading": "bass descends G→F (whole step), upper voices static",
+                    "bars": [5, 6]
+                },
+                {
+                    "symbol": "E7",
+                    "roman": "V7",
+                    "midi_voicing": [40, 44, 47, 50],
+                    "notes": ["E2", "G#2", "B2", "D3"],
+                    "voice_leading": "bass descends F→E (half step), introduces G#",
+                    "chromatic_event": "G# first appearance",
+                    "bars": [7, 8]
+                }
+            ],
+            "description": "Chromatic bass descent A→G→F→E creates downward gravity",
+            "dynamic": "mp"
+        },
+        "searching": {
+            "bars": [9, 10, 11, 12, 13, 14, 15, 16],
+            "chords": [
+                {
+                    "symbol": "Dm7",
+                    "roman": "iv7",
+                    "midi_voicing": [38, 41, 45, 48],
+                    "notes": ["D2", "F2", "A2", "C3"],
+                    "bars": [9, 10]
+                },
+                {
+                    "symbol": "G7",
+                    "roman": "bVII7",
+                    "midi_voicing": [43, 47, 50, 53],
+                    "notes": ["G2", "B2", "D3", "F3"],
+                    "voice_leading": "bass walks D→E→F#→G (chromatic approach)",
+                    "chromatic_event": "F# in bass walk",
+                    "bars": [11, 12]
+                },
+                {
+                    "symbol": "Cmaj7",
+                    "roman": "bIIImaj7",
+                    "midi_voicing": [36, 40, 43, 47],
+                    "notes": ["C2", "E2", "G2", "B2"],
+                    "voice_leading": "resolves ii-V-I to relative major",
+                    "bars": [13, 14]
+                },
+                {
+                    "symbol": "Fmaj7",
+                    "roman": "bVImaj7",
+                    "midi_voicing": [41, 45, 48, 52],
+                    "notes": ["F2", "A2", "C3", "E3"],
+                    "bars": [15, 16]
+                }
+            ],
+            "description": "ii-V-I motion hints at C major resolution",
+            "dynamic": "mp → mf"
+        },
+        "darkness": {
+            "bars": [17, 18, 19, 20, 21, 22, 23, 24],
+            "chords": [
+                {
+                    "symbol": "Am",
+                    "roman": "i",
+                    "midi_voicing": [45, 48, 52, 57],
+                    "notes": ["A2", "C3", "E3", "A3"],
+                    "bars": [17, 18]
+                },
+                {
+                    "symbol": "F",
+                    "roman": "bVI",
+                    "midi_voicing": [41, 45, 48],
+                    "notes": ["F2", "A2", "C3"],
+                    "bars": [19, 20]
+                },
+                {
+                    "symbol": "Dm",
+                    "roman": "iv",
+                    "midi_voicing": [38, 41, 45],
+                    "notes": ["D2", "F2", "A2"],
+                    "bars": [21, 22]
+                },
+                {
+                    "symbol": "E7#9",
+                    "roman": "V7#9",
+                    "midi_voicing": [40, 44, 47, 50, 55],
+                    "notes": ["E2", "G#2", "B2", "D3", "G3"],
+                    "voice_leading": "G# vs G natural = moll/dur clash",
+                    "description": "The Hendrix chord — Purple Haze tension",
+                    "chromatic_event": "G# and G natural clash embodies major/minor ambiguity",
+                    "bars": [23, 24]
+                }
+            ],
+            "description": "Crisis point — the #9 contains both major and minor 3rd",
+            "dynamic": "mf → f"
+        },
+        "hope": {
+            "bars": [25, 26, 27, 28, 29, 30, 31, 32],
+            "chords": [
+                {
+                    "symbol": "C",
+                    "roman": "I (in C)",
+                    "midi_voicing": [36, 40, 43],
+                    "notes": ["C2", "E2", "G2"],
+                    "description": "First unambiguous major chord",
+                    "bars": [25, 26]
+                },
+                {
+                    "symbol": "G/B",
+                    "roman": "V (1st inv)",
+                    "midi_voicing": [35, 43, 47, 50],
+                    "notes": ["B1", "G2", "B2", "D3"],
+                    "voice_leading": "bass descends C→B (half step)",
+                    "bars": [27, 28]
+                },
+                {
+                    "symbol": "Am",
+                    "roman": "vi",
+                    "midi_voicing": [45, 48, 52],
+                    "notes": ["A2", "C3", "E3"],
+                    "voice_leading": "bass descends B→A (whole step)",
+                    "bars": [29, 30]
+                },
+                {
+                    "symbol": "G",
+                    "roman": "V",
+                    "midi_voicing": [43, 47, 50],
+                    "notes": ["G2", "B2", "D3"],
+                    "bars": [31, 32]
+                }
+            ],
+            "description": "Light breaking through — now heard in C major context",
+            "dynamic": "mf"
+        },
+        "jazz": {
+            "bars": [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48],
+            "chords": [
+                {
+                    "symbol": "Dm9",
+                    "roman": "ii9",
+                    "midi_voicing": [38, 41, 45, 48, 52],
+                    "notes": ["D2", "F2", "A2", "C3", "E3"],
+                    "description": "Full 9th voicing — sophisticated ii chord",
+                    "bars": [33, 34]
+                },
+                {
+                    "symbol": "G13",
+                    "roman": "V13",
+                    "midi_voicing": [43, 47, 50, 53, 57, 64],
+                    "notes": ["G2", "B2", "D3", "F3", "A3", "E4"],
+                    "voice_leading": "stacked tensions create maximum forward motion",
+                    "bars": [35, 36]
+                },
+                {
+                    "symbol": "Cmaj9",
+                    "roman": "Imaj9",
+                    "midi_voicing": [36, 40, 43, 47, 50],
+                    "notes": ["C2", "E2", "G2", "B2", "D3"],
+                    "voice_leading": "resolves but maintains color",
+                    "bars": [37, 38]
+                },
+                {
+                    "symbol": "A7alt",
+                    "roman": "VI7alt (→ii)",
+                    "midi_voicing": [45, 49, 51, 55, 58],
+                    "notes": ["A2", "C#3", "Eb3", "G3", "Bb3"],
+                    "voice_leading": "altered tensions create chromatic saturation",
+                    "chromatic_event": "C#, Eb, Bb all introduced — chromatic completion",
+                    "description": "Altered dominant — b5, b9 = maximum chromatic content",
+                    "bars": [39, 40]
+                },
+                {
+                    "symbol": "Dm9",
+                    "roman": "ii9",
+                    "midi_voicing": [38, 41, 45, 48, 52],
+                    "notes": ["D2", "F2", "A2", "C3", "E3"],
+                    "bars": [41, 42]
+                },
+                {
+                    "symbol": "G13",
+                    "roman": "V13",
+                    "midi_voicing": [43, 47, 50, 53, 57, 64],
+                    "notes": ["G2", "B2", "D3", "F3", "A3", "E4"],
+                    "bars": [43, 44]
+                },
+                {
+                    "symbol": "Cmaj9",
+                    "roman": "Imaj9",
+                    "midi_voicing": [36, 40, 43, 47, 50],
+                    "notes": ["C2", "E2", "G2", "B2", "D3"],
+                    "bars": [45, 46]
+                },
+                {
+                    "symbol": "Fmaj7#11",
+                    "roman": "IVmaj7#11",
+                    "midi_voicing": [41, 45, 48, 52, 54],
+                    "notes": ["F2", "A2", "C3", "E3", "B3"],
+                    "voice_leading": "Lydian color — dreamy extension",
+                    "bars": [47, 48]
+                }
+            ],
+            "description": "Full jazz exploration — ii-V-I with extensions, then secondary dominant cycle",
+            "dynamic": "f"
+        },
+        "breakthrough": {
+            "bars": [49, 50, 51, 52, 53, 54, 55, 56],
+            "chords": [
+                {
+                    "symbol": "F",
+                    "roman": "IV",
+                    "midi_voicing": [41, 45, 48],
+                    "notes": ["F2", "A2", "C3"],
+                    "bars": [49, 50]
+                },
+                {
+                    "symbol": "G",
+                    "roman": "V",
+                    "midi_voicing": [43, 47, 50],
+                    "notes": ["G2", "B2", "D3"],
+                    "bars": [51, 52]
+                },
+                {
+                    "symbol": "Am",
+                    "roman": "vi",
+                    "midi_voicing": [45, 48, 52],
+                    "notes": ["A2", "C3", "E3"],
+                    "bars": [53, 54]
+                },
+                {
+                    "symbol": "C",
+                    "roman": "I",
+                    "midi_voicing": [36, 40, 43, 48],
+                    "notes": ["C2", "E2", "G2", "C3"],
+                    "bars": [55, 56]
+                }
+            ],
+            "description": "The breakthrough — clean diatonic triads feel liberating after jazz",
+            "dynamic": "ff"
+        },
+        "resolution": {
+            "bars": [57, 58, 59, 60, 61, 62, 63, 64],
+            "chords": [
+                {
+                    "symbol": "C",
+                    "roman": "I",
+                    "midi_voicing": [36, 40, 43, 48],
+                    "notes": ["C2", "E2", "G2", "C3"],
+                    "bars": [57, 58]
+                },
+                {
+                    "symbol": "G",
+                    "roman": "V",
+                    "midi_voicing": [43, 47, 50],
+                    "notes": ["G2", "B2", "D3"],
+                    "bars": [59, 60]
+                },
+                {
+                    "symbol": "Am",
+                    "roman": "vi",
+                    "midi_voicing": [45, 48, 52],
+                    "notes": ["A2", "C3", "E3"],
+                    "bars": [61, 62]
+                },
+                {
+                    "symbol": "F",
+                    "roman": "IV",
+                    "midi_voicing": [41, 45, 48],
+                    "notes": ["F2", "A2", "C3"],
+                    "bars": [63, 64]
+                }
+            ],
+            "description": "I-V-vi-IV — the pop resolution, now earned",
+            "dynamic": "mf"
+        },
+        "celebration": {
+            "bars": [65, 66, 67, 68, 69, 70, 71, 72],
+            "chords": [
+                {
+                    "symbol": "Cmaj7",
+                    "roman": "Imaj7",
+                    "midi_voicing": [36, 40, 43, 47],
+                    "notes": ["C2", "E2", "G2", "B2"],
+                    "bars": [65, 66]
+                },
+                {
+                    "symbol": "Fmaj7",
+                    "roman": "IVmaj7",
+                    "midi_voicing": [41, 45, 48, 52],
+                    "notes": ["F2", "A2", "C3", "E3"],
+                    "bars": [67, 68]
+                },
+                {
+                    "symbol": "G",
+                    "roman": "V",
+                    "midi_voicing": [43, 47, 50],
+                    "notes": ["G2", "B2", "D3"],
+                    "bars": [69, 70]
+                },
+                {
+                    "symbol": "C",
+                    "roman": "I",
+                    "midi_voicing": [36, 40, 43, 48],
+                    "notes": ["C2", "E2", "G2", "C3"],
+                    "bars": [71, 72]
+                }
+            ],
+            "description": "Triumphant ending — warm 7ths, fadeout on home",
+            "dynamic": "mf → mp"
+        }
+    },
+    "sections": {
+        "uncertainty": {
+            "bars": 8,
+            "bar_range": [1, 8],
+            "density": 0.3,
+            "instruments": ["pad", "bass"],
+            "mood": "questioning",
+            "dynamic": "mp",
+            "description": "Sparse opening — minor atmosphere, chromatic bass descent"
+        },
+        "searching": {
+            "bars": 8,
+            "bar_range": [9, 16],
+            "density": 0.5,
+            "instruments": ["pad", "bass", "piano", "hihat"],
+            "mood": "exploratory",
+            "dynamic": "mp → mf",
+            "description": "Adding movement — ii-V-I hints at resolution"
+        },
+        "darkness": {
+            "bars": 8,
+            "bar_range": [17, 24],
+            "density": 0.6,
+            "instruments": ["pad", "bass", "piano", "kick", "snare"],
+            "mood": "tense",
+            "dynamic": "mf → f",
+            "description": "The crisis point — Hendrix chord embodies major/minor clash"
+        },
+        "hope": {
+            "bars": 8,
+            "bar_range": [25, 32],
+            "density": 0.5,
+            "instruments": ["pad", "bass", "sequence", "hihat"],
+            "mood": "optimistic",
+            "dynamic": "mf",
+            "description": "Light breaking through — first unambiguous major"
+        },
+        "jazz": {
+            "bars": 16,
+            "bar_range": [33, 48],
+            "density": 0.7,
+            "instruments": ["piano", "bass", "kick", "hihat", "rimshot"],
+            "mood": "sophisticated",
+            "dynamic": "f",
+            "description": "Full jazz exploration — extended harmonies complete the chromatic set"
+        },
+        "breakthrough": {
+            "bars": 8,
+            "bar_range": [49, 56],
+            "density": 0.8,
+            "instruments": ["pad", "bass", "piano", "kick", "snare", "sequence"],
+            "mood": "triumphant",
+            "dynamic": "ff",
+            "description": "The moment of clarity — clean triads feel liberating"
+        },
+        "resolution": {
+            "bars": 8,
+            "bar_range": [57, 64],
+            "density": 0.7,
+            "instruments": ["pad", "bass", "piano", "kick", "hihat"],
+            "mood": "peaceful",
+            "dynamic": "mf",
+            "description": "I-V-vi-IV — the pop resolution, now earned"
+        },
+        "celebration": {
+            "bars": 8,
+            "bar_range": [65, 72],
+            "density": 0.6,
+            "instruments": ["pad", "bass", "sequence"],
+            "mood": "joyful",
+            "dynamic": "mf → mp",
+            "description": "Warm fadeout on home"
+        }
+    },
+    "arrangement": {
+        "structure": "narrative_arc",
+        "total_bars": 72,
+        "has_strict_sections": true,
+        "development": "chromatic_journey",
+        "transitions": "smooth_harmonic",
+        "dynamic_arc": {
+            "shape": "mp → f → ff → mf → mp",
+            "peak": "breakthrough (bars 49-56)",
+            "description": "Builds through jazz section, peaks at breakthrough, settles into resolution"
+        }
+    },
+    "mixing": {
+        "reverb": { "size": 0.6, "mix": 0.3, "character": "studio_room" },
+        "stereo_width": 0.75,
+        "piano_position": "center_slight_left",
+        "bass_position": "center",
+        "pad_position": "wide_stereo"
+    }
+}

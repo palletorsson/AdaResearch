@@ -1,0 +1,129 @@
+{
+  "id": "morph24_bio_cathedral_perch",
+  "family": "bio_furniture",
+  "notes": "Extreme cathedral perch: a narrow operative seat with giant rear buttress, stacked front plinths, and a thin surveillance arm above.",
+  "camera_yaw": 0.68,
+  "camera_pitch": 0.36,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.92,
+      0.9,
+      0.74
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "cathedral_buttress",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.18,
+        "scale": 0.84,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          1.02,
+          -0.12
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "cathedral_side_braces",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.44,
+        "scale": 0.42,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.18,
+          0.16
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "cathedral_steps",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 1,
+        "rows": 4,
+        "select": "all",
+        "length": 0.22,
+        "scale": 0.66
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "cathedral_arm",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.22,
+        "scale": 0.1,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.34,
+          0.96,
+          0.28
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.3
+    },
+    {
+      "id": "cathedral_arm_tip",
+      "when": {
+        "role": "support",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.32,
+        "scale": 0.22,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.2,
+          0.12,
+          -0.1
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

@@ -1,0 +1,102 @@
+{
+  "id": "morph43_creature_beacon_heron",
+  "family": "scifi_creatures",
+  "notes": "Creature pass: the beacon tower becomes a narrow heron-like sentry with long legs, a high neck, and one signal crown as a head.",
+  "camera_yaw": 0.76,
+  "camera_pitch": 0.38,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.62,
+      0.72,
+      0.56
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 8,
+  "rules": [
+    {
+      "id": "beacon_heron_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 1,
+        "select": "all",
+        "length": 0.46,
+        "scale": 0.18
+      },
+      "child_role": "support",
+      "budget_factor": 0.24
+    },
+    {
+      "id": "beacon_heron_neck",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.92,
+        "scale": 0.2,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.46,
+          0.12
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.22
+    },
+    {
+      "id": "beacon_heron_head",
+      "when": {
+        "role": "support",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 2,
+        "length": 0.16,
+        "scale": 0.96
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "beacon_heron_tail",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.22,
+        "scale": 0.34,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.08,
+          -0.08
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

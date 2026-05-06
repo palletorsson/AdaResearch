@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://eikrp6woost1"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/11_turret_targeting/TurretTargeting.gd" id="1_main"]
+
+[node name="TurretTargeting" type="Node3D"]
+script = ExtResource("1_main")
+turret_position = Vector3(0, 0, 0)
+dropper_offset = Vector3(0, 3, 2)
+drop_interval = 2.5
+max_balls = 4
+auto_drop = true
+detection_range = 8.0
+burn_time = 0.3
+laser_color = Color(1, 0.05, 0, 1)
+show_stats = true

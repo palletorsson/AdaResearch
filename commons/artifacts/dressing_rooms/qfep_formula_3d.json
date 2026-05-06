@@ -1,0 +1,27 @@
+{
+	"approach": "south",
+	"artifact_offset": [0.0, 0.25, 0.0],
+	"clearance": [3.0, 3.0, 5.0],
+	"exit": "north",
+	"extras": [
+		{ "offset": [-1.0, 0.0, 0.0], "text": "QFE = F − λE(S) + φΔE(S,t)", "type": "3t" },
+		{ "offset": [0.0, 0.0, 0.0], "params": "3:1", "type": "el" }
+	],
+	"footing": {
+		"anchor": [1.0, 1.0],
+		"tiles": [[1.0, 1.0, 1.0], [1.0, 2.0, 1.0], [1.0, 1.0, 1.0]]
+	},
+	"footprint": [3.0, 3.0, 3.0],
+	"lookup_name": "qfep_formula_3d",
+	"rotations": ["0"],
+
+	"vitrine_grammar": {
+		"select_from": "sequence:qfeplaboratory",
+		"where":       { "name_contains": "slider" },
+		"limit":       4,
+		"layout":      "ring",
+		"radius":      0.42,
+		"scale":       0.35,
+		"exclude_self": true
+	}
+}

@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyj5k8px2vq7h"]
+
+[ext_resource type="PackedScene" uid="uid://c7jy4m8vxk2nf" path="res://commons/infoboards_3d/base/HandheldInfoBoard.tscn" id="1_handheld"]
+[ext_resource type="PackedScene" uid="uid://du5oglwhp06g" path="res://commons/infoboards_3d/boards/RandomWalk/RandomWalkInfoBoardUI.tscn" id="2_ui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_randomwalk"]
+resource_local_to_scene = true
+size = Vector3(1.125, 0.84375, 0.09)
+
+[sub_resource type="BoxMesh" id="BoxMesh_randomwalk"]
+resource_local_to_scene = true
+size = Vector3(1.125, 0.84375, 0.09)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_randomwalk"]
+resource_local_to_scene = true
+resource_name = "FrameMaterial"
+albedo_color = Color(0.15, 0.15, 0.2, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t6w4r"]
+resource_local_to_scene = true
+size = Vector3(1.035, 0.776, 0.0410164)
+
+[node name="RandomWalkInfoBoard" instance=ExtResource("1_handheld")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="BoardFrame" index="0"]
+shape = SubResource("BoxShape3D_randomwalk")
+
+[node name="MeshInstance3D" parent="BoardFrame" index="1"]
+mesh = SubResource("BoxMesh_randomwalk")
+
+[node name="Viewport2Din3D" parent="BoardFrame/TabletFrame" index="0"]
+scene = ExtResource("2_ui")
+scene_properties_keys = PackedStringArray("RandomWalkInfoBoard.gd", "AlgorithmInfoBoardBase.gd", "board_title", "category_color", "auto_advance", "auto_advance_delay")
+
+[node name="Frame" parent="BoardFrame/TabletFrame" index="1"]
+mesh = SubResource("BoxMesh_randomwalk")
+surface_material_override/0 = SubResource("StandardMaterial3D_randomwalk")
+
+[node name="CollisionShape3D" parent="InteractionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999997, 0, 0, 0, 0.999997, 0, 0, 0.0434232)
+shape = SubResource("BoxShape3D_t6w4r")

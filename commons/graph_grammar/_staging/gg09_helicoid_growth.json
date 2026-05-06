@@ -1,0 +1,38 @@
+{
+  "id": "gg09_helicoid_growth",
+  "notes": "Helicoid displacement \u00e2\u20ac\u201d radius-growing helix tower.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.1
+  },
+  "iterations": 12,
+  "materials": {
+    "default": "bark"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.3,
+        "spread_deg": 5,
+        "radius_decay": 0.93
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "helicoid",
+        "t_source": "depth",
+        "t_scale": 0.5,
+        "amp": 1.0
+      }
+    }
+  ]
+}

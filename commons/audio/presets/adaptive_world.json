@@ -1,0 +1,164 @@
+{
+    "description": "Stage 15: Machine learning feel. Sounds that evolve over time. Subtle mutations. The world learns.",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.APHEX_TWIN_MODULAR",
+            "volume_db": -14,
+            "bus": "Melody"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AUTOMATA_RHYTHM",
+            "volume_db": -12,
+            "bus": "Rhythm"
+        },
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -18,
+            "bus": "Ambient",
+            "parameters": {
+                "entropy": 0.55,
+                "queer_factor": 0.6
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.LIFE_HARMONY",
+            "volume_db": -20,
+            "bus": "Harmony"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -26,
+            "bus": "DeepAmbient"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": ["AudioSynthesizer.RULE_CHANGE_BURST"],
+            "interval_range": [6.0, 18.0],
+            "volume_range": [-16, -10],
+            "bus": "Glitch"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.GENERATION_SWEEP"],
+            "interval_range": [10.0, 28.0],
+            "volume_range": [-18, -12],
+            "bus": "FX"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.GRID_PULSE", "SyntheticSoundGenerator.detection_sound"],
+            "interval_range": [5.0, 15.0],
+            "volume_range": [-20, -14],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 275,
+                    "feedback": 0.4,
+                    "wet": 0.3
+                },
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.6,
+                    "depth": 0.2,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "Rhythm": {
+            "effects": [
+                {
+                    "type": "Compressor",
+                    "threshold_db": -12.0,
+                    "ratio": 3.5
+                },
+                {
+                    "type": "EQ",
+                    "low_gain_db": 1.0,
+                    "mid_gain_db": 2.0,
+                    "high_gain_db": -1.0
+                }
+            ]
+        },
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.55,
+                    "wet": 0.4,
+                    "damping": 0.35
+                }
+            ]
+        },
+        "Harmony": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.45,
+                    "damping": 0.3
+                },
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.25,
+                    "depth": 0.15,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.75,
+                    "wet": 0.55,
+                    "damping": 0.25
+                }
+            ]
+        },
+        "Glitch": {
+            "effects": [
+                {
+                    "type": "Compressor",
+                    "threshold_db": -8.0,
+                    "ratio": 5.0
+                },
+                {
+                    "type": "EQ",
+                    "low_gain_db": -4.0,
+                    "mid_gain_db": 4.0,
+                    "high_gain_db": 3.0
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 350,
+                    "feedback": 0.35,
+                    "wet": 0.25
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.65,
+                    "wet": 0.45,
+                    "damping": 0.3
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.35,
+                    "damping": 0.4
+                }
+            ]
+        }
+    }
+}

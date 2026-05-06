@@ -1,0 +1,574 @@
+{
+  "sequence": "swarmintelligence",
+  "generated_at": "2026-04-29T11:23:48.128222Z",
+  "runs": [
+    {
+      "base": "SwarmIntelligence_PhysarumColony",
+      "variants": [
+        {
+          "id": "SwarmIntelligence_PhysarumColony_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.645,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "SwarmIntelligence_PhysarumColony_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 4,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SwarmIntelligence_PhysarumColony_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.451,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "SwarmIntelligence_FlowFields",
+      "variants": [
+        {
+          "id": "SwarmIntelligence_FlowFields_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.612,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "SwarmIntelligence_FlowFields_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.997,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SwarmIntelligence_FlowFields_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.416,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "SwarmIntelligence_Boids_Algorithm",
+      "variants": [
+        {
+          "id": "SwarmIntelligence_Boids_Algorithm_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.604,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "SwarmIntelligence_Boids_Algorithm_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SwarmIntelligence_Boids_Algorithm_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.416,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "variants": [
+        {
+          "id": "SwarmIntelligence_Agent_Based_Modeling_ABM_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.605,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "SwarmIntelligence_Agent_Based_Modeling_ABM_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SwarmIntelligence_Agent_Based_Modeling_ABM_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.398,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "SwarmIntelligence_Ant_Colony_Optimization",
+      "variants": [
+        {
+          "id": "SwarmIntelligence_Ant_Colony_Optimization_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.59,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "SwarmIntelligence_Ant_Colony_Optimization_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 4,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SwarmIntelligence_Ant_Colony_Optimization_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.395,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "variants": [
+        {
+          "id": "SwarmIntelligence_Particle_Swarm_Optimization_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.58,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "SwarmIntelligence_Particle_Swarm_Optimization_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 4,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SwarmIntelligence_Particle_Swarm_Optimization_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.764,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "variants": [
+        {
+          "id": "SwarmIntelligence_Swarm_Intelligence_Algorithms_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.592,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "SwarmIntelligence_Swarm_Intelligence_Algorithms_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SwarmIntelligence_Swarm_Intelligence_Algorithms_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.766,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_Swarm",
+      "variants": [
+        {
+          "id": "Chamber_Swarm_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.581,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Chamber_Swarm_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.998,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "Chamber_Swarm_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.715,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    }
+  ]
+}

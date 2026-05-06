@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3irgejynod06"]
+
+[ext_resource type="Script" uid="uid://c6dj1dkxwi6l5" path="res://algorithms/randomness/RandomRotateRandomXYZ/RandomRotateRandomXYZ.gd" id="1_iwdo8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iwdo8"]
+
+[node name="RandomRotateRandomXyz" type="Node3D"]
+script = ExtResource("1_iwdo8")
+selection_mode = 1
+bell_center = Vector3(4, 1, 4)
+bell_radius = 3.0
+noise_source = SubResource("FastNoiseLite_iwdo8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9805975)

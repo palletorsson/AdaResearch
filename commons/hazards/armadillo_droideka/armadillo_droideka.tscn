@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/hazards/armadillo_droideka/armadillo_droideka.gd" id="1_armadillo"]
+
+[node name="ArmadilloDroideka" type="CharacterBody3D"]
+script = ExtResource("1_armadillo")

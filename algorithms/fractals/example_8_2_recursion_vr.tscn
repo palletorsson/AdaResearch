@@ -4,6 +4,11 @@
 
 [node name="Example_8_2_Recursion" type="Node3D"]
 script = ExtResource("1_script")
+max_depth = 6
+size_reduction = 0.5
+initial_size = 1.0
+show_frame = true
+frame_thickness = 0.03
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 2)

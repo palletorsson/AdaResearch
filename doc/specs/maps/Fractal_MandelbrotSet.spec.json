@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_MandelbrotSet",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 9,
+    "d": 9
+  },
+  "signature": "mandelbrot_set implements the escape-time visualization of M; mandelbrot_dive enables infinite zoom into the boundary filaments; dark_sphere anchors.",
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.027,
+  "breath_zones": [
+    {
+      "size": 71,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 9
+      },
+      "centroid": [
+        4.112676056338028,
+        3.647887323943662
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "mandelbrot_set"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 74,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

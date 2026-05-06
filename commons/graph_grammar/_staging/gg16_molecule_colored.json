@@ -1,0 +1,58 @@
+{
+  "id": "gg16_molecule_colored",
+  "notes": "Same chandelier grammar \u00e2\u2020\u2019 molecule diagram. Big colored emissive spheres at every node (including joints) with colored rods between. Ada's teaching aesthetic.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.015
+  },
+  "iterations": 1,
+  "render_mode": "chandelier",
+  "camera_pitch": 0.1,
+  "camera_yaw": 0.6,
+  "chandelier": {
+    "edge_radius": 0.02,
+    "edge_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "edge_metallic": 0.2,
+    "edge_roughness": 0.4,
+    "bulb_radius": 0.12,
+    "bulb_color": [
+      0.2,
+      0.75,
+      0.9
+    ],
+    "bulb_emission": 1.2,
+    "bulb_roughness": 0.3,
+    "show_joints": true,
+    "joint_radius": 0.08
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 4,
+        "length": 0.5,
+        "spread_deg": 70,
+        "radius_decay": 0.95
+      }
+    },
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.35,
+        "spread_deg": 55,
+        "radius_decay": 0.95
+      }
+    }
+  ]
+}

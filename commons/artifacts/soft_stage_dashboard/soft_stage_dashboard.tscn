@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/soft_stage_dashboard/soft_stage_dashboard.gd" id="1_script"]
+
+[node name="SoftStageDashboard" type="Node3D"]
+script = ExtResource("1_script")

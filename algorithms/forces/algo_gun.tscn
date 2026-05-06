@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://algo_gun_001"]
+
+[ext_resource type="Script" path="res://algorithms/forces/algo_gun.gd" id="1_algo"]
+
+[node name="AlgoGun" type="Node3D"]
+script = ExtResource("1_algo")
+attraction_radius = 1.5
+attraction_strength = 15.0
+capture_radius = 0.2
+max_captured_objects = 20
+captured_scale = 0.3
+disable_gravity_on_attraction = true
+launch_force = 15.0
+launch_spread = 0.1
+show_force_field = true
+force_field_color = Color(0.4, 0.9, 1, 0.3)
+show_gun_model = true
+gun_color = Color(0.6, 0.9, 1, 1)
+trigger_button_action = "trigger"
+debug = false
+can_capture_grid_agents = true
+agent_detection_radius = 3.0
+agent_orbit_radius = 0.3
+agent_orbit_speed = 2.0
+grid_agent_task_duration = 30.0
+

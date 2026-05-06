@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "id": "k_bass",
+    "name": "K-Bass",
+    "lineage": "yunji, MAR VISTA, Coziest, h4rdy, 7ip7o3 — SCR × ScreaM Records",
+    "era": "2024-present",
+    "bpm": { "min": 160, "max": 180, "typical": 170 },
+    "lambda": 0.5
+  },
+
+  "identity": {
+    "token": "Reese sub as lead + chopped breaks + metallic stabs + drop-based dynamics",
+    "two_second_test": "Physical sub pressure, jungle velocity, dramatic drops",
+    "emotional_truth": "Seoul underground exporting UK bass grammar — pressure and release"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "sub", "stab", "atmosphere", "break"],
+
+  "forbidden": [
+    "melody_led",
+    "verse_chorus",
+    "vocal_hooks",
+    "4_on_floor_monotony",
+    "kpop_structure",
+    "predictable_drops"
+  ],
+
+  "rhythm": {
+    "quantize": "strict",
+    "humanize_ms": 3,
+    "swing_pct": 0,
+    "pattern": "jungle_syncopated"
+  },
+
+  "harmony": {
+    "scales": ["minor"],
+    "voicings": "minimal_textural"
+  },
+
+  "fx": {
+    "saturation": true,
+    "compression": "heavy"
+  },
+
+  "transitions": {
+    "crossfade_s": 0.5
+  },
+
+  "sections": {
+    "intro": ["atmosphere"],
+    "build": ["atmosphere", "hihat", "sub"],
+    "drop1": ["kick", "snare", "hihat", "sub", "stab", "break"],
+    "breakdown": ["atmosphere"],
+    "drop2": ["kick", "snare", "hihat", "sub", "stab", "break"],
+    "switchup": ["kick", "snare", "hihat", "sub", "break"],
+    "outro": ["atmosphere", "sub"]
+  }
+}

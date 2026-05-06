@@ -1,0 +1,141 @@
+{
+  "id": "morph_auto_drag_pageant_02",
+  "family": "drag_pageant",
+  "notes": "Auto-generated pageant drag candidate.",
+  "camera_yaw": 0.746,
+  "camera_pitch": 0.281,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.757,
+      1.423,
+      0.625
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "pageant_to_gown",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.929,
+        "scale": 1.363
+      },
+      "child_role": "garment",
+      "budget_factor": 0.587
+    },
+    {
+      "id": "pageant_train",
+      "when": {
+        "role": "garment",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.28
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.896,
+        "scale": 1.072,
+        "normal_bias": 1.0,
+        "bitangent_bias": 0.669,
+        "world_bias": [
+          0.076,
+          -0.263,
+          -0.428
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.22
+    },
+    {
+      "id": "pageant_to_shoulders",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.231,
+        "scale": 0.476,
+        "normal_bias": 1.0,
+        "tangent_bias": 0.204,
+        "world_bias": [
+          0.0,
+          0.12,
+          0.0
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "pageant_to_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.255,
+        "scale": 0.474
+      },
+      "child_role": "hair",
+      "budget_factor": 0.59
+    },
+    {
+      "id": "pageant_hair_sweep",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.24
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.147,
+        "scale": 0.836,
+        "normal_bias": 1.0,
+        "tangent_bias": 0.18,
+        "world_bias": [
+          0.108,
+          0.46,
+          0.076
+        ]
+      },
+      "child_role": "hair",
+      "budget_factor": 0.34
+    },
+    {
+      "id": "pageant_wig",
+      "when": {
+        "role": "hair",
+        "min_depth": 2,
+        "max_depth": 2,
+        "min_budget": 0.12
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 3,
+        "length": 0.186,
+        "scale": 1.108
+      },
+      "child_role": "hair",
+      "budget_factor": 0.0
+    }
+  ]
+}

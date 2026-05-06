@@ -1,0 +1,5 @@
+Two terrains. Same algorithm, different noise. The flat landscape rolls gently — marching cubes tracing where density crosses zero, converting a scalar field into walkable ground. The overhang landscape breaks the contract. Rock juts sideways, canopies form from nothing, gravity loses its vote. Same threshold, same 256-case lookup, but the noise field now curves back on itself.
+
+Heightmaps can't do this. They enforce a rule: one height per point, one surface per column. Marching cubes refuses that constraint. When the field says solid-above-empty-above-solid, it builds exactly that. Overhangs, arches, shelves of stone floating on math.
+
+Flat terrain is landscape as floor. Overhang terrain is landscape as architecture — structure that folds over itself, where ground becomes ceiling becomes ground again.

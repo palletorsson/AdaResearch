@@ -22,7 +22,7 @@ class WFCLandscapeTile:
 	var position: Vector3
 	var mesh_instance: MeshInstance3D
 	
-	func _init(pos: Vector3):
+	func _init(pos: Vector3) -> void:
 		position = pos
 		possible_states.assign([TileType.EMPTY, TileType.ROCK, TileType.CRYSTAL, TileType.VOID, TileType.BRIDGE])
 
@@ -35,12 +35,12 @@ var is_generating: bool = true
 # Materials for different tile types
 var materials: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	setup_camera()
 	initialize_grid()
 	
-func setup_materials():
+func setup_materials() -> void:
 	# Rock material - dark gray
 	var rock_mat = StandardMaterial3D.new()
 	rock_mat.albedo_color = Color(0.3, 0.3, 0.3)
@@ -60,11 +60,11 @@ func setup_materials():
 	bridge_mat.roughness = 0.6
 	materials[TileType.BRIDGE] = bridge_mat
 
-func setup_camera():
+func setup_camera() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(GRID_SIZE, GRID_SIZE * 0.8, GRID_SIZE * 1.2)
 	add_child(camera)
-	camera.look_at(Vector3(GRID_SIZE/2, 0, GRID_SIZE/2))
+	camera.look_at_from_position(camera.position, Vector3(GRID_SIZE/2, 0, GRID_SIZE/2), Vector3.UP)
 	
 	# Add some ambient lighting
 	var env = Environment.new()
@@ -79,9 +79,9 @@ func setup_camera():
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(10, 10, 10)
 	add_child(light)
-	light.look_at(Vector3.ZERO, Vector3.UP)
+	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid.resize(GRID_SIZE)
 	for x in range(GRID_SIZE):
 		grid[x] = []
@@ -107,7 +107,7 @@ func initialize_grid():
 			tile.mesh_instance = mesh_instance
 			add_child(mesh_instance)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not is_generating:
 		return
 		
@@ -116,7 +116,7 @@ func _process(delta):
 		collapse_timer = 0.0
 		collapse_next_tile()
 
-func collapse_next_tile():
+func collapse_next_tile() -> void:
 	# Find tile with minimum entropy (fewest possible states)
 	var min_entropy = 999
 	var candidates: Array[Vector2i] = []
@@ -143,7 +143,7 @@ func collapse_next_tile():
 	collapse_tile(chosen.x, chosen.y)
 	propagate_constraints(chosen.x, chosen.y)
 
-func collapse_tile(x: int, z: int):
+func collapse_tile(x: int, z: int) -> void:
 	var tile = grid[x][z]
 	if tile.collapsed:
 		return
@@ -157,7 +157,7 @@ func collapse_tile(x: int, z: int):
 	tile.collapsed = true
 	update_tile_visual(tile)
 
-func update_tile_visual(tile: WFCLandscapeTile):
+func update_tile_visual(tile: WFCLandscapeTile) -> void:
 	var mesh_instance = tile.mesh_instance
 	
 	match tile.final_state:
@@ -185,7 +185,7 @@ func update_tile_visual(tile: WFCLandscapeTile):
 			mesh_instance.material_override = materials[TileType.BRIDGE]
 			mesh_instance.position.y = 0.5
 
-func propagate_constraints(x: int, z: int):
+func propagate_constraints(x: int, z: int) -> void:
 	var collapsed_tile = grid[x][z]
 	var neighbors = get_neighbors(x, z)
 	
@@ -239,3 +239,12 @@ func get_allowed_adjacent_states(state: TileType) -> Array[TileType]:
 			return [TileType.BRIDGE, TileType.EMPTY, TileType.ROCK, TileType.VOID]
 		_:
 			return [TileType.EMPTY]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

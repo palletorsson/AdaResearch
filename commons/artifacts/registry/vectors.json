@@ -1,0 +1,6468 @@
+{
+	"artifacts": {
+		"CoordinateSystem3M": {
+			"capacity": "FEEL orientation as embodied direction by standing inside the coordinate frame",
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Stand inside the coordinate system. Three meter-long axes \u2014 X red, Y green, Z blue \u2014 establish the right-handed frame that every 3D operation assumes. A gyroscope gadget shows your orientation relative to the axes. The arbitrary nature of axis conventions becomes visible: right-handed vs left-handed, Y-up vs Z-up are choices, not laws.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Linear algebra fundamentals, 3D graphics programming",
+			"include_in_map_data": true,
+			"interactions": [
+				"observe axis colors (X=red, Y=green, Z=blue)",
+				"read info panel",
+				"interact with gyroscope gadget"
+			],
+			"lookup_name": "CoordinateSystem3M",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"testmaps"
+			],
+			"name": "CoordinateSystem3M",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Pure F \u2014 the coordinate system is the most fundamental structure, the frame from which all measurement begins. Without agreed axes, no vector has components, no transform has a matrix.",
+			"scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
+			"size_group": "compact",
+			"tags": [
+				"coordinate_system",
+				"axes",
+				"orientation",
+				"right_hand_rule",
+				"3d",
+				"interactive",
+				"vectors"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"vectors",
+					"sequence",
+					"gyroscope",
+					"gadget",
+					"interactive"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.76,
+					3.22,
+					3.27
+				],
+				"aabb_center": [
+					0.72,
+					1.49,
+					1.47
+				],
+				"grid_cells": [
+					5.0,
+					4.0
+				],
+				"max_dimension_m": 4.76,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"ForceMagnitudeDemo": {
+			"capacity": "FEEL that force and acceleration are the same shape by dragging an arrow and watching the ball respond proportionally",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Drag the force arrow longer and the ball accelerates harder. F = ma made visceral \u2014 magnitude is felt, not read. The ball's trajectory traces the force's history. Reset with R, freeze with Space. Contrasts with WorkEnergyDemo (same force, different measure); feeds into CombinedForcesDemo (multiple forces).",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Linear algebra fundamentals, physics simulation",
+			"include_in_map_data": true,
+			"interactions": [
+				"drag force arrow to change magnitude and direction",
+				"press R to reset ball",
+				"press Space to freeze motion"
+			],
+			"lookup_name": "ForceMagnitudeDemo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "ForceMagnitudeDemo",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Classical F \u2014 force as deterministic law. Drag the arrow, the ball obeys. No randomness, no emergence. Pure Newtonian causality where every input produces a proportional output.",
+			"scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
+			"size_group": "compact",
+			"tags": [
+				"force",
+				"magnitude",
+				"acceleration",
+				"newton",
+				"f_equals_ma",
+				"interactive",
+				"vectors",
+				"physics"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"point",
+					"forces",
+					"sequence",
+					"combined_forces_demo",
+					"multiple"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.86,
+					0.33,
+					0.35
+				],
+				"aabb_center": [
+					0.26,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.86,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorAddition": {
+			"capacity": "SEE that the ball knows only the sum of all forces, not the individual forces themselves",
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Two force arrows, one ball, one truth: nature does not apply forces one at a time. Drag F1 and F2 independently \u2014 the yellow net force arrow updates as their vector sum, and the ball accelerates along it. Cancellation when forces oppose. Diagonal trajectories from perpendicular forces. Superposition as felt experience.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Linear algebra fundamentals, vector spaces",
+			"include_in_map_data": true,
+			"interactions": [
+				"drag red F1 vector",
+				"drag orange F2 vector",
+				"observe yellow net force",
+				"press R to reset",
+				"press Space to freeze"
+			],
+			"lookup_name": "VectorAddition",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "VectorAddition",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-composition \u2014 two deterministic forces combine into one deterministic result. Superposition is linearity made visible. The net force IS the sum, no approximation, no loss.",
+			"scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector_addition",
+				"superposition",
+				"forces",
+				"net_force",
+				"interactive",
+				"vectors",
+				"physics"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.24,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					0.0,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.24,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorBasics": {
+			"capacity": "UNDERSTAND that a vector is not a number and not a point \u2014 it is a displacement carrying both how far and which way",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grab an arrow and stretch it. Watch magnitude, unit vector, and components all update as one system. v = |v| * v-hat \u2014 a vector is magnitude times direction, decomposed into (x,y,z) components along the axes. The magnitude arc sweeps from the x-axis. The spring scale responds to vector length like a physical instrument.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Linear algebra fundamentals, vector decomposition",
+			"include_in_map_data": true,
+			"interactions": [
+				"grab and drag vector endpoint",
+				"observe component arrows along axes",
+				"read spring scale gadget",
+				"toggle component visibility"
+			],
+			"lookup_name": "VectorBasics",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "VectorBasics",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Pure F-decomposition \u2014 breaking a single quantity into orthogonal components. The vector IS its components, and the components ARE the vector. No information lost, no approximation.",
+			"scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector",
+				"magnitude",
+				"direction",
+				"components",
+				"unit_vector",
+				"decomposition",
+				"interactive",
+				"vectors"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~36"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"point",
+					"vector",
+					"artifacts",
+					"basis_vectors_rig",
+					"decomposition"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.22,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					-0.05,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.22,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorCrossProduct": {
+			"capacity": "FEEL that torque is not a force but the force's opinion about rotation, measured by how far off-center and how perpendicular it acts",
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Drag the force and its application point. The purple torque vector pops out perpendicular to both, spinning the ball via the right-hand rule. tau = r x F \u2014 the cross product. Zero torque when force passes through center (r parallel to F). Maximum torque when perpendicular to the lever arm.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Linear algebra fundamentals, cross product, angular momentum",
+			"include_in_map_data": true,
+			"interactions": [
+				"drag cyan position handle (lever arm)",
+				"drag red force handle",
+				"observe purple torque arrow",
+				"watch ball spin"
+			],
+			"lookup_name": "VectorCrossProduct",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "VectorCrossProduct",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-perpendicularity \u2014 the cross product extracts the component of interaction that is orthogonal to both inputs. It measures not agreement (that is dot product) but the capacity for rotation.",
+			"scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+			"size_group": "compact",
+			"tags": [
+				"cross_product",
+				"torque",
+				"rotation",
+				"right_hand_rule",
+				"perpendicular",
+				"interactive",
+				"vectors",
+				"physics"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.27,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					-0.08,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.27,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorDotProduct": {
+			"capacity": "SEE that pushing sideways does nothing \u2014 work is the component of force that agrees with motion",
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Push a ball and watch the work meter tick up. Push perpendicular and it stays at zero. W = F . d = |F||d|cos(theta) \u2014 the dot product made visceral. The meter turns green for positive work, red for negative, yellow for zero. Total work accumulates as a running dot-product integrator over the path.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Linear algebra fundamentals, dot product, work-energy theorem",
+			"include_in_map_data": true,
+			"interactions": [
+				"drag force vector",
+				"observe work meter (green/red/yellow)",
+				"read angle display",
+				"press R to reset total work"
+			],
+			"lookup_name": "VectorDotProduct",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "VectorDotProduct",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-projection \u2014 the dot product extracts the component of one vector that agrees with another. It measures alignment. Perpendicular forces do zero work because they have zero agreement with the direction of motion.",
+			"scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+			"size_group": "compact",
+			"tags": [
+				"dot_product",
+				"work",
+				"energy",
+				"projection",
+				"alignment",
+				"interactive",
+				"vectors",
+				"physics"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					1.05,
+					0.66
+				],
+				"aabb_center": [
+					-0.11,
+					0.47,
+					0.06
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorFieldFlow": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "F(p) = swirl(p) - radial(p). A vector field assigns a direction to every point. The particle reads the field and follows.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorFieldFlow",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"noise"
+			],
+			"name": "VectorFieldFlow",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~192"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"version",
+					"force_field_visualizer",
+					"concept",
+					"different",
+					"rendering"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.1,
+					1.6,
+					1.6
+				],
+				"aabb_center": [
+					0.0,
+					0.74,
+					0.74
+				],
+				"grid_cells": [
+					4.0,
+					2.0
+				],
+				"max_dimension_m": 3.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorForces": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorForces",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				20,
+				1,
+				20
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorForces",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "VectorForces",
+			"parameters": {
+				"footprint": [
+					20,
+					1,
+					20
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.49,
+					3.0,
+					0.82
+				],
+				"aabb_center": [
+					0.11,
+					-0.51,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorMotion": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorMotion",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				4,
+				4,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorMotion",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "VectorMotion",
+			"parameters": {
+				"footprint": [
+					4,
+					4,
+					4
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "l_system_turtle",
+					"primitives": [],
+					"operations": [
+						"string_rewrite",
+						"turtle_interpret",
+						"emit_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					0.08,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorProjectionReflection": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorProjectionReflection",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorProjectionReflection",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "VectorProjectionReflection",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.98,
+					1.02,
+					1.98
+				],
+				"aabb_center": [
+					0.0,
+					0.48,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.98,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorSubtraction": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorSubtraction",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorSubtraction",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "VectorSubtraction",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.34,
+					1.03,
+					0.82
+				],
+				"aabb_center": [
+					-0.11,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.34,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorThrowing": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "p(t) = p0 + v0*t + 0.5*g*t^2. Projectile motion. Horizontal = constant velocity; vertical = constant acceleration. Your hand writes the initial conditions.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				4,
+				5
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorThrowing",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "VectorThrowing",
+			"parameters": {
+				"footprint": [
+					1,
+					4,
+					5
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn",
+			"size_group": "environment",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"projectile",
+					"physics",
+					"subtraction",
+					"normalization",
+					"hl_turret_vectors"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.3,
+					3.3,
+					1.43
+				],
+				"aabb_center": [
+					0.0,
+					-0.02,
+					0.69
+				],
+				"grid_cells": [
+					4.0,
+					2.0
+				],
+				"max_dimension_m": 3.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorTorque": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorTorque",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorTorque",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "VectorTorque",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					0.08,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"VectorWorkbench": {
+			"category": "vectors",
+			"complexity": "intermediate",
+			"description": "Universal vector sandbox - two draggable vectors with all operations (add, subtract, dot, cross, projection) computed live",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				4,
+				2,
+				3
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab"
+			],
+			"lookup_name": "VectorWorkbench",
+			"map_ready": true,
+			"map_sequences": [
+				"vectors"
+			],
+			"name": "Vector Workbench",
+			"parameters": {
+				"footprint": [
+					4,
+					2,
+					3
+				],
+				"size_group": "room_scale"
+			},
+			"qfep_connection": "All vector operations in one frame of reference. See relationships between operations. Synthesis of mathematical tools.",
+			"scene": "res://algorithms/vectors/vector_workbench/VectorWorkbench.tscn",
+			"sequence": "vectors",
+			"size_group": "room_scale",
+			"tags": [
+				"vectors",
+				"addition",
+				"subtraction",
+				"dot_product",
+				"cross_product",
+				"projection",
+				"sandbox"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					1.94,
+					0.75
+				],
+				"aabb_center": [
+					-0.54,
+					0.29,
+					0.35
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"ball_dropper": {
+			"category": "mathematics",
+			"class_name": "BallDropper",
+			"complexity": "beginner",
+			"description": "Drops colorful physics balls one at a time. Pair with laser_turret for targeting demo. Balls cycle through colors and have configurable physics properties.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"physics",
+				"spawning"
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"Automatic dropping - configure via parameters"
+			],
+			"lookup_name": "ball_dropper",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Ball Dropper",
+			"parameters": {
+				"auto_drop": "Enable automatic dropping (default true)",
+				"ball_bounce": "Bounciness (default 0.7)",
+				"ball_mass": "Mass for physics (default 0.5)",
+				"ball_radius": "Size of balls (default 0.1)",
+				"drop_interval": "Seconds between drops (default 3.0)",
+				"initial_velocity": "Starting velocity Vector3",
+				"max_balls": "Maximum balls alive at once (default 5)",
+				"spawn_spread": "Random XZ spread (default 0.3)"
+			},
+			"qfep_connection": "Entropy source - introducing moving targets into the system for the turret to track.",
+			"scene": "res://commons/artifacts/turret_targeting/ball_dropper.tscn",
+			"sequence": "forces",
+			"signals": [
+				"ball_spawned",
+				"ball_destroyed"
+			],
+			"tags": [
+				"balls",
+				"physics",
+				"spawner",
+				"dropper",
+				"colorful",
+				"standalone"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~576"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.3,
+					0.3,
+					0.3
+				],
+				"aabb_center": [
+					0.0,
+					-0.03,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"basis_vectors_rig": {
+			"category": "mathematics",
+			"class_name": "BasisVectorsRig",
+			"complexity": "intermediate",
+			"description": "Interactive basis vectors (\u00ee, \u0135, k\u0302) showing how any 3D point is a linear combination: P = x\u00ee + y\u0135 + zk\u0302.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"linear_algebra"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab and rotate basis",
+				"move target point",
+				"preset configurations"
+			],
+			"lookup_name": "basis_vectors_rig",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"testmaps"
+			],
+			"name": "Basis Vectors Rig",
+			"parameters": {
+				"axis_length": "Length of basis arrows",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact",
+				"target_point": "Point to decompose into basis components"
+			},
+			"qfep_connection": "Basis as frame of reference - the coordinate system from which we measure all positions",
+			"scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"tags": [
+				"vectors",
+				"basis",
+				"coordinate_system",
+				"linear_combination",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~576"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"vector_addition_demo",
+					"addition",
+					"requires",
+					"understanding",
+					"components"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.8,
+					1.03,
+					1.92
+				],
+				"aabb_center": [
+					0.0,
+					0.48,
+					0.06
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.92,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"coordinate_system_switcher": {
+			"category": "mathematics",
+			"class_name": "CoordinateSystemSwitcher",
+			"complexity": "intermediate",
+			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,\u03b8,z), and Spherical (\u03c1,\u03b8,\u03c6) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"coordinate_systems",
+				"visualization"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coordinate_system_switcher",
+			"map_ready": true,
+			"map_sequences": [
+				"vectors"
+			],
+			"name": "Coordinate System Switcher",
+			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality \u2014 the point doesn't change, only the language describing it.",
+			"scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
+			"tags": [
+				"vectors",
+				"coordinates",
+				"cartesian",
+				"cylindrical",
+				"spherical",
+				"polar",
+				"conversion",
+				"3d",
+				"visualization"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "l_system_turtle",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"string_rewrite",
+						"turtle_interpret",
+						"emit_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"basis_vectors_rig",
+					"frames",
+					"fields",
+					"position",
+					"dependent"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.46,
+					0.45,
+					0.46
+				],
+				"aabb_center": [
+					0.22,
+					0.22,
+					0.22
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.46,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"coordinates": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "coordinates",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				5,
+				5,
+				5
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coordinates",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "coordinates",
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/vectors/01_vector_basics/coordinates.tscn",
+			"size_group": "environment",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.54,
+					0.54,
+					0.53
+				],
+				"aabb_center": [
+					0.25,
+					0.25,
+					0.25
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.54,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"cross_product_demo": {
+			"category": "mathematics",
+			"class_name": "CrossProductDemo",
+			"complexity": "intermediate",
+			"description": "Interactive cross product: A \u00d7 B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab handle spheres",
+				"preset configurations"
+			],
+			"lookup_name": "cross_product_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Cross Product Demo",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact",
+				"vector_a": "First vector",
+				"vector_b": "Second vector"
+			},
+			"qfep_connection": "Cross product as emergence - a third direction arising from two, perpendicularity as difference",
+			"scene": "res://commons/artifacts/cross_product_demo/cross_product_demo.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"tags": [
+				"vectors",
+				"cross_product",
+				"perpendicular",
+				"area",
+				"right_hand_rule",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "l_system_turtle",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"string_rewrite",
+						"turtle_interpret",
+						"emit_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~400"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.37,
+					2.94,
+					3.37
+				],
+				"aabb_center": [
+					0.0,
+					0.68,
+					0.01
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.37,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				4.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"destructible_marching_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "destructible_marching_cube",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "destructible_marching_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "destructible_marching_cube",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles/organic_voronoi_cube_test.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.27,
+					3.72,
+					3.73
+				],
+				"aabb_center": [
+					-0.24,
+					0.01,
+					-0.04
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"destructibles_test_scene": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "impact \u2192 destroy(method). Eight destruction methods: instant, health-based, face-peel, Cantor recursion, Voronoi fracture, planar crack, prism shatter. Topology of breaking.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				20,
+				20,
+				20
+			],
+			"include_in_map_data": true,
+			"lookup_name": "destructibles_test_scene",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "destructibles_test_scene",
+			"parameters": {
+				"footprint": [
+					20,
+					20,
+					20
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"destruction",
+					"algorithms",
+					"throwing",
+					"system",
+					"subsystems"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.0,
+					2.07,
+					7.61
+				],
+				"aabb_center": [
+					0.0,
+					1.02,
+					3.79
+				],
+				"grid_cells": [
+					5.0,
+					8.0
+				],
+				"max_dimension_m": 7.61,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"dot_product_projector": {
+			"category": "mathematics",
+			"class_name": "DotProductProjector",
+			"complexity": "intermediate",
+			"description": "Interactive dot product visualizer showing A \u00b7 B = |A||B|cos(\u03b8). Demonstrates projection and alignment measurement.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab handle spheres",
+				"preset configurations"
+			],
+			"lookup_name": "dot_product_projector",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Dot Product Projector",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact",
+				"vector_a": "Vector being projected",
+				"vector_b": "Vector projected onto"
+			},
+			"qfep_connection": "Dot product as alignment - measuring how much two directions agree or oppose",
+			"scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"tags": [
+				"vectors",
+				"dot_product",
+				"projection",
+				"angle",
+				"cosine",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"work_energy_demo",
+					"product",
+					"hl_turret_vectors",
+					"check",
+					"product"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.07,
+					2.19,
+					3.17
+				],
+				"aabb_center": [
+					0.03,
+					0.61,
+					0.08
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.17,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				4.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_1_bouncing_ball_with_no_vectors_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Bouncing ball demonstration without vector math",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_1_bouncing_ball_with_no_vectors_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Bouncing Ball with No Vectors VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_1_bouncing_ball_with_no_vectors_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"math",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.52,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.22,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_2_bouncing_ball_with_vectors_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Bouncing ball demonstration using vector math",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_2_bouncing_ball_with_vectors_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Bouncing Ball with Vectors VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_2_bouncing_ball_with_vectors_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"math",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.53,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.21,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_3_vector_subtraction_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector subtraction demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_3_vector_subtraction_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Vector Subtraction VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_3_vector_subtraction_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.58,
+					0.29
+				],
+				"aabb_center": [
+					0.38,
+					0.24,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_4_vector_multiplication_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector multiplication demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_4_vector_multiplication_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Vector Multiplication VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_4_vector_multiplication_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.53,
+					0.29
+				],
+				"aabb_center": [
+					0.38,
+					0.21,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_5_vector_magnitude_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector magnitude calculation demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_5_vector_magnitude_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Vector Magnitude VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_5_vector_magnitude_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.23,
+					0.6,
+					0.29
+				],
+				"aabb_center": [
+					0.16,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.23,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_6_vector_normalize_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector normalization demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_6_vector_normalize_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Vector Normalize VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_6_vector_normalize_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.58,
+					0.29
+				],
+				"aabb_center": [
+					0.38,
+					0.24,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_7_motion_101_velocity_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Basic velocity motion demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_7_motion_101_velocity_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Motion 101 Velocity VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_7_motion_101_velocity_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"physics",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.06,
+					0.06,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_8_motion_101_velocity_and_constant_acceleration_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Velocity and constant acceleration demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Motion 101 Velocity and Constant Acceleration VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_8_motion_101_velocity_and_constant_acceleration_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"physics",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.56,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"example_1_9_motion_101_velocity_and_random_acceleration_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Velocity and random acceleration demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Motion 101 Velocity and Random Acceleration VR",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"physics",
+				"probability",
+				"procedural",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.06,
+					0.06,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"exercise_1_3_solution_3_d_bouncing_ball_vr": {
+			"capacity": "WATCH a bouncing ball as a clock that runs down \u2014 each bounce measures how much the universe forgot",
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "A ball trapped in a box, slowly dying. Position accumulates velocity, velocity accumulates gravity, walls reverse and damp. Each bounce lower than the last as elasticity drains energy. A trail draws the ball's parabolic history as a fading line. The simplest dynamics: one force, one constraint, and the slow settling as the universe forgets.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, Nature of Code",
+			"include_in_map_data": true,
+			"interactions": [
+				"watch ball bounce with trail",
+				"observe parabolic arcs between bounces",
+				"see energy decay through diminishing heights"
+			],
+			"lookup_name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "3D Bouncing Ball",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Pure F with dissipation \u2014 gravity is constant F, the wall's elasticity coefficient IS lambda. At e=1.0 energy is conserved forever. Below 1.0, each bounce leaks energy into the wall. Lambda controls how fast the system forgets its initial conditions.",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"bouncing",
+				"ball",
+				"gravity",
+				"trail",
+				"energy_decay",
+				"elasticity",
+				"nature_of_code",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~16"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"dynamics",
+					"artifact",
+					"forces",
+					"exercise_1_8",
+					"attraction"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.91,
+					1.01,
+					0.91
+				],
+				"aabb_center": [
+					0.0,
+					0.45,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"exercise_1_5_solution_accelerate_and_decelerate_vr": {
+			"capacity": "SEE that smooth deceleration emerges from scaling desired speed by distance \u2014 arrival is a feedback loop, not a decision",
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "A ball chases a moving target, steering with arrival behavior \u2014 accelerating toward the target and decelerating as it approaches. The target traces sinusoidal curves through 3D space. When far, the ball applies maximum force. When close, force scales down proportionally, producing smooth deceleration. Seek behavior with distance-based speed ramping.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, Nature of Code",
+			"include_in_map_data": true,
+			"interactions": [
+				"watch ball chase moving target",
+				"observe acceleration phase vs deceleration phase",
+				"see smooth arrival behavior"
+			],
+			"lookup_name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Accelerate and Decelerate",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-feedback \u2014 the steering force depends on the gap between current and desired velocity. Close to the target, F diminishes. This is a self-regulating system: the closer you get, the gentler the approach. Negative feedback as navigation strategy.",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"steering",
+				"arrival",
+				"acceleration",
+				"deceleration",
+				"seek",
+				"feedback",
+				"nature_of_code",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"bouncing_ball",
+					"steering",
+					"instead",
+					"bouncing"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.39,
+					0.59,
+					0.1
+				],
+				"aabb_center": [
+					0.15,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.59,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"exercise_1_8_solution_attraction_magnitude_vr": {
+			"capacity": "FEEL that an orbit is a perpetual fall that always misses the ground \u2014 attraction creates structure from distance and direction",
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "Inverse-square attraction. Closer means stronger. A ball orbits a grabbable attractor \u2014 drag it in VR and the orbit reshapes in real time. Elliptical paths emerge from the interplay of tangential velocity and radial pull. F = strength * dir / r-squared. An orbit is a perpetual fall that always misses the ground.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, Nature of Code",
+			"include_in_map_data": true,
+			"interactions": [
+				"grab attractor sphere in VR and drag",
+				"adjust attraction strength slider",
+				"observe elliptical orbit formation",
+				"watch orbit reshape when attractor moves"
+			],
+			"lookup_name": "exercise_1_8_solution_attraction_magnitude_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Attraction and Orbit",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F as geometry \u2014 inverse-square means force IS a function of distance. The orbit shape encodes the relationship between speed and attraction. Move the attractor mid-orbit and watch deterministic chaos: same law, different trajectory.",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"attraction",
+				"orbit",
+				"inverse_square",
+				"gravity",
+				"grabbable",
+				"interactive",
+				"nature_of_code",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"bouncing_ball",
+					"attraction",
+					"three_body_problem",
+					"nbody_simulation",
+					"attractors"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.57,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"gravity_gun_test_scene": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "gravity_gun_test_scene",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gravity_gun_test_scene",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "gravity_gun_test_scene",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles/gravity_gun_test_scene.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.1,
+					0.6,
+					0.1
+				],
+				"aabb_center": [
+					0.0,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"hl_turret_vectors": {
+			"category": "mathematics",
+			"class_name": "HLTurretVectors",
+			"complexity": "intermediate",
+			"description": "Half-Life inspired sentry turret demonstrating ALL vector operations in one coherent system: subtraction (direction to target), magnitude (distance/range check), normalization (unit direction), dot product (FOV check), cross product (rotation axis), projection (ground plane), scalar multiplication (bullet velocity), and velocity integration (bullet physics). Fires tracer rounds with visible velocity vectors!",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"applied_math",
+				"physics"
+			],
+			"footprint": [
+				11,
+				5,
+				20
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"grab target sphere to move it",
+				"preset buttons for scenarios",
+				"SPACE to manual fire",
+				"F to toggle auto-fire"
+			],
+			"lookup_name": "hl_turret_vectors",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Half-Life Turret - Vector Compendium",
+			"parameters": {
+				"barrel_length": "Length of gun barrel (default 0.25)",
+				"bullet_speed": "Bullet velocity in units/sec (default 4.0)",
+				"field_of_view_degrees": "Total FOV cone in degrees (default 90)",
+				"fire_rate": "Shots per second (default 3.0)",
+				"footprint": [
+					11,
+					5,
+					20
+				],
+				"max_range": "Maximum targeting range (default 2.5)",
+				"shooting_enabled": "Enable automatic firing (default true)",
+				"show_bullet_vectors": "Show velocity arrows on bullets (default true)",
+				"size_group": "xlarge",
+				"target_position": "Initial target position Vector3",
+				"tracking_speed": "How fast turret tracks target (default 2.0)",
+				"turret_height": "Height of turret barrel (default 0.4)"
+			},
+			"qfep_connection": "The turret as computational subject - vectors as the mathematics of surveillance, targeting, and ballistics. Shows how abstract math operations have immediate, embodied applications in games and simulations.",
+			"scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn",
+			"signals": [
+				"target_acquired",
+				"target_lost",
+				"bullet_fired",
+				"bullet_hit"
+			],
+			"size_group": "xlarge",
+			"tags": [
+				"vectors",
+				"all_operations",
+				"turret",
+				"game",
+				"interactive",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"cross_product",
+				"projection",
+				"addition",
+				"scalar_multiplication",
+				"velocity",
+				"physics",
+				"shooting"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus",
+						"plane",
+						"capsule"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"every",
+					"operation",
+					"taught",
+					"through",
+					"weather_vector_field"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.01,
+					5.0,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					0.4,
+					0.0
+				],
+				"grid_cells": [
+					11.0,
+					20.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"laser_turret": {
+			"category": "mathematics",
+			"class_name": "LaserTurret",
+			"complexity": "beginner",
+			"description": "Standalone laser turret that auto-targets and destroys balls. Place separately from ball_dropper to customize layout. Demonstrates vector subtraction (direction), magnitude (range), normalization (aim), dot product (lock).",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"applied_math"
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"Automatic targeting - no direct interaction needed"
+			],
+			"lookup_name": "laser_turret",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "Laser Turret",
+			"parameters": {
+				"auto_target": "Auto-acquire targets (default true)",
+				"burn_time": "Laser burn time before explosion (default 0.35)",
+				"detection_range": "Maximum targeting range (default 10.0)",
+				"fire_delay": "Lock time before firing (default 0.25)",
+				"laser_color": "Color of laser beam (default red)",
+				"rotation_speed": "Turret rotation speed in rad/s (default 4.0)",
+				"target_closest": "Prioritize closest target (default true)"
+			},
+			"qfep_connection": "The turret as computational subject - continuously computing direction vectors to track moving targets.",
+			"scene": "res://commons/artifacts/turret_targeting/laser_turret.tscn",
+			"signals": [
+				"ball_destroyed",
+				"target_acquired",
+				"target_lost"
+			],
+			"tags": [
+				"vectors",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"turret",
+				"laser",
+				"standalone"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 3,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"sentry_turret": {
+			"category": "mathematics",
+			"class_name": "SentryTurret",
+			"complexity": "beginner",
+			"description": "Half-Life style sentry turret. Targets balls and/or player. Simple reliable targeting with bullet physics. Emits signals for hits.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"targeting"
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"Automatic - targets balls and player"
+			],
+			"lookup_name": "sentry_turret",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Sentry Turret",
+			"parameters": {
+				"bullet_speed": "Bullet velocity (default 20.0)",
+				"detection_range": "Maximum targeting range (default 15.0)",
+				"fire_rate": "Shots per second (default 5.0)",
+				"rotation_speed": "Turret rotation speed (default 5.0)",
+				"target_balls": "Target balls from droppers (default true)",
+				"target_player": "Target the player/camera (default true)"
+			},
+			"qfep_connection": "The turret as autonomous agent - continuously computing vectors to track and engage targets.",
+			"scene": "res://commons/artifacts/sentry_turret/sentry_turret.tscn",
+			"sequence": "forces",
+			"signals": [
+				"target_acquired",
+				"target_lost",
+				"fired",
+				"hit_target"
+			],
+			"tags": [
+				"turret",
+				"sentry",
+				"targeting",
+				"bullets",
+				"halflife",
+				"player",
+				"balls"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.01,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.05
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"sphere_splitting_showcase": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "sphere \u2192 fragments(method). Five fracture algorithms: planar cut, octree division, orange-peel sectors, CSG boolean, pre-segmented mesh. One sphere, five deaths.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				18,
+				18,
+				18
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sphere_splitting_showcase",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "sphere_splitting_showcase",
+			"parameters": {
+				"footprint": [
+					18,
+					18,
+					18
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"destructibles_test_scene",
+					"cubes",
+					"planes",
+					"spheres",
+					"computational"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.6,
+					2.07,
+					3.82
+				],
+				"aabb_center": [
+					0.75,
+					1.02,
+					1.89
+				],
+				"grid_cells": [
+					7.0,
+					4.0
+				],
+				"max_dimension_m": 6.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"throw_ball": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "throw_ball.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "throw_ball",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "throw_ball",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/throw_ball.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.05,
+					1.05,
+					0.03
+				],
+				"aabb_center": [
+					0.0,
+					0.02,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"turret_boll_infoboard": {
+			"category": "mathematics",
+			"class_name": "TurretBollInfoBoard",
+			"complexity": "beginner",
+			"description": "3m \u00d7 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"infoboard",
+				"reference"
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"Static display - no interaction"
+			],
+			"lookup_name": "turret_boll_infoboard",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Turret-Boll Vector Diagram",
+			"parameters": {},
+			"qfep_connection": "The diagram as pedagogical synthesis - all vector operations unified through the targeting metaphor, showing how abstract math becomes embodied behavior.",
+			"scene": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"tags": [
+				"vectors",
+				"infoboard",
+				"2d_in_3d",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"projection",
+				"turret",
+				"reference",
+				"diagram"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					2.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.6,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"turret_targeting": {
+			"category": "mathematics",
+			"class_name": "TurretTargeting",
+			"complexity": "beginner",
+			"description": "Combined turret + ball dropper setup. Laser turret tracks and destroys falling balls. Use laser_turret and ball_dropper separately for custom arrangements.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"applied_math"
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"DROP BALL button",
+				"RESET button",
+				"AUTO toggle"
+			],
+			"lookup_name": "turret_targeting",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Turret Targeting (Combined)",
+			"parameters": {
+				"burn_time": "Time laser burns before explosion (default 0.3)",
+				"detection_range": "Turret targeting range (default 8.0)",
+				"drop_interval": "Seconds between ball drops (default 2.5)",
+				"dropper_offset": "Offset of ball dropper from turret (default 0,3,2)",
+				"footprint": [
+					2,
+					3,
+					3
+				],
+				"laser_color": "Color of laser beam (default red)",
+				"max_balls": "Maximum balls alive at once (default 4)",
+				"show_controls": "Show VR control panel (default true)",
+				"size_group": "room_scale",
+				"turret_position": "Position of turret base (default 0,0,0)"
+			},
+			"qfep_connection": "Targeting as embodied vector math - the turret performs subtraction, normalization, and dot product continuously to track moving targets.",
+			"scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn",
+			"signals": [
+				"ball_destroyed",
+				"target_acquired",
+				"target_lost"
+			],
+			"tags": [
+				"vectors",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"turret",
+				"targeting",
+				"interactive",
+				"game",
+				"laser",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			}
+		},
+		"vector_addition_demo": {
+			"category": "mathematics",
+			"class_name": "VectorAdditionDemo",
+			"complexity": "beginner",
+			"description": "Interactive vector addition visualizer: A + B = C. Shows parallelogram law with head-to-tail placement and ghost arrows.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				4,
+				2,
+				4
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab handle spheres to adjust vectors",
+				"preset buttons"
+			],
+			"lookup_name": "vector_addition_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Vector Addition",
+			"parameters": {
+				"footprint": [
+					4,
+					2,
+					4
+				],
+				"max_vector_length": "Maximum allowed vector length",
+				"size_group": "xlarge",
+				"vector_a": "First vector",
+				"vector_b": "Second vector"
+			},
+			"qfep_connection": "Composition - how separate movements combine into a single displacement",
+			"scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"size_group": "xlarge",
+			"tags": [
+				"vectors",
+				"addition",
+				"parallelogram",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"combined_forces_demo",
+					"force",
+					"superposition",
+					"vector",
+					"addition"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.07,
+					2.53,
+					3.2
+				],
+				"aabb_center": [
+					0.03,
+					0.31,
+					0.1
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_addition_walk": {
+			"category": "mathematics",
+			"class_name": "VectorAdditionWalk",
+			"complexity": "beginner",
+			"description": "Player-scale 3D vector addition. Walk inside a 3m coordinate grid, grab vector endpoints at body height, see parallelogram construction and component projections in real space.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				4,
+				4,
+				4
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab handle spheres to adjust vectors A and B",
+				"walk through the grid to see components",
+				"preset buttons for orthogonal/acute/3D configurations"
+			],
+			"lookup_name": "vector_addition_walk",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Vector Addition Walk (Room Scale)",
+			"parameters": {
+				"footprint": [
+					4,
+					4,
+					4
+				],
+				"grid_divisions": "Grid lines per axis (default 6)",
+				"grid_size": "Size of walkable grid in meters (default 3.0)",
+				"max_vector_length": "Maximum vector length (default 2.5)",
+				"size_group": "xlarge",
+				"vector_a": "First vector (default 1.5, 0.5, 0)",
+				"vector_b": "Second vector (default 0.3, 1.2, 0.8)"
+			},
+			"qfep_connection": "Embodied composition: you ARE inside the vector space. Walk along X to feel the X component. Addition becomes spatial, not symbolic.",
+			"scene": "res://commons/artifacts/vector_addition_walk/vector_addition_walk.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"size_group": "xlarge",
+			"tags": [
+				"vectors",
+				"addition",
+				"parallelogram",
+				"room-scale",
+				"walkable"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box",
+						"sphere",
+						"plane"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"scale",
+					"version",
+					"vector_addition_demo",
+					"basis_vectors_rig"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.73,
+					4.96,
+					3.76
+				],
+				"aabb_center": [
+					-0.07,
+					0.52,
+					0.38
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 4.96,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_drone": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "desired = (target - position).normalized() * speed. Chase, prepare, shoot, cooldown. A state machine driven by vector subtraction.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vector_drone",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "vector_drone",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/vector_drone.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"counterpart",
+					"hl_turret_vectors",
+					"player",
+					"controlled",
+					"targeting"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.52,
+					1.52,
+					1.49
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.52,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_field_visualizer": {
+			"category": "mathematics",
+			"class_name": "VectorFieldVisualizer",
+			"complexity": "intermediate",
+			"description": "3D arrow field showing flow \u2014 vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"fields",
+				"visualization"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vector_field_visualizer",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Vector Field Visualizer",
+			"qfep_connection": "Vector fields as continuous flow \u2014 every point in space carries a direction, the field as a living topology of force and movement.",
+			"scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
+			"tags": [
+				"vectors",
+				"vector_field",
+				"flow",
+				"vortex",
+				"dipole",
+				"source",
+				"sink",
+				"arrows",
+				"3d",
+				"magnitude",
+				"direction"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.36,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.28,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_joint_playground": {
+			"category": "mathematics",
+			"class_name": "VectorJointPlayground",
+			"complexity": "intermediate",
+			"description": "Human-scale VR playground with 6 interactive stations. Each station pairs draggable vectors with a large physics joint mechanism: crane (magnitude), pistons (addition), door (dot product), seesaw (subtraction), waterwheel (cross product), spring tower (forces). Drag a vector, watch the machine respond.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"joints",
+				"physics",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab vector endpoints to manipulate",
+				"observe mechanism responses",
+				"read live math on info panels"
+			],
+			"lookup_name": "vector_joint_playground",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Vector-Joint Playground",
+			"parameters": {
+				"footprint": [
+					18,
+					2,
+					18
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Vectors as embodied forces \u2014 abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
+			"scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
+			"sequence": "vectors",
+			"signals": [],
+			"tags": [
+				"vectors",
+				"joints",
+				"playground",
+				"magnitude",
+				"addition",
+				"dot_product",
+				"subtraction",
+				"cross_product",
+				"forces",
+				"interactive",
+				"vr",
+				"human_scale"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~1024"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					18.0,
+					5.67,
+					18.0
+				],
+				"aabb_center": [
+					0.0,
+					2.68,
+					0.0
+				],
+				"grid_cells": [
+					18.0,
+					18.0
+				],
+				"max_dimension_m": 18.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				18.0,
+				1,
+				18.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_magnitude_demo": {
+			"category": "mathematics",
+			"class_name": "VectorMagnitudeDemo",
+			"complexity": "beginner",
+			"description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = \u221a(x\u00b2 + y\u00b2 + z\u00b2).",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab"
+			],
+			"lookup_name": "vector_magnitude_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Vector Magnitude",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Measurement - quantifying the 'amount' of a vector regardless of direction",
+			"scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
+			"sequence": "forces",
+			"size_group": "compact",
+			"tags": [
+				"vectors",
+				"magnitude",
+				"length",
+				"pythagorean",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.73,
+					0.6,
+					0.68
+				],
+				"aabb_center": [
+					0.2,
+					0.27,
+					0.32
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_normalize_demo": {
+			"category": "mathematics",
+			"class_name": "VectorNormalizeDemo",
+			"complexity": "beginner",
+			"description": "Shows normalization: V\u0302 = V/|V|. Converts any vector to unit length while preserving direction.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab"
+			],
+			"lookup_name": "vector_normalize_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"testmaps",
+				"transformation"
+			],
+			"name": "Vector Normalization",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
+			"scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+			"sequence": "forces",
+			"tags": [
+				"vectors",
+				"normalize",
+				"unit_vector",
+				"direction",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"grid_overlay",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~3072"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.9,
+					0.99
+				],
+				"aabb_center": [
+					0.12,
+					0.12,
+					0.16
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.99,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_projection_demo": {
+			"category": "mathematics",
+			"class_name": "VectorProjectionDemo",
+			"complexity": "intermediate",
+			"description": "Visualizes vector projection onto another vector or plane. Shows shadow/component decomposition.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				2,
+				3,
+				3
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vector_projection_demo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Vector Projection",
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					3
+				],
+				"size_group": "large"
+			},
+			"qfep_connection": "Projection as filtering - extracting the component in a particular direction",
+			"scene": "res://commons/artifacts/vector_projection_demo/vector_projection_demo.tscn",
+			"size_group": "large",
+			"tags": [
+				"vectors",
+				"projection",
+				"shadow",
+				"component",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"plane"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~4 instances"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"dot_product_projector",
+					"projection",
+					"product",
+					"normal_force_demo",
+					"force"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.19,
+					2.56,
+					2.41
+				],
+				"aabb_center": [
+					-0.31,
+					0.28,
+					0.43
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.56,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_subtraction_demo": {
+			"category": "mathematics",
+			"class_name": "VectorSubtractionDemo",
+			"complexity": "beginner",
+			"description": "Interactive vector subtraction: A - B = C. Shows how subtraction finds the difference vector between two points.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				3,
+				3,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vector_subtraction_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Vector Subtraction",
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					4
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "Difference and direction - finding what separates two states",
+			"scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"vectors",
+				"subtraction",
+				"direction",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"plane"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~4 instances"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"vector_addition_demo",
+					"hl_turret_vectors",
+					"direction",
+					"target",
+					"turret"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					2.35,
+					3.07
+				],
+				"aabb_center": [
+					0.0,
+					0.39,
+					0.04
+				],
+				"grid_cells": [
+					3.0,
+					4.0
+				],
+				"max_dimension_m": 3.07,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_translation_demo": {
+			"category": "mathematics",
+			"class_name": "VectorTranslationDemo",
+			"complexity": "beginner",
+			"description": "Shows vectors as displacements in space. Position vectors and translation vectors.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab"
+			],
+			"lookup_name": "vector_translation_demo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Vector Translation",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Translation as movement - vectors as instructions for displacement",
+			"scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
+			"tags": [
+				"vectors",
+				"translation",
+				"displacement",
+				"position",
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "pbr",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.56,
+					0.79,
+					0.68
+				],
+				"aabb_center": [
+					0.37,
+					0.24,
+					0.19
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.56,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vectorline": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive vector line with arrowhead",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vectorline",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "vectorline",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/vectorline/vectorline.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1536"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.12,
+					0.12,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.12,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vectorpoint": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector axes demonstration scene with grab sphere and info panel for 3D position breakdowns.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vectorpoint",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "VectorPoint",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/01_vector_basics/VectorPoint.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"geometry",
+				"interactive",
+				"linear_algebra",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.04,
+					1.04,
+					1.04
+				],
+				"aabb_center": [
+					0.49,
+					0.49,
+					0.49
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.04,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
+			}
+		}
+	},
+	"registry_info": {
+		"category": "mathematics",
+		"description": "Vector operation artifacts - addition, subtraction, magnitude, normalization, dot product, cross product, projection",
+		"name": "vectors",
+		"theoretical_grounding": "Linear algebra fundamentals, 3D graphics programming, physics simulation"
+	},
+	"sequence_mapping": {
+		"all_vectors": [
+			"vector_addition_demo",
+			"vector_subtraction_demo",
+			"vector_magnitude_demo",
+			"vector_normalize_demo",
+			"dot_product_projector",
+			"cross_product_demo",
+			"vector_projection_demo",
+			"hl_turret_vectors",
+			"turret_targeting",
+			"laser_turret",
+			"ball_dropper",
+			"turret_boll_infoboard",
+			"basis_vectors_rig",
+			"vector_joint_playground",
+			"vector_field_visualizer",
+			"coordinate_system_switcher"
+		],
+		"vector_applications": [
+			"hl_turret_vectors",
+			"turret_targeting",
+			"laser_turret",
+			"ball_dropper",
+			"turret_boll_infoboard",
+			"basis_vectors_rig",
+			"vector_joint_playground",
+			"vector_field_visualizer"
+		],
+		"vector_fundamentals": [
+			"vector_addition_demo",
+			"vector_subtraction_demo",
+			"vector_magnitude_demo",
+			"vector_normalize_demo"
+		],
+		"vector_products": [
+			"dot_product_projector",
+			"cross_product_demo",
+			"vector_projection_demo"
+		]
+	},
+	"theoretical_connections": {
+		"applied_examples": [
+			"hl_turret_vectors",
+			"turret_targeting",
+			"laser_turret",
+			"ball_dropper",
+			"turret_boll_infoboard",
+			"vector_field_visualizer"
+		],
+		"basic_operations": [
+			"vector_addition_demo",
+			"vector_subtraction_demo",
+			"vector_magnitude_demo",
+			"vector_normalize_demo"
+		],
+		"coordinate_systems": [
+			"basis_vectors_rig",
+			"vector_translation_demo",
+			"coordinate_system_switcher"
+		],
+		"product_operations": [
+			"dot_product_projector",
+			"cross_product_demo"
+		]
+	}
+}

@@ -1,0 +1,148 @@
+{
+  "page": "loom_simulator",
+  "version": 1,
+  "draft_name": "Overshot Star",
+  "loom": {
+    "id": "8-shaft",
+    "shafts": 8,
+    "treadles": 10
+  },
+  "panels": [
+    {
+      "id": "loom_selector",
+      "role": "left",
+      "width_m": 0.35,
+      "height_m": 0.65,
+      "viewport_px": [256, 600],
+      "elements": [
+        {
+          "id": "loom_type_selector",
+          "type": "dropdown",
+          "rect": [0, 0, 256, 40],
+          "metadata": { "data_path": "loom.id" }
+        },
+        {
+          "id": "structure_presets",
+          "type": "button_group",
+          "rect": [0, 48, 256, 200],
+          "metadata": { "data_path": "structureId" }
+        },
+        {
+          "id": "thread_colors",
+          "type": "color_palette",
+          "rect": [0, 260, 256, 200],
+          "overlay_3d": "color_prism",
+          "metadata": { "data_path": "colors" }
+        }
+      ]
+    },
+    {
+      "id": "draft_editor",
+      "role": "center",
+      "width_m": 0.65,
+      "height_m": 0.65,
+      "viewport_px": [500, 500],
+      "elements": [
+        {
+          "id": "threading_grid",
+          "type": "binary_grid",
+          "rect": [16, 16, 336, 112],
+          "overlay_3d": "peg_board",
+          "metadata": {
+            "rows": 8,
+            "cols": 24,
+            "flip_y": true,
+            "transposed": true,
+            "click_mode": "exclusive_col",
+            "data_path": "threading"
+          }
+        },
+        {
+          "id": "tieup_grid",
+          "type": "binary_grid",
+          "rect": [358, 16, 140, 112],
+          "overlay_3d": "peg_board",
+          "metadata": {
+            "rows": 8,
+            "cols": 10,
+            "flip_y": false,
+            "transposed": false,
+            "click_mode": "toggle",
+            "data_path": "tieup"
+          }
+        },
+        {
+          "id": "drawdown_display",
+          "type": "canvas",
+          "rect": [16, 134, 336, 336],
+          "overlay_3d": "fabric_swatch",
+          "metadata": {
+            "rows": 24,
+            "cols": 24,
+            "read_only": true,
+            "data_path": "drawdown"
+          }
+        },
+        {
+          "id": "treadling_grid",
+          "type": "binary_grid",
+          "rect": [358, 134, 140, 336],
+          "overlay_3d": "peg_board",
+          "metadata": {
+            "rows": 24,
+            "cols": 10,
+            "flip_y": false,
+            "transposed": false,
+            "click_mode": "exclusive_col",
+            "data_path": "treadling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "draft_properties",
+      "role": "right",
+      "width_m": 0.40,
+      "height_m": 0.65,
+      "viewport_px": [288, 600],
+      "elements": [
+        {
+          "id": "draft_name_input",
+          "type": "text_input",
+          "rect": [0, 0, 288, 48],
+          "metadata": { "data_path": "name" }
+        },
+        {
+          "id": "dimensions_panel",
+          "type": "form_group",
+          "rect": [0, 56, 288, 120],
+          "metadata": { "fields": ["warps", "picks", "preview_repeats"] }
+        },
+        {
+          "id": "mirror_ops",
+          "type": "button_group",
+          "rect": [0, 184, 288, 36],
+          "metadata": { "actions": ["mirror_threading", "mirror_treadling", "invert_tieup"] }
+        },
+        {
+          "id": "shift_ops",
+          "type": "button_group",
+          "rect": [0, 224, 288, 36],
+          "metadata": { "actions": ["shift_threading_l", "shift_threading_r", "shift_treadling_u", "shift_treadling_d"] }
+        },
+        {
+          "id": "util_ops",
+          "type": "button_group",
+          "rect": [0, 264, 288, 36],
+          "metadata": { "actions": ["invert_threading", "invert_treadling", "clear"] }
+        },
+        {
+          "id": "export_bar",
+          "type": "button_group",
+          "rect": [0, 308, 288, 36],
+          "metadata": { "actions": ["export_json", "export_png", "export_panel_layout"] }
+        }
+      ]
+    }
+  ]
+}

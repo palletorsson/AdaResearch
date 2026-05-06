@@ -1,0 +1,58 @@
+{
+  "map_info": {
+    "name": "Chamber Swarm",
+    "lookup_name": "Chamber_Swarm",
+    "description": "Your eight boids meet their swarm. Two flocks in one space. The same rules on both sides. The miura dances with you.",
+    "dimensions": {
+      "width": 11,
+      "depth": 7,
+      "max_height": 2
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "enter_type": "I"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Return to Lab",
+      "description": "Sequence complete",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","0"]
+    ],
+    "utilities": [
+      ["sp"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","t"]
+    ],
+    "interactables": [
+      [" "," ","becoming_catalyst#start_mode:swarm"," "," "," "," "," ","science_screen:180:1.5#mode:scatter"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" ","catalyst_target"," ","catalyst_target"," "," "," ","catalyst_target"," ","catalyst_target"," "],
+      [" "," "," "," "," ","proximity_spawner#type:swarm_hive"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

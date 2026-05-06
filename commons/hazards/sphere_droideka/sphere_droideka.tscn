@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cspheredroid01"]
+
+[ext_resource type="Script" path="res://commons/hazards/sphere_droideka/sphere_droideka.gd" id="1"]
+
+[node name="SphereDroideka" type="CharacterBody3D"]
+script = ExtResource("1")
+shell_segments = 8
+shell_slices = 12
+ball_radius = 0.35
+deployed_height = 1.2
+leg_count = 3

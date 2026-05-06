@@ -62,6 +62,7 @@ func _spawn_ball() -> void:
 	_ball = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.04
+	sphere.height = 0.08
 	_ball.mesh = sphere
 	_ball.material_override = MAT_BALL
 	_sim_root.add_child(_ball)
@@ -98,10 +99,19 @@ func _process(_delta: float) -> void:
 		var arrow_length := vel_length * 2.0
 		_arrow.visible = true
 		_arrow.position = _position + (_velocity * 0.5)
-		_arrow.look_at(_position + _velocity, Vector3.UP)
+		_arrow.look_at_from_position(_arrow.position, _position + _velocity, Vector3.UP)
 		_arrow.rotate_object_local(Vector3.RIGHT, PI / 2)
 		_arrow.scale = Vector3(1, arrow_length, 1)
 	else:
 		_arrow.visible = false
 
 	_status_label.text = "Ball (Vectors) | Vel %.2f" % vel_length
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

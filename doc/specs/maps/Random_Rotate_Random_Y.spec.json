@@ -1,0 +1,60 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Rotate_Random_Y",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 13,
+    "d": 16
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.019,
+  "breath_zones": [
+    {
+      "size": 203,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 16
+      },
+      "centroid": [
+        6.0344827586206895,
+        7.4926108374384235
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "rotate_random_y"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "pipe_dream"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "randomup"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 207,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

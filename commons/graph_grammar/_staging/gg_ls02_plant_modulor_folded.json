@@ -1,0 +1,55 @@
+{
+  "id": "gg_ls02_plant_modulor_folded",
+  "notes": "Same L-system plant DNA, post-processed with Modulor fold. Each leaf selected and folded down one Modulor rung \u2014 the tree becomes scaled-down objects at each tip.",
+  "seed": {
+    "lsystem": {
+      "axiom": "F",
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
+      "iterations": 4,
+      "angle_deg": 25.7,
+      "step_len": 0.25,
+      "step_shrink": 0.72,
+      "base_radius": 0.09,
+      "radius_shrink": 0.78,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "iterations": 1,
+  "rules": [
+    {
+      "op": "modulor_fold",
+      "selector": "leaves",
+      "params": {
+        "level": 3,
+        "category": "cup"
+      }
+    }
+  ],
+  "render_mode": "capsule",
+  "tag_colors": {
+    "lsystem": [
+      0.45,
+      0.28,
+      0.12
+    ],
+    "cup": [
+      0.85,
+      0.45,
+      0.2
+    ],
+    "leaf": [
+      0.25,
+      0.65,
+      0.25
+    ]
+  },
+  "camera_yaw": 0.4,
+  "camera_pitch": -0.15,
+  "max_nodes": 3000
+}

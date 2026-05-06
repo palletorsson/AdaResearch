@@ -1,0 +1,1 @@
+Three arenas connected by long-range jump pads — one for drone combat, one for physics destruction, and one exhibition gallery holding every vector and force artifact built so far. The player puts accumulated knowledge to use: pilot a drone with force vectors, shatter objects with momentum, then walk through a curated lineup of the concepts that made it all possible.

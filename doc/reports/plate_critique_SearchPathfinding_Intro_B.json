@@ -1,0 +1,41 @@
+{
+  "map": "SearchPathfinding_Intro",
+  "edge": "B",
+  "shots": {
+    "above": "plate_critique_shots\\SearchPathfinding_Intro\\above.png",
+    "front": "plate_critique_shots\\SearchPathfinding_Intro\\front.png",
+    "left": "plate_critique_shots\\SearchPathfinding_Intro\\left.png",
+    "right": "plate_critique_shots\\SearchPathfinding_Intro\\right.png",
+    "back": "plate_critique_shots\\SearchPathfinding_Intro\\back.png"
+  },
+  "result": {
+    "model": "claude-sonnet-4-5",
+    "critique": {
+      "score": 2,
+      "verdict": "intro, not cliff",
+      "paragraph": "This plate reads as an introduction to search algorithms\u2014BFS, DFS, Dijkstra\u2014not as a demonstration of tractability collapse. All three artifacts appear at similar, comfortable scales (a small grid, a simple maze, a ~15-node graph), with no visual progression from 'solvable' to 'impossible.' Edge B demands a crescendo: the same problem at N=5, N=8, N=12, N=15, where the search space visibly explodes and fills the room. Here, the visual grammar says 'three different algorithms that all work' rather than 'one algorithm that stops working when the problem grows.' The plate teaches search concepts cleanly, but it does not teach the cliff.",
+      "strengths": [
+        "Clean quadrant layout distinguishes three algorithm types at a glance",
+        "Graph structure (lower-left) is legible from all angles with clear node/edge geometry",
+        "Good use of color coding (blue grid, green maze paths, pink graph edges)"
+      ],
+      "weaknesses": [
+        "No scaling progression\u2014all problems appear equally tractable",
+        "Missing the 'fills the room' moment: no visual representation of cost explosion or runtime growth",
+        "Reads as introductory search survey (Edge A: 'does it halt?') not tractability limit (Edge B: 'can we afford to halt it?')",
+        "Graph has only ~15 nodes\u2014nowhere near the scale where tractability cliffs emerge",
+        "No temporal or spatial encoding of computational cost (e.g., search tree depth, branching factor visualization)"
+      ],
+      "next_gen_hints": [
+        "Replace three distinct algorithms with one problem (e.g., traveling salesperson) at three scales: N=5, N=8, N=12",
+        "Use vertical stacking or spatial volume to encode search tree growth\u2014N=12 should be visibly denser or taller than N=5",
+        "Make the largest instance overflow its grid bounds or spawn geometry that reaches toward the ceiling",
+        "Position the player path to walk past N=5 (instant solution), N=8 (slower), N=12 (visibly struggling or incomplete)",
+        "Consider a bespoke 'search tree visualizer' artifact that grows branches in real-time\u2014player watches N=5 finish, then N=12 fills the room before timing out",
+        "Use artifact density as the teaching variable: same footprint, exponentially more geometry per step in N"
+      ],
+      "edge_reads_as": "A or D\u2014search algorithms in general, not tractability limits"
+    },
+    "raw": "```json\n{\n  \"score\": 2,\n  \"verdict\": \"intro, not cliff\",\n  \"paragraph\": \"This plate reads as an introduction to search algorithms\u2014BFS, DFS, Dijkstra\u2014not as a demonstration of tractability collapse. All three artifacts appear at similar, comfortable scales (a small grid, a simple maze, a ~15-node graph), with no visual progression from 'solvable' to 'impossible.' Edge B demands a crescendo: the same problem at N=5, N=8, N=12, N=15, where the search space visibly explodes and fills the room. Here, the visual grammar says 'three different algorithms that all work' rather than 'one algorithm that stops working when the problem grows.' The plate teaches search concepts cleanly, but it does not teach the cliff.\",\n  \"strengths\": [\n    \"Clean quadrant layout distinguishes three algorithm types at a glance\",\n    \"Graph structure (lower-left) is legible from all angles with clear node/edge geometry\",\n    \"Good use of color coding (blue grid, green maze paths, pink graph edges)\"\n  ],\n  \"weaknesses\": [\n    \"No scaling progression\u2014all problems appear equally tractable\",\n    \"Missing the 'fills the room' moment: no visual representation of cost explosion or runtime growth\",\n    \"Reads as introductory search survey (Edge A: 'does it halt?') not tractability limit (Edge B: 'can we afford to halt it?')\",\n    \"Graph has only ~15 nodes\u2014nowhere near the scale where tractability cliffs emerge\",\n    \"No temporal or spatial encoding of computational cost (e.g., search tree depth, branching factor visualization)\"\n  ],\n  \"next_gen_hints\": [\n    \"Replace three distinct algorithms with one problem (e.g., traveling salesperson) at three scales: N=5, N=8, N=12\",\n    \"Use vertical stacking or spatial volume to encode search tree growth\u2014N=12 should be visibly denser or taller than N=5\",\n    \"Make the largest instance overflow its grid bounds or spawn geometry that reaches toward the ceiling\",\n    \"Position the player path to walk past N=5 (instant solution), N=8 (slower), N=12 (visibly struggling"
+  }
+}

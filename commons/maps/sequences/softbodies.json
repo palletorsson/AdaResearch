@@ -1,0 +1,289 @@
+{
+	"sequences": {
+		"softbodies": {
+			"absorbed": {
+				"morphogenesis": "2 maps absorbed from standalone morphogenesis sequence. Turing's reaction-diffusion connects to soft body dynamics  --  both are about continuous matter finding form."
+			},
+			"audio": {
+				"ambient_preset": "minimal_drone",
+				"volume": -10.0
+			},
+			"completion_rewards": [
+				"soft_body_badge",
+				"morphogenesis_badge"
+			],
+			"content": [
+				"SoftBodies_Soft_Body_Deformation: Jelly cubes and soft mills  --  basic deformation",
+				"SoftBodies_Carusell: Carousel of soft cloth and mushrooms  --  playful physics",
+				"SoftBodies_Obsticals: Breathing rooms and flag dancers  --  soft bodies meet obstacles",
+				"SoftBodies_Obsticals_Part2: Extended obstacle gallery",
+				"SoftBodies_Cloth_Physics: Cloth simulation  --  draping, tearing, wind",
+				"SoftBodies_Playground_of_Joy: Free play with soft bodies and growth",
+				"SoftBodies_Affect_Theory_Visualization: Softness as theoretical concept  --  radiolaria, affect",
+				"ProceduralGeneration_Reaction_Diffusion_Systems: Reaction-Diffusion",
+				"Topology_Entropy_Morphogenesis: Entropy Becoming Morphology"
+			],
+			"description": "From cloth draping to Turing patterns  --  matter that deforms, bounces, and self-organizes. Starts with soft body physics (jelly, cloth, obstacles), then expands into morphogenesis: how biological form emerges from reaction-diffusion dynamics. Alan Turing's last paper becomes a VR experience.",
+			"difficulty": "intermediate",
+			"estimated_time": "25-35 minutes",
+			"lab_map": "Lab/map_data_post_softbodies",
+			"layer": "integration",
+			"learning_objectives": [
+				"Spring-mass systems as soft body foundation",
+				"Cloth physics  --  constraints on deformable surfaces",
+				"Obstacle interaction with deformable bodies",
+				"Affect and materiality  --  what softness means",
+				"Turing's reaction-diffusion  --  pattern from chemical dynamics",
+				"Morphogenesis  --  entropy becoming structure"
+			],
+			"maps": [
+				"SoftBodies_Soft_Body_Deformation",
+				"SoftBodies_Carusell",
+				"SoftBodies_Obsticals",
+				"SoftBodies_Obsticals_Part2",
+				"SoftBodies_Cloth_Physics",
+				"SoftBodies_Playground_of_Joy",
+				"SoftBodies_Affect_Theory_Visualization",
+				"ProceduralGeneration_Reaction_Diffusion_Systems",
+				"Topology_Entropy_Morphogenesis",
+				"Chamber_SoftBodies",
+				"SoftBody_sb01_cloth_drape_corners",
+				"SoftBody_sb02_cloth_drape_top_row",
+				"SoftBody_sb03_cloth_flag_sideways",
+				"SoftBody_sb04_cloth_tablecloth",
+				"SoftBody_sb05_jelly_box_bounce",
+				"SoftBody_sb06_jelly_grid_settle",
+				"SoftBody_sb07_jelly_grid_tall_stiff",
+				"SoftBody_sb08_jelly_grid_floppy",
+				"SoftBody_sb_ls01_plant_skeleton",
+				"SoftBody_sb_ls02_plant_wind_collapse",
+				"SoftBody_sb_ca01_conway_cloth",
+				"SoftBody_sb_ca02_life_without_death_cloth",
+				"SoftBody_sb_noise01_jelly_crystal",
+				"SoftBody_sb_rd01_coral_cloth",
+				"SoftBody_sb_rd02_stripes_flag",
+				"SoftBody_gl01_classic_bulb",
+				"SoftBody_gl02_long_bottle",
+				"SoftBody_gl03_wide_bowl",
+				"SoftBody_gl04_lopsided_vase",
+				"SoftBody_gl05_collapsed_sag",
+				"SoftBody_gm01_bottle_in_cylinder_mould",
+				"SoftBody_gm02_vase_in_tapered_mould",
+				"SoftBody_gm03_box_in_cube_mould",
+				"SoftBody_gm04_pressed_onto_sphere"
+			],
+			"name": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+			"prerequisites": [
+				"forces",
+				"cellularautomata"
+			],
+			"qfep_connection": "Soft bodies embody F=E oscillation physically  --  elastic forces (F) against deformation (E). Morphogenesis extends this: Turing's reaction-diffusion shows how pattern emerges from the tension between activation and inhibition, the chemical F and E.",
+			"qfep_term": "Integration",
+			"return_to": "lab",
+			"truth": "Form is not imposed  --  it emerges from the material's own dynamics.",
+			"unlocks": [
+				"swarmintelligence",
+				"morphogenesis"
+			],
+			"artifact_groups": [
+				{
+					"map": "SoftBodies_Soft_Body_Deformation",
+					"position": "intro",
+					"artifacts": [
+						"jelly_cube",
+						"softmill"
+					],
+					"size_budget": "environment",
+					"rationale": "Spring-mass foundation: jelly cube jiggles under contact, softmill grinds rotation against compliance. Matter negotiating between rigid and liquid."
+				},
+				{
+					"map": "SoftBodies_Carusell",
+					"position": "intro",
+					"artifacts": [
+						"cloth_straps",
+						"grab_long_stick",
+						"pick_up_cube",
+						"revolving_joy_ride",
+						"soft_mushroom"
+					],
+					"size_budget": "environment",
+					"rationale": "Playful carousel: centripetal force spins soft mushrooms, cloth straps drape and collide, revolving joy ride teaches deformation through contact rather than instruction."
+				},
+				{
+					"map": "SoftBodies_Obsticals",
+					"position": "foundation",
+					"artifacts": [
+						"breathing_room",
+						"flagdancer",
+						"grab_long_stick",
+						"pick_up_cube"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Walls that breathe, flags that dance. Soft bodies negotiate obstacles  --  structures must continuously earn form against pressure, gravity, and wind."
+				},
+				{
+					"map": "SoftBodies_Obsticals_Part2",
+					"position": "exploration",
+					"artifacts": [
+						"grab_long_stick",
+						"pick_up_cube",
+						"softbody_gallery_part2"
+					],
+					"size_budget": "mixed",
+					"rationale": "Extended obstacle gallery: yielding matter wraps and compresses around unyielding structure. Twelve test scenarios deepen non-collisional deformation understanding."
+				},
+				{
+					"map": "SoftBodies_Cloth_Physics",
+					"position": "exploration",
+					"artifacts": [
+						"softstopscene"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Dedicated cloth chamber: draping, tearing, wind. Springs connecting vertices solve collective equilibrium  --  cloth thinks with its whole body."
+				},
+				{
+					"map": "SoftBodies_Playground_of_Joy",
+					"position": "integration",
+					"artifacts": [
+						"branching_growth_algorithm",
+						"gridagent",
+						"rounded_softbody_test"
+					],
+					"size_budget": "environment",
+					"rationale": "Free play: growth algorithms seed organic structures, grid agents multiply, rounded soft bodies scatter. Elasticity as medium, deformation as play."
+				},
+				{
+					"map": "SoftBodies_Affect_Theory_Visualization",
+					"position": "integration",
+					"artifacts": [
+						"radiolaria"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Single radiolarian specimen: silica skeleton emergent from surface tension, not designed but negotiated. Bridges physical simulation to affect theory  --  softness as capacity to be affected."
+				},
+				{
+					"map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+					"position": "synthesis",
+					"artifacts": [
+						"reaction_diffusion",
+						"turing_pattern_generator"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Turing's reaction-diffusion: activator and inhibitor diffusing at different speeds produce spots, stripes, labyrinths. Pattern from process, no blueprint."
+				},
+				{
+					"map": "Topology_Entropy_Morphogenesis",
+					"position": "synthesis",
+					"artifacts": [
+						"entropy_morphogenesis"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Entropy becoming morphology: the boundary where disorder finds structure. Topological contraction as morphogenetic principle  --  form emerges from negotiation, not imposition."
+				}
+			],
+			"notes": "",
+			"last_imported_from": {
+				"gallery": "soft-body",
+				"n_added": 24,
+				"at": "2026-04-29T08:19:35.646816Z"
+			}
+		}
+	},
+	"artifact_groups": [
+		{
+			"map": "SoftBodies_Soft_Body_Deformation",
+			"position": "intro",
+			"artifacts": [
+				"jelly_cube",
+				"softmill"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Introduces soft body physics with basic deformation. Jelly cube and soft mill as tactile first contact."
+		},
+		{
+			"map": "SoftBodies_Carusell",
+			"position": "foundation",
+			"artifacts": [
+				"pick_up_cube",
+				"grab_long_stick",
+				"revolving_joy_ride",
+				"cloth_straps",
+				"soft_mushroom"
+			],
+			"size_budget": "mixed",
+			"rationale": "Playful carousel of soft physics objects. Foundation map building on deformation with variety."
+		},
+		{
+			"map": "SoftBodies_Obsticals",
+			"position": "foundation",
+			"artifacts": [
+				"breathing_room",
+				"pick_up_cube",
+				"grab_long_stick",
+				"flagdancer"
+			],
+			"size_budget": "mixed",
+			"rationale": "Soft bodies meeting obstacles. Breathing room and flag dancer show environmental interactions."
+		},
+		{
+			"map": "SoftBodies_Obsticals_Part2",
+			"position": "exploration",
+			"artifacts": [
+				"softbody_gallery_part2",
+				"pick_up_cube",
+				"grab_long_stick"
+			],
+			"size_budget": "mixed",
+			"rationale": "Extended obstacle gallery. Deeper engagement with soft body obstacle interactions."
+		},
+		{
+			"map": "SoftBodies_Cloth_Physics",
+			"position": "exploration",
+			"artifacts": [
+				"softstopscene"
+			],
+			"size_budget": "environment",
+			"rationale": "Dedicated cloth simulation. Draping, tearing, and wind as focused exploration."
+		},
+		{
+			"map": "SoftBodies_Playground_of_Joy",
+			"position": "exploration",
+			"artifacts": [
+				"gridagent",
+				"branching_growth_algorithm",
+				"rounded_softbody_test"
+			],
+			"size_budget": "mixed",
+			"rationale": "Free play combining soft bodies with growth algorithms. Mid-sequence creative space."
+		},
+		{
+			"map": "SoftBodies_Affect_Theory_Visualization",
+			"position": "integration",
+			"artifacts": [
+				"radiolaria"
+			],
+			"size_budget": "environment",
+			"rationale": "Softness as theoretical concept. Radiolaria bridges physical simulation to affect theory."
+		},
+		{
+			"map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+			"position": "integration",
+			"artifacts": [
+				"turing_pattern_generator",
+				"reaction_diffusion"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Absorbed morphogenesis map. Turing patterns connect soft body dynamics to reaction-diffusion chemistry."
+		},
+		{
+			"map": "Topology_Entropy_Morphogenesis",
+			"position": "synthesis",
+			"artifacts": [
+				"entropy_morphogenesis"
+			],
+			"size_budget": "environment",
+			"rationale": "Absorbed morphogenesis synthesis. Entropy becoming form, the boundary where disorder finds structure."
+		}
+	],
+	"world_phase": "organic"
+}

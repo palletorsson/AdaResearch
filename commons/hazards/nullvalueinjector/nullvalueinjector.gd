@@ -1,4 +1,4 @@
-# NullInjectorEntity.gd
+﻿# NullInjectorEntity.gd
 # Malicious entity that injects null values into the scene to cause chaos
 extends Node3D
 class_name NullInjectorEntity
@@ -485,7 +485,7 @@ func _create_corruption_effect(position: Vector3):
 	get_tree().current_scene.add_child(cleanup_timer)
 	cleanup_timer.start()
 
-func _update_corruptions(delta):
+func _update_corruptions(_delta):
 	# Monitor and manage active corruptions
 	var active_corruptions = 0
 	for injection in injected_nulls:

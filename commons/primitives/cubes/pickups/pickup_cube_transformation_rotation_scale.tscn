@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://combo_pickup_wrapper"]
+
+[ext_resource type="Script" uid="uid://wrapper_script_uid" path="res://commons/primitives/cubes/pickups/pickup_wrapper.gd" id="1_logic"]
+[ext_resource type="PackedScene" uid="uid://cv1qkq6lipnwy" path="res://commons/primitives/cubes/animation/transformation_rotation_scale_cube.tscn" id="2_visuals"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pickup"]
+size = Vector3(0.52, 0.52, 0.52)
+
+[node name="PickupCubeCombo" type="Node3D"]
+script = ExtResource("1_logic")
+rotation_speed = 0.0
+bob_height = 0.0
+bob_speed = 0.0
+
+[node name="DetectionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496961, 0)
+collision_layer = 0
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012207, 0.990516, -0.00292969)
+shape = SubResource("BoxShape3D_pickup")
+
+[node name="Visuals" parent="." instance=ExtResource("2_visuals")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

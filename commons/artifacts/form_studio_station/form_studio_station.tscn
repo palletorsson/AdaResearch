@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfstudio001form"]
+
+[ext_resource type="Script" path="res://commons/artifacts/form_studio_station/form_studio_station.gd" id="1"]
+
+[node name="FormStudioStation" type="Node3D"]
+script = ExtResource("1")

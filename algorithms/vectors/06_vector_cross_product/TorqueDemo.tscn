@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://torque_demo_001"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/06_vector_cross_product/TorqueDemo.gd" id="1"]
+
+[node name="TorqueDemo" type="Node3D"]
+script = ExtResource("1")

@@ -1,0 +1,20 @@
+{
+  "id": "mg_op15_icosa_scale_pod",
+  "notes": "UNDERUSED-OPS PASS: icosahedron covered with scale tiles. A pinecone/artichoke test for the scale_tile operator rather than another petal-based rosette.",
+  "seed": "icosahedron",
+  "seed_scale": 0.42,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "scale_tile",
+      "selector": "all",
+      "params": {
+        "scale_length": 0.22,
+        "scale_width": 0.11,
+        "tilt_degrees": 36,
+        "overlap": 0.45,
+        "pointed": true
+      }
+    }
+  ]
+}

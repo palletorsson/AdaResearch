@@ -29,17 +29,8 @@ func setup_triangle():
 	for config in line_configs:
 		var line_node = get_node_or_null(config["line_name"] + "/lineContainer")
 		if line_node:
-			var sphere1 = line_node.get_node_or_null("GrabSphere")
-			var sphere2 = line_node.get_node_or_null("GrabSphere2")
-
-			if sphere1 and sphere2:
-				sphere1.position = config["start"]
-				sphere2.position = config["end"]
+			# Set positions
+			line_node.set_positions(config["start"], config["end"])
 
 			# Set line properties
-			line_node.line_thickness = 0.01
-			line_node.line_color = Color(0.3, 0.8, 1.0, 1.0)
-
-			# Update connections after positioning
-			if line_node.has_method("update_connections"):
-				line_node.update_connections()
+			line_node.set_line_properties(0.01, Color(0.3, 0.8, 1.0, 1.0))

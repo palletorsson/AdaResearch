@@ -1,0 +1,59 @@
+{
+	"instructions": "Add these entries to grid_artifacts.json in the 'artifacts' section",
+	"new_primitives": {
+		"sphere_low": {
+			"name": "sphere_low",
+			"lookup_name": "sphere_low",
+			"description": "Low poly sphere with 8 rings and 8 radial segments showing tessellation structure.",
+			"scene": "res://commons/primitives/godotmeshes/sphere_low.tscn"
+		},
+		"sphere_mid": {
+			"name": "sphere_mid",
+			"lookup_name": "sphere_mid",
+			"description": "Medium poly sphere with 16 rings and 16 radial segments for balanced detail.",
+			"scene": "res://commons/primitives/godotmeshes/sphere_mid.tscn"
+		},
+		"sphere_high": {
+			"name": "sphere_high",
+			"lookup_name": "sphere_high",
+			"description": "High poly sphere with 32 rings and 32 radial segments for smooth appearance.",
+			"scene": "res://commons/primitives/godotmeshes/sphere_high.tscn"
+		},
+		"cylinder_low": {
+			"name": "cylinder_low",
+			"lookup_name": "cylinder_low",
+			"description": "Low poly cylinder with 8 radial segments showing faceted structure.",
+			"scene": "res://commons/primitives/godotmeshes/cylinder_low.tscn"
+		},
+		"cylinder_mid": {
+			"name": "cylinder_mid",
+			"lookup_name": "cylinder_mid",
+			"description": "Medium poly cylinder with 16 radial segments for smooth curves.",
+			"scene": "res://commons/primitives/godotmeshes/cylinder_mid.tscn"
+		},
+		"torus_low": {
+			"name": "torus_low",
+			"lookup_name": "torus_low",
+			"description": "Low poly torus with 8 ring segments and 6 radial segments showing donut structure.",
+			"scene": "res://commons/primitives/godotmeshes/torus_low.tscn"
+		},
+		"square_pyramid": {
+			"name": "square_pyramid",
+			"lookup_name": "square_pyramid",
+			"description": "Johnson Solid J1: Square pyramid with 4 triangular faces and 1 square base.",
+			"scene": "res://commons/primitives/johnsonsolids/square_pyramid.tscn"
+		},
+		"triangular_cupola": {
+			"name": "triangular_cupola",
+			"lookup_name": "triangular_cupola",
+			"description": "Johnson Solid J3: Triangular cupola combining triangular and square faces.",
+			"scene": "res://commons/primitives/johnsonsolids/triangular_cupola.tscn"
+		},
+		"l_shape": {
+			"name": "l_shape",
+			"lookup_name": "l_shape",
+			"description": "L-shaped building block useful for constructing corners and complex structures.",
+			"scene": "res://commons/primitives/lshape/l_shape.tscn"
+		}
+	}
+}

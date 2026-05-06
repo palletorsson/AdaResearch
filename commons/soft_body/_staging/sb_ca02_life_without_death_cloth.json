@@ -1,0 +1,47 @@
+{
+  "id": "sb_ca02_life_without_death_cloth",
+  "topology": "ca_grid",
+  "ca": {
+    "rule": "life_without_death",
+    "grid_size": 22,
+    "iterations": 12,
+    "density": 0.3,
+    "seed": 11,
+    "cell_size": 0.1,
+    "pin_mode": "top_corners"
+  },
+  "stiffness": 0.6,
+  "damping": 0.992,
+  "gravity": [
+    0.5,
+    -9.8,
+    0
+  ],
+  "floor_y": -3.0,
+  "constraint_passes": 4,
+  "steps": 120,
+  "origin": [
+    0,
+    1.8,
+    0
+  ],
+  "camera_yaw": 0.35,
+  "camera_pitch": 0.1,
+  "render": {
+    "color": [
+      0.7,
+      0.35,
+      0.25
+    ],
+    "roughness": 0.55,
+    "particle_radius": 0.03,
+    "show_wires": true,
+    "wire_color": [
+      0.2,
+      0.1,
+      0.08
+    ]
+  },
+  "layout": "ca_bridge",
+  "notes": "DNA BRIDGE: Life-without-Death cloth. 12 steps produce a filled mosaic (cells never die); hangs from two corners with slight wind. A fully-woven tapestry from the rule alone."
+}

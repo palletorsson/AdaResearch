@@ -1,0 +1,132 @@
+{
+  "layers": {
+	"interactables": [
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," ","AudioContr:-90#preset:basic_mono"," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," ","demo_singles:-90"," "],
+	  [" "," "," "," "," "," ","interactable_demo"," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," ","demo_passive:-90"," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," ","demo_compounds"," "," "," "," "," "],
+	  [" "," ","AudioContr:90#preset:interface_prototypes"," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "]
+	],
+	"structure": [
+	  ["1","1","2","3","3","3","3","3","3","3","3","3"],
+	  ["1","1","2","3","1","1","1","1","1","1","2","3"],
+	  ["1","1","2","3","2","3","1","1","1","1","2","3"],
+	  ["1","1","1","1","1","1","1","1","1","1","2","3"],
+	  ["1","1","1","1","1","2","2","2","1","1","2","3"],
+	  ["4","1","1","1","1","1","1","1","1","1","2","3"],
+	  ["3","1","1","1","1","1","1","1","1","1","1","3"],
+	  ["4","1","1","1","1","1","1","1","2","1","1","4"],
+	  ["3","1","1","1","1","1","1","1","1","1","1","3"],
+	  ["4","2","1","1","1","1","1","1","2","1","1","4"],
+	  ["3","2","1","1","2","1","1","1","1","1","2","3"],
+	  ["3","1","1","1","1","1","1","1","1","1","1","4"],
+	  ["3","3","3","3","3","1","0","1","3","3","3","3"],
+	  ["3","3","3","3","3","1","1","1","3","3","3","3"]
+	],
+	"utilities": [
+	  ["s"," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," ","sub:map"," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," ","wp:90"," "," "," "," "," "," "," "," "],
+	  [" "," "," ",""," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," ","t"," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "]
+	]
+  },
+  "lighting": {
+	"ambient_color": [
+	  0.1,
+	  0.1,
+	  0.2
+	],
+	"ambient_energy": 0.8,
+	"directional_light": {
+	  "color": [
+		1.0,
+		0.9,
+		0.8
+	  ],
+	  "direction": [
+		-0.4,
+		-0.7,
+		-0.4
+	  ],
+	  "enabled": true,
+	  "energy": 1.2
+	}
+  },
+  "map_info": {
+	"description": "Explore audio reactivity and simple waveform visualization",
+	"dimensions": {
+	  "depth": 14.0,
+	  "max_height": 4.0,
+	  "width": 12.0
+	},
+	"format": "json",
+	"lookup_name": "WaveFunctions_Effect_Sound",
+	"metadata": {
+	  "category": "wavefunctions",
+	  "difficulty": "intermediate",
+	  "estimated_time": "8-12 minutes",
+	  "learning_objectives": [
+		"Audio bus and amplitude analysis",
+		"FFT spectrum: breaking waveforms into frequencies",
+		"Frequency bands: bass,mids,highs",
+		"Quantization noise and sampling gaps",
+		"Critical: Latency as reacting to the past,not present",
+		"Biological sounds: heartbeat rhythm",
+        "Ambient soundscapes: lab hum"
+	  ]
+	},
+	"name": "Audio Reactive Mario",
+	"title": "Sound as Waveform",
+	"version": "1.0"
+  },
+  "settings": {
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [
+		0.05,
+		0.05,
+		0.1
+	  ],
+	  "type": "sky"
+	},
+	"cube_size": 1.0,
+	"enable_physics": true,
+	"gutter": 0.0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true
+  },
+  "utility_definitions": {
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	},
+	"t": {
+	  "description": "Continue to the next wavefunctions demonstration",
+	  "name": "Next Lesson",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
+  }
+}

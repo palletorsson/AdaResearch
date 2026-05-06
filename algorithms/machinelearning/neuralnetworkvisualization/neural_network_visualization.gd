@@ -1,17 +1,27 @@
+# ============================================================================
 # Neural Network Visualization: Learning & Adaptation in 3D Space
-# This algorithm visualizes how neural networks learn through backpropagation,
-# showing weight changes, activation flows, and emergent pattern recognition.
+# Interactive 3D visualization of a feedforward neural network training via
+# backpropagation. Shows weight changes, activation flows, and error descent.
 #
-# Enhanced by Gemini:
-# - Corrected 3D orientation for weight connections.
-# - Added interactive orbit camera (Right-click + drag to orbit, Wheel to zoom).
-# - Implemented a real-time 3D error graph.
-# - Added selectable activation functions (Sigmoid, ReLU, Tanh).
-# - Added a WorldEnvironment with a glow effect for better visuals.
-# - Implemented true mini-batch gradient descent.
-# - Fixed AmbientLight error for Godot 4 compatibility.
-
+# Features:
+# - Interactive orbit camera (Right-click + drag, scroll to zoom)
+# - Real-time 3D error graph
+# - Selectable activation functions (Sigmoid, ReLU, Tanh)
+# - Mini-batch gradient descent with Xavier/Glorot initialization
+# - WorldEnvironment with glow for visual polish
+# - Color-coded neurons: green=input, blue=hidden, red=output
+# ============================================================================
 extends Node3D
+
+# @identity
+# essence: a(l) = σ(W(l)·a(l-1) + b(l)); ∂L/∂W = δ·a(T); backpropagation through layers
+# desire: see neurons glow as activations flow forward, weights shimmer as gradients flow backward, error graph descend
+# critical_parameter: learning_rate — the step size that makes the difference between convergence and oscillation
+# triggers: auto_train drives mini-batch gradient descent; activation function selection changes the nonlinearity; error history builds the 3D graph
+# emerges: feature representation in hidden layers — the network discovers its own internal language
+# needs: VR controls [missing] — has orbit camera but no VR spatial interaction
+# relationships: depends on gradient_descent_visualization (backprop IS gradient descent on weights); unlocks convolutional_neural_networks_cnns_vr (specialized architecture)
+# truth: a neural network does not learn rules — it learns a continuous function that happens to approximate them
 
 # --- Configuration ---
 @export_category("Network Configuration")
@@ -67,7 +77,7 @@ var camera_rotation: Vector2 = Vector2(-0.5, 0.5)
 #  Engine Functions
 #=============================================================================
 
-func _ready():
+func _ready() -> void:
 	# Initialize random seed
 	randomize()
 
@@ -90,7 +100,7 @@ func _ready():
 	if auto_train:
 		start_training()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Handle interactive camera controls
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
@@ -130,7 +140,7 @@ func _input(event):
 #  Initialization and Setup
 #=============================================================================
 
-func build_network():
+func build_network() -> void:
 	"""Initialize the neural network structure with random weights and biases."""
 	var layer_sizes = [input_layer_size] + hidden_layer_sizes + [output_layer_size]
 	
@@ -169,7 +179,7 @@ func build_network():
 		b_vector.fill(0.0)
 		biases.append(b_vector)
 
-func generate_training_data():
+func generate_training_data() -> void:
 	"""Generate XOR training data as a classic neural network problem."""
 	training_data = [
 		[0.0, 0.0, 0.0, 1.0],
@@ -184,7 +194,7 @@ func generate_training_data():
 		[1.0, 0.0]
 	]
 
-func create_visualization():
+func create_visualization() -> void:
 	"""Create 3D visualization of the neural network."""
 	# Clear previous visuals
 	for child in get_children():
@@ -214,7 +224,7 @@ func create_visualization():
 	setup_camera()
 	setup_environment()
 
-func setup_camera():
+func setup_camera() -> void:
 	"""Setup the camera pivot and initial position."""
 	camera = get_node_or_null("Camera3D")
 	if not camera:
@@ -238,13 +248,13 @@ func setup_camera():
 		
 	update_camera()
 
-func update_camera():
+func update_camera() -> void:
 	"""Update camera position based on rotation and distance."""
 	if not is_instance_valid(camera_pivot) or not is_instance_valid(camera): return
 	camera_pivot.rotation = Vector3(camera_rotation.x, camera_rotation.y, 0)
 	camera.position = Vector3(0, 0, camera_distance)
 
-func setup_environment():
+func setup_environment() -> void:
 	"""Add lighting and a WorldEnvironment for glow and ambient light."""
 	# Add a WorldEnvironment node to enable glow and set ambient light
 	var world_env = WorldEnvironment.new()
@@ -288,18 +298,24 @@ func create_neuron(layer_idx: int, neuron_idx: int, layer_size: int) -> MeshInst
 	neuron.position = Vector3(x, y, 0)
 	
 	var material = StandardMaterial3D.new()
-	if layer_idx == 0: material.albedo_color = Color.GREEN
-	elif layer_idx == neuron_meshes.size() - 1: material.albedo_color = Color.RED
-	else: material.albedo_color = Color.BLUE
+	# Color palette: green=input, blue=hidden, red=output
+	if layer_idx == 0:
+		material.albedo_color = Color(0.3, 0.85, 0.4, 1.0) # Green for input
+	elif layer_idx == neuron_meshes.size() - 1:
+		material.albedo_color = Color(0.9, 0.3, 0.3, 1.0) # Red for output
+	else:
+		material.albedo_color = Color(0.3, 0.5, 0.9, 1.0) # Blue for hidden
 	
 	material.emission_enabled = true
 	material.emission = material.albedo_color
-	material.emission_energy = 0.5
+	material.emission_energy_multiplier = 1.2
+	material.metallic = 0.4
+	material.roughness = 0.35
 	neuron.material_override = material
 	
 	return neuron
 
-func create_weight_lines():
+func create_weight_lines() -> void:
 	"""Create lines representing weights between neurons."""
 	var layer_sizes = [input_layer_size] + hidden_layer_sizes + [output_layer_size]
 	for layer_idx in range(layer_sizes.size() - 1):
@@ -366,7 +382,7 @@ func create_weight_line(from_layer: int, from_neuron: int, to_layer: int, to_neu
 	
 	return line
 
-func create_info_display():
+func create_info_display() -> void:
 	info_display = get_node_or_null("InfoLabel") as Label3D
 	if not info_display:
 		info_display = Label3D.new()
@@ -378,7 +394,7 @@ func create_info_display():
 		add_child(info_display)
 	update_info_display()
 
-func create_error_graph():
+func create_error_graph() -> void:
 	error_graph = get_node_or_null("ErrorGraph")
 	if error_graph: error_graph.queue_free()
 	error_graph = Node3D.new()
@@ -392,7 +408,7 @@ func create_error_graph():
 #  Training Loop
 #=============================================================================
 
-func start_training():
+func start_training() -> void:
 	if is_training: return
 	is_training = true
 	var timer = Timer.new()
@@ -402,7 +418,7 @@ func start_training():
 	add_child(timer)
 	timer.start()
 
-func _run_training_batch():
+func _run_training_batch() -> void:
 	"""Perform one batch of training."""
 	if not is_training or current_epoch >= training_iterations:
 		is_training = false
@@ -563,18 +579,20 @@ func deep_copy(data):
 #  Visualization Updates
 #=============================================================================
 
-func update_visualization():
+func update_visualization() -> void:
 	"""Update the 3D visualization based on current network state."""
-	# Update neuron colors/size based on activation levels
+	# Update neuron colors/size based on activation levels with tween animation
 	if show_activations:
 		for l in range(neuron_meshes.size()):
 			for n in range(neuron_meshes[l].size()):
 				var neuron = neuron_meshes[l][n]
 				var activation = activations[l][n]
 				var material = neuron.material_override as StandardMaterial3D
-				material.emission_energy = activation * 2.0
-				var scale = 1.0 + activation * 0.5
-				neuron.scale = Vector3(scale, scale, scale)
+				material.emission_energy_multiplier = 0.5 + activation * 2.0
+				var target_scale = 1.0 + activation * 0.5
+				# Smooth scale transition instead of instant snap
+				var tween = create_tween()
+				tween.tween_property(neuron, "scale", Vector3.ONE * target_scale, 0.15).set_trans(Tween.TRANS_SINE)
 	
 	# Update weight line colors/thickness
 	if show_weights:
@@ -598,13 +616,13 @@ func update_visualization():
 	update_info_display()
 	update_error_graph()
 
-func update_info_display():
+func update_info_display() -> void:
 	if info_display:
 		info_display.text = "Epoch: %d / %d\n" % [current_epoch, training_iterations]
 		info_display.text += "Error: %.5f\n" % current_error
 		info_display.text += "Activation: %s" % [ "Sigmoid", "ReLU", "Tanh" ][activation_function]
 
-func update_error_graph():
+func update_error_graph() -> void:
 	"""Draws a 3D line graph of the error history."""
 	if not is_instance_valid(error_graph): return
 	
@@ -653,7 +671,7 @@ func test_network(inputs: Array) -> Array:
 	"""Test the trained network with new inputs."""
 	return forward_pass(inputs)
 
-func reset_network():
+func reset_network() -> void:
 	"""Reset the network to initial random state."""
 	if is_training:
 		is_training = false
@@ -667,3 +685,12 @@ func reset_network():
 	update_visualization()
 	if auto_train:
 		start_training()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

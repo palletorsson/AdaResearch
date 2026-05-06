@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpyghkv2qetem"]
+
+[ext_resource type="Script" uid="uid://den0jfnd4fgd6" path="res://commons/audio/systems/discreet_music/DiscreetMusicTest.gd" id="1_root"]
+[ext_resource type="Script" uid="uid://c3jtnwtgbilh8" path="res://commons/audio/systems/discreet_music/DiscreetMusicLooper.gd" id="2_looper"]
+[ext_resource type="Script" uid="uid://ck3t7pwemtb5m" path="res://commons/audio/systems/discreet_music/DiscreetSynth.gd" id="3_synth"]
+[ext_resource type="Script" uid="uid://bdipbm57r7114" path="res://commons/audio/systems/discreet_music/DiscreetVisualizer.gd" id="4_viz"]
+[ext_resource type="Script" uid="uid://bvk4mahgdwm1f" path="res://commons/audio/systems/IntensityController.gd" id="5_ctrl"]
+
+[node name="DiscreetMusicTest" type="Node3D"]
+script = ExtResource("1_root")
+
+[node name="DiscreetMusicLooper" type="Node" parent="."]
+script = ExtResource("2_looper")
+left_synth_path = NodePath("../LeftSynth")
+right_synth_path = NodePath("../RightSynth")
+
+[node name="IntensityController" type="Node" parent="."]
+script = ExtResource("5_ctrl")
+target_node_path = NodePath("../DiscreetMusicLooper")
+
+[node name="LeftSynth" type="AudioStreamPlayer" parent="."]
+script = ExtResource("3_synth")
+
+[node name="RightSynth" type="AudioStreamPlayer" parent="."]
+script = ExtResource("3_synth")
+
+[node name="DiscreetVisualizer" type="Node3D" parent="."]
+script = ExtResource("4_viz")
+looper_path = NodePath("../DiscreetMusicLooper")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+projection = 1
+size = 10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 0, 0)

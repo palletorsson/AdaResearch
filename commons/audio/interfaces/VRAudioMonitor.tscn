@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkvrnpnoen1oh"]
+
+[ext_resource type="Script" uid="uid://co0lielaeip03" path="res://commons/audio/interfaces/VRAudioMonitor.gd" id="1_v4m4"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_viewport"]
+[ext_resource type="PackedScene" uid="uid://d3yq8v5gq2r1" path="res://commons/audio/interfaces/VRAudioMonitorUI.tscn" id="3_ui"]
+[ext_resource type="Material" uid="uid://ada_screen_bezel" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_chassis"]
+size = Vector3(0.32, 0.24, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chassis"]
+size = Vector3(0.34, 0.26, 0.12)
+
+[node name="VRAudioMonitor" type="Node3D"]
+script = ExtResource("1_v4m4")
+
+[node name="Chassis" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_chassis")
+surface_material_override/0 = ExtResource("MatBezel")
+
+[node name="LabelName" type="Label3D" parent="Chassis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.051)
+pixel_size = 0.0005
+text = "MONITOR"
+font_size = 28
+font_color = Color(0.92, 0.92, 0.94, 1)
+outline_size = 0
+uppercase = true
+
+[node name="ScreenOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.051)
+
+[node name="Viewport2Din3D" parent="ScreenOrigin" instance=ExtResource("2_viewport")]
+screen_size = Vector2(0.30, 0.22)
+scene = ExtResource("3_ui")
+viewport_size = Vector2(600, 440)
+unshaded = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_chassis")

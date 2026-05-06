@@ -1,0 +1,56 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CA_EdgeOfChaos",
+  "home_sequence": "cellularautomata",
+  "dimensions": {
+    "w": 7,
+    "d": 9
+  },
+  "signature": "ca_screen provides the visual display for rule classification; disease_spread_ca demonstrates Class IV dynamics in epidemiological modeling; self_organization_ca shows spontaneous pattern formation at criticality; volumetric_fog_ca applies CA rules to 3D atmospheric density.",
+  "style": null,
+  "echoes": [
+    "randomness",
+    "noise"
+  ],
+  "density": 0.167,
+  "breath_zones": [
+    {
+      "size": 8,
+      "bounds": {
+        "x": 4,
+        "z": 5,
+        "w": 3,
+        "d": 3
+      },
+      "centroid": [
+        5.0,
+        6.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 2,
+      "token": "self_organization_ca"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "disease_spread_ca"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "volumetric_fog_ca"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 18,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

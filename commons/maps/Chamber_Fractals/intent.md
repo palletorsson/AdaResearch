@@ -1,0 +1,7 @@
+Concept: Self-similarity across the player-creature boundary — both sides express the same recursion, just with different base cases and branching factors, so the encounter has no convergence point.
+Sequence role: Catalyst chamber for the Fractals sequence, the last map before returning to the Lab. After the sequence's deletion arc (Cantor, Sierpinski, Menger) and its organic arc, this chamber converts self-similarity from geometry into relationship and hands the fractal catalyst to the learner. Follows the sequence's capstone; precedes the Lab return.
+Technical angle: Catalyst mode fractal, projecting shots that branch into four offshoots on impact and whose offshoots branch again to a bounded depth. Creature fractal_hydra regrows two heads for every head cut, branching at factor two per cycle. Science Screen scatter plots events against a depth axis so each side's recursion is legible.
+Critical angle: The chamber turns infinite regress from a mathematical curiosity into a combat problem, then turns the combat problem into a relationship the learner cannot win by finishing. Self-reference is the engine of the sequence's argument; here it is also the constraint the encounter is built on.
+Key artifacts: fractal_hydra carries the creature-side recursion; the fractal catalyst carries the player-side recursion; the Science Screen exposes the two depth traces in parallel so the non-terminating exchange is visible as a pair of curves rather than as a score.
+
+Gap: No gap identified.

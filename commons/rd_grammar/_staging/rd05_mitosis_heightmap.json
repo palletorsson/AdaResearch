@@ -1,0 +1,23 @@
+{
+  "id": "rd05_mitosis_heightmap",
+  "preset": "mitosis",
+  "grid_size": 96,
+  "iterations": 3500,
+  "seed": 5,
+  "render_mode": "heightmap",
+  "height_amp": 0.8,
+  "color_lo": [
+    0.1,
+    0.2,
+    0.25
+  ],
+  "color_hi": [
+    0.7,
+    0.95,
+    0.9
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.55,
+  "layout": "rd_field",
+  "notes": "Mitosis pattern (F=0.0367, K=0.0649). Cells split and self-replicate \u00e2\u20ac\u201d biology from two constants."
+}

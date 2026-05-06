@@ -1,0 +1,64 @@
+{
+    "description": "Annihilation inspired: Unsettling, refracted beauty, detuned synths",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.APHEX_TWIN_MODULAR",
+            "volume_db": -16,
+            "bus": "Refraction"
+        },
+        {
+            "sound_id": "AudioSynthesizer.CINEMATIC_432HZ_PAD",
+            "volume_db": -20,
+            "bus": "Pad"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "liturgical.cathedral_bell",
+                "AudioSynthesizer.SCI_FI_DATA_CHIRPS"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -18,
+                -14
+            ],
+            "bus": "GlassFX"
+        }
+    ],
+    "buses": {
+        "Refraction": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "dry": 0.5,
+                    "wet": 0.8,
+                    "rate_hz": 0.2
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.6
+                }
+            ]
+        },
+        "GlassFX": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 150,
+                    "tap1_level_db": -8.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.5
+                }
+            ]
+        }
+    }
+}

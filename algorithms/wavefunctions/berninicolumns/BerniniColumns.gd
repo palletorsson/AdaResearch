@@ -3,6 +3,19 @@
 # Gian Lorenzo Bernini's baroque architectural style.
 extends Node3D
 
+
+# @identity
+# essence: column(h) = r * (cos(spiral_density*h), h, sin(spiral_density*h)) with sine/cosine amplitude modulation
+# desire: Stand among baroque spiral columns that twist with trigonometric functions and emit organ tones
+# critical_parameter: spiral_density — controls how many helical turns per column height
+# triggers: time animates subtle column rotation; audio_phase drives organ sound generation
+# emerges: the baroque as frozen oscillation — architecture that remembers the wave that shaped it
+# needs: VR walkthrough [has], audio playback [has]
+# relationships: depends on procedural spiral mesh generation; contrasts with sine_cylinder_staircase (decorative vs functional spirals); unlocks wave-as-architecture
+# truth: A spiral column is a sine wave wrapped around a vertical axis.
+
+const BERNINI_BASE_SCENE := preload("res://algorithms/wavefunctions/berninicolumns/bernini_base.tscn")
+
 # -- Configuration --
 
 # Parameters for column generation
@@ -14,27 +27,50 @@ extends Node3D
 @export var vertical_segments: int = 40
 @export var radial_segments: int = 16
 @export var twist_factor: float = 0.8  # How much the column twists as it rises
-@export var material_color: Color = Color(0.8, 0.7, 0.5, 1.0)  # Gold-like color
+@export var material_color: Color = Color(0.96, 0.93, 0.85, 1.0)  # Bright warm marble
 
 # For animated rotation
 @export var rotate_columns: bool = true
 @export var rotation_speed: float = 0.2
 var time: float = 0.0
 
+# Audio System
+var audio_player: AudioStreamPlayer3D
+var audio_stream: AudioStreamGenerator
+var playback: AudioStreamGeneratorPlayback
+const SAMPLE_RATE = 44100.0
+var audio_phase: float = 0.0
+
 # -- Scene State --
 var columns = []
 
-# Column positions (Baldacchino has 4 columns)
-var column_positions = [
-	Vector3(-2, 0, -2),
-	Vector3(2, 0, -2),
-	Vector3(-2, 0, 2),
-	Vector3(2, 0, 2)
-]
+# Column positions - equally spaced 3x3 grid
+@export var grid_spacing: float = 4.0  # Distance between columns
+var column_positions = []
+
+func _generate_grid_positions() -> void:
+	"""Generate a 3x3 equally spaced grid of column positions"""
+	column_positions.clear()
+	var grid_size = 3
+	var offset = (grid_size - 1) * grid_spacing / 2.0
+	
+	for x in range(grid_size):
+		for z in range(grid_size):
+			var pos = Vector3(
+				x * grid_spacing - offset,
+				0,
+				z * grid_spacing - offset
+			)
+			column_positions.append(pos)
 
 # -- Godot Lifecycle Functions --
 
-func _ready():
+func _ready() -> void:
+	_setup_audio()
+	
+	# Generate equally spaced grid positions
+	_generate_grid_positions()
+	
 	# Create the Baldacchino columns
 	for pos in column_positions:
 		var column = create_spiral_column()
@@ -42,42 +78,99 @@ func _ready():
 		add_child(column)
 		columns.append(column)
 	
-	# Create a simple platform/base
-	create_platform()
-	
 	# Add a light to highlight the columns
 	create_lighting()
 
-func _process(delta):
+func _setup_audio() -> void:
+	audio_player = AudioStreamPlayer3D.new()
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = SAMPLE_RATE
+	audio_stream.buffer_length = 0.1
+	
+	audio_player.stream = audio_stream
+	audio_player.unit_size = 15.0
+	audio_player.max_db = -5.0
+	audio_player.autoplay = true
+	
+	add_child(audio_player)
+	audio_player.play()
+	playback = audio_player.get_stream_playback()
+
+func _process(delta: float) -> void:
 	# Animate the columns if enabled
 	if rotate_columns:
 		time += delta
 		for column in columns:
-			# Slow continuous rotation
-			column.rotation.y = time * rotation_speed
+			var rotating_root = column.get_node_or_null("RotatingRoot")
+			if rotating_root:
+				# Slow continuous rotation applied only to the shaft/capital
+				rotating_root.rotation.y = time * rotation_speed
+	
+	_generate_audio_samples()
+
+func _generate_audio_samples() -> void:
+	if not playback:
+		return
+		
+	var frames_available = playback.get_frames_available()
+	if frames_available < 1:
+		return
+		
+	for i in range(frames_available):
+		var sample = 0.0
+		
+		# Generate a chord based on the 8 columns
+		# Frequencies based on a richer D Major chord with octave doubling
+		# Modulate slightly with rotation speed
+		var freqs = [146.83, 185.00, 220.00, 293.66, 73.42, 110.00, 329.63, 440.00] # D2-D4 extended
+		
+		for j in range(min(8, column_positions.size())):
+			var f = freqs[j] + sin(time * 0.5 + j) * 2.0 # Slight detuning
+			
+			# Sawtooth-ish wave for metallic sound
+			var wave = 2.0 * (fmod(audio_phase * f / SAMPLE_RATE + float(j) * 0.25, 1.0) - 0.5)
+			
+			# Soften it to triangle
+			wave = abs(wave) * 2.0 - 1.0
+			
+			sample += wave
+			
+		sample *= 0.1 * rotation_speed # Volume based on rotation
+		
+		playback.push_frame(Vector2(sample, sample))
+		
+		audio_phase += 1.0
+		if audio_phase > SAMPLE_RATE:
+			audio_phase -= SAMPLE_RATE
 
 # --- Procedural Generation Functions ---
 
 func create_spiral_column() -> Node3D:
 	# Creates a single, complete column with a base, shaft, and capital.
 	var column_node = Node3D.new()
+	var rotating_root = Node3D.new()
+	rotating_root.name = "RotatingRoot"
+	column_node.add_child(rotating_root)
 	
 	# Create the main spiral shaft
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = generate_spiral_column_mesh()
 	
-	# Create and apply the material
+	# Create and apply the material — bright to emphasize column form
 	var material = StandardMaterial3D.new()
 	material.albedo_color = material_color
-	material.metallic = 0.8
-	material.roughness = 0.2
+	material.metallic = 0.4
+	material.roughness = 0.35
+	material.emission_enabled = true
+	material.emission = material_color * 0.15
+	material.emission_energy_multiplier = 0.5
 	mesh_instance.set_surface_override_material(0, material)
 	
-	column_node.add_child(mesh_instance)
+	rotating_root.add_child(mesh_instance)
 	
 	# Add the decorative top and bottom parts
 	add_column_base(column_node)
-	add_column_capital(column_node)
+	add_column_capital(rotating_root)
 	
 	return column_node
 
@@ -147,82 +240,23 @@ func generate_spiral_column_mesh() -> Mesh:
 	
 	return st.commit()
 
-func create_tube_trail_base_mesh() -> Mesh:
-	"""Create a tube trail mesh for the column base"""
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
-	# Tube parameters
-	var base_radius = column_radius * 2.0
-	var top_radius = column_radius * 1.5
-	var height = 0.5
-	var segments = radial_segments
-	var rings = 8  # Number of vertical rings for the tube
-	
-	# Generate vertices for the tube
-	for i in range(rings + 1):
-		var v = float(i) / rings  # Vertical progress (0.0 to 1.0)
-		var current_height = v * height
-		var current_radius = lerp(base_radius, top_radius, v)
-		
-		# Create a ring of vertices
-		for j in range(segments + 1):
-			var u = float(j) / segments  # Radial progress (0.0 to 1.0)
-			var angle = u * 2.0 * PI
-			
-			# Calculate vertex position
-			var x = cos(angle) * current_radius
-			var z = sin(angle) * current_radius
-			var vertex = Vector3(x, current_height, z)
-			
-			# Calculate normal (pointing outward from center)
-			var normal = Vector3(x, 0, z).normalized()
-			
-			# Add vertex data
-			st.set_normal(normal)
-			st.set_uv(Vector2(u, v))
-			st.add_vertex(vertex)
-	
-	# Create triangle faces
-	for i in range(rings):
-		for j in range(segments):
-			# Get indices for the four corners of a quad
-			var a = i * (segments + 1) + j
-			var b = i * (segments + 1) + j + 1
-			var c = (i + 1) * (segments + 1) + j
-			var d = (i + 1) * (segments + 1) + j + 1
-			
-			# Create the first triangle of the quad
-			st.add_index(a)
-			st.add_index(b)
-			st.add_index(c)
-			
-			# Create the second triangle of the quad
-			st.add_index(b)
-			st.add_index(d)
-			st.add_index(c)
-	
-	# Finalize the mesh
-	st.generate_normals()
-	st.generate_tangents()
-	
-	return st.commit()
+func add_column_base(column_node: Node3D) -> void:
+	# Adds the Bernini base scene below the column shaft.
+	var base_instance = BERNINI_BASE_SCENE.instantiate()
+	base_instance.position.y = -0.25
+	var mesh_instance := base_instance.get_node_or_null("StaticBody3D/MeshInstance3D") as MeshInstance3D
+	if mesh_instance:
+		var material = StandardMaterial3D.new()
+		material.albedo_color = material_color
+		material.metallic = 0.4
+		material.roughness = 0.35
+		material.emission_enabled = true
+		material.emission = material_color * 0.15
+		material.emission_energy_multiplier = 0.5
+		mesh_instance.set_surface_override_material(0, material)
+	column_node.add_child(base_instance)
 
-func add_column_base(column_node: Node3D):
-	# Adds a tube trail mesh base to the bottom of a column.
-	var base = MeshInstance3D.new()
-	base.mesh = create_tube_trail_base_mesh()
-	base.position.y = -0.25
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = material_color
-	material.metallic = 0.8
-	material.roughness = 0.2
-	base.set_surface_override_material(0, material)
-	
-	column_node.add_child(base)
-
-func add_column_capital(column_node: Node3D):
+func add_column_capital(column_node: Node3D) -> void:
 	# Adds a cylindrical capital to the top of a column.
 	var capital = MeshInstance3D.new()
 	var cylinder_mesh = CylinderMesh.new()
@@ -235,47 +269,18 @@ func add_column_capital(column_node: Node3D):
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = material_color
-	material.metallic = 0.8
-	material.roughness = 0.2
+	material.metallic = 0.4
+	material.roughness = 0.35
+	material.emission_enabled = true
+	material.emission = material_color * 0.15
+	material.emission_energy_multiplier = 0.5
 	capital.set_surface_override_material(0, material)
 	
 	column_node.add_child(capital)
 
 # --- Scene Setup Functions ---
 
-func create_platform():
-	# Creates a three-step base for the columns.
-	var base_material = StandardMaterial3D.new()
-	base_material.albedo_color = Color(0.6, 0.6, 0.6, 1.0) # Gray marble-like color
-
-	# Step 1 (Bottom)
-	var step1 = MeshInstance3D.new()
-	var mesh1 = BoxMesh.new()
-	mesh1.size = Vector3(8.0, 0.2, 8.0)
-	step1.mesh = mesh1
-	step1.position.y = -0.1
-	step1.set_surface_override_material(0, base_material)
-	add_child(step1)
-
-	# Step 2 (Middle)
-	var step2 = MeshInstance3D.new()
-	var mesh2 = BoxMesh.new()
-	mesh2.size = Vector3(7.0, 0.2, 7.0)
-	step2.mesh = mesh2
-	step2.position.y = 0.1
-	step2.set_surface_override_material(0, base_material)
-	add_child(step2)
-
-	# Step 3 (Top)
-	var step3 = MeshInstance3D.new()
-	var mesh3 = BoxMesh.new()
-	mesh3.size = Vector3(6.0, 0.2, 6.0)
-	step3.mesh = mesh3
-	step3.position.y = 0.3
-	step3.set_surface_override_material(0, base_material)
-	add_child(step3)
-
-func create_lighting():
+func create_lighting() -> void:
 	# Sets up basic lighting for the scene to make the columns visible.
 	var dir_light = DirectionalLight3D.new()
 	dir_light.light_energy = 1.2
@@ -292,9 +297,19 @@ func create_lighting():
 	for pos in column_positions:
 		var spotlight = SpotLight3D.new()
 		spotlight.position = pos + Vector3(0, column_height * 1.5, 0)
-		spotlight.look_at_from_position(spotlight.position, pos, Vector3.UP)
+		# Use FORWARD as up vector when looking straight down to avoid colinear vectors
+		spotlight.look_at_from_position(spotlight.position, pos, Vector3.FORWARD)
 		spotlight.light_energy = 2.0
 		spotlight.light_color = Color(1.0, 0.9, 0.7) # Warm golden light
 		spotlight.spot_range = column_height * 2.0
 		spotlight.spot_angle = 30.0
 		add_child(spotlight)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

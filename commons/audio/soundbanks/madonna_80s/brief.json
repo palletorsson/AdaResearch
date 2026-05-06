@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "id": "madonna_80s",
+    "name": "Madonna 80s Pop",
+    "lineage": "Madonna, Nile Rodgers, Jellybean Benitez, Stock Aitken Waterman",
+    "era": "1983-1989",
+    "bpm": { "min": 110, "max": 125, "typical": 118 },
+    "lambda": 0.35
+  },
+
+  "identity": {
+    "token": "LinnDrum + Oberheim stabs + synth bass + bright optimism",
+    "two_second_test": "Punchy drums, bright synth stab, uplifting energy",
+    "emotional_truth": "Glamour, confidence, dance floor empowerment"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "clap", "bass", "stab", "pad", "arp"],
+
+  "forbidden": [
+    "vinyl_crackle",
+    "tape_degradation",
+    "hoover_bass",
+    "distortion",
+    "lo_fi",
+    "minor_key_only",
+    "sparse_arrangement"
+  ],
+
+  "rhythm": {
+    "quantize": "tight",
+    "humanize_ms": 2,
+    "swing_pct": 0
+  },
+
+  "harmony": {
+    "scales": ["major", "mixolydian"],
+    "voicings": "bright_pop"
+  },
+
+  "fx": {
+    "gated_reverb": true,
+    "chorus": true,
+    "bright_eq": true
+  },
+
+  "transitions": {
+    "crossfade_s": 1.5
+  },
+
+  "sections": {
+    "intro": ["pad", "arp"],
+    "verse": ["kick", "snare", "hihat", "bass", "pad"],
+    "prechorus": ["kick", "snare", "hihat", "clap", "bass", "pad", "arp"],
+    "chorus": ["kick", "snare", "hihat", "clap", "bass", "stab", "pad", "arp"],
+    "outro": ["pad", "arp"]
+  }
+}

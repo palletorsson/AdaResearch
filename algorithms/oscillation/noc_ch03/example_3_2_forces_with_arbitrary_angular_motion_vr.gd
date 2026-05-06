@@ -1,13 +1,25 @@
 # ===========================================================================
 # NOC Example 3.2: Forces with Arbitrary Angular Motion
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing -> GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
+#
+# @identity
+# essence: a += F/m, v += a, p += v, omega += random, theta += omega. Linear attraction plus independent angular motion. Two dynamics, one body.
+# desire: To show that rotation and translation are independent — boxes orbit an attractor while spinning at their own rate, two freedoms coexisting.
+# critical_parameter: angular_damping (0.9-0.999) — controls how quickly spin decays. Low damping = chaotic spinning. High damping = gradual alignment. The knob between chaos and order.
+# triggers: Automatic — 8 movers orbit attractor, each accumulating random angular velocity. VR sliders → attractor strength and angular damping.
+# emerges: Movers wrapping around boundaries and re-entering from the opposite side (toroidal space). Spin rates diverging as random angular impulses accumulate.
+# needs: VR parameter controllers [has], attractor visualization [has]. Missing: angular velocity display arrows, trail visualization.
+# relationships: Extends torque_demo concepts to many bodies. Lives in ForcesSystems. Bridges linear forces (attraction) with angular dynamics (spin).
+# truth: Rotation does not need a force. It needs a torque — or random impulses. Translation and rotation are independent stories told by the same body.
 
+class_name ArbitraryAngularMotionVR
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_ATTRACTOR := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_accent.tres")
@@ -26,6 +38,7 @@ var _controller_root: Node3D
 func _ready() -> void:
 	_setup_environment()
 	_spawn_scene()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -73,6 +86,7 @@ func _spawn_scene() -> void:
 	_attractor = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.06
+	sphere.height = sphere.radius * 2.0
 	_attractor.mesh = sphere
 	_attractor.material_override = MAT_ATTRACTOR
 	_attractor.position = Vector3(0, 0.5, 0)
@@ -106,6 +120,11 @@ func _process(delta: float) -> void:
 
 	_status_label.text = "Angular + Forces | %d movers" % _movers.size()
 
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
 func _exit_tree() -> void:
 	for m in _movers:
 		m.queue_free()
@@ -121,8 +140,17 @@ class AngularMover:
 
 	var position: Vector3:
 		get:
+			if not is_instance_valid(root):
+				return Vector3.ZERO
 			return root.global_position
 		set(value):
+			if not is_instance_valid(root):
+				return
+			if root.get_parent() is Node3D:
+				var det := (root.get_parent() as Node3D).global_transform.basis.determinant()
+				if abs(det) < 0.0001:
+					root.position = value
+					return
 			root.global_position = value
 
 	func init(parent: Node3D, mat: Material) -> void:
@@ -169,3 +197,6 @@ class AngularMover:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

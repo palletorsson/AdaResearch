@@ -10,10 +10,32 @@
 
 # Project Directories to Exclude
 # =============================================================================
-/addons/
+/addons/*
+!/addons/audio_catalog_editor/
+!/addons/audio_catalog_editor/**
+!/addons/map_sequence_editor/
+!/addons/map_sequence_editor/**
 /build/
 /assets/
 /android/
+
+# Out-of-project archive — auto-research maps, captures, narrations, and
+# other artifacts the Godot project produces but doesn't load. Files stay
+# on disk for tooling (preset clusterer, etc.) but never enter the repo.
+# See _archive/README.md for layout. Per-subdir .gdignore files tell
+# Godot's importer to skip them as well.
+/_archive/
+/ada_run/captures/
+/ada_run/narrations/
+/ada_run/noc_vr_shots/
+/ada_run/artifact_measurements.json
+/ada_run/*.checkpoint.json
+/ada_run/*.progress.txt
+/ada_run/*.skip_list.txt
+/ada_run/capture_daemon.pid
+
+# Claude Code worktree leftovers — disposable session dirs.
+/commons/maps/tmpclaude-*
 
 
 # Godot Export & Build Files
@@ -293,3 +315,39 @@ icon.png.import
 *.uid
 _android/.build_version
 nul
+temp_errors.yaml
+
+# Python compile artifacts
+__pycache__/
+*.pyc
+
+# Claude local state
+.claude/scheduled_tasks.lock
+tools/claude_http_context.json
+
+# Next.js build artifacts (nested encyclopedia clone)
+ada_encyclopedia/
+
+# Scratch + per-render staging dirs (auto-generated config outputs of
+# mesh_grammar / substrate / artifact research pipelines)
+_tmp_*
+tmp_*
+**/_staging/
+
+# Auto-regenerated report — changes on every analysis run
+doc/HEAT_MAP.json
+
+# Auto-generated gallery / research outputs (per-render outputs of
+# build_gallery_best_of_manifest and similar tools)
+commons/generated/
+
+# Generated capture images — these are written by Godot capture scripts
+# and Python research tools, then served by the ada_encyclopedia
+# (see tools/move_uncommitted_images.py for the one-time migration).
+# Never commit them to this repo.
+ada_run/captures/
+commons/maps/*/map_iso.png
+commons/maps/*/map_top.png
+commons/maps/*/*.jpg
+doc/reports/map_comparisons/
+doc/reports/map_strategies/

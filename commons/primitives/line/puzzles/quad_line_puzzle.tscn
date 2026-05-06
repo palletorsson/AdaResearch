@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5kkxp8d6p84w"]
+
+[ext_resource type="Script" path="res://commons/primitives/line/puzzles/quad_line_puzzle.gd" id="1_quad"]
+[ext_resource type="PackedScene" uid="uid://c8j5k2v0n7nak" path="res://commons/primitives/logic_display/CategoryLogicDisplay.tscn" id="2_display"]
+
+[node name="QuadLinePuzzle" type="Node3D"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+script = ExtResource("1_quad")
+auto_validate = true
+marker_color = Color(0, 0.8, 1, 0.6)
+marker_active_color = Color(0, 1, 0.8, 0.9)
+completion_color = Color(0.2, 1, 0.6, 1)
+line_color = Color(0.1, 0.7, 0.9, 0.9)
+line_locked_color = Color(0.3, 1, 0.7, 1)
+lock_on_complete = true
+
+[node name="QuadLogicDisplay" parent="." instance=ExtResource("2_display")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.6, 0)
+equation = ["line", "times", "4", "equals", "quad"]

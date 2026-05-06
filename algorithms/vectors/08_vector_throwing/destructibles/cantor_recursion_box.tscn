@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxak3m4n6px7y"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/08_vector_throwing/destructibles/cantor_recursion_box.gd" id="1_script"]
+
+[node name="CantorRecursionBox" type="RigidBody3D"]
+script = ExtResource("1_script")

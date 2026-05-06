@@ -1,17 +1,29 @@
 # res://profiles/EditableProfile_PinkFold.gd
 extends Node3D
+
+# @identity
+# essence: zigzag(n_triangles, height_high, height_low) — a strip of alternating triangles forming a pleat profile
+# desire: learner feels how a complex perimeter shape is just many small triangles sharing edges
+# critical_parameter: grab_point_count — how many vertex handles exist along the zigzag strip perimeter
+# triggers: dragging any grab handle — the triangle strip deforms, showing how local edits ripple through profile
+# emerges: the strip as a minimal surface description — pleats and folds arise from alternating vertex heights
+# needs: [has many grabbable vertex handles [has], missing global height/frequency sliders]
+# relationships: sibling to triangle; demonstrates that profiles and extrusions are just strips of triangles
+# truth: a complex surface profile is built from the simplest unit — a triangle — repeated with shared edges
+
 ## One editable "folded paper (narrow pleats)" profile built from triangles.
 ## Baseline is at y = base_y, and the mesh is pink.
 
-@export var base_y: float = 1.2
-@export var segment_width: float = 1.0
-@export var height: float = 1.2
-@export var segment_count: int = 16
+@export var base_y: float = 0.5
+@export var segment_width: float = 0.5
+@export var height: float = 0.2
+@export var segment_count: int = 32 # Higher res for perimeter
 @export var double_sided: bool = true
-@export var sphere_scale: float = 0.5
+@export var sphere_scale: float = 0.3
 
-# Pink color
+# Pink colors
 @export var color_profile := Color(1.0, 0.08, 0.58) # deep pink-ish
+@export var color_alt := Color(0.8, 0.0, 0.4) # darker pink
 
 var _profile := {
 	"name": "Folded_Pink",
@@ -19,7 +31,8 @@ var _profile := {
 	"mesh": null,
 	"verts": [],
 	"drag_points": null,
-	"color": null
+	"color": null,
+	"collision_shape": null
 }
 
 func _ready() -> void:
@@ -28,6 +41,9 @@ func _ready() -> void:
 		c.queue_free()
 
 	_create_profile_folded_narrow(0.0) # z-offset 0
+
+# -----------------------------------------------------------------------------------
+# Builder: standing open folded paper (narrow pleats), pink
 
 # -----------------------------------------------------------------------------------
 # Builder: standing open folded paper (narrow pleats), pink
@@ -41,19 +57,51 @@ func _create_profile_folded_narrow(z_offset: float) -> void:
 	var mi := MeshInstance3D.new()
 	mi.name = "Mesh_Folded_Pink"
 	parent.add_child(mi)
+	
+	# Collision Setup
+	var sb := StaticBody3D.new()
+	sb.name = "StaticBody"
+	parent.add_child(sb)
+	
+	var col := CollisionShape3D.new()
+	col.name = "CollisionShape"
+	sb.add_child(col)
+	_profile["collision_shape"] = col
 
 	# Ridge vertices: alternate crest/trough above baseline
 	var verts: Array[Vector3] = []
-	var w := segment_width
 	var crest := base_y + height * 1.0
 	var trough := base_y + height * 0.1
+	
+	# Square Perimeter Logic
+	var side_len = 5.0
+	var total_perimeter = side_len * 4.0
+	
+	var h = side_len / 2.0
+	var corners = [
+		Vector3(-h, 0, -h),
+		Vector3(h, 0, -h),
+		Vector3(h, 0, h),
+		Vector3(-h, 0, h),
+		Vector3(-h, 0, -h)
+	]
 
 	for i in range(segment_count + 1):
-		var x := float(i) * w
+		# Normalized position 0..1
+		var t = float(i) / float(segment_count)
+		var pos_on_perim = _get_point_on_square_path(t, corners)
+		
 		var y_val := crest
 		if (i % 2) == 1:
 			y_val = trough
-		verts.append(Vector3(x, y_val, z_offset))
+			
+		# Used to rely on 'z_offset' for the straight line depth.
+		# The prompt says "wrapped around a square perimeter". 
+		# This likely implies the profile *extrudes* along this path or *stands* on it.
+		# The current profile is a vertical zigzag wall.
+		# So x/z are determined by the path, y is by crest/trough.
+		
+		verts.append(Vector3(pos_on_perim.x, y_val, pos_on_perim.z + z_offset))
 
 	var drag_points := DragPointSet.new()
 	drag_points.name = "GrabPoints"
@@ -94,6 +142,26 @@ func _create_profile_folded_narrow(z_offset: float) -> void:
 
 	_update_profile_mesh_from_verts()
 
+func _get_point_on_square_path(t: float, corners: Array) -> Vector3:
+	var total_len = 0.0
+	var lengths = []
+	for i in range(corners.size() - 1):
+		var l = corners[i].distance_to(corners[i+1])
+		lengths.append(l)
+		total_len += l
+		
+	var target_dist = t * total_len
+	var current_dist = 0.0
+	
+	for i in range(corners.size() - 1):
+		var l = lengths[i]
+		if current_dist + l >= target_dist - 0.001: 
+			var seg_t = (target_dist - current_dist) / l
+			return corners[i].lerp(corners[i+1], seg_t)
+		current_dist += l
+	
+	return corners[corners.size()-1]
+
 # -----------------------------------------------------------------------------------
 # Mesh update: triangulate the strip to baseline y = base_y
 
@@ -106,30 +174,36 @@ func _update_profile_mesh_from_verts() -> void:
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.roughness = 0.9
+	mat.vertex_color_use_as_albedo = true
+	mat.roughness = 1.0
+	mat.metallic = 0.0
+	mat.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	mat.emission_enabled = true
-	mat.emission = color * 0.3  # Add subtle emission using the profile color
-
-	var z_off := (_profile["node"] as Node3D).position.z
+	mat.emission = color * 0.2
 
 	for i in range(verts.size() - 1):
-		var x0 = verts[i].x
-		var x1 = verts[i + 1].x
-		var v0 := Vector3(x0, base_y, z_off)      # baseline left
-		var v1 := Vector3(x1, base_y, z_off)      # baseline right
-		var v2 := Vector3(verts[i + 1].x, verts[i + 1].y, z_off)  # ridge right
-		var v3 := Vector3(verts[i].x,     verts[i].y,     z_off)  # ridge left
+		# Use actual x,z from vertices (following square perimeter)
+		var vert_curr: Vector3 = verts[i]
+		var vert_next: Vector3 = verts[i + 1]
+		var v0 := Vector3(vert_curr.x, base_y, vert_curr.z)   # baseline left
+		var v1 := Vector3(vert_next.x, base_y, vert_next.z)   # baseline right
+		var v2 := vert_next                                    # ridge right
+		var v3 := vert_curr                                    # ridge left
 
-		_add_face(st, v0, v1, v2)
-		_add_face(st, v0, v2, v3)
+		# Alternate colors for segments
+		var c = color_profile if (i % 2 == 0) else color_alt
+
+		_add_face(st, v0, v1, v2, c)
+		_add_face(st, v0, v2, v3, c)
 
 	var mesh := st.commit()
 	mi.mesh = mesh
 	mi.material_override = mat
-
-# -----------------------------------------------------------------------------------
-# Helpers
+	
+	# Update Collision
+	if _profile["collision_shape"]:
+		var col_shape_node: CollisionShape3D = _profile["collision_shape"]
+		col_shape_node.shape = mesh.create_trimesh_shape()
 
 func _on_drag_point_moved(index: int, position: Vector3, meta: Dictionary) -> void:
 	var verts: Array = _profile["verts"]
@@ -139,20 +213,31 @@ func _on_drag_point_moved(index: int, position: Vector3, meta: Dictionary) -> vo
 			verts[point_index] = position
 			_update_profile_mesh_from_verts()
 
-func _add_face(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
+func _add_face(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, color: Color) -> void:
 	var n := (b - a).cross(c - a).normalized()
+	
+	st.set_color(color)
 	st.set_normal(n)
 	st.add_vertex(a)
+	
+	st.set_color(color)
 	st.set_normal(n)
 	st.add_vertex(b)
+	
+	st.set_color(color)
 	st.set_normal(n)
 	st.add_vertex(c)
 
 	if double_sided:
 		var n2 := -n
+		st.set_color(color)
 		st.set_normal(n2)
 		st.add_vertex(a)
+		
+		st.set_color(color)
 		st.set_normal(n2)
 		st.add_vertex(c)
+		
+		st.set_color(color)
 		st.set_normal(n2)
 		st.add_vertex(b)

@@ -34,7 +34,7 @@ var vr_player = null
 var boid_manager = null
 
 
-func _ready():
+func _ready() -> void:
 	# Initialize with random velocity
 	velocity = Vector3(
 		randf_range(-1, 1),
@@ -51,8 +51,15 @@ func _ready():
 	if parent and parent.has_method("get_boids"):
 		boid_manager = parent
 
+	# Attach Ribbon Trail
+	var trail_ref = load("res://algorithms/emergentsystems/boidflocking/TrailRibbon.gd")
+	if trail_ref:
+		var trail = trail_ref.new()
+		trail.color = Color(1, 0.2, 1, 0.5)
+		add_child(trail)
 
-func _physics_process(delta):
+
+func _physics_process(delta: float) -> void:
 	# Calculate all steering forces
 	var alignment = Vector3.ZERO
 	var cohesion = Vector3.ZERO
@@ -169,7 +176,7 @@ func _physics_process(delta):
 
 
 # This method can be called from outside to temporarily attract or repel the boid
-func apply_force_from_vr(direction, strength, duration=1.0):
+func apply_force_from_vr(direction, strength, duration=1.0) -> void:
 	var force = direction.normalized() * strength
 	
 	# Apply immediate force
@@ -185,5 +192,14 @@ func apply_force_from_vr(direction, strength, duration=1.0):
 			duration
 		)
 
-func _apply_diminishing_force(force):
+func _apply_diminishing_force(force) -> void:
 	acceleration += force
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

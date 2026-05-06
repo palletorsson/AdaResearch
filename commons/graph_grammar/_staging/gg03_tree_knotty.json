@@ -1,0 +1,39 @@
+{
+  "id": "gg03_tree_knotty",
+  "notes": "Tree with noise-modulated radii \u00e2\u20ac\u201d knotty bark-like thickness variation.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.2
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.85,
+        "spread_deg": 35,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "noise_radii",
+      "selector": "all",
+      "params": {
+        "amp": 0.6,
+        "freq": 3.0,
+        "seed": 22,
+        "floor": 0.35
+      }
+    }
+  ]
+}

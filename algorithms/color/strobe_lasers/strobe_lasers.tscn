@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cljfmbcdlju26"]
+
+[ext_resource type="Script" uid="uid://bc0m8b1q8n56e" path="res://algorithms/color/strobe_lasers/strobe_lasers.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://6jckrguoiesn" path="res://core/line3d.gd" id="2_sjh1m"]
+
+[node name="StrobeLaserSystem" type="Node3D"]
+transform = Transform3D(0.7729854, 0, 0.64005256, 0, 1, 0, -0.64005256, 0, 0.7729854, 0, 0, 0)
+script = ExtResource("1_script")
+beam_count = 12
+beam_length = 15.0
+spread_angle_deg = 360.0
+rotation_speed = 1.0
+strobe_frequency = 15.0
+rainbow_mode = true
+
+[node name="Line3D" type="MeshInstance3D" parent="."]
+script = ExtResource("2_sjh1m")
+metadata/_custom_type_script = "uid://6jckrguoiesn"

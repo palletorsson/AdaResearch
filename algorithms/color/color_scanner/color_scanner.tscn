@@ -116,9 +116,6 @@ emission_energy_multiplier = 0.3
 
 [node name="ColorScanner" type="Node3D"]
 script = ExtResource("1_7h4kv")
-scan_range = 15.0
-scan_frequency = 30.0
-beam_intensity = 0.8
 
 [node name="ColorPalletWall" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)

@@ -1,0 +1,43 @@
+{
+  "map": "Joints_Kinematics",
+  "edge": "E",
+  "shots": {
+    "above": "plate_critique_shots\\Joints_Kinematics\\above.png",
+    "front": "plate_critique_shots\\Joints_Kinematics\\front.png",
+    "left": "plate_critique_shots\\Joints_Kinematics\\left.png",
+    "right": "plate_critique_shots\\Joints_Kinematics\\right.png",
+    "back": "plate_critique_shots\\Joints_Kinematics\\back.png"
+  },
+  "result": {
+    "model": "claude-sonnet-4-5",
+    "critique": {
+      "score": 2,
+      "verdict": "misreads edge \u2014 teaches IK technique, not embodiment tension",
+      "paragraph": "This plate teaches articulated joint hierarchies and inverse kinematics \u2014 a technical implementation pattern \u2014 rather than the phenomenological mismatch between continuous bodies and discrete algorithms. The purple wave pattern hints at continuous motion, but there is no visible discrete apparatus to create tension against it. The spatial grammar reads as 'here is how FK/IK works' rather than 'the algorithm cannot hold the body.' The blurb confirms the misread: it describes constraint propagation and endpoint solving, not the lived experience of being quantised by a system not built for you. Edge E demands a dance floor that punishes smoothness or rewards grid-snapping; this map offers a kinematic demo.",
+      "strengths": [
+        "Clean, minimal composition with centered teaching artifact",
+        "Purple wave pattern suggests continuous motion/flow vocabulary",
+        "Kinematic rig is legible as a joint chain structure"
+      ],
+      "weaknesses": [
+        "No discrete grid visible to contrast with continuous body motion",
+        "Blurb describes technical IK implementation, not body-algorithm phenomenology",
+        "No spatial grammar for quantisation apparatus or frame-stepping",
+        "Missing the 'dance for/beside algorithm' choice point specified in edge sketch",
+        "Scale too small to choreograph embodied tension across space",
+        "No Vitruvian/Marey/chronophotographic visual reference to signal discrete-continuous bracket"
+      ],
+      "next_gen_hints": [
+        "Replace IK artifact with grid-snapping dance floor that visually highlights when player motion quantises to discrete cells",
+        "Add visual trail system showing continuous VR controller path versus discrete algorithm interpretation (Marey-style motion frames)",
+        "Create two spatial paths: one rewarding grid-aligned movement, one punishing it \u2014 force player to choose dance grammar",
+        "Expand floor pattern to show chronophotographic frames of player body discretised across time-space",
+        "Add Vitruvian circle/square overlay that constrains body into geometric grid when activated",
+        "Introduce CA or automaton that advances only when player's gait matches its discrete rhythm",
+        "Show body-trace artifacts: continuous gesture frozen into discrete pose keyframes along path"
+      ],
+      "edge_reads_as": "J (joining/composition technique) or K (kinematic implementation) \u2014 not E"
+    },
+    "raw": "```json\n{\n  \"score\": 2,\n  \"verdict\": \"misreads edge \u2014 teaches IK technique, not embodiment tension\",\n  \"paragraph\": \"This plate teaches articulated joint hierarchies and inverse kinematics \u2014 a technical implementation pattern \u2014 rather than the phenomenological mismatch between continuous bodies and discrete algorithms. The purple wave pattern hints at continuous motion, but there is no visible discrete apparatus to create tension against it. The spatial grammar reads as 'here is how FK/IK works' rather than 'the algorithm cannot hold the body.' The blurb confirms the misread: it describes constraint propagation and endpoint solving, not the lived experience of being quantised by a system not built for you. Edge E demands a dance floor that punishes smoothness or rewards grid-snapping; this map offers a kinematic demo.\",\n  \"strengths\": [\n    \"Clean, minimal composition with centered teaching artifact\",\n    \"Purple wave pattern suggests continuous motion/flow vocabulary\",\n    \"Kinematic rig is legible as a joint chain structure\"\n  ],\n  \"weaknesses\": [\n    \"No discrete grid visible to contrast with continuous body motion\",\n    \"Blurb describes technical IK implementation, not body-algorithm phenomenology\",\n    \"No spatial grammar for quantisation apparatus or frame-stepping\",\n    \"Missing the 'dance for/beside algorithm' choice point specified in edge sketch\",\n    \"Scale too small to choreograph embodied tension across space\",\n    \"No Vitruvian/Marey/chronophotographic visual reference to signal discrete-continuous bracket\"\n  ],\n  \"next_gen_hints\": [\n    \"Replace IK artifact with grid-snapping dance floor that visually highlights when player motion quantises to discrete cells\",\n    \"Add visual trail system showing continuous VR controller path versus discrete algorithm interpretation (Marey-style motion frames)\",\n    \"Create two spatial paths: one rewarding grid-aligned movement, one punishing it \u2014 force player to choose dance grammar\",\n    \"Expand floor pattern to sho"
+  }
+}

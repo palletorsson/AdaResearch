@@ -58,13 +58,13 @@ var decision_display: Label3D
 # Sampling animation
 var sampling_tween: Tween
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	setup_visualization()
 	setup_info_displays()
 	reset_test()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -87,7 +87,7 @@ func setup_vr():
 			xr_origin.add_child(controller)
 			controllers.append(controller)
 
-func setup_visualization():
+func setup_visualization() -> void:
 	"""Create visualization elements"""
 	# Null distribution display
 	null_distribution_display = Node3D.new()
@@ -109,7 +109,7 @@ func setup_visualization():
 	p_value_display.position = Vector3(0, -0.5, 0)
 	add_child(p_value_display)
 
-func setup_info_displays():
+func setup_info_displays() -> void:
 	"""Create information displays"""
 	info_display = Label3D.new()
 	info_display.position = Vector3(-2.5, 2.5, 0)
@@ -123,14 +123,14 @@ func setup_info_displays():
 	decision_display.modulate = Color.WHITE
 	add_child(decision_display)
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		collect_sample()
 	elif button_name == "grip_click":
 		change_test_type()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
@@ -140,7 +140,7 @@ func _input(event):
 		elif event.keycode == KEY_R:
 			reset_test()
 
-func collect_sample():
+func collect_sample() -> void:
 	"""Collect sample data and perform hypothesis test"""
 	generate_sample_data()
 	
@@ -149,7 +149,7 @@ func collect_sample():
 	else:
 		perform_hypothesis_test()
 
-func generate_sample_data():
+func generate_sample_data() -> void:
 	"""Generate sample data based on true population parameters"""
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -181,7 +181,7 @@ func generate_sample_data():
 				sample_data.append(before)
 				sample_data_2.append(after)
 
-func animate_sampling_process():
+func animate_sampling_process() -> void:
 	"""Animate the data collection process"""
 	if sampling_tween:
 		sampling_tween.kill()
@@ -195,11 +195,11 @@ func animate_sampling_process():
 	# Animate each data point appearing
 	for i in range(sample_data.size()):
 		sampling_tween.tween_callback(show_sample_point.bind(i))
-		sampling_tween.tween_delay(0.05)
+		sampling_tween.tween_interval(0.05)
 	
 	sampling_tween.tween_callback(perform_hypothesis_test)
 
-func show_sample_point(index: int):
+func show_sample_point(index: int) -> void:
 	"""Show individual sample point"""
 	if index >= sample_data.size():
 		return
@@ -207,6 +207,7 @@ func show_sample_point(index: int):
 	var point = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.02
+	sphere_mesh.height = 0.04
 	point.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()
@@ -223,7 +224,7 @@ func show_sample_point(index: int):
 	point.position = Vector3(x_pos, y_pos, z_pos)
 	sample_display.add_child(point)
 
-func perform_hypothesis_test():
+func perform_hypothesis_test() -> void:
 	"""Perform the selected hypothesis test"""
 	match test_type:
 		TestType.ONE_SAMPLE_T_TEST:
@@ -237,7 +238,7 @@ func perform_hypothesis_test():
 	
 	update_all_displays()
 
-func perform_one_sample_t_test():
+func perform_one_sample_t_test() -> void:
 	"""Perform one-sample t-test"""
 	# Calculate sample statistics
 	sample_mean = calculate_mean(sample_data)
@@ -254,7 +255,7 @@ func perform_one_sample_t_test():
 	# Make decision
 	is_significant = p_value < alpha_level
 
-func perform_two_sample_t_test():
+func perform_two_sample_t_test() -> void:
 	"""Perform independent two-sample t-test"""
 	sample_mean = calculate_mean(sample_data)
 	sample_std = calculate_std(sample_data)
@@ -276,7 +277,7 @@ func perform_two_sample_t_test():
 	
 	is_significant = p_value < alpha_level
 
-func perform_paired_t_test():
+func perform_paired_t_test() -> void:
 	"""Perform paired t-test"""
 	# Calculate differences
 	var differences: Array[float] = []
@@ -295,12 +296,12 @@ func perform_paired_t_test():
 	
 	is_significant = p_value < alpha_level
 
-func perform_chi_square_test():
+func perform_chi_square_test() -> void:
 	"""Perform chi-square goodness of fit test"""
 	# Simplified chi-square test implementation
 	pass
 
-func update_all_displays():
+func update_all_displays() -> void:
 	"""Update all visualization displays"""
 	update_null_distribution()
 	update_test_statistic_display()
@@ -308,7 +309,7 @@ func update_all_displays():
 	update_info_display_text()
 	update_decision_display()
 
-func update_null_distribution():
+func update_null_distribution() -> void:
 	"""Update null distribution visualization"""
 	# Clear existing
 	for child in null_distribution_display.get_children():
@@ -341,7 +342,7 @@ func update_null_distribution():
 	label.font_size = 18
 	null_distribution_display.add_child(label)
 
-func create_critical_regions(critical_t: float):
+func create_critical_regions(critical_t: float) -> void:
 	"""Create shaded critical regions"""
 	# Right tail
 	var right_region = MeshInstance3D.new()
@@ -355,7 +356,7 @@ func create_critical_regions(critical_t: float):
 	create_shaded_region(left_region, -1.0, left_x, Color.RED)
 	null_distribution_display.add_child(left_region)
 
-func create_shaded_region(mesh_instance: MeshInstance3D, x_start: float, x_end: float, color: Color):
+func create_shaded_region(mesh_instance: MeshInstance3D, x_start: float, x_end: float, color: Color) -> void:
 	"""Create shaded region for critical area"""
 	var box_mesh = BoxMesh.new()
 	var width = x_end - x_start
@@ -369,7 +370,7 @@ func create_shaded_region(mesh_instance: MeshInstance3D, x_start: float, x_end: 
 	
 	mesh_instance.position = Vector3((x_start + x_end) / 2.0, 0.75, -0.01)
 
-func update_test_statistic_display():
+func update_test_statistic_display() -> void:
 	"""Update test statistic visualization"""
 	# Clear existing
 	for child in test_statistic_display.get_children():
@@ -378,7 +379,7 @@ func update_test_statistic_display():
 	# Show test statistic as vertical line on null distribution
 	var t_line = MeshInstance3D.new()
 	var x_pos = clamp(test_statistic / 5.0, -1.0, 1.0)
-	var line_points = [Vector3(x_pos, 0, 0.01), Vector3(x_pos, 1.5, 0.01)]
+	var line_points: Array[Vector3] = [Vector3(x_pos, 0, 0.01), Vector3(x_pos, 1.5, 0.01)]
 	create_line_mesh(t_line, line_points, Color.YELLOW)
 	test_statistic_display.add_child(t_line)
 	
@@ -390,7 +391,7 @@ func update_test_statistic_display():
 	label.modulate = Color.YELLOW
 	test_statistic_display.add_child(label)
 
-func update_p_value_display():
+func update_p_value_display() -> void:
 	"""Update p-value visualization"""
 	# Clear existing
 	for child in p_value_display.get_children():
@@ -414,7 +415,7 @@ func update_p_value_display():
 	# Add alpha level reference line
 	var alpha_line = MeshInstance3D.new()
 	var alpha_x = 2.0 * alpha_level - 1.0
-	var alpha_points = [Vector3(alpha_x, -0.2, 0), Vector3(alpha_x, 0.2, 0)]
+	var alpha_points: Array[Vector3] = [Vector3(alpha_x, -0.2, 0), Vector3(alpha_x, 0.2, 0)]
 	create_line_mesh(alpha_line, alpha_points, Color.WHITE)
 	p_value_display.add_child(alpha_line)
 	
@@ -431,7 +432,7 @@ func update_p_value_display():
 	alpha_label.font_size = 16
 	p_value_display.add_child(alpha_label)
 
-func update_info_display_text():
+func update_info_display_text() -> void:
 	"""Update information display"""
 	var text = "Hypothesis Testing\n\n"
 	text += "Test: %s\n" % get_test_type_name()
@@ -456,7 +457,7 @@ func update_info_display_text():
 	
 	info_display.text = text
 
-func update_decision_display():
+func update_decision_display() -> void:
 	"""Update decision display"""
 	var text = "DECISION\n\n"
 	
@@ -543,7 +544,7 @@ func log_gamma(x: float) -> float:
 		return log_gamma(x + 1.0) - log(x)
 	return (x - 0.5) * log(x) - x + 0.5 * log(2.0 * PI)
 
-func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color):
+func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color) -> void:
 	"""Create line mesh from points"""
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -565,13 +566,13 @@ func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], col
 	material.flags_unshaded = true
 	mesh_instance.material_override = material
 
-func change_test_type():
+func change_test_type() -> void:
 	"""Change the type of hypothesis test"""
 	var current_index = test_type as int
 	test_type = ((current_index + 1) % TestType.size()) as TestType
 	reset_test()
 
-func reset_test():
+func reset_test() -> void:
 	"""Reset test data and displays"""
 	sample_data.clear()
 	sample_data_2.clear()
@@ -615,3 +616,12 @@ func get_statistics_summary() -> Dictionary:
 		"is_significant": is_significant,
 		"decision": "Reject H0" if is_significant else "Fail to reject H0"
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

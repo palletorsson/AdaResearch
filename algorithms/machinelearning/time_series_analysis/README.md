@@ -1,5 +1,12 @@
 # Time Series Analysis
 
+
+## Folder Summary
+
+The `Time Series Analysis` module provides a 3D sandbox for exploring the ideas behind the Time Series Analysis workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `time_series_analysis.tscn` and the controller script `TimeSeriesAnalysis.gd`.
+
 ## Overview
 This algorithm demonstrates various time series analysis techniques for analyzing and forecasting data that changes over time, including trend analysis, seasonality detection, and predictive modeling.
 

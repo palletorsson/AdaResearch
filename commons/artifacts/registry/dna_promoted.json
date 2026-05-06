@@ -1,0 +1,63 @@
+{
+	"id": "dna_promoted",
+	"name": "DNA Promoted Findings",
+	"description": "Curated /dna gallery findings promoted to first-class registry artifacts. Each entry either delegates to an existing builder via delegate_to (when supported) or directly sets the builder's scene + parameters.",
+	"category": "dna_promoted",
+	"theoreticalGrounding": "Curation as registry growth.",
+	"artifacts": {
+		"dna_facade_classical": {
+			"lookup_name": "dna_facade_classical",
+			"name": "DNA: Classical",
+			"description": "Promoted from /dna facade-gallery entry 'classical'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"facade-gallery",
+				"live"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "facade_builder",
+			"delegate_params": {
+				"preset": "classical"
+			}
+		},
+		"dna_mesh_grammar_gen00_petals": {
+			"lookup_name": "dna_mesh_grammar_gen00_petals",
+			"name": "DNA: Gen00 Petals",
+			"description": "Promoted from /dna mesh-grammar-gallery entry 'gen00_petals'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"mesh-grammar-gallery",
+				"live"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "mesh_grammar_artifact",
+			"delegate_params": {
+				"config_path": "res://commons/generated/gallery_best_of/configs/mesh-grammar-gallery__gen00_petals.json"
+			}
+		}
+	}
+}

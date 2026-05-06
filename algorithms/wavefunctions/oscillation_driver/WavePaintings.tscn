@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvtbeq137ckwb"]
+
+[ext_resource type="Script" uid="uid://dbpe7o7jfiuxp" path="res://algorithms/wavefunctions/oscillation_driver/WavePaintings.gd" id="1_script"]
+
+[node name="WavePaintings" type="Node3D"]
+script = ExtResource("1_script")

@@ -1,0 +1,73 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Randomness",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.08,
+  "breath_zones": [
+    {
+      "size": 73,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 8
+      },
+      "centroid": [
+        5.027397260273973,
+        3.684931506849315
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "noise_mixer"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "random_transformations"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "randompoints_gaussian"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "randompoints_uniform"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "rejection_sampling_demo"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "shannon_entropy_meter"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "worley_noise"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 87,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

@@ -4,9 +4,6 @@ render_mode unshaded;
 uniform sampler2D prev_texture;
 uniform vec2 texture_size = vec2(256.0, 256.0);
 
-
-uniform sampler2D simulation_texture;
-
 uniform float diffusion_a = 0.16;
 uniform float diffusion_b = 0.08;
 uniform float feed = 0.055;
@@ -59,5 +56,4 @@ void fragment() {
     B = clamp(B, 0.0, 1.0);
 
     ALBEDO = vec3(A, B, 0.0);
-	//texture(simulation_texture, UV).rg = vec2(A, B);
 }

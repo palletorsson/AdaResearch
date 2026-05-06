@@ -1,0 +1,1 @@
+L-systems build cities. Streets branch, blocks subdivide, buildings rise according to rules. Not hand-placed architecture but grammar-derived urbanism. The city is a sentence in a procedural language. Growth rules become zoning laws. Syntax becomes skyline.

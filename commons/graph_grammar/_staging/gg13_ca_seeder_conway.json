@@ -1,0 +1,44 @@
+{
+  "id": "gg13_ca_seeder_conway",
+  "notes": "Conway CA directly SEEDS the forest \u00e2\u20ac\u201d one tree per alive cell. Ecology IS the CA pattern.",
+  "seed": {
+    "ca_scatter": {
+      "rule": "conway",
+      "iterations": 25,
+      "grid_size": 20,
+      "region_size": 2.5,
+      "y": 0,
+      "density": 0.45,
+      "seed": 11,
+      "radius": 0.1,
+      "jitter": 0.3
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.4,
+        "spread_deg": 30,
+        "radius_decay": 0.72
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 9,
+        "length": 0.14,
+        "radius": 0.016,
+        "splay": 0.9
+      }
+    }
+  ]
+}

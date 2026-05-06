@@ -1,0 +1,124 @@
+[gd_scene load_steps=14 format=3 uid="uid://c5qw8h3jyapn2"]
+
+[ext_resource type="Script" uid="uid://cpc7cnthe2wqc" path="res://algorithms/transformation/carousel_cake/carousel_cake.gd" id="1_x7k2m"]
+[ext_resource type="Shader" uid="uid://gxs2kl6ki6im" path="res://algorithms/transformation/carousel_cake/circus_complete.gdshader" id="2_circus"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ucpih"]
+render_priority = 0
+shader = ExtResource("2_circus")
+shader_parameter/base_pattern_count = 10.0
+shader_parameter/pattern_density_multiplier = 1.3
+shader_parameter/layer_count = 8.0
+shader_parameter/dot_size = 0.08
+shader_parameter/color_black = Color(0.102, 0.102, 0.102, 1.0)
+shader_parameter/color_yellow = Color(0.957, 0.827, 0.369, 1.0)
+shader_parameter/color_red = Color(0.757, 0.071, 0.122, 1.0)
+shader_parameter/color_white = Color(0.973, 0.976, 0.980, 1.0)
+shader_parameter/color_silver = Color(0.6, 0.62, 0.65, 1.0)
+shader_parameter/color_gold = Color(1.0, 0.84, 0.0, 1.0)
+shader_parameter/time_scale = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wvlkw"]
+material = SubResource("ShaderMaterial_ucpih")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.0
+radial_segments = 32
+
+[sub_resource type="MultiMesh" id="MultiMesh_1mmfg"]
+transform_format = 1
+use_colors = true
+instance_count = 8
+mesh = SubResource("CylinderMesh_wvlkw")
+buffer = PackedFloat32Array(4, 0, 0, 0, 0, 0.05, 0, 0.025, 0, 0, 4, 0, 0.9980827, 0.5375196, 1, 1, 3.5, 0, 0, 0, 0, 0.05, 0, 0.075, 0, 0, 3.5, 0, 0.5399469, 0.8234474, 0.99999994, 1, 3, 0, 0, 0, 0, 0.05, 0, 0.125, 0, 0, 3, 0, 0.9980827, 0.5375196, 1, 1, 1.6, 0, 0, 0, 0, 3, 0, 1.65, 0, 0, 1.6, 0, 0.5399469, 0.8234474, 0.99999994, 1, 3, 0, 0, 0, 0, 1, 0, 3.65, 0, 0, 3, 0, 0.9980827, 0.5375196, 1, 1, 3.5, 0, 0, 0, 0, 0.5, 0, 4.4, 0, 0, 3.5, 0, 0.5399469, 0.8234474, 0.99999994, 1, 4, 0, 0, 0, 0, 0.5, 0, 4.9, 0, 0, 4, 0, 0.9980827, 0.5375196, 1, 1, 5, 0, 0, 0, 0, 0.5, 0, 5.4, 0, 0, 5, 0, 0.5399469, 0.8234474, 0.99999994, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d0ap5"]
+height = 0.05
+radius = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qdxsh"]
+height = 0.05
+radius = 3.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3buwj"]
+height = 0.05
+radius = 3.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ejom7"]
+height = 3.0
+radius = 1.6
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1gu4y"]
+height = 1.0
+radius = 3.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_55yya"]
+height = 0.5
+radius = 3.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vcxi0"]
+height = 0.5
+radius = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qtfej"]
+height = 0.5
+radius = 5.0
+
+[node name="CarouselCake" type="Node3D"]
+script = ExtResource("1_x7k2m")
+color_a = Color(0.9980827, 0.5375196, 1, 1)
+color_b = Color(0.5399469, 0.8234474, 0.99999994, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.96048826, 0.2783207, 0, -0.27832067, 0.96048826, 0, 2.0084488, 7.903329)
+
+[node name="@MultiMeshInstance3D@185448" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_1mmfg")
+
+[node name="ColliderLayer_0" type="StaticBody3D" parent="."]
+
+[node name="@CollisionShape3D@185449" type="CollisionShape3D" parent="ColliderLayer_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+shape = SubResource("CylinderShape3D_d0ap5")
+
+[node name="ColliderLayer_1" type="StaticBody3D" parent="."]
+
+[node name="@CollisionShape3D@185450" type="CollisionShape3D" parent="ColliderLayer_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+shape = SubResource("CylinderShape3D_qdxsh")
+
+[node name="ColliderLayer_2" type="StaticBody3D" parent="."]
+
+[node name="@CollisionShape3D@185451" type="CollisionShape3D" parent="ColliderLayer_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("CylinderShape3D_3buwj")
+
+[node name="ColliderLayer_3" type="StaticBody3D" parent="."]
+
+[node name="@CollisionShape3D@185452" type="CollisionShape3D" parent="ColliderLayer_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+shape = SubResource("CylinderShape3D_ejom7")
+
+[node name="ColliderLayer_4" type="StaticBody3D" parent="."]
+
+[node name="@CollisionShape3D@185453" type="CollisionShape3D" parent="ColliderLayer_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.65, 0)
+shape = SubResource("CylinderShape3D_1gu4y")
+
+[node name="ColliderLayer_5" type="StaticBody3D" parent="."]
+
+[node name="@CollisionShape3D@185454" type="CollisionShape3D" parent="ColliderLayer_5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4, 0)
+shape = SubResource("CylinderShape3D_55yya")
+
+[node name="ColliderLayer_6" type="StaticBody3D" parent="."]
+
+[node name="@CollisionShape3D@185455" type="CollisionShape3D" parent="ColliderLayer_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9, 0)
+shape = SubResource("CylinderShape3D_vcxi0")
+
+[node name="ColliderLayer_7" type="StaticBody3D" parent="."]
+
+[node name="@CollisionShape3D@185456" type="CollisionShape3D" parent="ColliderLayer_7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.4, 0)
+shape = SubResource("CylinderShape3D_qtfej")

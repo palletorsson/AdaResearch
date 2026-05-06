@@ -1,0 +1,100 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Villa San Michele — Exact replica of Bengt Böckman 1992 watercolor. Asymmetric facade: wider ochre-grotto left section, lighter blue-arched right loggia with pergola.",
+  "facade": {
+    "bays": 6,
+    "stories": 3,
+    "symmetry": "none",
+    "total_width": 14.0,
+    "total_height": 10.0,
+    "wall_depth": 0.25,
+    "bay_widths": [2.3, 2.3, 2.3, 2.0, 2.0, 2.0],
+    "bilateral_symmetry": false
+  },
+  "zones": [
+    { "row": 0, "name": "RoofParapet",  "height_multiplier": 0.20 },
+    { "row": 1, "name": "UpperFloor",   "height_multiplier": 1.00 },
+    { "row": 2, "name": "LowerFloor",   "height_multiplier": 1.50 }
+  ],
+  "materials": {
+    "wall": "#F5F0E8",
+    "zones": {
+      "RoofParapet": { "color": "#F5F0E8", "type": "stone" },
+      "UpperFloor":  { "color": "#F5F0E8", "type": "stone" },
+      "LowerFloor":  { "color": "#D4C4A0", "type": "stone" }
+    },
+    "zone_overrides": [
+      { "row": 2, "cols": [3, 4, 5], "color": "#C8D8E8", "type": "stone" }
+    ]
+  },
+  "step_down": {
+    "enabled": true,
+    "description": "Right section roof is lower than left section",
+    "left_cols": [0, 1, 2],
+    "right_cols": [3, 4, 5],
+    "right_offset_y": -0.8
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "parapet_wall", "col_span": 6,
+      "params": { "height": 0.3, "color": "#F5F0E8", "depth": 0.05 }
+    },
+
+    { "col": 0, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "width_ratio": 0.35, "height_ratio": 0.40, "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8", "glass_color": "#4A5A6A", "shutter": false }
+    },
+    { "col": 1, "row": 1, "part": "door", "col_span": 1, "row_span": 1,
+      "params": { "width_ratio": 0.40, "height_ratio": 0.70, "frame_width": 0.03, "frame_depth": 0.02, "frame_color": "#B0A890", "door_color": "#6B5E4A", "has_transom": false }
+    },
+    { "col": 2, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "width_ratio": 0.35, "height_ratio": 0.40, "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8", "glass_color": "#4A5A6A", "shutter": false }
+    },
+    { "col": 3, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "width_ratio": 0.35, "height_ratio": 0.40, "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8", "glass_color": "#4A5A6A", "shutter": false }
+    },
+    { "col": 4, "row": 1, "part": "balcony_door", "col_span": 1, "row_span": 1,
+      "params": { "width_ratio": 0.40, "height_ratio": 0.75, "frame_width": 0.03, "frame_depth": 0.02, "frame_color": "#E0D8C8", "door_color": "#6B5E4A", "glass_color": "#8A9AAA", "balcony_depth": 0.4, "balcony_rail_color": "#D0C8B8", "balcony_rail_height": 0.15 }
+    },
+    { "col": 5, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "width_ratio": 0.35, "height_ratio": 0.40, "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8", "glass_color": "#4A5A6A", "shutter": false }
+    },
+
+    { "col": 0, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.50, "width_ratio": 0.80, "height_ratio": 0.90, "glass_color": "#2A2520", "archivolt_depth": 0.04, "frame_color": "#D4C4A0", "frame_width": 0.04, "deep_reveal": true, "reveal_depth": 0.20 }
+    },
+    { "col": 1, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.50, "width_ratio": 0.80, "height_ratio": 0.90, "glass_color": "#2A2520", "archivolt_depth": 0.04, "frame_color": "#D4C4A0", "frame_width": 0.04, "deep_reveal": true, "reveal_depth": 0.20 }
+    },
+    { "col": 2, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.50, "width_ratio": 0.80, "height_ratio": 0.90, "glass_color": "#2A2520", "archivolt_depth": 0.04, "frame_color": "#D4C4A0", "frame_width": 0.04, "deep_reveal": true, "reveal_depth": 0.20 }
+    },
+
+    { "col": 3, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.45, "width_ratio": 0.70, "height_ratio": 0.80, "glass_color": "#3A4550", "archivolt_depth": 0.03, "frame_color": "#C8D8E8", "frame_width": 0.03, "deep_reveal": true, "reveal_depth": 0.15 }
+    },
+    { "col": 4, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.45, "width_ratio": 0.70, "height_ratio": 0.80, "glass_color": "#3A4550", "archivolt_depth": 0.03, "frame_color": "#C8D8E8", "frame_width": 0.03, "deep_reveal": true, "reveal_depth": 0.15, "statue_niche": true, "niche_color": "#E8E0D0" }
+    },
+    { "col": 5, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.45, "width_ratio": 0.70, "height_ratio": 0.80, "glass_color": "#3A4550", "archivolt_depth": 0.03, "frame_color": "#C8D8E8", "frame_width": 0.03, "deep_reveal": true, "reveal_depth": 0.15 }
+    },
+
+    { "col": 5, "row": 2, "part": "pergola", "col_span": 1,
+      "params": { "extends_right": true, "extension_length": 2.0, "beam_color": "#B0A890", "beam_width": 0.08, "beam_count": 4, "vine_color": "#5A7A4A", "vine_coverage": 0.6 }
+    }
+  ],
+  "annotations": {
+    "source": "Bengt Böckman watercolor, 1992",
+    "subject": "Villa San Michele, Anacapri",
+    "notes": [
+      "Asymmetric composition: wider ochre left section with 3 large dark grotto arches, narrower blue-tinted right loggia with 4 smaller arches",
+      "Left section taller — roof steps down at the junction",
+      "Right section has balcony door (col 4) and statue niche in center arch",
+      "Pergola extends beyond right edge with vine growth",
+      "Left lower floor: warm ochre limestone (#D4C4A0) with deep shadow voids (#2A2520)",
+      "Right lower floor: cool blue-white wash (#C8D8E8) with softer shadow (#3A4550)",
+      "Upper floor unified white stucco (#F5F0E8) across both sections"
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "map": "AdvancedLaboratory_Systems_Lab",
+  "wait": 6,
+  "auto_frame": true,
+  "anchor": [
+    4,
+    1
+  ],
+  "shots": [
+    {
+      "name": "front_clean",
+      "out": "user://research_loop/loop_coupled_oscillator_lattice_batch_moo5v8ns_front_clean.png",
+      "camera": {
+        "direction": [
+          0,
+          1.4,
+          3
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          4,
+          1.4,
+          4
+        ],
+        "look_at": [
+          4,
+          1,
+          1
+        ],
+        "fov": 55
+      }
+    },
+    {
+      "name": "orbit_side",
+      "out": "user://research_loop/loop_coupled_oscillator_lattice_batch_moo5v8ns_orbit_side.png",
+      "camera": {
+        "direction": [
+          3,
+          1,
+          0
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          7,
+          1,
+          1
+        ],
+        "look_at": [
+          4,
+          1,
+          1
+        ],
+        "fov": 55
+      }
+    },
+    {
+      "name": "top",
+      "out": "user://research_loop/loop_coupled_oscillator_lattice_batch_moo5v8ns_top.png",
+      "camera": {
+        "direction": [
+          0,
+          4,
+          0
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          4,
+          4,
+          1
+        ],
+        "look_at": [
+          4,
+          0,
+          1
+        ],
+        "fov": 55
+      }
+    },
+    {
+      "name": "branch_close",
+      "out": "user://research_loop/loop_coupled_oscillator_lattice_batch_moo5v8ns_branch_close.png",
+      "camera": {
+        "direction": [
+          1.5,
+          1.8,
+          0.5
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          5.5,
+          1.8,
+          1.5
+        ],
+        "look_at": [
+          4,
+          1.5,
+          1
+        ],
+        "fov": 55
+      }
+    }
+  ]
+}

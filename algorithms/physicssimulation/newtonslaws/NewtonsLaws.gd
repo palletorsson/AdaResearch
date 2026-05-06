@@ -1,90 +1,184 @@
+## Newton's Laws — Three balls under different force conditions
+## Uses Godot's built-in RigidBody3D physics. No manual gravity or collision.
+##
+## @identity
+## essence: Side-by-side comparison of three rigid bodies under different applied forces — gravity-only, lateral push, oscillating force
+## desire: To make Newton's three laws visible at once: inertia, F=ma, equal-and-opposite reactions arriving as visible motion
+## critical_parameter: applied_force_strength — the magnitude knob that decides whether differences are subtle or dramatic
+## triggers: Low force shows all three balls behaving similarly under gravity; high force separates inertial from forced behavior visibly
+## emerges: Watching three balls together reveals laws as relations, not isolated rules — the third ball moves only because the others do not
+## needs: RigidBody3D physics [has], force/velocity arrows [has], grid config for force tuning [has]
+## relationships: Anchor artifact for forces/Newton's_Laws map. Companion to bouncingball, friction_ramp, and the example_2_* NOC ports
+## truth: A law is not a rule about one body — it is a constraint on what relations between bodies are allowed.
 extends Node3D
 
-class_name NewtonsLaws
+@export var applied_force_strength: float = 5.0
+@export var oscillation_speed: float = 2.0
 
-var balls = []
-var velocities = []
-var forces = []
-var paused = false
-var gravity = Vector3(0, -9.8, 0)
-var friction = 0.98
+var balls: Array[RigidBody3D] = []
+var time: float = 0.0
 
-func _ready():
-	# Initialize balls and their properties
-	balls = [$Objects/Ball1, $Objects/Ball2, $Objects/Ball3]
-	
-	# Initialize velocities and forces for each ball
+# Visualization
+var force_arrows: Array[MeshInstance3D] = []
+var velocity_arrows: Array[MeshInstance3D] = []
+
+var ball_colors := [
+	Color(1.0, 0.3, 0.3),  # Red — gravity only
+	Color(0.3, 1.0, 0.3),  # Green — constant applied force
+	Color(0.3, 0.5, 1.0),  # Blue — oscillating force
+]
+
+func _ready() -> void:
+	scale = Vector3(0.8, 0.8, 0.8)
+	_create_balls()
+	_create_containment()
+
+func _create_balls() -> void:
+	var positions := [Vector3(-2, 3, 0), Vector3(0, 3, 0), Vector3(2, 3, 0)]
+	var masses := [1.0, 1.5, 2.0]
+
+	for i in range(3):
+		var rb := RigidBody3D.new()
+		rb.mass = masses[i]
+		rb.name = "Ball_%d" % i
+
+		# Collision shape
+		var col := CollisionShape3D.new()
+		var shape := SphereShape3D.new()
+		shape.radius = 0.3
+		col.shape = shape
+		rb.add_child(col)
+
+		# Visual
+		var mesh_inst := MeshInstance3D.new()
+		var sphere := SphereMesh.new()
+		sphere.radius = 0.3
+		sphere.height = 0.6
+		mesh_inst.mesh = sphere
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = ball_colors[i]
+		mat.emission_enabled = true
+		mat.emission = ball_colors[i] * 0.5
+		mat.emission_energy_multiplier = 1.5
+		mesh_inst.material_override = mat
+		rb.add_child(mesh_inst)
+
+		# Physics material — different friction per ball
+		var phys_mat := PhysicsMaterial.new()
+		phys_mat.bounce = 0.6
+		if i == 0:
+			phys_mat.friction = 0.2  # Low friction
+		elif i == 1:
+			phys_mat.friction = 0.5  # Medium friction
+		else:
+			phys_mat.friction = 0.9  # High friction
+		rb.physics_material_override = phys_mat
+
+		rb.position = positions[i]
+		add_child(rb)
+		balls.append(rb)
+
+		# Force arrow visualization
+		var arrow := _create_arrow(ball_colors[i])
+		add_child(arrow)
+		force_arrows.append(arrow)
+
+		# Velocity arrow
+		var vel_arrow := _create_arrow(Color.YELLOW)
+		add_child(vel_arrow)
+		velocity_arrows.append(vel_arrow)
+
+func _create_containment() -> void:
+	# Floor
+	var floor_body := StaticBody3D.new()
+	var floor_col := CollisionShape3D.new()
+	var floor_shape := BoxShape3D.new()
+	floor_shape.size = Vector3(10, 0.2, 10)
+	floor_col.shape = floor_shape
+	floor_body.add_child(floor_col)
+	floor_body.position = Vector3(0, -0.1, 0)
+	add_child(floor_body)
+
+	# Walls
+	for wall_data in [
+		[Vector3(5, 2, 0), Vector3(0.2, 4, 10)],
+		[Vector3(-5, 2, 0), Vector3(0.2, 4, 10)],
+		[Vector3(0, 2, 5), Vector3(10, 4, 0.2)],
+		[Vector3(0, 2, -5), Vector3(10, 4, 0.2)],
+	]:
+		var wall := StaticBody3D.new()
+		var wcol := CollisionShape3D.new()
+		var wshape := BoxShape3D.new()
+		wshape.size = wall_data[1]
+		wcol.shape = wshape
+		wall.add_child(wcol)
+		wall.position = wall_data[0]
+		add_child(wall)
+
+func _physics_process(delta: float) -> void:
+	time += delta
+
+	# Ball 0: gravity only — no applied force needed, Godot handles it
+	# Ball 1: constant horizontal force
+	if balls.size() > 1:
+		balls[1].apply_central_force(Vector3(applied_force_strength, 0, 0))
+
+	# Ball 2: oscillating force
+	if balls.size() > 2:
+		var osc_force := Vector3(
+			sin(time * oscillation_speed) * applied_force_strength * 1.5,
+			0,
+			cos(time * oscillation_speed * 0.75) * applied_force_strength
+		)
+		balls[2].apply_central_force(osc_force)
+
+	_update_arrows()
+
+func _update_arrows() -> void:
 	for i in range(balls.size()):
-		velocities.append(Vector3.ZERO)
-		forces.append(Vector3.ZERO)
-	
-	# Set initial forces
-	forces[1] = Vector3(2, 0, 0)  # Ball 2 gets horizontal force
-	forces[2] = Vector3(-2, 0, 0)  # Ball 3 gets opposite force
-	
-	# Connect UI buttons
-	$UI/VBoxContainer/ResetButton.pressed.connect(_on_reset_pressed)
-	$UI/VBoxContainer/PauseButton.pressed.connect(_on_pause_pressed)
+		var rb := balls[i]
+		var vel := rb.linear_velocity
 
-func _physics_process(delta):
-	if paused:
-		return
-	
-	# Apply physics to each ball
+		# Velocity arrow
+		if vel.length() > 0.2 and i < velocity_arrows.size():
+			var arrow := velocity_arrows[i]
+			arrow.visible = true
+			arrow.position = rb.position + Vector3(0, 0.4, 0)
+			var target := arrow.position + vel.normalized()
+			if arrow.position.distance_to(target) > 0.01:
+				arrow.look_at(target, Vector3.UP)
+			arrow.scale.y = clamp(vel.length() / 5.0, 0.2, 2.0)
+		elif i < velocity_arrows.size():
+			velocity_arrows[i].visible = false
+
+func _create_arrow(color: Color) -> MeshInstance3D:
+	var arrow := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = 0.015
+	cyl.bottom_radius = 0.015
+	cyl.height = 1.0
+	arrow.mesh = cyl
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color * 0.5
+	arrow.material_override = mat
+	arrow.visible = false
+	return arrow
+
+func reset() -> void:
+	var positions := [Vector3(-2, 3, 0), Vector3(0, 3, 0), Vector3(2, 3, 0)]
 	for i in range(balls.size()):
-		_apply_physics(i, delta)
+		balls[i].linear_velocity = Vector3.ZERO
+		balls[i].angular_velocity = Vector3.ZERO
+		balls[i].position = positions[i]
+	time = 0.0
 
-func _apply_physics(ball_index: int, delta: float):
-	var ball = balls[ball_index]
-	var velocity = velocities[ball_index]
-	var force = forces[ball_index]
-	
-	# Apply gravity
-	force += gravity
-	
-	# Apply force to velocity (F = ma, assuming mass = 1)
-	velocity += force * delta
-	
-	# Apply friction
-	velocity *= friction
-	
-	# Update position
-	ball.position += velocity * delta
-	
-	# Ground collision
-	if ball.position.y <= 0.5:
-		ball.position.y = 0.5
-		velocity.y = -velocity.y * 0.7  # Bounce with energy loss
-		velocity.x *= 0.9  # Ground friction
-	
-	# Wall collisions
-	if abs(ball.position.x) > 9:
-		velocity.x = -velocity.x * 0.8
-		ball.position.x = sign(ball.position.x) * 9
-	
-	if abs(ball.position.z) > 9:
-		velocity.z = -velocity.z * 0.8
-		ball.position.z = sign(ball.position.z) * 9
-	
-	# Update stored velocity
-	velocities[ball_index] = velocity
-	
-	# Reset force for next frame (except applied forces)
-	if ball_index == 1:
-		forces[ball_index] = Vector3(2, 0, 0)
-	elif ball_index == 2:
-		forces[ball_index] = Vector3(-2, 0, 0)
-	else:
-		forces[ball_index] = Vector3.ZERO
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 
-func _on_reset_pressed():
-	# Reset all balls to initial positions
-	var initial_positions = [Vector3(-3, 2, 0), Vector3(0, 2, 0), Vector3(3, 2, 0)]
-	
-	for i in range(balls.size()):
-		balls[i].position = initial_positions[i]
-		velocities[i] = Vector3.ZERO
 
-func _on_pause_pressed():
-	paused = !paused
-	$UI/VBoxContainer/PauseButton.text = "Resume" if paused else "Pause"
+func apply_grid_config(config: Dictionary) -> void:
+	pass

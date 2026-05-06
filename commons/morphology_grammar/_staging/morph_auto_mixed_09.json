@@ -1,0 +1,118 @@
+{
+  "id": "morph_auto_mixed_09",
+  "family": "mixed_forms",
+  "notes": "Auto-generated mixed-family candidate from bio_furniture, table.",
+  "camera_yaw": 0.839,
+  "camera_pitch": 0.379,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.05,
+      0.405,
+      1.068
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "mixed_09_01_orbit_side_pad",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.276,
+        "scale": 0.784,
+        "normal_bias": 1.065,
+        "world_bias": [
+          -0.017,
+          0.116,
+          0.191
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "mixed_09_02_blossom_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.279,
+        "scale": 1.43
+      },
+      "child_role": "body",
+      "budget_factor": 0.073
+    },
+    {
+      "id": "mixed_09_03_petal_seat_bowl",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.204,
+        "scale": 1.035,
+        "normal_bias": 1.184,
+        "world_bias": [
+          0.001,
+          0.158,
+          0.05
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.105
+    },
+    {
+      "id": "mixed_09_04_shrine_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.201,
+        "scale": 1.196
+      },
+      "child_role": "body",
+      "budget_factor": 0.059
+    },
+    {
+      "id": "mixed_09_05_gantry_rear_fin",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.133,
+        "scale": 0.591,
+        "normal_bias": 1.181,
+        "world_bias": [
+          0.012,
+          0.681,
+          -0.133
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    }
+  ]
+}

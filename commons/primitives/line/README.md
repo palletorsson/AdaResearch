@@ -28,6 +28,12 @@ This folder contains interactive line primitives for VR that explore the fundame
   - Renaissance perspective
   - Orientation in space
 
+### Grid Trace
+- **`grid_lines.tscn`** - Grid overlay plus saved trace archive visualization
+  - Renders static X/Z lattice using `line_static` instances
+  - Listens to `/root/TraceData` and visualizes saved traces
+  - Includes optional data table paging for recent trace samples
+
 ### Documentation
 - **`LINE_POETICS.md`** - Philosophical and poetic framework
 - **`README.md`** - This file
@@ -106,10 +112,10 @@ Lines send events to TextManager on interaction:
 # Event: "line_drop"
 # Context includes:
 {
-    "length": "1.50",
-    "length_raw": 1.5,
-    "poetic_scale": "an arm's length",
-    "relationship": "diagonal - cutting through space"
+	"length": "1.50",
+	"length_raw": 1.5,
+	"poetic_scale": "an arm's length",
+	"relationship": "diagonal - cutting through space"
 }
 ```
 
@@ -171,4 +177,3 @@ Scale is relative. A line can be a hair or a horizon. In VR, we make this relati
 ---
 
 *Parallelism as ordering principle. X as the unknown. The cross as orientation. These are not just geometric facts – they are ways of being in space.*
-

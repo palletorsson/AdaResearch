@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvxq8n2y3qr7c"]
+
+[ext_resource type="Script" uid="uid://c3l817nt0dv02" path="res://algorithms/proceduralgeneration/metaballgenerator/metaballscene.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://b6m62uve4s5ol" path="res://algorithms/proceduralgeneration/metaballgenerator/metaballgenerator.gd" id="2_generator"]
+[ext_resource type="Shader" path="res://commons/resourses/shaders/PinkTeleport.gdshader" id="3_pink_shader"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.08, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.7, 0.8, 1, 1)
+ambient_light_energy = 0.4
+reflected_light_source = 2
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 1.5
+glow_enabled = true
+glow_intensity = 0.3
+glow_bloom = 0.1
+
+[node name="MetaballWorld" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10, 20, 10)
+light_energy = 1.0
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, -0.5, -0.5, -10, 15, -10)
+light_color = Color(0.6, 0.75, 1, 1)
+light_energy = 0.6
+
+[node name="MetaballGenerator" type="Node3D" parent="."]
+script = ExtResource("2_generator")
+grid_size = Vector3i(30, 64, 30)
+cell_size = 0.15
+iso_level = 0.65
+metaball_count = 10
+max_steps = 5
+step_duration = 0.4
+surface_shader = ExtResource("3_pink_shader")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")

@@ -1,0 +1,76 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Lab",
+  "home_sequence": "lab",
+  "dimensions": {
+    "w": 10,
+    "d": 16
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [
+    "transformation",
+    "color"
+  ],
+  "density": 0.045,
+  "breath_zones": [
+    {
+      "size": 147,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 16
+      },
+      "centroid": [
+        4.517006802721088,
+        7.795918367346939
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 1,
+      "token": "loving_triangle"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "becoming_catalyst"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "catalyst_pedestal"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "progression_driver"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "cube_lines"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "light_sphere"
+    },
+    {
+      "x": 5,
+      "z": 11,
+      "token": "artifact_workstation"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 156,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

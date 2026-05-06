@@ -1,0 +1,180 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Primitives_Ignorance",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 9,
+    "d": 27
+  },
+  "signature": "platonic_grabbables for hands-on encounter with the five Platonic solids; torus_radials_rings and capsule_radials_rings for parametric control exposure; sphere_low/mid/high for resolution as epistemological choice; hole_with_cones and truncatedtetrahedron for forms that resist easy naming.",
+  "style": "bauhaus",
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.128,
+  "breath_zones": [
+    {
+      "size": 179,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 24
+      },
+      "centroid": [
+        4.033519553072626,
+        10.513966480446927
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 2,
+      "z": 0,
+      "token": "sphere"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "platonic_grabbables"
+    },
+    {
+      "x": 1,
+      "z": 11,
+      "token": "hole_with_cones"
+    },
+    {
+      "x": 3,
+      "z": 11,
+      "token": "sphere_high"
+    },
+    {
+      "x": 5,
+      "z": 11,
+      "token": "sphere_high"
+    },
+    {
+      "x": 7,
+      "z": 11,
+      "token": "star_primitive"
+    },
+    {
+      "x": 1,
+      "z": 13,
+      "token": "righttriangle"
+    },
+    {
+      "x": 3,
+      "z": 13,
+      "token": "sphere_mid"
+    },
+    {
+      "x": 5,
+      "z": 13,
+      "token": "sphere_mid"
+    },
+    {
+      "x": 7,
+      "z": 13,
+      "token": "truncatedtetrahedron"
+    },
+    {
+      "x": 1,
+      "z": 15,
+      "token": "roughrock"
+    },
+    {
+      "x": 3,
+      "z": 15,
+      "token": "sphere_low"
+    },
+    {
+      "x": 5,
+      "z": 15,
+      "token": "sphere_low"
+    },
+    {
+      "x": 7,
+      "z": 15,
+      "token": "capsule"
+    },
+    {
+      "x": 3,
+      "z": 20,
+      "token": "lshape"
+    },
+    {
+      "x": 5,
+      "z": 20,
+      "token": "lshape"
+    },
+    {
+      "x": 0,
+      "z": 21,
+      "token": "prism_block"
+    },
+    {
+      "x": 1,
+      "z": 21,
+      "token": "prism_block"
+    },
+    {
+      "x": 2,
+      "z": 21,
+      "token": "prism_block"
+    },
+    {
+      "x": 3,
+      "z": 21,
+      "token": "prism_block"
+    },
+    {
+      "x": 5,
+      "z": 21,
+      "token": "prism_block"
+    },
+    {
+      "x": 6,
+      "z": 21,
+      "token": "prism_block"
+    },
+    {
+      "x": 7,
+      "z": 21,
+      "token": "prism_block"
+    },
+    {
+      "x": 8,
+      "z": 21,
+      "token": "prism_block"
+    },
+    {
+      "x": 1,
+      "z": 25,
+      "token": "plus"
+    },
+    {
+      "x": 7,
+      "z": 25,
+      "token": "plus"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 28,
+    "walkable_cells": 218,
+    "breath_zone_count": 1,
+    "unique_tokens": 16
+  }
+}

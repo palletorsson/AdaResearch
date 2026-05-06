@@ -1,0 +1,54 @@
+{
+  "id": "gg_quad01_ca_tapestry_chandelier",
+  "notes": "QUADRUPLE DNA BRIDGE: Life-without-Death CA \u2192 soft-body cloth (pinned corners, wind) \u2192 graph from post-sim pose \u2192 chandelier render. Four substrates in one config. DNA flows: rule \u2192 pattern \u2192 physics \u2192 topology \u2192 glass.",
+  "seed": {
+    "soft_body_pose": {
+      "topology": "ca_grid",
+      "ca": {
+        "rule": "life_without_death",
+        "grid_size": 18,
+        "iterations": 10,
+        "density": 0.35,
+        "seed": 11,
+        "cell_size": 0.11,
+        "pin_mode": "top_corners"
+      },
+      "stiffness": 0.6,
+      "steps": 120,
+      "gravity": [
+        0.5,
+        -9.8,
+        0.3
+      ],
+      "damping": 0.992,
+      "floor_y": -3.0,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "node_radius": 0.035
+    }
+  },
+  "iterations": 0,
+  "rules": [],
+  "render_mode": "chandelier",
+  "chandelier": {
+    "edge_color": [
+      0.15,
+      0.1,
+      0.08
+    ],
+    "leaf_color": [
+      1.0,
+      0.9,
+      0.65
+    ],
+    "leaf_emission": 2.2,
+    "edge_radius": 0.004,
+    "leaf_radius": 0.05
+  },
+  "camera_yaw": 0.35,
+  "camera_pitch": 0.1,
+  "max_nodes": 4000
+}

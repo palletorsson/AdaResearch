@@ -1,0 +1,67 @@
+[gd_scene load_steps=12 format=3 uid="uid://3lsum8kwj8ra"]
+
+[ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_scene_base"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="3_player_body"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="4_movement_direct"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5_movement_turn"]
+[ext_resource type="PackedScene" uid="uid://bk6ban0hctyym" path="res://addons/godot-xr-tools/functions/movement_wall_walk.tscn" id="6_wall_walk"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="7_pickup"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="8_jump"]
+[ext_resource type="PackedScene" path="res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn" id="9_mobius_world"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_top_color = Color(0.05, 0.05, 0.15, 1)
+sky_horizon_color = Color(0.1, 0.12, 0.2, 1)
+ground_bottom_color = Color(0.02, 0.02, 0.05, 1)
+ground_horizon_color = Color(0.1, 0.12, 0.2, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.35, 0.5, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.3
+fog_enabled = true
+fog_light_color = Color(0.2, 0.25, 0.4, 1)
+fog_density = 0.005
+
+[node name="MobiusWorldDemo" instance=ExtResource("1_scene_base")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_1")
+
+[node name="XROrigin3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 2, 0)
+
+[node name="MovementDirect" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("4_movement_direct")]
+strafe = true
+
+[node name="FunctionPickup" parent="XROrigin3D/LeftHand" index="1" instance=ExtResource("7_pickup")]
+
+[node name="MovementJump" parent="XROrigin3D/LeftHand" index="2" instance=ExtResource("8_jump")]
+jump_button_action = "_disabled"
+
+[node name="MovementDirect" parent="XROrigin3D/RightHand" index="0" instance=ExtResource("4_movement_direct")]
+
+[node name="MovementTurn" parent="XROrigin3D/RightHand" index="1" instance=ExtResource("5_movement_turn")]
+
+[node name="FunctionPickup" parent="XROrigin3D/RightHand" index="2" instance=ExtResource("7_pickup")]
+
+[node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("3_player_body")]
+
+[node name="MovementWallWalk" parent="XROrigin3D" index="4" instance=ExtResource("6_wall_walk")]
+
+[node name="MobiusWorld" parent="." index="2" instance=ExtResource("9_mobius_world")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="3"]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 50, 0)
+light_color = Color(0.8, 0.85, 1, 1)
+light_energy = 0.6
+shadow_enabled = true

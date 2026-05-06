@@ -1,0 +1,98 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "test_batch_1",
+  "home_sequence": "testmaps",
+  "dimensions": {
+    "w": 9,
+    "d": 16
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.145,
+  "breath_zones": [
+    {
+      "size": 83,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 16
+      },
+      "centroid": [
+        3.9759036144578315,
+        7.421686746987952
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "additive_wave_demo"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "angle_sum_triangle"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "chord_tension_spring"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "constructive_proof"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "curvature_slider"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "excluded_middle_demo"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "harmonic_distance_table"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "random_walk_terrarium"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "sentry_turret"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "superposition_display"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "vector_normalize_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 12,
+    "walkable_cells": 83,
+    "breath_zone_count": 1,
+    "unique_tokens": 12
+  }
+}

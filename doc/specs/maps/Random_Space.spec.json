@@ -1,0 +1,62 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Space",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 13,
+    "d": 15
+  },
+  "signature": "random_space is the culminating artifact \u2014 randomness as inhabitable spatial experience",
+  "style": null,
+  "echoes": [
+    "transformation",
+    "color",
+    "noise"
+  ],
+  "density": 0.021,
+  "breath_zones": [
+    {
+      "size": 187,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 15
+      },
+      "centroid": [
+        6.016042780748663,
+        6.9411764705882355
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "noise_mixer"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "worley_noise"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 9,
+      "token": "shannon_entropy_meter"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 192,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

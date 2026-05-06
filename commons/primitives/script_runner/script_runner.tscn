@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cig2ipglw04lg"]
+
+[ext_resource type="Script" path="res://commons/primitives/script_runner/script_runner.gd" id="1_script"]
+
+[node name="ScriptRunner" type="Node3D"]
+script = ExtResource("1_script")
+script_name = "point"
+auto_loop = true
+start_delay = 1.0
+default_line_duration = 1.0
+highlight_transition_time = 0.15
+panel_width = 0.6
+panel_height = 0.4
+font_size = 18
+line_height = 24.0
+show_line_numbers = true
+bg_color = Color(0.08, 0.08, 0.12, 0.95)
+text_color = Color(0.9, 0.9, 0.9, 1)
+keyword_color = Color(0.6, 0.8, 1, 1)
+string_color = Color(0.6, 1, 0.6, 1)
+number_color = Color(1, 0.8, 0.5, 1)
+comment_color = Color(0.5, 0.5, 0.5, 1)
+highlight_color = Color(1, 0.8, 0, 0.85)

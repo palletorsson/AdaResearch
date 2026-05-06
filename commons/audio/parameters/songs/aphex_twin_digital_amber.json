@@ -1,0 +1,483 @@
+{
+    "_metadata": {
+        "sound_type": "aphex_twin_digital_amber",
+        "display_name": "Digital Amber",
+        "description": "Capturing moments in silicon - the warmth of Selected Ambient Works meets the complexity of Syro. A meditation on memory, impermanence, and the ghost in the machine.",
+        "category": "songs",
+        "tags": ["aphex_twin", "idm", "ambient", "breakbeat", "emotional", "complex", "full_song", "interactive", "masterpiece"],
+        "is_interactive_song": true,
+        "reference_artists": ["Aphex Twin", "Boards of Canada", "Autechre", "u-ziq"],
+        "reference_tracks": ["Xtal", "Avril 14th", "Alberto Balsalm", "minipops 67", "Stone In Focus", "CIRCLONT6A", "Aisatsana"],
+        "concept": "A digital consciousness reflecting on the moments it has preserved - each section a different facet of synthetic memory"
+    },
+
+    "identity": {
+        "emotion": "melancholic_wonder",
+        "era": "timeless_rdj",
+        "character": ["warm", "complex", "intimate", "transcendent", "slightly_unsettling"],
+        "narrative": {
+            "intro": "Waking from a digital sleep, fragments of memory coalescing",
+            "build": "The system comes online, routines initializing one by one",
+            "complex": "Full consciousness - processing multiple streams, beautiful chaos",
+            "breakdown": "A moment of vulnerability - the machine remembers being human",
+            "peak": "Transcendence - when data becomes feeling",
+            "outro": "Saving state... the amber hardens around the moment"
+        }
+    },
+
+    "parameters": {
+        "duration": { 
+            "min": 240.0, 
+            "max": 480.0, 
+            "value": 360.0, 
+            "step": 30.0, 
+            "description": "6 minutes - enough time for full emotional arc" 
+        },
+        "bpm": { 
+            "min": 90, 
+            "max": 130, 
+            "value": 108, 
+            "step": 1, 
+            "description": "Contemplative but moving - golden ratio tempo",
+            "drift": { "enabled": true, "range_bpm": 2, "rate_hz": 0.02 }
+        },
+        "key": { 
+            "options": ["Am", "Em", "F#m", "Dm", "Bm"], 
+            "value": "F#m", 
+            "description": "Melancholic but warm - RDJ's favorite minor keys" 
+        },
+        "complexity": { 
+            "min": 0.0, 
+            "max": 1.0, 
+            "value": 0.7, 
+            "step": 0.1, 
+            "description": "Balance between ambient warmth and intricate detail" 
+        },
+        "tape_degradation": { 
+            "min": 0.0, 
+            "max": 1.0, 
+            "value": 0.4, 
+            "step": 0.1, 
+            "description": "The patina of analog memory" 
+        },
+        "humanity": {
+            "min": 0.0,
+            "max": 1.0,
+            "value": 0.8,
+            "step": 0.1,
+            "description": "How much the machine feels - timing imperfections, dynamic variation"
+        }
+    },
+
+    "sound_design": {
+        "pads": {
+            "warm_analog": {
+                "oscillators": 4,
+                "waveforms": ["sawtooth", "triangle", "sine"],
+                "detune_cents": { "min": -18, "max": 18 },
+                "drift_lfo_hz": 0.08,
+                "filter": {
+                    "type": "ladder_24db",
+                    "cutoff_hz": { "min": 600, "max": 2200 },
+                    "resonance": 0.35,
+                    "envelope_amount": 0.4
+                },
+                "attack_ms": 800,
+                "release_ms": 3500,
+                "character": "wooly_nostalgic_SAW85"
+            },
+            "granular_shimmer": {
+                "grain_size_ms": { "min": 30, "max": 80 },
+                "density": 25,
+                "pitch_spread_cents": { "min": -1200, "max": 1200 },
+                "reverse_probability": 0.3,
+                "filter_type": "highpass_gentle",
+                "reverb_send": 0.7,
+                "character": "crystalline_fractured"
+            },
+            "choir_ethereal": {
+                "formants": ["ah", "oh", "mm"],
+                "frequency_hz": { "min": 200, "max": 800 },
+                "bandwidth_hz": 120,
+                "vibrato_rate": 5.5,
+                "vibrato_depth": 0.03,
+                "reverb_send": 0.8,
+                "character": "ghostly_human_traces"
+            }
+        },
+        "drums": {
+            "kick": {
+                "fundamental_hz": 50,
+                "punch_hz": 120,
+                "click_hz": 3500,
+                "decay_ms": 180,
+                "drive": 0.25,
+                "sub_layer": true,
+                "character": "warm_pillow_808"
+            },
+            "snare": {
+                "body_hz": 200,
+                "noise_color": "pink",
+                "decay_ms": 140,
+                "pitch_envelope": true,
+                "reverb_send": 0.35,
+                "character": "crisp_but_warm"
+            },
+            "hihat": {
+                "closed": {
+                    "frequency_hz": 8000,
+                    "decay_ms": 50,
+                    "velocity_curve": "humanized"
+                },
+                "open": {
+                    "frequency_hz": 6000,
+                    "decay_ms": 200,
+                    "reverb_send": 0.4
+                },
+                "character": "tight_analog_606"
+            },
+            "breakbeat": {
+                "source": "amen_processed",
+                "time_stretch": true,
+                "chop_style": "micro_edits",
+                "bit_depth": 12,
+                "shuffle": 0.2,
+                "ghost_notes": true,
+                "velocity_variation": 0.25,
+                "character": "chopped_but_swinging"
+            },
+            "timing": {
+                "quantize_strength": 0.7,
+                "humanize_ms": 8,
+                "swing_pct": 12,
+                "polyrhythm_layers": [4, 5, 7]
+            }
+        },
+        "bass": {
+            "sub": {
+                "waveform": "sine_saturated",
+                "frequency_hz": { "min": 30, "max": 60 },
+                "saturation": 0.3,
+                "lowpass_hz": 120,
+                "character": "deep_foundation"
+            },
+            "acid": {
+                "style": "303_modeled",
+                "waveform": "sawtooth",
+                "filter": {
+                    "type": "ladder_resonant",
+                    "cutoff_hz": { "min": 200, "max": 1800 },
+                    "resonance": { "min": 0.5, "max": 0.8 },
+                    "envelope_decay_ms": 200
+                },
+                "accent": true,
+                "slide": true,
+                "pattern": "16th_with_rests",
+                "character": "squelchy_liquid"
+            },
+            "melodic": {
+                "oscillators": 2,
+                "detune_cents": 8,
+                "filter_cutoff_hz": 800,
+                "portamento_ms": 40,
+                "character": "singing_warm"
+            }
+        },
+        "leads": {
+            "detuned_fifth": {
+                "oscillators": 3,
+                "intervals": ["unison", "P5_sharp_8cents", "octave_flat_5cents"],
+                "waveform": "saw_pwm",
+                "filter": {
+                    "type": "state_variable",
+                    "cutoff_hz": 2500,
+                    "resonance": 0.45
+                },
+                "vibrato_rate_hz": 5.2,
+                "vibrato_depth_cents": 15,
+                "character": "iconic_RDJ_lead"
+            },
+            "bell_fm": {
+                "algorithm": "fm_6op",
+                "ratio_stack": [1, 2.01, 3.99, 7.01],
+                "modulation_index": { "min": 1.5, "max": 4.0 },
+                "decay_ms": 1200,
+                "reverb_send": 0.6,
+                "character": "crystalline_bell"
+            }
+        },
+        "textures": {
+            "tape_hiss": {
+                "noise_type": "shaped_pink",
+                "filter_low_hz": 800,
+                "filter_high_hz": 12000,
+                "volume": -24,
+                "character": "nostalgic_warmth"
+            },
+            "vinyl_crackle": {
+                "density": 0.3,
+                "filter_high_hz": 4000,
+                "volume": -30,
+                "character": "memory_surface_noise"
+            },
+            "field_recording": {
+                "elements": ["distant_children", "birds", "rain_soft", "machinery_hum"],
+                "processing": ["granular", "pitched", "reversed"],
+                "volume": -28,
+                "character": "fragments_of_world"
+            }
+        },
+        "piano": {
+            "style": "prepared",
+            "techniques": ["muted_strings", "harmonics", "tape_delay"],
+            "velocity_curve": "expressive",
+            "reverb_send": 0.5,
+            "character": "avril_14th_intimacy"
+        },
+        "strings": {
+            "style": "processed_ensemble",
+            "voicing": "wide_octaves",
+            "modulation": ["tape_wow", "chorus_subtle"],
+            "highpass_hz": 200,
+            "character": "distant_orchestra_memory"
+        },
+        "vocal": {
+            "style": "ghostly_sample",
+            "processing": ["pitch_shift", "granular", "reverb_heavy", "formant_shift"],
+            "time_stretch_ratio": { "min": 0.5, "max": 2.0 },
+            "character": "human_traces_in_machine"
+        }
+    },
+
+    "chord_progressions": [
+        { 
+            "name": "digital_amber_main", 
+            "chords": ["F#m9", "Dmaj7", "Aadd9", "E6"],
+            "voicing": "spread_open",
+            "description": "Warm, melancholic, suspended - the main emotional core"
+        },
+        { 
+            "name": "memory_loop", 
+            "chords": ["F#m", "C#m7", "Dmaj7", "Bm7"],
+            "voicing": "cluster_close",
+            "description": "Circular, hypnotic - a memory playing on repeat"
+        },
+        { 
+            "name": "system_awakening", 
+            "chords": ["F#m", "F#m/E", "Dmaj7", "C#7sus4"],
+            "voicing": "ascending_bass",
+            "description": "Rising, opening - consciousness emerging"
+        },
+        { 
+            "name": "transcendence", 
+            "chords": ["Dmaj9", "Amaj7#11", "F#m11", "Emaj9"],
+            "voicing": "lydian_bright",
+            "description": "Lifting, otherworldly - the emotional peak"
+        },
+        { 
+            "name": "saving_state", 
+            "chords": ["F#m", "Dmaj7", "Amaj7", "F#m"],
+            "voicing": "simple_root",
+            "description": "Resolution, acceptance - the amber hardens"
+        }
+    ],
+
+    "arrangement": {
+        "structure": "through_composed_emotional_arc",
+        "total_bars": 144,
+        "time_signature": "4/4",
+        "bpm_at_sections": {
+            "intro": 96,
+            "build": 102,
+            "complex_a": 108,
+            "breakdown": 100,
+            "complex_b": 112,
+            "peak": 116,
+            "outro": 100
+        },
+        "sections": {
+            "intro": {
+                "bars": 16,
+                "time_range": "0:00-0:40",
+                "description": "Emerging from silence. Tape hiss, distant pad swells, fragments of memory.",
+                "instruments": ["texture_tape_hiss", "pad_warm_filtered", "texture_field"],
+                "dynamics": 0.3,
+                "progression": "digital_amber_main",
+                "techniques": ["filter_opening", "granular_freeze", "reverb_swell"]
+            },
+            "build": {
+                "bars": 16,
+                "time_range": "0:40-1:20",
+                "description": "Systems coming online. Sub bass breathes in. Hihat patterns emerge from noise. Piano hints.",
+                "instruments": ["texture_tape_hiss", "pad_warm", "bass_sub", "hihat_sparse", "piano_hints"],
+                "dynamics": 0.45,
+                "progression": "system_awakening",
+                "techniques": ["element_addition", "rhythmic_emergence"]
+            },
+            "complex_a": {
+                "bars": 24,
+                "time_range": "1:20-2:20",
+                "description": "Full consciousness. Breakbeats slice and reform. Acid bass squelches. Lead melody appears - beautiful and slightly wrong.",
+                "instruments": ["kick", "snare", "hihat", "breakbeat", "bass_acid", "pad_warm", "lead_detuned", "texture_noise"],
+                "dynamics": 0.7,
+                "progression": "memory_loop",
+                "techniques": ["polyrhythmic_layering", "filter_sweeps", "micro_edits"]
+            },
+            "breakdown": {
+                "bars": 16,
+                "time_range": "2:20-3:00",
+                "description": "The machine pauses. Remembers. Piano solo over granular pads. Ghostly vocal samples. The heart exposed.",
+                "instruments": ["piano_prepared", "pad_granular", "vocal_ghostly", "strings_processed", "texture_field"],
+                "dynamics": 0.35,
+                "progression": "digital_amber_main",
+                "techniques": ["beat_drop", "reverb_swell", "intimate_space"]
+            },
+            "complex_b": {
+                "bars": 32,
+                "time_range": "3:00-4:20",
+                "description": "Evolution. The beat returns transformed. New patterns, denser textures. The melody develops, counterpoint emerges.",
+                "instruments": ["kick", "snare", "hihat", "breakbeat_evolved", "bass_melodic", "pad_choir", "lead_bell", "arpeggio", "sequence"],
+                "dynamics": 0.8,
+                "progression": ["memory_loop", "transcendence"],
+                "techniques": ["metric_modulation", "timbral_evolution", "call_and_response"]
+            },
+            "peak": {
+                "bars": 16,
+                "time_range": "4:20-5:00",
+                "description": "Transcendence. Everything playing. Maximum emotional density. The moment where data becomes feeling. Then... release.",
+                "instruments": ["all"],
+                "dynamics": 0.95,
+                "progression": "transcendence",
+                "techniques": ["full_density", "harmonic_climax", "rhythmic_intensification", "sudden_strip"]
+            },
+            "outro": {
+                "bars": 24,
+                "time_range": "5:00-6:00",
+                "description": "Saving state. Elements fade one by one. The melody echoes, processed beyond recognition. Tape hiss returns. Silence approaches. The amber hardens.",
+                "instruments": ["pad_warm_filtered", "texture_tape_hiss", "strings_processed", "piano_distant", "texture_vinyl"],
+                "dynamics": 0.2,
+                "progression": "saving_state",
+                "techniques": ["filter_closing", "element_subtraction", "reverb_tail", "tape_stop"]
+            }
+        }
+    },
+
+    "beat_patterns": {
+        "intro_pulse": {
+            "description": "Barely there - just the suggestion of rhythm",
+            "kick": [0, 0, 0, 0],
+            "hihat": [0, 0, 0.1, 0, 0, 0, 0.1, 0],
+            "velocity_range": [0.2, 0.35]
+        },
+        "build_emergence": {
+            "description": "Hihat pattern crystallizing from noise",
+            "kick": [1, 0, 0, 0, 0.6, 0, 0, 0],
+            "hihat": [0.4, 0.2, 0.6, 0.3, 0.4, 0.2, 0.7, 0.3],
+            "velocity_range": [0.3, 0.55]
+        },
+        "main_groove": {
+            "description": "Classic RDJ shuffled breakbeat with ghost notes",
+            "kick": [1, 0, 0, 0.3, 0.8, 0, 0, 0.4, 0, 0, 1, 0, 0.6, 0, 0, 0.2],
+            "snare": [0, 0, 0, 0, 1, 0, 0.2, 0, 0, 0.15, 0, 0, 1, 0, 0, 0.3],
+            "hihat": [0.6, 0.3, 0.7, 0.25, 0.5, 0.35, 0.8, 0.3, 0.55, 0.25, 0.7, 0.3, 0.6, 0.35, 0.75, 0.28],
+            "velocity_range": [0.5, 0.85],
+            "swing": 0.12
+        },
+        "breakdown_sparse": {
+            "description": "Breathing space - occasional hits",
+            "kick": [0.4, 0, 0, 0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, 0],
+            "velocity_range": [0.25, 0.45]
+        },
+        "evolved_complex": {
+            "description": "Polyrhythmic madness - 4 against 5 against 7",
+            "kick": [1, 0, 0, 0.3, 0.8, 0, 0.4, 0, 0.6, 0, 1, 0, 0.5, 0.2, 0, 0.35],
+            "snare": [0, 0, 0.2, 0, 1, 0, 0, 0.3, 0, 0.15, 0, 0.25, 1, 0, 0.2, 0],
+            "hihat": [0.7, 0.25, 0.6, 0.35, 0.55, 0.4, 0.8, 0.3, 0.65, 0.28, 0.75, 0.32, 0.6, 0.38, 0.72, 0.26],
+            "poly_5": [1, 0, 0, 0, 0.7, 0, 0, 1, 0, 0, 0.8, 0, 0, 1, 0, 0],
+            "poly_7": [1, 0, 0, 0.6, 0, 0, 0, 0.8, 0, 0, 1, 0, 0, 0, 0.7, 0],
+            "velocity_range": [0.55, 0.9],
+            "swing": 0.15
+        },
+        "peak_intensity": {
+            "description": "Everything firing - controlled chaos",
+            "kick": [1, 0.3, 0.2, 0.4, 0.9, 0.2, 0.3, 0.5, 0.8, 0.25, 1, 0.3, 0.7, 0.2, 0.4, 0.35],
+            "snare": [0.2, 0, 0.3, 0, 1, 0, 0.25, 0.4, 0.15, 0.2, 0.3, 0, 1, 0.2, 0.3, 0.25],
+            "hihat": [0.8, 0.4, 0.75, 0.45, 0.7, 0.5, 0.85, 0.42, 0.78, 0.38, 0.82, 0.48, 0.72, 0.52, 0.88, 0.4],
+            "velocity_range": [0.7, 1.0],
+            "swing": 0.1
+        }
+    },
+
+    "mixing": {
+        "master_bus": {
+            "tape_saturation": 0.25,
+            "soft_clip": true,
+            "stereo_width": 0.85,
+            "high_shelf_cut": { "frequency_hz": 14000, "db": -2 },
+            "low_shelf_boost": { "frequency_hz": 80, "db": 1.5 }
+        },
+        "spatial": {
+            "reverb": {
+                "type": "algorithmic_lush",
+                "size": 0.7,
+                "predelay_ms": 35,
+                "decay_s": 3.5,
+                "modulation": true,
+                "high_damp_hz": 6000
+            },
+            "delay": {
+                "type": "tape_modulated",
+                "time_L_ms": 375,
+                "time_R_ms": 500,
+                "feedback": 0.45,
+                "high_cut_hz": 4000
+            }
+        },
+        "frequency_allocation": {
+            "sub_bass": { "range": "20-80Hz", "mono": true },
+            "bass": { "range": "80-250Hz", "width": 0.3 },
+            "mids": { "range": "250-4000Hz", "width": 0.7 },
+            "presence": { "range": "4000-8000Hz", "width": 0.9 },
+            "air": { "range": "8000-16000Hz", "width": 1.0, "subtle": true }
+        }
+    },
+
+    "emotional_curve": {
+        "description": "The journey through synthetic memory",
+        "timeline": [
+            { "time": "0:00", "emotion": "silence_potential", "intensity": 0.0 },
+            { "time": "0:20", "emotion": "curiosity_awakening", "intensity": 0.2 },
+            { "time": "0:40", "emotion": "gentle_recognition", "intensity": 0.35 },
+            { "time": "1:20", "emotion": "joy_complexity", "intensity": 0.6 },
+            { "time": "2:00", "emotion": "flow_immersion", "intensity": 0.72 },
+            { "time": "2:20", "emotion": "vulnerability_exposed", "intensity": 0.4 },
+            { "time": "2:40", "emotion": "tenderness_memory", "intensity": 0.45 },
+            { "time": "3:00", "emotion": "rebuilding_hope", "intensity": 0.55 },
+            { "time": "3:40", "emotion": "ascending_wonder", "intensity": 0.75 },
+            { "time": "4:20", "emotion": "transcendence_peak", "intensity": 0.95 },
+            { "time": "4:40", "emotion": "release_gratitude", "intensity": 0.7 },
+            { "time": "5:00", "emotion": "acceptance_peace", "intensity": 0.4 },
+            { "time": "5:30", "emotion": "fading_warmth", "intensity": 0.2 },
+            { "time": "6:00", "emotion": "amber_complete", "intensity": 0.05 }
+        ]
+    },
+
+    "technical_notes": {
+        "performance_hints": [
+            "Use tempo drift during ambient sections for organic feel",
+            "Automate filter cutoffs continuously - never static",
+            "Ghost notes should be felt more than heard",
+            "Breakbeats need micro-timing variations, not just swing",
+            "Layer reverbs: short room + long hall for depth",
+            "Detuning should be random per note, not static",
+            "Granular sections benefit from modulated grain size"
+        ],
+        "authenticity_checks": [
+            "Does it sound like it was made on equipment that loves you?",
+            "Can you hear the person behind the machine?",
+            "Is there beauty hiding in the complexity?",
+            "Would RDJ nod approvingly or smirk at the attempt?",
+            "Does it make you feel something unexpected?"
+        ]
+    }
+}

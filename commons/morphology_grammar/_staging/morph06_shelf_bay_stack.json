@@ -1,0 +1,41 @@
+{
+  "id": "morph06_shelf_bay_stack",
+  "family": "shelf",
+  "notes": "A tall body is carved into repeated front bays so the hierarchy reads as frame first, compartments second, stored things implied last.",
+  "camera_yaw": 0.68,
+  "camera_pitch": 0.28,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.58,
+      1.86,
+      0.62
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 3,
+  "rules": [
+    {
+      "id": "shelf_front_bays",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 3,
+        "rows": 4,
+        "length": 0.12,
+        "scale": 0.8,
+        "door_col": 1,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

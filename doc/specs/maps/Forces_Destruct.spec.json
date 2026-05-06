@@ -1,0 +1,76 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Forces_Destruct",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 13,
+    "d": 19
+  },
+  "signature": "destructible_marching_cube and sphere_splitting_showcase demonstrate volumetric fracture; throw_ball and gravity_gun_test_scene provide force application tools; grab_sphere_point allows precise force placement; VectorThrowing connects back to projectile delivery of destructive force.",
+  "style": null,
+  "echoes": [
+    "color",
+    "forces"
+  ],
+  "density": 0.028,
+  "breath_zones": [
+    {
+      "size": 239,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 19
+      },
+      "centroid": [
+        5.99581589958159,
+        9.05857740585774
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "destructibles_test_scene"
+    },
+    {
+      "x": 10,
+      "z": 1,
+      "token": "VectorThrowing"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "destructible_marching_cube"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "throw_ball"
+    },
+    {
+      "x": 10,
+      "z": 6,
+      "token": "grab_sphere_point"
+    },
+    {
+      "x": 1,
+      "z": 11,
+      "token": "sphere_splitting_showcase"
+    },
+    {
+      "x": 6,
+      "z": 11,
+      "token": "gravity_gun_test_scene"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 246,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

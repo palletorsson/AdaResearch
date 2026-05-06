@@ -21,10 +21,98 @@ var reverb_buffer := []
 var delay_buffer := []
 var output_signal := []
 
-func _ready():
-	initialize_audio_buffers()
+# Real-time audio synthesis
+var sample_rate := 44100.0
+var audio_stream: AudioStreamGenerator
+var audio_player: AudioStreamPlayer
+var audio_playback: AudioStreamGeneratorPlayback
+var audio_buffer_size := 512
+var input_phase := 0.0
+var noise_phase := 0.0
+var chorus_phase := 0.0
+var audio_chorus_buffer := []
+var audio_chorus_index := 0
+var audio_delay_buffer := []
+var audio_delay_index := 0
+var audio_reverb_buffer := []
+var audio_reverb_index := 0
+var theme_sequence := ["queer", "sci_fi", "cyberpunk", "epic"]
+var current_theme_index := 0
+var theme_cycle_duration := 16.0
+var theme_timer := 0.0
+var current_theme := ""
+var current_theme_profile := {}
+var theme_profiles := {
+	"queer": {
+		"base_frequency": 220.0,
+		"sparkle": 0.7,
+		"noise": 0.18,
+		"distortion_drive": 0.32,
+		"reverb_size": 0.75,
+		"reverb_damping": 0.42,
+		"reverb_mix": 0.55,
+		"delay_time": 0.34,
+		"delay_feedback": 0.44,
+		"delay_mix": 0.45,
+		"chorus_rate": 1.6,
+		"chorus_depth": 0.0045,
+		"chorus_mix": 0.4
+	},
+	"sci_fi": {
+		"base_frequency": 320.0,
+		"sparkle": 0.9,
+		"noise": 0.12,
+		"distortion_drive": 0.24,
+		"reverb_size": 0.62,
+		"reverb_damping": 0.28,
+		"reverb_mix": 0.5,
+		"delay_time": 0.46,
+		"delay_feedback": 0.52,
+		"delay_mix": 0.48,
+		"chorus_rate": 0.9,
+		"chorus_depth": 0.006,
+		"chorus_mix": 0.55
+	},
+	"cyberpunk": {
+		"base_frequency": 140.0,
+		"sparkle": 0.5,
+		"noise": 0.25,
+		"distortion_drive": 0.58,
+		"reverb_size": 0.52,
+		"reverb_damping": 0.35,
+		"reverb_mix": 0.42,
+		"delay_time": 0.28,
+		"delay_feedback": 0.62,
+		"delay_mix": 0.55,
+		"chorus_rate": 2.1,
+		"chorus_depth": 0.0055,
+		"chorus_mix": 0.5
+	},
+	"epic": {
+		"base_frequency": 260.0,
+		"sparkle": 0.85,
+		"noise": 0.1,
+		"distortion_drive": 0.3,
+		"reverb_size": 0.88,
+		"reverb_damping": 0.5,
+		"reverb_mix": 0.6,
+		"delay_time": 0.38,
+		"delay_feedback": 0.48,
+		"delay_mix": 0.5,
+		"chorus_rate": 1.3,
+		"chorus_depth": 0.0035,
+		"chorus_mix": 0.45
+	}
+}
 
-func _process(delta):
+
+func _ready() -> void:
+	randomize()
+	initialize_audio_buffers()
+	setup_audio_synthesis()
+	apply_theme_profile(theme_sequence[0])
+
+func _process(delta: float) -> void:
 	time += delta
 	effect_timer += delta
 	
@@ -36,8 +124,10 @@ func _process(delta):
 	visualize_distortion_effect()
 	show_effect_chain()
 	show_frequency_analysis()
+	update_theme_cycle(delta)
+	generate_audio_samples()
 
-func initialize_audio_buffers():
+func initialize_audio_buffers() -> void:
 	# Initialize buffers for audio processing simulation
 	input_signal.resize(128)
 	reverb_buffer.resize(256)
@@ -54,23 +144,37 @@ func initialize_audio_buffers():
 	for i in range(output_signal.size()):
 		output_signal[i] = 0.0
 
-func update_effect_parameters():
-	# Animate effect parameters
-	reverb_size = 0.5 + sin(time * 0.3) * 0.3
-	reverb_damping = 0.3 + cos(time * 0.4) * 0.2
-	delay_time = 0.2 + sin(time * 0.5) * 0.15
-	delay_feedback = 0.3 + cos(time * 0.6) * 0.2
-	chorus_rate = 1.5 + sin(time * 0.7) * 0.8
-	chorus_depth = 0.15 + cos(time * 0.8) * 0.1
-	distortion_drive = 0.4 + sin(time * 0.9) * 0.3
+func update_effect_parameters() -> void:
+	if current_theme_profile.is_empty():
+		return
+	
+	var profile: Dictionary = current_theme_profile
+	reverb_size = profile.get("reverb_size", 0.7) + sin(time * 0.3) * 0.1
+	reverb_damping = clamp(profile.get("reverb_damping", 0.4) + cos(time * 0.4) * 0.05, 0.0, 1.0)
+	delay_time = clamp(profile.get("delay_time", 0.3) + sin(time * 0.5) * 0.05, 0.05, 0.6)
+	delay_feedback = clamp(profile.get("delay_feedback", 0.4) + cos(time * 0.6) * 0.05, 0.0, 0.95)
+	chorus_rate = max(0.1, profile.get("chorus_rate", 1.5) + sin(time * 0.7) * 0.4)
+	chorus_depth = clamp(profile.get("chorus_depth", 0.003) + cos(time * 0.8) * 0.0015, 0.0005, 0.02)
+	distortion_drive = clamp(profile.get("distortion_drive", 0.4) + sin(time * 0.9) * 0.06, 0.0, 1.0)
 
-func generate_input_signal():
-	# Generate test input signal (sine wave with harmonics)
+func generate_input_signal() -> void:
+	if current_theme_profile.is_empty():
+		return
+	
+	var profile: Dictionary = current_theme_profile
+	var base_freq = profile.get("base_frequency", 440.0)
+	var sparkle = profile.get("sparkle", 0.6)
+	var noise_amount = profile.get("noise", 0.1)
+	
 	for i in range(input_signal.size()):
-		var t = time + float(i) / 44100.0  # Simulate sample rate
-		input_signal[i] = sin(t * TAU * 440) * 0.5 + sin(t * TAU * 880) * 0.25 + sin(t * TAU * 1320) * 0.125
+		var t = time + float(i) / sample_rate
+		var fundamental = sin(t * TAU * base_freq) * 0.5
+		var harmonic = sin(t * TAU * base_freq * 2.0 + 0.3) * 0.3
+		var shimmer = sin(t * TAU * base_freq * 0.5 + i * 0.02) * sparkle * 0.25
+		var noise = randf_range(-1.0, 1.0) * noise_amount * 0.2
+		input_signal[i] = (fundamental + harmonic + shimmer + noise) * 0.8
 
-func visualize_reverb_effect():
+func visualize_reverb_effect() -> void:
 	var container = $ReverbVisualization
 	
 	# Clear previous visualization
@@ -118,7 +222,7 @@ func visualize_reverb_effect():
 	
 	container.add_child(chamber)
 
-func visualize_delay_effect():
+func visualize_delay_effect() -> void:
 	var container = $DelayVisualization
 	
 	# Clear previous visualization
@@ -161,7 +265,7 @@ func visualize_delay_effect():
 	
 	container.add_child(delay_line)
 
-func visualize_chorus_effect():
+func visualize_chorus_effect() -> void:
 	var container = $ChorusVisualization
 	
 	# Clear previous visualization
@@ -212,7 +316,7 @@ func visualize_chorus_effect():
 			
 			container.add_child(connection)
 
-func visualize_distortion_effect():
+func visualize_distortion_effect() -> void:
 	var container = $DistortionVisualization
 	
 	# Clear previous visualization
@@ -275,7 +379,7 @@ func visualize_distortion_effect():
 	
 	container.add_child(curve_display)
 
-func show_effect_chain():
+func show_effect_chain() -> void:
 	var container = $EffectChain
 	
 	# Clear previous visualization
@@ -329,7 +433,7 @@ func show_effect_chain():
 			
 			container.add_child(arrow)
 
-func show_frequency_analysis():
+func show_frequency_analysis() -> void:
 	var container = $FrequencyAnalysis
 	
 	# Clear previous visualization
@@ -369,3 +473,153 @@ func show_frequency_analysis():
 		spectrum_bar.material_override = material
 		
 		container.add_child(spectrum_bar)
+
+func setup_audio_synthesis() -> void:
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = sample_rate
+	audio_stream.buffer_length = 0.2
+
+	audio_player = AudioStreamPlayer.new()
+	audio_player.stream = audio_stream
+	audio_player.volume_db = -4.0
+	add_child(audio_player)
+	audio_player.play()
+
+	audio_playback = audio_player.get_stream_playback()
+
+	audio_chorus_buffer.resize(int(sample_rate * 0.05))
+	audio_delay_buffer.resize(int(sample_rate * 1.5))
+	audio_reverb_buffer.resize(int(sample_rate * 2.0))
+	reset_audio_delay_lines()
+
+func reset_audio_delay_lines() -> void:
+	audio_chorus_index = 0
+	audio_delay_index = 0
+	audio_reverb_index = 0
+
+	for i in range(audio_chorus_buffer.size()):
+		audio_chorus_buffer[i] = 0.0
+	for i in range(audio_delay_buffer.size()):
+		audio_delay_buffer[i] = 0.0
+	for i in range(audio_reverb_buffer.size()):
+		audio_reverb_buffer[i] = 0.0
+
+func apply_theme_profile(theme_name: String) -> void:
+	if not theme_profiles.has(theme_name):
+		return
+
+	current_theme = theme_name
+	current_theme_index = theme_sequence.find(theme_name)
+	if current_theme_index == -1:
+		current_theme_index = 0
+
+	current_theme_profile = theme_profiles[theme_name]
+	reverb_size = current_theme_profile.get("reverb_size", reverb_size)
+	reverb_damping = current_theme_profile.get("reverb_damping", reverb_damping)
+	delay_time = current_theme_profile.get("delay_time", delay_time)
+	delay_feedback = current_theme_profile.get("delay_feedback", delay_feedback)
+	chorus_rate = current_theme_profile.get("chorus_rate", chorus_rate)
+	chorus_depth = current_theme_profile.get("chorus_depth", chorus_depth)
+	distortion_drive = current_theme_profile.get("distortion_drive", distortion_drive)
+	theme_timer = 0.0
+	reset_audio_delay_lines()
+	print("AudioEffects: activated %s theme" % theme_name)
+
+func update_theme_cycle(delta: float) -> void:
+	theme_timer += delta
+	if theme_timer >= theme_cycle_duration:
+		theme_timer = 0.0
+		advance_theme()
+
+func advance_theme() -> void:
+	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
+	apply_theme_profile(theme_sequence[current_theme_index])
+
+func ensure_playback():
+	if audio_playback:
+		return true
+	if not audio_player:
+		return false
+	audio_playback = audio_player.get_stream_playback()
+	return audio_playback != null
+
+func generate_audio_samples() -> void:
+	if not audio_player or not audio_player.playing:
+		return
+	if current_theme_profile.is_empty():
+		return
+	if not ensure_playback():
+		return
+
+	var available = audio_playback.get_frames_available()
+	if available < audio_buffer_size:
+		return
+
+	var profile: Dictionary = current_theme_profile
+	var base_freq = profile.get("base_frequency", 220.0)
+	var sparkle = profile.get("sparkle", 0.6)
+	var noise_amount = profile.get("noise", 0.1)
+	var drive = profile.get("distortion_drive", 0.3)
+	var chorus_mix = profile.get("chorus_mix", 0.4)
+	var delay_mix = profile.get("delay_mix", 0.45)
+	var reverb_mix = profile.get("reverb_mix", 0.5)
+	var frames_to_write = min(audio_buffer_size, available)
+	var delay_samples = clamp(int(delay_time * sample_rate), 1, max(2, audio_delay_buffer.size() - 1))
+	var reverb_decay = 0.35 + reverb_size * 0.4
+	var damping = clamp(current_theme_profile.get("reverb_damping", reverb_damping), 0.0, 0.95)
+
+	for _i in range(frames_to_write):
+		input_phase = wrapf(input_phase + base_freq * TAU / sample_rate, 0.0, TAU)
+		var base = sin(input_phase)
+		var overtone = sin(input_phase * 2.0) * 0.45
+		var shimmer = sin(input_phase * 0.5 + time * 0.5) * sparkle * 0.25
+		var dry = (base + overtone + shimmer) * 0.4
+		dry += randf_range(-1.0, 1.0) * noise_amount * 0.15
+
+		var distorted = soft_clip(dry, drive)
+
+		if audio_chorus_buffer.size() == 0:
+			audio_chorus_buffer.resize(1)
+		var chorus_size = audio_chorus_buffer.size()
+		var chorus_delay = clamp(int((0.01 + chorus_depth) * sample_rate + sin(chorus_phase) * chorus_depth * sample_rate), 1, chorus_size - 1)
+		var chorus_read = (audio_chorus_index - chorus_delay) % chorus_size
+		var modulated = audio_chorus_buffer[chorus_read]
+		audio_chorus_buffer[audio_chorus_index] = distorted
+		audio_chorus_index = (audio_chorus_index + 1) % chorus_size
+		chorus_phase = wrapf(chorus_phase + chorus_rate * TAU / sample_rate, 0.0, TAU)
+		var chorus_out = distorted * (1.0 - chorus_mix) + modulated * chorus_mix
+
+		if audio_delay_buffer.size() == 0:
+			audio_delay_buffer.resize(1)
+		var delay_size = audio_delay_buffer.size()
+		var delay_read = (audio_delay_index - delay_samples) % delay_size
+		var delay_sample = audio_delay_buffer[delay_read]
+		audio_delay_buffer[audio_delay_index] = chorus_out + delay_sample * delay_feedback
+		audio_delay_index = (audio_delay_index + 1) % delay_size
+		var delay_out = chorus_out * (1.0 - delay_mix) + delay_sample * delay_mix
+
+		if audio_reverb_buffer.size() == 0:
+			audio_reverb_buffer.resize(1)
+		var reverb_size_local = audio_reverb_buffer.size()
+		var reverb_sample = audio_reverb_buffer[audio_reverb_index]
+		var reverb_input = delay_out + reverb_sample * reverb_decay
+		audio_reverb_buffer[audio_reverb_index] = reverb_input * (1.0 - damping)
+		audio_reverb_index = (audio_reverb_index + 1) % reverb_size_local
+		var wet = reverb_sample * reverb_mix
+
+		var output = clamp(delay_out * (1.0 - reverb_mix) + wet, -1.0, 1.0)
+		audio_playback.push_frame(Vector2(output, output))
+
+func soft_clip(value: float, drive: float) -> float:
+	var drive_amount = 1.0 + clamp(drive, 0.0, 1.0) * 6.0
+	var y = value * drive_amount
+	return y / (1.0 + abs(y))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

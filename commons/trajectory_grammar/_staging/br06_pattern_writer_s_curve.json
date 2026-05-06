@@ -1,0 +1,133 @@
+{
+  "id": "br06_pattern_writer_s_curve",
+  "force": "bouncing_gravity",
+  "params": {
+    "gravity": 9.8,
+    "extrude_rate": 0.0,
+    "walls": [
+      {
+        "axis": "y",
+        "pos": -4.0,
+        "side": "below",
+        "restitution": 0.3
+      }
+    ],
+    "plates": [
+      {
+        "a": [
+          -0.845435441562641,
+          2.6913919732900937
+        ],
+        "b": [
+          0.845435441562641,
+          3.3086080267099063
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          0.16432974020683466,
+          2.7586080267099065
+        ],
+        "b": [
+          1.8552006233321168,
+          2.141391973290094
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          0.24572147062817695,
+          1.5913919732900936
+        ],
+        "b": [
+          1.936592353753459,
+          2.208608026709906
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          -0.6760914318908005,
+          1.6586080267099061
+        ],
+        "b": [
+          1.0147794512344817,
+          1.0413919732900936
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          -1.7535984359321548,
+          0.4913919732900936
+        ],
+        "b": [
+          -0.0627275528068727,
+          1.108608026709906
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          -1.9961445711584072,
+          0.5586080267099063
+        ],
+        "b": [
+          -0.30527368803312505,
+          -0.058608026709906225
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          -1.1807340394013521,
+          -0.6086080267099065
+        ],
+        "b": [
+          0.51013684372393,
+          0.008608026709905958
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          -0.057051523100094204,
+          -0.5413919732900943
+        ],
+        "b": [
+          1.6338193600251878,
+          -1.1586080267099068
+        ],
+        "restitution": 0.55
+      }
+    ]
+  },
+  "initial": {
+    "pos": [
+      0.0,
+      4.0
+    ],
+    "vel": [
+      0.1,
+      0.0
+    ]
+  },
+  "duration": 10.0,
+  "dt": 0.004,
+  "interpretation": "tube",
+  "tube_radius": 0.014,
+  "color_start": [
+    0.3,
+    0.55,
+    0.85
+  ],
+  "color_end": [
+    0.95,
+    0.45,
+    0.35
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.25,
+  "notes": "Eight hand-placed plates curving left-right-left-right down the fall. Target shape: a rough S-curve. The ball traces the S because the plates force it to \u2014 reverse-engineered form. This is the 'plates choreograph the fall' case in its simplest form."
+}

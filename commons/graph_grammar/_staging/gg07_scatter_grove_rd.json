@@ -1,0 +1,53 @@
+{
+  "id": "gg07_scatter_grove_rd",
+  "notes": "Scattered forest + RD spots displacement \u00e2\u20ac\u201d a dappled grove, patterns emerge across trees.",
+  "seed": {
+    "scatter": {
+      "count": 10,
+      "region_size": 2.0,
+      "min_dist": 0.5,
+      "shape": "disk",
+      "radius": 0.1,
+      "seed": 33
+    }
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.5,
+        "spread_deg": 35,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "rd_displace",
+      "selector": "tag:leaf",
+      "params": {
+        "pattern": "spots",
+        "amp": 0.3,
+        "iterations": 2000,
+        "grid_size": 72,
+        "world_size": 5.0,
+        "seed": 77
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 10,
+        "length": 0.17,
+        "radius": 0.018,
+        "splay": 0.85
+      }
+    }
+  ]
+}

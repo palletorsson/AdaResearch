@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "GT_Connectivity",
+  "home_sequence": "graphtheory",
+  "dimensions": {
+    "w": 12,
+    "d": 8
+  },
+  "signature": "tarjan_algorithm implements SCC discovery via single DFS; kosaraju_algorithm implements the two-pass alternative \u2014 same result",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 92,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 8
+      },
+      "centroid": [
+        5.467391304347826,
+        3.467391304347826
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 95,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

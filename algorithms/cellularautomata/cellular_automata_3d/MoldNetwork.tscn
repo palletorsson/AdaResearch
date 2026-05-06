@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd" id="1_script"]
+
+[node name="MoldNetwork" type="Node3D"]
+script = ExtResource("1_script")
+grid_size = Vector3i(30, 30, 30)
+rule_string = "4-6/5-7/10/M"
+cell_size = 0.2
+generation_interval = 0.1
+max_generations = 100
+use_gradient = true
+gradient_mode = 1

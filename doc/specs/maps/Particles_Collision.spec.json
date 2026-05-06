@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Particles_Collision",
+  "home_sequence": "particles",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.078,
+  "breath_zones": [
+    {
+      "size": 47,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0638297872340425,
+        3.0851063829787235
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "example_4_6_particle_repeller_vr"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "particle_campfire"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "0"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

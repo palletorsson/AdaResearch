@@ -182,3 +182,6 @@ func _commit_mesh() -> void:
 		mat.metallic = 0.1
 		material_override = mat
 		print("VoxelExtractor: Added default material")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

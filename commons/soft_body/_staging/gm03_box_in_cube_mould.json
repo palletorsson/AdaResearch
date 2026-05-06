@@ -1,0 +1,59 @@
+{
+  "id": "gm03_box_in_cube_mould",
+  "topology": "glass_blow",
+  "radius": 0.55,
+  "rings": 14,
+  "segments": 22,
+  "pin_top_fraction": 0.15,
+  "preinflate": 0.8,
+  "stiffness": 0.5,
+  "damping": 0.994,
+  "gravity": [
+    0,
+    -5.0,
+    0
+  ],
+  "floor_y": -3.5,
+  "constraint_passes": 5,
+  "steps": 240,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "mould": {
+    "type": "box",
+    "mode": "contain",
+    "center": [
+      0,
+      1.5,
+      0
+    ],
+    "size": [
+      0.45,
+      0.7,
+      0.45
+    ]
+  },
+  "camera_yaw": 0.42,
+  "camera_pitch": 0.15,
+  "render": {
+    "color": [
+      0.85,
+      0.55,
+      0.3,
+      0.9
+    ],
+    "roughness": 0.4,
+    "particle_radius": 0.018,
+    "show_wires": true,
+    "wire_color": [
+      0.3,
+      0.15,
+      0.08
+    ],
+    "double_sided": true
+  },
+  "layout": "frozen_form",
+  "notes": "GLASS MEETS MOULD: sphere pressed into a box mould 0.9\u00d71.4\u00d70.9. The round glass becomes a square bottle \u2014 rectangular with rounded corners where internal pressure pushes outward but the flat faces stop it. The mould's geometry imprints onto the vessel directly."
+}

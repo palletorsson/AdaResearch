@@ -1,0 +1,54 @@
+{
+  "id": "gg16_chandelier_5bulb",
+  "notes": "Larger Adelman family \u00e2\u20ac\u201d 5 bulbs. Trunk splits into 5 branches.",
+  "seed": {
+    "pos": [
+      0,
+      2.0,
+      0
+    ],
+    "radius": 0.015
+  },
+  "iterations": 1,
+  "render_mode": "chandelier",
+  "camera_pitch": 0.1,
+  "camera_yaw": 0.6,
+  "chandelier": {
+    "edge_radius": 0.012,
+    "edge_color": [
+      0.12,
+      0.1,
+      0.09
+    ],
+    "bulb_radius": 0.1,
+    "bulb_color": [
+      1.0,
+      0.92,
+      0.78
+    ],
+    "bulb_emission": 2.0
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.55,
+        "spread_deg": 5,
+        "radius_decay": 0.95,
+        "pitch": 3.14
+      }
+    },
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 5,
+        "length": 0.4,
+        "spread_deg": 65,
+        "radius_decay": 0.95
+      }
+    }
+  ]
+}

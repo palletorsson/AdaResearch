@@ -1,0 +1,1 @@
+This room is a curated compression. It makes comparison easy, but it also flattens each gallery into a single representative image. The convenience of the shortlist comes with the risk of mistaking a family for its current winner.

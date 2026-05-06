@@ -1,0 +1,1090 @@
+{
+  "version": 1,
+  "description": "Soft body research \u2014 Verlet spring-mass simulations. Config = topology + stiffness + pin mode + gravity + damping + steps. Same config + same seed = identical final pose. Rendered after N steps as a reproducible DNA artifact.",
+  "configs": [
+    {
+      "id": "sb01_cloth_drape_corners",
+      "topology": "cloth_grid",
+      "cols": 16,
+      "rows": 16,
+      "cell_size": 0.16,
+      "pin_mode": "top_corners",
+      "stiffness": 0.85,
+      "damping": 0.995,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -2.0,
+      "steps": 240,
+      "origin": [
+        0,
+        1.8,
+        0
+      ],
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.15,
+      "render": {
+        "color": [
+          0.72,
+          0.35,
+          0.32
+        ],
+        "roughness": 0.6,
+        "double_sided": true
+      },
+      "layout": "verlet_cloth",
+      "notes": "Classic hanging cloth \u2014 two top corners pinned, gravity pulls the middle into a catenary sag."
+    },
+    {
+      "id": "sb02_cloth_drape_top_row",
+      "topology": "cloth_grid",
+      "cols": 18,
+      "rows": 12,
+      "cell_size": 0.15,
+      "pin_mode": "top_row",
+      "stiffness": 0.9,
+      "damping": 0.995,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -2.0,
+      "steps": 200,
+      "origin": [
+        0,
+        1.4,
+        0
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.1,
+      "render": {
+        "color": [
+          0.25,
+          0.35,
+          0.55
+        ],
+        "roughness": 0.65,
+        "double_sided": true
+      },
+      "layout": "verlet_cloth",
+      "notes": "Curtain with entire top row pinned \u2014 flat hang, slight side curl where grid ends."
+    },
+    {
+      "id": "sb03_cloth_flag_sideways",
+      "topology": "cloth_grid",
+      "cols": 20,
+      "rows": 12,
+      "cell_size": 0.14,
+      "pin_mode": "left_column",
+      "stiffness": 0.8,
+      "damping": 0.992,
+      "gravity": [
+        0.6,
+        -9.8,
+        0.8
+      ],
+      "floor_y": -3.0,
+      "steps": 260,
+      "origin": [
+        0,
+        1.2,
+        0
+      ],
+      "camera_yaw": 0.6,
+      "camera_pitch": 0.1,
+      "render": {
+        "color": [
+          0.85,
+          0.72,
+          0.25
+        ],
+        "roughness": 0.55,
+        "double_sided": true
+      },
+      "layout": "verlet_cloth",
+      "notes": "Flag pinned along left edge with sideways wind \u2014 settles into a drooping wave shape."
+    },
+    {
+      "id": "sb04_cloth_tablecloth",
+      "topology": "cloth_grid",
+      "cols": 14,
+      "rows": 14,
+      "cell_size": 0.2,
+      "pin_mode": "four_corners",
+      "stiffness": 0.7,
+      "damping": 0.994,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -2.5,
+      "steps": 180,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.45,
+      "camera_pitch": 0.25,
+      "render": {
+        "color": [
+          0.95,
+          0.93,
+          0.88
+        ],
+        "roughness": 0.7,
+        "double_sided": true
+      },
+      "layout": "verlet_cloth",
+      "notes": "Square cloth held at all four corners \u2014 belly sags, edges scallop between pins."
+    },
+    {
+      "id": "sb05_jelly_box_bounce",
+      "topology": "jelly_box",
+      "size": 1.4,
+      "stiffness": 0.9,
+      "damping": 0.99,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -1.5,
+      "steps": 300,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.55,
+      "camera_pitch": 0.2,
+      "render": {
+        "color": [
+          0.9,
+          0.45,
+          0.55
+        ],
+        "roughness": 0.4,
+        "particle_radius": 0.12,
+        "show_wires": true,
+        "wire_color": [
+          0.2,
+          0.12,
+          0.1
+        ]
+      },
+      "layout": "verlet_jelly",
+      "notes": "8-corner jelly cube dropped \u2014 lands and wobbles, wires show 28-spring topology."
+    },
+    {
+      "id": "sb06_jelly_grid_settle",
+      "topology": "jelly_grid_3d",
+      "nx": 5,
+      "ny": 5,
+      "nz": 5,
+      "cell": 0.22,
+      "stiffness": 0.6,
+      "damping": 0.99,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -1.5,
+      "steps": 280,
+      "origin": [
+        0,
+        1.0,
+        0
+      ],
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.2,
+      "render": {
+        "color": [
+          0.35,
+          0.7,
+          0.55
+        ],
+        "roughness": 0.5,
+        "particle_radius": 0.06,
+        "show_wires": true,
+        "wire_color": [
+          0.1,
+          0.2,
+          0.15
+        ]
+      },
+      "layout": "verlet_jelly",
+      "notes": "5x5x5 jelly grid \u2014 low stiffness, settles into squashed lattice on ground."
+    },
+    {
+      "id": "sb07_jelly_grid_tall_stiff",
+      "topology": "jelly_grid_3d",
+      "nx": 3,
+      "ny": 8,
+      "nz": 3,
+      "cell": 0.25,
+      "stiffness": 0.92,
+      "damping": 0.995,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -1.5,
+      "steps": 240,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.1,
+      "render": {
+        "color": [
+          0.55,
+          0.4,
+          0.8
+        ],
+        "roughness": 0.45,
+        "particle_radius": 0.07,
+        "show_wires": true,
+        "wire_color": [
+          0.15,
+          0.1,
+          0.2
+        ]
+      },
+      "layout": "verlet_jelly",
+      "notes": "Tall stiff column \u2014 stays upright with minor wobble, structural integrity preserved."
+    },
+    {
+      "id": "sb08_jelly_grid_floppy",
+      "topology": "jelly_grid_3d",
+      "nx": 6,
+      "ny": 3,
+      "nz": 6,
+      "cell": 0.2,
+      "stiffness": 0.35,
+      "damping": 0.985,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -1.5,
+      "steps": 320,
+      "origin": [
+        0,
+        1.8,
+        0
+      ],
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.3,
+      "render": {
+        "color": [
+          0.85,
+          0.75,
+          0.35
+        ],
+        "roughness": 0.55,
+        "particle_radius": 0.06,
+        "show_wires": true,
+        "wire_color": [
+          0.2,
+          0.15,
+          0.08
+        ]
+      },
+      "layout": "verlet_jelly",
+      "notes": "Floppy pancake \u2014 low stiffness wide grid spreads out on landing, loses shape."
+    },
+    {
+      "id": "sb_ls01_plant_skeleton",
+      "topology": "lsystem",
+      "lsystem": {
+        "axiom": "F",
+        "rules": {
+          "F": "F[+F]F[-F]F"
+        },
+        "iterations": 3,
+        "angle_deg": 25.7,
+        "step_len": 0.2,
+        "step_shrink": 0.72
+      },
+      "stiffness": 0.85,
+      "damping": 0.995,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -0.5,
+      "constraint_passes": 6,
+      "steps": 60,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.15,
+      "render": {
+        "color": [
+          0.4,
+          0.55,
+          0.3
+        ],
+        "roughness": 0.5,
+        "particle_radius": 0.03,
+        "show_wires": true,
+        "wire_color": [
+          0.3,
+          0.2,
+          0.12
+        ]
+      },
+      "layout": "lsystem_bridge",
+      "notes": "DNA BRIDGE: L-system plant (F->F[+F]F[-F]F) as spring-mass skeleton. Pinned at base, high stiffness, 60 steps \u2014 stands upright with slight settle. Same DNA as lsystem-gallery ls03, now a soft structure."
+    },
+    {
+      "id": "sb_ls02_plant_wind_collapse",
+      "topology": "lsystem",
+      "lsystem": {
+        "axiom": "F",
+        "rules": {
+          "F": "F[+F]F[-F]F"
+        },
+        "iterations": 3,
+        "angle_deg": 25.7,
+        "step_len": 0.2,
+        "step_shrink": 0.72
+      },
+      "stiffness": 0.4,
+      "damping": 0.992,
+      "gravity": [
+        1.8,
+        -9.8,
+        0.6
+      ],
+      "floor_y": -0.5,
+      "constraint_passes": 4,
+      "steps": 140,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.15,
+      "render": {
+        "color": [
+          0.7,
+          0.45,
+          0.2
+        ],
+        "roughness": 0.55,
+        "particle_radius": 0.03,
+        "show_wires": true,
+        "wire_color": [
+          0.25,
+          0.15,
+          0.1
+        ]
+      },
+      "layout": "lsystem_bridge",
+      "notes": "DNA BRIDGE: Same L-system plant DNA, but low stiffness + diagonal wind + 140 steps. Tree bends and partially collapses \u2014 same DNA, dynamic consequence."
+    },
+    {
+      "id": "sb_ca01_conway_cloth",
+      "topology": "ca_grid",
+      "ca": {
+        "rule": "conway",
+        "grid_size": 22,
+        "iterations": 8,
+        "density": 0.5,
+        "seed": 7,
+        "cell_size": 0.1,
+        "pin_mode": "top_row"
+      },
+      "stiffness": 0.75,
+      "damping": 0.995,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -3.0,
+      "constraint_passes": 5,
+      "steps": 80,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.15,
+      "render": {
+        "color": [
+          0.4,
+          0.5,
+          0.7
+        ],
+        "roughness": 0.55,
+        "particle_radius": 0.03,
+        "show_wires": true,
+        "wire_color": [
+          0.15,
+          0.2,
+          0.35
+        ]
+      },
+      "layout": "ca_bridge",
+      "notes": "DNA BRIDGE: Conway Life cloth. 8 CA steps produce a sparse pattern; alive cells become particles, 4-neighbors become springs, top row pinned. Hangs as a tattered lattice."
+    },
+    {
+      "id": "sb_ca02_life_without_death_cloth",
+      "topology": "ca_grid",
+      "ca": {
+        "rule": "life_without_death",
+        "grid_size": 22,
+        "iterations": 12,
+        "density": 0.3,
+        "seed": 11,
+        "cell_size": 0.1,
+        "pin_mode": "top_corners"
+      },
+      "stiffness": 0.6,
+      "damping": 0.992,
+      "gravity": [
+        0.5,
+        -9.8,
+        0
+      ],
+      "floor_y": -3.0,
+      "constraint_passes": 4,
+      "steps": 120,
+      "origin": [
+        0,
+        1.8,
+        0
+      ],
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.1,
+      "render": {
+        "color": [
+          0.7,
+          0.35,
+          0.25
+        ],
+        "roughness": 0.55,
+        "particle_radius": 0.03,
+        "show_wires": true,
+        "wire_color": [
+          0.2,
+          0.1,
+          0.08
+        ]
+      },
+      "layout": "ca_bridge",
+      "notes": "DNA BRIDGE: Life-without-Death cloth. 12 steps produce a filled mosaic (cells never die); hangs from two corners with slight wind. A fully-woven tapestry from the rule alone."
+    },
+    {
+      "id": "sb_noise01_jelly_crystal",
+      "topology": "jelly_grid_3d",
+      "nx": 5,
+      "ny": 5,
+      "nz": 5,
+      "cell": 0.22,
+      "stiffness": 0.6,
+      "damping": 0.99,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -1.5,
+      "steps": 280,
+      "origin": [
+        0,
+        1.0,
+        0
+      ],
+      "post_ops": [
+        {
+          "op": "noise_displace",
+          "amplitude": 0.08,
+          "frequency": 3.0,
+          "octaves": 2,
+          "seed": 42,
+          "noise_type": "cellular",
+          "mode": "vector"
+        }
+      ],
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.2,
+      "render": {
+        "color": [
+          0.55,
+          0.4,
+          0.8
+        ],
+        "roughness": 0.5,
+        "particle_radius": 0.07,
+        "show_wires": true,
+        "wire_color": [
+          0.15,
+          0.1,
+          0.25
+        ]
+      },
+      "layout": "noise_bridge",
+      "notes": "DNA BRIDGE: Jelly grid + cellular-noise post-op. The settled lattice gets crystalline Voronoi displacement \u2014 reads as a fractured gemstone."
+    },
+    {
+      "id": "sb_rd01_coral_cloth",
+      "topology": "rd_field",
+      "rd": {
+        "preset": "coral",
+        "grid_size": 48,
+        "iterations": 3500,
+        "seed": 17,
+        "threshold": 0.28,
+        "cell_size": 0.08,
+        "pin_mode": "top_corners"
+      },
+      "stiffness": 0.65,
+      "damping": 0.993,
+      "gravity": [
+        0.3,
+        -9.8,
+        0.1
+      ],
+      "floor_y": -3.0,
+      "constraint_passes": 4,
+      "steps": 100,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.15,
+      "render": {
+        "color": [
+          0.9,
+          0.55,
+          0.3
+        ],
+        "roughness": 0.55,
+        "particle_radius": 0.02,
+        "show_wires": true,
+        "wire_color": [
+          0.2,
+          0.1,
+          0.08
+        ]
+      },
+      "layout": "rd_bridge",
+      "notes": "DNA BRIDGE: Gray-Scott coral pattern \u2192 soft-body cloth. Coral cells become particles, 4-neighbors become springs, pinned at corners. Coral tapestry hanging like a bleached reef fragment."
+    },
+    {
+      "id": "sb_rd02_stripes_flag",
+      "topology": "rd_field",
+      "rd": {
+        "preset": "stripes",
+        "grid_size": 40,
+        "iterations": 3500,
+        "seed": 3,
+        "threshold": 0.3,
+        "cell_size": 0.08,
+        "pin_mode": "top_row"
+      },
+      "stiffness": 0.55,
+      "damping": 0.992,
+      "gravity": [
+        1.2,
+        -9.8,
+        0.3
+      ],
+      "floor_y": -3.0,
+      "constraint_passes": 4,
+      "steps": 120,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.1,
+      "render": {
+        "color": [
+          0.35,
+          0.7,
+          0.5
+        ],
+        "roughness": 0.55,
+        "particle_radius": 0.018,
+        "show_wires": true,
+        "wire_color": [
+          0.15,
+          0.25,
+          0.2
+        ]
+      },
+      "layout": "rd_bridge",
+      "notes": "DNA BRIDGE: Gray-Scott stripes pattern \u2192 soft-body flag. Brain-ridge cloth pinned top-row, side wind. The Turing pattern as a waving banner."
+    },
+    {
+      "id": "gl01_classic_bulb",
+      "topology": "glass_blow",
+      "radius": 0.5,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.12,
+      "preinflate": 0.2,
+      "stiffness": 0.6,
+      "damping": 0.995,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 5,
+      "steps": 200,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.7,
+          0.8,
+          0.85
+        ],
+        "roughness": 0.35,
+        "particle_radius": 0.02,
+        "show_wires": true,
+        "wire_color": [
+          0.2,
+          0.25,
+          0.3
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Classic glass bulb \u2014 sphere with small top-pin ring, moderate pressure, 200 settle steps under gravity. Settles into a drooping bulb that tapers toward the pin. The whole vessel is a record of pressure \u00d7 gravity \u00d7 duration."
+    },
+    {
+      "id": "gl02_long_bottle",
+      "topology": "glass_blow",
+      "radius": 0.45,
+      "rings": 16,
+      "segments": 24,
+      "pin_top_fraction": 0.08,
+      "preinflate": 0.08,
+      "stiffness": 0.4,
+      "damping": 0.992,
+      "gravity": [
+        0,
+        -12.0,
+        0
+      ],
+      "floor_y": -4.0,
+      "constraint_passes": 4,
+      "steps": 380,
+      "origin": [
+        0,
+        2.0,
+        0
+      ],
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.1,
+      "render": {
+        "color": [
+          0.55,
+          0.72,
+          0.65
+        ],
+        "roughness": 0.4,
+        "particle_radius": 0.018,
+        "show_wires": true,
+        "wire_color": [
+          0.15,
+          0.25,
+          0.22
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Long drooping bottle. Smaller top pin, low stiffness, stronger gravity, 380 steps. Lets the vessel stretch vertically \u2014 the longer the simulation runs, the longer the neck becomes. Frozen at the moment chosen by steps param."
+    },
+    {
+      "id": "gl03_wide_bowl",
+      "topology": "glass_blow",
+      "radius": 0.55,
+      "rings": 12,
+      "segments": 24,
+      "pin_top_fraction": 0.28,
+      "preinflate": 0.4,
+      "stiffness": 0.75,
+      "damping": 0.996,
+      "gravity": [
+        0,
+        -6.0,
+        0
+      ],
+      "floor_y": -3.0,
+      "constraint_passes": 6,
+      "steps": 120,
+      "origin": [
+        0,
+        1.2,
+        0
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.35,
+      "render": {
+        "color": [
+          0.88,
+          0.68,
+          0.45
+        ],
+        "roughness": 0.45,
+        "particle_radius": 0.022,
+        "show_wires": true,
+        "wire_color": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Wide bowl. Large top pin ring (28% of top), high preinflate (+40%), strong stiffness, weak gravity. Settles into a shallow squat vessel \u2014 pressure dominates, gravity mild. Different force balance \u2192 different vessel."
+    },
+    {
+      "id": "gl04_lopsided_vase",
+      "topology": "glass_blow",
+      "radius": 0.5,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.12,
+      "preinflate": 0.2,
+      "stiffness": 0.5,
+      "damping": 0.994,
+      "gravity": [
+        1.2,
+        -9.0,
+        0.3
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 5,
+      "steps": 260,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.85,
+          0.45,
+          0.5
+        ],
+        "roughness": 0.4,
+        "particle_radius": 0.02,
+        "show_wires": true,
+        "wire_color": [
+          0.3,
+          0.15,
+          0.2
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Lopsided vase. Non-axial gravity (sideways + down) causes the vessel to droop off-center \u2014 reads like a handcrafted organic piece that slumped to one side while cooling. Gravity direction as design parameter."
+    },
+    {
+      "id": "gl05_collapsed_sag",
+      "topology": "glass_blow",
+      "radius": 0.5,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.1,
+      "preinflate": 0.0,
+      "stiffness": 0.22,
+      "damping": 0.99,
+      "gravity": [
+        0,
+        -15.0,
+        0
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 4,
+      "steps": 500,
+      "origin": [
+        0,
+        2.0,
+        0
+      ],
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.65,
+          0.55,
+          0.4
+        ],
+        "roughness": 0.55,
+        "particle_radius": 0.018,
+        "show_wires": true,
+        "wire_color": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Over-cooked collapse. Very low stiffness, no pre-inflation, strong gravity, 500 steps. Vessel fails \u2014 stretches into a long teardrop hanging from the pin. Reads as 'left too long in the kiln.' Documents what breaks the vessel pattern."
+    },
+    {
+      "id": "gm01_bottle_in_cylinder_mould",
+      "topology": "glass_blow",
+      "radius": 0.5,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.1,
+      "preinflate": 0.7,
+      "stiffness": 0.5,
+      "damping": 0.994,
+      "gravity": [
+        0,
+        -6.0,
+        0
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 5,
+      "steps": 220,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "mould": {
+        "type": "cylinder",
+        "mode": "contain",
+        "center": [
+          0,
+          1.5,
+          0
+        ],
+        "radius": 0.55
+      },
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.6,
+          0.78,
+          0.85,
+          0.9
+        ],
+        "roughness": 0.35,
+        "particle_radius": 0.02,
+        "show_wires": true,
+        "wire_color": [
+          0.15,
+          0.25,
+          0.3
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "GLASS MEETS MOULD: sphere pre-inflated 70% pressed into a cylindrical mould of radius 0.55. The glass wants to expand outward, the mould says no. Result: uniform-radius bottle, the vessel inherits the mould's cylindrical shape. This is the literal industrial glass-blowing process."
+    },
+    {
+      "id": "gm02_vase_in_tapered_mould",
+      "topology": "glass_blow",
+      "radius": 0.5,
+      "rings": 16,
+      "segments": 22,
+      "pin_top_fraction": 0.1,
+      "preinflate": 0.9,
+      "stiffness": 0.45,
+      "damping": 0.994,
+      "gravity": [
+        0,
+        -5.5,
+        0
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 5,
+      "steps": 260,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "mould": {
+        "type": "tapered_cylinder",
+        "mode": "contain",
+        "center": [
+          0,
+          1.5,
+          0
+        ],
+        "radius_top": 0.25,
+        "radius_bottom": 0.7,
+        "y_top": 2.1,
+        "y_bottom": 0.4
+      },
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.55,
+          0.72,
+          0.65,
+          0.9
+        ],
+        "roughness": 0.4,
+        "particle_radius": 0.018,
+        "show_wires": true,
+        "wire_color": [
+          0.15,
+          0.25,
+          0.22
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "GLASS MEETS MOULD: glass in a tapered mould \u2014 narrow top (r=0.25), wide bottom (r=0.7). Takes the shape of a classical amphora \u2014 narrow neck, bulging body. Same DNA as gl02 but with a mould: vessel proportions come from the mould cavity, not force balance."
+    },
+    {
+      "id": "gm03_box_in_cube_mould",
+      "topology": "glass_blow",
+      "radius": 0.55,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.15,
+      "preinflate": 0.8,
+      "stiffness": 0.5,
+      "damping": 0.994,
+      "gravity": [
+        0,
+        -5.0,
+        0
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 5,
+      "steps": 240,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "mould": {
+        "type": "box",
+        "mode": "contain",
+        "center": [
+          0,
+          1.5,
+          0
+        ],
+        "size": [
+          0.45,
+          0.7,
+          0.45
+        ]
+      },
+      "camera_yaw": 0.42,
+      "camera_pitch": 0.15,
+      "render": {
+        "color": [
+          0.85,
+          0.55,
+          0.3,
+          0.9
+        ],
+        "roughness": 0.4,
+        "particle_radius": 0.018,
+        "show_wires": true,
+        "wire_color": [
+          0.3,
+          0.15,
+          0.08
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "GLASS MEETS MOULD: sphere pressed into a box mould 0.9\u00d71.4\u00d70.9. The round glass becomes a square bottle \u2014 rectangular with rounded corners where internal pressure pushes outward but the flat faces stop it. The mould's geometry imprints onto the vessel directly."
+    },
+    {
+      "id": "gm04_pressed_onto_sphere",
+      "topology": "glass_blow",
+      "radius": 0.7,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.1,
+      "preinflate": 0.2,
+      "stiffness": 0.4,
+      "damping": 0.993,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 5,
+      "steps": 300,
+      "origin": [
+        0,
+        2.0,
+        0
+      ],
+      "mould": {
+        "type": "sphere",
+        "mode": "exclude",
+        "center": [
+          0,
+          0.9,
+          0
+        ],
+        "radius": 0.4
+      },
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.88,
+          0.65,
+          0.5,
+          0.9
+        ],
+        "roughness": 0.4,
+        "particle_radius": 0.018,
+        "show_wires": true,
+        "wire_color": [
+          0.3,
+          0.2,
+          0.12
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "GLASS MEETS EXTERNAL FORM: hot glass sagging under gravity meets a solid sphere below (exclude mode \u2014 glass can't pass through the sphere). The glass drapes OVER the obstacle, taking its shape. Like fabric over a sculpture, or pottery slumped onto a form. The final vessel wraps around the obstruction."
+    }
+  ]
+}

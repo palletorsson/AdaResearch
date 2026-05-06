@@ -1,0 +1,5 @@
+Forces are vectors with consequences. Push, pull, gravity, friction — each one an arrow applied to a body. Stack them. Sum them. The resultant force is what actually happens. Every physical interaction reduces to vector addition with mass.
+
+The cross product does something stranger. Two vectors define a plane. The cross product escapes it — producing a third vector perpendicular to both, pointing into the dimension neither input occupies. Direction from multiplication. A new axis from two old ones. The right-hand rule is the body remembering what algebra cannot show.
+
+Dark spheres pulse in the space where these operations converge. Forces accumulate on surfaces. Cross products generate normals — the invisible scaffolding that tells light where to bounce, tells physics which way is "out." Perpendicularity is not a property. It is a relation that produces orientation from collision.

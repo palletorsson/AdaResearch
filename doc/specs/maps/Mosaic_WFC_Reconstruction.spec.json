@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Mosaic_WFC_Reconstruction",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 5,
+    "d": 4
+  },
+  "signature": "wfc_tile_mosaic implements the full WFC pipeline applied to mosaic reconstruction \u2014 tile extraction from documented patterns",
+  "style": "pompeii",
+  "echoes": [
+    "color",
+    "forces",
+    "randomness",
+    "noise"
+  ],
+  "density": 0.111,
+  "breath_zones": [
+    {
+      "size": 17,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 4
+      },
+      "centroid": [
+        2.0,
+        1.4705882352941178
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "wfc_tile_mosaic"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "pattern_tile_puzzle"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 18,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

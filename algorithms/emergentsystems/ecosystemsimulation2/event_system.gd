@@ -1,4 +1,4 @@
-# event_system.gd
+﻿# event_system.gd
 class_name EventSystem
 extends Node
 
@@ -44,10 +44,10 @@ var narrative_arcs = [
 	"exploration", "tension", "convergence", "transformation", "emergence"
 ]
 
-func _ready():
+func _ready() -> void:
 	randomize()
 
-func trigger_event(event_type: String, affected_entities = null, parameters = null):
+func trigger_event(event_type: String, affected_entities = null, parameters = null) -> void:
 	# Basic validation
 	if event_type.is_empty():
 		return
@@ -122,7 +122,7 @@ func consider_random_event(current_day: int, available_entities: Array, environm
 	
 	return false
 
-func update(delta: float):
+func update(delta: float) -> void:
 	# Update time since last event
 	time_since_last_event += delta
 	
@@ -150,10 +150,10 @@ func update(delta: float):
 			active_events.erase(event)
 			past_events.append(event)
 
-func set_entropy(value: float):
+func set_entropy(value: float) -> void:
 	current_entropy = clamp(value, 0.0, 1.0)
 
-func _determine_random_event_type(current_day: int) -> String:
+func _determine_random_event_type(_current_day: int) -> String:
 	# Event probabilities adjusted by entropy and narrative arc
 	var celebration_chance = 0.4 - current_entropy * 0.2
 	var challenge_chance = 0.3 + current_entropy * 0.2
@@ -294,7 +294,7 @@ func _generate_event_parameters(event_type: String, affected_entities: Array, en
 	
 	return parameters
 
-func _handle_celebration_event(event: Dictionary):
+func _handle_celebration_event(event: Dictionary) -> void:
 	# Special handling for celebration events
 	var intensity = event.parameters.intensity
 	var location = event.parameters.location
@@ -306,7 +306,7 @@ func _handle_celebration_event(event: Dictionary):
 	# In a full implementation, this would create visual effects,
 	# gameplay changes, etc.
 
-func _handle_challenge_event(event: Dictionary):
+func _handle_challenge_event(event: Dictionary) -> void:
 	# Special handling for challenge events
 	var difficulty = event.parameters.difficulty
 	var event_type = event.type
@@ -318,7 +318,7 @@ func _handle_challenge_event(event: Dictionary):
 	# In a full implementation, this would create challenges for
 	# the affected entities to overcome
 
-func _handle_transformation_event(event: Dictionary):
+func _handle_transformation_event(event: Dictionary) -> void:
 	# Special handling for transformation events
 	var magnitude = event.parameters.transformation_magnitude
 	var entities = event.entities
@@ -329,7 +329,7 @@ func _handle_transformation_event(event: Dictionary):
 	# In a full implementation, this would trigger actual changes
 	# to the affected entities
 
-func _handle_season_change_event(event: Dictionary):
+func _handle_season_change_event(event: Dictionary) -> void:
 	# Special handling for season change
 	var season = event.parameters.season if event.parameters.has("season") else 0
 	
@@ -352,7 +352,7 @@ func _handle_season_change_event(event: Dictionary):
 			event.parameters.stability_factor = 0.4
 			event.parameters.energy_conservation = 0.3
 
-func _handle_boundary_event(event: Dictionary):
+func _handle_boundary_event(event: Dictionary) -> void:
 	# Handle an entity transcending a boundary
 	var entity = event.entities[0] if event.entities.size() > 0 else null
 	var boundary_type = event.parameters.boundary_type if event.parameters.has("boundary_type") else "unknown"
@@ -375,7 +375,7 @@ func _handle_boundary_event(event: Dictionary):
 			event.parameters.expressiveness_boost = 0.3
 			event.parameters.uniqueness_boost = 0.2
 
-func _handle_special_event(event: Dictionary):
+func _handle_special_event(event: Dictionary) -> void:
 	# Handle special one-off events
 	
 	# In a full implementation, this would have unique logic for
@@ -384,7 +384,7 @@ func _handle_special_event(event: Dictionary):
 	# For now, just add a special flag
 	event.parameters.is_special = true
 
-func advance_narrative_arc():
+func advance_narrative_arc() -> void:
 	# Move to the next narrative arc
 	var current_index = narrative_arcs.find(current_narrative_arc)
 	current_index = (current_index + 1) % narrative_arcs.size()

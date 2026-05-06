@@ -1,0 +1,29 @@
+{
+  "id": "mg_op16_sphere_barnacle_field",
+  "notes": "UNDERUSED-OPS PASS: sphere with a dense scatter of spikes and light bulging. A barnacle/urchin surface recipe using scatter instead of face extrusion.",
+  "seed": "sphere",
+  "seed_scale": 0.58,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "random_50",
+      "params": {
+        "amount": 0.08
+      }
+    },
+    {
+      "op": "scatter",
+      "selector": "all",
+      "params": {
+        "shape": "spike",
+        "density": 0.72,
+        "min_size": 0.03,
+        "max_size": 0.08,
+        "offset": 0.01,
+        "align_to_normal": true,
+        "seed_value": 13
+      }
+    }
+  ]
+}

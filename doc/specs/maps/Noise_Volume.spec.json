@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Noise_Volume",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.006,
+  "breath_zones": [
+    {
+      "size": 164,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.469512195121951,
+        6.451219512195122
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 4,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 166,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

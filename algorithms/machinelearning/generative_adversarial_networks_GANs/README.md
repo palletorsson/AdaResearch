@@ -1,5 +1,12 @@
 # Generative Adversarial Networks (GANs)
 
+
+## Folder Summary
+
+The `Generative Adversarial Networks (GANs)` module provides a 3D sandbox for exploring the ideas behind the Generative Adversarial Networks (GANs) workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `generative_adversarial_networks_GANs.tscn` and the controller script `GenerativeAdversarialNetworksGANs.gd`.
+
 ## Overview
 This algorithm demonstrates Generative Adversarial Networks, a powerful framework for training generative models through an adversarial process where two neural networks compete: a generator that creates data and a discriminator that evaluates authenticity.
 

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/randomness/coin_toss/coin_toss.gd" id="1_main"]
+
+[node name="CoinToss" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="SceneLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 2.0, 0.75)
+light_energy = 2.0
+omni_range = 7.5

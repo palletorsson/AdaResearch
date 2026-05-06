@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 arena inside it. Algorithms fight for territory using the only weapon that matters: chance.
+
+Random walks trace drunk paths across the field. Gaussian distributions pile cubes into bell-curve mountains. Height maps randomize terrain while removal algorithms dissolve it — column by column, row by row, or all at once. Profile generators extrude landscapes from noise. Cubes rotate in wave patterns. Sculptures drip and bubble. Objects spawn and vanish. Every process reshapes the same grid, and none of them agree on what it should become.
+
+This is the arena where order and disorder negotiate in real time. Watch a random walk long enough and structure emerges — not designed, not intended, but statistically inevitable. The grid doesn't care what you meant. It cares what you measured.

@@ -1,0 +1,241 @@
+{
+	"sequences": {
+		"forces": {
+			"algorithm_paths": {
+				"Forces_1": "res://algorithms/physics/forces/",
+				"Forces_Destruct": "res://algorithms/physics/destruction/",
+				"VectorAddition": "res://algorithms/vectors/addition/",
+				"VectorBasics": "res://algorithms/vectors/basics/",
+				"VectorFieldFlow": "res://algorithms/vectors/flowfield/",
+				"VectorForces": "res://algorithms/vectors/forces/",
+				"VectorMotion": "res://algorithms/vectors/motion/"
+			},
+			"audio": {
+				"ambient_preset": "industrial_hum",
+				"interactive_sounds": {
+					"teleport": "AudioSynthesizer.IMPACT_THUD"
+				},
+				"volume": -10.0
+			},
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/vectors_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/dot_product_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/cross_product_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/newtons_laws.md",
+				"res://commons/context/clipboard/tutorial_text/gravity_axioms.md"
+			],
+			"completion_rewards": [
+				"spatial_architect_badge",
+				"vector_master_badge",
+				"force_master_badge",
+				"newton_badge",
+				"physics_vector_badge"
+			],
+			"content": [
+				"VectorFoundations: Components and Addition",
+				"VectorOperations: Dot and Cross Product",
+				"VectorApplied: Targeting and Fields",
+				"VectorAdvanced: Torque and Throwing",
+				"ForcesFoundations: Newton's Laws",
+				"ForcesComposition: Superposition and Energy",
+				"ForcesSystems: Attractors and Springs",
+				"ForcesChaos: N-Body and Chaos",
+				"ForcesArena: Combat Arena"
+			],
+			"demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
+			"description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitudeâ€”the building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
+			"difficulty": "intermediate",
+			"estimated_time": "60-90 minutes",
+			"formula": "v = (x,y,z), |v| = âˆš(xÂ²+yÂ²+zÂ²), F = ma â†’ a = F/m â†’ v += aÂ·dt â†’ p += vÂ·dt",
+			"lab_map": "Lab/map_data_post_forces",
+			"layer": "behaviors",
+			"learning_objectives": [
+				"Coordinate systems and spatial reasoning in 3D",
+				"Vector components: x, y, z as decomposed direction",
+				"Magnitude: length as âˆš(xÂ² + yÂ² + zÂ²)",
+				"Unit vectors: direction without magnitude",
+				"Addition and subtraction: combining and differencing vectors",
+				"Dot product: measuring alignment (aÂ·b = |a||b|cos Î¸)",
+				"Cross product: creating perpendicular vectors, torque, normals",
+				"Projection and reflection: mirrors and collisions",
+				"Vector fields: spatial functions mapping position to direction",
+				"F = ma: Force equals mass times acceleration",
+				"Gravity: constant downward acceleration (9.8 m/sÂ²)",
+				"Friction and drag: resistance to motion",
+				"Attraction and repulsion: inverse square laws",
+				"Springs: Hooke's law (F = -kx)",
+				"Particle systems: many bodies under forces",
+				"N-body dynamics: gravitational chaos from simple rules"
+			],
+			"maps": [
+				"VectorFoundations",
+				"VectorOperations",
+				"VectorApplied",
+				"VectorAdvanced",
+				"ForcesFoundations",
+				"ForcesComposition",
+				"ForcesSystems",
+				"ForcesChaos",
+				"ForcesArena",
+				"Chamber_Forces"
+			],
+			"name": "Vectors & Forces: From Direction to Dynamics",
+			"prerequisites": [
+				"primitives",
+				"transformation"
+			],
+			"qfep_connection": "Vectors define system statesâ€”the S in QFEP. Forces introduce changeâ€”they drive the temporal evolution Ï†Î”E(S,t). Together, vectors and forces are the complete grammar of physical motion: direction encodes where, magnitude encodes how much, and F=ma encodes why things change.",
+			"qfep_term": "dynamics",
+			"return_to": "lab",
+			"truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
+			"unlock_requirements": [],
+			"unlocks": [
+				"physicssimulation",
+				"swarmintelligence",
+				"softbodies"
+			],
+			"artifact_groups": [
+				{
+					"map": "VectorFoundations",
+					"position": "intro",
+					"artifacts": [
+						"becoming_catalyst",
+						"VectorBasics",
+						"basis_vectors_rig",
+						"vector_addition_demo",
+						"ForceMagnitudeDemo",
+						"dark_sphere",
+						"vector_subtraction_demo",
+						"coordinate_system_switcher"
+					],
+					"size_budget": "environment",
+					"rationale": "Three islands of vector fundamentals: components, magnitude, addition and subtraction. Entry point for the combined vectors+forces sequence.",
+					"grammar": "linear"
+				},
+				{
+					"map": "VectorOperations",
+					"position": "foundation",
+					"artifacts": [
+						"VectorBasics",
+						"basis_vectors_rig",
+						"dot_product_projector",
+						"dark_sphere",
+						"vector_projection_demo",
+						"normal_force_demo"
+					],
+					"size_budget": "environment",
+					"rationale": "Three islands of advanced vector operations: dot product, cross product, projection/reflection. Builds on foundation components.",
+					"grammar": "linear"
+				},
+				{
+					"map": "VectorApplied",
+					"position": "foundation",
+					"artifacts": [
+						"VectorFieldFlow",
+						"force_field_visualizer",
+						"dark_sphere",
+						"VectorBasics",
+						"basis_vectors_rig",
+						"hl_turret_vectors",
+						"weather_vector_field"
+					],
+					"size_budget": "environment",
+					"rationale": "Targeting turrets, weather fields, and force vectors across three islands. Applied vector usage in game-like contexts.",
+					"grammar": "florence"
+				},
+				{
+					"map": "VectorAdvanced",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"exercise_1_3_solution_3_d_bouncing_ball_vr",
+						"exercise_1_8_solution_attraction_magnitude_vr",
+						"VectorThrowing",
+						"torque_demo"
+					],
+					"size_budget": "environment",
+					"rationale": "Four islands of advanced applications: torque, dynamic simulations, steering, projectile throwing.",
+					"grammar": "florence"
+				},
+				{
+					"map": "ForcesComposition",
+					"position": "exploration",
+					"artifacts": [
+						"VectorBasics",
+						"basis_vectors_rig",
+						"dark_sphere",
+						"combined_forces_demo",
+						"work_energy_demo",
+						"momentum_collision"
+					],
+					"size_budget": "mixed",
+					"rationale": "Force superposition, work-energy theorem, and momentum conservation in one diamond arena. Bridges vectors to forces.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "ForcesFoundations",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"example_2_5_fluid_resistance_vr"
+					],
+					"size_budget": "environment",
+					"rationale": "Three islands of fundamental forces: Newton's laws, projectile motion, friction. Jump pads as embodied projectile physics.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "ForcesSystems",
+					"position": "integration",
+					"artifacts": [
+						"vector_fields",
+						"force_field_visualizer",
+						"VectorBasics",
+						"basis_vectors_rig",
+						"dark_sphere",
+						"catalyst_target",
+						"particle_systems",
+						"force_fields",
+						"mass_spring_damper",
+						"spring_system",
+						"firework_launcher",
+						"example_3_2_forces_with_arbitrary_angular_motion_vr",
+						"example_3_3_pointing_in_the_direction_of_motion_vr"
+					],
+					"size_budget": "environment",
+					"rationale": "Four islands of force systems: attractors, force fields, springs, particles. Clockwise circuit via jump pads. Callbacks to vector basics.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "ForcesChaos",
+					"position": "integration",
+					"artifacts": [
+						"three_body_problem",
+						"nbody_simulation",
+						"chaos_attractor",
+						"forcedirected3d"
+					],
+					"size_budget": "environment",
+					"rationale": "N-body dynamics and strange attractors: deterministic chaos from simple rules. Two islands of complexity.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "ForcesArena",
+					"position": "synthesis",
+					"artifacts": [
+						"gravity_gun_test_scene",
+						"vector_drone",
+						"destructibles_test_scene",
+						"VectorThrowing",
+						"sphere_splitting_showcase"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Grand finale: drone combat, physics destruction sandbox, and exhibition gallery. Applied forces across three massive arenas with callbacks to throwing and vectors.",
+					"grammar": "vatican"
+				}
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
+}

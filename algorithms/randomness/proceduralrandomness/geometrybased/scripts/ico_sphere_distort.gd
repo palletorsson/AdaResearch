@@ -14,7 +14,7 @@ extends Node3D
 var sphere_positions: Dictionary = {}  # Stores vertex positions
 var index_count: int = 0  # Counter for indexing vertices
 
-func _ready():
+func _ready() -> void:
 	# Generate an icosphere structure
 	var data  = generate_icosphere(subdivisions)
 	var vertices = data[0]
@@ -33,7 +33,7 @@ func _ready():
 		var displacement = calculate_positional_displacement(v)
 
 		var _position = (v + displacement).normalized() * structure_radius  # Ensure it remains on the sphere
-		sphere.global_transform.origin = _position
+		sphere.position = _position
 		add_child(sphere)
 		sphere_positions[index_count] = _position
 		index_count += 1
@@ -149,7 +149,7 @@ func create_sphere_instance() -> Node3D:
 	return sphere
 
 # Function to draw a cylinder between two points in 3D space
-func draw_cylinder_between_points(start: Vector3, end: Vector3):
+func draw_cylinder_between_points(start: Vector3, end: Vector3) -> void:
 	var cylinder_mesh = CylinderMesh.new()
 	cylinder_mesh.top_radius = line_thickness
 	cylinder_mesh.bottom_radius = line_thickness
@@ -168,7 +168,7 @@ func draw_cylinder_between_points(start: Vector3, end: Vector3):
 
 	# Position and rotate the cylinder between the start and end points
 	var mid_point = (start + end) * 0.5
-	cylinder.global_transform.origin = mid_point
+	cylinder.position = mid_point
 	
 	# Calculate the direction and rotation for the cylinder
 	var direction = (end - start).normalized()
@@ -177,3 +177,12 @@ func draw_cylinder_between_points(start: Vector3, end: Vector3):
 	
 	# Add the cylinder to the scene
 	add_child(cylinder)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

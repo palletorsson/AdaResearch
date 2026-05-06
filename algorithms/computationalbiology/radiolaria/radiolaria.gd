@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: CSG boolean operations (UNION, SUBTRACTION) on spheres, cylinders, and tori — generating radiolaria, spiky forms, lattice spheres, ringed forms, and pollen through procedural composition
+# desire: to fill a grid with biological specimens that look grown rather than designed — each one a unique CSG sculpture you can walk around and inspect in VR
+# critical_parameter: spikiness_probability — controls how many forms grow spines; at 0 all forms are smooth spheres, at 1.0 every specimen bristles with projections
+# triggers: randi() % 6 selects form type per grid cell; randf() gates each sub-feature (bumps, spokes, pores); golden-ratio icosahedron vertices place spikes symmetrically
+# emerges: the combination of random form selection and random feature gating means no two grids produce the same cabinet of specimens, yet all feel biologically plausible
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: bridges soft body physics to affect theory in SoftBodies_Affect_Theory_Visualization; inspired by Ernst Haeckel's Kunstformen der Natur
+# truth: a radiolarian's skeleton is not engineered — it is what remains after surface tension, mineral deposition, and evolutionary pressure finish negotiating
+
 # Radiolaria and Pollen Form Generator
 # Creates a variety of symmetric geometric biological forms inspired by Ernst Haeckel illustrations
 
@@ -17,7 +27,7 @@ extends Node3D
 var base_materials = []
 var spike_materials = []
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Create materials
@@ -29,7 +39,7 @@ func _ready():
 	# Add camera and lighting
 	setup_environment()
 
-func create_materials():
+func create_materials() -> void:
 	# Create several base materials with different colors
 	var colors = [
 		Color(0.9, 0.9, 0.7),  # Cream
@@ -62,7 +72,7 @@ func create_materials():
 		material.roughness = 0.7
 		spike_materials.append(material)
 
-func generate_grid():
+func generate_grid() -> void:
 	var forms_container = Node3D.new()
 	forms_container.name = "BiologicalForms"
 	add_child(forms_container)
@@ -178,7 +188,7 @@ func create_spiky_radiolaria(parent, position):
 	parent.add_child(form)
 	return form
 
-func add_spike(parent, direction, material):
+func add_spike(parent, direction, material) -> void:
 	var spike = CSGCylinder3D.new()
 	spike.name = "Spike"
 	#spike.radius_bottom = randf_range(0.03, 0.08)
@@ -245,7 +255,7 @@ func create_polyhedral_form(parent, position):
 				var cutter = CSGBox3D.new()
 				cutter.size = Vector3(0.4, 0.4, 0.4)
 				cutter.position = vertex
-				cutter.look_at(Vector3.ZERO, Vector3.UP)
+				cutter.look_at_from_position(cutter.position, Vector3.ZERO, Vector3.UP)
 				cutter.operation = CSGShape3D.OPERATION_SUBTRACTION
 				core.add_child(cutter)
 		
@@ -272,7 +282,7 @@ func create_polyhedral_form(parent, position):
 				var cutter = CSGBox3D.new()
 				cutter.size = Vector3(size, size, size)
 				cutter.position = direction * distance
-				cutter.look_at(Vector3.ZERO, Vector3.UP)
+				cutter.look_at_from_position(cutter.position, Vector3.ZERO, Vector3.UP)
 				cutter.operation = CSGShape3D.OPERATION_SUBTRACTION
 				core.add_child(cutter)
 	
@@ -660,26 +670,26 @@ func generate_dodecahedron_vertices(radius):
 	
 	return vertices
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create a camera for viewing
 	var camera = Camera3D.new()
 	camera.name = "Camera"
 	camera.position = Vector3(0, 3, 5)
-	camera.look_at(Vector3(0, 0, 0))
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	add_child(camera)
 	
 	# Create directional light
 	var light = DirectionalLight3D.new()
 	light.name = "MainLight"
 	light.position = Vector3(5, 5, 5)
-	light.look_at(Vector3(0, 0, 0))
+	light.look_at_from_position(light.position, Vector3(0, 0, 0), Vector3.UP)
 	add_child(light)
 	
 	# Add secondary light for better visibility
 	var fill_light = DirectionalLight3D.new()
 	fill_light.name = "FillLight"
 	fill_light.position = Vector3(-3, 2, -3)
-	fill_light.look_at(Vector3(0, 0, 0))
+	fill_light.look_at_from_position(fill_light.position, Vector3(0, 0, 0), Vector3.UP)
 	fill_light.light_energy = 0.5
 	add_child(fill_light)
 	
@@ -691,3 +701,12 @@ func setup_environment():
 	var world_env = WorldEnvironment.new()
 	world_env.environment = environment
 	add_child(world_env)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

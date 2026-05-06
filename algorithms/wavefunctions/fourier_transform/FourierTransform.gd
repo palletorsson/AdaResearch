@@ -1,6 +1,16 @@
 extends Node3D
 class_name FourierTransform
 
+# @identity
+# essence: X(f) = sum(x(t) * e^(-2*pi*i*f*t)) — decomposes a composite waveform into frequency spectrum bars; 5 harmonics + noise synthesized in time domain, DFT computed per frame for visualization
+# desire: to see a messy waveform dissolve into clean frequency bars — to hear the sci-fi theremin audio that the same harmonics produce while watching them separate visually
+# critical_parameter: fundamental_freq — the base frequency whose integer multiples (harmonics) compose the signal; changing it shifts the entire spectrum
+# triggers: _process updates waveform in real time, computes simplified DFT, animates transform engine and data flow particles; AudioStreamGenerator produces theremin-like audio from the same harmonics
+# emerges: the data flow particles tracing sinusoidal paths between time and frequency domains make the abstract transform physically visible — information flows through the machine
+# needs: [missing] no VR slider_horizontal or push_button — no interactive control of fundamental_freq or noise_level; relies on .tscn scene tree nodes ($TimeDomain, $FrequencyDomain, etc.)
+# relationships: the core artifact for F17_Zen_Garden (contemplative mathematical object); connects to spectrum_display (frequency analysis) and standing_waves (wave physics)
+# truth: every signal is a sum of pure frequencies — the Fourier transform does not create this decomposition, it reveals the one that was always there
+
 var time: float = 0.0
 var transform_progress: float = 0.0
 var frequency_resolution: float = 0.0
@@ -19,9 +29,19 @@ var fundamental_freq: float = 1.0
 var harmonics: Array = [1.0, 0.5, 0.3, 0.2, 0.1]  # Harmonic amplitudes
 var noise_level: float = 0.1
 
-func _ready():
+# Audio System
+var audio_player: AudioStreamPlayer3D
+var audio_stream: AudioStreamGenerator
+var playback: AudioStreamGeneratorPlayback
+const SAMPLE_RATE = 44100.0
+var audio_phase: float = 0.0
+
+func _ready() -> void:
 	# Initialize Fourier Transform visualization
 	print("Fourier Transform Visualization initialized")
+	
+	_setup_audio()
+	
 	create_time_waveform()
 	create_frequency_spectrum()
 	create_wave_components()
@@ -29,7 +49,22 @@ func _ready():
 	create_flow_particles()
 	setup_fourier_metrics()
 
-func _process(delta):
+func _setup_audio() -> void:
+	audio_player = AudioStreamPlayer3D.new()
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = SAMPLE_RATE
+	audio_stream.buffer_length = 0.1
+	
+	audio_player.stream = audio_stream
+	audio_player.unit_size = 10.0
+	audio_player.max_db = -5.0
+	audio_player.autoplay = true
+	
+	add_child(audio_player)
+	audio_player.play()
+	playback = audio_player.get_stream_playback()
+
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate transform progress
@@ -42,8 +77,85 @@ func _process(delta):
 	animate_wave_components(delta)
 	animate_data_flow(delta)
 	update_fourier_metrics(delta)
+	
+	_generate_audio_samples()
 
-func create_time_waveform():
+func _generate_audio_samples() -> void:
+	if not playback:
+		return
+
+	var frames_available = playback.get_frames_available()
+	if frames_available < 1:
+		return
+
+	# SCI-FI / THEREMIN STYLE - Wavering, eerie, space-age
+	# Classic theremin-like tones with vibrato and portamento
+	
+	# Theremin frequencies - eerie intervals
+	var base_freq = 440.0 + sin(time * 0.5) * 100.0  # Slow pitch drift
+	
+	var master_volume = 0.10
+
+	for i in range(frames_available):
+		var sample = 0.0
+		var t = audio_phase / SAMPLE_RATE
+		
+		# 1. Main theremin voice - sine with vibrato
+		var vibrato_rate = 5.5 + sin(time * 0.3) * 1.0  # Varying vibrato speed
+		var vibrato_depth = 8.0 + sin(time * 0.7) * 4.0  # Varying vibrato depth
+		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
+		
+		var theremin_freq = base_freq + vibrato
+		var theremin = sin(2.0 * PI * theremin_freq * t)
+		
+		# Add slight waveshaping for classic theremin timbre
+		theremin = theremin * 0.7 + sin(theremin * PI) * 0.3
+		sample += theremin * 0.5
+		
+		# 2. Harmony voice - fifth above with different vibrato
+		var harmony_freq = (base_freq * 1.5) + sin(2.0 * PI * 4.5 * t) * 6.0
+		var harmony = sin(2.0 * PI * harmony_freq * t) * 0.25
+		
+		# Fade harmony based on transform progress
+		harmony *= transform_progress
+		sample += harmony
+		
+		# 3. Sub oscillator - octave below, subtle
+		var sub_freq = base_freq * 0.5
+		var sub = sin(2.0 * PI * sub_freq * t) * 0.15
+		sample += sub
+		
+		# 4. Sci-fi texture - high frequency shimmer
+		var shimmer_freq = base_freq * 3.0 + sin(time * 2.0) * 50.0
+		var shimmer = sin(2.0 * PI * shimmer_freq * t) * 0.05
+		shimmer *= 0.5 + 0.5 * sin(time * 1.5)  # Pulsing
+		sample += shimmer
+		
+		# 5. Space ambience - filtered noise bursts
+		var noise = (randf() * 2.0 - 1.0)
+		noise *= 0.02 * max(0.0, sin(time * 0.8))  # Occasional bursts
+		sample += noise
+		
+		# Apply volume envelope based on frequency activity
+		var envelope = 0.6 + 0.4 * frequency_resolution
+		sample *= envelope
+		
+		# Apply master volume
+		sample *= master_volume
+		
+		# Soft limiting
+		sample = tanh(sample * 2.0) * 0.6
+		
+		playback.push_frame(Vector2(sample, sample))
+
+		audio_phase += 1.0
+		if audio_phase > SAMPLE_RATE * 10.0:
+			audio_phase -= SAMPLE_RATE * 10.0
+
+
+
+
+func create_time_waveform() -> void:
 	# Create time domain waveform points
 	var time_waveform_node = $TimeDomain/TimeWaveform
 	for i in range(sample_count):
@@ -67,7 +179,7 @@ func create_time_waveform():
 			"amplitude": 0.0
 		})
 
-func create_frequency_spectrum():
+func create_frequency_spectrum() -> void:
 	# Create frequency domain spectrum bars
 	var frequency_spectrum_node = $FrequencyDomain/FrequencySpectrum
 	for i in range(frequency_bins):
@@ -91,7 +203,7 @@ func create_frequency_spectrum():
 			"phase": 0.0
 		})
 
-func create_wave_components():
+func create_wave_components() -> void:
 	# Create sine wave components
 	var sine_waves_node = $WaveComponents/SineWaves
 	for i in range(harmonics.size()):
@@ -139,7 +251,7 @@ func create_wave_components():
 			"phase": PI/2  # Cosine is 90 degrees out of phase
 		})
 
-func create_complex_numbers():
+func create_complex_numbers() -> void:
 	# Create complex number representations
 	var complex_numbers_node = $WaveComponents/ComplexNumbers
 	for i in range(8):
@@ -166,7 +278,7 @@ func create_complex_numbers():
 			"phase": angle
 		})
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	# Create transform flow particles
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(30):
@@ -186,7 +298,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_fourier_metrics():
+func setup_fourier_metrics() -> void:
 	# Initialize Fourier metrics
 	var resolution_indicator = $FourierMetrics/ResolutionMeter/ResolutionIndicator
 	var phase_indicator = $FourierMetrics/PhaseCoherenceMeter/PhaseIndicator
@@ -195,7 +307,7 @@ func setup_fourier_metrics():
 	if phase_indicator:
 		phase_indicator.position.x = 0  # Start at middle
 
-func update_waveforms(delta):
+func update_waveforms(delta) -> void:
 	# Update time domain waveform
 	for i in range(time_waveform.size()):
 		var point_data = time_waveform[i]
@@ -230,7 +342,7 @@ func update_waveforms(delta):
 	# Perform simplified FFT calculation for frequency domain
 	update_frequency_spectrum(delta)
 
-func update_frequency_spectrum(delta):
+func update_frequency_spectrum(delta) -> void:
 	# Simplified FFT calculation (for visualization purposes)
 	for i in range(frequency_spectrum.size()):
 		var spectrum_data = frequency_spectrum[i]
@@ -273,7 +385,7 @@ func update_frequency_spectrum(delta):
 			var phase_intensity = (sin(phase + time * 2.0) * 0.5 + 0.5) * intensity
 			bar.material_override.emission = bar.material_override.albedo_color * (0.3 + phase_intensity * 0.4)
 
-func animate_transform_engine(delta):
+func animate_transform_engine(delta) -> void:
 	# Animate transform engine core
 	var engine_core = $TransformEngine/EngineCore
 	if engine_core:
@@ -329,7 +441,7 @@ func animate_transform_engine(delta):
 			var intensity = 0.3 + ifft_activation * 0.7
 			ifft_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_wave_components(delta):
+func animate_wave_components(delta) -> void:
 	# Animate wave components core
 	var components_core = $WaveComponents/ComponentsCore
 	if components_core:
@@ -413,7 +525,7 @@ func animate_wave_components(delta):
 			var color = Color(val, val, val, 1)  # Simplified
 			representation.material_override.albedo_color = color
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -437,7 +549,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 3.0 + i * 0.3) * 0.2 * transform_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_fourier_metrics(delta):
+func update_fourier_metrics(delta) -> void:
 	# Update frequency resolution meter
 	var resolution_indicator = $FourierMetrics/ResolutionMeter/ResolutionIndicator
 	if resolution_indicator:
@@ -460,10 +572,10 @@ func update_fourier_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - phase_coherence)
 		phase_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_fundamental_frequency(freq: float):
+func set_fundamental_frequency(freq: float) -> void:
 	fundamental_freq = clamp(freq, 0.1, 5.0)
 
-func set_noise_level(noise: float):
+func set_noise_level(noise: float) -> void:
 	noise_level = clamp(noise, 0.0, 0.5)
 
 func get_transform_progress() -> float:
@@ -475,8 +587,17 @@ func get_frequency_resolution() -> float:
 func get_phase_coherence() -> float:
 	return phase_coherence
 
-func reset_transform():
+func reset_transform() -> void:
 	time = 0.0
 	transform_progress = 0.0
 	frequency_resolution = 0.0
 	phase_coherence = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

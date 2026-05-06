@@ -1,0 +1,7 @@
+Concept: Rule systems meeting — two cellular automata interact across the player-creature boundary. The learner fires cellular bursts, and the creature's armour is itself a Game of Life grid, so the encounter is Conway meeting Conway.
+Sequence role: Catalyst chamber for the Cellular Automata sequence, the last map before returning to the Lab. The sequence taught local rules, elementary automata, Game of Life, totalistic rules, extended neighbourhoods, stochastic rules, Wireworld, and the edge of chaos; this chamber puts two rule systems in contact and reads their interference as the sequence's closing gesture.
+Technical angle: Catalyst mode cellular, firing bursts of live cells that seed perturbations on contact. Creature lifeform_walker whose surface texture is a live 2D automaton running Conway's rules. Science Screen grid shows both grids side by side, labels active gliders on each, and tracks which perturbations survive more than a few ticks.
+Critical angle: The chamber argues that computation is a medium rather than an endpoint. When two automata share a surface, interaction is neither damage nor negotiation but mutual seeding: each side's patterns enter the other and are rewritten by it. The player-creature boundary becomes a boundary between rule sets.
+Key artifacts: lifeform_walker carries the creature-side automaton; the cellular catalyst carries the player-side seed; the Science Screen's grid display reads the two rule systems in parallel and highlights surviving structure.
+
+Gap: No gap identified.

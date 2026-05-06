@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "auto_xy_xy_freq_5a3935",
+    "description": "XY — x:depth y:reso, color #88ff44",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "xy",
+      "label": "DEP/RES",
+      "color": "#88ff44",
+      "parameter_x": "depth",
+      "parameter_y": "reso"
+    }
+  }
+}

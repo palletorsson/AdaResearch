@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://commons/substrates/grid2d/grid2d_substrate.gd" id="1_sub"]
+[ext_resource type="Script" path="res://commons/substrates/grid2d/grid2d_renderer.gd" id="2_ren"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+size = Vector3(2.0, 0.012, 2.0)
+
+[sub_resource type="StandardMaterial3D" id="Mat_base"]
+resource_name = "PetriDishBase"
+albedo_color = Color(0.04, 0.04, 0.05, 1.0)
+metallic = 0.3
+roughness = 0.1
+emission_enabled = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_rim"]
+size = Vector3(2.01, 0.018, 2.01)
+
+[sub_resource type="StandardMaterial3D" id="Mat_rim"]
+resource_name = "PetriDishRim"
+albedo_color = Color(0.08, 0.08, 0.09, 0.95)
+metallic = 0.5
+roughness = 0.15
+transparency = 1
+emission_enabled = true
+emission = Color(0.06, 0.06, 0.08, 1.0)
+emission_energy_multiplier = 0.15
+
+[sub_resource type="BoxShape3D" id="BoxShape_touch"]
+size = Vector3(2.0, 0.05, 2.0)
+
+[node name="Grid2DSubstrate" type="Node3D"]
+script = ExtResource("1_sub")
+
+[node name="Renderer" type="Node3D" parent="."]
+script = ExtResource("2_ren")
+
+[node name="BasePlate" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006, 0)
+mesh = SubResource("BoxMesh_base")
+material_override = SubResource("Mat_base")
+cast_shadow = 0
+
+[node name="Rim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.003, 0)
+mesh = SubResource("BoxMesh_rim")
+material_override = SubResource("Mat_rim")
+cast_shadow = 0
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, -0.02, 1.05)
+text = "Grid2D"
+font_size = 18
+outline_size = 8
+modulate = Color(0.6, 0.6, 0.65, 0.8)
+horizontal_alignment = 1
+
+[node name="TouchArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TouchArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+shape = SubResource("BoxShape_touch")

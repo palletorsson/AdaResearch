@@ -47,7 +47,14 @@ var liquid_material: ShaderMaterial
 var bacterial_material: ShaderMaterial
 var metal_material: StandardMaterial3D
 
-func _ready():
+# MultiMesh bacteria data
+var _bacteria_mm_instances: Array[MultiMeshInstance3D] = []
+var _bacteria_type_indices: PackedInt32Array = PackedInt32Array()
+var _bacteria_local_indices: PackedInt32Array = PackedInt32Array()
+var _bacteria_positions: PackedVector3Array = PackedVector3Array()
+var _bacteria_rotations: Array[Basis] = []
+
+func _ready() -> void:
 	# Create materials
 	create_materials()
 	
@@ -68,7 +75,7 @@ func _ready():
 	if enable_interaction:
 		setup_interaction()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	if enable_animation:
@@ -81,7 +88,7 @@ func _process(delta):
 		# Update material properties
 		update_materials(delta)
 
-func create_materials():
+func create_materials() -> void:
 	# Glass material using custom shader
 	glass_material = ShaderMaterial.new()
 	glass_material.shader = load("res://commons/resourses/shaders/frosted_glass.gdshader")
@@ -142,7 +149,7 @@ func duplicate_shader_material(original_material: ShaderMaterial) -> ShaderMater
 	
 	return new_material
 
-func update_materials(delta: float):
+func update_materials(_delta: float) -> void:
 	# Update liquid materials properties for a subtle dynamic effect
 	
 	# Update main material properties
@@ -163,7 +170,7 @@ func update_materials(delta: float):
 			var drift_z = cos(time * fog_movement_speed * 0.7) * 0.1
 			process_material.direction = Vector3(drift_x, 0.1, drift_z).normalized()
 
-func create_bioreactors():
+func create_bioreactors() -> void:
 	var bioreactor_container = Node3D.new()
 	bioreactor_container.name = "Bioreactors"
 	
@@ -253,35 +260,38 @@ func create_bioreactors():
 		
 		bioreactor.add_child(liquid)
 		
-		# Add some bacterial particles floating in the liquid
+		# Add bacterial particles as a MultiMesh
 		var particle_count = randi() % 15 + 10
+		var particle_size = 0.017 * lab_scale  # Average size for shared mesh
+		var p_mesh = SphereMesh.new()
+		p_mesh.radius = particle_size
+		p_mesh.height = particle_size * 2
+
+		var p_mat = ShaderMaterial.new()
+		p_mat.shader = bacterial_material.shader
+		var p_color = bacterial_color.lerp(primary_color, 0.5)
+		p_mat.set_shader_parameter("albedo", p_color)
+		p_mat.set_shader_parameter("roughness", 0.7)
+		p_mat.set_shader_parameter("emission_color", p_color)
+		p_mat.set_shader_parameter("emission_energy", 0.5)
+		p_mesh.material = p_mat
+
+		var p_mm = MultiMesh.new()
+		p_mm.transform_format = MultiMesh.TRANSFORM_3D
+		p_mm.instance_count = particle_count
+		p_mm.mesh = p_mesh
+
 		for k in range(particle_count):
-			var particle = MeshInstance3D.new()
-			var particle_mesh = SphereMesh.new()
-			var particle_size = randf_range(0.01, 0.025) * lab_scale
-			particle_mesh.radius = particle_size
-			particle_mesh.height = particle_size * 2
-			
-			# Create a new shader material for each particle
-			var particle_material = ShaderMaterial.new()
-			particle_material.shader = bacterial_material.shader
-			
-			var mixed_color = bacterial_color.lerp(primary_color, randf())
-			particle_material.set_shader_parameter("albedo", mixed_color)
-			particle_material.set_shader_parameter("roughness", 0.7)
-			particle_material.set_shader_parameter("emission_color", mixed_color)
-			particle_material.set_shader_parameter("emission_energy", 0.5)
-			
-			particle.mesh = particle_mesh
-			particle.material_override = particle_material
-			
-			# Random position within the liquid
 			var angle_p = randf() * 2.0 * PI
 			var radius_p = randf() * 0.13 * lab_scale
 			var height_p = randf() * liquid_mesh.height - liquid_mesh.height / 2.0
-			particle.position = Vector3(cos(angle_p) * radius_p, height_p + liquid.position.y, sin(angle_p) * radius_p)
-			
-			bioreactor.add_child(particle)
+			var p_pos = Vector3(cos(angle_p) * radius_p, height_p + liquid.position.y, sin(angle_p) * radius_p)
+			p_mm.set_instance_transform(k, Transform3D(Basis.IDENTITY, p_pos))
+
+		var p_mmi = MultiMeshInstance3D.new()
+		p_mmi.name = "BioreactorParticlesMM"
+		p_mmi.multimesh = p_mm
+		bioreactor.add_child(p_mmi)
 		
 		# Create a stirring rod or impeller
 		var stirrer = MeshInstance3D.new()
@@ -321,73 +331,93 @@ func create_bioreactors():
 	
 	add_child(bioreactor_container)
 
-func create_bacterial_entities():
+func create_bacterial_entities() -> void:
 	var bacteria_container = Node3D.new()
 	bacteria_container.name = "BacterialEntities"
-	
+
+	# Sort bacteria by type first
+	var type_data: Array[Array] = [[], [], []]  # capsule, sphere, stretched-sphere
+	_bacteria_type_indices.resize(bacteria_count)
+	_bacteria_local_indices.resize(bacteria_count)
+	_bacteria_positions.resize(bacteria_count)
+	_bacteria_rotations.resize(bacteria_count)
+
 	for i in range(bacteria_count):
-		var bacteria = MeshInstance3D.new()
-		bacteria.name = "Bacteria_" + str(i)
-		
-		# Randomly select a bacteria shape
 		var shape_type = randi() % 3
-		var bacteria_mesh
-		
-		match shape_type:
-			0:  # Rod-shaped (bacillus)
-				bacteria_mesh = CapsuleMesh.new()
-				bacteria_mesh.radius = randf_range(0.02, 0.04) * lab_scale
-				bacteria_mesh.height = randf_range(0.08, 0.15) * lab_scale
-			1:  # Spherical (coccus)
-				bacteria_mesh = SphereMesh.new()
-				bacteria_mesh.radius = randf_range(0.03, 0.06) * lab_scale
-				bacteria_mesh.height = bacteria_mesh.radius * 2
-			2:  # Spiral (spirillum) - approximated with stretched sphere
-				bacteria_mesh = SphereMesh.new()
-				bacteria_mesh.radius = randf_range(0.02, 0.04) * lab_scale
-				bacteria_mesh.height = randf_range(0.1, 0.2) * lab_scale
-		
-		bacteria.mesh = bacteria_mesh
-		
-		# Create unique material for each bacteria
-		var bacteria_mat = ShaderMaterial.new()
-		bacteria_mat.shader = bacterial_material.shader
-		
-		var hue_offset = randf()
-		var bacteria_color_instance = bacterial_color.lerp(tertiary_color, hue_offset)
-		
-		# Set shader parameters
-		bacteria_mat.set_shader_parameter("albedo", bacteria_color_instance)
-		bacteria_mat.set_shader_parameter("roughness", 0.7)
-		bacteria_mat.set_shader_parameter("emission_color", bacteria_color_instance)
-		bacteria_mat.set_shader_parameter("emission_energy", randf_range(0.3, 0.8))
-		
-		bacteria.material_override = bacteria_mat
-		
-		# Random position in the lab space
 		var x_range = 1.5 * lab_scale
 		var y_range = 1.0 * lab_scale
 		var z_range = 1.0 * lab_scale
-		
-		bacteria.position = Vector3(
+		var pos = Vector3(
 			randf_range(-x_range, x_range),
 			randf_range(0.8, 0.8 + y_range),
 			randf_range(-z_range, z_range)
 		)
-		
-		# Random rotation
-		bacteria.rotation = Vector3(
-			randf_range(0, 2 * PI),
-			randf_range(0, 2 * PI),
-			randf_range(0, 2 * PI)
-		)
-		
-		bacteria_container.add_child(bacteria)
-		bacterial_entities.append(bacteria)
-	
+		var rot = Basis.from_euler(Vector3(randf_range(0, TAU), randf_range(0, TAU), randf_range(0, TAU)))
+
+		_bacteria_type_indices[i] = shape_type
+		_bacteria_local_indices[i] = type_data[shape_type].size()
+		_bacteria_positions[i] = pos
+		_bacteria_rotations[i] = rot
+		type_data[shape_type].append({"pos": pos, "rot": rot})
+
+	# Create meshes for each type
+	var meshes: Array[Mesh] = []
+
+	# Type 0: Capsule (bacillus)
+	var capsule = CapsuleMesh.new()
+	capsule.radius = 0.03 * lab_scale
+	capsule.height = 0.11 * lab_scale
+	meshes.append(capsule)
+
+	# Type 1: Sphere (coccus)
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.045 * lab_scale
+	sphere.height = 0.09 * lab_scale
+	meshes.append(sphere)
+
+	# Type 2: Stretched sphere (spirillum)
+	var stretched = SphereMesh.new()
+	stretched.radius = 0.03 * lab_scale
+	stretched.height = 0.15 * lab_scale
+	meshes.append(stretched)
+
+	# Create one MultiMesh per type
+	_bacteria_mm_instances.clear()
+	for type_idx in range(3):
+		var entries = type_data[type_idx]
+		if entries.is_empty():
+			# Still add a placeholder so indices line up
+			_bacteria_mm_instances.append(null)
+			continue
+
+		var mat = ShaderMaterial.new()
+		mat.shader = bacterial_material.shader
+		var bacteria_col = bacterial_color.lerp(tertiary_color, 0.5)
+		mat.set_shader_parameter("albedo", bacteria_col)
+		mat.set_shader_parameter("roughness", 0.7)
+		mat.set_shader_parameter("emission_color", bacteria_col)
+		mat.set_shader_parameter("emission_energy", 0.5)
+		meshes[type_idx].material = mat
+
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = entries.size()
+		mm.mesh = meshes[type_idx]
+
+		for i in range(entries.size()):
+			var e = entries[i]
+			var t = Transform3D(e["rot"], e["pos"])
+			mm.set_instance_transform(i, t)
+
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "BacteriaMM_" + str(type_idx)
+		mmi.multimesh = mm
+		bacteria_container.add_child(mmi)
+		_bacteria_mm_instances.append(mmi)
+
 	add_child(bacteria_container)
 
-func create_fog_particles():
+func create_fog_particles() -> void:
 	fog_particles = GPUParticles3D.new()
 	fog_particles.name = "FogParticles"
 	
@@ -444,7 +474,7 @@ func create_fog_particles():
 	
 	add_child(fog_particles)
 
-func setup_interaction():
+func setup_interaction() -> void:
 	for equipment in lab_equipment:
 		var area = Area3D.new()
 		area.name = "InteractionArea"
@@ -463,7 +493,7 @@ func setup_interaction():
 		
 		equipment.add_child(area)
 
-func _on_area_input_event(camera, event, click_position, click_normal, shape_idx, equipment):
+func _on_area_input_event(_camera, event, _click_position, _click_normal, _shape_idx, equipment) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		# Handle interaction with the equipment
 		print("Interacted with: ", equipment.name)
@@ -475,7 +505,7 @@ func _on_area_input_event(camera, event, click_position, click_normal, shape_idx
 		# Show information about the equipment
 		show_equipment_info(equipment)
 
-func _on_area_mouse_entered(equipment):
+func _on_area_mouse_entered(equipment) -> void:
 	# Change cursor or provide visual feedback
 	print("Hover over: ", equipment.name)
 	
@@ -484,7 +514,7 @@ func _on_area_mouse_entered(equipment):
 	if material is ShaderMaterial:
 		material.set_shader_parameter("emission_energy", 0.5)
 
-func _on_area_mouse_exited(equipment):
+func _on_area_mouse_exited(equipment) -> void:
 	# Restore original state
 	print("Exit from: ", equipment.name)
 	
@@ -533,7 +563,7 @@ func create_highlight_effect(node: Node3D) -> Node3D:
 	
 	return highlight
 
-func show_equipment_info(equipment: Node3D):
+func show_equipment_info(equipment: Node3D) -> void:
 	# In a real implementation, this would show UI with information
 	# about the selected lab equipment
 	var equipment_type = equipment.name.split("_")[0]
@@ -552,7 +582,7 @@ func show_equipment_info(equipment: Node3D):
 	print("INFO: ", info)
 	# In a real implementation, display this in UI
 
-func animate_lab_equipment(delta: float):
+func animate_lab_equipment(delta: float) -> void:
 	# Subtle movement and effects for lab equipment
 	for i in range(lab_equipment.size()):
 		var equipment = lab_equipment[i]
@@ -595,54 +625,40 @@ func animate_lab_equipment(delta: float):
 						var pulse = (sin(time * pulsation_speed * 0.5 + i) + 1) / 2.0
 						material.set_shader_parameter("emission_energy", 0.3 + pulse * 0.2)
 
-func animate_bacterial_entities(delta: float):
-	# Movement for floating bacterial entities
-	for i in range(bacterial_entities.size()):
-		var bacteria = bacterial_entities[i]
-		
-		# Calculate movement
+func animate_bacterial_entities(delta: float) -> void:
+	# Movement for floating bacterial entities via MultiMesh
+	for i in range(_bacteria_positions.size()):
+		var pos = _bacteria_positions[i]
 		var movement = Vector3(
 			sin(time * floating_speed + i),
 			cos(time * floating_speed * 0.7 + i * 0.5),
 			sin(time * floating_speed * 0.5 + i * 0.3)
 		) * delta * 0.05 * lab_scale
-		
-		bacteria.position += movement
-		
-		# Keep within boundaries
+		pos += movement
+
 		var bounds = 1.5 * lab_scale
 		var y_min = 0.8 * lab_scale
 		var y_max = 1.8 * lab_scale
-		
-		if abs(bacteria.position.x) > bounds:
-			bacteria.position.x = sign(bacteria.position.x) * bounds
-		
-		if bacteria.position.y < y_min:
-			bacteria.position.y = y_min
-		elif bacteria.position.y > y_max:
-			bacteria.position.y = y_max
-		
-		if abs(bacteria.position.z) > bounds:
-			bacteria.position.z = sign(bacteria.position.z) * bounds
-		
-		# Random rotation
-		bacteria.rotate_x(randf_range(-0.01, 0.01) * rotation_speed)
-		bacteria.rotate_y(randf_range(-0.01, 0.01) * rotation_speed)
-		bacteria.rotate_z(randf_range(-0.01, 0.01) * rotation_speed)
-		
-		# Pulsating emission
-		var material = bacteria.material_override
-		if material is ShaderMaterial:
-			var pulse = (sin(time * pulsation_speed * 0.8 + i * 0.7) + 1) / 2.0
-			material.set_shader_parameter("emission_energy", 0.3 + pulse * 0.4)
-			
-			# Subtle color shifting
-			var hue_shift = (sin(time * color_shift_speed * 0.2 + i) + 1) / 2.0
-			var base_color = bacterial_color.lerp(tertiary_color, hue_shift)
-			material.set_shader_parameter("albedo", base_color)
-			material.set_shader_parameter("emission_color", base_color)
+		pos.x = clampf(pos.x, -bounds, bounds)
+		pos.y = clampf(pos.y, y_min, y_max)
+		pos.z = clampf(pos.z, -bounds, bounds)
+		_bacteria_positions[i] = pos
 
-func create_lab_base():
+		# Update rotation
+		var rot = _bacteria_rotations[i]
+		rot = rot.rotated(Vector3.RIGHT, randf_range(-0.01, 0.01) * rotation_speed)
+		rot = rot.rotated(Vector3.UP, randf_range(-0.01, 0.01) * rotation_speed)
+		rot = rot.rotated(Vector3.FORWARD, randf_range(-0.01, 0.01) * rotation_speed)
+		_bacteria_rotations[i] = rot
+
+		# Update transform in the appropriate MultiMesh
+		var type_idx = _bacteria_type_indices[i]
+		var local_idx = _bacteria_local_indices[i]
+		var mmi = _bacteria_mm_instances[type_idx]
+		if mmi and mmi.multimesh:
+			mmi.multimesh.set_instance_transform(local_idx, Transform3D(rot, pos))
+
+func create_lab_base() -> void:
 	var base = Node3D.new()
 	base.name = "LabBase"
 	
@@ -699,7 +715,7 @@ func create_lab_base():
 	
 	add_child(base)
 
-func create_decorative_pipes(parent: Node3D):
+func create_decorative_pipes(parent: Node3D) -> void:
 	# Create some interconnecting tubes and pipes for aesthetic
 	var pipes = Node3D.new()
 	pipes.name = "DecorativePipes"
@@ -774,7 +790,7 @@ func create_valve(position: Vector3, radius: float) -> MeshInstance3D:
 	
 	return valve
 
-func create_lab_equipment():
+func create_lab_equipment() -> void:
 	# Create various lab equipment and place on the table
 	
 	# Create petri dishes
@@ -789,7 +805,7 @@ func create_lab_equipment():
 	# Create bioreactors
 	create_bioreactors()
 
-func create_petri_dishes():
+func create_petri_dishes() -> void:
 	var petri_dish_container = Node3D.new()
 	petri_dish_container.name = "PetriDishes"
 	
@@ -849,35 +865,37 @@ func create_petri_dishes():
 
 		petri.add_child(medium)
 
-		# Create bacterial colonies on the medium
+		# Create bacterial colonies on the medium as a MultiMesh
 		var colony_count = randi() % 8 + 3
+		var colony_size = 0.02 * lab_scale  # Average size for shared mesh
+		var colony_mesh = SphereMesh.new()
+		colony_mesh.radius = colony_size
+		colony_mesh.height = colony_size * 1.5
+
+		var colony_material = ShaderMaterial.new()
+		colony_material.shader = load("res://commons/resourses/shaders/slime.gdshader")
+		var colony_color = bacterial_color.lerp(tertiary_color, 0.5)
+		colony_material.set_shader_parameter("albedo", colony_color)
+		colony_material.set_shader_parameter("roughness", 0.7)
+		colony_material.set_shader_parameter("emission_color", colony_color)
+		colony_material.set_shader_parameter("emission_energy", 0.5)
+		colony_mesh.material = colony_material
+
+		var colony_mm = MultiMesh.new()
+		colony_mm.transform_format = MultiMesh.TRANSFORM_3D
+		colony_mm.instance_count = colony_count
+		colony_mm.mesh = colony_mesh
+
 		for j in range(colony_count):
-			var colony = MeshInstance3D.new()
-			var colony_mesh = SphereMesh.new()
-			var colony_size = randf_range(0.01, 0.03) * lab_scale
-			colony_mesh.radius = colony_size
-			colony_mesh.height = colony_size * 1.5
-
-			# Create a new ShaderMaterial for each colony
-			var colony_material = ShaderMaterial.new()
-			colony_material.shader = load("res://commons/resourses/shaders/slime.gdshader")
-
-			var colony_color = bacterial_color.lerp(tertiary_color, randf())
-
-			# Set shader parameters
-			colony_material.set_shader_parameter("albedo", colony_color)
-			colony_material.set_shader_parameter("roughness", 0.7)
-			colony_material.set_shader_parameter("emission_color", colony_color)
-			colony_material.set_shader_parameter("emission_energy", 0.5)
-
-			colony.mesh = colony_mesh
-			colony.material_override = colony_material
-
 			var angle = randf() * 2.0 * PI
 			var distance = randf() * 0.12 * lab_scale
-			colony.position = Vector3(cos(angle) * distance, 0.025 * lab_scale, sin(angle) * distance)
+			var c_pos = Vector3(cos(angle) * distance, 0.025 * lab_scale, sin(angle) * distance)
+			colony_mm.set_instance_transform(j, Transform3D(Basis.IDENTITY, c_pos))
 
-			petri.add_child(colony)
+		var colony_mmi = MultiMeshInstance3D.new()
+		colony_mmi.name = "ColonyMM"
+		colony_mmi.multimesh = colony_mm
+		petri.add_child(colony_mmi)
 
 		# Position on the table
 		var grid_size = sqrt(petri_dish_count) + 1
@@ -895,7 +913,7 @@ func create_petri_dishes():
 	
 	add_child(petri_dish_container)
 
-func create_test_tubes():
+func create_test_tubes() -> void:
 	var test_tube_container = Node3D.new()
 	test_tube_container.name = "TestTubes"
 	
@@ -998,29 +1016,35 @@ func create_test_tube_rack(tube_count: int) -> Node3D:
 	
 	rack.add_child(top)
 	
-	# Create holes in the top support
+	# Create holes in the top support as a MultiMesh
+	var hole_mesh = CylinderMesh.new()
+	hole_mesh.top_radius = 0.027 * lab_scale
+	hole_mesh.bottom_radius = 0.027 * lab_scale
+	hole_mesh.height = 0.022 * lab_scale
+	hole_mesh.material = metal_material
+
+	var hole_mm = MultiMesh.new()
+	hole_mm.transform_format = MultiMesh.TRANSFORM_3D
+	hole_mm.instance_count = tube_count
+	hole_mm.mesh = hole_mesh
+
 	for i in range(tube_count):
 		var x_index = i % columns
 		var z_index = i / columns
-		
+
 		var x_pos = (x_index - columns/2) * 0.06 * lab_scale
 		var z_pos = (z_index) * 0.06 * lab_scale
-		
-		var hole = MeshInstance3D.new()
-		var hole_mesh = CylinderMesh.new()
-		hole_mesh.top_radius = 0.027 * lab_scale
-		hole_mesh.bottom_radius = 0.027 * lab_scale
-		hole_mesh.height = 0.022 * lab_scale
-		
-		hole.mesh = hole_mesh
-		hole.material_override = metal_material
-		hole.position = Vector3(x_pos, 0.95 * lab_scale, z_pos - 0.8 * lab_scale)
-		
-		rack.add_child(hole)
+		var h_pos = Vector3(x_pos, 0.95 * lab_scale, z_pos - 0.8 * lab_scale)
+		hole_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, h_pos))
+
+	var hole_mmi = MultiMeshInstance3D.new()
+	hole_mmi.name = "RackHolesMM"
+	hole_mmi.multimesh = hole_mm
+	rack.add_child(hole_mmi)
 	
 	return rack
 
-func create_flasks():
+func create_flasks() -> void:
 	var flask_container = Node3D.new()
 	flask_container.name = "Flasks"
 	
@@ -1205,3 +1229,12 @@ func create_flasks():
 		lab_equipment.append(flask)
 	
 	add_child(flask_container)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

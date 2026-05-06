@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ivjk7jpopm3s"]
+
+[ext_resource type="Script" uid="uid://r1f4ersohiyo" path="res://algorithms/softbodies/slap_test/pendulum_slap.gd" id="1_slap"]
+
+[node name="PendulumSlap" type="Node3D"]
+script = ExtResource("1_slap")

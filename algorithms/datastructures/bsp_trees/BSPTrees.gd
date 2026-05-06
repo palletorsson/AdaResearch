@@ -22,11 +22,11 @@ var root_node: BSPNode
 var partitioning_planes := []
 var space_regions := []
 
-func _ready():
+func _ready() -> void:
 	initialize_bsp_tree()
 	create_initial_space()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	animate_construction_process()
@@ -34,7 +34,7 @@ func _process(delta):
 	visualize_space_partitions()
 	update_tree_structure()
 
-func initialize_bsp_tree():
+func initialize_bsp_tree() -> void:
 	root_node = BSPNode.new()
 	root_node.bounds = AABB(Vector3(-5, -5, -5), Vector3(10, 10, 10))
 	root_node.depth = 0
@@ -66,7 +66,7 @@ func create_test_polygons() -> Array:
 	
 	return polygons
 
-func create_initial_space():
+func create_initial_space() -> void:
 	var container = $SpacePartitions
 	
 	# Create initial bounding box
@@ -83,7 +83,7 @@ func create_initial_space():
 	
 	container.add_child(initial_box)
 
-func animate_construction_process():
+func animate_construction_process() -> void:
 	var container = $ConstructionProcess
 	
 	# Clear previous visualization
@@ -96,7 +96,7 @@ func animate_construction_process():
 	# Show BSP construction step by step
 	show_construction_step(container, construction_step)
 
-func show_construction_step(container: Node3D, step: int):
+func show_construction_step(container: Node3D, step: int) -> void:
 	var current_bounds = AABB(Vector3(-4, -4, -4), Vector3(8, 8, 8))
 	
 	for depth in range(step + 1):
@@ -124,7 +124,7 @@ func show_construction_step(container: Node3D, step: int):
 					
 					container.add_child(region)
 
-func demonstrate_traversal():
+func demonstrate_traversal() -> void:
 	var container = $TraversalDemo
 	
 	# Clear previous visualization
@@ -154,7 +154,7 @@ func demonstrate_traversal():
 	# Show traversal path
 	show_traversal_path(container, traversal_point.position)
 
-func show_traversal_path(container: Node3D, query_point: Vector3):
+func show_traversal_path(container: Node3D, query_point: Vector3) -> void:
 	# Simulate BSP tree traversal path
 	var current_region = AABB(Vector3(-4, -4, -4), Vector3(8, 8, 8))
 	
@@ -194,7 +194,7 @@ func show_traversal_path(container: Node3D, query_point: Vector3):
 		else:
 			current_region.size[axis] *= 0.5
 
-func visualize_space_partitions():
+func visualize_space_partitions() -> void:
 	var container = $SpacePartitions
 	
 	# Clear old partitions except the first (base) box
@@ -228,7 +228,7 @@ func visualize_space_partitions():
 		
 		container.add_child(plane)
 
-func update_tree_structure():
+func update_tree_structure() -> void:
 	var container = $BSPTreeStructure
 	
 	# Clear previous tree visualization
@@ -239,7 +239,7 @@ func update_tree_structure():
 	var tree_depth = int(time * 0.2) % 4 + 1
 	create_tree_nodes(container, Vector3(0, 5, 0), tree_depth, 0, 4.0)
 
-func create_tree_nodes(container: Node3D, position: Vector3, max_depth: int, current_depth: int, spacing: float):
+func create_tree_nodes(container: Node3D, position: Vector3, max_depth: int, current_depth: int, spacing: float) -> void:
 	if current_depth >= max_depth:
 		return
 	
@@ -271,7 +271,7 @@ func create_tree_nodes(container: Node3D, position: Vector3, max_depth: int, cur
 		create_tree_nodes(container, left_pos, max_depth, current_depth + 1, child_spacing)
 		create_tree_nodes(container, right_pos, max_depth, current_depth + 1, child_spacing)
 
-func create_connection(container: Node3D, from: Vector3, to: Vector3):
+func create_connection(container: Node3D, from: Vector3, to: Vector3) -> void:
 	var connection = CSGCylinder3D.new()
 	connection.radius = 0.05
 	
@@ -288,3 +288,11 @@ func create_connection(container: Node3D, from: Vector3, to: Vector3):
 	
 	container.add_child(connection)
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

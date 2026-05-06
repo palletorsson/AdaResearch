@@ -1,0 +1,1 @@
+How much do two directions agree? The dot product measures alignment — positive when vectors point together, zero when perpendicular, negative when opposed. This single number encodes projection, shadow, the degree to which one direction participates in another. Cosine made operational.

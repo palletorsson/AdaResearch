@@ -1,6 +1,22 @@
 # Convolutional Neural Networks (CNNs)
 
+
+## Folder Summary
+
+The `Convolutional Neural Networks (CNNs)` module provides a 3D sandbox for exploring the ideas behind the Convolutional Neural Networks (CNNs) workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `convolutional_neural_networks_CNNs.tscn` and the controller script `ConvolutionalNeuralNetworksCNNs.gd`.
+
 ## Overview
+## VR Scene Blueprint
+The VR stage unfolds as a living pipeline: at stage left a luminous voxel canvas floats in mid-air, its pixels breathing as the convolution window glides across them. Feature stacks bloom at centre stage as vertical light bars that swell with every activation, while a basin of pooling columns downstream translates peaks into smooth glass pillars. To the right, a spiral of fully connected neurons orbits slowly, each orb pulsing in response to the pooled energy flowing through a ribbon of particles that courses along the entire path.
+
+### Interactive Moments
+- Ride the kernel sweep: watch the semi-transparent window skim across the input and spotlight the exact pixels feeding the current activation.
+- Track activations: feature map tiles stretch upward and brighten according to their learned weights, fading back as attention moves on.
+- Feel the compression: pooling columns breathe collectively, embodying how spatial detail condenses before classification.
+- Follow the decision spiral: glowing orbs in the dense stage tilt, scale, and shimmer with downstream confidence, closing the story arc from raw image to prediction.
+
 Convolutional Neural Networks (CNNs) are a specialized type of neural network designed for processing structured grid data, particularly images. They use convolutional layers to automatically learn hierarchical features from input data, making them highly effective for computer vision tasks.
 
 ## What are CNNs?

@@ -1,0 +1,61 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Trans_Rotation_2_",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 37
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 111,
+      "bounds": {
+        "x": 0,
+        "z": 15,
+        "w": 7,
+        "d": 16
+      },
+      "centroid": [
+        3.0,
+        22.44144144144144
+      ]
+    },
+    {
+      "size": 45,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 11
+      },
+      "centroid": [
+        2.7777777777777777,
+        5.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 4,
+      "token": "boolean_tunnel"
+    },
+    {
+      "x": 3,
+      "z": 12,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 157,
+    "breath_zone_count": 2,
+    "unique_tokens": 2
+  }
+}

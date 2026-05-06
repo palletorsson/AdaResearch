@@ -1,0 +1,39 @@
+name: Skill Workflow Check
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
+permissions:
+  pull-requests: read
+
+jobs:
+  pr-skill-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR includes skill workflow section
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = (context.payload.pull_request.body || "").toLowerCase();
+            const required = [
+              "## skill workflow",
+              "`ada-navigator`",
+              "build skill",
+              "`ada-auditor`",
+              "`ada-chronicler`",
+              "`ada-code-specialist`",
+              "`adaresearch-work-summary`"
+            ];
+
+            const missing = required.filter(token => !body.includes(token));
+            if (missing.length > 0) {
+              core.setFailed(
+                "PR template is missing skill workflow fields: " + missing.join(", ") +
+                ". Please fill the 'Skill Workflow' section in the PR body."
+              );
+            }

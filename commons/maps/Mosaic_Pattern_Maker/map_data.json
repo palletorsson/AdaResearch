@@ -1,0 +1,58 @@
+{
+  "map_info": {
+    "name": "Wallpaper Group Workshop",
+    "lookup_name": "Mosaic_Pattern_Maker",
+    "description": "Full wallpaper group workstation — apply field-captured motifs to all 17 symmetry groups.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 5,
+      "depth": 5,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "mosaicanalysis",
+      "estimated_time": "exploration based",
+      "learning_objectives": [
+        "Apply all 17 wallpaper groups to field-captured motifs",
+        "Compare algorithmic tiling to historical pattern intent",
+        "Create new patterns that bridge classical and computational"
+      ]
+    },
+    "title": "Wallpaper Group Workshop"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1"],
+      ["1","0","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","0","1","1"]
+    ],
+    "utilities": [
+      ["sp"," "," "," "," "],
+      [" ","t"," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," ","t"," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "],
+      [" ","pattern_maker_station"," ","pattern_tile_puzzle"," "],
+      [" "," "," "," "," "],
+      [" "," ","tessellation_lattice_demo"," "," "],
+      [" "," "," "," "," "]
+    ]
+  }
+}

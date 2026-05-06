@@ -1,0 +1,46 @@
+{
+    "description": "Solarpunk: Watery sounds, soft motors, automated farming",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+            "volume_db": -20,
+            "bus": "Motors"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+            "volume_db": -18,
+            "bus": "WaterFlow"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SCI_FI_DATA_CHIRPS"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -25,
+                -22
+            ],
+            "bus": "Servos"
+        }
+    ],
+    "buses": {
+        "WaterFlow": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 800
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.5
+                }
+            ]
+        }
+    }
+}

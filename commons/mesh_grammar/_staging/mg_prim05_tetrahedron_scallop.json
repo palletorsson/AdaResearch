@@ -1,0 +1,15 @@
+{
+  "id": "mg_prim05_tetrahedron_scallop",
+  "notes": "PRIMITIVE-AS-SEED: Tetrahedron + scallop edges + bulge. Simplest polyhedron gets elaborate edge decoration \u2014 from 4 faces to an ornamented form.",
+  "seed": "tetrahedron",
+  "generations": 2,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "all",
+      "params": {
+        "amount": 0.04
+      }
+    }
+  ]
+}

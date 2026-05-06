@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "GT_Spanning_Trees",
+  "home_sequence": "graphtheory",
+  "dimensions": {
+    "w": 9,
+    "d": 9
+  },
+  "signature": "mst_visualization demonstrates Kruskal/Prim construction \u2014 watching the skeleton emerge edge by edge from the scattered platforms",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 11,
+      "bounds": {
+        "x": 5,
+        "z": 5,
+        "w": 4,
+        "d": 4
+      },
+      "centroid": [
+        6.454545454545454,
+        6.7272727272727275
+      ]
+    },
+    {
+      "size": 10,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 5
+      },
+      "centroid": [
+        1.7,
+        2.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 33,
+    "breath_zone_count": 2,
+    "unique_tokens": 0
+  }
+}

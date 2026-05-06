@@ -1,0 +1,128 @@
+{
+  "catalyst:array_tutorial": {
+    "track": "catalyst",
+    "sequenceId": "array_tutorial",
+    "comment": "Need a catalyst mode for array sorting — maybe a reordering beam?",
+    "updatedAt": "2026-03-03T13:12:56.362Z"
+  },
+  "catalyst:arraytutorial": {
+    "track": "catalyst",
+    "sequenceId": "arraytutorial",
+    "comment": "Need a catalyst mode for array sorting — maybe a reordering beam?",
+    "updatedAt": "2026-03-03T13:13:34.177Z"
+  },
+  "hazards:transformation": {
+    "track": "hazards",
+    "sequenceId": "transformation",
+    "comment": "the Hazards could be a rectangle of fire sitting under the transportation cube , if the player falls down into play die.",
+    "updatedAt": "2026-03-03T14:15:09.475Z"
+  },
+  "hazards:arraytutorial": {
+    "track": "hazards",
+    "sequenceId": "arraytutorial",
+    "comment": "This hazard has too much order forcing players to walk on the grid, snap walking.",
+    "updatedAt": "2026-03-03T14:28:39.227Z"
+  },
+  "hazards:wavefunctions": {
+    "track": "hazards",
+    "sequenceId": "wavefunctions",
+    "comment": "This hazard shoots crazy spiral balls patterns",
+    "updatedAt": "2026-03-03T14:32:20.640Z"
+  },
+  "hazards:color": {
+    "track": "hazards",
+    "sequenceId": "color",
+    "comment": "This hazard critter thins everything in gray",
+    "updatedAt": "2026-03-03T14:36:36.583Z"
+  },
+  "hazards:noise": {
+    "track": "hazards",
+    "sequenceId": "noise",
+    "comment": "This hazard is noise blob",
+    "updatedAt": "2026-03-03T14:33:39.960Z"
+  },
+  "capability:color": {
+    "track": "capability",
+    "sequenceId": "color",
+    "comment": "shoting rainbiw color balls repaints the gray out world and shrinks harzardes critter",
+    "updatedAt": "2026-03-03T14:36:24.936Z"
+  },
+  "capability:forces": {
+    "track": "capability",
+    "sequenceId": "forces",
+    "comment": "use the gun as a anti force feild not to get draged in to the force feild",
+    "updatedAt": "2026-03-03T14:37:49.061Z"
+  },
+  "ecosystem:primitives": {
+    "track": "ecosystem",
+    "sequenceId": "primitives",
+    "comment": "Just a floor of cubes. Allow grey flowers from primitives. The ecosystem starts bare.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:transformation": {
+    "track": "ecosystem",
+    "sequenceId": "transformation",
+    "comment": "Allow some static movement in the ecosystem. Flowers/elements can shift position.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:color": {
+    "track": "ecosystem",
+    "sequenceId": "color",
+    "comment": "Allow color in the ecosystem. Grey flowers gain color.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:forces": {
+    "track": "ecosystem",
+    "sequenceId": "forces",
+    "comment": "Allow some force in the ecosystem. Elements react to forces.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:arraytutorial": {
+    "track": "ecosystem",
+    "sequenceId": "arraytutorial",
+    "comment": "Allow arrays of flowers. Flowers can appear in ordered groups/patterns.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:wavefunctions": {
+    "track": "ecosystem",
+    "sequenceId": "wavefunctions",
+    "comment": "Allow sine math form in the ecosystem. Wave-shaped growth patterns.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:randomness": {
+    "track": "ecosystem",
+    "sequenceId": "randomness",
+    "comment": "Allow random space in the ecosystem. Placement and variation become stochastic.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:noise": {
+    "track": "ecosystem",
+    "sequenceId": "noise",
+    "comment": "Allow noise voxels and noise terrain. The ground itself becomes a noise landscape.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:cellularautomata": {
+    "track": "ecosystem",
+    "sequenceId": "cellularautomata",
+    "comment": "Allow growth — small game of life ecosystem. Plants spread and die by local rules.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:fractals": {
+    "track": "ecosystem",
+    "sequenceId": "fractals",
+    "comment": "Allow procedural fractal flowers and trees. Self-similar branching at every scale.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:lsystems": {
+    "track": "ecosystem",
+    "sequenceId": "lsystems",
+    "comment": "Allow L-system flowers and trees. Grammar-driven plant growth becomes the world.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  },
+  "ecosystem:proceduralgeneration": {
+    "track": "ecosystem",
+    "sequenceId": "proceduralgeneration",
+    "comment": "Allow procedurally generated ecosystem elements. The world generates itself.",
+    "updatedAt": "2026-03-03T16:00:00.000Z"
+  }
+}

@@ -23,7 +23,7 @@ func create_trail() -> void:
 	trail_line = Line3D.new()
 	trail_line.width = trail_width
 	trail_line.default_color = accent_pink
-	trail_line.texture_mode = Line3D.TEXTURE_MODE_TILE
+	#trail_line.texture_mode = Line3D.TEXTURE_MODE_TILE
 	trail_line.material_override = create_trail_material()
 	add_child(trail_line)
 
@@ -95,4 +95,3 @@ func set_trail_visible(visible: bool) -> void:
 
 func is_trail_visible() -> bool:
 	return trail_line != null and trail_line.visible
-

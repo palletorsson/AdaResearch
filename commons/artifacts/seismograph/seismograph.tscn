@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cseismograph"]
+
+[ext_resource type="Script" uid="uid://seismograph_script" path="res://commons/artifacts/seismograph/seismograph.gd" id="1_script"]
+
+[node name="Seismograph" type="Node3D"]
+script = ExtResource("1_script")

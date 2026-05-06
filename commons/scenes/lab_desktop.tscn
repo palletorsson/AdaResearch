@@ -1,0 +1,125 @@
+[gd_scene load_steps=14 format=3 uid="uid://dqus3el56gbp5"]
+
+[ext_resource type="Script" uid="uid://lqeedqhm41pc" path="res://commons/scenes/LabGridSystem.gd" id="1_labgrid"]
+[ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_grid"]
+[ext_resource type="Script" uid="uid://b7qlq12bbaryn" path="res://commons/scenes/DesktopLabManager.gd" id="2_labmanager"]
+[ext_resource type="PackedScene" path="res://commons/scenes/desktop_player.tscn" id="3_player"]
+[ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="4_sky"]
+[ext_resource type="Script" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="5_overlay"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="6_layer_editor"]
+[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="7_dashboard"]
+[ext_resource type="Script" path="res://commons/maps/catalog/LabEvolutionEditor.gd" id="8_lab_evolution"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("4_sky")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(0.7, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(1, 0.8, 0.4, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.1
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ShaderMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+background_energy_multiplier = 1.43
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_color = Color(0.67207, 0.682537, 0.672356, 1)
+ambient_light_energy = 2.5
+reflected_light_source = 1
+tonemap_mode = 3
+tonemap_exposure = 0.16
+ssil_enabled = true
+glow_intensity = 1.67
+fog_enabled = true
+fog_light_color = Color(0.81025255, 0.8915905, 0.99056953, 1)
+fog_light_energy = 6.55
+fog_sun_scatter = 3.5
+fog_density = 0.02
+fog_sky_affect = 0.885
+fog_height = -1.3
+adjustment_enabled = true
+adjustment_brightness = 0.92
+adjustment_contrast = 1.02
+adjustment_saturation = 1.01
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(50, 0.1, 50)
+
+[node name="LabDesktop" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 10, 0)
+shadow_enabled = true
+
+[node name="DesktopPlayer" parent="." instance=ExtResource("3_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.2, 1)
+use_gravity = false
+allow_jump = false
+
+[node name="LabGridSystem" parent="." instance=ExtResource("2_grid")]
+script = ExtResource("1_labgrid")
+lab_mode = true
+lab_cube_color = Color(0.95, 0.95, 0.98, 1)
+lab_ambient_color = Color(0.9, 0.9, 1, 1)
+map_name = "Lab"
+
+[node name="DesktopLabManager" type="Node3D" parent="."]
+script = ExtResource("2_labmanager")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
+text = "LAB - Desktop Mode
+Left Click / Enter: Interact with teleporters/artifacts
+WASD: Move | Mouse: Look | Shift: Sprint
+R: Return to Lab | N: Next Map | P: Previous Map
+M: Map Switcher Overlay | K: Lab Evolution Editor
+ESC: Toggle mouse"
+font_size = 24
+outline_size = 8
+
+[node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("5_overlay")
+
+[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("6_layer_editor")
+
+[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("7_dashboard")
+
+[node name="LabEvolutionEditor" type="CanvasLayer" parent="."]
+script = ExtResource("8_lab_evolution")

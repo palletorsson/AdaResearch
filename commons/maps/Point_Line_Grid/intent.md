@@ -1,0 +1,7 @@
+Concept: The grid quantises continuous movement into discrete positions. Traces snap to cells; memory becomes finite, sampled, measured against a fixed frame. Structure meets recording, and the learner's fluid path is disciplined into a sequence of addresses.
+Sequence role: Fourth map in Primitives. Synthesises Point_Lines' grid and Point_Trace's duration. The fluid trace is disciplined by spatial structure so that deviation becomes measurable rather than merely present. Prepares Point_Triangle by establishing the coordinate politics that closure will formalise.
+Technical angle: Grid snapping algorithms, discrete versus continuous position, recording player position over time into grid cells, sampling rate and resolution tradeoffs, coordinate-system-relative measurement. The snap is not cosmetic; it converts a continuous path into a discrete log that can be replayed, diffed, and compared with other recorded paths.
+Critical angle: The grid as political technology — quantisation is always a choice about what resolution of difference matters. Foucault's disciplinary grid; the panopticon as spatial sampling. Whose grid? Whose resolution? The map exposes the grid as a chosen instrument rather than as a neutral backdrop, and asks the learner to feel the fit and the misfit between continuous body and sampled record.
+Key artifacts: player_trace records movement as gridded history; grid_lines provides the fixed frame; grab_sphere_point_snap demonstrates the snap constraint — agency within imposed structure.
+
+Gap: No gap identified.

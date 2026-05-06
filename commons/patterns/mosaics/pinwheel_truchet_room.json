@@ -1,0 +1,33 @@
+{
+  "name": "MANN — Pinwheel Truchet Room",
+  "type": "mosaic_composite",
+  "technique": "opus_tessellatum",
+  "period": "roman_republican",
+  "palette": ["#141418", "#EBE6D9"],
+  "aspect_ratio": [4, 3],
+  "tile_shape": 1,
+  "border_width": 6,
+  "aging": {
+    "grout_width": 0.04,
+    "wear_amount": 0.3,
+    "crack_density": 0.0
+  },
+  "rings": [
+    { "type": "separator", "width": 2, "color_index": 0 },
+    { "type": "separator", "width": 1, "color_index": 1 },
+    { "type": "separator", "width": 2, "color_index": 0 },
+    { "type": "separator", "width": 1, "color_index": 1 }
+  ],
+  "zones": {
+    "field": {
+      "motif": "pinwheel_truchet",
+      "group": "P1",
+      "tile_shape": 1,
+      "domain_size": 2,
+      "domain": [
+        [0, 1],
+        [1, 0]
+      ]
+    }
+  }
+}

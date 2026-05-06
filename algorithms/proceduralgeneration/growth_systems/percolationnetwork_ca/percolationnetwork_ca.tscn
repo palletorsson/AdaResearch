@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://chrjqr4330chu"]
+
+[ext_resource type="Script" uid="uid://cu31bfxk2of" path="res://algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd" id="1_n5bmm"]
+
+[node name="PercolationnetworkCa" type="Node3D" unique_id=895145906]
+script = ExtResource("1_n5bmm")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1601844913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.38487)

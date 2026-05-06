@@ -1,0 +1,15 @@
+# The turret aims — vectors at work and the politics of targeting
+
+A turret is a small machine that decides where to point. The decision is usually hidden in code, but this map exposes it. A target drone moves through the space; the turret subtracts the drone's position from its own, normalises the result, and obtains a unit vector pointing from gun to target. A dot-product check against the current barrel direction decides whether to fire. The arithmetic is live on a panel above the gun, so the decision is legible rather than assumed.
+
+Caroline Criado Perez's work on default design argues that tools are built for a presumed user and that the presumption leaks through into every use. The turret is a presumed user made mechanical. Its default is vigilant. Its default is lethal under conditions the designer chose. The learner watching the turret at work is watching a designer's decisions play out at the speed of arithmetic, and the arithmetic is the part that feels neutral while the decisions do not.
+
+The second station runs a superposed weather system. Gravity, wind, and turbulence are three vector fields stacked on top of one another, and a cloud of light particles drifts through their sum. Each field can be toggled independently. The particles redraw their paths as soon as the composition changes. The superposition is an addition; the emergent behaviour is not. The learner can see that two simple fields and one chaotic one produce a weather pattern that none of them produces alone.
+
+The third station is a field visualiser. A cubic grid of arrow glyphs fills a volume. A selector switches between gravitational, electric, and magnetic fields. The arrows change length and orientation to match. A small test mass released into the grid rides the streamlines the arrows describe. Three different physics, one shared display. The map argues that a field is a way of filling space with instructions, and that the space's behaviour depends on which instructions fill it.
+
+Criado Perez would point at the choice of default fields. Gravity, electric, magnetic — the three that a physics curriculum expects. A different tradition might fill space with tidal fields, or with rotational fields, or with the velocity fields of fluid dynamics. The map's menu is not exhaustive; it is inherited. Choosing one of three is easier than asking why these three and not others.
+
+The turret, the weather, and the field visualiser share a politics. Each is a decision about how arrows act on bodies in a space. Each was made long before the learner arrived. Each is labelled as an operation rather than as a choice, and the labelling is what makes the operation feel inevitable. The map's contribution is to expose the arithmetic on a panel, so the decisions can at least be watched while they play out.
+
+Within the sequence, VectorApplied is where vectors start doing work. The operations from VectorOperations are put to use, and the work has consequence rather than just form. VectorAdvanced will push the consequences further into embodied practice.

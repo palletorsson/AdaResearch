@@ -1,0 +1,145 @@
+{
+  "map_info": {
+    "description": "Showcase of 30 unplaced artifacts from Commons_3. Walk through to browse available artifacts.",
+    "dimensions": {
+      "depth": 20.0,
+      "max_height": 2.0,
+      "width": 11.0
+    },
+    "format": "json",
+    "lookup_name": "Gallery_Commons_3",
+    "metadata": {
+      "category": "gallery",
+      "difficulty": "gallery",
+      "estimated_time": "10-15 minutes",
+      "learning_objectives": [
+        "Browse 30 Commons_3 artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "name": "Gallery: Commons_3",
+    "title": "Commons_3 Artifact Gallery",
+    "version": "1.0"
+  },
+  "utility_definitions": {
+    "s": {
+      "properties": {
+        "height": 1.5
+      },
+      "type": "spawn"
+    },
+    "t": {
+      "description": "Return to sequence",
+      "name": "Back",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
+  },
+  "settings": {
+    "background": {
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "show_grid": true
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "enabled": true,
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" ","sp"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","request_note:0:1.5#text:overfitting demo"," ","request_note:0:1.5#text:pickable showcase"," ","request_note:0:1.5#text:player position to console"," ","request_note:0:1.5#text:player presence indicator"," "," "],
+      [" "," ","overfitting_demo:0:-0.5"," ","pickable_showcase:0:-0.5"," ","player_position_to_console:0:-0.5"," ","player_presence_indicator:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:point is"," ","request_note:0:1.5#text:pop music demo"," ","request_note:0:1.5#text:pressure soft body"," ","request_note:0:1.5#text:profiler flame graph"," "," "],
+      [" "," ","point_is:0:-0.5"," ","pop_music_demo:0:-0.5"," ","pressure_soft_body:0:-0.5"," ","profiler_flame_graph:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:reset area"," ","request_note:0:1.5#text:reset cube"," ","request_note:0:1.5#text:schlegel diagram"," ","request_note:0:1.5#text:sequencer"," "," "],
+      [" "," ","reset_area:0:-0.5"," ","reset_cube:0:-0.5"," ","schlegel_diagram:0:-0.5"," ","sequencer:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:settings ui"," ","request_note:0:1.5#text:sine wave controller"," ","request_note:0:1.5#text:soft body slicer"," ","request_note:0:1.5#text:sol lewitt wall drawing"," "," "],
+      [" "," ","settings_ui:0:-0.5"," ","sine_wave_controller:0:-0.5"," ","soft_body_slicer:0:-0.5"," ","sol_lewitt_wall_drawing:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:sparse array demo"," ","request_note:0:1.5#text:speed display"," ","request_note:0:1.5#text:spit text 3d"," ","request_note:0:1.5#text:spring chain"," "," "],
+      [" "," ","sparse_array_demo:0:-0.5"," ","speed_display:0:-0.5"," ","spit_text_3d:0:-0.5"," ","spring_chain:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:tesla sparks"," ","request_note:0:1.5#text:tesla sphere"," ","request_note:0:1.5#text:text display"," ","request_note:0:1.5#text:transform matrix cube"," "," "],
+      [" "," ","tesla_sparks:0:-0.5"," ","tesla_sphere:0:-0.5"," ","text_display:0:-0.5"," ","transform_matrix_cube:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:tts test"," ","request_note:0:1.5#text:value mapper example"," ","request_note:0:1.5#text:vera molnar des ordres"," ","request_note:0:1.5#text:viscous fluid blob"," "," "],
+      [" "," ","tts_test:0:-0.5"," ","value_mapper_example:0:-0.5"," ","vera_molnar_des_ordres:0:-0.5"," ","viscous_fluid_blob:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:wave equation solver"," ","request_note:0:1.5#text:wave interference tank"," "," "," "," "," "," "],
+      [" "," ","wave_equation_solver:0:-0.5"," ","wave_interference_tank:0:-0.5"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

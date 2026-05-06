@@ -1,4 +1,20 @@
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
+
+# @identity
+# essence: energy(t+1) = energy(t) - metabolism(gene) + food; reproduce when energy > threshold
+# desire: watch an ecosystem self-regulate — births, deaths, food cycles, population waves
+# critical_parameter: mutation_rate — shapes the gene drift between size and speed
+# triggers: food contact grants energy; energy depletion triggers death and food-drop; reproduction probabilistic
+# emerges: population oscillations, size/speed trade-off equilibria nobody prescribed
+# needs: VR slider for mutation_rate [has], slider for food interval [has]
+# relationships: contrasts 9_3_smart_rockets_vr (goal-directed vs open-ended); unlocks evolved_creatures (richer morphologies)
+# truth: a single gene controlling a trade-off is enough for an entire ecology to self-organize
+
+## Evolving Bloops — a self-sustaining ecosystem simulation.
+## Bloops wander, eat food, and reproduce when they have enough energy.
+## Their DNA gene controls the size/speed trade-off (bigger = slower but lasts longer).
+## Dead bloops become food. The population self-regulates.
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_BLOOP := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
@@ -23,11 +39,14 @@ var _spawn_timer: float = 0.0
 var _status_label: Label3D
 var _generation: int = 1
 var _births: int = 0
+var _deaths: int = 0
+var _peak_population: int = 0
 
 func _ready() -> void:
 	randomize()
 	_setup_environment()
 	_spawn_initial_population()
+	call_deferred("_apply_standard_presentation")
 	set_physics_process(true)
 
 func _setup_environment() -> void:
@@ -122,21 +141,23 @@ func _physics_process(delta: float) -> void:
 			_spawn_food(bloop.position)
 			bloop.queue_free()
 			_bloops.erase(bloop)
+			_deaths += 1
 
 	for food in _foods.duplicate():
 		if food.consumed:
 			food.queue_free()
 			_foods.erase(food)
 
+	_peak_population = max(_peak_population, _bloops.size())
 	_update_status()
 
 func _update_status() -> void:
-	_status_label.text = "Gen %d | Bloops %d | Food %d | Births %d" % [_generation, _bloops.size(), _foods.size(), _births]
+	_status_label.text = "Bloops %d (peak %d) | Food %d | Born %d | Died %d" % [_bloops.size(), _peak_population, _foods.size(), _births, _deaths]
 
 class DNA:
 	var gene: float
 
-	func _init():
+	func _init() -> void:
 		gene = clamp(randf(), 0.0, 1.0)
 
 	func copy() -> DNA:
@@ -175,6 +196,7 @@ class Bloop:
 		body = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.05
+		sphere.height = sphere.radius * 2.0
 		body.mesh = sphere
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(1.0, 0.6, 0.9, 0.8)
@@ -189,7 +211,9 @@ class Bloop:
 		radius = lerp(0.03, 0.12, dna.gene)
 		max_speed = lerp(0.6, 0.2, dna.gene)
 		if body.mesh is SphereMesh:
-			(body.mesh as SphereMesh).radius = radius
+			var body_sphere := body.mesh as SphereMesh
+			body_sphere.radius = radius
+			body_sphere.height = body_sphere.radius * 2.0
 
 	func update(delta: float) -> void:
 		var vx: float = lerp(-max_speed, max_speed, _noise(noise_offset.x))
@@ -255,7 +279,7 @@ class FoodItem:
 		set(value):
 			root.position = value
 
-	func init(parent: Node3D, pos: Vector3, material: Material) -> void:
+	func init(parent: Node3D, pos: Vector3, _material: Material) -> void:
 		root = Node3D.new()
 		root.name = "Food"
 		root.position = pos
@@ -264,8 +288,14 @@ class FoodItem:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = radius
+		sphere.height = sphere.radius * 2.0
 		mesh.mesh = sphere
-		mesh.material_override = material
+		# Glowing green food particles
+		var food_mat := StandardMaterial3D.new()
+		food_mat.albedo_color = Color(0.3, 0.85, 0.4)
+		food_mat.emission_enabled = true
+		food_mat.emission = Color(0.3, 0.85, 0.4) * 0.5
+		mesh.material_override = food_mat
 		root.add_child(mesh)
 
 	func pulse(delta: float) -> void:
@@ -282,3 +312,17 @@ class FoodItem:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

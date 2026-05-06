@@ -1,0 +1,25 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn`.
+Your implementation must bring the `K-Means Clustering` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# K-Means Clustering
+
+## Folder Summary
+
+The `K-Means Clustering` module provides a 3D sandbox for exploring the ideas behind the K-Means Clustering workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with scene files like `enhanced_kmeans.tscn` and `kmeans_simple.tscn` and controller scripts such as `enhanced_kmeans.gd`, `kmeans_assessment_tool.gd`, and `kmeans_clustering.gd`.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Expose inspector controls for `data_point_count`, `cluster_count`, `iteration_speed`, `convergence_threshold`, `data_space_size`, `generate_clustered_data`, `natural_cluster_count`, `cluster_spread`, `noise_points_percentage`, `show_centroids`, `show_connections`, `show_voronoi_regions`, `animate_clustering`, `show_iteration_stats`, `show_convergence_graph`, `point_size_scale`, `step_by_step_mode`, `highlight_moving_centroids`, `show_distance_calculations`, `pause_on_convergence`.
+- Implement the lifecycle helpers `_init()`, `_ready()`, `_process()`, `_input()`, `handle_input()`, `setup_environment()`.
+- Maintain state containers including `data_points`, `centroids`, `assignments`, `previous_assignments`, `iteration`, `converged`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

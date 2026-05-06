@@ -1,0 +1,117 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8lissajous3d"]
+
+[ext_resource type="Script" path="res://commons/audio/interfaces/VRLissajousDisplay.gd" id="1_lissajous"]
+[ext_resource type="Material" uid="uid://ada_screen_bezel" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_chassis"]
+size = Vector3(0.32, 0.24, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chassis"]
+size = Vector3(0.34, 0.26, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_screen"]
+albedo_color = Color(1, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.2, 0.3, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_screen"]
+size = Vector2(0.30, 0.22)
+
+[sub_resource type="GDScript" id="GDScript_controller"]
+script/source = "extends Node3D
+
+## VR Lissajous Display - 3D wrapper for Lissajous figure visualization
+## Shows parametric XY plot of two frequency components
+
+@export var display_name: String = \"LISSAJOUS\"
+
+@onready var viewport: SubViewport = $LissajousViewport
+@onready var screen_mesh: MeshInstance3D = $ScreenMesh
+@onready var lissajous_display: Control = $LissajousViewport/LissajousDisplay
+
+var _parent_controller = null
+
+func _ready():
+	# Connect viewport texture to screen mesh
+	if viewport and screen_mesh:
+		var material = screen_mesh.material_override as StandardMaterial3D
+		if material:
+			material.albedo_texture = viewport.get_texture()
+			material.emission_texture = viewport.get_texture()
+	
+	# Set name label
+	var label = get_node_or_null(\"Chassis/LabelName\")
+	if label:
+		label.text = display_name
+
+func set_frequency_x(freq: float):
+	\"\"\"Set X-axis frequency (e.g., start_freq)\"\"\"
+	if lissajous_display and lissajous_display.has_method(\"set_frequency_x\"):
+		lissajous_display.set_frequency_x(freq)
+
+func set_frequency_y(freq: float):
+	\"\"\"Set Y-axis frequency (e.g., end_freq)\"\"\"
+	if lissajous_display and lissajous_display.has_method(\"set_frequency_y\"):
+		lissajous_display.set_frequency_y(freq)
+
+func set_frequencies(freq1: float, freq2: float):
+	\"\"\"Set both frequencies at once\"\"\"
+	if lissajous_display and lissajous_display.has_method(\"set_frequencies\"):
+		lissajous_display.set_frequencies(freq1, freq2)
+
+func set_param_name(text: String):
+	\"\"\"Set the display label\"\"\"
+	display_name = text
+	var label = get_node_or_null(\"Chassis/LabelName\")
+	if label:
+		label.text = text
+
+func connect_to_controller(controller):
+	\"\"\"Connect to UVAC for parameter updates\"\"\"
+	_parent_controller = controller
+"
+
+[node name="VRLissajousDisplay" type="Node3D"]
+script = SubResource("GDScript_controller")
+
+[node name="Chassis" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_chassis")
+surface_material_override/0 = ExtResource("MatBezel")
+
+[node name="LabelName" type="Label3D" parent="Chassis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0.011)
+pixel_size = 0.0005
+text = "LISSAJOUS"
+font_size = 20
+font_color = Color(0.92, 0.92, 0.94, 1)
+outline_size = 0
+
+[node name="LissajousViewport" type="SubViewport" parent="."]
+disable_3d = true
+size = Vector2i(600, 440)
+render_target_update_mode = 4
+
+[node name="LissajousDisplay" type="Control" parent="LissajousViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lissajous")
+line_color = Color(0, 1, 1, 1)
+glow_color = Color(0, 0.5, 1, 0.4)
+background_color = Color(0, 0.03, 0.06, 1)
+sample_count = 512
+phase_speed = 0.3
+
+[node name="ScreenMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0.011)
+material_override = SubResource("StandardMaterial3D_screen")
+mesh = SubResource("QuadMesh_screen")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_chassis")

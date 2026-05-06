@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://mg_grab_octahedron"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/math_gallery/grab_octahedron.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_highlight"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1"]
+points = PackedVector3Array(0.15, 0, 0, -0.15, 0, 0, 0, 0.15, 0, 0, -0.15, 0, 0, 0, 0.15, 0, 0, -0.15)
+
+[node name="GrabOctahedron" instance=ExtResource("1_pickable")]
+script = ExtResource("2_script")
+base_color = Color(1, 0.5, 0, 1)
+object_scale = 0.15
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("ConvexPolygonShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_highlight")]

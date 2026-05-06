@@ -43,7 +43,7 @@ var current_color: Color
 var target_color: Color
 var color_transition_speed = 2.0
 
-func _ready():
+func _ready() -> void:
 	_detect_soft_body_type()
 	_setup_soft_body()
 	_setup_physics()
@@ -53,7 +53,7 @@ func _ready():
 	# Start with idle state
 	_change_state(BodyState.IDLE)
 
-func _detect_soft_body_type():
+func _detect_soft_body_type() -> void:
 	# Automatically detect the soft body type from the node name
 	var node_name = name.to_lower()
 	if "sphere" in node_name:
@@ -70,7 +70,7 @@ func _detect_soft_body_type():
 	
 	print("SoftBody: Detected type '%s' from node name '%s'" % [soft_body_type, name])
 
-func _setup_soft_body():
+func _setup_soft_body() -> void:
 	if type_properties.has(soft_body_type):
 		var props = type_properties[soft_body_type]
 		
@@ -88,7 +88,7 @@ func _setup_soft_body():
 	else:
 		print("SoftBody: Warning - Unknown type '%s', using defaults" % soft_body_type)
 
-func _setup_physics():
+func _setup_physics() -> void:
 	# Set up collision layers and masks
 	collision_layer = 1
 	collision_mask = 1
@@ -99,7 +99,7 @@ func _setup_physics():
 	
 	print("SoftBody: %s physics configured at position %s" % [soft_body_type, global_position])
 
-func _setup_colors():
+func _setup_colors() -> void:
 	# Set up fallback colors for each type
 	var fallback_colors = {
 		"sphere": Color(0.2, 0.6, 1.0, 0.8),
@@ -113,7 +113,7 @@ func _setup_colors():
 	
 	print("SoftBody: %s colors initialized" % soft_body_type)
 
-func _setup_interactions():
+func _setup_interactions() -> void:
 	if enable_interaction:
 		# Connect to wind zone
 		var wind_zone = get_node_or_null("../../InteractiveElements/WindZone")
@@ -127,20 +127,20 @@ func _setup_interactions():
 			force_field.body_entered.connect(_on_force_field_entered)
 			force_field.body_exited.connect(_on_force_field_exited)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_update_state(delta)
 	_update_forces(delta)
 	_update_colors(delta)
 	_apply_external_forces(delta)
 	_validate_physics()
 
-func _update_state(delta):
+func _update_state(delta) -> void:
 	state_timer += delta
 	
 	if state_timer >= state_duration:
 		_cycle_to_next_state()
 
-func _cycle_to_next_state():
+func _cycle_to_next_state() -> void:
 	match current_state:
 		BodyState.IDLE:
 			_change_state(BodyState.ACTIVE)
@@ -151,7 +151,7 @@ func _cycle_to_next_state():
 		BodyState.RECOVERING:
 			_change_state(BodyState.IDLE)
 
-func _change_state(new_state: BodyState):
+func _change_state(new_state: BodyState) -> void:
 	current_state = new_state
 	state_timer = 0.0
 	
@@ -167,7 +167,7 @@ func _change_state(new_state: BodyState):
 	
 	print("SoftBody: %s changed to state: %s" % [soft_body_type, BodyState.keys()[new_state]])
 
-func _apply_idle_behavior():
+func _apply_idle_behavior() -> void:
 	# Gentle, subtle movement
 	pressure_coefficient = lerp(pressure_coefficient, type_properties[soft_body_type].pressure, 0.1)
 	
@@ -177,7 +177,7 @@ func _apply_idle_behavior():
 	target_color.r += sin(Time.get_unix_time_from_system()) * 0.1
 	target_color.g += cos(Time.get_unix_time_from_system() * 0.7) * 0.1
 
-func _apply_active_behavior():
+func _apply_active_behavior() -> void:
 	# More dynamic movement
 	pressure_coefficient = lerp(pressure_coefficient, type_properties[soft_body_type].pressure * 1.3, 0.2)
 	
@@ -187,7 +187,7 @@ func _apply_active_behavior():
 	target_color.g = min(target_color.g * 1.2, 1.0)
 	target_color.b = min(target_color.b * 1.2, 1.0)
 
-func _apply_deformed_behavior():
+func _apply_deformed_behavior() -> void:
 	# Maximum deformation
 	pressure_coefficient = lerp(pressure_coefficient, type_properties[soft_body_type].pressure * 1.8, 0.3)
 	
@@ -197,7 +197,7 @@ func _apply_deformed_behavior():
 	target_color.g = min(target_color.g * 1.5, 1.0)
 	target_color.b = min(target_color.b * 1.5, 1.0)
 
-func _apply_recovering_behavior():
+func _apply_recovering_behavior() -> void:
 	# Gradually return to normal
 	pressure_coefficient = lerp(pressure_coefficient, type_properties[soft_body_type].pressure, 0.15)
 	
@@ -210,7 +210,7 @@ func _apply_recovering_behavior():
 	}
 	target_color = fallback_colors.get(soft_body_type, Color.WHITE)
 
-func _update_forces(delta):
+func _update_forces(_delta) -> void:
 	# Apply wind effect
 	if enable_wind_effect and wind_force != Vector3.ZERO:
 		_apply_force(wind_force)
@@ -220,59 +220,59 @@ func _update_forces(delta):
 		var to_center = global_position.direction_to(Vector3.ZERO)
 		_apply_force(to_center * force_field_strength)
 
-func _update_colors(delta):
+func _update_colors(delta) -> void:
 	# Update colors smoothly
 	if current_color != target_color:
 		current_color = current_color.lerp(target_color, color_transition_speed * delta)
 
-func _apply_external_forces(delta):
+func _apply_external_forces(delta) -> void:
 	if external_forces != Vector3.ZERO:
 		_apply_force(external_forces)
 		external_forces = external_forces.lerp(Vector3.ZERO, delta * 2.0)
 
-func _apply_force(force: Vector3):
+func _apply_force(force: Vector3) -> void:
 	"""Apply a force to the soft body using the correct Godot 4 API"""
 	# In Godot 4, we need to apply forces to the physics body
-	if has_method("apply_impulse"):
+	if has_method("apply_external_impulse"):
 		# Apply as impulse if force method not available
-		apply_impulse(force * 0.1)  # Scale down for impulse
+		apply_external_impulse(force * 0.1)  # Scale down for impulse
 	else:
 		# Fallback: try to move the body directly
 		global_position += force * 0.01
 
 # Interactive event handlers
-func _on_wind_zone_entered(body):
+func _on_wind_zone_entered(body) -> void:
 	if body == self:
 		wind_force = Vector3(2.0, 0.0, 1.0)
 		print("SoftBody: %s entered wind zone" % soft_body_type)
 
-func _on_wind_zone_exited(body):
+func _on_wind_zone_exited(body) -> void:
 	if body == self:
 		wind_force = Vector3.ZERO
 		print("SoftBody: %s exited wind zone" % soft_body_type)
 
-func _on_force_field_entered(body):
+func _on_force_field_entered(body) -> void:
 	if body == self:
 		force_field_strength = 5.0
 		print("SoftBody: %s entered force field" % soft_body_type)
 
-func _on_force_field_exited(body):
+func _on_force_field_exited(body) -> void:
 	if body == self:
 		force_field_strength = 0.0
 		print("SoftBody: %s exited force field" % soft_body_type)
 
 # Public API for external control
-func apply_impulse(force: Vector3):
+func apply_external_impulse(force: Vector3) -> void:
 	"""Apply an external impulse to the soft body"""
 	external_forces += force
 	print("SoftBody: %s received impulse: %s" % [soft_body_type, force])
 
-func set_physics_properties(pressure: float):
+func set_physics_properties(pressure: float) -> void:
 	"""Dynamically adjust physics properties"""
 	pressure_coefficient = pressure
 	print("SoftBody: %s physics updated - P:%.2f" % [soft_body_type, pressure])
 
-func reset_to_defaults():
+func reset_to_defaults() -> void:
 	"""Reset to type-specific default properties"""
 	if type_properties.has(soft_body_type):
 		var props = type_properties[soft_body_type]
@@ -280,14 +280,17 @@ func reset_to_defaults():
 		print("SoftBody: %s reset to defaults" % soft_body_type)
 
 # Debug functions
-func print_status():
+func print_status() -> void:
 	print("SoftBody: %s Status:" % soft_body_type)
 	print("  State: %s" % BodyState.keys()[current_state])
 	print("  Physics: P=%.2f" % [pressure_coefficient])
 	print("  Forces: Wind=%s Field=%.2f External=%s" % [wind_force, force_field_strength, external_forces])
 
-func _validate_physics():
+func _validate_physics() -> void:
 	# Ensure the soft body doesn't fall below the floor
 	if global_position.y < -0.5:
 		global_position.y = 1.0
 		print("SoftBody: %s repositioned above floor" % soft_body_type)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,122 @@
+{
+    "name": "Cellular Automata Music",
+    "description": "Generative music from cellular automata rules (Wolfram, Conway). Grid-based pattern evolution, emergent complexity from simple rules, visual-to-sonic mapping.",
+    "style_notes": {
+        "influences": ["Wolfram's Rule 30/110", "Conway's Game of Life", "Xenakis", "generative systems"],
+        "era": "1970-present (algorithmic composition)",
+        "techniques": [
+            "1D cellular automata for rhythm/melody",
+            "2D automata (Game of Life) for harmony",
+            "Rule number as timbral parameter",
+            "Grid state to pitch mapping",
+            "Emergent patterns from simple rules"
+        ],
+        "philosophy": "Complexity emerges from simplicity - the algorithm is the composer"
+    },
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.CELLULAR_MELODY",
+            "volume_db": -8.0,
+            "bus": "Melody"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AUTOMATA_RHYTHM",
+            "volume_db": -6.0,
+            "bus": "Rhythm"
+        },
+        {
+            "sound_id": "AudioSynthesizer.LIFE_HARMONY",
+            "volume_db": -12.0,
+            "bus": "Harmony"
+        }
+    ],
+    "placeholder_layer": {
+        "sound_id": "AudioSynthesizer.GRID_PULSE",
+        "volume_db": -14.0,
+        "bus": "Rhythm",
+        "fade_out_when_ready": true,
+        "fade_duration": 2.0
+    },
+    "random_events": [
+        {
+            "sound_id": "AudioSynthesizer.RULE_CHANGE_BURST",
+            "interval_range": [20.0, 60.0],
+            "volume_db": -10.0,
+            "bus": "FX"
+        },
+        {
+            "sound_id": "AudioSynthesizer.GENERATION_SWEEP",
+            "interval_range": [10.0, 30.0],
+            "volume_db": -12.0,
+            "bus": "FX"
+        }
+    ],
+    "buses": {
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 250,
+                    "feedback": 0.3,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "Rhythm": {
+            "effects": [
+                {
+                    "type": "Compressor",
+                    "threshold_db": -10.0,
+                    "ratio": 3.0
+                }
+            ]
+        },
+        "Harmony": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4
+                },
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.4,
+                    "depth": 0.2,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.5
+                }
+            ]
+        }
+    },
+    "generation": {
+        "async": true,
+        "persist_across_maps": false
+    },
+    "synthesis_parameters": {
+        "automata_type": "1d_elementary",
+        "rule_number": 30,
+        "grid_width": 16,
+        "generations_per_bar": 4,
+        "pitch_mapping": {
+            "scale": "pentatonic_minor",
+            "root_midi": 48,
+            "cell_on": "note_on",
+            "cell_off": "rest"
+        },
+        "rhythm_subdivision": 16,
+        "life_grid_size": 8,
+        "life_to_harmony": {
+            "cell_count_to_chord_density": true,
+            "pattern_to_inversion": true
+        },
+        "evolution_rate_hz": 4.0
+    }
+}

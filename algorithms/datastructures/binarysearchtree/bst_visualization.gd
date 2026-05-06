@@ -36,10 +36,10 @@ class TreeNode:
 	var position_3d: Vector3 = Vector3.ZERO
 	var level: int = 0
 	
-	func _init(val: int):
+	func _init(val: int) -> void:
 		value = val
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_ui()
 	
@@ -47,7 +47,7 @@ func _ready():
 		for val in initial_values:
 			queue_insert(val)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if operation_queue.size() > 0 and current_operation.is_empty():
 		current_operation = operation_queue.pop_front()
 		operation_timer = 0.0
@@ -58,7 +58,7 @@ func _process(delta):
 			execute_current_operation()
 			operation_timer = 0.0
 
-func setup_environment():
+func setup_environment() -> void:
 	# Lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
@@ -77,28 +77,28 @@ func setup_environment():
 	# Camera
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 10, 15)
-	camera.look_at(Vector3.ZERO)
+	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
-func queue_insert(value: int):
+func queue_insert(value: int) -> void:
 	operation_queue.append({
 		"type": "insert",
 		"value": value
 	})
 
-func queue_delete(value: int):
+func queue_delete(value: int) -> void:
 	operation_queue.append({
 		"type": "delete", 
 		"value": value
 	})
 
-func queue_traversal(type: String):
+func queue_traversal(type: String) -> void:
 	operation_queue.append({
 		"type": "traversal",
 		"traversal_type": type  # "inorder", "preorder", "postorder"
 	})
 
-func execute_current_operation():
+func execute_current_operation() -> void:
 	match current_operation.type:
 		"insert":
 			insert_value(current_operation.value)
@@ -109,7 +109,7 @@ func execute_current_operation():
 	
 	current_operation.clear()
 
-func insert_value(value: int):
+func insert_value(value: int) -> void:
 	if root == null:
 		root = TreeNode.new(value)
 		root.level = 0
@@ -123,7 +123,7 @@ func insert_value(value: int):
 	
 	print("Inserted: ", value)
 
-func insert_recursive(node: TreeNode, new_node: TreeNode):
+func insert_recursive(node: TreeNode, new_node: TreeNode) -> void:
 	if new_node.value < node.value:
 		if node.left == null:
 			node.left = new_node
@@ -137,7 +137,7 @@ func insert_recursive(node: TreeNode, new_node: TreeNode):
 		else:
 			insert_recursive(node.right, new_node)
 
-func delete_value(value: int):
+func delete_value(value: int) -> void:
 	root = delete_recursive(root, value)
 	calculate_positions()
 	print("Deleted: ", value)
@@ -175,7 +175,7 @@ func find_min(node: TreeNode) -> TreeNode:
 		node = node.left
 	return node
 
-func create_node_visual(node: TreeNode):
+func create_node_visual(node: TreeNode) -> void:
 	# Create sphere mesh
 	var mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
@@ -200,11 +200,11 @@ func create_node_visual(node: TreeNode):
 	mesh_instance.add_child(label)
 	node.text_label = label
 
-func update_node_visual(node: TreeNode):
+func update_node_visual(node: TreeNode) -> void:
 	if node.text_label:
 		node.text_label.text = str(node.value)
 
-func calculate_positions():
+func calculate_positions() -> void:
 	if root == null:
 		return
 	
@@ -225,7 +225,7 @@ func calculate_positions():
 	if show_connections:
 		update_connections()
 
-func collect_inorder_positions(node: TreeNode, positions: Array):
+func collect_inorder_positions(node: TreeNode, positions: Array) -> void:
 	if node == null:
 		return
 	
@@ -233,10 +233,10 @@ func collect_inorder_positions(node: TreeNode, positions: Array):
 	positions.append(node)
 	collect_inorder_positions(node.right, positions)
 
-func update_visual_positions():
+func update_visual_positions() -> void:
 	update_positions_recursive(root)
 
-func update_positions_recursive(node: TreeNode):
+func update_positions_recursive(node: TreeNode) -> void:
 	if node == null:
 		return
 	
@@ -246,7 +246,7 @@ func update_positions_recursive(node: TreeNode):
 	update_positions_recursive(node.left)
 	update_positions_recursive(node.right)
 
-func update_connections():
+func update_connections() -> void:
 	# Remove old connection lines
 	for child in get_children():
 		if child.name.begins_with("Connection"):
@@ -255,7 +255,7 @@ func update_connections():
 	# Create new connection lines
 	create_connections_recursive(root)
 
-func create_connections_recursive(node: TreeNode):
+func create_connections_recursive(node: TreeNode) -> void:
 	if node == null:
 		return
 	
@@ -267,7 +267,7 @@ func create_connections_recursive(node: TreeNode):
 		create_connection_line(node.position_3d, node.right.position_3d)
 		create_connections_recursive(node.right)
 
-func create_connection_line(from: Vector3, to: Vector3):
+func create_connection_line(from: Vector3, to: Vector3) -> void:
 	var line = MeshInstance3D.new()
 	line.name = "Connection"
 	
@@ -285,12 +285,12 @@ func create_connection_line(from: Vector3, to: Vector3):
 	# Position and orient line
 	var center = (from + to) / 2
 	line.position = center
-	line.look_at(to, Vector3.UP)
+	line.look_at_from_position(line.position, to, Vector3.UP)
 	line.scale.y = from.distance_to(to)
 	
 	add_child(line)
 
-func start_traversal(traversal_type: String):
+func start_traversal(traversal_type: String) -> void:
 	var traversal_order = []
 	
 	match traversal_type:
@@ -304,7 +304,7 @@ func start_traversal(traversal_type: String):
 	print("Traversal (", traversal_type, "): ", traversal_order)
 	animate_traversal(traversal_order)
 
-func inorder_traversal(node: TreeNode, order: Array):
+func inorder_traversal(node: TreeNode, order: Array) -> void:
 	if node == null:
 		return
 	
@@ -312,7 +312,7 @@ func inorder_traversal(node: TreeNode, order: Array):
 	order.append(node.value)
 	inorder_traversal(node.right, order)
 
-func preorder_traversal(node: TreeNode, order: Array):
+func preorder_traversal(node: TreeNode, order: Array) -> void:
 	if node == null:
 		return
 	
@@ -320,7 +320,7 @@ func preorder_traversal(node: TreeNode, order: Array):
 	preorder_traversal(node.left, order)
 	preorder_traversal(node.right, order)
 
-func postorder_traversal(node: TreeNode, order: Array):
+func postorder_traversal(node: TreeNode, order: Array) -> void:
 	if node == null:
 		return
 	
@@ -328,7 +328,7 @@ func postorder_traversal(node: TreeNode, order: Array):
 	postorder_traversal(node.right, order)
 	order.append(node.value)
 
-func animate_traversal(order: Array):
+func animate_traversal(order: Array) -> void:
 	# Simple animation - could be enhanced to show step-by-step highlighting
 	for i in range(order.size()):
 		var node = find_node_with_value(root, order[i])
@@ -349,7 +349,7 @@ func find_node_with_value(node: TreeNode, value: int) -> TreeNode:
 	else:
 		return find_node_with_value(node.right, value)
 
-func setup_ui():
+func setup_ui() -> void:
 	var canvas = CanvasLayer.new()
 	add_child(canvas)
 	
@@ -363,4 +363,13 @@ func setup_ui():
 	controls_label.position = Vector2(20, 50)
 	controls_label.text = "Auto-inserting values..."
 	canvas.add_child(controls_label)
-	ui_labels.append(controls_label) 
+	ui_labels.append(controls_label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

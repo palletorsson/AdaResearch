@@ -1,0 +1,59 @@
+{
+  "id": "morph05_chair_recursive_seat",
+  "family": "chair",
+  "notes": "A seat body keeps its broad slab, drops four corner legs, then folds its rear band upward into a backrest instead of attaching a separate mesh.",
+  "camera_yaw": 0.88,
+  "camera_pitch": 0.38,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.18,
+      0.22,
+      1.02
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 4,
+  "rules": [
+    {
+      "id": "seat_to_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.92,
+        "scale": 0.23
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.58
+    },
+    {
+      "id": "seat_to_backrest",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "up",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 1,
+        "rows": 2,
+        "select": "back_row",
+        "length": 0.82,
+        "scale": 0.98
+      },
+      "child_role": "wall",
+      "budget_factor": 0.42
+    }
+  ],
+  "render_mode": "wireframe"
+}

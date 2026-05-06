@@ -1,0 +1,1 @@
+Gold tesserae were set at slight angles so they'd catch light differently depending on where you stand. This map treats Byzantine gold-ground mosaics as a problem of directional reflection — tessera tilt becomes a shader parameter, and the image shifts with the viewer. Pattern here is not fixed; it depends on who is looking and from where.

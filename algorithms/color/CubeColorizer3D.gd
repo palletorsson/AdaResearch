@@ -41,13 +41,13 @@ var colors = {
 	"yellow_green": Color(0.6, 0.7, 0.3)  # Yellow-green
 }
 
-func _ready():
+func _ready() -> void:
 	print("CubeColorizer3D: Ready to colorize cubes!")
 	# Small delay to ensure scene is fully loaded
 	await get_tree().create_timer(0.5).timeout
 	colorize_all_cubes()
 
-func colorize_all_cubes():
+func colorize_all_cubes() -> void:
 	print("CubeColorizer3D: Starting cube colorization...")
 	
 	# Find all MeshInstance3D nodes with "cube" in their name
@@ -75,7 +75,7 @@ func find_all_cube_meshes() -> Array[MeshInstance3D]:
 	
 	return cube_meshes
 
-func find_cube_meshes_recursive(node: Node, cube_list: Array[MeshInstance3D]):
+func find_cube_meshes_recursive(node: Node, cube_list: Array[MeshInstance3D]) -> void:
 	# Check if this node is a MeshInstance3D with "cube" in its name
 	if node is MeshInstance3D and "cube" in node.name.to_lower():
 		cube_list.append(node as MeshInstance3D)
@@ -115,7 +115,7 @@ func sort_cubes_by_3d_position(cubes: Array[MeshInstance3D]) -> Array[MeshInstan
 	
 	return cubes
 
-func apply_pattern_to_cubes(cubes: Array[MeshInstance3D]):
+func apply_pattern_to_cubes(cubes: Array[MeshInstance3D]) -> void:
 	print("CubeColorizer3D: Applying rose vase pattern to %d cubes..." % cubes.size())
 	
 	var cube_index = 0
@@ -144,7 +144,7 @@ func apply_pattern_to_cubes(cubes: Array[MeshInstance3D]):
 	
 	print("CubeColorizer3D: Successfully colored %d cubes!" % colored_count)
 
-func apply_color_to_mesh(mesh_instance: MeshInstance3D, color: Color, color_name: String):
+func apply_color_to_mesh(mesh_instance: MeshInstance3D, color: Color, color_name: String) -> void:
 	# Create a new StandardMaterial3D and apply the color
 	var material = StandardMaterial3D.new()
 	material.albedo_color = color
@@ -160,7 +160,7 @@ func apply_color_to_mesh(mesh_instance: MeshInstance3D, color: Color, color_name
 
 # Utility functions for manual control
 
-func reset_all_cube_colors():
+func reset_all_cube_colors() -> void:
 	"""Reset all cube colors to default"""
 	print("CubeColorizer3D: Resetting all cube colors...")
 	var cubes = find_all_cube_meshes()
@@ -170,7 +170,7 @@ func reset_all_cube_colors():
 	
 	print("CubeColorizer3D: Reset %d cubes" % cubes.size())
 
-func test_all_red():
+func test_all_red() -> void:
 	"""Make all cubes red for testing"""
 	print("CubeColorizer3D: Making all cubes red...")
 	var cubes = find_all_cube_meshes()
@@ -180,7 +180,7 @@ func test_all_red():
 	
 	print("CubeColorizer3D: Made %d cubes red" % cubes.size())
 
-func test_rainbow():
+func test_rainbow() -> void:
 	"""Apply rainbow colors for testing"""
 	print("CubeColorizer3D: Applying rainbow colors...")
 	var cubes = find_all_cube_meshes()
@@ -192,11 +192,11 @@ func test_rainbow():
 	
 	print("CubeColorizer3D: Applied rainbow to %d cubes" % cubes.size())
 
-func reapply_pattern():
+func reapply_pattern() -> void:
 	"""Reapply the rose vase pattern"""
 	colorize_all_cubes()
 
-func debug_cube_info():
+func debug_cube_info() -> void:
 	"""Print detailed information about found cubes"""
 	print("CubeColorizer3D: === CUBE DEBUG INFO ===")
 	var cubes = find_all_cube_meshes()

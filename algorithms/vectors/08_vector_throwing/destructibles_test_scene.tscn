@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3ueix3lm7a2x"]
+
+[ext_resource type="Script" uid="uid://dqieijnegkp0l" path="res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.gd" id="1_script"]
+
+[node name="DestructiblesTestScene" type="Node3D"]
+script = ExtResource("1_script")

@@ -1,0 +1,98 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Profile",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 10
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.11,
+  "breath_zones": [
+    {
+      "size": 85,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 10
+      },
+      "centroid": [
+        4.952941176470588,
+        4.741176470588235
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "profile"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "profile_beat"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "profile_brownian"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "profile_damped"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "profile_lissajous"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "profile_noise"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "profile_noise_octaves"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "profile_random_walk"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "profile_saw"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "profile_spring"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "profile_square"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "profile_triangle"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 12,
+    "walkable_cells": 109,
+    "breath_zone_count": 1,
+    "unique_tokens": 12
+  }
+}

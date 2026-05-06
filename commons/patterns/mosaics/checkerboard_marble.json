@@ -1,0 +1,28 @@
+{
+  "name": "Checkerboard Marble",
+  "type": "mosaic_composite",
+  "technique": "opus_tessellatum",
+  "period": "roman_imperial",
+  "palette": ["#2B2926", "#E8DCC8"],
+  "aging": {
+    "grout_width": 0.03,
+    "wear_amount": 0.25,
+    "crack_density": 0.0
+  },
+  "rings": [
+    { "type": "separator", "width": 2, "color_index": 0 },
+    { "type": "separator", "width": 1, "color_index": 1 },
+    { "type": "separator", "width": 1, "color_index": 0 }
+  ],
+  "zones": {
+    "field": {
+      "motif": "checkerboard",
+      "group": "P4M",
+      "domain_size": 2,
+      "domain": [
+        [0, 1],
+        [1, 0]
+      ]
+    }
+  }
+}

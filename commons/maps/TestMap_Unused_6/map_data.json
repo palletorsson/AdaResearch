@@ -1,0 +1,45 @@
+{
+  "map_info": {
+    "name": "TestMap_Unused_6",
+    "lookup_name": "TestMap_Unused_6",
+    "description": "Test map for artifacts: dual_display_test, env_one, evolutionary_algorithms, extreme_randomness",
+    "dimensions": {
+      "width": 5,
+      "depth": 5,
+      "max_height": 3
+    }
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next Lesson",
+      "description": "Continue to the next algorithm demonstration",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","0","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," ","s"," "," "],
+      [" "," "," "," "," "],
+      [" "," ","t"," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "],
+      [" ","dual_display_test:0:2"," ","env_one:0:2"," "],
+      [" "," "," "," "," "],
+      [" ","evolutionary_algorithms:0:2"," ","extreme_randomness:0:2"," "],
+      [" "," "," "," "," "]
+    ]
+  }
+}

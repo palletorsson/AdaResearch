@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://5ruomhsxmw3r"]
+
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1_gno66"]
+[ext_resource type="PackedScene" uid="uid://b3wn56kir0avm" path="res://commons/primitives/panels/DigitalPaper/TextUIControl.tscn" id="2_wcv8x"]
+[ext_resource type="Material" uid="uid://bhj8fob2pxx4l" path="res://commons/scenes/main_menu/objects/settings_ui_material.tres" id="3_prsvp"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="4_5gdvt"]
+[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="5_801ff"]
+[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="6_57yjn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lidq2"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.364706)
+
+[sub_resource type="BoxMesh" id="1"]
+size = Vector3(0.7, 0.7, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7u64y"]
+size = Vector3(1.1935638, 1.1614411, 0.16576621)
+
+[node name="textDisplay" type="Node3D"]
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("1_gno66")]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -0.009103626, -0.0011309981, -0.007540345)
+screen_size = Vector2(1, 1)
+scene = ExtResource("2_wcv8x")
+viewport_size = Vector2(1000, 1000)
+unshaded = true
+
+[node name="Screen2" type="MeshInstance3D" parent="Viewport2Din3D"]
+transform = Transform3D(1.46, 0, 0, 0, 1.48, -2.01367e-08, 0, 2.98023e-08, 1, 0, 0, -0.0133978)
+material_override = SubResource("StandardMaterial3D_lidq2")
+mesh = SubResource("1")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_prsvp")
+
+[node name="HandPoseArea" parent="." instance=ExtResource("4_5gdvt")]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+monitoring = true
+left_pose = ExtResource("5_801ff")
+right_pose = ExtResource("6_57yjn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
+transform = Transform3D(1, 0, 0, 0, 1.0000004, 0, 0, 0, 1.0000004, -0.048484847, 0.07342761, -0.22125357)
+shape = SubResource("BoxShape3D_7u64y")

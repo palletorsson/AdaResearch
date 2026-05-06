@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Primitives_Polythedra",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 7,
+    "d": 9
+  },
+  "signature": "grab_trihedron for direct manipulation of the spatial corner; snap_tetrahedron_puzzle for assembling the first closed solid; pyramid_edit for modifying the emergent volume.",
+  "style": null,
+  "echoes": [],
+  "density": 0.021,
+  "breath_zones": [
+    {
+      "size": 43,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        2.86046511627907,
+        3.6744186046511627
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 48,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

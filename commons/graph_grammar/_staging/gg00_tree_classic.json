@@ -1,0 +1,30 @@
+{
+  "id": "gg00_tree_classic",
+  "notes": "Iterative branching \u00e2\u20ac\u201d each generation spawns 3 children from every leaf.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 4,
+  "color": [
+    0.45,
+    0.28,
+    0.18
+  ],
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.9,
+        "spread_deg": 35,
+        "radius_decay": 0.65
+      }
+    }
+  ]
+}

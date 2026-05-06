@@ -1,29 +1,53 @@
+## ============================================================================
+## RecommendationSystems.gd — Interactive Recommendation Systems Visualization
+## Demonstrates collaborative filtering, content-based, and hybrid recommendation
+## engines with animated user-item matching, data flow, and live metric tracking.
+## ============================================================================
 extends Node3D
 
+# ── Runtime UI Controls ──────────────────────────────────────────────────────
+@export_range(0.0, 1.0, 0.01) var recommendation_progress: float = 0.0:
+	set(v):
+		recommendation_progress = clamp(v, 0.0, 1.0)
+		_on_progress_changed()
+
+@export_range(0.0, 1.0, 0.01) var precision_score: float = 0.0:
+	set(v):
+		precision_score = clamp(v, 0.0, 1.0)
+
+@export_range(0.0, 1.0, 0.01) var recall_score: float = 0.0:
+	set(v):
+		recall_score = clamp(v, 0.0, 1.0)
+
+@export_range(5, 40, 1) var particle_count: int = 15
+@export_range(0.1, 3.0, 0.1) var animation_speed: float = 1.0
+@export var auto_progress: bool = true  ## Automatically advance progress over time
+
+# ── Internal State ───────────────────────────────────────────────────────────
 var time: float = 0.0
-var recommendation_progress: float = 0.0
-var precision_score: float = 0.0
-var recall_score: float = 0.0
-var particle_count: int = 15
 var flow_particles: Array = []
 var user_particles: Array = []
 var item_particles: Array = []
+var _stats_label: Label3D = null
+var _match_lines: Array = []  ## Lines connecting matched user-item pairs
 
-func _ready():
+func _ready() -> void:
 	# Initialize Recommendation Systems visualization
 	print("Recommendation Systems Visualization initialized")
 	create_user_particles()
 	create_item_particles()
 	create_flow_particles()
 	setup_recommendation_metrics()
+	_create_stats_label()
 
-func _process(delta):
-	time += delta
+func _process(delta: float) -> void:
+	time += delta * animation_speed
 	
-	# Simulate recommendation progress
-	recommendation_progress = min(1.0, time * 0.1)
-	precision_score = recommendation_progress * 0.9
-	recall_score = recommendation_progress * 0.85
+	# ── Auto-advance progress if enabled ─────────────────────────────────
+	if auto_progress:
+		recommendation_progress = min(1.0, time * 0.1)
+		precision_score = recommendation_progress * 0.9
+		recall_score = recommendation_progress * 0.85
 	
 	animate_users(delta)
 	animate_recommendation_engine(delta)
@@ -31,17 +55,21 @@ func _process(delta):
 	animate_user_item_matrix(delta)
 	animate_data_flow(delta)
 	update_recommendation_metrics(delta)
+	_update_stats_label()
 
-func create_user_particles():
-	# Create user profile particles
+func create_user_particles() -> void:
+	## Create user profile particles — purple spheres representing individual users
 	var user_profiles = $Users/UserProfiles
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.08
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.2, 0.8, 1)
+		particle.material_override.albedo_color = Color(0.3, 0.5, 0.9, 1)  # Blue for data
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.2, 0.8, 1) * 0.3
+		particle.material_override.emission = Color(0.3, 0.5, 0.9, 1) * 0.5
+		particle.material_override.emission_energy_multiplier = 1.5
+		particle.material_override.metallic = 0.4
+		particle.material_override.roughness = 0.3
 		
 		# Position particles in a cluster around users
 		var x = randf_range(-1.5, 1.5)
@@ -52,16 +80,19 @@ func create_user_particles():
 		user_profiles.add_child(particle)
 		user_particles.append(particle)
 
-func create_item_particles():
-	# Create item catalog particles
+func create_item_particles() -> void:
+	## Create item catalog particles — cyan spheres representing available items
 	var item_catalog = $Items/ItemCatalog
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.08
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.2, 0.8, 0.8, 1)
+		particle.material_override.albedo_color = Color(0.3, 0.85, 0.4, 1)  # Green for items
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.2, 0.8, 0.8, 1) * 0.3
+		particle.material_override.emission = Color(0.3, 0.85, 0.4, 1) * 0.5
+		particle.material_override.emission_energy_multiplier = 1.5
+		particle.material_override.metallic = 0.4
+		particle.material_override.roughness = 0.3
 		
 		# Position particles in a cluster around items
 		var x = randf_range(-1.5, 1.5)
@@ -72,16 +103,19 @@ func create_item_particles():
 		item_catalog.add_child(particle)
 		item_particles.append(particle)
 
-func create_flow_particles():
-	# Create data flow particles
+func create_flow_particles() -> void:
+	## Create data flow particles — gold spheres flowing through the recommendation pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(30):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.05
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
+		particle.material_override.albedo_color = Color(1.0, 0.85, 0.2, 1)  # Gold for data flow
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.3
+		particle.material_override.emission = Color(1.0, 0.85, 0.2, 1) * 0.6
+		particle.material_override.emission_energy_multiplier = 2.0
+		particle.material_override.metallic = 0.6
+		particle.material_override.roughness = 0.2
 		
 		# Position particles along the recommendation flow path
 		var progress = float(i) / 30
@@ -92,7 +126,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_recommendation_metrics():
+func setup_recommendation_metrics() -> void:
 	# Initialize recommendation metrics
 	var precision_indicator = $RecommendationMetrics/PrecisionMeter/PrecisionIndicator
 	var recall_indicator = $RecommendationMetrics/RecallMeter/RecallIndicator
@@ -101,8 +135,10 @@ func setup_recommendation_metrics():
 	if recall_indicator:
 		recall_indicator.position.x = 0  # Start at middle
 
-func animate_users(delta):
-	# Animate user particles
+## ── User & Item Animation ────────────────────────────────────────────────────
+
+func animate_users(delta) -> void:
+	## Animate user particles in flowing cluster patterns with progress-based pulsing
 	for i in range(user_particles.size()):
 		var particle = user_particles[i]
 		if particle:
@@ -119,8 +155,10 @@ func animate_users(delta):
 			var pulse = 1.0 + sin(time * 2.0 + i * 0.2) * 0.2 * recommendation_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_recommendation_engine(delta):
-	# Animate recommendation engine core
+## ── Recommendation Engine Animation ──────────────────────────────────────────
+
+func animate_recommendation_engine(delta) -> void:
+	## Animate the central engine and its sub-method cores (collaborative, content-based, hybrid)
 	var engine_core = $RecommendationEngine/EngineCore
 	if engine_core:
 		# Rotate engine
@@ -147,7 +185,7 @@ func animate_recommendation_engine(delta):
 		
 		if collaborative_core.material_override:
 			var intensity = 0.3 + collaborative_activation * 0.7
-			collaborative_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
+			collaborative_core.material_override.emission = Color(0.9, 0.3, 0.3, 1) * intensity
 	
 	var content_based_core = $RecommendationEngine/RecommendationMethods/ContentBasedCore
 	if content_based_core:
@@ -160,7 +198,7 @@ func animate_recommendation_engine(delta):
 		
 		if content_based_core.material_override:
 			var intensity = 0.3 + content_activation * 0.7
-			content_based_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
+			content_based_core.material_override.emission = Color(0.3, 0.5, 0.9, 1) * intensity
 	
 	var hybrid_core = $RecommendationEngine/RecommendationMethods/HybridCore
 	if hybrid_core:
@@ -173,9 +211,9 @@ func animate_recommendation_engine(delta):
 		
 		if hybrid_core.material_override:
 			var intensity = 0.3 + hybrid_activation * 0.7
-			hybrid_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
+			hybrid_core.material_override.emission = Color(1.0, 0.85, 0.2, 1) * intensity  # Gold for hybrid
 
-func animate_items(delta):
+func animate_items(delta) -> void:
 	# Animate item particles
 	for i in range(item_particles.size()):
 		var particle = item_particles[i]
@@ -193,7 +231,7 @@ func animate_items(delta):
 			var pulse = 1.0 + sin(time * 2.2 + i * 0.15) * 0.2 * recommendation_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_user_item_matrix(delta):
+func animate_user_item_matrix(delta) -> void:
 	# Animate user-item matrix core
 	var matrix_core = $UserItemMatrix/MatrixCore
 	if matrix_core:
@@ -209,8 +247,10 @@ func animate_user_item_matrix(delta):
 			var intensity = 0.3 + recommendation_progress * 0.7
 			matrix_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_data_flow(delta):
-	# Animate flow particles
+## ── Data Flow Animation ──────────────────────────────────────────────────────
+
+func animate_data_flow(delta) -> void:
+	## Animate gold flow particles traveling through the recommendation pipeline
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
 		if particle:
@@ -233,8 +273,10 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * recommendation_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_recommendation_metrics(delta):
-	# Update precision meter
+## ── Metrics Animation ────────────────────────────────────────────────────────
+
+func update_recommendation_metrics(delta) -> void:
+	## Update precision and recall meter indicators with color-coded feedback
 	var precision_indicator = $RecommendationMetrics/PrecisionMeter/PrecisionIndicator
 	if precision_indicator:
 		var target_x = lerp(-2, 2, precision_score)
@@ -256,13 +298,15 @@ func update_recommendation_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - recall_score)
 		recall_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_recommendation_progress(progress: float):
+# ── Public API ───────────────────────────────────────────────────────────────
+
+func set_recommendation_progress(progress: float) -> void:
 	recommendation_progress = clamp(progress, 0.0, 1.0)
 
-func set_precision_score(precision: float):
+func set_precision_score(precision: float) -> void:
 	precision_score = clamp(precision, 0.0, 1.0)
 
-func set_recall_score(recall: float):
+func set_recall_score(recall: float) -> void:
 	recall_score = clamp(recall, 0.0, 1.0)
 
 func get_recommendation_progress() -> float:
@@ -274,8 +318,56 @@ func get_precision_score() -> float:
 func get_recall_score() -> float:
 	return recall_score
 
-func reset_recommendation():
+func reset_recommendation() -> void:
 	time = 0.0
 	recommendation_progress = 0.0
 	precision_score = 0.0
 	recall_score = 0.0
+	# Animate reset with a tween pulse on the engine
+	var engine_core = $RecommendationEngine/EngineCore
+	if engine_core:
+		var tween = create_tween()
+		tween.tween_property(engine_core, "scale", Vector3.ONE * 1.5, 0.15)
+		tween.tween_property(engine_core, "scale", Vector3.ONE, 0.3)
+
+# ── Stats Label & Visual Feedback ────────────────────────────────────────────
+
+func _create_stats_label() -> void:
+	## Creates a floating 3D label that shows live recommendation stats
+	_stats_label = Label3D.new()
+	_stats_label.text = "Initializing..."
+	_stats_label.font_size = 48
+	_stats_label.modulate = Color(1.0, 0.85, 0.2, 1.0)
+	_stats_label.outline_modulate = Color(0, 0, 0, 0.8)
+	_stats_label.outline_size = 8
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_stats_label.position = Vector3(0, 4.5, 0)
+	_stats_label.no_depth_test = true
+	add_child(_stats_label)
+
+func _update_stats_label() -> void:
+	if _stats_label:
+		_stats_label.text = "Recommendation Systems\nProgress: %d%%  |  Precision: %.0f%%  |  Recall: %.0f%%" % [
+			recommendation_progress * 100,
+			precision_score * 100,
+			recall_score * 100
+		]
+
+func _on_progress_changed() -> void:
+	## Visual feedback when progress changes — pulse the engine core with gold glow
+	var engine_core = $RecommendationEngine/EngineCore
+	if engine_core and engine_core.material_override:
+		var tween = create_tween()
+		tween.tween_property(engine_core.material_override, "emission",
+			Color(1.0, 0.85, 0.2) * 1.5, 0.15)
+		tween.tween_property(engine_core.material_override, "emission",
+			Color(0.3, 0.85, 0.4) * (0.3 + recommendation_progress * 0.7), 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,3 @@
+Your eight boids meet their swarm. Two flocks in one space. The same rules on both sides. The miura dances with you.
+
+This is the catalyst chamber for Swarm Intelligence — where collective behavior meets collective behavior. The catalyst mode is swarm: your projectile is not one object but a flock of eight boids running Reynolds' rules. The `swarm_hive` creature has its own flock running the same rules, and the interaction is two self-organizing systems overlapping in one volume. The Science Screen scatters the encounter across alignment and cohesion axes so you can read the coupling. The miura arrives curious rather than hostile, testing whether another swarm operates in its territory. Neither flock controls the interaction; both are controlled by the rules they share.

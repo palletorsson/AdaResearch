@@ -1,0 +1,41 @@
+{
+  "map": "CriticalAlgorithms_Bias_Gallery",
+  "edge": "D",
+  "shots": {
+    "above": "plate_critique_shots\\CriticalAlgorithms_Bias_Gallery\\above.png",
+    "front": "plate_critique_shots\\CriticalAlgorithms_Bias_Gallery\\front.png",
+    "left": "plate_critique_shots\\CriticalAlgorithms_Bias_Gallery\\left.png",
+    "right": "plate_critique_shots\\CriticalAlgorithms_Bias_Gallery\\right.png",
+    "back": "plate_critique_shots\\CriticalAlgorithms_Bias_Gallery\\back.png"
+  },
+  "result": {
+    "model": "claude-sonnet-4-5",
+    "critique": {
+      "score": 2,
+      "verdict": "empty gallery",
+      "paragraph": "The map reads as a sparse exhibition floor rather than a teaching plate. Edge D requires visible sorting, categorization, and exclusion\u2014a Vesalius-cousin diagram where the unlabeled region becomes the argument. This space has the grid infrastructure (pink lines suggesting measurement, categorization) but no central artifact demonstrating what the algorithm fails to see. The scattered dots in the corner hint at data points but don't construct a legible claim about representational silence. A player would cross this room without encountering the edge spatially.",
+      "strengths": [
+        "Grid floor establishes measurement/categorization framework",
+        "Dark surface provides negative space for contrast",
+        "Scattered elements (if data points) gesture toward categorization"
+      ],
+      "weaknesses": [
+        "No teaching artifact that demonstrates representational silence",
+        "No sorting mechanism, labeled categories, or exclusion visible",
+        "Too sparse to function as a Haeckel-style diagram-as-argument",
+        "Player path encounters no spatial claim about what algorithms don't see",
+        "Missing the frame-in-frame or labeled-diagram-with-gap pattern"
+      ],
+      "next_gen_hints": [
+        "Add central sorting artifact: a classifier with labeled bins where the player category is conspicuously absent",
+        "Use Vesalius pattern: place a detailed anatomical/typological diagram with one region deliberately unlabeled or greyed out",
+        "Show feature extraction visually: pedestals measuring height, color, shape\u2014with visible gaps in what's measured",
+        "Position unlabeled silhouette or data point at path center, surrounded by fully-labeled examples",
+        "Consider boolean-cut vocabulary: show the positive space of categories, make the excluded region a literal void",
+        "Add weight: the plate should be dense enough to read as diagram, not empty stage"
+      ],
+      "edge_reads_as": "unclear"
+    },
+    "raw": "```json\n{\n  \"score\": 2,\n  \"verdict\": \"empty gallery\",\n  \"paragraph\": \"The map reads as a sparse exhibition floor rather than a teaching plate. Edge D requires visible sorting, categorization, and exclusion\u2014a Vesalius-cousin diagram where the unlabeled region becomes the argument. This space has the grid infrastructure (pink lines suggesting measurement, categorization) but no central artifact demonstrating what the algorithm fails to see. The scattered dots in the corner hint at data points but don't construct a legible claim about representational silence. A player would cross this room without encountering the edge spatially.\",\n  \"strengths\": [\n    \"Grid floor establishes measurement/categorization framework\",\n    \"Dark surface provides negative space for contrast\",\n    \"Scattered elements (if data points) gesture toward categorization\"\n  ],\n  \"weaknesses\": [\n    \"No teaching artifact that demonstrates representational silence\",\n    \"No sorting mechanism, labeled categories, or exclusion visible\",\n    \"Too sparse to function as a Haeckel-style diagram-as-argument\",\n    \"Player path encounters no spatial claim about what algorithms don't see\",\n    \"Missing the frame-in-frame or labeled-diagram-with-gap pattern\"\n  ],\n  \"next_gen_hints\": [\n    \"Add central sorting artifact: a classifier with labeled bins where the player category is conspicuously absent\",\n    \"Use Vesalius pattern: place a detailed anatomical/typological diagram with one region deliberately unlabeled or greyed out\",\n    \"Show feature extraction visually: pedestals measuring height, color, shape\u2014with visible gaps in what's measured\",\n    \"Position unlabeled silhouette or data point at path center, surrounded by fully-labeled examples\",\n    \"Consider boolean-cut vocabulary: show the positive space of categories, make the excluded region a literal void\",\n    \"Add weight: the plate should be dense enough to read as diagram, not empty stage\"\n  ],\n  \"edge_reads_as\": \"unclear\"\n}\n```"
+  }
+}

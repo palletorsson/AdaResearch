@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cedgchsorb002"]
+
+[ext_resource type="Script" path="res://commons/interfaces/qfep/edge_of_chaos_orb.gd" id="1_script"]
+
+[node name="EdgeOfChaosOrb" type="Node3D"]
+script = ExtResource("1_script")

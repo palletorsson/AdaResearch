@@ -30,7 +30,7 @@ func setup_cryogenic_unit():
 	add_to_group('preservation_devices')
 	
 	# Set initial cryo chamber appearance
-	cryo_chamber.material_override.emission_energy = 0.3
+	cryo_chamber.material_override.emission_energy_multiplier = 0.3
 
 func initialize_cooling_systems():
 	print('❄️ CRYOGENIC UNIT: Cooling systems initializing...')
@@ -106,7 +106,7 @@ func update_temperature_visuals():
 	
 	# Chamber frost intensity
 	var frost_intensity = (-cryo_temperature / 200.0) * 0.8
-	cryo_chamber.material_override.emission_energy = frost_intensity
+	cryo_chamber.material_override.emission_energy_multiplier = frost_intensity
 
 func _on_area_3d_body_entered(body):
 	if body.is_in_group('player'):
@@ -125,7 +125,7 @@ func activate_cryogenic_system():
 func initiate_cooling(progress: float):
 	# Visual feedback during cooling activation
 	var mist_intensity = progress * 1.5
-	cryo_mist.material_override.emission_energy = mist_intensity
+	cryo_mist.material_override.emission_energy_multiplier = mist_intensity
 	
 	# Specimen capsule frost buildup
 	var frost_buildup = progress * 0.6
@@ -140,8 +140,8 @@ func trigger_temperature_warning():
 	# Flash warning indicators
 	var warning_tween = create_tween()
 	warning_tween.set_loops(3)
-	warning_tween.tween_property(temperature_display, 'material_override:emission_energy', 3.0, 0.2)
-	warning_tween.tween_property(temperature_display, 'material_override:emission_energy', 1.0, 0.2)
+	warning_tween.tween_property(temperature_display, 'material_override:emission_energy_multiplier', 3.0, 0.2)
+	warning_tween.tween_property(temperature_display, 'material_override:emission_energy_multiplier', 1.0, 0.2)
 
 func emergency_cooling():
 	print('❄️ EMERGENCY COOLING: Activating backup nitrogen reserves')
@@ -162,7 +162,7 @@ func thaw_specimen():
 	# Gradual thawing visuals
 	var thaw_tween = create_tween()
 	thaw_tween.tween_property(specimen_capsule, 'material_override:albedo_color:a', 1.0, 10.0)
-	thaw_tween.tween_property(cryo_mist, 'material_override:emission_energy', 0.0, 5.0)
+	thaw_tween.tween_property(cryo_mist, 'material_override:emission_energy_multiplier', 0.0, 5.0)
 	
 	# Check specimen viability after thaw
 	get_tree().create_timer(12.0).timeout.connect(check_specimen_viability)

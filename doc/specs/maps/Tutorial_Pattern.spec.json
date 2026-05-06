@@ -1,0 +1,95 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Tutorial_Pattern",
+  "home_sequence": "array_tutorial",
+  "dimensions": {
+    "w": 10,
+    "d": 13
+  },
+  "signature": "script_runner#array executes pattern-generating code live; pattern_tile_mirror and pattern_tile_puzzle#cursor provide interactive tiling; pattern_tile_puzzle#p4m#cursor introduces the p4m wallpaper group; dark_sphere anchors.",
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.085,
+  "breath_zones": [
+    {
+      "size": 117,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 13
+      },
+      "centroid": [
+        4.495726495726496,
+        5.9743589743589745
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 2,
+      "token": "grid_model"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "pattern_studio_plate"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "pattern_tile_plate"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "pattern_tile_plate"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "pattern_tile_plate"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "pattern_tile_mirror"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "pattern_tile_puzzle"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "pattern_maker_station"
+    },
+    {
+      "x": 3,
+      "z": 9,
+      "token": "script_runner"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "pulsar_compact"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 129,
+    "breath_zone_count": 1,
+    "unique_tokens": 9
+  }
+}

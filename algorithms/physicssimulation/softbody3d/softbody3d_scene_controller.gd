@@ -12,8 +12,8 @@ var current_demonstration = 0
 var demonstration_timer = 0.0
 
 # Interactive elements
-@onready var wind_zone: Area3D = $InteractiveElements/WindZone
-@onready var force_field: Area3D = $InteractiveElements/ForceField
+@onready var wind_zone: Area3D = get_node_or_null("InteractiveElements/WindZone")
+@onready var force_field: Area3D = get_node_or_null("InteractiveElements/ForceField")
 
 # UI elements
 @onready var info_panel: Panel = $UI/InfoPanel
@@ -31,11 +31,11 @@ var physics_demo_params = {
 	"very_low_pressure": {"pressure": 0.02}
 }
 
-func _ready():
+func _ready() -> void:
 	_setup_scene()
 	_start_demonstration_cycle()
 
-func _setup_scene():
+func _setup_scene() -> void:
 	# Collect all soft bodies
 	for child in $SoftBodyVariations.get_children():
 		if child is SoftBody3D:
@@ -59,7 +59,7 @@ func _setup_scene():
 	# Setup UI
 	_setup_ui()
 
-func _setup_interactive_zones():
+func _setup_interactive_zones() -> void:
 	if wind_zone:
 		wind_zone.body_entered.connect(_on_wind_zone_body_entered)
 		wind_zone.body_exited.connect(_on_wind_zone_body_exited)
@@ -68,14 +68,14 @@ func _setup_interactive_zones():
 		force_field.body_entered.connect(_on_force_field_body_entered)
 		force_field.body_exited.connect(_on_force_field_body_exited)
 
-func _setup_ui():
+func _setup_ui() -> void:
 	if title_label:
 		title_label.text = "Soft Body Physics Variations"
 	
 	# Add interactive buttons if needed
 	_add_ui_controls()
 
-func _add_ui_controls():
+func _add_ui_controls() -> void:
 	# Create a control panel for user interaction
 	var control_panel = Panel.new()
 	control_panel.name = "ControlPanel"
@@ -112,25 +112,25 @@ func _add_ui_controls():
 	
 	$UI.add_child(control_panel)
 
-func _start_demonstration_cycle():
+func _start_demonstration_cycle() -> void:
 	if auto_cycle_demonstrations:
 		_change_demonstration_mode()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_cycle_demonstrations:
 		demonstration_timer += delta
 		if demonstration_timer >= demonstration_duration:
 			demonstration_timer = 0.0
 			_cycle_demonstration()
 
-func _cycle_demonstration():
+func _cycle_demonstration() -> void:
 	current_demonstration += 1
 	if current_demonstration >= 4:  # Number of demonstration types
 		current_demonstration = 0
 	
 	_change_demonstration_mode()
 
-func _change_demonstration_mode():
+func _change_demonstration_mode() -> void:
 	match current_demonstration:
 		0:
 			_start_physics_variations_demo()
@@ -141,7 +141,7 @@ func _change_demonstration_mode():
 		3:
 			_start_collision_demo()
 
-func _start_physics_variations_demo():
+func _start_physics_variations_demo() -> void:
 	print("SceneController: Starting Physics Variations Demo")
 	title_label.text = "Physics Variations Demo"
 	
@@ -153,7 +153,7 @@ func _start_physics_variations_demo():
 		if params.has("pressure"):
 			body.pressure_coefficient = params.pressure
 
-func _start_interactive_forces_demo():
+func _start_interactive_forces_demo() -> void:
 	print("SceneController: Starting Interactive Forces Demo")
 	title_label.text = "Interactive Forces Demo"
 	
@@ -167,7 +167,7 @@ func _start_interactive_forces_demo():
 	if force_field:
 		force_field.monitoring = true
 
-func _start_state_cycling_demo():
+func _start_state_cycling_demo() -> void:
 	print("SceneController: Starting State Cycling Demo")
 	title_label.text = "State Cycling Demo"
 	
@@ -176,7 +176,7 @@ func _start_state_cycling_demo():
 		var body = soft_bodies[i]
 		body.state_duration = 2.0 + i * 1.0  # Different timing for each body
 
-func _start_collision_demo():
+func _start_collision_demo() -> void:
 	print("SceneController: Starting Collision Demo")
 	title_label.text = "Collision Demo"
 	
@@ -187,42 +187,42 @@ func _start_collision_demo():
 			randf_range(2.0, 5.0),
 			randf_range(-3.0, 3.0)
 		)
-		body.apply_impulse(random_force)
+		body.apply_external_impulse(random_force)
 
 # Interactive zone handlers
-func _on_wind_zone_body_entered(body):
+func _on_wind_zone_body_entered(body) -> void:
 	if body is SoftBodyVariation:
 		print("SceneController: %s entered wind zone" % body.soft_body_type)
 
-func _on_wind_zone_body_exited(body):
+func _on_wind_zone_body_exited(body) -> void:
 	if body is SoftBodyVariation:
 		print("SceneController: %s exited wind zone" % body.soft_body_type)
 
-func _on_force_field_body_entered(body):
+func _on_force_field_body_entered(body) -> void:
 	if body is SoftBodyVariation:
 		print("SceneController: %s entered force field" % body.soft_body_type)
 
-func _on_force_field_body_exited(body):
+func _on_force_field_body_exited(body) -> void:
 	if body is SoftBodyVariation:
 		print("SceneController: %s exited force field" % body.soft_body_type)
 
 # UI control handlers
-func _cycle_demo_mode():
+func _cycle_demo_mode() -> void:
 	current_mode = (current_mode + 1) % DemoMode.size()
 	_change_demonstration_mode()
 
-func _apply_random_physics():
+func _apply_random_physics() -> void:
 	print("SceneController: Applying random physics to all bodies")
 	for body in soft_bodies:
 		var random_pressure = randf_range(0.1, 0.8)
 		body.set_physics_properties(random_pressure)
 
-func _reset_all_bodies():
+func _reset_all_bodies() -> void:
 	print("SceneController: Resetting all bodies to defaults")
 	for body in soft_bodies:
 		body.reset_to_defaults()
 
-func _apply_random_impulse():
+func _apply_random_impulse() -> void:
 	print("SceneController: Applying random impulse to all bodies")
 	for body in soft_bodies:
 		var random_force = Vector3(
@@ -230,7 +230,7 @@ func _apply_random_impulse():
 			randf_range(3.0, 8.0),
 			randf_range(-5.0, 5.0)
 		)
-		body.apply_impulse(random_force)
+		body.apply_external_impulse(random_force)
 
 # Public API
 func get_soft_body_count() -> int:
@@ -242,16 +242,16 @@ func get_soft_body_by_type(type: String) -> SoftBodyVariation:
 			return body
 	return null
 
-func pause_demonstrations():
+func pause_demonstrations() -> void:
 	auto_cycle_demonstrations = false
 	print("SceneController: Demonstrations paused")
 
-func resume_demonstrations():
+func resume_demonstrations() -> void:
 	auto_cycle_demonstrations = true
 	print("SceneController: Demonstrations resumed")
 
 # Debug functions
-func print_scene_status():
+func print_scene_status() -> void:
 	print("SceneController: Scene Status:")
 	print("  Soft Bodies: %d" % soft_bodies.size())
 	print("  Current Mode: %s" % DemoMode.keys()[current_mode])
@@ -260,3 +260,12 @@ func print_scene_status():
 	
 	for body in soft_bodies:
 		body.print_status()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

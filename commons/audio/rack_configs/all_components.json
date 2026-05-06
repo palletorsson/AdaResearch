@@ -1,0 +1,207 @@
+{
+    "rack_info": {
+        "name": "Component Showcase",
+        "description": "A showcase of all available VR audio control components.",
+        "version": "1.0",
+        "sound_type": "synth_wave"
+    },
+    "layout": {
+        "padding_px": 20,
+        "gap_px": 12,
+        "face_plates": true
+    },
+    "grid": [
+        [
+            "lbl_title",
+            "lbl_info",
+            "",
+            ""
+        ],
+        [
+            "mon_main",
+            "mon_main",
+            "mtr_L",
+            "mtr_R"
+        ],
+        [
+            "lbl_sliders",
+            "",
+            "",
+            ""
+        ],
+        [
+            "sl_norm",
+            "sl_snap",
+            "sl_zero",
+            "sl_vert"
+        ],
+        [
+            "lbl_rotary",
+            "",
+            "",
+            ""
+        ],
+        [
+            "nb_1",
+            "nb_2",
+            "whl_1",
+            "whl_2"
+        ],
+        [
+            "lbl_2d",
+            "",
+            "",
+            ""
+        ],
+        [
+            "xy_1",
+            "js_1",
+            "btn_1",
+            "lv_1"
+        ],
+        [
+            "grp_demo",
+            "",
+            "",
+            ""
+        ]
+    ],
+    "control_definitions": {
+        "lbl_title": {
+            "type": "label",
+            "text": "ALL COMPONENTS",
+            "font_size": 42,
+            "color": "#ffffff"
+        },
+        "lbl_info": {
+            "type": "label",
+            "text": "Visual Reference",
+            "font_size": 24,
+            "color": "#aaaaaa"
+        },
+        "mon_main": {
+            "type": "monitor",
+            "label": "MAIN OUTPUT"
+        },
+        "mtr_L": {
+            "type": "meter",
+            "label": "L",
+            "source": "left"
+        },
+        "mtr_R": {
+            "type": "meter",
+            "label": "R",
+            "source": "right"
+        },
+        "lbl_sliders": {
+            "type": "label",
+            "text": "SLIDERS",
+            "font_size": 32,
+            "color": "#44aaff"
+        },
+        "sl_norm": {
+            "type": "slider",
+            "label": "Standard",
+            "parameter": "cutoff",
+            "min": 20.0,
+            "max": 20000.0,
+            "default": 1000.0
+        },
+        "sl_snap": {
+            "type": "sls",
+            "label": "Snapped",
+            "parameter": "octave",
+            "min": -2,
+            "max": 2,
+            "step": 1,
+            "default": 0
+        },
+        "sl_zero": {
+            "type": "slz",
+            "label": "Bipolar",
+            "parameter": "detune",
+            "min": -1.0,
+            "max": 1.0,
+            "default": 0.0
+        },
+        "sl_vert": {
+            "type": "slv",
+            "label": "Vertical",
+            "parameter": "resonance",
+            "min": 0.0,
+            "max": 1.0,
+            "default": 0.5
+        },
+        "lbl_rotary": {
+            "type": "label",
+            "text": "ROTARY",
+            "font_size": 32,
+            "color": "#ffaa44"
+        },
+        "nb_1": {
+            "type": "knob",
+            "label": "Knob 1",
+            "parameter": "attack",
+            "default": 0.1
+        },
+        "nb_2": {
+            "type": "knob",
+            "label": "Knob 2",
+            "parameter": "decay",
+            "default": 0.3
+        },
+        "whl_1": {
+            "type": "wheel",
+            "label": "Wheel",
+            "parameter": "mod",
+            "default": 0.0
+        },
+        "whl_2": {
+            "type": "wheel",
+            "label": "Pitch",
+            "parameter": "pitch",
+            "min": -1.0,
+            "max": 1.0,
+            "default": 0.0
+        },
+        "lbl_2d": {
+            "type": "label",
+            "text": "INTERACTIVE & 2D",
+            "font_size": 32,
+            "color": "#aa44ff"
+        },
+        "xy_1": {
+            "type": "xy",
+            "label": "XY Pad",
+            "parameter_x": "formant_x",
+            "parameter_y": "formant_y"
+        },
+        "js_1": {
+            "type": "joystick",
+            "label": "Joystick",
+            "parameter_x": "pan_x",
+            "parameter_y": "pan_y"
+        },
+        "btn_1": {
+            "type": "button",
+            "label": "Toggle",
+            "parameter": "mute",
+            "action": "toggle",
+            "toggle": true,
+            "color": "#ff4444"
+        },
+        "lv_1": {
+            "type": "lever",
+            "label": "Power",
+            "parameter": "master_power",
+            "default": 1.0
+        },
+        "grp_demo": {
+            "type": "group",
+            "label": "GROUP CONTAINER",
+            "width": 0.8,
+            "height": 0.2,
+            "color": "#334455"
+        }
+    }
+}

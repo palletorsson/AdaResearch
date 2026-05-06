@@ -1,0 +1,43 @@
+{
+  "id": "mg_form51_snake_serpent",
+  "notes": "SNAKE TEST: deterministic single-face serpent grown by l-system tube segments from a low-res spherical seed. One body, no branching, small widened head at the tip.",
+  "seed": "icosahedron",
+  "seed_scale": 0.22,
+  "generations": 1,
+  "camera_pitch": 0.24,
+  "camera_yaw": 0.78,
+  "camera_focus_y_bias": -0.1,
+  "camera_fit_padding": 0.7,
+  "floor_clearance": 0.03,
+  "rules": [
+    {
+      "op": "lsystem_branch",
+      "selector": "index:0",
+      "params": {
+        "axiom": "F+F+F-F-F+F+F-F+F-F+F+F-F-F+F",
+        "rules": {},
+        "lsystem_generations": 1,
+        "step_length": 0.12,
+        "step_taper": 0.985,
+        "start_radius": 0.045,
+        "angle_degrees": 18,
+        "tube_segments": 6,
+        "tube_rings": 4,
+        "max_branches": 32,
+        "branch_tag": "snake_body",
+        "tip_tag": "snake_tip"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:snake_tip",
+      "params": {
+        "distance": 0.025,
+        "scale": 1.28,
+        "top_tag": "snake_head",
+        "side_tag": "snake_head_side",
+        "min_area": 0.0001
+      }
+    }
+  ]
+}

@@ -1,0 +1,621 @@
+{
+  "map_info": {
+    "name": "WaveFunctions Synthesis Lab p3",
+    "title": "Fourier Decomposition Lab",
+    "lookup_name": "WaveFunctions_Synthesis_Lab_p3",
+    "description": "A research laboratory where waves are decomposed and reconstructed. Fourier analysis meets biological oscillation. Glass resonators, DNA helices spinning in centrifuges, petri dishes with oscillating organisms. Everything vibrates at its natural frequency.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 13,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "wavefunctions",
+      "estimated_time": "8-12 minutes",
+      "learning_objectives": [
+        "Fourier synthesis: any signal = sum of sines",
+        "Harmonics: integer multiples of fundamental",
+        "Natural frequency: everything has one",
+        "Resonance: when frequencies match",
+        "Biological oscillation: heartbeats, circadian rhythms, DNA rotation"
+      ],
+      "spine_research": true,
+      "placement_only": true,
+      "derived_from": "WaveFunctions_Synthesis_Lab",
+      "scores": {
+        "walk_pct": 0.955,
+        "n_heights": 3,
+        "util_count": 8,
+        "has_spawn": true,
+        "has_teleporter": true,
+        "verdict": "exemplary",
+        "artifacts_placed": 26,
+        "artifacts_original": 26,
+        "reachability_fixes": {
+          "wp_added": 6,
+          "tc_added": 0,
+          "cubes_added": 0,
+          "fixed_artifacts": 5,
+          "still_orphan": 0
+        }
+      },
+      "placement_seed": 439,
+      "rows": 12,
+      "cols": 11,
+      "saved_at": "2026-04-29T08:06:23.555318Z",
+      "composite_score": {
+        "score": 92,
+        "breakdown": {
+          "verdict": 30,
+          "reachable": 20,
+          "artifacts": 15,
+          "density": 2,
+          "heights": 10,
+          "budget": 10,
+          "path_budget": 5
+        },
+        "reasons": [
+          "verdict=exemplary (30/30)",
+          "BFS path=15 steps (20/20)",
+          "artifacts 26/26 (15/15)",
+          "walk_pct=0.95 (2/10)",
+          "n_heights=3 (10/10)",
+          "interior 90 vs cells_max 110 (10/10)",
+          "path_budget=20 (5/5)"
+        ],
+        "bfs_steps": 15,
+        "phase": "oscillation"
+      },
+      "evaluated_at": "2026-04-29T08:41:18.344947Z"
+    }
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Continue",
+      "description": "Next station",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "WaveFunctions Synthesis Lab",
+    "layout": "11x13 laboratory with workstations, glass display cases, and experimental apparatus",
+    "objective": "Understand how complex signals decompose into simple waves, and see oscillation in biological systems",
+    "key_elements": [
+      "air_music_display_case - Air Music in glass display: spatial audio triggered by movement, subtle ambient phasing",
+      "additive_wave_demo - Build waves from harmonics",
+      "dna_specimen - DNA double helix in glass jar, biological oscillation made visible",
+      "petri_dish_worms - C. elegans moving in sine patterns",
+      "GlassRack - Laboratory glassware apparatus",
+      "lissajous_curves - 3D parametric waveforms in glass display case (1m)",
+      "oscilloscope - Waveform visualization",
+      "seismograph - Drum chart recorder with sine trace",
+      "chladni_plate - Vibration pattern visualization",
+      "multimeter - AC voltage needle oscillation",
+      "chemicalapparatus - Bubbling liquids with phase offsets",
+      "samplevialrack - Wave propagation across 6 vials",
+      "electronicscales - Damped harmonic settling",
+      "microscope - Pulsing illumination",
+      "atmosphericmonitoring - Three gauges at different frequencies",
+      "holographicdisplay - Scan line + flicker effects",
+      "biomagneticresonator - Standing waves with harmonics"
+    ]
+  },
+  "lighting": {
+    "ambient_color": [
+      0.3,
+      0.35,
+      0.4
+    ],
+    "ambient_energy": 0.5,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "color": [
+        1.0,
+        0.98,
+        0.95
+      ],
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": false,
+    "enable_physics": true,
+    "background": {
+      "type": "color",
+      "color": [
+        0.12,
+        0.14,
+        0.18
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "2",
+        "1",
+        "1",
+        "4",
+        "1",
+        "2",
+        "1",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "1",
+        "1",
+        "2",
+        "4",
+        "1",
+        "2",
+        "2",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "2",
+        "1",
+        "2",
+        "4",
+        "1",
+        "2",
+        "2",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "2",
+        "1",
+        "2",
+        "4",
+        "1",
+        "2",
+        "4",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "1",
+        "1",
+        "2",
+        "4",
+        "1",
+        "1",
+        "0",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4",
+        "1",
+        "0",
+        "0",
+        "0",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "2",
+        "2",
+        "1",
+        "0",
+        "1",
+        "2",
+        "2",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ]
+    ],
+    "utilities": [
+      [
+        "sp",
+        " ",
+        " ",
+        " ",
+        "wp:270",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "wp:180",
+        " ",
+        "wp:0",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "wp:0",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "wp:90",
+        " ",
+        " ",
+        "t",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "wp:90",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "coloredlines:0:1:0.05",
+        " ",
+        " ",
+        "hallway_scene:0:0:0.1",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "air_music_display_case:0:1",
+        " ",
+        " ",
+        "chemicalapparatus:0:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        "microscope:0:1",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "dark_sphere",
+        "dna_specimen:0:0.4",
+        "holographicdisplay:0:1",
+        "oscilloscope:0:0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "multimeter:0:1",
+        "UnitCircleTrig:-90:0:0.1",
+        " ",
+        " ",
+        "lissajous_curves:0:1:0.1",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "samplevialrack:0:1",
+        " ",
+        "electronicscales:0:1",
+        "seismograph",
+        " ",
+        "additive_wave_demo:0:0.5",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "petri_dish_worms:180:0.8",
+        " ",
+        "electronicscales:0:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "double_helix_scene",
+        " ",
+        " ",
+        "GlassRack:0:0.8#config:spiral_tube",
+        "atmosphericmonitoring:180:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "biomagneticresonator:0:1",
+        " ",
+        "chladni_plate",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "GlassRack:0:1#path:flask,f,ypipe,[,l,spiral],r,spiral,f,beaker",
+        "spring_demo:0:0.5",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "SoundscapeRadioRack:90:1.4",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
+}

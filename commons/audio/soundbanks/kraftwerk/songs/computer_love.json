@@ -1,0 +1,495 @@
+{
+	"_metadata": {
+		"song_id": "kraftwerk_computer_love",
+		"display_name": "Computer Love",
+		"artist": "Kraftwerk (Procedural Recreation)",
+		"original_artist": "Kraftwerk",
+		"original_album": "Computer World",
+		"original_year": 1981,
+		"description": "Procedural recreation of Kraftwerk's melancholic synth-pop masterpiece. A robot's yearning for connection in the digital age.",
+		"category": "songs",
+		"tags": ["kraftwerk", "synth-pop", "1981", "computer_world", "melancholic", "robotic_romance", "motorik"],
+		"is_interactive_song": true,
+		"soundbank": "kraftwerk",
+		"version": "1.0.0",
+		"created": "2025-02-04"
+	},
+
+	"production_brief": {
+		"genre": "kraftwerk_synth_pop",
+		"emotion": "melancholic_robotic_romance",
+		"references": ["Kraftwerk - Computer Love", "Kraftwerk - The Model", "Kraftwerk - Neon Lights"],
+		"character": ["melancholic", "precise", "romantic", "robotic", "yearning"],
+		"era": "early_80s_electronic",
+		"aesthetic": "Clean electronic production, machine precision meets human emotion"
+	},
+
+	"parameters": {
+		"bpm": { "min": 120, "max": 135, "value": 129, "step": 1 },
+		"key": { "options": ["F", "G", "A"], "value": "F" },
+		"mode": { "options": ["major", "minor"], "value": "major" },
+		"duration_bars": 64,
+		"time_signature": { "numerator": 4, "denominator": 4 },
+		"master_volume": -3.0,
+		"robotic_precision": { "min": 0.0, "max": 1.0, "value": 1.0, "description": "Kraftwerk = perfect machine timing" }
+	},
+
+	"harmony": {
+		"key": "F",
+		"mode": "major",
+		"scale_degrees": ["F", "G", "A", "Bb", "C", "D", "E"],
+		"chord_progression": {
+			"main": ["F", "Dm", "Bb", "C"],
+			"notation": ["I", "vi", "IV", "V"],
+			"bars_per_chord": 2,
+			"description": "Classic I-vi-IV-V progression - melancholic yet hopeful"
+		},
+		"voicings": "simple_clean",
+		"root_notes_hz": {
+			"F2": 87.31,
+			"G2": 98.00,
+			"A2": 110.00,
+			"Bb2": 116.54,
+			"C3": 130.81,
+			"D3": 146.83,
+			"E3": 164.81,
+			"F3": 174.61,
+			"A3": 220.00,
+			"C4": 261.63,
+			"F4": 349.23
+		}
+	},
+
+	"sound_design": {
+		"arpeggio": {
+			"component": "sequence",
+			"description": "The iconic Computer Love arpeggio - clean square wave, perfect timing",
+			"waveform": "square",
+			"filter_cutoff": 2000,
+			"attack_s": 0.001,
+			"decay_s": 0.08,
+			"modulation": 0.0,
+			"drift_cents": 0,
+			"notes_per_bar": 16,
+			"pattern_type": "ascending_triad",
+			"octave_range": [3, 4]
+		},
+		"pad": {
+			"component": "pad",
+			"description": "Warm vocoder-style pad - the emotional bed of the track",
+			"voices": 6,
+			"attack_s": 0.05,
+			"sustain": 0.8,
+			"release_s": 0.5,
+			"chorus_depth": 0.1,
+			"filter_cutoff": 3000
+		},
+		"bass": {
+			"component": "bass",
+			"description": "Minimoog bass - warm but precise, minimal 2-cent drift",
+			"waveform": "dual_saw",
+			"drift_cents": 2,
+			"filter_cutoff": 600,
+			"resonance": 0.35,
+			"octave": 2
+		},
+		"lead": {
+			"component": "sequence",
+			"description": "Melodic lead for chorus - the 'Computer Love' theme",
+			"waveform": "square",
+			"filter_cutoff": 2500,
+			"attack_s": 0.01,
+			"decay_s": 0.3,
+			"vibrato_hz": 0,
+			"note": "Clean, no vibrato - robotic romance"
+		},
+		"drums": {
+			"style": "motorik",
+			"description": "Steady 4/4 motorik beat - driving yet hypnotic",
+			"swing_pct": 0,
+			"humanize_ms": 0,
+			"components": {
+				"kick": { "pattern": "four_on_floor", "velocity": 0.8 },
+				"snare": { "pattern": "backbeat", "velocity": 0.7 },
+				"hihat": { "pattern": "eighth_notes", "velocity": 0.5, "accent_offbeat": true }
+			}
+		}
+	},
+
+	"layers": {
+		"arpeggio": {
+			"enabled": true,
+			"volume": -6.0,
+			"pan": 0.0,
+			"component": "kraftwerk/sequence",
+			"description": "The defining element - always present"
+		},
+		"pad": {
+			"enabled": true,
+			"volume": -12.0,
+			"pan": 0.0,
+			"component": "kraftwerk/pad",
+			"description": "Emotional warmth beneath the machines"
+		},
+		"bass": {
+			"enabled": true,
+			"volume": -4.0,
+			"pan": 0.0,
+			"component": "kraftwerk/bass",
+			"description": "Foundation - Minimoog warmth"
+		},
+		"lead": {
+			"enabled": true,
+			"volume": -8.0,
+			"pan": 0.1,
+			"component": "kraftwerk/sequence",
+			"description": "Melodic theme in choruses"
+		},
+		"kick": {
+			"enabled": true,
+			"volume": -3.0,
+			"pan": 0.0,
+			"component": "kraftwerk/kick"
+		},
+		"snare": {
+			"enabled": true,
+			"volume": -6.0,
+			"pan": 0.0,
+			"component": "kraftwerk/snare"
+		},
+		"hihat": {
+			"enabled": true,
+			"volume": -10.0,
+			"pan": -0.2,
+			"component": "kraftwerk/hihat"
+		}
+	},
+
+	"patterns": {
+		"arpeggio_F": {
+			"description": "F major arpeggio - F A C F",
+			"length_steps": 16,
+			"notes_hz": [174.61, 220.00, 261.63, 349.23],
+			"rhythm": "sixteenth_notes",
+			"direction": "ascending",
+			"steps": [
+				{ "step": 0, "note": "F3", "velocity": 0.8, "duration": 0.1 },
+				{ "step": 1, "note": "A3", "velocity": 0.7, "duration": 0.1 },
+				{ "step": 2, "note": "C4", "velocity": 0.7, "duration": 0.1 },
+				{ "step": 3, "note": "F4", "velocity": 0.9, "duration": 0.1 },
+				{ "step": 4, "note": "F3", "velocity": 0.8, "duration": 0.1 },
+				{ "step": 5, "note": "A3", "velocity": 0.7, "duration": 0.1 },
+				{ "step": 6, "note": "C4", "velocity": 0.7, "duration": 0.1 },
+				{ "step": 7, "note": "F4", "velocity": 0.9, "duration": 0.1 },
+				{ "step": 8, "note": "F3", "velocity": 0.8, "duration": 0.1 },
+				{ "step": 9, "note": "A3", "velocity": 0.7, "duration": 0.1 },
+				{ "step": 10, "note": "C4", "velocity": 0.7, "duration": 0.1 },
+				{ "step": 11, "note": "F4", "velocity": 0.9, "duration": 0.1 },
+				{ "step": 12, "note": "F3", "velocity": 0.8, "duration": 0.1 },
+				{ "step": 13, "note": "A3", "velocity": 0.7, "duration": 0.1 },
+				{ "step": 14, "note": "C4", "velocity": 0.7, "duration": 0.1 },
+				{ "step": 15, "note": "F4", "velocity": 0.9, "duration": 0.1 }
+			]
+		},
+		"arpeggio_Dm": {
+			"description": "D minor arpeggio - D F A D",
+			"length_steps": 16,
+			"notes_hz": [146.83, 174.61, 220.00, 293.66],
+			"rhythm": "sixteenth_notes",
+			"direction": "ascending"
+		},
+		"arpeggio_Bb": {
+			"description": "Bb major arpeggio - Bb D F Bb",
+			"length_steps": 16,
+			"notes_hz": [116.54, 146.83, 174.61, 233.08],
+			"rhythm": "sixteenth_notes",
+			"direction": "ascending"
+		},
+		"arpeggio_C": {
+			"description": "C major arpeggio - C E G C",
+			"length_steps": 16,
+			"notes_hz": [130.81, 164.81, 196.00, 261.63],
+			"rhythm": "sixteenth_notes",
+			"direction": "ascending"
+		},
+		"motorik_kick": {
+			"description": "Four on the floor - steady pulse",
+			"length_steps": 16,
+			"type": "kick",
+			"swing": 0,
+			"humanize": 0,
+			"steps": [
+				{ "step": 0, "velocity": 1.0 },
+				{ "step": 4, "velocity": 0.95 },
+				{ "step": 8, "velocity": 1.0 },
+				{ "step": 12, "velocity": 0.95 }
+			]
+		},
+		"motorik_snare": {
+			"description": "Backbeat snare - beats 2 and 4",
+			"length_steps": 16,
+			"type": "snare",
+			"steps": [
+				{ "step": 4, "velocity": 0.8 },
+				{ "step": 12, "velocity": 0.8 }
+			]
+		},
+		"motorik_hihat": {
+			"description": "Driving 8th note hats - the motorik pulse",
+			"length_steps": 16,
+			"type": "hihat",
+			"steps": [
+				{ "step": 0, "velocity": 0.5, "open": false },
+				{ "step": 2, "velocity": 0.7, "open": false },
+				{ "step": 4, "velocity": 0.5, "open": false },
+				{ "step": 6, "velocity": 0.7, "open": false },
+				{ "step": 8, "velocity": 0.5, "open": false },
+				{ "step": 10, "velocity": 0.7, "open": false },
+				{ "step": 12, "velocity": 0.5, "open": false },
+				{ "step": 14, "velocity": 0.7, "open": true }
+			]
+		},
+		"bass_F": {
+			"description": "Bass on F - root note pulse",
+			"root_hz": 87.31,
+			"octave": 2,
+			"pattern": "whole_notes"
+		},
+		"bass_Dm": {
+			"root_hz": 73.42,
+			"octave": 2,
+			"pattern": "whole_notes"
+		},
+		"bass_Bb": {
+			"root_hz": 58.27,
+			"octave": 2,
+			"pattern": "whole_notes"
+		},
+		"bass_C": {
+			"root_hz": 65.41,
+			"octave": 2,
+			"pattern": "whole_notes"
+		},
+		"pad_F": {
+			"description": "F major pad chord",
+			"chord_hz": [174.61, 220.00, 261.63],
+			"duration_bars": 2
+		},
+		"pad_Dm": {
+			"chord_hz": [146.83, 174.61, 220.00],
+			"duration_bars": 2
+		},
+		"pad_Bb": {
+			"chord_hz": [116.54, 146.83, 174.61],
+			"duration_bars": 2
+		},
+		"pad_C": {
+			"chord_hz": [130.81, 164.81, 196.00],
+			"duration_bars": 2
+		},
+		"lead_melody_chorus": {
+			"description": "The 'Computer Love' melodic theme",
+			"length_bars": 8,
+			"notes": [
+				{ "bar": 0, "beat": 0, "note": "C5", "hz": 523.25, "duration": 2.0 },
+				{ "bar": 0, "beat": 2, "note": "D5", "hz": 587.33, "duration": 1.0 },
+				{ "bar": 0, "beat": 3, "note": "C5", "hz": 523.25, "duration": 1.0 },
+				{ "bar": 1, "beat": 0, "note": "A4", "hz": 440.00, "duration": 4.0 },
+				{ "bar": 2, "beat": 0, "note": "G4", "hz": 392.00, "duration": 2.0 },
+				{ "bar": 2, "beat": 2, "note": "A4", "hz": 440.00, "duration": 1.0 },
+				{ "bar": 2, "beat": 3, "note": "G4", "hz": 392.00, "duration": 1.0 },
+				{ "bar": 3, "beat": 0, "note": "F4", "hz": 349.23, "duration": 4.0 },
+				{ "bar": 4, "beat": 0, "note": "C5", "hz": 523.25, "duration": 2.0 },
+				{ "bar": 4, "beat": 2, "note": "D5", "hz": 587.33, "duration": 1.0 },
+				{ "bar": 4, "beat": 3, "note": "E5", "hz": 659.26, "duration": 1.0 },
+				{ "bar": 5, "beat": 0, "note": "F5", "hz": 698.46, "duration": 4.0 },
+				{ "bar": 6, "beat": 0, "note": "E5", "hz": 659.26, "duration": 2.0 },
+				{ "bar": 6, "beat": 2, "note": "D5", "hz": 587.33, "duration": 2.0 },
+				{ "bar": 7, "beat": 0, "note": "C5", "hz": 523.25, "duration": 4.0 }
+			]
+		}
+	},
+
+	"sections": {
+		"intro": {
+			"description": "Arpeggio alone - establishing the lonely electronic world",
+			"bar_start": 0,
+			"length_bars": 8,
+			"active_layers": ["arpeggio"],
+			"volume_multiplier": 0.7,
+			"energy": 0.3,
+			"mood": "lonely_anticipation",
+			"chord_sequence": ["F", "F", "Dm", "Dm", "Bb", "Bb", "C", "C"],
+			"automation": {
+				"filter_sweep": { "start": 1000, "end": 2000, "duration_bars": 8 }
+			}
+		},
+		"verse_1": {
+			"description": "First verse - the machine awakens, rhythm joins",
+			"bar_start": 8,
+			"length_bars": 16,
+			"active_layers": ["arpeggio", "kick", "snare", "hihat", "bass", "pad"],
+			"volume_multiplier": 0.85,
+			"energy": 0.5,
+			"mood": "mechanical_yearning",
+			"chord_sequence": ["F", "F", "Dm", "Dm", "Bb", "Bb", "C", "C", "F", "F", "Dm", "Dm", "Bb", "Bb", "C", "C"],
+			"notes": "Full motorik rhythm established. Pad adds emotional depth."
+		},
+		"chorus_1": {
+			"description": "First chorus - the melody emerges, full emotional power",
+			"bar_start": 24,
+			"length_bars": 8,
+			"active_layers": ["arpeggio", "kick", "snare", "hihat", "bass", "pad", "lead"],
+			"volume_multiplier": 1.0,
+			"energy": 0.8,
+			"mood": "robotic_romance_peak",
+			"chord_sequence": ["F", "F", "Dm", "Dm", "Bb", "Bb", "C", "C"],
+			"lead_pattern": "lead_melody_chorus",
+			"notes": "Lead melody appears - the heart of Computer Love"
+		},
+		"verse_2": {
+			"description": "Second verse - variation, slightly more open",
+			"bar_start": 32,
+			"length_bars": 16,
+			"active_layers": ["arpeggio", "kick", "snare", "hihat", "bass", "pad"],
+			"volume_multiplier": 0.9,
+			"energy": 0.6,
+			"mood": "deepening_connection",
+			"chord_sequence": ["F", "F", "Dm", "Dm", "Bb", "Bb", "C", "C", "F", "F", "Dm", "Dm", "Bb", "Bb", "C", "C"],
+			"variation": {
+				"hihat_pattern": "more_open_hats",
+				"pad_volume": "+2dB"
+			},
+			"notes": "Slight lift in energy, anticipating final chorus"
+		},
+		"chorus_2": {
+			"description": "Final chorus - full power, emotional climax",
+			"bar_start": 48,
+			"length_bars": 8,
+			"active_layers": ["arpeggio", "kick", "snare", "hihat", "bass", "pad", "lead"],
+			"volume_multiplier": 1.0,
+			"energy": 1.0,
+			"mood": "digital_transcendence",
+			"chord_sequence": ["F", "F", "Dm", "Dm", "Bb", "Bb", "C", "C"],
+			"lead_pattern": "lead_melody_chorus",
+			"notes": "Maximum emotional impact - the robot finds love"
+		},
+		"outro": {
+			"description": "Return to solitude - arpeggio fades into the digital void",
+			"bar_start": 56,
+			"length_bars": 8,
+			"active_layers": ["arpeggio", "pad"],
+			"volume_multiplier": 0.5,
+			"energy": 0.2,
+			"mood": "melancholic_acceptance",
+			"chord_sequence": ["F", "F", "Dm", "Dm", "Bb", "Bb", "C", "C"],
+			"automation": {
+				"volume_fade": { "start": 1.0, "end": 0.0, "start_bar": 4, "duration_bars": 4 },
+				"filter_close": { "start": 2000, "end": 500, "start_bar": 4, "duration_bars": 4 }
+			},
+			"notes": "Gentle fade - the connection remains, even in silence"
+		}
+	},
+
+	"energy_arc": {
+		"description": "The emotional journey of Computer Love",
+		"graph": [
+			{ "bar": 0, "energy": 0.3, "note": "Intro - lonely arpeggio" },
+			{ "bar": 8, "energy": 0.5, "note": "Verse 1 - rhythm enters" },
+			{ "bar": 16, "energy": 0.55, "note": "Verse 1 - building" },
+			{ "bar": 24, "energy": 0.8, "note": "Chorus 1 - melody peak" },
+			{ "bar": 32, "energy": 0.6, "note": "Verse 2 - breathing space" },
+			{ "bar": 40, "energy": 0.7, "note": "Verse 2 - building again" },
+			{ "bar": 48, "energy": 1.0, "note": "Chorus 2 - maximum emotion" },
+			{ "bar": 56, "energy": 0.4, "note": "Outro - retreat" },
+			{ "bar": 60, "energy": 0.2, "note": "Outro - fade" },
+			{ "bar": 64, "energy": 0.0, "note": "End - silence" }
+		],
+		"breathing_points": [32, 56],
+		"climax_bar": 48,
+		"narrative": "A robot discovers longing. The arpeggio is its heartbeat, steady and precise. Drums bring purpose. The melody brings meaning. And then... peaceful acceptance."
+	},
+
+	"effects": {
+		"master": {
+			"description": "Clean Kraftwerk production - minimal processing",
+			"limiter": { "threshold": -1.0, "release": 100 },
+			"eq": {
+				"low_cut_hz": 30,
+				"high_shelf_hz": 12000,
+				"high_shelf_db": -1.0
+			}
+		},
+		"reverb": {
+			"enabled": true,
+			"room_size": 0.3,
+			"damping": 0.6,
+			"wet": 0.15,
+			"dry": 0.85,
+			"note": "Minimal reverb - Kraftwerk is DRY"
+		},
+		"delay": {
+			"enabled": false,
+			"note": "No delay - clean and precise"
+		}
+	},
+
+	"transitions": {
+		"crossfade_s": 2.0,
+		"section_transitions": {
+			"intro_to_verse1": {
+				"type": "additive",
+				"description": "Elements layer in smoothly over 2 beats",
+				"fade_in_layers": ["kick", "snare", "hihat", "bass", "pad"]
+			},
+			"verse1_to_chorus1": {
+				"type": "additive",
+				"description": "Lead melody enters cleanly",
+				"fade_in_layers": ["lead"]
+			},
+			"chorus1_to_verse2": {
+				"type": "subtractive",
+				"description": "Lead drops out, energy pulls back",
+				"fade_out_layers": ["lead"]
+			},
+			"verse2_to_chorus2": {
+				"type": "additive",
+				"description": "Lead returns with full power",
+				"fade_in_layers": ["lead"]
+			},
+			"chorus2_to_outro": {
+				"type": "subtractive",
+				"description": "Drums and bass fade, leaving arpeggio and pad",
+				"fade_out_layers": ["kick", "snare", "hihat", "bass", "lead"],
+				"fade_duration_bars": 2
+			}
+		}
+	},
+
+	"performance_notes": {
+		"tempo_feel": "Steady, unwavering 129 BPM - the machine does not rush or drag",
+		"dynamics": "Controlled - volume changes come from arrangement, not playing intensity",
+		"key_elements": [
+			"The arpeggio NEVER stops until outro fade - it IS the song",
+			"Motorik beat must be perfectly quantized - no swing, no humanization",
+			"Lead melody is simple but must be perfectly timed",
+			"Pad provides emotional warmth beneath the machine precision"
+		],
+		"forbidden": [
+			"Swing or shuffle",
+			"Humanization timing",
+			"Heavy reverb or delay",
+			"Distortion",
+			"Pitch wobble or excessive detuning"
+		],
+		"spirit": "This is a love song sung by a machine. The precision IS the emotion. Every perfectly timed note is an expression of longing."
+	},
+
+	"credits": {
+		"original_composition": "Kraftwerk (Ralf Hütter, Florian Schneider, Karl Bartos)",
+		"original_year": 1981,
+		"procedural_adaptation": "AdaResearch Audio System",
+		"soundbank": "kraftwerk",
+		"note": "This is a procedural recreation for educational and research purposes, honoring the pioneering electronic music of Kraftwerk."
+	}
+}

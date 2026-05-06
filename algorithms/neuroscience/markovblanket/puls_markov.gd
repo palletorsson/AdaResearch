@@ -36,7 +36,7 @@ var hotspot_parent
 var inner_entropy_label
 var outer_entropy_label
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Configure noise with FastNoiseLite
@@ -54,7 +54,7 @@ func _ready():
 	for i in range(3):
 		_generate_hotspot()
 
-func _setup_scene():
+func _setup_scene() -> void:
 	# Setup camera
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 0, 5)
@@ -77,7 +77,7 @@ func _setup_scene():
 	# Add lighting
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(10, 10, 10)
-	light.look_at(Vector3.ZERO, Vector3.UP)
+	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
 	add_child(light)
 	
 	# Create inner cell mesh
@@ -151,7 +151,7 @@ func _setup_scene():
 	outer_entropy_label.text = "Outer Entropy: 0.5"
 	canvas_layer.add_child(outer_entropy_label)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time_passed += delta
 	current_time += delta
 	
@@ -171,7 +171,7 @@ func _process(delta):
 	# Rotate the cell slowly
 	rotate_y(delta * 0.1)
 
-func _update_visual_elements():
+func _update_visual_elements() -> void:
 	var pulse_factor = sin(time_passed * pulse_speed) * 0.5 + 0.5
 	
 	# Update membrane mesh with noise and pulsation
@@ -205,7 +205,7 @@ func _update_visual_elements():
 	inner_entropy_label.text = "Inner Entropy: " + str(snapped(inner_entropy, 0.01))
 	outer_entropy_label.text = "Outer Entropy: " + str(snapped(outer_entropy, 0.01))
 
-func _generate_hotspot():
+func _generate_hotspot() -> void:
 	if information_hotspots.size() >= max_hotspots:
 		return
 	
@@ -247,7 +247,7 @@ func _generate_hotspot():
 		"mesh_instance": hotspot_mesh
 	})
 
-func _process_hotspots(delta):
+func _process_hotspots(delta) -> void:
 	var i = 0
 	while i < information_hotspots.size():
 		var hotspot = information_hotspots[i]
@@ -342,7 +342,7 @@ func _process_hotspots(delta):
 		else:
 			i += 1
 
-func _adjust_entropy():
+func _adjust_entropy() -> void:
 	# Count how many hotspots are being processed at the membrane
 	var membrane_activity = 0
 	for hotspot in information_hotspots:
@@ -360,7 +360,7 @@ func _adjust_entropy():
 	if randf() < 0.01:  # Occasionally spawn decorative elements
 		_create_decorative_element()
 
-func _create_decorative_element():
+func _create_decorative_element() -> void:
 	# Create a decorative element inspired by Ernst Haeckel's illustrations
 	var decorative = Node3D.new()
 	
@@ -422,4 +422,12 @@ func _create_decorative_element():
 		decorative.add_child(small_mesh)
 	
 	hotspot_parent.add_child(decorative)
-	
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

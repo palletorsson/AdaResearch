@@ -1,0 +1,28 @@
+{
+  "id": "sbN02_pillow_square",
+  "topology": "native_pillow",
+  "cloth_size": 1.6,
+  "subdivide": 16,
+  "total_mass": 0.5,
+  "linear_stiffness": 0.6,
+  "pressure_coefficient": 6.0,
+  "damping_coefficient": 0.04,
+  "simulation_precision": 8,
+  "origin": [
+    0,
+    0.8,
+    0
+  ],
+  "steps": 160,
+  "color": [
+    0.88,
+    0.82,
+    0.7
+  ],
+  "roughness": 0.65,
+  "floor_y": -0.5,
+  "camera_yaw": 0.55,
+  "camera_pitch": 0.25,
+  "layout": "native_pillow",
+  "notes": "Flat plane + pressure = inflated cushion. Edges seal, center puffs out."
+}

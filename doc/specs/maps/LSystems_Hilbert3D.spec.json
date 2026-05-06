@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "LSystems_Hilbert3D",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 8,
+    "d": 8
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [],
+  "density": 0.016,
+  "breath_zones": [
+    {
+      "size": 62,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        3.4516129032258065,
+        3.467741935483871
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "Hilbert3D"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 63,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

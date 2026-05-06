@@ -1,0 +1,388 @@
+{
+  "schema": "adaresearch.tasks.contexts.v1",
+  "description": "Named reusable briefs that tasks point to. Each context bundles a pattern, its source files, and one-line summary. Tasks reference contexts by id. When a context improves, every task pointing to it gains the improvement.",
+  "contexts": {
+    "evolution_framework": {
+      "title": "Evolution framework — 8-stage structure",
+      "kind": "pattern",
+      "summary": "Every evolution.json has 8 stages, a concept layer, technique_first/technique_reference/domain_deferred classifications, and capture_leaks with a limit stage. The last stage always contains an @identity block.",
+      "sources": [
+        "doc/curriculum_audit/_framework.md"
+      ],
+      "key_rules": [
+        "Opening stage references the previous sequence's truth",
+        "Each technique is classified: first_use (explain inline), reference (seen before, just cite), or deferred (belongs to another sequence, name and skip)",
+        "capture_leaks document what the abstraction cannot hold and points forward to where that question gets answered",
+        "Final stage shows @identity truth statement"
+      ]
+    },
+    "evolution_exemplar": {
+      "title": "Evolution exemplar — Point_One",
+      "kind": "example",
+      "summary": "The reference implementation of an evolution.json. 8 stages, ~200 lines of narration, tracks technique introductions, flags capture leaks to Point_Trace (duration), Point_Line (relation), Point_Triangle (size), QFEP (identity), CA/noise (continuity).",
+      "sources": [
+        "commons/maps/Point_One/evolution.json",
+        "commons/maps/Point_Line/evolution.json",
+        "commons/maps/Trans_Translation/evolution.json"
+      ],
+      "see_also": ["evolution_framework"]
+    },
+    "three_track_alignment": {
+      "title": "Three-track alignment — evolution + grammar + biome",
+      "kind": "principle",
+      "summary": "Every evolution.json should explicitly cross-reference the other two tracks. Add `grammar_alignment` (which operations this evolution teaches or defers to siblings) and `biome_alignment` (density, kingdoms, verbs, hazards at this sequence). If an evolution introduces a technique that should be a grammar operation, register it in grammar_operations.json. If it changes what the world can do, verify soft_stages.json.",
+      "sources": [
+        "commons/maps/Tutorial_Single/evolution.json",
+        "commons/artifacts/grammar_operations.json",
+        "commons/maps/soft_stages.json"
+      ],
+      "key_rules": [
+        "Before writing evolution: read grammar_operations.json[sequences][<seq>] and soft_stages.json[stages][<seq>]",
+        "Add `grammar_alignment` field listing operations_taught and operations_deferred_to_sequence",
+        "Add `biome_alignment` field with density_at_entry, kingdoms_unlocked, hand_verbs_gained",
+        "If you discover a missing operation (a new grammar verb the evolution creates), add it to grammar_operations.json",
+        "If you discover a missing biome capability, flag it in the evolution's note and propose a soft_stages update"
+      ]
+    },
+    "red_thread": {
+      "title": "Red thread — how sequences chain",
+      "kind": "principle",
+      "summary": "Each evolution opens by referencing the previous sequence's truth and closes with its own. Techniques introduced in one sequence are referenced (not re-explained) in the next. The curriculum is a single conversation across 19 sequences.",
+      "sources": [
+        "doc/curriculum_audit/primitives.md",
+        "commons/maps/Point_One/evolution.json",
+        "commons/maps/Point_Line/evolution.json"
+      ],
+      "key_rules": [
+        "Open with 'In <previous map>, you learned X...' or similar",
+        "End with the truth statement that will be referenced by the next map",
+        "Never re-explain a technique that appeared in a previous sequence \u2014 reference it with `(Point_One)` style attribution"
+      ]
+    },
+    "capture_bias": {
+      "title": "Capture bias — every abstraction leaks",
+      "kind": "principle",
+      "summary": "Point captures position but leaks duration, relation, size, identity, continuity. Each leak is a forward arrow to the sequence where the question gets repaired. Evolutions must articulate what they cannot hold.",
+      "sources": [
+        "public/blog/2026-04-17-four-layers.html",
+        "commons/maps/Point_One/evolution.json"
+      ],
+      "key_rules": [
+        "List 3\u20135 capture_leaks per evolution",
+        "Each leak points to a specific sequence/map where it gets answered",
+        "The limit stage is prose that names what this abstraction refuses"
+      ]
+    },
+    "rams_slider_panel": {
+      "title": "Rams slider panel — RackTemplates pattern",
+      "kind": "pattern",
+      "summary": "VR control panels are built via RackTemplates.create_panel(). Dieter Rams aesthetic: cream CREAM, dark WARM_DARK, copper COPPER accent. Supports slider_h, slider_v, knob, button, monitor. Tilt panel 25-30 degrees toward player.",
+      "sources": [
+        "commons/audio/rack_templates/RackTemplates.gd",
+        "commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd"
+      ],
+      "key_snippets": [
+        "var RackTpl: GDScript = load('res://commons/audio/rack_templates/RackTemplates.gd')",
+        "var panel = RackTpl.create_panel('TITLE', [[{'type': 'slider_h', 'label': 'X', 'default': 0.5}]])",
+        "panel.rotation_degrees.x = -25",
+        "var slider = panel.find_child('Param_0', true, false)",
+        "slider.slider_moved.connect(_on_slider_changed)",
+        "var val = slider.get_normalized_value()"
+      ]
+    },
+    "artifact_three_files": {
+      "title": "Artifact three-file pattern",
+      "kind": "pattern",
+      "summary": "Every artifact = .gd script + .tscn scene + registry JSON entry. Script extends Node3D (or XRToolsPickable via RigidBody3D), has class_name in PascalCase, procedural generation in _ready(), optional apply_grid_config(dict).",
+      "sources": [
+        "commons/primitives/point/interactive_point_origin.gd",
+        "commons/primitives/point/interactive_point_origin.tscn",
+        "commons/artifacts/registry/primitives.json"
+      ],
+      "key_rules": [
+        "scene .tscn root type is the native Godot class (e.g. RigidBody3D), script extends the XRTools class",
+        "Registry entry requires: lookup_name, scene path, category, complexity, map_sequences[], tags[]",
+        "Include @identity block in .gd for essence/desire/critical_parameter/truth/etc.",
+        "Include apply_grid_config(config_data: Dictionary) for runtime parameterization"
+      ]
+    },
+    "map_placement": {
+      "title": "Map placement in 3-layer grid",
+      "kind": "pattern",
+      "summary": "commons/maps/<MapName>/map_data.json has 3 layers: structure (heights 0-5), utilities (sp/t/wp/ramps), interactables (artifact_name:rotation:y_offset#config). Placements must fit the map's red thread, not just any empty cell.",
+      "sources": [
+        "doc/MAP_BUILDING_GUIDE.md",
+        "commons/maps/Point_One/map_data.json"
+      ],
+      "key_rules": [
+        "Artifact syntax: `lookup_name:rotation:y_offset` or `lookup_name#config:value` or combined",
+        "Empty cell = ' ' (single space) or '' (empty string)",
+        "Rotation in degrees (0, 90, 180, 270)",
+        "y_offset in meters (can be negative for pit placement, positive for elevation)",
+        "config after '#' passes to artifact.apply_grid_config()"
+      ]
+    },
+    "pathfinder_validate": {
+      "title": "Pathfinder validation",
+      "kind": "pattern",
+      "summary": "Every map must pass python tools/map_pathfinder.py. Spawn height auto-inferred from neighbors. Rule 4 (artifact reachability) downgraded to WARN for artifacts on void (h=0) or marked view_only in registry.",
+      "sources": [
+        "tools/map_pathfinder.py"
+      ],
+      "key_snippets": [
+        "python tools/map_pathfinder.py check <MapName>",
+        "python tools/map_pathfinder.py check --all",
+        "python tools/map_pathfinder.py show <MapName>",
+        "python tools/map_pathfinder.py path <MapName> --to <artifact>"
+      ],
+      "key_rules": [
+        "Always run after modifying any map",
+        "500/500 OK is the current baseline \u2014 don't regress",
+        "Unreachable artifacts on void (h=0) are silent (show pieces)",
+        "Mark truly view-only artifacts with `\"view_only\": true` in registry"
+      ]
+    },
+    "registry_schema": {
+      "title": "Artifact registry schema",
+      "kind": "pattern",
+      "summary": "commons/artifacts/registry/<category>.json has one artifacts object. Each entry requires lookup_name, scene, category, complexity, description, map_sequences, tags. Optional: qfep_connection, capacity, parameters, size_group.",
+      "sources": [
+        "commons/artifacts/registry/physics_simulation.json",
+        "commons/artifacts/registry/primitives.json"
+      ],
+      "key_rules": [
+        "lookup_name MUST match the artifact's scene file basename",
+        "scene path starts with 'res://'",
+        "include_in_map_data: true to make available to map placement",
+        "map_ready: true means artifact has been tested in a map",
+        "Add view_only: true for pure display artifacts (silence pathfinder)"
+      ]
+    },
+    "four_layer_architecture": {
+      "title": "Four-layer architecture",
+      "kind": "principle",
+      "summary": "Curriculum (what you learn), Grammar (operations unlocked), Biome (what the world can do), Staging (how artifacts present). All four share one axis \u2014 the sequence order \u2014 and advance together. Every concept the player learns adds a word to the world's vocabulary.",
+      "sources": [
+        "public/blog/2026-04-17-four-layers.html",
+        "commons/artifacts/grammar_operations.json",
+        "commons/maps/soft_stages.json",
+        "commons/artifacts/space_grammar_rules.json"
+      ]
+    },
+    "grammar_operations": {
+      "title": "Grammar operations registry",
+      "kind": "data",
+      "summary": "80 operations across 18 sequences. Each operation declares input form type, output form type, parameters, teaching artifact. Operations compose freely: any op can act on any form in its input domain regardless of which sequence produced it.",
+      "sources": [
+        "commons/artifacts/grammar_operations.json"
+      ],
+      "key_rules": [
+        "19 form types: atom, segment, polygon, surface, solid, lattice, pattern, wave, field, terrain, automaton, fractal, growth, generated, softbody, swarm, adaptive, paradoxical, tunable",
+        "Each operation has `taught_by` pointing to a specific artifact",
+        "status field: `available` (default), `needs_evolution`, `deferred`",
+        "When a task teaches a new concept, it likely unlocks a new operation \u2014 register it here"
+      ]
+    },
+    "soft_stages_biome": {
+      "title": "Biome evolution per sequence",
+      "kind": "data",
+      "summary": "soft_stages.json declares for each sequence: ecosystem (vegetation_density 0\u20131.0, nature_kingdoms, ambient_preset), hazards (unlock_types, spawner_behavior, max_concurrent), capability (catalyst_mode, hand_verbs, movement_abilities).",
+      "sources": [
+        "commons/maps/soft_stages.json",
+        "algorithms/nature_system/",
+        "commons/managers/EcosystemManager.gd"
+      ],
+      "key_rules": [
+        "Sequence 1-2: sterile grey, no creatures",
+        "Sequence 3: first flowers",
+        "Sequence 11 (L-systems): plants grow, creatures appear",
+        "Sequence 17 (QFEP): full self_generating terrain"
+      ]
+    },
+    "sequence_audit_dir": {
+      "title": "Per-sequence curriculum audits",
+      "kind": "data",
+      "summary": "doc/curriculum_audit/<sequence_id>.md \u2014 19 audits, one per sequence. Each has: core concept, red thread (numbered concept atoms with capture leaks), map-to-concept mapping, artifact inventory, gap analysis, forward leaks, proposed ordering.",
+      "sources": [
+        "doc/curriculum_audit/"
+      ],
+      "key_rules": [
+        "Consult the target sequence's audit before any task touching that sequence",
+        "Audit sections are stable across all 19 files (7-section structure)",
+        "Audits are living documents \u2014 update them if you discover the gap analysis is wrong"
+      ]
+    },
+    "curriculum_spine": {
+      "title": "Curriculum spine order",
+      "kind": "data",
+      "summary": "19 sequences in fixed pedagogical order: primitives, transformation, color, forces, array_tutorial, wavefunctions, randomness, noise, cellularautomata, fractals, lsystems, proceduralgeneration, softbodies, swarmintelligence, machinelearning, foundationscrisis, qfeplaboratory, postfoundationscrisis, graphtheory.",
+      "sources": [
+        "commons/maps/curriculum_spine.json"
+      ]
+    },
+    "qfep_formula": {
+      "title": "QFEP \u2014 Queer Free Energy Principle",
+      "kind": "principle",
+      "summary": "QFE = F - \u03bb\u00b7E(S) + \u03c6\u00b7\u0394E(S,t). F = free energy, E(S) = entropy, \u03bb = entropy drive (0 = order, 1 = dissolution), \u03c6 = sensitivity to entropy change. The project's theoretical backbone; every sequence is one term made tangible.",
+      "sources": [
+        "doc/ENTRY.md",
+        "doc/curriculum_audit/qfeplaboratory.md",
+        "commons/artifacts/registry/qfep.json"
+      ]
+    },
+    "vr_text_readability": {
+      "title": "VR text readability patterns",
+      "kind": "pattern",
+      "summary": "For SubViewport text in VR: use unshaded material on the Sprite3D (SHADING_MODE_UNSHADED), add OmniLight3D per screen, high-contrast palette (Catppuccin Mocha dark bg + light text), high-res internal viewport (1400px+).",
+      "sources": [
+        "commons/artifacts/code_evolution_screen/code_evolution_screen.gd",
+        "commons/primitives/script_runner/script_runner.gd",
+        "commons/infoboards_3d/base/HandheldInfoBoard.tscn"
+      ],
+      "key_snippets": [
+        "mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED",
+        "light.light_color = Color(0.7, 0.8, 1.0); light.light_energy = 0.8"
+      ]
+    },
+    "array_tutorial_ordering": {
+      "title": "Array tutorial ordering discovery",
+      "kind": "audit",
+      "summary": "Current maps[] order starts with Tutorial_Pattern and Array_Patterns, but the audit's target order is Tutorial_Single -> Tutorial_Row -> Tutorial_2D_Build -> Tutorial_3D -> Tutorial_Pattern -> Array_Patterns -> Tutorial_Disco -> Chamber_Arrays.",
+      "sources": [
+        "doc/tasks/_audits/fix_ordering_discovery.md",
+        "commons/maps/sequences/array_tutorial.json",
+        "doc/curriculum_audit/array_tutorial.md"
+      ],
+      "key_rules": [
+        "This task is a maps[] reorder only; the needed maps already exist in the sequence JSON",
+        "The audit treats the dimension ladder as the foundation and the pattern maps as later abstraction",
+        "Chamber_Arrays stays last"
+      ]
+    },
+    "cellularautomata_ordering": {
+      "title": "Cellular automata ordering discovery",
+      "kind": "audit",
+      "summary": "The audit contradicts the current JSON order: it wants CA_GameOfLife before CA_ElementaryRules, and it also places CA_EdgeOfChaos before CA_AgentsCircuits in the full concept flow.",
+      "sources": [
+        "doc/tasks/_audits/fix_ordering_discovery.md",
+        "commons/maps/sequences/cellularautomata.json",
+        "doc/curriculum_audit/cellularautomata.md"
+      ],
+      "key_rules": [
+        "Treat Game of Life as the canonical 2D example before the 1D rule-system survey",
+        "Keep Chamber_CA last",
+        "If downstream code depends on artifact_groups order, keep it aligned with maps[]"
+      ]
+    },
+    "swarmintelligence_ordering": {
+      "title": "Swarm ordering discovery",
+      "kind": "audit",
+      "summary": "Current JSON opens with Physarum, but the audit's target order starts with FlowFields and moves Physarum to slot 6 as the late radical boundary case after fields, boids, ABM, ACO, and PSO.",
+      "sources": [
+        "doc/tasks/_audits/fix_ordering_discovery.md",
+        "commons/maps/sequences/swarmintelligence.json",
+        "doc/curriculum_audit/swarmintelligence.md"
+      ],
+      "key_rules": [
+        "This is a sequence reorder, not an artifact rebuild",
+        "Physarum is intentionally delayed so the learner has swarm vocabulary before meeting cognition-as-medium",
+        "Keep Chamber_Swarm last"
+      ]
+    },
+    "point_lines_reachability": {
+      "title": "Point_Lines reachability discovery",
+      "kind": "audit",
+      "summary": "Point_Lines already passes pathfinder, but show-mode still reports one unreachable artifact: dgrid at (6,26) on void row 26. The task is to decide whether that island should be reachable or explicitly treated as display-only.",
+      "sources": [
+        "doc/tasks/_audits/fix_ordering_discovery.md",
+        "commons/maps/Point_Lines/map_data.json",
+        "tools/map_pathfinder.py"
+      ],
+      "key_rules": [
+        "Do not assume this is a broken map; check already returns OK",
+        "Use show-mode to confirm the exact unreachable tile before editing",
+        "If you keep it unreachable, document or mark the intent so the issue does not keep resurfacing"
+      ]
+    },
+    "orphan_wave_softbody_placements": {
+      "title": "Wave and soft-body orphan placements",
+      "kind": "audit",
+      "summary": "standing_waves, pendulum_slap, and soft_trampoline already exist with registry entries and target maps. These are true placement tasks, but each one has a concept-specific target cluster rather than a generic empty-cell drop.",
+      "sources": [
+        "doc/tasks/_audits/place_orphans_discovery.md",
+        "commons/artifacts/registry/wavefunctions.json",
+        "commons/artifacts/registry/soft_bodies.json",
+        "doc/curriculum_audit/_placement_plan.md"
+      ],
+      "key_rules": [
+        "Use the existing registered artifact scenes; do not rebuild the artifacts",
+        "WaveFunctions_Sine_Space placement should stay on reachable upper walkway, not in the lower void strip",
+        "WaveFunctions_Pendulum placement should reinforce the pendulum cluster",
+        "SoftBodies_Soft_Body_Deformation placement should reinforce restoring-force teaching, not gallery overflow"
+      ]
+    },
+    "noise_vector_fields_gap": {
+      "title": "Noise vector-fields gap",
+      "kind": "audit",
+      "summary": "The noise audit and placement plan both say the vector-field objective has no map anchor. Discovery favors creating a new map Noise_Vector_Fields for curl_noise_particles, noise_mixer, and likely VectorFieldFlow.",
+      "sources": [
+        "doc/tasks/_audits/place_orphans_discovery.md",
+        "doc/curriculum_audit/noise.md",
+        "doc/curriculum_audit/_placement_plan.md",
+        "commons/artifacts/registry/randomness.json"
+      ],
+      "key_rules": [
+        "Treat this as a map-design task, not a forced placement into Noise_One or Noise_Voxel",
+        "curl_noise_particles and noise_mixer already exist and are registered",
+        "Consider VectorFieldFlow as a same-map companion because the audit names the vector-field objective as the missing anchor"
+      ]
+    },
+    "trans_composition_activation": {
+      "title": "Trans_Composition activation",
+      "kind": "audit",
+      "summary": "Trans_Composition already exists as a map and passes pathfinder, but it is not in transformation.json. The matrix cluster currently lives only in Trans_Introduction and should move into this dormant composition map.",
+      "sources": [
+        "doc/tasks/_audits/place_orphans_discovery.md",
+        "commons/maps/Trans_Introduction/map_data.json",
+        "commons/maps/Trans_Composition/map_data.json",
+        "doc/curriculum_audit/transformation.md"
+      ],
+      "key_rules": [
+        "Activate Trans_Composition in the live sequence before moving artifacts into it",
+        "Move the four algebra-heavy artifacts as a cluster, not one-by-one in isolation",
+        "Reconcile transformation.json content and artifact_groups while you are touching the manifest"
+      ]
+    },
+    "primitives_missing_geometry_maps": {
+      "title": "Primitives missing geometry maps",
+      "kind": "audit",
+      "summary": "Point_Polygon, Point_Circle, and Point_Coordinate_System are missing from the ideal audit progression, but the live primitives sequence currently does not reference them. These are sequence-expansion tasks, not simple orphan placements.",
+      "sources": [
+        "doc/tasks/_audits/place_orphans_discovery.md",
+        "doc/curriculum_audit/primitives.md",
+        "commons/maps/sequences/primitives.json"
+      ],
+      "key_rules": [
+        "Do not treat missing map folders as simple placement work",
+        "Polygon and circle likely need new teaching artifacts as well as maps",
+        "Any implementation must decide how these maps fit into the live primitives sequence, which currently uses a different set of later maps"
+      ]
+    },
+    "coordinate_system_reuse": {
+      "title": "CoordinateSystem3M reuse",
+      "kind": "audit",
+      "summary": "CoordinateSystem3M already exists, is registered, and is already placed in Point_One and Point_Zero. The missing work is the dedicated map and sequence slot, not artifact construction.",
+      "sources": [
+        "doc/tasks/_audits/place_orphans_discovery.md",
+        "commons/artifacts/registry/vectors.json",
+        "commons/maps/Point_One/map_data.json",
+        "commons/maps/Point_Zero/map_data.json"
+      ],
+      "key_rules": [
+        "Reuse the existing CoordinateSystem3M artifact rather than building a new one from scratch",
+        "Decide whether the dedicated coordinate-system map duplicates or relocates the existing placements",
+        "Treat this as map design plus sequence insertion"
+      ]
+    }
+  }
+}

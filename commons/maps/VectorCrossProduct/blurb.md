@@ -1,0 +1,1 @@
+Two vectors define a plane. The cross product escapes that plane — a third vector perpendicular to both, its length encoding the area of the parallelogram they span. Torque, angular momentum, surface normals: wherever perpendicularity matters, the cross product appears.

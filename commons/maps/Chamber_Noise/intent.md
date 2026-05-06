@@ -1,0 +1,7 @@
+Concept: World-building — the player becomes environment designer rather than combatant. The chamber replaces the creature encounter with a place-making practice, and the catalyst acts on terrain rather than on a body.
+Sequence role: Catalyst chamber for the Noise sequence, the last map before returning to the Lab. The only chamber in the curriculum without a creature, because the sequence's argument — that coherent noise is a generative medium — lands best when the learner uses it to author a small place rather than to negotiate with something else.
+Technical angle: Catalyst mode none, because no projectile is needed. Creature none. A control bench exposes noise parameters — frequency, amplitude, octaves, displacement magnitude, distribution type — and the learner drives the terrain in real time. Science Screen field renders the current noise distribution as a 2D map, a heightmap, and a parameter list.
+Critical angle: The chamber reframes the catalyst practice as custodial rather than as adversarial. Care is directed at a terrain the learner is making rather than at a creature the learner is meeting; world-building is argued as a legitimate mode of computational practice rather than as a mere background activity for combat.
+Key artifacts: the noise parameter bench carries the learner's authoring instrument; the Science Screen's field display reads the terrain as data; a small gallery saves configurations so the learner can compare the places they have made.
+
+Gap: No gap identified.

@@ -1,0 +1,63 @@
+{
+    "description": "Minimal dark void with occasional disturbances",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -25,
+            "bus": "DeepAmbient"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -28,
+            "bus": "Wind"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.FLYING_LOTUS_SAMPLER",
+                "AudioSynthesizer.APHEX_TWIN_MODULAR"
+            ],
+            "interval_range": [
+                40.0,
+                120.0
+            ],
+            "volume_range": [
+                -30,
+                -24
+            ],
+            "bus": "Glitch"
+        }
+    ],
+    "buses": {
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.8,
+                    "damping": 0.05
+                },
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 600
+                }
+            ]
+        },
+        "Glitch": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 750,
+                    "tap1_level_db": -3.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

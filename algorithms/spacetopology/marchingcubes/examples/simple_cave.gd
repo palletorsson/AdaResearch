@@ -4,7 +4,7 @@
 
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	generate_simple_cave()
 
 func generate_simple_cave():
@@ -86,4 +86,13 @@ static func create_cave_procedurally(parent_node: Node3D, params: Dictionary = {
 	return generator
 
 # Example usage in other scripts:
-# var cave = simple_cave.create_cave_procedurally(self, {"size": Vector3(100, 40, 100)}) 
+# var cave = simple_cave.create_cave_procedurally(self, {"size": Vector3(100, 40, 100)})
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

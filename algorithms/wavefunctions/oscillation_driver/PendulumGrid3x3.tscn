@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://6sycwgh8gun2"]
+
+[ext_resource type="Script" uid="uid://ch6v3n1iehlro" path="res://algorithms/wavefunctions/oscillation_driver/PendulumGrid3x3.gd" id="1_grid"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.65, 0.65, 0.7, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+
+[node name="PendulumGrid3x3" type="Node3D"]
+script = ExtResource("1_grid")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 5, 8, 5)
+light_energy = 0.8
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, -0.5, -0.5, -5, 8, 5)
+light_energy = 0.4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+text = "3x3 Double Pendulum Grid"
+font_size = 48
+outline_size = 8

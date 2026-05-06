@@ -1,0 +1,140 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ForcesSystems",
+  "home_sequence": "forces",
+  "dimensions": {
+    "w": 22,
+    "d": 17
+  },
+  "signature": "vector_fields renders 3D force fields as arrow glyphs showing direction and magnitude at every grid point. force_field_visualizer adds interactive color-coded field strength overlays. force_fields implements configurable superposition of multiple field types. particle_systems launches many bodies under shared forces to demonstrate statistical emergence. mass_spring_damper implements F = -kx - bv (damped harmonic oscillation) with tunable stiffness and damping. spring_system extends oscillation to coupled springs showing energy transfer. firework_launcher combines launch impulse",
+  "style": null,
+  "echoes": [
+    "color",
+    "randomness"
+  ],
+  "density": 0.051,
+  "breath_zones": [
+    {
+      "size": 56,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        3.625,
+        3.2142857142857144
+      ]
+    },
+    {
+      "size": 53,
+      "bounds": {
+        "x": 14,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.58490566037736,
+        3.3207547169811322
+      ]
+    },
+    {
+      "size": 53,
+      "bounds": {
+        "x": 0,
+        "z": 9,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        3.641509433962264,
+        12.264150943396226
+      ]
+    },
+    {
+      "size": 53,
+      "bounds": {
+        "x": 14,
+        "z": 9,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.660377358490567,
+        12.283018867924529
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 16,
+      "z": 1,
+      "token": "vector_fields"
+    },
+    {
+      "x": 18,
+      "z": 1,
+      "token": "force_field_visualizer"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "particle_systems"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "force_fields"
+    },
+    {
+      "x": 16,
+      "z": 10,
+      "token": "mass_spring_damper"
+    },
+    {
+      "x": 18,
+      "z": 10,
+      "token": "spring_system"
+    },
+    {
+      "x": 2,
+      "z": 13,
+      "token": "firework_launcher"
+    },
+    {
+      "x": 16,
+      "z": 13,
+      "token": "example_3_2_forces_with_arbitrary_angular_motion_vr"
+    },
+    {
+      "x": 18,
+      "z": 13,
+      "token": "example_3_3_pointing_in_the_direction_of_motion_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 12,
+    "walkable_cells": 236,
+    "breath_zone_count": 4,
+    "unique_tokens": 12
+  }
+}

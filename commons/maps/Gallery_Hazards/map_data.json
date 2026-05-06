@@ -1,0 +1,115 @@
+{
+  "map_info": {
+    "name": "Gallery: Hazards",
+    "lookup_name": "Gallery_Hazards",
+    "description": "Showcase of 11 unplaced artifacts from Hazards. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 10,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": [
+        "Browse 11 Hazards artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "Hazards Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" ","sp"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","request_note:0:1.5#text:deltahedron creature"," ","request_note:0:1.5#text:fibonacci snake"," ","request_note:0:1.5#text:flora landscape"," ","request_note:0:1.5#text:folding zoo"," "," "],
+      [" "," ","deltahedron_creature:0:-0.5"," ","fibonacci_snake:0:-0.5"," ","flora_landscape:0:-0.5"," ","folding_zoo:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:foliage showcase"," ","request_note:0:1.5#text:goomba box"," ","request_note:0:1.5#text:helix cylinder creature"," ","request_note:0:1.5#text:shell roller"," "," "],
+      [" "," ","foliage_showcase:0:-0.5"," ","goomba_box:0:-0.5"," ","helix_cylinder_creature:0:-0.5"," ","shell_roller:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:spring hopper"," ","request_note:0:1.5#text:sweeper block"," ","request_note:0:1.5#text:wedge skill pickup"," "," "," "," "],
+      [" "," ","spring_hopper:0:-0.5"," ","sweeper_block:0:-0.5"," ","wedge_skill_pickup:0:-0.5"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

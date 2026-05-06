@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "gridagent_puzzle02_translate",
+  "home_sequence": "devexamples",
+  "dimensions": {
+    "w": 11,
+    "d": 9
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.041,
+  "breath_zones": [
+    {
+      "size": 35,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 9
+      },
+      "centroid": [
+        4.857142857142857,
+        3.914285714285714
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "algo_gun"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "gridagent"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 49,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

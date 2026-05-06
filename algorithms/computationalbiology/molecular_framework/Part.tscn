@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://mol_part_scene_001"]
+
+[ext_resource type="Script" path="res://algorithms/computationalbiology/molecular_framework/Part.gd" id="1_part_script"]
+
+[node name="MolecularPart" type="Node3D"]
+script = ExtResource("1_part_script")
+idle_float_radius = 0.4
+idle_float_speed = 0.6
+float_noise_scale = 0.02
+dock_spring = 8.0
+dock_damp = 0.85
+dock_rotation_speed = 5.0
+part_mass = 0.5
+
+[node name="Mesh" type="MeshInstance3D" parent="."]

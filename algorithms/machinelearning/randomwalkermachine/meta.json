@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_randomwalkermachine",
+  "title": "Random Walker Machine",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.tscn",
+  "script": "res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/randomwalkermachine/README.md",
+    "tutorial": "res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/randomwalkermachine/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/randomwalkermachine/summery.md"
+  },
+  "summary": "The `Random Walker Machine` sandbox investigates concepts from Random Walker Machine inside a real-time Godot lab.",
+  "keywords": [
+    "agents",
+    "create",
+    "evolve",
+    "experiment",
+    "generate",
+    "init"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

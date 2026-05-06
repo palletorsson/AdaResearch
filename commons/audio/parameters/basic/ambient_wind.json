@@ -16,49 +16,49 @@
 				"step": 0.5
 			},
 			"noise_density": {
-				"value": 4,
+				"value": 5,
 				"min": 2,
 				"max": 8,
 				"step": 1
 			},
 			"filter_cutoff": {
-				"value": 0.7,
+				"value": 0.6,
 				"min": 0.3,
 				"max": 1.0,
 				"step": 0.05
 			},
 			"gust_rate1": {
-				"value": 0.2,
+				"value": 0.15,
 				"min": 0.05,
 				"max": 1.0,
 				"step": 0.05
 			},
 			"gust_rate2": {
-				"value": 0.07,
+				"value": 0.05,
 				"min": 0.02,
 				"max": 0.5,
 				"step": 0.01
 			},
 			"tonal_freq1": {
-				"value": 80.0,
+				"value": 70.0,
 				"min": 40.0,
 				"max": 200.0,
 				"step": 2.0
 			},
 			"tonal_freq2": {
-				"value": 120.0,
+				"value": 110.0,
 				"min": 60.0,
 				"max": 300.0,
 				"step": 2.0
 			},
 			"tonal_amount": {
-				"value": 0.1,
+				"value": 0.08,
 				"min": 0.0,
 				"max": 0.5,
 				"step": 0.01
 			},
 			"amplitude": {
-				"value": 0.2,
+				"value": 0.18,
 				"min": 0.0,
 				"max": 1.0,
 				"step": 0.01

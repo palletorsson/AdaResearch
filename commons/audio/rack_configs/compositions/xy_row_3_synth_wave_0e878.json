@@ -1,0 +1,42 @@
+{
+  "rack_info": {
+    "name": "3x XY",
+    "description": "3x XY — auto-generated UVAC composition. sound_type=synth_wave, composition_type=xy_row.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "composition_type": "xy_row",
+    "composition_count": 3
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "xy_0",
+      "xy_1",
+      "xy_2"
+    ]
+  ],
+  "control_definitions": {
+    "xy_0": {
+      "type": "xy",
+      "label": "AMP/RATE",
+      "parameter_x": "amp",
+      "parameter_y": "rate"
+    },
+    "xy_1": {
+      "type": "xy",
+      "label": "DRIVE/REL",
+      "parameter_x": "drive",
+      "parameter_y": "release"
+    },
+    "xy_2": {
+      "type": "xy",
+      "label": "AMP/DRIVE",
+      "parameter_x": "amp",
+      "parameter_y": "drive"
+    }
+  }
+}

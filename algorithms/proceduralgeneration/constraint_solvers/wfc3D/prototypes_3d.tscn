@@ -1,0 +1,246 @@
+[gd_scene load_steps=15 format=3 uid="uid://dleiyk2nga7l7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lwc1"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6psp"]
+albedo_color = Color(0.4, 0.25, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxp5e"]
+transparency = 1
+albedo_color = Color(0.1, 0.3, 0.9, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dokq1"]
+albedo_color = Color(0.76, 0.7, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynw1u"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxs20"]
+albedo_color = Color(0.3, 0.7, 0.3, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_7xvhp"]
+left_to_right = 0.0
+size = Vector3(2, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kdvi"]
+albedo_color = Color(0.55, 0.55, 0.55, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_biuna"]
+left_to_right = 0.0
+size = Vector3(2, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rt65y"]
+albedo_color = Color(0.55, 0.55, 0.55, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_ugban"]
+left_to_right = 0.0
+size = Vector3(2, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ubg1g"]
+albedo_color = Color(0.55, 0.55, 0.55, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_iyda5"]
+left_to_right = 0.0
+size = Vector3(2, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60uij"]
+albedo_color = Color(0.55, 0.55, 0.55, 1)
+
+[node name="Prototypes3D" type="Node3D"]
+
+[node name="Air" type="Node3D" parent="."]
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 10.0
+
+[node name="Air_Water" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "water_top",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 10.0
+
+[node name="Grass" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 5.0
+
+[node name="@CSGBox3D@175259" type="CSGBox3D" parent="Grass"]
+use_collision = true
+size = Vector3(2, 1, 2)
+material = SubResource("StandardMaterial3D_8lwc1")
+
+[node name="Dirt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 2.0
+
+[node name="@CSGBox3D@175260" type="CSGBox3D" parent="Dirt"]
+use_collision = true
+size = Vector3(2, 1, 2)
+material = SubResource("StandardMaterial3D_o6psp")
+
+[node name="Water" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "water_top",
+"pz": "rough"
+}
+metadata/weight = 5.0
+
+[node name="@CSGBox3D@175261" type="CSGBox3D" parent="Water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+size = Vector3(2, 0.8, 2)
+material = SubResource("StandardMaterial3D_fxp5e")
+
+[node name="Sand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 3.0
+
+[node name="@CSGBox3D@175262" type="CSGBox3D" parent="Sand"]
+use_collision = true
+size = Vector3(2, 1, 2)
+material = SubResource("StandardMaterial3D_dokq1")
+
+[node name="Stone" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 4.0
+
+[node name="@CSGBox3D@175263" type="CSGBox3D" parent="Stone"]
+use_collision = true
+size = Vector3(2, 1, 2)
+material = SubResource("StandardMaterial3D_ynw1u")
+
+[node name="Grass_Cliff" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 1.0
+
+[node name="@CSGBox3D@175264" type="CSGBox3D" parent="Grass_Cliff"]
+use_collision = true
+size = Vector3(2, 1, 2)
+material = SubResource("StandardMaterial3D_vxs20")
+
+[node name="Slope_N" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 0.5
+
+[node name="@CSGMesh3D@175265" type="CSGMesh3D" parent="Slope_N"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+use_collision = true
+mesh = SubResource("PrismMesh_7xvhp")
+material = SubResource("StandardMaterial3D_6kdvi")
+
+[node name="Slope_S" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 0.5
+
+[node name="@CSGMesh3D@175266" type="CSGMesh3D" parent="Slope_S"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+use_collision = true
+mesh = SubResource("PrismMesh_biuna")
+material = SubResource("StandardMaterial3D_rt65y")
+
+[node name="Slope_E" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 0.5
+
+[node name="@CSGMesh3D@175267" type="CSGMesh3D" parent="Slope_E"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+use_collision = true
+mesh = SubResource("PrismMesh_ugban")
+material = SubResource("StandardMaterial3D_ubg1g")
+
+[node name="Slope_W" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, 0)
+metadata/sockets = {
+"nx": "rough",
+"ny": "rough",
+"nz": "rough",
+"px": "rough",
+"py": "rough",
+"pz": "rough"
+}
+metadata/weight = 0.5
+
+[node name="@CSGMesh3D@175268" type="CSGMesh3D" parent="Slope_W"]
+use_collision = true
+mesh = SubResource("PrismMesh_iyda5")
+material = SubResource("StandardMaterial3D_60uij")

@@ -1,0 +1,5 @@
+A force field is a function from position to vector. F(x) returns a direction and magnitude at every point in space. Gravity pulls uniformly downward. Wind pushes laterally with drag. A point attractor draws inward by inverse square. A vortex curls particles into spirals. Each field is simple. Stack them and the simplicity disappears.
+
+The room descends toward its center — geometry mirroring the gradient. Particles spawn at the rim and fall inward through layered fields, their trajectories shaped by invisible architecture. Superposition is the key: forces add linearly, but the resulting motion is nonlinear, chaotic, orbital. Balls cluster, scatter, orbit, collapse. No two runs identical.
+
+Every landscape is a field. Every field is a bias written into space itself. The particles don't decide where to go — the room already decided for them.

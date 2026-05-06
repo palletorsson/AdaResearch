@@ -1,13 +1,13 @@
 extends Node3D
 
 # Test script to validate all 10 sphere variations + additional bodies
-func _ready():
+func _ready() -> void:
 	print("🔬 Testing Soft Body Variations...")
 	
 	await get_tree().create_timer(1.0).timeout
 	_test_all_variations()
 
-func _test_all_variations():
+func _test_all_variations() -> void:
 	var soft_body_variations = get_node("SoftBodyVariations")
 	if not soft_body_variations:
 		print("❌ SoftBodyVariations node not found!")
@@ -82,7 +82,7 @@ func _test_all_variations():
 	print("\n🧪 Testing Physics Behavior Differences...")
 	_test_physics_differences()
 
-func _test_physics_differences():
+func _test_physics_differences() -> void:
 	var soft_body_variations = get_node("SoftBodyVariations")
 	var bodies = []
 	
@@ -99,8 +99,8 @@ func _test_physics_differences():
 		# Apply same impulse to different bodies
 		var test_force = Vector3(2.0, 1.0, 0.0)
 		for body in bodies:
-			if body.has_method("apply_impulse"):
-				body.apply_impulse(test_force)
+			if body.has_method("apply_external_impulse"):
+				body.apply_external_impulse(test_force)
 				print("  Applied impulse to %s (P=%.2f)" % [body.name, body.pressure_coefficient])
 		
 		print("⏰ Observe the different deformation behaviors!")
@@ -108,3 +108,6 @@ func _test_physics_differences():
 		print("   - Higher precision = smoother physics")
 	
 	print("\n🏁 Soft Body Variations Test Complete!")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

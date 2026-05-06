@@ -1,0 +1,3 @@
+The crawler folds flat when your shrink ray hits it. It does not die. It compresses. You have changed something without destroying it.
+
+This is the catalyst chamber for the Transformation sequence — where the algebra of rotation, translation, and scale becomes encounter rather than exercise. The `miura_crawler` is the creature you studied as a folding primitive; here it responds to your catalyst mode. The Science Screen logs the event as scatter data, making the transformation measurable even as it feels like relationship. Chambers are where mathematics ceases to be an abstraction you operate and becomes a language in which you negotiate with something else. Folded is not less than unfolded. It is a different state of the same being.

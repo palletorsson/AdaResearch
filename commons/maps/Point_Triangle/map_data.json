@@ -1,0 +1,132 @@
+{
+  "audio": {
+	"ambient_preset": "fractal_exploration",
+	"volume": -10
+  },
+  "documentation": {
+	"key_elements": [
+	  "`la:triangle` annotation at (3,3)",
+	  "`triangle_line_puzzle` at (3,3)",
+	  "`triangle` manipulator at (3,6)",
+	  "`dark_sphere` enclosure at (3,4)",
+	  "`cube_scene` fillhole marker at (3,5)",
+	  "`triangleprofiles` elevated profile at (3,7)",
+      "Teleporter `t` at (3,7)"
+	],
+	"layout": "7x9 grid with varied heights; central workspace.",
+	"objective": "Introduce triangle as first closure; editable vertices, inside/outside distinction.",
+	"summary": "Point_Triangle - First Closed Geometry"
+  },
+  "layers": {
+	"interactables": [
+	  ["dark_sphere:0:-0.5"," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","triangle_line_puzzle:0:1.2:0#fillhole:remove"," "," "," "],
+	  [" "," "," "," "," ","parasol_triangle"," "],
+	  [" "," "," ","cube_scene:0:0:0.90#group:fillhole"," "," "," "],
+	  [" "," "," ","triangle:0:1.0"," "," "," "],
+	  [" "," "," ","triangleprofiles:0:2"," ","science_screen:180:1.5#mode:triangle"," "],
+	  [" "," "," "," "," "," "," "]
+	],
+	"structure": [
+	  ["1","1","1","1","2","0","0"],
+	  ["1","1","1","1","2","0","0"],
+	  ["2","2","1","1","1","2","2"],
+	  ["0","2","1","1","1","1","1"],
+	  ["0","1","1","1","1","1","1"],
+	  ["0","2","2","1","2","2","2"],
+	  ["0","1","1","1","1","1","1"],
+	  ["0","1","1","0","1","1","1"],
+	  ["0","1","1","1","1","1","1"]
+	],
+	"utilities": [
+	  ["sp"," "," "," "," "," ","an:-90"],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","t"," "," "," "],
+	  [" "," "," ","3t:Everything triangle"," "," "," "]
+	]
+  },
+  "lighting": {
+	"ambient_color": [
+	  0.4,
+	  0.4,
+	  0.5
+	],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "color": [
+		1,
+		0.9,
+		0.8
+	  ],
+	  "direction": [
+		-0.4,
+		-0.7,
+		-0.4
+	  ],
+	  "enabled": true,
+	  "energy": 1.2
+	}
+  },
+  "map_info": {
+	"description": "The triangle is the first figure that produces a surface.With three points, a boundary is closed and an interior appears. Unlike the line, which only connects, the triangle defines an area and establishes orientation: front and back, inside and outside.",
+	"dimensions": {
+	  "depth": 9,
+	  "max_height": 3,
+	  "width": 7
+	},
+	"format": "json",
+	"lookup_name": "Point_Triangle",
+	"manual_file": "res://commons/context/clipboard/tutorial_text/triangle_axioms.md",
+	"metadata": {
+	  "category": "tutorial",
+	  "difficulty": "beginner",
+	  "estimated_time": "3-4 minutes",
+	  "learning_objectives": [
+		"First closure",
+		"Inside/outside boundary",
+        "Triangle as surface"
+	  ]
+	},
+	"name": "Triangle",
+	"title": "Three Points Close a Boundary",
+	"version": "1.0"
+  },
+  "settings": {
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [
+		0.2,
+		0.3,
+		0.7
+	  ],
+	  "type": "sky"
+	},
+	"cube_size": 1,
+	"enable_physics": true,
+	"gutter": 0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true
+  },
+  "utility_definitions": {
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	},
+	"t": {
+	  "description": "Continue to next step",
+	  "name": "Next",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
+  }
+}

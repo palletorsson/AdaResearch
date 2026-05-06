@@ -1,0 +1,24 @@
+{
+  "id": "mg_rd03_mitosis_bulged",
+  "notes": "DNA BRIDGE: RD mitosis \u2192 mesh-grammar. Self-replicating RD cells as heightmap, then bulge operation on up-facing faces \u2014 Turing dots become inflated bubble-clusters.",
+  "seed": {
+    "rd": {
+      "preset": "mitosis",
+      "grid_size": 48,
+      "iterations": 3000,
+      "seed": 5,
+      "world_size": 0.7,
+      "height_amp": 0.18
+    }
+  },
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "up",
+      "params": {
+        "amount": 0.08
+      }
+    }
+  ]
+}

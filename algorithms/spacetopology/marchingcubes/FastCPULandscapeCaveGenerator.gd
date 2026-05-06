@@ -1,4 +1,4 @@
-# FastCPULandscapeCaveGenerator.gd
+﻿# FastCPULandscapeCaveGenerator.gd
 # High-performance CPU landscape + cave generator
 # Optimized for speed while maintaining quality
 
@@ -48,14 +48,14 @@ var generation_time: float = 0.0
 signal generation_complete(generation_time: float)
 signal generation_progress(percentage: float)
 
-func _ready():
+func _ready() -> void:
 	setup_noise_generators()
 	setup_marching_cubes()
 	
 	if auto_generate_on_ready:
 		call_deferred("generate_world_async")
 
-func setup_noise_generators():
+func setup_noise_generators() -> void:
 	"""Initialize all noise generators for terrain and caves"""
 	var base_seed = randi()
 	
@@ -91,7 +91,7 @@ func setup_noise_generators():
 	
 	print("FastCPULandscapeCaveGenerator: Noise generators initialized")
 
-func setup_marching_cubes():
+func setup_marching_cubes() -> void:
 	"""Initialize marching cubes system"""
 	marching_cubes = MarchingCubesGenerator.new()
 	marching_cubes.threshold = 0.5
@@ -99,7 +99,7 @@ func setup_marching_cubes():
 	
 	print("FastCPULandscapeCaveGenerator: Marching cubes initialized")
 
-func generate_world_async():
+func generate_world_async() -> void:
 	"""Generate the complete world asynchronously using optimized CPU approach"""
 	var start_time = Time.get_ticks_msec()
 	print("FastCPULandscapeCaveGenerator: Starting optimized world generation...")
@@ -245,7 +245,7 @@ func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 	await get_tree().process_frame  # Allow for UI updates
 	return mesh
 
-func create_mesh_instance(mesh: ArrayMesh):
+func create_mesh_instance(mesh: ArrayMesh) -> void:
 	"""Create visual mesh instance with appropriate material"""
 	terrain_mesh_instance = MeshInstance3D.new()
 	terrain_mesh_instance.name = "FastLandscapeCaveMesh"
@@ -259,7 +259,7 @@ func create_mesh_instance(mesh: ArrayMesh):
 	add_child(terrain_mesh_instance)
 	print("FastCPULandscapeCaveGenerator: Mesh instance created")
 
-func create_collision_shape(mesh: ArrayMesh):
+func create_collision_shape(mesh: ArrayMesh) -> void:
 	"""Create collision shape for physics interaction"""
 	if mesh.get_surface_count() == 0:
 		return
@@ -311,7 +311,7 @@ func get_landscape_material() -> StandardMaterial3D:
 	
 	return material
 
-func clear_previous_world():
+func clear_previous_world() -> void:
 	"""Clear any previously generated content"""
 	if terrain_mesh_instance:
 		terrain_mesh_instance.queue_free()
@@ -322,12 +322,12 @@ func clear_previous_world():
 		collision_body = null
 
 # === PUBLIC API ===
-func regenerate_world():
+func regenerate_world() -> void:
 	"""Regenerate the world with new random seed"""
 	setup_noise_generators()  # New random seed
 	generate_world_async()
 
-func set_terrain_parameters(params: Dictionary):
+func set_terrain_parameters(params: Dictionary) -> void:
 	"""Update terrain parameters"""
 	if params.has("height"):
 		terrain_height = params.height
@@ -336,7 +336,7 @@ func set_terrain_parameters(params: Dictionary):
 		if noise_terrain:
 			noise_terrain.frequency = terrain_noise_frequency
 
-func set_cave_parameters(params: Dictionary):
+func set_cave_parameters(params: Dictionary) -> void:
 	"""Update cave parameters"""
 	if params.has("density"):
 		cave_density = params.density
@@ -376,36 +376,36 @@ func get_generation_info() -> Dictionary:
 	}
 
 # === UI INTERACTION METHODS ===
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input events"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
 				regenerate_world()
 
-func _on_generation_complete(time: float):
+func _on_generation_complete(_time: float) -> void:
 	"""Handle generation completion"""
 	update_stats_display()
 
-func _on_generation_progress(percentage: float):
+func _on_generation_progress(percentage: float) -> void:
 	"""Handle generation progress updates"""
 	var progress_bar = get_node_or_null("UI/ControlsPanel/ControlsContainer/ProgressBar")
 	if progress_bar:
 		progress_bar.value = percentage
 
-func _on_regenerate_button_pressed():
+func _on_regenerate_button_pressed() -> void:
 	"""Handle regenerate button press"""
 	regenerate_world()
 
-func _on_terrain_height_slider_value_changed(value: float):
+func _on_terrain_height_slider_value_changed(value: float) -> void:
 	"""Handle terrain height slider change"""
 	set_terrain_parameters({"height": value})
 
-func _on_cave_density_slider_value_changed(value: float):
+func _on_cave_density_slider_value_changed(value: float) -> void:
 	"""Handle cave density slider change"""
 	set_cave_parameters({"density": value})
 
-func update_stats_display():
+func update_stats_display() -> void:
 	"""Update the statistics display"""
 	var stats_label = get_node_or_null("UI/InfoPanel/InfoContainer/StatsLabel")
 	if stats_label:
@@ -439,3 +439,12 @@ func format_number(num: int) -> String:
 		count += 1
 	
 	return result
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

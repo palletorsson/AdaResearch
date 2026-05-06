@@ -1,0 +1,65 @@
+{
+    "_metadata": {
+        "sound_type": "vocal_chop_house",
+        "display_name": "House Vocal Chop",
+        "description": "Classic house vocal chop style - syncopated, filtered, euphoric",
+        "category": "pop_edm",
+        "era": "early_90s",
+        "tags": ["vocal", "chop", "house", "90s", "filter"],
+        "reference_artists": ["Crystal Waters", "Robin S", "Black Box"],
+        "reference_tracks": ["Gypsy Woman (La Da Dee)", "Show Me Love", "Everybody Everybody"],
+        "created_at": "2026-02-05T12:00:00Z",
+        "version": "1.0"
+    },
+    "parameters": {
+        "style": {
+            "value": "la_da_dee",
+            "options": ["la_da_dee", "diva_phrase", "ooh_aah", "yeah_hit"]
+        },
+        "notes": {
+            "value": ["F4", "A4", "C5", "F5"],
+            "options": [
+                ["F4", "A4", "C5", "F5"],
+                ["C4", "E4", "G4", "C5"],
+                ["A3", "C4", "E4", "A4"],
+                ["G4", "B4", "D5", "G5"]
+            ]
+        },
+        "rhythm": {
+            "value": "syncopated",
+            "options": ["syncopated", "on_beat", "offbeat", "triplet"]
+        },
+        "filter_sweep": {
+            "value": true,
+            "options": [true, false]
+        },
+        "filter_sweep_time_ms": {
+            "value": 500,
+            "min": 100,
+            "max": 2000,
+            "step": 50
+        },
+        "formant": {
+            "value": "ah",
+            "options": ["ah", "ee", "oh", "oo"]
+        },
+        "vibrato_rate_hz": {
+            "value": 5.0,
+            "min": 0.0,
+            "max": 10.0,
+            "step": 0.5
+        },
+        "vibrato_depth": {
+            "value": 0.1,
+            "min": 0.0,
+            "max": 0.3,
+            "step": 0.02
+        },
+        "reverb_send": {
+            "value": 0.3,
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.1
+        }
+    }
+}

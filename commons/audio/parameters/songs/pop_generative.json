@@ -1,0 +1,66 @@
+{
+    "_metadata": {
+        "sound_type": "pop_generative_song",
+        "display_name": "Pop Generative",
+        "description": "Modern pop production. Polished, dynamic, hook-driven. Sidechained synths, layered drums, clear song structure with verse-chorus dynamics.",
+        "category": "songs",
+        "tags": ["pop", "generative", "full_song", "interactive", "verse", "chorus", "modern"],
+        "is_interactive_song": true,
+        "reference_artists": ["Billie Eilish", "The Weeknd", "Dua Lipa", "Max Martin"],
+        "reference_tracks": ["bad guy", "Blinding Lights", "Don't Start Now"]
+    },
+    "identity": {
+        "emotion": "immediate_emotion",
+        "era": "2010s_present",
+        "character": ["polished", "dynamic", "hook_driven", "catchy"]
+    },
+    "parameters": {
+        "duration": { "min": 150.0, "max": 270.0, "value": 200.0, "step": 10.0, "description": "Radio-friendly length" },
+        "bpm": { "min": 100, "max": 128, "value": 118, "step": 1, "description": "Varies by sub-style" },
+        "key": { "options": ["C", "G", "F", "D"], "value": "C", "description": "Bright major key — pop optimism and clarity" },
+        "energy": { "min": 0.0, "max": 1.0, "value": 0.7, "step": 0.1, "description": "Overall intensity" }
+    },
+    "sound_design": {
+        "drums": {
+            "kick": { "character": "punchy", "sidechain_source": true },
+            "snare": { "layers": ["acoustic", "clap", "snap"], "parallel_compression": true },
+            "hats": { "character": "crisp_programmed" }
+        },
+        "synths": {
+            "pads": { "style": "lush_wide", "plugins": ["serum", "massive"] },
+            "bass": { "layers": ["sine_sub", "mid_layer_separate"] },
+            "leads": { "options": ["supersaw_energy", "bells_hooks"] }
+        },
+        "piano": {
+            "role": "emotional_anchor",
+            "style": "intimate_close_mic",
+            "processing": ["gentle_compression", "subtle_reverb"]
+        }
+    },
+    "song_structure": {
+        "sections": [
+            { "name": "intro", "bars": { "min": 4, "max": 8 }, "character": "sparse_hook_hint" },
+            { "name": "verse_1", "bars": { "min": 8, "max": 16 }, "character": "minimal_vocal_focus" },
+            { "name": "pre_chorus", "bars": { "min": 4, "max": 8 }, "character": "build_tension" },
+            { "name": "chorus", "bars": { "min": 8, "max": 16 }, "character": "full_energy_hook" },
+            { "name": "verse_2", "bars": { "min": 8, "max": 16 }, "character": "added_elements" },
+            { "name": "pre_chorus_2", "bars": { "min": 4, "max": 8 }, "character": "bigger_build" },
+            { "name": "chorus_2", "bars": { "min": 8, "max": 16 }, "character": "repeat_variations" },
+            { "name": "bridge", "bars": 8, "character": "different_breakdown" },
+            { "name": "final_chorus", "bars": { "min": 8, "max": 16 }, "character": "maximum_energy" },
+            { "name": "outro", "bars": { "min": 4, "max": 8 }, "character": "hook_repetition_fade" }
+        ]
+    },
+    "chord_progressions": [
+        { "name": "axis_of_awesome", "chords": ["I", "V", "vi", "IV"], "notes": "Most pop songs" },
+        { "name": "emotional_minor_start", "chords": ["vi", "IV", "I", "V"] },
+        { "name": "bright_hopeful", "chords": ["I", "IV", "vi", "V"] },
+        { "name": "minor_anthem", "chords": ["i", "VI", "III", "VII"] }
+    ],
+    "arrangement": {
+        "sidechain_compression": "everything_ducks_to_kick",
+        "dynamics": "pre_chorus_to_chorus_energy_shift",
+        "risers": "white_noise_tension_builders",
+        "impacts": "big_hits_on_downbeats_after_drops"
+    }
+}

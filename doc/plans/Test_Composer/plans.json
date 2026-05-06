@@ -1,0 +1,38 @@
+{
+  "name": "Test_Composer",
+  "title": "Test Composer",
+  "description": "Three dressing rooms composed along a south-walking path.",
+  "dimensions": {
+    "rows": 14,
+    "cols": 14
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    1,
+    7
+  ],
+  "teleport": [
+    12,
+    7
+  ],
+  "artifacts": [
+    {
+      "name": "russell_set_box",
+      "row": 4,
+      "col": 7,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "qfep_formula_3d",
+      "row": 6,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "lambda_slider",
+      "row": 9,
+      "col": 7,
+      "family": "substrate_vectors"
+    }
+  ]
+}

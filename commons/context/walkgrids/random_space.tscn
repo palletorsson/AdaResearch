@@ -6,13 +6,17 @@
 cull_mode = 2
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_t8aym"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0, 0, 0.5)
 
 [node name="RandomSpace" type="Node3D"]
 script = ExtResource("1_n8dtw")
 seed_value = 1
-space_size = Vector2(8, 8)
-height_scale = 0.1
-position_offset = Vector3(0, 0.1, 0)
+space_size = Vector2(11, 20)
+resolution = 50
+chaos_level = 1.0
+height_scale = 0.12
+enable_animation = false
+position_offset = Vector3(0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -23,7 +27,12 @@ material_override = SubResource("StandardMaterial3D_n8dtw")
 shape = SubResource("ConvexPolygonShape3D_t8aym")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.941482, 0.337062, 0, -0.337062, 0.941482, 0, 1.38567, 2.0455)
+transform = Transform3D(1, 0, 0, 0, 0.895766, 0.444526, 0, -0.444526, 0.895766, 0, 0.717012, 1.41516)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40231, 0)
+light_color = Color(1, 0.980392, 0.929412, 1)
+light_energy = 2.2
+omni_range = 18.0
+omni_attenuation = 0.9
+

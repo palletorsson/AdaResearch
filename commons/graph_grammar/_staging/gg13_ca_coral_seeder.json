@@ -1,0 +1,41 @@
+{
+  "id": "gg13_ca_coral_seeder",
+  "notes": "CA-seeded CORAL forest + metaball \u00e2\u20ac\u201d colonies form in CA patterns, fuse smoothly.",
+  "seed": {
+    "ca_scatter": {
+      "rule": "conway",
+      "iterations": 15,
+      "grid_size": 18,
+      "region_size": 2.0,
+      "y": 0,
+      "density": 0.4,
+      "seed": 29,
+      "radius": 0.1,
+      "jitter": 0.2
+    }
+  },
+  "iterations": 2,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.18,
+  "metaball_resolution": 64,
+  "materials": {
+    "default": [
+      0.7,
+      0.36,
+      0.34
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.4,
+        "spread_deg": 55,
+        "radius_decay": 0.72,
+        "jitter": 0.4
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://transform_staircase_dna_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/arrays/transform_staircase.gd" id="1_script"]
+
+[node name="TransformStaircaseDNA" type="Node3D"]
+script = ExtResource("1_script")
+staircase_type = 5
+step_count = 48
+base_scale = Vector3(0.15, 0.15, 0.15)
+dna_radius = 0.6
+dna_rise_per_step = 0.08
+dna_angle_per_step = 30.0
+use_rainbow = false
+emit_light = true

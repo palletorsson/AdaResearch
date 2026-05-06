@@ -1,5 +1,15 @@
 extends MeshInstance3D
 
+# @identity
+# essence: shader_param(flow_map, noise, derivative_height) -> animated water surface — flow-mapped distortion with underwater fog, refraction, and depth-faded transparency on a subdivided PlaneMesh
+# desire: to look down at a procedural water surface and see flow patterns ripple through noise-driven height displacement — to feel the refraction bend what lies beneath
+# critical_parameter: flow_strength — controls how aggressively the flow map distorts the water surface; at zero it is glass, at maximum it is rapids
+# triggers: _ready loads catwater.gdshader and sets all uniform parameters; update_material_properties refreshes at runtime; create_simple_flow_map generates a radial flow texture procedurally
+# emerges: the interaction of flow direction, noise-driven height, and refraction produces water that looks physically plausible from pure math — no simulation, just shader trickery
+# needs: [missing] no VR sliders or buttons — exported parameters only; no runtime interaction beyond code
+# relationships: provides the water surface for Pattern_Generation_Five; uses catwater.gdshader from commons/resourses/shaders; a material artifact like shader_11_queerrubber but for landscape
+# truth: water is the surface that never holds still — and a shader that fakes motion through coordinate distortion proves that stillness was always an illusion
+
 # Water material setup script
 class_name WaterSurface
 
@@ -31,10 +41,10 @@ class_name WaterSurface
 
 var water_material: ShaderMaterial
 
-func _ready():
+func _ready() -> void:
 	setup_water_material()
 
-func setup_water_material():
+func setup_water_material() -> void:
 	# Load the water shader
 	var water_shader = load("res://commons/resourses/shaders/catwater.gdshader") # Adjust path as needed
 	
@@ -56,7 +66,7 @@ func setup_water_material():
 		plane_mesh.subdivide_depth = 32
 		mesh = plane_mesh
 
-func update_material_properties():
+func update_material_properties() -> void:
 	if water_material == null:
 		return
 		
@@ -90,7 +100,7 @@ func update_material_properties():
 	water_material.set_shader_parameter("depth_fade_distance", depth_fade_distance)
 
 # Call this when you change properties at runtime
-func _set_property_changed():
+func _set_property_changed() -> void:
 	update_material_properties()
 
 # Example function to create flow map texture procedurally
@@ -145,3 +155,6 @@ func create_simple_derivative_height_texture(size: int = 512) -> ImageTexture:
 	var texture = ImageTexture.new()
 	texture.set_image(image)
 	return texture
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

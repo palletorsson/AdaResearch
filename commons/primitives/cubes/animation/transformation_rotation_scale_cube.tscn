@@ -1,13 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv1qkq6lipnwy"]
+[gd_scene load_steps=5 format=3 uid="uid://cv1qkq6lipnwy"]
 
-[ext_resource type="PackedScene" uid="uid://u6bpfxudkduq" path="res://commons/primitives/cubes/animation/transformation_rotation_cube.tscn" id="1_phl8g"]
-[ext_resource type="Script" uid="uid://dmxx8xjkd3ksa" path="res://commons/primitives/cubes/animation/ScaleTween.gd" id="2_xqnjh"]
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://djyrr6lleolqm" path="res://commons/primitives/cubes/animation/TransformationTween.gd" id="2_trans"]
+[ext_resource type="Script" uid="uid://2ga0rsmpymgc" path="res://commons/primitives/cubes/animation/RotationTween.gd" id="3_rot"]
+[ext_resource type="Script" uid="uid://dmxx8xjkd3ksa" path="res://commons/primitives/cubes/animation/ScaleTween.gd" id="4_scale"]
 
-[node name="CubeWithAllAnimations" instance=ExtResource("1_phl8g")]
+[node name="TransformationRotationScaleCube" instance=ExtResource("1_base")]
 
-[node name="ScaleTween" type="Node" parent="." index="4"]
-script = ExtResource("2_xqnjh")
+[node name="TransformationTween" type="Node" parent="." index="1"]
+script = ExtResource("2_trans")
 
-[node name="Label3D_1_2" type="Label3D" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-text = "1:1"
+[node name="RotationTween" type="Node" parent="." index="2"]
+script = ExtResource("3_rot")
+
+[node name="ScaleTween" type="Node" parent="." index="3"]
+script = ExtResource("4_scale")
+scale_amount = 1.8
+duration = 2.0

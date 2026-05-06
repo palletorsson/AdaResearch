@@ -1,4 +1,15 @@
 # fractal.gd - Organic fractal generator with animation
+#
+# @identity
+# essence: part(level, i) = parent.rotation * child.rotation * spin(t), 5-branch recursive tree with MultiMesh
+# desire: To sway — every branch spins independently, gravity sags the arms, and the whole organism breathes
+# critical_parameter: reverse_spin_chance (0.25) — the probability a branch spins opposite to its siblings, creating visual turbulence
+# triggers: Each frame updates all levels: spin accumulates, sag responds to gravity, colors shift by golden ratio sampling
+# emerges: Organic breathing motion from independent per-part spin velocities and gravity sag — no animation was designed, only physics
+# needs: VR depth control [missing], wind force input [missing]
+# relationships: Most performant fractal (MultiMesh GPU instancing); organic counterpart to the geometric recursive_tree
+# truth: An organism is a tree where every branch has forgotten it is a branch and believes it is the whole.
+
 extends Node3D
 
 @export_range(3, 8) var depth: int = 6
@@ -42,10 +53,10 @@ const ROTATIONS = [
 	Quaternion(Vector3.RIGHT, -PI * 0.5)
 ]
 
-func _ready():
+func _ready() -> void:
 	generate_fractal()
 
-func generate_fractal():
+func generate_fractal() -> void:
 	clear_fractal()
 	
 	# Initialize parts arrays for each level
@@ -80,7 +91,7 @@ func create_part(child_index: int) -> Dictionary:
 		"max_sag_angle": deg_to_rad(randf_range(max_sag_angle_a, max_sag_angle_b))
 	}
 
-func create_multi_mesh_instances():
+func create_multi_mesh_instances() -> void:
 	multi_mesh_instances.clear()
 	
 	for i in range(depth):
@@ -101,10 +112,10 @@ func create_multi_mesh_instances():
 		add_child(mmi)
 		multi_mesh_instances.append(mmi)
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	update_fractal(delta)
 
-func update_fractal(delta: float):
+func update_fractal(delta: float) -> void:
 	# Update root part
 	var root_part = parts[0][0]
 	root_part.spin_angle += root_part.spin_velocity * delta
@@ -162,7 +173,7 @@ func update_fractal(delta: float):
 	# Update colors
 	update_colors()
 
-func update_colors():
+func update_colors() -> void:
 	if not material:
 		return
 	
@@ -175,27 +186,30 @@ func update_colors():
 			
 			if is_leaf:
 				# Leaf colors
-				var t = fract(j * 0.381 + 0.618)
+				var t = fmod(j * 0.381 + 0.618, 1.0)
 				color = leaf_color_a.lerp(leaf_color_b, t)
 			else:
 				# Gradient colors
 				var gradient_t = float(i) / float(depth - 2)
 				var color_a = gradient_a.sample(gradient_t) if gradient_a else Color.WHITE
 				var color_b = gradient_b.sample(gradient_t) if gradient_b else Color.WHITE
-				var t = fract(j * 0.381 + i * 0.618)
+				var t = fmod(j * 0.381 + i * 0.618, 1.0)
 				color = color_a.lerp(color_b, t)
 			
 			# Set color for this instance
 			multi_mesh.set_instance_color(j, color)
 
-func fract(value: float) -> float:
+func fmod_wrap(value: float) -> float:
 	return value - floor(value)
 
-func clear_fractal():
+func clear_fractal() -> void:
 	for mmi in multi_mesh_instances:
 		mmi.queue_free()
 	multi_mesh_instances.clear()
 	parts.clear()
 
-func _exit_tree():
+func _exit_tree() -> void:
 	clear_fractal()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

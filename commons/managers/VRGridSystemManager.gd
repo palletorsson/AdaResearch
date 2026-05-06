@@ -1,4 +1,4 @@
-# VRGridSystemManager.gd
+﻿# VRGridSystemManager.gd
 # Manages VR experiences using grid systems directly without progression requirements
 # Provides a clean interface for starting VR with specific maps/grid configurations
 
@@ -400,7 +400,7 @@ func get_spawn_point(spawn_name: String) -> Dictionary:
 	}
 
 # Position player at specific location by name (simplified)
-func position_player_at_spawn(spawn_name: String) -> bool:
+func position_player_at_spawn(_spawn_name: String) -> bool:
 	print("VRGridSystemManager: Using default positioning (spawn system not available)")
 	_position_player_at_default_location()
 	return true

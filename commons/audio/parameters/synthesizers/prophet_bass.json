@@ -1,0 +1,22 @@
+{
+  "prophet_bass": {
+    "_metadata": {
+      "sound_type": "prophet_bass",
+      "description": "Lush unison synth bass with poly-mod motion in Prophet style.",
+      "instrument": "Sequential Prophet style",
+      "era": "1980s-present",
+      "tags": ["bass", "prophet", "synthwave", "unison"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 2.4, "min": 0.2, "max": 10.0, "step": 0.1 },
+      "frequency": { "value": 82.4, "min": 20.0, "max": 220.0, "step": 0.1 },
+      "osc_detune": { "value": 0.08, "min": 0.0, "max": 0.3, "step": 0.001 },
+      "poly_mod_amount": { "value": 0.3, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "filter_cutoff": { "value": 1200.0, "min": 100.0, "max": 6000.0, "step": 10.0 },
+      "filter_resonance": { "value": 0.4, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "unison_voices": { "value": 4, "min": 1, "max": 8, "step": 1 },
+      "amplitude": { "value": 0.42, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

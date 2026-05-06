@@ -1,12 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://kpfhe8ow58om"]
+[gd_scene load_steps=19 format=3 uid="uid://kpfhe8ow58om"]
 
 [ext_resource type="Shader" uid="uid://c1t2n5kkfm7l3" path="res://algorithms/patterngeneration/gridscheckers/checkers.gdshader" id="1_fn5mw"]
 [ext_resource type="Shader" uid="uid://ba41jfva80kxe" path="res://algorithms/patterngeneration/gridscheckers/linegrid.gdshader" id="2_74bsi"]
 [ext_resource type="Shader" uid="uid://ca0b28fh2swso" path="res://algorithms/patterngeneration/gridscheckers/diagonalstripes.gdshader" id="3_7afui"]
 [ext_resource type="Shader" uid="uid://c08ke0r6841lq" path="res://algorithms/patterngeneration/gridscheckers/rotatedcheckers.gdshader" id="4_wiot5"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(10, 0.1, 10)
+[ext_resource type="Shader" uid="uid://dmuhwr41shmck" path="res://commons/resourses/shaders/alber.gdshader" id="5_rvlub"]
+[ext_resource type="Shader" uid="uid://dbfclper4f7sg" path="res://commons/resourses/shaders/grid_dirt.gdshader" id="6_sywul"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_74bsi"]
 render_priority = 0
@@ -16,8 +15,7 @@ shader_parameter/col_a = Color(0.05, 0.02, 0.08, 1)
 shader_parameter/col_b = Color(1, 1, 1, 1)
 shader_parameter/glow = 0.8
 
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(5, 0.1, 5)
+[sub_resource type="BoxMesh" id="BoxMesh_wiot5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7afui"]
 render_priority = 0
@@ -29,8 +27,7 @@ shader_parameter/col_bg = Color(0.02, 0, 0.06, 1)
 shader_parameter/col_ln = Color(1, 0.6, 0, 1)
 shader_parameter/glow = 1.6
 
-[sub_resource type="BoxMesh" id="BoxMesh_2"]
-size = Vector3(10, 0.1, 10)
+[sub_resource type="BoxMesh" id="BoxMesh_rvlub"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wiot5"]
 render_priority = 0
@@ -40,8 +37,7 @@ shader_parameter/stripe_width = 0.35
 shader_parameter/col_a = Color(0.02, 0.02, 0.08, 1)
 shader_parameter/col_b = Color(1, 0, 0.8, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_3"]
-size = Vector3(10, 0.1, 10)
+[sub_resource type="BoxMesh" id="BoxMesh_sywul"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rvlub"]
 render_priority = 0
@@ -58,32 +54,71 @@ shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.45
 
 [sub_resource type="SphereMesh" id="SphereMesh_wiot5"]
-radius = 2.0
-height = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sywul"]
+render_priority = 0
+shader = ExtResource("5_rvlub")
+shader_parameter/time = 0.0
+shader_parameter/scale = 20.0
+shader_parameter/animation_speed = 1.0
+shader_parameter/animate = true
+shader_parameter/intensity = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ospqc"]
+material = SubResource("ShaderMaterial_sywul")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ospqc"]
+render_priority = 0
+shader = ExtResource("6_sywul")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/show_interior = true
+shader_parameter/dirt_scale = 1.5
+shader_parameter/dirt_intensity = 1.0
+shader_parameter/decay_scale = 2.0
+shader_parameter/decay_intensity = 0.5
+shader_parameter/animate_dirt = false
+shader_parameter/time = 0.0
+shader_parameter/grid_height_spacing = 0.5
+shader_parameter/grid_line_thickness = 0.02
+shader_parameter/grid_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/grid_intensity = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_b17u0"]
+material = SubResource("ShaderMaterial_ospqc")
 
 [node name="FloorScene" type="Node3D"]
 
 [node name="FloorCollider" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCollider"]
-shape = SubResource("BoxShape3D_1")
-
 [node name="FloorSection1" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 4.37607, -0.715593)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("ShaderMaterial_74bsi")
-mesh = SubResource("BoxMesh_1")
+mesh = SubResource("BoxMesh_wiot5")
 
 [node name="FloorSection2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
 material_override = SubResource("ShaderMaterial_7afui")
-mesh = SubResource("BoxMesh_2")
+mesh = SubResource("BoxMesh_rvlub")
 
 [node name="FloorSection3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.20424, 0.978921, 0, -0.978921, 0.20424, 0, 1.546, -10.3729)
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.5, 2)
 material_override = SubResource("ShaderMaterial_wiot5")
-mesh = SubResource("BoxMesh_3")
+mesh = SubResource("BoxMesh_sywul")
 
 [node name="FloorSection4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = SubResource("ShaderMaterial_rvlub")
 mesh = SubResource("SphereMesh_wiot5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.093149, -2.5387537)
+mesh = SubResource("SphereMesh_ospqc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.081234455, 0.49752343, -3.8616881)
+mesh = SubResource("BoxMesh_b17u0")

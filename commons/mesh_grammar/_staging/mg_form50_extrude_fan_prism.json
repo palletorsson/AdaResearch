@@ -1,0 +1,52 @@
+{
+  "id": "mg_form50_extrude_fan_prism",
+  "notes": "EXTRUDE PASS: prism is pulled into a theatrical fan by stacked extrusions after an initial pinch. Less rotation, more accumulative push.",
+  "seed": "prism",
+  "seed_scale": 0.36,
+  "generations": 2,
+  "camera_pitch": 0.32,
+  "camera_focus_y_bias": -0.16,
+  "camera_fit_padding": 0.62,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.22,
+        "scale": 0.9,
+        "top_tag": "fan_mid",
+        "side_tag": "fan_mid_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:fan_mid",
+      "params": {
+        "scale": 1.18
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:fan_mid",
+      "params": {
+        "distance": 0.14,
+        "scale": 1.08,
+        "top_tag": "fan_outer",
+        "side_tag": "fan_outer_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:fan_outer",
+      "params": {
+        "distance": 0.12,
+        "scale": 1.04,
+        "top_tag": "fan_tip",
+        "side_tag": "fan_tip_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

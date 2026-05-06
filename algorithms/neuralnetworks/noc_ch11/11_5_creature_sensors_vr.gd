@@ -130,6 +130,7 @@ class SensorCreature:
 		body = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.06
+		sphere.height = 0.12
 		body.mesh = sphere
 		body.material_override = body_mat
 		root.add_child(body)
@@ -189,6 +190,7 @@ class SensorBeam:
 		tip_mesh = MeshInstance3D.new()
 		var tip := SphereMesh.new()
 		tip.radius = 0.02
+		tip.height = 0.04
 		tip_mesh.mesh = tip
 		var tip_mat := StandardMaterial3D.new()
 		if highlight_mat is StandardMaterial3D:
@@ -204,7 +206,12 @@ class SensorBeam:
 		node.position = origin
 
 		# orient beam towards tip (cylinder defaults along +Y)
-		node.look_at(tip_pos, Vector3.UP)
+		var direction_to_tip = (tip_pos - node.position).normalized()
+		var up_vector = Vector3.UP
+		if abs(direction_to_tip.dot(Vector3.UP)) > 0.9:  # If direction is nearly vertical
+			up_vector = Vector3.RIGHT  # Use right vector instead
+		
+		node.look_at_from_position(node.position, tip_pos, up_vector)
 		node.rotate_x(-PI / 2.0)
 
 		beam_mesh.scale = Vector3(0.08, length, 0.08)
@@ -243,6 +250,7 @@ class FoodTarget:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = rad
+		sphere.height = rad * 2.0
 		mesh.mesh = sphere
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(1.0, 0.7, 0.95, 0.6)
@@ -262,4 +270,13 @@ class FoodTarget:
 			(mesh.mesh as SphereMesh).radius = radius
 
 class Hazard:
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
 	pass

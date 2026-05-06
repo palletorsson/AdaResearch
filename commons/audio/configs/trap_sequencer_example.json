@@ -1,0 +1,40 @@
+{
+	"_comment": "Example Trap Sequencer Configuration",
+	"_description": "Automated trap beat sequencer with real-time control",
+
+	"pattern": "minimal_trap",
+	"bpm": 85.0,
+	"swing": 0.15,
+	"variation": 0.1,
+	"master_volume": -6.0,
+
+	"track_volumes": {
+		"kick": 0.0,
+		"snare": -3.0,
+		"hihat": -6.0,
+		"perc": -9.0
+	},
+
+	"kick_bus": "TrapKick",
+	"snare_bus": "TrapSnare",
+	"hihat_bus": "TrapHiHat",
+	"perc_bus": "TrapPerc",
+
+	"_available_patterns": [
+		"minimal_trap - Sparse minimal beat",
+		"hard_trap - Aggressive hard-hitting",
+		"triplet_trap - Triplet feel groove",
+		"drill - UK drill pattern",
+		"ambient_sparse - Very sparse ambient percussion"
+	],
+
+	"_custom_pattern_example": {
+		"custom_pattern": {
+			"steps": 16,
+			"kick": [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+			"snare": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+			"hihat_closed": [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+			"clap": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+		}
+	}
+}

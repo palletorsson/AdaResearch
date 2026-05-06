@@ -1,0 +1,39 @@
+{
+  "id": "tr10_lorenz_fan",
+  "force": "fan",
+  "params": {
+    "count": 6,
+    "spread": 0.002,
+    "inner_force": "lorenz_attractor",
+    "inner_params": {
+      "sigma": 10.0,
+      "rho": 28.0,
+      "beta": 2.6667,
+      "scale": 0.04
+    }
+  },
+  "initial": {
+    "pos": [
+      0.1,
+      0.0,
+      0.0
+    ]
+  },
+  "duration": 40.0,
+  "dt": 0.005,
+  "interpretation": "tube",
+  "tube_radius": 0.008,
+  "color_start": [
+    0.4,
+    0.65,
+    0.95
+  ],
+  "color_end": [
+    0.95,
+    0.4,
+    0.65
+  ],
+  "camera_yaw": 0.6,
+  "camera_pitch": 0.3,
+  "notes": "Six Lorenz attractors from infinitesimally-different initial conditions (spread 0.002). The chaos amplifies the difference; the six trails diverge into distinct butterflies. Sensitivity to initial conditions made spatial."
+}

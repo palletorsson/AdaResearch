@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Physics_4",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.078,
+  "breath_zones": [
+    {
+      "size": 47,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.1914893617021276,
+        3.1914893617021276
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "example_6_5_chain_vr"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 4,
+      "token": "example_6_7_bridge_vr"
+    },
+    {
+      "x": 2,
+      "z": 5,
+      "token": "example_6_6_grab_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

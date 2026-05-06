@@ -21,7 +21,7 @@ class DijkstraNode:
 	var distance: float = INF
 	var visited: bool = false
 	
-	func _init(node_id: String, pos: Vector3):
+	func _init(node_id: String, pos: Vector3) -> void:
 		id = node_id
 		position = pos
 
@@ -31,17 +31,17 @@ class DijkstraEdge:
 	var weight: float
 	var visual_object: CSGCylinder3D
 	
-	func _init(from: String, to: String, w: float):
+	func _init(from: String, to: String, w: float) -> void:
 		from_node = from
 		to_node = to
 		weight = w
 
-func _ready():
+func _ready() -> void:
 	create_sample_graph()
 	setup_materials()
 	initialize_dijkstra()
 
-func create_sample_graph():
+func create_sample_graph() -> void:
 	var node_positions = [
 		Vector3(-4, -2, 0), Vector3(-2, 0, 0), Vector3(0, -1, 0),
 		Vector3(2, 1, 0), Vector3(4, 2, 0), Vector3(1, -2, 0),
@@ -82,7 +82,7 @@ func create_sample_graph():
 		edge_cylinder.position = (from_pos + to_pos) * 0.5
 		
 		var direction = (to_pos - from_pos).normalized()
-		edge_cylinder.look_at(from_pos + direction, Vector3.UP)
+		edge_cylinder.look_at_from_position(edge_cylinder.position, from_pos + direction, Vector3.UP)
 		edge_cylinder.rotate_object_local(Vector3.RIGHT, PI/2)
 		
 		get_or_create_container("GraphEdges").add_child(edge_cylinder)
@@ -99,11 +99,11 @@ func get_or_create_container(container_name: String) -> Node3D:
 		add_child(container)
 	return container
 
-func setup_materials():
+func setup_materials() -> void:
 	# Create and setup indicator materials
 	setup_indicator_materials()
 
-func setup_indicator_materials():
+func setup_indicator_materials() -> void:
 	# Distance indicator
 	var distance_indicator = get_or_create_indicator("DistanceIndicator", 0.15, 1.0)
 	var distance_material = StandardMaterial3D.new()
@@ -146,7 +146,7 @@ func get_or_create_box_indicator(indicator_name: String, size: Vector3) -> CSGBo
 		add_child(indicator)
 	return indicator
 
-func initialize_dijkstra():
+func initialize_dijkstra() -> void:
 	# Reset algorithm state
 	distances.clear()
 	previous.clear()
@@ -172,7 +172,7 @@ func initialize_dijkstra():
 	
 	update_node_visuals()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	algorithm_step_timer += delta
 	
@@ -183,7 +183,7 @@ func _process(delta):
 	animate_dijkstra()
 	animate_indicators()
 
-func dijkstra_step():
+func dijkstra_step() -> void:
 	if unvisited.size() == 0:
 		path_found = true
 		return
@@ -239,7 +239,7 @@ func get_node_by_id(id: String) -> DijkstraNode:
 			return node
 	return null
 
-func update_node_visuals():
+func update_node_visuals() -> void:
 	for node in graph_nodes:
 		if not node.visual_object or not is_instance_valid(node.visual_object):
 			continue
@@ -307,7 +307,7 @@ func reconstruct_path() -> Array:
 	
 	return path
 
-func animate_dijkstra():
+func animate_dijkstra() -> void:
 	# Animate current node
 	if current_node != null:
 		var current_visual_node = get_node_by_id(current_node)
@@ -329,7 +329,7 @@ func animate_dijkstra():
 			var edge_pulse = 1.0 + sin(time * 6.0 + i * 0.3) * 0.1
 			edge.visual_object.scale = Vector3.ONE * edge_pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Distance indicator
 	var current_distance = distances.get(current_node, 0.0)
 	var distance_height = min(current_distance / 10.0, 1.0) * 2.0 + 0.5
@@ -380,17 +380,17 @@ func get_algorithm_info() -> Dictionary:
 	}
 
 # Additional utility functions
-func reset_algorithm():
+func reset_algorithm() -> void:
 	"""Reset the algorithm to initial state"""
 	initialize_dijkstra()
 
-func set_start_node(node_id: String):
+func set_start_node(node_id: String) -> void:
 	"""Set a new start node"""
 	if get_node_by_id(node_id):
 		start_node = node_id
 		initialize_dijkstra()
 
-func set_end_node(node_id: String):
+func set_end_node(node_id: String) -> void:
 	"""Set a new end node"""
 	if get_node_by_id(node_id):
 		end_node = node_id
@@ -403,3 +403,12 @@ func get_shortest_distance() -> float:
 func is_algorithm_complete() -> bool:
 	"""Check if the algorithm has completed"""
 	return path_found or unvisited.size() == 0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

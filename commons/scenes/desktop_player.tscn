@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b33u6sl8s1ook"]
+
+[ext_resource type="Script" uid="uid://djouaaayjptll" path="res://commons/scenes/DesktopPlayer.gd" id="1"]
+[ext_resource type="PackedScene" path="res://commons/scenes/DesktopInteractionPointer.tscn" id="2_ptr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.3
+height = 1.8
+
+[node name="DesktopPlayer" type="CharacterBody3D" unique_id=548298795 groups=["player_body"]]
+script = ExtResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1330005015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="Head" type="Node3D" parent="." unique_id=1143380036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=2131095310]
+
+[node name="Crosshair" type="ColorRect" parent="Head/Camera3D" unique_id=1157544849]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.8)
+
+[node name="InteractionRaycast" type="RayCast3D" parent="Head" unique_id=1589176171]
+target_position = Vector3(0, 0, -5)
+collide_with_areas = true
+
+[node name="DesktopInteractionPointer" parent="Head" unique_id=340938085 instance=ExtResource("2_ptr")]

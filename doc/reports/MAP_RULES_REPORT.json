@@ -1,0 +1,4914 @@
+{
+  "generated": "2026-02-24T11:41:18",
+  "summary": {
+    "total_sequences": 50,
+    "total_maps": 478,
+    "ok": 367,
+    "fail": 73,
+    "missing": 38
+  },
+  "sequences": [
+    {
+      "id": "advancedlaboratory",
+      "title": "Advanced Laboratory",
+      "ok": 0,
+      "fail": 0,
+      "missing": 0,
+      "maps": []
+    },
+    {
+      "id": "array_tutorial",
+      "title": "Array Tutorial Sequence",
+      "ok": 6,
+      "fail": 1,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Array_Patterns",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Tutorial_Single",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Tutorial_Row",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Tutorial_2D_Build",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'gridagent' at (1,21) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'xyz_coordinates' at (7,22) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Tutorial_2D_Build**\n  Manual: Artifact 'gridagent' at (1,21) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'xyz_coordinates' at (7,22) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Tutorial_3D",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Tutorial_Pattern",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Tutorial_Disco",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "artmathematics",
+      "title": "Art & Mathematics: Visual Philosophy",
+      "ok": 8,
+      "fail": 1,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Escher_Impossible",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (6,10) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'escher_staircase' at (0,4) h=4 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'penrose_triangle' at (10,7) h=3 unreachable"
+            }
+          ],
+          "fix_text": "**Escher_Impossible**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'escher_staircase' at (0,4) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'penrose_triangle' at (10,7) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Escher_Tessellation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Magritte_Pipe",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Magritte_Windows",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Rodchenko_Monochrome",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Judd_Minimalism",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Dark_Room_Paradox",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Art_Synthesis",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "MathArt_Cultural_History",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "biological_growth",
+      "title": "Biological Growth: Life Finds a Way",
+      "ok": 2,
+      "fail": 2,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "BG_Slime_Mold",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,9) — no structure row at z=10 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'slimemold' at (4,4) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**BG_Slime_Mold**\n  Manual: Artifact 'slimemold' at (4,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,9) — no structure row at z=10 to catch player"
+        },
+        {
+          "name": "BG_Mushroom_Growth",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,9) — no structure row at z=10 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "BG_Crack_Propagation",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (8,8) — no structure row at z=9 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "BG_Tree_Forms",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,9) — no structure row at z=10 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'tree_gen' at (4,4) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**BG_Tree_Forms**\n  Manual: Artifact 'tree_gen' at (4,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,9) — no structure row at z=10 to catch player"
+        }
+      ]
+    },
+    {
+      "id": "bricolage",
+      "title": "Bricolage: From Parts to Structures",
+      "ok": 7,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Bricolage_Inventory",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Bricolage_Affordances",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Bricolage_Arrays_as_Probes",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Bricolage_Constraints",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Bricolage_Chair",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Bricolage_Sculpture",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Bricolage_Dome",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "cellularautomata",
+      "title": "Cellular Automata: Local Rules, Global Patterns",
+      "ok": 10,
+      "fail": 2,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "CA_1",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_3",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_4",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (6,0) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'hexagon_ca_vr' at (3,3) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'ca_growth_network' at (2,4) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**CA_4**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'hexagon_ca_vr' at (3,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'ca_growth_network' at (2,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "CA_5",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_6",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_7",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_8",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_9",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_10",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "CA_12",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (5,6) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'ca_screen' at (2,2) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'self_organization_ca' at (4,2) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'disease_spread_ca' at (6,2) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'volumetric_fog_ca' at (3,3) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**CA_12**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'ca_screen' at (2,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'self_organization_ca' at (4,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'disease_spread_ca' at (6,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'volumetric_fog_ca' at (3,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "CA_11",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "title": "Color: Perception, Not Physics",
+      "ok": 7,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Color_Nails",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Color_Grid_Pallet",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Color_Rainbow",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Color_Pillar",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Color_Paint",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Color_Walls",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Color_Flashlight",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "computationalgeometry",
+      "title": "Computational Geometry",
+      "ok": 11,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Geometric_1",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Geometric_2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Geometric_3",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ComputationalGeometry_Medial_Axis_Transform",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ComputationalGeometry_Distance_Fields_SDF",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ComputationalGeometry_Morphological_Operations",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ComputationalGeometry_Closest_Pair_Problem",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ComputationalGeometry_Line_Intersection",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ComputationalGeometry_Point_in_Polygon",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ComputationalGeometry_Convex_Hull_Algorithms",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ComputationalGeometry_Euclidean_Distance_Transform",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "constraint_solvers",
+      "title": "Constraint Solvers: Rules Become Worlds",
+      "ok": 3,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "ProceduralGeneration_Wave_Function_Collapse",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationWfcDungeonGenerator",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationBooleanPatterns",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "criticalalgorithms",
+      "title": "Critical Algorithms",
+      "ok": 0,
+      "fail": 0,
+      "missing": 0,
+      "maps": []
+    },
+    {
+      "id": "datastructures",
+      "title": "Data Structures",
+      "ok": 12,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "DataStructures_Linked_Lists",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Trees",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Hash_Maps",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Heap_Operations",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Graph_Structures",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Union_Find_Disjoint_Set",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Trie_Operations",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Segment_Tree",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Suffix_Array_Tree",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_BSP_Trees",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "DataStructures_Quadtrees_Octrees",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "devexamples",
+      "title": "Dev Examples",
+      "ok": 1,
+      "fail": 5,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "gridagent_puzzle01_copy",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'gridagent' at (4,4) h=1 unreachable"
+            }
+          ],
+          "fix_text": "**gridagent_puzzle01_copy**\n  Manual: Artifact 'gridagent' at (4,4) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "gridagent_puzzle02_translate",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'gridagent' at (5,4) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**gridagent_puzzle02_translate**\n  Manual: Artifact 'gridagent' at (5,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "gridagent_puzzle03_rotate",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'gridagent' at (5,5) h=1 unreachable"
+            }
+          ],
+          "fix_text": "**gridagent_puzzle03_rotate**\n  Manual: Artifact 'gridagent' at (5,5) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "InfoBoards_Example",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (2,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Structure_Examples",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'light_sphere' at (13,3) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'crystal_ball' at (3,9) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'spectrum_display' at (19,9) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((0,3), (16,24)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Structure_Examples**\n  Manual: Artifact 'light_sphere' at (13,3) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'crystal_ball' at (3,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'spectrum_display' at (19,9) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 2 teleports ((0,3), (16,24)) — normal case is 1"
+        },
+        {
+          "name": "Structure_Examples_VoxelGrammar_Principles",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (10,2) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'probability_sphere' at (27,21) h=1 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((3,18), (32,30)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Structure_Examples_VoxelGrammar_Principles**\n  Manual: Artifact 'cube_scene' at (10,2) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'probability_sphere' at (27,21) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 2 teleports ((3,18), (32,30)) — normal case is 1"
+        }
+      ]
+    },
+    {
+      "id": "forces",
+      "title": "Vectors & Forces: From Direction to Dynamics",
+      "ok": 23,
+      "fail": 1,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "VectorBasics",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "VectorSubtraction",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "VectorCrossProduct",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "VectorProjectionReflection",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Vectors_1",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'example_1_2_bouncing_ball_with_vectors_vr' at (0,7) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Vectors_1**\n  Manual: Artifact 'example_1_2_bouncing_ball_with_vectors_vr' at (0,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "VectorFieldFlow",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "VectorForces",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "VectorMotion",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Vectors_5",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Vectors_6",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "VectorWorkbench",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,10) — no structure row at z=11 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_1",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_3",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_4",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_5",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_6",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_7",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_8",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "VectorThrowing",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "VectorTorque",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_Drone_Game",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (11,18) — no structure row at z=19 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Forces_Destruct",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (11,18) — no structure row at z=19 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Vector_Exhibition",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "foundationscrisis",
+      "title": "Foundations Crisis: The Limits of Formalization",
+      "ok": 6,
+      "fail": 1,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Euclid_Parallel",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "NonEuclidean_Spaces",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Russell_Paradox",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Godel_Incompleteness",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((5,12), (7,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Brouwer_Intuitionism",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Florensky_Paraconsistent",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Crisis_Synthesis",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'qfep_formula_3d' at (8,8) h=3 unreachable"
+            }
+          ],
+          "fix_text": "**Crisis_Synthesis**\n  Manual: Artifact 'qfep_formula_3d' at (8,8) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        }
+      ]
+    },
+    {
+      "id": "fractals",
+      "title": "Fractals: Infinite Within Finite",
+      "ok": 12,
+      "fail": 2,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Fractals_1",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'recursive_boolean_cube' at (1,10) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'example_8_3_recursion_circles_vr' at (4,10) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'fibonacci_pagoda' at (2,12) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Fractals_1**\n  Manual: Artifact 'recursive_boolean_cube' at (1,10) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'example_8_3_recursion_circles_vr' at (4,10) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'fibonacci_pagoda' at (2,12) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Fractals_2",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (13,11) — no structure row at z=12 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_3",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_4",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_5",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_6",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (6,6) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'menger_sponge' at (6,5) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((6,6), (11,11)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Fractals_6**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'menger_sponge' at (6,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 2 teleports ((6,6), (11,11)) — normal case is 1"
+        },
+        {
+          "name": "Fractals_7",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_8",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_9",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_10",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_11",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_12",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_13",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Fractals_14",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "grammar_systems",
+      "title": "Grammar Systems: Rules Generate Structure",
+      "ok": 3,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "ProceduralGeneration_Markov_Chains",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_N_grams",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Voxel_Grammar",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (4,10) — no structure row at z=11 to catch player"
+            }
+          ],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "graphtheory",
+      "title": "Graph Theory: Connections Define Structure",
+      "ok": 8,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "GT_Foundations",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "GT_Layout",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "GT_Pathfinding",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "GT_Network_Analysis",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "GT_Connectivity",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "GT_Spanning_Trees",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "GT_Flow",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "GT_Matching",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "higher_dimensions",
+      "title": "Higher Dimensions: Beyond 3D",
+      "ok": 4,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "ProceduralGenerationTesseractErrorTunnel",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationSixteenCellNet",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationNetSpace",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationPortals",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "isosurfaces",
+      "title": "Isosurfaces: Implicit to Explicit",
+      "ok": 16,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "ISO_Voxel_Cave_Struct",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((2,0), (6,0), (11,8)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_3",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_4",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_5",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_6",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_7",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_8",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_9",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_10",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((2,0), (11,8)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Showcase_11",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Marching_Gyroid",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_MarchingCave",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationMarchingcubesPortalLandscape",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Metaballs",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ISO_Implicit_Modeling",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "joints",
+      "title": "Joints",
+      "ok": 7,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Joints_1",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Joints_2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Joints_3",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Joints_4",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Joints_5",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Joints_6",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Joints_7",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "lab",
+      "title": "Lab Evolution States",
+      "ok": 0,
+      "fail": 1,
+      "missing": 38,
+      "maps": [
+        {
+          "name": "Lab",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (3,2) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (2,4) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'living_paper' at (2,2) h=2 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_lines' at (2,4) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'light_sphere' at (3,4) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'vr_component_demo' at (4,4) h=1 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((8,1), (3,2), (2,4), (8,5)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Lab**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'living_paper' at (2,2) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_lines' at (2,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'light_sphere' at (3,4) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'vr_component_demo' at (4,4) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((8,1), (3,2), (2,4), (8,5)) — normal case is 1"
+        },
+        {
+          "name": "Lab/map_data_init",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_one",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_one_back",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_back",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_primitives",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_transformation",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_color",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_forces",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_array_tutorial",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_wavefunctions",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_randomness",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_noise",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_cellularautomata",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_fractals",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_lsystems",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_proceduralgeneration",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_softbodies",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_swarmintelligence",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_morphogenesis",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_machinelearning",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_foundationscrisis",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_qfeplaboratory",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_vectors",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_physicssimulation",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_datastructures",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_searchpathfinding",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_computationalgeometry",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_meshes",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_patterngeneration",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_criticalalgorithms",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_speculativecomputation",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_recursiveemergence",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_artmathematics",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_proceduralaudio",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_graphtheory",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_advancedlaboratory",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_resourcemanagement",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Lab/map_data_post_geometric",
+          "status": "MISSING",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "lsystems",
+      "title": "L-Systems: Rules Grow Structure",
+      "ok": 7,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "LSystems_Tree_L_Systems",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "LSystems_AnimatedTree",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "LSystems_ContextSensitiveTree",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "LSystems_ForestCompetition",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "LSystems_Context_Free_Grammars_CFG",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "LSystems_CityGenerator",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "LSystems_Hilbert3D",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "machinelearning",
+      "title": "Machine Learning: Algorithms That Learn",
+      "ok": 3,
+      "fail": 5,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "ML_Evolution",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ML_Gradient_Landscape",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ML_Classification",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ML_Neural_Networks",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (3,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'neural_network_visualization' at (2,5) h=2 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'learn_world_stacked' at (1,10) h=2 unreachable"
+            }
+          ],
+          "fix_text": "**ML_Neural_Networks**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'neural_network_visualization' at (2,5) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'learn_world_stacked' at (1,10) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "ML_Perception",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (4,6) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'computer_vision_vr' at (5,1) h=2 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'convolutional_neural_networks_cnns_vr' at (1,3) h=2 unreachable"
+            }
+          ],
+          "fix_text": "**ML_Perception**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'computer_vision_vr' at (5,1) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'convolutional_neural_networks_cnns_vr' at (1,3) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "ML_Sequence_Memory",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (2,10) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'transformers_vr' at (1,6) h=2 unreachable"
+            }
+          ],
+          "fix_text": "**ML_Sequence_Memory**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'transformers_vr' at (1,6) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "ML_Generative",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (6,6) is NOT reachable from spawn"
+            }
+          ],
+          "fix_text": "**ML_Generative**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge"
+        },
+        {
+          "name": "ML_Synthesis",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'anomaly_detection' at (0,9) h=2 unreachable"
+            }
+          ],
+          "fix_text": "**ML_Synthesis**\n  Manual: Artifact 'anomaly_detection' at (0,9) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        }
+      ]
+    },
+    {
+      "id": "meshes",
+      "title": "Mesh Generation",
+      "ok": 4,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Meshes_One",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Meshes_Two",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Meshes_Three",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Meshes_Four",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "morphogenesis",
+      "title": "Morphogenesis: Pattern from Noise",
+      "ok": 0,
+      "fail": 0,
+      "missing": 0,
+      "maps": []
+    },
+    {
+      "id": "noise",
+      "title": "Noise: Entropy with Memory",
+      "ok": 4,
+      "fail": 5,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Random_Noise_Types",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Noise_Columns",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Noise_One",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'noisetorus' at (5,5) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'noiselayers' at (5,6) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Noise_One**\n  Manual: Artifact 'noisetorus' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'noiselayers' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Noise_Voxel",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Noise_6_Wall",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'shader_noise_space' at (5,5) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Noise_6_Wall**\n  Manual: Artifact 'shader_noise_space' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Noise_Inside_Noise",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (7,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'noisesphere' at (5,6) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Noise_Inside_Noise**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'noisesphere' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player"
+        },
+        {
+          "name": "Noise_Space_10",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (10,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'noise_space' at (5,6) h=1 unreachable"
+            }
+          ],
+          "fix_text": "**Noise_Space_10**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'noise_space' at (5,6) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Noise_Perlin_Simplex",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'simplex_noise' at (2,3) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'perlin_noise' at (7,3) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'noise_terrain' at (5,6) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'perlin_noise_terrain' at (5,10) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'configurable_portal' at (8,12) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Noise_Perlin_Simplex**\n  Manual: Artifact 'simplex_noise' at (2,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'perlin_noise' at (7,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'noise_terrain' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'perlin_noise_terrain' at (5,10) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'configurable_portal' at (8,12) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Lab_Path",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "particles",
+      "title": "Particle Systems",
+      "ok": 5,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Particles_1",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Particles_2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Particles_3",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Particles_4",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Particles_5",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "patterngeneration",
+      "title": "Shaders & Patterns: The Book of Shaders",
+      "ok": 18,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Shader_01_Shaping",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_02_Colors",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_03_Shapes",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_04_Matrices",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_05_Patterns",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_06_Random",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_07_Noise",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_08_CellularNoise",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_09_FBM",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_10_ReactionDiffusion",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_11_QueerRubber",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Shader_12_PinkExtravaganza",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Pattern_Generation_Five",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "PatternGeneration_Diffusion_Limited_Aggregation_DLA",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PatternGeneration_Narrative_Generation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PatternGeneration_Penrose_Tilings",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PatternGeneration_Typography_Generation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PatternGeneration_Wang_Tiles",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "physicssimulation",
+      "title": "Physics Simulation: The Engine Behind Reality",
+      "ok": 21,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "PhysicsSim_Foundations",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSim_Bodies",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (4,8) — no structure row at z=9 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSim_Springs",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (3,10) — no structure row at z=11 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSim_Fields",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (4,10) — no structure row at z=11 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSim_Continuum",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (4,10) — no structure row at z=11 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Bouncing_Ball_Physics",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Cloth_Simulation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Collision_Detection",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Constraints",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Finite_Element_Method_FEM",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Fluid_Simulation_SPH",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Force_Fields",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Mass_Spring_Damper",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Newton_s_Laws",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Numerical_Integration",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Particle_Systems",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Rigid_Body_Dynamics",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Spring_Mass_Systems",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Three_Body_Problem",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Vector_Fields",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PhysicsSimulation_Verlet_Integration",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "postfoundationscrisis",
+      "title": "Post-Crisis: Applied Limits",
+      "ok": 3,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SpeculativeComputation_Rhizome_Network",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "AdvancedLaboratory_Lab_Equipment_Simulation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "primitives",
+      "title": "Primitives: Points Build Worlds",
+      "ok": 6,
+      "fail": 5,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Point_One",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (1,5) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'static_point' at (4,0) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'interactive_point_origin' at (1,3) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'frame_counter_display' at (0,9) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'CoordinateSystem3M' at (6,9) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Point_One**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'static_point' at (4,0) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'interactive_point_origin' at (1,3) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'frame_counter_display' at (0,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'CoordinateSystem3M' at (6,9) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Point_Lines",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'perspective_lines' at (1,23) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'scale_lines' at (3,23) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'perspective_lines' at (5,23) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'lightrod' at (3,25) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'dgrid' at (6,26) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Point_Lines**\n  Manual: Artifact 'perspective_lines' at (1,23) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'scale_lines' at (3,23) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'perspective_lines' at (5,23) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'lightrod' at (3,25) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dgrid' at (6,26) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Point_Trace",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Point_Line_Grid",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'grid_lines' at (4,3) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Point_Line_Grid**\n  Manual: Artifact 'grid_lines' at (4,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Point_Triangle",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Point_Triangle_Context",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Primitives_Polythedra",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (5,6) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pyramid_edit' at (1,7) h=2 unreachable"
+            }
+          ],
+          "fix_text": "**Primitives_Polythedra**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pyramid_edit' at (1,7) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Point_Animatedcube",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Primitives_Ignorance",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'plus' at (1,25) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'plus' at (7,25) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Primitives_Ignorance**\n  Manual: Artifact 'plus' at (1,25) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'plus' at (7,25) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Primitives_Portals",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Primitives_Melencolia",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((1,8), (5,8)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "proceduralaudio",
+      "title": "Procedural Audio",
+      "ok": 8,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "ProceduralAudio_Additive_Synthesis",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralAudio_Subtractive_Synthesis",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralAudio_FM_Synthesis",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralAudio_Granular_Synthesis",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralAudio_Audio_Effects",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralAudio_Sound_Synthesis_Drone_Effects",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralAudio_Generative_Music_Algorithms",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralAudio_Psychoacoustics",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "proceduralgeneration",
+      "title": "Procedural Generation: Rules Build Worlds",
+      "ok": 7,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "PG_Genetic_Evolution",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PG_Space_Colonization",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PG_Percolation_Network",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PG_Branching_Growth",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PG_Caves_Mazes",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PG_Sculpted_Forms",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "PG_Mirrored_Patterns",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "proceduralgeneration_all",
+      "title": "Procedural Generation (All Maps)",
+      "ok": 42,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "ProceduralGeneration_21",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_BranchingGrowthAlgorithm",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_CaveRandomWalk",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_CubeMound",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Delaunay_Triangulation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Dome",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Eight",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Eleven",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Five",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Four",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Genetic_Algorithms",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Genetic_Programming",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Marching_Cubes_Algorithm",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_MarchingCave",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_MarchingGallery",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Markov_Chains",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Maze",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((2,0), (15,16)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_N_grams",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Poisson_Disk_Sampling",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Reaction_Diffusion_Systems",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Seven",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Space_Colonization_Algorithms",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Space_Partitioning",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Ten",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Three",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Two",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Voronoi_Diagrams",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Wave_Function_Collapse",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationBooleanPatterns",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationCaveExplorer3dUi",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationCrystalRandom",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationMarchingcubesFlatLandscape",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationMarchingCubesInsideCave",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationMarchingcubesPortalLandscape",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationMarchingCubesSculpture",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationMarchingcubesTorusSculpture",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationMarchingCubesVovelNoise",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationNetSpace",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationPortals",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationSixteenCellNet",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationTesseractErrorTunnel",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGenerationWfcDungeonGenerator",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "qfeplaboratory",
+      "title": "QFEP Laboratory: The Formula Made Interactive",
+      "ok": 0,
+      "fail": 8,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "QFEP_Introduction",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 1,
+              "severity": "ERROR",
+              "msg": "Spawn is 's:1:1:1' — must be 's' (always start at 1,1,1)"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (4,9) — no structure row at z=10 to catch player"
+            }
+          ],
+          "fix_text": "**QFEP_Introduction**\nAuto-fix (Rule 1):\n  `python tools/map_pathfinder.py fix QFEP_Introduction`\n  Note: Teleport at (4,9) — no structure row at z=10 to catch player"
+        },
+        {
+          "name": "QFEP_F_Term",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 1,
+              "severity": "ERROR",
+              "msg": "Spawn is 's:1:1:1' — must be 's' (always start at 1,1,1)"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (4,11) — no structure row at z=12 to catch player"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (4,11) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'crystal_cluster' at (4,4) h=2 unreachable"
+            }
+          ],
+          "fix_text": "**QFEP_F_Term**\nAuto-fix (Rule 1):\n  `python tools/map_pathfinder.py fix QFEP_F_Term`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'crystal_cluster' at (4,4) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (4,11) — no structure row at z=12 to catch player"
+        },
+        {
+          "name": "QFEP_E_Term",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 1,
+              "severity": "ERROR",
+              "msg": "Spawn is 's:1:1:1' — must be 's' (always start at 1,1,1)"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,11) — no structure row at z=12 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_cubes' at (4,3) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_cubes' at (7,3) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'particle_chaos' at (5,5) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_cubes' at (4,7) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_cubes' at (7,7) h=3 unreachable"
+            }
+          ],
+          "fix_text": "**QFEP_E_Term**\nAuto-fix (Rule 1):\n  `python tools/map_pathfinder.py fix QFEP_E_Term`\n  Manual: Artifact 'random_cubes' at (4,3) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'random_cubes' at (7,3) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'particle_chaos' at (5,5) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'random_cubes' at (4,7) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'random_cubes' at (7,7) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (5,11) — no structure row at z=12 to catch player"
+        },
+        {
+          "name": "QFEP_Lambda_Spectrum",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 1,
+              "severity": "ERROR",
+              "msg": "Spawn is 's:2:1:0' — must be 's' (always start at 1,1,1)"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (2,17) — no structure row at z=18 to catch player"
+            }
+          ],
+          "fix_text": "**QFEP_Lambda_Spectrum**\nAuto-fix (Rule 1):\n  `python tools/map_pathfinder.py fix QFEP_Lambda_Spectrum`\n  Note: Teleport at (2,17) — no structure row at z=18 to catch player"
+        },
+        {
+          "name": "QFEP_Phi_Term",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 1,
+              "severity": "ERROR",
+              "msg": "Spawn is 's:1:1:1' — must be 's' (always start at 1,1,1)"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (4,9) — no structure row at z=10 to catch player"
+            }
+          ],
+          "fix_text": "**QFEP_Phi_Term**\nAuto-fix (Rule 1):\n  `python tools/map_pathfinder.py fix QFEP_Phi_Term`\n  Note: Teleport at (4,9) — no structure row at z=10 to catch player"
+        },
+        {
+          "name": "QFEP_Edge_Of_Chaos",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 1,
+              "severity": "ERROR",
+              "msg": "Spawn is 's:1:1:1' — must be 's' (always start at 1,1,1)"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (6,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'turing_pattern' at (4,3) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'turing_pattern' at (8,3) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'edge_core' at (6,6) h=4 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'emergence_zone' at (4,9) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'emergence_zone' at (8,9) h=3 unreachable"
+            }
+          ],
+          "fix_text": "**QFEP_Edge_Of_Chaos**\nAuto-fix (Rule 1):\n  `python tools/map_pathfinder.py fix QFEP_Edge_Of_Chaos`\n  Manual: Artifact 'turing_pattern' at (4,3) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'turing_pattern' at (8,3) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'edge_core' at (6,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'emergence_zone' at (4,9) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'emergence_zone' at (8,9) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (6,12) — no structure row at z=13 to catch player"
+        },
+        {
+          "name": "QFEP_Sandbox",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 1,
+              "severity": "ERROR",
+              "msg": "Spawn is 's:1:1:1' — must be 's' (always start at 1,1,1)"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (6,13) — no structure row at z=14 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'qfep_reactor' at (6,5) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'reactive_particles' at (4,7) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'reactive_particles' at (8,7) h=3 unreachable"
+            }
+          ],
+          "fix_text": "**QFEP_Sandbox**\nAuto-fix (Rule 1):\n  `python tools/map_pathfinder.py fix QFEP_Sandbox`\n  Manual: Artifact 'qfep_reactor' at (6,5) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'reactive_particles' at (4,7) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'reactive_particles' at (8,7) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (6,13) — no structure row at z=14 to catch player"
+        },
+        {
+          "name": "QFEP_Synthesis",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 1,
+              "severity": "ERROR",
+              "msg": "Spawn is 's:1:1:1' — must be 's' (always start at 1,1,1)"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,11) — no structure row at z=12 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'qfep_formula_3d' at (5,5) h=3 unreachable"
+            }
+          ],
+          "fix_text": "**QFEP_Synthesis**\nAuto-fix (Rule 1):\n  `python tools/map_pathfinder.py fix QFEP_Synthesis`\n  Manual: Artifact 'qfep_formula_3d' at (5,5) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (5,11) — no structure row at z=12 to catch player"
+        }
+      ]
+    },
+    {
+      "id": "randomness",
+      "title": "Randomness: Freedom from Pattern",
+      "ok": 9,
+      "fail": 4,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Random_Definition",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Random_Remove",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 6 teleports ((1,4), (11,4), (1,10), (11,10), (1,16), (11,16)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Randomness_10_PRINT_Algorithm",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Random_Cubes",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Random_Rotate_Random_XYZ",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Random_Walk",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_walk_128' at (6,6) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_walk_leash' at (8,8) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((0,4), (10,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Random_Walk**\n  Manual: Artifact 'random_walk_128' at (6,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'random_walk_leash' at (8,8) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 2 teleports ((0,4), (10,12)) — normal case is 1"
+        },
+        {
+          "name": "Random_Gaussian",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_bell_curve' at (6,20) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Random_Gaussian**\n  Manual: Artifact 'random_bell_curve' at (6,20) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Random_Mushrooms",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (8,12) — no structure row at z=13 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Random_Space_Geometry",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((1,22), (10,22)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Randomness_Examples_of_Randomness",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Random_Pheromone",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (7,7) — row z=8 has no floor cubes to catch player"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,7) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pheromone_terrain' at (5,5) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'clipboard' at (2,6) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'clipboard' at (3,7) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Random_Pheromone**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pheromone_terrain' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'clipboard' at (2,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'clipboard' at (3,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,7) — row z=8 has no floor cubes to catch player"
+        },
+        {
+          "name": "Random_Space",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (6,14) — no structure row at z=15 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Random_Game",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (6,15) — no structure row at z=16 to catch player"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,0) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (6,15) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'r_c' at (1,3) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'r_c' at (2,3) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'r_c' at (3,3) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'r_c' at (1,4) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'r_c' at (2,4) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'r_c' at (3,4) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'armadillo_eggling' at (4,6) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'armadillo_eggling' at (8,6) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'origami_droideka' at (6,7) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_projectile_spawner' at (6,8) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'miura_crawler' at (2,10) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'kresling_spire' at (3,10) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'scissor_stalker' at (4,10) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'kaleidocycle_enemy' at (5,10) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((7,0), (6,15)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Random_Game**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'r_c' at (1,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'r_c' at (2,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'r_c' at (3,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'r_c' at (1,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'r_c' at (2,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'r_c' at (3,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'armadillo_eggling' at (4,6) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'armadillo_eggling' at (8,6) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'origami_droideka' at (6,7) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_projectile_spawner' at (6,8) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'miura_crawler' at (2,10) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'kresling_spire' at (3,10) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'scissor_stalker' at (4,10) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'kaleidocycle_enemy' at (5,10) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (6,15) — no structure row at z=16 to catch player\n  Note: Map has 2 teleports ((7,0), (6,15)) — normal case is 1"
+        }
+      ]
+    },
+    {
+      "id": "recursiveemergence",
+      "title": "Recursive Emergence",
+      "ok": 11,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "RecursiveEmergence_Cellular_Automata_1D",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Cellular_Automata_2D",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Cellular_Automata_3D",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Rule_30_110",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Lattice_Gas_Automata",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Fibonacci_Sequences",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Tail_Recursion_Memoization",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Iterated_Function_Systems_IFS",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Koch_Curve",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Mandelbrot_Set",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "RecursiveEmergence_Julia_Set",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "resourcemanagement",
+      "title": "Resource Management",
+      "ok": 0,
+      "fail": 0,
+      "missing": 0,
+      "maps": []
+    },
+    {
+      "id": "searchpathfinding",
+      "title": "Search & Pathfinding",
+      "ok": 0,
+      "fail": 0,
+      "missing": 0,
+      "maps": []
+    },
+    {
+      "id": "softbodies",
+      "title": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+      "ok": 9,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "SoftBodies_Soft_Body_Deformation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SoftBodies_Carusell",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SoftBodies_Obsticals",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SoftBodies_Obsticals_Part2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SoftBodies_Cloth_Physics",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SoftBodies_Playground_of_Joy",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SoftBodies_Affect_Theory_Visualization",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Reaction_Diffusion_Systems",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Topology_Entropy_Morphogenesis",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "spatial_partitioning",
+      "title": "Spatial Partitioning: Dividing Space",
+      "ok": 4,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "ProceduralGeneration_Voronoi_Diagrams",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Delaunay_Triangulation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Space_Partitioning",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "ProceduralGeneration_Poisson_Disk_Sampling",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "speculativecomputation",
+      "title": "Speculative Computation",
+      "ok": 0,
+      "fail": 0,
+      "missing": 0,
+      "maps": []
+    },
+    {
+      "id": "structure",
+      "title": "Structure Grammar: Spatial Formulas",
+      "ok": 14,
+      "fail": 2,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "F1_Pedestal",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F2_Corridor",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F4_Amphitheater",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'light_sphere' at (3,3) h=1 unreachable"
+            }
+          ],
+          "fix_text": "**F4_Amphitheater**\n  Manual: Artifact 'light_sphere' at (3,3) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "F8_The_Drop",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F9_Frame",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F11_Comparison",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F12_Cathedral",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F13_Observation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F14_Lab_Bench",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F17_Zen_Garden",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F20_Well",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'spectrum_display' at (3,3) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**F20_Well**\n  Manual: Artifact 'spectrum_display' at (3,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "F26_Portal_Chamber",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F30_Ramp_Walkpath",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F31_Transport_Cube",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F32_Teleporter",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "F33_Bridge",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "swarmintelligence",
+      "title": "Swarm Intelligence: No Leader, Yet Coordinated",
+      "ok": 7,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "SwarmIntelligence_PhysarumColony",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SwarmIntelligence_FlowFeilds",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SwarmIntelligence_Boids_Algorithm",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SwarmIntelligence_Ant_Colony_Optimization",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SwarmIntelligence_Particle_Swarm_Optimization",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "templats",
+      "title": "Templates",
+      "ok": 4,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Template_Basic",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Template_Medium",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Template_Large",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Template_Land",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "testmaps",
+      "title": "Unused Artifacts Test",
+      "ok": 6,
+      "fail": 16,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Test_1",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'ChengSimulationScaled' at (5,6) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Test_1**\n  Manual: Artifact 'ChengSimulationScaled' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Test_2",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,11) — no structure row at z=12 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'closest_pair' at (5,5) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_2**\n  Manual: Artifact 'closest_pair' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,11) — no structure row at z=12 to catch player\n  Note: Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
+        },
+        {
+          "name": "Test_3",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (7,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (8,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'distance_fields_sdf' at (3,5) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_3**\n  Manual: Artifact 'distance_fields_sdf' at (3,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player\n  Note: Teleport at (8,12) — no structure row at z=13 to catch player\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player\n  Note: Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_4",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (8,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (9,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pathfinding3d' at (5,6) h=4 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_4**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding3d' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_5",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_5**\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_6",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (8,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (9,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'network_analysis' at (2,11) h=7 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_6**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_7",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_plants' at (3,7) h=1 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_7**\n  Manual: Artifact 'random_plants' at (3,7) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_8",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_plants' at (3,7) h=1 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_8**\n  Manual: Artifact 'random_plants' at (3,7) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_9",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'graphspace' at (5,6) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Test_9**\n  Manual: Artifact 'graphspace' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Test_10",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,11) — no structure row at z=12 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'graphspace3d' at (5,5) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'KonigsbergBridge' at (5,6) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_10**\n  Manual: Artifact 'graphspace3d' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'KonigsbergBridge' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,11) — no structure row at z=12 to catch player\n  Note: Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
+        },
+        {
+          "name": "Test_11",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (7,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (8,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'graphspace' at (3,5) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_11**\n  Manual: Artifact 'graphspace' at (3,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player\n  Note: Teleport at (8,12) — no structure row at z=13 to catch player\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player\n  Note: Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_12",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (8,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (9,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pathfinding3d' at (5,6) h=4 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_12**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding3d' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_13",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_13**\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_14",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (8,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (9,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'network_analysis' at (2,11) h=7 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_14**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_15",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_15**\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_16",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (8,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (9,12) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'network_analysis' at (2,11) h=7 unreachable"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": "**Test_16**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+        },
+        {
+          "name": "Test_Scene_1",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (7,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (8,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 4 teleports ((0,1), (7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Test_Scene_2",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (7,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (8,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
+            },
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "test_cctv",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (3,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "test_gridagent",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "test_gridagent_algogun",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Test_Substrates",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,10) — no structure row at z=11 to catch player"
+            }
+          ],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "transformation",
+      "title": "Transformation: What Stays the Same When Everything Changes",
+      "ok": 2,
+      "fail": 4,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Trans_Introduction",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (5,14) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'balance_puzzle' at (5,10) h=2 unreachable"
+            }
+          ],
+          "fix_text": "**Trans_Introduction**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'balance_puzzle' at (5,10) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Trans_Translation",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'player_trace' at (0,0) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'z_translation_cube' at (6,2) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pick_up_cube' at (5,3) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'y_translation_cube' at (1,11) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pick_up_cube' at (2,12) h=3 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pick_up_cube' at (4,12) h=2 unreachable"
+            }
+          ],
+          "fix_text": "**Trans_Translation**\n  Manual: Artifact 'player_trace' at (0,0) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (6,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (5,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'y_translation_cube' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (2,12) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (4,12) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Trans_AxisDecomposition",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (7,8) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'toruscylinder' at (5,2) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'z_translation_cube' at (0,5) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'x_translation_cube' at (2,8) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pickup_gate' at (6,9) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'translation_cube_demo' at (1,11) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (0,12) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (1,12) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (2,12) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (0,13) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (2,13) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (0,14) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (2,14) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (0,15) h=1 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pick_up_cube' at (1,15) h=5 unreachable"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'cube_scene' at (2,15) h=1 unreachable"
+            }
+          ],
+          "fix_text": "**Trans_AxisDecomposition**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'toruscylinder' at (5,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (0,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'x_translation_cube' at (2,8) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pickup_gate' at (6,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'translation_cube_demo' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (1,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (1,15) h=5 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Trans_Rotation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Trans_RotationSpectacle",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'pick_up_cube' at (2,51) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**Trans_RotationSpectacle**\n  Manual: Artifact 'pick_up_cube' at (2,51) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Trans_Scale",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((1,14), (5,14), (3,15)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "unused",
+      "title": "Unused",
+      "ok": 23,
+      "fail": 0,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "Dialectic_Automation",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Directionality_Examples",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (12,24) — no structure row at z=25 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "One_Adapt_1",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "One_Adapt_2",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "One_Adapt_3",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "One_Adapt_4",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "One_Adapt_5",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "One_Adapt_6",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "One_Adapt_7",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 2,
+              "severity": "WARN",
+              "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "oscillation_1",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "oscillation_2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "oscillation_3",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "oscillation_4",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "oscillation_5",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "oscillation_6",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "oscillation_7",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Pattern_Generation_One",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Pattern_Generation_Two",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Pattern_Generation_Three",
+          "status": "OK",
+          "issues": [
+            {
+              "rule": 6,
+              "severity": "WARN",
+              "msg": "Map has 3 teleports ((11,10), (11,11), (9,12)) — normal case is 1"
+            }
+          ],
+          "fix_text": ""
+        },
+        {
+          "name": "Pattern_Generation_Four",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Pattern_Generation_Six",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Pattern_Generation_Seven",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Primitives_2",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "title": "Vectors: Direction + Magnitude = Everything (MERGED INTO FORCES)",
+      "ok": 0,
+      "fail": 0,
+      "missing": 0,
+      "maps": []
+    },
+    {
+      "id": "wavefunctions",
+      "title": "Wavefunctions: Everything Oscillates",
+      "ok": 4,
+      "fail": 8,
+      "missing": 0,
+      "maps": [
+        {
+          "name": "WaveFunctions_Intro",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "WaveFunctions_Pendulum",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "WaveFunctions_Sine_Space",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (10,26) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'colorballs' at (5,7) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'colorballs' at (5,12) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'sine_space' at (5,15) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'colorballs' at (5,17) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**WaveFunctions_Sine_Space**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'colorballs' at (5,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,12) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'sine_space' at (5,15) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,17) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "WaveFunctions_Unit_Circle",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'unit_circle_advanced' at (6,3) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'colorballs' at (5,6) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**WaveFunctions_Unit_Circle**\n  Manual: Artifact 'unit_circle_advanced' at (6,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "WaveFunctions_3D_Wave_Propagation",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (13,16) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'kusama_sine' at (5,6) h=0 unreachable [on VOID]"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'wave_propagation_3d' at (7,8) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**WaveFunctions_3D_Wave_Propagation**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'kusama_sine' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'wave_propagation_3d' at (7,8) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "WaveFunctions_Effect_Sound",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "Wavefunctions_Bernini",
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
+        },
+        {
+          "name": "WaveFunctions_John_Cage",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'ruth_asawa_sculpture' at (6,6) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**WaveFunctions_John_Cage**\n  Manual: Artifact 'ruth_asawa_sculpture' at (6,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "WaveFunctions_AirMusic",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'SystemsMusicTest' at (5,5) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**WaveFunctions_AirMusic**\n  Manual: Artifact 'SystemsMusicTest' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "Wavefunctions_Sky_Stairs",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'math_objects' at (6,11) h=8 unreachable"
+            }
+          ],
+          "fix_text": "**Wavefunctions_Sky_Stairs**\n  Manual: Artifact 'math_objects' at (6,11) h=8 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "WaveFunctions_TrigWalkingPath",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 3,
+              "severity": "ERROR",
+              "msg": "Teleport at (10,2) is NOT reachable from spawn"
+            },
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'TrigWalkingPath' at (6,3) h=0 unreachable [on VOID]"
+            }
+          ],
+          "fix_text": "**WaveFunctions_TrigWalkingPath**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'TrigWalkingPath' at (6,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+        },
+        {
+          "name": "WaveFunctions_Synthesis_Lab",
+          "status": "FAIL",
+          "issues": [
+            {
+              "rule": 4,
+              "severity": "ERROR",
+              "msg": "Artifact 'SoundscapeRadioRack' at (2,11) h=4 unreachable"
+            }
+          ],
+          "fix_text": "**WaveFunctions_Synthesis_Lab**\n  Manual: Artifact 'SoundscapeRadioRack' at (2,11) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+        }
+      ]
+    }
+  ]
+}

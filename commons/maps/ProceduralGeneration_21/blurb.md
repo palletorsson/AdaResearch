@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 region in the center where algorithms perform. The arena is a stage — each random process gets the same space, the same constraints, the same cells to fill. What differs is the rule.
+
+Randomness is not one thing. Uniform scatter. Weighted distribution. Constrained walks. Each algorithm claims to be "random" but encodes a different relationship to chance. The sixteen-cell net floats overhead — a polytope unfolded from four dimensions into three, proof that structure can arrive from spaces we cannot directly inhabit.
+
+Watch algorithms compete for the same grid. Same input, different logic, different output. The arena makes visible what stays invisible in production code: that every "random" function is a decision about what kind of disorder to permit. Chaos is never free. It is always designed.

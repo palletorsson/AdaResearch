@@ -1,0 +1,23 @@
+{
+  "id": "ps_ls01_bauhaus_tree",
+  "layout": "lsystem_scatter",
+  "lsystem": {
+    "axiom": "F",
+    "rules": {
+      "F": "F[+F]F[-F]F"
+    },
+    "iterations": 3,
+    "angle_deg": 25.7,
+    "step_len": 0.25,
+    "step_shrink": 0.72
+  },
+  "segment_shape": "cube",
+  "branch_shape": "sphere",
+  "leaf_shape": "bipyramid",
+  "palette": "bauhaus",
+  "primitive_size": 0.05,
+  "size_by_depth": true,
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.1,
+  "notes": "DNA BRIDGE: L-system plant (F->F[+F]F[-F]F at 25.7\u00b0) as Bauhaus-primitive sculpture. Cubes on branches, spheres at branch points, bipyramid tips. Same DNA as lsystem-gallery ls03, now a Bauspiel totem."
+}

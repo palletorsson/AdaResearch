@@ -1,0 +1,1 @@
+Control thrust against gravity. Four rotors, each adding force vectors. Tilt to translate, balance to hover, cut thrust to fall. The drone is a lesson in force composition made playable — every wobble, every correction, every crash teaches Newton's laws through your hands.

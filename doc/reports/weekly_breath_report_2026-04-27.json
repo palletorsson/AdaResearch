@@ -1,0 +1,336 @@
+{
+  "report_date": "2026-04-27",
+  "generated": "2026-04-27T10:40:00",
+  "period": "2026-04-20 to 2026-04-27",
+  "total_breaths_in_period": 3,
+  "breaths_in_period": [
+    "2026-04-21T09:00",
+    "2026-04-22T09:00",
+    "2026-04-23T08:00"
+  ],
+  "note": "Last breath was 2026-04-23. 4-day gap (Apr 24-27) with no scheduled breaths recorded.",
+
+  "pipeline_snapshot": {
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_at_stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "array_tutorial",
+      "wavefunctions", "noise", "cellularautomata", "fractals", "lsystems",
+      "proceduralgeneration", "softbodies", "swarmintelligence", "machinelearning",
+      "foundationscrisis", "qfeplaboratory", "postfoundationscrisis", "graphtheory",
+      "graphtheory"
+    ],
+    "sequences_at_stage_5_or_below": [],
+    "note": "UNCHANGED from last week. All 19 spine sequences at stage 6+. VR testing is the only path to advance pipeline stages — requires human VR sessions."
+  },
+
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "all_passing": true,
+    "grade_A_maps": 597,
+    "grade_B_maps": 85,
+    "grade_C_maps": 96,
+    "grade_F_maps": 0,
+    "notable": {
+      "B_missing_map_ready": 1,
+      "B_missing_include_in_map_data": 1,
+      "D_changed_count": 12,
+      "D_total_issues": 39,
+      "D_ok_superset_pairs": 5
+    },
+    "week_delta": "UNCHANGED — all 4 gates passing since 2026-04-18. Sub-metrics stable."
+  },
+
+  "garden_health": {
+    "total_artifacts": 2031,
+    "voiced": 887,
+    "voice_coverage_pct": 43,
+    "embodied": 290,
+    "embodiment_rate_pct": 32,
+    "phantom_limbs": 708,
+    "sequences_by_state": {
+      "LIVING": ["grammar_gallery", "joints", "vectors"],
+      "GROWING": [
+        "primitives", "foundationscrisis", "machinelearning", "lsystems",
+        "postfoundationscrisis", "fold_system", "bodyprogression",
+        "morphogenesis", "spatial_partitioning"
+      ],
+      "REACHING": [
+        "hazards", "fractals", "patterngeneration", "mosaicanalysis",
+        "cellularautomata", "graphtheory", "grammar_systems",
+        "proceduralaudio", "artmathematics", "meshes"
+      ],
+      "SCATTERED": [
+        "forces", "wavefunctions", "randomness", "qfeplaboratory",
+        "physicssimulation", "array_tutorial", "transformation",
+        "color", "softbodies", "noise", "proceduralgeneration",
+        "swarmintelligence"
+      ]
+    },
+    "week_delta_voiced": "+153 (734 → 887)",
+    "week_delta_voice_coverage_pct": "+7pp (36% → 43%)",
+    "week_delta_embodied": "+35 (255 → 290)",
+    "state_transitions_this_week": [
+      "patterngeneration: SCATTERED → REACHING (2026-04-21)",
+      "mosaicanalysis: SCATTERED → REACHING (2026-04-21)",
+      "vectors: SCATTERED → LIVING (2026-04-22)",
+      "machinelearning: SCATTERED → GROWING (2026-04-22)",
+      "cellularautomata: SCATTERED → REACHING (2026-04-22)",
+      "grammar_systems: SCATTERED → REACHING (2026-04-22)",
+      "proceduralaudio: SCATTERED → REACHING (2026-04-22)",
+      "spatial_partitioning: SCATTERED → GROWING (2026-04-22)",
+      "fractals: SCATTERED → REACHING (2026-04-23)"
+    ],
+    "biggest_single_advance": "2026-04-22: +98 voiced in one breath (garden_listener PascalCase cache key fix unlocked all previously-invisible ML/CA/grammar/audio/spatial artifacts)"
+  },
+
+  "sequences_improved": [
+    {
+      "id": "patterngeneration",
+      "garden_delta": "SCATTERED → REACHING (60.4% → 71.7%)",
+      "mechanism": "@identity on floor_plan_space (28+ map appearances, cross-sequence cascade)",
+      "breath_refs": ["2026-04-21T09:00"]
+    },
+    {
+      "id": "mosaicanalysis",
+      "garden_delta": "SCATTERED → REACHING (39.5% → 93.0%)",
+      "mechanism": "Collateral cascade from floor_plan_space @identity (cross-sequence shared artifact)",
+      "breath_refs": ["2026-04-21T09:00"]
+    },
+    {
+      "id": "vectors",
+      "garden_delta": "SCATTERED → LIVING (60% → 100%, 3/5 embodied)",
+      "mechanism": "PascalCase cache fix + vectorworkbench/vector_magnitude_demo @identity",
+      "breath_refs": ["2026-04-22T09:00"]
+    },
+    {
+      "id": "machinelearning",
+      "garden_delta": "SCATTERED → GROWING (69.2% → 96.2%)",
+      "mechanism": "PascalCase cache key normalization fix in garden_listener.py revealed 25 already-voiced artifacts",
+      "breath_refs": ["2026-04-22T09:00"]
+    },
+    {
+      "id": "cellularautomata",
+      "garden_delta": "SCATTERED → REACHING (55.6% → 74%)",
+      "mechanism": "PascalCase cache key fix",
+      "breath_refs": ["2026-04-22T09:00"]
+    },
+    {
+      "id": "grammar_systems",
+      "garden_delta": "SCATTERED → REACHING (→ 7/9 voiced)",
+      "mechanism": "PascalCase cache key fix",
+      "breath_refs": ["2026-04-22T09:00"]
+    },
+    {
+      "id": "proceduralaudio",
+      "garden_delta": "SCATTERED → REACHING (→ 9/9 voiced = 100%)",
+      "mechanism": "PascalCase cache key fix",
+      "breath_refs": ["2026-04-22T09:00"]
+    },
+    {
+      "id": "spatial_partitioning",
+      "garden_delta": "SCATTERED → GROWING (→ 5/5 voiced)",
+      "mechanism": "PascalCase cache key fix",
+      "breath_refs": ["2026-04-22T09:00"]
+    },
+    {
+      "id": "fractals",
+      "garden_delta": "SCATTERED → REACHING (67.2% → 70.7%)",
+      "mechanism": "@identity on lyapunov_fractal + fractal_clouds",
+      "breath_refs": ["2026-04-23T08:00"]
+    }
+  ],
+
+  "total_delta": {
+    "pipeline_avg_start": 5.05,
+    "pipeline_avg_end": 5.05,
+    "pipeline_delta": 0.0,
+    "pipeline_delta_note": "Structural stall — VR testing bottleneck. Pipeline cannot advance without human VR sessions.",
+    "release_gates_start": "4/4 passing",
+    "release_gates_end": "4/4 passing",
+    "garden_voiced_start": 734,
+    "garden_voiced_end": 887,
+    "garden_voiced_delta": "+153",
+    "garden_voice_coverage_delta": "+7pp (36% → 43%)",
+    "garden_state_transitions": 9,
+    "largest_single_breath": "+98 voiced (2026-04-22T09:00)"
+  },
+
+  "week_over_week_comparison": {
+    "last_week_period": "2026-04-13 to 2026-04-20",
+    "this_week_period": "2026-04-20 to 2026-04-27",
+    "pipeline_avg": {
+      "last_week_delta": "+1.68 (3.37 → 5.05)",
+      "this_week_delta": "0.0 (5.05 → 5.05)",
+      "interpretation": "Last week was exceptional — fixed the validation scorer bug and created 55 scene stubs (structural breakthrough). This week pipeline is at its AI ceiling: VR testing cannot be automated."
+    },
+    "release_gates": {
+      "last_week_delta": "1/4 → 4/4 (all gates newly passing)",
+      "this_week_delta": "4/4 → 4/4 (stable, maintained)",
+      "interpretation": "Maintenance week for gates. No regressions."
+    },
+    "garden_health": {
+      "last_week_voiced_delta": "+67",
+      "this_week_voiced_delta": "+153",
+      "interpretation": "Garden improvement ACCELERATED this week vs last (+153 vs +67). Key driver: PascalCase cache bug fix on Apr-22 unlocked 98 previously-invisible voices in one breath. Infrastructure fixes remain higher-leverage than @identity writing."
+    },
+    "state_transitions": {
+      "last_week": 1,
+      "this_week": 9,
+      "interpretation": "9 state transitions this week vs 1 last week. Best week yet for garden advancement."
+    }
+  },
+
+  "skill_effectiveness_changes": {
+    "direct_file_edit": {
+      "total_calls_cumulative": 59,
+      "success_rate": 1.0,
+      "week_calls": 23,
+      "week_activity": "9 @identity additions (Apr-21 and Apr-23), 5 identity + 1 bug fix (Apr-22)",
+      "status": "reliable, high-volume. Primary tool for garden work."
+    },
+    "tool_bug_fix": {
+      "total_calls_cumulative": 1,
+      "success_rate": 1.0,
+      "week_calls": 1,
+      "week_activity": "garden_listener PascalCase cache key normalization (2026-04-22)",
+      "status": "highest single-call leverage this week — 98 voices unlocked from 1 fix"
+    },
+    "registry_repair": {
+      "total_calls_cumulative": 17,
+      "success_rate": 1.0,
+      "week_calls": 0,
+      "status": "inactive this week — no registry gaps found. Exhausted for now."
+    },
+    "documentation_writing": {
+      "total_calls_cumulative": 5,
+      "success_rate": 1.0,
+      "week_calls": 0,
+      "status": "inactive — all sequences past stage 2. Exhausted."
+    },
+    "ada-breather": {
+      "total_calls_cumulative": 2,
+      "success_rate": 1.0,
+      "avg_delta": 1.0,
+      "week_calls": 0,
+      "status": "not called this week — weekly audit calling dry-run mode only"
+    },
+    "emerging_pattern": "tool_bug_fix (garden_listener normalization) had higher ROI than any @identity batch. Pattern: scan for infrastructure/tooling bugs BEFORE dispatching content improvement work."
+  },
+
+  "proposals_pending_review": [
+    {
+      "id": "prop-001",
+      "skill": "ada-breather",
+      "status": "proposed",
+      "tldr": "Garden identity targeting must verify artifact is placed in TARGET sequence maps, not gallery maps. Currently dispatches @identity to artifacts only visible in gallery — garden_listener counts gallery separately, so voiced count for content sequences does not move.",
+      "evidence": "Failed on gradient_descent_landscape + particle_swarm_optimization (Apr-20). Counter-evidence: Apr-21 and Apr-22 succeeds show it works when correctly targeting sequence-specific artifacts. 1 failure / multiple successes — proposal still warranted as explicit pre-check guard.",
+      "proposed_change": "Add sequence-map pre-check in Evaluate phase: cross-reference candidate artifact against map_data.json interactables layers in target sequence's maps before selecting.",
+      "expected_improvement": "Sequence-specific garden success rate: ~50% → ~90%+",
+      "file": "doc/reports/skill_evolution_proposals.json",
+      "breath_refs": ["2026-04-20T09:00"],
+      "age_days": 7,
+      "urgency": "medium — not blocking, but low-hanging efficiency gain"
+    }
+  ],
+
+  "breather_dry_run_work_plan": {
+    "mode": "dry-run",
+    "trajectory": "IMPROVING (garden health active front) / STALLED (pipeline — structural VR bottleneck)",
+    "focus": "auto-selected (FOCUS_VECTOR primary goal 'rebuild primitives maps' requires VR; pivoting to garden health as productive AI-reachable front)",
+    "cooling_filter": "No cooled items — last 2 breaths (Apr-22, Apr-23) had zero failures.",
+    "items_selected": [
+      {
+        "rank": 1,
+        "item": "forces_garden_identity",
+        "temperature": 62,
+        "reason": "forces at SCATTERED (62.7% voiced = 69/110). 8% short of REACHING threshold. Has 22+ artifacts with .gd files but no @identity — run garden --silent to confirm actionable count. High artifact count = high map-appearance leverage.",
+        "action": "Run garden_listener --silent to enumerate unvoiced forces artifacts with .gd files. Apply @identity to top 10 by map appearance count.",
+        "dispatch": "direct_file_edit",
+        "expected_outcome": "forces: SCATTERED → REACHING (≥70% = 77+ voiced)",
+        "pre_check": "Verify targeted artifacts appear in forces sequence maps (Forces_*, not gallery maps)"
+      },
+      {
+        "rank": 2,
+        "item": "capture_tooling",
+        "temperature": 80,
+        "reason": "Heat map top item (80°, 6 recent commits). Active capture pipeline work suggests in-progress improvements. Likely needs follow-up or QA.",
+        "action": "Read recent capture-related commits, check if capture_report.json or manifests need updating, verify multi-angle capture working for any new artifacts.",
+        "dispatch": "ada-code-guide + direct_file_edit",
+        "expected_outcome": "Capture pipeline stable; any broken paths or manifest entries repaired."
+      },
+      {
+        "rank": 3,
+        "item": "duplicate_artifact_files",
+        "temperature": 60,
+        "reason": "Heat map: branching_growth_algorithm exists in two locations (branchinggrowthalgorithm/ and branchinggrowthalgorithmcontinued/). garden_listener last-write-wins — can cause unreliable voiced counts. Apr-23 discovery: fix was to add @identity to both, but underlying duplicate is still there.",
+        "action": "Investigate: are both files intentionally different algorithms, or one is dead? If redundant, remove the orphan or merge. If intentional, document why.",
+        "dispatch": "Explore + direct_file_edit",
+        "expected_outcome": "Duplicate resolved; garden_listener cache stable for proceduralgeneration."
+      },
+      {
+        "rank": 4,
+        "item": "randomness_garden_identity",
+        "temperature": 50,
+        "reason": "randomness at SCATTERED (46.6% voiced = 34/73). 23% short of REACHING — a longer push, but every voiced artifact is a step forward. garden --silent should reveal actionable targets.",
+        "action": "Run garden_listener --silent for randomness. Identify up to 5 unvoiced artifacts with .gd files. Apply @identity blocks.",
+        "dispatch": "direct_file_edit",
+        "expected_outcome": "randomness: 46.6% → ~50%+ (partial progress toward REACHING)"
+      },
+      {
+        "rank": 5,
+        "item": "color_garden_identity",
+        "temperature": 45,
+        "reason": "color at SCATTERED (66.7% = 20/30 voiced). Only 1 artifact away from REACHING threshold (21/30 = 70%). Apr-23 discovery: 'ALL voiceless color artifacts have no .gd files' — but worth verifying if any recently-created color artifacts now have files.",
+        "action": "Run garden_listener --silent for color. If any .gd-backed unvoiced artifacts exist, apply @identity. If all are .gd-less, mark as blocked and skip.",
+        "dispatch": "direct_file_edit (or skip if all blocked)",
+        "expected_outcome": "color: SCATTERED → REACHING (21/30 = 70%) if even 1 artifact has a .gd file"
+      }
+    ],
+    "cooled_items": []
+  },
+
+  "stall_analysis": {
+    "stall_detected": true,
+    "stall_type": "PIPELINE — structural, expected, known",
+    "stall_condition": "global_avg improvement (pipeline) over 7 days",
+    "7_day_delta_pipeline": 0.0,
+    "7_day_delta_garden_voiced": "+153",
+    "verdict": "PIPELINE STALL — 9 days flat at 5.05 (2026-04-18 to 2026-04-27). This is STRUCTURAL and EXPECTED. All 19 sequences at stage 6 (VR testing). No AI action can advance pipeline stages — requires human VR sessions.",
+    "shadow_metric_verdict": "GARDEN HEALTH IMPROVING — fastest week yet (+153 voiced, 9 state transitions). The garden front is actively moving despite pipeline ceiling.",
+    "stall_improvement_trajectory_flag": "improvement_trajectory.json stall_detected:true is ACCURATE. Reason is 'VR testing bottleneck'. This flag correctly describes the situation and should remain set.",
+    "why_stall_persists": [
+      "Pipeline advancement = VR sessions — requires human player with headset",
+      "All AI-actionable pipeline stages (Structure, Documentation, Artifacts, Maps, Validation) are COMPLETE for all 19 sequences",
+      "The last structural AI-actionable action was 2026-04-18 (validation scorer bug fix + stub creation)",
+      "Polish stage (7) can only be reached after VR testing (6) — and VR testing requires actual VR testing"
+    ],
+    "what_ai_can_still_improve": [
+      "Garden health: @identity writes (SCATTERED → REACHING), VR control additions (REACHING → GROWING)",
+      "Grade B/C map quality upgrades (structural improvements, not VR-dependent)",
+      "New artifact creation (if new features are needed)",
+      "Capture pipeline maintenance",
+      "Documentation quality"
+    ]
+  },
+
+  "key_discoveries_this_week": [
+    "PascalCase filename cache key mismatch: garden_listener keyed by gd.stem.lower() but map lookups use snake_case. Fix in tools/garden_listener.py unlocked 98 invisible voices in one breath (2026-04-22). Infrastructure bugs hide progress more than missing content does.",
+    "Cross-sequence cascade: floor_plan_space @identity voiced it in 28+ appearances across patterngeneration AND mosaicanalysis simultaneously — one file edit, two sequence state changes (2026-04-21).",
+    "Ultra-high-leverage @identity targets: shared infrastructure artifacts (floor_plan_space, array_carpet) with multi-sequence map appearances are 10x-leverage compared to single-algorithm artifacts.",
+    "Garden ceiling map: SCATTERED → REACHING = @identity only (AI-actionable). REACHING → GROWING = VR controls/apply_grid_config (code change). GROWING → LIVING = VR test session (human-required). Three different interventions for three transitions.",
+    "color, noise, swarmintelligence stuck at SCATTERED because ALL voiceless artifacts have no .gd files — cannot advance without creating new GDScript files or building new maps."
+  ],
+
+  "recommendations_for_next_week": [
+    "URGENT: Apply prop-001 to ada-breather SKILL.md (via /ada-skill-updater) — prevents wasted garden work on gallery-placed artifacts",
+    "Human VR sessions needed: 18/19 sequences at stage 6. Without VR testing, pipeline is permanently stalled. Even 1-2 VR sessions per sequence would unblock pipeline advancement.",
+    "forces garden: 8% from REACHING — highest ROI garden push available (large artifact count, many with .gd files)",
+    "Before next garden breath: run garden_listener --silent to inventory all 'no @identity' targets. Use this to plan the batch rather than discovering targets mid-breath.",
+    "New artifact creation needed for color/noise/swarmintelligence — these sequences cannot garden-advance via @identity alone because their voiceless artifacts have no .gd files.",
+    "Investigate capture pipeline (80° heat): 6 recent commits suggest active work. Verify and stabilize.",
+    "Grade B/C map audits: 85 grade-B + 96 grade-C maps are upgrade candidates — improve map quality without VR dependency."
+  ]
+}

@@ -1,0 +1,512 @@
+{
+  "goal_id": "write_evolutions",
+  "goal_title": "Write code evolution tutorials for anchor artifacts",
+  "why": "An evolution.json turns an artifact's code into a playable tutorial — 8 stages from empty to complete, with thinking narration. Currently 4/175 maps have evolutions. Each anchor evolution unlocks its map both on the web player and the VR code evolution screen. This is the lowest-friction way to move every map from 'silent' to 'teaching'.",
+  "success_criteria": [
+    "One evolution.json per sequence anchor artifact (19 total)",
+    "Each evolution follows the framework: concept_layer, technique_first/reference, domain_deferred, capture_leaks, limit, 8 stages",
+    "The red thread holds: each evolution opens by referencing the previous truth, ends with its own truth",
+    "Each evolution renders correctly at /code-evolution/<slug>"
+  ],
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "write_evolutions.001",
+      "title": "Evolution: Trans_Rotation anchor",
+      "spec": "Write commons/maps/Trans_Rotation/evolution.json. Anchor artifact is rotation_gimbal. Follow the framework in doc/curriculum_audit/_framework.md and the template at commons/maps/Point_One/evolution.json. Open stage must reference Trans_Translation's truth ('translation requires direction and magnitude'). Include: concept_layer ('rotation as angular transformation'), technique_first (Quat, axis-angle, gimbal), technique_reference (Basis from Point_Line, Transform3D from Trans_Translation), capture_leaks (non-commutativity, gimbal lock, quaternion needed). 8 stages ending with an identity block.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "artifact_refs": [
+        "rotation_gimbal"
+      ],
+      "map_refs": [
+        "Trans_Rotation"
+      ],
+      "sequence_refs": [
+        "transformation"
+      ],
+      "output": "commons/maps/Trans_Rotation/evolution.json",
+      "verification": "curl -s http://localhost:3003/api/code-evolution/rotation_gimbal | python -c 'import json,sys;d=json.load(sys.stdin);assert len(d[\"evolution\"][\"stages\"])==8'",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.002",
+      "title": "Evolution: Color sequence anchor (Color_Flashlight + flashlight_demo)",
+      "spec": "Write commons/maps/Color_Flashlight/evolution.json. Anchor artifact flashlight_demo. This is the gate+thesis map of the color sequence. Reference Trans_Translation's truth in opening. Introduce: Color as RGB triple, emission, light accumulation. Capture leaks: perception (SimultaneousContrast), metamerism (MetamerismLab), subpixel representation. 8 stages ending with an identity block. See doc/curriculum_audit/color.md for the sequence's concept arc.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "artifact_refs": [
+        "flashlight_demo"
+      ],
+      "map_refs": [
+        "Color_Flashlight"
+      ],
+      "sequence_refs": [
+        "color"
+      ],
+      "output": "commons/maps/Color_Flashlight/evolution.json",
+      "verification": "test -f commons/maps/Color_Flashlight/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.003",
+      "title": "Evolution: Forces anchor (ForcesFoundations + example_2_1_forces_vr)",
+      "spec": "Write commons/maps/ForcesFoundations/evolution.json. Anchor artifact example_2_1_forces_vr. Open by referencing the color sequence truth. Introduce Newton's F=ma. technique_first: force vector, mass, acceleration, Vector3 operations. capture_leaks: friction (2_4), gravity (2_3), fluid (2_5), composite forces (ForcesComposition). 8 stages. See doc/curriculum_audit/forces.md.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.002"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "artifact_refs": [
+        "example_2_1_forces_vr"
+      ],
+      "map_refs": [
+        "ForcesFoundations"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "output": "commons/maps/ForcesFoundations/evolution.json",
+      "verification": "test -f commons/maps/ForcesFoundations/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.004",
+      "title": "Evolution: Arrays anchor (Tutorial_Single + pick_up_cube or column_3_z)",
+      "spec": "Write commons/maps/Tutorial_Single/evolution.json OR Array_Patterns/evolution.json depending on which map truly anchors the sequence (check audit: doc/curriculum_audit/array_tutorial.md). Introduce arrays as indexed memory. Reference forces truth. 8 stages.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.003"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "artifact_refs": [
+        "column_3_z"
+      ],
+      "map_refs": [
+        "Tutorial_Single"
+      ],
+      "sequence_refs": [
+        "array_tutorial"
+      ],
+      "output": "commons/maps/Tutorial_Single/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.005",
+      "title": "Evolution: Wavefunctions anchor (WaveFunctions_Unit_Circle)",
+      "spec": "Write commons/maps/WaveFunctions_Unit_Circle/evolution.json. The audit calls this 'the conceptual keystone'. Anchor artifact TBD — read map_data.json and select the primary interactable. Introduce sin/cos from unit circle rotation. Reference arrays truth. capture_leaks: Fourier (Synthesis_Lab), propagation (3D_Wave_Propagation).",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.004"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "map_refs": [
+        "WaveFunctions_Unit_Circle"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "output": "commons/maps/WaveFunctions_Unit_Circle/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.006",
+      "title": "Evolution: Randomness anchor (Random_Definition + entropy_axiom)",
+      "spec": "Write commons/maps/Random_Definition/evolution.json. Anchor artifact entropy_axiom. Introduce randomness as (1) definition, (2) distribution, (3) pseudo. Reference wavefunctions truth. See doc/curriculum_audit/randomness.md.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.005"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "map_refs": [
+        "Random_Definition"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "commons/maps/Random_Definition/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.007",
+      "title": "Evolution: Noise anchor",
+      "spec": "Write evolution.json for the noise sequence anchor. Check doc/curriculum_audit/noise.md to select the right map (likely Noise_Perlin_Simplex). Introduce noise as correlated randomness. Perlin algorithm stage-by-stage.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.006"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "sequence_refs": [
+        "noise"
+      ],
+      "output": "commons/maps/<noise_anchor>/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.008",
+      "title": "Evolution: Cellular Automata anchor (CA_ElementaryRules or CA_GameOfLife)",
+      "spec": "Write evolution.json for the CA anchor. Per audit, CA_GameOfLife should come before CA_ElementaryRules. Use whichever is actually second in the sequence JSON. Introduce local rules → global emergence. Anchor artifact 7_2_game_of_life_vr.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.007"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "output": "commons/maps/CA_GameOfLife/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.009",
+      "title": "Evolution: Fractals anchor (Fractal_Recursion + recursive_tree)",
+      "spec": "Write commons/maps/Fractal_Recursion/evolution.json. Anchor artifact recursive_tree. Introduce recursion as form-generating function applied to itself. Reference CA truth. capture_leaks: stochastic growth (L-systems), complex-plane (Julia/Mandelbrot).",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.008"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "artifact_refs": [
+        "recursive_tree"
+      ],
+      "map_refs": [
+        "Fractal_Recursion"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "output": "commons/maps/Fractal_Recursion/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.010",
+      "title": "Evolution: L-Systems anchor (LSystems_Grammar_Lab)",
+      "spec": "Write commons/maps/LSystems_Grammar_Lab/evolution.json. Introduce grammar rewriting. technique_first: alphabet, production rules, derivation. Reference fractals truth. capture_leaks: stochastic grammars, context-sensitivity, ecological grammars.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.009"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "map_refs": [
+        "LSystems_Grammar_Lab"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "output": "commons/maps/LSystems_Grammar_Lab/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.011",
+      "title": "Evolution: Procgen anchor (PG_Genetic_Evolution)",
+      "spec": "Write evolution.json for PG_Genetic_Evolution. Introduce procgen as deterministic + random + rules = infinite content.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.010"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "map_refs": [
+        "PG_Genetic_Evolution"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "output": "commons/maps/PG_Genetic_Evolution/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.012",
+      "title": "Evolution: Softbodies anchor",
+      "spec": "Write evolution.json for the softbodies anchor (check audit: doc/curriculum_audit/softbodies.md — likely SoftBodies_Soft_Body_Deformation using rounded_softbody_test). Introduce deformation, springs, constraints.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.011"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "artifact_refs": [
+        "rounded_softbody_test"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "output": "commons/maps/SoftBodies_Soft_Body_Deformation/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.013",
+      "title": "Evolution: Swarm anchor (SwarmIntelligence_Boids_Algorithm)",
+      "spec": "Write evolution.json. Introduce boids 3 rules (separation, alignment, cohesion). Reference softbodies truth.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.012"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "output": "commons/maps/SwarmIntelligence_Boids_Algorithm/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.014",
+      "title": "Evolution: ML anchor (ML_Evolution or ML_Gradient_Landscape)",
+      "spec": "Write evolution.json. Introduce optimization under uncertainty. capture_leaks: bias, interpretability, the gap between learning and knowing.",
+      "effort": "1.5h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.013"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "output": "commons/maps/ML_Evolution/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.015",
+      "title": "Evolution: Foundations anchor (Russell_Paradox or Godel_Incompleteness)",
+      "spec": "Write evolution.json. Introduce paradox as form of self-reference. This sequence is the pivot into QFEP — the tone should shift from 'building' to 'encountering limits'.",
+      "effort": "1.5h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.014"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "output": "commons/maps/Russell_Paradox/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.016",
+      "title": "Evolution: QFEP anchor (QFEP_Introduction + qfep_formula_3d)",
+      "spec": "Write evolution.json — the pedagogical climax of the entire curriculum. Walk through building QFE = F - λE(S) + φΔE(S,t) one term at a time. Reference foundations truth.",
+      "effort": "2h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.015"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "artifact_refs": [
+        "qfep_formula_3d"
+      ],
+      "map_refs": [
+        "QFEP_Introduction"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "output": "commons/maps/QFEP_Introduction/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    },
+    {
+      "id": "write_evolutions.017",
+      "title": "Evolution: Graphtheory anchor (GT_Foundations)",
+      "spec": "Write evolution.json. Introduce nodes + edges = relational structure. Reference QFEP truth (closure of the curriculum).",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [
+        "write_evolutions.016"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "map_refs": [
+        "GT_Foundations"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "output": "commons/maps/GT_Foundations/evolution.json",
+      "contexts": [
+        "evolution_framework",
+        "evolution_exemplar",
+        "red_thread",
+        "capture_bias",
+        "sequence_audit_dir",
+        "curriculum_spine",
+        "three_track_alignment"
+      ]
+    }
+  ]
+}

@@ -9,12 +9,15 @@ extends Node3D
 @export var grid_width: int = 10
 @export var grid_depth: int = 10
 @export var wall_thickness: float = 0.1
+@export var show_marker_disks: bool = false
 
 # Ant settings
 @export var ant_speed: float = 5.0
 @export var ant_size: float = 0.3
 @export var ant_color: Color = Color.RED
 @export var path_color: Color = Color(1.0, 0.5, 0.0)
+@export var wall_color: Color = Color(0.9, 0.95, 1.0, 1.0)
+@export_range(0.02, 2.0, 0.01) var wall_change_interval: float = 0.2
 
 # Maze representation
 var maze: Array = []
@@ -43,23 +46,23 @@ var visited: Dictionary = {}
 var wall_timer: Timer
 var wall_nodes: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	generate_maze()
-	# build_navigation_grid()
+	build_navigation_grid()
 	create_3d_maze()
 	setup_wall_movement_timer()
 	# for later
-	#create_ant()
-	#create_path_visualization()
-	#place_ant()
+	create_ant()
+	create_path_visualization()
+	place_ant()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if ant_moving and not found_exit:
 		move_ant(delta)
 		update_path_visualization()
 
-func generate_maze():
+func generate_maze() -> void:
 	# Initialize maze grid
 	maze.clear()
 	for z in range(grid_depth):
@@ -73,7 +76,7 @@ func generate_maze():
 	start_pos = Vector2i(0, randi() % grid_depth)
 	exit_pos = Vector2i(grid_width - 1, randi() % grid_depth)
 
-func build_navigation_grid():
+func build_navigation_grid() -> void:
 	# Create a finer grid for navigation where lines are walls
 	nav_grid.clear()
 	
@@ -104,67 +107,64 @@ func build_navigation_grid():
 					if nx < grid_width * nav_grid_scale and nz < grid_depth * nav_grid_scale:
 						nav_grid[nz][nx] = 1  # 1 = wall
 
-func create_3d_maze():
-	# Create the floor
-	var floor_mesh = PlaneMesh.new()
-	floor_mesh.size = Vector2(grid_width * cell_size, grid_depth * cell_size)
-	
-	var floor_material = StandardMaterial3D.new()
-	floor_material.albedo_color = Color(0.2, 0.2, 0.2)
-	
-	var floor_instance = MeshInstance3D.new()
-	floor_instance.mesh = floor_mesh
-	floor_instance.material_override = floor_material
-	floor_instance.position = Vector3(grid_width * cell_size / 3, -1, grid_depth * cell_size / 2)
-	add_child(floor_instance)
-	
+func create_3d_maze() -> void:
 	# Clear existing wall nodes
 	wall_nodes.clear()
-	
-	# Create maze walls
+
+	# Create maze walls (in ZY plane)
 	for z in range(grid_depth):
 		for x in range(grid_width):
-			var wall_position = Vector3(x * cell_size, 3, z * cell_size)
-			
+			var wall_position = Vector3(0, z * cell_size, x * cell_size)
+
 			if maze[z][x] == 0:  # / diagonal
 				create_diagonal_wall(wall_position, true)
 			else:  # \ diagonal
 				create_diagonal_wall(wall_position, false)
-	
-	# Create entrance and exit markers
-	create_marker(Vector3(0, 0.05, start_pos.y * cell_size + cell_size/2), Color.GREEN)
-	create_marker(Vector3(grid_width * cell_size, 0.05, exit_pos.y * cell_size + cell_size/2), Color.BLUE)
 
-func create_diagonal_wall(position, is_forward_slash):
+	# Optional entrance/exit markers (disabled by default).
+	if show_marker_disks:
+		create_marker(Vector3(ant_size, start_pos.y * cell_size + cell_size/2, 0), Color.GREEN)
+		create_marker(Vector3(ant_size, exit_pos.y * cell_size + cell_size/2, grid_width * cell_size), Color.BLUE)
+
+func create_diagonal_wall(position, is_forward_slash) -> void:
 	var wall_node = Node3D.new()
 	wall_node.position = position
 	add_child(wall_node)
-	
+
 	# Store reference to wall node for movement
 	wall_nodes.append(wall_node)
-	
-	var wall_mesh = BoxMesh.new()
-	wall_mesh.size = Vector3(cell_size * sqrt(2), wall_height, wall_thickness)
-	
-	var wall_material = StandardMaterial3D.new()
-	wall_material.albedo_color = Color.WHITE
-	
+
+	# Render each 10 PRINT stroke as a line (no square bars).
+	var line_length := cell_size * sqrt(2.0)
+	var wall_mesh := ImmediateMesh.new()
+	var wall_material := StandardMaterial3D.new()
+	wall_material.albedo_color = wall_color
+	wall_material.emission_enabled = true
+	wall_material.emission = wall_color
+	wall_material.emission_energy_multiplier = 0.6
+	wall_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	wall_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+
 	var wall_instance = MeshInstance3D.new()
 	wall_instance.mesh = wall_mesh
 	wall_instance.material_override = wall_material
-	
-	# Position adjustments
-	wall_instance.position = Vector3(cell_size/2, wall_height/2, cell_size/2)
-	
-	# Rotate based on diagonal type
-	if is_forward_slash:  # /
-		wall_instance.rotate_y(PI/4)
-	else:  # \
-		wall_instance.rotate_y(-PI/4)
-	
+	wall_mesh.surface_begin(Mesh.PRIMITIVE_LINES, wall_material)
+	wall_mesh.surface_add_vertex(Vector3(0, 0, -line_length * 0.5))
+	wall_mesh.surface_add_vertex(Vector3(0, 0, line_length * 0.5))
+	wall_mesh.surface_end()
+
+	# Position at center of cell in ZY plane
+	wall_instance.position = Vector3(0, cell_size/2, cell_size/2)
+
+	# Rotate around X axis to create diagonals in ZY plane
+	if is_forward_slash:  # / (bottom-left to top-right)
+		wall_instance.rotation = Vector3(-PI/4, 0, 0)
+	else:  # \ (top-left to bottom-right)
+		wall_instance.rotation = Vector3(PI/4, 0, 0)
+
 	wall_node.add_child(wall_instance)
 
-func create_marker(position, color):
+func create_marker(position, color) -> void:
 	var marker_mesh = CylinderMesh.new()
 	marker_mesh.top_radius = cell_size * 0.3
 	marker_mesh.bottom_radius = cell_size * 0.3
@@ -185,7 +185,7 @@ func create_marker(position, color):
 
 
 
-func create_ant():
+func create_ant() -> void:
 	ant_node = Node3D.new()
 	ant_node.name = "Ant"
 	
@@ -206,28 +206,28 @@ func create_ant():
 	ant_node.add_child(ant_mesh_instance)
 	add_child(ant_node)
 
-func create_path_visualization():
+func create_path_visualization() -> void:
 	path_node = Node3D.new()
 	path_node.name = "Path"
 	add_child(path_node)
 	
 	# We'll create the actual path mesh in update_path_visualization()
 
-func place_ant():
-	# Place ant at start (left side)
+func place_ant() -> void:
+	# Place ant at start (bottom side in ZY plane)
 	var start_z = start_pos.y * nav_grid_scale + nav_grid_scale / 2
 	ant_nav_pos = Vector2i(0, start_z)
 	ant_path = [ant_nav_pos]
-	
-	# Set 3D position
-	var ant_3d_x = ant_nav_pos.x * cell_size / nav_grid_scale
-	var ant_3d_z = ant_nav_pos.y * cell_size / nav_grid_scale
-	ant_node.position = Vector3(ant_3d_x, ant_size, ant_3d_z)
-	
+
+	# Set 3D position (now in ZY plane)
+	var ant_3d_y = ant_nav_pos.y * cell_size / nav_grid_scale
+	var ant_3d_z = ant_nav_pos.x * cell_size / nav_grid_scale
+	ant_node.position = Vector3(ant_size, ant_3d_y, ant_3d_z)
+
 	ant_moving = true
 	visited = {ant_nav_pos: true}
 
-func move_ant(delta):
+func move_ant(_delta) -> void:
 	if is_at_exit():
 		found_exit = true
 		return
@@ -251,11 +251,11 @@ func move_ant(delta):
 	visited[ant_nav_pos] = true
 	update_ant_3d_position()
 
-func update_ant_3d_position():
-	# Update the 3D position of the ant based on its navigation grid position
-	var ant_3d_x = ant_nav_pos.x * cell_size / nav_grid_scale
-	var ant_3d_z = ant_nav_pos.y * cell_size / nav_grid_scale
-	ant_node.position = Vector3(ant_3d_x, ant_size, ant_3d_z)
+func update_ant_3d_position() -> void:
+	# Update the 3D position of the ant based on its navigation grid position (ZY plane)
+	var ant_3d_y = ant_nav_pos.y * cell_size / nav_grid_scale
+	var ant_3d_z = ant_nav_pos.x * cell_size / nav_grid_scale
+	ant_node.position = Vector3(ant_size, ant_3d_y, ant_3d_z)
 
 func is_at_exit():
 	# Check if ant has reached right edge of maze
@@ -310,70 +310,67 @@ func choose_best_move(moves):
 	
 	return best_move
 
-func update_path_visualization():
+func update_path_visualization() -> void:
 	# Remove previous path
 	if path_mesh_instance != null:
 		path_mesh_instance.queue_free()
-	
+
 	if ant_path.size() <= 1:
 		return
-	
+
 	# Create a new path using ImmediateMesh
 	var path_immediate_mesh = ImmediateMesh.new()
 	path_mesh_instance = MeshInstance3D.new()
 	path_mesh_instance.mesh = path_immediate_mesh
-	
+
 	var path_material = StandardMaterial3D.new()
 	path_material.albedo_color = path_color
 	path_material.emission_enabled = true
 	path_material.emission = path_color
 	path_material.emission_energy_multiplier = 1.0
 	path_mesh_instance.material_override = path_material
-	
-	# Draw the path
+
+	# Draw the path (now in ZY plane)
 	path_immediate_mesh.clear_surfaces()
 	path_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP, path_material)
-	
+
 	for point in ant_path:
-		var x = point.x * cell_size / nav_grid_scale
-		var z = point.y * cell_size / nav_grid_scale
-		path_immediate_mesh.surface_add_vertex(Vector3(x, ant_size, z))
-	
+		var y = point.y * cell_size / nav_grid_scale
+		var z = point.x * cell_size / nav_grid_scale
+		path_immediate_mesh.surface_add_vertex(Vector3(ant_size, y, z))
+
 	path_immediate_mesh.surface_end()
 	path_node.add_child(path_mesh_instance)
 
-func setup_wall_movement_timer():
-	"""Setup timer to move a random wall every second"""
+func setup_wall_movement_timer() -> void:
+	"""Setup timer to move a random wall at the configured interval."""
 	wall_timer = Timer.new()
-	wall_timer.wait_time = 1.0
+	wall_timer.wait_time = maxf(wall_change_interval, 0.02)
 	wall_timer.timeout.connect(_on_wall_timer_timeout)
 	wall_timer.autostart = true
 	add_child(wall_timer)
 
-func _on_wall_timer_timeout():
+func _on_wall_timer_timeout() -> void:
 	"""Rotate a random wall to change its diagonal direction"""
 	if wall_nodes.is_empty():
 		return
-	
+
 	# Pick a random wall
 	var random_wall = wall_nodes[randi() % wall_nodes.size()]
-	
+
 	# Get the wall's mesh instance
 	var wall_instance = random_wall.get_child(0) as MeshInstance3D
 	if not wall_instance:
 		return
-	
-	# Rotate the wall by 90 degrees (switching between / and \)
-	wall_instance.rotate_y(PI/2)
-	
-	# Add some visual feedback - change color briefly
-	if wall_instance.material_override:
-		var original_color = wall_instance.material_override.albedo_color
-		wall_instance.material_override.albedo_color = Color.RED
-		
-		# Reset color after 0.2 seconds
-		await get_tree().create_timer(0.2).timeout
-		if is_instance_valid(wall_instance) and wall_instance.material_override:
-			wall_instance.material_override.albedo_color = original_color
-	
-	print("Rotated wall at position: ", random_wall.position)
+
+	# Rotate the wall by 90 degrees around X axis (switching between / and \ in ZY plane)
+	wall_instance.rotate_x(PI/2)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

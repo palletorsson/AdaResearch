@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "VectorBasics",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 9,
+    "d": 9
+  },
+  "signature": "basis_vectors_rig decomposes a target point into three colored axis projections",
+  "style": null,
+  "echoes": [
+    "primitives",
+    "transformation",
+    "color",
+    "forces"
+  ],
+  "density": 0.037,
+  "breath_zones": [
+    {
+      "size": 77,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 9
+      },
+      "centroid": [
+        4.025974025974026,
+        3.987012987012987
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 3,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 80,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

@@ -1,0 +1,238 @@
+map: Primitives_Melencolia
+sequence: primitives
+dimensions:
+  rows: 14
+  cols: 7
+base_recipe: flat_corridor
+base_recipe_match_pct: 66.7
+residual_cells: 2
+residual_pct: 33.3
+vocabulary_coverage_pct: 66.7
+cells_masked_void_envelope: 92
+operator_groups: 2
+operator_kinds:
+  @void: 2
+operators_declarative:
+  - "@void at (0,13)"
+  - "@void at (6,13)"
+utilities:
+  -
+    token: sp
+    at:
+      - 0
+      - 0
+    raw: sp
+  -
+    token: an
+    at:
+      - 6
+      - 0
+    raw: "an:90"
+  -
+    token: wp
+    at:
+      - 0
+      - 3
+    raw: wp
+  -
+    token: t
+    at:
+      - 1
+      - 8
+    raw: t
+  -
+    token: t
+    at:
+      - 5
+      - 8
+    raw: t
+  -
+    token: wp
+    at:
+      - 3
+      - 9
+    raw: wp
+artifacts:
+  -
+    token: dark_sphere
+    at:
+      - 0
+      - 0
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: pyramid
+    at:
+      - 1
+      - 1
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 1
+  -
+    token: snap_pyramid_puzzle
+    at:
+      - 3
+      - 1
+    rotation: 180
+    y_offset: ""
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: pyramid
+    at:
+      - 5
+      - 1
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: library_rack
+    at:
+      - 6
+      - 1
+    rotation: 180
+    y_offset: 1.5
+    footprint_inferred:
+      - 1
+      - 3
+    config: "#collection:alternative_geometries#cols:4#rows:4"
+  -
+    token: cube_scene
+    at:
+      - 3
+      - 2
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: cube_scene
+    at:
+      - 2
+      - 3
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: pyramidlong
+    at:
+      - 3
+      - 3
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: cube_scene
+    at:
+      - 4
+      - 3
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: prism_block
+    at:
+      - 6
+      - 3
+    rotation: 90
+    y_offset: ""
+    footprint_inferred:
+      - 1
+      - 3
+  -
+    token: cube_scene
+    at:
+      - 3
+      - 4
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: pyramid
+    at:
+      - 1
+      - 5
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 1
+  -
+    token: pyramid
+    at:
+      - 5
+      - 5
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: bigframe
+    at:
+      - 0
+      - 8
+    rotation: 90
+    y_offset: 1
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: bigframe
+    at:
+      - 6
+      - 8
+    rotation: 90
+    y_offset: 1
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: diamondtoruscollection
+    at:
+      - 3
+      - 10
+    rotation: 0
+    y_offset: 4
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: durer_scene
+    at:
+      - 3
+      - 12
+    rotation: 180
+    y_offset: 0
+    footprint_inferred:
+      - 3
+      - 1
+  -
+    token: code_display
+    at:
+      - 3
+      - 13
+    rotation: 180
+    y_offset: 4
+    footprint_inferred:
+      - 1
+      - 1
+    config: "#tutorial:melencolia_axioms"
+artifact_count: 18

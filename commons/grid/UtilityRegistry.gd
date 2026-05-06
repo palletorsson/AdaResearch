@@ -29,18 +29,37 @@ const UTILITY_TYPES = {
 		"supports_parameters": true  # destination, spawn point
 	},
 	"t": {
-		"name": "teleport", 
-		"file": "teleport_scene.tscn", 
+		"name": "teleport",
+		"file": "teleport_scene.tscn",
 		"category": "transport",
 		"description": "Instant location changes",
 		"supports_parameters": true  # destination, spawn point
 	},
-	"s": {
-		"name": "spawn_point", 
-		"file": "spawn_point_scene.tscn", 
+	"m": {
+		"name": "move_player",
+		"file": "move_player.tscn",
 		"category": "transport",
-		"description": "Player starting position and respawn location",
+		"description": "Moves player to specific location after delay",
+		"supports_parameters": true  # x, y, z, delay
+	},
+	"s": {
+		"name": "spawn_point",
+		"file": "spawn_point_scene.tscn",
+		"category": "transport",
+		# OPTIONAL. When absent, GridSpawnComponent places the player at the
+		# centroid of floor cells, facing the centroid of interactables.
+		# See the SPAWN POLICY doc block at the top of GridSpawnComponent.gd.
+		# Add `s` only to override position; add map_data.json
+		# `spawn_points.default.rotation` to override facing.
+		"description": "Optional — explicit player start. Defaults to floor centroid facing interactables.",
 		"supports_parameters": true  # spawn_name, rotation, priority
+	},
+	"cp": {
+		"name": "checkpoint",
+		"file": "checkpoint.tscn",
+		"category": "safety",
+		"description": "Save point - green sphere with S, saves player progress on touch",
+		"supports_parameters": true  # checkpoint_id
 	},
 	"sp": {
 	"name": "score points", 
@@ -56,12 +75,61 @@ const UTILITY_TYPES = {
 	"description": "Displays current map name and description",
 	"supports_parameters": true  # display_mode, text_scale
 	},
+	"tts": {
+		"name": "text_to_speech",
+		"file": "tts_speaker.tscn",
+		"category": "audio",
+		"description": "Speaks text on load",
+		"supports_parameters": true  # message string
+	},
+	"sub": {
+		"name": "subtitle_trigger",
+		"file": "subtitle_trigger.tscn",
+		"category": "ui",
+		"description": "Shows Portal 2-style subtitle when player enters area",
+		"supports_parameters": true  # key: 'map' for map desc, or custom text/key
+	},
+	"3t": {
+		"name": "text_display",
+		"file": "word_is.tscn",
+		"category": "ui",
+		"description": "Displays custom short text using a TextMesh",
+		"supports_parameters": true  # message string (underscores become spaces)
+	},
+	"sr": {
+		"name": "speed_reader",
+		"file": "speed_text.tscn",
+		"category": "ui",
+		"description": "Shows tutorial text one line at a time (3D speed read)",
+		"supports_parameters": true  # key[:seconds[:loop]]
+	},
+	"Sr": {
+		"name": "speed_reader (legacy)",
+		"file": "speed_text.tscn",
+		"category": "ui",
+		"description": "Deprecated alias for 'sr' (use lowercase)",
+		"supports_parameters": true
+	},
 	"r": {
 	"name": "reset_cube", 
 	"file": "reset_cube.tscn", 
 	"category": "safety",
 	"description": "Resets player to safe position when approached",
 	"supports_parameters": true  # position, height_offset, warning_distance
+	},
+	"h": {
+		"name": "hazard_zone",
+		"file": "danger_zone.tscn",
+		"category": "hazard",
+		"description": "Danger zone that damages player (h:fire, h:vacuum, h:electric, h:toxic, h:radiation, h:death)",
+		"supports_parameters": true  # type:damage_per_tick (e.g. "fire:20", "death")
+	},
+	"f": {
+		"name": "force_field",
+		"file": "",
+		"category": "hazard",
+		"description": "Dual-nature force zone — hazard that transmutes into benefit (f:fire, f:electric:15, f:toxic:10). Q-FEP: same potential, different restraint.",
+		"supports_parameters": true  # type:intensity (e.g. "fire:1.5", "electric:2")
 	},
 	"q": {
 		"name": "quit_cube", 
@@ -133,11 +201,39 @@ const UTILITY_TYPES = {
 		"supports_parameters": true
 	},
 	"tc": {
-		"name": "transport_cube", 
-		"file": "transport_cube.tscn", 
+		"name": "transport_cube",
+		"file": "transport_cube.tscn",
 		"category": "transport",
 		"description": "Cube that carries players across voids with directional movement",
-		"supports_parameters": true  # distance:direction (e.g. "4:z" or "3.5:1,0,0")
+		"supports_parameters": true  # distance:direction[:auto] (e.g. "4:z", "3.5:1,0,0", "3:z:auto")
+	},
+	"br": {
+		"name": "bridge_path",
+		"file": "bridge_path.tscn",
+		"category": "transport",
+		"description": "Transparent green grid bridge spanning voids on x/z axis",
+		"supports_parameters": true  # axis:length (e.g. "z:3", "-x:2")
+	},
+	"jp": {
+		"name": "jump_pad",
+		"file": "jump_pad.tscn",
+		"category": "transport",
+		"description": "Parabolic arc launcher to target grid position — player becomes the projectile",
+		"supports_parameters": true  # target_x:target_z[:arc_height] (e.g. "15:3", "15:3:8")
+	},
+	"rc": {
+		"name": "rotation_cube",
+		"file": "rotation_cube.tscn",
+		"category": "transport",
+		"description": "Cube that rotates to create walkable ramps/surfaces",
+		"supports_parameters": true  # angle:axis:pause (e.g. "45:y:2" = 45° on Y, 2s pause) or "continuous:x:30"
+	},
+	"sc": {
+		"name": "scale_cube",
+		"file": "scale_cube.tscn",
+		"category": "transport",
+		"description": "Cube that scales to fill gaps with presence",
+		"supports_parameters": true  # max:min:offset (e.g. "3:0.5:1.5" = scale 0.5→3, offset 1.5)
 	},
 	
 	# UI/Information utilities
@@ -155,11 +251,18 @@ const UTILITY_TYPES = {
 		"description": "Information and instruction displays",
 		"supports_parameters": false
 	},
+	"ib": {
+		"name": "info_board_handheld",
+		"file": "",
+		"category": "educational",
+		"description": "Handheld 3D info board for algorithm education (ib:randomwalk, ib:vectors, ib:forces, etc.)",
+		"supports_parameters": true  # board_type, height_offset
+	},
 	"la": {
 		"name": "label",
 		"file": "info_label.tscn",
 		"category": "ui",
-		"description": "Displays artifact name from grid_artifacts.json by keyid",
+		"description": "Displays artifact name from the artifact registry by keyid",
 		"supports_parameters": true  # keyid parameter
 	},
 
@@ -172,13 +275,129 @@ const UTILITY_TYPES = {
 		"supports_parameters": true  # direction, destination
 	},
 	
+	"bp": {
+		"name": "big_pipe",
+		"file": "",
+		"category": "structure",
+		"description": "Procedural pipe system (bp:f,f,s,u...)",
+		"supports_parameters": true  # pipe code string
+	},
+
+	# Player body customization
+	"pb": {
+		"name": "player_body_trigger",
+		"file": "player_body_trigger.tscn",
+		"category": "interactive",
+		"description": "Triggers player body customization (pb:dress, pb:skin_color, pb:dress_wicked)",
+		"supports_parameters": true  # feature_name, optional color/params
+	},
+
+	"ds": {
+		"name": "dark_sphere",
+		"file": "dark_sphere_utility.tscn",
+		"category": "atmosphere",
+		"description": "Large dark sphere that envelops the scene — makes artifacts pop against darkness",
+		"supports_parameters": true  # radius (default covers entire map)
+	},
+
 	# Empty space
 	" ": {
-		"name": "none", 
-		"file": "", 
+		"name": "none",
+		"file": "",
 		"category": "empty",
 		"description": "Empty grid space",
 		"supports_parameters": false
+	},
+
+	# ─────────────────────────────────────────────────────────────
+	# AUTHORIAL ANNOTATIONS (@-prefixed)
+	# Invisible at runtime. Read by the map pipeline (validation,
+	# reverse-extraction, differential capture, constraint solver).
+	# They declare authorial intent the generator must respect.
+	# ─────────────────────────────────────────────────────────────
+	"@void": {
+		"name": "annotation_void",
+		"file": "",
+		"category": "authorial",
+		"description": "Argued emptiness — this cell (or W:D region anchored here) MUST stay empty. Stronger than absence. Generator, placement rules, and biome layers all skip. Params: W:D footprint extending +x/+z from anchor (default 1:1).",
+		"supports_parameters": true  # W:D (e.g. "@void:3:2")
+	},
+	"@look": {
+		"name": "annotation_look",
+		"file": "",
+		"category": "authorial",
+		"description": "Change-detection region anchor. Params: W:D cell footprint. Capture pipeline diffs this zone between runs and surfaces deltas.",
+		"supports_parameters": true  # W:D (e.g. "@look:3:2")
+	},
+	"@sample": {
+		"name": "annotation_sample",
+		"file": "",
+		"category": "authorial",
+		"description": "Named golden reference region. Generator copies verbatim when scoring similarity. Params: key:W:D — `key` identifies the sample for cross-map reuse (e.g. @sample:pedestal_single:3:3).",
+		"supports_parameters": true  # key:W:D
+	},
+	"@hold": {
+		"name": "annotation_hold",
+		"file": "",
+		"category": "authorial",
+		"description": "Frozen region — generator cannot modify ANY cell inside this W:D footprint, whatever the cells contain. Stronger than @void (which forbids placement) and @sample (which reads but doesn't lock).",
+		"supports_parameters": true  # W:D
+	},
+	"@must": {
+		"name": "annotation_must",
+		"file": "",
+		"category": "authorial",
+		"description": "Required artifact slot — generator must place the named token here. Params: token name (e.g. @must:rotation_gimbal).",
+		"supports_parameters": true
+	},
+	"@block": {
+		"name": "annotation_block",
+		"file": "",
+		"category": "authorial",
+		"description": "Exclusion — the named token may not appear on this map. Params: token name.",
+		"supports_parameters": true
+	},
+	"@signature": {
+		"name": "annotation_signature",
+		"file": "",
+		"category": "authorial",
+		"description": "Load-bearing artifact — protected from dimming/shuffling by composition passes. Params: token name.",
+		"supports_parameters": true
+	},
+	"@breath": {
+		"name": "annotation_breath",
+		"file": "",
+		"category": "authorial",
+		"description": "Intentional sparse zone — biome layers dim here. Authored breath in a dense sequence.",
+		"supports_parameters": false
+	},
+	"@echo": {
+		"name": "annotation_echo",
+		"file": "",
+		"category": "authorial",
+		"description": "Sequence-echo marker — run an earlier sequence's biome layers at this stage. Params: sequence name (e.g. @echo:primitives).",
+		"supports_parameters": true
+	},
+	"@style": {
+		"name": "annotation_style",
+		"file": "",
+		"category": "authorial",
+		"description": "Style hint for biome palette/density. Params: style token (kusama|rams|bauhaus|escher|pompeii).",
+		"supports_parameters": true
+	},
+	"@seed": {
+		"name": "annotation_seed",
+		"file": "",
+		"category": "authorial",
+		"description": "Deterministic seed override for generation around this cell. Params: integer.",
+		"supports_parameters": true
+	},
+	"@dense": {
+		"name": "annotation_dense",
+		"file": "",
+		"category": "authorial",
+		"description": "Per-map density multiplier hint, applied by surrounding generation. Params: float 0..1.",
+		"supports_parameters": true
 	}
 }
 
@@ -189,9 +408,13 @@ const CATEGORIES = {
 	"structure": "Structural elements and barriers",
 	"furniture": "Furniture and static objects",
 	"interactive": "Interactive and grabbable objects",
+	"authorial": "Authorial annotations — invisible at runtime, read by the pipeline",
 	"ui": "User interface elements",
 	"educational": "Educational and informational content",
 	"navigation": "Navigation aids and indicators",
+	"safety": "Checkpoints and reset points",
+	"hazard": "Danger zones and environmental hazards",
+	"atmosphere": "Scene atmosphere and environmental effects",
 	"empty": "Empty space marker"
 }
 
@@ -284,6 +507,19 @@ static func validate_utility_grid(grid_data: Array) -> Dictionary:
 			var utility_type = cell_value[0] if not cell_value.is_empty() else " "
 			if ":" in cell_value:
 				utility_type = cell_value.split(":")[0]
+			
+			# Special handling for info board utilities (ib: prefix)
+			if utility_type == "ib":
+				# Validate info board type using InfoBoardRegistry
+				var board_type = cell_value.split(":")[1] if cell_value.split(":").size() > 1 else ""
+				if not InfoBoardRegistry.is_valid_board_type(board_type):
+					validation_result.valid = false
+					validation_result.errors.append(
+						"Invalid info board type '%s' at position [%d, %d]" % [board_type, x, z]
+					)
+					if not validation_result.unknown_types.has("ib:" + board_type):
+						validation_result.unknown_types.append("ib:" + board_type)
+				continue  # Skip regular utility validation for info boards
 			
 			# Check if utility type is valid
 			if not is_valid_utility_type(utility_type):

@@ -1,0 +1,199 @@
+{
+    "_metadata": {
+        "sound_type": "detroit_techno_song",
+        "display_name": "Midnight Metroplex",
+        "description": "Classic Detroit techno in the tradition of Juan Atkins, Derrick May. Clean 909 drums, cold digital pads, 808 sub bass. Machine precision, Afrofuturist soul.",
+        "category": "songs",
+        "tags": ["techno", "detroit", "classic", "909", "minimal", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Juan Atkins", "Derrick May", "Model 500", "Rhythim is Rhythim"],
+        "reference_tracks": ["No UFOs", "Strings of Life", "Night Drive", "Nude Photo"],
+        "research": "detroit_techno_deep_research.md"
+    },
+
+    "identity": {
+        "emotion": "cold_machine_funk",
+        "era": "1985-1990_detroit_first_wave",
+        "character": ["cold", "precise", "hypnotic", "futuristic", "clean"],
+        "two_second_test": "Metallic 909 hats + clean digital pad + deep sub = Detroit"
+    },
+
+    "parameters": {
+        "duration": { "min": 180.0, "max": 480.0, "value": 300.0, "step": 60.0 },
+        "bpm": { "min": 120, "max": 130, "value": 126, "step": 1, "description": "Classic Detroit tempo" },
+        "key": { "options": ["C#m", "F#m", "Bm", "G#m"], "value": "C#m", "description": "Cyberpunk noir — C#m Dorian, jazz-influenced Drexciya/Metroplex vibe" }
+    },
+
+    "sound_design": {
+        "drums": {
+            "machine": "TR-909",
+            "research_source": "detroit_techno_deep_research.md",
+            "kick": {
+                "pitch_start_hz": 130,
+                "pitch_end_hz": 50,
+                "pitch_decay_ms": 25,
+                "body_decay_ms": 120,
+                "click_freq_hz": 4000,
+                "click_decay_ms": 3,
+                "character": "punchy_fast_attack"
+            },
+            "snare": {
+                "tone_1_hz": 180,
+                "tone_2_hz": 330,
+                "noise_bandpass_hz": 6500,
+                "body_decay_ms": 40,
+                "noise_decay_ms": 50,
+                "character": "ring_mod_metallic",
+                "reverb": "none"
+            },
+            "hihat": {
+                "oscillator_count": 6,
+                "frequencies_hz": [263, 400, 421, 474, 587, 845],
+                "bandpass_center_hz": 9000,
+                "closed_decay_ms": 25,
+                "open_decay_ms": 150,
+                "character": "metallic_shimmer"
+            },
+            "clap": {
+                "burst_count": 4,
+                "burst_spacing_ms": 12,
+                "tail_decay_ms": 80,
+                "character": "layered_909"
+            }
+        },
+        "bass": {
+            "style": "808_sub",
+            "waveform": "sine_with_square",
+            "cutoff_hz": 150,
+            "attack_ms": 1,
+            "decay_ms": 300,
+            "sustain": 0.5,
+            "sub_boost_db": 3,
+            "character": "deep_sub_clean"
+        },
+        "pad": {
+            "style": "clean_digital",
+            "source": "Juno-106 DCO",
+            "waveform": "saw",
+            "voices": 4,
+            "detune_cents": 0,
+            "filter_cutoff_hz": 3500,
+            "attack_ms": 500,
+            "sustain": 0.7,
+            "chorus": false,
+            "character": "cold_precise_stable"
+        },
+        "stab": {
+            "style": "fm_metallic",
+            "source": "DX7 Algorithm 5",
+            "mod_ratio": 3.0,
+            "mod_index": 2.5,
+            "attack_ms": 3,
+            "decay_ms": 70,
+            "sustain": 0,
+            "reverb_mix": 0.15,
+            "character": "bell_like_percussive"
+        }
+    },
+
+    "patterns": {
+        "kick": {
+            "main": [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],
+            "description": "4-on-floor, quantized perfection"
+        },
+        "snare": {
+            "main": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+            "description": "2 and 4, locked"
+        },
+        "hihat": {
+            "main": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],
+            "variation": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,1],
+            "description": "Offbeat 8ths, occasional 16th variation"
+        },
+        "clap": {
+            "main": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+            "description": "Layered with snare on 2 and 4"
+        },
+        "bass": {
+            "main": [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],
+            "description": "Root on 1 and 3, locked to kick"
+        },
+        "stab": {
+            "main": [0,0,0,1, 0,0,1,0, 0,1,0,0, 0,0,0,0],
+            "description": "Syncopated, interlocking with drums"
+        }
+    },
+
+    "rhythm": {
+        "quantize": "strict",
+        "humanize_ms": 0,
+        "swing_pct": 0,
+        "velocity_profile": "machine",
+        "description": "Detroit is MACHINE music. Zero humanization."
+    },
+
+    "chord_progressions": [
+        { 
+            "name": "hypnotic_minimal", 
+            "chords": ["Am", "Em", "Am", "Em"], 
+            "bars_per_chord": 4,
+            "description": "Minimal movement, groove carries it"
+        },
+        { 
+            "name": "dorian_shift", 
+            "chords": ["Am", "Dm", "Am", "Dm"], 
+            "bars_per_chord": 4,
+            "description": "Jazz-influenced Dorian color"
+        }
+    ],
+
+    "arrangement": {
+        "structure": "hypnotic_loop",
+        "sections": [
+            { "name": "intro", "bars": 8, "elements": ["pad"], "description": "Cold pad alone" },
+            { "name": "build", "bars": 8, "elements": ["pad", "bass", "hihat"], "description": "Sub enters with offbeat hats" },
+            { "name": "main_a", "bars": 16, "elements": ["kick", "snare", "hihat", "clap", "bass", "pad"], "description": "Full groove, no stab" },
+            { "name": "main_b", "bars": 16, "elements": ["kick", "snare", "hihat", "clap", "bass", "pad", "stab"], "description": "Stab enters for variation" },
+            { "name": "breakdown", "bars": 8, "elements": ["pad", "bass"], "description": "Strip to pad and sub" },
+            { "name": "main_c", "bars": 16, "elements": ["kick", "snare", "hihat", "clap", "bass", "pad", "stab"], "description": "Full return" },
+            { "name": "outro", "bars": 8, "elements": ["pad", "hihat"], "description": "Fade to pad with fading hats" }
+        ],
+        "total_bars": 80,
+        "transitions": {
+            "crossfade_s": 2.0,
+            "style": "smooth_blend"
+        },
+        "variation": "minimal",
+        "philosophy": "Repetition as meditation. The groove hypnotizes through precision."
+    },
+
+    "mix": {
+        "kick_dominant": true,
+        "low_end": {
+            "focus_hz": 50,
+            "sub_boost_db": 2
+        },
+        "high_end": {
+            "shelf_hz": 4000,
+            "boost_db": 2,
+            "description": "Brightness for metallic 909 character"
+        },
+        "room": "dry",
+        "reverb": "minimal",
+        "compression": "light",
+        "stereo_width": "narrow"
+    },
+
+    "forbidden": [
+        "supersaw",
+        "hoover_bass",
+        "tape_saturation",
+        "gated_reverb",
+        "pitch_drift",
+        "pad_detune",
+        "humanization",
+        "vinyl_crackle",
+        "breakbeats",
+        "303_acid_squelch"
+    ]
+}

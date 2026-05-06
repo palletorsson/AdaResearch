@@ -1,5 +1,10 @@
 extends Node3D
 @onready var plane_node = $Plane
+
+# Export settings
+@export var border_size: int = 20  # Unmanipulated border size (in segments) for walkable edges
+@export var raise_amount: float = 0.1  # Height increase per step
+
 var walkers = []
 var vertex_grid = []
 var x_segments
@@ -7,7 +12,7 @@ var y_segments
 var mesh_instance
 var indices: PackedInt32Array
 
-func _ready():
+func _ready() -> void:
 	set_process(false)
 	# Wait a bit longer for the plane to be fully instantiated
 	await get_tree().process_frame
@@ -36,15 +41,33 @@ func _ready():
 		else:
 			push_error("No MeshInstance3D found in plane node and no mesh_built signal available")
 
-func _initialize_walk(mi: MeshInstance3D):
+func _initialize_walk(mi: MeshInstance3D) -> void:
 	mesh_instance = mi
-	x_segments = plane_node.x_segments
-	y_segments = plane_node.y_segments
+	# Try to read plane-like segmentation and size properties; otherwise, infer from mesh
+	var xs_prop = plane_node.get("x_segments")
+	var ys_prop = plane_node.get("y_segments")
+	if typeof(xs_prop) != TYPE_NIL and typeof(ys_prop) != TYPE_NIL:
+		x_segments = int(xs_prop)
+		y_segments = int(ys_prop)
+	else:
+		# Fallback: Higher resolution but not too extreme
+		x_segments = 100
+		y_segments = 100
 	
 	# The PrimitiveMeshBuilder creates non-indexed geometry (600 vertices, not 121)
 	# So we need to rebuild the grid ourselves with the correct structure
-	var plane_width = plane_node.width
-	var plane_height = plane_node.height
+	var plane_width
+	var plane_height
+	var w_prop = plane_node.get("width")
+	var h_prop = plane_node.get("height")
+	if typeof(w_prop) != TYPE_NIL and typeof(h_prop) != TYPE_NIL:
+		plane_width = float(w_prop)
+		plane_height = float(h_prop)
+	else:
+		# Not a plane primitive; infer width/height from the mesh AABB (x and z extents)
+		var aabb: AABB = mesh_instance.get_aabb() if mesh_instance else AABB()
+		plane_width = aabb.size.x if aabb.size.x > 0.0 else 1.0
+		plane_height = aabb.size.z if aabb.size.z > 0.0 else 1.0
 	
 	vertex_grid.clear()
 	var half_width = plane_width / 2.0
@@ -61,9 +84,10 @@ func _initialize_walk(mi: MeshInstance3D):
 			row.append(Vector3(x, 0, z))
 		vertex_grid.append(row)
 	walkers.clear()
+	# Spawn walker in the center (inside border)
 	walkers.append({
-		"x": int(x_segments / 2),
-		"y": int(y_segments / 2),
+		"x": clamp(int(x_segments / 2.0), border_size, x_segments - border_size),
+		"y": clamp(int(y_segments / 2.0), border_size, y_segments - border_size),
 	})
 	
 	# Generate indices
@@ -84,19 +108,22 @@ func _initialize_walk(mi: MeshInstance3D):
 			indices.append(d)
 	set_process(true)
 
-func _process(delta):
+func _process(_delta):
 	if not mesh_instance or vertex_grid.is_empty():
 		return
 	# Move walkers
 	for walker in walkers:
 		walker.x += randi_range(-1, 1)
 		walker.y += randi_range(-1, 1)
-		walker.x = clamp(walker.x, 0, x_segments)
-		walker.y = clamp(walker.y, 0, y_segments)
-		# Modify vertex height - FIXED: properly update the array
-		var current_vertex = vertex_grid[walker.y][walker.x]
-		current_vertex.y += 0.1
-		vertex_grid[walker.y][walker.x] = current_vertex
+		# Clamp walkers to stay inside border (not on the edge)
+		walker.x = clamp(walker.x, border_size, x_segments - border_size)
+		walker.y = clamp(walker.y, border_size, y_segments - border_size)
+
+		# Only modify terrain inside the border area
+		if not _is_in_border(walker.x, walker.y):
+			var current_vertex = vertex_grid[walker.y][walker.x]
+			current_vertex.y += raise_amount
+			vertex_grid[walker.y][walker.x] = current_vertex
 	
 	# Update mesh with proper normal generation
 	var new_vertices = PackedVector3Array()
@@ -130,3 +157,11 @@ func _process(delta):
 	# Preserve material if any
 	if mesh_instance.material_override:
 		mesh.surface_set_material(0, mesh_instance.material_override)
+
+func _is_in_border(x: int, y: int) -> bool:
+	"""Check if position is in the border area"""
+	return x < border_size or x > x_segments - border_size or \
+		   y < border_size or y > y_segments - border_size
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

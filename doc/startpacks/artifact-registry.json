@@ -1,0 +1,241 @@
+{
+  "query": "Artifact Registry",
+  "matched_topic": "artifact_registry",
+  "pack_slug": "artifact-registry",
+  "title": "Artifact Registry",
+  "category": "content",
+  "tags": [
+    "registry",
+    "artifacts",
+    "lookup",
+    "metadata",
+    "spawning"
+  ],
+  "overview": "The artifact registry is the lookup and metadata layer between maps and scenes. Use this pack when the task is about adding artifacts, changing lookup_name metadata, understanding registry structure, or improving how artifacts are categorized and discovered.",
+  "read_first": [
+    {
+      "path": "commons/managers/GridArtifactRegistry.gd",
+      "reason": "Authoritative runtime loader for registry/*.json files.",
+      "exists": true
+    },
+    {
+      "path": "doc/ARCHITECTURE.md",
+      "reason": "System-level description of artifact lookup and registry structure.",
+      "exists": true
+    },
+    {
+      "path": "doc/ARTIFACT_THEME_GUIDE.md",
+      "reason": "Metadata and categorization guide for registry entries.",
+      "exists": true
+    },
+    {
+      "path": "doc/ARTIFACT_ORGANIZATION_PROPOSAL.md",
+      "reason": "Design rationale behind modular category registries.",
+      "exists": true
+    },
+    {
+      "path": "commons/artifacts/registry/primitives.json",
+      "reason": "Representative modular registry file with live artifact entries.",
+      "exists": true
+    },
+    {
+      "path": "commons/artifacts/registry/lab.json",
+      "reason": "Registry example for lab- and tool-oriented artifacts.",
+      "exists": true
+    }
+  ],
+  "principles": [
+    "registry/*.json is the authoritative source; the legacy grid_artifacts.json file is deprecated.",
+    "lookup_name is the stable bridge between map tokens, registry metadata, and scene loading.",
+    "Theme/category metadata should improve discovery without changing runtime identity."
+  ],
+  "constraints": [
+    "GridArtifactRegistry loads all registry/*.json files and may overwrite duplicate keys by last-loaded file.",
+    "New metadata should stay additive and backward compatible unless you are deliberately changing loader behavior.",
+    "Maps and sequences should refer to stable lookup_name values, not folder structure."
+  ],
+  "first_moves": [
+    "Decide whether the work is loader behavior, registry schema, or authoring metadata.",
+    "Check for duplicate or overlapping lookup_name entries before adding a new artifact.",
+    "If the change is discovery-oriented, update metadata first and runtime code second."
+  ],
+  "deepwiki_url": "https://deepwiki.com/palletorsson/AdaResearch",
+  "deepwiki_topics": [
+    "Artifact Registry System",
+    "Artifacts & Interactables",
+    "Map & Content Definition"
+  ],
+  "encyclopedia": [
+    {
+      "label": "AI tool inventory",
+      "route": "/ai",
+      "source": "src/lib/ai/tool-inventory.ts",
+      "reason": "Useful when you want to connect artifact metadata to encyclopedia tooling surfaces.",
+      "exists": true
+    },
+    {
+      "label": "Map Builder",
+      "route": "/map-builder",
+      "source": "src/components/map-builder/MapBuilderPage.tsx",
+      "reason": "Relevant because map authoring consumes lookup_name artifacts from the registry layer.",
+      "exists": true
+    }
+  ],
+  "history_hits": [
+    {
+      "path": "doc/SESSION_HANDOFF_2026-03-28.md",
+      "snippet": "- **Godot artifacts**: 42 floor patterns in `commons/artifacts/pompeii_mosaic_floor/`, Science Screen, Filter Screen (6 modes), Dark Sphere atmosphere, FloorPlanSpace",
+      "score": "3"
+    },
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "Processed 38 of 42 sequences. Added titles to 313 maps. Merged 13 maps. Fixed artifact-map mismatches across 6 sequences.",
+      "score": "2"
+    },
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "Processed 38 of 42 sequences. Added titles to 313 maps. Merged 13 maps. Fixed artifact-map mismatches across 6 sequences.",
+      "score": "2"
+    }
+  ],
+  "doc_hits": [
+    {
+      "path": "doc/ARTIFACT_THEME_GUIDE.md",
+      "snippet": "# Artifact Theme Guide",
+      "score": "7"
+    },
+    {
+      "path": "docs/TODO.md",
+      "snippet": "## Registry Cleanup (2026-01-30)",
+      "score": "7"
+    },
+    {
+      "path": "doc/ARCHITECTURE.md",
+      "snippet": "2. **Artifact System** — Educational object registry and spawning",
+      "score": "6"
+    },
+    {
+      "path": "doc/ARTIFACT_ORGANIZATION_PROPOSAL.md",
+      "snippet": "# Artifact Organization Proposal",
+      "score": "6"
+    },
+    {
+      "path": "doc/CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md",
+      "snippet": "AdaSceneManager loads all `.json` files from the sequences directory at runtime and merges them. Each sequence file defines learning sequences (like chapters in a book). Each sequence contains:",
+      "score": "6"
+    },
+    {
+      "path": "doc/HOW_TO_ADD_MAP_SEQUENCE.md",
+      "snippet": "For map-building sessions, use the workbench CLI to audit spine coverage, suggest artifacts, scaffold new maps, and append them to a sequence:",
+      "score": "6"
+    }
+  ],
+  "repo_hits": [
+    "commons/artifacts/category_registry.json",
+    "commons/artifacts/grid_artifacts.json.deprecated",
+    "commons/artifacts/registry/README.md",
+    "commons/artifacts/registry/algorithms_misc.json",
+    "commons/artifacts/registry/alternative_geometries.json",
+    "commons/artifacts/registry/arrays.json",
+    "commons/artifacts/registry/bar_array.json",
+    "commons/artifacts/registry/cellular_automata.json"
+  ],
+  "grounded_wiki": {
+    "project_slug": "adaresearch-case-study",
+    "points": [
+      {
+        "point_type": "fact",
+        "title": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while r...",
+        "statement": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while registry metadata carries the bridge back to scenes, categories, tags, and sequence ownership.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "fact",
+        "title": "How: `GridInteractablesComponent.gd` scans 49 registry files, validates `look...",
+        "statement": "How: `GridInteractablesComponent.gd` scans 49 registry files, validates `lookup_name`, normalizes scene paths, and merges 1,699 artifact definitions into one runtime dictionary.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "fact",
+        "title": "What: Central directory of JSON registry files that define all artifacts in t...",
+        "statement": "What: Central directory of JSON registry files that define all artifacts in the project. Each file contains artifact entries with lookup names, scene paths, metadata, and configuration. This is the authoritative source for artifact definitions, loaded by ArtifactCatalogDataProvider and GridInteractablesComponent.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "pattern",
+        "title": "Keep new map-facing behavior encoded in `map_data.json`, `utility_definitions...",
+        "statement": "Keep new map-facing behavior encoded in `map_data.json`, `utility_definitions`, or registry metadata rather than hardcoded scene assumptions.",
+        "support_count": 1,
+        "confidence": 0.71
+      }
+    ],
+    "claims": [
+      {
+        "claim_type": "fact",
+        "statement": "What: Central directory of JSON registry files that define all artifacts in the project. Each file contains artifact entries with lookup names, scene paths, metadata, and configuration. This is the authoritative source for artifact definitions, loaded by ArtifactCatalogDataProvider and GridInteractablesComponent.",
+        "support_count": 1,
+        "confidence": 0.81,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "fact",
+        "statement": "How: `GridInteractablesComponent.gd` scans 49 registry files, validates `lookup_name`, normalizes scene paths, and merges 1,699 artifact definitions into one runtime dictionary.",
+        "support_count": 1,
+        "confidence": 0.81,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "fact",
+        "statement": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while registry metadata carries the bridge back to scenes, categories, tags, and sequence ownership.",
+        "support_count": 1,
+        "confidence": 0.81,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "fact",
+        "statement": "What: Central directory of JSON registry files that define all artifacts in the project. Each file contains artifact entries with lookup names, scene paths, metadata, and configuration. This is the authoritative source for artifact definitions, loaded by ArtifactCatalogDataProvider and GridInteractablesComponent.",
+        "support_count": 1,
+        "confidence": 0.81,
+        "status": "grounded"
+      }
+    ],
+    "turns": [
+      {
+        "session_id": "66df209d-b3a1-4657-9cf6-522c844b3022",
+        "turn_index": 1,
+        "role": "user",
+        "text": "...orking on the \"Ada Research Zero One\" project. Take your time and do excellent work. **Task:** Merge dual registry systems **Task ID:** -untEV4J34eFwsR4F_anQ **Priority:** medium **Description:** Two parallel registry systems coexist with significant overlap: - Legacy: commons/artifacts/grid_artifacts.json (~1,015 entr..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 448,
+        "role": "user",
+        "text": "...ps captured (4 angles each), 10 artifacts captured (4 angles each). 5 artifacts could not be found in the registry: lsystem_tree, fractal_lsystem_string, dark_sphere, lsystem_dungeon, genetic_tree_sculptor.\", \"entries\": [ { \"type\": \"map\", \"target\": \"LSystems_Grammar_Lab\", \"shots\": { \"above\": \"/audit-shots/lsystems/LSys..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 531,
+        "role": "assistant",
+        "text": "...ite the final plan and call ExitPlanMode. Let me read the current plan file and overwrite it with the new scene catalog plan. Now let me write the new plan for the scene catalog project: Now I'll exit plan mode to present this for approval: It sounds like your message got cut off - \"there came\" - could you complete tha..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 614,
+        "role": "user",
+        "text": "...uage model must consume to reach a correct answer. In an exploratory dual-agent benchmark on a real 1,971-scene codebase, fold-based navigation reached the same correct answer as traditional file exploration using 5.9x fewer inference tokens, 4x fewer tool calls, and 2.4x less wall-clock time. The result suggests that ..."
+      }
+    ]
+  },
+  "trust_order": [
+    "repo files",
+    "doc/ and docs/ contracts",
+    "session handoffs and session summaries",
+    "grounded wiki chat points and turns",
+    "encyclopedia routes and source files",
+    "DeepWiki overview"
+  ],
+  "generated_at": "2026-04-04T11:50:50+00:00"
+}

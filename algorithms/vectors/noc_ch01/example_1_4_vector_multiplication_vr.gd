@@ -89,6 +89,15 @@ func _update_arrow(arrow: MeshInstance3D, origin: Vector3, vec: Vector3) -> void
 
 	arrow.visible = true
 	arrow.position = origin + vec * 0.5
-	arrow.look_at(origin + vec, Vector3.UP)
+	arrow.look_at_from_position(arrow.position, origin + vec, Vector3.UP)
 	arrow.rotate_object_local(Vector3.RIGHT, PI / 2)
 	arrow.scale = Vector3(1, length, 1)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

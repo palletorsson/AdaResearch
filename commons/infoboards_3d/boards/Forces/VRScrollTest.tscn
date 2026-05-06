@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dewn2dp8ilqyv"]
+
+[ext_resource type="Script" path="res://commons/infoboards_3d/boards/Forces/VRScrollTest.gd" id="1_test"]
+[ext_resource type="PackedScene" uid="uid://b068w0w3jvbkb" path="res://commons/infoboards_3d/boards/Forces/ForcesInfoBoard_new.tscn" id="2_board"]
+
+[node name="VRScrollTest" type="Node3D"]
+script = ExtResource("1_test")
+test_board_scene = ExtResource("2_board")

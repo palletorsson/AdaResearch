@@ -1,0 +1,144 @@
+{
+  "map_info": {
+	"name": "09 Melencolia",
+	"lookup_name": "Primitives_Melencolia",
+	"description": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint. Geometry has mastered shapes and measures, yet meaning, orientation, and closure remain unsettled. This map stages the melancholy of finitude - where knowing and not knowing interlock.",
+	"description_2": "The point leads to the trace and the line; the line multiplies into grids and vectors; a third point closes into a triangle, the triangle extends into quads, and quads decompose into meshes. The cube and the Platonic primitives mark moments of maximal stabilization, where geometry appears complete and self-sufficient. Yet this entire construction rests on a fundamental tension: polygons are built from discrete line segments, while they endlessly aspire toward the smoothness of the infinite circle. What computation produces is not continuity, but its approximation - an accumulation of finite decisions that can never exhaust the curve they simulate. Durer's Melencolia I marks this limit, where geometric mastery confronts its own insufficiency.",
+	"version": "1.0",
+	"format": "json",
+	"dimensions": {
+	  "width": 7,
+	  "depth": 14,
+	  "max_height": 3
+	},
+	"metadata": {
+	  "difficulty": "beginner",
+	  "category": "tutorial",
+	  "estimated_time": "3-4 minutes",
+	  "learning_objectives": [
+		"Geometric limits",
+		"Melancholy of knowledge",
+        "Completion as incompleteness"
+	  ]
+	},
+	"title": "Melancholy of Finitude"
+  },
+  "utility_definitions": {
+	"t": {
+	  "type": "teleporter",
+	  "name": "Next",
+	  "description": "Continue to next step",
+	  "properties": {
+		"action": "next_in_sequence"
+	  }
+	},
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	}
+  },
+  "documentation": {
+	"summary": "Primitives_Melencolia - Melancholy of Knowledge",
+	"layout": "7x14 multi-tier plaza with elevated central court and southern reflection platform.",
+	"objective": "Culminate primitives sequence with melancholic reflection on geometric limits.",
+	"key_elements": [
+	  "Four `pyramid` fixtures at (1,1), (5,1), (1,5), (5,5)",
+	  "`pyramidlong` and `cube_scene` cluster around (3,3)",
+	  "`snap_pyramid_puzzle` at (3,1)",
+	  "`diamondtoruscollection` at (3,10) on elevated tier",
+	  "`code_display` with melencolia_axioms at (3,13)",
+	  "`dark_sphere` at (2,5)",
+	  "`durer_scene` at (3,12)",
+      "Twin teleporters at (1,8) and (5,8)"
+	]
+  },
+  "lighting": {
+	"ambient_color": [
+	  0.4,
+	  0.4,
+	  0.5
+	],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "enabled": true,
+	  "direction": [
+		-0.4,
+		-0.7,
+		-0.4
+	  ],
+	  "color": [
+		1.0,
+		0.9,
+		0.8
+	  ],
+	  "energy": 1.2
+	}
+  },
+  "settings": {
+	"cube_size": 1.0,
+	"gutter": 0.0,
+	"show_grid": true,
+	"enable_physics": true,
+	"auto_reveal_on_entry": false,
+	"initial_tile_visibility": "hidden_except_corners",
+	"background": {
+	  "type": "sky",
+	  "color": [
+		0.2,
+		0.3,
+		0.7
+	  ]
+	}
+  },
+  "layers": {
+	"structure": [
+	  ["1","1","1","1","1","1","1"],
+	  ["1","2","2","2","2","2","1"],
+	  ["1","2","2","2","2","2","1"],
+	  ["1","2","2","2","2","2","1"],
+	  ["2","2","2","2","2","2","1"],
+	  ["1","2","2","2","2","2","1"],
+	  ["1","1","1","2","1","1","1"],
+	  ["1","1","1","2","1","1","1"],
+	  ["1","0","1","2","1","0","1"],
+	  ["1","1","1","2","1","1","1"],
+	  ["1","1","3","3","3","1","1"],
+	  ["1","1","3","3","3","1","1"],
+	  ["1","1","1","3","1","1","1"],
+	  ["0","0","0","0","0","0","0"]
+	],
+	"utilities": [
+	  ["sp"," "," "," "," "," ","an:90"],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  ["wp"," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" ","t"," "," "," ","t"," "],
+	  [" "," "," ","wp"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "]
+	],
+	"interactables": [
+	  ["dark_sphere:0:-0.5"," "," "," "," "," "," "],
+	  [" ","pyramid:0:-0.5"," ","snap_pyramid_puzzle:180"," ","pyramid:0:-0.5","library_rack:180:1.5#collection:alternative_geometries#cols:4#rows:4"],
+	  [" "," "," ","cube_scene:0:-0.5:0.5"," "," "," "],
+	  [" "," ","cube_scene:0:-0.5:0.5","pyramidlong:0:-0.5","cube_scene:0:-0.5:0.5"," ","prism_block:90"],
+	  [" "," "," ","cube_scene:0:-0.5:0.5"," "," "," "],
+	  [" ","pyramid:0:-0.5"," "," "," ","pyramid:0:-0.5"," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  ["bigframe:90:1"," "," "," "," "," ","bigframe:90:1"],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","diamondtoruscollection:0:4"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","durer_scene:180:0:0.5"," "," "," "],
+	  [" "," "," ","code_display:180:4#tutorial:melencolia_axioms"," "," "," "]
+	]
+  }
+}

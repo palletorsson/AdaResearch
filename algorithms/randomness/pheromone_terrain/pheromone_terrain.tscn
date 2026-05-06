@@ -1,12 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpheromone123"]
+[gd_scene format=3 uid="uid://dpheromone123"]
 
 [ext_resource type="Script" uid="uid://cbhn034f653ax" path="res://algorithms/randomness/pheromone_terrain/pheromone_terrain.gd" id="1_pheromone"]
-[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/walledcube/walledcube.tscn" id="2_plane"]
+[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="2_oehhj"]
 
-[node name="PheromonesTerrain" type="Node3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_napp6"]
+render_priority = 0
+shader = ExtResource("2_oehhj")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(0.8969174, 0.00018462956, 0.7687847, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+material = SubResource("ShaderMaterial_napp6")
+size = Vector2(20, 20)
+subdivide_width = 80
+subdivide_depth = 80
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(20, 0.1, 20)
+
+[node name="PheromonesTerrain" type="Node3D" unique_id=349106746]
 script = ExtResource("1_pheromone")
+walker_count = 4
+raise_amount = 0.2
+max_height = 4.0
+pheromone_deposit = 0.6
+pheromone_attraction = 0.4
 
-[node name="Plane" parent="." instance=ExtResource("2_plane")]
+[node name="Plane" type="Node3D" parent="." unique_id=416600936]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plane" unique_id=11202441]
+mesh = SubResource("PlaneMesh_1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane" unique_id=845022242]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D" unique_id=2054432932]
+shape = SubResource("BoxShape3D_1")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=40878668]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 2.4010162, 3.4134483)

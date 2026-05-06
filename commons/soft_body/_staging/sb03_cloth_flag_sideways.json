@@ -1,0 +1,35 @@
+{
+  "id": "sb03_cloth_flag_sideways",
+  "topology": "cloth_grid",
+  "cols": 20,
+  "rows": 12,
+  "cell_size": 0.14,
+  "pin_mode": "left_column",
+  "stiffness": 0.8,
+  "damping": 0.992,
+  "gravity": [
+    0.6,
+    -9.8,
+    0.8
+  ],
+  "floor_y": -3.0,
+  "steps": 260,
+  "origin": [
+    0,
+    1.2,
+    0
+  ],
+  "camera_yaw": 0.6,
+  "camera_pitch": 0.1,
+  "render": {
+    "color": [
+      0.85,
+      0.72,
+      0.25
+    ],
+    "roughness": 0.55,
+    "double_sided": true
+  },
+  "layout": "verlet_cloth",
+  "notes": "Flag pinned along left edge with sideways wind \u2014 settles into a drooping wave shape."
+}

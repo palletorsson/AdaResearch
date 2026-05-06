@@ -1,13 +1,13 @@
-
+﻿
 class_name RhizomaticMaterials
 extends Node
 
 var materials: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	create_material_library()
 
-func create_material_library():
+func create_material_library() -> void:
 	"""Create materials for different maze elements"""
 	# Tunnel material
 	var tunnel_mat = StandardMaterial3D.new()
@@ -34,7 +34,7 @@ func create_material_library():
 	tendril_mat.roughness = 0.9
 	materials["tendril"] = tendril_mat
 
-func get_tunnel_material(properties: Dictionary = {}) -> StandardMaterial3D:
+func get_tunnel_material(_properties: Dictionary = {}) -> StandardMaterial3D:
 	return materials.get("tunnel", null)
 
 func get_chamber_material() -> StandardMaterial3D:

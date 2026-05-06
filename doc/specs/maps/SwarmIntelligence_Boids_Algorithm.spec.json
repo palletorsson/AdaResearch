@@ -1,0 +1,62 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "home_sequence": "swarmintelligence",
+  "dimensions": {
+    "w": 11,
+    "d": 11
+  },
+  "signature": "boid_manager",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.033,
+  "breath_zones": [
+    {
+      "size": 115,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 11
+      },
+      "centroid": [
+        4.930434782608696,
+        4.982608695652174
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 3,
+      "z": 7,
+      "token": "boid_manager",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "boids_aquarium"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "boid_flocking"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "boids_2d_in_3d"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 120,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

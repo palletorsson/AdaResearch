@@ -1,0 +1,41 @@
+{
+  "id": "mg_op19_daynight_ziggurat",
+  "notes": "DNA BRIDGE + UNDERUSED-OPS PASS: Day-and-Night CA seed treated as a stepped citadel, then lightly twisted at the top. Tests a richer CA seed than Conway plus transform ops.",
+  "seed": {
+    "ca": {
+      "rule": "day_and_night",
+      "grid_size": 16,
+      "iterations": 8,
+      "density": 0.42,
+      "seed": 7,
+      "cell_size": 0.085,
+      "base_height": 0.08,
+      "height_scale": 0.03
+    }
+  },
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.18
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.08,
+        "scale": 0.84
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:extruded_top",
+      "params": {
+        "angle_degrees": 8
+      }
+    }
+  ]
+}

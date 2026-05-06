@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc34f2c4nemd5"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/sound_box/SoundBox.gd" id="1_soundbox"]
+[ext_resource type="PackedScene" uid="uid://d3x7y6z5w4v3u" path="res://algorithms/wavefunctions/sound_box/SoundTriggerButton.tscn" id="2_trigger"]
+
+[node name="SoundBox" type="Node3D"]
+script = ExtResource("1_soundbox")
+collection_path = "res://commons/audio/collections/synthetic_suite.json"
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+text = "Sound Box"
+font_size = 32
+outline_size = 8
+
+[node name="GridContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.4, 0)

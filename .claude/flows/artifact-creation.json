@@ -1,0 +1,92 @@
+{
+  "id": "artifact-creation",
+  "title": "Create New Artifact",
+  "description": "The 3-file pattern: .gd + .tscn + registry entry. Procedural in _ready(), grid-configurable, identity-documented.",
+  "triggers": [
+    "create artifact",
+    "new artifact",
+    "build artifact",
+    "add artifact"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "CLAUDE.md artifact creation pattern, 600+ artifacts in registry",
+  "nodes": [
+    {
+      "id": "design",
+      "type": "action",
+      "label": "Design the algorithm + interaction",
+      "detail": "What does it teach? What can the learner control? What's the critical parameter?"
+    },
+    {
+      "id": "write_gd",
+      "type": "action",
+      "label": "Write <token>.gd",
+      "detail": "extends Node3D, class_name PascalCase, @identity block, procedural in _ready(), apply_grid_config(config: Dictionary)"
+    },
+    {
+      "id": "write_tscn",
+      "type": "action",
+      "label": "Write <token>.tscn",
+      "detail": "Minimal: [gd_scene format=3], ext_resource for script, root Node3D"
+    },
+    {
+      "id": "register",
+      "type": "action",
+      "label": "Add registry entry",
+      "detail": "commons/artifacts/registry/<category>.json. Include lookup_name, scene path, map_sequences, tags."
+    },
+    {
+      "id": "test",
+      "type": "action",
+      "label": "Test in Godot",
+      "detail": "Load scene, verify _ready() builds correctly, check for errors."
+    },
+    {
+      "id": "capture",
+      "type": "action",
+      "label": "Capture screenshot",
+      "detail": "capture_multi_angle.gd --mode=artifact --target=<lookup_name>"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Artifact ready for maps"
+    }
+  ],
+  "edges": [
+    {
+      "from": "design",
+      "to": "write_gd"
+    },
+    {
+      "from": "write_gd",
+      "to": "write_tscn"
+    },
+    {
+      "from": "write_tscn",
+      "to": "register"
+    },
+    {
+      "from": "register",
+      "to": "test"
+    },
+    {
+      "from": "test",
+      "to": "capture"
+    },
+    {
+      "from": "capture",
+      "to": "done"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Design → write .gd (extends Node3D, class_name, @identity, apply_grid_config) → write .tscn → register in JSON → test → capture.",
+  "links_to": [
+    "identity-writing",
+    "metadata-enrich",
+    "capture-framing"
+  ]
+}

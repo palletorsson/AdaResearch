@@ -1,0 +1,67 @@
+{
+  "artifact": "plus_line_puzzle",
+  "title": "Building a Puzzle from Lines",
+  "concept_layer": "lines as construction tool, perpendicularity, dot product as geometry test",
+  "technique_first": ["class inheritance", "snap targets", "TorusMesh", "FormConstraint", "puzzle validation"],
+  "technique_reference": ["CylinderMesh (Point_Line)", "Basis (Point_Line)", "Label3D (Point_One)"],
+  "domain_deferred": ["laser physics \u2192 forces", "perspective projection \u2192 later in primitives"],
+  "capture_leaks": {
+    "euclidean_assumption": "foundationscrisis \u2014 perpendicularity assumes flat space; non-Euclidean geometry breaks this",
+    "exact_orthogonality": "randomness, machinelearning \u2014 real systems are approximately perpendicular; tolerance hides deep complexity",
+    "semantic_independence": "machinelearning \u2014 mathematical \u22a5 is not conceptual \u22a5; feature orthogonality in ML is a different beast",
+    "two_dimensional_reasoning": "Point_Triangle, fractals \u2014 lines cross in pairs; three lines make area, many make recursion",
+    "static_constraint": "forces, softbodies \u2014 these lines cannot bend or respond; rigid geometry is the corpse of living structure"
+  },
+  "limit": "These lines cross but do not yield. They are perpendicular in flat space only. Every tolerance you accept hides a paradox. Every constraint you satisfy defers a deeper question. The puzzle solves. The ontology does not.",
+  "description": "In Point_Line you built one line. Now lines become tools \u2014 arrange them to form shapes, and the code validates whether your construction is geometrically correct.",
+  "stages": [
+    {
+      "title": "One line is a relation. Two lines are a question.",
+      "thinking": "In Point_Line, a single line connected two points. Now there are two lines, four endpoints, and a question: can you arrange them into a plus sign? Lines stop being measurements and become building material. The question is geometry \u2014 the answer is your hands.",
+      "code": "# One line: a relation\nvar line_a_start: Vector3 = Vector3(0, 0, -0.2)\nvar line_a_end: Vector3 = Vector3(0, 0, 0.2)\n\n# Two lines: a question\nvar line_b_start: Vector3 = Vector3(0, -0.2, 0)\nvar line_b_end: Vector3 = Vector3(0, 0.2, 0)\n\n# Are they perpendicular?\n# Are they crossing at their midpoints?\n# The puzzle checks both.",
+      "concepts": ["two lines", "spatial arrangement", "geometric question"]
+    },
+    {
+      "title": "Define where the answer lives",
+      "thinking": "The puzzle needs target positions \u2014 the places where endpoints must land for the shape to be correct. Four glowing markers in a cross pattern. The targets are the answer written in space, waiting for the player to discover them by snapping lines into place.",
+      "code": "extends LineSnapPuzzleBase\nclass_name PlusLinePuzzle\n\nfunc _init() -> void:\n\t# The 4 target vertices for + shape\n\ttarget_positions = [\n\t\tVector3(0, 0, -0.2),   # Center-back\n\t\tVector3(0, 0, 0.2),    # Center-front\n\t\tVector3(0, -0.2, 0),   # Bottom-center\n\t\tVector3(0, 0.2, 0)     # Top-center\n\t]\n\t\n\t# Where lines start before the player moves them\n\tline_start_positions = [\n\t\t[Vector3(0.2, -0.25, -0.15), Vector3(0.2, -0.25, 0.15)],\n\t\t[Vector3(0.2, -0.4, -0.15), Vector3(0.2, -0.4, 0.15)]\n\t]",
+      "concepts": ["target positions", "initial state", "class inheritance", "_init()"]
+    },
+    {
+      "title": "Build the base class",
+      "thinking": "PlusLinePuzzle extends LineSnapPuzzleBase. This is the first time we see class inheritance \u2014 a base class that handles all the shared puzzle logic (creating markers, managing snap, checking completion) while the specific puzzle only defines its targets and constraints. Write the common parts once, specialize many times.",
+      "code": "extends Node3D\nclass_name LineSnapPuzzleBase\n\n## Puzzle Configuration\n@export var auto_validate: bool = true\n@export var show_target_markers: bool = true\n@export var lock_on_complete: bool = true\n\n## Internal state\nvar target_positions: Array[Vector3] = []\nvar line_start_positions: Array[Array] = []\nvar form_constraints: Array[FormConstraint] = []\nvar snap_lines: Array[SnapLineSegment] = []\nvar is_completed: bool = false\n\n## Signals\nsignal puzzle_completed()\nsignal line_snapped_to_target(line: SnapLineSegment)\n\nfunc _ready() -> void:\n\tif target_positions.is_empty():\n\t\tpush_error(\"target_positions not set!\")\n\t\treturn\n\t\n\tawait get_tree().process_frame\n\tcall_deferred(\"_setup_target_markers\")\n\tcall_deferred(\"_setup_lines\")",
+      "concepts": ["class_name", "extends", "inheritance", "signal declaration", "call_deferred", "await"]
+    },
+    {
+      "title": "Holographic target markers",
+      "thinking": "Each target position gets a glowing marker \u2014 a torus ring with emission, styled after Half-Life: Alyx\u2019s holographic puzzles. Cyan glow, small radius, visible from any angle. These are not decorative \u2014 they are the affordance that tells the player \"snap here.\"",
+      "code": "func _setup_target_markers() -> void:\n\tfor i in range(target_positions.size()):\n\t\tvar marker = _create_alyx_marker(i)\n\t\tadd_child(marker)\n\t\tmarker.global_position = global_transform * target_positions[i]\n\t\ttarget_markers.append(marker)\n\nfunc _create_alyx_marker(_index: int) -> Node3D:\n\tvar marker = Node3D.new()\n\t\n\t# Torus ring \u2014 the snap target\n\tvar ring_mesh = MeshInstance3D.new()\n\tvar torus = TorusMesh.new()\n\ttorus.inner_radius = 0.018\n\ttorus.outer_radius = 0.025\n\ttorus.rings = 24\n\tring_mesh.mesh = torus\n\t\n\tvar mat = StandardMaterial3D.new()\n\tmat.albedo_color = Color(0.0, 0.8, 1.0, 0.6)  # Cyan hologram\n\tmat.emission_enabled = true\n\tmat.emission = Color(0.0, 0.8, 1.0)\n\tmat.emission_energy_multiplier = 1.5\n\tmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA\n\tring_mesh.material_override = mat\n\tmarker.add_child(ring_mesh)\n\t\n\treturn marker",
+      "concepts": ["TorusMesh", "emission", "transparency", "holographic affordance"]
+    },
+    {
+      "title": "The perpendicularity test",
+      "thinking": "How does the code know two lines form a plus? The dot product. Two direction vectors with dot product zero are perpendicular \u2014 90 degrees between them. This is the first time algebra defines geometry: a number (zero) means a shape (right angle). The constraint system checks this automatically when endpoints snap.",
+      "code": "class FormConstraint:\n\tvar type: String  # \"perpendicular\", \"parallel\", \"intersect_center\"\n\tvar line_a_index: int\n\tvar line_b_index: int\n\tvar tolerance: float\n\t\n\tstatic func plus_constraints() -> Array[FormConstraint]:\n\t\t# Plus shape requires:\n\t\t# 1. Lines must be perpendicular (dot product = 0)\n\t\t# 2. Lines must intersect at their midpoints\n\t\treturn [\n\t\t\tFormConstraint.new(\"perpendicular\", 0, 1, 0.15),\n\t\t\tFormConstraint.new(\"intersect_center\", 0, 1, 0.08)\n\t\t]\n\nfunc _check_perpendicular(line_a: SnapLineSegment, line_b: SnapLineSegment, tolerance: float) -> bool:\n\tvar dir_a = (line_a.end_pos - line_a.start_pos).normalized()\n\tvar dir_b = (line_b.end_pos - line_b.start_pos).normalized()\n\tvar dot = abs(dir_a.dot(dir_b))\n\treturn dot < tolerance  # Zero means perpendicular",
+      "concepts": ["dot product", "perpendicularity", "tolerance", "inner class", "static function"]
+    },
+    {
+      "title": "Snap and validate",
+      "thinking": "When a line endpoint gets close enough to a target marker, it snaps \u2014 position jumps to the exact target. After every snap, the system checks: are all endpoints at targets? Are the form constraints satisfied? If both are true, the puzzle is complete. This is event-driven validation \u2014 the code doesn\u2019t check every frame, only when something changes.",
+      "code": "func _on_endpoint_near_target(endpoint: Node3D, target_index: int) -> void:\n\tvar target_pos = global_transform * target_positions[target_index]\n\tvar dist = endpoint.global_position.distance_to(target_pos)\n\t\n\tif dist < snap_distance:\n\t\t# Snap!\n\t\tendpoint.global_position = target_pos\n\t\tline_snapped_to_target.emit(snap_lines[0])\n\t\t_check_completion()\n\nfunc _check_completion() -> void:\n\tif is_completed:\n\t\treturn\n\t\n\t# All endpoints at targets?\n\tif require_all_at_targets and not _all_endpoints_at_targets():\n\t\treturn\n\t\n\t# Form constraints satisfied?\n\tif use_form_constraints:\n\t\tfor constraint in form_constraints:\n\t\t\tif not _evaluate_constraint(constraint):\n\t\t\t\treturn\n\t\n\t# Puzzle complete!\n\tis_completed = true\n\tpuzzle_completed.emit()\n\t_complete_puzzle()",
+      "concepts": ["snap distance", "event-driven validation", "constraint evaluation", "signal emit"]
+    },
+    {
+      "title": "Completion as transformation",
+      "thinking": "When the puzzle completes, the lines change color from cyan to green, a pulse animation plays, and the lines lock in place. Optionally, a tagged object in the map gets removed \u2014 the #plusfillhole syntax removes a floor cube, revealing what\u2019s below. The puzzle transforms the map itself.",
+      "code": "func _complete_puzzle() -> void:\n\t# Lock lines in place\n\tif lock_on_complete:\n\t\tfor line in snap_lines:\n\t\t\tline.lock()\n\t\n\t# Green completion pulse\n\tfor line in snap_lines:\n\t\tline.set_color(completion_color)  # Cyan \u2192 Green\n\t\n\t# Pulse animation\n\tvar tween = create_tween()\n\tfor marker in target_markers:\n\t\ttween.parallel().tween_property(\n\t\t\tmarker, \"scale\",\n\t\t\tVector3.ONE * 1.5, completion_pulse_duration\n\t\t)\n\t\n\t# Trigger map action (e.g. remove floor cube)\n\tif trigger_tag and trigger_action:\n\t\t_trigger_tag_action(trigger_tag, trigger_action)",
+      "concepts": ["Tween", "completion pulse", "tag system", "map transformation"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "Two lines, four endpoints, one geometric truth. Perpendicularity is defined by the dot product equaling zero \u2014 geometry expressed as algebra. The plus sign is not a shape you draw. It is a constraint you satisfy. The puzzle knows this about itself.",
+      "code": "# @identity\n# essence: \u22a5 \u2014 two lines whose direction vectors have dot product zero\n# desire: learner feels perpendicularity as a physical arrangement they construct\n# critical_parameter: the intersection constraint \u2014 lines must cross at midpoints\n# triggers: snapping all 4 endpoints to cross targets\n# emerges: 90 degrees is not special until you define an inner product\n# relationships: extends LineSnapPuzzleBase; contrasts with parallel_line_puzzle\n# truth: perpendicularity is defined by the dot product equaling zero \u2014 geometry expressed as algebra",
+      "concepts": ["@identity", "dot product = geometry", "construction as proof", "truth"]
+    }
+  ]
+}

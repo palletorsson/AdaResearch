@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://hole_with_cones_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/combines/hole_with_cones.gd" id="1_hole"]
+
+[node name="HoleWithCones" type="Node3D"]
+script = ExtResource("1_hole")

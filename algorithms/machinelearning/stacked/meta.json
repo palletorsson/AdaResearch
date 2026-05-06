@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_stacked",
+  "title": "BuildEnv - Grammar Discovery RL Environment",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/stacked/diagnostic_test.tscn",
+  "script": "res://algorithms/machinelearning/stacked/LearnWorldStacked.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/stacked/README.md",
+    "tutorial": "res://algorithms/machinelearning/stacked/stacked_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/stacked/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/stacked/summery.md"
+  },
+  "summary": "The `BuildEnv - Grammar Discovery RL Environment` sandbox investigates concepts from BuildEnv - Grammar Discovery RL Environment inside a real-time Godot lab.",
+  "keywords": [
+    "aabb",
+    "action",
+    "active",
+    "add",
+    "and",
+    "arch"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

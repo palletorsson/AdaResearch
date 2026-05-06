@@ -1,0 +1,66 @@
+{
+  "rack_info": {
+    "name": "5x KNOB",
+    "description": "5x KNOB — auto-generated UVAC composition. sound_type=synth_wave, composition_type=knobs.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "composition_type": "knobs",
+    "composition_count": 5
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "kn_0",
+      "kn_1",
+      "kn_2",
+      "kn_3",
+      "kn_4"
+    ]
+  ],
+  "control_definitions": {
+    "kn_0": {
+      "type": "knob",
+      "label": "CUT",
+      "parameter": "cutoff",
+      "min": 20.0,
+      "max": 12000.0,
+      "default": 1000.0
+    },
+    "kn_1": {
+      "type": "knob",
+      "label": "MIX",
+      "parameter": "mix",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    },
+    "kn_2": {
+      "type": "knob",
+      "label": "AMP",
+      "parameter": "amp",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.7
+    },
+    "kn_3": {
+      "type": "knob",
+      "label": "AMP",
+      "parameter": "amp",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.7
+    },
+    "kn_4": {
+      "type": "knob",
+      "label": "MIX",
+      "parameter": "mix",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

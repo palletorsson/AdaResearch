@@ -1,0 +1,176 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Vector_Exhibition",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 13,
+    "d": 19
+  },
+  "signature": "The full catalog \u2014 example_1_1 (no vectors) through example_2_9 (N-body) in pedagogical order; VectorBasics/Subtraction/CrossProduct/Addition as operation stations; attractorsphere and pattern_tile_brick as spatial anchors; dark_sphere as the final appearance of the sequence's persistent companion.",
+  "style": "kusama",
+  "echoes": [
+    "primitives",
+    "forces"
+  ],
+  "density": 0.11,
+  "breath_zones": [
+    {
+      "size": 217,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 19
+      },
+      "centroid": [
+        6.1013824884792625,
+        9.15668202764977
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "token": "VectorAddition"
+    },
+    {
+      "x": 5,
+      "z": 1,
+      "token": "VectorSubtraction"
+    },
+    {
+      "x": 7,
+      "z": 1,
+      "token": "vector_magnitude_demo"
+    },
+    {
+      "x": 9,
+      "z": 1,
+      "token": "vector_normalize_demo"
+    },
+    {
+      "x": 10,
+      "z": 1,
+      "token": "VectorCrossProduct"
+    },
+    {
+      "x": 11,
+      "z": 1,
+      "token": "vector_magnitude_demo"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "example_2_2_forces_mass_variation_vr"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "example_2_3_gravity_scaled_by_mass_vr"
+    },
+    {
+      "x": 8,
+      "z": 5,
+      "token": "pattern_tile_brick"
+    },
+    {
+      "x": 1,
+      "z": 6,
+      "token": "example_1_1_bouncing_ball_with_no_vectors_vr"
+    },
+    {
+      "x": 9,
+      "z": 6,
+      "token": "example_2_5_fluid_resistance_vr"
+    },
+    {
+      "x": 8,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 8,
+      "token": "example_1_3_vector_subtraction_vr"
+    },
+    {
+      "x": 3,
+      "z": 8,
+      "token": "example_1_4_vector_multiplication_vr"
+    },
+    {
+      "x": 1,
+      "z": 10,
+      "token": "example_1_5_vector_magnitude_vr"
+    },
+    {
+      "x": 3,
+      "z": 10,
+      "token": "example_1_6_vector_normalize_vr"
+    },
+    {
+      "x": 7,
+      "z": 10,
+      "token": "example_2_6_single_attractor_vr"
+    },
+    {
+      "x": 9,
+      "z": 10,
+      "token": "example_2_7_multiple_attractors_vr"
+    },
+    {
+      "x": 1,
+      "z": 12,
+      "token": "example_1_7_motion_101_velocity_vr"
+    },
+    {
+      "x": 3,
+      "z": 12,
+      "token": "example_1_8_motion_101_velocity_and_constant_acceleration_vr"
+    },
+    {
+      "x": 7,
+      "z": 12,
+      "token": "example_2_8_two_body_attraction_vr"
+    },
+    {
+      "x": 9,
+      "z": 12,
+      "token": "example_2_9_n_body_attraction_vr"
+    },
+    {
+      "x": 1,
+      "z": 14,
+      "token": "example_1_9_motion_101_velocity_and_random_acceleration_vr"
+    },
+    {
+      "x": 3,
+      "z": 14,
+      "token": "exercise_1_3_solution_3_d_bouncing_ball_vr"
+    },
+    {
+      "x": 1,
+      "z": 16,
+      "token": "exercise_1_5_solution_accelerate_and_decelerate_vr"
+    },
+    {
+      "x": 3,
+      "z": 16,
+      "token": "exercise_1_8_solution_attraction_magnitude_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 27,
+    "walkable_cells": 246,
+    "breath_zone_count": 1,
+    "unique_tokens": 26
+  }
+}

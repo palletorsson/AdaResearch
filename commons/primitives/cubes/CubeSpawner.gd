@@ -9,6 +9,22 @@ extends Node3D
 @export var max_projectiles: int = 20
 @export var auto_start: bool = true
 
+enum SpawnMode {
+	FORWARD,
+	FALLING_FIELD
+}
+
+@export_group("Falling Field")
+@export var spawn_mode: SpawnMode = SpawnMode.FORWARD
+@export var field_size_meters: Vector2 = Vector2(8.0, 8.0)
+@export var field_center_offset: Vector3 = Vector3.ZERO
+@export var field_spawn_height: float = 7.0
+@export var field_fall_speed_range: Vector2 = Vector2(1.8, 3.0)
+@export var field_initial_horizontal_speed: float = 0.35
+@export var field_horizontal_jitter: float = 0.25
+@export var field_jitter_interval: float = 0.4
+@export var field_vertical_speed_variation: float = 0.2
+
 # Visual components
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -22,6 +38,7 @@ extends Node3D
 var player_node: Node3D
 var active_projectiles: Array[Node3D] = []
 var is_active: bool = false
+var _rng := RandomNumberGenerator.new()
 
 # Signals
 signal projectile_spawned(projectile: Node3D)
@@ -30,6 +47,7 @@ signal spawner_activated()
 signal spawner_deactivated()
 
 func _ready():
+	_rng.randomize()
 	_setup_spawner()
 	_find_player()
 	
@@ -179,19 +197,11 @@ func _spawn_projectile():
 	
 	# Add to scene
 	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = spawn_point.global_position
-	
-	# Set direction - shoot in Z direction (forward)
-	var direction = Vector3(0, 0, -1)  # Shoot forward in Z direction
-	
-	# Apply spawner's rotation to direction
-	direction = global_transform.basis * direction
-	
-	# Configure projectile
-	if projectile.has_method("setup_projectile"):
-		projectile.setup_projectile(direction, projectile_speed, self)
-	elif "velocity" in projectile:
-		projectile.velocity = direction * projectile_speed
+
+	if spawn_mode == SpawnMode.FALLING_FIELD:
+		_configure_falling_field_projectile(projectile)
+	else:
+		_configure_forward_projectile(projectile)
 	
 	# Track projectile
 	active_projectiles.append(projectile)
@@ -201,11 +211,132 @@ func _spawn_projectile():
 		projectile.projectile_destroyed.connect(_on_projectile_destroyed.bind(projectile))
 	
 	# Play spawn sound
-	if spawn_sound:
+	if spawn_sound and spawn_sound.stream:
 		spawn_sound.play()
 	
 	projectile_spawned.emit(projectile)
-	print("CubeSpawner: Spawned projectile #%d in direction %s" % [active_projectiles.size(), direction])
+	print("CubeSpawner: Spawned projectile #%d (mode=%s)" % [active_projectiles.size(), "field" if spawn_mode == SpawnMode.FALLING_FIELD else "forward"])
+
+func _configure_forward_projectile(projectile: Node3D) -> void:
+	projectile.global_position = spawn_point.global_position
+
+	# Set direction - shoot in Z direction (forward)
+	var direction = Vector3(0, 0, -1)
+
+	# Apply spawner's rotation to direction
+	direction = global_transform.basis * direction
+
+	if projectile.has_method("setup_projectile"):
+		projectile.setup_projectile(direction, projectile_speed, self)
+	elif "velocity" in projectile:
+		projectile.velocity = direction * projectile_speed
+
+func _configure_falling_field_projectile(projectile: Node3D) -> void:
+	var half_w = max(field_size_meters.x * 0.5, 0.1)
+	var half_d = max(field_size_meters.y * 0.5, 0.1)
+	var field_origin = global_position + field_center_offset
+	var spawn_pos = field_origin + Vector3(
+		_rng.randf_range(-half_w, half_w),
+		field_spawn_height,
+		_rng.randf_range(-half_d, half_d)
+	)
+	projectile.global_position = spawn_pos
+
+	var min_fall_speed = max(0.2, min(field_fall_speed_range.x, field_fall_speed_range.y))
+	var max_fall_speed = max(min_fall_speed, max(field_fall_speed_range.x, field_fall_speed_range.y))
+	var fall_speed = _rng.randf_range(min_fall_speed, max_fall_speed)
+	var initial_velocity = Vector3(
+		_rng.randf_range(-field_initial_horizontal_speed, field_initial_horizontal_speed),
+		-fall_speed,
+		_rng.randf_range(-field_initial_horizontal_speed, field_initial_horizontal_speed)
+	)
+
+	if projectile.has_method("set_falling_field_profile"):
+		projectile.set_falling_field_profile(
+			initial_velocity,
+			field_horizontal_jitter,
+			field_jitter_interval,
+			field_vertical_speed_variation
+		)
+	elif projectile.has_method("setup_projectile"):
+		var direction = initial_velocity.normalized() if initial_velocity.length() > 0.001 else Vector3.DOWN
+		projectile.setup_projectile(direction, initial_velocity.length(), self)
+	elif "velocity" in projectile:
+		projectile.velocity = initial_velocity
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	configure(config_data)
+
+func configure(config_data: Dictionary) -> void:
+	if config_data.is_empty():
+		return
+
+	if config_data.has("mode"):
+		var mode_value = str(config_data["mode"]).strip_edges().to_lower()
+		if mode_value in ["field", "falling", "falling_field", "rain", "rain_field"]:
+			spawn_mode = SpawnMode.FALLING_FIELD
+		else:
+			spawn_mode = SpawnMode.FORWARD
+
+	# Boolean shorthand support: #field
+	if config_data.has("field"):
+		spawn_mode = SpawnMode.FALLING_FIELD
+		var field_value = config_data["field"]
+		if typeof(field_value) != TYPE_BOOL:
+			field_size_meters = _parse_field_size(str(field_value), field_size_meters)
+
+	if config_data.has("spawn_interval"):
+		set_spawn_interval(_to_float(config_data["spawn_interval"], spawn_interval))
+	if config_data.has("max_projectiles"):
+		max_projectiles = int(_to_float(config_data["max_projectiles"], float(max_projectiles)))
+	if config_data.has("projectile_speed"):
+		set_projectile_speed(_to_float(config_data["projectile_speed"], projectile_speed))
+
+	if config_data.has("field_size"):
+		field_size_meters = _parse_field_size(str(config_data["field_size"]), field_size_meters)
+	if config_data.has("field_width"):
+		field_size_meters.x = max(0.5, _to_float(config_data["field_width"], field_size_meters.x))
+	if config_data.has("field_depth"):
+		field_size_meters.y = max(0.5, _to_float(config_data["field_depth"], field_size_meters.y))
+	if config_data.has("field_x"):
+		field_size_meters.x = max(0.5, _to_float(config_data["field_x"], field_size_meters.x))
+	if config_data.has("field_z"):
+		field_size_meters.y = max(0.5, _to_float(config_data["field_z"], field_size_meters.y))
+	if config_data.has("field_height"):
+		field_spawn_height = max(0.5, _to_float(config_data["field_height"], field_spawn_height))
+
+	if config_data.has("fall_min"):
+		field_fall_speed_range.x = max(0.2, _to_float(config_data["fall_min"], field_fall_speed_range.x))
+	if config_data.has("fall_max"):
+		field_fall_speed_range.y = max(0.2, _to_float(config_data["fall_max"], field_fall_speed_range.y))
+
+	if config_data.has("drift"):
+		field_initial_horizontal_speed = max(0.0, _to_float(config_data["drift"], field_initial_horizontal_speed))
+	if config_data.has("jitter"):
+		field_horizontal_jitter = max(0.0, _to_float(config_data["jitter"], field_horizontal_jitter))
+	if config_data.has("jitter_interval"):
+		field_jitter_interval = max(0.05, _to_float(config_data["jitter_interval"], field_jitter_interval))
+	if config_data.has("vertical_variation"):
+		field_vertical_speed_variation = max(0.0, _to_float(config_data["vertical_variation"], field_vertical_speed_variation))
+
+func _to_float(value: Variant, fallback: float) -> float:
+	if value is float or value is int:
+		return float(value)
+	var text = str(value).strip_edges()
+	return float(text) if text.is_valid_float() else fallback
+
+func _parse_field_size(value: String, fallback: Vector2) -> Vector2:
+	var normalized = value.strip_edges().to_lower()
+	normalized = normalized.replace("x", " ")
+	normalized = normalized.replace(",", " ")
+	normalized = normalized.replace(";", " ")
+	var parts = normalized.split(" ", false)
+	if parts.size() >= 2 and parts[0].is_valid_float() and parts[1].is_valid_float():
+		return Vector2(max(0.5, float(parts[0])), max(0.5, float(parts[1])))
+	if parts.size() == 1 and parts[0].is_valid_float():
+		var s = max(0.5, float(parts[0]))
+		return Vector2(s, s)
+	return fallback
 
 func _get_predicted_player_position() -> Vector3:
 	"""Calculate where the player will be when projectile arrives"""

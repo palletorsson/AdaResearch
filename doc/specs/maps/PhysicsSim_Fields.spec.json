@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PhysicsSim_Fields",
+  "home_sequence": "physicssimulation",
+  "dimensions": {
+    "w": 9,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.051,
+  "breath_zones": [
+    {
+      "size": 93,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 11
+      },
+      "centroid": [
+        4.0,
+        4.946236559139785
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "force_fields"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "vector_fields"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "three_body_problem"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "particle_systems"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "nbody_simulation"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 98,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

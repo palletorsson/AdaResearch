@@ -1,11 +1,32 @@
-# SelfOrganizationCA.gd
+﻿# SelfOrganizationCA.gd
 # Self-organizing patterns and emergence
+#
+# @identity
+# essence: cell(t+1) = cell(t) * (1 - k) + avg(neighbors) * k + noise — local averaging with perturbation
+# desire: To settle into consensus regions, then be disturbed — watch opinion clusters form and dissolve
+# critical_parameter: INTERACTION_STRENGTH (0.1) — how fast cells converge toward their neighbors' average
+# triggers: High interaction → rapid homogenization into uniform zones; randomness prevents total consensus
+# emerges: Domain boundaries and cluster formation from simple averaging — phase separation without physics
+# needs: VR interaction/randomness sliders [missing], diversity readout [has via get_pattern_diversity]
+# relationships: Feeds into CA_EdgeOfChaos. Demonstrates self-organization as the CA analogue of social consensus.
+# truth: Average with your neighbors and add noise — domains form, boundaries emerge, organization happens without an organizer.
+
 extends BaseCA
 
 const INTERACTION_STRENGTH = 0.1
 const RANDOMNESS = 0.05
 
-func initialize_grid():
+func initialize_grid() -> void:
+	# Configure MultiMesh
+	var step = 3
+	var cube_size = CUBE_SIZE * step
+	var mesh = BoxMesh.new()
+	mesh.size = Vector3(cube_size, cube_size, cube_size)
+	
+	var cells_per_axis := ceili(float(GRID_SIZE) / step)
+	var max_instances = cells_per_axis * cells_per_axis * cells_per_axis
+	configure_multimesh(mesh, max_instances)
+	
 	grid = create_3d_grid()
 	
 	# Initialize with random values
@@ -14,12 +35,12 @@ func initialize_grid():
 			for z in range(GRID_SIZE):
 				grid[x][y][z] = randi() % 10  # Random state 0-9
 
-func update_simulation(delta):
+func update_simulation(_delta) -> void:
 	# Evolve self-organizing patterns
 	evolve_self_organization()
-	update_visualization()
+	# Note: update_visualization() is called by base_ca._process() after this
 
-func evolve_self_organization():
+func evolve_self_organization() -> void:
 	var new_grid = duplicate_3d_grid(grid)
 	
 	for x in range(GRID_SIZE):
@@ -47,48 +68,36 @@ func evolve_self_organization():
 	
 	grid = new_grid
 
-func update_visualization():
-	var array_mesh = ArrayMesh.new()
-	
-	# Create mesh with color-coded states
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var indices = PackedInt32Array()
-	var colors = PackedColorArray()
-	var vertex_index = 0
-	
+func update_visualization() -> void:
+	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
+		return
+		
+	var mm = multi_mesh_instance.multimesh
+	var idx = 0
 	var step = 3
+	
+	# Reset remaining instances
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
 	for x in range(0, GRID_SIZE, step):
 		for y in range(0, GRID_SIZE, step):
 			for z in range(0, GRID_SIZE, step):
 				var state = grid[x][y][z]
-				if state > 0:  # Only show non-zero states
-					create_cube_at_position(vertices, normals, indices, vertex_index, x, y, z)
+				if state > 0 and idx < mm.instance_count:  # Only show non-zero states
+					var world_pos = Vector3(
+						(x - GRID_SIZE/2) * CUBE_SIZE,
+						(y - GRID_SIZE/2) * CUBE_SIZE,
+						(z - GRID_SIZE/2) * CUBE_SIZE
+					)
+					
+					mm.set_instance_transform(idx, Transform3D(Basis(), world_pos))
 					
 					# Add colors for each vertex
 					var color = get_state_color(state)
-					for i in range(8):  # 8 vertices per cube
-						colors.append(color)
+					mm.set_instance_color(idx, color)
 					
-					vertex_index += 8
-	
-	if vertices.size() > 0:
-		var arrays = []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_NORMAL] = normals
-		arrays[Mesh.ARRAY_INDEX] = indices
-		arrays[Mesh.ARRAY_COLOR] = colors
-		
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		
-		# Create material that uses vertex colors
-		var material = StandardMaterial3D.new()
-		material.vertex_color_use_as_albedo = true
-		array_mesh.surface_set_material(0, material)
-	
-	mesh_instance.mesh = array_mesh
+					idx += 1
 
 func get_state_color(state: int) -> Color:
 	# Color-code different states
@@ -116,7 +125,10 @@ func get_pattern_diversity() -> int:
 				unique_states[state] = true
 	return unique_states.size()
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,26 @@
+{
+    "_metadata": {
+        "sound_type": "lofi_house_song",
+        "display_name": "Lo-Fi House",
+        "description": "DJ Seinfeld, Mall Grab, Ross From Friends style. Dusty samples, warm Juno pads, tape saturation, nostalgic grooves.",
+        "category": "songs",
+        "tags": ["lofi", "house", "juno", "dusty", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["DJ Seinfeld", "Mall Grab", "Ross From Friends"],
+        "reference_tracks": ["U", "Panic Emoji", "Talk to Me You'll Understand"]
+    },
+    "identity": {
+        "emotion": "nostalgic_warmth",
+        "era": "2010s_lofi_revival",
+        "character": ["dusty", "warm", "groovy", "tape_saturated"]
+    },
+    "parameters": {
+        "bpm": { "min": 115, "max": 125, "value": 118, "step": 1 },
+        "key": { "options": ["Am", "Dm", "Gm", "Em"], "value": "Dm" },
+        "lofi_amount": { "min": 0.0, "max": 1.0, "value": 0.7 }
+    },
+    "sound_design": {
+        "juno_pad": { "chorus": "juno_style", "detune": 0.005 },
+        "drums": { "style": "lofi_dusty", "saturation": "tape", "tempo": 118 }
+    }
+}

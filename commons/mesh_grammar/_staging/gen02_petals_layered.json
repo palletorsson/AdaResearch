@@ -1,0 +1,25 @@
+{
+  "id": "gen02_petals_layered",
+  "notes": "Petals on all faces, then small petals on the petal tips \u2014 fractal frond.",
+  "seed": "icosahedron",
+  "seed_scale": 0.3,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "petal_splay",
+      "selector": "all",
+      "params": {
+        "splay": 0.35,
+        "length": 0.5
+      }
+    },
+    {
+      "op": "petal_splay",
+      "selector": "up",
+      "params": {
+        "splay": 0.5,
+        "length": 0.2
+      }
+    }
+  ]
+}

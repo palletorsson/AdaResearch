@@ -1,0 +1,383 @@
+{
+	"description": "Named sequence index for TestPlus and tooling.",
+	"usage": "Use values from sequences[].id in GameManager.testplus_excluded_sequences.",
+	"sequences": [
+		{
+			"id": "advancedlaboratory",
+			"name": "Advanced Laboratory",
+			"map_count": 5,
+			"source_files": [
+				"commons/maps/sequences/advancedlaboratory.json"
+			]
+		},
+		{
+			"id": "array_tutorial",
+			"name": "Array Tutorial Sequence",
+			"map_count": 8,
+			"source_files": [
+				"commons/maps/sequences/array_tutorial.json"
+			]
+		},
+		{
+			"id": "artmathematics",
+			"name": "Art & Mathematics: Visual Philosophy",
+			"map_count": 9,
+			"source_files": [
+				"commons/maps/sequences/artmathematics.json"
+			]
+		},
+		{
+			"id": "bricolage",
+			"name": "Bricolage: From Parts to Structures",
+			"map_count": 7,
+			"source_files": [
+				"commons/maps/sequences/bricolage.json"
+			]
+		},
+		{
+			"id": "cellularautomata",
+			"name": "Cellular Automata: Local Rules, Global Patterns",
+			"map_count": 12,
+			"source_files": [
+				"commons/maps/sequences/cellularautomata.json"
+			]
+		},
+		{
+			"id": "color",
+			"name": "Color: Perception, Not Physics",
+			"map_count": 12,
+			"source_files": [
+				"commons/maps/sequences/color.json"
+			]
+		},
+		{
+			"id": "computationalgeometry",
+			"name": "Computational Geometry",
+			"map_count": 11,
+			"source_files": [
+				"commons/maps/sequences/computationalgeometry.json"
+			]
+		},
+		{
+			"id": "constraint_solvers",
+			"name": "Constraint Solvers: Rules Become Worlds",
+			"map_count": 3,
+			"source_files": [
+				"commons/maps/sequences/constraint_solvers.json"
+			]
+		},
+		{
+			"id": "criticalalgorithms",
+			"name": "Critical Algorithms",
+			"map_count": 6,
+			"source_files": [
+				"commons/maps/sequences/criticalalgorithms.json"
+			]
+		},
+		{
+			"id": "datastructures",
+			"name": "Data Structures",
+			"map_count": 12,
+			"source_files": [
+				"commons/maps/sequences/datastructures.json"
+			]
+		},
+		{
+			"id": "devexamples",
+			"name": "Dev Examples",
+			"map_count": 6,
+			"source_files": [
+				"commons/maps/sequences/devexamples.json"
+			]
+		},
+		{
+			"id": "forces",
+			"name": "Forces: F = ma and the Feel of Change",
+			"map_count": 10,
+			"source_files": [
+				"commons/maps/sequences/forces.json"
+			]
+		},
+		{
+			"id": "fold_system",
+			"name": "Folding: Same Faces, Only Positions Change",
+			"map_count": 1,
+			"source_files": [
+				"commons/maps/sequences/fold_system.json"
+			]
+		},
+		{
+			"id": "foundationscrisis",
+			"name": "Foundations Crisis: The Limits of Formalization",
+			"map_count": 7,
+			"source_files": [
+				"commons/maps/sequences/foundationscrisis.json"
+			]
+		},
+		{
+			"id": "fractals",
+			"name": "Fractals: Infinite Within Finite",
+			"map_count": 14,
+			"source_files": [
+				"commons/maps/sequences/fractals.json"
+			]
+		},
+		{
+			"id": "grammar_systems",
+			"name": "Grammar Systems: Rules Generate Structure",
+			"map_count": 3,
+			"source_files": [
+				"commons/maps/sequences/grammar_systems.json"
+			]
+		},
+		{
+			"id": "graphtheory",
+			"name": "Graph Theory",
+			"map_count": 14,
+			"source_files": [
+				"commons/maps/sequences/graphtheory.json"
+			]
+		},
+		{
+			"id": "hazards",
+			"name": "Hazards: The Bestiary",
+			"map_count": 1,
+			"source_files": [
+				"commons/maps/sequences/hazards.json"
+			]
+		},
+		{
+			"id": "higher_dimensions",
+			"name": "Higher Dimensions: Beyond 3D",
+			"map_count": 4,
+			"source_files": [
+				"commons/maps/sequences/higher_dimensions.json"
+			]
+		},
+		{
+			"id": "isosurfaces",
+			"name": "Isosurfaces: Implicit to Explicit",
+			"map_count": 3,
+			"source_files": [
+				"commons/maps/sequences/isosurfaces.json"
+			]
+		},
+		{
+			"id": "joints",
+			"name": "Joints",
+			"map_count": 7,
+			"source_files": [
+				"commons/maps/sequences/joints.json"
+			]
+		},
+		{
+			"id": "lsystems",
+			"name": "L-Systems",
+			"map_count": 11,
+			"source_files": [
+				"commons/maps/sequences/lsystems.json"
+			]
+		},
+		{
+			"id": "machinelearning",
+			"name": "Machine Learning",
+			"map_count": 16,
+			"source_files": [
+				"commons/maps/sequences/machinelearning.json"
+			]
+		},
+		{
+			"id": "meshes",
+			"name": "Mesh Generation",
+			"map_count": 4,
+			"source_files": [
+				"commons/maps/sequences/meshes.json"
+			]
+		},
+		{
+			"id": "mosaicanalysis",
+			"name": "Mosaic Analysis: Grid Logic in Stone and Glass",
+			"map_count": 7,
+			"source_files": [
+				"commons/maps/sequences/mosaicanalysis.json"
+			]
+		},
+		{
+			"id": "morphogenesis",
+			"name": "Morphogenesis: Pattern from Noise",
+			"map_count": 2,
+			"source_files": [
+				"commons/maps/sequences/morphogenesis.json"
+			]
+		},
+		{
+			"id": "noise",
+			"name": "Noise: Entropy with Memory",
+			"map_count": 11,
+			"source_files": [
+				"commons/maps/sequences/noise.json"
+			]
+		},
+		{
+			"id": "particles",
+			"name": "Particle Systems",
+			"map_count": 5,
+			"source_files": [
+				"commons/maps/sequences/particles.json"
+			]
+		},
+		{
+			"id": "patterngeneration",
+			"name": "Shaders & Patterns: The Book of Shaders",
+			"map_count": 18,
+			"source_files": [
+				"commons/maps/sequences/patterngeneration.json"
+			]
+		},
+		{
+			"id": "physicssimulation",
+			"name": "Physics Simulation: The Engine Behind Reality",
+			"map_count": 21,
+			"source_files": [
+				"commons/maps/sequences/physicssimulation.json"
+			]
+		},
+		{
+			"id": "primitives",
+			"name": "Primitives: Points Build Worlds",
+			"map_count": 12,
+			"source_files": [
+				"commons/maps/sequences/primitives.json"
+			]
+		},
+		{
+			"id": "proceduralaudio",
+			"name": "Procedural Audio",
+			"map_count": 8,
+			"source_files": [
+				"commons/maps/sequences/proceduralaudio.json"
+			]
+		},
+		{
+			"id": "proceduralgeneration",
+			"name": "Procedural Generation Hub",
+			"map_count": 18,
+			"source_files": [
+				"commons/maps/sequences/proceduralgeneration.json"
+			]
+		},
+		{
+			"id": "qfeplaboratory",
+			"name": "QFEP Laboratory: The Formula Made Interactive",
+			"map_count": 8,
+			"source_files": [
+				"commons/maps/sequences/qfeplaboratory.json"
+			]
+		},
+		{
+			"id": "randomness",
+			"name": "Randomness: Freedom from Pattern",
+			"map_count": 13,
+			"source_files": [
+				"commons/maps/sequences/randomness.json"
+			]
+		},
+		{
+			"id": "recursiveemergence",
+			"name": "Recursive Emergence",
+			"map_count": 11,
+			"source_files": [
+				"commons/maps/sequences/recursiveemergence.json"
+			]
+		},
+		{
+			"id": "resourcemanagement",
+			"name": "Resource Management",
+			"map_count": 6,
+			"source_files": [
+				"commons/maps/sequences/resourcemanagement.json"
+			]
+		},
+		{
+			"id": "searchpathfinding",
+			"name": "Search & Pathfinding",
+			"map_count": 7,
+			"source_files": [
+				"commons/maps/sequences/searchpathfinding.json"
+			]
+		},
+		{
+			"id": "softbodies",
+			"name": "Soft Bodies",
+			"map_count": 8,
+			"source_files": [
+				"commons/maps/sequences/softbodies.json"
+			]
+		},
+		{
+			"id": "spatial_partitioning",
+			"name": "Spatial Partitioning: Dividing Space",
+			"map_count": 4,
+			"source_files": [
+				"commons/maps/sequences/spatial_partitioning.json"
+			]
+		},
+		{
+			"id": "speculativecomputation",
+			"name": "Speculative Computation",
+			"map_count": 5,
+			"source_files": [
+				"commons/maps/sequences/speculativecomputation.json"
+			]
+		},
+		{
+			"id": "swarmintelligence",
+			"name": "Swarm Intelligence: No Leader, Yet Coordinated",
+			"map_count": 7,
+			"source_files": [
+				"commons/maps/sequences/swarmintelligence.json"
+			]
+		},
+		{
+			"id": "testmaps",
+			"name": "Unused Artifacts Test",
+			"map_count": 22,
+			"source_files": [
+				"commons/maps/sequences/testmaps.json"
+			]
+		},
+		{
+			"id": "transformation",
+			"name": "Transformation: What Stays the Same When Everything Changes",
+			"map_count": 6,
+			"source_files": [
+				"commons/maps/sequences/transformation.json"
+			]
+		},
+		{
+			"id": "unused",
+			"name": "Unused",
+			"map_count": 23,
+			"source_files": [
+				"commons/maps/sequences/unused.json"
+			]
+		},
+		{
+			"id": "vectors",
+			"name": "Vectors: Direction + Magnitude = Everything",
+			"map_count": 17,
+			"source_files": [
+				"commons/maps/sequences/vectors.json"
+			]
+		},
+		{
+			"id": "wavefunctions",
+			"name": "Wavefunctions: Everything Oscillates",
+			"map_count": 12,
+			"source_files": [
+				"commons/maps/sequences/wavefunctions.json"
+			]
+		}
+	],
+	"parse_warnings": []
+}

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c8qva3adb4mhk"]
+
+[ext_resource type="Script" uid="uid://ccb2jbr654w07" path="res://algorithms/shaders/book_of_shaders/shader_12_pinkextravaganza.gd" id="1"]
+
+[node name="Shader12PinkExtravaganza" type="Node3D" unique_id=961413797]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1701689302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70426977, 7.7472324)

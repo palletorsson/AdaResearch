@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: [100m, 10m, 1m, 10cm, 1mm] — a logarithmic ladder of reference lengths made tangible
+# desire: learner viscerally understands the orders of magnitude separating human-scale from micro and macro
+# critical_parameter: the 1m line — the human-body reference; all others derive meaning relative to it
+# triggers: nothing — static configuration; the experience is spatial proximity and comparison
+# emerges: the body as unit — standing next to 1m makes all other lengths relative to your own height
+# needs: [missing VR controls — static reference display]
+# relationships: sibling to perspective_lines; both configure existing line nodes for a specific lesson
+# truth: every measurement is relative — scale only makes sense from a chosen reference
+
 # Script to ensure scale lines are positioned correctly at different measurements
 
 func _ready():
@@ -19,22 +29,12 @@ func setup_scale_lines():
 	for scale in scales:
 		var line_node = get_node_or_null(scale["name"] + "/lineContainer")
 		if line_node:
-			var sphere1 = line_node.get_node_or_null("GrabSphere")
-			var sphere2 = line_node.get_node_or_null("GrabSphere2")
-
-			if sphere1 and sphere2:
-				# Position spheres at the correct distance
-				var half_distance = scale["distance"] / 2.0
-				sphere1.position = Vector3(-half_distance, 0, 0)
-				sphere2.position = Vector3(half_distance, 0, 0)
+			# Set positions at the correct distance
+			var half_distance = scale["distance"] / 2.0
+			line_node.set_positions(Vector3(-half_distance, 0, 0), Vector3(half_distance, 0, 0))
 
 			# Set line properties
-			line_node.line_thickness = scale["thickness"]
-			line_node.line_color = scale["color"]
-
-			# Update connections after positioning
-			if line_node.has_method("update_connections"):
-				line_node.update_connections()
+			line_node.set_line_properties(scale["thickness"], scale["color"])
 
 		# Position the parent line node at the correct Y position
 		var parent_line = get_node_or_null(scale["name"])

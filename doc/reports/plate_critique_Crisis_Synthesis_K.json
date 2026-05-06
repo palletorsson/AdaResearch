@@ -1,0 +1,40 @@
+{
+  "map": "Crisis_Synthesis",
+  "edge": "K",
+  "shots": {
+    "above": "plate_critique_shots\\Crisis_Synthesis\\above.png",
+    "front": "plate_critique_shots\\Crisis_Synthesis\\front.png",
+    "left": "plate_critique_shots\\Crisis_Synthesis\\left.png",
+    "right": "plate_critique_shots\\Crisis_Synthesis\\right.png",
+    "back": "plate_critique_shots\\Crisis_Synthesis\\back.png"
+  },
+  "result": {
+    "model": "claude-sonnet-4-5",
+    "critique": {
+      "score": 1,
+      "verdict": "wrong edge entirely",
+      "paragraph": "This map teaches the Western mathematical foundations crisis (G\u00f6del, Russell, Escher, Florensky) synthesized through the QFEP formula. It is a coherent argument about limits of formal systems within a single cosmology. But Edge K demands multiple cosmologies shown as equally complete \u2014 Yoruba ifa divination alongside Euclidean logic, Aboriginal songlines alongside Turing machines. This map presents only Western mathematical artifacts in a unified Cartesian wireframe grammar. There are no separate 'rooms' representing distinct knowledge systems, no visual shift between cosmographies, no moment where the player realizes their default was arbitrary. The crisis depicted is internal to Western logic, not about the colonial universalization of Western computation.",
+      "strengths": [
+        "Clear spatial organization with artifacts arranged in a processional arc",
+        "Visually distinct artifacts (Escher staircase, bifurcation diagram, sphere) are legible from multiple angles",
+        "The summit metaphor (central area) works as a synthesis point"
+      ],
+      "weaknesses": [
+        "Only one cosmology present \u2014 all artifacts are Western mathematical tradition",
+        "No visual grammar shift between regions \u2014 uniform wireframe throughout undermines 'many worlds' claim",
+        "No spatial separation into distinct 'rooms' or zones representing different knowledge systems",
+        "Crisis is about limits within Western logic, not about pluriversality of technical systems",
+        "Map reads as Edge A (Uncomputability) or foundations-crisis synthesis, not Edge K at all"
+      ],
+      "next_gen_hints": [
+        "Replace Western artifacts with at least 3-4 cosmologically distinct systems: one zone with Yoruba ifa board, one with Aboriginal songline painting, one with Tibetan thangka, one with Euclidean proof",
+        "Use radically different visual grammars per zone \u2014 concentric rings for thangka zone, dust-and-symbol for ifa zone, iconographic for songline zone, wireframe only for Euclidean zone",
+        "Create spatial 'rooms' or chambers \u2014 player walks from one complete knowledge system into another, teleporter does not connect zones in one world but jumps between worlds",
+        "Give each zone a different 'answer' to the same question (e.g., 'where am I?' answered by GPS in Euclidean zone, by ancestor-story in songline zone, by divination pattern in ifa zone)",
+        "Remove all synthesis \u2014 the map's teaching is that there IS no synthesis, no meta-frame. Player exits realizing they cannot hold all systems in one Cartesian space."
+      ],
+      "edge_reads_as": "A"
+    },
+    "raw": "```json\n{\n  \"score\": 1,\n  \"verdict\": \"wrong edge entirely\",\n  \"paragraph\": \"This map teaches the Western mathematical foundations crisis (G\u00f6del, Russell, Escher, Florensky) synthesized through the QFEP formula. It is a coherent argument about limits of formal systems within a single cosmology. But Edge K demands multiple cosmologies shown as equally complete \u2014 Yoruba ifa divination alongside Euclidean logic, Aboriginal songlines alongside Turing machines. This map presents only Western mathematical artifacts in a unified Cartesian wireframe grammar. There are no separate 'rooms' representing distinct knowledge systems, no visual shift between cosmographies, no moment where the player realizes their default was arbitrary. The crisis depicted is internal to Western logic, not about the colonial universalization of Western computation.\",\n  \"strengths\": [\n    \"Clear spatial organization with artifacts arranged in a processional arc\",\n    \"Visually distinct artifacts (Escher staircase, bifurcation diagram, sphere) are legible from multiple angles\",\n    \"The summit metaphor (central area) works as a synthesis point\"\n  ],\n  \"weaknesses\": [\n    \"Only one cosmology present \u2014 all artifacts are Western mathematical tradition\",\n    \"No visual grammar shift between regions \u2014 uniform wireframe throughout undermines 'many worlds' claim\",\n    \"No spatial separation into distinct 'rooms' or zones representing different knowledge systems\",\n    \"Crisis is about limits within Western logic, not about pluriversality of technical systems\",\n    \"Map reads as Edge A (Uncomputability) or foundations-crisis synthesis, not Edge K at all\"\n  ],\n  \"next_gen_hints\": [\n    \"Replace Western artifacts with at least 3-4 cosmologically distinct systems: one zone with Yoruba ifa board, one with Aboriginal songline painting, one with Tibetan thangka, one with Euclidean proof\",\n    \"Use radically different visual grammars per zone \u2014 concentric rings for thangka zone, dust-and-symbol for ifa zone, iconogr"
+  }
+}

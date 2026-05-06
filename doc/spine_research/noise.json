@@ -1,0 +1,716 @@
+{
+  "sequence": "noise",
+  "generated_at": "2026-04-29T11:23:37.606411Z",
+  "runs": [
+    {
+      "base": "Random_Noise_Types",
+      "variants": [
+        {
+          "id": "Random_Noise_Types_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.592,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Noise_Types_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Random_Noise_Types_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Noise_Columns",
+      "variants": [
+        {
+          "id": "Noise_Columns_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.574,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Noise_Columns_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Noise_Columns_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Noise_One",
+      "variants": [
+        {
+          "id": "Noise_One_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.58,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Noise_One_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Noise_One_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Noise_Voxel",
+      "variants": [
+        {
+          "id": "Noise_Voxel_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.562,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Noise_Voxel_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Noise_Voxel_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Noise_6_Wall",
+      "variants": [
+        {
+          "id": "Noise_6_Wall_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.633,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Noise_6_Wall_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Noise_6_Wall_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Noise_Inside_Noise",
+      "variants": [
+        {
+          "id": "Noise_Inside_Noise_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.587,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Noise_Inside_Noise_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Noise_Inside_Noise_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Noise_Space_10",
+      "variants": [
+        {
+          "id": "Noise_Space_10_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.577,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Noise_Space_10_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Noise_Space_10_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 4,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Noise_Perlin_Simplex",
+      "variants": [
+        {
+          "id": "Noise_Perlin_Simplex_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.597,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 3,
+              "cubes_added": 2,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Noise_Perlin_Simplex_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Noise_Perlin_Simplex_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Lab_Path",
+      "variants": [
+        {
+          "id": "Lab_Path_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.577,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Lab_Path_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Lab_Path_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_Noise",
+      "variants": [
+        {
+          "id": "Chamber_Noise_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.573,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Chamber_Noise_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.991,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Chamber_Noise_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.991,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+    "_metadata": {
+        "sound_type": "detroit_techno",
+        "display_name": "Detroit Techno",
+        "description": "Juan Atkins style Detroit techno - cold machine funk. 808 as heartbeat, bass as subwoofer meditation.",
+        "category": "pop_edm",
+        "tags": ["detroit", "techno", "atkins", "machine", "minimal", "cold"]
+    },
+    "parameters": {
+        "bpm": { "min": 115.0, "max": 140.0, "value": 125.0, "step": 1.0 },
+        "bass_note": { "min": 24.0, "max": 48.0, "value": 36.0, "step": 1.0 },
+        "coldness": { "min": 0.3, "max": 1.0, "value": 0.7, "step": 0.05 },
+        "duration": { "min": 2.0, "max": 15.0, "value": 6.0, "step": 0.5 }
+    }
+}

@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b12x1wmigmlmo"]
+[gd_scene format=3 uid="uid://b12x1wmigmlmo"]
 
 [ext_resource type="PackedScene" uid="uid://d28m400o724g5" path="res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn" id="1_0f1eu"]
 [ext_resource type="Script" uid="uid://b11b8g0mx4lvc" path="res://algorithms/randomness/randomwalk/scenes/place_me.gd" id="1_vt5mq"]
-[ext_resource type="PackedScene" uid="uid://bqx8y7j2qk0dw" path="res://algorithms/color/grabcolor/shelf.tscn" id="3_a6fw8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_t7wqy"]
 viewport_path = NodePath("placeMe/SubViewport")
@@ -12,60 +11,60 @@ albedo_color = Color(0.10748, 0.10748, 0.10748, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xb2ei"]
 
-[node name="RandomWalkCollection" type="Node3D"]
+[node name="RandomWalkCollection" type="Node3D" unique_id=849143591]
 
-[node name="placeMe" type="Node3D" parent="."]
+[node name="placeMe" type="Node3D" parent="." unique_id=259152191]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.120228, 0, -0.32644)
 script = ExtResource("1_vt5mq")
 
-[node name="RandomWalkGrabPaper_simple_0001" parent="placeMe" instance=ExtResource("1_0f1eu")]
-transform = Transform3D(0.997997, 0, -0.0632608, 0, 1, 0, 0.0632608, 0, 0.997997, -0.422545, -0.336047, -0.311709)
+[node name="RandomWalkGrabPaper_simple_0001" parent="placeMe" unique_id=791150829 instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.997997, 8.513628e-08, -0.063260734, 0.061606146, 0.2272123, 0.9718946, 0.014373699, -0.97384524, 0.22675718, -0.422545, -0.336047, -0.311709)
 label_text = "id: 0001 - simpel random walk "
 selected_walk_type = 1
 
-[node name="RandomWalkGrabPaper_diagonal_0002" parent="placeMe" instance=ExtResource("1_0f1eu")]
-transform = Transform3D(0.998678, 0, -0.0513947, 0, 1, 0, 0.0513947, 0, 0.998678, -0.122545, -0.336047, -0.311709)
+[node name="RandomWalkGrabPaper_diagonal_0002" parent="placeMe" unique_id=1044136001 instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.998678, 7.444596e-08, -0.051394656, 0.043765713, 0.5242535, 0.8504365, 0.026943892, -0.85156226, 0.52356046, -0.122545, -0.336047, -0.311709)
 label_text = "id: 0002 - diagonal random walk "
 selected_walk_type = 2
 
-[node name="RandomWalkGrabPaper_brownian_0003" parent="placeMe" instance=ExtResource("1_0f1eu")]
-transform = Transform3D(0.99853, 0, -0.0542008, 0, 1, 0, 0.0542008, 0, 0.99853, 0.156819, -0.336047, -0.311709)
+[node name="RandomWalkGrabPaper_brownian_0003" parent="placeMe" unique_id=306399876 instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.99853, 8.398384e-08, -0.05420074, 0.052068613, 0.27771705, 0.9592507, 0.01505255, -0.9606629, 0.2773088, 0.15681902, -0.336047, -0.31170896)
 label_text = "id: 0003 -  brownian random walk"
 selected_walk_type = 3
 
-[node name="RandomWalkGrabPaper_fractal_0004" parent="placeMe" instance=ExtResource("1_0f1eu")]
-transform = Transform3D(0.999091, 0, 0.0426255, 0, 1, 0, -0.0426255, 0, 0.999091, -0.381428, -0.336047, -0.00221828)
+[node name="RandomWalkGrabPaper_fractal_0004" parent="placeMe" unique_id=507550027 instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.99909115, 8.725297e-08, 0.042625587, -0.042542778, 0.06230282, 0.9971501, -0.0026556074, -0.9980574, 0.0622462, -0.381428, -0.336047, -0.0022182763)
 label_text = "id: 0004 - fractal random walk "
 
-[node name="RandomWalkGrabPaper_selfavioding_0005" parent="placeMe" instance=ExtResource("1_0f1eu")]
-transform = Transform3D(0.997105, 0, -0.0760403, 0, 1, 0, 0.0760403, 0, 0.997105, -0.10831, -0.336047, -0.00221819)
+[node name="RandomWalkGrabPaper_selfavioding_0005" parent="placeMe" unique_id=1273767029 instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.997105, 8.621502e-08, -0.07604022, 0.074989684, 0.16565011, 0.9833296, 0.012596156, -0.9861846, 0.16517055, -0.10831, -0.336047, -0.0022181869)
 label_text = "id: 0005 - self avoiding walk "
 selected_walk_type = 6
 
-[node name="RandomWalkGrabPaper_levyflight_0006" parent="placeMe" instance=ExtResource("1_0f1eu")]
-transform = Transform3D(0.998815, 0, 0.0486754, 0, 1, 0, -0.0486754, 0, 0.998815, 0.147842, -0.336047, -0.00221804)
+[node name="RandomWalkGrabPaper_levyflight_0006" parent="placeMe" unique_id=1482000880 instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.998815, 8.4905096e-08, 0.04867546, -0.047273666, 0.2382623, 0.97005, -0.011597444, -0.9712008, 0.23797995, 0.14784202, -0.336047, -0.0022180378)
 label_text = "id: 0006 - levy flight walk "
 selected_walk_type = 7
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="placeMe"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="placeMe" unique_id=1462456022]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28123, 0)
 skeleton = NodePath("../..")
 
-[node name="SubViewport" type="SubViewport" parent="placeMe"]
+[node name="SubViewport" type="SubViewport" parent="placeMe" unique_id=661859525]
 
-[node name="ViewPortCamera3D" type="Camera3D" parent="placeMe/SubViewport"]
+[node name="ViewPortCamera3D" type="Camera3D" parent="placeMe/SubViewport" unique_id=599477770]
 transform = Transform3D(-1, 8.74228e-08, -1.12078e-15, 5.28339e-08, 0.604349, 0.79672, 6.96515e-08, 0.79672, -0.604349, -0.363626, 3.26796, 0.803389)
 visible = false
 
-[node name="Sprite3D" type="Sprite3D" parent="placeMe"]
+[node name="Sprite3D" type="Sprite3D" parent="placeMe" unique_id=806813003]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3.72529e-08, 0.926537, -2.173)
 visible = false
 texture = SubResource("ViewportTexture_t7wqy")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="placeMe/Sprite3D"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="placeMe/Sprite3D" unique_id=1676747549]
 transform = Transform3D(-5.4, -2.6658e-28, -1.74846e-08, 0, 5.4, 0, 4.72083e-07, -3.04932e-21, -0.2, 8.9407e-08, 0, -0.10808)
 material_override = SubResource("StandardMaterial3D_vt5mq")
 mesh = SubResource("BoxMesh_xb2ei")
 
-[node name="Shelf7x7" parent="." instance=ExtResource("3_a6fw8")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2075794335]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.91585934)

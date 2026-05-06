@@ -1,0 +1,133 @@
+{
+    "description": "Neon-lit streets with lo-fi hip-hop vibes - street vendors, hover bikes, holographic ads",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -20,
+            "bus": "SubBass",
+            "parameters": {
+                "base_freq": 40.0
+            }
+        },
+        {
+            "sound_id": "techno_noir.city_ambience",
+            "volume_db": -14,
+            "bus": "Ambient",
+            "parameters": {
+                "traffic_density": 0.6
+            }
+        },
+        {
+            "sound_id": "techno_noir.rain_segment",
+            "volume_db": -22,
+            "bus": "Ambient",
+            "parameters": {
+                "intensity": 0.15
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren",
+                "techno_noir.mechanical_whir"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -18,
+                -12
+            ],
+            "bus": "Effects"
+        },
+        {
+            "sound_pool": [
+                "AudioSynthesizer.KORG_M1_PIANO",
+                "AudioSynthesizer.DX7_ELECTRIC_PIANO"
+            ],
+            "interval_range": [
+                15.0,
+                35.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Music"
+        },
+        {
+            "sound_pool": [
+                "trap_beats.hihat_closed",
+                "trap_beats.808_kick"
+            ],
+            "interval_range": [
+                5.0,
+                15.0
+            ],
+            "volume_range": [
+                -28,
+                -22
+            ],
+            "bus": "Beats"
+        }
+    ],
+    "buses": {
+        "SubBass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 100
+                }
+            ]
+        },
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 2000
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 300,
+                    "tap1_level_db": -10.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "Music": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "Beats": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.1
+                }
+            ]
+        }
+    }
+}

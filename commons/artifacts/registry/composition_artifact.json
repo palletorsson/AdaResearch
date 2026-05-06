@@ -1,0 +1,37 @@
+{
+	"id": "composition_artifact",
+	"name": "Composition Artifact",
+	"description": "Placeable wrapper around primitive_stack.build(cfg). Reads a JSON config (layout, palette, sequence of shapes/colors/sizes) and builds the resulting Bauhaus-descended composition as a Node3D in 3D space. Mirrors the primitive_stack grammar's research-render pipeline.",
+	"category": "dna_grammar",
+	"theoreticalGrounding": "Same federated rendering pattern as facade_builder, lsystem_artifact, etc.: each grammar's existing build function becomes a placeable artifact.",
+	"artifacts": {
+		"composition_artifact": {
+			"lookup_name": "composition_artifact",
+			"name": "Composition Artifact",
+			"description": "Placeable primitive-stack composition. Parameters: config_path (JSON config), grammar (default 'primitive_stack'). Loads the config and calls PrimStack.build(cfg).",
+			"category": "dna_grammar",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [2, 2, 4],
+			"tags": ["primitive_stack", "composition", "dna", "bauhaus", "placeable"],
+			"qfep_connection": "F_order: structured arrangement of primitives — Bauspiel, Vignelli, Becker as composition vocabulary.",
+			"parameters": {
+				"config_path": "",
+				"grammar": "primitive_stack",
+				"footprint": [2, 2, 4],
+				"size_group": "medium"
+			},
+			"size_group": "medium",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 5,
+				"density": "high",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

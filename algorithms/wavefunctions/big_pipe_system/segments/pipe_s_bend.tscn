@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://pipe_s_bend_001"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/big_pipe_system/segments/pipe_s_bend_parametric.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pipe"]
+cull_mode = 2
+albedo_color = Color(0.7, 0.7, 0.8, 1.0)
+metallic = 0.8
+roughness = 0.2
+
+[node name="PipeSBend" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_pipe")
+script = ExtResource("1_script")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+

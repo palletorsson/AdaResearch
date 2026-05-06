@@ -1,0 +1,96 @@
+{
+	"sequences": {
+		"higher_dimensions": {
+			"name": "Higher Dimensions: Beyond 3D",
+			"truth": "We are 3D creatures projecting 4D shadows. The tesseract rotates through dimensions we cannot directly perceive.",
+			"qfep_term": "F",
+			"qfep_connection": "Higher-dimensional geometry extends F (order) into spaces we cannot inhabit. Pure structure, revealed through projectionâ€”the Platonic forms casting shadows into our world.",
+			"formula": "4D â†’ 3D projection â†’ perception",
+			"description": "Explore geometry beyond three dimensions. Tesseracts, penteracts, 16-cellsâ€”polytopes that exist in 4D and 5D space, visualized through projection into 3D. Walk through the nets, see rotations through the fourth dimension.",
+			"layer": "systems",
+			"prerequisites": [
+				"primitives",
+				"transformation",
+				"vectors"
+			],
+			"unlocks": [
+				"speculativecomputation"
+			],
+			"difficulty": "advanced",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Dimensional analogy: pointâ†’lineâ†’squareâ†’cubeâ†’tesseract",
+				"Projection: how higher-D casts shadows into lower-D",
+				"Tesseract (4D hypercube): 8 cubic cells",
+				"16-cell: 4D analog of octahedron",
+				"Penteract (5D hypercube): 10 tesseract cells",
+				"Nets: unfolding higher-D shapes into 3D"
+			],
+			"maps": [
+				"ProceduralGenerationTesseractErrorTunnel",
+				"ProceduralGenerationSixteenCellNet",
+				"ProceduralGenerationNetSpace",
+				"ProceduralGenerationPortals"
+			],
+			"algorithm_paths": {
+				"tesseract": "res://algorithms/proceduralgeneration/higher_dimensional/tesseractnetspace/",
+				"tesseract_tunnel": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/",
+				"sixteen_cell": "res://algorithms/proceduralgeneration/higher_dimensional/sixteencellnetspace/",
+				"penteract": "res://algorithms/proceduralgeneration/higher_dimensional/penteractdoubleprojection/",
+				"portals": "res://algorithms/proceduralgeneration/higher_dimensional/tessellatingportal/"
+			},
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_higher_dimensions",
+			"completion_rewards": [
+				"fourth_dimension_badge",
+				"hypercube_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "ProceduralGenerationTesseractErrorTunnel",
+					"position": "intro",
+					"artifacts": [
+						"tesseract_tunnel_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Tesseract tunnel: walk through a 4D hypercube projected into 3D. The error tunnel — where dimensional projection breaks, you feel the fourth dimension."
+				},
+				{
+					"map": "ProceduralGenerationSixteenCellNet",
+					"position": "foundation",
+					"artifacts": [
+						"sixteen_cell_net_space_showcase"
+					],
+					"size_budget": "world_scale",
+					"rationale": "16-cell: the 4D analog of the octahedron, unfolded as a walkable net. Eight tetrahedral cells projected into space you can inhabit."
+				},
+				{
+					"map": "ProceduralGenerationNetSpace",
+					"position": "integration",
+					"artifacts": [
+						"tesseract_net_space_showcase"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Tesseract net space: the eight cubes of a hypercube unfolded into 3D. Walk through Dalí's Corpus Hypercubus — the cross-shaped net of the fourth dimension."
+				},
+				{
+					"map": "ProceduralGenerationPortals",
+					"position": "synthesis",
+					"artifacts": [
+						"tessellating_portal_demo"
+					],
+					"size_budget": "environment",
+					"rationale": "Tessellating portals: dimensional boundaries you can step through. Synthesis of projection, nets, and higher-dimensional topology as navigable architecture."
+				}
+			],
+			"content": [
+				"ProceduralGenerationTesseractErrorTunnel: Walking the Fourth Dimension",
+				"ProceduralGenerationSixteenCellNet: Dual Polytope Unfolded",
+				"ProceduralGenerationNetSpace: Tesseract Net Space",
+				"ProceduralGenerationPortals: Tessellating Portals"
+			]
+		}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
+}

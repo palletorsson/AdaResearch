@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CA_ExpandingSpace",
+  "home_sequence": "cellularautomata",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "cellular_automata_3d_tree demonstrates branching growth under extended 3D neighborhoods; crossway_ca shows interference from overlapping influence zones; decaying_bridge combines structural persistence with multi-state decay; dark_sphere anchors the research space.",
+  "style": null,
+  "echoes": [],
+  "density": 0.106,
+  "breath_zones": [
+    {
+      "size": 42,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0476190476190474,
+        3.1666666666666665
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 1,
+      "token": "ca_chair_test"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "cellular_automata_3d_tree"
+    },
+    {
+      "x": 2,
+      "z": 7,
+      "token": "crossway_ca"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "decaying_bridge"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 47,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

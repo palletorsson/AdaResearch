@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bntblusjep435"]
+
+[ext_resource type="Script" path="res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.gd" id="1_turret"]
+
+[node name="HLTurretVectors" type="Node3D"]
+script = ExtResource("1_turret")

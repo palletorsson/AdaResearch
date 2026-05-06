@@ -1,0 +1,41 @@
+{
+  "id": "mg_form23_column_capital_cylinder",
+  "notes": "FORM STUDY: narrow cube shaft becomes a capitalized column by sequencing extrude, inset, and one flare. Same grammar idea as the cylinder test, but on a seed that reads cleanly.",
+  "seed": "cube",
+  "seed_scale": 0.38,
+  "generations": 1,
+  "camera_pitch": 0.28,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.36,
+        "scale": 0.72,
+        "top_tag": "drum_top",
+        "side_tag": "drum_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "inset",
+      "selector": "tag:drum_top",
+      "params": {
+        "amount": 0.16,
+        "inner_tag": "capital_core",
+        "border_tag": "capital_rim"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:capital_core",
+      "params": {
+        "distance": 0.08,
+        "scale": 1.28,
+        "top_tag": "capital_top",
+        "side_tag": "capital_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

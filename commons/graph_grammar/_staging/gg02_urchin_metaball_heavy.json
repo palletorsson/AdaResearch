@@ -1,0 +1,35 @@
+{
+  "id": "gg02_urchin_metaball_heavy",
+  "notes": "Heavy smoothing on a 64-bristle urchin \u00e2\u20ac\u201d bristles blur into a spiked organ.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.1
+  },
+  "iterations": 1,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.18,
+  "metaball_resolution": 64,
+  "materials": {
+    "default": [
+      0.7,
+      0.35,
+      0.32
+    ]
+  },
+  "rules": [
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 64,
+        "length": 0.35,
+        "radius": 0.03,
+        "splay": 1.0
+      }
+    }
+  ]
+}

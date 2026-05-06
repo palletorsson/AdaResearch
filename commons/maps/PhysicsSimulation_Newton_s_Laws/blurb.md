@@ -1,0 +1,5 @@
+Three balls. Three rules. The entire mechanical universe.
+
+An object at rest stays at rest — until force arrives. Force applied to mass produces acceleration: F=ma, the shortest equation that governs everything from falling apples to orbital decay. Every action generates an equal and opposite reaction. These aren't abstractions. Point the arrow, scale the magnitude, watch the ball respond. Heavy objects resist. Light objects fly. The containment walls push back exactly as hard as they're hit.
+
+Newton's laws are the grammar of physical order — the irreducible mapping from cause to consequence. Before springs oscillate, before fluids pour, before cloth tears, this is what holds. Three statements compressed into one arena. The simplest rules produce the deepest constraint. Everything that moves, moves because of this.

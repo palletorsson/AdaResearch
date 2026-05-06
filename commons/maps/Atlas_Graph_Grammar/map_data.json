@@ -1,0 +1,149 @@
+{
+  "artifact_definitions": {},
+  "documentation": {
+    "summary": "Atlas · Graph Grammar Studio — in-VR live editor for branching topologies",
+    "layout": "14x14 floor. Graph Grammar Station at (6,6). Spawn at south, teleporter at north.",
+    "objective": "Press preset buttons (Tree, Conifer, Autumn, Bush, Coral, Canopy, Bristle Ball). Drag the sliders below the pedestal to tune branch count, spread, depth, jitter, foliage density. The graph regenerates live.",
+    "key_elements": [
+      "`graph_grammar_station` at center (6,6)",
+      "7 push-buttons along east side (one per preset)",
+      "4 horizontal sliders along south side (per-preset DNA)"
+    ]
+  },
+  "subtitles": {},
+  "map_info": {
+    "description": "Atlas · Graph Grammar Studio. Pick a preset, drag sliders, watch branching topology regenerate with bark + plant shaders.",
+    "dimensions": {
+      "depth": 14,
+      "max_height": 3,
+      "width": 14
+    },
+    "format": "json",
+    "lookup_name": "Atlas_Graph_Grammar",
+    "metadata": {
+      "category": "atlas",
+      "difficulty": "reference",
+      "estimated_time": "5-15 minutes",
+      "learning_objectives": [
+        "Feel how branch count and spread shape a tree silhouette",
+        "See the same rules produce tree, bush, coral, or sea urchin",
+        "Discover the parameter sweet spot where each preset reads as its archetype"
+      ]
+    },
+    "name": "Atlas - Graph Grammar",
+    "version": "1.0",
+    "title": "Graph Grammar Studio"
+  },
+  "utility_definitions": {
+    "s": {
+      "properties": {
+        "height": 1.5
+      }
+    },
+    "t": {
+      "description": "Continue",
+      "name": "Next",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.55,
+    "directional_light": {
+      "color": [
+        1.0,
+        0.95,
+        0.88
+      ],
+      "direction": [
+        -0.35,
+        -0.8,
+        -0.3
+      ],
+      "enabled": true,
+      "energy": 1.2
+    }
+  },
+  "settings": {
+    "auto_reveal_on_entry": true,
+    "background": {
+      "color": [
+        0.08,
+        0.09,
+        0.12
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "enter_type": "I",
+    "grid_animation": {
+      "delay_between": 0.03,
+      "duration": 0.15,
+      "easing": "ease_out",
+      "enabled": true,
+      "order": "wave_z",
+      "type": "wave"
+    },
+    "gutter": 0.0,
+    "initial_tile_visibility": "visible",
+    "show_grid": false
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","s"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","t"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","graph_grammar_station"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd" id="1_decay"]
+
+[node name="RandomDecayMultiMesh" type="Node3D"]
+script = ExtResource("1_decay")
+decay_growth_rate = 0.05
+decay_injection_per_second = 0.06
+drift_strength = 0.12
+rotation_jitter_degrees = 3.0
+sink_distance = 0.12
+movement_xy_only = true
+rotation_xy_plane_only = true
+force_uniform_item_size = true
+cube_decay_speed_scale = 0.3
+cube_color_decay_mix = 0.35
+prism_base_color = Color(0.62, 0.72, 0.86, 1)
+prism_decay_speed_scale = 0.1
+prism_color_decay_mix = 0.16
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.955336, 0.29552, 0, -0.29552, 0.955336, 0, 4.8, 16.0)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.816589, -0.577046, 0, 0.265035, 0.374817, 0.888074, -0.512401, -0.725197, 0.460311, 0, 9, 0)
+light_energy = 1.35
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0, 6.0)
+light_energy = 0.6
+omni_range = 20.0

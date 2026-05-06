@@ -1,0 +1,16 @@
+{
+  "id": "mg_prim01_dodecahedron_extruded",
+  "notes": "PRIMITIVE-AS-SEED: Dodecahedron from Ada primitive library + extrude on all faces. Twelve pentagonal faces each grow outward \u2014 reads as a blooming crystal.",
+  "seed": "dodecahedron",
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "all",
+      "params": {
+        "distance": 0.15,
+        "scale": 0.7
+      }
+    }
+  ]
+}

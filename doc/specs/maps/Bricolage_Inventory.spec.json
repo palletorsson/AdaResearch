@@ -1,0 +1,90 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Bricolage_Inventory",
+  "home_sequence": "bricolage",
+  "dimensions": {
+    "w": 11,
+    "d": 13
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [
+    "primitives"
+  ],
+  "density": 0.07,
+  "breath_zones": [
+    {
+      "size": 130,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 13
+      },
+      "centroid": [
+        5.0,
+        6.153846153846154
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "point_specimen"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "line_specimen"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "triangle_specimen"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "plane_specimen"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "cube_specimen"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "sphere_specimen"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "cylinder_specimen"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "torus_specimen"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 9,
+      "z": 8,
+      "token": "inventory_workbench"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 10,
+    "walkable_cells": 142,
+    "breath_zone_count": 1,
+    "unique_tokens": 10
+  }
+}

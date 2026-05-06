@@ -1,31 +1,56 @@
 extends Node3D
+## Optimization Algorithms Visualization
+## Shows a loss landscape with SGD / Adam / RMSprop / Adagrad / Momentum
+## converging towards a minimum. Gradient vectors, convergence spirals, and
+## data-flow particles animate the optimization process.
 
+# ─── Runtime-tunable parameters ───────────────────────────────────────────────
+@export_range(0.01, 0.5, 0.01) var simulation_speed: float = 0.1:
+	set(v):
+		simulation_speed = v
+@export_range(10, 80, 5) var particle_count: int = 25:
+	set(v):
+		particle_count = v
+		if is_inside_tree():
+			_rebuild_all_particles()
+@export var color_landscape: Color = Color(0.8, 0.2, 0.8, 1.0):
+	set(v):
+		color_landscape = v
+@export var color_convergence: Color = Color(0.2, 0.8, 0.8, 1.0):
+	set(v):
+		color_convergence = v
+@export var color_gradient: Color = Color(1.0, 0.85, 0.2, 0.7):
+	set(v):
+		color_gradient = v
+
+# ─── Internal state ───────────────────────────────────────────────────────────
 var time: float = 0.0
 var optimization_progress: float = 0.0
 var loss_value: float = 1.0  # Start high, decrease over time
 var learning_rate: float = 0.5
-var particle_count: int = 25
 var flow_particles: Array = []
 var landscape_particles: Array = []
 var convergence_particles: Array = []
 var gradient_vectors: Array = []
 
-func _ready():
-	# Initialize Optimization Algorithms visualization
-	print("Optimization Algorithms Visualization initialized")
+# ─── Stats overlay ────────────────────────────────────────────────────────────
+var _stats_label: Label3D = null
+
+func _ready() -> void:
 	create_landscape_particles()
 	create_convergence_particles()
 	create_gradient_vectors()
 	create_flow_particles()
 	setup_optimization_metrics()
+	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate optimization progress
-	optimization_progress = min(1.0, time * 0.1)
-	loss_value = 1.0 - (optimization_progress * 0.9)  # Loss decreases as optimization progresses
-	learning_rate = 0.1 + sin(time * 0.5) * 0.05  # Learning rate oscillates
+	optimization_progress = min(1.0, time * simulation_speed)
+	loss_value = 1.0 - (optimization_progress * 0.9)
+	learning_rate = 0.1 + sin(time * 0.5) * 0.05
 	
 	animate_loss_landscape(delta)
 	animate_optimization_core(delta)
@@ -33,17 +58,52 @@ func _process(delta):
 	animate_gradient_flow(delta)
 	animate_data_flow(delta)
 	update_optimization_metrics(delta)
+	_update_stats_label()
 
-func create_landscape_particles():
+# ─── Stats Label3D ────────────────────────────────────────────────────────────
+func _create_stats_label() -> void:
+	_stats_label = Label3D.new()
+	_stats_label.name = "StatsOverlay"
+	_stats_label.pixel_size = 0.005
+	_stats_label.font_size = 28
+	_stats_label.position = Vector3(0, 5.5, 0)
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_stats_label.modulate = Color(1, 1, 1, 0.9)
+	_stats_label.outline_size = 8
+	_stats_label.outline_modulate = Color(0, 0, 0, 0.6)
+	add_child(_stats_label)
+
+func _update_stats_label() -> void:
+	if _stats_label:
+		_stats_label.text = "Optimization: %d%%  |  Loss: %.3f  |  LR: %.4f" % [
+			int(optimization_progress * 100), loss_value, learning_rate]
+
+# ─── Helpers ──────────────────────────────────────────────────────────────────
+func _rebuild_all_particles() -> void:
+	for arr in [landscape_particles, convergence_particles, gradient_vectors, flow_particles]:
+		for p in arr:
+			if is_instance_valid(p): p.queue_free()
+		arr.clear()
+	landscape_particles = []; convergence_particles = []; gradient_vectors = []; flow_particles = []
+	create_landscape_particles()
+	create_convergence_particles()
+	create_gradient_vectors()
+	create_flow_particles()
+
+func create_landscape_particles() -> void:
 	# Create loss landscape particles representing the loss surface
 	var landscape_particles_node = $LossLandscape/LandscapeParticles
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.08
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.2, 0.8, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.2, 0.8, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_landscape
+		mat.emission_enabled = true
+		mat.emission = color_landscape * 0.35
+		mat.emission_energy_multiplier = 1.3
+		mat.metallic = 0.3
+		mat.roughness = 0.2
+		particle.material_override = mat
 		
 		# Position particles in a landscape pattern
 		var grid_size = 5
@@ -58,16 +118,20 @@ func create_landscape_particles():
 		landscape_particles_node.add_child(particle)
 		landscape_particles.append(particle)
 
-func create_convergence_particles():
-	# Create convergence particles showing optimization path
+func create_convergence_particles() -> void:
+	# Create convergence particles showing the optimization path spiral
 	var convergence_particles_node = $Convergence/ConvergenceParticles
 	for i in range(20):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.1
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.2, 0.8, 0.8, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.2, 0.8, 0.8, 1) * 0.4
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_convergence
+		mat.emission_enabled = true
+		mat.emission = color_convergence * 0.45
+		mat.emission_energy_multiplier = 1.5
+		mat.metallic = 0.35
+		mat.roughness = 0.2
+		particle.material_override = mat
 		
 		# Position particles along convergence path
 		var progress = float(i) / 20
@@ -81,17 +145,21 @@ func create_convergence_particles():
 		convergence_particles_node.add_child(particle)
 		convergence_particles.append(particle)
 
-func create_gradient_vectors():
-	# Create gradient vector particles
+func create_gradient_vectors() -> void:
+	# Create gradient vector arrows showing descent direction
 	var gradient_vectors_node = $GradientFlow/GradientVectors
 	for i in range(15):
 		var vector = CSGBox3D.new()
 		vector.size = Vector3(0.1, 0.1, 0.8)
-		vector.material_override = StandardMaterial3D.new()
-		vector.material_override.albedo_color = Color(0.8, 0.8, 0.2, 0.7)
-		vector.material_override.emission_enabled = true
-		vector.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.2
-		vector.material_override.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_gradient
+		mat.emission_enabled = true
+		mat.emission = Color(1.0, 0.85, 0.2, 1) * 0.3
+		mat.emission_energy_multiplier = 1.4
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.metallic = 0.2
+		mat.roughness = 0.3
+		vector.material_override = mat
 		
 		# Position gradient vectors in flow space
 		var angle = float(i) / 15.0 * PI * 2
@@ -107,27 +175,32 @@ func create_gradient_vectors():
 		gradient_vectors_node.add_child(vector)
 		gradient_vectors.append(vector)
 
-func create_flow_particles():
-	# Create optimization flow particles
+func create_flow_particles() -> void:
+	# Create optimization flow particles along the gradient-descent pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
-	for i in range(40):
+	var flow_count := int(max(20, particle_count * 1.6))
+	for i in range(flow_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.05
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color(1.0, 0.85, 0.2, 1)
+		mat.emission_enabled = true
+		mat.emission = Color(1.0, 0.85, 0.2, 1) * 0.45
+		mat.emission_energy_multiplier = 1.8
+		mat.metallic = 0.15
+		mat.roughness = 0.25
+		particle.material_override = mat
 		
 		# Position particles along the optimization flow path
-		var progress = float(i) / 40
-		var x = lerp(-8, 8, progress)
+		var progress = float(i) / float(flow_count)
+		var x = lerp(-8.0, 8.0, progress)
 		var y = sin(progress * PI * 6) * 2.5
 		particle.position = Vector3(x, y, 0)
 		
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_optimization_metrics():
+func setup_optimization_metrics() -> void:
 	# Initialize optimization metrics
 	var loss_indicator = $OptimizationMetrics/LossMeter/LossIndicator
 	var lr_indicator = $OptimizationMetrics/LearningRateMeter/LearningRateIndicator
@@ -136,7 +209,7 @@ func setup_optimization_metrics():
 	if lr_indicator:
 		lr_indicator.position.x = 0  # Start at middle
 
-func animate_loss_landscape(delta):
+func animate_loss_landscape(delta) -> void:
 	# Animate loss landscape particles
 	for i in range(landscape_particles.size()):
 		var particle = landscape_particles[i]
@@ -158,7 +231,7 @@ func animate_loss_landscape(delta):
 			var blue_component = 0.8 * (1.0 - local_loss)
 			particle.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func animate_optimization_core(delta):
+func animate_optimization_core(delta) -> void:
 	# Animate optimizer hub
 	var optimizer_hub = $OptimizationCore/OptimizerHub
 	if optimizer_hub:
@@ -240,7 +313,7 @@ func animate_optimization_core(delta):
 			var intensity = 0.3 + momentum_activation * 0.7
 			momentum_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_convergence(delta):
+func animate_convergence(delta) -> void:
 	# Animate convergence particles
 	for i in range(convergence_particles.size()):
 		var particle = convergence_particles[i]
@@ -267,7 +340,7 @@ func animate_convergence(delta):
 			var red_component = 0.2 + 0.6 * (1.0 - convergence)
 			particle.material_override.albedo_color = Color(red_component, green_component, 0.8, 1)
 
-func animate_gradient_flow(delta):
+func animate_gradient_flow(delta) -> void:
 	# Animate gradient flow core
 	var gradient_core = $GradientFlow/GradientCore
 	if gradient_core:
@@ -304,7 +377,7 @@ func animate_gradient_flow(delta):
 			vector.material_override.albedo_color = gradient_color
 			vector.material_override.emission = Color(0.8, 0.8, 0.2, 1) * gradient_strength * 0.4
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -328,7 +401,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * optimization_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_optimization_metrics(delta):
+func update_optimization_metrics(delta) -> void:
 	# Update loss meter (inverted - lower loss is better, so higher on meter)
 	var loss_indicator = $OptimizationMetrics/LossMeter/LossIndicator
 	if loss_indicator:
@@ -352,13 +425,13 @@ func update_optimization_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - normalized_lr)
 		lr_indicator.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func set_optimization_progress(progress: float):
+func set_optimization_progress(progress: float) -> void:
 	optimization_progress = clamp(progress, 0.0, 1.0)
 
-func set_loss_value(loss: float):
+func set_loss_value(loss: float) -> void:
 	loss_value = clamp(loss, 0.0, 1.0)
 
-func set_learning_rate(rate: float):
+func set_learning_rate(rate: float) -> void:
 	learning_rate = clamp(rate, 0.01, 1.0)
 
 func get_optimization_progress() -> float:
@@ -370,8 +443,28 @@ func get_loss_value() -> float:
 func get_learning_rate() -> float:
 	return learning_rate
 
-func reset_optimization():
+func reset_optimization() -> void:
+	var had_progress := optimization_progress > 0.1
 	time = 0.0
 	optimization_progress = 0.0
 	loss_value = 1.0
 	learning_rate = 0.5
+	if is_inside_tree() and had_progress:
+		_flash_reset()
+
+## Pulse the optimizer hub on reset for visual feedback
+func _flash_reset() -> void:
+	var hub = $OptimizationCore/OptimizerHub
+	if hub:
+		var tw := create_tween()
+		tw.tween_property(hub, "scale", Vector3.ONE * 1.5, 0.15)
+		tw.tween_property(hub, "scale", Vector3.ONE, 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

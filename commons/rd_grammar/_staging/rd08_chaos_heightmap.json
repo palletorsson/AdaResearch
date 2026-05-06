@@ -1,0 +1,23 @@
+{
+  "id": "rd08_chaos_heightmap",
+  "preset": "chaos",
+  "grid_size": 96,
+  "iterations": 5000,
+  "seed": 13,
+  "render_mode": "heightmap",
+  "height_amp": 0.9,
+  "color_lo": [
+    0.15,
+    0.1,
+    0.2
+  ],
+  "color_hi": [
+    1.0,
+    0.65,
+    0.3
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.5,
+  "layout": "rd_field",
+  "notes": "Chaotic parameters never reach equilibrium. Field evolves continuously \u00e2\u20ac\u201d 5000 iterations produces a perpetually-morphing ridge landscape."
+}

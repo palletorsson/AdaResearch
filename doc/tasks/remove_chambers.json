@@ -1,0 +1,142 @@
+{
+  "goal_id": "remove_chambers",
+  "goal_title": "Remove chamber maps; distribute gaming layer into every teaching map",
+  "why": "Chambers were bolted-on integration rooms. The biome + grammar + catalyst system already provides integration environmentally — every teaching map in a sequence inherits its ecosystem. Removing chambers simplifies the architecture and makes every map a complete experience rather than a setup for a finale.",
+  "success_criteria": [
+    "17 Chamber_* maps removed from sequence JSONs (not deleted yet — archived)",
+    "Every non-chamber map has biome wiring (BiomeRingComponent reading current sequence)",
+    "Every sequence exposes its catalyst mode in at least one non-chamber map",
+    "Creatures/hazards distributed to thematically-appropriate teaching maps",
+    "All 500 maps still pass pathfinder",
+    "VR walkthrough of primitives sequence confirms complete experience without chamber"
+  ],
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "remove_chambers.001",
+      "title": "Audit chamber uniqueness — what exists only in chambers?",
+      "spec": "Read each Chamber_*/map_data.json (17 maps). For each artifact placed there, check: does it appear in any other map? Produce doc/tasks/_audits/chamber_unique.md listing: (1) artifacts only-in-chambers that need relocation, (2) artifacts also elsewhere (chamber was just repeating), (3) narrative content (subtitles, utility_definitions) that needs to migrate.",
+      "effort": "1h",
+      "skill": "read",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "output": "doc/tasks/_audits/chamber_unique.md",
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture",
+        "map_placement",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "remove_chambers.002",
+      "title": "Design gaming-layer distribution rule",
+      "spec": "Write doc/curriculum_audit/_gaming_layer.md specifying: which teaching map gets the catalyst pedestal per sequence, which gets creatures (first, mid, or last map?), how friend/foe transitions happen, hazard grammar per sequence. Should be opinionated enough that 17 removals can follow mechanically.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "remove_chambers.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "output": "doc/curriculum_audit/_gaming_layer.md",
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture",
+        "map_placement",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "remove_chambers.003",
+      "title": "Prototype: convert primitives sequence (remove Chamber_Primitives)",
+      "spec": "Follow the distribution rule from task 002 for the primitives sequence only. (a) Read Chamber_Primitives/map_data.json contents. (b) Distribute becoming_catalyst, catalyst_target, science_screen content to appropriate teaching maps in the sequence. (c) Remove Chamber_Primitives from commons/maps/sequences/primitives.json maps[]. (d) Archive Chamber_Primitives folder to commons/maps/_archived_chambers/. (e) Verify all primitives-sequence maps pass pathfinder. (f) Document the moves in doc/tasks/_audits/primitives_distribution.md.",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [
+        "remove_chambers.002"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Chamber_Primitives"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "python tools/map_pathfinder.py check --all | grep === && ! grep -q Chamber_Primitives commons/maps/sequences/primitives.json",
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture",
+        "map_placement",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "remove_chambers.004",
+      "title": "VR verify primitives without chamber",
+      "spec": "Launch Ada in VR (or desktop), walk the primitives sequence. Write doc/tasks/_audits/primitives_vr_review.md: does the sequence feel complete? Does the catalyst appear at a good moment? Are creatures in right places? Do hazards create pressure without frustration?",
+      "effort": "1h",
+      "skill": "verify",
+      "depends_on": [
+        "remove_chambers.003"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "output": "doc/tasks/_audits/primitives_vr_review.md",
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture",
+        "map_placement",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "remove_chambers.005",
+      "title": "Apply to remaining 16 sequences",
+      "spec": "Once primitives is validated, repeat the pattern (tasks 001–003) for each other sequence. This should be split into 16 subtasks but can be a single focused effort if the pattern holds.",
+      "effort": "multi-day",
+      "skill": "edit",
+      "depends_on": [
+        "remove_chambers.004"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "transformation",
+        "color",
+        "forces",
+        "array_tutorial",
+        "wavefunctions",
+        "randomness",
+        "noise",
+        "cellularautomata",
+        "fractals",
+        "lsystems",
+        "proceduralgeneration",
+        "softbodies",
+        "swarmintelligence",
+        "machinelearning",
+        "foundationscrisis",
+        "qfeplaboratory"
+      ],
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture",
+        "map_placement",
+        "sequence_audit_dir"
+      ]
+    }
+  ]
+}

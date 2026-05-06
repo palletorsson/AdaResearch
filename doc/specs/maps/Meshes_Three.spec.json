@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Meshes_Three",
+  "home_sequence": "meshes",
+  "dimensions": {
+    "w": 7,
+    "d": 7
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.021,
+  "breath_zones": [
+    {
+      "size": 47,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 7
+      },
+      "centroid": [
+        2.9574468085106385,
+        2.9361702127659575
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "geometric_transformations"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 48,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

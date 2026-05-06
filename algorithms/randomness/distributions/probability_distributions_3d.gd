@@ -57,7 +57,7 @@ var grid_material: StandardMaterial3D = null
 var color_gradient = null
 
 # Called when the node enters the scene tree for the first time
-func _ready():
+func _ready() -> void:
 	# Initialize container nodes
 	setup_containers()
 	
@@ -75,7 +75,7 @@ func _ready():
 	generate_distribution()
 
 # Setup container nodes
-func setup_containers():
+func setup_containers() -> void:
 	# Main node for distribution points
 	distribution_points = Node3D.new()
 	distribution_points.name = "DistributionPoints"
@@ -97,7 +97,7 @@ func setup_containers():
 	add_child(ui_controls)
 
 # Setup materials and colors
-func setup_materials():
+func setup_materials() -> void:
 	# Material for points
 	point_material = StandardMaterial3D.new()
 	point_material.albedo_color = magenta_color
@@ -119,7 +119,7 @@ func setup_materials():
 	color_gradient.add_point(1.0, Color(0, 0, 1))  # Blue (low values)
 
 # Create grid
-func create_grid():
+func create_grid() -> void:
 	# Clear existing grid
 	for child in grid_lines.get_children():
 		child.queue_free()
@@ -246,7 +246,7 @@ func create_line(start: Vector3, end: Vector3, material: Material, is_axis: bool
 	return line_instance
 
 # Create axis label
-func create_axis_label(text: String, position: Vector3):
+func create_axis_label(text: String, position: Vector3) -> void:
 	var label = Label3D.new()
 	label.text = text
 	label.font_size = 24
@@ -256,7 +256,7 @@ func create_axis_label(text: String, position: Vector3):
 	grid_lines.add_child(label)
 
 # Create UI elements for interaction
-func create_ui():
+func create_ui() -> void:
 	# Clear previous UI
 	for child in ui_controls.get_children():
 		child.queue_free()
@@ -312,7 +312,7 @@ func create_info_panel():
 	return panel
 
 # Create buttons for switching distributions
-func create_distribution_buttons():
+func create_distribution_buttons() -> void:
 	var button_panel = Node3D.new()
 	button_panel.name = "ButtonPanel"
 	
@@ -400,7 +400,7 @@ func get_distribution_description() -> String:
 			return "No description available."
 
 # Initialize multimodal centers
-func initialize_multimodal_centers():
+func initialize_multimodal_centers() -> void:
 	multimodal_center_positions = []
 	
 	for i in range(multimodal_centers):
@@ -413,7 +413,7 @@ func initialize_multimodal_centers():
 		})
 
 # Process function - handles animation and interaction
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	if animate_distribution:
@@ -423,7 +423,7 @@ func _process(delta):
 	update_ui_facing()
 
 # Update distribution animations
-func update_animated_distribution(delta):
+func update_animated_distribution(delta) -> void:
 	match current_distribution:
 		"gaussian":
 			if rotating_distribution:
@@ -443,7 +443,7 @@ func update_animated_distribution(delta):
 			generate_distribution()
 
 # Keep UI facing the camera
-func update_ui_facing():
+func update_ui_facing() -> void:
 	if info_panel and info_panel.get_child_count() > 0:
 		var info_node = ui_controls.get_node_or_null("InfoPanel")
 		var button_panel = ui_controls.get_node_or_null("ButtonPanel")
@@ -455,13 +455,13 @@ func update_ui_facing():
 				var camera_pos = camera.global_transform.origin
 				
 				# Make the panel face the camera
-				info_node.look_at(camera_pos, Vector3.UP)
+				info_node.look_at_from_position(info_node.position, camera_pos, Vector3.UP)
 				
 				if button_panel:
-					button_panel.look_at(camera_pos, Vector3.UP)
+					button_panel.look_at_from_position(button_panel.position, camera_pos, Vector3.UP)
 
 # Generate the current distribution
-func generate_distribution():
+func generate_distribution() -> void:
 	# Clear existing points
 	for child in distribution_points.get_children():
 		child.queue_free()
@@ -481,7 +481,7 @@ func generate_distribution():
 	update_distribution_info()
 
 # Generate Gaussian distribution
-func generate_gaussian_distribution():
+func generate_gaussian_distribution() -> void:
 	# Calculate rotation in radians
 	var rot_rad = deg_to_rad(gaussian_rotation)
 	var cos_rot = cos(rot_rad)
@@ -519,7 +519,7 @@ func generate_gaussian_distribution():
 		create_distribution_point(x, height, z, value)
 
 # Generate Exponential distribution
-func generate_exponential_distribution():
+func generate_exponential_distribution() -> void:
 	# Calculate direction vector
 	var dir_rad = deg_to_rad(exponential_direction)
 	var dir_x = cos(dir_rad)
@@ -548,7 +548,7 @@ func generate_exponential_distribution():
 		create_distribution_point(x, height, z, value)
 
 # Generate Uniform distribution
-func generate_uniform_distribution():
+func generate_uniform_distribution() -> void:
 	# Calculate half dimensions
 	var half_width = uniform_width / 2
 	var half_height = uniform_height / 2
@@ -566,7 +566,7 @@ func generate_uniform_distribution():
 		create_distribution_point(x, uniform_thickness, z, value)
 
 # Generate Multimodal distribution
-func generate_multimodal_distribution():
+func generate_multimodal_distribution() -> void:
 	# Create points based on the distribution
 	for i in range(point_count):
 		# Generate uniform random points in [-grid_size, grid_size]
@@ -607,6 +607,7 @@ func create_distribution_point(x: float, y: float, z: float, value: float) -> Me
 	
 	# Size based on probability value
 	sphere.radius = 0.05 + value * 0.1
+	sphere.height = 0.05 + value * 0.1 * 2.0
 	point.mesh = sphere
 	
 	# Position
@@ -632,6 +633,7 @@ func create_center_marker(x: float, z: float) -> MeshInstance3D:
 	var sphere = SphereMesh.new()
 	
 	sphere.radius = 0.2
+	sphere.height = 0.4
 	marker.mesh = sphere
 	
 	marker.position = Vector3(x, 0.2, z)
@@ -647,7 +649,7 @@ func create_center_marker(x: float, z: float) -> MeshInstance3D:
 	return marker
 
 # Update info panel text
-func update_distribution_info():
+func update_distribution_info() -> void:
 	var info_node = ui_controls.get_node_or_null("InfoPanel")
 	if info_node:
 		var title_label = info_node.get_node_or_null("TitleLabel")
@@ -660,14 +662,14 @@ func update_distribution_info():
 			desc_label.text = get_distribution_description()
 
 # Method to change distribution type
-func set_distribution(dist_type: String):
+func set_distribution(dist_type: String) -> void:
 	if dist_type in ["gaussian", "exponential", "uniform", "multimodal"]:
 		current_distribution = dist_type
 		generate_distribution()
 		create_ui()  # Update UI to show the new selection
 
 # Parameter adjustment methods
-func set_gaussian_params(sigma_x: float, sigma_y: float, rotation: float):
+func set_gaussian_params(sigma_x: float, sigma_y: float, rotation: float) -> void:
 	gaussian_sigma_x = sigma_x
 	gaussian_sigma_y = sigma_y
 	gaussian_rotation = rotation
@@ -675,21 +677,21 @@ func set_gaussian_params(sigma_x: float, sigma_y: float, rotation: float):
 	if current_distribution == "gaussian":
 		generate_distribution()
 
-func set_exponential_params(lambda_val: float, direction: float):
+func set_exponential_params(lambda_val: float, direction: float) -> void:
 	exponential_lambda = lambda_val
 	exponential_direction = direction
 	
 	if current_distribution == "exponential":
 		generate_distribution()
 
-func set_uniform_params(width: float, height: float):
+func set_uniform_params(width: float, height: float) -> void:
 	uniform_width = width
 	uniform_height = height
 	
 	if current_distribution == "uniform":
 		generate_distribution()
 
-func set_multimodal_params(centers: int, sigma: float):
+func set_multimodal_params(centers: int, sigma: float) -> void:
 	multimodal_centers = centers
 	multimodal_sigma = sigma
 	initialize_multimodal_centers()
@@ -698,11 +700,11 @@ func set_multimodal_params(centers: int, sigma: float):
 		generate_distribution()
 
 # Toggle animation
-func set_animation(enabled: bool):
+func set_animation(enabled: bool) -> void:
 	animate_distribution = enabled
 
 # Method to handle input (would be replaced with proper VR interaction in the actual implementation)
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# This is a simplified version - in VR you would use proper controller interaction
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -720,3 +722,12 @@ func _input(event):
 				
 				if result and result.collider.has_meta("distribution"):
 					set_distribution(result.collider.get_meta("distribution"))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

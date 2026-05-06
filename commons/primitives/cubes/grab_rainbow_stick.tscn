@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://drwynvpcqs3d5"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_u82vu"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_4w1i0"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_tfadk"]
+[ext_resource type="Script" uid="uid://cegq55d1jncwf" path="res://commons/primitives/cubes/text_node.gd" id="6_ckwi5"]
+[ext_resource type="PackedScene" uid="uid://801v8wjrvkgv" path="res://commons/resourses/shaders/displayobjectposition/displayobjectposition.tscn" id="6_w7h7a"]
+[ext_resource type="Script" uid="uid://wsil35e7eaj8" path="res://commons/primitives/trails/mesmerizing_trail.gd" id="7_trail"]
+[ext_resource type="Shader" path="res://commons/resourses/shaders/rainbow_trail.gdshader" id="8_rainbow"]
+
+[sub_resource type="BoxShape3D" id="7"]
+margin = 0.01
+size = Vector3(0.0236115, 0.169395, 0.0203419)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhi2d"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="8"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvu24"]
+albedo_color = Color(1, 1, 1, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_w7h7a"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v82ba"]
+radius = 0.07304194
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ckwi5"]
+top_radius = 0.012
+bottom_radius = 0.014
+height = 1.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rainbow"]
+render_priority = 0
+shader = ExtResource("8_rainbow")
+shader_parameter/speed = 3.0
+shader_parameter/color_frequency = 2.5
+shader_parameter/wave_amplitude = 0.12
+shader_parameter/wave_frequency = 4.0
+shader_parameter/glow_intensity = 1.8
+shader_parameter/saturation = 0.95
+shader_parameter/brightness = 1.0
+
+[node name="GrabRainbowStick" instance=ExtResource("1_u82vu")]
+freeze = true
+script = ExtResource("2_4w1i0")
+alternate_material = null
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(-1.37323e-10, 0.999995, -0.00314159, 4.37112e-08, 0.00314159, 0.999995, 1, 0, -4.37114e-08, -0.608517, 7.98806e-05, -0.000782901)
+shape = SubResource("7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(-6.55671e-09, 0, -1.646, 0, 0.15, 0, 0.15, 0, -7.19489e-08, -0.608403, 0, 0)
+material_override = SubResource("StandardMaterial3D_hhi2d")
+mesh = SubResource("8")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_tfadk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.588657, 0, 0.0739675)
+
+[node name="Blade" type="Node3D" parent="." index="3"]
+
+[node name="Top" type="Node3D" parent="Blade" index="0"]
+
+[node name="Displayobjectposition" parent="Blade/Top" index="0" instance=ExtResource("6_w7h7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.994309, 0.331825, 0)
+
+[node name="TrackBall" type="MeshInstance3D" parent="Blade/Top" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00344, 0, 0)
+material_override = SubResource("StandardMaterial3D_rvu24")
+mesh = SubResource("SphereMesh_w7h7a")
+skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Blade/Top/TrackBall" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.129813, 0, 0)
+light_color = Color(1, 1, 1, 1)
+light_energy = 0.8
+
+[node name="TextNode" type="Node3D" parent="Blade/Top/TrackBall" index="1"]
+script = ExtResource("6_ckwi5")
+manifesto_text = ""
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Blade/Top/TrackBall" index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blade/Top/TrackBall/StaticBody3D" index="0"]
+shape = SubResource("SphereShape3D_v82ba")
+
+[node name="Blade" type="MeshInstance3D" parent="Blade" index="1"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.222, 0, 0)
+mesh = SubResource("CylinderMesh_ckwi5")
+skeleton = NodePath("")
+
+[node name="RainbowTrail" type="MeshInstance3D" parent="." index="4"]
+top_level = true
+material_override = SubResource("ShaderMaterial_rainbow")
+script = ExtResource("7_trail")
+target_path = NodePath("../Blade/Top/TrackBall")
+trail_length = 120
+width = 0.25
+min_distance = 0.03

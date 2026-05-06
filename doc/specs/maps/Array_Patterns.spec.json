@@ -1,0 +1,95 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Array_Patterns",
+  "home_sequence": "array_tutorial",
+  "dimensions": {
+    "w": 11,
+    "d": 11
+  },
+  "signature": "pattern_tile_4x4/brick/herringbone/mirror demonstrate four tiling approaches; vr_tile_editor_mirror makes symmetry interactive; tiling_demo generates the complete pattern; facade_grammar_demo extends tiling to architectural grammar; dark_sphere anchors the space.",
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.092,
+  "breath_zones": [
+    {
+      "size": 108,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 11
+      },
+      "centroid": [
+        4.916666666666667,
+        5.027777777777778
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 1,
+      "token": "pattern_tile_4x4"
+    },
+    {
+      "x": 5,
+      "z": 1,
+      "token": "vr_tile_editor_mirror"
+    },
+    {
+      "x": 7,
+      "z": 1,
+      "token": "pattern_tile_mirror"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "tiling_demo"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 7,
+      "z": 4,
+      "token": "pattern_tile_plate"
+    },
+    {
+      "x": 3,
+      "z": 6,
+      "token": "panel_bridge_loom"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "grid_model"
+    },
+    {
+      "x": 9,
+      "z": 8,
+      "token": "facade_grammar_demo"
+    },
+    {
+      "x": 3,
+      "z": 9,
+      "token": "pattern_tile_brick"
+    },
+    {
+      "x": 7,
+      "z": 9,
+      "token": "pattern_tile_herringbone"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 120,
+    "breath_zone_count": 1,
+    "unique_tokens": 11
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "Euclid_Parallel",
+  "title": "The Fifth Postulate",
+  "description": "The fifth postulate that held geometry together for 2000 years. Through one point, exactly one line parallel to a given line. What if it weren't true?",
+  "dimensions": {
+    "rows": 15,
+    "cols": 11
+  },
+  "n_artifacts": 4,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    13,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "science_screen",
+      "row": 4,
+      "col": 9,
+      "family": "shaders"
+    },
+    {
+      "name": "parallel_lines",
+      "row": 5,
+      "col": 3,
+      "family": "primitives"
+    },
+    {
+      "name": "angle_sum_triangle",
+      "row": 5,
+      "col": 7,
+      "family": "foundations"
+    },
+    {
+      "name": "euclid_postulates_plaque",
+      "row": 7,
+      "col": 5,
+      "family": "substrate_vectors"
+    }
+  ]
+}

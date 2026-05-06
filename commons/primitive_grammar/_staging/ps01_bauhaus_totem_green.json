@@ -1,0 +1,24 @@
+{
+  "id": "ps01_bauhaus_totem_green",
+  "notes": "Siedhoff-Buscher Bauspiel (1923) \u00e2\u20ac\u201d green-sphere totem. Sphere on cube on stepped base.",
+  "layout": "vertical_stack",
+  "palette": "bauhaus",
+  "base_scale": 0.25,
+  "sequence": [
+    {
+      "shape": "cuboid",
+      "color": "#d6a85e",
+      "scale": 1.3
+    },
+    {
+      "shape": "cube",
+      "color": "#e8a846",
+      "scale": 1.0
+    },
+    {
+      "shape": "sphere",
+      "color": "#4a6b5e",
+      "scale": 1.3
+    }
+  ]
+}

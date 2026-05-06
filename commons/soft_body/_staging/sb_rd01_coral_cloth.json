@@ -1,0 +1,47 @@
+{
+  "id": "sb_rd01_coral_cloth",
+  "topology": "rd_field",
+  "rd": {
+    "preset": "coral",
+    "grid_size": 48,
+    "iterations": 3500,
+    "seed": 17,
+    "threshold": 0.28,
+    "cell_size": 0.08,
+    "pin_mode": "top_corners"
+  },
+  "stiffness": 0.65,
+  "damping": 0.993,
+  "gravity": [
+    0.3,
+    -9.8,
+    0.1
+  ],
+  "floor_y": -3.0,
+  "constraint_passes": 4,
+  "steps": 100,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.15,
+  "render": {
+    "color": [
+      0.9,
+      0.55,
+      0.3
+    ],
+    "roughness": 0.55,
+    "particle_radius": 0.02,
+    "show_wires": true,
+    "wire_color": [
+      0.2,
+      0.1,
+      0.08
+    ]
+  },
+  "layout": "rd_bridge",
+  "notes": "DNA BRIDGE: Gray-Scott coral pattern \u2192 soft-body cloth. Coral cells become particles, 4-neighbors become springs, pinned at corners. Coral tapestry hanging like a bleached reef fragment."
+}

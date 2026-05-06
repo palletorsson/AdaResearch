@@ -6,6 +6,7 @@
 [node name="Infokiosk" type="Node3D"]
 
 [node name="messageconsole" parent="." instance=ExtResource("1_dy8dg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.205083, 1.05538, 0.321242)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.205083, 1.05538, -0.28074455)
 
 [node name="VerticalStatusMonitor" parent="." instance=ExtResource("2_v2vn7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6019865)

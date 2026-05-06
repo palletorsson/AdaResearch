@@ -1,0 +1,103 @@
+{
+  "id": "morph25_bio_shrine_bed",
+  "family": "bio_furniture",
+  "notes": "Extreme shrine bed: a low sleeping plinth wrapped by one huge rear slab and one smaller side slab, as if the furniture were also an altar wall.",
+  "camera_yaw": 0.78,
+  "camera_pitch": 0.28,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.52,
+      0.42,
+      1.04
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "shrine_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 1.38
+      },
+      "child_role": "body",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "shrine_mattress",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.14,
+        "scale": 0.9,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.08,
+          0.04
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "shrine_back_wall",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.34,
+        "scale": 0.86,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          1.06,
+          -0.08
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "shrine_side_wall",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.82,
+        "scale": 0.62,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.18,
+          0.54,
+          0.12
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

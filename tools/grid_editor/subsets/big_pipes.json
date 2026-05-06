@@ -1,0 +1,222 @@
+{
+  "id": "big_pipes",
+  "name": "Big Pipes",
+  "version": "1.2",
+  "description": "Industrial drain pipe system for map decoration",
+  "orientation": {
+    "plane": "XZ",
+    "up_axis": "Y",
+    "forward": "+Z",
+    "grid_size": 2.0,
+    "comment": "2m per cell. Top-down view: X=left/right, Z=forward/back"
+  },
+  "categories": [
+    {"id": "basic", "name": "Basic", "color": "#607D8B"},
+    {"id": "turns", "name": "Turns", "color": "#795548"},
+    {"id": "junctions", "name": "Junctions", "color": "#FF9800"},
+    {"id": "vertical", "name": "Vertical", "color": "#9E9E9E"},
+    {"id": "terminals", "name": "Terminals", "color": "#F44336"}
+  ],
+  "presets": [
+    {
+      "id": "straight_run",
+      "name": "Straight Run",
+      "description": "Simple pipeline: capped start → straight segments → capped end. Industrial backbone.",
+      "grid_size": [8, 3],
+      "placements": [
+        {"element": "end_cap", "position": [0, 1], "rotation": 0},
+        {"element": "straight", "position": [1, 1], "rotation": 0},
+        {"element": "straight", "position": [2, 1], "rotation": 0},
+        {"element": "straight", "position": [3, 1], "rotation": 0},
+        {"element": "straight", "position": [4, 1], "rotation": 0},
+        {"element": "straight", "position": [5, 1], "rotation": 0},
+        {"element": "straight", "position": [6, 1], "rotation": 0},
+        {"element": "end_cap", "position": [7, 1], "rotation": 180}
+      ]
+    },
+    {
+      "id": "l_bend",
+      "name": "L-Bend",
+      "description": "Right-angle turn with straight runs on each side. Standard corner routing.",
+      "grid_size": [6, 6],
+      "placements": [
+        {"element": "end_cap", "position": [0, 2], "rotation": 0},
+        {"element": "straight", "position": [1, 2], "rotation": 0},
+        {"element": "straight", "position": [2, 2], "rotation": 0},
+        {"element": "corner_right", "position": [3, 2], "rotation": 0},
+        {"element": "straight", "position": [3, 3], "rotation": 90},
+        {"element": "straight", "position": [3, 4], "rotation": 90},
+        {"element": "end_cap", "position": [3, 5], "rotation": 90}
+      ]
+    },
+    {
+      "id": "t_distribution",
+      "name": "T-Distribution",
+      "description": "Main line splits into two branches via T-junction. Feed system for parallel processing.",
+      "grid_size": [8, 6],
+      "placements": [
+        {"element": "end_cap", "position": [0, 3], "rotation": 0},
+        {"element": "straight", "position": [1, 3], "rotation": 0},
+        {"element": "straight", "position": [2, 3], "rotation": 0},
+        {"element": "t_junction", "position": [3, 3], "rotation": 0},
+        {"element": "straight", "position": [4, 3], "rotation": 0},
+        {"element": "end_cap", "position": [5, 3], "rotation": 180},
+        {"element": "straight", "position": [3, 1], "rotation": 90},
+        {"element": "straight", "position": [3, 2], "rotation": 90},
+        {"element": "end_cap", "position": [3, 0], "rotation": 270}
+      ]
+    },
+    {
+      "id": "serpentine",
+      "name": "Serpentine",
+      "description": "Back-and-forth pipe runs covering a rectangular area. Cooling or heating pattern.",
+      "grid_size": [8, 8],
+      "placements": [
+        {"element": "end_cap", "position": [0, 0], "rotation": 0},
+        {"element": "straight", "position": [1, 0], "rotation": 0},
+        {"element": "straight", "position": [2, 0], "rotation": 0},
+        {"element": "straight", "position": [3, 0], "rotation": 0},
+        {"element": "straight", "position": [4, 0], "rotation": 0},
+        {"element": "straight", "position": [5, 0], "rotation": 0},
+        {"element": "corner_right", "position": [6, 0], "rotation": 0},
+        {"element": "straight", "position": [6, 1], "rotation": 90},
+        {"element": "corner_left", "position": [6, 2], "rotation": 180},
+        {"element": "straight", "position": [5, 2], "rotation": 0},
+        {"element": "straight", "position": [4, 2], "rotation": 0},
+        {"element": "straight", "position": [3, 2], "rotation": 0},
+        {"element": "straight", "position": [2, 2], "rotation": 0},
+        {"element": "straight", "position": [1, 2], "rotation": 0},
+        {"element": "corner_left", "position": [0, 2], "rotation": 0},
+        {"element": "straight", "position": [0, 3], "rotation": 90},
+        {"element": "corner_right", "position": [0, 4], "rotation": 0},
+        {"element": "straight", "position": [1, 4], "rotation": 0},
+        {"element": "straight", "position": [2, 4], "rotation": 0},
+        {"element": "straight", "position": [3, 4], "rotation": 0},
+        {"element": "straight", "position": [4, 4], "rotation": 0},
+        {"element": "straight", "position": [5, 4], "rotation": 0},
+        {"element": "end_cap", "position": [6, 4], "rotation": 180}
+      ]
+    },
+    {
+      "id": "vertical_bypass",
+      "name": "Vertical Bypass",
+      "description": "Main line with a vertical bypass loop — pipes go up and come back down.",
+      "grid_size": [8, 4],
+      "placements": [
+        {"element": "end_cap", "position": [0, 2], "rotation": 0},
+        {"element": "straight", "position": [1, 2], "rotation": 0},
+        {"element": "up", "position": [2, 2], "rotation": 0},
+        {"element": "straight", "position": [3, 2], "rotation": 0},
+        {"element": "down", "position": [4, 2], "rotation": 0},
+        {"element": "straight", "position": [5, 2], "rotation": 0},
+        {"element": "end_cap", "position": [6, 2], "rotation": 180}
+      ]
+    },
+    {
+      "id": "cross_manifold",
+      "name": "Cross Manifold",
+      "description": "Central cross junction with four capped branches. Distribution hub.",
+      "grid_size": [7, 7],
+      "placements": [
+        {"element": "end_cap", "position": [3, 0], "rotation": 270},
+        {"element": "straight", "position": [3, 1], "rotation": 90},
+        {"element": "straight", "position": [3, 2], "rotation": 90},
+        {"element": "cross", "position": [3, 3], "rotation": 0},
+        {"element": "straight", "position": [3, 4], "rotation": 90},
+        {"element": "straight", "position": [3, 5], "rotation": 90},
+        {"element": "end_cap", "position": [3, 6], "rotation": 90},
+        {"element": "end_cap", "position": [0, 3], "rotation": 0},
+        {"element": "straight", "position": [1, 3], "rotation": 0},
+        {"element": "straight", "position": [2, 3], "rotation": 0},
+        {"element": "straight", "position": [4, 3], "rotation": 0},
+        {"element": "straight", "position": [5, 3], "rotation": 0},
+        {"element": "end_cap", "position": [6, 3], "rotation": 180}
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "id": "straight",
+      "name": "Straight",
+      "category": "basic",
+      "size": [1, 1],
+      "icon": "─",
+      "description": "Straight pipe segment",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_straight.tscn"
+    },
+    {
+      "id": "corner_left",
+      "name": "Corner Left",
+      "category": "turns",
+      "size": [1, 1],
+      "icon": "╭",
+      "description": "90° corner, turns left",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_corner.tscn",
+      "rotation_y": 90
+    },
+    {
+      "id": "corner_right",
+      "name": "Corner Right",
+      "category": "turns",
+      "size": [1, 1],
+      "icon": "╮",
+      "description": "90° corner, turns right",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_corner.tscn",
+      "rotation_y": 0
+    },
+    {
+      "id": "sbend",
+      "name": "S-Bend",
+      "category": "turns",
+      "size": [2, 1],
+      "icon": "∿",
+      "description": "S-curve lateral shift",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_s_bend.tscn"
+    },
+    {
+      "id": "t_junction",
+      "name": "T-Junction",
+      "category": "junctions",
+      "size": [1, 1],
+      "icon": "┬",
+      "description": "Three-way T-junction",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_t_junction.tscn"
+    },
+    {
+      "id": "cross",
+      "name": "Cross",
+      "category": "junctions",
+      "size": [1, 1],
+      "icon": "┼",
+      "description": "Four-way cross junction",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_cross.tscn"
+    },
+    {
+      "id": "up",
+      "name": "Bend Up",
+      "category": "vertical",
+      "size": [1, 1],
+      "icon": "↑",
+      "description": "Bends upward out of ground plane",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_vertical_up.tscn"
+    },
+    {
+      "id": "down",
+      "name": "Bend Down",
+      "category": "vertical",
+      "size": [1, 1],
+      "icon": "↓",
+      "description": "Bends downward into ground",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_vertical_down.tscn"
+    },
+    {
+      "id": "end_cap",
+      "name": "End Cap",
+      "category": "terminals",
+      "size": [1, 1],
+      "icon": "●",
+      "description": "Sealed pipe end",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_end_cap.tscn"
+    }
+  ]
+}

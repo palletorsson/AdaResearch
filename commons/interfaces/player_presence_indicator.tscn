@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b28bio2nqfvi"]
+
+[ext_resource type="Script" uid="uid://bp20i6j25a5m2" path="res://commons/interfaces/player_presence_indicator.gd" id="1_o38ut"]
+
+[node name="PlayerPresenceIndicator" type="Node3D"]
+script = ExtResource("1_o38ut")
+
+[node name="StatusLabel" type="Label3D" parent="."]

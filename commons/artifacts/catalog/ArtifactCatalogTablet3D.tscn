@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlvg8j4r3xpq2"]
+
+[ext_resource type="Script" path="res://commons/artifacts/catalog/ArtifactCatalogTablet3D.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://ckvgvbu0s56o" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c5m6j4r8yx0kl" path="res://commons/artifacts/catalog/ui/ArtifactCatalogUI.tscn" id="3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tablet"]
+size = Vector3(1.6, 1.2, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tablet"]
+size = Vector3(1.6, 1.2, 0.1)
+
+[node name="ArtifactCatalogTablet3D" type="Node3D" groups=["artifact_catalog_kiosk"]]
+script = ExtResource("1")
+screen_width = 1.6
+screen_height = 1.2
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("2")]
+screen_size = Vector2(1.6, 1.2)
+viewport_size = Vector2(1600, 1200)
+scene = ExtResource("3")
+transparent = false
+
+[node name="TabletBacking" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03)
+mesh = SubResource("BoxMesh_tablet")
+
+[node name="InteractionArea" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_tablet")

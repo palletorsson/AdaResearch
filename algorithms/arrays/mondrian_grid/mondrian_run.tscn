@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5xyi50f13kcx"]
+
+[ext_resource type="Script" uid="uid://dkrmc4arvqnqx" path="res://algorithms/arrays/mondrian_grid/mondrian_generator_3d.gd" id="1_generator"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_bottom_color = Color(0.2, 0.2, 0.2, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="MondrianRun" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MondrianGenerator3D" type="Node3D" parent="."]
+script = ExtResource("1_generator")
+min_block_size = 1
+line_thickness = 0.3
+spawner_spacing = null
+spawner_offset = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5589614, 0.8291937, 0, -0.8291937, 0.5589614, 0, 7.7962093, 10.138665)
+

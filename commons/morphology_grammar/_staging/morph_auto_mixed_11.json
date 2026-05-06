@@ -1,0 +1,128 @@
+{
+  "id": "morph_auto_mixed_11",
+  "family": "mixed_forms",
+  "notes": "Auto-generated mixed-family candidate from bio_furniture, drag_avant_garde, scifi_props.",
+  "camera_yaw": 0.71,
+  "camera_pitch": 0.323,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.116,
+      0.711,
+      0.608
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "mixed_11_01_shrine_side_wall",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.603,
+        "scale": 0.522,
+        "normal_bias": 1.099,
+        "world_bias": [
+          0.212,
+          0.458,
+          0.139
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.074
+    },
+    {
+      "id": "mixed_11_02_triptych_back_leaf",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.708,
+        "scale": 0.621,
+        "normal_bias": 0.883,
+        "world_bias": [
+          -0.013,
+          0.515,
+          -0.066
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "mixed_11_03_cradle_base_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 1.569,
+        "rows": 2.285,
+        "select": "corners",
+        "length": 0.247,
+        "scale": 0.18
+      },
+      "child_role": "support",
+      "budget_factor": 0.024
+    },
+    {
+      "id": "mixed_11_04_harness_hanger_drop",
+      "when": {
+        "role": "support",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.709,
+        "scale": 0.106,
+        "normal_bias": 0.853,
+        "world_bias": [
+          -0.193,
+          -0.17,
+          -0.238
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.026
+    },
+    {
+      "id": "mixed_11_05_petal_back_fin",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.769,
+        "scale": 0.61,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.102,
+          0.493,
+          -0.383
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.101
+    }
+  ]
+}

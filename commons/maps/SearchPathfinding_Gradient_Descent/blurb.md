@@ -1,0 +1,3 @@
+A 12×12 grid. Eight columns, eight rows of open field at its center. Algorithms compete here — not against each other, but against expectation. Random walks trace drunk paths across cubes. Gaussian distributions pile height into bell curves. Columns vanish by coin flip. Profiles generate terrain no designer intended.
+
+Each algorithm reshapes the same grid differently. The walker staggers. The distribution clusters. The remover erases. The sculptor builds what no blueprint prescribed. Same space, same cubes, same rules of access — radically different outcomes. Randomness is not the absence of structure. It is structure's other name, the one it uses when no one is forcing legibility.

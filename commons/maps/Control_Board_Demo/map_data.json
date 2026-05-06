@@ -1,0 +1,135 @@
+{
+  "map_info": {
+	"name": "Control Board Demo",
+	"lookup_name": "Control_Board_Demo",
+	"description": "Black Mesa-style mission control room — three interactive console stations in a dark operations centre. Walk up, press buttons, move faders, watch the screens flicker.",
+	"version": "1.0",
+	"format": "json",
+	"dimensions": {
+	  "width": 15,
+	  "depth": 12,
+	  "max_height": 4
+	},
+	"metadata": {
+	  "difficulty": "exhibition",
+	  "category": "laboratory",
+	  "estimated_time": "exploration based",
+	  "learning_objectives": [
+		"Interact with VR control surfaces — sliders, buttons, switches",
+		"Observe procedural animation — CRT phosphor, VU needles, LED blink",
+        "Experience retro-tech aesthetic as inhabitable environment"
+	  ]
+	}
+  },
+  "utility_definitions": {
+	"t": {
+	  "type": "teleporter",
+	  "name": "Next",
+	  "description": "Continue to next step",
+	  "properties": {
+		"action": "next_in_sequence"
+	  }
+	}
+  },
+  "spawn_points": {
+	"default": {
+	  "position": [
+		7.0,
+		1.8,
+		10.0
+	  ],
+	  "rotation": [
+		0.0,
+		0.0,
+		0.0
+	  ],
+	  "description": "Back of the room — facing the control stations"
+	}
+  },
+  "tutorial_text": {
+	"control_board_main": {
+	  "title": "OPERATIONS CENTRE",
+	  "text": "Mission control. Move the faders — watch the VU meters respond. Press the coloured buttons — LEDs toggle. The screens run on their own. Approach a station and interact."
+	}
+  },
+  "lighting": {
+	"ambient_color": [
+	  0.15,
+	  0.18,
+	  0.25
+	],
+	"ambient_energy": 0.2,
+	"directional_light": {
+	  "enabled": true,
+	  "direction": [
+		-0.2,
+		-0.9,
+		-0.1
+	  ],
+	  "color": [
+		0.6,
+		0.65,
+		0.8
+	  ],
+	  "energy": 0.3
+	}
+  },
+  "settings": {
+	"cube_size": 1.0,
+	"gutter": 0.0,
+	"show_grid": false,
+	"enable_physics": true,
+	"background": {
+	  "type": "sky",
+	  "color": [
+		0.03,
+		0.04,
+		0.06
+	  ]
+	}
+  },
+  "layers": {
+	"structure": [
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","0","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
+	],
+	"utilities": [
+	  ["s"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," ","t"," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+	],
+	"interactables": [
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," ","tt:control_board_main:180:1.0"," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," ","control_board:0:1.0"," "," "," "," "," "," "," ","control_board:0:1.0"," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," ","control_board:0:0.7"," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+	]
+  }
+}

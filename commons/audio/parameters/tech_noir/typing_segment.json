@@ -1,0 +1,44 @@
+{
+	"typing_segment": {
+		"_metadata": {
+			"sound_type": "typing_segment",
+			"description": "Computer keyboard typing sounds for office ambience",
+			"tags": "typing, keyboard, computer, office, mechanical",
+			"created_at": "2025-01-07T00:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"buffer_length": {
+				"value": 4.0,
+				"min": 2.0,
+				"max": 10.0,
+				"step": 0.5
+			},
+			"typing_speed": {
+				"value": 0.15,
+				"min": 0.05,
+				"max": 0.5,
+				"step": 0.01
+			},
+			"key_volume_min": {
+				"value": 0.15,
+				"min": 0.05,
+				"max": 0.3,
+				"step": 0.01
+			},
+			"key_volume_max": {
+				"value": 0.35,
+				"min": 0.2,
+				"max": 0.7,
+				"step": 0.01
+			},
+			"seed": {
+				"value": -1,
+				"min": -1,
+				"max": 10000,
+				"step": 1
+			}
+		}
+	}
+}

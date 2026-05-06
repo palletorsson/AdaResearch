@@ -23,6 +23,7 @@ viewport_path = NodePath("Viewport")
 [node name="InfoBoard" type="Node3D"]
 transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0, 0, 0)
 script = ExtResource("1_wlbfx")
+animate_text = true
 
 [node name="Viewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -116,6 +117,24 @@ theme_override_font_sizes/font_size = 18
 text = "A meta-quest into the world of algorithms"
 autowrap_mode = 2
 
+[node name="ContextHint" type="Label" parent="Viewport/InfoBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -30.0
+offset_right = 250.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.91377574, 0.51736957, 1, 1)
+theme_override_font_sizes/font_size = 17
+text = "Press (X) for Context"
+horizontal_alignment = 1
+
 [node name="Barcode" type="Label" parent="Viewport/InfoBoardUI/MainPanel"]
 visible = false
 layout_mode = 1
@@ -192,7 +211,7 @@ offset_right = 100.0
 offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 text = "Ada Research"
 horizontal_alignment = 1
 

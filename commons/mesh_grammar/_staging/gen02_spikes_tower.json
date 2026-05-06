@@ -1,0 +1,32 @@
+{
+  "id": "gen02_spikes_tower",
+  "notes": "Stepped tower with spike crown \u2014 fantasy castle.",
+  "seed": "cube",
+  "seed_scale": 0.5,
+  "generations": 3,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.15
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.35,
+        "scale": 0.8
+      }
+    },
+    {
+      "op": "petal_splay",
+      "selector": "tag:extruded_top",
+      "params": {
+        "splay": 0.5,
+        "length": 0.3
+      }
+    }
+  ]
+}

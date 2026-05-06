@@ -1,89 +1,100 @@
-# TimelineController.gd
+# TimelineController.gd - VR timeline controls using push buttons
 extends Control
 
-# UI References
-@onready var record_button = $VBoxContainer/ControlPanel/RecordButton
-@onready var play_button = $VBoxContainer/ControlPanel/PlayButton
-@onready var stop_button = $VBoxContainer/ControlPanel/StopButton
-@onready var clear_button = $VBoxContainer/ControlPanel/ClearButton
-@onready var zoom_slider = $VBoxContainer/ControlPanel/ZoomSlider
-@onready var scroll_slider = $VBoxContainer/ControlPanel/ScrollSlider
-@onready var timeline_area = $VBoxContainer/TimelineArea
+# Button references
+var record_button: Node3D
+var play_button: Node3D
+var stop_button: Node3D
+var clear_button: Node3D
 
 # Timeline visualizer
 var timeline_visualizer: SoundTimelineVisualizer
 
-func _ready():
+# Button labels
+var _record_label: Label3D
+var _play_label: Label3D
+
+func _ready() -> void:
 	# Create the timeline visualizer
 	timeline_visualizer = SoundTimelineVisualizer.new()
-	timeline_area.add_child(timeline_visualizer)
-	
-	# Connect UI signals
-	connect_ui_signals()
-	
+	add_child(timeline_visualizer)
+	timeline_visualizer.position = Vector3(0, -0.05, 0)
+
+	# Create VR push buttons
+	_create_buttons()
+
 	# Start with recording enabled
 	timeline_visualizer.start_recording()
 
-func connect_ui_signals():
-	if record_button:
-		record_button.pressed.connect(_on_record_pressed)
-	if play_button:
-		play_button.pressed.connect(_on_play_pressed)
-	if stop_button:
-		stop_button.pressed.connect(_on_stop_pressed)
-	if clear_button:
-		clear_button.pressed.connect(_on_clear_pressed)
-	if zoom_slider:
-		zoom_slider.value_changed.connect(_on_zoom_changed)
-	if scroll_slider:
-		scroll_slider.value_changed.connect(_on_scroll_changed)
+func _create_buttons() -> void:
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("TIMELINE", [
+		[{"type": "button", "label": "REC"}, {"type": "button", "label": "PLAY"},
+		 {"type": "button", "label": "STOP"}, {"type": "button", "label": "CLEAR"}],
+	])
+	panel.position = Vector3(0, 0, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-func _on_record_pressed():
+	record_button = panel.find_child("Btn_0", true, false)
+	play_button = panel.find_child("Btn_1", true, false)
+	stop_button = panel.find_child("Btn_2", true, false)
+	clear_button = panel.find_child("Btn_3", true, false)
+
+	if record_button:
+		var area = record_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_record_pressed)
+	if play_button:
+		var area = play_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_play_pressed)
+	if stop_button:
+		var area = stop_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_stop_pressed)
+	if clear_button:
+		var area = clear_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_clear_pressed)
+
+func _on_record_pressed() -> void:
 	if timeline_visualizer.is_recording:
 		timeline_visualizer.stop_recording()
-		record_button.text = "Record"
-		record_button.modulate = Color.WHITE
+		_record_label.text = "REC"
+		_record_label.modulate = Color.RED
 	else:
 		timeline_visualizer.start_recording()
-		record_button.text = "Stop Rec"
-		record_button.modulate = Color.RED
+		_record_label.text = "STOP REC"
+		_record_label.modulate = Color(1, 0.3, 0.3)
 
-func _on_play_pressed():
+func _on_play_pressed() -> void:
 	if timeline_visualizer.is_playing and not timeline_visualizer.is_recording:
 		timeline_visualizer.stop_playback()
-		play_button.text = "Play"
-		play_button.modulate = Color.WHITE
+		_play_label.text = "PLAY"
+		_play_label.modulate = Color.GREEN
 	else:
 		timeline_visualizer.start_playback()
-		play_button.text = "Pause"
-		play_button.modulate = Color.GREEN
+		_play_label.text = "PAUSE"
+		_play_label.modulate = Color(0.3, 1.0, 0.3)
 
-func _on_stop_pressed():
+func _on_stop_pressed() -> void:
 	timeline_visualizer.stop_playback()
 	timeline_visualizer.stop_recording()
-	
-	# Reset button states
-	play_button.text = "Play"
-	play_button.modulate = Color.WHITE
-	record_button.text = "Record"
-	record_button.modulate = Color.WHITE
 
-func _on_clear_pressed():
+	_play_label.text = "PLAY"
+	_play_label.modulate = Color.GREEN
+	_record_label.text = "REC"
+	_record_label.modulate = Color.RED
+
+func _on_clear_pressed() -> void:
 	timeline_visualizer.clear_timeline()
-	_on_stop_pressed()  # Also stop any current operations
+	_on_stop_pressed()
 
-func _on_zoom_changed(value: float):
-	if timeline_visualizer:
-		timeline_visualizer.set_zoom(value)
+func apply_grid_config(config: Dictionary) -> void:
+	pass
 
-func _on_scroll_changed(value: float):
-	if timeline_visualizer:
-		timeline_visualizer.set_scroll(value)
-
-func _process(delta):
-	# Update UI based on timeline state
-	if timeline_visualizer:
-		# Update scroll slider max value based on timeline content
-		var timeline_duration = timeline_visualizer.get_timeline_duration()
-		if timeline_duration > 0 and scroll_slider:
-			scroll_slider.max_value = max(0.0, 1.0 - (timeline_visualizer.timeline_width / (timeline_duration * 60.0)))
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()

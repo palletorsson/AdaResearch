@@ -1,0 +1,36 @@
+{
+  "id": "ls05_classic_tree_as_softbody",
+  "axiom": "F",
+  "rules": {
+    "F": "F[+F]F[-F]F"
+  },
+  "iterations": 3,
+  "angle_deg": 25.7,
+  "step_len": 0.12,
+  "step_shrink": 0.72,
+  "interpretation": "softbody",
+  "sb_stiffness": 0.6,
+  "sb_gravity": [
+    0.3,
+    -9.8,
+    0
+  ],
+  "sb_steps": 100,
+  "color_trunk": [
+    0.3,
+    0.25,
+    0.15
+  ],
+  "color_tip": [
+    0.6,
+    0.7,
+    0.2
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.15,
+  "layout": "tree",
+  "dna_connections": [
+    "soft_body"
+  ],
+  "notes": "Same plant DNA fed as spring-mass topology into soft_body_sim. Side wind pulls the tree \u00e2\u20ac\u201d L-system as physical skeleton."
+}

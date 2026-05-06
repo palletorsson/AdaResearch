@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Facade_Custom_Composition",
+  "home_sequence": "facades",
+  "dimensions": {
+    "w": 14,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.012,
+  "breath_zones": [
+    {
+      "size": 165,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 12
+      },
+      "centroid": [
+        6.509090909090909,
+        5.515151515151516
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "facade_builder"
+    },
+    {
+      "x": 7,
+      "z": 2,
+      "token": "facade_grammar_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

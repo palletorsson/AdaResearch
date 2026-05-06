@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://csc10co35gsem"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_2d5xq"]
+radial_segments = 4
+rings = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0, 0.8, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="FallingCube" type="RigidBody3D"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_2d5xq")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1")

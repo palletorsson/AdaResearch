@@ -1,0 +1,1 @@
+This map gathers the current winner from each gallery into a single VR room. It does not try to rebuild every system live. It gives you a fast spatial overview of which galleries are producing the strongest forms right now.

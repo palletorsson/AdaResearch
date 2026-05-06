@@ -1,0 +1,1 @@
+Release the object and watch it fly. Your hand's velocity at release becomes the initial velocity vector. Gravity adds its downward pull each frame. The arc is not calculated in advance — it emerges from the rules. Throw harder, throw higher, throw at different angles. Physics plays out.

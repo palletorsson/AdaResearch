@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://mg8olfwbvm8a" path="res://algorithms/transformation/quantum_field/quantum_field.gd" id="1_q7k3m"]
+
+[node name="QuantumField" type="Node3D"]
+script = ExtResource("1_q7k3m")

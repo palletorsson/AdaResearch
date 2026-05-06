@@ -1,0 +1,15 @@
+# Data that rhymes — the pattern tile and the politics of rule-generated ornament
+
+A tile is a small grid with a rule that assigns a colour to each cell. The rule can be simple: colour black when (x + y) is even, colour white otherwise. The resulting pattern is a checkerboard, and the checkerboard is a famous object in the history of ornament — it is one of the first patterns a child can draw and one of the first structures a tiling algorithm can produce.
+
+Owen Jones's 1856 *Grammar of Ornament* argued that decorative patterns are generated from a small set of principles applied consistently across a surface. Jones catalogued patterns from every tradition he could access and proposed that the underlying grammar was universal. Tutorial_Pattern stages Jones's argument computationally. The grammar is a rule; the surface is the tile; the ornament is the rule's output.
+
+Four small tile stations sit around the room. Each station holds a tiny grid and a rule. The first rule is the checkerboard. The second is a wave: colour scales with sin(x). The third combines x and y multiplicatively. The fourth exposes the full expression as an editable string, so the learner can write their own rule and watch the tiles respond. The progression is from fixed grammar to open grammar, and the openness is the map's final gesture.
+
+A large preview board on the wall takes whichever rule is active and tiles it across a much bigger surface. The local pattern scales to global ornament, and the scaling is not cosmetic; it demonstrates that a small rule produces a large pattern without additional work. Jones's grammar is multiplicative in this sense: a few principles, applied at scale, produce whole visual traditions.
+
+The politics of rule-generated ornament are in the cultural traffic the rules claim to describe. Jones's book included patterns from Islamic, Egyptian, Chinese, Greek, and Renaissance traditions, and he presented them all as instances of a shared grammar. Later scholarship has pushed back: flattening traditions into a universal grammar erases the specific histories and meanings each tradition carries. The map holds Jones's move lightly — its rules produce pretty patterns, and the prettiness does not claim to explain any specific tradition's ornament.
+
+The mode toggle between direct and mirrored tiling is where the map's argument about ornament's rules becomes interactive. Turning simple rules into kaleidoscopic variants takes only a flip-and-copy operation, and the operation multiplies the visual complexity dramatically. The complexity is not earned by new rules; it is earned by a symmetry operation applied to the existing rule, and the map makes the operation available to the learner.
+
+Within the sequence, Tutorial_Pattern is where arrays stop being data containers and become pattern generators. The learner leaves knowing that data rhymes because a rule makes it rhyme, and that choosing which rule to apply is the work of pattern-making. Array_Patterns will next push the move into full wallpaper-group symmetries, and the rule-grammar relationship will become the subject of the next map rather than a byproduct of this one.

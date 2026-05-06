@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: three labeled CSGCylinder3D axes (X=red, Y=green, Z=blue) assembled into a pickable coordinate reference object that the player can hold in their hand
+# desire: to hold space in your hand — to pick up the XYZ gadget and reorient it until you understand that X, Y, and Z are directions relative to you, not absolute truths about the world
+# critical_parameter: initial_scale — at 3.2x the gadget is large enough to read labels comfortably in VR; at 1.0 it would be too small to hold and read simultaneously
+# triggers: grabbing the object lets the player physically rotate it, embodying the relationship between coordinate axes; the axes' emission glow makes them readable in dark VR environments
+# emerges: students consistently discover that "X goes right" is only true when you're looking in the default direction — rotating the gadget breaks this assumption and makes coordinates genuinely spatial rather than notational
+# needs: colored axis cylinders [has]; pickup physics [has via grab_sphere]; Label3D axis labels [has]; no slider or button controls [has none needed]
+# relationships: appears in Tutorial_Single (first VR object encounter), Tutorial_Row, Tutorial_2D_Build (coordinate reference throughout array tutorial); contrasts with basis_vectors_rig (mathematical vs intuitive representation)
+# truth: coordinate systems are conventions about shared directions, not properties of space itself — the XYZ gadget makes this visible by being rotatable
+
 # XYZ Coordinate Gadget for VR Interaction
 @export var initial_scale: Vector3 = Vector3(3.2, 3.2, 3.2)  # Smaller scale for VR
 @export var rotation_speed: float = 1.0  # Rotation speed in radians per second

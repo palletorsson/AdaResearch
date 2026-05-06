@@ -1,0 +1,135 @@
+{
+  "id": "morph_auto_mixed_04",
+  "family": "mixed_forms",
+  "notes": "Auto-generated mixed-family candidate from bio_furniture, drag_pageant.",
+  "camera_yaw": 0.873,
+  "camera_pitch": 0.345,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.816,
+      1.089,
+      0.695
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "mixed_04_01_petal_seat_bowl",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.3,
+        "scale": 0.978,
+        "normal_bias": 0.953,
+        "world_bias": [
+          0.002,
+          0.153,
+          0.057
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.077
+    },
+    {
+      "id": "mixed_04_02_perch_back",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.536,
+        "scale": 0.555,
+        "normal_bias": 1.277,
+        "world_bias": [
+          0.116,
+          0.378,
+          -0.19
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "mixed_04_03_petal_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.182,
+        "scale": 1.244
+      },
+      "child_role": "body",
+      "budget_factor": 0.12
+    },
+    {
+      "id": "mixed_04_04_harness_wraps",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.602,
+        "scale": 0.258,
+        "normal_bias": 1.05,
+        "world_bias": [
+          0.032,
+          0.307,
+          0.389
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.317
+    },
+    {
+      "id": "mixed_transform_01_inset_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.308
+      },
+      "selector": "right",
+      "op": "inset_panel",
+      "params": {
+        "scale": 0.713,
+        "depth": 0.094
+      },
+      "child_role": "body",
+      "budget_factor": 0.493
+    },
+    {
+      "id": "mixed_transform_02_rotate_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 1,
+        "min_budget": 0.62
+      },
+      "selector": "back",
+      "op": "rotate_panel",
+      "params": {
+        "axis": "normal",
+        "angle_deg": 16.207,
+        "normal_offset": -0.0
+      },
+      "child_role": "body",
+      "budget_factor": 0.591
+    }
+  ]
+}

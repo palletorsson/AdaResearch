@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/audio/rack_controls/RackWheel.gd" id="1"]
+
+[node name="RackWheel" type="Control"]
+custom_minimum_size = Vector2(100, 100)
+script = ExtResource("1")

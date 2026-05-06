@@ -66,7 +66,7 @@ class BTreeNode:
 	var mesh_instance: MeshInstance3D = null  # Visual representation
 	var is_full: bool = false      # Node capacity status
 	
-	func _init(degree: int):
+	func _init(degree: int) -> void:
 		keys.resize(2 * degree - 1)
 		children.resize(2 * degree)
 		for i in range(keys.size()):
@@ -126,10 +126,10 @@ var operation_timer: Timer
 var demo_keys: Array = []
 var current_demo_index: int = 0
 
-func _init():
+func _init() -> void:
 	name = "BTree_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	initialize_btree()
@@ -137,7 +137,7 @@ func _ready():
 	if auto_demo:
 		call_deferred("start_demo")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for B-Tree visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -160,14 +160,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for animation operations"""
 	operation_timer = Timer.new()
 	operation_timer.wait_time = operation_delay
 	operation_timer.timeout.connect(_on_operation_timer_timeout)
 	add_child(operation_timer)
 
-func initialize_btree():
+func initialize_btree() -> void:
 	"""Initialize empty B-Tree"""
 	root = BTreeNode.new(tree_degree)
 	root.position = Vector3(0, 0, 0)
@@ -178,7 +178,7 @@ func initialize_btree():
 	create_node_visualization(root, root_node_color)
 	print("B-Tree initialized with degree ", tree_degree)
 
-func start_demo():
+func start_demo() -> void:
 	"""Start comprehensive B-Tree demonstration"""
 	generate_demo_data()
 	current_demo_index = 0
@@ -188,7 +188,7 @@ func start_demo():
 	else:
 		perform_bulk_demo()
 
-func generate_demo_data():
+func generate_demo_data() -> void:
 	"""Generate demonstration dataset"""
 	demo_keys.clear()
 	
@@ -206,7 +206,7 @@ func generate_demo_data():
 	
 	print("Generated demo data: ", demo_keys)
 
-func perform_bulk_demo():
+func perform_bulk_demo() -> void:
 	"""Perform bulk operations without animation"""
 	for key in demo_keys:
 		insert_key(key)
@@ -214,7 +214,7 @@ func perform_bulk_demo():
 	update_visualization()
 	update_ui()
 
-func insert_key(key: int):
+func insert_key(key: int) -> void:
 	"""Insert key into B-Tree"""
 	if not root:
 		initialize_btree()
@@ -243,7 +243,7 @@ func insert_key(key: int):
 	update_tree_positions()
 	update_visualization()
 
-func insert_non_full(node: BTreeNode, key: int):
+func insert_non_full(node: BTreeNode, key: int) -> void:
 	"""Insert key into non-full node"""
 	disk_accesses += 1
 	var i = node.get_key_count() - 1
@@ -268,7 +268,7 @@ func insert_non_full(node: BTreeNode, key: int):
 		
 		insert_non_full(node.children[i], key)
 
-func split_child(parent: BTreeNode, index: int):
+func split_child(parent: BTreeNode, index: int) -> void:
 	"""Split full child node"""
 	var full_child = parent.children[index]
 	var new_child = BTreeNode.new(tree_degree)
@@ -408,13 +408,13 @@ func find_key_index(node: BTreeNode, key: int) -> int:
 		i += 1
 	return i
 
-func delete_from_leaf(node: BTreeNode, index: int):
+func delete_from_leaf(node: BTreeNode, index: int) -> void:
 	"""Delete key from leaf node"""
 	for i in range(index, node.get_key_count() - 1):
 		node.keys[i] = node.keys[i + 1]
 	node.keys[node.get_key_count() - 1] = null
 
-func delete_from_internal(node: BTreeNode, index: int):
+func delete_from_internal(node: BTreeNode, index: int) -> void:
 	"""Delete key from internal node"""
 	var key = node.keys[index]
 	
@@ -448,7 +448,7 @@ func get_successor(node: BTreeNode, index: int) -> int:
 		current = current.children[0]
 	return current.keys[0]
 
-func fill_child(node: BTreeNode, index: int):
+func fill_child(node: BTreeNode, index: int) -> void:
 	"""Fill child that has minimum number of keys"""
 	# Try to borrow from left sibling
 	if index > 0 and node.children[index - 1].get_key_count() >= tree_degree:
@@ -463,7 +463,7 @@ func fill_child(node: BTreeNode, index: int):
 		else:
 			merge_children(node, index - 1)
 
-func borrow_from_prev(node: BTreeNode, index: int):
+func borrow_from_prev(node: BTreeNode, index: int) -> void:
 	"""Borrow key from previous sibling"""
 	var child = node.children[index]
 	var sibling = node.children[index - 1]
@@ -484,7 +484,7 @@ func borrow_from_prev(node: BTreeNode, index: int):
 	node.keys[index - 1] = sibling.keys[sibling.get_key_count() - 1]
 	sibling.keys[sibling.get_key_count() - 1] = null
 
-func borrow_from_next(node: BTreeNode, index: int):
+func borrow_from_next(node: BTreeNode, index: int) -> void:
 	"""Borrow key from next sibling"""
 	var child = node.children[index]
 	var sibling = node.children[index + 1]
@@ -507,7 +507,7 @@ func borrow_from_next(node: BTreeNode, index: int):
 		sibling.keys[i] = sibling.keys[i + 1]
 	sibling.keys[sibling.get_key_count() - 1] = null
 
-func merge_children(node: BTreeNode, index: int):
+func merge_children(node: BTreeNode, index: int) -> void:
 	"""Merge child with its sibling"""
 	var child = node.children[index]
 	var sibling = node.children[index + 1]
@@ -535,7 +535,7 @@ func merge_children(node: BTreeNode, index: int):
 	
 	total_nodes -= 1
 
-func update_tree_positions():
+func update_tree_positions() -> void:
 	"""Update 3D positions of all nodes"""
 	if not root:
 		return
@@ -556,7 +556,7 @@ func update_tree_positions():
 				0
 			)
 
-func collect_level_nodes(node: BTreeNode, level: int, level_dict: Dictionary):
+func collect_level_nodes(node: BTreeNode, level: int, level_dict: Dictionary) -> void:
 	"""Collect nodes at each level for positioning"""
 	if not level_dict.has(level):
 		level_dict[level] = []
@@ -568,7 +568,7 @@ func collect_level_nodes(node: BTreeNode, level: int, level_dict: Dictionary):
 			if child:
 				collect_level_nodes(child, level + 1, level_dict)
 
-func update_visualization():
+func update_visualization() -> void:
 	"""Update 3D visualization of B-Tree"""
 	clear_visualization()
 	
@@ -578,7 +578,7 @@ func update_visualization():
 	visualize_tree(root)
 	create_connections()
 
-func clear_visualization():
+func clear_visualization() -> void:
 	"""Clear existing visualization elements"""
 	for mesh in node_meshes:
 		if mesh and is_instance_valid(mesh):
@@ -590,7 +590,7 @@ func clear_visualization():
 			mesh.queue_free()
 	connection_meshes.clear()
 
-func visualize_tree(node: BTreeNode):
+func visualize_tree(node: BTreeNode) -> void:
 	"""Recursively visualize tree nodes"""
 	if not node:
 		return
@@ -610,7 +610,7 @@ func visualize_tree(node: BTreeNode):
 			if child:
 				visualize_tree(child)
 
-func create_node_visualization(node: BTreeNode, color: Color):
+func create_node_visualization(node: BTreeNode, color: Color) -> void:
 	"""Create 3D visualization for a node"""
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = BoxMesh.new()
@@ -639,7 +639,7 @@ func create_node_visualization(node: BTreeNode, color: Color):
 	# Add key labels
 	create_key_labels(node)
 
-func create_key_labels(node: BTreeNode):
+func create_key_labels(node: BTreeNode) -> void:
 	"""Create labels for keys in node"""
 	var key_count = node.get_key_count()
 	
@@ -656,14 +656,14 @@ func create_key_labels(node: BTreeNode):
 			add_child(label)
 			node_meshes.append(label)
 
-func create_connections():
+func create_connections() -> void:
 	"""Create visual connections between parent and child nodes"""
 	if not root:
 		return
 	
 	create_node_connections(root)
 
-func create_node_connections(node: BTreeNode):
+func create_node_connections(node: BTreeNode) -> void:
 	"""Create connections for a specific node"""
 	if node.is_leaf:
 		return
@@ -687,7 +687,7 @@ func create_connection_line(from_pos: Vector3, to_pos: Vector3) -> MeshInstance3
 	
 	mesh_instance.mesh = mesh
 	mesh_instance.position = (from_pos + to_pos) / 2.0
-	mesh_instance.look_at(to_pos, Vector3.UP)
+	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = pointer_color
@@ -697,7 +697,7 @@ func create_connection_line(from_pos: Vector3, to_pos: Vector3) -> MeshInstance3
 	
 	return mesh_instance
 
-func _on_operation_timer_timeout():
+func _on_operation_timer_timeout() -> void:
 	"""Handle animation timer for step-by-step operations"""
 	if current_demo_index < demo_keys.size():
 		insert_key(demo_keys[current_demo_index])
@@ -707,14 +707,22 @@ func _on_operation_timer_timeout():
 		operation_timer.stop()
 		print("Demo complete!")
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current B-Tree state"""
 	if not ui_display:
 		return
 	
+	# Check if the UI structure exists
+	var panel = ui_display.get_node("Panel")
+	if not panel:
+		return
+	var vbox = panel.get_node("VBoxContainer")
+	if not vbox:
+		return
+	
 	var labels = []
 	for i in range(40):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = vbox.get_node("info_label_" + str(i))
 		if label:
 			labels.append(label)
 	
@@ -788,7 +796,7 @@ func get_height_efficiency() -> String:
 	var efficiency = float(min_height) / float(tree_height) * 100.0
 	return str(int(efficiency)) + "%"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -821,7 +829,7 @@ func _input(event):
 				else:
 					operation_timer.stop()
 
-func highlight_search_path():
+func highlight_search_path() -> void:
 	"""Highlight the search path in visualization"""
 	for node in search_path:
 		if node.mesh_instance:
@@ -834,7 +842,7 @@ func highlight_search_path():
 	await get_tree().create_timer(highlight_duration).timeout
 	update_visualization()
 
-func reset_btree():
+func reset_btree() -> void:
 	"""Reset B-Tree to initial state"""
 	clear_visualization()
 	total_nodes = 0
@@ -849,7 +857,7 @@ func reset_btree():
 	update_ui()
 	print("B-Tree reset")
 
-func change_degree(new_degree: int):
+func change_degree(new_degree: int) -> void:
 	"""Change B-Tree degree"""
 	tree_degree = new_degree
 	reset_btree()
@@ -878,4 +886,13 @@ func get_algorithm_info() -> Dictionary:
 			"delete": "O(log n)",
 			"space": "O(n)"
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

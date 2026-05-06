@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2w78aht0kdrj"]
+
+[ext_resource type="Script" uid="uid://cyjpa8msagytc" path="res://algorithms/randomness/randomwalk/scripts/tessellation_lattice_walk.gd" id="1_lattice"]
+[ext_resource type="Script" uid="uid://sj2l2wvrksvs" path="res://algorithms/randomness/randomwalk/scripts/tessellation_demo_controller.gd" id="2_controller"]
+
+[node name="TessellationLatticeDemo" type="Node3D"]
+script = ExtResource("2_controller")
+
+[node name="TessellationLatticeWalk" type="Node3D" parent="."]
+script = ExtResource("1_lattice")
+grid_size = Vector3i(8, 8, 8)
+walk_speed = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 25, 15, 25)
+fov = 70.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_bottom = 650.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Tessellation Lattice Walk"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TypeLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Type: CUBE"
+
+[node name="Label1" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Select Tessellation Type:"
+
+[node name="CubeButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Cube (Simple)"
+
+[node name="OctahedronButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Octahedron (8 Triangles)"
+
+[node name="RhombicButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Rhombic Dodecahedron (Crystalline)"
+
+[node name="TruncatedButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Truncated Octahedron (Soccer Ball)"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Speed: 10.0 cells/sec"
+
+[node name="SpeedSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.5
+max_value = 50.0
+step = 0.5
+value = 10.0
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="PauseButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Pause"
+
+[node name="ResetButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Reset Walk"
+
+[node name="RevealAllButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Reveal All"
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Type: CUBE
+Grid: (8, 8, 8)
+Total Cells: 512
+Revealed: 0
+Progress: 0.0%"
+autowrap_mode = 3
+
+[node name="HSeparator5" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Info:
+Cube, Rhombic Dodecahedron, and Truncated Octahedron perfectly fill 3D space with NO gaps. Octahedron has small gaps but is included for comparison.
+
+Random walk moves neighbor-to-neighbor, revealing cells one at a time.
+
+Mouse wheel: Zoom camera"
+autowrap_mode = 3

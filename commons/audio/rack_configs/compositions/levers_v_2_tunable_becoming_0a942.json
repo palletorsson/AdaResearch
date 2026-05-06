@@ -1,0 +1,39 @@
+{
+  "rack_info": {
+    "name": "2x LEVER",
+    "description": "2x LEVER — auto-generated UVAC composition. sound_type=tunable_becoming, composition_type=levers_v.",
+    "version": "auto-1",
+    "sound_type": "tunable_becoming",
+    "auto_generated": true,
+    "composition_type": "levers_v",
+    "composition_count": 2
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "lv_0",
+      "lv_1"
+    ]
+  ],
+  "control_definitions": {
+    "lv_0": {
+      "type": "lever",
+      "label": "ATK",
+      "parameter": "attack",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.05
+    },
+    "lv_1": {
+      "type": "lever",
+      "label": "RATE",
+      "parameter": "rate",
+      "min": 0.01,
+      "max": 20.0,
+      "default": 2.0
+    }
+  }
+}

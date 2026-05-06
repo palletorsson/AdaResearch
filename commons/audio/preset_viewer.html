@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdaResearch Soundscape Browser</title>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface-hover: #1a1a25;
+            --border: #2a2a3a;
+            --text: #e0e0e0;
+            --text-dim: #888;
+            --accent: #7b68ee;
+            --accent-dim: #5a4abd;
+            --green: #4ade80;
+            --orange: #fb923c;
+            --pink: #f472b6;
+            --cyan: #22d3ee;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+        
+        .subtitle {
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            font-size: 0.85rem;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .sidebar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .category {
+            margin-bottom: 16px;
+        }
+        
+        .category-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+        
+        .preset-item {
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .preset-item:hover {
+            background: var(--surface-hover);
+        }
+        
+        .preset-item.active {
+            background: var(--accent-dim);
+            color: white;
+        }
+        
+        .preset-item.new::after {
+            content: 'NEW';
+            font-size: 0.6rem;
+            background: var(--pink);
+            color: black;
+            padding: 2px 4px;
+            border-radius: 3px;
+            margin-left: auto;
+        }
+        
+        .main {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .preset-name {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        
+        .preset-desc {
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .section {
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--cyan);
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+        }
+        
+        .influences {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .tag.influence { border-color: var(--accent); color: var(--accent); }
+        .tag.technique { border-color: var(--green); color: var(--green); }
+        .tag.era { border-color: var(--orange); color: var(--orange); }
+        
+        .layers {
+            display: grid;
+            gap: 8px;
+        }
+        
+        .layer {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+        }
+        
+        .layer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .layer-name {
+            color: var(--green);
+            font-size: 0.85rem;
+        }
+        
+        .layer-vol {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+        }
+        
+        .layer-bus {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+        }
+        
+        .params {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .param-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .param-row:last-child { border-bottom: none; }
+        
+        .param-key { color: var(--text-dim); }
+        .param-val { color: var(--green); }
+        
+        .philosophy {
+            font-style: italic;
+            color: var(--text-dim);
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+            margin: 12px 0;
+        }
+        
+        .no-selection {
+            color: var(--text-dim);
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .bus-effects {
+            display: grid;
+            gap: 8px;
+        }
+        
+        .bus {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px;
+        }
+        
+        .bus-name {
+            color: var(--orange);
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+        }
+        
+        .effect {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            padding: 2px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎛️ AdaResearch Soundscape Browser</h1>
+    <p class="subtitle">55 procedural audio presets for algorithmic exploration</p>
+    
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <!-- Populated by JS -->
+        </div>
+        <div class="main" id="main">
+            <div class="no-selection">← Select a preset to view details</div>
+        </div>
+    </div>
+
+    <script>
+        const presets = {
+            "🔇 Utility": ["silent"],
+            "🔬 Lab / Science": ["lab_scientific", "half_life_science", "computational_hum", "particle_physics", "quantum_lab", "xeno_flora_lab"],
+            "🌃 Noir / Cyberpunk": ["techno_noir_subtle", "techno_noir_full", "techno_noir_bass_foundation", "techno_noir_lofi_return", "blade_runner_minimal", "rain_soaked_metropolis", "tears_in_rain_redux", "cyberpunk_night_market", "the_data_heist", "neon_arcade"],
+            "🏭 Industrial": ["industrial_machine", "abandoned_factory", "asteroid_processing_plant", "mainframe_terminal"],
+            "🚀 Sci-Fi / Space": ["deep_void", "the_event_horizon", "nostromo_corridors", "space_station_isolation", "orbital_prison", "the_leviathan_interior", "the_aerostat_spire"],
+            "🌿 Organic": ["arrakis_desert", "the_shimmer", "bio_dome_greenhouse", "hydro_garden_complex", "desert_outpost", "underwater_research_lab"],
+            "⛪ Atmospheric": ["liturgical_cathedral", "minimal_drone", "fractal_exploration", "vangelis_waves", "heptapod_chamber", "the_sprawl_market"],
+            "🎵 Generative": ["pop_generative", "prog_synth_70s", "dark_game_808"],
+            "🥁 Beats": ["space_station_beats", "abandoned_factory_beats", "quantum_lab_beats", "underwater_lab_beats", "desert_outpost_beats", "bio_dome_beats"],
+            "🧪 Experimental": ["radiophonic_workshop", "xenakis_stochastic", "spiegel_intelligent", "autechre_flutter", "ikeda_dataplex", "eccojam_drift", "cellular_automata"]
+        };
+        
+        const newPresets = ["radiophonic_workshop", "xenakis_stochastic", "spiegel_intelligent", "autechre_flutter", "ikeda_dataplex", "eccojam_drift", "cellular_automata"];
+        
+        const presetData = {};
+        let currentPreset = null;
+        
+        // Build sidebar
+        const sidebar = document.getElementById('sidebar');
+        for (const [category, items] of Object.entries(presets)) {
+            const cat = document.createElement('div');
+            cat.className = 'category';
+            cat.innerHTML = `<div class="category-title">${category}</div>`;
+            
+            for (const preset of items) {
+                const item = document.createElement('div');
+                item.className = 'preset-item' + (newPresets.includes(preset) ? ' new' : '');
+                item.textContent = preset;
+                item.dataset.preset = preset;
+                item.onclick = () => selectPreset(preset);
+                cat.appendChild(item);
+            }
+            
+            sidebar.appendChild(cat);
+        }
+        
+        async function loadPreset(name) {
+            if (presetData[name]) return presetData[name];
+            try {
+                const resp = await fetch(`presets/${name}.json`);
+                if (resp.ok) {
+                    presetData[name] = await resp.json();
+                    return presetData[name];
+                }
+            } catch (e) {}
+            return null;
+        }
+        
+        async function selectPreset(name) {
+            // Update active state
+            document.querySelectorAll('.preset-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.preset === name);
+            });
+            
+            const data = await loadPreset(name);
+            const main = document.getElementById('main');
+            
+            if (!data) {
+                main.innerHTML = `
+                    <div class="preset-name">${name}</div>
+                    <div class="preset-desc">Preset file not found or not yet implemented.</div>
+                `;
+                return;
+            }
+            
+            let html = `
+                <div class="preset-name">${data.name || name}</div>
+                <div class="preset-desc">${data.description || ''}</div>
+            `;
+            
+            // Style notes
+            if (data.style_notes) {
+                html += `<div class="section">`;
+                html += `<div class="section-title">Style & Influences</div>`;
+                
+                if (data.style_notes.influences) {
+                    html += `<div class="influences">`;
+                    for (const inf of data.style_notes.influences) {
+                        html += `<span class="tag influence">${inf}</span>`;
+                    }
+                    html += `</div>`;
+                }
+                
+                if (data.style_notes.era) {
+                    html += `<span class="tag era">${data.style_notes.era}</span>`;
+                }
+                
+                if (data.style_notes.philosophy) {
+                    html += `<div class="philosophy">"${data.style_notes.philosophy}"</div>`;
+                }
+                
+                if (data.style_notes.techniques) {
+                    html += `<div class="influences" style="margin-top: 12px;">`;
+                    for (const tech of data.style_notes.techniques) {
+                        html += `<span class="tag technique">${tech}</span>`;
+                    }
+                    html += `</div>`;
+                }
+                
+                html += `</div>`;
+            }
+            
+            // Layers
+            if (data.continuous_layers || data.placeholder_layer) {
+                html += `<div class="section">`;
+                html += `<div class="section-title">Audio Layers</div>`;
+                html += `<div class="layers">`;
+                
+                if (data.continuous_layers) {
+                    for (const layer of data.continuous_layers) {
+                        html += `
+                            <div class="layer">
+                                <div class="layer-header">
+                                    <span class="layer-name">${layer.sound_id}</span>
+                                    <span class="layer-vol">${layer.volume_db} dB</span>
+                                </div>
+                                <div class="layer-bus">Bus: ${layer.bus || 'Master'}</div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                if (data.placeholder_layer) {
+                    html += `
+                        <div class="layer" style="border-color: var(--orange);">
+                            <div class="layer-header">
+                                <span class="layer-name">${data.placeholder_layer.sound_id}</span>
+                                <span class="layer-vol">${data.placeholder_layer.volume_db} dB (placeholder)</span>
+                            </div>
+                            <div class="layer-bus">Fades out in ${data.placeholder_layer.fade_duration || 2}s</div>
+                        </div>
+                    `;
+                }
+                
+                html += `</div></div>`;
+            }
+            
+            // Random events
+            if (data.random_events && data.random_events.length > 0) {
+                html += `<div class="section">`;
+                html += `<div class="section-title">Random Events</div>`;
+                html += `<div class="layers">`;
+                
+                for (const evt of data.random_events) {
+                    html += `
+                        <div class="layer">
+                            <div class="layer-header">
+                                <span class="layer-name">${evt.sound_id}</span>
+                                <span class="layer-vol">${evt.volume_db} dB</span>
+                            </div>
+                            <div class="layer-bus">Every ${evt.interval_range[0]}-${evt.interval_range[1]}s</div>
+                        </div>
+                    `;
+                }
+                
+                html += `</div></div>`;
+            }
+            
+            // Bus effects
+            if (data.buses) {
+                html += `<div class="section">`;
+                html += `<div class="section-title">Bus Effects</div>`;
+                html += `<div class="bus-effects">`;
+                
+                for (const [busName, bus] of Object.entries(data.buses)) {
+                    html += `<div class="bus"><div class="bus-name">${busName}</div>`;
+                    if (bus.effects) {
+                        for (const fx of bus.effects) {
+                            const params = Object.entries(fx).filter(([k]) => k !== 'type').map(([k, v]) => `${k}: ${v}`).join(', ');
+                            html += `<div class="effect">${fx.type} — ${params}</div>`;
+                        }
+                    }
+                    html += `</div>`;
+                }
+                
+                html += `</div></div>`;
+            }
+            
+            // Synthesis parameters
+            if (data.synthesis_parameters) {
+                html += `<div class="section">`;
+                html += `<div class="section-title">Synthesis Parameters</div>`;
+                html += `<div class="params">`;
+                
+                for (const [key, val] of Object.entries(data.synthesis_parameters)) {
+                    const displayVal = typeof val === 'object' ? JSON.stringify(val) : val;
+                    html += `<div class="param-row"><span class="param-key">${key}</span><span class="param-val">${displayVal}</span></div>`;
+                }
+                
+                html += `</div></div>`;
+            }
+            
+            main.innerHTML = html;
+        }
+        
+        // Select first experimental preset by default
+        selectPreset('radiophonic_workshop');
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_MachineLearning",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 24
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.141,
+  "breath_zones": [
+    {
+      "size": 189,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 24
+      },
+      "centroid": [
+        5.01058201058201,
+        12.121693121693122
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "9_1_ga_shakespeare_vr"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "9_2_smart_rockets_basic_vr"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "9_4_interactive_selection_vr"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "9_6_ga_shakespeare_annotated_vr"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "adaboost"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "attention_mechanisms"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "axiom_garden"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "clustering_algorithms"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "computer_vision"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "decision_boundary_viewer"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "dimensionality_reduction"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "ensemble_methods"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "evolved_creatures_v2"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "evolving_creatures_ea"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "explainable_ai"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "feature_engineering"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "fine_tuning"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "gans"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "genetic_algorithm"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "gradient_descent"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "gradient_descent_landscape"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "kmeans_simple"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "lstms"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "neural_networks"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "nlp"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "optimization_algorithms"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "perceptron_playground"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "random_forest"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "recommendation_systems"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "reinforcement_learning"
+    },
+    {
+      "x": 6,
+      "z": 16,
+      "token": "shape_learner_2d"
+    },
+    {
+      "x": 8,
+      "z": 16,
+      "token": "shape_learner_3d"
+    },
+    {
+      "x": 2,
+      "z": 18,
+      "token": "spotlight_attention"
+    },
+    {
+      "x": 4,
+      "z": 18,
+      "token": "switchboard_attention"
+    },
+    {
+      "x": 6,
+      "z": 18,
+      "token": "time_series_analysis"
+    },
+    {
+      "x": 8,
+      "z": 18,
+      "token": "transformers"
+    },
+    {
+      "x": 2,
+      "z": 20,
+      "token": "vaes"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 37,
+    "walkable_cells": 263,
+    "breath_zone_count": 1,
+    "unique_tokens": 37
+  }
+}

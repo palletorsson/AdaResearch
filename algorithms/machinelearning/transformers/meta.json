@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_transformers",
+  "title": "Transformers",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/transformers/transformers.tscn",
+  "script": "res://algorithms/machinelearning/transformers/Transformers.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/transformers/README.md",
+    "tutorial": "res://algorithms/machinelearning/transformers/transformers_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/transformers/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/transformers/summery.md"
+  },
+  "summary": "The `Transformers` sandbox investigates concepts from Transformers inside a real-time Godot lab.",
+  "keywords": [
+    "accuracy",
+    "animate",
+    "attention",
+    "create",
+    "encoding",
+    "flow"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

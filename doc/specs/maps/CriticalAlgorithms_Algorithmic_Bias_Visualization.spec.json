@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+  "home_sequence": "postfoundationscrisis",
+  "dimensions": {
+    "w": 8,
+    "d": 9
+  },
+  "signature": "bias_visualizer demonstrates algorithmic bias as spatial inequality \u2014 the architecture IS the argument.",
+  "style": null,
+  "echoes": [],
+  "density": 0.028,
+  "breath_zones": [
+    {
+      "size": 68,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 9
+      },
+      "centroid": [
+        3.3823529411764706,
+        3.9411764705882355
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 4,
+      "token": "bias_visualizer"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "bias_from_inside"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 71,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

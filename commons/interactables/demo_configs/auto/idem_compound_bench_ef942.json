@@ -1,0 +1,135 @@
+{
+  "demo_info": {
+    "name": "Compound Bench ef942",
+    "description": "Auto-generated compound_bench board composed from the InteractableDemo vocabulary.",
+    "family": "compound_bench",
+    "auto_generated": true,
+    "auto_score": 46.02,
+    "selection_rank": 2
+  },
+  "titles": {
+    "main": "COMPOUND BENCH",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.66,
+      0.69,
+      0.72,
+      1.0
+    ],
+    "frame_color": [
+      0.18,
+      0.22,
+      0.27,
+      1.0
+    ],
+    "accent_color": [
+      0.94,
+      0.48,
+      0.19,
+      1.0
+    ],
+    "dark_color": [
+      0.07,
+      0.08,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.82,
+      0.84,
+      0.88,
+      1.0
+    ],
+    "spacing": 0.271,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.074,
+    "row2_y": 0.581,
+    "row3_y": 0.093,
+    "row4_y": -0.398,
+    "show_hand_scale_guides": true
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/slider_snap.tscn",
+      "label": "SNAP",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "label": "KNOB",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/push_button_front.tscn",
+      "label": "BUTTON\nFRONT",
+      "y": 0.0,
+      "rot_y": 180.0
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "rect_tall",
+      "label": "RECT TALL"
+    },
+    {
+      "type": "rect_sm",
+      "label": "RECT SM"
+    }
+  ],
+  "passive_elements": [
+    {
+      "builder": "build_speaker_lines",
+      "label": "SPEAKER LINES",
+      "width": 1
+    },
+    {
+      "monitor": "scope",
+      "slots": 3,
+      "label": "SCOPE WIDE",
+      "width": 3
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_v",
+      "count": 2,
+      "label": "2x SLIDER V",
+      "width": 2
+    },
+    {
+      "type": "monitor_sliders",
+      "count": 3,
+      "label": "MONITOR+SLIDERS",
+      "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 3,
+      "label": "3x SLIDER V",
+      "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 4,
+      "label": "4x SLIDER V",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "text_static_1",
+      "label": "TEXT 1",
+      "width": 1
+    },
+    {
+      "type": "patch_matrix",
+      "label": "PATCH\nMATRIX",
+      "width": 1
+    }
+  ]
+}

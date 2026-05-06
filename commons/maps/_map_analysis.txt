@@ -1,0 +1,237 @@
+FOLDER: ProceduralGenerationBooleanPatterns
+  KEY: boolean_patterns
+  SCENE: res://algorithms/proceduralgeneration/constraint_solvers/randomboolean/all_patterns_demo.tscn
+  DESC: boolean_patterns
+----------------------------------------
+FOLDER: ProceduralGenerationCaveExplorer3dUi
+  KEY: cave_explorer_3d_ui
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/cave_explorer_3d_ui.tscn
+  DESC: cave_explorer_3d_ui
+----------------------------------------
+FOLDER: ProceduralGenerationCrystalRandom
+  KEY: crystal_random_walk_demo (Not found in artifacts)
+----------------------------------------
+FOLDER: ProceduralGenerationMarchingCubesInsideCave
+  KEY: dark_sphere
+  SCENE: res://commons/primitives/sphere/dark_sphere.tscn
+  DESC: Large reflective black sphere used as an ambient dome for isolating demos.
+  KEY: marchingcubes_inside_cave
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn
+  DESC: marchingcubes_inside_cave
+----------------------------------------
+FOLDER: ProceduralGenerationMarchingCubesSculpture
+  KEY: marching_cubes_gallery
+  SCENE: res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/sculpture_gallery.tscn
+  DESC: marching_cubes_gallery
+----------------------------------------
+Error processing c:\Users\palle\Documents\GitHub\AdaResearch\commons\maps\ProceduralGenerationMarchingCubesVovelNoise\map_data.json: Expecting value: line 50 column 3 (char 2303)
+FOLDER: ProceduralGenerationMarchingcubesFlatLandscape
+  KEY: marchingcubes_flat_landscape
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn
+  DESC: marchingcubes_flat_landscape
+----------------------------------------
+Error processing c:\Users\palle\Documents\GitHub\AdaResearch\commons\maps\ProceduralGenerationMarchingcubesPortalLandscape\map_data.json: Expecting value: line 30 column 3 (char 840)
+FOLDER: ProceduralGenerationMarchingcubesTorusSculpture
+  KEY: marchingcubes_torus_sculpture
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn
+  DESC: marchingcubes_torus_sculpture
+----------------------------------------
+FOLDER: ProceduralGenerationNetSpace
+  KEY: tesseract_net_space_showcase
+  SCENE: res://algorithms/proceduralgeneration/higher_dimensional/tesseractnetspace/tesseract_net_space_showcase.tscn
+  DESC: tesseract_net_space_showcase
+----------------------------------------
+FOLDER: ProceduralGenerationPortals
+  KEY: tessellating_portal_demo
+  SCENE: res://algorithms/proceduralgeneration/higher_dimensional/tessellatingportal/tessellating_portal_demo.tscn
+  DESC: tessellating_portal_demo
+----------------------------------------
+FOLDER: ProceduralGenerationSixteenCellNet
+  KEY: sixteen_cell_net_space_showcase
+  SCENE: res://algorithms/proceduralgeneration/higher_dimensional/sixteencellnetspace/sixteen_cell_net_space_showcase.tscn
+  DESC: sixteen_cell_net_space_showcase
+----------------------------------------
+FOLDER: ProceduralGenerationTesseractErrorTunnel
+  KEY: tesseract_tunnel_demo
+  SCENE: res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/tesseract_tunnel_demo.tscn
+  DESC: tesseract_tunnel_demo
+----------------------------------------
+Error processing c:\Users\palle\Documents\GitHub\AdaResearch\commons\maps\ProceduralGenerationWfcDungeonGenerator\map_data.json: Expecting value: line 33 column 3 (char 939)
+FOLDER: ProceduralGeneration_17
+  KEY: percolationnetwork_ca
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn
+  DESC: percolationnetwork_ca
+----------------------------------------
+FOLDER: ProceduralGeneration_21
+  KEY: sixteen_cell_net_space_showcase
+  SCENE: res://algorithms/proceduralgeneration/higher_dimensional/sixteencellnetspace/sixteen_cell_net_space_showcase.tscn
+  DESC: sixteen_cell_net_space_showcase
+----------------------------------------
+FOLDER: ProceduralGeneration_BranchingGrowthAlgorithm
+  KEY: branching_growth_algorithm
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn
+  DESC: Interactive visualization of branching growth patterns and algorithmic plant generation
+----------------------------------------
+FOLDER: ProceduralGeneration_CaveRandomWalk
+  KEY: caverandomwalk
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn
+  DESC: caverandomwalk
+----------------------------------------
+FOLDER: ProceduralGeneration_CubeMound
+  KEY: cube_mound_scene
+  SCENE: res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn
+  DESC: cube_mound_scene
+  KEY: cube_mound_scene_sphere
+  SCENE: res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene_sphere.tscn
+  DESC: cube_mound_scene_sphere
+----------------------------------------
+FOLDER: ProceduralGeneration_Delaunay_Triangulation
+  KEY: delaunay_triangulation_3d_cell
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn
+  DESC: delaunay_triangulation_3d_cell
+  KEY: info_display
+  SCENE: res://commons/scenes/mapobjects/infodisplay.tscn
+  DESC: info Display
+----------------------------------------
+FOLDER: ProceduralGeneration_Dome
+  KEY: dome
+  SCENE: res://commons/primitives/booleans/dome.tscn
+  DESC: dome.
+  KEY: interactable_demo
+  SCENE: res://commons/interactables/interactable_demo.tscn
+  DESC: interactable_demo.
+  KEY: voronoi_grid_3d
+  SCENE: res://algorithms/voronoi/voronoi_grid_3D.tscn
+  DESC: voronoi_grid_3d
+----------------------------------------
+FOLDER: ProceduralGeneration_Eight
+  KEY: grab_stick
+  SCENE: res://algorithms/color/color_scanner/grab_stick.tscn
+  DESC: grab_stick
+  KEY: mirror_cellular_texture_for_3d
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn
+  DESC: Interactive 3D cellular automata with mirroring and texture generation capabilities
+  KEY: rhizomatic_maze_space
+  SCENE: res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn
+  DESC: A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems
+----------------------------------------
+FOLDER: ProceduralGeneration_Eleven
+  KEY: array_visualizer
+  SCENE: res://commons/primitives/tools/array_visualizer.tscn
+  DESC: Interactive tool for visualizing array structures
+  KEY: organic_space
+  SCENE: res://algorithms/alternativegeometries/organicspace/organic_space.tscn
+  DESC: An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions
+  KEY: rule_30_110
+  SCENE: res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn
+  DESC: Elementary cellular automata rules 30 and 110 visualization
+----------------------------------------
+Error processing c:\Users\palle\Documents\GitHub\AdaResearch\commons\maps\ProceduralGeneration_Five\map_data.json: Expecting value: line 34 column 3 (char 1366)
+FOLDER: ProceduralGeneration_Four
+  KEY: fibonacci_sequences
+  SCENE: res://algorithms/recursiveemergence/fibonacci_sequences/fibonacci_sequences.tscn
+  DESC: Recursive mathematical sequences and spiral visualizations
+----------------------------------------
+FOLDER: ProceduralGeneration_Genetic_Algorithms
+  KEY: lattice_gas_automata
+  SCENE: res://algorithms/cellularautomata/lattice_gas_automata/lattice_gas_automata.tscn
+  DESC: lattice_gas_automata
+----------------------------------------
+FOLDER: ProceduralGeneration_Genetic_Programming
+  KEY: GeneticProgramming
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn
+  DESC: GeneticProgramming
+----------------------------------------
+FOLDER: ProceduralGeneration_MarchingCave
+  KEY: marchingcave
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn
+  DESC: marchingcave
+  KEY: marchingcubes_cave
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn
+  DESC: marchingcubes_cave
+----------------------------------------
+FOLDER: ProceduralGeneration_Marching_Cubes_Algorithm
+  KEY: implicit_surface_modeling
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn
+  DESC: Metaball-based implicit surface generation and modeling
+----------------------------------------
+FOLDER: ProceduralGeneration_Markov_Chains
+  KEY: markov_chains_tree
+  SCENE: res://algorithms/proceduralgeneration/grammar_systems/markov_chains_tree/MarkovChainsTree.tscn
+  DESC: markov_chains_tree
+----------------------------------------
+FOLDER: ProceduralGeneration_Maze
+  KEY: maze_generation
+  SCENE: res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator.tscn
+  DESC: Procedural maze generation algorithms and visualization
+----------------------------------------
+FOLDER: ProceduralGeneration_N_grams
+  KEY: tessellation_lattice_demo (Not found in artifacts)
+----------------------------------------
+FOLDER: ProceduralGeneration_Poisson_Disk_Sampling
+  KEY: poisson_disk_sampling_3d
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn
+  DESC: poisson_disk_sampling_3d
+----------------------------------------
+FOLDER: ProceduralGeneration_Reaction_Diffusion_Systems
+  KEY: reaction_diffusion
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/turing_pattern.tscn
+  DESC: Turing pattern generation using reaction-diffusion systems
+----------------------------------------
+FOLDER: ProceduralGeneration_Seven
+  KEY: array_visualizer
+  SCENE: res://commons/primitives/tools/array_visualizer.tscn
+  DESC: Interactive tool for visualizing array structures
+  KEY: organic_space
+  SCENE: res://algorithms/alternativegeometries/organicspace/organic_space.tscn
+  DESC: An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions
+  KEY: recursive_tree
+  SCENE: res://algorithms/fractals/recursive_tree/recursive_tree.tscn
+  DESC: recursive_tree
+----------------------------------------
+FOLDER: ProceduralGeneration_Space_Colonization_Algorithms
+  KEY: space_colonization_algorithm
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn
+  DESC: space_colonization_algorithm
+----------------------------------------
+FOLDER: ProceduralGeneration_Space_Partitioning
+  KEY: binary_space_partitioning
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/binary_space_partitioning/BinarySpacePartitioning.tscn
+  DESC: binary_space_partitioning
+----------------------------------------
+FOLDER: ProceduralGeneration_Ten
+  KEY: context_free_grammars
+  SCENE: res://algorithms/recursiveemergence/lsystems/context_free_grammars/context_free_grammars.tscn
+  DESC: L-system context-free grammar generation and visualization
+  KEY: fibonacci_sequences
+  SCENE: res://algorithms/recursiveemergence/fibonacci_sequences/fibonacci_sequences.tscn
+  DESC: Recursive mathematical sequences and spiral visualizations
+  KEY: julia_set
+  SCENE: res://algorithms/fractals/julia_set/julia_set.tscn
+  DESC: Complex plane fractal visualization of Julia sets
+  KEY: tree_gen
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/treegen/gen_tree.tscn
+  DESC: Procedural tree generation with branching algorithms
+----------------------------------------
+FOLDER: ProceduralGeneration_Three
+  KEY: voronoi_diagrams
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagrams/voronoi_diagrams.tscn
+  DESC: Spatial partitioning using Voronoi tessellation algorithms
+  KEY: voronoi_space
+  SCENE: res://commons/context/walkgrids/voronoi_space.tscn
+  DESC: A crystal that contains territorial boundary algorithms
+----------------------------------------
+FOLDER: ProceduralGeneration_Two
+  KEY:  (Not found in artifacts)
+  KEY: boolean_patterns_demo (Not found in artifacts)
+----------------------------------------
+FOLDER: ProceduralGeneration_Voronoi_Diagrams
+  KEY: voronoi_diagram_3d
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagram_3d/VoronoiDiagram3D.tscn
+  DESC: voronoi_diagram_3d
+----------------------------------------
+FOLDER: ProceduralGeneration_Wave_Function_Collapse
+  KEY: wave_function_collapse
+  SCENE: res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/wave_function_collapse.tscn
+  DESC: Procedural generation using wave function collapse algorithm
+----------------------------------------

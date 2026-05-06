@@ -1,0 +1,51 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PG_Mirrored_Patterns",
+  "home_sequence": "proceduralgeneration",
+  "dimensions": {
+    "w": 11,
+    "d": 9
+  },
+  "signature": "mirror_cellular_texture_for_3d generates kaleidoscopic textures through symmetry-amplified cellular automata for 3D surface application; rhizomatic_maze_space produces non-hierarchical labyrinthine spaces with multiple entry points and loop topology.",
+  "style": "escher",
+  "echoes": [
+    "forces",
+    "randomness"
+  ],
+  "density": 0.031,
+  "breath_zones": [
+    {
+      "size": 63,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 9
+      },
+      "centroid": [
+        5.0476190476190474,
+        4.285714285714286
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 3,
+      "token": "mirror_cellular_texture_for_3d"
+    },
+    {
+      "x": 6,
+      "z": 3,
+      "token": "rhizomatic_maze_space"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 65,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

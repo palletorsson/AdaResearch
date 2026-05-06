@@ -1,0 +1,65 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "LSystems_Grammar_Lab",
+  "home_sequence": "lsystems",
+  "dimensions": {
+    "w": 8,
+    "d": 10
+  },
+  "signature": "lsystem_tree",
+  "style": null,
+  "echoes": [],
+  "density": 0.063,
+  "breath_zones": [
+    {
+      "size": 73,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.452054794520548,
+        4.465753424657534
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 2,
+      "z": 5,
+      "token": "lsystem_tree",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "lsystem_editor"
+    },
+    {
+      "x": 1,
+      "z": 4,
+      "token": "grammar_provenance"
+    },
+    {
+      "x": 6,
+      "z": 5,
+      "token": "fractal_lsystem_string"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 79,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

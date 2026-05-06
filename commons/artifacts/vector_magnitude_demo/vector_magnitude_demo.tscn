@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.gd" id="1_main"]
+
+[node name="VectorMagnitudeDemo" type="Node3D"]
+script = ExtResource("1_main")

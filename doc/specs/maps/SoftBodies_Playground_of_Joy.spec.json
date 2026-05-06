@@ -1,0 +1,75 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SoftBodies_Playground_of_Joy",
+  "home_sequence": "softbodies",
+  "dimensions": {
+    "w": 12,
+    "d": 11
+  },
+  "signature": "branching_growth_algorithm demonstrates organic branching structures with soft body dynamics; gridagent provides agent-based interaction with soft body grids; rounded_softbody_test explores curvature effects on soft body deformation.",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.053,
+  "breath_zones": [
+    {
+      "size": 124,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 11
+      },
+      "centroid": [
+        5.5,
+        4.991935483870968
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "gridagent"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "branching_growth_algorithm"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "branching_growth_algorithm"
+    },
+    {
+      "x": 9,
+      "z": 4,
+      "token": "branching_growth_algorithm"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "rounded_softbody_test"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "branching_growth_algorithm"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "branching_growth_algorithm"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 131,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

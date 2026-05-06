@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cew773k1lhced"]
+
+[ext_resource type="Script" uid="uid://c2cdqnynm2btq" path="res://algorithms/wavefunctions/dancing_body/ElphabaDemo.gd" id="1_demo"]
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn" id="2_dress"]
+
+[node name="ElphabaDemo" type="Node3D"]
+script = ExtResource("1_demo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.94, 0.342, 0, -0.342, 0.94, 0, 1.5, 3)
+
+[node name="ElphabaDress" parent="." instance=ExtResource("2_dress")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)

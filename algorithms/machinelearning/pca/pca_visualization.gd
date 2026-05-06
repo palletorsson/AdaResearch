@@ -1,8 +1,29 @@
 extends Node3D
 
-# Principal Component Analysis: Dimensional Reduction & Identity Compression
-# Visualizes how high-dimensional data can be projected onto lower dimensions
-# Explores the politics of dimensionality reduction and information loss
+# @identity
+# essence: X_centered → covariance → eigenvectors → project onto top-k components; maximize preserved variance
+# desire: watch blue data points collapse onto red projections as principal component axes reveal the hidden structure
+# critical_parameter: target_dimensions — how many dimensions to keep; the compression/information trade-off
+# triggers: auto_start runs the full PCA pipeline; projection animation interpolates points to their lower-dimensional positions
+# emerges: the realization that most of the variance lives in very few directions — data is lower-dimensional than it appears
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: unlocks gradient_descent_visualization (PCA is optimization without gradient); contrasts enhanced_kmeans (clustering vs dimensionality reduction)
+# truth: PCA reveals that high-dimensional data is a conspiracy of a few directions pretending to be many
+
+# =============================================================================
+# PCA — Principal Component Analysis Visualization
+# =============================================================================
+# Visualizes how high-dimensional data can be projected onto lower dimensions.
+# Original data points (blue) are shown alongside their projections (red).
+# Principal component axes are drawn as glowing lines with variance labels.
+# The projection animation smoothly interpolates points to their projections.
+# =============================================================================
+
+# --- Color Palette -----------------------------------------------------------
+const COLOR_DATA := Color(0.3, 0.5, 0.9)       # Blues for original data
+const COLOR_POSITIVE := Color(0.3, 0.85, 0.4)   # Greens for positive
+const COLOR_NEGATIVE := Color(0.9, 0.3, 0.3)    # Reds for projections
+const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for highlights
 
 @export_category("PCA Configuration")
 @export var num_dimensions: int = 4  # Original data dimensions
@@ -70,19 +91,24 @@ var explained_variance_ratio: Array = []
 var projection_animation_active: bool = false
 var animation_progress: float = 0.0
 
-func _init():
+# 3D in-scene labels
+var _title_label_3d: Label3D
+var _stats_label_3d: Label3D
+
+func _init() -> void:
 	name = "PCA_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	setup_data_container()
+	_build_3d_labels()
 	generate_data()
 	
 	if auto_start:
 		call_deferred("start_pca_computation")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for PCA visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -105,20 +131,37 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for step-by-step computation"""
 	computation_timer = Timer.new()
 	computation_timer.wait_time = step_delay
 	computation_timer.timeout.connect(_on_computation_timer_timeout)
 	add_child(computation_timer)
 
-func setup_data_container():
+func setup_data_container() -> void:
 	"""Setup container for data visualization"""
 	data_container = Node3D.new()
 	data_container.name = "Data_Container"
 	add_child(data_container)
 
-func generate_data():
+func _build_3d_labels() -> void:
+	"""Create in-scene 3D labels for VR / immersive viewing."""
+	_title_label_3d = Label3D.new()
+	_title_label_3d.text = "Principal Component Analysis"
+	_title_label_3d.font_size = 64
+	_title_label_3d.modulate = COLOR_SPECIAL
+	_title_label_3d.position = Vector3(0, 6, 0)
+	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label_3d)
+
+	_stats_label_3d = Label3D.new()
+	_stats_label_3d.font_size = 36
+	_stats_label_3d.modulate = Color.WHITE
+	_stats_label_3d.position = Vector3(0, 5, 0)
+	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_stats_label_3d)
+
+func generate_data() -> void:
 	"""Generate high-dimensional correlated data"""
 	original_data.clear()
 	
@@ -145,7 +188,7 @@ func generate_data():
 	create_original_data_visualization()
 	print("Generated ", num_samples, " samples with ", num_dimensions, " dimensions")
 
-func create_original_data_visualization():
+func create_original_data_visualization() -> void:
 	"""Create 3D visualization of original data (first 3 dimensions)"""
 	clear_visualizations()
 	
@@ -167,7 +210,7 @@ func create_original_data_visualization():
 		data_container.add_child(point)
 
 func create_data_point(position: Vector3, color: Color, size: float) -> MeshInstance3D:
-	"""Create a 3D sphere for a data point"""
+	"""Create a 3D sphere for a data point with emissive material."""
 	var sphere = MeshInstance3D.new()
 	var mesh = SphereMesh.new()
 	mesh.radius = size
@@ -177,14 +220,16 @@ func create_data_point(position: Vector3, color: Color, size: float) -> MeshInst
 	var material = StandardMaterial3D.new()
 	material.albedo_color = color
 	material.emission_enabled = true
-	material.emission = color * 0.3
+	material.emission = color * 0.35
+	material.metallic = 0.3
+	material.roughness = 0.45
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	sphere.material_override = material
 	
 	sphere.position = position
 	return sphere
 
-func start_pca_computation():
+func start_pca_computation() -> void:
 	"""Start PCA computation process"""
 	if is_computing:
 		return
@@ -200,11 +245,13 @@ func start_pca_computation():
 	
 	print("Starting PCA computation...")
 
-func _on_computation_timer_timeout():
+func _on_computation_timer_timeout() -> void:
 	"""Handle computation timer timeout"""
 	if not is_computing:
 		return
 	
+	var step_names := ["Centering data...", "Covariance matrix...", "Eigendecomposition...",
+		"Selecting PCs...", "Projecting data...", "Finalizing..."]
 	match computation_step:
 		0:
 			center_and_normalize_data()
@@ -229,9 +276,16 @@ func _on_computation_timer_timeout():
 			is_computing = false
 			computation_complete = true
 	
+	# Update 3D stats
+	if _stats_label_3d:
+		if computation_step <= step_names.size():
+			_stats_label_3d.text = "Step %d/6: %s" % [computation_step, step_names[min(computation_step - 1, step_names.size() - 1)]]
+		else:
+			_stats_label_3d.text = "PCA Complete  |  Dims: %d → %d" % [num_dimensions, target_dimensions]
+	
 	update_ui()
 
-func center_and_normalize_data():
+func center_and_normalize_data() -> void:
 	"""Center and optionally normalize the data"""
 	centered_data.clear()
 	normalized_data.clear()
@@ -273,7 +327,7 @@ func center_and_normalize_data():
 	
 	print("Data centering and normalization complete")
 
-func compute_covariance_matrix():
+func compute_covariance_matrix() -> void:
 	"""Compute covariance matrix"""
 	covariance_matrix.clear()
 	
@@ -296,7 +350,7 @@ func compute_covariance_matrix():
 	
 	print("Covariance matrix computed")
 
-func compute_eigenvalues_vectors():
+func compute_eigenvalues_vectors() -> void:
 	"""Compute eigenvalues and eigenvectors using power iteration method"""
 	eigenvalues.clear()
 	eigenvectors.clear()
@@ -410,7 +464,7 @@ func deflate_matrix(matrix: Array, eigenvalue: float, eigenvector: Array) -> Arr
 	
 	return result
 
-func sort_eigen_pairs():
+func sort_eigen_pairs() -> void:
 	"""Sort eigenvalues and eigenvectors by eigenvalue (descending)"""
 	var pairs = []
 	for i in range(eigenvalues.size()):
@@ -432,7 +486,7 @@ func sort_eigen_pairs():
 		eigenvalues.append(pair.value)
 		eigenvectors.append(pair.vector)
 
-func select_principal_components():
+func select_principal_components() -> void:
 	"""Select the top principal components"""
 	principal_components.clear()
 	
@@ -453,7 +507,7 @@ func select_principal_components():
 	print("Selected ", num_components, " principal components")
 	print("Explained variance ratios: ", explained_variance_ratio)
 
-func project_data():
+func project_data() -> void:
 	"""Project data onto principal components"""
 	projected_data.clear()
 	
@@ -472,7 +526,19 @@ func project_data():
 	
 	print("Data projection complete")
 
-func create_projected_data_visualization():
+func _update_3d_stats() -> void:
+	"""Update in-scene 3D stats label with current PCA state."""
+	if not _stats_label_3d:
+		return
+	if computation_complete and explained_variance_ratio.size() > 0:
+		var cumulative := 0.0
+		for r in explained_variance_ratio:
+			cumulative += r
+		_stats_label_3d.text = "PCA Complete  |  Explained: %.1f%%  |  Error: %.3f" % [
+			cumulative * 100.0, get_reconstruction_error()
+		]
+
+func create_projected_data_visualization() -> void:
 	"""Create visualization of projected data"""
 	if not show_projected_data:
 		return
@@ -496,10 +562,16 @@ func create_projected_data_visualization():
 		position.z = -4.0
 		
 		var point = create_data_point(position, projected_data_color, data_point_size * 1.2)
+		# Animate projected points scaling in
+		point.scale = Vector3.ZERO
 		projected_points.append(point)
 		data_container.add_child(point)
+		var tw := create_tween()
+		var delay := float(i) * 0.005  # Staggered appearance
+		tw.tween_interval(delay)
+		tw.tween_property(point, "scale", Vector3.ONE, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
-func create_principal_component_visualization():
+func create_principal_component_visualization() -> void:
 	"""Create visualization of principal component vectors"""
 	if not show_principal_components:
 		return
@@ -556,7 +628,7 @@ func create_component_line(component: Array, color: Color, index: int) -> MeshIn
 	
 	return line
 
-func finalize_pca():
+func finalize_pca() -> void:
 	"""Finalize PCA computation"""
 	create_principal_component_visualization()
 	
@@ -566,7 +638,7 @@ func finalize_pca():
 	computation_complete = true
 	print("PCA computation complete")
 
-func start_projection_animation():
+func start_projection_animation() -> void:
 	"""Start animation showing projection process"""
 	projection_animation_active = true
 	animation_progress = 0.0
@@ -576,7 +648,7 @@ func start_projection_animation():
 	tween.tween_property(self, "animation_progress", 1.0, 2.0)
 	tween.tween_callback(func(): projection_animation_active = false)
 
-func compute_pca_full():
+func compute_pca_full() -> void:
 	"""Compute full PCA without animation"""
 	center_and_normalize_data()
 	compute_covariance_matrix()
@@ -617,7 +689,7 @@ func get_reconstruction_error() -> float:
 	
 	return total_error / original_data.size()
 
-func clear_visualizations():
+func clear_visualizations() -> void:
 	"""Clear all visualization elements"""
 	for point in original_points:
 		point.queue_free()
@@ -631,7 +703,7 @@ func clear_visualizations():
 		line.queue_free()
 	component_lines.clear()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current PCA state"""
 	if not ui_display:
 		return
@@ -686,7 +758,7 @@ func update_ui():
 		labels[28].text = "Controls: SPACE=Start, R=Reset, 1-3=Toggle views"
 		labels[29].text = "🏳️‍🌈 Explores information loss & compression"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -704,12 +776,12 @@ func _input(event):
 			KEY_3:
 				toggle_principal_components()
 
-func stop_computation():
+func stop_computation() -> void:
 	"""Stop PCA computation"""
 	is_computing = false
 	computation_timer.stop()
 
-func reset_pca():
+func reset_pca() -> void:
 	"""Reset PCA and regenerate data"""
 	stop_computation()
 	computation_complete = false
@@ -725,7 +797,7 @@ func reset_pca():
 	clear_visualizations()
 	generate_data()
 
-func toggle_original_data():
+func toggle_original_data() -> void:
 	"""Toggle original data display"""
 	show_original_data = !show_original_data
 	if show_original_data:
@@ -735,7 +807,7 @@ func toggle_original_data():
 			point.queue_free()
 		original_points.clear()
 
-func toggle_projected_data():
+func toggle_projected_data() -> void:
 	"""Toggle projected data display"""
 	show_projected_data = !show_projected_data
 	if show_projected_data and computation_complete:
@@ -745,7 +817,7 @@ func toggle_projected_data():
 			point.queue_free()
 		projected_points.clear()
 
-func toggle_principal_components():
+func toggle_principal_components() -> void:
 	"""Toggle principal component display"""
 	show_principal_components = !show_principal_components
 	if show_principal_components and computation_complete:
@@ -777,4 +849,13 @@ func get_algorithm_info() -> Dictionary:
 			"explained_variance_ratio": explained_variance_ratio,
 			"reconstruction_error": get_reconstruction_error() if computation_complete else 0.0
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

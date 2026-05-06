@@ -1,0 +1,17 @@
+{
+  "id": "gen02_petals_short_fat",
+  "notes": "Short fat petals \u2014 scales / armor.",
+  "seed": "icosahedron",
+  "seed_scale": 0.5,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "petal_splay",
+      "selector": "all",
+      "params": {
+        "splay": 0.55,
+        "length": 0.2
+      }
+    }
+  ]
+}

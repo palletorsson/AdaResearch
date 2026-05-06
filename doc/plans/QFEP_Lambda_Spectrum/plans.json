@@ -1,0 +1,62 @@
+{
+  "name": "QFEP_Lambda_Spectrum",
+  "title": "Walking Order to Chaos",
+  "description": "Walk the spectrum from order to chaos. Your position IS the \u03bb value. Find where complexity emerges \u2014 the edge of chaos at \u03bb \u2248 0.4.",
+  "dimensions": {
+    "rows": 18,
+    "cols": 5
+  },
+  "n_artifacts": 7,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    17,
+    2
+  ],
+  "artifacts": [
+    {
+      "name": "crystal_formation",
+      "row": 1,
+      "col": 2,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "ordered_grid",
+      "row": 4,
+      "col": 2,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "bifurcation_walkway",
+      "row": 6,
+      "col": 0,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "edge_particles",
+      "row": 7,
+      "col": 2,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "complexity_pattern",
+      "row": 9,
+      "col": 2,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "dissolving_form",
+      "row": 12,
+      "col": 2,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "chaos_particles",
+      "row": 15,
+      "col": 2,
+      "family": "substrate_vectors"
+    }
+  ]
+}

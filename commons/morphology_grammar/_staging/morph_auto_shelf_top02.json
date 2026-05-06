@@ -1,0 +1,41 @@
+{
+  "id": "morph_auto_shelf_top02",
+  "family": "shelf",
+  "notes": "Auto-researched shelf variant: 45 front bays inside one frame body.",
+  "camera_yaw": 0.646,
+  "camera_pitch": 0.31,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.765,
+      2.144,
+      0.59
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 3,
+  "rules": [
+    {
+      "id": "shelf_front_bays",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 3,
+        "rows": 3,
+        "length": 0.09,
+        "scale": 0.717,
+        "door_col": 1,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

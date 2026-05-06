@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 
 @export var width: int = 128              # Width of the image texture
@@ -27,7 +27,7 @@ var time_since_last_step: float = 0.0     # Timer for step interval
 
 @onready var mesh_instance: MeshInstance3D = $GrabPaper/RandomWalkPlanMesh
 
-func _ready():
+func _ready() -> void:
 	if not mesh_instance:
 		push_error("MeshInstance3D not found in RandomWalk node!")
 		return
@@ -74,7 +74,7 @@ func _ready():
 	else:
 		push_warning("Label3D node not found at path: GrabPaper/id_info_Label3D")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_walking:
 		time_since_last_step += delta
 		if time_since_last_step >= interval:
@@ -86,11 +86,14 @@ func _process(delta):
 			MaterialHelper.update_texture_material(mesh_instance, texture)
 			time_since_last_step = 0.0
 
-func _on_grab_paper_grabbed(pickable: Variant, by: Variant) -> void:
+func _on_grab_paper_grabbed(_pickable: Variant, by: Variant) -> void:
 	print("Item picked up, starting random walk")
 	is_walking = true
 	time_since_last_step = 0.0  # Reset timer for immediate step
 
-func _on_grab_paper_dropped(pickable: Variant) -> void:
+func _on_grab_paper_dropped(_pickable: Variant) -> void:
 	print("Item dropped, stopping random walk")
 	is_walking = false
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

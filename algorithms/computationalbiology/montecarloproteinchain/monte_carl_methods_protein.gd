@@ -54,7 +54,7 @@ class Residue:
 	var hydrophobic: bool
 	var charge: int  # -1, 0, or 1
 	
-	func _init(aa_type: String):
+	func _init(aa_type: String) -> void:
 		type = aa_type
 		hydrophobic = HYDROPHOBIC.has(aa_type)
 		charge = 0
@@ -63,7 +63,7 @@ class Residue:
 		elif CHARGE_NEGATIVE.has(aa_type):
 			charge = -1
 
-func _ready():
+func _ready() -> void:
 	rng.randomize()
 	
 	# Setup enhanced visual environment
@@ -84,11 +84,11 @@ func _ready():
 	# Start Monte Carlo simulation
 	start_simulation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Slowly rotate the protein for better visualization
 	rotate_y(delta * 0.2)
 
-func generate_protein():
+func generate_protein() -> void:
 	residues.clear()
 	positions.clear()
 	
@@ -101,7 +101,7 @@ func generate_protein():
 	for i in range(NUM_RESIDUES):
 		positions.append(Vector3(i * BOND_LENGTH, 0, 0))
 
-func setup_ui():
+func setup_ui() -> void:
 	# Create energy display
 	energy_label = Label3D.new()
 	energy_label.text = "Energy: 0.0"
@@ -121,14 +121,14 @@ func setup_ui():
 	canvas_layer.add_child(pause_button)
 	add_child(canvas_layer)
 
-func _on_pause_button_pressed():
+func _on_pause_button_pressed() -> void:
 	paused = !paused
 	if paused:
 		$SimulationTimer.stop()
 	else:
 		$SimulationTimer.start()
 
-func create_visualization():
+func create_visualization() -> void:
 	# Remove any existing visualization
 	clear_visualization()
 	
@@ -153,7 +153,7 @@ func create_visualization():
 	if show_secondary_structure:
 		create_secondary_structure_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
 	"""Clear all visualization elements"""
 	for sphere in spheres:
 		if sphere and is_instance_valid(sphere):
@@ -284,7 +284,7 @@ func create_bond(pos1: Vector3, pos2: Vector3) -> MeshInstance3D:
 	add_child(bond)
 	return bond
 
-func center_protein():
+func center_protein() -> void:
 	# Calculate center of mass
 	var center = Vector3.ZERO
 	for pos in positions:
@@ -300,7 +300,7 @@ func center_protein():
 	# Update bonds
 	update_bonds()
 
-func update_bonds():
+func update_bonds() -> void:
 	for i in range(bonds.size()):
 		bonds[i].queue_free()
 	bonds.clear()
@@ -309,7 +309,7 @@ func update_bonds():
 		var bond = create_bond(positions[i-1], positions[i])
 		bonds.append(bond)
 
-func start_simulation():
+func start_simulation() -> void:
 	var timer = Timer.new()
 	timer.wait_time = 0.05  # 50ms between visual updates
 	timer.timeout.connect(_monte_carlo_step)
@@ -317,7 +317,7 @@ func start_simulation():
 	timer.name = "SimulationTimer"
 	add_child(timer)
 
-func _monte_carlo_step():
+func _monte_carlo_step() -> void:
 	if iteration_count >= ITERATIONS:
 		$SimulationTimer.stop()
 		print("Simulation complete!")
@@ -332,7 +332,7 @@ func _monte_carlo_step():
 	update_energy_display()
 	update_progress()
 
-func update_visualization_smooth():
+func update_visualization_smooth() -> void:
 	"""Update visualization with smooth animations"""
 	# Update sphere positions with smooth transitions
 	for i in range(positions.size()):
@@ -352,7 +352,7 @@ func update_visualization_smooth():
 	if show_secondary_structure:
 		create_secondary_structure_visualization()
 
-func update_progress():
+func update_progress() -> void:
 	"""Update progress bar and energy history"""
 	if progress_bar:
 		progress_bar.value = iteration_count
@@ -362,7 +362,7 @@ func update_progress():
 	if energy_history.size() > max_energy_history:
 		energy_history.pop_front()
 
-func perform_monte_carlo_iteration():
+func perform_monte_carlo_iteration() -> void:
 	# Choose a random residue (excluding first and last to simplify)
 	var residue_idx = rng.randi_range(1, positions.size() - 2)
 	
@@ -491,12 +491,12 @@ func calculate_energy() -> float:
 	
 	return energy
 
-func update_energy_display():
+func update_energy_display() -> void:
 	if energy_label and is_instance_valid(energy_label):
 		energy_label.text = "Energy: %.2f\nIteration: %d/%d" % [current_energy, iteration_count, ITERATIONS]
 
 # Setup camera and lights for better viewing
-func _enter_tree():
+func _enter_tree() -> void:
 	# Set up camera
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 0, 20)
@@ -519,7 +519,7 @@ func _enter_tree():
 #  Enhanced Visual Setup Functions
 #=============================================================================
 
-func setup_visual_environment():
+func setup_visual_environment() -> void:
 	"""Set up enhanced visual environment with better lighting and camera"""
 	# Add environment
 	var env = WorldEnvironment.new()
@@ -567,7 +567,7 @@ func setup_visual_environment():
 	camera.fov = 60.0
 	camera_controller.add_child(camera)
 
-func setup_enhanced_ui():
+func setup_enhanced_ui() -> void:
 	"""Create enhanced UI with more controls and information"""
 	ui_canvas = CanvasLayer.new()
 	add_child(ui_canvas)
@@ -638,7 +638,7 @@ func setup_enhanced_ui():
 	interaction_toggle.toggled.connect(_on_interactions_toggled)
 	toggle_container.add_child(interaction_toggle)
 
-func setup_particle_effects():
+func setup_particle_effects() -> void:
 	"""Setup particle effects for energy visualization"""
 	if not particle_effects:
 		return
@@ -661,12 +661,12 @@ func setup_particle_effects():
 	
 	add_child(energy_particles)
 
-func _on_temperature_changed(value: float):
+func _on_temperature_changed(_value: float) -> void:
 	"""Handle temperature slider change"""
 	# Update temperature for new moves
 	pass  # Temperature is used in the Monte Carlo step
 
-func _on_reset_button_pressed():
+func _on_reset_button_pressed() -> void:
 	"""Reset the simulation"""
 	iteration_count = 0
 	energy_history.clear()
@@ -675,15 +675,15 @@ func _on_reset_button_pressed():
 	current_energy = calculate_energy()
 	update_energy_display()
 
-func _on_energy_field_toggled(pressed: bool):
+func _on_energy_field_toggled(pressed: bool) -> void:
 	"""Toggle energy field visualization"""
 	show_energy_field = pressed
 
-func _on_interactions_toggled(pressed: bool):
+func _on_interactions_toggled(pressed: bool) -> void:
 	"""Toggle interaction visualization"""
 	show_interactions = pressed
 
-func create_interaction_visualization():
+func create_interaction_visualization() -> void:
 	"""Create visualization for residue interactions"""
 	# Clear existing interaction lines
 	for line in interaction_lines:
@@ -735,7 +735,7 @@ func create_interaction_line(pos1: Vector3, pos2: Vector3, distance: float) -> M
 	add_child(line)
 	return line
 
-func create_secondary_structure_visualization():
+func create_secondary_structure_visualization() -> void:
 	"""Create visualization for secondary structures (alpha helices, beta sheets)"""
 	# This is a simplified implementation
 	# In a real protein, you would analyze the backbone angles to detect structures
@@ -745,7 +745,7 @@ func create_secondary_structure_visualization():
 		if i + 4 < positions.size():
 			create_alpha_helix_ribbon(i, i + 4)
 
-func create_alpha_helix_ribbon(start_idx: int, end_idx: int):
+func create_alpha_helix_ribbon(start_idx: int, end_idx: int) -> void:
 	"""Create a ribbon representation of an alpha helix"""
 	var ribbon = MeshInstance3D.new()
 	var array_mesh = ArrayMesh.new()
@@ -785,3 +785,12 @@ func create_alpha_helix_ribbon(start_idx: int, end_idx: int):
 	
 	add_child(ribbon)
 	secondary_structure_meshes.append(ribbon)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

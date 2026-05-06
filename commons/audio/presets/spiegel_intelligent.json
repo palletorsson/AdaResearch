@@ -1,0 +1,92 @@
+{
+    "name": "Spiegel Intelligent Harmony",
+    "description": "Laurie Spiegel Music Mouse-inspired generative harmony. Algorithmic counterpoint, rule-based voice leading, evolving tonal textures.",
+    "style_notes": {
+        "influences": ["Laurie Spiegel", "Music Mouse", "GROOVE System", "Harmonices Mundi"],
+        "era": "1973-present",
+        "techniques": [
+            "Algorithmic harmony generation",
+            "Rule-based counterpoint (Bach-style)",
+            "Voice leading automation",
+            "Scale-locked improvisation",
+            "Natural phenomenon simulation"
+        ],
+        "philosophy": "Automate logical musical tasks to focus on what cannot be reduced to logic"
+    },
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.INTELLIGENT_HARMONY",
+            "volume_db": -6.0,
+            "bus": "Harmony"
+        },
+        {
+            "sound_id": "AudioSynthesizer.ALGORITHMIC_COUNTERPOINT",
+            "volume_db": -10.0,
+            "bus": "Melody"
+        }
+    ],
+    "placeholder_layer": {
+        "sound_id": "AudioSynthesizer.WARM_DIGITAL_PAD",
+        "volume_db": -12.0,
+        "bus": "Harmony",
+        "fade_out_when_ready": true,
+        "fade_duration": 3.0
+    },
+    "random_events": [
+        {
+            "sound_id": "AudioSynthesizer.ARPEGGIO_FLOURISH",
+            "interval_range": [12.0, 30.0],
+            "volume_db": -14.0,
+            "bus": "Melody"
+        }
+    ],
+    "buses": {
+        "Harmony": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.5,
+                    "depth": 0.3,
+                    "wet": 0.25
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 333,
+                    "feedback": 0.35,
+                    "wet": 0.2
+                }
+            ]
+        }
+    },
+    "generation": {
+        "async": true,
+        "persist_across_maps": true
+    },
+    "synthesis_parameters": {
+        "scale_type": "major",
+        "root_note": "C",
+        "harmony_voices": 4,
+        "voice_leading_rules": {
+            "max_interval_leap": 5,
+            "prefer_stepwise": true,
+            "avoid_parallel_fifths": true,
+            "resolve_leading_tone": true
+        },
+        "counterpoint_rules": {
+            "contrary_motion_weight": 0.6,
+            "oblique_motion_weight": 0.3,
+            "parallel_motion_weight": 0.1
+        },
+        "chord_change_probability": 0.25,
+        "melody_note_density": 2.0
+    }
+}

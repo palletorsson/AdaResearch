@@ -1,0 +1,1438 @@
+{
+	"registry_info": {
+		"name": "lab",
+		"description": "Laboratory equipment artifacts for bench instruments, monitors, and advanced experimental devices",
+		"category": "laboratory",
+		"theoretical_grounding": "Embodied instrumentation and interface literacy in AdaResearch lab environments"
+	},
+	"artifacts": {
+		"spine_portal": {
+			"lookup_name": "spine_portal",
+			"scene": "res://commons/artifacts/spine_portal/spine_portal.tscn",
+			"class_name": "SpinePortal",
+			"name": "Spine Corridor Portal",
+			"description": "Step into this pillar of light to enter the spine-runner corridor mode. Loads vr_spine_runner.tscn via VRStaging's standard scene transition.",
+			"category": "navigation",
+			"complexity": "advanced",
+			"tags": [
+				"portal",
+				"navigation",
+				"spine",
+				"corridor"
+			],
+			"measurements": {
+				"aabb_size": [
+					1.3,
+					3.02,
+					1.3
+				],
+				"aabb_center": [
+					0.0,
+					1.49,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 3.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"control_board": {
+			"lookup_name": "control_board",
+			"scene": "res://commons/artifacts/control_board/control_board.tscn",
+			"class_name": "ControlBoard",
+			"name": "Control Board",
+			"description": "Black Mesa-style mission control console with interactive CRT monitors, VU meters, push buttons, toggle switches, faders, rotary knobs, speaker and LED indicators. Screens flicker with phosphor glow, needles bounce to simulated signal, LEDs blink with activity.",
+			"category": "laboratory",
+			"complexity": "advanced",
+			"tags": [
+				"lab",
+				"control-panel",
+				"interactive",
+				"vr",
+				"monitors",
+				"buttons",
+				"retro"
+			],
+			"interactions": [
+				"press buttons to toggle LEDs",
+				"move faders to drive VU meters",
+				"observe animated CRT screens and blinking indicators"
+			],
+			"signals": [],
+			"parameters": {
+				"desk_width": "Console width in meters (default 2.4)",
+				"desk_depth": "Console depth in meters (default 0.8)",
+				"desk_height": "Console height in meters (default 0.85)",
+				"panel_tilt": "Surface angle in degrees (default 25)"
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"dev_themes": [
+				"environment",
+				"immersion",
+				"retro-tech"
+			],
+			"dev_category": "furniture",
+			"map_sequences": [
+				"testmaps"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~768"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.43,
+					1.4,
+					0.15
+				],
+				"aabb_center": [
+					0.0,
+					0.7,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.43,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"pipettedispenser": {
+			"lookup_name": "pipettedispenser",
+			"scene": "res://commons/lab/pipettedispenser/pipettedispenser.tscn",
+			"name": "Pipette Dispenser",
+			"description": "Precision liquid handling instrument with volume feedback and dispense animation.",
+			"category": "laboratory",
+			"complexity": "intermediate",
+			"tags": [
+				"lab",
+				"chemistry",
+				"pipette",
+				"measurement",
+				"instrument"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab",
+				"music"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.08,
+					0.17,
+					0.07
+				],
+				"aabb_center": [
+					0.0,
+					0.09,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.17,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"quantumentanglementmeter": {
+			"lookup_name": "quantumentanglementmeter",
+			"scene": "res://commons/lab/quantumentanglementmeter/quantumentanglementmeter.tscn",
+			"name": "Quantum Entanglement Meter",
+			"description": "Dual-chamber quantum diagnostic device with coherence and anomaly visualization.",
+			"category": "laboratory",
+			"complexity": "advanced",
+			"tags": [
+				"lab",
+				"quantum",
+				"entanglement",
+				"meter",
+				"instrument"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.16,
+					0.1,
+					0.09
+				],
+				"aabb_center": [
+					0.0,
+					0.05,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.16,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"resonancechamber": {
+			"lookup_name": "resonancechamber",
+			"scene": "res://commons/lab/resonancechamber/resonancechamber.tscn",
+			"name": "Resonance Chamber",
+			"description": "High-energy resonance chamber with rotating rings and phased conduit feedback.",
+			"category": "laboratory",
+			"complexity": "advanced",
+			"tags": [
+				"lab",
+				"resonance",
+				"chamber",
+				"energy",
+				"instrument"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					4
+				],
+				"size_group": "environment"
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.99,
+					6.0,
+					5.99
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					0.0
+				],
+				"grid_cells": [
+					6.0,
+					6.0
+				],
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				6.0,
+				1,
+				6.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"fluxdetector": {
+			"lookup_name": "fluxdetector",
+			"scene": "res://commons/lab/fluxdetector/fluxdetector.tscn",
+			"name": "Flux Detector",
+			"description": "Temporal and field flux detector with sweep animations and anomaly signaling.",
+			"category": "laboratory",
+			"complexity": "advanced",
+			"tags": [
+				"lab",
+				"flux",
+				"detector",
+				"temporal",
+				"instrument"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.23,
+					0.19,
+					0.23
+				],
+				"aabb_center": [
+					0.0,
+					0.1,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.23,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"cryogenicpreservation": {
+			"lookup_name": "cryogenicpreservation",
+			"scene": "res://commons/lab/cryogenicpreservation/cryogenicpreservation.tscn",
+			"name": "Cryogenic Preservation Unit",
+			"description": "Cryogenic chamber with cooling cycle visuals and preservation state indicators.",
+			"category": "laboratory",
+			"complexity": "advanced",
+			"tags": [
+				"lab",
+				"cryogenic",
+				"preservation",
+				"cooling",
+				"instrument"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					4,
+					3,
+					2
+				],
+				"size_group": "room_scale"
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.62,
+					4.05,
+					2.55
+				],
+				"aabb_center": [
+					0.0,
+					0.97,
+					0.07
+				],
+				"grid_cells": [
+					4.0,
+					3.0
+				],
+				"max_dimension_m": 4.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"robotarm": {
+			"lookup_name": "robotarm",
+			"scene": "res://commons/lab/robotarm/robotarm.tscn",
+			"name": "Robot Arm",
+			"description": "Articulated lab robot for scripted precision handling and calibration sequences.",
+			"category": "laboratory",
+			"complexity": "intermediate",
+			"tags": [
+				"lab",
+				"robotics",
+				"arm",
+				"automation",
+				"instrument"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"art",
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					1.73,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.86,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"circularradarmonitor": {
+			"lookup_name": "circularradarmonitor",
+			"scene": "res://commons/lab/circularradarmonitor/circularradarmonitor.tscn",
+			"name": "Circular Radar Monitor",
+			"description": "Circular sweep monitor with contact blips, range rings, and target status cues.",
+			"category": "laboratory",
+			"complexity": "intermediate",
+			"tags": [
+				"lab",
+				"radar",
+				"monitor",
+				"detection",
+				"instrument"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.4,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.2,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"datatablet": {
+			"lookup_name": "datatablet",
+			"scene": "res://commons/lab/datatablet/datatablet.tscn",
+			"name": "Data Tablet",
+			"description": "Portable lab tablet interface for dataset refresh, sync status, and alerts.",
+			"category": "laboratory",
+			"complexity": "beginner",
+			"tags": [
+				"lab",
+				"tablet",
+				"data",
+				"interface",
+				"monitor"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.12,
+					0.18,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.09,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.18,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"electromagneticfieldgenerator": {
+			"lookup_name": "electromagneticfieldgenerator",
+			"scene": "res://commons/lab/electromagneticfieldgenerator/electromagneticfieldgenerator.tscn",
+			"name": "Electromagnetic Field Generator",
+			"description": "Electromagnetic generator with Tesla coil phases and field-strength dynamics.",
+			"category": "laboratory",
+			"complexity": "advanced",
+			"tags": [
+				"lab",
+				"electromagnetic",
+				"field",
+				"generator",
+				"instrument"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					8,
+					2,
+					7
+				],
+				"size_group": "environment"
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.5,
+					8.0,
+					7.99
+				],
+				"aabb_center": [
+					-0.25,
+					1.0,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					8.0
+				],
+				"max_dimension_m": 8.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"terminal": {
+			"lookup_name": "terminal",
+			"scene": "res://commons/lab/terminal/terminal.tscn",
+			"name": "Lab Terminal",
+			"description": "Research terminal with animated status lights, screen flicker, and analysis cycle.",
+			"category": "laboratory",
+			"complexity": "beginner",
+			"tags": [
+				"lab",
+				"terminal",
+				"computer",
+				"interface",
+				"monitor"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					0.57,
+					0.55
+				],
+				"aabb_center": [
+					0.0,
+					0.29,
+					0.08
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"smallcontainment": {
+			"lookup_name": "smallcontainment",
+			"name": "smallcontainment",
+			"description": "Desk-scale containment cube with animated field projectors and floating specimen.",
+			"scene": "res://commons/lab/smallcontainment/smallcontainment.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.29,
+					0.2
+				],
+				"aabb_center": [
+					0.0,
+					0.04,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.29,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"chair2": {
+			"lookup_name": "chair2",
+			"name": "chair2",
+			"description": "Procedurally builds a wood chair with seat, backrest, and legs atop a tartan accent pad.",
+			"scene": "res://commons/lab/chair/officechair.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				5,
+				6,
+				3
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					6,
+					3
+				],
+				"size_group": "environment"
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					1.24,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.59,
+					-0.13
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.24,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"entropy_visualization": {
+			"lookup_name": "entropy_visualization",
+			"name": "entropy_visualization",
+			"description": "entropy_visualization",
+			"scene": "res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			}
+		}
+	}
+}

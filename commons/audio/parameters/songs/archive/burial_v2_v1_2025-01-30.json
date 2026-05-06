@@ -1,0 +1,27 @@
+{
+    "_metadata": {
+        "sound_type": "burial_v2_song",
+        "display_name": "Burial V2",
+        "description": "Enhanced Burial style. Deeper atmospheres, more vinyl rain, ghostlier vocals, South London nights.",
+        "category": "songs",
+        "tags": ["burial", "dubstep", "uk_garage", "dark", "v2", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Burial"],
+        "reference_tracks": ["Stolen Dog", "Rival Dealer", "Come Down To Us"]
+    },
+    "identity": {
+        "emotion": "nocturnal_sorrow",
+        "era": "mid_00s_london",
+        "character": ["underground", "ghostly", "urban", "emotional"]
+    },
+    "parameters": {
+        "bpm": { "min": 125, "max": 140, "value": 132, "step": 1 },
+        "key": { "options": ["Am", "Dm", "Em", "Gm"], "value": "Dm" },
+        "atmosphere_depth": { "min": 0.0, "max": 1.0, "value": 0.9 }
+    },
+    "sound_design": {
+        "atmosphere": { "reverb_decay": 6.0, "phaser": true },
+        "sub_bass": { "freq": 40, "saturation": 1.4 },
+        "drums": { "style": "2step_shuffled", "timing_slop": 15 }
+    }
+}

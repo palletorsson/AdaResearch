@@ -1,16 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cta7bg2mikhes"]
+[gd_scene load_steps=4 format=3 uid="uid://cta7bg2mikhes"]
 
-[ext_resource type="PackedScene" uid="uid://n88q8m218rmh" path="res://algorithms/misc/algorithm_flowchart_2d.tscn" id="1_dxj5k"]
+[ext_resource type="PackedScene" uid="uid://3c6rskdpafdo" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/paint_dripping_2d.tscn" id="1_x1kv6"]
+[ext_resource type="Script" uid="uid://dmnqe63j33p2e" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/pollock_painting_in_3d.gd" id="2_6ntf0"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lvt26"]
 viewport_path = NodePath("SubViewport")
 
 [node name="OverviewIn3d" type="Node3D"]
+script = ExtResource("2_6ntf0")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(1024, 512)
+size = Vector2i(1200, 800)
+render_target_update_mode = 4
 
-[node name="AlgorithmFlowChart2D" parent="SubViewport" instance=ExtResource("1_dxj5k")]
+[node name="PollockPainting2D" parent="SubViewport" instance=ExtResource("1_x1kv6")]
+initial_paint_ratio = 0.12
+paint_buildup_duration = 90.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)

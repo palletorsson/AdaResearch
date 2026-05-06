@@ -1,0 +1,33 @@
+{
+  "id": "gen02_mushroom_petaled",
+  "notes": "Mushroom with petal underside.",
+  "seed": "cube",
+  "seed_scale": 0.3,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.7,
+        "scale": 1.0
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.08,
+        "scale": 1.9
+      }
+    },
+    {
+      "op": "petal_splay",
+      "selector": "down",
+      "params": {
+        "splay": 0.4,
+        "length": 0.35
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwm8x5n3vyapq"]
+
+[ext_resource type="Script" path="res://commons/agent/CubeAgentBuilder.gd" id="1_agent_builder"]
+[ext_resource type="Script" path="res://commons/agent/CubeAgentWalkController.gd" id="2_walk_controller"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(20, 0.2, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(20, 0.2, 20)
+
+[node name="CubeAgentTest" type="Node3D"]
+
+[node name="CubeAgent" type="Node3D" parent="."]
+script = ExtResource("1_agent_builder")
+agent_data_path = "res://commons/agent/agent_data.json"
+cube_size = 0.2
+cube_mass = 0.5
+
+[node name="WalkController" type="Node" parent="CubeAgent"]
+script = ExtResource("2_walk_controller")
+walk_speed = 5.0
+step_frequency = 2.0
+step_height = 80.0
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Environment"]
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Environment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[editable path="CubeAgent"]

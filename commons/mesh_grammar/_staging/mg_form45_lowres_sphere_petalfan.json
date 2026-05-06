@@ -1,0 +1,21 @@
+{
+  "id": "mg_form45_lowres_sphere_petalfan",
+  "notes": "LOW-RES SPHERE EXPANSION: the low-res sphere opens into a giant petal fan. Less body-preserving than the bloom, more about how far the spherical seed can theatrically unfold.",
+  "seed": "icosahedron",
+  "seed_scale": 0.3,
+  "generations": 1,
+  "camera_pitch": 0.34,
+  "rules": [
+    {
+      "op": "petal_splay",
+      "selector": "all",
+      "params": {
+        "splay": 0.62,
+        "length": 1.18,
+        "width_scale": 1.08,
+        "thickness": 0.08,
+        "tag": "petal_fan"
+      }
+    }
+  ]
+}

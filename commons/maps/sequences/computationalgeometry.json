@@ -1,0 +1,137 @@
+{
+	"sequences": {
+		"computationalgeometry": {
+			"name": "Computational Geometry",
+			"description": "Explore geometric algorithms and spatial computation",
+			"qfep_term": "F",
+			"qfep_connection": "Geometric computation is exact, deterministic, order-maximizing â€” the pure F-domain. Convex hulls, Voronoi diagrams, and triangulations find the minimal structures that organize spatial data.",
+			"difficulty": "advanced",
+			"estimated_time": "30-35 minutes",
+			"learning_objectives": [
+				"Geometric algorithm design",
+				"Spatial data structures",
+				"Distance field computation",
+				"Morphological operations"
+			],
+			"maps": [
+				"Geometric_1: Grid as Ground Truth",
+				"Geometric_2: Void as Datum",
+				"Geometric_3: Irregular Exactitude",
+				"ComputationalGeometry_Medial_Axis_Transform: Skeleton of Shape",
+				"ComputationalGeometry_Distance_Fields_SDF: Distance Everywhere at Once",
+				"ComputationalGeometry_Morphological_Operations: Erosion and Dilation",
+				"ComputationalGeometry_Closest_Pair_Problem: Nearest Two Among Many",
+				"ComputationalGeometry_Line_Intersection: Where Paths Cross",
+				"ComputationalGeometry_Point_in_Polygon: Containment by Crossing Count",
+				"ComputationalGeometry_Convex_Hull_Algorithms: Tightest Boundary",
+				"ComputationalGeometry_Euclidean_Distance_Transform: Distance as Terrain"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_computationalgeometry",
+			"unlock_requirements": [
+				"graphtheory"
+			],
+			"completion_rewards": [
+				"geometry_expert_badge",
+				"spatial_computation_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Geometric_1",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Scene-embedded geometric algorithm demonstrations. Awaiting artifact placement — algorithm visualization runs in-scene."
+				},
+				{
+					"map": "Geometric_2",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Scene-embedded geometric algorithm demonstrations. Second introductory gallery — algorithm visualization runs in-scene."
+				},
+				{
+					"map": "Geometric_3",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Scene-embedded geometric computations. Foundation gallery — spatial algorithms demonstrated through environment geometry."
+				},
+				{
+					"map": "ComputationalGeometry_Medial_Axis_Transform",
+					"position": "foundation",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Medial axis as skeleton: the locus of inscribed circles that captures a shape's topological essence. Thinning geometry to its structural core."
+				},
+				{
+					"map": "ComputationalGeometry_Distance_Fields_SDF",
+					"position": "exploration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Signed distance fields: every point in space knows how far it is from the nearest surface. The implicit representation that powers modern rendering and collision."
+				},
+				{
+					"map": "ComputationalGeometry_Morphological_Operations",
+					"position": "exploration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Dilation, erosion, opening, closing: structuring elements sweep across shapes, adding or removing boundary pixels. Image processing as geometric sculpting."
+				},
+				{
+					"map": "ComputationalGeometry_Closest_Pair_Problem",
+					"position": "exploration",
+					"artifacts": [
+						"fibonacci_sequences"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Divide and conquer finds the nearest two points in O(n log n). Fibonacci sequences provide spatial distribution context for the geometric search."
+				},
+				{
+					"map": "ComputationalGeometry_Line_Intersection",
+					"position": "integration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Sweep line algorithm: a vertical line scans left to right, detecting segment crossings. Event-driven geometry turning O(n²) brute force into elegance."
+				},
+				{
+					"map": "ComputationalGeometry_Point_in_Polygon",
+					"position": "integration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Ray casting: shoot a ray from the point, count boundary crossings. Odd means inside, even means outside. The simplest topological test in computational geometry."
+				},
+				{
+					"map": "ComputationalGeometry_Convex_Hull_Algorithms",
+					"position": "synthesis",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Gift wrapping, Graham scan, quickhull: multiple strategies for finding the tightest convex boundary. The rubber band around the nails — minimal enclosure as geometric synthesis."
+				},
+				{
+					"map": "ComputationalGeometry_Euclidean_Distance_Transform",
+					"position": "synthesis",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Every pixel labeled with its distance to the nearest feature: the distance transform that enables Voronoi computation, path planning, and morphological analysis."
+				}
+			]
+		}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
+}

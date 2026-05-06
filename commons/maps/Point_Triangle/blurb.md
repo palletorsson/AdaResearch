@@ -1,0 +1,3 @@
+Three points close a boundary. For the first time: inside and outside. The triangle is the GPU's atom — all surfaces decompose here. Enclosure begins. Territory begins.
+
+The `triangle_line_puzzle` lets you construct the closure yourself — three vertices, one commitment, and suddenly area exists. `triangleprofiles` shows the triangle as cross-section, the minimum figure that separates volume into within and beyond. The Jordan curve theorem at its simplest: a closed curve creates exactly two regions. Ask who is inside. Ask who is outside. The first geometry of exclusion is also the first geometry of shelter.

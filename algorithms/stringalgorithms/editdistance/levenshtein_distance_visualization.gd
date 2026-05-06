@@ -56,7 +56,7 @@ var computation_statistics: Dictionary = {
 	"final_distance": 0
 }
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_camera()
 	load_transition_preset()
@@ -66,14 +66,14 @@ func _ready():
 	if auto_animate:
 		start_transformation_animation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_animating_transformation and auto_animate:
 		animation_timer += delta
 		if animation_timer >= animation_speed:
 			perform_transformation_step()
 			animation_timer = 0.0
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -94,7 +94,7 @@ func _input(event):
 			KEY_P:
 				toggle_path_visibility()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Gentle, affirming lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.2
@@ -112,16 +112,16 @@ func setup_environment():
 	env.environment = environment
 	add_child(env)
 
-func setup_camera():
+func setup_camera() -> void:
 	camera_controller = Node3D.new()
 	add_child(camera_controller)
 	
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 10, 20)
-	camera.look_at(Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	camera_controller.add_child(camera)
 
-func load_transition_preset(preset: String = ""):
+func load_transition_preset(preset: String = "") -> void:
 	if preset != "":
 		transition_preset = preset
 	
@@ -143,7 +143,7 @@ func load_transition_preset(preset: String = ""):
 	
 	restart_computation()
 
-func compute_levenshtein_distance():
+func compute_levenshtein_distance() -> void:
 	"""Compute the dynamic programming table for Levenshtein distance"""
 	source_chars = []
 	target_chars = []
@@ -191,7 +191,7 @@ func compute_levenshtein_distance():
 	
 	print("Levenshtein distance from '", source_string, "' to '", target_string, "': ", computation_statistics.final_distance)
 
-func build_transformation_sequence():
+func build_transformation_sequence() -> void:
 	"""Backtrack through DP table to find optimal transformation sequence"""
 	transformation_operations.clear()
 	computation_statistics.insertions = 0
@@ -261,7 +261,7 @@ func build_transformation_sequence():
 		  computation_statistics.deletions, " deletions, ", 
 		  computation_statistics.substitutions, " substitutions")
 
-func create_visualization():
+func create_visualization() -> void:
 	"""Create the complete visualization of the algorithm"""
 	clear_previous_visualization()
 	
@@ -275,7 +275,7 @@ func create_visualization():
 	
 	adjust_camera_for_content()
 
-func create_source_string_display():
+func create_source_string_display() -> void:
 	"""Create visual representation of source string"""
 	source_display = Node3D.new()
 	source_display.name = "SourceDisplay"
@@ -291,7 +291,7 @@ func create_source_string_display():
 		char_mesh.name = "source_char_" + str(i)
 		source_display.add_child(char_mesh)
 
-func create_target_string_display():
+func create_target_string_display() -> void:
 	"""Create visual representation of target string"""
 	target_display = Node3D.new()
 	target_display.name = "TargetDisplay"
@@ -307,7 +307,7 @@ func create_target_string_display():
 		char_mesh.name = "target_char_" + str(i)
 		target_display.add_child(char_mesh)
 
-func create_dp_table_display():
+func create_dp_table_display() -> void:
 	"""Create visual representation of the dynamic programming table"""
 	table_display = Node3D.new()
 	table_display.name = "TableDisplay"
@@ -335,7 +335,7 @@ func create_dp_table_display():
 			cell_mesh.name = "table_cell_" + str(i) + "_" + str(j)
 			table_display.add_child(cell_mesh)
 
-func create_transformation_display():
+func create_transformation_display() -> void:
 	"""Create display area for showing transformation operations"""
 	transformation_display = Node3D.new()
 	transformation_display.name = "TransformationDisplay"
@@ -344,7 +344,7 @@ func create_transformation_display():
 	var title_label = create_floating_text("Transformation Journey:", Vector3(-8, -2, 0), operation_color, 1.1)
 	transformation_display.add_child(title_label)
 
-func create_path_visualization():
+func create_path_visualization() -> void:
 	"""Create visualization of the optimal path through the DP table"""
 	path_visualization = Node3D.new()
 	path_visualization.name = "PathVisualization"
@@ -415,7 +415,7 @@ func create_floating_text(text: String, position: Vector3, color: Color, scale: 
 	label.modulate = color
 	return label
 
-func start_transformation_animation():
+func start_transformation_animation() -> void:
 	"""Begin animated visualization of the transformation sequence"""
 	current_operation_index = 0
 	is_animating_transformation = true
@@ -429,7 +429,7 @@ func start_transformation_animation():
 	update_ui()
 	print("Starting transformation animation...")
 
-func perform_transformation_step():
+func perform_transformation_step() -> void:
 	"""Perform one step of the transformation animation"""
 	if current_operation_index >= transformation_operations.size():
 		is_animating_transformation = false
@@ -445,7 +445,7 @@ func perform_transformation_step():
 	current_operation_index += 1
 	update_ui()
 
-func create_operation_visualization(operation: Dictionary, step_index: int):
+func create_operation_visualization(operation: Dictionary, step_index: int) -> void:
 	"""Create visual representation of a single transformation operation"""
 	var operation_text = ""
 	var operation_position = Vector3(-8, -4 - step_index * 0.8, 0)
@@ -465,7 +465,7 @@ func create_operation_visualization(operation: Dictionary, step_index: int):
 	# Add visual effect
 	create_operation_effect(operation, operation_position)
 
-func create_operation_effect(operation: Dictionary, position: Vector3):
+func create_operation_effect(operation: Dictionary, position: Vector3) -> void:
 	"""Create visual effect for transformation operation"""
 	var effect = MeshInstance3D.new()
 	var cylinder = CylinderMesh.new()
@@ -489,7 +489,7 @@ func create_operation_effect(operation: Dictionary, position: Vector3):
 	tween.tween_property(effect, "modulate:a", 0.0, 0.5)
 	tween.tween_callback(func(): effect.queue_free())
 
-func clear_previous_visualization():
+func clear_previous_visualization() -> void:
 	"""Clear all previous visualization elements"""
 	if source_display:
 		source_display.queue_free()
@@ -502,7 +502,7 @@ func clear_previous_visualization():
 	if path_visualization:
 		path_visualization.queue_free()
 
-func adjust_camera_for_content():
+func adjust_camera_for_content() -> void:
 	"""Adjust camera to show all content optimally"""
 	var content_bounds = calculate_content_bounds()
 	var camera_distance = max(content_bounds.x, content_bounds.y) * 1.5
@@ -514,7 +514,7 @@ func calculate_content_bounds() -> Vector2:
 	var max_y = 10 + transformation_operations.size() * 0.8
 	return Vector2(max_x, max_y)
 
-func restart_computation():
+func restart_computation() -> void:
 	"""Restart the entire computation and visualization"""
 	clear_previous_visualization()
 	compute_levenshtein_distance()
@@ -523,21 +523,21 @@ func restart_computation():
 	current_operation_index = 0
 	update_ui()
 
-func toggle_table_visibility():
+func toggle_table_visibility() -> void:
 	"""Toggle visibility of the DP table"""
 	show_dynamic_programming_table = !show_dynamic_programming_table
 	if table_display:
 		table_display.visible = show_dynamic_programming_table
 	update_ui()
 
-func toggle_path_visibility():
+func toggle_path_visibility() -> void:
 	"""Toggle visibility of the optimal path"""
 	highlight_optimal_path = !highlight_optimal_path
 	if path_visualization:
 		path_visualization.visible = highlight_optimal_path
 	update_ui()
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive user interface"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -567,14 +567,14 @@ func setup_ui():
 	
 	update_ui()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update user interface with current state"""
 	if not ui_display:
 		return
 	
 	var labels = []
 	for i in range(18):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	
@@ -596,4 +596,13 @@ func update_ui():
 		labels[14].text = ""
 		labels[15].text = "Controls: SPACE=Step/Start, R=Restart"
 		labels[16].text = "1-3=Presets, T=Toggle Table, P=Toggle Path"
-		labels[17].text = "Every edit operation represents growth toward authenticity" 
+		labels[17].text = "Every edit operation represents growth toward authenticity"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

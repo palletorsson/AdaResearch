@@ -1,0 +1,1 @@
+Coupled oscillators influence each other. Metronomes on a shared platform synchronize. Fireflies flash together. Neurons fire in rhythm. Coupling can lock phases, create beats, or produce chaos. Connection changes individual behavior into collective pattern.

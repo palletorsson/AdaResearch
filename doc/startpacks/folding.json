@@ -1,0 +1,148 @@
+{
+  "query": "Folding",
+  "matched_topic": "folding",
+  "pack_slug": "folding",
+  "title": "Folding",
+  "category": "experimental",
+  "tags": [
+    "folding",
+    "runtime",
+    "spec",
+    "morphology",
+    "prototype"
+  ],
+  "overview": "Folding is currently strongest as a design/runtime specification. It already has a detailed contract, but the runtime is still more design-heavy than grid or nature-system work. Start by separating authored specification from actually implemented fold code.",
+  "read_first": [
+    {
+      "path": "doc/FOLDING_CREATURE_SYSTEM.md",
+      "reason": "High-level folding design and authoring model.",
+      "exists": true
+    },
+    {
+      "path": "doc/FOLD_RUNTIME_SPEC_V1.md",
+      "reason": "Runtime class contracts and update order.",
+      "exists": true
+    },
+    {
+      "path": "doc/NATURE_SYSTEM_PLAN.md",
+      "reason": "Nature-system overlap if folding is being attached to critters rather than isolated artifacts.",
+      "exists": true
+    },
+    {
+      "path": "commons/primitives/foldedpaper/foldedpaper.gd",
+      "reason": "Closest concrete folded primitive currently present in the repo.",
+      "exists": true
+    }
+  ],
+  "principles": [],
+  "constraints": [
+    "Folding is specified across morphology, function, structure, and symbolic meaning.",
+    "The runtime spec centers on fold_amount and explicit FoldRig/FoldSolver abstractions.",
+    "Treat this as partially implemented: design truth is stronger than code truth here."
+  ],
+  "first_moves": [
+    "Decide whether the next step is spec consolidation, a folded primitive prototype, or critter integration.",
+    "Avoid assuming FoldRig/FoldSolver runtime classes already exist unless you verify them locally."
+  ],
+  "deepwiki_url": "https://deepwiki.com/palletorsson/AdaResearch",
+  "deepwiki_topics": [
+    "Overview",
+    "Interactive Components",
+    "Artifacts & Interactables"
+  ],
+  "encyclopedia": [],
+  "history_hits": [
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "1"
+    },
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "1"
+    }
+  ],
+  "doc_hits": [
+    {
+      "path": "doc/FOLDING_CREATURE_SYSTEM.md",
+      "snippet": "# Folding Creature System — Design Document v2.1",
+      "score": "7"
+    },
+    {
+      "path": "doc/FOLD_RUNTIME_SPEC_V1.md",
+      "snippet": "# Fold Runtime Spec v1",
+      "score": "6"
+    },
+    {
+      "path": "doc/LOD_TREE.json",
+      "snippet": "\"lod3\": \"Brouwer's free choice sequences - unfinished infinite objects that unfold over time, visualized as fading dots with an o...\",",
+      "score": "4"
+    },
+    {
+      "path": "doc/ARTIFACT_DEVELOPMENT_PLAN.md",
+      "snippet": "| `dragon_curve_unfolder` | 🔨 Build | MED | Paper folding visualization |",
+      "score": "3"
+    },
+    {
+      "path": "doc/TAXONOMY.md",
+      "snippet": "| 14 | `machinelearning` | `integration` | 18 | 18 | 0 | `MachineLearning_Evolving_Creatures` | `living_paper_kmeans`, `profile_gradient_descent`, `transformation_workbench` |",
+      "score": "3"
+    },
+    {
+      "path": "docs/reports/2026-02-08_godot46_upgrade.md",
+      "snippet": "- 3 tripod legs unfold from inside",
+      "score": "3"
+    }
+  ],
+  "repo_hits": [
+    "commons/fold_system/deltahedron_creature.gd",
+    "commons/fold_system/deltahedron_creature.gd.uid",
+    "commons/fold_system/deltahedron_creature.tscn",
+    "commons/fold_system/helix_cylinder_creature.gd",
+    "commons/fold_system/helix_cylinder_creature.gd.uid",
+    "commons/fold_system/helix_cylinder_creature.tscn",
+    "commons/fold_system/zoo/folding_zoo.gd",
+    "commons/fold_system/zoo/folding_zoo.gd.uid"
+  ],
+  "grounded_wiki": {
+    "project_slug": "adaresearch-case-study",
+    "points": [],
+    "claims": [],
+    "turns": [
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 614,
+        "role": "user",
+        "text": "great, now the paper what do you think? Fractal Folded Search: A Database Where Fold = Index = Compression, Benchmarked by Inference Cost Palle Torsson, Claude March 6, 2026 Abstract We present Fractal Folded Search, a database architecture for hierarchical knowledge systems in which a single recursive operation-the fo..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 616,
+        "role": "user",
+        "text": "Fractal Folded Search: A Database Where Fold = Index = Compression, Benchmarked by Inference Cost Palle Torsson, Claude March 6, 2026 Abstract We present Fractal Folded Search, a database architecture for hierarchical knowledge systems in which a single recursive operation-the fold-simultaneously performs storage summa..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 562,
+        "role": "user",
+        "text": "* Three questions: Do you believe in fractal folded search? Different fractal folding strategies for storing and searching over a project like ada research. Any novelty? Not a graph database, a fractal database. What do you do when you compress your thoughts? * Expose every endpoint with a compaction or your chosen for..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 618,
+        "role": "user",
+        "text": "...he paper is already strong on the things that matter most in an early research draft: The framing works. \"Fold = index = compression\" is memorable, and \"tokens per correct answer\" is a real evaluative claim, not just branding. The experiment is credible. The dual-agent comparison is limited, but it is concrete and inte..."
+      }
+    ]
+  },
+  "trust_order": [
+    "repo files",
+    "doc/ and docs/ contracts",
+    "session handoffs and session summaries",
+    "grounded wiki chat points and turns",
+    "encyclopedia routes and source files",
+    "DeepWiki overview"
+  ],
+  "generated_at": "2026-04-04T11:50:54+00:00"
+}

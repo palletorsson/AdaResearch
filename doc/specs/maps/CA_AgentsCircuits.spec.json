@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CA_AgentsCircuits",
+  "home_sequence": "cellularautomata",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "CellularAutomata3DStacked layers elementary CA time-steps into a navigable 3D volume; ca_rule_explorer provides an interactive Wolfram CA sandbox for custom rule definition and experimentation.",
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.044,
+  "breath_zones": [
+    {
+      "size": 42,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0952380952380953,
+        3.2142857142857144
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "CellularAutomata3DStacked"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "token": "sierpinski_pyramid"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 45,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

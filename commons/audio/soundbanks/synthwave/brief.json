@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "id": "synthwave",
+    "name": "Synthwave",
+    "lineage": "Kavinsky, College, Perturbator, Carpenter Brut, John Carpenter",
+    "era": "2005-present (1980s homage)",
+    "bpm": { "min": 80, "max": 118, "typical": 108 },
+    "lambda": 0.3
+  },
+
+  "identity": {
+    "token": "Gated reverb snare + JP-8000 supersaw + Juno chorus arp",
+    "two_second_test": "Big 80s snare hit, wide detuned synth, nostalgic",
+    "emotional_truth": "1980s nostalgia, neon nights, VHS dreams"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "bass", "supersaw", "arp", "pad", "lead", "sweep_up", "impact"],
+
+  "forbidden": [
+    "vinyl_crackle",
+    "tape_degradation", 
+    "bitcrushing",
+    "hoover_bass",
+    "2step_rhythm",
+    "humanization",
+    "zero_detune_pads"
+  ],
+
+  "rhythm": {
+    "quantize": "strict",
+    "humanize_ms": 0,
+    "swing_pct": 0
+  },
+
+  "harmony": {
+    "scales": ["minor", "dorian"],
+    "voicings": "80s_pop"
+  },
+
+  "fx": {
+    "gated_reverb": true,
+    "chorus": true,
+    "delay_dotted_eighth": true
+  },
+
+  "transitions": {
+    "crossfade_s": 2.5
+  },
+
+  "sections": {
+    "intro": ["pad", "arp"],
+    "verse": ["pad", "arp", "bass", "hihat"],
+    "chorus": ["kick", "snare", "hihat", "bass", "supersaw", "arp", "pad"],
+    "build": ["pad", "arp", "bass", "hihat"],
+    "main": ["kick", "snare", "hihat", "bass", "supersaw", "arp", "pad"],
+    "breakdown": ["pad", "arp"],
+    "outro": ["pad"]
+  }
+}

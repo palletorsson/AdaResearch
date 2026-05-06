@@ -38,7 +38,7 @@ var post_processing_material: ShaderMaterial
 # Animation variables
 var time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Create the basic environment
 	setup_environment()
 	
@@ -55,7 +55,7 @@ func _ready():
 	# Start video playback
 	start_video_projections()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Animate color shifts
@@ -68,7 +68,7 @@ func _process(delta):
 	if use_post_processing and post_processing_material:
 		post_processing_material.set_shader_parameter("time", time)
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create a world environment for the surreal atmosphere
 	world_environment = WorldEnvironment.new()
 	var environment = Environment.new()
@@ -104,7 +104,7 @@ func setup_environment():
 	directional_light.rotation_degrees = Vector3(-45, 45, 0)
 	add_child(directional_light)
 
-func create_projection_surfaces():
+func create_projection_surfaces() -> void:
 	# Create various surfaces for projections
 	
 	# 1. Large curved screen
@@ -287,7 +287,7 @@ func create_dome_projection_surface(position: Vector3, radius: float, rings: int
 	
 	return surface
 
-func create_floating_objects():
+func create_floating_objects() -> void:
 	# Create various floating objects typical of Rist's installations
 	
 	# 1. Floating flowers
@@ -460,7 +460,7 @@ func create_water_object(position: Vector3, size: Vector3) -> Node3D:
 	
 	return water
 
-func setup_post_processing():
+func setup_post_processing() -> void:
 	# Create a shader for post-processing effects typical in Rist's work
 	var canvas_layer = CanvasLayer.new()
 	add_child(canvas_layer)
@@ -480,7 +480,7 @@ func setup_post_processing():
 	# Ensure the rect covers the full viewport
 	color_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 
-func start_video_projections():
+func start_video_projections() -> void:
 	# Set up video projections for surfaces
 	var default_videos = [
 
@@ -491,7 +491,7 @@ func start_video_projections():
 	
 
 
-func create_projection_for_surface(surface: Node3D, video_path: String):
+func create_projection_for_surface(surface: Node3D, video_path: String) -> void:
 	# Check if we have a mesh to project onto
 	var mesh_instance = find_mesh_instance(surface)
 	if not mesh_instance:
@@ -547,7 +547,7 @@ func find_mesh_instance(node: Node) -> MeshInstance3D:
 	
 	return null
 
-func animate_colors(delta):
+func animate_colors(delta) -> void:
 	# Animate environment colors
 	if world_environment and world_environment.environment:
 		var env = world_environment.environment
@@ -571,7 +571,7 @@ func animate_colors(delta):
 			var pulse = (sin(time * pulsating_speed + i * 0.5) * 0.3 + 0.7) * projection_intensity
 			mat.emission_energy = pulse
 
-func animate_floating_objects(delta):
+func animate_floating_objects(delta) -> void:
 	# Animate all floating objects
 	for i in range(floating_objects.size()):
 		var obj = floating_objects[i]
@@ -622,14 +622,14 @@ func add_floating_object(position: Vector3, type: String = "flower"):
 	
 	return null
 
-func change_all_videos(video_path: String):
+func change_all_videos(video_path: String) -> void:
 	for i in range(video_players.size()):
 		if ResourceLoader.exists(video_path):
 			var video_stream = load(video_path)
 			video_players[i].stream = video_stream
 			video_players[i].play()
 
-func set_color_theme(main_color: Color):
+func set_color_theme(main_color: Color) -> void:
 	fog_color = main_color
 	ambient_light_color = main_color.darkened(0.5)
 	sky_color = main_color.lightened(0.3)
@@ -639,3 +639,12 @@ func set_color_theme(main_color: Color):
 		env.fog_color = fog_color
 		env.ambient_light_color = ambient_light_color
 		env.background_color = sky_color
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

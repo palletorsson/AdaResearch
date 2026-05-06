@@ -1,4 +1,4 @@
-# GridAudioComponent.gd
+﻿# GridAudioComponent.gd
 # Manages ambient audio for grid-based maps
 # Integrates with SoundBankSingleton and AmbientSoundController
 
@@ -44,7 +44,7 @@ func initialize(grid_sys: Node3D, data_comp: GridDataComponent):
 	is_initialized = true
 	audio_initialized.emit()
 
-# Resolve audio configuration from hierarchy (Global → Sequence → Map)
+# Resolve audio configuration from hierarchy (Global â†’ Sequence â†’ Map)
 func resolve_audio_config() -> Dictionary:
 	"""
 	Resolve audio configuration with three-level hierarchy:
@@ -55,32 +55,47 @@ func resolve_audio_config() -> Dictionary:
 
 	var config = {}
 
-	# Try to load map_sequences.json for global and sequence config
-	var sequences_data = _load_map_sequences()
-	print("🔍 Loaded map_sequences.json: %s" % (not sequences_data.is_empty()))
-
-	if sequences_data:
-		# 1. Apply global defaults
-		if "audio_defaults" in sequences_data:
-			config = sequences_data["audio_defaults"].duplicate(true)
+	# Try to get sequence data from MapProgressionManager
+	var sequence_data = {}
+	if MapProgressionManager and "sequences" in MapProgressionManager:
+		print("ðŸ” Accessing MapProgressionManager sequences")
+		var full_sequences = MapProgressionManager.sequences
+		
+		# 1. Apply global audio defaults (if available in MapProgressionManager or hardcoded fallback)
+		if MapProgressionManager.get("progression_config") and "audio_defaults" in MapProgressionManager.progression_config:
+			config = MapProgressionManager.progression_config["audio_defaults"].duplicate(true)
 			print("GridAudioComponent: Applied global audio defaults: %s" % config)
-
-		# 2. Apply sequence-level config (if we can determine sequence)
-		print("🔍 Checking sequence config - sequence_id: '%s'" % sequence_id)
-		if not sequence_id.is_empty() and "sequences" in sequences_data:
-			print("🔍 Sequences available: %s" % str(sequences_data["sequences"].keys()))
-			if sequence_id in sequences_data["sequences"]:
-				var sequence = sequences_data["sequences"][sequence_id]
-				print("🔍 Found sequence: %s" % str(sequence))
+			
+		# 2. Apply sequence-level config
+		if not sequence_id.is_empty():
+			if sequence_id in full_sequences:
+				var sequence = full_sequences[sequence_id]
+				print("ðŸ” Found sequence in MapProgressionManager: %s" % str(sequence))
+				
+				# Check for direct ambient_preset in sequence (new format)
+				if "ambient_preset" in sequence:
+					config["ambient_preset"] = sequence["ambient_preset"]
+					print("GridAudioComponent: Applied sequence ambient preset: %s" % sequence["ambient_preset"])
+				
+				# Check for audio object (old format)
 				if "audio" in sequence:
 					config.merge(sequence["audio"], true)
-					print("GridAudioComponent: Applied sequence audio config: %s → %s" % [sequence_id, config])
-				else:
-					print("🔍 Sequence has no 'audio' key")
+					print("GridAudioComponent: Applied sequence audio config: %s" % config)
 			else:
-				print("🔍 Sequence '%s' not found in sequences" % sequence_id)
-		else:
-			print("🔍 Skipping sequence config (empty ID or no sequences)")
+				print("ðŸ” Sequence '%s' not found in MapProgressionManager" % sequence_id)
+	else:
+		print("GridAudioComponent: WARNING - MapProgressionManager not available")
+		
+		# Fallback to local load (legacy)
+		var sequences_data = _load_map_sequences()
+		if sequences_data:
+			if "audio_defaults" in sequences_data:
+				config = sequences_data["audio_defaults"].duplicate(true)
+			
+			if not sequence_id.is_empty() and "sequences" in sequences_data and sequence_id in sequences_data["sequences"]:
+				var sequence = sequences_data["sequences"][sequence_id]
+				if "audio" in sequence:
+					config.merge(sequence["audio"], true)
 
 	# 3. Apply map-level config (highest priority)
 	if data_component:
@@ -130,11 +145,11 @@ func set_sequence_id(seq_id: String):
 
 # Start ambient audio for the current map
 func start_ambient():
-	print("🎵 ========== AUDIO START DEBUG ==========")
-	print("🎵 Map name: %s" % map_name)
-	print("🎵 Sequence ID: '%s'" % sequence_id)
-	print("🎵 Is initialized: %s" % is_initialized)
-	print("🎵 Is already playing: %s" % is_playing)
+	print("ðŸŽµ ========== AUDIO START DEBUG ==========")
+	print("ðŸŽµ Map name: %s" % map_name)
+	print("ðŸŽµ Sequence ID: '%s'" % sequence_id)
+	print("ðŸŽµ Is initialized: %s" % is_initialized)
+	print("ðŸŽµ Is already playing: %s" % is_playing)
 
 	if is_playing:
 		print("GridAudioComponent: Audio already playing")
@@ -147,34 +162,34 @@ func start_ambient():
 
 	# Check if SoundBank singleton exists
 	var sound_bank = get_node_or_null("/root/SoundBank")
-	print("🎵 SoundBank found: %s" % (sound_bank != null))
+	print("ðŸŽµ SoundBank found: %s" % (sound_bank != null))
 	if not sound_bank:
 		print("GridAudioComponent: ERROR - SoundBank singleton not found!")
 		print("  Please add SoundBankSingleton to AutoLoad:")
-		print("  Project → Project Settings → AutoLoad")
+		print("  Project â†’ Project Settings â†’ AutoLoad")
 		print("  Name: SoundBank")
 		print("  Path: res://commons/audio/SoundBankSingleton.gd")
 		audio_error.emit("SoundBank singleton not found")
 		return
 
 	# Resolve audio configuration
-	print("🎵 Resolving audio config...")
+	print("ðŸŽµ Resolving audio config...")
 	resolve_audio_config()
-	print("🎵 Resolved config: %s" % audio_config)
+	print("ðŸŽµ Resolved config: %s" % audio_config)
 
 	# Get preset and settings
 	var preset = audio_config.get("ambient_preset", "silent")
 	var volume = audio_config.get("volume", 0.0)
 	var fade_duration = audio_config.get("crossfade_duration", 2.0)
 
-	print("🎵 Preset: '%s'" % preset)
-	print("🎵 Volume: %.1f dB" % volume)
-	print("🎵 Fade duration: %.1f s" % fade_duration)
+	print("ðŸŽµ Preset: '%s'" % preset)
+	print("ðŸŽµ Volume: %.1f dB" % volume)
+	print("ðŸŽµ Fade duration: %.1f s" % fade_duration)
 
 	# Skip if silent preset
 	if preset == "silent":
-		print("GridAudioComponent: ⚠️ Silent preset - no audio will play")
-		print("🎵 ========================================")
+		print("GridAudioComponent: âš ï¸ Silent preset - no audio will play")
+		print("ðŸŽµ ========================================")
 		return
 
 	# Create ambient controller if it doesn't exist
@@ -191,12 +206,12 @@ func start_ambient():
 
 	# Load and start the preset
 	print("GridAudioComponent: Starting ambient preset: %s (volume: %.1f dB)" % [preset, volume])
-	print("🎵 Calling ambient_controller.load_preset()...")
+	print("ðŸŽµ Calling ambient_controller.load_preset()...")
 	ambient_controller.load_preset(preset, volume, fade_duration)
-	print("🎵 load_preset() call completed")
+	print("ðŸŽµ load_preset() call completed")
 
 	is_playing = true
-	print("🎵 ========================================")
+	print("ðŸŽµ ========================================")
 
 # Stop ambient audio
 func stop_ambient():
@@ -237,14 +252,14 @@ func cleanup():
 # Signal handlers
 func _on_ambient_started():
 	var preset = audio_config.get("ambient_preset", "unknown")
-	print("GridAudioComponent: ✅ Ambient started - %s" % preset)
+	print("GridAudioComponent: âœ… Ambient started - %s" % preset)
 	ambient_started.emit(preset)
 
 func _on_ambient_stopped():
-	print("GridAudioComponent: ⏹️ Ambient stopped")
+	print("GridAudioComponent: â¹ï¸ Ambient stopped")
 	ambient_stopped.emit()
 
-func _on_random_event(sound_id: String):
+func _on_random_event(_sound_id: String):
 	# Optional: Log or handle random audio events
 	pass
 
@@ -262,7 +277,7 @@ func get_audio_info() -> Dictionary:
 
 func print_info():
 	var info = get_audio_info()
-	print("🎵 GRID AUDIO COMPONENT INFO 🎵")
+	print("ðŸŽµ GRID AUDIO COMPONENT INFO ðŸŽµ")
 	print("   Map: %s" % info["map_name"])
 	print("   Sequence: %s" % info["sequence_id"])
 	print("   Playing: %s" % info["is_playing"])

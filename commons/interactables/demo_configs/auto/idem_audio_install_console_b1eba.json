@@ -1,0 +1,172 @@
+{
+  "demo_info": {
+    "name": "Audio Install Console b1eba",
+    "description": "Auto-generated audio_install_console board composed from the InteractableDemo vocabulary.",
+    "family": "audio_install_console",
+    "auto_generated": true,
+    "auto_score": 34.16,
+    "selection_rank": 2
+  },
+  "titles": {
+    "main": "AUDIO INSTALL CONSOLE",
+    "row2": "SIGNAL METERS + MONITORS",
+    "row3": "CONTROL BANKS",
+    "row4": "AUDIO MAP TOKENS + RACK PRESETS"
+  },
+  "layout": {
+    "panel_color": [
+      0.64,
+      0.6,
+      0.56,
+      1.0
+    ],
+    "frame_color": [
+      0.2,
+      0.16,
+      0.15,
+      1.0
+    ],
+    "accent_color": [
+      0.86,
+      0.25,
+      0.48,
+      1.0
+    ],
+    "dark_color": [
+      0.12,
+      0.1,
+      0.11,
+      1.0
+    ],
+    "cream_color": [
+      0.8,
+      0.76,
+      0.7,
+      1.0
+    ],
+    "spacing": 0.254,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.097,
+    "row2_y": 0.651,
+    "row3_y": 0.163,
+    "row4_y": -0.303,
+    "show_hand_scale_guides": false
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "label": "SLIDER H",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/joystick_smooth.tscn",
+      "label": "JOYSTICK",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "label": "KNOB",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_zero.tscn",
+      "label": "ZERO",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "rect_sm",
+      "label": "RECT SM"
+    },
+    {
+      "type": "rect_tall",
+      "label": "RECT TALL"
+    }
+  ],
+  "passive_elements": [
+    {
+      "builder": "build_vu_meter_v",
+      "label": "VU METER V",
+      "width": 1
+    },
+    {
+      "builder": "build_speaker_lines",
+      "label": "SPEAKER LINES",
+      "width": 1
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_h",
+      "count": 2,
+      "label": "2x SLIDER H",
+      "width": 2
+    },
+    {
+      "type": "sliders_h",
+      "count": 3,
+      "label": "3x SLIDER H",
+      "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 4,
+      "label": "4x SLIDER V",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "live_audio_controller",
+      "preset": "basic_mono",
+      "token": "AudioContr:-90#preset:basic_mono",
+      "label": "LIVE\nBASIC",
+      "width": 4,
+      "live_scale": 0.34
+    },
+    {
+      "type": "rotary_selector",
+      "label": "ROTARY\nSELECTOR",
+      "width": 1
+    },
+    {
+      "type": "rack_scene_preset",
+      "config": "rack_ambient_drone",
+      "scene": "res://commons/audio/rack_presets/rack_ambient_drone.tscn",
+      "sound": "AMBIENT DRONE",
+      "label": "AMBIENT\nDRONE",
+      "width": 3,
+      "modules": 6
+    },
+    {
+      "type": "audio_controller_preset",
+      "preset": "template_showcase",
+      "token": "AudioContr:90:0.1:0.9#preset:template_showcase",
+      "label": "TEMPLATE\nSHOW",
+      "width": 3,
+      "knobs": 3,
+      "sliders": 2
+    },
+    {
+      "type": "audio_controller_preset",
+      "preset": "full_studio",
+      "token": "AudioContr:180#preset:full_studio",
+      "label": "FULL\nSTUDIO",
+      "width": 3,
+      "knobs": 4,
+      "sliders": 3
+    },
+    {
+      "type": "text_scroll_2",
+      "label": "SCROLL 2",
+      "width": 2
+    }
+  ]
+}

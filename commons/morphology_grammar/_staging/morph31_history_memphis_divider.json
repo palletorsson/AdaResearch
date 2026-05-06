@@ -1,0 +1,101 @@
+{
+  "id": "morph31_history_memphis_divider",
+  "family": "history_furniture",
+  "notes": "History-modernism pass: a Memphis-like divider or shelving object with asymmetrical bays, pastel planes, and a totemic center spine.",
+  "camera_yaw": 0.7,
+  "camera_pitch": 0.33,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.18,
+      1.1,
+      0.42
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "memphis_base",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.12,
+        "scale": 1.24
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "memphis_bays",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 3,
+        "rows": 3,
+        "length": 0.14,
+        "scale": 0.68,
+        "door_col": 1,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "memphis_wing_left",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.46,
+        "scale": 0.34,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.06,
+          0.22,
+          0.16
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "memphis_wing_right",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.58,
+        "scale": 0.28,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.08,
+          -0.06,
+          -0.12
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

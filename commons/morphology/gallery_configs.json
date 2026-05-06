@@ -1,0 +1,294 @@
+{
+  "version": 1,
+  "description": "Curated best-of configs for the Form Gallery. Each entry is one DNA sample that shows off the form library at its best.",
+  "configs": [
+    {
+      "id": "flower_classic",
+      "form": "flower",
+      "recipe": "res://commons/morphology/sdf/flower_body.gd",
+      "label": "Flower · classic",
+      "category": "kingdom",
+      "dna": {"scale": 0.8, "segments": 4, "symmetry": 6, "pattern_scale": 1.0, "pattern_density": 0.6},
+      "materials": "flower"
+    },
+    {
+      "id": "flower_3petal",
+      "form": "flower",
+      "recipe": "res://commons/morphology/sdf/flower_body.gd",
+      "label": "Flower · 3 petals",
+      "category": "kingdom",
+      "dna": {"scale": 0.8, "segments": 2, "symmetry": 3, "pattern_scale": 0.8},
+      "materials": "flower"
+    },
+    {
+      "id": "flower_7petal",
+      "form": "flower",
+      "recipe": "res://commons/morphology/sdf/flower_body.gd",
+      "label": "Flower · 7 petals",
+      "category": "kingdom",
+      "dna": {"scale": 0.8, "segments": 4, "symmetry": 7, "pattern_scale": 1.1},
+      "materials": "flower"
+    },
+    {
+      "id": "flower_compact",
+      "form": "flower",
+      "recipe": "res://commons/morphology/sdf/flower_body.gd",
+      "label": "Flower · compact",
+      "category": "kingdom",
+      "dna": {"scale": 0.6, "segments": 2, "symmetry": 8, "pattern_scale": 0.7},
+      "materials": "flower"
+    },
+    {
+      "id": "fungus_cap",
+      "form": "fungus",
+      "recipe": "res://commons/morphology/sdf/fungus_body.gd",
+      "label": "Fungus · cap",
+      "category": "kingdom",
+      "dna": {"scale": 0.8, "segments": 4, "symmetry": 6},
+      "materials": "fungus"
+    },
+    {
+      "id": "fungus_tall",
+      "form": "fungus",
+      "recipe": "res://commons/morphology/sdf/fungus_body.gd",
+      "label": "Fungus · tall",
+      "category": "kingdom",
+      "dna": {"scale": 1.0, "segments": 6, "symmetry": 5},
+      "materials": "fungus"
+    },
+    {
+      "id": "walker_biped",
+      "form": "walker",
+      "recipe": "res://commons/morphology/sdf/walker_body.gd",
+      "label": "Walker · biped",
+      "category": "kingdom",
+      "dna": {"scale": 0.8, "segments": 4, "symmetry": 2},
+      "materials": "walker"
+    },
+    {
+      "id": "walker_quad",
+      "form": "walker",
+      "recipe": "res://commons/morphology/sdf/walker_body.gd",
+      "label": "Walker · quad",
+      "category": "kingdom",
+      "dna": {"scale": 0.9, "segments": 4, "symmetry": 4},
+      "materials": "walker"
+    },
+    {
+      "id": "tree_classic",
+      "form": "tree",
+      "recipe": "res://commons/morphology/sdf/tree_body.gd",
+      "label": "Tree · classic",
+      "category": "kingdom",
+      "dna": {"scale": 1.0, "segments": 4, "symmetry": 5},
+      "materials": "tree"
+    },
+    {
+      "id": "tree_gnarled",
+      "form": "tree",
+      "recipe": "res://commons/morphology/sdf/tree_body.gd",
+      "label": "Tree · gnarled",
+      "category": "kingdom",
+      "dna": {"scale": 0.8, "segments": 6, "symmetry": 3},
+      "materials": "tree"
+    },
+    {
+      "id": "modulor_rung0",
+      "form": "modulor_walker",
+      "recipe": "res://commons/morphology/sdf/modulor_walker.gd",
+      "label": "Modulor · rung 0",
+      "category": "modulor",
+      "dna": {"scale": 1.0, "segments": 4, "symmetry": 2, "ladder_offset": 0},
+      "materials": "walker"
+    },
+    {
+      "id": "modulor_rung2",
+      "form": "modulor_walker",
+      "recipe": "res://commons/morphology/sdf/modulor_walker.gd",
+      "label": "Modulor · rung 2",
+      "category": "modulor",
+      "dna": {"scale": 1.0, "segments": 4, "symmetry": 2, "ladder_offset": 2},
+      "materials": "walker"
+    },
+    {
+      "id": "modulor_rung4",
+      "form": "modulor_walker",
+      "recipe": "res://commons/morphology/sdf/modulor_walker.gd",
+      "label": "Modulor · rung 4",
+      "category": "modulor",
+      "dna": {"scale": 1.0, "segments": 4, "symmetry": 2, "ladder_offset": 4},
+      "materials": "walker"
+    },
+    {
+      "id": "column_doric",
+      "form": "column",
+      "recipe": "res://commons/morphology/objects/classical/column.gd",
+      "label": "Column · Doric",
+      "category": "classical",
+      "dna": {},
+      "materials": "stone"
+    },
+    {
+      "id": "column_tall",
+      "form": "column",
+      "recipe": "res://commons/morphology/objects/classical/column.gd",
+      "label": "Column · tall",
+      "category": "classical",
+      "dna": {"height": 3.0, "shaft_radius": 0.22},
+      "materials": "stone"
+    },
+    {
+      "id": "pedestal_square",
+      "form": "pedestal",
+      "recipe": "res://commons/morphology/objects/classical/pedestal.gd",
+      "label": "Pedestal · square",
+      "category": "classical",
+      "dna": {},
+      "materials": "stone"
+    },
+    {
+      "id": "pedestal_tall",
+      "form": "pedestal",
+      "recipe": "res://commons/morphology/objects/classical/pedestal.gd",
+      "label": "Pedestal · tall",
+      "category": "classical",
+      "dna": {"height": 1.8, "width": 0.5, "depth": 0.5},
+      "materials": "stone"
+    },
+    {
+      "id": "amphora_classic",
+      "form": "amphora",
+      "recipe": "res://commons/morphology/objects/classical/amphora.gd",
+      "label": "Amphora · classic",
+      "category": "classical",
+      "dna": {},
+      "materials": "ceramic"
+    },
+    {
+      "id": "amphora_squat",
+      "form": "amphora",
+      "recipe": "res://commons/morphology/objects/classical/amphora.gd",
+      "label": "Amphora · squat",
+      "category": "classical",
+      "dna": {"height": 0.55, "belly_width": 0.5, "neck_ratio": 0.4},
+      "materials": "ceramic"
+    },
+    {
+      "id": "graph_tree_classic",
+      "form": "graph_tree",
+      "recipe": "res://commons/morphology/graph/graph_tree_body.gd",
+      "label": "Graph Tree · classic",
+      "category": "graph",
+      "dna": {"trunk_length": 1.5, "branch_count": 3, "depth": 4, "length_decay": 0.65, "angle_spread": 45, "radius_base": 0.18, "radius_decay": 0.62, "jitter": 0.25, "seed": 7},
+      "materials": "tree"
+    },
+    {
+      "id": "graph_tree_sparse",
+      "form": "graph_tree",
+      "recipe": "res://commons/morphology/graph/graph_tree_body.gd",
+      "label": "Graph Tree · sparse",
+      "category": "graph",
+      "dna": {"trunk_length": 1.8, "branch_count": 2, "depth": 4, "length_decay": 0.7, "angle_spread": 35, "radius_base": 0.2, "radius_decay": 0.65, "jitter": 0.15, "seed": 12},
+      "materials": "tree"
+    },
+    {
+      "id": "graph_tree_coral",
+      "form": "graph_tree",
+      "recipe": "res://commons/morphology/graph/graph_tree_body.gd",
+      "label": "Graph Tree · coral",
+      "category": "graph",
+      "dna": {"trunk_length": 1.2, "branch_count": 5, "depth": 4, "length_decay": 0.6, "angle_spread": 65, "radius_base": 0.15, "radius_decay": 0.6, "jitter": 0.3, "seed": 23},
+      "materials": "tree"
+    },
+    {
+      "id": "graph_tree_fan",
+      "form": "graph_tree",
+      "recipe": "res://commons/morphology/graph/graph_tree_body.gd",
+      "label": "Graph Tree · fan",
+      "category": "graph",
+      "dna": {"trunk_length": 1.0, "branch_count": 4, "depth": 5, "length_decay": 0.58, "angle_spread": 55, "radius_base": 0.14, "radius_decay": 0.55, "jitter": 0.4, "seed": 41},
+      "materials": "tree"
+    },
+    {
+      "id": "graph_tree_dense",
+      "form": "graph_tree",
+      "recipe": "res://commons/morphology/graph/graph_tree_body.gd",
+      "label": "Graph Tree · dense",
+      "category": "graph",
+      "dna": {"trunk_length": 1.4, "branch_count": 3, "depth": 5, "length_decay": 0.65, "angle_spread": 50, "radius_base": 0.16, "radius_decay": 0.62, "jitter": 0.2, "seed": 55},
+      "materials": "tree"
+    },
+    {
+      "id": "rhizome_classic",
+      "form": "rhizome",
+      "recipe": "res://commons/morphology/graph/rhizome_body.gd",
+      "label": "Rhizome · classic",
+      "category": "graph",
+      "dna": {"max_depth": 40, "step_length": 0.5, "variance": 0.3, "radius": 0.06, "seed": 11},
+      "materials": "tree"
+    },
+    {
+      "id": "koch_snowflake",
+      "form": "koch",
+      "recipe": "res://commons/morphology/fractals/koch_curve_body.gd",
+      "label": "Koch · snowflake",
+      "category": "fractal",
+      "dna": {"depth": 4, "length": 2.0, "radius": 0.04},
+      "materials": "neutral"
+    },
+    {
+      "id": "sierpinski_tetra",
+      "form": "sierpinski",
+      "recipe": "res://commons/morphology/fractals/sierpinski_body.gd",
+      "label": "Sierpinski · tetra",
+      "category": "fractal",
+      "dna": {"depth": 3, "size": 1.0, "radius": 0.02},
+      "materials": "neutral"
+    },
+    {
+      "id": "klein_bottle_default",
+      "form": "klein",
+      "recipe": "res://commons/morphology/parametric/klein_bottle_body.gd",
+      "label": "Klein bottle",
+      "category": "parametric",
+      "dna": {"scale": 0.05, "num_u": 48, "num_v": 24},
+      "materials": "ceramic"
+    },
+    {
+      "id": "mobius_default",
+      "form": "mobius",
+      "recipe": "res://commons/morphology/parametric/mobius_strip_body.gd",
+      "label": "Möbius strip",
+      "category": "parametric",
+      "dna": {"radius": 1.0, "width": 0.3, "twists": 1, "segments": 48, "w_segments": 8},
+      "materials": "ceramic"
+    },
+    {
+      "id": "supershape_star",
+      "form": "supershape",
+      "recipe": "res://commons/morphology/parametric/supershape_body.gd",
+      "label": "Supershape · hex star",
+      "category": "parametric",
+      "dna": {"scale": 0.5, "m": 6, "n1": 1.0, "n2": 1.0, "n3": 1.0, "num_u": 64, "num_v": 32},
+      "materials": "ceramic"
+    },
+    {
+      "id": "supershape_bloom",
+      "form": "supershape",
+      "recipe": "res://commons/morphology/parametric/supershape_body.gd",
+      "label": "Supershape · bloom",
+      "category": "parametric",
+      "dna": {"scale": 0.5, "m": 8, "n1": 0.3, "n2": 0.6, "n3": 0.6, "num_u": 64, "num_v": 32},
+      "materials": "ceramic"
+    },
+    {
+      "id": "ruin_wall_low",
+      "form": "ruin_wall",
+      "recipe": "res://commons/morphology/objects/classical/ruin_wall.gd",
+      "label": "Ruin · low wall",
+      "category": "classical",
+      "dna": {"length": 2.5, "height": 1.2, "jaggedness": 0.8, "rubble_count": 5},
+      "materials": "stone"
+    }
+  ]
+}

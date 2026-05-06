@@ -13,12 +13,12 @@ var generation_interval = 0.1
 var current_iteration = 0
 var max_iterations = 100
 
-func _ready():
+func _ready() -> void:
 	create_distance_field()
 	setup_materials()
 	start_poisson_disk_sampling()
 
-func create_distance_field():
+func create_distance_field() -> void:
 	var field_parent = $DistanceField
 	
 	for x in range(grid_size):
@@ -34,7 +34,7 @@ func create_distance_field():
 			field_parent.add_child(field_point)
 			distance_field[x].append(field_point)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Min distance material
 	var min_dist_material = StandardMaterial3D.new()
 	min_dist_material.albedo_color = Color(1.0, 0.3, 0.3, 1.0)
@@ -60,7 +60,7 @@ func setup_materials():
 		for point in row:
 			point.material_override = field_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_timer += delta
 	
@@ -75,7 +75,7 @@ func _process(delta):
 	animate_blue_noise()
 	animate_indicators()
 
-func start_poisson_disk_sampling():
+func start_poisson_disk_sampling() -> void:
 	noise_points.clear()
 	active_list.clear()
 	current_iteration = 0
@@ -88,7 +88,7 @@ func start_poisson_disk_sampling():
 	var initial_point = Vector2(0, 0)
 	add_sample_point(initial_point)
 
-func poisson_disk_step():
+func poisson_disk_step() -> void:
 	if active_list.size() == 0:
 		current_iteration = max_iterations
 		return
@@ -133,7 +133,7 @@ func is_valid_point(point: Vector2) -> bool:
 	
 	return true
 
-func add_sample_point(point: Vector2):
+func add_sample_point(point: Vector2) -> void:
 	noise_points.append(point)
 	active_list.append(point)
 	
@@ -164,7 +164,7 @@ func add_sample_point(point: Vector2):
 	if noise_points.size() % 5 == 0:  # Update every 5 points for performance
 		update_voronoi_diagram()
 
-func update_distance_field():
+func update_distance_field() -> void:
 	# Update distance field visualization
 	for x in range(grid_size):
 		for y in range(grid_size):
@@ -195,7 +195,7 @@ func update_distance_field():
 				)
 				material.emission = material.albedo_color * 0.3
 
-func update_voronoi_diagram():
+func update_voronoi_diagram() -> void:
 	# Clear existing voronoi cells
 	for cell in voronoi_cells:
 		cell.queue_free()
@@ -236,7 +236,7 @@ func update_voronoi_diagram():
 			
 			create_voronoi_edge(start_point, end_point)
 
-func create_voronoi_edge(start: Vector2, end: Vector2):
+func create_voronoi_edge(start: Vector2, end: Vector2) -> void:
 	var edge = CSGCylinder3D.new()
 	var length = start.distance_to(end)
 	
@@ -266,11 +266,11 @@ func create_voronoi_edge(start: Vector2, end: Vector2):
 	$VoronoiCells.add_child(edge)
 	voronoi_cells.append(edge)
 
-func reset_generation():
+func reset_generation() -> void:
 	start_poisson_disk_sampling()
 	time = 0.0
 
-func animate_blue_noise():
+func animate_blue_noise() -> void:
 	# Animate noise points
 	for i in range($NoisePoints.get_child_count()):
 		var point = $NoisePoints.get_child(i)
@@ -288,7 +288,7 @@ func animate_blue_noise():
 			var wave = sin(time * 2.0 + point.position.x * 0.5 + point.position.y * 0.3) * 0.1
 			point.position.z = -1 + wave
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Min distance indicator
 	var min_dist_height = min_distance * 1.5 + 0.5
 	$MinDistance.height = min_dist_height
@@ -307,3 +307,12 @@ func animate_indicators():
 	
 	# Update min distance over time
 	min_distance = 0.8 + sin(time * 0.2) * 0.4
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

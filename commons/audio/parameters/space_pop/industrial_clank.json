@@ -1,0 +1,14 @@
+{
+  "_metadata": {
+    "sound_type": "industrial_clank",
+    "description": "Metal factory hit - FM synthesis metallic percussion for industrial soundscapes.",
+    "tags": ["industrial", "percussion", "metal", "hit", "fm", "factory"]
+  },
+  "parameters": {
+    "pitch": { "min": 50, "max": 500, "value": 150 },
+    "mod_ratio": { "min": 1.0, "max": 3.0, "value": 1.414 },
+    "mod_index": { "min": 1.0, "max": 15.0, "value": 8.0 },
+    "decay": { "min": 2.0, "max": 15.0, "value": 6.0 },
+    "duration": { "min": 0.5, "max": 3.0, "value": 1.0 }
+  }
+}

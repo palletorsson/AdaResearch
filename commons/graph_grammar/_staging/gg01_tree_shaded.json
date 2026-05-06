@@ -1,0 +1,29 @@
+{
+  "id": "gg01_tree_shaded",
+  "notes": "gen00 tree_classic with bark/plant shaders \u00e2\u20ac\u201d leaves on leaves.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.9,
+        "spread_deg": 35,
+        "radius_decay": 0.65
+      }
+    }
+  ]
+}

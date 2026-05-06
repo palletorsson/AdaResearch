@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 region in the center where algorithms fight for space. Gaussian distributions raise terrain into bell curves. Random walks trace drunk paths across the surface. Cubes appear, rotate, vanish — removed by column, by row, by range. Height fields fluctuate. Profiles generate and regenerate. The grid breathes differently each time.
+
+Every algorithm here uses randomness as a material. Not chaos — structured unpredictability. A Gaussian function clusters results around a mean. A random walk accumulates tiny decisions into emergent trails. A removal algorithm introduces absence as a sculptural act. The arena doesn't produce one correct output. It produces a population of possible outputs, each valid, none repeatable.
+
+Determinism promises the same answer twice. Randomness promises that no answer is final.

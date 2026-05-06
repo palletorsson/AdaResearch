@@ -1,0 +1,111 @@
+{
+  "_meta": {
+    "description": "Nature layer auto-generated from soft_stages.json",
+    "version": "1.0",
+    "generator": "generate_nature_layers.py",
+    "terrain_mode": "stone_floor",
+    "density": 0.6,
+    "kingdoms": [
+      "flower",
+      "tree",
+      "fungus"
+    ]
+  },
+  "map_name": "Mosaic_WFC_Reconstruction",
+  "dimensions": {
+    "width": 5,
+    "depth": 4
+  },
+  "layers": {
+    "ground": [
+      [
+        {
+          "type": "moss",
+          "intensity": 0.1
+        },
+        {
+          "type": "soil",
+          "intensity": 0.17
+        },
+        {
+          "type": "soil",
+          "intensity": 0.29
+        },
+        {
+          "type": "grass",
+          "intensity": 0.2
+        },
+        {
+          "type": "bush",
+          "intensity": 0.09
+        }
+      ],
+      [
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "moss",
+          "intensity": 0.31
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "type": "soil",
+          "intensity": 0.28
+        },
+        {
+          "type": "grass",
+          "intensity": 0.12
+        },
+        {
+          "type": "soil",
+          "intensity": 0.17
+        },
+        {
+          "type": "bush",
+          "intensity": 0.75
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "type": "tree",
+          "intensity": 0.09
+        },
+        {
+          "type": "soil",
+          "intensity": 0.04
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "soil",
+          "intensity": 0.26
+        }
+      ]
+    ]
+  }
+}

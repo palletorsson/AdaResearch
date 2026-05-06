@@ -6,7 +6,7 @@ extends Node
 
 @onready var terrain: NoiseLayers
 
-func _ready():
+func _ready() -> void:
 	"""Find the terrain node automatically"""
 	terrain = get_parent() as NoiseLayers
 	if not terrain:
@@ -16,7 +16,7 @@ func _ready():
 	if not terrain:
 		print("Error: No NoiseLayers terrain found!")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input for debugging"""
 	if event.is_action_pressed("ui_accept"):  # Space key
 		debug_terrain_collision()
@@ -27,7 +27,7 @@ func _input(event):
 	elif event.is_action_pressed("ui_select"):  # Enter key
 		regenerate_terrain()
 
-func debug_terrain_collision():
+func debug_terrain_collision() -> void:
 	"""Debug terrain collision system"""
 	if not terrain:
 		print("No terrain found!")
@@ -46,7 +46,7 @@ func debug_terrain_collision():
 	
 	print("=== END DEBUG ===\n")
 
-func test_walkable_surfaces():
+func test_walkable_surfaces() -> void:
 	"""Test walkable surface detection at various positions"""
 	if not terrain:
 		return
@@ -69,7 +69,7 @@ func test_walkable_surfaces():
 			pos, is_walkable, height, slope
 		])
 
-func fix_collision_issues():
+func fix_collision_issues() -> void:
 	"""Fix collision issues by using basic collision"""
 	if not terrain:
 		print("No terrain found!")
@@ -79,7 +79,7 @@ func fix_collision_issues():
 	terrain.fix_collision_issues()
 	print("Collision fixed! Try moving around now.")
 
-func regenerate_terrain():
+func regenerate_terrain() -> void:
 	"""Regenerate the entire terrain"""
 	if not terrain:
 		print("No terrain found!")
@@ -89,7 +89,7 @@ func regenerate_terrain():
 	terrain.regenerate_terrain()
 	print("Terrain regenerated!")
 
-func enable_basic_collision():
+func enable_basic_collision() -> void:
 	"""Permanently enable basic collision mode"""
 	if not terrain:
 		print("No terrain found!")
@@ -99,7 +99,7 @@ func enable_basic_collision():
 	terrain.regenerate_terrain()
 	print("Switched to basic collision mode")
 
-func enable_optimized_collision():
+func enable_optimized_collision() -> void:
 	"""Enable optimized collision mode"""
 	if not terrain:
 		print("No terrain found!")
@@ -110,14 +110,14 @@ func enable_optimized_collision():
 	print("Switched to optimized collision mode")
 
 # Quick fix functions you can call from the editor or code
-func quick_fix():
+func quick_fix() -> void:
 	"""Quick fix for getting stuck in terrain"""
 	if terrain:
 		terrain.enable_collision_optimization = false
 		terrain.regenerate_terrain()
 		print("Quick fix applied - using basic collision")
 
-func increase_walkable_slope():
+func increase_walkable_slope() -> void:
 	"""Increase walkable slope to make more surfaces walkable"""
 	if not terrain:
 		return
@@ -126,7 +126,7 @@ func increase_walkable_slope():
 	terrain.regenerate_terrain()
 	print("Increased walkable slope to 45 degrees")
 
-func disable_erosion():
+func disable_erosion() -> void:
 	"""Disable erosion simulation which might cause collision issues"""
 	if not terrain:
 		return

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/qfeplaboratory/fold_theatre_runner/fold_theatre_runner.gd" id="1_fold"]
+
+[node name="FoldTheatreRunner" type="Node3D"]
+script = ExtResource("1_fold")

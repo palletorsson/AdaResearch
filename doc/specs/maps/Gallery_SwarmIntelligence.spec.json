@@ -1,0 +1,73 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_SwarmIntelligence",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.08,
+  "breath_zones": [
+    {
+      "size": 73,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 8
+      },
+      "centroid": [
+        5.027397260273973,
+        3.684931506849315
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "ant_agent"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "ant_colony_art"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "ant_colony_v2"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "particle_swarm_optimization"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "particle_swarm_optimization_legacy"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "physarum_colony"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "stigmergy_grid"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 87,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

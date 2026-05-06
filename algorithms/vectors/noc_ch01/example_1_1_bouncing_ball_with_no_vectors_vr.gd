@@ -63,6 +63,7 @@ func _spawn_ball() -> void:
 	_ball = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.04
+	sphere.height = 0.08
 	_ball.mesh = sphere
 	_ball.material_override = MAT_BALL
 	_sim_root.add_child(_ball)
@@ -88,3 +89,12 @@ func _process(_delta: float) -> void:
 	_ball.position = Vector3(_x, _y, _z)
 
 	_status_label.text = "Ball (No Vectors) | Y %.2f" % _y
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

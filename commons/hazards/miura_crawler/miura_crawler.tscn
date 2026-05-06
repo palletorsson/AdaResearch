@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv7k2xqm8no4p"]
+
+[ext_resource type="Script" path="res://commons/hazards/miura_crawler/miura_crawler.gd" id="1"]
+
+[node name="MiuraCrawler" type="CharacterBody3D"]
+script = ExtResource("1")
+rows = 4
+cols = 6
+panel_width = 0.12
+panel_height = 0.1
+skew_angle = 65.0
+max_health = 60.0
+crawl_speed = 2.2
+surface_color = Color(0.42, 0.5, 0.45, 1)
+mountain_color = Color(0.75, 0.28, 0.22, 1)
+valley_color = Color(0.22, 0.38, 0.72, 1)

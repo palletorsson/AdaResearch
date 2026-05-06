@@ -1,0 +1,156 @@
+{
+    "description": "Desert Outpost with dusty beats - arid wasteland with sparse tribal drums",
+    "category": "sci_fi_lofi_beats",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -16,
+            "bus": "HeatShimmer",
+            "parameters": {
+                "base_freq": 90.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -18,
+            "bus": "Wind"
+        },
+        {
+            "sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
+            "volume_db": -20,
+            "bus": "Bass"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "house_drums.909_kick"
+            ],
+            "interval_range": [
+                3.0,
+                8.0
+            ],
+            "volume_range": [
+                -20,
+                -14
+            ],
+            "bus": "Kicks"
+        },
+        {
+            "sound_pool": [
+                "house_drums.909_clap"
+            ],
+            "interval_range": [
+                6.0,
+                15.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Claps"
+        },
+        {
+            "sound_pool": [
+                "house_drums.909_hihat_closed"
+            ],
+            "interval_range": [
+                1.0,
+                3.0
+            ],
+            "volume_range": [
+                -28,
+                -22
+            ],
+            "bus": "HiHats"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.static_burst"
+            ],
+            "interval_range": [
+                15.0,
+                45.0
+            ],
+            "volume_range": [
+                -26,
+                -20
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "HeatShimmer": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "dry": 0.9,
+                    "wet": 0.2
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "Wind": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 150
+                }
+            ]
+        },
+        "Bass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 120
+                }
+            ]
+        },
+        "Kicks": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.15
+                }
+            ]
+        },
+        "Claps": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.85,
+                    "tap1_delay_ms": 400,
+                    "tap1_level_db": -10.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "HiHats": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 3000
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 500,
+                    "tap1_level_db": -12.0
+                }
+            ]
+        }
+    }
+}

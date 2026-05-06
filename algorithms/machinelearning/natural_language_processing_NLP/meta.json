@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_natural_language_processing_NLP",
+  "title": "Natural Language Processing (NLP)",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/natural_language_processing_NLP/natural_language_processing_NLP.tscn",
+  "script": "res://algorithms/machinelearning/natural_language_processing_NLP/NaturalLanguageProcessingNLP.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/natural_language_processing_NLP/README.md",
+    "tutorial": "res://algorithms/machinelearning/natural_language_processing_NLP/natural_language_processing_NLP_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/natural_language_processing_NLP/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/natural_language_processing_NLP/summery.md"
+  },
+  "summary": "The `Natural Language Processing (NLP)` sandbox investigates concepts from Natural Language Processing (NLP) inside a real-time Godot lab.",
+  "keywords": [
+    "accuracy",
+    "animate",
+    "create",
+    "flow",
+    "get",
+    "input"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

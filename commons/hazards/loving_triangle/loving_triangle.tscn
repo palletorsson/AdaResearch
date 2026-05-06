@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/hazards/loving_triangle/loving_triangle.gd" id="1_triangle"]
+
+[node name="LovingTriangle" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_triangle")

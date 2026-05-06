@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvr_neural_networks_001"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.gd" id="1_nn_vr"]
+
+[node name="NeuralNetworks_VR" type="Node3D"]
+script = ExtResource("1_nn_vr")
+layer_spacing = 6.0
+neuron_size = 0.25
+room_height = 8.0
+layer_sizes = Array[int]([5, 4, 3, 2])
+enable_bias_neurons = true
+activation_function = "ReLU"
+auto_train = true
+learning_rate = 0.05
+training_speed = 0.2
+show_backprop = true
+enable_neuron_grabbing = true
+enable_data_throwing = true
+show_weights = true
+show_activations = true
+weight_line_thickness = 0.02

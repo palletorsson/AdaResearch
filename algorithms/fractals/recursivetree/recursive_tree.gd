@@ -4,6 +4,16 @@ extends Node3D
 # Grows upward in Y with natural branching patterns
 # Features: randomized angles, tapering branches, natural colors, and smooth growth animation
 
+# @identity
+# essence: branch(pos, dir, len, depth) = cylinder(tapered) + branch_count * branch(end, rotated_dir, len * 0.7, depth+1)
+# desire: To grow before your eyes — trunk first, then branches unfurl in real-time, leaf clusters blooming at the tips
+# critical_parameter: randomness_amount (0.15) — the variance injected into every angle and length, making each tree unique
+# triggers: growth_interval tick → pop next branch from queue → create tapered cylinder → enqueue children
+# emerges: Natural-looking asymmetry from uniform random perturbation — no two trees are alike, yet all are recognizably trees
+# needs: VR growth speed slider [missing], prune-by-grab [missing]
+# relationships: Deterministic sibling to fractal_stochastic_tree; feeds into inverted_tree_cloud (same algorithm, flipped)
+# truth: A tree is not designed — it is a recursive function that ran until it ran out of energy.
+
 # Tree settings
 @export var growth_interval: float = 0.3  # Time between growth steps
 @export var max_depth: int = 10  # Maximum recursion depth
@@ -29,7 +39,7 @@ var branches_to_grow: Array = []  # Queue of branches to grow
 var bark_material: StandardMaterial3D
 var leaf_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	print("RecursiveTree: Ready")
 	print("RecursiveTree: Will grow to depth %d with %d branches per node" % [max_depth, branch_count])
 
@@ -44,7 +54,7 @@ func _ready():
 		is_growing = true
 		print("RecursiveTree: Auto-growth enabled")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_growing:
 		return
 
@@ -57,7 +67,7 @@ func _process(delta: float):
 		perform_growth_step()
 
 # Create beautiful materials for the tree
-func create_materials():
+func create_materials() -> void:
 	# Bark material - brown with subtle texture
 	bark_material = StandardMaterial3D.new()
 	bark_material.albedo_color = Color(0.25, 0.15, 0.08)  # Rich brown
@@ -74,7 +84,7 @@ func create_materials():
 	leaf_material.emission_energy = 0.3
 
 # Create the initial trunk
-func create_trunk():
+func create_trunk() -> void:
 	var trunk_data = {
 		"position": Vector3.ZERO,
 		"direction": Vector3.UP,
@@ -100,7 +110,7 @@ func create_trunk():
 	print("RecursiveTree: Created trunk")
 
 # Perform one growth step
-func perform_growth_step():
+func perform_growth_step() -> void:
 	if branches_to_grow.is_empty():
 		print("RecursiveTree: Growth complete at depth %d" % current_depth)
 		is_growing = false
@@ -125,7 +135,7 @@ func perform_growth_step():
 		create_branching_node(branch_data, i)
 
 # Create a branching node with multiple branches
-func create_branching_node(parent_data: Dictionary, branch_index: int):
+func create_branching_node(parent_data: Dictionary, branch_index: int) -> void:
 	var depth = parent_data.depth
 	var parent_pos = parent_data.position
 	var parent_dir = parent_data.direction
@@ -279,7 +289,7 @@ func create_tapered_cylinder(height: float, bottom_radius: float, top_radius: fl
 	return mesh
 
 # Add a leaf cluster at the end of a branch
-func add_leaf_cluster(data: Dictionary):
+func add_leaf_cluster(data: Dictionary) -> void:
 	var leaf_node = Node3D.new()
 	leaf_node.position = data.position
 
@@ -295,16 +305,16 @@ func add_leaf_cluster(data: Dictionary):
 	data.parent_node.add_child(leaf_node)
 
 # Manual control functions
-func start_growth():
+func start_growth() -> void:
 	is_growing = true
 	growth_timer = 0.0
 	print("RecursiveTree: Started manually")
 
-func stop_growth():
+func stop_growth() -> void:
 	is_growing = false
 	print("RecursiveTree: Stopped manually")
 
-func reset():
+func reset() -> void:
 	# Clear all children
 	for child in get_children():
 		child.queue_free()
@@ -319,5 +329,14 @@ func reset():
 
 	print("RecursiveTree: Reset")
 
-func step():
+func step() -> void:
 	perform_growth_step()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

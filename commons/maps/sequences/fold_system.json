@@ -1,0 +1,44 @@
+{
+	"sequences": {
+		"fold_system": {
+			"name": "Folding: Same Faces, Only Positions Change",
+			"description": "Seven fold primitives demonstrating the universal transformation principle. Deltahedron nets, helix coils, pineapple cylinders, Fibonacci spirals, origami birds, curtain walls, and flocking inflation. Same vertices, same faces throughout — only positions change.",
+			"difficulty": "exhibition",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"See fold_amount drive geometry from 0 to 1 across seven primitive types",
+				"Verify same vertex and face count at every fold stage",
+				"Compare net folding, helix coiling, hinge cascading, and vertex flocking",
+				"Understand Cauchy's rigidity theorem through deltahedra",
+				"Experience Transformer-style activation windows on the origami bird"
+			],
+			"maps": [
+				"Folding_Zoo"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_init",
+			"unlock_requirements": [],
+			"completion_rewards": [],
+			"artifact_groups": [
+				{
+					"map": "Folding_Zoo",
+					"position": "intro",
+					"artifacts": [
+						"deltahedron_stages",
+						"helix_fold",
+						"helix_cylinder",
+						"fibonacci_snake_stages",
+						"origami_bird",
+						"folding_zoo",
+						"inflate_flock",
+						"fold_wall",
+						"deltahedron_creature",
+						"helix_cylinder_creature",
+						"fibonacci_snake",
+						"fold_demo_critter"
+					]
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Point_Triangle_Context",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 7,
+    "d": 12
+  },
+  "signature": "interactivetriangle and pythagorean_triangle_angles for direct manipulation of constraint; folded_strip for physical folding intuition; draw_triangle_faces for surface construction; quad_line_puzzle#fillhole and quad for the triangle-to-quad transition.",
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.043,
+  "breath_zones": [
+    {
+      "size": 60,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 10
+      },
+      "centroid": [
+        3.0,
+        4.383333333333334
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 6,
+      "z": 1,
+      "token": "folded_strip"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "draw_triangle_faces"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 69,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

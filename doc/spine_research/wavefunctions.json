@@ -1,0 +1,929 @@
+{
+  "sequence": "wavefunctions",
+  "generated_at": "2026-04-29T11:23:34.745686Z",
+  "runs": [
+    {
+      "base": "WaveFunctions_Intro",
+      "variants": [
+        {
+          "id": "WaveFunctions_Intro_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 21,
+            "artifacts_original": 21,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_Intro_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.917,
+            "n_heights": 3,
+            "util_count": 8,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 21,
+            "artifacts_original": 21,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_Intro_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.851,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 21,
+            "artifacts_original": 21,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_Pendulum",
+      "variants": [
+        {
+          "id": "WaveFunctions_Pendulum_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 14,
+            "artifacts_original": 14,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_Pendulum_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.917,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 14,
+            "artifacts_original": 14,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_Pendulum_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.851,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 14,
+            "artifacts_original": 14,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_Unit_Circle",
+      "variants": [
+        {
+          "id": "WaveFunctions_Unit_Circle_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_Unit_Circle_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.917,
+            "n_heights": 3,
+            "util_count": 9,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_Unit_Circle_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.851,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_Sine_Space",
+      "variants": [
+        {
+          "id": "WaveFunctions_Sine_Space_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_Sine_Space_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.917,
+            "n_heights": 3,
+            "util_count": 8,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_Sine_Space_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.851,
+            "n_heights": 2,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_3D_Wave_Propagation",
+      "variants": [
+        {
+          "id": "WaveFunctions_3D_Wave_Propagation_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_3D_Wave_Propagation_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.917,
+            "n_heights": 3,
+            "util_count": 8,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_3D_Wave_Propagation_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.851,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_Effect_Sound",
+      "variants": [
+        {
+          "id": "WaveFunctions_Effect_Sound_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.983,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 34,
+            "artifacts_original": 34,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_Effect_Sound_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.917,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 34,
+            "artifacts_original": 34,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_Effect_Sound_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.843,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 34,
+            "artifacts_original": 34,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Wavefunctions_Bernini",
+      "variants": [
+        {
+          "id": "Wavefunctions_Bernini_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Wavefunctions_Bernini_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.833,
+            "n_heights": 3,
+            "util_count": 9,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Wavefunctions_Bernini_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.757,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_John_Cage",
+      "variants": [
+        {
+          "id": "WaveFunctions_John_Cage_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_John_Cage_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.826,
+            "n_heights": 3,
+            "util_count": 9,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_John_Cage_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 2,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_AirMusic",
+      "variants": [
+        {
+          "id": "WaveFunctions_AirMusic_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 10,
+            "artifacts_original": 10,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_AirMusic_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.833,
+            "n_heights": 3,
+            "util_count": 11,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 10,
+            "artifacts_original": 10,
+            "reachability_fixes": {
+              "wp_added": 4,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 4,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_AirMusic_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 10,
+            "artifacts_original": 10,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Wavefunctions_Sky_Stairs",
+      "variants": [
+        {
+          "id": "Wavefunctions_Sky_Stairs_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Wavefunctions_Sky_Stairs_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.826,
+            "n_heights": 3,
+            "util_count": 12,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 5,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 5,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Wavefunctions_Sky_Stairs_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_TrigWalkingPath",
+      "variants": [
+        {
+          "id": "WaveFunctions_TrigWalkingPath_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_TrigWalkingPath_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.826,
+            "n_heights": 3,
+            "util_count": 9,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_TrigWalkingPath_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "WaveFunctions_Synthesis_Lab",
+      "variants": [
+        {
+          "id": "WaveFunctions_Synthesis_Lab_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 26,
+            "artifacts_original": 26,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "WaveFunctions_Synthesis_Lab_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.826,
+            "n_heights": 3,
+            "util_count": 11,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 26,
+            "artifacts_original": 26,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "WaveFunctions_Synthesis_Lab_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 2,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 26,
+            "artifacts_original": 26,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 4,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_Waves",
+      "variants": [
+        {
+          "id": "Chamber_Waves_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Chamber_Waves_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.763,
+            "n_heights": 3,
+            "util_count": 16,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Chamber_Waves_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    }
+  ]
+}

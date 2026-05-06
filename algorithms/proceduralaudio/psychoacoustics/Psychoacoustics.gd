@@ -1,3 +1,13 @@
+# @identity
+# essence: perception = transform(signal, cochlea, brain) -- the gap between pressure wave and heard sound
+# desire: masking, beating, binaural offsets -- auditory illusions revealing how hearing constructs reality
+# critical_parameter: masker_frequency / probe_offset -- where one tone renders another inaudible
+# triggers: theme profiles reshape masker frequency, probe timing, binaural offset, modulation depth
+# emerges: perception is not reception but generation -- the ear performs its own Fourier transform
+# needs: AudioStreamGenerator [has]; masker/probe envelope system [has]; binaural offset [has]; VR controls [missing]
+# relationships: capstone of proceduralaudio -- all synthesis lands between waveform and listener
+# truth: the instrument is the ear -- every synthesis decision is judged by what the listener constructs.
+
 extends Node3D
 
 # Psychoacoustics Visualization
@@ -12,6 +22,99 @@ var masker_amplitude := 0.8
 var probe_frequency := 1200.0
 var probe_amplitude := 0.3
 
+# Audio synthesis
+var sample_rate := 44100.0
+var audio_stream: AudioStreamGenerator
+var audio_player: AudioStreamPlayer
+var audio_playback: AudioStreamGeneratorPlayback
+var audio_buffer_size := 512
+var audio_masker_freq := 800.0
+var audio_masker_level := 0.6
+var audio_probe_offset := 200.0
+var audio_probe_level := 0.3
+var audio_noise_amount := 0.1
+var audio_binaural_offset := 3.0
+var audio_probe_interval := 0.6
+var audio_probe_duration := 0.12
+var audio_probe_cycle := 0.0
+var audio_probe_envelope := 0.0
+var audio_probe_attack_step := 0.01
+var audio_probe_release_step := 0.005
+var audio_mod_depth := 0.3
+var audio_mod_rate := 0.4
+var audio_pad_phase := 0.0
+var masker_phase := 0.0
+var probe_phase_left := 0.0
+var probe_phase_right := 0.0
+var theme_sequence := ["queer", "sci_fi", "cyberpunk", "epic"]
+var current_theme_index := 0
+var current_theme := ""
+var theme_cycle_duration := 18.0
+var theme_timer := 0.0
+var current_theme_profile := {}
+var theme_profiles := {
+	"queer": {
+		"masker_freq": 380.0,
+		"masker_amp": 0.55,
+		"probe_offset": 180.0,
+		"probe_amp": 0.38,
+		"noise": 0.12,
+		"binaural_offset": 4.5,
+		"probe_interval": 0.7,
+		"probe_duration": 0.18,
+		"mod_depth": 0.35,
+		"mod_rate": 0.5,
+		"attack": 0.01,
+		"release": 0.04,
+		"sparkle": 0.32
+	},
+	"sci_fi": {
+		"masker_freq": 720.0,
+		"masker_amp": 0.48,
+		"probe_offset": 280.0,
+		"probe_amp": 0.3,
+		"noise": 0.08,
+		"binaural_offset": 6.0,
+		"probe_interval": 0.9,
+		"probe_duration": 0.12,
+		"mod_depth": 0.5,
+		"mod_rate": 0.65,
+		"attack": 0.008,
+		"release": 0.03,
+		"sparkle": 0.4
+	},
+	"cyberpunk": {
+		"masker_freq": 220.0,
+		"masker_amp": 0.7,
+		"probe_offset": 120.0,
+		"probe_amp": 0.35,
+		"noise": 0.18,
+		"binaural_offset": 2.0,
+		"probe_interval": 0.5,
+		"probe_duration": 0.1,
+		"mod_depth": 0.45,
+		"mod_rate": 0.3,
+		"attack": 0.006,
+		"release": 0.035,
+		"sparkle": 0.25
+	},
+	"epic": {
+		"masker_freq": 540.0,
+		"masker_amp": 0.6,
+		"probe_offset": 210.0,
+		"probe_amp": 0.32,
+		"noise": 0.1,
+		"binaural_offset": 3.5,
+		"probe_interval": 0.8,
+		"probe_duration": 0.16,
+		"mod_depth": 0.38,
+		"mod_rate": 0.45,
+		"attack": 0.009,
+		"release": 0.04,
+		"sparkle": 0.33
+	}
+}
+
 # Critical band data (Bark scale)
 var critical_bands := [
 	20, 100, 200, 300, 400, 510, 630, 770, 920, 1080,
@@ -19,10 +122,12 @@ var critical_bands := [
 	6400, 7700, 9500, 12000, 15500
 ]
 
-func _ready():
-	pass
+func _ready() -> void:
+	randomize()
+	setup_audio_synthesis()
+	apply_theme_profile(theme_sequence[0])
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	masking_timer += delta
 	
@@ -31,15 +136,40 @@ func _process(delta):
 	visualize_temporal_masking()
 	show_critical_bands()
 	demonstrate_loudness_perception()
+	update_theme_cycle(delta)
+	generate_audio_samples()
 
-func update_masking_parameters():
+func update_masking_parameters() -> void:
 	# Animate psychoacoustic parameters
-	masker_frequency = 800 + sin(time * 0.3) * 400
-	masker_amplitude = 0.6 + cos(time * 0.4) * 0.3
-	probe_frequency = masker_frequency + 200 + sin(time * 0.7) * 300
-	probe_amplitude = 0.2 + sin(time * 0.9) * 0.2
+	if current_theme_profile.is_empty():
+		masker_frequency = 800 + sin(time * 0.3) * 400
+		masker_amplitude = 0.6 + cos(time * 0.4) * 0.3
+		probe_frequency = masker_frequency + 200 + sin(time * 0.7) * 300
+		probe_amplitude = 0.2 + sin(time * 0.9) * 0.2
+		return
 
-func visualize_frequency_masking():
+	var profile: Dictionary = current_theme_profile
+	audio_masker_freq = profile.get("masker_freq", audio_masker_freq)
+	audio_masker_level = profile.get("masker_amp", audio_masker_level)
+	audio_probe_offset = profile.get("probe_offset", audio_probe_offset)
+	audio_probe_level = profile.get("probe_amp", audio_probe_level)
+	audio_noise_amount = profile.get("noise", audio_noise_amount)
+	audio_binaural_offset = profile.get("binaural_offset", audio_binaural_offset)
+	audio_probe_interval = profile.get("probe_interval", audio_probe_interval)
+	audio_probe_duration = profile.get("probe_duration", audio_probe_duration)
+	audio_mod_depth = profile.get("mod_depth", audio_mod_depth)
+	audio_mod_rate = profile.get("mod_rate", audio_mod_rate)
+	var attack_seconds = max(0.001, profile.get("attack", 0.01))
+	var release_seconds = max(0.001, profile.get("release", 0.04))
+	audio_probe_attack_step = 1.0 / max(1.0, attack_seconds * sample_rate)
+	audio_probe_release_step = 1.0 / max(1.0, release_seconds * sample_rate)
+
+	masker_frequency = audio_masker_freq + sin(time * audio_mod_rate) * audio_masker_freq * 0.15
+	masker_amplitude = clamp(audio_masker_level, 0.05, 1.0)
+	probe_frequency = masker_frequency + audio_probe_offset + sin(time * 0.6) * audio_probe_offset * 0.2
+	probe_amplitude = clamp(audio_probe_level, 0.05, 1.0)
+
+func visualize_frequency_masking() -> void:
 	var container = $FrequencyMasking
 	
 	# Clear previous visualization
@@ -113,7 +243,7 @@ func frequency_to_bark(frequency: float) -> float:
 	# Convert frequency to Bark scale
 	return 13.0 * atan(0.00076 * frequency) + 3.5 * atan(pow(frequency / 7500.0, 2))
 
-func visualize_temporal_masking():
+func visualize_temporal_masking() -> void:
 	var container = $TemporalMasking
 	
 	# Clear previous visualization
@@ -187,7 +317,7 @@ func visualize_temporal_masking():
 			
 			container.add_child(threshold_curve)
 
-func show_critical_bands():
+func show_critical_bands() -> void:
 	var container = $CriticalBands
 	
 	# Clear previous visualization
@@ -244,7 +374,7 @@ func show_critical_bands():
 			
 			container.add_child(overlap)
 
-func demonstrate_loudness_perception():
+func demonstrate_loudness_perception() -> void:
 	var container = $LoudnessPerception
 	
 	# Clear previous visualization
@@ -309,7 +439,7 @@ func calculate_equal_loudness_spl(frequency: float, phon_level: float) -> float:
 	
 	return Ln + low_freq_boost + high_freq_reduction
 
-func show_a_weighting_filter(container: Node3D):
+func show_a_weighting_filter(container: Node3D) -> void:
 	# Show A-weighting frequency response
 	var filter_frequencies = [63, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
 	var a_weighting_values = [-26.2, -16.1, -8.6, -3.2, 0.0, 1.2, 1.0, -1.1, -6.6]
@@ -353,3 +483,110 @@ func create_contour_connection(from: Vector3, to: Vector3) -> CSGCylinder3D:
 	connection.material_override = material
 	
 	return connection
+
+func setup_audio_synthesis() -> void:
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = sample_rate
+	audio_stream.buffer_length = 0.2
+
+	audio_player = AudioStreamPlayer.new()
+	audio_player.stream = audio_stream
+	audio_player.volume_db = -5.0
+	add_child(audio_player)
+	audio_player.play()
+
+	audio_playback = audio_player.get_stream_playback()
+	reset_audio_state()
+
+func ensure_playback() -> bool:
+	if audio_playback:
+		return true
+	if not audio_player:
+		return false
+	audio_playback = audio_player.get_stream_playback()
+	return audio_playback != null
+
+func reset_audio_state() -> void:
+	audio_probe_cycle = 0.0
+	audio_probe_envelope = 0.0
+	masker_phase = 0.0
+	probe_phase_left = 0.0
+	probe_phase_right = 0.0
+	audio_pad_phase = 0.0
+
+func apply_theme_profile(theme_name: String) -> void:
+	if not theme_profiles.has(theme_name):
+		return
+
+	current_theme = theme_name
+	current_theme_index = theme_sequence.find(theme_name)
+	if current_theme_index == -1:
+		current_theme_index = 0
+
+	current_theme_profile = theme_profiles[theme_name]
+	update_masking_parameters()
+	reset_audio_state()
+	theme_timer = 0.0
+	print("Psychoacoustics: activated %s theme" % theme_name)
+
+func update_theme_cycle(delta: float) -> void:
+	theme_timer += delta
+	if theme_timer >= theme_cycle_duration:
+		theme_timer = 0.0
+		advance_theme()
+
+func advance_theme() -> void:
+	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
+	apply_theme_profile(theme_sequence[current_theme_index])
+
+func generate_audio_samples() -> void:
+	if not audio_player or not audio_player.playing:
+		return
+	if current_theme_profile.is_empty():
+		return
+	if not ensure_playback():
+		return
+
+	var available = audio_playback.get_frames_available()
+	if available < audio_buffer_size:
+		return
+
+	var frames = min(audio_buffer_size, available)
+	var sparkle = current_theme_profile.get("sparkle", 0.3)
+
+	for _i in range(frames):
+		audio_probe_cycle += 1.0 / sample_rate
+		if audio_probe_cycle >= audio_probe_interval:
+			audio_probe_cycle -= audio_probe_interval
+		var gated = 1.0 if audio_probe_cycle < audio_probe_duration else 0.0
+		if gated > 0.0:
+			audio_probe_envelope = min(1.0, audio_probe_envelope + audio_probe_attack_step)
+		else:
+			audio_probe_envelope = max(0.0, audio_probe_envelope - audio_probe_release_step)
+
+		var mod_factor = 1.0 + sin(audio_pad_phase) * audio_mod_depth
+		audio_pad_phase = wrapf(audio_pad_phase + audio_mod_rate * TAU / sample_rate, 0.0, TAU)
+
+		masker_phase = wrapf(masker_phase + audio_masker_freq * mod_factor * TAU / sample_rate, 0.0, TAU)
+		var masker_sample = sin(masker_phase) * audio_masker_level
+
+		probe_phase_left = wrapf(probe_phase_left + (audio_masker_freq + audio_probe_offset) * TAU / sample_rate, 0.0, TAU)
+		probe_phase_right = wrapf(probe_phase_right + (audio_masker_freq + audio_probe_offset + audio_binaural_offset) * TAU / sample_rate, 0.0, TAU)
+		var probe_env = audio_probe_envelope * audio_probe_level
+		var probe_left = sin(probe_phase_left) * probe_env
+		var probe_right = sin(probe_phase_right) * probe_env
+
+		var shimmer = sin(masker_phase * 2.0 + time * 1.5) * sparkle * 0.1
+		var noise = randf_range(-1.0, 1.0) * audio_noise_amount * 0.35
+		var left = clamp(masker_sample + probe_left + shimmer + noise, -1.0, 1.0)
+		var right = clamp(masker_sample + probe_right - shimmer + noise, -1.0, 1.0)
+		audio_playback.push_frame(Vector2(left, right))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

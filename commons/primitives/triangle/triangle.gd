@@ -1,7 +1,17 @@
-# Triangle.gd - Creates a single interactive triangle with three grabbable vertices
+﻿# Triangle.gd - Creates a single interactive triangle with three grabbable vertices
 extends Node3D
 
-var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
+# @identity
+# essence: triangle(v0, v1, v2) — the minimal surface: 3 points that define a plane and a bounded region
+# desire: learner feels how a surface deforms when its boundary points move — topology through touch
+# critical_parameter: the double-sided mesh — front and back are different colors, making orientation visible
+# triggers: dragging any vertex grab sphere — mesh rebuilds instantly to reflect new positions; area displayed on drop
+# emerges: the area formula as something felt — move vertices apart, area grows; collapse them, area vanishes
+# needs: [has 3 grabbable vertex spheres [has], missing area-threshold feedback or VR slider]
+# relationships: atomic unit of all 3D meshes; logical predecessor to quad, folded_strip, animatedcubebuilder
+# truth: every surface in 3D graphics is an agreement among three points — all meshes are triangles
+
+var vertex_color: Color = Color(0.2, 0.8, 0.3)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.25  # Half the original size
 @export var sphere_y_offset: float = 0.5
 
@@ -191,7 +201,7 @@ func print_help():
 	print("E: Reset to equilateral triangle")
 	print("R: Reset to right-angled triangle")
 	print("I: Reset to isosceles triangle")
-	print("Triangle vertices: Bottom-left �+' Bottom-right �+' Top-center")
+	print("Triangle vertices: Bottom-left ï¿½+' Bottom-right ï¿½+' Top-center")
 	print("============================")
 
 func get_triangle_info() -> Dictionary:
@@ -210,7 +220,7 @@ func get_triangle_area(indices: Array[int]) -> float:
 	var cross = edge1.cross(edge2)
 	return cross.length() * 0.5
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
 	print("DEBUG PICKUP")
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:

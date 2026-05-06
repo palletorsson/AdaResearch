@@ -1,0 +1,30 @@
+{
+  "id": "ps06_grawunder_cmy",
+  "notes": "Three panels \u00e2\u20ac\u201d cyan + magenta + yellow. Maximum subtractive darkening at triple overlap.",
+  "layout": "table_cross",
+  "height": 0.45,
+  "width": 0.85,
+  "top_radius": 0.5,
+  "top_color": [
+    0.7,
+    0.5,
+    0.2
+  ],
+  "top_alpha": 0.45,
+  "panels": [
+    {
+      "color": "#26c4c4",
+      "alpha": 0.5
+    },
+    {
+      "color": "#d82b7a",
+      "alpha": 0.5
+    },
+    {
+      "color": "#e8cf3f",
+      "alpha": 0.5
+    }
+  ],
+  "camera_pitch": 0.35,
+  "camera_yaw": 0.65
+}

@@ -1,0 +1,32 @@
+{
+  "name": "BodyProg_Hands",
+  "title": "Floating in Void",
+  "description": "Mirror artifact showing player's floating hands. Learn nail color customization. QFEP: the body begins as fragments.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 2,
+  "spawn": [
+    8,
+    8
+  ],
+  "teleport": [
+    8,
+    1
+  ],
+  "artifacts": [
+    {
+      "name": "color_picker",
+      "row": 5,
+      "col": 3,
+      "family": "unknown"
+    },
+    {
+      "name": "mirror_artifact",
+      "row": 5,
+      "col": 5,
+      "family": "procgen_extra"
+    }
+  ]
+}

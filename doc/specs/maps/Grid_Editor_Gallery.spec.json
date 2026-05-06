@@ -1,0 +1,83 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Grid_Editor_Gallery",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 15,
+    "d": 15
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [],
+  "density": 0.04,
+  "breath_zones": [
+    {
+      "size": 209,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 15
+      },
+      "centroid": [
+        7.062200956937799,
+        7.100478468899522
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 8,
+      "z": 1,
+      "token": "GlassRack_DistillationRack"
+    },
+    {
+      "x": 12,
+      "z": 1,
+      "token": "BigPipe_Serpentine"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "GlassRack_FractionalDistillation"
+    },
+    {
+      "x": 12,
+      "z": 4,
+      "token": "BigPipe_CrossManifold"
+    },
+    {
+      "x": 8,
+      "z": 7,
+      "token": "GlassRack_SpiralCondenser"
+    },
+    {
+      "x": 12,
+      "z": 7,
+      "token": "BigPipe_TDistribution"
+    },
+    {
+      "x": 1,
+      "z": 10,
+      "token": "grid_editor_board"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "GlassRack_ComplexApparatus"
+    },
+    {
+      "x": 12,
+      "z": 10,
+      "token": "BigPipe_IndustrialBranch"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 9,
+    "walkable_cells": 224,
+    "breath_zone_count": 1,
+    "unique_tokens": 9
+  }
+}

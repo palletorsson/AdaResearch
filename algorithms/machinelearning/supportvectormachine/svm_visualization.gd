@@ -1,8 +1,31 @@
 extends Node3D
 
-# Support Vector Machine: Mathematical Justice & Boundary Politics
-# Visualizes the politics of classification boundaries and margin optimization
-# Demonstrates how algorithms create separating hyperplanes in high-dimensional identity spaces
+# @identity
+# essence: max margin: min ||w||² s.t. yᵢ(w·xᵢ + b) ≥ 1; kernel trick maps to higher dimensions
+# desire: see the maximum-margin hyperplane crystallize between classes, support vectors glowing gold at the boundary
+# critical_parameter: C_parameter — regularization; low C allows misclassification for wider margin, high C demands perfection
+# triggers: auto_start runs SMO optimization; kernel_type switches between linear, polynomial, RBF, sigmoid decision boundaries
+# emerges: support vectors — the few critical points that define the entire boundary; most data points are irrelevant
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: contrasts enhanced_kmeans (supervised vs unsupervised); contrasts random_forest_visualization (single optimal boundary vs ensemble of approximations)
+# truth: the decision boundary depends on only a few points — most of the data is redundant once the margin is found
+
+# =============================================================================
+# SVM — Support Vector Machine Visualization
+# =============================================================================
+# Visualizes classification with maximum-margin separating hyperplanes.
+# Positive (green) and negative (red) data points are shown as spheres.
+# The decision boundary is rendered as a point cloud. Support vectors are
+# highlighted with golden glow and enlarged size.
+# Uses a simplified SMO (Sequential Minimal Optimization) solver.
+# =============================================================================
+
+# --- Color Palette -----------------------------------------------------------
+const COLOR_DATA := Color(0.3, 0.5, 0.9)       # Blues for data
+const COLOR_POSITIVE_SVM := Color(0.3, 0.85, 0.4) # Green for +1 class
+const COLOR_NEGATIVE_SVM := Color(0.9, 0.3, 0.3)  # Red for -1 class
+const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for support vectors
+const COLOR_BOUNDARY := Color(0.9, 0.2, 0.9)    # Magenta for boundary
 
 @export_category("SVM Configuration")
 @export var kernel_type: String = "rbf"  # linear, polynomial, rbf, sigmoid
@@ -23,10 +46,10 @@ extends Node3D
 @export var show_decision_boundary: bool = true
 @export var show_margin_lines: bool = true
 @export var support_vector_size: float = 0.3
-@export var positive_color: Color = Color(0.2, 0.9, 0.3)  # Green
-@export var negative_color: Color = Color(0.9, 0.3, 0.2)  # Red
-@export var support_vector_color: Color = Color(0.9, 0.9, 0.2)  # Yellow
-@export var boundary_color: Color = Color(0.9, 0.2, 0.9)  # Magenta
+@export var positive_color: Color = COLOR_POSITIVE_SVM
+@export var negative_color: Color = COLOR_NEGATIVE_SVM
+@export var support_vector_color: Color = COLOR_SPECIAL
+@export var boundary_color: Color = COLOR_BOUNDARY
 
 @export_category("Algorithm Animation")
 @export var auto_start: bool = true
@@ -54,23 +77,45 @@ var boundary_mesh: MeshInstance3D
 var margin_meshes: Array = []
 var ui_display: CanvasLayer
 
+# 3D in-scene labels
+var _title_label_3d: Label3D
+var _stats_label_3d: Label3D
+
 # Algorithm signals
 signal training_step_complete()
 signal training_finished()
 signal classification_changed()
 
-func _init():
+func _init() -> void:
 	name = "SVM_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
+	_build_3d_labels()
 	generate_training_data()
 	
 	if auto_start:
 		call_deferred("start_training")
 
-func setup_ui():
+func _build_3d_labels() -> void:
+	"""Create in-scene 3D labels for VR / immersive viewing."""
+	_title_label_3d = Label3D.new()
+	_title_label_3d.text = "Support Vector Machine"
+	_title_label_3d.font_size = 64
+	_title_label_3d.modulate = COLOR_SPECIAL
+	_title_label_3d.position = Vector3(0, 5, 0)
+	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label_3d)
+
+	_stats_label_3d = Label3D.new()
+	_stats_label_3d.font_size = 36
+	_stats_label_3d.modulate = Color.WHITE
+	_stats_label_3d.position = Vector3(0, 4.2, 0)
+	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_stats_label_3d)
+
+func setup_ui() -> void:
 	"""Create comprehensive UI for SVM visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -93,14 +138,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for animation"""
 	optimization_timer = Timer.new()
 	optimization_timer.wait_time = step_delay
 	optimization_timer.timeout.connect(_on_optimization_timer_timeout)
 	add_child(optimization_timer)
 
-func generate_training_data():
+func generate_training_data() -> void:
 	"""Generate training data with clear class separation"""
 	training_data.clear()
 	training_labels.clear()
@@ -126,7 +171,7 @@ func generate_training_data():
 	create_data_visualization()
 	print("Generated ", training_data.size(), " training samples")
 
-func create_data_visualization():
+func create_data_visualization() -> void:
 	"""Create 3D visualization of training data"""
 	clear_previous_visualization()
 	
@@ -139,23 +184,26 @@ func create_data_visualization():
 		add_child(sphere)
 
 func create_data_point(point: Vector2, label: int) -> MeshInstance3D:
-	"""Create a 3D sphere for a data point"""
+	"""Create a 3D sphere for a data point, colored by class label."""
 	var sphere = MeshInstance3D.new()
 	var mesh = SphereMesh.new()
 	mesh.radius = 0.1
 	mesh.height = 0.2
 	sphere.mesh = mesh
 	
+	var base_color: Color = positive_color if label == 1 else negative_color
 	var material = StandardMaterial3D.new()
-	material.albedo_color = positive_color if label == 1 else negative_color
+	material.albedo_color = base_color
 	material.emission_enabled = true
-	material.emission = material.albedo_color * 0.3
+	material.emission = base_color * 0.35
+	material.metallic = 0.3
+	material.roughness = 0.45
 	sphere.material_override = material
 	
 	sphere.position = Vector3(point.x, point.y, 0)
 	return sphere
 
-func start_training():
+func start_training() -> void:
 	"""Start SVM training process"""
 	if is_training:
 		return
@@ -173,7 +221,7 @@ func start_training():
 	
 	print("Starting SVM training with kernel: ", kernel_type)
 
-func initialize_svm_parameters():
+func initialize_svm_parameters() -> void:
 	"""Initialize SVM parameters"""
 	alphas.clear()
 	for i in range(training_data.size()):
@@ -183,7 +231,7 @@ func initialize_svm_parameters():
 	support_vectors.clear()
 	support_vector_labels.clear()
 
-func _on_optimization_timer_timeout():
+func _on_optimization_timer_timeout() -> void:
 	"""Perform one step of SVM optimization"""
 	if not is_training:
 		return
@@ -198,6 +246,11 @@ func _on_optimization_timer_timeout():
 		training_finished.emit()
 	else:
 		training_step_complete.emit()
+		# Update 3D progress
+		if _stats_label_3d:
+			_stats_label_3d.text = "Training: iter %d/%d  |  Kernel: %s" % [
+				current_iteration, max_iterations, kernel_type
+			]
 	
 	update_ui()
 
@@ -314,7 +367,7 @@ func update_alphas(i: int, j: int, Ei: float, Ej: float) -> bool:
 	
 	return true
 
-func update_bias(i: int, j: int, old_alpha_i: float, old_alpha_j: float, Ei: float, Ej: float):
+func update_bias(i: int, j: int, old_alpha_i: float, old_alpha_j: float, Ei: float, Ej: float) -> void:
 	"""Update bias term"""
 	var b1 = bias - Ei - training_labels[i] * (alphas[i] - old_alpha_i) * kernel_function(training_data[i], training_data[i]) - \
 			 training_labels[j] * (alphas[j] - old_alpha_j) * kernel_function(training_data[i], training_data[j])
@@ -329,7 +382,7 @@ func update_bias(i: int, j: int, old_alpha_i: float, old_alpha_j: float, Ei: flo
 	else:
 		bias = (b1 + b2) / 2
 
-func train_svm_full():
+func train_svm_full() -> void:
 	"""Train SVM without animation"""
 	initialize_svm_parameters()
 	
@@ -339,17 +392,26 @@ func train_svm_full():
 	
 	finalize_training()
 
-func finalize_training():
+func finalize_training() -> void:
 	"""Finalize SVM training"""
 	extract_support_vectors()
 	create_decision_boundary()
 	update_support_vector_visualization()
 	is_trained = true
 	
+	# Update 3D stats
+	if _stats_label_3d:
+		_stats_label_3d.text = "Trained!  SVs: %d  |  Kernel: %s  |  Bias: %.2f" % [
+			support_vectors.size(), kernel_type, bias
+		]
+		var tw := create_tween()
+		tw.tween_property(_stats_label_3d, "modulate", COLOR_SPECIAL, 0.2)
+		tw.tween_property(_stats_label_3d, "modulate", Color.WHITE, 0.8)
+	
 	print("SVM training completed")
 	print("Support vectors found: ", support_vectors.size())
 
-func extract_support_vectors():
+func extract_support_vectors() -> void:
 	"""Extract support vectors from training data"""
 	support_vectors.clear()
 	support_vector_labels.clear()
@@ -359,7 +421,7 @@ func extract_support_vectors():
 			support_vectors.append(training_data[i])
 			support_vector_labels.append(training_labels[i])
 
-func create_decision_boundary():
+func create_decision_boundary() -> void:
 	"""Create visualization of decision boundary"""
 	if boundary_mesh:
 		boundary_mesh.queue_free()
@@ -419,21 +481,24 @@ func create_boundary_mesh() -> ArrayMesh:
 	
 	return array_mesh
 
-func update_support_vector_visualization():
-	"""Update visualization of support vectors"""
+func update_support_vector_visualization() -> void:
+	"""Highlight support vectors with animated scale-up and golden glow."""
 	if not show_support_vectors:
 		return
 	
-	# Highlight support vectors
 	for i in range(training_data.size()):
 		if alphas[i] > tolerance and i < data_points.size():
 			var material = data_points[i].material_override as StandardMaterial3D
 			material.albedo_color = support_vector_color
-			material.emission = support_vector_color * 0.5
+			material.emission = support_vector_color * 0.6
+			material.metallic = 0.5
+			material.roughness = 0.25
 			
-			# Make support vectors larger
-			var scale = Vector3.ONE * (1.0 + support_vector_size)
-			data_points[i].scale = scale
+			# Animate support vectors scaling up with a bounce
+			var target_scale = Vector3.ONE * (1.0 + support_vector_size)
+			var tw := create_tween()
+			tw.tween_property(data_points[i], "scale", target_scale * 1.3, 0.15).set_ease(Tween.EASE_OUT)
+			tw.tween_property(data_points[i], "scale", target_scale, 0.25).set_ease(Tween.EASE_IN_OUT)
 
 func classify_new_point(point: Vector2) -> Dictionary:
 	"""Classify a new point and return detailed results"""
@@ -451,7 +516,7 @@ func classify_new_point(point: Vector2) -> Dictionary:
 		"distance_to_boundary": abs(prediction)
 	}
 
-func clear_previous_visualization():
+func clear_previous_visualization() -> void:
 	"""Clear previous visualization elements"""
 	for point in data_points:
 		point.queue_free()
@@ -464,7 +529,7 @@ func clear_previous_visualization():
 		margin_mesh.queue_free()
 	margin_meshes.clear()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current SVM state"""
 	if not ui_display:
 		return
@@ -497,7 +562,7 @@ func update_ui():
 		labels[18].text = "Examines how classification boundaries"
 		labels[19].text = "separate identities in high-dimensional space"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -523,18 +588,18 @@ func _input(event):
 				C_parameter = max(C_parameter / 1.5, 0.1)
 				reset_svm()
 
-func stop_training():
+func stop_training() -> void:
 	"""Stop SVM training"""
 	is_training = false
 	optimization_timer.stop()
 
-func reset_svm():
+func reset_svm() -> void:
 	"""Reset SVM and regenerate data"""
 	stop_training()
 	is_trained = false
 	generate_training_data()
 
-func change_kernel(new_kernel: String):
+func change_kernel(new_kernel: String) -> void:
 	"""Change kernel type and retrain"""
 	kernel_type = new_kernel
 	reset_svm()
@@ -563,4 +628,13 @@ func get_algorithm_info() -> Dictionary:
 			"bias": bias,
 			"training_samples": training_data.size()
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

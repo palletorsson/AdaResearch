@@ -1,0 +1,78 @@
+{
+  "spec_version": "0.1",
+  "artifact": {
+    "id": "pompeii_mosaic_floor",
+    "name": "Pompeii Mosaic Floor",
+    "qfep": "F_order",
+    "category": "tiling_pattern",
+    "essence": "a floor that carries the geometry of Roman domestic space",
+    "truth": "constraint applied to two colors on a grid produced all of Pompeii's floors"
+  },
+  "parameters": [
+    { "id": "floor_size",            "type": "vec2",  "default": [1.2, 0.9], "unit": "m" },
+    { "id": "tiles_short",           "type": "int",   "default": 10,
+      "doc": "number of truchet tiles on the short axis" },
+    { "id": "border_widths",         "type": "int[]", "default": [2, 1, 2],
+      "doc": "widths of nested border bands, inside-out" },
+    { "id": "border_motif",          "type": "enum",  "default": "SAWTOOTH",
+      "values": ["SAWTOOTH", "MEANDER", "WAVE", "STEPS", "GUILLOCHE"] },
+    { "id": "color_dark",            "type": "color", "default": "$palette.DARK" },
+    { "id": "color_light",           "type": "color", "default": "$palette.LIGHT" },
+    { "id": "grout_color",           "type": "color", "default": "$palette.GROUT" },
+    { "id": "grout_width_fraction",  "type": "float", "default": 0.06, "range": [0, 0.1] },
+    { "id": "wear_level",            "type": "float", "default": 0.3,  "range": [0, 1],
+      "doc": "ages the colors and adds chip noise" }
+  ],
+  "imports": [
+    { "id": "palette", "ref": "res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd" },
+    { "id": "border_motifs", "ref": "res://commons/artifacts/pompeii_mosaic_floor/border_motifs.gd" }
+  ],
+  "geometry": {
+    "kind": "procedural_mesh",
+    "plane": "xz",
+    "build": [
+      {
+        "step": "compute_grid",
+        "let": {
+          "border_total": "sum($border_widths)",
+          "tile_size":    "min($floor_size) / ($tiles_short + 2 * border_total)",
+          "grid_w":       "round($floor_size.x / tile_size)",
+          "grid_h":       "round($floor_size.y / tile_size)"
+        }
+      },
+      {
+        "step": "draw_borders",
+        "for_each_band": "(width, idx) in $border_widths",
+        "emit_via": "$border_motifs.draw_border_frame(motif=$border_motif, alternate=idx % 2 == 1)"
+      },
+      {
+        "step": "draw_truchet_field",
+        "region": "inside borders",
+        "tile_kind": "pinwheel_two_color",
+        "rotation_choice": "deterministic by (cell.x + cell.y) % 4"
+      },
+      {
+        "step": "apply_grout",
+        "width": "$tile_size * $grout_width_fraction",
+        "color": "$grout_color",
+        "between": "all tile boundaries"
+      },
+      {
+        "step": "wear_overlay",
+        "amount": "$wear_level",
+        "method": "darken_random_tiles + chip_corners"
+      }
+    ],
+    "surfaces": [
+      { "id": "dark",  "vertices": "$dark_verts",  "material": { "albedo": "$color_dark"  } },
+      { "id": "light", "vertices": "$light_verts", "material": { "albedo": "$color_light" } },
+      { "id": "grout", "vertices": "$grout_verts", "material": { "albedo": "$grout_color" } },
+      { "id": "terra", "vertices": "$terra_verts", "material": { "albedo": "$palette.TERRA"} }
+    ]
+  },
+  "behavior": {
+    "on_ready": ["build_geometry"],
+    "on_parameter_change": ["rebuild"]
+  },
+  "interaction": []
+}

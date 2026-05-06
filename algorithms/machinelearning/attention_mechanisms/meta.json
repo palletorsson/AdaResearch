@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_attention_mechanisms",
+  "title": "Attention Mechanisms",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms.tscn",
+  "script": "res://algorithms/machinelearning/attention_mechanisms/AttentionMechanisms.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/attention_mechanisms/README.md",
+    "tutorial": "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/attention_mechanisms/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/attention_mechanisms/summery.md"
+  },
+  "summary": "The `Attention Mechanisms` sandbox investigates concepts from Attention Mechanisms inside a real-time Godot lab.",
+  "keywords": [
+    "animate",
+    "attention",
+    "base",
+    "cell",
+    "children",
+    "clear"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

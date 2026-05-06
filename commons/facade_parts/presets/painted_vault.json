@@ -1,0 +1,130 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Painted Vault Ceiling — Ribbed vault illusion with alternating arched windows and framed panels in celestial blue and gold, string course ribs between stories",
+  "facade": {
+    "bays": 4,
+    "stories": 4,
+    "symmetry": "bilateral",
+    "total_width": 12.0,
+    "total_height": 12.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "VaultCrown",  "height_multiplier": 0.80 },
+    { "row": 1, "name": "UpperVault",  "height_multiplier": 1.20 },
+    { "row": 2, "name": "LowerVault",  "height_multiplier": 1.20 },
+    { "row": 3, "name": "VaultSpring", "height_multiplier": 0.80 }
+  ],
+  "materials": {
+    "wall": "#1A3A5C",
+    "zones": {
+      "VaultCrown":  { "color": "#0F2840", "type": "plaster" },
+      "UpperVault":  { "color": "#1A3A5C", "type": "plaster" },
+      "LowerVault":  { "color": "#1A3A5C", "type": "plaster" },
+      "VaultSpring": { "color": "#0F2840", "type": "plaster" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "string_course", "col_span": 4,
+      "sub_grid": {
+        "rows": [0.25, 0.50, 0.25],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#C8A860" } },
+          { "row": 1, "part": "fascia", "params": { "color": "#1A3A5C" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#C8A860" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.04, "frame_depth": 0.020, "frame_color": "#C8A860", "glass_color": "#1A3A5C" }
+    },
+    { "col": 1, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 1, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.04, "frame_depth": 0.020, "frame_color": "#C8A860", "glass_color": "#1A3A5C" }
+    },
+    { "col": 3, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "string_course", "col_span": 4,
+      "params": { "depth": 0.015, "band_height": 0.020, "color": "#C8A860" }
+    },
+
+    { "col": 0, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.04, "frame_depth": 0.020, "frame_color": "#C8A860", "glass_color": "#1A3A5C" }
+    },
+    { "col": 2, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.04, "frame_depth": 0.020, "frame_color": "#C8A860", "glass_color": "#1A3A5C" }
+    },
+
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 4,
+      "params": { "depth": 0.015, "band_height": 0.020, "color": "#C8A860" }
+    },
+
+    { "col": 0, "row": 3, "part": "string_course", "col_span": 4,
+      "sub_grid": {
+        "rows": [0.25, 0.50, 0.25],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#C8A860" } },
+          { "row": 1, "part": "fascia", "params": { "color": "#0F2840" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#C8A860" } }
+        ]
+      }
+    }
+  ]
+}

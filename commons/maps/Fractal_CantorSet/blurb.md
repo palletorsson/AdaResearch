@@ -1,0 +1,1 @@
+Remove the middle third. Remove it again. And again. The Cantor set is defined by absence—after infinite deletions, uncountably many points remain with zero total length. More than nothing, less than something. Dimension 0.631: between point and line.

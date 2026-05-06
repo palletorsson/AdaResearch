@@ -3,6 +3,10 @@
 
 extends Node3D
 
+# Entry scene preloads
+const CORRIDOR_SCENE = preload("res://commons/structures/corridor/CorridorScene.tscn")
+const ONE_CUBE_ENTRY = preload("res://commons/structures/entry/OneCubeEntry.tscn")
+
 @onready var grid_system = $"../GridSystem"
 
 # Sequence management
@@ -11,17 +15,24 @@ var current_map_index: int = 0
 
 func _ready():
 	print("GridScene: Initializing with SceneManagerHelper integration")
-	
-	# Wait for SceneManager to be ready
-	var scene_manager = await SceneManagerHelper.wait_for_scene_manager(self)
-	
-	# Connect to grid system if available
+
+	# Connect to grid system signal BEFORE any await
 	if grid_system:
-		scene_manager.connect_to_grid_system(grid_system)
-		
-		# Connect to grid system signals for sequence management
 		if grid_system.has_signal("map_generation_complete"):
 			grid_system.map_generation_complete.connect(_on_map_generation_complete)
+			print("GridScene: Connected to map_generation_complete signal")
+
+		# Deferred fallback in case signal was missed
+		call_deferred("_deferred_entry_check")
+
+	# Wait for SceneManager to be ready
+	var scene_manager = await SceneManagerHelper.wait_for_scene_manager(self)
+
+	# Connect to grid system if available
+	if grid_system and scene_manager and scene_manager.has_method("connect_to_grid_system"):
+		scene_manager.connect_to_grid_system(grid_system)
+	elif grid_system:
+		print("GridScene: No SceneManager available in this context; running without manager connection")
 	
 	# Handle scene user data from staging
 	call_deferred("_process_scene_user_data")
@@ -71,13 +82,107 @@ func _configure_grid_system_for_map(map_name: String):
 		# Fallback: reload the scene
 		get_tree().reload_current_scene()
 
+func _spawn_entry_by_type():
+	"""Spawn entry based on map settings - corridor for Lab, one_cube for others, I for two cubes"""
+	var enter_type = "one_cube"  # Default
+
+	# Get enter_type from map settings
+	if grid_system and grid_system.get_data_component():
+		var settings = grid_system.get_data_component().get_settings()
+		if settings.has("enter_type"):
+			enter_type = settings["enter_type"]
+
+	# Skip entry cubes if map has a timeline (scripted experience manages its own flow)
+	var timeline_path := "res://commons/maps/%s/timeline.json" % (grid_system.map_name if grid_system else "")
+	if FileAccess.file_exists(timeline_path):
+		print("GridScene: Timeline found — skipping entry cubes")
+		return
+
+	print("GridScene: Spawning entry type '%s'" % enter_type)
+
+	# Clear any existing entry
+	var existing = get_node_or_null("ActiveEntry")
+	if existing:
+		existing.queue_free()
+
+	# Spawn based on type
+	if enter_type == "none":
+		print("GridScene: enter_type=none — no entry cubes")
+		return
+
+	var instance: Node3D
+	if enter_type == "corridor":
+		instance = CORRIDOR_SCENE.instantiate()
+		instance.position = Vector3.ZERO
+	elif enter_type == "I" or enter_type == "i":
+		# Create two cubes: one default, one in +X direction
+		instance = Node3D.new()
+		instance.name = "ActiveEntry"
+		
+		# First cube at default position
+		var cube1 = ONE_CUBE_ENTRY.instantiate()
+		cube1.position = Vector3(0, 0, -1)
+		cube1.name = "Cube1"
+		instance.add_child(cube1)
+		
+		# Second cube in +X direction
+		var cube2 = ONE_CUBE_ENTRY.instantiate()
+		cube2.position = Vector3(1, 0, -1)  # +1 meter in X direction
+		cube2.name = "Cube2"
+		instance.add_child(cube2)
+		
+		instance.position = Vector3.ZERO
+	else:
+		instance = ONE_CUBE_ENTRY.instantiate()
+		instance.position = Vector3(0, 0, -1)
+
+	instance.name = "ActiveEntry"
+	add_child(instance)
+	print("GridScene: Spawned %s at position %s" % [enter_type, instance.position])
+
+func _deferred_entry_check():
+	"""Fallback check — wait for map generation signal instead of spawning immediately"""
+	# Don't spawn here. Wait for _on_map_generation_complete which has the actual map data.
+	# The signal-based path is the correct one.
+	pass
+
 func _on_map_generation_complete():
 	"""Handle grid system completing map generation"""
 	print("GridScene: Map generation complete")
-	
+
+	# Spawn entry based on map settings
+	_spawn_entry_by_type()
+
+	# NOTE: Subtitles are now triggered by walking over "sub:" triggers in the map
+	# (see subtitle_trigger.gd) rather than showing automatically on map entry
+
 	# Add exit trigger if in sequence
 	if not sequence_data.is_empty():
 		_setup_sequence_exit_trigger()
+
+func _show_map_subtitle():
+	"""Show map description as Portal 2-style subtitle overlay"""
+	if not grid_system:
+		return
+
+	var data_component = grid_system.get_data_component()
+	if not data_component:
+		return
+
+	var map_name = data_component.get_map_name()
+	var description = data_component.get_description()
+
+	# Skip if no description
+	if description.is_empty():
+		return
+
+	# Use Subtitles autoload if available
+	var subtitles = get_node_or_null("/root/Subtitles")
+	if subtitles:
+		# Format map name nicely (replace underscores with spaces)
+		var display_name = map_name.replace("_", " ")
+		subtitles.show_map_entry(display_name, description)
+		print("GridScene: Showing subtitle for '%s'" % map_name)
 
 func _setup_sequence_exit_trigger():
 	"""Setup automatic sequence progression trigger"""

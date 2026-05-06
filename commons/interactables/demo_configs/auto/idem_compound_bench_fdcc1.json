@@ -1,0 +1,130 @@
+{
+  "demo_info": {
+    "name": "Compound Bench fdcc1",
+    "description": "Auto-generated compound_bench board composed from the InteractableDemo vocabulary.",
+    "family": "compound_bench",
+    "auto_generated": true,
+    "auto_score": 46.23,
+    "selection_rank": 1
+  },
+  "titles": {
+    "main": "COMPOUND BENCH",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.64,
+      0.6,
+      0.56,
+      1.0
+    ],
+    "frame_color": [
+      0.2,
+      0.16,
+      0.15,
+      1.0
+    ],
+    "accent_color": [
+      0.86,
+      0.25,
+      0.48,
+      1.0
+    ],
+    "dark_color": [
+      0.12,
+      0.1,
+      0.11,
+      1.0
+    ],
+    "cream_color": [
+      0.8,
+      0.76,
+      0.7,
+      1.0
+    ],
+    "spacing": 0.262,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.035,
+    "row2_y": 0.558,
+    "row3_y": 0.104,
+    "row4_y": -0.299,
+    "show_hand_scale_guides": true
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/joystick_smooth.tscn",
+      "label": "JOYSTICK",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/wheel_smooth.tscn",
+      "label": "WHEEL",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_zero.tscn",
+      "label": "ZERO",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_snap.tscn",
+      "label": "SNAP",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [],
+  "passive_elements": [
+    {
+      "builder": "build_speaker_lines",
+      "label": "SPEAKER LINES",
+      "width": 1
+    },
+    {
+      "monitor": "scope",
+      "slots": 2,
+      "label": "SCOPE",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_v",
+      "count": 2,
+      "label": "2x SLIDER V",
+      "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 4,
+      "label": "4x SLIDER V",
+      "width": 2
+    },
+    {
+      "type": "monitor_sliders",
+      "count": 3,
+      "label": "MONITOR+SLIDERS",
+      "width": 2
+    },
+    {
+      "type": "sliders_h",
+      "count": 4,
+      "label": "4x SLIDER H",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "needle_meter",
+      "label": "NEEDLE\nMETER",
+      "width": 1
+    },
+    {
+      "type": "text_scroll_2",
+      "label": "SCROLL 2",
+      "width": 2
+    }
+  ]
+}

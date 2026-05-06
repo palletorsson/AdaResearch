@@ -1,0 +1,1 @@
+Emitters shape the birth. Point emitters create fountains; line emitters create curtains; mesh emitters create surfaces of spawn. Initial velocity, spread angle, randomness — control the birth and the life follows. The emitter is choreographer of chaos.

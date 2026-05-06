@@ -50,13 +50,13 @@ var sample_particles: Array[Node3D] = []
 var simulation_tween: Tween
 var is_running: bool = false
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	setup_visualization()
 	setup_info_display()
 	reset_simulation()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -79,7 +79,7 @@ func setup_vr():
 			xr_origin.add_child(controller)
 			controllers.append(controller)
 
-func setup_visualization():
+func setup_visualization() -> void:
 	"""Create visualization elements for Monte Carlo simulation"""
 	match simulation_type:
 		SimulationType.PI_ESTIMATION:
@@ -91,7 +91,7 @@ func setup_visualization():
 		SimulationType.RANDOM_WALK:
 			setup_random_walk_visual()
 
-func setup_pi_estimation_visual():
+func setup_pi_estimation_visual() -> void:
 	"""Set up visualization for π estimation using circle/square"""
 	# Create unit circle
 	circle_display = Node3D.new()
@@ -128,7 +128,7 @@ func setup_pi_estimation_visual():
 	# Convergence chart
 	setup_convergence_chart()
 
-func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color):
+func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color) -> void:
 	"""Create a line mesh from points"""
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -150,7 +150,7 @@ func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], col
 	material.flags_unshaded = true
 	mesh_instance.material_override = material
 
-func setup_convergence_chart():
+func setup_convergence_chart() -> void:
 	"""Create chart to show convergence to π"""
 	convergence_chart = Node3D.new()
 	convergence_chart.position = Vector3(2.5, 0, 0)
@@ -170,26 +170,26 @@ func setup_convergence_chart():
 	
 	# π reference line
 	var pi_line = MeshInstance3D.new()
-	var pi_points = [Vector3(-1.0, 0.0, 0.01), Vector3(1.0, 0.0, 0.01)]
+	var pi_points: Array[Vector3] = [Vector3(-1.0, 0.0, 0.01), Vector3(1.0, 0.0, 0.01)]
 	create_line_mesh(pi_line, pi_points, Color.RED)
 	convergence_chart.add_child(pi_line)
 
-func setup_integration_visual():
+func setup_integration_visual() -> void:
 	"""Set up visualization for numerical integration"""
 	# This would create visuals for integration under a curve
 	pass
 
-func setup_option_pricing_visual():
+func setup_option_pricing_visual() -> void:
 	"""Set up visualization for financial option pricing"""
 	# This would create stock price paths visualization
 	pass
 
-func setup_random_walk_visual():
+func setup_random_walk_visual() -> void:
 	"""Set up visualization for random walk simulation"""
 	# This would create path visualization for random walks
 	pass
 
-func setup_info_display():
+func setup_info_display() -> void:
 	"""Create information display"""
 	info_display = Label3D.new()
 	info_display.position = Vector3(-2.5, 1.5, 0)
@@ -198,7 +198,7 @@ func setup_info_display():
 	add_child(info_display)
 	update_info_display()
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		if is_running:
@@ -208,7 +208,7 @@ func _on_controller_button(button_name: String):
 	elif button_name == "grip_click":
 		reset_simulation()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
@@ -221,7 +221,7 @@ func _input(event):
 		elif event.keycode == KEY_C:
 			change_simulation_type()
 
-func start_simulation():
+func start_simulation() -> void:
 	"""Start Monte Carlo simulation with animation"""
 	if is_running:
 		return
@@ -237,11 +237,11 @@ func start_simulation():
 	# Run simulation in batches
 	for batch in range(sample_size / batch_size):
 		simulation_tween.tween_callback(run_simulation_batch)
-		simulation_tween.tween_delay(0.1 / animation_speed)
+		simulation_tween.tween_interval(0.1 / animation_speed)
 	
 	simulation_tween.tween_callback(complete_simulation)
 
-func run_simulation_batch():
+func run_simulation_batch() -> void:
 	"""Run a batch of Monte Carlo samples"""
 	match simulation_type:
 		SimulationType.PI_ESTIMATION:
@@ -253,7 +253,7 @@ func run_simulation_batch():
 		SimulationType.RANDOM_WALK:
 			run_random_walk_batch()
 
-func run_pi_estimation_batch():
+func run_pi_estimation_batch() -> void:
 	"""Run a batch of π estimation samples"""
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -286,11 +286,12 @@ func run_pi_estimation_batch():
 	update_convergence_chart()
 	update_info_display()
 
-func create_sample_point(position: Vector3, is_inside: bool):
+func create_sample_point(position: Vector3, is_inside: bool) -> void:
 	"""Create visual representation of a sample point"""
 	var point = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.01
+	sphere_mesh.height = 0.02
 	point.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()
@@ -311,7 +312,7 @@ func create_sample_point(position: Vector3, is_inside: bool):
 		var old_point = sample_particles.pop_front()
 		old_point.queue_free()
 
-func update_convergence_chart():
+func update_convergence_chart() -> void:
 	"""Update the convergence chart showing π estimation"""
 	# Clear existing convergence lines
 	for child in convergence_chart.get_children():
@@ -336,7 +337,7 @@ func update_convergence_chart():
 	create_line_mesh(convergence_line, line_points, Color.YELLOW)
 	convergence_chart.add_child(convergence_line)
 
-func run_integration_batch():
+func run_integration_batch() -> void:
 	"""Run batch for numerical integration example"""
 	# Example: integrate x² from 0 to 1
 	var rng = RandomNumberGenerator.new()
@@ -345,29 +346,29 @@ func run_integration_batch():
 	# Monte Carlo integration implementation would go here
 	pass
 
-func run_option_pricing_batch():
+func run_option_pricing_batch() -> void:
 	"""Run batch for option pricing simulation"""
 	# Black-Scholes option pricing via Monte Carlo would go here
 	pass
 
-func run_random_walk_batch():
+func run_random_walk_batch() -> void:
 	"""Run batch for random walk simulation"""
 	# Random walk simulation would go here
 	pass
 
-func complete_simulation():
+func complete_simulation() -> void:
 	"""Called when simulation completes"""
 	is_running = false
 	update_info_display()
 
-func stop_simulation():
+func stop_simulation() -> void:
 	"""Stop the running simulation"""
 	if simulation_tween:
 		simulation_tween.kill()
 	is_running = false
 	update_info_display()
 
-func reset_simulation():
+func reset_simulation() -> void:
 	"""Reset all simulation data"""
 	stop_simulation()
 	
@@ -390,7 +391,7 @@ func reset_simulation():
 	
 	update_info_display()
 
-func change_simulation_type():
+func change_simulation_type() -> void:
 	"""Change the type of Monte Carlo simulation"""
 	var current_index = simulation_type as int
 	simulation_type = ((current_index + 1) % SimulationType.size()) as SimulationType
@@ -398,7 +399,7 @@ func change_simulation_type():
 	reset_simulation()
 	setup_visualization()
 
-func update_info_display():
+func update_info_display() -> void:
 	"""Update information display"""
 	var text = "Monte Carlo Simulation\n"
 	text += "Type: %s\n\n" % get_simulation_type_name()
@@ -454,3 +455,12 @@ func get_statistics_summary() -> Dictionary:
 		"pi_estimates": pi_estimates.duplicate(),
 		"is_running": is_running
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

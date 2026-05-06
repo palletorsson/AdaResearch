@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://ttcllidfkqhg"]
+
+[ext_resource type="PackedScene" uid="uid://dli47lf48p833" path="res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.tscn" id="1_stwlu"]
+
+[sub_resource type="Curve" id="Curve_qmb18"]
+_data = [Vector2(0.3436123, 0.5995005), 0.0, 0.0, 0, 0, Vector2(0.7621145, 0.5074938), 0.0, 0.0, 0, 0, Vector2(0.95814973, 0.84845966), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_sqv00"]
+radius = 3.95
+curve = SubResource("Curve_qmb18")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fb31i"]
+height = 4.6691895
+radius = 1.2236328
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_stwlu"]
+top_radius = 1.4
+bottom_radius = 1.4
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qmb18"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.5
+
+[node name="DoubleHelixScene" type="Node3D"]
+
+[node name="DoubleHelix" parent="." instance=ExtResource("1_stwlu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.586253, 0)
+max_trail_length = 150
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("TubeTrailMesh_sqv00")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3345947, 0)
+shape = SubResource("CylinderShape3D_fb31i")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.388828, 0)
+mesh = SubResource("CylinderMesh_stwlu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70007133, 0)
+mesh = SubResource("CylinderMesh_qmb18")

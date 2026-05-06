@@ -1,0 +1,48 @@
+{
+    "description": "Computational/analytical atmosphere for machine learning",
+    "continuous_layers": [
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -15,
+            "bus": "Ambient",
+            "parameters": {
+                "entropy": 0.2,
+                "queer_factor": 0.3
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.C64_SID_PULSE",
+                "AudioSynthesizer.GAMEBOY_PULSE",
+                "AudioSynthesizer.COMMODORE_AMIGA_WAVE"
+            ],
+            "interval_range": [
+                10.0,
+                30.0
+            ],
+            "volume_range": [
+                -20,
+                -15
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 200
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.2,
+                    "damping": 0.6
+                }
+            ]
+        }
+    }
+}

@@ -28,17 +28,24 @@ func load_map(map_path: String) -> bool:
 	var parse_result = json.parse(json_string)
 	
 	if parse_result != OK:
-		push_error("JsonMapLoader: Failed to parse JSON: %s" % json.error_string)
+		push_error("JsonMapLoader: Failed to parse JSON at line %d: %s" % [json.get_error_line(), json.get_error_message()])
 		return false
 	
 	map_data = json.data
 	is_loaded = true
-	
+
+	# Preprocess layers for select-repeat (sr) utilities
+	var layers = map_data.get("layers", {})
+	if not layers.is_empty():
+		layers = GridUtilitiesComponent.preprocess_select_repeat(layers)
+		map_data["layers"] = layers
+		print("JsonMapLoader: Layers preprocessed for select-repeat utilities")
+
 	# Create data adapter instances FIRST
 	structure_data_instance = JsonStructureDataAdapter.new()
 	utility_data_instance = JsonUtilityDataAdapter.new()  # Create this!
 	interactable_data_instance = JsonInteractableDataAdapter.new()
-	
+
 	# THEN extract data from JSON
 	structure_data_instance.layout_data = map_data.get("layers", {}).get("structure", [])
 	utility_data_instance.layout_data = map_data.get("layers", {}).get("utilities", [])
@@ -81,6 +88,13 @@ func get_utilities_layer() -> Array:
 func get_interactables_layer() -> Array:
 	return map_data.get("layers", {}).get("interactables", [])
 
+## Optional 4th layer for authorial biome-density hints. See
+## algorithms/nature_system/systems/biome_paint_tokens.gd for the token
+## language (f1..f5, t1..t5, u1..u5, c1..c5, m1..m5, x1..x5, "-").
+## Returns [] if absent — fully backward-compatible with existing maps.
+func get_biome_paint_layer() -> Array:
+	return map_data.get("layers", {}).get("biome_paint", [])
+
 # Get definitions
 func get_utility_definitions() -> Dictionary:
 	return map_data.get("utility_definitions", {})
@@ -96,6 +110,10 @@ func get_default_spawn_point() -> Dictionary:
 # Get lighting settings
 func get_lighting_settings() -> Dictionary:
 	return map_data.get("lighting", {})
+
+# Get per-map environment overrides (optional block in map_data.json)
+func get_environment_overrides() -> Dictionary:
+	return map_data.get("environment", {})
 
 # Get general settings
 func get_settings() -> Dictionary:

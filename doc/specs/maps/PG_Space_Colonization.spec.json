@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PG_Space_Colonization",
+  "home_sequence": "proceduralgeneration",
+  "dimensions": {
+    "w": 8,
+    "d": 14
+  },
+  "signature": "space_colonization_algorithm implements the full attractor-driven growth pipeline with configurable attraction distance",
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.014,
+  "breath_zones": [
+    {
+      "size": 68,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 14
+      },
+      "centroid": [
+        2.8970588235294117,
+        6.882352941176471
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 6,
+      "token": "space_colonization_algorithm"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 69,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

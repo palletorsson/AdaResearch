@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3r4l7catxsum"]
+
+[ext_resource type="Script" uid="uid://dcxfyrn4hyu24" path="res://algorithms/speech/phoneme_cloud/singing_board.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dg5hn1rbxo8km" path="res://commons/interfaces/value_mapper_3d.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://algorithms/speech/phoneme_cloud/vowel_synth.tscn" id="3"]
+
+[node name="SingingBoard" type="Node3D"]
+script = ExtResource("1")
+tempo_bpm = 100.0
+
+[node name="ValueMapper3D" parent="." instance=ExtResource("2")]
+space_size = Vector3(0.5, 0.5, 0.5)
+
+[node name="VowelSynth3D" parent="." instance=ExtResource("3")]
+
+[node name="LabelWord" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+text = "♪"
+font_size = 64

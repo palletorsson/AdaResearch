@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "VectorFieldFlow",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 6,
+    "d": 10
+  },
+  "signature": "VectorFieldFlow generates the spatial vector assignment; dark_sphere acts as the particle within the field",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.034,
+  "breath_zones": [
+    {
+      "size": 57,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 6,
+        "d": 10
+      },
+      "centroid": [
+        2.491228070175439,
+        4.473684210526316
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 3,
+      "token": "VectorFieldFlow"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 59,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

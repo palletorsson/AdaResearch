@@ -1,293 +1,303 @@
 extends Node3D
-  
 
-var time: float = 0.0
-var detection_progress: float = 0.0
-var precision_score: float = 0.0
-var recall_score: float = 0.0
-var particle_count: int = 30
-var flow_particles: Array = []
-var normal_particles: Array = []
-var anomaly_particles: Array = []
+# @identity
+# essence: score(x) > threshold → anomaly; three heuristics: z-score, isolation radius, autoencoder error
+# desire: see the boundary between normal and anomalous shift as you change methods and thresholds
+# critical_parameter: threshold — determines where the decision boundary falls for each method
+# triggers: cycling detection mode recolors all points; lowering threshold floods with false positives
+# emerges: the realization that "anomaly" is not intrinsic — it depends entirely on which lens you use
+# needs: VR controls for mode cycling [missing], threshold adjustment [missing] — exported params only
+# relationships: contrasts enhanced_kmeans (clustering finds groups, anomaly detection finds outsiders); unlocks explainable_ai_xai_vr
+# truth: anomaly is not a property of a point but a relationship between a point and the model judging it
 
-func _ready():
-	# Initialize Anomaly Detection visualization
-	print("Anomaly Detection Visualization initialized")
-	create_normal_particles()
-	create_anomaly_particles()
-	create_flow_particles()
-	setup_detection_metrics()
+## Anomaly Detection Sandbox
+## Interactive visualization of Z-Score, Isolation Radius, and Autoencoder
+## Error anomaly detection methods. Anomalous points glow, rise, and scale
+## up with animated transitions.
 
-func _process(delta):
-	time += delta
-	
-	# Simulate detection progress
-	detection_progress = min(1.0, time * 0.1)
-	precision_score = detection_progress * 0.9
-	recall_score = detection_progress * 0.85
-	
-	animate_normal_data(delta)
-	animate_detection_engine(delta)
-	animate_anomaly_output(delta)
-	animate_threshold_boundary(delta)
-	animate_data_flow(delta)
-	update_detection_metrics(delta)
+enum DetectionMode { Z_SCORE, ISOLATION_RADIUS, AUTOENCODER_ERROR }
 
-func create_normal_particles():
-	# Create normal data particles
-	var normal_particles_node = $NormalData/NormalParticles
-	for i in range(particle_count):
-		var particle = CSGSphere3D.new()
-		particle.radius = 0.08
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.2, 0.8, 0.2, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.2, 0.8, 0.2, 1) * 0.3
-		
-		# Position particles in a normal distribution cluster
-		var angle = randf() * PI * 2
-		var radius = randf_range(0.5, 2.0)
-		var x = cos(angle) * radius
-		var y = sin(angle) * radius
-		var z = randf_range(-0.5, 0.5)
-		particle.position = Vector3(x, y, z)
-		
-		normal_particles_node.add_child(particle)
-		normal_particles.append(particle)
+const MODE_SEQUENCE := [
+	DetectionMode.Z_SCORE,
+	DetectionMode.ISOLATION_RADIUS,
+	DetectionMode.AUTOENCODER_ERROR,
+]
 
-func create_anomaly_particles():
-	# Create anomaly output particles
-	var anomaly_particles_node = $AnomalyOutput/AnomalyParticles
-	for i in range(10):  # Fewer anomalies
-		var particle = CSGSphere3D.new()
-		particle.radius = 0.12
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.2, 0.2, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.2, 0.2, 1) * 0.5
-		
-		# Position particles as outliers
-		var angle = randf() * PI * 2
-		var radius = randf_range(3.0, 5.0)
-		var x = cos(angle) * radius
-		var y = sin(angle) * radius
-		var z = randf_range(-1.0, 1.0)
-		particle.position = Vector3(x, y, z)
-		
-		anomaly_particles_node.add_child(particle)
-		anomaly_particles.append(particle)
+# ─── Tunable parameters ──────────────────────────────────────────────────────
+@export_group("Dataset")
+@export_range(10, 400, 5) var normal_sample_count: int = 72
+@export_range(1, 60, 1) var anomaly_sample_count: int = 10
+@export var dataset_seed: int = 20241031
 
-func create_flow_particles():
-	# Create data flow particles
-	var flow_particles_node = $DataFlow/FlowParticles
-	for i in range(25):
-		var particle = CSGSphere3D.new()
-		particle.radius = 0.05
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.3
-		
-		# Position particles along the detection flow path
-		var progress = float(i) / 25
-		var x = lerp(-8, 8, progress)
-		var y = sin(progress * PI * 3) * 2
-		particle.position = Vector3(x, y, 0)
-		
-		flow_particles_node.add_child(particle)
-		flow_particles.append(particle)
+@export_group("Thresholds")
+@export_range(0.5, 6.0, 0.1) var z_score_threshold: float = 2.4
+@export_range(0.5, 8.0, 0.1) var isolation_radius_threshold: float = 3.4
+@export_range(0.1, 4.0, 0.1) var autoencoder_error_threshold: float = 1.1
 
-func setup_detection_metrics():
-	# Initialize detection metrics
-	var precision_indicator = $DetectionMetrics/PrecisionMeter/PrecisionIndicator
-	var recall_indicator = $DetectionMetrics/RecallMeter/RecallIndicator
-	if precision_indicator:
-		precision_indicator.position.x = 0  # Start at middle
-	if recall_indicator:
-		recall_indicator.position.x = 0  # Start at middle
+@export_group("Visuals")
+@export_range(1.0, 2.5, 0.05) var anomaly_scale_multiplier: float = 1.35
+@export var detection_mode: DetectionMode = DetectionMode.Z_SCORE
 
-func animate_normal_data(delta):
-	# Animate normal data particles
-	for i in range(normal_particles.size()):
-		var particle = normal_particles[i]
-		if particle:
-			# Move particles in a flowing pattern within normal bounds
-			var base_pos = particle.position
-			var move_x = base_pos.x + sin(time * 0.8 + i * 0.1) * 0.2
-			var move_y = base_pos.y + cos(time * 1.2 + i * 0.15) * 0.2
-			var move_z = base_pos.z + sin(time * 1.0 + i * 0.12) * 0.1
-			
-			particle.position.x = lerp(particle.position.x, move_x, delta * 1.5)
-			particle.position.y = lerp(particle.position.y, move_y, delta * 1.5)
-			particle.position.z = lerp(particle.position.z, move_z, delta * 1.5)
-			
-			# Pulse particles based on detection progress
-			var pulse = 1.0 + sin(time * 2.0 + i * 0.2) * 0.2 * detection_progress
-			particle.scale = Vector3.ONE * pulse
+@onready var data_root: Node3D = $DataRoot
+@onready var threshold_visual: MeshInstance3D = $ThresholdVisual
+@onready var title_label: Label3D = $StatsLabels/TitleLabel
+@onready var mode_label: Label3D = $StatsLabels/ModeLabel
+@onready var summary_label: Label3D = $StatsLabels/SummaryLabel
 
-func animate_detection_engine(delta):
-	# Animate detection engine core
-	var engine_core = $DetectionEngine/EngineCore
-	if engine_core:
-		# Rotate engine
-		engine_core.rotation.y += delta * 0.5
-		
-		# Pulse based on detection progress
-		var pulse = 1.0 + sin(time * 2.0) * 0.1 * detection_progress
-		engine_core.scale = Vector3.ONE * pulse
-		
-		# Change emission intensity based on detection
-		if engine_core.material_override:
-			var intensity = 0.3 + detection_progress * 0.7
-			engine_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
-	
-	# Animate detection method cores
-	var statistical_core = $DetectionEngine/DetectionMethods/StatisticalCore
-	if statistical_core:
-		statistical_core.rotation.y += delta * 0.8
-		var statistical_activation = sin(time * 1.5) * 0.5 + 0.5
-		statistical_activation *= detection_progress
-		
-		var pulse = 1.0 + statistical_activation * 0.3
-		statistical_core.scale = Vector3.ONE * pulse
-		
-		if statistical_core.material_override:
-			var intensity = 0.3 + statistical_activation * 0.7
-			statistical_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
-	
-	var isolation_core = $DetectionEngine/DetectionMethods/IsolationForestCore
-	if isolation_core:
-		isolation_core.rotation.y += delta * 1.0
-		var isolation_activation = cos(time * 1.8) * 0.5 + 0.5
-		isolation_activation *= detection_progress
-		
-		var pulse = 1.0 + isolation_activation * 0.3
-		isolation_core.scale = Vector3.ONE * pulse
-		
-		if isolation_core.material_override:
-			var intensity = 0.3 + isolation_activation * 0.7
-			isolation_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
-	
-	var autoencoder_core = $DetectionEngine/DetectionMethods/AutoencoderCore
-	if autoencoder_core:
-		autoencoder_core.rotation.y += delta * 1.2
-		var autoencoder_activation = sin(time * 2.0) * 0.5 + 0.5
-		autoencoder_activation *= detection_progress
-		
-		var pulse = 1.0 + autoencoder_activation * 0.3
-		autoencoder_core.scale = Vector3.ONE * pulse
-		
-		if autoencoder_core.material_override:
-			var intensity = 0.3 + autoencoder_activation * 0.7
-			autoencoder_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
+const BASE_POINT_RADIUS := 0.12
 
-func animate_anomaly_output(delta):
-	# Animate anomaly particles
-	for i in range(anomaly_particles.size()):
-		var particle = anomaly_particles[i]
-		if particle:
-			# Move particles in an erratic pattern
-			var base_pos = particle.position
-			var move_x = base_pos.x + sin(time * 1.5 + i * 0.3) * 0.5
-			var move_y = base_pos.y + cos(time * 2.0 + i * 0.4) * 0.5
-			var move_z = base_pos.z + sin(time * 1.8 + i * 0.25) * 0.3
-			
-			particle.position.x = lerp(particle.position.x, move_x, delta * 2.0)
-			particle.position.y = lerp(particle.position.y, move_y, delta * 2.0)
-			particle.position.z = lerp(particle.position.z, move_z, delta * 2.0)
-			
-			# Pulse particles based on detection progress
-			var pulse = 1.0 + sin(time * 2.5 + i * 0.5) * 0.3 * detection_progress
-			particle.scale = Vector3.ONE * pulse
-			
-			# Flash red when detection is active
-			if detection_progress > 0.5:
-				var flash = sin(time * 5.0 + i * 0.5) * 0.5 + 0.5
-				particle.material_override.emission = Color(0.8, 0.2, 0.2, 1) * flash * 0.8
+var _rng := RandomNumberGenerator.new()
+var _samples: Array = []
+var _mean := Vector2.ZERO
+var _std := Vector2.ONE
+var _max_distance := 1.0
 
-func animate_threshold_boundary(delta):
-	# Animate threshold boundary core
-	var boundary_core = $ThresholdBoundary/BoundaryCore
-	if boundary_core:
-		# Rotate boundary
-		boundary_core.rotation.y += delta * 0.3
-		
-		# Pulse based on detection progress
-		var pulse = 1.0 + sin(time * 2.5) * 0.1 * detection_progress
-		boundary_core.scale = Vector3.ONE * pulse
-		
-		# Change emission intensity based on detection
-		if boundary_core.material_override:
-			var intensity = 0.3 + detection_progress * 0.7
-			boundary_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
+func _ready() -> void:
+	_rng.seed = dataset_seed
+	_generate_samples()
+	_build_points()
+	_refresh_statistics()
+	run_detection()
 
-func animate_data_flow(delta):
-	# Animate flow particles
-	for i in range(flow_particles.size()):
-		var particle = flow_particles[i]
-		if particle:
-			# Move particles through the detection flow
-			var progress = fmod(time * 0.25 + i * 0.1, 1.0)
-			var x = lerp(-8, 8, progress)
-			var y = sin(progress * PI * 3) * 2
-			
-			particle.position.x = lerp(particle.position.x, x, delta * 2.0)
-			particle.position.y = lerp(particle.position.y, y, delta * 2.0)
-			
-			# Change color based on position and detection progress
-			var color_progress = fmod((progress + 0.5), 1.0)
-			var red_component = 0.8 * (0.5 + color_progress * 0.5)
-			var blue_component = 0.8 * (0.5 + (1.0 - color_progress) * 0.5)
-			particle.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
-			particle.material_override.emission = Color(red_component, 0.2, blue_component, 1) * 0.3
-			
-			# Pulse particles based on detection
-			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * detection_progress
-			particle.scale = Vector3.ONE * pulse
+func _generate_samples() -> void:
+	_samples.clear()
+	for i in range(max(10, normal_sample_count)):
+		var pos := Vector2(
+			_rng.randfn(0.0, 1.2),
+			_rng.randfn(0.0, 1.0)
+		)
+		_samples.append({
+			"position": pos,
+			"tag": "normal"
+		})
 
-func update_detection_metrics(delta):
-	# Update precision meter
-	var precision_indicator = $DetectionMetrics/PrecisionMeter/PrecisionIndicator
-	if precision_indicator:
-		var target_x = lerp(-2, 2, precision_score)
-		precision_indicator.position.x = lerp(precision_indicator.position.x, target_x, delta * 2.0)
-		
-		# Change color based on precision
-		var green_component = 0.8 * precision_score
-		var red_component = 0.2 + 0.6 * (1.0 - precision_score)
-		precision_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
-	
-	# Update recall meter
-	var recall_indicator = $DetectionMetrics/RecallMeter/RecallIndicator
-	if recall_indicator:
-		var target_x = lerp(-2, 2, recall_score)
-		recall_indicator.position.x = lerp(recall_indicator.position.x, target_x, delta * 2.0)
-		
-		# Change color based on recall
-		var green_component = 0.8 * recall_score
-		var red_component = 0.2 + 0.6 * (1.0 - recall_score)
-		recall_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
+	for i in range(max(1, anomaly_sample_count)):
+		var angle := _rng.randf_range(0.0, TAU)
+		var radius := _rng.randf_range(4.0, 6.0)
+		var offset := Vector2(cos(angle), sin(angle)) * radius
+		offset.y += _rng.randfn(0.0, 0.6)
+		_samples.append({
+			"position": offset,
+			"tag": "seeded_anomaly"
+		})
 
-func set_detection_progress(progress: float):
-	detection_progress = clamp(progress, 0.0, 1.0)
+func _build_points() -> void:
+	for child in data_root.get_children():
+		child.queue_free()
 
-func set_precision_score(precision: float):
-	precision_score = clamp(precision, 0.0, 1.0)
+	var sphere_mesh := SphereMesh.new()
+	sphere_mesh.radius = BASE_POINT_RADIUS
+	sphere_mesh.height = BASE_POINT_RADIUS * 2.0
 
-func set_recall_score(recall: float):
-	recall_score = clamp(recall, 0.0, 1.0)
+	for sample in _samples:
+		var mesh_instance := MeshInstance3D.new()
+		mesh_instance.mesh = sphere_mesh
+		mesh_instance.position = Vector3(sample["position"].x, 0.0, sample["position"].y)
 
-func get_detection_progress() -> float:
-	return detection_progress
+		var material := StandardMaterial3D.new()
+		material.metallic = 0.25
+		material.roughness = 0.2
+		material.emission_enabled = true
+		material.emission = Color(0.2, 0.6, 1.0, 1.0) * 0.25
+		material.emission_energy_multiplier = 1.4
+		mesh_instance.material_override = material
 
-func get_precision_score() -> float:
-	return precision_score
+		data_root.add_child(mesh_instance)
+		sample["mesh"] = mesh_instance
+		sample["material"] = material
 
-func get_recall_score() -> float:
-	return recall_score
+func run_detection() -> void:
+	_refresh_statistics()
+	var threshold := _active_threshold()
+	var anomaly_count := 0
+	var scores: Array = []
 
-func reset_detection():
-	time = 0.0
-	detection_progress = 0.0
-	precision_score = 0.0
-	recall_score = 0.0
+	for sample in _samples:
+		var score := _score_sample(sample)
+		sample["score"] = score
+		scores.append(score)
+
+		var normalized: float = clamp(score / threshold, 0.0, 1.5) if threshold > 0.0 else 0.0
+		var mesh: MeshInstance3D = sample["mesh"]
+		var material: StandardMaterial3D = sample["material"]
+
+		var color_start: Color = Color(0.15, 0.75, 0.95, 1.0)
+		var color_end: Color = Color(1.0, 0.3, 0.35, 1.0)
+		var display_color := color_start.lerp(color_end, normalized)
+
+		var is_anomaly := score >= threshold
+		sample["is_anomaly"] = is_anomaly
+		if is_anomaly:
+			anomaly_count += 1
+
+		# Animate colour, scale and height transitions via tweens
+		var target_emission := display_color * (0.9 if is_anomaly else 0.25)
+		var target_scale := Vector3.ONE * (anomaly_scale_multiplier if is_anomaly else 1.0)
+		var target_y := 0.25 if is_anomaly else 0.0
+		material.albedo_color = display_color
+
+		if is_inside_tree():
+			var tw := create_tween().set_parallel(true)
+			tw.tween_property(material, "emission", target_emission, 0.4)
+			tw.tween_property(mesh, "scale", target_scale, 0.35).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+			tw.tween_property(mesh, "position:y", target_y, 0.35).set_ease(Tween.EASE_OUT)
+		else:
+			material.emission = target_emission
+			mesh.scale = target_scale
+			mesh.position.y = target_y
+
+	_update_threshold_visual(threshold)
+	_update_labels(anomaly_count, scores, threshold)
+
+func cycle_detection_mode() -> void:
+	var idx: int = MODE_SEQUENCE.find(detection_mode)
+	if idx == -1:
+		idx = 0
+	idx = (idx + 1) % MODE_SEQUENCE.size()
+	detection_mode = MODE_SEQUENCE[idx]
+	run_detection()
+
+func reset_dataset(new_seed: int = dataset_seed) -> void:
+	dataset_seed = new_seed
+	_rng.seed = dataset_seed
+	_generate_samples()
+	_build_points()
+	_refresh_statistics()
+	run_detection()
+
+func _refresh_statistics() -> void:
+	if _samples.is_empty():
+		_mean = Vector2.ZERO
+		_std = Vector2.ONE
+		_max_distance = 1.0
+		return
+
+	_mean = Vector2.ZERO
+	for sample in _samples:
+		_mean += sample["position"]
+	_mean /= float(_samples.size())
+
+	var variance := Vector2.ZERO
+	_max_distance = 0.0
+	for sample in _samples:
+		var diff = sample["position"] - _mean
+		variance.x += diff.x * diff.x
+		variance.y += diff.y * diff.y
+		_max_distance = max(_max_distance, diff.length())
+
+	variance /= max(1.0, float(_samples.size()))
+	_std = Vector2(
+		sqrt(max(variance.x, 0.0001)),
+		sqrt(max(variance.y, 0.0001))
+	)
+	_max_distance = max(_max_distance, 0.0001)
+
+func _score_sample(sample: Dictionary) -> float:
+	var pos: Vector2 = sample["position"]
+	match detection_mode:
+		DetectionMode.Z_SCORE:
+			var z_x = abs((pos.x - _mean.x) / _std.x)
+			var z_y = abs((pos.y - _mean.y) / _std.y)
+			return z_x + z_y
+		DetectionMode.ISOLATION_RADIUS:
+			return (pos - _mean).length()
+		DetectionMode.AUTOENCODER_ERROR:
+			var expected_y := sin(pos.x * 0.6) * 1.5
+			var reconstruction_error = abs(pos.y - expected_y)
+			var radial_penalty = abs(pos.length() - 2.4) * 0.25
+			return reconstruction_error + radial_penalty
+	return 0.0
+
+func _active_threshold() -> float:
+	match detection_mode:
+		DetectionMode.Z_SCORE:
+			return max(0.5, z_score_threshold)
+		DetectionMode.ISOLATION_RADIUS:
+			return max(0.5, isolation_radius_threshold)
+		DetectionMode.AUTOENCODER_ERROR:
+			return max(0.1, autoencoder_error_threshold)
+	return 1.0
+
+func _update_threshold_visual(threshold: float) -> void:
+	if not threshold_visual or not is_instance_valid(threshold_visual):
+		return
+
+	var visual_radius := 2.0
+	match detection_mode:
+		DetectionMode.Z_SCORE:
+			visual_radius = max(0.5, ((_std.x + _std.y) * 0.5) * threshold)
+		DetectionMode.ISOLATION_RADIUS:
+			visual_radius = max(0.5, threshold)
+		DetectionMode.AUTOENCODER_ERROR:
+			visual_radius = max(0.5, 1.8 + threshold * 1.4)
+
+	threshold_visual.scale = Vector3(visual_radius, 0.05, visual_radius)
+
+	var material := threshold_visual.material_override
+	if material == null:
+		material = StandardMaterial3D.new()
+		threshold_visual.material_override = material
+
+	if material is StandardMaterial3D:
+		var highlight := _mode_color()
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.albedo_color = Color(highlight.r, highlight.g, highlight.b, 0.18)
+		material.emission_enabled = true
+		material.emission = highlight * 0.35
+		material.metallic = 0.0
+		material.roughness = 0.4
+
+func _update_labels(anomaly_count: int, scores: Array, threshold: float) -> void:
+	if title_label:
+		title_label.text = "Anomaly Detection Sandbox"
+
+	if mode_label:
+		mode_label.text = "[b]Mode:[/b] %s" % _mode_name()
+
+	if summary_label:
+		var total = max(1, _samples.size())
+		scores.sort()
+		var avg := 0.0
+		for s in scores:
+			avg += s
+		avg /= total
+		var median = scores[int(clamp(total / 2, 0, scores.size() - 1))]
+		summary_label.text = "Anomalies: %d / %d\nThreshold: %.2f\nmu-score: %.2f  med-score: %.2f" % [
+			anomaly_count,
+			_total_samples(),
+			threshold,
+			avg,
+			median
+		]
+
+func _mode_name() -> String:
+	match detection_mode:
+		DetectionMode.Z_SCORE:
+			return "Z-Score"
+		DetectionMode.ISOLATION_RADIUS:
+			return "Isolation Radius"
+		DetectionMode.AUTOENCODER_ERROR:
+			return "Autoencoder Error"
+	return "Unknown"
+
+func _mode_color() -> Color:
+	match detection_mode:
+		DetectionMode.Z_SCORE:
+			return Color(0.3, 0.7, 1.0, 1.0)
+		DetectionMode.ISOLATION_RADIUS:
+			return Color(0.6, 0.9, 0.4, 1.0)
+		DetectionMode.AUTOENCODER_ERROR:
+			return Color(1.0, 0.5, 0.6, 1.0)
+	return Color.WHITE
+
+func _total_samples() -> int:
+	return _samples.size()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

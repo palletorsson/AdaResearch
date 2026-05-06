@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_particle_chaos"]
+
+[ext_resource type="Script" uid="uid://qfep_particle_chaos_script" path="res://commons/interfaces/qfep/particle_chaos.gd" id="1_chaos"]
+
+[node name="ParticleChaos" type="Node3D"]
+script = ExtResource("1_chaos")

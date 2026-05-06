@@ -31,14 +31,14 @@ var label: Label
 var scroll_position: Vector2 = Vector2.ZERO
 var text_size: Vector2 = Vector2.ZERO
 
-func _ready():
+func _ready() -> void:
 	# Create the display mesh
 	create_led_display()
 	
 	# Setup scrolling text
 	setup_viewport_text()
 
-func create_led_display():
+func create_led_display() -> void:
 	# Create a simple flat box to represent the LED display
 	var mesh_instance = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
@@ -55,7 +55,7 @@ func create_led_display():
 	
 	add_child(mesh_instance)
 
-func setup_viewport_text():
+func setup_viewport_text() -> void:
 	# Create viewport for the text
 	viewport = SubViewport.new()
 	viewport.size = Vector2(int(display_width * 100), int(display_height * 100))
@@ -100,7 +100,7 @@ func setup_viewport_text():
 	viewport_sprite.scale = Vector3(display_width, display_height, 1) / viewport_sprite.pixel_size
 	add_child(viewport_sprite)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Calculate scrolling based on direction and speed
 	scroll_position += direction * scroll_speed * delta * 100
 	
@@ -124,3 +124,12 @@ func _process(delta):
 	
 	# Update label position
 	label.position = Vector2(viewport.size.x, 0) + scroll_position
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

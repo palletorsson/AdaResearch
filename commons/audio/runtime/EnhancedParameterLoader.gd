@@ -11,7 +11,8 @@ const PARAMETER_CATEGORIES = [
 	"synthesizers",
 	"retro",
 	"experimental",
-	"ambient"
+	"ambient",
+	"space_pop"
 ]
 
 static var cached_parameters: Dictionary = {}

@@ -1,0 +1,98 @@
+{
+    "description": "Industrial decay with wind through broken windows and falling debris",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -14,
+            "bus": "Ambient",
+            "parameters": {
+                "base_freq": 70.0
+            }
+        },
+        {
+            "sound_id": "techno_noir.rain_segment",
+            "volume_db": -20,
+            "bus": "Wind",
+            "parameters": {
+                "intensity": 0.08
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.static_burst",
+                "techno_noir.mechanical_whir"
+            ],
+            "interval_range": [
+                8.0,
+                25.0
+            ],
+            "volume_range": [
+                -22,
+                -15
+            ],
+            "bus": "Effects"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren"
+            ],
+            "interval_range": [
+                20.0,
+                60.0
+            ],
+            "volume_range": [
+                -28,
+                -18
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.15
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.5,
+                    "damping": 0.2
+                }
+            ]
+        },
+        "Wind": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 200
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.7
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 1000,
+                    "tap1_level_db": -8.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

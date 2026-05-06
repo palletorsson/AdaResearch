@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2utpenjhee10"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/11_turret_targeting/ball_dropper.gd" id="1_dropper"]
+
+[node name="BallDropper" type="Node3D"]
+script = ExtResource("1_dropper")
+drop_interval_min = 2.0
+drop_interval_max = 3.5
+auto_drop = true
+total_balls = 30
+ball_radius = 0.1
+ball_mass = 0.5
+ball_bounce = 0.7
+emission_strength = 0.8
+drop_height = 0.0
+spawn_spread = 0.3

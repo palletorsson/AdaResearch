@@ -1,0 +1,24 @@
+{
+  "id": "rd18_gamma_branch_heightmap",
+  "F": 0.026,
+  "K": 0.055,
+  "grid_size": 112,
+  "iterations": 5600,
+  "seed": 61,
+  "render_mode": "heightmap",
+  "height_amp": 0.82,
+  "color_lo": [
+    0.12,
+    0.14,
+    0.22
+  ],
+  "color_hi": [
+    0.84,
+    0.86,
+    0.48
+  ],
+  "camera_yaw": 0.45,
+  "camera_pitch": 0.57,
+  "layout": "rd_field",
+  "notes": "\u00ce\u00b3-class unstable stripe field (F=0.026, K=0.055): branching worms and occasional local instabilities, sitting between the calmer stripe regimes and the more volatile \u00ce\u00b5 territory."
+}

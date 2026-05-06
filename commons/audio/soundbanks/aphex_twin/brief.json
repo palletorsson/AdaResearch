@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "id": "aphex_twin",
+    "name": "Aphex Twin",
+    "lineage": "Richard D. James - Cornish polymath, bedroom genius",
+    "era": "1985-present",
+    "bpm": { "min": 85, "max": 175, "typical": 130 },
+    "lambda": 0.618,
+    "moods": ["melancholic", "playful", "unsettling", "transcendent", "intimate"]
+  },
+
+  "identity": {
+    "token": "Tape drift (0.08Hz LFO) + 12-bit warmth + detuned fifths + polyrhythmic subdivisions + melodic beauty buried in complexity",
+    "two_second_test": "You hear a warm analog pad, slightly out of tune, with an intricate beat that sounds both mechanical and deeply human - and somewhere in there, a melody that breaks your heart",
+    "emotional_truth": "The loneliness of a computer dreaming of childhood. Machines trying to feel. Complexity masking vulnerability. The uncanny valley of emotion.",
+    "philosophical_core": "Every sound contains its opposite - beauty in ugliness, order in chaos, warmth in digital cold"
+  },
+
+  "soundbank": [
+    "kick", "snare", "hihat",
+    "bass", "pad", "sequence", "texture"
+  ],
+
+  "forbidden": [
+    "supersaw_clean",
+    "4_on_floor_quantized",
+    "gated_reverb_80s",
+    "vocoder_basic",
+    "sidechain_pumping",
+    "preset_sounds",
+    "generic_pads",
+    "stock_breakbeats",
+    "simple_verse_chorus",
+    "in_tune_unison",
+    "rigid_tempo",
+    "sterile_digital",
+    "cheesy_arpeggios",
+    "predictable_drops"
+  ],
+
+  "essence": {
+    "SAW_85_92": {
+      "description": "Warm, intimate, tape-degraded ambient",
+      "bpm": { "min": 85, "max": 100 },
+      "key_elements": ["tape_saturation", "detuned_chords", "lo_fi_breakbeats", "nostalgic_pads"]
+    },
+    "drukQs": {
+      "description": "Prepared piano, drill n bass, emotional extremes",
+      "bpm": { "min": 140, "max": 175 },
+      "key_elements": ["prepared_piano", "rapid_breakbeats", "ambient_interludes", "dynamic_range"]
+    },
+    "Syro": {
+      "description": "Modern analog complexity, intricate arrangements",
+      "bpm": { "min": 110, "max": 145 },
+      "key_elements": ["layered_synths", "polyrhythms", "evolving_patches", "crisp_but_warm"]
+    },
+    "RDJ_Album": {
+      "description": "Playful, unsettling, suburban uncanny",
+      "bpm": { "min": 100, "max": 140 },
+      "key_elements": ["pitch_shifted_vocals", "unusual_scales", "humor_in_horror", "bedroom_production"]
+    }
+  },
+
+  "rhythm": {
+    "quantize": "micro_varied",
+    "humanize_ms": 8,
+    "swing_pct": 5,
+    "pattern": "polyrhythmic_breakbeat"
+  },
+
+  "harmony": {
+    "scales": ["lydian", "dorian", "mixolydian", "whole_tone", "custom_RDJ"],
+    "voicings": "wide_detuned_clusters",
+    "techniques": {
+      "detuned_unisons": { "cents": { "min": 8, "max": 25 } },
+      "non_octave_tuning": true,
+      "microtonality": "subtle",
+      "suspended_ambiguity": true
+    },
+    "progressions": {
+      "style": "non_functional",
+      "common_intervals": ["m3", "M2", "P5", "tritone"],
+      "bass_movement": "chromatic_or_pedal"
+    }
+  },
+
+  "sound_design": {
+    "oscillators": {
+      "analog_modeling": true,
+      "detuning": "always",
+      "drift": { "rate_hz": 0.08, "amount_cents": 12 },
+      "waveform_mix": ["saw", "square", "sine_sub"]
+    },
+    "filters": {
+      "types": ["ladder_moog", "state_variable", "comb"],
+      "resonance": { "min": 0.3, "max": 0.85 },
+      "envelope_mod": true,
+      "lfo_mod": true,
+      "key_tracking": { "min": 0.3, "max": 0.7 }
+    },
+    "modulation": {
+      "lfo_count": { "min": 3, "max": 8 },
+      "cross_modulation": true,
+      "feedback_loops": true,
+      "chaos_elements": 0.15
+    },
+    "granular": {
+      "grain_size_ms": { "min": 10, "max": 100 },
+      "density": { "min": 5, "max": 50 },
+      "pitch_variation": true,
+      "reverse_grains": true
+    }
+  },
+
+  "fx": {
+    "tape_saturation": { "amount": 0.3, "warmth": 0.6 },
+    "bit_depth": { "min": 10, "max": 14 },
+    "sample_rate_reduction": { "min": 0, "max": 0.15 },
+    "reverb": {
+      "type": "algorithmic_lush",
+      "size": { "min": 0.4, "max": 0.9 },
+      "predelay_ms": { "min": 20, "max": 80 },
+      "modulation": true
+    },
+    "delay": {
+      "ping_pong": true,
+      "modulated": true,
+      "tape_style": true,
+      "feedback": { "min": 0.3, "max": 0.7 }
+    },
+    "highshelf_cut_db": { "min": -2, "max": -6 },
+    "analog_warmth": true,
+    "subtle_phaser": true
+  },
+
+  "transitions": {
+    "crossfade_s": { "min": 2.0, "max": 8.0 },
+    "techniques": [
+      "filter_sweep",
+      "granular_freeze",
+      "reverb_swell",
+      "beat_drop",
+      "element_isolation",
+      "tempo_drift",
+      "pitch_shift"
+    ]
+  },
+
+  "sections": {
+    "intro": ["texture", "pad"],
+    "build": ["texture", "pad", "bass", "hihat", "sequence"],
+    "main": ["kick", "snare", "hihat", "bass", "pad", "sequence", "texture"],
+    "breakdown": ["pad", "texture"],
+    "outro": ["pad", "texture"]
+  },
+
+  "reference_tracks": {
+    "ambient_warm": ["Xtal", "Ageispolis", "Stone In Focus", "#3", "Lichen"],
+    "complex_rhythmic": ["Vordhosbn", "54 Cymru Beats", "minipops 67", "CIRCLONT6A"],
+    "emotional_piano": ["Aisatsana", "Avril 14th", "Nanou2", "Kesson Daslef"],
+    "dark_unsettling": ["Come to Daddy", "Ventolin", "Bucephalus Bouncing Ball"],
+    "playful_weird": ["Fingerbib", "Alberto Balsalm", "Girl/Boy Song", "IZ-US"]
+  }
+}

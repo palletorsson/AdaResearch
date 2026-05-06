@@ -1,0 +1,144 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "VectorAdvanced",
+  "home_sequence": "forces",
+  "dimensions": {
+    "w": 22,
+    "d": 19
+  },
+  "signature": "VectorTorque and torque_demo demonstrate tau = r x F with draggable force and position vectors \u2014 zero torque when force passes through center",
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.052,
+  "breath_zones": [
+    {
+      "size": 64,
+      "bounds": {
+        "x": 14,
+        "z": 9,
+        "w": 7,
+        "d": 10
+      },
+      "centroid": [
+        17.015625,
+        13.453125
+      ]
+    },
+    {
+      "size": 62,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 8
+      },
+      "centroid": [
+        3.6129032258064515,
+        3.467741935483871
+      ]
+    },
+    {
+      "size": 55,
+      "bounds": {
+        "x": 0,
+        "z": 9,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        3.6,
+        12.290909090909091
+      ]
+    },
+    {
+      "size": 53,
+      "bounds": {
+        "x": 14,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.69811320754717,
+        3.169811320754717
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 16,
+      "z": 1,
+      "token": "VectorFieldFlow"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "VectorTorque"
+    },
+    {
+      "x": 18,
+      "z": 3,
+      "token": "VectorTorque"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 16,
+      "z": 4,
+      "token": "exercise_1_3_solution_3_d_bouncing_ball_vr"
+    },
+    {
+      "x": 18,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 18,
+      "z": 5,
+      "token": "example_1_9_motion_101_velocity_and_random_acceleration_vr"
+    },
+    {
+      "x": 3,
+      "z": 9,
+      "token": "torque_demo"
+    },
+    {
+      "x": 2,
+      "z": 11,
+      "token": "exercise_1_5_solution_accelerate_and_decelerate_vr"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "exercise_1_8_solution_attraction_magnitude_vr"
+    },
+    {
+      "x": 17,
+      "z": 12,
+      "token": "VectorThrowing"
+    },
+    {
+      "x": 6,
+      "z": 13,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 17,
+      "z": 14,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 13,
+    "walkable_cells": 251,
+    "breath_zone_count": 4,
+    "unique_tokens": 9
+  }
+}

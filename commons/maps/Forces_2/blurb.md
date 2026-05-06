@@ -1,0 +1,1 @@
+Multiple forces combine into a net force. Gravity down, normal force up, friction sideways. The object doesn't care about individual contributions — it feels only the sum. Free body diagrams become embodied: see all the arrows, see them merge into one resultant.

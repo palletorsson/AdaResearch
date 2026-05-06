@@ -1,0 +1,215 @@
+## TilingDemo — Standalone demo scene showcasing the tiling system.
+## Shows Italian motifs as floor panels with different palettes and border compositions.
+## Run this scene directly to test the tiling system.
+
+# @identity
+# essence: gallery of TilingSystem instances loaded with Italian historical motifs (checkerboard→meander→perspective cubes→floral cross) displayed as floor panels in two rows: individual motifs and composed floors with borders
+# desire: to walk through a gallery of floors and feel that mathematical tiling has a history — that the same index-based repetition logic underlies Roman mosaics, Cosmatesque pavements, and the array in your pocket
+# critical_parameter: panel_spacing — determines whether the gallery reads as a sequence of individual specimens or as a continuous floor surface; changing it shifts the experience from museum to architecture
+# triggers: the demo calls TilingSystem._demo_setup and _demo_composed_setup via call_deferred — each panel independently loads its motif pack and configures borders; composed floors add border+corner logic on top of field motifs
+# emerges: the Italian site names (Casa del Fauno, Santa Chiara, Certosa) attached to abstract tiling patterns reveal that mathematical structure carries cultural memory — the same p4m symmetry group appears in vastly different historical contexts
+# needs: no VR interactivity [missing]; static gallery with Label3D names [has]; overhead camera [has]; no slider controls for live editing [missing]
+# relationships: uses TilingSystem (the underlying tile engine); contrasts with PatternTilePuzzle (interactive editing vs historical display); connects to array_tutorial's gallery-of-patterns intro
+# truth: a tiling motif is a function from grid index to visual element, and every historical floor pattern is a specific instantiation of the same abstract array-to-image mapping
+
+extends Node3D
+
+@export var panel_size: Vector2 = Vector2(4.0, 4.0)
+@export var panel_spacing: float = 3.0
+
+func _ready() -> void:
+	_create_environment()
+	_create_floor()
+	_create_motif_gallery()
+	_create_composed_floors()
+
+
+# ---------------------------------------------------------------------------
+# Environment
+# ---------------------------------------------------------------------------
+func _create_environment() -> void:
+	var env := Environment.new()
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = Color(0.08, 0.08, 0.12)
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color = Color(0.5, 0.55, 0.65)
+	env.ambient_light_energy = 0.6
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+
+	var world_env := WorldEnvironment.new()
+	world_env.environment = env
+	add_child(world_env)
+
+	# Top-down light for floor viewing
+	var light := DirectionalLight3D.new()
+	light.rotation_degrees = Vector3(-70, 20, 0)
+	light.light_color = Color(1.0, 0.97, 0.92)
+	light.light_energy = 1.2
+	light.shadow_enabled = true
+	add_child(light)
+
+	var fill := DirectionalLight3D.new()
+	fill.rotation_degrees = Vector3(-30, -120, 0)
+	fill.light_color = Color(0.6, 0.7, 0.9)
+	fill.light_energy = 0.3
+	fill.shadow_enabled = false
+	add_child(fill)
+
+	# Camera — overhead angled view
+	var cam := Camera3D.new()
+	cam.position = Vector3(6, 8, 10)
+	cam.rotation_degrees = Vector3(-45, 0, 0)
+	cam.fov = 55
+	add_child(cam)
+
+
+# ---------------------------------------------------------------------------
+# Base floor
+# ---------------------------------------------------------------------------
+func _create_floor() -> void:
+	var floor_mesh := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(14, 12)
+	floor_mesh.mesh = plane
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.15, 0.14, 0.13)
+	mat.roughness = 0.95
+	floor_mesh.material_override = mat
+	floor_mesh.position.y = -0.01
+	add_child(floor_mesh)
+
+
+# ---------------------------------------------------------------------------
+# Row 1: Individual Motifs — one TilingSystem per motif
+# ---------------------------------------------------------------------------
+func _create_motif_gallery() -> void:
+	# Motifs from the Italy study pack
+	var motifs := [
+		{"name": "Checkerboard", "motif": "checkerboard", "period": "roman_republican"},
+		{"name": "Meander Key", "motif": "meander_key", "period": "roman_republican"},
+		{"name": "Diamond Lozenge", "motif": "diamond_lozenge", "period": "roman_imperial"},
+		{"name": "Octagon & Square", "motif": "octagon_square", "period": "roman_imperial"},
+		{"name": "Perspective Cubes", "motif": "perspective_cubes", "period": "cosmatesque_period"},
+		{"name": "Star Pattern", "motif": "star_pattern", "period": "cosmatesque_period"},
+		{"name": "Floral Cross", "motif": "floral_cross", "period": "renaissance"},
+		{"name": "Vine Scroll", "motif": "vine_scroll", "period": "baroque"},
+	]
+
+	# Section label
+	var label := Label3D.new()
+	label.text = "ITALIAN TILING MOTIFS"
+	label.font_size = 64
+	label.pixel_size = 0.003
+	label.position = Vector3(0, 0.05, -1.5)
+	label.rotation_degrees.x = -90
+	label.modulate = Color(0.7, 0.7, 0.8)
+	add_child(label)
+
+	for i in range(motifs.size()):
+		var spec: Dictionary = motifs[i]
+		var col: int = i % 4
+		var row: int = i / 4
+		var x: float = col * panel_spacing
+		var z: float = row * panel_spacing + 1.0
+
+		_spawn_motif_panel(spec, Vector3(x, 0, z))
+
+
+func _spawn_motif_panel(spec: Dictionary, pos: Vector3) -> void:
+	var tiling := TilingSystem.new()
+	tiling.name = "Tiling_%s" % spec["motif"]
+	tiling.tile_size = 8
+	tiling.field_size = Vector2i(5, 5)
+	tiling.has_border = false
+	tiling.has_corners = false
+	tiling.has_medallion = false
+	tiling.cell_size = 0.12
+	tiling.position = pos
+	add_child(tiling)
+
+	# Load pack, set period, load motif — deferred so _ready() runs first
+	tiling.call_deferred("_demo_setup", spec["motif"], spec.get("period", ""))
+
+	# Label
+	var label := Label3D.new()
+	label.text = spec["name"]
+	label.font_size = 32
+	label.pixel_size = 0.002
+	label.position = pos + Vector3(panel_size.x / 2.0, 0.05, panel_size.y + 0.15)
+	label.rotation_degrees.x = -90
+	label.modulate = Color(0.7, 0.7, 0.8)
+	add_child(label)
+
+
+# ---------------------------------------------------------------------------
+# Row 2: Composed Floors — field + border + corners
+# ---------------------------------------------------------------------------
+func _create_composed_floors() -> void:
+	var compositions := [
+		{
+			"name": "Casa del Fauno Floor",
+			"site": "casa_del_fauno",
+			"field_motif": "checkerboard",
+			"border_motif": "meander_key",
+		},
+		{
+			"name": "Santa Chiara Majolica",
+			"site": "santa_chiara",
+			"field_motif": "floral_cross",
+			"border_motif": "vine_scroll",
+		},
+		{
+			"name": "Cosmatesque Pavement",
+			"site": "museo_archeologico",
+			"field_motif": "perspective_cubes",
+			"border_motif": "guilloche",
+		},
+	]
+
+	# Section label
+	var label := Label3D.new()
+	label.text = "COMPOSED FLOORS"
+	label.font_size = 64
+	label.pixel_size = 0.003
+	label.position = Vector3(0, 0.05, 5.0)
+	label.rotation_degrees.x = -90
+	label.modulate = Color(0.7, 0.7, 0.8)
+	add_child(label)
+
+	for i in range(compositions.size()):
+		var spec: Dictionary = compositions[i]
+		var x: float = i * panel_spacing
+		var z: float = 6.0
+
+		_spawn_composed_floor(spec, Vector3(x, 0, z))
+
+
+func _spawn_composed_floor(spec: Dictionary, pos: Vector3) -> void:
+	var tiling := TilingSystem.new()
+	tiling.name = "Composed_%s" % spec.get("name", "floor").replace(" ", "_")
+	tiling.tile_size = 8
+	tiling.field_size = Vector2i(5, 5)
+	tiling.border_width = 4
+	tiling.has_border = true
+	tiling.has_corners = true
+	tiling.has_medallion = false
+	tiling.cell_size = 0.12
+	tiling.position = pos
+	add_child(tiling)
+
+	# Deferred setup
+	tiling.call_deferred("_demo_composed_setup",
+		spec.get("site", ""),
+		spec.get("field_motif", "checkerboard"),
+		spec.get("border_motif", "meander_key"))
+
+	# Label
+	var label := Label3D.new()
+	label.text = spec.get("name", "Floor")
+	label.font_size = 32
+	label.pixel_size = 0.002
+	label.position = pos + Vector3(panel_size.x / 2.0, 0.05, panel_size.y + 0.15)
+	label.rotation_degrees.x = -90
+	label.modulate = Color(0.7, 0.7, 0.8)
+	add_child(label)

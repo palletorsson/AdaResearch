@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://vowel_synth_v1"]
+
+[ext_resource type="Script" path="res://algorithms/speech/phoneme_cloud/vowel_synth.gd" id="1_script"]
+
+[node name="VowelSynth3D" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+unit_size = 5.0
+max_distance = 50.0

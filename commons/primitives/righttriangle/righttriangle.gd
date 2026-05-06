@@ -1,5 +1,16 @@
 # RightTriangle.gd - 90 degree right triangle leaning right in black
 extends Node3D
+class_name RightTriangle
+
+# @identity
+# essence: right_triangle(base, height) with 90° angle at origin — the geometric primitive of Pythagoras
+# desire: learner has a reference form for right angles to which other geometry is compared
+# critical_parameter: the right angle at the origin — this defines the shape; moving it makes it non-right
+# triggers: nothing — static reference object; thin (0.05 depth) for readability as a 2D form in 3D space
+# emerges: the usefulness of black — a neutral diagnostic color that does not compete with adjacent color coding
+# needs: [missing VR controls — static display only]
+# relationships: used in Trans_RotationSpectacle map; sibling to pythagorean_triangle_angles
+# truth: the right angle is the basis of all rectangular coordinate systems — it defines what "perpendicular" means
 
 var base_color: Color = Color(0.1, 0.1, 0.1)  # Black
 var triangle_size: float = 1.0

@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SwarmIntelligence_FlowFields",
+  "home_sequence": "swarmintelligence",
+  "dimensions": {
+    "w": 10,
+    "d": 8
+  },
+  "signature": "FlowFieldMain implements the flow field simulation with particle advection",
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 78,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 8
+      },
+      "centroid": [
+        4.448717948717949,
+        3.4743589743589745
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 3,
+      "token": "FlowFieldMain"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 79,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

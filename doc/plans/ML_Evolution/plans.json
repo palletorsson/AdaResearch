@@ -1,0 +1,62 @@
+{
+  "name": "ML_Evolution",
+  "title": "Selection Without Design",
+  "description": "Evolutionary algorithms in action \u00e2\u20ac\u201d creatures, flowers, rockets, and bloops evolve through selection pressure in a central arena while you observe from a raised amphitheater ring.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 12
+  },
+  "n_artifacts": 7,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    8,
+    10
+  ],
+  "artifacts": [
+    {
+      "name": "science_screen",
+      "row": 0,
+      "col": 11,
+      "family": "shaders"
+    },
+    {
+      "name": "evolved_creatures",
+      "row": 1,
+      "col": 3,
+      "family": "machinelearning"
+    },
+    {
+      "name": "evolvingflowers",
+      "row": 2,
+      "col": 10,
+      "family": "machinelearning"
+    },
+    {
+      "name": "9_3_smart_rockets_vr",
+      "row": 4,
+      "col": 1,
+      "family": "machinelearning"
+    },
+    {
+      "name": "non_teleological_evolution",
+      "row": 5,
+      "col": 5,
+      "family": "machinelearning"
+    },
+    {
+      "name": "9_5_evolving_bloops_vr",
+      "row": 6,
+      "col": 1,
+      "family": "machinelearning"
+    },
+    {
+      "name": "gradient_descent_visualization",
+      "row": 7,
+      "col": 3,
+      "family": "algorithms_misc"
+    }
+  ]
+}

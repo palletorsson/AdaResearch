@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://normal_force_demo_001"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/07_vector_projection_reflection/NormalForceDemo.gd" id="1"]
+
+[node name="NormalForceDemo" type="Node3D"]
+script = ExtResource("1")

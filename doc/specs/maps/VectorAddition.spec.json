@@ -1,0 +1,60 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "VectorAddition",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 10,
+    "d": 9
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.045,
+  "breath_zones": [
+    {
+      "size": 85,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 9
+      },
+      "centroid": [
+        4.5058823529411764,
+        4.011764705882353
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "VectorAddition"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "vector_addition_demo"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "ForceMagnitudeDemo"
+    },
+    {
+      "x": 7,
+      "z": 5,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 89,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

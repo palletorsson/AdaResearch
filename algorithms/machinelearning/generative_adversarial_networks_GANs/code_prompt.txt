@@ -1,0 +1,89 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/generative_adversarial_networks_GANs/generative_adversarial_networks_GANs.tscn`.
+Your implementation must bring the `Generative Adversarial Networks (GANs)` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Generative Adversarial Networks (GANs)
+
+
+## Folder Summary
+
+The `Generative Adversarial Networks (GANs)` module provides a 3D sandbox for exploring the ideas behind the Generative Adversarial Networks (GANs) workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `generative_adversarial_networks_GANs.tscn` and the controller script `GenerativeAdversarialNetworksGANs.gd`.
+
+## Overview
+This algorithm demonstrates Generative Adversarial Networks, a powerful framework for training generative models through an adversarial process where two neural networks compete: a generator that creates data and a discriminator that evaluates authenticity.
+
+## What It Does
+- **Data Generation**: Creates realistic, high-quality data samples
+- **Adversarial Training**: Two networks competing and improving together
+- **Generator Network**: Produces synthetic data samples
+- **Discriminator Network**: Distinguishes real from fake data
+- **Real-time Training**: Continuous model improvement and competition
+- **Interactive Visualization**: Shows generated samples and training progress
+
+## Key Concepts
+
+### GAN Architecture
+- **Generator (G)**: Neural network that creates synthetic data
+- **Discriminator (D)**: Neural network that evaluates data authenticity
+- **Adversarial Training**: Competitive training process
+- **Loss Functions**: Generator and discriminator objectives
+- **Convergence**: Balancing generator and discriminator performance
+
+### Training Process
+- **Generator Training**: Minimizing discriminator accuracy
+- **Discriminator Training**: Maximizing classification accuracy
+- **Adversarial Balance**: Preventing one network from dominating
+- **Mode Collapse**: Avoiding limited variety in generated samples
+- **Training Stability**: Maintaining balanced training dynamics
+
+## Algorithm Features
+- **Multiple GAN Variants**: Various GAN architectures
+- **Real-time Training**: Continuous adversarial training
+- **Sample Generation**: Real-time synthetic data creation
+- **Performance Monitoring**: Tracks training progress and sample quality
+- **Parameter Control**: Adjustable training parameters
+- **Export Capabilities**: Save trained models and generated samples
+
+## Use Cases
+- **Image Generation**: Creating realistic images and artwork
+- **Data Augmentation**: Expanding training datasets
+- **Style Transfer**: Applying artistic styles to images
+- **Super-resolution**: Enhancing image quality and resolution
+- **Text-to-Image**: Generating images from text descriptions
+- **Video Generation**: Creating synthetic video content
+
+## Technical Implementation
+- **GDScript**: Written in Godot's scripting language
+- **Neural Networks**: Generator and discriminator implementations
+- **Adversarial Training**: Training algorithms and loss functions
+- **Performance Optimization**: Optimized for real-time training
+- **Memory Management**: Efficient model parameter storage
+
+## Performance Considerations
+- Model complexity affects training speed
+- Training stability requires careful parameter tuning
+- Real-time generation requires optimization
+- Memory usage scales with model size
+
+## Future Enhancements
+- **Additional GAN Variants**: More GAN architectures
+- **Conditional GANs**: Controlled data generation
+- **Advanced Training**: More sophisticated training methods
+- **Custom Architectures**: User-defined GAN designs
+- **Performance Analysis**: Detailed training analysis tools
+- **Model Persistence**: Save and load trained GANs
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Implement the lifecycle helpers `_ready()`, `_process()`, `create_noise_particles()`, `create_data_particles()`, `create_feedback_particles()`, `setup_training_metrics()`.
+- Maintain state containers including `time`, `training_progress`, `generator_loss`, `discriminator_loss`, `competition_level`, `particle_count`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

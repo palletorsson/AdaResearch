@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var sphere_scene: PackedScene  # Packed scene for the sphere
 @export var num_segments: int = 10  # Number of segments in the spark line
@@ -112,6 +112,8 @@ func create_sphere_instance() -> Node3D:
 
 # Function to generate sparks from the current positions of the start_node and end_node
 func _generate_spark_from_nodes():
+	if not start_node or not end_node:
+		return
 	var new_start = start_node.global_transform.origin - self.global_transform.origin
 	var new_end = end_node.global_transform.origin - self.global_transform.origin
 	_generate_spark(new_start, new_end)
@@ -120,5 +122,5 @@ func _generate_spark_from_nodes():
 	label.text = "Start: " + str(new_start) + "\nEnd: " + str(new_end)
 
 # Update spark position in real-time using _process
-func _process(delta):
+func _process(_delta):
 	_generate_spark_from_nodes()

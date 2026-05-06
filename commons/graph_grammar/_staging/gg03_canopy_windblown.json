@@ -1,0 +1,66 @@
+{
+  "id": "gg03_canopy_windblown",
+  "notes": "Space-colonized canopy with horizontal noise bias \u00e2\u20ac\u201d windblown.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 1,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "space_colonize",
+      "selector": "all",
+      "params": {
+        "iterations": 50,
+        "attractor_count": 250,
+        "cloud_shape": "ellipsoid",
+        "cloud_size": [
+          1.6,
+          1.0,
+          1.6
+        ],
+        "cloud_center": [
+          0,
+          2.0,
+          0
+        ],
+        "influence_radius": 1.0,
+        "kill_radius": 0.22,
+        "step": 0.13,
+        "radius_decay": 0.97
+      }
+    },
+    {
+      "op": "noise_displace",
+      "selector": "all",
+      "params": {
+        "amp": 0.25,
+        "freq": 0.8,
+        "seed": 77,
+        "axis_mask": [
+          1.0,
+          0.3,
+          0.5
+        ]
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.15,
+        "radius": 0.02,
+        "splay": 0.9
+      }
+    }
+  ]
+}

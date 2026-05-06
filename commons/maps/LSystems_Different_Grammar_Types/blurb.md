@@ -1,0 +1,5 @@
+A 12×12 grid. Eight-by-eight cells in the center where algorithms fight for territory. Gaussian distributions raise terrain into bell curves. Random walks carve drunk paths through flat planes. Cubes spawn, rotate, vanish — each removal a coin flip, each placement a roll of dice.
+
+The arena stages randomness as spectacle. Height maps built from noise. Profiles generated from nothing but a seed and a rule. Walkers that remember nowhere they've been. Sculptural forms that emerge from functions pretending to be chaos. Every algorithm here uses the same raw material — `randf()`, the machine's best impression of uncertainty — and produces radically different worlds.
+
+Randomness is not the absence of structure. It is structure's precondition. The grid doesn't dissolve into noise. It organizes around it.

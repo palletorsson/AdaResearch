@@ -1,0 +1,47 @@
+{
+  "id": "gg10_mandala_6fold",
+  "notes": "6-fold symmetry \u00e2\u20ac\u201d hexagonal mandala.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0.5
+    ],
+    "radius": 0.1
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.4,
+        "spread_deg": 30,
+        "radius_decay": 0.72
+      }
+    },
+    {
+      "op": "symmetry",
+      "selector": "all",
+      "params": {
+        "count": 6,
+        "axis": "y"
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.13,
+        "radius": 0.015,
+        "splay": 0.85
+      }
+    }
+  ]
+}

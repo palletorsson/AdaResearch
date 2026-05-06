@@ -1,0 +1,17 @@
+{
+  "id": "gen00_spikes_iso",
+  "notes": "Icosphere with random face extrusions \u2014 spiky organism.",
+  "seed": "icosahedron",
+  "seed_scale": 0.5,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "random_30",
+      "params": {
+        "distance": 0.5,
+        "scale": 0.35
+      }
+    }
+  ]
+}

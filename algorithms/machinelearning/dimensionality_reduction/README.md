@@ -1,5 +1,12 @@
 # Dimensionality Reduction
 
+
+## Folder Summary
+
+The `Dimensionality Reduction` module provides a 3D sandbox for exploring the ideas behind the Dimensionality Reduction workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `dimensionality_reduction.tscn` and the controller script `DimensionalityReduction.gd`.
+
 ## Overview
 This algorithm demonstrates various dimensionality reduction techniques used in machine learning to reduce the number of features while preserving important information, improving model performance and interpretability.
 

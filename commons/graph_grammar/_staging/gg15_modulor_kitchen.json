@@ -1,0 +1,45 @@
+{
+  "id": "gg15_modulor_kitchen",
+  "notes": "Kitchen counter with many cups and books.",
+  "seed": {
+    "modulor": {
+      "level": 0,
+      "category": "room",
+      "pos": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "iterations": 1,
+  "render_mode": "boxes",
+  "camera_pitch": 0.75,
+  "camera_yaw": 0.5,
+  "rules": [
+    {
+      "op": "modulor_fold",
+      "selector": "tag:room",
+      "params": {
+        "count": 3,
+        "category_child": "table",
+        "spread_rad": 2.6,
+        "pitch": 1.4,
+        "distance_factor": 0.72,
+        "jitter": 0.08
+      }
+    },
+    {
+      "op": "modulor_fold",
+      "selector": "tag:table",
+      "params": {
+        "count": 5,
+        "category_child": "cup",
+        "spread_rad": 2.8,
+        "pitch": 0.9,
+        "distance_factor": 0.45,
+        "jitter": 0.15
+      }
+    }
+  ]
+}

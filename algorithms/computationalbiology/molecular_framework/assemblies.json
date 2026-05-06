@@ -1,0 +1,312 @@
+{
+    "catalog": {
+        "SphereSmall": {
+            "mesh": "sphere_small",
+            "radius": 0.08,
+            "color": [0.8, 0.9, 1.0, 1.0],
+            "mass": 0.5
+        },
+        "SphereMed": {
+            "mesh": "sphere_med",
+            "radius": 0.12,
+            "color": [0.7, 0.8, 1.0, 1.0],
+            "mass": 1.0
+        },
+        "SphereTiny": {
+            "mesh": "sphere_small",
+            "radius": 0.04,
+            "color": [0.9, 0.95, 1.0, 1.0],
+            "mass": 0.2
+        },
+        "Cylinder": {
+            "mesh": "cylinder",
+            "r": 0.05,
+            "h": 0.4,
+            "color": [0.9, 0.8, 0.6, 1.0],
+            "mass": 0.8
+        },
+        "CylinderThin": {
+            "mesh": "cylinder",
+            "r": 0.02,
+            "h": 0.3,
+            "color": [0.85, 0.75, 0.55, 1.0],
+            "mass": 0.4
+        },
+        "CylinderThick": {
+            "mesh": "cylinder",
+            "r": 0.08,
+            "h": 0.5,
+            "color": [0.7, 0.6, 0.5, 1.0],
+            "mass": 1.2
+        },
+        "Panel": {
+            "mesh": "box",
+            "size": [0.5, 0.02, 0.5],
+            "color": [0.7, 0.7, 0.7, 1.0],
+            "mass": 1.2
+        },
+        "PanelLarge": {
+            "mesh": "box",
+            "size": [0.8, 0.02, 0.8],
+            "color": [0.65, 0.65, 0.65, 1.0],
+            "mass": 1.8
+        },
+        "PanelTall": {
+            "mesh": "box",
+            "size": [0.5, 0.8, 0.02],
+            "color": [0.75, 0.75, 0.75, 1.0],
+            "mass": 1.5
+        },
+        "DNANucleotide": {
+            "mesh": "box",
+            "size": [0.1, 0.05, 0.15],
+            "color": [0.3, 0.8, 0.9, 1.0],
+            "mass": 0.3
+        },
+        "InsectSegment": {
+            "mesh": "sphere_med",
+            "radius": 0.1,
+            "color": [0.2, 0.3, 0.2, 1.0],
+            "mass": 0.6
+        },
+        "AlienNode": {
+            "mesh": "sphere_small",
+            "radius": 0.06,
+            "color": [0.8, 0.3, 0.9, 1.0],
+            "mass": 0.4
+        },
+        "CrystalPrism": {
+            "mesh": "cylinder",
+            "r": 0.06,
+            "h": 0.25,
+            "color": [0.6, 0.9, 0.95, 1.0],
+            "mass": 0.5
+        }
+    },
+
+    "assemblies": {
+        "VRBody": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "torso",   "part": "SphereMed",   "pos": [0, 1.2, 0] },
+                { "id": "head",    "part": "SphereSmall", "pos": [0, 1.55, 0] },
+                { "id": "l_sh",    "part": "SphereSmall", "pos": [-0.25, 1.35, 0] },
+                { "id": "r_sh",    "part": "SphereSmall", "pos": [ 0.25, 1.35, 0] },
+                { "id": "l_elb",   "part": "SphereSmall", "pos": [-0.45, 1.15, 0] },
+                { "id": "r_elb",   "part": "SphereSmall", "pos": [ 0.45, 1.15, 0] },
+                { "id": "l_hand",  "part": "SphereSmall", "pos": [-0.55, 0.95, 0.05] },
+                { "id": "r_hand",  "part": "SphereSmall", "pos": [ 0.55, 0.95, 0.05] },
+                { "id": "pelvis",  "part": "SphereSmall", "pos": [0, 0.95, 0] },
+                { "id": "l_knee",  "part": "SphereSmall", "pos": [-0.15, 0.6, 0] },
+                { "id": "r_knee",  "part": "SphereSmall", "pos": [ 0.15, 0.6, 0] },
+                { "id": "l_foot",  "part": "SphereSmall", "pos": [-0.12, 0.15, 0.1] },
+                { "id": "r_foot",  "part": "SphereSmall", "pos": [ 0.12, 0.15, 0.1] }
+            ],
+            "bonds": [
+                ["torso","head"],
+                ["torso","l_sh"], ["torso","r_sh"],
+                ["l_sh","l_elb"], ["r_sh","r_elb"],
+                ["l_elb","l_hand"], ["r_elb","r_hand"],
+                ["torso","pelvis"],
+                ["pelvis","l_knee"], ["pelvis","r_knee"],
+                ["l_knee","l_foot"], ["r_knee","r_foot"]
+            ]
+        },
+
+        "Chair": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "seat",  "part": "Panel",    "pos": [0, 0.5, 0] },
+                { "id": "back",  "part": "Panel",    "pos": [0, 0.85, -0.22] },
+                { "id": "leg1",  "part": "Cylinder", "pos": [-0.18, 0.25,  0.18] },
+                { "id": "leg2",  "part": "Cylinder", "pos": [ 0.18, 0.25,  0.18] },
+                { "id": "leg3",  "part": "Cylinder", "pos": [-0.18, 0.25, -0.18] },
+                { "id": "leg4",  "part": "Cylinder", "pos": [ 0.18, 0.25, -0.18] }
+            ],
+            "bonds": [
+                ["seat","back"],
+                ["seat","leg1"],["seat","leg2"],["seat","leg3"],["seat","leg4"]
+            ]
+        },
+
+        "DNAHelix": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "n0",  "part": "DNANucleotide", "pos": [ 0.15, 0.0, 0] },
+                { "id": "n1",  "part": "DNANucleotide", "pos": [-0.15, 0.2, 0] },
+                { "id": "n2",  "part": "DNANucleotide", "pos": [ 0.15, 0.4, 0] },
+                { "id": "n3",  "part": "DNANucleotide", "pos": [-0.15, 0.6, 0] },
+                { "id": "n4",  "part": "DNANucleotide", "pos": [ 0.15, 0.8, 0] },
+                { "id": "n5",  "part": "DNANucleotide", "pos": [-0.15, 1.0, 0] },
+                { "id": "n6",  "part": "DNANucleotide", "pos": [ 0.15, 1.2, 0] },
+                { "id": "n7",  "part": "DNANucleotide", "pos": [-0.15, 1.4, 0] }
+            ],
+            "bonds": [
+                ["n0","n1"], ["n1","n2"], ["n2","n3"], ["n3","n4"],
+                ["n4","n5"], ["n5","n6"], ["n6","n7"]
+            ]
+        },
+
+        "Insect": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "head",    "part": "SphereMed",     "pos": [0, 1.2, 0.3] },
+                { "id": "thorax",  "part": "InsectSegment", "pos": [0, 1.0, 0] },
+                { "id": "abdomen", "part": "InsectSegment", "pos": [0, 0.8, -0.2] },
+                { "id": "leg1_l",  "part": "CylinderThin",  "pos": [-0.15, 0.85, 0.15] },
+                { "id": "leg1_r",  "part": "CylinderThin",  "pos": [ 0.15, 0.85, 0.15] },
+                { "id": "leg2_l",  "part": "CylinderThin",  "pos": [-0.2, 0.85, 0] },
+                { "id": "leg2_r",  "part": "CylinderThin",  "pos": [ 0.2, 0.85, 0] },
+                { "id": "leg3_l",  "part": "CylinderThin",  "pos": [-0.15, 0.85, -0.15] },
+                { "id": "leg3_r",  "part": "CylinderThin",  "pos": [ 0.15, 0.85, -0.15] },
+                { "id": "wing_l",  "part": "Panel",         "pos": [-0.15, 1.15, -0.1] },
+                { "id": "wing_r",  "part": "Panel",         "pos": [ 0.15, 1.15, -0.1] }
+            ],
+            "bonds": [
+                ["head","thorax"], ["thorax","abdomen"],
+                ["thorax","leg1_l"], ["thorax","leg1_r"],
+                ["thorax","leg2_l"], ["thorax","leg2_r"],
+                ["thorax","leg3_l"], ["thorax","leg3_r"],
+                ["thorax","wing_l"], ["thorax","wing_r"]
+            ]
+        },
+
+        "Octopus": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "mantle", "part": "SphereMed",    "pos": [0, 1.0, 0] },
+                { "id": "arm0",   "part": "CylinderThin", "pos": [ 0.2, 0.8,  0.2] },
+                { "id": "arm1",   "part": "CylinderThin", "pos": [ 0.28, 0.8, 0] },
+                { "id": "arm2",   "part": "CylinderThin", "pos": [ 0.2, 0.8, -0.2] },
+                { "id": "arm3",   "part": "CylinderThin", "pos": [ 0, 0.8, -0.28] },
+                { "id": "arm4",   "part": "CylinderThin", "pos": [-0.2, 0.8, -0.2] },
+                { "id": "arm5",   "part": "CylinderThin", "pos": [-0.28, 0.8, 0] },
+                { "id": "arm6",   "part": "CylinderThin", "pos": [-0.2, 0.8,  0.2] },
+                { "id": "arm7",   "part": "CylinderThin", "pos": [ 0, 0.8,  0.28] }
+            ],
+            "bonds": [
+                ["mantle","arm0"], ["mantle","arm1"], ["mantle","arm2"], ["mantle","arm3"],
+                ["mantle","arm4"], ["mantle","arm5"], ["mantle","arm6"], ["mantle","arm7"]
+            ]
+        },
+
+        "AlienTree": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "core",    "part": "AlienNode",  "pos": [0, 1.0, 0] },
+                { "id": "branch1", "part": "AlienNode",  "pos": [ 0.2, 1.2, 0] },
+                { "id": "branch2", "part": "AlienNode",  "pos": [-0.1, 1.15, 0.17] },
+                { "id": "branch3", "part": "AlienNode",  "pos": [-0.1, 1.15, -0.17] },
+                { "id": "leaf1a",  "part": "SphereTiny", "pos": [ 0.35, 1.35, 0.1] },
+                { "id": "leaf1b",  "part": "SphereTiny", "pos": [ 0.3, 1.3, -0.1] },
+                { "id": "leaf2a",  "part": "SphereTiny", "pos": [-0.2, 1.3, 0.3] },
+                { "id": "leaf2b",  "part": "SphereTiny", "pos": [-0.15, 1.25, 0.25] },
+                { "id": "leaf3a",  "part": "SphereTiny", "pos": [-0.2, 1.3, -0.3] },
+                { "id": "leaf3b",  "part": "SphereTiny", "pos": [-0.15, 1.25, -0.25] }
+            ],
+            "bonds": [
+                ["core","branch1"], ["core","branch2"], ["core","branch3"],
+                ["branch1","leaf1a"], ["branch1","leaf1b"],
+                ["branch2","leaf2a"], ["branch2","leaf2b"],
+                ["branch3","leaf3a"], ["branch3","leaf3b"]
+            ]
+        },
+
+        "Table": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "top",  "part": "PanelLarge",    "pos": [0, 0.75, 0] },
+                { "id": "leg1", "part": "CylinderThick", "pos": [-0.3, 0.375,  0.3] },
+                { "id": "leg2", "part": "CylinderThick", "pos": [ 0.3, 0.375,  0.3] },
+                { "id": "leg3", "part": "CylinderThick", "pos": [-0.3, 0.375, -0.3] },
+                { "id": "leg4", "part": "CylinderThick", "pos": [ 0.3, 0.375, -0.3] }
+            ],
+            "bonds": [
+                ["top","leg1"], ["top","leg2"], ["top","leg3"], ["top","leg4"]
+            ]
+        },
+
+        "Lamp": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "base",  "part": "Panel",         "pos": [0, 0.01, 0] },
+                { "id": "shaft", "part": "CylinderThin",  "pos": [0, 0.5, 0] },
+                { "id": "bulb",  "part": "SphereMed",     "pos": [0, 1.0, 0] },
+                { "id": "shade", "part": "CylinderThick", "pos": [0, 1.15, 0] }
+            ],
+            "bonds": [
+                ["base","shaft"], ["shaft","bulb"], ["bulb","shade"]
+            ]
+        },
+
+        "Shelf": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "back",   "part": "PanelTall", "pos": [0, 1.0, -0.25] },
+                { "id": "shelf1", "part": "Panel",     "pos": [0, 0.5, 0] },
+                { "id": "shelf2", "part": "Panel",     "pos": [0, 1.0, 0] },
+                { "id": "shelf3", "part": "Panel",     "pos": [0, 1.5, 0] }
+            ],
+            "bonds": [
+                ["back","shelf1"], ["back","shelf2"], ["back","shelf3"]
+            ]
+        },
+
+        "Spider": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "body",   "part": "SphereMed",    "pos": [0, 1.0, 0] },
+                { "id": "head",   "part": "SphereSmall",  "pos": [0, 1.0, 0.15] },
+                { "id": "leg1_l", "part": "CylinderThin", "pos": [-0.3, 0.9,  0.2] },
+                { "id": "leg1_r", "part": "CylinderThin", "pos": [ 0.3, 0.9,  0.2] },
+                { "id": "leg2_l", "part": "CylinderThin", "pos": [-0.35, 0.9,  0.1] },
+                { "id": "leg2_r", "part": "CylinderThin", "pos": [ 0.35, 0.9,  0.1] },
+                { "id": "leg3_l", "part": "CylinderThin", "pos": [-0.35, 0.9, -0.1] },
+                { "id": "leg3_r", "part": "CylinderThin", "pos": [ 0.35, 0.9, -0.1] },
+                { "id": "leg4_l", "part": "CylinderThin", "pos": [-0.3, 0.9, -0.2] },
+                { "id": "leg4_r", "part": "CylinderThin", "pos": [ 0.3, 0.9, -0.2] }
+            ],
+            "bonds": [
+                ["body","head"],
+                ["body","leg1_l"], ["body","leg1_r"],
+                ["body","leg2_l"], ["body","leg2_r"],
+                ["body","leg3_l"], ["body","leg3_r"],
+                ["body","leg4_l"], ["body","leg4_r"]
+            ]
+        },
+
+        "CrystalTree": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "trunk",    "part": "CrystalPrism", "pos": [0, 0.5, 0] },
+                { "id": "branch1",  "part": "CrystalPrism", "pos": [ 0.15, 0.8, 0] },
+                { "id": "branch2",  "part": "CrystalPrism", "pos": [-0.15, 0.85, 0] },
+                { "id": "branch3",  "part": "CrystalPrism", "pos": [ 0, 0.9, 0.15] },
+                { "id": "crystal1", "part": "AlienNode",    "pos": [ 0.25, 1.0, 0.1] },
+                { "id": "crystal2", "part": "AlienNode",    "pos": [-0.25, 1.05, 0.1] },
+                { "id": "crystal3", "part": "AlienNode",    "pos": [ 0.1, 1.1, 0.3] }
+            ],
+            "bonds": [
+                ["trunk","branch1"], ["trunk","branch2"], ["trunk","branch3"],
+                ["branch1","crystal1"], ["branch2","crystal2"], ["branch3","crystal3"]
+            ]
+        },
+
+        "Molecule": {
+            "scale": 1.0,
+            "nodes": [
+                { "id": "center",  "part": "SphereMed",   "pos": [0, 1.0, 0] },
+                { "id": "atom1",   "part": "SphereSmall", "pos": [ 0.2, 1.0, 0] },
+                { "id": "atom2",   "part": "SphereSmall", "pos": [-0.2, 1.0, 0] },
+                { "id": "atom3",   "part": "SphereSmall", "pos": [0, 1.2, 0] },
+                { "id": "atom4",   "part": "SphereSmall", "pos": [0, 0.8, 0] },
+                { "id": "atom5",   "part": "SphereSmall", "pos": [0, 1.0, 0.2] },
+                { "id": "atom6",   "part": "SphereSmall", "pos": [0, 1.0, -0.2] }
+            ],
+            "bonds": [
+                ["center","atom1"], ["center","atom2"], ["center","atom3"],
+                ["center","atom4"], ["center","atom5"], ["center","atom6"]
+            ]
+        }
+    }
+}

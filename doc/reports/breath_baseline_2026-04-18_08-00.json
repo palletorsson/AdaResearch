@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-04-18T08:00:00",
+  "phase": "post_work",
+  "pipeline_summary": {
+    "sequences_scored": 19,
+    "baseline_avg": 4.05,
+    "post_avg": 5.05,
+    "delta": 1.0,
+    "heads": "18x stage 6 (vr_testing), 1x stage 7 (polish:randomness)"
+  },
+  "heat_map_top_5": [
+    "pattern at 70 (active commits)",
+    "registry_repair at 60 (stale discovery)",
+    "artifact_lookup_patterns at 60 (stale discovery)",
+    "registry_alias_pattern at 60 (stale discovery)",
+    "sequence:resourcemanagement at 50 (empty seq)"
+  ],
+  "garden_health": {
+    "total_artifacts": 1998,
+    "voice_coverage": "32%",
+    "embodiment_rate": "38%",
+    "phantom_limbs": 410
+  },
+  "release_gates": {
+    "overall": "PASS (4/4)",
+    "A_sequence_contract": "PASS (missing: 0, duplicates: 0)",
+    "B_artifact_integrity": "PASS (unresolved: 0)",
+    "C_map_validation": "PASS (F=0, grade_A=582)",
+    "D_lab_continuity": "PASS"
+  }
+}

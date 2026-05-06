@@ -73,10 +73,10 @@ var visited_nodes: Array = []
 var parent_nodes: Array = []
 var path_capacities: Array = []
 
-func _init():
+func _init() -> void:
 	name = "NetworkFlow_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	initialize_graph()
@@ -85,7 +85,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_flow_computation")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for network flow visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -108,14 +108,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for step-by-step animation"""
 	computation_timer = Timer.new()
 	computation_timer.wait_time = animation_delay
 	computation_timer.timeout.connect(_on_computation_timer_timeout)
 	add_child(computation_timer)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	"""Initialize the flow network graph"""
 	nodes.clear()
 	edges.clear()
@@ -144,7 +144,7 @@ func initialize_graph():
 	
 	print("Initialized network with ", nodes.size(), " nodes and ", edges.size(), " edges")
 
-func generate_node_positions():
+func generate_node_positions() -> void:
 	"""Generate positions for nodes in a circular layout"""
 	var radius = 6.0
 	var angle_increment = 2.0 * PI / graph_size
@@ -157,7 +157,7 @@ func generate_node_positions():
 		
 		nodes[i].position = Vector3(x, y, z)
 
-func initialize_matrices():
+func initialize_matrices() -> void:
 	"""Initialize adjacency, capacity, and flow matrices"""
 	adjacency_matrix.clear()
 	capacity_matrix.clear()
@@ -181,7 +181,7 @@ func initialize_matrices():
 		flow_matrix.append(flow_row)
 		residual_matrix.append(res_row)
 
-func generate_graph_structure():
+func generate_graph_structure() -> void:
 	"""Generate random graph structure with capacity constraints"""
 	edges.clear()
 	
@@ -195,7 +195,7 @@ func generate_graph_structure():
 				if randf() < edge_density:
 					add_edge(i, j, randi_range(min_capacity, max_capacity))
 
-func ensure_source_sink_connectivity():
+func ensure_source_sink_connectivity() -> void:
 	"""Ensure there's at least one path from source to sink"""
 	# Create a path from source to sink
 	var path_nodes = range(graph_size)
@@ -213,7 +213,7 @@ func ensure_source_sink_connectivity():
 		var to_node = path_nodes[i + 1]
 		add_edge(from_node, to_node, randi_range(min_capacity, max_capacity))
 
-func add_edge(from_node: int, to_node: int, capacity: int):
+func add_edge(from_node: int, to_node: int, capacity: int) -> void:
 	"""Add an edge with given capacity"""
 	if from_node >= 0 and from_node < graph_size and to_node >= 0 and to_node < graph_size:
 		adjacency_matrix[from_node][to_node] = true
@@ -229,13 +229,13 @@ func add_edge(from_node: int, to_node: int, capacity: int):
 		}
 		edges.append(edge)
 
-func create_visualization():
+func create_visualization() -> void:
 	"""Create 3D visualization of the network"""
 	clear_visualization()
 	create_node_visualization()
 	create_edge_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
 	"""Clear existing visualization elements"""
 	for mesh in node_meshes:
 		if mesh:
@@ -255,7 +255,7 @@ func clear_visualization():
 	flow_indicators.clear()
 	path_highlights.clear()
 
-func create_node_visualization():
+func create_node_visualization() -> void:
 	"""Create visual representation of nodes"""
 	for i in range(nodes.size()):
 		var node = nodes[i]
@@ -292,7 +292,7 @@ func create_node_visualization():
 		add_child(mesh_instance)
 		node_meshes.append(mesh_instance)
 
-func create_edge_visualization():
+func create_edge_visualization() -> void:
 	"""Create visual representation of edges"""
 	for edge in edges:
 		var from_pos = nodes[edge.from].position
@@ -376,7 +376,7 @@ func create_flow_indicator(from_pos: Vector3, to_pos: Vector3, flow: int, capaci
 	
 	return mesh_instance
 
-func create_node_label(parent: MeshInstance3D, text: String, offset: Vector3):
+func create_node_label(parent: MeshInstance3D, text: String, offset: Vector3) -> void:
 	"""Create text label for node"""
 	var label = Label3D.new()
 	label.text = text
@@ -384,7 +384,7 @@ func create_node_label(parent: MeshInstance3D, text: String, offset: Vector3):
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	parent.add_child(label)
 
-func create_edge_label(parent: MeshInstance3D, text: String, position: Vector3):
+func create_edge_label(parent: MeshInstance3D, text: String, position: Vector3) -> void:
 	"""Create text label for edge"""
 	var label = Label3D.new()
 	label.text = text
@@ -392,7 +392,7 @@ func create_edge_label(parent: MeshInstance3D, text: String, position: Vector3):
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	parent.add_child(label)
 
-func start_flow_computation():
+func start_flow_computation() -> void:
 	"""Start the maximum flow computation"""
 	if is_computing:
 		return
@@ -423,14 +423,14 @@ func start_flow_computation():
 	
 	print("Starting ", algorithm_type, " algorithm...")
 
-func start_ford_fulkerson():
+func start_ford_fulkerson() -> void:
 	"""Start Ford-Fulkerson algorithm"""
 	if step_by_step:
 		computation_timer.start()
 	else:
 		run_ford_fulkerson_complete()
 
-func run_ford_fulkerson_complete():
+func run_ford_fulkerson_complete() -> void:
 	"""Run complete Ford-Fulkerson algorithm"""
 	while true:
 		var path = find_augmenting_path_dfs(source_node, sink_node)
@@ -526,7 +526,7 @@ func get_path_flow(path: Array) -> int:
 	
 	return min_capacity
 
-func augment_flow_along_path(path: Array, flow_amount: int):
+func augment_flow_along_path(path: Array, flow_amount: int) -> void:
 	"""Augment flow along the given path"""
 	for i in range(path.size() - 1):
 		var from_node = path[i]
@@ -539,14 +539,14 @@ func augment_flow_along_path(path: Array, flow_amount: int):
 		# Backward edge (for residual graph)
 		residual_matrix[to_node][from_node] += flow_amount
 
-func start_edmonds_karp():
+func start_edmonds_karp() -> void:
 	"""Start Edmonds-Karp algorithm (Ford-Fulkerson with BFS)"""
 	if step_by_step:
 		computation_timer.start()
 	else:
 		run_edmonds_karp_complete()
 
-func run_edmonds_karp_complete():
+func run_edmonds_karp_complete() -> void:
 	"""Run complete Edmonds-Karp algorithm"""
 	while true:
 		var path = find_augmenting_path_bfs(source_node, sink_node)
@@ -562,12 +562,12 @@ func run_edmonds_karp_complete():
 	find_min_cut()
 	finalize_computation()
 
-func start_dinic():
+func start_dinic() -> void:
 	"""Start Dinic's algorithm (simplified version)"""
 	# For now, use Edmonds-Karp as placeholder
 	start_edmonds_karp()
 
-func find_min_cut():
+func find_min_cut() -> void:
 	"""Find minimum cut using DFS from source in residual graph"""
 	visited_nodes.clear()
 	for i in range(graph_size):
@@ -581,7 +581,7 @@ func find_min_cut():
 		if visited_nodes[i]:
 			min_cut_nodes.append(i)
 
-func dfs_min_cut(node: int):
+func dfs_min_cut(node: int) -> void:
 	"""DFS to find reachable nodes from source in residual graph"""
 	visited_nodes[node] = true
 	
@@ -589,7 +589,7 @@ func dfs_min_cut(node: int):
 		if not visited_nodes[neighbor] and residual_matrix[node][neighbor] > 0:
 			dfs_min_cut(neighbor)
 
-func _on_computation_timer_timeout():
+func _on_computation_timer_timeout() -> void:
 	"""Handle step-by-step computation timer"""
 	if not is_computing:
 		return
@@ -621,7 +621,7 @@ func _on_computation_timer_timeout():
 		find_min_cut()
 		finalize_computation()
 
-func highlight_augmenting_path(path: Array):
+func highlight_augmenting_path(path: Array) -> void:
 	"""Highlight the current augmenting path"""
 	clear_path_highlights()
 	
@@ -635,14 +635,14 @@ func highlight_augmenting_path(path: Array):
 		add_child(highlight)
 		path_highlights.append(highlight)
 
-func clear_path_highlights():
+func clear_path_highlights() -> void:
 	"""Clear path highlight visualizations"""
 	for highlight in path_highlights:
 		if highlight:
 			highlight.queue_free()
 	path_highlights.clear()
 
-func update_flow_visualization():
+func update_flow_visualization() -> void:
 	"""Update flow visualization"""
 	# Update flow indicators
 	for i in range(flow_indicators.size()):
@@ -663,7 +663,7 @@ func update_flow_visualization():
 			var material = indicator.material_override as StandardMaterial3D
 			material.emission = flow_color * flow_ratio
 
-func finalize_computation():
+func finalize_computation() -> void:
 	"""Finalize the flow computation"""
 	is_computing = false
 	computation_complete = true
@@ -680,7 +680,7 @@ func finalize_computation():
 	
 	update_ui()
 
-func highlight_min_cut():
+func highlight_min_cut() -> void:
 	"""Highlight the minimum cut"""
 	# Color nodes in min cut
 	for i in range(min_cut_nodes.size()):
@@ -690,7 +690,7 @@ func highlight_min_cut():
 			var material = mesh.material_override as StandardMaterial3D
 			material.emission = cut_color * 0.5
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current algorithm state"""
 	if not ui_display:
 		return
@@ -747,7 +747,7 @@ func get_flow_efficiency() -> float:
 		return 0.0
 	return float(max_flow_value) / float(total_capacity)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -775,12 +775,12 @@ func _input(event):
 				show_capacity_labels = not show_capacity_labels
 				create_visualization()
 
-func stop_computation():
+func stop_computation() -> void:
 	"""Stop the flow computation"""
 	is_computing = false
 	computation_timer.stop()
 
-func reset_network():
+func reset_network() -> void:
 	"""Reset the network and computation"""
 	stop_computation()
 	computation_complete = false
@@ -791,7 +791,7 @@ func reset_network():
 	create_visualization()
 	update_ui()
 
-func change_algorithm(new_algorithm: String):
+func change_algorithm(new_algorithm: String) -> void:
 	"""Change the flow algorithm"""
 	algorithm_type = new_algorithm
 	reset_network()
@@ -822,4 +822,13 @@ func get_algorithm_info() -> Dictionary:
 			"source_node": source_node,
 			"sink_node": sink_node
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,27 @@
+{
+  "rack_info": {
+    "name": "S-Bend Manifold",
+    "description": "Multiple S-bends creating an offset distribution manifold",
+    "version": "1.0",
+    "system": "glass"
+  },
+  "layout": {
+    "segment_length": 0.1,
+    "tube_radius": 0.01
+  },
+  "path": "f,sbend,f,sbend,f,cross,[,l,f,f,drip,],[,r,f,f,drip,],f,f,drip",
+  "materials": {
+    "glass_color": [
+      0.88,
+      0.94,
+      1.0,
+      0.22
+    ],
+    "liquid_color": [
+      0.0,
+      0.7,
+      1.0,
+      0.5
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-# ZigzagProfile.gd - Creates a standing zigzag profile with 7 segments and interactive points
+﻿# ZigzagProfile.gd - Creates a standing zigzag profile with 7 segments and interactive points
 extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
@@ -157,7 +157,7 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array):
 		st.set_uv(Vector2(1.0, 0.0))
 		st.add_vertex(v1)
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
 	print("DEBUG PICKUP")
 
 func _on_point_dropped(index: int, _pickable, meta: Dictionary) -> void:

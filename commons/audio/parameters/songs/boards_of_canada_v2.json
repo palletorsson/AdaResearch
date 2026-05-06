@@ -1,0 +1,27 @@
+{
+    "_metadata": {
+        "sound_type": "boards_of_canada_v2_song",
+        "display_name": "Boards of Canada V2",
+        "description": "Enhanced BoC style. More tape wobble, nostalgic melodies, VHS textures, childhood memories.",
+        "category": "songs",
+        "tags": ["boards_of_canada", "idm", "ambient", "lofi", "v2", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Boards of Canada"],
+        "reference_tracks": ["Dayvan Cowboy", "Chromakey Dreamcoat", "1969"]
+    },
+    "identity": {
+        "emotion": "deep_nostalgia",
+        "era": "late_90s_warp",
+        "character": ["warbly", "childlike", "vhs", "dreamlike"]
+    },
+    "parameters": {
+        "bpm": { "min": 85, "max": 110, "value": 100, "step": 1 },
+        "key": { "options": ["D", "G", "Em", "A"], "value": "D" },
+        "nostalgia_depth": { "min": 0.0, "max": 1.0, "value": 0.8 }
+    },
+    "sound_design": {
+        "warbly_pad": { "detune_cents": 15, "lfo_rate": 0.15, "voices": 4 },
+        "texture": { "type": "vhs_cassette" },
+        "drums": { "style": "lofi_hiphop", "humanize": 10 }
+    }
+}

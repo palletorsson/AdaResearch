@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 arena at its center. Inside, walkers move — each step decided by coin flip, dice roll, weighted probability. No destination. No objective. Just rules and randomness, iterated.
+
+The arena makes the invisible visible. Watch a random walker trace its path across the grid and see accumulation without intention — clusters form, edges get avoided, patterns emerge from patternlessness. Run multiple walkers simultaneously. Compare algorithms side by side. The grid becomes a laboratory for studying what happens when simple stochastic rules operate in bounded space.
+
+Randomness is not the absence of structure. It is structure's precondition — the raw material from which order self-selects. Every algorithm here begins with noise and ends with something that looks, unsettlingly, like decision.

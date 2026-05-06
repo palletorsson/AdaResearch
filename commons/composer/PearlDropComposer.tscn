@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://commons/composer/PearlDropComposer.gd" id="1_script"]
+
+[sub_resource type="ProceduralSkyMaterial" id="Sky_mat"]
+sky_top_color = Color(0.10, 0.12, 0.18, 1)
+sky_horizon_color = Color(0.16, 0.20, 0.28, 1)
+ground_bottom_color = Color(0.05, 0.06, 0.08, 1)
+ground_horizon_color = Color(0.10, 0.12, 0.16, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("Sky_mat")
+
+[sub_resource type="Environment" id="Env_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 2
+ambient_light_color = Color(0.45, 0.48, 0.55, 1)
+ambient_light_energy = 0.55
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.35
+
+[sub_resource type="PlaneMesh" id="Plane_1"]
+size = Vector2(120, 120)
+
+[sub_resource type="StandardMaterial3D" id="GroundMat_1"]
+albedo_color = Color(0.08, 0.09, 0.11, 1)
+metallic = 0.05
+roughness = 0.95
+
+[sub_resource type="LabelSettings" id="LabelSettings_Info"]
+font_size = 18
+font_color = Color(0.92, 0.92, 0.95, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 0.8)
+
+[node name="PearlDropComposer" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_1")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+mesh = SubResource("Plane_1")
+material_override = SubResource("GroundMat_1")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 6, 12, 6)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, -4, 8, -4)
+light_color = Color(0.85, 0.88, 1, 1)
+light_energy = 0.45
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Chain" type="Node3D" parent="."]
+
+[node name="CameraRig" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+fov = 50.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Info" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1200.0
+offset_bottom = 60.0
+text = "loading…"
+label_settings = SubResource("LabelSettings_Info")
+
+[node name="Hints" type="Label" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -38.0
+offset_right = 1500.0
+offset_bottom = -16.0
+text = ""
+label_settings = SubResource("LabelSettings_Info")

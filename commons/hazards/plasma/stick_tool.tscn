@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://csticktool00001"]
+
+[ext_resource type="Script" path="res://commons/hazards/plasma/stick_tool.gd" id="1_stick"]
+
+[node name="StickTool" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 196615
+freeze_mode = 1
+script = ExtResource("1_stick")

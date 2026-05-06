@@ -1,0 +1,66 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Rainbow",
+  "home_sequence": "color",
+  "dimensions": {
+    "w": 7,
+    "d": 18
+  },
+  "signature": "rainbow is the core environmental artifact driving the spectral corridor; pick_up_cube allows extracting discrete samples from the continuous field \u2014 a physical metaphor for quantization.",
+  "style": null,
+  "echoes": [],
+  "density": 0.042,
+  "breath_zones": [
+    {
+      "size": 32,
+      "bounds": {
+        "x": 1,
+        "z": 9,
+        "w": 6,
+        "d": 9
+      },
+      "centroid": [
+        3.5,
+        13.15625
+      ]
+    },
+    {
+      "size": 27,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 7
+      },
+      "centroid": [
+        3.0,
+        2.037037037037037
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 0,
+      "token": "mario_cube"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 17,
+      "token": "pick_up_cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 72,
+    "breath_zone_count": 2,
+    "unique_tokens": 3
+  }
+}

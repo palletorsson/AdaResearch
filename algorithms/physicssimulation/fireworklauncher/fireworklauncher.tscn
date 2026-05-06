@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfwrklnchr05"]
+
+[ext_resource type="Script" path="res://algorithms/physicssimulation/fireworklauncher/FireworkLauncher.gd" id="1_firework"]
+
+[node name="FireworkLauncher" type="Node3D"]
+script = ExtResource("1_firework")

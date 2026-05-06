@@ -1,0 +1,141 @@
+{
+  "id": "morph_auto_drag_club_kid_06",
+  "family": "drag_club_kid",
+  "notes": "Auto-generated club-kid drag candidate.",
+  "camera_yaw": 0.815,
+  "camera_pitch": 0.355,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.853,
+      1.131,
+      0.724
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "clubkid_to_platforms",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.962,
+        "scale": 0.344
+      },
+      "child_role": "heel",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "clubkid_to_rig",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.44,
+        "scale": 0.408,
+        "normal_bias": 1.0,
+        "tangent_bias": 0.3,
+        "world_bias": [
+          0.083,
+          0.462,
+          0.121
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.357
+    },
+    {
+      "id": "clubkid_to_corset",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.193,
+        "scale": 0.684,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.073,
+          0.13,
+          0.134
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "clubkid_to_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.172,
+        "scale": 0.579
+      },
+      "child_role": "hair",
+      "budget_factor": 0.498
+    },
+    {
+      "id": "clubkid_headpiece",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.2
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.323,
+        "scale": 0.409,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.307,
+          0.36,
+          0.016
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.295
+    },
+    {
+      "id": "clubkid_spikes",
+      "when": {
+        "role": "ornament",
+        "min_depth": 1,
+        "max_depth": 2,
+        "min_budget": 0.12
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 5,
+        "length": 0.237,
+        "scale": 1.061
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    }
+  ]
+}

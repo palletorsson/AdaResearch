@@ -1,0 +1,154 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ForcesArena",
+  "home_sequence": "forces",
+  "dimensions": {
+    "w": 30,
+    "d": 34
+  },
+  "signature": "vector_drone hunts the player using subtraction-based AI with chase",
+  "style": null,
+  "echoes": [],
+  "density": 0.044,
+  "breath_zones": [
+    {
+      "size": 134,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 12
+      },
+      "centroid": [
+        5.388059701492537,
+        5.514925373134329
+      ]
+    },
+    {
+      "size": 125,
+      "bounds": {
+        "x": 0,
+        "z": 25,
+        "w": 15,
+        "d": 9
+      },
+      "centroid": [
+        7.008,
+        29.128
+      ]
+    },
+    {
+      "size": 122,
+      "bounds": {
+        "x": 13,
+        "z": 13,
+        "w": 12,
+        "d": 11
+      },
+      "centroid": [
+        18.516393442622952,
+        18.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 0,
+      "token": "hits_reset_display"
+    },
+    {
+      "x": 7,
+      "z": 0,
+      "token": "health_display"
+    },
+    {
+      "x": 6,
+      "z": 5,
+      "token": "gravity_gun_test_scene"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "queer_cylinder_target"
+    },
+    {
+      "x": 10,
+      "z": 7,
+      "token": "queer_cylinder_target"
+    },
+    {
+      "x": 10,
+      "z": 9,
+      "token": "vector_drone"
+    },
+    {
+      "x": 15,
+      "z": 14,
+      "token": "destructibles_test_scene"
+    },
+    {
+      "x": 20,
+      "z": 14,
+      "token": "VectorThrowing"
+    },
+    {
+      "x": 17,
+      "z": 18,
+      "token": "throw_ball"
+    },
+    {
+      "x": 19,
+      "z": 18,
+      "token": "grab_sphere_point"
+    },
+    {
+      "x": 15,
+      "z": 20,
+      "token": "sphere_splitting_showcase"
+    },
+    {
+      "x": 20,
+      "z": 20,
+      "token": "gravity_gun_test_scene"
+    },
+    {
+      "x": 2,
+      "z": 26,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 4,
+      "z": 26,
+      "token": "VectorAddition"
+    },
+    {
+      "x": 5,
+      "z": 26,
+      "token": "VectorSubtraction"
+    },
+    {
+      "x": 7,
+      "z": 26,
+      "token": "vector_magnitude_demo"
+    },
+    {
+      "x": 9,
+      "z": 26,
+      "token": "vector_normalize_demo"
+    },
+    {
+      "x": 10,
+      "z": 26,
+      "token": "VectorCrossProduct"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 18,
+    "walkable_cells": 408,
+    "breath_zone_count": 3,
+    "unique_tokens": 16
+  }
+}

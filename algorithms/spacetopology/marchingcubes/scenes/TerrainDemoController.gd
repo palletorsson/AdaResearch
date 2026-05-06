@@ -1,4 +1,4 @@
-# TerrainDemoController.gd
+﻿# TerrainDemoController.gd
 # Controls the walkable terrain demo
 # Provides UI and camera controls for testing marching cubes terrain
 
@@ -30,7 +30,7 @@ var terrain_size: float = 10.0
 var terrain_height: float = 5.0
 var noise_frequency: float = 0.05
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_terrain_generator()
 	setup_camera()
@@ -39,7 +39,7 @@ func _ready():
 	# Generate initial terrain
 	call_deferred("generate_terrain_async")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Initialize UI elements"""
 	# Get UI references
 	generate_button = $UI/Panel/VBoxContainer/Controls/GenerateButton
@@ -54,7 +54,7 @@ func setup_ui():
 	
 	print("TerrainDemo: UI initialized")
 
-func setup_terrain_generator():
+func setup_terrain_generator() -> void:
 	"""Initialize terrain generation system"""
 	terrain_generator = TerrainGenerator.new()
 	terrain_generator.generation_progress.connect(_on_generation_progress)
@@ -65,7 +65,7 @@ func setup_terrain_generator():
 	
 	print("TerrainDemo: Terrain generator initialized")
 
-func setup_camera():
+func setup_camera() -> void:
 	"""Setup camera system"""
 	camera = $Camera3D
 	vr_camera = find_child("XRCamera3D") as XRCamera3D
@@ -74,7 +74,7 @@ func setup_camera():
 	if not vr_camera:
 		print("TerrainDemo: Desktop camera controls enabled")
 
-func setup_vr_navigation():
+func setup_vr_navigation() -> void:
 	"""Setup VR teleportation system"""
 	# Find VR components if they exist
 	var xr_origin = find_child("XROrigin3D")
@@ -86,7 +86,7 @@ func setup_vr_navigation():
 	
 	print("TerrainDemo: Found %d VR controllers" % vr_controllers.size())
 
-func setup_controller_teleport(controller: XRController3D):
+func setup_controller_teleport(controller: XRController3D) -> void:
 	"""Setup teleportation for a VR controller"""
 	# Create teleport ray
 	var teleport_ray = RayCast3D.new()
@@ -157,7 +157,7 @@ func create_teleport_preview_mesh() -> ArrayMesh:
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return mesh
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input events"""
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -175,7 +175,7 @@ func _input(event):
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				is_mouse_captured = false
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update camera if not in VR mode
 	if not vr_camera:
 		update_camera_movement(delta)
@@ -183,7 +183,7 @@ func _process(delta):
 	# Update teleport previews
 	update_teleport_previews()
 
-func update_camera_movement(delta: float):
+func update_camera_movement(delta: float) -> void:
 	"""Handle non-VR camera movement"""
 	if not camera:
 		return
@@ -222,7 +222,7 @@ func update_camera_movement(delta: float):
 		var movement = camera.transform.basis * input_vector * speed * delta
 		camera.position += movement
 
-func update_teleport_previews():
+func update_teleport_previews() -> void:
 	"""Update teleport preview positions"""
 	for controller in vr_controllers:
 		var teleport_ray = controller.find_child("TeleportRay") as RayCast3D
@@ -243,7 +243,7 @@ func update_teleport_previews():
 					material.albedo_color = Color.RED
 					material.emission = Color.RED
 
-func update_terrain_parameters():
+func update_terrain_parameters() -> void:
 	"""Update terrain parameters from UI"""
 	var params = {
 		"size": Vector2(terrain_size, terrain_size),
@@ -255,11 +255,11 @@ func update_terrain_parameters():
 	}
 	terrain_generator.configure_terrain(params)
 
-func _on_generate_pressed():
+func _on_generate_pressed() -> void:
 	"""Handle generate button press"""
 	generate_terrain_async()
 
-func generate_terrain_async():
+func generate_terrain_async() -> void:
 	"""Generate terrain asynchronously"""
 	print("TerrainDemo: Starting terrain generation...")
 	
@@ -279,30 +279,30 @@ func generate_terrain_async():
 	# Add terrain to scene
 	terrain_generator.add_terrain_to_scene(self)
 
-func clear_previous_terrain():
+func clear_previous_terrain() -> void:
 	"""Clear previously generated terrain"""
 	# Remove old terrain
 	for child in get_children():
 		if child.name.begins_with("TerrainChunk_") or child.name.ends_with("_VR_Collision") or child.name.begins_with("NavTile_"):
 			child.queue_free()
 
-func _on_generation_progress(percentage: float):
+func _on_generation_progress(percentage: float) -> void:
 	"""Update progress bar during generation"""
 	progress_bar.value = percentage
 	
 	var status = ""
 	if percentage <= 25:
-		status = "🏗️ Creating voxel grid..."
+		status = "ðŸ—ï¸ Creating voxel grid..."
 	elif percentage <= 50:
-		status = "🌄 Generating height field..."
+		status = "ðŸŒ„ Generating height field..."
 	elif percentage <= 75:
-		status = "🎨 Creating terrain meshes..."
+		status = "ðŸŽ¨ Creating terrain meshes..."
 	else:
-		status = "⚡ Building collision..."
+		status = "âš¡ Building collision..."
 	
-	stats_text.text = "[color=cyan]🔄 Generating terrain...[/color]\n[color=gray]%s[/color]\n[color=white]Progress: %.0f%%[/color]" % [status, percentage]
+	stats_text.text = "[color=cyan]ðŸ”„ Generating terrain...[/color]\n[color=gray]%s[/color]\n[color=white]Progress: %.0f%%[/color]" % [status, percentage]
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	"""Handle generation completion"""
 	print("TerrainDemo: Generation complete!")
 	
@@ -314,7 +314,7 @@ func _on_generation_complete():
 	# Update statistics
 	update_terrain_statistics()
 
-func update_terrain_statistics():
+func update_terrain_statistics() -> void:
 	"""Update the statistics display"""
 	if terrain_generator == null:
 		return
@@ -322,13 +322,13 @@ func update_terrain_statistics():
 	var info = terrain_generator.get_terrain_info()
 	
 	var stats_html = "[color=cyan]Terrain Statistics:[/color]\n"
-	stats_html += "• Terrain Size: %.0fx%.0f units\n" % [info.terrain_size.x, info.terrain_size.y]
-	stats_html += "• Height Variation: %.1f units\n" % info.height_variation
-	stats_html += "• Terrain Chunks: %d\n" % info.terrain_chunks
-	stats_html += "• Mesh Instances: %d\n" % info.mesh_instances
-	stats_html += "• Collision Bodies: %d\n" % info.collision_bodies
-	stats_html += "• Total Vertices: %s\n" % format_number(info.total_vertices)
-	stats_html += "• Total Triangles: %s\n" % format_number(info.total_triangles)
+	stats_html += "â€¢ Terrain Size: %.0fx%.0f units\n" % [info.terrain_size.x, info.terrain_size.y]
+	stats_html += "â€¢ Height Variation: %.1f units\n" % info.height_variation
+	stats_html += "â€¢ Terrain Chunks: %d\n" % info.terrain_chunks
+	stats_html += "â€¢ Mesh Instances: %d\n" % info.mesh_instances
+	stats_html += "â€¢ Collision Bodies: %d\n" % info.collision_bodies
+	stats_html += "â€¢ Total Vertices: %s\n" % format_number(info.total_vertices)
+	stats_html += "â€¢ Total Triangles: %s\n" % format_number(info.total_triangles)
 	
 	# Count VR navigation tiles
 	var nav_tile_count = 0
@@ -337,12 +337,12 @@ func update_terrain_statistics():
 			nav_tile_count += 1
 	
 	stats_html += "\n[color=green]VR Navigation:[/color]\n"
-	stats_html += "• Walkable Tiles: %d (1x1m)\n" % nav_tile_count
-	stats_html += "• VR Controllers: %d\n" % vr_controllers.size()
+	stats_html += "â€¢ Walkable Tiles: %d (1x1m)\n" % nav_tile_count
+	stats_html += "â€¢ VR Controllers: %d\n" % vr_controllers.size()
 	
 	# Memory estimate
 	var memory_mb = (info.total_vertices * 12 + info.total_triangles * 6) / (1024 * 1024)
-	stats_html += "\n• Memory Est: %.1f MB" % memory_mb
+	stats_html += "\nâ€¢ Memory Est: %.1f MB" % memory_mb
 	
 	stats_text.text = stats_html
 
@@ -361,27 +361,27 @@ func format_number(num: int) -> String:
 	return formatted
 
 # Slider event handlers
-func _on_size_changed(value: float):
+func _on_size_changed(value: float) -> void:
 	terrain_size = value
 	var size_label = $UI/Panel/VBoxContainer/Parameters/SizeLabel
 	size_label.text = "Terrain Size: %.0f units" % value
 
-func _on_height_changed(value: float):
+func _on_height_changed(value: float) -> void:
 	terrain_height = value
 	var height_label = $UI/Panel/VBoxContainer/Parameters/HeightLabel
 	height_label.text = "Height Variation: %.1f" % value
 
-func _on_noise_changed(value: float):
+func _on_noise_changed(value: float) -> void:
 	noise_frequency = value
 	var noise_label = $UI/Panel/VBoxContainer/Parameters/NoiseLabel
 	noise_label.text = "Noise Frequency: %.3f" % value
 
 # VR teleportation handlers
-func _on_vr_button_pressed(controller: XRController3D, teleport_ray: RayCast3D, teleport_marker: MeshInstance3D, button: String):
+func _on_vr_button_pressed(_controller: XRController3D, teleport_ray: RayCast3D, teleport_marker: MeshInstance3D, button: String) -> void:
 	if button == "trigger_click" or button == "by_button":
 		teleport_marker.visible = true
 
-func _on_vr_button_released(controller: XRController3D, teleport_ray: RayCast3D, teleport_marker: MeshInstance3D, button: String):
+func _on_vr_button_released(_controller: XRController3D, teleport_ray: RayCast3D, teleport_marker: MeshInstance3D, button: String) -> void:
 	if button == "trigger_click" or button == "by_button":
 		teleport_marker.visible = false
 		
@@ -392,10 +392,19 @@ func _on_vr_button_released(controller: XRController3D, teleport_ray: RayCast3D,
 			if collider != null and collider.has_meta("vr_walkable"):
 				perform_vr_teleport(collision_point)
 
-func perform_vr_teleport(target_position: Vector3):
+func perform_vr_teleport(target_position: Vector3) -> void:
 	"""Teleport VR player to target position"""
 	var xr_origin = find_child("XROrigin3D")
 	if xr_origin != null:
 		var teleport_position = target_position + Vector3(0, 0.1, 0)
 		xr_origin.global_position = teleport_position
 		print("VR Teleport: Moved to ", teleport_position)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

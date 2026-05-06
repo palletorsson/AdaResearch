@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://composition_artifact_root"]
+
+[ext_resource type="Script" path="res://commons/artifacts/composition_artifact/composition_artifact.gd" id="1_comp"]
+
+[node name="CompositionArtifact" type="Node3D"]
+script = ExtResource("1_comp")

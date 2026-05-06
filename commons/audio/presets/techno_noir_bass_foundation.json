@@ -1,0 +1,107 @@
+{
+    "description": "Tech-noir dark ambient bed with deep evolving bass pulses",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -14,
+            "bus": "Bass",
+            "parameters": {
+                "pulse_rate": 0.35,
+                "filter_cutoff": 220.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -20,
+            "bus": "Drone",
+            "parameters": {
+                "entropy": 0.25,
+                "queer_factor": 0.6
+            }
+        },
+        {
+            "sound_id": "techno_noir.city_ambience",
+            "volume_db": -22,
+            "bus": "Texture"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.MOOG_KRAFTWERK_SEQUENCER",
+                "AudioSynthesizer.GHOST_DRONE",
+                "techno_noir.static_burst"
+            ],
+            "interval_range": [
+                18.0,
+                42.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Events"
+        }
+    ],
+    "buses": {
+        "Bass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 160
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.35,
+                    "damping": 0.2
+                }
+            ]
+        },
+        "Drone": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.92,
+                    "wet": 0.6,
+                    "damping": 0.12
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.6,
+                    "wet": 0.45
+                }
+            ]
+        },
+        "Texture": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 420,
+                    "tap1_level_db": -6.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.85,
+                    "wet": 0.5,
+                    "damping": 0.3
+                }
+            ]
+        },
+        "Events": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 180
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.65,
+                    "tap1_delay_ms": 640,
+                    "tap1_level_db": -8.0
+                }
+            ]
+        }
+    }
+}

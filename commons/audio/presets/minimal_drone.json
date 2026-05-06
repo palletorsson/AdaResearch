@@ -1,0 +1,23 @@
+{
+    "description": "Minimal ambient drone for focused work",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -22,
+            "bus": "Ambient"
+        }
+    ],
+    "random_events": [],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.3,
+                    "damping": 0.4
+                }
+            ]
+        }
+    }
+}

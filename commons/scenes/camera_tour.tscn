@@ -1,0 +1,170 @@
+[gd_scene format=3 uid="uid://c7ba4yikuapcs"]
+
+[ext_resource type="Script" uid="uid://lqeedqhm41pc" path="res://commons/scenes/LabGridSystem.gd" id="1_labgrid"]
+[ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_grid"]
+[ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="4_sky"]
+[ext_resource type="Script" uid="uid://cny5a26dfmwon" path="res://commons/scenes/CameraTourManager.gd" id="5_tour"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("4_sky")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(0.7, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(1, 0.8, 0.4, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.1
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ShaderMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+background_energy_multiplier = 1.43
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_color = Color(0.67207, 0.682537, 0.672356, 1)
+ambient_light_energy = 2.5
+reflected_light_source = 1
+tonemap_mode = 3
+tonemap_exposure = 0.16
+ssil_enabled = true
+glow_intensity = 1.67
+fog_enabled = true
+fog_light_color = Color(0.81025255, 0.8915905, 0.99056953, 1)
+fog_light_energy = 6.55
+fog_sun_scatter = 3.5
+fog_density = 0.02
+fog_sky_affect = 0.885
+fog_height = -1.3
+adjustment_enabled = true
+adjustment_brightness = 0.92
+adjustment_contrast = 1.02
+adjustment_saturation = 1.01
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(50, 0.1, 50)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="CameraTour" type="Node3D" unique_id=904601026]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=475217757]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1572454250]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 10, 0)
+shadow_enabled = true
+
+[node name="TourCamera" type="Camera3D" parent="." unique_id=494434633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 1)
+current = true
+fov = 65.0
+
+[node name="LabGridSystem" parent="." unique_id=901386709 instance=ExtResource("2_grid")]
+script = ExtResource("1_labgrid")
+lab_mode = true
+lab_cube_color = Color(0.95, 0.95, 0.98, 1)
+lab_ambient_color = Color(0.9, 0.9, 1, 1)
+map_name = "Lab"
+
+[node name="CameraTourManager" type="Node3D" parent="." unique_id=1003231050]
+script = ExtResource("5_tour")
+start_sequence = "noise"
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1980341802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1880087384]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="TourOverlay" type="CanvasLayer" parent="." unique_id=1891795143]
+layer = 10
+
+[node name="InfoPanel" type="PanelContainer" parent="TourOverlay" unique_id=2101476462]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 400.0
+offset_bottom = 160.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="TourOverlay/InfoPanel" unique_id=1873922939]
+layout_mode = 2
+
+[node name="SequenceLabel" type="Label" parent="TourOverlay/InfoPanel/VBox" unique_id=1886280828]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Camera Tour"
+
+[node name="MapLabel" type="Label" parent="TourOverlay/InfoPanel/VBox" unique_id=1942140154]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Loading..."
+
+[node name="SpeedLabel" type="Label" parent="TourOverlay/InfoPanel/VBox" unique_id=1800675313]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "Speed: 1.0x"
+
+[node name="ProgressBar" type="ProgressBar" parent="TourOverlay/InfoPanel/VBox" unique_id=293532162]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+show_percentage = false
+
+[node name="HelpLabel" type="Label" parent="TourOverlay" unique_id=1816188294]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -40.0
+offset_right = 300.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.8, 0.8)
+theme_override_font_sizes/font_size = 14
+text = "SPACE: Pause | +/-: Speed | N: Next Map | S: Next Sequence | ESC: Quit"
+horizontal_alignment = 1
+
+[node name="FadeRect" type="ColorRect" parent="TourOverlay" unique_id=1678040221]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

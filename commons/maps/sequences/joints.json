@@ -1,0 +1,90 @@
+{
+	"sequences": {
+		"joints": {
+			"name": "Joints",
+			"description": "Joint-focused structure examples and connector studies.",
+			"difficulty": "intermediate",
+			"estimated_time": "10-20 minutes",
+			"learning_objectives": [
+				"Understand connector motifs",
+				"Compare joint variants"
+			],
+			"maps": [
+				"Joints_ConstrainedMotion",
+				"Joints_HingeAxis",
+				"Joints_SliderRail",
+				"Joints_BallSocket",
+				"Joints_SoftConstraints",
+				"Joints_Kinematics"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_init",
+			"unlock_requirements": [],
+			"completion_rewards": [],
+			"artifact_groups": [
+				{
+					"map": "Joints_ConstrainedMotion",
+					"position": "intro",
+					"artifacts": [
+						"PendulumPin",
+						"DoublePendulum"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Pendulum as primal joint: pin pendulum demonstrates single-axis rotation, double pendulum reveals chaotic sensitivity — two constraints producing unpredictable motion."
+				},
+				{
+					"map": "Joints_HingeAxis",
+					"position": "foundation",
+					"artifacts": [
+						"HingeCrank",
+						"DrawbridgeHinge"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Single-axis hinge rotation with 2 artifacts"
+				},
+				{
+					"map": "Joints_SliderRail",
+					"position": "foundation",
+					"artifacts": [
+						"SliderPress",
+						"SpringSuspension"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Linear translation joints with 2 artifacts"
+				},
+				{
+					"map": "Joints_BallSocket",
+					"position": "exploration",
+					"artifacts": [
+						"ConeTwistBag",
+						"CharacterRagdoll"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Spherical rotation and cone-twist limits"
+				},
+				{
+					"map": "Joints_SoftConstraints",
+					"position": "integration",
+					"artifacts": [
+						"ChainSwing",
+						"constraints"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Springs, chains, and constraint solvers"
+				},
+				{
+					"map": "Joints_Kinematics",
+					"position": "synthesis",
+					"artifacts": [
+						"GimbalStabilizer",
+						"IKArm"
+					],
+					"size_budget": "mixed",
+					"rationale": "Articulated chains, gimbal mechanics, and inverse kinematic solving"
+				}
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
+}

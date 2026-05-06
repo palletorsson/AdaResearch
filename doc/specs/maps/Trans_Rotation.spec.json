@@ -1,0 +1,93 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Trans_Rotation",
+  "home_sequence": "transformation",
+  "dimensions": {
+    "w": 7,
+    "d": 40
+  },
+  "signature": "rotation_gimbal",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.018,
+  "breath_zones": [
+    {
+      "size": 272,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 40
+      },
+      "centroid": [
+        2.988970588235294,
+        19.44485294117647
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "rotate_grid_cubes"
+    },
+    {
+      "x": 2,
+      "z": 17,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 18,
+      "token": "spin"
+    },
+    {
+      "x": 2,
+      "z": 19,
+      "token": "spin"
+    },
+    {
+      "x": 3,
+      "z": 36,
+      "token": "pick_up_cube"
+    }
+  ],
+  "authorial_annotations": [
+    {
+      "x": 3,
+      "z": 3,
+      "code": "@signature",
+      "params": [
+        "rotate_grid_cubes"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "rotate_grid_cubes"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "code": "@hold",
+      "params": [
+        "1",
+        "3"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 3
+      },
+      "key": null
+    }
+  ],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 279,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Trans_Pit",
+  "home_sequence": "transformation",
+  "dimensions": {
+    "w": 15,
+    "d": 25
+  },
+  "signature": "pusher_block enacts translation as displacement; revolving_wall enacts rotation as sweep; grower_block enacts scaling as pressure. Fire pits are the constant \u2014 the transformations are the variables.",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 368,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 25
+      },
+      "centroid": [
+        7.010869565217392,
+        11.964673913043478
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 374,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

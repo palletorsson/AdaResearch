@@ -18,12 +18,19 @@ var unlocked_artifacts: Array[String] = []
 # Additional lab signals
 signal lab_artifact_activated(artifact_id: String)
 signal lab_sequence_triggered(sequence_name: String)
- 
+
 var show_grid
+
+# Artifact catalog system
+var artifact_spawn_manager: ArtifactSpawnManager = null
+var desktop_catalog: DesktopArtifactCatalog = null
 
 func _ready():
 	print("LabGridSystem: Initializing lab variant of grid system...")
-	
+
+	# Add to lab_system group so catalog can find us
+	add_to_group("lab_system")
+
 	# Set default map_name for lab if not already set
 	if map_name.is_empty() or map_name == "Tutorial_Start":
 		map_name = "Lab"
@@ -48,6 +55,10 @@ func _ready():
 	# Call parent ready
 	super()
 
+	# Connect to map generation complete to initialize catalog after map loads
+	if not map_generation_complete.is_connected(_on_lab_map_ready_for_catalog):
+		map_generation_complete.connect(_on_lab_map_ready_for_catalog)
+
 func _check_for_progressive_map():
 	"""Check if this is a progressive map file"""
 	if map_name.begins_with("Lab/map_data_"):
@@ -58,13 +69,13 @@ func _check_for_progressive_map():
 		match map_file:
 			"map_data_init":
 				progression_state = "initial"
-			"map_data_post_array":
+			"map_data_post_array_tutorial":
 				progression_state = "post_array_tutorial"
 			"map_data_post_random":
-				progression_state = "post_randomness_exploration"
+				progression_state = "post_random"
 			"map_data_post_geometric":
 				progression_state = "post_geometric_algorithms"
-			"map_data_complete":
+			"map_data_complete", "map_data_post_qfeplaboratory":
 				progression_state = "all_complete"
 			_:
 				progression_state = "initial"
@@ -74,6 +85,88 @@ func _check_for_progressive_map():
 		is_progressive_map = false
 		progression_state = "initial"
 		print("LabGridSystem: Standard lab map - using legacy progression system")
+
+func _on_lab_map_ready_for_catalog():
+	"""Called when map generation is complete - safe to initialize catalog"""
+	print("LabGridSystem: Map generation complete, initializing artifact catalog...")
+	_setup_artifact_catalog_system()
+
+
+func _setup_artifact_catalog_system():
+	"""Initialize artifact spawn manager and desktop catalog"""
+	print("LabGridSystem: Setting up artifact catalog system...")
+
+	# Verify GridInteractablesComponent is loaded and has artifacts
+	if not has_node("GridInteractablesComponent"):
+		push_warning("LabGridSystem: GridInteractablesComponent not found, skipping catalog setup")
+		return
+
+	var interactables = get_node("GridInteractablesComponent")
+	if not "grid_artifact_registry" in interactables or interactables.grid_artifact_registry.is_empty():
+		push_warning("LabGridSystem: Artifact registry is empty, skipping catalog setup")
+		return
+
+	print("LabGridSystem: Found %d artifacts, proceeding with catalog setup" % interactables.grid_artifact_registry.size())
+
+	# Create and add spawn manager
+	artifact_spawn_manager = ArtifactSpawnManager.new()
+	artifact_spawn_manager.name = "ArtifactSpawnManager"
+	add_child(artifact_spawn_manager)
+
+	# Connect spawn manager signals
+	artifact_spawn_manager.artifact_spawned.connect(_on_artifact_spawned_from_catalog)
+	artifact_spawn_manager.spawn_failed.connect(_on_artifact_spawn_failed)
+
+	print("LabGridSystem: Artifact spawn manager initialized")
+
+	# Check if in VR mode
+	var xr_interface = XRServer.get_primary_interface()
+	var is_vr = xr_interface != null and xr_interface.is_initialized()
+
+	# Add desktop catalog only in desktop mode
+	if not is_vr:
+		var catalog_scene = load("res://commons/artifacts/catalog/DesktopArtifactCatalog.tscn")
+		if catalog_scene:
+			desktop_catalog = catalog_scene.instantiate()
+			get_tree().root.add_child(desktop_catalog)
+
+			# Pass references directly to avoid scene tree search issues
+			desktop_catalog.set_references(self, artifact_spawn_manager)
+
+			# Connect catalog signals
+			desktop_catalog.artifact_spawn_requested.connect(_on_catalog_spawn_requested)
+			desktop_catalog.catalog_opened.connect(_on_catalog_opened)
+			desktop_catalog.catalog_closed.connect(_on_catalog_closed)
+
+			print("LabGridSystem: Desktop artifact catalog initialized (Tab key to toggle)")
+		else:
+			push_warning("LabGridSystem: Could not load desktop catalog scene")
+	else:
+		print("LabGridSystem: VR mode - using kiosk in Lab map")
+
+func _on_artifact_spawned_from_catalog(lookup_name: String, artifact: Node):
+	"""Handle artifact spawned from catalog"""
+	print("LabGridSystem: Artifact spawned from catalog: %s" % lookup_name)
+	lab_artifact_activated.emit(lookup_name)
+
+func _on_artifact_spawn_failed(lookup_name: String, error: String):
+	"""Handle artifact spawn failure"""
+	push_warning("LabGridSystem: Failed to spawn artifact '%s': %s" % [lookup_name, error])
+
+func _on_catalog_spawn_requested(lookup_name: String):
+	"""Handle spawn request from catalog (fallback if spawn manager not found)"""
+	if artifact_spawn_manager:
+		artifact_spawn_manager.spawn_artifact(lookup_name)
+	else:
+		push_warning("LabGridSystem: Spawn requested but spawn manager not initialized")
+
+func _on_catalog_opened():
+	"""Handle catalog opened"""
+	print("LabGridSystem: Artifact catalog opened")
+
+func _on_catalog_closed():
+	"""Handle catalog closed"""
+	print("LabGridSystem: Artifact catalog closed")
 
 func _apply_lab_styling():
 	"""Apply lab-specific visual styling"""
@@ -104,46 +197,43 @@ func _on_lab_generation_complete():
 		print("LabGridSystem: ✅ Progressive map - artifacts already defined in JSON, skipping filtering")
 
 func _apply_lab_cube_materials():
-	"""Apply lab styling to all grid cubes while preserving grid shader effect"""
+	"""Apply lab styling to MultiMesh grid cubes"""
 	if not structure_component:
 		return
-	
-	var cube_positions = structure_component.get_all_cube_positions()
-	print("LabGridSystem: Applying lab materials to %d cubes" % cube_positions.size())
-	
-	for position in cube_positions:
-		var cube = structure_component.get_cube_at(position.x, position.y, position.z)
-		if cube:
-			_apply_lab_material_to_cube(cube)
 
-func _apply_lab_material_to_cube(cube: Node3D):
-	"""Apply lab styling to cube while keeping grid shader"""
-	# Find the mesh instance in the cube
-	var mesh_instance = _find_mesh_instance_in_cube(cube)
-	if not mesh_instance:
+	var cube_count = structure_component.get_cube_count()
+	print("LabGridSystem: Applying lab materials to MultiMesh (%d instances)" % cube_count)
+
+	# Apply material to the MultiMeshInstance3D
+	if structure_component.multimesh_instance:
+		_apply_lab_material_to_multimesh(structure_component.multimesh_instance)
+
+func _apply_lab_material_to_multimesh(multimesh_inst: MultiMeshInstance3D):
+	"""Apply lab styling to MultiMeshInstance3D"""
+	if not multimesh_inst:
 		return
-	
-	# Check if it already has a shader material
-	var current_material = mesh_instance.material_override
+
+	# Check if it already has a material
+	var current_material = multimesh_inst.material_override
 	if current_material and current_material is ShaderMaterial:
-		# Duplicate the shader material to make it unique for this cube
+		# Duplicate the shader material
 		var lab_shader_material = current_material.duplicate() as ShaderMaterial
-		
+
 		# Update shader parameters for lab styling
 		lab_shader_material.set_shader_parameter("modelColor", lab_cube_color)
 		lab_shader_material.set_shader_parameter("wireframeColor", Color(0.7, 0.7, 0.7, 1.0))  # Gray wireframe
 		lab_shader_material.set_shader_parameter("emissionColor", Color(0.6, 0.6, 0.6, 1.0))   # Gray emission
 		lab_shader_material.set_shader_parameter("emission_strength", 0.5)  # Subtle emission
-		lab_shader_material.set_shader_parameter("modelOpacity", 1.0)  # Slightly transparent
-		
+		lab_shader_material.set_shader_parameter("show_interior", true)
+
 		# Apply the modified shader material
-		mesh_instance.material_override = lab_shader_material
+		multimesh_inst.material_override = lab_shader_material
 	else:
-		# Fallback: create new shader material if none exists
+		# Create new shader material
 		var lab_shader_material = ShaderMaterial.new()
 		var grid_shader = load("res://commons/resourses/shaders/Grid.gdshader")
 		lab_shader_material.shader = grid_shader
-		
+
 		# Set lab-appropriate shader parameters
 		lab_shader_material.set_shader_parameter("modelColor", lab_cube_color)
 		lab_shader_material.set_shader_parameter("wireframeColor", Color(0.7, 0.7, 0.7, 1.0))  # Gray wireframe
@@ -151,27 +241,9 @@ func _apply_lab_material_to_cube(cube: Node3D):
 		lab_shader_material.set_shader_parameter("width", 8.0)
 		lab_shader_material.set_shader_parameter("blur", 0.5)
 		lab_shader_material.set_shader_parameter("emission_strength", 0.5)  # Subtle emission
-		lab_shader_material.set_shader_parameter("modelOpacity", 0.95)
-		
-		mesh_instance.material_override = lab_shader_material
+		lab_shader_material.set_shader_parameter("show_interior", true)
 
-func _find_mesh_instance_in_cube(cube: Node3D) -> MeshInstance3D:
-	"""Find MeshInstance3D in cube hierarchy"""
-	# Check if cube itself is a MeshInstance3D
-	if cube is MeshInstance3D:
-		return cube as MeshInstance3D
-	
-	# Search children recursively
-	for child in cube.get_children():
-		if child is MeshInstance3D:
-			return child as MeshInstance3D
-		
-		# Check grandchildren (for nested structures)
-		var nested_mesh = _find_mesh_instance_in_cube(child)
-		if nested_mesh:
-			return nested_mesh
-	
-	return null
+		multimesh_inst.material_override = lab_shader_material
 
 func _apply_lab_lighting():
 	"""Apply lab-appropriate lighting"""
@@ -201,7 +273,7 @@ func _apply_progressive_lighting(env: Environment):
 		"post_array_tutorial":
 			env.ambient_light_color = Color(0.2, 0.2, 0.3)
 			env.ambient_light_energy = 0.2
-		"post_randomness_exploration":
+		"post_randomness":
 			env.ambient_light_color = Color(0.3, 0.3, 0.4)
 			env.ambient_light_energy = 0.3
 		"post_geometric_algorithms":
@@ -367,13 +439,26 @@ func _on_interactable_activated(object_id: String, position: Vector3, data: Dict
 func _on_utility_activated(utility_type: String, position: Vector3, data: Dictionary):
 	"""Override utility activation for lab-specific handling"""
 	print("LabGridSystem: Lab utility activated - %s" % utility_type)
-	
+
 	# Handle lab teleporter differently
 	if utility_type == "t":
 		print("LabGridSystem: 🚀 Lab teleporter activated")
-		
+
 		var destination = data.get("destination", "")
-		
+
+		# Special destination: open landscape (endgame scene)
+		if destination == "landscape":
+			print("LabGridSystem: 🌄 Landscape teleporter activated — loading open landscape")
+			var scene_manager = _find_scene_manager()
+			if scene_manager:
+				scene_manager.request_transition({
+					"type": 1, # TransitionType.TELEPORTER
+					"action": "load_landscape",
+					"source": "lab_teleporter",
+					"position": position
+				})
+			return
+
 		# Check if destination is a sequence name (no map extension)
 		var sequence_name = ""
 		if _is_sequence_name(destination):
@@ -383,8 +468,19 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 			# Legacy: map name, try to determine sequence
 			sequence_name = _get_sequence_for_map(destination)
 			print("LabGridSystem: Map-based teleporter '%s' -> sequence '%s'" % [destination, sequence_name])
-		
-		# Find SceneManager and request transition
+
+		# Check if we're in desktop mode (no XR interface)
+		var xr_interface = XRServer.get_primary_interface()
+		var is_vr_mode = xr_interface != null and xr_interface.is_initialized()
+
+		if not is_vr_mode:
+			print("LabGridSystem: Desktop mode - emitting lab_sequence_triggered signal instead of using SceneManager")
+			# In desktop mode, emit the signal for DesktopLabManager to handle
+			if sequence_name:
+				lab_sequence_triggered.emit(sequence_name)
+			return
+
+		# VR mode - use SceneManager
 		var scene_manager = _find_scene_manager()
 		if scene_manager:
 			if sequence_name:
@@ -412,43 +508,10 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 # SEQUENCE MANAGEMENT HELPERS
 
 func _is_sequence_name(name: String) -> bool:
-	"""Check if the name is a sequence name rather than a map name"""
-	var known_sequences = [
-		"primitives",
-		"transformation",
-		"color",
-		"tests",
-		"array_tutorial",
-		"meshestextures",
-		"randomness_exploration",
-		"wavefunctions",
-		"vectors", 
-		"fractals", 
-		"cellularautomata", 
-		"joints", 
-		"noise",
-		"forces",
-		"particles",
-		"oscillation",
-		"physics",
-		"proceduralaudio",
-		"physicssimulation",
-		"softbodies",
-		"recursiveemergence",
-		"lsystems",
-		"swarmintelligence",
-		"patterngeneration",
-		"proceduralgeneration",
-		"searchpathfinding",
-		"graphtheory",
-		"computationalgeometry",
-		"machinelearning",
-		"criticalalgorithms",
-		"speculativecomputation",
-		"resourcemanagement",
-		"advancedlaboratory"
-	]
-	return name in known_sequences
+	"""Check if the name is a sequence name rather than a map name.
+	Delegates to GridSystem's dynamic discovery (scans commons/maps/sequences/*.json)
+	so new sequences are auto-recognized without code changes."""
+	return super._is_sequence_name(name)
 
 func _get_sequence_for_map(map_name: String) -> String:
 	"""Determine which sequence a map belongs to based on map_sequences.json"""

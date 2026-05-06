@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://cd6bwxdymdvf1"]
+
+[ext_resource type="Script" uid="uid://dh75mowkoxnrp" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.gd" id="1_vg2gf"]
+[ext_resource type="Script" uid="uid://jnnultxsu2rs" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd" id="2_lgffc"]
+
+[sub_resource type="QuadMesh" id="1"]
+resource_local_to_scene = true
+size = Vector2(3, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0f73k"]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f73k"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("ViewportTexture_0f73k")
+texture_filter = 1
+
+[sub_resource type="BoxShape3D" id="4"]
+resource_local_to_scene = true
+size = Vector3(3, 2, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vif37"]
+albedo_color = Color(0.834037, 0.442794, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5bnv0"]
+
+[node name="Viewport2Din3D" type="Node3D"]
+script = ExtResource("1_vg2gf")
+viewport_size = Vector2(1024, 512)
+alpha_scissor_threshold = 0.25
+unshaded = false
+filter = true
+scene_properties_keys = PackedStringArray("SoundWaveInfoSheet.gd")
+
+[node name="Viewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+gui_embed_subwindows = true
+size = Vector2i(1024, 512)
+render_target_update_mode = 1
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14889, 0)
+mesh = SubResource("1")
+surface_material_override/0 = SubResource("StandardMaterial3D_0f73k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14889, 0)
+collision_layer = 5242881
+collision_mask = 0
+script = ExtResource("2_lgffc")
+viewport_size = Vector2(1024, 512)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+shape = SubResource("4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.05, 0, 0, 0, 2, 0, 0, 0, 0.065, 0, 1.07935, -0.0454537)
+material_override = SubResource("StandardMaterial3D_vif37")
+mesh = SubResource("BoxMesh_5bnv0")

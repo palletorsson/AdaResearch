@@ -1,0 +1,38 @@
+{
+  "name": "Escher_Impossible",
+  "title": "Locally Valid, Globally Impossible",
+  "description": "The staircase that goes up forever and ends where it began. Locally coherent, globally impossible. Visual G\u00f6del.",
+  "dimensions": {
+    "rows": 12,
+    "cols": 11
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    10,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "escher_staircase",
+      "row": 4,
+      "col": 0,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "penrose_triangle",
+      "row": 7,
+      "col": 10,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "magritte_pipe",
+      "row": 10,
+      "col": 5,
+      "family": "substrate_vectors"
+    }
+  ]
+}

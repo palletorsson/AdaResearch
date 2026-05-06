@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bijbtby524e3d"]
+
+[ext_resource type="Script" uid="uid://byf86k2g4s0di" path="res://commons/primitives/johnsonsolids/square_pyramid.gd" id="1_script"]
+
+[node name="SquarePyramid" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9507486, 0, 0.309963, 0, 1, 0, -0.309963, 0, 0.9507486, 0.38621706, 0, 2.2216923)

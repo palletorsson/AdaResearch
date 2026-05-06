@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "VectorTorque",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "VectorTorque demonstrates the \u03c4 = r \u00d7 F relationship with adjustable force application point and direction; dark_sphere anchors the rotational space.",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.036,
+  "breath_zones": [
+    {
+      "size": 53,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.018867924528302,
+        3.4716981132075473
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "VectorTorque"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 55,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

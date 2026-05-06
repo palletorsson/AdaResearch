@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://btnmwtxi2a65o"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x8ybs"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="World3D" id="World3D_viewport"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x8ybs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bssq"]
+resource_local_to_scene = true
+albedo_color = Color(0.15, 0.15, 0.18, 1)
+metallic = 0.3
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_pxs07"]
+resource_local_to_scene = true
+size = Vector3(1.08, 1.08, 0.06)
+
+[node name="Screen" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-0.24999999, 0, -2.1855692e-08, 0, 0.25, 0, 2.1855692e-08, 0, -0.24999999, 0, 1.2, 0.43370646)
+texture = SubResource("ViewportTexture_x8ybs")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+world_3d = SubResource("World3D_viewport")
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-1, 0, -8.742278e-08, -4.2536783e-08, 0.8736449, 0.4865641, 7.637646e-08, 0.4865641, -0.8736449, 0.012191534, 1.7461159, 1.8280501)
+
+[node name="lookAtScene" type="Node3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14839566, 1.258896, 4.417562)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/lookAtScene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17895865, 0)
+mesh = SubResource("PlaneMesh_x8ybs")
+
+[node name="MonitorFrame" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.2, 0, -1.04907336e-07, 0, 1.2, 0, 1.04907336e-07, 0, -1.2, 0, 1.2, 0.48)
+material_override = SubResource("StandardMaterial3D_1bssq")
+mesh = SubResource("BoxMesh_pxs07")
+skeleton = NodePath("../Sprite3D")

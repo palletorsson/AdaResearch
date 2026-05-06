@@ -1,4 +1,4 @@
-class_name Cell
+class_name ChairCell
 extends RefCounted
 
 enum CellType { EMPTY, STRUCTURE, FRONT_LEFT, FRONT_RIGHT, BACK_LEFT, BACK_RIGHT }
@@ -10,15 +10,15 @@ var gradient: float = 0.0
 var is_occupied: bool = false
 var generation_born: int = 0
 
-func _init(pos: Vector3i):
+func _init(pos: Vector3i) -> void:
 	position = pos
 
-func set_occupied(type: CellType, gen: int):
+func set_occupied(type: CellType, gen: int) -> void:
 	is_occupied = true
 	cell_type = type
 	memory_type = type
 	generation_born = gen
 
-func clear():
+func clear() -> void:
 	is_occupied = false
 	cell_type = CellType.EMPTY

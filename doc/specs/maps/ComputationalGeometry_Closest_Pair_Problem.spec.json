@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ComputationalGeometry_Closest_Pair_Problem",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 10,
+    "d": 9
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.011,
+  "breath_zones": [
+    {
+      "size": 88,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 9
+      },
+      "centroid": [
+        4.5,
+        3.977272727272727
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "fibonacci_sequences"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 89,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

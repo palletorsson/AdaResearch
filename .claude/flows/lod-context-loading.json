@@ -1,0 +1,111 @@
+{
+  "id": "lod-context-loading",
+  "title": "LOD Context Loading",
+  "description": "Load exactly the right amount of context for your task. Don't read everything — use fractal depth.",
+  "triggers": [
+    "load context",
+    "understand artifact",
+    "what is this",
+    "lod query",
+    "find context"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "LOD_TREE.json, tools/lod_query.py",
+  "nodes": [
+    {
+      "id": "what",
+      "type": "decision",
+      "label": "What level of detail do you need?"
+    },
+    {
+      "id": "overview",
+      "type": "action",
+      "label": "Project overview",
+      "code": "python tools/lod_query.py"
+    },
+    {
+      "id": "sequence",
+      "type": "action",
+      "label": "Sequence detail",
+      "code": "python tools/lod_query.py <sequence_id>"
+    },
+    {
+      "id": "map",
+      "type": "action",
+      "label": "Map detail",
+      "code": "python tools/lod_query.py <MapName>"
+    },
+    {
+      "id": "artifact",
+      "type": "action",
+      "label": "Artifact detail",
+      "code": "python tools/lod_query.py <lookup_name>"
+    },
+    {
+      "id": "function",
+      "type": "action",
+      "label": "Function detail",
+      "code": "python tools/lod_query.py <lookup_name>._function_name"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Context loaded at right depth"
+    }
+  ],
+  "edges": [
+    {
+      "from": "what",
+      "to": "overview",
+      "label": "what exists?"
+    },
+    {
+      "from": "what",
+      "to": "sequence",
+      "label": "what's in this sequence?"
+    },
+    {
+      "from": "what",
+      "to": "map",
+      "label": "what's in this map?"
+    },
+    {
+      "from": "what",
+      "to": "artifact",
+      "label": "what does this artifact do?"
+    },
+    {
+      "from": "what",
+      "to": "function",
+      "label": "how does this function work?"
+    },
+    {
+      "from": "overview",
+      "to": "done"
+    },
+    {
+      "from": "sequence",
+      "to": "done"
+    },
+    {
+      "from": "map",
+      "to": "done"
+    },
+    {
+      "from": "artifact",
+      "to": "done"
+    },
+    {
+      "from": "function",
+      "to": "done"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Don't read everything. lod_query.py <topic> at the right depth: project → sequence → map → artifact → function.",
+  "links_to": [
+    "heat-map-triage"
+  ]
+}

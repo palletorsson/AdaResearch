@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PhysicsSimulation_Three_Body_Problem",
+  "home_sequence": "physicssimulation",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": null,
+  "style": "escher",
+  "echoes": [],
+  "density": 0.01,
+  "breath_zones": [
+    {
+      "size": 98,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        4.479591836734694,
+        4.469387755102041
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 4,
+      "token": "three_body_problem"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 99,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

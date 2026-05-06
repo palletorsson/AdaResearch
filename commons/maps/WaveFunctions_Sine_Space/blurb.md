@@ -1,0 +1,3 @@
+The wave made spatial. Walk through a sine function frozen in three dimensions — amplitude as height, frequency as compression, phase as shift. The mathematics of oscillation becomes architecture you can inhabit.
+
+The `sine_space` sculpts the function into 3D geometry; the `sine_wall_corridor` turns it into a walkable hallway whose curvature IS the formula. `sine_space_explanation` and `sine_wall_explanation` annotate what you are standing inside. The `colorballs` mark phase positions so you can see the waveform without needing to see its graph. The abstract/concrete distinction collapses here. A sine function is not a line on paper; it is the shape of the floor, the curve of the wall, the geometry you navigate with your body.

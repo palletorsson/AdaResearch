@@ -1,0 +1,19 @@
+{
+  "_metadata": {
+    "sound_type": "emd_house_hyper_pluck_lead",
+    "display_name": "EMD House - Hyper Pluck Lead",
+    "description": "Bright pluck lead extension with snappy attack and shimmer.",
+    "category": "emd_house",
+    "tags": ["emd_house", "pluck", "lead", "bright", "festival"],
+    "generator": "soundbank_script",
+    "soundbank_id": "emd_house",
+    "sound_name": "hyper_pluck_lead",
+    "invoke_mode": "t_freq_trigger",
+    "preview_freq_hz": 440.0
+  },
+  "parameters": {
+    "frequency_hz": { "min": 120.0, "max": 1600.0, "value": 440.0, "step": 1.0 },
+    "duration": { "min": 0.2, "max": 3.0, "value": 0.9, "step": 0.1 },
+    "gain": { "min": 0.2, "max": 1.8, "value": 1.0, "step": 0.05 }
+  }
+}

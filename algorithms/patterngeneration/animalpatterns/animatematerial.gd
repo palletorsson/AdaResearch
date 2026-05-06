@@ -1,3 +1,13 @@
+# @identity
+# essence: a shader surface that procedurally generates Leopard, Tiger, Zebra, Dalmatian, and Snake skin patterns — each is a different parameter set of the same underlying reaction-diffusion mathematics
+# desire: to make Turing's morphogenesis thesis legible as material — to stand beside a wall wearing leopard skin is to stand beside a solved differential equation that biology ran for four million years
+# critical_parameter: preset (enum of 5 species) — each preset is a distinct parameterization; the scale, spot_density, rosette_ring, and color channels are the only things separating a leopard from a zebra
+# triggers: _ready() calls apply_preset(); preset setter triggers live re-parameterization of the ShaderMaterial; the GPU runs the reaction-diffusion shader per fragment
+# emerges: pattern as taxonomy — the five presets reveal that species-specific markings are not identities but parameter regions in a continuous mathematical space; evolution tuned numbers, not equations
+# needs: VR preset-switching (grab-and-dial) [missing]; live parameter sliders [missing]; apply_grid_config [missing]; side-by-side display of all 5 presets [missing]
+# relationships: paired conceptually with reaction_diffusion and turing_pattern — all three are morphogenesis algorithms; animatematerial is the material application of the same math shown abstractly in those exhibits
+# truth: a leopard's rosette and a zebra's stripe are the same equation with different numbers — Turing proved in 1952 that skin patterns need no blueprint, only two chemicals diffusing at different rates
+
 # AnimalPrintMaterial.gd
 # Attach this script to a MeshInstance3D (or any Node3D with a ShaderMaterial).
 # The shader must be the "AnimalPrint.gdshader" from before.
@@ -11,10 +21,10 @@ extends Node3D
 
 @onready var mat: ShaderMaterial = $".".material_override
 
-func _ready():
+func _ready() -> void:
 	apply_preset()
 
-func apply_preset():
+func apply_preset() -> void:
 	if not mat:
 		return
 
@@ -68,3 +78,6 @@ func apply_preset():
 			mat.set_shader_parameter("rough", 0.45)
 			mat.set_shader_parameter("metallic_amt", 0.05)
 			mat.set_shader_parameter("normal_amount", 0.4)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

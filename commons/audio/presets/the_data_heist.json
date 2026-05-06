@@ -1,0 +1,53 @@
+{
+    "description": "High-security server room: Clean hums, high-pitched chirps",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+            "volume_db": -15,
+            "bus": "ServerHum"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+            "volume_db": -20,
+            "bus": "Cooling"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SCI_FI_DATA_CHIRPS",
+                "AudioSynthesizer.SCI_FI_ELECTROMAGNETIC"
+            ],
+            "interval_range": [
+                2.0,
+                8.0
+            ],
+            "volume_range": [
+                -22,
+                -16
+            ],
+            "bus": "Processing"
+        }
+    ],
+    "buses": {
+        "ServerHum": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.2,
+                    "wet": 0.1
+                }
+            ]
+        },
+        "Processing": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.9,
+                    "tap1_delay_ms": 50,
+                    "tap1_level_db": -15.0
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Tutorial_3D",
+  "home_sequence": "array_tutorial",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "grid_3d_4x4x4 is the complete volumetric structure; dark_sphere anchors the space at the center of the volume.",
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.111,
+  "breath_zones": [
+    {
+      "size": 48,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0208333333333335,
+        3.4791666666666665
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 2,
+      "token": "grid_3d_4x4x4"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "sorting_algorithm_race"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "bar_array"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "token": "grid3d"
+    },
+    {
+      "x": 3,
+      "z": 6,
+      "token": "bar_array_bubble_sort"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 54,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

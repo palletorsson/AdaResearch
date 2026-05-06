@@ -1,0 +1,297 @@
+{
+  "report_date": "2026-05-04",
+  "generated": "2026-05-04T07:30:00",
+  "period": "2026-04-27 to 2026-05-04",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-04-27.json",
+  "total_breaths_in_period": 3,
+  "breaths_in_period": [
+    "2026-04-28T09:04",
+    "2026-04-30T07:18",
+    "2026-05-03T06:36"
+  ],
+  "note": "Three full breaths this week. Pipeline stall broken on 2026-04-30 (first non-flat in 9 sessions). Schedule shows 4 days without breaths after May-03 — same gap pattern as last week.",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline": 5.43,
+    "global_avg_pipeline_last_week": 5.05,
+    "global_avg_pipeline_delta": 0.38,
+    "stall_period_status": "BROKEN — 10-breath plateau at 5.05 ended on 2026-04-30",
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_at_stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "wavefunctions",
+      "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
+      "isosurfaces", "swarmintelligence", "machinelearning", "foundationscrisis",
+      "qfeplaboratory", "postfoundationscrisis", "graphtheory"
+    ],
+    "sequences_at_stage_2_documentation": ["array_tutorial (18% doc, 60% art)", "softbodies (29% doc, 64% art)"],
+    "sequences_at_stage_1_structure": ["boolean_surfaces"],
+    "advancement_this_week": [
+      "isosurfaces: stage 3 → 6 (cell-token rename, 2026-04-30)",
+      "color: stage 2 → 6 (2 doc files, 2026-04-30)"
+    ]
+  },
+
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "FAIL",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "all_passing": false,
+    "passing_count": 3,
+    "passing_count_last_week": 4,
+    "regression_detected": true,
+    "regression_details": {
+      "gate": "B (Artifact Registry Integrity)",
+      "missing_scene_path": 2,
+      "missing_map_ready": 1,
+      "missing_include_in_map_data": 1,
+      "unresolved_scene_files": 0,
+      "interpretation": "Small backslide — 4 sub-issues across 2 categories. Same fix shape as Apr-16 batch (defaults restoration). Easily recoverable in one focused breath."
+    },
+    "grade_A_maps": 1860,
+    "grade_B_maps": 411,
+    "grade_C_maps": 583,
+    "grade_F_maps": 0,
+    "grade_A_delta_vs_last_week": "+1263 (huge jump — likely from a validator change or new map batch; investigate)",
+    "week_delta": "REGRESSED 4/4 → 3/4 (Gate B)"
+  },
+
+  "garden_health": {
+    "total_artifacts": 2103,
+    "voiced": 923,
+    "voice_coverage_pct": 43,
+    "embodied": 324,
+    "embodiment_rate_pct": 35,
+    "phantom_limbs": 736,
+    "voiced_last_week": 887,
+    "voiced_delta": 36,
+    "voice_coverage_pct_last_week": 43,
+    "voice_coverage_pct_delta": 0,
+    "state_transitions_this_week": [
+      "forces: SCATTERED → LIVING (2026-04-28, cache cascade revealed 68 already-embodied artifacts)",
+      "flowers: SCATTERED → LIVING (2026-04-28, botanical_flower dual-file fix)"
+    ],
+    "current_scattered_count": 16,
+    "current_scattered_count_last_week": 12,
+    "scattered_growth_note": "scattered count rose +4 — biological_growth, structure, particles, facades, annotations, grow_map_sandbox, catalyst_test newly visible at SCATTERED tier (likely from total_artifacts +83 reflecting new content vs new voicings)"
+  },
+
+  "sequences_improved": [
+    {
+      "id": "isosurfaces",
+      "pipeline_delta": "stage 3 → 6",
+      "mechanism": "Single cell-token rename (2026-04-30)",
+      "breath_refs": ["2026-04-30T07:18"]
+    },
+    {
+      "id": "color",
+      "pipeline_delta": "stage 2 → 6",
+      "mechanism": "2 doc files (2026-04-30)",
+      "breath_refs": ["2026-04-30T07:18"]
+    },
+    {
+      "id": "forces",
+      "garden_delta": "SCATTERED → LIVING (62.7% → 76% voiced, 68 embodied)",
+      "mechanism": "Cache cascade after voicing apply_grid_config artifacts",
+      "breath_refs": ["2026-04-28T09:04"]
+    },
+    {
+      "id": "flowers",
+      "garden_delta": "SCATTERED → LIVING",
+      "mechanism": "botanical_flower dual-file fix (filename mismatch)",
+      "breath_refs": ["2026-04-28T09:04"]
+    }
+  ],
+
+  "total_delta": {
+    "pipeline_avg_start": 5.05,
+    "pipeline_avg_end": 5.43,
+    "pipeline_delta": 0.38,
+    "pipeline_delta_note": "STALL BROKEN on Apr-30 after 10 breaths flat. Two long-stalled sequences advanced to stage 6 via tiny edits (1 cell rename + 2 doc files). Recovery path: scoped pipeline-stage repairs on the only sub-stage-6 sequences.",
+    "release_gates_start": "4/4 passing",
+    "release_gates_end": "3/4 passing",
+    "release_gates_delta": "-1 (Gate B regression)",
+    "garden_voiced_start": 887,
+    "garden_voiced_end": 923,
+    "garden_voiced_delta": 36,
+    "garden_state_transitions": 2,
+    "biggest_single_advance": "+0.38 pipeline_avg in one breath (2026-04-30T07:18) via scoped fix on isosurfaces + color"
+  },
+
+  "week_over_week_comparison": {
+    "last_week_period": "2026-04-20 to 2026-04-27",
+    "this_week_period": "2026-04-27 to 2026-05-04",
+    "pipeline_avg": {
+      "last_week_delta": 0.0,
+      "this_week_delta": 0.38,
+      "interpretation": "BREAKTHROUGH week. 10-breath plateau at 5.05 ended on Apr-30. The path was scoped sub-stage-6 repair, not VR-dependent. Means pipeline ceiling is closer to 5.5-6.0 than 5.05 — VR ceiling reached only when ALL spine sequences are at stage 6+."
+    },
+    "release_gates": {
+      "last_week_delta": "0 (4/4 stable)",
+      "this_week_delta": "-1 (4/4 → 3/4)",
+      "interpretation": "REGRESSION. Gate B sub-issues reappeared (missing_scene_path 2, missing_map_ready 1, missing_include_in_map_data 1). This is the same failure shape as Apr-16 — likely from new artifact entries added without curation defaults."
+    },
+    "garden_health": {
+      "last_week_voiced_delta": 153,
+      "this_week_voiced_delta": 36,
+      "interpretation": "Garden growth slowed 4x (+153 → +36). Last week's surge was the PascalCase cache fix unlocking 98 invisible voices in one shot. This week's gains came from manual @identity writes only — no infrastructure-bug-fix multiplier."
+    },
+    "state_transitions": {
+      "last_week": 9,
+      "this_week": 2,
+      "interpretation": "Down from 9 to 2. Both this week (forces, flowers) were cascade effects from cache normalization, not pure @identity writes. Implies most cheap garden wins exhausted; remaining work needs new GDScript files or new maps."
+    }
+  },
+
+  "skill_effectiveness_changes": {
+    "direct_file_edit": {
+      "total_calls_cumulative": 75,
+      "success_rate": 1.0,
+      "week_calls": 16,
+      "status": "still primary tool. Steady."
+    },
+    "registry_repair": {
+      "total_calls_cumulative": 18,
+      "success_rate": 1.0,
+      "week_calls": 1,
+      "status": "1 call this week — but Gate B regression suggests another batch needed soon."
+    },
+    "identity_writing": {
+      "total_calls_cumulative": 13,
+      "success_rate": 1.0,
+      "week_calls": 4,
+      "status": "lower volume than last week (was ~12) — diminishing returns on remaining unvoiced artifacts."
+    },
+    "scene_repair": {
+      "total_calls_cumulative": 1,
+      "success_rate": 1.0,
+      "week_calls": 1,
+      "status": "NEW skill recorded this week. branchinggrowthalgorithmcontinued/.tscn uid+path corrected (2026-05-03)."
+    },
+    "tool_bug_fix": {
+      "total_calls_cumulative": 2,
+      "success_rate": 1.0,
+      "week_calls": 1,
+      "status": "scorer KeyError on empty sequences unblocked daily baseline (2026-05-03)."
+    },
+    "ada-breather": {
+      "total_calls_cumulative": 2,
+      "success_rate": 1.0,
+      "week_calls": 0,
+      "status": "Not called as full mode this week. Today's invocation is dry-run only."
+    },
+    "emerging_pattern": "Three high-leverage move types this week: (1) tool_bug_fix on display loops, (2) scene_repair for uid+path drift, (3) scoped sub-stage repair for non-VR pipeline stalls. All three are infrastructure fixes that unlock content rather than create content."
+  },
+
+  "proposals_pending_review": [
+    {
+      "id": "prop-001",
+      "skill": "ada-breather",
+      "status": "proposed",
+      "tldr": "Garden identity targeting must verify artifact is placed in TARGET sequence maps, not gallery maps.",
+      "age_days": 14,
+      "urgency": "low — still proposed, not blocking. forces/flowers cascade success (Apr-28) showed targeting CAN succeed without the explicit pre-check. Consider closing as 'won't fix' or add lighter-weight guidance.",
+      "file": "doc/reports/skill_evolution_proposals.json"
+    }
+  ],
+
+  "stall_analysis": {
+    "stall_detected": false,
+    "stall_condition": "global_avg improvement (pipeline) over 7 days",
+    "7_day_pipeline_delta": 0.38,
+    "7_day_pipeline_window": "2026-04-28 (5.05) → 2026-05-04 (5.43)",
+    "verdict": "NO STALL. Pipeline_avg improved +0.38 within the 7-day window (broken on 2026-04-30). However, the last 4 days are flat at 5.43 — a mini-plateau forming, not yet a stall.",
+    "sub_window_observation": {
+      "last_4_days": "5.43 → 5.43 (flat from Apr-30 to May-03)",
+      "interpretation": "VR-bottleneck reasserts itself at 5.43. After Apr-30 unlocked the only sub-stage-6 sequences, only VR testing can advance the pipeline further from here.",
+      "expected_next_stall_avg": "5.5-5.7 (if any remaining grade-improvement edge cases get cleaned up); hard ceiling near 6.0 until VR testing happens"
+    },
+    "stall_history_update": {
+      "previous_stall": "5.05 for 10 breaths (Apr-18 to Apr-28)",
+      "broken_at": "2026-04-30T07:18",
+      "break_method": "scoped registry/doc fixes on the only 2 sub-stage-6 spine sequences (color, isosurfaces)",
+      "current_potential_stall": "5.43 for 4 days (4 breath-equivalent days, only 1 actual breath on May-03 was flat)"
+    }
+  },
+
+  "key_discoveries_this_week": [
+    "Pipeline ceiling was not at 5.05 but at 5.43 — the 10-breath plateau was caused by missing two cheap fixes (color docs + isosurfaces token), not by structural VR-bottleneck. Lesson: re-check the long-tail sub-stage-6 sequences before assuming a VR ceiling.",
+    "Cache cascade applies to garden voicing too: writing @identity to artifacts with apply_grid_config can reveal 60+ already-embodied voices invisible to the cache. The forces SCATTERED → LIVING jump in one breath came from this mechanism.",
+    "scene_repair as a new skill: tscn files can have stale uid+path pointing to removed/renamed scripts. Symptom is runtime crash; fix is editing the tscn ext_resource. branchinggrowthalgorithmcontinued/.tscn was the example case.",
+    "Empty-sequence schema bug: pipeline_scorer's display loop assumed all stages populated. KeyError on '2_documentation' for empty sequences crashed the daily baseline. Fixed 2026-05-03.",
+    "Gate B regression cycle: 7 days of green, then small backslide. Likely a new artifact entry was added without map_ready/include_in_map_data defaults. Need a CI-style guard or registry-add helper that injects defaults."
+  ],
+
+  "recommendations_for_next_week": [
+    "Restore Gate B to PASS: 4 sub-issues, fixable in one breath. Same fix shape as Apr-16 batch.",
+    "Investigate the +1263 grade-A maps jump vs last week (597 → 1860). Validator counting changed, or many more maps now valid. Either way, reconcile before reading too much into Gate C numbers.",
+    "Garden push: wavefunctions (still SCATTERED at ~62% if voiced count climbs) and randomness (still SCATTERED) are the two best garden targets. Color is now nearly stuck — voiceless artifacts have no .gd files.",
+    "boolean_surfaces and resourcemanagement are 50° empty sequences in the heat map — could create starter map_data.json + 1-2 artifacts each to clear them off the heat map.",
+    "If pipeline_avg stays at 5.43 for another 5 days, escalate to actual stall analysis. Likely cause will be: no remaining non-VR levers.",
+    "Write a registry-add helper or pre-commit guard for map_ready/include_in_map_data defaults to prevent Gate B regressions from recurring.",
+    "Schedule pacing: 3 breaths in 7 days (Apr-28, Apr-30, May-03) is healthy but the 4-day gap at week-end repeats last week's pattern. Consider a Sunday-noon scheduled breath to fill the gap."
+  ],
+
+  "breather_dry_run_work_plan": {
+    "mode": "dry-run",
+    "trajectory": "IMPROVING (pipeline broke 10-breath plateau, +0.38) / REGRESSING (release gates -1) / SLOWING (garden +36 vs +153 last week)",
+    "focus": "auto-selected (FOCUS_VECTOR primary 'rebuild primitives maps' is VR-dependent and not AI-actionable as a breath; pivot to gate-recovery + remaining garden targets + tooling)",
+    "cooling_filter": "tscn uid path drift (60°) — addressed 2026-05-03 for branchinggrowthalgorithmcontinued; skip unless a new artifact appears with the same symptom.",
+    "items_selected": [
+      {
+        "rank": 1,
+        "item": "gate_b_regression_fix",
+        "temperature": 75,
+        "reason": "Release gate regressed from 4/4 to 3/4 since 2026-04-27. 4 small sub-issues (missing_scene_path: 2, missing_map_ready: 1, missing_include_in_map_data: 1). Apr-16 breath fixed the same issue shape — high-confidence repair pattern.",
+        "action": "Run release gates with verbose mode, identify the 4 specific entries, add defaults / scene path corrections.",
+        "dispatch": "registry_repair + direct_file_edit",
+        "expected_outcome": "Gate B → PASS, all 4 release gates passing again."
+      },
+      {
+        "rank": 2,
+        "item": "pipeline_scorer_empty_sequence_schema",
+        "temperature": 60,
+        "reason": "Heat map deep discovery: score_sequence early-returns on empty maps but display loop later assumes stages populated → daily baseline crashed once already (2026-05-03). Partially patched but heat-map entry persists.",
+        "action": "Read tools/sequence_pipeline_scorer.py main display loop, add per-stage .get() defaults so empty sequences render as '0%' across all 7 stages.",
+        "dispatch": "tool_bug_fix",
+        "expected_outcome": "Pipeline scorer survives boolean_surfaces and resourcemanagement without errors. Heat-map entry decays."
+      },
+      {
+        "rank": 3,
+        "item": "wavefunctions_garden_identity",
+        "temperature": 55,
+        "reason": "Still SCATTERED at ~64% voiced (largest SCATTERED sequence with 105 artifacts). One @identity batch could push toward REACHING. forces precedent (Apr-28) shows cache cascade can multiply effect.",
+        "action": "Run garden_listener --silent for wavefunctions. Apply @identity to top 5 unvoiced artifacts that have .gd files AND apply_grid_config (cache cascade trigger).",
+        "dispatch": "identity_writing + direct_file_edit",
+        "expected_outcome": "wavefunctions: SCATTERED → REACHING (or voiced count up by ~10–60 if cascade fires)."
+      },
+      {
+        "rank": 4,
+        "item": "pipeline_scorer_token_parsing",
+        "temperature": 60,
+        "reason": "Heat map deep discovery: artifact stage parses colon-prefixed cells to bare prefix, may misclassify utility cells as missing artifacts. Persistent in heat map for multiple days.",
+        "action": "Read the artifact-stage parser, add a test fixture for colon-prefixed cells, assert correct lookup or skip behavior. Fix if symptom confirmed.",
+        "dispatch": "tool_bug_fix + verify",
+        "expected_outcome": "Heat-map entry decays. Pipeline scoring trustworthy for sequences with utility-heavy interactables layers."
+      },
+      {
+        "rank": 5,
+        "item": "boolean_surfaces_starter_structure",
+        "temperature": 50,
+        "reason": "Empty sequence at heat 50°. Currently stage 1 (structure 0%). Creating 2-3 starter maps with minimal map_data.json would clear it from the heat map and unblock downstream work.",
+        "action": "Create 2-3 map_data.json files for Boolean_Surfaces_Intro, Boolean_Union, Boolean_Intersection with minimal structure + spawn + teleporter. Wire into commons/maps/sequences/boolean_surfaces.json.",
+        "dispatch": "ada-map-expert + direct_file_edit",
+        "expected_outcome": "boolean_surfaces: stage 1 → stage 2 (some structure exists). Heat map entry decays."
+      }
+    ],
+    "cooled_items": [
+      {"item": "tscn uid path drift", "reason": "Same symptom was fixed 2026-05-03 for branchinggrowthalgorithmcontinued/.tscn. Skip unless a NEW artifact shows the same pattern."}
+    ],
+    "skipped_due_to_5_item_cap": [
+      {"item": "color_garden_identity", "reason": "All voiceless color artifacts have no .gd files (Apr-23 discovery). Blocked until new GDScript files are created."},
+      {"item": "softbodies_documentation", "reason": "Stage 2 at 29% doc, 64% art — could be advanced but lower-value than gate recovery."},
+      {"item": "array_tutorial_documentation", "reason": "Stage 2 at 18% doc, 60% art — same as softbodies; defer to next breath if Gate B clears."}
+    ]
+  }
+}

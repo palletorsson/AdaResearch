@@ -1,0 +1,42 @@
+{
+    "description": "Energetic atmosphere for particle and physics simulations",
+    "continuous_layers": [
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -18,
+            "bus": "Ambient",
+            "parameters": {
+                "entropy": 0.5,
+                "queer_factor": 0.6
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SHIELD_HIT",
+                "AudioSynthesizer.ACID_TB303_SQUELCH"
+            ],
+            "interval_range": [
+                5.0,
+                15.0
+            ],
+            "volume_range": [
+                -20,
+                -15
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.35
+                }
+            ]
+        }
+    }
+}

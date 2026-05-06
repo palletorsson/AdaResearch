@@ -1,0 +1,96 @@
+{
+    "description": "Stage 7: Random crackling. White noise undertones. Unpredictable events. The sound of randomness itself.",
+    "continuous_layers": [
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -22,
+            "bus": "Ambient",
+            "parameters": {
+                "entropy": 0.7,
+                "queer_factor": 0.2
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -24,
+            "bus": "Wind"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": ["AudioSynthesizer.SHIELD_HIT"],
+            "interval_range": [3.0, 12.0],
+            "volume_range": [-28, -20],
+            "bus": "Glitch"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.RULE_CHANGE_BURST"],
+            "interval_range": [8.0, 25.0],
+            "volume_range": [-25, -18],
+            "bus": "FX"
+        },
+        {
+            "sound_pool": ["SyntheticSoundGenerator.detection_sound"],
+            "interval_range": [5.0, 18.0],
+            "volume_range": [-26, -20],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "EQ",
+                    "low_gain_db": -4.0,
+                    "mid_gain_db": 0.0,
+                    "high_gain_db": 2.0
+                }
+            ]
+        },
+        "Wind": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.2,
+                    "damping": 0.6
+                }
+            ]
+        },
+        "Glitch": {
+            "effects": [
+                {
+                    "type": "Compressor",
+                    "threshold_db": -15.0,
+                    "ratio": 4.0
+                },
+                {
+                    "type": "EQ",
+                    "low_gain_db": -6.0,
+                    "mid_gain_db": 3.0,
+                    "high_gain_db": 5.0
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.3,
+                    "damping": 0.5
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 150,
+                    "feedback": 0.1,
+                    "wet": 0.2
+                }
+            ]
+        }
+    }
+}

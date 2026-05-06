@@ -1,0 +1,125 @@
+{
+  "jobs": [
+    {
+      "map": "QFEP_Synthesis",
+      "edge": "F",
+      "score": 2,
+      "verdict": "misreads \u2014 teaches synthesis, not folding",
+      "edge_reads_as": "A (emergence) or K (integration)",
+      "paragraph": "The plate reads as integration rather than transformation. Four distinct spheres frame a central formula and specimen \u2014 a collection of parts made whole, not one principle becoming another. Edge F demands visible metamorphosis: the Rule 30 floor that becomes Sierpinski, the egg-l",
+      "hints": [
+        "Show specimen at three scales along path: small at spawn (egg), medium at midpoint (larva), large at center (imago) \u2014 Merian's lifecycle strip",
+        "Make floor pattern transform across zones: Rule 30 tiles near spawn becoming Sierpinski near center becoming BFS frontier near exit",
+        "Position spheres to show one becoming another: F sphere with particle trail dissolving into E sphere, or lambda/phi as mid-blend forms",
+        "Replace linear path with circular carousel: four stations around center, each showing formula at different \u03c6, visitor walks the transformation cycle",
+        "Make specimen visibly mid-fold: left half crystalline (\u03bb\u21920), right half organic (\u03c6>0), center is the hinge",
+        "Add three smaller specimens (miniatures of the transformation stages) in the corner positions, Haeckel Tafel 9 style"
+      ],
+      "report": "doc\\reports\\plate_critique_QFEP_Synthesis_F.json"
+    },
+    {
+      "map": "Crisis_Synthesis",
+      "edge": "K",
+      "score": 1,
+      "verdict": "wrong edge entirely",
+      "edge_reads_as": "A",
+      "paragraph": "This map teaches the Western mathematical foundations crisis (G\u00f6del, Russell, Escher, Florensky) synthesized through the QFEP formula. It is a coherent argument about limits of formal systems within a single cosmology. But Edge K demands multiple cosmologies shown as equally comp",
+      "hints": [
+        "Replace Western artifacts with at least 3-4 cosmologically distinct systems: one zone with Yoruba ifa board, one with Aboriginal songline painting, one with Tibetan thangka, one with Euclidean proof",
+        "Use radically different visual grammars per zone \u2014 concentric rings for thangka zone, dust-and-symbol for ifa zone, iconographic for songline zone, wireframe only for Euclidean zone",
+        "Create spatial 'rooms' or chambers \u2014 player walks from one complete knowledge system into another, teleporter does not connect zones in one world but jumps between worlds",
+        "Give each zone a different 'answer' to the same question (e.g., 'where am I?' answered by GPS in Euclidean zone, by ancestor-story in songline zone, by divination pattern in ifa zone)",
+        "Remove all synthesis \u2014 the map's teaching is that there IS no synthesis, no meta-frame. Player exits realizing they cannot hold all systems in one Cartesian space."
+      ],
+      "report": "doc\\reports\\plate_critique_Crisis_Synthesis_K.json"
+    },
+    {
+      "map": "PostCrisis_Synthesis",
+      "edge": "M",
+      "score": 1,
+      "verdict": "misreads",
+      "edge_reads_as": "unclear",
+      "paragraph": "This map teaches synthesis and retrospective organization, not authenticity collapse. It presents a clean museum of labeled methodologies \u2014 rhizome, commons, molecular design \u2014 with explicit categorization and no ambiguity. Edge M requires specimens of indeterminate provenance, f",
+      "hints": [
+        "Replace all labeled stations with five unlabeled specimens (text fragments, visual works, code samples, recipes, sounds)",
+        "Provide forensic investigation tools: pattern analyzer, authorship detector, training-data tracer",
+        "Remove explicit labels entirely \u2014 make provenance the investigation, not the given",
+        "Design 2-3 specimens to be genuinely indeterminate: model-assisted human work, human-curated model output, mixed provenance",
+        "End with a reflection panel asking: 'Did wanting to know change how you read? Does the answer matter?'",
+        "Consider moving this map to Edge K (Incompleteness) or F (Transformation) where synthesis/retrospective fits better",
+        "If keeping for Edge M: introduce the Steyerl/Paglen framing \u2014 show works where the question of authenticity has already collapsed"
+      ],
+      "report": "doc\\reports\\plate_critique_PostCrisis_Synthesis_M.json"
+    },
+    {
+      "map": "BodyProg_Dress",
+      "edge": "E",
+      "score": 2,
+      "verdict": "misreads as classification",
+      "edge_reads_as": "D",
+      "paragraph": "This plate teaches Edge D (classification/identity-slippage), not Edge E (embodiment/continuous-discrete). The three dress mannequins read as discrete identity categories awaiting selection \u2014 a taxonomy problem, not an embodiment problem. Edge E requires visible tension between c",
+      "hints": [
+        "Show VR hand trails being snapped to grid vertices in real-time \u2014 make the quantization visible",
+        "Add chronophotographic overlay: a walking figure split into discrete frames along the grid, Muybridge-style",
+        "Replace static dresses with motion-capture skeleton sequences showing continuous gesture quantized to discrete poses",
+        "Add temporal strip on wall: smooth sine wave of body motion above, stepped/pixelated version below",
+        "Make grid cells light up when player crosses them \u2014 show mismatch between smooth VR locomotion and discrete cell activation",
+        "Consider: player's own body captured as Marey-style composite \u2014 continuous motion frozen into one multi-exposure frame",
+        "Reframe 'outfit' as motion signature: show how continuous dance gets classified into discrete movement archetypes (Classical Gait, Wicked Stride, Custom Glitch)"
+      ],
+      "report": "doc\\reports\\plate_critique_BodyProg_Dress_E.json"
+    },
+    {
+      "map": "Joints_Kinematics",
+      "edge": "E",
+      "score": 2,
+      "verdict": "misreads edge \u2014 teaches IK technique, not embodiment tension",
+      "edge_reads_as": "J (joining/composition technique) or K (kinematic implementation) \u2014 not E",
+      "paragraph": "This plate teaches articulated joint hierarchies and inverse kinematics \u2014 a technical implementation pattern \u2014 rather than the phenomenological mismatch between continuous bodies and discrete algorithms. The purple wave pattern hints at continuous motion, but there is no visible ",
+      "hints": [
+        "Replace IK artifact with grid-snapping dance floor that visually highlights when player motion quantises to discrete cells",
+        "Add visual trail system showing continuous VR controller path versus discrete algorithm interpretation (Marey-style motion frames)",
+        "Create two spatial paths: one rewarding grid-aligned movement, one punishing it \u2014 force player to choose dance grammar",
+        "Expand floor pattern to show chronophotographic frames of player body discretised across time-space",
+        "Add Vitruvian circle/square overlay that constrains body into geometric grid when activated",
+        "Introduce CA or automaton that advances only when player's gait matches its discrete rhythm",
+        "Show body-trace artifacts: continuous gesture frozen into discrete pose keyframes along path"
+      ],
+      "report": "doc\\reports\\plate_critique_Joints_Kinematics_E.json"
+    },
+    {
+      "map": "QFEP_Sandbox",
+      "edge": "H",
+      "score": 2,
+      "verdict": "reads as parameterization, not apparatus-as-phenomenon",
+      "edge_reads_as": "C (Parameterization)",
+      "paragraph": "The map reads as an interactive control panel operating on a separate simulation, not as an apparatus that constitutively makes the phenomenon it measures. Edge H requires the apparatus and the phenomenon to be visibly the same thing \u2014 'the path is the apparatus' \u2014 but here the s",
+      "hints": [
+        "Make reactor form morph based on viewer position \u2014 west approach crystallizes it, east approach dissolves it; the path literally is the apparatus",
+        "Remove sliders entirely; let learner's spatial position (x,y on floor) implicitly set \u03bb and \u03c6 \u2014 standing becomes measuring",
+        "Add three 'measurement stations' at different grid positions; standing at each station produces a different visual reading of the same central phenomenon (wave/particle/field)",
+        "Make particles trace visible beams from learner position to reactor \u2014 the observation ray is part of the diagram",
+        "Split reactor into two overlaid forms (crystalline + chaotic) with position-dependent opacity \u2014 apparatus-cut makes one real and other virtual"
+      ],
+      "report": "doc\\reports\\plate_critique_QFEP_Sandbox_H.json"
+    },
+    {
+      "map": "QFEP_Edge_Of_Chaos",
+      "edge": "I",
+      "score": 2,
+      "verdict": "misreads \u2014 teaches emergence, not debt",
+      "edge_reads_as": "H (phase transition / emergent criticality)",
+      "paragraph": "The plate presents edge-of-chaos emergence as a phenomenon to witness, not entropy debt as a cost to discover. The Turing-pattern floor and particle systems demonstrate self-organization beautifully, but they celebrate complexity's arrival without asking what paid for it. Edge I ",
+      "hints": [
+        "Add a wall or threshold: player crosses from front (sees pattern) to back (sees cost apparatus \u2014 cooling system, energy meter, heat exhaust)",
+        "Include a heat sink artifact that glows hotter as floor patterns complexify \u2014 make thermal cost visible in real-time",
+        "Split the space: spawn side shows emergence beauty, teleporter side shows the entropy bill (decaying particles, exhausted resources)",
+        "Add decay_uniform modifier to one zone \u2014 same Turing algorithm, but visibly aging/consuming as it runs",
+        "Replace one particle system with a 'what this costs' visualization (wattage counter, thermometer rising, worker-hand animation)",
+        "Use teleporter as the teaching threshold \u2014 step through it and the floor inverts to show entropic exhaust beneath the pattern",
+        "Pair artifacts: one generates pattern (edge_core), one shows its shadow cost (entropy_meter, heat_vent) \u2014 position them as before/after revelation"
+      ],
+      "report": "doc\\reports\\plate_critique_QFEP_Edge_Of_Chaos_I.json"
+    }
+  ]
+}

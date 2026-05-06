@@ -1,0 +1,70 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/clustering_algorithms/ClusteringAlgorithms.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/clustering_algorithms/clustering_algorithms.tscn`.
+Your implementation must bring the `Clustering Algorithms` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+﻿# Clustering Algorithms Sandbox
+
+
+## Folder Summary
+
+The `Clustering Algorithms` module provides a 3D sandbox for exploring the ideas behind the Clustering Algorithms workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `clustering_algorithms.tscn`, controller scripts such as `ClusteringAlgorithms.gd` and `clustering_algorithms_tutorial.gd`, and supporting assets including `code_prompt.txt` and `meta.json`.
+
+## Scene Assets
+- `clustering_algorithms.tscn` — root scene with camera, ground plane, data/centroid containers, translucent radius disc, and HUD labels.
+- `ClusteringAlgorithms.gd` — controller script that generates samples, runs K-Means / Agglomerative / DBSCAN, and updates the visual state.
+- `code_prompt.txt` — prompt for regenerating the script with an AI assistant.
+- `clustering_algorithms_tutorial.gd` — in-world BBCode tutorial card.
+- `meta.json` — metadata for VR menus, search, and scene catalogues.
+
+## How It Works
+1. `_generate_dataset()` samples `sample_count` points around randomly spaced centres (plus optional uniform noise) using a deterministic `dataset_seed`.
+2. `_build_point_meshes()` creates a `MeshInstance3D` for each datapoint, storing references to its mesh/material so later updates are cheap.
+3. `run_clustering()` dispatches to one of the three algorithms:
+   - **K-Means**: k initial centroids, a handful of Lloyd iterations.
+   - **Agglomerative**: naive single-link merges until `cluster_count` groups remain.
+   - **DBSCAN**: region query + expansion with configurable `eps` and `min_points`.
+4. `_apply_cluster_visuals()` recolours points, lifts anomalies, and `_update_centroid_visuals()` emits glowing centroid spheres.
+5. `_update_labels()` reports the selected algorithm, effective cluster count, inertia (average squared distance to centroids), and an approximate silhouette score.
+
+## Exported Controls (Inspector)
+- `sample_count` (30–600) – total samples to generate.
+- `cluster_count` (2–6) – requested clusters for K-Means/Agglomerative.
+- `cluster_spread` – Gaussian noise around base centres.
+- `noise_ratio` – fraction of uniform “noise” points.
+- `dbscan_eps` / `dbscan_min_points` – density thresholds for DBSCAN.
+- `kmeans_iterations` – Lloyd iterations to run when in K-Means mode.
+- `algorithm_mode` – initial algorithm selection (K-Means, Agglomerative, DBSCAN).
+- `animate_clusters` – toggle the gentle Y-axis lift on assigned points.
+
+### Helper Methods
+- `run_clustering()` – recompute assignments after tweaking exports.
+- Use `cycle_algorithm_mode()` from a button or console to compare algorithms on the same dataset.
+- `reset_dataset(new_seed)` – reseed RNG, rebuild samples, rerun clustering.
+
+## Usage Notes
+- Changing any export (e.g., `cluster_count`, `dbscan_eps`) then calling `run_clustering()` immediately updates the visualisation.
+- Use `cycle_algorithm_mode()` from a button or console to compare algorithms on the same dataset.
+- The translucent disc scales to roughly cover the current dataset extent.
+
+## Extending
+- Hook UI sliders to thresholds for live exploration sessions.
+- Replace the synthetic generator with logged telemetry or embed dimensionality reduction for higher-D data.
+- Add hull meshes or connection lines per cluster for deeper insight into algorithm behaviour.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Expose inspector controls for `dataset_seed`, `algorithm_mode`, `animate_clusters`.
+- Resolve @onready references for `data_root`, `centroids_root`, `threshold_visual`, `title_label`, `mode_label`, `summary_label`.
+- Implement the lifecycle helpers `_ready()`, `_generate_dataset()`, `_build_point_meshes()`, `run_clustering()`, `cycle_algorithm_mode()`, `reset_dataset()`.
+- Retain constant definitions such as `MODE_SEQUENCE`, `PALETTE`, `POINT_RADIUS`, `NOISE_COLOR`.
+- Maintain state containers including `sample_count`, `cluster_count`, `cluster_spread`, `noise_ratio`, `dbscan_eps`, `dbscan_min_points`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

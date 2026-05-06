@@ -1,168 +1,232 @@
+@tool
 extends Node3D
 
-const STEP_COUNT := 96
-const TOTAL_TURNS := 2.5
-const BASE_RADIUS := 1.6
-const WALKWAY_OFFSET := 0.9
-const STEP_RISE := 0.32
-const STEP_THICKNESS := 0.22
-const STEP_WIDTH := 1.6
-const MIN_STEP_DEPTH := 0.4
-const WAVE_AMPLITUDE := 0.45
-const WAVE_FREQUENCY := 2.0
-const COLUMN_MARGIN := 2.0
+# ----------------- Parameters -----------------
 
-var _step_material: StandardMaterial3D
+# @identity
+# essence: r(theta) = base_radius + sine_mod * sin(mod_freq * theta), y = step_rise * i
+# desire: Climb a helical staircase whose radius breathes with sine modulation as you ascend
+# critical_parameter: SINE_MODULATION — amplitude of the radial sine wave that makes the staircase breathe
+# triggers: _compute_samples() calculates each step position from modulated polar coordinates
+# emerges: a walkable sine function wrapped into architecture — your body traces the wave by climbing
+# needs: VR locomotion and collision [has], staircase physics [has]
+# relationships: depends on polar-to-Cartesian conversion with sine modulation; contrasts with bernini_columns (staircase vs column spirals); unlocks wave-as-architecture
+# truth: A spiral staircase with sine-modulated radius is a helix that breathes.
 
-func _ready():
-	_step_material = _create_step_material()
-	_create_central_column()
-	var step_data = _compute_step_data()
-	_create_staircase(step_data)
-	_create_start_marker(step_data)
-	_create_top_marker(step_data)
+@export var STEP_COUNT: int = 80
+@export var TOTAL_TURNS: float = 2.0
+@export var BASE_RADIUS: float = 1.6
+@export var WALKWAY_OFFSET: float = 0.9
+@export var STEP_RISE: float = 0.10
+@export var STEP_THICKNESS: float = 0.22
+@export var STEP_WIDTH: float = 2.0
+@export var MIN_STEP_DEPTH: float = 0.4
+@export var WAVE_AMPLITUDE: float = 0.0   # set >0 for wavy path
+@export var WAVE_FREQUENCY: float = 2.0
+@export var COLLIDER_HEIGHT_OFFSET: float = 0.3 # small lift so it sits on the tread
+@export var show_planes: bool = true   # visible bridge planes
+@export var show_center_pole: bool = false
+@export var debug: bool = false
 
-func _create_central_column():
-	var total_height = float(STEP_COUNT) * STEP_RISE + COLUMN_MARGIN
-	var column_mesh = CylinderMesh.new()
-	column_mesh.top_radius = BASE_RADIUS
-	column_mesh.bottom_radius = BASE_RADIUS
-	column_mesh.height = total_height
-	column_mesh.radial_segments = 64
+var _mat_step: StandardMaterial3D
+var _mat_plane: StandardMaterial3D
 
-	var column_instance = MeshInstance3D.new()
-	column_instance.name = "CentralColumn"
-	column_instance.mesh = column_mesh
-	column_instance.position = Vector3(0, total_height * 0.5, 0)
-	add_child(column_instance)
+func _ready() -> void:
+	_mat_step = _make_step_mat()
+	_mat_plane = _make_plane_mat()
+	_build()
 
-	var column_body = StaticBody3D.new()
-	column_body.name = "CentralColumnBody"
-	column_body.position = column_instance.position
+# ----------------- Build -----------------
+func _build() -> void:
+	# clear
+	for c in get_children():
+		c.queue_free()
 
-	var column_shape = CollisionShape3D.new()
-	var cylinder_shape = CylinderShape3D.new()
-	cylinder_shape.height = total_height
-	cylinder_shape.radius = BASE_RADIUS
-	column_shape.shape = cylinder_shape
-	column_body.add_child(column_shape)
-	add_child(column_body)
+	var data := _compute_samples()
 
-func _compute_step_data() -> Array:
-	var data: Array = []
-	var denominator = max(1, STEP_COUNT - 1)
-	for i in range(STEP_COUNT):
-		var progress = float(i) / float(denominator)
-		var angle = progress * TOTAL_TURNS * TAU
-		var wave = sin(angle * WAVE_FREQUENCY) * WAVE_AMPLITUDE
-		var radius = BASE_RADIUS + WALKWAY_OFFSET + wave
-		var step_top = float(i) * STEP_RISE
-		var center_y = step_top - STEP_THICKNESS * 0.5
-		var position = Vector3(
-			cos(angle) * radius,
-			center_y,
-			sin(angle) * radius
-		)
-		data.append({
-			"angle": angle,
-			"position": position,
-			"radius": radius,
-			"top": step_top
-		})
-	return data
+	# keep roots & spans so we can bridge after we know both steps
+	var roots: Array[Node3D] = []
+	var spans: Array[float] = []
 
-func _create_staircase(step_data: Array) -> void:
-	var steps_root = Node3D.new()
+	var steps_root := Node3D.new()
 	steps_root.name = "StairSteps"
 	add_child(steps_root)
 
-	for i in range(step_data.size()):
-		var current = step_data[i]
-		var prev = step_data[max(i - 1, 0)]
-		var nxt = step_data[min(i + 1, step_data.size() - 1)]
+	for i in range(data.size()):
+		var current = data[i]
+		var prev = data[max(i - 1, 0)]
+		var nxt = data[min(i + 1, data.size() - 1)]
 
-		var current_pos: Vector3 = current["position"]
-		var prev_pos: Vector3 = prev["position"]
-		var nxt_pos: Vector3 = nxt["position"]
+		var current_pos: Vector3 = current.position
+		var prev_pos: Vector3 = prev.position
+		var nxt_pos: Vector3 = nxt.position
 
-		var root = Node3D.new()
+		var root := Node3D.new()
 		root.name = "Step_%03d" % i
 		root.position = current_pos
 
-		var radial = Vector3(current_pos.x, 0, current_pos.z)
-		if radial.length() < 0.001:
-			radial = Vector3.FORWARD
-		radial = radial.normalized()
-
-		var tangent_vec = (nxt_pos - prev_pos)
-		tangent_vec.y = 0.0
-		if tangent_vec.length() < 0.001:
-			tangent_vec = Vector3(-radial.z, 0, radial.x)
-		tangent_vec = tangent_vec.normalized()
-
-		root.basis = Basis(radial, Vector3.UP, tangent_vec).orthonormalized()
+		# local axes: x = radial (width), y = up, z = tangent (depth)
+		var radial := Vector3(current_pos.x, 0, current_pos.z).normalized()
+		var tangent := (nxt_pos - prev_pos); tangent.y = 0.0
+		if tangent.length() < 0.001:
+			tangent = Vector3(-radial.z, 0, radial.x)
+		tangent = tangent.normalized()
+		root.basis = Basis(radial, Vector3.UP, tangent).orthonormalized()
 		steps_root.add_child(root)
 
-		var forward_span = (nxt_pos - current_pos)
-		forward_span.y = 0.0
-		var backward_span = (current_pos - prev_pos)
-		backward_span.y = 0.0
-		var span_length = 0.5 * forward_span.length() + 0.5 * backward_span.length()
-		if span_length < MIN_STEP_DEPTH:
-			span_length = MIN_STEP_DEPTH
+		# span (depth) around the helix; enforce minimum
+		var forward_span := (nxt_pos - current_pos); forward_span.y = 0.0
+		var backward_span := (current_pos - prev_pos); backward_span.y = 0.0
+		var span := 0.5 * forward_span.length() + 0.5 * backward_span.length()
+		if span < MIN_STEP_DEPTH:
+			span = MIN_STEP_DEPTH
 
-		var box_mesh = BoxMesh.new()
-		box_mesh.size = Vector3(STEP_WIDTH, STEP_THICKNESS, span_length * 1.35)
+		# mesh
+		var m := BoxMesh.new()
+		m.size = Vector3(STEP_WIDTH, STEP_THICKNESS, span * 1.35)
+		var mi := MeshInstance3D.new()
+		mi.mesh = m
+		mi.material_override = _mat_step
+		root.add_child(mi)
 
-		var step_mesh = MeshInstance3D.new()
-		step_mesh.mesh = box_mesh
-		step_mesh.material_override = _step_material
-		root.add_child(step_mesh)
+		# collider
+		var body := StaticBody3D.new()
+		var cs := CollisionShape3D.new()
+		var bs := BoxShape3D.new(); bs.size = m.size
+		cs.shape = bs
+		body.add_child(cs)
+		root.add_child(body)
 
-		var static_body = StaticBody3D.new()
-		static_body.name = "StepBody"
-		var collision_shape = CollisionShape3D.new()
-		var box_shape = BoxShape3D.new()
-		box_shape.size = box_mesh.size
-		collision_shape.shape = box_shape
-		static_body.add_child(collision_shape)
-		root.add_child(static_body)
+		roots.append(root)
+		spans.append(span)
 
-func _create_step_material() -> StandardMaterial3D:
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(0.9, 0.85, 0.8)
-	mat.roughness = 0.6
-	mat.metallic = 0.0
-	mat.emission_enabled = true
-	mat.emission = Color(0.2, 0.25, 0.3)
-	mat.emission_energy_multiplier = 0.25
-	return mat
+		# when we have current & previous, add the plane bridge between their facing edges
+		if show_planes and i > 0:
+			_add_plane_bridge(roots[i - 1], spans[i - 1], roots[i], spans[i])
 
-func _create_start_marker(step_data: Array):
-	if step_data.is_empty():
-		return
-	var first = step_data[0]
-	var first_pos: Vector3 = first["position"]
-	var radial = Vector3(first_pos.x, 0, first_pos.z)
-	if radial.length() < 0.001:
-		radial = Vector3.BACK
-		radial = radial.normalized()
-	var marker = Marker3D.new()
-	marker.name = "PlayerStart"
-	marker.position = first_pos + Vector3(0, STEP_THICKNESS * 0.5 + 0.05, 0) + radial * 0.6
-	add_child(marker)
+	if show_center_pole:
+		_add_center_pole(float(STEP_COUNT - 1) * STEP_RISE + 1.0)
 
-func _create_top_marker(step_data: Array):
-	if step_data.is_empty():
-		return
-	var last = step_data[step_data.size() - 1]
-	var last_pos: Vector3 = last["position"]
-	var radial = Vector3(last_pos.x, 0, last_pos.z)
-	if radial.length() < 0.001:
-		radial = Vector3.FORWARD
-		radial = radial.normalized()
-	var marker = Marker3D.new()
-	marker.name = "Summit"
-	marker.position = last_pos + Vector3(0, STEP_THICKNESS * 0.5 + 0.05, 0) + radial * 0.4
-	add_child(marker)
+# ----------------- Plane bridge (edge-to-edge) -----------------
+func _add_plane_bridge(a_root: Node3D, a_span: float, b_root: Node3D, b_span: float) -> void:
+	# --- compute facing edges in WORLD space (unchanged logic) ---
+	var b_world := b_root.global_transform.origin
+	var a_dir_local := a_root.to_local(b_world)
+	var a_sign := signf(a_dir_local.z); if a_sign == 0.0: a_sign = 1.0
 
+	var a_edge_center := a_root.to_global(Vector3(0, STEP_THICKNESS * 0.5, a_sign * (a_span * 0.5)))
+	var a_left  := a_edge_center + a_root.basis.x * (-STEP_WIDTH * 0.5)
+	var a_right := a_edge_center + a_root.basis.x * ( STEP_WIDTH * 0.5)
+
+	var a_world := a_root.global_transform.origin
+	var b_dir_local := b_root.to_local(a_world)
+	var b_sign := signf(b_dir_local.z); if b_sign == 0.0: b_sign = -1.0
+
+	# near edge on B (opposite sign so it's the edge facing A)
+	var b_edge_center := b_root.to_global(Vector3(0, STEP_THICKNESS * 0.5, -b_sign * (b_span * 0.5)))
+	var b_left  := b_edge_center + b_root.basis.x * (-STEP_WIDTH * 0.5)
+	var b_right := b_edge_center + b_root.basis.x * ( STEP_WIDTH * 0.5)
+
+	# --- build quad (two tris) in WORLD space ---
+	var verts_world := PackedVector3Array([a_left, a_right, b_right,  a_left, b_right, b_left])
+
+	# --- convert verts to STAIRCASE-LOCAL space so children align with this node ---
+	var to_local: Transform3D = self.global_transform.affine_inverse()
+	var verts_local := PackedVector3Array()
+	verts_local.resize(verts_world.size())
+	for i in range(verts_world.size()):
+		verts_local[i] = to_local * verts_world[i]
+		verts_local[i].y += COLLIDER_HEIGHT_OFFSET  # lift a tad so it sits on the tread
+
+	# --- visible plane (local space) ---
+	var am := ArrayMesh.new()
+	var arr := []
+	arr.resize(Mesh.ARRAY_MAX)
+	arr[Mesh.ARRAY_VERTEX] = verts_local
+	var n := (verts_local[1] - verts_local[0]).cross(verts_local[5] - verts_local[0]).normalized()
+	arr[Mesh.ARRAY_NORMAL] = PackedVector3Array([n, n, n, n, n, n])
+	am.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
+
+	var plane := MeshInstance3D.new()
+	plane.name = "BridgePlane"
+	plane.mesh = am
+	plane.material_override = _mat_plane
+	add_child(plane)
+
+	# --- matching collider (same local verts) ---
+	var body := StaticBody3D.new()
+	body.name = "BridgeCollider"
+	var col := CollisionShape3D.new()
+	var shape := ConcavePolygonShape3D.new()
+	shape.data = verts_local
+	col.shape = shape
+	body.add_child(col)
+	add_child(body)
+
+	if debug:
+		print("Bridge plane added between:", a_root.name, " <-> ", b_root.name)
+
+
+# ----------------- Helpers -----------------
+class StepSample:
+	var position: Vector3
+	func _init(p: Vector3) -> void:
+		position = p
+
+func _compute_samples() -> Array:
+	var out: Array = []
+	var denom = max(1, STEP_COUNT - 1)
+	for i in range(STEP_COUNT):
+		var t := float(i) / float(denom)
+		var ang := t * TOTAL_TURNS * TAU
+		var wave := sin(ang * WAVE_FREQUENCY) * WAVE_AMPLITUDE
+		var r := BASE_RADIUS + WALKWAY_OFFSET + wave
+		var top := float(i) * STEP_RISE
+		var center_y := top - STEP_THICKNESS * 0.5
+		out.append(StepSample.new(Vector3(cos(ang) * r, center_y, sin(ang) * r)))
+	return out
+
+func _add_center_pole(h: float) -> void:
+	var m := CylinderMesh.new()
+	m.top_radius = BASE_RADIUS
+	m.bottom_radius = BASE_RADIUS
+	m.height = h
+	var mi := MeshInstance3D.new()
+	mi.mesh = m
+	mi.position.y = h * 0.5
+	add_child(mi)
+
+	# collider
+	var body := StaticBody3D.new()
+	var cs := CollisionShape3D.new()
+	var shape := CylinderShape3D.new()
+	shape.radius = BASE_RADIUS
+	shape.height = h
+	cs.shape = shape
+	body.add_child(cs)
+	body.position = mi.position
+	add_child(body)
+
+func _make_step_mat() -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(0.85, 0.85, 0.85)
+	m.roughness = 0.6
+	return m
+
+func _make_plane_mat() -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(1.0, 0.2, 1.0, 0.25)  # pink, semi-transparent
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+	m.render_priority = 1
+	return m
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,36 @@
+{
+  "name": "Y-Branch Distillation",
+  "description": "Simple Y-branch with two spiral condensers feeding into beakers",
+  "schematic": [
+    "     ┌─○─┐     ",
+    "     │ F │     ",
+    "     └─┬─┘     ",
+    "       │       ",
+    "     ┌─┴─┐     ",
+    "    ╱  Y  ╲    ",
+    "   ╱       ╲   ",
+    "  ◎         ◎  ",
+    "  S         S  ",
+    "  ◎         ◎  ",
+    "  │         │  ",
+    "  ▽         ▽  ",
+    "  B         B  "
+  ],
+  "legend": {
+    "F": "flask",
+    "Y": "ypipe",
+    "S": "spiral",
+    "B": "beaker",
+    "│": "straight",
+    "◎": "coil turn",
+    "▽": "drip"
+  },
+  "path": "flask,f,ypipe,[,l,spiral,f,beaker,],r,spiral,f,beaker",
+  "layout": {
+    "segment_length": 0.2,
+    "tube_radius": 0.015
+  },
+  "rack_info": {
+    "system": "glass"
+  }
+}

@@ -1,0 +1,2286 @@
+{
+	"registry_info": {
+		"name": "isosurfaces",
+		"description": "Marching cubes, metaballs, implicit surfaces, and isosurface extraction artifacts",
+		"category": "proceduralgeneration"
+	},
+	"artifacts": {
+		"voxel_noise_demo": {
+			"lookup_name": "voxel_noise_demo",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/spacetopology/marchingcubes/voxel_noise_demo.tscn",
+			"class_name": "VoxelNoiseMarchingCubes",
+			"description": "CPU marching cubes with 3D noise \u2014 the working cave/blob generator. Glass shader with wireframe overlay.",
+			"interactions": [
+				"auto-generates on ready",
+				"regenerate() to rebuild"
+			],
+			"parameters": {
+				"chunk_size": "World size (default 32)",
+				"num_points_per_axis": "Voxel resolution (default 32)",
+				"iso_level": "Isosurface threshold 0-1 (default 0.5)",
+				"noise_scale": "Noise frequency (default 0.05)",
+				"noise_octaves": "Fractal octaves (default 4)",
+				"footprint": [
+					1,
+					11,
+					31
+				],
+				"size_group": "world_scale"
+			},
+			"compute": "HEAVY \u2014 CPU nested loop, generates mesh on ready",
+			"tags": [
+				"marching_cubes",
+				"noise",
+				"voxel",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"name": "voxel_noise_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					32.0,
+					32.0,
+					32.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					32.0,
+					32.0
+				],
+				"max_dimension_m": 32.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				32.0,
+				1,
+				32.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"gyroid_demo": {
+			"lookup_name": "gyroid_demo",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn",
+			"class_name": "TerrainGeneratorGyroid",
+			"description": "GPU compute gyroid minimal surface \u2014 domain-warped, organic sculpture emerging from nothing. Triply periodic implicit function.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"parameters": {
+				"noiseScale": "Domain warp intensity",
+				"isoLevel": "Surface threshold",
+				"scale": "World scale",
+				"footprint": [
+					41,
+					41,
+					41
+				],
+				"size_group": "world_scale"
+			},
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"gyroid",
+				"sculpture",
+				"gpu",
+				"implicit",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"name": "gyroid_demo",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.0,
+					20.0,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					20.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				20.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"fountain_demo": {
+			"lookup_name": "fountain_demo",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/FountainDemo.tscn",
+			"class_name": "TerrainGeneratorFountain",
+			"description": "GPU compute fountain shape \u2014 vertical form generated by marching cubes.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"fountain",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					1,
+					11,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "fountain_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					10.0,
+					10.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				10.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"mc_sculpt_vr": {
+			"lookup_name": "mc_sculpt_vr",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn",
+			"class_name": "TerrainGeneratorSculpt",
+			"description": "GPU SDF sculpting \u2014 add spherical blobs with smooth union. Up to 500 blobs, real-time mesh extraction.",
+			"interactions": [
+				"add_blob(pos, radius) to sculpt",
+				"clear_blobs() to reset"
+			],
+			"parameters": {
+				"numBlobs": "Active blob count",
+				"isoLevel": "Surface threshold"
+			},
+			"compute": "MEDIUM \u2014 GPU compute, real-time updates",
+			"tags": [
+				"marching_cubes",
+				"sculpt",
+				"sdf",
+				"gpu",
+				"interactive",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.55,
+					2.0,
+					2.0
+				],
+				"aabb_center": [
+					0.27,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					2.0
+				],
+				"max_dimension_m": 2.55,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"mc_portal_landscape": {
+			"lookup_name": "mc_portal_landscape",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_portal_landscape.tscn",
+			"class_name": "TerrainGeneratorPortals",
+			"description": "GPU terrain with portal arches \u2014 landscape-scale marching cubes with embedded portal geometry.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"terrain",
+				"portals",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					50,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_portal_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~3600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"mc_cave": {
+			"lookup_name": "mc_cave",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
+			"class_name": "TerrainGeneratorBase",
+			"description": "GPU cave system \u2014 noise-driven marching cubes producing walkable cave geometry.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"cave",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					46,
+					44,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_cave",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"mc_torus_sculpture": {
+			"lookup_name": "mc_torus_sculpture",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+			"class_name": "TerrainGeneratorTorus",
+			"description": "GPU torus sculpture \u2014 marching cubes extracting torus isosurface.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"torus",
+				"sculpture",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					50,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_torus_sculpture",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~576"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"mc_shapes_gallery": {
+			"lookup_name": "mc_shapes_gallery",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingShapesGallery.tscn",
+			"class_name": "MarchingShapesGallery",
+			"description": "Gallery of multiple marching cubes shapes \u2014 sphere, torus, and more displayed side by side.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "HEAVY \u2014 multiple GPU compute passes",
+			"tags": [
+				"marching_cubes",
+				"gallery",
+				"shapes",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					1,
+					26,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_shapes_gallery",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.06,
+					1.95,
+					4.7
+				],
+				"aabb_center": [
+					-0.03,
+					-0.1,
+					-5.85
+				],
+				"grid_cells": [
+					10.0,
+					5.0
+				],
+				"max_dimension_m": 9.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"mc_inside_cave": {
+			"lookup_name": "mc_inside_cave",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+			"description": "GPU interior cave view \u2014 marching cubes cave seen from inside.",
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"cave",
+				"interior",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					50,
+					30,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_inside_cave",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"mc_flat_landscape": {
+			"lookup_name": "mc_flat_landscape",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+			"class_name": "TerrainGeneratorFlat",
+			"description": "GPU flat terrain \u2014 marching cubes landscape with gentle noise.",
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"terrain",
+				"flat",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					36,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_flat_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~2500"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"mc_overhang_landscape": {
+			"lookup_name": "mc_overhang_landscape",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn",
+			"class_name": "TerrainGeneratorOverhang",
+			"description": "GPU overhang terrain \u2014 landscape with overhanging rock formations.",
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"terrain",
+				"overhang",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					50,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_overhang_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~3600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"animated_noise_explorer": {
+			"lookup_name": "animated_noise_explorer",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/animated_noise_explorer.tscn",
+			"class_name": "AnimatedNoiseExplorer",
+			"description": "Animated noise field explorer \u2014 watch marching cubes extract surfaces from evolving noise in real-time.",
+			"compute": "MEDIUM \u2014 GPU compute shader, animated",
+			"tags": [
+				"marching_cubes",
+				"noise",
+				"animated",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					4,
+					5,
+					4
+				],
+				"size_group": "environment"
+			},
+			"name": "animated_noise_explorer",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"grid_overlay",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"mc_base": {
+			"lookup_name": "mc_base",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
+			"description": "Base GPU marching cubes scene \u2014 the core implementation.",
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"base",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					7,
+					41,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_base",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"nakama_metaballs": {
+			"lookup_name": "nakama_metaballs",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.tscn",
+			"description": "Kouhei Nakama-inspired organic metaballs \u2014 60 animated blobs with subsurface scattering shader. Approximated mesh via sphere deformation.",
+			"parameters": {
+				"num_metaballs": "Blob count (default 60)",
+				"container_size": "Bounds (default 5x5x5)",
+				"movement_speed": "Animation speed",
+				"material_color": "Surface color",
+				"footprint": [
+					1,
+					3,
+					6
+				],
+				"size_group": "environment"
+			},
+			"compute": "HEAVY \u2014 CPU per-frame mesh rebuild with metaball field evaluation",
+			"tags": [
+				"metaballs",
+				"organic",
+				"animated",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"name": "nakama_metaballs",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"raymarched_metaballs": {
+			"lookup_name": "raymarched_metaballs",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
+			"description": "Shader raymarched metaballs \u2014 9 animated balls rendered via SDF raymarching on a cube mesh. Real-time implicit surface visualization.",
+			"parameters": {
+				"metaball_count": "Number of balls (default 9)",
+				"blend_factor": "SDF blend smoothness",
+				"base_strength": "Field strength",
+				"animate_strength": "Pulse animation"
+			},
+			"compute": "LIGHT \u2014 GPU shader only, no mesh extraction",
+			"tags": [
+				"metaballs",
+				"raymarching",
+				"sdf",
+				"implicit",
+				"shader",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.0,
+					12.0,
+					12.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					12.0,
+					12.0
+				],
+				"max_dimension_m": 12.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				12.0,
+				1,
+				12.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"metaball_world": {
+			"lookup_name": "metaball_world",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballworld.tscn",
+			"class_name": "MetaballGenerator",
+			"description": "Full marching cubes metaball system \u2014 proper isosurface extraction from metaball field. Animated, with collision. The real deal.",
+			"parameters": {
+				"grid_size": "Voxel grid resolution (default 64x32x64)",
+				"cell_size": "Cell size (default 0.5)",
+				"iso_level": "Surface threshold (default 1.0)",
+				"metaball_count": "Blob count (default 8)",
+				"animation_speed": "Movement speed",
+				"footprint": [
+					21,
+					6,
+					21
+				],
+				"size_group": "world_scale"
+			},
+			"compute": "HEAVY \u2014 CPU marching cubes, periodic mesh rebuild",
+			"tags": [
+				"metaballs",
+				"marching_cubes",
+				"animated",
+				"collision",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"name": "metaball_world",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.66,
+					7.28,
+					2.49
+				],
+				"aabb_center": [
+					0.04,
+					-0.36,
+					0.05
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 7.28,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"fifteen_cases_demo": {
+			"lookup_name": "fifteen_cases_demo",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/fifteen_cases_demo.tscn",
+			"class_name": "FifteenCasesController",
+			"description": "Interactive display of the 15 unique marching cubes cases (from 256 total). Educational \u2014 shows how the lookup table works.",
+			"compute": "LIGHT \u2014 static mesh display",
+			"tags": [
+				"marching_cubes",
+				"educational",
+				"cases",
+				"lookup_table",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					1,
+					7,
+					11
+				],
+				"size_group": "world_scale"
+			},
+			"name": "fifteen_cases_demo",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.79,
+					0.79,
+					4.79
+				],
+				"aabb_center": [
+					0.36,
+					0.36,
+					0.36
+				],
+				"grid_cells": [
+					9.0,
+					5.0
+				],
+				"max_dimension_m": 8.79,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"rhizome_cave_demo": {
+			"lookup_name": "rhizome_cave_demo",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"class_name": "RhizomeCaveDemoController",
+			"description": "Rhizomatic cave \u2014 Deleuze-inspired branching cave generation using growth patterns + marching cubes.",
+			"compute": "HEAVY \u2014 CPU growth simulation + marching cubes",
+			"tags": [
+				"marching_cubes",
+				"rhizome",
+				"cave",
+				"growth",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"postfoundationscrisis"
+			],
+			"sequence": "postfoundationscrisis",
+			"parameters": {
+				"footprint": [
+					1,
+					16,
+					26
+				],
+				"size_group": "world_scale"
+			},
+			"name": "rhizome_cave_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"mc_terrain_demo": {
+			"lookup_name": "mc_terrain_demo",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+			"class_name": "TerrainDemoController",
+			"description": "CPU terrain generation demo \u2014 marching cubes terrain with configurable noise parameters.",
+			"compute": "HEAVY \u2014 CPU marching cubes terrain",
+			"tags": [
+				"marching_cubes",
+				"terrain",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					1,
+					21,
+					11
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_terrain_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"queer_marching_cave": {
+			"lookup_name": "queer_marching_cave",
+			"category": "proceduralgeneration",
+			"scene": "res://algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.tscn",
+			"class_name": "QueerMarchingCave",
+			"description": "Extended cave system \u2014 long procedural cave with queer spatial topology themes.",
+			"compute": "HEAVY \u2014 CPU extended cave generation",
+			"tags": [
+				"marching_cubes",
+				"cave",
+				"long",
+				"queer",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					31,
+					21,
+					31
+				],
+				"size_group": "world_scale"
+			},
+			"name": "queer_marching_cave",
+			"complexity": "expert",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.5,
+					11.5,
+					18.13
+				],
+				"aabb_center": [
+					4.75,
+					2.75,
+					4.06
+				],
+				"grid_cells": [
+					20.0,
+					19.0
+				],
+				"max_dimension_m": 19.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				19.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.133583Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"rhizome_cave_system": {
+			"lookup_name": "rhizome_cave_system",
+			"name": "Rhizomatic Cave System",
+			"description": "Advanced cave generation using rhizomatic growth patterns and marching cubes for organic underground networks",
+			"scene": "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			}
+		},
+		"marching_cubes_static": {
+			"lookup_name": "marching_cubes_static",
+			"name": "Marching Cubes Static",
+			"description": "Static marching cubes demonstration",
+			"scene": "res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"tags": [
+				"isosurface"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			}
+		}
+	},
+	"sequence_mapping": {
+		"isosurfaces": [
+			"voxel_noise_demo",
+			"gyroid_demo",
+			"mc_sculpt_vr",
+			"mc_cave",
+			"mc_portal_landscape",
+			"mc_shapes_gallery",
+			"nakama_metaballs",
+			"metaball_world",
+			"raymarched_metaballs",
+			"fifteen_cases_demo"
+		]
+	}
+}

@@ -1,0 +1,48 @@
+{
+  "id": "sb_ls02_plant_wind_collapse",
+  "topology": "lsystem",
+  "lsystem": {
+    "axiom": "F",
+    "rules": {
+      "F": "F[+F]F[-F]F"
+    },
+    "iterations": 3,
+    "angle_deg": 25.7,
+    "step_len": 0.2,
+    "step_shrink": 0.72
+  },
+  "stiffness": 0.4,
+  "damping": 0.992,
+  "gravity": [
+    1.8,
+    -9.8,
+    0.6
+  ],
+  "floor_y": -0.5,
+  "constraint_passes": 4,
+  "steps": 140,
+  "origin": [
+    0,
+    0,
+    0
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.15,
+  "render": {
+    "color": [
+      0.7,
+      0.45,
+      0.2
+    ],
+    "roughness": 0.55,
+    "particle_radius": 0.03,
+    "show_wires": true,
+    "wire_color": [
+      0.25,
+      0.15,
+      0.1
+    ]
+  },
+  "layout": "lsystem_bridge",
+  "notes": "DNA BRIDGE: Same L-system plant DNA, but low stiffness + diagonal wind + 140 steps. Tree bends and partially collapses \u2014 same DNA, dynamic consequence."
+}

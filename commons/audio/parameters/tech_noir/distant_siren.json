@@ -1,0 +1,50 @@
+{
+	"distant_siren": {
+		"_metadata": {
+			"sound_type": "distant_siren",
+			"description": "Police/ambulance siren with doppler panning effect",
+			"tags": "siren, emergency, police, doppler, urban",
+			"created_at": "2025-01-07T00:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"buffer_length": {
+				"value": 6.0,
+				"min": 3.0,
+				"max": 12.0,
+				"step": 0.5
+			},
+			"base_freq": {
+				"value": 500.0,
+				"min": 300.0,
+				"max": 800.0,
+				"step": 10.0
+			},
+			"freq_range": {
+				"value": 250.0,
+				"min": 100.0,
+				"max": 500.0,
+				"step": 10.0
+			},
+			"cycle_time": {
+				"value": 2.0,
+				"min": 0.5,
+				"max": 4.0,
+				"step": 0.1
+			},
+			"volume": {
+				"value": 0.2,
+				"min": 0.0,
+				"max": 0.5,
+				"step": 0.01
+			},
+			"seed": {
+				"value": -1,
+				"min": -1,
+				"max": 10000,
+				"step": 1
+			}
+		}
+	}
+}

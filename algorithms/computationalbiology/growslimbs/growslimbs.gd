@@ -31,7 +31,7 @@ var current_iteration: int = 0
 var is_growing: bool = false
 var attractor_spheres: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	# Create skeleton
 	skeleton = Skeleton3D.new()
 	add_child(skeleton)
@@ -58,7 +58,7 @@ func _ready():
 	
 	print("Press SPACE to start growth, R to reset")
 
-func create_limb_attractors():
+func create_limb_attractors() -> void:
 	# Create attractors for multiple limbs (arms and legs pattern)
 	var limb_configs = [
 		{"base": Vector3(0.5, 0, 0), "end": Vector3(1.5, -0.3, 0.2)},  # Right arm
@@ -76,7 +76,7 @@ func create_limb_attractors():
 			pos += Vector3(randf_range(-0.1, 0.1), randf_range(-0.1, 0.1), randf_range(-0.1, 0.1))
 			attractor_points.append(pos)
 
-func visualize_attractors():
+func visualize_attractors() -> void:
 	for pos in attractor_points:
 		var sphere = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
@@ -92,7 +92,7 @@ func visualize_attractors():
 		add_child(sphere)
 		attractor_spheres.append(sphere)
 
-func _process(delta):
+func _process(_delta):
 	if is_growing and current_iteration < max_iterations:
 		grow_step()
 		current_iteration += 1
@@ -102,7 +102,7 @@ func _process(delta):
 			is_growing = false
 			print("Growth complete! %d bones created" % skeleton.get_bone_count())
 
-func grow_step():
+func grow_step() -> void:
 	var influenced_nodes: Dictionary = {}
 	
 	# Find which attractors influence which nodes
@@ -180,7 +180,7 @@ func grow_step():
 	for i in range(attractors_to_remove.size() - 1, -1, -1):
 		attractor_points.remove_at(attractors_to_remove[i])
 
-func update_skeleton_and_mesh():
+func update_skeleton_and_mesh() -> void:
 	# Update bone rest poses
 	for node in all_nodes:
 		if node.bone_index >= 0:
@@ -212,7 +212,7 @@ func update_skeleton_and_mesh():
 	material.roughness = 0.7
 	mesh_instance.material_override = material
 
-func create_skinned_segment(st: SurfaceTool, parent_node: GrowthNode, child_node: GrowthNode):
+func create_skinned_segment(st: SurfaceTool, parent_node: GrowthNode, child_node: GrowthNode) -> void:
 	var start = parent_node.position
 	var end = child_node.position
 	var radius_start = parent_node.radius
@@ -266,18 +266,18 @@ func create_skinned_segment(st: SurfaceTool, parent_node: GrowthNode, child_node
 		st.set_weights(PackedFloat32Array([0.0, 1.0]))
 		st.add_vertex(p1_end)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			start_growth()
 		elif event.keycode == KEY_R:
 			reset_growth()
 
-func start_growth():
+func start_growth() -> void:
 	is_growing = true
 	print("Starting morphogenesis growth...")
 
-func reset_growth():
+func reset_growth() -> void:
 	# Clear everything
 	current_iteration = 0
 	is_growing = false
@@ -307,3 +307,12 @@ func reset_growth():
 	create_limb_attractors()
 	update_skeleton_and_mesh()
 	print("Growth reset. Press SPACE to start.")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,121 @@
+[gd_scene load_steps=17 format=3 uid="uid://c8j5k2v0n7nak"]
+
+[ext_resource type="Script" uid="uid://bw1udmcdqtvkv" path="res://commons/primitives/logic_display/category_logic_display.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://b8y4k2v0n7m8j" path="res://commons/primitives/logic_display/CategoryLogicDisplayUI.tscn" id="2_ui"]
+[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="3_yyira"]
+[ext_resource type="Shader" uid="uid://fgffmigpyumy" path="res://commons/scenes/main_menu/components/linear_progress.gdshader" id="4_r1mgx"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_screen"]
+size = Vector2(1, 0.25)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_content"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_holo"]
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_content")
+texture_filter = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tpbxh"]
+size = Vector3(1, 0.2, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jv1lt"]
+size = Vector3(1, 0.2, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uu75s"]
+render_priority = 0
+shader = ExtResource("3_yyira")
+shader_parameter/modelColor = Color(1, 1, 1, 0.24313726)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(0.8035234, 0.15450457, 0.93145883, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_i4g05"]
+material = SubResource("ShaderMaterial_uu75s")
+size = Vector3(1, 0.305, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6ps3"]
+render_priority = 0
+shader = ExtResource("3_yyira")
+shader_parameter/modelColor = Color(0.23753911, 0.23753914, 0.23753908, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(0, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_yxytr"]
+material = SubResource("ShaderMaterial_o6ps3")
+size = Vector3(0.96, 0.265, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jj674"]
+render_priority = 0
+shader = ExtResource("4_r1mgx")
+shader_parameter/progress = 0.0
+shader_parameter/color = Color(0.5, 0.5, 0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_progress"]
+render_priority = 0
+shader = ExtResource("4_r1mgx")
+shader_parameter/progress = 0.0
+shader_parameter/color = Color(0.5, 0.5, 0.5, 0.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_lkjif"]
+material = SubResource("ShaderMaterial_progress")
+size = Vector2(1, 0.2)
+
+[node name="CategoryLogicDisplay" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1024, 256)
+render_target_update_mode = 3
+
+[node name="CategoryLogicDisplayUI" parent="SubViewport" instance=ExtResource("2_ui")]
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 0.09033485, -0.029600382)
+mesh = SubResource("QuadMesh_screen")
+surface_material_override/0 = SubResource("StandardMaterial3D_holo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.854939, 0, -0.51872855, 0, 1, 0, 0.51872855, 0, -0.854939, 0, 0, -0.77981484)
+
+[node name="Frame" type="StaticBody3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.09976885, 0)
+collision_layer = 1048577
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
+shape = SubResource("BoxShape3D_tpbxh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Frame"]
+visible = false
+mesh = SubResource("BoxMesh_jv1lt")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Frame"]
+mesh = SubResource("BoxMesh_i4g05")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Frame/CSGMesh3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05123362)
+operation = 2
+mesh = SubResource("BoxMesh_yxytr")
+
+[node name="ProgressIndicator" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.055)
+visible = false
+material_override = SubResource("ShaderMaterial_jj674")
+mesh = SubResource("QuadMesh_lkjif")

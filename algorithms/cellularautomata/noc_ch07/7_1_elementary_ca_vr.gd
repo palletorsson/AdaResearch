@@ -8,12 +8,12 @@ const MAT_INACTIVE := preload("res://commons/resourses/materials/noc_vr/noc_vr_f
 @export var rows_visible: int = 36
 @export var update_interval: float = 0.2
 
-const GRID_WIDTH := 64
+const GRID_WIDTH := 128
 const CELL_WIDTH := 0.9 / GRID_WIDTH
 
 var _sim_root: Node3D
 var _rows: Array[PackedByteArray] = []
-var _row_meshes: Array[MeshInstance3D] = []
+var _multi_mesh: MultiMeshInstance3D
 var _timer: float = 0.0
 var _next_row_index: int = 1
 var _status_label: Label3D
@@ -53,15 +53,33 @@ func _setup_environment() -> void:
 		_initialize_rows()
 	)
 	rule_controller.set_value(rule_number)
+	
+	# Setup MultiMesh
+	_multi_mesh = MultiMeshInstance3D.new()
+	_sim_root.add_child(_multi_mesh)
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = BoxMesh.new()
+	mm.mesh.size = Vector3(CELL_WIDTH * 0.95, 0.015, 0.015) # Thin strip like original triangle
+	mm.instance_count = rows_visible * GRID_WIDTH
+	_multi_mesh.multimesh = mm
+	
+	# Initialize transforms once
+	var idx = 0
+	for r in range(rows_visible):
+		for c in range(GRID_WIDTH):
+			var x = -0.45 + c * CELL_WIDTH + CELL_WIDTH * 0.5
+			var y = 0.15 + r * 0.02
+			var t = Transform3D(Basis(), Vector3(x, y, 0))
+			mm.set_instance_transform(idx, t)
+			mm.set_instance_color(idx, Color(0,0,0,0)) # Invisible initially
+			idx += 1
 
 	_update_status()
 
 func _initialize_rows() -> void:
-	for mesh in _row_meshes:
-		mesh.queue_free()
-	_row_meshes.clear()
 	_rows.clear()
-
 	_rows.resize(rows_visible)
 	for r in range(rows_visible):
 		var row := PackedByteArray()
@@ -72,14 +90,8 @@ func _initialize_rows() -> void:
 
 	_rows[0][GRID_WIDTH / 2] = 1
 	_next_row_index = 1
-
-	for r in range(rows_visible):
-		var mesh := MeshInstance3D.new()
-		mesh.position = Vector3(0, 0.15 + r * 0.02, 0)
-		_sim_root.add_child(mesh)
-		_row_meshes.append(mesh)
-		_update_row_mesh(r)
-
+	
+	_update_all_visuals()
 	_timer = 0.0
 
 func _process(delta: float) -> void:
@@ -91,12 +103,12 @@ func _process(delta: float) -> void:
 func _step_generation() -> void:
 	if _next_row_index < rows_visible:
 		_generate_row(_next_row_index)
-		_update_row_mesh(_next_row_index)
 		_next_row_index += 1
 	else:
 		_scroll_rows()
 		_generate_row(rows_visible - 1)
-		_update_row_mesh(rows_visible - 1)
+	
+	_update_all_visuals()
 
 func _generate_row(index: int) -> void:
 	var prev := _rows[(index - 1 + rows_visible) % rows_visible]
@@ -111,38 +123,32 @@ func _generate_row(index: int) -> void:
 func _scroll_rows() -> void:
 	for r in range(rows_visible - 1):
 		_rows[r] = _rows[r + 1].duplicate()
-		_update_row_mesh(r)
 
-func _update_row_mesh(index: int) -> void:
-	var row := _rows[index]
-	var surface := ImmediateMesh.new()
-	surface.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-	var has_vertices := false
+func _update_all_visuals() -> void:
+	if not _multi_mesh:
+		return
+	var mm = _multi_mesh.multimesh
+	var idx = 0
+	var active_color = Color(1.0, 0.7, 0.95)
+	var inactive_color = Color(0,0,0,0)
 	
-	for c in range(GRID_WIDTH):
-		if row[c] == 0:
-			continue
-		has_vertices = true
-		surface.surface_set_color(Color(1.0, 0.7, 0.95))
-		var x0 := -0.45 + c * CELL_WIDTH
-		var x1 := x0 + CELL_WIDTH
-		var y0 := 0
-		var y1 := 0.015
-		# Triangle 1
-		surface.surface_add_vertex(Vector3(x0, y0, 0))
-		surface.surface_add_vertex(Vector3(x1, y0, 0))
-		surface.surface_add_vertex(Vector3(x1, y1, 0))
-		# Triangle 2
-		surface.surface_add_vertex(Vector3(x0, y0, 0))
-		surface.surface_add_vertex(Vector3(x1, y1, 0))
-		surface.surface_add_vertex(Vector3(x0, y1, 0))
-	
-	if has_vertices:
-		surface.surface_end()
-		_row_meshes[index].mesh = surface
-	else:
-		# If no vertices were added, set mesh to null or create empty mesh
-		_row_meshes[index].mesh = null
+	for r in range(rows_visible):
+		var row = _rows[r]
+		for c in range(GRID_WIDTH):
+			if row[c] == 1:
+				mm.set_instance_color(idx, active_color)
+			else:
+				mm.set_instance_color(idx, inactive_color)
+			idx += 1
 
 func _update_status() -> void:
 	_status_label.text = "Rule %d" % rule_number
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

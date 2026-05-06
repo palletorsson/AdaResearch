@@ -1,0 +1,1 @@
+Gravity pulls. Objects with different masses fall at the same rate — but heavier ones carry more momentum when they land. Mass is resistance to acceleration. Force is what overcomes that resistance. Newton's laws begin here, with objects that respond to pushes and pulls.

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/shaders/book_of_shaders/shader_04_matrices.gd" id="1"]
+
+[node name="Shader04Matrices" type="Node3D"]
+script = ExtResource("1")

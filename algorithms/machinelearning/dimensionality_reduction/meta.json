@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_dimensionality_reduction",
+  "title": "Dimensionality Reduction",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/dimensionality_reduction/dimensionality_reduction.tscn",
+  "script": "res://algorithms/machinelearning/dimensionality_reduction/DimensionalityReduction.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/dimensionality_reduction/README.md",
+    "tutorial": "res://algorithms/machinelearning/dimensionality_reduction/dimensionality_reduction_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/dimensionality_reduction/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/dimensionality_reduction/summery.md"
+  },
+  "summary": "The `Dimensionality Reduction` sandbox investigates concepts from Dimensionality Reduction inside a real-time Godot lab.",
+  "keywords": [
+    "algorithm",
+    "animate",
+    "create",
+    "dimensional",
+    "error",
+    "explained"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

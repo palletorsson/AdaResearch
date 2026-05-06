@@ -1,34 +1,57 @@
 extends Node3D
 
+# Butterfly spawner — spawns entropy-seeking butterflies.
+# Butterflies discover entropy_axiom nodes in the scene and are drawn to them.
+
 @export var butterfly_scene: PackedScene
-var timer: Timer  # Timer to handle spawning intervals
+@export var spawn_interval: float = 10.0
+@export var max_butterflies: int = 8  # Cap to keep performance reasonable
+
+var timer: Timer
+
 
 func _ready() -> void:
-	# Set up the timer to spawn butterflies every 30 seconds
 	timer = Timer.new()
-	timer.wait_time = 10.0
-	timer.one_shot = false  # Keep the timer running repeatedly
-	timer.connect("timeout", Callable(self, "spawn_butterflies"))
+	timer.wait_time = spawn_interval
+	timer.one_shot = false
+	timer.timeout.connect(_on_spawn_timeout)
 	add_child(timer)
-	timer.start()  # Start the timer
+	timer.start()
 
-# Spawn butterflies and play animations
-func spawn_butterflies() -> void:
-	for n in range(1):
-		if butterfly_scene:
-			var butterfly_instance = butterfly_scene.instantiate() as Node3D
-			add_child(butterfly_instance)
-			butterfly_instance.add_to_group("remove")  # Optional group for management
-			
-			# Check if the instantiated scene has the necessary nodes
-			var butterfly_node = butterfly_instance.get_node("butterfly")
-			if butterfly_node:
-				var animation_player = butterfly_node.get_node("AnimationPlayer")
-				if animation_player:
-					animation_player.play("fly")  # Play the "fly" animation
-				else:
-					print("Error: AnimationPlayer not found in 'butterfly' node.")
-			else:
-				print("Error: 'butterfly' node not found in instantiated scene.")
-		else:
-			print("Error: Butterfly scene is not assigned.")
+	# Spawn one immediately so the scene isn't empty
+	_spawn_butterfly()
+
+
+func _on_spawn_timeout() -> void:
+	# Count current butterflies
+	var count: int = get_tree().get_nodes_in_group("entropy_butterfly").size()
+	if count < max_butterflies:
+		_spawn_butterfly()
+
+
+func _spawn_butterfly() -> void:
+	if not butterfly_scene:
+		return
+
+	var instance: Node3D = butterfly_scene.instantiate() as Node3D
+	if not instance:
+		return
+
+	add_child(instance)
+	instance.add_to_group("remove")
+
+	# Start the fly animation on the inner butterfly node
+	var butterfly_node: Node3D = instance.find_child("butterfly", true, false) as Node3D
+	if butterfly_node:
+		var anim: AnimationPlayer = butterfly_node.find_child("AnimationPlayer", true, false) as AnimationPlayer
+		if anim:
+			anim.play("fly")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

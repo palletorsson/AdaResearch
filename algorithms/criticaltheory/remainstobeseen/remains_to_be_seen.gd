@@ -10,7 +10,7 @@ var rotation_speed = 0.2
 var subtle_movement_amplitude = 0.1
 var swing_speed = 0.8
 
-func _ready():
+func _ready() -> void:
 	# Create a dark environment with appropriate lighting
 	setup_environment()
 	
@@ -25,7 +25,7 @@ func _ready():
 	
 
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create environment
 	var environment = WorldEnvironment.new()
 	var env = Environment.new()
@@ -61,7 +61,7 @@ func setup_environment():
 	spot_light.spot_angle = 30
 	add_child(spot_light)
 
-func create_suspended_frames():
+func create_suspended_frames() -> void:
 	# Parent node for all frames
 	var frames = Node3D.new()
 	frames.name = "SuspendedFrames"
@@ -120,34 +120,49 @@ func create_random_frame():
 			
 	return frame
 
-func create_bed_frame(parent):
+func create_bed_frame(parent) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = BoxMesh.new()
-	
+
 	# Create bed frame dimensions
 	mesh.size = Vector3(1.8, 0.1, 0.9)
 	mesh_instance.mesh = mesh
 	mesh_instance.material_override = wire_material
-	
+
 	# Convert solid mesh to wireframe
 	convert_to_wireframe(mesh_instance)
-	
-	parent.add_child(mesh_instance)
-	
-	# Add bed posts (legs)
-	for x in [-0.85, 0.85]:
-		for z in [-0.4, 0.4]:
-			var post = MeshInstance3D.new()
-			var post_mesh = CylinderMesh.new()
-			post_mesh.height = 0.5
-			post_mesh.top_radius = 0.05
-			post.mesh = post_mesh
-			post.material_override = wire_material
-			post.position = Vector3(x, -0.25, z)
-			convert_to_wireframe(post)
-			parent.add_child(post)
 
-func create_chair_frame(parent):
+	parent.add_child(mesh_instance)
+
+	# Add bed posts (legs) using MultiMesh
+	var post_mesh = CylinderMesh.new()
+	post_mesh.height = 0.5
+	post_mesh.top_radius = 0.05
+	var post_mat = wire_material.duplicate()
+	post_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	post_mat.albedo_color.a = 0.6
+	post_mesh.material = post_mat
+
+	var positions = [
+		Vector3(-0.85, -0.25, -0.4), Vector3(-0.85, -0.25, 0.4),
+		Vector3(0.85, -0.25, -0.4), Vector3(0.85, -0.25, 0.4)
+	]
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = 4
+	mm.mesh = post_mesh
+	for i in range(4):
+		var t = Transform3D()
+		t.origin = positions[i]
+		mm.set_instance_transform(i, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "BedPosts_MM"
+	mmi.multimesh = mm
+	parent.add_child(mmi)
+
+func create_chair_frame(parent) -> void:
 	# Chair seat
 	var seat = MeshInstance3D.new()
 	var seat_mesh = BoxMesh.new()
@@ -167,20 +182,33 @@ func create_chair_frame(parent):
 	parent.add_child(back)
 	convert_to_wireframe(back)
 	
-	# Chair legs
-	for x in [-0.2, 0.2]:
-		for z in [-0.2, 0.2]:
-			var leg = MeshInstance3D.new()
-			var leg_mesh = CylinderMesh.new()
-			leg_mesh.height = 0.4
-			leg_mesh.top_radius = 0.02
-			leg.mesh = leg_mesh
-			leg.material_override = wire_material
-			leg.position = Vector3(x, -0.2, z)
-			convert_to_wireframe(leg)
-			parent.add_child(leg)
+	# Chair legs using MultiMesh
+	var leg_mesh = CylinderMesh.new()
+	leg_mesh.height = 0.4
+	leg_mesh.top_radius = 0.02
+	var leg_mat = wire_material.duplicate()
+	leg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	leg_mat.albedo_color.a = 0.6
+	leg_mesh.material = leg_mat
 
-func create_table_frame(parent):
+	var leg_positions = [
+		Vector3(-0.2, -0.2, -0.2), Vector3(-0.2, -0.2, 0.2),
+		Vector3(0.2, -0.2, -0.2), Vector3(0.2, -0.2, 0.2)
+	]
+	var leg_mm = MultiMesh.new()
+	leg_mm.transform_format = MultiMesh.TRANSFORM_3D
+	leg_mm.instance_count = 4
+	leg_mm.mesh = leg_mesh
+	for i in range(4):
+		var t = Transform3D()
+		t.origin = leg_positions[i]
+		leg_mm.set_instance_transform(i, t)
+	var leg_mmi = MultiMeshInstance3D.new()
+	leg_mmi.name = "ChairLegs_MM"
+	leg_mmi.multimesh = leg_mm
+	parent.add_child(leg_mmi)
+
+func create_table_frame(parent) -> void:
 	# Table top
 	var top = MeshInstance3D.new()
 	var top_mesh = BoxMesh.new()
@@ -190,20 +218,33 @@ func create_table_frame(parent):
 	parent.add_child(top)
 	convert_to_wireframe(top)
 	
-	# Table legs
-	for x in [-0.5, 0.5]:
-		for z in [-0.3, 0.3]:
-			var leg = MeshInstance3D.new()
-			var leg_mesh = CylinderMesh.new()
-			leg_mesh.height = 0.7
-			leg_mesh.top_radius = 0.03
-			leg.mesh = leg_mesh
-			leg.material_override = wire_material
-			leg.position = Vector3(x, -0.35, z)
-			convert_to_wireframe(leg)
-			parent.add_child(leg)
+	# Table legs using MultiMesh
+	var tleg_mesh = CylinderMesh.new()
+	tleg_mesh.height = 0.7
+	tleg_mesh.top_radius = 0.03
+	var tleg_mat = wire_material.duplicate()
+	tleg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	tleg_mat.albedo_color.a = 0.6
+	tleg_mesh.material = tleg_mat
 
-func create_crib_frame(parent):
+	var tleg_positions = [
+		Vector3(-0.5, -0.35, -0.3), Vector3(-0.5, -0.35, 0.3),
+		Vector3(0.5, -0.35, -0.3), Vector3(0.5, -0.35, 0.3)
+	]
+	var tleg_mm = MultiMesh.new()
+	tleg_mm.transform_format = MultiMesh.TRANSFORM_3D
+	tleg_mm.instance_count = 4
+	tleg_mm.mesh = tleg_mesh
+	for i in range(4):
+		var t = Transform3D()
+		t.origin = tleg_positions[i]
+		tleg_mm.set_instance_transform(i, t)
+	var tleg_mmi = MultiMeshInstance3D.new()
+	tleg_mmi.name = "TableLegs_MM"
+	tleg_mmi.multimesh = tleg_mm
+	parent.add_child(tleg_mmi)
+
+func create_crib_frame(parent) -> void:
 	# Crib base
 	var base = MeshInstance3D.new()
 	var base_mesh = BoxMesh.new()
@@ -231,20 +272,33 @@ func create_crib_frame(parent):
 		convert_to_wireframe(side)
 		parent.add_child(side)
 	
-	# Crib legs
-	for x in [-0.45, 0.45]:
-		for z in [-0.25, 0.25]:
-			var leg = MeshInstance3D.new()
-			var leg_mesh = CylinderMesh.new()
-			leg_mesh.height = 0.5
-			leg_mesh.top_radius = 0.02
-			leg.mesh = leg_mesh
-			leg.material_override = wire_material
-			leg.position = Vector3(x, -0.2, z)
-			convert_to_wireframe(leg)
-			parent.add_child(leg)
+	# Crib legs using MultiMesh
+	var cleg_mesh = CylinderMesh.new()
+	cleg_mesh.height = 0.5
+	cleg_mesh.top_radius = 0.02
+	var cleg_mat = wire_material.duplicate()
+	cleg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	cleg_mat.albedo_color.a = 0.6
+	cleg_mesh.material = cleg_mat
 
-func convert_to_wireframe(mesh_instance):
+	var cleg_positions = [
+		Vector3(-0.45, -0.2, -0.25), Vector3(-0.45, -0.2, 0.25),
+		Vector3(0.45, -0.2, -0.25), Vector3(0.45, -0.2, 0.25)
+	]
+	var cleg_mm = MultiMesh.new()
+	cleg_mm.transform_format = MultiMesh.TRANSFORM_3D
+	cleg_mm.instance_count = 4
+	cleg_mm.mesh = cleg_mesh
+	for i in range(4):
+		var t = Transform3D()
+		t.origin = cleg_positions[i]
+		cleg_mm.set_instance_transform(i, t)
+	var cleg_mmi = MultiMeshInstance3D.new()
+	cleg_mmi.name = "CribLegs_MM"
+	cleg_mmi.multimesh = cleg_mm
+	parent.add_child(cleg_mmi)
+
+func convert_to_wireframe(mesh_instance) -> void:
 	# This is a simplified approach to create a wireframe effect
 	# For a true wireframe, you would typically use a shader
 	var material = mesh_instance.material_override.duplicate()
@@ -257,7 +311,7 @@ func convert_to_wireframe(mesh_instance):
 	
 	mesh_instance.material_override = material
 
-func add_suspension_wires(frames_parent):
+func add_suspension_wires(frames_parent) -> void:
 	# Add thin suspension wires that go up to ceiling
 	var ceiling_height = 6.0
 	
@@ -300,7 +354,7 @@ func add_suspension_wires(frames_parent):
 			# Add to scene
 			add_child(wire)
 
-func create_swing_animation(animation_player, frame):
+func create_swing_animation(_animation_player, frame) -> void:
 	# Create animation for subtle swinging motion
 	var animation = Animation.new()
 	
@@ -329,6 +383,15 @@ func create_swing_animation(animation_player, frame):
 	
 
 
-func _process(delta):
+func _process(_delta):
 	# Add any global animations or interactions here
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
 	pass

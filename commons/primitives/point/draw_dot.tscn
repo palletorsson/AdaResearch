@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://f04k4l7r0gb2"]
+
+[ext_resource type="Script" uid="uid://cj383sgq8j7b0" path="res://commons/primitives/point/draw_dot.gd" id="1_j5b6m"]
+[ext_resource type="PackedScene" uid="uid://cu0qtodekjr5r" path="res://commons/primitives/point/grab_sphere_point.tscn" id="2_m1q2d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drawdot"]
+albedo_color = Color(1, 0.5, 0.8, 1)
+emission_enabled = true
+emission = Color(1, 0.5, 0.8, 1)
+emission_energy_multiplier = 1.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_drawdot"]
+radius = 0.018
+height = 0.036
+
+[node name="DrawDot" type="Node3D"]
+script = ExtResource("1_j5b6m")
+trail_max_points = 4096
+min_segment_distance = 0.005
+
+[node name="GrabPoint" parent="." instance=ExtResource("2_m1q2d")]
+xp_on_pickup = 1
+
+[node name="DrawSphere" type="MeshInstance3D" parent="GrabPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.12)
+material_override = SubResource("StandardMaterial3D_drawdot")
+mesh = SubResource("SphereMesh_drawdot")

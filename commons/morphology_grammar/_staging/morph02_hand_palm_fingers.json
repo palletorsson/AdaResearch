@@ -1,0 +1,55 @@
+{
+  "id": "morph02_hand_palm_fingers",
+  "family": "hand",
+  "notes": "Flat palm body allocates a five-finger zone, extrudes finger trunks, then extends phalange segments from each tip.",
+  "camera_yaw": 0.82,
+  "camera_pitch": 0.38,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.28,
+      0.26,
+      0.82
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "palm_to_fingers",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "finger_array",
+      "params": {
+        "count": 5,
+        "length": 0.58,
+        "fill": 0.9,
+        "thickness_scale": 1.08
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.72
+    },
+    {
+      "id": "palm_to_wrist",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "back",
+      "op": "extrude",
+      "params": {
+        "length": 0.26,
+        "scale": 0.42
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

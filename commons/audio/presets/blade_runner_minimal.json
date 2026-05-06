@@ -1,0 +1,73 @@
+{
+    "description": "Minimal dystopian cyberpunk atmosphere",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -20,
+            "bus": "Bass"
+        },
+        {
+            "sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
+            "volume_db": -18,
+            "bus": "Ambient"
+        },
+        {
+            "sound_id": "AudioSynthesizer.JUPITER_8_STRINGS",
+            "volume_db": -24,
+            "bus": "Strings"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.LASER_SHOT",
+                "AudioSynthesizer.SHIELD_HIT",
+                "AudioSynthesizer.APHEX_TWIN_GLITCH"
+            ],
+            "interval_range": [
+                25.0,
+                80.0
+            ],
+            "volume_range": [
+                -28,
+                -22
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.6,
+                    "damping": 0.15
+                }
+            ]
+        },
+        "Bass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 120
+                }
+            ]
+        },
+        "Strings": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.7,
+                    "damping": 0.1
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.7,
+                    "wet": 0.4
+                }
+            ]
+        }
+    }
+}

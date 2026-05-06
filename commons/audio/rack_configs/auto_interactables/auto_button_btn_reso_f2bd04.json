@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "auto_button_btn_reso_f2bd04",
+    "description": "BTN — toggle on reso, color #ff8844",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "btn",
+      "label": "RESO",
+      "color": "#ff8844",
+      "parameter": "reso",
+      "action": "toggle"
+    }
+  }
+}

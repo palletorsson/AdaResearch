@@ -1,0 +1,90 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_Pendulum",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 11,
+    "d": 19
+  },
+  "signature": "PendulumWave shows phase relationships across multiple lengths; foucault_pendulum demonstrates Earth-rotation coupling; seismograph and draw_dot_time_domain record oscillation as trace; BigPipeSystem and GlassRack provide the laboratory aesthetic; lab_table anchors the experimental frame; dark_sphere continues.",
+  "style": "kusama",
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.049,
+  "breath_zones": [
+    {
+      "size": 191,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 19
+      },
+      "centroid": [
+        4.947643979057592,
+        9.104712041884817
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 9,
+      "z": 0,
+      "token": "PendulumWave"
+    },
+    {
+      "x": 1,
+      "z": 1,
+      "token": "draw_dot_time_domain"
+    },
+    {
+      "x": 10,
+      "z": 1,
+      "token": "PendulumWave"
+    },
+    {
+      "x": 9,
+      "z": 2,
+      "token": "PendulumWave"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 10,
+      "token": "lab_table"
+    },
+    {
+      "x": 9,
+      "z": 10,
+      "token": "lab_table"
+    },
+    {
+      "x": 5,
+      "z": 12,
+      "token": "foucault_pendulum"
+    },
+    {
+      "x": 3,
+      "z": 16,
+      "token": "VRAudioMonitor"
+    },
+    {
+      "x": 7,
+      "z": 16,
+      "token": "seismograph"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 10,
+    "walkable_cells": 206,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

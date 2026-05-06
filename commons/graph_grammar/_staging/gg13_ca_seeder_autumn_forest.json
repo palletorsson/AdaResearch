@@ -1,0 +1,44 @@
+{
+  "id": "gg13_ca_seeder_autumn_forest",
+  "notes": "Wide autumn forest \u00e2\u20ac\u201d Conway CA over larger region + red foliage.",
+  "seed": {
+    "ca_scatter": {
+      "rule": "conway",
+      "iterations": 22,
+      "grid_size": 28,
+      "region_size": 3.5,
+      "y": 0,
+      "density": 0.42,
+      "seed": 55,
+      "radius": 0.08,
+      "jitter": 0.3
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_red"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.3,
+        "spread_deg": 30,
+        "radius_decay": 0.72
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.11,
+        "radius": 0.014,
+        "splay": 0.9
+      }
+    }
+  ]
+}

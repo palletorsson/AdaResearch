@@ -1,0 +1,68 @@
+{
+  "name": "QFEP_Sandbox",
+  "title": "Full Parameter Control",
+  "description": "You've earned the force. All parameters at your command. \u03bb, \u03c6, and the world responds. Find YOUR edge of chaos.",
+  "dimensions": {
+    "rows": 14,
+    "cols": 14
+  },
+  "n_artifacts": 8,
+  "spawn": [
+    1,
+    1
+  ],
+  "teleport": [
+    13,
+    6
+  ],
+  "artifacts": [
+    {
+      "name": "lambda_slider",
+      "row": 2,
+      "col": 2,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "phi_slider",
+      "row": 2,
+      "col": 10,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "qfep_reactor",
+      "row": 5,
+      "col": 6,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "reactive_particles",
+      "row": 7,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "reactive_particles",
+      "row": 7,
+      "col": 8,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "tt",
+      "row": 10,
+      "col": 2,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "tt",
+      "row": 10,
+      "col": 10,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "qfep_formula_3d",
+      "row": 12,
+      "col": 5,
+      "family": "substrate_vectors"
+    }
+  ]
+}

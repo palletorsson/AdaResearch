@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "Glass_spiral_condenser (glass)",
+    "description": "Auto-generated glass_spiral_condenser turtle-path for glass system. path='flask,f,u,f,spiral,f,corner45,f,condenser,d,f,beaker'",
+    "system": "glass",
+    "archetype": "glass_spiral_condenser",
+    "auto_generated": true
+  },
+  "layout": {
+    "segment_length": 0.126,
+    "pipe_radius": 0.02,
+    "tube_radius": 0.015
+  },
+  "path": "flask,f,u,f,spiral,f,corner45,f,condenser,d,f,beaker",
+  "materials": {
+    "glass_color": [
+      0.88,
+      0.94,
+      1.0,
+      0.24
+    ],
+    "liquid_color": [
+      0.05,
+      0.7,
+      1.0,
+      0.52
+    ],
+    "show_liquid": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+	"layout_info": {
+		"name": "Example Pipe Network",
+		"description": "Demonstrates the hybrid anchor + turtle layout system"
+	},
+	"settings": {
+		"pipe_type": "glass",
+		"show_anchors": true
+	},
+	"anchors": {
+		"A": [0, 0, 0],
+		"B": [3, 0, 0],
+		"C": [3, 2, 0],
+		"D": [0, 2, 0],
+		"E": [1.5, 1, -2]
+	},
+	"paths": [
+		{
+			"id": "main_line",
+			"from": "A",
+			"to": "B",
+			"code": "f,f,f"
+		},
+		{
+			"id": "vertical_run",
+			"from": "B",
+			"code": "l,f,spiral,f"
+		},
+		{
+			"id": "branch",
+			"from": "A",
+			"code": "l,f,flask,f"
+		},
+		{
+			"id": "auto_path",
+			"from": "D",
+			"to": "E",
+			"comment": "Auto-paths to anchor E"
+		}
+	]
+}

@@ -1,0 +1,157 @@
+{
+  "map_info": {
+    "description": "Showcase of 37 unplaced artifacts from WaveFunctions. Walk through to browse available artifacts.",
+    "dimensions": {
+      "depth": 24.0,
+      "max_height": 2.0,
+      "width": 11.0
+    },
+    "format": "json",
+    "lookup_name": "Gallery_WaveFunctions",
+    "metadata": {
+      "category": "gallery",
+      "difficulty": "gallery",
+      "estimated_time": "12-18 minutes",
+      "learning_objectives": [
+        "Browse 37 WaveFunctions artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "name": "Gallery: WaveFunctions",
+    "title": "WaveFunctions Artifact Gallery",
+    "version": "1.0"
+  },
+  "utility_definitions": {
+    "s": {
+      "properties": {
+        "height": 1.5
+      },
+      "type": "spawn"
+    },
+    "t": {
+      "description": "Return to sequence",
+      "name": "Back",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
+  },
+  "settings": {
+    "background": {
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "show_grid": true
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "enabled": true,
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" ","sp"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","request_note:0:1.5#text:BigPipe"," ","request_note:0:1.5#text:BigPipe LBend"," ","request_note:0:1.5#text:BigPipe StraightRun"," ","request_note:0:1.5#text:BigPipe VerticalBypass"," "," "],
+      [" "," ","BigPipe:0:-0.5"," ","BigPipe_LBend:0:-0.5"," ","BigPipe_StraightRun:0:-0.5"," ","BigPipe_VerticalBypass:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:CircleSpiral"," ","request_note:0:1.5#text:ElphabaDemo"," ","request_note:0:1.5#text:GlassRack BranchingCondenser"," ","request_note:0:1.5#text:GlassRack BreakingBadCoffee"," "," "],
+      [" "," ","CircleSpiral:0:-0.5"," ","ElphabaDemo:0:-0.5"," ","GlassRack_BranchingCondenser:0:-0.5"," ","GlassRack_BreakingBadCoffee:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:GlassRack DistillationY"," ","request_note:0:1.5#text:GlassRack RefluxApparatus"," ","request_note:0:1.5#text:GlassRack SbendManifold"," ","request_note:0:1.5#text:GlassRack SimpleTube"," "," "],
+      [" "," ","GlassRack_DistillationY:0:-0.5"," ","GlassRack_RefluxApparatus:0:-0.5"," ","GlassRack_SbendManifold:0:-0.5"," ","GlassRack_SimpleTube:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:GlassRack SpiralTube"," ","request_note:0:1.5#text:HarmonicBuilder"," ","request_note:0:1.5#text:MelodySoundBoard"," ","request_note:0:1.5#text:OscillatingWave"," "," "],
+      [" "," ","GlassRack_SpiralTube:0:-0.5"," ","HarmonicBuilder:0:-0.5"," ","MelodySoundBoard:0:-0.5"," ","OscillatingWave:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:OscillationDriver"," ","request_note:0:1.5#text:PendulumCircle"," ","request_note:0:1.5#text:PendulumGrid3x3"," ","request_note:0:1.5#text:PhonemeCloud"," "," "],
+      [" "," ","OscillationDriver:0:-0.5"," ","PendulumCircle:0:-0.5"," ","PendulumGrid3x3:0:-0.5"," ","PhonemeCloud:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:Rack808Drums"," ","request_note:0:1.5#text:RackMario"," ","request_note:0:1.5#text:SoundBoxLong"," ","request_note:0:1.5#text:SoundBoxShort"," "," "],
+      [" "," ","Rack808Drums:0:-0.5"," ","RackMario:0:-0.5"," ","SoundBoxLong:0:-0.5"," ","SoundBoxShort:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:WaveRideScene"," ","request_note:0:1.5#text:circle spiral scene"," ","request_note:0:1.5#text:doppler effect demo"," ","request_note:0:1.5#text:double helix oscillator"," "," "],
+      [" "," ","WaveRideScene:0:-0.5"," ","circle_spiral_scene:0:-0.5"," ","doppler_effect_demo:0:-0.5"," ","double_helix_oscillator:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:modulor man"," ","request_note:0:1.5#text:modulor man interactive"," ","request_note:0:1.5#text:noir sequencer"," ","request_note:0:1.5#text:sine oscillation"," "," "],
+      [" "," ","modulor_man:0:-0.5"," ","modulor_man_interactive:0:-0.5"," ","noir_sequencer:0:-0.5"," ","sine_oscillation:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:sine wall"," ","request_note:0:1.5#text:sound timeline"," ","request_note:0:1.5#text:static reference cube"," ","request_note:0:1.5#text:vertical wave lines"," "," "],
+      [" "," ","sine_wall:0:-0.5"," ","sound_timeline:0:-0.5"," ","static_reference_cube:0:-0.5"," ","vertical_wave_lines:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:vr map loader kiosk"," "," "," "," "," "," "," "," "],
+      [" "," ","vr_map_loader_kiosk:0:-0.5"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

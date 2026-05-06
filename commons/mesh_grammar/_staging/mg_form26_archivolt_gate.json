@@ -1,0 +1,28 @@
+{
+  "id": "mg_form26_archivolt_gate",
+  "notes": "FORM STUDY: arch seed using nothing but inset and extrude. The goal is a thicker, layered gate rather than ornament.",
+  "seed": "arch",
+  "generations": 1,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.12,
+        "inner_tag": "arch_band",
+        "border_tag": "arch_skin"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:arch_band",
+      "params": {
+        "distance": 0.06,
+        "scale": 0.98,
+        "top_tag": "arch_core",
+        "side_tag": "arch_core_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

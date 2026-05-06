@@ -1,0 +1,58 @@
+{
+  "id": "morph_auto_house_top02",
+  "family": "house",
+  "notes": "Auto-researched house variant: 40 apertures under 18 roof planes.",
+  "camera_yaw": 0.737,
+  "camera_pitch": 0.365,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.918,
+      1.103,
+      0.982
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 4,
+  "rules": [
+    {
+      "id": "front_apertures",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.7
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 4,
+        "rows": 2,
+        "length": 0.084,
+        "scale": 0.558,
+        "door_col": 2,
+        "door_height_scale": 1.359
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "roof_cap",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.7
+      },
+      "selector": "up",
+      "op": "gable_cap",
+      "params": {
+        "pitch_deg": 22.03,
+        "thickness": 0.095,
+        "overhang": 1.142
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

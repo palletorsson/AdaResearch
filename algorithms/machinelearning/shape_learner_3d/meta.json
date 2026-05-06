@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_shape_learner_3d",
+  "title": "Shape Learner 3D",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/shape_learner_3d/ShapeLearner3D.tscn",
+  "script": "res://algorithms/machinelearning/shape_learner_3d/ShapeLearner3D.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/shape_learner_3d/README.md",
+    "tutorial": "res://algorithms/machinelearning/shape_learner_3d/shape_learner_3d_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/shape_learner_3d/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/shape_learner_3d/summery.md"
+  },
+  "summary": "The `Shape Learner 3D` sandbox investigates concepts from Shape Learner 3D inside a real-time Godot lab.",
+  "keywords": [
+    "async",
+    "calculate",
+    "count",
+    "create",
+    "crossover",
+    "enum"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

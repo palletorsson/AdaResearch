@@ -1,0 +1,141 @@
+{
+  "id": "morph15_drag_spike_armor",
+  "family": "drag_avant_garde",
+  "notes": "Reference-driven spike armor: hard shoulder growth, a smaller rear shroud, and a hostile headpiece turn the body into a sharp performance shell.",
+  "camera_yaw": 0.86,
+  "camera_pitch": 0.34,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.78,
+      1.28,
+      0.56
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "armor_back",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.68,
+        "scale": 1.08,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.24,
+          -0.34
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "armor_wings",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.72,
+        "scale": 0.24,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.36,
+          0.26
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.34
+    },
+    {
+      "id": "armor_spikes",
+      "when": {
+        "role": "ornament",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.12
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 5,
+        "length": 0.28,
+        "scale": 1.58
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "armor_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 0.48
+      },
+      "child_role": "hair",
+      "budget_factor": 0.46
+    },
+    {
+      "id": "armor_crown",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.16
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.32,
+        "scale": 0.34,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.52,
+          0.24
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.24
+    },
+    {
+      "id": "armor_heels",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.62,
+        "scale": 0.22
+      },
+      "child_role": "heel",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

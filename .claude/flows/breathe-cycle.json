@@ -1,0 +1,90 @@
+{
+  "id": "breathe-cycle",
+  "title": "BREATHE — Self-Improving Agent Cycle",
+  "description": "The autonomous improvement loop. Baseline scores, read state, evaluate priorities, act on highest-impact items, test changes, harvest deltas, evolve skills. Each breath feeds the next.",
+  "triggers": [
+    "breathe",
+    "self-improve",
+    "autonomous cycle",
+    "run a breath",
+    "improve everything"
+  ],
+  "granularity": "macro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-10",
+  "updated": "2026-04-10",
+  "earned_from": "Synthesis of all existing tools — heat map, pipeline scorer, garden listener, release gates, LOD system, ada-researcher cycle, session-handoff flow — into a single composable loop.",
+  "nodes": [
+    {
+      "id": "baseline",
+      "type": "action",
+      "label": "B — Baseline: snapshot all scores",
+      "detail": "Run sequence_pipeline_scorer.py, heat_map_generator.py, garden_listener.py --diagnosis, run_release_gates.py. Save to doc/reports/breath_baseline_{timestamp}.json."
+    },
+    {
+      "id": "read",
+      "type": "action",
+      "label": "R — Read: perceive project state",
+      "detail": "Load HEAT_MAP.json, FOCUS_VECTOR.json, LOD_TREE.json, breath_log.json. Extract cooling filter (failed items from last 2 breaths) and trajectory."
+    },
+    {
+      "id": "evaluate",
+      "type": "decision",
+      "label": "E — Evaluate: what to work on?",
+      "detail": "Priority: 1) FOCUS_VECTOR primary, 2) temp 90+ blocked, 3) highest temperature*impact_score, 4) pipeline HEAD. Apply cooling filter. Select up to 5 items."
+    },
+    {
+      "id": "dry_run_exit",
+      "type": "end",
+      "label": "Dry-run: output work plan and stop"
+    },
+    {
+      "id": "act",
+      "type": "action",
+      "label": "A — Act: dispatch to skills",
+      "detail": "For each item: write THOUGHT block (2+ options + do nothing), then dispatch. Maps→map-expert, artifacts→artifact-improver, docs→code-documenter, text→humanizer, VR feedback→bridge-listener."
+    },
+    {
+      "id": "test",
+      "type": "action",
+      "label": "T — Test: validate every change",
+      "detail": "Match change type to validator: map→pathfinder, sequence→verify_sequence, GDScript→Godot parse, registry→JSON parse, all→release gates. Failed items get reverted and marked."
+    },
+    {
+      "id": "harvest",
+      "type": "action",
+      "label": "H — Harvest: compute deltas, record outcomes",
+      "detail": "Re-run pipeline_scorer. Compute delta vs baseline. Append to breath_log.json with items attempted/succeeded/failed, skills used, discoveries. Update improvement_trajectory.json."
+    },
+    {
+      "id": "evolve",
+      "type": "action",
+      "label": "E — Evolve: improve how we improve",
+      "detail": "Level 1: Save new effective tool sequences as flows (autonomous). Level 2: Track skill effectiveness in trajectory (autonomous). Level 3: Propose SKILL.md changes to skill_evolution_proposals.json (human reviews)."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Breath complete — project improved, knowledge recorded, next breath is smarter"
+    }
+  ],
+  "edges": [
+    {"from": "baseline", "to": "read"},
+    {"from": "read", "to": "evaluate"},
+    {"from": "evaluate", "to": "dry_run_exit", "label": "dry-run mode"},
+    {"from": "evaluate", "to": "act", "label": "full/quick mode"},
+    {"from": "act", "to": "test"},
+    {"from": "test", "to": "harvest"},
+    {"from": "harvest", "to": "evolve"},
+    {"from": "evolve", "to": "done"}
+  ],
+  "confidence": "scaffolded",
+  "summary": "Baseline → Read → Evaluate → Act → Test → Harvest → Evolve. Each breath feeds the next via breath_log.json. 5-item cap, cooling filter, FOCUS_VECTOR priority, 3-tier safety.",
+  "links_to": [
+    "heat-map-triage",
+    "session-handoff",
+    "sequence-improve",
+    "metadata-enrich",
+    "artifact-visual-upgrade"
+  ]
+}

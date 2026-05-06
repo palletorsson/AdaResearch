@@ -1,0 +1,63 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Memphis Totem Wall — Ettore Sottsass / Memphis Group inspired sculptural facade. Bold clashing colors, asymmetric composition, mixed opening types. Each bay and story is a different wild element creating visual chaos and energy. A postmodern art object viewable from all angles.",
+  "facade": {
+    "bays": 3,
+    "stories": 5,
+    "symmetry": "none",
+    "total_width": 8.0,
+    "total_height": 10.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "Crown",   "height_multiplier": 0.6 },
+    { "row": 1, "name": "Pink",    "height_multiplier": 1.0 },
+    { "row": 2, "name": "Blue",    "height_multiplier": 1.2 },
+    { "row": 3, "name": "Yellow",  "height_multiplier": 1.0 },
+    { "row": 4, "name": "Mint",    "height_multiplier": 0.8 }
+  ],
+  "materials": {
+    "wall": "#1A1A1A",
+    "zones": {
+      "Crown":  { "color": "#1A1A1A", "type": "plaster" },
+      "Pink":   { "color": "#FF1493", "type": "plaster" },
+      "Blue":   { "color": "#00BFFF", "type": "plaster" },
+      "Yellow": { "color": "#FFD700", "type": "plaster" },
+      "Mint":   { "color": "#98FB98", "type": "plaster" }
+    }
+  },
+  "placements": [
+    { "col": 0, "row": 0, "part": "pediment_broken", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 0, "part": "medallion", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 0, "part": "cartouche", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 1, "part": "porthole", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 1, "part": "arched_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 1, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 3, "cols": 2 } },
+
+    { "col": 0, "row": 1, "part": "string_course", "col_span": 3,
+      "params": { "depth": 0.03, "band_height": 0.04, "y_frac": 0.0, "material": "stone_cornice" }
+    },
+
+    { "col": 0, "row": 2, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 2, "part": "round_arch", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 2, "part": "porthole", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 3,
+      "params": { "depth": 0.03, "band_height": 0.04, "y_frac": 0.0, "material": "stone_cornice" }
+    },
+
+    { "col": 0, "row": 3, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 4, "cols": 2 } },
+    { "col": 1, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 3, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 3, "part": "string_course", "col_span": 3,
+      "params": { "depth": 0.03, "band_height": 0.04, "y_frac": 0.0, "material": "stone_cornice" }
+    },
+
+    { "col": 0, "row": 4, "part": "arched_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 4, "part": "pilaster", "col_span": 1, "row_span": 1, "params": { "depth": 0.1 } },
+    { "col": 2, "row": 4, "part": "medallion", "col_span": 1, "row_span": 1, "params": {} }
+  ]
+}

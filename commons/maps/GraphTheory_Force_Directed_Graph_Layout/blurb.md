@@ -1,0 +1,5 @@
+Nodes repel. Edges pull. From these two forces, structure emerges — not designed, but negotiated. Force-directed layout takes a graph with no spatial information and gives it a body. Springs between connected nodes. Coulomb repulsion between all pairs. Run the simulation. Wait. The graph finds its own shape.
+
+An 8×8 arena. Algorithms compete for arrangement. Each step recalculates position from the sum of forces acting on every node — attraction, repulsion, gravity, damping. No node knows the final layout. No coordinator assigns positions. The graph self-organizes through local physics applied to abstract relationships.
+
+Layout is not in the data. It's in the process. The same graph, different initial conditions, different resting states. Equilibrium is not truth — it's one of many possible truces between tension and collapse.

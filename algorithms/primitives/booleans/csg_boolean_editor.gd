@@ -67,16 +67,16 @@ var variation_types = [
 # Materials for visual distinction
 var materials = []
 
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint():
 		setup_materials()
 		update_grid_info()
 
-func update_grid_info():
+func update_grid_info() -> void:
 	total_objects = grid_size.x * grid_size.y * grid_size.z
 	grid_info = "%dx%dx%d = %d objects" % [grid_size.x, grid_size.y, grid_size.z, total_objects]
 
-func setup_materials():
+func setup_materials() -> void:
 	materials.clear()
 	var base_colors = [
 		Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, 
@@ -94,7 +94,7 @@ func setup_materials():
 			material.flags_wireframe = true
 		materials.append(material)
 
-func generate_csg_grid():
+func generate_csg_grid() -> void:
 	if not Engine.is_editor_hint():
 		return
 	
@@ -140,12 +140,12 @@ func generate_csg_grid():
 	update_grid_info()
 	print("Generated %d CSG variations!" % total_objects)
 
-func set_owner_recursive(node: Node, owner: Node):
+func set_owner_recursive(node: Node, owner: Node) -> void:
 	for child in node.get_children():
 		child.owner = owner
 		set_owner_recursive(child, owner)
 
-func clear_all_csg():
+func clear_all_csg() -> void:
 	if not Engine.is_editor_hint():
 		return
 	
@@ -159,7 +159,7 @@ func clear_all_csg():
 	
 	print("Cleared all CSG objects")
 
-func toggle_labels_visibility():
+func toggle_labels_visibility() -> void:
 	if not Engine.is_editor_hint():
 		return
 	
@@ -167,7 +167,7 @@ func toggle_labels_visibility():
 		if child.name.begins_with("Label3D_"):
 			child.visible = show_labels
 
-func toggle_wireframe_mode():
+func toggle_wireframe_mode() -> void:
 	if not Engine.is_editor_hint():
 		return
 	
@@ -178,7 +178,7 @@ func toggle_wireframe_mode():
 		if child.name.begins_with("CSG_"):
 			update_csg_materials(child)
 
-func update_csg_materials(csg_node: Node):
+func update_csg_materials(csg_node: Node) -> void:
 	if csg_node is CSGShape3D and use_materials:
 		var index = int(csg_node.get_parent().name.split("_")[-1]) if csg_node.get_parent().name.contains("_") else 0
 		if index < materials.size():
@@ -233,7 +233,7 @@ func create_csg_variation(index: int) -> Node3D:
 	return container
 
 # CSG Creation Functions
-func create_hollow_sphere(combiner: CSGCombiner3D):
+func create_hollow_sphere(combiner: CSGCombiner3D) -> void:
 	var outer_sphere = CSGSphere3D.new()
 	outer_sphere.name = "OuterSphere"
 	outer_sphere.radius = 1.0
@@ -245,7 +245,7 @@ func create_hollow_sphere(combiner: CSGCombiner3D):
 	inner_sphere.operation = CSGShape3D.OPERATION_SUBTRACTION
 	combiner.add_child(inner_sphere)
 
-func create_sphere_with_holes(combiner: CSGCombiner3D):
+func create_sphere_with_holes(combiner: CSGCombiner3D) -> void:
 	var sphere = CSGSphere3D.new()
 	sphere.name = "BaseSphere"
 	sphere.radius = 1.2
@@ -263,7 +263,7 @@ func create_sphere_with_holes(combiner: CSGCombiner3D):
 		)
 		combiner.add_child(hole)
 
-func create_perforated_cube(combiner: CSGCombiner3D):
+func create_perforated_cube(combiner: CSGCombiner3D) -> void:
 	var cube = CSGBox3D.new()
 	cube.name = "BaseCube"
 	cube.size = Vector3(2, 2, 2)
@@ -283,7 +283,7 @@ func create_perforated_cube(combiner: CSGCombiner3D):
 				combiner.add_child(hole)
 				hole_index += 1
 
-func create_torus_intersection(combiner: CSGCombiner3D):
+func create_torus_intersection(combiner: CSGCombiner3D) -> void:
 	var torus1 = CSGTorus3D.new()
 	torus1.name = "Torus1"
 	torus1.inner_radius = 0.3
@@ -298,7 +298,7 @@ func create_torus_intersection(combiner: CSGCombiner3D):
 	torus2.operation = CSGShape3D.OPERATION_INTERSECTION
 	combiner.add_child(torus2)
 
-func create_cylinder_subtraction(combiner: CSGCombiner3D):
+func create_cylinder_subtraction(combiner: CSGCombiner3D) -> void:
 	var cylinder = CSGCylinder3D.new()
 	cylinder.name = "BaseCylinder"
 	cylinder.height = 2.0
@@ -317,7 +317,7 @@ func create_cylinder_subtraction(combiner: CSGCombiner3D):
 		small_cyl.position = Vector3(cos(angle) * 0.6, 0, sin(angle) * 0.6)
 		combiner.add_child(small_cyl)
 
-func create_nested_boxes(combiner: CSGCombiner3D):
+func create_nested_boxes(combiner: CSGCombiner3D) -> void:
 	var sizes = [2.0, 1.6, 1.2, 0.8]
 	var operations = [CSGShape3D.OPERATION_UNION, CSGShape3D.OPERATION_SUBTRACTION, 
 					 CSGShape3D.OPERATION_UNION, CSGShape3D.OPERATION_SUBTRACTION]
@@ -330,7 +330,7 @@ func create_nested_boxes(combiner: CSGCombiner3D):
 		box.rotation_degrees = Vector3(i * 15, i * 15, i * 15)
 		combiner.add_child(box)
 
-func create_swiss_cheese_effect(combiner: CSGCombiner3D):
+func create_swiss_cheese_effect(combiner: CSGCombiner3D) -> void:
 	var base = CSGSphere3D.new()
 	base.name = "CheeseBase"
 	base.radius = 1.3
@@ -348,7 +348,7 @@ func create_swiss_cheese_effect(combiner: CSGCombiner3D):
 		)
 		combiner.add_child(hole)
 
-func create_lattice_structure(combiner: CSGCombiner3D):
+func create_lattice_structure(combiner: CSGCombiner3D) -> void:
 	var frame_thickness = 0.1
 	var beam_index = 0
 	
@@ -369,7 +369,7 @@ func create_lattice_structure(combiner: CSGCombiner3D):
 				combiner.add_child(beam)
 				beam_index += 1
 
-func create_twisted_forms(combiner: CSGCombiner3D):
+func create_twisted_forms(combiner: CSGCombiner3D) -> void:
 	for i in range(5):
 		var shape: CSGShape3D
 		if i % 2 == 0:
@@ -391,52 +391,52 @@ func create_twisted_forms(combiner: CSGCombiner3D):
 		combiner.add_child(shape)
 
 # Simplified implementations for remaining variations
-func create_boolean_sculpture(combiner: CSGCombiner3D):
+func create_boolean_sculpture(combiner: CSGCombiner3D) -> void:
 	create_torus_intersection(combiner)
 
-func create_organic_cavities(combiner: CSGCombiner3D):
+func create_organic_cavities(combiner: CSGCombiner3D) -> void:
 	create_swiss_cheese_effect(combiner)
 
-func create_ring_structures(combiner: CSGCombiner3D):
+func create_ring_structures(combiner: CSGCombiner3D) -> void:
 	create_torus_intersection(combiner)
 
-func create_intersecting_cylinders(combiner: CSGCombiner3D):
+func create_intersecting_cylinders(combiner: CSGCombiner3D) -> void:
 	create_cylinder_subtraction(combiner)
 
-func create_complex_hollow(combiner: CSGCombiner3D):
+func create_complex_hollow(combiner: CSGCombiner3D) -> void:
 	create_nested_boxes(combiner)
 
-func create_fractal_like(combiner: CSGCombiner3D):
+func create_fractal_like(combiner: CSGCombiner3D) -> void:
 	create_lattice_structure(combiner)
 
-func create_architectural_form(combiner: CSGCombiner3D):
+func create_architectural_form(combiner: CSGCombiner3D) -> void:
 	create_perforated_cube(combiner)
 
-func create_abstract_art(combiner: CSGCombiner3D):
+func create_abstract_art(combiner: CSGCombiner3D) -> void:
 	create_twisted_forms(combiner)
 
-func create_mechanical_parts(combiner: CSGCombiner3D):
+func create_mechanical_parts(combiner: CSGCombiner3D) -> void:
 	create_cylinder_subtraction(combiner)
 
-func create_natural_erosion(combiner: CSGCombiner3D):
+func create_natural_erosion(combiner: CSGCombiner3D) -> void:
 	create_swiss_cheese_effect(combiner)
 
-func create_crystalline_structure(combiner: CSGCombiner3D):
+func create_crystalline_structure(combiner: CSGCombiner3D) -> void:
 	create_lattice_structure(combiner)
 
-func create_flowing_forms(combiner: CSGCombiner3D):
+func create_flowing_forms(combiner: CSGCombiner3D) -> void:
 	create_twisted_forms(combiner)
 
-func create_puzzle_pieces(combiner: CSGCombiner3D):
+func create_puzzle_pieces(combiner: CSGCombiner3D) -> void:
 	create_nested_boxes(combiner)
 
-func create_minimal_art(combiner: CSGCombiner3D):
+func create_minimal_art(combiner: CSGCombiner3D) -> void:
 	create_hollow_sphere(combiner)
 
-func create_complex_intersection(combiner: CSGCombiner3D):
+func create_complex_intersection(combiner: CSGCombiner3D) -> void:
 	create_torus_intersection(combiner)
 
-func create_random_combination(combiner: CSGCombiner3D):
+func create_random_combination(combiner: CSGCombiner3D) -> void:
 	var num_shapes = randi_range(2, 4)
 	for i in range(num_shapes):
 		var shape = create_random_primitive()
@@ -471,7 +471,7 @@ func create_random_primitive() -> CSGShape3D:
 	
 	return shape
 
-func apply_material_to_csg(csg_node: Node, material: Material):
+func apply_material_to_csg(csg_node: Node, material: Material) -> void:
 	if csg_node is CSGShape3D:
 		csg_node.material_override = material
 	
@@ -487,3 +487,12 @@ func create_variation_label(index: int, pos: Vector3) -> Label3D:
 	label.pixel_size = 0.005
 	label.modulate = Color.WHITE
 	return label
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

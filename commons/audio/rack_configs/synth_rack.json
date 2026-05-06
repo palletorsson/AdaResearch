@@ -1,0 +1,70 @@
+{
+	"rack_info": {
+		"name": "Advanced Synth Rack",
+		"description": "Full-featured synthesizer rack with oscillator, filter, and modulation controls",
+		"version": "1.0",
+		"sound_type": "synth_wave"
+	},
+	"layout": {
+		"padding_px": 20,
+		"gap_px": 20
+	},
+	"grid": [
+		["sl_1", " ", "sl_2"],
+		[" ", " ", " "],
+
+		["nb_1", " ", "nb_2"],
+		[" ", " ", " "],	
+		["sl_3", " ", "nb_3"]
+	],
+	"control_definitions": {
+		"sl_1": {
+			"type": "slider",
+			"label": "Frequency",
+			"parameter": "freq",
+			"min": 20.0,
+			"max": 2000.0,
+			"default": 440.0
+		},
+		"sl_2": {
+			"type": "slider",
+			"label": "Amplitude",
+			"parameter": "amp",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.5
+		},
+		"nb_1": {
+			"type": "knob",
+			"label": "Hardness",
+			"parameter": "hardness",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.5
+		},
+		"nb_2": {
+			"type": "knob",
+			"label": "Quality",
+			"parameter": "quality",
+			"min": 0.5,
+			"max": 10.0,
+			"default": 1.0
+		},
+		"sl_3": {
+			"type": "slider",
+			"label": "Duration",
+			"parameter": "duration",
+			"min": 0.1,
+			"max": 10.0,
+			"default": 2.0
+		},
+		"nb_3": {
+			"type": "knob",
+			"label": "Detune",
+			"parameter": "detune",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.0
+		}
+	}
+}

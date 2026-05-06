@@ -1,6 +1,6 @@
 extends SceneTree
 
-func _init():
+func _init() -> void:
 	print("🔍 Validating SoftBody3D Scene...")
 	
 	# Load the main scene

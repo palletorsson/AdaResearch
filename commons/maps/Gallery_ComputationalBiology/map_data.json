@@ -1,0 +1,109 @@
+{
+  "map_info": {
+    "name": "Gallery: ComputationalBiology",
+    "lookup_name": "Gallery_ComputationalBiology",
+    "description": "Showcase of 5 unplaced artifacts from ComputationalBiology. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 8,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "2-5 minutes",
+      "learning_objectives": [
+        "Browse 5 ComputationalBiology artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "ComputationalBiology Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" ","sp"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","request_note:0:1.5#text:growslimbs"," ","request_note:0:1.5#text:limbgrowth"," ","request_note:0:1.5#text:monte carlo protein"," ","request_note:0:1.5#text:morphobody"," "," "],
+      [" "," ","growslimbs:0:-0.5"," ","limbgrowth:0:-0.5"," ","monte_carlo_protein:0:-0.5"," ","morphobody:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:ten tulip buckets"," "," "," "," "," "," "," "," "],
+      [" "," ","ten_tulip_buckets:0:-0.5"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

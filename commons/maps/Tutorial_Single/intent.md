@@ -1,0 +1,7 @@
+Concept: The absolute minimum interaction — one cube, one exit. The entire system reduced to grab-and-go, teaching VR hand tracking before any data structure concepts enter.
+Sequence role: Second map in Array Tutorial; the zero-index map (absolute_beginner). Before arrays, before patterns, the learner must know how to pick up an object in VR. This is the control tutorial — establishing the interface contract that all subsequent maps assume. The single cube is the scalar before the array; follows Array_Patterns; leads to Tutorial_Row.
+Technical angle: VR hand tracking, grab mechanics, object interaction feedback (score node), spatial navigation on a minimal platform. The xyz_coordinates artifact introduces the coordinate label system used throughout the sequence. No array concepts yet — pure interface.
+Critical angle: One is not yet a pattern. The single cube is the atom from which arrays are built, but alone it teaches only interaction, not structure. The deliberate minimalism (4×3 platform, one object, one exit) prevents cognitive overload and isolates the input mechanism from the data structure.
+Key artifacts: pick_up_cube is the singular interaction object; xyz_coordinates labels the coordinate system for all future maps; dark_sphere provides ambient presence.
+
+Gap: No gap identified.

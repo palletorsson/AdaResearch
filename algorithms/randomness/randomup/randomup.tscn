@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1fn8m7dpqdqh"]
+
+[ext_resource type="Script" uid="uid://ctt7mbh5pqo4q" path="res://algorithms/randomness/randomup/randomup.gd" id="1_vixtr"]
+
+[node name="Randomup" type="Node3D"]
+script = ExtResource("1_vixtr")
+upward_bias = 0.3

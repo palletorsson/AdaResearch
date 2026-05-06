@@ -1,0 +1,134 @@
+{
+  "id": "morph13_drag_pageant_mermaid",
+  "family": "drag_pageant",
+  "notes": "Reference-driven mermaid glam: a narrow lower column that breaks into a late trumpet flare, with a compact swept wig and restrained shoulder sparkle.",
+  "camera_yaw": 0.76,
+  "camera_pitch": 0.31,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.74,
+      1.38,
+      0.54
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "mermaid_column",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.92,
+        "scale": 0.58
+      },
+      "child_role": "garment",
+      "budget_factor": 0.54
+    },
+    {
+      "id": "mermaid_flare",
+      "when": {
+        "role": "garment",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.22
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.48,
+        "scale": 1.72
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "mermaid_shoulders",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.22,
+        "scale": 0.28,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.12,
+          0.04
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "mermaid_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.22,
+        "scale": 0.52
+      },
+      "child_role": "hair",
+      "budget_factor": 0.6
+    },
+    {
+      "id": "mermaid_hair_sweep",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.22
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.16,
+        "scale": 0.84,
+        "normal_bias": 1.0,
+        "tangent_bias": 0.14,
+        "world_bias": [
+          -0.08,
+          0.34,
+          0.08
+        ]
+      },
+      "child_role": "hair",
+      "budget_factor": 0.28
+    },
+    {
+      "id": "mermaid_wig_finish",
+      "when": {
+        "role": "hair",
+        "min_depth": 2,
+        "max_depth": 2,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 3,
+        "length": 0.15,
+        "scale": 1.14
+      },
+      "child_role": "hair",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

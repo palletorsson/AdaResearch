@@ -1,0 +1,32 @@
+{
+  "id": "gen01_hybrid_fixed",
+  "notes": "Inset+extrude+noise on a cube with the correct tag.",
+  "seed": "cube",
+  "seed_scale": 0.55,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.12
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:inset",
+      "params": {
+        "distance": 0.22,
+        "scale": 0.85
+      }
+    },
+    {
+      "op": "noise",
+      "selector": "all",
+      "params": {
+        "amount": 0.04,
+        "frequency": 4.0
+      }
+    }
+  ]
+}

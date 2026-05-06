@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://djecs05dmblst"]
+
+[ext_resource type="Script" uid="uid://bxbkl7216cud1" path="res://algorithms/particles/example_particle_body.gd" id="1"]
+[ext_resource type="Script" uid="uid://dpl7n4sp2drig" path="res://core/particle_emitter.gd" id="2"]
+[ext_resource type="Script" uid="uid://coj6vnnwirlna" path="res://core/particle_body.gd" id="3"]
+[ext_resource type="Script" uid="uid://dsqf3358tdjn2" path="res://core/blobfish_swarm.gd" id="4"]
+
+[node name="BlobfishDemo" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 5)
+light_energy = 0.8
+
+[node name="ParticleEmitter" type="Node3D" parent="."]
+script = ExtResource("2")
+max_particles = 7
+particle_color = Color(1, 0.90588236, 1, 0.1882353)
+use_instancing = true
+
+[node name="ParticleBody" type="Node3D" parent="."]
+script = ExtResource("3")
+connection_mode = 3
+line_thickness = 0.1
+surface_color = Color(0.9506473, 0.8898321, 0.9999998, 0.3019608)
+line_color = Color(0, 0, 0.85882354, 1)
+
+[node name="BlobfishSwarm" type="Node3D" parent="."]
+script = ExtResource("4")

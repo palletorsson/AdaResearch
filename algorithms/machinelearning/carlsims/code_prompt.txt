@@ -1,0 +1,57 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/carlsims/evolvedcreatures.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/carlsims/evolved_creatures.tscn`.
+Your implementation must bring the `Karl Sims Inspired Evolution` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Karl Sims Inspired Evolution
+
+
+## Folder Summary
+
+The `Karl Sims Inspired Evolution` module provides a 3D sandbox for exploring the ideas behind the Karl Sims Inspired Evolution workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `evolved_creatures.tscn`, controller scripts such as `carlsims_tutorial.gd` and `evolvedcreatures.gd`, and supporting assets including `code_prompt.txt` and `meta.json`.
+
+## Scene Assets
+- `evolvedcreatures.tscn` — camera + light; the script builds the ground plane and creatures at runtime.
+- `evolvedcreatures.gd` — controller that maintains the population, applies joint motors, evaluates fitness, and breeds new generations.
+- `code_prompt.txt` — instructions for regenerating the script with an AI assistant.
+- `carlsims_tutorial.gd` — in-world BBCode tutorial board.
+- `meta.json` — catalog entry for VR menus/search.
+
+## How It Works
+1. `_build_ground()` adds a static floor so physics can settle.
+2. `spawn_initial_population()` samples random genomes (hip amplitudes/frequencies/phases, body masses) and builds walkers with rigid body torsos + two hinged legs.
+3. `_physics_process()` drives each hip joint with a sinusoidal motor derived from the genome.
+4. After `GENERATION_DURATION` seconds, `_evaluate_population()` measures forward displacement and height bonus to compute fitness.
+5. `_evolve_generation()` keeps the top genomes, breeds children via weighted crossover, mutates traits, and respawns the population.
+
+## Exported Controls
+- `random_seed` — deterministic seed for genome sampling.
+- `enable_random_restart` — optionally add fresh random genomes when filling the population.
+- `enable_debug_prints` — print per-generation fitness values.
+
+## Usage Tips
+- Watch for walkers that develop asymmetric gaits; mutation can produce interesting cycles.
+- Toggle `enable_random_restart` to keep injecting new genomes if the population converges too soon.
+- Adjust `GENERATION_DURATION`, `HIP_MAX_TORQUE`, or mutation constants in the script for faster/slower evolution.
+
+## Extending
+- Add knee joints or extra body segments for richer morphologies.
+- Implement obstacles and evaluate how walkers cope.
+- Track average fitness per generation and visualise trends with labels or graphs.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Expose inspector controls for `random_seed`, `enable_random_restart`, `enable_debug_prints`.
+- Resolve @onready references for `camera`, `light`.
+- Implement the lifecycle helpers `randomize()`, `duplicate()`, `_ready()`, `_build_ground()`, `spawn_initial_population()`, `_grid_position()`.
+- Retain constant definitions such as `POPULATION_SIZE`, `GENERATION_DURATION`, `HIP_LIMIT`, `HIP_MAX_TORQUE`, `CREATURE_SPACING`, `ROOT_HEIGHT`.
+- Maintain state containers including `hip_amplitude`, `hip_frequency`, `hip_phase`, `torso_mass`, `leg_mass`, `fitness`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

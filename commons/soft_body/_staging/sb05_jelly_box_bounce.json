@@ -1,0 +1,38 @@
+{
+  "id": "sb05_jelly_box_bounce",
+  "topology": "jelly_box",
+  "size": 1.4,
+  "stiffness": 0.9,
+  "damping": 0.99,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -1.5,
+  "steps": 300,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "camera_yaw": 0.55,
+  "camera_pitch": 0.2,
+  "render": {
+    "color": [
+      0.9,
+      0.45,
+      0.55
+    ],
+    "roughness": 0.4,
+    "particle_radius": 0.12,
+    "show_wires": true,
+    "wire_color": [
+      0.2,
+      0.12,
+      0.1
+    ]
+  },
+  "layout": "verlet_jelly",
+  "notes": "8-corner jelly cube dropped \u2014 lands and wobbles, wires show 28-spring topology."
+}

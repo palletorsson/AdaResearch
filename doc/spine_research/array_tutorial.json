@@ -1,0 +1,3130 @@
+{
+  "sequence": "array_tutorial",
+  "generated_at": "2026-04-29T11:23:30.135670Z",
+  "runs": [
+    {
+      "base": "Tutorial_Pattern",
+      "variants": [
+        {
+          "id": "Tutorial_Pattern_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Tutorial_Pattern_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Tutorial_Pattern_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Array_Patterns",
+      "variants": [
+        {
+          "id": "Array_Patterns_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Array_Patterns_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Array_Patterns_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Tutorial_Single",
+      "variants": [
+        {
+          "id": "Tutorial_Single_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Tutorial_Single_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Tutorial_Single_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Tutorial_Row",
+      "variants": [
+        {
+          "id": "Tutorial_Row_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Tutorial_Row_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Tutorial_Row_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Tutorial_2D_Build",
+      "variants": [
+        {
+          "id": "Tutorial_2D_Build_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Tutorial_2D_Build_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Tutorial_2D_Build_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Tutorial_3D",
+      "variants": [
+        {
+          "id": "Tutorial_3D_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Tutorial_3D_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Tutorial_3D_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Tutorial_Disco",
+      "variants": [
+        {
+          "id": "Tutorial_Disco_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Tutorial_Disco_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Tutorial_Disco_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_Arrays",
+      "variants": [
+        {
+          "id": "Chamber_Arrays_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Chamber_Arrays_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Chamber_Arrays_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt01_p1_bauhaus",
+      "variants": [
+        {
+          "id": "Pattern_pt01_p1_bauhaus_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt01_p1_bauhaus_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt01_p1_bauhaus_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt02_p2_escher",
+      "variants": [
+        {
+          "id": "Pattern_pt02_p2_escher_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt02_p2_escher_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt02_p2_escher_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt03_p4m_alhambra",
+      "variants": [
+        {
+          "id": "Pattern_pt03_p4m_alhambra_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt03_p4m_alhambra_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt03_p4m_alhambra_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt04_p6m_persian",
+      "variants": [
+        {
+          "id": "Pattern_pt04_p6m_persian_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt04_p6m_persian_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt04_p6m_persian_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt05_p3_memphis",
+      "variants": [
+        {
+          "id": "Pattern_pt05_p3_memphis_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt05_p3_memphis_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt05_p3_memphis_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt06_pmm_tatami",
+      "variants": [
+        {
+          "id": "Pattern_pt06_pmm_tatami_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt06_pmm_tatami_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt06_pmm_tatami_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt07_p4g_pastel",
+      "variants": [
+        {
+          "id": "Pattern_pt07_p4g_pastel_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt07_p4g_pastel_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt07_p4g_pastel_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt08_p6_monochrome",
+      "variants": [
+        {
+          "id": "Pattern_pt08_p6_monochrome_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt08_p6_monochrome_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt08_p6_monochrome_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt09_pgg_bauhaus",
+      "variants": [
+        {
+          "id": "Pattern_pt09_pgg_bauhaus_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt09_pgg_bauhaus_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        },
+        {
+          "id": "Pattern_pt09_pgg_bauhaus_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Pattern_pt10_p3m1_alhambra",
+      "variants": [
+        {
+          "id": "Pattern_pt10_p3m1_alhambra_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Pattern_pt10_p3m1_alhambra_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Pattern_pt10_p3m1_alhambra_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_baroque",
+      "variants": [
+        {
+          "id": "Facade_baroque_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_baroque_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_baroque_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_bernini_colonnade",
+      "variants": [
+        {
+          "id": "Facade_bernini_colonnade_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_bernini_colonnade_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_bernini_colonnade_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_capri_whitewash",
+      "variants": [
+        {
+          "id": "Facade_capri_whitewash_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_capri_whitewash_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_capri_whitewash_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_classical",
+      "variants": [
+        {
+          "id": "Facade_classical_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_classical_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_classical_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_continuous_monument",
+      "variants": [
+        {
+          "id": "Facade_continuous_monument_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 4,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_continuous_monument_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_continuous_monument_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_decon_fragment",
+      "variants": [
+        {
+          "id": "Facade_decon_fragment_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 5,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_decon_fragment_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_decon_fragment_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_florence_marble",
+      "variants": [
+        {
+          "id": "Facade_florence_marble_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 4,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_florence_marble_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_florence_marble_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_florentine_polychrome",
+      "variants": [
+        {
+          "id": "Facade_florentine_polychrome_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_florentine_polychrome_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_florentine_polychrome_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_galleria_vittorio_emanuele",
+      "variants": [
+        {
+          "id": "Facade_galleria_vittorio_emanuele_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_galleria_vittorio_emanuele_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_galleria_vittorio_emanuele_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_gothic_portal",
+      "variants": [
+        {
+          "id": "Facade_gothic_portal_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_gothic_portal_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_gothic_portal_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_memphis_totem",
+      "variants": [
+        {
+          "id": "Facade_memphis_totem_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_memphis_totem_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_memphis_totem_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_naples_diamond_rustication",
+      "variants": [
+        {
+          "id": "Facade_naples_diamond_rustication_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_naples_diamond_rustication_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_naples_diamond_rustication_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_nyc_tenement",
+      "variants": [
+        {
+          "id": "Facade_nyc_tenement_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_nyc_tenement_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_nyc_tenement_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_painted_vault",
+      "variants": [
+        {
+          "id": "Facade_painted_vault_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_painted_vault_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_painted_vault_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_pompeii_black_room",
+      "variants": [
+        {
+          "id": "Facade_pompeii_black_room_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_pompeii_black_room_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_pompeii_black_room_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_pompeii_ceiling_coffers",
+      "variants": [
+        {
+          "id": "Facade_pompeii_ceiling_coffers_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_pompeii_ceiling_coffers_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_pompeii_ceiling_coffers_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_pompeii_ceiling_medallion",
+      "variants": [
+        {
+          "id": "Facade_pompeii_ceiling_medallion_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_pompeii_ceiling_medallion_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_pompeii_ceiling_medallion_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_pompeii_fourth_style",
+      "variants": [
+        {
+          "id": "Facade_pompeii_fourth_style_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_pompeii_fourth_style_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_pompeii_fourth_style_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_pompeii_red_room",
+      "variants": [
+        {
+          "id": "Facade_pompeii_red_room_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_pompeii_red_room_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_pompeii_red_room_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_pompeii_second_style",
+      "variants": [
+        {
+          "id": "Facade_pompeii_second_style_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_pompeii_second_style_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_pompeii_second_style_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_superstudio_grid",
+      "variants": [
+        {
+          "id": "Facade_superstudio_grid_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_superstudio_grid_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_superstudio_grid_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_venetian_gothic",
+      "variants": [
+        {
+          "id": "Facade_venetian_gothic_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_venetian_gothic_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_venetian_gothic_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_villa_boscoreale",
+      "variants": [
+        {
+          "id": "Facade_villa_boscoreale_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_villa_boscoreale_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_villa_boscoreale_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_villa_mysteries",
+      "variants": [
+        {
+          "id": "Facade_villa_mysteries_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_villa_mysteries_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_villa_mysteries_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_villa_san_michele",
+      "variants": [
+        {
+          "id": "Facade_villa_san_michele_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_villa_san_michele_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_villa_san_michele_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Facade_villa_san_michele_exact",
+      "variants": [
+        {
+          "id": "Facade_villa_san_michele_exact_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.96,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Facade_villa_san_michele_exact_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "Facade_villa_san_michele_exact_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    }
+  ]
+}

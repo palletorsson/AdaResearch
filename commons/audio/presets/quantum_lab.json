@@ -1,0 +1,110 @@
+{
+    "description": "Scientific facility at night - late-night research with contemplative downtempo breakbeat feel",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -16,
+            "bus": "Ambient",
+            "parameters": {
+                "base_freq": 45.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
+            "volume_db": -22,
+            "bus": "Bass"
+        },
+        {
+            "sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
+            "volume_db": -20,
+            "bus": "Pad"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.static_burst",
+                "techno_noir.typing_segment"
+            ],
+            "interval_range": [
+                10.0,
+                30.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Effects"
+        },
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SHIELD_HIT",
+                "AudioSynthesizer.DX7_ELECTRIC_PIANO"
+            ],
+            "interval_range": [
+                20.0,
+                50.0
+            ],
+            "volume_range": [
+                -28,
+                -20
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4,
+                    "damping": 0.3
+                }
+            ]
+        },
+        "Bass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 200
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "Pad": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "dry": 0.8,
+                    "wet": 0.3
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.5
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 632,
+                    "tap1_level_db": -8.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.4
+                }
+            ]
+        }
+    }
+}

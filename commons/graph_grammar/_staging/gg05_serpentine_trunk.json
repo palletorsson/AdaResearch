@@ -1,0 +1,43 @@
+{
+  "id": "gg05_serpentine_trunk",
+  "notes": "Serpentine trunk \u00e2\u20ac\u201d sine displacement along height drives X-axis wiggle.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.2
+  },
+  "iterations": 6,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.6,
+        "spread_deg": 5,
+        "radius_decay": 0.85
+      }
+    },
+    {
+      "op": "sine_displace",
+      "selector": "all",
+      "params": {
+        "amp": 0.35,
+        "freq": 0.4,
+        "along_axis": "y",
+        "displace": [
+          1,
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

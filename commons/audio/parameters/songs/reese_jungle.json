@@ -1,0 +1,26 @@
+{
+    "_metadata": {
+        "sound_type": "reese_jungle_song",
+        "display_name": "Jungle / Drum & Bass",
+        "description": "Goldie, LTJ Bukem, Photek style. Chopped Amen breaks, wobbling Reese bass, dark atmospheres, 170 BPM energy.",
+        "category": "songs",
+        "tags": ["jungle", "dnb", "drum_and_bass", "amen", "reese", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Goldie", "LTJ Bukem", "Photek", "Roni Size"],
+        "reference_tracks": ["Inner City Life", "Atlantis", "Ni Ten Ichi Ryu"]
+    },
+    "identity": {
+        "emotion": "dark_energy",
+        "era": "mid_90s_uk",
+        "character": ["chopped", "dark", "complex", "driving"]
+    },
+    "parameters": {
+        "bpm": { "min": 160, "max": 180, "value": 170, "step": 1 },
+        "key": { "options": ["Gm", "Fm", "Dm", "Cm"], "value": "Gm" },
+        "break_complexity": { "min": 0.0, "max": 1.0, "value": 0.7 }
+    },
+    "sound_design": {
+        "reese_bass": { "detune": 0.07, "sub": true, "filter_lfo": 0.25 },
+        "drums": { "style": "amen_chopped", "tempo": 170 }
+    }
+}

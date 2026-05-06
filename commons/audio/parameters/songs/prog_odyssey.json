@@ -1,0 +1,158 @@
+{
+    "_metadata": {
+        "sound_type": "prog_odyssey_song",
+        "display_name": "Prog Odyssey",
+        "description": "Through-composed progressive rock suite in 7 movements. Variable tempos, asymmetric sections, thematic callbacks. Dark sci-fi Moog synthesis meets ELP virtuosity and Tangerine Dream sequencers. A voyage from overture to vanishing point.",
+        "category": "songs",
+        "tags": ["prog", "70s", "moog", "elp", "tangerine_dream", "king_crimson", "klaus_schulze", "through_composed", "suite", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Emerson Lake & Palmer", "Tangerine Dream", "King Crimson", "Klaus Schulze", "Kraftwerk"],
+        "reference_tracks": ["Tarkus", "Phaedra", "21st Century Schizoid Man", "Timewind"]
+    },
+    "identity": {
+        "emotion": "dark_voyage",
+        "era": "early_to_mid_70s",
+        "character": ["dark", "exploratory", "through_composed", "cinematic", "epic"]
+    },
+    "parameters": {
+        "duration": { "min": 240.0, "max": 1200.0, "value": 600.0, "step": 60.0, "description": "Extended suite length — 7 movements" },
+        "bpm": { "min": 75, "max": 130, "value": 100, "step": 1, "description": "Variable: 100 (overture/reprise), 130 (machine/eruption), 75 (cathedral)" },
+        "key": { "options": ["Bm", "F#m", "Am", "Dm"], "value": "Bm", "description": "B minor Aeolian — dark, distinct from Em prog_synth_70s" },
+        "style": { "options": ["suite", "dark_voyage"], "value": "suite", "description": "Through-composed progressive suite" }
+    },
+    "sound_design": {
+        "mellotron_pad": {
+            "oscillators": { "count": 5, "waveform": "mixed_saw_square", "detune": "moderate" },
+            "filter": { "type": "24db_lowpass", "resonance": { "min": 0.3, "max": 0.6 } },
+            "character": "cathedral_warmth",
+            "role": "overture_and_reprise_foundation"
+        },
+        "minimoog_lead": {
+            "oscillators": { "count": 3, "waveform": "sawtooth", "detune": "slight" },
+            "filter": { "type": "24db_lowpass", "resonance": { "min": 0.6, "max": 0.8 } },
+            "portamento": { "enabled": true, "essential": true, "speed": { "min": 0.05, "max": 0.2 } },
+            "expression": ["pitch_wheel_bends", "filter_sweeps"],
+            "character": "screaming_lead",
+            "role": "eruption_solo"
+        },
+        "minimoog_bass": {
+            "oscillators": { "count": 2, "waveform": "sawtooth_sub", "detune": "fat" },
+            "filter": { "type": "ladder_lowpass", "cutoff": 800, "resonance": 0.4 },
+            "glide": 50,
+            "character": "deep_analog_warmth",
+            "role": "descent_and_eruption_foundation"
+        },
+        "kraftwerk_sequence": {
+            "style": "tangerine_dream",
+            "pattern": "16th_note_arpeggios",
+            "filter_modulation": "slow_lfo_sweeps",
+            "layering": "hypnotic_polyrhythms",
+            "role": "machine_room_dominant"
+        },
+        "motorik_beat": {
+            "pattern": "steady_unwavering_4_4",
+            "character": "mechanical_hypnotic",
+            "philosophy": "human_as_machine",
+            "role": "machine_room_and_eruption"
+        }
+    },
+    "movements": {
+        "1_overture": {
+            "bars": 8,
+            "bpm": 100,
+            "time_signature": "4/4",
+            "instruments": ["moog_pad"],
+            "description": "Mellotron pad + motif statement. The theme that will return in Reprise.",
+            "progression": "overture"
+        },
+        "2_descent": {
+            "bars": 12,
+            "bpm": 100,
+            "time_signature": "4/4",
+            "instruments": ["moog_pad", "moog_bass", "kraftwerk_seq"],
+            "description": "Darker progression, Moog bass enters, sequence builds tension.",
+            "progression": "descent"
+        },
+        "3_machine_room": {
+            "bars": 8,
+            "bpm": 130,
+            "time_signature": "7/8",
+            "instruments": ["kraftwerk_seq", "motorik_drums", "moog_bass"],
+            "description": "Tempo jump. Motorik drums dominate. Kraftwerk sequence in asymmetric 7/8 feel.",
+            "progression": "machine"
+        },
+        "4_cathedral": {
+            "bars": 6,
+            "bpm": 75,
+            "time_signature": "6/8",
+            "instruments": ["moog_pad"],
+            "description": "Dramatic slow-down. Pad-only. Near-silence. Spacious and reverberant.",
+            "progression": "cathedral"
+        },
+        "5_eruption": {
+            "bars": 16,
+            "bpm": 130,
+            "time_signature": "4/4",
+            "instruments": ["moog_pad", "moog_bass", "kraftwerk_seq", "elp_lead", "motorik_drums"],
+            "description": "Full force. ELP screaming lead solo over everything. Longest section.",
+            "progression": "eruption"
+        },
+        "6_reprise": {
+            "bars": 8,
+            "bpm": 100,
+            "time_signature": "4/4",
+            "instruments": ["moog_pad", "moog_bass"],
+            "description": "Overture theme returns transformed. Bass + pad only. Thematic callback.",
+            "progression": "overture"
+        },
+        "7_vanishing": {
+            "bars": 4,
+            "bpm": 100,
+            "time_signature": "4/4",
+            "instruments": ["moog_pad"],
+            "description": "Fade to single oscillator drone. The voyage ends.",
+            "progression": "vanishing"
+        }
+    },
+    "time_signatures": ["4/4", "7/8", "6/8"],
+    "chord_progressions": {
+        "overture": {
+            "name": "overture_theme",
+            "degrees": [0, 5, 3, 6, 0, 4, 2, 5],
+            "description": "i - VI - iv - VII - i - V - iii - VI — modal arc, the main motif"
+        },
+        "descent": {
+            "name": "chromatic_descent",
+            "degrees": [0, 6, 5, 4, 0, 3, 6, 5, 0, 6, 4, 3],
+            "description": "i - VII - VI - V - i - iv - VII - VI - i - VII - V - iv — 12-bar descending with chromatic tension"
+        },
+        "machine": {
+            "name": "machine_ostinato",
+            "degrees": [0, 0, 3, 3, 5, 5, 6, 6],
+            "description": "Repeated pairs: i-i-iv-iv-VI-VI-VII-VII — mechanical, relentless"
+        },
+        "cathedral": {
+            "name": "cathedral_space",
+            "degrees": [5, 3, 0, 4, 5, 0],
+            "description": "VI - iv - i - V - VI - i — spacious, slow, each chord breathes"
+        },
+        "eruption": {
+            "name": "eruption_fury",
+            "degrees": [0, 6, 5, 4, 3, 2, 6, 0, 0, 5, 4, 3, 6, 5, 4, 0],
+            "description": "16-bar descending fury with chromatic movement — solo playground"
+        },
+        "vanishing": {
+            "name": "vanishing_drone",
+            "degrees": [0, 0, 0, 0],
+            "description": "Pure root drone — single note fading to silence"
+        }
+    },
+    "arrangement": {
+        "structure": "through_composed_suite",
+        "movements": 7,
+        "development": "themes_introduced_transformed_reprised",
+        "dynamics": "quiet_overture_to_eruption_to_vanishing",
+        "tempo_changes": true,
+        "thematic_callbacks": ["overture_returns_as_reprise"]
+    }
+}

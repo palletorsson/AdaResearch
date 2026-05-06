@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://duax6j8yjgvbe"]
+
+[ext_resource type="Script" path="res://commons/primitives/line/snap_line_segment.gd" id="1_segment"]
+[ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="2_snappoint"]
+
+[node name="SnapLineSegment" type="Node3D"]
+script = ExtResource("1_segment")
+line_width = 0.006
+line_color = Color(0.1, 0.75, 0.95, 0.9)
+locked_color = Color(0.3, 1.0, 0.7, 1.0)
+snap_tolerance = 0.08
+
+[node name="EndpointA" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+
+[node name="EndpointB" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)

@@ -1,0 +1,80 @@
+{
+  "name": "QFEP_Synthesis",
+  "title": "The Formula Made Yours",
+  "description": "QFE = F \u2212 \u03bbE(S) + \u03c6\u0394E(S,t). The formula is not a static equation \u2014 it is a metamorphosis. Walk the egg \u2192 larva \u2192 imago strip; collect F, E, \u03bb, \u03c6 along the path; the formula unfolds atop the plinth; the imago you return as is what the force has earned. Merian's lifecycle plate, mid-fold.",
+  "dimensions": {
+    "rows": 12,
+    "cols": 12
+  },
+  "n_artifacts": 10,
+  "spawn": [
+    1,
+    5
+  ],
+  "teleport": [
+    11,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "queer_morphology_specimen",
+      "row": 2,
+      "col": 2,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "grab_sphere_F",
+      "row": 3,
+      "col": 3,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "grab_sphere_E",
+      "row": 3,
+      "col": 7,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "grab_sphere_lambda",
+      "row": 5,
+      "col": 3,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "queer_morphology_specimen",
+      "row": 5,
+      "col": 5,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "grab_sphere_phi",
+      "row": 5,
+      "col": 7,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "qfep_formula_3d",
+      "row": 6,
+      "col": 5,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "queer_morphology_specimen",
+      "row": 9,
+      "col": 5,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "tt",
+      "row": 10,
+      "col": 2,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "tt",
+      "row": 10,
+      "col": 8,
+      "family": "commons_artifacts"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ var arch_height: float = 0.9
 var arch_width: float = 0.8
 var arch_depth: float = 0.2
 var pillar_width: float = 0.15
+var arch_thickness: float = 0.08  # Thickness of the arch curve
 var arch_segments: int = 12
 
 func _ready():
@@ -35,7 +36,7 @@ func create_arch_vertices() -> Array:
 	var half_depth = arch_depth * 0.5
 	var top_of_pillars = arch_height * 0.6
 
-	# Left pillar
+	# Left pillar (indices 0-7)
 	vertices.append_array([
 		# Bottom (0-3)
 		Vector3(-half_width, 0, -half_depth),
@@ -49,7 +50,7 @@ func create_arch_vertices() -> Array:
 		Vector3(-half_width, top_of_pillars, half_depth),
 	])
 
-	# Right pillar
+	# Right pillar (indices 8-15)
 	vertices.append_array([
 		# Bottom (8-11)
 		Vector3(half_width - pillar_width, 0, -half_depth),
@@ -63,20 +64,32 @@ func create_arch_vertices() -> Array:
 		Vector3(half_width - pillar_width, top_of_pillars, half_depth),
 	])
 
-	# Curved top (arch curve) - front face
-	var start_idx = vertices.size()
+	# Curved arch with thickness (4 vertices per segment point)
+	# The arch outer edge aligns with the pillar outer edges
+	# Outer edge of pillars: ±half_width
+	# Inner edge of pillars: ±(half_width - pillar_width)
+	var outer_radius = half_width  # Outer curve aligns with pillar outer edge
+	var inner_radius = half_width - pillar_width  # Inner curve aligns with pillar inner edge
+	var center_height = top_of_pillars  # Arch center at top of pillars
+
+	# Starting at index 16
 	for i in range(arch_segments + 1):
 		var t = float(i) / float(arch_segments)
-		var angle = PI * t  # Half circle
-		var radius = (arch_width - pillar_width * 2) * 0.5
-		var center_height = top_of_pillars
-		var x = cos(angle) * radius
-		var y = center_height + sin(angle) * radius
+		var angle = PI * (1.0 - t)  # Half circle, right to left (0 = right, PI = left)
 
-		# Front curve
-		vertices.append(Vector3(x, y, half_depth))
-		# Back curve
-		vertices.append(Vector3(x, y, -half_depth))
+		var outer_x = cos(angle) * outer_radius
+		var outer_y = center_height + sin(angle) * outer_radius
+		var inner_x = cos(angle) * inner_radius
+		var inner_y = center_height + sin(angle) * inner_radius
+
+		# Outer front (index: 16 + i*4 + 0)
+		vertices.append(Vector3(outer_x, outer_y, half_depth))
+		# Outer back (index: 16 + i*4 + 1)
+		vertices.append(Vector3(outer_x, outer_y, -half_depth))
+		# Inner front (index: 16 + i*4 + 2)
+		vertices.append(Vector3(inner_x, inner_y, half_depth))
+		# Inner back (index: 16 + i*4 + 3)
+		vertices.append(Vector3(inner_x, inner_y, -half_depth))
 
 	return vertices
 
@@ -84,57 +97,91 @@ func create_arch_faces() -> Array:
 	var faces = []
 
 	# Left pillar faces
-	# Bottom
-	faces.append([0, 2, 1])
-	faces.append([0, 3, 2])
-	# Sides
-	faces.append([0, 1, 5])
-	faces.append([0, 5, 4])
-	faces.append([1, 2, 6])
-	faces.append([1, 6, 5])
-	faces.append([2, 3, 7])
-	faces.append([2, 7, 6])
-	faces.append([3, 0, 4])
-	faces.append([3, 4, 7])
-	# Top
-	faces.append([4, 5, 6])
-	faces.append([4, 6, 7])
+	# Bottom (facing down)
+	faces.append([0, 1, 2])
+	faces.append([0, 2, 3])
+	# Left side (facing -X)
+	faces.append([0, 3, 7])
+	faces.append([0, 7, 4])
+	# Front side (facing +Z)
+	faces.append([3, 2, 6])
+	faces.append([3, 6, 7])
+	# Right side (facing +X, inner)
+	faces.append([2, 1, 5])
+	faces.append([2, 5, 6])
+	# Back side (facing -Z)
+	faces.append([1, 0, 4])
+	faces.append([1, 4, 5])
+	# Top (facing up)
+	faces.append([4, 7, 6])
+	faces.append([4, 6, 5])
 
 	# Right pillar faces
-	# Bottom
-	faces.append([8, 10, 9])
-	faces.append([8, 11, 10])
-	# Sides
-	faces.append([8, 9, 13])
-	faces.append([8, 13, 12])
-	faces.append([9, 10, 14])
-	faces.append([9, 14, 13])
-	faces.append([10, 11, 15])
-	faces.append([10, 15, 14])
-	faces.append([11, 8, 12])
-	faces.append([11, 12, 15])
-	# Top
-	faces.append([12, 13, 14])
-	faces.append([12, 14, 15])
+	# Bottom (facing down)
+	faces.append([8, 9, 10])
+	faces.append([8, 10, 11])
+	# Left side (facing -X, inner)
+	faces.append([8, 11, 15])
+	faces.append([8, 15, 12])
+	# Front side (facing +Z)
+	faces.append([11, 10, 14])
+	faces.append([11, 14, 15])
+	# Right side (facing +X)
+	faces.append([10, 9, 13])
+	faces.append([10, 13, 14])
+	# Back side (facing -Z)
+	faces.append([9, 8, 12])
+	faces.append([9, 12, 13])
+	# Top (facing up)
+	faces.append([12, 15, 14])
+	faces.append([12, 14, 13])
 
-	# Curved arch
+	# Curved arch faces
 	var start_idx = 16
 	for i in range(arch_segments):
-		var front1 = start_idx + i * 2
-		var back1 = front1 + 1
-		var front2 = front1 + 2
-		var back2 = front2 + 1
+		# Current segment vertices
+		var of1 = start_idx + i * 4 + 0  # outer front 1
+		var ob1 = start_idx + i * 4 + 1  # outer back 1
+		var if1 = start_idx + i * 4 + 2  # inner front 1
+		var ib1 = start_idx + i * 4 + 3  # inner back 1
+		# Next segment vertices
+		var of2 = start_idx + (i + 1) * 4 + 0  # outer front 2
+		var ob2 = start_idx + (i + 1) * 4 + 1  # outer back 2
+		var if2 = start_idx + (i + 1) * 4 + 2  # inner front 2
+		var ib2 = start_idx + (i + 1) * 4 + 3  # inner back 2
 
-		# Front face
-		faces.append([front1, front2, front1 + 2] if i < arch_segments - 1 else [front1, start_idx, front2])
-		# Back face
-		faces.append([back1, back2, back1 + 2] if i < arch_segments - 1 else [back1, start_idx + 1, back2])
-		# Outer surface
-		faces.append([front1, back1, front2])
-		faces.append([back1, back2, front2])
-		# Inner surface
-		faces.append([front1, front2, back1])
-		faces.append([back1, front2, back2])
+		# Outer surface (facing outward/up)
+		faces.append([of1, of2, ob2])
+		faces.append([of1, ob2, ob1])
+
+		# Inner surface (facing inward/down)
+		faces.append([if1, ib1, ib2])
+		faces.append([if1, ib2, if2])
+
+		# Front face (facing +Z)
+		faces.append([of1, if1, if2])
+		faces.append([of1, if2, of2])
+
+		# Back face (facing -Z)
+		faces.append([ob1, ob2, ib2])
+		faces.append([ob1, ib2, ib1])
+
+	# End caps for arch curve
+	# Left end cap (connects to left pillar top)
+	var left_of = start_idx + arch_segments * 4 + 0
+	var left_ob = start_idx + arch_segments * 4 + 1
+	var left_if = start_idx + arch_segments * 4 + 2
+	var left_ib = start_idx + arch_segments * 4 + 3
+	faces.append([left_of, left_ob, left_ib])
+	faces.append([left_of, left_ib, left_if])
+
+	# Right end cap
+	var right_of = start_idx + 0
+	var right_ob = start_idx + 1
+	var right_if = start_idx + 2
+	var right_ib = start_idx + 3
+	faces.append([right_of, right_if, right_ib])
+	faces.append([right_of, right_ib, right_ob])
 
 	return faces
 

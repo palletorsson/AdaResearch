@@ -525,6 +525,24 @@ Reference custom materials in settings:
 }
 ```
 
+### Big Pipe System
+
+Generate complex pipe structures using the `bp` setting:
+
+```json
+"settings": {
+  "bp": "f,f,s,u,f,d"
+}
+```
+
+**Commands:**
+- `f`: Forward (Straight segment)
+- `s`: S-Bend (Offset segment)
+- `u`: Up (90° turn Up)
+- `d` or `c`: Down (90° turn Down)
+- `l`: Left (90° turn Left)
+- `r`: Right (90° turn Right)
+
 ### Environment Effects
 
 Add atmosphere with lighting and background:

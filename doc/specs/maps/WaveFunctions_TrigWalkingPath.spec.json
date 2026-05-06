@@ -1,0 +1,68 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_TrigWalkingPath",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 14,
+    "d": 14
+  },
+  "signature": "TrigWalkingPath generates the dual sine/cosine walkable lanes; dark_sphere anchors the space.",
+  "style": null,
+  "echoes": [],
+  "density": 0.031,
+  "breath_zones": [
+    {
+      "size": 189,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 14
+      },
+      "centroid": [
+        6.497354497354498,
+        6.624338624338624
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "sine_oscillation"
+    },
+    {
+      "x": 10,
+      "z": 1,
+      "token": "lissajous_curves"
+    },
+    {
+      "x": 6,
+      "z": 3,
+      "token": "TrigWalkingPath"
+    },
+    {
+      "x": 10,
+      "z": 3,
+      "token": "wave_interference"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "beat_frequency_demo"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 195,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

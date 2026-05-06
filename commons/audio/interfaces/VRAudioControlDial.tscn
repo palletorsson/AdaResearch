@@ -1,0 +1,186 @@
+[gd_scene load_steps=11 format=3 uid="uid://cx6m7xj7q8xv7"]
+
+[ext_resource type="Script" path="res://commons/audio/interfaces/VRAudioControlDial.gd" id="1_v4m4"]
+[ext_resource type="Script" uid="uid://ccvkvky7vqx7x" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2_v4m4"]
+[ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3_v4m4"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
+[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" uid="uid://ada_metal_dark" path="res://commons/ui/materials/metal_dark.tres" id="MatKnobBase"]
+[ext_resource type="Material" uid="uid://ada_accent_orange" path="res://commons/ui/materials/accent_orange.tres" id="MatIndicator"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 0.038
+bottom_radius = 0.038
+height = 0.012
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_knob"]
+top_radius = 0.028
+bottom_radius = 0.028
+height = 0.035
+radial_segments = 24
+
+[sub_resource type="BoxMesh" id="BoxMesh_indicator"]
+size = Vector3(0.006, 0.016, 0.012)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_base"]
+size = Vector3(0.08, 0.08, 0.02)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_handle"]
+radius = 0.01
+
+[node name="VRAudioControlDial" type="Node3D"]
+script = ExtResource("1_v4m4")
+
+[node name="Frame" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
+shape = SubResource("BoxShape3D_base")
+
+[node name="Backing" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.01)
+mesh = SubResource("CylinderMesh_base")
+surface_material_override/0 = ExtResource("MatPanel")
+
+[node name="Label3DValue" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0.01)
+pixel_size = 0.0005
+text = "0.5"
+font_size = 32
+font_color = Color(0.12, 0.12, 0.14, 1)
+outline_size = 0
+
+[node name="LabelName" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.045, 0.01)
+pixel_size = 0.0005
+text = "PARAM"
+font_size = 24
+font_color = Color(0.40, 0.40, 0.44, 1)
+outline_size = 0
+uppercase = true
+
+[node name="DialOrigin" type="Node3D" parent="."]
+
+[node name="InteractableHinge" type="Node3D" parent="DialOrigin"]
+script = ExtResource("2_v4m4")
+hinge_limit_min = -150.0
+hinge_limit_max = 150.0
+
+[node name="KnobMesh" type="MeshInstance3D" parent="DialOrigin/InteractableHinge"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.012)
+mesh = SubResource("CylinderMesh_knob")
+surface_material_override/0 = ExtResource("MatKnobBase")
+
+[node name="Indicator" type="MeshInstance3D" parent="DialOrigin/InteractableHinge/KnobMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016, -0.018)
+mesh = SubResource("BoxMesh_indicator")
+surface_material_override/0 = ExtResource("MatIndicator")
+
+[node name="Handles" type="Node3D" parent="DialOrigin/InteractableHinge"]
+
+[node name="Handle1" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/Handles/Handle1"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/Handles/Handle1/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="Handle2" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.014, -0.014)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/Handles/Handle2"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/Handles/Handle2/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="Handle3" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.02)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/Handles/Handle3"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/Handles/Handle3/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="Handle4" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
+transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, -0.014, -0.014)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/Handles/Handle4"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/Handles/Handle4/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="Handle5" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -0.02, 0)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/Handles/Handle5"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/Handles/Handle5/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="Handle6" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
+transform = Transform3D(1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0, -0.014, 0.014)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/Handles/Handle6"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/Handles/Handle6/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="Handle7" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, -1, 0, 1, 1.19249e-08, 0, 0, 0.02)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/Handles/Handle7"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/Handles/Handle7/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="Handle8" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0.014, 0.014)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/Handles/Handle8"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/Handles/Handle8/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+unit_size = 1.0
+max_db = -12.0

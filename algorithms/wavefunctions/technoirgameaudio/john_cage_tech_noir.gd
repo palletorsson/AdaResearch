@@ -4,11 +4,23 @@ extends Node3D
 # Creates a continuous ambient soundscape with modulated drones and random sound elements
 
 # Audio buses setup
+
+# @identity
+# essence: ambient(t) = drone(t) + sum(random_effect_i(t)) with stochastic scheduling
+# desire: Stand in a space where algorithmic composition endlessly generates cyberpunk ambience
+# critical_parameter: num_effect_players — determines the density of the random sound event texture
+# triggers: stochastic timers trigger random effect generation; drone layer provides continuous foundation
+# emerges: endless non-repeating ambient music from a small vocabulary of synthesis rules
+# needs: VR presence [has], 3D loading bar visualization [has]
+# relationships: depends on threaded audio generation; contrasts with SoundscapeRadioRack (generative vs preset ambience); unlocks algorithmic composition
+# truth: Silence is not the absence of sound — it is the space between algorithmically chosen events.
+
 const NUM_BUSES = 4
 var bus_names = ["Master", "Reverb", "Delay", "LowPass"]
 
 # Sound generators and audio players
-var rng = RandomNumberGenerator.new()
+var rng = RandomNumberGenerator.new()         # main thread only
+var _thread_rng: RandomNumberGenerator = null  # background thread only
 var sample_rate = 44100
 var buffer_size = 4096
 
@@ -66,7 +78,7 @@ signal sound_created(sound_name: String)
 signal generation_progress_updated(progress: float)
 signal sound_generation_complete
 
-func _ready():
+func _ready() -> void:
 	_ensure_rng()
 	mutex = Mutex.new()
 	generation_thread = Thread.new()
@@ -91,7 +103,7 @@ func _ready():
 	start_sound_generation()
 
 func _ensure_rng() -> RandomNumberGenerator:
-	if rng == null or not is_instance_valid(rng):
+	if rng == null:
 		rng = RandomNumberGenerator.new()
 		rng.randomize()
 	return rng
@@ -105,7 +117,23 @@ func _randf() -> float:
 func _randi() -> int:
 	return _ensure_rng().randi()
 
-func _process(delta):
+# --- Thread-safe RNG: used ONLY from _thread_generate_sounds and functions it calls ---
+func _ensure_thread_rng() -> RandomNumberGenerator:
+	if _thread_rng == null:
+		_thread_rng = RandomNumberGenerator.new()
+		_thread_rng.randomize()
+	return _thread_rng
+
+func _t_randf_range(min_value: float, max_value: float) -> float:
+	return _ensure_thread_rng().randf_range(min_value, max_value)
+
+func _t_randf() -> float:
+	return _ensure_thread_rng().randf()
+
+func _t_randi() -> int:
+	return _ensure_thread_rng().randi()
+
+func _process(delta: float) -> void:
 	_ensure_rng()
 	if stop_requested:
 		return
@@ -122,7 +150,7 @@ func _process(delta):
 		play_random_effect()
 		last_effect_time = elapsed_time
 
-func start_sound_generation():
+func start_sound_generation() -> void:
 	is_generating = true
 	sound_generation_started.emit()
 	
@@ -131,8 +159,8 @@ func start_sound_generation():
 		print("Failed to start generation thread")
 		return
 
-func _thread_generate_sounds():
-	_ensure_rng()
+func _thread_generate_sounds() -> void:
+	_ensure_thread_rng()
 	if stop_requested:
 		return
 	# Thread-safe sound generation
@@ -218,19 +246,19 @@ func _thread_generate_sounds():
 	
 	call_deferred("_emit_generation_complete")
 
-func _emit_sound_created(sound_name: String):
+func _emit_sound_created(sound_name: String) -> void:
 	sound_created.emit(sound_name)
 
-func _emit_progress_updated():
+func _emit_progress_updated() -> void:
 	mutex.lock()
 	var progress = generation_progress
 	mutex.unlock()
 	generation_progress_updated.emit(progress)
 
-func _emit_generation_complete():
+func _emit_generation_complete() -> void:
 	sound_generation_complete.emit()
 
-func create_3d_loading_bar():
+func create_3d_loading_bar() -> void:
 	# Create container for loading bar
 	loading_bar_container = Node3D.new()
 	loading_bar_container.name = "LoadingBarContainer"
@@ -295,7 +323,7 @@ func create_3d_loading_bar():
 	# Position the entire loading bar at a good viewing position
 	loading_bar_container.position = Vector3(0, 2, -5)
 
-func create_loading_particles():
+func create_loading_particles() -> void:
 	# Create floating particles around the loading bar
 	for i in range(20):
 		var particle = MeshInstance3D.new()
@@ -333,7 +361,7 @@ func create_loading_particles():
 			"rotation_speed": _randf_range(1.0, 3.0)
 		})
 
-func animate_loading_bar(delta):
+func animate_loading_bar(delta) -> void:
 	if not loading_bar_container:
 		return
 	
@@ -369,16 +397,16 @@ func animate_loading_bar(delta):
 	# Rotate entire loading bar container slowly
 	loading_bar_container.rotation_degrees.y += delta * 5
 
-func _on_generation_started():
+func _on_generation_started() -> void:
 	print("Sound generation started...")
 
-func _on_sound_created(sound_name: String):
+func _on_sound_created(sound_name: String) -> void:
 	print("Created: " + sound_name)
 	_maybe_start_stream(sound_name)
 	if progress_text:
 		progress_text.text = "Created: " + sound_name.replace("_", " ").capitalize()
 
-func _on_progress_updated(progress: float):
+func _on_progress_updated(progress: float) -> void:
 	# Update loading bar fill
 	if loading_bar_fill:
 		var new_width = lerp(0.1, 7.9, progress)
@@ -395,7 +423,7 @@ func _on_progress_updated(progress: float):
 		var percentage = int(progress * 100)
 		loading_text.text = "Generating Sounds... " + str(percentage) + "%"
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	print("Sound generation complete!")
 	
 	# Hide loading bar with fade effect
@@ -412,14 +440,14 @@ func _on_generation_complete():
 		_try_start_playback()
 	is_generating = false
 
-func _try_start_playback():
+func _try_start_playback() -> void:
 	if base_sounds_ready["drone"] and base_sounds_ready["city_ambience"] and not playback_started:
 		playback_started = true
 		elapsed_time = 0.0
 		last_effect_time = 0.0
 		play_random_effect()
 
-func _ensure_player_stream(player: AudioStreamPlayer, stream: AudioStream):
+func _ensure_player_stream(player: AudioStreamPlayer, stream: AudioStream) -> void:
 	if player == null or stream == null:
 		return
 	if player.stream != stream:
@@ -427,7 +455,7 @@ func _ensure_player_stream(player: AudioStreamPlayer, stream: AudioStream):
 	if not player.playing:
 		player.play()
 
-func _maybe_start_stream(sound_name: String):
+func _maybe_start_stream(sound_name: String) -> void:
 	if sound_name == "drone" and precreated_sounds.has("drone"):
 		_ensure_player_stream(drone_player, precreated_sounds["drone"])
 		base_sounds_ready["drone"] = true
@@ -441,7 +469,7 @@ func _maybe_start_stream(sound_name: String):
 	if precreated_sounds.has(sound_name) and precreated_sounds[sound_name] is Array:
 		_play_effect_immediately(sound_name)
 
-func _play_effect_immediately(sound_name: String):
+func _play_effect_immediately(sound_name: String) -> void:
 	var available_players = []
 	for player in effect_players:
 		if not player.playing:
@@ -460,7 +488,7 @@ func _play_effect_immediately(sound_name: String):
 	player.play()
 	last_effect_time = elapsed_time
 
-func setup_audio_buses():
+func setup_audio_buses() -> void:
 	# Create audio buses for effects
 	for i in range(1, NUM_BUSES):
 		var bus_idx = AudioServer.get_bus_count()
@@ -490,7 +518,7 @@ func setup_audio_buses():
 				lowpass.cutoff_hz = 2000
 				AudioServer.add_bus_effect(bus_idx, lowpass)
 
-func setup_players():
+func setup_players() -> void:
 	# Create main players for continuous sounds
 	drone_player = AudioStreamPlayer.new()
 	drone_player.bus = "Reverb"
@@ -513,7 +541,7 @@ func setup_players():
 		add_child(player)
 		effect_players.append(player)
 
-func setup_visualizers():
+func setup_visualizers() -> void:
 	# Rebuild small transparent spheres for each audio source.
 	if visualizer_root:
 		visualizer_root.queue_free()
@@ -542,7 +570,7 @@ func setup_visualizers():
 		var color = Color.from_hsv(hue, 0.75, 1.0, 0.6)
 		add_visualizer_for_player(effect_players[i], pos, color)
 
-func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, color: Color):
+func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, color: Color) -> void:
 	if not player:
 		return
 	if visualizer_root == null:
@@ -580,7 +608,7 @@ func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, col
 	})
 
 # Smooth amplitude-driven scaling to keep the floating orbs breathing.
-func update_visualizers(delta):
+func update_visualizers(_delta) -> void:
 	if visualizer_infos.size() == 0:
 		return
 	for i in range(visualizer_infos.size()):
@@ -642,7 +670,7 @@ func _get_stream_amplitude(stream: AudioStreamWAV, position: float, sample_windo
 		return 0.0
 	return sum / float(samples)
 
-func start_ambient():
+func start_ambient() -> void:
 	# Start the continuous drone using pre-generated stream
 	if precreated_sounds.has("drone"):
 		_ensure_player_stream(drone_player, precreated_sounds["drone"])
@@ -651,7 +679,7 @@ func start_ambient():
 	if precreated_sounds.has("city_ambience"):
 		_ensure_player_stream(ambient_player, precreated_sounds["city_ambience"])
 
-func play_random_effect():
+func play_random_effect() -> void:
 	_ensure_rng()
 	if stop_requested:
 		return
@@ -684,7 +712,7 @@ func play_random_effect():
 # Sound Generators
 
 func create_endless_drone():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -719,8 +747,8 @@ func create_endless_drone():
 		sample = sample * (0.85 + lfo1 + lfo2)
 		
 		# Add subtle noise texture
-		sample += _randf_range(-0.05, 0.05)
-		
+		sample += _t_randf_range(-0.05, 0.05)
+
 		# Clamp the sample
 		sample = clamp(sample * 0.4, -1.0, 1.0)  # Overall volume reduction
 		
@@ -742,7 +770,7 @@ func create_endless_drone():
 	return stream
 
 func create_city_ambience():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -766,12 +794,12 @@ func create_city_ambience():
 		rumble *= rumble_volume * (0.8 + 0.2 * sin(2.0 * PI * 0.07 * t))
 		
 		# Traffic sounds (filtered noise)
-		var traffic = _randf_range(-1.0, 1.0)
+		var traffic = _t_randf_range(-1.0, 1.0)
 		traffic = traffic * traffic * traffic  # Shape the noise
 		traffic = traffic * traffic_volume * (0.7 + 0.3 * sin(2.0 * PI * 0.2 * t))
-		
+
 		# Ambient noise
-		var ambient = (_randf_range(-1.0, 1.0) * 0.1) * ambient_volume
+		var ambient = (_t_randf_range(-1.0, 1.0) * 0.1) * ambient_volume
 		
 		# Mix together
 		var sample = clamp(rumble + traffic + ambient, -0.8, 0.8)
@@ -789,7 +817,7 @@ func create_city_ambience():
 	return stream
 
 func create_distant_siren():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -801,7 +829,7 @@ func create_distant_siren():
 	data.resize(frame_count * 4)  # 4 bytes per frame (16-bit stereo)
 	
 	# Siren parameters
-	var base_freq = 500.0 + _randf_range(-100, 100)
+	var base_freq = 500.0 + _t_randf_range(-100, 100)
 	var freq_range = 250.0
 	var cycle_time = 2.0  # Time for one up-down cycle
 	
@@ -826,8 +854,8 @@ func create_distant_siren():
 			siren += echo
 		
 		# Add city ambience noise
-		var ambient = _randf_range(-1.0, 1.0) * 0.05
-		
+		var ambient = _t_randf_range(-1.0, 1.0) * 0.05
+
 		var sample = siren + ambient
 		sample = clamp(sample, -1.0, 1.0)
 		
@@ -846,7 +874,7 @@ func create_distant_siren():
 	return stream
 
 func create_static_burst():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -878,14 +906,14 @@ func create_static_burst():
 			envelope = max(0.0, envelope)
 		
 		# Base static (shaped noise)
-		var noise = _randf_range(-1.0, 1.0)
+		var noise = _t_randf_range(-1.0, 1.0)
 		noise = noise * noise * sign(noise)  # Shape the noise
 		var static_sound = noise * static_volume
-		
+
 		# Add random crackles
 		var crackle = 0.0
-		if _randf() < crackle_chance:
-			crackle = _randf_range(-1.0, 1.0) * crackle_volume
+		if _t_randf() < crackle_chance:
+			crackle = _t_randf_range(-1.0, 1.0) * crackle_volume
 		
 		# Modulate with LFO
 		var lfo_mod = 0.8 + 0.2 * sin(2.0 * PI * 4.0 * t)
@@ -895,19 +923,19 @@ func create_static_burst():
 		
 		# Stereo output with slight variation
 		var left = sample
-		var right = sample * 0.9 + _randf_range(-0.05, 0.05)
-		
+		var right = sample * 0.9 + _t_randf_range(-0.05, 0.05)
+
 		# Convert to 16-bit PCM and store in buffer
 		var left_value = int(left * 32767.0)
 		var right_value = int(right * 32767.0)
 		data.encode_s16(i * 4, left_value)
 		data.encode_s16(i * 4 + 2, right_value)
-	
+
 	stream.data = data
 	return stream
 
 func create_rain_segment():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -920,14 +948,14 @@ func create_rain_segment():
 	
 	# Rain parameters
 	var raindrops = []
-	var intensity = 0.2 + _randf() * 0.2  # Random intensity
+	var intensity = 0.2 + _t_randf() * 0.2  # Random intensity
 	
 	for i in range(frame_count):
 		var t = float(i) / sample_rate
 		var sample = 0.0
 		
 		# Continuous light rain (filtered noise)
-		var noise = _randf_range(-1.0, 1.0)
+		var noise = _t_randf_range(-1.0, 1.0)
 		noise = noise * noise * noise  # Shape the noise
 		sample += noise * 0.1
 		
@@ -941,11 +969,11 @@ func create_rain_segment():
 			envelope = 1.0
 		
 		# Random individual raindrops
-		if _randf() < intensity * 0.01:
+		if _t_randf() < intensity * 0.01:
 			raindrops.append({
 				"time": t,
-				"pan": _randf_range(-0.8, 0.8),
-				"volume": _randf_range(0.05, 0.2)
+				"pan": _t_randf_range(-0.8, 0.8),
+				"volume": _t_randf_range(0.05, 0.2)
 			})
 		
 		# Process active raindrops
@@ -973,7 +1001,7 @@ func create_rain_segment():
 	return stream
 
 func create_mechanical_whir():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -985,7 +1013,7 @@ func create_mechanical_whir():
 	data.resize(frame_count * 4)
 	
 	# Parameters
-	var motor_freq = 80.0 + _randf_range(-20, 20)  # Base motor frequency
+	var motor_freq = 80.0 + _t_randf_range(-20, 20)  # Base motor frequency
 	var gear_ratios = [1.0, 2.0, 3.5, 7.0]  # Different gear components
 	var volumes = [0.3, 0.2, 0.15, 0.1]
 	
@@ -1018,7 +1046,7 @@ func create_mechanical_whir():
 			motor += component
 		
 		# Add some noise for friction/air
-		motor += _randf_range(-0.1, 0.1) * 0.05
+		motor += _t_randf_range(-0.1, 0.1) * 0.05
 		
 		# Speed variations
 		var speed_mod = 1.0 + 0.1 * sin(2.0 * PI * 0.25 * t)
@@ -1040,7 +1068,7 @@ func create_mechanical_whir():
 	return stream
 
 func create_typing_segment():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -1057,11 +1085,11 @@ func create_typing_segment():
 	var time = 0.5  # Start after a small delay
 	
 	while time < buffer_length - 0.5:
-		time += typing_speed * (0.7 + 0.6 * _randf())
+		time += typing_speed * (0.7 + 0.6 * _t_randf())
 		keypresses.append({
 			"time": time,
-			"volume": 0.15 + 0.2 * _randf(),
-			"tone": 1500 + _randf_range(-400, 400)
+			"volume": 0.15 + 0.2 * _t_randf(),
+			"tone": 1500 + _t_randf_range(-400, 400)
 		})
 	
 	for i in range(frame_count):
@@ -1075,12 +1103,12 @@ func create_typing_segment():
 				if key_age >= 0:
 					var env = press["volume"] * exp(-key_age * 100.0)
 					var click = sin(2.0 * PI * press["tone"] * key_age) * env
-					var noise = _randf_range(-1.0, 1.0) * env * 0.7
-					
+					var noise = _t_randf_range(-1.0, 1.0) * env * 0.7
+
 					sample += click + noise
-		
+
 		# Background mechanical noise (the typewriter carriage)
-		var bg_noise = _randf_range(-1.0, 1.0) * 0.01
+		var bg_noise = _t_randf_range(-1.0, 1.0) * 0.01
 		sample += bg_noise
 		
 		sample = clamp(sample, -1.0, 1.0)
@@ -1099,7 +1127,7 @@ func create_typing_segment():
 	return stream
 
 func create_electric_hum():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -1140,10 +1168,10 @@ func create_electric_hum():
 		sample *= (1.0 + fluctuation)
 		
 		# Add some noise
-		sample += _randf_range(-0.05, 0.05)
-		
+		sample += _t_randf_range(-0.05, 0.05)
+
 		# Occasional power surge
-		if _randf() < 0.001:
+		if _t_randf() < 0.001:
 			sample *= 1.3
 		
 		sample = clamp(sample * env, -1.0, 1.0)
@@ -1158,7 +1186,7 @@ func create_electric_hum():
 	return stream
 
 func create_heartbeat_segment():
-	_ensure_rng()
+	_ensure_thread_rng()
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = sample_rate
@@ -1170,7 +1198,7 @@ func create_heartbeat_segment():
 	data.resize(frame_count * 4)
 	
 	# Heartbeat parameters
-	var bpm = 65.0 + _randf_range(-5, 15)  # Heart rate
+	var bpm = 65.0 + _t_randf_range(-5, 15)  # Heart rate
 	var beat_interval = 60.0 / bpm
 	
 	# Envelope
@@ -1209,7 +1237,7 @@ func create_heartbeat_segment():
 		sample = sample * (1.0 + 0.1 * sin(2.0 * PI * 2.0 * t))
 		
 		# Add very quiet background noise (bloodflow)
-		sample += _randf_range(-0.1, 0.1) * 0.02
+		sample += _t_randf_range(-0.1, 0.1) * 0.02
 		
 		sample = clamp(sample * env, -1.0, 1.0)
 		
@@ -1221,7 +1249,10 @@ func create_heartbeat_segment():
 	stream.data = data
 	return stream
 
-func shutdown_audio():
+func _exit_tree() -> void:
+	shutdown_audio()
+
+func shutdown_audio() -> void:
 	if stop_requested:
 		return
 	stop_requested = true
@@ -1244,3 +1275,6 @@ func shutdown_audio():
 		visualizer_root.queue_free()
 		visualizer_root = null
 	visualizer_infos.clear()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

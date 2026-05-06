@@ -71,10 +71,10 @@ func update_quantum_displays():
 	# Entanglement beam visibility
 	if particles_entangled:
 		entanglement_beam.material_override.albedo_color.a = entanglement_strength * 0.8
-		entanglement_beam.material_override.emission_energy = entanglement_strength * 2.0
+		entanglement_beam.material_override.emission_energy_multiplier = entanglement_strength * 2.0
 	else:
 		entanglement_beam.material_override.albedo_color.a = 0.1
-		entanglement_beam.material_override.emission_energy = 0.3
+		entanglement_beam.material_override.emission_energy_multiplier = 0.3
 	
 	# Chamber synchronization
 	if particles_entangled:
@@ -88,7 +88,7 @@ func update_quantum_displays():
 		quantum_chamber_b.material_override.emission = Color.RED
 	
 	# Coherence display brightness
-	coherence_display.material_override.emission_energy = quantum_coherence * 2.0
+	coherence_display.material_override.emission_energy_multiplier = quantum_coherence * 2.0
 	
 	# Uncertainty gauge needle position
 	uncertainty_gauge.rotation_degrees.z = heisenberg_uncertainty * 45.0

@@ -1,0 +1,55 @@
+{
+  "id": "gg_ls04_fallen_tree_chandelier",
+  "notes": "TRIPLE DNA BRIDGE: L-system plant \u2192 soft-body sim (140 steps, low stiffness, diagonal wind) \u2192 graph-grammar chandelier. The post-wind collapsed tree pose becomes a chandelier. Same DNA as sb_ls02_plant_wind_collapse but rendered as Adelman glass-and-metal.",
+  "seed": {
+    "soft_body_pose": {
+      "topology": "lsystem",
+      "lsystem": {
+        "axiom": "F",
+        "rules": {
+          "F": "F[+F]F[-F]F"
+        },
+        "iterations": 3,
+        "angle_deg": 25.7,
+        "step_len": 0.22,
+        "step_shrink": 0.72
+      },
+      "stiffness": 0.4,
+      "steps": 100,
+      "gravity": [
+        1.0,
+        -5.0,
+        0.3
+      ],
+      "damping": 0.992,
+      "floor_y": -0.5,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "node_radius": 0.05
+    }
+  },
+  "iterations": 0,
+  "rules": [],
+  "render_mode": "chandelier",
+  "chandelier": {
+    "edge_color": [
+      0.14,
+      0.1,
+      0.08
+    ],
+    "leaf_color": [
+      1.0,
+      0.85,
+      0.55
+    ],
+    "leaf_emission": 2.0,
+    "edge_radius": 0.006,
+    "leaf_radius": 0.05
+  },
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.15,
+  "max_nodes": 3000
+}

@@ -1,0 +1,17 @@
+{
+  "id": "gen00_noise_sphere",
+  "notes": "Sphere with noise displacement.",
+  "seed": "sphere",
+  "seed_scale": 0.6,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "noise",
+      "selector": "all",
+      "params": {
+        "amount": 0.12,
+        "frequency": 2.0
+      }
+    }
+  ]
+}

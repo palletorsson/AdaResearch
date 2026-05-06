@@ -1,6 +1,16 @@
 # TruncatedTetrahedron.gd - Tetrahedron with cut corners
 extends Node3D
 
+# @identity
+# essence: tetrahedron with corners cut — each vertex replaced by a triangular face, adding 4 new faces
+# desire: learner sees truncation as a topological operation: vertices become faces, edges become edges
+# critical_parameter: base_color — orange pride color that signals this is a pedagogical display object
+# triggers: nothing at runtime — static SurfaceTool mesh generated once at _ready()
+# emerges: the Archimedean insight that truncation transforms one solid into another with more faces
+# needs: [missing VR controls — static display only]
+# relationships: sibling to grab_tetrahedron and snap_tetrahedron_puzzle; shows topology via truncation
+# truth: truncation is a functor — it transforms the vertex-edge-face structure systematically
+
 var base_color: Color = Color(1.0, 0.5, 0.0)  # Orange from pride colors
 
 func _ready():

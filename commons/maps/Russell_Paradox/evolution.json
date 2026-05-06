@@ -1,0 +1,80 @@
+{
+  "artifact": "russell_set_box",
+  "title": "Building a Box That Cannot Decide If It Contains Itself",
+  "concept_layer": "Russell's paradox; self-reference as contradiction; limits of naive set theory; infinite regress made tangible",
+  "technique_first": ["recursive scene instantiation", "interact-to-open pattern", "max depth with infinity indicator", "paradox_text escalation", "signal-based observation tracking"],
+  "technique_reference": ["Recursion (Fractal_Recursion)", "Push/pop stack (LSystems bracket state)", "XR ray pickable interaction (jelly_cube, rotation_gimbal controls)", "@identity truth statement (all prior)"],
+  "domain_deferred": ["G\u00f6del's incompleteness \u2192 Godel_Incompleteness", "halting problem \u2192 Turing_Halting (if built)", "type theory as the fix \u2192 deferred (not in current spine)", "Zermelo-Fraenkel axiomatization \u2192 brief text only"],
+  "capture_leaks": {
+    "concrete_not_abstract": "The box is a tangible demo. Russell's actual paradox is about ALL sets \u2014 infinitely many, not a chain of containers. The physical analogy leaks.",
+    "finite_regress": "max_visible_depth bounds the chain. Mathematical regress is unbounded. The \u221e indicator is a nod, not the thing.",
+    "decidability_confusion": "The box \u2018cannot decide\u2019 visually (paradox animations), but that\u2019s different from G\u00f6del-undecidability (there exist statements neither provable nor disprovable in the system).",
+    "naive_set_theory_specific": "This paradox broke Cantor\u2019s naive theory but ZFC fixes it via the axiom of foundation. The artifact doesn\u2019t explain the fix \u2014 that\u2019s a separate artifact.",
+    "metaphor_limit": "Self-reference in language (\u2018this sentence is false\u2019), code (recursion), sets (Russell), and arithmetic (G\u00f6del) are different kinds of self-reference. The box handles only the set version."
+  },
+  "limit": "A box that opens to reveal another box, forever. What it captures: the visceral experience of infinite self-reference. What it refuses: the specific mathematical formulation that made Russell\u2019s paradox a crisis (undefined sets, comprehension axiom), the historical context (Russell\u2019s letter to Frege destroying Principia), the modern resolution (typed set theory, ZFC foundation axiom). Each is addressed in sibling artifacts \u2014 this one makes the paradox walkable.",
+  "grammar_alignment": {
+    "sequence": "foundationscrisis",
+    "operations_taught": ["self_reference", "paradox"],
+    "operations_deferred_to_sequence": ["non_euclidean (NonEuclidean_Spaces)", "impossible (Escher_Impossible)"],
+    "note": "russell_set_box teaches self_reference (a form that describes itself) and paradox (a form whose premises contradict). The other two foundations operations are parallel \u2014 non-Euclidean breaks the parallel postulate, impossible assembles locally-consistent pieces into a globally-contradictory whole. Together they map the ways mathematics discovers its limits."
+  },
+  "biome_alignment": {
+    "sequence": "foundationscrisis",
+    "density_at_entry": 0.95,
+    "kingdoms_unlocked": ["flower", "tree", "fungus", "creature"],
+    "hand_verbs_gained": ["encounter_paradox"],
+    "catalyst_mode": "break",
+    "note": "The biome is now 95% dense \u2014 the world is fully alive, and now it shows its SEAMS. Escher-like geometries, Penrose triangles, places where walking forward brings you back. The 'break' catalyst lets the player introduce a contradiction into any form \u2014 and the form persists despite the contradiction. This is the sequence where the world reveals it was never fully consistent."
+  },
+  "stages": [
+    {
+      "title": "From optimization to self-reference",
+      "thinking": "ML_Gradient_Landscape taught that learning is descending a landscape of loss. Optimization was meaningful when we knew what 'better' meant \u2014 the loss function was given. But what if the SYSTEM ITSELF can\u2019t decide what\u2019s true? What if a well-formed statement in a well-formed system lands on 'both true and false' simultaneously? This is the foundations crisis. Not failure of implementation \u2014 failure of the system to be internally consistent.",
+      "code": "# Learning: follow the gradient, descend toward minimum\n#   requires a LOSS FUNCTION that is well-defined\n#   requires a SPACE where 'lower' is meaningful\n#\n# But what if the space has a HOLE?\n# What if a position in parameter space is neither\n# up nor down, but BOTH, because the rules contradict?\n#\n# Russell, 1901: consider S = { x | x \u2209 x }\n# Is S \u2208 S?\n#   If yes, then by definition of S, S \u2209 S. Contradiction.\n#   If no, then by definition of S, S \u2208 S. Contradiction.\n#\n# Neither answer works. The set breaks the system.",
+      "concepts": ["self-reference", "paradox", "system inconsistency", "well-formed yet undecidable"]
+    },
+    {
+      "title": "A box is a set",
+      "thinking": "Concretize the abstract. A set contains members. A box contains objects. What if a box could contain BOXES? Nothing strange about that. Now: what if a box contains ITSELF? Impossible in physical space \u2014 but possible in set theory. Russell\u2019s set is defined precisely as the set of sets that do NOT contain themselves. The question: does this set contain itself? Both answers lead to contradiction. The box artifact makes this feel, physically, like an infinite regress.",
+      "code": "extends Node3D\nclass_name RussellSetBox\n\n@export var size: float = 0.3\n@export var wall_thickness: float = 0.02\n@export var max_visible_depth: int = 7\n\nsignal paradox_observed(depth: int)\nsignal box_opened(depth: int)\nsignal infinite_regress_detected()\n\nfunc _ready() -> void:\n\t_build_outer_box()\n\t_setup_interaction()",
+      "concepts": ["set-as-box metaphor", "containment", "physical vs mathematical", "self-containment"]
+    },
+    {
+      "title": "Opening the box reveals another box",
+      "thinking": "The first interaction: click the box. It opens. Inside is another, smaller box. Click again: opens. Another box inside. Each box is a copy of the outer \u2014 same proportions, smaller scale. After a few levels, the player understands: this is infinite. The regress has no bottom.",
+      "code": "var _current_depth: int = 0\nvar _inner_box: RussellSetBox = null\n\nfunc _on_box_clicked() -> void:\n\tif _current_depth >= max_visible_depth:\n\t\t_show_infinite_regress()\n\t\tinfinite_regress_detected.emit()\n\t\treturn\n\t\n\t# Open the lid\n\t_animate_open()\n\t\n\t# Instantiate the next box inside\n\tif _inner_box == null:\n\t\t_inner_box = _spawn_inner_box(_current_depth + 1)\n\t\n\tbox_opened.emit(_current_depth)\n\nfunc _spawn_inner_box(depth: int) -> RussellSetBox:\n\tvar inner = RussellSetBox.new()\n\tinner.size = size * 0.65\n\tinner.max_visible_depth = max_visible_depth\n\tinner._current_depth = depth\n\tinner.position = Vector3.ZERO\n\tadd_child(inner)\n\treturn inner",
+      "concepts": ["recursive instantiation", "depth tracking", "scale-down by constant factor", "signal emission"]
+    },
+    {
+      "title": "The \u221e indicator \u2014 admit the regress",
+      "thinking": "max_visible_depth = 7. After opening seven boxes, we can\u2019t keep going (performance, clarity). Instead, the 8th box displays the infinity symbol and a text: 'the regress continues.' This is honest. We cannot render infinity, but we can POINT to it. The symbol is not the thing; it is the signal that the thing is endless. The player understands: this is not a bug. This is the paradox being exactly itself.",
+      "code": "func _show_infinite_regress() -> void:\n\tvar infinity_label = Label3D.new()\n\tinfinity_label.text = \"\u221e\"\n\tinfinity_label.font_size = 96\n\tinfinity_label.pixel_size = 0.002\n\tinfinity_label.modulate = Color(1.0, 0.3, 0.3)  # alert red\n\tinfinity_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED\n\tinfinity_label.position = Vector3(0, 0, 0)\n\tadd_child(infinity_label)\n\t\n\tvar context_label = Label3D.new()\n\tcontext_label.text = \"the regress continues\\nthe box contains itself\\nS \u2208 S \u2194 S \u2209 S\"\n\tcontext_label.font_size = 16\n\tcontext_label.position = Vector3(0, -0.2, 0)\n\tcontext_label.modulate = Color(0.9, 0.7, 0.7)\n\tadd_child(context_label)",
+      "concepts": ["infinity indicator", "graceful regress termination", "symbol as signpost", "honest abstraction"]
+    },
+    {
+      "title": "Paradox text escalates with depth",
+      "thinking": "Each level, a different text appears. Level 1: 'a box.' Level 2: 'a box inside a box.' Level 3: 'and another.' Level 4: 'how deep does this go?' Level 5: 'this is the paradox.' Level 6: 'R = { x | x \u2209 x }.' Level 7: 'Is R in R? If yes \u2014 contradiction. If no \u2014 contradiction.' The text accompanies the embodied experience. The box gives you a body. The text gives you a mind. Together: the paradox lands.",
+      "code": "const PARADOX_TEXTS := [\n\t\"a box\",\n\t\"a box inside a box\",\n\t\"and another\",\n\t\"how deep does this go?\",\n\t\"this is the paradox\",\n\t\"R = { x | x \u2209 x }\",\n\t\"Is R in R? If yes \u2014 contradiction. If no \u2014 contradiction.\",\n]\n\nfunc _update_paradox_text(depth: int) -> void:\n\tvar idx = mini(depth, PARADOX_TEXTS.size() - 1)\n\t_label.text = PARADOX_TEXTS[idx]\n\t# Later texts fade in more slowly, feel more ominous\n\t_label.modulate = Color(\n\t\t0.9,\n\t\t0.9 - depth * 0.08,\n\t\t0.9 - depth * 0.08,\n\t\t1.0\n\t)",
+      "concepts": ["escalating narration", "text as companion", "color as emotional register", "embodied + symbolic learning"]
+    },
+    {
+      "title": "The lid opens with a physical animation",
+      "thinking": "The box opens via a rotating lid (AnimationPlayer or Tween). This matters. If boxes just popped open, the experience would feel arcade. The hinge-rotation animation slows the player down \u2014 each opening is a small ritual. You DECIDE to open each layer. You watch the lid turn. You see the inside reveal. The artifact uses time as a teaching tool.",
+      "code": "func _animate_open() -> void:\n\tvar tween = create_tween()\n\ttween.tween_property(\n\t\t_lid, \"rotation_degrees:x\",\n\t\t-120.0,  # open angle\n\t\t0.6      # duration in seconds\n\t).set_trans(Tween.TRANS_CUBIC)\n\n# The open duration is calibrated:\n#   too fast (< 0.2s)  \u2192 feels arcade, no gravity\n#   0.6s               \u2192 natural hinge feel\n#   too slow (> 1.5s)  \u2192 boring, player checks out\n# Time as pedagogy.",
+      "concepts": ["Tween animation", "pacing as pedagogy", "ritual slowness", "embodied time"]
+    },
+    {
+      "title": "Signals let other systems observe the paradox",
+      "thinking": "box_opened(depth), paradox_observed(depth), infinite_regress_detected() \u2014 three signals. Other artifacts in the map (science screens, catalyst devices) can listen and react. The science screen updates with the paradox explanation at each depth. A catalyst target can unlock at infinite_regress_detected. Signals make the artifact composable with the map\u2019s narrative.",
+      "code": "signal paradox_observed(depth: int)\nsignal box_opened(depth: int)\nsignal infinite_regress_detected()\n\n# In the map:\nfunc _ready() -> void:\n\t$RussellSetBox.box_opened.connect(_on_box_opened)\n\t$RussellSetBox.infinite_regress_detected.connect(_on_regress)\n\nfunc _on_box_opened(depth: int) -> void:\n\t$ScienceScreen.set_paragraph(depth)\n\nfunc _on_regress() -> void:\n\t$CatalystTarget.unlock()\n\t$DarkSphere.darken_further()\n\n# The paradox is an EVENT other systems can subscribe to.\n# The map composes around it.",
+      "concepts": ["signals for composition", "event-driven design", "map-level narrative integration"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The Russell set box knows what it is. Not a toy \u2014 a physical demonstration that self-reference in naive set theory leads to a contradiction that destroyed the foundations of mathematics in 1901. Russell\u2019s letter to Frege arrived while Frege\u2019s second volume of Grundgesetze was at the printer. Frege inserted an acknowledgment in an afterword that his system was inconsistent. The modern resolution (ZFC, type theory) is elsewhere in the sequence; this artifact offers the crisis itself, unvarnished. The truth: some systems break when they try to describe everything.",
+      "code": "# @identity\n# essence: S = { x | x \u2209 x }; S \u2208 S \u2194 S \u2209 S \u2014 Russell's paradox as infinite regress\n# desire: open the box and find another box inside, and another, forever \u2014 feel the paradox as infinite nesting\n# critical_parameter: max_visible_depth \u2014 how many nested boxes before the infinite regress indicator\n# triggers: click/interact opens next layer; each opening reveals a smaller box; at max depth the \u221e symbol appears; paradox text escalates\n# emerges: the visceral experience that self-reference creates bottomless contradiction\n# needs: VR click interaction [has], XR ray pickable [has]\n# relationships: contrasts godel_statement_plaque (arithmetic vs set-theoretic self-reference); contrasts florensky_sphere (contradiction as paradox vs contradiction as truth); unlocks escher_staircase (spatial self-reference)\n# truth: naive set theory is inconsistent \u2014 the set of all sets that do not contain themselves destroyed the foundations of mathematics in 1901",
+      "concepts": ["@identity", "Russell 1901", "inconsistency of naive set theory", "self-reference crisis", "truth"]
+    }
+  ]
+}

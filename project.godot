@@ -8,33 +8,75 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
-config/name="Ada Research Zero"
-run/main_scene="uid://dh0yixpmcvifk"
-config/features=PackedStringArray("4.4")
+config/name="Ada Research Zero One"
+run/main_scene="res://commons/scenes/vr_staging.tscn"
+config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
+
+[audio]
+
+buses/default_bus_layout="uid://rwex60pqapc"
+driver/enable_input=true
 
 [autoload]
 
-XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
-XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
+XRToolsUserSettings="*uid://bqgb8i74tm0t"
+XRToolsRumbleManager="*uid://by853dk86g1qw"
 GameManager="*res://commons/managers/GameManager.gd"
 TextManager="*res://commons/managers/TextManager.gd"
 MapProgressionManager="*res://commons/managers/MapProgressionManager.gd"
+EcosystemManager="*res://commons/managers/EcosystemManager.gd"
+GrammarOperationsManager="*res://commons/managers/GrammarOperationsManager.gd"
+BiomeAccrualManager="*res://commons/managers/BiomeAccrualManager.gd"
+HazardManager="*res://commons/managers/HazardManager.gd"
+CatalystCapabilityManager="*res://commons/managers/CatalystCapabilityManager.gd"
 SceneManager="*res://commons/managers/AdaSceneManager.gd"
+SoundBank="*res://commons/audio/SoundBankSingleton.gd"
+TraceData="*res://commons/globals/trace_data.gd"
+SceneNarrator="*res://commons/managers/SceneNarrator.gd"
+EquipmentRegistry="*res://commons/globals/equipment_registry.gd"
+Subtitles="*res://commons/ui/subtitles/SubtitleManager.gd"
+StuckDetector="*res://commons/player/stuck_detector.gd"
+DebugLogger="*res://commons/managers/DebugLogger.gd"
+DeathEffect="*res://commons/managers/DeathEffect.gd"
+NatureRenderer="*res://commons/managers/NatureRenderer.gd"
+FloraSpawner="*res://commons/managers/FloraSpawner.gd"
+OversightVoiceBridge="*res://commons/tools/OversightVoiceBridge.gd"
+ClaudeBridge="*res://commons/tools/ClaudeBridge.gd"
+
+[debug]
+
+file_logging/enable_file_logging=true
+file_logging/max_log_files=12
+
+[display]
+
+window/size/viewport_width=1800
+window/size/viewport_height=1200
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/map_grid_editor/plugin.cfg")
 
 [filesystem]
 
 import/blender/enabled=false
 
-[gdnative]
+[global_script_classes]
 
-singletons=["res://addons/godot-openxr/config/godot_openxr.gdnlib"]
+_global_script_class_0="GridMaterialFactory"
+_global_script_class_type_0="Object"
+_global_script_class_path_0="res://commons/primitives/shared/grid_material_factory.gd"
+_global_script_class_1="PrimitiveMeshBuilder"
+_global_script_class_type_1="Object"
+_global_script_class_path_1="res://commons/primitives/shared/primitive_mesh_builder.gd"
+_global_script_classes=["GridMaterialFactory", "PrimitiveMeshBuilder"]
 
 [gui]
 
@@ -92,6 +134,16 @@ fly={
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+vr_button_a={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+]
+}
+toggle_artifact_catalog={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -123,4 +175,5 @@ limits/time/time_rollover_secs=30.0
 openxr/enabled=true
 openxr/foveation_level=3
 openxr/foveation_dynamic=true
+openxr/extensions/debug_utils=0
 shaders/enabled=true

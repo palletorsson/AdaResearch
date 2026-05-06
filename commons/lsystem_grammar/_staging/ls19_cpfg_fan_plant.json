@@ -1,0 +1,32 @@
+{
+  "id": "ls19_cpfg_fan_plant",
+  "axiom": "F",
+  "rules": {
+    "F": "F[+F]F[-F][F]"
+  },
+  "iterations": 4,
+  "angle_deg": 20,
+  "step_len": 0.055,
+  "step_shrink": 0.74,
+  "interpretation": "tubes",
+  "base_width": 0.016,
+  "width_shrink": 0.78,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.38,
+    0.25,
+    0.12
+  ],
+  "color_tip": [
+    0.48,
+    0.82,
+    0.34
+  ],
+  "camera_yaw": 0.26,
+  "camera_pitch": 0.18,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Plant-like branching structure from the CPFG manual figure set: F->F[+F]F[-F][F], rendered as a radial fan."
+}

@@ -1,11 +1,20 @@
+# @identity
+# essence: 3D cellular automaton on a 12^3 grid — 26-neighbor Moore neighborhood, four rule sets (Life3D, Crystal Growth, Erosion, Diffusion). MultiMesh renders live cells as colored spheres; dying cells flash red before removal.
+# desire: To cycle through rule regimes — every rule_interval seconds the automaton switches rules and reinitializes, showing how the same grid substrate produces coral, crystal, erosion, and diffusion under different transition tables.
+# critical_parameter: current_rule (Rule3D enum) — selects which birth/survival/death thresholds apply; grid_size (12) — cube dimensions; max_generations (100) — simulation cap before halt
+# triggers: _process → generation_timer fires at generation_interval → generate_next_3d_generation; rule_timer → switch_3d_rule → reinitialize; GenerationControl/DensityIndicator → animated height indicators
+# emerges: Forms that the flat law never predicted — 2D rules given volume discover architecture. Crystal Growth seeds from center outward, Erosion strips sparse cells, Diffusion bridges corners. Same counting, different thresholds, radically different morphology.
+# needs: VR rule selector [missing], generation playback [missing], cell state inspection [missing]
+# relationships: The volumetric extension of cellular_automata_2d (2D grid life). Paired with cellular_automata_3d_stacked (stacked generation history). Appears in RecursiveEmergence_Cellular_Automata_3D map.
+# truth: The automaton does not know it has depth — it only counts neighbors. But depth knows it has the automaton. A flat law, given volume, discovers forms it was never told to make.
+
 extends Node3D
 
 var time = 0.0
 var grid_size = 12
 var current_generation = 0
 var generation_timer = 0.0
-var generation_interval = 2.0
-var automaton_cells = []
+var generation_interval = 0.5 # Faster interval
 var current_state = []
 var rule_timer = 0.0
 var rule_interval = 10.0
@@ -23,59 +32,72 @@ enum Rule3D {
 var current_rule = Rule3D.LIFE_3D
 var alive_count = 0
 
-func _ready():
-	create_3d_grid()
+@onready var multi_mesh_instance: MultiMeshInstance3D = $MultiMeshInstance3D
+
+func _ready() -> void:
+	_setup_multimesh()
 	setup_materials()
 	initialize_3d_automaton()
 
-func create_3d_grid():
-	var cells_parent = $AutomatonCells
+func _setup_multimesh() -> void:
+	# Create MultiMesh if not exists
+	if not has_node("MultiMeshInstance3D"):
+		multi_mesh_instance = MultiMeshInstance3D.new()
+		multi_mesh_instance.name = "MultiMeshInstance3D"
+		add_child(multi_mesh_instance)
+	else:
+		multi_mesh_instance = $MultiMeshInstance3D
+		
+	var multimesh = MultiMesh.new()
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	multimesh.use_colors = true
+	multimesh.mesh = SphereMesh.new()
+	multimesh.mesh.radius = 0.1
+	multimesh.mesh.height = 0.2
+	multimesh.mesh.radial_segments = 8 # Low poly for performance
+	multimesh.mesh.rings = 4
 	
-	for x in range(grid_size):
-		current_state.append([])
-		automaton_cells.append([])
-		for y in range(grid_size):
-			current_state[x].append([])
-			automaton_cells[x].append([])
-			for z in range(grid_size):
-				var cell = CSGSphere3D.new()
-				cell.radius = 0.1
-				cell.position = Vector3(
-					-3 + x * 0.5,
-					-3 + y * 0.5,
-					-3 + z * 0.5
-				)
-				cells_parent.add_child(cell)
-				automaton_cells[x][y].append(cell)
-				current_state[x][y].append(0)
+	# Pre-allocate for max possible cells (grid_size^3)
+	multimesh.instance_count = grid_size * grid_size * grid_size
+	
+	# Hide all initially
+	for i in range(multimesh.instance_count):
+		multimesh.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0))) # Move away
+		
+	multi_mesh_instance.multimesh = multimesh
 
-func setup_materials():
+func setup_materials() -> void:
 	# Generation control material
 	var gen_material = StandardMaterial3D.new()
 	gen_material.albedo_color = Color(0.2, 1.0, 0.8, 1.0)
 	gen_material.emission_enabled = true
 	gen_material.emission = Color(0.05, 0.3, 0.2, 1.0)
-	$GenerationControl.material_override = gen_material
+	if has_node("GenerationControl"):
+		$GenerationControl.material_override = gen_material
 	
 	# Density indicator material
 	var density_material = StandardMaterial3D.new()
 	density_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
 	density_material.emission_enabled = true
 	density_material.emission = Color(0.3, 0.2, 0.05, 1.0)
-	$DensityIndicator.material_override = density_material
+	if has_node("DensityIndicator"):
+		$DensityIndicator.material_override = density_material
 
-func initialize_3d_automaton():
-	# Clear grid
+func initialize_3d_automaton() -> void:
+	current_state = []
+	# Initialize grid
 	for x in range(grid_size):
+		current_state.append([])
 		for y in range(grid_size):
+			current_state[x].append([])
 			for z in range(grid_size):
-				current_state[x][y][z] = 0
+				current_state[x][y].append(0)
 	
 	# Add initial pattern based on rule
 	match current_rule:
 		Rule3D.LIFE_3D:
 			# Random sparse initialization
-			for i in range(20):
+			for i in range(40): # Increased count
 				var rx = randi() % grid_size
 				var ry = randi() % grid_size
 				var rz = randi() % grid_size
@@ -102,7 +124,7 @@ func initialize_3d_automaton():
 	current_generation = 0
 	update_cell_display()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if !is_simulation_running:
 		return
 
@@ -121,13 +143,12 @@ func _process(delta):
 		rule_timer = 0.0
 		switch_3d_rule()
 	
-	animate_3d_automaton()
 	animate_indicators()
 
-func stop_simulation():
+func stop_simulation() -> void:
 	is_simulation_running = false
 
-func generate_next_3d_generation():
+func generate_next_3d_generation() -> void:
 	if current_generation >= max_generations:
 		stop_simulation()
 		return
@@ -184,32 +205,24 @@ func count_3d_neighbors(x: int, y: int, z: int) -> int:
 func apply_3d_rule(current_cell: int, neighbors: int) -> int:
 	match current_rule:
 		Rule3D.LIFE_3D:
-			# 3D Conway's Life variation
 			if current_cell == 1:
-				# Alive cell survives with 4-7 neighbors
 				return 1 if neighbors >= 4 and neighbors <= 7 else 0
 			else:
-				# Dead cell becomes alive with exactly 6 neighbors
 				return 1 if neighbors == 6 else 0
 		
 		Rule3D.CRYSTAL_GROWTH:
-			# Growth rule
 			if current_cell == 1:
-				return 1  # Alive cells stay alive
+				return 1
 			else:
-				# Dead cell becomes alive with 1-3 neighbors
 				return 1 if neighbors >= 1 and neighbors <= 3 else 0
 		
 		Rule3D.EROSION:
-			# Erosion rule
 			if current_cell == 1:
-				# Alive cell dies if too few or too many neighbors
 				return 0 if neighbors < 2 or neighbors > 8 else 1
 			else:
 				return 0
 		
 		Rule3D.DIFFUSION:
-			# Diffusion-like rule
 			if current_cell == 1:
 				return 1 if neighbors >= 2 and neighbors <= 5 else 0
 			else:
@@ -218,78 +231,75 @@ func apply_3d_rule(current_cell: int, neighbors: int) -> int:
 		_:
 			return current_cell
 
-func switch_3d_rule():
+func switch_3d_rule() -> void:
 	current_rule = (current_rule + 1) % Rule3D.size()
 	initialize_3d_automaton()
 
-func update_cell_display():
+func update_cell_display() -> void:
 	alive_count = 0
+	if not multi_mesh_instance or not multi_mesh_instance.multimesh: return
+	
+	var mm = multi_mesh_instance.multimesh
+	var idx = 0
 	
 	for x in range(grid_size):
 		for y in range(grid_size):
 			for z in range(grid_size):
-				var cell = automaton_cells[x][y][z]
 				var cell_state = current_state[x][y][z]
 				
-				if cell_state == 1:
-					alive_count += 1
-				
-				# Update material and visibility
-				var cell_material = StandardMaterial3D.new()
-				
-				if cell_state == 1:
-					# Alive cell
-					var color_intensity = float(x + y + z) / (grid_size * 3)
-					cell_material.albedo_color = Color(
-						1.0 - color_intensity * 0.5,
-						0.3 + color_intensity * 0.7,
-						0.8,
-						1.0
-					)
-					cell_material.emission_enabled = true
-					cell_material.emission = cell_material.albedo_color * 0.6
-					cell.visible = true
-				elif cell_state == 2:
-					# Dying cell
-					cell_material.albedo_color = Color(1.0, 0.0, 0.0, 1.0)
-					cell_material.emission_enabled = true
-					cell_material.emission = cell_material.albedo_color * 0.6
-					cell.visible = true
+				if cell_state == 0:
+					# Hide (move away)
+					mm.set_instance_transform(idx, Transform3D(Basis(), Vector3(0, -1000, 0)))
 				else:
-					# Dead cell - make invisible
-					cell.visible = false
-				
-				cell.material_override = cell_material
-
-func animate_3d_automaton():
-	# Animate alive cells
-	for x in range(grid_size):
-		for y in range(grid_size):
-			for z in range(grid_size):
-				if current_state[x][y][z] == 1:
-					var cell = automaton_cells[x][y][z]
-
+					if cell_state == 1:
+						alive_count += 1
 					
-					# Add rotation
-					cell.rotation_degrees.y += 30.0 * get_process_delta_time()
+					var pos = Vector3(
+						-3 + x * 0.5,
+						-3 + y * 0.5,
+						-3 + z * 0.5
+					)
+					mm.set_instance_transform(idx, Transform3D(Basis(), pos))
+					
+					# Color logic
+					var col = Color.WHITE
+					if cell_state == 1:
+						var color_intensity = float(x + y + z) / (grid_size * 3)
+						col = Color(
+							1.0 - color_intensity * 0.5,
+							0.3 + color_intensity * 0.7,
+							0.8,
+							1.0
+						)
+					elif cell_state == 2:
+						col = Color(1.0, 0.0, 0.0, 1.0)
+					
+					mm.set_instance_color(idx, col)
+				
+				idx += 1
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Generation control
-	var gen_height = (current_generation % 20) * 0.15 + 0.5
-	$GenerationControl.height = gen_height
-	$GenerationControl.position.y = -4 + gen_height/2
+	if has_node("GenerationControl"):
+		var gen_height = (current_generation % 20) * 0.15 + 0.5
+		$GenerationControl.height = gen_height
+		$GenerationControl.position.y = -4 + gen_height/2
+		
+		# Pulsing effects
+		var pulse = 1.0 + sin(time * 4.0) * 0.1
+		$GenerationControl.scale.x = pulse
 	
 	# Density indicator
-	var density = float(alive_count) / (grid_size * grid_size * grid_size)
-	var density_height = density * 3.0 + 0.5
-	var densityindicator = get_node_or_null("DensityIndicator")
-	if densityindicator and densityindicator is CSGCylinder3D:
-		densityindicator.height = density_height
-		densityindicator.position.y = -4 + density_height/2
+	if has_node("DensityIndicator"):
+		var density = float(alive_count) / (grid_size * grid_size * grid_size)
+		var density_height = density * 3.0 + 0.5
+		$DensityIndicator.height = density_height
+		$DensityIndicator.position.y = -4 + density_height/2
+		$DensityIndicator.scale.x = 1.0 + sin(time * 4.0) * 0.1
 	
 	# Update rule-based colors
-	var gen_material = $GenerationControl.material_override as StandardMaterial3D
-	var density_material = $DensityIndicator.material_override as StandardMaterial3D
+	var gen_material = $GenerationControl.material_override as StandardMaterial3D if has_node("GenerationControl") else null
+	var density_material = $DensityIndicator.material_override as StandardMaterial3D if has_node("DensityIndicator") else null
 	
 	if gen_material and density_material:
 		match current_rule:
@@ -308,11 +318,6 @@ func animate_indicators():
 		
 		gen_material.emission = gen_material.albedo_color * 0.3
 		density_material.emission = density_material.albedo_color * 0.3
-	
-	# Pulsing effects
-	var pulse = 1.0 + sin(time * 4.0) * 0.1
-	$GenerationControl.scale.x = pulse
-	$DensityIndicator.scale.x = pulse
 
 func get_rule_name() -> String:
 	match current_rule:
@@ -326,3 +331,12 @@ func get_rule_name() -> String:
 			return "Diffusion"
 		_:
 			return "Unknown"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,1 @@
+All the fractal forms converge. Recursion, Koch, Cantor, Sierpinski, Fibonacci, romanesco—each a different face of the same principle: D = log(N)/log(S). Fractals embody the QFEP tension: deterministic rules plus entropic variation creates forms at the edge of chaos. Queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.

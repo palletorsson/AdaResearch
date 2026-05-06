@@ -27,12 +27,12 @@ class NeuroRocket extends VREntity:
 	var trail_mesh: ImmediateMesh
 	var trail_node: MeshInstance3D
 
-	func _init():
+	func _init() -> void:
 		# Brain: 6 inputs, 8 hidden, 4 outputs (force X, Y, Z, magnitude)
 		# Inputs: position (3), velocity (3)
 		brain = NeuralNetwork.new(6, 8, 4)
 
-	func setup_mesh():
+	func setup_mesh() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var cone = CylinderMesh.new()
 		cone.top_radius = 0.0
@@ -47,7 +47,7 @@ class NeuroRocket extends VREntity:
 		trail_node.mesh = trail_mesh
 		add_child(trail_node)
 
-	func think(target_pos: Vector3, obstacles: Array):
+	func think(target_pos: Vector3, obstacles: Array) -> void:
 		if not alive or hit_target:
 			return
 
@@ -74,7 +74,7 @@ class NeuroRocket extends VREntity:
 
 		apply_force(force)
 
-	func _physics_process(delta):
+	func _physics_process(delta: float) -> void:
 		if not alive or hit_target:
 			return
 
@@ -90,7 +90,7 @@ class NeuroRocket extends VREntity:
 		if frame_count > max_frames:
 			alive = false
 
-	func update_trail():
+	func update_trail() -> void:
 		"""Draw pink trail ribbon"""
 		if trail_points.size() < 2:
 			return
@@ -104,13 +104,13 @@ class NeuroRocket extends VREntity:
 
 		trail_mesh.surface_end()
 
-	func check_target(target_pos: Vector3, radius: float):
+	func check_target(target_pos: Vector3, radius: float) -> void:
 		if position_v.distance_to(target_pos) < radius:
 			hit_target = true
 			# Brighten color
 			set_color(accent_pink)
 
-	func check_obstacle(obstacle_pos: Vector3, size: float):
+	func check_obstacle(obstacle_pos: Vector3, size: float) -> void:
 		if abs(position_v.x - obstacle_pos.x) < size and \
 		   abs(position_v.y - obstacle_pos.y) < size and \
 		   abs(position_v.z - obstacle_pos.z) < size:
@@ -120,7 +120,7 @@ class NeuroRocket extends VREntity:
 			if material:
 				material.albedo_color.a = 0.2
 
-	func calculate_fitness(target_pos: Vector3):
+	func calculate_fitness(target_pos: Vector3) -> void:
 		"""Calculate fitness based on distance to target and success"""
 		var distance = position_v.distance_to(target_pos)
 		fitness = 1.0 / (distance + 1.0)
@@ -136,11 +136,11 @@ class NeuroRocket extends VREntity:
 			fitness += 1.0 / (frame_count + 1)
 
 # Obstacle
-class Obstacle extends Node3D:
+class RocketObstacle extends Node3D:
 	var size: float = 0.15
 	var mesh_instance: MeshInstance3D
 
-	func _ready():
+	func _ready() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var box = BoxMesh.new()
 		box.size = Vector3(size, size, size)
@@ -154,15 +154,16 @@ class Obstacle extends Node3D:
 		add_child(mesh_instance)
 
 # Target
-class Target extends Node3D:
+class RocketTarget extends Node3D:
 	var radius: float = 0.08
 	var mesh_instance: MeshInstance3D
 	var accent_pink: Color = Color(1.0, 0.6, 1.0, 1.0)
 
-	func _ready():
+	func _ready() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = radius
+		sphere.height = radius * 2.0
 		mesh_instance.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -178,8 +179,8 @@ class Target extends Node3D:
 var population: Array[NeuroRocket] = []
 var population_size: int = 25
 var generation: int = 1
-var target: Target
-var obstacles: Array[Obstacle] = []
+var target: RocketTarget
+var obstacles: Array[RocketObstacle] = []
 var mutation_rate: float = 0.1
 
 var simulation_running: bool = true
@@ -189,9 +190,9 @@ var gen_label: Label3D
 var alive_label: Label3D
 var best_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	# Create target
-	target = Target.new()
+	target = RocketTarget.new()
 	target.position = Vector3(0, 0.35, -0.3)
 	add_child(target)
 
@@ -204,19 +205,19 @@ func _ready():
 	# Create UI
 	create_ui()
 
-func create_obstacles():
+func create_obstacles() -> void:
 	"""Create obstacles in the path"""
-	var obs1 = Obstacle.new()
+	var obs1 = RocketObstacle.new()
 	obs1.position = Vector3(0, 0.1, -0.1)
 	add_child(obs1)
 	obstacles.append(obs1)
 
-	var obs2 = Obstacle.new()
+	var obs2 = RocketObstacle.new()
 	obs2.position = Vector3(-0.15, 0.2, -0.2)
 	add_child(obs2)
 	obstacles.append(obs2)
 
-func create_population():
+func create_population() -> void:
 	"""Create or evolve population of rockets"""
 	for i in range(population_size):
 		var rocket = NeuroRocket.new()
@@ -225,7 +226,7 @@ func create_population():
 		add_child(rocket)
 		population.append(rocket)
 
-func create_ui():
+func create_ui() -> void:
 	gen_label = Label3D.new()
 	gen_label.text = "Generation: 1"
 	gen_label.font_size = 32
@@ -286,7 +287,7 @@ func _process(_delta):
 	if alive_count == 0:
 		next_generation()
 
-func next_generation():
+func next_generation() -> void:
 	"""Evolve next generation"""
 	generation += 1
 	gen_label.text = "Generation: " + str(generation)
@@ -336,3 +337,12 @@ func next_generation():
 		rocket.queue_free()
 
 	population = new_population
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,65 @@
+{
+  "artifact": "flashlight_color",
+  "title": "Building a Flashlight That Reveals What the World Already Is",
+  "concept_layer": "color as the chosen subset of wavelengths offered by a light source; subtractive interaction between colored light and colored surface",
+  "technique_first": ["SpotLight3D", "light_color property", "emission on a lens", "recursive node search", "NodePath target resolution", "additive-vs-subtractive color model"],
+  "technique_reference": ["Node3D + MeshInstance3D (Point_One)", "StandardMaterial3D emission (Point_Line)", "@export parameters (rotation_gimbal)"],
+  "domain_deferred": ["human color perception \u2192 later color maps (SimultaneousContrast, MetamerismLab)", "GPU lighting pipeline \u2192 procgen/shaders", "wavelength spectrum \u2192 wavefunctions"],
+  "capture_leaks": {
+    "perception_context": "Color isn't wavelength \u2014 it's what your eye+brain decide. Simultaneous contrast (later in this sequence) breaks the naive model.",
+    "metamerism": "Different wavelength mixes can look identical to us; MetamerismLab addresses this.",
+    "subpixel_rendering": "The flashlight projects 'pure' colors but your screen reconstructs them from three subpixels. A whole world of approximation lives here.",
+    "material_response": "A surface doesn't have 'a color' \u2014 it has a spectral response function. This map uses Godot's simplified albedo model; the full story waits."
+  },
+  "limit": "A flashlight with a single exported color seems simple. Under it, three assumptions: that color is one vector in RGB, that surfaces respond linearly, that seeing is objective. Every one of those is wrong in interesting ways. The next maps in this sequence begin dismantling them.",
+  "stages": [
+    {
+      "title": "From rotation to quality",
+      "thinking": "Trans_Rotation taught you that orientation lives on a curved manifold and Euler angles are a leaky chart. Now a new kind of property: not where a form is, not which way it faces, but what it *is like*. Color is the first quality. Geometry has said nothing about this until now \u2014 a point has position, a line has length, a triangle has area, but none of them have hue. Color is where mathematics meets perception.",
+      "code": "# Previous sequences:\n#   primitives \u2014 where (position, extent, closure)\n#   transformation \u2014 how (translate, rotate, scale)\n#\n# New question: what is a form LIKE?\n#\n# In Godot, color is a Color \u2014 four floats (r, g, b, a)\n# Each in [0, 1]. Together they represent the simplest\n# additive model of how humans see light.\n\n@export var light_color: Color = Color.WHITE\n\n# This is the seed. Everything else follows from it.",
+      "concepts": ["Color type", "RGB triple", "qualitative property", "additive model"]
+    },
+    {
+      "title": "Light is directed, not ambient",
+      "thinking": "The first tool the player gets for working with color is a flashlight \u2014 a SpotLight3D. This is deliberate. Ambient light fills space uniformly; the world has a color all the time. A flashlight only colors what it hits. This teaches color as an *interaction* between a source and a surface, not a property hanging in the air.",
+      "code": "extends Node3D\n\n@export var light_color: Color = Color.WHITE\n@export var target_path: NodePath\n\nfunc _ready() -> void:\n\tvar target_root = _resolve_target_root()\n\t\n\t# Find SpotLight3D in the target flashlight\n\tvar spot = _find_spot_light(target_root)\n\tif spot:\n\t\tspot.light_color = light_color",
+      "concepts": ["SpotLight3D", "light_color", "directed vs ambient", "source\u2013surface interaction"]
+    },
+    {
+      "title": "Walk the tree to find the light",
+      "thinking": "This script attaches to a flashlight model. It needs to find the SpotLight3D buried inside. Recursion walks the node tree. A pattern that reappears everywhere: a script configures a feature buried in a scene by descending and matching a type. First example of dynamic scene traversal in the curriculum.",
+      "code": "func _find_spot_light(node: Node) -> SpotLight3D:\n\tfor child in node.get_children():\n\t\tif child is SpotLight3D:\n\t\t\treturn child\n\t\tvar found = _find_spot_light(child)\n\t\tif found:\n\t\t\treturn found\n\treturn null\n\nfunc _resolve_target_root() -> Node:\n\tif target_path != NodePath():\n\t\tvar explicit = get_node_or_null(target_path)\n\t\tif explicit:\n\t\t\treturn explicit\n\tif _find_spot_light(self):\n\t\treturn self\n\tvar parent = get_parent()\n\tif parent and _find_spot_light(parent):\n\t\treturn parent\n\treturn self",
+      "concepts": ["recursive tree search", "NodePath resolution", "dynamic type matching", "fallback chain"]
+    },
+    {
+      "title": "Tint the lens so the color is visible even when off-target",
+      "thinking": "A colored flashlight shining on a wall colors the wall. But what about the flashlight itself? A white flashlight emitting red light should LOOK red \u2014 its lens should glow. We find the lens mesh by name and apply a material with emission matching the light. This is where color stops being a number and starts being a seen thing.",
+      "code": "# Also tint the lens to match\nvar lens = _find_lens_mesh(target_root)\nif lens and lens is MeshInstance3D:\n\tvar mat = StandardMaterial3D.new()\n\tmat.albedo_color = light_color.lerp(Color.WHITE, 0.5)\n\tmat.emission_enabled = true\n\tmat.emission = light_color * 0.5\n\tmat.emission_energy_multiplier = 1.0\n\tmat.metallic = 0.1\n\tmat.roughness = 0.1\n\tlens.material_override = mat\n\nfunc _find_lens_mesh(node: Node) -> MeshInstance3D:\n\tfor child in node.get_children():\n\t\tif child is MeshInstance3D and child.name == \"LensMesh\":\n\t\t\treturn child\n\t\tvar found = _find_lens_mesh(child)\n\t\tif found:\n\t\t\treturn found\n\treturn null",
+      "concepts": ["emission", "albedo_color", "Color.lerp()", "name-based node lookup", "material_override"]
+    },
+    {
+      "title": "See the subtractive truth",
+      "thinking": "Here's where the lesson lands. The flashlight emits red light. You shine it on a blue wall. The wall goes nearly black. Why? Because the blue wall reflects blue wavelengths; the red flashlight offers no blue to reflect. Color is not additive on surfaces \u2014 it is the intersection of what the light offers and what the surface reflects. White flashlights hide this because white contains everything.",
+      "code": "# The player slides a color into the flashlight\n# and points it at a wall. What happens?\n#\n# red flashlight on blue wall   \u2192 nearly black\n# red flashlight on red wall    \u2192 bright red  \n# red flashlight on white wall  \u2192 red (white reflects all)\n# red flashlight on yellow wall \u2192 red (yellow = red + green)\n# green flashlight on yellow    \u2192 green (same reason)\n#\n# Color on a surface is an AND gate:\n# what the light offers  AND  what the surface reflects.\n# No shared wavelength \u2192 darkness.\n\n# This is why the flashlight matters.\n# A white flashlight would hide the truth.\n# A colored flashlight reveals what the world is made of.",
+      "concepts": ["subtractive interaction", "wavelength filtering", "surface spectral response", "reveal vs add"]
+    },
+    {
+      "title": "Unambiguous choice: one color, one identity",
+      "thinking": "No animation, no cycling, no slider. The flashlight's color is set once in _ready() and never changes. Why this restraint? Because this map is about understanding one fixed color's interaction with many surfaces. Swapping between flashlights (done at the map level, not the artifact level) is the ritual. Each flashlight IS its color.",
+      "code": "func _ready() -> void:\n\tvar target_root = _resolve_target_root()\n\tvar spot = _find_spot_light(target_root)\n\tif spot:\n\t\tspot.light_color = light_color\n\t# ... and done.\n\t#\n\t# No _process, no tween, no runtime change.\n\t# The color is the flashlight's identity, set once,\n\t# held forever. The player changes color by\n\t# picking up a different flashlight.\n\nfunc apply_grid_config(config: Dictionary) -> void:\n\tpass  # Even grid config doesn't override color.\n\t      # Color belongs to this specific instance.",
+      "concepts": ["set-once configuration", "identity vs state", "instance-as-variant", "restraint as pedagogy"]
+    },
+    {
+      "title": "Works whether attached to flashlight, parent, or target path",
+      "thinking": "The target resolution is flexible because flashlights get placed in maps in different ways \u2014 sometimes this script attaches to the flashlight root, sometimes to a sibling, sometimes via explicit NodePath. Three fallbacks. This kind of flexibility is invisible when it works, invaluable when it fails elsewhere.",
+      "code": "func _resolve_target_root() -> Node:\n\t# Priority 1: explicit target_path if set\n\tif target_path != NodePath():\n\t\tvar explicit = get_node_or_null(target_path)\n\t\tif explicit:\n\t\t\treturn explicit\n\t\n\t# Priority 2: self contains the SpotLight3D\n\tif _find_spot_light(self):\n\t\treturn self\n\t\n\t# Priority 3: parent contains it (this script is a sibling)\n\tvar parent = get_parent()\n\tif parent and _find_spot_light(parent):\n\t\treturn parent\n\t\n\t# Default: use self anyway so _find_spot_light logs the warning\n\treturn self",
+      "concepts": ["fallback chain", "NodePath", "flexible attachment", "defensive resolution"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "A flashlight knows what it is. Not an object that adds color to the world \u2014 a device that chooses which wavelengths to offer. The world's color was always there. The flashlight reveals it by editing what it gives. This is color as relation, not color as attribute. The whole Color sequence unfolds from this.",
+      "code": "# @identity\n# essence: SpotLight3D.light_color = exported color \u2014 tints a flashlight beam and its lens mesh to match\n# desire: to hold a colored flashlight in VR and paint the world with tinted light, seeing how surfaces respond to non-white illumination\n# critical_parameter: light_color \u2014 the single color that defines everything: beam hue, lens tint, and emission glow\n# triggers: _ready applies color once; no runtime changes \u2014 the flashlight's color is its identity\n# emerges: colored light on colored surfaces creates unexpected results (red light on blue wall = black) teaching subtractive interaction\n# needs: SpotLight3D [has]; lens mesh tinting [has]; VR grab [missing]; color picker [missing]\n# relationships: synthesis artifact for Color_Flashlight map; contrasts with ambient-light artifacts\n# truth: a flashlight does not add color to the world \u2014 it reveals what was always there by choosing which wavelengths to offer",
+      "concepts": ["@identity", "revealing vs adding", "color as relation", "truth"]
+    }
+  ]
+}

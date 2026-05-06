@@ -1,0 +1,61 @@
+{
+  "spec_version": "0.1",
+  "artifact": {
+    "id": "cellular_automata_1d",
+    "name": "Cellular Automata 1D — Four Walls",
+    "qfep": "F_order",
+    "category": "cellular_automata",
+    "essence": "four walls evolve with four different elementary CA rules side by side, room as comparator",
+    "truth": "a single rule on a single line generates structure; comparing rules teaches what the rule is"
+  },
+  "parameters": [
+    { "id": "grid_width",          "type": "int",     "default": 20, "range": [4, 64] },
+    { "id": "grid_height",         "type": "int",     "default": 20, "range": [4, 64] },
+    { "id": "cube_size",           "type": "float",   "default": 0.55, "unit": "m" },
+    { "id": "generation_interval", "type": "float",   "default": 0.5, "unit": "s",
+      "doc": "delay between generations (one row per tick)" },
+    { "id": "cycle_interval",      "type": "float",   "default": 15.0, "unit": "s",
+      "doc": "delay before reset" },
+    { "id": "wall_rules",          "type": "int[]",   "default": [30, 110, 90, 150], "length": 4,
+      "doc": "elementary CA rule per wall (0..255)" },
+    { "id": "wall_names",          "type": "string[]","default": ["North","South","East","West"], "length": 4 },
+    { "id": "wall_colors",         "type": "color[]", "default": [
+        [1.0, 0.6, 0.2], [0.2, 1.0, 0.8], [1.0, 0.2, 0.8], [0.8, 1.0, 0.2]
+      ], "length": 4 }
+  ],
+  "state": [
+    { "id": "time",          "type": "float", "init": 0.0 },
+    { "id": "current_gen",   "type": "int",   "init": 0 },
+    { "id": "walls",         "type": "object[]", "init": "init_walls()",
+      "shape": "{ rule: int, name: string, current_state: int[], history: int[][] }" }
+  ],
+  "algorithm": {
+    "kind": "elementary_ca_1d",
+    "step": "for i in 0..grid_width: neighborhood = (left*4 + center*2 + right); next[i] = (rule >> neighborhood) & 1",
+    "neighbor_wrap": "circular",
+    "init_state": "single 1 at grid_width/2, rest zero"
+  },
+  "geometry": {
+    "kind": "instances_per_cell",
+    "primitive_ref": "res://commons/primitives/cubes/cube_scene.tscn",
+    "scale": [0.5, 0.5, 0.5],
+    "layout": {
+      "kind": "four_walls",
+      "wall_count": 4,
+      "wall_normal_axes": ["+z", "-z", "+x", "-x"],
+      "wall_offset": 5.25,
+      "cell_position_in_wall": "[(x - grid_width/2 + 0.5) * cube_size, 5 - gen * cube_size]",
+      "spawn_when": "cell_state == 1"
+    }
+  },
+  "behavior": {
+    "on_ready": ["create_four_walls", "initialize_all_walls"],
+    "on_tick": [
+      "advance_time",
+      "every($generation_interval): generate_next_generation_all_walls; update_display",
+      "every($cycle_interval): reset_all_walls",
+      "animate_current_row(pulse = 1.0 + sin(time*5 + x*0.3) * 0.15)"
+    ]
+  },
+  "interaction": []
+}

@@ -1,0 +1,117 @@
+# Map: Gallery: LivingPaper
+
+> LivingPaper Artifact Gallery
+
+## Overview
+
+**Dimensions:** 11 x 18 (max height: 2)
+**Difficulty:** gallery | **Time:** 9-14 minutes
+
+Showcase of 28 unplaced artifacts from LivingPaper. Walk through to browse available artifacts.
+
+## Learning Objectives
+
+- Browse 28 LivingPaper artifacts
+- Identify artifacts for placement in curriculum maps
+- Observe artifact visual and interaction patterns
+
+## Layout
+
+**Grid:** 18 rows x 11 columns
+**Cube Size:** 1.0 | **Gutter:** 0.0
+**Background:** sky
+
+### Artifacts
+
+| Cell | Artifact | Category | Config |
+|------|----------|----------|--------|
+| [1,2] | request_note | tools | `:0:1.5#text:living paper bfs` |
+| [1,4] | request_note | tools | `:0:1.5#text:living paper brians brain` |
+| [1,6] | request_note | tools | `:0:1.5#text:living paper brownian` |
+| [1,8] | request_note | tools | `:0:1.5#text:living paper bubble sort` |
+| [2,2] | living_paper_bfs | substrate | `:0:-0.5` |
+| [2,4] | living_paper_brians_brain | substrate | `:0:-0.5` |
+| [2,6] | living_paper_brownian | substrate | `:0:-0.5` |
+| [2,8] | living_paper_bubble_sort | substrate | `:0:-0.5` |
+| [3,2] | request_note | tools | `:0:1.5#text:living paper dfs maze` |
+| [3,4] | request_note | tools | `:0:1.5#text:living paper dla` |
+| [3,6] | request_note | tools | `:0:1.5#text:living paper dragon` |
+| [3,8] | request_note | tools | `:0:1.5#text:living paper fern` |
+| [4,2] | living_paper_dfs_maze | substrate | `:0:-0.5` |
+| [4,4] | living_paper_dla | substrate | `:0:-0.5` |
+| [4,6] | living_paper_dragon | substrate | `:0:-0.5` |
+| [4,8] | living_paper_fern | substrate | `:0:-0.5` |
+| [5,2] | request_note | tools | `:0:1.5#text:living paper fourier` |
+| [5,4] | request_note | tools | `:0:1.5#text:living paper heat` |
+| [5,6] | request_note | tools | `:0:1.5#text:living paper insertion sort` |
+| [5,8] | request_note | tools | `:0:1.5#text:living paper julia` |
+| [6,2] | living_paper_fourier | substrate | `:0:-0.5` |
+| [6,4] | living_paper_heat | substrate | `:0:-0.5` |
+| [6,6] | living_paper_insertion_sort | substrate | `:0:-0.5` |
+| [6,8] | living_paper_julia | substrate | `:0:-0.5` |
+| [7,2] | request_note | tools | `:0:1.5#text:living paper kmeans` |
+| [7,4] | request_note | tools | `:0:1.5#text:living paper koch` |
+| [7,6] | request_note | tools | `:0:1.5#text:living paper lissajous` |
+| [7,8] | request_note | tools | `:0:1.5#text:living paper merge sort` |
+| [8,2] | living_paper_kmeans | substrate | `:0:-0.5` |
+| [8,4] | living_paper_koch | substrate | `:0:-0.5` |
+| [8,6] | living_paper_lissajous | substrate | `:0:-0.5` |
+| [8,8] | living_paper_merge_sort | substrate | `:0:-0.5` |
+| [9,2] | request_note | tools | `:0:1.5#text:living paper noise octaves` |
+| [9,4] | request_note | tools | `:0:1.5#text:living paper perlin` |
+| [9,6] | request_note | tools | `:0:1.5#text:living paper quadtree` |
+| [9,8] | request_note | tools | `:0:1.5#text:living paper quick sort` |
+| [10,2] | living_paper_noise_octaves | substrate | `:0:-0.5` |
+| [10,4] | living_paper_perlin | substrate | `:0:-0.5` |
+| [10,6] | living_paper_quadtree | substrate | `:0:-0.5` |
+| [10,8] | living_paper_quick_sort | substrate | `:0:-0.5` |
+| [11,2] | request_note | tools | `:0:1.5#text:living paper reaction diffu...` |
+| [11,4] | request_note | tools | `:0:1.5#text:living paper rule110` |
+| [11,6] | request_note | tools | `:0:1.5#text:living paper rule30` |
+| [11,8] | request_note | tools | `:0:1.5#text:living paper seeds` |
+| [12,2] | living_paper_reaction_diffusion | substrate | `:0:-0.5` |
+| [12,4] | living_paper_rule110 | substrate | `:0:-0.5` |
+| [12,6] | living_paper_rule30 | substrate | `:0:-0.5` |
+| [12,8] | living_paper_seeds | substrate | `:0:-0.5` |
+| [13,2] | request_note | tools | `:0:1.5#text:living paper self avoiding` |
+| [13,4] | request_note | tools | `:0:1.5#text:living paper sine` |
+| [13,6] | request_note | tools | `:0:1.5#text:living paper tree` |
+| [13,8] | request_note | tools | `:0:1.5#text:living paper voronoi` |
+| [14,2] | living_paper_self_avoiding | substrate | `:0:-0.5` |
+| [14,4] | living_paper_sine | substrate | `:0:-0.5` |
+| [14,6] | living_paper_tree | substrate | `:0:-0.5` |
+| [14,8] | living_paper_voronoi | substrate | `:0:-0.5` |
+
+### Utilities
+
+| Cell | Value |
+|------|-------|
+| [0,1] | `sp` |
+| [16,9] | `t` |
+
+### Utility Definitions
+
+- `t`: teleporter -- Back
+- `s`: spawn -- 
+
+## Lighting
+
+- **Ambient:** rgb([0.5, 0.5, 0.55]) energy 0.7
+- **Directional:** dir=[-0.3, -0.8, -0.3], color=[1.0, 0.95, 0.9], energy=0.8
+
+## Text Coverage
+
+| blurb | technical | critical | intent | summary |
+|-------|-----------|----------|--------|---------|
+| **no** | **no** | **no** | **no** | **no** |
+
+## Verification
+
+- [ ] Load in Godot
+- [ ] Walk through all artifacts
+- [ ] Test teleporters
+- [ ] Check atmosphere and lighting
+- [ ] Verify text files written
+
+---
+*Generated by generate_map_plans.py on 2026-04-15*

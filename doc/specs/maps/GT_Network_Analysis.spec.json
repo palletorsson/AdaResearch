@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "GT_Network_Analysis",
+  "home_sequence": "graphtheory",
+  "dimensions": {
+    "w": 11,
+    "d": 11
+  },
+  "signature": "network_analysis computes and visualizes multiple centrality measures; networkflow3d demonstrates flow constraints and bottlenecks \u2014 capacity as a distinct structural property from connectivity.",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 16,
+      "bounds": {
+        "x": 5,
+        "z": 7,
+        "w": 6,
+        "d": 4
+      },
+      "centroid": [
+        7.375,
+        9.0
+      ]
+    },
+    {
+      "size": 13,
+      "bounds": {
+        "x": 0,
+        "z": 4,
+        "w": 9,
+        "d": 3
+      },
+      "centroid": [
+        4.3076923076923075,
+        5.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 41,
+    "breath_zone_count": 2,
+    "unique_tokens": 0
+  }
+}

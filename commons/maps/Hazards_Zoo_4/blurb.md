@@ -1,0 +1,5 @@
+Pickups, companions, and creatures built from data structures. A 4×4 grid walks and fires cells by index. A binary search tree balances on its own leaf nodes. A network of eight spheres reconfigures its edges — BFS, DFS, shortest path made visible as the graph rewires itself toward you. A convex hull sheds vertices as projectiles, its body shrinking with each launch.
+
+Between them: the things you carry. A mushroom that rewrites perception. A stick that bridges player and plasma. The Becoming Catalyst — an evolving hand force that tracks the entire curriculum in its modes, from slow cubes through calming fields to swarm intelligence. Its companion, the Loving Triangle, folds and tiles in response. The atom of all 3D worlds, dancing with the tool that transforms it.
+
+Every algorithm here has a body. Every body encodes a relationship. The array teaches traversal by attacking in row-major order. The graph teaches connectivity by hunting you through its own edges. The hull teaches convexity by consuming itself. Structure is not abstract — it walks, fires, shrinks, and reaches.

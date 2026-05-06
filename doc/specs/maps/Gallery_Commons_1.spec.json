@@ -1,0 +1,188 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Commons_1",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 20
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.137,
+  "breath_zones": [
+    {
+      "size": 159,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 20
+      },
+      "centroid": [
+        5.0251572327044025,
+        10.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "2d_in_3d_point_vis"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "2d_in_3d_vectors_vis"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "ConnectedTriangles"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "HandheldInfoBoard"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "VRBrush"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "agent_spawner"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "agnes_grid"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "agnes_grid_2d"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "agnes_martin_grid_painting"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "backpropagation_flow"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "barnsley_fern"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "big_o_race"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "bridget_riley_op_art"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "cache_hit_visualizer"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "camera_context"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "centripetal_force_demo"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "circular_buffer"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "clipboard_large"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "code"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "constraint_sculptor"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "coupled_pendulums"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "cube_create"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "dimensional_analogy"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "disco_floor"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "drag_coefficient_wind_tunnel"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "draw_calls_display"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "drawing_paper"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "drawing_pen"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "found_object_assembler"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "fractal_space"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 30,
+    "walkable_cells": 219,
+    "breath_zone_count": 1,
+    "unique_tokens": 30
+  }
+}

@@ -1,0 +1,56 @@
+{
+	"approach": "south",
+	"artifact_offset": [
+		0.0,
+		3.75500011444092,
+		0.0
+	],
+	"clearance": [
+		3.0,
+		3.0,
+		3.0
+	],
+	"exit": "north",
+	"extras": [],
+	"footing": {
+		"anchor": [
+			1.0,
+			1.0
+		],
+		"tiles": [
+			[
+				1.0,
+				1.0,
+				1.0
+			],
+			[
+				1.0,
+				3.0,
+				1.0
+			],
+			[
+				1.0,
+				1.0,
+				1.0
+			]
+		]
+	},
+	"footprint": [
+		6,
+		6,
+		6
+	],
+	"lookup_name": "tscn_joint",
+	"notes": {
+		"tags": [
+			"artifact-needs-fix"
+		],
+		"text": "[auto] AABB.y min = -3.76 — body sinks into / floats above floor"
+	},
+	"rotations": [
+		"0",
+		"90",
+		"180",
+		"270"
+	]
+}

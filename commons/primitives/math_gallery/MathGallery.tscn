@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dhc4dw1tvmqfa"]
+
+[ext_resource type="Script" uid="uid://c8444yhhxfp8c" path="res://commons/primitives/math_gallery/math_gallery.gd" id="1_math_gallery"]
+
+[node name="MathGallery" type="Node3D" unique_id=1263494506]
+script = ExtResource("1_math_gallery")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2066056953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.6394889)

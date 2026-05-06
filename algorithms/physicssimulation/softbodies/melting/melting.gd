@@ -4,19 +4,21 @@ extends Node3D
 
 var melting_geometry: Node3D
 var heat_source_marker: MeshInstance3D
+var _xr_active: bool = false
 
-func _ready():
+func _ready() -> void:
+	_xr_active = XRServer.primary_interface != null
 	setup_scene()
 	setup_melting_geometry()
 	setup_heat_source_marker()
 	setup_camera()
 	setup_lighting()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Set up basic scene
 	pass
 
-func setup_melting_geometry():
+func setup_melting_geometry() -> void:
 	# Create the melting geometry node
 	melting_geometry = preload("res://algorithms/physicssimulation/softbodies/melting/meltinggeometry.gd").new()
 	add_child(melting_geometry)
@@ -30,7 +32,7 @@ func setup_melting_geometry():
 	# Add initial heat source
 	melting_geometry.add_heat_source(Vector3(1, 0, 0))
 
-func setup_heat_source_marker():
+func setup_heat_source_marker() -> void:
 	# Create a visual marker for heat sources
 	heat_source_marker = MeshInstance3D.new()
 	add_child(heat_source_marker)
@@ -48,19 +50,21 @@ func setup_heat_source_marker():
 	
 	heat_source_marker.position = Vector3(1, 0, 0)
 
-func setup_camera():
+func setup_camera() -> void:
 	var camera = Camera3D.new()
 	add_child(camera)
 	camera.position = Vector3(5, 3, 5)
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 
-func setup_lighting():
+func setup_lighting() -> void:
 	var light = DirectionalLight3D.new()
 	add_child(light)
 	light.position = Vector3(2, 4, 2)
 	light.rotation_degrees = Vector3(-45, 45, 0)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
+	if _xr_active and event is InputEventMouseButton:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			# Add heat source at clicked position
@@ -87,3 +91,12 @@ func _input(event):
 				# Reset the geometry
 				melting_geometry.queue_free()
 				setup_melting_geometry()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

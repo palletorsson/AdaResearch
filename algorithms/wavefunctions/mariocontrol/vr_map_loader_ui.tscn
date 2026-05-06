@@ -1,0 +1,173 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/mariocontrol/vr_map_loader_ui.gd" id="1"]
+
+[node name="VRMapLoaderUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.038, 0.065, 0.11, 0.9)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 16.0
+offset_right = -18.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "VR Map Loading Station"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 30
+
+[node name="SubtitleLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "Filter by sequence and map algorithm, then load one map at a time."
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+
+[node name="SequenceRow" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SequenceLabel" type="Label" parent="Margin/VBox/SequenceRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(124, 0)
+text = "Sequence"
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 17
+
+[node name="SequenceOption" type="OptionButton" parent="Margin/VBox/SequenceRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 46)
+theme_override_font_sizes/font_size = 17
+
+[node name="AlgorithmRow" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AlgorithmLabel" type="Label" parent="Margin/VBox/AlgorithmRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(124, 0)
+text = "Algorithm"
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 17
+
+[node name="AlgorithmOption" type="OptionButton" parent="Margin/VBox/AlgorithmRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 46)
+theme_override_font_sizes/font_size = 17
+
+[node name="MapRow" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MapLabel" type="Label" parent="Margin/VBox/MapRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(124, 0)
+text = "Map"
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 17
+
+[node name="MapOption" type="OptionButton" parent="Margin/VBox/MapRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 46)
+theme_override_font_sizes/font_size = 17
+
+[node name="CountLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "0 maps"
+theme_override_font_sizes/font_size = 16
+
+[node name="ContextLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "Seq: all  |  Algo: all  |  Map: - (0/0)"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 15
+
+[node name="ButtonRow" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PrevButton" type="Button" parent="Margin/VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "Prev"
+theme_override_font_sizes/font_size = 16
+
+[node name="NextButton" type="Button" parent="Margin/VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "Next"
+theme_override_font_sizes/font_size = 16
+
+[node name="LoadNextButton" type="Button" parent="Margin/VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "Load Next"
+theme_override_font_sizes/font_size = 16
+
+[node name="LoadButton" type="Button" parent="Margin/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 44)
+text = "Load Map"
+theme_override_font_sizes/font_size = 16
+
+[node name="StartSequenceButton" type="Button" parent="Margin/VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "Start Sequence"
+theme_override_font_sizes/font_size = 16
+
+[node name="RefreshButton" type="Button" parent="Margin/VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "Refresh"
+theme_override_font_sizes/font_size = 16
+
+[node name="StatusLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Status"
+autowrap_mode = 3
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+
+[node name="HintLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "Tip: choose sequence + algorithm, then Load Map. Press B to move kiosk to you."
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14

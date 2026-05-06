@@ -1,0 +1,48 @@
+{
+  "rack_info": {
+    "name": "MIX-3",
+    "description": "MIX-3 — auto-generated UVAC composition. sound_type=tunable_becoming, composition_type=mixed_row.",
+    "version": "auto-1",
+    "sound_type": "tunable_becoming",
+    "auto_generated": true,
+    "composition_type": "mixed_row",
+    "composition_count": 3
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "kn_0",
+      "sv_1",
+      "kn_2"
+    ]
+  ],
+  "control_definitions": {
+    "kn_0": {
+      "type": "knob",
+      "label": "RATE",
+      "parameter": "rate",
+      "min": 0.01,
+      "max": 20.0,
+      "default": 2.0
+    },
+    "sv_1": {
+      "type": "slv",
+      "label": "FBK",
+      "parameter": "feedback",
+      "min": 0.0,
+      "max": 0.95,
+      "default": 0.3
+    },
+    "kn_2": {
+      "type": "knob",
+      "label": "DEPTH",
+      "parameter": "depth",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

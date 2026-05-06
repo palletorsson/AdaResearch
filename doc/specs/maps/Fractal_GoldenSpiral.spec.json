@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_GoldenSpiral",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 15,
+    "d": 13
+  },
+  "signature": "fibonacci_sequences visualizes the recurrence and ratio convergence; fibonacci_terrain#preset applies Fibonacci to landscape generation; golden_rectangle#preset demonstrates self-similar subdivision; romanesco is the empirical fractal \u2014 nature's own computation; dark_sphere anchors.",
+  "style": null,
+  "echoes": [],
+  "density": 0.016,
+  "breath_zones": [
+    {
+      "size": 177,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 13
+      },
+      "centroid": [
+        7.129943502824859,
+        5.564971751412429
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "fibonacci_sequences"
+    },
+    {
+      "x": 7,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 11,
+      "z": 9,
+      "token": "romanesco"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 182,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

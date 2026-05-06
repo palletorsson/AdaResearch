@@ -1,4 +1,4 @@
-# SpikeTrapHazard.gd
+﻿# SpikeTrapHazard.gd
 # Deadly spikes that emerge from the ground when player falls or steps on them
 extends Area3D
 class_name SpikeTrapHazard
@@ -182,7 +182,7 @@ func _update_idle_state():
 	for spike in spikes:
 		spike.position.y = -spike_height * 0.5  # Underground
 
-func _update_warning_state(delta):
+func _update_warning_state(_delta):
 	# Show pulsing warning
 	warning_indicator.visible = true
 	var pulse = 0.5 + 0.5 * sin(state_timer * 15.0)  # Fast pulse
@@ -194,7 +194,7 @@ func _update_warning_state(delta):
 	if state_timer >= activation_delay:
 		_change_state(TrapState.EMERGING)
 
-func _update_emerging_state(delta):
+func _update_emerging_state(_delta):
 	# Animate spikes emerging
 	var emerge_progress = min(state_timer / 0.5, 1.0)  # 0.5 second emerge time
 	var target_height = spike_height * 0.4  # Emerge above ground
@@ -208,7 +208,7 @@ func _update_emerging_state(delta):
 		_change_state(TrapState.ACTIVE)
 		damage_dealt_this_cycle = false
 
-func _update_active_state(delta):
+func _update_active_state(_delta):
 	# Spikes are fully extended and dangerous
 	warning_indicator.visible = false
 	
@@ -220,7 +220,7 @@ func _update_active_state(delta):
 	if state_timer >= spike_duration:
 		_change_state(TrapState.RETRACTING)
 
-func _update_retracting_state(delta):
+func _update_retracting_state(_delta):
 	# Animate spikes retracting
 	var retract_progress = min(state_timer / retraction_time, 1.0)
 	var start_height = spike_height * 0.4
@@ -233,7 +233,7 @@ func _update_retracting_state(delta):
 	if retract_progress >= 1.0:
 		_change_state(TrapState.COOLDOWN)
 
-func _update_cooldown_state(delta):
+func _update_cooldown_state(_delta):
 	# Wait before trap can be triggered again
 	if state_timer >= cooldown_time:
 		_change_state(TrapState.IDLE)

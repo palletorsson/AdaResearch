@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://qvsj4sl1n785"]
+
+[ext_resource type="Script" uid="uid://ct1pc6b5agtsb" path="res://algorithms/color/dark_side_prism.gd" id="1_prism"]
+
+[node name="DarkSidePrism" type="Node3D"]
+script = ExtResource("1_prism")

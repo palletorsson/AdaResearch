@@ -1,0 +1,75 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Bricolage_Affordances",
+  "home_sequence": "bricolage",
+  "dimensions": {
+    "w": 13,
+    "d": 15
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "primitives"
+  ],
+  "density": 0.036,
+  "breath_zones": [
+    {
+      "size": 186,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 15
+      },
+      "centroid": [
+        6.0,
+        7.010752688172043
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "cylinder_as_column"
+    },
+    {
+      "x": 9,
+      "z": 3,
+      "token": "cylinder_as_axle"
+    },
+    {
+      "x": 6,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "plane_as_seat"
+    },
+    {
+      "x": 9,
+      "z": 7,
+      "token": "plane_as_wall"
+    },
+    {
+      "x": 3,
+      "z": 11,
+      "token": "sphere_as_joint"
+    },
+    {
+      "x": 9,
+      "z": 11,
+      "token": "sphere_as_hub"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 194,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

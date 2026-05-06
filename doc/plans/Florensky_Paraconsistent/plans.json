@@ -1,0 +1,38 @@
+{
+  "name": "Florensky_Paraconsistent",
+  "title": "Holding Contradiction Without Collapse",
+  "description": "What if contradictions don't destroy everything? Florensky's supralogic holds A and not-A without collapse. Quantum states exist in superposition.",
+  "dimensions": {
+    "rows": 12,
+    "cols": 13
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    10,
+    6
+  ],
+  "artifacts": [
+    {
+      "name": "florensky_sphere",
+      "row": 5,
+      "col": 6,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "schrodinger_box",
+      "row": 7,
+      "col": 3,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "superposition_display",
+      "row": 7,
+      "col": 9,
+      "family": "quantumalgorithms"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Three bodies. Three gravitational pulls. No closed-form solution. Newton solved two bodies exactly — add a third and determinism collapses into chaos. Poincaré proved it: no general formula exists. The problem isn't hard. It's impossible.
+
+Step into an open arena where three masses orbit under mutual gravitation. Watch stable configurations dissolve without warning. Tiny perturbations — a fraction of a pixel in initial position — cascade into entirely different futures. The system remembers nothing and forgives nothing. Cellular automata line the walls, ticking out rule-driven certainty while the bodies above trace paths that no rule can predict.
+
+Two bodies make an orbit. Three bodies make a question. The universe doesn't solve differential equations — it just moves, and the math tries to keep up.

@@ -1,0 +1,54 @@
+{
+  "id": "morph_auto_hand_07",
+  "family": "hand",
+  "notes": "Auto-generated hand candidate.",
+  "camera_yaw": 0.904,
+  "camera_pitch": 0.363,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.433,
+      0.224,
+      0.824
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "palm_to_fingers",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "finger_array",
+      "params": {
+        "count": 6,
+        "length": 0.583,
+        "fill": 0.882,
+        "thickness_scale": 1.075
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.817
+    },
+    {
+      "id": "palm_to_wrist",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "back",
+      "op": "extrude",
+      "params": {
+        "length": 0.228,
+        "scale": 0.35
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ]
+}

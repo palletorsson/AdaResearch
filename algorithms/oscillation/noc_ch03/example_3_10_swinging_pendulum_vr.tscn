@@ -1,6 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://lxy2nynvb0jt"]
 
-[ext_resource type="Script" path="res://algorithms/oscillation/noc_ch03/example_3_10_swinging_pendulum_vr.gd" id="1_d4plm"]
+[ext_resource type="Script" uid="uid://cxqlc5o5y2bn" path="res://algorithms/oscillation/noc_ch03/example_3_10_swinging_pendulum_vr.gd" id="1_d4plm"]
 
 [node name="Example310PendulumVR" type="Node3D"]
 script = ExtResource("1_d4plm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1275432)

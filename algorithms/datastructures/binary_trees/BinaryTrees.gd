@@ -32,7 +32,7 @@ class TreeNode:
 	var level: int
 	var position_in_level: int
 	
-	func _init(val: int):
+	func _init(val: int) -> void:
 		value = val
 		left_child = null
 		right_child = null
@@ -44,11 +44,11 @@ var root: TreeNode = null
 var all_nodes = []
 var tree_edges = []
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	build_initial_tree()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Root marker material
 	var root_marker = get_node_or_null("RootMarker")
 	if root_marker and (root_marker is CSGShape3D or root_marker is MeshInstance3D):
@@ -76,13 +76,13 @@ func setup_materials():
 		height_material.emission = Color(0.3, 0.2, 0.05, 1.0)
 		height_indicator.material_override = height_material
 
-func build_initial_tree():
+func build_initial_tree() -> void:
 	# Build a sample binary search tree
 	var values = [50, 30, 70, 20, 40, 60, 80]
 	for value in values:
 		insert_node(value)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	tree_operation_timer += delta
 	traversal_timer += delta
@@ -101,7 +101,7 @@ func _process(delta):
 	animate_tree()
 	animate_indicators()
 
-func switch_operation():
+func switch_operation() -> void:
 	# FIXED: Use int() cast for enum operations in Godot 4
 	current_operation = TreeOperation.values()[(int(current_operation) + 1) % TreeOperation.size()]
 	
@@ -129,7 +129,7 @@ func switch_operation():
 				search_target = all_nodes[randi() % all_nodes.size()].value
 				start_search(search_target)
 
-func insert_node(value: int):
+func insert_node(value: int) -> void:
 	if root == null:
 		root = TreeNode.new(value)
 		create_visual_node(root)
@@ -143,7 +143,7 @@ func insert_node(value: int):
 	calculate_positions()
 	update_edges()
 
-func insert_recursive(current: TreeNode, new_node: TreeNode):
+func insert_recursive(current: TreeNode, new_node: TreeNode) -> void:
 	if new_node.value < current.value:
 		if current.left_child == null:
 			current.left_child = new_node
@@ -157,7 +157,7 @@ func insert_recursive(current: TreeNode, new_node: TreeNode):
 		else:
 			insert_recursive(current.right_child, new_node)
 
-func delete_node(value: int):
+func delete_node(value: int) -> void:
 	var node_to_delete = find_node(root, value)
 	if node_to_delete:
 		delete_node_recursive(node_to_delete)
@@ -166,7 +166,7 @@ func delete_node(value: int):
 		calculate_positions()
 		update_edges()
 
-func delete_node_recursive(node: TreeNode):
+func delete_node_recursive(node: TreeNode) -> void:
 	# Simplified deletion - just remove leaf nodes or nodes with one child
 	if node.left_child == null and node.right_child == null:
 		# Leaf node
@@ -209,7 +209,7 @@ func find_node(current: TreeNode, value: int) -> TreeNode:
 	else:
 		return find_node(current.right_child, value)
 
-func create_visual_node(node: TreeNode):
+func create_visual_node(node: TreeNode) -> void:
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.3
 	
@@ -235,7 +235,7 @@ func create_visual_node(node: TreeNode):
 	
 	node.visual_object = sphere
 
-func calculate_positions():
+func calculate_positions() -> void:
 	if root == null:
 		return
 	
@@ -259,7 +259,7 @@ func calculate_positions():
 		if root_marker and root_marker is Node3D:
 			root_marker.position = Vector3(root.visual_object.position.x, root.visual_object.position.y + 1, 0)
 
-func calculate_node_levels(node: TreeNode, level: int):
+func calculate_node_levels(node: TreeNode, level: int) -> void:
 	node.level = level
 	
 	# Calculate position in level using inorder traversal
@@ -286,7 +286,7 @@ func get_level_center(level: int) -> float:
 	var level_nodes = get_nodes_at_level(level)
 	return (level_nodes.size() - 1) / 2.0
 
-func update_edges():
+func update_edges() -> void:
 	# Clear existing edges
 	for edge in tree_edges:
 		edge.queue_free()
@@ -299,7 +299,7 @@ func update_edges():
 		if node.right_child and node.visual_object and node.right_child.visual_object:
 			create_edge(node, node.right_child)
 
-func create_edge(parent: TreeNode, child: TreeNode):
+func create_edge(parent: TreeNode, child: TreeNode) -> void:
 	var edge = CSGCylinder3D.new()
 	var distance = parent.visual_object.position.distance_to(child.visual_object.position)
 	
@@ -336,7 +336,7 @@ func create_edge(parent: TreeNode, child: TreeNode):
 	
 	tree_edges.append(edge)
 
-func start_traversal(type: String):
+func start_traversal(type: String) -> void:
 	traversal_order.clear()
 	current_traversal_index = 0
 	
@@ -348,7 +348,7 @@ func start_traversal(type: String):
 		"postorder":
 			postorder_traversal(root)
 
-func inorder_traversal(node: TreeNode):
+func inorder_traversal(node: TreeNode) -> void:
 	if node == null:
 		return
 	
@@ -356,7 +356,7 @@ func inorder_traversal(node: TreeNode):
 	traversal_order.append(node)
 	inorder_traversal(node.right_child)
 
-func preorder_traversal(node: TreeNode):
+func preorder_traversal(node: TreeNode) -> void:
 	if node == null:
 		return
 	
@@ -364,7 +364,7 @@ func preorder_traversal(node: TreeNode):
 	preorder_traversal(node.left_child)
 	preorder_traversal(node.right_child)
 
-func postorder_traversal(node: TreeNode):
+func postorder_traversal(node: TreeNode) -> void:
 	if node == null:
 		return
 	
@@ -372,17 +372,17 @@ func postorder_traversal(node: TreeNode):
 	postorder_traversal(node.right_child)
 	traversal_order.append(node)
 
-func advance_traversal():
+func advance_traversal() -> void:
 	if current_traversal_index < traversal_order.size():
 		current_traversal_index += 1
 	else:
 		current_traversal_index = 0  # Reset for loop
 
-func start_search(target: int):
+func start_search(_target: int) -> void:
 	# Search will be animated in animate_tree()
 	pass
 
-func animate_tree():
+func animate_tree() -> void:
 	# Reset all node scales
 	for node in all_nodes:
 		if node.visual_object:
@@ -401,7 +401,7 @@ func animate_tree():
 		TreeOperation.DELETE:
 			animate_delete_highlighting()
 
-func animate_traversal_highlighting():
+func animate_traversal_highlighting() -> void:
 	# Highlight visited nodes
 	for i in range(min(current_traversal_index, traversal_order.size())):
 		var node = traversal_order[i]
@@ -417,7 +417,7 @@ func animate_traversal_highlighting():
 		if material:
 			material.emission = material.albedo_color * (0.3 + intensity * 0.7)
 
-func animate_search_highlighting():
+func animate_search_highlighting() -> void:
 	# Animate search path
 	var current_node = root
 	var search_path = []
@@ -443,21 +443,21 @@ func animate_search_highlighting():
 			var intensity = max(0.0, 1.0 - distance_from_wave)
 			node.visual_object.scale = Vector3.ONE * (1.0 + intensity * 0.8)
 
-func animate_insert_highlighting():
+func animate_insert_highlighting() -> void:
 	# Pulse all nodes
 	var pulse = 1.0 + sin(time * 4.0) * 0.2
 	for node in all_nodes:
 		if node.visual_object:
 			node.visual_object.scale = Vector3.ONE * pulse
 
-func animate_delete_highlighting():
+func animate_delete_highlighting() -> void:
 	# Different pulse for delete
 	var pulse = 1.0 + sin(time * 6.0) * 0.15
 	for node in all_nodes:
 		if node.visual_object:
 			node.visual_object.scale = Vector3.ONE * pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Traversal indicator
 	var traversal_indicator = get_node_or_null("TraversalIndicator")
 	if traversal_indicator and traversal_indicator is CSGBox3D:
@@ -490,3 +490,12 @@ func get_tree_height() -> int:
 		max_level = max(max_level, node.level)
 	
 	return max_level + 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

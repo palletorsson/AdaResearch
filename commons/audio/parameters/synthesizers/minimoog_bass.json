@@ -1,0 +1,22 @@
+{
+  "minimoog_bass": {
+    "_metadata": {
+      "sound_type": "minimoog_bass",
+      "description": "Fat ladder-filter bass with stacked oscillators and analog drive.",
+      "instrument": "Minimoog Model D style",
+      "era": "1970s-present",
+      "tags": ["bass", "moog", "analog", "funk"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 2.0, "min": 0.2, "max": 10.0, "step": 0.1 },
+      "frequency": { "value": 55.0, "min": 20.0, "max": 220.0, "step": 0.1 },
+      "osc_mix": { "value": 0.5, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "osc2_detune": { "value": 0.04, "min": -0.2, "max": 0.2, "step": 0.001 },
+      "filter_cutoff": { "value": 1100.0, "min": 80.0, "max": 6000.0, "step": 10.0 },
+      "filter_resonance": { "value": 0.48, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "filter_env_amount": { "value": 0.72, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "amplitude": { "value": 0.5, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

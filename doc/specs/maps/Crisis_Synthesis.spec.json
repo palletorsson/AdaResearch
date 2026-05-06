@@ -1,0 +1,73 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Crisis_Synthesis",
+  "home_sequence": "foundationscrisis",
+  "dimensions": {
+    "w": 17,
+    "d": 18
+  },
+  "signature": "qfep_formula_3d presents the complete formula; godel_statement_plaque",
+  "style": "escher",
+  "echoes": [],
+  "density": 0.03,
+  "breath_zones": [
+    {
+      "size": 228,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 17,
+        "d": 18
+      },
+      "centroid": [
+        8.0,
+        7.969298245614035
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "godel_statement_plaque"
+    },
+    {
+      "x": 12,
+      "z": 3,
+      "token": "russell_set_box"
+    },
+    {
+      "x": 6,
+      "z": 11,
+      "token": "lambda_slider"
+    },
+    {
+      "x": 10,
+      "z": 11,
+      "token": "phi_slider"
+    },
+    {
+      "x": 4,
+      "z": 13,
+      "token": "escher_staircase"
+    },
+    {
+      "x": 8,
+      "z": 13,
+      "token": "bifurcation_diagram"
+    },
+    {
+      "x": 12,
+      "z": 13,
+      "token": "florensky_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 236,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

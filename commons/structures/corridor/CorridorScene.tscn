@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8x7y203a4w1"]
+
+[ext_resource type="Script" uid="uid://bearpekbodrpl" path="res://commons/structures/corridor/CorridorGenerator.gd" id="1_gen"]
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_cube"]
+
+[node name="CorridorScene" type="Node3D"]
+script = ExtResource("1_gen")
+cube_scene = ExtResource("2_cube")

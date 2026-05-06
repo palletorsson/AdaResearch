@@ -1,74 +1,69 @@
 {
 	"map_info": {
-		"name": "Lab - Post Primitives",
-		"description": "Central Science Lab - After completing primitives sequence",
-		"version": "2.0",
-		"format": "json_lab",
+		"name": "Lab_Post_Vectors",
+		"description": "LEGACY/ORPHAN - Vectors sequence was absorbed into forces. This file contained Post Primitives data and has been corrected to identify itself. Layout is from early Lab v2.0 format. Not in active branch graph.",
+		"version": "2.1",
+		"format": "json_lab_progressive",
+		"progression_state": "post_vectors",
+		"_anomaly_note": "Originally contained Lab - Post Primitives data. Vectors content merged into forces sequence. This branch post-lab is unassigned in the progression manifest.",
 		"dimensions": {
-			"width": 8,
-			"depth": 8,
-			"max_height": 3
+			"width": 7,
+			"depth": 9,
+			"max_height": 6
 		},
 		"metadata": {
 			"difficulty": "hub",
-			"category": "laboratory",
-			"estimated_time": "exploration based",
-			"learning_objectives": [
-				"Central hub after primitives completion",
-				"Access to more advanced sequences",
-				"Progressive artifact discovery"
-			]
+			"category": "laboratory_progressive",
+			"status": "legacy_orphan",
+			"learning_objectives": [ "Vector operations demonstrated", "Force concepts previewed", "Legacy layout from early Lab design" ]
 		}
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "1", "2", "1"],
-			["1", "1", "2", "1", "1", "3", "3"],
-			["1", "1", "2", "1", "1", "3", "1"],
-			["1", "1", "0", "1", "1", "3", "4"],
-			["1", "1", "1", "1", "1", "3", "0"],
-			["1", "1", "1", "1", "1", "3", "0"],
-			["1", "1", "1", "1", "0", "2", "0"],
-			["0", "0", "0", "2", "2", "2", "0"],
-			["0", "0", "0", "0", "0", "0", "0"]
+			[ "1", "1", "1", "1", "1", "2", "1" ],
+			[ "1", "1", "2", "1", "1", "3", "3" ],
+			[ "1", "1", "2", "1", "1", "3", "1" ],
+			[ "1", "1", "0", "1", "1", "3", "4" ],
+			[ "1", "1", "1", "1", "1", "3", "0" ],
+			[ "1", "1", "1", "1", "1", "3", "0" ],
+			[ "1", "1", "1", "1", "0", "2", "0" ],
+			[ "0", "0", "0", "2", "2", "2", "0" ],
+			[ "0", "0", "0", "0", "0", "0", "0" ]
 		],
 		"static_objects": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", "wp:90", " ", "t:transformation"],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "l", " ", "t:color"],
-			[" ", " ", "t:primitives", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "t:array_tutorial", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		], 
+			[ " ", " ", " ", " ", "wp:90", " ", "t:transformation" ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", "l", " ", "t:color" ],
+			[ " ", " ", "t:primitives", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", "t:array_tutorial", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ]
+		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "shelf_with_stickers:0:1", " "],
-			[" ", " ", "smallcontainment:-90:0:4", " ", " ", " ", " "],
-			[" ", "", "cube_scene:0:2", " ", " ", " ", "rainbow:90:0.5:0.1"],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "rotating_cube:0:0:0.2", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", "becoming_catalyst", " ", "shelf_with_stickers:0:1", " " ],
+			[ " ", " ", "smallcontainment:180:0:4", " ", " ", " ", " " ],
+			[ " ", "cube_lines", "cube_scene:0:2", "light_sphere", " ", " ", "rainbow:90:0:0.05" ],
+			[ " ", "RackSineBasic:0:1", " ", " ", " ", " ", " " ],
+			[ " ", " ", "world_map_tablet:180:0.2:2", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", "rotating_cube:0:0:0.2", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ]
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/hazards.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -92,19 +87,39 @@
 	},
 	"spawn_points": {
 		"default": {
-			"position": [0.5, 1.8, 6.0],
-			"rotation": [0.0, 180.0, 0.0],
+			"position": [
+				0.5,
+				1.8,
+				6
+			],
+			"rotation": [
+				0,
+				180,
+				0
+			],
 			"description": "Main entrance - facing the central table"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.9, 0.9, 1.0],
+		"ambient_color": [
+			0.9,
+			0.9,
+			1
+		],
 		"ambient_energy": 0.3,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 1.0, 1.0],
-			"energy": 1.0
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				1,
+				1,
+				1
+			],
+			"energy": 1
 		},
 		"lab_atmosphere": {
 			"enable_particle_effects": false,
@@ -113,19 +128,24 @@
 		}
 	},
 	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
+		"enter_type": "corridor",
+		"cube_size": 1,
+		"gutter": 0,
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
 		"background": {
 			"type": "sky",
-			"color": [0.1, 0.15, 0.25]
+			"color": [
+				0.1,
+				0.15,
+				0.25
+			]
 		},
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": ["rotating_cube"],
+			"initial_artifacts": [ "rotating_cube" ],
 			"unlock_on_sequence_completion": true
 		}
 	}

@@ -1,0 +1,100 @@
+{
+  "id": "morph40_creature_pod_beetle",
+  "family": "scifi_creatures",
+  "notes": "Creature pass: the cryo pod becomes a shell-backed beetle with six short legs and one heavy dorsal cover.",
+  "camera_yaw": 0.8,
+  "camera_pitch": 0.28,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.28,
+      0.4,
+      0.88
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "pod_beetle_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "finger_array",
+      "params": {
+        "count": 6,
+        "length": 0.26,
+        "fill": 0.92
+      },
+      "child_role": "support",
+      "budget_factor": 0.18
+    },
+    {
+      "id": "pod_beetle_shell",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.88,
+        "scale": 0.92,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.48,
+          -0.08
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "pod_beetle_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.24,
+        "scale": 0.52,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.12,
+          0.12
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "pod_beetle_feelers",
+      "when": {
+        "role": "wall",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.0
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 2,
+        "length": 0.1,
+        "scale": 0.74
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

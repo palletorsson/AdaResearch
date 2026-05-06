@@ -1,0 +1,188 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Commons_2",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 20
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.137,
+  "breath_zones": [
+    {
+      "size": 159,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 20
+      },
+      "centroid": [
+        5.0251572327044025,
+        10.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "frames_display"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "garbage_collector_demo"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "grabable_agnes"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "grabable_mondrian"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "graphics_monitor"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "graphics_slideshow"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "graphics_slideshow_2d"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "graphics_slideshow_all"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "grid_eye"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "harmonic_motion_demo"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "helper_arm"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "hypercube_rotation"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "impulse_collision_demo"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "index_map_puzzle"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "info_display"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "jelly_variants"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "kitbash_station"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "latent_space_walk"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "line_interface"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "magnifying_glass"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "magnifying_glass_red"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "magnifying_glass_tool"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "matrix_multiply_visual"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "memory_display"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "mondrian_2d"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "mondrian_3d_display"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "monitorsystem"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "monte_carlo_estimator"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "orbital_mechanics_demo"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "oscilloscope_artifact"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 30,
+    "walkable_cells": 219,
+    "breath_zone_count": 1,
+    "unique_tokens": 30
+  }
+}

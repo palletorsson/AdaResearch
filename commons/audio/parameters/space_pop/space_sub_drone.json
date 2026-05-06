@@ -1,0 +1,12 @@
+{
+  "_metadata": {
+    "sound_type": "space_sub_drone",
+    "description": "Deep sub bass drone - foundation for space atmosphere with slow pitch drift.",
+    "tags": ["sub", "bass", "drone", "space", "foundation", "ambient"]
+  },
+  "parameters": {
+    "root_note": { "min": 24, "max": 48, "value": 36 },
+    "movement": { "min": 0.0, "max": 0.8, "value": 0.3 },
+    "duration": { "min": 5.0, "max": 60.0, "value": 20.0 }
+  }
+}

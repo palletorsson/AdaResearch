@@ -38,7 +38,7 @@ class DataPoint:
 	var cluster_id: int = -1
 	var mesh_instance: MeshInstance3D
 	
-	func _init(pos: Vector3):
+	func _init(pos: Vector3) -> void:
 		position = pos
 
 class Centroid:
@@ -46,24 +46,24 @@ class Centroid:
 	var cluster_id: int
 	var mesh_instance: MeshInstance3D
 	
-	func _init(pos: Vector3, id: int):
+	func _init(pos: Vector3, id: int) -> void:
 		position = pos
 		cluster_id = id
 
-func _ready():
+func _ready() -> void:
 	generate_data()
 	initialize_centroids()
 	create_visuals()
 	start_clustering()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not converged:
 		algorithm_timer += delta
 		if algorithm_timer >= iteration_speed:
 			perform_clustering_step()
 			algorithm_timer = 0.0
 
-func generate_data():
+func generate_data() -> void:
 	data_points.clear()
 	
 	# Generate clustered data
@@ -97,7 +97,7 @@ func generate_data():
 		var point = DataPoint.new(random_pos)
 		data_points.append(point)
 
-func initialize_centroids():
+func initialize_centroids() -> void:
 	centroids.clear()
 	assignments.clear()
 	
@@ -115,7 +115,7 @@ func initialize_centroids():
 	for i in range(data_points.size()):
 		assignments.append(-1)
 
-func create_visuals():
+func create_visuals() -> void:
 	# Create data point visuals
 	for point in data_points:
 		var mesh_instance = MeshInstance3D.new()
@@ -152,12 +152,12 @@ func create_visuals():
 		add_child(mesh_instance)
 		centroid_meshes.append(mesh_instance)
 
-func start_clustering():
+func start_clustering() -> void:
 	iteration = 0
 	converged = false
 	print("Starting K-means clustering with ", cluster_count, " clusters")
 
-func perform_clustering_step():
+func perform_clustering_step() -> void:
 	if converged:
 		return
 	
@@ -204,7 +204,7 @@ func perform_clustering_step():
 	# Update visuals
 	update_visuals()
 
-func update_visuals():
+func update_visuals() -> void:
 	# Update point colors
 	for i in range(data_points.size()):
 		var point = data_points[i]
@@ -221,3 +221,12 @@ func update_visuals():
 		if centroid.mesh_instance:
 			var tween = create_tween()
 			tween.tween_property(centroid.mesh_instance, "position", centroid.position, 1.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

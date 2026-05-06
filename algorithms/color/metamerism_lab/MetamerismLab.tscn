@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://df5j2n1k8m4y"]
+
+[ext_resource type="Script" path="res://algorithms/color/metamerism_lab/MetamerismLab.gd" id="1_p5n2z"]
+
+[node name="MetamerismLab" type="Node3D"]
+script = ExtResource("1_p5n2z")

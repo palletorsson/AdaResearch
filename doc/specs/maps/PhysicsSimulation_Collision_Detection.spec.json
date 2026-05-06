@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PhysicsSimulation_Collision_Detection",
+  "home_sequence": "physicssimulation",
+  "dimensions": {
+    "w": 9,
+    "d": 9
+  },
+  "signature": null,
+  "style": "escher",
+  "echoes": [],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 79,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 9
+      },
+      "centroid": [
+        4.012658227848101,
+        3.9873417721518987
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "collision_detection"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 80,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

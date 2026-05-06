@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "AdvancedLaboratory_Water_Dynamics",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 99,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        4.4646464646464645,
+        4.4646464646464645
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 99,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

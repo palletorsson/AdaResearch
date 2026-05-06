@@ -1,0 +1,95 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Primitives_Melencolia",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 7,
+    "d": 14
+  },
+  "signature": "durer_scene as the central art-historical reference; bigframe for staging the scene as tableau; diamondtoruscollection for the accumulated formal vocabulary; snap_pyramid_puzzle as final hands-on act; code_display for making the underlying system legible at the moment of its exhaustion.",
+  "style": null,
+  "echoes": [
+    "transformation"
+  ],
+  "density": 0.124,
+  "breath_zones": [
+    {
+      "size": 72,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 13
+      },
+      "centroid": [
+        2.9583333333333335,
+        6.388888888888889
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 1,
+      "token": "pyramid"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "snap_pyramid_puzzle"
+    },
+    {
+      "x": 5,
+      "z": 1,
+      "token": "pyramid"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "pyramidlong"
+    },
+    {
+      "x": 6,
+      "z": 3,
+      "token": "prism_block"
+    },
+    {
+      "x": 1,
+      "z": 5,
+      "token": "pyramid"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "pyramid"
+    },
+    {
+      "x": 0,
+      "z": 8,
+      "token": "bigframe"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "bigframe"
+    },
+    {
+      "x": 3,
+      "z": 10,
+      "token": "diamondtoruscollection"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 89,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

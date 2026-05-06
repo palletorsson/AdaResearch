@@ -1,0 +1,68 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Pillar",
+  "home_sequence": "color",
+  "dimensions": {
+    "w": 12,
+    "d": 22
+  },
+  "signature": "visual_color_mixing is the conceptual centerpiece; SpectrumVisualizer provides the analytical view; grab_rainbow_stick makes color a holdable",
+  "style": null,
+  "echoes": [],
+  "density": 0.023,
+  "breath_zones": [
+    {
+      "size": 256,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 22
+      },
+      "centroid": [
+        5.546875,
+        10.40625
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 3,
+      "token": "pillarcolorcollection"
+    },
+    {
+      "x": 6,
+      "z": 11,
+      "token": "color_sets_overview"
+    },
+    {
+      "x": 3,
+      "z": 13,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 18,
+      "token": "grab_rainbow_stick"
+    },
+    {
+      "x": 4,
+      "z": 18,
+      "token": "grab_rainbow_stick"
+    },
+    {
+      "x": 3,
+      "z": 20,
+      "token": "SpectrumVisualizer"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 263,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

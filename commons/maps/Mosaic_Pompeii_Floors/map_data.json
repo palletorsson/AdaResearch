@@ -1,0 +1,61 @@
+{
+  "map_info": {
+    "name": "Pompeii Geometric Floors",
+    "lookup_name": "Mosaic_Pompeii_Floors",
+    "description": "Roman opus tessellatum from Pompeii — wallpaper group identification in ancient geometric floor mosaics.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 6,
+      "depth": 6,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "mosaicanalysis",
+      "estimated_time": "exploration based",
+      "learning_objectives": [
+        "Identify wallpaper groups in Roman geometric floors",
+        "Decompose motif tiles from opus tessellatum",
+        "Map ancient color palettes to algorithmic color spaces"
+      ]
+    },
+    "title": "Pompeii Geometric Floors"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1"],
+      ["1","0","1","1","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","1","0","1","1"]
+    ],
+    "utilities": [
+      ["sp"," "," "," "," "," "],
+      [" ","t"," "," "," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," ","t"," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "],
+      [" ","pompeii_mosaic_floor"," ","tumbling_blocks_floor"," "," "],
+      ["free_meander_floor"," "," "," "," "," "],
+      [" ","octagon_square_floor"," ","diamonds_squares_floor"," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," "," "," "," "]
+    ]
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Hazards_Zoo",
+  "home_sequence": "hazards",
+  "dimensions": {
+    "w": 15,
+    "d": 10
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [
+    "color"
+  ],
+  "density": 0.08,
+  "breath_zones": [
+    {
+      "size": 135,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 10
+      },
+      "centroid": [
+        7.2,
+        4.57037037037037
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 0,
+      "token": "soft_stage_dashboard"
+    },
+    {
+      "x": 9,
+      "z": 0,
+      "token": "progression_driver"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "miura_crawler"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "kresling_spire"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "kaleidocycle_enemy"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "scissor_stalker"
+    },
+    {
+      "x": 9,
+      "z": 3,
+      "token": "origami_pyre_plane"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "armadillo_droideka"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "armadillo_eggling"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "origami_droideka"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "waterbomb_enemy"
+    },
+    {
+      "x": 9,
+      "z": 7,
+      "token": "sphere_droideka"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 12,
+    "walkable_cells": 150,
+    "breath_zone_count": 1,
+    "unique_tokens": 12
+  }
+}

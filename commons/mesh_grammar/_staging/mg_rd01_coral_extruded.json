@@ -1,0 +1,25 @@
+{
+  "id": "mg_rd01_coral_extruded",
+  "notes": "DNA BRIDGE: RD coral \u2192 mesh-grammar. Gray-Scott coral heightmap becomes the starting mesh; extrude-up extends ridges into vertical coral structures.",
+  "seed": {
+    "rd": {
+      "preset": "coral",
+      "grid_size": 48,
+      "iterations": 3000,
+      "seed": 17,
+      "world_size": 0.7,
+      "height_amp": 0.12
+    }
+  },
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.15,
+        "scale": 0.92
+      }
+    }
+  ]
+}

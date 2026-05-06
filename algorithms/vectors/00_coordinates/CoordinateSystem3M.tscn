@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b30167wq885vs"]
+
+[ext_resource type="Script" uid="uid://b2p0rtvsny56m" path="res://algorithms/vectors/00_coordinates/CoordinateSystem3M.gd" id="1"]
+
+[node name="CoordinateSystem3M" type="Node3D"]
+script = ExtResource("1")
+axis_thickness = 0.05

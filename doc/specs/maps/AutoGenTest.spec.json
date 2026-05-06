@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "AutoGenTest",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 14,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.043,
+  "breath_zones": [
+    {
+      "size": 111,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 12
+      },
+      "centroid": [
+        6.882882882882883,
+        4.918918918918919
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "AnimatedTree"
+    },
+    {
+      "x": 10,
+      "z": 3,
+      "token": "genetic_tree_sculptor"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "lsystem_editor"
+    },
+    {
+      "x": 9,
+      "z": 8,
+      "token": "flocking_controls"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 116,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

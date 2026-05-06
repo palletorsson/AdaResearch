@@ -10,13 +10,24 @@ dof_blur_far_transition = 8.0
 [node name="GeometryColorPlates" type="Node3D"]
 script = ExtResource("1")
 geometry_resolution = 2
-wireframe_overlay = true
+geometry_scale = 1.5
+plate_thickness = 0.2
+plate_separation = 0.05
+plate_scaling = 1.5
+use_dots = true
+fill_volume = true
+dot_count = 3000
+dot_size = 0.025
+color_mode = "RGB_Cube"
+color_intensity = 1.5
+wireframe_overlay = false
 
 [node name="CameraController" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 15)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.5, 5)
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 attributes = SubResource("CameraAttributesPractical_1")
+current = true
 fov = 65.0
 near = 0.1
 far = 100.0

@@ -1,3 +1,13 @@
+# @identity
+# essence: 50 particles orbiting a 3D fitness landscape, each pulled between their own best remembered position and the swarm's global best — trails trace the collective negotiation between individual memory and social pressure
+# desire: to show that optimization is a political act — the diversity_preservation parameter is a literal resistance to premature convergence; the swarm that stays diverse finds more of the landscape
+# critical_parameter: social_coefficient vs cognitive_coefficient balance (both 1.5 default) — high social pulls the swarm toward consensus, high cognitive keeps particles near their own history; together they define how collective the intelligence is
+# triggers: each particle updates velocity using inertia + cognitive pull (toward personal best) + social pull (toward global best) + queer_resistance (mutation and diversity preservation); global_best updates whenever any particle finds a better fitness
+# emerges: particles with high identity_fluidity resist the global best and continue exploring — they function as scouts; when a scout finds a new basin, the social coefficient pulls the rest of the swarm toward it
+# needs: apply_grid_config [missing]; VR interaction to adjust inertia/social/cognitive live [missing]; objective function switching [has via export_enum]
+# relationships: appears in SwarmIntelligence gallery alongside ant_colony artifacts; the queer_landscape objective function (option 4) explicitly models resistance to a single optimum; contrast with gradient_descent_landscape (deterministic, single path)
+# truth: a swarm that never converges finds more — diversity_preservation is not inefficiency but epistemological humility about whether you have found the right answer or just an answer
+
 extends Node3D
 class_name ParticleSwarmOptimization
 
@@ -46,7 +56,7 @@ var performance_display: Label
 var heteronormative_pressure: float = 0.0  # Pressure toward single "optimal" solution
 var queer_resistance: float = 0.0          # Collective resistance to normalization
 
-class Particle:
+class Particles:
 	var position: Vector3
 	var velocity: Vector3
 	var personal_best_position: Vector3
@@ -56,25 +66,25 @@ class Particle:
 	var identity_fluidity: float  # How much the particle resists fixed optimization
 	var collective_influence: float  # How much it's influenced by swarm memory
 	
-	func _init(start_pos: Vector3):
+	func _init(start_pos: Vector3) -> void:
 		position = start_pos
 		velocity = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1))
 		personal_best_position = position
 		identity_fluidity = randf_range(0.1, 0.9)
 		collective_influence = randf_range(0.2, 0.8)
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_swarm()
 	create_visual_landscape()
 	setup_ui()
 	
-func _process(delta):
+func _process(delta: float) -> void:
 	update_swarm(delta)
 	update_visuals(delta)
 	analyze_collective_behavior(delta)
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create ambient environment that reflects collective intelligence
 	var env = WorldEnvironment.new()
 	var environment = Environment.new()
@@ -92,7 +102,7 @@ func setup_environment():
 	light.rotation_degrees = Vector3(-45, 30, 0)
 	add_child(light)
 
-func initialize_swarm():
+func initialize_swarm() -> void:
 	particles.clear()
 	
 	# Create particles with diverse starting conditions
@@ -103,7 +113,7 @@ func initialize_swarm():
 			randf_range(-search_space_size/2, search_space_size/2)
 		)
 		
-		var particle = Particle.new(start_pos)
+		var particle = Particles.new(start_pos)
 		particles.append(particle)
 		
 		# Create visual representation
@@ -112,7 +122,7 @@ func initialize_swarm():
 	# Initialize global best
 	evaluate_all_particles()
 
-func create_particle_visual(particle: Particle, index: int):
+func create_particle_visual(particle, index: int) -> void:
 	particle.mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.1
@@ -135,7 +145,7 @@ func create_particle_visual(particle: Particle, index: int):
 	
 	particle_materials.append(material)
 
-func update_swarm(delta: float):
+func update_swarm(delta: float) -> void:
 	# Update heteronormative pressure based on convergence
 	update_social_pressures()
 	
@@ -160,7 +170,7 @@ func update_swarm(delta: float):
 	if diversity_preservation > 0:
 		apply_diversity_preservation()
 
-func update_particle_velocity(particle: Particle):
+func update_particle_velocity(particle) -> void:
 	# Standard PSO velocity update with queer modifications
 	var r1 = randf()
 	var r2 = randf()
@@ -184,7 +194,7 @@ func update_particle_velocity(particle: Particle):
 	if particle.velocity.length() > max_velocity:
 		particle.velocity = particle.velocity.normalized() * max_velocity
 
-func update_particle_position(particle: Particle, delta: float):
+func update_particle_position(particle, delta: float) -> void:
 	particle.position += particle.velocity * delta
 	
 	# Boundary handling - reflective boundaries that preserve exploration
@@ -201,7 +211,7 @@ func update_particle_position(particle: Particle, delta: float):
 	if particle.trail_positions.size() > particle_trail_length:
 		particle.trail_positions.pop_front()
 
-func apply_non_binary_exploration(particle: Particle):
+func apply_non_binary_exploration(particle) -> void:
 	# Particles can exist in superposition of states, exploring multiple solutions
 	if randf() < mutation_rate * particle.identity_fluidity:
 		var quantum_jump = Vector3(
@@ -211,14 +221,14 @@ func apply_non_binary_exploration(particle: Particle):
 		) * search_space_size * 0.1
 		particle.position += quantum_jump
 
-func apply_collective_memory(particle: Particle):
+func apply_collective_memory(particle) -> void:
 	# Influence from collective memory of good solutions
 	if collective_memory.size() > 0 and randf() < particle.collective_influence:
 		var memory_solution = collective_memory[randi() % collective_memory.size()]
 		var memory_influence = (memory_solution - particle.position) * collective_memory_strength
 		particle.velocity += memory_influence
 
-func update_collective_memory():
+func update_collective_memory() -> void:
 	# Store diverse good solutions, not just the best
 	for particle in particles:
 		if particle.personal_best_fitness < global_best_fitness * 1.1:  # Within 10% of best
@@ -233,7 +243,7 @@ func update_collective_memory():
 				if collective_memory.size() > 20:  # Limit memory size
 					collective_memory.pop_front()
 
-func evaluate_all_particles():
+func evaluate_all_particles() -> void:
 	for particle in particles:
 		var fitness = evaluate_fitness(particle.position)
 		
@@ -315,7 +325,7 @@ func rastrigin_function(pos: Vector3) -> float:
 	var n = 3
 	return A * n + (pos.x*pos.x - A*cos(2*PI*pos.x)) + (pos.y*pos.y - A*cos(2*PI*pos.y)) + (pos.z*pos.z - A*cos(2*PI*pos.z))
 
-func update_social_pressures():
+func update_social_pressures() -> void:
 	# Calculate heteronormative pressure (pressure to converge to single solution)
 	var total_distance = 0.0
 	var count = 0
@@ -330,7 +340,7 @@ func update_social_pressures():
 	# Queer resistance builds when pressure is too high
 	queer_resistance = max(0, heteronormative_pressure - (1.0 - diversity_preservation))
 
-func apply_diversity_preservation():
+func apply_diversity_preservation() -> void:
 	# If swarm is too converged, inject diversity
 	if heteronormative_pressure > 0.8:
 		var most_diverse_particles = particles.slice(0, particle_count / 4)
@@ -341,7 +351,7 @@ func apply_diversity_preservation():
 				particle.position += breakaway_direction * search_space_size * 0.2
 				particle.velocity = breakaway_direction * max_velocity * 0.5
 
-func update_visuals(delta: float):
+func update_visuals(_delta: float) -> void:
 	# Update particle colors based on performance and diversity
 	for i in range(particles.size()):
 		var particle = particles[i]
@@ -358,7 +368,7 @@ func update_visuals(delta: float):
 			
 			# Pulse effect for high-performing diverse particles
 			if fitness_normalized > 0.7 and diversity_factor > 0.5:
-				brightness += sin(Time.get_time_dict_from_system()["unix"] * 4) * 0.2
+				brightness += sin(Time.get_unix_time_from_system() * 4.0) * 0.2
 			
 			material.albedo_color = Color.from_hsv(hue, saturation, brightness)
 			material.emission = material.albedo_color * 0.4
@@ -367,7 +377,7 @@ func update_visuals(delta: float):
 			var fitness_factor = clamp(1.0 - (particle.personal_best_fitness / (global_best_fitness + 1)), 0.5, 2.0)
 			particle.mesh_instance.scale = Vector3.ONE * fitness_factor
 
-func create_visual_landscape():
+func create_visual_landscape() -> void:
 	# Create a visual representation of the fitness landscape
 	landscape_mesh = MeshInstance3D.new()
 	
@@ -386,7 +396,7 @@ func create_visual_landscape():
 	
 	add_child(landscape_mesh)
 
-func setup_ui():
+func setup_ui() -> void:
 	var canvas = CanvasLayer.new()
 	add_child(canvas)
 	
@@ -395,7 +405,7 @@ func setup_ui():
 	performance_display.add_theme_color_override("font_color", Color.WHITE)
 	canvas.add_child(performance_display)
 
-func analyze_collective_behavior(delta: float):
+func analyze_collective_behavior(_delta: float) -> void:
 	# Update diversity metrics
 	var current_diversity = calculate_swarm_diversity()
 	swarm_diversity_history.append(current_diversity)
@@ -426,4 +436,13 @@ func calculate_swarm_diversity() -> float:
 			total_distance += particles[i].position.distance_to(particles[j].position)
 			count += 1
 	
-	return total_distance / count if count > 0 else 0.0 
+	return total_distance / count if count > 0 else 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

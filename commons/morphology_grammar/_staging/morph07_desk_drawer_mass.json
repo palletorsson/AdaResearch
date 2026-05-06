@@ -1,0 +1,60 @@
+{
+  "id": "morph07_desk_drawer_mass",
+  "family": "desk",
+  "notes": "A work-plane body allocates support legs from below and drawer recesses from the front, keeping the desk as one volume with differentiated depth.",
+  "camera_yaw": 0.74,
+  "camera_pitch": 0.34,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.86,
+      0.86,
+      0.96
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 4,
+  "rules": [
+    {
+      "id": "desk_to_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.84,
+        "scale": 0.24
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.52
+    },
+    {
+      "id": "desk_front_drawers",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 2,
+        "rows": 3,
+        "length": 0.08,
+        "scale": 0.72,
+        "door_col": 0,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

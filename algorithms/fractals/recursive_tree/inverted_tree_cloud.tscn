@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn0ers35khskq"]
+
+[ext_resource type="Script" uid="uid://c3ql5oytmpx8b" path="res://algorithms/fractals/recursive_tree/inverted_tree_cloud.gd" id="1_script"]
+
+[node name="InvertedTreeCloud" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 8, 8, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 12, 0)
+shadow_enabled = true

@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "RecursiveEmergence_Rule_30_110",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 6,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.016,
+  "breath_zones": [
+    {
+      "size": 60,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 6,
+        "d": 11
+      },
+      "centroid": [
+        2.533333333333333,
+        4.983333333333333
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 4,
+      "token": "rule_30_110_gravity"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 61,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

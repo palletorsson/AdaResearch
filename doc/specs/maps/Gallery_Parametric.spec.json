@@ -1,0 +1,113 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Parametric",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.115,
+  "breath_zones": [
+    {
+      "size": 101,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        5.01980198019802,
+        5.811881188118812
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "breather_surface"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "catenoid"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "dini_surface"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "double_enneper"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "enneper_order3"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "figure_eight_knot"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "helicoid"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "klein_bottle"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "math_objects_gallery"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "mobius_strip_parametric"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "renaissancepaintingfloorrattern"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "seashell"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "torus_knot"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "trefoil_knot"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "wave_torus"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 15,
+    "walkable_cells": 131,
+    "breath_zone_count": 1,
+    "unique_tokens": 15
+  }
+}

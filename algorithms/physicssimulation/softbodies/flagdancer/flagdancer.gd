@@ -1,6 +1,16 @@
-@tool 
+@tool
 # PrideFlagVariations.gd - Utökad version med flera flaggor
 extends Node3D
+
+# @identity
+# essence: Skeleton3D with per-bone sine wave displacement — each flag_bone gets xform.origin.z = base_wave + wind_noise, creating cloth-like ripple across a SurfaceTool-built pride flag mesh
+# desire: to wave a pride flag in VR that responds to wind_strength and celebration_intensity — a flag you can make dance harder by pressing SPACE
+# critical_parameter: wind_strength — controls the amplitude of the sine wave displacement; below 0.5 the flag barely stirs, above 1.5 it whips violently
+# triggers: celebration_mode toggle (ui_accept) multiplies wave amplitude by 1.5 and adds bone rotation and scale stretching; flag_type enum switches the color stripe palette
+# emerges: bone phase offsets create a travelling wave across the flag surface that looks like real wind even though it is just sin() with different offsets per bone
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: extends cloth_straps from static draping to animated wind; bridges soft body physics to affect theory in SoftBodies_Affect_Theory_Visualization
+# truth: a flag is not a symbol displayed — it is a material surface negotiating wind, and the pride it carries lives in the physics of its motion
 
 enum FlagType {
 	RAINBOW,
@@ -248,3 +258,12 @@ func create_flag_parade() -> void:
 		flag_scene.position.x = i * 8.0 - 12.0
 		flag_scene.wind_strength = randf_range(0.8, 1.2)
 		add_child(flag_scene)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

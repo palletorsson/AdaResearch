@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Chamber_Forces",
+  "home_sequence": "forces",
+  "dimensions": {
+    "w": 11,
+    "d": 7
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.053,
+  "breath_zones": [
+    {
+      "size": 69,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 7
+      },
+      "centroid": [
+        4.927536231884058,
+        3.101449275362319
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 2,
+      "token": "catalyst_target"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "catalyst_target"
+    },
+    {
+      "x": 7,
+      "z": 2,
+      "token": "catalyst_target"
+    },
+    {
+      "x": 9,
+      "z": 2,
+      "token": "catalyst_target"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 76,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7g4dxk5n8yw6"]
+[gd_scene load_steps=5 format=3 uid="uid://r2u1ujlxcao3b"]
 
 [ext_resource type="Script" uid="uid://cchduyqgkigog" path="res://algorithms/wavefunctions/berninicolumns/BerniniColumns.gd" id="1_3xjmv"]
 
@@ -35,14 +35,6 @@ current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qul75")
-
-[node name="Explanation" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
-billboard = 1
-text = "Bernini's Twisted Columns
-Created using Sine and Cosine Displacement"
-font_size = 64
-width = 800.0
 
 [node name="tubetrailmesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("TubeTrailMesh_34kgh")

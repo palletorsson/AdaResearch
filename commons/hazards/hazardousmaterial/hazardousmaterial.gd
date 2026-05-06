@@ -1,4 +1,4 @@
-# HazardousMaterial.gd
+﻿# HazardousMaterial.gd
 # Toxic/radioactive materials that continuously damage the player's health
 extends Area3D
 class_name HazardousMaterial
@@ -300,7 +300,7 @@ func _process(delta):
 		_apply_damage_to_players()
 		damage_timer = 0.0
 
-func _animate_particles(delta):
+func _animate_particles(_delta):
 	if not particles:
 		return
 	

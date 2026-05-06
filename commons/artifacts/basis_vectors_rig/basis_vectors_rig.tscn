@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1npw7v4qryhs"]
+
+[ext_resource type="Script" path="res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.gd" id="1_main"]
+
+[node name="BasisVectorsRig" type="Node3D"]
+script = ExtResource("1_main")

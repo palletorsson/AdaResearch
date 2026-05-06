@@ -1,0 +1,21 @@
+{
+  "id": "mg_form22_obelisk_prism",
+  "notes": "FORM STUDY: prism seed with repeated top-face extrusion and scale reduction. A baseline obelisk/tower recipe using only the most basic grammar moves.",
+  "seed": "prism",
+  "seed_scale": 0.46,
+  "generations": 4,
+  "camera_pitch": 0.24,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.22,
+        "scale": 0.86,
+        "top_tag": "shaft_top",
+        "side_tag": "shaft_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

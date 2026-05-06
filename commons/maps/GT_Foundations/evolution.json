@@ -1,0 +1,101 @@
+{
+  "artifact": "graphspace",
+  "title": "Building a Walkable Graph from Nodes, Edges, and Physics",
+  "concept_layer": "graph as relational structure (nodes + edges); force-directed layout as a physics that reveals natural shape; the curriculum itself as a graph; closure of the 19-sequence spine",
+  "technique_first": [
+    "force-directed layout (F_rep = k/d², F_spring = stretch × stiffness)",
+    "iterated relaxation (layout_iters) until equilibrium",
+    "planar snap (plane_y, plane_snap) to keep layout walkable",
+    "per-node structure assignment by StructureType (RANDOM, BY_DEGREE, BY_DISTANCE)",
+    "Dijkstra distance from focal_node driving ambient lighting",
+    "portal-as-edge: every connection becomes a walkable bridge",
+    "deterministic seeding for reproducible topologies"
+  ],
+  "technique_reference": [
+    "repulsion / spring physics (forces_foundation, boid_manager cohesion)",
+    "iteration until equilibrium (SoftBody3D, gradient_descent_visualization)",
+    "seed-based determinism (entropy_axiom, perlin_noise_bridge)",
+    "distance-driven lighting (flashlight_color wavelength filtering)",
+    "per-node parameter tuning (qfep_formula_3d)",
+    "@identity truth as closure (all prior artifacts)"
+  ],
+  "domain_deferred": [
+    "shortest path → GT_Pathfinding (Dijkstra, A*)",
+    "specific historical topology → KonigsbergBridge (Euler)",
+    "network analysis (centrality, clustering) → deferred",
+    "graph coloring, matching, flow → deferred",
+    "the curriculum-as-graph visualization → /curriculum-graph in encyclopedia"
+  ],
+  "capture_leaks": {
+    "spatial_embedding_is_a_choice": "Force-directed layout gives the graph A shape — not THE shape. A graph is abstract: only nodes and edges. The 3D embedding is one of infinitely many valid layouts. The walkable arrangement risks teaching that graphs have geometry inherently. They don't; the physics invents it.",
+    "small_node_count": "node_count = 12 is walkable. Real graphs have thousands, millions of nodes. The pedagogy relies on small scale; the concept generalizes uncountably further.",
+    "planar_snap_lies": "Forcing rooms onto a plane (plane_snap) lets the player walk through the graph. But many graphs are non-planar (K₅, K_{3,3}). The snap erases that distinction.",
+    "edges_as_bridges": "Rendering an edge as a physical bridge suggests edges are symmetric and walkable. Real graphs have directed edges, weighted edges, hyperedges, multi-edges — none of which are legible as a bridge.",
+    "physics_is_not_graph": "The force-directed iteration is a TOOL for showing structure. It is not what a graph IS. A graph is a set V and a relation E ⊆ V×V. Everything else is interpretation."
+  },
+  "limit": "A walkable graph of 12 rooms connected by bridges, laid out by repulsion and springs until equilibrium. What it captures: the felt sense that connections have a shape, that structure emerges from local forces, that you can walk a relationship. What it refuses: directed edges, weighted semantics, graph algorithms themselves (→ GT_Pathfinding), specific historical topologies (→ KonigsbergBridge), the curriculum-as-graph meta-reading (→ /curriculum-graph in the encyclopedia). This is the foundation — a graph is not a diagram, it is a set of relationships, and physics reveals its shape.",
+  "grammar_alignment": {
+    "sequence": "graphtheory",
+    "operations_taught": ["connect"],
+    "operations_deferred_to_sequence": ["traverse (GT_Pathfinding)", "layout (force-directed variations)", "color (graph coloring)", "match (matching problems)"],
+    "note": "GT_Foundations teaches connect — the primitive operation that takes two atoms and produces a graph by adding an edge. Every prior sequence contributed atoms (points, curves, fractals, creatures, systems tuned by QFEP). This sequence gives those atoms a RELATION. The curriculum itself is a graph: each sequence a node, each technique_reference field in every evolution an edge. Graphtheory is where the spine sees itself."
+  },
+  "biome_alignment": {
+    "sequence": "graphtheory",
+    "density_at_entry": 1.0,
+    "kingdoms_unlocked": ["flower", "tree", "fungus", "creature"],
+    "hand_verbs_gained": ["connect", "traverse_edge"],
+    "catalyst_mode": "tunable_becoming",
+    "note": "The biome carries over from QFEP at full density, with the 'connection_topology' and 'network_world' flags enabled. Creatures and flora no longer exist as isolated instances — they exist as a NETWORK. Every organism has edges to its pollinators, its predators, its symbionts. The catalyst still tunes; now it also CONNECTS. Place a node, draw an edge, watch the graph relax into a new equilibrium. This is the closing biome: a world that is explicitly relational."
+  },
+  "stages": [
+    {
+      "title": "From lens to network",
+      "thinking": "QFEP gave every prior system a tunable lens: (F, λ, E, φ, Δ). Each sequence could be re-read through that lens. But the lenses do not exist in isolation — they REFERENCE each other. Every evolution has a technique_reference field pointing back to prior artifacts. The curriculum is already a graph; we just have not drawn it yet. This sequence draws it. Nodes = artifacts/sequences. Edges = technique references and concept dependencies. Layout = force-directed physics (which the player has already built — forces, springs, equilibrium). The closing sequence is the curriculum seeing itself.",
+      "code": "# QFEP: a lens for reading any one system.\n# Graph: how the lenses connect.\n#\n# Every evolution.json has:\n#   - technique_first (this artifact's atoms)\n#   - technique_reference (edges to prior artifacts)\n#   - domain_deferred (edges forward to unbuilt artifacts)\n#\n# The curriculum is a DAG across 19 sequences,\n# 600+ maps, 800+ artifacts, thousands of edges.\n#\n# GT_Foundations asks: what is a graph, physically?\n# Answer: nodes pushed apart by repulsion,\n#         pulled together by springs on edges,\n#         relaxed until they find their shape.",
+      "concepts": ["from tunable lens to relational network", "curriculum-as-graph", "evolution.json as edge declaration", "closing the spine"]
+    },
+    {
+      "title": "V and E — the minimal abstraction",
+      "thinking": "A graph is two sets: V (vertices/nodes) and E ⊆ V×V (edges). Nothing else. No geometry, no colors, no weights (unless you add them). Start there. node_count = 12, avg_degree = 2.2. Sample edges randomly with a fixed seed. This IS the graph. The rest — rooms, bridges, lighting, structure placement — is interpretation.",
+      "code": "@export var node_count: int = 12\n@export var avg_degree: float = 2.2\n@export var seed: int = 20250922\n\nfunc _build_graph() -> void:\n\tvar rng := RandomNumberGenerator.new()\n\trng.seed = seed\n\t\n\tvar V: Array = range(node_count)                    # vertices\n\tvar E: Array = []                                     # edges\n\t\n\tvar target_edges: int = int(node_count * avg_degree * 0.5)\n\twhile E.size() < target_edges:\n\t\tvar a: int = rng.randi_range(0, node_count - 1)\n\t\tvar b: int = rng.randi_range(0, node_count - 1)\n\t\tif a != b and not _has_edge(E, a, b):\n\t\t\tE.append([a, b])\n\t\n\t# That's the graph. Two arrays.",
+      "concepts": ["V = vertices", "E ⊆ V×V", "deterministic seed", "edge sampling", "graph is abstract"]
+    },
+    {
+      "title": "Force-directed layout — let physics find the shape",
+      "thinking": "Nodes start at random positions. Apply repulsion between every pair (F_rep = k/d²) — push them apart. Apply spring force along every edge (F_spring = stretch × stiffness) — pull connected pairs together. Integrate velocity, damp, repeat. After layout_iters = 250, the nodes settle into an equilibrium. The shape was NOT specified — it emerged from local forces. This is the same physics the player walked through in ForcesFoundations, tuned for a new purpose.",
+      "code": "@export var repulsion: float = 180.0\n@export var edge_stiffness: float = 0.08\n@export var damping: float = 0.82\n@export var layout_iters: int = 250\n\nfunc _relax(positions: Array, velocities: Array) -> void:\n\tfor iter in layout_iters:\n\t\tfor i in node_count:\n\t\t\tvar force := Vector3.ZERO\n\t\t\t# Repulsion from every other node\n\t\t\tfor j in node_count:\n\t\t\t\tif i == j: continue\n\t\t\t\tvar delta: Vector3 = positions[i] - positions[j]\n\t\t\t\tvar d: float = max(delta.length(), 0.1)\n\t\t\t\tforce += delta.normalized() * (repulsion / (d * d))\n\t\t\t# Spring attraction along edges\n\t\t\tfor edge in E:\n\t\t\t\tif edge[0] == i or edge[1] == i:\n\t\t\t\t\tvar other: int = edge[1] if edge[0] == i else edge[0]\n\t\t\t\t\tvar stretch: Vector3 = positions[other] - positions[i]\n\t\t\t\t\tforce += stretch * edge_stiffness\n\t\t\tvelocities[i] = (velocities[i] + force) * damping\n\t\t\tpositions[i] += velocities[i] * 0.016",
+      "concepts": ["repulsion / spring physics", "equilibrium emerges from local forces", "layout is computed, not specified", "same physics as ForcesFoundations"]
+    },
+    {
+      "title": "Rooms at nodes, bridges at edges — make it walkable",
+      "thinking": "The abstract graph is embedded in 3D. Now make it walkable. Instantiate room_scene at every node position. Instantiate portal_scene (a bridge) along every edge. planar_snap pulls all rooms toward plane_y = 0 so the player can traverse on foot without flying. The graph is now a LEVEL. Walking from room to room IS traversing an edge. The data structure becomes the space.",
+      "code": "@export var room_scene: PackedScene\n@export var portal_scene: PackedScene\n@export var planar_layout: bool = true\n@export var plane_y: float = 0.0\n@export var plane_snap: float = 0.25\n\nfunc _embed(positions: Array) -> void:\n\tfor i in node_count:\n\t\tvar pos: Vector3 = positions[i]\n\t\tif planar_layout:\n\t\t\tpos.y = lerp(pos.y, plane_y, plane_snap)\n\t\tvar room = room_scene.instantiate()\n\t\troom.position = pos\n\t\tadd_child(room)\n\t\n\tfor edge in E:\n\t\tvar a: Vector3 = positions[edge[0]]\n\t\tvar b: Vector3 = positions[edge[1]]\n\t\tvar bridge = portal_scene.instantiate()\n\t\tbridge.position = (a + b) * 0.5\n\t\tbridge.look_at(b, Vector3.UP)\n\t\tadd_child(bridge)",
+      "concepts": ["graph-as-level", "room = node", "bridge = edge", "planar snap for walkability", "data structure becomes space"]
+    },
+    {
+      "title": "Structure assignment — every node is typed by its graph role",
+      "thinking": "A graph is not uniform. Some nodes have many edges (hubs). Some are peripheral (leaves). StructureType.BY_DEGREE chooses which building appears at a node based on how many edges touch it. A 5-edge hub gets a large structure; a 1-edge leaf gets a small one. The architectural variety is derived from the graph's topology. This is the closing move of the curriculum: topology produces form. Every prior sequence built forms; this one builds a form-generator FROM RELATIONSHIPS.",
+      "code": "enum StructureType { RANDOM, BY_DEGREE, BY_DISTANCE, SINGLE_TYPE, CUSTOM_PATTERN }\n\n@export var structure_scenes: Array[PackedScene] = []\n@export var structure_type: StructureType = StructureType.BY_DEGREE\n\nfunc _assign_structure(node_index: int) -> PackedScene:\n\tmatch structure_type:\n\t\tStructureType.BY_DEGREE:\n\t\t\tvar deg: int = _degree_of(node_index)\n\t\t\tvar idx: int = clampi(deg, 0, structure_scenes.size() - 1)\n\t\t\treturn structure_scenes[idx]\n\t\tStructureType.BY_DISTANCE:\n\t\t\tvar d: int = _dijkstra_from_focal(node_index)\n\t\t\treturn structure_scenes[clampi(d, 0, structure_scenes.size() - 1)]\n\t\t_:\n\t\t\treturn structure_scenes[0]",
+      "concepts": ["topology-produces-form", "degree as typing signal", "Dijkstra distance as architectural cue", "role-based structure selection"]
+    },
+    {
+      "title": "Dijkstra-driven atmosphere — distance becomes light",
+      "thinking": "Pick a focal_node. Compute shortest-path distance to every other node via Dijkstra. Map that distance to ambient lighting — rooms close to the focal stay bright, rooms far away grow dim and cool. The player can FEEL how far they've walked in graph-distance, not Euclidean distance. Two rooms may be adjacent in 3D (physics placed them near each other) but many edges apart in the graph. The light tells the truth of the RELATION, not the embedding. This is where the artifact teaches what a graph actually is.",
+      "code": "@export var focal_node: int = 0\n\nfunc _update_ambient() -> void:\n\tvar distances: Array = _dijkstra(focal_node)\n\tvar max_d: int = distances.max()\n\tfor i in node_count:\n\t\tvar room = get_child(i)\n\t\tvar t: float = float(distances[i]) / max(float(max_d), 1.0)\n\t\tvar light: Color = Color(1.0, 0.9, 0.7).lerp(Color(0.2, 0.3, 0.5), t)\n\t\troom.set_ambient(light)\n\n# Ambient dims with graph distance, not Euclidean distance.\n# This is the felt sense of what an edge IS.",
+      "concepts": ["graph distance ≠ Euclidean distance", "Dijkstra shortest path", "light as distance channel", "relation over embedding", "the truth of the graph"]
+    },
+    {
+      "title": "The curriculum is a graph",
+      "thinking": "Zoom out. Every artifact built across 19 sequences has three outgoing edges in its evolution.json: technique_reference (edges to prior artifacts), domain_deferred (edges to future/unbuilt artifacts), grammar_alignment.operations_deferred_to_sequence (edges across sequences). Every concept, every formula, every interactable is a node. The curriculum itself is a force-directed graph: primitives at one end, QFEP at the climax, graphtheory closing the loop. The sequence the player is walking RIGHT NOW is a subgraph of the full curriculum. GraphSpace is not just teaching graph theory — it is teaching the SHAPE OF THE CURRICULUM THAT TAUGHT IT.",
+      "code": "# The evolution JSONs are the edges:\n#\n#   evolution.json {\n#     technique_first:       [...atoms of this artifact...]\n#     technique_reference:   [...edges to prior artifacts...]\n#     domain_deferred:       [...edges to artifacts not yet built...]\n#     grammar_alignment:     [...edges across sequence boundaries...]\n#   }\n#\n# Run a force-directed layout on the 800+ artifacts,\n# weight edges by technique_reference count,\n# snap to plane, render as rooms-and-bridges.\n#\n# That is the curriculum as a walkable graph.\n# It exists at /curriculum-graph in the encyclopedia.\n# GT_Foundations is the MINIATURE of that experience\n# — you walk 12 rooms to feel what it is to walk 800.",
+      "concepts": ["curriculum-as-graph", "evolution.json as edge format", "graph of graphs", "fractal self-reference", "miniature of the whole"]
+    },
+    {
+      "title": "Closure — a graph is not a diagram",
+      "thinking": "Final stage. @identity: a graph is not a diagram — it is a set of relationships, and force-directed layout reveals that structure has a natural shape if you let physics find it. This is the closing truth of the spine. Primitives gave us atoms. Transformations moved them. Waves and noise gave them texture. Randomness gave them variance. CA and fractals gave them emergence. L-systems and genetics gave them grammar. Soft bodies and swarms gave them collective behavior. ML gave them learning. Foundations showed the limits. QFEP gave the tunable lens. Now graphtheory gives the relations. Every atom is now a node. Every technique transfer is an edge. The player has walked 19 sequences — and at the end, the curriculum reveals it was ALWAYS a graph. The closing move is recognition.",
+      "code": "# @identity\n# essence: force-directed graph layout —\n#          repulsion F_rep = k/d², spring F_spring = stretch * stiffness,\n#          iterated layout_iters times to position node_count rooms\n#          connected by weighted edges.\n# truth:   a graph is not a diagram — it is a set of relationships,\n#          and force-directed layout reveals that structure has\n#          a natural shape if you let physics find it.\n#\n# From QFEP_Introduction truth:\n#   'QFE = F - λE(S) + φΔE(S,t) is not an equation\n#    to solve but a lens through which to see every system.'\n#\n# From GT_Foundations truth:\n#   'A graph is not a diagram — it is a set of relationships.'\n#\n# The curriculum closes:\n#   Every sequence was a LENS (QFEP).\n#   Every lens is CONNECTED to every other lens (Graphtheory).\n#   The whole is a network of tunable readings,\n#   walkable in VR, relaxed into shape by physics,\n#   opened one term at a time.\n#\n# End of spine. The player exits into the biome\n# they just learned how to read.",
+      "concepts": ["truth: a graph is a set of relationships", "closure of the 19-sequence spine", "recognition as final move", "exit into the biome", "the curriculum reveals itself"]
+    }
+  ]
+}

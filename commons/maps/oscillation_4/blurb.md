@@ -1,0 +1,1 @@
+Driven oscillation: push at the right frequency and amplitude grows. Resonance — the system's natural frequency matched by the driver. Bridges sway, glasses shatter, children swing higher. Small inputs, large outputs when timing aligns. Resonance is selective amplification.

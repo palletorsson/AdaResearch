@@ -1,0 +1,169 @@
+{
+  "sequences": {
+	"foundationscrisis": {
+	  "name": "Foundations Crisis: The Limits of Formalization",
+	  "truth": "Every formal system has an outside. Complete order is impossible.",
+	  "qfep_term": "Edge",
+	  "qfep_connection": "GÃ¶del proves pure F-minimization hits a wall. The edge isn't failureâ€”it's constitutive. Systems must oscillate because they cannot close.",
+	  "formula": "âˆƒ statement S: S is true AND S is unprovable",
+	  "description": "The 19th-20th century crisis that shattered mathematical certainty. Non-Euclidean geometry, Russell's paradox, GÃ¶del's incompleteness, Brouwer's intuitionism. Each map stages a limitâ€”where formal systems encounter their outside.",
+	  "layer": "integration",
+	  "prerequisites": [
+		"primitives",
+        "randomness"
+	  ],
+	  "unlocks": [
+		"qfeplaboratory",
+        "speculativecomputation"
+	  ],
+	  "difficulty": "advanced",
+	  "estimated_time": "30-40 minutes",
+	  "learning_objectives": [
+		"Non-Euclidean geometry: the parallel postulate is independent",
+		"Russell's paradox: self-reference creates contradiction",
+		"GÃ¶del's incompleteness: true statements that cannot be proven",
+		"Brouwer's intuitionism: only assert what you can construct",
+        "The edge as constitutive, not defective"
+	  ],
+	  "content": [
+		"Euclid_Parallel: The Fifth Postulate — assumed for millennia, independent all along",
+		"NonEuclidean_Spaces: Curvature as Choice — alternatives exist",
+		"Russell_Paradox: The Self-Containing Set — The set of all sets that don't contain themselves",
+		"Godel_Incompleteness: True But Unprovable — self-reference creates the edge",
+		"Escher_Impossible: Locally Valid, Globally Impossible — visual GÃ¶del",
+		"Brouwer_Intuitionism: Only What You Can Construct — Only assert what you can construct",
+		"Florensky_Paraconsistent: Holding Contradiction Without Collapse — holding contradiction without triviality",
+        "Crisis_Synthesis: The Edge Is the Engine — The edge is where the interesting work happens"
+	  ],
+	  "maps": [
+		"Euclid_Parallel",
+		"NonEuclidean_Spaces",
+		"Russell_Paradox",
+		"Godel_Incompleteness",
+		"Escher_Impossible",
+		"Brouwer_Intuitionism",
+		"Florensky_Paraconsistent",
+		"Crisis_Synthesis",
+        "Chamber_Foundations"
+	  ],
+	  "audio": {
+		"ambient_preset": "minimal_drone",
+		"volume": -10.0
+	  },
+	  "axiom_files": [
+		"res://commons/context/clipboard/tutorial_text/godel_axioms.md",
+		"res://commons/context/clipboard/tutorial_text/russell_paradox_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/brouwer_axioms.md"
+	  ],
+	  "references": {
+		"gamwell_chapters": [
+		  "Ch 3: Cantor/Infinity",
+		  "Ch 4: Hilbert/Formalism",
+		  "Ch 6: Brouwer/Intuitionism",
+          "Ch 9: GÃ¶del"
+		],
+		"key_figures": [
+		  "Euclid",
+		  "Lobachevsky",
+		  "Riemann",
+		  "Russell",
+		  "GÃ¶del",
+		  "Brouwer",
+		  "Florensky",
+          "Escher"
+		]
+	  },
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_foundationscrisis",
+	  "completion_rewards": [
+		"incompleteness_badge",
+		"edge_explorer_badge",
+        "godel_badge"
+	  ],
+	  "artifact_groups": [
+		{
+		  "map": "Euclid_Parallel",
+		  "position": "intro",
+		  "artifacts": [
+			"parallel_lines",
+			"angle_sum_triangle",
+            "euclid_postulates_plaque"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Three compact geometry artifacts introduce Euclidean certainty with minimal density"
+		},
+		{
+		  "map": "NonEuclidean_Spaces",
+		  "position": "intro",
+		  "artifacts": [
+			"hyperbolic_surface",
+			"elliptic_surface",
+			"curvature_slider",
+			"poincare_disk",
+            "riemann_sphere"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Five artifacts across split dual landscape; surfaces are room_scale, slider and models compact"
+		},
+		{
+		  "map": "Russell_Paradox",
+		  "position": "foundation",
+		  "artifacts": [
+            "russell_set_box"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Single focused artifact at center of nested concentric structure embodies self-reference"
+		},
+		{
+		  "map": "Godel_Incompleteness",
+		  "position": "exploration",
+		  "artifacts": [
+            "godel_statement_plaque"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Single plaque artifact; the spatial layout of unreachable islands carries the concept"
+		},
+		{
+		  "map": "Brouwer_Intuitionism",
+		  "position": "exploration",
+		  "artifacts": [
+			"excluded_middle_demo",
+			"constructive_proof",
+            "brouwer_choice_sequence"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Three compact artifacts on stepping-stone platforms; fragmented layout enacts constructivism"
+		},
+		{
+		  "map": "Florensky_Paraconsistent",
+		  "position": "integration",
+		  "artifacts": [
+			"florensky_sphere",
+			"schrodinger_box",
+            "superposition_display"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Three artifacts across overlapping diamonds; sphere is room_scale centerpiece, others compact"
+		},
+		{
+		  "map": "Crisis_Synthesis",
+		  "position": "synthesis",
+		  "artifacts": [
+			"godel_statement_plaque",
+			"russell_set_box",
+			"qfep_formula_3d",
+			"lambda_slider",
+			"phi_slider",
+			"escher_staircase",
+			"bifurcation_diagram",
+            "florensky_sphere"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Dense synthesis map with callbacks to Godel, Russell, Escher, Florensky plus QFEP formula and sliders; largest map in sequence at 17x18"
+		}
+	  ]
+	}
+  },
+  "world_phase": "beyond",
+  "artifact_groups": []
+}

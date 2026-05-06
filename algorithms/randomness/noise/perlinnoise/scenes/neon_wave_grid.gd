@@ -29,8 +29,9 @@ var waves = []
 var noise : FastNoiseLite
 var materials = []
 var time_offset = 0.0
+var _pulse_tweens : Array = []
 
-func _ready():
+func _ready() -> void:
 	# Create noise generator for random wave variations
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
@@ -48,7 +49,7 @@ func _ready():
 	# Generate the wave grid
 	generate_wave_grid()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create environment if not already present
 	if get_tree().root.get_node_or_null("WorldEnvironment") == null:
 		var world_env = WorldEnvironment.new()
@@ -66,7 +67,7 @@ func setup_environment():
 		world_env.environment = environment
 		add_child(world_env)
 
-func generate_wave_grid():
+func generate_wave_grid() -> void:
 	# Calculate grid dimensions
 	var grid_half_width = (grid_width - 1) * cell_spacing * 0.5
 	var grid_half_height = (grid_height - 1) * cell_spacing * 0.5
@@ -155,7 +156,7 @@ func create_neon_path_mesh(curve: Curve3D, seed_offset: int) -> MeshInstance3D:
 	
 	return mesh_instance
 
-func add_trail_effect(wave_mesh: MeshInstance3D, material: Material, seed_offset: int):
+func add_trail_effect(wave_mesh: MeshInstance3D, material: Material, seed_offset: int) -> void:
 	# Create subtle trail or glow particles behind the wave
 	var particles = GPUParticles3D.new()
 	particles.name = "TrailEffect"
@@ -201,7 +202,7 @@ func add_trail_effect(wave_mesh: MeshInstance3D, material: Material, seed_offset
 	particle_material.emission_energy_multiplier = neon_intensity * 0.5
 	particle_mesh.material = particle_material
 
-func draw_curve_tube(immediate_mesh: ImmediateMesh, curve: Curve3D, thickness: float, segments: int = 8):
+func draw_curve_tube(immediate_mesh: ImmediateMesh, curve: Curve3D, thickness: float, segments: int = 8) -> void:
 	immediate_mesh.clear_surfaces()
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	
@@ -260,7 +261,7 @@ func draw_curve_tube(immediate_mesh: ImmediateMesh, curve: Curve3D, thickness: f
 	
 	immediate_mesh.surface_end()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if animate:
 		time_offset += delta * animation_speed
 		
@@ -271,7 +272,7 @@ func _process(delta):
 		if randf() < 0.01:
 			pulse_effect()
 
-func animate_wave(wave: MeshInstance3D, delta: float):
+func animate_wave(wave: MeshInstance3D, delta: float) -> void:
 	var seed_offset = wave.get_meta("seed_offset")
 	var curve = wave.get_meta("curve")
 	var base_pos = wave.get_meta("base_pos")
@@ -302,12 +303,28 @@ func animate_wave(wave: MeshInstance3D, delta: float):
 	var immediate_mesh = wave.mesh as ImmediateMesh
 	draw_curve_tube(immediate_mesh, curve, neon_thickness)
 
-func pulse_effect():
+func pulse_effect() -> void:
+	# Kill any still-running pulse tweens to prevent accumulation
+	for t in _pulse_tweens:
+		if t and t.is_valid():
+			t.kill()
+	_pulse_tweens.clear()
+
 	# Add a brief pulse of increased brightness to all neon materials
 	for material in materials:
 		var original_energy = material.emission_energy_multiplier
-		
+
 		# Create tween for pulse effect
 		var tween = create_tween()
 		tween.tween_property(material, "emission_energy_multiplier", original_energy * 1.5, 0.1)
 		tween.tween_property(material, "emission_energy_multiplier", original_energy, 0.3)
+		_pulse_tweens.append(tween)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

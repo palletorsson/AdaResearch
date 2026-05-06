@@ -1,0 +1,32 @@
+{
+  "rack_info": {
+    "name": "auto_knob_knob_cutoff_442f7d",
+    "description": "KNOB — cutoff hz_low(20-200) smooth, color #ff4444",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "knob",
+      "label": "CUTOFF",
+      "color": "#ff4444",
+      "parameter": "cutoff",
+      "min": 20.0,
+      "max": 200.0,
+      "default": 110.0
+    }
+  }
+}

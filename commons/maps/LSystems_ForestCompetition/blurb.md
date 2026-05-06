@@ -1,0 +1,5 @@
+Trees don't negotiate. They grow. Each one follows its own L-System grammar — a local strategy for branching, reaching, thickening — with no knowledge of the others. But they share light, share soil, share the finite geometry of a clearing's edge.
+
+Multiple growth strategies compete across an open field punctuated by void gaps. Each tree minimizes its own uncertainty, extends toward available space, adjusts health when neighbors crowd in. The ecosystem isn't designed. It emerges from overlapping grammars colliding through shared constraint. Watch the canopy: where one strategy dominates, others thin. Where niches open, opportunists fill.
+
+Competition is not opposition. It's parallel self-organization under scarcity — multiple models of "how to grow" tested against the same ground. The forest is an argument conducted in wood.

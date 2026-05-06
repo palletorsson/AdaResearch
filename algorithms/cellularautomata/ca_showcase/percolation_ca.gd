@@ -1,4 +1,4 @@
-# PercolationCA.gd
+﻿# PercolationCA.gd
 # Fluid percolation through porous medium
 extends BaseCA
 
@@ -8,7 +8,16 @@ const POROSITY = 0.6
 
 var flow_grid: Array = []
 
-func initialize_grid():
+func initialize_grid() -> void:
+	# Configure MultiMesh
+	var step = 4
+	var cube_size = CUBE_SIZE * step
+	var mesh = BoxMesh.new()
+	mesh.size = Vector3(cube_size, cube_size, cube_size)
+	
+	var max_instances = (GRID_SIZE / step) * (GRID_SIZE / step) * (GRID_SIZE / step)
+	configure_multimesh(mesh, max_instances)
+	
 	grid = create_3d_grid()
 	flow_grid = create_3d_grid()
 	
@@ -28,12 +37,12 @@ func initialize_grid():
 				grid[x][y][GRID_SIZE - 1] = 2  # Source
 				flow_grid[x][y][GRID_SIZE - 1] = 1.0
 
-func update_simulation(delta):
+func update_simulation(_delta) -> void:
 	# Percolate fluid through connected sites
 	percolate_fluid()
 	update_visualization()
 
-func percolate_fluid():
+func percolate_fluid() -> void:
 	var new_flow = duplicate_3d_grid(flow_grid)
 	
 	for x in range(GRID_SIZE):
@@ -62,7 +71,7 @@ func calculate_neighbor_flow(x: int, y: int, z: int) -> float:
 	
 	return max_flow
 
-func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, current_flow: float):
+func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, current_flow: float) -> void:
 	var flow_amount = current_flow * FLOW_RATE
 	var neighbors = get_3d_neighbors(Vector3i(x, y, z))
 	
@@ -75,41 +84,40 @@ func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, curren
 					flow_amount * randf_range(0.7, 1.0)
 				)
 
-func update_visualization():
-	var array_mesh = ArrayMesh.new()
-	
-	# Create separate surfaces for different states
-	create_mesh_surface(array_mesh, 1, material_occupied)  # Occupied
-	create_mesh_surface(array_mesh, 2, material_active)    # Source
-	create_mesh_surface(array_mesh, 3, material_active)    # Flowing
-	
-	mesh_instance.mesh = array_mesh
-
-func create_mesh_surface(array_mesh: ArrayMesh, target_state: int, material: StandardMaterial3D):
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var indices = PackedInt32Array()
-	var vertex_index = 0
-	
+func update_visualization() -> void:
+	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
+		return
+		
+	var mm = multi_mesh_instance.multimesh
+	var idx = 0
 	var step = 4
+	
+	# Reset remaining instances
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
 	for x in range(0, GRID_SIZE, step):
 		for y in range(0, GRID_SIZE, step):
 			for z in range(0, GRID_SIZE, step):
-				if grid[x][y][z] == target_state:
-					create_cube_at_position(vertices, normals, indices, vertex_index, x, y, z)
-					vertex_index += 8
-	
-	if vertices.size() > 0:
-		var arrays = []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_NORMAL] = normals
-		arrays[Mesh.ARRAY_INDEX] = indices
-		
-		var surface_index = array_mesh.get_surface_count()
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		array_mesh.surface_set_material(surface_index, material)
+				var state = grid[x][y][z]
+				if state == 1 or state == 2 or state == 3:
+					var world_pos = Vector3(
+						(x - GRID_SIZE/2) * CUBE_SIZE,
+						(y - GRID_SIZE/2) * CUBE_SIZE,
+						(z - GRID_SIZE/2) * CUBE_SIZE
+					)
+					
+					mm.set_instance_transform(idx, Transform3D(Basis(), world_pos))
+					
+					# Color logic
+					if state == 1:
+						mm.set_instance_color(idx, Color.WHITE.darkened(0.5)) # Occupied (porous rock)
+					elif state == 2:
+						mm.set_instance_color(idx, Color.CYAN) # Source
+					elif state == 3:
+						mm.set_instance_color(idx, Color.BLUE) # Flowing
+					
+					idx += 1
 
 func get_flow_count() -> int:
 	var count = 0
@@ -120,8 +128,11 @@ func get_flow_count() -> int:
 					count += 1
 	return count
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	flow_grid = create_3d_grid()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

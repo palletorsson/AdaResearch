@@ -1,0 +1,33 @@
+{
+  "id": "sbN05_flag_pinned_pole",
+  "topology": "native_cloth",
+  "cloth_size": 2.0,
+  "subdivide": 14,
+  "total_mass": 0.25,
+  "linear_stiffness": 0.3,
+  "damping_coefficient": 0.015,
+  "drag_coefficient": 0.1,
+  "simulation_precision": 6,
+  "origin": [
+    0,
+    1.8,
+    0
+  ],
+  "steps": 220,
+  "color": [
+    0.15,
+    0.5,
+    0.35
+  ],
+  "roughness": 0.55,
+  "floor_y": -1.5,
+  "pin": {
+    "mode": "left_edge_pole",
+    "cols": 16,
+    "rows": 16
+  },
+  "camera_yaw": 0.55,
+  "camera_pitch": 0.1,
+  "layout": "native_cloth",
+  "notes": "Flag pinned on one edge \u00e2\u20ac\u201d native cloth drapes naturally. Compare against sb03 Verlet flame-cone."
+}

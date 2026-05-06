@@ -1,0 +1,7 @@
+Concept: Deliberate epistemic reset — "primitive" names not a lowest form but a stage of unknowing. Point, line, shape re-encountered as constructs rather than givens. Mastery is undermined; assumptions and blind spots surface.
+Sequence role: Ninth map. Disrupts the cumulative confidence built across maps 1-8. After building from point to enclosed volume, the learner confronts what was assumed. The zoo of forms (platonic solids, capsules, tori, L-shapes) overwhelms tidy progression. Prepares Primitives_Portals by clearing ground for the infinite; follows Point_Animatedcube.
+Technical angle: Procedural generation of diverse primitives, parametric control (radials, rings, resolution), architectural and organic forms, mesh resolution tradeoffs (sphere_low/mid/high), the primitive as API abstraction hiding complexity.
+Critical angle: Socratic ignorance — knowing that you do not know. The primitive catalog reveals that "basic" shapes encode centuries of mathematical convention. Wittgenstein's language games: calling something "primitive" is a move, not a description.
+Key artifacts: platonic_grabbables for hands-on encounter with the five Platonic solids; torus_radials_rings and capsule_radials_rings for parametric control exposure; sphere_low/mid/high for resolution as epistemological choice; hole_with_cones and truncatedtetrahedron for forms that resist easy naming.
+
+Gap: No gap identified.

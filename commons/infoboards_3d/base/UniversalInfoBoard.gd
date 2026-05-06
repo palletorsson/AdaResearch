@@ -1,0 +1,442 @@
+# UniversalInfoBoard.gd
+# UNIVERSAL TEMPLATE - Works for ANY InfoBoard by loading from JSON
+# Supports three modes: single slide, single board, or all slides
+extends Control
+
+# Font resource
+const ROBOTO_FONT = preload("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
+
+# Display modes
+enum DisplayMode {
+	SINGLE_SLIDE,  # Show one specific slide (no navigation)
+	SINGLE_BOARD,  # Show all pages from one board (with navigation)
+	ALL_SLIDES     # Show all slides across all boards (with navigation)
+}
+
+# MAIN CONFIGURATION
+@export var display_mode: DisplayMode = DisplayMode.SINGLE_BOARD
+@export var board_id: String = "point"  # Used in SINGLE_BOARD mode
+@export var slide_id: String = ""  # Used in SINGLE_SLIDE mode (e.g., "point_1", "line_3")
+@export var auto_load_on_ready: bool = true  # Load content automatically
+@export var enable_navigation: bool = true  # Show prev/next buttons (auto-disabled in SINGLE_SLIDE mode)
+
+# Variables for interactive elements
+var current_page := 0
+var total_pages := 0
+var animation_speed := 1.0
+var animation_playing := true
+var animation_time := 0.0
+var vis_control: Control
+
+# Content loaded from JSON
+var page_content: Array = []
+var board_meta: Dictionary = {}
+
+# Node references
+@onready var hbox_container = $MarginContainer/HBoxContainer
+@onready var left_panel = $MarginContainer/HBoxContainer/LeftPanel
+@onready var text_container = $MarginContainer/HBoxContainer/LeftPanel/TextScrollContainer/CodeContainer/MarginContainer/VBoxContainer
+@onready var vis_container = $MarginContainer/HBoxContainer/VisualizationContainer/MarginContainer/VBoxContainer
+
+@onready var title_label = $MarginContainer/HBoxContainer/LeftPanel/Title
+@onready var prev_button = $MarginContainer/HBoxContainer/LeftPanel/NavigationButtons/PrevButton
+@onready var next_button = $MarginContainer/HBoxContainer/LeftPanel/NavigationButtons/NextButton
+@onready var navigation_buttons = $MarginContainer/HBoxContainer/LeftPanel/NavigationButtons
+
+func _ready():
+	print("[UniversalInfoBoard] _ready() called - board_id: %s, display_mode: %d, auto_load: %s" % [board_id, display_mode, auto_load_on_ready])
+	print("[UniversalInfoBoard] text_container path check: %s" % text_container)
+
+	# Setup UI first (connect buttons, etc.)
+	setup_ui()
+
+	if auto_load_on_ready:
+		match display_mode:
+			DisplayMode.SINGLE_SLIDE:
+				if not slide_id.is_empty():
+					load_slide(slide_id)
+				else:
+					push_error("UniversalInfoBoard: SINGLE_SLIDE mode requires slide_id to be set")
+			DisplayMode.SINGLE_BOARD:
+				print("[UniversalInfoBoard] Loading board: %s" % board_id)
+				load_board(board_id)
+			DisplayMode.ALL_SLIDES:
+				load_all_slides()
+		
+		# Show the initial page
+		update_page()
+
+	print("[UniversalInfoBoard] _ready() complete")
+
+# PUBLIC API - Load a single slide by ID (no navigation)
+func load_slide(new_slide_id: String) -> bool:
+	slide_id = new_slide_id
+	display_mode = DisplayMode.SINGLE_SLIDE
+
+	# Load single slide from JSON
+	var slide_data = InfoBoardContentLoader.get_slide_by_id(slide_id)
+
+	if slide_data.is_empty():
+		push_error("UniversalInfoBoard: Slide '%s' not found" % slide_id)
+		show_error_content()
+		return false
+
+	# Wrap slide in array for consistent handling
+	page_content = [slide_data]
+	total_pages = 1
+
+	# Get board metadata from slide
+	var parent_board_id = slide_data.get("_board_id", "")
+	if not parent_board_id.is_empty():
+		board_meta = InfoBoardContentLoader.get_board_meta(parent_board_id)
+	else:
+		board_meta = {"title": "InfoBoard", "subtitle": ""}
+
+	print("UniversalInfoBoard: Loaded slide '%s' from board '%s'" % [slide_id, parent_board_id])
+
+	# Show the single slide
+	current_page = 0
+
+	return true
+
+# PUBLIC API - Load a specific board by ID (with navigation)
+func load_board(new_board_id: String) -> bool:
+	board_id = new_board_id
+	display_mode = DisplayMode.SINGLE_BOARD
+
+	# Load content from JSON
+	page_content = InfoBoardContentLoader.get_pages(board_id)
+	board_meta = InfoBoardContentLoader.get_board_meta(board_id)
+	total_pages = page_content.size()
+
+	if page_content.is_empty():
+		push_error("UniversalInfoBoard: No content found for board ID '%s'" % board_id)
+		show_error_content()
+		return false
+
+	print("UniversalInfoBoard: Loaded '%s - %s' (%d pages)" % [board_meta.title, board_meta.subtitle, total_pages])
+
+	# Reset to first page
+	current_page = 0
+
+	return true
+
+# PUBLIC API - Load all slides across all boards (with navigation)
+func load_all_slides() -> bool:
+	display_mode = DisplayMode.ALL_SLIDES
+
+	# Load all slides from JSON
+	page_content = InfoBoardContentLoader.get_all_slides()
+	total_pages = page_content.size()
+
+	if page_content.is_empty():
+		push_error("UniversalInfoBoard: No slides found in content")
+		show_error_content()
+		return false
+
+	board_meta = {
+		"title": "All Topics",
+		"subtitle": "Complete InfoBoard Collection"
+	}
+
+	print("UniversalInfoBoard: Loaded all slides (%d total)" % total_pages)
+
+	# Reset to first page
+	current_page = 0
+
+	return true
+
+# Setup UI elements
+func setup_ui():
+	# Connect navigation buttons
+	prev_button.custom_minimum_size = Vector2(140, 48)
+	prev_button.pressed.connect(_on_prev_button_pressed)
+	next_button.custom_minimum_size = Vector2(140, 48)
+	next_button.pressed.connect(_on_next_button_pressed)
+
+	# Hide navigation in SINGLE_SLIDE mode
+	if display_mode == DisplayMode.SINGLE_SLIDE or not enable_navigation:
+		prev_button.visible = false
+		next_button.visible = false
+
+	# Show initial page
+	update_page()
+
+func _process(delta):
+	if animation_playing:
+		animation_time += delta * animation_speed
+
+		# Update visualization based on current page
+		if vis_control and is_instance_valid(vis_control):
+			vis_control.animation_time = animation_time
+			vis_control.animation_speed = animation_speed
+			vis_control.queue_redraw()
+
+func update_page():
+	print("[UniversalInfoBoard] update_page() called - current_page: %d, total: %d" % [current_page, total_pages])
+
+	if page_content.is_empty():
+		print("[UniversalInfoBoard] ERROR: page_content is empty!")
+		return
+
+	if not text_container:
+		print("[UniversalInfoBoard] ERROR: text_container is null!")
+		return
+
+	print("[UniversalInfoBoard] text_container info - visible: %s, size: %s, child_count: %d" % [text_container.visible, text_container.size, text_container.get_child_count()])
+
+	# Clear previous content
+	for child in text_container.get_children():
+		child.queue_free()
+
+	# Get current page data from loaded content
+	var current_page_data: Dictionary = page_content[current_page]
+	print("[UniversalInfoBoard] Loading page: %s" % current_page_data.get("title", "No title"))
+
+	# Update title (include board context in ALL_SLIDES mode)
+	var page_title = current_page_data.get("title", "Untitled")
+	if display_mode == DisplayMode.ALL_SLIDES:
+		var board_title = current_page_data.get("_board_title", "")
+		var slide_id_val = current_page_data.get("slide_id", "")
+		if not board_title.is_empty():
+			title_label.text = "[%s] %s" % [board_title, page_title]
+		else:
+			title_label.text = "%s (%s)" % [page_title, slide_id_val]
+	else:
+		title_label.text = page_title
+
+	# Build display text from structured page data
+	var text_lines: Array = _build_text_lines(current_page_data)
+	print("[UniversalInfoBoard] Text lines count: %d" % text_lines.size())
+
+	for entry in text_lines:
+		var entry_type = "paragraph"
+		var entry_text := ""
+
+		if entry is Dictionary:
+			entry_type = entry.get("type", "paragraph")
+			entry_text = entry.get("text", "")
+		else:
+			entry_text = str(entry)
+
+		if typeof(entry_text) != TYPE_STRING:
+			entry_text = str(entry_text)
+
+		if entry_type == "spacer":
+			var spacer = Control.new()
+			spacer.custom_minimum_size = Vector2(0, 14)
+			text_container.add_child(spacer)
+			continue
+
+		print("[UniversalInfoBoard] Adding text (%s): %s" % [entry_type, entry_text.substr(0, min(60, entry_text.length()))])
+
+		var label = Label.new()
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+		label.add_theme_font_override("font", ROBOTO_FONT)
+
+		match entry_type:
+			"axiom":
+				label.add_theme_font_size_override("font_size", 22)
+				label.add_theme_color_override("font_color", Color(1.0, 0.88, 0.6))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			"section":
+				label.add_theme_font_size_override("font_size", 19)
+				label.add_theme_color_override("font_color", Color(0.85, 0.92, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			"code":
+				entry_text = entry_text.replace("	", "    ")
+				label.add_theme_font_size_override("font_size", 17)
+				label.add_theme_color_override("font_color", Color(0.78, 1.0, 0.82))
+				label.autowrap_mode = TextServer.AUTOWRAP_OFF
+				label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+				label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+			"step":
+				label.add_theme_font_size_override("font_size", 17)
+				label.add_theme_color_override("font_color", Color(0.92, 0.95, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			"poetics":
+				label.add_theme_font_size_override("font_size", 19)
+				label.add_theme_color_override("font_color", Color(0.85, 0.92, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			"paragraph":
+				label.add_theme_font_size_override("font_size", 18)
+				label.add_theme_color_override("font_color", Color(0.95, 0.95, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+
+		label.text = entry_text
+		text_container.add_child(label)
+
+		if text_container.get_child_count() > 1:
+			label.add_theme_constant_override("margin_top", 10)
+
+	# Update visualization
+	var vis_data = current_page_data.get("visualization", {})
+	var vis_id = current_page_data.get("visual_id", "")
+	if vis_data is Dictionary:
+		vis_id = vis_data.get("id", vis_id)
+	elif typeof(vis_data) == TYPE_STRING and vis_id.is_empty():
+		vis_id = vis_data
+	update_visualization(vis_id)
+
+	# Update navigation buttons
+	prev_button.disabled = (current_page == 0)
+	next_button.disabled = (current_page == total_pages - 1)
+
+func _build_text_lines(page: Dictionary) -> Array:
+	var lines: Array = []
+
+	var axiom = page.get("axiom", "")
+	if typeof(axiom) == TYPE_STRING and not axiom.is_empty():
+		lines.append({"type": "axiom", "text": axiom})
+		lines.append({"type": "spacer", "text": ""})
+
+	var code_dict = page.get("code", {})
+	if code_dict is Dictionary:
+		var code_block = code_dict.get("block", "")
+		if typeof(code_block) == TYPE_STRING and not code_block.is_empty():
+			lines.append({"type": "section", "text": "Code"})
+			for line in code_block.split("
+"):
+				lines.append({"type": "code", "text": line})
+
+	var narrative = page.get("narrative", [])
+	if narrative is Array:
+		for paragraph in narrative:
+			if typeof(paragraph) == TYPE_STRING and not paragraph.is_empty():
+				lines.append({"type": "paragraph", "text": paragraph})
+
+	var steps = page.get("steps", [])
+	if steps is Array and steps.size() > 0:
+		lines.append({"type": "section", "text": "Steps"})
+		for i in range(steps.size()):
+			var step_text = steps[i]
+			if typeof(step_text) == TYPE_STRING and not step_text.is_empty():
+				lines.append({"type": "step", "text": "%d. %s" % [i + 1, step_text]})
+
+	var poetics = page.get("poetics", "")
+	if typeof(poetics) == TYPE_STRING and not poetics.is_empty():
+		lines.append({"type": "poetics", "text": poetics})
+
+	var visualization = page.get("visualization", {})
+	if visualization is Dictionary:
+		var asset_text = visualization.get("asset", "")
+		if typeof(asset_text) == TYPE_STRING and not asset_text.is_empty():
+			lines.append({"type": "paragraph", "text": asset_text})
+
+	return lines
+
+func update_visualization(vis_type: String):
+	# Clear previous visualization
+	if vis_control and is_instance_valid(vis_control):
+		vis_control.queue_free()
+		vis_control = null
+
+	if vis_type.is_empty():
+		return
+
+	# Determine which board's visualization to use
+	var vis_board_id = board_id
+	if display_mode == DisplayMode.ALL_SLIDES and current_page < page_content.size():
+		# Use the board_id from the slide data
+		vis_board_id = page_content[current_page].get("_board_id", board_id)
+
+	# Try to load visualization scene for this board
+	var vis_scene_path = get_visualization_scene_path(vis_board_id)
+
+	if not ResourceLoader.exists(vis_scene_path):
+		push_warning("UniversalInfoBoard: Visualization scene not found: %s" % vis_scene_path)
+		return
+
+	var vis_scene = load(vis_scene_path)
+	if vis_scene == null:
+		push_warning("UniversalInfoBoard: Failed to load visualization scene: %s" % vis_scene_path)
+		return
+
+	vis_control = vis_scene.instantiate()
+
+	# Set visualization type if the control supports it
+	if "visualization_type" in vis_control:
+		vis_control.visualization_type = vis_type
+
+	# Set animation properties
+	if "animation_time" in vis_control:
+		vis_control.animation_time = animation_time
+	if "animation_speed" in vis_control:
+		vis_control.animation_speed = animation_speed
+	if "animation_playing" in vis_control:
+		vis_control.animation_playing = animation_playing
+
+	# Scale up the visualization content to make animations larger
+	vis_control.scale = Vector2(1.3, 1.3)
+
+	# Set up sizing flags
+	vis_control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	vis_control.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+	vis_container.add_child(vis_control)
+
+# Get the visualization scene path for a board
+func get_visualization_scene_path(board_id_param: String) -> String:
+	# Convention: boards/{BoardName}/{BoardName}VisualizationControl.tscn
+	# Examples:
+	# - point -> boards/Point/PointVisualizationControl.tscn
+	# - line -> boards/Line/LineVisualizationControl.tscn
+
+	var capitalized = board_id_param.capitalize().replace(" ", "")
+	return "res://commons/infoboards_3d/boards/%s/%sVisualizationControl.tscn" % [capitalized, capitalized]
+
+func show_error_content():
+	page_content = [{
+		"title": "Error Loading Content",
+		"visual_id": "",
+		"axiom": "",
+		"narrative": [
+			"Failed to load content for board: %s" % board_id,
+			"",
+			"Please check:",
+			"• Board ID exists in infoboard_content.json",
+			"• JSON syntax is valid",
+			"• Content is properly formatted"
+		],
+		"steps": [],
+		"code": {"id": "", "language": "gdscript", "purpose": "", "block": ""},
+		"poetics": "",
+		"visualization": {"id": "", "asset": "", "files": []}
+	}]
+	total_pages = 1
+	current_page = 0
+	update_page()
+
+
+# Navigation
+func _on_prev_button_pressed():
+	if current_page > 0:
+		current_page -= 1
+		update_page()
+
+func _on_next_button_pressed():
+	if current_page < total_pages - 1:
+		current_page += 1
+		update_page()
+
+	if vis_control and is_instance_valid(vis_control):
+		if "animation_playing" in vis_control:
+			vis_control.animation_playing = animation_playing
+
+# PUBLIC API - Change to different board at runtime
+func switch_to_board(new_board_id: String) -> bool:
+	return load_board(new_board_id)
+
+# PUBLIC API - Get current board info
+func get_current_board_id() -> String:
+	return board_id
+
+func get_current_page_number() -> int:
+	return current_page
+
+func get_total_pages() -> int:
+	return total_pages
+
+func get_board_metadata() -> Dictionary:
+	return board_meta

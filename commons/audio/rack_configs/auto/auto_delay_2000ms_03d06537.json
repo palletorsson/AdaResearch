@@ -1,0 +1,106 @@
+{
+  "rack_info": {
+    "name": "Delay+Reverb 2000ms",
+    "description": "Delay (up to 2000ms) into reverb. Time, feedback, mix; size, damping, mix.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "archetype": "delay",
+    "seed": 63989047
+  },
+  "layout": {
+    "padding_px": 18,
+    "gap_px": 14,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "lbl_d",
+      "lbl_r"
+    ],
+    [
+      "time",
+      "size"
+    ],
+    [
+      "fbk",
+      "damp"
+    ],
+    [
+      "d_mix",
+      "r_mix"
+    ],
+    [
+      "tap",
+      ""
+    ]
+  ],
+  "control_definitions": {
+    "lbl_d": {
+      "type": "label",
+      "text": "DELAY",
+      "font_size": 18
+    },
+    "lbl_r": {
+      "type": "label",
+      "text": "REVERB",
+      "font_size": 18
+    },
+    "time": {
+      "type": "slv",
+      "label": "TIME",
+      "parameter": "delay_time",
+      "min": 1.0,
+      "max": 2000.0,
+      "default": 500.0
+    },
+    "fbk": {
+      "type": "knob",
+      "label": "FBK",
+      "parameter": "feedback",
+      "min": 0.0,
+      "max": 0.95,
+      "default": 0.35
+    },
+    "d_mix": {
+      "type": "knob",
+      "label": "MIX",
+      "parameter": "delay_mix",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.3
+    },
+    "size": {
+      "type": "slv",
+      "label": "SIZE",
+      "parameter": "reverb_size",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.6
+    },
+    "damp": {
+      "type": "knob",
+      "label": "DAMP",
+      "parameter": "reverb_damp",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    },
+    "r_mix": {
+      "type": "knob",
+      "label": "MIX",
+      "parameter": "reverb_mix",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.2
+    },
+    "tap": {
+      "type": "btn",
+      "label": "TAP",
+      "parameter": "tap_tempo",
+      "action": "trigger",
+      "color": "#44ccff"
+    }
+  }
+}

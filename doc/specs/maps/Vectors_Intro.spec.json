@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Vectors_Intro",
+  "home_sequence": "vectors",
+  "dimensions": {
+    "w": 5,
+    "d": 5
+  },
+  "signature": null,
+  "style": "kusama",
+  "echoes": [],
+  "density": 0.208,
+  "breath_zones": [
+    {
+      "size": 19,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 5
+      },
+      "centroid": [
+        1.894736842105263,
+        1.894736842105263
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "vector_addition_demo"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "vector_subtraction_demo"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "VectorWorkbench"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "dot_product_projector"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "vector_magnitude_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 24,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

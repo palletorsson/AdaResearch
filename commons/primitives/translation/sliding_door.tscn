@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3m7n9xr4k8pq"]
+
+[ext_resource type="Script" path="res://commons/primitives/translation/axis_slider.gd" id="1_slider"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_door"]
+size = Vector3(2.0, 2.5, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door"]
+albedo_color = Color(0.6, 0.4, 0.2, 1)
+roughness = 1.0
+metallic = 0.0
+metallic_specular = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_door"]
+size = Vector3(2.0, 2.5, 0.2)
+
+[node name="SlidingDoor" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 1
+gravity_scale = 0.0
+script = ExtResource("1_slider")
+freeze = true
+alter_freeze = false
+slide_axis = "X"
+slide_min = 0.0
+slide_max = 2.5
+snap_to_grid = true
+grid_spacing = 0.5
+show_rail = true
+rail_color = Color(0.3, 0.6, 1, 0.5)
+show_position_marker = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_door")
+surface_material_override/0 = SubResource("StandardMaterial3D_door")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_door")
+
+[node name="DoorLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+text = "Slide →"
+font_size = 64
+pixel_size = 0.01
+billboard = 1

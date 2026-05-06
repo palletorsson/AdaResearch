@@ -1,0 +1,190 @@
+{
+  "id": "morph_auto_mixed_08",
+  "family": "mixed_forms",
+  "notes": "Auto-generated mixed-family candidate from bio_furniture, history_furniture, house.",
+  "camera_yaw": 0.626,
+  "camera_pitch": 0.307,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.521,
+      1.019,
+      0.855
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "mixed_08_01_harness_chassis",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2.311,
+        "rows": 2.053,
+        "select": "corners",
+        "length": 0.387,
+        "scale": 0.191
+      },
+      "child_role": "support",
+      "budget_factor": 0.027
+    },
+    {
+      "id": "mixed_08_02_harness_wraps",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.499,
+        "scale": 0.232,
+        "normal_bias": 1.26,
+        "world_bias": [
+          0.007,
+          0.305,
+          0.314
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.498
+    },
+    {
+      "id": "mixed_08_03_roof_cap",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.7
+      },
+      "selector": "up",
+      "op": "gable_cap",
+      "params": {
+        "pitch_deg": 31.965,
+        "thickness": 0.123,
+        "overhang": 1.176
+      },
+      "child_role": "cap",
+      "budget_factor": 0.017
+    },
+    {
+      "id": "mixed_08_04_daybed_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.163,
+        "scale": 1.39
+      },
+      "child_role": "support",
+      "budget_factor": 0.1
+    },
+    {
+      "id": "mixed_08_05_blossom_side_petals",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.083,
+        "scale": 0.607,
+        "normal_bias": 0.865,
+        "world_bias": [
+          -0.001,
+          0.622,
+          0.248
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.082
+    },
+    {
+      "id": "mixed_08_06_cradle_side_arm_return",
+      "when": {
+        "role": "support",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.14
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.534,
+        "scale": 0.198,
+        "normal_bias": 1.189,
+        "world_bias": [
+          -0.441,
+          0.194,
+          -0.122
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.093
+    },
+    {
+      "id": "mixed_transform_01_scale_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 1,
+        "min_budget": 0.303
+      },
+      "selector": "right",
+      "op": "scale_panel",
+      "params": {
+        "scale_x": 1.121,
+        "scale_y": 1.211,
+        "normal_offset": 0.079
+      },
+      "child_role": "body",
+      "budget_factor": 0.73
+    },
+    {
+      "id": "mixed_transform_02_rotate_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.668
+      },
+      "selector": "up",
+      "op": "rotate_panel",
+      "params": {
+        "axis": "tangent",
+        "angle_deg": 21.356,
+        "normal_offset": 0.005
+      },
+      "child_role": "body",
+      "budget_factor": 0.702
+    },
+    {
+      "id": "mixed_transform_03_scale_panel",
+      "when": {
+        "role": "support",
+        "max_depth": 0,
+        "min_budget": 0.569
+      },
+      "selector": "front",
+      "op": "scale_panel",
+      "params": {
+        "scale_x": 0.657,
+        "scale_y": 0.744,
+        "normal_offset": 0.07
+      },
+      "child_role": "support",
+      "budget_factor": 0.316
+    }
+  ]
+}

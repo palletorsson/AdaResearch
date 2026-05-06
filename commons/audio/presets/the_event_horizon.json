@@ -1,0 +1,60 @@
+{
+    "description": "Cosmic Horror: Deep drones, dissonance, endless falling",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.GHOST_DRONE",
+            "volume_db": -12,
+            "bus": "Void"
+        },
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -15,
+            "bus": "Sub"
+        },
+        {
+            "sound_id": "Fourier.drone",
+            "volume_db": -18,
+            "bus": "Void"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+                "liturgical.sacred_whisper",
+                "Epic.trailer_rise",
+                "SciFi.dystopian_alarm"
+            ],
+            "interval_range": [
+                20.0,
+                60.0
+            ],
+            "volume_range": [
+                -20,
+                -15
+            ],
+            "bus": "Whispers"
+        }
+    ],
+    "buses": {
+        "Void": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.9,
+                    "damping": 0.0
+                }
+            ]
+        },
+        "Whispers": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.8
+                }
+            ]
+        }
+    }
+}

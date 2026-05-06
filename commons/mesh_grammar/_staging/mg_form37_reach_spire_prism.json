@@ -1,0 +1,41 @@
+{
+  "id": "mg_form37_reach_spire_prism",
+  "notes": "REACH PASS: prism seed is pulled into a taller, thinner reach study. More about vertical extension and delayed pinch than compact towering.",
+  "seed": "prism",
+  "seed_scale": 0.4,
+  "generations": 2,
+  "camera_pitch": 0.28,
+  "camera_focus_y_bias": -0.18,
+  "camera_fit_padding": 0.56,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.34,
+        "scale": 0.92,
+        "top_tag": "spire_top",
+        "side_tag": "spire_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:spire_top",
+      "params": {
+        "scale": 0.68
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:spire_top",
+      "params": {
+        "distance": 0.18,
+        "scale": 0.64,
+        "top_tag": "spire_tip",
+        "side_tag": "spire_tip_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

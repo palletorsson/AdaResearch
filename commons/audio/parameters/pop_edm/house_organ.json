@@ -1,0 +1,15 @@
+{
+    "_metadata": {
+        "sound_type": "house_organ",
+        "display_name": "House Organ Stab",
+        "description": "Frankie Knuckles Chicago house organ stab. M1 'Organ 2' style - house as ritual space.",
+        "category": "pop_edm",
+        "tags": ["house", "organ", "chicago", "knuckles", "m1", "stab"]
+    },
+    "parameters": {
+        "root_note": { "min": 48.0, "max": 72.0, "value": 60.0, "step": 1.0 },
+        "stab_rate": { "min": 1.0, "max": 8.0, "value": 2.0, "step": 0.5 },
+        "brightness": { "min": 0.2, "max": 1.0, "value": 0.6, "step": 0.05 },
+        "duration": { "min": 2.0, "max": 10.0, "value": 4.0, "step": 0.5 }
+    }
+}

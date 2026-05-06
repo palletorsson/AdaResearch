@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvq8xh3m5n7yw"]
+
+[ext_resource type="Script" path="res://algorithms/arrays/grid_editor/GridEditorCube.gd" id="1_cube_script"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cube"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cube"]
+render_priority = 0
+shader = ExtResource("2_grid_shader")
+shader_parameter/modelColor = Color(0.3, 0.6, 0.9, 1)
+shader_parameter/wireframeColor = Color(0.0, 0.8, 1.0, 1)
+shader_parameter/emissionColor = Color(0.5, 0.8, 1, 1)
+shader_parameter/width = 10.0
+shader_parameter/blur = 0.5
+shader_parameter/emission_strength = 1.5
+shader_parameter/show_interior = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cube"]
+size = Vector3(0.125, 0.125, 0.125)
+
+[node name="GridEditorCube" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 3
+mass = 0.1
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
+script = ExtResource("1_cube_script")
+press_to_hold = false
+ranged_grab_method = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_cube")
+mesh = SubResource("BoxMesh_cube")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cube")
+

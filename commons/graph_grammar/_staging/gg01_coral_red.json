@@ -1,0 +1,29 @@
+{
+  "id": "gg01_coral_red",
+  "notes": "Dense red branching \u00e2\u20ac\u201d coral/sea fan.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.12
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "flesh"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.5,
+        "spread_deg": 50,
+        "radius_decay": 0.7,
+        "jitter": 0.5
+      }
+    }
+  ]
+}

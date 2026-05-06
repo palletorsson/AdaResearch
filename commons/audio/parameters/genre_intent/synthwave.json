@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "version": 1,
+    "mode": "advisory",
+    "strict": false
+  },
+  "genre_id": "synthwave",
+  "suit_guidance": {
+    "core_roles": ["rhythm", "bass", "harmony"],
+    "common_roles": ["hook", "fx"],
+    "experimental_roles": ["fx", "hook"],
+    "continuity_preferences": [
+      "keep bass and pad bed present through most sections",
+      "use lead entry/exit for section identity, not full reset",
+      "preserve groove while widening texture over time"
+    ]
+  },
+  "tempo": {
+    "preferred_bpm": 108,
+    "bpm_range": [95, 120]
+  },
+  "harmony": {
+    "preferred_keys": ["Am", "Em", "Cm", "Dm"],
+    "priority_progressions": [
+      "i-bVI-bIII-bVII",
+      "i-bVII-bVI-bVII",
+      "i-bIII-bVII-bVI"
+    ],
+    "harmonic_devices": [
+      "minor tonal center with cinematic triad movement",
+      "long pad voicing and octave lead doubling",
+      "sustained harmony with arpeggiated motion"
+    ]
+  },
+  "rhythm": {
+    "groove_notes": [
+      "steady kick with gated snare feel",
+      "eighth-note pulse from arp and bass",
+      "supportive hats without over-fragmenting the groove"
+    ],
+    "swing_range": [0.0, 0.06]
+  },
+  "arrangement": {
+    "energy_curve": ["intro", "verse", "build", "chorus", "break", "final_chorus", "outro"],
+    "notes": [
+      "contrast via filter and width automation",
+      "avoid hard cuts that drop all harmonic support",
+      "let hooks evolve while harmonic identity stays clear"
+    ]
+  },
+  "references": {
+    "artists": ["Kavinsky", "Timecop1983", "FM-84"],
+    "tracks": ["Nightcall", "On the Run", "Running in the Night"]
+  }
+}

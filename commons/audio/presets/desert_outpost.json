@@ -1,0 +1,121 @@
+{
+    "description": "Arid wasteland with heat shimmer drone, sand wind, and sparse technology sounds",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -14,
+            "bus": "HeatShimmer",
+            "parameters": {
+                "base_freq": 90.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -16,
+            "bus": "Wind"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.static_burst"
+            ],
+            "interval_range": [
+                12.0,
+                35.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Effects"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.mechanical_whir"
+            ],
+            "interval_range": [
+                25.0,
+                70.0
+            ],
+            "volume_range": [
+                -28,
+                -20
+            ],
+            "bus": "Effects"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren"
+            ],
+            "interval_range": [
+                40.0,
+                120.0
+            ],
+            "volume_range": [
+                -32,
+                -24
+            ],
+            "bus": "Distance"
+        }
+    ],
+    "buses": {
+        "HeatShimmer": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "dry": 0.9,
+                    "wet": 0.2
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.2,
+                    "damping": 0.8
+                }
+            ]
+        },
+        "Wind": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 150
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.15
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.85,
+                    "tap1_delay_ms": 500,
+                    "tap1_level_db": -12.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "Distance": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 800
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.3
+                }
+            ]
+        }
+    }
+}

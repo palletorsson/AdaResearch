@@ -1,0 +1,108 @@
+{
+    "detection_sound": {
+        "_metadata": {
+            "generator": "SciFi",
+            "description": "Scanner detection chirps",
+            "tags": "sci-fi, ui, notification",
+            "sound_type": "sci_fi_data_chirps"
+        },
+        "parameters": {}
+    },
+    "lift_start_sound": {
+        "_metadata": {
+            "generator": "Default",
+            "description": "Elevator starting pulse",
+            "tags": "sci-fi, mechanic, lift",
+            "sound_type": "lift_bass_pulse"
+        },
+        "parameters": {
+            "base_freq": {
+                "value": 50.0,
+                "min": 30.0,
+                "max": 100.0
+            },
+            "decay_rate": {
+                "value": 1.5,
+                "min": 0.5,
+                "max": 5.0
+            }
+        }
+    },
+    "lift_loop_sound": {
+        "_metadata": {
+            "generator": "Default",
+            "description": "Elevator moving loop",
+            "tags": "sci-fi, mechanic, loop",
+            "sound_type": "ghost_drone"
+        },
+        "parameters": {
+            "freq1": {
+                "value": 55.0,
+                "min": 30.0,
+                "max": 100.0
+            },
+            "freq2": {
+                "value": 110.0,
+                "min": 50.0,
+                "max": 200.0
+            },
+            "mod_cycles": {
+                "value": 4.0,
+                "min": 1.0,
+                "max": 10.0
+            }
+        }
+    },
+    "lift_stop_sound": {
+        "_metadata": {
+            "generator": "Default",
+            "description": "Elevator stopping",
+            "tags": "sci-fi, mechanic, lift",
+            "sound_type": "lift_bass_pulse"
+        },
+        "parameters": {
+            "base_freq": {
+                "value": 40.0,
+                "min": 30.0,
+                "max": 100.0
+            },
+            "decay_rate": {
+                "value": 3.0,
+                "min": 1.0,
+                "max": 8.0
+            }
+        }
+    },
+    "warning_sound": {
+        "_metadata": {
+            "generator": "Default",
+            "description": "Alarm warning",
+            "tags": "sci-fi, alarm, ui",
+            "sound_type": "teleport_drone"
+        },
+        "parameters": {
+            "mod_freq": {
+                "value": 8.0,
+                "min": 1.0,
+                "max": 20.0
+            },
+            "wave_type": {
+                "value": "sawtooth",
+                "options": [
+                    "sine",
+                    "sawtooth",
+                    "square"
+                ]
+            }
+        }
+    },
+    "ambient_sound": {
+        "_metadata": {
+            "generator": "SciFi",
+            "description": "Background room ambience",
+            "tags": "sci-fi, ambient",
+            "sound_type": "sci_fi_lab_hum_clean"
+        },
+        "parameters": {}
+    }
+}

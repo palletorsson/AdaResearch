@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx8v7f4u6g2b"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/infinite_voxel_floor/InfiniteVoxelFloor.gd" id="1_v4m8j"]
+
+[node name="InfiniteVoxelFloor" type="Node3D"]
+script = ExtResource("1_v4m8j")
+grid_radius = 20
+cube_size = 1.0
+height_scale = 3.0
+noise_frequency = 0.03
+light_radius = 15.0
+highlight_emission = 12.0

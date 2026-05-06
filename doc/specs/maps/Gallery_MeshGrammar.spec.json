@@ -1,0 +1,143 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_MeshGrammar",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 16
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.12,
+  "breath_zones": [
+    {
+      "size": 133,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 16
+      },
+      "centroid": [
+        5.015037593984962,
+        7.992481203007519
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "mesh_grammar"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "mesh_grammar_barnacle"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "mesh_grammar_blooming_bulge"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "mesh_grammar_branching_coral"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "mesh_grammar_budding"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "mesh_grammar_ca_growth"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "mesh_grammar_coral_fingers"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "mesh_grammar_crumpled"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "mesh_grammar_detailed_bulge"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "mesh_grammar_extruded_spire"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "mesh_grammar_inset_pattern"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "mesh_grammar_inset_towers"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "mesh_grammar_lsystem_tree"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "mesh_grammar_nodule_sphere"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "mesh_grammar_noise_sculpture"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "mesh_grammar_petal_flower"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "mesh_grammar_riveted"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "mesh_grammar_scale_armor"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "mesh_grammar_seed"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "mesh_grammar_spike_ball"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "mesh_grammar_subdivided"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 21,
+    "walkable_cells": 175,
+    "breath_zone_count": 1,
+    "unique_tokens": 21
+  }
+}

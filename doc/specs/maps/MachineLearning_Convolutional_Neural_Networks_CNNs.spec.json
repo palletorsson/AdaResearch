@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "MachineLearning_Convolutional_Neural_Networks_CNNs",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.006,
+  "breath_zones": [
+    {
+      "size": 166,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.481927710843373,
+        6.469879518072289
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "convolutional_neural_networks"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

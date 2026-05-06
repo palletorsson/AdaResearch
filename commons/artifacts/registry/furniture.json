@@ -1,0 +1,2773 @@
+{
+	"artifacts": {
+		"albers_relief": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"relief_type": 2.0
+			},
+			"description": "Color study relief inspired by Josef Albers. Nested squares exploring color interaction.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "albers_relief",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Albers Relief Puzzle",
+			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+			"tags": [
+				"color",
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.33,
+					0.5
+				],
+				"aabb_center": [
+					0.0,
+					0.53,
+					0.23
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110014Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"analysis_station_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"workstation_type": 0.0
+			},
+			"description": "Combine microscope, scales, and specimen jar into an analysis workstation for examining specimens.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "analysis_station_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Analysis Station Assembly",
+			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					0.28,
+					0.82
+				],
+				"aabb_center": [
+					0.0,
+					0.61,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110014Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"artifact_catalog_kiosk": {
+			"category": "navigation",
+			"complexity": "intermediate",
+			"description": "VR kiosk for browsing and spawning artifacts. Filter by theme and complexity, search by tags. 318+ artifacts organized into 10 thematic categories. Dev tool that becomes player inventory through progression.",
+			"dev_themes": [
+				"art",
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "artifact_catalog_kiosk",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Artifact Catalog Kiosk",
+			"scene": "res://commons/artifacts/catalog/ArtifactCatalogTablet3D.tscn",
+			"tags": [
+				"navigation",
+				"searching",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.6,
+					1.2,
+					0.05
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-0.03
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"assembly_line_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"description": "Conveyor belt puzzle. Build houses from cubes and pyramids on a production line.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "assembly_line_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Assembly Line Puzzle",
+			"scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn",
+			"tags": [
+				"l_system",
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"cylinder",
+						"prism"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.1,
+					0.32,
+					1.65
+				],
+				"aabb_center": [
+					0.1,
+					0.59,
+					-0.68
+				],
+				"grid_cells": [
+					3.0,
+					2.0
+				],
+				"max_dimension_m": 2.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"attachable_wood_cube": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Scalable wood cube with attachment points on all faces. Pieces snap together when attachment points align and face each other.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "attachable_wood_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Attachable Wood Cube",
+			"scene": "res://commons/primitives/cubes/grab_cube_attachable.tscn",
+			"tags": [
+				"primitives"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.13,
+					0.13,
+					0.13
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.13,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"audio_catalog_tablet": {
+			"category": "audio",
+			"complexity": "beginner",
+			"description": "Handheld sound library. Browse 73+ audio presets across 15 categories, preview sounds, edit parameters in VR.",
+			"dev_themes": [
+				"decoration",
+				"environment",
+				"music"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "audio_catalog_tablet",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Audio Catalog Tablet",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://commons/audio/catalog/AudioCatalogTablet3D.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "standard",
+			"tags": [
+				"audio",
+				"sound",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"depends",
+					"contrasts",
+					"individual",
+					"sounds",
+					"ambient"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.52,
+					1.16,
+					0.03
+				],
+				"aabb_center": [
+					0.0,
+					-0.04,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.52,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"balance_puzzle": {
+			"capacity": "JUDGE which translations and rotations preserve stability in a stacked structure.",
+			"category": "puzzles",
+			"complexity": "intermediate",
+			"description": "Stack pieces until the system stops moving. Each drop translates and reorients a block, but the goal is not motion for its own sake: it is finding a configuration whose center of mass and support relations hold long enough to trigger the creature reward. The puzzle turns balance into a lived lesson about which transformations preserve stability and which topple it. It frames transformation as a negotiation with gravity.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"gamwell_reference": "",
+			"include_in_map_data": true,
+			"interactions": [
+				"grab and drop pieces into a taller stack",
+				"raise the structure past the height threshold",
+				"hold the arrangement stable until the timer completes",
+				"watch the reward creature emerge from a successful configuration"
+			],
+			"lookup_name": "balance_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Balance Puzzle",
+			"qfep_connection": "Transformation changes S while stability acts as the invariant. The stack only counts as coherent when many local moves preserve a global equilibrium.",
+			"scene": "res://commons/primitives/balance/balance_puzzle.tscn",
+			"sequence": "transformation",
+			"signals": [
+				"height_changed",
+				"stability_progress",
+				"transformation_complete",
+				"transformation_started",
+				"walker_created"
+			],
+			"tags": [
+				"transformation",
+				"balance",
+				"gravity",
+				"stacking",
+				"stability",
+				"physics",
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"intro",
+					"artifact",
+					"primitives",
+					"sequence",
+					"thematically"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.69,
+					1.57,
+					0.5
+				],
+				"aabb_center": [
+					0.1,
+					0.73,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.57,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"biederman_relief": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"description": "Constructivist relief composition inspired by Charles Biederman. Arrange colored rectangular bars at varying depths on a blue backing.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "biederman_relief",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Biederman Relief Puzzle",
+			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.33,
+					0.5
+				],
+				"aabb_center": [
+					0.0,
+					0.53,
+					0.23
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"chair_assembly_puzzle": {
+			"capacity": "ASSEMBLE furniture by combining translation, rotation, and scale on repeated cube primitives.",
+			"category": "puzzles",
+			"complexity": "beginner",
+			"description": "Assemble furniture by moving, rotating, and scaling cube-based parts into ghost guides. The puzzle shows that a chair is not a special primitive but a relationship between transformed rectangles. Snapping and growth feedback make the composition legible as soon as the pieces align. It turns affine transformation into constructive form.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"gamwell_reference": "",
+			"include_in_map_data": true,
+			"interactions": [
+				"grab and scale pieces into place",
+				"snap parts onto holographic ghost guides",
+				"switch furniture_type to compare chair, stool, table, or shelf targets",
+				"complete the assembly to trigger the growth animation"
+			],
+			"lookup_name": "chair_assembly_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps",
+				"transformation"
+			],
+			"name": "Chair Assembly Puzzle",
+			"qfep_connection": "Transformation modifies S while the cube remains the invariant unit. Furniture appears when repeated primitives preserve coherence under translation, rotation, and scale.",
+			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"sequence": "transformation",
+			"signals": [
+				"furniture_assembled",
+				"furniture_grown"
+			],
+			"tags": [
+				"transformation",
+				"assembly",
+				"scale",
+				"translation",
+				"rotation",
+				"furniture",
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.92,
+					0.55
+				],
+				"aabb_center": [
+					0.35,
+					0.41,
+					0.07
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"configurable_portal": {
+			"category": "mapobjects",
+			"complexity": "intermediate",
+			"description": "Fully configurable portal - any size, rotation, destination. Use: configurable_portal#width:2#height:3#dest_x:5#dest_y:1#dest_z:10 or configurable_portal#dest_map:Trans_RotationSpectacle",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"footprint": [
+				2.0,
+				3.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "configurable_portal",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Configurable Portal",
+			"parameters": {
+				"active": "bool - can be used (default true)",
+				"color1": "hex - primary color",
+				"color2": "hex - secondary color",
+				"cooldown": "float - seconds between uses",
+				"depth": "float - collision depth (default 0.5)",
+				"dest": "string - destination as 'x,y,z'",
+				"dest_map": "string - map name to load",
+				"dest_x": "float - destination X in current map",
+				"dest_y": "float - destination Y in current map",
+				"dest_z": "float - destination Z in current map",
+				"energy": "float - glow energy",
+				"footprint": [
+					2.0,
+					3.0,
+					1.0
+				],
+				"frame": "bool - show frame (default true)",
+				"height": "float - portal height (default 2.5)",
+				"label": "string - text shown above portal",
+				"map": "string - alias for dest_map",
+				"rot_x": "float - rotation X degrees",
+				"rot_y": "float - rotation Y degrees",
+				"rot_z": "float - rotation Z degrees",
+				"size_group": "standard",
+				"spawn": "string - named spawn point in destination",
+				"width": "float - portal width (default 1.5)"
+			},
+			"scene": "res://commons/scenes/mapobjects/configurable_portal.tscn",
+			"sequence": "noise",
+			"size_group": "standard",
+			"tags": [
+				"mapobjects"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.65,
+					2.61,
+					0.3
+				],
+				"aabb_center": [
+					0.0,
+					1.27,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 2.61,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"constructivist_relief": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"relief_type": 3.0
+			},
+			"description": "Dynamic diagonal composition inspired by Soviet Constructivism. Bold red and black bars creating visual tension.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "constructivist_relief",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Constructivist Relief Puzzle",
+			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+			"tags": [
+				"animation",
+				"puzzles",
+				"visualization"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.33,
+					0.5
+				],
+				"aabb_center": [
+					0.0,
+					0.53,
+					0.23
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"diagnostic_station_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"workstation_type": 3.0
+			},
+			"description": "Combine microscope and multimeter into a diagnostic workstation.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "diagnostic_station_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Diagnostic Station Assembly",
+			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					0.28,
+					0.82
+				],
+				"aabb_center": [
+					0.0,
+					0.61,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"equipment_assembly_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"description": "Level 2 compositional assembly. Combine assembled equipment (microscope, scales, etc.) into functional workstations.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "equipment_assembly_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Equipment Assembly Puzzle",
+			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					0.28,
+					0.82
+				],
+				"aabb_center": [
+					0.0,
+					0.61,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"lab_assembly_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"puzzle_type": 1.0
+			},
+			"description": "Half-Life inspired lab equipment assembly. Build health chargers, cameras, and specimen jars from basic shapes.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lab_assembly_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Lab Assembly Puzzle",
+			"scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"cylinder",
+						"prism"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.1,
+					0.32,
+					1.65
+				],
+				"aabb_center": [
+					0.1,
+					0.59,
+					-0.68
+				],
+				"grid_cells": [
+					3.0,
+					2.0
+				],
+				"max_dimension_m": 2.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"laser_exploding_sphere": {
+			"category": "interactive",
+			"complexity": "beginner",
+			"description": "Grabbable sphere that explodes into particles when hit by a laser pointer. 40 particle burst with procedural explosion sound. VR target practice.",
+			"dev_themes": [
+				"tools",
+				"primitives"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "laser_exploding_sphere",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Laser Exploding Sphere",
+			"scene": "res://commons/primitives/spheres/laser_exploding_sphere.tscn",
+			"sequence": "primitives",
+			"tags": [
+				"geometry",
+				"interactive",
+				"procedural",
+				"sound",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.2
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"measurement_station_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"workstation_type": 1.0
+			},
+			"description": "Combine multimeter and scales into a measurement workstation for precise readings.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "measurement_station_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Measurement Station Assembly",
+			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					0.28,
+					0.82
+				],
+				"aabb_center": [
+					0.0,
+					0.61,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"mondrian_relief": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"relief_type": 1.0
+			},
+			"description": "De Stijl relief composition inspired by Piet Mondrian. Grid-based arrangement with primary colors and black lines.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mondrian_relief",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Mondrian Relief Puzzle",
+			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+			"tags": [
+				"2d",
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.33,
+					0.5
+				],
+				"aabb_center": [
+					0.0,
+					0.53,
+					0.23
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"scalable_wood_cube": {
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Grabbable wood cube with two-handed scaling support. Scale snaps to discrete values (0.05x to 4.0x) per axis.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "scalable_wood_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Scalable Wood Cube",
+			"scene": "res://commons/primitives/cubes/grab_cube_scalable.tscn",
+			"tags": [
+				"primitives"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.1,
+					0.1,
+					0.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"scientific_assembly_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"puzzle_type": 2.0
+			},
+			"description": "Build real lab equipment from simple primitives. Assemble cubes and pyramids to produce a microscope, electronic scales, or multimeter.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "scientific_assembly_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Scientific Equipment Assembly",
+			"scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"cylinder",
+						"prism"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.1,
+					0.32,
+					1.65
+				],
+				"aabb_center": [
+					0.1,
+					0.59,
+					-0.68
+				],
+				"grid_cells": [
+					3.0,
+					2.0
+				],
+				"max_dimension_m": 2.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"score_display": {
+			"category": "tools",
+			"complexity": "beginner",
+			"description": "Visual counter display showing score. Can be incremented via signals or methods.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "score_display",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Score Display",
+			"scene": "res://commons/visualaid/score/score_display.tscn",
+			"tags": [
+				"tools",
+				"visualization"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					0.25,
+					0.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"shelf_assembly_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"furniture_type": 3.0
+			},
+			"description": "Assembly puzzle for a Judd-style shelf (2 vertical supports + 3 horizontal shelves).",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shelf_assembly_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Shelf Assembly Puzzle",
+			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.92,
+					0.55
+				],
+				"aabb_center": [
+					0.35,
+					0.41,
+					0.07
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"snappable_wood_cube": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Scalable wood cube with grid-based face snapping. Faces snap to 0.05m grid alignment when parallel and close.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "snappable_wood_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Snappable Wood Cube",
+			"scene": "res://commons/primitives/cubes/grab_cube_snappable.tscn",
+			"tags": [
+				"2d",
+				"primitives"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.1,
+					0.1,
+					0.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"stool_assembly_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"furniture_type": 1.0
+			},
+			"description": "Assembly puzzle for a simple stool (seat + 4 legs).",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "stool_assembly_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Stool Assembly Puzzle",
+			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.87,
+					0.55
+				],
+				"aabb_center": [
+					0.35,
+					0.44,
+					0.07
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"storage_station_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"workstation_type": 2.0
+			},
+			"description": "Arrange multiple specimen jars into an organized storage workstation.",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "storage_station_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Storage Station Assembly",
+			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					0.28,
+					0.82
+				],
+				"aabb_center": [
+					0.0,
+					0.61,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"table_assembly_puzzle": {
+			"category": "puzzles",
+			"complexity": "beginner",
+			"config": {
+				"furniture_type": 2.0
+			},
+			"description": "Assembly puzzle for a minimal table (top + 4 legs).",
+			"dev_themes": [
+				"decoration",
+				"environment"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "table_assembly_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Table Assembly Puzzle",
+			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"tags": [
+				"puzzles"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.85,
+					0.55
+				],
+				"aabb_center": [
+					0.35,
+					0.45,
+					0.07
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vr_component_demo": {
+			"category": "tools",
+			"complexity": "beginner",
+			"description": "Showcase panel of all interactable and display components. Sliders (vertical, horizontal, snap, bipolar, axis), dials, buttons, joystick, lever, wheel, XY pad, plus VR audio controls and waveform/spectrum/Lissajous displays. Press R to rebuild layout.",
+			"dev_themes": [
+				"tools",
+				"ui",
+				"audio"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vr_component_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"lab"
+			],
+			"name": "VR Component Demo",
+			"parameters": {
+				"footprint": [
+					2.0,
+					4.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/ui/demo/vr_component_demo.tscn",
+			"sequence": "lab",
+			"tags": [
+				"interactive",
+				"sound",
+				"tools",
+				"visualization",
+				"vr"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.36,
+					3.6,
+					0.24
+				],
+				"aabb_center": [
+					0.02,
+					-0.9,
+					0.09
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 3.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 10,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"world_map_tablet": {
+			"category": "navigation",
+			"complexity": "beginner",
+			"description": "Metro-style map showing your learning journey. 6 colored lines represent QFEP layers. Stations unlock as you complete sequences.",
+			"dev_themes": [
+				"decoration",
+				"education",
+				"environment",
+				"qfep"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "world_map_tablet",
+			"map_ready": true,
+			"map_sequences": [
+				"lab"
+			],
+			"name": "World Map Tablet",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/scenes/world_map/WorldMapOverview3D.tscn",
+			"sequence": "lab",
+			"tags": [
+				"navigation",
+				"qfep"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.52,
+					1.16,
+					0.03
+				],
+				"aabb_center": [
+					0.0,
+					-0.04,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.52,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.110524Z",
+				"derived_from": "aabb_size + category"
+			}
+		}
+	}
+}

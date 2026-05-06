@@ -1,3 +1,13 @@
+# @identity
+# essence: Conway's Game of Life on a 20x20 toroidal grid — birth/survival/death rules applied per generation. Cube scenes instantiated for live cells, shader-colored by age. Gliders, blinkers, and blocks seeded at init.
+# desire: To evolve autonomously — _process advances generations at generation_interval, applying the four Conway rules. Dying cells shrink, newborns glow, aged cells redden.
+# critical_parameter: generation_interval — seconds between state transitions; grid_size — dimensions of the toroidal world (20x20 = 400 cells)
+# triggers: _ready → initialize_grid + seed patterns + create_cell_visuals; generation_timer → update_generation → count_neighbors → apply rules → update_cell_visuals
+# emerges: Gliders traverse the grid, blinkers oscillate, blocks persist. From four rules on a flat grid: movement, oscillation, stability, and extinction — the full taxonomy of dynamical behavior.
+# needs: VR cell toggling [missing], pattern library selector [missing], generation speed slider [missing]
+# relationships: The 2D step between cellular_automata (1D scrolling) and cellular_automata_3d (volumetric). Shares the RecursiveEmergence sequence with lattice_gas_automata — same grid, different interpretation.
+# truth: Four rules. That is the entire program. Everything else — gliders, guns, Turing completeness — is consequence, not design.
+
 extends Node3D
 
 # Preload the cube scene
@@ -19,7 +29,7 @@ var oscillators: Array = []
 var still_lifes: Array = []
 var dying_cells: Array = []
 
-func _ready():
+func _ready() -> void:
 	# Initialize Cellular Automata visualization
 	print("Cellular Automata 2D Visualization initialized")
 	$PatternEvolution.queue_free()
@@ -27,7 +37,7 @@ func _ready():
 	$RuleEngine.queue_free()
 	initialize_grid()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_time += delta
 	
@@ -39,7 +49,7 @@ func _process(delta):
 	
 	animate_cells(delta)
 
-func animate_cells(delta):
+func animate_cells(delta) -> void:
 	# Animate dying cells
 	for dying_cell_data in dying_cells:
 		for cell_data in live_cells:
@@ -72,7 +82,7 @@ func animate_cells(delta):
 				var emission_intensity = 0.4 + (1.0 - age_factor) * 0.3
 				cube_mesh.material_override.set_shader_parameter("emission_strength", emission_intensity)
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Initialize cellular automata grid
 	cell_grid = []
 	next_grid = []
@@ -96,7 +106,7 @@ func initialize_grid():
 	
 	create_cell_visuals()
 
-func create_cell_visuals():
+func create_cell_visuals() -> void:
 	# Create visual representation of cells
 	for x in range(grid_size):
 		for z in range(grid_size):
@@ -124,7 +134,7 @@ func create_cell_visuals():
 				$CellGrid/LiveCells.add_child(cell)
 				live_cells.append({"cell": cell, "x": x, "z": z, "age": 0})
 
-func update_cell_visuals():
+func update_cell_visuals() -> void:
 	var new_live_cells = []
 	var cells_to_remove = []
 
@@ -163,7 +173,7 @@ func update_cell_visuals():
 
 	live_cells = new_live_cells
 
-func add_glider_pattern(start_x: int, start_y: int):
+func add_glider_pattern(start_x: int, start_y: int) -> void:
 	# Add Conway's Game of Life glider pattern
 	var glider_pattern = [
 		[false, true, false],
@@ -178,7 +188,7 @@ func add_glider_pattern(start_x: int, start_y: int):
 			if x >= 0 and x < grid_size and y >= 0 and y < grid_size:
 				cell_grid[x][y] = glider_pattern[i][j]
 
-func add_blinker_pattern(start_x: int, start_y: int):
+func add_blinker_pattern(start_x: int, start_y: int) -> void:
 	# Add oscillator pattern (blinker)
 	for i in range(3):
 		var x = start_x + i
@@ -186,7 +196,7 @@ func add_blinker_pattern(start_x: int, start_y: int):
 		if x >= 0 and x < grid_size and y >= 0 and y < grid_size:
 			cell_grid[x][y] = true
 
-func add_block_pattern(start_x: int, start_y: int):
+func add_block_pattern(start_x: int, start_y: int) -> void:
 	# Add still life pattern (block)
 	for i in range(2):
 		for j in range(2):
@@ -195,7 +205,7 @@ func add_block_pattern(start_x: int, start_y: int):
 			if x >= 0 and x < grid_size and y >= 0 and y < grid_size:
 				cell_grid[x][y] = true
 
-func update_generation():
+func update_generation() -> void:
 	# Apply Conway's Game of Life rules
 	var live_count = 0
 	dying_cells.clear()
@@ -270,7 +280,7 @@ func count_neighbors(x: int, y: int) -> int:
 
 
 
-func set_generation_interval(interval: float):
+func set_generation_interval(interval: float) -> void:
 	generation_interval = clamp(interval, 0.1, 2.0)
 
 func get_generation() -> int:
@@ -282,8 +292,11 @@ func get_density() -> float:
 func get_stability() -> float:
 	return stability
 
-func reset_automata():
+func reset_automata() -> void:
 	generation = 0
 	generation_time = 0.0
 	time = 0.0
 	initialize_grid()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

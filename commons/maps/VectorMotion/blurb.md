@@ -1,0 +1,1 @@
+Position changes by velocity. Velocity changes by acceleration. Each frame: add velocity to position, add acceleration to velocity. This is Euler integration — the heartbeat of physics simulation. Motion is nothing but vectors accumulating over time.

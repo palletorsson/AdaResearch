@@ -1,0 +1,70 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Grabbable",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 14,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.031,
+  "breath_zones": [
+    {
+      "size": 189,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 14
+      },
+      "centroid": [
+        6.523809523809524,
+        6.571428571428571
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "grabcolorcollection"
+    },
+    {
+      "x": 6,
+      "z": 1,
+      "token": "grabcolorcollection"
+    },
+    {
+      "x": 10,
+      "z": 1,
+      "token": "grabcolorcollection"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 7,
+      "token": "grabcolorcollection"
+    },
+    {
+      "x": 6,
+      "z": 7,
+      "token": "grabcolorcollection"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 195,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

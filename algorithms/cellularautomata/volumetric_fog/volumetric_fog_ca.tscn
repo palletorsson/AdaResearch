@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.gd" id="1_script"]
+
+[node name="VolumetricFogCA" type="Node3D"]
+script = ExtResource("1_script")
+grid_size = Vector3i(64, 64, 64)
+update_interval = 0.05

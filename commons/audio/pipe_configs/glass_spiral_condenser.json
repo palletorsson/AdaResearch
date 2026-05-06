@@ -1,0 +1,56 @@
+{
+  "rack_info": {
+    "name": "Spiral Condenser",
+    "description": "Standalone spiral condenser with inlet/outlet tubes",
+    "version": "1.0",
+    "system": "glass"
+  },
+  "layout": {
+    "segment_length": 0.12,
+    "tube_radius": 0.012
+  },
+  "segments": [
+    {
+      "id": "inlet",
+      "type": "straight",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "params": {
+        "length": 0.2
+      }
+    },
+    {
+      "id": "coil",
+      "type": "spiral",
+      "params": {
+        "height": 0.4,
+        "spiral_radius": 0.08,
+        "turns": 6
+      }
+    },
+    {
+      "id": "outlet",
+      "type": "straight",
+      "params": {
+        "length": 0.2
+      }
+    }
+  ],
+  "materials": {
+    "glass_color": [
+      0.85,
+      0.92,
+      1.0,
+      0.3
+    ],
+    "liquid_color": [
+      0.2,
+      0.8,
+      0.4,
+      0.6
+    ]
+  }
+}

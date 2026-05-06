@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxq"]
+[gd_scene load_steps=5 format=3 uid="uid://h8zpy9irmxdp3"]
+
+[ext_resource type="Script" uid="uid://cgvk4fixj1u8w" path="res://algorithms/physicssimulation/massspringdamper/MassSpringDamper.gd" id="1_erchh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxr"]
 albedo_color = Color(0.8, 0.4, 0.2, 1)
@@ -25,14 +27,7 @@ emission = Color(0.4, 0.1, 0.3, 0)
 emission_energy_multiplier = 0.3
 
 [node name="MassSpringDamper" type="Node3D"]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8.66025)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
-light_energy = 1.5
-shadow_enabled = true
+script = ExtResource("1_erchh")
 
 [node name="MassSpringSystem" type="Node3D" parent="."]
 

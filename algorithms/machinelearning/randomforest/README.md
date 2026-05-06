@@ -1,5 +1,12 @@
 # Random Forest Visualization
 
+
+## Folder Summary
+
+The `Random Forest Visualization` module provides a 3D sandbox for exploring the ideas behind the Random Forest Visualization workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `random_forest_visualization.tscn` and the controller script `random_forest_visualization.gd`.
+
 ## 🌲 Collective Intelligence & Democratic Decision Making
 
 A comprehensive implementation of Random Forest ensemble learning with 3D visualization of individual decision trees, bootstrap sampling, and democratic voting mechanisms. This algorithm explores collective decision-making processes through multiple decision trees working together.

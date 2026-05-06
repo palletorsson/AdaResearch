@@ -1,0 +1,7 @@
+Concept: The line as captured trace — relation, direction, and the possibility of measurement emerging from the act of connecting two positions. Two points become a line only when a rule names them as endpoints and a renderer draws the segment between them.
+Sequence role: Third map in Primitives, following Point_One (position) and Point_Lines (multiplicity). Formalises the link between discrete positions as directed geometry, and prepares Point_Triangle by introducing the binary relation that closure will later extend to three.
+Technical angle: Line rendering between two Vector3 endpoints, direction vectors computed as the difference of the endpoints, length as the magnitude of that vector, parametric interpolation along the segment. Trace capture converts the learner's temporal path into a persistent spatial form, so movement and geometry share one display.
+Critical angle: The line is not given but constructed — a negotiated distance between two commitments in space. Duration becomes geometry, history becomes measurement, relation becomes visible. The segment is an agreement between two points that the space between them matters and can be named, and that agreement is what the map makes available to the learner.
+Key artifacts: line_renderer draws between endpoints; trace_line captures movement as persistent form; distance_label makes measurement explicit; direction_arrow shows orientation so the segment reads as a vector rather than as a mark.
+
+Gap: No gap identified.

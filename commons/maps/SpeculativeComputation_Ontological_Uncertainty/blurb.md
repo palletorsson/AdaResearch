@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 arena at its center. Algorithms enter and reshape the terrain through dice rolls, coin flips, Gaussian curves. Random walks leave trails across the surface. Height maps rise and fall by stochastic decree. Cubes appear, disappear, rotate — selected by chance, placed by probability distributions. Profiles generate from noise. A sculpted form breathes in a loop.
+
+Nothing here is designed. Everything is authored. The parameters — sigma, variation, step count — constrain the randomness without eliminating it. A bell curve is not freedom; it is a specific shape of freedom. The walker does not choose where to go, but the walk still produces structure. Terrain, geometry, pattern — emerging from processes that cannot predict their own output.
+
+Determinism is a special case. Randomness is the general condition.

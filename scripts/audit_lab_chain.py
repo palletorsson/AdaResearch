@@ -1,0 +1,290 @@
+"""
+Audit Lab progression chain.
+For each consecutive pair, checks:
+1. Dimensions match
+2. Structure is superset (no cells removed)
+3. Teleporters are superset (no teleporters removed)
+4. Artifacts/utilities preserved
+
+Notes on map-specific utilities (not continuity issues):
+- sub: (subtitle/info tiles) are specific to each map and can move freely
+- m: (music volume markers) are specific to each map and can move freely
+These are tracked separately from real continuity losses.
+"""
+import json, os, sys
+
+LAB_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "commons", "maps", "Lab")
+
+# Progression order from curriculum_spine.json lab_evolution.actual_progression
+PROGRESSION = [
+    ("Initial",              "map_data.json"),
+    ("primitives",           "map_data_post_primitives.json"),
+    ("transformation",       "map_data_post_transformation.json"),
+    ("color",                "map_data_post_color.json"),
+    ("forces",               "map_data_post_forces.json"),
+    ("array_tutorial",       "map_data_post_array_tutorial.json"),
+    ("wavefunctions",        "map_data_post_wavefunctions.json"),
+    ("noise",                "map_data_post_noise.json"),
+    ("randomness",           "map_data_post_randomness.json"),
+    ("cellularautomata",     "map_data_post_cellularautomata.json"),
+    ("lsystems",             "map_data_post_lsystems.json"),
+    ("fractals",             "map_data_post_fractals.json"),
+    ("proceduralgeneration", "map_data_post_proceduralgeneration.json"),
+    ("softbodies",           "map_data_post_softbodies.json"),
+    ("swarmintelligence",    "map_data_post_swarmintelligence.json"),
+    ("machinelearning",      "map_data_post_machinelearning.json"),
+    ("graphtheory",          "map_data_post_graphtheory.json"),
+    ("foundationscrisis",    "map_data_post_foundationscrisis.json"),
+    ("qfeplaboratory",       "map_data_post_qfeplaboratory.json"),
+    ("postfoundationscrisis","map_data_post_foundationscrisis.json"),
+]
+
+# Known intentional destination removals in legacy Lab snapshots.
+# These are tracked as non-blocking removals, not continuity failures.
+ALLOWED_TELEPORTER_DEST_LOSS = {
+    ("Initial", "primitives"): {"randomness"},
+}
+
+def load_map(filename):
+    path = os.path.join(LAB_DIR, filename)
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        text = f.read()
+    # Strip trailing commas before ] or }
+    import re
+    text = re.sub(r',(\s*[}\]])', r'\1', text)
+    return json.loads(text)
+
+def parse_grid(layer_rows):
+    """Parse a layer into a dict of (row, col) -> cell_value, skipping empty cells."""
+    grid = {}
+    if not layer_rows:
+        return grid
+    for r, row in enumerate(layer_rows):
+        # Rows can be lists (already parsed) or strings (comma-separated)
+        if isinstance(row, str):
+            cells = row.split(",")
+        elif isinstance(row, list):
+            cells = row
+        else:
+            continue
+        for c, cell in enumerate(cells):
+            if isinstance(cell, str):
+                cell = cell.strip()
+            else:
+                cell = str(cell)
+            if cell and cell != "0" and cell != "":
+                grid[(r, c)] = cell
+    return grid
+
+def summarize_map(data):
+    dims = data.get("dimensions", {})
+    w, h = dims.get("width", 0), dims.get("height", 0)
+    layers = data.get("layers", {})
+
+    structure = parse_grid(layers.get("structure", []))
+    utilities = parse_grid(layers.get("utilities", []))
+    interactables = parse_grid(layers.get("interactables", []))
+    artifacts = parse_grid(layers.get("artifacts", []))
+
+    # Extract teleporter destinations from utilities and interactables.
+    def _tp_dest(cell):
+        if not isinstance(cell, str):
+            return ""
+        c = cell.strip()
+        if c.startswith("t:"):
+            rest = c[2:]
+        elif c.startswith("tp:"):
+            rest = c[3:]
+        else:
+            return ""
+        if not rest:
+            return ""
+        return rest.split(":", 1)[0].strip()
+
+    teleporter_destinations = set()
+    for _, v in utilities.items():
+        dest = _tp_dest(v)
+        if dest:
+            teleporter_destinations.add(dest)
+    for _, v in interactables.items():
+        dest = _tp_dest(v)
+        if dest:
+            teleporter_destinations.add(dest)
+
+    return {
+        "dims": (w, h),
+        "structure": structure,
+        "utilities": utilities,
+        "interactables": interactables,
+        "artifacts": artifacts,
+        "teleporters": teleporter_destinations,
+    }
+
+def compare_stages(name_a, summary_a, name_b, summary_b):
+    """Compare two stages. Destination continuity is release-critical."""
+    issues = []
+
+    # Dimension check
+    if summary_a["dims"] != summary_b["dims"]:
+        issues.append(f"  DIMS: {name_a} is {summary_a['dims']}, {name_b} is {summary_b['dims']}")
+
+    # For each layer, check removals/changes (non-blocking diagnostics).
+    # Note: sub: (subtitle/info tiles) and m: (music markers) are map-specific
+    # utilities that routinely move between stages — not continuity issues.
+    for layer_name in ["structure", "utilities", "artifacts"]:
+        a_grid = summary_a[layer_name]
+        b_grid = summary_b[layer_name]
+        lost = set(a_grid.keys()) - set(b_grid.keys())
+        changed = {k for k in set(a_grid.keys()) & set(b_grid.keys()) if a_grid[k] != b_grid[k]}
+
+        if layer_name == "utilities":
+            # Separate map-specific utilities (sub:, m:) from real losses
+            map_specific_lost = {k for k in lost if isinstance(a_grid[k], str) and (a_grid[k].startswith("sub:") or a_grid[k].startswith("m:"))}
+            real_lost = lost - map_specific_lost
+            if real_lost:
+                issues.append(f"  {layer_name.upper()} REMOVED ({len(real_lost)} cells): e.g. {list(real_lost)[:5]}")
+            if map_specific_lost:
+                issues.append(f"  {layer_name.upper()} MOVED (map-specific, {len(map_specific_lost)} sub:/m: cells)")
+        else:
+            if lost:
+                issues.append(f"  {layer_name.upper()} REMOVED ({len(lost)} cells): e.g. {list(lost)[:5]}")
+        if changed:
+            examples = [(k, a_grid[k], b_grid[k]) for k in list(changed)[:3]]
+            issues.append(f"  {layer_name.upper()} CHANGED ({len(changed)} cells): e.g. {examples}")
+
+    # Teleporter destinations are the progression contract.
+    # Teleporters should NOT move position between stages.
+    a_tp = summary_a["teleporters"]
+    b_tp = summary_b["teleporters"]
+    lost_tp = set(a_tp) - set(b_tp)
+    allowed_loss = ALLOWED_TELEPORTER_DEST_LOSS.get((name_a, name_b), set())
+    expected_lost = sorted(lost_tp & allowed_loss)
+    unexpected_lost = sorted(lost_tp - allowed_loss)
+    if expected_lost:
+        issues.append(f"  TELEPORTERS REMOVED_BY_DESIGN: {expected_lost}")
+    if unexpected_lost:
+        issues.append(f"  TELEPORTERS LOST: {unexpected_lost}")
+
+    # Check teleporter positions: same destination should be at same cell
+    a_util = summary_a["utilities"]
+    b_util = summary_b["utilities"]
+
+    def _tp_dest_from_val(v):
+        """Extract destination name from 't:forces:0:0:0.6' -> 'forces'."""
+        if not isinstance(v, str):
+            return ""
+        if v.startswith("t:"):
+            rest = v[2:]
+        elif v.startswith("tp:"):
+            rest = v[3:]
+        else:
+            return ""
+        return rest.split(":")[0] if rest else ""
+
+    a_tp_positions = {}  # dest -> pos
+    for pos, val in a_util.items():
+        dest = _tp_dest_from_val(val)
+        if dest:
+            a_tp_positions[dest] = pos
+
+    b_tp_positions = {}  # dest -> pos
+    for pos, val in b_util.items():
+        dest = _tp_dest_from_val(val)
+        if dest:
+            b_tp_positions[dest] = pos
+
+    moved_tps = []
+    for dest, a_pos in a_tp_positions.items():
+        if dest in b_tp_positions and b_tp_positions[dest] != a_pos:
+            moved_tps.append(f"{dest}: {a_pos} -> {b_tp_positions[dest]}")
+    if moved_tps:
+        issues.append(f"  TELEPORTERS MOVED ({len(moved_tps)}): {moved_tps[:5]}")
+
+    # Interactables (non-teleporter) diagnostics.
+    def _is_teleporter_value(v):
+        return isinstance(v, str) and (v.startswith("tp:") or v.startswith("t:"))
+
+    a_inter = {k: v for k, v in summary_a["interactables"].items() if not _is_teleporter_value(v)}
+    b_inter = {k: v for k, v in summary_b["interactables"].items() if not _is_teleporter_value(v)}
+    lost_inter = set(a_inter.keys()) - set(b_inter.keys())
+    if lost_inter:
+        lost_details = [(k, a_inter[k]) for k in list(lost_inter)[:5]]
+        issues.append(f"  INTERACTABLES REMOVED ({len(lost_inter)}): e.g. {lost_details}")
+
+    return issues
+
+def main():
+    print("=" * 70)
+    print("LAB PROGRESSION CHAIN AUDIT")
+    print("=" * 70)
+
+    summaries = []
+    for name, filename in PROGRESSION:
+        data = load_map(filename)
+        if data is None:
+            print(f"\n[WARN] {name}: {filename} NOT FOUND")
+            summaries.append((name, filename, None))
+            continue
+        s = summarize_map(data)
+        print(f"\n{'-'*50}")
+        print(f"Stage: {name} ({filename})")
+        print(f"  Dimensions: {s['dims'][0]}x{s['dims'][1]}")
+        print(f"  Structure cells: {len(s['structure'])}")
+        print(f"  Utilities: {len(s['utilities'])}")
+        print(f"  Artifacts: {len(s['artifacts'])}")
+        print(f"  Interactables: {len(s['interactables'])}")
+        print(f"  Teleporters: {len(s['teleporters'])}")
+        # List teleporter destinations
+        for dest in sorted(s["teleporters"]):
+            print(f"    tp->{dest}")
+        summaries.append((name, filename, s))
+
+    print(f"\n{'=' * 70}")
+    print("CONTINUITY CHECK (each stage vs previous)")
+    print("=" * 70)
+
+    total_issues = 0
+    for i in range(1, len(summaries)):
+        name_a, _, s_a = summaries[i-1]
+        name_b, _, s_b = summaries[i]
+        if s_a is None or s_b is None:
+            print(f"\n[WARN] Skipping {name_a} -> {name_b} (missing file)")
+            continue
+
+        issues = compare_stages(name_a, s_a, name_b, s_b)
+        if issues:
+            print(f"\n[FAIL] {name_a} -> {name_b}: {len(issues)} issues")
+            for iss in issues:
+                print(iss)
+            total_issues += len(issues)
+        else:
+            print(f"\n[OK] {name_a} -> {name_b}: OK (superset)")
+
+    print(f"\n{'=' * 70}")
+    print(f"TOTAL ISSUES: {total_issues}")
+
+    # Also check: what NEW content was added at each stage
+    print(f"\n{'=' * 70}")
+    print("NEW CONTENT PER STAGE")
+    print("=" * 70)
+    for i in range(1, len(summaries)):
+        name_a, _, s_a = summaries[i-1]
+        name_b, _, s_b = summaries[i]
+        if s_a is None or s_b is None:
+            continue
+
+        new_tp = set(s_b["teleporters"]) - set(s_a["teleporters"])
+        new_struct = len(s_b["structure"]) - len(s_a["structure"])
+        new_art = set(s_b["artifacts"].keys()) - set(s_a["artifacts"].keys())
+
+        print(f"\n{name_b}:")
+        print(f"  New structure cells: {new_struct}")
+        print(f"  New artifact positions: {len(new_art)}")
+        if new_tp:
+            for dest in sorted(new_tp):
+                print(f"  New teleporter destination: {dest}")
+
+if __name__ == "__main__":
+    main()

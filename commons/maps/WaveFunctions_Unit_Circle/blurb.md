@@ -1,0 +1,3 @@
+Rotation becomes oscillation. A point traveling in a circle traces a sine wave when watched from the side. The unit circle is where trigonometry begins — where angle becomes number, where spinning becomes swinging.
+
+The `unit_circle_advanced` animates the projection: a dot sweeps the circumference, its shadow falls onto an axis, the shadow is the sine. The `OscillationCurve` draws the resulting wave to the side so you can see source and output in the same frame. Stand on the `SimpleOscillatingBridge` and feel it — the ground moves under you the way the shadow moves on the wall. Rotation and oscillation are the same phenomenon observed in different numbers of dimensions. Every wave in the rest of the sequence reduces to a circle you cannot yet see.

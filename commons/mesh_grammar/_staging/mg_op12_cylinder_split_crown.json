@@ -1,0 +1,31 @@
+{
+  "id": "mg_op12_cylinder_split_crown",
+  "notes": "UNDERUSED-OPS PASS: crystal seed split across all faces, then the split centers are extruded outward. Uses split as a real faceting operator rather than a barely-visible cap tweak.",
+  "seed": "crystal",
+  "generations": 2,
+  "rules": [
+    {
+      "op": "split",
+      "selector": "all",
+      "params": {
+        "pattern": "midpoint"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:split_center",
+      "params": {
+        "distance": 0.09,
+        "scale": 0.65,
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:split_corner",
+      "params": {
+        "scale": 1.08
+      }
+    }
+  ]
+}

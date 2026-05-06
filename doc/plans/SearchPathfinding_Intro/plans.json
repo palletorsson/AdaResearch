@@ -1,0 +1,38 @@
+{
+  "name": "SearchPathfinding_Intro",
+  "title": "Search and Pathfinding",
+  "description": "Explore search algorithms: BFS, DFS maze generation, and Dijkstra's shortest path in interactive grid substrates.",
+  "dimensions": {
+    "rows": 5,
+    "cols": 5
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    4,
+    4
+  ],
+  "artifacts": [
+    {
+      "name": "grid2d_bfs",
+      "row": 1,
+      "col": 1,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "grid2d_dfs_maze",
+      "row": 1,
+      "col": 3,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "grid3d_dijkstra",
+      "row": 3,
+      "col": 2,
+      "family": "grid3d"
+    }
+  ]
+}

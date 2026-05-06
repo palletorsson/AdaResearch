@@ -1,0 +1,23 @@
+{
+  "id": "rd01_spots_heightmap",
+  "preset": "spots",
+  "grid_size": 96,
+  "iterations": 3000,
+  "seed": 7,
+  "render_mode": "heightmap",
+  "height_amp": 0.9,
+  "color_lo": [
+    0.2,
+    0.15,
+    0.25
+  ],
+  "color_hi": [
+    0.95,
+    0.75,
+    0.3
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.5,
+  "layout": "rd_field",
+  "notes": "Classic Gray-Scott spots pattern (F=0.037, K=0.06). Heightmap render \u00e2\u20ac\u201d V concentration lifts to form dome-islands. Reads as an atoll field."
+}

@@ -1,0 +1,105 @@
+{
+    "name": "Autechre Flutter",
+    "description": "Autechre-inspired non-repetitive algorithmic rhythms. Glitch textures, micro-variations, generative patterns that never exactly repeat.",
+    "style_notes": {
+        "influences": ["Autechre", "Anti EP", "Confield", "Chiastic Slide"],
+        "era": "1994-present",
+        "techniques": [
+            "Non-repetitive rhythm generation",
+            "Granular micro-variations",
+            "Probability-based hit patterns",
+            "Glitch artifacts as musical elements",
+            "Evolving filter sweeps"
+        ],
+        "philosophy": "No two bars contain identical beats - each moment unique"
+    },
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.FLUTTER_RHYTHM",
+            "volume_db": -6.0,
+            "bus": "Rhythm"
+        },
+        {
+            "sound_id": "AudioSynthesizer.GRANULAR_TEXTURE",
+            "volume_db": -12.0,
+            "bus": "Texture"
+        }
+    ],
+    "placeholder_layer": {
+        "sound_id": "AudioSynthesizer.GLITCH_DRONE",
+        "volume_db": -14.0,
+        "bus": "Texture",
+        "fade_out_when_ready": true,
+        "fade_duration": 2.0
+    },
+    "random_events": [
+        {
+            "sound_id": "AudioSynthesizer.BUFFER_STUTTER",
+            "interval_range": [3.0, 10.0],
+            "volume_db": -10.0,
+            "bus": "FX"
+        },
+        {
+            "sound_id": "AudioSynthesizer.BITCRUSH_SWEEP",
+            "interval_range": [8.0, 25.0],
+            "volume_db": -12.0,
+            "bus": "FX"
+        }
+    ],
+    "buses": {
+        "Rhythm": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "drive": 0.15,
+                    "mode": "soft_clip"
+                },
+                {
+                    "type": "Compressor",
+                    "threshold_db": -12.0,
+                    "ratio": 4.0
+                }
+            ]
+        },
+        "Texture": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.25
+                },
+                {
+                    "type": "Phaser",
+                    "rate_hz": 0.1,
+                    "depth": 0.5
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 187,
+                    "feedback": 0.5,
+                    "wet": 0.4
+                }
+            ]
+        }
+    },
+    "generation": {
+        "async": true,
+        "persist_across_maps": false
+    },
+    "synthesis_parameters": {
+        "tempo_bpm": 135,
+        "variation_probability": 0.3,
+        "pattern_length": 16,
+        "guaranteed_difference_per_bar": true,
+        "hit_probability_base": 0.4,
+        "subdivision_depth": 4,
+        "granular_grain_size_ms": 50,
+        "granular_density": 8,
+        "filter_modulation_rate": 0.07,
+        "bitcrush_range": [4, 12]
+    }
+}

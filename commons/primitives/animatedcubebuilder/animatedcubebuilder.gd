@@ -1,6 +1,16 @@
-# VRAnimatedCubeBuilder.gd - Clean VR cube construction animation
+﻿# VRAnimatedCubeBuilder.gd - Clean VR cube construction animation
 # No UI - just the educational animation for VR environments
 extends Node3D
+
+# @identity
+# essence: cube = 8 vertices + 12 edges + 6 faces — build it layer by layer from its components
+# desire: learner watches a cube assemble itself and understands it as an accumulation of primitives
+# critical_parameter: the animation sequence — vertices appear first, then edges, then faces, in order
+# triggers: automatically starts on ready; after full build, vertex drag handles activate for deformation
+# emerges: the pedagogical insight that a solid is constructed from lower-dimensional elements: 0D → 1D → 2D → 3D
+# needs: [has grabbable vertex handles after animation completes [has], missing play/pause/reset button]
+# relationships: depends on triangle (faces) and line (edges) concepts; precursor to animating fractals
+# truth: dimension accumulates — points make edges, edges make faces, faces make solids
 
 const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.tscn")
 
@@ -76,7 +86,7 @@ var initial_delay = 0.5  # Shorter delay before starting animation
 # Colors optimized for VR - Marble green balls, transparent triangles, black edges
 var vertex_color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 var vertex_color_alt = Color(0.2, 0.8, 0.3, 0.7)  # Same marble green for all
-var edge_color = Color(0.1, 0.1, 0.1)    # Black edges
+var edge_color = Color(1.0, 1.0, 1.0)    # White edges
 var triangle_color = Color(0.8, 0.2, 0.4, 0.6)  # Transparent dark pink
 var triangle_color_alt1 = Color(0.8, 0.1, 0.1, 0.6)  # Transparent red
 var triangle_color_alt2 = Color(0.1, 0.1, 0.1, 0.6)  # Transparent black
@@ -171,12 +181,13 @@ func create_line_mesh(start: Vector3, end: Vector3) -> MeshInstance3D:
 	
 	mesh_instance.transform = transform
 	
-	# Create black material for edges
+	# Create matte white material for edges
 	var material = StandardMaterial3D.new()
 	material.albedo_color = edge_color
 	material.emission_enabled = false
-	material.roughness = 0.3
+	material.roughness = 1.0
 	material.metallic = 0.0
+	material.metallic_specular = 0.0
 	mesh_instance.material_override = material
 	
 	return mesh_instance
@@ -225,6 +236,10 @@ func create_triangle_meshes():
 		material.albedo_color = color
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		material.emission_enabled = false
+		material.roughness = 1.0
+		material.metallic = 0.0
+		material.metallic_specular = 0.0
+		material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 		material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides in VR
 		mesh_instance.material_override = material
 		
@@ -301,7 +316,7 @@ func _process(delta):
 			# Keep what we built without animation
 			pass
 
-func animate_vertices(delta):
+func animate_vertices(_delta):
 	# Show vertices one by one with blinking effect
 	if current_step_time >= step_duration and animation_step < vertices.size():
 		vertex_spheres[animation_step].visible = true
@@ -317,7 +332,7 @@ func animate_vertices(delta):
 	
 	# Note: Blinking animation removed since grab spheres handle their own appearance
 
-func animate_edges(delta):
+func animate_edges(_delta):
 	# Show edges progressively
 	var edge_step_duration = step_duration * 0.4
 	
@@ -332,7 +347,7 @@ func animate_edges(delta):
 			current_step_time = 0.0
 			animation_step_completed.emit("edges_complete")
 
-func animate_triangles(delta):
+func animate_triangles(_delta):
 	# Show triangles progressively
 	var triangle_step_duration = step_duration * 0.3
 	
@@ -346,7 +361,7 @@ func animate_triangles(delta):
 			current_step_time = 0.0
 			animation_step_completed.emit("triangles_complete")
 
-func animate_final_mesh(delta):
+func animate_final_mesh(_delta):
 	# Wait a moment, then transition to final mesh
 	if current_step_time >= step_duration:
 		# Hide all individual components

@@ -1,0 +1,1 @@
+Grammar is not only text. In voxel space, every cube is a symbol waiting for a rule. Neighborhood by neighborhood, discrete decisions assemble cities, trees, and caverns from the same logic: rewrite, iterate, emerge.

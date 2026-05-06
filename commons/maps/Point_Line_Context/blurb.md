@@ -1,0 +1,5 @@
+One line is a direction. Two lines are a relationship. Parallel lines agree — same slope, infinite separation, a pact never to meet. Crossed lines collide — intersection produces a point that belongs to both, owned by neither. The plus sign centers itself, divides space into quadrants. The coordinate cross names every position with two numbers. A grid emerges: rows and columns, X and Y, address and territory.
+
+Walk among them. Grab the lines, drag the Modulor Man apart, watch the dark sphere pulse at the origin. The 2D array is not abstraction — it is architecture. Every spreadsheet, every pixel grid, every chessboard is this same structure: discrete cells tiling a plane.
+
+Lines alone wander. Lines in context produce measurement. The moment two axes cross, space stops being felt and starts being counted.

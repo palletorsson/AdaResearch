@@ -1,0 +1,39 @@
+{
+  "id": "map-editor-plugin",
+  "title": "Build 2D Top-Down Map Editor (@tool EditorPlugin)",
+  "description": "A Godot @tool EditorPlugin for editing map_data.json visually — top-down 2D grid, paint structure heights, stamp utilities, place artifacts, live pathfinder validation.",
+  "triggers": ["map editor", "edit map_data", "level editor", "grid editor plugin", "paint map"],
+  "granularity": "macro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "User tried web editor, voxel editor, raw JSON — none had tight enough loop. @tool plugin is the tightest: edit in same tool where you test.",
+  "confidence": "scaffolded",
+  "summary": "Godot @tool EditorPlugin: 2D top-down grid, 3 layer toggle, paint heights, stamp utilities, place artifacts, live pathfinder. Reads/writes map_data.json directly.",
+  "links_to": ["pathfinder-validation", "map-editing-pipeline", "artifact-creation"],
+  "nodes": [
+    {"id": "start", "type": "start", "label": "Design the plugin"},
+    {"id": "plugin_structure", "type": "action", "label": "Create plugin.cfg + main EditorPlugin script", "detail": "addons/map_editor/plugin.cfg + map_editor_plugin.gd. Register a bottom panel or dock."},
+    {"id": "grid_view", "type": "action", "label": "Build 2D grid renderer", "detail": "Draw grid cells colored by height (0=black void, 1-5=gray floor shades, 6=red wall). Click to paint. Scroll to zoom."},
+    {"id": "layer_toggle", "type": "action", "label": "Layer toggle: structure / utilities / interactables", "detail": "Tabs or buttons. Show active layer opaque, dim others. Each layer paints different data."},
+    {"id": "structure_paint", "type": "action", "label": "Structure painting", "detail": "Select height 0-6, click/drag to paint cells. Palette bar showing heights with colors."},
+    {"id": "utility_stamps", "type": "action", "label": "Utility stamps", "detail": "Toolbar with sp/t/r/tc/m/ds icons. Click cell to stamp. Shows icon on grid."},
+    {"id": "artifact_place", "type": "action", "label": "Artifact placement", "detail": "Search box with registry lookup. Click cell to place. Shows name on grid. Set rotation/y_offset."},
+    {"id": "pathfinder", "type": "action", "label": "Live pathfinder validation", "detail": "Run map_pathfinder rules on every edit. Flash unreachable cells red. Show spawn→teleporter path."},
+    {"id": "save_load", "type": "action", "label": "Save/load map_data.json", "detail": "Read on open, write on save. Preserve map_info, settings, lighting — only edit layers."},
+    {"id": "test", "type": "action", "label": "Test: edit → F5 → walk the map", "detail": "The tightest loop: paint in editor, press play, walk through it in VR/desktop."},
+    {"id": "done", "type": "end", "label": "Plugin working"}
+  ],
+  "edges": [
+    {"from": "start", "to": "plugin_structure"},
+    {"from": "plugin_structure", "to": "grid_view"},
+    {"from": "grid_view", "to": "layer_toggle"},
+    {"from": "layer_toggle", "to": "structure_paint"},
+    {"from": "structure_paint", "to": "utility_stamps"},
+    {"from": "utility_stamps", "to": "artifact_place"},
+    {"from": "artifact_place", "to": "pathfinder"},
+    {"from": "pathfinder", "to": "save_load"},
+    {"from": "save_load", "to": "test"},
+    {"from": "test", "to": "done"}
+  ]
+}

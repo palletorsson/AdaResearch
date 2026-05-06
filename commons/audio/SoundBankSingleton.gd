@@ -9,6 +9,7 @@ signal sound_bank_ready
 signal preset_loaded(preset_name: String)
 signal sound_generated(sound_id: String)
 signal generation_progress(current: int, total: int, sound_name: String)
+signal request_ambient_change(preset_name: String) # Global request to change ambient
 
 # Sound registry - stores all generated AudioStreamWAV sounds
 var sound_registry: Dictionary = {}
@@ -23,11 +24,21 @@ var generation_thread: Thread = null
 var generation_mutex: Mutex = null
 
 # Paths
-const PRESETS_PATH = "res://commons/audio/ambient_presets.json"
+const PRESETS_DIR = "res://commons/audio/presets/"
+const MANIFEST_PATH = "res://commons/audio/presets_manifest.json"
 
 # Audio bus management
 var audio_buses_initialized: bool = false
 var active_buses: Dictionary = {}
+
+# Map transition state
+var _is_transitioning: bool = false
+var _music_players: Array = []
+var _currently_paused_players: Array = []
+
+# Current ambient tracking (survives scene changes)
+var current_ambient_preset: String = ""
+var current_ambient_controller: Node = null  # Weak reference via instance_id
 
 func _ready():
 	print("🎵 SoundBankSingleton initializing...")
@@ -39,9 +50,106 @@ func _ready():
 
 	# Pre-generate common sounds (lazy loading by default)
 	# Specific sounds are generated on-demand
+	
+	# Connect to scene manager signals for pause during transitions
+	call_deferred("_connect_scene_manager_signals")
 
 	print("✅ SoundBankSingleton ready")
 	sound_bank_ready.emit()
+
+func _connect_scene_manager_signals():
+	# Try to find SceneManager and connect to transition signals
+	var scene_manager = get_node_or_null("/root/SceneManager")
+	if scene_manager:
+		if scene_manager.has_signal("scene_transition_started"):
+			if not scene_manager.scene_transition_started.is_connected(_on_scene_transition_started):
+				scene_manager.scene_transition_started.connect(_on_scene_transition_started)
+				print("SoundBank: Connected to scene_transition_started")
+		if scene_manager.has_signal("scene_transition_completed"):
+			if not scene_manager.scene_transition_completed.is_connected(_on_scene_transition_completed):
+				scene_manager.scene_transition_completed.connect(_on_scene_transition_completed)
+				print("SoundBank: Connected to scene_transition_completed")
+	else:
+		print("SoundBank: SceneManager not found, will retry...")
+		# Retry after a short delay
+		await get_tree().create_timer(1.0).timeout
+		_connect_scene_manager_signals()
+
+func _on_scene_transition_started(_from_scene: String, _to_scene: String, _transition_type):
+	"""Track transition state and pause registered music players."""
+	if _is_transitioning:
+		return
+	_is_transitioning = true
+	pause_all_music()
+	if _currently_paused_players.size() > 0:
+		print("SoundBank: ⏸️ Paused %d music player(s) for transition" % _currently_paused_players.size())
+
+func _on_scene_transition_completed(_scene_name: String, _user_data: Dictionary):
+	"""Track transition state and resume previously paused music players."""
+	if not _is_transitioning:
+		return
+	_is_transitioning = false
+	resume_all_music()
+
+func pause_all_music():
+	"""Pause registered music players that are actively playing."""
+	_prune_music_players()
+	_currently_paused_players.clear()
+	for player in _music_players:
+		if is_instance_valid(player) and player.playing and not player.stream_paused:
+			player.stream_paused = true
+			_currently_paused_players.append(player)
+
+func resume_all_music():
+	"""Resume only players paused by pause_all_music()."""
+	for player in _currently_paused_players:
+		if is_instance_valid(player):
+			player.stream_paused = false
+	_currently_paused_players.clear()
+	_prune_music_players()
+
+func register_music_player(player: Node):
+	"""Register a player for transition pause/resume tracking."""
+	if player == null:
+		return
+	if player not in _music_players:
+		_music_players.append(player)
+
+func unregister_music_player(player: Node):
+	"""Unregister a player from transition pause/resume tracking."""
+	_music_players.erase(player)
+	_currently_paused_players.erase(player)
+
+func _prune_music_players():
+	"""Remove invalid player references from tracking arrays."""
+	var valid_music_players: Array = []
+	for player in _music_players:
+		if is_instance_valid(player):
+			valid_music_players.append(player)
+	_music_players = valid_music_players
+	
+	var valid_paused_players: Array = []
+	for player in _currently_paused_players:
+		if is_instance_valid(player):
+			valid_paused_players.append(player)
+	_currently_paused_players = valid_paused_players
+
+func set_current_ambient(preset_name: String, controller: Node = null):
+	"""Track the currently playing ambient preset"""
+	current_ambient_preset = preset_name
+	current_ambient_controller = controller
+
+func get_current_ambient() -> String:
+	"""Get the currently playing ambient preset name"""
+	return current_ambient_preset
+
+func is_ambient_playing(preset_name: String) -> bool:
+	"""Check if a specific ambient preset is currently playing/paused"""
+	return current_ambient_preset == preset_name
+
+func should_skip_generation(preset_name: String) -> bool:
+	"""Check if we should skip generation (already playing this preset)"""
+	return preset_name == current_ambient_preset
 
 func _exit_tree():
 	# Clean up thread if running
@@ -51,27 +159,56 @@ func _exit_tree():
 # ===== PRESET LOADING =====
 
 func _load_ambient_presets():
-	"""Load ambient preset definitions from JSON"""
-	var file = FileAccess.open(PRESETS_PATH, FileAccess.READ)
-	if not file:
-		print("⚠️ Could not load ambient presets from: ", PRESETS_PATH)
+	"""Load ambient preset definitions from individual JSON files via manifest"""
+	ambient_presets.clear()
+	
+	# 1. Load Manifest
+	var manifest_file = FileAccess.open(MANIFEST_PATH, FileAccess.READ)
+	if not manifest_file:
+		print("⚠️ Could not load presets manifest from: ", MANIFEST_PATH)
 		return
-
-	var json_text = file.get_as_text()
-	file.close()
 
 	var json = JSON.new()
-	var parse_result = json.parse(json_text)
+	var parse_result = json.parse(manifest_file.get_as_text())
+	manifest_file.close()
+
 	if parse_result != OK:
-		print("⚠️ JSON parse error in ambient presets")
+		print("⚠️ JSON parse error in presets manifest")
 		return
 
-	var data = json.data
-	if "presets" in data:
-		ambient_presets = data["presets"]
-		print("✅ Loaded %d ambient presets" % ambient_presets.size())
-	else:
-		print("⚠️ No 'presets' key found in ambient presets JSON")
+	var manifest_data = json.data
+	if not "presets" in manifest_data:
+		print("⚠️ No 'presets' key found in manifest")
+		return
+		
+	var preset_list = manifest_data["presets"]
+	print("📂 Found %d presets in manifest. Loading..." % preset_list.size())
+	
+	# 2. Load Each Preset File
+	for preset_id in preset_list:
+		_load_single_preset(preset_id)
+		
+	print("✅ Successfully loaded %d ambient presets" % ambient_presets.size())
+
+func _load_single_preset(preset_id: String):
+	"""Load a single preset file"""
+	var path = PRESETS_DIR + preset_id + ".json"
+	var file = FileAccess.open(path, FileAccess.READ)
+	
+	if not file:
+		print("⚠️ Could not load preset file: ", path)
+		return
+		
+	var json = JSON.new()
+	var error = json.parse(file.get_as_text())
+	file.close()
+	
+	if error != OK:
+		print("⚠️ JSON parse error in preset: ", preset_id)
+		return
+		
+	# Store the preset data directly under its ID
+	ambient_presets[preset_id] = json.data
 
 func get_preset(preset_name: String) -> Dictionary:
 	"""Get an ambient preset by name"""
@@ -81,52 +218,129 @@ func get_preset(preset_name: String) -> Dictionary:
 		print("⚠️ Preset not found: ", preset_name, " - using 'silent' preset")
 		return ambient_presets.get("silent", {})
 
+func trigger_ambient_change(preset_name: String):
+	"""Trigger a global change of ambient preset"""
+	print("🔊 SoundBank: Requesting global ambient change to: ", preset_name)
+	request_ambient_change.emit(preset_name)
+
 # ===== SOUND GENERATION =====
 
-func get_sound(sound_id: String) -> AudioStreamWAV:
+func get_sound(sound_id: String) -> AudioStream:
 	"""Get a sound from the registry, generating it if needed"""
 
 	# Check if already cached
 	if sound_id in sound_registry:
 		return sound_registry[sound_id]
 
-	# Generate the sound
+# Generate the sound
 	var sound = _generate_sound(sound_id)
 	if sound:
 		sound_registry[sound_id] = sound
 		sound_generated.emit(sound_id)
 		return sound
 	else:
+		# Check if it supports async generation (interactive songs - these take 10+ seconds)
+		var async_song_types = ["POP_INTERACTIVE_SONG", "AMBIENT_WORKS_SONG", "PROG_SYNTH_SONG",
+							   "MORODER_DISCO_SONG", "DETROIT_TECHNO_SONG", "SYNTHWAVE_SONG", "RAVE_SONG"]
+		for song_type in async_song_types:
+			if sound_id.contains(song_type):
+				print("SoundBank: Triggering async generation for ", sound_id)
+				_request_async_generation(sound_id)
+				return null  # Caller must listen to sound_generated signal
+			
 		print("⚠️ Failed to generate sound: ", sound_id)
 		return null
 
-func _generate_sound(sound_id: String) -> AudioStreamWAV:
+func _request_async_generation(sound_id: String):
+	# Store the sound_id for callback
+	_pending_async_id = sound_id
+	
+	# Route to appropriate async generator based on song type
+	if sound_id.contains("POP_INTERACTIVE_SONG"):
+		AudioSynthesizer.generate_pop_song_async({}, self, "_on_async_sound_ready")
+	elif sound_id.contains("AMBIENT_WORKS_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "AMBIENT"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("PROG_SYNTH_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "PROG_SYNTH"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("MORODER_DISCO_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "MORODER_DISCO"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("DETROIT_TECHNO_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "DETROIT_TECHNO"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("SYNTHWAVE_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "SYNTHWAVE"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("RAVE_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "RAVE"}, self, "_on_async_sound_ready")
+	else:
+		print("SoundBank: ⚠️ Unknown async song type in: ", sound_id)
+
+var _pending_async_id: String = ""
+
+func _on_async_sound_ready(stream: AudioStream):
+	# Use tracked pending ID
+	var sound_id = _pending_async_id if not _pending_async_id.is_empty() else "AudioSynthesizer.POP_INTERACTIVE_SONG"
+	
+	if stream:
+		sound_registry[sound_id] = stream
+		print("SoundBank: Async sound ready: ", sound_id)
+		sound_generated.emit(sound_id)
+	else:
+		print("SoundBank: Async generation failed for: ", sound_id)
+	
+	_pending_async_id = ""
+
+func _generate_sound(sound_id: String) -> AudioStream:
 	"""Generate a sound based on its ID"""
 
-	# Parse the sound ID (format: "generator.sound_name" or "SoundClass.METHOD")
-	var parts = sound_id.split(".")
+	# Parse the sound ID (format: "generator.sound_name" or "generator:sound_name")
+	var separator = "."
+	if sound_id.contains(":"):
+		separator = ":"
+	
+	var parts = sound_id.split(separator)
 	if parts.size() != 2:
-		print("⚠️ Invalid sound_id format: ", sound_id)
+		print("⚠️ Invalid sound_id format (needs generator.sound or generator:sound): ", sound_id)
 		return null
 
 	var generator = parts[0]
 	var sound_name = parts[1]
 
-	# Route to appropriate generator
-	match generator:
-		"SyntheticSoundGenerator":
+	# Route to appropriate generator (case-insensitive for convenience)
+	match generator.to_lower():
+		"syntheticsoundgenerator":
 			return _generate_synthetic_sound(sound_name)
-		"AudioSynthesizer":
+		"audiosynthesizer":
 			return _generate_synthesizer_sound(sound_name)
 		"techno_noir":
 			return _generate_techno_noir_sound(sound_name)
+		"trap_beats":
+			return _generate_trap_beats_sound(sound_name)
 		"liturgical":
 			return _generate_liturgical_sound(sound_name)
-		"DarkGameTrack":
+		"darkgametrack":
 			return _generate_dark_game_track_sound(sound_name)
+		"cinematic":
+			return _generate_cinematic_sound(sound_name)
+		"epic":
+			return _generate_epic_sound(sound_name)
+		"fourier_space":
+			return _generate_fourier_space_sound(sound_name)
+		"sci_fi":
+			return _generate_sci_fi_dystopia_sound(sound_name)
+		"cyber_jazz":
+			return _generate_cyber_jazz_sound(sound_name)
+		"house_drums", "909":
+			return _generate_house_drums_sound(sound_name)
 		_:
-			print("⚠️ Unknown generator: ", generator)
-			return null
+			# Fallback for original casing if needed
+			match generator:
+				"SyntheticSoundGenerator": return _generate_synthetic_sound(sound_name)
+				"AudioSynthesizer": return _generate_synthesizer_sound(sound_name)
+				"DarkGameTrack": return _generate_dark_game_track_sound(sound_name)
+				"Cinematic": return _generate_cinematic_sound(sound_name)
+				"Epic": return _generate_epic_sound(sound_name)
+				_:
+					print("⚠️ Unknown generator: ", generator)
+					return null
 
 # ===== GENERATOR WRAPPERS =====
 
@@ -156,6 +370,14 @@ func _generate_synthetic_sound(sound_name: String, params: Dictionary = {}) -> A
 
 func _generate_synthesizer_sound(sound_name: String) -> AudioStreamWAV:
 	"""Generate sound from AudioSynthesizer"""
+	
+	# IMPORTANT: Interactive songs must use async generation - return null to trigger async path
+	# These take 10+ seconds to generate synchronously!
+	if sound_name in ["POP_INTERACTIVE_SONG", "AMBIENT_WORKS_SONG", "PROG_SYNTH_SONG", 
+					  "MORODER_DISCO_SONG", "DETROIT_TECHNO_SONG", "SYNTHWAVE_SONG", "RAVE_SONG"]:
+		print("SoundBank: Interactive song '%s' requires async generation" % sound_name)
+		return null  # Triggers async path in get_sound()
+	
 	var AudioSynth = preload("res://commons/audio/generators/AudioSynthesizer.gd")
 
 	# Convert string name to enum
@@ -169,73 +391,158 @@ func _generate_synthesizer_sound(sound_name: String) -> AudioStreamWAV:
 
 func _string_to_sound_type(sound_name: String):
 	"""Convert sound name string to AudioSynthesizer.SoundType enum"""
-	var AudioSynth = preload("res://commons/audio/generators/AudioSynthesizer.gd")
+	# Dynamic lookup in the Enum (which acts as a dictionary)
+	if sound_name in AudioSynthesizer.SoundType:
+		return AudioSynthesizer.SoundType[sound_name]
 
+	# Handle aliases (backward compatibility)
 	match sound_name:
-		"BASIC_SINE_WAVE": return AudioSynth.SoundType.BASIC_SINE_WAVE
-		"PICKUP_MARIO": return AudioSynth.SoundType.PICKUP_MARIO
-		"TELEPORT_DRONE": return AudioSynth.SoundType.TELEPORT_DRONE
-		"LIFT_BASS_PULSE": return AudioSynth.SoundType.LIFT_BASS_PULSE
-		"GHOST_DRONE": return AudioSynth.SoundType.GHOST_DRONE
-		"MELODIC_DRONE": return AudioSynth.SoundType.MELODIC_DRONE
-		"LASER_SHOT": return AudioSynth.SoundType.LASER_SHOT
-		"POWER_UP_JINGLE": return AudioSynth.SoundType.POWER_UP_JINGLE
-		"EXPLOSION": return AudioSynth.SoundType.EXPLOSION
-		"RETRO_JUMP": return AudioSynth.SoundType.RETRO_JUMP
-		"SHIELD_HIT": return AudioSynth.SoundType.SHIELD_HIT
-		"AMBIENT_WIND": return AudioSynth.SoundType.AMBIENT_WIND
-		"DARK_808_KICK": return AudioSynth.SoundType.DARK_808_KICK
-		"ACID_606_HIHAT": return AudioSynth.SoundType.ACID_606_HIHAT
-		"DARK_808_SUB_BASS": return AudioSynth.SoundType.DARK_808_SUB_BASS
-		"AMBIENT_AMIGA_DRONE": return AudioSynth.SoundType.AMBIENT_AMIGA_DRONE
-		"MOOG_BASS_LEAD": return AudioSynth.SoundType.MOOG_BASS_LEAD
-		"TB303_ACID_BASS": return AudioSynth.SoundType.TB303_ACID_BASS
-		"DX7_ELECTRIC_PIANO": return AudioSynth.SoundType.DX7_ELECTRIC_PIANO
-		"C64_SID_LEAD": return AudioSynth.SoundType.C64_SID_LEAD
-		"AMIGA_MOD_SAMPLE": return AudioSynth.SoundType.AMIGA_MOD_SAMPLE
-		"PPG_WAVE_PAD": return AudioSynth.SoundType.PPG_WAVE_PAD
-		"TR909_KICK": return AudioSynth.SoundType.TR909_KICK
-		"JUPITER_8_STRINGS": return AudioSynth.SoundType.JUPITER_8_STRINGS
-		"KORG_M1_PIANO": return AudioSynth.SoundType.KORG_M1_PIANO
-		"ARP_2600_LEAD": return AudioSynth.SoundType.ARP_2600_LEAD
-		"SYNARE_3_DISCO_TOM": return AudioSynth.SoundType.SYNARE_3_DISCO_TOM
-		"SYNARE_3_COSMIC_FX": return AudioSynth.SoundType.SYNARE_3_COSMIC_FX
-		"MOOG_KRAFTWERK_SEQUENCER": return AudioSynth.SoundType.MOOG_KRAFTWERK_SEQUENCER
-		"HERBIE_HANCOCK_MOOG_FUSION": return AudioSynth.SoundType.HERBIE_HANCOCK_MOOG_FUSION
-		"APHEX_TWIN_MODULAR": return AudioSynth.SoundType.APHEX_TWIN_MODULAR
-		"FLYING_LOTUS_SAMPLER": return AudioSynth.SoundType.FLYING_LOTUS_SAMPLER
-		# Alternative names (for backward compatibility)
-		"MOOG_MINIMOOG_BASS": return AudioSynth.SoundType.MOOG_BASS_LEAD
-		"ACID_TB303_SQUELCH": return AudioSynth.SoundType.TB303_ACID_BASS
-		"C64_SID_PULSE": return AudioSynth.SoundType.C64_SID_LEAD
-		"GAMEBOY_PULSE": return AudioSynth.SoundType.C64_SID_LEAD  # Similar sound
-		"COMMODORE_AMIGA_WAVE": return AudioSynth.SoundType.AMIGA_MOD_SAMPLE
-		"PPG_WAVE_METALLIC": return AudioSynth.SoundType.PPG_WAVE_PAD
-		"KRAFTWERK_ROBOTIC": return AudioSynth.SoundType.MOOG_KRAFTWERK_SEQUENCER
-		"APHEX_TWIN_GLITCH": return AudioSynth.SoundType.APHEX_TWIN_MODULAR
-		"TELEPORT_WHOOSH": return AudioSynth.SoundType.TELEPORT_DRONE
+		"MOOG_MINIMOOG_BASS": return AudioSynthesizer.SoundType.MOOG_BASS_LEAD
+		"ACID_TB303_SQUELCH": return AudioSynthesizer.SoundType.TB303_ACID_BASS
+		"C64_SID_PULSE": return AudioSynthesizer.SoundType.C64_SID_LEAD
+		"GAMEBOY_PULSE": return AudioSynthesizer.SoundType.C64_SID_LEAD
+		"COMMODORE_AMIGA_WAVE": return AudioSynthesizer.SoundType.AMIGA_MOD_SAMPLE
+		"PPG_WAVE_METALLIC": return AudioSynthesizer.SoundType.PPG_WAVE_PAD
+		"KRAFTWERK_ROBOTIC": return AudioSynthesizer.SoundType.MOOG_KRAFTWERK_SEQUENCER
+		"APHEX_TWIN_GLITCH": return AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR
+		"TELEPORT_WHOOSH": return AudioSynthesizer.SoundType.TELEPORT_DRONE
+		"POP_INTERACTIVE_SONG": return AudioSynthesizer.SoundType.POP_INTERACTIVE_SONG
+		"PROG_SYNTH_SONG": return AudioSynthesizer.SoundType.PROG_SYNTH_SONG
 		_:
 			return null
 
-func _generate_techno_noir_sound(sound_name: String) -> AudioStreamWAV:
+func _generate_techno_noir_sound(sound_name: String, params: Dictionary = {}) -> AudioStreamWAV:
 	"""Generate sound from techno noir generator"""
-	# TODO: Extract techno noir generation logic from john_cage_tech_noir.gd
-	# For now, return null - will implement after refactoring
-	print("ℹ️ Techno noir sound generation not yet implemented: ", sound_name)
-	return null
+	var TechnoNoir = preload("res://commons/audio/generators/TechnoNoirGenerator.gd")
+
+	# Use the static generator method
+	var stream = TechnoNoir.generate_sound(sound_name, params)
+
+	if stream:
+		print("✅ Generated tech noir sound: ", sound_name)
+		return stream
+	else:
+		print("⚠️ Unknown tech noir sound: ", sound_name)
+		return null
+
+func _generate_trap_beats_sound(sound_name: String, params: Dictionary = {}) -> AudioStreamWAV:
+	"""Generate sound from trap beats generator - BANG HARDER"""
+	var TrapBeats = preload("res://commons/audio/generators/TrapBeatsGenerator.gd")
+
+	# Use the static generator method
+	var stream = TrapBeats.generate_sound(sound_name, params)
+
+	if stream:
+		print("✅ Generated trap beat: ", sound_name, " 🔥")
+		return stream
+	else:
+		print("⚠️ Unknown trap beat: ", sound_name)
+		return null
 
 func _generate_liturgical_sound(sound_name: String) -> AudioStreamWAV:
-	"""Generate sound from liturgical generator"""
-	# TODO: Extract liturgical generation logic from liturgicalambientgenerator.gd
-	# For now, return null - will implement after refactoring
-	print("ℹ️ Liturgical sound generation not yet implemented: ", sound_name)
-	return null
+	"""Generate sound from liturgical generator bridge"""
+	var LitGen = preload("res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.gd").new()
+	
+	match sound_name.to_lower():
+		"cathedral_bell", "cathedral_bells": return LitGen.create_cathedral_bell()
+		"pipe_organ_swell": return LitGen.create_pipe_organ_swell()
+		"sacred_whisper", "sacred_whispers": return LitGen.create_sacred_whisper()
+		"choral_texture", "angelic_texture": return LitGen.create_angelic_texture()
+		"gregorian_phrase": return LitGen.create_gregorian_phrase()
+		"divine_breath": return LitGen.create_divine_breath()
+		_:
+			print("⚠️ Unknown liturgical sound: ", sound_name, " - falling back to choir")
+			return LitGen.create_angelic_texture()
 
 func _generate_dark_game_track_sound(sound_name: String) -> AudioStreamWAV:
-	"""Generate sound from dark game track"""
-	# TODO: Extract from DarkGameTrackPlayer
-	print("ℹ️ Dark game track sound generation not yet implemented: ", sound_name)
+	"""Generate sound from dark game track bridge (reusing trap_beats logic)"""
+	var TrapBeats = preload("res://commons/audio/generators/TrapBeatsGenerator.gd")
+	
+	match sound_name.to_lower():
+		"808_kick", "dark_808_kick": return TrapBeats.create_808_kick()
+		"606_hihat", "acid_606_hihat": return TrapBeats.create_hihat_909() # Using hihat fallback
+		"808_sub_bass", "sub_bass": return TrapBeats.create_808_kick({"decay": 2.0, "punch": 0.5}) # Long sub
+		"ambient_drone": return _generate_cinematic_sound("blade_runner_pad")
+		"acid_606_snare", "snare": return TrapBeats.create_trap_snare()
+		"glitch_stab": return TrapBeats.create_808_cowbell({"pitch": 800})
+		"blade_runner_hit": return _generate_cinematic_sound("vangelis_brass_lead")
+		_:
+			print("⚠️ Unknown game track sound: ", sound_name, " - falling back to kick")
+			return TrapBeats.create_808_kick()
+
+func _generate_cinematic_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from CinematicMusicGenerator"""
+	var CinematicGen = preload("res://commons/audio/generators/CinematicMusicGenerator.gd")
+	
+	# Default params (can be expanded later to accept params from preset)
+	var params = {}
+	
+	var stream = CinematicGen.generate_sound(sound_name, params)
+	
+	if stream:
+		print("✅ Generated cinematic sound: ", sound_name, " 🎬")
+		return stream
+	else:
+		print("⚠️ Unknown cinematic sound: ", sound_name)
+		return null
+
+func _generate_epic_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from EpicSynthEngine (Analog Domain)"""
+	var EpicGen = preload("res://commons/audio/engines/EpicSynthEngine.gd")
+	var params = {} # Default params
+	
+	var stream = EpicGen.generate_patch(sound_name, params)
+	
+	if stream:
+		print("✅ Generated EPIC sound: ", sound_name, " 🎹")
+		return stream
+	else:
+		print("⚠️ Unknown epic sound: ", sound_name)
+		return null
+
+func _generate_sci_fi_dystopia_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from SciFiPreviewGenerator (Space Dystopia)"""
+	var SciFiGen = preload("res://commons/audio/generators/SciFiPreviewGenerator.gd")
+	var stream = SciFiGen.generate_preview(sound_name)
+	
+	if stream:
+		print("✅ Generated SciFi Dystopia preview: ", sound_name, " 🎷")
+		return stream
+	else:
+		print("⚠️ Unknown sci_fi sound: ", sound_name)
+		return null
+
+func _generate_cyber_jazz_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from CyberJazzGenerator"""
+	var JazzGen = preload("res://commons/audio/generators/CyberJazzGenerator.gd")
+	var stream = null
+	
+	match sound_name.to_lower():
+		"sax", "saxophone", "noir_sax":
+			stream = JazzGen.generate_sax()
+		"pluck", "koto_pluck", "market_pluck":
+			stream = JazzGen.generate_pluck()
+		_:
+			print("⚠️ Unknown cyber jazz sound: ", sound_name)
+			return null
+			
+	if stream:
+		print("✅ Generated Cyber Jazz sound: ", sound_name, " 🎷")
+		return stream
 	return null
+
+func _generate_house_drums_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from HouseDrumGenerator (TR-909 style)"""
+	var HouseDrums = preload("res://commons/audio/generators/HouseDrumGenerator.gd")
+	
+	var stream = HouseDrums.generate_sound(sound_name)
+	
+	if stream:
+		print("✅ Generated House Drum: ", sound_name, " 🥁")
+		return stream
+	else:
+		print("⚠️ Unknown house drum: ", sound_name)
+		return null
 
 # ===== BULK GENERATION =====
 
@@ -374,6 +681,24 @@ func _create_audio_effect(config: Dictionary) -> AudioEffect:
 			return null
 
 	return effect
+
+func _generate_fourier_space_sound(sound_name: String) -> AudioStream:
+	var generator = load("res://commons/audio/generators/FourierSpaceGenerator.gd").new()
+	
+	match sound_name.to_lower():
+		"drone":
+			# Default wheels as defined in fouriertransformshape.gd
+			var wheels = [
+				{"freq": 1.0, "radius": 2.0, "phase": 0.0},
+				{"freq": 3.0, "radius": 0.8, "phase": 0.0},
+				{"freq": 5.0, "radius": 0.4, "phase": PI / 2},
+				{"freq": 7.0, "radius": 0.2, "phase": PI / 4}
+			]
+			return generator.create_fourier_drone(wheels)
+		"nebula":
+			return generator.create_nebula_pad()
+		_:
+			return generator.create_fourier_drone([])
 
 # ===== CLEANUP =====
 

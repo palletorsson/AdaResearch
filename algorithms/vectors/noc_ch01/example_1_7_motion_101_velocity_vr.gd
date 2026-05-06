@@ -54,3 +54,12 @@ func _process(delta: float) -> void:
 		_position.z = clamp(_position.z, _bounds_min.z + _ball_radius, _bounds_max.z - _ball_radius)
 
 	_ball.position = _position
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

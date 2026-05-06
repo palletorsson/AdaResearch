@@ -1,0 +1,30 @@
+{
+  "name": "pinwheel_truchet",
+  "group": "P1",
+  "zone": "field",
+  "domain_size": 2,
+  "tile_scale": 10,
+  "tile_shape": 6,
+  "grout_width": 0.015,
+  "noise_distort": 0,
+  "wear_amount": 0.15,
+  "dust_amount": 0,
+  "fade_amount": 0,
+  "crack_density": 0.05,
+  "stain_amount": 0,
+  "chip_amount": 0,
+  "palette": [
+    "#141418",
+    "#EBE6D9"
+  ],
+  "domain": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ]
+  ]
+}

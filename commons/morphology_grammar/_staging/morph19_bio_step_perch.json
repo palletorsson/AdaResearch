@@ -1,0 +1,106 @@
+{
+  "id": "morph19_bio_step_perch",
+  "family": "bio_furniture",
+  "notes": "Reference-driven step perch: an upright seat shell with a small stair-like front assembly and an arcing instrument arm.",
+  "camera_yaw": 0.68,
+  "camera_pitch": 0.34,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.94,
+      0.88,
+      0.72
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "perch_shells",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.42,
+        "scale": 0.52,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.14,
+          0.18
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "perch_back",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.7,
+        "scale": 0.7,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.12,
+          0.44,
+          -0.18
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "perch_head_arm",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.12,
+        "scale": 0.14,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.28,
+          0.82,
+          0.22
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "perch_steps",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 1,
+        "rows": 3,
+        "select": "all",
+        "length": 0.2,
+        "scale": 0.68
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

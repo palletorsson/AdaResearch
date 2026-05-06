@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "id": "burial",
+    "name": "Burial",
+    "lineage": "William Bevan, UK Garage, 2-step",
+    "era": "2005-present",
+    "bpm": { "min": 125, "max": 140, "typical": 130 },
+    "lambda": 0.5
+  },
+
+  "identity": {
+    "token": "Vinyl crackle + pitched vocals + 2-step shuffle + mono sub",
+    "two_second_test": "Crackle, ghostly vocal, offbeat kick, deep sub",
+    "emotional_truth": "South London rain, night bus, melancholy nostalgia"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "sub", "atmosphere", "crackle", "vocal"],
+
+  "forbidden": [
+    "supersaw",
+    "gated_reverb",
+    "chorus",
+    "clean_production",
+    "quantized_drums",
+    "4_on_floor",
+    "bright_highs"
+  ],
+
+  "rhythm": {
+    "quantize": "loose",
+    "humanize_ms": 15,
+    "swing_pct": 0,
+    "pattern": "2step_garage"
+  },
+
+  "harmony": {
+    "scales": ["minor", "dorian"],
+    "voicings": "sparse"
+  },
+
+  "fx": {
+    "vinyl_crackle": true,
+    "heavy_reverb": true,
+    "highshelf_cut_db": -3,
+    "mono_sub": true
+  },
+
+  "transitions": {
+    "crossfade_s": 5.0
+  },
+
+  "sections": {
+    "intro": ["crackle", "atmosphere"],
+    "build": ["crackle", "atmosphere", "sub", "hihat"],
+    "main": ["kick", "snare", "hihat", "sub", "atmosphere", "crackle", "vocal"],
+    "breakdown": ["crackle", "atmosphere", "vocal"],
+    "outro": ["crackle", "atmosphere"]
+  }
+}

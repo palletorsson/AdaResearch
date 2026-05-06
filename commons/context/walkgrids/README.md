@@ -1,316 +1,185 @@
-# 🌊 Mathematical Topology VR
+# 🌊 Walkable Mathematical Spaces
 
-*Walkable Mathematical Spaces for Immersive Learning*
-
----
-
-## 🎯 **Vision**
-
-Transform abstract mathematical concepts into tangible, walkable 3D worlds where students can literally **experience mathematics through movement**. This project creates immersive VR environments that embody different mathematical organizations of space—from the perfect control of sine waves to the resistant chaos of noise terrain.
-
-## 🌍 **The Mathematical Territories**
-
-### **🎵 Sine Space - The Surveillance Landscape**
-*Perfect mathematical waves with predictable sine/cosine bumps*
-- **Smooth, metallic surfaces** representing mathematical control
-- **Every point calculable** - no place to hide from algorithmic prediction
-- **Beautiful but controlling** - the seductive power of total mathematical order
-- Walk along sine waves and feel the rhythm of mathematical perfection
-
-### **🌿 Noise Space - The Resistance Terrain**
-*Fractal noise terrain with organic, unpredictable boundaries*
-- **Rough, organic surfaces** that resist mathematical measurement
-- **Algorithmic disruption** - where prediction fails and complexity emerges
-- **Spaces of mathematical freedom** - hiding places in computational chaos
-- Navigate fractal landscapes that escape geometric control
-
-### **🔷 Voronoi Space - The Territorial Cells**
-*Cellular boundaries based on proximity to random seed points*
-- **Organic territorial divisions** that emerge from simple rules
-- **Natural boundaries** that feel biological rather than imposed
-- **Flat cellular regions** with sharp transitions between territories
-- Experience how mathematical algorithms create living, territorial spaces
-
-### **🔥 Random Space - Mathematical Anarchy**
-*Pure chaos where every point is randomly determined*
-- **Complete unpredictability** - no rhythm, no pattern, no escape from chaos
-- **Aggressive red surfaces** - mathematical disruption made visible
-- **Constant balance challenges** - nowhere feels stable or "normal"
-- Walk through pure mathematical entropy where all order breaks down
+*Every algorithm becomes a landscape. Every landscape teaches.*
 
 ---
 
-## 🛠️ **Technical Implementation**
+## The System
 
-### **Built With**
-- **Godot 4.x** - Open-source 3D engine with excellent VR support
-- **GDScript** - Clean, Python-like scripting for rapid development
-- **XR/VR Integration** - Works with OpenXR-compatible headsets
-- **Procedural Generation** - Mathematical surfaces created in real-time
+`TopologyManager` orchestrates a library of **20 walkable mathematical surfaces**, each generated procedurally from a different algorithm. All extend `TopologySpace` — the base class that handles mesh generation, collision, and material.
 
-### **Core Architecture**
-
-```
-TopologyManager (Node3D)
-├── SineSpace (Node3D)
-│   └── StaticBody3D
-│       ├── MeshInstance3D      # Procedural sine surface
-│       └── CollisionShape3D    # Walkable physics
-├── NoiseSpace (Node3D)
-│   └── StaticBody3D
-│       ├── MeshInstance3D      # Fractal noise terrain
-│       └── CollisionShape3D    # Organic collision
-├── VoronoiSpace (Node3D)
-│   └── StaticBody3D
-│       ├── MeshInstance3D      # Cellular territories
-│       └── CollisionShape3D    # Territorial boundaries
-└── RandomSpace (Node3D)
-	└── StaticBody3D
-		├── MeshInstance3D      # Chaotic surface
-		└── CollisionShape3D    # Anarchic physics
-```
-
-### **Mathematical Algorithms**
-
-**Sine Wave Generation:**
-```gdscript
-height = amplitude * sin(x * frequency + phase_x) * cos(z * frequency + phase_z)
-```
-
-**Fractal Noise:**
-```gdscript
-height = FastNoiseLite.get_noise_2d(x * scale, z * scale)
-```
-
-**Voronoi Territories:**
-```gdscript
-height = closest_point_height(x, z, seed_points)
-```
-
-**Pure Randomness:**
-```gdscript
-height = random_range(-chaos_level, chaos_level)
-```
+Toggle spaces on/off in the Inspector. They line up along the X axis, `space_separation` apart. Add more at runtime with `add_space_at_runtime("key")`.
 
 ---
 
-## 🚀 **Quick Start**
+## The Spaces
 
-### **Prerequisites**
-- **Godot 4.x** (download from [godotengine.org](https://godotengine.org))
-- **VR Headset** (optional but recommended)
-- **XR Plugin** enabled in Godot project settings
+### Core (5)
 
-### **Installation**
+| Space | Algorithm | Character |
+|-------|-----------|-----------|
+| **SineSpace** | `sin(x) * cos(z)` | Smooth, metallic, predictable. The surveillance landscape. |
+| **NoiseSpace** | FastNoiseLite fractal | Rough, organic, resistant. Where prediction fails. |
+| **VoronoiSpace** | Nearest-point territories | Flat plateaus with sharp borders. Biological division. |
+| **RandomSpace** | Pure `randf()` chaos | Animated mathematical anarchy. 4 animation modes. |
+| **FractalSpace** | Diamond-square / midpoint | Recursive self-similarity. 3 algorithms. |
 
-1. **Clone or Download** this project
-2. **Open in Godot** - import the project
-3. **Add Scripts** to your project:
-   ```
-   res://
-   ├── scripts/
-   │   ├── TopologySpace.gd
-   │   ├── SineSpace.gd
-   │   ├── NoiseSpace.gd
-   │   ├── VoronoiSpace.gd
-   │   └── RandomSpace.gd
-   ```
+### Cellular & Emergent (3)
 
-4. **Import the Scene**:
-   - Drag `TopologyManager.tscn` into your existing VR scene
-   - Position where you want the mathematical territories
+| Space | Algorithm | Character |
+|-------|-----------|-----------|
+| **WorleySpace** | Worley noise (cellular noise) | Cracked earth, cell walls. 5 distance combos × 4 metrics. |
+| **CellularAutomataSpace** | Game of Life + 5 variants | Geological layers from emergent life. Cave, Maze, Diamoeba… |
+| **ReactionDiffusionSpace** | Gray-Scott model | Turing patterns: spots, stripes, spirals, coral, worms. Live evolution. |
 
-5. **Configure Input Map**:
-   ```
-   Project Settings → Input Map → Add:
-   - "next_topology" → Right Arrow, VR Right Trigger
-   - "previous_topology" → Left Arrow, VR Left Trigger
-   ```
+### Mathematical Structures (6)
 
-6. **Run and Explore!**
+| Space | Algorithm | Character |
+|-------|-----------|-----------|
+| **MandelbrotSpace** | Iteration count → height | Walk the boundary of decidability. 6 zoom presets. |
+| **LSystemSpace** | L-system turtle → height | Branching grammars as ridges. Tree, Koch, dragon curve, Hilbert… |
+| **WaveInterferenceSpace** | Superposition of sources | Constructive/destructive patterns. Double-slit, ripple tank. Animated. |
+| **RidgedNoiseSpace** | Ridged multifractal | Mountain ranges, canyons, dragon spines. Terracing + erosion. |
+| **SphericalHarmonicsSpace** | Y_l^m projected flat | Electron orbitals as terrain. Single, sum, superposition, hybrid. |
+| **FlowFieldSpace** | Vector field potential → height | Vortices, sources/sinks, dipoles, saddle points. The landscape of forces. |
 
-### **For Existing VR Projects**
-This is designed as a **drop-in component**. The TopologyManager will automatically:
-- ✅ Find your existing **XROrigin3D** player
-- ✅ Generate mathematical surfaces on startup
-- ✅ Enable teleportation between territories
-- ✅ Work with your existing VR setup
+### Terrain & Simulation (2)
 
----
+| Space | Algorithm | Character |
+|-------|-----------|-----------|
+| **DomainWarpSpace** | Noise-warped noise (Quilez) | Organic, fluid, lava-lamp terrain. Marble, wood grain, crystalline. |
+| **ErosionSpace** | Hydraulic erosion simulation | 50K water droplets carving river valleys into noise terrain. |
 
-## 🎮 **Controls**
+### Topology & Non-Euclidean (3)
 
-### **VR Controls**
-- **Right Trigger** → Teleport to next mathematical territory
-- **Left Trigger** → Teleport to previous mathematical territory
-- **Physical Movement** → Walk around within tracking area
-- **Thumbstick** → Additional movement (if configured)
+| Space | Algorithm | Character |
+|-------|-----------|-----------|
+| **MöbiusSpace** | Möbius strip → height field | Non-orientable topology. 3 projection modes. Variable twist. |
+| **TorusSpace** | Torus parameterization | Gaussian curvature, Villarceau circles, flat torus. |
+| **HyperbolicSpace** | Poincaré disk model | Negative curvature. Space compresses at the edge. Tiling overlay. |
 
-### **Desktop Controls**
-- **Right Arrow** → Next mathematical space
-- **Left Arrow** → Previous mathematical space
-- **WASD** → Move around (if movement controller added)
+### Meta (1)
+
+| Space | Algorithm | Character |
+|-------|-----------|-----------|
+| **KnowledgeTerrainSpace** | Curriculum → terrain | QFEP phases as elevation. Concept markers. Spine paths. |
 
 ---
 
-## 🎨 **Customization**
+## Shared Assets
 
-### **Adjustable Parameters**
-
-Each mathematical space can be customized in the Godot Inspector:
-
-**Sine Space:**
-- `wave_frequency` - How tight the waves are
-- `wave_amplitude` - How tall the waves are
-- `phase_x/phase_z` - Wave offset and direction
-
-**Noise Space:**
-- `noise_scale` - Detail level of the fractal terrain
-- `octaves` - Complexity layers
-- `persistence` - How much detail at each scale
-
-**Voronoi Space:**
-- `num_points` - Number of territorial cells
-- `height_variation` - Difference between cell heights
-
-**Random Space:**
-- `chaos_level` - How extreme the randomness is
-- `seed_value` - Reproducible chaos patterns
-
-### **Visual Styling**
-
-Each space has distinct materials that reflect their mathematical character:
-- **Sine**: Smooth, metallic, surveillance aesthetic
-- **Noise**: Rough, organic, resistance aesthetic  
-- **Voronoi**: Cellular, territorial, biological aesthetic
-- **Random**: Aggressive, chaotic, anarchic aesthetic
-
----
-
-## 🎓 **Educational Applications**
-
-### **Mathematical Concepts**
-- **Continuity vs Discontinuity** - Feel smooth vs rough surfaces
-- **Deterministic vs Stochastic** - Experience predictable vs random spaces
-- **Order vs Chaos** - Embody mathematical organization principles
-- **Boundary Theory** - Walk along edges where different mathematics meet
-- **Spatial Reasoning** - Develop intuition for mathematical relationships
-
-### **Philosophical Implications**
-- **Mathematics as Politics** - How different mathematical principles organize space
-- **Surveillance vs Resistance** - The politics of mathematical prediction
-- **Territory and Boundaries** - How mathematical algorithms create spatial divisions
-- **Embodied Learning** - Understanding abstract concepts through physical movement
-
-### **Cross-Disciplinary Connections**
-- **Computer Science** - Algorithm visualization and computational geometry
-- **Physics** - Understanding field theory and mathematical modeling
-- **Art** - Mathematical aesthetics and generative design
-- **Philosophy** - The relationship between mathematics and reality
-- **Geography** - Spatial analysis and territorial organization
-
----
-
-## 🔧 **Advanced Features**
-
-### **Performance Optimization**
-- **Level-of-Detail** mesh generation based on distance
-- **Efficient collision** using Godot's built-in mesh collision
-- **Configurable resolution** - balance quality vs performance
-- **Spatial indexing** for large mathematical spaces
-
-### **Extensibility**
-The system is designed for easy extension:
+**`terrain_height_color.gdshader`** — Drop-in shader for any space. Colors terrain by elevation (valley→mid→peak gradient), with optional contour lines, slope shading, and fresnel rim.
 
 ```gdscript
-# Create new mathematical spaces by extending TopologySpace
+# Apply the shader to any space:
+var shader_mat = ShaderMaterial.new()
+shader_mat.shader = load("res://commons/context/walkgrids/terrain_height_color.gdshader")
+shader_mat.set_shader_parameter("color_low", Color(0.1, 0.05, 0.2))
+shader_mat.set_shader_parameter("color_high", Color(1.0, 0.9, 0.7))
+shader_mat.set_shader_parameter("show_contours", true)
+$SomeSpace/StaticBody3D/MeshInstance3D.material_override = shader_mat
+```
+
+---
+
+## Quick Start
+
+```gdscript
+# Enable in Inspector or code:
+var tm = $TopologyManager
+tm.create_mandelbrot_space = true
+tm.create_erosion_space = true
+tm.create_reaction_diffusion_space = true
+
+# Navigate
+tm.next_space()
+var pos = tm.teleport_to_space_by_name("MandelbrotSpace")
+
+# Runtime addition
+tm.add_space_at_runtime("worley")
+tm.add_space_at_runtime("spherical_harmonics")
+tm.add_space_at_runtime("domain_warp")
+
+# Get all active space names
+print(tm.get_space_names())
+```
+
+## Extending
+
+```gdscript
 extends TopologySpace
-class_name MyCustomSpace
+class_name MySpace
 
 func generate_space():
-	# Your mathematical algorithm here
-	var heights = your_algorithm()
-	var mesh = create_mesh_from_heights(heights)
-	mesh_instance.mesh = mesh
-	create_collision_from_mesh(mesh)
+    var heights = []
+    for z in range(resolution + 1):
+        for x in range(resolution + 1):
+            heights.append(your_algorithm(x, z) * height_scale)
+    var mesh = create_mesh_from_heights(heights)
+    mesh_instance.mesh = mesh
+    create_collision_from_mesh(mesh)
 ```
 
-### **Planned Features**
-- 🔄 **Smooth transitions** between mathematical spaces
-- 🎵 **Audio synthesis** - mathematical surfaces generating sound
-- 🤝 **Multi-user support** - collaborative mathematical exploration
-- 📊 **Learning analytics** - track student interaction patterns
-- 🔀 **Morphing spaces** - watch one mathematics transform into another
+Add to `TopologyManager.SPACE_REGISTRY` to make it toggle-able.
 
 ---
 
-## 🤝 **Contributing**
+## File Inventory
 
-We welcome contributions that expand the mathematical universe!
-
-### **Ideas for New Spaces**
-- **Möbius Strip** - Non-orientable topology where left becomes right
-- **Hyperbolic Space** - Non-Euclidean geometry with negative curvature
-- **Fractional Brownian Motion** - Self-similar stochastic processes
-- **Cellular Automata** - Emergent mathematical behavior
-- **Topology Morphing** - Spaces that transform in real-time
-
-### **Development Guidelines**
-- **Mathematical Accuracy** - Ensure algorithms are mathematically sound
-- **Performance First** - VR demands smooth 90+ FPS
-- **Educational Value** - Every feature should enhance mathematical understanding
-- **Accessibility** - Design for diverse learners and abilities
-
----
-
-## 📚 **Mathematical Background**
-
-### **Theoretical Foundation**
-This project draws inspiration from:
-- **Deleuze & Guattari** - Smooth vs striated space, rhizomatic thinking
-- **Critical Mathematics** - The politics of mathematical representation
-- **Embodied Cognition** - Learning through physical interaction
-- **Topology** - The study of spatial properties under continuous deformations
-
-### **Further Reading**
-- *A Thousand Plateaus* - Deleuze & Guattari (smooth vs striated space)
-- *The Shape of Space* - Jeffrey Weeks (topology for general audiences)
-- *Fractal Geometry of Nature* - Benoit Mandelbrot (fractal mathematics)
-- *Algorithms of Oppression* - Safiya Noble (critical algorithm studies)
-
----
-
-## 🌟 **Project Philosophy**
-
-### **Mathematics as Exploration, Not Domination**
-Traditional mathematics education often treats mathematical knowledge as territory to be conquered. This project reimagines mathematics as **territory to be explored** - infinite worlds of possibility rather than fixed facts to memorize.
-
-### **From Abstract to Embodied**
-Instead of learning *about* mathematical concepts, students **become mathematical** through movement and interaction. The body becomes a site of mathematical understanding.
-
-### **Queer Mathematics**
-This project embraces "queer edges" - mathematical phenomena that resist categorization, challenge assumptions, and create new possibilities for mathematical thinking and being.
+```
+walkgrids/
+├── TopologySpace.gd              # Base class — mesh gen, collision, materials
+├── TopologyManager.gd             # Orchestrator — registry, navigation, runtime API
+├── terrain_height_color.gdshader  # Shared height-gradient shader
+│
+├── SineSpace.gd                   # ── Core ──
+├── NoiseSpace.gd
+├── VoronoiSpace.gd
+├── RandomSpace.gd
+├── FractalSpace.gd
+│
+├── WorleySpace.gd                 # ── Cellular & Emergent ──
+├── CellularAutomataSpace.gd
+├── ReactionDiffusionSpace.gd
+│
+├── MandelbrotSpace.gd             # ── Mathematical Structures ──
+├── LSystemSpace.gd
+├── WaveInterferenceSpace.gd
+├── RidgedNoiseSpace.gd
+├── SphericalHarmonicsSpace.gd
+├── FlowFieldSpace.gd
+│
+├── DomainWarpSpace.gd             # ── Terrain & Simulation ──
+├── ErosionSpace.gd
+│
+├── MobiusSpace.gd                 # ── Topology & Non-Euclidean ──
+├── TorusSpace.gd
+├── HyperbolicSpace.gd
+│
+├── KnowledgeTerrainSpace.gd       # ── Meta ──
+│
+└── *.tscn                         # Scene files for each space
+```
 
 ---
 
-## 📄 **License**
+## Presets & Variations
 
-This project is open source and available under the MIT License. Use it, modify it, extend it, teach with it, learn from it.
+Most spaces have internal presets (enums in the Inspector):
 
-**Mathematical knowledge belongs to everyone.**
+- **ReactionDiffusion**: Spots, Stripes, Spirals, Coral, Holes, Worms
+- **CellularAutomata**: Game of Life, HighLife, Day&Night, Diamoeba, Maze, Cave
+- **Mandelbrot**: Full Set, Seahorse Valley, Elephant Valley, Spiral, Mini-Brot, Lightning
+- **LSystem**: Tree, Koch Island, Dragon Curve, Sierpinski, Hilbert, River Delta
+- **WaveInterference**: Circular, Plane, Double-Slit, Mixed, Ripple Tank
+- **RidgedNoise**: Mountain Range, Canyon Network, Dragon Spine, Eroded Plateau, Alien Geology
+- **DomainWarp**: Organic, Crystalline, Turbulent, Marble, Wood Grain
+- **FlowField**: Vortex Array, Source/Sink, Dipole, Gradient Noise, Saddle Points, Electromagnetic
+- **Worley**: F1, F2, F2−F1, F1+F2, F1×F2 × Euclidean/Manhattan/Chebyshev/Minkowski
+- **Fractal**: Diamond-Square, Midpoint Displacement, Recursive Subdivision
+- **SphericalHarmonics**: Single Y_l^m, Sum All Orders, Superposition, Orbital Hybrid
+- **Möbius**: Height Map, Unrolled, Cylindrical
+- **Torus**: Gaussian Curvature, Elevation, Meridian/Parallel Waves, Villarceau, Flat Torus
+- **Hyperbolic**: Hyperbolic Distance, Gaussian Curvature, Geodesic Grid, Pseudosphere
 
----
-
-## 🙏 **Acknowledgments**
-
-Created with love for mathematical exploration and educational innovation.
-
-*"Mathematics is not about numbers, equations, computations, or algorithms: it is about understanding."* - William Paul Thurston
-
-*"The best way to learn mathematics is to walk through it."* - This Project
-
----
-
-**Ready to walk through mathematical infinity?** 🚶‍♀️🌊📐✨
-
-*Start your journey from the surveillance landscapes of sine waves to the resistant territories of noise, and discover what mathematics feels like when you embody it with your whole being.*
+**That's ~100+ distinct walkable terrains from 20 spaces.**

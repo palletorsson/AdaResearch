@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 arena at its center. Algorithms enter, transform the space, and leave traces. Gaussian distributions raise terrain into bell curves. Random walks carve drunk paths through cubes. Height fields mutate. Objects spawn and vanish. Profiles generate from noise. Each algorithm reshapes the same grid differently — same substrate, different morphology.
+
+The arena is a laboratory for controlled chaos. Watch a walker stumble 128 steps and somehow produce structure. Watch removal algorithms dissolve geometry by column, row, or range. Watch rotation patterns cycle through axes — Z, Y, X, then all at once. The grid remembers every operation. Randomness here is not absence of pattern but the engine that produces pattern before intention arrives.
+
+Dice don't choose. They eliminate everything except what lands.

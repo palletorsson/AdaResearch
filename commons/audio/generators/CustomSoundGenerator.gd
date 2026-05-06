@@ -37,6 +37,8 @@ static func generate_custom_sound(type: AudioSynthesizer.SoundType, params: Dict
 			generate_custom_shield_hit(data, sample_count, params)
 		AudioSynthesizer.SoundType.AMBIENT_WIND:
 			generate_custom_ambient_wind(data, sample_count, params)
+		AudioSynthesizer.SoundType.ARTIFACT_REVEAL_SHIMMER:
+			AudioSynthesizer._generate_artifact_reveal_shimmer(data, sample_count, params)
 		AudioSynthesizer.SoundType.DARK_808_KICK:
 			generate_custom_dark_808_kick(data, sample_count, params)
 		AudioSynthesizer.SoundType.ACID_606_HIHAT:
@@ -77,7 +79,161 @@ static func generate_custom_sound(type: AudioSynthesizer.SoundType, params: Dict
 			generate_custom_aphex_twin_modular(data, sample_count, params)
 		AudioSynthesizer.SoundType.FLYING_LOTUS_SAMPLER:
 			generate_custom_flying_lotus_sampler(data, sample_count, params)
-	
+		# Cinematic / legacy synths
+		AudioSynthesizer.SoundType.CS80_BRASS_LEAD:
+			AudioSynthesizer._generate_cs80_brass_lead(data, sample_count)
+		AudioSynthesizer.SoundType.CINEMATIC_432HZ_PAD:
+			AudioSynthesizer._generate_cinematic_432hz_pad(data, sample_count)
+		# Pop legacy timbres
+		AudioSynthesizer.SoundType.POP_JUNO_CHORUS_PAD:
+			AudioSynthesizer._generate_juno_chorus_pad(data, sample_count)
+		AudioSynthesizer.SoundType.POP_DX7_BALLAD_KEYS:
+			AudioSynthesizer._generate_dx7_ballad_keys(data, sample_count)
+		AudioSynthesizer.SoundType.POP_OBXA_BRASS:
+			AudioSynthesizer._generate_obxa_brass(data, sample_count)
+		AudioSynthesizer.SoundType.POP_PROPHET_LEAD:
+			AudioSynthesizer._generate_prophet_lead(data, sample_count)
+		AudioSynthesizer.SoundType.POP_FUNK_BASS:
+			AudioSynthesizer._generate_funk_bass(data, sample_count)
+		AudioSynthesizer.SoundType.HEARTBEAT:
+			generate_custom_heartbeat(data, sample_count, params)
+		AudioSynthesizer.SoundType.LAB_HUM:
+			generate_custom_lab_hum(data, sample_count, params)
+		# Expressive Lead & Melodic Sounds
+		AudioSynthesizer.SoundType.SUPERSAW_LEAD:
+			generate_custom_supersaw_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.SYNC_LEAD:
+			generate_custom_sync_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.FM_BELL:
+			generate_custom_fm_bell(data, sample_count, params)
+		AudioSynthesizer.SoundType.SQUARE_LEAD:
+			generate_custom_square_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.PORTAMENTO_LEAD:
+			generate_custom_portamento_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.VOCAL_FORMANT:
+			generate_custom_vocal_formant(data, sample_count, params)
+		AudioSynthesizer.SoundType.BRASS_STAB:
+			generate_custom_brass_stab(data, sample_count, params)
+		AudioSynthesizer.SoundType.STRING_ENSEMBLE:
+			generate_custom_string_ensemble(data, sample_count, params)
+		AudioSynthesizer.SoundType.PLUCK_LEAD:
+			generate_custom_pluck_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.GLASS_LEAD:
+			generate_custom_glass_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.DISTORTED_LEAD:
+			generate_custom_distorted_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.BITCRUSHED_LEAD:
+			generate_custom_bitcrushed_lead(data, sample_count, params)
+		# Experimental / Algorithmic - route to AudioSynthesizer
+		AudioSynthesizer.SoundType.RADIOPHONIC_WORKSHOP:
+			AudioSynthesizer._generate_radiophonic_workshop(data, sample_count, params)
+		AudioSynthesizer.SoundType.XENAKIS_STOCHASTIC:
+			AudioSynthesizer._generate_xenakis_stochastic(data, sample_count, params)
+		AudioSynthesizer.SoundType.SPIEGEL_INTELLIGENT:
+			AudioSynthesizer._generate_spiegel_intelligent(data, sample_count, params)
+		AudioSynthesizer.SoundType.AUTECHRE_FLUTTER:
+			AudioSynthesizer._generate_autechre_flutter(data, sample_count, params)
+		AudioSynthesizer.SoundType.IKEDA_DATAPLEX:
+			AudioSynthesizer._generate_ikeda_dataplex(data, sample_count, params)
+		AudioSynthesizer.SoundType.ECCOJAM_DRIFT:
+			AudioSynthesizer._generate_eccojam_drift(data, sample_count, params)
+		AudioSynthesizer.SoundType.CELLULAR_AUTOMATA:
+			AudioSynthesizer._generate_cellular_automata(data, sample_count, params)
+		# Pop & EDM - route to AudioSynthesizer
+		AudioSynthesizer.SoundType.MORODER_DISCO_BASS:
+			AudioSynthesizer._generate_moroder_disco_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.PROPHET_PAD:
+			AudioSynthesizer._generate_prophet_pad(data, sample_count, params)
+		AudioSynthesizer.SoundType.PRINCE_SYNC_LEAD:
+			AudioSynthesizer._generate_prince_sync_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.ELECTRO_808:
+			AudioSynthesizer._generate_electro_808(data, sample_count, params)
+		AudioSynthesizer.SoundType.DETROIT_TECHNO:
+			AudioSynthesizer._generate_detroit_techno(data, sample_count, params)
+		AudioSynthesizer.SoundType.HOUSE_ORGAN:
+			AudioSynthesizer._generate_house_organ(data, sample_count, params)
+		AudioSynthesizer.SoundType.RAVE_STAB:
+			AudioSynthesizer._generate_rave_stab(data, sample_count, params)
+		AudioSynthesizer.SoundType.SUPERSAW_PROGRESSIVE:
+			AudioSynthesizer._generate_supersaw_progressive(data, sample_count, params)
+		AudioSynthesizer.SoundType.WOBBLE_BASS:
+			AudioSynthesizer._generate_wobble_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.SYNTHWAVE_LEAD:
+			AudioSynthesizer._generate_synthwave_lead(data, sample_count, params)
+		# Space Dystopia Soundscape Pop - route to AudioSynthesizer
+		AudioSynthesizer.SoundType.SPACE_CHOIR_PAD:
+			AudioSynthesizer._generate_space_choir_pad(data, sample_count, params)
+		AudioSynthesizer.SoundType.CINEMATIC_STRINGS:
+			AudioSynthesizer._generate_cinematic_strings(data, sample_count, params)
+		AudioSynthesizer.SoundType.INDUSTRIAL_CLANK:
+			AudioSynthesizer._generate_industrial_clank(data, sample_count, params)
+		AudioSynthesizer.SoundType.RAIN_ATMOSPHERE:
+			AudioSynthesizer._generate_rain_atmosphere(data, sample_count, params)
+		AudioSynthesizer.SoundType.WAVETABLE_MORPH:
+			AudioSynthesizer._generate_wavetable_morph(data, sample_count, params)
+		AudioSynthesizer.SoundType.PEDAL_STEEL_SWELL:
+			AudioSynthesizer._generate_pedal_steel_swell(data, sample_count, params)
+		AudioSynthesizer.SoundType.GLITCH_CHAOS:
+			AudioSynthesizer._generate_glitch_chaos(data, sample_count, params)
+		AudioSynthesizer.SoundType.NOIR_SAX_BREATH:
+			AudioSynthesizer._generate_noir_sax_breath(data, sample_count, params)
+		AudioSynthesizer.SoundType.SPACE_SUB_DRONE:
+			AudioSynthesizer._generate_space_sub_drone(data, sample_count, params)
+		# Essential Drum Sounds
+		AudioSynthesizer.SoundType.CLAP:
+			generate_custom_clap(data, sample_count, params)
+		AudioSynthesizer.SoundType.OPEN_HIHAT:
+			generate_custom_open_hihat(data, sample_count, params)
+		AudioSynthesizer.SoundType.SNARE_ACOUSTIC:
+			generate_custom_snare_acoustic(data, sample_count, params)
+		AudioSynthesizer.SoundType.RIMSHOT:
+			generate_custom_rimshot(data, sample_count, params)
+		# Production Polish
+		AudioSynthesizer.SoundType.SHAKER:
+			generate_custom_shaker(data, sample_count, params)
+		AudioSynthesizer.SoundType.TAMBOURINE:
+			generate_custom_tambourine(data, sample_count, params)
+		AudioSynthesizer.SoundType.RIDE_CYMBAL:
+			generate_custom_ride_cymbal(data, sample_count, params)
+		AudioSynthesizer.SoundType.CRASH_CYMBAL:
+			generate_custom_crash_cymbal(data, sample_count, params)
+		# Genre-Specific
+		AudioSynthesizer.SoundType.TOM_LOW:
+			generate_custom_tom(data, sample_count, params, "low")
+		AudioSynthesizer.SoundType.TOM_MID:
+			generate_custom_tom(data, sample_count, params, "mid")
+		AudioSynthesizer.SoundType.TOM_HIGH:
+			generate_custom_tom(data, sample_count, params, "high")
+		AudioSynthesizer.SoundType.CONGA:
+			generate_custom_conga(data, sample_count, params)
+		AudioSynthesizer.SoundType.BONGO:
+			generate_custom_bongo(data, sample_count, params)
+		# Genre-Defining Bass Sounds
+		AudioSynthesizer.SoundType.REESE_BASS:
+			generate_custom_reese_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.WOBBLE_BASS_CUSTOM:
+			generate_custom_wobble_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.PLUCK_BASS:
+			generate_custom_pluck_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.SUB_BASS_SINE:
+			generate_custom_sub_bass_sine(data, sample_count, params)
+		AudioSynthesizer.SoundType.DISTORTED_BASS:
+			generate_custom_distorted_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.JUNO_BASS:
+			generate_custom_juno_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.MINIMOOG_BASS:
+			generate_custom_minimoog_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.SH101_BASS:
+			generate_custom_sh101_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.PROPHET_BASS:
+			generate_custom_prophet_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.UPRIGHT_BASS:
+			generate_custom_upright_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.SLAP_BASS:
+			generate_custom_slap_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.PICKED_BASS:
+			generate_custom_picked_bass(data, sample_count, params)
+
 	return create_audio_stream(data)
 
 static func generate_custom_basic_sine_wave(data: PackedFloat32Array, sample_count: int, params: Dictionary):
@@ -86,7 +242,7 @@ static func generate_custom_basic_sine_wave(data: PackedFloat32Array, sample_cou
 	var fade_in_time = params.get("fade_in_time", 0.05)
 	var fade_out_time = params.get("fade_out_time", 0.05)
 	
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -142,9 +298,9 @@ static func generate_custom_teleport_drone(data: PackedFloat32Array, sample_coun
 	var fade_out_time = params.get("fade_out_time", 0.08)
 	var wave_type = params.get("wave_type", "sawtooth")
 	
-	print("🎛️ TELEPORT DRONE GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] TELEPORT DRONE GENERATING with wave_type: %s" % wave_type)
 	
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -186,7 +342,7 @@ static func generate_custom_bass_pulse(data: PackedFloat32Array, sample_count: i
 	var amplitude = params.get("amplitude", 0.4)
 	var wave_type = params.get("wave_type", "sine")
 	
-	print("🎛️ BASS PULSE GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] BASS PULSE GENERATING with wave_type: %s" % wave_type)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -266,7 +422,7 @@ static func generate_custom_laser_shot(data: PackedFloat32Array, sample_count: i
 	var amplitude = params.get("amplitude", 0.4)
 	var wave_type = params.get("wave_type", "sawtooth")
 	
-	print("🎛️ LASER SHOT GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] LASER SHOT GENERATING with wave_type: %s" % wave_type)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -302,7 +458,7 @@ static func generate_custom_power_up_jingle(data: PackedFloat32Array, sample_cou
 	var amplitude = params.get("amplitude", 0.3)
 	var scale_type = params.get("scale_type", "major")
 	
-	print("🎛️ POWER-UP JINGLE GENERATING with scale: %s" % scale_type)
+	print("[SYNTH] POWER-UP JINGLE GENERATING with scale: %s" % scale_type)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	var note_duration = duration / note_count
@@ -347,7 +503,7 @@ static func generate_custom_explosion(data: PackedFloat32Array, sample_count: in
 	var high_amount = params.get("high_amount", 0.3)
 	var amplitude = params.get("amplitude", 0.5)
 	
-	print("🎛️ EXPLOSION GENERATING multi-band synthesis")
+	print("[SYNTH] EXPLOSION GENERATING multi-band synthesis")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -381,7 +537,7 @@ static func generate_custom_retro_jump(data: PackedFloat32Array, sample_count: i
 	var amplitude = params.get("amplitude", 0.35)
 	var wave_type = params.get("wave_type", "square")
 	
-	print("🎛️ RETRO JUMP GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] RETRO JUMP GENERATING with wave_type: %s" % wave_type)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -417,7 +573,7 @@ static func generate_custom_shield_hit(data: PackedFloat32Array, sample_count: i
 	var impact_amount = params.get("impact_amount", 0.8)
 	var amplitude = params.get("amplitude", 0.3)
 	
-	print("🎛️ SHIELD HIT GENERATING with ring modulation")
+	print("[SYNTH] SHIELD HIT GENERATING with ring modulation")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -450,7 +606,7 @@ static func generate_custom_ambient_wind(data: PackedFloat32Array, sample_count:
 	var tonal_amount = params.get("tonal_amount", 0.1)
 	var amplitude = params.get("amplitude", 0.2)
 	
-	print("🎛️ AMBIENT WIND GENERATING with noise density: %d" % noise_density)
+	print("[SYNTH] AMBIENT WIND GENERATING with noise density: %d" % noise_density)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -503,7 +659,7 @@ static func generate_custom_dark_808_kick(data: PackedFloat32Array, sample_count
 	var amplitude = params.get("amplitude", 0.7)
 	var saturation = params.get("saturation", 1.5)
 	
-	print("🎛️ DARK 808 KICK GENERATING with pitch sweep")
+	print("[SYNTH] DARK 808 KICK GENERATING with pitch sweep")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -539,7 +695,7 @@ static func generate_custom_acid_606_hihat(data: PackedFloat32Array, sample_coun
 	var ring_amount = params.get("ring_amount", 0.2)
 	var amplitude = params.get("amplitude", 0.3)
 	
-	print("🎛️ ACID 606 HIHAT GENERATING with filter sweep")
+	print("[SYNTH] ACID 606 HIHAT GENERATING with filter sweep")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -577,13 +733,13 @@ static func generate_custom_dark_808_sub_bass(data: PackedFloat32Array, sample_c
 	var decay_rate = params.get("decay_rate", 0.5)
 	var amplitude = params.get("amplitude", 0.5)
 	
-	print("🎛️ DARK 808 SUB BASS GENERATING with slow modulation")
+	print("[SYNTH] DARK 808 SUB BASS GENERATING with slow modulation")
 	
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Slow frequency modulation for movement
 		var mod_wave = sin(2.0 * PI * modulation_freq * t)
@@ -621,7 +777,7 @@ static func generate_custom_ambient_amiga_drone(data: PackedFloat32Array, sample
 	var detune_level = params.get("detune_level", 0.1)
 	var amplitude = params.get("amplitude", 0.3)
 	
-	print("🎛️ AMBIENT AMIGA DRONE GENERATING multi-layer synthesis")
+	print("[SYNTH] AMBIENT AMIGA DRONE GENERATING multi-layer synthesis")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -657,21 +813,22 @@ static func generate_custom_ambient_amiga_drone(data: PackedFloat32Array, sample
 		data[i] = combined * envelope * amplitude
 
 static func generate_custom_moog_bass_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
-	var osc1_freq = params.get("osc1_freq", 110.0)
-	var osc2_freq = params.get("osc2_freq", 220.0)
-	var osc2_detune = params.get("osc2_detune", 0.3)
-	var filter_cutoff = params.get("filter_cutoff", 2000.0)
-	var filter_resonance = params.get("filter_resonance", 0.7)
-	var filter_env_amount = params.get("filter_env_amount", 0.8)
-	var amp_attack = params.get("amp_attack", 0.01)
-	var amp_decay = params.get("amp_decay", 0.3)
-	var amp_sustain = params.get("amp_sustain", 0.7)
-	var amp_release = params.get("amp_release", 1.0)
-	var portamento = params.get("portamento", 0.1)
-	var wave_type = params.get("wave_type", "sawtooth")
-	var amplitude = params.get("amplitude", 0.4)
+	# Accept both specific and common parameter names
+	var osc1_freq = params.get("osc1_freq", params.get("frequency", 110.0))
+	var osc2_freq = params.get("osc2_freq", osc1_freq * 2.0)  # Default to octave above
+	var osc2_detune = params.get("osc2_detune", params.get("detune", 0.3))
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 2000.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.7))
+	var filter_env_amount = params.get("filter_env_amount", params.get("env_mod", 0.8))
+	var amp_attack = params.get("amp_attack", params.get("attack", 0.01))
+	var amp_decay = params.get("amp_decay", params.get("decay", 0.3))
+	var amp_sustain = params.get("amp_sustain", params.get("sustain", 0.7))
+	var amp_release = params.get("amp_release", params.get("release", 1.0))
+	var portamento = params.get("portamento", params.get("glide", 0.1))
+	var wave_type = params.get("wave_type", params.get("waveform", "sawtooth"))
+	var amplitude = params.get("amplitude", params.get("amp", 0.4))
 	
-	print("🎛️ MOOG BASS LEAD GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] MOOG BASS LEAD GENERATING with wave_type: %s" % wave_type)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -730,18 +887,19 @@ static func generate_custom_moog_bass_lead(data: PackedFloat32Array, sample_coun
 		data[i] = filtered * envelope * amplitude
 
 static func generate_custom_tb303_acid_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
-	var base_freq = params.get("base_freq", 82.4)
-	var filter_cutoff = params.get("filter_cutoff", 800.0)
-	var filter_resonance = params.get("filter_resonance", 0.85)
-	var filter_env_mod = params.get("filter_env_mod", 0.9)
-	var accent_amount = params.get("accent_amount", 0.6)
-	var slide_time = params.get("slide_time", 0.2)
-	var decay_time = params.get("decay_time", 0.8)
-	var distortion = params.get("distortion", 0.3)
-	var wave_type = params.get("wave_type", "sawtooth")
-	var amplitude = params.get("amplitude", 0.3)
+	# Accept both specific and common parameter names
+	var base_freq = params.get("base_freq", params.get("frequency", 82.4))
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 800.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.85))
+	var filter_env_mod = params.get("filter_env_mod", params.get("env_mod", 0.9))
+	var accent_amount = params.get("accent_amount", params.get("accent", 0.6))
+	var slide_time = params.get("slide_time", params.get("slide", 0.2))
+	var decay_time = params.get("decay_time", params.get("decay", 0.8))
+	var distortion = params.get("distortion", params.get("drive", 0.3))
+	var wave_type = params.get("wave_type", params.get("waveform", "sawtooth"))
+	var amplitude = params.get("amplitude", params.get("amp", 0.3))
 	
-	print("🎛️ TB-303 ACID BASS GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] TB-303 ACID BASS GENERATING with wave_type: %s" % wave_type)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -771,27 +929,28 @@ static func generate_custom_tb303_acid_bass(data: PackedFloat32Array, sample_cou
 		data[i] = filtered * envelope * accent * amplitude
 
 static func generate_custom_dx7_electric_piano(data: PackedFloat32Array, sample_count: int, params: Dictionary):
-	var carrier_freq = params.get("carrier_freq", 220.0)
-	var modulator_ratio = params.get("modulator_ratio", 2.0)
-	var fm_index = params.get("fm_index", 3.0)
-	var mod_env_attack = params.get("mod_env_attack", 0.01)
-	var mod_env_decay = params.get("mod_env_decay", 0.3)
-	var mod_env_sustain = params.get("mod_env_sustain", 0.2)
-	var mod_env_release = params.get("mod_env_release", 1.0)
-	var carrier_attack = params.get("carrier_attack", 0.01)
-	var carrier_decay = params.get("carrier_decay", 0.5)
-	var carrier_sustain = params.get("carrier_sustain", 0.3)
-	var carrier_release = params.get("carrier_release", 2.0)
-	var velocity_sensitivity = params.get("velocity_sensitivity", 0.7)
-	var amplitude = params.get("amplitude", 0.4)
+	# Accept both specific and common parameter names
+	var carrier_freq = params.get("carrier_freq", params.get("frequency", 220.0))
+	var modulator_ratio = params.get("modulator_ratio", params.get("ratio", 2.0))
+	var fm_index = params.get("fm_index", params.get("mod_depth", 3.0))
+	var mod_env_attack = params.get("mod_env_attack", params.get("attack", 0.01))
+	var mod_env_decay = params.get("mod_env_decay", params.get("decay", 0.3))
+	var mod_env_sustain = params.get("mod_env_sustain", params.get("sustain", 0.2))
+	var mod_env_release = params.get("mod_env_release", params.get("release", 1.0))
+	var carrier_attack = params.get("carrier_attack", params.get("attack", 0.01))
+	var carrier_decay = params.get("carrier_decay", params.get("decay", 0.5))
+	var carrier_sustain = params.get("carrier_sustain", params.get("sustain", 0.3))
+	var carrier_release = params.get("carrier_release", params.get("release", 2.0))
+	var velocity_sensitivity = params.get("velocity_sensitivity", params.get("velocity", 0.7))
+	var amplitude = params.get("amplitude", params.get("amp", 0.4))
 	
-	print("🎛️ DX7 ELECTRIC PIANO GENERATING FM synthesis")
+	print("[SYNTH] DX7 ELECTRIC PIANO GENERATING FM synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Modulator envelope (controls FM index)
 		var mod_envelope = 1.0
@@ -850,13 +1009,13 @@ static func generate_custom_c64_sid_lead(data: PackedFloat32Array, sample_count:
 	var vibrato_depth = params.get("vibrato_depth", 0.1)
 	var amplitude = params.get("amplitude", 0.35)
 	
-	print("🎛️ C64 SID LEAD GENERATING with PWM")
+	print("[SYNTH] C64 SID LEAD GENERATING with PWM")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Vibrato
 		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
@@ -908,7 +1067,7 @@ static func generate_custom_amiga_mod_sample(data: PackedFloat32Array, sample_co
 	var wave_type = params.get("wave_type", "sawtooth")
 	var amplitude = params.get("amplitude", 0.8)
 	
-	print("🎛️ AMIGA MOD SAMPLE GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] AMIGA MOD SAMPLE GENERATING with wave_type: %s" % wave_type)
 	
 	# Apply finetune (semitone adjustment)
 	var tuned_freq = base_freq * pow(2.0, finetune / 12.0)
@@ -939,7 +1098,7 @@ static func generate_custom_amiga_mod_sample(data: PackedFloat32Array, sample_co
 		
 		# Simple looping with crossfade
 		var loop_start_sample = loop_start * sample_count
-		var loop_end_sample = loop_start_sample + loop_length * sample_count
+		var _loop_end_sample = loop_start_sample + loop_length * sample_count
 		
 		if progress > loop_start and progress < (loop_start + loop_length):
 			# We're in the loop section - add slight modulation
@@ -963,13 +1122,13 @@ static func generate_custom_ppg_wave_pad(data: PackedFloat32Array, sample_count:
 	var release = params.get("release", 2.0)
 	var amplitude = params.get("amplitude", 0.4)
 	
-	print("🎛️ PPG WAVE PAD GENERATING wavetable synthesis")
+	print("[SYNTH] PPG WAVE PAD GENERATING wavetable synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Wavetable position (morphing between waveforms)
 		var base_freq = 220.0
@@ -1013,7 +1172,7 @@ static func generate_custom_tr909_kick(data: PackedFloat32Array, sample_count: i
 	var tone = params.get("tone", 0.5)
 	var amplitude = params.get("amplitude", 0.8)
 	
-	print("🎛️ TR-909 KICK GENERATING drum synthesis")
+	print("[SYNTH] TR-909 KICK GENERATING drum synthesis")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -1054,13 +1213,13 @@ static func generate_custom_jupiter_8_strings(data: PackedFloat32Array, sample_c
 	var release = params.get("release", 1.5)
 	var amplitude = params.get("amplitude", 0.3)
 	
-	print("🎛️ JUPITER-8 STRINGS GENERATING ensemble synthesis")
+	print("[SYNTH] JUPITER-8 STRINGS GENERATING ensemble synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Multiple oscillators for richness
 		var wave = 0.0
@@ -1106,13 +1265,13 @@ static func generate_custom_korg_m1_piano(data: PackedFloat32Array, sample_count
 	var stereo_width = params.get("stereo_width", 0.5)
 	var amplitude = params.get("amplitude", 0.5)
 	
-	print("🎛️ KORG M1 PIANO GENERATING digital piano synthesis")
+	print("[SYNTH] KORG M1 PIANO GENERATING digital piano synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Digital piano harmonics
 		var wave = 0.0
@@ -1157,7 +1316,7 @@ static func generate_custom_arp_2600_lead(data: PackedFloat32Array, sample_count
 	var portamento = params.get("portamento", 0.0)
 	var amplitude = params.get("amplitude", 0.6)
 	
-	print("🎛️ ARP 2600 LEAD GENERATING analog synthesis")
+	print("[SYNTH] ARP 2600 LEAD GENERATING analog synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1224,7 +1383,7 @@ static func generate_custom_synare_3_disco_tom(data: PackedFloat32Array, sample_
 	var wave_type = params.get("wave_type", "pulse")
 	var amplitude = params.get("amplitude", 0.5)
 	
-	print("🎛️ SYNARE 3 DISCO TOM GENERATING - the 'Ring My Bell' sound!")
+	print("[SYNTH] SYNARE 3 DISCO TOM GENERATING - the 'Ring My Bell' sound!")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1327,7 +1486,7 @@ static func generate_custom_synare_3_cosmic_fx(data: PackedFloat32Array, sample_
 	var retrigger_rate = params.get("retrigger_rate", 4.0)
 	var amplitude = params.get("amplitude", 0.4)
 	
-	print("🎛️ SYNARE 3 COSMIC FX GENERATING - UFO and space sounds! 🛸")
+	print("[SYNTH] SYNARE 3 COSMIC FX GENERATING - UFO and space sounds! ??")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1442,7 +1601,7 @@ static func generate_custom_moog_kraftwerk_sequencer(data: PackedFloat32Array, s
 	var stereo_spread = params.get("stereo_spread", 0.2)
 	var amplitude = params.get("amplitude", 0.7)
 	
-	print("🎹 MOOG KRAFTWERK SEQUENCER GENERATING - Electronic precision!")
+	print("[SYNTH] MOOG KRAFTWERK SEQUENCER GENERATING - Electronic precision!")
 	
 	# Note frequency mapping
 	var note_frequencies = {
@@ -1622,7 +1781,7 @@ static func generate_custom_herbie_hancock_moog_fusion(data: PackedFloat32Array,
 	var sustain = params.get("sustain", 0.7)
 	var release = params.get("release", 0.6)
 	var polyphony = params.get("polyphony", 4)
-	var chord_voicing = params.get("chord_voicing", "jazz_7th")
+	var _chord_voicing = params.get("chord_voicing", "jazz_7th")  # TODO: Implement chord voicing variations
 	var groove_feel = params.get("groove_feel", 0.15)
 	var velocity_sensitivity = params.get("velocity_sensitivity", 0.6)
 	var distortion = params.get("distortion", 0.2)
@@ -1631,7 +1790,7 @@ static func generate_custom_herbie_hancock_moog_fusion(data: PackedFloat32Array,
 	var space_reverb = params.get("space_reverb", 0.25)
 	var amplitude = params.get("amplitude", 0.8)
 	
-	print("🎹✨ HERBIE HANCOCK MOOG FUSION GENERATING - Jazz-funk revolution!")
+	print("[SYNTH] HERBIE HANCOCK MOOG FUSION GENERATING - Jazz-funk revolution!")
 	
 	# Note frequency mapping
 	var note_frequencies = {
@@ -1672,7 +1831,7 @@ static func generate_custom_herbie_hancock_moog_fusion(data: PackedFloat32Array,
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var global_progress = t / duration
+		var _global_progress = t / duration
 		
 		# Current chord
 		var chord_index = int(t / chord_duration) % chord_sequence.size()
@@ -1842,11 +2001,11 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 	var mathematical_precision = params.get("mathematical_precision", 0.9)
 	var amplitude = params.get("amplitude", 0.7)
 	
-	print("🔬🎛️ APHEX TWIN MODULAR GENERATING - Experimental synthesis mastery!")
+	print("[SYNTH] APHEX TWIN MODULAR GENERATING - Experimental synthesis mastery!")
 	
 	# Mathematical constants and sequences
 	var golden_ratio = 1.618033988749
-	var euler_number = 2.718281828459
+	var _euler_number = 2.718281828459
 	var pi_constant = 3.141592653589
 	
 	# Generate mathematical sequences based on pattern
@@ -1888,7 +2047,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 		[7, 11, 14]     # V - Major fifth
 	]
 	var progression_length = 4.0  # 4 seconds per chord
-	var beats_per_chord = 8  # 8 beats per chord change
+	var _beats_per_chord = 8  # 8 beats per chord change
 	
 	# Initialize feedback delay lines for complex modular routing
 	var feedback_buffers = []
@@ -1915,7 +2074,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 		
 		# Beat timing for rhythmic elements
 		var beat_rate = 2.0  # 2 beats per second (120 BPM)
-		var beat_time = fmod(t * beat_rate, 1.0)
+		var _beat_time = fmod(t * beat_rate, 1.0)
 		var is_strong_beat = int(t * beat_rate) % 4 == 0  # Strong beat every 4 beats
 		
 		# Complex LFO network with tempo sync
@@ -2021,7 +2180,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 				var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
 				var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
 				var release_samples = release * AudioSynthesizer.SAMPLE_RATE
-				var total_samples = attack_samples + decay_samples + release_samples
+				var _total_samples = attack_samples + decay_samples + release_samples
 				
 				if i < attack_samples:
 					filter_env = float(i) / attack_samples
@@ -2032,7 +2191,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 					filter_env = sustain
 			"multi_stage":
 				# Complex envelope with multiple stages
-				var stage_duration = duration / 5.0
+				var _stage_duration = duration / 5.0
 				var stage = int(global_progress * 5.0)
 				var stage_progress = fmod(global_progress * 5.0, 1.0)
 				match stage:
@@ -2125,8 +2284,8 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 		# Sample rate reduction
 		if sample_rate_reduction > 0.0:
 			var reduced_rate = AudioSynthesizer.SAMPLE_RATE * (1.0 - sample_rate_reduction * 0.9)
-			var sample_step = AudioSynthesizer.SAMPLE_RATE / reduced_rate
-			if int(i / sample_step) != int((i - 1) / sample_step):
+			var sample_step = float(AudioSynthesizer.SAMPLE_RATE) / reduced_rate
+			if int(float(i) / sample_step) != int(float(i - 1) / sample_step):
 				# Keep current sample
 				pass
 			else:
@@ -2210,7 +2369,7 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 	var experimental_factor = params.get("experimental_factor", 0.4)
 	var amplitude = params.get("amplitude", 0.8)
 	
-	print("🎛️🚁 FLYING LOTUS SAMPLER GENERATING - Genre-defying beat music!")
+	print("[SYNTH] FLYING LOTUS SAMPLER GENERATING - Genre-defying beat music!")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	var beat_duration = 60.0 / bpm / 4.0  # 16th note duration
@@ -2262,12 +2421,12 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var global_progress = t / duration
+		var _global_progress = t / duration
 		
 		# Current chord progression
 		var chord_duration = 4.0  # 4 seconds per chord
 		var chord_index = int(t / chord_duration) % chord_progression.size()
-		var chord_progress = fmod(t / chord_duration, 1.0)
+		var _chord_progress = fmod(t / chord_duration, 1.0)
 		var current_chord = chord_progression[chord_index]
 		
 		# Beat timing with swing
@@ -2288,7 +2447,7 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 		# Sample chopping simulation
 		var chop_rate = float(chop_density) / 4.0  # Chops per beat
 		var chop_time = fmod(t * chop_rate, 1.0)
-		var chop_index = int(t * chop_rate) % 64
+		var _chop_index = int(t * chop_rate) % 64
 		
 		# LFO with chaos
 		var lfo_base = sin(2.0 * PI * lfo_rate * t)
@@ -2389,8 +2548,8 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 		# Sample rate reduction
 		if sample_rate_redux > 0.0:
 			var reduced_rate = AudioSynthesizer.SAMPLE_RATE * (1.0 - sample_rate_redux * 0.8)
-			var sample_step = AudioSynthesizer.SAMPLE_RATE / reduced_rate
-			if int(i / sample_step) == int((i - 1) / sample_step):
+			var sample_step = float(AudioSynthesizer.SAMPLE_RATE) / reduced_rate
+			if int(float(i) / sample_step) == int(float(i - 1) / sample_step):
 				# Hold previous sample
 				pass
 		
@@ -2468,3 +2627,2208 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 		
 		# Final output
 		data[i] = (reverbed_wave + stereo_component) * amplitude
+
+# =============================================================================
+# HEARTBEAT - Biological heartbeat with lub-dub rhythm
+# =============================================================================
+static func generate_custom_heartbeat(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var bpm = params.get("bpm", 70.0)
+	var amplitude = params.get("amplitude", 0.4)
+	var depth = params.get("depth", 0.8)
+
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var beat_interval = 60.0 / bpm  # Time between heartbeats
+
+	# Heartbeat frequencies - low thump
+	var lub_freq = 40.0  # First beat (lub) - lower
+	var dub_freq = 55.0  # Second beat (dub) - slightly higher
+	var lub_dub_gap = 0.15  # Gap between lub and dub in seconds
+
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+
+		# Find position within current beat cycle
+		var beat_phase = fmod(t, beat_interval)
+
+		# Generate lub-dub pattern
+		var wave = 0.0
+
+		# LUB (first thump) - occurs at start of beat
+		var lub_duration = 0.08
+		if beat_phase < lub_duration:
+			var lub_progress = beat_phase / lub_duration
+			var lub_envelope = sin(PI * lub_progress)  # Smooth bump
+			var lub_wave = sin(2.0 * PI * lub_freq * beat_phase)
+			# Add harmonics for body resonance
+			lub_wave += 0.3 * sin(2.0 * PI * lub_freq * 2.0 * beat_phase)
+			wave += lub_wave * lub_envelope * depth
+
+		# DUB (second thump) - occurs after gap
+		var dub_start = lub_dub_gap
+		var dub_duration = 0.06
+		if beat_phase > dub_start and beat_phase < dub_start + dub_duration:
+			var dub_local = beat_phase - dub_start
+			var dub_progress = dub_local / dub_duration
+			var dub_envelope = sin(PI * dub_progress) * 0.7  # Slightly softer
+			var dub_wave = sin(2.0 * PI * dub_freq * dub_local)
+			dub_wave += 0.2 * sin(2.0 * PI * dub_freq * 2.0 * dub_local)
+			wave += dub_wave * dub_envelope * depth
+
+		# Add subtle body resonance between beats
+		var body_resonance = sin(2.0 * PI * 25.0 * t) * 0.02 * depth
+		wave += body_resonance
+
+		# Overall envelope for fade in/out
+		var overall_envelope = 1.0
+		if progress < 0.05:
+			overall_envelope = progress / 0.05
+		elif progress > 0.95:
+			overall_envelope = (1.0 - progress) / 0.05
+
+		data[i] = wave * overall_envelope * amplitude
+
+# =============================================================================
+# LAB_HUM - Sterile sci-fi lab ambience with multi-layered sine hum
+# =============================================================================
+static func generate_custom_lab_hum(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var base_freq = params.get("base_freq", 60.0)  # Electrical hum frequency (50Hz EU / 60Hz US)
+	var amplitude = params.get("amplitude", 0.25)
+	var mod_depth = params.get("mod_depth", 0.3)
+
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+
+	# Multiple harmonic layers for rich lab ambience
+	var harmonics = [1.0, 2.0, 3.0, 5.0]  # Fundamental + harmonics
+	var harmonic_levels = [1.0, 0.3, 0.15, 0.08]  # Decreasing levels
+
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+
+		var wave = 0.0
+
+		# Layer 1: Base electrical hum with harmonics
+		for h in range(harmonics.size()):
+			var freq = base_freq * harmonics[h]
+			var level = harmonic_levels[h]
+			wave += sin(2.0 * PI * freq * t) * level
+
+		# Layer 2: Slow amplitude modulation (breathing effect)
+		var slow_mod = 1.0 + sin(2.0 * PI * 0.1 * t) * mod_depth * 0.3
+		wave *= slow_mod
+
+		# Layer 3: Subtle high-frequency shimmer (fluorescent light flicker)
+		var flicker_freq = 120.0  # Double mains frequency
+		var flicker = sin(2.0 * PI * flicker_freq * t) * 0.05
+		wave += flicker
+
+		# Layer 4: Very low drone for depth
+		var sub_drone = sin(2.0 * PI * 30.0 * t) * 0.15 * mod_depth
+		wave += sub_drone
+
+		# Layer 5: Random subtle variation (air circulation texture)
+		var noise_mod = sin(2.0 * PI * 0.3 * t + sin(2.0 * PI * 0.7 * t) * 2.0)
+		wave *= (1.0 + noise_mod * mod_depth * 0.1)
+
+		# Sterile clinical character - slight phase shift for width
+		var stereo_component = sin(2.0 * PI * base_freq * 1.001 * t) * 0.1
+		wave += stereo_component
+
+		# Overall envelope
+		var envelope = 1.0
+		if progress < 0.1:
+			envelope = progress / 0.1  # Slow fade in
+		elif progress > 0.9:
+			envelope = (1.0 - progress) / 0.1  # Slow fade out
+
+		# Smoothstep the envelope
+		envelope = envelope * envelope * (3.0 - 2.0 * envelope)
+
+		data[i] = wave * envelope * amplitude * 0.5  # Keep levels moderate
+
+# =============================================================================
+# GENRE-DEFINING BASS SOUNDS
+# Research-based synthesis for authentic genre character
+# =============================================================================
+
+# =============================================================================
+# REESE BASS - DnB Essential (Juno-106 style)
+# Detuned saws with slow phasing movement, dark and ominous
+# Hardware: Originally Juno-106, later refined in samplers
+# =============================================================================
+static func generate_custom_reese_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# Accept both specific and common parameter names
+	var freq = params.get("frequency", params.get("freq", 55.0))
+	var detune_cents = params.get("detune_cents", params.get("detune", 12.0))
+	var num_voices = int(params.get("voices", 3))
+	var phase_rate = params.get("phase_rate", params.get("movement", 0.3))
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 800.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.3))
+	var distortion = params.get("distortion", params.get("drive", 0.4))
+	var attack = params.get("attack", 0.05)
+	var release = params.get("release", 0.3)
+	var amplitude = params.get("amplitude", params.get("amp", 0.45))
+	
+	print("[SYNTH] REESE BASS GENERATING - DnB essential with %d detuned voices" % num_voices)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	# Calculate detune ratios for each voice
+	var detune_ratios = []
+	for v in range(num_voices):
+		var cents_offset = (float(v) / (num_voices - 1) - 0.5) * detune_cents * 2.0 if num_voices > 1 else 0.0
+		detune_ratios.append(pow(2.0, cents_offset / 1200.0))
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		# Phase modulation for movement (the reese "wobble")
+		var phase_mod = sin(2.0 * PI * phase_rate * t) * 0.5
+		
+		# Generate detuned sawtooth oscillators
+		var wave = 0.0
+		for v in range(num_voices):
+			var voice_freq = freq * detune_ratios[v]
+			# Add phase offset per voice for stereo width
+			var phase_offset = float(v) * 0.3 + phase_mod * (0.5 if v % 2 == 0 else -0.5)
+			var saw = 2.0 * fmod(voice_freq * t + phase_offset, 1.0) - 1.0
+			wave += saw
+		wave /= num_voices
+		
+		# Low-pass filter with slight resonance
+		var filter_env = 1.0 - exp(-progress * 3.0)  # Filter opens over time
+		var dynamic_cutoff = filter_cutoff * (0.5 + filter_env * 0.5)
+		var filter_factor = clamp(dynamic_cutoff / 4000.0, 0.1, 1.0)
+		wave *= filter_factor * (1.0 + filter_resonance * 0.5)
+		
+		# Soft distortion for warmth and grit
+		if distortion > 0.0:
+			wave = tanh(wave * (1.0 + distortion * 2.0)) / (1.0 + distortion)
+		
+		# ADSR envelope
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i >= release_start:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = 1.0 - release_progress
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# WOBBLE BASS - Dubstep (Massive/FM8 style)
+# LFO on filter cutoff, aggressive character
+# =============================================================================
+static func generate_custom_wobble_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 55.0))
+	var wobble_rate = params.get("wobble_rate", params.get("lfo_rate", 4.0))
+	var wobble_depth = params.get("wobble_depth", params.get("lfo_depth", 0.8))
+	var base_cutoff = params.get("base_cutoff", params.get("cutoff", 400.0))
+	var max_cutoff = params.get("max_cutoff", 4000.0)
+	var resonance = params.get("resonance", 0.7)
+	var distortion = params.get("distortion", params.get("drive", 0.6))
+	var sub_amount = params.get("sub_amount", params.get("sub", 0.3))
+	var attack = params.get("attack", 0.01)
+	var release = params.get("release", 0.2)
+	var amplitude = params.get("amplitude", params.get("amp", 0.5))
+	
+	print("[SYNTH] WOBBLE BASS GENERATING - Dubstep with %.1f Hz LFO" % wobble_rate)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# LFO for wobble (sine or triangle based on depth)
+		var lfo = sin(2.0 * PI * wobble_rate * t)
+		lfo = (lfo + 1.0) * 0.5  # Normalize to 0-1
+		
+		# Main oscillator - sawtooth
+		var saw = 2.0 * fmod(freq * t, 1.0) - 1.0
+		
+		# Add sub oscillator (sine, one octave down)
+		var sub = sin(2.0 * PI * freq * 0.5 * t) * sub_amount
+		
+		var wave = saw + sub
+		
+		# Dynamic filter cutoff driven by LFO
+		var cutoff = base_cutoff + lfo * wobble_depth * (max_cutoff - base_cutoff)
+		var filter_factor = clamp(cutoff / 6000.0, 0.05, 1.0)
+		
+		# Resonant filter simulation
+		var resonance_boost = 1.0 + resonance * 2.0 * lfo
+		wave *= filter_factor * resonance_boost
+		
+		# Add resonant peak
+		var resonant_peak = sin(2.0 * PI * cutoff * t) * resonance * 0.15 * lfo
+		wave += resonant_peak
+		
+		# Heavy distortion for aggression
+		if distortion > 0.0:
+			wave = tanh(wave * (1.0 + distortion * 3.0)) / (1.0 + distortion * 0.5)
+		
+		# Envelope
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i >= release_start:
+			envelope = 1.0 - (i - release_start) / (sample_count - release_start)
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# PLUCK BASS - House/Pop (Juno-60 style)
+# Fast attack, medium decay, punchy and defined
+# =============================================================================
+static func generate_custom_pluck_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 82.4))  # E2
+	var attack = params.get("attack", 0.005)
+	var decay = params.get("decay", 0.25)
+	var sustain = params.get("sustain", 0.2)
+	var filter_attack = params.get("filter_attack", 0.01)
+	var filter_decay = params.get("filter_decay", 0.15)
+	var filter_base = params.get("filter_base", params.get("cutoff", 500.0))
+	var filter_peak = params.get("filter_peak", 3000.0)
+	var resonance = params.get("resonance", 0.4)
+	var wave_type = params.get("wave_type", params.get("waveform", "saw"))
+	var amplitude = params.get("amplitude", params.get("amp", 0.5))
+	
+	print("[SYNTH] PLUCK BASS GENERATING - House/Pop punchy bass with %s wave" % wave_type)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		# Generate base waveform
+		var wave = 0.0
+		match wave_type:
+			"saw", "sawtooth":
+				wave = 2.0 * fmod(freq * t, 1.0) - 1.0
+			"square":
+				wave = 1.0 if sin(2.0 * PI * freq * t) > 0 else -1.0
+			"triangle":
+				var phase = fmod(freq * t, 1.0)
+				wave = 4.0 * abs(phase - 0.5) - 1.0
+			_:
+				wave = 2.0 * fmod(freq * t, 1.0) - 1.0
+		
+		# Filter envelope (fast attack, medium decay)
+		var filter_env = 0.0
+		if t < filter_attack:
+			filter_env = t / filter_attack
+		else:
+			filter_env = exp(-(t - filter_attack) / filter_decay)
+		
+		var cutoff = filter_base + filter_env * (filter_peak - filter_base)
+		var filter_factor = clamp(cutoff / 5000.0, 0.1, 1.0)
+		wave *= filter_factor * (1.0 + resonance * filter_env)
+		
+		# Amplitude envelope (plucky)
+		var envelope = 0.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		else:
+			envelope = sustain * exp(-(progress - (attack + decay) / duration) * 2.0)
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# SUB BASS SINE - Pure Sub (808 style)
+# Clean sine wave, no harmonics, foundation layer
+# =============================================================================
+static func generate_custom_sub_bass_sine(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 40.0))
+	var attack = params.get("attack", 0.02)
+	var decay = params.get("decay", 0.5)
+	var sustain = params.get("sustain", 0.8)
+	var release = params.get("release", 0.5)
+	var pitch_drop = params.get("pitch_drop", params.get("drop", 0.0))  # Semitones to drop
+	var pitch_drop_time = params.get("pitch_drop_time", 0.05)
+	var amplitude = params.get("amplitude", params.get("amp", 0.6))
+	
+	print("[SYNTH] SUB BASS SINE GENERATING - Pure sub at %.1f Hz" % freq)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Pitch drop (808-style)
+		var current_freq = freq
+		if pitch_drop > 0.0 and t < pitch_drop_time:
+			var drop_progress = t / pitch_drop_time
+			var semitone_offset = pitch_drop * (1.0 - drop_progress)
+			current_freq = freq * pow(2.0, semitone_offset / 12.0)
+		
+		# Pure sine wave
+		var wave = sin(2.0 * PI * current_freq * t)
+		
+		# Soft ADSR envelope (no clicks)
+		var envelope = 0.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+			envelope = envelope * envelope * (3.0 - 2.0 * envelope)  # Smoothstep
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# DISTORTED BASS - Rock/Industrial (Bass guitar + tube amp)
+# Tube saturation, gritty character
+# =============================================================================
+static func generate_custom_distorted_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 82.4))  # E2
+	var drive = params.get("drive", params.get("distortion", 0.7))
+	var tone = params.get("tone", 0.6)  # 0 = dark, 1 = bright
+	var presence = params.get("presence", 0.4)
+	var attack = params.get("attack", 0.01)
+	var sustain_level = params.get("sustain", 0.7)
+	var release = params.get("release", 0.3)
+	var sub_mix = params.get("sub_mix", params.get("sub", 0.2))
+	var amplitude = params.get("amplitude", params.get("amp", 0.5))
+	
+	print("[SYNTH] DISTORTED BASS GENERATING - Rock/Industrial with drive %.2f" % drive)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Main oscillator - saw for harmonics
+		var saw = 2.0 * fmod(freq * t, 1.0) - 1.0
+		
+		# Add square for more aggressive character
+		var square = 1.0 if sin(2.0 * PI * freq * t) > 0 else -1.0
+		
+		# Sub oscillator (clean sine for low end)
+		var sub = sin(2.0 * PI * freq * 0.5 * t) * sub_mix
+		
+		# Mix oscillators
+		var wave = saw * 0.6 + square * 0.4
+		
+		# Tube saturation stages (cascaded for more harmonics)
+		var drive_amount = 1.0 + drive * 4.0
+		wave = tanh(wave * drive_amount)
+		wave = tanh(wave * (1.0 + drive * 2.0))  # Second stage
+		
+		# Add odd harmonics (tube character)
+		if presence > 0.0:
+			wave += sin(2.0 * PI * freq * 3.0 * t) * presence * 0.1
+			wave += sin(2.0 * PI * freq * 5.0 * t) * presence * 0.05
+		
+		# Tone control (simple high-pass/low-pass balance)
+		var filter_factor = 0.3 + tone * 0.7
+		wave *= filter_factor
+		
+		# Mix in clean sub
+		wave = wave * (1.0 - sub_mix * 0.5) + sub
+		
+		# Envelope
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < release_start:
+			envelope = sustain_level
+		else:
+			envelope = sustain_level * (1.0 - (i - release_start) / (sample_count - release_start))
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# JUNO BASS - 80s Pop (Roland Juno-106)
+# Chorus, warmth, classic Roland character
+# =============================================================================
+static func generate_custom_juno_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 82.4))
+	var sub_level = params.get("sub_level", params.get("sub", 0.5))
+	var chorus_rate = params.get("chorus_rate", 0.5)
+	var chorus_depth = params.get("chorus_depth", params.get("chorus", 0.3))
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 1500.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.3))
+	var filter_env = params.get("filter_env", 0.5)
+	var attack = params.get("attack", 0.01)
+	var decay = params.get("decay", 0.3)
+	var sustain = params.get("sustain", 0.6)
+	var release = params.get("release", 0.4)
+	var amplitude = params.get("amplitude", params.get("amp", 0.45))
+	
+	print("[SYNTH] JUNO BASS GENERATING - 80s pop with Roland chorus")
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Main oscillator - sawtooth
+		var saw = 2.0 * fmod(freq * t, 1.0) - 1.0
+		
+		# Sub oscillator - square one octave down (Juno characteristic)
+		var sub = (1.0 if sin(2.0 * PI * freq * 0.5 * t) > 0 else -1.0) * sub_level
+		
+		# Juno chorus (3 slightly detuned voices with LFO)
+		var chorus_lfo = sin(2.0 * PI * chorus_rate * t)
+		var voice1 = 2.0 * fmod(freq * (1.0 + chorus_depth * 0.01 * chorus_lfo) * t, 1.0) - 1.0
+		var voice2 = 2.0 * fmod(freq * (1.0 - chorus_depth * 0.01 * chorus_lfo) * t, 1.0) - 1.0
+		var voice3 = 2.0 * fmod(freq * (1.0 + chorus_depth * 0.005 * sin(chorus_lfo * 1.3)) * t, 1.0) - 1.0
+		
+		var chorused = (saw + voice1 + voice2 + voice3) / 4.0
+		
+		# Mix main and sub
+		var wave = chorused * 0.7 + sub * 0.3
+		
+		# Filter envelope
+		var f_env = 1.0
+		var env_time = t * 8.0  # Fast filter env
+		f_env = exp(-env_time) * filter_env + (1.0 - filter_env)
+		
+		var dynamic_cutoff = filter_cutoff * (0.5 + f_env * 0.5)
+		var filter_factor = clamp(dynamic_cutoff / 4000.0, 0.2, 1.0)
+		wave *= filter_factor * (1.0 + filter_resonance * f_env)
+		
+		# Amplitude envelope
+		var envelope = 0.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			envelope = sustain * (1.0 - (i - release_start) / (sample_count - release_start))
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# MINIMOOG BASS - Funk/Soul (Moog Model D)
+# Ladder filter, fat and warm, oscillator stacking
+# =============================================================================
+static func generate_custom_minimoog_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 55.0))  # A1
+	var osc1_wave = params.get("osc1_wave", "saw")
+	var osc2_wave = params.get("osc2_wave", "square")
+	var osc2_detune = params.get("osc2_detune", params.get("detune", 0.05))
+	var osc2_octave = params.get("osc2_octave", 0)  # 0, -1, +1
+	var osc_mix = params.get("osc_mix", 0.5)
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 1000.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.5))
+	var filter_env_amount = params.get("filter_env_amount", params.get("env_mod", 0.7))
+	var filter_attack = params.get("filter_attack", 0.01)
+	var filter_decay = params.get("filter_decay", 0.3)
+	var amp_attack = params.get("attack", 0.005)
+	var amp_decay = params.get("decay", 0.3)
+	var amp_sustain = params.get("sustain", 0.8)
+	var amp_release = params.get("release", 0.3)
+	var keyboard_tracking = params.get("keyboard_tracking", 0.5)
+	var amplitude = params.get("amplitude", params.get("amp", 0.5))
+	
+	print("[SYNTH] MINIMOOG BASS GENERATING - Fat Moog ladder filter")
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Oscillator 1
+		var osc1 = 0.0
+		match osc1_wave:
+			"saw", "sawtooth":
+				osc1 = 2.0 * fmod(freq * t, 1.0) - 1.0
+			"square":
+				osc1 = 1.0 if sin(2.0 * PI * freq * t) > 0 else -1.0
+			"triangle":
+				var phase = fmod(freq * t, 1.0)
+				osc1 = 4.0 * abs(phase - 0.5) - 1.0
+		
+		# Oscillator 2 (detuned, possibly different octave)
+		var osc2_freq = freq * pow(2.0, osc2_octave) * (1.0 + osc2_detune)
+		var osc2 = 0.0
+		match osc2_wave:
+			"saw", "sawtooth":
+				osc2 = 2.0 * fmod(osc2_freq * t, 1.0) - 1.0
+			"square":
+				osc2 = 1.0 if sin(2.0 * PI * osc2_freq * t) > 0 else -1.0
+			"triangle":
+				var phase = fmod(osc2_freq * t, 1.0)
+				osc2 = 4.0 * abs(phase - 0.5) - 1.0
+		
+		# Mix oscillators
+		var wave = osc1 * (1.0 - osc_mix) + osc2 * osc_mix
+		
+		# Moog ladder filter envelope
+		var filter_env = 0.0
+		if t < filter_attack:
+			filter_env = t / filter_attack
+		else:
+			filter_env = exp(-(t - filter_attack) / filter_decay)
+		
+		# Keyboard tracking affects cutoff
+		var kb_track = 1.0 + (freq / 440.0 - 1.0) * keyboard_tracking
+		var dynamic_cutoff = filter_cutoff * kb_track
+		dynamic_cutoff += filter_env * filter_env_amount * 3000.0
+		
+		# 4-pole ladder filter simulation
+		var filter_factor = clamp(dynamic_cutoff / 5000.0, 0.1, 1.0)
+		var resonance_boost = 1.0 + filter_resonance * 3.0 * filter_env
+		
+		# Cascaded filtering (Moog ladder approximation)
+		for pole in range(4):
+			wave *= filter_factor * 0.9
+		wave *= resonance_boost
+		
+		# Warm saturation (Moog transistor character)
+		wave = tanh(wave * 1.3)
+		
+		# Amplitude envelope
+		var envelope = 0.0
+		var attack_samples = amp_attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = amp_decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - amp_release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - amp_sustain)
+		elif i < release_start:
+			envelope = amp_sustain
+		else:
+			envelope = amp_sustain * (1.0 - (i - release_start) / (sample_count - release_start))
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# SH-101 BASS - Acid/Electro (Roland SH-101)
+# Single oscillator, high resonance, glide/slide
+# =============================================================================
+static func generate_custom_sh101_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 55.0))
+	var target_freq = params.get("target_freq", freq * 1.5)  # For slide
+	var glide_time = params.get("glide_time", params.get("glide", 0.15))
+	var wave_type = params.get("wave_type", params.get("waveform", "saw"))
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 600.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.75))
+	var filter_env_amount = params.get("filter_env_amount", params.get("env_mod", 0.8))
+	var filter_decay = params.get("filter_decay", 0.4)
+	var accent = params.get("accent", 0.5)
+	var attack = params.get("attack", 0.005)
+	var decay = params.get("decay", 0.5)
+	var sustain = params.get("sustain", 0.3)
+	var release = params.get("release", 0.2)
+	var amplitude = params.get("amplitude", params.get("amp", 0.45))
+	
+	print("[SYNTH] SH-101 BASS GENERATING - Acid squelch with %.2f resonance" % filter_resonance)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var current_freq = freq
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Portamento/glide
+		if t < glide_time:
+			var glide_progress = t / glide_time
+			glide_progress = glide_progress * glide_progress * (3.0 - 2.0 * glide_progress)  # Smoothstep
+			current_freq = freq + (target_freq - freq) * glide_progress
+		else:
+			current_freq = target_freq
+		
+		# Single oscillator
+		var wave = 0.0
+		match wave_type:
+			"saw", "sawtooth":
+				wave = 2.0 * fmod(current_freq * t, 1.0) - 1.0
+			"square":
+				wave = 1.0 if sin(2.0 * PI * current_freq * t) > 0 else -1.0
+			"pulse":
+				var phase = fmod(current_freq * t, 1.0)
+				wave = 1.0 if phase < 0.25 else -1.0  # Narrow pulse
+		
+		# Filter envelope with accent
+		var filter_env = exp(-t / filter_decay)
+		var accent_boost = 1.0 + accent * 0.5 * filter_env
+		
+		# Resonant filter (SH-101/303 character)
+		var dynamic_cutoff = filter_cutoff + filter_env * filter_env_amount * 3000.0 * accent_boost
+		var filter_factor = clamp(dynamic_cutoff / 5000.0, 0.05, 1.0)
+		
+		# High resonance creates the squelch
+		var resonance_boost = 1.0 + filter_resonance * 3.0
+		wave *= filter_factor * resonance_boost
+		
+		# Add resonant peak (the acid "squelch")
+		var resonant_peak = sin(2.0 * PI * dynamic_cutoff * t) * filter_resonance * 0.2 * filter_env
+		wave += resonant_peak
+		
+		# Slight distortion for grit
+		wave = tanh(wave * 1.5)
+		
+		# Amplitude envelope
+		var envelope = 0.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			envelope = sustain * (1.0 - (i - release_start) / (sample_count - release_start))
+		
+		# Accent affects amplitude too
+		envelope *= accent_boost
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# PROPHET BASS - Synthwave (Sequential Prophet-5)
+# Lush, complex, poly-mod for character
+# =============================================================================
+static func generate_custom_prophet_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 82.4))
+	var osc_detune = params.get("osc_detune", params.get("detune", 0.08))
+	var poly_mod_amount = params.get("poly_mod_amount", params.get("poly_mod", 0.3))
+	var poly_mod_rate = params.get("poly_mod_rate", 5.0)
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 1200.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.4))
+	var filter_env = params.get("filter_env", 0.6)
+	var unison_voices = int(params.get("unison_voices", params.get("voices", 4)))
+	var unison_spread = params.get("unison_spread", 0.02)
+	var attack = params.get("attack", 0.02)
+	var decay = params.get("decay", 0.4)
+	var sustain = params.get("sustain", 0.6)
+	var release = params.get("release", 0.5)
+	var amplitude = params.get("amplitude", params.get("amp", 0.4))
+	
+	print("[SYNTH] PROPHET BASS GENERATING - Synthwave lush with %d unison voices" % unison_voices)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Poly-mod LFO (Prophet-5 characteristic)
+		var poly_mod = sin(2.0 * PI * poly_mod_rate * t) * poly_mod_amount
+		
+		# Generate unison voices
+		var wave = 0.0
+		for v in range(unison_voices):
+			var voice_detune = (float(v) / (unison_voices - 1) - 0.5) * unison_spread if unison_voices > 1 else 0.0
+			var voice_freq = freq * (1.0 + voice_detune + osc_detune)
+			
+			# Saw with poly-mod on pitch
+			var mod_freq = voice_freq * (1.0 + poly_mod * 0.02)
+			var saw = 2.0 * fmod(mod_freq * t, 1.0) - 1.0
+			wave += saw
+		wave /= unison_voices
+		
+		# Filter with envelope
+		var f_env = exp(-t * 3.0) * filter_env + (1.0 - filter_env)
+		var dynamic_cutoff = filter_cutoff * (0.5 + f_env * 0.5)
+		dynamic_cutoff += poly_mod * 200.0  # Poly-mod affects filter
+		
+		var filter_factor = clamp(dynamic_cutoff / 4000.0, 0.2, 1.0)
+		wave *= filter_factor * (1.0 + filter_resonance * f_env)
+		
+		# Slight warmth
+		wave = tanh(wave * 1.2)
+		
+		# Amplitude envelope
+		var envelope = 0.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			envelope = sustain * (1.0 - (i - release_start) / (sample_count - release_start))
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# UPRIGHT BASS - Jazz/Lo-fi (Physical modeling)
+# Body resonance, finger noise, woody character
+# =============================================================================
+static func generate_custom_upright_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 82.4))
+	var body_resonance = params.get("body_resonance", params.get("body", 0.4))
+	var finger_noise = params.get("finger_noise", params.get("noise", 0.15))
+	var string_tension = params.get("string_tension", params.get("tension", 0.6))
+	var attack = params.get("attack", 0.03)
+	var decay = params.get("decay", 1.0)
+	var sustain = params.get("sustain", 0.4)
+	var release = params.get("release", 0.5)
+	var warmth = params.get("warmth", 0.7)
+	var amplitude = params.get("amplitude", params.get("amp", 0.5))
+	
+	print("[SYNTH] UPRIGHT BASS GENERATING - Jazz with body resonance")
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	# Body resonance frequencies (typical upright bass)
+	var body_freqs = [62.0, 95.0, 123.0, 185.0]
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# String vibration (Karplus-Strong inspired)
+		var string_wave = sin(2.0 * PI * freq * t)
+		# Add harmonics with decay
+		string_wave += sin(2.0 * PI * freq * 2.0 * t) * 0.5 * exp(-t * 2.0)
+		string_wave += sin(2.0 * PI * freq * 3.0 * t) * 0.25 * exp(-t * 3.0)
+		string_wave += sin(2.0 * PI * freq * 4.0 * t) * 0.12 * exp(-t * 4.0)
+		
+		# String tension affects brightness
+		string_wave *= (0.5 + string_tension * 0.5)
+		
+		# Body resonance
+		var body_wave = 0.0
+		for bf in body_freqs:
+			var resonance_amount = exp(-abs(freq - bf) / 50.0) * body_resonance
+			body_wave += sin(2.0 * PI * bf * t) * resonance_amount * exp(-t * 1.5)
+		
+		# Finger noise on attack
+		var noise = 0.0
+		if t < 0.05:
+			var noise_t = t * 8000.0
+			noise = (sin(noise_t) * 0.4 + sin(noise_t * 1.7) * 0.3) * exp(-t * 60.0) * finger_noise
+		
+		var wave = string_wave + body_wave * 0.3 + noise
+		
+		# Warmth (low-pass character)
+		var filter_factor = 0.3 + warmth * 0.4
+		wave *= filter_factor
+		
+		# Envelope
+		var envelope = 0.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			envelope = sustain * (1.0 - (i - release_start) / (sample_count - release_start))
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# SLAP BASS - Funk (Bass guitar technique)
+# Sharp attack transient, string slap, percussive
+# =============================================================================
+static func generate_custom_slap_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 82.4))
+	var slap_intensity = params.get("slap_intensity", params.get("slap", 0.8))
+	var pop_amount = params.get("pop_amount", params.get("pop", 0.5))
+	var string_brightness = params.get("string_brightness", params.get("brightness", 0.7))
+	var attack = params.get("attack", 0.002)
+	var decay = params.get("decay", 0.3)
+	var sustain = params.get("sustain", 0.3)
+	var release = params.get("release", 0.15)
+	var compression = params.get("compression", 0.6)
+	var amplitude = params.get("amplitude", params.get("amp", 0.55))
+	
+	print("[SYNTH] SLAP BASS GENERATING - Funk with slap intensity %.2f" % slap_intensity)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Slap transient (bright, percussive)
+		var slap = 0.0
+		if t < 0.015:
+			var slap_env = exp(-t * 150.0)
+			# High frequency content for the "slap" sound
+			slap = sin(t * 4000.0) * 0.5 + sin(t * 6000.0) * 0.3 + sin(t * 8000.0) * 0.2
+			slap *= slap_env * slap_intensity
+		
+		# Pop/pluck attack
+		var pop = 0.0
+		if t < 0.03:
+			var pop_env = exp(-t * 80.0)
+			pop = sin(2.0 * PI * freq * 4.0 * t) * pop_env * pop_amount
+		
+		# Main string vibration
+		var string_wave = sin(2.0 * PI * freq * t)
+		# Harmonics for brightness
+		string_wave += sin(2.0 * PI * freq * 2.0 * t) * 0.4 * string_brightness
+		string_wave += sin(2.0 * PI * freq * 3.0 * t) * 0.2 * string_brightness
+		string_wave += sin(2.0 * PI * freq * 4.0 * t) * 0.1 * string_brightness
+		
+		var wave = slap + pop + string_wave
+		
+		# Compression for funk punch
+		if compression > 0.0:
+			var threshold = 0.6
+			if abs(wave) > threshold:
+				var excess = abs(wave) - threshold
+				wave = sign(wave) * (threshold + excess * (1.0 - compression))
+		
+		# Envelope
+		var envelope = 0.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			envelope = sustain * (1.0 - (i - release_start) / (sample_count - release_start))
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# PICKED BASS - Rock (Electric bass with pick)
+# Pick attack, string vibration, defined articulation
+# =============================================================================
+static func generate_custom_picked_bass(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var freq = params.get("frequency", params.get("freq", 82.4))
+	var pick_hardness = params.get("pick_hardness", params.get("pick", 0.7))
+	var pick_position = params.get("pick_position", params.get("position", 0.3))  # 0 = bridge, 1 = neck
+	var tone = params.get("tone", 0.6)
+	var attack = params.get("attack", 0.003)
+	var decay = params.get("decay", 0.5)
+	var sustain = params.get("sustain", 0.5)
+	var release = params.get("release", 0.25)
+	var drive = params.get("drive", 0.2)
+	var amplitude = params.get("amplitude", params.get("amp", 0.5))
+	
+	print("[SYNTH] PICKED BASS GENERATING - Rock with pick hardness %.2f" % pick_hardness)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Pick attack noise
+		var pick_noise = 0.0
+		if t < 0.01:
+			var pick_env = exp(-t * 200.0) * pick_hardness
+			# Bright transient for pick
+			pick_noise = sin(t * 5000.0) * 0.4 + sin(t * 7500.0) * 0.3
+			pick_noise *= pick_env
+		
+		# Main string vibration
+		var string_wave = sin(2.0 * PI * freq * t)
+		
+		# Harmonics depend on pick position
+		# Closer to bridge = more harmonics
+		var harmonic_amount = 1.0 - pick_position * 0.5
+		string_wave += sin(2.0 * PI * freq * 2.0 * t) * 0.5 * harmonic_amount
+		string_wave += sin(2.0 * PI * freq * 3.0 * t) * 0.3 * harmonic_amount
+		string_wave += sin(2.0 * PI * freq * 4.0 * t) * 0.15 * harmonic_amount
+		string_wave += sin(2.0 * PI * freq * 5.0 * t) * 0.08 * harmonic_amount
+		
+		var wave = pick_noise + string_wave
+		
+		# Tone control
+		wave *= (0.4 + tone * 0.6)
+		
+		# Optional drive
+		if drive > 0.0:
+			wave = tanh(wave * (1.0 + drive * 2.0)) / (1.0 + drive * 0.5)
+		
+		# Envelope
+		var envelope = 0.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			envelope = sustain * (1.0 - (i - release_start) / (sample_count - release_start))
+		
+		data[i] = wave * envelope * amplitude
+
+# =============================================================================
+# ESSENTIAL DRUM SOUNDS - Production-quality drum synthesis
+# =============================================================================
+
+# =============================================================================
+# CLAP - TR-909 style layered noise bursts with room character
+# Reference: Roland TR-909, LinnDrum - the sound of house/pop music
+# Technique: Multiple short noise bursts (4-8) layered with 15-30ms delays
+# =============================================================================
+static func generate_custom_clap(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 0.35))
+	var tone = params.get("tone", 0.6)  # 0=dark, 1=bright
+	var room = params.get("room", 0.3)  # Room reverb amount
+	var layers = int(params.get("layers", 5))  # Number of clap layers (4-8)
+	var spread = params.get("spread", 0.025)  # Time spread between layers (seconds)
+	var filter_freq = params.get("filter_freq", 1200.0 + tone * 800.0)  # Bandpass center
+	var amplitude = params.get("amplitude", 0.5)
+	
+	# Layer timing - each clap hits slightly after the previous
+	var layer_times = []
+	for layer in range(layers):
+		# Slightly randomized timing for natural feel
+		layer_times.append(layer * spread * (0.8 + randf() * 0.4))
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var wave = 0.0
+		
+		# Generate each clap layer
+		for layer in range(layers):
+			var layer_t = t - layer_times[layer]
+			if layer_t >= 0:
+				# Each layer is a short noise burst
+				var layer_duration = 0.015 + randf() * 0.01  # 15-25ms per burst
+				
+				if layer_t < layer_duration:
+					# Generate bandpass-filtered noise
+					var noise = 0.0
+					for n in range(6):
+						var freq = filter_freq * (0.5 + float(n) * 0.3)
+						noise += sin(t * freq * 2.0 * PI + n * 1.37) * (1.0 / (n + 1))
+					noise = tanh(noise * 2.0)  # Soft clip for density
+					
+					# Short attack, fast decay per layer
+					var layer_env = exp(-layer_t / layer_duration * 3.0)
+					
+					# Later layers are slightly quieter
+					var layer_amp = 1.0 - float(layer) / layers * 0.3
+					
+					wave += noise * layer_env * layer_amp
+		
+		# Overall envelope with room tail
+		var main_envelope = exp(-t / decay)
+		
+		# Add room reverb simulation (simple delay + decay)
+		var room_wave = 0.0
+		if room > 0.0:
+			var room_delay = 0.03  # 30ms early reflection
+			var room_t = t - room_delay
+			if room_t > 0:
+				room_wave = wave * exp(-room_t / (decay * 1.5)) * room
+		
+		# Apply high-pass filter to remove rumble (claps have no low end)
+		var hp_factor = 0.8 + tone * 0.15
+		
+		data[i] = (wave + room_wave) * main_envelope * hp_factor * amplitude
+
+# =============================================================================
+# OPEN_HIHAT - TR-909/808 style long decay metallic hi-hat
+# Reference: Roland TR-909, TR-808 - essential for groove
+# Technique: Multiple square wave oscillators at inharmonic ratios
+# =============================================================================
+static func generate_custom_open_hihat(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 0.5))  # Longer than closed
+	var tone = params.get("tone", 0.7)  # 0=dark, 1=bright
+	var metallic = params.get("metallic", 0.6)  # Metallic ring amount
+	var amplitude = params.get("amplitude", 0.35)
+	
+	# TR-909 uses 6 square wave oscillators at these ratios for metallic character
+	var osc_ratios = [1.0, 1.28, 1.42, 1.67, 2.0, 2.14]
+	var base_freq = 200.0 + tone * 100.0  # Base frequency for metallic oscillators
+	
+	# High-frequency noise component frequencies
+	var noise_freq_base = 8000.0 + tone * 4000.0
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# Metallic oscillator component (6 oscillators at inharmonic ratios)
+		var metallic_wave = 0.0
+		for osc in range(osc_ratios.size()):
+			var freq = base_freq * osc_ratios[osc]
+			# Square wave for each oscillator
+			var phase = fmod(freq * t, 1.0)
+			var sq = 1.0 if phase < 0.5 else -1.0
+			metallic_wave += sq * (1.0 / osc_ratios.size())
+		
+		# Ring modulate for extra complexity
+		metallic_wave *= sin(2.0 * PI * base_freq * 1.5 * t)
+		
+		# Noise component (high-pass filtered white noise simulation)
+		var noise = 0.0
+		for n in range(8):
+			var freq = noise_freq_base + n * 1200.0
+			noise += sin(t * freq + n * 2.13) * (1.0 / (n + 1))
+		noise = tanh(noise * 1.5)
+		
+		# Mix metallic and noise based on metallic parameter
+		var wave = metallic_wave * metallic + noise * (1.0 - metallic * 0.5)
+		
+		# Open hi-hat envelope: instant attack, long exponential decay
+		var envelope = exp(-t / decay)
+		
+		# Tone shaping: reduce lows, emphasize highs
+		var high_emphasis = 0.7 + tone * 0.3
+		
+		data[i] = wave * envelope * high_emphasis * amplitude
+
+# =============================================================================
+# SNARE_ACOUSTIC - Layered acoustic snare with body, wires, and air
+# Reference: Real acoustic snare drums, not electronic
+# Technique: Drum body (sine/triangle), snare wires (high noise), transient
+# =============================================================================
+static func generate_custom_snare_acoustic(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 0.25))
+	var pitch = params.get("pitch", 200.0)  # Body pitch (150-250Hz typical)
+	var wire_amount = params.get("wires", params.get("snare", 0.6))  # Snare wire level
+	var body_amount = params.get("body", 0.5)  # Drum body level
+	var attack_click = params.get("attack", params.get("click", 0.4))  # Attack transient
+	var tune = params.get("tune", 0.5)  # Pitch variation
+	var tone = params.get("tone", 0.5)  # 0=dark, 1=bright
+	var amplitude = params.get("amplitude", 0.6)
+	
+	# Pitch adjusted by tune parameter
+	var body_freq = pitch * (0.8 + tune * 0.4)
+	var wire_freq_base = 4000.0 + tone * 4000.0  # Wire resonance 4-8kHz
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		# 1. BODY - Pitched sine/triangle with slight pitch drop
+		var body_pitch_env = 1.0 + exp(-t * 40.0) * 0.3  # Pitch drops quickly at start
+		var body_wave = sin(2.0 * PI * body_freq * body_pitch_env * t)
+		# Add harmonic for body resonance
+		body_wave += sin(2.0 * PI * body_freq * 2.0 * body_pitch_env * t) * 0.3
+		var body_env = exp(-t / (decay * 0.8))
+		var body = body_wave * body_env * body_amount
+		
+		# 2. SNARE WIRES - High-frequency noise with characteristic rattle
+		var wire_noise = 0.0
+		for n in range(10):
+			var freq = wire_freq_base + n * 800.0
+			wire_noise += sin(t * freq + n * 1.7) * (1.0 / (n + 1))
+		# Add some modulation for wire rattle character
+		var wire_mod = 1.0 + sin(2.0 * PI * 180.0 * t) * 0.3  # Subtle modulation
+		wire_noise *= wire_mod
+		wire_noise = tanh(wire_noise * 1.5)
+		var wire_env = exp(-t / (decay * 0.6))
+		var wires = wire_noise * wire_env * wire_amount
+		
+		# 3. ATTACK TRANSIENT - Sharp click at the start
+		var click_freq = 1500.0 + tone * 1000.0
+		var click_wave = sin(2.0 * PI * click_freq * t)
+		click_wave += sin(2.0 * PI * click_freq * 2.5 * t) * 0.5
+		var click_env = exp(-t * 80.0)  # Very fast decay
+		var click = click_wave * click_env * attack_click
+		
+		# 4. AIR/ROOM - Subtle low-frequency rumble
+		var air = sin(2.0 * PI * 80.0 * t) * exp(-t / decay) * 0.1
+		
+		# Combine all layers
+		var wave = body + wires + click + air
+		
+		data[i] = wave * amplitude
+
+# =============================================================================
+# RIMSHOT - Wood + metal click for dub/reggae
+# Reference: Acoustic rimshot, 808 rimshot
+# Technique: Short high-frequency click + wood resonance
+# =============================================================================
+static func generate_custom_rimshot(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 0.08))  # Very short
+	var pitch = params.get("pitch", 600.0)  # Wood body pitch
+	var click_amount = params.get("click", 0.7)  # Metal click level
+	var wood_amount = params.get("wood", params.get("body", 0.6))  # Wood resonance
+	var tone = params.get("tone", 0.6)
+	var amplitude = params.get("amplitude", 0.5)
+	
+	var click_freq = 1500.0 + tone * 1000.0
+	var wood_freq = pitch * (0.8 + tone * 0.4)
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		
+		# 1. METAL CLICK - Very short, high frequency
+		var click = sin(2.0 * PI * click_freq * t)
+		click += sin(2.0 * PI * click_freq * 2.3 * t) * 0.4  # Harmonic
+		var click_env = exp(-t * 100.0)  # Extremely fast
+		click *= click_env * click_amount
+		
+		# 2. WOOD BODY - Short resonant thump
+		var wood = sin(2.0 * PI * wood_freq * t)
+		wood += sin(2.0 * PI * wood_freq * 1.5 * t) * 0.3  # Fifth harmonic
+		var wood_env = exp(-t / decay)
+		wood *= wood_env * wood_amount
+		
+		# 3. SLIGHT PITCH DROP for punch
+		var pitch_drop = sin(2.0 * PI * (wood_freq * 0.5) * t) * exp(-t * 50.0) * 0.2
+		
+		data[i] = (click + wood + pitch_drop) * amplitude
+
+# =============================================================================
+# SHAKER - 16th note groove texture with filtered noise
+# Reference: Egg shaker, maraca
+# Technique: High-pass filtered noise with short granular envelope
+# =============================================================================
+static func generate_custom_shaker(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 0.05))  # Very short
+	var tone = params.get("tone", 0.7)  # 0=dark, 1=bright
+	var density = params.get("density", 0.8)  # Grain density
+	var filter_freq = params.get("filter_freq", 3000.0 + tone * 4000.0)
+	var amplitude = params.get("amplitude", 0.3)
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		
+		# High-pass filtered noise (shaker has no low frequencies)
+		var noise = 0.0
+		for n in range(8):
+			var freq = filter_freq + n * 1000.0
+			noise += sin(t * freq + n * 3.14) * (1.0 / (n + 1))
+		
+		# Add some granular texture
+		var grain_rate = 200.0 * density  # Grains per second
+		var grain_phase = fmod(t * grain_rate, 1.0)
+		var grain_env = sin(grain_phase * PI) if grain_phase < 0.3 else 0.0
+		noise *= (0.5 + grain_env * 0.5)
+		
+		# Overall envelope
+		var envelope = exp(-t / decay)
+		
+		data[i] = noise * envelope * amplitude
+
+# =============================================================================
+# TAMBOURINE - Pop/disco essential with jingles + shell hit
+# Reference: Real tambourine with metal jingles
+# Technique: Shell hit at ~300-500Hz, jingles at 5-10kHz metallic
+# =============================================================================
+static func generate_custom_tambourine(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 0.3))
+	var jingle_brightness = params.get("brightness", params.get("tone", 0.7))
+	var shell_level = params.get("shell", 0.4)
+	var jingle_level = params.get("jingles", 0.7)
+	var amplitude = params.get("amplitude", 0.4)
+	
+	var shell_freq = 400.0
+	var jingle_base_freq = 6000.0 + jingle_brightness * 3000.0
+	
+	# Jingle frequencies (multiple slightly detuned for shimmer)
+	var jingle_freqs = [1.0, 1.05, 1.12, 1.18, 1.25, 1.33]
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		
+		# 1. SHELL HIT - Low thump
+		var shell = sin(2.0 * PI * shell_freq * t)
+		shell += sin(2.0 * PI * shell_freq * 2.0 * t) * 0.3
+		var shell_env = exp(-t * 20.0)  # Fast decay
+		shell *= shell_env * shell_level
+		
+		# 2. JINGLES - Multiple metallic frequencies with shimmer
+		var jingles = 0.0
+		for j in range(jingle_freqs.size()):
+			var freq = jingle_base_freq * jingle_freqs[j]
+			# Mix of sine and square for metallic character
+			var jingle_wave = sin(2.0 * PI * freq * t) * 0.7
+			jingle_wave += (1.0 if sin(2.0 * PI * freq * 1.3 * t) > 0 else -1.0) * 0.3
+			jingles += jingle_wave / jingle_freqs.size()
+		
+		# Jingles sustain longer than shell
+		var jingle_env = exp(-t / decay)
+		jingles *= jingle_env * jingle_level
+		
+		# Add slight modulation for shimmer
+		var shimmer = 1.0 + sin(2.0 * PI * 15.0 * t) * 0.1
+		jingles *= shimmer
+		
+		data[i] = (shell + jingles) * amplitude
+
+# =============================================================================
+# RIDE_CYMBAL - Jazz/ambient long metallic shimmer
+# Reference: Jazz ride cymbal
+# Technique: Complex inharmonic partials with very long decay
+# =============================================================================
+static func generate_custom_ride_cymbal(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 3.0))  # Very long
+	var tone = params.get("tone", 0.5)  # Bell vs bow character
+	var bell = params.get("bell", 0.0)  # Bell hit amount (0=bow, 1=bell)
+	var stick = params.get("stick", 0.3)  # Stick click amount
+	var amplitude = params.get("amplitude", 0.35)
+	
+	# Ride has many inharmonic partials
+	var partial_ratios = [1.0, 1.48, 1.89, 2.13, 2.58, 3.14, 3.78, 4.21]
+	var base_freq = 300.0 + bell * 200.0  # Bell is higher
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		
+		# 1. CYMBAL BODY - Complex partials
+		var cymbal = 0.0
+		for p in range(partial_ratios.size()):
+			var freq = base_freq * partial_ratios[p]
+			# Each partial has slightly different decay
+			var partial_decay = decay * (1.0 - float(p) / partial_ratios.size() * 0.5)
+			var partial_env = exp(-t / partial_decay)
+			
+			var partial_wave = sin(2.0 * PI * freq * t)
+			cymbal += partial_wave * partial_env / partial_ratios.size()
+		
+		# 2. HIGH FREQUENCY SHIMMER
+		var shimmer = 0.0
+		for s in range(5):
+			var freq = 5000.0 + s * 2000.0 + tone * 3000.0
+			shimmer += sin(t * freq + s * 1.5) / 5.0
+		shimmer *= exp(-t / (decay * 0.7))
+		
+		# 3. STICK CLICK - Initial attack
+		var click = sin(2.0 * PI * 4000.0 * t) * exp(-t * 80.0) * stick
+		
+		# Bell adds more fundamental ring
+		if bell > 0.0:
+			cymbal += sin(2.0 * PI * base_freq * 0.5 * t) * exp(-t / decay) * bell * 0.5
+		
+		data[i] = (cymbal + shimmer * 0.3 + click) * amplitude
+
+# =============================================================================
+# CRASH_CYMBAL - Transition cymbal with noise burst + metallic decay
+# Reference: Crash cymbal
+# Technique: Wide frequency noise burst + metallic partials, long decay
+# =============================================================================
+static func generate_custom_crash_cymbal(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 2.0))
+	var tone = params.get("tone", 0.6)  # 0=dark, 1=bright
+	var attack_noise = params.get("attack", 0.6)  # Initial noise burst
+	var amplitude = params.get("amplitude", 0.45)
+	
+	var partial_ratios = [1.0, 1.32, 1.67, 2.14, 2.78, 3.45, 4.12]
+	var base_freq = 250.0 + tone * 100.0
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		
+		# 1. INITIAL NOISE BURST - Crash has explosive start
+		var noise = 0.0
+		for n in range(12):
+			var freq = 2000.0 + n * 1500.0 + tone * 2000.0
+			noise += sin(t * freq + n * 2.7) / 12.0
+		var noise_env = exp(-t * 15.0)  # Fast decay on noise
+		noise *= noise_env * attack_noise
+		
+		# 2. METALLIC BODY - Sustained ring
+		var metallic = 0.0
+		for p in range(partial_ratios.size()):
+			var freq = base_freq * partial_ratios[p]
+			var partial_env = exp(-t / (decay * (1.0 - float(p) / partial_ratios.size() * 0.4)))
+			metallic += sin(2.0 * PI * freq * t) * partial_env / partial_ratios.size()
+		
+		# 3. HIGH SHIMMER
+		var shimmer = 0.0
+		for s in range(6):
+			var freq = 8000.0 + s * 2500.0
+			shimmer += sin(t * freq + s * 1.3) / 6.0
+		shimmer *= exp(-t / (decay * 0.5))
+		
+		# Overall envelope
+		var envelope = exp(-t / decay)
+		
+		data[i] = (noise + metallic * 0.7 + shimmer * 0.3) * envelope * amplitude
+
+# =============================================================================
+# TOM - Pitched drum for fills (LOW/MID/HIGH variants)
+# Reference: Acoustic toms, 808/909 toms
+# Technique: Pitched sine with pitch envelope (starts high, drops)
+# =============================================================================
+static func generate_custom_tom(data: PackedFloat32Array, sample_count: int, params: Dictionary, tom_type: String = "mid"):
+	var decay = params.get("decay_time", params.get("decay", 0.35))
+	var tone = params.get("tone", 0.5)
+	var pitch_env_amount = params.get("pitch_env", 0.4)  # How much pitch drops
+	var attack = params.get("attack", params.get("click", 0.3))
+	var amplitude = params.get("amplitude", 0.6)
+	
+	# Base pitch depends on tom type
+	var base_pitch = 80.0  # Low
+	match tom_type:
+		"low":
+			base_pitch = params.get("pitch", 80.0)
+		"mid":
+			base_pitch = params.get("pitch", 140.0)
+		"high":
+			base_pitch = params.get("pitch", 220.0)
+	
+	base_pitch *= (0.9 + tone * 0.2)
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		
+		# PITCH ENVELOPE - Starts higher, drops to fundamental
+		var pitch_env = 1.0 + pitch_env_amount * exp(-t * 25.0)
+		var freq = base_pitch * pitch_env
+		
+		# TOM BODY - Sine wave with some harmonic content
+		var body = sin(2.0 * PI * freq * t)
+		body += sin(2.0 * PI * freq * 2.0 * t) * 0.2  # Harmonic
+		body += sin(2.0 * PI * freq * 0.5 * t) * 0.15  # Sub
+		
+		# ATTACK CLICK
+		var click = sin(2.0 * PI * 1500.0 * t) * exp(-t * 60.0) * attack
+		
+		# Amplitude envelope
+		var envelope = exp(-t / decay)
+		
+		data[i] = (body * envelope + click) * amplitude
+
+# =============================================================================
+# CONGA - Latin/house grooves with slap transient
+# Reference: Latin congas (quinto, conga, tumba)
+# Technique: Pitched membrane synthesis with slap transient
+# =============================================================================
+static func generate_custom_conga(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 0.2))
+	var pitch = params.get("pitch", 280.0)  # Typical conga pitch
+	var slap = params.get("slap", 0.5)  # Slap amount (vs muted)
+	var tone = params.get("tone", 0.5)
+	var open = params.get("open", params.get("mute", 0.7))  # 0=muted, 1=open
+	var amplitude = params.get("amplitude", 0.5)
+	
+	var body_freq = pitch * (0.8 + tone * 0.4)
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		
+		# PITCH ENVELOPE - Slight drop
+		var pitch_env = 1.0 + 0.15 * exp(-t * 30.0)
+		var freq = body_freq * pitch_env
+		
+		# BODY - Membrane resonance
+		var body = sin(2.0 * PI * freq * t)
+		body += sin(2.0 * PI * freq * 1.6 * t) * 0.25  # Inharmonic partial
+		body += sin(2.0 * PI * freq * 2.2 * t) * 0.15
+		
+		# SLAP TRANSIENT - High frequency click
+		var slap_wave = 0.0
+		if slap > 0.0:
+			var slap_freq = 2500.0 + tone * 1500.0
+			slap_wave = sin(2.0 * PI * slap_freq * t) * exp(-t * 50.0) * slap
+			slap_wave += sin(2.0 * PI * slap_freq * 1.8 * t) * exp(-t * 60.0) * slap * 0.5
+		
+		# Envelope depends on open/muted
+		var envelope = exp(-t / (decay * open + 0.05))
+		
+		data[i] = (body * envelope + slap_wave) * amplitude
+
+# =============================================================================
+# BONGO - Higher pitched percussion fills
+# Reference: Cuban bongos (hembra/macho)
+# Technique: Similar to conga but higher pitched, sharper attack
+# =============================================================================
+static func generate_custom_bongo(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var decay = params.get("decay_time", params.get("decay", 0.12))  # Shorter than conga
+	var pitch = params.get("pitch", 450.0)  # Higher than conga
+	var attack = params.get("attack", params.get("slap", 0.6))  # Sharp attack
+	var tone = params.get("tone", 0.6)
+	var amplitude = params.get("amplitude", 0.45)
+	
+	var body_freq = pitch * (0.9 + tone * 0.2)
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		
+		# PITCH ENVELOPE - Quick drop
+		var pitch_env = 1.0 + 0.2 * exp(-t * 40.0)
+		var freq = body_freq * pitch_env
+		
+		# BODY - Higher membrane sound
+		var body = sin(2.0 * PI * freq * t)
+		body += sin(2.0 * PI * freq * 1.5 * t) * 0.3
+		body += sin(2.0 * PI * freq * 2.8 * t) * 0.1
+		
+		# ATTACK - Very sharp
+		var attack_wave = sin(2.0 * PI * 3500.0 * t) * exp(-t * 80.0) * attack
+		
+		# Envelope
+		var envelope = exp(-t / decay)
+		
+		data[i] = (body * envelope + attack_wave) * amplitude
+
+# ============================================================================
+# EXPRESSIVE LEAD & MELODIC SOUNDS
+# Research: Leads need 2-5kHz presence, velocity->timbre, expressive control
+# ============================================================================
+
+static func generate_custom_supersaw_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# SUPERSAW LEAD - Trance/EDM essential (JP-8000 style)
+	# Research: 7 detuned saws, +/-25-30 cents spread, stereo width
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var detune_cents = params.get("detune_cents", params.get("detune", 25.0))
+	var velocity = params.get("velocity", 0.8)
+	var attack = params.get("attack", 0.01)
+	var decay = params.get("decay", 0.2)
+	var sustain = params.get("sustain", 0.7)
+	var release = params.get("release", 0.3)
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 4000.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.3))
+	var vibrato_rate = params.get("vibrato_rate", 5.0)
+	var vibrato_depth = params.get("vibrato_depth", 0.01)
+	var amplitude = params.get("amplitude", 0.4)
+	
+	# Detune spread (cents) for 7 voices - JP-8000 style
+	var detune_spread = [-1.0, -0.67, -0.33, 0.0, 0.33, 0.67, 1.0]
+	var voice_mix = [0.7, 0.85, 0.95, 1.0, 0.95, 0.85, 0.7]
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		# Vibrato (delayed onset)
+		var vibrato = 0.0
+		if progress > 0.1:
+			var vib_intensity = min((progress - 0.1) / 0.3, 1.0)
+			vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth * vib_intensity
+		var mod_freq = freq * (1.0 + vibrato)
+		
+		# Generate 7 detuned sawtooth waves
+		var total_wave = 0.0
+		for voice in range(7):
+			var voice_detune_cents = detune_spread[voice] * detune_cents
+			var detune_ratio = pow(2.0, voice_detune_cents / 1200.0)
+			var voice_freq = mod_freq * detune_ratio
+			var saw = 2.0 * fmod(voice_freq * t, 1.0) - 1.0
+			total_wave += saw * voice_mix[voice]
+		total_wave /= 7.0
+		
+		# Velocity affects filter cutoff
+		var vel_cutoff = filter_cutoff * (0.5 + velocity * 0.5)
+		var filter_env = exp(-progress * 3.0) * 0.5 + 0.5
+		var dynamic_cutoff = vel_cutoff * filter_env
+		var filter_factor = clamp(dynamic_cutoff / 8000.0, 0.2, 1.0)
+		var filtered = total_wave * filter_factor * (1.0 + filter_resonance * filter_env)
+		
+		# ADSR envelope
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.5 + velocity * 0.5
+		data[i] = filtered * envelope * amplitude * vel_amp
+
+
+static func generate_custom_sync_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# SYNC LEAD - Aggressive oscillator sync
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var sync_ratio = params.get("sync_ratio", 2.5)
+	var velocity = params.get("velocity", 0.8)
+	var attack = params.get("attack", 0.01)
+	var decay = params.get("decay", 0.3)
+	var sustain = params.get("sustain", 0.6)
+	var release = params.get("release", 0.4)
+	var filter_cutoff = params.get("filter_cutoff", params.get("cutoff", 3000.0))
+	var filter_resonance = params.get("filter_resonance", params.get("resonance", 0.5))
+	var sync_sweep = params.get("sync_sweep", 0.0)
+	var vibrato_rate = params.get("vibrato_rate", 5.5)
+	var vibrato_depth = params.get("vibrato_depth", 0.015)
+	var amplitude = params.get("amplitude", 0.45)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var master_phase = 0.0
+	var slave_phase = 0.0
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
+		var master_freq = freq * (1.0 + vibrato)
+		var current_sync = sync_ratio + sync_sweep * sin(2.0 * PI * 0.5 * t)
+		var slave_freq = master_freq * current_sync
+		
+		var master_inc = master_freq / AudioSynthesizer.SAMPLE_RATE
+		var slave_inc = slave_freq / AudioSynthesizer.SAMPLE_RATE
+		
+		master_phase += master_inc
+		slave_phase += slave_inc
+		
+		if master_phase >= 1.0:
+			master_phase = fmod(master_phase, 1.0)
+			slave_phase = 0.0
+		
+		var wave = 2.0 * slave_phase - 1.0
+		
+		var vel_cutoff = filter_cutoff * (0.6 + velocity * 0.4)
+		var filter_env = exp(-progress * 4.0) * 0.6 + 0.4
+		var dynamic_cutoff = vel_cutoff * filter_env
+		var filter_factor = clamp(dynamic_cutoff / 6000.0, 0.3, 1.0)
+		var filtered = wave * filter_factor * (1.0 + filter_resonance * filter_env * 0.5)
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.6 + velocity * 0.4
+		data[i] = filtered * envelope * amplitude * vel_amp
+
+
+static func generate_custom_fm_bell(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# FM BELL - DX7 style metallic bell
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var mod_ratio = params.get("mod_ratio", params.get("ratio", 1.414))
+	var mod_index = params.get("mod_index", params.get("mod_depth", 5.0))
+	var velocity = params.get("velocity", 0.8)
+	var attack = params.get("attack", 0.001)
+	var decay = params.get("decay", 1.5)
+	var brightness = params.get("brightness", 0.7)
+	var amplitude = params.get("amplitude", 0.4)
+	
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var modulator_freq = freq * mod_ratio
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var mod_env = exp(-progress * 8.0) * velocity
+		var current_mod_index = mod_index * mod_env * brightness
+		
+		var modulator = sin(2.0 * PI * modulator_freq * t)
+		var carrier = sin(2.0 * PI * freq * t + modulator * current_mod_index)
+		
+		var mod2_freq = freq * 2.414
+		var mod2 = sin(2.0 * PI * mod2_freq * t) * current_mod_index * 0.3
+		carrier += sin(2.0 * PI * freq * t + mod2) * 0.3
+		carrier /= 1.3
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		else:
+			envelope = exp(-progress * (3.0 / decay))
+		
+		var vel_amp = 0.5 + velocity * 0.5
+		data[i] = carrier * envelope * amplitude * vel_amp
+
+
+static func generate_custom_square_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# SQUARE LEAD - Chiptune/retro
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var pulse_width = params.get("pulse_width", 0.5)
+	var pwm_rate = params.get("pwm_rate", 4.0)
+	var pwm_depth = params.get("pwm_depth", 0.2)
+	var velocity = params.get("velocity", 0.8)
+	var attack = params.get("attack", 0.005)
+	var decay = params.get("decay", 0.1)
+	var sustain = params.get("sustain", 0.8)
+	var release = params.get("release", 0.2)
+	var vibrato_rate = params.get("vibrato_rate", 6.0)
+	var vibrato_depth = params.get("vibrato_depth", 0.02)
+	var retro_quantize = params.get("retro_quantize", false)
+	var amplitude = params.get("amplitude", 0.35)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var vibrato = 0.0
+		if progress > 0.15:
+			var vib_intensity = min((progress - 0.15) / 0.2, 1.0)
+			vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth * vib_intensity
+		var mod_freq = freq * (1.0 + vibrato)
+		
+		var dynamic_pw = pulse_width + sin(2.0 * PI * pwm_rate * t) * pwm_depth
+		dynamic_pw = clamp(dynamic_pw, 0.1, 0.9)
+		
+		var phase = fmod(mod_freq * t, 1.0)
+		var wave = 1.0 if phase < dynamic_pw else -1.0
+		
+		if velocity > 0.7:
+			var harm_amount = (velocity - 0.7) / 0.3 * 0.2
+			wave += sin(2.0 * PI * mod_freq * 3.0 * t) * harm_amount
+		
+		if retro_quantize:
+			wave = floor(wave * 7.5) / 7.5
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.6 + velocity * 0.4
+		data[i] = wave * envelope * amplitude * vel_amp
+
+
+static func generate_custom_portamento_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# PORTAMENTO LEAD - Smooth gliding
+	var start_freq = params.get("start_freq", params.get("frequency", 440.0))
+	var end_freq = params.get("end_freq", start_freq * 1.5)
+	var glide_time = params.get("glide_time", params.get("portamento", 0.15))
+	var velocity = params.get("velocity", 0.8)
+	var attack = params.get("attack", 0.02)
+	var decay = params.get("decay", 0.2)
+	var sustain = params.get("sustain", 0.7)
+	var release = params.get("release", 0.4)
+	var filter_cutoff = params.get("filter_cutoff", 3500.0)
+	var vibrato_rate = params.get("vibrato_rate", 5.0)
+	var vibrato_depth = params.get("vibrato_depth", 0.02)
+	var waveform = params.get("waveform", "sawtooth")
+	var amplitude = params.get("amplitude", 0.4)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var glide_samples = glide_time * AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		var current_freq = start_freq
+		if i < glide_samples:
+			var glide_progress = float(i) / glide_samples
+			glide_progress = 1.0 - pow(1.0 - glide_progress, 2.0)
+			current_freq = start_freq * pow(end_freq / start_freq, glide_progress)
+		else:
+			current_freq = end_freq
+		
+		if i > glide_samples:
+			var vib_intensity = min((float(i) - glide_samples) / (glide_samples * 0.5), 1.0)
+			current_freq *= 1.0 + sin(2.0 * PI * vibrato_rate * t) * vibrato_depth * vib_intensity
+		
+		var wave = 0.0
+		match waveform:
+			"sawtooth":
+				wave = 2.0 * fmod(current_freq * t, 1.0) - 1.0
+			"square":
+				wave = 1.0 if fmod(current_freq * t, 1.0) < 0.5 else -1.0
+			"sine":
+				wave = sin(2.0 * PI * current_freq * t)
+			"triangle":
+				var phase = fmod(current_freq * t, 1.0)
+				wave = 4.0 * abs(phase - 0.5) - 1.0
+		
+		var vel_cutoff = filter_cutoff * (0.5 + velocity * 0.5)
+		var filter_factor = clamp(vel_cutoff / 6000.0, 0.3, 1.0)
+		wave *= filter_factor
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.6 + velocity * 0.4
+		data[i] = wave * envelope * amplitude * vel_amp
+
+
+static func generate_custom_vocal_formant(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# VOCAL FORMANT - Vowel sounds
+	var freq = params.get("frequency", params.get("freq", 220.0))
+	var vowel = params.get("vowel", "ah")
+	var velocity = params.get("velocity", 0.8)
+	var attack = params.get("attack", 0.05)
+	var decay = params.get("decay", 0.2)
+	var sustain = params.get("sustain", 0.7)
+	var release = params.get("release", 0.3)
+	var vibrato_rate = params.get("vibrato_rate", 5.5)
+	var vibrato_depth = params.get("vibrato_depth", 0.015)
+	var breathiness = params.get("breathiness", 0.1)
+	var amplitude = params.get("amplitude", 0.4)
+	
+	var formants = {
+		"ah": [800.0, 1200.0, 2500.0],
+		"ee": [300.0, 2300.0, 3000.0],
+		"oo": [350.0, 600.0, 2400.0],
+		"eh": [600.0, 1800.0, 2600.0],
+		"oh": [500.0, 900.0, 2400.0]
+	}
+	
+	var current_formants = formants.get(vowel, formants["ah"])
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
+		var mod_freq = freq * (1.0 + vibrato)
+		
+		var source = 2.0 * fmod(mod_freq * t, 1.0) - 1.0
+		var breath = (sin(t * 8000.0) * 0.5 + sin(t * 12000.0) * 0.3) * breathiness
+		source += breath
+		
+		var filtered = 0.0
+		var formant_weights = [1.0, 0.7, 0.4]
+		
+		for f in range(current_formants.size()):
+			var formant_freq = current_formants[f]
+			var bandwidth = formant_freq * 0.1
+			var _formant_response = sin(2.0 * PI * formant_freq * t)
+			var distance = abs(mod_freq - formant_freq)
+			var resonance = exp(-distance / bandwidth) * formant_weights[f]
+			filtered += source * resonance
+		
+		var wave = filtered * 0.7 + source * 0.3
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.5 + velocity * 0.5
+		data[i] = wave * envelope * amplitude * vel_amp
+
+
+static func generate_custom_brass_stab(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# BRASS STAB - House/funk (fast attack, filter sweep)
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var velocity = params.get("velocity", 0.9)
+	var attack = params.get("attack", 0.008)
+	var decay = params.get("decay", 0.4)
+	var sustain = params.get("sustain", 0.3)
+	var release = params.get("release", 0.2)
+	var filter_start = params.get("filter_start", 500.0)
+	var filter_peak = params.get("filter_peak", params.get("filter_cutoff", 4000.0))
+	var filter_resonance = params.get("filter_resonance", 0.6)
+	var filter_attack = params.get("filter_attack", 0.02)
+	var detune = params.get("detune", 0.008)
+	var voices = params.get("voices", 3)
+	var amplitude = params.get("amplitude", 0.5)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var filter_attack_samples = filter_attack * AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var wave = 0.0
+		for v in range(voices):
+			var voice_detune = (float(v) / (voices - 1) - 0.5) * detune * 2.0 if voices > 1 else 0.0
+			var voice_freq = freq * (1.0 + voice_detune)
+			wave += 2.0 * fmod(voice_freq * t, 1.0) - 1.0
+		wave /= voices
+		
+		var filter_env = 0.0
+		if i < filter_attack_samples:
+			filter_env = float(i) / filter_attack_samples
+		else:
+			filter_env = exp(-(progress - filter_attack) * 3.0)
+		
+		var vel_peak = filter_start + (filter_peak - filter_start) * velocity
+		var dynamic_cutoff = filter_start + (vel_peak - filter_start) * filter_env
+		
+		var filter_factor = clamp(dynamic_cutoff / 6000.0, 0.15, 1.0)
+		var resonance_boost = 1.0 + filter_resonance * filter_env * 0.8
+		wave *= filter_factor * resonance_boost
+		wave += sin(2.0 * PI * dynamic_cutoff * t) * filter_resonance * filter_env * 0.15
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.6 + velocity * 0.4
+		data[i] = wave * envelope * amplitude * vel_amp
+
+
+static func generate_custom_string_ensemble(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# STRING ENSEMBLE - Lush pads for melodies
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var velocity = params.get("velocity", 0.7)
+	var attack = params.get("attack", 0.3)
+	var decay = params.get("decay", 0.3)
+	var sustain = params.get("sustain", 0.8)
+	var release = params.get("release", 0.5)
+	var chorus_rate = params.get("chorus_rate", 1.5)
+	var chorus_depth = params.get("chorus_depth", 0.15)
+	var voices = params.get("voices", 6)
+	var vibrato_rate = params.get("vibrato_rate", 5.0)
+	var vibrato_depth = params.get("vibrato_depth", 0.008)
+	var filter_cutoff = params.get("filter_cutoff", 3000.0)
+	var amplitude = params.get("amplitude", 0.35)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var vibrato = 0.0
+		if progress > 0.2:
+			var vib_intensity = min((progress - 0.2) / 0.3, 1.0)
+			vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth * vib_intensity
+		
+		var wave = 0.0
+		for v in range(voices):
+			var voice_phase = float(v) / voices * 2.0 * PI
+			var chorus_mod = sin(2.0 * PI * chorus_rate * t + voice_phase) * chorus_depth
+			var voice_freq = freq * (1.0 + chorus_mod * 0.02 + vibrato)
+			var saw = 2.0 * fmod(voice_freq * t, 1.0) - 1.0
+			wave += saw
+		wave /= voices
+		
+		var filter_factor = clamp(filter_cutoff / 5000.0, 0.3, 1.0)
+		wave *= filter_factor
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			var attack_progress = float(i) / attack_samples
+			envelope = attack_progress * attack_progress * (3.0 - 2.0 * attack_progress)
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.5 + velocity * 0.5
+		data[i] = wave * envelope * amplitude * vel_amp
+
+
+static func generate_custom_pluck_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# PLUCK LEAD - Kalimba/marimba style
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var velocity = params.get("velocity", 0.8)
+	var decay_time = params.get("decay_time", params.get("decay", 0.8))
+	var brightness = params.get("brightness", 0.7)
+	var body_resonance = params.get("body_resonance", 0.3)
+	var attack = params.get("attack", 0.001)
+	var amplitude = params.get("amplitude", 0.45)
+	
+	var delay_samples = int(AudioSynthesizer.SAMPLE_RATE / freq)
+	var delay_line = PackedFloat32Array()
+	delay_line.resize(delay_samples)
+	
+	for j in range(delay_samples):
+		delay_line[j] = (randf() * 2.0 - 1.0) * brightness
+	
+	var delay_index = 0
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var wave = delay_line[delay_index]
+		var next_index = (delay_index + 1) % delay_samples
+		var filtered = (delay_line[delay_index] + delay_line[next_index]) * 0.5
+		var decay_factor = 0.995 + velocity * 0.004
+		delay_line[delay_index] = filtered * decay_factor
+		delay_index = next_index
+		
+		if body_resonance > 0.0:
+			wave += sin(2.0 * PI * freq * 2.0 * t) * body_resonance * exp(-progress * 5.0)
+		
+		var envelope = exp(-progress * (5.0 / decay_time))
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		if i < attack_samples:
+			envelope *= float(i) / attack_samples
+		
+		var vel_amp = 0.5 + velocity * 0.5
+		data[i] = wave * envelope * amplitude * vel_amp
+
+
+static func generate_custom_glass_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# GLASS LEAD - Crystalline bell-like FM
+	var freq = params.get("frequency", params.get("freq", 880.0))
+	var mod_ratio = params.get("mod_ratio", params.get("ratio", 3.0))
+	var mod_index = params.get("mod_index", params.get("mod_depth", 3.0))
+	var velocity = params.get("velocity", 0.7)
+	var attack = params.get("attack", 0.02)
+	var decay = params.get("decay", 2.0)
+	var shimmer = params.get("shimmer", 0.3)
+	var amplitude = params.get("amplitude", 0.35)
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var mod_env = exp(-progress * 4.0)
+		var current_mod = mod_index * mod_env * velocity
+		
+		var mod_freq = freq * mod_ratio
+		var modulator = sin(2.0 * PI * mod_freq * t)
+		var carrier = sin(2.0 * PI * freq * t + modulator * current_mod)
+		
+		var shimmer_wave = 0.0
+		if shimmer > 0.0:
+			shimmer_wave = sin(2.0 * PI * freq * 5.14 * t) * shimmer * mod_env * 0.3
+			shimmer_wave += sin(2.0 * PI * freq * 7.23 * t) * shimmer * mod_env * 0.2
+		
+		var wave = carrier + shimmer_wave
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		else:
+			envelope = exp(-progress * (2.0 / decay))
+		
+		var vel_amp = 0.5 + velocity * 0.5
+		data[i] = wave * envelope * amplitude * vel_amp
+
+
+static func generate_custom_distorted_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# DISTORTED LEAD - Rock/industrial saturation
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var velocity = params.get("velocity", 0.8)
+	var drive = params.get("drive", params.get("distortion", 0.7))
+	var distortion_type = params.get("distortion_type", "tube")
+	var attack = params.get("attack", 0.01)
+	var decay = params.get("decay", 0.2)
+	var sustain = params.get("sustain", 0.8)
+	var release = params.get("release", 0.3)
+	var tone = params.get("tone", 0.6)
+	var vibrato_rate = params.get("vibrato_rate", 5.5)
+	var vibrato_depth = params.get("vibrato_depth", 0.02)
+	var amplitude = params.get("amplitude", 0.4)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
+		var mod_freq = freq * (1.0 + vibrato)
+		
+		var wave = 2.0 * fmod(mod_freq * t, 1.0) - 1.0
+		wave += (1.0 if fmod(mod_freq * t, 1.0) < 0.5 else -1.0) * 0.3
+		
+		var pre_gain = 1.0 + drive * 5.0 * velocity
+		wave *= pre_gain
+		
+		match distortion_type:
+			"tube":
+				if wave > 0:
+					wave = tanh(wave * 1.2)
+				else:
+					wave = tanh(wave * 0.9)
+			"fuzz":
+				wave = tanh(wave * 2.0)
+				wave = sign(wave) * pow(abs(wave), 0.7)
+			"hard":
+				wave = clamp(wave, -0.8, 0.8)
+		
+		var tone_cutoff = 1000.0 + tone * 4000.0
+		var tone_factor = clamp(tone_cutoff / 5000.0, 0.3, 1.0)
+		wave *= tone_factor
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.6 + velocity * 0.4
+		data[i] = wave * envelope * amplitude * vel_amp
+
+
+static func generate_custom_bitcrushed_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	# BITCRUSHED LEAD - Lo-fi character
+	var freq = params.get("frequency", params.get("freq", 440.0))
+	var velocity = params.get("velocity", 0.8)
+	var bit_depth = params.get("bit_depth", 8)
+	var sample_rate_reduction = params.get("sample_rate_reduction", 0.3)
+	var attack = params.get("attack", 0.01)
+	var decay = params.get("decay", 0.2)
+	var sustain = params.get("sustain", 0.7)
+	var release = params.get("release", 0.3)
+	var mix = params.get("mix", params.get("wet", 0.8))
+	var vibrato_rate = params.get("vibrato_rate", 5.0)
+	var vibrato_depth = params.get("vibrato_depth", 0.015)
+	var waveform = params.get("waveform", "sawtooth")
+	var amplitude = params.get("amplitude", 0.4)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var hold_interval = 1 + int(sample_rate_reduction * 10.0)
+	var held_sample = 0.0
+	var quant_levels = pow(2, bit_depth - 1)
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var _progress = float(i) / sample_count
+		
+		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
+		var mod_freq = freq * (1.0 + vibrato)
+		
+		var clean_wave = 0.0
+		match waveform:
+			"sawtooth":
+				clean_wave = 2.0 * fmod(mod_freq * t, 1.0) - 1.0
+			"square":
+				clean_wave = 1.0 if fmod(mod_freq * t, 1.0) < 0.5 else -1.0
+			"sine":
+				clean_wave = sin(2.0 * PI * mod_freq * t)
+			"triangle":
+				var phase = fmod(mod_freq * t, 1.0)
+				clean_wave = 4.0 * abs(phase - 0.5) - 1.0
+		
+		if i % hold_interval == 0:
+			held_sample = clean_wave
+		var crushed_wave = held_sample
+		crushed_wave = floor(crushed_wave * quant_levels) / quant_levels
+		
+		var wave = clean_wave * (1.0 - mix) + crushed_wave * mix
+		
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var release_start = (1.0 - release / duration) * sample_count
+		
+		if i < attack_samples:
+			envelope = float(i) / attack_samples
+		elif i < attack_samples + decay_samples:
+			var decay_progress = (i - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif i < release_start:
+			envelope = sustain
+		else:
+			var release_progress = (i - release_start) / (sample_count - release_start)
+			envelope = sustain * (1.0 - release_progress)
+		
+		var vel_amp = 0.5 + velocity * 0.5
+		data[i] = wave * envelope * amplitude * vel_amp

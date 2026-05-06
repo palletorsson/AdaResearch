@@ -1,0 +1,37 @@
+{
+  "id": "gg12_tree_in_hull",
+  "notes": "Tree + tight convex hull \u00e2\u20ac\u201d branches pressing against a skin.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.15
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.8,
+        "spread_deg": 35,
+        "radius_decay": 0.68
+      }
+    },
+    {
+      "op": "hull_shell",
+      "selector": "all",
+      "params": {
+        "shell_scale": 1.08,
+        "shell_radius": 0.015
+      }
+    }
+  ]
+}

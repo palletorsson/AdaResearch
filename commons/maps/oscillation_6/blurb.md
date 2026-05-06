@@ -1,0 +1,1 @@
+Waves are oscillations that travel. A disturbance propagates, each point passing the pattern to its neighbor. Transverse waves wiggle perpendicular to travel; longitudinal waves compress along it. Sound, light, water — all waves, all oscillation spread through space.

@@ -247,3 +247,6 @@ class CrowdPath3D:
 		normal_point.x = clamp(normal_point.x, min(a.x, b.x), max(a.x, b.x))
 		normal_point.y = clamp(normal_point.y, min(a.y, b.y), max(a.y, b.y))
 		return normal_point
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

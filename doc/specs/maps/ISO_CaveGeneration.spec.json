@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ISO_CaveGeneration",
+  "home_sequence": "isosurfaces",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.011,
+  "breath_zones": [
+    {
+      "size": 179,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        6.0,
+        6.4525139664804465
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "marchingcave"
+    },
+    {
+      "x": 1,
+      "z": 10,
+      "token": "marchingcubes_cave"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 181,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

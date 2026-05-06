@@ -1,0 +1,7 @@
+Concept: Navigate a maze — you are the algorithm searching for the exit. Every corridor is an edge, every junction a node, every dead end a branch that promised something and lied. Pathfinding as embodied graph traversal.
+Sequence role: Third map in Graph Theory; makes the learner's body the search algorithm. After foundations (structure) and layout (visualization), pathfinding introduces the central graph problem: how do you get from here to there? DFS, BFS, A* — each is a different strategy the body can enact by walking; follows GT_Layout; leads to GT_Network_Analysis.
+Technical angle: Depth-first search (go deep, backtrack on dead ends), breadth-first search (explore all neighbors before going deeper), A* (heuristic-guided search using distance estimates). The pathfinding3d artifact implements all three; the maze makes the algorithmic strategies physically navigable.
+Critical angle: Pathfinding reveals that knowing the graph exists is not the same as knowing how to traverse it. The maze is fully determined — every wall is fixed — yet finding the path requires search. This is the computational complexity thesis: structure does not imply accessibility. The learner hitting dead ends and backtracking is DFS made visceral.
+Key artifacts: pathfinding3d implements the maze as a navigable graph with visible algorithmic overlays — showing which nodes have been visited, which are queued, which path is currently optimal.
+
+Gap: pathfinding3d needs slider_horizontal, push_button, Label3D.

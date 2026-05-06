@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bii7125d77ymd"]
+
+[ext_resource type="Script" uid="uid://ds8xulk62u0yu" path="res://commons/scenes/editors/form_editor.gd" id="1"]
+
+[node name="FormEditor" type="HSplitContainer" unique_id=5226815]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")

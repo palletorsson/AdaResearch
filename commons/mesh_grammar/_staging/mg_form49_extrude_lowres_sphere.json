@@ -1,0 +1,32 @@
+{
+  "id": "mg_form49_extrude_lowres_sphere",
+  "notes": "EXTRUDE PASS: low-res sphere seed expands by repeated radial extrusion only. This tests how far the icosahedron can bloom before it turns fully into a mine.",
+  "seed": "icosahedron",
+  "seed_scale": 0.32,
+  "generations": 2,
+  "camera_pitch": 0.34,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "all",
+      "params": {
+        "distance": 0.16,
+        "scale": 1.06,
+        "top_tag": "sphere_mid",
+        "side_tag": "sphere_mid_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:sphere_mid",
+      "params": {
+        "distance": 0.16,
+        "scale": 1.08,
+        "top_tag": "sphere_outer",
+        "side_tag": "sphere_outer_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

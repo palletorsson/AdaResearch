@@ -1,14 +1,25 @@
 extends Node3D
 
-@export var grid_size: int = 20
-@export var tile_size: float = 0.4
-@export var tile_gutter: float = 0.1
-@export var tile_height: float = 0.06
+
+# @identity
+# essence: height(x,z,t) = sum(A_ring * sin(omega*t - k*distance(x,z,center))) — expanding ring waves
+# desire: Watch concentric wave rings propagate across a tile floor, interfering where they meet
+# critical_parameter: grid_size — determines the spatial extent of the wave propagation field
+# triggers: wave_rings[] spawn at intervals; each ring expands and decays over time
+# emerges: interference patterns from overlapping circular waves — constructive and destructive zones appear
+# needs: VR interaction to spawn waves [missing], walking on tiles [has]
+# relationships: depends on MultiMesh tile height animation; contrasts with sine_space (propagating rings vs standing waves); unlocks wave interference visualization
+# truth: Every point in a wave field is the sum of all waves that have reached it — superposition is the law.
+
+@export var grid_size: int = 20  # ~11.6m total span
+@export var tile_size: float = 0.5  # Bigger tiles
+@export var tile_gutter: float = 0.08
+@export var tile_height: float = 0.15  # Taller tiles for more visible height
 @export var floor_tilt_degrees: float = -12.0
 @export var frequency: float = 0.7
-@export var amplitude: float = 0.5
+@export var amplitude: float = 1.8  # Bigger wave displacement
 @export var wave_speed: float = 0.6
-@export var wave_damping: float = 0.08
+@export var wave_damping: float = 0.06  # Slightly less damping for larger visible area
 
 var time: float = 0.0
 var tile_positions: Array[Vector2] = []
@@ -16,16 +27,25 @@ var tile_multimesh_instance: MultiMeshInstance3D
 var tile_multimesh: MultiMesh
 var wave_rings: Array = []
 var tile_collision_bodies: Array[StaticBody3D] = []
+var soundscape: Node3D
 
-var base_tile_color := Color(0.22, 0.55, 0.85, 1.0)
-var peak_tile_color := Color(0.95, 0.85, 0.4, 1.0)
+# More distinct color gradient for wave visualization
+var base_tile_color := Color(0.15, 0.35, 0.65, 1.0)  # Darker blue base
+var peak_tile_color := Color(1.0, 0.9, 0.3, 1.0)  # Brighter yellow peak
 
-func _ready():
+func _ready() -> void:
 	create_wave_surface()
-	#create_wave_rings()
+	create_wave_rings() # Enable rings for the soundscape
 	setup_materials()
+	setup_soundscape()
 
-func create_wave_surface():
+func setup_soundscape() -> void:
+	var WaveSoundscape = load("res://algorithms/wavefunctions/wave_propagation_3d/WaveSoundscapeComponent.gd")
+	soundscape = WaveSoundscape.new()
+	add_child(soundscape)
+	print("WavePropagation: Soundscape component initialized.")
+
+func create_wave_surface() -> void:
 	var surface_parent = $WaveSurface
 	var instance = MultiMeshInstance3D.new()
 	tile_multimesh_instance = instance
@@ -34,7 +54,7 @@ func create_wave_surface():
 	tile_mesh.size = Vector3(tile_size, tile_height, tile_size)
 	tile_multimesh.mesh = tile_mesh
 	tile_multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	tile_multimesh.set("color_format", 1)  # Fallback for MultiMesh.COLOR_8BIT
+	tile_multimesh.use_colors = true
 	tile_multimesh.instance_count = grid_size * grid_size
 	tile_multimesh_instance.multimesh = tile_multimesh
 	surface_parent.add_child(tile_multimesh_instance)
@@ -56,7 +76,7 @@ func create_wave_surface():
 			tile_multimesh.set_instance_color(index, base_tile_color)
 			index += 1
 
-func create_wave_rings():
+func create_wave_rings() -> void:
 	var rings_parent = $WaveRings
 	wave_rings.clear()
 	var ring_count = 4
@@ -68,7 +88,7 @@ func create_wave_rings():
 		rings_parent.add_child(ring)
 		wave_rings.append(ring)
 
-func setup_materials():
+func setup_materials() -> void:
 	var tile_material = StandardMaterial3D.new()
 	tile_material.vertex_color_use_as_albedo = true
 	tile_material.metallic = 0.0
@@ -103,13 +123,16 @@ func setup_materials():
 	amp_material.emission = Color(0.2, 0.32, 0.08)
 	$AmplitudeControl.material_override = amp_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	animate_3d_wave_propagation()
 	animate_wave_rings()
 	animate_controls()
+	
+	if soundscape:
+		soundscape.update_parameters(frequency, amplitude, time, wave_rings)
 
-func animate_3d_wave_propagation():
+func animate_3d_wave_propagation() -> void:
 	if tile_multimesh == null:
 		return
 	var instance_index = 0
@@ -132,27 +155,27 @@ func animate_3d_wave_propagation():
 		
 		instance_index += 1
 
-func animate_wave_rings():
+func animate_wave_rings() -> void:
 	if wave_rings.is_empty():
 		return
 	var travel_rate = max(wave_speed * 1.8, 0.01)
-	var max_radius = 7.5
+	var max_radius = 12.0  # Larger radius to match bigger grid
 	var cycle_duration = max_radius / travel_rate
 	for i in range(wave_rings.size()):
 		var ring = wave_rings[i]
-		var local_time = time - float(i) * 0.9
+		var local_time = time - float(i) * 1.2  # Wider spacing between rings
 		if cycle_duration <= 0.0:
 			cycle_duration = 1.0
 		local_time = fposmod(local_time, cycle_duration)
-		var ring_radius = max(0.15, travel_rate * local_time)
+		var ring_radius = max(0.2, travel_rate * local_time)
 		ring.radius = ring_radius
-		var fade = clamp(1.0 - local_time * 0.18, 0.0, 1.0)
+		var fade = clamp(1.0 - local_time * 0.12, 0.0, 1.0)  # Slower fade
 		var ring_material = ring.material_override as StandardMaterial3D
 		if ring_material:
 			ring_material.albedo_color.a = fade * 0.35
 			ring_material.emission = Color(0.22 * fade, 0.22 * fade, 0.45 * fade, 1.0)
 
-func animate_controls():
+func animate_controls() -> void:
 	var freq_height = frequency * 0.8
 	var freq_size = $FrequencyControl.size
 	freq_size.y = max(0.2, freq_height)
@@ -164,11 +187,11 @@ func animate_controls():
 	$AmplitudeControl.size = amp_size
 	$AmplitudeControl.position.y = -3.0 + amp_size.y * 0.5
 	frequency = 0.55 + sin(time * 0.12) * 0.25
-	amplitude = 0.22 + cos(time * 0.1) * 0.12
+	amplitude = 0.45 + cos(time * 0.1) * 0.2
 	wave_speed = 0.5 + sin(time * 0.09) * 0.18
 	$WaveSource.radius = 0.28 + sin(time * frequency * 2.4) * 0.05
 
-func _create_tile_collision_bodies(surface_parent: Node3D):
+func _create_tile_collision_bodies(surface_parent: Node3D) -> void:
 	"""Create collision bodies for each tile"""
 	tile_collision_bodies.clear()
 	
@@ -196,3 +219,12 @@ func _create_tile_collision_bodies(surface_parent: Node3D):
 			
 			# Store reference for animation
 			tile_collision_bodies.append(collision_body)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

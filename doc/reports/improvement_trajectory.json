@@ -1,0 +1,195 @@
+{
+  "version": "1.0",
+  "description": "Computed summary of improvement trends across BREATHE cycles. Updated after each breath's Harvest phase.",
+  "last_updated": "2026-05-03T06:50:00",
+  "total_breaths": 17,
+  "global_avg_history": [
+    {
+      "date": "2026-04-08",
+      "avg": 2.04,
+      "breath_id": "baseline"
+    },
+    {
+      "date": "2026-04-11",
+      "avg": 2.04,
+      "breath_id": "2026-04-11T00:30"
+    },
+    {
+      "date": "2026-04-12",
+      "avg": 4.37,
+      "breath_id": "2026-04-12T09:00"
+    },
+    {
+      "date": "2026-04-14",
+      "avg": 4.0,
+      "breath_id": "2026-04-14T07:30"
+    },
+    {
+      "date": "2026-04-15",
+      "avg": 4.05,
+      "breath_id": "2026-04-15T09:30",
+      "note": "Pipeline unchanged; Gate C now PASS (grade_F 2->0, unresolved 62->55)",
+      "release_gates_passing": 2
+    },
+    {
+      "date": "2026-04-16",
+      "avg": 4.05,
+      "breath_id": "2026-04-16T09:30",
+      "note": "Pipeline unchanged (validation timeout); Gate B 3 sub-metrics cleared: missing_scene_path 6->0, missing_map_ready 14->0, missing_include_in_map_data 19->0. Gate A duplicate cleared: 1->0.",
+      "release_gates_passing": 2
+    },
+    {
+      "date": "2026-04-17",
+      "avg": 4.0,
+      "breath_id": "2026-04-17T09:00",
+      "note": "primitives and graphtheory both advanced stage 3->5 (laser_sword typo fix + topological_sort registry alias). All 19 spine sequences now at stage 5. Score flat at 4.00 due to validation timeout artifact. Real delta: 2 sequences unblocked.",
+      "release_gates_passing": 2
+    },
+    {
+      "date": "2026-04-18",
+      "avg": 5.05,
+      "breath_id": "2026-04-18T08:00",
+      "note": "Largest delta ever (+1.00). All 4 release gates pass. Validation scorer bug fixed. 55 tscn stubs + 10 map stubs created."
+    },
+    {
+      "date": "2026-04-19",
+      "avg": 5.05,
+      "breath_id": "2026-04-19T08:00",
+      "garden_delta": "+67 voiced, primitives SCATTERED->GROWING"
+    },
+    {
+      "date": "2026-04-20",
+      "avg": 5.05,
+      "breath_id": "2026-04-20T09:00"
+    },
+    {
+      "date": "2026-04-21",
+      "avg": 5.05,
+      "breath_id": "2026-04-21T09:00",
+      "garden_delta": "patterngeneration SCATTERED->REACHING (+6 voiced), mosaicanalysis SCATTERED->REACHING (+23 voiced via floor_plan_space)"
+    },
+    {
+      "date": "2026-04-22",
+      "avg": 5.05,
+      "breath_id": "2026-04-22T09:00",
+      "garden_delta": "+98 voiced (763->861). Gate A restored. vectors LIVING, machinelearning GROWING, cellularautomata/grammar_systems/proceduralaudio/spatial_partitioning REACHING. Root cause: PascalCase gd filename cache key mismatch in garden_listener + primitives.json trailing comma."
+    },
+    {
+      "date": "2026-04-23",
+      "avg": 5.05,
+      "breath_id": "2026-04-23T08:00",
+      "garden_voiced": 876,
+      "garden_state_advancements": [
+        "fractals: SCATTERED->REACHING"
+      ]
+    },
+    {
+      "date": "2026-04-28",
+      "avg": 5.05,
+      "breath_id": "2026-04-28T09:04",
+      "garden_voiced": 901,
+      "garden_state_advancements": [
+        "forces: SCATTERED->LIVING (cache cascade revealed 68 already-embodied artifacts)",
+        "flowers: SCATTERED->LIVING (botanical_flower dual-file fix)"
+      ],
+      "note": "Two sequences advanced two states in one breath (SCATTERED skipping REACHING/GROWING straight to LIVING). Voicing artifacts that declare apply_grid_config [has] in @identity reveals previously-invisible embodied artifacts in the cache."
+    },
+    {
+      "date": "2026-04-30",
+      "avg": 5.43,
+      "breath_id": "2026-04-30T07:18",
+      "garden_voiced": 904,
+      "pipeline_advance": [
+        "isosurfaces stage 3 -> 6",
+        "color stage 2 -> 6"
+      ],
+      "note": "First non-flat breath in 9 sessions (+0.33). Two long-stalled sequences advanced to stage 6 via 1 cell-token rename + 2 doc files. Spine global_avg breaks the 10-breath plateau at 5.05."
+    },
+    {
+      "date": "2026-05-03",
+      "avg": 5.43,
+      "breath_id": "2026-05-03T06:36",
+      "garden_voiced": 912,
+      "note": "Pipeline avg flat (5.43, VR-testing bottleneck). Daily baseline crash unblocked (scorer KeyError on empty sequences). Runtime bug fixed in branchinggrowthalgorithmcontinued/.tscn (was loading wrong script via stale uid+path). +9 voices from 4 @identity adds; wavefunctions/randomness still SCATTERED but closer to thresholds.",
+      "release_gates_passing": 3
+    }
+  ],
+  "skill_effectiveness_cumulative": {
+    "documentation_writing": {
+      "total_calls": 7,
+      "success_rate": 1.0,
+      "avg_delta": 0
+    },
+    "pathfinder_validation": {
+      "total_calls": 5,
+      "success_rate": 1.0,
+      "avg_delta": 0
+    },
+    "registry_repair": {
+      "total_calls": 18,
+      "success_rate": 1.0,
+      "avg_delta": 0.42
+    },
+    "direct_file_edit": {
+      "total_calls": 55,
+      "success_rate": 1.0,
+      "avg_delta": 0.0
+    },
+    "registry_alias": {
+      "total_calls": 1,
+      "success_rate": 1.0,
+      "avg_delta": 0.0,
+      "note": "Adding lookup aliases for renamed/variant artifact names"
+    },
+    "ada-breather": {
+      "total_calls": 2,
+      "success_rate": 1.0,
+      "avg_delta": 1.0,
+      "note": "Both calls succeeded. First call: full breath 2026-04-18 morning (+1.00 delta). Second call: evolve-only 2026-04-18 evening."
+    },
+    "identity_writing": {
+      "total_calls": 13,
+      "success_rate": 1.0,
+      "avg_delta": 0.0,
+      "note": "Cumulative across breaths. 2026-05-03: +4 wavefunctions/randomness/advancedlaboratory voices (BigPipeSystem, seismograph, coupled_oscillator_lattice, RemoveRandom)."
+    },
+    "scene_repair": {
+      "total_calls": 1,
+      "success_rate": 1.0,
+      "avg_delta": 0.0,
+      "note": "2026-05-03: branchinggrowthalgorithmcontinued/.tscn uid+path corrected, restoring intended script binding."
+    }
+  },
+  "stall_detected": false,
+  "stall_reason": null,
+  "known_tooling_limits": [
+    {
+      "tool": "sequence_pipeline_scorer.py",
+      "limit": "Validation stage checked 'FAIL' not in result_text, but pathfinder always outputs '0 FAIL' in summary line. All sequences showed 0% validation even when structurally valid.",
+      "first_seen": "2026-04-11T00:30",
+      "resolved": "2026-04-18T08:00",
+      "resolution": "Fix: check ' 0 FAIL' (with leading space) in result_text instead of bare '0 FAIL'. Scorer now correctly reads validation results.",
+      "occurrence_count": 7,
+      "status": "RESOLVED"
+    }
+  ],
+  "evening_harvest_notes": {
+    "date": "2026-04-21",
+    "summary": "Today's morning breath (2026-04-21T09:00) achieved a cascade effect via infrastructure artifact targeting: floor_plan_space appears in 28+ maps across two sequences, so one @identity write advanced patterngeneration (SCATTERED->REACHING, 60.4%->71.7%) and mosaicanalysis (SCATTERED->REACHING, 39.5%->93.0%) simultaneously. Six artifacts voiced, all correctly placed in sequence-specific maps. The garden-multiplier-triage flow referenced in Apr-19 harvest was never written to disk \u2014 created it this evening. Global avg stable at 5.05 (VR bottleneck), garden health is the active improvement front.",
+    "next_breath_recommendation": "Target SCATTERED sequences: machinelearning and swarmintelligence are stuck because their artifacts are counted under gallery maps, not sequence maps. Either build new sequence-specific maps or skip until map building resumes. Consider softbodies or fractals if below 70% threshold. patterngeneration REACHING needs embodiment work (VR controls) to reach GROWING \u2014 this requires code changes, not just @identity.",
+    "skill_evolution_proposals": "prop-001 still has 1 breath of evidence (2026-04-20 gallery-map failure). Today was counter-evidence: correctly targeted sequence maps. 3+ failure threshold not reached. No new proposals warranted.",
+    "trajectory_note": "global_avg stable at 5.05 for 4 consecutive breaths (Apr-18 to Apr-21). Expected: VR testing is the only pipeline advancement path. Garden health is the shadow metric: SCATTERED->REACHING via @identity (AI-actionable), REACHING->GROWING via VR controls (code change required), GROWING->LIVING via VR test sessions (human-required). All 4 release gates passing since Apr-18.",
+    "new_flows_added": [
+      "garden-multiplier-triage"
+    ],
+    "missing_flow_recovered": "garden-multiplier-triage was listed in Apr-19 harvest notes but file was never created on disk \u2014 written this evening"
+  },
+  "previous_stall_history": [
+    {
+      "stalled_at": 5.05,
+      "stalled_for_breaths": 10,
+      "broken_at": "2026-04-30T07:18",
+      "break_method": "scoped registry/doc fixes on the only 2 sub-stage-6 spine sequences (color, isosurfaces) - both held back by single-cell or single-doc gaps, not VR-bottlenecked"
+    }
+  ]
+}

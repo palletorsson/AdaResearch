@@ -1,0 +1,21 @@
+{
+  "pluck_lead": {
+    "_metadata": {
+      "sound_type": "pluck_lead",
+      "description": "Short melodic pluck with resonant body and percussive attack.",
+      "instrument": "Karplus-Strong Pluck",
+      "era": "1980s-present",
+      "tags": ["lead", "pluck", "percussive", "melodic"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 1.8, "min": 0.1, "max": 8.0, "step": 0.05 },
+      "frequency": { "value": 440.0, "min": 55.0, "max": 2200.0, "step": 1.0 },
+      "decay_time": { "value": 0.75, "min": 0.05, "max": 5.0, "step": 0.01 },
+      "brightness": { "value": 0.8, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "body_resonance": { "value": 0.28, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "velocity": { "value": 0.85, "min": 0.1, "max": 1.0, "step": 0.01 },
+      "amplitude": { "value": 0.45, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

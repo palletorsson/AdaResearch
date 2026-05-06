@@ -1,0 +1,61 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Forces_6",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "example_3_2 (arbitrary angular motion) and example_3_3 (pointing in direction of motion) demonstrate attraction-driven orbits; mass_spring_damper and spring_system bridge the restoring-force concept from springs to gravitational wells.",
+  "style": null,
+  "echoes": [
+    "color",
+    "forces"
+  ],
+  "density": 0.078,
+  "breath_zones": [
+    {
+      "size": 47,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0851063829787235,
+        3.234042553191489
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "mass_spring_damper"
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "token": "spring_system"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "example_3_2_forces_with_arbitrary_angular_motion_vr"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "example_3_3_pointing_in_the_direction_of_motion_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

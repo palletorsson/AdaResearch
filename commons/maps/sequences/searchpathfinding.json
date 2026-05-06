@@ -1,0 +1,34 @@
+{
+	"sequences": {
+		"searchpathfinding": {
+			"name": "Search & Pathfinding",
+			"status": "deferred",
+			"deferred_reason": "All 7 maps were env_one placeholders. No real content. Rebuild when content exists.",
+			"description": "Search algorithms, pathfinding, and optimization",
+			"qfep_term": "F",
+			"qfep_connection": "Search as F-landscape navigation \u00e2\u20ac\u201d algorithms explore a space of possibilities, minimizing cost functions to find optimal paths. A* combines known cost (F) with heuristic prediction (estimated remaining E(S)).",
+			"difficulty": "intermediate",
+			"learning_objectives": [
+				"Gradient descent",
+				"Dijkstra's algorithm",
+				"A* search",
+				"BFS and DFS",
+				"Simulated annealing",
+				"Particle swarm optimization"
+			],
+			"maps": ["SearchPathfinding_Intro"],
+			"deferred_maps": [
+				"SearchPathfinding_Gradient_Descent",
+				"SearchPathfinding_Dijkstra_s_Algorithm",
+				"SearchPathfinding_A_Search_Algorithm",
+				"SearchPathfinding_Breadth_First_Search_BFS",
+				"SearchPathfinding_Depth_First_Search_DFS",
+				"SearchPathfinding_Simulated_Annealing",
+				"SearchPathfinding_Particle_Swarm_Optimization"
+			],
+			"artifact_groups": []
+		}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
+}

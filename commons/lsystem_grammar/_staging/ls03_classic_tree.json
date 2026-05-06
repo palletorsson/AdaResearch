@@ -1,0 +1,32 @@
+{
+  "id": "ls03_classic_tree",
+  "axiom": "F",
+  "rules": {
+    "F": "F[+F]F[-F]F"
+  },
+  "iterations": 4,
+  "angle_deg": 25.7,
+  "step_len": 0.08,
+  "step_shrink": 0.72,
+  "interpretation": "tubes",
+  "base_width": 0.025,
+  "width_shrink": 0.75,
+  "tube_sides": 8,
+  "color_trunk": [
+    0.4,
+    0.25,
+    0.1
+  ],
+  "color_tip": [
+    0.25,
+    0.7,
+    0.2
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.15,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Lindenmayer's canonical plant at 25.7\u00c2\u00b0 \u00e2\u20ac\u201d rendered as tubes instead of lines. Same DNA, mesh-grammar substrate."
+}

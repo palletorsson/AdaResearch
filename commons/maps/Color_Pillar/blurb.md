@@ -1,0 +1,1 @@
+Pillars of color rise along the runway, each a collection point for chromatic data. Grab the color sticks, watch the flashlight demo reveal how light creates color from darkness. The visual color mixing station shows what happens when primaries combine. Here color is not just seen but gathered, mixed, understood as process rather than property.

@@ -1,0 +1,62 @@
+{
+  "id": "psX_pendant_with_shade",
+  "notes": "CROSS: Coco Reynolds pendant beads ending in a revolution lamp shade instead of a bare bulb.",
+  "layout": "compose",
+  "camera_pitch": 0.0,
+  "camera_yaw": 0.45,
+  "parts": [
+    {
+      "y": 1.5,
+      "config": {
+        "layout": "pendant_thread",
+        "alphabet": [
+          "disc",
+          "bipyramid"
+        ],
+        "palette": "wood",
+        "count": 10,
+        "base_scale": 0.05,
+        "cord_length": 1.8,
+        "bulb_radius": 0.01,
+        "seed": 9
+      }
+    },
+    {
+      "y": -0.5,
+      "config": {
+        "layout": "revolution",
+        "profile": [
+          [
+            0,
+            0.02
+          ],
+          [
+            0.15,
+            0.18
+          ],
+          [
+            0.4,
+            0.24
+          ],
+          [
+            0.7,
+            0.22
+          ],
+          [
+            0.95,
+            0.08
+          ]
+        ],
+        "segments": 48,
+        "height_samples": 28,
+        "color": [
+          1.0,
+          0.93,
+          0.75
+        ],
+        "alpha": 0.85,
+        "emission": 0.9
+      }
+    }
+  ]
+}

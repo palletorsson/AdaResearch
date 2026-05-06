@@ -1,0 +1,53 @@
+{
+  "id": "fz06_bouncing_against_dome",
+  "force": "bouncing_gravity",
+  "params": {
+    "gravity": 9.8,
+    "walls": [
+      {
+        "axis": "y",
+        "pos": -1.8,
+        "side": "below",
+        "restitution": 0.85
+      }
+    ],
+    "plates": []
+  },
+  "initial": {
+    "pos": [
+      -2.2,
+      2.5
+    ],
+    "vel": [
+      2.8,
+      0.0
+    ]
+  },
+  "duration": 12.0,
+  "dt": 0.005,
+  "mould": {
+    "type": "sphere",
+    "mode": "exclude",
+    "center": [
+      0,
+      -0.5,
+      0
+    ],
+    "radius": 0.9
+  },
+  "interpretation": "tube",
+  "tube_radius": 0.022,
+  "color_start": [
+    0.95,
+    0.55,
+    0.25
+  ],
+  "color_end": [
+    0.15,
+    0.3,
+    0.55
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.25,
+  "notes": "Bouncing ball with a sphere mould at center \u2014 the ball's trajectory is EXCLUDED from the sphere's interior. Where the parabolas pass through that region, they get snapped to the sphere's surface. Reads as parabolas arcing over a dome, as if bouncing on invisible stones."
+}

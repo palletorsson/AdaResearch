@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cohwteh3hd42w"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/cubesubdivision/cube_bookshelf.gd" id="1_bookshelf"]
+
+[node name="CubeBookshelf" type="Node3D"]
+script = ExtResource("1_bookshelf")
+shelf_size = 2.0
+rows = 4
+columns = 3
+show_construction = true
+step_delay = 0.25

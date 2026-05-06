@@ -1,0 +1,29 @@
+{
+  "name": "Joints_SliderRail",
+  "title": "Slider Rail",
+  "description": "Linear translation \u2014 pistons, rails, and spring dampers",
+  "dimensions": {
+    "rows": 8,
+    "cols": 7
+  },
+  "n_artifacts": 2,
+  "spawn": null,
+  "teleport": [
+    6,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "SliderPress",
+      "row": 1,
+      "col": 2,
+      "family": "physics_simulation"
+    },
+    {
+      "name": "SpringSuspension",
+      "row": 4,
+      "col": 4,
+      "family": "physics_simulation"
+    }
+  ]
+}

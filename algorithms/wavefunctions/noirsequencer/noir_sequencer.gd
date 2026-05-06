@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 # Constants
 const ROWS = 8
@@ -38,7 +38,7 @@ var audio_initialized = false
 @onready var grid_container = $GridContainer
 @onready var test_sound_button = $ControlPanel/TestSoundButton
 
-func _ready():
+func _ready() -> void:
 	# Initialize the grid
 	initialize_grid()
 	
@@ -65,14 +65,14 @@ func _ready():
 # Simple tone generator as ultimate fallback
 var tone_generator = null
 
-func create_tone_generator():
+func create_tone_generator() -> void:
 	# Create a simple AudioStreamPlayer
 	tone_generator = AudioStreamPlayer.new()
 	add_child(tone_generator)
 	
 	# We'll create the stream on demand when needed
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid = []
 	for r in range(ROWS):
 		var row = []
@@ -80,7 +80,7 @@ func initialize_grid():
 			row.append(false)
 		grid.append(row)
 
-func create_grid_ui():
+func create_grid_ui() -> void:
 	# Create note labels
 	var label_container = HBoxContainer.new()
 	grid_container.add_child(label_container)
@@ -150,7 +150,7 @@ func create_cell_style(active, hover):
 	
 	return style
 
-func initialize_audio():
+func initialize_audio() -> void:
 	# Print audio diagnostic information
 	print("=== AUDIO DIAGNOSTIC INFO ===")
 	print("Default bus count: ", AudioServer.get_bus_count())
@@ -241,7 +241,7 @@ func initialize_audio():
 var fallback_audio_players = {}
 var using_fallback = false
 
-func setup_fallback_audio():
+func setup_fallback_audio() -> void:
 	# Create fallback audio players using AudioStreamGeneratorPlayback
 	for note in noir_notes:
 		# Create a new AudioStreamPlayer for each note
@@ -260,7 +260,7 @@ func setup_fallback_audio():
 	
 	print("Fallback audio system initialized")
 
-func play_note(note_name):
+func play_note(note_name) -> void:
 	if not audio_initialized:
 		return
 	
@@ -282,7 +282,7 @@ func play_note(note_name):
 	if using_fallback:
 		play_note_fallback(note_name, freq)
 
-func try_play_note_primary(note_name, freq):
+func try_play_note_primary(_note_name, freq):
 	var amp = 0.5
 	var attack = 0.05
 	var release = 0.7
@@ -347,7 +347,7 @@ func try_play_note_primary(note_name, freq):
 	return true
 
 
-func play_note_fallback(note_name, freq):
+func play_note_fallback(note_name, freq) -> void:
 	# Use the fallback system
 	if not note_name in fallback_audio_players:
 		print("Note not found in fallback players: ", note_name)
@@ -378,7 +378,7 @@ func play_note_fallback(note_name, freq):
 		player.stop()
 	player.play()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_playing:
 		elapsed_time += delta
 		
@@ -388,7 +388,7 @@ func _process(delta):
 
 
 
-func update_step_indicator():
+func update_step_indicator() -> void:
 	# Update visual indicator for current step
 	for r in range(ROWS):
 		var row_container = grid_container.get_child(r + 1)  # +1 because first child is the label row
@@ -424,14 +424,14 @@ func create_active_cell_style(active):
 	
 	return style
 
-func update_bpm_label():
+func update_bpm_label() -> void:
 	bpm_label.text = str(bpm)
 	step_time = 60.0 / bpm / 4.0  # Time per 16th note
 
-func set_status(message):
+func set_status(message) -> void:
 	status_label.text = message
 
-func _on_cell_toggled(row, col):
+func _on_cell_toggled(row, col) -> void:
 	grid[row][col] = not grid[row][col]
 	
 	# If active and sequencer is stopped, play the note for feedback
@@ -441,7 +441,7 @@ func _on_cell_toggled(row, col):
 
 
 
-func _on_init_audio_button_pressed():
+func _on_init_audio_button_pressed() -> void:
 	if not audio_initialized:
 		set_status("Initializing audio...")
 		
@@ -456,7 +456,7 @@ func _on_init_audio_button_pressed():
 		setup_fallback_audio()
 
 # Simple test to see if any audio works
-func test_basic_audio():
+func test_basic_audio() -> void:
 	# Create a simple AudioStreamPlayer with a standard sound
 	var test_player = AudioStreamPlayer.new()
 	add_child(test_player)
@@ -490,7 +490,7 @@ func test_basic_audio():
 	await get_tree().create_timer(2.0).timeout
 	test_player.queue_free()
 
-func _on_clear_button_pressed():
+func _on_clear_button_pressed() -> void:
 	initialize_grid()
 	
 	# Update UI
@@ -502,7 +502,7 @@ func _on_clear_button_pressed():
 			var cell = cells.get_child(c)
 			cell.button_pressed = false
 
-func _on_random_button_pressed():
+func _on_random_button_pressed() -> void:
 	for r in range(ROWS):
 		for c in range(COLS):
 			# 20% chance of a cell being active
@@ -517,11 +517,11 @@ func _on_random_button_pressed():
 			var cell = cells.get_child(c)
 			cell.button_pressed = grid[r][c]
 
-func _on_bpm_slider_changed(value):
+func _on_bpm_slider_changed(value) -> void:
 	bpm = value
 	update_bpm_label()
 
-func _on_test_sound_button_pressed():
+func _on_test_sound_button_pressed() -> void:
 	# First test direct audio output
 	test_direct_output()
 	
@@ -535,7 +535,7 @@ func _on_test_sound_button_pressed():
 		set_status("Testing simple tone...")
 
 # Direct audio test bypassing all systems
-func test_direct_output():
+func test_direct_output() -> void:
 	# Create a simple AudioStreamPlayer
 	var direct_player = AudioStreamPlayer.new()
 	add_child(direct_player)
@@ -578,7 +578,7 @@ func test_direct_output():
 	direct_player.queue_free()
 
 # Ultimate fallback - use a simple tone
-func play_simple_tone(frequency):
+func play_simple_tone(frequency) -> void:
 	# Create a simple sine wave tone
 	var sample_rate = 44100.0
 	var sample_count = int(sample_rate * 0.5) # 0.5 seconds
@@ -628,13 +628,13 @@ func play_simple_tone(frequency):
 	tone_generator.stream = stream
 	tone_generator.play()
 
-func _on_note_label_pressed(row):
+func _on_note_label_pressed(row) -> void:
 	if audio_initialized:
 		play_note(noir_notes[row])
 		set_status("Playing note: " + noir_notes[row])
 
 
-func advance_step():
+func advance_step() -> void:
 	current_step = (current_step + 1) % COLS
 	update_step_indicator()
 	
@@ -655,7 +655,7 @@ func advance_step():
 				play_note(noir_notes[r])
 
 # Add this new function
-func test_direct_output_for_note(note_name):
+func test_direct_output_for_note(note_name) -> void:
 	# Get frequency for the note
 	var freq = note_frequencies[note_name]
 	
@@ -712,7 +712,7 @@ func test_direct_output_for_note(note_name):
 	direct_player.queue_free()
 
 # Also modify _on_play_button_pressed to reset the sequencer more effectively
-func _on_play_button_pressed():
+func _on_play_button_pressed() -> void:
 	if not audio_initialized:
 		set_status("Please initialize audio first")
 		return
@@ -737,3 +737,9 @@ func _on_play_button_pressed():
 		set_status("Sequencer stopped")
 		current_step = -1
 		update_step_indicator()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

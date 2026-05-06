@@ -1,0 +1,98 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Trans_Scale",
+  "home_sequence": "transformation",
+  "dimensions": {
+    "w": 7,
+    "d": 21
+  },
+  "signature": "scale_me as the interactive scaling object that invites direct manipulation; prism_block as the reference geometry that makes scale comparative rather than absolute; chair_assembly_puzzle as the test of scale reasoning \u2014 correct assembly requires matching magnitudes; clipboard#vr_scale_controls for explicit parametric control; dark_sphere as the final appearance of the sequence's persistent invariant.",
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.067,
+  "breath_zones": [
+    {
+      "size": 62,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 10
+      },
+      "centroid": [
+        2.774193548387097,
+        4.725806451612903
+      ]
+    },
+    {
+      "size": 56,
+      "bounds": {
+        "x": 0,
+        "z": 11,
+        "w": 7,
+        "d": 9
+      },
+      "centroid": [
+        3.017857142857143,
+        15.053571428571429
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 8,
+      "token": "scale_me"
+    },
+    {
+      "x": 0,
+      "z": 10,
+      "token": "prism_block"
+    },
+    {
+      "x": 1,
+      "z": 10,
+      "token": "prism_block"
+    },
+    {
+      "x": 5,
+      "z": 10,
+      "token": "prism_block"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "prism_block"
+    },
+    {
+      "x": 2,
+      "z": 13,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 15,
+      "token": "prism_block"
+    },
+    {
+      "x": 5,
+      "z": 15,
+      "token": "prism_block"
+    },
+    {
+      "x": 3,
+      "z": 16,
+      "token": "prism_block"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 9,
+    "walkable_cells": 134,
+    "breath_zone_count": 2,
+    "unique_tokens": 3
+  }
+}

@@ -1,0 +1,51 @@
+{
+    "description": "Retro-Futurism: Computer chirps, fan noise, tape loading",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_ELECTROMAGNETIC",
+            "volume_db": -15,
+            "bus": "CRT_Hum"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+            "volume_db": -18,
+            "bus": "Fans"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.C64_SID_LEAD",
+                "AudioSynthesizer.AMIGA_MOD_SAMPLE",
+                "techno_noir.typing_segment"
+            ],
+            "interval_range": [
+                2.0,
+                8.0
+            ],
+            "volume_range": [
+                -18,
+                -12
+            ],
+            "bus": "Compute"
+        }
+    ],
+    "buses": {
+        "CRT_Hum": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "drive": 0.1
+                }
+            ]
+        },
+        "Compute": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "drive": 0.3
+                }
+            ]
+        }
+    }
+}

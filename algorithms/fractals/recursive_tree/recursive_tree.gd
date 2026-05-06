@@ -1,3 +1,13 @@
+# @identity
+# essence: Procedural binary tree — a trunk forks into branches, each branch forks again, recursion depth 3. Box meshes with emission materials create a geometric canopy. Self-similar at every level.
+# desire: To grow by halving — generate_branches calls itself with decremented depth, producing sub-branches from each endpoint. The tree is its own blueprint.
+# critical_parameter: num_main_branches / max_sub_branches — control branching factor; random_seed — deterministic chaos, same seed same tree
+# triggers: _ready → seed + material creation + full tree generation; rebuild_tree → clear all children, regenerate from parameters
+# emerges: A geometric sculpture where every subtree is a complete tree — hierarchy from constraint, not command. Each node knows only its children yet the whole structure self-organizes.
+# needs: VR branch manipulation [missing], growth animation [missing], parameter sliders [missing]
+# relationships: Appears in DataStructures_Trees (binary recursion) and RecursiveEmergence_Tail_Recursion_Memoization (call stack visualization). The tree that teaches both data structure and recursion.
+# truth: A tree is a list that learned to decide — left or right, less or greater. Hierarchy emerges not from authority but from the constraint of binary choice repeated.
+
 extends Node3D
 
 # Parameters for tree generation
@@ -28,7 +38,7 @@ var secondary_material: StandardMaterial3D
 var trunk_material: StandardMaterial3D
 
 # Called when the node enters the scene tree for the first time
-func _ready():
+func _ready() -> void:
 	# Set the random seed
 	seed(random_seed)
 	
@@ -39,7 +49,7 @@ func _ready():
 	generate_tree()
 
 # Creates materials for the tree
-func create_materials():
+func create_materials() -> void:
 	# Primary material (most blocks)
 	primary_material = StandardMaterial3D.new()
 	primary_material.albedo_color = primary_color
@@ -68,7 +78,7 @@ func create_materials():
 	trunk_material.emission_energy_multiplier = emission_strength * 0.5
 
 # Generates the complete tree structure
-func generate_tree():
+func generate_tree() -> void:
 	# Create root node for the tree
 	var tree_root = Node3D.new()
 	tree_root.name = "GeometricTree"
@@ -132,7 +142,7 @@ func create_trunk():
 	return trunk_node
 
 # Recursively generates branches
-func generate_branches(parent, origin_point, num_branches, current_depth, max_depth):
+func generate_branches(parent, origin_point, num_branches, current_depth, max_depth) -> void:
 	if current_depth >= max_depth:
 		return
 	
@@ -182,7 +192,7 @@ func generate_branches(parent, origin_point, num_branches, current_depth, max_de
 		branch_instance.position = position
 		
 		# Rotate to point in the direction
-		branch_instance.look_at(position + direction, Vector3.UP)
+		branch_instance.look_at_from_position(branch_instance.position, position + direction, Vector3.UP)
 		
 		branch.add_child(branch_instance)
 		
@@ -201,7 +211,7 @@ func generate_branches(parent, origin_point, num_branches, current_depth, max_de
 		generate_branches(branch, end_point, num_sub, current_depth + 1, max_depth)
 
 # Adds small detail blocks to a branch
-func add_detail_blocks(parent_node, branch_instance, branch_size):
+func add_detail_blocks(parent_node, branch_instance, branch_size) -> void:
 	var num_details = randi() % 3 + 1
 	
 	for i in range(num_details):
@@ -241,7 +251,7 @@ func add_detail_blocks(parent_node, branch_instance, branch_size):
 		
 		# Apply rotation of parent branch to the relative position
 		var global_transform = branch_instance.global_transform
-		detail.position = branch_instance.to_local(global_transform.origin + global_transform.basis * relative_position)
+		detail.position = branch_instance.to_local(global_position + global_transform.basis * relative_position)
 		
 		# Match parent rotation
 		detail.rotation = branch_instance.rotation
@@ -252,7 +262,7 @@ func add_detail_blocks(parent_node, branch_instance, branch_size):
 		parent_node.add_child(detail)
 
 # Additional function to create more complex geometric tree like in the image
-func generate_complex_geometric_tree():
+func generate_complex_geometric_tree() -> void:
 	# Create root node for the tree
 	var tree_root = Node3D.new()
 	tree_root.name = "ComplexGeometricTree"
@@ -290,7 +300,7 @@ func create_base():
 	return base_node
 
 # Creates a complex cluster of blocks like in the reference image
-func create_block_cluster(parent, origin_point):
+func create_block_cluster(parent, origin_point) -> void:
 	# Create a node for the cluster
 	var cluster = Node3D.new()
 	cluster.name = "BlockCluster"
@@ -306,7 +316,7 @@ func create_block_cluster(parent, origin_point):
 	add_cluster_details(cluster, origin_point)
 
 # Creates the main large blocks of the cluster
-func create_main_blocks(parent, origin_point):
+func create_main_blocks(parent, origin_point) -> void:
 	# In the reference image, there are about 3-4 large block clusters
 	var num_blocks = 4
 	
@@ -355,7 +365,7 @@ func create_main_blocks(parent, origin_point):
 			block_node.add_child(block)
 
 # Creates connecting structures between main blocks
-func create_connecting_structures(parent, origin_point):
+func create_connecting_structures(parent, origin_point) -> void:
 	# Create a few connector pieces
 	var num_connectors = randi() % 5 + 3
 	
@@ -423,7 +433,7 @@ func create_connecting_structures(parent, origin_point):
 		parent.add_child(connector)
 
 # Adds small detail blocks to the cluster
-func add_cluster_details(parent, origin_point):
+func add_cluster_details(parent, origin_point) -> void:
 	var num_details = randi() % 10 + 5
 	
 	for i in range(num_details):
@@ -459,7 +469,7 @@ func add_cluster_details(parent, origin_point):
 		parent.add_child(detail)
 
 # Can be called to rebuild the tree with new parameters
-func rebuild_tree():
+func rebuild_tree() -> void:
 	# Remove existing tree
 	for child in get_children():
 		child.queue_free()
@@ -468,9 +478,18 @@ func rebuild_tree():
 	generate_tree()
 
 # For the specific style in the image - call this instead of generate_tree()
-func generate_image_style_tree():
+func generate_image_style_tree() -> void:
 	# Create base materials
 	create_materials()
 	
 	# Create complex geometric tree like in the image
 	generate_complex_geometric_tree()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

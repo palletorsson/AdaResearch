@@ -1,0 +1,24 @@
+{
+  "id": "rd10_theta_ring_heightmap",
+  "F": 0.03,
+  "K": 0.057,
+  "grid_size": 112,
+  "iterations": 5200,
+  "seed": 29,
+  "render_mode": "heightmap",
+  "height_amp": 0.82,
+  "color_lo": [
+    0.12,
+    0.16,
+    0.28
+  ],
+  "color_hi": [
+    0.52,
+    0.88,
+    0.82
+  ],
+  "camera_yaw": 0.42,
+  "camera_pitch": 0.58,
+  "layout": "rd_field",
+  "notes": "\u00ce\u00b8-class ring-growing regime (F=0.030, K=0.057): blue spots swell into concentric rings and joining stripe networks."
+}

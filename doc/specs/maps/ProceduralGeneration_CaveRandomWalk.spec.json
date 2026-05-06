@@ -1,0 +1,39 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGeneration_CaveRandomWalk",
+  "home_sequence": "proceduralgeneration_all",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 180,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        5.977777777777778,
+        6.461111111111111
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 181,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

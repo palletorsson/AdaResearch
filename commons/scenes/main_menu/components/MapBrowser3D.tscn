@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/scenes/main_menu/components/MapBrowser3D.gd" id="1_browser"]
+[ext_resource type="PackedScene" path="res://commons/scenes/main_menu/components/MenuButton3D.tscn" id="2_button"]
+
+[node name="MapBrowser3D" type="Node3D"]
+script = ExtResource("1_browser")
+button_scene = ExtResource("2_button")
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+text = "Sequences"
+font_size = 64
+outline_size = 12
+pixel_size = 0.0025
+
+[node name="ItemsContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="PageLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0, 0)
+text = "Page 1 / 1"
+font_size = 36
+outline_size = 8
+pixel_size = 0.0025
+
+[node name="NavButtons" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+
+[node name="PrevButton" parent="NavButtons" instance=ExtResource("2_button")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.8, 0, 0)
+text = "< Prev"
+color = Color(0.5, 0.5, 1, 1)
+
+[node name="ToggleModeButton" parent="NavButtons" instance=ExtResource("2_button")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+text = "Maps"
+color = Color(0.5, 1, 0.5, 1)
+
+[node name="NextButton" parent="NavButtons" instance=ExtResource("2_button")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.8, 0, 0)
+text = "Next >"
+color = Color(0.5, 0.5, 1, 1)
+
+[node name="BackButton" parent="NavButtons" instance=ExtResource("2_button")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.5, 0)
+text = "Back"
+color = Color(1, 0.5, 0.5, 1)

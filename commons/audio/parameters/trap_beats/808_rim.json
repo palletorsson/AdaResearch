@@ -1,0 +1,38 @@
+{
+	"808_rim": {
+		"_metadata": {
+			"sound_type": "808_rim",
+			"description": "808 rimshot with sharp click - TICK",
+			"tags": "rimshot, rim, 808, percussion, click",
+			"created_at": "2025-01-07T00:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"pitch": {
+				"value": 800.0,
+				"min": 400.0,
+				"max": 1500.0,
+				"step": 50.0
+			},
+			"click": {
+				"value": 0.8,
+				"min": 0.0,
+				"max": 1.5,
+				"step": 0.1
+			},
+			"decay": {
+				"value": 0.04,
+				"min": 0.02,
+				"max": 0.1,
+				"step": 0.01
+			},
+			"seed": {
+				"value": -1,
+				"min": -1,
+				"max": 10000,
+				"step": 1
+			}
+		}
+	}
+}

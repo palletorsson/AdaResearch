@@ -25,13 +25,13 @@ var inited := false
 func _cell(x:int,y:int,z:int) -> int:
 	return x + grid_n * (y + grid_n * z)
 
-func _ready():
+func _ready() -> void:
 	_alloc_fields()
 	_seed_fields()
 	_make_torso_visual()
 	inited = true
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not inited: return
 	for i in range(steps_per_frame):
 		_step_rd()
@@ -41,7 +41,7 @@ func _process(delta: float):
 		_grow_limbs(delta)
 
 # --- field setup ---
-func _alloc_fields():
+func _alloc_fields() -> void:
 	var n3 = grid_n * grid_n * grid_n
 	A = PackedFloat32Array()
 	B = PackedFloat32Array()
@@ -50,7 +50,7 @@ func _alloc_fields():
 		A[i] = 1.0
 		B[i] = 0.0
 
-func _seed_fields():
+func _seed_fields() -> void:
 	var c = (grid_n - 1) * 0.5
 	for z in range(grid_n):
 		for y in range(grid_n):
@@ -79,7 +79,7 @@ func _lap(buf: PackedFloat32Array, x:int,y:int,z:int) -> float:
 	if z < grid_n-1:     v += buf[_cell(x,y,z+1)]
 	return v
 
-func _step_rd():
+func _step_rd() -> void:
 	var A2 := A.duplicate()
 	var B2 := B.duplicate()
 	for z in range(1, grid_n-1):
@@ -95,7 +95,7 @@ func _step_rd():
 	A = A2; B = B2
 
 # --- Bud detection + limb growth ---
-func _spawn_buds_from_field():
+func _spawn_buds_from_field() -> void:
 	var c = (grid_n - 1) * 0.5
 	var candidates: Array = []
 	for z in range(1, grid_n-1):
@@ -128,7 +128,7 @@ func _spawn_buds_from_field():
 		limb.look_at_from_position(limb.position, limb.position + dir, Vector3.UP)
 		buds.append({ "pos": p, "dir": dir, "len": 0.01, "mesh": limb })
 
-func _grow_limbs(delta: float):
+func _grow_limbs(delta: float) -> void:
 	for bud in buds:
 		bud["len"] = min((bud["len"] as float) + growth_speed * delta, limb_max_len)
 		var m: MeshInstance3D = bud["mesh"]
@@ -144,10 +144,11 @@ func _ellipsoid_sdf(p: Vector3, r: Vector3) -> float:
 	return k1 - 1.0
 
 # --- Visuals ---
-func _make_torso_visual():
+func _make_torso_visual() -> void:
 	var mesh := MeshInstance3D.new()
 	var m := SphereMesh.new()
 	m.radius = 0.5
+	m.height = 1.0
 	m.radial_segments = 24
 	m.rings = 24
 	mesh.mesh = m
@@ -171,8 +172,17 @@ func _make_capsule(r: float, h: float) -> MeshInstance3D:
 	mi.material_override = mat
 	return mi
 
-func _update_capsule(mi: MeshInstance3D, r: float, h: float):
+func _update_capsule(mi: MeshInstance3D, r: float, h: float) -> void:
 	var cap := mi.mesh as CapsuleMesh
 	cap.radius = r
 	cap.height = maxf(h, 0.01)
 	mi.mesh = cap
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

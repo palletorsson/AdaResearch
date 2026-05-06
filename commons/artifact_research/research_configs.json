@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "description": "Seed library of artifact configs for the auto-research loop. Each config = an artifact scene path + optional param overrides via apply_grid_config(). Schema mirrors substrate_research and mesh_grammar_research so all three galleries are queried by the same iteration tooling.",
+  "configs": [
+    {
+      "id": "gen00_dark_sphere",
+      "notes": "The reference marker artifact. Single dark sphere on a small base. Used everywhere as a placeholder.",
+      "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn"
+    },
+    {
+      "id": "gen00_pompeii_basket_weave",
+      "notes": "Mosaic floor with basket-weave motif. From the pompeii_mosaic_floor family — procedural mosaic with palette + tile + grout parameters.",
+      "scene": "res://commons/artifacts/pompeii_mosaic_floor/basket_weave_floor.tscn"
+    },
+    {
+      "id": "gen00_pompeii_compass_rose",
+      "notes": "Compass-rose mosaic floor — radial taxonomy in tiles.",
+      "scene": "res://commons/artifacts/pompeii_mosaic_floor/compass_rose_floor.tscn"
+    },
+    {
+      "id": "gen00_pompeii_diamond_lattice",
+      "notes": "Diamond-lattice mosaic — orthogonal tessellation with diamond infill.",
+      "scene": "res://commons/artifacts/pompeii_mosaic_floor/diamond_lattice_floor.tscn"
+    },
+    {
+      "id": "gen00_pompeii_dense_carpet",
+      "notes": "Dense carpet motif — high-density mosaic.",
+      "scene": "res://commons/artifacts/pompeii_mosaic_floor/dense_carpet_floor.tscn"
+    },
+    {
+      "id": "gen00_persian_rug",
+      "notes": "Persian rug procedural pattern — cellular automaton on a rug.",
+      "scene": "res://algorithms/cellularautomata/persian_rug/persian_rug.tscn"
+    },
+    {
+      "id": "gen00_recrystallization_ca",
+      "notes": "Recrystallization cellular automaton showcase. CA evolution as the artifact.",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/recrystallization_ca.tscn"
+    },
+    {
+      "id": "gen00_colorballs",
+      "notes": "Colour-ball arrangement — palette-driven sphere cluster.",
+      "scene": "res://algorithms/color/colorballs/colorballs.tscn"
+    },
+    {
+      "id": "gen00_disco_lights",
+      "notes": "Disco lights — chromatic point-light arrangement.",
+      "scene": "res://algorithms/color/colorball/disco_lights.tscn"
+    },
+    {
+      "id": "gen00_crystal_random_walk",
+      "notes": "Random-walk crystal growth — 3D random-walker leaving a crystallised trace.",
+      "scene": "res://algorithms/randomness/randomwalk/scenes/crystal_random_walk.tscn"
+    }
+  ]
+}

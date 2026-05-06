@@ -1,0 +1,119 @@
+{
+  "id": "morph36_scifi_reactor_pedestal",
+  "family": "scifi_props",
+  "notes": "Sci-fi props pass: a reactor or power core pedestal with vertical body, side fins, and a crowned top emitter.",
+  "camera_yaw": 0.74,
+  "camera_pitch": 0.34,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.92,
+      1.18,
+      0.74
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "reactor_base",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.16,
+        "scale": 1.26
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "reactor_panels",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 2,
+        "rows": 4,
+        "length": 0.08,
+        "scale": 0.72,
+        "door_col": 0,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "reactor_fins",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.28,
+        "scale": 0.22,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.24,
+          0.0
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "reactor_emitter",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.84,
+        "scale": 0.34,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.46,
+          0.0
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.22
+    },
+    {
+      "id": "reactor_cap",
+      "when": {
+        "role": "support",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 3,
+        "length": 0.18,
+        "scale": 1.12
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

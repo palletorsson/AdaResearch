@@ -12,6 +12,14 @@ extends Node3D
 @export var bubble_fade_time: float = 2.0  # Time it takes for a bubble to fade out
 @export var bubble_scale_down_rate: float = 0.05  # How quickly bubbles shrink as they rise
 
+# Bubble light properties
+@export var enable_bubble_lights: bool = true
+@export var bubble_light_probability: float = 0.35
+@export var max_bubble_lights: int = 24
+@export var bubble_light_energy: float = 0.22
+@export var bubble_light_range: float = 1.8
+@export var bubble_light_color: Color = Color(1.0, 0.75, 0.92)
+
 # Petri dish properties
 @export var petri_dish_radius: float = 3.5  # Radius of the petri dish (smaller)
 @export var petri_dish_height: float = 0.25  # Height of the petri dish walls
@@ -38,6 +46,7 @@ var active_audio_players = []
 var audio_player_pool = []
 var synthesized_sounds: Array = []
 var petri_dish_container: Node3D
+var active_bubble_light_count: int = 0
 #var sound_synthesizer: BubbleSoundSynthesizer
 
 # Bubble class to track properties of each bubble
@@ -50,8 +59,9 @@ class Bubble:
 	var wobble_amount: float
 	var wobble_speed: float
 	var material: StandardMaterial3D
+	var light: OmniLight3D = null
 	
-	func _init(p_mesh_instance, p_rise_speed, p_initial_scale, p_wobble_amount, p_wobble_speed):
+	func _init(p_mesh_instance, p_rise_speed, p_initial_scale, p_wobble_amount, p_wobble_speed) -> void:
 		mesh_instance = p_mesh_instance
 		rise_speed = p_rise_speed
 		initial_scale = p_initial_scale
@@ -69,7 +79,7 @@ class Bubble:
 		material.metallic_specular = 1.0
 		mesh_instance.set_surface_override_material(0, material)
 
-func _ready():
+func _ready() -> void:
 	# Create the petri dish
 	create_petri_dish()
 	
@@ -90,7 +100,7 @@ func _ready():
 		#add_child(audio_player)
 		#audio_player_pool.append(audio_player)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Spawn new bubbles
 	bubble_timer += delta
 	if bubble_timer >= 1.0 / spawn_rate and active_bubbles.size() < max_bubble_count:
@@ -105,6 +115,8 @@ func _process(delta):
 		
 		if bubble.age >= bubble_lifetime:
 			# Remove and free the bubble
+			if bubble.light:
+				active_bubble_light_count = maxi(0, active_bubble_light_count - 1)
 			bubble.mesh_instance.queue_free()
 			active_bubbles.remove_at(i)
 			continue
@@ -134,9 +146,13 @@ func _process(delta):
 			var alpha = 0.3 * (1.0 - (bubble.age - (bubble_lifetime - bubble_fade_time)) / bubble_fade_time)
 			bubble.material.albedo_color.a = alpha
 		
+		if bubble.light:
+			var life_ratio = clampf(1.0 - (bubble.age / bubble_lifetime), 0.0, 1.0)
+			bubble.light.light_energy = bubble_light_energy * life_ratio
+		
 		i += 1
 
-func create_petri_dish():
+func create_petri_dish() -> void:
 	"""Create a realistic petri dish with glass-like appearance"""
 	petri_dish_container = Node3D.new()
 	petri_dish_container.name = "PetriDish"
@@ -207,7 +223,7 @@ func create_petri_dish():
 	
 	print("BubblesRandom: Created petri dish with radius %.1f and height %.1f" % [petri_dish_radius, petri_dish_height])
 
-func spawn_bubble():
+func spawn_bubble() -> void:
 	# Create a random position within the spawn area
 	var pos = Vector3(
 		randf_range(-spawn_area_size.x/2, spawn_area_size.x/2),
@@ -238,12 +254,24 @@ func spawn_bubble():
 	
 	# Create and track the bubble
 	var bubble = Bubble.new(mesh_instance, rise_speed, initial_scale, wobble_amount, wobble_speed)
+
+	if enable_bubble_lights and active_bubble_light_count < max_bubble_lights and randf() <= bubble_light_probability:
+		var bubble_light = OmniLight3D.new()
+		bubble_light.name = "BubbleLight"
+		bubble_light.shadow_enabled = false
+		bubble_light.light_energy = bubble_light_energy
+		bubble_light.light_color = bubble_light_color
+		bubble_light.omni_range = bubble_light_range * clampf(initial_scale, 0.5, 1.4)
+		mesh_instance.add_child(bubble_light)
+		bubble.light = bubble_light
+		active_bubble_light_count += 1
+
 	active_bubbles.append(bubble)
 	
 	# Play bubble sound effect
 	play_bubble_sound(pos, initial_scale)
 
-func play_bubble_sound(position: Vector3, bubble_size: float):
+func play_bubble_sound(position: Vector3, bubble_size: float) -> void:
 	# Determine normalized bubble size (0-1)
 	var size_factor = (bubble_size - min_bubble_size) / (max_bubble_size - min_bubble_size)
 	
@@ -287,8 +315,17 @@ func play_bubble_sound(position: Vector3, bubble_size: float):
 	# Play the sound
 	audio_player.play()
 
-func _on_audio_finished(audio_player):
+func _on_audio_finished(audio_player) -> void:
 	# Return the audio player to the pool when finished
 	if active_audio_players.has(audio_player):
 		active_audio_players.erase(audio_player)
 		audio_player_pool.append(audio_player)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

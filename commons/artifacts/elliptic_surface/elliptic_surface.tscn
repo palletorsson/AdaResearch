@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://elliptic_surf01"]
+
+[ext_resource type="Script" path="res://commons/artifacts/elliptic_surface/elliptic_surface.gd" id="1_script"]
+
+[node name="EllipticSurface" type="Node3D"]
+script = ExtResource("1_script")

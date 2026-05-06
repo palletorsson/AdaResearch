@@ -1,0 +1,766 @@
+{
+  "version": 1,
+  "description": "Tracks artifact registry improvements made by /ada-artifact-improver",
+  "improvements": [
+    {
+      "lookup_name": "randompoints",
+      "registry_file": "randomness.json",
+      "timestamp": "2026-04-08",
+      "before_score": "2/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions",
+        "footprint",
+        "size_group",
+        "parameters"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "bulging_tunnel",
+      "registry_file": "alternative_geometries.json",
+      "timestamp": "2026-04-08",
+      "before_score": "2/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions",
+        "footprint",
+        "size_group",
+        "parameters"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "gdscript_additions": [
+        "class_name BulgingTunnel",
+        "@identity block (AI-drafted)"
+      ],
+      "screenshot_captured": true,
+      "identity_source": false,
+      "verified": true
+    },
+    {
+      "lookup_name": "graphspace",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "KonigsbergBridge",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": false,
+      "verified": true,
+      "gdscript_additions": [
+        "@identity block (AI-drafted)"
+      ]
+    },
+    {
+      "lookup_name": "force_directed_layout",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "gdscript_additions": [
+        "class_name ForceDirectedLayout"
+      ]
+    },
+    {
+      "lookup_name": "pathfinding3d",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "networkflow3d",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "network_analysis",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "rhizomatic_structure",
+      "registry_file": "alternative_geometries.json",
+      "timestamp": "2026-04-08",
+      "before_score": "3/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "tarjan_algorithm",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "kosaraju_algorithm",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "mst_visualization",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "push_relabel_algorithm",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "edmonds_algorithm",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "7/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "balance_puzzle",
+      "registry_file": "furniture.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions",
+        "signals"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "boolean_tunnel",
+      "registry_file": "transforms.json",
+      "timestamp": "2026-04-08",
+      "before_score": "2/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "gdscript_additions": [
+        "class_name BooleanTunnel"
+      ]
+    },
+    {
+      "lookup_name": "carousel_cake",
+      "registry_file": "transforms.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "gdscript_additions": [
+        "class_name CarouselCake"
+      ]
+    },
+    {
+      "lookup_name": "catalyst_target",
+      "registry_file": "hazards.json",
+      "timestamp": "2026-04-08",
+      "before_score": "2/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": false,
+      "verified": true
+    },
+    {
+      "lookup_name": "chair_assembly_puzzle",
+      "registry_file": "furniture.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions",
+        "signals"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "clipboard",
+      "registry_file": "commons_artifacts.json",
+      "timestamp": "2026-04-08",
+      "before_score": "0/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "cube_scene",
+      "registry_file": "primitives.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "dark_sphere",
+      "registry_file": "lsystems.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": false,
+      "verified": true
+    },
+    {
+      "lookup_name": "pick_up_cube",
+      "registry_file": "commons_artifacts.json",
+      "timestamp": "2026-04-08",
+      "before_score": "0/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": false,
+      "verified": true
+    },
+    {
+      "lookup_name": "pickup_gate",
+      "registry_file": "commons_artifacts.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": false,
+      "verified": true
+    },
+    {
+      "lookup_name": "player_trace",
+      "registry_file": "primitives.json",
+      "timestamp": "2026-04-08",
+      "before_score": "0/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "prism_block",
+      "registry_file": "primitives.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": false,
+      "verified": true
+    },
+    {
+      "lookup_name": "righttriangle",
+      "registry_file": "primitives.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "gdscript_additions": [
+        "class_name RightTriangle"
+      ]
+    },
+    {
+      "lookup_name": "rotate_grid_cubes",
+      "registry_file": "randomness.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": false,
+      "verified": true,
+      "gdscript_additions": [
+        "class_name RotateGridCubes"
+      ]
+    },
+    {
+      "lookup_name": "scale_me",
+      "registry_file": "algorithms_misc.json",
+      "timestamp": "2026-04-08",
+      "before_score": "0/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "gdscript_additions": [
+        "class_name ScaleMe"
+      ]
+    },
+    {
+      "lookup_name": "science_screen",
+      "registry_file": "shaders.json",
+      "timestamp": "2026-04-08",
+      "before_score": "3/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": false,
+      "verified": true
+    },
+    {
+      "lookup_name": "spin",
+      "registry_file": "transforms.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "gdscript_additions": [
+        "class_name Spin"
+      ]
+    },
+    {
+      "lookup_name": "toruscylinder",
+      "registry_file": "transforms.json",
+      "timestamp": "2026-04-08",
+      "before_score": "2/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "translation_cube_demo",
+      "registry_file": "transforms.json",
+      "timestamp": "2026-04-08",
+      "before_score": "2/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "gdscript_additions": [
+        "class_name TranslationCubeDemo"
+      ]
+    },
+    {
+      "lookup_name": "x_translation_cube",
+      "registry_file": "transforms.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "y_translation_cube",
+      "registry_file": "transforms.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "z_translation_cube",
+      "registry_file": "transforms.json",
+      "timestamp": "2026-04-08",
+      "before_score": "1/8",
+      "after_score": "5/8",
+      "fields_added": [
+        "qfep_connection",
+        "gamwell_reference",
+        "capacity",
+        "interactions"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    }
+  ]
+}

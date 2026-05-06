@@ -1,0 +1,18 @@
+{
+  "id": "gen01_tube_branches_dense",
+  "notes": "Many tube branches \u2014 coral-like.",
+  "seed": "icosahedron",
+  "seed_scale": 0.35,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "tube_branch",
+      "selector": "random_50",
+      "params": {
+        "length": 0.4,
+        "radius": 0.05,
+        "segments": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "id": "morph_auto_drag_avant_garde_04",
+  "family": "drag_avant_garde",
+  "notes": "Auto-generated avant-garde drag candidate.",
+  "camera_yaw": 0.754,
+  "camera_pitch": 0.375,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.728,
+      1.352,
+      0.646
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "avant_to_cape",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.764,
+        "scale": 1.552,
+        "normal_bias": 1.0,
+        "bitangent_bias": 0.573,
+        "world_bias": [
+          0.078,
+          -0.454,
+          -0.271
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.511
+    },
+    {
+      "id": "avant_train_extension",
+      "when": {
+        "role": "garment",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.24
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.593,
+        "scale": 1.218,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.225,
+          -0.053,
+          -0.785
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "avant_to_major_sleeve",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.505,
+        "scale": 0.346,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.146,
+          0.297,
+          0.025
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "avant_to_minor_sleeve",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.322,
+        "scale": 0.179,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.042,
+          -0.223,
+          -0.061
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "avant_to_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.184,
+        "scale": 0.499
+      },
+      "child_role": "hair",
+      "budget_factor": 0.517
+    },
+    {
+      "id": "avant_headpiece",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.2
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.207,
+        "scale": 0.413,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.313,
+          0.346,
+          0.398
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "avant_to_heels",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.661,
+        "scale": 0.271
+      },
+      "child_role": "heel",
+      "budget_factor": 0.0
+    }
+  ]
+}

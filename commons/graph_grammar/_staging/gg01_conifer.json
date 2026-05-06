@@ -1,0 +1,39 @@
+{
+  "id": "gg01_conifer",
+  "notes": "Cypress \u00e2\u20ac\u201d narrow branching with bright green tufts.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.14
+  },
+  "iterations": 5,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.7,
+        "spread_deg": 22,
+        "radius_decay": 0.72
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 10,
+        "length": 0.18,
+        "radius": 0.015,
+        "splay": 0.6
+      }
+    }
+  ]
+}

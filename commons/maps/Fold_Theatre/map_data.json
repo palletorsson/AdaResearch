@@ -1,0 +1,123 @@
+{
+  "map_info": {
+    "name": "Fold Theatre",
+    "lookup_name": "Fold_Theatre",
+    "description": "The F-edge first cycle. Substrate cycles between Wolfram Rule 30, Sierpinski, and Menger sponge expressions on the same floor; subdivision intensifies where the player looks; flower-grammar paints concentric anatomy in petal/sepal/stamen/pistil colour bands; the path from spawn to teleporter is guaranteed by PATH_GUARANTEE. Same map, three foldings of the same algorithm, the same body walking through.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 13,
+      "depth": 17,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "qfep",
+      "estimated_time": "5-7 minutes",
+      "learning_objectives": [
+        "F edge: an algorithm becomes another algorithm",
+        "Apparatus-as-phenomenon: detail arrives where attention is",
+        "Pattern-as-maze: the algorithm IS the floor plan",
+        "Part-grammar: every cube knows what it is"
+      ]
+    },
+    "title": "The Fold Theatre"
+  },
+  "utility_definitions": {
+    "sp": {
+      "type": "spawn",
+      "name": "Theatre entrance",
+      "description": "You enter the theatre. The floor is already drawing itself."
+    },
+    "t": {
+      "type": "teleporter",
+      "name": "Continue",
+      "description": "Carry the fold catalyst forward.",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "audio": {
+    "ambient_preset": "laboratory_hum",
+    "volume": -10.0
+  },
+  "lighting": {
+    "ambient_color": [0.4, 0.42, 0.5],
+    "ambient_energy": 0.55
+  },
+  "documentation": {
+    "summary": "Fold_Theatre — F-edge first cycle on the substrate",
+    "layout": "Long-axis corridor 13 wide x 17 deep. Spawn at z=1 col=2 (front-left), teleporter at z=15 col=10 (back-right). Centre-floor hosts the substrate runner; substrate cycles visibility expressions, paints flower-grammar roles, subdivides at viewer attention, and guarantees the spawn-to-teleporter route via PATH_GUARANTEE.",
+    "objective": "Walk from entrance to exit while the floor reorganises itself. The algorithm becoming another algorithm — formal F edge — paired with the visual-grammar argument from doc/EDGES_OF_ALGORITHM_VISUAL_SEEDS.md (Haeckel Tafel 9, Codex carousel, Hilma af Klint).",
+    "key_elements": [
+      "GridSubstrateRunner with all four channels (visibility + glyph + part + colour-by-role)",
+      "PATH_GUARANTEE floor-plan mode protects walkability across all visibility expressions",
+      "Flower-grammar paints concentric anatomy on the floor",
+      "Subdivide-by-attention reveals detail where the player's gaze falls"
+    ]
+  },
+  "settings": {
+    "render_walls": true,
+    "render_ceiling": false
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","0","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," ","sp"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","t"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","fold_theatre_runner"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

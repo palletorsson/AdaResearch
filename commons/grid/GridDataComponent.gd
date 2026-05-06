@@ -10,6 +10,9 @@ const MAPS_PATH = "res://commons/maps/"
 
 # Configuration
 @export var prefer_json_format: bool = true
+# When true, and a sibling map_data.corridor.json exists, load THAT instead.
+# Used by SpineRunner to consume procedurally-generated 16x8 layouts.
+@export var prefer_corridor_variant: bool = false
 
 # Loaded data
 var json_loader: JsonMapLoader
@@ -59,7 +62,7 @@ func _load_json_map() -> bool:
 		print("🔍 DEBUG: json_path = '%s'" % json_path)
 	elif map_name == "Lab":
 		# For base Lab map: res://commons/maps/Lab/map_data.json  
-		json_path = MAPS_PATH + "Lab/map_data_one.json"
+		json_path = MAPS_PATH + "Lab/map_data.json"
 		print("🔍 DEBUG: Base Lab map")
 		print("🔍 DEBUG: json_path = '%s'" % json_path)
 	else:
@@ -67,6 +70,16 @@ func _load_json_map() -> bool:
 		json_path = MAPS_PATH + map_name + "/map_data.json"
 		print("🔍 DEBUG: Regular map")
 		print("🔍 DEBUG: json_path = '%s'" % json_path)
+
+	# Spine-runner corridor variant: prefer map_data.corridor.json when present
+	# and prefer_corridor_variant is set. Falls back silently if not generated yet.
+	if prefer_corridor_variant and not map_name.begins_with("Lab"):
+		var corridor_path = MAPS_PATH + map_name + "/map_data.corridor.json"
+		if FileAccess.file_exists(corridor_path):
+			print("GridDataComponent: loading CORRIDOR variant: %s" % corridor_path)
+			json_path = corridor_path
+		else:
+			print("GridDataComponent: corridor variant not found, using base map_data.json")
 	
 	print("🔍 DEBUG: Final json_path = '%s'" % json_path)
 	print("🔍 DEBUG: File exists check: %s" % FileAccess.file_exists(json_path))
@@ -147,11 +160,50 @@ func get_utility_definitions() -> Dictionary:
 		return json_loader.get_utility_definitions()
 	return {}
 
+## Optional 4th layer for biome-density hints. See
+## algorithms/nature_system/systems/biome_paint_tokens.gd for the token
+## language. Returns [] when the map has no biome_paint layer.
+func get_biome_paint_layer() -> Array:
+	if json_loader:
+		return json_loader.get_biome_paint_layer()
+	return []
+
 # Get lighting settings from loaded data
 func get_lighting_settings() -> Dictionary:
 	if json_loader:
 		return json_loader.get_lighting_settings()
 	return {}
+
+# Get per-map environment overrides (from map_data.json "environment" block)
+func get_environment_overrides() -> Dictionary:
+	if json_loader:
+		return json_loader.get_environment_overrides()
+	return {}
+
+# Get the resolved environment config for this map.
+# Merges: soft_stages defaults (from sequence) + per-map overrides.
+# Returns: { terrain_mode, vegetation_density, ambient_energy, fog_density, ... }
+func get_environment_config() -> Dictionary:
+	# Stage defaults come from EcosystemManager (reads soft_stages.json)
+	var eco = Engine.get_singleton("EcosystemManager") if Engine.has_singleton("EcosystemManager") else null
+	var defaults: Dictionary = {}
+	if eco and eco.has_method("get_current_ecosystem_config"):
+		defaults = eco.get_current_ecosystem_config()
+	else:
+		# Fallback defaults when EcosystemManager isn't available
+		defaults = {
+			"terrain_mode": "flat",
+			"vegetation_density": 0.0,
+			"nature_kingdoms": [],
+			"ambient_preset": "empty_lab",
+		}
+
+	# Merge per-map overrides on top of defaults
+	var overrides: Dictionary = get_environment_overrides()
+	for key in overrides:
+		defaults[key] = overrides[key]
+
+	return defaults
 
 # Get current map metadata
 func get_map_metadata() -> Dictionary:
@@ -182,6 +234,18 @@ func is_data_loaded() -> bool:
 # Get current map name
 func get_current_map_name() -> String:
 	return map_name
+
+# Get map name from loaded data (for display)
+func get_map_name() -> String:
+	if json_loader:
+		return json_loader.get_map_name()
+	return map_name
+
+# Get map description from loaded data
+func get_description() -> String:
+	if json_loader:
+		return json_loader.get_map_description()
+	return ""
 
 # Get current format
 func get_current_format() -> String:

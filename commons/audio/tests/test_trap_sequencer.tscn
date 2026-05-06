@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhafuq1cvghrt"]
+
+[ext_resource type="Script" path="res://commons/audio/tests/test_trap_sequencer.gd" id="1"]
+
+[node name="TrapSequencerTest" type="Node"]
+script = ExtResource("1")

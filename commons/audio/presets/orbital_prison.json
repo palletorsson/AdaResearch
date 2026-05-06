@@ -1,0 +1,198 @@
+{
+    "description": "Confined space station with dark industrial techno, tension, resistance - aggressive and tense",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -14,
+            "bus": "OminousBass",
+            "parameters": {
+                "base_freq": 35.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.TB303_ACID_BASS",
+            "volume_db": -18,
+            "bus": "Acid"
+        },
+        {
+            "sound_id": "techno_noir.city_ambience",
+            "volume_db": -24,
+            "bus": "Tension",
+            "parameters": {
+                "traffic_density": 0.2
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "trap_beats.808_kick"
+            ],
+            "interval_range": [
+                3.0,
+                8.0
+            ],
+            "volume_range": [
+                -16,
+                -10
+            ],
+            "bus": "Kicks"
+        },
+        {
+            "sound_pool": [
+                "trap_beats.clap",
+                "trap_beats.trap_snare"
+            ],
+            "interval_range": [
+                5.0,
+                12.0
+            ],
+            "volume_range": [
+                -18,
+                -12
+            ],
+            "bus": "Percussion"
+        },
+        {
+            "sound_pool": [
+                "trap_beats.hihat_closed"
+            ],
+            "interval_range": [
+                1.5,
+                4.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "HiHats"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.static_burst",
+                "techno_noir.mechanical_whir"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -20,
+                -14
+            ],
+            "bus": "Effects"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren"
+            ],
+            "interval_range": [
+                15.0,
+                40.0
+            ],
+            "volume_range": [
+                -22,
+                -16
+            ],
+            "bus": "Alarm"
+        }
+    ],
+    "buses": {
+        "OminousBass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 100
+                },
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.25
+                }
+            ]
+        },
+        "Acid": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 600
+                },
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.3
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.85,
+                    "tap1_delay_ms": 545,
+                    "tap1_level_db": -8.0
+                }
+            ]
+        },
+        "Tension": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 1500
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "Kicks": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.35
+                }
+            ]
+        },
+        "Percussion": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "HiHats": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 3000
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.75,
+                    "tap1_delay_ms": 545,
+                    "tap1_level_db": -6.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.5
+                }
+            ]
+        },
+        "Alarm": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

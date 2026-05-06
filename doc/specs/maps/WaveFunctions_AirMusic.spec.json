@@ -1,0 +1,68 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_AirMusic",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": "SystemsMusicTest implements phasing/generative composition; RackAmbientDrone provides sustained tonal foundation; resonating_metallophone adds physical resonance; air_music_display_case frames the instruments; BigPipeSystem and GlassRack provide the laboratory aesthetic; lab_table anchors the workspace; dark_sphere continues.",
+  "style": "rams",
+  "echoes": [],
+  "density": 0.056,
+  "breath_zones": [
+    {
+      "size": 98,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        5.010204081632653,
+        5.622448979591836
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 2,
+      "token": "lab_table"
+    },
+    {
+      "x": 9,
+      "z": 2,
+      "token": "lab_table"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 8,
+      "token": "RackAmbientDrone"
+    },
+    {
+      "x": 3,
+      "z": 9,
+      "token": "air_music_display_case"
+    },
+    {
+      "x": 5,
+      "z": 9,
+      "token": "resonating_metallophone"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 107,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

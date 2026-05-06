@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgfgao1t85hwx"]
+
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/big_pipe_system/segments/pipe_straight.tscn" id="1_straight"]
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/big_pipe_system/segments/pipe_corner.tscn" id="2_corner"]
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/big_pipe_system/segments/pipe_s_bend.tscn" id="3_sbend"]
+[ext_resource type="Script" uid="uid://c2lvqpvf2ig88" path="res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd" id="4_system"]
+[ext_resource type="Script" uid="uid://dy8dmm3amhbxy" path="res://algorithms/wavefunctions/big_pipe_system/big_pipe_test_runner.gd" id="5_runner"]
+
+[node name="BigPipeTestScene" type="Node3D"]
+script = ExtResource("5_runner")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="PartsGallery" type="Node3D" parent="."]
+
+[node name="Label_Straight" type="Label3D" parent="PartsGallery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+text = "Straight"
+
+[node name="PipeStraight" parent="PartsGallery" instance=ExtResource("1_straight")]
+
+[node name="Label_Corner" type="Label3D" parent="PartsGallery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, 0)
+text = "Corner"
+
+[node name="PipeCorner" parent="PartsGallery" instance=ExtResource("2_corner")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Label_SBend" type="Label3D" parent="PartsGallery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.5, 0)
+text = "S-Bend (Parametric)"
+
+[node name="PipeSBend" parent="PartsGallery" instance=ExtResource("3_sbend")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4.051222)
+
+[node name="SystemTest" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 4)
+script = ExtResource("4_system")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 3, 3, 8)

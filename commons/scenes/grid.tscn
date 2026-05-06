@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bagt28h74e1yj"]
+[gd_scene format=3 uid="uid://bagt28h74e1yj"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_tp52a"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
 [ext_resource type="Script" uid="uid://m0efb6r2gupf" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
-[ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="4_al13m"]
+[ext_resource type="Script" uid="uid://dp16jbaa5uj0v" path="res://commons/scenes/mapobjects/PlayerBoundsCheck.gd" id="4_bounds_script"]
 [ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
+[ext_resource type="Script" uid="uid://nwo7del1p6np" path="res://commons/audio/components/AudioLoadingIndicator.gd" id="6_loading"]
+[ext_resource type="PackedScene" uid="uid://b7gpc47eqau2t" path="res://commons/primitives/sphere/dark_sphere.tscn" id="7_darksphere"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_al13m"]
 sky_top_color = Color(0.684412, 0.190585, 0.698947, 1)
@@ -15,19 +17,17 @@ sky_material = SubResource("ProceduralSkyMaterial_al13m")
 
 [sub_resource type="Environment" id="Environment_q35sa"]
 background_mode = 2
-background_energy_multiplier = 2.74
 sky = SubResource("Sky_al13m")
 ambient_light_source = 3
 ambient_light_color = Color(0.506377, 0.515376, 0.472721, 1)
+ambient_light_energy = 2.5
+reflected_light_source = 1
 tonemap_mode = 3
 tonemap_exposure = 0.16
-ssr_enabled = true
 ssil_enabled = true
-glow_enabled = true
 fog_light_color = Color(0.699675, 0.367402, 0.915893, 1)
 fog_sun_scatter = 0.06
 fog_density = 0.0236
-adjustment_enabled = true
 adjustment_brightness = 0.92
 adjustment_contrast = 1.29
 adjustment_saturation = 1.28
@@ -39,32 +39,43 @@ shader = ExtResource("5_al13m")
 [sub_resource type="PlaneMesh" id="PlaneMesh_jli6m"]
 size = Vector2(100, 100)
 
-[node name="Base" instance=ExtResource("1_tp52a")]
+[node name="Base2" unique_id=32484138 instance=ExtResource("1_tp52a")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0" unique_id=647017336]
 environment = SubResource("Environment_q35sa")
 
 [node name="XROrigin3D" parent="." index="2" groups=["player_body"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.8, 0)
 
-[node name="Label3D" parent="." index="3"]
+[node name="FunctionPickup" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" parent_id_path=PackedInt32Array(100554498) index="1" unique_id=1366509493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, -0.05, 0.1)
+
+[node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" parent_id_path=PackedInt32Array(1055388144) index="3" unique_id=1831217974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, -0.05, 0.1)
+
+[node name="Label3D" parent="." index="3" unique_id=645111340]
 visible = false
 text = "Base - Grid"
 
-[node name="GridSystem" parent="." index="5" instance=ExtResource("2_s4bvx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="GridSystem" parent="." index="5" unique_id=2133953560 instance=ExtResource("2_s4bvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="ResetArea3D" parent="GridSystem" index="1" instance=ExtResource("4_al13m")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-
-[node name="CollisionShape3D" parent="StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51939, -0.436035, 1.55084)
-
-[node name="GridScene" type="Node3D" parent="." index="7"]
+[node name="GridScene" type="Node3D" parent="." index="7" unique_id=905463453]
 script = ExtResource("3_0u7bn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GridScene" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GridScene" index="0" unique_id=907078593]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
 visible = false
 material_override = SubResource("ShaderMaterial_6o8e0")
 mesh = SubResource("PlaneMesh_jli6m")
+
+[node name="PlayerBoundsCheck2" type="Node3D" parent="." index="8" unique_id=1500793908]
+script = ExtResource("4_bounds_script")
+box_bounds = Vector3(100, 50, 100)
+
+[node name="AudioLoadingIndicator" type="Node3D" parent="." index="9" unique_id=37476056]
+script = ExtResource("6_loading")
+label_offset = Vector3(0, 0.3, -1.2)
+label_font_size = 24
+
+[node name="DarkSphere" parent="." index="10" unique_id=92868398 instance=ExtResource("7_darksphere")]

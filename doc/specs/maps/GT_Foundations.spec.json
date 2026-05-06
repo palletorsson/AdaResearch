@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "GT_Foundations",
+  "home_sequence": "graphtheory",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": "graphspace",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 18,
+      "bounds": {
+        "x": 2,
+        "z": 0,
+        "w": 7,
+        "d": 9
+      },
+      "centroid": [
+        4.666666666666667,
+        4.277777777777778
+      ]
+    },
+    {
+      "size": 8,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 3,
+        "d": 3
+      },
+      "centroid": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "size": 8,
+      "bounds": {
+        "x": 7,
+        "z": 7,
+        "w": 3,
+        "d": 3
+      },
+      "centroid": [
+        8.0,
+        8.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 36,
+    "breath_zone_count": 3,
+    "unique_tokens": 0
+  }
+}

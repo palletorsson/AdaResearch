@@ -1,0 +1,130 @@
+{
+    "name": "Space Station Isolation",
+    "description": "Deep space, loneliness, mechanical ambience, hull sounds - eerie and isolated",
+    "category": "rhythmic_ambient",
+    "bpm": 0,
+    "continuous_layers": [
+        {
+            "generator": "TechnoNoirGenerator",
+            "method": "create_endless_drone",
+            "params": {
+                "base_freq": 30.0,
+                "buffer_length": 30.0,
+                "harmonic_brightness": 0.2
+            },
+            "volume_db": -18,
+            "bus": "Ambient"
+        },
+        {
+            "generator": "TechnoNoirGenerator",
+            "method": "create_city_ambience",
+            "params": {
+                "buffer_length": 15.0,
+                "traffic_density": 0.1,
+                "rumble_volume": 0.3,
+                "ambient_volume": 0.05
+            },
+            "volume_db": -25,
+            "bus": "Ambient"
+        }
+    ],
+    "random_events": [
+        {
+            "generator": "TechnoNoirGenerator",
+            "method": "create_static_burst",
+            "params": {
+                "buffer_length": 2.0,
+                "intensity": 0.15
+            },
+            "interval_range": [
+                15.0,
+                45.0
+            ],
+            "volume_range": [
+                -28,
+                -20
+            ],
+            "bus": "Effects"
+        },
+        {
+            "generator": "TechnoNoirGenerator",
+            "method": "create_distant_siren",
+            "params": {
+                "buffer_length": 4.0,
+                "base_freq": 300.0,
+                "freq_range": 50.0,
+                "volume": 0.1
+            },
+            "interval_range": [
+                30.0,
+                90.0
+            ],
+            "volume_range": [
+                -35,
+                -25
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.8,
+                    "damping": 0.05
+                },
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 800
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 1200,
+                    "tap1_level_db": -6.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.6
+                }
+            ]
+        }
+    },
+    "abstract_parameters": {
+        "intensity": {
+            "default": 0.3,
+            "affects": [
+                "event_frequency",
+                "drone_volume"
+            ]
+        },
+        "tension": {
+            "default": 0.4,
+            "affects": [
+                "filter_cutoff",
+                "reverb_wet"
+            ]
+        },
+        "space": {
+            "default": 0.8,
+            "affects": [
+                "reverb_room_size",
+                "delay_time"
+            ]
+        },
+        "darkness": {
+            "default": 0.7,
+            "affects": [
+                "lowpass_cutoff",
+                "sub_bass_volume"
+            ]
+        }
+    }
+}

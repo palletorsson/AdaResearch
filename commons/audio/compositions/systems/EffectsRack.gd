@@ -64,14 +64,16 @@ func _setup_effects_buses():
 	"""Create send effect buses"""
 	
 	# Create reverb send bus
-	reverb_bus = AudioServer.add_bus()
+	AudioServer.add_bus()
+	reverb_bus = AudioServer.bus_count - 1
 	AudioServer.set_bus_name(reverb_bus, "ReverbSend")
-	AudioServer.set_bus_send(reverb_bus, "Master")
+	AudioServer.set_bus_send(reverb_bus, "Master")  # Send to Master
 	
 	# Create delay send bus
-	delay_bus = AudioServer.add_bus()
+	AudioServer.add_bus()
+	delay_bus = AudioServer.bus_count - 1
 	AudioServer.set_bus_name(delay_bus, "DelaySend")
-	AudioServer.set_bus_send(delay_bus, "Master")
+	AudioServer.set_bus_send(delay_bus, "Master")  # Send to Master
 	
 	_setup_send_effects()
 	
@@ -241,7 +243,9 @@ func apply_delay_throw(layer_bus: String, throw_duration: float = 2.0, feedback_
 		return
 	
 	# Temporarily increase send to delay bus
-	var original_send = AudioServer.get_bus_send(bus_idx, delay_bus)
+	# Note: get_bus_send() only returns the target bus index, not the send level
+	# We'll track the original send target separately if needed
+	var original_send_target = AudioServer.get_bus_send(bus_idx)
 	
 	# Create dramatic send increase
 	var tween = create_tween()
@@ -249,7 +253,7 @@ func apply_delay_throw(layer_bus: String, throw_duration: float = 2.0, feedback_
 	tween.parallel().tween_method(_set_delay_feedback, master_delay.feedback_level_db, linear_to_db(feedback_amount), 0.1)
 	
 	# Fade back down
-	tween.tween_delay(throw_duration * 0.3)
+	tween.tween_interval(throw_duration * 0.3)
 	tween.parallel().tween_method(_set_bus_send_level.bind(bus_idx, delay_bus), 0.8, 0.0, throw_duration * 0.7)
 	tween.parallel().tween_method(_set_delay_feedback, linear_to_db(feedback_amount), master_delay.feedback_level_db, throw_duration * 0.7)
 	
@@ -363,7 +367,7 @@ func _set_bus_volume(bus_idx: int, volume_db: float):
 	"""Helper to set bus volume"""
 	AudioServer.set_bus_volume_db(bus_idx, volume_db)
 
-func _set_bus_send_level(from_bus: int, to_bus: int, level: float):
+func _set_bus_send_level(_from_bus: int, to_bus: int, level: float):
 	"""Helper to set send level"""
 	# Note: Godot doesn't have direct send level control
 	# This would need custom implementation or workaround

@@ -1,0 +1,17 @@
+{
+  "pop_prophet_lead": {
+    "_metadata": {
+      "sound_type": "pop_prophet_lead",
+      "description": "Prophet-style sync lead for melodic pop lines with bite.",
+      "instrument": "Sequential Prophet style",
+      "era": "1980s",
+      "tags": ["lead", "pop", "prophet", "sync"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 2.0, "min": 0.1, "max": 10.0, "step": 0.1 },
+      "frequency": { "value": 440.0, "min": 55.0, "max": 2200.0, "step": 1.0 },
+      "amplitude": { "value": 0.42, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

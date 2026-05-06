@@ -1,0 +1,27 @@
+{
+    "_metadata": {
+        "sound_type": "prog_synth_v2_song",
+        "display_name": "70s Prog V2",
+        "description": "Enhanced prog style. Mellotron pads, recurring motifs, Moog bass, ELP-style leads, Neu! motorik.",
+        "category": "songs",
+        "tags": ["prog", "70s", "moog", "mellotron", "v2", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Emerson Lake & Palmer", "Yes", "Tangerine Dream", "Neu!"],
+        "reference_tracks": ["Tarkus", "Close to the Edge", "Phaedra", "Hallogallo"]
+    },
+    "identity": {
+        "emotion": "epic_journey",
+        "era": "early_70s",
+        "character": ["virtuosic", "drifting", "hypnotic", "epic"]
+    },
+    "parameters": {
+        "bpm": { "min": 90, "max": 130, "value": 105, "step": 1 },
+        "key": { "options": ["Em", "Am", "Dm", "G"], "value": "Em" },
+        "prog_intensity": { "min": 0.0, "max": 1.0, "value": 0.7 }
+    },
+    "sound_design": {
+        "mellotron_pad": { "detune_cents": 10, "attack": 2.0, "chorus": 0.3 },
+        "moog_bass": { "filter": "ladder_800Hz", "drift_cents": 8 },
+        "drums": { "style": "motorik_humanized", "tempo": 105 }
+    }
+}

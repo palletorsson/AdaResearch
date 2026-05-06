@@ -1,0 +1,74 @@
+{
+  "id": "morph_auto_tree_top02",
+  "family": "tree",
+  "notes": "Auto-researched tree variant: 30 branch volumes, 75 terminal tips, height 2.08.",
+  "camera_yaw": 0.669,
+  "camera_pitch": 0.418,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.391,
+      0.185,
+      0.316
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "body_to_trunk",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 1.131,
+        "scale": 0.603
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.812
+    },
+    {
+      "id": "trunk_to_branch_fan",
+      "when": {
+        "role": "trunk",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.45
+      },
+      "selector": "up",
+      "op": "subdivide_extrude_fan",
+      "params": {
+        "count": 5,
+        "length": 0.772,
+        "scale": 0.505,
+        "splay_deg": 21.43,
+        "lateral_spread": 0.624
+      },
+      "child_role": "branch",
+      "budget_factor": 0.668
+    },
+    {
+      "id": "branch_to_tip",
+      "when": {
+        "role": "branch",
+        "min_depth": 2,
+        "max_depth": 2,
+        "min_budget": 0.2
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.257,
+        "scale": 0.724
+      },
+      "child_role": "tip",
+      "budget_factor": 0.423
+    }
+  ],
+  "render_mode": "wireframe"
+}

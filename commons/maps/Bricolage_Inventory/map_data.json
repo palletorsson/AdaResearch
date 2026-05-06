@@ -1,0 +1,135 @@
+{
+  "map_info": {
+    "name": "Bricolage: The Inventory",
+    "lookup_name": "Bricolage_Inventory",
+    "description": "Introduction to bricolageâ€”the bricoleur's workshop where primitives become potential parts",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 13,
+      "max_height": 2
+    },
+    "title": "Shapes Become Potential Parts",
+    "metadata": {
+      "difficulty": "beginner",
+      "category": "bricolage",
+      "estimated_time": "4-5 minutes",
+      "learning_objectives": [
+        "Bricoleur vs Engineer mindset",
+        "Primitives as potential parts",
+        "Inventory thinking"
+      ]
+    }
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to Affordances",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 4.5
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Bricolage_Inventory - The Workshop",
+    "layout": "11Ã—13 workshop space with primitive specimens arranged for examination",
+    "objective": "Shift from 'shapes' to 'potential parts'â€”see primitives as inventory for assembly",
+    "key_elements": [
+      "Primitive specimens on pedestals",
+      "clipboard#bricolage_axioms introducing the concept",
+      "Transition from primitives sequence to assembly thinking"
+    ]
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.45,
+      0.4
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.85
+      ],
+      "energy": 1.1
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": false,
+    "initial_tile_visibility": "visible",
+    "background": {
+      "type": "sky",
+      "color": [
+        0.25,
+        0.22,
+        0.2
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","2","2","2","2","2","2","2","2","2"],
+      ["1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","2","1","2","1","2","1","2","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","2","1","2","1","2","1","2","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","0","1","1","1","1","2"],
+      ["2","2","2","2","1","1","1","2","2","2","2"]
+    ],
+    "utilities": [
+      ["s"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","t"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","clipboard#bricolage_axioms:180:1.5"," "," "," "," "," "],
+      [" "," ","point_specimen:0:0.5"," ","line_specimen:0:0.5"," ","triangle_specimen:0:0.5"," ","plane_specimen:0:0.5"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","cube_specimen:0:0.5"," ","sphere_specimen:0:0.5"," ","cylinder_specimen:0:0.5"," ","torus_specimen:0:0.5"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","dark_sphere"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" ","clipboard#affordance_catalog_axioms:90:1.2"," "," "," "," "," "," "," ","inventory_workbench"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

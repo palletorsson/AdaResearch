@@ -1,0 +1,86 @@
+{
+  "id": "progression-state",
+  "title": "Progression State Management",
+  "description": "How sequence completion flows through the system: GridScene → MapProgressionManager → LabManager → artifact unlock.",
+  "triggers": [
+    "progression",
+    "sequence complete",
+    "unlock artifacts",
+    "lab state",
+    "save state"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "DeepWiki: Sequence Completion → Lab State Update Chain",
+  "nodes": [
+    {
+      "id": "complete",
+      "type": "start",
+      "label": "Player completes all maps in sequence"
+    },
+    {
+      "id": "signal",
+      "type": "action",
+      "label": "GridScene emits sequence_completed"
+    },
+    {
+      "id": "save",
+      "type": "action",
+      "label": "MapProgressionManager saves to user://map_progression.json"
+    },
+    {
+      "id": "lab",
+      "type": "action",
+      "label": "LabManager reads lab_artifact_system.json",
+      "detail": "Finds which artifacts to unlock for this sequence completion."
+    },
+    {
+      "id": "unlock",
+      "type": "action",
+      "label": "Instantiate unlocked artifacts in lab"
+    },
+    {
+      "id": "persist",
+      "type": "action",
+      "label": "Save new lab state"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Lab updated — new content visible"
+    }
+  ],
+  "edges": [
+    {
+      "from": "complete",
+      "to": "signal"
+    },
+    {
+      "from": "signal",
+      "to": "save"
+    },
+    {
+      "from": "save",
+      "to": "lab"
+    },
+    {
+      "from": "lab",
+      "to": "unlock"
+    },
+    {
+      "from": "unlock",
+      "to": "persist"
+    },
+    {
+      "from": "persist",
+      "to": "done"
+    }
+  ],
+  "confidence": "extracted",
+  "summary": "sequence_completed signal → MapProgressionManager saves → LabManager reads unlock list → instantiate new artifacts → save lab state.",
+  "links_to": [
+    "scene-transition"
+  ]
+}

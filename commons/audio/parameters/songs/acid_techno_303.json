@@ -1,0 +1,356 @@
+{
+    "_metadata": {
+        "sound_type": "acid_techno_303_song",
+        "display_name": "Acid Techno 303",
+        "description": "Hard techno acid - the pro acidline formula. Multiple 303s, aggressive resonance, relentless 909, slides on the strong beats, accents driving the groove. Filter IS the instrument.",
+        "reference_artists": ["Hardfloor", "Emmanuel Top", "Plastikman", "Umek", "Dave Clarke", "Chris Liebing", "Joey Beltram"],
+        "reference_tracks": ["Acperience 1 - Hardfloor", "Turkish Bazar - Hardfloor", "Acid Storm - Emmanuel Top", "Spastik - Plastikman", "Energy Flash - Joey Beltram"]
+    },
+    "identity": {
+        "emotion": "relentless_squelch",
+        "era": "european_techno_1992",
+        "character": ["hard", "driving", "hypnotic", "aggressive", "acidic", "machine"]
+    },
+    "parameters": {
+        "bpm": { "min": 130, "max": 145, "value": 138 },
+        "key": { "options": ["F", "Eb", "Gm", "Cm"], "value": "F" },
+        "time_signature": "4/4"
+    },
+    "sound_design": {
+        "acid_bass_1": {
+            "enabled": true,
+            "type": "tb303",
+            "role": "main_line",
+            "waveform": "sawtooth",
+            "filter": {
+                "type": "lowpass_18db",
+                "cutoff_hz": { "min": 150, "max": 600, "value": 300 },
+                "resonance": { "min": 0.75, "max": 0.98, "value": 0.88 },
+                "env_mod": { "min": 0.6, "max": 0.95, "value": 0.85 },
+                "decay_ms": { "min": 80, "max": 300, "value": 150 }
+            },
+            "accent": {
+                "enabled": true,
+                "amount": 0.7,
+                "boosts_resonance": true,
+                "boosts_env_mod": true,
+                "notes": "accent increases filter env depth AND resonance - the secret sauce"
+            },
+            "slide": {
+                "enabled": true,
+                "speed": 0.12,
+                "notes": "slides on STRONG beats (1, 5, 9, 13) create the hypnotic pull"
+            },
+            "octave_range": { "min": 1, "max": 3 },
+            "distortion": {
+                "enabled": true,
+                "type": "soft_clip",
+                "amount": 0.3,
+                "notes": "light drive for presence"
+            }
+        },
+        "acid_bass_2": {
+            "enabled": true,
+            "type": "tb303",
+            "role": "counter_line",
+            "waveform": "square",
+            "filter": {
+                "type": "lowpass_18db",
+                "cutoff_hz": { "min": 200, "max": 800, "value": 400 },
+                "resonance": { "min": 0.65, "max": 0.85, "value": 0.75 },
+                "env_mod": { "min": 0.5, "max": 0.8, "value": 0.65 },
+                "decay_ms": { "min": 100, "max": 250, "value": 180 }
+            },
+            "accent": {
+                "enabled": true,
+                "amount": 0.5
+            },
+            "slide": {
+                "enabled": true,
+                "speed": 0.18
+            },
+            "octave_offset": -1,
+            "notes": "secondary 303 plays counter-rhythm, square wave for different texture"
+        },
+        "drums": {
+            "machine": "TR-909",
+            "kick": {
+                "style": "four_on_floor",
+                "punch_hz": 80,
+                "decay_ms": 250,
+                "drive": 0.4,
+                "character": "punchy_hard",
+                "notes": "hard 909 kick, slight drive, short decay for clarity"
+            },
+            "clap": {
+                "style": "909_clap",
+                "position": "2_and_4",
+                "tight": true,
+                "reverb": 0.1
+            },
+            "snare": {
+                "enabled": true,
+                "style": "909_snare",
+                "layered_with_clap": true,
+                "notes": "layer snare under clap for impact"
+            },
+            "hihat_closed": {
+                "style": "16th_notes",
+                "velocity_variation": 0.15,
+                "accent_offbeat": true,
+                "notes": "constant 16ths, accent on offbeats for drive"
+            },
+            "hihat_open": {
+                "style": "upbeats",
+                "decay_ms": 100,
+                "notes": "short open hats on upbeats"
+            },
+            "ride": {
+                "enabled": true,
+                "style": "8th_notes",
+                "velocity": 0.4,
+                "notes": "ride adds relentless texture"
+            }
+        },
+        "fx": {
+            "delay": {
+                "enabled": true,
+                "time_sync": "16th",
+                "feedback": 0.25,
+                "wet": 0.15,
+                "target": "acid_bass_1",
+                "notes": "short delay adds rhythmic complexity"
+            },
+            "reverb": {
+                "enabled": true,
+                "decay_s": 0.8,
+                "wet": 0.1,
+                "target": "drums",
+                "notes": "short reverb, keep it tight"
+            },
+            "distortion": {
+                "enabled": true,
+                "type": "tape_saturation",
+                "amount": 0.2,
+                "target": "master",
+                "notes": "glue everything together"
+            }
+        }
+    },
+    "pro_acidline_formula": {
+        "description": "The secret to pro acidlines - it's all about accent and slide placement",
+        "rules": {
+            "rule_1": {
+                "name": "accent_on_downbeats",
+                "description": "Place accents on beats 1 and 3 (steps 1, 9) for driving feel"
+            },
+            "rule_2": {
+                "name": "slide_into_accents",
+                "description": "Slide INTO accented notes from the previous step - creates the pull"
+            },
+            "rule_3": {
+                "name": "octave_jumps_on_accents",
+                "description": "Accented notes often jump up an octave - instant energy"
+            },
+            "rule_4": {
+                "name": "rests_create_tension",
+                "description": "Strategic rests (ties) before accented notes build anticipation"
+            },
+            "rule_5": {
+                "name": "root_fifth_relationship",
+                "description": "Patterns often alternate between root and fifth for harmonic movement"
+            },
+            "rule_6": {
+                "name": "filter_follows_accent",
+                "description": "Accent boosts filter envelope - accented notes are brighter/squelchier"
+            }
+        },
+        "golden_pattern": {
+            "description": "The classic techno acid pattern structure",
+            "principle": "Accent + Slide + Octave jump = SQUELCH",
+            "example": "Note low, slide up into accented high note = maximum acid"
+        }
+    },
+    "pattern_templates": {
+        "hardfloor_classic": {
+            "description": "The Acperience-style rolling pattern - relentless 16ths, octave jumps",
+            "steps": 16,
+            "notes":   ["A1", "A1", "A2", "A1", "A1", "E1", "A2", "A1", "A1", "A1", "A2", "E1", "A1", "E1", "A2", "A1"],
+            "slides":  [false, false, true, false, false, false, true, false, false, false, true, false, false, false, true, false],
+            "accents": [true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false],
+            "notes_text": "constant 16ths, accent every other beat, slide into octave jumps"
+        },
+        "driving_minimal": {
+            "description": "Sparse pattern with maximum impact - less is more",
+            "steps": 16,
+            "notes":   ["A1", "--", "--", "A1", "A2", "--", "--", "A1", "--", "--", "A1", "--", "A2", "--", "A1", "--"],
+            "slides":  [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false],
+            "accents": [true, false, false, false, true, false, false, false, false, false, true, false, true, false, false, false],
+            "notes_text": "rests create tension, accents punch through"
+        },
+        "squelch_machine": {
+            "description": "Maximum filter workout - the filter IS the melody",
+            "steps": 16,
+            "notes":   ["A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1"],
+            "slides":  [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            "accents": [true, false, false, true, false, false, true, false, true, false, false, true, false, false, true, false],
+            "notes_text": "single note, accents do ALL the work - pure filter manipulation"
+        },
+        "counter_rhythm": {
+            "description": "For the second 303 - syncopated against main line",
+            "steps": 16,
+            "notes":   ["--", "E1", "--", "E1", "--", "--", "A1", "--", "--", "E1", "--", "E1", "--", "--", "A1", "E1"],
+            "slides":  [false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, false],
+            "accents": [false, false, false, true, false, false, true, false, false, false, false, true, false, false, true, false],
+            "notes_text": "fills the gaps, creates call-and-response"
+        },
+        "emmanuel_top_style": {
+            "description": "Turkish Bazar-inspired - melodic acid with Eastern flavor",
+            "steps": 16,
+            "notes":   ["A1", "--", "B1", "C2", "--", "B1", "A1", "--", "G#1","--", "A1", "B1", "--", "A1", "G#1","A1"],
+            "slides":  [false, false, true, false, false, true, false, false, false, false, true, false, false, true, false, false],
+            "accents": [true, false, false, true, false, false, true, false, true, false, false, true, false, false, true, false],
+            "notes_text": "minor scale movement, slides create the Eastern feel"
+        }
+    },
+    "drum_patterns": {
+        "techno_driving": {
+            "kick":     ["X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", "."],
+            "clap":     [".", ".", ".", ".", "X", ".", ".", ".", ".", ".", ".", ".", "X", ".", ".", "."],
+            "chh":      ["X", "x", "X", "x", "X", "x", "X", "x", "X", "x", "X", "x", "X", "x", "X", "x"],
+            "ohh":      [".", ".", ".", ".", ".", ".", ".", "X", ".", ".", ".", ".", ".", ".", ".", "X"],
+            "ride":     [".", "X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X"],
+            "notes": "X = hard hit, x = soft hit (velocity variation)"
+        },
+        "hardfloor_pumping": {
+            "kick":     ["X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", "."],
+            "clap":     [".", ".", ".", ".", "X", ".", ".", ".", ".", ".", ".", ".", "X", ".", ".", "."],
+            "snare":    [".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", "."],
+            "chh":      ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+            "ohh":      [".", ".", ".", "x", ".", ".", ".", "X", ".", ".", ".", "x", ".", ".", ".", "X"],
+            "ride":     ["x", ".", "x", ".", "x", ".", "x", ".", "x", ".", "x", ".", "x", ".", "x", "."],
+            "notes": "constant hats, ride adds texture, layered snare under clap"
+        },
+        "minimal_peak": {
+            "kick":     ["X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", "."],
+            "clap":     [".", ".", ".", ".", "X", ".", ".", ".", ".", ".", ".", ".", "X", ".", ".", "."],
+            "chh":      ["X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X", "."],
+            "notes": "stripped back for drops and peaks - kick + clap + hats only"
+        }
+    },
+    "arrangement": {
+        "structure": "techno_build_release",
+        "sections": {
+            "intro": {
+                "bars": 16,
+                "elements": ["kick", "ride"],
+                "acid_filter": "closed",
+                "notes": "kick only, ride enters bar 9"
+            },
+            "acid_entry": {
+                "bars": 16,
+                "elements": ["kick", "ride", "acid_bass_1"],
+                "acid_filter": "closed_sweeping",
+                "pattern": "squelch_machine",
+                "notes": "303 enters, filter sweeping slowly"
+            },
+            "build_1": {
+                "bars": 16,
+                "elements": ["kick", "hihat", "ride", "acid_bass_1"],
+                "acid_filter": "opening",
+                "pattern": "hardfloor_classic",
+                "notes": "full hats, pattern becomes melodic"
+            },
+            "drop_1": {
+                "bars": 32,
+                "elements": ["drums_full", "acid_bass_1", "acid_bass_2"],
+                "acid_filter": "wide_sweep",
+                "pattern_1": "hardfloor_classic",
+                "pattern_2": "counter_rhythm",
+                "notes": "both 303s, full drums, maximum acid"
+            },
+            "breakdown": {
+                "bars": 16,
+                "elements": ["acid_bass_1"],
+                "acid_filter": "dramatic_sweep",
+                "pattern": "emmanuel_top_style",
+                "notes": "drums drop, solo 303 with filter automation"
+            },
+            "rebuild": {
+                "bars": 8,
+                "elements": ["kick", "acid_bass_1"],
+                "acid_filter": "rising",
+                "notes": "kick returns, tension building"
+            },
+            "drop_2": {
+                "bars": 32,
+                "elements": ["drums_full", "acid_bass_1", "acid_bass_2"],
+                "acid_filter": "maximum",
+                "pattern_1": "hardfloor_classic",
+                "pattern_2": "counter_rhythm",
+                "notes": "full power, resonance pushed high"
+            },
+            "peak": {
+                "bars": 16,
+                "elements": ["drums_full", "acid_bass_1", "acid_bass_2"],
+                "acid_filter": "open_locked",
+                "filter_automation": "resonance_ride",
+                "notes": "filter open, ride resonance for intensity"
+            },
+            "outro": {
+                "bars": 16,
+                "elements": ["kick", "acid_bass_1"],
+                "acid_filter": "closing",
+                "notes": "elements drop out, filter closes"
+            }
+        },
+        "builds": ["filter_sweeps", "element_addition", "resonance_push", "pattern_change"],
+        "total_bars": 168,
+        "duration_at_138bpm": "4:52"
+    },
+    "performance": {
+        "filter_automation": {
+            "enabled": true,
+            "style": "dramatic_sweeps",
+            "sweep_time_bars": { "min": 4, "max": 32 },
+            "notes": "long sweeps for builds, fast cuts for drops"
+        },
+        "resonance_automation": {
+            "enabled": true,
+            "range": [0.75, 0.98],
+            "peak_style": "push_to_screech",
+            "notes": "push resonance near self-oscillation at peaks"
+        },
+        "env_mod_automation": {
+            "enabled": true,
+            "range": [0.6, 0.95],
+            "notes": "higher env mod = more squelch"
+        },
+        "pattern_switching": {
+            "enabled": true,
+            "trigger": "section_change",
+            "notes": "switch patterns at arrangement points"
+        }
+    },
+    "mixing_notes": {
+        "frequency_space": {
+            "kick": "50-100 Hz fundamental, 2-4 kHz click",
+            "303_1": "100-300 Hz fundamental, 800-4000 Hz resonance peak",
+            "303_2": "80-250 Hz (lower, square wave)",
+            "hats": "8-16 kHz"
+        },
+        "sidechain": {
+            "enabled": true,
+            "source": "kick",
+            "target": ["acid_bass_1", "acid_bass_2"],
+            "amount": "light",
+            "notes": "subtle ducking keeps kick punching through"
+        },
+        "stereo": {
+            "kick": "mono_center",
+            "303_1": "slight_stereo_chorus",
+            "303_2": "mono_center",
+            "hats": "wide"
+        }
+    }
+}

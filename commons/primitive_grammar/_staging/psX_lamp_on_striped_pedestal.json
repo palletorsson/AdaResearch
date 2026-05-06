@@ -1,0 +1,78 @@
+{
+  "id": "psX_lamp_on_striped_pedestal",
+  "notes": "CROSS: revolution lamp shade perched on a striped Kra\u00c5\u00a1-style pedestal. Table lamp.",
+  "layout": "compose",
+  "camera_pitch": 0.15,
+  "camera_yaw": 0.5,
+  "parts": [
+    {
+      "y": 0,
+      "config": {
+        "layout": "table_pedestal",
+        "height": 0.5,
+        "top_radius": 0.25,
+        "top_thickness": 0.03,
+        "top_color": [
+          0.18,
+          0.18,
+          0.2
+        ],
+        "pedestal_radius": 0.12,
+        "stripe_count": 18,
+        "stripe_colors": [
+          [
+            0.08,
+            0.08,
+            0.1
+          ],
+          [
+            0.96,
+            0.96,
+            0.94
+          ]
+        ]
+      }
+    },
+    {
+      "y": 0.5,
+      "config": {
+        "layout": "revolution",
+        "profile": [
+          [
+            0,
+            0.04
+          ],
+          [
+            0.1,
+            0.12
+          ],
+          [
+            0.3,
+            0.24
+          ],
+          [
+            0.55,
+            0.28
+          ],
+          [
+            0.78,
+            0.22
+          ],
+          [
+            1.0,
+            0.08
+          ]
+        ],
+        "segments": 48,
+        "height_samples": 28,
+        "color": [
+          1.0,
+          0.93,
+          0.75
+        ],
+        "alpha": 0.85,
+        "emission": 0.8
+      }
+    }
+  ]
+}

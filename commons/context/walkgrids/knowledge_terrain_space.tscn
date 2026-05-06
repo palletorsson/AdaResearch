@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://knowledge_terrain_space"]
+
+[ext_resource type="Script" uid="uid://knowledge_terrain_gd" path="res://commons/context/walkgrids/KnowledgeTerrainSpace.gd" id="1_knowledge"]
+
+[node name="KnowledgeTerrainSpace" type="Node3D"]
+script = ExtResource("1_knowledge")
+space_size = Vector2(60, 60)
+resolution = 120
+height_scale = 3.0
+terrain_scale = 8.0
+concept_influence_radius = 5.0
+show_concept_markers = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+
+[node name="AmbientLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.433, 0.25, 0, 0.5, 0.866, -0.5, -0.75, 0.433, 0, 20, 0)
+light_color = Color(0.95, 0.95, 1, 1)
+light_energy = 0.8
+shadow_enabled = true

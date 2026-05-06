@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmr8kxq3jo2y5"]
+
+[ext_resource type="Script" path="res://commons/hazards/kresling_spire/kresling_spire.gd" id="1"]
+
+[node name="KreslingSpire" type="CharacterBody3D"]
+script = ExtResource("1")
+radial_segments = 6
+layers = 5
+radius = 0.28
+edge_length = 0.22
+max_health = 75.0
+optimal_range = 9.0
+fire_damage = 24.0
+shell_color = Color(0.32, 0.36, 0.42, 1)
+emission_color = Color(1, 0.38, 0.12, 1)

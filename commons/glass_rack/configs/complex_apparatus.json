@@ -1,0 +1,85 @@
+{
+	"rack_info": {
+		"name": "Reflux Distillation System",
+		"description": "Complete reflux apparatus with boiling flask, condenser, collection vessel, and branching tubes",
+		"version": "1.0"
+	},
+	"layout": {
+		"segment_length": 0.12,
+		"tube_radius": 0.015
+	},
+	"segments": [
+		{
+			"id": "boiling_flask",
+			"type": "flask",
+			"position": [0, 0, 0],
+			"params": {
+				"radius": 0.1,
+				"neck_radius": 0.02,
+				"neck_length": 0.08
+			}
+		},
+		{
+			"id": "riser_1",
+			"type": "straight",
+			"params": {"length": 0.15}
+		},
+		{
+			"id": "bend_up",
+			"type": "corner",
+			"params": {"corner_radius": 0.08}
+		},
+		{
+			"id": "horizontal_1",
+			"type": "straight",
+			"params": {"length": 0.1}
+		},
+		{
+			"id": "tee_junction",
+			"type": "junction",
+			"params": {"length": 0.12}
+		},
+		{
+			"id": "condenser_coil",
+			"type": "spiral",
+			"params": {
+				"height": 0.35,
+				"spiral_radius": 0.06,
+				"tube_radius": 0.012,
+				"turns": 5
+			}
+		},
+		{
+			"id": "exit_tube",
+			"type": "wobbly",
+			"params": {
+				"length": 0.25,
+				"amplitude": 0.03,
+				"frequency": 2.0
+			}
+		},
+		{
+			"id": "bend_down",
+			"type": "corner",
+			"params": {"corner_radius": 0.06}
+		},
+		{
+			"id": "drip_tube",
+			"type": "straight",
+			"params": {"length": 0.12}
+		},
+		{
+			"id": "collection_flask",
+			"type": "flask",
+			"params": {
+				"radius": 0.08,
+				"neck_radius": 0.018,
+				"neck_length": 0.06
+			}
+		}
+	],
+	"materials": {
+		"glass_color": [0.82, 0.90, 1.0, 0.28],
+		"liquid_color": [0.9, 0.6, 0.1, 0.7]
+	}
+}

@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://dli47lf48p833"]
+
+[ext_resource type="Script" uid="uid://cesayax1wb6ah" path="res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.gd" id="1"]
+
+[sub_resource type="SphereMesh" id="1"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="TorusMesh" id="4"]
+inner_radius = 0.95
+outer_radius = 1.05
+ring_segments = 4
+
+[node name="DoubleHelix" type="Node3D"]
+script = ExtResource("1")
+max_trail_length = 100
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Ball1" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("1")
+
+[node name="Ball2" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("1")
+
+[node name="Trail1" type="MeshInstance3D" parent="."]
+
+[node name="Trail2" type="MeshInstance3D" parent="."]
+
+[node name="ReferenceCircle" type="MeshInstance3D" parent="."]
+mesh = SubResource("4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, -0.183013, 0.683013, 4, 1.5, 4)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 5, 5, 5)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "Double Helix (DNA)"

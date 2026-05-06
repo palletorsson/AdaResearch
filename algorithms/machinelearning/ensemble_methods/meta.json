@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_ensemble_methods",
+  "title": "Ensemble Methods",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/ensemble_methods/ensemble_methods.tscn",
+  "script": "res://algorithms/machinelearning/ensemble_methods/EnsembleMethods.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/ensemble_methods/README.md",
+    "tutorial": "res://algorithms/machinelearning/ensemble_methods/ensemble_methods_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/ensemble_methods/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/ensemble_methods/summery.md"
+  },
+  "summary": "The `Ensemble Methods` sandbox investigates concepts from Ensemble Methods inside a real-time Godot lab.",
+  "keywords": [
+    "accuracy",
+    "animate",
+    "base",
+    "core",
+    "create",
+    "diversity"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

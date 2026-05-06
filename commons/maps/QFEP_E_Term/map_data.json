@@ -1,0 +1,139 @@
+{
+  "map_info": {
+    "name": "E(S) Term: Entropy as Freedom",
+    "lookup_name": "QFEP_E_Term",
+    "description": "E(S) is Entropy — the space of possibilities. High entropy means freedom from pattern, openness to becoming. But pure chaos dissolves.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 12,
+      "depth": 14,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "qfep",
+      "estimated_time": "4-5 minutes",
+      "learning_objectives": [
+        "E(S) = entropy, possibility space",
+        "High entropy = freedom, randomness",
+        "λE(S) = the entropy drive in the formula",
+        "Pure chaos also fails — dissolution"
+      ]
+    },
+    "title": "Entropy as Possibility Space"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Find the Balance",
+      "description": "Neither pure order nor pure chaos. Continue to the spectrum.",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "audio": {
+    "ambient_preset": "noise_wash",
+    "volume": -8.0
+  },
+  "documentation": {
+    "summary": "QFEP_E_Term - Understanding Entropy",
+    "layout": "Expansive chaotic space. Random particles. Noise terrain.",
+    "objective": "Experience entropy as freedom. Walk through randomness. Then encounter the dissolution at λ=1.",
+    "key_elements": [
+      "Particle systems (chaotic)",
+      "Random distribution objects",
+      "Lambda slider at λ=1 (pure chaos mode)",
+      "Noise terrain — immersive chaos"
+    ]
+  },
+  "lighting": {
+    "ambient_color": [
+      0.3,
+      0.15,
+      0.15
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.6,
+        -0.4
+      ],
+      "color": [
+        1.0,
+        0.7,
+        0.6
+      ],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.15,
+        0.05,
+        0.1
+      ]
+    },
+    "grid_animation": {
+      "enabled": true,
+      "type": "random_pop",
+      "duration": 0.5,
+      "delay_between": 0.01,
+      "order": "random",
+      "easing": "elastic_out"
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","2","2","2","2","1","1","1","1"],
+      ["1","1","1","2","3","3","3","3","2","1","1","1"],
+      ["1","1","2","3","3","3","3","3","3","2","1","1"],
+      ["1","1","2","3","3","3","3","3","3","2","1","1"],
+      ["1","1","2","3","3","3","3","3","3","2","1","1"],
+      ["1","1","1","2","3","3","3","3","2","1","1","1"],
+      ["1","1","1","1","2","2","2","2","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","0","0","0","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","s"," "," ","sub:map"," "," "," "," "," "," "," "],
+      [" ","3t:E \u2014 ENTROPY"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","el:1:1"," "," "," "," "," "," "],
+      [" ","3t:POSSIBILITY SPACE"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","3t:\u03bb=1 DISSOLUTION"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","t"," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","random_cubes:0:0.5"," "," ","random_cubes:0:0.5"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","particle_chaos:0:1"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","random_cubes:0:0.5"," "," ","random_cubes:0:0.5"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","lambda_slider:0:0.5#value:1.0"," "," "," "," "," "," "," ","tt:entropy_axioms:180:0.5"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

@@ -533,6 +533,7 @@ func add_quantum_field_visualization(pos: Vector3, color: Color):
 	
 	var field_mesh = SphereMesh.new()
 	field_mesh.radius = 0.05
+	field_mesh.height = 0.1
 	field.mesh = field_mesh
 	
 	var field_material = StandardMaterial3D.new()

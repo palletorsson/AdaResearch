@@ -1,0 +1,118 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Shaders",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.122,
+  "breath_zones": [
+    {
+      "size": 99,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        4.959595959595959,
+        5.777777777777778
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "buffer_geometry_particles"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "carpet_cove_gallery"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "cove_display"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "dynamic_cubemap"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "dynamiccubemap"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "filter_screen"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "materials_transmission"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "materialstransmission"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "pattern_compositor"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "pixel_carpet_gallery"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "queer_collection_gallery_a"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "shader_bibliotek"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "shader_gallery"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "wall_cove"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "wall_pattern_colorizer"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "wall_shader_showcase"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 16,
+    "walkable_cells": 131,
+    "breath_zone_count": 1,
+    "unique_tokens": 16
+  }
+}

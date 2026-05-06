@@ -1,0 +1,52 @@
+{
+	"name": "Moroder Disco - I Feel Love Era",
+	"description": "Giorgio Moroder's revolutionary electronic disco. Hypnotic 16th-note sequencer, 4-on-floor kick, breathy female vocal. The birth of electronic dance music.",
+	"era": "1977-1982",
+	"bpm_range": "120-130",
+	"key_characteristics": [
+		"Constant 16th-note sequencer (the motor)",
+		"4-on-floor kick drum",
+		"Minimoog bass following root",
+		"Space pads with long reverb",
+		"Breathy, repetitive vocal hooks",
+		"Extended builds and drops"
+	],
+	"reference_tracks": [
+		"I Feel Love - Donna Summer (1977)",
+		"From Here to Eternity - Giorgio Moroder (1977)",
+		"Chase - Giorgio Moroder (1978)"
+	],
+	"key_artists": ["Giorgio Moroder", "Donna Summer", "Harold Faltermeyer"],
+	"key_hardware": [
+		"Moog Modular",
+		"Minimoog (bass)",
+		"ARP Odyssey",
+		"Roland CR-78"
+	],
+	"soundbank": [
+		"kick",
+		"hihat",
+		"snare",
+		"sequencer",
+		"bass",
+		"pad",
+		"singing_voice"
+	],
+	"sections": {
+		"intro": ["pad", "sequencer"],
+		"build": ["pad", "sequencer", "hihat", "bass"],
+		"main": ["kick", "hihat", "sequencer", "bass", "pad"],
+		"vocal": ["kick", "hihat", "sequencer", "bass", "singing_voice"],
+		"breakdown": ["pad", "sequencer"],
+		"drop": ["kick", "hihat", "snare", "sequencer", "bass", "pad", "singing_voice"],
+		"outro": ["pad", "sequencer", "singing_voice"]
+	},
+	"forbidden": [
+		"guitar",
+		"acoustic_drums",
+		"rock_bass",
+		"distortion"
+	],
+	"mood": "Hypnotic, ecstatic, mechanical desire, endless build",
+	"production_notes": "The sequencer never stops. Vocal is breathy, high, repetitive. Everything builds slowly."
+}

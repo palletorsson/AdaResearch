@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://excluded_mid01"]
+
+[ext_resource type="Script" path="res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.gd" id="1_script"]
+
+[node name="ExcludedMiddleDemo" type="Node3D"]
+script = ExtResource("1_script")

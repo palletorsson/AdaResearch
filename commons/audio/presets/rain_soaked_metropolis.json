@@ -1,0 +1,469 @@
+{
+    "description": "TEARS IN RAIN - EPIC: Roy Batty's final moment. Every sound custom-designed for this scene. Deep emotional synthesis with ultra-slow breathing, crying melodies, and overwhelming rain. 'All those moments will be lost in time, like tears in rain.'",
+    "continuous_layers": [
+        {
+            "sound_id": "Cinematic.oceanic_sub_drone",
+            "volume_db": -18,
+            "bus": "SubFoundation",
+            "parameters": {
+                "duration": 48.0,
+                "freq": 55.0
+            }
+        },
+        {
+            "sound_id": "Cinematic.dystopian_foundation_pad",
+            "volume_db": -15,
+            "bus": "DarkFoundation",
+            "parameters": {
+                "duration": 36.0,
+                "freq": 82.41
+            }
+        },
+        {
+            "sound_id": "Cinematic.dystopian_foundation_pad",
+            "volume_db": -17,
+            "bus": "DarkFoundation2",
+            "parameters": {
+                "duration": 40.0,
+                "freq": 65.41
+            }
+        },
+        {
+            "sound_id": "Cinematic.neon_shimmer_wash",
+            "volume_db": -14,
+            "bus": "NeonWash1",
+            "parameters": {
+                "duration": 32.0,
+                "freq": 164.81
+            }
+        },
+        {
+            "sound_id": "Cinematic.neon_shimmer_wash",
+            "volume_db": -16,
+            "bus": "NeonWash2",
+            "parameters": {
+                "duration": 28.0,
+                "freq": 196.0
+            }
+        },
+        {
+            "sound_id": "Cinematic.crying_brass_melody",
+            "volume_db": -9,
+            "bus": "MainMelody",
+            "parameters": {
+                "duration": 32.0,
+                "freq": 523.25
+            }
+        },
+        {
+            "sound_id": "Cinematic.distant_memory_lead",
+            "volume_db": -13,
+            "bus": "MemoryLead",
+            "parameters": {
+                "duration": 28.0,
+                "freq": 293.66
+            }
+        },
+        {
+            "sound_id": "Cinematic.glass_harmonic_voice",
+            "volume_db": -16,
+            "bus": "GlassVoice",
+            "parameters": {
+                "duration": 26.0,
+                "freq": 659.25
+            }
+        },
+        {
+            "sound_id": "Cinematic.heavy_rain_cascade",
+            "volume_db": -10,
+            "bus": "RainHeavy",
+            "parameters": {
+                "duration": 20.0,
+                "density": 0.08
+            }
+        },
+        {
+            "sound_id": "Cinematic.wind_through_towers",
+            "volume_db": -14,
+            "bus": "WindAtmosphere",
+            "parameters": {
+                "duration": 24.0
+            }
+        },
+        {
+            "sound_id": "Cinematic.electric_rain_static",
+            "volume_db": -19,
+            "bus": "ElectricStatic",
+            "parameters": {
+                "duration": 22.0
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "Cinematic.neon_reflection_pulse"
+            ],
+            "interval_range": [
+                10.0,
+                25.0
+            ],
+            "volume_range": [
+                -16,
+                -12
+            ],
+            "bus": "NeonPulses",
+            "parameters": {
+                "duration": 3.0,
+                "freq": 880.0
+            }
+        },
+        {
+            "sound_pool": [
+                "Cinematic.memory_fragment_swell"
+            ],
+            "interval_range": [
+                25.0,
+                60.0
+            ],
+            "volume_range": [
+                -14,
+                -10
+            ],
+            "bus": "MemorySwells",
+            "parameters": {
+                "duration": 10.0,
+                "freq": 392.0
+            }
+        },
+        {
+            "sound_pool": [
+                "Cinematic.memory_fragment_swell"
+            ],
+            "interval_range": [
+                30.0,
+                70.0
+            ],
+            "volume_range": [
+                -15,
+                -11
+            ],
+            "bus": "MemorySwells2",
+            "parameters": {
+                "duration": 12.0,
+                "freq": 440.0
+            }
+        },
+        {
+            "sound_pool": [
+                "Cinematic.distant_thunder_rumble"
+            ],
+            "interval_range": [
+                45.0,
+                120.0
+            ],
+            "volume_range": [
+                -20,
+                -16
+            ],
+            "bus": "ThunderRumbles"
+        },
+        {
+            "sound_pool": [
+                "Cinematic.glass_droplet_chime"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -22,
+                -18
+            ],
+            "bus": "GlassDroplets"
+        }
+    ],
+    "buses": {
+        "SubFoundation": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 100
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.35,
+                    "damping": 0.3
+                }
+            ]
+        },
+        "DarkFoundation": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 600
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.7,
+                    "damping": 0.1
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.6,
+                    "wet": 0.5
+                }
+            ]
+        },
+        "DarkFoundation2": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 500
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.92,
+                    "wet": 0.65,
+                    "damping": 0.12
+                }
+            ]
+        },
+        "NeonWash1": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.88,
+                    "wet": 0.75,
+                    "damping": 0.15
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.5,
+                    "wet": 0.65
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 400,
+                    "tap1_level_db": -7.0
+                }
+            ]
+        },
+        "NeonWash2": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.85,
+                    "wet": 0.72,
+                    "damping": 0.18
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.55,
+                    "wet": 0.6
+                }
+            ]
+        },
+        "MainMelody": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.94,
+                    "wet": 0.68,
+                    "damping": 0.12
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.6,
+                    "tap1_delay_ms": 450,
+                    "tap1_level_db": -4.0,
+                    "tap2_active": true,
+                    "tap2_delay_ms": 900,
+                    "tap2_level_db": -8.0
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.65,
+                    "wet": 0.48
+                }
+            ]
+        },
+        "MemoryLead": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.96,
+                    "wet": 0.8,
+                    "damping": 0.08
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.55,
+                    "tap1_delay_ms": 600,
+                    "tap1_level_db": -5.0
+                }
+            ]
+        },
+        "GlassVoice": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.78,
+                    "damping": 0.14
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.65,
+                    "tap1_delay_ms": 350,
+                    "tap1_level_db": -6.0
+                },
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 800
+                }
+            ]
+        },
+        "RainHeavy": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 300
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.65,
+                    "wet": 0.5,
+                    "damping": 0.35
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 120,
+                    "tap1_level_db": -10.0
+                }
+            ]
+        },
+        "WindAtmosphere": {
+            "effects": [
+                {
+                    "type": "BandPassFilter",
+                    "cutoff_hz": 700,
+                    "resonance": 0.3
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.6,
+                    "damping": 0.25
+                }
+            ]
+        },
+        "ElectricStatic": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 1500
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 80,
+                    "tap1_level_db": -9.0
+                }
+            ]
+        },
+        "NeonPulses": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.87,
+                    "wet": 0.7,
+                    "damping": 0.18
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.6,
+                    "tap1_delay_ms": 300,
+                    "tap1_level_db": -5.0
+                }
+            ]
+        },
+        "MemorySwells": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.8,
+                    "damping": 0.1
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.55,
+                    "tap1_delay_ms": 500,
+                    "tap1_level_db": -4.0,
+                    "tap2_active": true,
+                    "tap2_delay_ms": 1000,
+                    "tap2_level_db": -8.0
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.6,
+                    "wet": 0.55
+                }
+            ]
+        },
+        "MemorySwells2": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.92,
+                    "wet": 0.75,
+                    "damping": 0.12
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.58,
+                    "wet": 0.52
+                }
+            ]
+        },
+        "ThunderRumbles": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 150
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.98,
+                    "wet": 0.7,
+                    "damping": 0.05
+                }
+            ]
+        },
+        "GlassDroplets": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 2000
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.85,
+                    "wet": 0.65,
+                    "damping": 0.2
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.65,
+                    "tap1_delay_ms": 200,
+                    "tap1_level_db": -7.0
+                }
+            ]
+        }
+    }
+}

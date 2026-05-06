@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://34hetr1pslam"]
+
+[ext_resource type="Script" uid="uid://b6otcgplaxpe6" path="res://commons/artifacts/turret_targeting/turret_targeting.gd" id="1_main"]
+
+[node name="TurretTargeting" type="Node3D"]
+script = ExtResource("1_main")
+max_balls = 40

@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Mushrooms",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 12,
+    "d": 13
+  },
+  "signature": "mushrooms is the central biological model \u2014 fungal growth as spatial probability; bubbles_random provides a contrasting uniform-distribution system; random_number_book_page_collection deepens the historical RAND Corporation thread from map 1; dark_sphere anchors.",
+  "style": null,
+  "echoes": [],
+  "density": 0.032,
+  "breath_zones": [
+    {
+      "size": 149,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 13
+      },
+      "centroid": [
+        5.496644295302014,
+        5.912751677852349
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "mushrooms"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "bubble_particles"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "reaction_diffusion_intro"
+    },
+    {
+      "x": 5,
+      "z": 12,
+      "token": "random_number_book_page_collection"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 155,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

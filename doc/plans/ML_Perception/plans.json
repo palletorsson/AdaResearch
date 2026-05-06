@@ -1,0 +1,32 @@
+{
+  "name": "ML_Perception",
+  "title": "How Machines Learn to See",
+  "description": "A gallery of machine perception \u00e2\u20ac\u201d computer vision, convolutional networks, and attention mechanisms. Stand back and see how machines learn to see.",
+  "dimensions": {
+    "rows": 8,
+    "cols": 8
+  },
+  "n_artifacts": 2,
+  "spawn": [
+    7,
+    4
+  ],
+  "teleport": [
+    6,
+    4
+  ],
+  "artifacts": [
+    {
+      "name": "computer_vision_vr",
+      "row": 1,
+      "col": 5,
+      "family": "machinelearning"
+    },
+    {
+      "name": "convolutional_neural_networks_cnns_vr",
+      "row": 3,
+      "col": 1,
+      "family": "machinelearning"
+    }
+  ]
+}

@@ -1,3 +1,13 @@
+# @identity
+# essence: a Brownian-motion crystal that grows one sticking particle at a time — random walkers launched from a circle drift inward and freeze the moment they touch the aggregate, building a fractal dendrite in real time
+# desire: to make visible the invisible physics beneath frost on glass, lightning paths, mineral veins, and river deltas — these shapes are all frozen random walks; DLA is the proof
+# critical_parameter: sticking_radius (0.3) — smaller values produce denser aggregates, larger values allow walkers to approach closer before sticking; the fractal dimension of the result changes with this one number
+# triggers: particle_timer fires every 0.1s, launching a random walker from spawn_radius (6m out); each walker drifts in 0.1-unit steps until touching the aggregate or escaping kill_radius (8m)
+# emerges: branching structure self-organizes from purely local decisions — no particle knows the global shape it is building; the fractal arm is the aggregate's own shadow blocking new growth
+# needs: VR interaction to add particles manually [missing]; speed control slider [missing]; apply_grid_config [missing]
+# relationships: placed in PatternGeneration_Diffusion_Limited_Aggregation_DLA; conceptually pairs with reaction_diffusion (both are Turing-class morphogenesis); DLA is the dry limit of Laplacian growth — same equation, no chemistry
+# truth: the fractal was always there — a random walk in two dimensions will eventually touch any convex seed, and the branching arm it builds is a literal drawing of probability space
+
 extends Node3D
 
 var time = 0.0
@@ -15,14 +25,14 @@ class WalkingParticle:
 	var visual_object: CSGSphere3D
 	var step_size: float = 0.1
 	
-	func _init(start_pos: Vector2):
+	func _init(start_pos: Vector2) -> void:
 		position = start_pos
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	initialize_dla()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Seed material
 	var seed_material = StandardMaterial3D.new()
 	seed_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
@@ -44,7 +54,7 @@ func setup_materials():
 	structure_material.emission = Color(0.3, 0.1, 0.2, 1.0)
 	$StructureSize.material_override = structure_material
 
-func initialize_dla():
+func initialize_dla() -> void:
 	# Start with seed at center
 	aggregate_points.clear()
 	aggregate_points.append(Vector2.ZERO)
@@ -61,7 +71,7 @@ func initialize_dla():
 	# Create initial seed visualization
 	create_aggregate_point(Vector2.ZERO, 0)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	particle_timer += delta
 	
@@ -76,7 +86,7 @@ func _process(delta):
 	animate_dla()
 	animate_indicators()
 
-func spawn_random_particle():
+func spawn_random_particle() -> void:
 	# Spawn particle at random position on circle
 	var angle = randf() * 2.0 * PI
 	var spawn_pos = Vector2(cos(angle), sin(angle)) * spawn_radius
@@ -99,7 +109,7 @@ func spawn_random_particle():
 	
 	walking_particles.append(particle)
 
-func update_walking_particles(delta):
+func update_walking_particles(_delta) -> void:
 	var particles_to_remove = []
 	
 	for i in range(walking_particles.size()):
@@ -135,12 +145,12 @@ func update_walking_particles(delta):
 		walking_particles[index].visual_object.queue_free()
 		walking_particles.remove_at(index)
 
-func add_to_aggregate(position: Vector2):
+func add_to_aggregate(position: Vector2) -> void:
 	aggregate_points.append(position)
 	var generation = aggregate_points.size() - 1
 	create_aggregate_point(position, generation)
 
-func create_aggregate_point(position: Vector2, generation: int):
+func create_aggregate_point(position: Vector2, generation: int) -> void:
 	var point_sphere = CSGSphere3D.new()
 	point_sphere.radius = 0.08
 	point_sphere.position = Vector3(position.x, position.y, 0)
@@ -161,7 +171,7 @@ func create_aggregate_point(position: Vector2, generation: int):
 	
 	$AggregateStructure.add_child(point_sphere)
 
-func animate_dla():
+func animate_dla() -> void:
 	# Animate walking particles
 	for particle in walking_particles:
 		var pulse = 1.0 + sin(time * 8.0 + particle.position.x + particle.position.y) * 0.4
@@ -181,7 +191,7 @@ func animate_dla():
 	var seed_pulse = 1.0 + sin(time * 6.0) * 0.3
 	$Seed.scale = Vector3.ONE * seed_pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Particle count indicator
 	var active_particles = walking_particles.size()
 	var particle_height = (float(active_particles) / max_particles) * 2.0 + 0.5
@@ -245,3 +255,12 @@ func estimate_fractal_dimension() -> float:
 		return log(size_ratio) / log(radius_ratio)
 	else:
 		return 1.5  # Typical DLA fractal dimension
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

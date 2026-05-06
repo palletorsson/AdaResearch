@@ -1,0 +1,148 @@
+{
+  "artifact_definitions": {},
+  "documentation": {
+	"key_elements": [
+	  "`line` at (2,4) - grabbable line segment",
+	  "`vectorline` at (4,3) - vector direction visualization",
+	  "`coordinate_lines` at (4,5) - axis reference lines",
+	  "`line_demo` at (4,6) - two snap points connected by dynamic measuring line",
+	  "`science_screen` at (2,7) - line mode display",
+      "Teleporter `t` at (5,8)"
+	],
+	"layout": "7x15 grid with irregular voids and central line interaction zone.",
+	"objective": "Demonstrate line segment as relation between two points; embodied measurement.",
+	"summary": "Point_Line - Line Introduction Chamber"
+  },
+  "layers": {
+	"interactables": [
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," ","line_demo:90"," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," ","vectorline:0:1.5"],
+	  [" "," ",""," "," "," "," "],
+	  [" "," ",""," ",""," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","line:0:1"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","science_screen:180:2:4#mode:line"," "," "," "]
+	],
+	"structure": [
+	  ["1","1","1","1","1","0","0"],
+	  ["1","1","1","1","1","0","1"],
+	  ["0","0","1","1","1","0","0"],
+	  ["0","0","2","1","2","0","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","0","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["0","0","0","0","0","0","0"],
+	  ["0","0","0","0","0","0","0"],
+	  ["0","0","0","0","0","0","0"],
+	  ["0","0","0","0","0","0","0"],
+	  ["0","0","0","0","0","0","0"]
+	],
+	"utilities": [
+	  [" ","sp"," "," "," "," "," "],
+	  [" "," "," "," "," "," ","an:-90"],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," ","t"," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "]
+	]
+  },
+  "lighting": {
+	"ambient_color": [
+	  0.4,
+	  0.4,
+	  0.5
+	],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "color": [
+		1.0,
+		0.9,
+		0.8
+	  ],
+	  "direction": [
+		-0.4,
+		-0.7,
+		-0.4
+	  ],
+	  "enabled": true,
+	  "energy": 1.2
+	}
+  },
+  "map_info": {
+	"description": "Captures trace into a line. Here relational history becomes discipline: the trace is formalized into directed relation. This map stages the first formal link between discrete moments, converting duration into geometry. Lines are not given; they are captured traces.",
+	"description_2": "The Line introduces relation, direction, and the possibility of measurement. By stretching between points or extending through space, the line transforms isolated positions into ordered relations. Length, direction, and orientation emerge as measurable properties, revealing how geometry begins not with form but with comparison. The player's embodied action makes explicit that a line is not an object but a negotiated distance between at least two commitments in space.",
+	"dimensions": {
+	  "depth": 15.0,
+	  "max_height": 2.0,
+	  "width": 7.0
+	},
+	"format": "json",
+	"lookup_name": "Point_Line",
+	"manual_file": "res://commons/context/clipboard/tutorial_text/line_axioms.md",
+	"metadata": {
+	  "category": "tutorial",
+	  "difficulty": "beginner",
+	  "estimated_time": "3-4 minutes",
+	  "learning_objectives": [
+		"Line as relation",
+		"Measurement",
+        "Direction and length"
+	  ]
+	},
+	"name": "The Line",
+	"title": "Position Without Extension",
+	"version": "1.0"
+  },
+  "settings": {
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [
+		0.2,
+		0.3,
+		0.7
+	  ],
+	  "type": "sky"
+	},
+	"cube_size": 1.0,
+	"enable_physics": true,
+	"enter_type": "I",
+	"gutter": 0.0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true
+  },
+  "utility_definitions": {
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	},
+	"t": {
+	  "description": "Continue to next step",
+	  "name": "Next",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
+  }
+}

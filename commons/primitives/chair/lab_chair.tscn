@@ -1,0 +1,163 @@
+[gd_scene load_steps=12 format=3 uid="uid://ccb1kbfyv3qjb"]
+
+[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="1_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_seat"]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_seat"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_backrest"]
+top_radius = 0.125
+bottom_radius = 0.125
+height = 0.01
+radial_segments = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_armrest"]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_left_armrest"]
+size = Vector3(0.015, 0.085, 0.01)
+
+[sub_resource type="BoxMesh" id="BoxMesh_right_armrest"]
+size = Vector3(0.015, 0.085, 0.01)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_base"]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hub"]
+top_radius = 0.03
+bottom_radius = 0.02
+height = 0.135
+radial_segments = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_spoke"]
+size = Vector3(0.075, 0.01, 0.01)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wheel"]
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.01
+radial_segments = 8
+
+[node name="LabChair" type="Node3D"]
+
+[node name="Seat" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+material_override = SubResource("ShaderMaterial_seat")
+mesh = SubResource("CylinderMesh_seat")
+
+[node name="Backrest" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 0.9366722, -4.094324e-08, 0.3502074, -0.3502074, 1.5308052e-08, 0.9366722, -0.11763308, 0.38652086, 0)
+material_override = SubResource("ShaderMaterial_seat")
+mesh = SubResource("CylinderMesh_backrest")
+
+[node name="LeftArmrest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.122065306, 0.24947354, -0.02569627)
+material_override = SubResource("ShaderMaterial_armrest")
+mesh = SubResource("BoxMesh_left_armrest")
+
+[node name="RightArmrest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.122065306, 0.24947354, 0.024677537)
+material_override = SubResource("ShaderMaterial_armrest")
+mesh = SubResource("BoxMesh_right_armrest")
+
+[node name="BaseHub" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13106376, 0)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("CylinderMesh_hub")
+
+[node name="Spoke1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0375, 0.05, 0)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("BoxMesh_spoke")
+
+[node name="Spoke2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.24561223, 0, 0.96936864, 0, 1, 0, -0.96936864, 0, -0.24561223, 0.0116, 0.05, 0.0354)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("BoxMesh_spoke")
+
+[node name="Spoke3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.82898855, 0, -0.55926526, 0, 1, 0, 0.55926526, 0, -0.82898855, -0.0303, 0.05, 0.0227)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("BoxMesh_spoke")
+
+[node name="Spoke4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.69180274, 0, 0.7220863, 0, 1, 0, -0.7220863, 0, -0.69180274, -0.0303, 0.05, -0.0227)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("BoxMesh_spoke")
+
+[node name="Spoke5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.27437907, 0, -0.96162206, 0, 1, 0, 0.96162206, 0, -0.27437907, 0.0116, 0.05, -0.0354)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("BoxMesh_spoke")
+
+[node name="Wheel1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.075, 0.025, 0)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="Wheel2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.038441133, -0.9922324, -0.11830971, 0.30661666, -0.12439812, 0.94366956, -0.951057, 0, 0.309017, 0.02575493, 0.025, 0.0708)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="Wheel3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.59647536, 0.64862484, 0.47276062, 0.6211477, -4.971144e-08, 0.7836933, 0.5083231, 0.7611081, -0.40289187, -0.0606, 0.025, 0.0454)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="Wheel4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6461095, 0.6018151, -0.46942607, 0.5877851, -2.569291e-08, 0.8090169, 0.4868785, -0.7986355, -0.35373798, -0.0606, 0.025, -0.0454)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="Wheel5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.30764544, -0.94551855, -0.10653178, 0.32721806, -1.4303149e-08, -0.9449494, 0.8934671, -0.32556817, 0.30939075, 0.0232, 0.025, -0.0708)
+material_override = SubResource("ShaderMaterial_base")
+mesh = SubResource("CylinderMesh_wheel")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.5, 2)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 2, 0)
+shadow_enabled = true

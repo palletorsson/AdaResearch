@@ -29,6 +29,14 @@ The audio system is now **fully integrated** into GridSystem! Here's what was ad
 4. Click **Add**
 5. Click **Close**
 
+### Step 1.5: Enable Audio Catalog Editor (Optional but Recommended)
+
+For advanced sound design and testing tools:
+1. Go to: **Project → Project Settings → Plugins**
+2. Find **Audio Catalog**
+3. Check **Enable** ✅
+4. A new "Audio Catalog" workspace will appear in the main editor toolbar.
+
 ### Step 2: Test in Primitives Sequence
 
 The audio system is already configured in `map_sequences.json`:

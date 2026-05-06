@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6cubecabin01"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/cubesubdivision/cube_cabin.gd" id="1_cabin"]
+
+[node name="CubeCabin" type="Node3D"]
+script = ExtResource("1_cabin")
+cabin_size = 3.0
+show_construction = true
+step_delay = 0.35

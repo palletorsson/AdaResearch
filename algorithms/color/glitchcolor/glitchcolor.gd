@@ -7,15 +7,15 @@ var time := 0.0
 var materials := []
 var cubes := []
 
-func _ready():
+func _ready() -> void:
 	setup_color_cubes()
 	create_bit_shift_examples()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	animate_bit_effects()
 
-func setup_color_cubes():
+func setup_color_cubes() -> void:
 	# Create a grid of cubes to demonstrate different bit effects
 	for i in range(5):
 		for j in range(3):
@@ -31,11 +31,11 @@ func setup_color_cubes():
 			materials.append(material)
 			add_child(cube)
 
-func create_bit_shift_examples():
+func create_bit_shift_examples() -> void:
 	# Each cube demonstrates a different bit manipulation technique
 	pass
 
-func animate_bit_effects():
+func animate_bit_effects() -> void:
 	for i in range(cubes.size()):
 		var cube = cubes[i]
 		var material = materials[i]
@@ -309,3 +309,12 @@ func bit_crush_channel(value: float, bit_depth: int) -> float:
 	var levels = 1 << bit_depth  # 2^bit_depth levels
 	var step = 1.0 / float(levels - 1)
 	return floor(value / step) * step
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

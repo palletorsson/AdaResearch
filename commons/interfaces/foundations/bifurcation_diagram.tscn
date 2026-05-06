@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dwor8ku6htrkv"]
+
+[ext_resource type="Script" uid="uid://dv0np6v86a78d" path="res://commons/interfaces/foundations/bifurcation_diagram.gd" id="1_script"]
+
+[node name="BifurcationDiagram" type="Node3D" unique_id=1238997563]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1079787097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.1155174)

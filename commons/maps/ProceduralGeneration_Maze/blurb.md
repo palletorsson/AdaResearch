@@ -1,0 +1,5 @@
+A perfect maze has exactly one path between any two points. No loops, no islands, no choices that don't matter. Depth-first search carves it: pick a wall, knock it down, move forward, backtrack when stuck. The algorithm remembers where it's been by forgetting where it hasn't.
+
+Recursive backtracking is a drunk walk with perfect memory. It staggers deep into unvisited territory, hits a dead end, rewinds to the last fork, tries again. The maze emerges not from design but from exhaustion — every cell visited, every wall questioned. What remains is structure born from constraint.
+
+A maze is a graph pretending to be architecture. Walls encode absence of connection. Corridors encode permission. The generator doesn't build — it removes. Every passage is a decision the algorithm already made for you.

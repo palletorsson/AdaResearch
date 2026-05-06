@@ -1,0 +1,36 @@
+{
+  "id": "mg_form32_tilted_frame_arch",
+  "notes": "SELECT-TRANSFORM-ARTICULATE PASS: arch seed first gets a global inset, then the inner band is rotated and extruded. The goal is a portal that feels shifted rather than simply thickened.",
+  "seed": "arch",
+  "generations": 1,
+  "camera_pitch": 0.28,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.14,
+        "inner_tag": "portal_band",
+        "border_tag": "portal_skin"
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:portal_band",
+      "params": {
+        "angle_degrees": 11
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:portal_band",
+      "params": {
+        "distance": 0.07,
+        "scale": 0.98,
+        "top_tag": "portal_core",
+        "side_tag": "portal_core_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

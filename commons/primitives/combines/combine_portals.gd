@@ -1,5 +1,30 @@
 extends Node3D
 
+# @identity
+# essence: portals[i].ring_segments = base_segments + i*increment — a progression of torus discretization levels
+# desire: learner walks through a corridor of increasingly refined tori and feels resolution as spatial experience
+# critical_parameter: portal_count — how many steps the resolution ladder has; more steps = finer progression
+# triggers: nothing at runtime — all portals are placed at ready() along Z axis
+# emerges: the relationship between segment count and perceived smoothness — resolution is a resource allocation
+# needs: [missing VR controls — purely spatial/visual; walk through to experience]
+# relationships: demonstrates combine/instantiation pattern; related to sphere_low/mid/high resolution comparison
+# truth: every smooth curve in 3D graphics is an illusion — beneath it are polygons, and you choose how many
+
+
+# Spine-corridor contract — this artifact extends ~90m along +Z (20 portals
+# × 4.5m spacing), which is 5+ corridor lengths. Tagged "oversized" so the
+# spine_corridor generator skips it in 16m corridors.
+func spine_hints() -> Dictionary:
+	return {
+		"role":         "primary",
+		"footprint":    Vector2i(2, 16),
+		"approach":     "south",
+		"reading_dist": 1.0,
+		"budget_ms":    3.0,
+		"tags":         ["oversized", "corridor_incompatible"],
+	}
+
+
 @export var portal_count: int = 20
 @export var portal_spacing: float = 4.5
 @export var base_path: NodePath = NodePath("Lowrestorus")

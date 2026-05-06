@@ -189,7 +189,7 @@ From `commons/maps/map_sequences.json`:
     "Advanced_Final"
   ],
   "return_to": "lab",
-  "unlock_requirements": ["randomness_exploration", "geometric_algorithms"],
+  "unlock_requirements": ["randomness", "geometric_algorithms"],
   "completion_rewards": ["algorithm_architect_badge", "complexity_master_badge"]
 }
 ```
@@ -207,7 +207,7 @@ The lab literally transforms as you progress, using different JSON files:
 
 2. **Post-Array**: `commons/maps/Lab/map_data_post_array.json`
    - Adds `xyz_coordinates` and `grid_display` artifacts
-   - Teleporter `t:randomness_exploration` at position [4,2]
+   - Teleporter `t:randomness` at position [4,2]
    - Brighter "discovery" lighting
 
 3. **Post-Randomness**: `commons/maps/Lab/map_data_post_random.json`
@@ -235,11 +235,11 @@ From `commons/artifacts/lab_artifact_system.json`:
     "array_tutorial": {
       "new_state": "post_array_tutorial",
       "artifacts_unlocked": ["xyz_coordinates"],
-      "sequences_unlocked": ["randomness_exploration"],
+      "sequences_unlocked": ["randomness"],
       "celebration_message": "🎉 Array mastery achieved! New tools have appeared in the lab."
     },
-    "randomness_exploration": {
-      "new_state": "post_randomness_exploration", 
+    "randomness": {
+      "new_state": "post_randomness", 
       "artifacts_unlocked": ["probability_sphere", "geometric_crystal"],
       "sequences_unlocked": ["geometric_algorithms"],
       "celebration_message": "🎲 Randomness understood! The lab reveals deeper mysteries."
@@ -367,7 +367,7 @@ func _apply_lab_material_to_cube(cube: Node3D):
 ### 3. Return to Enhanced Lab
 - Lab loads `map_data_post_array.json`
 - New artifacts appear: `xyz_coordinates`, `grid_display`
-- Teleporter `t:randomness_exploration` becomes available
+- Teleporter `t:randomness` becomes available
 - Brighter lighting and enhanced lab atmosphere
 
 ### 4. Subsequent Sequences
@@ -467,7 +467,7 @@ scene_manager.get_current_sequence_data()
 lab_system.print_lab_status()
 
 # Force progression for testing
-scene_manager.start_sequence("randomness_exploration")
+scene_manager.start_sequence("randomness")
 lab_system.complete_sequence("array_tutorial")
 lab_system.force_unlock_artifact("disco_floor")
 

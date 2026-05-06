@@ -1,0 +1,32 @@
+{
+  "id": "gen00_hybrid",
+  "notes": "Inset + extrude + noise on alternating faces.",
+  "seed": "cube",
+  "seed_scale": 0.55,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.12
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:inset_inner",
+      "params": {
+        "distance": 0.2,
+        "scale": 0.9
+      }
+    },
+    {
+      "op": "noise",
+      "selector": "all",
+      "params": {
+        "amount": 0.03,
+        "frequency": 4.0
+      }
+    }
+  ]
+}

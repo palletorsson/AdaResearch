@@ -1,0 +1,5 @@
+Tests 25 through 36. The third wall of specimens — each one a different answer to the same question: what happens when rigid geometry learns to yield?
+
+Grab the long stick. Pick up the cube. Press, pull, release. The mesh deforms under force, then recovers — or doesn't. Rounded edges absorb impact differently than sharp ones. Segments determine resolution of collapse. Every parameter — size, radius, softness — changes the conversation between object and obstacle.
+
+Soft bodies don't break. They negotiate. A cube that gives under pressure isn't failing; it's redistributing stress across every vertex, finding equilibrium through deformation rather than fracture. Structure maintained not by rigidity but by the capacity to change shape without losing identity. The body that bends is the body that persists.

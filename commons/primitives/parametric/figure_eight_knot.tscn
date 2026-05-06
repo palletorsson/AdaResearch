@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b52dyl3llnvoa"]
+
+[ext_resource type="Script" path="res://commons/primitives/parametric/figure_eight_knot.gd" id="1_script"]
+
+[node name="FigureEightKnot" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_script")

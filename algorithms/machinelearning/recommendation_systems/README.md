@@ -1,5 +1,12 @@
 # Recommendation Systems
 
+
+## Folder Summary
+
+The `Recommendation Systems` module provides a 3D sandbox for exploring the ideas behind the Recommendation Systems workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `recommendation_systems.tscn` and the controller script `RecommendationSystems.gd`.
+
 ## Overview
 This algorithm demonstrates various recommendation system approaches used in modern applications to suggest relevant items, content, or actions to users based on their preferences, behavior, and similar users.
 

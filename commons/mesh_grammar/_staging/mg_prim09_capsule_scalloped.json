@@ -1,0 +1,18 @@
+{
+  "id": "mg_prim09_capsule_scalloped",
+  "notes": "PRIMITIVE-AS-SEED: Godot CapsuleMesh + noise displacement. The pill gets organic surface texture.",
+  "seed": "capsule",
+  "seed_scale": 0.7,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "noise_displace",
+      "selector": "all",
+      "params": {
+        "amplitude": 0.04,
+        "frequency": 3.0,
+        "seed": 7
+      }
+    }
+  ]
+}

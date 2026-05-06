@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dntnynso2re1l"]
+
+[ext_resource type="Script" uid="uid://cubgtor56fkac" path="res://algorithms/proceduralgeneration/wfc3D/wfc_solver_3d.gd" id="1_solver"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.15, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.6, 0.7, 1)
+ssao_enabled = true
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1"]
+
+[node name="WFC_3D_Demo" type="Node3D"]
+
+[node name="WFC_Solver_3D" type="Node3D" parent="."]
+script = ExtResource("1_solver")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+camera_attributes = SubResource("CameraAttributesPractical_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.7071068, -0.35355324, 0.6123725, 0, 0.86602557, 0.49999976, -0.7071068, -0.35355324, 0.6123725, 20.62752, 10, 21.26043)
+fov = 60.0
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+billboard = 1
+text = "WFC 3D Demo
+Press F6 to Generate
+Make sure to generate tiles first!"
+font_size = 64

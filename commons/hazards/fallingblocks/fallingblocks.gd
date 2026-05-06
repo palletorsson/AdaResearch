@@ -1,3 +1,13 @@
+# @identity
+# essence: spawn(block) -> fall(gravity) -> stack_or_destroy -- blocks spawning and falling as hazard
+# desire: a rain of rigid blocks that accumulate, stack, and threaten with geometric debris
+# critical_parameter: _spawn_timer interval -- how frequently new blocks appear; gravity determines fall speed
+# triggers: timer-based spawning; RigidBody3D physics drives falling; collision with player causes damage
+# emerges: Tetris without player control -- blocks fall and the landscape of danger builds itself
+# needs: RigidBody3D physics [has]; spawn timer [has]; collision detection [has]; VR interaction [missing]
+# relationships: pairs with blockbuilderentity (passive rain vs active construction)
+# truth: gravity is the simplest algorithm -- spawn, fall, accumulate. The hazard is just physics with a schedule.
+
 extends Node3D
 
 const CUBE_SCENE: PackedScene = preload("res://commons/scenes/mapobjects/reset_cube.tscn")
@@ -123,7 +133,7 @@ func _build_falling_cube_body() -> RigidBody3D:
 	var rigid := RigidBody3D.new()
 	rigid.name = "FallingResetCube"
 	rigid.contact_monitor = true
-	rigid.max_max_contacts_reported = 8
+	rigid.max_contacts_reported = 8
 	rigid.mass = cube_mass
 	rigid.linear_damp = linear_damp
 	rigid.angular_damp = angular_damp

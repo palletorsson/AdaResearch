@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://vowel_instrument_v1"]
+
+[ext_resource type="Script" path="res://algorithms/speech/phoneme_cloud/vowel_instrument.gd" id="1_controller"]
+[ext_resource type="PackedScene" uid="uid://vowel_synth_v1" path="res://algorithms/speech/phoneme_cloud/vowel_synth.tscn" id="2_synth"]
+
+[node name="VowelInstrument" type="Node3D"]
+script = ExtResource("1_controller")
+vowel_synth_path = NodePath("VowelSynth3D")
+
+[node name="VowelSynth3D" parent="." instance=ExtResource("2_synth")]

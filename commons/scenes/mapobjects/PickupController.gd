@@ -1,4 +1,4 @@
-# Enhanced PickupController.gd
+﻿# Enhanced PickupController.gd
 # Chapter 4+: Pickup Cube with Audio Integration
 # Adds Mario-style pickup sounds to the interaction system
 
@@ -103,7 +103,7 @@ func _remove_hover_effect():
 		animator.scale /= hover_scale_boost
 
 # Called by XR-Tools when grabbed
-func grabbed(grabber):
+func grabbed(_grabber):
 	is_grabbed = true
 	_apply_grab_effect()
 	
@@ -116,7 +116,7 @@ func grabbed(grabber):
 	print("PickupController: Cube grabbed with sound!")
 
 # Called by XR-Tools when released
-func released(grabber):
+func released(_grabber):
 	is_grabbed = false
 	_remove_grab_effect()
 	cube_released.emit(self)

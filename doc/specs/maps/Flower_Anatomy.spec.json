@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Flower_Anatomy",
+  "home_sequence": "flowers",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.01,
+  "breath_zones": [
+    {
+      "size": 96,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        4.385416666666667,
+        4.520833333333333
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "botanical_flower"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 98,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "artifact": "entropy_axiom",
+  "title": "Building a Grid That Dissolves Into Chaos",
+  "concept_layer": "randomness as the breakdown of order; entropy as a gradient; pseudo-randomness via randf_range",
+  "technique_first": ["triple nested for-loop", "randf_range", "lerp() for interpolation", "pow() for curve shaping", "entropy as a visual gradient"],
+  "technique_reference": ["for-loop pattern (Tutorial_Single)", "Vector3 positions (Trans_Translation)", "ImmediateMesh sampling (ForcesFoundations)", "grid logic (arrays)"],
+  "domain_deferred": ["true randomness vs pseudo-randomness \u2192 later randomness maps", "probability distributions \u2192 Galton board", "Monte Carlo methods \u2192 proceduralgeneration", "Shannon entropy (information theory) \u2192 QFEP laboratory"],
+  "capture_leaks": {
+    "pseudo_vs_true": "randf_range uses a deterministic PRNG. Given the same seed, the output is reproducible. True randomness (thermal, quantum) is not available. PRNG internals deferred.",
+    "uniform_distribution": "Every offset is drawn from a uniform range. But most natural randomness is Gaussian, Poisson, or power-law. Distribution shapes arrive later.",
+    "independent_samples": "Each offset is independent of its neighbors. Natural noise is usually correlated \u2014 that's what the next sequence (noise) addresses.",
+    "scalar_entropy": "Entropy here is a single float (randomness_amount) at each Z slice. Shannon entropy as information measure requires probability distributions \u2014 deferred to QFEP.",
+    "reversibility": "The grid dissolves toward high Z, but you can never 'reassemble' it by walking back. The artifact visually reinforces the arrow of time without naming it."
+  },
+  "limit": "Ten thousand points, a gradient of chaos. It looks like the whole story: order becomes disorder. But this is a mechanical simulation of entropy, not entropy itself. Real entropy is about state counting, information content, the probability-weighted log of microstates. This artifact lets you feel the shape; the statistical mechanics comes later.",
+  "grammar_alignment": {
+    "sequence": "randomness",
+    "operations_taught": ["jitter", "scatter"],
+    "operations_deferred_to_sequence": ["sample (Galton board, distribution artifacts)", "walk (brownian, random walks)"],
+    "note": "entropy_axiom teaches jitter (per-point random offset) and scatter (distribute many forms in a region) simultaneously \u2014 the two operations are easier to teach together because they're the same randf_range call at different scales."
+  },
+  "biome_alignment": {
+    "sequence": "randomness",
+    "density_at_entry": 0.3,
+    "kingdoms_unlocked": ["flower", "tree", "fungus"],
+    "hand_verbs_gained": ["randomize", "entropy_trigger"],
+    "catalyst_mode": "chaos",
+    "hazard_type": "octapod_crawler + plasma_critter",
+    "note": "Fungus kingdom unlocks here \u2014 the first 'disorganized' life form. Creatures begin appearing (octapod, plasma). The world has started populating itself non-deterministically. The catalyst mode 'chaos' lets the player inject randomness into any form."
+  },
+  "stages": [
+    {
+      "title": "From wave to noise",
+      "thinking": "WaveFunctions_Unit_Circle taught that sine is the shadow of a circle \u2014 a pure, predictable, memoryless signal. Now its opposite. What if the next value is not derivable from the current one? What if every position is drawn fresh from a hat? This is randomness. The sine is one curve for all time; randomness is a new curve every frame, every draw.",
+      "code": "# Sine:\n#   y(t) = sin(t)   \u2192 deterministic, same t always gives same y\n#\n# Randomness:\n#   y = randf_range(-1, 1)   \u2192 each call returns a different value\n#   no t dependency, no memory, no predictability\n#\n# The question becomes:\n# if we add randomness to an ordered structure,\n# when does order die?",
+      "concepts": ["randf_range", "determinism vs stochasticity", "order \u2192 chaos as a spectrum"]
+    },
+    {
+      "title": "Build a perfectly ordered grid",
+      "thinking": "Start with the opposite of random: a regular 10\u00d710\u00d740 grid of points. Each point sits at a computed position (x\u00b7s, y\u00b7s, z\u00b7s). No randomness yet. This is order as infrastructure. Every point knows exactly where it belongs. The triple nested for-loop is the pattern that scales arrays to 3D volumes.",
+      "code": "extends Node3D\n\n@export var grid_size_x: int = 10\n@export var grid_size_y: int = 10\n@export var grid_size_z: int = 40\n@export var base_spacing: float = 0.2\n\nvar point_scene = preload(\"res://commons/primitives/point/grab_sphere_point_with_color.tscn\")\n\nfunc generate_entropy_grid() -> void:\n\tfor z in range(grid_size_z):\n\t\tfor y in range(grid_size_y):\n\t\t\tfor x in range(grid_size_x):\n\t\t\t\tvar base_x = (x - grid_size_x / 2.0) * base_spacing\n\t\t\t\tvar base_y = (y - grid_size_y / 2.0) * base_spacing\n\t\t\t\tvar base_z = z * base_spacing\n\t\t\t\t# centered on origin in XY, extends positive in Z",
+      "concepts": ["triple-nested for", "centered grid coordinates", "preloaded scene as template", "order as baseline"]
+    },
+    {
+      "title": "The chaos gradient \u2014 entropy grows with Z",
+      "thinking": "The crucial move. entropy_factor = z / (grid_size_z - 1). At z=0, factor is 0 (perfect order). At z=39, factor is 1 (maximum chaos). Then: pow(factor, 2.0) to accelerate the onset. Low-Z slices look pristine; high-Z slices look dissolved. The pow exponent is a pedagogical choice: linear would be boring, pow(2) creates a runway.",
+      "code": "# Calculate entropy factor (0.0 at z=0, 1.0 at z=max)\nvar entropy_factor = float(z) / float(grid_size_z - 1)\n\n# Exponential curve \u2014 entropy accelerates\nvar curved_entropy = pow(entropy_factor, 2.0)\n\n# lerp between min and max randomness\nvar randomness_amount = lerp(min_randomness, max_randomness, curved_entropy)\n\n# Apply random offset in XY only (Z stays aligned for the march-through effect)\nvar random_offset_x = randf_range(-randomness_amount, randomness_amount)\nvar random_offset_y = randf_range(-randomness_amount, randomness_amount)\n\nvar final_position = Vector3(\n\tbase_x + random_offset_x,\n\tbase_y + random_offset_y,\n\tbase_z\n)",
+      "concepts": ["entropy as normalized gradient", "lerp()", "pow() for non-linear curve", "randf_range", "jitter vs scatter"]
+    },
+    {
+      "title": "Why the player walks through it",
+      "thinking": "The grid runs along Z. The player enters from z=0 and walks forward. They begin inside perfect order \u2014 rows and columns visible, countable. A few steps forward, the lattice starts to shimmer. Halfway through, it's a haze. At the end, it's noise. You walk from countable space into uncountable space. Entropy is not told, it is traversed.",
+      "code": "# Player path: enter at (0, 0, 0), walk toward +z\n# \n# z=0:  [\u25aa][\u25aa][\u25aa][\u25aa][\u25aa]  perfect rows\n# z=10: [\u25aa][\u25aa][\u25aa][\u25aa][\u25aa]  tiny quivers\n# z=20: [\u25aa\u25aa][\u25aa] [\u25aa][\u25aa ]  lines breaking up\n# z=30: [\u25aa  \u25aa\u25aa  \u25aa  ]   pattern disintegrating\n# z=39: [ \u25aa \u25aa \u25aa    ]    pure noise\n#\n# The Z axis IS a time axis \u2014\n# time since order was established.\n# Walking Z is walking the arrow of time.",
+      "concepts": ["traversal as pedagogy", "Z axis as time axis", "arrow of time", "embodied entropy"]
+    },
+    {
+      "title": "Every point knows its entropy",
+      "thinking": "Each sphere can carry a color that encodes its local entropy \u2014 blue for ordered, red for chaotic. That color comes from the same `curved_entropy` that drives the jitter. The player doesn't just see disorder; they see a gradient, a temperature. Color as measurement. (This is why the Color sequence came before randomness \u2014 you need to know what paint does before you can paint entropy.)",
+      "code": "# Per-point color from local entropy\nvar point_color = Color(\n\tcurved_entropy,           # red = chaos\n\t0.3,                       # green constant\n\t1.0 - curved_entropy       # blue = order\n)\n\n# If the point scene exposes set_color:\nif point_instance.has_method(\"set_color\"):\n\tpoint_instance.set_color(point_color)\n\n# Referenced from color sequence \u2014 same paint, new meaning.\n# The gradient IS the entropy function made visual.",
+      "concepts": ["color as data encoding", "entropy \u2192 color mapping", "cross-sequence reference", "gradient visualization"]
+    },
+    {
+      "title": "The PRNG is deterministic and that is the point",
+      "thinking": "randf_range uses Godot's pseudo-random generator. Given the same seed, the exact same 'chaos' appears every time. Call randomize() in _ready() and the seed varies across sessions, so the grid dissolves differently each run. This is a crucial subtlety: what looks random is reproducible. Every PRNG is a clockwork that imitates noise. True randomness (radioactive decay, thermal fluctuation) is not accessible from code.",
+      "code": "# Default: deterministic across runs\nfunc _ready() -> void:\n\tgenerate_entropy_grid()\n\n# To make each session different:\nfunc _ready() -> void:\n\trandomize()  # seeds the PRNG from system clock\n\tgenerate_entropy_grid()\n\n# To reproduce a specific 'chaos':\nfunc _ready() -> void:\n\tseed(42)\n\tgenerate_entropy_grid()\n\n# Every call to randf_range steps the PRNG state.\n# The sequence is fixed once seeded.\n# 'Random' here means 'statistically uniform,'\n# not 'unpredictable in principle.'",
+      "concepts": ["PRNG", "seed()", "randomize()", "determinism of chaos", "reproducibility"]
+    },
+    {
+      "title": "Expose the parameters so chaos is tunable",
+      "thinking": "max_randomness, min_randomness, grid dimensions \u2014 all @export. In the editor or via apply_grid_config, the map author can tune the gradient. More randomness: chaos starts earlier. Taller grid: longer runway. Smaller max: dissolution never completes. These aren't just cosmetic; they control the pedagogical experience. Each parameter change tells a different story about how order breaks.",
+      "code": "@export var max_randomness: float = 0.5\n@export var min_randomness: float = 0.0\n\nfunc apply_grid_config(config: Dictionary) -> void:\n\tif config.has(\"max_randomness\"):\n\t\tmax_randomness = float(config[\"max_randomness\"])\n\tif config.has(\"grid_size_z\"):\n\t\tgrid_size_z = int(config[\"grid_size_z\"])\n\tif config.has(\"grid_size_x\"):\n\t\tgrid_size_x = int(config[\"grid_size_x\"])\n\t# ... etc\n\t_clear()\n\tgenerate_entropy_grid()\n\n# Different stories:\n#   max=0.1 grid_z=80  \u2014 very slow dissolution\n#   max=0.8 grid_z=10  \u2014 instant chaos\n#   max=0.5 grid_z=40  \u2014 the default, feels natural",
+      "concepts": ["@export tuning", "gradient shape parameters", "pedagogical variants"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "An entropy axiom knows what it is. Not a field of shaking cubes \u2014 a spatial embodiment of the arrow of time. The Z axis is not a direction in 3D; it is the forgetting of a pattern. The player walks from a place where everything has its coordinates to a place where nothing does. The critical parameter is max_randomness because it controls whether the end of the journey looks like annihilation (high) or merely weathering (low). What this artifact cannot hold: the information-theoretic formalization, the reversibility of microstates, the coupling between entropy and free energy. Those arrive at QFEP, where this whole sequence finds its math.",
+      "code": "# @identity\n# essence: a 10\u00d710\u00d740 grid where XY offsets grow with Z \u2014 perfect order at z=0 dissolves into chaos at z=max via quadratic entropy ramp\n# desire: learner walks the Z axis as a time axis and feels pattern dissolving around them\n# critical_parameter: max_randomness \u2014 how complete the final chaos is; pow(factor, 2.0) controls the onset curve\n# triggers: _ready generates the full volume once; no runtime chaos drift \u2014 the gradient is static, the WALK is the event\n# emerges: the arrow of time as a physical direction; color-coded entropy as a readable field; the difference between pseudo and true randomness\n# needs: triple nested grid [has]; color encoding [has]; apply_grid_config [has]; live chaos tuning [missing \u2014 fixed at startup]\n# relationships: opposite of Tutorial_Single (pure order vs dissolving order); precedes Random_Cubes (single scatter vs gradient); sets up noise sequence (correlated randomness)\n# truth: entropy is not disorder \u2014 it is the loss of the rule that made order possible",
+      "concepts": ["@identity", "arrow of time", "information vs mechanism", "truth"]
+    }
+  ]
+}

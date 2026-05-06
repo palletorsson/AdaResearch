@@ -1,0 +1,21 @@
+{
+  "id": "mg_form43_lowres_sphere_bloom",
+  "notes": "LOW-RES SPHERE EXPANSION: uses the icosahedron as the true low-res sphere seed. Every face is pushed out into a broad bloom, testing maximum radial reach before the object stops reading as one body.",
+  "seed": "icosahedron",
+  "seed_scale": 0.34,
+  "generations": 1,
+  "camera_pitch": 0.32,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "all",
+      "params": {
+        "distance": 0.34,
+        "scale": 1.16,
+        "top_tag": "bloom_top",
+        "side_tag": "bloom_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

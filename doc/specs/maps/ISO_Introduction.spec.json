@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ISO_Introduction",
+  "home_sequence": "isosurfaces",
+  "dimensions": {
+    "w": 14,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.007,
+  "breath_zones": [
+    {
+      "size": 135,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 10
+      },
+      "centroid": [
+        6.488888888888889,
+        4.57037037037037
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "voxel_noise_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 137,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

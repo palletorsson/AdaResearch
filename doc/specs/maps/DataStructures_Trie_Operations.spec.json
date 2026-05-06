@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "DataStructures_Trie_Operations",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 8,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 77,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 12
+      },
+      "centroid": [
+        3.1298701298701297,
+        6.402597402597403
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 6,
+      "token": "env_one"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 78,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

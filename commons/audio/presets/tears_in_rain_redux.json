@@ -1,0 +1,128 @@
+{
+    "description": "TEARS IN RAIN REDUX: The definitive Analog Epic experience. Powered by the new EpicSynthEngine (Domain A). Features massive 7-voice SuperSaw stacks, Moog-style ladder filters, and true analog drift. A sonic cathedral of rain and memory.",
+    "continuous_layers": [
+        {
+            "sound_id": "Epic.cs80_pad_1",
+            "volume_db": -10,
+            "bus": "DeepPad",
+            "parameters": {
+                "duration": 16.0,
+                "freq": 110.0
+            }
+        },
+        {
+            "sound_id": "Epic.cs80_lead_1",
+            "volume_db": -8,
+            "bus": "MainMelody",
+            "parameters": {
+                "duration": 20.0,
+                "freq": 220.0
+            }
+        },
+        {
+            "sound_id": "Epic.sub_bass",
+            "volume_db": -12,
+            "bus": "SubFoundation",
+            "parameters": {
+                "duration": 24.0,
+                "freq": 55.0
+            }
+        },
+        {
+            "sound_id": "Cinematic.cyber_rain_texture",
+            "volume_db": -14,
+            "bus": "RainHeavy",
+            "parameters": {
+                "duration": 15.0
+            }
+        },
+        {
+            "sound_id": "Cinematic.neon_glint",
+            "volume_db": -18,
+            "bus": "ShimmeringHigh",
+            "parameters": {
+                "duration": 12.0
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren"
+            ],
+            "interval_range": [
+                25.0,
+                50.0
+            ],
+            "volume_db": -22,
+            "bus": "DistantCity"
+        }
+    ],
+    "buses": {
+        "DeepPad": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.6,
+                    "damping": 0.1
+                }
+            ]
+        },
+        "MainMelody": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.92,
+                    "wet": 0.7,
+                    "damping": 0.1
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 550,
+                    "tap1_level_db": -5.0
+                }
+            ]
+        },
+        "SubFoundation": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 120
+                }
+            ]
+        },
+        "RainHeavy": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 300
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "ShimmeringHigh": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.8
+                }
+            ]
+        },
+        "DistantCity": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

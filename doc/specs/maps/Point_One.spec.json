@@ -1,0 +1,141 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Point_One",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 7,
+    "d": 12
+  },
+  "signature": "interactive_point_origin",
+  "style": null,
+  "echoes": [],
+  "density": 0.237,
+  "breath_zones": [
+    {
+      "size": 26,
+      "bounds": {
+        "x": 0,
+        "z": 1,
+        "w": 3,
+        "d": 11
+      },
+      "centroid": [
+        0.8846153846153846,
+        6.384615384615385
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 1,
+      "z": 4,
+      "token": "interactive_point_origin",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "origin"
+    },
+    {
+      "x": 2,
+      "z": 0,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 1,
+      "token": "mesh_builder_demo"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "xyz_slider_plate"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "static_point"
+    },
+    {
+      "x": 1,
+      "z": 5,
+      "token": "CoordinateSystem3M"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "token": "code_evolution_screen"
+    },
+    {
+      "x": 5,
+      "z": 11,
+      "token": "frame_counter_display"
+    }
+  ],
+  "authorial_annotations": [
+    {
+      "x": 5,
+      "z": 0,
+      "code": "@void",
+      "params": [
+        "2",
+        "11"
+      ],
+      "footprint": {
+        "w": 2,
+        "d": 11
+      },
+      "key": null
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "code": "@hold",
+      "params": [
+        "1",
+        "2"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 2
+      },
+      "key": null
+    },
+    {
+      "x": 1,
+      "z": 4,
+      "code": "@signature",
+      "params": [
+        "interactive_point_origin"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "interactive_point_origin"
+    },
+    {
+      "x": 5,
+      "z": 11,
+      "code": "@hold",
+      "params": [
+        "1",
+        "1"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": null
+    }
+  ],
+  "stats": {
+    "artifact_count": 9,
+    "walkable_cells": 38,
+    "breath_zone_count": 1,
+    "unique_tokens": 9
+  }
+}

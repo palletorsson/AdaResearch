@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "BodyProg_Torso",
+  "home_sequence": "bodyprogression",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [],
+  "density": 0.01,
+  "breath_zones": [
+    {
+      "size": 98,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        4.540816326530612,
+        4.459183673469388
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 5,
+      "token": "torso_estimation_vis"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 99,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

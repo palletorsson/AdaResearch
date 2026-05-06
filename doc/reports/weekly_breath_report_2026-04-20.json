@@ -1,0 +1,200 @@
+{
+  "report_date": "2026-04-20",
+  "generated": "2026-04-20T10:30:00",
+  "period": "2026-04-13 to 2026-04-20",
+  "total_breaths_in_period": 7,
+
+  "pipeline_snapshot": {
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_at_stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "array_tutorial",
+      "wavefunctions", "noise", "cellularautomata", "fractals", "lsystems",
+      "proceduralgeneration", "softbodies", "swarmintelligence", "machinelearning",
+      "foundationscrisis", "qfeplaboratory", "postfoundationscrisis", "graphtheory"
+    ],
+    "sequences_at_stage_5_or_below": [],
+    "note": "All 19 spine sequences at stage 6+. VR testing is the only path to advance pipeline stages — requires human VR sessions."
+  },
+
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "all_passing": true,
+    "grade_A_maps": 597,
+    "grade_B_maps": 84,
+    "grade_C_maps": 96,
+    "grade_F_maps": 0,
+    "note": "All 4 gates passing for first time in project history (achieved 2026-04-18)."
+  },
+
+  "garden_health": {
+    "total_artifacts": 2020,
+    "voiced": 734,
+    "voice_coverage_pct": 36,
+    "embodied": 255,
+    "embodiment_rate_pct": 34,
+    "phantom_limbs": 553,
+    "sequences_by_state": {
+      "LIVING": ["grammar_gallery", "joints"],
+      "GROWING": ["primitives", "foundationscrisis", "lsystems", "postfoundationscrisis", "fold_system", "bodyprogression", "morphogenesis"],
+      "REACHING": ["hazards", "graphtheory", "artmathematics", "meshes"]
+    },
+    "week_delta_voiced": "+67 (2026-04-19 breath)",
+    "state_transitions_this_week": ["primitives: SCATTERED -> GROWING"]
+  },
+
+  "sequences_improved": [
+    {
+      "id": "primitives",
+      "pipeline_delta": "stage 3 → stage 6 (within week)",
+      "garden_delta": "SCATTERED → GROWING",
+      "breath_refs": ["2026-04-17T09:00", "2026-04-18T08:00", "2026-04-19T08:00"]
+    },
+    {
+      "id": "graphtheory",
+      "pipeline_delta": "stage 3 → stage 6",
+      "garden_delta": "no change (REACHING)",
+      "breath_refs": ["2026-04-17T09:00", "2026-04-18T08:00"]
+    },
+    {
+      "id": "all_19_sequences",
+      "pipeline_delta": "stage 5 → stage 6 (2026-04-18 batch)",
+      "garden_delta": "various",
+      "breath_refs": ["2026-04-18T08:00"],
+      "note": "55 tscn stubs + 10 map stubs created, validation scorer bug fixed, unlocked stage 6 for all sequences"
+    }
+  ],
+
+  "total_delta": {
+    "pipeline_avg_start": 3.37,
+    "pipeline_avg_end": 5.05,
+    "pipeline_delta": 1.68,
+    "release_gates_start": "1/4 passing",
+    "release_gates_end": "4/4 passing",
+    "garden_voiced_delta": "+67 voiced artifact-map appearances",
+    "largest_single_breath": "+1.00 (2026-04-18T08:00)"
+  },
+
+  "skill_effectiveness_changes": {
+    "registry_repair": {
+      "total_calls_cumulative": 17,
+      "success_rate": 1.0,
+      "week_activity": "6 calls (2026-04-14, 2026-04-16)",
+      "status": "high-leverage — drives pipeline stage jumps"
+    },
+    "direct_file_edit": {
+      "total_calls_cumulative": 23,
+      "success_rate": 1.0,
+      "week_activity": "multiple calls for gate fixes, stub creation",
+      "status": "reliable workhorse"
+    },
+    "documentation_writing": {
+      "total_calls_cumulative": 5,
+      "success_rate": 1.0,
+      "week_activity": "minimal (stage 2 already complete for all sequences)",
+      "status": "exhausted — all sequences past documentation stage"
+    },
+    "ada-breather": {
+      "total_calls_cumulative": 2,
+      "success_rate": 1.0,
+      "avg_delta": 1.0,
+      "week_activity": "2 successful calls (2026-04-18 full + evolve-only)",
+      "status": "most impactful single skill when run — 1.00 delta in one session"
+    },
+    "garden_identity_targeting": {
+      "total_calls_cumulative": 1,
+      "success_rate": 0.0,
+      "week_activity": "1 call (2026-04-20T09:00) — gallery vs sequence-map targeting miss",
+      "status": "needs pre-check fix (prop-001)"
+    }
+  },
+
+  "proposals_pending_review": [
+    {
+      "id": "prop-001",
+      "skill": "ada-breather",
+      "status": "proposed",
+      "tldr": "Garden identity targeting must verify artifact is placed in TARGET sequence maps, not gallery maps. Currently dispatches @identity to artifacts only in gallery — garden_listener counts gallery separately, so voiced count for content sequences does not move.",
+      "proposed_change": "Add sequence-map pre-check in Evaluate phase: cross-reference candidate artifact lookup_name against map_data.json interactables layers in the target sequence's maps before selecting it.",
+      "expected_improvement": "Sequence-specific garden success rate: ~50% → ~90%+",
+      "file": "doc/reports/skill_evolution_proposals.json"
+    }
+  ],
+
+  "stall_analysis": {
+    "stall_detected": false,
+    "stall_condition_checked": "global_avg improvement over 7 days",
+    "7_day_delta": 1.68,
+    "verdict": "NO STALL — significant improvement over the week (+1.68, all 4 release gates newly passing)",
+    "2_day_flat_note": "Pipeline avg flat for 2 days (2026-04-18 → 2026-04-20 at 5.05) — this is EXPECTED and STRUCTURAL. Pipeline HEAD is stage 6 (VR testing) for 18/19 sequences. AI cannot advance VR testing without human headset sessions. Garden health is the active measurable improvement dimension.",
+    "existing_stall_flag": "improvement_trajectory.json has stall_detected:true for VR testing bottleneck — this is accurate and should remain. It means AI-driven pipeline advancement is blocked, not that the project is stalled overall."
+  },
+
+  "breather_dry_run_work_plan": {
+    "trajectory": "IMPROVING",
+    "focus": "auto-selected (primitives VR-blocked, pivoting to garden health)",
+    "items_selected": [
+      {
+        "rank": 1,
+        "item": "garden_identity_leverage",
+        "temperature": 60,
+        "reason": "High-multiplier voiceless artifacts: each shared ambient artifact voiced = 5-15 map appearances simultaneously",
+        "action": "Use garden-multiplier-triage flow. Target primitives + postfoundationscrisis sequences. Apply prop-001 pre-check before selecting artifacts.",
+        "dispatch": "ada-researcher"
+      },
+      {
+        "rank": 2,
+        "item": "release_gates_follow_up",
+        "temperature": 60,
+        "reason": "All 4 gates pass — milestone worth documenting. 84 grade_B + 96 grade_C maps are upgrade candidates.",
+        "action": "Audit highest-traffic grade_B/C maps for quick structural fixes",
+        "dispatch": "ada-map-expert"
+      },
+      {
+        "rank": 3,
+        "item": "sequence:resourcemanagement",
+        "temperature": 50,
+        "reason": "Empty sequence — no maps defined, not a spine sequence but visible as a gap",
+        "action": "Scaffold 3 minimal maps with structure + spawn + teleporter",
+        "dispatch": "ada-map-expert"
+      },
+      {
+        "rank": 4,
+        "item": "graphtheory_garden",
+        "temperature": 40,
+        "reason": "REACHING state (10/14 voiced, 24 phantom limbs) — closest to GROWING threshold among REACHING sequences",
+        "action": "@identity for 4+ voiceless graphtheory artifacts in sequence-specific maps",
+        "dispatch": "ada-researcher"
+      },
+      {
+        "rank": 5,
+        "item": "foundationscrisis_embodiment",
+        "temperature": 35,
+        "reason": "GROWING (28/30 voiced) but only 11/30 embodied — final arc sequence with low embodiment",
+        "action": "Add VR controls to highest-appearance voiceless artifacts",
+        "dispatch": "ada-code-guide + direct edit"
+      }
+    ],
+    "cooled_items": [
+      "gallery-placed artifact @identity for content sequences (failed in 2026-04-20T09:00 breath — see prop-001)"
+    ]
+  },
+
+  "key_discoveries_this_week": [
+    "Validation scorer bug: check ' 0 FAIL' (leading space) not bare '0 FAIL' — fixed 2026-04-18, resolved 7-breath tooling gap",
+    "Registry scene key: 'scene' not 'scene_path' — workbench uses value.get('scene') only",
+    "High-multiplier @identity pattern: shared ambient artifacts (dark_sphere, etc.) that appear in many maps are the highest-leverage garden targets — 1 @identity block can voice 13+ map appearances simultaneously",
+    "Gallery-placed artifacts don't count toward content sequence garden state — garden_listener --diagnosis groups by map sequence folder",
+    "All 4 release gates passing for first time in project history"
+  ],
+
+  "recommendations_for_next_week": [
+    "Apply prop-001 fix to ada-breather before next garden identity breath",
+    "Human VR sessions needed to advance 18/19 sequences from stage 6 → stage 7",
+    "Focus AI effort on garden health — voice coverage currently 36%, target 50%+ for thesis readiness",
+    "Grade B/C map audits could improve map quality scores without VR dependency",
+    "resourcemanagement sequence creation: low-hanging fruit to eliminate the 50° empty-sequence heat"
+  ]
+}

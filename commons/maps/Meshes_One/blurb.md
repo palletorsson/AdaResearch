@@ -1,0 +1,1 @@
+Vertices, edges, faces. The mesh is a surface built from triangles — positions in space, connected into topology. Every 3D model you've ever seen is a mesh. Smooth appearances hide faceted reality. The mesh is the lie that looks like truth.

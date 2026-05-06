@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/axis_translation_cube/axis_translation_cube.gd" id="1_script"]
+
+[node name="YTranslationCube" type="Node3D"]
+script = ExtResource("1_script")
+axis = 1
+cube_color = Color(0.3, 0.8, 0.4, 1)

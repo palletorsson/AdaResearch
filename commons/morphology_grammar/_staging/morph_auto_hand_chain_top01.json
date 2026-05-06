@@ -1,0 +1,72 @@
+{
+  "id": "morph_auto_hand_chain_top01",
+  "family": "hand_chain",
+  "notes": "Auto-researched hand-chain variant: 30 finger bases extended into 50 smaller phalange tips.",
+  "camera_yaw": 0.822,
+  "camera_pitch": 0.332,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.418,
+      0.214,
+      0.647
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "palm_to_fingers_chain",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "finger_array",
+      "params": {
+        "count": 4,
+        "length": 0.584,
+        "fill": 0.939,
+        "thickness_scale": 1.0
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.68
+    },
+    {
+      "id": "finger_to_phalange",
+      "when": {
+        "role": "trunk",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.28
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.272,
+        "scale": 0.829
+      },
+      "child_role": "tip",
+      "budget_factor": 0.36
+    },
+    {
+      "id": "palm_to_wrist_chain",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "back",
+      "op": "extrude",
+      "params": {
+        "length": 0.28,
+        "scale": 0.442
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

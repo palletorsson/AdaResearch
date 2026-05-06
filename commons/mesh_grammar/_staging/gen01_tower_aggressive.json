@@ -1,0 +1,24 @@
+{
+  "id": "gen01_tower_aggressive",
+  "notes": "Tower with aggressive scale taper \u2014 pyramid-like.",
+  "seed": "cube",
+  "seed_scale": 0.7,
+  "generations": 5,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.12
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.3,
+        "scale": 0.7
+      }
+    }
+  ]
+}

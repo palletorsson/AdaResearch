@@ -1,0 +1,93 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Primitives_Godot",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 9,
+    "d": 5
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.262,
+  "breath_zones": [
+    {
+      "size": 30,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 5
+      },
+      "centroid": [
+        3.7333333333333334,
+        1.9
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 1,
+      "token": "sphere_low"
+    },
+    {
+      "x": 1,
+      "z": 1,
+      "token": "sphere_mid"
+    },
+    {
+      "x": 2,
+      "z": 1,
+      "token": "sphere_high"
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "token": "cylinder_low"
+    },
+    {
+      "x": 5,
+      "z": 1,
+      "token": "cylinder_mid"
+    },
+    {
+      "x": 7,
+      "z": 1,
+      "token": "torus_low"
+    },
+    {
+      "x": 0,
+      "z": 3,
+      "token": "sphere"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "cylinder"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "capsule"
+    },
+    {
+      "x": 6,
+      "z": 3,
+      "token": "torus"
+    },
+    {
+      "x": 8,
+      "z": 3,
+      "token": "cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 42,
+    "breath_zone_count": 1,
+    "unique_tokens": 11
+  }
+}

@@ -1,0 +1,92 @@
+{
+	"sequences": {
+		"grammar_systems": {
+			"name": "Grammar Systems: Rules Generate Structure",
+			"truth": "A handful of rules, iterated, becomes a forest. Grammars are the DNA of procedural generation.",
+			"qfep_term": "Fâ†’E(S)â†’F",
+			"qfep_connection": "Grammars are pure F (deterministic rules) that generate E(S) (structural variety). Stochastic grammars add controlled entropy. L-systems are morphogenesis made computational.",
+			"formula": "axiom + rules + iterations â†’ structure",
+			"description": "Formal grammars as generative systems. Markov chains predict from history, N-grams capture local patterns, L-systems grow plants and cities. Context-free, context-sensitive, stochasticâ€”different rule types for different generations.",
+			"layer": "systems",
+			"prerequisites": [
+				"primitives",
+				"randomness"
+			],
+			"unlocks": [
+				"lsystems",
+				"machinelearning"
+			],
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Formal grammars: rules that rewrite symbols",
+				"Markov chains: probability from history",
+				"N-grams: local context patterns",
+				"L-systems basics: turtle graphics, branching",
+				"Stochastic grammars: controlled randomness",
+				"Applications: text, music, architecture, plants"
+			],
+			"maps": [
+				"ProceduralGeneration_Markov_Chains",
+				"ProceduralGeneration_N_grams",
+				"Voxel_Grammar"
+			],
+			"algorithm_paths": {
+				"markov": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains/",
+				"markov_tree": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains_tree/",
+				"lsystem": "res://algorithms/l_systems/"
+			},
+			"related_sequences": [
+				"lsystems"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_grammar_systems",
+			"completion_rewards": [
+				"grammar_badge",
+				"generative_rules_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "ProceduralGeneration_Markov_Chains",
+					"position": "intro",
+					"artifacts": [
+						"clipboard",
+						"markov_chains",
+						"markov_chains_tree"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Markov chains as generative grammar: transition probabilities predict next states from history. Clipboard logs the chain, tree variant shows branching probability paths."
+				},
+				{
+					"map": "ProceduralGeneration_N_grams",
+					"position": "exploration",
+					"artifacts": [
+						"markov_chains"
+					],
+					"size_budget": "world_scale",
+					"rationale": "N-grams as local context windows: same Markov chain artifact reconfigured for N-gram analysis. Character and word-level pattern capture — the statistical foundation of language models."
+				},
+				{
+					"map": "Voxel_Grammar",
+					"position": "synthesis",
+					"artifacts": [
+						"CityGenerator",
+						"ContextSensitiveTree",
+						"VoxelNoiseROIs",
+						"cellular_automata_3d_tree",
+						"voxelnoise"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Voxel grammar synthesis: city generator and context-sensitive tree from L-systems, 3D cellular automata tree, voxel noise and ROI volumes. Five artifacts showing grammars building worlds from rules."
+				}
+			],
+			"content": [
+				"ProceduralGeneration_Markov_Chains: Probability Walks",
+				"ProceduralGeneration_N_grams: Windows of Context",
+				"Voxel_Grammar: Rules Build Worlds"
+			]
+		}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
+}

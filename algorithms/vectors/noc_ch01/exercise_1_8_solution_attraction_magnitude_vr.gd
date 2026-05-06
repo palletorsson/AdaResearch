@@ -1,15 +1,27 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 1.8: Exercise 1.8: Attraction Magnitude
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing -> GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
+#
+# @identity
+# essence: F = strength * dir / r^2. Inverse-square attraction. Closer = stronger. Orbit emerges from falling and missing.
+# desire: To let the learner grab the attractor in VR and drag it — watching the orbiting ball reshape its path in real time.
+# critical_parameter: attraction_strength — controls the force constant. Too weak → ball escapes. Too strong → ball spirals inward. The sweet spot produces stable orbits.
+# triggers: VR grab attractor sphere → ball orbit changes shape, strength slider → orbits tighten or loosen, velocity clamped at 0.15 to prevent escape
+# emerges: Elliptical orbits from the interplay of tangential velocity and radial attraction. Moving the attractor mid-orbit creates chaotic transitions between orbit shapes.
+# needs: VR grabbable attractor [has], strength parameter controller [has], force line visualization [has]. Missing: trail showing orbit history.
+# relationships: Extends bouncing_ball (adds attraction). Feeds into three_body_problem and nbody_simulation (many attractors). Gateway to gravitational dynamics.
+# truth: An orbit is a perpetual fall that always misses the ground. Attraction creates structure from nothing but distance and direction.
 
+class_name AttractionMagnitudeVR
 extends Node3D
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
+const GRAB_SPHERE_SCENE := preload("res://commons/primitives/math_gallery/GrabSphere.tscn")
 const MAT_BALL := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 const MAT_ATTRACTOR := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_accent.tres")
 const MAT_LINE := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_secondary.tres")
@@ -18,13 +30,17 @@ const MAT_LINE := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_
 
 var _sim_root: Node3D
 var _ball: MeshInstance3D
-var _attractor: MeshInstance3D
+var _attractor_grab: Node3D  # GrabSphere for VR interaction
 var _position: Vector3 = Vector3(-0.3, 0.7, 0.2)
 var _velocity: Vector3 = Vector3(0.05, 0, 0.03)
 var _attractor_position: Vector3 = Vector3(0, 0.5, 0)
 var _ball_radius: float = 0.03
 var _line_mesh: ImmediateMesh
 var _line_instance: MeshInstance3D
+var _trail_mesh: ImmediateMesh
+var _trail_instance: MeshInstance3D
+var _trail_points: Array[Vector3] = []
+var _max_trail_length: int = 300
 var _status_label: Label3D
 var _controller_root: Node3D
 
@@ -71,14 +87,13 @@ func _spawn_objects() -> void:
 	_ball.material_override = MAT_BALL
 	_sim_root.add_child(_ball)
 
-	_attractor = MeshInstance3D.new()
-	var attractor_sphere := SphereMesh.new()
-	attractor_sphere.radius = 0.04
-	attractor_sphere.height = 0.08
-	_attractor.mesh = attractor_sphere
-	_attractor.material_override = MAT_ATTRACTOR
-	_attractor.position = _attractor_position
-	_sim_root.add_child(_attractor)
+	# Grabbable attractor sphere — move it in VR to redirect the orbiting ball
+	_attractor_grab = GRAB_SPHERE_SCENE.instantiate()
+	_attractor_grab.base_color = Color(1.0, 0.4, 0.7)
+	_attractor_grab.object_scale = 0.08
+	_attractor_grab.snap_to_shelf = false
+	_attractor_grab.position = _attractor_position
+	_sim_root.add_child(_attractor_grab)
 
 func _setup_line() -> void:
 	_line_mesh = ImmediateMesh.new()
@@ -87,7 +102,22 @@ func _setup_line() -> void:
 	_line_instance.material_override = MAT_LINE
 	_sim_root.add_child(_line_instance)
 
-func _process(delta: float) -> void:
+	# Orbit trail — shows the path history
+	_trail_mesh = ImmediateMesh.new()
+	_trail_instance = MeshInstance3D.new()
+	_trail_instance.mesh = _trail_mesh
+	var trail_mat := StandardMaterial3D.new()
+	trail_mat.albedo_color = Color(1.0, 0.4, 0.7, 0.35)
+	trail_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	trail_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_trail_instance.material_override = trail_mat
+	_sim_root.add_child(_trail_instance)
+
+func _process(_delta: float) -> void:
+	# Track attractor position from the grabbable sphere (local to sim_root)
+	if _attractor_grab:
+		_attractor_position = _attractor_grab.position
+
 	var to_attractor := _attractor_position - _position
 	var distance := to_attractor.length()
 
@@ -106,4 +136,24 @@ func _process(delta: float) -> void:
 	_line_mesh.surface_add_vertex(_attractor_position)
 	_line_mesh.surface_end()
 
+	# Orbit trail
+	_trail_points.append(_position)
+	if _trail_points.size() > _max_trail_length:
+		_trail_points.remove_at(0)
+	_trail_mesh.clear_surfaces()
+	if _trail_points.size() >= 2:
+		_trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		for p in _trail_points:
+			_trail_mesh.surface_add_vertex(p)
+		_trail_mesh.surface_end()
+
 	_status_label.text = "Attraction | dist: %.3f, force: %.4f" % [distance, force.length()]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

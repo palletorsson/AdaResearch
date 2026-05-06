@@ -1,0 +1,55 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "LSystems_Competition",
+  "home_sequence": "lsystems",
+  "dimensions": {
+    "w": 8,
+    "d": 10
+  },
+  "signature": "ForestCompetition simulates multiple L-Systems competing for light and soil in shared space; branching_coral demonstrates marine branching competition under flow dynamics; dark_sphere anchors the research environment.",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.039,
+  "breath_zones": [
+    {
+      "size": 74,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.472972972972973,
+        4.486486486486487
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "ForestCompetition"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "branching_coral"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 77,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

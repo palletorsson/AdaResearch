@@ -1,0 +1,192 @@
+{
+  "version": "1.0",
+  "discoveries": [
+    {
+      "timestamp": "2026-03-29T08:15:52.982449+00:00",
+      "topic": "LOD system",
+      "insight": "Built 3-tool LOD onboarding: generator, query, session writer. Tree has 55 sequences, 498 maps, 1670 artifacts.",
+      "lod": 0
+    },
+    {
+      "timestamp": "2026-03-29T21:15:51.391176+00:00",
+      "topic": "map_building",
+      "insight": "Maps are narrative spaces: entry(spawn+context) → teaching(main artifact) → exploration(related artifacts) → reflection(text+darkness) → exit(teleporter). Artifact params: name:rotation:y_offset. Structure 0=void 1=floor 2+=wall. Utilities: sp/t/ds/r/m:x:y:z:delay/an:angle/sub:scene/3t:text. The Map Studio at /map-studio understands all 3 layers.",
+      "lod": 2,
+      "tags": [
+        "map",
+        "building",
+        "narrative",
+        "structure",
+        "utilities",
+        "interactables"
+      ]
+    },
+    {
+      "timestamp": "2026-03-29T21:16:06.034423+00:00",
+      "topic": "map_building",
+      "insight": "Maps are narrative spaces with 5 phases. Structure 0=void 1=floor 2+=wall. Artifact params name:rotation:y_offset. Map Studio at /map-studio.",
+      "lod": 2,
+      "tags": [
+        "map",
+        "building",
+        "narrative"
+      ]
+    },
+    {
+      "timestamp": "2026-03-29T21:55:39.531462+00:00",
+      "topic": "primitives_maps_study",
+      "insight": "All 11 primitives maps studied. Design language: 7 wide, 10-35 deep. Spawn at (0,0), facing set at (0,6). Dark sphere at center. Teleporter on void. Text at bottom. Walls (S=2) used as artifact pedestals not rooms. Grouping via #fillhole. Average 8-13 placed items per map.",
+      "lod": 2,
+      "tags": [
+        "map",
+        "primitives",
+        "design",
+        "study"
+      ]
+    },
+    {
+      "timestamp": "2026-04-11T08:34:39.273912+00:00",
+      "topic": "pipeline_scorer_validation_timeout",
+      "insight": "Pipeline scorer validation stage runs pathfinder with 10s subprocess timeout per map. Maps pass individually but batch scoring reports 0% because cumulative processing exceeds limits. Fix: increase timeout or cache validation results.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-12T07:13:51.536145+00:00",
+      "topic": "registry_repair",
+      "insight": "When pipeline scorer reports 99% artifacts, exactly 1 artifact token in map_data.json (layers.interactables) is missing from all registries. Fix: cross-reference tokens against load_all_registry_scenes(). 3 repairs advanced 2 sequences from stage 3 to stage 5.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-14T05:39:27.631743+00:00",
+      "topic": "registry_repair",
+      "insight": "Two registry files (qfep.json, transforms.json) had _comment_* string values in artifacts dict causing 'str object has no attribute get' — entire files silently skipped by pipeline scorer. Fix: remove comment keys. This pattern may exist in other registry files.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-14T05:39:27.727898+00:00",
+      "topic": "registry_repair",
+      "insight": "Wrong res:// paths are common: array vs arrays directory, recursiveemergence vs fractals directory, light vs postprocessing directory. When scorer shows 95-99% artifacts, check disk paths against registry scene values.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-14T05:39:27.837962+00:00",
+      "topic": "registry_repair",
+      "insight": "tt (tutorial text) and 3t (word_is text display) are grid utilities placed in interactables layer. Registering them with their scene files allows pipeline scorer to count them as present. Add to commons_artifacts.json.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-15T07:17:15.112352+00:00",
+      "topic": "map_data_format",
+      "insight": "Old flat format (name/gridWidth/structure at top level) fails validate_map.py has_required_fields check. New format requires map_info + layers wrapper. Convert by wrapping existing data.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-15T07:17:15.223717+00:00",
+      "topic": "release_gates",
+      "insight": "Grade-F maps come from JSON validity failures OR missing has_required_fields (map_info + layers). Gate C (Map Validation) now passes at grade_F=0. Gate B still fails on 55 unresolved scene files.",
+      "lod": 2
+    },
+    {
+      "timestamp": "2026-04-16T07:10:26.462992+00:00",
+      "topic": "registry_repair",
+      "insight": "scene_path key vs scene key mismatch: workbench reads value.get('scene') but some entries were written with 'scene_path' key. Fix: add 'scene' key = scene_path value. Affects physics_simulation.json and procgen_extra.json.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-17T07:12:43.802508+00:00",
+      "topic": "artifact_lookup_patterns",
+      "insight": "laser_sward in Point_Lines was a typo for laser_sword. Pattern: when scorer shows 99% artifacts, check for misspellings in map_data.json interactables — the scorer does exact string matching against registry keys.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-17T07:12:46.219054+00:00",
+      "topic": "registry_alias_pattern",
+      "insight": "When an artifact file is named X but the registry entry is named X_algorithm, maps that use X as the lookup will score as missing. Fix by adding a registry alias entry X pointing to the same scene as X_algorithm. topological_sort vs topological_sort_algorithm was this pattern in graphtheory.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-18T08:48:50.963618+00:00",
+      "topic": "pipeline_scoring",
+      "insight": "Validation scorer had 'FAIL not in text' bug — pathfinder always outputs '0 FAIL' so all maps failed. Fix: check ' 0 FAIL' in result_text. All 19 sequences advanced stage 5→6.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-18T08:48:51.083406+00:00",
+      "topic": "release_gates",
+      "insight": "All 4 gates pass for first time. Gate B: 55 tscn stubs in commons/artifacts/. Gate A: map_has_data() now strips ': Display Title' colon suffix before folder lookup.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-19T10:09:52.192680+00:00",
+      "topic": "garden_identity_leverage",
+      "insight": "Dark_sphere and shared commons artifacts multiply garden health: voicing 1 .gd file voices it N times (once per map it appears in). Focus @identity work on artifacts used across many maps for max garden coverage.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-19T10:09:52.298121+00:00",
+      "topic": "primitives_garden_threshold",
+      "insight": "Primitives garden state: SCATTERED->GROWING at 70% voiced threshold. 64/91 artifacts voiced after adding @identity to 9 files. Next: add @identity to grab_octahedron, laser_measure, triangle, vectorline to push toward LIVING.",
+      "lod": 2
+    },
+    {
+      "timestamp": "2026-04-20T07:14:43.143039+00:00",
+      "topic": "garden_identity_leverage",
+      "insight": "garden_listener --diagnosis groups artifacts by MAP sequence not artifact registry category. Gallery maps count toward 'gallery' sequence, not machinelearning/swarmintelligence. To advance ML/swarm sequences: place voiced artifacts in sequence maps or create missing .gd files.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-21T07:17:01.899891+00:00",
+      "topic": "garden_identity_leverage",
+      "insight": "floor_plan_space is a cross-sequence ultra-high-leverage artifact — one @identity voiced it 28+ times across patterngeneration AND mosaicanalysis simultaneously. Infrastructure artifacts serving as spatial containers for multiple maps have far higher leverage than algorithm-specific artifacts.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-22T07:16:00.196075+00:00",
+      "topic": "garden_listener_cache",
+      "insight": "PascalCase .gd filenames produce cache keys without the underscores between words (NeuralNetworks_VR -> neuralnetworksvr not neural_networks_vr). Fix: normalize both cache key and lookup by stripping underscores as fallback. Revealed 98 previously-invisible voiced artifacts across machinelearning, cellularautomata, grammar_systems, proceduralaudio, spatial_partitioning.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-23T07:26:22.309766+00:00",
+      "topic": "garden identity",
+      "insight": "garden_listener --silent distinguishes 'no @identity' (has .gd file, actionable) vs 'no .gd file' (no file, blocked). Run --silent first to scope what's actually actionable before planning identity work.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-23T07:26:35.423937+00:00",
+      "topic": "duplicate artifact files",
+      "insight": "branching_growth_algorithm exists in two dirs (branchinggrowthalgorithm/ and branchinggrowthalgorithmcontinued/). garden_listener cache last-write-wins — the latter file shadows the former. Always check for duplicate .gd filenames when a file has @identity but garden still shows it as voiceless.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-28T07:13:15.766769+00:00",
+      "topic": "garden_embodiment_cache_cascade",
+      "insight": "Voicing artifacts with 'apply_grid_config [has]' in @identity 'needs' field reveals previously-invisible embodied artifacts. Forces sequence jumped from 0 to 68 embodied after voicing 14 artifacts that declared apply_grid_config — the embodiment was already there in code, just not declared in @identity. Pattern: SCATTERED sequences with low embodiment may actually be heavily embodied but voiceless. Voice + declare to surface existing work.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-30T05:30:16.778824+00:00",
+      "topic": "pipeline_scorer_token_parsing",
+      "insight": "Pipeline scorer's artifact stage parses cell tokens as cell.split(':')[0] - so map_data references like 'mc:sphere:0:1:0.04' parse to bare 'mc' (unregistered) rather than 'mc:sphere'. Colon-prefixed namespace tokens cannot be saved by adding a registry alias; they must be renamed to use underscores in the map_data. Found in ISO_ShapesGallery during the 2026-04-30 breath.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-03T06:48:32.860062+00:00",
+      "topic": "pipeline_scorer empty sequence schema",
+      "insight": "score_sequence early-return on empty maps left stages 2-7 unpopulated, crashing main() display loop with KeyError. Fix: when maps==[] populate all 7 stage keys with done=0 total=0 pct=0 before return. Schema invariant matters for downstream JSON consumers too.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-03T06:48:32.989986+00:00",
+      "topic": "tscn uid path drift",
+      "insight": "branchinggrowthalgorithmcontinued/.tscn had a stale path (missing growth_systems/) AND a uid pointing to the OTHER folder's script — Godot resolved by uid and silently loaded the wrong .gd. Pattern: when two files share a name across folders, check that each .tscn references its sibling's uid not the other folder's. Two distinct symbols (uid + path) must agree.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-03T17:07:58.501423+00:00",
+      "topic": "catalyst_foe_system",
+      "insight": "Unified enemy: vent emits cube foes; catalyst projectile flips them to friend; friend converts peers. 4 kinds (goo/transport/swarm/drainfriend) dispatch on projectile mode_id. Editor /editor + VR commons/hazards/catalyst_foe/. 10 test maps Catalyst_01..10 chained. Save through /api/voxel-editor for compact-rows JSON.",
+      "lod": 2
+    }
+  ]
+}

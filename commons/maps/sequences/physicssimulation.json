@@ -1,0 +1,315 @@
+{
+	"sequences": {
+		"physicssimulation": {
+			"name": "Physics Simulation: The Engine Behind Reality",
+			"truth": "Reality is continuous. Simulation is discrete. The art of physics simulation is making the discrete feel continuous â€” and knowing where the illusion breaks.",
+			"qfep_term": "dynamics",
+			"qfep_connection": "Physics simulation is the computational engine of emergence (Ï†). Forces (F) create order, entropy (E) dissolves it, and the simulation timestep (dt) is the hidden Î» â€” the parameter that determines whether the system behaves or explodes. Numerical stability is the edge of chaos.",
+			"formula": "x(t+dt) = 2x(t) - x(t-dt) + a(t)Â·dtÂ²",
+			"demonstration": "Feel Newton's laws pull you. Watch rigid bodies collide and scatter. Stretch springs until they oscillate. See force fields push particles into orbits. Pour fluid into a simulated world.",
+			"description": "From F=ma to fluid dynamics. Five maps covering the full stack of physics simulation: the mathematical foundations (integration methods), rigid body dynamics (collisions and constraints), elastic systems (springs and cloth), force fields (particles and n-body), and continuous matter (fluids and soft bodies). Each map adds a layer of complexity â€” and a new way the simulation can break.",
+			"layer": "dynamics",
+			"prerequisites": [
+				"forces"
+			],
+			"unlocks": [
+				"softbodies",
+				"swarmintelligence"
+			],
+			"ambient_preset": "ambient_drone",
+			"difficulty": "advanced",
+			"estimated_time": "40-50 minutes",
+			"learning_objectives": [
+				"Numerical integration: Euler, Verlet, RK4 â€” and why the method matters",
+				"Rigid body dynamics: rotation, angular momentum, inertia tensors",
+				"Collision detection: broad phase (spatial hashing) and narrow phase (GJK/SAT)",
+				"Constraints: joints, hinges, and how physics engines solve them",
+				"Spring-mass systems: Hooke's law, damping, and emergent cloth behavior",
+				"Force fields and vector fields: invisible forces made visible",
+				"N-body simulation: gravitational democracy and the three-body problem",
+				"SPH fluid simulation: discretizing continuous matter into particles",
+				"Finite Element Method: engineering simulation for deformable bodies",
+				"Soft body physics: the compromise between rigid and fluid"
+			],
+			"content": [
+				"PhysicsSim_Foundations: Discretizing Reality — Newton’s laws → numerical integration → Verlet. The math that makes simulation possible.",
+				"PhysicsSim_Bodies: Rigid Bodies and Contact — Rigid bodies → collision detection → constraints → bouncing ball. Solid things interacting.",
+				"PhysicsSim_Springs: Elasticity and Memory — Mass-spring-damper → spring networks → cloth. Elastic connections and emergent softness.",
+				"PhysicsSim_Fields: Invisible Architecture — Force fields → vector fields → particles → n-body → three-body problem. Invisible forces, visible chaos.",
+				"PhysicsSim_Continuum: Continuous Matter — Fluid (SPH) → FEM → soft bodies → magnetic fields → kinetic sculpture. Continuous matter, discrete approximation.",
+				"PhysicsSimulation_Bouncing_Ball_Physics: Bouncing Ball",
+				"PhysicsSimulation_Cloth_Simulation: Cloth Simulation",
+				"PhysicsSimulation_Collision_Detection: Collision Detection",
+				"PhysicsSimulation_Constraints: Constraints",
+				"PhysicsSimulation_Finite_Element_Method_FEM: Finite Elements",
+				"PhysicsSimulation_Fluid_Simulation_SPH: Fluid Simulation",
+				"PhysicsSimulation_Force_Fields: Force Fields",
+				"PhysicsSimulation_Mass_Spring_Damper: Mass-Spring-Damper",
+				"PhysicsSimulation_Newton_s_Laws: Newton’s Laws",
+				"PhysicsSimulation_Numerical_Integration: Numerical Integration",
+				"PhysicsSimulation_Particle_Systems: Particle Systems",
+				"PhysicsSimulation_Rigid_Body_Dynamics: Rigid Body Dynamics",
+				"PhysicsSimulation_Spring_Mass_Systems: Spring-Mass Networks",
+				"PhysicsSimulation_Three_Body_Problem: Three-Body Problem",
+				"PhysicsSimulation_Vector_Fields: Vector Fields",
+				"PhysicsSimulation_Verlet_Integration: Verlet Integration"
+			],
+			"maps": [
+				"PhysicsSim_Foundations",
+				"PhysicsSim_Bodies",
+				"PhysicsSim_Springs",
+				"PhysicsSim_Fields",
+				"PhysicsSim_Continuum",
+				"PhysicsSimulation_Bouncing_Ball_Physics",
+				"PhysicsSimulation_Cloth_Simulation",
+				"PhysicsSimulation_Collision_Detection",
+				"PhysicsSimulation_Constraints",
+				"PhysicsSimulation_Finite_Element_Method_FEM",
+				"PhysicsSimulation_Fluid_Simulation_SPH",
+				"PhysicsSimulation_Force_Fields",
+				"PhysicsSimulation_Mass_Spring_Damper",
+				"PhysicsSimulation_Newton_s_Laws",
+				"PhysicsSimulation_Numerical_Integration",
+				"PhysicsSimulation_Particle_Systems",
+				"PhysicsSimulation_Rigid_Body_Dynamics",
+				"PhysicsSimulation_Spring_Mass_Systems",
+				"PhysicsSimulation_Three_Body_Problem",
+				"PhysicsSimulation_Vector_Fields",
+				"PhysicsSimulation_Verlet_Integration"
+			],
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/newtons_laws.md"
+			],
+			"algorithm_paths": {
+				"PhysicsSim_Foundations": "res://algorithms/physicssimulation/newtonslaws/",
+				"PhysicsSim_Bodies": "res://algorithms/physicssimulation/rigidbody/",
+				"PhysicsSim_Springs": "res://algorithms/physicssimulation/springmass/",
+				"PhysicsSim_Fields": "res://algorithms/physicssimulation/forcefields/",
+				"PhysicsSim_Continuum": "res://algorithms/physicssimulation/fluidsimulation/"
+			},
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_physicssimulation",
+			"unlock_requirements": [
+				"forces"
+			],
+			"completion_rewards": [
+				"physics_engine_badge",
+				"numerical_methods_badge",
+				"simulation_master_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "PhysicsSim_Foundations",
+					"position": "intro",
+					"artifacts": [
+						"newtons_laws",
+						"numerical_integration",
+						"verlet_integration",
+						"simulation_instability"
+					],
+					"size_budget": "environment",
+					"rationale": "Newton's laws launch the pipeline: force produces acceleration, integration methods (Euler vs Verlet) translate continuous math into discrete timesteps. The foundation of every physics engine. Simulation instability completes the picture — watch what happens when dt grows too large."
+				},
+				{
+					"map": "PhysicsSim_Bodies",
+					"position": "intro",
+					"artifacts": [
+						"bouncing_ball",
+						"collision_detection",
+						"constraints",
+						"rigid_body"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Solid objects meeting: rigid body rotation and angular momentum, collision detection (broad/narrow phase), constraints limiting freedom, bouncing ball as simplest negotiation between velocity and restitution."
+				},
+				{
+					"map": "PhysicsSim_Springs",
+					"position": "intro",
+					"artifacts": [
+						"cloth_simulation",
+						"mass_spring_damper",
+						"spring_mass_system",
+						"spring_system"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Hooke's law scaled up: single spring-damper oscillation, spring-mass lattices propagating waves, cloth emerging from many springs solving equilibrium collectively."
+				},
+				{
+					"map": "PhysicsSim_Fields",
+					"position": "intro",
+					"artifacts": [
+						"force_fields",
+						"nbody_simulation",
+						"particle_systems",
+						"three_body_problem",
+						"vector_fields"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Invisible architecture: force fields and vector fields directing particles, n-body gravitational democracy, three-body chaos where determinism meets unpredictability."
+				},
+				{
+					"map": "PhysicsSim_Continuum",
+					"position": "foundation",
+					"artifacts": [
+						"fem_simulation",
+						"fluid_simulation",
+						"magnetic_simulation",
+						"soft_bodies",
+						"surreal_kinetic_sculpture"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Continuous matter discretized: SPH fluid particles, FEM stress-strain, soft body deformation, magnetic fields, and kinetic sculpture where physics becomes art."
+				},
+				{
+					"map": "PhysicsSimulation_Bouncing_Ball_Physics",
+					"position": "foundation",
+					"artifacts": [
+						"bouncing_ball"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Coefficient of restitution in action: elastic vs inelastic collisions, energy loss per bounce. Every bounce negotiates between velocity and entropy."
+				},
+				{
+					"map": "PhysicsSimulation_Cloth_Simulation",
+					"position": "foundation",
+					"artifacts": [
+						"cloth_simulation"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Spring-mass lattice at scale: thousands of Hooke's law connections draping, tearing, settling. Cloth thinks with its whole body — no vertex knows the shape."
+				},
+				{
+					"map": "PhysicsSimulation_Collision_Detection",
+					"position": "foundation",
+					"artifacts": [
+						"collision_detection"
+					],
+					"size_budget": "environment",
+					"rationale": "Broad phase meets narrow phase: spatial hashing eliminates distant pairs, GJK/SAT resolve overlaps. Split arena mirrors the two-stage detection pipeline."
+				},
+				{
+					"map": "PhysicsSimulation_Constraints",
+					"position": "exploration",
+					"artifacts": [
+						"constraints"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Joints, hinges, degrees of freedom: the constraint solver reduces motion to what's permitted. Scaffold room with ramps embodies structured limitation."
+				},
+				{
+					"map": "PhysicsSimulation_Finite_Element_Method_FEM",
+					"position": "exploration",
+					"artifacts": [
+						"fem_simulation"
+					],
+					"size_budget": "environment",
+					"rationale": "Discretization as engineering truth: finite basis functions approximate continuous stress-strain. Laboratory setting matches the analytical precision of FEM."
+				},
+				{
+					"map": "PhysicsSimulation_Fluid_Simulation_SPH",
+					"position": "exploration",
+					"artifacts": [
+						"lattice_gas_automata",
+						"fluid_simulation"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Two approaches to fluid: lattice gas automata (discrete collision rules on a grid) and SPH (smoothed particle hydrodynamics). Different discretizations of the same continuous truth."
+				},
+				{
+					"map": "PhysicsSimulation_Force_Fields",
+					"position": "exploration",
+					"artifacts": [
+						"force_fields"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Force as spatial function: radial room descends toward center source. Particles read invisible gradient — divergence, convergence, and vortex made walkable."
+				},
+				{
+					"map": "PhysicsSimulation_Mass_Spring_Damper",
+					"position": "exploration",
+					"artifacts": [
+						"mass_spring_damper"
+					],
+					"size_budget": "environment",
+					"rationale": "Oscillation dissected: underdamped rings, overdamped creeps, critically damped settles fastest. Corridor with spring-mounted platforms embodies the damping ratio."
+				},
+				{
+					"map": "PhysicsSimulation_Newton_s_Laws",
+					"position": "integration",
+					"artifacts": [
+						"newtons_laws"
+					],
+					"size_budget": "environment",
+					"rationale": "Three laws, one arena: inertia resists, F=ma accelerates, action-reaction pairs. The simplest rules constraining everything physics simulation builds upon."
+				},
+				{
+					"map": "PhysicsSimulation_Numerical_Integration",
+					"position": "integration",
+					"artifacts": [
+						"numerical_integration"
+					],
+					"size_budget": "environment",
+					"rationale": "Stepped ascending room as accumulated area: Euler's first-order error, Verlet's time-reversible elegance, RK4's precision. The timestep method determines whether simulation behaves or explodes."
+				},
+				{
+					"map": "PhysicsSimulation_Particle_Systems",
+					"position": "integration",
+					"artifacts": [
+						"particle_systems"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Particle emitters, life cycles, and collective behavior from simple birth-death rules. Many particles, one system."
+				},
+				{
+					"map": "PhysicsSimulation_Rigid_Body_Dynamics",
+					"position": "integration",
+					"artifacts": [
+						"rigid_body"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Inertia tensor and angular momentum: obstacle course where rigid bodies tumble, spin, and conserve rotational energy. Geometry determines resistance to rotation."
+				},
+				{
+					"map": "PhysicsSimulation_Spring_Mass_Systems",
+					"position": "integration",
+					"artifacts": [
+						"spring_mass_system"
+					],
+					"size_budget": "mixed",
+					"rationale": "Suspended walkway as spring-mass bridge: local springs propagating waves globally. The discrete secret of continuous matter — vibration traveling through connected nodes."
+				},
+				{
+					"map": "PhysicsSimulation_Three_Body_Problem",
+					"position": "synthesis",
+					"artifacts": [
+						"three_body_problem"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Poincaré’s impossibility: three gravitational bodies with no closed-form solution. Deterministic chaos — predictable rules, unpredictable outcomes."
+				},
+				{
+					"map": "PhysicsSimulation_Vector_Fields",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"vector_fields"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Space as instruction set: vector field arrows direct particles through sources, sinks, and vortices. Dark sphere anchors the visual field; streamlines reveal invisible architecture."
+				},
+				{
+					"map": "PhysicsSimulation_Verlet_Integration",
+					"position": "synthesis",
+					"artifacts": [
+						"verlet_integration"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Verlet's elegance isolated: position-based integration that is time-reversible, energy-conserving, and stable. The method that makes cloth and molecular dynamics possible."
+				}
+			]
+		}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
+}

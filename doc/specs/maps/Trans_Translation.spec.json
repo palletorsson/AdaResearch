@@ -1,0 +1,86 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Trans_Translation",
+  "home_sequence": "transformation",
+  "dimensions": {
+    "w": 7,
+    "d": 24
+  },
+  "signature": "translation_cube_demo",
+  "style": null,
+  "echoes": [],
+  "density": 0.063,
+  "breath_zones": [
+    {
+      "size": 76,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 17
+      },
+      "centroid": [
+        3.0,
+        8.276315789473685
+      ]
+    },
+    {
+      "size": 25,
+      "bounds": {
+        "x": 0,
+        "z": 19,
+        "w": 7,
+        "d": 5
+      },
+      "centroid": [
+        3.48,
+        20.76
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "player_trace"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 3,
+      "z": 10,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 2,
+      "z": 19,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 2,
+      "z": 20,
+      "token": "pick_up_cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 111,
+    "breath_zone_count": 2,
+    "unique_tokens": 3
+  }
+}

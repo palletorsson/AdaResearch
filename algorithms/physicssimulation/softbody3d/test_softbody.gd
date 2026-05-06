@@ -4,7 +4,7 @@ class_name SoftBodyTest
 # Simple test script to validate soft body functionality
 @onready var scene_controller = $SoftBodyVariationsScene
 
-func _ready():
+func _ready() -> void:
 	print("🧪 SoftBody3D Test Starting...")
 	
 	# Wait a moment for scene to initialize
@@ -12,7 +12,7 @@ func _ready():
 	
 	_run_basic_tests()
 
-func _run_basic_tests():
+func _run_basic_tests() -> void:
 	print("🔍 Running Basic Tests...")
 	
 	# Test 1: Check if scene controller exists
@@ -42,13 +42,13 @@ func _run_basic_tests():
 	
 	print("🏁 Basic tests completed!")
 
-func _test_physics_interactions():
+func _test_physics_interactions() -> void:
 	print("💨 Testing Wind Zone...")
 	
 	# Get sphere soft body and apply impulse
 	var sphere_body = scene_controller.get_soft_body_by_type("sphere")
 	if sphere_body:
-		sphere_body.apply_impulse(Vector3(5.0, 3.0, 0.0))
+		sphere_body.apply_external_impulse(Vector3(5.0, 3.0, 0.0))
 		print("✅ Applied impulse to sphere soft body")
 	
 	# Wait and test state changes
@@ -67,7 +67,7 @@ func _test_physics_interactions():
 	
 	print("🎯 All tests completed!")
 
-func _on_test_timer_timeout():
+func _on_test_timer_timeout() -> void:
 	print("⏰ Test timer finished - running final validation...")
 	
 	# Final check - ensure all bodies are still functioning

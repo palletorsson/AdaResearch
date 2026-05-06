@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "auto_xy_xy_freq_cda450",
+    "description": "XY — x:rate y:bias, color #ff8844",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "xy",
+      "label": "RAT/BIA",
+      "color": "#ff8844",
+      "parameter_x": "rate",
+      "parameter_y": "bias"
+    }
+  }
+}

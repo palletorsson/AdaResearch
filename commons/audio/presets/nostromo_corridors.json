@@ -1,0 +1,63 @@
+{
+    "description": "Alien inspired: Wind in vents, mechanical groans, isolation",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+            "volume_db": -12,
+            "bus": "Vents"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+            "volume_db": -20,
+            "bus": "ShipHum"
+        },
+        {
+            "sound_id": "SciFi.space_ambience",
+            "volume_db": -22,
+            "bus": "ShipHum"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+                "techno_noir.mechanical_whir",
+                "SciFi.dystopian_alarm",
+                "techno_noir.static_burst"
+            ],
+            "interval_range": [
+                15.0,
+                40.0
+            ],
+            "volume_range": [
+                -22,
+                -16
+            ],
+            "bus": "Groans"
+        }
+    ],
+    "buses": {
+        "Vents": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "Groans": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.5
+                },
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 600
+                }
+            ]
+        }
+    }
+}

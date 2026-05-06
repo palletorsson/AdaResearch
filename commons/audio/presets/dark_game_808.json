@@ -1,0 +1,51 @@
+{
+    "description": "Dark 808/606 game track atmosphere",
+    "continuous_layers": [
+        {
+            "sound_id": "DarkGameTrack.AMBIENT_DRONE",
+            "volume_db": -12,
+            "bus": "Ambient"
+        },
+        {
+            "sound_id": "DarkGameTrack.DARK_808_SUB_BASS",
+            "volume_db": -15,
+            "bus": "Bass"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "DarkGameTrack.GLITCH_STAB",
+                "DarkGameTrack.BLADE_RUNNER_HIT"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -15,
+                -10
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "Bass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 150
+                }
+            ]
+        }
+    }
+}

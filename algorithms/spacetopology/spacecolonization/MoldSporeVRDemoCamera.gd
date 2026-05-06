@@ -18,7 +18,7 @@ var is_mouse_captured: bool = false
 var zoom_distance: float = 3.0
 var orbit_center: Vector3 = Vector3(0.5, 0.5, 0.5)  # Center of 1x1x1 space
 
-func _ready():
+func _ready() -> void:
 	# Position camera to look at the generation space
 	look_at_generation_space()
 	
@@ -26,7 +26,7 @@ func _ready():
 	print("MoldSporeVRDemo Camera: Right-click to capture/release mouse")
 	print("MoldSporeVRDemo Camera: Mouse wheel to zoom, F to focus on center")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Handle mouse capture toggle
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
@@ -51,10 +51,10 @@ func _input(event):
 			KEY_ESCAPE:
 				release_mouse()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	handle_movement(delta)
 
-func handle_movement(delta):
+func handle_movement(delta) -> void:
 	"""Handle WASD movement"""
 	var input_dir = Vector3()
 	
@@ -80,7 +80,7 @@ func handle_movement(delta):
 		var speed = sprint_speed if Input.is_key_pressed(KEY_CTRL) else movement_speed
 		global_position += input_dir * speed * delta
 
-func handle_mouse_look(mouse_delta):
+func handle_mouse_look(mouse_delta) -> void:
 	"""Handle mouse look rotation"""
 	camera_rotation.x -= mouse_delta.y * mouse_sensitivity
 	camera_rotation.y -= mouse_delta.x * mouse_sensitivity
@@ -93,41 +93,41 @@ func handle_mouse_look(mouse_delta):
 	rotate_object_local(Vector3.UP, camera_rotation.y)
 	rotate_object_local(Vector3.RIGHT, camera_rotation.x)
 
-func toggle_mouse_capture():
+func toggle_mouse_capture() -> void:
 	"""Toggle mouse capture for look controls"""
 	if is_mouse_captured:
 		release_mouse()
 	else:
 		capture_mouse()
 
-func capture_mouse():
+func capture_mouse() -> void:
 	"""Capture mouse for look controls"""
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	is_mouse_captured = true
 	print("MoldSporeVRDemo Camera: Mouse captured - move mouse to look around")
 
-func release_mouse():
+func release_mouse() -> void:
 	"""Release mouse capture"""
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	is_mouse_captured = false
 	print("MoldSporeVRDemo Camera: Mouse released")
 
-func zoom_in():
+func zoom_in() -> void:
 	"""Zoom camera closer to center"""
 	zoom_distance = max(min_zoom_distance, zoom_distance - zoom_speed * 0.1)
 	update_camera_position()
 
-func zoom_out():
+func zoom_out() -> void:
 	"""Zoom camera further from center"""
 	zoom_distance = min(max_zoom_distance, zoom_distance + zoom_speed * 0.1)
 	update_camera_position()
 
-func update_camera_position():
+func update_camera_position() -> void:
 	"""Update camera position based on zoom distance"""
 	var direction = (global_position - orbit_center).normalized()
 	global_position = orbit_center + direction * zoom_distance
 
-func look_at_generation_space():
+func look_at_generation_space() -> void:
 	"""Position camera to look at the 1x1x1 generation space"""
 	global_position = Vector3(2, 1.5, 2)
 	look_at(orbit_center, Vector3.UP)
@@ -137,7 +137,7 @@ func look_at_generation_space():
 	camera_rotation.x = euler.x
 	camera_rotation.y = euler.y
 
-func focus_on_generation_space():
+func focus_on_generation_space() -> void:
 	"""Focus camera on the generation space center"""
 	var tween = create_tween()
 	tween.set_parallel(true)
@@ -152,7 +152,7 @@ func focus_on_generation_space():
 	
 	print("MoldSporeVRDemo Camera: Focusing on generation space")
 
-func smooth_look_at(basis: Basis):
+func smooth_look_at(basis: Basis) -> void:
 	"""Smooth basis interpolation for camera rotation"""
 	transform.basis = basis
 
@@ -164,4 +164,13 @@ func get_camera_info() -> Dictionary:
 		"zoom_distance": zoom_distance,
 		"looking_at": orbit_center,
 		"mouse_captured": is_mouse_captured
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,24 @@
+{
+  "id": "gen00_tower_taper",
+  "notes": "Inset + extrude with scale<1 \u2014 tapering stepped pyramid.",
+  "seed": "cube",
+  "seed_scale": 0.6,
+  "generations": 4,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.15
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.35,
+        "scale": 0.85
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "gg14_burning_ship_forest",
+  "notes": "Burning Ship fractal \u00e2\u20ac\u201d angular antenna-like boundary, produces geometric forest silhouettes.",
+  "seed": {
+    "scatter": {
+      "count": 200,
+      "region_size": 2.0,
+      "min_dist": 0.12,
+      "shape": "disk",
+      "radius": 0.06,
+      "seed": 23
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.28,
+        "spread_deg": 25,
+        "radius_decay": 0.75
+      }
+    },
+    {
+      "op": "fractal_prune",
+      "selector": "all",
+      "params": {
+        "fractal": "burning_ship",
+        "max_iter": 35,
+        "scale": 1.0,
+        "offset": [
+          -1.7,
+          0
+        ]
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.1,
+        "radius": 0.013,
+        "splay": 0.9
+      }
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_Effect_Sound",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": "Rack303Acid/RackDX7Piano/RackMoogBass/RackSineBasic provide genre-spanning synthesis; VRAudioMonitor visualizes audio; chord_tension_spring maps harmonic tension to spring physics; timbre_sculptor shapes tone; harmonic_distance_table quantifies consonance/dissonance; cable_builder connects the modular chain; dark_sphere anchors.",
+  "style": "rams",
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.162,
+  "breath_zones": [
+    {
+      "size": 133,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.56390977443609,
+        6.924812030075188
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "BigPipeSystem"
+    },
+    {
+      "x": 1,
+      "z": 1,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 2,
+      "z": 1,
+      "token": "AudioContr"
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 9,
+      "z": 1,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 1,
+      "z": 2,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "AudioContr"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "RackSineBasic"
+    },
+    {
+      "x": 9,
+      "z": 2,
+      "token": "cable_builder"
+    },
+    {
+      "x": 10,
+      "z": 2,
+      "token": "VRAudioMonitor"
+    },
+    {
+      "x": 6,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 8,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 9,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "DualBallFMController"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "Rack303Acid"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "RackMoogBass"
+    },
+    {
+      "x": 7,
+      "z": 4,
+      "token": "RackDX7Piano"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "AudioContr"
+    },
+    {
+      "x": 9,
+      "z": 4,
+      "token": "audio_catalog_tablet"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "wave_interference_3d"
+    },
+    {
+      "x": 2,
+      "z": 7,
+      "token": "harmonic_distance_table"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "chord_tension_spring"
+    },
+    {
+      "x": 8,
+      "z": 7,
+      "token": "timbre_sculptor"
+    },
+    {
+      "x": 8,
+      "z": 9,
+      "token": "mario_test_sound_ui"
+    },
+    {
+      "x": 10,
+      "z": 10,
+      "token": "interactable_demo"
+    },
+    {
+      "x": 3,
+      "z": 11,
+      "token": "lab_table"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 27,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 19
+  }
+}

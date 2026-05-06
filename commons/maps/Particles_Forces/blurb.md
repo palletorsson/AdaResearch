@@ -1,0 +1,1 @@
+Forces act on particles. Gravity pulls down, wind pushes sideways, attractors draw in, turbulence randomizes. Each frame: sum forces, update velocity, update position. The same physics as any object, but repeated thousands of times. Collective response to shared fields.

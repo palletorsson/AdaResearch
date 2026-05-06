@@ -1,0 +1,57 @@
+{
+  "id": "commons_point_primitive",
+  "title": "Interactive Point",
+  "category": "primitives",
+  "scene": "res://commons/primitives/point/point.tscn",
+  "script": "res://commons/primitives/point/point.gd",
+  "documentation": {
+	"readme": "res://commons/primitives/point/README.md",
+	"tutorial": "res://commons/primitives/point/point_tutorial.gd",
+	"prompt": "res://commons/primitives/point/code_prompt.txt"
+  },
+  "summary": "Pickable 3D point helper with billboarded coordinate label and optional color control module.",
+  "keywords": [
+	"point",
+	"grab sphere",
+	"coordinates",
+	"label3d",
+    "vr tools"
+  ],
+  "difficulty": "beginner",
+  "estimated_duration": "2-3 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+	"comfort": "Label text follows the point smoothly without extra animations.",
+	"interaction": "Compatible with XR pick-up logic exposed by GrabSphere.",
+	"performance": "Single mesh + label; negligible cost even in dense scenes."
+  },
+  "parameters": [
+	{
+	  "name": "set_point_position",
+	  "type": "method",
+	  "description": "Moves the point/label to a new world position."
+	},
+	{
+	  "name": "set_point_color",
+	  "type": "method",
+	  "description": "Applies a color via PointColor or emissive material fallback."
+	},
+	{
+	  "name": "set_label_visible",
+	  "type": "method",
+	  "description": "Toggles the coordinate label on or off."
+	}
+  ],
+  "links": [
+	{
+	  "title": "Label3D (Godot Docs)",
+	  "type": "documentation",
+	  "url": "https://docs.godotengine.org/en/stable/classes/class_label3d.html"
+	},
+	{
+	  "title": "XR Tools Grab Spheres",
+	  "type": "reference",
+	  "note": "Handling pickable anchors in VR rig"
+	}
+  ]
+}

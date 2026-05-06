@@ -1,0 +1,62 @@
+{
+  "name": "QFEP_E_Term",
+  "title": "Entropy as Possibility Space",
+  "description": "E(S) is Entropy \u2014 the space of possibilities. High entropy means freedom from pattern, openness to becoming. But pure chaos dissolves.",
+  "dimensions": {
+    "rows": 12,
+    "cols": 12
+  },
+  "n_artifacts": 7,
+  "spawn": [
+    1,
+    1
+  ],
+  "teleport": [
+    11,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "random_cubes",
+      "row": 3,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "random_cubes",
+      "row": 3,
+      "col": 7,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "particle_chaos",
+      "row": 5,
+      "col": 5,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "random_cubes",
+      "row": 7,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "random_cubes",
+      "row": 7,
+      "col": 7,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "lambda_slider",
+      "row": 9,
+      "col": 1,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "tt",
+      "row": 9,
+      "col": 9,
+      "family": "commons_artifacts"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Remove",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 13,
+    "d": 18
+  },
+  "signature": "remove_random is the core mechanism \u2014 parameterized deletion with mode selection (range/column/row/all); hazards_demo extends removal into gameplay consequence",
+  "style": null,
+  "echoes": [],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 225,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 18
+      },
+      "centroid": [
+        6.0088888888888885,
+        8.466666666666667
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 6,
+      "z": 7,
+      "token": "remove_random"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 9,
+      "token": "hazards_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 228,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

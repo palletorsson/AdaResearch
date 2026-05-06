@@ -3,7 +3,7 @@ shader_type spatial;
 uniform float inner_color_speed = 0.5;
 uniform float outer_color_speed = 0.7;
 uniform float gradient_spread = 0.5;
-uniform vec3 light_dir;
+uniform vec3 light_dir = vec3(0.0, 1.0, 0.0);
 
 void vertex() {
 	// A simple vertex shader, no transformation needed for this effect.

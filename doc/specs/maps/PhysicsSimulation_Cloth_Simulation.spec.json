@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PhysicsSimulation_Cloth_Simulation",
+  "home_sequence": "physicssimulation",
+  "dimensions": {
+    "w": 6,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.017,
+  "breath_zones": [
+    {
+      "size": 58,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 6,
+        "d": 10
+      },
+      "centroid": [
+        2.5,
+        4.448275862068965
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 4,
+      "token": "cloth_simulation"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 59,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

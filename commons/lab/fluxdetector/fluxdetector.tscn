@@ -82,7 +82,7 @@ func update_temporal_displays():
 	temporal_orb.material_override.emission = flux_color
 	
 	# Orb brightness
-	temporal_orb.material_override.emission_energy = 1.0 + abs(flux_intensity) * 2.0
+	temporal_orb.material_override.emission_energy_multiplier = 1.0 + abs(flux_intensity) * 2.0
 	
 	# Needle positions based on temporal readings
 	if temporal_needles.size() >= 2:
@@ -94,7 +94,7 @@ func update_temporal_displays():
 	
 	# Flux readout brightness
 	var readout_intensity = clamp(abs(flux_intensity) * 3.0, 0.5, 2.0)
-	flux_readout.material_override.emission_energy = readout_intensity
+	flux_readout.material_override.emission_energy_multiplier = readout_intensity
 
 func trigger_temporal_anomaly():
 	temporal_anomaly_detected = true
@@ -116,8 +116,8 @@ func perform_temporal_scan():
 	
 	# Enhanced scanning mode
 	var scan_tween = create_tween()
-	scan_tween.tween_property(chronometer, 'material_override:emission_energy', 3.0, 2.0)
-	scan_tween.tween_property(chronometer, 'material_override:emission_energy', 1.0, 1.0)
+	scan_tween.tween_property(chronometer, 'material_override:emission_energy_multiplier', 3.0, 2.0)
+	scan_tween.tween_property(chronometer, 'material_override:emission_energy_multiplier', 1.0, 1.0)
 	
 	# Display temporal readings
 	display_temporal_readings()
@@ -136,8 +136,8 @@ func detect_chronon_surge():
 		
 		# Surge visual effect
 		var surge_tween = create_tween()
-		surge_tween.tween_property(temporal_orb, 'material_override:emission_energy', 5.0, 0.3)
-		surge_tween.tween_property(temporal_orb, 'material_override:emission_energy', 1.0, 2.0)
+		surge_tween.tween_property(temporal_orb, 'material_override:emission_energy_multiplier', 5.0, 0.3)
+		surge_tween.tween_property(temporal_orb, 'material_override:emission_energy_multiplier', 1.0, 2.0)
 
 func calibrate_temporal_baseline():
 	print('⏰ TEMPORAL DETECTOR: Calibrating to local timestream...')

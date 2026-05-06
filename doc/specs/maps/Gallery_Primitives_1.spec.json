@@ -1,0 +1,188 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Primitives_1",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 20
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.137,
+  "breath_zones": [
+    {
+      "size": 159,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 20
+      },
+      "centroid": [
+        5.0251572327044025,
+        10.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "PipeLayout"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "SDFDrawTool"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "aalto_vase"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "alessi_tree"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "arch"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "array_rotate"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "array_scale"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "array_translate"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "arrow"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "bucket_of_tulips"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "capsules"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "cavetest"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "combine_primitives"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "concept_synthesizer"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "coordinate_axes_xy"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "coordinate_lines"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "cross_lines"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "crystal"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "crystalcluster"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "cylinder_radials_rings"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "diamond"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "dimension_lens"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "dynamic_rock"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "editable_bezier"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "editable_catmull_rom"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "editable_curve"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "elevator_platform"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "falling_cube"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "foldedpaper"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "folding_cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 30,
+    "walkable_cells": 219,
+    "breath_zone_count": 1,
+    "unique_tokens": 30
+  }
+}

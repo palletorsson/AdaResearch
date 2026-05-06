@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcqqtmblmibxv"]
+
+[ext_resource type="Script" path="res://commons/artifacts/turret_targeting/laser_turret.gd" id="1_turret"]
+
+[node name="LaserTurret" type="Node3D"]
+script = ExtResource("1_turret")
+rotation_speed = 8.0
+detection_range = 25.0
+fire_delay = 0.1
+damage_per_second = 80.0

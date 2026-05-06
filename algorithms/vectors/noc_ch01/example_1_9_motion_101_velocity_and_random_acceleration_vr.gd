@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 1.9: Motion 101: Velocity and Random Acceleration
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -51,7 +51,7 @@ func _setup_trail() -> void:
 	_trail_instance.material_override = MAT_TRAIL
 	_sim_root.add_child(_trail_instance)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var random_accel := Vector3(
 		randf_range(-0.02, 0.02),
 		randf_range(-0.02, 0.02),
@@ -91,3 +91,12 @@ func _update_trail() -> void:
 	for point in _trail_points:
 		_trail_mesh.surface_add_vertex(point)
 	_trail_mesh.surface_end()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

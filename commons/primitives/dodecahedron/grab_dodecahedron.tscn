@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://grab_dodecahedron_001"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/dodecahedron/grab_dodecahedron.gd" id="2_grab_dodecahedron"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_highlight"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dodecahedron"]
+points = PackedVector3Array(0.4, 0.4, 0.4, 0.4, 0.4, -0.4, 0.4, -0.4, 0.4, -0.4, 0.4, 0.4, -0.4, -0.4, 0.4, -0.4, 0.4, -0.4, 0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.247214, 0.618034, 0, -0.247214, 0.618034, 0, 0.247214, -0.618034, 0, -0.247214, -0.618034, 0.247214, 0.618034, 0, -0.247214, 0.618034, 0, 0.247214, -0.618034, 0, -0.247214, -0.618034, 0, 0.618034, 0, 0.247214, -0.618034, 0, 0.247214, 0.618034, 0, -0.247214, -0.618034, 0, -0.247214)
+
+[node name="GrabDodecahedron" instance=ExtResource("1_pickable")]
+script = ExtResource("2_grab_dodecahedron")
+alternate_material = null
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
+base_color = Color(1, 0.8, 0.2, 1)
+dodecahedron_scale = 0.4
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("ConvexPolygonShape3D_dodecahedron")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_highlight")]

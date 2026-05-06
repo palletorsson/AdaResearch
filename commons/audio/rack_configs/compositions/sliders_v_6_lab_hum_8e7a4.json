@@ -1,0 +1,75 @@
+{
+  "rack_info": {
+    "name": "6x SLIDER V",
+    "description": "6x SLIDER V — auto-generated UVAC composition. sound_type=lab_hum, composition_type=sliders_v.",
+    "version": "auto-1",
+    "sound_type": "lab_hum",
+    "auto_generated": true,
+    "composition_type": "sliders_v",
+    "composition_count": 6
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "sv_0",
+      "sv_1",
+      "sv_2",
+      "sv_3",
+      "sv_4",
+      "sv_5"
+    ]
+  ],
+  "control_definitions": {
+    "sv_0": {
+      "type": "slv",
+      "label": "DEC",
+      "parameter": "decay",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.2
+    },
+    "sv_1": {
+      "type": "slv",
+      "label": "PAN",
+      "parameter": "pan",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    "sv_2": {
+      "type": "slv",
+      "label": "DRIVE",
+      "parameter": "drive",
+      "min": 0.0,
+      "max": 10.0,
+      "default": 1.0
+    },
+    "sv_3": {
+      "type": "slv",
+      "label": "PAN",
+      "parameter": "pan",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    "sv_4": {
+      "type": "slv",
+      "label": "RES",
+      "parameter": "reso",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.3
+    },
+    "sv_5": {
+      "type": "slv",
+      "label": "DEC",
+      "parameter": "decay",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.2
+    }
+  }
+}

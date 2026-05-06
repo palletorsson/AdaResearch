@@ -30,11 +30,11 @@ var is_running: bool = false
 signal algorithm_step_complete()
 signal algorithm_finished()
 
-func _init():
+func _init() -> void:
 	algorithm_name = "Random Walk (8x8 Region)"
 	algorithm_description = "Walker leaves trail in middle 8x8 area"
 
-func _ready():
+func _ready() -> void:
 	# Create timer for stepping
 	timer = Timer.new()
 	timer.wait_time = step_delay
@@ -47,7 +47,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_algorithm")
 
-func _find_and_connect_grid():
+func _find_and_connect_grid() -> void:
 	# Look for GridSystem in the scene
 	var grid_system = get_tree().get_first_node_in_group("grid_system")
 	if not grid_system:
@@ -71,7 +71,7 @@ func _find_node_by_class(node: Node, target_class_name: String) -> Node:
 	
 	return null
 
-func start_algorithm():
+func start_algorithm() -> void:
 	if not grid_reference:
 		print("RandomWalkAlgorithm: Cannot start - grid not ready")
 		return
@@ -81,7 +81,7 @@ func start_algorithm():
 	timer.start()
 	print("RandomWalkAlgorithm: Algorithm started")
 
-func stop_algorithm():
+func stop_algorithm() -> void:
 	is_running = false
 	timer.stop()
 	print("RandomWalkAlgorithm: Algorithm stopped")
@@ -99,11 +99,11 @@ func step_once():
 	
 	return result
 
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	if is_running:
 		step_once()
 
-func setup_initial_state():
+func setup_initial_state() -> void:
 	# Start walker in center of 8x8 region
 	walker_x = (region_min_x + region_max_x) / 2
 	walker_z = (region_min_z + region_max_z) / 2
@@ -135,11 +135,11 @@ func execute_step() -> bool:
 	return true
 
 # Set grid reference for the algorithm to work with
-func set_grid_reference(grid_ref):
+func set_grid_reference(grid_ref) -> void:
 	grid_reference = grid_ref
 
 # New function to work with 3D grid system at specified Y level
-func set_cell_3d(x: int, z: int, active: bool):
+func set_cell_3d(x: int, z: int, active: bool) -> void:
 	if not grid_reference:
 		return
 	
@@ -156,7 +156,7 @@ func set_cell_3d(x: int, z: int, active: bool):
 		_remove_cube_at(x, target_y_level, z)
 
 # Place a cube at specific 3D coordinates
-func _place_cube_at(x: int, y: int, z: int):
+func _place_cube_at(x: int, y: int, z: int) -> void:
 	if not grid_reference:
 		return
 		
@@ -169,12 +169,11 @@ func _place_cube_at(x: int, y: int, z: int):
 		return
 	
 	# Create new cube using the grid system's method
-	var total_size = structure_component.cube_size + structure_component.gutter
-	structure_component._add_cube(x, y, z, total_size)
+	structure_component.add_cube_at(x, y, z)
 	# Don't manipulate grid array directly - let the component handle it
 
 # Remove a cube at specific 3D coordinates
-func _remove_cube_at(x: int, y: int, z: int):
+func _remove_cube_at(x: int, y: int, z: int) -> void:
 	if not grid_reference:
 		return
 		
@@ -208,3 +207,12 @@ func get_algorithm_info() -> Dictionary:
 		"max_steps": max_steps,
 		"region_bounds": get_region_bounds()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

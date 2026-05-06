@@ -1,0 +1,46 @@
+{
+  "id": "gg09_enneper_cluster",
+  "notes": "Enneper-surface-inspired displacement on a coral metaball \u00e2\u20ac\u201d cusped organic form.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.14
+  },
+  "iterations": 3,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.18,
+  "metaball_resolution": 72,
+  "materials": {
+    "default": [
+      0.7,
+      0.38,
+      0.35
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.55,
+        "spread_deg": 50,
+        "radius_decay": 0.72,
+        "jitter": 0.4
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "enneper",
+        "t_source": "depth",
+        "t_scale": 0.6,
+        "amp": 0.3
+      }
+    }
+  ]
+}

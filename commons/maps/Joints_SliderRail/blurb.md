@@ -1,0 +1,1 @@
+Sliders translate without rotating. Pistons extend, drawers open, rails guide. The slider constrains rotation while permitting translation along one axis. Linear motion, no spin. The opposite constraint to the hinge. Together they build machines.

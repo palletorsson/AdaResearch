@@ -22,14 +22,14 @@ var spawn_timer: float = 0.0
 # UI
 var info_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
 
 	print("Example 4.2: Array of Particles - Auto-spawning particles")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Spawn particles
 	spawn_timer += delta
 	while spawn_timer >= 1.0 / spawn_rate and particles.size() < max_particles:
@@ -45,7 +45,7 @@ func _process(delta):
 	# Update UI
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			# Spawn burst of particles
@@ -58,7 +58,7 @@ func _input(event):
 		elif event.keycode == KEY_DOWN:
 			spawn_rate = max(spawn_rate - 1.0, 1.0)
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -76,12 +76,12 @@ func create_info_label():
 	instructions.text = "[SPACE] Burst | [↑/↓] Rate | [R] Reset"
 	add_child(instructions)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		info_label.text = "Array of Particles\n%d / %d (%.1f/s)" % [particles.size(), max_particles, spawn_rate]
 
-func spawn_particle():
+func spawn_particle() -> void:
 	"""Spawn a new particle"""
 	if particles.size() >= max_particles:
 		return
@@ -116,7 +116,7 @@ func spawn_particle():
 	add_child(particle)
 	particles.append(particle)
 
-func update_particles(delta: float):
+func update_particles(delta: float) -> void:
 	"""Update all particles"""
 	for particle in particles:
 		# Apply gravity
@@ -131,7 +131,7 @@ func update_particles(delta: float):
 		# Update particle
 		particle.update(delta)
 
-func cleanup_dead_particles():
+func cleanup_dead_particles() -> void:
 	"""Remove dead particles"""
 	var dead_particles: Array[Particle] = []
 
@@ -143,9 +143,18 @@ func cleanup_dead_particles():
 		particles.erase(particle)
 		particle.queue_free()
 
-func reset():
+func reset() -> void:
 	"""Reset all particles"""
 	for particle in particles:
 		particle.queue_free()
 	particles.clear()
 	spawn_timer = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

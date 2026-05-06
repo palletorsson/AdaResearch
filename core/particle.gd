@@ -10,14 +10,24 @@ var velocity: Vector3 = Vector3.ZERO
 var acceleration: Vector3 = Vector3.ZERO
 var mass: float = 1.0
 
-# Lifespan (decreases over time, 0 = dead)
-var lifespan: float = 255.0
-var max_lifespan: float = 255.0
+# Agent-ParticlePhysicist: Parametric physics controls for pedagogy
+@export var damping: float = 0.98  # Air resistance (0.0 = full drag, 1.0 = no drag)
+@export var restitution: float = 0.5  # Bounce coefficient (0.0 = no bounce, 1.0 = perfect bounce)
 
-# Visual properties
+# Lifespan (in seconds, frame-rate independent!)
+var lifespan: float = 4.0
+var max_lifespan: float = 4.0
+@export var decay_rate: float = 1.0  # Units per second
+
+# Visual properties (legacy - kept for compatibility)
 var mesh_instance: MeshInstance3D
 var material: StandardMaterial3D
-var size: float = 0.05
+var size: float = 0.02  # Smaller particles for blobfish
+
+# Agent-PerformanceEngineer: MultiMesh instancing support
+var multimesh_instance: MultiMeshInstance3D = null
+var instance_id: int = -1
+var use_multimesh: bool = false  # Set by emitter
 
 # Pink color palette
 var primary_pink: Color = Color(1.0, 0.6, 1.0, 1.0)
@@ -29,15 +39,16 @@ func _init(pos: Vector3 = Vector3.ZERO, vel: Vector3 = Vector3.ZERO):
 	position = pos
 	velocity = vel
 	acceleration = Vector3.ZERO
-	lifespan = 255.0
-	max_lifespan = 255.0
+	lifespan = 4.0  # 4 seconds
+	max_lifespan = 4.0
 
 func _ready():
 	# Find fish tank
 	find_fish_tank()
 
 	# Create visual representation
-	if not mesh_instance:
+	# Agent-PerformanceEngineer: Only create legacy mesh if not using MultiMesh
+	if not use_multimesh and not mesh_instance:
 		create_default_visual()
 
 func find_fish_tank():
@@ -69,14 +80,17 @@ func create_default_visual():
 
 func update(delta: float):
 	"""Update particle physics"""
+	# Agent-ParticlePhysicist: Apply damping (air resistance)
+	velocity *= damping
+	
 	# Update velocity
 	velocity += acceleration * delta
 
 	# Update position
 	position += velocity * delta
 
-	# Decrease lifespan
-	lifespan -= delta * 60.0  # ~60 fps normalized
+	# Decrease lifespan (frame-rate independent!)
+	lifespan -= decay_rate * delta
 
 	# Clear acceleration for next frame
 	acceleration = Vector3.ZERO
@@ -86,9 +100,29 @@ func update(delta: float):
 
 func update_visual():
 	"""Update visual based on lifespan"""
-	if material:
+	var alpha = lifespan / max_lifespan
+	
+	# Agent-PerformanceEngineer: MultiMesh mode
+	if use_multimesh and multimesh_instance and instance_id >= 0:
+		# Safety check: Ensure MultiMesh is valid and index is in bounds
+		if multimesh_instance.multimesh and instance_id < multimesh_instance.multimesh.instance_count:
+			# Update transform
+			multimesh_instance.multimesh.set_instance_transform(instance_id, Transform3D(Basis(), global_position))
+			
+			# Update color/alpha via instance color (if enabled)
+			if multimesh_instance.multimesh.use_colors:
+				var color = primary_pink
+				color.a = alpha
+				multimesh_instance.multimesh.set_instance_color(instance_id, color)
+			
+			# Store emission strength in custom data (if enabled)
+			if multimesh_instance.multimesh.use_custom_data:
+				var custom_data = Color(alpha, 0, 0, 0)  # Use alpha for emission strength
+				multimesh_instance.multimesh.set_instance_custom_data(instance_id, custom_data)
+	
+	# Legacy material mode
+	elif material:
 		# Fade out as particle dies
-		var alpha = lifespan / max_lifespan
 		var color = primary_pink
 		color.a = alpha
 		material.albedo_color = color
@@ -114,5 +148,5 @@ func constrain_to_tank():
 	var constrained = fish_tank.constrain_position(position)
 	if constrained != position:
 		position = constrained
-		# Bounce off boundaries
-		velocity *= -0.5
+		# Agent-ParticlePhysicist: Parametric bounce with restitution coefficient
+		velocity *= -restitution

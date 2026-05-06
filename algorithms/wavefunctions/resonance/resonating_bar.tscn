@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj8v2laxp3tn5"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/resonance/ResonatingBar.gd" id="1"]
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.08, 0.04, 0.3)
+
+[node name="ResonatingBar" type="RigidBody3D"]
+gravity_scale = 0.0
+mass = 0.5
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1")
+frequency = 440.0
+decay_time = 3.0
+max_amplitude = 0.5
+bar_color = Color(0.8, 0.6, 1, 1)
+glow_intensity = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]

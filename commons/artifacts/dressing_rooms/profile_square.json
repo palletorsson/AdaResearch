@@ -1,0 +1,50 @@
+{
+  "lookup_name": "profile_square",
+  "footprint": [
+    1,
+    1,
+    1
+  ],
+  "rotations": [
+    "0",
+    "90",
+    "180",
+    "270"
+  ],
+  "approach": "south",
+  "exit": "north",
+  "footing": {
+    "anchor": [
+      1,
+      1
+    ],
+    "tiles": [
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        3,
+        1
+      ],
+      [
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "extras": [],
+  "artifact_offset": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "clearance": [
+    3,
+    3,
+    3
+  ]
+}

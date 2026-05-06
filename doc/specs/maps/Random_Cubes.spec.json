@@ -1,0 +1,305 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Cubes",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 12,
+    "d": 20
+  },
+  "signature": "random_edge_profile is the core artifact \u2014 geometry shaped by per-edge random decisions; coin_toss and dice_throw make the random mechanisms physically interactive before they are applied to geometry; random_object_spawner demonstrates population-level variety from a single algorithm; dark_sphere provides the unrandomized control.",
+  "style": null,
+  "echoes": [
+    "transformation"
+  ],
+  "density": 0.222,
+  "breath_zones": [
+    {
+      "size": 186,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 20
+      },
+      "centroid": [
+        5.478494623655914,
+        9.086021505376344
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "dice_throw"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "coin_toss"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "random_object_spawner"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "random_object_spawner"
+    },
+    {
+      "x": 3,
+      "z": 8,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 7,
+      "z": 8,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 3,
+      "z": 9,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 4,
+      "z": 9,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 5,
+      "z": 9,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 6,
+      "z": 9,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 7,
+      "z": 9,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 8,
+      "z": 9,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 3,
+      "z": 10,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 5,
+      "z": 10,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 7,
+      "z": 10,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 3,
+      "z": 11,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 4,
+      "z": 11,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 5,
+      "z": 11,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 6,
+      "z": 11,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 7,
+      "z": 11,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 8,
+      "z": 11,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 3,
+      "z": 12,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 5,
+      "z": 12,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 7,
+      "z": 12,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 3,
+      "z": 13,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 4,
+      "z": 13,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 5,
+      "z": 13,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 6,
+      "z": 13,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 7,
+      "z": 13,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 8,
+      "z": 13,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 3,
+      "z": 14,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 5,
+      "z": 14,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 7,
+      "z": 14,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 3,
+      "z": 15,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 4,
+      "z": 15,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 5,
+      "z": 15,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 6,
+      "z": 15,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 7,
+      "z": 15,
+      "token": "random_edge_profile"
+    },
+    {
+      "x": 8,
+      "z": 15,
+      "token": "random_edge_profile"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 53,
+    "walkable_cells": 239,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

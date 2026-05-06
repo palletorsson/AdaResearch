@@ -1,0 +1,5 @@
+Signals and abstractions given teeth. Pattern mines pulse SDF contour rings — cross the zero-boundary and they detonate. A resonance chamber pins standing waves to space, safe at anti-nodes, lethal at nodes, harmonics shifting every eight seconds. A particle emitter cycles cone, fountain, spiral — birth-white to dying-red, the lifecycle as ammunition.
+
+Then mathematics stops pretending to be flat. A wireframe tesseract rotates through the fourth dimension, vertices phasing in and out of hittability by W-depth. An Escher figure climbs stairs that go nowhere — invulnerable inside its own impossibility. A mesh morpher shifts between sphere, cube, torus, cylinder — each topology a different attack, genus as combat strategy. A bricoleur golem shatters and rebuilds from whatever's at hand, never the same body twice.
+
+The pattern is the weapon. The abstraction is the armor. Every creature here proves the same thing — mathematics doesn't describe reality. It *is* the threat.

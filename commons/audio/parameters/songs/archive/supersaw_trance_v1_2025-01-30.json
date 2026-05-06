@@ -1,0 +1,30 @@
+{
+    "_metadata": {
+        "sound_type": "supersaw_trance_song",
+        "display_name": "Supersaw Trance",
+        "description": "Classic uplifting trance. Massive detuned supersaws, driving basslines, euphoric builds. The Roland JP-8000 sound.",
+        "category": "songs",
+        "tags": ["trance", "supersaw", "uplifting", "jp8000", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["ATB", "Paul van Dyk", "Tiësto", "Armin van Buuren"],
+        "reference_tracks": ["9PM (Till I Come)", "For an Angel", "Adagio for Strings"]
+    },
+    "identity": {
+        "emotion": "euphoric_uplifting",
+        "era": "late_90s_early_00s",
+        "character": ["massive", "uplifting", "emotional", "driving"]
+    },
+    "parameters": {
+        "bpm": { "min": 135, "max": 145, "value": 140, "step": 1 },
+        "key": { "options": ["Am", "Fm", "Cm", "Gm"], "value": "Am" },
+        "supersaw_width": { "min": 0.0, "max": 1.0, "value": 0.8 }
+    },
+    "sound_design": {
+        "supersaw_pad": {
+            "oscillators": 8,
+            "detune_cents": { "spread": 40 },
+            "stereo": "wide"
+        },
+        "drums": { "style": "trance_driving", "tempo": 140 }
+    }
+}

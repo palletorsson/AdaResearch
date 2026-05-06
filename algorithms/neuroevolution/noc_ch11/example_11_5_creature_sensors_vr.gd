@@ -18,7 +18,7 @@ class Sensor:
 	var max_distance: float = 0.3
 	var current_reading: float = 0.0
 
-	func _init(a: float, dist: float = 0.3):
+	func _init(a: float, dist: float = 0.3) -> void:
 		angle = a
 		max_distance = dist
 
@@ -50,7 +50,7 @@ class FoodItem extends Node3D:
 	var sparkle_timer: float = 0.0
 	var accent_pink: Color = Color(1.0, 0.6, 1.0, 1.0)
 
-	func _ready():
+	func _ready() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var cube = BoxMesh.new()
 		cube.size = Vector3(0.03, 0.03, 0.03)
@@ -65,7 +65,7 @@ class FoodItem extends Node3D:
 
 		add_child(mesh_instance)
 
-	func _process(delta):
+	func _process(delta: float) -> void:
 		# Sparkle effect
 		sparkle_timer += delta
 		var sparkle = sin(sparkle_timer * 5.0) * 0.5 + 0.5
@@ -86,18 +86,19 @@ class SensorCreature extends VREntity:
 	# Sensor visualization
 	var sensor_meshes: Array[MeshInstance3D] = []
 
-	func _init():
+	func _init() -> void:
 		# Create sensors in a forward arc
 		for i in range(num_sensors):
 			var angle = -PI/3 + (i * (2 * PI/3) / (num_sensors - 1))  # -60 to +60 degrees
 			var sensor = Sensor.new(angle, sensor_range)
 			sensors.append(sensor)
 
-	func setup_mesh():
+	func setup_mesh() -> void:
 		# Body
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.04
+		sphere.height = 0.08
 		mesh_instance.mesh = sphere
 		add_child(mesh_instance)
 
@@ -147,7 +148,7 @@ class SensorCreature extends VREntity:
 
 		return readings
 
-	func move_towards_food(readings: Array[float], delta: float):
+	func move_towards_food(readings: Array[float], delta: float) -> void:
 		"""Simple reactive behavior: turn towards strongest sensor signal"""
 		if readings.size() == 0:
 			return
@@ -192,7 +193,7 @@ var score: int = 0
 var score_label: Label3D
 var sensor_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	# Create creature
 	creature = SensorCreature.new()
 	creature.position_v = Vector3(0, 0, 0)
@@ -204,7 +205,7 @@ func _ready():
 	# Create UI
 	create_ui()
 
-func spawn_food():
+func spawn_food() -> void:
 	"""Spawn food items randomly in tank"""
 	for i in range(num_food):
 		var food = FoodItem.new()
@@ -216,7 +217,7 @@ func spawn_food():
 		add_child(food)
 		food_items.append(food)
 
-func create_ui():
+func create_ui() -> void:
 	score_label = Label3D.new()
 	score_label.text = "Food: 0"
 	score_label.font_size = 32
@@ -233,7 +234,7 @@ func create_ui():
 	sensor_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(sensor_label)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Creature senses environment
 	var readings = creature.sense(food_items)
 
@@ -267,3 +268,12 @@ func _process(delta):
 		)
 		add_child(new_food)
 		food_items.append(new_food)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,5 @@
+Every building is an argument about where to stand. This map lays out twelve spatial formulas — Pedestal, Corridor, Amphitheater, Portal Chamber, Zen Garden, Cathedral, Observation Deck — each one a proven pattern extracted from architecture, level design, and the natural world.
+
+Height encodes feeling. Two blocks: a table, a workbench, something to lean on. Three blocks: a wall, a boundary, a declaration. Five or six: the nave lifts and the body follows. Voids cut through solid ground — negative space as dramatic verb. Ramps and transport cubes move the body the way conjunctions move a sentence.
+
+Walk the progression from simple to complex. Symmetry locks the eye; asymmetry sets it loose. Enclosure compresses attention; openness dissolves it. Space is never neutral. Every room is a choreography you haven't noticed yet.

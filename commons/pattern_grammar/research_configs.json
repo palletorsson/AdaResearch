@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "description": "Wallpaper-group pattern research. 17 mathematical tilings of the 2D plane — the algebraic vocabulary of textiles, tiles, and wallpaper across all cultures. DNA = group × motif_seed × palette × tile_size. Same motif through different groups produces different symmetry worlds.",
+  "configs": [
+    {
+      "id": "pt01_p1_bauhaus",
+      "group": "p1",
+      "tile_size": 24,
+      "motif_seed": 7,
+      "motif": "random",
+      "density": 0.45,
+      "palette": "bauhaus",
+      "canvas_size": 512,
+      "notes": "Group p1 — translation only, no symmetry. Simplest wallpaper group. Bauhaus palette reveals the raw motif repeating."
+    },
+    {
+      "id": "pt02_p2_escher",
+      "group": "p2",
+      "tile_size": 28,
+      "motif_seed": 11,
+      "motif": "random",
+      "density": 0.5,
+      "palette": "escher",
+      "canvas_size": 512,
+      "notes": "Group p2 — 180° rotation centers. Escher's simplest symmetry. Monochrome palette emphasizes figure-ground flipping."
+    },
+    {
+      "id": "pt03_p4m_alhambra",
+      "group": "p4m",
+      "tile_size": 32,
+      "motif_seed": 3,
+      "motif": "dot",
+      "radius_factor": 0.38,
+      "palette": "alhambra",
+      "canvas_size": 512,
+      "notes": "Group p4m — 90° rotation + reflections. The Alhambra's most common group. Dot motif with alhambra palette reads as ceramic tilework."
+    },
+    {
+      "id": "pt04_p6m_persian",
+      "group": "p6m",
+      "tile_size": 40,
+      "motif_seed": 5,
+      "motif": "dot",
+      "radius_factor": 0.42,
+      "palette": "persian",
+      "canvas_size": 512,
+      "notes": "Group p6m — 60° rotation + reflections. Hexagonal symmetry, richest of all 17 groups. Persian palette evokes carpet medallions."
+    },
+    {
+      "id": "pt05_p3_memphis",
+      "group": "p3",
+      "tile_size": 36,
+      "motif_seed": 9,
+      "motif": "random",
+      "density": 0.4,
+      "palette": "memphis",
+      "canvas_size": 512,
+      "notes": "Group p3 — 120° rotation only, no reflection. Triangular lattice with chirality. Memphis palette gives '80s postmodern textile."
+    },
+    {
+      "id": "pt06_pmm_tatami",
+      "group": "pmm",
+      "tile_size": 28,
+      "motif_seed": 13,
+      "motif": "random",
+      "density": 0.5,
+      "palette": "tatami",
+      "canvas_size": 512,
+      "notes": "Group pmm — two perpendicular reflections. Rectangular lattice. Tatami palette reads as Japanese straw weave."
+    },
+    {
+      "id": "pt07_p4g_pastel",
+      "group": "p4g",
+      "tile_size": 32,
+      "motif_seed": 17,
+      "motif": "random",
+      "density": 0.45,
+      "palette": "pastel",
+      "canvas_size": 512,
+      "notes": "Group p4g — 90° rotation + reflections NOT through centers. Subtler than p4m. Pastel palette softens the chirality."
+    },
+    {
+      "id": "pt08_p6_monochrome",
+      "group": "p6",
+      "tile_size": 36,
+      "motif_seed": 19,
+      "motif": "dot",
+      "radius_factor": 0.32,
+      "palette": "monochrome",
+      "canvas_size": 512,
+      "notes": "Group p6 — 60° rotation only, no reflection. Hexagonal chirality. Monochrome reduces to pure geometry."
+    },
+    {
+      "id": "pt09_pgg_bauhaus",
+      "group": "pgg",
+      "tile_size": 30,
+      "motif_seed": 23,
+      "motif": "random",
+      "density": 0.5,
+      "palette": "bauhaus",
+      "canvas_size": 512,
+      "notes": "Group pgg — two perpendicular glides, no reflection. Chiral zig-zag. Bauhaus palette."
+    },
+    {
+      "id": "pt10_p3m1_alhambra",
+      "group": "p3m1",
+      "tile_size": 40,
+      "motif_seed": 29,
+      "motif": "dot",
+      "radius_factor": 0.42,
+      "palette": "alhambra",
+      "canvas_size": 512,
+      "notes": "Group p3m1 — 120° rotation + reflection type 1. Triangular lattice with mirror lines through rotation centers. Classic Moorish tessellation."
+    }
+  ]
+}

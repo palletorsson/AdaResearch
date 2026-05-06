@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cylinder_low_poly"]
+
+[ext_resource type="Script" path="res://commons/primitives/godotmeshes/cylinder_low.gd" id="1_script"]
+
+[node name="CylinderLow" type="MeshInstance3D"]
+script = ExtResource("1_script")

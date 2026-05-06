@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://bx8m5qqayocta"]
+
+[ext_resource type="Script" path="res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.gd" id="1_octahedron"]
+[ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="2_snappoint"]
+[ext_resource type="Script" uid="uid://csnkuxp3jotry" path="res://commons/primitives/snappoint/snap_connection_manager.gd" id="3_manager"]
+[ext_resource type="PackedScene" uid="uid://c8j5k2v0n7nak" path="res://commons/primitives/logic_display/CategoryLogicDisplay.tscn" id="4_display"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_boundary"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.3, 0.8, 1, 0.1)
+metallic = 0.2
+roughness = 0.4
+emission_enabled = true
+emission = Color(0.3, 0.8, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_boundary"]
+radius = 0.4
+height = 0.8
+radial_segments = 32
+rings = 16
+
+[node name="SnapOctahedronPuzzle" type="Node3D"]
+script = ExtResource("1_octahedron")
+spawn_position = Vector3(0, 0, 2)
+spawn_scale = 1.0
+prism_rotation = Vector3(0, 0, 0)
+
+[node name="SnapConnectionManager" type="Node" parent="."]
+script = ExtResource("3_manager")
+
+[node name="PointEquatorialBackLeft" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.7, -0.1)
+
+[node name="PointEquatorialBackRight" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.7, -0.1)
+
+[node name="PointEquatorialFrontLeft" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.7, 0.1)
+
+[node name="PointEquatorialFrontRight" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.7, 0.1)
+
+[node name="PointPolarTop" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="PointPolarBottom" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CategoryLogicDisplay" parent="." instance=ExtResource("4_display")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+equation = ["point", "times", "6", "equals", "octahedron"]
+
+[node name="PuzzleBoundary" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.7, 0)
+material_override = SubResource("StandardMaterial3D_boundary")
+mesh = SubResource("SphereMesh_boundary")

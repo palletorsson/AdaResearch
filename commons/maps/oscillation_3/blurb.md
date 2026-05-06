@@ -1,0 +1,1 @@
+Damping steals energy from oscillation. Each swing smaller than the last. Friction, resistance, drag — the world dissipates motion into heat. Underdamped systems ring; overdamped systems sluggishly return; critically damped systems settle fastest. Most real oscillators die.

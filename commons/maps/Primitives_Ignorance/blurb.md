@@ -1,0 +1,3 @@
+Ignorance is not the absence of knowledge but a structural limit. Every geometric, computational, or philosophical system is bounded by the capacities that produce it. What cannot be formalized does not vanish; it persists as a remainder, a debt. This map establishes ignorance as orientation rather than failure—an awareness that all models stand at the edge of what they cannot contain.
+
+Chirimuuta's haptic realism: knowledge as contact, not code. Understanding emerges from doing, probing, walking through the gallery—not from viewing it from above. Abstraction is necessary but dangerous. Models explain by omission. What resists abstraction is not noise, but signal.

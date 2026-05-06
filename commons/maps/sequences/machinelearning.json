@@ -1,0 +1,262 @@
+{
+  "sequences": {
+	"machinelearning": {
+	  "name": "Machine Learning: Algorithms That Learn",
+	  "truth": "Learning is optimization in a landscape you can't fully see.",
+	  "qfep_term": "Integration",
+	  "qfep_connection": "ML systems navigate Fâ†”E by descending loss landscapes. Gradient descent IS the oscillation between order (model) and entropy (data). Overfitting is F-collapse; underfitting is E-dominance.",
+	  "description": "From evolving creatures to neural networks â€” algorithms that adapt. Three arcs: evolution (selection pressure shapes form), perception (learning to classify and compress), generation (machines that make new things).",
+	  "layer": "integration",
+	  "prerequisites": [
+		"forces",
+        "randomness"
+	  ],
+	  "unlocks": [
+        "foundationscrisis"
+	  ],
+	  "difficulty": "advanced",
+	  "estimated_time": "30-40 minutes",
+	  "learning_objectives": [
+		"Evolution as optimization without gradient",
+		"Gradient descent as landscape navigation",
+		"Clustering as unsupervised pattern finding",
+		"Neural networks as layered feature extraction",
+		"Generative models as learned distributions",
+        "The gap between model and reality"
+	  ],
+	  "content": [
+		"ML_Evolution: Selection Without Design — selection pressure shapes form without explicit design",
+		"ML_Gradient_Landscape: Descending the Loss Surface — navigating loss surfaces, seeing high dimensions",
+		"ML_Classification: Drawing Boundaries in Data — different ways to draw boundaries in data",
+		"ML_Neural_Networks: Layers Learn Features — layers learn features",
+		"ML_Perception: How Machines Learn to See — how machines learn to see",
+		"ML_Sequence_Memory: Gates and Attention Over Time — learning temporal patterns and long-range dependencies",
+		"ML_Generative: Adversarial Creation from Noise — machines that generate, not just classify",
+        "ML_Synthesis: Agents That Question Themselves — agents that act, models we can question"
+	  ],
+	  "maps": [
+		"ML_Evolution",
+		"ML_Gradient_Landscape",
+		"ML_Classification",
+		"ML_Neural_Networks",
+		"ML_Perception",
+		"ML_Sequence_Memory",
+		"ML_Generative",
+		"ML_Synthesis",
+        "Chamber_ML"
+	  ],
+	  "audio": {
+		"ambient_preset": "minimal_drone",
+		"volume": -10.0
+	  },
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_machinelearning",
+	  "completion_rewards": [
+        "ai_specialist_badge"
+	  ],
+	  "deferred_maps": [
+		"MachineLearning_Transformers",
+		"MachineLearning_Generative_Adversarial_Networks_GANs",
+		"MachineLearning_Variational_Autoencoders_VAEs",
+		"MachineLearning_Clustering_Algorithms",
+		"MachineLearning_Dimensionality_Reduction",
+		"MachineLearning_Transfer_Learning",
+		"MachineLearning_Fine_tuning",
+		"MachineLearning_Recommendation_Systems",
+		"MachineLearning_Classification_Algorithms",
+        "MachineLearning_Attention_Mechanisms"
+	  ],
+	  "algorithm_sources": {
+		"_note": "Mapping from new maps to algorithms/machinelearning/ folders",
+		"ML_Evolution": [
+		  "carlsims",
+		  "evolvingflowers",
+		  "evolutionaryalgorithms",
+		  "noc_ch09 (smart_rockets, evolving_bloops)",
+          "ga_ca_shape_learner"
+		],
+		"ML_Gradient_Landscape": [
+		  "gradientdescent",
+		  "pca",
+          "optimization_algorithms"
+		],
+		"ML_Classification": [
+		  "kmeansclustering",
+		  "supportvectormachine",
+		  "randomforest",
+          "clustering_algorithms"
+		],
+		"ML_Neural_Networks": [
+		  "neural_networks",
+		  "neuralnetworkvisualization",
+          "stacked"
+		],
+		"ML_Perception": [
+		  "computer_vision",
+		  "convolutional_neural_networks_CNNs",
+          "attention_mechanisms"
+		],
+		"ML_Sequence_Memory": [
+		  "LSTMs",
+		  "transformers",
+          "time_series_analysis"
+		],
+		"ML_Generative": [
+		  "generative_adversarial_networks_GANs",
+          "variational_autoencoders_VAEs"
+		],
+		"ML_Synthesis": [
+		  "reinforcementlearning",
+		  "explainable_AI_XAI",
+          "anomaly_detection"
+		]
+	  },
+	  "artifact_groups": [
+		{
+		  "map": "ML_Evolution",
+		  "position": "intro",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "Evolution as optimization without gradient: Carl Sims creatures and evolving flowers shaped by selection pressure. Artifacts pending placement from root-level groups."
+		},
+		{
+		  "map": "ML_Gradient_Landscape",
+		  "position": "intro",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "Navigating loss surfaces: gradient descent visualization and PCA dimensionality reduction. Seeing high-dimensional landscapes. Artifacts pending placement."
+		},
+		{
+		  "map": "ML_Classification",
+		  "position": "foundation",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "Three ways to draw boundaries in data: K-means clustering, SVM, random forest. Different strategies for the same fundamental question. Artifacts pending placement."
+		},
+		{
+		  "map": "ML_Neural_Networks",
+		  "position": "exploration",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "Layers learn features: neural network visualization and architecture exploration. From input to output, each layer extracts progressively abstract representations. Artifacts pending placement."
+		},
+		{
+		  "map": "ML_Perception",
+		  "position": "exploration",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "How machines learn to see: computer vision, CNNs, attention mechanisms. Specialized perception — convolution as learned pattern matching. Artifacts pending placement."
+		},
+		{
+		  "map": "ML_Sequence_Memory",
+		  "position": "integration",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "Temporal patterns and long-range dependencies: LSTMs gate memory, transformers attend across sequences. Learning to remember what matters. Artifacts pending placement."
+		},
+		{
+		  "map": "ML_Generative",
+		  "position": "synthesis",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "Machines that generate, not just classify: GANs and VAEs learn distributions and sample new instances. Creation from learned probability. Artifacts pending placement."
+		},
+		{
+		  "map": "ML_Synthesis",
+		  "position": "synthesis",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "Reinforcement learning agents that act, explainable AI we can question, anomaly detection that finds the unexpected. ML paradigm synthesis. Artifacts pending placement."
+		}
+	  ]
+	}
+  },
+  "artifact_groups": [
+	{
+	  "map": "ML_Evolution",
+	  "position": "intro",
+	  "artifacts": [
+		"evolved_creatures",
+		"evolvingflowers",
+		"9_3_smart_rockets_vr",
+		"9_5_evolving_bloops_vr",
+        "gradient_descent_visualization"
+	  ],
+	  "size_budget": "mixed",
+	  "rationale": "Evolution as optimization without gradient. Five artifacts showing selection pressure shaping form."
+	},
+	{
+	  "map": "ML_Gradient_Landscape",
+	  "position": "foundation",
+	  "artifacts": [
+		"gradient_descent_visualization",
+        "pca_visualization"
+	  ],
+	  "size_budget": "compact_only",
+	  "rationale": "Navigating loss surfaces and seeing high dimensions. Foundation for understanding optimization."
+	},
+	{
+	  "map": "ML_Classification",
+	  "position": "foundation",
+	  "artifacts": [
+		"enhanced_kmeans",
+		"svm_visualization",
+        "random_forest_visualization"
+	  ],
+	  "size_budget": "compact_only",
+	  "rationale": "Three ways to draw boundaries in data. K-means, SVM, and random forest as classification foundations."
+	},
+	{
+	  "map": "ML_Neural_Networks",
+	  "position": "exploration",
+	  "artifacts": [
+		"neural_networks_vr",
+		"neural_network_visualization",
+        "learn_world_stacked"
+	  ],
+	  "size_budget": "mixed",
+	  "rationale": "Layers learn features. Three neural network artifacts showing architecture and learning dynamics."
+	},
+	{
+	  "map": "ML_Perception",
+	  "position": "exploration",
+	  "artifacts": [
+		"computer_vision_vr",
+        "convolutional_neural_networks_cnns_vr"
+	  ],
+	  "size_budget": "compact_only",
+	  "rationale": "How machines learn to see. CNNs and computer vision as specialized perception exploration."
+	},
+	{
+	  "map": "ML_Sequence_Memory",
+	  "position": "integration",
+	  "artifacts": [
+		"lstms_vr",
+        "transformers_vr"
+	  ],
+	  "size_budget": "compact_only",
+	  "rationale": "Temporal patterns and long-range dependencies. LSTMs and transformers as sequence modeling integration."
+	},
+	{
+	  "map": "ML_Generative",
+	  "position": "integration",
+	  "artifacts": [
+        "generative_adversarial_networks_gans_vr"
+	  ],
+	  "size_budget": "compact_only",
+	  "rationale": "Machines that generate, not just classify. GANs as generative model integration."
+	},
+	{
+	  "map": "ML_Synthesis",
+	  "position": "synthesis",
+	  "artifacts": [
+		"joint_learn_walk",
+		"explainable_ai_xai_vr",
+        "anomaly_detection"
+	  ],
+	  "size_budget": "mixed",
+	  "rationale": "Reinforcement learning agents that act, plus explainable AI and anomaly detection. Synthesis across all ML paradigms."
+	}
+  ],
+  "world_phase": "organic"
+}

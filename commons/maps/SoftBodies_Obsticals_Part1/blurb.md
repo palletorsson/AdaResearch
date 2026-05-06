@@ -1,0 +1,5 @@
+A grid of deformable objects. Spheres, boxes, capsules, cylinders, tori, prisms — twelve test cells, each a different shape yielding under pressure. Grab them. Watch them recover. Internal pressure fights external force. The mesh deforms but remembers.
+
+A double pendulum swings through the gallery — chaotic, uncontrollable — and slaps each body into response. The same impact, twelve different recoveries. Rounded edges absorb what sharp corners resist. Softness is not weakness. It is a strategy for surviving collision.
+
+Rigid bodies break or hold. Soft bodies do neither. They negotiate. Every vertex displaces, every spring pulls back, and the shape that emerges is not the shape that was — but close enough to persist. Identity as ongoing negotiation between structure and the forces that act upon it.

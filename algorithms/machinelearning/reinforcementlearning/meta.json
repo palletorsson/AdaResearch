@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_reinforcementlearning",
+  "title": "Reinforcement Learning Creature",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
+  "script": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/reinforcementlearning/README.md",
+    "tutorial": "res://algorithms/machinelearning/reinforcementlearning/reinforcementlearning_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/reinforcementlearning/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/reinforcementlearning/summery.md"
+  },
+  "summary": "The `Reinforcement Learning Creature` sandbox investigates concepts from Reinforcement Learning Creature inside a real-time Godot lab.",
+  "keywords": [
+    "action",
+    "add",
+    "angle",
+    "apply",
+    "body",
+    "choose"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_ProceduralGeneration",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 22
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.137,
+  "breath_zones": [
+    {
+      "size": 175,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 22
+      },
+      "centroid": [
+        5.011428571428572,
+        10.937142857142858
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "CaveGenerator"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "SierpinskiPyramid"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "WFCCav"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "branching_growth_algorithm_continued"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "cantor_pagoda_vr"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "cave_generator"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "cube_chair"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "dewcoveredfol"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "example_8_6_recursive_tree_vr"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "fractal_cantor_set"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "fractal_recursion_circles"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "fractal_recursive_tree"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "genetic_programming"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "gyroid_demo"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "koch_curve_1"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "liquid_simulation"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "marching_cubes_cave_gallery"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "marching_cubes_gallery"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "marching_cubes_static"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "maze_generator"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "penteract_double_projection"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "reaction_diffusion_vr"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "rhizome_cave_system"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "room_grammar"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "slime_mold"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "spherenetwork"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "terrain_erosion"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "tesseract_tunnel"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "test_scene_3"
+    },
+    {
+      "x": 6,
+      "z": 16,
+      "token": "test_scene_4"
+    },
+    {
+      "x": 8,
+      "z": 16,
+      "token": "test_scene_5"
+    },
+    {
+      "x": 2,
+      "z": 18,
+      "token": "test_scene_6"
+    },
+    {
+      "x": 6,
+      "z": 18,
+      "token": "wfc"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 33,
+    "walkable_cells": 241,
+    "breath_zone_count": 1,
+    "unique_tokens": 33
+  }
+}

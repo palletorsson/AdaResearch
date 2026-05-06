@@ -1,0 +1,39 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Tutorial_Single",
+  "home_sequence": "array_tutorial",
+  "dimensions": {
+    "w": 4,
+    "d": 3
+  },
+  "signature": "column_3_z",
+  "style": null,
+  "echoes": [],
+  "density": 0.273,
+  "breath_zones": [],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "xyz_coordinates"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 11,
+    "breath_zone_count": 0,
+    "unique_tokens": 3
+  }
+}

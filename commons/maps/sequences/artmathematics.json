@@ -1,0 +1,159 @@
+{
+	"sequences": {
+		"artmathematics": {
+			"name": "Art & Mathematics: Visual Philosophy",
+			"truth": "Art makes visible what mathematics proves. The impossible staircase is G\u00c3\u00b6del you can climb.",
+			"qfep_term": "Visualization",
+			"qfep_connection": "Artists have visualized QFEP dynamics for centuries\u00e2\u20ac\u201dEscher's impossible objects (edge of formal systems), Magritte's sign/signified gap, Minimalism's dark room paradox. Art embodies theory before theory names itself.",
+			"formula": "Ceci n'est pas une pipe",
+			"description": "From Escher's impossible staircases to Magritte's treachery of images to Minimalism's meaning-evacuation paradox. Art as visual epistemology\u00e2\u20ac\u201dmaking mathematical and philosophical limits tangible.",
+			"layer": "cross_cutting",
+			"prerequisites": [
+				"primitives",
+				"transformation"
+			],
+			"unlocks": [
+				"speculativecomputation"
+			],
+			"difficulty": "intermediate",
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Escher: locally coherent, globally impossible\u00e2\u20ac\u201dvisual G\u00c3\u00b6del",
+				"Magritte: the sign is not the signified\u00e2\u20ac\u201drepresentation has limits",
+				"Constructivism: meaning-free elements in autonomous arrangements",
+				"Minimalism paradox: signs signify despite meaning-evacuation",
+				"Art as visual philosophy"
+			],
+			"content": [
+				"Escher_Impossible: Locally Valid, Globally Impossible",
+				"Escher_Tessellation: Infinity in Finite Space",
+				"Magritte_Pipe: This Is Not a Pipe",
+				"Magritte_Windows: The Frame That Lies",
+				"Rodchenko_Monochrome: Pure Color, Zero Depth",
+				"Judd_Minimalism: What You See Is What You See",
+				"Dark_Room_Paradox: Meaning Refuses Evacuation",
+				"Art_Synthesis: Artists See It First",
+				"MathArt_Cultural_History: Form Through Constraint"
+			],
+			"maps": [
+				"Escher_Impossible",
+				"Escher_Tessellation",
+				"Magritte_Pipe",
+				"Magritte_Windows",
+				"Rodchenko_Monochrome",
+				"Judd_Minimalism",
+				"Dark_Room_Paradox",
+				"Art_Synthesis",
+				"MathArt_Cultural_History"
+			],
+			"audio": {
+				"ambient_preset": "gallery_silence",
+				"volume": -15.0
+			},
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/escher_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/magritte_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/minimalism_axioms.md"
+			],
+			"references": {
+				"gamwell_chapters": [
+					"Ch 9: G\u00c3\u00b6del (Escher/Magritte)",
+					"Ch 4: Formalism (Constructivism)",
+					"Ch 13: Postmodernism (Minimalism)"
+				],
+				"key_figures": [
+					"M.C. Escher",
+					"Ren\u00c3\u00a9 Magritte",
+					"Alexander Rodchenko",
+					"Donald Judd",
+					"Robert Morris"
+				],
+				"key_works": [
+					"Relativity (1953)",
+					"The Treachery of Images (1929)",
+					"Untitled (Specific Objects)"
+				]
+			},
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_artmathematics",
+			"completion_rewards": [
+				"visual_philosopher_badge",
+				"impossible_object_badge",
+				"escher_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Escher_Impossible",
+					"position": "intro",
+					"artifacts": [
+						"escher_staircase",
+						"magritte_pipe",
+						"penrose_triangle"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Visual Gödel: Escher's impossible staircase, Penrose triangle, and Magritte's pipe. Locally coherent, globally impossible — art that makes formal limits tangible."
+				},
+				{
+					"map": "Escher_Tessellation",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Infinity in finite space: Escher's tessellations fill the plane without gaps. Scene-embedded — the environment itself demonstrates symmetry group tiling."
+				},
+				{
+					"map": "Magritte_Pipe",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "The treachery of images: this is not a pipe. Scene-embedded exploration of the gap between sign and signified — representation has limits."
+				},
+				{
+					"map": "Magritte_Windows",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "The frame that lies: Magritte's windows where inside and outside collapse. Scene-embedded — the environment enacts the deception."
+				},
+				{
+					"map": "Rodchenko_Monochrome",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Pure Red, Pure Yellow, Pure Blue: Rodchenko's monochromes test whether meaning-free elements exist. Scene-embedded constructivist space."
+				},
+				{
+					"map": "Judd_Minimalism",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "What you see is what you see — but is it? Judd's specific objects: the minimalist paradox where meaning evacuates but significance remains. Scene-embedded."
+				},
+				{
+					"map": "Dark_Room_Paradox",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "The attempt to evacuate meaning keeps generating it. Scene-embedded darkness where absence becomes presence — the dark room as philosophical experiment."
+				},
+				{
+					"map": "Art_Synthesis",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Why artists see what mathematicians prove: synthesis across Escher, Magritte, Rodchenko, Judd. Scene-embedded reflection on visual epistemology."
+				},
+				{
+					"map": "MathArt_Cultural_History",
+					"position": "synthesis",
+					"artifacts": [
+						"penrose_tilings"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Penrose tilings as cultural capstone: aperiodic order discovered independently in Islamic architecture and mathematical crystallography. Art and math converging on the same truth."
+				}
+			]
+		}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
+}

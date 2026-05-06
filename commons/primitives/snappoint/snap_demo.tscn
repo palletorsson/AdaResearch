@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq4m5n8saxwts"]
+
+[ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="1_demo"]
+[ext_resource type="Script" uid="uid://csnkuxp3jotry" path="res://commons/primitives/snappoint/snap_connection_manager.gd" id="2_manager"]
+
+[node name="SnapDemo" type="Node3D"]
+
+[node name="SnapConnectionManager" type="Node" parent="."]
+script = ExtResource("2_manager")
+
+[node name="SnapPoint1" parent="." instance=ExtResource("1_demo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.8723147, -0.5)
+
+[node name="SnapPoint2" parent="." instance=ExtResource("1_demo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.8723147, -0.5)
+
+[node name="SnapPoint3" parent="." instance=ExtResource("1_demo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1723146, -0.5)
+
+[node name="SnapPoint4" parent="." instance=ExtResource("1_demo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8723147, -0.2)
+
+[node name="SnapPoint5" parent="." instance=ExtResource("1_demo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.57231474, -0.5)
+
+[node name="SnapPoint6" parent="." instance=ExtResource("1_demo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.57231474, -0.5)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5723147, -0.5)
+billboard = 1
+text = "Snap Point Demo
+Grab and connect points!
+2 points = Line
+3 points = Triangle
+4 connected points = Tetrahedron"
+font_size = 24
+outline_size = 8

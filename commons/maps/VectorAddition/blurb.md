@@ -1,0 +1,1 @@
+Two arrows meet head-to-tail, and a third emerges — the resultant. Forces combine, velocities stack, directions compose. Addition is not just arithmetic here; it is the grammar of combined influence. What pushes you is never singular. Every motion is a sum.

@@ -50,7 +50,7 @@ var tangent_color = Color(0.9, 0.4, 0.2)
 var convergence_color = Color(0.2, 0.9, 0.3)
 var root_color = Color(0.9, 0.9, 0.2)
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_camera()
 	load_function_preset()
@@ -58,14 +58,14 @@ func _ready():
 	setup_ui()
 	start_newton_raphson()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_animating and animate_convergence:
 		animation_timer += delta
 		if animation_timer >= (1.0 / iteration_speed):
 			perform_iteration_step()
 			animation_timer = 0.0
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
@@ -83,7 +83,7 @@ func _input(event):
 			KEY_3:
 				load_function_preset("Sine")
 
-func setup_environment():
+func setup_environment() -> void:
 	# Lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.2
@@ -101,13 +101,13 @@ func setup_environment():
 	env.environment = environment
 	add_child(env)
 
-func setup_camera():
+func setup_camera() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 8, 12)
-	camera.look_at(Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	add_child(camera)
 
-func load_function_preset(preset: String = ""):
+func load_function_preset(preset: String = "") -> void:
 	if preset != "":
 		function_preset = preset
 	
@@ -155,7 +155,7 @@ func evaluate_derivative(x: float) -> float:
 		_:
 			return 3*x*x - 2  # Default
 
-func create_function_visualization():
+func create_function_visualization() -> void:
 	"""Create 3D visualization of the function"""
 	clear_previous_visualization()
 	
@@ -243,11 +243,11 @@ func create_axis_line(start: Vector3, end: Vector3, color: Color) -> MeshInstanc
 	# Position and orient the line
 	var center = (start + end) / 2
 	mesh_instance.position = center
-	mesh_instance.look_at(end, Vector3.UP)
+	mesh_instance.look_at_from_position(mesh_instance.position, end, Vector3.UP)
 	
 	return mesh_instance
 
-func start_newton_raphson():
+func start_newton_raphson() -> void:
 	"""Initialize the Newton-Raphson algorithm"""
 	current_x = initial_guess
 	iterations_completed = 0
@@ -267,7 +267,7 @@ func start_newton_raphson():
 	
 	print("Newton-Raphson started with initial guess: ", current_x)
 
-func perform_iteration_step():
+func perform_iteration_step() -> void:
 	"""Perform one iteration of Newton-Raphson method"""
 	if is_converged or iterations_completed >= max_iterations:
 		is_animating = false
@@ -311,7 +311,7 @@ func perform_iteration_step():
 	update_convergence_path()
 	update_ui()
 
-func create_tangent_line(x: float, fx: float, fpx: float):
+func create_tangent_line(x: float, fx: float, fpx: float) -> void:
 	"""Create visualization of tangent line at current point"""
 	var tangent_range = 2.0
 	var x1 = x - tangent_range
@@ -329,11 +329,12 @@ func create_tangent_line(x: float, fx: float, fpx: float):
 	tangent_lines.append(tangent_line)
 	add_child(tangent_line)
 
-func create_iteration_point(position: Vector3, color: Color):
+func create_iteration_point(position: Vector3, color: Color) -> void:
 	"""Create a visual marker for an iteration point"""
 	var point = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.15
+	sphere.height = 0.3
 	point.mesh = sphere
 	
 	var material = StandardMaterial3D.new()
@@ -346,7 +347,7 @@ func create_iteration_point(position: Vector3, color: Color):
 	iteration_points.append(point)
 	add_child(point)
 
-func create_root_marker(root_x: float):
+func create_root_marker(root_x: float) -> void:
 	"""Create special marker for the discovered root"""
 	root_marker = MeshInstance3D.new()
 	var cylinder = CylinderMesh.new()
@@ -364,7 +365,7 @@ func create_root_marker(root_x: float):
 	root_marker.position = Vector3(root_x, 0, 0)
 	add_child(root_marker)
 
-func update_convergence_path():
+func update_convergence_path() -> void:
 	"""Update the visual path showing convergence trajectory"""
 	if convergence_history.size() < 2:
 		return
@@ -379,12 +380,12 @@ func update_convergence_path():
 	convergence_path = create_curve_mesh(path_points, convergence_color, 0.05)
 	add_child(convergence_path)
 
-func update_tangent_visualization():
+func update_tangent_visualization() -> void:
 	"""Toggle tangent line visibility"""
 	for tangent in tangent_lines:
 		tangent.visible = show_tangent_lines
 
-func clear_previous_visualization():
+func clear_previous_visualization() -> void:
 	"""Clear previous visualization elements"""
 	if function_mesh:
 		function_mesh.queue_free()
@@ -403,13 +404,13 @@ func clear_previous_visualization():
 	if root_marker:
 		root_marker.queue_free()
 
-func restart_algorithm():
+func restart_algorithm() -> void:
 	"""Restart the algorithm with current parameters"""
 	clear_previous_visualization()
 	create_function_visualization()
 	start_newton_raphson()
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create user interface for information display"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -438,14 +439,22 @@ func setup_ui():
 	
 	update_ui()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update the user interface with current algorithm state"""
 	if not ui_display:
 		return
 	
+	# Check if the UI structure exists
+	var panel = ui_display.get_node_or_null("Panel")
+	if not panel:
+		return
+	var vbox = panel.get_node("VBoxContainer")
+	if not vbox:
+		return
+	
 	var labels = []
 	for i in range(8):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = vbox.get_node("info_label_" + str(i))
 		if label:
 			labels.append(label)
 	
@@ -457,4 +466,13 @@ func update_ui():
 		labels[4].text = "Iteration: %d / %d" % [iterations_completed, max_iterations]
 		labels[5].text = "Status: " + ("CONVERGED" if is_converged else "Running" if is_animating else "Paused")
 		labels[6].text = "Tolerance: " + str(tolerance)
-		labels[7].text = "Press R to restart, SPACE to step, T for tangents" 
+		labels[7].text = "Press R to restart, SPACE to step, T for tangents"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

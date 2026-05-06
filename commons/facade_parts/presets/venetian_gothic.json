@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "generator": "ada_facade_builder",
+  "facade": {
+    "bays": 7,
+    "stories": 5,
+    "symmetry": "bilateral",
+    "total_width": 21.0,
+    "total_height": 16.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "Cornice", "height_multiplier": 0.4 },
+    { "row": 1, "name": "Upper Gallery", "height_multiplier": 0.9 },
+    { "row": 2, "name": "Piano Nobile", "height_multiplier": 1.5 },
+    { "row": 3, "name": "Mezzanine", "height_multiplier": 0.7 },
+    { "row": 4, "name": "Water Storey", "height_multiplier": 1.2 }
+  ],
+  "materials": {
+    "wall": "#f0e8d8",
+    "zones": {
+      "Cornice": { "color": "#d4c5a9", "type": "stone_cornice" },
+      "Upper Gallery": { "color": "#e8dfd0", "type": "plaster" },
+      "Piano Nobile": { "color": "#f5ede0", "type": "dressed_stone" },
+      "Mezzanine": { "color": "#e0d8c8", "type": "plaster" },
+      "Water Storey": { "color": "#a09080", "type": "rusticated_stone" }
+    }
+  },
+  "placements": [
+    { "col": 0, "row": 0, "part": "cyma_recta", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 0, "part": "cyma_recta", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 0, "part": "cyma_recta", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 0, "part": "cyma_recta", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 1, "part": "pointed_arch", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 1, "part": "pointed_arch", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 1, "part": "pointed_arch", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 1, "part": "pointed_arch", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 2, "part": "venetian_bifora", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 2, "part": "venetian_bifora", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 2, "part": "venetian_bifora", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 2, "part": "venetian_bifora", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 3, "part": "porthole", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 3, "part": "porthole", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 3, "part": "porthole", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 3, "part": "porthole", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 4, "part": "rusticated_block", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 4, "part": "round_arch", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 4, "part": "round_arch", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 4, "part": "rusticated_block", "col_span": 1, "row_span": 1, "params": {} }
+  ]
+}

@@ -1,0 +1,330 @@
+{
+  "_meta": {
+    "description": "Nature layer auto-generated from soft_stages.json",
+    "version": "1.0",
+    "generator": "generate_nature_layers.py",
+    "terrain_mode": "self_generating",
+    "density": 1.0,
+    "kingdoms": [
+      "flower",
+      "tree",
+      "fungus",
+      "creature"
+    ]
+  },
+  "map_name": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+  "dimensions": {
+    "width": 8,
+    "depth": 9
+  },
+  "layers": {
+    "ground": [
+      [
+        {
+          "type": "crawler",
+          "intensity": 0.28
+        },
+        {
+          "type": "mushrooms",
+          "intensity": 0.15
+        },
+        {
+          "type": "grass",
+          "intensity": 0.15
+        },
+        {
+          "type": "moss",
+          "intensity": 0.12
+        },
+        {
+          "type": "moss",
+          "intensity": 0.13
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.13
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "crawler",
+          "intensity": 0.21
+        }
+      ],
+      [
+        {
+          "type": "bush",
+          "intensity": 0.28
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.62
+        },
+        {
+          "type": "tree",
+          "intensity": 0.62
+        },
+        {
+          "type": "mushrooms",
+          "intensity": 0.59
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.56
+        },
+        {
+          "type": "mushrooms",
+          "intensity": 0.77
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "walker",
+          "intensity": 0.17
+        }
+      ],
+      [
+        {
+          "type": "walker",
+          "intensity": 0.23
+        },
+        {
+          "type": "tree",
+          "intensity": 0.41
+        },
+        {
+          "type": "bush",
+          "intensity": 0.73
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.77
+        },
+        {
+          "type": "tree",
+          "intensity": 0.99
+        },
+        {
+          "type": "moss",
+          "intensity": 0.52
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "walker",
+          "intensity": 0.22
+        }
+      ],
+      [
+        {
+          "type": "mushrooms",
+          "intensity": 0.1
+        },
+        {
+          "type": "bush",
+          "intensity": 0.33
+        },
+        {
+          "type": "mushrooms",
+          "intensity": 0.84
+        },
+        {
+          "type": "moss",
+          "intensity": 0.83
+        },
+        {
+          "type": "mushrooms",
+          "intensity": 0.96
+        },
+        {
+          "type": "grass",
+          "intensity": 0.52
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.1
+        }
+      ],
+      [
+        {
+          "type": "moss",
+          "intensity": 0.2
+        },
+        {
+          "type": "grass",
+          "intensity": 0.32
+        },
+        {
+          "type": "walker",
+          "intensity": 0.69
+        },
+        {
+          "type": "tree",
+          "intensity": 0.98
+        },
+        {
+          "type": "moss",
+          "intensity": 0.87
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "crawler",
+          "intensity": 0.25
+        }
+      ],
+      [
+        {
+          "type": "grass",
+          "intensity": 0.12
+        },
+        {
+          "type": "grass",
+          "intensity": 0.61
+        },
+        {
+          "type": "grass",
+          "intensity": 0.85
+        },
+        {
+          "type": "tree",
+          "intensity": 0.73
+        },
+        {
+          "type": "crawler",
+          "intensity": 0.61
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "walker",
+          "intensity": 0.76
+        },
+        {
+          "type": "moss",
+          "intensity": 0.28
+        }
+      ],
+      [
+        {
+          "type": "tree",
+          "intensity": 0.21
+        },
+        {
+          "type": "bush",
+          "intensity": 0.77
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.88
+        },
+        {
+          "type": "grass",
+          "intensity": 0.63
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.95
+        },
+        {
+          "type": "moss",
+          "intensity": 0.68
+        },
+        {
+          "type": "bush",
+          "intensity": 0.41
+        },
+        {
+          "type": "moss",
+          "intensity": 0.29
+        }
+      ],
+      [
+        {
+          "type": "mushrooms",
+          "intensity": 0.26
+        },
+        {
+          "type": "moss",
+          "intensity": 0.78
+        },
+        {
+          "type": "grass",
+          "intensity": 0.76
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.46
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.52
+        },
+        {
+          "type": "moss",
+          "intensity": 0.73
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "bush",
+          "intensity": 0.24
+        }
+      ],
+      [
+        {
+          "type": "tree",
+          "intensity": 0.15
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.2
+        },
+        {
+          "type": "walker",
+          "intensity": 0.28
+        },
+        {
+          "type": "mushrooms",
+          "intensity": 0.18
+        },
+        {
+          "type": "moss",
+          "intensity": 0.13
+        },
+        {
+          "type": "moss",
+          "intensity": 0.17
+        },
+        {
+          "type": "moss",
+          "intensity": 0.14
+        },
+        {
+          "type": "tree",
+          "intensity": 0.21
+        }
+      ]
+    ]
+  }
+}

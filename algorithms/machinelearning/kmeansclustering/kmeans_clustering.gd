@@ -1,7 +1,19 @@
 extends Node3D
 
-# Enhanced K-Means Clustering Algorithm Visualization
-# Educational tool with advanced features and interactive controls
+# =============================================================================
+# K-Means Clustering Algorithm Visualization
+# =============================================================================
+# Educational tool with advanced features and interactive controls.
+# Data points (spheres) are assigned to the nearest centroid (discs).
+# Centroids move toward the mean of their cluster each iteration.
+# Convergence is reached when centroid movement drops below threshold.
+# =============================================================================
+
+# --- Color Palette (project-wide conventions) --------------------------------
+const COLOR_DATA := Color(0.3, 0.5, 0.9)       # Blues for unassigned data
+const COLOR_POSITIVE := Color(0.3, 0.85, 0.4)   # Greens for positive feedback
+const COLOR_NEGATIVE := Color(0.9, 0.3, 0.3)    # Reds for negative
+const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for convergence
 
 @export_category("Algorithm Parameters")
 @export var data_point_count: int = 100:
@@ -109,6 +121,10 @@ var cluster_colors: Array = [
 	Color(0.7, 0.3, 1.0)   # Purple
 ]
 
+# 3D in-scene labels for VR/3D viewing
+var _title_label_3d: Label3D
+var _stats_label_3d: Label3D
+
 # Data structures
 class DataPoint:
 	var position: Vector3
@@ -117,7 +133,7 @@ class DataPoint:
 	var mesh_instance: MeshInstance3D
 	var distance_to_centroid: float = 0.0
 	
-	func _init(pos: Vector3):
+	func _init(pos: Vector3) -> void:
 		position = pos
 
 class Centroid:
@@ -128,14 +144,15 @@ class Centroid:
 	var assigned_points: Array = []
 	var movement_distance: float = 0.0
 	
-	func _init(pos: Vector3, id: int):
+	func _init(pos: Vector3, id: int) -> void:
 		position = pos
 		previous_position = pos
 		cluster_id = id
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_ui()
+	_build_3d_labels()
 	generate_data()
 	initialize_centroids()
 	create_visuals()
@@ -144,7 +161,24 @@ func _ready():
 	if animate_clustering and not step_by_step_mode:
 		start_clustering()
 
-func _process(delta):
+func _build_3d_labels() -> void:
+	"""Create in-scene 3D labels for VR / immersive viewing."""
+	_title_label_3d = Label3D.new()
+	_title_label_3d.text = "K-Means Clustering"
+	_title_label_3d.font_size = 72
+	_title_label_3d.modulate = COLOR_SPECIAL
+	_title_label_3d.position = Vector3(0, 12, 0)
+	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label_3d)
+
+	_stats_label_3d = Label3D.new()
+	_stats_label_3d.font_size = 40
+	_stats_label_3d.modulate = Color.WHITE
+	_stats_label_3d.position = Vector3(0, 10.5, 0)
+	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_stats_label_3d)
+
+func _process(delta: float) -> void:
 	if animate_clustering and not converged and not is_paused and not step_by_step_mode:
 		algorithm_timer += delta
 		if algorithm_timer >= iteration_speed:
@@ -154,7 +188,7 @@ func _process(delta):
 	update_ui()
 	handle_input()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
 		if step_by_step_mode or is_paused:
 			manual_step = true
@@ -163,13 +197,13 @@ func _input(event):
 	elif event.is_action_pressed("ui_select"):  # Enter key
 		is_paused = !is_paused
 
-func handle_input():
+func handle_input() -> void:
 	if manual_step:
 		manual_step = false
 		if not converged:
 			perform_clustering_step()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Enhanced lighting setup
 	var light = DirectionalLight3D.new()
 	light.light_energy = 0.8
@@ -208,7 +242,7 @@ func setup_environment():
 	camera.fov = 65
 	add_child(camera)
 
-func setup_ui():
+func setup_ui() -> void:
 	# Create UI container
 	ui_container = Control.new()
 	ui_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -365,7 +399,7 @@ func create_convergence_graph() -> Panel:
 	# Graph will be drawn in _draw method
 	return panel
 
-func generate_data():
+func generate_data() -> void:
 	clear_data()
 	
 	if generate_clustered_data:
@@ -375,7 +409,7 @@ func generate_data():
 	
 	print("Generated ", data_points.size(), " data points")
 
-func generate_clustered_dataset():
+func generate_clustered_dataset() -> void:
 	var points_per_cluster = int(data_point_count * (1.0 - noise_points_percentage) / natural_cluster_count)
 	
 	# Generate natural clusters
@@ -411,7 +445,7 @@ func generate_clustered_dataset():
 		var point = DataPoint.new(random_pos)
 		data_points.append(point)
 
-func generate_random_dataset():
+func generate_random_dataset() -> void:
 	for i in range(data_point_count):
 		var random_pos = Vector3(
 			randf_range(-data_space_size/2, data_space_size/2),
@@ -421,7 +455,7 @@ func generate_random_dataset():
 		var point = DataPoint.new(random_pos)
 		data_points.append(point)
 
-func initialize_centroids():
+func initialize_centroids() -> void:
 	clear_centroids()
 	
 	# K-means++ initialization for better initial centroid placement
@@ -460,7 +494,7 @@ func initialize_centroids():
 		assignments.append(-1)
 		previous_assignments.append(-1)
 
-func create_visuals():
+func create_visuals() -> void:
 	clear_visuals()
 	
 	# Create data point visuals
@@ -472,9 +506,11 @@ func create_visuals():
 		mesh_instance.mesh = sphere
 		
 		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0.8, 0.8, 0.8)
-		material.metallic = 0.3
-		material.roughness = 0.7
+		material.albedo_color = COLOR_DATA
+		material.metallic = 0.35
+		material.roughness = 0.55
+		material.emission_enabled = true
+		material.emission = COLOR_DATA * 0.1
 		mesh_instance.material_override = material
 		mesh_instance.position = point.position
 		
@@ -504,7 +540,7 @@ func create_visuals():
 		add_child(mesh_instance)
 		centroid_meshes.append(mesh_instance)
 
-func start_clustering():
+func start_clustering() -> void:
 	iteration = 0
 	converged = false
 	is_paused = false
@@ -513,7 +549,7 @@ func start_clustering():
 	
 	print("Starting K-means clustering with ", cluster_count, " clusters")
 
-func perform_clustering_step():
+func perform_clustering_step() -> void:
 	if converged:
 		return
 	
@@ -573,12 +609,40 @@ func perform_clustering_step():
 		converged = true
 		if pause_on_convergence:
 			is_paused = true
+		_play_convergence_celebration()
 		print("Converged after ", iteration, " iterations")
 	
 	# Update visuals
 	update_visuals()
+	_update_3d_stats()
 
-func update_visuals():
+func _play_convergence_celebration() -> void:
+	"""Scale-pulse all centroids and flash them gold on convergence."""
+	for centroid in centroids:
+		if centroid.mesh_instance:
+			var tw := create_tween()
+			tw.tween_property(centroid.mesh_instance, "scale", Vector3.ONE * 2.0, 0.25).set_ease(Tween.EASE_OUT)
+			tw.tween_property(centroid.mesh_instance, "scale", Vector3.ONE, 0.5).set_ease(Tween.EASE_IN_OUT)
+			var mat = centroid.mesh_instance.material_override as StandardMaterial3D
+			if mat:
+				var orig_emission = mat.emission
+				var tw2 := create_tween()
+				tw2.tween_property(mat, "emission", COLOR_SPECIAL * 1.5, 0.15)
+				tw2.tween_property(mat, "emission", orig_emission, 0.8)
+
+func _update_3d_stats() -> void:
+	"""Update the in-scene 3D stats label."""
+	if _stats_label_3d:
+		var status_str := "Clustering..."
+		if converged:
+			status_str = "Converged ✓"
+		elif is_paused:
+			status_str = "Paused"
+		_stats_label_3d.text = "Iter: %d  |  K: %d  |  Dist: %.1f  |  %s" % [
+			iteration, cluster_count, total_distance, status_str
+		]
+
+func update_visuals() -> void:
 	# Update point colors and highlight changes
 	for i in range(data_points.size()):
 		var point = data_points[i]
@@ -625,7 +689,7 @@ func update_visuals():
 	if show_voronoi_regions:
 		update_voronoi_regions()
 
-func update_connection_lines():
+func update_connection_lines() -> void:
 	clear_connections()
 	
 	# Limit connections for performance
@@ -669,7 +733,7 @@ func create_connection_line(from: Vector3, to: Vector3, color: Color) -> MeshIns
 	add_child(line_mesh)
 	return line_mesh
 
-func update_voronoi_regions():
+func update_voronoi_regions() -> void:
 	clear_voronoi()
 	
 	# Create simplified voronoi visualization using planes
@@ -690,7 +754,7 @@ func update_voronoi_regions():
 		add_child(plane_mesh)
 		voronoi_planes.append(plane_mesh)
 
-func update_ui():
+func update_ui() -> void:
 	if not ui_container:
 		return
 	
@@ -713,13 +777,13 @@ func update_ui():
 		status_label.text = status
 
 # Utility functions
-func clear_data():
+func clear_data() -> void:
 	data_points.clear()
 
-func clear_centroids():
+func clear_centroids() -> void:
 	centroids.clear()
 
-func clear_visuals():
+func clear_visuals() -> void:
 	for mesh in point_meshes:
 		if mesh:
 			mesh.queue_free()
@@ -733,34 +797,34 @@ func clear_visuals():
 	clear_connections()
 	clear_voronoi()
 
-func clear_connections():
+func clear_connections() -> void:
 	for line in connection_lines:
 		if line:
 			line.queue_free()
 	connection_lines.clear()
 
-func clear_voronoi():
+func clear_voronoi() -> void:
 	for plane in voronoi_planes:
 		if plane:
 			plane.queue_free()
 	voronoi_planes.clear()
 
-func update_centroid_visibility():
+func update_centroid_visibility() -> void:
 	for mesh in centroid_meshes:
 		if mesh:
 			mesh.visible = show_centroids
 
-func update_connection_visibility():
+func update_connection_visibility() -> void:
 	for line in connection_lines:
 		if line:
 			line.visible = show_connections
 
-func update_voronoi_visibility():
+func update_voronoi_visibility() -> void:
 	for plane in voronoi_planes:
 		if plane:
 			plane.visible = show_voronoi_regions
 
-func update_point_sizes():
+func update_point_sizes() -> void:
 	for point in data_points:
 		if point.mesh_instance and point.mesh_instance.mesh:
 			var sphere = point.mesh_instance.mesh as SphereMesh
@@ -768,14 +832,14 @@ func update_point_sizes():
 				sphere.radius = 0.3 * point_size_scale
 				sphere.height = 0.6 * point_size_scale
 
-func restart_clustering():
+func restart_clustering() -> void:
 	clear_visuals()
 	generate_data()
 	initialize_centroids()
 	create_visuals()
 	start_clustering()
 
-func regenerate_data():
+func regenerate_data() -> void:
 	if not is_inside_tree():
 		return
 	clear_visuals()
@@ -902,14 +966,14 @@ var performance_metrics = {
 	"render_times": []
 }
 
-func _notification(what):
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		# Clean up resources
 		clear_visuals()
 		get_tree().quit()
 
 # Advanced visualization features
-func create_3d_convergence_visualization():
+func create_3d_convergence_visualization() -> void:
 	"""Create a 3D trail showing centroid movement over time"""
 	if centroid_movement_history.size() < 2:
 		return
@@ -932,7 +996,7 @@ func create_3d_convergence_visualization():
 		# Create trail visualization
 		create_centroid_trail(centroid, history)
 
-func create_centroid_trail(centroid: Centroid, positions: Array):
+func create_centroid_trail(centroid: Centroid, positions: Array) -> void:
 	if positions.size() < 2:
 		return
 	
@@ -975,11 +1039,11 @@ func create_centroid_trail(centroid: Centroid, positions: Array):
 		timer.start()
 
 # Interactive features
-func _on_data_point_clicked(point: DataPoint):
+func _on_data_point_clicked(point: DataPoint) -> void:
 	"""Handle clicking on data points for detailed information"""
 	show_point_info(point)
 
-func show_point_info(point: DataPoint):
+func show_point_info(point: DataPoint) -> void:
 	var info_panel = create_info_panel(point)
 	ui_container.add_child(info_panel)
 	
@@ -1065,7 +1129,7 @@ func generate_learning_report() -> Dictionary:
 	return report
 
 # Experiment modes for educational purposes
-func run_k_comparison_experiment():
+func run_k_comparison_experiment() -> void:
 	"""Run clustering with different K values to demonstrate elbow method"""
 	var k_values = [2, 3, 4, 5, 6, 7, 8]
 	var inertias = []
@@ -1089,17 +1153,17 @@ func run_k_comparison_experiment():
 	# Display results
 	show_elbow_analysis(k_values, inertias)
 
-func show_elbow_analysis(k_values: Array, inertias: Array):
+func show_elbow_analysis(k_values: Array, inertias: Array) -> void:
 	print("Elbow Method Analysis:")
 	for i in range(k_values.size()):
 		print("K=%d: Inertia=%.2f" % [k_values[i], inertias[i]])
 
 # Advanced initialization methods
-func initialize_centroids_plus_plus():
+func initialize_centroids_plus_plus() -> void:
 	"""K-means++ initialization - already implemented in initialize_centroids()"""
 	pass
 
-func initialize_centroids_random():
+func initialize_centroids_random() -> void:
 	"""Pure random initialization"""
 	clear_centroids()
 	
@@ -1119,7 +1183,7 @@ func initialize_centroids_random():
 		assignments.append(-1)
 		previous_assignments.append(-1)
 
-func initialize_centroids_data_points():
+func initialize_centroids_data_points() -> void:
 	"""Initialize centroids at random data point positions"""
 	clear_centroids()
 	
@@ -1143,7 +1207,7 @@ func initialize_centroids_data_points():
 		previous_assignments.append(-1)
 
 # Save/Load functionality
-func save_clustering_session(filename: String):
+func save_clustering_session(filename: String) -> void:
 	var save_data = export_clustering_data()
 	var file = FileAccess.open("user://clustering_sessions/" + filename + ".json", FileAccess.WRITE)
 	if file:
@@ -1185,7 +1249,7 @@ func load_clustering_session(filename: String) -> bool:
 	return true
 
 # Performance optimization
-func optimize_rendering_for_large_datasets():
+func optimize_rendering_for_large_datasets() -> void:
 	"""Implement LOD (Level of Detail) for large datasets"""
 	var camera_pos = get_viewport().get_camera_3d().global_position
 	
@@ -1235,7 +1299,7 @@ func get_cluster_statistics() -> Array:
 	
 	return stats
 
-func print_algorithm_summary():
+func print_algorithm_summary() -> void:
 	print("\n=== K-Means Clustering Summary ===")
 	print("Clusters: ", cluster_count)
 	print("Data Points: ", data_point_count)
@@ -1243,3 +1307,12 @@ func print_algorithm_summary():
 	print("Converged: ", converged)
 	print("Final Inertia: ", snapped(total_distance, 0.01))
 	print("================================\n")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

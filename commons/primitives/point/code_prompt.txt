@@ -1,0 +1,14 @@
+﻿You are generating a Godot 4.2 GDScript named `point.gd` for `res://commons/primitives/point/point.tscn`.
+
+Core requirements
+1. Extend `Node3D` and, in `_ready()`, call a helper that grabs references to the grab sphere and mesh (`GrabSphere/MeshInstance3D`).
+2. Instantiate a `Label3D` at runtime: billboarded, centered, with outline for readability, positioned slightly above the sphere, and showing the world coordinates formatted to one decimal place.
+3. Update the label every frame in `_process(delta)` so the text mirrors the grab sphere’s global position even while it is being moved externally.
+4. Expose convenience methods:
+   - `set_point_position(Vector3)` moves both the node and the grab sphere and refreshes the label.
+   - `set_point_color(Color)` delegates to a `PointColor` child if present, otherwise applies/creates a simple emissive `StandardMaterial3D` on the sphere mesh.
+   - `get_pickable_sphere()`, `is_grabbed()`, `set_label_visible(bool)`, `set_label_offset(Vector3)`, `set_label_color(Color)` for integration with other systems.
+5. Keep comments focused on intent (e.g., why the label is parented under the grab sphere) and structure the file with clear helper sections for setup, getters, and public API.
+6. Use ASCII-compatible UTF-8 and avoid assumptions about optional nodes—guard lookups with `get_node_or_null` and `has_method` checks.
+
+Assume supporting scenes (`GrabSphere`, `PointColor`) are provided elsewhere in the project.

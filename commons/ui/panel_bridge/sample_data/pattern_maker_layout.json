@@ -1,0 +1,169 @@
+{
+  "page": "pattern_maker",
+  "version": 1,
+  "pattern_name": "Sample P4M",
+  "domain": {
+    "size": 8,
+    "group": "P4M"
+  },
+  "panels": [
+    {
+      "id": "motif_library",
+      "role": "left",
+      "width_m": 0.35,
+      "height_m": 0.65,
+      "viewport_px": [256, 600],
+      "elements": [
+        {
+          "id": "period_selector",
+          "type": "dropdown",
+          "rect": [0, 0, 256, 40],
+          "metadata": { "data_path": "periodId" }
+        },
+        {
+          "id": "site_buttons",
+          "type": "button_group",
+          "rect": [0, 48, 256, 100],
+          "metadata": { "data_path": "siteId" }
+        },
+        {
+          "id": "motif_thumbnails",
+          "type": "thumbnail_grid",
+          "rect": [0, 156, 256, 444],
+          "metadata": { "data_path": "motifs" }
+        }
+      ]
+    },
+    {
+      "id": "pattern_editor",
+      "role": "center",
+      "width_m": 0.65,
+      "height_m": 0.65,
+      "viewport_px": [480, 640],
+      "elements": [
+        {
+          "id": "domain_editor",
+          "type": "color_grid",
+          "rect": [48, 16, 384, 384],
+          "overlay_3d": "mosaic_board",
+          "metadata": {
+            "rows": 8,
+            "cols": 8,
+            "cell_px": 48,
+            "palette_colors": [
+              "#f0e6d2", "#1a1c2e", "#1e3a5f", "#c4a35a",
+              "#8b2500", "#2d5a27", "#4a2d6b", "#c67b30"
+            ],
+            "click_mode": "paint",
+            "data_path": "domain"
+          }
+        },
+        {
+          "id": "palette_bar",
+          "type": "color_palette",
+          "rect": [48, 408, 384, 32],
+          "metadata": {
+            "palette_colors": [
+              "#f0e6d2", "#1a1c2e", "#1e3a5f", "#c4a35a",
+              "#8b2500", "#2d5a27", "#4a2d6b", "#c67b30"
+            ],
+            "data_path": "active_color"
+          }
+        },
+        {
+          "id": "tiled_preview",
+          "type": "color_grid",
+          "rect": [48, 456, 384, 168],
+          "overlay_3d": "mosaic_floor",
+          "metadata": {
+            "rows": 24,
+            "cols": 24,
+            "cell_px": 7,
+            "palette_colors": [
+              "#f0e6d2", "#1a1c2e", "#1e3a5f", "#c4a35a",
+              "#8b2500", "#2d5a27", "#4a2d6b", "#c67b30"
+            ],
+            "wallpaper_group": "P4M",
+            "read_only": true,
+            "data_path": "expandedGrid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pattern_properties",
+      "role": "right",
+      "width_m": 0.40,
+      "height_m": 0.65,
+      "viewport_px": [288, 600],
+      "elements": [
+        {
+          "id": "group_selector",
+          "type": "button_grid",
+          "rect": [0, 0, 288, 220],
+          "metadata": {
+            "data_path": "group",
+            "current_group": "P4M"
+          }
+        },
+        {
+          "id": "domain_size_selector",
+          "type": "button_group",
+          "rect": [0, 228, 288, 40],
+          "metadata": {
+            "data_path": "domain.size",
+            "options": [2, 4, 6, 8, 12, 16]
+          }
+        },
+        {
+          "id": "zone_selector",
+          "type": "dropdown",
+          "rect": [0, 276, 288, 36],
+          "metadata": {
+            "data_path": "zone",
+            "current_zone": "field"
+          }
+        },
+        {
+          "id": "preview_repeats_slider",
+          "type": "slider",
+          "rect": [0, 320, 288, 32],
+          "overlay_3d": "slider_rail",
+          "metadata": {
+            "data_path": "previewRepeats",
+            "min": 2,
+            "max": 12,
+            "current": 3
+          }
+        },
+        {
+          "id": "operations_bar",
+          "type": "button_group",
+          "rect": [0, 360, 288, 80],
+          "metadata": {
+            "actions": [
+              "mirror_x", "mirror_y",
+              "rotate_cw", "rotate_ccw",
+              "invert", "shift_l", "shift_r",
+              "shift_u", "shift_d", "clear"
+            ]
+          }
+        },
+        {
+          "id": "motif_name_input",
+          "type": "text_input",
+          "rect": [0, 448, 288, 36],
+          "metadata": { "data_path": "motifName" }
+        },
+        {
+          "id": "export_bar",
+          "type": "button_group",
+          "rect": [0, 492, 288, 108],
+          "metadata": {
+            "actions": ["export_json", "export_png", "copy_array", "export_panel_layout"]
+          }
+        }
+      ]
+    }
+  ]
+}

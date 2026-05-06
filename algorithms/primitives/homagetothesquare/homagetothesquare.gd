@@ -1,13 +1,26 @@
 extends Node3D
 
+# @identity
+# essence: for i in 10: draw_quad(center, size[i], color[i]) — ten nested squares from Albers' color theory, each a slightly smaller concentric rectangle rendered front-to-back with vertex colors
+# desire: to stand before a flat painting and feel color relationships shift as squares nest — warm beige yields to mauve yields to coral, each boundary a silent argument about adjacency
+# critical_parameter: square_sizes ratio array — the proportional nesting from 1.0 down to 0.16 determines which color dominates peripheral vision vs foveal attention
+# triggers: _ready builds ArrayMesh with vertex colors and a dark wood frame; static display, no animation
+# emerges: transparency (alpha 0.8) lets background bleed through, so the painting's appearance depends on the grid cube behind it — context changes the work
+# needs: [missing] no VR interaction — pure contemplative object; no sliders, no buttons
+# relationships: a mathematical art primitive used in F14_Lab_Bench alongside platonicsolids, rainbow, and cube_scene — demonstrates that color theory is computation
+# truth: Albers proved that color is never seen as it is — it is always relative, always a negotiation between adjacent fields
+
+# Local debug flag to gate prints (default off)
+@export var debug: bool = false
+
 # Plane dimensions
 const PLANE_SIZE = 10.0
 
 # Scale factor
 var scale_factor = 0.5
 
-# Translation offset
-var x_offset = 0.5
+# Center the painting at the origin for proper grid placement
+var x_offset = 0.0
 var z_offset = 0.0
 
 # Colors from the Albers image (from outer to inner)
@@ -27,10 +40,39 @@ var square_colors = [
 # Square sizes (as ratios of the plane)
 var square_sizes = [1.0, 0.85, 0.7, 0.6, 0.5, 0.42, 0.35, 0.28, 0.22, 0.16]
 
-func _ready():
+func _ready() -> void:
+	create_frame()
 	create_albers_plane()
 
-func create_albers_plane():
+func create_frame() -> void:
+	# Create a thick frame behind the painting
+	# Frame goes from 0.399m (just behind painting) to 0.6m (into the wall)
+	var frame = MeshInstance3D.new()
+	frame.name = "Frame"
+	add_child(frame)
+	
+	# Calculate frame size based on outer square
+	var outer_size = square_sizes[0] * PLANE_SIZE * 0.5 * scale_factor
+	var frame_size = outer_size + 0.15  # Slight border around painting
+	
+	# Frame depth behind the painting surface
+	var frame_depth = 0.1
+
+	var box = BoxMesh.new()
+	box.size = Vector3(frame_size, frame_size, frame_depth)
+	frame.mesh = box
+
+	# Position frame behind the painting (painting faces Z+, frame sits at Z-)
+	frame.position = Vector3(x_offset, 0, -(frame_depth * 0.5 + 0.005))
+	
+	# Dark wood frame material
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.15, 0.1, 0.08)  # Dark brown/walnut
+	mat.roughness = 0.7
+	mat.metallic = 0.0
+	frame.material_override = mat
+
+func create_albers_plane() -> void:
 	# Create the base plane geometry
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = "AlbersPlane"
@@ -89,7 +131,7 @@ func create_albers_plane():
 		indices.append(base + 0)
 		indices.append(base + 1)
 		indices.append(base + 2)
-		
+
 		# Second triangle (bottom-left, top-right, top-left)
 		indices.append(base + 0)
 		indices.append(base + 2)
@@ -120,5 +162,13 @@ func create_albers_plane():
 	
 	mesh_instance.material_override = material
 	
-	# Rotate plane to face viewer better
-	mesh_instance.rotation_degrees = Vector3(0, 90, 0)
+	# Painting faces Z- direction (toward the viewer in the grid)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

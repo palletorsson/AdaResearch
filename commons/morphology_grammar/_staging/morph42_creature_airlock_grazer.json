@@ -1,0 +1,99 @@
+{
+  "id": "morph42_creature_airlock_grazer",
+  "family": "scifi_creatures",
+  "notes": "Creature pass: the airlock frame becomes a tall grazing walker with a plate face, heavy shoulders, and four planted legs.",
+  "camera_yaw": 0.72,
+  "camera_pitch": 0.36,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.12,
+      0.96,
+      0.54
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "airlock_grazer_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "finger_array",
+      "params": {
+        "count": 4,
+        "length": 0.52,
+        "fill": 0.86
+      },
+      "child_role": "support",
+      "budget_factor": 0.16
+    },
+    {
+      "id": "airlock_grazer_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.36,
+        "scale": 0.58,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          -0.04,
+          0.18
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "airlock_grazer_shoulders",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.22,
+        "scale": 0.22,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.1,
+          -0.04
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "airlock_grazer_horns",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 2,
+        "length": 0.16,
+        "scale": 0.84
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

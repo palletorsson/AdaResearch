@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://4bsb3cpkg8k0"]
+[gd_scene format=3 uid="uid://4bsb3cpkg8k0"]
 
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="1_kcq30"]
 
@@ -11,9 +11,6 @@ shader_parameter/emissionColor = Color(0.981557, 0.761247, 0.912913, 1)
 shader_parameter/width = 3.713
 shader_parameter/blur = 0.581
 shader_parameter/emission_strength = 0.458
-shader_parameter/modelOpacity = 1.0
-shader_parameter/wireframeOpacity = 1.0
-shader_parameter/globalOpacity = 1.0
 shader_parameter/show_interior = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_yho6o"]
@@ -23,20 +20,20 @@ albedo_color = Color(1, 0, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uyvxc"]
 
-[node name="CubeScene" type="Node3D"]
+[node name="CubeScene" type="Node3D" unique_id=465105138]
 
-[node name="CubeBaseStaticBody3D" type="StaticBody3D" parent="."]
+[node name="CubeBaseStaticBody3D" type="StaticBody3D" parent="." unique_id=271139903]
 
-[node name="CubeBaseMesh" type="MeshInstance3D" parent="CubeBaseStaticBody3D"]
+[node name="CubeBaseMesh" type="MeshInstance3D" parent="CubeBaseStaticBody3D" unique_id=2138673286]
 material_override = SubResource("ShaderMaterial_jsgum")
 mesh = SubResource("BoxMesh_yho6o")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jmrfl")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeBaseStaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeBaseStaticBody3D" unique_id=941132665]
 shape = SubResource("BoxShape3D_uyvxc")
 
-[node name="Label3D_1_1" type="Label3D" parent="CubeBaseStaticBody3D"]
+[node name="Label3D_1_1" type="Label3D" parent="CubeBaseStaticBody3D" unique_id=1042916716]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 visible = false
 text = "1:1"

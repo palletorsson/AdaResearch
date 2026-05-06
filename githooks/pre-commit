@@ -1,0 +1,35 @@
+#!/bin/sh
+# Versioned pre-commit hook for AdaResearch. Install with:
+#     git config core.hooksPath githooks
+#
+# Runs two checks in order:
+#   1. Block accidental commits of local OpenXR input map tweaks.
+#   2. Run the coverage gate (artifact docs + map coverage invariants).
+
+set -e
+
+# --- 1. OpenXR action map ---------------------------------------------
+if git diff --cached --name-only | grep -qx "openxr_action_map.tres"; then
+  echo "ERROR: openxr_action_map.tres must not be committed." >&2
+  echo "Unstage it with: git restore --staged openxr_action_map.tres" >&2
+  exit 1
+fi
+
+# --- 2. Coverage gate -------------------------------------------------
+# Only runs when changes affect the layers that can move coverage numbers.
+# Avoids slowing down unrelated commits (text-only, doc tweaks, etc.).
+if git diff --cached --name-only | grep -qE '^(commons/maps/[^/]+/map_data\.json|commons/artifacts/|commons/primitives/|commons/visualaid/|commons/lab/|algorithms/|commons/artifacts/registry/)'; then
+  echo "Coverage-affecting files changed — running coverage gate…" >&2
+  if ! python tools/check_coverage.py --skip-regen; then
+    echo "" >&2
+    echo "Coverage gate failed. Regenerate reports and re-try:" >&2
+    echo "  python tools/map_coverage.py" >&2
+    echo "" >&2
+    echo "Or, if the change is intentional and you want to accept the new state:" >&2
+    echo "  python tools/check_coverage.py --write-budget" >&2
+    echo "  git add doc/reports/COVERAGE_BUDGET.json" >&2
+    exit 1
+  fi
+fi
+
+exit 0

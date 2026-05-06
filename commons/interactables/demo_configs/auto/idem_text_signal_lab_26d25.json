@@ -1,0 +1,129 @@
+{
+  "demo_info": {
+    "name": "Text Signal Lab 26d25",
+    "description": "Auto-generated text_signal_lab board composed from the InteractableDemo vocabulary.",
+    "family": "text_signal_lab",
+    "auto_generated": true,
+    "auto_score": 67.94,
+    "selection_rank": 1
+  },
+  "titles": {
+    "main": "TEXT SIGNAL LAB",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.56,
+      0.64,
+      0.61,
+      1.0
+    ],
+    "frame_color": [
+      0.16,
+      0.2,
+      0.19,
+      1.0
+    ],
+    "accent_color": [
+      0.27,
+      0.73,
+      0.9,
+      1.0
+    ],
+    "dark_color": [
+      0.06,
+      0.08,
+      0.08,
+      1.0
+    ],
+    "cream_color": [
+      0.77,
+      0.81,
+      0.79,
+      1.0
+    ],
+    "spacing": 0.265,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.05,
+    "row2_y": 0.623,
+    "row3_y": 0.158,
+    "row4_y": -0.289,
+    "show_hand_scale_guides": false
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/joystick_smooth.tscn",
+      "label": "JOYSTICK",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/lever_smooth.tscn",
+      "label": "LEVER",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/push_button.tscn",
+      "label": "BUTTON",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "rect_sm",
+      "label": "RECT SM"
+    }
+  ],
+  "passive_elements": [
+    {
+      "monitor": "lissajous",
+      "slots": 2,
+      "label": "LISSAJOUS",
+      "width": 2
+    },
+    {
+      "monitor": "scope",
+      "slots": 2,
+      "label": "SCOPE",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "meters_v",
+      "count": 3,
+      "label": "3x METERS",
+      "width": 1
+    },
+    {
+      "type": "sliders_h",
+      "count": 2,
+      "label": "2x SLIDER H",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "text_static_1",
+      "label": "TEXT 1",
+      "width": 1
+    },
+    {
+      "type": "patch_matrix",
+      "label": "PATCH\nMATRIX",
+      "width": 1
+    },
+    {
+      "type": "text_scroll_2",
+      "label": "SCROLL 2",
+      "width": 2
+    },
+    {
+      "type": "needle_meter",
+      "label": "NEEDLE\nMETER",
+      "width": 1
+    }
+  ]
+}

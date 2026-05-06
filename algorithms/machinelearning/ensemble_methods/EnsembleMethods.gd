@@ -1,30 +1,57 @@
 extends Node3D
- 
+## Ensemble Methods Visualization
+## Displays multiple base models (Decision Tree, Random Forest, SVM,
+## Neural Network) that vote / aggregate into a final prediction.
+## Supports runtime parameter tuning via @export variables.
 
+# ─── Runtime-tunable parameters ───────────────────────────────────────────────
+@export_range(0.01, 0.5, 0.01) var simulation_speed: float = 0.1:
+	set(v):
+		simulation_speed = v
+@export_range(8, 60, 4) var particle_count: int = 20:
+	set(v):
+		particle_count = v
+		if is_inside_tree():
+			_rebuild_all_particles()
+@export var color_decision_tree: Color = Color(0.9, 0.3, 0.3, 1.0):
+	set(v):
+		color_decision_tree = v
+@export var color_random_forest: Color = Color(0.3, 0.85, 0.4, 1.0):
+	set(v):
+		color_random_forest = v
+@export var color_svm: Color = Color(0.3, 0.5, 0.9, 1.0):
+	set(v):
+		color_svm = v
+@export var color_neural_net: Color = Color(1.0, 0.85, 0.2, 1.0):
+	set(v):
+		color_neural_net = v
+
+# ─── Internal state ───────────────────────────────────────────────────────────
 var time: float = 0.0
 var ensemble_progress: float = 0.0
 var accuracy_score: float = 0.0
 var diversity_score: float = 0.0
-var particle_count: int = 20
 var flow_particles: Array = []
 var model_particles: Array = []
 var prediction_particles: Array = []
 var vote_particles: Array = []
 
-func _ready():
-	# Initialize Ensemble Methods visualization
-	print("Ensemble Methods Visualization initialized")
+# ─── Stats overlay ────────────────────────────────────────────────────────────
+var _stats_label: Label3D = null
+
+func _ready() -> void:
 	create_model_particles()
 	create_prediction_particles()
 	create_vote_particles()
 	create_flow_particles()
 	setup_ensemble_metrics()
+	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate ensemble progress
-	ensemble_progress = min(1.0, time * 0.1)
+	ensemble_progress = min(1.0, time * simulation_speed)
 	accuracy_score = ensemble_progress * 0.95  # Ensembles typically have higher accuracy
 	diversity_score = ensemble_progress * 0.8
 	
@@ -34,29 +61,62 @@ func _process(delta):
 	animate_voting_system(delta)
 	animate_data_flow(delta)
 	update_ensemble_metrics(delta)
+	_update_stats_label()
 
-func create_model_particles():
-	# Create base model particles
+# ─── Stats Label3D ────────────────────────────────────────────────────────────
+func _create_stats_label() -> void:
+	_stats_label = Label3D.new()
+	_stats_label.name = "StatsOverlay"
+	_stats_label.pixel_size = 0.005
+	_stats_label.font_size = 28
+	_stats_label.position = Vector3(0, 5.5, 0)
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_stats_label.modulate = Color(1, 1, 1, 0.9)
+	_stats_label.outline_size = 8
+	_stats_label.outline_modulate = Color(0, 0, 0, 0.6)
+	add_child(_stats_label)
+
+func _update_stats_label() -> void:
+	if _stats_label:
+		_stats_label.text = "Ensemble: %d%%  |  Accuracy: %.0f%%  |  Diversity: %.0f%%" % [
+			int(ensemble_progress * 100), accuracy_score * 100, diversity_score * 100]
+
+# ─── Helpers ──────────────────────────────────────────────────────────────────
+func _model_color(model_type: int) -> Color:
+	match model_type:
+		0: return color_decision_tree
+		1: return color_random_forest
+		2: return color_svm
+		3: return color_neural_net
+	return Color.WHITE
+
+func _rebuild_all_particles() -> void:
+	for arr in [model_particles, prediction_particles, vote_particles, flow_particles]:
+		for p in arr:
+			if is_instance_valid(p): p.queue_free()
+		arr.clear()
+	model_particles = []; prediction_particles = []; vote_particles = []; flow_particles = []
+	create_model_particles()
+	create_prediction_particles()
+	create_vote_particles()
+	create_flow_particles()
+
+func create_model_particles() -> void:
+	# Create base model particles — each model type gets its own colour
 	var model_particles_node = $BaseModels/ModelParticles
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.1
-		particle.material_override = StandardMaterial3D.new()
-		
-		# Different colors for different base models
 		var model_type = i % 4
-		match model_type:
-			0:  # Decision Tree
-				particle.material_override.albedo_color = Color(0.8, 0.2, 0.2, 1)
-			1:  # Random Forest
-				particle.material_override.albedo_color = Color(0.2, 0.8, 0.2, 1)
-			2:  # SVM
-				particle.material_override.albedo_color = Color(0.2, 0.2, 0.8, 1)
-			3:  # Neural Network
-				particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
-		
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = particle.material_override.albedo_color * 0.3
+		var col := _model_color(model_type)
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = col
+		mat.emission_enabled = true
+		mat.emission = col * 0.4
+		mat.emission_energy_multiplier = 1.4
+		mat.metallic = 0.35
+		mat.roughness = 0.2
+		particle.material_override = mat
 		
 		# Position particles in model clusters
 		var cluster = i / 5
@@ -71,16 +131,20 @@ func create_model_particles():
 		model_particles_node.add_child(particle)
 		model_particles.append(particle)
 
-func create_prediction_particles():
-	# Create final prediction particles
+func create_prediction_particles() -> void:
+	# Create final prediction particles — consensus outputs
 	var prediction_particles_node = $FinalPrediction/PredictionParticles
 	for i in range(15):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.12
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.2, 0.8, 0.8, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.2, 0.8, 0.8, 1) * 0.4
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color(0.2, 0.8, 0.8, 1)
+		mat.emission_enabled = true
+		mat.emission = Color(0.2, 0.8, 0.8, 1) * 0.45
+		mat.emission_energy_multiplier = 1.5
+		mat.metallic = 0.3
+		mat.roughness = 0.2
+		particle.material_override = mat
 		
 		# Position particles in final prediction arrangement
 		var row = i / 5
@@ -93,7 +157,7 @@ func create_prediction_particles():
 		prediction_particles_node.add_child(particle)
 		prediction_particles.append(particle)
 
-func create_vote_particles():
+func create_vote_particles() -> void:
 	# Create voting particles
 	var votes_node = $VotingSystem/Votes
 	for i in range(12):
@@ -116,27 +180,32 @@ func create_vote_particles():
 		votes_node.add_child(particle)
 		vote_particles.append(particle)
 
-func create_flow_particles():
-	# Create data flow particles
+func create_flow_particles() -> void:
+	# Create data flow particles along the ensemble pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
-	for i in range(35):
+	var flow_count := int(max(15, particle_count * 1.75))
+	for i in range(flow_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.05
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color(1.0, 0.85, 0.2, 1)
+		mat.emission_enabled = true
+		mat.emission = Color(1.0, 0.85, 0.2, 1) * 0.45
+		mat.emission_energy_multiplier = 1.8
+		mat.metallic = 0.15
+		mat.roughness = 0.25
+		particle.material_override = mat
 		
 		# Position particles along the ensemble flow path
-		var progress = float(i) / 35
-		var x = lerp(-8, 8, progress)
+		var progress = float(i) / float(flow_count)
+		var x = lerp(-8.0, 8.0, progress)
 		var y = sin(progress * PI * 5) * 2.5
 		particle.position = Vector3(x, y, 0)
 		
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_ensemble_metrics():
+func setup_ensemble_metrics() -> void:
 	# Initialize ensemble metrics
 	var accuracy_indicator = $EnsembleMetrics/AccuracyMeter/AccuracyIndicator
 	var diversity_indicator = $EnsembleMetrics/DiversityMeter/DiversityIndicator
@@ -145,7 +214,7 @@ func setup_ensemble_metrics():
 	if diversity_indicator:
 		diversity_indicator.position.x = 0  # Start at middle
 
-func animate_base_models(delta):
+func animate_base_models(delta) -> void:
 	# Animate base model particles
 	for i in range(model_particles.size()):
 		var particle = model_particles[i]
@@ -172,7 +241,7 @@ func animate_base_models(delta):
 			if particle.material_override:
 				particle.material_override.emission = particle.material_override.albedo_color * (0.3 + contribution * 0.4)
 
-func animate_ensemble_core(delta):
+func animate_ensemble_core(delta) -> void:
 	# Animate ensemble hub
 	var ensemble_hub = $EnsembleCore/EnsembleHub
 	if ensemble_hub:
@@ -254,7 +323,7 @@ func animate_ensemble_core(delta):
 			var intensity = 0.3 + blending_activation * 0.7
 			blending_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_final_prediction(delta):
+func animate_final_prediction(delta) -> void:
 	# Animate prediction particles
 	for i in range(prediction_particles.size()):
 		var particle = prediction_particles[i]
@@ -279,7 +348,7 @@ func animate_final_prediction(delta):
 			var red_component = 0.2 + 0.6 * (1.0 - confidence)
 			particle.material_override.albedo_color = Color(red_component, green_component, 0.8, 1)
 
-func animate_voting_system(delta):
+func animate_voting_system(delta) -> void:
 	# Animate voting system core
 	var voting_core = $VotingSystem/VotingCore
 	if voting_core:
@@ -315,7 +384,7 @@ func animate_voting_system(delta):
 			vote.material_override.albedo_color = vote_color
 			vote.material_override.emission = Color(0.8, 0.8, 0.2, 1) * vote_strength * 0.3
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -339,7 +408,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * ensemble_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_ensemble_metrics(delta):
+func update_ensemble_metrics(delta) -> void:
 	# Update accuracy meter
 	var accuracy_indicator = $EnsembleMetrics/AccuracyMeter/AccuracyIndicator
 	if accuracy_indicator:
@@ -362,13 +431,13 @@ func update_ensemble_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - diversity_score)
 		diversity_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_ensemble_progress(progress: float):
+func set_ensemble_progress(progress: float) -> void:
 	ensemble_progress = clamp(progress, 0.0, 1.0)
 
-func set_accuracy_score(accuracy: float):
+func set_accuracy_score(accuracy: float) -> void:
 	accuracy_score = clamp(accuracy, 0.0, 1.0)
 
-func set_diversity_score(diversity: float):
+func set_diversity_score(diversity: float) -> void:
 	diversity_score = clamp(diversity, 0.0, 1.0)
 
 func get_ensemble_progress() -> float:
@@ -380,8 +449,28 @@ func get_accuracy_score() -> float:
 func get_diversity_score() -> float:
 	return diversity_score
 
-func reset_ensemble():
+func reset_ensemble() -> void:
+	var had_progress := ensemble_progress > 0.1
 	time = 0.0
 	ensemble_progress = 0.0
 	accuracy_score = 0.0
 	diversity_score = 0.0
+	if is_inside_tree() and had_progress:
+		_flash_reset()
+
+## Pulse the ensemble hub on reset for visual feedback
+func _flash_reset() -> void:
+	var hub = $EnsembleCore/EnsembleHub
+	if hub:
+		var tw := create_tween()
+		tw.tween_property(hub, "scale", Vector3.ONE * 1.5, 0.15)
+		tw.tween_property(hub, "scale", Vector3.ONE, 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

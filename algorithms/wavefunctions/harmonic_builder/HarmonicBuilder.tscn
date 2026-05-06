@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmcbr4hboy6nr"]
+
+[ext_resource type="Script" uid="uid://lkcb0fq1sx58" path="res://algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdua" path="res://commons/interactables/slider_smooth.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2td5hwh2oluy" path="res://commons/interactables/wheel_smooth.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://commons/interactables/push_button.tscn" id="4"]
+
+[node name="HarmonicBuilder" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Slider1" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
+
+[node name="Slider2" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 0)
+
+[node name="Slider3" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+
+[node name="Slider4" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+
+[node name="Slider5" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+
+[node name="Slider6" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+
+[node name="Slider7" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 0)
+
+[node name="Slider8" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+
+[node name="FrequencyWheel" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0)
+
+[node name="PresetSine" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.2, 0.5)
+
+[node name="PresetSquare" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.2, 0.5)
+
+[node name="PresetSawtooth" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.2, 0.5)
+
+[node name="PresetTriangle" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.2, 0.5)
+
+[node name="PresetOrgan" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.5)
+
+[node name="PresetClarinet" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.2, 0.5)
+
+[node name="PresetBrass" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.2, 0.5)
+
+[node name="PresetFlute" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.2, 0.5)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+max_distance = 20.0

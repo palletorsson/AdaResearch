@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/testing/capture_rig.gd" id="1_rig"]
+
+[node name="CaptureRig" type="Node3D"]
+script = ExtResource("1_rig")
+
+[node name="Camera" type="Camera3D" parent="."]
+fov = 60.0
+near = 0.05
+far = 500.0
+
+[node name="KeyFill" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.97, 0.92, 1)
+light_energy = 0.6
+omni_range = 12.0
+omni_attenuation = 1.4
+
+[node name="AmbientFill" type="OmniLight3D" parent="."]
+light_color = Color(0.9, 0.93, 1, 1)
+light_energy = 0.25
+omni_range = 10.0
+omni_attenuation = 2.0

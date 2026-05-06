@@ -1,0 +1,123 @@
+{
+  "id": "morph45_drag_clubkid_cutout_frame",
+  "family": "drag_club_kid",
+  "notes": "Transform-led club-kid look: platform legs, a cutout torso frame, one shifted shoulder rig, and a displaced headpiece push the silhouette into harsher queer club territory.",
+  "camera_yaw": 0.9,
+  "camera_pitch": 0.33,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.74,
+      1.28,
+      0.58
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "cutout_platforms",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.84,
+        "scale": 0.26
+      },
+      "child_role": "heel",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "cutout_corset",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "inset_panel",
+      "params": {
+        "scale": 0.56,
+        "depth": 0.1
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "cutout_hips",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "move_panel",
+      "params": {
+        "normal_offset": 0.08,
+        "bitangent_offset": 0.14
+      },
+      "child_role": "garment",
+      "budget_factor": 0.34
+    },
+    {
+      "id": "cutout_shoulders",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "scale_panel",
+      "params": {
+        "scale_x": 1.22,
+        "scale_y": 0.62,
+        "normal_offset": 0.06
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.28
+    },
+    {
+      "id": "cutout_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 0.46
+      },
+      "child_role": "hair",
+      "budget_factor": 0.36
+    },
+    {
+      "id": "cutout_headpiece",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.12
+      },
+      "selector": "up",
+      "op": "move_panel",
+      "params": {
+        "normal_offset": 0.14,
+        "tangent_offset": 0.26,
+        "bitangent_offset": -0.04
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

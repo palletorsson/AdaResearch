@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://math_gallery_pedestal"]
+
+[ext_resource type="Script" path="res://commons/primitives/math_gallery/pedestal.gd" id="1_pedestal"]
+
+[node name="Pedestal" type="Node3D"]
+script = ExtResource("1_pedestal")
+pedestal_color = Color(0.15, 0.15, 0.2, 1)
+pedestal_radius = 0.08
+pedestal_height = 0.02

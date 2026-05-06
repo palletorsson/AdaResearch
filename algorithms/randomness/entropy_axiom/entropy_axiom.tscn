@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddp5cwxqfhh5y"]
+
+[ext_resource type="Script" uid="uid://pifs62qtfnfo" path="res://algorithms/randomness/entropy_axiom/entropy_axiom.gd" id="1_entropy"]
+
+[node name="EntropyAxiom" type="Node3D"]
+script = ExtResource("1_entropy")
+grid_size_x = 5
+grid_size_y = 5
+grid_size_z = 30

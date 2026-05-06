@@ -118,8 +118,8 @@ func analyze_specimen():
 		
 		# Specimen reacts to analysis
 		var analysis_tween = create_tween()
-		analysis_tween.tween_property(specimen, 'material_override:emission_energy', 2.0, 0.5)
-		analysis_tween.tween_property(specimen, 'material_override:emission_energy', 0.5, 0.5)
+		analysis_tween.tween_property(specimen, 'material_override:emission_energy_multiplier', 2.0, 0.5)
+		analysis_tween.tween_property(specimen, 'material_override:emission_energy_multiplier', 0.5, 0.5)
 
 func recharge_containment():
 	energy_level = min(100.0, energy_level + 50.0)

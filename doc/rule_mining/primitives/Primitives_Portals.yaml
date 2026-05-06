@@ -1,0 +1,91 @@
+map: Primitives_Portals
+sequence: primitives
+dimensions:
+  rows: 35
+  cols: 7
+base_recipe: void_canvas
+base_recipe_match_pct: 89.8
+residual_cells: 20
+residual_pct: 10.2
+vocabulary_coverage_pct: 89.8
+cells_masked_void_envelope: 49
+operator_groups: 9
+operator_kinds:
+  @floor: 9
+operators_declarative:
+  - "@floor at (0,4)"
+  - "@floor:2:1 at (1,7)"
+  - "@floor:1:3 at (2,10)"
+  - "@floor:1:3 at (4,10)"
+  - "@floor at (3,18)"
+  - "@floor:3:1 at (3,32)"
+  - "@floor:1:2 at (3,33)"
+  - "@floor:2:2 at (5,33)"
+  - "@floor at (4,34)"
+utilities:
+  -
+    token: an
+    at:
+      - 0
+      - 4
+    raw: "an:180"
+  -
+    token: br
+    at:
+      - 3
+      - 7
+    raw: "br:z:25"
+  -
+    token: t
+    at:
+      - 4
+      - 33
+    raw: t
+  -
+    token: s
+    at:
+      - 5
+      - 34
+    raw: s
+artifacts:
+  -
+    token: dark_sphere
+    at:
+      - 0
+      - 0
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: capsule
+    at:
+      - 5
+      - 2
+    rotation: ""
+    y_offset: ""
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: combine_portals
+    at:
+      - 3
+      - 4
+    rotation: 0
+    y_offset: "-0.2"
+    footprint_inferred:
+      - 1
+      - 3
+  -
+    token: achilles_tortoise
+    at:
+      - 5
+      - 5
+    rotation: 0
+    y_offset: 1
+    footprint_inferred:
+      - 1
+      - 1
+artifact_count: 4

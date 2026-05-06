@@ -1,0 +1,86 @@
+{
+	"metadata_version": "1.0",
+	"description": "Theme taxonomy for organizing AdaResearch artifacts by purpose and function. Used for developer workflow organization.",
+
+	"themes": {
+		"primitives": {
+			"name": "Primitives & Building Blocks",
+			"description": "Basic shapes, grab objects, foundational elements for building experiences",
+			"examples": ["scalable cubes", "pattern tiles", "color systems", "coordinate displays"]
+		},
+		"audio": {
+			"name": "Audio & Harmony",
+			"description": "Music sequencers, synthesis, spectral analysis, sound generation",
+			"examples": ["step sequencers", "spectral analyzers", "synthesizers", "melody generators"]
+		},
+		"physics": {
+			"name": "Physics & Dynamics",
+			"description": "Soft bodies, rigid body simulations, oscillators, physical puzzles",
+			"examples": ["cloth simulation", "trampolines", "pendulums", "springs", "balance challenges"]
+		},
+		"procedural": {
+			"name": "Procedural Generation",
+			"description": "Noise systems, terrain generation, growth algorithms, procedural content",
+			"examples": ["Perlin noise", "terrain generators", "random walks", "L-systems"]
+		},
+		"emergence": {
+			"name": "Emergence & Complexity",
+			"description": "Cellular automata, self-organization, evolutionary algorithms, edge of chaos",
+			"examples": ["Conway's Game of Life", "reaction-diffusion", "swarm behavior", "genetic algorithms"]
+		},
+		"qfep": {
+			"name": "QFEP Visualization & Control",
+			"description": "Queer Free Energy Principle interactive tools - lambda, phi, entropy, free energy",
+			"examples": ["lambda slider", "phi slider", "entropy meters", "bifurcation diagrams", "formula displays"]
+		},
+		"waves": {
+			"name": "Waves & Oscillation",
+			"description": "Sine/cosine visualizations, Fourier transforms, standing waves, harmonic motion",
+			"examples": ["waveform displays", "Fourier series", "interference patterns", "Lissajous curves"]
+		},
+		"philosophy": {
+			"name": "Narrative & Philosophy",
+			"description": "Foundations crisis artifacts, art-mathematics connections, conceptual pieces",
+			"examples": ["Gödel incompleteness", "Russell's paradox", "Escher loops", "Magritte's pipe"]
+		},
+		"puzzles": {
+			"name": "Interactive Puzzles",
+			"description": "Assembly challenges, construction puzzles, relief compositions",
+			"examples": ["furniture assembly", "Mondrian compositions", "Albers squares", "Judd boxes"]
+		},
+		"tools": {
+			"name": "Navigation & Tools",
+			"description": "UI elements, navigation aids, system utilities, catalogs",
+			"examples": ["world map", "audio catalog", "score displays", "teleporters"]
+		}
+	},
+
+	"complexity_levels": {
+		"beginner": {
+			"description": "Simple, single-concept artifacts for introduction"
+		},
+		"intermediate": {
+			"description": "Multi-parameter artifacts requiring some understanding"
+		},
+		"advanced": {
+			"description": "Complex systems with multiple interacting components"
+		},
+		"expert": {
+			"description": "Highly sophisticated artifacts requiring deep theoretical understanding"
+		}
+	},
+
+	"tagging_guidelines": {
+		"dev_themes": "Array of 1-3 theme keys that best describe the artifact's purpose",
+		"dev_category": "More specific subcategory string (e.g., 'procedural_audio', 'qfep_controller')",
+		"complexity": "One of: beginner, intermediate, advanced, expert",
+		"tags": "Array of freeform descriptive tags (e.g., ['3d', 'vr', 'interactive'])"
+	},
+
+	"notes": [
+		"Artifacts may belong to multiple themes (use dev_themes array)",
+		"Theme metadata is additive - does not affect existing artifact loading",
+		"lookup_name must remain stable for backward compatibility",
+		"Update artifact_theme_index.json when adding theme metadata to artifacts"
+	]
+}

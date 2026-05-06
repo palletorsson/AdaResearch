@@ -1,0 +1,5 @@
+A gallery of procedurally generated tracks. Six SoundBoxes arranged in a darkened hall, each one running a different composition algorithm in real time. No recordings. No stems. Every sound assembled from wavefunction primitives — sine, square, sawtooth, noise — layered and sequenced by code that never plays the same thing twice.
+
+Dark spheres pulse slow purple between the stations. Ambient markers. The room breathes.
+
+Space Dystopia imagines sound after collapse — what music survives when instruments don't. The answer: instructions. A score is not a performance but a set of constraints. Pitch ranges, rhythm probabilities, timbral envelopes. The machine interprets. The listener encounters not a song but a system performing itself. Every playback is a first draft and a final version simultaneously.

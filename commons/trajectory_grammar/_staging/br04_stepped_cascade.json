@@ -1,0 +1,111 @@
+{
+  "id": "br04_stepped_cascade",
+  "force": "bouncing_gravity",
+  "params": {
+    "gravity": 9.8,
+    "extrude_rate": 0.0,
+    "walls": [
+      {
+        "axis": "y",
+        "pos": -3.0,
+        "side": "below",
+        "restitution": 0.3
+      }
+    ],
+    "plates": [
+      {
+        "a": [
+          -2.5,
+          2.0
+        ],
+        "b": [
+          -1.9,
+          1.95
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          -1.8,
+          1.5
+        ],
+        "b": [
+          -1.2000000000000002,
+          1.45
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          -1.1,
+          1.0
+        ],
+        "b": [
+          -0.5000000000000001,
+          0.95
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          -0.40000000000000036,
+          0.5
+        ],
+        "b": [
+          0.19999999999999962,
+          0.45
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          0.2999999999999998,
+          0.0
+        ],
+        "b": [
+          0.8999999999999998,
+          -0.05
+        ],
+        "restitution": 0.55
+      },
+      {
+        "a": [
+          1.0,
+          -0.5
+        ],
+        "b": [
+          1.6,
+          -0.55
+        ],
+        "restitution": 0.55
+      }
+    ]
+  },
+  "initial": {
+    "pos": [
+      -2.2,
+      2.8
+    ],
+    "vel": [
+      0.4,
+      0.0
+    ]
+  },
+  "duration": 8.0,
+  "dt": 0.004,
+  "interpretation": "tube",
+  "tube_radius": 0.014,
+  "color_start": [
+    0.25,
+    0.6,
+    0.85
+  ],
+  "color_end": [
+    0.95,
+    0.55,
+    0.25
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.25,
+  "notes": "Staircase of six slightly-tilted plates. Ball enters top-left, cascades diagonally down \u2014 each plate bounces it to the next. Waterfall path frozen as trail."
+}

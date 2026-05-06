@@ -1,0 +1,24 @@
+{
+  "id": "rd16_zeta_stable_heightmap",
+  "F": 0.026,
+  "K": 0.059,
+  "grid_size": 112,
+  "iterations": 5600,
+  "seed": 53,
+  "render_mode": "heightmap",
+  "height_amp": 0.74,
+  "color_lo": [
+    0.14,
+    0.16,
+    0.22
+  ],
+  "color_hi": [
+    0.8,
+    0.92,
+    0.78
+  ],
+  "camera_yaw": 0.46,
+  "camera_pitch": 0.57,
+  "layout": "rd_field",
+  "notes": "\u00ce\u00b6-class stable-spot terrain (F=0.026, K=0.059): still lively, but calmer and more symmetric than \u00ce\u00b5, with longer-lived spot clusters."
+}

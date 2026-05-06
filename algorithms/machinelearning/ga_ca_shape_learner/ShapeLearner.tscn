@@ -2,9 +2,5 @@
 
 [ext_resource type="Script" uid="uid://b8rvc6evj01co" path="res://algorithms/machinelearning/ga_ca_shape_learner/ShapeLearner.gd" id="1_5t4g3"]
 
-[node name="ShapeLearner" type="Node2D"]
+[node name="ShapeLearner" type="Node3D"]
 script = ExtResource("1_5t4g3")
-
-[node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="."]
-
-[node name="Timer" type="Timer" parent="."]

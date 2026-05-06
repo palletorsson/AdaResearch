@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3v35kd2rafme"]
+
+[ext_resource type="Script" uid="uid://bicgshf5pe3d8" path="res://algorithms/arrays/index_visualizer/IndexVisualizer.gd" id="1_v4m2b"]
+
+[node name="IndexVisualizer" type="Node3D"]
+script = ExtResource("1_v4m2b")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8483458)

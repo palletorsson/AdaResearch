@@ -1,0 +1,67 @@
+{
+  "artifact": "line",
+  "title": "Building a Line Between Two Points",
+  "description": "A point is a position. A line is a relation. Watch how two endpoints create distance, direction, and the first hint that whole numbers resist.",
+  "concept_layer": "relation, distance, direction, measurement",
+  "technique_first": ["distance_to()", "normalized()", "cross product", "Basis", "fmod()", "resistance threshold", "AudioStreamWAV loop"],
+  "technique_reference": ["CylinderMesh (Point_One)", "Label3D (Point_One)", "haptic_pulse (Point_One)"],
+  "domain_deferred": ["white noise synthesis \u2192 randomness"],
+  "capture_leaks": {
+    "curvature": "wavefunctions \u2014 a line is always straight; waves bend it into sine and cosine",
+    "thickness": "later primitives \u2014 a line has no width; cylinders, tubes, meshes add extent",
+    "meaning": "graphtheory \u2014 a line connects two points but says nothing about what they share; edges carry semantics",
+    "multiplicity": "Point_Lines \u2014 one line tells you about a relation; many lines tell you about a system",
+    "discreteness_at_integer": "randomness, foundationscrisis \u2014 the integer glitch teaches that whole numbers are an imposition, not a property of space"
+  },
+  "limit": "This line is straight, thin, alone, and meaningless. Each silence is a question. A curved line is a wave. A thick line is a mesh. A line among lines is a network. The line you built is the atom of all these structures.",
+  "stages": [
+    {
+      "title": "Two points make a relation",
+      "thinking": "In Point_One you held a single point. Now there are two. The moment you have two positions, you have something new \u2014 the space between them. Distance. Direction. A line is not a thing. It is a relation between two things.",
+      "code": "# Two points\nvar point_one: Vector3 = Vector3(0.0, 1.0, 0.0)\nvar point_two: Vector3 = Vector3(1.0, 1.0, 0.0)\n\n# The relation between them\nvar distance: float = point_one.distance_to(point_two)\nvar direction: Vector3 = (point_two - point_one).normalized()\n\n# distance = 1.0\n# direction = (1, 0, 0) \u2014 pointing right\n# The line has no independent existence.\n# It IS the relation.",
+      "concepts": ["distance_to()", "normalized()", "relation", "direction"]
+    },
+    {
+      "title": "Make the relation visible",
+      "thinking": "Distance is a number. Direction is a vector. Neither is visible. We create a CylinderMesh stretched between the two points \u2014 the same technique from interactive_point_origin\u2019s line to origin. Position at midpoint, height equals distance, orient toward the endpoint.",
+      "code": "extends Node3D\n\n@export var line_thickness: float = 0.005\n@export var line_color: Color = Color(1.0, 1.0, 1.0)\n\n@onready var point_one = $GrabSphere\n@onready var point_two = $GrabSphere2\n\nvar current_line: MeshInstance3D\nvar length_label: Label3D\n\nfunc _ready():\n\tcreate_length_label()\n\tupdate_connections()\n\nfunc create_connection_line(start_pos: Vector3, end_pos: Vector3) -> MeshInstance3D:\n\tvar line = MeshInstance3D.new()\n\tvar cylinder = CylinderMesh.new()\n\tcylinder.height = start_pos.distance_to(end_pos)\n\tcylinder.top_radius = line_thickness\n\tcylinder.bottom_radius = line_thickness\n\tline.mesh = cylinder\n\t\n\t# Position at midpoint\n\tline.position = (start_pos + end_pos) / 2.0\n\tadd_child(line)\n\treturn line",
+      "concepts": ["CylinderMesh", "midpoint", "line_thickness", "@onready"]
+    },
+    {
+      "title": "Orient the cylinder",
+      "thinking": "A cylinder stands upright by default. To make it point from A to B, we need to build a rotation basis from the direction vector. This is the first real transform \u2014 creating an orthonormal basis from a direction. Three perpendicular vectors that define how the cylinder faces.",
+      "code": "func update_line_transform(start_pos: Vector3, end_pos: Vector3):\n\tvar cylinder = current_line.mesh as CylinderMesh\n\tvar distance = start_pos.distance_to(end_pos)\n\tcylinder.height = distance\n\t\n\tvar center_pos = (start_pos + end_pos) / 2.0\n\tcurrent_line.position = center_pos\n\t\n\t# Build orientation from direction\n\tvar direction = (end_pos - start_pos).normalized()\n\tvar up = Vector3.UP\n\tvar right = direction.cross(up).normalized()\n\tif right.length() < 0.001:  # direction is parallel to UP\n\t\tright = Vector3.RIGHT\n\t\tup = right.cross(direction).normalized()\n\telse:\n\t\tup = right.cross(direction).normalized()\n\t\n\t# Apply the basis\n\tcurrent_line.transform.basis = Basis(right, direction, up)",
+      "concepts": ["Basis", "cross product", "orthonormal basis", "transform.basis"]
+    },
+    {
+      "title": "Show the measurement",
+      "thinking": "The line has length. The label makes it readable \u2014 a billboard Label3D floating above the midpoint, updating every frame. The number is formatted to two decimal places. This is the bridge between felt distance and named distance.",
+      "code": "func create_length_label():\n\tlength_label = Label3D.new()\n\tlength_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED\n\tlength_label.font_size = 32\n\tlength_label.modulate = Color(1.0, 1.0, 1.0, 0.8)\n\tlength_label.outline_size = 4\n\tlength_label.scale = Vector3.ONE * 0.1\n\tadd_child(length_label)\n\nfunc update_length_label(start_pos: Vector3, end_pos: Vector3):\n\tvar distance = start_pos.distance_to(end_pos)\n\tlength_label.text = \"Length: %.2fm\" % distance\n\t\n\t# Position at midpoint, slightly above\n\tvar center_pos = (start_pos + end_pos) / 2.0\n\tcenter_pos.y += 0.05\n\tlength_label.position = center_pos",
+      "concepts": ["Label3D", "billboard", "string formatting", "measurement display"]
+    },
+    {
+      "title": "Update every frame",
+      "thinking": "Both endpoints are grabbable. The player moves them freely. So the line must update every frame \u2014 recalculate height, reposition at midpoint, reorient, relabel. This is the _process loop: the heartbeat that keeps the relation alive as its constituents change.",
+      "code": "func _process(_delta):\n\tif point_one and point_two:\n\t\tupdate_line_transform(point_one.position, point_two.position)\n\t\tupdate_length_label(point_one.position, point_two.position)\n\t\t\n\t\tif enable_resistance:\n\t\t\t_process_resistance(\n\t\t\t\tpoint_one.position.distance_to(point_two.position)\n\t\t\t)",
+      "concepts": ["_process()", "per-frame update", "conditional logic"]
+    },
+    {
+      "title": "Whole numbers resist",
+      "thinking": "This is the critical interaction. When the distance approaches an integer \u2014 0.97m, 1.03m \u2014 the line fights back. It jitters. It crackles. The controller vibrates. The label flashes red. Why? Because whole numbers are a human imposition. Nature doesn\u2019t prefer 1.0 over 0.97. The glitch makes you feel that discreteness is a choice, not a given.",
+      "code": "func _process_resistance(distance: float):\n\t# How close to the nearest integer?\n\tvar remainder = fmod(distance, 1.0)\n\tvar dist_to_int = min(remainder, 1.0 - remainder)\n\t\n\tif dist_to_int < resistance_threshold:\n\t\tvar t = 1.0 - (dist_to_int / resistance_threshold)\n\t\tvar intensity = pow(t, 2.0)  # Non-linear: gentle at edges, fierce at center\n\t\t\n\t\t# 1. Visual: the line jitters\n\t\tcurrent_line.position += Vector3(\n\t\t\trandf_range(-1, 1),\n\t\t\trandf_range(-1, 1),\n\t\t\trandf_range(-1, 1)\n\t\t) * max_jitter * intensity\n\t\t\n\t\t# 2. Audio: white noise crackle\n\t\t_glitch_player.volume_db = lerp(-40.0, glitch_sound_volume_db, intensity)\n\t\t_glitch_player.pitch_scale = 1.0 + (randf() - 0.5) * intensity\n\t\t\n\t\t# 3. Haptic: controller vibrates\n\t\tcontroller.trigger_haptic_pulse(\"haptic\", 100.0 + intensity * 200.0, intensity * 0.8, 0.05, 0)\n\t\t\n\t\t# 4. Label flashes red\n\t\tif randf() < intensity * 0.2:\n\t\t\tlength_label.modulate = Color.RED",
+      "concepts": ["fmod()", "resistance threshold", "non-linear intensity", "multi-channel feedback"]
+    },
+    {
+      "title": "Synthesize the glitch sound",
+      "thinking": "The crackle is not a file. It\u2019s generated from white noise with random spikes \u2014 the same synthesis technique from interactive_point_origin\u2019s pickup tone, but harsher. A looping AudioStreamWAV that plays silently until resistance activates, then fades in. The sound of a number asserting itself.",
+      "code": "func _generate_glitch_stream() -> AudioStreamWAV:\n\tvar stream := AudioStreamWAV.new()\n\tstream.format = AudioStreamWAV.FORMAT_16_BITS\n\tstream.mix_rate = 22050\n\tvar duration := 0.5  # Short loop\n\tvar length := int(stream.mix_rate * duration)\n\tvar data := PackedByteArray()\n\tdata.resize(length * 2)\n\t\n\tfor i in length:\n\t\t# White noise with occasional spikes\n\t\tvar sample: float = randf_range(-1.0, 1.0) * 0.8\n\t\tif randf() > 0.95:\n\t\t\tsample = sign(sample) * 1.0  # Crackle\n\t\t\n\t\tvar int_sample: int = int(sample * 32767.0)\n\t\tdata[2 * i] = int_sample & 0xFF\n\t\tdata[2 * i + 1] = (int_sample >> 8) & 0xFF\n\t\n\tstream.data = data\n\tstream.loop_mode = AudioStreamWAV.LOOP_FORWARD\n\treturn stream",
+      "concepts": ["AudioStreamWAV", "white noise synthesis", "loop_mode", "PackedByteArray"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The line knows what it is. It is not an object \u2014 it is defined entirely by its two endpoints. The resistance at integer lengths is not a bug. It is the pedagogical core: the privilege of whole numbers, felt through the body before named by the mind.",
+      "code": "# @identity\n# essence: length = |p2 - p1| \u2014 the distance between two points, made visible and tangible\n# desire: learner feels a line as relationship, not object \u2014 it exists because two points exist\n# critical_parameter: the glitch/haptic resistance when length is near an integer\n# triggers: dragging either end grab sphere \u2014 length label updates live, glitch fires at integer thresholds\n# emerges: the privilege of whole numbers; the line as a tension between two positions\n# needs: Label3D [has], both endpoints are grabbable [has]\n# relationships: depends on two static_points; unlocks all polygon primitives\n# truth: a line segment has no intrinsic existence \u2014 it is defined entirely by its two endpoints",
+      "concepts": ["@identity", "relation not object", "integer resistance", "truth"]
+    }
+  ]
+}

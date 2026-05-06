@@ -22,7 +22,7 @@ var terrain_mesh: MeshInstance3D
 var noise: FastNoiseLite
 var height_map: Array = []
 
-func _ready():
+func _ready() -> void:
 	# Initialize noise generator
 	initialize_noise()
 	
@@ -33,14 +33,14 @@ func _ready():
 	apply_materials()
 
 # Initialize the noise generator
-func initialize_noise():
+func initialize_noise() -> void:
 	noise = FastNoiseLite.new()
 	noise.seed = terrain_seed
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise.frequency = 0.01
 
 # Generate terrain mesh
-func generate_terrain():
+func generate_terrain() -> void:
 	# Create a plane mesh with specified resolution
 	var plane_mesh = PlaneMesh.new()
 	plane_mesh.size = terrain_size
@@ -165,7 +165,7 @@ func generate_height(x: float, z: float) -> float:
 	return combined
 
 # Apply hydraulic erosion to simulate water flow
-func apply_hydraulic_erosion():
+func apply_hydraulic_erosion() -> void:
 	# Erosion parameters
 	var rainfall = 0.01
 	var evaporation = 0.5
@@ -268,7 +268,7 @@ func apply_hydraulic_erosion():
 				height_map[x][z] += sediment_map[x][z]
 
 # Apply materials based on height and slope
-func apply_materials():
+func apply_materials() -> void:
 	if not terrain_mesh:
 		return
 	
@@ -360,3 +360,12 @@ func generate_navigation_map():
 		path_map.append(row)
 	
 	return path_map
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

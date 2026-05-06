@@ -1,0 +1,98 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Point_Line_Context",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 17
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.133,
+  "breath_zones": [
+    {
+      "size": 77,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 17
+      },
+      "centroid": [
+        2.5194805194805197,
+        6.194805194805195
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "line"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "one_meter_line"
+    },
+    {
+      "x": 0,
+      "z": 8,
+      "token": "parallel_line_puzzle"
+    },
+    {
+      "x": 0,
+      "z": 9,
+      "token": "scale_lines"
+    },
+    {
+      "x": 0,
+      "z": 10,
+      "token": "parallel_line_puzzle"
+    },
+    {
+      "x": 6,
+      "z": 11,
+      "token": "grid_lines"
+    },
+    {
+      "x": 0,
+      "z": 12,
+      "token": "cube_lines"
+    },
+    {
+      "x": 5,
+      "z": 12,
+      "token": "VitruvianMan"
+    },
+    {
+      "x": 1,
+      "z": 14,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 1,
+      "z": 16,
+      "token": "perspective_lines"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 12,
+    "walkable_cells": 90,
+    "breath_zone_count": 1,
+    "unique_tokens": 11
+  }
+}

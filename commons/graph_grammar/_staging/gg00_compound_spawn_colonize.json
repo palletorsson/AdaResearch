@@ -1,0 +1,63 @@
+{
+  "id": "gg00_compound_spawn_colonize",
+  "notes": "First spawn two levels, then let space colonization fill the canopy.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.2
+  },
+  "iterations": 1,
+  "color": [
+    0.4,
+    0.28,
+    0.18
+  ],
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 1.0,
+        "spread_deg": 10,
+        "radius_decay": 0.85
+      }
+    },
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.6,
+        "spread_deg": 40,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "space_colonize",
+      "selector": "all",
+      "params": {
+        "iterations": 40,
+        "attractor_count": 200,
+        "cloud_shape": "ellipsoid",
+        "cloud_size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "cloud_center": [
+          0,
+          2.3,
+          0
+        ],
+        "influence_radius": 0.8,
+        "kill_radius": 0.2,
+        "step": 0.12,
+        "radius_decay": 0.97
+      }
+    }
+  ]
+}

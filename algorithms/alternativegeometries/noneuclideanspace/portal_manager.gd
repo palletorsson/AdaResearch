@@ -9,29 +9,29 @@ signal teleport_complete(portal, body)
 var active_portals = []
 var teleporting = false
 
-func _ready():
+func _ready() -> void:
 	# Find all portals in the scene
 	_find_portals()
 
-func _find_portals():
+func _find_portals() -> void:
 	active_portals.clear()
 	for portal in get_tree().get_nodes_in_group("portals"):
 		register_portal(portal)
 
-func register_portal(portal: Portal):
+func register_portal(portal: Portal) -> void:
 	if !active_portals.has(portal):
 		active_portals.append(portal)
 		portal.body_entered.connect(_on_portal_body_entered.bind(portal))
 		portal.body_exited.connect(_on_portal_body_exited.bind(portal))
 		print("Registered portal: " + portal.name)
 
-func unregister_portal(portal: Portal):
+func unregister_portal(portal: Portal) -> void:
 	if active_portals.has(portal):
 		active_portals.erase(portal)
 		portal.body_entered.disconnect(_on_portal_body_entered)
 		portal.body_exited.disconnect(_on_portal_body_exited)
 
-func _on_portal_body_entered(body: Node3D, portal: Portal):
+func _on_portal_body_entered(body: Node3D, portal: Portal) -> void:
 	portal_entered.emit(portal, body)
 	
 	# If this is the player and we're not already teleporting, handle it
@@ -40,10 +40,10 @@ func _on_portal_body_entered(body: Node3D, portal: Portal):
 		if target_portal:
 			_handle_teleport(body, portal, target_portal)
 
-func _on_portal_body_exited(body: Node3D, portal: Portal):
+func _on_portal_body_exited(body: Node3D, portal: Portal) -> void:
 	portal_exited.emit(portal, body)
 
-func _handle_teleport(body: XROrigin3D, source_portal: Portal, target_portal: Portal):
+func _handle_teleport(body: XROrigin3D, source_portal: Portal, target_portal: Portal) -> void:
 	teleporting = true
 	
 	# Calculate the relative position and orientation
@@ -61,3 +61,6 @@ func _handle_teleport(body: XROrigin3D, source_portal: Portal, target_portal: Po
 	# Emit signal and reset teleporting flag
 	teleport_complete.emit(target_portal, body)
 	teleporting = false
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dm0nhplsvkj51"]
+
+[ext_resource type="Script" uid="uid://bowkp8vhywkps" path="res://commons/scenes/editors/pipeline_combiner_editor.gd" id="1"]
+
+[node name="PipelineCombinerEditor" type="HSplitContainer" unique_id=1390408443]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")

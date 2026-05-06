@@ -10,7 +10,7 @@ class_name TartanBoxes3D
 @export var saturation_boost: float = 1.5
 var box_instances: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	if tartan_shader == null:
 		tartan_shader = load("res://commons/resourses/shaders/tartanshader.gdshader")
 	
@@ -19,12 +19,12 @@ func _ready():
 	
 	print("TartanBoxes3D: Created %d x %d grid with vibrant tartan patterns" % [grid_size, grid_size])
 
-func setup_lighting():
+func setup_lighting() -> void:
 	# Bright main directional light for vibrant colors
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "MainLight"
 	main_light.position = Vector3(5, 10, 5)
-	main_light.look_at(Vector3.ZERO, Vector3.UP)
+	main_light.look_at_from_position(main_light.position, Vector3.ZERO, Vector3.UP)
 	main_light.light_energy = 1.5  # Increased brightness
 	main_light.shadow_enabled = true
 	add_child(main_light)
@@ -33,7 +33,7 @@ func setup_lighting():
 	var fill_light = DirectionalLight3D.new()
 	fill_light.name = "FillLight"
 	fill_light.position = Vector3(-3, 8, -3)
-	fill_light.look_at(Vector3.ZERO, Vector3.UP)
+	fill_light.look_at_from_position(fill_light.position, Vector3.ZERO, Vector3.UP)
 	fill_light.light_energy = 0.8
 	fill_light.light_color = Color(1.1, 1.0, 0.9)  # Slightly warm
 	add_child(fill_light)
@@ -55,7 +55,7 @@ func setup_lighting():
 	world_env.environment = env
 	add_child(world_env)
 
-func create_tartan_grid():
+func create_tartan_grid() -> void:
 	# Clear existing boxes
 	for box in box_instances:
 		if is_instance_valid(box):
@@ -145,3 +145,12 @@ func create_bright_tartan_material(row: int, col: int) -> ShaderMaterial:
 	material.set_shader_parameter("saturation_boost", saturation_boost)
 	
 	return material
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

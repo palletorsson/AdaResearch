@@ -1,0 +1,54 @@
+{
+    "description": "Biopunk: Organic pulsing, wet textures, living ship",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -14,
+            "bus": "Heartbeat",
+            "parameters": {
+                "pulse_rate": 0.8
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+            "volume_db": -20,
+            "bus": "GutDrone"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.ACID_TB303_SQUELCH",
+                "AudioSynthesizer.GHOST_DRONE"
+            ],
+            "interval_range": [
+                10.0,
+                25.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Fluids"
+        }
+    ],
+    "buses": {
+        "Heartbeat": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 100
+                }
+            ]
+        },
+        "Fluids": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

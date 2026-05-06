@@ -12,7 +12,10 @@ func _ready():
 	
 	# Connect to lab grid system
 	if lab_grid_system:
-		scene_manager.connect_to_grid_system(lab_grid_system)
+		if scene_manager and scene_manager.has_method("connect_to_grid_system"):
+			scene_manager.connect_to_grid_system(lab_grid_system)
+		else:
+			print("LabGridScene: No SceneManager available in this context; running without manager connection")
 		
 		# Connect lab-specific signals
 		if lab_grid_system.has_signal("lab_artifact_activated"):
@@ -338,8 +341,8 @@ func fix_progression_issue():
 	print("🔍 Current progression before fix: %s" % str(completed_sequences))
 	
 	# If geometric_algorithms is present but randomness_exploration is not, it's incorrect
-	if "geometric_algorithms" in completed_sequences and "randomness_exploration" not in completed_sequences:
-		print("🚨 DETECTED ISSUE: geometric_algorithms completed without randomness_exploration!")
+	if "geometric_algorithms" in completed_sequences and "randomness" not in completed_sequences:
+		print("🚨 DETECTED ISSUE: geometric_algorithms completed without randomness!")
 		print("🔧 Fixing progression to correct state...")
 		
 		# Reset to correct progression: only array_tutorial if that's what should be completed

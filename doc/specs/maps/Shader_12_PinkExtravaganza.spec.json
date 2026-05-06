@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Shader_12_PinkExtravaganza",
+  "home_sequence": "patterngeneration",
+  "dimensions": {
+    "w": 16,
+    "d": 16
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.008,
+  "breath_zones": [
+    {
+      "size": 252,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 16,
+        "d": 16
+      },
+      "centroid": [
+        7.4563492063492065,
+        7.503968253968254
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 7,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 7,
+      "z": 8,
+      "token": "shader_12_pinkextravaganza"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 255,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

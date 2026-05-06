@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 1.8: Motion 101: Velocity and Constant Acceleration
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -58,7 +58,7 @@ func _spawn_ball() -> void:
 	_ball.material_override = MAT_BALL
 	_sim_root.add_child(_ball)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_velocity += acceleration
 	_position += _velocity
 
@@ -75,3 +75,12 @@ func _process(delta: float) -> void:
 		_position.z = clamp(_position.z, _bounds_min.z + _ball_radius, _bounds_max.z - _ball_radius)
 
 	_ball.position = _position
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

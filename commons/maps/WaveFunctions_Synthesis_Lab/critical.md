@@ -1,0 +1,15 @@
+# Decomposition is a politics — Fourier, the primitive basis, and the decision to call a signal a sum
+
+Fourier's theorem makes an audacious claim: any periodic signal, no matter how jagged, can be written as a sum of sine waves. The jaggedness is an appearance. Underneath it is a decomposition into simple components, and the components are always the same components — sinusoids at integer multiples of the fundamental frequency.
+
+Bruno Latour argues that scientific decomposition is always a political act. It decides what counts as primitive and what counts as composite. Fourier's theorem decides that sinusoids are primitive. Every other waveform — square, sawtooth, triangle, a heartbeat, a vowel — is composite and can be taken apart. The decision is not neutral. It makes a particular basis load-bearing, and once the basis is load-bearing, the whole rest of signal processing inherits its assumptions.
+
+The map stages Fourier's decision as a working instrument. A central bench holds an additive synthesiser with sliders for the first sixteen harmonics. Raising each slider adds a scaled sine at that harmonic's frequency into the output. A large display above the bench shows the resulting waveform and its spectrum side by side. Presets reconstruct a square wave, a sawtooth, a triangle, and a rough approximation of the vowel "a" as particular configurations of the sliders.
+
+The biology stations make the decomposition ambitious. A heartbeat trace is broken into its dominant frequencies; a day-night cycle is reduced to a low-frequency carrier with seasonal modulations; a DNA helix is described as a spatial oscillator. The claim is that biology is full of oscillators and that Fourier is how they can be read. Latour would note that this claim is simultaneously a description and a commitment: describing a heartbeat as a sum of sines commits the analyst to treating sine as the relevant basis for heartbeats.
+
+The basis is not inevitable. Wavelets offer a different basis that trades frequency resolution for temporal resolution. Short-time Fourier transforms compromise between the two. Each alternative is a different political decision about what primitives a signal should be decomposed into, and each decision is better for some kinds of signal and worse for others. The map quietly admits this by holding the sixteen-harmonic synthesiser up as one option among many, rather than as the option.
+
+Within the sequence, Synthesis Lab is the synthesis in more than one sense. Every earlier concept in Wavefunctions is used here: sine as shape, circle as source, propagation as distance, sound as translation, silence as baseline, parallelism as offset. The lab hands the learner the operation that takes waves apart and puts them back together, and it also hands the learner the question of whether the primitive basis it uses is the one the learner actually needs. The question stays open on the exit teleporter.
+
+The sequence's closing gesture is the unresolved basis question: Fourier is the primitive handed to the learner, and its primitivity is a decision the learner now knows enough to refuse if they have the reason.

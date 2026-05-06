@@ -75,6 +75,7 @@ func _spawn_vehicle_and_target() -> void:
 	_target = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.06
+	sphere.height = 0.12
 	_target.mesh = sphere
 	_target.material_override = MAT_TARGET
 	_target.position = Vector3(0.3, 0.6, 0)
@@ -169,3 +170,12 @@ class Vehicle:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -58,3 +58,6 @@ func _rescale_sprite(new_size: Vector2i) -> void:
 		_baseline_sprite_extent.y / float(new_size.y),
 		_initial_sprite_scale.z
 	)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

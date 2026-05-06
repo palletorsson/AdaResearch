@@ -1,0 +1,52 @@
+{
+  "id": "gg_noise02_plant_cellular",
+  "notes": "DNA BRIDGE: Same L-system plant, but noise_type=cellular (Worley/Voronoi noise) with larger amplitude. Nodes snap to Voronoi-cell centers, producing a more crystalline shape. Noise-type as DNA variable.",
+  "seed": {
+    "lsystem": {
+      "axiom": "F",
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
+      "iterations": 4,
+      "angle_deg": 25.7,
+      "step_len": 0.25,
+      "step_shrink": 0.72,
+      "base_radius": 0.09,
+      "radius_shrink": 0.78,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "iterations": 0,
+  "rules": [],
+  "post_ops": [
+    {
+      "op": "noise_displace",
+      "amplitude": 0.15,
+      "frequency": 2.0,
+      "octaves": 2,
+      "seed": 9,
+      "noise_type": "cellular",
+      "mode": "vector"
+    }
+  ],
+  "render_mode": "capsule",
+  "tag_colors": {
+    "lsystem": [
+      0.35,
+      0.25,
+      0.15
+    ],
+    "leaf": [
+      0.6,
+      0.75,
+      0.35
+    ]
+  },
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.1,
+  "max_nodes": 3000
+}

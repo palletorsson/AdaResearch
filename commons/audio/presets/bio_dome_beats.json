@@ -1,0 +1,158 @@
+{
+    "description": "Bio-Dome with organic beats - nature sounds with gentle organic drums",
+    "category": "sci_fi_lofi_beats",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -20,
+            "bus": "Growth",
+            "parameters": {
+                "base_freq": 45.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -24,
+            "bus": "Breeze"
+        },
+        {
+            "sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
+            "volume_db": -20,
+            "bus": "Bass"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "house_drums.909_kick"
+            ],
+            "interval_range": [
+                3.0,
+                7.0
+            ],
+            "volume_range": [
+                -22,
+                -16
+            ],
+            "bus": "Kicks"
+        },
+        {
+            "sound_pool": [
+                "house_drums.909_hihat_closed"
+            ],
+            "interval_range": [
+                0.8,
+                2.0
+            ],
+            "volume_range": [
+                -28,
+                -22
+            ],
+            "bus": "HiHats"
+        },
+        {
+            "sound_pool": [
+                "AudioSynthesizer.KORG_M1_PIANO"
+            ],
+            "interval_range": [
+                10.0,
+                25.0
+            ],
+            "volume_range": [
+                -26,
+                -20
+            ],
+            "bus": "Chimes"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.rain_segment"
+            ],
+            "interval_range": [
+                20.0,
+                50.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Water"
+        }
+    ],
+    "buses": {
+        "Growth": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 300
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "Breeze": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 1200
+                }
+            ]
+        },
+        "Bass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 150
+                }
+            ]
+        },
+        "Kicks": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.35,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "HiHats": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 3000
+                }
+            ]
+        },
+        "Chimes": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 400,
+                    "tap1_level_db": -8.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "Water": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 2500
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.35,
+                    "wet": 0.2
+                }
+            ]
+        }
+    }
+}

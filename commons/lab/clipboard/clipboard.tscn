@@ -1,12 +1,7 @@
-[gd_scene load_steps=24 format=4 uid="uid://bqaqcvdoccfdq"]
+[gd_scene load_steps=19 format=4 uid="uid://bqaqcvdoccfdr"]
 
-[ext_resource type="Script" path="res://Common/Scripts/clipboard.gd" id="1_edgjo"]
-[ext_resource type="Script" path="res://scenes/pickable_demo/objects/grab_cube.gd" id="1_f3d0w"]
-[ext_resource type="Material" uid="uid://rffo8pgalbag" path="res://assets/wahooney.itch.io/blue_grid.tres" id="2_2igq3"]
-[ext_resource type="Texture2D" uid="uid://rvkboex0kxkp" path="res://Common/Models/Table/Clipboard/clipboard_clipboard2_board_Diffuse.png" id="4_kdgph"]
+[ext_resource type="Script" uid="uid://ca830nso3sipl" path="res://commons/lab/clipboard/clipboard.gd" id="1_lo6l7"]
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_nusvq"]
-[ext_resource type="Texture2D" uid="uid://cqgn256xk30wp" path="res://Common/Models/Table/Clipboard/clipboard_clipboard2_page_Diffuse.png" id="5_ku4vn"]
-[ext_resource type="Script" path="res://Common/Scripts/reset_canvas_trigger.gd" id="7_u53ab"]
 
 [sub_resource type="BoxShape3D" id="7"]
 margin = 0.01
@@ -21,7 +16,6 @@ albedo_color = Color(0.314939, 0.159426, 0.0158957, 1)
 resource_name = "boardmaterial"
 transparency = 4
 cull_mode = 2
-albedo_texture = ExtResource("4_kdgph")
 metallic = 1.0
 roughness = 0.552786
 uv1_offset = Vector3(0, -1, 0)
@@ -64,7 +58,6 @@ shadow_mesh = SubResource("ArrayMesh_uargb")
 resource_name = "pagematerial"
 transparency = 4
 cull_mode = 2
-albedo_texture = ExtResource("5_ku4vn")
 roughness = 0.292893
 uv1_offset = Vector3(0, -1, 0)
 
@@ -148,19 +141,12 @@ albedo_color = Color(1, 0.439216, 1, 0.290196)
 [sub_resource type="BoxMesh" id="BoxMesh_o7p37"]
 
 [node name="clipboard" type="Node3D"]
-script = ExtResource("1_edgjo")
-addxp = 22
-title = "Hello world"
-description_sets = Array[String](["Every artifact has a script. Use code:point to start making space.", "Need structure? Combine them with code:line and then close the surface with code:triangle."])
+script = ExtResource("1_lo6l7")
 
 [node name="GrabCube" type="RigidBody3D" parent="."]
 collision_layer = 4
 collision_mask = 196615
 freeze_mode = 1
-script = ExtResource("1_f3d0w")
-alternate_material = ExtResource("2_2igq3")
-ranged_grab_method = 0
-second_hand_grab = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00210572, 0.0129178, 0.122245)
@@ -220,7 +206,6 @@ width = 300.0
 
 [node name="ResetCanvas" type="Area3D" parent="GrabCube/clipboard"]
 transform = Transform3D(0.00203103, 0, -0.269992, 0, 0.27, 0, 0.269992, 0, 0.00203103, 0, -0.0943234, 0.12193)
-script = ExtResource("7_u53ab")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube/clipboard/ResetCanvas"]
 transform = Transform3D(1, 0, -2.3842e-07, 0, 1, 0, 2.3842e-07, 0, 1, 0.653194, 0.256977, 0.250938)

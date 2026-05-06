@@ -33,7 +33,7 @@ var unit_circle_visual: Node3D
 # Bridge path data
 var bridge_points: PackedVector3Array = PackedVector3Array()
 
-func _ready():
+func _ready() -> void:
 	generate_bridge()
 	if show_unit_circle:
 		create_unit_circle_reference()
@@ -42,11 +42,11 @@ func _ready():
 	setup_camera()
 	create_environment()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if player and camera:
 		update_camera_follow(delta)
 
-func generate_bridge():
+func generate_bridge() -> void:
 	"""Generate the sine wave bridge geometry with collision"""
 	bridge_points.clear()
 
@@ -67,7 +67,7 @@ func generate_bridge():
 	if show_projection_lines:
 		create_support_structures()
 
-func create_bridge_mesh():
+func create_bridge_mesh() -> void:
 	"""Create a beautiful ribbon-like walkable surface"""
 	bridge_mesh_instance = MeshInstance3D.new()
 	bridge_mesh_instance.name = "BridgeSurface"
@@ -149,7 +149,7 @@ func create_bridge_mesh():
 	material.roughness = 0.7
 	bridge_mesh_instance.material_override = material
 
-func create_bridge_collision():
+func create_bridge_collision() -> void:
 	"""Create collision shape for the bridge"""
 	bridge_collision_body = StaticBody3D.new()
 	bridge_collision_body.name = "BridgeCollision"
@@ -160,7 +160,7 @@ func create_bridge_collision():
 	collision_shape.shape = trimesh_shape
 	bridge_collision_body.add_child(collision_shape)
 
-func create_support_structures():
+func create_support_structures() -> void:
 	"""Create vertical lines showing projection to ground plane"""
 	var supports_container = Node3D.new()
 	supports_container.name = "SupportStructures"
@@ -191,7 +191,7 @@ func create_line_mesh(from: Vector3, to: Vector3, thickness: float) -> MeshInsta
 
 	mesh_instance.position = midpoint
 	if distance > 0.001:
-		mesh_instance.look_at(to, Vector3.UP)
+		mesh_instance.look_at_from_position(mesh_instance.position, to, Vector3.UP)
 	mesh_instance.scale.z = distance
 
 	# Material
@@ -202,7 +202,7 @@ func create_line_mesh(from: Vector3, to: Vector3, thickness: float) -> MeshInsta
 
 	return mesh_instance
 
-func create_unit_circle_reference():
+func create_unit_circle_reference() -> void:
 	"""Create a reference unit circle at the start of the bridge"""
 	unit_circle_visual = Node3D.new()
 	unit_circle_visual.name = "UnitCircleReference"
@@ -242,7 +242,7 @@ func create_unit_circle_reference():
 	unit_circle_visual.add_child(x_axis)
 	unit_circle_visual.add_child(y_axis)
 
-func create_player():
+func create_player() -> void:
 	"""Create a simple player controller"""
 	player = CharacterBody3D.new()
 	player.name = "Player"
@@ -275,7 +275,7 @@ func create_player():
 	collision_shape.position.y = 0.9
 	player.add_child(collision_shape)
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	if not player:
 		return
 
@@ -303,7 +303,7 @@ func _physics_process(delta: float):
 
 	player.move_and_slide()
 
-func setup_camera():
+func setup_camera() -> void:
 	"""Setup camera to follow the player or provide a good overview"""
 	camera = Camera3D.new()
 	camera.name = "Camera3D"
@@ -312,14 +312,14 @@ func setup_camera():
 	if spawn_player and player:
 		# Position camera behind and above player
 		camera.position = player.position + Vector3(-5, 5, 3)
-		camera.look_at(player.position, Vector3.UP)
+		camera.look_at_from_position(camera.position, player.position, Vector3.UP)
 	else:
 		# Position for overview of entire bridge
-		var bridge_center = bridge_points[bridge_segments / 2]
+		var bridge_center = bridge_points[bridge_segments / 2.0]
 		camera.position = bridge_center + Vector3(-bridge_length * 0.3, bridge_length * 0.3, bridge_width * 3)
-		camera.look_at(bridge_center, Vector3.UP)
+		camera.look_at_from_position(camera.position, bridge_center, Vector3.UP)
 
-func update_camera_follow(delta: float):
+func update_camera_follow(delta: float) -> void:
 	"""Smoothly follow the player with the camera"""
 	if not player or not camera:
 		return
@@ -333,9 +333,9 @@ func update_camera_follow(delta: float):
 	var new_forward = current_forward.lerp(desired_forward, camera_follow_smoothing * delta)
 
 	if new_forward.length() > 0.001:
-		camera.look_at(camera.global_position + new_forward, Vector3.UP)
+		camera.look_at_from_position(camera.global_position, camera.global_position + new_forward, Vector3.UP)
 
-func create_environment():
+func create_environment() -> void:
 	"""Create lighting and environment"""
 	# Directional light
 	var light = DirectionalLight3D.new()
@@ -371,8 +371,17 @@ func get_gradient_color(progress: float) -> Color:
 	else:
 		return magenta_color.lerp(pink_color, (progress - 0.75) * 4.0)
 
-func restart():
+func restart() -> void:
 	"""Reset the scene"""
 	if player:
 		player.position = bridge_points[0] + Vector3(0, 1.0, 0)
 		player.velocity = Vector3.ZERO
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

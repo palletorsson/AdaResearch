@@ -1,0 +1,5 @@
+Two networks trained against each other. The generator fabricates from noise — random vectors mapped into images, sounds, structures that never existed. The discriminator judges: real or fake. Each round sharpens both. The forger learns to deceive; the detective learns to detect. Neither improves without the other.
+
+VAEs compress reality into a latent space — a smooth, navigable terrain of possibility. Sample any point and decode it back into something plausible. GANs skip compression entirely. They learn to produce without ever learning to understand.
+
+The mirrored room splits the process in half. Stand on either side and watch the other work. Generator and discriminator are adversaries locked in productive tension — neither wins, neither should. The equilibrium IS the output. Creation as sustained conflict. The machine doesn't learn what's real. It learns what passes.

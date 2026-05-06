@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "id": "chromatic_story",
+    "name": "Chromatic Story",
+    "lineage": "Steely Dan, Herbie Hancock, Pat Metheny, Bill Evans",
+    "era": "timeless_jazz_fusion",
+    "bpm": { "min": 90, "max": 110, "typical": 100 },
+    "lambda": 0.3
+  },
+
+  "identity": {
+    "token": "jazz_piano + walking_bass + brushed_drums + chromatic_exploration",
+    "two_second_test": "Warm jazz piano chord, gentle swing, searching harmony",
+    "emotional_truth": "Musical journey from uncertainty to celebration through all 12 tones"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "rimshot", "bass", "piano", "pad", "sequence"],
+
+  "forbidden": [
+    "distortion",
+    "harsh_digital",
+    "4_on_floor_heavy",
+    "aggressive_compression",
+    "lo_fi_degradation"
+  ],
+
+  "rhythm": {
+    "quantize": "loose",
+    "humanize_ms": 8,
+    "swing_pct": 5
+  },
+
+  "harmony": {
+    "scales": ["minor", "major", "dorian", "mixolydian"],
+    "voicings": "jazz_extended",
+    "chromatic_passing": true
+  },
+
+  "fx": {
+    "room_reverb": true,
+    "warm_eq": true,
+    "light_compression": true
+  },
+
+  "transitions": {
+    "crossfade_s": 2.5
+  },
+
+  "sections": {
+    "uncertainty": ["pad", "bass"],
+    "searching": ["pad", "bass", "piano", "hihat"],
+    "darkness": ["pad", "bass", "piano", "kick", "snare"],
+    "hope": ["pad", "bass", "sequence", "hihat"],
+    "jazz": ["piano", "bass", "kick", "hihat", "rimshot"],
+    "breakthrough": ["pad", "bass", "piano", "kick", "snare", "sequence"],
+    "resolution": ["pad", "bass", "piano", "kick", "hihat"],
+    "celebration": ["pad", "bass", "sequence"]
+  }
+}

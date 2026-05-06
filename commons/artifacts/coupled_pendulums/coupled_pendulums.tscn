@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqn7mxvt4w3lj"]
+
+[ext_resource type="Script" path="res://commons/artifacts/coupled_pendulums/coupled_pendulums.gd" id="1_main"]
+
+[node name="CoupledPendulums" type="Node3D"]
+script = ExtResource("1_main")

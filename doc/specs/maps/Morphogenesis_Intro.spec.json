@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Morphogenesis_Intro",
+  "home_sequence": "morphogenesis",
+  "dimensions": {
+    "w": 5,
+    "d": 5
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.208,
+  "breath_zones": [
+    {
+      "size": 13,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 4,
+        "d": 5
+      },
+      "centroid": [
+        1.0769230769230769,
+        2.1538461538461537
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "turing_pattern_generator"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "reaction_diffusion"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "entropy_morphogenesis"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "queer_morphology_specimen"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "flower_lab"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 24,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

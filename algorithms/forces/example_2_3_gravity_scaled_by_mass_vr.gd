@@ -5,11 +5,20 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Gravity computed as a force scaled by each body's mass, revealing that all masses fall at the same acceleration
+# desire: To enact Galileo's experiment — drop different masses, watch them stay together, see why F=mg cancels in the equation of motion
+# critical_parameter: gravity_strength — the constant that proves itself constant by producing equal acceleration regardless of mass
+# triggers: Default gravity reproduces Galileo's result; reducing gravity slows the fall but masses still descend together; reversing gravity inverts the demonstration
+# emerges: The equivalence principle as visible event — heavy and light reach the floor together, the algebra confirmed by the eye
+# needs: per-body mass [has], gravity force application [has], visible arrow comparison [has], VR sliders [has]
+# relationships: NOC Ch.2 trilogy with example_2_1 and example_2_2. Anchor artifact in forces/Newton's_Laws map
+# truth: Gravity treats mass as both source and target — and so cancels itself in motion, leaving acceleration alone to fall.
 # ===========================================================================
 
 extends Node3D
 
-const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const DEFAULT_GRAVITY_STRENGTH := 0.9
 const ARROW_LENGTH_SCALE := 0.8
 const MIN_ARROW_LENGTH := 0.05
@@ -23,13 +32,16 @@ var mover_initial_positions: Dictionary = {}
 var gravity_strength: float = DEFAULT_GRAVITY_STRENGTH
 var show_force_vectors: bool = true
 
-var info_label: Label3D
-var instructions_label: Label3D
-var gravity_controller: ParameterController3D
+# UI — Ada rack panel
+var _panel: ForcesRackPanel
+var _gravity_slider: Node3D
 var auto_reset_timer: Timer
 
 func _ready() -> void:
-	create_ui()
+	# Scale down for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
+	_create_panel()
 	spawn_movers()
 	setup_auto_reset()
 	print("Example 2.3: Gravity scaled by mass")
@@ -42,7 +54,7 @@ func setup_auto_reset() -> void:
 	add_child(auto_reset_timer)
 
 func _process(_delta: float) -> void:
-	update_info_label()
+	pass  # Slider labels auto-update
 
 func _physics_process(_delta: float) -> void:
 	for mover in movers:
@@ -61,34 +73,18 @@ func _input(event: InputEvent) -> void:
 			KEY_F:
 				toggle_force_vectors()
 
-func create_ui() -> void:
-	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 28
-	info_label.outline_size = 4
-	info_label.modulate = Color(1.0, 0.9, 1.0)
-	info_label.position = Vector3(0, 0.68, 0)
-	add_child(info_label)
+func _create_panel() -> void:
+	_panel = ForcesRackPanel.new()
+	_panel.setup("2.3  Gravity Scaled by Mass", 1, 3)
+	_panel.set_instructions("[F] Weight arrows  [R] Reset")
 
-	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.9)
-	instructions_label.position = Vector3(0, 0.58, 0)
-	instructions_label.text = "[F] Toggle weight arrows  |  [R] Reset"
-	add_child(instructions_label)
+	_gravity_slider = _panel.add_slider("Gravity", 0.1, 2.5, gravity_strength, 0.05)
+	_gravity_slider.slider_moved.connect(_on_gravity_slider_moved)
 
-	gravity_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	gravity_controller.parameter_name = "Gravity"
-	gravity_controller.min_value = 0.1
-	gravity_controller.max_value = 2.5
-	gravity_controller.default_value = gravity_strength
-	gravity_controller.step_size = 0.05
-	gravity_controller.position = Vector3(0, 0.48, 0.25)
-	gravity_controller.rotation_degrees = Vector3.ZERO
-	add_child(gravity_controller)
-	gravity_controller.value_changed.connect(_on_gravity_changed)
-	gravity_controller.set_value(gravity_strength)
+	# Position panel to the left, at chest height, angled toward viewer
+	_panel.position = Vector3(-0.45, 0.35, 0.15)
+	_panel.rotation_degrees = Vector3(0, 25, 0)
+	add_child(_panel)
 
 func spawn_movers() -> void:
 	clear_existing_movers()
@@ -150,7 +146,7 @@ func create_force_arrow() -> Node3D:
 	shaft.mesh = shaft_mesh
 	shaft.position = Vector3(0, 0, -0.5)
 	shaft.rotation_degrees = Vector3(90, 0, 0)
-	shaft.material_override = create_arrow_material()
+	shaft.material_override = _create_gravity_arrow_material()
 	arrow_root.add_child(shaft)
 
 	var head := MeshInstance3D.new()
@@ -162,24 +158,20 @@ func create_force_arrow() -> Node3D:
 	head.mesh = head_mesh
 	head.position = Vector3(0, 0, -1.0)
 	head.rotation_degrees = Vector3(90, 0, 0)
-	head.material_override = create_arrow_material()
+	head.material_override = _create_gravity_arrow_material()
 	arrow_root.add_child(head)
 
 	return arrow_root
 
-func create_arrow_material() -> StandardMaterial3D:
+func _create_gravity_arrow_material() -> StandardMaterial3D:
+	# Use Ada accent_orange for gravity arrows
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.6, 1.0, 0.2)
+	mat.albedo_color = Color(0.95, 0.45, 0.15, 0.25)
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.6, 1.0) * 0.3
-	mat.emission_energy_multiplier = 0.5
+	mat.emission = Color(0.95, 0.45, 0.15)
+	mat.emission_energy_multiplier = 0.4
 	return mat
-
-func update_info_label() -> void:
-	if info_label:
-		info_label.text = "Example 2.3: Gravity scaled by mass\nGravity %.2f m/s^2" % gravity_strength
-
 
 func update_force_visual(mover: Mover, gravity_force: Vector3) -> void:
 	var arrow: Node3D = force_visuals.get(mover, null)
@@ -210,8 +202,8 @@ func update_force_visual(mover: Mover, gravity_force: Vector3) -> void:
 
 func reset_scene() -> void:
 	gravity_strength = DEFAULT_GRAVITY_STRENGTH
-	if gravity_controller:
-		gravity_controller.set_value(gravity_strength)
+	if _panel:
+		_panel.set_slider_value(0, gravity_strength)
 	restore_initial_positions()
 
 func restore_initial_positions() -> void:
@@ -229,9 +221,17 @@ func toggle_force_vectors() -> void:
 		if is_instance_valid(arrow):
 			arrow.visible = show_force_vectors
 
-func _on_gravity_changed(value: float) -> void:
-	gravity_strength = value
+func _on_gravity_slider_moved(_position) -> void:
+	gravity_strength = _panel.get_slider_value(0)
 	for mover in movers:
 		if is_instance_valid(mover):
 			mover.acceleration = Vector3.ZERO
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

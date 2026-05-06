@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdqi1kxe8xvsq"]
+
+[ext_resource type="Script" uid="uid://d0vgbw8k0pph2" path="res://commons/primitives/rockfactory/RockFactory.gd" id="1_gravity"]
+
+[node name="RockFactoryGravity" type="Node3D"]
+script = ExtResource("1_gravity")
+number_of_rocks = 30
+auto_generate = false
+spawn_area = Vector3(3, 2, 3)
+container_height = 3.0
+rock_size_min = 0.12
+rock_size_max = 0.25
+deformation_min = 3.5
+deformation_max = 6.5
+roughness_max = 3.5
+subdivisions = 1
+color_variation = 0.15
+make_rocks_static = false
+enable_gravity = true
+rock_mass = 0.8
+rock_bounce = 0.05
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.40808415)

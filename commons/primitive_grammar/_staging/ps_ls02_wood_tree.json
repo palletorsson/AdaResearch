@@ -1,0 +1,23 @@
+{
+  "id": "ps_ls02_wood_tree",
+  "layout": "lsystem_scatter",
+  "lsystem": {
+    "axiom": "F",
+    "rules": {
+      "F": "F[+F]F[-F]F"
+    },
+    "iterations": 3,
+    "angle_deg": 25.7,
+    "step_len": 0.25,
+    "step_shrink": 0.72
+  },
+  "segment_shape": "sphere",
+  "branch_shape": "cylinder",
+  "leaf_shape": "sphere",
+  "palette": "wood",
+  "primitive_size": 0.05,
+  "size_by_depth": true,
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.1,
+  "notes": "Same L-system plant DNA, wood palette \u2014 reads as a carved totem pole variant. Palette and alphabet change the character; structure stays the same."
+}

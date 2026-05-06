@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg0lpetrid1sh"]
+
+[ext_resource type="Script" uid="uid://cg0lpetrid1sh" path="res://commons/artifacts/game_of_life_petri/game_of_life_petri.gd" id="1_script"]
+
+[node name="GameOfLifePetri" type="Node3D"]
+script = ExtResource("1_script")

@@ -1,0 +1,171 @@
+{
+    "description": "Stage 16: Paradox. Two drones fighting. Sounds that shouldn't coexist. Tension. Beauty in contradiction.",
+    "continuous_layers": [
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -14,
+            "bus": "Ambient",
+            "parameters": {
+                "entropy": 0.75,
+                "queer_factor": 0.85
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -12,
+            "bus": "DeepAmbient"
+        },
+        {
+            "sound_id": "AudioSynthesizer.APHEX_TWIN_MODULAR",
+            "volume_db": -10,
+            "bus": "Glitch"
+        },
+        {
+            "sound_id": "AudioSynthesizer.LIFE_HARMONY",
+            "volume_db": -16,
+            "bus": "Harmony"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -22,
+            "bus": "Wind"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": ["AudioSynthesizer.SHIELD_HIT"],
+            "interval_range": [4.0, 12.0],
+            "volume_range": [-14, -8],
+            "bus": "FX"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.RULE_CHANGE_BURST"],
+            "interval_range": [6.0, 16.0],
+            "volume_range": [-16, -10],
+            "bus": "Glitch"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.CELLULAR_MELODY"],
+            "interval_range": [8.0, 24.0],
+            "volume_range": [-18, -12],
+            "bus": "Melody"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.GENERATION_SWEEP", "AudioSynthesizer.GRID_PULSE"],
+            "interval_range": [5.0, 15.0],
+            "volume_range": [-20, -14],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "EQ",
+                    "low_gain_db": 4.0,
+                    "mid_gain_db": -6.0,
+                    "high_gain_db": 4.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.5,
+                    "damping": 0.2
+                }
+            ]
+        },
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "EQ",
+                    "low_gain_db": 6.0,
+                    "mid_gain_db": -2.0,
+                    "high_gain_db": -8.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.85,
+                    "wet": 0.6,
+                    "damping": 0.15
+                }
+            ]
+        },
+        "Glitch": {
+            "effects": [
+                {
+                    "type": "EQ",
+                    "low_gain_db": -8.0,
+                    "mid_gain_db": 5.0,
+                    "high_gain_db": 6.0
+                },
+                {
+                    "type": "Compressor",
+                    "threshold_db": -6.0,
+                    "ratio": 6.0
+                },
+                {
+                    "type": "Delay",
+                    "delay_ms": 170,
+                    "feedback": 0.5,
+                    "wet": 0.35
+                }
+            ]
+        },
+        "Harmony": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.7,
+                    "depth": 0.35,
+                    "wet": 0.4
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.45,
+                    "damping": 0.25
+                }
+            ]
+        },
+        "Wind": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.3,
+                    "damping": 0.5
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.7,
+                    "damping": 0.1
+                }
+            ]
+        },
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 450,
+                    "feedback": 0.45,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 200,
+                    "feedback": 0.3,
+                    "wet": 0.25
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkm7p2qj8vwb0"]
+
+[ext_resource type="Script" path="res://commons/primitives/snappoint/snap_triangle.gd" id="1_tri"]
+
+[node name="SnapTriangle" type="Node3D"]
+script = ExtResource("1_tri")
+triangle_color = Color(0.9, 0.3, 0.7, 0.8)
+wireframe_color = Color(1, 1, 1, 1)
+

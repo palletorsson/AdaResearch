@@ -1,0 +1,5 @@
+A tree grows generation by generation. Each step applies the same rewriting rule — F becomes F[+F]F[-F]F — and the string doubles, triples, explodes into branches. On the left, a walled corridor. The tree hits walls, prunes, bends, adapts. On the right, open clearing. Same axiom, same rules, unconstrained. Two trees diverge not because they carry different instructions but because they inhabit different worlds.
+
+Step through each generation manually. Watch the string lengthen. Watch branches fork. At the back platform, twist continuous parameters — angle decay, length shrinkage — and see rigid geometry soften into something organic. Context-sensitive rules let the grammar feel its surroundings: grow toward light, stop at stone.
+
+The genome doesn't change. The environment does. Identity is not instruction — it's instruction meeting constraint. Same sentence, different room, different tree.

@@ -5,7 +5,7 @@ class_name SceneSlideshowManager
 # Persists ONLY filenames (no JSON/metadata) to user://scores/scored_files.txt
 
 @export var starting_slide_index: int = 0
-@export var scan_root: String = "res://algorithms"  # root to search for .tscn scenes
+@export_dir var scan_root: String = "res://algorithms"  # root to search for .tscn scenes
 
 const SAVE_SUBDIR := "scores"
 const SAVE_TXT := "scored_files.txt"
@@ -18,10 +18,19 @@ var current_score: int = 0
 var total_score: int = 0
 var current_map_data: Dictionary[String, Variant] = {}
 var scene_root: Node = null
+var principal_list: Array[String] = []
+var ui_layer: CanvasLayer
+var folder_dropdown: OptionButton
+var folder_paths: Array[String] = []
+var comment_label: Label
+var todo_label: Label
 
 func _ready() -> void:
 	print("=== Scene Slideshow Manager (Filename-only persistence) ===")
 	_print_controls()
+
+	# Build folder selector UI (dropdown)
+	_build_folder_selector()
 
 	# Index scenes
 	print("Indexing scenes under:", scan_root)
@@ -39,6 +48,93 @@ func _ready() -> void:
 		_load_scene_at_index(current_scene_index)
 	else:
 		print("No scenes found. Put .tscn files under:", scan_root)
+		print("Tip: Use the dropdown to choose a different folder.")
+
+func _build_folder_selector() -> void:
+	# Create UI layer and dropdown
+	ui_layer = CanvasLayer.new()
+	ui_layer.layer = 100
+	add_child(ui_layer)
+
+	var root_ctrl := Control.new()
+	root_ctrl.name = "FolderSelector"
+	root_ctrl.anchor_left = 0.0
+	root_ctrl.anchor_top = 0.0
+	root_ctrl.anchor_right = 0.0
+	root_ctrl.anchor_bottom = 0.0
+	root_ctrl.offset_left = 0.0
+	root_ctrl.offset_top = 0.0
+	root_ctrl.offset_right = 0.0
+	root_ctrl.offset_bottom = 0.0
+	ui_layer.add_child(root_ctrl)
+
+	folder_dropdown = OptionButton.new()
+	folder_dropdown.position = Vector2(16, 16)
+	folder_dropdown.size = Vector2(560, 28)
+	root_ctrl.add_child(folder_dropdown)
+
+	# Comment and Todo labels
+	comment_label = Label.new()
+	comment_label.position = Vector2(16, 52)
+	comment_label.size = Vector2(700, 48)
+	comment_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	comment_label.clip_text = false
+	comment_label.text = ""
+	root_ctrl.add_child(comment_label)
+
+	todo_label = Label.new()
+	todo_label.position = Vector2(16, 104)
+	todo_label.size = Vector2(700, 64)
+	todo_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	todo_label.clip_text = false
+	todo_label.text = ""
+	root_ctrl.add_child(todo_label)
+
+	# Populate with algorithms root and immediate subdirectories
+	folder_paths = _collect_algorithm_dirs("res://algorithms")
+	# Ensure the base path is first
+	if folder_paths.is_empty() or folder_paths[0] != "res://algorithms":
+		folder_paths.insert(0, "res://algorithms")
+
+	folder_dropdown.clear()
+	for p in folder_paths:
+		folder_dropdown.add_item(p)
+
+	# Select current scan_root if present
+	var idx := folder_paths.find(scan_root)
+	if idx == -1:
+		idx = 0
+		scan_root = folder_paths[0]
+	folder_dropdown.select(idx)
+
+	folder_dropdown.item_selected.connect(_on_folder_selected)
+
+func _collect_algorithm_dirs(base: String) -> Array[String]:
+	var result: Array[String] = []
+	var d := DirAccess.open(base)
+	if d:
+		d.list_dir_begin()
+		var name := d.get_next()
+		while name != "":
+			if not name.begins_with(".") and d.current_is_dir():
+				result.append(base.path_join(name))
+			name = d.get_next()
+		d.list_dir_end()
+	result.sort()
+	return result
+
+func _on_folder_selected(index: int) -> void:
+	if index < 0 or index >= folder_paths.size():
+		return
+	scan_root = folder_paths[index]
+	print("→ Folder changed to:", scan_root)
+	_index_scenes(scan_root)
+	print("Found ", scene_list.size(), " scenes.")
+	if not scene_list.is_empty():
+		current_scene_index = 0
+		_load_scene_at_index(current_scene_index)
+	else:
+		print("No scenes in:", scan_root)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -47,11 +143,12 @@ func _input(event: InputEvent) -> void:
 			KEY_P:                                 previous_scene()
 			KEY_PLUS, KEY_KP_ADD:                  increase_score()
 			KEY_MINUS, KEY_KP_SUBTRACT:            decrease_score()
-			KEY_R:                                 reset_score()
+			KEY_R:                                 _principal_add_current()
 			KEY_X:                                 save_current_score_and_filename()   # save current filename only
 			KEY_C:                                 _additional_control()
 			KEY_J:                                 save_all_scored_filenames()         # write all scored filenames
 			KEY_K:                                 save_complete_json_data()           # save complete JSON data
+			KEY_L:                                 _principal_print()   # L for List
 
 # ---------------------------
 # Scene indexing & loading
@@ -126,12 +223,14 @@ func _load_scene_at_index(index: int) -> void:
 		print("ERROR: Failed to load scene:", scene_path)
 		return
 
+	# Instantiate the scene normally
 	scene_root = packed.instantiate()
 	if scene_root == null:
 		print("ERROR: Failed to instantiate scene:", scene_path)
 		return
 
-	add_child(scene_root)
+	# Add scene to tree deferred to avoid parent path resolution issues
+	call_deferred("add_child", scene_root)
 
 	_update_current_map_data(scene_path, metadata)
 
@@ -169,6 +268,25 @@ func decrease_score() -> void:
 func reset_score() -> void:
 	current_score = 0
 	print("Score reset to:", current_score)
+
+func _principal_add_current() -> void:
+	if current_scene_index < 0 or current_scene_index >= scene_list.size():
+		print("No current scene to add to Principal list")
+		return
+	var path := scene_list[current_scene_index]
+	if not principal_list.has(path):
+		principal_list.append(path)
+		print("Added to Principal list:", path)
+	else:
+		print("Already in Principal list:", path)
+
+func _principal_print() -> void:
+	print("=== Principal Scene List ===")
+	if principal_list.is_empty():
+		print("(empty)")
+		return
+	for i in range(principal_list.size()):
+		print(str(i+1) + ") ", principal_list[i])
 
 func save_current_score_and_filename() -> void:
 	# Save in-memory score for the current scene
@@ -275,10 +393,67 @@ func _update_current_map_data(scene_path: String, metadata: Dictionary) -> void:
 		"timestamp": Time.get_unix_time_from_system(),
 		"scene_index": current_scene_index
 	}
+	# Lookup artifact comment for this scene path
+	var comment := _lookup_artifact_comment(scene_path)
+	var todo := _lookup_artifact_todo(scene_path)
+	print("Comment:", (comment if comment != "" else "(none)"))
+	print("Todo:", (todo if todo != "" else "(none)"))
+	_update_comment_todo_ui(comment, todo)
 	print("Map data updated for:", current_map_data["scene_name"])
+
+func _lookup_artifact_comment(scene_path: String) -> String:
+	var key_name := String(scene_path.get_file().get_basename())
+	var result := _search_registry_field(key_name, scene_path, "comment")
+	return result
+
+func _lookup_artifact_todo(scene_path: String) -> String:
+	var key_name := String(scene_path.get_file().get_basename())
+	var result := _search_registry_field(key_name, scene_path, "todo")
+	if result.is_empty():
+		result = _search_registry_field(key_name, scene_path, "notes")
+	return result
+
+# Search all registry/*.json files for a field on an artifact matched by key or scene path
+func _search_registry_field(key_name: String, scene_path: String, field: String) -> String:
+	const REGISTRY_DIR := "res://commons/artifacts/registry/"
+	var dir := DirAccess.open(REGISTRY_DIR)
+	if not dir:
+		return ""
+	dir.list_dir_begin()
+	var fname := dir.get_next()
+	while fname != "":
+		if not dir.current_is_dir() and fname.ends_with(".json"):
+			var f := FileAccess.open(REGISTRY_DIR + fname, FileAccess.READ)
+			if f:
+				var parsed = JSON.parse_string(f.get_as_text())
+				f.close()
+				if typeof(parsed) == TYPE_DICTIONARY:
+					var artifacts: Dictionary = parsed.get("artifacts", {})
+					# Direct key lookup
+					if artifacts.has(key_name):
+						var entry = artifacts[key_name]
+						if typeof(entry) == TYPE_DICTIONARY and entry.has(field):
+							dir.list_dir_end()
+							return String(entry[field])
+					# Fallback: match by scene path
+					for k in artifacts:
+						var v = artifacts[k]
+						if typeof(v) == TYPE_DICTIONARY:
+							if (v.has("scene") and String(v["scene"]) == scene_path) and v.has(field):
+								dir.list_dir_end()
+								return String(v[field])
+		fname = dir.get_next()
+	dir.list_dir_end()
+	return ""
 
 func get_current_map_data() -> Dictionary:
 	return current_map_data
+
+func _update_comment_todo_ui(comment: String, todo: String) -> void:
+	if comment_label:
+		comment_label.text = ("" if comment == "" else ("Comment: " + comment))
+	if todo_label:
+		todo_label.text = ("" if todo == "" else ("Todo: " + todo))
 
 # ---------------------------
 # Filename-only persistence
@@ -346,11 +521,18 @@ func _print_controls() -> void:
 	print("  P - Previous scene")
 	print("  + / Numpad + - Increase score (in-memory)")
 	print("  - / Numpad - - Decrease score (in-memory)")
-	print("  R - Reset score (in-memory)")
+	print("  R - Add current scene to Principal list")
 	print("  X - Save current filename ONLY to text (append unique)")
 	print("  C - Status/Info")
 	print("  J - Write ALL scored filenames with scores to text (overwrite)")
 	print("  K - Save complete JSON data with all scores and metadata")
+	print("  L - Print Principal list to console")
 	print("  ESC - Toggle mouse capture (engine default)")
 	print("===============================")
 	print("")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

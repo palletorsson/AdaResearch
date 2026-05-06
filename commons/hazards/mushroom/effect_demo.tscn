@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ct2ppssug2aea"]
+
+[ext_resource type="Script" path="res://commons/hazards/mushroom/effect_demo.gd" id="1_script"]
+
+[node name="EffectDemo" type="Node3D"]
+script = ExtResource("1_script")

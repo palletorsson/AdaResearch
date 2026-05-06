@@ -1,0 +1,145 @@
+{
+  "map_info": {
+    "name": "Gallery: Primitives_1",
+    "lookup_name": "Gallery_Primitives_1",
+    "description": "Showcase of 30 unplaced artifacts from Primitives_1. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 20,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "10-15 minutes",
+      "learning_objectives": [
+        "Browse 30 Primitives_1 artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "Primitives_1 Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" ","sp"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","request_note:0:1.5#text:PipeLayout"," ","request_note:0:1.5#text:SDFDrawTool"," ","request_note:0:1.5#text:aalto vase"," ","request_note:0:1.5#text:alessi tree"," "," "],
+      [" "," ","PipeLayout:0:-0.5"," ","SDFDrawTool:0:-0.5"," ","aalto_vase:0:-0.5"," ","alessi_tree:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:arch"," ","request_note:0:1.5#text:array rotate"," ","request_note:0:1.5#text:array scale"," ","request_note:0:1.5#text:array translate"," "," "],
+      [" "," ","arch:0:-0.5"," ","array_rotate:0:-0.5"," ","array_scale:0:-0.5"," ","array_translate:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:arrow"," ","request_note:0:1.5#text:bucket of tulips"," ","request_note:0:1.5#text:capsules"," ","request_note:0:1.5#text:cavetest"," "," "],
+      [" "," ","arrow:0:-0.5"," ","bucket_of_tulips:0:-0.5"," ","capsules:0:-0.5"," ","cavetest:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:combine primitives"," ","request_note:0:1.5#text:concept synthesizer"," ","request_note:0:1.5#text:coordinate axes xy"," ","request_note:0:1.5#text:coordinate lines"," "," "],
+      [" "," ","combine_primitives:0:-0.5"," ","concept_synthesizer:0:-0.5"," ","coordinate_axes_xy:0:-0.5"," ","coordinate_lines:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:cross lines"," ","request_note:0:1.5#text:crystal"," ","request_note:0:1.5#text:crystalcluster"," ","request_note:0:1.5#text:cylinder radials rings"," "," "],
+      [" "," ","cross_lines:0:-0.5"," ","crystal:0:-0.5"," ","crystalcluster:0:-0.5"," ","cylinder_radials_rings:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:diamond"," ","request_note:0:1.5#text:dimension lens"," ","request_note:0:1.5#text:dynamic rock"," ","request_note:0:1.5#text:editable bezier"," "," "],
+      [" "," ","diamond:0:-0.5"," ","dimension_lens:0:-0.5"," ","dynamic_rock:0:-0.5"," ","editable_bezier:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:editable catmull rom"," ","request_note:0:1.5#text:editable curve"," ","request_note:0:1.5#text:elevator platform"," ","request_note:0:1.5#text:falling cube"," "," "],
+      [" "," ","editable_catmull_rom:0:-0.5"," ","editable_curve:0:-0.5"," ","elevator_platform:0:-0.5"," ","falling_cube:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:foldedpaper"," ","request_note:0:1.5#text:folding cube"," "," "," "," "," "," "],
+      [" "," ","foldedpaper:0:-0.5"," ","folding_cube:0:-0.5"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

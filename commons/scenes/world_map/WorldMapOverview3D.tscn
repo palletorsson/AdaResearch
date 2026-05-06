@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://x4uxyx1mhnv8"]
+
+[ext_resource type="Script" uid="uid://csboc0gj1xjr4" path="res://commons/scenes/world_map/WorldMapOverview3D.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_viewport2d"]
+[ext_resource type="PackedScene" uid="uid://dcx4hj8k5m2yp" path="res://commons/scenes/world_map/ui/WorldMapUI.tscn" id="3_ui"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frame"]
+resource_local_to_scene = true
+albedo_color = Color(0.1, 0.1, 0.12, 1)
+metallic = 0.9
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame"]
+resource_local_to_scene = true
+size = Vector3(1.48, 1.08, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_handle"]
+resource_local_to_scene = true
+albedo_color = Color(0.15, 0.15, 0.18, 1)
+metallic = 0.7
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_handle"]
+resource_local_to_scene = true
+size = Vector3(0.12, 0.04, 0.03)
+
+[node name="WorldMapOverview3D" type="Node3D" unique_id=801435332]
+script = ExtResource("1_main")
+show_full_map = true
+
+[node name="Frame" type="MeshInstance3D" parent="." unique_id=143961683]
+material_override = SubResource("StandardMaterial3D_frame")
+mesh = SubResource("BoxMesh_frame")
+
+[node name="Viewport2Din3D" parent="." unique_id=83565735 instance=ExtResource("2_viewport2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.011)
+screen_size = Vector2(1.4, 1)
+scene = ExtResource("3_ui")
+viewport_size = Vector2(1600, 1200)
+transparent = 0
+unshaded = true
+scene_properties_keys = PackedStringArray("WorldMapUI.gd", "show_full_map")
+show_full_map = false
+
+[node name="HandleLeft" type="MeshInstance3D" parent="." unique_id=2063444579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.6, 0)
+material_override = SubResource("StandardMaterial3D_handle")
+mesh = SubResource("BoxMesh_handle")
+
+[node name="HandleRight" type="MeshInstance3D" parent="." unique_id=1980532747]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.6, 0)
+material_override = SubResource("StandardMaterial3D_handle")
+mesh = SubResource("BoxMesh_handle")
+
+[node name="ScreenGlow" type="OmniLight3D" parent="." unique_id=749518154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
+light_color = Color(0.2, 0.7, 0.9, 1)
+light_energy = 0.8
+omni_range = 1.2
+omni_attenuation = 2.0
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1819028134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58, 0.012)
+pixel_size = 0.002
+text = "WORLD MAP"
+font_size = 28
+outline_size = 4
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1837348806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8547557)

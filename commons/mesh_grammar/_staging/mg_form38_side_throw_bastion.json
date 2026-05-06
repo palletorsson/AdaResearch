@@ -1,0 +1,37 @@
+{
+  "id": "mg_form38_side_throw_bastion",
+  "notes": "REACH PASS: side faces are enlarged before a deeper outward throw. Intended as a stronger side-bias mass allocation than the earlier bastion study.",
+  "seed": "cube",
+  "seed_scale": 0.62,
+  "generations": 2,
+  "camera_pitch": 0.3,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "side",
+      "params": {
+        "amount": 0.14,
+        "inner_tag": "throw_core",
+        "border_tag": "throw_rim"
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:throw_core",
+      "params": {
+        "scale": 1.12
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:throw_core",
+      "params": {
+        "distance": 0.16,
+        "scale": 1.0,
+        "top_tag": "throw_face",
+        "side_tag": "throw_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "gg09_rose_5_bush",
+  "notes": "5-petal rose displacement on a dense bush \u00e2\u20ac\u201d pentagonal flower cluster.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.14
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_red"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 4,
+        "length": 0.5,
+        "spread_deg": 55,
+        "radius_decay": 0.65
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "rose_5",
+        "t_source": "radial",
+        "t_scale": 1.5,
+        "amp": 0.3,
+        "axes": [
+          1,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 10,
+        "length": 0.15,
+        "radius": 0.018,
+        "splay": 0.9
+      }
+    }
+  ]
+}

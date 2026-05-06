@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CA_Introduction",
+  "home_sequence": "cellularautomata",
+  "dimensions": {
+    "w": 7,
+    "d": 17
+  },
+  "signature": "line_network_ca exposes the neighbor graph; persian_rug demonstrates symmetry preservation under local rules; dark_sphere anchors the research space.",
+  "style": null,
+  "echoes": [],
+  "density": 0.025,
+  "breath_zones": [
+    {
+      "size": 115,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 17
+      },
+      "centroid": [
+        3.026086956521739,
+        8.008695652173913
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "persian_rug"
+    },
+    {
+      "x": 2,
+      "z": 11,
+      "token": "line_network_ca"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 118,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

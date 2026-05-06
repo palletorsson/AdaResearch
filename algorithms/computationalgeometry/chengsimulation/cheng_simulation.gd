@@ -82,7 +82,7 @@ class SimulationEntity:
 	var behavior_tree = {}
 	var evolved_steps = 0
 	
-	func _init():
+	func _init() -> void:
 		id = 0
 		type = "generic"
 		position = Vector3.ZERO
@@ -142,7 +142,7 @@ class SimulationEntity:
 		return wander_force * weight
 
 # Initialize the simulation
-func _ready():
+func _ready() -> void:
 	rng.randomize()
 	
 	# Create materials for different entity types
@@ -174,7 +174,7 @@ func _ready():
 	setup_vr_integration()
 
 # Process frame update
-func _process(delta):
+func _process(delta: float) -> void:
 	simulation_time += delta * evolution_speed
 	
 	# Update environment
@@ -209,7 +209,7 @@ func _process(delta):
 		update_debug_visualization()
 
 # Create materials for different entity types
-func create_materials():
+func create_materials() -> void:
 	var base_material = StandardMaterial3D.new()
 	base_material.roughness = 0.4
 	base_material.metallic = 0.0
@@ -268,7 +268,7 @@ func create_materials():
 	# Apply different visual styles based on setting
 	apply_visual_style()
 
-func apply_visual_style():
+func apply_visual_style() -> void:
 	match visual_style:
 		0:  # Minimal
 			for mat in materials:
@@ -295,7 +295,7 @@ func apply_visual_style():
 				mat.emission_energy_multiplier = 0.3
 
 # Register different entity types
-func register_entity_types():
+func register_entity_types() -> void:
 	if enable_wanderers:
 		entity_types.append("wanderer")
 	
@@ -316,7 +316,7 @@ func register_entity_types():
 		entity_types.append("wanderer")
 
 # Create the base environment
-func create_environment():
+func create_environment() -> void:
 	var environment_container = Node3D.new()
 	environment_container.name = "SimulationEnvironment"
 	add_child(environment_container)
@@ -358,7 +358,7 @@ func create_environment():
 			2:  # Structure
 				create_environment_structure(environment_container)
 
-func create_environment_mound(parent: Node3D):
+func create_environment_mound(parent: Node3D) -> void:
 	var mound = MeshInstance3D.new()
 	mound.name = "Mound"
 	
@@ -394,7 +394,7 @@ func create_environment_mound(parent: Node3D):
 	parent.add_child(mound)
 	environment_nodes.append(mound)
 
-func create_environment_pit(parent: Node3D):
+func create_environment_pit(parent: Node3D) -> void:
 	var pit = MeshInstance3D.new()
 	pit.name = "Pit"
 	
@@ -420,7 +420,7 @@ func create_environment_pit(parent: Node3D):
 	parent.add_child(pit)
 	environment_nodes.append(pit)
 
-func create_environment_structure(parent: Node3D):
+func create_environment_structure(parent: Node3D) -> void:
 	var structure = Node3D.new()
 	structure.name = "Structure"
 	
@@ -457,46 +457,57 @@ func create_environment_structure(parent: Node3D):
 	parent.add_child(structure)
 	environment_nodes.append(structure)
 
-func create_resource_points():
+func create_resource_points() -> void:
 	var resource_container = Node3D.new()
 	resource_container.name = "ResourcePoints"
 	add_child(resource_container)
 	
 	var resource_count = int(complexity_level * 15)
 	
+	# Create resource points using MultiMesh
+	var resource_mesh = SphereMesh.new()
+	resource_mesh.radius = 0.3
+	resource_mesh.height = 0.6
+
+	var resource_material = StandardMaterial3D.new()
+	resource_material.albedo_color = Color(0.0, 0.8, 0.5)
+	resource_material.emission_enabled = true
+	resource_material.emission = Color(0.0, 0.5, 0.3)
+	resource_material.emission_energy_multiplier = 0.8
+	resource_mesh.material = resource_material
+
+	var res_mm = MultiMesh.new()
+	res_mm.transform_format = MultiMesh.TRANSFORM_3D
+	res_mm.instance_count = resource_count
+	res_mm.mesh = resource_mesh
+
 	for i in range(resource_count):
-		var resource = MeshInstance3D.new()
-		resource.name = "Resource_" + str(i)
-		
-		var resource_mesh = SphereMesh.new()
-		resource_mesh.radius = 0.3
-		resource_mesh.height = 0.6
-		
-		var resource_material = StandardMaterial3D.new()
-		resource_material.albedo_color = Color(0.0, 0.8, 0.5)
-		resource_material.emission_enabled = true
-		resource_material.emission = Color(0.0, 0.5, 0.3)
-		resource_material.emission_energy_multiplier = 0.8
-		
-		resource.mesh = resource_mesh
-		resource.material_override = resource_material
-		
 		var x = rng.randf_range(-environment_size.x/2 + 1, environment_size.x/2 - 1)
 		var z = rng.randf_range(-environment_size.z/2 + 1, environment_size.z/2 - 1)
-		var y = 0.3  # Just above ground level
-		resource.position = Vector3(x, y, z)
-		
-		resource_container.add_child(resource)
+		var y = 0.3
+		var pos = Vector3(x, y, z)
+
+		var t = Transform3D()
+		t.origin = pos
+		res_mm.set_instance_transform(i, t)
+
 		resource_points.append({
-			"node": resource,
-			"position": resource.position,
+			"node": null,
+			"mm_index": i,
+			"position": pos,
 			"energy": 100.0,
 			"type": "standard",
 			"last_used": 0.0
 		})
 
+	var res_mmi = MultiMeshInstance3D.new()
+	res_mmi.name = "Resources_MM"
+	res_mmi.multimesh = res_mm
+	resource_container.add_child(res_mmi)
+	resource_container.set_meta("multimesh", res_mm)
+
 # Create a random entity
-func create_random_entity():
+func create_random_entity() -> void:
 	if entities.size() >= max_entities:
 		return
 	
@@ -534,7 +545,7 @@ func create_random_entity():
 	if use_spatial_partitioning:
 		add_to_spatial_partition(entity)
 
-func setup_entity_properties(entity: SimulationEntity):
+func setup_entity_properties(entity: SimulationEntity) -> void:
 	# Set common properties with some randomization
 	entity.energy = rng.randf_range(70.0, 100.0)
 	entity.lifespan = rng.randf_range(60.0, 180.0) * (1.0 + complexity_level)
@@ -579,7 +590,7 @@ func setup_entity_properties(entity: SimulationEntity):
 			entity.attributes["generic_value"] = rng.randf_range(0.5, 1.5)
 			entity.color = Color(0.7, 0.7, 0.7)
 
-func create_entity_visual(entity: SimulationEntity):
+func create_entity_visual(entity: SimulationEntity) -> void:
 	var visual = Node3D.new()
 	visual.name = "Entity_" + entity.type + "_" + str(entity.id)
 	
@@ -698,20 +709,18 @@ func create_entity_visual(entity: SimulationEntity):
 	entity.node = visual
 	entity.node.position = entity.position
 
-func update_environment(delta: float):
+func update_environment(delta: float) -> void:
 	# Process resource points
+	var res_container = get_node_or_null("ResourcePoints")
+	var res_mm: MultiMesh = null
+	if res_container and res_container.has_meta("multimesh"):
+		res_mm = res_container.get_meta("multimesh")
+
 	for resource in resource_points:
 		# Regenerate energy slowly
 		if resource.energy < 100.0:
 			resource.energy += delta * 2.0
-			
-			# Visual feedback for regeneration
-			if resource.node:
-				var material = resource.node.material_override as StandardMaterial3D
-				if material:
-					var energy_ratio = resource.energy / 100.0
-					material.emission_energy_multiplier = 0.3 + energy_ratio * 0.5
-		
+
 		# Slowly move resources
 		if rng.randf() < delta * 0.05:
 			var movement = Vector3(
@@ -719,13 +728,16 @@ func update_environment(delta: float):
 				0,
 				rng.randf_range(-0.5, 0.5)
 			) * delta
-			
-			resource.position += movement
-			
-			if resource.node:
-				resource.node.position = resource.position
 
-func handle_entity_interactions():
+			resource.position += movement
+
+			# Update MultiMesh transform
+			if res_mm and resource.has("mm_index"):
+				var t = Transform3D()
+				t.origin = resource.position
+				res_mm.set_instance_transform(resource.mm_index, t)
+
+func handle_entity_interactions() -> void:
 	# Handle interactions between entities that are close to each other
 	if use_spatial_partitioning:
 		# Only check entities that are in the same or adjacent cells
@@ -779,7 +791,7 @@ func handle_entity_interactions():
 				if distance < 1.0:
 					process_entity_interaction(entity1, entity2)
 
-func apply_environmental_effects(delta: float):
+func apply_environmental_effects(delta: float) -> void:
 	# Apply environmental constraints
 	for entity in entities:
 		# Apply gravity
@@ -800,7 +812,7 @@ func apply_environmental_effects(delta: float):
 				rng.randf_range(-0.5, 0.5),
 				rng.randf_range(-1, 1)
 			) * delta * chaos_factor
-func process_entity_interaction(entity1: SimulationEntity, entity2: SimulationEntity):
+func process_entity_interaction(entity1: SimulationEntity, entity2: SimulationEntity) -> void:
 	# Different interactions based on entity types
 	
 	# Create a type pair key for easy matching
@@ -1001,282 +1013,27 @@ func process_entity_interaction(entity1: SimulationEntity, entity2: SimulationEn
 				if entity2.attributes.has("construction_state") and entity2.attributes["construction_state"] == "building":
 					entity2.attributes["construction_progress"] = min(1.0, entity2.attributes["construction_progress"] + 0.1)
 
-func update_wanderer(entity: SimulationEntity, delta: float):
-	# Wanderers explore and seek interesting things
-	
-	# Apply wander behavior
-	var wander_force = entity.wander(entity.attributes["wander_strength"])
-	
-	# Check if entity should seek a target
-	if entity.target != Vector3.ZERO:
-		# If close to target, clear it
-		if entity.position.distance_to(entity.target) < 1.0:
-			entity.target = Vector3.ZERO
-		else:
-			# Seek the target
-			var seek_force = entity.seek(entity.target)
-			entity.apply_force(seek_force)
-	else:
-		# Find a new target occasionally
-		if rng.randf() < delta * entity.attributes["curiosity"]:
-			var new_target = find_interest_target(entity)
-			if new_target:
-				entity.target = new_target
-	
-	# Apply forces
-	entity.apply_force(wander_force)
-	
-	# Update velocity and position
-	entity.velocity += entity.acceleration * delta
-	var max_speed = entity.attributes["max_speed"]
-	entity.velocity = entity.velocity.limit_length(max_speed)
-	entity.position += entity.velocity * delta
-	
-	# Reset acceleration
-	entity.acceleration = Vector3.ZERO
-	
-	# Update node position and rotation
-	if entity.node:
-		entity.node.position = entity.position
-		
-		# Orient in direction of movement
-		if entity.velocity.length() > 0.1:
-			var look_dir = entity.velocity.normalized()
-			entity.node.look_at_from_position(entity.node.position, entity.position + look_dir, Vector3.UP)
-	
-	# Check for state changes
-	if entity.energy < 30.0:
-		entity.set_state("hungry")
-	elif entity.energy > 70.0:
-		entity.set_state("exploring")
-	else:
-		entity.set_state("searching")
+func update_wanderer(entity: SimulationEntity, delta: float) -> void:
+	ChengEntityBehaviors.update_wanderer(self, entity, delta)
 
 
-func update_grower(entity: SimulationEntity, delta: float):
-	# Growers stay relatively stationary and grow
-	
-	# Slower movement for growers
-	var wander_force = entity.wander(0.5)
-	entity.apply_force(wander_force)
-	
-	# Update velocity and position
-	entity.velocity += entity.acceleration * delta
-	entity.velocity = entity.velocity.limit_length(1.0)  # Growers move slowly
-	entity.position += entity.velocity * delta
-	
-	# Reset acceleration
-	entity.acceleration = Vector3.ZERO
-	
-	# Handle growth
-	var growth_rate = entity.attributes["growth_rate"]
-	var max_size = entity.attributes["max_size"]
-	
-	# Scale up to max size based on age and growth rate
-	var target_scale = min(1.0 + (entity.age * growth_rate * 0.05), max_size)
-	
-	# Check if near resources to accelerate growth
-	var nearby_resources = get_entities_in_radius(entity.position, 2.0)
-	for resource in resource_points:
-		if entity.position.distance_to(resource.position) < 2.0 and resource.energy > 10.0:
-			# Consume resource
-			var consumption = min(delta * 10.0, resource.energy * 0.5)
-			resource.energy -= consumption
-			entity.energy += consumption * entity.attributes["resource_efficiency"]
-			
-			# Accelerate growth
-			target_scale += delta * 0.1
-			break
-	
-	# Update scale
-	if entity.node:
-		entity.scale = Vector3.ONE * target_scale
-		entity.node.scale = entity.scale
-	
-	# Check for reproduction
-	if entity.scale.x >= entity.attributes["split_threshold"] * max_size and entity.energy > 80.0:
-		if entities.size() < max_entities:
-			split_grower(entity)
-	
-	# Update state
-	if entity.energy < 30.0:
-		entity.set_state("absorbing")
-	elif entity.scale.x >= entity.attributes["split_threshold"] * max_size:
-		entity.set_state("splitting")
-	else:
-		entity.set_state("growing")
+func update_grower(entity: SimulationEntity, delta: float) -> void:
+	ChengEntityBehaviors.update_grower(self, entity, delta)
 
 
-func update_networker(entity: SimulationEntity, delta: float):
-	# Networkers form connections and share information
-	
-	# Movement - attracted to other networkers
-	var wander_force = entity.wander(0.7)
-	entity.apply_force(wander_force)
-	
-	# Find nearby networkers to connect with
-	var nearby_entities = get_entities_in_radius(entity.position, entity.attributes["connection_range"])
-	var connected_count = 0
-	
-	for nearby in nearby_entities:
-		if nearby.id != entity.id and nearby.type == "networker":
-			# Establish connection
-			if not entity.relationships.has(nearby.id) or entity.relationships[nearby.id] != "connected":
-				entity.relationships[nearby.id] = "connected"
-				nearby.relationships[entity.id] = "connected"
-				
-				# Draw connection line
-				update_network_connections(entity)
-				
-				connected_count += 1
-			
-			# Seek other networkers
-			var seek_force = entity.seek(nearby.position, 0.5)
-			entity.apply_force(seek_force)
-		
-		# Reached max connections
-		if connected_count >= entity.attributes["max_connections"]:
-			break
-	
-	# Update velocity and position
-	entity.velocity += entity.acceleration * delta
-	entity.velocity = entity.velocity.limit_length(1.5)
-	entity.position += entity.velocity * delta
-	
-	# Reset acceleration
-	entity.acceleration = Vector3.ZERO
-	
-	# Update node
-	if entity.node:
-		entity.node.position = entity.position
-		
-		# Update connection visualizer
-		var connector = entity.node.get_node_or_null("Connections")
-		if connector:
-			for child in connector.get_children():
-				if child is MeshInstance3D:
-					child.visible = false
-	
-	# Update state
-	if connected_count > 0:
-		entity.set_state("connected")
-	else:
-		entity.set_state("searching")
+func update_networker(entity: SimulationEntity, delta: float) -> void:
+	ChengEntityBehaviors.update_networker(self, entity, delta)
 
 
-func update_predator(entity: SimulationEntity, delta: float):
-	# Predators hunt other entities
-	
-	# Wander behavior
-	var wander_force = entity.wander(0.8)
-	entity.apply_force(wander_force)
-	
-	# Find prey
-	var target_entity = null
-	var nearest_distance = INF
-	
-	# Look for potential prey within perception range
-	var nearby_entities = get_entities_in_radius(entity.position, 6.0)
-	for nearby in nearby_entities:
-		if nearby.id != entity.id and (nearby.type == "wanderer" or nearby.type == "grower" or nearby.type == "networker"):
-			var distance = entity.position.distance_to(nearby.position)
-			
-			if distance < nearest_distance:
-				nearest_distance = distance
-				target_entity = nearby
-	
-	# Hunt target
-	if target_entity and entity.energy < 80.0:
-		var hunt_strength = entity.attributes["hunting_efficiency"]
-		var seek_force = entity.seek(target_entity.position, hunt_strength)
-		entity.apply_force(seek_force)
-		
-		entity.target = target_entity.position
-		entity.set_state("hunting")
-		
-		# If close enough, attempt attack
-		if nearest_distance < 1.0 and rng.randf() < entity.attributes["attack_strength"] * 0.1:
-			var damage = 10.0 * entity.attributes["attack_strength"]
-			target_entity.energy = max(10.0, target_entity.energy - damage)
-			entity.energy = min(100.0, entity.energy + damage * 0.7)
-			
-			create_attack_effect(entity.position, target_entity.position)
-	else:
-		entity.set_state("stalking")
-	
-	# Update velocity and position
-	entity.velocity += entity.acceleration * delta
-	var max_speed = 2.0 + entity.attributes["hunting_efficiency"] * 0.5
-	entity.velocity = entity.velocity.limit_length(max_speed)
-	entity.position += entity.velocity * delta
-	
-	# Reset acceleration
-	entity.acceleration = Vector3.ZERO
-	
-	# Update node position and rotation
-	if entity.node:
-		entity.node.position = entity.position
-		
-		# Orient in direction of movement
-		if entity.velocity.length() > 0.1:
-			var look_dir = entity.velocity.normalized()
-			entity.node.look_at_from_position(entity.node.position, entity.position + look_dir, Vector3.UP)
+func update_predator(entity: SimulationEntity, delta: float) -> void:
+	ChengEntityBehaviors.update_predator(self, entity, delta)
 
 
-func update_builder(entity: SimulationEntity, delta: float):
-	# Builders construct structures
-	
-	# Slower movement when building
-	var movement_speed = 1.5
-	var is_building = entity.attributes.get("construction_state", "") == "building"
-	
-	if is_building:
-		movement_speed = 0.5
-	
-	# Apply wander behavior
-	var wander_force = entity.wander(0.6)
-	entity.apply_force(wander_force)
-	
-	# Either building or looking for resources
-	if is_building:
-		# Update construction progress
-		entity.attributes["construction_progress"] = min(1.0, entity.attributes["construction_progress"] + delta * entity.attributes["construction_speed"])
-		
-		# If construction complete
-		if entity.attributes["construction_progress"] >= 1.0:
-			complete_construction(entity)
-			entity.attributes.erase("construction_state")
-	else:
-		# Find resources to start building
-		if entity.energy > 50.0 and rng.randf() < delta * entity.attributes["creativity"]:
-			start_construction(entity)
-	
-	# Update velocity and position
-	entity.velocity += entity.acceleration * delta
-	entity.velocity = entity.velocity.limit_length(movement_speed)
-	entity.position += entity.velocity * delta
-	
-	# Reset acceleration
-	entity.acceleration = Vector3.ZERO
-	
-	# Update node
-	if entity.node:
-		entity.node.position = entity.position
-		
-		# Update construction visualizer
-		if is_building:
-			update_construction_visualizer(entity)
-	
-	# Update state
-	if is_building:
-		entity.set_state("building")
-	elif entity.energy < 30.0:
-		entity.set_state("gathering")
-	else:
-		entity.set_state("planning")
+func update_builder(entity: SimulationEntity, delta: float) -> void:
+	ChengEntityBehaviors.update_builder(self, entity, delta)
 
 
-func evolve_entity(entity: SimulationEntity):
+func evolve_entity(entity: SimulationEntity) -> void:
 	# Apply evolutionary changes based on entity state and history
 	var evolution_factor = 0.2
 	entity.evolved_steps += 1
@@ -1334,7 +1091,7 @@ func evolve_entity(entity: SimulationEntity):
 	})
 
 
-func apply_environmental_influences(delta: float):
+func apply_environmental_influences(delta: float) -> void:
 	# Apply dynamic environmental influences based on settings
 	var influence_range = environment_reactivity * 10.0
 	
@@ -1353,7 +1110,7 @@ func apply_environmental_influences(delta: float):
 				create_resource_wave()
 
 
-func create_energy_field():
+func create_energy_field() -> void:
 	# Create a temporary energy field that affects entities
 	var field_position = Vector3(
 		rng.randf_range(-environment_size.x/2, environment_size.x/2),
@@ -1414,7 +1171,7 @@ func create_energy_field():
 	timer.timeout.connect(func(): field_visualization.queue_free())
 
 
-func create_atmospheric_disturbance():
+func create_atmospheric_disturbance() -> void:
 	# Create a temporary atmospheric effect that influences entity behavior
 	var disturbance_position = Vector3(
 		rng.randf_range(-environment_size.x/2, environment_size.x/2),
@@ -1470,7 +1227,7 @@ func create_atmospheric_disturbance():
 	)
 
 
-func create_resource_wave():
+func create_resource_wave() -> void:
 	# Create a wave of temporary resources
 	var wave_center = Vector3(
 		rng.randf_range(-environment_size.x/2, environment_size.x/2),
@@ -1557,7 +1314,7 @@ func create_resource_wave():
 	)
 
 
-func split_grower(entity: SimulationEntity):
+func split_grower(entity: SimulationEntity) -> void:
 	# Create a new grower as a result of splitting
 	var new_entity = SimulationEntity.new()
 	new_entity.id = entities.size()
@@ -1623,7 +1380,7 @@ func split_grower(entity: SimulationEntity):
 	timer.timeout.connect(func(): particles.queue_free())
 
 
-func update_network_connections(entity: SimulationEntity):
+func update_network_connections(entity: SimulationEntity) -> void:
 	if not entity.node:
 		return
 	
@@ -1675,7 +1432,7 @@ func update_network_connections(entity: SimulationEntity):
 			connector.add_child(line)
 
 
-func create_attack_effect(attacker_pos: Vector3, target_pos: Vector3):
+func create_attack_effect(attacker_pos: Vector3, target_pos: Vector3) -> void:
 	var effect = CPUParticles3D.new()
 	var midpoint = (attacker_pos + target_pos) / 2
 	effect.position = midpoint
@@ -1702,7 +1459,7 @@ func create_attack_effect(attacker_pos: Vector3, target_pos: Vector3):
 	timer.timeout.connect(func(): effect.queue_free())
 
 
-func warn_connected_networkers(networker: SimulationEntity, predator: SimulationEntity):
+func warn_connected_networkers(networker: SimulationEntity, predator: SimulationEntity) -> void:
 	# Send warning to connected networkers
 	for connected_id in networker.relationships.keys():
 		if networker.relationships[connected_id] == "connected" and connected_id < entities.size():
@@ -1719,7 +1476,7 @@ func warn_connected_networkers(networker: SimulationEntity, predator: Simulation
 				create_warning_effect(connected_entity.position)
 
 
-func create_warning_effect(position: Vector3):
+func create_warning_effect(position: Vector3) -> void:
 	var warning = CPUParticles3D.new()
 	warning.position = position
 	
@@ -1744,7 +1501,7 @@ func create_warning_effect(position: Vector3):
 	warning.add_child(timer)
 	timer.timeout.connect(func(): warning.queue_free())
 
-func complete_construction(entity: SimulationEntity):
+func complete_construction(entity: SimulationEntity) -> void:
 	# This function is called when a builder entity completes a construction project
 	
 	if not entity.attributes.has("construction_type"):
@@ -1893,7 +1650,7 @@ func complete_construction(entity: SimulationEntity):
 	})
 
 
-func _on_structure_input_event(camera, event, position, normal, shape_idx, structure):
+func _on_structure_input_event(_camera, event, position, _normal, _shape_idx, structure) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			# Create interaction effect on structure
@@ -1926,7 +1683,7 @@ func _on_structure_input_event(camera, event, position, normal, shape_idx, struc
 					entity.target = structure.position
 					entity.energy = min(100.0, entity.energy + 10.0) 
 					
-func start_construction(entity: SimulationEntity):
+func start_construction(entity: SimulationEntity) -> void:
 	entity.attributes["construction_state"] = "building"
 	entity.attributes["construction_progress"] = 0.0
 	entity.attributes["construction_type"] = ["shelter", "tower", "bridge", "sculpture"][rng.randi() % 4]
@@ -1936,7 +1693,7 @@ func start_construction(entity: SimulationEntity):
 	update_construction_visualizer(entity)
 
 
-func update_construction_visualizer(entity: SimulationEntity):
+func update_construction_visualizer(entity: SimulationEntity) -> void:
 	if not entity.node:
 		return
 	
@@ -1951,7 +1708,7 @@ func update_construction_visualizer(entity: SimulationEntity):
 	var progress = entity.attributes["creativity"] 
 	var construction
 
-func evolve_simulation(delta: float):
+func evolve_simulation(delta: float) -> void:
 	# Apply evolutionary changes based on elapsed time and entity states
 	if evolution_speed <= 0.0:
 		return
@@ -2009,7 +1766,7 @@ func create_construction_visualizer() -> Node3D:
 	constructor.name = "Construction"
 	return constructor
 
-func add_to_spatial_partition(entity: SimulationEntity):
+func add_to_spatial_partition(entity: SimulationEntity) -> void:
 	var cell_x = int(entity.position.x / grid_cell_size)
 	var cell_y = int(entity.position.y / grid_cell_size)
 	var cell_z = int(entity.position.z / grid_cell_size)
@@ -2022,7 +1779,7 @@ func add_to_spatial_partition(entity: SimulationEntity):
 
 
 
-func update_spatial_partition(entity: SimulationEntity, old_position: Vector3):
+func update_spatial_partition(entity: SimulationEntity, old_position: Vector3) -> void:
 	var old_cell_x = int(old_position.x / grid_cell_size)
 	var old_cell_y = int(old_position.y / grid_cell_size)
 	var old_cell_z = int(old_position.z / grid_cell_size)
@@ -2046,7 +1803,7 @@ func update_spatial_partition(entity: SimulationEntity, old_position: Vector3):
 	
 	partitioning_grid[new_cell_key].append(entity.id)
 
-func setup_vr_integration():
+func setup_vr_integration() -> void:
 	# Find existing XR Origin in the scene if available
 	xr_origin = get_node_or_null("../XROrigin3D")
 	
@@ -2070,7 +1827,7 @@ func setup_vr_integration():
 		camera.rotation_degrees = Vector3(-20, 0, 0)
 		add_child(camera)
 
-func process_vr_interactions():
+func process_vr_interactions() -> void:
 	if not xr_origin:
 		return
 		
@@ -2105,7 +1862,7 @@ func process_vr_interactions():
 			if highlighted_entity and highlighted_entity.node:
 				highlight_entity(highlighted_entity)
 
-func highlight_entity(entity: SimulationEntity):
+func highlight_entity(entity: SimulationEntity) -> void:
 	if entity.node:
 		var mesh_instance = entity.node.get_child(0)
 		if mesh_instance is MeshInstance3D:
@@ -2119,14 +1876,14 @@ func highlight_entity(entity: SimulationEntity):
 			entity.node.set_meta("original_material", original_material)
 			mesh_instance.material_override = highlight_material
 
-func unhighlight_entity(entity: SimulationEntity):
+func unhighlight_entity(entity: SimulationEntity) -> void:
 	if entity.node:
 		var mesh_instance = entity.node.get_child(0)
 		if mesh_instance is MeshInstance3D and entity.node.has_meta("original_material"):
 			var original_material = entity.node.get_meta("original_material")
 			mesh_instance.material_override = original_material
 
-func _on_vr_trigger_pressed():
+func _on_vr_trigger_pressed() -> void:
 	# Interact with highlighted entity
 	if highlighted_entity:
 		# Boost entity energy
@@ -2148,28 +1905,28 @@ func _on_vr_trigger_pressed():
 		# Visual effect for interaction
 		create_interaction_effect(highlighted_entity.position)
 
-func _on_vr_trigger_released():
+func _on_vr_trigger_released() -> void:
 	# Additional functionality can be added here
 	pass
 
-func _on_entity_body_entered(body, entity: SimulationEntity):
+func _on_entity_body_entered(body, entity: SimulationEntity) -> void:
 	# Handle collision with environment
 	if body is StaticBody3D:
 		# Bounce off
 		entity.velocity = entity.velocity.bounce(Vector3.UP) * 0.5
 
-func _on_entity_body_exited(body, entity: SimulationEntity):
+func _on_entity_body_exited(_body, _entity: SimulationEntity) -> void:
 	# Additional functionality can be added here
 	pass
 
-func _on_entity_input_event(camera, event, position, normal, shape_idx, entity: SimulationEntity):
+func _on_entity_input_event(_camera, event, _position, _normal, _shape_idx, entity: SimulationEntity) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			# Handle mouse interaction (for desktop testing)
 			highlighted_entity = entity
 			_on_vr_trigger_pressed()
 
-func create_interaction_effect(position: Vector3):
+func create_interaction_effect(position: Vector3) -> void:
 	var effect = CPUParticles3D.new()
 	effect.position = position
 	effect.amount = 30
@@ -2197,7 +1954,7 @@ func create_interaction_effect(position: Vector3):
 	effect.add_child(timer)
 	timer.timeout.connect(func(): effect.queue_free())
 
-func setup_recorder_camera():
+func setup_recorder_camera() -> void:
 	# Add a camera to record the simulation
 	recorder_camera = Camera3D.new()
 	recorder_camera.name = "RecorderCamera"
@@ -2207,7 +1964,7 @@ func setup_recorder_camera():
 	
 	add_child.call_deferred(recorder_camera)
 
-func initialize_behavior_networks():
+func initialize_behavior_networks() -> void:
 	# Initialize networks that define relationships between entities
 	behavior_networks = {
 		"predator_prey": {"predators": [], "prey": []},
@@ -2215,7 +1972,7 @@ func initialize_behavior_networks():
 		"builders": []
 	}
 
-func create_environment_influences():
+func create_environment_influences() -> void:
 	# Set up environmental factors that influence entity behavior
 	var world_environment = get_node_or_null("../WorldEnvironment")
 	if not world_environment:
@@ -2237,7 +1994,7 @@ func create_environment_influences():
 		world_environment.environment = environment
 		get_parent().add_child.call_deferred(world_environment)
 
-func update_entities(delta):
+func update_entities(delta) -> void:
 	for entity in entities:
 		var old_position = entity.position
 		
@@ -2269,7 +2026,7 @@ func update_entities(delta):
 		if use_spatial_partitioning:
 			update_spatial_partition(entity, old_position)
 
-func constrain_to_environment(entity: SimulationEntity):
+func constrain_to_environment(entity: SimulationEntity) -> void:
 	# Constrain to environment boundaries with bounce
 	var half_width = environment_size.x / 2
 	var half_depth = environment_size.z / 2
@@ -2382,11 +2139,11 @@ func find_interest_target(entity: SimulationEntity):
 	
 	return null
 
-func mark_entity_for_removal(entity: SimulationEntity):
+func mark_entity_for_removal(entity: SimulationEntity) -> void:
 	if not entities_to_remove.has(entity):
 		entities_to_remove.append(entity)
 
-func process_entity_removal():
+func process_entity_removal() -> void:
 	if entities_to_remove.size() > 0:
 		for entity in entities_to_remove:
 			# Remove from entities list
@@ -2411,7 +2168,7 @@ func process_entity_removal():
 		
 		entities_to_remove.clear()
 
-func create_death_effect(position: Vector3, type: String):
+func create_death_effect(position: Vector3, type: String) -> void:
 	var particles = CPUParticles3D.new()
 	particles.position = position
 	particles.amount = 20
@@ -2452,7 +2209,7 @@ func create_death_effect(position: Vector3, type: String):
 	particles.add_child(timer)
 	timer.timeout.connect(func(): particles.queue_free())
 
-func maintain_entity_population():
+func maintain_entity_population() -> void:
 	# Keep entity population at healthy levels
 	var current_count = entities.size()
 	
@@ -2464,7 +2221,7 @@ func maintain_entity_population():
 			if entities.size() < max_entities:
 				create_random_entity()
 
-func generate_emergent_events(delta: float):
+func generate_emergent_events(delta: float) -> void:
 	# Chance for spontaneous events to occur
 	if rng.randf() < delta * complexity_level * 0.1:
 		var event_type = rng.randi() % 3
@@ -2481,7 +2238,7 @@ func generate_emergent_events(delta: float):
 			2:  # Environmental shift
 				create_environmental_shift()
 
-func mutate_entity(entity: SimulationEntity):
+func mutate_entity(entity: SimulationEntity) -> void:
 	# Apply significant mutations to an entity
 	var mutation_strength = 0.5 + rng.randf() * 0.5
 	
@@ -2524,7 +2281,7 @@ func mutate_entity(entity: SimulationEntity):
 		"strength": mutation_strength
 	})
 
-func create_emergent_resource():
+func create_emergent_resource() -> void:
 	# Create a new resource at a random location
 	var resource_container = get_node_or_null("ResourcePoints")
 	if not resource_container:
@@ -2586,7 +2343,7 @@ func create_emergent_resource():
 	particles.add_child(timer)
 	timer.timeout.connect(func(): particles.queue_free())
 
-func create_environmental_shift():
+func create_environmental_shift() -> void:
 	# Change the environment in some significant way
 	var shift_type = rng.randi() % 3
 	
@@ -2638,7 +2395,7 @@ func create_environmental_shift():
 			
 			create_terrain_shift(shift_position, shift_radius)
 
-func create_terrain_shift(position: Vector3, radius: float):
+func create_terrain_shift(position: Vector3, radius: float) -> void:
 	var terrain_shift = Node3D.new()
 	terrain_shift.name = "TerrainShift"
 	
@@ -2694,7 +2451,7 @@ func create_terrain_shift(position: Vector3, radius: float):
 	terrain_shift.add_child(timer)
 	timer.timeout.connect(func(): terrain_shift.queue_free())
 
-func update_debug_visualization():
+func update_debug_visualization() -> void:
 	# Visualize spatial partitioning grid
 	if use_spatial_partitioning:
 		var debug_lines = get_node_or_null("DebugLines")
@@ -2729,3 +2486,12 @@ func update_debug_visualization():
 				box.position = cell_pos
 				
 				debug_lines.add_child(box)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

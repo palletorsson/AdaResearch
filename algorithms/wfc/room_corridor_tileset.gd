@@ -5,7 +5,7 @@ extends Node3D
 
 @onready var wfc_grid = $WFCGrid3D
 
-func _ready():
+func _ready() -> void:
 	wfc_grid.tile_types.clear()
 	wfc_grid.solver.tile_types.clear()
 
@@ -22,7 +22,7 @@ func _ready():
 	print("Press SPACE to generate")
 	print("================================")
 
-func create_room_corridor_tiles():
+func create_room_corridor_tiles() -> void:
 	"""Create a complete room and corridor tileset"""
 
 	# ROOMS - Enclosed spaces
@@ -170,7 +170,7 @@ func create_room_corridor_tiles():
 	# SUPPORT TILES
 	add_support_tiles()
 
-func create_doorway(id: String, opens_to: Vector3, col: Color):
+func create_doorway(id: String, opens_to: Vector3, col: Color) -> void:
 	"""Create a doorway tile that opens in one direction"""
 	var door = WFCTile.new(id, 0.7)
 	door.color = col
@@ -201,7 +201,7 @@ func create_doorway(id: String, opens_to: Vector3, col: Color):
 	door.set_compatible(Vector3.DOWN, ["floor"])
 	wfc_grid.add_tile_type(door)
 
-func add_support_tiles():
+func add_support_tiles() -> void:
 	"""Add wall, floor, and empty tiles"""
 	# Wall
 	var wall = WFCTile.new("wall", 3.0)
@@ -236,7 +236,7 @@ func add_support_tiles():
 	empty.set_compatible(Vector3(0, 0, -1), ["empty", "wall", "corridor_EW", "corner_NW", "corner_SW", "tjunc_W", "tjunc_N", "tjunc_S", "doorway_N", "doorway_S", "room"])
 	wfc_grid.add_tile_type(empty)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -249,9 +249,12 @@ func _input(event):
 				wfc_grid.animate_generation = not wfc_grid.animate_generation
 				print("Animation: ", "ON" if wfc_grid.animate_generation else "OFF")
 
-func _on_generation_started():
+func _on_generation_started() -> void:
 	print("Generation started...")
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	print("Generation complete!")
 	print("Total tiles: ", wfc_grid.tile_nodes.size())
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

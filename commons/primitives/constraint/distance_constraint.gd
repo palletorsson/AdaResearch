@@ -1,4 +1,4 @@
-# DistanceConstraint.gd - Attach to any 3D object that needs distance constraints
+﻿# DistanceConstraint.gd - Attach to any 3D object that needs distance constraints
 extends Node3D
 
 # Constraint settings
@@ -24,7 +24,7 @@ func release_grab():
 		print("Grab released")
 
 # Update constraint every physics frame
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_grabbed:
 		apply_distance_constraint()
 

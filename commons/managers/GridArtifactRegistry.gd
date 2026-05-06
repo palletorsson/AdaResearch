@@ -2,8 +2,13 @@
 extends Node
 class_name GridArtifactRegistry
 
-# Path to the JSON file containing artifact definitions
-const ARTIFACT_DATA_PATH = "res://commons/artifacts/grid_artifacts.json"
+# Legacy file — DEPRECATED: all entries have been migrated to registry/*.json
+# Kept for backwards compatibility; will be removed in a future version.
+const LEGACY_DATA_PATH = "res://commons/artifacts/grid_artifacts.json"
+const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
+
+# Set to false to skip loading the deprecated legacy file
+var load_legacy_file: bool = false
 
 # Main registry of artifacts
 var artifacts: Dictionary = {}
@@ -18,14 +23,45 @@ func _ready():
 	# Load the artifact data on startup
 	load_artifact_data()
 
-# Load artifact data from JSON file
+# Load artifact data from registry directory (and optionally legacy file)
 func load_artifact_data() -> void:
 	artifacts.clear()
 	_loaded_scenes.clear()
-	
-	var file = FileAccess.open(ARTIFACT_DATA_PATH, FileAccess.READ)
+
+	# 1. Load legacy file only if explicitly enabled (deprecated)
+	if load_legacy_file:
+		push_warning("GridArtifactRegistry: Loading deprecated grid_artifacts.json — all entries have been migrated to registry/*.json")
+		_load_single_file(LEGACY_DATA_PATH)
+
+	# 2. Load all files in registry directory (authoritative source)
+	_load_directory(REGISTRY_DIR_PATH)
+
+	print("Total loaded: %d artifact definitions" % artifacts.size())
+	emit_signal("registry_loaded")
+
+func _load_directory(dir_path: String) -> void:
+	var dir = DirAccess.open(dir_path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir() and file_name.ends_with(".json"):
+				var full_path = dir_path + file_name
+				print("Loading registry file: %s" % full_path)
+				_load_single_file(full_path)
+			file_name = dir.get_next()
+	else:
+		print("Registry directory not found or inaccessible: %s" % dir_path)
+
+func _load_single_file(file_path: String) -> void:
+	if not FileAccess.file_exists(file_path):
+		if file_path == LEGACY_DATA_PATH:
+			push_warning("Legacy artifact file not found (expected — it is deprecated): %s" % file_path)
+		return
+		
+	var file = FileAccess.open(file_path, FileAccess.READ)
 	if not file:
-		push_error("Failed to open artifact data file: %s" % ARTIFACT_DATA_PATH)
+		push_error("Failed to open file: %s" % file_path)
 		return
 	
 	var json_text = file.get_as_text()
@@ -34,20 +70,22 @@ func load_artifact_data() -> void:
 	var json = JSON.new()
 	var error = json.parse(json_text)
 	if error != OK:
-		push_error("Failed to parse artifact data JSON: %s at line %d" % [json.get_error_message(), json.get_error_line()])
+		push_error("Failed to parse artifact data JSON: %s at line %d in %s" % [json.get_error_message(), json.get_error_line(), file_path])
 		return
 	
 	var data = json.get_data()
 	if not data is Dictionary:
-		push_error("Artifact data JSON does not contain a root object")
+		push_error("Artifact data JSON does not contain a root object in %s" % file_path)
 		return
 	
 	if not data.has("artifacts") or not data["artifacts"] is Dictionary:
-		push_error("Artifact data JSON missing 'artifacts' object")
+		push_error("Artifact data JSON missing 'artifacts' object in %s" % file_path)
 		return
 	
 	# Process each artifact entry
 	var artifact_data = data["artifacts"]
+	var loaded_count = 0
+	
 	for artifact_id in artifact_data.keys():
 		var artifact = artifact_data[artifact_id]
 		if not artifact is Dictionary:
@@ -58,10 +96,13 @@ func load_artifact_data() -> void:
 			push_warning("Skipping artifact entry missing scene field: %s" % artifact_id)
 			continue
 		
+		if artifacts.has(artifact_id):
+			print("Note: Overwriting artifact '%s' with definition from %s" % [artifact_id, file_path])
+			
 		artifacts[artifact_id] = artifact
-	
-	print("Loaded %d artifact definitions from %s" % [artifacts.size(), ARTIFACT_DATA_PATH])
-	emit_signal("registry_loaded")
+		loaded_count += 1
+		
+	print("Loaded %d artifacts from %s" % [loaded_count, file_path])
 
 # Get an artifact's metadata by ID
 func get_artifact(id: String) -> Dictionary:

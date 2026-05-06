@@ -1,0 +1,114 @@
+# TODO — AdaResearch
+
+## Registry Cleanup (2026-01-30)
+
+### P0: Critical
+- [x] Fix placeholder descriptions (description = name) in:
+  - `randomness.json` — ✅ 23 entries fixed (2026-01-30)
+  - `qfep.json` — ✅ already clean, no placeholders
+  - `cellular_automata.json` — ✅ 1 entry fixed (2026-01-30)
+  - `soft_bodies.json` — ✅ 2 entries fixed (2026-01-30)
+- [x] Mark or remove `status: planned` artifacts in `qfep.json` — ✅ already correct (3 planned items)
+
+### P1: Important  
+- [ ] Add consistent metadata across all registries:
+  - `dev_themes` — thematic categories
+  - `complexity` — beginner/intermediate/advanced/expert
+  - `tags` — searchable keywords
+- [ ] Align `category` fields with `category_registry.json` canonical categories
+
+### P2: Cleanup
+- [ ] Add `sequence` field to all artifacts (which learning sequence they belong to)
+- [ ] Document interactions/signals for interactive artifacts
+- [ ] Deduplicate `grid_artifacts.json` vs `registry/*.json`:
+  - ~736 entries in legacy file
+  - ~324 entries in registry files
+  - Significant overlap — registry wins on conflict
+  - Move unique legacy entries → appropriate registry files
+  - Eventually deprecate `grid_artifacts.json`
+
+### P3: Enhancement
+- [ ] Write richer descriptions using `foundations.json` as model:
+  - `gamwell_reference` — art/math history grounding
+  - `qfep_connection` — theoretical tie-in
+  - `signals`, `interactions`, `parameters` documentation
+
+---
+
+## Registry Stats (2026-01-30)
+
+| File | Artifacts | Quality |
+|------|-----------|---------|
+| grid_artifacts.json | ~736 | Legacy bloat |
+| arrays.json | 26 | ✅ Good |
+| cellular_automata.json | 39 | ✅ Fixed |
+| foundations.json | 6 | ✅ Exemplary |
+| furniture.json | 28 | ✅ Good |
+| lsystems.json | 5 | ✅ Clean |
+| qfep.json | 35 | ✅ Clean |
+| randomness.json | 96 | ✅ Fixed |
+| script_runner.json | 1 | ✅ Good |
+| soft_bodies.json | 15 | ✅ Fixed |
+| wavefunctions.json | 73 | Mixed |
+
+---
+
+## Documentation
+
+### P0: Critical
+- [x] Update `README.md` — ✅ Rewritten with QFEP, sequences, architecture (2026-01-30)
+  - Added QFEP theoretical framework
+  - Added learning sequences overview
+  - Added architecture links
+  - Linked to key documentation
+
+### P1: Important
+- [ ] Maintain `CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md`
+  - Keep in sync with project changes
+  - Update map sequences and file paths
+  - Add new systems as they're built
+- [ ] Maintain `doc/CLAUDE_PROJECT_NAVIGATOR.md`
+  - Project vision and QFEP theory
+  - Folder structure and architecture
+  - Navigation patterns for AI agents
+
+### P2: Cleanup
+- [x] Document system architecture — ✅ Created `ARCHITECTURE.md` (2026-01-30)
+  - Core systems (grid, artifacts, sequences)
+  - Player systems (XR, movement, interaction)
+  - Data flow diagrams
+- [ ] Document scenes
+  - Map structure and conventions
+  - Scene hierarchy patterns
+  - Common node setups
+
+### P3: Enhancement
+- [x] Add READMEs per major folder — ✅ Created 6 READMEs (2026-01-30):
+  - `commons/artifacts/README.md`
+  - `commons/audio/README.md`
+  - `commons/managers/README.md`
+  - `core/README.md`
+  - `shaders/README.md`
+  - `spatial_ui/README.md`
+- [ ] Add script headers and inline comments for complex logic
+
+---
+
+## Code Quality
+
+- [ ] Review scripts for potential improvements
+  - Refactoring opportunities
+  - Performance bottlenecks
+  - Dead code removal
+  - Consistent naming conventions
+
+---
+
+## Playtesting
+
+- [ ] Playtest and list improvements
+  - UX pain points
+  - Bugs and glitches
+  - Difficulty/pacing issues
+  - VR comfort (motion sickness, scale)
+  - Missing feedback/affordances

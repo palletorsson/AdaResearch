@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmv7kworkbench"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/vector_workbench/VectorWorkbench.gd" id="1_workbench"]
+[ext_resource type="PackedScene" path="res://commons/interactables/slider_smooth.tscn" id="2_slider"]
+[ext_resource type="PackedScene" path="res://commons/interactables/push_button.tscn" id="3_button"]
+
+[node name="VectorWorkbench" type="Node3D"]
+script = ExtResource("1_workbench")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.92388, 0.382683, 0, -0.382683, 0.92388, 0, 0.8, 2.2)
+
+[node name="ControlPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0, 0.8, 0)
+
+[node name="LabelA" type="Label3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+text = "Vector A"
+font_size = 32
+
+[node name="SliderA_X" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+
+[node name="SliderA_Y" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="SliderA_Z" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="LabelB" type="Label3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+text = "Vector B"
+font_size = 32
+
+[node name="SliderB_X" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+
+[node name="SliderB_Y" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+
+[node name="SliderB_Z" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
+
+[node name="ModeButtons" type="Node3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.3, 0)
+
+[node name="LabelModes" type="Label3D" parent="ControlPanel/ModeButtons"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+text = "Display Mode"
+font_size = 24
+
+[node name="BtnAll" parent="ControlPanel/ModeButtons" instance=ExtResource("3_button")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.15, 0, 0)
+
+[node name="BtnAdd" parent="ControlPanel/ModeButtons" instance=ExtResource("3_button")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0, 0, 0)
+
+[node name="BtnDot" parent="ControlPanel/ModeButtons" instance=ExtResource("3_button")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.15, 0, 0)
+
+[node name="BtnCross" parent="ControlPanel/ModeButtons" instance=ExtResource("3_button")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.075, -0.12, 0)
+
+[node name="BtnProj" parent="ControlPanel/ModeButtons" instance=ExtResource("3_button")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.075, -0.12, 0)
+
+[node name="BtnReset" parent="ControlPanel/ModeButtons" instance=ExtResource("3_button")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.24, 0)

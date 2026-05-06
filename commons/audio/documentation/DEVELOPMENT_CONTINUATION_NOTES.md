@@ -137,6 +137,10 @@ cd AdaResearch/
 # 3. Test the interfaces
 # Open in Godot: commons/audio/interfaces/SoundDesignerInterface.gd
 # Run as main scene - should show sound categories and working controls
+
+# 4. Use the Audio Catalog Editor (Recommended)
+# Enable the plugin in Project Settings -> Plugins
+# Use the "Audio Catalog" tab in the main editor to browse and preview sounds
 ```
 
 ### Expected Test Output

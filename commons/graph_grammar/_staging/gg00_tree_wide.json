@@ -1,0 +1,30 @@
+{
+  "id": "gg00_tree_wide",
+  "notes": "Wide oak \u00e2\u20ac\u201d 4 children per node with big splay.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.2
+  },
+  "iterations": 3,
+  "color": [
+    0.38,
+    0.28,
+    0.18
+  ],
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 4,
+        "length": 0.7,
+        "spread_deg": 60,
+        "radius_decay": 0.6
+      }
+    }
+  ]
+}

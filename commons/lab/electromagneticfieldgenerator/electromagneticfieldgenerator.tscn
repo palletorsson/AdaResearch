@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://fx28li2e78mm"]
+[gd_scene load_steps=16 format=3 uid="uid://65m0ludjn21na"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -57,7 +57,7 @@ func initialize_field_systems():
 	# Power conduit energy flow
 	animate_power_conduits()
 
-func animate_tesla_coil(coil: Node3D, phase_offset: float, time: float):
+func animate_tesla_coil(time: float, coil: Node3D, phase_offset: float):
 	var intensity = sin(time + phase_offset) * 0.5 + 0.5
 	coil.get_child(0).light_energy = intensity * 2.0
 
@@ -68,7 +68,7 @@ func animate_power_conduits():
 		
 		var conduit_tween = create_tween()
 		conduit_tween.set_loops()
-		conduit_tween.tween_delay(delay)
+		conduit_tween.tween_interval(delay)
 		conduit_tween.tween_property(conduit, 'light_energy', 0.1, 0.3)
 		conduit_tween.tween_property(conduit, 'light_energy', 1.8, 0.2)
 		conduit_tween.tween_property(conduit, 'light_energy', 0.1, 1.0)
@@ -144,8 +144,8 @@ func increase_frequency():
 	
 	# Visual frequency change
 	var freq_tween = create_tween()
-	freq_tween.tween_property(field_visualization, 'material_override:emission_energy', 3.0, 0.2)
-	freq_tween.tween_property(field_visualization, 'material_override:emission_energy', 1.0, 0.8)
+	freq_tween.tween_property(field_visualization, 'material_override:emission_energy_multiplier', 3.0, 0.2)
+	freq_tween.tween_property(field_visualization, 'material_override:emission_energy_multiplier', 1.0, 0.8)
 
 func reverse_polarity():
 	field_polarity *= -1

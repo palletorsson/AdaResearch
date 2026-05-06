@@ -1,0 +1,39 @@
+{
+  "id": "gg08_helix_vine",
+  "notes": "Single chain trunk displaced by helix curve \u00e2\u20ac\u201d coiling vine.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.08
+  },
+  "iterations": 10,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.35,
+        "spread_deg": 5,
+        "radius_decay": 0.92
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "helix",
+        "t_source": "depth",
+        "t_scale": 1.2,
+        "amp": 0.3
+      }
+    }
+  ]
+}

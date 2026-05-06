@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "home_sequence": "proceduralgeneration_all",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": "reaction_diffusion implements the Gray-Scott model on a 2D grid with real-time parameter control; turing_pattern_generator provides a systematic explorer of the (f",
+  "style": null,
+  "echoes": [
+    "softbodies"
+  ],
+  "density": 0.006,
+  "breath_zones": [
+    {
+      "size": 179,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        6.005586592178771,
+        6.4916201117318435
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "reaction_diffusion"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 181,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

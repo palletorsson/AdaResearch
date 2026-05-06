@@ -1,0 +1,5 @@
+A grid. Twelve by twelve. The middle eight-by-eight is the arena — a space where randomness performs. Walkers drift without destination. Gaussian curves shape terrain into bell-curved hills. Cubes spawn, rotate, vanish. Profiles generate jagged skylines from nothing but a seed and a range.
+
+Every algorithm here uses randomness, but none of them are random. A walk is bounded. A distribution has a mean. Heights clamp between min and max. The random object spawner chooses from a finite set. Constraints everywhere — the chaos is always on a leash.
+
+This is the paradox: randomness requires rules to exist. Without bounds, there is no surprise — only noise. The arena doesn't generate disorder. It generates the specific, structured kind of disorder that makes things interesting. Every roll of the dice was designed by someone who chose how many sides it has.

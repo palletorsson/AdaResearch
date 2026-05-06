@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://image_billboard_root"]
+
+[ext_resource type="Script" path="res://commons/artifacts/image_billboard/image_billboard.gd" id="1_imb"]
+
+[node name="ImageBillboard" type="Node3D"]
+script = ExtResource("1_imb")

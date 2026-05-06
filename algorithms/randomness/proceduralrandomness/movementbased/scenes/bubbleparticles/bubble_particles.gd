@@ -45,7 +45,7 @@ class Bubble:
 	var wobble_speed: float
 	var material: StandardMaterial3D
 	
-	func _init(p_mesh_instance, p_rise_speed, p_initial_scale, p_wobble_amount, p_wobble_speed):
+	func _init(p_mesh_instance, p_rise_speed, p_initial_scale, p_wobble_amount, p_wobble_speed) -> void:
 		mesh_instance = p_mesh_instance
 		rise_speed = p_rise_speed
 		initial_scale = p_initial_scale
@@ -63,7 +63,7 @@ class Bubble:
 		material.metallic_specular = 1.0
 		mesh_instance.set_surface_override_material(0, material)
 
-func _ready():
+func _ready() -> void:
 	# Create the sound synthesizer
 	if use_synthesized_sounds:
 		# TODO: Implement BubbleSoundSynthesizer class
@@ -83,7 +83,7 @@ func _ready():
 		add_child(audio_player)
 		audio_player_pool.append(audio_player)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Spawn new bubbles
 	bubble_timer += delta
 	if bubble_timer >= 1.0 / spawn_rate and active_bubbles.size() < max_bubble_count:
@@ -129,7 +129,7 @@ func _process(delta):
 		
 		i += 1
 
-func spawn_bubble():
+func spawn_bubble() -> void:
 	# Create a random position within the spawn area
 	var pos = Vector3(
 		randf_range(-spawn_area_size.x/2, spawn_area_size.x/2),
@@ -165,7 +165,7 @@ func spawn_bubble():
 	# Play bubble sound effect
 	play_bubble_sound(pos, initial_scale)
 
-func play_bubble_sound(position: Vector3, bubble_size: float):
+func play_bubble_sound(position: Vector3, bubble_size: float) -> void:
 	# Determine normalized bubble size (0-1)
 	var size_factor = (bubble_size - min_bubble_size) / (max_bubble_size - min_bubble_size)
 	
@@ -209,8 +209,17 @@ func play_bubble_sound(position: Vector3, bubble_size: float):
 	# Play the sound
 	audio_player.play()
 
-func _on_audio_finished(audio_player):
+func _on_audio_finished(audio_player) -> void:
 	# Return the audio player to the pool when finished
 	if active_audio_players.has(audio_player):
 		active_audio_players.erase(audio_player)
 		audio_player_pool.append(audio_player)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

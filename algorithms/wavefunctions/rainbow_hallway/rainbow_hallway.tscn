@@ -1,67 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqxvhxqxqxqxr"]
+[gd_scene load_steps=2 format=3 uid="uid://c4kefgrlrqnal"]
 
 [ext_resource type="Script" uid="uid://baauqibx16nbv" path="res://algorithms/wavefunctions/rainbow_hallway/RainbowHallway.gd" id="1_script"]
 
 [node name="RainbowHallway" type="Node3D"]
 script = ExtResource("1_script")
+cone_mode = true
+start_radius = 4.0
+end_radius = 1.5
+num_segments = 8
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 8)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 12)
 fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
-light_energy = 0.8
+light_energy = 0.5
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-use_collision = true
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-size = Vector3(10, 10, 10)
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
-operation = 2
-radius = 3.0
-height = 9.0
-sides = 15
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 5)
-operation = 2
-radius = 4.0
-height = 1.0
-sides = 15
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, -5)
-operation = 2
-radius = 4.0332
-height = 1.12646
-sides = 15
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-light_color = Color(1, 0.9, 0.7, 1)
-light_energy = 2.0
-omni_range = 15.0
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
-light_color = Color(1, 0.9, 0.7, 1)
-light_energy = 2.0
-omni_range = 15.0
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
-light_color = Color(1, 0.9, 0.7, 1)
-light_energy = 2.0
-omni_range = 15.0
+[node name="HallwaySegments" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

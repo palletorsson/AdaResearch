@@ -1,4 +1,4 @@
-# SequencePortal.gd
+﻿# SequencePortal.gd
 # Individual portal to a sequence - visual gateway in the lab
 # Appears when requirements are met
 
@@ -219,7 +219,7 @@ func _on_area_entered(area):
 		print("SequencePortal: Hand interaction with portal '%s'" % portal_name)
 		_trigger_portal_entry()
 
-func _start_entry_sequence(body):
+func _start_entry_sequence(_body):
 	"""Start the portal entry sequence"""
 	print("SequencePortal: Starting entry sequence for '%s'" % portal_name)
 	

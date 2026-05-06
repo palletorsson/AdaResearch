@@ -30,12 +30,12 @@ extends MeshInstance3D
 @export var brick_width: float = 0.8
 @export var mortar_depth: float = 0.02
 
-func _ready():
+func _ready() -> void:
 	setup_noise()
 	generate_wall()
 	setup_collision()
 
-func setup_noise():
+func setup_noise() -> void:
 	# Base structural noise (large-scale variations)
 	if not base_noise:
 		base_noise = FastNoiseLite.new()
@@ -60,7 +60,7 @@ func setup_noise():
 		fine_noise.frequency = fine_frequency
 		fine_noise.fractal_octaves = 2
 
-func generate_wall():
+func generate_wall() -> void:
 	var array_mesh = ArrayMesh.new()
 	var vertices = PackedVector3Array()
 	var normals = PackedVector3Array()
@@ -167,7 +167,7 @@ func calculate_brick_offset(x: float, y: float) -> float:
 	
 	return 0.0
 
-func generate_wall_edges(vertices: PackedVector3Array, uvs: PackedVector2Array, indices: PackedInt32Array, width_segs: int, height_segs: int):
+func generate_wall_edges(vertices: PackedVector3Array, uvs: PackedVector2Array, indices: PackedInt32Array, width_segs: int, height_segs: int) -> void:
 	# This is a simplified version - you'd want to add proper edge geometry
 	# For now, we'll just add some basic edge vertices to close the mesh
 	var start_vertex_count = vertices.size()
@@ -229,7 +229,7 @@ func calculate_normals(vertices: PackedVector3Array, indices: PackedInt32Array) 
 	
 	return normals
 
-func setup_collision():
+func setup_collision() -> void:
 	# Create StaticBody3D for collision
 	var static_body = StaticBody3D.new()
 	add_child(static_body)
@@ -243,7 +243,7 @@ func setup_collision():
 	collision_shape.shape = mesh.create_trimesh_shape()
 
 # Regenerate wall at runtime
-func regenerate_wall():
+func regenerate_wall() -> void:
 	setup_noise()
 	generate_wall()
 	# Update collision
@@ -252,3 +252,12 @@ func regenerate_wall():
 		var collision_shape = static_body.get_child(0) as CollisionShape3D
 		if collision_shape:
 			collision_shape.shape = mesh.create_trimesh_shape()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

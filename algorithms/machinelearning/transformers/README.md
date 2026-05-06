@@ -1,5 +1,12 @@
 # Transformers
 
+
+## Folder Summary
+
+The `Transformers` module provides a 3D sandbox for exploring the ideas behind the Transformers workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `transformers.tscn` and the controller script `Transformers.gd`.
+
 ## Overview
 This algorithm demonstrates transformer architecture, a revolutionary neural network design that has become the foundation for modern natural language processing, computer vision, and other AI applications through its attention-based approach.
 

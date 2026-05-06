@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://d7ik9e0l3m5n7"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.gd" id="1_lissajous"]
+
+[node name="LissajousCurves" type="Node3D"]
+script = ExtResource("1_lissajous")
+freq_ratio_x = 3.0
+freq_ratio_y = 2.0
+freq_ratio_z = 1.0
+amplitude_x = 1.0
+amplitude_y = 1.0
+amplitude_z = 0.5
+phase_shift = 0.0
+animate_phase = true
+phase_speed = 0.5
+num_points = 500
+line_width = 0.02
+trail_length = 200
+show_particle = true
+particle_size = 0.08
+rainbow_gradient = true
+animation_speed = 1.0
+auto_rotate = false
+rotation_speed = 0.2

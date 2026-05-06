@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "BodyProg_Hands",
+  "home_sequence": "bodyprogression",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.02,
+  "breath_zones": [
+    {
+      "size": 97,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        4.546391752577319,
+        4.453608247422681
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 5,
+      "token": "color_picker"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "mirror_artifact"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 99,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

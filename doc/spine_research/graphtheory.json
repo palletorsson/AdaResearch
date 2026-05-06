@@ -1,0 +1,574 @@
+{
+  "sequence": "graphtheory",
+  "generated_at": "2026-04-29T11:23:53.804875Z",
+  "runs": [
+    {
+      "base": "GT_Foundations",
+      "variants": [
+        {
+          "id": "GT_Foundations_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.59,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "GT_Foundations_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.472,
+            "n_heights": 3,
+            "util_count": 26,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "GT_Foundations_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        }
+      ]
+    },
+    {
+      "base": "GT_Layout",
+      "variants": [
+        {
+          "id": "GT_Layout_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.529,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "GT_Layout_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.407,
+            "n_heights": 3,
+            "util_count": 23,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "GT_Layout_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        }
+      ]
+    },
+    {
+      "base": "GT_Pathfinding",
+      "variants": [
+        {
+          "id": "GT_Pathfinding_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.601,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "GT_Pathfinding_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.421,
+            "n_heights": 3,
+            "util_count": 25,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "GT_Pathfinding_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        }
+      ]
+    },
+    {
+      "base": "GT_Network_Analysis",
+      "variants": [
+        {
+          "id": "GT_Network_Analysis_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.527,
+            "n_heights": 2,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "GT_Network_Analysis_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.395,
+            "n_heights": 3,
+            "util_count": 27,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "GT_Network_Analysis_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    },
+    {
+      "base": "GT_Connectivity",
+      "variants": [
+        {
+          "id": "GT_Connectivity_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.522,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 2,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "GT_Connectivity_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.395,
+            "n_heights": 3,
+            "util_count": 27,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "GT_Connectivity_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    },
+    {
+      "base": "GT_Spanning_Trees",
+      "variants": [
+        {
+          "id": "GT_Spanning_Trees_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.567,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "GT_Spanning_Trees_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.361,
+            "n_heights": 3,
+            "util_count": 28,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "GT_Spanning_Trees_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 4,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    },
+    {
+      "base": "GT_Flow",
+      "variants": [
+        {
+          "id": "GT_Flow_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.506,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "GT_Flow_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.358,
+            "n_heights": 3,
+            "util_count": 28,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "GT_Flow_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 2,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    },
+    {
+      "base": "GT_Matching",
+      "variants": [
+        {
+          "id": "GT_Matching_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.55,
+            "n_heights": 2,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "GT_Matching_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.339,
+            "n_heights": 3,
+            "util_count": 29,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "GT_Matching_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.996,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    }
+  ]
+}

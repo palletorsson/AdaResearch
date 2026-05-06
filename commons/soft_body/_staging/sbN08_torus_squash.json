@@ -1,0 +1,30 @@
+{
+  "id": "sbN08_torus_squash",
+  "topology": "native_torus",
+  "torus_inner": 0.28,
+  "torus_outer": 0.75,
+  "torus_rings": 28,
+  "torus_ring_segments": 14,
+  "total_mass": 0.8,
+  "linear_stiffness": 0.55,
+  "pressure_coefficient": 3.0,
+  "damping_coefficient": 0.03,
+  "simulation_precision": 8,
+  "origin": [
+    0,
+    1.4,
+    0
+  ],
+  "steps": 200,
+  "color": [
+    0.85,
+    0.55,
+    0.7
+  ],
+  "roughness": 0.5,
+  "floor_y": -0.5,
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.3,
+  "layout": "native_torus",
+  "notes": "Soft donut with slight internal pressure \u00e2\u20ac\u201d dropped flat, settles into a squashed ring."
+}

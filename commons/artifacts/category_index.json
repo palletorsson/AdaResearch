@@ -1,0 +1,249 @@
+{
+  "_meta": {
+    "description": "Category index mapping artifacts to pedagogical layers",
+    "version": "1.0",
+    "last_updated": "2026-01-29"
+  },
+  
+  "categories": {
+    "01_primitives": {
+      "name": "Primitives",
+      "description": "Euclidean building blocks - points, lines, polygons, solids",
+      "gamwell_chapter": "Ch 1-2: Arithmetic and Geometry",
+      "qfep_role": "F (free energy) - the axioms that define order",
+      "subcategories": {
+        "points": {
+          "artifacts": ["point", "static_point", "grab_sphere_point", "grab_sphere_point_with_color", "grab_sphere_point_with_text", "grab_sphere_point_snap", "interactive_point_origin", "vectorpoint", "draw_dot", "origin"],
+          "teaches": "0-dimensional foundation, position without extension"
+        },
+        "lines": {
+          "artifacts": ["line", "cross_lines", "parallel_lines", "coordinate_lines", "plus_lines", "cube_lines", "grid_lines", "grab_line", "grab_line_pusher", "grab_line_drawer", "perspective_lines", "one_meter_line", "horizon_plumb_lines", "scale_lines", "right_triangle_lines", "lightrod"],
+          "teaches": "1-dimensional extension, connection, direction"
+        },
+        "triangles": {
+          "artifacts": ["triangle", "pythagorean_triangle", "righttriangle", "lefttriangle", "interactivetriangle", "triangleprofiles", "ConnectedTriangles", "pythagorean_triangle_angles", "draw_triangle_faces"],
+          "teaches": "First polygon, structural stability, Pythagorean theorem"
+        },
+        "polygons": {
+          "artifacts": ["quad", "plane", "folded_strip", "zigzagprofile", "foldedpaper"],
+          "teaches": "2-dimensional extension, surfaces"
+        },
+        "solids": {
+          "artifacts": ["cube", "sphere", "cylinder", "prism", "torus", "capsule", "dome", "pyramid", "bipyramid", "diamond", "crystalcluster", "crystal"],
+          "teaches": "3-dimensional extension, volume"
+        },
+        "platonic": {
+          "artifacts": ["tetrahedron", "grab_tetrahedron", "octahedron", "grab_octahedron", "dodecahedron", "icosahedron", "platonic_demo", "trihedron", "grab_trihedron"],
+          "teaches": "Regular polyhedra, mathematical perfection"
+        }
+      }
+    },
+    
+    "02_vectors": {
+      "name": "Vectors",
+      "description": "Magnitude and direction - the language of physics",
+      "gamwell_chapter": "Applied mathematics",
+      "qfep_role": "Forces that drive F-minimization",
+      "subcategories": {
+        "basics": {
+          "artifacts": ["VectorBasics", "VectorAddition", "VectorSubtraction", "vectorline", "2d_in_3d_vectors_vis"],
+          "teaches": "Vector fundamentals"
+        },
+        "operations": {
+          "artifacts": ["VectorDotProduct", "VectorCrossProduct", "VectorProjectionReflection"],
+          "teaches": "Vector algebra"
+        },
+        "applications": {
+          "artifacts": ["VectorForces", "VectorMotion", "VectorTorque", "VectorFieldFlow", "vector_field", "vector_drone"],
+          "teaches": "Physics applications"
+        }
+      }
+    },
+    
+    "03_transformations": {
+      "name": "Transformations",
+      "description": "Operations that preserve or change structure",
+      "gamwell_chapter": "Ch 7: Symmetry",
+      "qfep_role": "What remains invariant under transformation",
+      "subcategories": {
+        "translation": {
+          "artifacts": ["sliding_door", "elevator_platform", "translation_demo", "translation_cube_demo"],
+          "teaches": "Position change without rotation"
+        },
+        "rotation": {
+          "artifacts": ["rotating_cube", "spin", "rotation_oscillation_cube", "rotation_match_puzzle"],
+          "teaches": "Angular change, orientation"
+        },
+        "scale": {
+          "artifacts": ["scale_me", "scaleme", "scalable_wood_cube"],
+          "teaches": "Size change, similarity"
+        },
+        "combined": {
+          "artifacts": ["geometric_transformations", "transformation_cube", "animated_cube", "pickup_cube_transforming", "pickup_cube_rotating", "pickup_cube_scaling"],
+          "teaches": "Composing transformations"
+        }
+      }
+    },
+    
+    "05_wavefunctions": {
+      "name": "Wavefunctions",
+      "description": "Oscillation, frequency, synthesis - sine creates curves",
+      "gamwell_chapter": "Ch 8: Utopian Visions / Bauhaus",
+      "qfep_role": "F ↔ E(S) oscillation, the dynamic balance",
+      "subcategories": {
+        "oscillation": {
+          "artifacts": ["OscillatingWave", "coupled_oscillator_lattice", "oscillation_cube", "OscillationDriver", "OscillationCurve"],
+          "teaches": "Periodic motion, simple harmonic motion"
+        },
+        "harmonics": {
+          "artifacts": ["SphericalHarmonics", "HarmonicBuilder", "fourier_transform", "fourier_transform_advanced", "fouriertransformshape", "additive_synthesis"],
+          "teaches": "Frequency decomposition, overtones"
+        },
+        "waves": {
+          "artifacts": ["wave_propagation_3d", "standing_waves", "wave_interference", "sine_wave_controller", "walkable_sine_bridge", "sine_wall_static", "sine_wall_corridor"],
+          "teaches": "Wave propagation, interference patterns"
+        },
+        "synthesis": {
+          "artifacts": ["fm_synthesis", "granular_synthesis", "subtractive_synthesis", "generative_music", "tech_noir_audio", "liturgicalambientgen"],
+          "teaches": "Sound creation from mathematical principles"
+        },
+        "curves": {
+          "artifacts": ["lissajous_curves", "Lissajous3D", "parametric_pendulum_waves", "PendulumWave", "doublehelix", "DoubleHelix", "CircleSpiral", "UnitCircleTrig"],
+          "teaches": "Parametric curves from oscillation"
+        }
+      }
+    },
+    
+    "06_randomness": {
+      "name": "Randomness",
+      "description": "Entropy, noise, probability - disorder as creative force",
+      "gamwell_chapter": "Ch 10: Turing Morphogenesis",
+      "qfep_role": "E(S) - system entropy, the source of novelty",
+      "subcategories": {
+        "distributions": {
+          "artifacts": ["randompoints", "randompoints_gaussian", "randompoints_uniform", "distribution_visualization", "gaussian_random", "random_bell_curve", "probability_distributions_3d"],
+          "teaches": "How randomness is structured"
+        },
+        "noise": {
+          "artifacts": ["perlin_noise", "simplex_noise", "value_noise", "blue_noise", "noisetorus", "noisesphere", "noisetext", "noiselayers", "shader_noise_space", "voxelnoise"],
+          "teaches": "Continuous randomness, natural textures"
+        },
+        "walks": {
+          "artifacts": ["random_walk_128", "walk_random", "walkingsphere", "random_walk_collection", "random_walk_grab_paper", "crystal_random_walk_demo", "caverandomwalk"],
+          "teaches": "Cumulative randomness, diffusion"
+        },
+        "entropy": {
+          "artifacts": ["entropy_morphogenesis", "extreme_randomness", "random_decay_objects"],
+          "teaches": "Disorder and emergence"
+        }
+      }
+    },
+    
+    "07_cellular_automata": {
+      "name": "Cellular Automata",
+      "description": "Simple rules, complex behavior - the edge of chaos",
+      "gamwell_chapter": "Ch 12: Edge of Chaos",
+      "qfep_role": "λ parameter - tuning between order and chaos",
+      "subcategories": {
+        "elementary": {
+          "artifacts": ["rule_30_110", "rule_30_110_gravity", "elementary_ca_vr", "cellular_automata_1d", "7_1_elementary_ca_vr"],
+          "teaches": "1D automata, Wolfram classes"
+        },
+        "game_of_life": {
+          "artifacts": ["game_of_life_vr", "game_of_life_oop_vr", "7_2_game_of_life_vr", "7_3_game_of_life_oop_vr"],
+          "teaches": "2D emergence, gliders, patterns"
+        },
+        "3d": {
+          "artifacts": ["cellular_automata_3d", "CellularAutomata3DStacked", "CellularAutomata3DTree", "CA_sphere", "ca_columns", "ca_bridge"],
+          "teaches": "Volumetric automata"
+        },
+        "continuous": {
+          "artifacts": ["reaction_diffusion", "slime_mold", "diffusion_limited_aggregation", "PhysarumColony"],
+          "teaches": "Turing patterns, morphogenesis"
+        }
+      }
+    },
+    
+    "13_qfep": {
+      "name": "QFEP Framework",
+      "description": "Queer Free Energy Principle - oscillating between order and chaos",
+      "gamwell_chapter": "Synthesis of all chapters",
+      "qfep_role": "The complete framework: QFE = F - λE(S) + φΔE(S,t)",
+      "subcategories": {
+        "parameters": {
+          "artifacts": ["lambda_slider", "phi_slider"],
+          "teaches": "The control parameters λ (entropy drive) and φ (change rate)"
+        },
+        "formula": {
+          "artifacts": ["qfep_formula_3d"],
+          "teaches": "The complete QFEP formula visualized"
+        },
+        "visualizers": {
+          "artifacts": ["qfep_oscilloscope", "entropy_meter", "phase_cube", "edge_detector"],
+          "teaches": "Measuring and displaying QFEP dynamics"
+        },
+        "reactors": {
+          "artifacts": ["qfep_reactor", "edge_core", "reactive_particle_field"],
+          "teaches": "Active QFEP systems that respond to parameters"
+        },
+        "states": {
+          "artifacts": ["ordered_grid", "chaos_particles", "dissolving_form", "complexity_pattern", "turing_pattern", "rigid_sculpture", "fluid_form", "preserved_pattern", "transforming_pattern"],
+          "teaches": "Different regimes: order, chaos, edge of chaos"
+        }
+      }
+    },
+    
+    "14_foundations": {
+      "name": "Foundations of Mathematics",
+      "description": "Limits, paradoxes, incompleteness - every system has an outside",
+      "gamwell_chapter": "Ch 3-6, 9, 13: Crisis of Foundations",
+      "qfep_role": "Why pure F-minimization is impossible",
+      "subcategories": {
+        "incompleteness": {
+          "artifacts": ["godel_statement_plaque"],
+          "teaches": "Gödel's incompleteness - self-reference breaks systems"
+        },
+        "paradoxes": {
+          "artifacts": ["russell_set_box"],
+          "teaches": "Russell's paradox - sets that contain themselves"
+        },
+        "representation": {
+          "artifacts": ["magritte_pipe"],
+          "teaches": "The map is not the territory"
+        },
+        "impossible": {
+          "artifacts": ["escher_staircase"],
+          "teaches": "Locally valid, globally impossible"
+        },
+        "paraconsistent": {
+          "artifacts": ["florensky_sphere"],
+          "teaches": "A and not-A without collapse"
+        },
+        "edge_of_chaos": {
+          "artifacts": ["bifurcation_diagram"],
+          "teaches": "The phase transition from order to chaos"
+        }
+      }
+    }
+  },
+  
+  "pedagogical_sequence": [
+    "01_primitives",
+    "02_vectors", 
+    "03_transformations",
+    "05_wavefunctions",
+    "06_randomness",
+    "07_cellular_automata",
+    "13_qfep",
+    "14_foundations"
+  ],
+  
+  "qfep_mapping": {
+    "F_order": ["01_primitives", "02_vectors", "03_transformations"],
+    "E_entropy": ["06_randomness"],
+    "oscillation": ["05_wavefunctions"],
+    "lambda_parameter": ["07_cellular_automata"],
+    "framework": ["13_qfep"],
+    "edges": ["14_foundations"]
+  }
+}

@@ -16,7 +16,7 @@ var terrain_generator_ref: TerrainGenerator = null  # CRITICAL: Reference for bo
 var total_cubes_processed: int = 0
 var total_triangles_generated: int = 0
 
-func _init():
+func _init() -> void:
 	lookup_tables = MarchingCubesLookupTables.new()
 	print("MarchingCubesGenerator: Initialized with seamless boundary support")
 
@@ -325,7 +325,7 @@ func get_generation_stats() -> Dictionary:
 		"has_terrain_ref": terrain_generator_ref != null
 	}
 
-func set_terrain_generator_reference(terrain_gen: TerrainGenerator):
+func set_terrain_generator_reference(terrain_gen: TerrainGenerator) -> void:
 	"""Set reference to terrain generator for boundary calculations"""
 	terrain_generator_ref = terrain_gen
 	print("MarchingCubesGenerator: Terrain generator reference set for seamless boundaries") 

@@ -1,0 +1,124 @@
+{
+  "id": "morph47_drag_pageant_chapel_break",
+  "family": "drag_pageant",
+  "notes": "Transform-led chapel drag: a column body carries a broken halo collar, a side-shifted veil train, and a rigid wig block that feels ceremonial rather than polite.",
+  "camera_yaw": 0.74,
+  "camera_pitch": 0.32,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.74,
+      1.4,
+      0.54
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "chapel_gown",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.76,
+        "scale": 0.68
+      },
+      "child_role": "garment",
+      "budget_factor": 0.54
+    },
+    {
+      "id": "chapel_train",
+      "when": {
+        "role": "garment",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.22
+      },
+      "selector": "back",
+      "op": "move_panel",
+      "params": {
+        "normal_offset": 0.04,
+        "tangent_offset": 0.22,
+        "bitangent_offset": -0.26
+      },
+      "child_role": "garment",
+      "budget_factor": 0.28
+    },
+    {
+      "id": "chapel_halo",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "move_panel",
+      "params": {
+        "normal_offset": 0.12,
+        "tangent_offset": 0.0,
+        "bitangent_offset": -0.04
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "chapel_halo_break",
+      "when": {
+        "role": "ornament",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.0
+      },
+      "selector": "left|right|front",
+      "op": "rotate_panel",
+      "params": {
+        "axis": "normal",
+        "angle_deg": 18.0,
+        "normal_offset": 0.04
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "chapel_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.2,
+        "scale": 0.46
+      },
+      "child_role": "hair",
+      "budget_factor": 0.52
+    },
+    {
+      "id": "chapel_wig_block",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.18
+      },
+      "selector": "up",
+      "op": "scale_panel",
+      "params": {
+        "scale_x": 1.18,
+        "scale_y": 0.62,
+        "normal_offset": 0.1
+      },
+      "child_role": "hair",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

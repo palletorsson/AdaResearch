@@ -1,0 +1,33 @@
+{
+  "id": "mg_op11_twist_spire_cone",
+  "notes": "UNDERUSED-OPS PASS: cylinder seed + repeated extrude/rotate/scale on the top tag. This is the cleanest transform-stack test for a readable twisting tower.",
+  "seed": "cylinder",
+  "seed_scale": 0.55,
+  "generations": 4,
+  "camera_pitch": 0.28,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.2,
+        "scale": 0.86,
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:extruded_top",
+      "params": {
+        "angle_degrees": 32
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:extruded_top",
+      "params": {
+        "scale": 0.9
+      }
+    }
+  ]
+}

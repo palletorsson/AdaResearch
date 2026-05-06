@@ -172,7 +172,7 @@ func add_reverb_effect(audio_player: AudioStreamPlayer3D) -> void:
 		AudioServer.remove_bus(bus_idx)
 	)
 
-func _play_collection_effect():
+func _play_collection_effect() -> void:
 	var mesh_instance = find_child("CubeBaseMesh", true, false)
 	if mesh_instance:
 		var tween = create_tween()
@@ -272,3 +272,12 @@ func setup_xr_slider_scene() -> void:
 		print("Warning: No harmony slider assigned")
 	if not reverb_slider:
 		print("Warning: No reverb slider assigned")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

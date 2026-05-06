@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-04-14T07:30:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "total_sequences": 19,
+    "stage_5_blocked": 13,
+    "stage_3_artifacts": 6,
+    "sequences_at_stage_3": {
+      "qfeplaboratory": "45%",
+      "array_tutorial": "85%",
+      "transformation": "86%",
+      "fractals": "95%",
+      "forces": "98%",
+      "color": "96%"
+    },
+    "sequences_at_stage_5": ["primitives","wavefunctions","randomness","noise","cellularautomata","lsystems","proceduralgeneration","softbodies","swarmintelligence","machinelearning","foundationscrisis","postfoundationscrisis","graphtheory"]
+  },
+  "heat_map_top_5": [
+    {"item": "pipeline_scorer_validation_timeout", "temperature": 60, "reason": "known: batch timeout issue"},
+    {"item": "registry_repair", "temperature": 60, "reason": "deep discovery follow-up"},
+    {"item": "sequence:resourcemanagement", "temperature": 50, "reason": "empty sequence"}
+  ],
+  "garden_health": {
+    "total_artifacts": 1203,
+    "voiced": 523,
+    "embodied": 190,
+    "reaching": 281,
+    "phantom_limbs": 381,
+    "voice_coverage": "43%",
+    "embodiment_rate": "36%"
+  },
+  "release_gates": {
+    "A_scene_format": "pass",
+    "B_artifact_registry_integrity": "FAIL (71 unresolved scenes, 7 missing paths, 8 missing map_ready, 13 missing include_in_map_data)",
+    "C_map_validation": "FAIL (110 grade_C, 2 grade_F)",
+    "D_lab_progression": "pass"
+  }
+}

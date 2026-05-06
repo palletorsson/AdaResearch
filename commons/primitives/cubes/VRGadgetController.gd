@@ -1,4 +1,4 @@
-# VRGadgetController.gd
+﻿# VRGadgetController.gd
 # Chapter 6: The VR Gadget Cube
 # Extends PickupController with UI and touch interactions
 
@@ -43,7 +43,7 @@ func _ready():
 	
 	print("VRGadgetController: VR gadget ready with UI system")
 
-func _process(delta):
+func _process(_delta):
 	# Update UI visibility based on player proximity
 	_update_ui_visibility()
 	

@@ -1,0 +1,63 @@
+{
+	"harmonic_flute_soft": {
+		"_metadata": {
+			"sound_type": "harmonic_series",
+			"description": "Soft Flute - Pure Tone",
+			"category": "Educational/Synthesizer",
+			"created_at": "2025-01-27",
+			"version": "1.0",
+			"educational_concept": "Pure tones have weak upper harmonics",
+			"preset_name": "flute"
+		},
+		"parameters": {
+			"fundamental_freq": {
+				"value": 261.63,
+				"description": "C4 middle C"
+			},
+			"num_harmonics": {
+				"value": 8
+			},
+			"harmonic_1": {
+				"value": 1.0,
+				"description": "Strong fundamental"
+			},
+			"harmonic_2": {
+				"value": 0.2,
+				"description": "Weak octave"
+			},
+			"harmonic_3": {
+				"value": 0.05,
+				"description": "Very weak 3rd"
+			},
+			"harmonic_4": {
+				"value": 0.02,
+				"description": "Barely present 4th"
+			},
+			"harmonic_5": {
+				"value": 0.01,
+				"description": "Trace of 5th"
+			},
+			"harmonic_6": {
+				"value": 0.0,
+				"description": "Absent"
+			},
+			"harmonic_7": {
+				"value": 0.0,
+				"description": "Absent"
+			},
+			"harmonic_8": {
+				"value": 0.0,
+				"description": "Absent"
+			},
+			"duration": {
+				"value": 3.0,
+				"description": "Sustained for pads"
+			},
+			"overall_amplitude": {
+				"value": 0.4,
+				"description": "Soft volume"
+			}
+		},
+		"use_cases": ["ambient_pads", "meditation", "soft_melodies", "peaceful_environments"]
+	}
+}

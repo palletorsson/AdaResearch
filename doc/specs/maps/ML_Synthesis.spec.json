@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ML_Synthesis",
+  "home_sequence": "machinelearning",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": "ml_synthesis_lab provides an integrated environment combining evolutionary search",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 40,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        3.3,
+        5.075
+      ]
+    },
+    {
+      "size": 7,
+      "bounds": {
+        "x": 7,
+        "z": 0,
+        "w": 3,
+        "d": 3
+      },
+      "centroid": [
+        8.285714285714286,
+        0.8571428571428571
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 50,
+    "breath_zone_count": 2,
+    "unique_tokens": 0
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "gg13_ca_seeder_life_without_death",
+  "notes": "Life-without-Death (B3/S012345678) \u00e2\u20ac\u201d cells once alive stay alive, growth accumulates. Produces dense labyrinths.",
+  "seed": {
+    "ca_scatter": {
+      "rule": "life_without_death",
+      "iterations": 50,
+      "grid_size": 24,
+      "region_size": 2.8,
+      "y": 0,
+      "density": 0.15,
+      "seed": 7,
+      "radius": 0.07
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.3,
+        "spread_deg": 25,
+        "radius_decay": 0.75
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.11,
+        "radius": 0.014,
+        "splay": 0.9
+      }
+    }
+  ]
+}

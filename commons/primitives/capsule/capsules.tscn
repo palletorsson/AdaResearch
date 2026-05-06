@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://h2jj3ow0njth"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjoqm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7nqq0"]
+radius = 0.25
+height = 1.0
+radial_segments = 5
+rings = 5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xd5r3"]
+radius = 0.25
+height = 1.0
+radial_segments = 4
+rings = 4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_j2ni2"]
+radius = 0.24
+height = 0.99
+rings = 32
+
+[node name="Capsules" type="Node3D"]
+
+[node name="capsule_5_5" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_hjoqm")
+mesh = SubResource("CapsuleMesh_7nqq0")
+
+[node name="capsule_4_4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+mesh = SubResource("CapsuleMesh_xd5r3")
+
+[node name="capsule_6_6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+mesh = SubResource("CapsuleMesh_j2ni2")
+
+[node name="capsule_5_5_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_hjoqm")
+mesh = SubResource("CapsuleMesh_7nqq0")
+
+[node name="capsule_full" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_j2ni2")
+
+[node name="capsule_full2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+mesh = SubResource("CapsuleMesh_j2ni2")
+
+[node name="capsule_full3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+mesh = SubResource("CapsuleMesh_j2ni2")
+skeleton = NodePath("../capsule_full2")
+
+[node name="capsule_4_5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+mesh = SubResource("CapsuleMesh_xd5r3")
+
+[node name="capsule_6_7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+mesh = SubResource("CapsuleMesh_j2ni2")

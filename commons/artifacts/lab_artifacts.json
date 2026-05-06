@@ -8,7 +8,7 @@
 	  "lookup_name": "rotating_cube",
 	  "name": "Rotating Cube",
 	  "description": "A mysterious rotating cube that triggers the first learning sequence",
-	  "scene": "res://commons/primitives/cubes/rotating_cube.tscn",
+	  "scene": "res://commons/primitives/cubes/animation/rotating_cube.tscn",
 	  "position": [0.0, 0.1, 0.0],
 	  "rotation": [0.0, 0.0, 0.0],
 	  "scale": [0.5, 0.5, 0.5],
@@ -84,33 +84,13 @@
 	  "rotation": [0.0, 120.0, 0.0],
 	  "scale": [0.7, 0.7, 0.7],
 	  "interaction_type": "touch_start_sequence",
-	  "sequence": "randomness_exploration",
+	  "sequence": "randomness",
 	  "lighting": {
 		"add_focused_light": true,
 		"light_color": [1.0, 0.0, 1.0],
 		"light_intensity": 2.2,
 		"light_range": 3.5,
 		"light_position": [0, 0.6, 0]
-	  }
-	},
-	
-	"probability_sphere": {
-	  "lookup_name": "probability_sphere",
-	  "name": "Probability Sphere",
-	  "description": "Crystalline sphere containing swirling probability patterns",
-	  "scene": "res://commons/primitives/spheres/probability_sphere.tscn",
-	  "position": [0.5, 0.1, 0.7],
-	  "rotation": [0.0, -120.0, 0.0],
-	  "scale": [0.5, 0.5, 0.5],
-	  "interaction_type": "pickup_examine",
-	  "sequence": null,
-	  "unlock_trigger": "randomness_exploration_completed",
-	  "lighting": {
-		"add_focused_light": true,
-		"light_color": [0.8, 0.2, 1.0],
-		"light_intensity": 1.6,
-		"light_range": 2.2,
-		"light_position": [0, 0.3, 0]
 	  }
 	},
 	

@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_explainable_AI_XAI",
+  "title": "Explainable AI (XAI)",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/explainable_AI_XAI/explainable_AI_XAI.tscn",
+  "script": "res://algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/explainable_AI_XAI/README.md",
+    "tutorial": "res://algorithms/machinelearning/explainable_AI_XAI/explainable_AI_XAI_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/explainable_AI_XAI/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/explainable_AI_XAI/summery.md"
+  },
+  "summary": "The `Explainable AI (XAI)` sandbox investigates concepts from Explainable AI (XAI) inside a real-time Godot lab.",
+  "keywords": [
+    "animate",
+    "create",
+    "engine",
+    "explanation",
+    "flow",
+    "get"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj25nnsxeqzmk"]
+
+[ext_resource type="Script" uid="uid://6q06dk7i202w3" path="res://commons/scenes/main_menu/objects/settings_ui_content.gd" id="1_4ef25"]
+[ext_resource type="PackedScene" uid="uid://ytsxet2k47lj" path="res://addons/godot-xr-tools/user_settings/user_settings_ui.tscn" id="2_xrsettings"]
+
+[node name="SettingsUIContent" type="ScrollContainer"]
+offset_right = 400.0
+offset_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_4ef25")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="GameSettingsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Game Settings"
+
+[node name="InfoboardCheck" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+text = "Show Info Board"
+alignment = 1
+
+[node name="GameModeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Game Mode:"
+
+[node name="GameModeOption" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Story Mode"
+popup/item_1/text = "Test Mode (Skip)"
+popup/item_1/id = 1
+popup/item_2/text = "Explorer Mode"
+popup/item_2/id = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="XRSettingsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "XR Settings"
+
+[node name="UserSettingsUI" parent="VBoxContainer" instance=ExtResource("2_xrsettings")]
+layout_mode = 2
+
+[connection signal="toggled" from="VBoxContainer/InfoboardCheck" to="." method="_on_infoboard_check_toggled"]

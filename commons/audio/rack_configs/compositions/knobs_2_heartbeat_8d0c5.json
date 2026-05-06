@@ -1,0 +1,39 @@
+{
+  "rack_info": {
+    "name": "2x KNOB",
+    "description": "2x KNOB — auto-generated UVAC composition. sound_type=heartbeat, composition_type=knobs.",
+    "version": "auto-1",
+    "sound_type": "heartbeat",
+    "auto_generated": true,
+    "composition_type": "knobs",
+    "composition_count": 2
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "kn_0",
+      "kn_1"
+    ]
+  ],
+  "control_definitions": {
+    "kn_0": {
+      "type": "knob",
+      "label": "CUT",
+      "parameter": "cutoff",
+      "min": 20.0,
+      "max": 12000.0,
+      "default": 1000.0
+    },
+    "kn_1": {
+      "type": "knob",
+      "label": "DEC",
+      "parameter": "decay",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.2
+    }
+  }
+}

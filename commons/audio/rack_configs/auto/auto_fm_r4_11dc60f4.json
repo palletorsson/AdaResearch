@@ -1,0 +1,87 @@
+{
+  "rack_info": {
+    "name": "FM Pair (ratio 4)",
+    "description": "Two-operator FM. Carrier freq × modulator with ratio 0-4 and modulation index.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "archetype": "fm",
+    "seed": 299655412
+  },
+  "layout": {
+    "padding_px": 18,
+    "gap_px": 14,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "lbl_c",
+      "lbl_m"
+    ],
+    [
+      "carrier",
+      "ratio"
+    ],
+    [
+      "c_amp",
+      "index"
+    ],
+    [
+      "",
+      "m_level"
+    ]
+  ],
+  "control_definitions": {
+    "lbl_c": {
+      "type": "label",
+      "text": "CARRIER",
+      "font_size": 18
+    },
+    "lbl_m": {
+      "type": "label",
+      "text": "MODULATOR",
+      "font_size": 18
+    },
+    "carrier": {
+      "type": "slv",
+      "label": "FREQ",
+      "parameter": "carrier_freq",
+      "min": 20.0,
+      "max": 2000.0,
+      "default": 220.0
+    },
+    "c_amp": {
+      "type": "knob",
+      "label": "LEVEL",
+      "parameter": "carrier_amp",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.7
+    },
+    "ratio": {
+      "type": "slv",
+      "label": "RATIO",
+      "parameter": "mod_ratio",
+      "min": 0.0,
+      "max": 4.0,
+      "default": 1.0
+    },
+    "index": {
+      "type": "slv",
+      "label": "INDEX",
+      "parameter": "mod_index",
+      "min": 0.0,
+      "max": 10.0,
+      "default": 2.0
+    },
+    "m_level": {
+      "type": "knob",
+      "label": "M LVL",
+      "parameter": "mod_amp",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

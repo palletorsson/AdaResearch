@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqx8n5b7jk2mp"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.gd" id="1"]
+
+[node name="SimpleOscillatingBridge" type="Node3D"]
+script = ExtResource("1")
+num_platforms = 20
+platform_spacing = 2.0
+platform_size = Vector3(1.5, 0.3, 1.5)
+oscillation_amplitude_x = 2.0
+oscillation_amplitude_y = 1.5
+oscillation_speed = 1.0
+phase_offset_per_platform = 0.3
+use_gradient = true
+base_color = Color(0.5, 0.7, 1, 1)
+emission_strength = 0.4
+camera_distance = 15.0
+camera_height = 8.0

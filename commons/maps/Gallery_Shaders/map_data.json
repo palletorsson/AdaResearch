@@ -1,0 +1,121 @@
+{
+  "map_info": {
+    "name": "Gallery: Shaders",
+    "lookup_name": "Gallery_Shaders",
+    "description": "Showcase of 16 unplaced artifacts from Shaders. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 12,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "5-8 minutes",
+      "learning_objectives": [
+        "Browse 16 Shaders artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "Shaders Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" ","sp"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","request_note:0:1.5#text:buffer geometry particles"," ","request_note:0:1.5#text:carpet cove gallery"," ","request_note:0:1.5#text:cove display"," ","request_note:0:1.5#text:dynamic cubemap"," "," "],
+      [" "," ","buffer_geometry_particles:0:-0.5"," ","carpet_cove_gallery:0:-0.5"," ","cove_display:0:-0.5"," ","dynamic_cubemap:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:dynamiccubemap"," ","request_note:0:1.5#text:filter screen"," ","request_note:0:1.5#text:materials transmission"," ","request_note:0:1.5#text:materialstransmission"," "," "],
+      [" "," ","dynamiccubemap:0:-0.5"," ","filter_screen:0:-0.5"," ","materials_transmission:0:-0.5"," ","materialstransmission:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:pattern compositor"," ","request_note:0:1.5#text:pixel carpet gallery"," ","request_note:0:1.5#text:queer collection gallery a"," ","request_note:0:1.5#text:shader bibliotek"," "," "],
+      [" "," ","pattern_compositor:0:-0.5"," ","pixel_carpet_gallery:0:-0.5"," ","queer_collection_gallery_a:0:-0.5"," ","shader_bibliotek:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:shader gallery"," ","request_note:0:1.5#text:wall cove"," ","request_note:0:1.5#text:wall pattern colorizer"," ","request_note:0:1.5#text:wall shader showcase"," "," "],
+      [" "," ","shader_gallery:0:-0.5"," ","wall_cove:0:-0.5"," ","wall_pattern_colorizer:0:-0.5"," ","wall_shader_showcase:0:-0.5"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

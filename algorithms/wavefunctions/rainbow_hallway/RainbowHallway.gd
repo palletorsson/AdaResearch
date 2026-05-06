@@ -1,122 +1,192 @@
-extends Node3D
+﻿extends Node3D
+
+# @identity
+# essence: tapered CSG tube tunnel + animated rainbow gradient shader — walk through a cone of cycling color
+# desire: to step into a narrowing tunnel of light where color flows past you like standing inside a prism
+# critical_parameter: start_radius vs end_radius — the taper ratio determines whether the tunnel feels like entering or being swallowed
+# triggers: _process updates shader parameters every frame; gradient_offset and animation_speed drive continuous color flow
+# emerges: the cone shape creates forced perspective that makes the tunnel feel infinitely long even at modest segment counts
+# needs: rainbow_hallway.gdshader [has]; CSG collision [has]; VR walkthrough [has]; speed control slider [missing]
+# relationships: follows rainbow (static arc vs immersive tunnel); contrasts with spectrum_forest (ambient vs directed color experience)
+# truth: a hallway of color is not a hallway with color on it — it is a space where color becomes the architecture itself
 
 @export var animation_speed: float = 1.0
 @export var gradient_offset: float = 0.5
 @export var glow_intensity: float = 0.5
-@export var emission_strength: float = 0.3
+@export var emission_strength: float = 0.5
 
-var csg_combiner: CSGCombiner3D
+@export_group("Cone Shape")
+@export var cone_mode: bool = true
+@export var start_radius: float = 4.0
+@export var end_radius: float = 1.5
+@export var num_segments: int = 12
+@export var segment_length: float = 2.0
+@export var wall_thickness: float = 0.3
+
 var shader_material: ShaderMaterial
 var gradient_texture: GradientTexture1D
+var segments_parent: Node3D
 
-func _ready():
+func _ready() -> void:
+	segments_parent = get_node_or_null("HallwaySegments")
+	if not segments_parent:
+		segments_parent = Node3D.new()
+		segments_parent.name = "HallwaySegments"
+		add_child(segments_parent)
+	
 	setup_hallway()
 	setup_environment()
-	setup_ui()
 
-func setup_hallway():
-	# Get the CSG combiner
-	csg_combiner = $CSGCombiner3D
+func setup_hallway() -> void:
+	# Clear existing segments
+	for child in segments_parent.get_children():
+		child.queue_free()
 	
 	# Create the shader material
 	shader_material = ShaderMaterial.new()
 	var shader = load("res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.gdshader")
-	shader_material.shader = shader
+	if shader:
+		shader_material.shader = shader
 	
 	# Create gradient texture
 	gradient_texture = GradientTexture1D.new()
 	var gradient = Gradient.new()
-	
-	# Set up rainbow colors
-	gradient.add_point(0.0, Color(0.2, 0.8, 0.2))  # Green
-	gradient.add_point(0.33, Color(0.8, 0.8, 0.2)) # Yellow
-	gradient.add_point(0.66, Color(0.8, 0.2, 0.2)) # Red
-	gradient.add_point(1.0, Color(0.2, 0.2, 0.8))  # Blue
+
+	# Rainbow colors
+	gradient.offsets = PackedFloat32Array([0.0, 0.16, 0.33, 0.5, 0.66, 0.83, 1.0])
+	gradient.colors = PackedColorArray([
+		Color(1.0, 0.2, 0.2),   # Red
+		Color(1.0, 0.6, 0.2),   # Orange
+		Color(1.0, 1.0, 0.2),   # Yellow
+		Color(0.2, 1.0, 0.2),   # Green
+		Color(0.2, 0.6, 1.0),   # Blue
+		Color(0.6, 0.2, 1.0),   # Purple
+		Color(1.0, 0.2, 0.6)    # Pink
+	])
 	
 	gradient_texture.gradient = gradient
-	shader_material.set_shader_parameter("rainbow_gradient", gradient_texture)
+	if shader_material:
+		shader_material.set_shader_parameter("rainbow_gradient", gradient_texture)
 	
-	# Apply material to CSG combiner
-	csg_combiner.material_override = shader_material
+	# Generate cone segments
+	_generate_cone_segments()
 	
 	# Set initial shader parameters
 	update_shader_parameters()
 
-func setup_environment():
-	# Create environment for glow effect
+func _generate_cone_segments() -> void:
+	var total_length = num_segments * segment_length
+	
+	for i in range(num_segments):
+		var t = float(i) / float(num_segments - 1) if num_segments > 1 else 0.0
+		var radius = lerp(start_radius, end_radius, t)
+		var z_pos = i * segment_length
+		
+		# Create tube segment using CSG
+		var segment = _create_tube_segment(radius, segment_length, i)
+		segment.position = Vector3(0, 0, -z_pos)
+		segments_parent.add_child(segment)
+		
+		# Add light only every 3rd segment for performance
+		if i % 3 == 0:
+			var hue = fmod(t + gradient_offset, 1.0)
+			var light_color = Color.from_hsv(hue, 0.8, 1.0)
+			var light = OmniLight3D.new()
+			light.light_color = light_color
+			light.light_energy = 3.0  # Brighter to compensate for fewer lights
+			light.omni_range = radius * 3.5  # Larger range
+			light.shadow_enabled = false  # Disable shadows for performance
+			light.position = Vector3(0, 0, -z_pos - segment_length * 0.5)
+			segments_parent.add_child(light)
+
+func _create_tube_segment(radius: float, length: float, index: int) -> CSGCombiner3D:
+	var combiner = CSGCombiner3D.new()
+	combiner.name = "Segment_%d" % index
+	combiner.use_collision = true
+	
+	# Outer cylinder - reduced sides for performance
+	var outer = CSGCylinder3D.new()
+	outer.radius = radius + wall_thickness
+	outer.height = length
+	outer.sides = 16  # Reduced from 24 for better performance
+	outer.rotation_degrees.x = 90
+	outer.position.z = -length * 0.5
+	combiner.add_child(outer)
+	
+	# Inner cylinder (subtract) - reduced sides for performance
+	var inner = CSGCylinder3D.new()
+	inner.operation = CSGShape3D.OPERATION_SUBTRACTION
+	inner.radius = radius
+	inner.height = length + 0.1  # Slightly longer to avoid z-fighting
+	inner.sides = 16  # Reduced from 24 for better performance
+	inner.rotation_degrees.x = 90
+	inner.position.z = -length * 0.5
+	combiner.add_child(inner)
+	
+	# Apply material
+	if shader_material:
+		combiner.material_override = shader_material
+	else:
+		# Fallback material
+		var mat = StandardMaterial3D.new()
+		var hue = float(index) / float(num_segments)
+		mat.albedo_color = Color.from_hsv(hue, 0.7, 0.9)
+		mat.emission_enabled = true
+		mat.emission = Color.from_hsv(hue, 0.8, 1.0)
+		mat.emission_energy_multiplier = emission_strength
+		combiner.material_override = mat
+	
+	return combiner
+
+func setup_environment() -> void:
 	var env = Environment.new()
 	
-	# Enable glow
 	env.glow_enabled = true
 	env.glow_intensity = glow_intensity
-	env.glow_strength = 1.0
+	env.glow_strength = 1.2
 	env.glow_mix = 0.5
-	env.glow_bloom = 0.1
-	env.glow_hdr_threshold = 0.5
+	env.glow_bloom = 0.2
+	env.glow_hdr_threshold = 0.4
 	
-	# Set background
-	env.background_mode = Environment.BG_SKY
-	env.sky = Sky.new()
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = Color(0.02, 0.02, 0.05)
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color = Color(0.1, 0.1, 0.15)
+	env.ambient_light_energy = 0.3
 	
-	# Apply to world environment
-	var world_env = $WorldEnvironment
-	world_env.environment = env
+	var world_env = get_node_or_null("WorldEnvironment")
+	if world_env:
+		world_env.environment = env
 
-func setup_ui():
-	# Connect UI sliders
-	var gradient_slider = $UI/VBoxContainer/HSlider
-	var speed_slider = $UI/VBoxContainer/HSlider2
-	
-	gradient_slider.value_changed.connect(_on_gradient_changed)
-	speed_slider.value_changed.connect(_on_speed_changed)
-
-func _process(delta):
-	# Update shader parameters
+func _process(_delta):
 	update_shader_parameters()
 
-func update_shader_parameters():
+func update_shader_parameters() -> void:
 	if shader_material:
 		shader_material.set_shader_parameter("animation_speed", animation_speed)
 		shader_material.set_shader_parameter("gradient_offset", gradient_offset)
 		shader_material.set_shader_parameter("glow_intensity", glow_intensity)
 		shader_material.set_shader_parameter("emission_strength", emission_strength)
-		# Map gradient across exactly 10 meters in world Z
+		var total_length = num_segments * segment_length
 		shader_material.set_shader_parameter("gradient_start_z", 0.0)
-		shader_material.set_shader_parameter("gradient_length_m", 10.0)
+		shader_material.set_shader_parameter("gradient_length_m", total_length)
 
-func _on_gradient_changed(value: float):
-	gradient_offset = value
-
-func _on_speed_changed(value: float):
-	animation_speed = value
-
-func set_gradient_colors(colors: Array[Color]):
-	"""Update the gradient colors dynamically"""
-	if gradient_texture and gradient_texture.gradient:
-		var gradient = gradient_texture.gradient
-		gradient.clear()
-		
-		for i in range(colors.size()):
-			var t = float(i) / float(colors.size() - 1) if colors.size() > 1 else 0.0
-			gradient.add_point(t, colors[i])
-
-func add_light_at_position(position: Vector3, color: Color = Color.WHITE, energy: float = 2.0):
-	"""Add a light at the specified position"""
-	var light = OmniLight3D.new()
-	light.position = position
-	light.light_color = color
-	light.light_energy = energy
-	light.omni_range = 15.0
-	add_child(light)
-	return light
-
-func create_light_sequence(positions: Array[Vector3], colors: Array[Color] = []):
-	"""Create a sequence of lights along the hallway"""
-	if colors.is_empty():
-		colors = []
-		for i in range(positions.size()):
-			colors.append(Color.WHITE)
+func apply_grid_config(config: Dictionary) -> void:
+	if config.has("start_radius"):
+		start_radius = float(config["start_radius"])
+	if config.has("end_radius"):
+		end_radius = float(config["end_radius"])
+	if config.has("num_segments"):
+		num_segments = int(config["num_segments"])
+	if config.has("segment_length"):
+		segment_length = float(config["segment_length"])
+	if config.has("animation_speed"):
+		animation_speed = float(config["animation_speed"])
 	
-	for i in range(positions.size()):
-		var color = colors[i] if i < colors.size() else Color.WHITE
-		add_light_at_position(positions[i], color)
+	setup_hallway()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

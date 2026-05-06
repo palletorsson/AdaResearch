@@ -79,7 +79,7 @@ uniform float pattern_scale : hint_range(0.1, 2.0) = 0.8;
 varying vec3 world_pos;
 
 float noise(vec3 p) {
-	return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+	return fmod(sin(dot(p, vec3(127.1, 311.7, 74.7, 1.0))) * 43758.5453);
 }
 
 void vertex() {
@@ -108,14 +108,14 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	create_environment_objects()
 	create_reflective_objects() 
 	setup_reflection_probes()
 	start_animations()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create environment optimized for reflections
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -139,11 +139,11 @@ func setup_scene():
 	# Multiple lights for complex reflections
 	create_dynamic_lighting()
 
-func create_dynamic_lighting():
+func create_dynamic_lighting() -> void:
 	# Main directional light
 	var main_light = DirectionalLight3D.new()
 	main_light.position = Vector3(8, 12, 6)
-	main_light.look_at(Vector3.ZERO, Vector3.UP)
+	main_light.look_at_from_position(main_light.position, Vector3.ZERO, Vector3.UP)
 	main_light.light_energy = 1.2
 	main_light.light_color = Color(1.0, 0.95, 0.8)
 	add_child(main_light)
@@ -167,7 +167,7 @@ func create_dynamic_lighting():
 		# Animate the lights for dynamic reflections
 		animate_light(light, i)
 
-func animate_light(light: OmniLight3D, index: int):
+func animate_light(light: OmniLight3D, index: int) -> void:
 	var tween = create_tween()
 	tween.set_loops()
 	
@@ -194,7 +194,7 @@ func animate_light(light: OmniLight3D, index: int):
 				0.0, PI * 2, 6.0 / animation_speed
 			)
 
-func create_environment_objects():
+func create_environment_objects() -> void:
 	# Create colorful environment objects to be reflected
 	for i in range(12):
 		var env_object = MeshInstance3D.new()
@@ -241,7 +241,7 @@ func create_environment_objects():
 		# Animate environment objects
 		animate_environment_object(env_object, i)
 
-func animate_environment_object(obj: MeshInstance3D, index: int):
+func animate_environment_object(obj: MeshInstance3D, index: int) -> void:
 	# Gentle rotation for dynamic reflections
 	var tween = create_tween()
 	tween.set_loops()
@@ -297,7 +297,7 @@ func create_configured_cylinder_mesh() -> ArrayMesh:
 
 
 
-func create_reflective_objects():
+func create_reflective_objects() -> void:
 	# Create highly reflective objects that show dynamic reflections
 	var reflective_geometries = [
 		# Create and configure primitive meshes, then convert to ArrayMesh
@@ -333,7 +333,7 @@ func create_reflective_objects():
 		add_child(reflective_obj)
 		reflective_objects.append(reflective_obj)
 
-func create_reflection_material(obj: MeshInstance3D, index: int):
+func create_reflection_material(obj: MeshInstance3D, index: int) -> void:
 	# Create either standard PBR reflection or custom shader reflection
 	if index % 2 == 0:
 		# Standard PBR material with high metallic/low roughness
@@ -368,7 +368,7 @@ func create_reflection_material(obj: MeshInstance3D, index: int):
 		
 		obj.set_surface_override_material(0, material)
 
-func setup_reflection_probes():
+func setup_reflection_probes() -> void:
 	# Create reflection probes for real-time environment capture
 	for i in range(reflective_objects.size()):
 		var probe = ReflectionProbe.new()
@@ -401,14 +401,14 @@ func setup_reflection_probes():
 		add_child(probe)
 		reflection_probes.append(probe)
 
-func start_animations():
+func start_animations() -> void:
 	# Animate reflective objects for dynamic reflection changes
 	animate_reflective_objects()
 	
 	# Update reflection probes at specified rate
 	start_reflection_updates()
 
-func animate_reflective_objects():
+func animate_reflective_objects() -> void:
 	for i in range(reflective_objects.size()):
 		var obj = reflective_objects[i]
 		var original_pos = obj.position
@@ -448,7 +448,7 @@ func animate_reflective_objects():
 			0.0, PI * 2.0, randf_range(20.0, 40.0) / animation_speed
 		)
 
-func start_reflection_updates():
+func start_reflection_updates() -> void:
 	# Update reflection probes at specified rate for performance
 	var update_timer = Timer.new()
 	update_timer.timeout.connect(update_reflections)
@@ -456,7 +456,7 @@ func start_reflection_updates():
 	update_timer.autostart = true
 	add_child(update_timer)
 
-func update_reflections():
+func update_reflections() -> void:
 	# Force update of reflection probes for real-time reflections
 	for probe in reflection_probes:
 		if probe and is_instance_valid(probe):
@@ -595,6 +595,15 @@ func _process(_delta):
 	# Update any dynamic reflection effects
 	update_reflection_distortions()
 
-func update_reflection_distortions():
+func update_reflection_distortions() -> void:
 	# Optional: Add real-time distortion effects to reflections
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
 	pass

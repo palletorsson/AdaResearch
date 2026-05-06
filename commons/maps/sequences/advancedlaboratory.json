@@ -1,0 +1,31 @@
+{
+	"sequences": {
+		"advancedlaboratory": {
+			"name": "Advanced Laboratory",
+			"status": "deferred",
+			"deferred_reason": "4/5 maps were env_one placeholders or borrowed artifacts. Real map (Lab_Equipment_Simulation) moved to postfoundationscrisis. Rebuild when content exists.",
+			"description": "Advanced lab equipment simulation and systems theory",
+			"difficulty": "advanced",
+			"learning_objectives": [
+				"Lab equipment simulation",
+				"Water dynamics",
+				"Entropy visualization",
+				"Feedback cybernetics",
+				"Systems theory"
+			],
+			"maps": ["AdvancedLaboratory_Systems_Lab"],
+			"deferred_maps": [
+				"AdvancedLaboratory_Water_Dynamics",
+				"AdvancedLaboratory_Entropy_Visualization",
+				"AdvancedLaboratory_Feedback_Cybernetics",
+				"AdvancedLaboratory_Systems_Theory"
+			],
+			"moved_maps": {
+				"AdvancedLaboratory_Lab_Equipment_Simulation": "postfoundationscrisis"
+			},
+			"artifact_groups": []
+		}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
+}

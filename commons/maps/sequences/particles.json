@@ -1,0 +1,104 @@
+{
+	"sequences": {
+		"particles": {
+			"name": "Particle Systems",
+			"description": "Explore the emergent behavior of particle systems, from single particles to complex emitters and repellers.",
+			"qfep_term": "\u00ce\u00bbE(S)",
+			"qfep_connection": "Particles as controlled entropy \u00e2\u20ac\u201d emission, diffusion, decay. Each particle system manages the \u00ce\u00bb parameter: how much disorder to allow, how quickly to let structures dissolve.",
+			"difficulty": "intermediate",
+			"estimated_time": "45-60 minutes",
+			"learning_objectives": [
+				"Understanding particle physics and lifecycle",
+				"Managing particle arrays and memory",
+				"Creating particle emitters",
+				"Implementing inheritance and polymorphism in systems",
+				"Applying forces like repellers"
+			],
+			"content": [
+				"Particles_SingleAndArrays: Single Particle and Arrays",
+				"Particles_Emitters: Emitters",
+				"Particles_Forces: Forces and Fields",
+				"Particles_LifetimeAndTypes: Lifetime and Types",
+				"Particles_Collision: Collision and Synthesis"
+			],
+			"maps": [
+				"Particles_SingleAndArrays",
+				"Particles_Emitters",
+				"Particles_Forces",
+				"Particles_LifetimeAndTypes",
+				"Particles_Collision"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_particles",
+			"unlock_requirements": [
+				"vectors"
+			],
+			"completion_rewards": [
+				"system_architect_badge",
+				"chaos_theory_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Particles_SingleAndArrays",
+					"position": "intro",
+					"artifacts": [
+						"dark_sphere",
+						"example_4_1_single_particle_vr",
+						"example_4_2_array_particles_vr"
+					],
+					"size_budget": "environment",
+					"rationale": "Single particle and array: one particle demonstrates position/velocity/acceleration, arrays show population behavior. Dark sphere anchors the space."
+				},
+				{
+					"map": "Particles_Emitters",
+					"position": "foundation",
+					"artifacts": [
+						"dark_sphere",
+						"example_4_3_particle_emitter_vr",
+						"example_particle_body",
+						"example_4_4_multiple_emitters_vr",
+						"sub_emitters"
+					],
+					"size_budget": "mixed",
+					"rationale": "Emitter architecture: single emitter, particle body, multiple emitters, and sub-emitters build the emission pipeline from source to cascade."
+				},
+				{
+					"map": "Particles_Forces",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"force_fields",
+						"example_2_6_single_attractor_vr"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Particles under force: force fields push populations, single attractor pulls them. External forces shaping particle trajectories — Newton applied to swarms."
+				},
+				{
+					"map": "Particles_LifetimeAndTypes",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"example_4_5_inheritance_polymorphism_vr",
+						"particle_systems",
+						"lifetime_curves"
+					],
+					"size_budget": "environment",
+					"rationale": "Lifetime and type: inheritance polymorphism creates particle families, particle_systems manages populations, lifetime curves control birth-to-death trajectories."
+				},
+				{
+					"map": "Particles_Collision",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"example_4_6_particle_repeller_vr",
+						"particle_campfire"
+					],
+					"size_budget": "mixed",
+					"rationale": "Collision and repulsion: particles that bounce off boundaries and push each other away. Campfire as capstone — fire, smoke, and embers synthesizing all particle systems into one scene."
+				}
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
+}

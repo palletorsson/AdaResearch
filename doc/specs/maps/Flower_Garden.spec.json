@@ -1,0 +1,60 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Flower_Garden",
+  "home_sequence": "flowers",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.041,
+  "breath_zones": [
+    {
+      "size": 94,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        4.425531914893617,
+        4.5
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "botanical_flower"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "botanical_flower"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "botanical_flower"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "botanical_flower"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 98,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

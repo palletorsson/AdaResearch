@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2jxk8mwpn6yt"]
+
+[ext_resource type="Script" uid="uid://c5qvmr7t2hkxs" path="res://algorithms/fractals/cubesubdivision/cube_chair.gd" id="1_script"]
+
+[node name="CubeChair" type="Node3D"]
+script = ExtResource("1_script")
+chair_size = 1.0
+show_construction = true
+construction_delay = 0.25
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 1.5, 1.2, 2)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 3, 0)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 3, 0)
+light_energy = 0.4

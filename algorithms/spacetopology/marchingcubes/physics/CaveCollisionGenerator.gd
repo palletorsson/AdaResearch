@@ -1,4 +1,4 @@
-# CaveCollisionGenerator.gd
+﻿# CaveCollisionGenerator.gd
 # Generates optimized collision meshes for cave systems
 # Provides different LOD levels and collision shape options
 
@@ -343,10 +343,10 @@ func analyze_walkable_surfaces(mesh: ArrayMesh) -> Dictionary:
 		
 		# DEBUG: Show angle analysis for first few triangles
 		if surface_data.surface_count < 5:
-			print("Triangle %d: normal %v, angle from up: %.1f°" % [surface_data.surface_count, triangle_normal, angle_from_up])
+			print("Triangle %d: normal %v, angle from up: %.1fÂ°" % [surface_data.surface_count, triangle_normal, angle_from_up])
 		
 		# RELAXED: More permissive slope detection for voxel terrain
-		if angle_from_up <= 60.0:  # Increased from 30° to 60° for marching cubes terrain
+		if angle_from_up <= 60.0:  # Increased from 30Â° to 60Â° for marching cubes terrain
 			# Calculate triangle area
 			var area = edge1.cross(edge2).length() * 0.5
 			
@@ -364,7 +364,7 @@ func analyze_walkable_surfaces(mesh: ArrayMesh) -> Dictionary:
 				surface_data.total_walkable_area += area
 				surface_data.surface_count += 1
 	
-	print("DEBUG: Analyzed %d total triangles, found %d walkable (%.1f%%) with total area %.2f m²" % 
+	print("DEBUG: Analyzed %d total triangles, found %d walkable (%.1f%%) with total area %.2f mÂ²" % 
 		[indices.size() / 3, surface_data.walkable_triangles.size(), 
 		(surface_data.walkable_triangles.size() * 100.0) / max(1, indices.size() / 3),
 		surface_data.total_walkable_area])
@@ -495,7 +495,7 @@ func create_navigation_tile(grid_pos: Vector2i, tile_triangles: Array, parent_no
 	parent_node.add_child(nav_area)
 	return nav_area
 
-func create_vr_teleport_markers(navigation_tiles: Array[Area3D], parent_node: Node3D):
+func create_vr_teleport_markers(navigation_tiles: Array[Area3D], parent_node: Node3D) -> void:
 	"""Create visual markers for VR teleportation targets"""
 	print("CaveCollisionGenerator: Creating VR teleport markers...")
 	
@@ -504,7 +504,7 @@ func create_vr_teleport_markers(navigation_tiles: Array[Area3D], parent_node: No
 		if marker != null:
 			nav_tile.add_child(marker)
 
-func create_teleport_marker(nav_tile: Area3D) -> MeshInstance3D:
+func create_teleport_marker(_nav_tile: Area3D) -> MeshInstance3D:
 	"""Create a visual marker for a teleport target"""
 	var marker = MeshInstance3D.new()
 	marker.name = "TeleportMarker"
@@ -602,4 +602,6 @@ func is_position_walkable(position: Vector3) -> bool:
 		var collider = result.collider
 		return collider.has_meta("vr_walkable")
 	
-	return false 
+	return false
+
+

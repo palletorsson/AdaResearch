@@ -1,0 +1,43 @@
+{
+  "id": "gg13_ca_seeder_seeds",
+  "notes": "Seeds CA (B2/S) \u00e2\u20ac\u201d maximally explosive rule. Produces oscillating patterns.",
+  "seed": {
+    "ca_scatter": {
+      "rule": "seeds",
+      "iterations": 10,
+      "grid_size": 24,
+      "region_size": 2.5,
+      "y": 0,
+      "density": 0.08,
+      "seed": 3,
+      "radius": 0.08
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.35,
+        "spread_deg": 30,
+        "radius_decay": 0.72
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.12,
+        "radius": 0.015,
+        "splay": 0.9
+      }
+    }
+  ]
+}

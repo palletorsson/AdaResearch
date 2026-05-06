@@ -1,0 +1,60 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Randomness_Examples_of_Randomness",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 12,
+    "d": 17
+  },
+  "signature": "pollock_painting_in_3d translates action painting into 3D particle physics; monte_carlo_dartboard demonstrates randomness as computational method; pipe_dream shows combinatorial randomness as playful construction; extreme_randomness pushes beyond Gaussian to heavy-tailed distributions; dark_sphere persists as the constant across all gallery exhibits.",
+  "style": null,
+  "echoes": [
+    "wavefunctions"
+  ],
+  "density": 0.02,
+  "breath_zones": [
+    {
+      "size": 198,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 17
+      },
+      "centroid": [
+        5.494949494949495,
+        8.02020202020202
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 3,
+      "token": "pollock_painting_in_3d"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "pipe_dream"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "monte_carlo_dartboard"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 203,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

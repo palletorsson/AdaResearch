@@ -1,0 +1,24 @@
+{
+  "id": "gen02_petals_on_bulge",
+  "notes": "Bulge base then petals \u2014 pincushion organism.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "all",
+      "params": {
+        "amount": 0.2
+      }
+    },
+    {
+      "op": "petal_splay",
+      "selector": "all",
+      "params": {
+        "splay": 0.3,
+        "length": 0.4
+      }
+    }
+  ]
+}

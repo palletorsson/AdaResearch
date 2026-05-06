@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-04-28T09:04:21",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 19,
+    "global_avg": 5.05,
+    "heads": {
+      "randomness": "stage 7 polish",
+      "primitives": "stage 6 vr_testing",
+      "transformation": "stage 6 vr_testing",
+      "color": "stage 6 vr_testing",
+      "forces": "stage 6 vr_testing",
+      "array_tutorial": "stage 6 vr_testing",
+      "wavefunctions": "stage 6 vr_testing",
+      "noise": "stage 6 vr_testing",
+      "cellularautomata": "stage 6 vr_testing",
+      "fractals": "stage 6 vr_testing",
+      "lsystems": "stage 6 vr_testing",
+      "proceduralgeneration": "stage 6 vr_testing",
+      "softbodies": "stage 6 vr_testing",
+      "swarmintelligence": "stage 6 vr_testing",
+      "machinelearning": "stage 6 vr_testing",
+      "foundationscrisis": "stage 6 vr_testing",
+      "qfeplaboratory": "stage 6 vr_testing",
+      "postfoundationscrisis": "stage 6 vr_testing",
+      "graphtheory": "stage 6 vr_testing"
+    }
+  },
+  "heat_map_top_5": [
+    {"item": "garden_listener_cache", "temp": 60, "reason": "deep discovery: PascalCase .gd"},
+    {"item": "garden identity", "temp": 60, "reason": "deep discovery"},
+    {"item": "duplicate artifact files", "temp": 60, "reason": "branching_growth_algorithm"},
+    {"item": "sequence:resourcemanagement", "temp": 50, "reason": "empty sequence"}
+  ],
+  "garden_health": {
+    "total_voiced": 877,
+    "voice_coverage_pct": 43,
+    "embodiment_rate_pct": 33,
+    "phantom_limbs": 708,
+    "scattered": ["transformation", "color", "softbodies", "noise", "swarmintelligence", "proceduralgeneration", "particles", "structure", "facades", "flowers", "biological_growth"],
+    "reaching": ["hazards", "fractals", "patterngeneration", "mosaicanalysis", "cellularautomata", "graphtheory", "grammar_systems", "proceduralaudio", "artmathematics", "meshes"],
+    "growing": ["primitives", "foundationscrisis", "machinelearning", "lsystems", "postfoundationscrisis", "fold_system", "bodyprogression", "morphogenesis", "spatial_partitioning"],
+    "living": ["grammar_gallery", "joints", "vectors"]
+  },
+  "release_gates": {"A": true, "B": true, "C": true, "D": true, "passing": 4}
+}

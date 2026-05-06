@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyk5aro3podb4"]
+
+[ext_resource type="Script" uid="uid://cjweb08vsm0h0" path="res://commons/audio/systems/graph_music/CircleOfFifthsSystem.gd" id="1_sys"]
+[ext_resource type="Script" uid="uid://dkf2xnyjakn2e" path="res://commons/audio/systems/graph_music/GraphSynth.gd" id="2_synth"]
+[ext_resource type="Script" uid="uid://b7wfpklmltljy" path="res://commons/audio/systems/graph_music/GraphVisualizer.gd" id="3_viz"]
+[ext_resource type="Script" uid="uid://bvk4mahgdwm1f" path="res://commons/audio/systems/IntensityController.gd" id="4_ctrl"]
+
+[node name="CircleOfFifthsTest" type="Node3D"]
+
+[node name="GraphSynth" type="AudioStreamPlayer" parent="."]
+script = ExtResource("2_synth")
+
+[node name="CircleOfFifthsSystem" type="Node" parent="."]
+script = ExtResource("1_sys")
+synth_path = NodePath("../GraphSynth")
+
+[node name="IntensityController" type="Node" parent="."]
+script = ExtResource("4_ctrl")
+target_node_path = NodePath("../CircleOfFifthsSystem")
+max_intensity = 0.1
+shape = 1
+
+[node name="GraphVisualizer" type="Node3D" parent="."]
+script = ExtResource("3_viz")
+system_path = NodePath("../CircleOfFifthsSystem")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+projection = 1
+size = 12.0

@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "_Example_Island",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 9,
+    "d": 7
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.139,
+  "breath_zones": [
+    {
+      "size": 26,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 6
+      },
+      "centroid": [
+        2.0,
+        2.3076923076923075
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "origin"
+    },
+    {
+      "x": 8,
+      "z": 3,
+      "token": "sphere"
+    },
+    {
+      "x": 1,
+      "z": 4,
+      "token": "line"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "cube_scene"
+    },
+    {
+      "x": 2,
+      "z": 5,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 36,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

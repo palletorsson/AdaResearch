@@ -1,0 +1,16 @@
+{
+  "id": "mg_prim07_crystal_extruded",
+  "notes": "PRIMITIVE-AS-SEED: Ada crystal + extrude on all faces. Gem-like seed becomes an exploded crystal cluster.",
+  "seed": "crystal",
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "all",
+      "params": {
+        "distance": 0.08,
+        "scale": 0.7
+      }
+    }
+  ]
+}

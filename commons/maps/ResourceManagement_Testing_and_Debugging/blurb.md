@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 region inside it where things happen. Gaussian distributions raise terrain into bell curves. Random walks leave trails across the surface — 128 steps, each one a coin flip between directions. Height maps scatter and reform. Cubes appear, rotate, vanish. Profiles generate from noise, extruding geometry that no one designed.
+
+Every algorithm here uses randomness as a material. Not chaos — structured unpredictability. The walker doesn't wander aimlessly; it accumulates. The Gaussian doesn't scatter evenly; it clusters around a mean. Remove a cube at random and the grid remembers the gap. Spawn objects and they knock against each other with synthesized wood sounds.
+
+Randomness is not the absence of pattern. It is the condition under which pattern becomes surprising — even to the system that produced it.

@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://byjc8qr2f5wvf"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_snap"]
+[ext_resource type="Script" path="res://commons/primitives/snappoint/snap_point.gd" id="2_snap"]
+[ext_resource type="Script" uid="uid://7ndr65x3j6iv" path="res://commons/primitives/point/point_mesh.gd" id="3_snap"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_snap"]
+
+[sub_resource type="StandardMaterial3D" id="MatAlyxCyan"]
+albedo_color = Color(0.15, 0.85, 1.0, 1)
+metallic = 0.3
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.1, 0.6, 0.8, 1)
+emission_energy_multiplier = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_snap"]
+radius = 0.06
+
+[node name="SnapPoint" instance=ExtResource("1_snap")]
+freeze = true
+script = ExtResource("2_snap")
+snap_distance = 0.12
+snap_on_drop_only = true
+show_snap_preview = true
+snap_glow_color = Color(0.2, 1.0, 0.7, 1)
+snap_sound_volume_db = -10.0
+alternate_material = SubResource("MatAlyxCyan")
+alter_freeze = false
+glow_color = Color(0.3, 0.9, 1.0, 1)
+glow_emission_energy = 1.5
+pickup_sound_volume_db = -8.0
+haptic_pickup_intensity = 0.4
+haptic_pickup_duration = 0.08
+haptic_drop_intensity = 0.25
+haptic_drop_duration = 0.04
+haptic_snap_intensity = 0.5
+haptic_snap_duration = 0.12
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_snap")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+
+[node name="Sphere" type="Node3D" parent="MeshInstance3D" index="0"]
+script = ExtResource("3_snap")
+radius = 0.018
+color = Color(0.15, 0.85, 1.0, 1)
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("4_snap")]
+visible = false

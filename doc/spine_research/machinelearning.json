@@ -1,0 +1,645 @@
+{
+  "sequence": "machinelearning",
+  "generated_at": "2026-04-29T11:23:49.170362Z",
+  "runs": [
+    {
+      "base": "ML_Evolution",
+      "variants": [
+        {
+          "id": "ML_Evolution_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.522,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 2,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "ML_Evolution_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ML_Evolution_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.469,
+            "n_heights": 3,
+            "util_count": 27,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "ML_Gradient_Landscape",
+      "variants": [
+        {
+          "id": "ML_Gradient_Landscape_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.515,
+            "n_heights": 2,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 3,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "ML_Gradient_Landscape_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ML_Gradient_Landscape_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.421,
+            "n_heights": 3,
+            "util_count": 26,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "ML_Classification",
+      "variants": [
+        {
+          "id": "ML_Classification_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.504,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "ML_Classification_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ML_Classification_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.421,
+            "n_heights": 3,
+            "util_count": 26,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "ML_Neural_Networks",
+      "variants": [
+        {
+          "id": "ML_Neural_Networks_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.512,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 4,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "ML_Neural_Networks_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ML_Neural_Networks_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.395,
+            "n_heights": 3,
+            "util_count": 27,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "ML_Perception",
+      "variants": [
+        {
+          "id": "ML_Perception_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.535,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "ML_Perception_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ML_Perception_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.398,
+            "n_heights": 3,
+            "util_count": 28,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "ML_Sequence_Memory",
+      "variants": [
+        {
+          "id": "ML_Sequence_Memory_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.507,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "ML_Sequence_Memory_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ML_Sequence_Memory_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.395,
+            "n_heights": 3,
+            "util_count": 26,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "ML_Generative",
+      "variants": [
+        {
+          "id": "ML_Generative_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.612,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "ML_Generative_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ML_Generative_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.361,
+            "n_heights": 3,
+            "util_count": 28,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "ML_Synthesis",
+      "variants": [
+        {
+          "id": "ML_Synthesis_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.501,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 2,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "ML_Synthesis_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.995,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ML_Synthesis_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.358,
+            "n_heights": 3,
+            "util_count": 27,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_ML",
+      "variants": [
+        {
+          "id": "Chamber_ML_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.537,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Chamber_ML_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.996,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Chamber_ML_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.341,
+            "n_heights": 3,
+            "util_count": 28,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    }
+  ]
+}

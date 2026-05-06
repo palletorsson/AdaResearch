@@ -1,23 +1,39 @@
 extends Node3D
 
-# Simplified Learning Creature inspired by Carl Sims' approach
-# This script creates a simple creature that learns to move through reinforcement learning
+## Simplified Learning Creature inspired by Carl Sims' approach.
+## Uses Q-learning to train creatures with different morphologies (quadruped, biped, snake)
+## to move across a ground plane. Joint torques are the action space; joint angles form the state.
 
-class_name SimplifiedCreature
 
+# ──────────────────────────────────────────────
 # Body settings
-@export var limb_length: float = 0.8
-@export var limb_radius: float = 0.15
+# ──────────────────────────────────────────────
+@export var limb_length: float = 0.8:
+	set(v):
+		limb_length = v
+		if is_inside_tree():
+			change_creature_type(creature_type)
+@export var limb_radius: float = 0.15:
+	set(v):
+		limb_radius = v
+		if is_inside_tree():
+			change_creature_type(creature_type)
 @export var torque_strength: float = 5.0
-@export var creature_type: int = 0  # 0 = quadruped, 1 = biped, 2 = snake
+@export_enum("Quadruped", "Biped", "Snake") var creature_type: int = 0:
+	set(v):
+		creature_type = v
+		if is_inside_tree():
+			change_creature_type(v)
 
+# ──────────────────────────────────────────────
 # Learning parameters
-@export var learning_rate: float = 0.1
-@export var discount_factor: float = 0.95
-@export var exploration_rate: float = 0.4
-@export var exploration_decay: float = 0.995
-@export var min_exploration_rate: float = 0.05
-@export var update_frequency: float = 0.1
+# ──────────────────────────────────────────────
+@export_range(0.01, 1.0) var learning_rate: float = 0.1
+@export_range(0.5, 0.99) var discount_factor: float = 0.95
+@export_range(0.0, 1.0) var exploration_rate: float = 0.4
+@export_range(0.9, 0.999) var exploration_decay: float = 0.995
+@export_range(0.01, 0.5) var min_exploration_rate: float = 0.05
+@export_range(0.05, 1.0) var update_frequency: float = 0.1
 
 # References
 var body_parts = []
@@ -35,7 +51,9 @@ var timer = 0.0
 var episode_reward = 0.0
 var episode_count = 0
 
+# ──────────────────────────────────────────────
 # Debug visualization
+# ──────────────────────────────────────────────
 var path_points = []
 var start_marker = null
 var path_instance = null
@@ -44,7 +62,11 @@ var path_instance = null
 var ui_root
 var stats_label
 
-func _ready():
+# Visual feedback
+var _best_distance: float = 0.0
+var _distance_label_3d: Label3D = null
+
+func _ready() -> void:
 	randomize()
 	
 	# Create the environment
@@ -76,7 +98,7 @@ func _ready():
 	# Start training
 	start_learning()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update timer
 	timer += delta
 	
@@ -100,7 +122,7 @@ func _process(delta):
 		timer = 0.0
 		update_learning()
 
-func create_environment():
+func create_environment() -> void:
 	# Create a floor
 	var floor_mesh = PlaneMesh.new()
 	floor_mesh.size = Vector2(50.0, 50.0)
@@ -110,7 +132,9 @@ func create_environment():
 	floor_instance.name = "Floor"
 	
 	var floor_material = StandardMaterial3D.new()
-	floor_material.albedo_color = Color(0.3, 0.3, 0.3)
+	floor_material.albedo_color = Color(0.25, 0.28, 0.3)
+	floor_material.roughness = 0.9
+	floor_material.metallic = 0.05
 	floor_instance.material_override = floor_material
 	
 	var floor_body = StaticBody3D.new()
@@ -135,7 +159,7 @@ func create_environment():
 	camera.rotation = Vector3(-0.2, 0, 0)
 	add_child(camera)
 
-func create_grid():
+func create_grid() -> void:
 	# Create a grid on the floor for distance reference
 	var grid_lines = ImmediateMesh.new()
 	var grid_instance = MeshInstance3D.new()
@@ -165,7 +189,7 @@ func create_grid():
 	grid_lines.surface_end()
 	add_child(grid_instance)
 
-func create_debug_visualization():
+func create_debug_visualization() -> void:
 	# Create a node for path visualization
 	path_instance = ImmediateMesh.new()
 	var path_mesh_instance = MeshInstance3D.new()
@@ -179,22 +203,24 @@ func create_debug_visualization():
 	
 	add_child(path_mesh_instance)
 	
-	# Create start marker
+	# Create start marker — glowing green beacon at the starting position
 	start_marker = CSGSphere3D.new()
 	start_marker.name = "StartMarker"
 	start_marker.radius = 0.2
 	
 	var marker_material = StandardMaterial3D.new()
-	marker_material.albedo_color = Color(0.0, 1.0, 0.0)
+	marker_material.albedo_color = Color(0.3, 0.85, 0.4)
+	marker_material.emission_enabled = true
+	marker_material.emission = Color(0.3, 0.85, 0.4) * 0.6
 	start_marker.material = marker_material
 	
 	add_child(start_marker)
 
-func add_path_point(point):
+func add_path_point(point) -> void:
 	path_points.append(Vector3(point.x, 0.05, point.z))  # Keep y slightly above floor
 	update_path_visualization()
 
-func update_path_visualization():
+func update_path_visualization() -> void:
 	# Set start marker position
 	if start_marker:
 		start_marker.position = Vector3(starting_position.x, 0.2, starting_position.z)
@@ -209,7 +235,7 @@ func update_path_visualization():
 		
 		path_instance.surface_end()
 
-func create_ui():
+func create_ui() -> void:
 	ui_root = Control.new()
 	ui_root.name = "UI"
 	ui_root.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -220,12 +246,24 @@ func create_ui():
 	
 	ui_root.add_child(stats_label)
 	add_child(ui_root)
+	
+	# Floating 3D distance label above creature
+	_distance_label_3d = Label3D.new()
+	_distance_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_distance_label_3d.font_size = 48
+	_distance_label_3d.modulate = Color(1.0, 0.85, 0.2)
+	_distance_label_3d.outline_modulate = Color(0, 0, 0, 0.6)
+	_distance_label_3d.outline_size = 4
+	_distance_label_3d.text = "0.00m"
+	add_child(_distance_label_3d)
 
-func update_ui():
+func update_ui() -> void:
 	var text = "Episode: %d\n" % episode_count
-	text += "Distance: %.2f\n" % current_distance
+	text += "Distance: %.2f m\n" % current_distance
+	text += "Best Distance: %.2f m\n" % _best_distance
 	text += "Reward: %.2f\n" % episode_reward
-	text += "Exploration Rate: %.2f\n" % exploration_rate
+	text += "Exploration: %.0f%%\n" % (exploration_rate * 100)
+	text += "Q-States: %d\n" % q_table.size()
 	
 	if core_body:
 		text += "Position: (%.1f, %.1f, %.1f)\n" % [
@@ -233,11 +271,24 @@ func update_ui():
 			core_body.global_position.y,
 			core_body.global_position.z
 		]
+	text += "\n[Space] Reset  [E] Toggle Explore  [1/2/3] Morph"
 	
 	stats_label.text = text
+	
+	# Update floating 3D label above creature
+	if _distance_label_3d and core_body and is_instance_valid(core_body):
+		_distance_label_3d.global_position = core_body.global_position + Vector3(0, 1.5, 0)
+		_distance_label_3d.text = "%.2fm" % current_distance
+		# Color shifts from blue → green → gold as distance increases
+		var t = clamp(current_distance / 5.0, 0.0, 1.0)
+		if current_distance > _best_distance:
+			_best_distance = current_distance
+			_distance_label_3d.modulate = Color(1.0, 0.85, 0.2)  # Gold for new record
+		else:
+			_distance_label_3d.modulate = Color(0.3, 0.5, 0.9).lerp(Color(0.3, 0.85, 0.4), t)
 
 # Create a quadruped creature (4 legs)
-func create_quadruped():
+func create_quadruped() -> void:
 	# Create core body
 	core_body = create_core()
 	
@@ -253,7 +304,7 @@ func create_quadruped():
 		create_leg(core_body, leg_positions[i], i)
 
 # Create a biped creature (2 legs)
-func create_biped():
+func create_biped() -> void:
 	# Create core body
 	core_body = create_core()
 	
@@ -267,7 +318,7 @@ func create_biped():
 		create_leg(core_body, leg_positions[i], i)
 
 # Create a snake-like creature
-func create_snake():
+func create_snake() -> void:
 	# Create head segment
 	core_body = create_segment(null, Vector3(0, 0.5, 0), 0)
 	
@@ -277,7 +328,7 @@ func create_snake():
 		prev_segment = create_segment(prev_segment, Vector3(-limb_length * i, 0.5, 0), i)
 
 func create_core():
-	# Create the core body
+	# Create the core body — the main torso of the creature
 	var core_body = RigidBody3D.new()
 	core_body.name = "Core"
 	core_body.mass = 3.0
@@ -288,7 +339,11 @@ func create_core():
 	core_mesh.mesh.size = Vector3(limb_length * 2, limb_length * 0.5, limb_length * 1.5)
 	
 	var core_material = StandardMaterial3D.new()
-	core_material.albedo_color = Color(0.8, 0.2, 0.2)
+	core_material.albedo_color = Color(0.9, 0.3, 0.3)
+	core_material.emission_enabled = true
+	core_material.emission = Color(0.9, 0.3, 0.3) * 0.15
+	core_material.metallic = 0.2
+	core_material.roughness = 0.6
 	core_mesh.material_override = core_material
 	
 	var core_collision = CollisionShape3D.new()
@@ -378,7 +433,11 @@ func create_segment(parent_segment, position, segment_index):
 	segment_mesh.mesh.height = limb_length
 	
 	var segment_material = StandardMaterial3D.new()
-	segment_material.albedo_color = Color(0.2, 0.6, 0.8)
+	segment_material.albedo_color = Color(0.3, 0.5, 0.9)
+	segment_material.emission_enabled = true
+	segment_material.emission = Color(0.3, 0.5, 0.9) * 0.1
+	segment_material.metallic = 0.15
+	segment_material.roughness = 0.5
 	segment_mesh.material_override = segment_material
 	
 	var segment_collision = CollisionShape3D.new()
@@ -417,8 +476,8 @@ func create_segment(parent_segment, position, segment_index):
 	
 	return segment
 
-func create_limb(limb_name, position, scale_vec=Vector3(1,1,1)):
-	# Create a limb
+func create_limb(limb_name, position, _scale_vec=Vector3(1, 1, 1)):
+	# Create a limb with emissive material for visual feedback
 	var limb = RigidBody3D.new()
 	limb.name = limb_name
 	limb.mass = 1.0
@@ -430,7 +489,11 @@ func create_limb(limb_name, position, scale_vec=Vector3(1,1,1)):
 	limb_mesh.mesh.height = limb_length
 	
 	var limb_material = StandardMaterial3D.new()
-	limb_material.albedo_color = Color(0.2, 0.6, 0.8)
+	limb_material.albedo_color = Color(0.3, 0.5, 0.9)
+	limb_material.emission_enabled = true
+	limb_material.emission = Color(0.3, 0.5, 0.9) * 0.1
+	limb_material.metallic = 0.15
+	limb_material.roughness = 0.5
 	limb_mesh.material_override = limb_material
 	
 	var limb_collision = CollisionShape3D.new()
@@ -484,7 +547,7 @@ func create_joint(body_a, body_b, joint_position, lower_limits, upper_limits):
 	add_child(joint)
 	return joint
 
-func initialize_learning():
+func initialize_learning() -> void:
 	# Initialize state vector (joint angles)
 	state = []
 	for joint in joints:
@@ -497,7 +560,7 @@ func initialize_learning():
 	for i in range(joints.size() * 3):  # 3 axes per joint
 		action.append(0.0)
 
-func start_learning():
+func start_learning() -> void:
 	# Initialize state
 	update_state()
 	
@@ -505,7 +568,7 @@ func start_learning():
 	exploration_rate = 1.0
 	choose_action()
 
-func update_state():
+func update_state() -> void:
 	# Update state vector with current joint angles
 	state = []
 	for joint in joints:
@@ -559,7 +622,7 @@ func get_state_key():
 	# Convert state vector to string key for q-table
 	return str(state)
 
-func choose_action():
+func choose_action() -> void:
 	var state_key = get_state_key()
 	
 	# Initialize state in q_table if not exists
@@ -581,7 +644,7 @@ func choose_action():
 	# Apply action (torques to joints)
 	apply_action()
 
-func apply_action():
+func apply_action() -> void:
 	# Apply torques to each joint based on action vector
 	var action_idx = 0
 	for joint_idx in range(joints.size()):
@@ -619,7 +682,7 @@ func apply_action():
 		
 		action_idx += 3
 
-func update_learning():
+func update_learning() -> void:
 	# Make sure core body exists
 	if not core_body or not is_instance_valid(core_body):
 		return
@@ -695,9 +758,19 @@ func is_stuck():
 	# Check if the creature is stuck (not moving for a while)
 	return current_distance < 0.1 and episode_reward > 5.0
 
-func end_episode():
+func end_episode() -> void:
 	episode_count += 1
-	print("Episode %d ended. Total reward: %.2f, Distance: %.2f" % [episode_count, episode_reward, current_distance])
+	_best_distance = max(_best_distance, current_distance)
+	print("Episode %d ended. Total reward: %.2f, Distance: %.2f, Best: %.2f" % [episode_count, episode_reward, current_distance, _best_distance])
+	
+	# Flash the core body on episode end
+	if core_body and is_instance_valid(core_body):
+		var mesh_node = core_body.get_child(0) if core_body.get_child_count() > 0 else null
+		if mesh_node is MeshInstance3D and mesh_node.material_override is StandardMaterial3D:
+			var mat = mesh_node.material_override as StandardMaterial3D
+			var flash_tween = create_tween()
+			flash_tween.tween_property(mat, "emission_energy_multiplier", 3.0, 0.15)
+			flash_tween.tween_property(mat, "emission_energy_multiplier", 1.0, 0.5)
 	
 	# Reset the creature
 	for body in body_parts:
@@ -728,7 +801,7 @@ func end_episode():
 	choose_action()
 
 # Input for debugging and control
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			if event.keycode == KEY_SPACE:
@@ -747,7 +820,7 @@ func _input(event):
 				# Switch to snake
 				change_creature_type(2)
 
-func change_creature_type(type):
+func change_creature_type(type) -> void:
 	# Clean up existing creature
 	for body in body_parts:
 		if is_instance_valid(body):
@@ -782,3 +855,12 @@ func change_creature_type(type):
 	
 	initialize_learning()
 	start_learning()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

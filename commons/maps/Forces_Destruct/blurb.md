@@ -1,0 +1,1 @@
+Things break. Force exceeds structural integrity and objects shatter, crumble, explode. Destruction is physics pushed past threshold — the moment where continuous deformation becomes discontinuous fragmentation. Watch structures fail. Understand that stability is always conditional.

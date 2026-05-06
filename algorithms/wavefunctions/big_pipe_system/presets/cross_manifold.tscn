@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://c2lvqpvf2ig88" path="res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd" id="1_ctrl"]
+
+[node name="BigPipe_CrossManifold" type="Node3D"]
+script = ExtResource("1_ctrl")
+auto_build = true
+config_file = "cross_manifold.json"

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8mobius_world_1"]
+
+[ext_resource type="Script" path="res://algorithms/alternativegeometries/mobiusstrip/mobius_world.gd" id="1_mobius_world"]
+
+[node name="MobiusWorld" type="Node3D"]
+script = ExtResource("1_mobius_world")

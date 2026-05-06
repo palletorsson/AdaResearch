@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw8vnl3rkj5pt"]
+
+[ext_resource type="Script" path="res://commons/artifacts/cross_product_demo/cross_product_demo.gd" id="1_main"]
+
+[node name="CrossProductDemo" type="Node3D"]
+script = ExtResource("1_main")

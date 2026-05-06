@@ -1,0 +1,200 @@
+{
+  "map_info": {
+    "name": "SearchPathfinding_Intro",
+    "lookup_name": "SearchPathfinding_Intro",
+    "title": "Search and Pathfinding",
+    "description": "Explore search algorithms: BFS, DFS maze generation, and Dijkstra's shortest path in interactive grid substrates.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 5,
+      "depth": 5,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "searchpathfinding",
+      "estimated_time": "5-7 minutes",
+      "learning_objectives": [
+        "Breadth-first search",
+        "Depth-first search",
+        "Dijkstra's algorithm",
+        "Graph traversal"
+      ]
+    }
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Exit Portal",
+      "description": "Continue to the next lesson",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
+  },
+  "documentation": {
+    "summary": "SearchPathfinding_Intro - Interactive search algorithm exploration",
+    "layout": "5x5 open room with search/pathfinding grid substrates",
+    "objective": "Introduce search algorithms through interactive 2D and 3D grid substrates showing BFS traversal, DFS maze generation, and Dijkstra shortest path.",
+    "key_elements": [
+      "grid2d_bfs at (1,1)",
+      "grid2d_dfs_maze at (3,1)",
+      "grid3d_dijkstra at (2,3) center-bottom"
+    ]
+  },
+  "lighting": {
+    "ambient_color": [
+      0.3,
+      0.35,
+      0.45
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.7,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 1.1
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.15,
+        0.2,
+        0.35
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "0"
+      ]
+    ],
+    "utilities": [
+      [
+        "sp",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "t"
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "grid2d_bfs",
+        " ",
+        "grid2d_dfs_maze",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "grid3d_dijkstra",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
+}

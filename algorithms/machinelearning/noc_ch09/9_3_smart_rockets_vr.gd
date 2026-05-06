@@ -1,4 +1,19 @@
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
+
+# @identity
+# essence: fitness(x) = 1/d(x, target)^2; DNA = [thrust_vectors]; select → crossover → mutate
+# desire: watch a swarm of rockets evolve from chaos to precision across generations
+# critical_parameter: mutation_rate — too low freezes, too high forgets
+# triggers: obstacle collisions kill fitness; target proximity rewards; generation boundary resets
+# emerges: coordinated flight paths through gaps nobody designed
+# needs: VR slider for mutation_rate [has], slider for obstacle gap [has]
+# relationships: unlocks gradient_descent_visualization (optimization WITH gradient); depends on evolvingflowers (shared GA pattern)
+# truth: selection pressure alone, without any gradient, discovers solutions in spaces too vast to search
+
+## Smart Rockets — evolves rocket trajectories via genetic algorithm.
+## Each rocket carries a DNA sequence of thrust vectors. The population breeds
+## based on proximity to the target. Obstacles create selection pressure.
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_ROCKET := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
@@ -20,12 +35,14 @@ const MAX_Z := 0.2
 
 var _sim_root: Node3D
 var _rockets: Array[Rocket] = []
-var _obstacles: Array[Obstacle] = []
-var _target: Target
+var _obstacles: Array[RocketObstacle] = []
+var _target: RocketTarget
 var _status_label: Label3D
 var _generation: int = 1
 var _step: int = 0
 var _record_time: int
+var _best_fitness_ever: float = 0.0
+var _hits_count: int = 0  # Total rockets that reached target
 
 func _ready() -> void:
 	_setup_environment()
@@ -34,6 +51,7 @@ func _ready() -> void:
 	_spawn_population()
 	_record_time = lifespan
 	_update_status(0.0)
+	call_deferred("_apply_standard_presentation")
 	set_physics_process(true)
 
 func _setup_environment() -> void:
@@ -83,7 +101,7 @@ func _create_controllers() -> void:
 	gap_controller.set_value(obstacle_gap_height)
 
 func _spawn_target() -> void:
-	_target = Target.new()
+	_target = RocketTarget.new()
 	_target.init(_sim_root, MAT_TARGET, Vector3(0.38, 0.78, 0), 0.05)
 
 func _spawn_obstacles() -> void:
@@ -95,9 +113,9 @@ func _spawn_obstacles() -> void:
 	var thickness := 0.04
 	var height := obstacle_gap_height
 
-	var upper := Obstacle.new()
+	var upper := RocketObstacle.new()
 	upper.init(_sim_root, center + Vector3(0, height * 0.5 + 0.08, 0), Vector3(0.4, 0.08, thickness), MAT_OBSTACLE)
-	var lower := Obstacle.new()
+	var lower := RocketObstacle.new()
 	lower.init(_sim_root, center - Vector3(0, height * 0.5 + 0.08, 0), Vector3(0.4, 0.08, thickness), MAT_OBSTACLE)
 	_obstacles.append(upper)
 	_obstacles.append(lower)
@@ -156,7 +174,8 @@ func rocket_position_nearest() -> Vector3:
 	return best
 
 func _update_status(best_fit: float) -> void:
-	_status_label.text = "Gen %d | Step %d/%d | Best %.2f" % [_generation, _step, lifespan, best_fit]
+	_best_fitness_ever = max(_best_fitness_ever, best_fit)
+	_status_label.text = "Gen %d | Step %d/%d | Best %.2f | Record %.2f | Hits %d" % [_generation, _step, lifespan, best_fit, _best_fitness_ever, _hits_count]
 
 func _next_generation() -> void:
 	var mating_pool: Array[Rocket] = []
@@ -242,7 +261,7 @@ class Rocket:
 			return
 		acceleration += dna.get_force(step)
 
-	func update(delta: float, target: Vector3, obstacles: Array[Obstacle]) -> void:
+	func update(delta: float, target: Vector3, obstacles: Array[RocketObstacle]) -> void:
 		if done:
 			return
 
@@ -262,12 +281,22 @@ class Rocket:
 		if dist < 0.07:
 			done = true
 			fitness += 1.0
+			# Flash green on target hit
+			if body.material_override is StandardMaterial3D:
+				var mat = body.material_override as StandardMaterial3D
+				mat.emission_enabled = true
+				mat.emission = Color(0.3, 0.85, 0.4) * 0.8
 			return
 
 		for obstacle in obstacles:
 			if obstacle.contains(position):
 				done = true
 				fitness *= 0.2
+				# Flash red on crash
+				if body.material_override is StandardMaterial3D:
+					var mat = body.material_override as StandardMaterial3D
+					mat.emission_enabled = true
+					mat.emission = Color(0.9, 0.3, 0.3) * 0.6
 				return
 
 	func queue_free() -> void:
@@ -295,7 +324,7 @@ class DNA:
 	func copy_from(other: DNA) -> void:
 		genes = other.genes.duplicate(true)
 
-class Target:
+class RocketTarget:
 	var root: Node3D
 	var mesh: MeshInstance3D
 	var radius: float
@@ -315,15 +344,23 @@ class Target:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = rad
+		sphere.height = sphere.radius * 2.0
 		mesh.mesh = sphere
-		mesh.material_override = material
+		# Glowing gold target material
+		var target_mat := StandardMaterial3D.new()
+		target_mat.albedo_color = Color(1.0, 0.85, 0.2)
+		target_mat.emission_enabled = true
+		target_mat.emission = Color(1.0, 0.85, 0.2) * 0.6
+		target_mat.metallic = 0.3
+		target_mat.roughness = 0.3
+		mesh.material_override = target_mat
 		root.add_child(mesh)
 		root.global_position = pos
 
 	func contains(point: Vector3) -> bool:
 		return root.global_position.distance_to(point) <= radius
 
-class Obstacle:
+class RocketObstacle:
 	var root: Node3D
 	var mesh: MeshInstance3D
 	var half_extents: Vector3
@@ -354,3 +391,19 @@ class Obstacle:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
+
+

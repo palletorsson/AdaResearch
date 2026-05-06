@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://grid_agent_translate_002"]
+
+[ext_resource type="PackedScene" uid="uid://grid_agent_base_000001" path="res://commons/hazards/gridagent/grid_agent_base.tscn" id="1_base"]
+
+[node name="GridAgent" instance=ExtResource("1_base")]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" parent="." index="0"]
+
+[node name="MeshInstance3D" parent="." index="1"]
+
+[node name="ThoughtLabel" parent="." index="2"]
+
+[node name="NavigationAgent3D" parent="." index="3"]
+

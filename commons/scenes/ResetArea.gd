@@ -6,7 +6,7 @@ extends Area3D
 # Export the NodePath to make it easier to assign your player's XROrigin3D
 @export var player_node_path: NodePath = NodePath("../XROrigin3D")
 @export var reset_position: Vector3 = Vector3(0, 4, 0)  # Where to reset player
-@export var fade_duration: float = 0.5
+@export var fade_duration: float = 0.0  # Disabled - was causing delays
 @export var show_debug_mesh: bool = false  # Show red debug area
 
 var player_node: Node3D

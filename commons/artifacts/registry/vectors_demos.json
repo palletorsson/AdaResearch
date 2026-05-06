@@ -1,0 +1,732 @@
+{
+	"registry_info": {
+		"name": "vectors_demos",
+		"description": "Vector concept demonstration artifacts \u2014 applied physics demos showing vectors in action: force addition, work/energy, torque, reflection, and targeting.",
+		"category": "vectors",
+		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
+	},
+	"artifacts": {
+		"combined_forces_demo": {
+			"lookup_name": "combined_forces_demo",
+			"scene": "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.tscn",
+			"name": "Combined Forces Demo",
+			"description": "Vector addition as force combination \u2014 multiple forces acting on a body, visualized as arrows that add head-to-tail. The resultant force emerges from superposition.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"tags": [
+				"vector",
+				"addition",
+				"force",
+				"superposition",
+				"resultant",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"application",
+					"vector_addition_demo",
+					"weather_vector_field",
+					"superposition"
+				],
+				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.69,
+					0.69,
+					0.35
+				],
+				"aabb_center": [
+					0.17,
+					0.18,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.69,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.301010Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"work_energy_demo": {
+			"lookup_name": "work_energy_demo",
+			"scene": "res://algorithms/vectors/03_dot_product/WorkEnergyDemo.tscn",
+			"name": "Work-Energy Demo",
+			"description": "Dot product as physical work \u2014 force dotted with displacement gives energy transfer. See why pushing perpendicular to motion does zero work.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": [
+				"vector",
+				"dot_product",
+				"work",
+				"energy",
+				"projection",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"application",
+					"dot_product_projector",
+					"momentum_collision",
+					"energy",
+					"conservation"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.86,
+					0.33,
+					0.35
+				],
+				"aabb_center": [
+					0.26,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.86,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.301010Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"torque_demo": {
+			"lookup_name": "torque_demo",
+			"scene": "res://algorithms/vectors/06_vector_cross_product/TorqueDemo.tscn",
+			"name": "Torque Demo",
+			"description": "Cross product as torque \u2014 force applied at a lever arm produces rotation perpendicular to both. The right-hand rule determines which way things spin.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": [
+				"vector",
+				"cross_product",
+				"torque",
+				"rotation",
+				"right_hand_rule",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"product",
+					"counterpart",
+					"dot_product_projector",
+					"example_3_2",
+					"angular"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.35,
+					0.85,
+					0.35
+				],
+				"aabb_center": [
+					0.0,
+					0.26,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.85,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.301010Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"normal_force_demo": {
+			"lookup_name": "normal_force_demo",
+			"scene": "res://algorithms/vectors/07_vector_projection_reflection/NormalForceDemo.tscn",
+			"name": "Normal Force & Reflection Demo",
+			"description": "Vector projection and reflection \u2014 decompose velocity into normal and tangent components, then reflect. The math behind every bouncing ball and billiard shot.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": [
+				"vector",
+				"projection",
+				"reflection",
+				"normal",
+				"bounce",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"vector_projection_demo",
+					"concepts",
+					"physics",
+					"fluid_resistance",
+					"another"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.35,
+					1.18,
+					0.35
+				],
+				"aabb_center": [
+					0.0,
+					-0.43,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.18,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.301010Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"turret_targeting": {
+			"lookup_name": "turret_targeting",
+			"scene": "res://algorithms/vectors/11_turret_targeting/TurretTargeting.tscn",
+			"name": "Turret Targeting",
+			"description": "Applied vector math for targeting \u2014 calculate direction, lead the target, account for projectile speed. Vectors solving the ancient problem of aiming at a moving target.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": [
+				"vector",
+				"targeting",
+				"turret",
+				"prediction",
+				"direction",
+				"game_math"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			},
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.301010Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"weather_vector_field": {
+			"lookup_name": "weather_vector_field",
+			"scene": "res://algorithms/vectors/weather_vector_field/weather_vector_field.tscn",
+			"name": "Weather Vector Field",
+			"description": "Applied vector addition as weather \u2014 two grabbable wind vectors combine in real-time. Drag arrow endpoints to feel how wind directions sum. Rain particles fall under gravity + wind, their diagonal paths demonstrating force superposition. Pressure zones add local variation to the field.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": [
+				"vector_addition",
+				"weather",
+				"wind",
+				"force_superposition",
+				"vector_field",
+				"rain",
+				"pressure",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere",
+						"cylinder",
+						"plane"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~96"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extension",
+					"vector_addition_demo",
+					"addition",
+					"narrative",
+					"weather"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.31,
+					2.14,
+					1.98
+				],
+				"aabb_center": [
+					-0.17,
+					0.62,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					2.0
+				],
+				"max_dimension_m": 2.31,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.301010Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_reflection_demo": {
+			"name": "Vector Reflection Demo",
+			"lookup_name": "vector_reflection_demo",
+			"description": "Interactive vector reflection off a rotatable surface. An incoming vector (blue), surface normal (green), and reflected vector (red) update in real time as sliders control the surface angle and incoming direction. Demonstrates r = v - 2(v\u00b7n)n.",
+			"scene": "res://algorithms/vectors/vector_reflection/vector_reflection_demo.tscn",
+			"category": "vectors",
+			"complexity": "beginner",
+			"tags": [
+				"vector",
+				"reflection",
+				"mirror",
+				"dot_product",
+				"interactive",
+				"linear_algebra"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors",
+				"optics"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"wall_backing": false,
+				"isolation": 0,
+				"preferred_zone": "middle"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.51,
+					0.39,
+					0.21
+				],
+				"aabb_center": [
+					0.09,
+					0.9,
+					0.08
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.51,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.301010Z",
+				"derived_from": "aabb_size + category"
+			}
+		}
+	}
+}

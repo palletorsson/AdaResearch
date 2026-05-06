@@ -1,0 +1,7 @@
+Concept: Bias as spatial allocation — a divided room where the left half is spacious and the right half cramped, making algorithmic inequality architectural before it is mathematical.
+Sequence role: First map in Post-Foundations Crisis; the applied consequences of formalization's limits. After the Foundations Crisis revealed that formal systems have outsides and the QFEP Lab gave tools for working the edge, this sequence asks: what do we build, knowing what we know? The bias visualizer answers: systems that reproduce inequality unless actively resisted; leads to SpeculativeComputation_Rhizome_Network.
+Technical angle: Algorithmic bias as unequal distribution of computational resources (training data, feature weighting, outcome allocation). The bias_visualizer makes the disparity spatial — walk from the spacious side to the cramped side and feel the difference. The room itself is the dataset, partitioned unfairly.
+Critical angle: Algorithms inherit the biases of their training data, their designers, and their deployment contexts. The post-crisis insight: knowing that formal systems have limits does not prevent those systems from having real effects. Bias is not a bug but a structural property of any system that classifies — and classification always creates an outside. The room's asymmetry is the QFEP F-term imposing order that excludes.
+Key artifacts: bias_visualizer demonstrates algorithmic bias as spatial inequality — the architecture IS the argument.
+
+Gap: No gap identified.

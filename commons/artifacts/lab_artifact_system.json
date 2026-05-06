@@ -31,10 +31,10 @@
 	  "visible_artifacts": ["rotating_cube", "grid_display", "xyz_coordinates"],
 	  "hidden_artifacts": ["randomness_sign", "disco_floor", "probability_sphere"],
 	  "lighting_mode": "dual_artifact_lighting",
-	  "unlocked_sequences": ["randomness_exploration"]
+	  "unlocked_sequences": ["randomness"]
 	},
 	
-	"post_randomness_exploration": {
+	"post_randomness": {
 	  "description": "After completing randomness exploration",
 	  "visible_artifacts": ["rotating_cube", "grid_display", "xyz_coordinates", "randomness_sign", "probability_sphere"],
 	  "hidden_artifacts": ["disco_floor"],
@@ -59,9 +59,9 @@
 	  "achievement": "array_master"
 	},
 	
-	"randomness_exploration": {
+	"randomness": {
 	  "artifacts_to_unlock": ["probability_sphere", "randomness_sign"],
-	  "new_state": "post_randomness_exploration", 
+	  "new_state": "post_randomness", 
 	  "lighting_change": "full_artifact_lighting",
 	  "achievement": "probability_pioneer"
 	},
@@ -135,14 +135,14 @@
 	"randomness_sign": {
 	  "status": "hidden", 
 	  "unlock_progress": 0.0,
-	  "unlock_trigger": "randomness_exploration_completed",
+	  "unlock_trigger": "randomness_completed",
 	  "progression_events": ["sign_unlocked", "randomness_started"]
 	},
 	
 	"probability_sphere": {
 	  "status": "hidden",
 	  "unlock_progress": 0.0,
-	  "unlock_trigger": "randomness_exploration_completed",
+	  "unlock_trigger": "randomness_completed",
 	  "progression_events": ["sphere_unlocked", "probability_examined"]
 	},
 	
@@ -169,11 +169,11 @@
 	  "next_state": "post_array_tutorial"
 	},
 	
-	"randomness_exploration_completed": {
+	"randomness_completed": {
 	  "unlocks": ["probability_sphere", "randomness_sign"],
 	  "updates_lighting": true,
 	  "achievement": "probability_pioneer",
-	  "next_state": "post_randomness_exploration"
+	  "next_state": "post_randomness"
 	},
 	
 	"geometric_algorithms_completed": {

@@ -49,7 +49,7 @@ class GrowthNode:
 	var branch_strength: float = 1.0
 	var has_spore_body: bool = false
 	
-	func _init(pos: Vector3, dir: Vector3 = Vector3.ZERO, p: GrowthNode = null):
+	func _init(pos: Vector3, dir: Vector3 = Vector3.ZERO, p: GrowthNode = null) -> void:
 		position = pos
 		direction = dir.normalized() if dir != Vector3.ZERO else Vector3.UP
 		parent = p
@@ -63,7 +63,7 @@ class SporeBranch:
 	var has_spores: bool = false
 	var spore_positions: Array[Vector3] = []
 	
-	func _init(start: GrowthNode, end: GrowthNode, thick: float = 0.008):
+	func _init(start: GrowthNode, end: GrowthNode, thick: float = 0.008) -> void:
 		start_node = start
 		end_node = end
 		thickness = thick
@@ -71,11 +71,11 @@ class SporeBranch:
 signal generation_complete()
 signal generation_progress(percentage: float)
 
-func _ready():
+func _ready() -> void:
 	setup_random_generator()
 	print("SpaceColonizationMoldSpore: Initialized for 1x1x1 unit space")
 
-func setup_random_generator(seed_value: int = -1):
+func setup_random_generator(seed_value: int = -1) -> void:
 	# Initialize random number generator
 	rng = RandomNumberGenerator.new()
 	if seed_value >= 0:
@@ -120,7 +120,7 @@ func generate_mold_spore_network(seed_value: int = -1) -> Array[MeshInstance3D]:
 	print("SpaceColonizationMoldSpore: Generation complete after %d iterations" % current_iteration)
 	return mesh_instances
 
-func clear_previous_generation():
+func clear_previous_generation() -> void:
 	# Clear any existing generated content
 	for mesh_instance in mesh_instances:
 		if mesh_instance and is_instance_valid(mesh_instance):
@@ -131,7 +131,7 @@ func clear_previous_generation():
 	growth_nodes.clear()
 	spore_branches.clear()
 
-func initialize_auxin_sources():
+func initialize_auxin_sources() -> void:
 	# Create auxin sources distributed throughout the 1x1x1 space
 	auxin_sources.clear()
 	
@@ -165,7 +165,7 @@ func initialize_auxin_sources():
 	
 	print("SpaceColonizationMoldSpore: Created %d auxin sources" % auxin_sources.size())
 
-func initialize_growth_nodes():
+func initialize_growth_nodes() -> void:
 	# Create initial growth nodes (spore starting points)
 	growth_nodes.clear()
 	
@@ -190,7 +190,7 @@ func initialize_growth_nodes():
 	
 	print("SpaceColonizationMoldSpore: Created %d initial growth nodes" % growth_nodes.size())
 
-func space_colonization_iteration():
+func space_colonization_iteration() -> void:
 	# Perform one iteration of the space colonization algorithm
 	var active_nodes = get_active_growth_nodes()
 	if active_nodes.is_empty():
@@ -283,7 +283,7 @@ func add_growth_randomness(direction: Vector3) -> Vector3:
 	var rotated_direction = direction.rotated(random_axis, random_angle)
 	return rotated_direction.normalized()
 
-func handle_branching(new_nodes: Array[GrowthNode]):
+func handle_branching(new_nodes: Array[GrowthNode]) -> void:
 	# Create additional branches for more complex growth patterns
 	var additional_branches: Array[GrowthNode] = []
 	
@@ -311,7 +311,7 @@ func handle_branching(new_nodes: Array[GrowthNode]):
 	for branch_node in additional_branches:
 		growth_nodes.append(branch_node)
 
-func add_spore_positions_to_branch(branch: SporeBranch):
+func add_spore_positions_to_branch(branch: SporeBranch) -> void:
 	# Add spore positions along a fertile branch
 	var num_spores = rng.randi_range(2, 6)
 	
@@ -338,7 +338,7 @@ func get_active_growth_nodes() -> Array[GrowthNode]:
 	
 	return active_nodes
 
-func age_growth_nodes():
+func age_growth_nodes() -> void:
 	# Age all growth nodes and deactivate old ones
 	for node in growth_nodes:
 		node.age += 1
@@ -353,7 +353,7 @@ func is_within_bounds(position: Vector3) -> bool:
 			position.y >= 0.0 and position.y <= space_bounds.y and
 			position.z >= 0.0 and position.z <= space_bounds.z)
 
-func create_spore_mesh():
+func create_spore_mesh() -> void:
 	# Generate the final 3D mesh for the spore network
 	if spore_branches.is_empty():
 		print("SpaceColonizationMoldSpore: No branches to mesh")
@@ -478,7 +478,7 @@ func create_branch_cylinder(start_pos: Vector3, end_pos: Vector3, radius: float)
 	
 	return branch_data
 
-func add_spore_bodies():
+func add_spore_bodies() -> void:
 	# Add spore reproductive bodies to the network
 	for branch in spore_branches:
 		if not branch.has_spores:
@@ -534,7 +534,7 @@ func create_spore_body_material() -> StandardMaterial3D:
 	return material
 
 # Public API functions
-func set_parameters(params: Dictionary):
+func set_parameters(params: Dictionary) -> void:
 	# Configure generation parameters
 	if params.has("influence_radius"):
 		influence_radius = params.influence_radius
@@ -564,9 +564,18 @@ func get_generation_statistics() -> Dictionary:
 		"active_growth_nodes": get_active_growth_nodes().size()
 	}
 
-func reset_generation():
+func reset_generation() -> void:
 	# Reset the generator for a new generation
 	clear_previous_generation()
 	current_iteration = 0
 	is_generating = false
 	print("SpaceColonizationMoldSpore: Generator reset")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

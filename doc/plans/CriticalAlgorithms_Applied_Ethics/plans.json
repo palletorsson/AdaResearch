@@ -1,0 +1,35 @@
+{
+  "name": "CriticalAlgorithms_Applied_Ethics",
+  "title": "Ethical Design After Incompleteness",
+  "description": "If every formal system has an outside, every classifier has someone it misreads. Ethics isn't a postprocessing step \u2014 it's the shape of the room.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 9
+  },
+  "n_artifacts": 3,
+  "spawn": null,
+  "teleport": [
+    9,
+    4
+  ],
+  "artifacts": [
+    {
+      "name": "bias_from_inside",
+      "row": 2,
+      "col": 6,
+      "family": "algorithms_misc"
+    },
+    {
+      "name": "godel_statement_plaque",
+      "row": 5,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "tt",
+      "row": 8,
+      "col": 6,
+      "family": "commons_artifacts"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Forces_8",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "three_body_problem as the canonical chaotic system; nbody_simulation for the general N-body case; example_2_8 (two-body attraction) as the solvable baseline; example_2_9 (N-body attraction) for the full ensemble; chaos_attractor for the geometric signature of chaos; forcedirected3d for N-body math applied to non-physical domains (graph layout).",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.118,
+  "breath_zones": [
+    {
+      "size": 45,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.111111111111111,
+        3.2
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "three_body_problem"
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "token": "nbody_simulation"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "example_2_8_two_body_attraction_vr"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "chaos_attractor"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "forcedirected3d"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "example_2_9_n_body_attraction_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

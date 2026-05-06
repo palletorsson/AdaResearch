@@ -1,0 +1,118 @@
+{
+  "map_info": {
+    "name": "Composition",
+    "title": "Garden Composition",
+    "lookup_name": "Flower_Garden",
+    "description": "Free-form garden building with multiple BotanicalFlower instances. Place flowers in space, create arrangements. Spatial composition as creative synthesis.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "flowers",
+      "estimated_time": "6-10 minutes",
+      "learning_objectives": [
+        "Spatial composition",
+        "Garden arrangement",
+        "Multiple instance placement",
+        "Creative synthesis"
+      ]
+    }
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Finish",
+      "description": "Complete the flower sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Flower_Garden - Free-form garden composition with multiple flowers",
+    "layout": "Open room with four BotanicalFlower instances arranged in a garden pattern",
+    "objective": "Explore a garden of procedural flowers. Each instance can be different. Understand spatial composition -- how arrangement creates meaning.",
+    "key_elements": [
+      "botanical_flower x4 - multiple flowers in garden arrangement"
+    ]
+  },
+  "lighting": {
+    "ambient_color": [
+      0.65,
+      0.75,
+      0.6
+    ],
+    "ambient_energy": 0.95,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.98,
+        0.9
+      ],
+      "energy": 1.1
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.5,
+        0.7,
+        0.5
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","0","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","1","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","botanical_flower"," "," "," ","botanical_flower"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","botanical_flower"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","botanical_flower"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

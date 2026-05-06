@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://cpwdvy41fqdua"]
+
+[ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
+[ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
+[ext_resource type="Script" uid="uid://cgk7meitry1a" path="res://commons/interactables/slider_smooth.gd" id="5_wmxoe"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_boasd"]
+[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" uid="uid://ada_track_groove" path="res://commons/ui/materials/track_groove.tres" id="MatTrack"]
+[ext_resource type="Material" uid="uid://ada_handle_glow" path="res://commons/ui/materials/handle_glow.tres" id="MatHandle"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_Panel"]
+size = Vector3(0.08, 0.22, 0.008)
+
+[sub_resource type="BoxShape3D" id="CollisionPanel"]
+size = Vector3(0.08, 0.22, 0.015)
+
+[sub_resource type="BoxMesh" id="BoxMesh_TrackGroove"]
+size = Vector3(0.006, 0.16, 0.003)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Handle"]
+size = Vector3(0.012, 0.035, 0.02)
+
+[sub_resource type="BoxShape3D" id="CollisionHandle"]
+size = Vector3(0.018, 0.04, 0.025)
+
+[node name="SliderSmooth" type="Node3D"]
+script = ExtResource("5_wmxoe")
+
+[node name="Frame" type="StaticBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
+shape = SubResource("CollisionPanel")
+
+[node name="PanelMesh" type="MeshInstance3D" parent="Frame"]
+mesh = SubResource("BoxMesh_Panel")
+surface_material_override/0 = ExtResource("MatPanel")
+
+[node name="TrackGroove" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+mesh = SubResource("BoxMesh_TrackGroove")
+surface_material_override/0 = ExtResource("MatTrack")
+
+[node name="Label3DValue" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.095, 0.008)
+pixel_size = 0.0008
+modulate = Color(0, 0, 0, 1)
+text = "0.50"
+font_size = 16
+font_color = Color(0.0, 0.0, 0.0, 1)
+outline_size = 0
+
+[node name="LabelName" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.095, 0.008)
+pixel_size = 0.0008
+modulate = Color(0, 0, 0, 1)
+font_size = 13
+font_color = Color(0.0, 0.0, 0.0, 1)
+outline_size = 0
+
+[node name="SliderOrigin" type="Node3D" parent="."]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -0.07, 0.012)
+
+[node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
+script = ExtResource("2")
+slider_limit_min = 0.0
+slider_limit_max = 0.14
+slider_position = 0.07
+default_position = 0.07
+
+[node name="HandleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider"]
+
+[node name="InteractableHandle" type="RigidBody3D" parent="SliderOrigin/InteractableSlider/HandleOrigin"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
+shape = SubResource("CollisionHandle")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
+mesh = SubResource("BoxMesh_Handle")
+surface_material_override/0 = ExtResource("MatHandle")
+
+[node name="GrabPointRedirectLeft" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("10_boasd")]
+
+[node name="GrabPointRedirectRight" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("10_boasd")]

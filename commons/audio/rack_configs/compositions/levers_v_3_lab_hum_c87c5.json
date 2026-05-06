@@ -1,0 +1,48 @@
+{
+  "rack_info": {
+    "name": "3x LEVER",
+    "description": "3x LEVER — auto-generated UVAC composition. sound_type=lab_hum, composition_type=levers_v.",
+    "version": "auto-1",
+    "sound_type": "lab_hum",
+    "auto_generated": true,
+    "composition_type": "levers_v",
+    "composition_count": 3
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "lv_0",
+      "lv_1",
+      "lv_2"
+    ]
+  ],
+  "control_definitions": {
+    "lv_0": {
+      "type": "lever",
+      "label": "RATE",
+      "parameter": "rate",
+      "min": 0.01,
+      "max": 20.0,
+      "default": 2.0
+    },
+    "lv_1": {
+      "type": "lever",
+      "label": "ATK",
+      "parameter": "attack",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.05
+    },
+    "lv_2": {
+      "type": "lever",
+      "label": "FBK",
+      "parameter": "feedback",
+      "min": 0.0,
+      "max": 0.95,
+      "default": 0.3
+    }
+  }
+}

@@ -1,4 +1,4 @@
-# PointScene.gd - Pickable point with position display
+﻿# PointScene.gd - Pickable point with position display
 # Label follows the point and appears underneath it in the scene tree
 extends Node3D
 
@@ -39,16 +39,16 @@ func get_position_text() -> String:
 		pos = grab_sphere.global_position
 
 	# Format numbers to always show exactly one decimal place
-	return "x:%.1f y:%.1f z:%.1f" % [pos.x, pos.y, pos.z]
+	return "local position: (%.1f, %.1f, %.1f)" % [pos.x, pos.y, pos.z]
 
-func _process(delta):
+func _process(_delta):
 	# Update position text continuously
 	if position_label:
 		position_label.text = get_position_text()
 
 # Public method to set position and update display
 func set_point_position(new_position: Vector3):
-	position = new_position
+	global_position = new_position
 	if grab_sphere:
 		grab_sphere.global_position = new_position
 	if position_label:

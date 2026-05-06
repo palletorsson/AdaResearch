@@ -1,0 +1,114 @@
+{
+  "map_info": {
+    "name": "Panel Bridge Demo",
+    "lookup_name": "Test_Panel_Bridge",
+    "description": "Test map for the 2D-in-3D VR panel bridge system. Displays three interactive panels (loom selector, draft editor, draft properties) in a cylindrical arc at arm's reach. Click threading/tieup/treadling cells to edit the weaving draft; the drawdown recomputes in real-time.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 8,
+      "depth": 8,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "testing",
+      "category": "textile",
+      "estimated_time": "variable",
+      "learning_objectives": [
+        "VR panel bridge system validation",
+        "2D-in-3D interactive UI",
+        "Weaving draft editing"
+      ]
+    }
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Exit",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
+  },
+  "external_references": {
+    "artifact_registries": [
+      "res://commons/artifacts/registry/panel_bridge.json"
+    ]
+  },
+  "lighting": {
+    "ambient_color": [
+      0.15,
+      0.17,
+      0.22
+    ],
+    "ambient_energy": 0.4,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "color": [
+        0.9,
+        0.85,
+        0.8
+      ],
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": false,
+    "enable_physics": true,
+    "auto_reveal_on_entry": true,
+    "initial_tile_visibility": "visible",
+    "background": {
+      "type": "sky",
+      "color": [
+        0.05,
+        0.07,
+        0.12
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","2"],
+      ["0","1","1","1","1","1","1","2"],
+      ["2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," ","s"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      ["t"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","panel_bridge_loom"," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "]
+    ]
+  }
+}

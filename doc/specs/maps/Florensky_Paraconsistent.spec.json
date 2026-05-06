@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Florensky_Paraconsistent",
+  "home_sequence": "foundationscrisis",
+  "dimensions": {
+    "w": 13,
+    "d": 12
+  },
+  "signature": "florensky_sphere holds contradictory logical states simultaneously; schrodinger_box demonstrates quantum superposition as physical paraconsistency; superposition_display visualizes the coexistence of exclusive states.",
+  "style": null,
+  "echoes": [],
+  "density": 0.018,
+  "breath_zones": [
+    {
+      "size": 108,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 12
+      },
+      "centroid": [
+        6.074074074074074,
+        5.055555555555555
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 7,
+      "token": "schrodinger_box"
+    },
+    {
+      "x": 9,
+      "z": 7,
+      "token": "superposition_display"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 111,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

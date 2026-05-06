@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://tts_speaker_scene_uid"]
+
+[ext_resource type="Script" path="res://commons/scenes/mapobjects/tts_speaker.gd" id="1_script"]
+
+[node name="TTSSpeaker" type="Node3D"]
+script = ExtResource("1_script")

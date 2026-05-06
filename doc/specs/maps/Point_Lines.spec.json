@@ -1,0 +1,128 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Point_Lines",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 7,
+    "d": 27
+  },
+  "signature": "plus_line_puzzle",
+  "style": null,
+  "echoes": [],
+  "density": 0.105,
+  "breath_zones": [
+    {
+      "size": 144,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 25
+      },
+      "centroid": [
+        2.9652777777777777,
+        11.972222222222221
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "line_demo"
+    },
+    {
+      "x": 1,
+      "z": 4,
+      "token": "modulor_man_demo"
+    },
+    {
+      "x": 4,
+      "z": 13,
+      "token": "laser_measure"
+    },
+    {
+      "x": 6,
+      "z": 13,
+      "token": "laser_exploding_sphere"
+    },
+    {
+      "x": 1,
+      "z": 14,
+      "token": "line"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "laser_measure"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "laser_exploding_sphere"
+    },
+    {
+      "x": 1,
+      "z": 15,
+      "token": "line"
+    },
+    {
+      "x": 2,
+      "z": 15,
+      "token": "grabbable_line"
+    },
+    {
+      "x": 4,
+      "z": 15,
+      "token": "laser_measure"
+    },
+    {
+      "x": 6,
+      "z": 15,
+      "token": "laser_exploding_sphere"
+    },
+    {
+      "x": 5,
+      "z": 19,
+      "token": "lightrod"
+    },
+    {
+      "x": 2,
+      "z": 22,
+      "token": "laser_sword"
+    },
+    {
+      "x": 4,
+      "z": 22,
+      "token": "laser_sword"
+    },
+    {
+      "x": 1,
+      "z": 23,
+      "token": "perspective_lines"
+    },
+    {
+      "x": 3,
+      "z": 23,
+      "token": "scale_lines"
+    },
+    {
+      "x": 5,
+      "z": 23,
+      "token": "perspective_lines"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 18,
+    "walkable_cells": 171,
+    "breath_zone_count": 1,
+    "unique_tokens": 11
+  }
+}

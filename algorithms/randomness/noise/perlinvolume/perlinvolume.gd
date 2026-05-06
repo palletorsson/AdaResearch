@@ -7,12 +7,12 @@ extends Node3D
 
 var volume_mesh: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# The entire effect is driven by the shader. This script just sets up
 	# the mesh and provides a basic rotation.
 	setup_scene()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Find the MeshInstance3D in the scene
 	volume_mesh = $VolumeBox
 	if not volume_mesh:
@@ -22,3 +22,6 @@ func setup_scene():
 	# The material is already set in the .tscn file, so we don't need
 	# to create it here. We just need to ensure the shader can receive
 	# updates if necessary (like the TIME uniform, which is built-in).
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

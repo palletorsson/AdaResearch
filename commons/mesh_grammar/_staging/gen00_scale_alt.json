@@ -1,0 +1,24 @@
+{
+  "id": "gen00_scale_alt",
+  "notes": "Alternating extrude with scale jitter on sides.",
+  "seed": "cube",
+  "seed_scale": 0.6,
+  "generations": 3,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "side",
+      "params": {
+        "amount": 0.08
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:inset_inner",
+      "params": {
+        "distance": 0.12,
+        "scale": 0.9
+      }
+    }
+  ]
+}

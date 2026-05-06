@@ -1,0 +1,89 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/ensemble_methods/EnsembleMethods.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/ensemble_methods/ensemble_methods.tscn`.
+Your implementation must bring the `Ensemble Methods` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Ensemble Methods
+
+
+## Folder Summary
+
+The `Ensemble Methods` module provides a 3D sandbox for exploring the ideas behind the Ensemble Methods workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `ensemble_methods.tscn` and the controller script `EnsembleMethods.gd`.
+
+## Overview
+This algorithm demonstrates various ensemble learning techniques that combine multiple machine learning models to improve prediction accuracy, robustness, and generalization performance.
+
+## What It Does
+- **Model Combination**: Combines multiple individual models
+- **Voting Systems**: Implements various voting and aggregation methods
+- **Bagging**: Bootstrap aggregating for improved stability
+- **Boosting**: Sequential model improvement techniques
+- **Stacking**: Meta-learning with multiple base models
+- **Performance Comparison**: Shows ensemble vs. individual model performance
+
+## Key Concepts
+
+### Ensemble Types
+- **Bagging (Bootstrap Aggregating)**: Parallel training of models on bootstrapped samples
+- **Boosting**: Sequential training with focus on difficult examples
+- **Stacking**: Meta-learning using predictions from base models
+- **Voting**: Simple aggregation of model predictions
+- **Random Forest**: Tree-based ensemble with bagging
+
+### Ensemble Benefits
+- **Improved Accuracy**: Better predictions than individual models
+- **Reduced Variance**: More stable and consistent predictions
+- **Better Generalization**: Improved performance on unseen data
+- **Robustness**: Less sensitive to noise and outliers
+- **Diversity**: Different models capture different aspects of data
+
+## Algorithm Features
+- **Multiple Ensemble Methods**: Various ensemble techniques
+- **Real-time Training**: Continuous model training and evaluation
+- **Performance Metrics**: Accuracy, precision, recall tracking
+- **Visual Comparison**: Side-by-side performance visualization
+- **Parameter Control**: Adjustable ensemble parameters
+- **Export Capabilities**: Save ensemble models and results
+
+## Use Cases
+- **Predictive Modeling**: Improving prediction accuracy
+- **Classification**: Better classification performance
+- **Regression**: More accurate regression predictions
+- **Anomaly Detection**: Robust outlier identification
+- **Recommendation Systems**: Improved recommendation quality
+- **Financial Modeling**: Better risk assessment and prediction
+
+## Technical Implementation
+- **GDScript**: Written in Godot's scripting language
+- **Machine Learning**: Various ML algorithm implementations
+- **Ensemble Logic**: Model combination and aggregation
+- **Performance Tracking**: Real-time metrics and evaluation
+- **Memory Management**: Efficient model storage and retrieval
+
+## Performance Considerations
+- Number of models affects training time
+- Ensemble size impacts memory usage
+- Real-time updates require optimization
+- Model complexity affects prediction speed
+
+## Future Enhancements
+- **Additional Ensemble Methods**: More ensemble techniques
+- **Deep Learning**: Neural network ensembles
+- **AutoML**: Automatic ensemble optimization
+- **Custom Models**: User-defined base models
+- **Performance Analysis**: Detailed ensemble analysis tools
+- **Model Persistence**: Save and load ensemble models
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Implement the lifecycle helpers `_ready()`, `_process()`, `create_model_particles()`, `create_prediction_particles()`, `create_vote_particles()`, `create_flow_particles()`.
+- Maintain state containers including `time`, `ensemble_progress`, `accuracy_score`, `diversity_score`, `particle_count`, `flow_particles`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

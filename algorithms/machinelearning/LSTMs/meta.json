@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_LSTMs",
+  "title": "Long Short-Term Memory (LSTMs)",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/LSTMs/LSTMs.tscn",
+  "script": "res://algorithms/machinelearning/LSTMs/LSTMs.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/LSTMs/README.md",
+    "tutorial": "res://algorithms/machinelearning/LSTMs/LSTMs_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/LSTMs/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/LSTMs/summery.md"
+  },
+  "summary": "The `Long Short-Term Memory (LSTMs)` sandbox investigates concepts from Long Short-Term Memory (LSTMs) inside a real-time Godot lab.",
+  "keywords": [
+    "accuracy",
+    "activations",
+    "animate",
+    "cell",
+    "create",
+    "flow"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

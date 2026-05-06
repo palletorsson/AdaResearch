@@ -1,0 +1,81 @@
+{
+  "artifact": "lsystem_tree",
+  "title": "Building a Tree from One Grammar Rule",
+  "concept_layer": "Lindenmayer systems: formal grammar as growth algorithm; string rewriting; turtle interpretation; bracketed branching",
+  "technique_first": ["string rewriting", "iteration loop that replaces symbols", "turtle graphics (stack-based)", "axiom + production rule", "branch push/pop with [ ]", "axis-angle branching"],
+  "technique_reference": ["Recursion (Fractal_Recursion)", "Basis rotation (Trans_Rotation)", "ImmediateMesh lines (Trans_Translation / ForcesFoundations)", "@export parameters (all prior)", "seed for reproducibility (Random_Definition, Noise_Perlin)"],
+  "domain_deferred": ["stochastic grammars \u2192 LSystems_Growth", "context-sensitive rules \u2192 LSystems_Grammars_And_Curves", "parametric L-systems \u2192 genetic_tree_sculptor", "Chomsky hierarchy \u2192 ContextFreeGrammars", "ecological grammars \u2192 LSystems_Living", "space-filling curves \u2192 Hilbert3D"],
+  "capture_leaks": {
+    "deterministic_growth": "F \u2192 F[+F]F[-F]F runs the same way every time. Real plants have randomness, environmental response, gene expression variance. Stochastic L-systems (next map) introduce randomness; ecological L-systems introduce context.",
+    "string_alphabet_small": "We use F, +, -, [, ], but L-systems can have arbitrary alphabets. Parametric L-systems attach values to symbols (F(length), +(angle)).",
+    "no_death": "Branches don\u2019t wither. Real plants prune, shed, heal. L-systems handle this with special symbols, but this artifact doesn\u2019t.",
+    "no_environment": "The grammar runs in vacuum \u2014 no light, no gravity response (phototropism), no collision. LSystems_Living adds environmental feedback.",
+    "bracketed_trees_only": "The [ ] convention makes the structure a tree. Graphs, cycles, mergers are awkward. Graph grammars (graphtheory sequence) handle those."
+  },
+  "limit": "One axiom. One rule. One angle. A plant. The artifact demonstrates that grammar \u2014 a formal system of symbol-replacement \u2014 is enough to generate organic-looking form. What it refuses: stochastic variation, contextual rules, parametric symbols, environmental response, death. Each of those is a door that later L-systems maps open. This is the seed of the entire sequence.",
+  "grammar_alignment": {
+    "sequence": "lsystems",
+    "operations_taught": ["rewrite", "turtle_interpret", "branch"],
+    "operations_deferred_to_sequence": ["parametric_rewrite (parametric L-systems)"],
+    "note": "lsystem_tree teaches THREE operations simultaneously \u2014 it is the densest grammar artifact. rewrite expands the string, turtle_interpret converts symbols to geometry, branch pushes/pops state via [ ]. Each is a separate concept but they compose so tightly that teaching them together is cleaner than apart."
+  },
+  "biome_alignment": {
+    "sequence": "lsystems",
+    "density_at_entry": 0.7,
+    "kingdoms_unlocked": ["flower", "tree", "fungus", "creature"],
+    "hand_verbs_gained": ["write_rule", "branch_grow"],
+    "catalyst_mode": "branching",
+    "movement_abilities_gained": ["climb"],
+    "note": "CRITICAL BIOME TRANSITION. First appearance of the 'creature' kingdom \u2014 the world now has animals. Movement gets 'climb' \u2014 the player can reach elevated terrain by climbing plants. 'write_rule' and 'branch_grow' verbs let the player literally author a grammar and watch it grow. This is the sequence where the world becomes ALIVE."
+  },
+  "stages": [
+    {
+      "title": "From recursion to grammar",
+      "thinking": "Fractal_Recursion taught that a function that calls itself with smaller parameters produces self-similar form. Now a different language for the same kind of thing. Instead of a function, a STRING. Instead of function calls, STRING REWRITES. Start with 'F' (the axiom). Replace every 'F' with 'F[+F]F[-F]F' (the rule). Repeat. The string grows. Then interpret each symbol as a drawing instruction and you have a tree. Grammar is recursion written as text.",
+      "code": "# Fractal_Recursion:\n#   function generate_branch(depth):\n#     if depth > 0:\n#       generate_branch(depth - 1)  # self-call\n#       generate_branch(depth - 1)  # another self-call\n#\n# L-system:\n#   axiom: \"F\"\n#   rule:  F \u2192 F[+F]F[-F]F\n#\n#   iteration 0: F\n#   iteration 1: F[+F]F[-F]F\n#   iteration 2: F[+F]F[-F]F[+F[+F]F[-F]F]F[+F]F[-F]F[-F[+F]F[-F]F]F[+F]F[-F]F\n#   iteration 4: ~1200 characters, looks like a plant\n#\n# Same computation, different representation.",
+      "concepts": ["axiom", "production rule", "string rewriting", "grammar vs function"]
+    },
+    {
+      "title": "The classic Lindenmayer rule",
+      "thinking": "F \u2192 F[+F]F[-F]F. Six symbols. F means 'step forward.' + means 'turn left.' - means 'turn right.' [ means 'save state.' ] means 'restore state.' Starting with just F, after 4 iterations, you have a string that, when interpreted, draws a realistic plant. This specific rule is Lindenmayer\u2019s original. Changing it subtly (F \u2192 FF[+F]F[-F] or F[+F][-F]F) gives a different species. Grammar IS species.",
+      "code": "extends Node3D\nclass_name LSystemTree\n\n@export var iterations: int = 4\n@export var base_angle: float = 25.7  # Lindenmayer's original\n@export var base_length: float = 0.1\n\nconst AXIOM := \"F\"\nconst RULES := {\n\t\"F\": \"F[+F]F[-F]F\"\n\t# Other examples:\n\t#   \"F\": \"FF[+F]F[-F]F\"       # taller, skinnier\n\t#   \"F\": \"F[+F][-F]F\"          # sparse\n\t#   \"F\": \"F[+F-F]F[-F+F]F\"     # kinked\n}",
+      "concepts": ["production rule dictionary", "axiom string", "alphabet symbols", "one-rule grammars"]
+    },
+    {
+      "title": "Rewrite the string N times",
+      "thinking": "For each iteration, walk through the current string and replace every F with its expansion. Other symbols (+, -, [, ]) are copied as-is. After N iterations, the string has grown exponentially. At iteration 4 with this rule, the string is about 1,200 characters. At iteration 6, it\u2019s over 100,000. This is why iteration count is bounded \u2014 memory and render cost explode.",
+      "code": "func _derive_string() -> String:\n\tvar current := AXIOM\n\tfor i in range(iterations):\n\t\tvar next := \"\"\n\t\tfor c in current:\n\t\t\tif RULES.has(c):\n\t\t\t\tnext += RULES[c]\n\t\t\telse:\n\t\t\t\tnext += c  # non-F symbols pass through\n\t\tcurrent = next\n\treturn current\n\n# String lengths for rule F \u2192 F[+F]F[-F]F:\n#   iter 0:    1 char (just 'F')\n#   iter 1:    9 chars\n#   iter 2:   81 chars\n#   iter 3:  729 chars\n#   iter 4: 6561 chars (default max)\n#   iter 5:  59k chars (too many lines for VR)",
+      "concepts": ["iterative rewriting", "exponential string growth", "pass-through symbols", "depth budget"]
+    },
+    {
+      "title": "The turtle \u2014 interpret symbols as drawing commands",
+      "thinking": "A 'turtle' is a virtual pen with position and heading. F: move forward, drawing a segment. +: turn left by base_angle. -: turn right. After deriving the string, walk it symbol by symbol, driving the turtle. Result: a geometric form. The turtle is the simplest interface between symbolic computation and visual form. Seymour Papert\u2019s invention; LOGO\u2019s heart; the missing link between text and picture.",
+      "code": "var turtle_pos: Vector3\nvar turtle_heading: Vector3  # unit vector\nvar turtle_up: Vector3       # for 3D turning\nvar turtle_stack: Array = []  # for [ ] bracketing\n\nfunc _interpret(s: String) -> void:\n\tturtle_pos = Vector3.ZERO\n\tturtle_heading = Vector3.UP\n\tturtle_up = Vector3.BACK\n\tturtle_stack.clear()\n\t\n\tvar lines = []\n\tfor c in s:\n\t\tmatch c:\n\t\t\t\"F\":\n\t\t\t\tvar new_pos = turtle_pos + turtle_heading * base_length\n\t\t\t\tlines.append([turtle_pos, new_pos])\n\t\t\t\tturtle_pos = new_pos\n\t\t\t\"+\":\n\t\t\t\tturtle_heading = turtle_heading.rotated(turtle_up, deg_to_rad(base_angle))\n\t\t\t\"-\":\n\t\t\t\tturtle_heading = turtle_heading.rotated(turtle_up, -deg_to_rad(base_angle))\n\t\t\t\"[\":\n\t\t\t\tturtle_stack.push_back([turtle_pos, turtle_heading, turtle_up])\n\t\t\t\"]\":\n\t\t\t\tvar state = turtle_stack.pop_back()\n\t\t\t\tturtle_pos = state[0]\n\t\t\t\tturtle_heading = state[1]\n\t\t\t\tturtle_up = state[2]\n\treturn lines",
+      "concepts": ["turtle graphics", "heading vector", "rotation around up axis", "state stack for branching", "match statement"]
+    },
+    {
+      "title": "The square brackets \u2014 save and restore state",
+      "thinking": "[ pushes turtle state onto a stack. ] pops it, restoring position and heading. Between a matching [ and ], the turtle wanders \u2014 then snaps back as if nothing happened. This is branching. Without [ ], a string like F[+F]F would make the turtle turn, draw, turn back, draw more \u2014 not a branch but a zigzag. The stack gives us recursion in-place without function calls.",
+      "code": "# [ ] is the hinge between strings and trees.\n#\n# Without stack:\n#   F+F-F    draws a zigzag (one line)\n#\n# With stack:\n#   F[+F][-F]F    draws a trunk with two branches\n#        ^^^^ 'save state' before turning,\n#              draw branch,\n#              'restore' and continue\n#\n# The stack makes a flat string represent a tree.\n# LIFO push/pop IS hierarchy.\n\n\"[\":\n\tturtle_stack.push_back([turtle_pos, turtle_heading, turtle_up])\n\"]\":\n\tvar state = turtle_stack.pop_back()\n\tturtle_pos = state[0]\n\tturtle_heading = state[1]\n\tturtle_up = state[2]",
+      "concepts": ["stack (LIFO)", "push/pop", "state serialization as array", "tree structure in flat string"]
+    },
+    {
+      "title": "Render the line segments with depth coloring",
+      "thinking": "After the turtle walks the string, we have a list of (start, end) line segments. Render them with ImmediateMesh. The trick: color based on how deep the segment is in the tree (how many [ ] above it). Trunk = brown. Deep branches = green. This gives the tree its plant-like appearance without any extra code \u2014 the structure itself produces the gradient.",
+      "code": "func _render_lines(lines: Array) -> void:\n\tvar im = ImmediateMesh.new()\n\tim.surface_begin(Mesh.PRIMITIVE_LINES)\n\t\n\tfor line in lines:\n\t\tvar start = line[0]\n\t\tvar end = line[1]\n\t\tvar depth = line[2] if line.size() > 2 else 0  # depth in bracket stack\n\t\t\n\t\t# Depth 0 = trunk (brown), deeper = greener\n\t\tvar t = float(depth) / float(iterations)\n\t\tvar color = trunk_color.lerp(tip_color, t)\n\t\t\n\t\tim.surface_set_color(color)\n\t\tim.surface_add_vertex(start)\n\t\tim.surface_set_color(color)\n\t\tim.surface_add_vertex(end)\n\t\n\tim.surface_end()\n\t_line_mesh.mesh = im",
+      "concepts": ["ImmediateMesh PRIMITIVE_LINES", "depth as color parameter", "Color.lerp", "structural aesthetic"]
+    },
+    {
+      "title": "Parameters \u2014 iteration count, angle, base length",
+      "thinking": "Three @export sliders. Iterations (1-5): sapling to forest giant. Base angle (10-45 degrees): palm (wide) to pine (narrow) to bush (spread). Base length (0.05-0.2): compact to sprawling. Same axiom, same rule \u2014 three parameters turn the grammar into a species. This is the real lesson: L-systems are not 'one plant' but a parameterized family. Change two numbers and get a different genus.",
+      "code": "@export var iterations: int = 4     # 1\u20135 reasonable, >5 explodes\n@export var base_angle: float = 25.7  # 10\u201345 reasonable\n@export var base_length: float = 0.1 # scale of each F segment\n\nfunc apply_grid_config(config: Dictionary) -> void:\n\tif config.has(\"iterations\"):\n\t\titerations = clampi(int(config[\"iterations\"]), 1, 6)\n\tif config.has(\"base_angle\"):\n\t\tbase_angle = float(config[\"base_angle\"])\n\tif config.has(\"base_length\"):\n\t\tbase_length = float(config[\"base_length\"])\n\trebuild()\n\nfunc rebuild() -> void:\n\t_clear()\n\tvar s = _derive_string()\n\tvar lines = _interpret(s)\n\t_render_lines(lines)",
+      "concepts": ["parameter \u2192 species", "apply_grid_config", "bounded iterations", "pedagogy via sliders"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The L-system tree knows what it is. Not a plant \u2014 a DEMONSTRATION that grammar is growth. One rule, one axiom, one angle. Repeat four times, interpret, render. The whole sequence follows from this atom: stochastic variants, context-sensitive rules, parametric attributes, ecological feedback. But all of them begin with F \u2192 F[+F]F[-F]F. The tree is the proof that Lindenmayer found in 1968: plants are computable, and the computation is short.",
+      "code": "# @identity\n# essence: F \u2192 F[+F]F[-F]F at 25.7\u00b0 \u2014 the classic Lindenmayer plant in one rule\n# desire: To stand as the canonical L-system tree \u2014 the simplest grammar that produces a convincing plant\n# critical_parameter: base_angle (25.7\u00b0) \u2014 Lindenmayer's original angle, balancing spread and density perfectly\n# triggers: Changing iterations \u2192 sapling to forest giant; adjusting angle \u2192 palm to pine to bush\n# emerges: Branching depth creates a brown-to-green gradient \u2014 trunk becomes canopy through recursion alone\n# needs: VR iteration/angle controls [missing], Label3D [has]\n# relationships: Appears in LSystems_Grammar_Lab, LSystems_Growth, and LSystems_Living. The reference tree for the whole sequence.\n# truth: One rule, one angle, one axiom \u2014 a tree grows.",
+      "concepts": ["@identity", "grammar as species", "Lindenmayer 1968", "computable biology", "truth"]
+    }
+  ]
+}

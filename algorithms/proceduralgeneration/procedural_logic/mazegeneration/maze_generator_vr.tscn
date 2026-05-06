@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3mvr1kpma0e"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/mazegeneration/maze_generator_vr.gd" id="1_maze_vr"]
+
+[node name="MazeGeneratorVR" type="Node3D"]
+script = ExtResource("1_maze_vr")
+maze_width = 15
+maze_height = 15
+cell_size = 2.0
+wall_height = 2.8
+wall_thickness = 0.3
+generation_speed = 0.05
+show_generation = true
+add_ambient_light = true

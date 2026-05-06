@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djul1asetexpl"]
+
+[ext_resource type="Script" uid="uid://cjul1asetexpl" path="res://commons/artifacts/julia_set_explorer/julia_set_explorer.gd" id="1_script"]
+
+[node name="JuliaSetExplorer" type="Node3D"]
+script = ExtResource("1_script")

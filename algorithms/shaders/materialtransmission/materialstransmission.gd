@@ -47,7 +47,7 @@ void fragment() {
 	vec2 screen_uv = SCREEN_UV;
 	
 	// Calculate refraction offset based on surface normal and view direction
-	vec3 refracted_ray = refract(-view_direction, world_normal, 1.0 / ior);
+	vec3 refracted_ray = refmod(-view_direction, world_normal, 1.0 / ior, 1.0);
 	vec2 refraction_offset = refracted_ray.xy * refraction_strength * 0.1;
 	
 	// Sample background with refraction offset
@@ -162,12 +162,12 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_transmission_environment()
 	create_transmission_objects()
 	start_transmission_animations()
 
-func setup_transmission_environment():
+func setup_transmission_environment() -> void:
 	# Create environment optimized for transmission materials
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -195,12 +195,12 @@ func setup_transmission_environment():
 	# Add directional light for transmission highlights
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(5, 10, 5)
-	light.look_at(Vector3.ZERO, Vector3.UP)
+	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
 	light.light_energy = 1.2
 	light.shadow_enabled = true
 	add_child(light)
 
-func create_transmission_objects():
+func create_transmission_objects() -> void:
 	# Create various geometric objects with transmission materials
 	var geometries = [
 		SphereMesh.new(),
@@ -283,7 +283,7 @@ func create_transmission_objects():
 		transmission_objects.append(mesh_instance)
 		transmission_materials.append(material)
 
-func start_transmission_animations():
+func start_transmission_animations() -> void:
 	# Animate transmission objects
 	for i in range(transmission_objects.size()):
 		var obj = transmission_objects[i]
@@ -313,7 +313,7 @@ func _process(_delta):
 	# Optional: Update transmission parameters dynamically
 	update_dynamic_transmission()
 
-func update_dynamic_transmission():
+func update_dynamic_transmission() -> void:
 	# Example: Pulse transmission strength with time
 	var time_factor = sin(Time.get_time_dict_from_system()["second"] * 0.3) * 0.1 + 1.0
 	
@@ -334,9 +334,10 @@ func update_dynamic_transmission():
 				material.set_shader_parameter("sparkle_intensity", base_sparkle * time_factor)
 
 # Function to add more transmission objects dynamically
-func add_transmission_object(position: Vector3, material_type: String = "advanced"):
+func add_transmission_object(position: Vector3, material_type: String = "advanced") -> void:
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.8
+	sphere_mesh.height = 1.6
 	
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = sphere_mesh
@@ -366,7 +367,7 @@ func add_transmission_object(position: Vector3, material_type: String = "advance
 	transmission_materials.append(material)
 
 # Preset transmission configurations
-func set_transmission_preset(preset: String):
+func set_transmission_preset(preset: String) -> void:
 	match preset:
 		"subtle":
 			transmission_strength = 0.6
@@ -380,3 +381,12 @@ func set_transmission_preset(preset: String):
 		_: # "default"
 			transmission_strength = 1.0
 			refraction_intensity = 0.3
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

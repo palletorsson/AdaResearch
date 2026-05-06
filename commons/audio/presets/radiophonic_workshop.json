@@ -1,0 +1,95 @@
+{
+    "name": "Radiophonic Workshop",
+    "description": "BBC Radiophonic Workshop style - Delia Derbyshire, Doctor Who era. Tape loops, ring modulation, oscillator sweeps, musique concrète textures.",
+    "style_notes": {
+        "influences": ["Delia Derbyshire", "Brian Hodgson", "Doctor Who Theme", "White Noise"],
+        "era": "1958-1975",
+        "techniques": [
+            "Ring modulation for metallic tones",
+            "Oscillator swoops and sweeps",
+            "Rhythmic loops from repeated patterns",
+            "Layered sine/square wave textures",
+            "Filtered noise for texture"
+        ]
+    },
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.RADIOPHONIC_TEXTURE",
+            "volume_db": -6.0,
+            "bus": "Atmosphere"
+        },
+        {
+            "sound_id": "AudioSynthesizer.TAPE_LOOP_RHYTHM",
+            "volume_db": -10.0,
+            "bus": "Rhythm"
+        }
+    ],
+    "placeholder_layer": {
+        "sound_id": "AudioSynthesizer.RING_MOD_DRONE",
+        "volume_db": -12.0,
+        "bus": "Atmosphere",
+        "fade_out_when_ready": true,
+        "fade_duration": 4.0
+    },
+    "random_events": [
+        {
+            "sound_id": "AudioSynthesizer.OSCILLATOR_SWOOP",
+            "interval_range": [8.0, 20.0],
+            "volume_db": -14.0,
+            "bus": "FX"
+        },
+        {
+            "sound_id": "AudioSynthesizer.TARDIS_LIKE_BURST",
+            "interval_range": [15.0, 40.0],
+            "volume_db": -16.0,
+            "bus": "FX"
+        }
+    ],
+    "buses": {
+        "Atmosphere": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.35
+                },
+                {
+                    "type": "EQ",
+                    "band_1_freq": 200,
+                    "band_1_gain_db": -3.0
+                }
+            ]
+        },
+        "Rhythm": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 375,
+                    "feedback": 0.3,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.5
+                }
+            ]
+        }
+    },
+    "generation": {
+        "async": true,
+        "persist_across_maps": true
+    },
+    "synthesis_parameters": {
+        "ring_mod_carrier_hz": 800,
+        "ring_mod_modulator_hz": 120,
+        "swooping_freq_range": [50, 2000],
+        "swoop_duration_range": [0.5, 3.0],
+        "tape_loop_speed_variation": 0.02,
+        "drone_base_frequencies": [55, 110, 165]
+    }
+}

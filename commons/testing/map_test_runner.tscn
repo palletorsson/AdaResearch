@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://cut84uds4bdnm"]
+
+[ext_resource type="Script" uid="uid://lqeedqhm41pc" path="res://commons/scenes/LabGridSystem.gd" id="1_labgrid"]
+[ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_grid"]
+[ext_resource type="Script" uid="uid://bjujn8un1qu6u" path="res://commons/testing/MapTestRunner.gd" id="3_runner"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_top_color = Color(0.3, 0.3, 0.4, 1)
+sky_horizon_color = Color(0.5, 0.5, 0.55, 1)
+ground_bottom_color = Color(0.15, 0.15, 0.2, 1)
+ground_horizon_color = Color(0.4, 0.4, 0.45, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_color = Color(0.7, 0.7, 0.75, 1)
+ambient_light_energy = 1.5
+tonemap_mode = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.05, 0.05, 0.1, 0.85)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="MapTestRunner" type="Node3D" unique_id=1694856587]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1045273886]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1583213595]
+transform = Transform3D(-0.866, -0.433, 0.25, 0, 0.5, 0.866, -0.5, 0.75, -0.433, 0, 10, 0)
+shadow_enabled = true
+
+[node name="TestCamera" type="Camera3D" parent="." unique_id=395955150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 8, -3)
+current = true
+fov = 70.0
+
+[node name="LabGridSystem" parent="." unique_id=999202173 instance=ExtResource("2_grid")]
+script = ExtResource("1_labgrid")
+auto_load_map_on_ready = false
+lab_mode = true
+lab_cube_color = Color(0.95, 0.95, 0.98, 1)
+lab_ambient_color = Color(0.9, 0.9, 1, 1)
+map_name = "Lab"
+
+[node name="MapTestRunnerNode" type="Node3D" parent="." unique_id=124994858]
+script = ExtResource("3_runner")
+wait_for_initial_load = false
+
+[node name="TimeoutTimer" type="Timer" parent="MapTestRunnerNode" unique_id=1998204625]
+one_shot = true
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1969435457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1487935462]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="TestOverlay" type="CanvasLayer" parent="." unique_id=1038333323]
+layer = 10
+
+[node name="InfoPanel" type="PanelContainer" parent="TestOverlay" unique_id=1595930408]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 500.0
+offset_bottom = 120.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="TestOverlay/InfoPanel" unique_id=850965705]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="TestOverlay/InfoPanel/VBox" unique_id=236004870]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "MAP TEST RUNNER"
+
+[node name="StatusLabel" type="Label" parent="TestOverlay/InfoPanel/VBox" unique_id=1074624872]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Initializing..."
+
+[node name="DetailLabel" type="Label" parent="TestOverlay/InfoPanel/VBox" unique_id=1810427639]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.8, 0.9)
+theme_override_font_sizes/font_size = 13
+
+[node name="ProgressBar" type="ProgressBar" parent="TestOverlay/InfoPanel/VBox" unique_id=1367483546]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+show_percentage = false

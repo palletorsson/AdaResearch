@@ -1,68 +1,63 @@
 {
 	"map_info": {
-		"name": "Lab_Post_Array",
-		"description": "Lab State After Array Tutorial - New artifacts and sequences unlocked",
-		"version": "1.0",
+		"name": "Lab_Post_Geometric",
+		"description": "LEGACY/ORPHAN - geometric_algorithms was renamed to computationalgeometry. The real post-lab is map_data_post_computationalgeometry.json. This file contained Lab_Post_Array data and has been corrected to identify itself. Not in active progression graph.",
+		"version": "2.1",
 		"format": "json_lab_progressive",
-		"progression_state": "post_array_tutorial",
+		"progression_state": "post_geometric",
+		"_anomaly_note": "Originally contained Lab_Post_Array data with t:geometric_algorithms teleporter. The sequence was renamed to computationalgeometry and a proper post-lab exists at map_data_post_computationalgeometry.json. This file is a v1.0 legacy remnant.",
 		"dimensions": {
 			"width": 7,
 			"depth": 7,
-			"max_height": 3
+			"max_height": 6
 		},
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": [
-				"Explore newly unlocked artifacts",
-				"Access to randomness exploration",
-				"Multiple sequence paths available"
-			]
+			"status": "legacy_orphan",
+			"learning_objectives": [ "Legacy layout from early Lab design", "geometric_algorithms teleporter (now computationalgeometry)", "Not in active branch graph" ]
 		}
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["0", "0", "0", "0", "0", "0", "0"]
+			[ "1", "1", "1", "1", "1", "1", "0" ],
+			[ "1", "1", "1", "1", "1", "1", "0" ],
+			[ "1", "1", "1", "1", "1", "1", "0" ],
+			[ "1", "1", "1", "1", "1", "1", "0" ],
+			[ "1", "1", "1", "1", "1", "1", "0" ],
+			[ "1", "1", "1", "1", "1", "1", "0" ],
+			[ "0", "0", "0", "0", "0", "0", "0" ]
 		],
 		"static_objects": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ]
 		],
 		"utilities": [
-			[" ", " ", " ", "q", "q", " ", " "],
-			[" ", "", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "t:geometric_algorithms", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "t:array_tutorial", " ", "t:randomness_exploration", " ", " ", " "],
-			[" ", "", " ", "", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", "q", "q", " ", " " ],
+			[ " ", "", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", "t:geometric_algorithms", "m:t:geometric_algorithms:0.1", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", "t:array_tutorial", " ", "t:randomness", " ", " ", " " ],
+			[ " ", "", " ", "", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			["xyz_coordinates", " ", " ", " ", " ", " ", " "],
-			["", "rotating_cube", " ", " ", " ", " ", " "],
-			[" ", "", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", "", " ", "becoming_catalyst", " ", "loving_triangle", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ "xyz_coordinates", " ", " ", " ", " ", " ", " " ],
+			[ "", "rotating_cube", " ", " ", " ", " ", " " ],
+			[ " ", "", " ", " ", " ", " ", " " ]
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/hazards.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -75,18 +70,38 @@
 	},
 	"spawn_points": {
 		"default": {
-			"position": [0.5, 1.8, 6.0],
-			"rotation": [0.0, 180.0, 0.0],
+			"position": [
+				0.5,
+				1.8,
+				6
+			],
+			"rotation": [
+				0,
+				180,
+				0
+			],
 			"description": "Main entrance - now with sequence access"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.2, 0.2, 0.3],
+		"ambient_color": [
+			0.2,
+			0.2,
+			0.3
+		],
 		"ambient_energy": 0.2,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				1,
+				0.9,
+				0.8
+			],
 			"energy": 0.5
 		},
 		"lab_atmosphere": {
@@ -94,16 +109,17 @@
 		}
 	},
 	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
+		"enter_type": "corridor",
+		"cube_size": 1,
+		"gutter": 0,
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
-		"progression_state": "post_array_tutorial",
+		"progression_state": "post_geometric",
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"initial_artifacts": [ "rotating_cube", "xyz_coordinates" ],
 			"unlock_on_sequence_completion": true
 		}
 	}

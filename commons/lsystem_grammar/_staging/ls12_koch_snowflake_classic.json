@@ -1,0 +1,26 @@
+{
+  "id": "ls12_koch_snowflake_classic",
+  "axiom": "F++F++F",
+  "rules": {
+    "F": "F-F++F-F"
+  },
+  "iterations": 4,
+  "angle_deg": 60,
+  "step_len": 0.02,
+  "interpretation": "lines",
+  "color_trunk": [
+    0.18,
+    0.28,
+    0.55
+  ],
+  "color_tip": [
+    0.42,
+    0.78,
+    0.92
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.4,
+  "layout": "fractal_curve",
+  "dna_connections": [],
+  "notes": "Koch snowflake family from the Grogra L-system overview: triangle axiom with F->F-F++F-F at 60 degrees."
+}

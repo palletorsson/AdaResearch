@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Wavefunctions_ColoredLinesVRCorridor",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 33
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.005,
+  "breath_zones": [
+    {
+      "size": 393,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 33
+      },
+      "centroid": [
+        5.493638676844784,
+        16.005089058524174
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "ColoredLinesVR"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 395,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

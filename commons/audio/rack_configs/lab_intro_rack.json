@@ -1,0 +1,83 @@
+{
+	"rack_info": {
+		"name": "Lab Intro Rack",
+		"description": "Sterile sci-fi lab ambience - multi-layered sine wave hum with subtle modulation",
+		"version": "1.0",
+		"sound_type": "lab_hum"
+	},
+	"layout": {
+		"padding_px": 20,
+		"gap_px": 15,
+		"hide_selection": true,
+		"hide_buttons": true,
+		"cable_accent_color": "#00ccff",
+		"cable_glow": 0.5
+	},
+	"grid": [
+		["lbl_title", " ", " ", "mtr_vol", "disp_waveform"],
+		["btn_on", "sl_freq", "sl_amp"],
+		["btn_off", "sl_dur", "sl_mod"]
+	],
+	"control_definitions": {
+		"lbl_title": {
+			"type": "label",
+			"label": "LAB INTRO"
+		},
+		"btn_on": {
+			"type": "btn",
+			"label": "PLAY",
+			"action": "play",
+			"color": "#00ccff"
+		},
+		"btn_off": {
+			"type": "btn",
+			"label": "STOP",
+			"action": "stop",
+			"color": "#006699"
+		},
+		"sl_freq": {
+			"type": "slider",
+			"label": "Base Freq",
+			"parameter": "base_freq",
+			"min": 50.0,
+			"max": 200.0,
+			"default": 60.0
+		},
+		"sl_amp": {
+			"type": "slider",
+			"label": "Volume",
+			"parameter": "amplitude",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.25
+		},
+		"sl_dur": {
+			"type": "slider",
+			"label": "Duration",
+			"parameter": "duration",
+			"min": 1.0,
+			"max": 30.0,
+			"default": 10.0
+		},
+		"sl_mod": {
+			"type": "slider",
+			"label": "Modulation",
+			"parameter": "mod_depth",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.3
+		},
+		"mtr_vol": {
+			"type": "meter",
+			"label": "VU",
+			"source": "rack"
+		},
+		"disp_waveform": {
+			"type": "simple_waveform",
+			"label": "HUM",
+			"source": "rack",
+			"freq_param": "base_freq",
+			"amp_param": "amplitude"
+		}
+	}
+}

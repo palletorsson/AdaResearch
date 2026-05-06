@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGeneration_CubeMound",
+  "home_sequence": "proceduralgeneration_all",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.011,
+  "breath_zones": [
+    {
+      "size": 177,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        5.971751412429379,
+        6.4124293785310735
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 10,
+      "z": 1,
+      "token": "cube_mound_scene_sphere"
+    },
+    {
+      "x": 1,
+      "z": 11,
+      "token": "cube_mound_scene"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 179,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

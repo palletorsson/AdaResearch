@@ -1,0 +1,90 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_Synthesis",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 21,
+    "d": 19
+  },
+  "signature": "cantor_set",
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.026,
+  "breath_zones": [
+    {
+      "size": 370,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 21,
+        "d": 19
+      },
+      "centroid": [
+        10.097297297297297,
+        8.594594594594595
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 6,
+      "z": 2,
+      "token": "cantor_set",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "fractal_recursion_1"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "koch_curve"
+    },
+    {
+      "x": 10,
+      "z": 4,
+      "token": "strange_attractors"
+    },
+    {
+      "x": 10,
+      "z": 6,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "recursive_tree"
+    },
+    {
+      "x": 15,
+      "z": 8,
+      "token": "fibonacci_sequences"
+    },
+    {
+      "x": 10,
+      "z": 10,
+      "token": "fractal_clouds"
+    },
+    {
+      "x": 5,
+      "z": 14,
+      "token": "sierpinski_triangle"
+    },
+    {
+      "x": 15,
+      "z": 14,
+      "token": "romanesco"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 10,
+    "walkable_cells": 380,
+    "breath_zone_count": 1,
+    "unique_tokens": 10
+  }
+}

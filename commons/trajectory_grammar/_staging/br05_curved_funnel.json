@@ -1,0 +1,71 @@
+{
+  "id": "br05_curved_funnel",
+  "force": "bouncing_gravity",
+  "params": {
+    "gravity": 9.8,
+    "extrude_rate": 0.25,
+    "walls": [],
+    "plates": [
+      {
+        "a": [
+          -1.2,
+          1.2
+        ],
+        "b": [
+          -0.15,
+          -0.2
+        ],
+        "restitution": 0.7
+      },
+      {
+        "a": [
+          1.2,
+          1.2
+        ],
+        "b": [
+          0.15,
+          -0.2
+        ],
+        "restitution": 0.7
+      },
+      {
+        "a": [
+          -0.3,
+          -0.3
+        ],
+        "b": [
+          0.3,
+          -0.3
+        ],
+        "restitution": 0.7
+      }
+    ]
+  },
+  "initial": {
+    "pos": [
+      0.1,
+      2.5
+    ],
+    "vel": [
+      0.05,
+      0.0
+    ]
+  },
+  "duration": 12.0,
+  "dt": 0.005,
+  "interpretation": "tube",
+  "tube_radius": 0.02,
+  "color_start": [
+    0.25,
+    0.35,
+    0.6
+  ],
+  "color_end": [
+    0.95,
+    0.5,
+    0.25
+  ],
+  "camera_yaw": 0.45,
+  "camera_pitch": 0.15,
+  "notes": "Two angled plates form a V-funnel; ball enters top, ricochets between walls, settles into a bowl at the bottom. Time axis extruded along Z so the bouncing history stacks vertically \u2014 frozen process visible as 3D sculpture."
+}

@@ -1,0 +1,3 @@
+Captures trace into a line. Here relational history becomes discipline: the trace is formalized into directed relation. This map stages the first formal link between discrete moments, converting duration into geometry. Lines are not given; they are captured traces.
+
+The `line_renderer` draws between two endpoints you place. The `distance_label` makes the measurement explicit — a scalar appears where before there was only spatial intuition. The `direction_arrow` reveals that the same two points hold two relations, one forward and one back. A line is not a thing. It is a negotiation between two commitments in space, the moment duration agrees to be measured.

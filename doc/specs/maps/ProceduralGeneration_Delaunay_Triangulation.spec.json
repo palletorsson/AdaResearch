@@ -1,0 +1,60 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGeneration_Delaunay_Triangulation",
+  "home_sequence": "proceduralgeneration_all",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.022,
+  "breath_zones": [
+    {
+      "size": 177,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        5.994350282485875,
+        6.491525423728813
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "delaunay_triangulation_3d_cell"
+    },
+    {
+      "x": 8,
+      "z": 3,
+      "token": "delaunay_triangulation_3d_cell"
+    },
+    {
+      "x": 3,
+      "z": 8,
+      "token": "delaunay_triangulation_3d_cell"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "delaunay_triangulation_3d_cell"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 181,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

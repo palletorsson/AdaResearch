@@ -1,0 +1,165 @@
+{
+  "sequence": "grow_map_sandbox",
+  "generated_at": "2026-04-29T20:48:00.791693Z",
+  "runs": [
+    {
+      "base": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric",
+      "variants": [
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.79,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.74,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.96,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        },
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mesh_grammar_artifact_root"]
+
+[ext_resource type="Script" path="res://commons/artifacts/mesh_grammar_artifact/mesh_grammar_artifact.gd" id="1_mga"]
+
+[node name="MeshGrammarArtifact" type="Node3D"]
+script = ExtResource("1_mga")

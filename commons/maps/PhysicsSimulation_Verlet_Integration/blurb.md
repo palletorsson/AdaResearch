@@ -1,0 +1,5 @@
+Forget velocity. Verlet integration remembers where you were and where you are — that's enough. The formula: take the current position, double it, subtract the previous position, add acceleration scaled by time squared. x_new = 2x - x_prev + a·dt². No velocity variable. No momentum tracking. Just positions and their ghosts.
+
+Two particles orbit side by side under identical forces. The red one runs Euler — velocity plus acceleration times dt, position plus velocity times dt. Its orbit spirals outward. Energy leaks in with every step. Given enough time, the particle escapes entirely. The blue one runs Verlet. Its orbit precesses — the ellipse rotates slowly — but it never escapes. Energy stays bounded. The difference is structural: Verlet is symplectic, time-reversible, and forgets the one variable everyone assumed was essential.
+
+A ghost line connects the previous position to the current position to the projected next position. That line IS the algorithm. The direction from past to present, extrapolated forward, plus a correction from acceleration. No velocity was computed. No velocity was needed.

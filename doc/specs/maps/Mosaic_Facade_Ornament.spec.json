@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Mosaic_Facade_Ornament",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 22,
+    "d": 22
+  },
+  "signature": "pattern_tile_puzzle lets the learner isolate repeating ornamental modules from facade photographs \u2014 a single volute",
+  "style": null,
+  "echoes": [],
+  "density": 0.002,
+  "breath_zones": [
+    {
+      "size": 482,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 22,
+        "d": 22
+      },
+      "centroid": [
+        10.533195020746888,
+        10.533195020746888
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "floor_plan_space"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 483,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

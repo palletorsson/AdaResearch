@@ -1,0 +1,38 @@
+{
+  "name": "ML_Gradient_Landscape",
+  "title": "Descending the Loss Surface",
+  "description": "Navigate a loss landscape made physical \u00e2\u20ac\u201d slopes, ridges, and valleys represent the terrain gradient descent must traverse. Feel optimization in your feet.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 9
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    9,
+    7
+  ],
+  "teleport": [
+    8,
+    7
+  ],
+  "artifacts": [
+    {
+      "name": "gradient_descent_visualization",
+      "row": 2,
+      "col": 2,
+      "family": "algorithms_misc"
+    },
+    {
+      "name": "pca_visualization",
+      "row": 4,
+      "col": 4,
+      "family": "machinelearning"
+    },
+    {
+      "name": "loss_function_comparator",
+      "row": 7,
+      "col": 5,
+      "family": "machinelearning"
+    }
+  ]
+}

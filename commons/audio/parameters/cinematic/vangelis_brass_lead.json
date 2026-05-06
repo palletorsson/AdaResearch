@@ -1,0 +1,24 @@
+{
+    "vangelis_brass_lead": {
+        "_metadata": {
+            "generator": "Cinematic",
+            "description": "Iconic analog brass lead sound",
+            "tags": "brass, lead, synth, vangelis, cinematic",
+            "version": "1.0"
+        },
+        "parameters": {
+            "brightness": {
+                "value": 0.7,
+                "min": 0.0,
+                "max": 1.0,
+                "step": 0.1
+            },
+            "glide": {
+                "value": 0.1,
+                "min": 0.0,
+                "max": 0.5,
+                "step": 0.01
+            }
+        }
+    }
+}

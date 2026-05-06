@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_variational_autoencoders_VAEs",
+  "title": "Variational Autoencoders (VAEs)",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/variational_autoencoders_VAEs/variational_autoencoders_VAEs.tscn",
+  "script": "res://algorithms/machinelearning/variational_autoencoders_VAEs/VariationalAutoencodersVAEs.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/variational_autoencoders_VAEs/README.md",
+    "tutorial": "res://algorithms/machinelearning/variational_autoencoders_VAEs/variational_autoencoders_VAEs_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/variational_autoencoders_VAEs/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/variational_autoencoders_VAEs/summery.md"
+  },
+  "summary": "The `Variational Autoencoders (VAEs)` sandbox investigates concepts from Variational Autoencoders (VAEs) inside a real-time Godot lab.",
+  "keywords": [
+    "animate",
+    "create",
+    "decoder",
+    "divergence",
+    "encoder",
+    "flow"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Noise_One",
+  "home_sequence": "noise",
+  "dimensions": {
+    "w": 11,
+    "d": 11
+  },
+  "signature": "noiselayers displays each octave as a separate visual layer before summation",
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.032,
+  "breath_zones": [
+    {
+      "size": 95,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 11
+      },
+      "centroid": [
+        4.968421052631579,
+        4.957894736842105
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "noisetorus"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "noiselayers"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 95,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

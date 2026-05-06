@@ -1,0 +1,1 @@
+Color space as geometry. Hue circles the equator, saturation extends from the pole, lightness runs north-south. The color sphere organizes all colors into navigable territory. Move through the space and feel relationships: complementaries opposite, analogues adjacent, neutrals at center.

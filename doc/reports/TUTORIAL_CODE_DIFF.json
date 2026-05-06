@@ -1,0 +1,6198 @@
+{
+  "summary_all": {
+    "maps": 179,
+    "total_declared_symbols": 1677,
+    "total_divergences": 1410,
+    "match_ratio": 0.159
+  },
+  "summary_content": {
+    "maps": 163,
+    "total_declared_symbols": 1493,
+    "total_divergences": 1255,
+    "match_ratio": 0.159
+  },
+  "summary_chambers": {
+    "maps": 16,
+    "total_declared_symbols": 184,
+    "total_divergences": 155,
+    "match_ratio": 0.158
+  },
+  "maps": [
+    {
+      "sequence": "primitives",
+      "map": "Point_One",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "draw_axes",
+          "snap_to_grid"
+        ],
+        "missing": [
+          "are_same_point",
+          "make_interactive",
+          "place_point",
+          "report_position"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/primitives/gyroscope.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Line",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "draw_line"
+        ],
+        "missing": [
+          "attach_distance_label",
+          "closest_point_on_line",
+          "point_at",
+          "point_to_line_distance"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "closest_grid_neighbour",
+          "connect_diagonal",
+          "connect_horizontal",
+          "connect_vertical",
+          "graph_stats",
+          "move_point",
+          "spawn_grid",
+          "vertex_degree"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Trace",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "has_loop",
+          "load_trace",
+          "render_trace",
+          "render_with_fade",
+          "save_trace",
+          "simplify_trace",
+          "total_path_length"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Line_Grid",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "cell_to_world"
+        ],
+        "missing": [
+          "draw_visited_lines",
+          "highlight_cell",
+          "path_length_cells",
+          "quantised_step",
+          "world_to_cell"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Triangle",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "draw_triangle",
+          "subdivide"
+        ],
+        "missing": [
+          "fill_triangle",
+          "point_in_triangle",
+          "triangle_area",
+          "triangle_normal"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "convex_hull"
+        ],
+        "missing": [
+          "are_neighbours",
+          "centroid",
+          "color_by_type",
+          "group_into_scene",
+          "rotate_group",
+          "shapes_overlap",
+          "shortest_distance",
+          "spawn_triangle_and_square"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "face_count"
+        ],
+        "missing": [
+          "euler_check",
+          "interior_angle_sum",
+          "solid_volume",
+          "spawn_polyhedron",
+          "tetrahedron_vertices"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "pause_animation",
+          "resume_animation"
+        ],
+        "missing": [
+          "animation_progress",
+          "redirect_tween"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "LocalObject"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_broadcast",
+          "emit_local_event",
+          "forget",
+          "knows",
+          "public_report",
+          "share_facts_with",
+          "teach"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Primitives_Portals",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Portal"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_body_entered"
+        ],
+        "missing": [
+          "can_teleport",
+          "is_valid_pair",
+          "setup_portal_camera"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "linked_portal"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SandFall"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "compose_melencolia",
+          "spawn_comet",
+          "spawn_compass",
+          "spawn_hourglass",
+          "spawn_magic_square",
+          "spawn_melencolia_polyhedron",
+          "truncated_rhombohedron_vertices"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "RotationCube",
+          "ScaleCube",
+          "TransportCube"
+        ],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "activate",
+          "scale",
+          "translate"
+        ],
+        "missing": [
+          "combine",
+          "get_origin",
+          "invert",
+          "is_identity",
+          "rotate_y",
+          "srt"
+        ]
+      },
+      "exports": {
+        "present": [
+          "rotation_axis",
+          "scale_factor"
+        ],
+        "missing": [
+          "rotation_angle_deg",
+          "translation_offset"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Translation",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "move_to"
+        ],
+        "missing": [
+          "combine",
+          "get_origin",
+          "invert",
+          "is_identity",
+          "move_along_bezier",
+          "move_forward",
+          "move_relative_to",
+          "move_sequence",
+          "nudge",
+          "tween_to"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_AxisDecomposition",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "combine",
+          "component_along",
+          "components_on_axes",
+          "decompose_custom",
+          "draw_decomposition",
+          "get_origin",
+          "invert",
+          "is_identity",
+          "project_onto_plane",
+          "reconstruct",
+          "sum_components"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Rotation",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "animate_rotation",
+          "apply_quaternion",
+          "combine",
+          "euler_rotate",
+          "get_origin",
+          "invert",
+          "is_identity",
+          "quaternion_rotation",
+          "rotate_around",
+          "rotate_vector",
+          "rotate_y",
+          "slerp_rotation"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_RotationSpectacle",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "add_counter_layer",
+          "attach_ring",
+          "build_frame",
+          "build_multi_ring",
+          "combine",
+          "get_origin",
+          "invert",
+          "is_identity",
+          "sync_to_beat"
+        ]
+      },
+      "exports": {
+        "present": [
+          "rotation_speed"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Scale",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "start_scaling"
+        ],
+        "missing": [
+          "clamp_scale",
+          "invert",
+          "is_identity",
+          "scale_non_uniform",
+          "scale_uniform",
+          "scale_with_collision",
+          "tween_scale",
+          "update_scaling",
+          "volume_ratio"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Pit",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "GrowerBlock",
+          "PusherBlock"
+        ],
+        "missing": [
+          "RevolvingWall"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_fire_pit_body_entered",
+          "combine",
+          "get_origin",
+          "invert",
+          "is_identity",
+          "place_fire_pits",
+          "reload_map"
+        ]
+      },
+      "exports": {
+        "present": [
+          "axis",
+          "distance",
+          "max_scale",
+          "speed"
+        ],
+        "missing": [
+          "angular_velocity",
+          "scale_rate"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "transformation",
+      "map": "Chamber_Transformation",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "MiuraCrawler"
+        ],
+        "missing": [
+          "TransformationCatalyst"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "update_mesh"
+        ],
+        "missing": [
+          "befriend",
+          "fire",
+          "invert",
+          "is_identity",
+          "log_fold_event",
+          "on_fold_operator"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "fold_decay_rate",
+          "hit_fold_increment"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Nails",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "NailColorController"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "apply_color"
+        ],
+        "missing": [
+          "_on_nail_pressed",
+          "hsv_of",
+          "load_palette",
+          "paint_hand",
+          "save_palette",
+          "tinted_clone"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Grid_Pallet",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_cell_clicked",
+          "apply_pixelated",
+          "build_grid",
+          "grid_to_texture",
+          "paint_cell",
+          "smooth_sample",
+          "spawn_color_constellation"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Rainbow",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "RainbowEmitter"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "lerp_hue",
+          "rainbow_texture",
+          "spawn_corridor_of_emitters",
+          "spawn_mario_cube",
+          "update_hue_label"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "cycle_speed",
+          "saturation",
+          "value"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/color/mario_cube.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Pillar",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ColorPillar",
+          "ColorStick",
+          "MixingStation"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_grab_released"
+        ],
+        "missing": [
+          "add_input",
+          "apply_flashlight_color",
+          "mix_additive",
+          "mix_subtractive",
+          "recompute_output",
+          "spawn_spectrum_visualizer"
+        ]
+      },
+      "exports": {
+        "present": [
+          "segments"
+        ],
+        "missing": [
+          "source_color"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Paint",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "PaintableSphere"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_area_body_entered",
+          "build_albers_square",
+          "clear_paint",
+          "impact_to_uv",
+          "refresh_material",
+          "spawn_comparison",
+          "splash"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Walls",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "apply_gradient_wall",
+          "gradient_texture",
+          "mood_for_color",
+          "multi_stop_gradient",
+          "sample_stops",
+          "spawn_corridor"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Flashlight",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ColoredMultiMesh",
+          "Flashlight"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "toggle"
+        ],
+        "missing": [
+          "apply_next_cube_palette",
+          "make_fluorescent",
+          "on_sequence_complete",
+          "set_instance_color",
+          "set_light_hue",
+          "tinted_clone"
+        ]
+      },
+      "exports": {
+        "present": [
+          "light_color"
+        ],
+        "missing": [
+          "light_intensity"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "color",
+      "map": "Chamber_Color",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "KaleidocycleEnemy"
+        ],
+        "missing": [
+          "ChromaticCatalyst"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "cycle_hue",
+          "fire",
+          "hue_match",
+          "log_hit",
+          "on_face_triggered",
+          "on_hue_mismatch",
+          "on_projectile_hit",
+          "spawn_miura_witness"
+        ]
+      },
+      "exports": {
+        "present": [
+          "cycle_interval"
+        ],
+        "missing": [
+          "current_hue"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/transformation/miura_crawler.tscn"
+        ]
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "forces",
+      "map": "VectorFoundations",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "compose",
+          "distance"
+        ],
+        "missing": [
+          "add_tip_to_tail",
+          "between_points",
+          "check_catalyst_pickup",
+          "decompose",
+          "from_direction_and_length",
+          "project_onto_axis",
+          "quick_perp",
+          "safe_normalise",
+          "scale_vector",
+          "vector_length"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "VectorOperations",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "alignment",
+          "angle_degrees",
+          "are_perpendicular",
+          "cross_product",
+          "decompose_gravity",
+          "dot_product",
+          "project",
+          "rejection",
+          "verify_cross_orientation"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "VectorApplied",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "sample"
+        ],
+        "missing": [
+          "aim_at_target",
+          "can_fire",
+          "populate_arrow_grid",
+          "spawn_particle_at",
+          "weather_at"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "VectorAdvanced",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "apply_off_center",
+          "bounce",
+          "gravitational_pull",
+          "record_hand_position",
+          "reflect",
+          "release_velocity",
+          "steer_to_target",
+          "torque",
+          "will_throw_reach",
+          "wrap_orbit"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "ForcesFoundations",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_jump_pad_body_entered",
+          "apply_push_to_block",
+          "drag_force",
+          "fire_cannon",
+          "friction_force",
+          "max_range",
+          "spring_between",
+          "test_f_equals_ma"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "ForcesComposition",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SuperpositionBody"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "add_force",
+          "draw_net_force_arrow",
+          "is_in_equilibrium",
+          "remove_force",
+          "update_operations",
+          "update_panels"
+        ]
+      },
+      "exports": {
+        "present": [
+          "vector_a",
+          "vector_b"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "ForcesSystems",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_field",
+          "sample_field",
+          "spawn_attractor",
+          "spawn_swarm",
+          "update_spring_chain"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "ForcesChaos",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "compute_accelerations",
+          "divergence_test",
+          "lorenz_step",
+          "rk4_step",
+          "spawn_body"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "ForcesArena",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "EnemyDrone"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "is_arena_complete",
+          "populate_gallery",
+          "should_fire",
+          "spawn_shards_as_rigid_bodies",
+          "submit_score",
+          "total_score",
+          "voronoi_fracture"
+        ]
+      },
+      "exports": {
+        "present": [
+          "max_speed"
+        ],
+        "missing": [
+          "fire_cone"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "forces",
+      "map": "Chamber_Forces",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "KreslingSpire"
+        ],
+        "missing": [
+          "ForcesCatalyst"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "befriend",
+          "compute_steadiness",
+          "project_field",
+          "record_field_sample",
+          "update_fold_visual"
+        ]
+      },
+      "exports": {
+        "present": [
+          "field_radius",
+          "field_strength",
+          "fold_angle"
+        ],
+        "missing": [
+          "calm_threshold"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Pattern",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "checkerboard",
+          "get_cached_texture",
+          "grid_to_texture",
+          "paint_cell",
+          "populate_grid",
+          "spiral_rule",
+          "tiled_color",
+          "wave_rule"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Array_Patterns",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "_initialize_grid_data",
+          "_on_cell_changed",
+          "mirror_x",
+          "set_cell",
+          "set_colors"
+        ],
+        "missing": [
+          "get_brick_color",
+          "get_herringbone_color",
+          "get_tiled_color",
+          "mirror_xy"
+        ]
+      },
+      "exports": {
+        "present": [
+          "carpet_offset",
+          "carpet_repeats",
+          "carpet_size",
+          "repeat_mode",
+          "symmetry_mode",
+          "tile_size",
+          "wallpaper_group"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Single",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "GrabbableCube"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_controller_grip_pressed",
+          "_on_controller_grip_released",
+          "add_collision",
+          "add_teleporter",
+          "buzz_controller",
+          "is_grip_pressed",
+          "make_grabbable",
+          "spawn_cube",
+          "within_grab_range"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Row",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_corridor",
+          "check_cell_crossing",
+          "current_index",
+          "highlight_current_cell",
+          "play_index_sound",
+          "show_row_contents",
+          "smooth_pitch_to"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_2D_Build",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "GridAgent"
+        ],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_grid",
+          "flat_index",
+          "highlight_column",
+          "highlight_row",
+          "rebuild_sequence"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_3D",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "_on_slider_changed"
+        ],
+        "missing": [
+          "apply_transparency",
+          "build_platforms",
+          "build_volume",
+          "cell_at",
+          "refresh_highlight",
+          "update_code_display"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Disco",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_tile_entered",
+          "build_dance_floor",
+          "light_tile",
+          "pitch_for",
+          "play_step",
+          "record_in_step"
+        ]
+      },
+      "exports": {
+        "present": [
+          "bpm"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Chamber_Arrays",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "GridAgent"
+        ],
+        "missing": [
+          "ChamberGrid"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_obstacles_changed",
+          "_on_trigger_pressed",
+          "bfs_path",
+          "clear_obstacle",
+          "compute_plan",
+          "is_blocked",
+          "place_obstacle",
+          "update_plan_display"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_amplitude_slider",
+          "_on_frequency_slider",
+          "_on_kind_button_pressed",
+          "animate_oscillating",
+          "auto_cycle",
+          "build_cubes",
+          "render_trace",
+          "sample_sine"
+        ]
+      },
+      "exports": {
+        "present": [
+          "amplitude",
+          "frequency"
+        ],
+        "missing": [
+          "kind"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/teach_cube.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Pendulum"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "step"
+        ],
+        "missing": [
+          "apply_foucault",
+          "pause_on_apex",
+          "period",
+          "step_double",
+          "trace_angle",
+          "update_bob",
+          "update_trail"
+        ]
+      },
+      "exports": {
+        "present": [
+          "gravity",
+          "length"
+        ],
+        "missing": [
+          "angle"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Unit_Circle",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "CircleRunner"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "draw_chord",
+          "draw_projection",
+          "label_runners",
+          "project_shadow",
+          "spawn_cosine_runner",
+          "update_angle_label",
+          "update_bridge"
+        ]
+      },
+      "exports": {
+        "present": [
+          "radius"
+        ],
+        "missing": [
+          "omega"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/runner.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Sine_Space",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SineWall"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_amplitude_lever_pulled",
+          "build_mirror",
+          "build_wall",
+          "corridor_width",
+          "place_markers",
+          "save_preset",
+          "tint_height"
+        ]
+      },
+      "exports": {
+        "present": [
+          "amplitude",
+          "frequency",
+          "length"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/wave_marker.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "WaveSource"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_pebble_dropped",
+          "build_double_source",
+          "readout_phase",
+          "sample_at",
+          "tint_by_height",
+          "update_field"
+        ]
+      },
+      "exports": {
+        "present": [
+          "amplitude",
+          "frequency",
+          "speed"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/source.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "TonePlayer"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_frequency_knob",
+          "draw_spectrum",
+          "fft",
+          "generate_sine_buffer",
+          "push_buffer",
+          "shape"
+        ]
+      },
+      "exports": {
+        "present": [
+          "frequency"
+        ],
+        "missing": [
+          "kind"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Bernini",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SolomonicColumn"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "animate_twist",
+          "build_mesh",
+          "colour_vertex",
+          "perturb",
+          "place_candle_light",
+          "ring_at"
+        ]
+      },
+      "exports": {
+        "present": [
+          "base_radius",
+          "height",
+          "twist_amount"
+        ],
+        "missing": [
+          "twist_frequency"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_John_Cage",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SilenceListener"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "aleatoric_event",
+          "compute_total",
+          "dim_room",
+          "log_event",
+          "print_piece",
+          "sample_ambient",
+          "update_floor_display"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "sample_seconds"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/ambient_click.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_AirMusic",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SpatialVoice"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "play_note"
+        ],
+        "missing": [
+          "log_note",
+          "populate_voices",
+          "show_halo",
+          "within_range"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "midi_note",
+          "phase_period"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/spatial_voice.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Sky_Stairs",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SineStaircase"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_peak_entered",
+          "build_steps",
+          "place_peak_lamps",
+          "populate_cubes",
+          "size_step",
+          "tilt_step"
+        ]
+      },
+      "exports": {
+        "present": [
+          "amplitude",
+          "frequency",
+          "step_count"
+        ],
+        "missing": [
+          "horizontal_span"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/float_cube.tscn",
+          "res://commons/artifacts/wavefunctions/stair_step.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "TrigPath"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "cull_behind",
+          "extend_path",
+          "label_step",
+          "sample_lanes",
+          "spawn_step",
+          "tint_lanes"
+        ]
+      },
+      "exports": {
+        "present": [
+          "amplitude",
+          "frequency"
+        ],
+        "missing": [
+          "ahead_distance",
+          "lane_spacing"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/trig_step.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Harmonic"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_slider_moved",
+          "load_preset"
+        ],
+        "missing": [
+          "build_bank",
+          "feed_audio",
+          "link_bio_example",
+          "sample_bank",
+          "update_trace"
+        ]
+      },
+      "exports": {
+        "present": [
+          "amplitude"
+        ],
+        "missing": [
+          "harmonic_number",
+          "phase"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "Chamber_Waves",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ResonancePair"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_befriended",
+          "_on_shot_hit",
+          "beat_freq",
+          "bounce",
+          "fire_helix",
+          "greet",
+          "read_bracelet",
+          "record_greeting",
+          "update_beat_ring"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "creature_freq",
+          "learner_freq",
+          "tolerance"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/wavefunctions/helix_shot.tscn"
+        ]
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "PRNGCrank"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "next"
+        ],
+        "missing": [
+          "_on_crank_turned",
+          "_on_seed_keyboard_entry",
+          "bit_view",
+          "compare_sources",
+          "log_sample",
+          "true_random_sample",
+          "uniform",
+          "update_histogram"
+        ]
+      },
+      "exports": {
+        "present": [
+          "seed"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Remove",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "RemoveRandom"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "populate"
+        ],
+        "missing": [
+          "_drop_cube",
+          "log_removed",
+          "remove_all",
+          "remove_column",
+          "remove_range",
+          "remove_row",
+          "undo_last"
+        ]
+      },
+      "exports": {
+        "present": [
+          "mode",
+          "size"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/grid_cube.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Randomness_10_PRINT_Algorithm",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "TenPrintMaze"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "animate_build",
+          "draw_grid"
+        ],
+        "missing": [
+          "build_maze",
+          "count_paths_hint",
+          "flip_cell",
+          "flip_cell_biased",
+          "reseed",
+          "set_bias",
+          "spawn_slash"
+        ]
+      },
+      "exports": {
+        "present": [
+          "cell_size",
+          "cols",
+          "rows"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/maze_slash.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Cubes",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "RandomEdgeCube"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_dice_thrown",
+          "build_mesh",
+          "flip_edges",
+          "highlight",
+          "populate_field",
+          "readout",
+          "save_profile"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "edge_chance"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/random_edge_cube.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Rotate_Random_XYZ",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "TripleRoll"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_axis_button_pressed",
+          "hardware_roll",
+          "log_roll",
+          "readout_euler",
+          "roll",
+          "save_preset",
+          "tween_to_preset"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "RandomWalker"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "step"
+        ],
+        "missing": [
+          "cap_path",
+          "displacement",
+          "fade_old_segments",
+          "pick_direction",
+          "render_path",
+          "spawn_cohort"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "step_delay",
+          "step_size"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/random_walker.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "GaltonBoard"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "drop_ball"
+        ],
+        "missing": [
+          "analytic_gaussian",
+          "drop_cohort",
+          "place_pegs",
+          "record_landing",
+          "update_histogram_mesh"
+        ]
+      },
+      "exports": {
+        "present": [
+          "rows"
+        ],
+        "missing": [
+          "peg_spacing"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/ball.tscn",
+          "res://commons/artifacts/randomness/peg.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Mushrooms",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SubstrateSampler"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "accept_candidate",
+          "likelihood",
+          "log_spawn",
+          "on_weather_changed",
+          "place_rand_plaque",
+          "scatter_candidates",
+          "shift_moisture",
+          "spawn_mushroom"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "moisture_map",
+          "substrate_map",
+          "temperature_map"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/mushroom.tscn",
+          "res://commons/artifacts/randomness/rand_book_plaque.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Space_Geometry",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ChamberPair"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_add_random_panel",
+          "_on_reroll_button_pressed",
+          "build_spine",
+          "generate_chamber",
+          "label_seeds",
+          "place_ceilings"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "north_seed",
+          "south_seed"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/spine_segment.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Randomness_Examples_of_Randomness",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "GalleryRegistry"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "extreme_sample",
+          "fly_butterfly",
+          "generate_pipes",
+          "label_room",
+          "place_rooms",
+          "plot_sample",
+          "pollock_drip"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "rooms"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/gallery_room.tscn",
+          "res://commons/artifacts/randomness/paint_drop.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Pheromone",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "PheromoneGrid"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_pick_direction_with_bias",
+          "decay",
+          "deposit",
+          "spawn_ants",
+          "step_ant",
+          "trail_entropy",
+          "update_heatmap"
+        ]
+      },
+      "exports": {
+        "present": [
+          "size"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/ant.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Space",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "RandomSpaceArena"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_drop_landed",
+          "compose_reading",
+          "layer_audio",
+          "place_gaussians",
+          "scatter_butterflies",
+          "start_drippers",
+          "write_closing"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "butterfly_count",
+          "gaussian_sources",
+          "pollock_drippers"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/butterfly.tscn",
+          "res://commons/artifacts/randomness/dripper.tscn",
+          "res://commons/artifacts/randomness/gaussian_marker.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "RandomGameGrid"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "check_player_footing",
+          "on_tick",
+          "populate_tiles",
+          "reset_game",
+          "spawn_origami",
+          "step_origami",
+          "update_tile"
+        ]
+      },
+      "exports": {
+        "present": [
+          "size"
+        ],
+        "missing": [
+          "sink_period_range"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/game_tile.tscn",
+          "res://commons/artifacts/randomness/origami_fold.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "randomness",
+      "map": "Chamber_Random",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ChaosShot"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_befriended",
+          "_on_shot_hit",
+          "apply_chaos_elsewhere",
+          "befriend",
+          "dispense_catalyst",
+          "fire",
+          "move_octapod",
+          "spawn_octapod"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "base_speed",
+          "spread"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/randomness/octapod.tscn"
+        ]
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "noise",
+      "map": "Random_Noise_Types",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "blue_noise_points",
+          "classify_noise",
+          "noise_to_texture",
+          "radial_spectrum",
+          "spectral_power",
+          "white_noise_grid"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Columns",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "setup_noise",
+          "terrain_height"
+        ],
+        "missing": [
+          "build_column_mesh",
+          "build_terrain",
+          "displace_column_vertices"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "displacement_strength",
+          "target_strength"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_One",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "fbm"
+        ],
+        "missing": [
+          "displace_torus",
+          "render_octaves_separately",
+          "torus_mesh",
+          "torus_noise",
+          "wrapped_torus_noise"
+        ]
+      },
+      "exports": {
+        "present": [
+          "lacunarity",
+          "octaves",
+          "persistence"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Voxel",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "is_visible"
+        ],
+        "missing": [
+          "carve_tunnel",
+          "initialise",
+          "is_solid",
+          "render_voxels"
+        ]
+      },
+      "exports": {
+        "present": [
+          "grid_size",
+          "threshold"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_6_Wall",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "create_shader_material",
+          "setup_wall",
+          "update_frequency"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Inside_Noise",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "advect_particles",
+          "clamp_noise",
+          "curl_noise",
+          "recursive_warp",
+          "render_warp_to_texture",
+          "warped_noise"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Space_10",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "NoiseParameters"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "load_preset",
+          "sample"
+        ],
+        "missing": [
+          "apply_to",
+          "clamp_noise",
+          "log_state",
+          "record_trajectory",
+          "save_preset",
+          "step_through_space"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Perlin_Simplex",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "benchmark",
+          "measure_isotropy",
+          "perlin_noise",
+          "render_comparison",
+          "render_rotated",
+          "simplex_noise"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Lab_Path",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "LabPath"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_teleporter_activated"
+        ],
+        "missing": [
+          "build_corridor_geometry",
+          "clamp_noise",
+          "configure_lighting",
+          "log_state",
+          "place_ambient_sphere",
+          "place_teleporter",
+          "prepare_handoff"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "source_sequence",
+          "target_lab_state"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/environments/lab_path.tres"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "noise",
+      "map": "Chamber_Noise",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "NoiseParameterBench",
+          "NoiseScienceScreen"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_slider_changed",
+          "set_distribution",
+          "update_display"
+        ],
+        "missing": [
+          "clamp_noise",
+          "expose_sliders",
+          "load_terrain",
+          "log_state",
+          "save_current"
+        ]
+      },
+      "exports": {
+        "present": [
+          "distribution"
+        ],
+        "missing": [
+          "bench",
+          "noise"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "step"
+        ],
+        "missing": [
+          "apply_rule",
+          "count_neighbours",
+          "initialise_random",
+          "seed_glider",
+          "to_texture"
+        ]
+      },
+      "exports": {
+        "present": [
+          "size"
+        ],
+        "missing": [
+          "steps_per_second"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_ElementaryRules",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_gallery",
+          "classify_rule",
+          "display_famous_rules",
+          "generate_rule_pattern",
+          "pattern_to_texture",
+          "rule_bit",
+          "step_row"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_GameOfLife",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "game_of_life_rule",
+          "is_oscillator",
+          "is_still_life",
+          "place_pattern",
+          "population",
+          "render_life_colored"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_BeyondBinary",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "count_hex_neighbours",
+          "hex_neighbours",
+          "multi_state_rule",
+          "paint_cell_by_state",
+          "random_totalistic_rule",
+          "totalistic_rule",
+          "world_position_for_hex"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_ExpandingSpace",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "CAGrowthTree"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "grow_step"
+        ],
+        "missing": [
+          "count_in_radius",
+          "crossway_step",
+          "spawn_visual_cells",
+          "weighted_neighbourhood"
+        ]
+      },
+      "exports": {
+        "present": [
+          "radius"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_SoftRules",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "anneal_step",
+          "biased_rule",
+          "measure_drift",
+          "reset_random",
+          "soft_rule_30",
+          "steady_state",
+          "stochastic_rule"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "fire_probability",
+          "gravity_bias"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_AgentsCircuits",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "draw_wire",
+          "inject_electron",
+          "reset_random",
+          "test_gate",
+          "wireworld_rule"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_EdgeOfChaos",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_fog_layer",
+          "classify_by_activity",
+          "compute_lambda",
+          "find_moving_structures",
+          "fog_step",
+          "majority_rule_step",
+          "sir_rule"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "Chamber_CA",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "LifeformWalker"
+        ],
+        "missing": [
+          "CellularCatalyst"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_body_entered"
+        ],
+        "missing": [
+          "count_gliders",
+          "fire",
+          "reset_random",
+          "stamp_pattern"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "burst_pattern",
+          "hide_size",
+          "hide_step_rate"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "factorial",
+          "fib"
+        ],
+        "missing": [
+          "complex_to_pixel",
+          "measure_depth",
+          "recursive_tree",
+          "render_fractal_at",
+          "sum_iterative",
+          "sum_tail"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_random_tree",
+          "build_ternary",
+          "build_tree",
+          "phyllotactic_angle",
+          "spawn_branch"
+        ]
+      },
+      "exports": {
+        "present": [
+          "branch_angle",
+          "max_depth"
+        ],
+        "missing": [
+          "length_ratio"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_CantorSet",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "animate_dimension_comparison",
+          "cantor_dimension",
+          "cantor_dust",
+          "cantor_intervals",
+          "complex_to_pixel",
+          "measure",
+          "render_cantor",
+          "render_generations"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "dimension",
+          "koch_segment",
+          "koch_snowflake",
+          "render_sierpinski",
+          "sierpinski_carpet",
+          "sierpinski_triangle"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_MengerSponge",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_depth_changed",
+          "count_at_depth",
+          "menger_dimension",
+          "menger_recursion",
+          "render_menger",
+          "render_menger_multimesh",
+          "safe_render"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "depth_limit"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_GoldenSpiral",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "fib"
+        ],
+        "missing": [
+          "complex_to_pixel",
+          "fibonacci_rectangles",
+          "quarter_arc",
+          "render_golden_spiral",
+          "spawn_line_segment"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_JuliaSet",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "complex_to_pixel",
+          "is_connected_julia",
+          "julia_iterations",
+          "render_julia",
+          "spawn_julia_sample"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_MandelbrotSet",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "animate_zoom",
+          "is_in_set",
+          "iter_to_color",
+          "mandelbrot_iterations",
+          "render_mandelbrot",
+          "smooth_iter",
+          "zoom"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_Synthesis",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "FractalGenerator",
+          "IntersectOp",
+          "KochGenerator",
+          "OverlayOp",
+          "ScaleOffsetOp",
+          "SierpinskiGenerator"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "complex_to_pixel",
+          "evaluate_at",
+          "example_composition",
+          "render_composition"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_CrossSequence",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "complex_to_pixel",
+          "count_boxes",
+          "estimate_slope",
+          "measure_box_dimension",
+          "render_matched_gallery",
+          "structural_correlation"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "fractals",
+      "map": "Chamber_Fractals",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "FractalHydra"
+        ],
+        "missing": [
+          "FractalCatalyst",
+          "FractalProjectile",
+          "FractalScienceScreen"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_body_entered"
+        ],
+        "missing": [
+          "_on_head_destroyed",
+          "complex_to_pixel",
+          "fire",
+          "log_projectile",
+          "spawn_branches",
+          "spawn_head"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "branch_depth",
+          "branches_per_hit",
+          "initial_heads",
+          "max_heads",
+          "regrowth_factor"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "LSystem",
+          "Turtle2D"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "expand",
+          "expand_once",
+          "interpret",
+          "is_terminal",
+          "pop_state",
+          "push_state",
+          "render_segments"
+        ]
+      },
+      "exports": {
+        "present": [
+          "angle_deg",
+          "axiom",
+          "rules"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Growth",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "GrowthAnimator",
+          "PlantStalk",
+          "Turtle3D"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "interpret",
+          "randomize_parameters",
+          "rebuild_to_generation",
+          "spawn_leaf_at"
+        ]
+      },
+      "exports": {
+        "present": [
+          "generations_per_second",
+          "max_height"
+        ],
+        "missing": [
+          "grow_rate",
+          "lsystem"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/lsystems/leaf.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Grammars_And_Curves",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "fit_to_bounds",
+          "interpret_curve",
+          "render_gallery"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Architecture",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "spawn_floor"
+        ],
+        "missing": [
+          "build_skyline",
+          "generate_variant",
+          "interpret_building",
+          "mutate_rule"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Competition",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "LightCompetingPlant",
+          "LightField"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "cull_weak",
+          "light_at",
+          "next_generation",
+          "register_as_occluder",
+          "reproduce_strong",
+          "spawn_population"
+        ]
+      },
+      "exports": {
+        "present": [
+          "max_height"
+        ],
+        "missing": [
+          "generation_interval"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Living",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "GeneticTreeSculptor"
+        ],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "generate_terrain",
+          "regenerate"
+        ],
+        "missing": [
+          "generate_rule_from_params",
+          "heightmap_to_mesh",
+          "is_terminal",
+          "plant_authored_tree",
+          "plant_trees_from_grammar"
+        ]
+      },
+      "exports": {
+        "present": [
+          "branch_angle",
+          "depth"
+        ],
+        "missing": [
+          "branch_forks",
+          "length_taper"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "lsystems",
+      "map": "Chamber_LSystems",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "BranchingVine"
+        ],
+        "missing": [
+          "BranchingCatalyst",
+          "RewriteTrace",
+          "TendrilProjectile"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_body_entered"
+        ],
+        "missing": [
+          "fire",
+          "intersection_log",
+          "log_expansion",
+          "respond_to_catalyst",
+          "spawn_geometry_from_string",
+          "spawn_lateral_in_direction"
+        ]
+      },
+      "exports": {
+        "present": [
+          "angle_deg",
+          "rule"
+        ],
+        "missing": [
+          "expansion_depth",
+          "vine_angle_deg",
+          "vine_rule"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Genetic_Evolution",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "BodyPlan"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "crossover",
+          "mutate"
+        ],
+        "missing": [
+          "evaluate",
+          "random_body",
+          "spawn_creature",
+          "tournament"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Space_Colonization",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SpaceColonizationTree"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "grow_step",
+          "reset"
+        ],
+        "missing": [
+          "closest_node",
+          "node_subtree_size",
+          "render_tree",
+          "scatter_attractors"
+        ]
+      },
+      "exports": {
+        "present": [
+          "step_length"
+        ],
+        "missing": [
+          "influence_radius",
+          "kill_radius"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Percolation_Network",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "animate_threshold",
+          "colour_clusters",
+          "find_clusters",
+          "flood_fill",
+          "generate_grid",
+          "has_spanning_cluster"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Branching_Growth",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "reset"
+        ],
+        "missing": [
+          "branch_from_path",
+          "compare_methods",
+          "grow_noise_path",
+          "noise_grow_step",
+          "recursive_branch",
+          "render_path"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Caves_Mazes",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "braid",
+          "count_wall_neighbours",
+          "generate_cave",
+          "generate_maze",
+          "render_walls",
+          "smooth_step"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Sculpted_Forms",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_dome",
+          "build_dome_segment",
+          "build_membrane",
+          "curve_membrane",
+          "drop_cube"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "dome_radius",
+          "dome_ring_count",
+          "drop_rate"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Mirrored_Patterns",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "RhizomaticMaze"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "apply_rotational",
+          "ca_step",
+          "grow_from_seed",
+          "initialise",
+          "mirror_both",
+          "mirror_horizontal"
+        ]
+      },
+      "exports": {
+        "present": [
+          "size"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "Chamber_ProcGen",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "BricoleurGolem"
+        ],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "reset"
+        ],
+        "missing": [
+          "attach_fragment",
+          "compute_attachment_point",
+          "find_nearby_fragment",
+          "on_struck",
+          "on_struck_with_tracking",
+          "reassemble",
+          "replenish_if_needed"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "pickup_radius",
+          "reassemble_interval"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "MassSpringCube"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "build",
+          "rebuild_mesh"
+        ],
+        "missing": [
+          "add_springs",
+          "apply_push",
+          "compute_forces",
+          "index_of"
+        ]
+      },
+      "exports": {
+        "present": [
+          "damping",
+          "size"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Carusell",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SoftCarousel"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "toggle_pause"
+        ],
+        "missing": [
+          "apply_centrifugal",
+          "cube_size_for_radius",
+          "detach_cube",
+          "pin_corners",
+          "populate_rings",
+          "spawn_soft_cube_at"
+        ]
+      },
+      "exports": {
+        "present": [
+          "rotation_speed"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/softbodies/mass_spring_cube.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Obsticals",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "apply_friction",
+          "toggle_pause"
+        ],
+        "missing": [
+          "apply_collision",
+          "penetration_at",
+          "plane_penetration",
+          "spawn_plane_obstacle",
+          "spawn_sphere_obstacle"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Obsticals_Part2",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Piston",
+          "Spoke"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "toggle_pause"
+        ],
+        "missing": [
+          "apply_moving_shape",
+          "apply_piston",
+          "log_impact",
+          "reset_piston"
+        ]
+      },
+      "exports": {
+        "present": [
+          "period",
+          "rotation_speed"
+        ],
+        "missing": [
+          "movement_range"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Cloth_Physics",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ClothPatch"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "build"
+        ],
+        "missing": [
+          "add_bend_constraints",
+          "add_shear_constraints",
+          "add_structural_constraints",
+          "pin_corners",
+          "satisfy_constraints",
+          "verlet_step"
+        ]
+      },
+      "exports": {
+        "present": [
+          "gravity",
+          "height",
+          "spacing",
+          "width"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Playground_of_Joy",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SoftBall",
+          "SoftMat"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_grab_released",
+          "build",
+          "toggle_pause"
+        ],
+        "missing": [
+          "apply_grab_force",
+          "apply_throw",
+          "get_bottom_layer_indices",
+          "make_grabbable"
+        ]
+      },
+      "exports": {
+        "present": [
+          "radius",
+          "segment_count"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Affect_Theory_Visualization",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Radiolarian"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "generate_seeds"
+        ],
+        "missing": [
+          "add_protoplasm",
+          "are_voronoi_neighbours",
+          "build_skeleton",
+          "display_haeckel_reference",
+          "voronoi_neighbours"
+        ]
+      },
+      "exports": {
+        "present": [
+          "radius",
+          "seed_count"
+        ],
+        "missing": [
+          "grow_rate"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/softbodies/haeckel_radiolaria.jpg"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "_on_reset_pressed",
+          "laplacian",
+          "set_pattern",
+          "step"
+        ],
+        "missing": [
+          "initialise",
+          "seed",
+          "to_texture"
+        ]
+      },
+      "exports": {
+        "present": [
+          "feed",
+          "kill",
+          "size"
+        ],
+        "missing": [
+          "du",
+          "dv"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "Topology_Entropy_Morphogenesis",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "GrayScott"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "laplacian",
+          "step"
+        ],
+        "missing": [
+          "initialise",
+          "marching_cubes_surface",
+          "metaball_value_at",
+          "render_to_texture"
+        ]
+      },
+      "exports": {
+        "present": [
+          "dt",
+          "feed",
+          "grid_size",
+          "kill"
+        ],
+        "missing": [
+          "du",
+          "dv"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "softbodies",
+      "map": "Chamber_SoftBodies",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "SpringHopper"
+        ],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "add_periodic_hop",
+          "compute_displacement_field",
+          "compute_total_energy",
+          "detect_learner_push",
+          "log_energy",
+          "periodic_bounce",
+          "render_displacement_field"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "hop_strength"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "PhysarumAgent"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "deposit",
+          "diffuse_trail",
+          "initialise_trail",
+          "random_agent",
+          "sense",
+          "turn_toward_trail"
+        ]
+      },
+      "exports": {
+        "present": [
+          "decay_rate",
+          "deposit_amount",
+          "diffusion_rate",
+          "grid_size",
+          "sensor_angle",
+          "sensor_distance"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_FlowFields",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "compute_dijkstra_field",
+          "compute_radial_field",
+          "initialise_field",
+          "sample_field",
+          "steepest_descent"
+        ]
+      },
+      "exports": {
+        "present": [
+          "grid_size"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Boid"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "alignment",
+          "cohesion",
+          "compute_steering",
+          "random_boid",
+          "separation"
+        ]
+      },
+      "exports": {
+        "present": [
+          "alignment_weight",
+          "cohesion_weight",
+          "max_speed",
+          "perception_radius",
+          "separation_radius",
+          "separation_weight"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ABMAgent"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "perceive"
+        ],
+        "missing": [
+          "follow",
+          "forage",
+          "population_by_state",
+          "reset_swarm",
+          "rest",
+          "update_state"
+        ]
+      },
+      "exports": {
+        "present": [
+          "max_speed",
+          "perception_radius"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ACOGraph"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "add_edge"
+        ],
+        "missing": [
+          "build_tour",
+          "choose_next",
+          "deposit_on_tour",
+          "edge_probability",
+          "evaporate",
+          "iteration"
+        ]
+      },
+      "exports": {
+        "present": [
+          "evaporation_rate"
+        ],
+        "missing": [
+          "alpha",
+          "beta",
+          "pheromone_deposit"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "PSOParticle"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "initialise_swarm",
+          "iteration",
+          "rastrigin",
+          "reset_swarm",
+          "update_bests",
+          "update_position",
+          "update_velocity"
+        ]
+      },
+      "exports": {
+        "present": [
+          "inertia"
+        ],
+        "missing": [
+          "cognitive",
+          "social"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "BoidsAlgorithm",
+          "LayeredSwarm",
+          "PhysarumAlgorithm",
+          "SwarmAlgorithm"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "initialize",
+          "perceive"
+        ],
+        "missing": [
+          "act",
+          "decide",
+          "populate_gallery",
+          "run_comparison",
+          "run_frame",
+          "update_environment"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "Chamber_Swarm",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "SwarmHive"
+        ],
+        "missing": [
+          "SwarmCatalyst"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "alignment_score",
+          "apply_reynolds",
+          "fire",
+          "get_nearby_boids",
+          "spawn_miura_witness"
+        ]
+      },
+      "exports": {
+        "present": [
+          "boid_count"
+        ],
+        "missing": [
+          "hive_size"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/transformation/miura_crawler.tscn"
+        ]
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Evolution",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Genome"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "crossover",
+          "mutate"
+        ],
+        "missing": [
+          "evaluate_fitness",
+          "random_genome",
+          "reset_population",
+          "run_generation",
+          "spawn_creature",
+          "tournament_select"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Gradient_Landscape",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "adam_step",
+          "animate_descent",
+          "gd_step",
+          "gradient",
+          "loss",
+          "momentum_step",
+          "render_surface"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "beta1",
+          "beta2",
+          "eps"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Classification",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "LabeledDataset",
+          "SimpleNN",
+          "SimpleSVM"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "forward",
+          "kmeans"
+        ],
+        "missing": [
+          "add_point",
+          "predict",
+          "render_boundary",
+          "render_points",
+          "train"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Neural_Networks",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "FeedforwardNet"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "activate",
+          "forward"
+        ],
+        "missing": [
+          "add_layer",
+          "backward",
+          "init_he",
+          "matmul",
+          "mse_loss"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Perception",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Perceptron"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "initialize"
+        ],
+        "missing": [
+          "convolve",
+          "edge_magnitude",
+          "predict",
+          "train",
+          "train_step"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Sequence_Memory",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "LSTMCell",
+          "RNNCell"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "step"
+        ],
+        "missing": [
+          "concat",
+          "measure_gradient_over_time",
+          "process_sequence",
+          "train_with_teacher_forcing"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Generative",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Discriminator",
+          "Generator"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "generate"
+        ],
+        "missing": [
+          "diffusion_forward",
+          "is_real",
+          "reparameterize",
+          "sample_noise",
+          "train_step",
+          "vae_encode",
+          "vae_loss"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Synthesis",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "QLearner"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "update"
+        ],
+        "missing": [
+          "choose_action",
+          "get_q",
+          "online_retrain",
+          "reinforce_update",
+          "run_episode",
+          "sample_from_lm",
+          "set_q"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "alpha",
+          "epsilon",
+          "gamma"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "Chamber_ML",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "GradientHunter"
+        ],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "observe"
+        ],
+        "missing": [
+          "fit_predictor",
+          "predict_next",
+          "reset_population",
+          "update_loss"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "befriend_threshold",
+          "buffer_size"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Euclid_Parallel",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_scroll_read",
+          "draw_parallels",
+          "emphasize_fifth",
+          "place_plinths",
+          "populate_history",
+          "toggle_fifth"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/maps/elements/text_plinth.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "CurvatureField"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "set_curvature"
+        ],
+        "missing": [
+          "_geodesic",
+          "_update_grid",
+          "_warp",
+          "draw_parallels",
+          "label_regime",
+          "tint_floor"
+        ]
+      },
+      "exports": {
+        "present": [
+          "curvature"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Russell_Paradox",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SetBox"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_reset_pressed",
+          "populate"
+        ],
+        "missing": [
+          "_on_russell_opened",
+          "build_russell_box",
+          "collect_non_self_containing",
+          "contains_self",
+          "disable_inference",
+          "readout_counts",
+          "russell_paradox"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "members"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "dim_for_verdict",
+          "evaluate_godel",
+          "godel_encode",
+          "godel_key",
+          "prepare_godel",
+          "search_proof",
+          "show_verdict"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Escher_Impossible",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "StairGraph"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_corners",
+          "camouflage_seam",
+          "close_loop",
+          "label_edge",
+          "show_global_sum",
+          "step_creature"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "rise_per_side"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Proposition"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "validate"
+        ],
+        "missing": [
+          "_on_finalize_pressed",
+          "_on_prop_constructed",
+          "add_step",
+          "attempt_lem",
+          "begin_construction",
+          "present_blocks",
+          "update_tally"
+        ]
+      },
+      "exports": {
+        "present": [
+          "steps"
+        ],
+        "missing": [
+          "constructed",
+          "name"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/foundations/proof_block.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Florensky_Paraconsistent",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "DualState"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "initialise_box",
+          "nudge",
+          "prevent_ex_falso",
+          "render_box",
+          "safe_infer",
+          "update_dials"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "anti_value",
+          "confidence",
+          "value"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "WingRegistry"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_lambda_slider_moved",
+          "_on_phi_slider_moved"
+        ],
+        "missing": [
+          "_on_player_near_wing",
+          "animate_summit",
+          "mark_wing_visited",
+          "place_wings",
+          "render_summit",
+          "update_bifurcation"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/maps/elements/crisis_wing.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Chamber_Foundations",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "TwinSpawner"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "assign_reality",
+          "give_catalyst",
+          "on_suspend_used",
+          "probe",
+          "render_twin",
+          "spawn_twins",
+          "write_threshold"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "offset",
+          "twin_scene"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "TermSphere"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_add_term",
+          "_on_grabbed"
+        ],
+        "missing": [
+          "build_formula",
+          "colorize_panel",
+          "render_label",
+          "show_formula"
+        ]
+      },
+      "exports": {
+        "present": [
+          "base_color"
+        ],
+        "missing": [
+          "description",
+          "symbol"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/qfep/term_sphere.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_F_Term",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "FMeter"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_dark_room_timer_timeout",
+          "_on_piece_snapped",
+          "enter_dark_room",
+          "f_value",
+          "log_f_descent",
+          "on_puzzle_solved",
+          "settle_toward",
+          "throttle_settle",
+          "update_f"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "observation",
+          "prediction"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_E_Term",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "EMeter"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_freeze_pressed",
+          "_on_release_pressed",
+          "_spread",
+          "clamp_to_room",
+          "entropy",
+          "spawn_random",
+          "update_visual"
+        ]
+      },
+      "exports": {
+        "present": [
+          "sample_count"
+        ],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/qfep/entropy_cube.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "LambdaReader"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_edge_weight",
+          "apply_lambda",
+          "label_stations",
+          "lambda_for",
+          "log_trajectory",
+          "populate_edge",
+          "update_creature"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "track_end",
+          "track_start"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/qfep/edge_creature.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Phi_Term",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "PhiDial"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "set_value"
+        ],
+        "missing": [
+          "_on_dial_grabbed",
+          "_on_phi_changed",
+          "delta_energy",
+          "lock_dial",
+          "phi_contribution",
+          "tint_floor",
+          "update_reading"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "value"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Edge_Of_Chaos",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "EdgeController"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_window_entered",
+          "_on_window_exited",
+          "count_visible_ants",
+          "in_edge",
+          "spawn_ants_if_edge",
+          "step_rd",
+          "update_floor"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "lambda_value",
+          "phi_value",
+          "window"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/artifacts/qfep/langton_ant.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Sandbox",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [
+          "QFEPReactor"
+        ],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "_on_lambda_slider_moved",
+          "_on_phi_slider_moved",
+          "_on_reset_pressed",
+          "compute_qfe",
+          "snapshot"
+        ],
+        "missing": [
+          "apply_qfe",
+          "update_readout"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "e_weight",
+          "f_weight",
+          "lambda_value",
+          "phi_value"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Synthesis",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SynthesisPlinth"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "place_terms",
+          "record_phi_signature",
+          "sequence_lights",
+          "show_formula",
+          "write_threshold"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "creature_path",
+          "terms"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "Chamber_QFEP",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ChamberManifest"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "unlock_all_modes"
+        ],
+        "missing": [
+          "_on_creature_greeted",
+          "arrange_ring",
+          "lower_lights",
+          "play_closing_tone",
+          "render_central_formula",
+          "spawn_creatures"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "catalyst_modes",
+          "creatures"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": true
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_rule_toggle_pressed",
+          "density",
+          "populate_left",
+          "populate_right",
+          "show_source_rule",
+          "tint_by_density",
+          "update_readout"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "left_columns",
+          "population_per_side",
+          "right_columns",
+          "row_count"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "EthicsCase"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "_on_threshold_slider_moved"
+        ],
+        "missing": [
+          "aggregate_costs",
+          "classify",
+          "color_for_outcome",
+          "label_case",
+          "outcome"
+        ]
+      },
+      "exports": {
+        "present": [
+          "title"
+        ],
+        "missing": [
+          "features",
+          "ground_truth",
+          "stakes"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "ParaKB"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "assert_fact",
+          "consistent_facts",
+          "contradictions",
+          "infer_new_facts",
+          "query",
+          "tooltip_for",
+          "update_sphere"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Situated_Computation",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Standpoint"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_standpoints",
+          "disagreement",
+          "highlight_spread",
+          "label_platform",
+          "project",
+          "render_column"
+        ]
+      },
+      "exports": {
+        "present": [
+          "color",
+          "origin"
+        ],
+        "missing": [
+          "filter_weights",
+          "name"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "LogicAgent"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "collect_reports",
+          "disagreement_score",
+          "mediate",
+          "reason",
+          "render_lectern"
+        ]
+      },
+      "exports": {
+        "present": [
+          "color"
+        ],
+        "missing": [
+          "agent_name",
+          "logic_style"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "RhizomeNode"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "build_network",
+          "color_by_degree",
+          "connect_nodes",
+          "draw_edges",
+          "reachable_from",
+          "step_from"
+        ]
+      },
+      "exports": {
+        "present": [
+          "id"
+        ],
+        "missing": [
+          "neighbors"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Atom"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "_on_designer_submit",
+          "archive_molecule",
+          "bond_atoms",
+          "can_bond",
+          "enforce_bond_angles",
+          "label_pit",
+          "reveal_pit_under"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": [
+          "element",
+          "valence"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/maps/elements/void_pit.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "PostCrisis_Synthesis",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "SynthesisPlinth"
+        ]
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "gradient_light",
+          "on_teleport_ready",
+          "place_memory_plinths",
+          "place_plinth",
+          "render_sentence",
+          "write_threshold"
+        ]
+      },
+      "exports": {
+        "present": [
+          "font_size"
+        ],
+        "missing": [
+          "sentence"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": [
+          "res://commons/maps/elements/memory_plinth.tscn"
+        ]
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Foundations",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "Graph"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "add_edge",
+          "add_vertex"
+        ],
+        "missing": [
+          "adjacency_list",
+          "build_konigsberg",
+          "degree",
+          "degrees",
+          "eulerian_walk_possible",
+          "render_edges",
+          "render_vertices"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Layout",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "layout_stress",
+          "repulsion_force_on",
+          "seed_positions",
+          "snap_positions",
+          "spring_force_on",
+          "update_visual_positions"
+        ]
+      },
+      "exports": {
+        "present": [
+          "damping",
+          "spring_k"
+        ],
+        "missing": [
+          "repulsion_k"
+        ]
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Pathfinding",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [
+          "astar",
+          "reconstruct_path"
+        ],
+        "missing": [
+          "bfs",
+          "dfs",
+          "grid_graph",
+          "manhattan",
+          "remove_walls"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Network_Analysis",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": []
+      },
+      "funcs": {
+        "present": [],
+        "missing": [
+          "betweenness_centrality",
+          "closeness_centrality",
+          "colour_by_centrality",
+          "degree_centrality",
+          "eigenvector_centrality",
+          "most_central"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Connectivity",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "DirectedGraph"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "add_edge"
+        ],
+        "missing": [
+          "condensation",
+          "render_inter_room_edges",
+          "spawn_scc_rooms",
+          "tarjan_scc",
+          "topological_sort"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Spanning_Trees",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "UnionFind",
+          "WeightedGraph"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "add_edge"
+        ],
+        "missing": [
+          "animate_mst",
+          "find",
+          "kruskal",
+          "make_set",
+          "prim",
+          "total_weight",
+          "union",
+          "verify_mst"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Flow",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "FlowNetwork"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "add_edge"
+        ],
+        "missing": [
+          "animate_push",
+          "bfs_augmenting",
+          "max_flow",
+          "min_cut",
+          "push_flow",
+          "residual"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Matching",
+      "tutorial_exists": true,
+      "class_names": {
+        "present": [],
+        "missing": [
+          "BipartiteGraph"
+        ]
+      },
+      "funcs": {
+        "present": [
+          "add_edge"
+        ],
+        "missing": [
+          "contract_blossom",
+          "gale_shapley",
+          "greedy_matching",
+          "hopcroft_karp",
+          "hungarian"
+        ]
+      },
+      "exports": {
+        "present": [],
+        "missing": []
+      },
+      "preloads": {
+        "present": [],
+        "missing": []
+      },
+      "is_chamber": false
+    }
+  ]
+}

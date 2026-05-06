@@ -1,0 +1,71 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_Effect_Sound_Test",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": "Rack303Acid/RackDX7Piano/RackMoogBass/RackSineBasic provide genre-spanning synthesis; VRAudioMonitor visualizes audio; chord_tension_spring maps harmonic tension to spring physics; timbre_sculptor shapes tone; harmonic_distance_table quantifies consonance/dissonance; cable_builder connects the modular chain; dark_sphere anchors.",
+  "style": null,
+  "echoes": [
+    "wavefunctions",
+    "noise"
+  ],
+  "density": 0.036,
+  "breath_zones": [
+    {
+      "size": 161,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.521739130434782,
+        6.503105590062112
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "AudioContr"
+    },
+    {
+      "x": 10,
+      "z": 3,
+      "token": "demo_singles"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "interactable_demo"
+    },
+    {
+      "x": 3,
+      "z": 6,
+      "token": "demo_passive"
+    },
+    {
+      "x": 6,
+      "z": 9,
+      "token": "demo_compounds"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "AudioContr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

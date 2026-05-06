@@ -1,25 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7gpc47eqau2t"]
+[gd_scene format=3 uid="uid://b7gpc47eqau2t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6p2k"]
 cull_mode = 2
+shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
-metallic = 1.0
-roughness = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_s108s"]
-radius = 40.0
+radius = 80.0
 height = 80.0
 
-[node name="DarkSphere" type="Node3D"]
+[node name="DarkSphere" type="Node3D" unique_id=1040100337]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1030564900]
 material_override = SubResource("StandardMaterial3D_r6p2k")
 mesh = SubResource("SphereMesh_s108s")
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
-visible = false
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1061893456]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.695341, 0)
 visible = false
 light_energy = 6.0

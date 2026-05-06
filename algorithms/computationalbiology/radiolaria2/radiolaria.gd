@@ -35,7 +35,7 @@ var ui_canvas = null
 var info_label = null
 var form_buttons = []
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Set up enhanced visual environment
@@ -54,7 +54,7 @@ func _ready():
 	if show_particle_effects:
 		setup_particle_effects()
 
-func create_enhanced_materials():
+func create_enhanced_materials() -> void:
 	# Create realistic biological materials
 	if use_realistic_colors:
 		create_realistic_materials()
@@ -64,7 +64,7 @@ func create_enhanced_materials():
 	# Create glow materials for effects
 	create_glow_materials()
 
-func create_realistic_materials():
+func create_realistic_materials() -> void:
 	# Silica-based radiolaria materials (realistic colors)
 	var silica_colors = [
 		Color(0.95, 0.95, 0.9),   # Pure silica
@@ -107,7 +107,7 @@ func create_realistic_materials():
 		material.emission = color * 0.1
 		spike_materials.append(material)
 
-func create_artistic_materials():
+func create_artistic_materials() -> void:
 	# Artistic Haeckel-inspired colors
 	var artistic_colors = [
 		Color(0.9, 0.9, 0.7),  # Cream
@@ -140,7 +140,7 @@ func create_artistic_materials():
 		material.roughness = 0.7
 		spike_materials.append(material)
 
-func create_glow_materials():
+func create_glow_materials() -> void:
 	# Create glowing materials for special effects
 	var glow_colors = [
 		Color(1.0, 0.8, 0.4),   # Warm glow
@@ -172,7 +172,7 @@ func create_noise_texture() -> NoiseTexture2D:
 	noise_texture.height = 64
 	return noise_texture
 
-func setup_visual_environment():
+func setup_visual_environment() -> void:
 	# Create enhanced lighting setup
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "MainLight"
@@ -234,7 +234,7 @@ func create_sky() -> Sky:
 	sky.sky_material = sky_material
 	return sky
 
-func setup_ui():
+func setup_ui() -> void:
 	# Create UI canvas
 	ui_canvas = CanvasLayer.new()
 	ui_canvas.name = "UI"
@@ -293,7 +293,7 @@ func setup_ui():
 	color_button.pressed.connect(_on_toggle_color_mode_pressed)
 	vbox.add_child(color_button)
 
-func setup_particle_effects():
+func setup_particle_effects() -> void:
 	# Create floating particle systems around forms
 	var forms_container = get_node_or_null("BiologicalForms")
 	if not forms_container:
@@ -303,7 +303,7 @@ func setup_particle_effects():
 		if child is Node3D:
 			create_form_particles(child)
 
-func create_form_particles(form: Node3D):
+func create_form_particles(form: Node3D) -> void:
 	var particles = GPUParticles3D.new()
 	particles.name = "Particles"
 	particles.position = form.position
@@ -338,7 +338,7 @@ func create_form_particles(form: Node3D):
 	add_child(particles)
 	particle_systems.append(particles)
 
-func generate_grid():
+func generate_grid() -> void:
 	var forms_container = Node3D.new()
 	forms_container.name = "BiologicalForms"
 	add_child(forms_container)
@@ -460,7 +460,7 @@ func create_spiky_radiolaria(parent, position):
 	parent.add_child(form)
 	return form
 
-func add_spike(parent, direction, material):
+func add_spike(parent, direction, material) -> void:
 	var spike = CSGCylinder3D.new()
 	spike.name = "Spike"
 	spike.radius = randf_range(0.03, 0.08)  # Use radius instead of radius_bottom
@@ -487,7 +487,7 @@ func add_spike(parent, direction, material):
 	if show_glow_effects and randf() < 0.3:  # 30% chance
 		add_spike_glow(spike, direction)
 
-func add_surface_texture_to_core(core: CSGSphere3D):
+func add_surface_texture_to_core(core: CSGSphere3D) -> void:
 	# Add small surface irregularities for biological realism
 	var num_textures = randi() % 8 + 4
 	for i in range(num_textures):
@@ -514,7 +514,7 @@ func add_surface_texture_to_core(core: CSGSphere3D):
 		
 		core.add_child(texture_bump)
 
-func add_spike_glow(spike: CSGCylinder3D, direction: Vector3):
+func add_spike_glow(spike: CSGCylinder3D, direction: Vector3) -> void:
 	# Add a subtle glow effect around spikes
 	var glow = CSGCylinder3D.new()
 	glow.name = "SpikeGlow"
@@ -990,7 +990,7 @@ func generate_dodecahedron_vertices(radius):
 	
 	return vertices
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create a camera for viewing
 	var camera = Camera3D.new()
 	camera.name = "Camera"
@@ -1022,7 +1022,7 @@ func setup_environment():
 	world_env.environment = environment
 	add_child(world_env)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Handle rotation if enabled
 	if enable_rotation and camera_controller:
 		camera_controller.rotation.y += rotation_speed * delta
@@ -1032,7 +1032,7 @@ func _process(delta):
 		if particles and is_instance_valid(particles):
 			particles.emitting = show_particle_effects
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Handle keyboard input
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -1049,7 +1049,7 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		handle_mouse_click(event.position)
 
-func handle_mouse_click(screen_pos: Vector2):
+func handle_mouse_click(screen_pos: Vector2) -> void:
 	# Cast ray from camera to detect form selection
 	var camera = camera_controller.get_node_or_null("Camera")
 	if not camera:
@@ -1072,7 +1072,7 @@ func handle_mouse_click(screen_pos: Vector2):
 		if form and form.name != "BiologicalForms":
 			select_form(form)
 
-func select_form(form: Node3D):
+func select_form(form: Node3D) -> void:
 	# Deselect previous form
 	if selected_form:
 		deselect_form(selected_form)
@@ -1082,13 +1082,13 @@ func select_form(form: Node3D):
 	highlight_form(form)
 	update_form_info(form)
 
-func deselect_form(form: Node3D):
+func deselect_form(form: Node3D) -> void:
 	# Remove highlight effects
 	for child in form.get_children():
 		if child.name.begins_with("Highlight"):
 			child.queue_free()
 
-func highlight_form(form: Node3D):
+func highlight_form(form: Node3D) -> void:
 	# Add glow effect
 	if show_glow_effects:
 		var glow = CSGSphere3D.new()
@@ -1098,7 +1098,7 @@ func highlight_form(form: Node3D):
 		glow.operation = CSGShape3D.OPERATION_UNION
 		form.add_child(glow)
 
-func update_form_info(form: Node3D):
+func update_form_info(form: Node3D) -> void:
 	if info_label:
 		var form_type = form.name.split("_")[0]
 		var form_info = "Selected: " + form_type + "\n"
@@ -1123,17 +1123,17 @@ func update_form_info(form: Node3D):
 		info_label.text = form_info
 
 # UI Callback Functions
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	regenerate_forms()
 
-func _on_toggle_effects_pressed():
+func _on_toggle_effects_pressed() -> void:
 	show_particle_effects = !show_particle_effects
 	update_particle_systems()
 
-func _on_toggle_rotation_pressed():
+func _on_toggle_rotation_pressed() -> void:
 	enable_rotation = !enable_rotation
 
-func _on_toggle_color_mode_pressed():
+func _on_toggle_color_mode_pressed() -> void:
 	use_realistic_colors = !use_realistic_colors
 	# Regenerate materials
 	base_materials.clear()
@@ -1142,7 +1142,7 @@ func _on_toggle_color_mode_pressed():
 	# Regenerate forms to apply new materials
 	regenerate_forms()
 
-func regenerate_forms():
+func regenerate_forms() -> void:
 	# Clear existing forms
 	var forms_container = get_node_or_null("BiologicalForms")
 	if forms_container:
@@ -1167,7 +1167,16 @@ func regenerate_forms():
 	if info_label:
 		info_label.text = "Radiolaria Generator\n\nClick on forms to examine them\nUse mouse to rotate view\nPress R to regenerate"
 
-func update_particle_systems():
+func update_particle_systems() -> void:
 	for particles in particle_systems:
 		if particles and is_instance_valid(particles):
 			particles.emitting = show_particle_effects
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://deegvsl771j5h"]
+
+[ext_resource type="PackedScene" uid="uid://dt3b5p4mrrmnf" path="res://commons/infoboards_3d/base/UniversalInfoBoard.tscn" id="1_infoboard"]
+[ext_resource type="Script" uid="uid://bf7sqfssvdb4c" path="res://commons/infoboards_3d/test_universal_infoboard_2d.gd" id="2_script"]
+
+[node name="TestUniversalInfoBoard2D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_script")
+
+[node name="UniversalInfoBoard" parent="." instance=ExtResource("1_infoboard")]
+layout_mode = 1
+display_mode = 2
+
+[node name="Instructions" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 400.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "Test Scene: ALL_SLIDES Mode
+Use PREVIOUS/NEXT buttons to flip through all slides
+Press ESC to exit"

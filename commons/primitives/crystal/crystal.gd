@@ -62,21 +62,7 @@ func create_crystal_vertices() -> Array:
 	# Crystal termination points (sharp pyramid tops)
 	vertices.append(Vector3(0, 1.0 * scale, 0))      # Main apex (18)
 	vertices.append(Vector3(0, -0.8 * scale, 0))     # Base point (19)
-	
-	# Additional crystal facet vertices for complexity
-	var facet_height = 0.6
-	var facet_radius = 0.3
-	for i in range(3):  # 3 smaller facet points
-		var angle = i * PI * 2.0 / 3.0 + PI/6  # Offset by 30 degrees
-		var x = cos(angle) * facet_radius
-		var z = sin(angle) * facet_radius
-		vertices.append(Vector3(x, facet_height, z) * scale)
-	
-	# Side crystal protrusions (natural crystal growth pattern)
-	vertices.append(Vector3(0.7 * scale, 0.1, 0.2 * scale))   # Right protrusion (23)
-	vertices.append(Vector3(-0.5 * scale, -0.1, -0.4 * scale)) # Left protrusion (24)
-	vertices.append(Vector3(0.1 * scale, 0.2, 0.8 * scale))   # Front protrusion (25)
-	
+
 	return vertices
 
 func create_crystal_faces() -> Array:
@@ -104,33 +90,7 @@ func create_crystal_faces() -> Array:
 	for i in range(6):
 		var next_i = (i + 1) % 6
 		faces.append([i, 19, next_i])  # Triangular faces to base point
-	
-	# Additional crystal facets for complexity (using vertices 20-22)
-	for i in range(3):
-		var upper_vertex = 12 + (i * 2) % 6  # Connect to upper hexagon
-		var next_upper = 12 + ((i * 2 + 2) % 6)
-		faces.append([upper_vertex, next_upper, 20 + i])
-		faces.append([20 + i, 18, upper_vertex])  # Connect facet to main apex
-	
-	# Side crystal protrusions (natural growth faces)
-	# Right protrusion
-	faces.append([6, 0, 23])
-	faces.append([0, 1, 23])
-	faces.append([1, 7, 23])
-	faces.append([7, 6, 23])
-	
-	# Left protrusion  
-	faces.append([9, 3, 24])
-	faces.append([3, 4, 24])
-	faces.append([4, 10, 24])
-	faces.append([10, 9, 24])
-	
-	# Front protrusion
-	faces.append([8, 2, 25])
-	faces.append([2, 5, 25])
-	faces.append([5, 11, 25])
-	faces.append([11, 8, 25])
-	
+
 	return faces
 
 func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):

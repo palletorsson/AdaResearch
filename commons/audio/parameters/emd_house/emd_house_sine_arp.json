@@ -1,0 +1,19 @@
+{
+  "_metadata": {
+    "sound_type": "emd_house_sine_arp",
+    "display_name": "EMD House - Sine Arp",
+    "description": "Soft plucky arp recreation with light digital grit and delay taps.",
+    "category": "emd_house",
+    "tags": ["emd_house", "arp", "pluck", "recreation", "melodic"],
+    "generator": "soundbank_script",
+    "soundbank_id": "emd_house",
+    "sound_name": "sine_arp",
+    "invoke_mode": "t_freq_trigger",
+    "preview_freq_hz": 392.0
+  },
+  "parameters": {
+    "frequency_hz": { "min": 110.0, "max": 880.0, "value": 392.0, "step": 1.0 },
+    "duration": { "min": 0.4, "max": 4.0, "value": 1.2, "step": 0.1 },
+    "gain": { "min": 0.2, "max": 1.8, "value": 1.0, "step": 0.05 }
+  }
+}

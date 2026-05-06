@@ -1,0 +1,5 @@
+Pick an edge at random. Contract it — merge the two vertices into one, collapse the edge between them. Repeat. The graph shrinks. Parallel edges accumulate. Self-loops vanish. Two super-vertices remain. The edges still connecting them are the cut.
+
+This is Karger's algorithm: a minimum cut finder that makes no intelligent choices. It picks randomly and destroys structure. Most runs fail — return a cut that isn't minimal. But run it enough times and the smallest cut surfaces, the way a fault line reveals itself through repeated stress. Probability compensates for blindness.
+
+The minimum cut is the cheapest way to break a network in two. The fewest connections whose removal splits a graph into disconnected halves. Karger finds it not by analysis but by erosion — contracting until only the essential fracture remains. Identity through repeated collapse. The cut was always there. Randomness just learned where to look.

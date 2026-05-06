@@ -1,0 +1,75 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SoftBodies_Obsticals",
+  "home_sequence": "softbodies",
+  "dimensions": {
+    "w": 20,
+    "d": 20
+  },
+  "signature": "breathing_room demonstrates soft body response to dynamically changing obstacle geometry; flagdancer shows cloth-wind interaction with fixed-edge constraints; grab_long_stick and pick_up_cube provide interactive manipulation within the obstacle field.",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.018,
+  "breath_zones": [
+    {
+      "size": 390,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 20,
+        "d": 20
+      },
+      "centroid": [
+        9.646153846153846,
+        9.558974358974359
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 10,
+      "z": 1,
+      "token": "breathing_room"
+    },
+    {
+      "x": 0,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 4,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 0,
+      "z": 5,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 6,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 0,
+      "z": 7,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "flagdancer"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 397,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

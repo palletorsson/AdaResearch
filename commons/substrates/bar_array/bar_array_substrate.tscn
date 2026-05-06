@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bar_array_substrate"]
+
+[ext_resource type="Script" path="res://commons/substrates/bar_array/bar_array_substrate.gd" id="1_substrate"]
+[ext_resource type="Script" path="res://commons/substrates/bar_array/bar_array_renderer.gd" id="2_renderer"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_baseplate"]
+size = Vector3(1.5, 0.012, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_baseplate"]
+albedo_color = Color(0.04, 0.04, 0.06, 1)
+metallic = 0.3
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_rim"]
+size = Vector3(1.51, 0.018, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rim"]
+transparency = 1
+albedo_color = Color(0.15, 0.15, 0.2, 0.3)
+emission_enabled = true
+emission = Color(0.2, 0.2, 0.3, 1)
+emission_energy_multiplier = 0.15
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_touch"]
+size = Vector3(1.5, 0.35, 0.1)
+
+[node name="BarArraySubstrate" type="Node3D"]
+script = ExtResource("1_substrate")
+
+[node name="Renderer" type="Node3D" parent="."]
+script = ExtResource("2_renderer")
+
+[node name="BasePlate" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006, 0)
+mesh = SubResource("BoxMesh_baseplate")
+material_override = SubResource("StandardMaterial3D_baseplate")
+
+[node name="Rim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.003, 0)
+mesh = SubResource("BoxMesh_rim")
+material_override = SubResource("StandardMaterial3D_rim")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0.12)
+pixel_size = 0.002
+font_size = 14
+text = ""
+horizontal_alignment = 1
+
+[node name="TouchArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TouchArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("BoxShape3D_touch")

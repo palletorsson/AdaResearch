@@ -1,0 +1,7 @@
+Pair every node. A matching selects edges so no vertex appears twice — maximum matching finds the most pairs possible. In bipartite graphs this is clean, solvable, settled. General graphs resist. Odd cycles create contradictions — three nodes, only one pair possible, one always left out. The algorithm that broke this open carries Jack Edmonds' name and a strange operation: blossom contraction.
+
+A gyroid surface riddles the space — triply periodic, minimal, dividing volume into two interlocking labyrinths. The cheese. Walk through it. Inside, graphs bloom and shrink. When the algorithm encounters an odd cycle, it contracts the entire blossom into a single supernode, recurses, then expands back. Identity compressed, problem solved, structure restored — but changed.
+
+Augmenting paths flip matched and unmatched edges in alternation. Each one found increases the matching by exactly one. When no augmenting path exists, the matching is maximum. Optimality proved by absence.
+
+The blossom is the queer move — the moment a structure that refuses clean partition gets folded into itself, made to work anyway, then unfolded carrying new information. Contraction as transformation. The odd one out becomes the mechanism.

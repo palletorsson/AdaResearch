@@ -1,0 +1,5 @@
+A matching pairs vertices — no vertex claimed twice. In bipartite graphs, this is clean. In general graphs, odd cycles poison everything. Greedy fails. Augmenting path methods choke on blossoms — odd-length cycles where the algorithm can't tell which edges to flip.
+
+Edmonds' trick: contract the blossom. Crush the odd cycle into a single pseudo-vertex, solve the smaller graph, then expand. The obstruction becomes the mechanism. What blocked progress gets folded into the structure and used.
+
+Maximum matching asks: how many pairs can exist simultaneously? The answer lives in the tension between local commitment and global optimality — every edge chosen forecloses others. Contraction treats identity as provisional. A vertex that was five vertices becomes one, then five again. The graph remembers what it compressed. Matching is monogamy enforced on a network. Blossoms are the queer substructure that makes it solvable.

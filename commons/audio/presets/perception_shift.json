@@ -1,0 +1,71 @@
+{
+    "description": "Stage 3-5: The hum gains overtones. Occasional crystalline pings. Color arriving as sound. Subtle, curious.",
+    "continuous_layers": [
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -28,
+            "bus": "DeepAmbient",
+            "parameters": {
+                "entropy": 0.08,
+                "queer_factor": 0.15
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -32,
+            "bus": "Ambient"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": ["SyntheticSoundGenerator.detection_sound"],
+            "interval_range": [20.0, 60.0],
+            "volume_range": [-30, -24],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "EQ",
+                    "low_gain_db": -2.0,
+                    "mid_gain_db": -6.0,
+                    "high_gain_db": -10.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.25,
+                    "wet": 0.2,
+                    "damping": 0.7
+                }
+            ]
+        },
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.2,
+                    "depth": 0.1,
+                    "wet": 0.15
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.5,
+                    "damping": 0.4
+                },
+                {
+                    "type": "Delay",
+                    "delay_ms": 400,
+                    "feedback": 0.2,
+                    "wet": 0.15
+                }
+            ]
+        }
+    }
+}

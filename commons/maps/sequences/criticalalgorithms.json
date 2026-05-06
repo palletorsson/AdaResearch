@@ -1,0 +1,33 @@
+{
+	"sequences": {
+		"criticalalgorithms": {
+			"name": "Critical Algorithms",
+			"status": "deferred",
+			"deferred_reason": "5/6 maps were env_one placeholders. Real map (Algorithmic_Bias_Visualization) moved to postfoundationscrisis. Rebuild when content exists.",
+			"description": "Explore algorithmic bias, ethics, and societal impact of algorithms",
+			"qfep_term": "Edge",
+			"qfep_connection": "Who defines the formal system? Whose F counts? Critical algorithms examine the power structures embedded in computational choices \u00e2\u20ac\u201d which data is collected, which patterns are recognized, which bodies are optimized for.",
+			"difficulty": "advanced",
+			"learning_objectives": [
+				"Algorithmic bias analysis",
+				"Ethics in AI systems",
+				"Societal impact assessment",
+				"Surveillance system critique"
+			],
+			"maps": ["CriticalAlgorithms_Bias_Gallery"],
+			"deferred_maps": [
+				"CriticalAlgorithms_Algorithmic_Misframing",
+				"CriticalAlgorithms_Societal_Impact",
+				"CriticalAlgorithms_Ethics_in_AI",
+				"CriticalAlgorithms_Surveillance_Systems",
+				"CriticalAlgorithms_Attention_Economy"
+			],
+			"moved_maps": {
+				"CriticalAlgorithms_Algorithmic_Bias_Visualization": "postfoundationscrisis"
+			},
+			"artifact_groups": []
+		}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
+}

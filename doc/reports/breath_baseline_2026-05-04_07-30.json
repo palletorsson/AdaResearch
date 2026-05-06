@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-05-04T07:30:00Z",
+  "phase": "baseline",
+  "mode": "dry-run",
+  "scheduled_task": "ada-weekly-audit",
+  "pipeline_summary": {
+    "scoring_status": "OK (boolean_surfaces empty-sequence path no longer crashes display loop)",
+    "all_19_spine_at_least_stage_5": true,
+    "stage_7_polish": ["randomness"],
+    "stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "wavefunctions",
+      "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
+      "isosurfaces", "swarmintelligence", "machinelearning", "foundationscrisis",
+      "qfeplaboratory", "postfoundationscrisis", "graphtheory"
+    ],
+    "stage_2_documentation": [
+      {"id": "array_tutorial", "doc_pct": 18, "art_pct": 60},
+      {"id": "softbodies", "doc_pct": 29, "art_pct": 64}
+    ],
+    "stage_1_structure": ["boolean_surfaces"],
+    "global_avg_pipeline": 5.43
+  },
+  "heat_map_top_5": [
+    {"item": "pipeline_scorer_token_parsing", "temp": 60, "reason": "deep discovery: artifact stage parses bare prefix"},
+    {"item": "pipeline_scorer empty sequence schema", "temp": 60, "reason": "deep discovery: score_sequence early-return on empty map"},
+    {"item": "tscn uid path drift", "temp": 60, "reason": "deep discovery: branchinggrowthalgorithmcontinued/.tscn (likely already addressed 2026-05-03)"},
+    {"item": "sequence:boolean_surfaces", "temp": 50, "reason": "empty sequence (Boolean Surfaces: CSG as Composition)"},
+    {"item": "sequence:resourcemanagement", "temp": 50, "reason": "empty sequence (Resource Management)"}
+  ],
+  "garden_health": {
+    "total_artifacts": 2103,
+    "voiced": 923,
+    "embodied": 324,
+    "reaching": 489,
+    "phantom_limbs": 736,
+    "voice_coverage_pct": 43,
+    "embodiment_rate_pct": 35,
+    "by_state": {
+      "LIVING": ["forces", "grammar_gallery", "joints", "flowers", "vectors"],
+      "GROWING": ["primitives", "foundationscrisis", "machinelearning", "lsystems", "postfoundationscrisis", "fold_system", "bodyprogression", "morphogenesis", "spatial_partitioning"],
+      "REACHING": ["hazards", "fractals", "patterngeneration", "mosaicanalysis", "cellularautomata", "graphtheory", "grammar_systems", "proceduralaudio", "artmathematics", "meshes"],
+      "SCATTERED": ["wavefunctions", "randomness", "qfeplaboratory", "physicssimulation", "transformation", "color", "catalyst_test", "noise", "swarmintelligence", "proceduralgeneration", "particles", "structure", "facades", "annotations", "biological_growth", "grow_map_sandbox"],
+      "DORMANT": ["gallery", "array_tutorial", "softbodies", "bricolage", "isosurfaces", "lab", "atlas", "criticalalgorithms", "higher_dimensions", "advancedlaboratory", "constraint_solvers", "speculativecomputation", "searchpathfinding"]
+    }
+  },
+  "release_gates": {
+    "overall": "FAIL",
+    "passing_count": 3,
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry_integrity": "FAIL",
+    "B_sub_issues": {
+      "unresolved_scene_files": 0,
+      "missing_scene_path": 2,
+      "unsupported_scene_path": 0,
+      "missing_map_ready": 1,
+      "missing_include_in_map_data": 1
+    },
+    "C_map_validation": "PASS",
+    "C_grades": {"A": 1860, "B": 411, "C": 583, "F": 0},
+    "D_lab_progression_continuity": "PASS",
+    "D_metrics": {"lost": 0, "changed": 12, "total_issues": 39, "ok_superset_pairs": 5},
+    "regression_note": "Gate B regressed since 2026-04-27 (was 4/4 passing). 4 small sub-issues across 2 categories — fixable in one breath."
+  }
+}

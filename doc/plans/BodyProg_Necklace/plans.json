@@ -1,0 +1,26 @@
+{
+  "name": "BodyProg_Necklace",
+  "title": "First Anchor",
+  "description": "A necklace/pendant appears at neck point. First body anchor beyond hands. QFEP: identity accretes around a center.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    8,
+    8
+  ],
+  "teleport": [
+    8,
+    1
+  ],
+  "artifacts": [
+    {
+      "name": "necklace_anchor",
+      "row": 5,
+      "col": 4,
+      "family": "procgen_extra"
+    }
+  ]
+}

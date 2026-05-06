@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PhysicsSimulation_Spring_Mass_Systems",
+  "home_sequence": "physicssimulation",
+  "dimensions": {
+    "w": 8,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.018,
+  "breath_zones": [
+    {
+      "size": 56,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        3.482142857142857,
+        3.517857142857143
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "spring_mass_system"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 57,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

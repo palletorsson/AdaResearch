@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://br34th3r5urf1"]
+
+[ext_resource type="Script" path="res://commons/primitives/parametric/breather_surface.gd" id="1_script"]
+
+[node name="BreatherSurface" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_script")

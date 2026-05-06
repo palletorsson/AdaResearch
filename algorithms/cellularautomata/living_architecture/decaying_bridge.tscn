@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/cellularautomata/living_architecture/decaying_bridge.gd" id="1_script"]
+
+[node name="DecayingBridge" type="Node3D"]
+script = ExtResource("1_script")
+length = 30
+width = 5
+decay_speed = 0.5
+regrow_speed = 1.0
+decay_radius = 2.5

@@ -1,0 +1,31 @@
+{
+  "sequences": {
+	"atlas": {
+	  "name": "The Atlas of Structures",
+	  "truth": "The world is not one model but the interplay of a few irreducible structures — graph, field, process, grammar, scale — and the transitions between them are where understanding lives.",
+	  "qfep_term": "meta",
+	  "description": "Cross-cutting atlas. One walkable gallery collecting the thirteen meta-structures used across the spine curriculum, with transition zones between them showing how any two structures translate. Referenced from every sequence; not a progression itself.",
+	  "layer": "atlas",
+	  "prerequisites": [],
+	  "unlocks": [],
+	  "difficulty": "reference",
+	  "estimated_time": "10 minutes (browsing)",
+	  "learning_objectives": [
+		"Recognize the thirteen meta-structures that recur across domains",
+		"Read a transition as a named verb bridging two structures",
+        "Place any algorithm, body, or system as an instance of (or hybrid between) these structures"
+	  ],
+	  "maps": [
+		"Atlas_Form_Studio",
+		"Atlas_Graph_Grammar",
+		"Atlas_Gallery_Row_Primitives",
+		"Atlas_Gallery_Row_Kingdoms",
+		"Atlas_Gallery_Row_Transition",
+		"Atlas_Gallery_Row_Modulor",
+		"Atlas_Gallery_Row_Operators",
+		"Atlas_Gallery_Row_DNA_Variance",
+		"Atlas_Gallery_Row_Stacked_Ops"
+	  ]
+	}
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "supersaw_lead": {
+    "_metadata": {
+      "sound_type": "supersaw_lead",
+      "description": "JP-style supersaw lead with detuned unison stack and bright motion.",
+      "instrument": "Virtual Analog (JP-8000 style)",
+      "era": "1990s-2000s",
+      "tags": ["lead", "supersaw", "edm", "trance"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 2.4, "min": 0.4, "max": 8.0, "step": 0.1 },
+      "frequency": { "value": 220.0, "min": 55.0, "max": 1760.0, "step": 1.0 },
+      "detune_cents": { "value": 28.0, "min": 2.0, "max": 60.0, "step": 0.5 },
+      "filter_cutoff": { "value": 4200.0, "min": 300.0, "max": 12000.0, "step": 25.0 },
+      "velocity": { "value": 0.85, "min": 0.1, "max": 1.0, "step": 0.01 },
+      "amplitude": { "value": 0.42, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

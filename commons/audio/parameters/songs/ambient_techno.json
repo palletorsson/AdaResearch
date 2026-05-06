@@ -1,0 +1,26 @@
+{
+    "_metadata": {
+        "sound_type": "ambient_techno_song",
+        "display_name": "Ambient Techno",
+        "description": "Basic Channel, Deepchord, Echospace style. Dub-influenced techno, vast reverbs, minimal beats, hypnotic loops.",
+        "category": "songs",
+        "tags": ["ambient", "techno", "dub", "minimal", "hypnotic", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Basic Channel", "Deepchord", "Echospace", "Porter Ricks"],
+        "reference_tracks": ["Quadrant Dub", "Vantage Isle", "Biokinetics"]
+    },
+    "identity": {
+        "emotion": "meditative_depth",
+        "era": "90s_berlin",
+        "character": ["vast", "dub", "minimal", "hypnotic"]
+    },
+    "parameters": {
+        "bpm": { "min": 100, "max": 125, "value": 115, "step": 1 },
+        "key": { "options": ["Cm", "Bbm", "Dm", "Gm"], "value": "Cm" },
+        "dub_depth": { "min": 0.0, "max": 1.0, "value": 0.8 }
+    },
+    "sound_design": {
+        "ambient_pad": { "attack": 5.0, "reverb_decay": 8.0 },
+        "drums": { "style": "minimal_dub", "tempo": 115 }
+    }
+}

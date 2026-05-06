@@ -52,7 +52,7 @@ var is_sorting = false
 var active_algorithm_index = -1
 var quick_sort_calls = []  # For tracking recursive quick sort steps
 
-func _ready():
+func _ready() -> void:
 	random_generator.randomize()
 	
 	# Create panel container
@@ -66,7 +66,7 @@ func _ready():
 	# Initialize with random data
 	randomize_bars()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Handle automatic sorting/randomizing
 	if auto_animate and !is_sorting:
 		sort_timer += delta
@@ -74,7 +74,7 @@ func _process(delta):
 			sort_timer = 0.0
 			toggle_sort_state()
 
-func toggle_sort_state():
+func toggle_sort_state() -> void:
 	if is_sorted:
 		randomize_bars()
 		is_sorted = false
@@ -82,7 +82,7 @@ func toggle_sort_state():
 		start_sorting_algorithms()
 		is_sorted = true
 
-func create_panel_structure():
+func create_panel_structure() -> void:
 	# Create panel background
 	var panel_base = CSGBox3D.new()
 	panel_base.name = "PanelBase"
@@ -120,7 +120,7 @@ func create_panel_structure():
 		bar_data.append([])
 		bar_objects.append([])
 
-func randomize_bars():
+func randomize_bars() -> void:
 	is_sorting = false
 	
 	# Generate a set of random heights
@@ -140,7 +140,7 @@ func randomize_bars():
 		# Create new bars
 		create_bars_for_algorithm(algo_idx)
 
-func create_bars_for_algorithm(algo_idx):
+func create_bars_for_algorithm(algo_idx) -> void:
 	var shelf_node = panel_container.get_node("Shelf_" + str(algo_idx))
 	if !shelf_node:
 		return
@@ -191,7 +191,7 @@ func highlight_bars(algo_idx, indices, highlight_color = Color(1, 1, 1)):
 			highlight_material.emission = highlight_color.darkened(0.3)
 			bar.material = highlight_material
 
-func swap_bars(algo_idx, idx1, idx2):
+func swap_bars(algo_idx, idx1, idx2) -> void:
 	# Swap data values
 	var temp = bar_data[algo_idx][idx1]
 	bar_data[algo_idx][idx1] = bar_data[algo_idx][idx2]
@@ -200,7 +200,7 @@ func swap_bars(algo_idx, idx1, idx2):
 	# Update bar positions
 	update_bar_positions(algo_idx)
 
-func update_bar_positions(algo_idx):
+func update_bar_positions(algo_idx) -> void:
 	var shelf_node = panel_container.get_node("Shelf_" + str(algo_idx))
 	if !shelf_node:
 		return
@@ -223,7 +223,7 @@ func update_bar_positions(algo_idx):
 			0
 		)
 
-func start_sorting_algorithms():
+func start_sorting_algorithms() -> void:
 	is_sorting = true
 	
 	# Start all four sorting algorithms
@@ -237,7 +237,7 @@ func start_sorting_algorithms():
 				quick_sort(i, 0, bar_data[i].size() - 1)
 
 # BUBBLE SORT
-func bubble_sort(algo_idx):
+func bubble_sort(algo_idx) -> void:
 	var n = bar_data[algo_idx].size()
 	
 	for i in range(n):
@@ -256,7 +256,7 @@ func bubble_sort(algo_idx):
 		is_sorting = false
 
 # SELECTION SORT
-func selection_sort(algo_idx):
+func selection_sort(algo_idx) -> void:
 	var n = bar_data[algo_idx].size()
 	
 	for i in range(n):
@@ -282,7 +282,7 @@ func selection_sort(algo_idx):
 	highlight_bars(algo_idx, [])
 
 # INSERTION SORT
-func insertion_sort(algo_idx):
+func insertion_sort(algo_idx) -> void:
 	var n = bar_data[algo_idx].size()
 	
 	for i in range(1, n):
@@ -311,7 +311,7 @@ func insertion_sort(algo_idx):
 	highlight_bars(algo_idx, [])
 
 # QUICK SORT
-func quick_sort(algo_idx, low, high):
+func quick_sort(algo_idx, low, high) -> void:
 	quick_sort_calls.append([low, high])
 	
 	if low < high:
@@ -350,3 +350,12 @@ func partition(algo_idx, low, high):
 	await get_tree().create_timer(sort_delay).timeout
 	
 	return i + 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

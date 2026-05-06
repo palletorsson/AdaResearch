@@ -4,7 +4,7 @@ extends Node3D
 
 # === ENVIRONMENT CONFIGURATION ===
 @export_group("Environment Settings")
-@export var auto_setup_on_ready: bool = true
+@export var auto_setup_on_ready: bool = false
 @export var target_platform: String = "desktop_vr"  # "desktop_vr" or "mobile_vr"
 @export var enable_advanced_effects: bool = true
 @export var performance_target_fps: int = 90
@@ -199,7 +199,7 @@ vec4 textureSeamless(sampler2D tex, vec2 uv, vec2 padding){
 	vec2 dy = dFdy(uv) * inv_scale;
 
 	// Textures need to repeat somewhere. In addition, repeat must be enabled on the sampler
-	uv = fract(uv+0.5)-0.5;
+	uv = mod(uv+0.5, 1.0)-0.5;
 
 	// Get the bilinear blend factors. This is actually undefined for padding = 0
 	vec2 u = smoothstep(-padding, padding, uv);
@@ -254,7 +254,7 @@ void sky() {
 	
 	// Alpha of tint ramp determines transparency of sky texture
 	COLOR = mix(textureLod(tint_ramp, SKY_COORDS.yx, 0.0).rgb, COLOR, textureLod(tint_ramp, SKY_COORDS.yx, 0.0).a);
-}n
+}
 """
 	return shader
 
@@ -315,8 +315,7 @@ func create_magical_orb_lights():
 
 func start_lighting_animation():
 	"""Start animated lighting effects"""
-	var tween = create_tween()
-	tween.set_loops()
+
 	
 	# Animate sun color cycling
 	if sun_color_cycle:
@@ -396,7 +395,8 @@ func create_sparkle_system():
 	
 	# VR-optimized particle count
 	var particle_count = 200 if target_platform == "mobile_vr" else 500
-	sparkles.amount = int(particle_count * particle_density)
+	var final_count = int(particle_count * particle_density)
+	sparkles.amount = max(1, final_count)  # Ensure at least 1 particle
 	
 	var material = ParticleProcessMaterial.new()
 	
@@ -440,7 +440,8 @@ func create_energy_field_system():
 	energy_field.emitting = true
 	
 	var particle_count = 100 if target_platform == "mobile_vr" else 300
-	energy_field.amount = int(particle_count * particle_density)
+	var final_count = int(particle_count * particle_density)
+	energy_field.amount = max(1, final_count)  # Ensure at least 1 particle
 	
 	var material = ParticleProcessMaterial.new()
 	
@@ -534,9 +535,16 @@ func setup_vr_optimizations():
 	# Additional VR optimizations
 	var viewport = get_viewport()
 	if viewport:
-		# Enable temporal upsampling for better performance
-		viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
-		viewport.scaling_3d_scale = 0.8 if target_platform == "mobile_vr" else 1.0
+		var rendering_method: String = ProjectSettings.get_setting("rendering/renderer/rendering_method", "")
+		var supports_fsr: bool = rendering_method == "forward_plus"
+		var desired_scale: float = 0.8 if target_platform == "mobile_vr" else 1.0
+		# FSR check can be unreliable if project settings don't match runtime renderer
+		# Fallback to Bilinear to prevent errors
+		viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+		viewport.scaling_3d_scale = desired_scale
+		
+		if supports_fsr:
+			print("VR Environment: Using Bilinear scaling (FSR disabled to prevent renderer mismatch errors)")
 	
 	print("VR optimizations applied for target FPS: " + str(performance_target_fps))
 
@@ -591,7 +599,8 @@ func update_particle_counts():
 	for particles in particle_systems:
 		var base_amount = particles.get_meta("base_amount", particles.amount)
 		particles.set_meta("base_amount", base_amount)
-		particles.amount = int(base_amount * particle_density)
+		var final_count = int(base_amount * particle_density)
+		particles.amount = max(1, final_count)  # Ensure at least 1 particle
 
 func apply_visual_theme():
 	"""Apply the selected visual theme to all elements"""

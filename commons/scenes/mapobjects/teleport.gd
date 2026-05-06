@@ -299,8 +299,17 @@ func _update_scene_label():
 # The following functions from your original script might be unnecessary
 # if 'scene' and 'destination_map' are the sole method of configuration
 # set by _configure_teleporter, effectively replacing SpawnDataType logic.
-# - _get_property_list()
-# - _property_can_revert(property)
-# - _property_get_revert(property)
 # - _set_spawn_data(p_spawn_data)
 # - set_collision_disabled(p_disable) # This might still be useful depending on your needs.
+
+func apply_grid_config(data: Dictionary):
+	print("Teleport: Applying grid config: %s" % str(data))
+	
+	if data.has("destination"):
+		var dest = str(data["destination"])
+		set_meta("destination", dest)
+		self.scene_name = dest
+		print("Teleport: Set destination to %s" % dest)
+		
+	if data.has("action"):
+		set_meta("action", str(data["action"]))

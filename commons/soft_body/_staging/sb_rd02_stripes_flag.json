@@ -1,0 +1,47 @@
+{
+  "id": "sb_rd02_stripes_flag",
+  "topology": "rd_field",
+  "rd": {
+    "preset": "stripes",
+    "grid_size": 40,
+    "iterations": 3500,
+    "seed": 3,
+    "threshold": 0.3,
+    "cell_size": 0.08,
+    "pin_mode": "top_row"
+  },
+  "stiffness": 0.55,
+  "damping": 0.992,
+  "gravity": [
+    1.2,
+    -9.8,
+    0.3
+  ],
+  "floor_y": -3.0,
+  "constraint_passes": 4,
+  "steps": 120,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.1,
+  "render": {
+    "color": [
+      0.35,
+      0.7,
+      0.5
+    ],
+    "roughness": 0.55,
+    "particle_radius": 0.018,
+    "show_wires": true,
+    "wire_color": [
+      0.15,
+      0.25,
+      0.2
+    ]
+  },
+  "layout": "rd_bridge",
+  "notes": "DNA BRIDGE: Gray-Scott stripes pattern \u2192 soft-body flag. Brain-ridge cloth pinned top-row, side wind. The Turing pattern as a waving banner."
+}

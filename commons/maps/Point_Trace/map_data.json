@@ -1,0 +1,143 @@
+{
+  "documentation": {
+	"key_elements": [
+	  "`grab_sphere_point_snap` at (2,4) rotated 180 deg",
+	  "`draw_dot` fillhole at (3,4)",
+	  "`dark_sphere` enclosure at (3,3)",
+	  "`cube_scene` markers at (3,5) and (4,5)",
+	  "Teleporter `t` at (5,10)",
+      "Floating text `3t:the_trace` at (3,13)"
+	],
+	"layout": "7x14 corridor with irregular terrain and a southern taper.",
+	"objective": "Introduce trace as accumulated movement; gesture and error over time.",
+	"summary": "Point_Trace - Duration and Residue"
+  },
+  "layers": {
+	"interactables": [
+	  ["dark_sphere:0:-0.5"," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","draw_dot:0:1:0#fillhole:remove"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","cube_scene:0:0:0.90#group:fillhole"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","science_screen:180:2#mode:trace"," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "]
+	],
+	"structure": [
+	  ["1","1","1","1","1","0","1"],
+	  ["1","1","1","1","1","0","0"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","2"],
+	  ["1","1","1","1","1","1","1"],
+	  ["0","2","2","1","2","2","0"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","0","1"],
+	  ["0","0","0","0","1","1","1"],
+	  ["0","0","0","0","0","0","0"],
+	  ["0","0","0","0","0","0","0"]
+	],
+	"utilities": [
+	  ["m:0:3:-1:0.1","sp"," "," "," "," ","an:-90"],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," ","sub:encodings"," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," ","t"," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "],
+	  [" "," "," ","3t:the_trace"," "," "," "]
+	]
+  },
+  "lighting": {
+	"ambient_color": [
+	  0.4,
+	  0.4,
+	  0.5
+	],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "color": [
+		1.0,
+		0.9,
+		0.8
+	  ],
+	  "direction": [
+		-0.4,
+		-0.7,
+		-0.4
+	  ],
+	  "enabled": true,
+	  "energy": 1.2
+	}
+  },
+  "map_info": {
+	"description": "The Trace introduces duration and embodied residue into geometry. Unlike points and lines that resolve instantly into abstraction, traces accumulate over time as records of movement. The map emphasizes gesture, repetition, and error, foregrounding how space remembers interaction. The trace resists full discretization, functioning as a counterpoint to the clean logic of primitives and revealing geometry as a lived process rather than a static system.",
+	"dimensions": {
+	  "depth": 14.0,
+	  "max_height": 2.0,
+	  "width": 7.0
+	},
+	"format": "json",
+	"lookup_name": "Point_Trace",
+	"metadata": {
+	  "category": "tutorial",
+	  "difficulty": "beginner",
+	  "estimated_time": "3-4 minutes",
+	  "learning_objectives": [
+        "The Trace"
+	  ]
+	},
+	"name": "The Trace",
+	"title": "Duration and Residue",
+	"version": "1.0"
+  },
+  "settings": {
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [
+		0.05,
+		0.05,
+		0.1
+	  ],
+	  "type": "sky"
+	},
+	"cube_size": 1.0,
+	"enable_physics": true,
+	"enter_type": "I",
+	"gutter": 0.0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true
+  },
+  "subtitles": {
+	"encodings": "There is no original behind the trace — only encodings at different scales, each erasing differently, each affording differently, none closer to the real.."
+  },
+  "utility_definitions": {
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	},
+	"t": {
+	  "description": "Continue to next step",
+	  "name": "Next",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
+  }
+}

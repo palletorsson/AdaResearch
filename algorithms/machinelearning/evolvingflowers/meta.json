@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_evolvingflowers",
+  "title": "Evolving Flowers",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+  "script": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/evolvingflowers/README.md",
+    "tutorial": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/evolvingflowers/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/evolvingflowers/summery.md"
+  },
+  "summary": "The `Evolving Flowers` sandbox investigates concepts from Evolving Flowers inside a real-time Godot lab.",
+  "keywords": [
+    "branch",
+    "branches",
+    "calculate",
+    "create",
+    "crossover",
+    "environment"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

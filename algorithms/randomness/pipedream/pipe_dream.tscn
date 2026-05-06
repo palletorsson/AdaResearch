@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c65gryu7tivbo"]
+
+[ext_resource type="Script" uid="uid://dlpbclbnm13te" path="res://algorithms/randomness/pipedream/PipeDream.gd" id="1_56xo3"]
+
+[node name="PipeDream" type="Node3D"]
+script = ExtResource("1_56xo3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61757827, 2.1875517)

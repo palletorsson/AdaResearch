@@ -1,165 +1,215 @@
+## Vector Fields — Visualizes force fields with MultiMesh arrows and Area3D sources
+## Arrows rendered in ONE draw call via MultiMesh, particles advected through the field
+##
+## @identity
+## essence: F(p) = sum(sources). Each point samples the superposed field of all Area3D gravity sources. Arrows point where particles would go.
+## desire: To place an attractor and a repulsor and watch the field tear itself between them — arrows bending, particles caught in the tug of war.
+## critical_parameter: The ratio of attractor gravity (+8) to repulsor gravity (-6). It determines whether particles orbit, escape, or get trapped.
+## triggers: Automatic — 125 arrows orient by sampling field, 30 particles advected by Area3D gravity overrides, escaped particles respawn randomly
+## emerges: Saddle points between attractor and repulsor where the field cancels. Particle streams forming visible flow lanes. Color gradient mapping field magnitude.
+## needs: MultiMesh arrow grid [has], RigidBody3D test particles [has], Area3D sources [has]. Missing: VR grabbable sources, field strength sliders.
+## relationships: More physical than VectorFieldFlow (uses Godot's Area3D physics). Complements force_field_visualizer (which computes fields analytically). Lives in ForcesSystems.
+## truth: A field is not a picture of arrows. It is a promise: if you put a particle here, this is what will happen.
 extends Node3D
 
-class_name VectorFields
+@export var grid_resolution: int = 5  # arrows per axis (5³ = 125 arrows)
+@export var grid_spacing: float = 0.7
+@export var arrow_scale: float = 0.18
+@export var particle_count: int = 30
 
-enum FieldType { RADIAL, VORTEX, UNIFORM, SINUSOIDAL }
+var arrow_multimesh: MultiMeshInstance3D
+var field_sources: Array[Area3D] = []
+var particles: Array[RigidBody3D] = []
 
-var current_field_type = FieldType.RADIAL
-var grid_size = 10
-var grid_spacing = 1.0
-var vector_arrows = []
-var test_particle_velocity = Vector3.ZERO
-var trail_enabled = true
-var trail_points = []
-var max_trail_points = 100
+func _ready() -> void:
+	scale = Vector3(0.8, 0.8, 0.8)
+	_create_field_sources()
+	_create_arrow_grid()
+	_create_test_particles()
 
-func _ready():
-	_create_grid()
-	_create_vector_field()
-	_connect_ui()
-	_reset_particle()
+func _create_field_sources() -> void:
+	# Attractor (pulls inward)
+	var attractor := Area3D.new()
+	attractor.name = "Attractor"
+	attractor.gravity_space_override = Area3D.SPACE_OVERRIDE_COMBINE
+	attractor.gravity_point = true
+	attractor.gravity = 8.0
+	attractor.gravity_point_unit_distance = 2.0
+	var acol := CollisionShape3D.new()
+	var ashape := SphereShape3D.new()
+	ashape.radius = 3.0
+	acol.shape = ashape
+	attractor.add_child(acol)
+	attractor.position = Vector3(-1.5, 1.5, 0)
 
-func _create_grid():
-	# Create grid lines for reference
-	var grid_material = StandardMaterial3D.new()
-	grid_material.albedo_color = Color(0.3, 0.3, 0.3, 0.5)
-	grid_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	
-	for i in range(-grid_size, grid_size + 1):
-		# X lines
-		var x_line = CSGBox3D.new()
-		x_line.material = grid_material
-		x_line.size = Vector3(grid_size * 2 * grid_spacing, 0.01, 0.01)
-		x_line.position = Vector3(0, 0, i * grid_spacing)
-		$Grid/GridLines.add_child(x_line)
-		
-		# Z lines
-		var z_line = CSGBox3D.new()
-		z_line.material = grid_material
-		z_line.size = Vector3(0.01, 0.01, grid_size * 2 * grid_spacing)
-		z_line.position = Vector3(i * grid_spacing, 0, 0)
-		$Grid/GridLines.add_child(z_line)
+	# Visual marker
+	var amarker := MeshInstance3D.new()
+	var asphere := SphereMesh.new()
+	asphere.radius = 0.25
+	amarker.mesh = asphere
+	var amat := StandardMaterial3D.new()
+	amat.albedo_color = Color(1.0, 0.3, 0.3)
+	amat.emission_enabled = true
+	amat.emission = Color(1.0, 0.2, 0.2) * 1.5
+	amarker.material_override = amat
+	attractor.add_child(amarker)
+	add_child(attractor)
+	field_sources.append(attractor)
 
-func _create_vector_field():
-	# Clear existing arrows
-	for arrow in vector_arrows:
-		arrow.queue_free()
-	vector_arrows.clear()
-	
-	# Create vector arrows at grid points
-	for x in range(-grid_size, grid_size + 1):
-		for z in range(-grid_size, grid_size + 1):
-			var pos = Vector3(x * grid_spacing, 0.1, z * grid_spacing)
-			var field_vector = _calculate_field_vector(pos)
-			
-			var arrow = preload("res://algorithms/physicssimulation/vectorfields/VectorFieldArrow.gd").new()
-			arrow.position = pos
-			arrow.set_direction(field_vector)
-			arrow.set_magnitude(field_vector.length())
-			$VectorField.add_child(arrow)
-			vector_arrows.append(arrow)
+	# Repulsor (pushes outward)
+	var repulsor := Area3D.new()
+	repulsor.name = "Repulsor"
+	repulsor.gravity_space_override = Area3D.SPACE_OVERRIDE_COMBINE
+	repulsor.gravity_point = true
+	repulsor.gravity = -6.0  # Negative = repulsion
+	repulsor.gravity_point_unit_distance = 2.0
+	var rcol := CollisionShape3D.new()
+	var rshape := SphereShape3D.new()
+	rshape.radius = 3.0
+	rcol.shape = rshape
+	repulsor.add_child(rcol)
+	repulsor.position = Vector3(1.5, 1.5, 0)
 
-func _calculate_field_vector(pos: Vector3) -> Vector3:
-	match current_field_type:
-		FieldType.RADIAL:
-			# Radial field: vectors point away from origin
-			var direction = pos.normalized()
-			return direction * 2.0
-		
-		FieldType.VORTEX:
-			# Vortex field: vectors rotate around origin
-			var direction = Vector3(-pos.z, 0, pos.x).normalized()
-			return direction * 2.0
-		
-		FieldType.UNIFORM:
-			# Uniform field: constant direction
-			return Vector3(1, 0, 0) * 2.0
-		
-		FieldType.SINUSOIDAL:
-			# Sinusoidal field: varying magnitude
-			var magnitude = sin(pos.x * 0.5) * cos(pos.z * 0.5) * 2.0
-			return Vector3(1, 0, 0) * magnitude
-	
-	return Vector3.ZERO
+	var rmarker := MeshInstance3D.new()
+	var rsphere := SphereMesh.new()
+	rsphere.radius = 0.25
+	rmarker.mesh = rsphere
+	var rmat := StandardMaterial3D.new()
+	rmat.albedo_color = Color(0.3, 0.5, 1.0)
+	rmat.emission_enabled = true
+	rmat.emission = Color(0.2, 0.4, 1.0) * 1.5
+	rmarker.material_override = rmat
+	repulsor.add_child(rmarker)
+	add_child(repulsor)
+	field_sources.append(repulsor)
 
-func _physics_process(delta):
-	if trail_enabled:
-		_update_particle_trail()
-	
-	# Update vector field if needed
-	_update_vector_field()
+func _create_arrow_grid() -> void:
+	arrow_multimesh = MultiMeshInstance3D.new()
+	arrow_multimesh.name = "ArrowGrid"
 
-func _update_particle_trail():
-	var particle_pos = $TestParticle.position
-	
-	# Add current position to trail
-	trail_points.append(particle_pos)
-	
-	# Limit trail length
-	if trail_points.size() > max_trail_points:
-		trail_points.pop_front()
-	
-	# Clear existing trail
-	for child in $ParticleTrail.get_children():
-		child.queue_free()
-	
-	# Draw trail
-	for i in range(1, trail_points.size()):
-		var start = trail_points[i-1]
-		var end = trail_points[i]
-		
-		var trail_segment = CSGBox3D.new()
-		trail_segment.size = Vector3(0.05, 0.05, start.distance_to(end))
-		trail_segment.position = (start + end) / 2
-		trail_segment.look_at(end, Vector3.UP)
-		
-		var trail_material = StandardMaterial3D.new()
-		trail_material.albedo_color = Color(0, 1, 0, 0.7)
-		trail_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		trail_segment.material = trail_material
-		
-		$ParticleTrail.add_child(trail_segment)
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	var total := grid_resolution * grid_resolution * grid_resolution
+	mm.instance_count = total
 
-func _update_vector_field():
-	# Update vector field based on current type
-	for i in range(vector_arrows.size()):
-		var arrow = vector_arrows[i]
-		var pos = arrow.position
-		var field_vector = _calculate_field_vector(pos)
-		arrow.set_direction(field_vector)
-		arrow.set_magnitude(field_vector.length())
+	# Arrow mesh (thin cone)
+	var cone := CylinderMesh.new()
+	cone.top_radius = 0.0
+	cone.bottom_radius = arrow_scale * 0.5
+	cone.height = arrow_scale * 2.0
+	mm.mesh = cone
 
-func _connect_ui():
-	$UI/VBoxContainer/FieldTypeButton.pressed.connect(_on_field_type_pressed)
-	$UI/VBoxContainer/ResetButton.pressed.connect(_on_reset_pressed)
-	$UI/VBoxContainer/TrailToggle.pressed.connect(_on_trail_toggle_pressed)
+	arrow_multimesh.multimesh = mm
 
-func _on_field_type_pressed():
-	current_field_type = (current_field_type + 1) % FieldType.size()
-	_create_vector_field()
-	
-	# Update UI text
-	var field_names = ["Radial", "Vortex", "Uniform", "Sinusoidal"]
-	$UI/VBoxContainer/FieldTypeButton.text = "Field: " + field_names[current_field_type]
+	# Material
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission_energy_multiplier = 1.5
+	arrow_multimesh.material_override = mat
 
-func _on_reset_pressed():
-	_reset_particle()
+	add_child(arrow_multimesh)
+	_update_arrows()
 
-func _on_trail_toggle_pressed():
-	trail_enabled = !trail_enabled
-	$UI/VBoxContainer/TrailToggle.text = "Trail: " + ("ON" if trail_enabled else "OFF")
-	
-	if !trail_enabled:
-		# Clear trail
-		for child in $ParticleTrail.get_children():
+func _create_test_particles() -> void:
+	for i in range(particle_count):
+		var rb := RigidBody3D.new()
+		rb.mass = 0.1
+		rb.linear_damp = 1.0  # Some drag so they don't fly away
+
+		var col := CollisionShape3D.new()
+		var shape := SphereShape3D.new()
+		shape.radius = 0.04
+		col.shape = shape
+		rb.add_child(col)
+
+		var mesh_inst := MeshInstance3D.new()
+		var sphere := SphereMesh.new()
+		sphere.radius = 0.06
+		sphere.height = 0.12
+		mesh_inst.mesh = sphere
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(1.0, 1.0, 0.3)
+		mat.emission_enabled = true
+		mat.emission = Color(1.0, 0.9, 0.2) * 1.2
+		mesh_inst.material_override = mat
+		rb.add_child(mesh_inst)
+
+		# Random position in the field
+		rb.position = Vector3(
+			randf_range(-1.5, 1.5),
+			randf_range(0.5, 2.5),
+			randf_range(-1.5, 1.5)
+		)
+		rb.gravity_scale = 0.0  # Only affected by Area3D fields
+
+		add_child(rb)
+		particles.append(rb)
+
+func _physics_process(_delta: float):
+	# Respawn escaped particles
+	for rb in particles:
+		if rb.position.length() > 5.0:
+			rb.position = Vector3(
+				randf_range(-1.5, 1.5),
+				randf_range(0.5, 2.5),
+				randf_range(-1.5, 1.5)
+			)
+			rb.linear_velocity = Vector3.ZERO
+
+func _update_arrows() -> void:
+	var mm := arrow_multimesh.multimesh
+	var idx := 0
+	var half := (grid_resolution - 1) * grid_spacing * 0.5
+
+	for x in range(grid_resolution):
+		for y in range(grid_resolution):
+			for z in range(grid_resolution):
+				var pos := Vector3(
+					x * grid_spacing - half,
+					y * grid_spacing + 0.3,
+					z * grid_spacing - half
+				)
+
+				# Calculate field vector at this point
+				var field := Vector3.ZERO
+				for source in field_sources:
+					var to_source := source.position - pos
+					var dist := to_source.length()
+					if dist < 0.1:
+						continue
+					var strength: float = source.gravity / (dist * dist)
+					if source.gravity > 0:
+						field += to_source.normalized() * strength
+					else:
+						field -= to_source.normalized() * abs(strength)
+
+				# Orient arrow along field direction
+				var t := Transform3D.IDENTITY
+				t.origin = pos
+				if field.length() > 0.01:
+					var up := Vector3.UP
+					if abs(field.normalized().dot(up)) > 0.99:
+						up = Vector3.RIGHT
+					t = t.looking_at(pos + field.normalized(), up)
+					t.basis = t.basis * Basis(Vector3.RIGHT, -PI / 2)  # Point cone along direction
+
+				var mag: float = clamp(field.length(), 0.1, 3.0)
+				t.basis = t.basis.scaled(Vector3(1, mag, 1))
+				mm.set_instance_transform(idx, t)
+
+				# Color by magnitude
+				var color := Color.from_hsv(0.6 - clamp(mag / 3.0, 0, 0.6), 0.8, 1.0)
+				mm.set_instance_color(idx, color)
+
+				idx += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
 			child.queue_free()
-		trail_points.clear()
 
-func _reset_particle():
-	$TestParticle.position = Vector3(0, 1, 0)
-	test_particle_velocity = Vector3.ZERO
-	trail_points.clear()
-	
-	# Clear trail
-	for child in $ParticleTrail.get_children():
-		child.queue_free()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,7 @@
+Concept: Collective intelligence meeting collective intelligence — the catalyst is a flock of boids rather than a single projectile, and the creature is a swarm running the same rules, so the encounter is two self-organising systems overlapping in one volume.
+Sequence role: Catalyst chamber for the Swarm Intelligence sequence, the last map before returning to the Lab. After the sequence developed boid flocking, stigmergy, and emergent coordination as population behaviours, this chamber makes the sequence's thesis interactional: local rules produce global coordination, and when two rule systems share a volume the global coordination becomes shared.
+Technical angle: Catalyst mode swarm, spawning a flock of eight boids on each activation that follow Reynolds' separation, alignment, and cohesion rules with tunable parameters. Creature swarm_hive runs a similar flock with its own parameter set. Science Screen scatter plots alignment and cohesion values over time as two braided trajectories.
+Critical angle: The chamber reframes authority as emergent rather than centralised. Neither flock controls the encounter, and both are controlled by the rules they share; the boundary between player and creature becomes a boundary between parameter sets rather than a boundary between agents.
+Key artifacts: swarm_hive carries the creature-side flock; the swarm catalyst carries the player-side flock; the Science Screen's scatter plot reads the coupling as a statistical footprint rather than as a per-agent log.
+
+Gap: No gap identified.

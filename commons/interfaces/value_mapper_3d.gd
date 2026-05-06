@@ -22,11 +22,18 @@ signal values_changed(x_value: float, y_value: float, z_value: float)
 @export var label_y: String = "Y"
 @export var label_z: String = "Z"
 @export var show_projection_lines: bool = true
+@export var show_color_space_map: bool = false
+@export var color_space_opacity: float = 0.35
+@export var color_space_grid_density: float = 8.0
+@export var color_space_grid_thickness: float = 0.08
+@export var color_space_grid_strength: float = 0.65
+@export var color_space_emission_strength: float = 0.45
 
 var point: Node3D
 var axis_x: Node3D
 var axis_y: Node3D
 var axis_z: Node3D
+var color_space_cube: MeshInstance3D
 var x_projection_line: MeshInstance3D
 var y_projection_line: MeshInstance3D
 var z_projection_line: MeshInstance3D
@@ -37,8 +44,11 @@ var z_label: Label3D
 
 const POINT_SCENE := preload("res://commons/primitives/point/grab_sphere_point_with_text.tscn")
 const COORDINATE_LINE := preload("res://commons/primitives/line/coordinate_line.tscn")
+const COLOR_SPACE_SHADER := preload("res://commons/resourses/shaders/color_space_map.gdshader")
 
 func _ready() -> void:
+	if show_color_space_map:
+		_create_color_space_map()
 	_create_axes()
 	_create_point()
 	if show_projection_lines:
@@ -46,6 +56,27 @@ func _ready() -> void:
 	if show_labels:
 		_create_labels()
 	_update_output()
+
+func _create_color_space_map() -> void:
+	color_space_cube = MeshInstance3D.new()
+	color_space_cube.name = "ColorSpaceMap"
+
+	var cube_mesh := BoxMesh.new()
+	cube_mesh.size = space_size
+	color_space_cube.mesh = cube_mesh
+	color_space_cube.position = space_size * 0.5
+
+	var material := ShaderMaterial.new()
+	material.shader = COLOR_SPACE_SHADER
+	material.set_shader_parameter("cube_size", space_size)
+	material.set_shader_parameter("opacity", color_space_opacity)
+	material.set_shader_parameter("grid_density", color_space_grid_density)
+	material.set_shader_parameter("grid_thickness", color_space_grid_thickness)
+	material.set_shader_parameter("grid_strength", color_space_grid_strength)
+	material.set_shader_parameter("emission_strength", color_space_emission_strength)
+	color_space_cube.material_override = material
+
+	add_child(color_space_cube)
 
 func _create_axes() -> void:
 	# Create corner box layout - all axes start from origin (corner) and extend in positive directions

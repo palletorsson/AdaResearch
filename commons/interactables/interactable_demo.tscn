@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dcwa500yc5w2p"]
+
+[ext_resource type="Script" uid="uid://xy04mtfsr4sk" path="res://commons/interactables/InteractableDemo.gd" id="1_demo"]
+
+[node name="InteractableDemo" type="Node3D" unique_id=1187414849]
+script = ExtResource("1_demo")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2052514979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7931993, 0.6514306, 1.1873395)

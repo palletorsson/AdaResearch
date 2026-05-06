@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgk28xb4qp5rn"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/parametric/klein_bottle.gd" id="2_klein"]
+
+[node name="KleinBottle" instance=ExtResource("1_pickable")]
+script = ExtResource("2_klein")

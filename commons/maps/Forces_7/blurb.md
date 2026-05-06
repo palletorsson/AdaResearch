@@ -1,0 +1,1 @@
+Constraints limit motion. A pendulum swings but cannot fly away — the string constrains it to an arc. Hinges, rails, ropes: constraints remove degrees of freedom. What cannot move is as important as what can. Constraints shape possibility.

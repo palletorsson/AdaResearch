@@ -13,18 +13,35 @@ extends Node3D
 ## Recursive circles within circles
 ## Chapter 08: Fractals
 
+# @identity
+# essence: circle(center, r, d) = torus(r) + 4 * circle(center +/- offset, r * 0.5, d-1)
+# desire: To hypnotize — nested tori spinning at depth-dependent speeds, each ring a portal into the next scale
+# critical_parameter: max_depth — at 3 it's a simple pattern, at 5 the circles overlap and interfere, creating moire-like density
+# triggers: Full rotation of outermost ring → pause; depth-varying rotation_per_depth creates visual decoherence
+# emerges: Interference patterns between spinning tori at different depths — visual beats from simple rotation ratios
+# needs: VR depth slider [missing], rotation speed control [missing]
+# relationships: Simplest fractal recursion — precedes Koch and Sierpinski; introduces the 4-fold branching pattern
+# truth: Recursion is not repetition — it is self-reference, and the circle that contains circles is the first fractal you can hold.
+
 const MAT_PINK := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
+const MAT_POP_PLASTIC := preload("res://algorithms/shaders/queer_materials/mat_pop_plastic.tres")
 
 @export var max_depth: int = 4
 @export var radius_reduction: float = 0.5
+@export var rotation_speed: float = 0.3
+@export var rotation_per_depth: float = 0.5
+@export var pause_duration: float = 10.0
 
 var _sim_root: Node3D
 var _status_label: Label3D
+var _circles: Array = []
+var _is_paused: bool = false
+var _pause_timer: float = 0.0
 
 func _ready() -> void:
 	_setup_environment()
-	_draw_circles(Vector3.ZERO, 0.4, max_depth)
-	set_process(false)
+	_draw_circles(Vector3.ZERO, 2.0, max_depth)
+	set_process(true)
 
 func _setup_environment() -> void:
 	_sim_root = Node3D.new()
@@ -63,11 +80,54 @@ func _create_circle(center: Vector3, radius: float, depth: int) -> void:
 	mesh_instance.mesh = torus
 	mesh_instance.position = center
 
-	var material := StandardMaterial3D.new()
-	var hue_shift := float(depth) / float(max_depth)
-	material.albedo_color = Color(1.0, 0.5 + hue_shift * 0.5, 0.8 + hue_shift * 0.2)
-	material.emission_enabled = true
-	material.emission = material.albedo_color * 0.5
-	mesh_instance.material_override = material
+	# Use the pop plastic shader material
+	mesh_instance.material_override = MAT_POP_PLASTIC
 
 	_sim_root.add_child(mesh_instance)
+
+	# Store circle data for rotation
+	_circles.append({
+		"node": mesh_instance,
+		"depth": depth,
+		"center": center,
+		"rotation": 0.0  # Track total rotation
+	})
+
+func _process(delta: float) -> void:
+	# Handle pause timer
+	if _is_paused:
+		_pause_timer += delta
+		if _pause_timer >= pause_duration:
+			_is_paused = false
+			_pause_timer = 0.0
+		return
+
+	# Rotate each circle based on its depth
+	for circle_data in _circles:
+		var node = circle_data["node"]
+		var depth = circle_data["depth"]
+
+		# Different rotation speeds per depth level
+		var speed_multiplier = rotation_speed * (1.0 + depth * rotation_per_depth)
+		var rotation_amount = delta * speed_multiplier
+
+		node.rotate_z(rotation_amount)
+		circle_data["rotation"] += rotation_amount
+
+		# Check if this circle completed a full rotation (2π radians)
+		if circle_data["rotation"] >= TAU:  # TAU = 2π
+			circle_data["rotation"] = fmod(circle_data["rotation"], TAU)
+
+			# Pause animation when first circle completes rotation
+			if depth == max_depth:  # Check the outermost/first created circle
+				_is_paused = true
+				_pause_timer = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

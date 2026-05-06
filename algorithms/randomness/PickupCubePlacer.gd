@@ -14,11 +14,11 @@ const PICKUP_CUBE_SCENE = "res://commons/scenes/mapobjects/pick_up_cube.tscn"
 var grid_system: GridSystem
 var pickup_cubes: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	# Find the grid system
 	call_deferred("_find_grid_system")
 
-func _find_grid_system():
+func _find_grid_system() -> void:
 	# Look for GridSystem in the scene
 	grid_system = get_tree().get_first_node_in_group("grid_system")
 	if not grid_system:
@@ -44,7 +44,7 @@ func _find_node_by_class(node: Node, _class_name: String) -> Node:
 			return result
 	return null
 
-func place_pickup_cubes():
+func place_pickup_cubes() -> void:
 	print("PickupCubePlacer: Placing %d pickup cubes using '%s' pattern" % [number_of_cubes, placement_pattern])
 	
 	var positions = _generate_positions()
@@ -185,7 +185,7 @@ func _is_valid_position(pos: Vector3i) -> bool:
 	
 	return true
 
-func _create_pickup_cube_at(x: int, y: int, z: int):
+func _create_pickup_cube_at(x: int, y: int, z: int) -> void:
 	# Load pickup cube scene
 	var scene_resource = load(PICKUP_CUBE_SCENE) as PackedScene
 	if not scene_resource:
@@ -211,22 +211,22 @@ func _create_pickup_cube_at(x: int, y: int, z: int):
 	print("PickupCubePlacer: Created pickup cube at (%d,%d,%d)" % [x, y, z])
 
 # Public API
-func set_placement_pattern(pattern: String):
+func set_placement_pattern(pattern: String) -> void:
 	placement_pattern = pattern
 	print("PickupCubePlacer: Pattern set to '%s'" % pattern)
 
-func set_number_of_cubes(count: int):
+func set_number_of_cubes(count: int) -> void:
 	number_of_cubes = max(1, count)
 	print("PickupCubePlacer: Number of cubes set to %d" % number_of_cubes)
 
-func clear_pickup_cubes():
+func clear_pickup_cubes() -> void:
 	for cube in pickup_cubes:
 		if is_instance_valid(cube):
 			cube.queue_free()
 	pickup_cubes.clear()
 	print("PickupCubePlacer: Cleared all pickup cubes")
 
-func respawn_pickup_cubes():
+func respawn_pickup_cubes() -> void:
 	clear_pickup_cubes()
 	await get_tree().process_frame
 	place_pickup_cubes()
@@ -239,3 +239,6 @@ func get_pickup_info() -> Dictionary:
 		"grid_bounds": grid_bounds,
 		"positions": pickup_cubes.map(func(cube): return cube.position)
 	}
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,57 @@
+{
+  "id": "morph_auto_house_09",
+  "family": "house",
+  "notes": "Auto-generated house candidate.",
+  "camera_yaw": 0.791,
+  "camera_pitch": 0.356,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.95,
+      1.115,
+      1.075
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 4,
+  "rules": [
+    {
+      "id": "front_apertures",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.7
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 3,
+        "rows": 2,
+        "length": 0.057,
+        "scale": 0.743,
+        "door_col": 1,
+        "door_height_scale": 1.503
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "roof_cap",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.7
+      },
+      "selector": "up",
+      "op": "gable_cap",
+      "params": {
+        "pitch_deg": 26.06,
+        "thickness": 0.102,
+        "overhang": 1.186
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ]
+}

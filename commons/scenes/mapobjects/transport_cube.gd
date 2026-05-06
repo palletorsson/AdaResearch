@@ -10,6 +10,7 @@ class_name TransportCube
 @export var move_speed: float = 2.0  # Speed of movement
 @export var return_delay: float = 3.0  # Seconds to wait before returning
 @export var start_delay: float = 1.0  # Seconds to wait before starting to move
+@export var auto_start: bool = false  # If true, starts moving automatically without player trigger
 
 # Visual effects
 @export var rotation_speed: float = 0.5  # Cube rotation while idle
@@ -59,8 +60,13 @@ func _ready() -> void:
 	
 	# Apply transport cube material
 	setup_transport_material()
-	
+
 	print("TransportCube: Ready to transport from %s to %s (distance: %.1f)" % [initial_position, target_position, move_distance])
+
+	# Auto-start if enabled
+	if auto_start:
+		print("TransportCube: Auto-start enabled, beginning transport sequence")
+		start_transport()
 
 func setup_transport_material():
 	"""Apply cyan/blue transport cube material"""
@@ -191,6 +197,11 @@ func _process(delta: float) -> void:
 				is_returning = false
 				movement_sound.stop()
 				print("TransportCube: Returned to start position")
+
+				# Auto-restart if auto_start is enabled (continuous loop)
+				if auto_start:
+					print("TransportCube: Auto-restart enabled, beginning next cycle")
+					start_transport()
 		else:
 			global_position = global_position.move_toward(target_position, move_speed * delta)
 			
@@ -273,6 +284,14 @@ func set_transport_parameters(distance: float, direction: Vector3):
 func set_movement_speed(speed: float):
 	"""Set movement speed"""
 	move_speed = speed
+
+func set_auto_start(enabled: bool):
+	"""Enable or disable auto-start mode"""
+	auto_start = enabled
+	# Only start if already in tree, otherwise _ready() will handle it
+	if enabled and is_inside_tree() and not is_moving and not waiting_to_start:
+		print("TransportCube: Auto-start enabled, beginning transport sequence")
+		start_transport()
 
 func set_return_delay(delay: float):
 	"""Set return delay"""

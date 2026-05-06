@@ -1,0 +1,21 @@
+{
+  "vocal_formant": {
+    "_metadata": {
+      "sound_type": "vocal_formant",
+      "description": "Formant-shaped synth lead with vowel-like vocal resonance.",
+      "instrument": "Formant Synth",
+      "era": "1990s-present",
+      "tags": ["lead", "formant", "vocal", "vowel"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 2.4, "min": 0.3, "max": 10.0, "step": 0.1 },
+      "frequency": { "value": 196.0, "min": 55.0, "max": 1760.0, "step": 1.0 },
+      "breathiness": { "value": 0.12, "min": 0.0, "max": 0.6, "step": 0.01 },
+      "vibrato_rate": { "value": 5.2, "min": 0.1, "max": 12.0, "step": 0.1 },
+      "vibrato_depth": { "value": 0.012, "min": 0.0, "max": 0.08, "step": 0.001 },
+      "velocity": { "value": 0.8, "min": 0.1, "max": 1.0, "step": 0.01 },
+      "amplitude": { "value": 0.4, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

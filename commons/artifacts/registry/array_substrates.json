@@ -1,0 +1,129 @@
+{
+	"id": "array_substrates",
+	"name": "Array Substrates",
+	"description": "Grid2D substrate stations for the array_tutorial sequence. Three cartridges (disco, slow, random) demonstrating substrate ↔ cartridge factoring.",
+	"category": "substrate",
+	"theoreticalGrounding": "Substrate-cartridge separation: the array is the reusable object, the cartridge is the algorithm running on it. Same hardware, many stories.",
+	"artifacts": {
+		"array_disco_substrate": {
+			"lookup_name": "array_disco_substrate",
+			"name": "Array DISCO Substrate",
+			"description": "Grid2D substrate running cartridge 'disco' at step interval 0.08s. One station of the Array_Soane_Plaza triptych — same array, different cadence.",
+			"category": "substrate",
+			"complexity": "beginner",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"tags": [
+				"array",
+				"substrate",
+				"grid2d",
+				"disco",
+				"soane",
+				"cartridge"
+			],
+			"qfep_connection": "F_order rhythm",
+			"parameters": {
+				"algorithm": "disco",
+				"interval": 0.08,
+				"auto_play": "true",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact",
+				"label_text": "DISCO"
+			},
+			"size_group": "compact"
+		},
+		"array_slow_substrate": {
+			"lookup_name": "array_slow_substrate",
+			"name": "Array SLOW Substrate",
+			"description": "Grid2D substrate running cartridge 'slow' at step interval 0.6s. One station of the Array_Soane_Plaza triptych — same array, different cadence.",
+			"category": "substrate",
+			"complexity": "beginner",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"tags": [
+				"array",
+				"substrate",
+				"grid2d",
+				"slow",
+				"soane",
+				"cartridge"
+			],
+			"qfep_connection": "F_order at slower tempo",
+			"parameters": {
+				"algorithm": "slow",
+				"interval": 0.6,
+				"auto_play": "true",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact",
+				"label_text": "SLOW"
+			},
+			"size_group": "compact"
+		},
+		"array_random_substrate": {
+			"lookup_name": "array_random_substrate",
+			"name": "Array RANDOM Substrate",
+			"description": "Grid2D substrate running cartridge 'random' at step interval 0.2s. One station of the Array_Soane_Plaza triptych — same array, different cadence.",
+			"category": "substrate",
+			"complexity": "beginner",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"tags": [
+				"array",
+				"substrate",
+				"grid2d",
+				"random",
+				"soane",
+				"cartridge"
+			],
+			"qfep_connection": "E_entropy as cartridge over F_order substrate",
+			"parameters": {
+				"algorithm": "random",
+				"interval": 0.2,
+				"auto_play": "true",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact",
+				"label_text": "RANDOM"
+			},
+			"size_group": "compact"
+		}
+	}
+}

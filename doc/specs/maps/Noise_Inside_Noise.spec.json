@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Noise_Inside_Noise",
+  "home_sequence": "noise",
+  "dimensions": {
+    "w": 12,
+    "d": 13
+  },
+  "signature": "noisesphere wraps domain-warped noise onto a spherical surface",
+  "style": null,
+  "echoes": [
+    "transformation"
+  ],
+  "density": 0.029,
+  "breath_zones": [
+    {
+      "size": 19,
+      "bounds": {
+        "x": 4,
+        "z": 7,
+        "w": 5,
+        "d": 6
+      },
+      "centroid": [
+        5.631578947368421,
+        9.894736842105264
+      ]
+    },
+    {
+      "size": 15,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 3
+      },
+      "centroid": [
+        3.3333333333333335,
+        0.6666666666666666
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 35,
+    "breath_zone_count": 2,
+    "unique_tokens": 1
+  }
+}

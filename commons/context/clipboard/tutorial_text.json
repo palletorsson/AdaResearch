@@ -1,0 +1,659 @@
+{
+	"_metadata": {
+		"description": "Tutorial text content for codeDisplay system",
+		"format": "BBCode supported text",
+		"version": "1.0"
+	},
+	"tutorials": {
+		"2_5d_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/2_5d_axioms.gd",
+			"order": 2.0,
+			"sequence": "arrays"
+		},
+		"ambient_scifi_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/ambient_scifi_axioms.gd",
+			"order": 3.0,
+			"sequence": "systems_music"
+		},
+		"ant_colony_optimization_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/ant_colony_optimization_axioms.gd",
+			"order": 0.0,
+			"sequence": "swarmintelligence"
+		},
+		"arrays_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/arrays_axioms.gd",
+			"order": 20.0,
+			"sequence": "arrays"
+		},
+		"astar_pathfinding_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/astar_pathfinding_axioms.gd",
+			"order": 0.0,
+			"sequence": "pathfinding"
+		},
+		"audio_reactivity_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/audio_reactivity_axioms.gd",
+			"order": 6.0,
+			"sequence": "wavefunctions"
+		},
+		"bell_curve_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/bell_curve_axioms.gd",
+			"order": 5.0,
+			"sequence": "randomness"
+		},
+		"bernini_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/bernini_axioms.gd",
+			"order": 7.0,
+			"sequence": "wavefunctions"
+		},
+		"bezier_curves_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/bezier_curves_axioms.gd",
+			"order": 0.0,
+			"sequence": "curves"
+		},
+		"bloom_filter_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/bloom_filter_axioms.gd",
+			"order": 0.0,
+			"sequence": "datastructures"
+		},
+		"blue_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/blue_noise_axioms.gd",
+			"order": 7.0,
+			"sequence": "randomness"
+		},
+		"btorus_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/torus_axioms.gd",
+			"order": 12.0,
+			"sequence": "primitives"
+		},
+		"ca_universe_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/ca_universe_axioms.gd",
+			"order": 2.0,
+			"sequence": "cellularautomata"
+		},
+		"cables_axioms": {
+			"content": "[ERROR: Script has no 'text' variable]",
+			"order": 9.0,
+			"sequence": "wavefunctions"
+		},
+		"catmull_rom_splines_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/catmull_rom_splines_axioms.gd",
+			"order": 1.0,
+			"sequence": "curves"
+		},
+		"circle_of_fifths_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/circle_of_fifths_axioms.gd",
+			"order": 4.0,
+			"sequence": "systems_music"
+		},
+		"collision_detection_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/collision_detection_axioms.gd",
+			"order": 0.0,
+			"sequence": "spatial"
+		},
+		"color_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/color_axioms.gd",
+			"order": 19.0,
+			"sequence": "color"
+		},
+		"constraint_satisfaction_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/constraint_satisfaction_axioms.gd",
+			"order": 0.0,
+			"sequence": "optimization"
+		},
+		"convex_hull_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/convex_hull_axioms.gd",
+			"order": 1.0,
+			"sequence": "computationalgeometry"
+		},
+		"cube_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/cube_axioms.gd",
+			"order": 10.0,
+			"sequence": "primitives"
+		},
+		"cylinder_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/cylinder_axioms.gd",
+			"order": 18.0,
+			"sequence": "primitives"
+		},
+		"decay": {
+			"content": "THE IMPORTANCE OF LOCAL DECAY TO REGENERATE ENTROPY AND GIVE SPACE\n1. Decay frees trapped order\n\nLocal decay breaks down rigid structures (patterns, forms, correlations).\nWhen a structure decays, its previously “locked” information is released.\n\nThis increases entropy locally.\n\n2. Regenerated entropy restores possibility\n\nEntropy = the number of possible next states.\n\nWhen decay breaks a pattern, it produces:\n\nvariability\n\nrandomness\n\nnew degrees of freedom\n\nThis is what makes new structure possible.\n\nWithout decay, a system becomes rigid, frozen, predictable — dead.\n\n3. Local decay prevents global stagnation\n\nIf everything stayed structured forever, the system would reach:\n\nmaximum order\n\nminimum entropy\n\nno gradients\n\nno drift\n\nno change\n\nDecay maintains motion, dynamics, becoming.\n\nEntropy is fuel.\n\n4. Decay creates gradients\n\nThis is the most important part:\n\nWhen entropy regenerates locally, new gradients emerge.\nGradients = direction.\nDirection = flow.\nFlow = space.\n\nDecay → entropy → gradient → space.\n\nThis is true in:\n\ndiffusion\n\nsand dunes\n\nweather\n\ngalaxies\n\nbiological growth\n\nPerlin noise fields\n\nVR generative environments\n\nA field with no decay becomes uniform → no gradients → no meaningful space.\n\n5. Decay creates space by making room\n\nRigid structures monopolize space.\nWhen they decay, they open gaps, intervals, discontinuities.\nThese gaps are where:\n\nnew growth happens\n\nnew particles move\n\nnew forms emerge\n\nnew relationships become possible\n\nDecay is a spatial reset.\n\n6. Decay is the generator of irregularity\n\nSpace feels alive when it has:\n\nvariation\n\ntexture\n\nturbulence\n\ndrift\n\npattern-death and pattern-rebirth\n\nAll of this emerges from local entropic regeneration.\n\nWithout decay, everything would be Perlin noise with no octaves — flat, boring, smooth to death.\n\n7. In noise and shader systems\n\nLocal decay =\n\nhigh-frequency Brownian loss\n\nedge erosion\n\nprocedural rust\n\ndensity decreases\n\nvalue diffusion\n\ngradient softening\n\nThese add:\n\ndepth\n\ndetail\n\nbreaks\n\nasymmetry\n\nspace for new structures\n\nDecay is what keeps procedural worlds from looking like plastic.\n\n8. In ecological or cosmological terms\n\nDecay is not the opposite of growth —\nit enables growth.\n\nFallen leaves decompose → soil gains entropy → new plants grow.\nStars die → matter enriches → new star systems form.\nInformation degrades → creates space for new information.\n\nDecay regenerates the possibility of becoming.\n\n9. In queer theoretical terms\n\nDecay is the release of rigidified normativity.\nWhen structures collapse, dissolved identities and forms create:\n\nnew orientations\n\nnew pathways\n\nnew gradients of desire\n\nnew space for becoming-other\n\nEntropy = possibility.\nDecay = the opening of possible worlds.\n\n⭐ ONE-SENTENCE SUMMARY\n\nLocal decay is essential because it regenerates entropy, and that regenerated entropy creates new gradients—those gradients are what give space its structure, variation, and capacity for new forms.\n\nIf you want, I can map this into:\n\na Godot shader/material representing “local decay as entropy regeneration,”\n\na visual diagram,\n\nor a short poetic version.",
+			"order": 0.0,
+			"sequence": "randomness"
+		},
+		"decay_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/decay_axioms.gd",
+			"order": 6.0,
+			"sequence": "randomness"
+		},
+		"delaunay_triangulation_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/delaunay_triangulation_axioms.gd",
+			"order": 0.0,
+			"sequence": "computationalgeometry"
+		},
+		"dijkstra_algorithm_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/dijkstra_algorithm_axioms.gd",
+			"order": 1.0,
+			"sequence": "pathfinding"
+		},
+		"discreet_music": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/discreet_music.gd",
+			"order": 1.0,
+			"sequence": "systems_music"
+		},
+		"distributions_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/distributions_axioms.gd",
+			"order": 13.0,
+			"sequence": "randomness"
+		},
+		"dual_contouring_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/dual_contouring_axioms.gd",
+			"order": 1.0,
+			"sequence": "proceduralgeneration"
+		},
+		"dynamic_programming_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/dynamic_programming_axioms.gd",
+			"order": 0.0,
+			"sequence": "optimization"
+		},
+		"elementary_ca_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/elementary_ca_axioms.gd",
+			"order": 0.0,
+			"sequence": "cellularautomata"
+		},
+		"entropy_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/entropy_axioms.gd",
+			"order": 0.0,
+			"sequence": "randomness"
+		},
+		"ewave_propagation_axioms": {
+			"content": "[ERROR: Script has no 'text' variable]",
+			"order": 12.0,
+			"sequence": "wavefunctions"
+		},
+		"flocking_boids_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/flocking_boids_axioms.gd",
+			"order": 2.0,
+			"sequence": "swarmintelligence"
+		},
+		"forces_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/forces_axioms.gd",
+			"order": 0.0,
+			"sequence": "forces"
+		},
+		"fourier_transform_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/fourier_transform_axioms.gd",
+			"order": 0.0,
+			"sequence": "signalprocessing"
+		},
+		"fractals_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/fractals_axioms.gd",
+			"order": 1.0,
+			"sequence": "fractals"
+		},
+		"game_of_life_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/game_of_life_axioms.gd",
+			"order": 1.0,
+			"sequence": "cellularautomata"
+		},
+		"genetic_algorithms_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/genetic_algorithms_axioms.gd",
+			"order": 0.0,
+			"sequence": "optimization"
+		},
+		"git_timeline_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/git_timeline_axioms.gd",
+			"order": 5.0,
+			"sequence": "systems_music"
+		},
+		"glitch_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/glitch_axioms.gd",
+			"order": 17.0,
+			"sequence": "randomness"
+		},
+		"graph_theory_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/graph_theory_axioms.gd",
+			"order": 0.0,
+			"sequence": "graphtheory"
+		},
+		"grid_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/grid_axioms.gd",
+			"order": 6.0,
+			"sequence": "primitives"
+		},
+		"hilbert_curve_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/hilbert_curve_axioms.gd",
+			"order": 0.0,
+			"sequence": "spacefilling"
+		},
+		"info_arrays": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_arrays.gd",
+			"order": 0.0,
+			"sequence": "infoboards"
+		},
+		"info_forces": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_forces.gd",
+			"order": 1.0,
+			"sequence": "infoboards"
+		},
+		"info_line": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_line.gd",
+			"order": 9.0,
+			"sequence": "infoboards"
+		},
+		"info_point": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_point.gd",
+			"order": 8.0,
+			"sequence": "infoboards"
+		},
+		"info_procedural": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_procedural.gd",
+			"order": 5.0,
+			"sequence": "infoboards"
+		},
+		"info_randomness": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_randomness.gd",
+			"order": 4.0,
+			"sequence": "infoboards"
+		},
+		"info_randomwalk": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_randomwalk.gd",
+			"order": 6.0,
+			"sequence": "infoboards"
+		},
+		"info_unitcircle": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_unitcircle.gd",
+			"order": 7.0,
+			"sequence": "infoboards"
+		},
+		"info_vectors": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_vectors.gd",
+			"order": 2.0,
+			"sequence": "infoboards"
+		},
+		"info_waves": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_waves.gd",
+			"order": 3.0,
+			"sequence": "infoboards"
+		},
+		"john_cage_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/john_cage_axioms.gd",
+			"order": 10.0,
+			"sequence": "wavefunctions"
+		},
+		"kmeans_clustering_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/kmeans_clustering_axioms.gd",
+			"order": 1.0,
+			"sequence": "machinelearning"
+		},
+		"kusama_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/kusama_axioms.gd",
+			"order": 11.0,
+			"sequence": "wavefunctions"
+		},
+		"line_axioms": {
+			"content": "[font_size=28][b]3. The Line[/b][/font_size]\n[i]Relation, Distance, and Compression[/i]\n\n[i][color=gray]Summary: A line is the shortest relation between two positions—the first formal relation in geometry. Once positions are referenced, they can be connected. The line introduces direction and distance. Yet this clarity comes at a cost: all possible journeys are compressed into a single metric, erasing duration, curvature, and intention.[/color][/i]\n\n[hr]\n\n[b]Defining the Line[/b]\n\nA line is the relation between two distinct positions—the shortest path through space. If a point is position, a line is the measured relation between positions.\n\nEuclid defines the line as “breadthless length.”\nIn computation, this definition becomes operational.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar point_a = Vector3(0, 0, 0)\nvar point_b = Vector3(1, 1, 0)\n\nvar direction = point_b - point_a\nvar distance = direction.length()\n[/code][/color]\n\nThe line appears the moment this distance is computed.\n\n[hr]\n\n[b]Measure as Condition[/b]\n\nThere is no line without measurement.\n\nA line does not exist first and receive a length later.\nIts existence is inseparable from its distance.\n\nIf the distance were zero, the line would collapse back into a point.\nThe line persists only as long as separation persists.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar line_vector = point_b - point_a\nvar length = line_vector.length()\nvar direction = line_vector.normalized()\n[/code][/color]\n\nDirection presupposes distance.\nRelation presupposes measure.\n\n[hr]\n\n[b]The Desire to Measure[/b]\n\nThe line awakens a particular desire: to quantify.\n\nOnce the line appears, the question is unavoidable:\n[i]how far?[/i]\n\nThe line reduces the space between two positions to a single number.\nThis reduction is precise, efficient, and seductive.\n\nDistance becomes the only property that matters.\n\nOther questions emerge immediately:\n\n• [b]Scale[/b] — How does this distance compare to others?\n• [b]Orientation[/b] — In which direction does it extend?\n• [b]Time[/b] — How long would it take to traverse?\n\nThe line answers only the first.\n\n[hr]\n\n[b]Materializing the Line[/b]\n\nTo make a line visible, it must be given form.\n\nA cylinder can represent a line segment by connecting two positions.\nIts height equals the measured distance.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\ncylinder.position = (point_a + point_b) / 2.0\ncylinder.look_at_from_position(\ncylinder.position, point_b, Vector3.UP\n)\nadd_child(cylinder)\n[/code][/color]\n\nThe geometry enforces the metric it represents.\n\n[hr]\n\n[b]What the Line Erases[/b]\n\nThe line is a radical compression.\n\nIt knows only:\n• two positions\n• one direction\n• one distance\n\nEverything else disappears.\n\n[color=orange][b]What the Line Cannot Hold:[/b][/color]\n\n• [b]Duration[/b] — how long movement took\n• [b]Curvature[/b] — deviation, looping, spiraling\n• [b]Texture[/b] — smoothness, turbulence, interruption\n• [b]Return[/b] — repetition without progress\n• [b]Intention[/b] — why this path was taken\n\nThe line is movement stripped of its history.\n\n[hr]\n\n[b]Optimization as Worldview[/b]\n\nWhen the system draws a line between two positions, it makes a claim:\n\n[i]this is the path that matters[/i]\n\nThe shortest path.\nThe efficient relation.\nThe optimized answer.\n\nBodies do not move this way.\n\nWe wander. We hesitate. We return.\nNot because it is efficient, but because movement carries meaning the metric cannot register.\n\nThe line is elegant in its clarity,\nand violent in what it excludes.\n\n[hr]\n\n[color=cyan][b]→ Next: The Trace[/b][/color]\nIf the line collapses movement into distance, the trace restores duration. The trace records what the line discards.",
+			"order": 7.0,
+			"sequence": "primitives"
+		},
+		"list_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/list_axioms.gd",
+			"order": 0.0,
+			"sequence": "arrays"
+		},
+		"lsystems_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/lsystems_axioms.gd",
+			"order": 2.0,
+			"sequence": "fractals"
+		},
+		"magenta_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/magenta_axioms.gd",
+			"order": 3.0,
+			"sequence": "color"
+		},
+		"marching_cubes_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/marching_cubes_axioms.gd",
+			"order": 0.0,
+			"sequence": "proceduralgeneration"
+		},
+		"markov_chains_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/markov_chains_axioms.gd",
+			"order": 0.0,
+			"sequence": "probability"
+		},
+		"melencolia_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/melencolia_axioms.gd",
+			"order": 20.0,
+			"sequence": "primitives"
+		},
+		"music_formalism_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/music_formalism_axioms.gd",
+			"order": 6.0,
+			"sequence": "systems_music"
+		},
+		"nested_arrays_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/nested_arrays_axioms.gd",
+			"order": 1.0,
+			"sequence": "arrays"
+		},
+		"neural_networks_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/neural_networks_axioms.gd",
+			"order": 0.0,
+			"sequence": "machinelearning"
+		},
+		"noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/noise_axioms.gd",
+			"order": 2.0,
+			"sequence": "randomness"
+		},
+		"noise_octaves_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/noise_octaves_axioms.gd",
+			"order": 12.0,
+			"sequence": "randomness"
+		},
+		"octree_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/octree_axioms.gd",
+			"order": 1.0,
+			"sequence": "datastructures"
+		},
+		"oscillating_wave_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/oscillating_wave_axioms.gd",
+			"order": 4.0,
+			"sequence": "wavefunctions"
+		},
+		"particle_swarm_optimization_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/particle_swarm_optimization_axioms.gd",
+			"order": 1.0,
+			"sequence": "swarmintelligence"
+		},
+		"pca_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/pca_axioms.gd",
+			"order": 0.0,
+			"sequence": "machinelearning"
+		},
+		"perception_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/perception_axioms.gd",
+			"order": 2.0,
+			"sequence": "color"
+		},
+		"perlin_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/perlin_noise_axioms.gd",
+			"order": 3.0,
+			"sequence": "randomness"
+		},
+		"pheromone_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/pheromone_axioms.gd",
+			"order": 18.0,
+			"sequence": "randomness"
+		},
+		"physics_simulation_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/physics_simulation_axioms.gd",
+			"order": 1.0,
+			"sequence": "forces"
+		},
+		"point_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/point_axioms.gd",
+			"order": 1.0,
+			"sequence": "primitives"
+		},
+		"point_zero": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/point_zero.gd",
+			"order": 0,
+			"sequence": "primitives"
+		},
+		"poisson_disk_sampling_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/poisson_disk_sampling_axioms.gd",
+			"order": 4.0,
+			"sequence": "proceduralgeneration"
+		},
+		"polyhedra_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/polyhedra_axioms.gd",
+			"order": 16.0,
+			"sequence": "primitives"
+		},
+		"primitives_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/primitives_axioms.gd",
+			"order": 14.0,
+			"sequence": "primitives"
+		},
+		"prng_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/prng_axioms.gd",
+			"order": 1.0,
+			"sequence": "randomness"
+		},
+		"procedural_placement_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/procedural_placement_axioms.gd",
+			"order": 15.0,
+			"sequence": "randomness"
+		},
+		"quad_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/quad_axioms.gd",
+			"order": 13.0,
+			"sequence": "primitives"
+		},
+		"quadtree_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/quadtree_axioms.gd",
+			"order": 0.0,
+			"sequence": "datastructures"
+		},
+		"random_transformations_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/random_transformations_axioms.gd",
+			"order": 16.0,
+			"sequence": "randomness"
+		},
+		"random_walk_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/random_walk_axioms.gd",
+			"order": 10.0,
+			"sequence": "randomness"
+		},
+		"randomness": {
+			"content": "⭐ 1. Gradient Descent = moving toward lower energy\n\nIn mathematics and machine learning, gradient descent is:\n\nmoving “downhill” along the direction of greatest decrease\nin an energy or cost landscape.\n\nThe gradient points where energy drops fastest.\nDescent is following that direction.\n\nThis is:\n\ndirectional\n\nteleological\n\nminimization-driven\n\nnorm-seeking\n\nstability-oriented\n\nIt reduces variation.\nIt compresses entropy.\nIt seeks a point of rest (a minimum).\n\n⭐ 2. Queer Energy Principle = local increases in entropy that open space\n\nThe queer energy principle, as we’ve been shaping it, states:\n\nA system becomes livable, expressive, or possible\nonly when local decay or variation regenerates entropy,\ncreating new gradients of becoming.\n\nQueer energy:\n\nresists compression\n\nresists strict minima\n\ngenerates local entropy\n\nsupports heterogeneity\n\nsustains drift\n\nencourages multiple attractors\n\nallows deviations and outliers to thrive\n\nIt does not want the system to fall into a single global minimum.\n\nIn fact, queer energy keeps the system from collapsing into:\n\na single attractor\n\na single identity\n\na single direction\n\na single “optimal” state\n\nIt preserves multiplicity.\n\n⭐ 3. The Deep Relationship: They Are Opposite Forces in the Same Field\nGradient Descent = entropy contraction\n\nA system descends toward:\n\nuniformity\n\nstable states\n\nminima\n\nreduced variation\n\nQueer Energy = entropy regeneration\n\nA system maintains:\n\nopenness\n\nalternatives\n\nbranching\n\nbecoming\n\nmultiple futures\n\nThey form a dynamic tension.\n\nJust like:\n\nerosion (decay) vs. gravity (pull)\n\ndiffusion (randomness) vs. potential fields (order)\n\nqueerness (variation) vs. normativity (compression)\n\nBoth are necessary for a “living” system.\n\nWithout gradient descent → chaos, no stability.\nWithout queer energy → collapse into sameness, no future.\n\nThis is the queer physics of becoming.\n\n⭐ 4. In mathematical language\n\nLet:\n\nU(x) = energy landscape\n\n∇U(x) = gradient (direction of steepest increase)\n\n–∇U(x) = descent direction\n\nGradient descent performs:\n\n𝑥\n𝑡\n+\n1\n=\n𝑥\n𝑡\n−\n𝜂\n∇\n𝑈\n(\n𝑥\n𝑡\n)\nx\nt+1\n\t​\n\n=x\nt\n\t​\n\n−η∇U(x\nt\n\t​\n\n)\n\nIt seeks to minimize U(x).\n\nQueer energy principle would add:\n𝑥\n𝑡\n+\n1\n=\n𝑥\n𝑡\n−\n𝜂\n1\n∇\n𝑈\n(\n𝑥\n𝑡\n)\n+\n𝜂\n2\n𝜉\n𝑡\nx\nt+1\n\t​\n\n=x\nt\n\t​\n\n−η\n1\n\t​\n\n∇U(x\nt\n\t​\n\n)+η\n2\n\t​\n\nξ\nt\n\t​\n\n\nWhere:\n\nξₜ = noise, drift, entropy injection\n\nη₂ = “queer energy” coefficient\n\nIn physics this is known as:\n\nLangevin dynamics\n\nstochastic gradient descent\n\ndiffusion with drift\n\nBrownian motion in a potential\n\nthe mathematics of life\n\nThis dual-force model forms:\n\nlocal minima that don’t trap the system\n\nexploration\n\nemergence\n\nunpredictability\n\ncreativity\n\nIt is literally the mathematical formulation of “queer becoming.”\n\n⭐ 5. How This Shows Up in Perlin Noise, Space, and Decay\n\nPerlin noise:\n\nuses gradients (direction)\n\nadds randomness (entropy)\n\nblends them (smooth becoming)\n\nExactly the same principle:\n\ngradient descent (structure)\n\nqueer energy (entropy)\ncreates space that is organic and alive.\n\nLocal decay (entropy regeneration) ensures the field never locks into:\n\ndead smoothness\n\npure minima\n\nconverged sameness\n\nstatic form\n\nThis keeps space open.\n\n⭐ 6. Philosophical Resonance\n\nGradient descent = the normative pull toward order, identity, stasis.\n\nQueer energy = the deviation force that keeps identity open, dynamic, reversible.\n\nYour work sits between these forces:\n\nVR world-building\n\nprocedural fields\n\nentropy-driven form\n\nqueer deviations\n\npattern decay\n\nnew space emerging from variation\n\nThis is Ada Research’s conceptual physics.\n\n⭐ 7. ONE SENTENCE SUMMARY\n\nGradient descent collapses entropy toward a minimum; the queer energy principle regenerates entropy to keep the system open, multiple, and becoming.\n\nThey are opposite but complementary forces that generate dynamic, livable space.",
+			"order": 0.0,
+			"sequence": "queer_energy"
+		},
+		"randomwalk_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/randomwalk_axioms.gd",
+			"order": 9.0,
+			"sequence": "randomness"
+		},
+		"ray_marching_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/ray_marching_axioms.gd",
+			"order": 0.0,
+			"sequence": "rendering"
+		},
+		"reaction_diffusion_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/reaction_diffusion_axioms.gd",
+			"order": 2.0,
+			"sequence": "proceduralgeneration"
+		},
+		"recursion_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/recursion_axioms.gd",
+			"order": 0.0,
+			"sequence": "fractals"
+		},
+		"rgb_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/rgb_axioms.gd",
+			"order": 0.0,
+			"sequence": "color"
+		},
+		"rotation_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/rotation_axioms.gd",
+			"order": 1.0,
+			"sequence": "transformation"
+		},
+		"satie_cage_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/satie_cage_axioms.gd",
+			"order": 2.0,
+			"sequence": "systems_music"
+		},
+		"scale_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/scale_axioms.gd",
+			"order": 2.0,
+			"sequence": "transformation"
+		},
+		"self_organized_criticality_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/self_organized_criticality_axioms.gd",
+			"order": 1.0,
+			"sequence": "chaos"
+		},
+		"shader_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/shader_noise_axioms.gd",
+			"order": 20.0,
+			"sequence": "randomness"
+		},
+		"simplex_algorithm_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/simplex_algorithm_axioms.gd",
+			"order": 1.0,
+			"sequence": "optimization"
+		},
+		"simplex_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/simplex_noise_axioms.gd",
+			"order": 4.0,
+			"sequence": "randomness"
+		},
+		"sine_space_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/sine_space_axioms.gd",
+			"order": 8.0,
+			"sequence": "wavefunctions"
+		},
+		"sine_wave_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/sine_wave_axioms.gd",
+			"order": 0.0,
+			"sequence": "wavefunctions"
+		},
+		"skip_list_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/skip_list_axioms.gd",
+			"order": 1.0,
+			"sequence": "datastructures"
+		},
+		"sound_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/sound_axioms.gd",
+			"order": 1.0,
+			"sequence": "wavefunctions"
+		},
+		"space_colonization_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/space_colonization_axioms.gd",
+			"order": 0.0,
+			"sequence": "organicgrowth"
+		},
+		"sphere_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/sphere_axioms.gd",
+			"order": 17.0,
+			"sequence": "primitives"
+		},
+		"spherical_harmonics_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/spherical_harmonics_axioms.gd",
+			"order": 5.0,
+			"sequence": "wavefunctions"
+		},
+		"steering_behaviors_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/steering_behaviors_axioms.gd",
+			"order": 0.0,
+			"sequence": "movement"
+		},
+		"strange_attractors_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/strange_attractors_axioms.gd",
+			"order": 0.0,
+			"sequence": "chaos"
+		},
+		"ten_print_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/ten_print_axioms.gd",
+			"order": 14.0,
+			"sequence": "randomness"
+		},
+		"text_idenity": {
+			"content": "[b]The Referenced Point[/b]\n[i]From position to reference[/i]\n\nA point is always a position.\nWhat changes here is not the point, but how its position is [i]exposed[/i].\n\nWhen the point snaps to the grid, its position becomes explicit.\nThe system aligns the point to a shared reference and displays its coordinates as text.\n\n[hr]\n\n[b]Snapping to a reference[/b]\n\nSnapping aligns the point to a regular coordinate system.\nThis makes its position stable, repeatable, and comparable.\n\nThe point still moves, but only in agreed steps.\n\nSnapping does not change the point’s nature.\nIt changes how the position relates to the system.\n\n[hr]\n\n[b]Labeling the position[/b]\n\nA text label displays the point’s coordinates next to it.\n\n[color=yellow]Code[/color]\n[code]\nvar label_3d = Label3D.new()\nlabel_3d.text = str(point_position)\nvar offset = Vector3(0, 0.15, 0)\nlabel_3d.position = point_position + offset\nadd_child(label_3d)\n[/code]\n\nAs the point moves, the label updates.\n\n[color=yellow]Code[/color]\n[code]\nfunc _process(delta):\nlabel_3d.text = str(point_position)\nlabel_3d.position = point_position + offset\n[/code]\n\nThe numbers do not describe the point.\nThey [i]anchor[/i] it.\n\n[hr]\n\n[b]Position becomes reference[/b]\n\nWith snapping and labeling, the point’s position can now:\n\n• be read\n• be compared\n• be returned to\n• be remembered\n\nThe point has not gained identity as a thing.\nIts position has gained identity as a [i]reference[/i].\n\nThis is the minimum condition for geometry to continue.\n\n[hr]\n\n[b]Preparing the trace[/b]\n\nAs the referenced point moves, its previous positions can be recorded.\n\nThese recorded positions appear beside the point as a trace.\n\nThe trace is not a line yet.\nIt is a memory of where the point has been.\n\nWithout reference, movement leaves nothing behind.\nWith reference, movement becomes history.\n\n[hr]\n\n[color=cyan][b]→ Next: The Trace[/b][/color]\nHow a referenced point produces a visible path through time.",
+			"order": 3.0,
+			"sequence": "primitives"
+		},
+		"the_trace": {
+			"content": "[font_size=28][b]4. The Trace[/b][/font_size]\n[i]Duration Against Compression[/i]\n\n[i][color=gray]Summary: The Trace resists reduction to the Line. Where the Line compresses movement into endpoints and distance, the Trace accumulates duration—the body’s movement through time. Yet even this resistance is bounded: memory limits, sampling thresholds, and reference frames constrain what can be recorded. The Trace is a queer excess that persists only through constant negotiation with its own capture.[/color][/i]\n\n[hr]\n\n[b]Beyond the Line[/b]\n\nIf the Point is position, and the Line is the shortest relation between two positions, then the Trace introduces [b]duration[/b].\n\nThe Trace does not replace the Line.\nIt exposes what the Line discards.\n\nWhere the Line reduces movement to efficiency, the Trace preserves sequence, hesitation, and deviation. It is not optimal. It is not minimal. It is [i]what happened[/i].\n\n[hr]\n\n[b]Movement Becomes History[/b]\n\nIn the scene, the Trace appears when a referenced point moves through space.\nAs the hand moves, previous positions are recorded and remain visible.\n\nThe Trace is not a line yet.\nIt is an accumulation of positions over time.\n\nEach point in the Trace was once present.\nTogether, they form a history that cannot be reduced to a single relation.\n\n[hr]\n\n[b]Gesture and Loss[/b]\n\nThe movement of the hand carries more than coordinates.\nIt trembles, hesitates, loops, returns.\n\nFrom early cave drawings to contemporary choreography, gesture exceeds what can be measured. It carries intention, rhythm, and affect that do not survive translation into vectors.\n\nHere, that limit becomes explicit.\n\nThe Trace shows what the system can record — and what it cannot.\n\n[hr]\n\n[b]Layer 1: The Bounded Archive[/b]\n[i]The Memory Limit[/i]\n\nThe Trace is not an infinite history.\nIt is a finite, bounded archive.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar _trail_points: Array[Vector3] = []\nvar trail_max_points: int = 1024\n\nfunc add_point(pos: Vector3):\n_trail_points.append(pos)\nif _trail_points.size() > trail_max_points:\n_trail_points.pop_front() # Oldest erased\n[/code][/color]\n\nAs new positions are recorded, older ones are erased.\n\nThe Trace sheds its own past in order to continue.\nDuration persists only by sacrificing memory.\n\nThis is not failure.\nIt is the cost of recording movement in a discrete system.\n\n[hr]\n\n[b]Layer 2: Quantized Movement[/b]\n[i]The Fidelity Limit[/i]\n\nContinuous motion must be sampled.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar min_segment_distance: float = 0.01\n\nfunc maybe_record(pos: Vector3):\nif _trail_points.is_empty():\nadd_point(pos)\nreturn\n\nvar last = _trail_points[-1]\nif pos.distance_to(last) >= min_segment_distance:\n    add_point(pos)\n\n\n[/code][/color]\n\nMovements below this threshold are ignored.\n\nMicro-gestures, subtle shifts, and tentative motions never enter the record.\nThe Trace exists only when movement is large enough to be noticed.\n\nWhat is too quiet to register disappears.\n\n[hr]\n\n[b]Layer 3: The Reference Frame[/b]\n[i]The Relational Limit[/i]\n\nEven the Trace must exist in relation to a frame.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nclass_name ReferenceFrame\nextends Node3D\n\n@export var frame_size: Vector3 = Vector3(1, 1, 1)\n\nfunc world_to_local_normalized(world_pos: Vector3) -> Vector3:\nvar local = to_local(world_pos)\nreturn local / frame_size\n[/code][/color]\n\nThe Trace is normalized, scaled, and compared.\n\nThis frame does not describe the Trace.\nIt disciplines it.\n\nDeviation is measured relative to a center that the Trace did not choose.\n\n[hr]\n\n[b]Resistance Geometry[/b]\n\nThe Trace does not escape the system.\nIt resists from within it.\n\nIts queerness lies not in freedom, but in persistence under constraint — in the visible friction between lived motion and computational capture.\n\n[color=orange][b]What escapes recording:[/b][/color]\n\n• micro-tremors below the threshold\n• intention without displacement\n• hesitation that never became motion\n• memory older than the buffer\n• meaning that exists only in duration\n\n[hr]\n\n[b]What the Line Cannot Hold[/b]\n\nThe Line reduces movement to relation.\nThe Trace insists on sequence.\n\nThe Line forgets how we arrived.\nThe Trace remembers — briefly, imperfectly, and at a cost.\n\nThere is always a remainder.\n\nThe system reaches.\nSomething slips.\n\n[hr]\n\n[color=cyan][b]→ Next: The Grid[/b][/color]\nTo compute duration at scale, space must be discretized. The grid introduces regularity — and decides what kinds of movement can persist.",
+			"order": 4.0,
+			"sequence": "primitives"
+		},
+		"transformation_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/transformation_axioms.gd",
+			"order": 5.0,
+			"sequence": "transformation"
+		},
+		"translation_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/translation_axioms.gd",
+			"order": 0.0,
+			"sequence": "transformation"
+		},
+		"triangle_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/triangle_axioms.gd",
+			"order": 8.0,
+			"sequence": "primitives"
+		},
+		"unitcircle_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/unitcircle_axioms.gd",
+			"order": 3.0,
+			"sequence": "wavefunctions"
+		},
+		"value_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/value_noise_axioms.gd",
+			"order": 8.0,
+			"sequence": "randomness"
+		},
+		"vectors_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/vectors_axioms.gd",
+			"order": 0.0,
+			"sequence": "vectors"
+		},
+		"voronoi_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/voronoi_axioms.gd",
+			"order": 3.0,
+			"sequence": "proceduralgeneration"
+		},
+		"voxel_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/voxel_noise_axioms.gd",
+			"order": 21.0,
+			"sequence": "randomness"
+		},
+		"wave_desire_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/wave_desire_axioms.gd",
+			"order": 2.0,
+			"sequence": "wavefunctions"
+		},
+		"wavelength_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/wavelength_axioms.gd",
+			"order": 1.0,
+			"sequence": "color"
+		},
+		"wfc_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/wfc_axioms.gd",
+			"order": 1.0,
+			"sequence": "proceduralgeneration"
+		},
+		"white_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/white_noise_axioms.gd",
+			"order": 19.0,
+			"sequence": "randomness"
+		},
+		"worley_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/worley_noise_axioms.gd",
+			"order": 11.0,
+			"sequence": "randomness"
+		},
+		"yacbinary_space_partitioning_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/binary_space_partitioning_axioms.gd",
+			"order": 0.0,
+			"sequence": "spatialpartitioning"
+		},
+		"z_coordinate_system": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/coordinate_system_axioms.gd",
+			"order": 2.0,
+			"sequence": "primitives"
+		},
+		"vr_scale_controls": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/vr_scale_controls.gd",
+			"order": 0.0,
+			"sequence": "controls"
+		},
+		"vr_controls_full": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/vr_controls_full.gd",
+			"order": 1.0,
+			"sequence": "controls"
+		}
+	}
+}

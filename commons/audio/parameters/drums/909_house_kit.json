@@ -1,0 +1,90 @@
+{
+    "_metadata": {
+        "sound_type": "909_house_kit",
+        "display_name": "909 House Kit",
+        "description": "Classic TR-909 house drum kit - punchy kick, clap snare, driving hihats",
+        "category": "drums",
+        "era": "late_80s_90s",
+        "tags": ["909", "house", "drums", "four_on_floor", "dance"],
+        "reference_artists": ["Frankie Knuckles", "Larry Heard", "Marshall Jefferson"],
+        "reference_tracks": ["Your Love", "Can You Feel It", "Move Your Body"],
+        "created_at": "2026-02-05T12:00:00Z",
+        "version": "1.0"
+    },
+    "parameters": {
+        "style": {
+            "value": "four_on_floor_house",
+            "options": ["four_on_floor_house", "breakbeat", "shuffle", "halftime"]
+        },
+        "kick_punch_hz": {
+            "value": 60,
+            "min": 40,
+            "max": 100,
+            "step": 5
+        },
+        "kick_click_hz": {
+            "value": 3000,
+            "min": 1000,
+            "max": 6000,
+            "step": 100
+        },
+        "kick_decay_ms": {
+            "value": 200,
+            "min": 80,
+            "max": 400,
+            "step": 10
+        },
+        "kick_character": {
+            "value": "punchy_909",
+            "options": ["punchy_909", "deep_909", "clicky_909"]
+        },
+        "kick_velocity": {
+            "value": 0.9,
+            "min": 0.5,
+            "max": 1.0,
+            "step": 0.05
+        },
+        "snare_style": {
+            "value": "clap_909",
+            "options": ["clap_909", "snare_909", "rimshot_909"]
+        },
+        "snare_on_beats": {
+            "value": [2, 4],
+            "options": [[2, 4], [2], [4], [2, 3, 4]]
+        },
+        "snare_velocity": {
+            "value": 0.75,
+            "min": 0.4,
+            "max": 1.0,
+            "step": 0.05
+        },
+        "hihat_style": {
+            "value": "16th_offbeat",
+            "options": ["16th_offbeat", "8th_notes", "16th_straight", "shuffle"]
+        },
+        "hihat_open_on": {
+            "value": [2.5, 4.5],
+            "options": [[2.5, 4.5], [2.5], [4.5], []]
+        },
+        "hihat_velocity_variation": {
+            "value": 0.15,
+            "min": 0.0,
+            "max": 0.4,
+            "step": 0.05
+        },
+        "swing": {
+            "value": 0.05,
+            "min": 0.0,
+            "max": 0.3,
+            "step": 0.01
+        },
+        "rimshot_enabled": {
+            "value": true,
+            "options": [true, false]
+        },
+        "rimshot_pattern": {
+            "value": "offbeat_accent",
+            "options": ["offbeat_accent", "upbeat", "every_bar", "none"]
+        }
+    }
+}

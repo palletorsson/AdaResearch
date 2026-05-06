@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ISO_ImplicitModeling",
+  "home_sequence": "isosurfaces",
+  "dimensions": {
+    "w": 16,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.005,
+  "breath_zones": [
+    {
+      "size": 192,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 16,
+        "d": 14
+      },
+      "centroid": [
+        7.604166666666667,
+        6.520833333333333
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 8,
+      "token": "implicit_surface_modeling"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 193,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

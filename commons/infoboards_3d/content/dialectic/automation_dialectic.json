@@ -1,0 +1,261 @@
+{
+	"_meta": {
+		"id": "automation_dialectic",
+		"title": "The Automation Dialectic",
+		"subtitle": "A Fractal Critique",
+		"description": "Each level contains the same oscillation between position and counter-position, but at different scales.",
+		"version": "1.0",
+		"layout": {
+			"z_spacing": 3.0,
+			"x_spacing": 2.5,
+			"panel_scale": 0.8
+		}
+	},
+	"levels": [
+		{
+			"level": 0,
+			"theme": "thesis",
+			"panels": [
+				{
+					"x": 0,
+					"title": "Automation Takes Away Autonomy",
+					"position": "The machine decides, we execute.",
+					"narrative": [
+						"Every automated system removes a choice.",
+						"The algorithm recommends, the interface constrains.",
+						"What was once deliberate becomes default."
+					],
+					"code": {
+						"block": "# The system chooses for you\nvar recommendation = algorithm.decide(user_data)\nuser.action = recommendation  # No deliberation",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "F",
+						"description": "Pure order: the system predicts and you conform"
+					},
+					"transition": "but then..."
+				}
+			]
+		},
+		{
+			"level": 1,
+			"theme": "counter",
+			"panels": [
+				{
+					"x": 0,
+					"title": "Cognitive Offloading is Liberation",
+					"position": "We WANT to delegate. Slave to the rhythm.",
+					"narrative": [
+						"Writing offloads memory.",
+						"The calculator offloads arithmetic.",
+						"The tool carries so we can travel further.",
+						"Automation frees cognition for other things."
+					],
+					"code": {
+						"block": "# Offloading is ancient\nvar memory = external_storage.write(thought)\nvar mind = freed_for(new_thoughts)\n\n# The rhythm holds you\nwhile beat.playing:\n    body.move()  # No decision needed",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "λE(S)",
+						"description": "Entropy as freedom: the system handles the predictable, you handle the unpredictable"
+					},
+					"transition": "but then..."
+				}
+			]
+		},
+		{
+			"level": 2,
+			"theme": "critique_of_counter",
+			"panels": [
+				{
+					"x": 0,
+					"title": "Opting Out is a Privilege",
+					"position": "Not everyone can choose their tools.",
+					"narrative": [
+						"The factory worker uses what's provided.",
+						"The student uses what's required.",
+						"The precarious worker uses what's available.",
+						"'Use this or be excluded.'"
+					],
+					"code": {
+						"block": "# The condition of entry\nif not user.has_tool(required_tool):\n    access.deny()\n    \n# No alternative offered\nvar choice = null  # There is no choice",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "F (imposed)",
+						"description": "The order is not chosen, it is given. λ is set by others."
+					},
+					"transition": "but then..."
+				}
+			]
+		},
+		{
+			"level": 3,
+			"theme": "pragmatic",
+			"panels": [
+				{
+					"x": 0,
+					"title": "At Every Level There is a λ to Adjust",
+					"position": "Even within constraints, there are dials.",
+					"narrative": [
+						"How much do I let the autocomplete write?",
+						"When do I override the recommendation?",
+						"Which defaults do I accept, which do I change?",
+						"The dial exists. The question is: can you reach it?"
+					],
+					"code": {
+						"block": "# The dials exist\nvar lambda = 0.5  # How much entropy do you allow?\n\n# You can adjust (if you know how)\nautocomplete.enabled = user_preference\nrecommendation.weight = slider.value\n\n# Small freedoms within constraints\nfor setting in accessible_settings:\n    adjust(setting)",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "λ",
+						"description": "The entropy drive: how much chaos/freedom does the system permit?"
+					},
+					"transition": "but then..."
+				}
+			]
+		},
+		{
+			"level": 4,
+			"theme": "reality_check",
+			"panels": [
+				{
+					"x": 0,
+					"title": "Who Actually Has Access to the Dials?",
+					"position": "The interface hides the parameters.",
+					"narrative": [
+						"'User-friendly' = fewer choices.",
+						"The defaults are someone else's decision.",
+						"The settings menu shows 10 options.",
+						"The config file has 10,000.",
+						"Who decides which 10 you see?"
+					],
+					"code": {
+						"block": "# What you see\nvar visible_settings = [\n    \"dark_mode\",\n    \"notifications\",\n    \"language\"\n]\n\n# What exists\nvar all_settings = config.get_all()  # 10,000 keys\n\n# The ratio\nvar your_control = visible_settings.size() / all_settings.size()\n# = 0.0003 = 0.03%",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "Hidden F",
+						"description": "The order you can't see. The λ you can't touch."
+					},
+					"transition": "but then..."
+				}
+			]
+		},
+		{
+			"level": 5,
+			"theme": "hacker_response",
+			"panels": [
+				{
+					"x": 0,
+					"title": "We Can Make the Dials Visible",
+					"position": "Open source. Inspect element. Read the code.",
+					"narrative": [
+						"Teach the structure, not just the interface.",
+						"Show the parameters that shape behavior.",
+						"Make the hidden visible.",
+						"This is what Ada Research does."
+					],
+					"code": {
+						"block": "# The hacker response\nvar source_code = open_source.read()\nvar hidden_params = inspector.reveal()\nvar documentation = write(what_you_learned)\n\n# Share the knowledge\nfor learner in community:\n    teach(learner, hidden_params)",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "Visible F, Adjustable λ",
+						"description": "Making the order visible. Making the entropy dial accessible."
+					},
+					"transition": "but then..."
+				}
+			]
+		},
+		{
+			"level": 6,
+			"theme": "limit",
+			"panels": [
+				{
+					"x": 0,
+					"title": "Not Everyone Can Read Code",
+					"position": "Literacy is unevenly distributed.",
+					"narrative": [
+						"Time is unevenly distributed.",
+						"Access is unevenly distributed.",
+						"Attention is unevenly distributed.",
+						"The hacker solution requires resources not everyone has."
+					],
+					"code": {
+						"block": "# The distribution\nvar can_code = population.filter(has_skill)\nvar has_time = population.filter(has_hours)\nvar has_access = population.filter(has_tools)\n\n# The intersection\nvar can_hack = can_code.intersect(has_time).intersect(has_access)\n# = small subset",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "Unequal λ access",
+						"description": "The dial exists but hands are bound."
+					},
+					"transition": "but then..."
+				}
+			]
+		},
+		{
+			"level": 7,
+			"theme": "collective",
+			"panels": [
+				{
+					"x": 0,
+					"title": "We Don't Have to Do It Alone",
+					"position": "Communities, collectives, unions.",
+					"narrative": [
+						"Those who can read share with those who can't.",
+						"Documentation is care work.",
+						"Teaching is solidarity.",
+						"Solidarity is distributed cognition."
+					],
+					"code": {
+						"block": "# The collective response\nclass Community:\n    var readers = []   # Those who can read code\n    var users = []     # Those who need tools\n    \n    func share_knowledge():\n        for reader in readers:\n            var knowledge = reader.decode(system)\n            for user in users:\n                user.receive(knowledge)\n    \n    func build_together():\n        # More than individual capacity\n        return collective_intelligence()",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "Distributed λ",
+						"description": "The entropy dial is turned together."
+					},
+					"transition": "and the dialectic continues..."
+				}
+			]
+		},
+		{
+			"level": 8,
+			"theme": "recursion",
+			"panels": [
+				{
+					"x": 0,
+					"title": "The Dialectic Never Resolves",
+					"position": "Each answer generates its own question.",
+					"narrative": [
+						"Zoom in: more levels.",
+						"Zoom out: more levels.",
+						"This is not failure.",
+						"This is the structure of thinking.",
+						"",
+						"The feminist hacker position:",
+						"Not to escape the dialectic",
+						"But to keep it moving",
+						"To refuse the false synthesis",
+						"That says 'this is just how it is'",
+						"",
+						"Every level has a λ.",
+						"Some we can touch.",
+						"Some we can't.",
+						"Knowing which is which: that's the work."
+					],
+					"code": {
+						"block": "# The fractal structure\nfunc dialectic(position: String, level: int) -> void:\n    var counter = generate_counter(position)\n    var critique = generate_critique(counter)\n    \n    # Recurse forever\n    dialectic(critique, level + 1)\n    \n# There is no base case\n# Only more levels",
+						"language": "gdscript"
+					},
+					"qfep": {
+						"term": "φΔE(S,t)",
+						"description": "Positive φ: embracing the change itself. The becoming, not the being."
+					},
+					"transition": null
+				}
+			]
+		}
+	]
+}

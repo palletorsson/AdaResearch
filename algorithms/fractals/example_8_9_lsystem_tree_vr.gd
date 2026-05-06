@@ -36,7 +36,7 @@ var preset_label: Label3D
 var angle_controller: ParameterController3D
 var length_controller: ParameterController3D
 
-func _ready():
+func _ready() -> void:
 	# Create turtle
 	turtle = Turtle3D.new()
 	turtle.use_pink_palette = true
@@ -61,7 +61,7 @@ func _ready():
 	update_info_label()
 	print("Example 8.9: L-System Tree - Preset: %s, Generations: %d" % [get_preset_name(), generations])
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if show_generation_animation and current_generation < generations:
 		generation_timer += delta
 		if generation_timer >= generation_speed:
@@ -71,7 +71,7 @@ func _process(delta):
 			draw_lsystem()
 			update_info_label()
 
-func create_lsystem_preset():
+func create_lsystem_preset() -> void:
 	"""Create L-System based on selected preset"""
 	match preset:
 		PresetType.PLANT:
@@ -104,7 +104,7 @@ func get_preset_name() -> String:
 		PresetType.ALGAE: return "Algae"
 	return "Unknown"
 
-func create_info_labels():
+func create_info_labels() -> void:
 	"""Create info labels"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -122,7 +122,7 @@ func create_info_labels():
 	preset_label.text = "L-System: %s" % get_preset_name()
 	add_child(preset_label)
 
-func create_controllers():
+func create_controllers() -> void:
 	"""Create 3D controllers"""
 	angle_controller = ParameterController3D.new()
 	angle_controller.parameter_name = "Angle"
@@ -144,29 +144,29 @@ func create_controllers():
 	length_controller.value_changed.connect(_on_length_changed)
 	add_child(length_controller)
 
-func _on_angle_changed(new_angle: float):
+func _on_angle_changed(new_angle: float) -> void:
 	"""Update turn angle and redraw"""
 	turn_angle = new_angle
 	draw_lsystem()
 
-func _on_length_changed(new_length: float):
+func _on_length_changed(new_length: float) -> void:
 	"""Update step length and redraw"""
 	step_length = new_length
 	draw_lsystem()
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info labels"""
 	if info_label:
 		var instruction_length = lsystem.get_sentence().length()
 		info_label.text = "L-System Tree\nGeneration: %d / %d\nInstructions: %d" % [current_generation, generations, instruction_length]
 
-func draw_lsystem():
+func draw_lsystem() -> void:
 	"""Draw the L-System using turtle graphics"""
 	if turtle:
 		var instructions = lsystem.get_sentence()
 		turtle.interpret_lsystem(instructions, step_length, turn_angle)
 
-func cycle_preset():
+func cycle_preset() -> void:
 	"""Cycle to next L-System preset"""
 	preset = (preset + 1) % 5
 	reset()
@@ -181,7 +181,7 @@ func cycle_preset():
 
 	print("Preset changed to: %s" % get_preset_name())
 
-func increase_generations():
+func increase_generations() -> void:
 	"""Increase generation count"""
 	if generations < 8:  # Limit to prevent explosion
 		generations += 1
@@ -190,7 +190,7 @@ func increase_generations():
 		draw_lsystem()
 		print("Generations increased to: %d" % generations)
 
-func decrease_generations():
+func decrease_generations() -> void:
 	"""Decrease generation count"""
 	if generations > 1:
 		generations -= 1
@@ -201,7 +201,7 @@ func decrease_generations():
 		draw_lsystem()
 		print("Generations decreased to: %d" % generations)
 
-func reset():
+func reset() -> void:
 	"""Reset L-System and turtle"""
 	current_generation = 0
 	generation_timer = 0.0
@@ -209,3 +209,12 @@ func reset():
 	if turtle:
 		turtle.reset()
 	update_info_label()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

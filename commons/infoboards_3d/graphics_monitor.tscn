@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://b2343w7gos8k0"]
+
+[ext_resource type="Script" path="res://commons/infoboards_3d/graphics_monitor.gd" id="1_viewport2d"]
+[ext_resource type="Script" uid="uid://jnnultxsu2rs" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd" id="2_body"]
+[ext_resource type="PackedScene" uid="uid://dkw7pq2xmghv3" path="res://commons/infoboards_3d/boards/GraphicsDisplay/GraphicsDisplayControl.tscn" id="3_display"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_screen"]
+resource_local_to_scene = true
+size = Vector2(1.0, 1.0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_screen"]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_screen"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_screen")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_interact"]
+resource_local_to_scene = true
+size = Vector3(1.0, 1.0, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frame"]
+resource_local_to_scene = true
+albedo_color = Color(0.15, 0.15, 0.18, 1)
+metallic = 0.3
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame"]
+resource_local_to_scene = true
+size = Vector3(1.08, 1.08, 0.06)
+
+[node name="GraphicsMonitor" type="Node3D"]
+script = ExtResource("1_viewport2d")
+screen_size = Vector2(1.0, 1.0)
+scene = ExtResource("3_display")
+viewport_size = Vector2(512, 512)
+alpha_scissor_threshold = 0.25
+unshaded = true
+filter = false
+scene_properties_keys = PackedStringArray("GraphicsDisplayControl.gd", "visualization_topic", "frame_duration", "auto_advance")
+visualization_topic = "vectors"
+frame_duration = 5.0
+auto_advance = true
+
+[node name="Viewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+gui_embed_subwindows = true
+size = Vector2i(512, 512)
+render_target_update_mode = 1
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.01)
+mesh = SubResource("QuadMesh_screen")
+surface_material_override/0 = SubResource("StandardMaterial3D_screen")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 5242881
+collision_mask = 0
+script = ExtResource("2_body")
+screen_size = Vector2(1.0, 1.0)
+viewport_size = Vector2(512, 512)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+shape = SubResource("BoxShape3D_interact")
+
+[node name="MonitorFrame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.02)
+material_override = SubResource("StandardMaterial3D_frame")
+mesh = SubResource("BoxMesh_frame")

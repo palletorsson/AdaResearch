@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-11T00:30:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "total_sequences": 19,
+    "at_stage_2_documentation": ["primitives", "transformation"],
+    "at_stage_3_artifacts": ["color", "forces", "array_tutorial", "wavefunctions", "fractals", "qfeplaboratory"],
+    "at_stage_5_validation": ["randomness", "noise", "cellularautomata", "lsystems", "proceduralgeneration", "softbodies", "swarmintelligence", "machinelearning", "foundationscrisis", "postfoundationscrisis", "graphtheory"]
+  },
+  "heat_map_top_5": [
+    {"item": "lod", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "shader", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "sequence:resourcemanagement", "temperature": 50, "reason": "empty sequence"}
+  ],
+  "garden_health": {
+    "total_artifacts": 1177,
+    "voiced": 516,
+    "embodied": 185,
+    "reaching": 279,
+    "phantom_limbs": 379,
+    "voice_coverage": 0.43,
+    "living_sequences": ["joints"]
+  },
+  "release_gates": {
+    "A_sequence_contract": "FAIL (44 missing declared maps)",
+    "B_registry_integrity": "FAIL (71 unresolved scenes)",
+    "C_map_validation": "FAIL (2 grade F)",
+    "D_lab_progression": "PASS"
+  }
+}

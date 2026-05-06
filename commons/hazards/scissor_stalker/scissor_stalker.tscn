@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3n7qjm2xho5a"]
+
+[ext_resource type="Script" path="res://commons/hazards/scissor_stalker/scissor_stalker.gd" id="1"]
+
+[node name="ScissorStalker" type="CharacterBody3D"]
+script = ExtResource("1")
+leg_count = 6
+units_per_leg = 3
+bar_length = 0.12
+body_radius = 0.18
+max_health = 90.0
+attack_damage = 28.0
+body_color = Color(0.22, 0.2, 0.26, 1)
+leg_color = Color(0.32, 0.3, 0.36, 1)
+joint_color = Color(0.65, 0.28, 0.22, 1)

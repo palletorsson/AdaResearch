@@ -1,0 +1,120 @@
+[gd_scene load_steps=3 format=3 uid="uid://n0pdtqwd6mqj"]
+
+[ext_resource type="Script" uid="uid://dkakx2m5wpqr2" path="res://algorithms/proceduralgeneration/randomboolean/advanced_carver.gd" id="1_carver"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.15, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.6, 0.7, 1)
+ambient_light_energy = 0.8
+ssao_enabled = true
+ssao_radius = 3.0
+glow_enabled = true
+glow_intensity = 0.5
+
+[node name="AllPatternsDemo" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 20, 0)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 20, 15, 25)
+fov = 70.0
+
+[node name="RandomWalk" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -15)
+script = ExtResource("1_carver")
+walk_steps = 50
+step_size = 1.5
+sphere_radius = 2.5
+random_seed = 1
+
+[node name="Label3D" type="Label3D" parent="RandomWalk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+text = "Random Walk"
+font_size = 24
+
+[node name="Spiral" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
+script = ExtResource("1_carver")
+pattern = 1
+step_size = 1.8
+sphere_radius = 2.8
+spiral_turns = 4.0
+spiral_radius_decay = 0.3
+random_seed = 2
+
+[node name="Label3D" type="Label3D" parent="Spiral"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+text = "Spiral"
+font_size = 24
+
+[node name="Branches" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -15)
+script = ExtResource("1_carver")
+pattern = 2
+walk_steps = 50
+step_size = 2.0
+sphere_radius = 3.0
+branch_probability = 0.2
+max_branches = 6
+random_seed = 3
+
+[node name="Label3D" type="Label3D" parent="Branches"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+text = "Branches"
+font_size = 24
+
+[node name="PerlinPath" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
+script = ExtResource("1_carver")
+pattern = 3
+walk_steps = 70
+step_size = 1.5
+sphere_radius = 2.5
+perlin_scale = 0.25
+random_seed = 4
+
+[node name="Label3D" type="Label3D" parent="PerlinPath"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+text = "Perlin Path"
+font_size = 24
+
+[node name="GridTunnels" type="CSGCombiner3D" parent="."]
+script = ExtResource("1_carver")
+pattern = 4
+step_size = 1.5
+sphere_radius = 2.5
+show_path_line = false
+random_seed = 5
+
+[node name="Label3D" type="Label3D" parent="GridTunnels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+text = "Grid Tunnels"
+font_size = 24
+
+[node name="SphereBase" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+script = ExtResource("1_carver")
+pattern = 1
+base_shape_type = "sphere"
+walk_steps = 50
+step_size = 1.8
+sphere_radius = 2.8
+random_seed = 6
+
+[node name="Label3D" type="Label3D" parent="SphereBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+text = "Sphere + Spiral"
+font_size = 24
+
+[node name="Title" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -15)
+text = "CSG Boolean Carving - All Patterns"
+font_size = 48

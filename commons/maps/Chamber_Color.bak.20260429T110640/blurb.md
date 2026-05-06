@@ -1,0 +1,3 @@
+Rainbow bursts shift the kaleidocycle through its four color-attack modes. The miura watches from the corner, no longer hostile.
+
+This is the catalyst chamber for Color — where hue becomes channel rather than attribute. You project chromatic bursts; the `kaleidocycle_enemy` responds differently to each wavelength, cycling through behavioral states tied to spectral bands. Red provokes one thing; green asks another; blue settles something. The Science Screen scatters the events across a chromatic axis so you can read the creature's grammar as frequency, not as personality. Color stopped being a property in Color_Flashlight. Here it completes its transformation into communication.

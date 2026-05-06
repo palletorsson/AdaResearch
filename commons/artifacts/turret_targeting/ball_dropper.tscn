@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cartifactballdropper"]
+
+[ext_resource type="Script" path="res://commons/artifacts/turret_targeting/ball_dropper.gd" id="1_dropper"]
+
+[node name="BallDropper" type="Node3D"]
+script = ExtResource("1_dropper")
+drop_interval_min = 0.8
+drop_interval_max = 1.5
+auto_drop = true
+total_balls = 30
+ball_radius = 0.15
+ball_mass = 0.5
+ball_bounce = 0.7
+emission_strength = 0.8
+ball_health = 80.0
+drop_height = 0.0
+spawn_spread = 1.5

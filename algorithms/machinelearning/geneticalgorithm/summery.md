@@ -1,0 +1,3 @@
+The `Evolutionary Ecosystem with Topological Data Analysis & Queer Forms Detection` sandbox is a small theatre of learning. Within this windlit studio, the scene `genetic_algorithm.tscn` and its companion script `genetic_algorithm.gd` invites you to map intuition onto geometry.
+
+Curious fingertips over `population_size`, `mutation_rate`, `crossover_rate`, `elite_count` change the rhythm of the system in an instant. Under the hood, loops like `_init()`, `initialize_genes()`, `initialize_neural_network()` keep the pulse steady. Helper forms like `EvolutionaryCreature`, `MyNeuralNetwork` hold memory and meaning between beats. Every reset becomes another verse in the same idea.

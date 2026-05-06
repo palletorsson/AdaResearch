@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://digmk5t7nl48f"]
+
+[ext_resource type="Script" uid="uid://m43sp48elk4m" path="res://algorithms/speech/phoneme_cloud/test_vowel.gd" id="1_test_script"]
+[ext_resource type="PackedScene" path="res://algorithms/speech/phoneme_cloud/vowel_synth.tscn" id="1_vowel"]
+
+[node name="TestVowel" type="Node3D"]
+script = ExtResource("1_test_script")
+
+[node name="VowelSynth3D" parent="." instance=ExtResource("1_vowel")]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+text = "..."
+font_size = 128
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)

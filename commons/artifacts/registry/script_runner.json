@@ -1,0 +1,133 @@
+{
+	"artifacts": {
+		"script_runner": {
+			"name": "Script Runner",
+			"lookup_name": "script_runner",
+			"description": "Live code display with real Expression evaluation! Shows code executing line-by-line with actual results. Scripts: #point, #vector_math, #array, #pattern, #loop. Example: script_runner#point:90:1",
+			"scene": "res://commons/primitives/script_runner/script_runner.tscn",
+			"category": "tools",
+			"config_mapping": {
+				"point": {
+					"script_name": "point"
+				},
+				"vector_math": {
+					"script_name": "vector_math"
+				},
+				"array": {
+					"script_name": "array"
+				},
+				"pattern": {
+					"script_name": "pattern"
+				},
+				"loop": {
+					"script_name": "loop"
+				}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"pattern",
+				"tools",
+				"visualization"
+			],
+			"dev_themes": [
+				"scripting",
+				"tools"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"appears",
+					"script_name",
+					"array",
+					"connects",
+					"column_3_z"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.73,
+					0.4,
+					0.03
+				],
+				"aabb_center": [
+					0.06,
+					0.0,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.264412Z",
+				"derived_from": "aabb_size + category"
+			}
+		}
+	}
+}

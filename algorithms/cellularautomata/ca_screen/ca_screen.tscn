@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://haj1c7as26hw"]
+
+[ext_resource type="PackedScene" uid="uid://cm7sauucsn1es" path="res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata.tscn" id="1_m73x5"]
+
+[node name="CaScreen" type="Node3D"]
+
+[node name="CellularAutomata" parent="." instance=ExtResource("1_m73x5")]
+auto_play = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.057462625)
+light_color = Color(0.7322011, 0.00041248053, 0.732661, 1)
+light_energy = 0.5

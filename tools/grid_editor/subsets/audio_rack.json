@@ -1,0 +1,638 @@
+{
+  "id": "audio_rack",
+  "name": "Audio Rack",
+  "version": "2.2",
+  "description": "Audio synthesis elements with parameter bindings for SongDevTools",
+  "orientation": {
+    "plane": "XY",
+    "up_axis": "Y",
+    "forward": "+Z",
+    "grid_size": 0.08,
+    "comment": "Each grid cell = 8cm. Wall-mounted rack, X=left/right, Y=up/down, Z=depth."
+  },
+  "audio": {
+    "sound_type": "basic_sine_wave",
+    "create_dedicated_bus": true,
+    "auto_play_on_change": true,
+    "play_debounce_ms": 500
+  },
+  "categories": [
+    {"id": "sources", "name": "Sources", "color": "#8BC34A"},
+    {"id": "controls", "name": "Controls", "color": "#4CAF50"},
+    {"id": "filters", "name": "Filters", "color": "#2196F3"},
+    {"id": "effects", "name": "Effects", "color": "#FF9800"},
+    {"id": "modulators", "name": "Modulators", "color": "#9C27B0"},
+    {"id": "displays", "name": "Displays", "color": "#F44336"},
+    {"id": "buttons", "name": "Buttons", "color": "#E91E63"}
+  ],
+  "presets": [
+    {
+      "id": "basic_synth_panel",
+      "name": "Basic Synth Panel",
+      "description": "Single oscillator with frequency, amplitude, waveform display and play button.",
+      "grid_size": [8, 6],
+      "placements": [
+        {"element": "src_sine", "position": [0, 0], "rotation": 0},
+        {"element": "sl_freq", "position": [3, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [5, 0], "rotation": 0},
+        {"element": "sl_dur", "position": [7, 0], "rotation": 0},
+        {"element": "disp_waveform", "position": [0, 4], "rotation": 0},
+        {"element": "btn_play", "position": [5, 4], "rotation": 0},
+        {"element": "btn_stop", "position": [6, 4], "rotation": 0},
+        {"element": "btn_reset", "position": [7, 4], "rotation": 0}
+      ]
+    },
+    {
+      "id": "subtractive_synth",
+      "name": "Subtractive Synth",
+      "description": "303-style acid bass with filter cutoff, resonance, envelope and spectrum display.",
+      "grid_size": [10, 8],
+      "placements": [
+        {"element": "src_303", "position": [0, 0], "rotation": 0},
+        {"element": "sl_freq", "position": [3, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [5, 0], "rotation": 0},
+        {"element": "knob_cutoff", "position": [7, 0], "rotation": 0},
+        {"element": "knob_resonance", "position": [7, 3], "rotation": 0},
+        {"element": "knob_attack", "position": [0, 4], "rotation": 0},
+        {"element": "knob_release", "position": [3, 4], "rotation": 0},
+        {"element": "disp_spectrum", "position": [0, 6], "rotation": 0},
+        {"element": "disp_wave_small", "position": [5, 6], "rotation": 0},
+        {"element": "btn_play", "position": [8, 6], "rotation": 0},
+        {"element": "btn_stop", "position": [9, 6], "rotation": 0},
+        {"element": "btn_reset", "position": [9, 7], "rotation": 0}
+      ]
+    },
+    {
+      "id": "fm_synthesis_station",
+      "name": "FM Synthesis Station",
+      "description": "DX7 FM piano with dual oscillator control, Lissajous phase display and full monitoring.",
+      "grid_size": [12, 8],
+      "placements": [
+        {"element": "src_dx7", "position": [0, 0], "rotation": 0},
+        {"element": "knob_freq", "position": [3, 0], "rotation": 0},
+        {"element": "sl_start_freq", "position": [6, 0], "rotation": 0},
+        {"element": "sl_end_freq", "position": [8, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [10, 0], "rotation": 0},
+        {"element": "knob_attack", "position": [0, 3], "rotation": 0},
+        {"element": "knob_release", "position": [3, 3], "rotation": 0},
+        {"element": "sl_decay", "position": [6, 3], "rotation": 0},
+        {"element": "sl_h_mix", "position": [8, 3], "rotation": 0},
+        {"element": "disp_lissajous", "position": [0, 5], "rotation": 0},
+        {"element": "disp_waveform", "position": [4, 5], "rotation": 0},
+        {"element": "disp_spectrum", "position": [8, 5], "rotation": 0},
+        {"element": "btn_play", "position": [0, 8], "rotation": 0},
+        {"element": "btn_stop", "position": [1, 8], "rotation": 0},
+        {"element": "btn_reset", "position": [2, 8], "rotation": 0}
+      ]
+    },
+    {
+      "id": "beat_machine",
+      "name": "Beat Machine",
+      "description": "808 kick + heartbeat combo with pan control and dual monitoring.",
+      "grid_size": [10, 6],
+      "placements": [
+        {"element": "src_808kick", "position": [0, 0], "rotation": 0},
+        {"element": "src_heartbeat", "position": [3, 0], "rotation": 0},
+        {"element": "sl_freq", "position": [6, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [8, 0], "rotation": 0},
+        {"element": "sl_h_pan", "position": [0, 3], "rotation": 0},
+        {"element": "sl_h_mix", "position": [5, 3], "rotation": 0},
+        {"element": "disp_monitor", "position": [0, 4], "rotation": 0},
+        {"element": "meter_vu", "position": [5, 4], "rotation": 0},
+        {"element": "meter_vu", "position": [7, 4], "rotation": 0},
+        {"element": "btn_play", "position": [9, 4], "rotation": 0},
+        {"element": "btn_stop", "position": [9, 5], "rotation": 0}
+      ]
+    },
+    {
+      "id": "modular_exploration",
+      "name": "Modular Exploration",
+      "description": "Full modular synth wall with Moog, Aphex and ambient sources, all controls and all displays.",
+      "grid_size": [14, 10],
+      "placements": [
+        {"element": "src_moog", "position": [0, 0], "rotation": 0},
+        {"element": "src_aphex", "position": [3, 0], "rotation": 0},
+        {"element": "src_ambient", "position": [6, 0], "rotation": 0},
+        {"element": "sl_freq", "position": [9, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [11, 0], "rotation": 0},
+        {"element": "sl_dur", "position": [13, 0], "rotation": 0},
+        {"element": "knob_freq", "position": [0, 3], "rotation": 0},
+        {"element": "knob_cutoff", "position": [3, 3], "rotation": 0},
+        {"element": "knob_resonance", "position": [6, 3], "rotation": 0},
+        {"element": "knob_attack", "position": [9, 3], "rotation": 0},
+        {"element": "knob_release", "position": [12, 3], "rotation": 0},
+        {"element": "sl_decay", "position": [0, 6], "rotation": 0},
+        {"element": "sl_start_freq", "position": [2, 6], "rotation": 0},
+        {"element": "sl_end_freq", "position": [4, 6], "rotation": 0},
+        {"element": "sl_h_pan", "position": [6, 6], "rotation": 0},
+        {"element": "sl_h_mix", "position": [6, 7], "rotation": 0},
+        {"element": "disp_waveform", "position": [0, 8], "rotation": 0},
+        {"element": "disp_spectrum", "position": [4, 8], "rotation": 0},
+        {"element": "disp_lissajous", "position": [8, 8], "rotation": 0},
+        {"element": "meter_vu", "position": [12, 6], "rotation": 0},
+        {"element": "meter_vu", "position": [13, 6], "rotation": 0},
+        {"element": "btn_play", "position": [12, 8], "rotation": 0},
+        {"element": "btn_stop", "position": [13, 8], "rotation": 0},
+        {"element": "btn_reset", "position": [12, 9], "rotation": 0}
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "id": "src_sine",
+      "name": "Sine Wave",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "∿",
+      "description": "Basic sine wave oscillator",
+      "scene": null,
+      "source": {
+        "sound_type": "BASIC_SINE_WAVE",
+        "label": "SINE"
+      }
+    },
+    {
+      "id": "src_mario",
+      "name": "Mario Pickup",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🍄",
+      "description": "Mario-style pickup sound with sweep",
+      "scene": null,
+      "source": {
+        "sound_type": "PICKUP_MARIO",
+        "label": "MARIO"
+      }
+    },
+    {
+      "id": "src_laser",
+      "name": "Laser Shot",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "⚡",
+      "description": "Sci-fi laser beam sound",
+      "scene": null,
+      "source": {
+        "sound_type": "LASER_SHOT",
+        "label": "LASER"
+      }
+    },
+    {
+      "id": "src_808kick",
+      "name": "808 Kick",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🥁",
+      "description": "Deep 808 kick drum",
+      "scene": null,
+      "source": {
+        "sound_type": "DARK_808_KICK",
+        "label": "808"
+      }
+    },
+    {
+      "id": "src_303",
+      "name": "303 Acid",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🎹",
+      "description": "TB-303 acid bass",
+      "scene": null,
+      "source": {
+        "sound_type": "TB303_ACID_BASS",
+        "label": "303"
+      }
+    },
+    {
+      "id": "src_dx7",
+      "name": "DX7 Piano",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🎹",
+      "description": "Yamaha DX7 FM electric piano",
+      "scene": null,
+      "source": {
+        "sound_type": "DX7_ELECTRIC_PIANO",
+        "label": "DX7"
+      }
+    },
+    {
+      "id": "src_moog",
+      "name": "Moog Bass",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🎛️",
+      "description": "Classic Moog bass/lead",
+      "scene": null,
+      "source": {
+        "sound_type": "MOOG_BASS_LEAD",
+        "label": "MOOG"
+      }
+    },
+    {
+      "id": "src_ambient",
+      "name": "Ambient Drone",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🌊",
+      "description": "Atmospheric ambient drone",
+      "scene": null,
+      "source": {
+        "sound_type": "AMBIENT_AMIGA_DRONE",
+        "label": "DRONE"
+      }
+    },
+    {
+      "id": "src_heartbeat",
+      "name": "Heartbeat",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "💓",
+      "description": "Biological heartbeat rhythm",
+      "scene": null,
+      "source": {
+        "sound_type": "HEARTBEAT",
+        "label": "HEART"
+      }
+    },
+    {
+      "id": "src_aphex",
+      "name": "Aphex Modular",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🔊",
+      "description": "Aphex Twin experimental modular",
+      "scene": null,
+      "source": {
+        "sound_type": "APHEX_TWIN_MODULAR",
+        "label": "APHEX"
+      }
+    },
+    {
+      "id": "sl_freq",
+      "name": "Frequency",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "∿",
+      "description": "Frequency control slider",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "frequency",
+        "min": 20.0,
+        "max": 2000.0,
+        "default": 440.0,
+        "label": "FREQ"
+      }
+    },
+    {
+      "id": "sl_amp",
+      "name": "Amplitude",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "▮",
+      "description": "Volume/amplitude control",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "amplitude",
+        "min": 0.0,
+        "max": 1.0,
+        "default": 0.5,
+        "label": "AMP"
+      }
+    },
+    {
+      "id": "sl_dur",
+      "name": "Duration",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "⏱",
+      "description": "Sound duration control",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "duration",
+        "min": 0.1,
+        "max": 5.0,
+        "default": 1.0,
+        "label": "DUR"
+      }
+    },
+    {
+      "id": "sl_decay",
+      "name": "Decay Rate",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "╲",
+      "description": "Decay rate control",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "decay_rate",
+        "min": 0.1,
+        "max": 20.0,
+        "default": 8.0,
+        "label": "DECAY"
+      }
+    },
+    {
+      "id": "sl_start_freq",
+      "name": "Start Frequency",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "⤴",
+      "description": "Starting frequency for sweeps",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "start_freq",
+        "min": 100.0,
+        "max": 2000.0,
+        "default": 540.0,
+        "label": "START"
+      }
+    },
+    {
+      "id": "sl_end_freq",
+      "name": "End Frequency",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "⤵",
+      "description": "Ending frequency for sweeps",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "end_freq",
+        "min": 100.0,
+        "max": 2000.0,
+        "default": 880.0,
+        "label": "END"
+      }
+    },
+    {
+      "id": "knob_freq",
+      "name": "Freq Knob",
+      "category": "controls",
+      "size": [2, 2],
+      "icon": "◎",
+      "description": "Frequency control knob",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "frequency",
+        "min": 20.0,
+        "max": 2000.0,
+        "default": 440.0,
+        "label": "FREQ"
+      }
+    },
+    {
+      "id": "knob_cutoff",
+      "name": "Filter Cutoff",
+      "category": "filters",
+      "size": [2, 2],
+      "icon": "▼",
+      "description": "Filter cutoff frequency",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "cutoff",
+        "min": 20.0,
+        "max": 20000.0,
+        "default": 1000.0,
+        "label": "CUTOFF"
+      }
+    },
+    {
+      "id": "knob_resonance",
+      "name": "Resonance",
+      "category": "filters",
+      "size": [2, 2],
+      "icon": "◆",
+      "description": "Filter resonance/Q",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "resonance",
+        "min": 0.0,
+        "max": 1.0,
+        "default": 0.3,
+        "label": "RES"
+      }
+    },
+    {
+      "id": "knob_attack",
+      "name": "Attack",
+      "category": "modulators",
+      "size": [2, 2],
+      "icon": "╱",
+      "description": "Envelope attack time",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "attack",
+        "min": 0.001,
+        "max": 2.0,
+        "default": 0.01,
+        "label": "ATK"
+      }
+    },
+    {
+      "id": "knob_release",
+      "name": "Release",
+      "category": "modulators",
+      "size": [2, 2],
+      "icon": "╲",
+      "description": "Envelope release time",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "release",
+        "min": 0.01,
+        "max": 5.0,
+        "default": 0.5,
+        "label": "REL"
+      }
+    },
+    {
+      "id": "sl_h_mix",
+      "name": "Mix Slider",
+      "category": "effects",
+      "size": [4, 1],
+      "icon": "═",
+      "description": "Horizontal mix/blend fader",
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "control": {
+        "type": "slider_h",
+        "parameter": "mix",
+        "min": 0.0,
+        "max": 1.0,
+        "default": 0.5,
+        "label": "MIX"
+      }
+    },
+    {
+      "id": "sl_h_pan",
+      "name": "Pan",
+      "category": "effects",
+      "size": [4, 1],
+      "icon": "◀▶",
+      "description": "Stereo panning",
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "control": {
+        "type": "slider_h",
+        "parameter": "pan",
+        "min": -1.0,
+        "max": 1.0,
+        "default": 0.0,
+        "label": "PAN"
+      }
+    },
+    {
+      "id": "btn_play",
+      "name": "Play",
+      "category": "buttons",
+      "size": [1, 1],
+      "icon": "▶",
+      "description": "Play/trigger sound",
+      "scene": "res://commons/interactables/push_button.tscn",
+      "control": {
+        "type": "button",
+        "action": "play",
+        "color": "#00ff00",
+        "label": "PLAY"
+      }
+    },
+    {
+      "id": "btn_stop",
+      "name": "Stop",
+      "category": "buttons",
+      "size": [1, 1],
+      "icon": "■",
+      "description": "Stop sound",
+      "scene": "res://commons/interactables/push_button.tscn",
+      "control": {
+        "type": "button",
+        "action": "stop",
+        "color": "#ff0000",
+        "label": "STOP"
+      }
+    },
+    {
+      "id": "btn_reset",
+      "name": "Reset",
+      "category": "buttons",
+      "size": [1, 1],
+      "icon": "↺",
+      "description": "Reset all controls to defaults",
+      "scene": "res://commons/interactables/push_button.tscn",
+      "control": {
+        "type": "button",
+        "action": "reset",
+        "color": "#ffaa00",
+        "label": "RESET"
+      }
+    },
+    {
+      "id": "disp_waveform",
+      "name": "Waveform",
+      "category": "displays",
+      "size": [4, 3],
+      "icon": "∿",
+      "description": "Waveform display showing audio output",
+      "scene": "res://commons/audio/interfaces/VRSimpleWaveform.tscn",
+      "display": {
+        "type": "waveform",
+        "source": "rack",
+        "freq_param": "frequency",
+        "amp_param": "amplitude",
+        "label": "OUTPUT"
+      }
+    },
+    {
+      "id": "disp_spectrum",
+      "name": "Spectrum",
+      "category": "displays",
+      "size": [4, 3],
+      "icon": "▂▄▆█",
+      "description": "Frequency spectrum analyzer",
+      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
+      "display": {
+        "type": "spectrum",
+        "source": "rack",
+        "label": "SPECTRUM"
+      }
+    },
+    {
+      "id": "disp_lissajous",
+      "name": "Lissajous",
+      "category": "displays",
+      "size": [4, 3],
+      "icon": "∞",
+      "description": "XY phase display",
+      "scene": "res://commons/audio/interfaces/VRLissajousDisplay.tscn",
+      "display": {
+        "type": "lissajous",
+        "source": "rack",
+        "label": "PHASE"
+      }
+    },
+    {
+      "id": "disp_monitor",
+      "name": "Monitor",
+      "category": "displays",
+      "size": [4, 3],
+      "icon": "▣",
+      "description": "Combined audio monitor",
+      "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
+      "display": {
+        "type": "monitor",
+        "source": "rack",
+        "label": "MONITOR"
+      }
+    },
+    {
+      "id": "disp_wave_small",
+      "name": "Wave (S)",
+      "category": "displays",
+      "size": [2, 2],
+      "icon": "∿",
+      "description": "Small waveform display",
+      "scene": "res://commons/audio/interfaces/VRWaveformDisplaySmall.tscn",
+      "display": {
+        "type": "waveform",
+        "source": "rack",
+        "label": "WAVE"
+      }
+    },
+    {
+      "id": "disp_spec_small",
+      "name": "Spectrum (S)",
+      "category": "displays",
+      "size": [2, 2],
+      "icon": "▂▄▆",
+      "description": "Small spectrum display",
+      "scene": "res://commons/audio/interfaces/VRSpectrumDisplaySmall.tscn",
+      "display": {
+        "type": "spectrum",
+        "source": "rack",
+        "label": "FFT"
+      }
+    },
+    {
+      "id": "meter_vu",
+      "name": "VU Meter",
+      "category": "displays",
+      "size": [1, 2],
+      "icon": "▮",
+      "description": "Volume level meter",
+      "scene": null,
+      "display": {
+        "type": "meter",
+        "source": "rack",
+        "label": "VU"
+      }
+    }
+  ]
+}

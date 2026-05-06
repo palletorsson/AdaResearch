@@ -1,0 +1,26 @@
+{
+  "name": "BodyProg_Dress",
+  "title": "Dressed to Kill",
+  "description": "Full outfit unlocks (ElphabaDress). QFEP: drag as performed identity, the body as canvas.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    8,
+    8
+  ],
+  "teleport": [
+    8,
+    1
+  ],
+  "artifacts": [
+    {
+      "name": "dress_selector",
+      "row": 5,
+      "col": 4,
+      "family": "procgen_extra"
+    }
+  ]
+}

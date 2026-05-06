@@ -1,0 +1,121 @@
+{
+  "map_info": {
+    "name": "Gallery: QFEP",
+    "lookup_name": "Gallery_QFEP",
+    "description": "Showcase of 13 unplaced artifacts from QFEP. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 12,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "4-6 minutes",
+      "learning_objectives": [
+        "Browse 13 QFEP artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "QFEP Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" ","sp"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","request_note:0:1.5#text:AnickaYiLab"," ","request_note:0:1.5#text:PipilottiRistWorld"," ","request_note:0:1.5#text:earths delight"," ","request_note:0:1.5#text:edge detector"," "," "],
+      [" "," ","AnickaYiLab:0:-0.5"," ","PipilottiRistWorld:0:-0.5"," ","earths_delight:0:-0.5"," ","edge_detector:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:edge of chaos orb"," ","request_note:0:1.5#text:entropy meter"," ","request_note:0:1.5#text:fuzzy cloud"," ","request_note:0:1.5#text:phase cube"," "," "],
+      [" "," ","edge_of_chaos_orb:0:-0.5"," ","entropy_meter:0:-0.5"," ","fuzzy_cloud:0:-0.5"," ","phase_cube:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:qfep oscilloscope"," ","request_note:0:1.5#text:qfep sandbox console"," ","request_note:0:1.5#text:reactive particle field"," ","request_note:0:1.5#text:science desk"," "," "],
+      [" "," ","qfep_oscilloscope:0:-0.5"," ","qfep_sandbox_console:0:-0.5"," ","reactive_particle_field:0:-0.5"," ","science_desk:0:-0.5"," "," "],
+      [" "," ","request_note:0:1.5#text:science glasses"," "," "," "," "," "," "," "," "],
+      [" "," ","science_glasses:0:-0.5"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

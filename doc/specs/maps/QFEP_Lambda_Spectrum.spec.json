@@ -1,0 +1,74 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "QFEP_Lambda_Spectrum",
+  "home_sequence": "qfeplaboratory",
+  "dimensions": {
+    "w": 5,
+    "d": 18
+  },
+  "signature": "crystal_formation (\u03bb\u22480)",
+  "style": null,
+  "echoes": [
+    "primitives",
+    "color",
+    "randomness",
+    "noise",
+    "fractals"
+  ],
+  "density": 0.069,
+  "breath_zones": [
+    {
+      "size": 80,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 18
+      },
+      "centroid": [
+        2.025,
+        8.25
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "crystal_formation"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "ordered_grid"
+    },
+    {
+      "x": 2,
+      "z": 7,
+      "token": "edge_particles"
+    },
+    {
+      "x": 2,
+      "z": 9,
+      "token": "complexity_pattern"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "dissolving_form"
+    },
+    {
+      "x": 2,
+      "z": 15,
+      "token": "chaos_particles"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 87,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

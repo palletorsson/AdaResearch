@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_neuralnetworkvisualization",
+  "title": "Neural Network Visualization",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+  "script": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/neuralnetworkvisualization/README.md",
+    "tutorial": "res://algorithms/machinelearning/neuralnetworkvisualization/neuralnetworkvisualization_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/neuralnetworkvisualization/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/neuralnetworkvisualization/summery.md"
+  },
+  "summary": "The `Neural Network Visualization` sandbox investigates concepts from Neural Network Visualization inside a real-time Godot lab.",
+  "keywords": [
+    "activate",
+    "activation",
+    "activations",
+    "auto",
+    "backward",
+    "batch"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

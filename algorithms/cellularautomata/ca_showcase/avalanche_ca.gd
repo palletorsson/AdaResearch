@@ -1,14 +1,25 @@
-# AvalancheCA.gd
+﻿# AvalancheCA.gd
 # Sand pile avalanche model (Bak-Tang-Wiesenfeld)
 extends BaseCA
 
 const CRITICAL_SLOPE = 4
 const SAND_DROP_RATE = 0.1
 
-func initialize_grid():
+func initialize_grid() -> void:
+	# Configure MultiMesh
+	var step = 2
+	var cube_size = CUBE_SIZE * step # Match step
+	var mesh = BoxMesh.new()
+	mesh.size = Vector3(cube_size, cube_size, cube_size)
+	
+	# Estimate max instances (grid * max_height)
+	# Max stable height is 3, but can go higher temporarily. Let's say 10.
+	var max_instances = (GRID_SIZE / step) * (GRID_SIZE / step) * 10
+	configure_multimesh(mesh, max_instances)
+	
 	grid = create_2d_grid()
 
-func update_simulation(delta):
+func update_simulation(_delta) -> void:
 	# Add sand grain to random location
 	if randf() < SAND_DROP_RATE:
 		add_sand_grain()
@@ -18,12 +29,12 @@ func update_simulation(delta):
 	
 	update_visualization()
 
-func add_sand_grain():
+func add_sand_grain() -> void:
 	var x = randi() % GRID_SIZE
 	var y = randi() % GRID_SIZE
 	grid[x][y] += 1
 
-func check_avalanche_conditions():
+func check_avalanche_conditions() -> void:
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
 			if grid[x][y] >= CRITICAL_SLOPE:
@@ -36,37 +47,38 @@ func check_avalanche_conditions():
 					if is_valid_2d_position(neighbor):
 						grid[neighbor.x][neighbor.y] += excess / neighbors.size()
 
-func update_visualization():
-	var array_mesh = ArrayMesh.new()
-	
-	# Create mesh for sand pile
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var indices = PackedInt32Array()
-	var vertex_index = 0
-	
+func update_visualization() -> void:
+	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
+		return
+		
+	var mm = multi_mesh_instance.multimesh
+	var idx = 0
 	var step = 2
+	
+	# Reset remaining instances
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
 	for x in range(0, GRID_SIZE, step):
 		for y in range(0, GRID_SIZE, step):
-			var height = grid[x][y]
+			var height = int(grid[x][y])
 			if height > 0:
-				# Create multiple cubes for height visualization
 				for h in range(height):
-					create_cube_at_position(vertices, normals, indices, vertex_index, x, y, h)
-					vertex_index += 8
-	
-	if vertices.size() > 0:
-		var arrays = []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_NORMAL] = normals
-		arrays[Mesh.ARRAY_INDEX] = indices
-		
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		array_mesh.surface_set_material(0, material_occupied)
-	
-	mesh_instance.mesh = array_mesh
+					if idx >= mm.instance_count: break
+					
+					var world_pos = Vector3(
+						(x - GRID_SIZE/2) * CUBE_SIZE,
+						h * CUBE_SIZE * step, # Stack vertically
+						(y - GRID_SIZE/2) * CUBE_SIZE
+					)
+					
+					mm.set_instance_transform(idx, Transform3D(Basis(), world_pos))
+					
+					# Color based on height
+					var col = Color.SANDY_BROWN.darkened(h * 0.1)
+					mm.set_instance_color(idx, col)
+					
+					idx += 1
 
 func get_total_sand() -> int:
 	var total = 0
@@ -75,6 +87,9 @@ func get_total_sand() -> int:
 			total += grid[x][y]
 	return total
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_2d_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

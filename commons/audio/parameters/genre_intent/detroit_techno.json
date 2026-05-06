@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "version": 1,
+    "mode": "advisory",
+    "strict": false
+  },
+  "genre_id": "detroit_techno",
+  "suit_guidance": {
+    "core_roles": ["rhythm", "bass", "hook"],
+    "common_roles": ["harmony", "fx"],
+    "experimental_roles": ["fx", "harmony"],
+    "continuity_preferences": [
+      "keep kick and hat engine stable across most sections",
+      "use mute automation as punctuation, not default behavior",
+      "rotate stabs and sequence accents for motion"
+    ]
+  },
+  "tempo": {
+    "preferred_bpm": 138,
+    "bpm_range": [130, 145]
+  },
+  "harmony": {
+    "preferred_keys": ["Am", "Em", "Dm", "F#m"],
+    "priority_progressions": [
+      "i-bVI-bVII-i",
+      "i-iv-bVII-i",
+      "single-chord modal center with moving stabs"
+    ],
+    "harmonic_devices": [
+      "short stabs with minor 7th and 9th color",
+      "modal harmony over rhythmic sequencing",
+      "minimal chord movement with strong timbral variation"
+    ]
+  },
+  "rhythm": {
+    "groove_notes": [
+      "4-on-floor machine kick",
+      "precise closed hats with small human offset",
+      "percussive stabs and syncopated punctuation"
+    ],
+    "swing_range": [0.0, 0.08]
+  },
+  "arrangement": {
+    "energy_curve": ["intro", "build", "main", "breakdown", "main", "outro"],
+    "notes": [
+      "arrangement should feel mechanical but alive",
+      "prefer additive/subtractive layering over chord rewrites",
+      "build tension with filter movement and percussive density"
+    ]
+  },
+  "references": {
+    "artists": ["Juan Atkins", "Derrick May", "Kevin Saunderson"],
+    "tracks": ["No UFOs", "Strings of Life", "Good Life"]
+  }
+}

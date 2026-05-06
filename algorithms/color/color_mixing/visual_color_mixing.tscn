@@ -1,0 +1,263 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfkeatfaxb5qp"]
+
+[ext_resource type="PackedScene" uid="uid://jhj23qqrld8p" path="res://commons/primitives/disks/grab_disk.tscn" id="1_disk"]
+[ext_resource type="Script" uid="uid://c6vr5mimwql4u" path="res://algorithms/color/color_mixing/color_display_disk.gd" id="2_display"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_table"]
+albedo_color = Color(0.05, 0.05, 0.05, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_white_bg"]
+
+[node name="VisualColorMixing" type="Node3D"]
+
+[node name="AdditiveTable" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
+size = Vector3(1.2, 0.05, 1.2)
+material = SubResource("StandardMaterial3D_table")
+
+[node name="AdditiveLabel" type="Label3D" parent="AdditiveTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+billboard = 1
+text = "ADDITIVE (RGB)
+Red + Green + Blue = White
+(Dark background)"
+font_size = 20
+
+[node name="Red1" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, -0.3)
+disk_color = Color(1, 0, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Red2" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0)
+disk_color = Color(1, 0, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Red3" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0.3)
+disk_color = Color(1, 0, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Green1" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.3)
+disk_color = Color(0, 1, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Green2" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+disk_color = Color(0, 1, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Green3" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.3)
+disk_color = Color(0, 1, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Blue1" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, -0.3)
+disk_color = Color(0, 0, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Blue2" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0)
+disk_color = Color(0, 0, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Blue3" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0.3)
+disk_color = Color(0, 0, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="SubtractiveTable" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
+size = Vector3(1.2, 0.05, 1.2)
+material = SubResource("StandardMaterial3D_white_bg")
+
+[node name="SubtractiveLabel" type="Label3D" parent="SubtractiveTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+billboard = 1
+text = "SUBTRACTIVE (CMY)
+Cyan + Magenta + Yellow = Black
+(White background)"
+font_size = 20
+
+[node name="Cyan1" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, -0.3)
+disk_color = Color(0, 1, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Cyan2" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0)
+disk_color = Color(0, 1, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Cyan3" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0.3)
+disk_color = Color(0, 1, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Magenta1" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.3)
+disk_color = Color(1, 0, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Magenta2" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+disk_color = Color(1, 0, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Magenta3" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.3)
+disk_color = Color(1, 0, 1, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Yellow1" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, -0.3)
+disk_color = Color(1, 1, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Yellow2" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0)
+disk_color = Color(1, 1, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Yellow3" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0.3)
+disk_color = Color(1, 1, 0, 1)
+blend_type = 0
+radius = 0.1
+height = 0.02
+snap_to_shelf = true
+
+[node name="Red1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Red1")
+
+[node name="Red2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Red2")
+
+[node name="Red3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Red3")
+
+[node name="Green1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Green1")
+
+[node name="Green2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Green2")
+
+[node name="Green3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Green3")
+
+[node name="Blue1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Blue1")
+
+[node name="Blue2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Blue2")
+
+[node name="Blue3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Blue3")
+
+[node name="Cyan1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Cyan1")
+
+[node name="Cyan2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Cyan2")
+
+[node name="Cyan3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Cyan3")
+
+[node name="Magenta1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Magenta1")
+
+[node name="Magenta2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Magenta2")
+
+[node name="Magenta3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Magenta3")
+
+[node name="Yellow1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Yellow1")
+
+[node name="Yellow2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Yellow2")
+
+[node name="Yellow3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Yellow3")
+
+[node name="Instructions" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+visible = false
+billboard = 1
+text = "VISUAL COLOR MIXING
+Drag disks to overlap them and see the colors blend!"
+font_size = 28

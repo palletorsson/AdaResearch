@@ -8,8 +8,8 @@
 # ===========================================================================
 
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
-const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_WAVE := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 
 @export var wavelength: float = 0.15
@@ -19,12 +19,14 @@ const MAT_WAVE := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_
 var _sim_root: Node3D
 var _wave_mesh: MeshInstance3D
 var _status_label: Label3D
-var _controller_root: Node3D
+var _control_panel: Node3D
 var _theta: float = 0.0
 
 func _ready() -> void:
 	_setup_environment()
 	_spawn_wave()
+	_setup_controls()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -39,51 +41,43 @@ func _setup_environment() -> void:
 	_status_label.position = Vector3(0, 0.82, 0)
 	_sim_root.add_child(_status_label)
 
-	_controller_root = Node3D.new()
-	_controller_root.position = Vector3(0.75, 0.5, 0)
-	add_child(_controller_root)
-
-	var wavelength_controller := CONTROLLER_SCENE.instantiate()
-	wavelength_controller.parameter_name = "Wavelength"
-	wavelength_controller.min_value = 0.05
-	wavelength_controller.max_value = 0.3
-	wavelength_controller.default_value = wavelength
-	wavelength_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(wavelength_controller)
-	wavelength_controller.value_changed.connect(func(v: float) -> void:
-		wavelength = v
-	)
-	wavelength_controller.set_value(wavelength)
-
-	var amplitude_controller := CONTROLLER_SCENE.instantiate()
-	amplitude_controller.parameter_name = "Amplitude"
-	amplitude_controller.min_value = 0.03
-	amplitude_controller.max_value = 0.25
-	amplitude_controller.default_value = amplitude
-	amplitude_controller.position = Vector3(0, -0.18, 0)
-	amplitude_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(amplitude_controller)
-	amplitude_controller.value_changed.connect(func(v: float) -> void:
-		amplitude = v
-	)
-	amplitude_controller.set_value(amplitude)
-
-	var speed_controller := CONTROLLER_SCENE.instantiate()
-	speed_controller.parameter_name = "Speed"
-	speed_controller.min_value = 0.01
-	speed_controller.max_value = 0.15
-	speed_controller.default_value = wave_speed
-	speed_controller.position = Vector3(0, -0.36, 0)
-	speed_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(speed_controller)
-	speed_controller.value_changed.connect(func(v: float) -> void:
-		wave_speed = v
-	)
-	speed_controller.set_value(wave_speed)
 
 func _spawn_wave() -> void:
 	_wave_mesh = MeshInstance3D.new()
 	_sim_root.add_child(_wave_mesh)
+
+func _setup_controls() -> void:
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("THE WAVE", [
+		[
+			{"type": "slider_h", "label": "WAVE \u03bb", "default": (wavelength - 0.05) / 0.35},
+			{"type": "slider_h", "label": "AMP", "default": (amplitude - 0.02) / 0.28},
+		],
+		[
+			{"type": "slider_h", "label": "SPEED", "default": (wave_speed - 0.01) / 0.14},
+		],
+	])
+	_control_panel.position = Vector3(0.4, 0.15, 0.2)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
+
+	var wl_slider: Node = _control_panel.find_child("Param_0", true, false)
+	var amp_slider: Node = _control_panel.find_child("Param_1", true, false)
+	var spd_slider: Node = _control_panel.find_child("Param_2", true, false)
+
+	if wl_slider and wl_slider.has_signal("slider_moved"):
+		wl_slider.slider_moved.connect(func(_n: String) -> void:
+			wavelength = 0.05 + wl_slider.get_normalized_value() * 0.35
+		)
+	if amp_slider and amp_slider.has_signal("slider_moved"):
+		amp_slider.slider_moved.connect(func(_n: String) -> void:
+			amplitude = 0.02 + amp_slider.get_normalized_value() * 0.28
+		)
+	if spd_slider and spd_slider.has_signal("slider_moved"):
+		spd_slider.slider_moved.connect(func(_n: String) -> void:
+			wave_speed = 0.01 + spd_slider.get_normalized_value() * 0.14
+		)
+
 
 func _process(_delta: float) -> void:
 	_theta += wave_speed
@@ -107,3 +101,19 @@ func _update_wave() -> void:
 	mesh.surface_end()
 	_wave_mesh.mesh = mesh
 	_wave_mesh.material_override = MAT_WAVE
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
+
+

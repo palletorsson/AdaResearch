@@ -3,16 +3,26 @@ extends Node3D
 # Fibonacci Sequences Visualization
 # Mathematical recursion patterns in nature and computation
 
+# @identity
+# essence: F(n) = F(n-1) + F(n-2), visualized as towers, golden spiral, sunflower, pinecone, nautilus, and recursive tree
+# desire: To reveal the golden ratio everywhere — towers grow logarithmically, spirals unfurl, seeds pack, shells expand
+# critical_parameter: golden_ratio ((1+sqrt(5))/2) — the single number that governs spiral growth, seed packing angle (137.508), and tower ratio convergence
+# triggers: sequence_timer cycles through current_index highlighting towers; time drives spiral animation and natural pattern updates
+# emerges: The sunflower seed packing — 144 seeds placed at golden angle intervals create visible spiral arms from a single placement rule
+# needs: VR section toggle [missing], golden angle visualization [missing]
+# relationships: Mathematical foundation for golden_rectangle, fibonacci_terrain, romanesco, and fibonacci_pagoda; the sequence they all implement
+# truth: The Fibonacci sequence is not about numbers — it is about the fact that growth, when it remembers its last two steps, spirals.
+
 var time := 0.0
 var sequence_timer := 0.0
 var current_index := 0
 var fibonacci_numbers := [1, 1]
 var golden_ratio := (1 + sqrt(5)) / 2
 
-func _ready():
+func _ready() -> void:
 	generate_fibonacci_sequence(20)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	sequence_timer += delta
 	
@@ -25,14 +35,14 @@ func _process(delta):
 	show_natural_patterns()
 	demonstrate_recursion()
 
-func generate_fibonacci_sequence(count: int):
+func generate_fibonacci_sequence(count: int) -> void:
 	fibonacci_numbers = [1, 1]
 	
 	for i in range(2, count):
 		var next_fib = fibonacci_numbers[i-1] + fibonacci_numbers[i-2]
 		fibonacci_numbers.append(next_fib)
 
-func visualize_number_sequence():
+func visualize_number_sequence() -> void:
 	var container = $NumberSequence
 	
 	# Clear previous visualization
@@ -64,7 +74,7 @@ func visualize_number_sequence():
 		if i >= 2:
 			create_addition_visualization(container, i)
 
-func create_addition_visualization(container: Node3D, index: int):
+func create_addition_visualization(container: Node3D, index: int) -> void:
 	# Visualize Fib(n) = Fib(n-1) + Fib(n-2)
 	var connection1 = CSGCylinder3D.new()
 	connection1.radius = 0.02
@@ -91,7 +101,7 @@ func create_addition_visualization(container: Node3D, index: int):
 	connection2.material_override = conn_material
 	container.add_child(connection2)
 
-func create_golden_spiral():
+func create_golden_spiral() -> void:
 	var container = $GoldenSpiral
 	
 	# Clear previous visualization
@@ -146,7 +156,7 @@ func create_golden_spiral():
 		
 		container.add_child(connection)
 
-func show_natural_patterns():
+func show_natural_patterns() -> void:
 	var container = $NaturalPatterns
 	
 	# Clear previous visualization
@@ -162,7 +172,7 @@ func show_natural_patterns():
 	# Create nautilus shell pattern
 	create_nautilus_pattern(container, Vector3(3, 0, 0))
 
-func create_sunflower_pattern(container: Node3D, center: Vector3):
+func create_sunflower_pattern(container: Node3D, center: Vector3) -> void:
 	var seed_count = 144  # Fibonacci number
 	var golden_angle = 2 * PI / (golden_ratio * golden_ratio)
 	
@@ -185,7 +195,7 @@ func create_sunflower_pattern(container: Node3D, center: Vector3):
 		
 		container.add_child(seed)
 
-func create_pinecone_pattern(container: Node3D, center: Vector3):
+func create_pinecone_pattern(container: Node3D, center: Vector3) -> void:
 	var spiral_count = 8  # Fibonacci number
 	var layers = 13       # Another Fibonacci number
 	
@@ -209,7 +219,7 @@ func create_pinecone_pattern(container: Node3D, center: Vector3):
 			
 			container.add_child(scale)
 
-func create_nautilus_pattern(container: Node3D, center: Vector3):
+func create_nautilus_pattern(container: Node3D, center: Vector3) -> void:
 	var chambers = 8  # Based on Fibonacci growth
 	var growth_rate = golden_ratio
 	var initial_radius = 0.1
@@ -234,7 +244,7 @@ func create_nautilus_pattern(container: Node3D, center: Vector3):
 		
 		container.add_child(chamber_sphere)
 
-func demonstrate_recursion():
+func demonstrate_recursion() -> void:
 	var container = $RecursionVisualization
 	
 	# Clear previous visualization
@@ -244,7 +254,7 @@ func demonstrate_recursion():
 	# Visualize recursive tree structure
 	create_recursive_tree(container, Vector3.ZERO, 0, 5)
 
-func create_recursive_tree(container: Node3D, position: Vector3, depth: int, max_depth: int):
+func create_recursive_tree(container: Node3D, position: Vector3, depth: int, max_depth: int) -> void:
 	if depth >= max_depth:
 		return
 	
@@ -294,3 +304,11 @@ func create_recursive_tree(container: Node3D, position: Vector3, depth: int, max
 			# Recursive call
 			create_recursive_tree(container, branch_pos, depth + 1, max_depth)
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

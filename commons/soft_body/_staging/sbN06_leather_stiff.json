@@ -1,0 +1,39 @@
+{
+  "id": "sbN06_leather_stiff",
+  "topology": "native_drape",
+  "cloth_size": 2.0,
+  "subdivide": 16,
+  "drape_shape": "cylinder",
+  "drape_size": 0.8,
+  "drape_offset": [
+    0,
+    -0.4,
+    0
+  ],
+  "drape_color": [
+    0.2,
+    0.15,
+    0.1
+  ],
+  "total_mass": 1.2,
+  "linear_stiffness": 0.95,
+  "damping_coefficient": 0.05,
+  "simulation_precision": 10,
+  "origin": [
+    0,
+    1.4,
+    0
+  ],
+  "steps": 220,
+  "color": [
+    0.45,
+    0.2,
+    0.15
+  ],
+  "roughness": 0.7,
+  "floor_y": -1.2,
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.2,
+  "layout": "native_drape",
+  "notes": "Stiff leather-like cloth over cylinder \u00e2\u20ac\u201d high stiffness + mass = angular fold, not smooth drape."
+}

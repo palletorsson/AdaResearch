@@ -1,0 +1,46 @@
+{
+	"rack_info": {
+		"name": "Basic Synth Rack",
+		"description": "Simple synthesizer control interface with frequency, amplitude, and duration controls",
+		"version": "1.0",
+		"sound_type": "basic_sine_wave"
+	},
+	"layout": {
+		"padding_px": 20,
+		"gap_px": 20,
+		"hide_selection": true,
+		"hide_buttons": true
+	},
+	"grid": [
+		[
+			"sl_1", "sl_2",  "slider_pan"
+		]
+	],
+	"control_definitions": {
+		"sl_1": {
+			"type": "slider",
+			"label": "Frequency",
+			"parameter": "freq",
+			"min": 200.0,
+			"max": 1000.0,
+			"default": 880.0
+		},
+		"sl_2": {
+			"type": "slider",
+			"label": "Frequency",
+			"parameter": "freq",
+			"min": 200.0,
+			"max": 1000.0,
+			"default": 880.0
+		},		
+		"slider_pan": {
+
+			"type": "slider_horizontal",
+			"label": "Pan",
+			"parameter": "pan",
+			"min": -5.0,
+			"max": 5.0,
+			"default": 0.0
+		}
+	}
+}

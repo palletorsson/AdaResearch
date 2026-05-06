@@ -1,0 +1,306 @@
+{
+	"sequences": {
+		"unused": {
+			"name": "Unused",
+			"description": "Holding sequence for archived or currently uncurated maps.",
+			"difficulty": "testing",
+			"estimated_time": "variable",
+			"learning_objectives": [
+				"Archive coverage",
+				"Future curation queue"
+			],
+			"maps": [
+				"Dialectic_Automation",
+				"Directionality_Examples",
+				"One_Adapt_1",
+				"One_Adapt_2",
+				"One_Adapt_3",
+				"One_Adapt_4",
+				"One_Adapt_5",
+				"One_Adapt_6",
+				"One_Adapt_7",
+				"oscillation_1",
+				"oscillation_2",
+				"oscillation_3",
+				"oscillation_4",
+				"oscillation_5",
+				"oscillation_6",
+				"oscillation_7",
+				"Pattern_Generation_One",
+				"Pattern_Generation_Two",
+				"Pattern_Generation_Three",
+				"Pattern_Generation_Four",
+				"Pattern_Generation_Six",
+				"Pattern_Generation_Seven",
+				"Primitives_2"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_init",
+			"unlock_requirements": [],
+			"completion_rewards": [],
+			"artifact_groups": [
+				{
+					"map": "Dialectic_Automation",
+					"position": "intro",
+					"artifacts": [
+						"criticalinfo",
+						"dark_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "Directionality_Examples",
+					"position": "intro",
+					"artifacts": [
+						"algorithm_overview",
+						"clipboard",
+						"code_display",
+						"coloredlines",
+						"cube_scene",
+						"dark_sphere",
+						"infokiosk",
+						"pick_up_cube",
+						"platonicsolids",
+						"rotating_cube"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 10 artifacts"
+				},
+				{
+					"map": "One_Adapt_1",
+					"position": "intro",
+					"artifacts": [
+						"colortrails"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "One_Adapt_2",
+					"position": "intro",
+					"artifacts": [
+						"clippingplanes",
+						"raycastingpoint"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "One_Adapt_3",
+					"position": "foundation",
+					"artifacts": [
+						"alphahash",
+						"waterflowers"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "One_Adapt_4",
+					"position": "foundation",
+					"artifacts": [
+						"fatwireframe",
+						"postprocessing_bloom"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "One_Adapt_5",
+					"position": "foundation",
+					"artifacts": [
+						"cloudvolume",
+						"perlinvolume"
+					],
+					"size_budget": "environment",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "One_Adapt_6",
+					"position": "foundation",
+					"artifacts": [
+						"buffergeometryparticles",
+						"instancingscatter"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "One_Adapt_7",
+					"position": "exploration",
+					"artifacts": [
+						"geometric_transformations",
+						"tartan_demo",
+						"transformation_cube"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 3 artifacts"
+				},
+				{
+					"map": "oscillation_1",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"example_3_10_swinging_pendulum_vr",
+						"example_3_1_angular_motion_using_rotate_vr"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 3 artifacts"
+				},
+				{
+					"map": "oscillation_2",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"example_3_11_a_spring_connection_vr",
+						"example_3_5_simple_harmonic_motion_vr"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 3 artifacts"
+				},
+				{
+					"map": "oscillation_3",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"example_3_6_simple_harmonic_motion_ii_vr",
+						"example_3_7_oscillator_objects_vr"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 3 artifacts"
+				},
+				{
+					"map": "oscillation_4",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"example_3_8_static_wave_vr",
+						"example_3_9_the_wave_vr",
+						"oscilloscope"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 4 artifacts"
+				},
+				{
+					"map": "oscillation_5",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"exercise_3_1_baton_vr",
+						"exercise_3_5_spiral_vr"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 3 artifacts"
+				},
+				{
+					"map": "oscillation_6",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"exercise_3_11_oop_wave_vr",
+						"exercise_3_12_additive_wave_vr"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 3 artifacts"
+				},
+				{
+					"map": "oscillation_7",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"exercise_3_15_double_pendulum_vr",
+						"exercise_3_6_asteroids_vr"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 3 artifacts"
+				},
+				{
+					"map": "Pattern_Generation_One",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"degrading_shader_demo",
+						"gridscheckers",
+						"tiles_explained"
+					],
+					"size_budget": "environment",
+					"rationale": "Integration combining 4 artifacts"
+				},
+				{
+					"map": "Pattern_Generation_Two",
+					"position": "integration",
+					"artifacts": [
+						"WFCSculptureGenerator",
+						"dark_sphere",
+						"glassdivider"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 3 artifacts"
+				},
+				{
+					"map": "Pattern_Generation_Three",
+					"position": "integration",
+					"artifacts": [
+						"WFC3DGenerator",
+						"dark_sphere",
+						"truchettiles"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 3 artifacts"
+				},
+				{
+					"map": "Pattern_Generation_Four",
+					"position": "synthesis",
+					"artifacts": [
+						"fabrics"
+					],
+					"size_budget": "environment",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "Pattern_Generation_Six",
+					"position": "synthesis",
+					"artifacts": [
+						"color_pattern_mate_texture_for_3d",
+						"dark_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 2 artifacts"
+				},
+				{
+					"map": "Pattern_Generation_Seven",
+					"position": "synthesis",
+					"artifacts": [
+						"animalpatterns",
+						"dark_sphere"
+					],
+					"size_budget": "environment",
+					"rationale": "Synthesis with 2 artifacts"
+				},
+				{
+					"map": "Primitives_2",
+					"position": "synthesis",
+					"artifacts": [
+						"bipyramid",
+						"cube",
+						"dark_sphere",
+						"dodecahedron",
+						"halocube",
+						"icosahedron",
+						"lshape",
+						"octahedron",
+						"prism_block",
+						"pyramid",
+						"roughrock",
+						"truncatedtetrahedron"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 12 artifacts"
+				}
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
+}

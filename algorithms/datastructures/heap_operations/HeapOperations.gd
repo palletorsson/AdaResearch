@@ -28,15 +28,15 @@ class HeapNodeVisual:
 	var level: int
 	var position_in_level: int
 	
-	func _init(val: int, index: int):
+	func _init(val: int, index: int) -> void:
 		value = val
 		array_index = index
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	build_initial_heap()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Heap type indicator material
 	var type_material = StandardMaterial3D.new()
 	type_material.albedo_color = Color(1.0, 0.6, 0.2, 1.0)
@@ -58,7 +58,7 @@ func setup_materials():
 	size_material.emission = Color(0.2, 0.05, 0.3, 1.0)
 	$HeapSizeIndicator.material_override = size_material
 
-func build_initial_heap():
+func build_initial_heap() -> void:
 	# Start with some initial values
 	var initial_values = [50, 30, 70, 20, 10, 60, 80]
 	for value in initial_values:
@@ -67,7 +67,7 @@ func build_initial_heap():
 	heapify_entire_array()
 	rebuild_visual_heap()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	operation_timer += delta
 	
@@ -78,7 +78,7 @@ func _process(delta):
 	animate_heap()
 	animate_indicators()
 
-func perform_heap_operation():
+func perform_heap_operation() -> void:
 	current_operation = (current_operation + 1) % HeapOperation.size()
 	
 	match current_operation:
@@ -105,7 +105,7 @@ func perform_heap_operation():
 		HeapOperation.SWITCH_TYPE:
 			switch_heap_type()
 
-func insert_element(value: int):
+func insert_element(value: int) -> void:
 	heap_array.append(value)
 	var index = heap_array.size() - 1
 	
@@ -118,7 +118,7 @@ func insert_element(value: int):
 	heapify_up(index)
 	rebuild_visual_heap()
 
-func extract_root():
+func extract_root() -> void:
 	if heap_array.size() == 0:
 		return
 	
@@ -137,7 +137,7 @@ func extract_root():
 	
 	rebuild_visual_heap()
 
-func heapify_up(index: int):
+func heapify_up(index: int) -> void:
 	while index > 0:
 		var parent_index = (index - 1) / 2
 		
@@ -153,7 +153,7 @@ func heapify_up(index: int):
 		else:
 			break
 
-func heapify_down(index: int):
+func heapify_down(index: int) -> void:
 	var size = heap_array.size()
 	
 	while true:
@@ -184,23 +184,23 @@ func heapify_down(index: int):
 		else:
 			break
 
-func swap_elements(i: int, j: int):
+func swap_elements(i: int, j: int) -> void:
 	var temp = heap_array[i]
 	heap_array[i] = heap_array[j]
 	heap_array[j] = temp
 
-func heapify_entire_array():
+func heapify_entire_array() -> void:
 	var size = heap_array.size()
 	# Start from the last non-leaf node and heapify down
 	for i in range(size / 2 - 1, -1, -1):
 		heapify_down(i)
 
-func demonstrate_heapify_up():
+func demonstrate_heapify_up() -> void:
 	# Add element and animate the heapify up process
 	if heap_array.size() < 15:
 		insert_element(randi() % 100)
 
-func demonstrate_heapify_down():
+func demonstrate_heapify_down() -> void:
 	# Temporarily mess up the heap property and fix it
 	if heap_array.size() > 2:
 		# Swap root with a random element
@@ -209,7 +209,7 @@ func demonstrate_heapify_down():
 		heapify_down(0)
 		rebuild_visual_heap()
 
-func randomize_and_heapify():
+func randomize_and_heapify() -> void:
 	# Randomize array and rebuild heap
 	for i in range(heap_array.size()):
 		heap_array[i] = randi() % 100
@@ -217,12 +217,12 @@ func randomize_and_heapify():
 	heapify_entire_array()
 	rebuild_visual_heap()
 
-func switch_heap_type():
+func switch_heap_type() -> void:
 	is_max_heap = !is_max_heap
 	heapify_entire_array()
 	rebuild_visual_heap()
 
-func create_visual_node(node_visual: HeapNodeVisual):
+func create_visual_node(node_visual: HeapNodeVisual) -> void:
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.25
 	
@@ -254,7 +254,7 @@ func create_visual_node(node_visual: HeapNodeVisual):
 	$HeapNodes.add_child(sphere)
 	node_visual.visual_object = sphere
 
-func rebuild_visual_heap():
+func rebuild_visual_heap() -> void:
 	# Update all node values and positions
 	for i in range(heap_nodes.size()):
 		if i < heap_array.size():
@@ -265,7 +265,7 @@ func rebuild_visual_heap():
 	calculate_heap_positions()
 	update_heap_edges()
 
-func calculate_heap_positions():
+func calculate_heap_positions() -> void:
 	for i in range(heap_nodes.size()):
 		var node = heap_nodes[i]
 		var level = int(log(i + 1) / log(2))  # Calculate level in binary tree
@@ -283,7 +283,7 @@ func calculate_heap_positions():
 		node.level = level
 		node.position_in_level = position_in_level
 
-func update_node_material(node: HeapNodeVisual):
+func update_node_material(node: HeapNodeVisual) -> void:
 	var sphere = node.visual_object
 	var material = sphere.material_override as StandardMaterial3D
 	
@@ -307,7 +307,7 @@ func update_node_material(node: HeapNodeVisual):
 		
 		material.emission = material.albedo_color * 0.4
 
-func update_heap_edges():
+func update_heap_edges() -> void:
 	# Clear existing edges
 	for edge in heap_edges:
 		edge.queue_free()
@@ -325,7 +325,7 @@ func update_heap_edges():
 		if right_child_index < heap_nodes.size():
 			create_heap_edge(i, right_child_index)
 
-func create_heap_edge(parent_index: int, child_index: int):
+func create_heap_edge(parent_index: int, child_index: int) -> void:
 	var edge = CSGCylinder3D.new()
 	var parent_pos = heap_nodes[parent_index].visual_object.position
 	var child_pos = heap_nodes[child_index].visual_object.position
@@ -356,7 +356,7 @@ func create_heap_edge(parent_index: int, child_index: int):
 	$HeapEdges.add_child(edge)
 	heap_edges.append(edge)
 
-func animate_heap():
+func animate_heap() -> void:
 	match current_operation:
 		HeapOperation.INSERT:
 			animate_insertion()
@@ -376,21 +376,21 @@ func animate_heap():
 		HeapOperation.SWITCH_TYPE:
 			animate_type_switch()
 
-func animate_insertion():
+func animate_insertion() -> void:
 	# Pulse the last inserted node
 	if heap_nodes.size() > 0:
 		var last_node = heap_nodes[-1]
 		var pulse = 1.0 + sin(time * 8.0) * 0.4
 		last_node.visual_object.scale = Vector3.ONE * pulse
 
-func animate_extraction():
+func animate_extraction() -> void:
 	# Pulse the root node
 	if heap_nodes.size() > 0:
 		var root_node = heap_nodes[0]
 		var pulse = 1.0 + sin(time * 6.0) * 0.5
 		root_node.visual_object.scale = Vector3.ONE * pulse
 
-func animate_heapify_up_process():
+func animate_heapify_up_process() -> void:
 	# Create upward wave effect
 	for i in range(heap_nodes.size()):
 		var node = heap_nodes[i]
@@ -399,7 +399,7 @@ func animate_heapify_up_process():
 		var intensity = max(0.0, sin(wave_phase)) * 0.3
 		node.visual_object.scale = Vector3.ONE * (1.0 + intensity)
 
-func animate_heapify_down_process():
+func animate_heapify_down_process() -> void:
 	# Create downward wave effect
 	for i in range(heap_nodes.size()):
 		var node = heap_nodes[i]
@@ -408,19 +408,19 @@ func animate_heapify_down_process():
 		var intensity = max(0.0, sin(wave_phase)) * 0.3
 		node.visual_object.scale = Vector3.ONE * (1.0 + intensity)
 
-func animate_heap_building():
+func animate_heap_building() -> void:
 	# Random pulsing during build
 	for node in heap_nodes:
 		var pulse = 1.0 + sin(time * 5.0 + node.value * 0.1) * 0.3
 		node.visual_object.scale = Vector3.ONE * pulse
 
-func animate_type_switch():
+func animate_type_switch() -> void:
 	# Color transition animation
 	for node in heap_nodes:
 		var transition_pulse = 1.0 + sin(time * 10.0 + node.array_index) * 0.4
 		node.visual_object.scale = Vector3.ONE * transition_pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Heap type indicator
 	var type_text_scale = 1.0 + sin(time * 3.0) * 0.1
 	$HeapTypeIndicator.scale = Vector3.ONE * type_text_scale
@@ -450,3 +450,12 @@ func animate_indicators():
 	var op_pulse = 1.0 + sin(time * 4.0) * 0.2
 	$OperationIndicator.scale.x = op_pulse
 	$OperationIndicator.scale.z = op_pulse
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

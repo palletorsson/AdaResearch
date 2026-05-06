@@ -7,6 +7,12 @@ extends RigidBody3D
 @export var explosion_particles: bool = true
 @export var my_knockback_force: float = 0.01
 
+@export_group("Falling Field")
+@export var falling_mode: bool = false
+@export var horizontal_jitter_strength: float = 0.25
+@export var jitter_interval: float = 0.4
+@export var vertical_speed_variation: float = 0.2
+
 # Components
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -19,12 +25,16 @@ extends RigidBody3D
 var velocity: Vector3 = Vector3.ZERO
 var spawner: Node3D
 var has_hit_player: bool = false
+var _rng := RandomNumberGenerator.new()
+var _jitter_timer: float = 0.0
+var _base_fall_speed: float = 2.0
 
 # Signals
 signal projectile_destroyed()
 signal player_hit(damage: int, position: Vector3)
 
 func _ready():
+	_rng.randomize()
 	_setup_projectile()
 	_setup_collision()
 	_setup_visuals()
@@ -127,15 +137,51 @@ func setup_projectile(direction: Vector3, speed: float, source_spawner: Node3D =
 	"""Configure the projectile with direction and speed"""
 	velocity = direction * speed
 	spawner = source_spawner
-	
+
+	if falling_mode:
+		_base_fall_speed = max(0.2, abs(velocity.y))
+		_jitter_timer = 0.0
+
 	# Apply initial velocity
 	linear_velocity = velocity
 	
 	# Face movement direction
 	if direction.length() > 0:
 		look_at(global_position + direction, Vector3.UP)
-	
+
 	print("ProjectileCube: Setup with velocity %s, speed %.1f" % [direction, speed])
+
+func set_falling_field_profile(initial_velocity: Vector3, horizontal_jitter: float, new_jitter_interval: float, speed_variation: float) -> void:
+	"""Configure this projectile for slow, jittered falling-field behavior."""
+	falling_mode = true
+	horizontal_jitter_strength = max(0.0, horizontal_jitter)
+	jitter_interval = max(0.05, new_jitter_interval)
+	vertical_speed_variation = max(0.0, speed_variation)
+	gravity_scale = 0.0
+
+	velocity = initial_velocity
+	_base_fall_speed = max(0.2, abs(initial_velocity.y))
+	_jitter_timer = 0.0
+	linear_velocity = velocity
+
+func _physics_process(delta: float) -> void:
+	if not falling_mode or has_hit_player:
+		return
+
+	_jitter_timer -= delta
+	if _jitter_timer > 0.0:
+		return
+
+	var jitter_scale = max(jitter_interval, 0.05)
+	_jitter_timer = max(0.05, jitter_scale + _rng.randf_range(-0.3, 0.3) * jitter_scale)
+
+	var new_fall_speed = _base_fall_speed + _rng.randf_range(-vertical_speed_variation, vertical_speed_variation)
+	new_fall_speed = max(0.2, new_fall_speed)
+
+	velocity.x = _rng.randf_range(-horizontal_jitter_strength, horizontal_jitter_strength)
+	velocity.z = _rng.randf_range(-horizontal_jitter_strength, horizontal_jitter_strength)
+	velocity.y = -new_fall_speed
+	linear_velocity = velocity
 
 func _integrate_forces(state):
 	"""Apply continuous movement force"""
@@ -353,7 +399,7 @@ func _create_explosion_effect():
 
 func _on_lifetime_expired():
 	"""Handle projectile lifetime expiration"""
-	print("ProjectileCube: Lifetime expired")
+	#print("ProjectileCube: Lifetime expired")
 	_destroy_projectile()
 
 func _destroy_projectile():

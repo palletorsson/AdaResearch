@@ -1,0 +1,33 @@
+{
+	"sequences": {
+		"morphogenesis": {
+			"name": "Morphogenesis: Pattern from Noise",
+			"status": "absorbed",
+			"absorbed_into": "softbodies",
+			"absorbed_reason": "2 maps moved to softbodies sequence. Turing's reaction-diffusion connects to soft body dynamics \u00e2\u20ac\u201d both are continuous matter finding form. Turing as muse gives it a prominent place in the expanded softbodies sequence.",
+			"truth": "You don't need a blueprint. Random initial conditions + simple rules = complex patterns.",
+			"qfep_term": "E(S)\u00e2\u2020\u2019F",
+			"qfep_connection": "Turing morphogenesis is the E(S) term creating F\u00e2\u20ac\u201dentropy generating order through self-organization.",
+			"formula": "\u00e2\u02c6\u201au/\u00e2\u02c6\u201at = D\u00e2\u02c6\u2021\u00c2\u00b2u + f(u,v)",
+			"description": "Turing's 1952 insight: ordered patterns emerge from homogeneous chaos. Reaction-diffusion dynamics, edge of chaos, spontaneous self-organization.",
+			"maps": ["Morphogenesis_Intro"],
+			"moved_maps": {
+				"ProceduralGeneration_Reaction_Diffusion_Systems": "softbodies",
+				"Topology_Entropy_Morphogenesis": "softbodies"
+			},
+			"references": {
+				"key_figures": [
+					"Alan Turing",
+					"Ilya Prigogine",
+					"Stuart Kauffman"
+				],
+				"key_papers": [
+					"The Chemical Basis of Morphogenesis (1952)"
+				]
+			},
+			"artifact_groups": []
+		}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
+}

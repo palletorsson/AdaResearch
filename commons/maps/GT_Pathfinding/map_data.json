@@ -1,0 +1,76 @@
+{
+  "map_info": {
+    "name": "Pathfinding Maze",
+    "lookup_name": "GT_Pathfinding",
+    "description": "Experience pathfinding firsthand â€” navigate a maze with dead ends and the one true path. You are the algorithm searching for the exit.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 7,
+      "depth": 12,
+      "max_height": 5
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "graphtheory",
+      "estimated_time": "5-8 minutes",
+      "spatial_temperature": 0.75,
+      "design_notes": "Maze corridor â€” winding path through walls with dead-end branches. Player experiences what a pathfinding algorithm does: explore, backtrack, find the way. Single heavy artifact at the maze center as reward."
+    },
+    "title": "Navigating the Search Tree"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","5","5","5","5","5"],
+      ["1","1","1","1","1","5","5"],
+      ["5","5","5","5","1","5","5"],
+      ["5","1","1","1","1","1","5"],
+      ["5","1","5","5","5","1","5"],
+      ["5","1","5","1","1","1","5"],
+      ["5","1","1","1","5","5","5"],
+      ["5","5","5","1","5","5","5"],
+      ["5","1","1","1","1","1","5"],
+      ["5","1","5","5","1","1","1"],
+      ["5","1","1","1","1","0","1"],
+      ["5","5","5","1","1","1","1"]
+    ],
+    "utilities": [
+      ["s"," "," "," "," "," "," "],
+      [" ","an"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," ","t"," "],
+      [" "," "," "," "," ","sp"," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," ","pathfinding3d:0:0:0.6"," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "]
+    ]
+  }
+}

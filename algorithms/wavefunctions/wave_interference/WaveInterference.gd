@@ -10,14 +10,14 @@ var field_points: Array = []
 var wave_rings1: Array = []
 var wave_rings2: Array = []
 
-func _ready():
+func _ready() -> void:
 	# Initialize Wave Interference visualization
 	print("Wave Interference Visualization initialized")
 	create_interference_field()
 	create_wave_rings()
 	setup_grid()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	animate_wave_sources(delta)
@@ -25,7 +25,7 @@ func _process(delta):
 	animate_interference_field(delta)
 	animate_interference_pattern(delta)
 
-func create_interference_field():
+func create_interference_field() -> void:
 	# Create field points for interference visualization
 	var field_points_node = $InterferenceField/FieldPoints
 	var grid_size = 20
@@ -48,7 +48,7 @@ func create_interference_field():
 			field_points_node.add_child(point)
 			field_points.append(point)
 
-func create_wave_rings():
+func create_wave_rings() -> void:
 	# Create wave rings for both sources
 	var rings1_node = $WaveRings1
 	var rings2_node = $WaveRings2
@@ -81,7 +81,7 @@ func create_wave_rings():
 		rings2_node.add_child(ring)
 		wave_rings2.append(ring)
 
-func setup_grid():
+func setup_grid() -> void:
 	# Create reference grid
 	var grid_lines = $Grid/GridLines
 	
@@ -103,7 +103,7 @@ func setup_grid():
 		z_line.position = Vector3(i, -3, 0)
 		grid_lines.add_child(z_line)
 
-func animate_wave_sources(delta):
+func animate_wave_sources(_delta) -> void:
 	# Animate wave source cores
 	var source1_core = $WaveSource1/SourceCore
 	var source2_core = $WaveSource2/SourceCore
@@ -126,7 +126,7 @@ func animate_wave_sources(delta):
 		var intensity2 = (sin(time * frequency2 * PI * 2) + 1.0) * 0.5
 		source2_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity2
 
-func animate_wave_rings(delta):
+func animate_wave_rings(_delta) -> void:
 	# Animate wave rings expanding from sources
 	for i in range(wave_rings1.size()):
 		var ring = wave_rings1[i]
@@ -162,7 +162,7 @@ func animate_wave_rings(delta):
 				ring.radius = 0.01
 				
 
-func animate_interference_field(delta):
+func animate_interference_field(_delta) -> void:
 	# Animate field points based on wave interference
 	var source1_pos = Vector3(-3, 0, -3)
 	var source2_pos = Vector3(3, 0, -3)
@@ -194,7 +194,7 @@ func animate_interference_field(delta):
 			var scale = 1.0 + abs(interference) * 0.3
 			point.scale = Vector3.ONE * scale
 
-func animate_interference_pattern(delta):
+func animate_interference_pattern(delta) -> void:
 	# Animate the interference pattern visualization
 	var pattern_core = $InterferencePattern/PatternCore
 	if pattern_core:
@@ -210,16 +210,16 @@ func animate_interference_pattern(delta):
 		var color = Color(0.2, 0.8, 0.2, 1).lerp(Color(0.8, 0.2, 0.2, 1), color_shift)
 		pattern_core.material_override.emission = color * 0.3
 
-func set_frequency1(freq: float):
+func set_frequency1(freq: float) -> void:
 	frequency1 = clamp(freq, 0.1, 5.0)
 
-func set_frequency2(freq: float):
+func set_frequency2(freq: float) -> void:
 	frequency2 = clamp(freq, 0.1, 5.0)
 
-func set_wave_speed(speed: float):
+func set_wave_speed(speed: float) -> void:
 	wave_speed = clamp(speed, 0.5, 5.0)
 
-func set_amplitude(amp: float):
+func set_amplitude(amp: float) -> void:
 	amplitude = clamp(amp, 0.1, 2.0)
 
 func get_interference_at_point(pos: Vector3) -> float:
@@ -234,5 +234,14 @@ func get_interference_at_point(pos: Vector3) -> float:
 	
 	return wave1 + wave2
 
-func reset_simulation():
+func reset_simulation() -> void:
 	time = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

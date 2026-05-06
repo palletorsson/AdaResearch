@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://s5fhr6bmrr3f"]
+
+[ext_resource type="Script" uid="uid://16dpjvnih1sx" path="res://algorithms/randomness/RandomizeCubesOverZ/RandomizeCubesOverZ.gd" id="1_78w1s"]
+
+[node name="RandomizeCubesOverZ" type="Node3D"]
+script = ExtResource("1_78w1s")

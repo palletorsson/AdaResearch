@@ -1,0 +1,126 @@
+{
+  "map_info": {
+	"name": "Hazards Zoo — Items & Math",
+	"lookup_name": "Hazards_Zoo_4",
+	"description": "Items, companions, and math/data structure creatures. Part 4 of 7 in the Hazards bestiary.",
+	"version": "1.0",
+	"format": "json",
+	"dimensions": {
+	  "width": 15,
+	  "depth": 11,
+	  "max_height": 3
+	},
+	"title": "Items, Companions, and Data Structures",
+	"metadata": {
+	  "difficulty": "exhibition",
+	  "category": "hazards",
+	  "estimated_time": "exploration based",
+	  "learning_objectives": [
+		"Meet pickups, systems, and relational partners",
+        "See algorithms made physical — array traversal, binary search trees, graph theory, convex geometry"
+	  ]
+	}
+  },
+  "spawn_points": {
+	"default": {
+	  "position": [
+		0.5,
+		1.8,
+		0.5
+	  ],
+	  "rotation": [
+		0.0,
+		180.0,
+		0.0
+	  ],
+	  "description": "Entrance — facing the zoo rows"
+	}
+  },
+  "tutorial_text": {
+	"hazards_zoo_companions": {
+	  "title": "ITEMS & COMPANIONS",
+	  "text": "Edible mushroom, Stick tool, Proximity spawner, The Catalyst, Loving Triangle — pickups, systems, and relational partners."
+	},
+	"hazards_zoo_math": {
+	  "title": "MATH & DATA STRUCTURES",
+	  "text": "Index Sentinel (array traversal), Data Tree Walker (binary search tree), Graph Weaver (network theory), Hull Crusher (convex geometry). Algorithms made physical."
+	}
+  },
+  "lighting": {
+	"ambient_color": [
+	  0.7,
+	  0.7,
+	  0.85
+	],
+	"ambient_energy": 0.4,
+	"directional_light": {
+	  "enabled": true,
+	  "direction": [
+		-0.3,
+		-0.8,
+		-0.2
+	  ],
+	  "color": [
+		1.0,
+		0.98,
+		0.95
+	  ],
+	  "energy": 0.8
+	}
+  },
+  "settings": {
+	"cube_size": 1.0,
+	"gutter": 0.0,
+	"show_grid": false,
+	"enable_physics": true,
+	"background": {
+	  "type": "sky",
+	  "color": [
+		0.08,
+		0.1,
+		0.18
+	  ]
+	}
+  },
+  "layers": {
+	"structure": [
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
+	],
+	"utilities": [
+	  ["s"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," ","t"," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+	],
+	"interactables": [
+	  [" "," "," "," "," ","soft_stage_dashboard:0:1.2"," "," "," ","progression_driver:0:0.8"," "," "," "," ","library_rack:0:0#collection:hazards#layout:rack_layout.json"],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  ["tt:hazards_zoo_companions:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" ","edible_mushroom"," ","stick_tool"," ","proximity_spawner"," ","becoming_catalyst"," ","loving_triangle"," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  ["tt:hazards_zoo_math:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" ","index_sentinel"," ","data_tree_walker"," ","graph_weaver"," ","hull_crusher"," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+	]
+  }
+}

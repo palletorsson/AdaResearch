@@ -69,3 +69,12 @@ static func _add_triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, n
 		st.add_vertex(c)
 		st.set_normal(back_normal)
 		st.add_vertex(b)
+static func build_mesh_instance_raw(vertices: Array, faces: Array, config: Dictionary = {}) -> ArrayMesh:
+	var mesh := build_mesh(vertices, faces, config)
+	if mesh == null:
+		return mesh
+	var material = config.get("material")
+	if material:
+		for surface in range(mesh.get_surface_count()):
+			mesh.surface_set_material(surface, material)
+	return mesh

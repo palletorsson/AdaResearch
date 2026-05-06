@@ -1,0 +1,11 @@
+You are an expert Godot 4.2 GDScript developer.
+
+Create the full contents of `res://algorithms/machinelearning/switchboard_attention/SwitchboardAttention.gd`.
+
+The script should implement a "Switchboard" model of attention, as described in the `README.md`.
+
+The scene should contain:
+- A set of "Input" nodes.
+- A set of "Output" nodes.
+- When the user selects an input node, it should be designated as the "Query".
+- The script should then determine the "Key" (the most relevant output node) and draw a connection (a "cable") between the Query and the Key.

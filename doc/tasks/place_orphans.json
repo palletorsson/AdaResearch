@@ -1,0 +1,237 @@
+{
+  "goal_id": "place_orphans",
+  "goal_title": "Place orphan artifacts into their concept-matching maps",
+  "why": "Audits identified artifacts that exist on disk but are underused, misplaced, or missing dedicated map homes. Each orphan represents pedagogical capacity going unused. Placement must follow the concept red thread, not just any empty tile.",
+  "success_criteria": [
+    "All flagged orphans placed in maps where their concept fit is explicit",
+    "All touched maps still pass pathfinder",
+    "Registry entries added only where genuinely missing",
+    "Build tasks are clearly separated from pure placement tasks"
+  ],
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "place_orphans.001",
+      "title": "Place standing_waves in WaveFunctions_Sine_Space",
+      "spec": "Use the existing artifact scene res://algorithms/wavefunctions/standing_waves/standing_waves.tscn, already registered in commons/artifacts/registry/wavefunctions.json as standing_waves. Add it to commons/maps/WaveFunctions_Sine_Space/map_data.json in a reachable cell on the upper sine-teaching walkway; avoid the lower void column where the map already has unreachable decorative artifacts. This is a placement task, not a build task.",
+      "effort": "15min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "standing_waves"
+      ],
+      "map_refs": [
+        "WaveFunctions_Sine_Space"
+      ],
+      "verification": "python tools/map_pathfinder.py check WaveFunctions_Sine_Space",
+      "contexts": [
+        "orphan_wave_softbody_placements",
+        "map_placement",
+        "registry_schema",
+        "pathfinder_validate",
+        "artifact_three_files",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "place_orphans.002",
+      "title": "Place pendulum_slap in WaveFunctions_Pendulum",
+      "spec": "Use the existing artifact scene res://algorithms/softbodies/slap_test/pendulum_slap.tscn, already registered in commons/artifacts/registry/soft_bodies.json as pendulum_slap. Add it to commons/maps/WaveFunctions_Pendulum/map_data.json in the existing pendulum teaching cluster near PendulumWave and foucault_pendulum, rather than treating it as a generic filler placement.",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "pendulum_slap"
+      ],
+      "map_refs": [
+        "WaveFunctions_Pendulum"
+      ],
+      "verification": "python tools/map_pathfinder.py check WaveFunctions_Pendulum",
+      "contexts": [
+        "orphan_wave_softbody_placements",
+        "map_placement",
+        "registry_schema",
+        "pathfinder_validate",
+        "artifact_three_files",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "place_orphans.003",
+      "title": "Place soft_trampoline in SoftBodies_Soft_Body_Deformation",
+      "spec": "Use the existing artifact scene res://algorithms/softbodies/advanced_concepts/soft_trampoline.tscn, already registered in commons/artifacts/registry/soft_bodies.json as soft_trampoline. Add it to commons/maps/SoftBodies_Soft_Body_Deformation/map_data.json as a restoring-force anchor that complements the current jelly_cube and softmill deformation arc.",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "soft_trampoline"
+      ],
+      "map_refs": [
+        "SoftBodies_Soft_Body_Deformation"
+      ],
+      "verification": "python tools/map_pathfinder.py check SoftBodies_Soft_Body_Deformation",
+      "contexts": [
+        "orphan_wave_softbody_placements",
+        "map_placement",
+        "registry_schema",
+        "pathfinder_validate",
+        "artifact_three_files",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "place_orphans.004",
+      "title": "Create a home for curl_noise_particles and noise_mixer",
+      "spec": "Discovery favors a new map, not a forced placement into Noise_One or Noise_Voxel. Both artifacts already exist and are registered in commons/artifacts/registry/randomness.json, and doc/curriculum_audit/_placement_plan.md explicitly recommends a new map commons/maps/Noise_Vector_Fields/ to anchor the noise sequence's currently unanchored vector-field objective. Design or create Noise_Vector_Fields, consider placing VectorFieldFlow alongside curl_noise_particles and noise_mixer, and add the new map to commons/maps/sequences/noise.json.",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "curl_noise_particles",
+        "noise_mixer"
+      ],
+      "map_refs": [
+        "Noise_Vector_Fields"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "contexts": [
+        "noise_vector_fields_gap",
+        "map_placement",
+        "registry_schema",
+        "pathfinder_validate",
+        "artifact_three_files",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "place_orphans.005",
+      "title": "Activate Trans_Composition and move the matrix cluster there",
+      "spec": "Promote commons/maps/Trans_Composition/map_data.json into the live transformation sequence by adding Trans_Composition to commons/maps/sequences/transformation.json after Trans_Scale and before Trans_Pit. Then move the four algebra-heavy artifacts now parked in commons/maps/Trans_Introduction/map_data.json — matrix_4x4_viewer at (5,6), homogeneous_coordinates at (2,8), rotation_gimbal at (8,8), and transform_composition at (2,12) — into Trans_Composition/map_data.json. Reconcile sequence content and artifact_groups metadata so Trans_Composition, Trans_Pit, and Chamber_Transformation are all represented consistently.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "matrix_4x4_viewer",
+        "homogeneous_coordinates",
+        "rotation_gimbal",
+        "transform_composition"
+      ],
+      "map_refs": [
+        "Trans_Introduction",
+        "Trans_Composition"
+      ],
+      "sequence_refs": [
+        "transformation"
+      ],
+      "verification": "python tools/map_pathfinder.py check Trans_Introduction Trans_Composition",
+      "contexts": [
+        "trans_composition_activation",
+        "map_placement",
+        "registry_schema",
+        "pathfinder_validate",
+        "artifact_three_files",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "place_orphans.006",
+      "title": "Build and insert the missing polygon primitive map",
+      "spec": "This is a sequence-expansion task, not an orphan placement. commons/maps/Point_Polygon/ does not exist, commons/maps/sequences/primitives.json does not reference Point_Polygon, and discovery did not find an obvious existing n-gon teaching artifact to drop in. Build a dedicated polygon artifact or adapt a suitable existing primitive, create commons/maps/Point_Polygon/map_data.json, and decide where the map belongs in the actual primitives sequence rather than assuming the audit's ideal order is already live.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Point_Polygon"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "contexts": [
+        "primitives_missing_geometry_maps",
+        "map_placement",
+        "registry_schema",
+        "pathfinder_validate",
+        "artifact_three_files",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "place_orphans.007",
+      "title": "Build and insert the missing circle primitive map",
+      "spec": "This is a follow-on build task after polygon, not a placement task. commons/maps/Point_Circle/ does not exist, commons/maps/sequences/primitives.json does not reference Point_Circle, and discovery did not find a dedicated circle-teaching artifact ready for placement. Build the circle artifact and map, then insert the map into the real primitives sequence order rather than relying on the audit's hypothetical missing-map ladder.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "place_orphans.006"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Point_Circle"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "contexts": [
+        "primitives_missing_geometry_maps",
+        "map_placement",
+        "registry_schema",
+        "pathfinder_validate",
+        "artifact_three_files",
+        "sequence_audit_dir"
+      ]
+    },
+    {
+      "id": "place_orphans.008",
+      "title": "Create a dedicated coordinate-system map using CoordinateSystem3M",
+      "spec": "This is a map-creation and sequence-insertion task, not an artifact-build task. commons/maps/Point_Coordinate_System/ does not exist and commons/maps/sequences/primitives.json does not reference it, but CoordinateSystem3M already exists at res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn, is registered in commons/artifacts/registry/vectors.json, and is already placed in Point_One and Point_Zero. Create the dedicated map, decide whether CoordinateSystem3M should be duplicated or relocated from earlier maps, and then insert Point_Coordinate_System into the live primitives sequence.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "place_orphans.007"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "CoordinateSystem3M"
+      ],
+      "map_refs": [
+        "Point_Coordinate_System"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "contexts": [
+        "primitives_missing_geometry_maps",
+        "coordinate_system_reuse",
+        "map_placement",
+        "registry_schema",
+        "pathfinder_validate",
+        "artifact_three_files",
+        "sequence_audit_dir"
+      ]
+    }
+  ]
+}

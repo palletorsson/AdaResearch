@@ -1,0 +1,5 @@
+Classical logic has a rule: if a contradiction exists, everything follows. One false step and the entire system collapses into triviality. Pavel Florensky — mathematician, priest, executed by Stalin — rejected this. He proposed a logic that holds A and not-A together without detonation. Not confusion. Not error. Structural coexistence.
+
+Two diamond rooms occupy the same space. One warm, ordered, low. One cold, entropic, high. Walk to the center and you stand in both. The Florensky sphere pulses between assertion and negation — touch it and superposition collapses, release and it returns. Nearby, Schrödinger's box performs the same gesture in physics. Observation destroys what holding permits.
+
+Paraconsistent logic doesn't resolve contradiction. It refuses the demand that contradiction must resolve. The system that can hold both states without shattering is not broken — it is more robust than the one that cannot.

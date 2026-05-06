@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvb5dkty8cnea"]
+
+[ext_resource type="Script" uid="uid://clhqbwic11rc2" path="res://addons/element_editor/element_layout_node.gd" id="1_layout"]
+[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdua" path="res://commons/interactables/slider_smooth.tscn" id="2_vxtna"]
+[ext_resource type="Script" uid="uid://cgk7meitry1a" path="res://commons/interactables/slider_smooth.gd" id="3_6y35i"]
+[ext_resource type="PackedScene" path="res://commons/audio/interfaces/VRSimpleWaveform.tscn" id="4_q1n1l"]
+[ext_resource type="Script" uid="uid://bmryksivf5axb" path="res://commons/audio/interfaces/VRSimpleWaveform.gd" id="5_s0swv"]
+[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://commons/interactables/push_button.tscn" id="6_spwyo"]
+[ext_resource type="Script" uid="uid://ddrknxyorgm1x" path="res://commons/interactables/push_button.gd" id="7_gknpf"]
+
+[node name="RackSineBasic" type="Node3D"]
+script = ExtResource("1_layout")
+subset_id = "audio_rack"
+grid_height = 6
+show_grid = false
+placements = [{
+"grid_pos": Vector3i(0, 4, 0),
+"id": "src_sine",
+"rotation": 0
+}, {
+"grid_pos": Vector3i(3, 3, 0),
+"id": "sl_freq",
+"rotation": 0
+}, {
+"grid_pos": Vector3i(4, 3, 0),
+"id": "sl_amp",
+"rotation": 0
+}, {
+"grid_pos": Vector3i(5, 3, 0),
+"id": "sl_dur",
+"rotation": 0
+}, {
+"grid_pos": Vector3i(6, 3, 0),
+"id": "disp_waveform",
+"rotation": 0
+}, {
+"grid_pos": Vector3i(0, 2, 0),
+"id": "btn_play",
+"rotation": 0
+}, {
+"grid_pos": Vector3i(1, 2, 0),
+"id": "btn_stop",
+"rotation": 0
+}]
+
+[node name="SliderSmooth" type="Node3D" parent="." instance=ExtResource("2_vxtna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, 0.35999998, 0)
+script = ExtResource("3_6y35i")
+
+[node name="@Node3D@82377" type="Node3D" parent="." instance=ExtResource("2_vxtna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35999998, 0.35999998, 0)
+script = ExtResource("3_6y35i")
+
+[node name="@Node3D@82378" type="Node3D" parent="." instance=ExtResource("2_vxtna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44, 0.35999998, 0)
+script = ExtResource("3_6y35i")
+
+[node name="VRSimpleWaveform" type="Node3D" parent="." instance=ExtResource("4_q1n1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64, 0.35999998, 0)
+script = ExtResource("5_s0swv")
+
+[node name="PushButton" type="Node3D" parent="." instance=ExtResource("6_spwyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.19999999, 0)
+script = ExtResource("7_gknpf")
+pressed_color = Color(0.2, 0.85, 1, 1)
+released_color = Color(0.12, 0.12, 0.15, 1)
+
+[node name="@Node3D@82379" type="Node3D" parent="." instance=ExtResource("6_spwyo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.19999999, 0)
+script = ExtResource("7_gknpf")
+pressed_color = Color(0.2, 0.85, 1, 1)
+released_color = Color(0.12, 0.12, 0.15, 1)

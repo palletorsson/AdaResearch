@@ -1,0 +1,58 @@
+{
+  "map_info": {
+    "name": "Chamber Transformation",
+    "lookup_name": "Chamber_Transformation",
+    "description": "The crawler folds flat when your shrink ray hits it. It does not die. It compresses. You have changed something without destroying it.",
+    "dimensions": {
+      "width": 11,
+      "depth": 7,
+      "max_height": 2
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "enter_type": "I"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Return to Lab",
+      "description": "Sequence complete",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","0"]
+    ],
+    "utilities": [
+      ["sp"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","t"]
+    ],
+    "interactables": [
+      [" "," ","becoming_catalyst#start_mode:transformation"," "," "," "," "," ","science_screen:180:1.5#mode:scatter"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" ","catalyst_target"," ","catalyst_target"," "," "," ","catalyst_target"," ","catalyst_target"," "],
+      [" "," "," "," "," ","proximity_spawner#type:miura_crawler"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

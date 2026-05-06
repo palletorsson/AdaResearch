@@ -1,0 +1,151 @@
+{
+    "description": "Flowing very long synth waves - Blade Runner/Vangelis style with lush evolving pads",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
+            "volume_db": -16,
+            "bus": "MainPad"
+        },
+        {
+            "sound_id": "AudioSynthesizer.JUPITER_8_STRINGS",
+            "volume_db": -18,
+            "bus": "StringPad"
+        },
+        {
+            "sound_id": "AudioSynthesizer.DX7_ELECTRIC_PIANO",
+            "volume_db": -22,
+            "bus": "HighPad"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -20,
+            "bus": "DeepDrone"
+        },
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -24,
+            "bus": "SubBass"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.KORG_M1_PIANO",
+                "AudioSynthesizer.DX7_ELECTRIC_PIANO",
+                "AudioSynthesizer.ARP_2600_LEAD"
+            ],
+            "interval_range": [
+                30.0,
+                90.0
+            ],
+            "volume_range": [
+                -26,
+                -20
+            ],
+            "bus": "DelayPad"
+        }
+    ],
+    "buses": {
+        "MainPad": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "dry": 0.5,
+                    "wet": 0.6
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.75,
+                    "damping": 0.08
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 375,
+                    "tap1_level_db": -4.0
+                }
+            ]
+        },
+        "StringPad": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.8,
+                    "damping": 0.05
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.6,
+                    "wet": 0.5
+                }
+            ]
+        },
+        "HighPad": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.92,
+                    "wet": 0.7,
+                    "damping": 0.1
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.75,
+                    "tap1_delay_ms": 500,
+                    "tap1_level_db": -5.0
+                }
+            ]
+        },
+        "DeepDrone": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 800
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.98,
+                    "wet": 0.85,
+                    "damping": 0.03
+                }
+            ]
+        },
+        "SubBass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 150
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.4,
+                    "damping": 0.2
+                }
+            ]
+        },
+        "DelayPad": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.5,
+                    "tap1_delay_ms": 1000,
+                    "tap1_level_db": -2.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.98,
+                    "wet": 0.8,
+                    "damping": 0.06
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.6,
+                    "wet": 0.5
+                }
+            ]
+        }
+    }
+}

@@ -1,8 +1,19 @@
-# SplitQuad.gd - Creates a quad split into two triangles with different colors
+﻿# SplitQuad.gd - Creates a quad split into two triangles with different colors
 extends Node3D
+
+# @identity
+# essence: triangle with randomized shader color — the single-face primitive in its simplest movable form
+# desire: learner grabs a triangle and feels it as a physical object, not a mathematical abstraction
+# critical_parameter: random shader color assigned at startup — makes each instance visually distinct
+# triggers: dragging any of the 3 vertex grab spheres — face deforms following hand movement
+# emerges: the distinction between the geometric shape and its visual representation (color is not intrinsic)
+# needs: [has 3 grabbable vertex spheres [has], missing color-override VR control]
+# relationships: lighter sibling to quad.gd; used alongside other primitives for comparison
+# truth: a triangle is the same shape regardless of color — properties are separable from appearance
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.5  # Half the original size
+@export var triangle_scale: float = 0.5 # Scale of the triangle vertices
 @export var sphere_y_offset: float = 0.0
 
 ## Freeze behavior options
@@ -14,11 +25,7 @@ var triangle_mesh_black: MeshInstance3D
 var drag_points: DragPointSet
 
 # Standing triangle has 3 corner points that define 1 triangle (vertical/standing)
-var vertex_positions: Array[Vector3] = [
-	Vector3(-1.0, sphere_y_offset - 1.0, 0.0),  # Bottom-left (0)
-	Vector3(1.0, sphere_y_offset - 1.0, 0.0),   # Bottom-right (1)
-	Vector3(0.0, sphere_y_offset + 1.0, 0.0)    # Top-center (2)
-]
+var vertex_positions: Array[Vector3] = []
 
 # Define the single standing triangle
 # Triangle: Bottom-left, Bottom-right, Top-center (indices 0,1,2)
@@ -26,6 +33,14 @@ var triangle1_indices: Array[int] = [0, 1, 2]  # Pink triangle
 var triangle2_indices: Array[int] = [0, 1, 2]  # Same triangle (for compatibility)
 
 func _ready():
+	# Initialize with scaled positions if not already set (e.g. from scene file)
+	if vertex_positions.is_empty():
+		vertex_positions = [
+			Vector3(-1.0 * triangle_scale, (sphere_y_offset - 1.0) * triangle_scale, 0.0),  # Bottom-left (0)
+			Vector3(1.0 * triangle_scale, (sphere_y_offset - 1.0) * triangle_scale, 0.0),   # Bottom-right (1)
+			Vector3(0.0 * triangle_scale, (sphere_y_offset + 1.0) * triangle_scale, 0.0)    # Top-center (2)
+		]
+	
 	drag_points = DragPointSet.new()
 	drag_points.name = "DragPoints"
 	add_child(drag_points)
@@ -133,7 +148,7 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 	st.set_uv(Vector2(1.0, 0.0))
 	st.add_vertex(v1)
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
 	print("DEBUG PICKUP")
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
@@ -193,7 +208,7 @@ func set_vertex_color(color: Color) -> void:
 		material.albedo_color = vertex_color
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		material.emission = Color(0.1, 0.4, 0.2) * 0.3
-		material.roughness = 0.1
+		material.roughness = 0.8
 		material.metallic = 0.0
 		material.refraction = 0.05
 	)
@@ -270,7 +285,7 @@ func print_help():
 	print("R: Reset to right-angled triangle")
 	print("I: Reset to isosceles triangle")
 	print("W: Reset to wide triangle")
-	print("Triangle vertices: Bottom-left �+' Bottom-right �+' Top-center")
+	print("Triangle vertices: Bottom-left ï¿½+' Bottom-right ï¿½+' Top-center")
 	print("============================")
 
 func get_triangle_info() -> Dictionary:

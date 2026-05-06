@@ -1,0 +1,31 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Primitives_Load",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 4
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "primitives"
+  ],
+  "density": 0.333,
+  "breath_zones": [],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 3,
+    "breath_zone_count": 0,
+    "unique_tokens": 1
+  }
+}

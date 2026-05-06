@@ -1,45 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://3dy7os2yscx"]
+[gd_scene load_steps=3 format=3 uid="uid://3dy7os2yscx"]
 
 [ext_resource type="Script" uid="uid://di58lda6qi44r" path="res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.gd" id="1_sculpture"]
-
-[sub_resource type="Environment" id="Environment_surreal"]
-background_mode = 1
-background_color = Color(0.05, 0.05, 0.08, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.4, 0.4, 0.5, 1)
-ambient_light_energy = 0.4
-reflected_light_source = 2
-tonemap_mode = 2
-glow_enabled = true
-glow_intensity = 1.2
-glow_bloom = 0.2
-fog_enabled = true
-fog_light_color = Color(0.3, 0.3, 0.4, 1)
-fog_light_energy = 0.5
-fog_sun_scatter = 0.1
-fog_density = 0.005
-fog_aerial_perspective = 0.2
-fog_sky_affect = 0.5
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.02
-volumetric_fog_albedo = Color(0.7, 0.7, 0.8, 1)
-volumetric_fog_emission = Color(0.1, 0.1, 0.15, 1)
-volumetric_fog_emission_energy = 0.3
-volumetric_fog_gi_inject = 0.5
-volumetric_fog_anisotropy = 0.1
-volumetric_fog_length = 30.0
-volumetric_fog_ambient_inject = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
-albedo_color = Color(0.15, 0.15, 0.18, 1)
-metallic = 0.3
-roughness = 0.8
-clearcoat_enabled = true
-clearcoat = 0.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_floor"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_viewing"]
 radius = 1.0
@@ -52,22 +13,6 @@ color_intensity = 1.4
 organic_distortion = 1.0
 rotation_speeds = Array[float]([0.4, 0.6, 0.35])
 piston_amplitudes = Array[float]([2.2, 1.8, 2.6])
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_surreal")
-
-[node name="Gallery" type="Node3D" parent="."]
-
-[node name="Floor" type="StaticBody3D" parent="Gallery"]
-
-[node name="FloorMesh" type="MeshInstance3D" parent="Gallery/Floor"]
-transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 15, 0, -2, 0)
-material_override = SubResource("StandardMaterial3D_floor")
-mesh = SubResource("BoxMesh_floor")
-
-[node name="FloorCollision" type="CollisionShape3D" parent="Gallery/Floor"]
-transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 15, 0, -2, 0)
-shape = SubResource("BoxShape3D_floor")
 
 [node name="MainLighting" type="Node3D" parent="."]
 

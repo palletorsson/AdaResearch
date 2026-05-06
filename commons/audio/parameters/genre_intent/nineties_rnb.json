@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "version": 1,
+    "mode": "advisory",
+    "strict": false
+  },
+  "genre_id": "nineties_rnb",
+  "suit_guidance": {
+    "core_roles": ["rhythm", "bass", "harmony"],
+    "common_roles": ["hook", "fx"],
+    "experimental_roles": ["fx", "hook"],
+    "continuity_preferences": [
+      "prefer drums and bass continuity between sections",
+      "allow hooks to enter and leave without muting core groove",
+      "use contrast by density, not full instrument dropouts"
+    ]
+  },
+  "tempo": {
+    "preferred_bpm": 92,
+    "bpm_range": [85, 115]
+  },
+  "harmony": {
+    "preferred_keys": ["Dm", "Am", "Gm", "Cm"],
+    "priority_progressions": [
+      "Dm9-Gm9-C7-A7#9",
+      "i7-v7-bVImaj7-iv7",
+      "iv9-bVII9-bIIImaj7-V7"
+    ],
+    "harmonic_devices": [
+      "extended chords (7th, 9th, 11th)",
+      "dominant turnaround tension before section resolves",
+      "smooth voice leading and chromatic approach movement"
+    ]
+  },
+  "rhythm": {
+    "groove_notes": [
+      "swung 16th hats",
+      "ghost snare and ghost kick accents",
+      "clap/snap layer on backbeats"
+    ],
+    "swing_range": [0.12, 0.22]
+  },
+  "arrangement": {
+    "energy_curve": ["intro", "verse", "prechorus", "chorus", "bridge", "final_chorus", "outro"],
+    "notes": [
+      "arrangement growth should feel smooth and vocal-friendly",
+      "avoid abrupt full-band mute between adjacent sections",
+      "let pad and keys support continuity while hook phrases vary"
+    ]
+  },
+  "references": {
+    "artists": ["Guy", "Teddy Riley", "Aaliyah", "Boyz II Men"],
+    "tracks": ["Piece of My Love", "Groove Me", "I Like"]
+  }
+}

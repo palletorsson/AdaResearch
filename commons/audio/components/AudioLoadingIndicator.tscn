@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://audio_loading_indicator"]
+
+[ext_resource type="Script" uid="uid://audio_loading_indicator_script" path="res://commons/audio/components/AudioLoadingIndicator.gd" id="1_script"]
+
+[node name="AudioLoadingIndicator" type="Node3D"]
+script = ExtResource("1_script")
+label_offset = Vector3(0, 0.5, -1.5)
+label_font_size = 24
+show_progress = true

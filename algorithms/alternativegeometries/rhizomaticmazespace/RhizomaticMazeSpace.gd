@@ -1,6 +1,16 @@
 extends Node3D
 class_name RhizomaticMazeSpace
 
+# @identity
+# essence: growth_seeds -> RhizomaticMazeGenerator -> path_network -> organic tunnel meshes with noise displacement — Deleuze's rhizome as architecture
+# desire: to wander a non-hierarchical tunnel network where every path leads to more paths, with no center and no dead ends that feel final
+# critical_parameter: branch_probability (0.7) — controls how often paths fork; at 1.0 the network explodes, at 0 it is a single corridor
+# triggers: generate_rhizomatic_maze() builds the full system in 6 phases; regenerate_maze() creates a new seed and rebuilds everything
+# emerges: merge_threshold causes independent growth paths to fuse into loops, creating the non-hierarchical topology that defines a rhizome
+# needs: organic tunnel meshes [has]; trimesh collision [has]; navigation waypoints [has]; VR exploration [has]; growth animation [missing]
+# relationships: paired with mirror_cellular_texture_for_3d in PG_Mirrored_Patterns; contrasts with maze_generation (tree-structured vs rhizomatic)
+# truth: a rhizome has no beginning and no end — it is always in the middle, between things, a line of flight
+
 ## 3D Rhizomatic Maze Generator for Godot 4 VR
 ## Creates interconnected organic tunnel networks with maze-like properties
 ## Builds on the existing marching cubes and rhizomatic cave systems
@@ -38,12 +48,12 @@ var navigation_nodes: Array[Vector3] = []
 var path_noise: FastNoiseLite
 var surface_noise: FastNoiseLite
 
-func _ready():
+func _ready() -> void:
 	setup_noise_systems()
 	setup_components()
 	generate_rhizomatic_maze()
 
-func setup_noise_systems():
+func setup_noise_systems() -> void:
 	"""Initialize noise for organic path variation"""
 	var seed = generation_seed if generation_seed >= 0 else randi()
 	
@@ -60,7 +70,7 @@ func setup_noise_systems():
 	surface_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	surface_noise.frequency = 0.15
 
-func setup_components():
+func setup_components() -> void:
 	"""Initialize all generation systems"""
 	# Main container
 	environment_container = Node3D.new()
@@ -87,7 +97,7 @@ func setup_components():
 		"merge_threshold": merge_threshold
 	})
 
-func generate_rhizomatic_maze():
+func generate_rhizomatic_maze() -> void:
 	"""Generate the complete rhizomatic maze system"""
 	print("🌿 RhizomaticMazeSpace: Starting generation...")
 	
@@ -111,7 +121,7 @@ func generate_rhizomatic_maze():
 	
 	print("✅ RhizomaticMazeSpace: Generation complete!")
 
-func generate_network_structure():
+func generate_network_structure() -> void:
 	"""Create the underlying rhizomatic network"""
 	# Create growth seeds across vertical layers
 	var growth_seeds: Array[Vector3] = []
@@ -138,14 +148,14 @@ func generate_network_structure():
 	
 	print("🌱 Network structure: %d nodes, %d connections" % [network.nodes.size(), network.connections.size()])
 
-func create_rhizomatic_paths():
+func create_rhizomatic_paths() -> void:
 	"""Create organic tunnel paths through the network"""
 	var connections = path_network.get_all_connections()
 	
 	for connection in connections:
 		create_organic_tunnel(connection.start, connection.end, connection.properties)
 
-func create_organic_tunnel(start: Vector3, end: Vector3, properties: Dictionary):
+func create_organic_tunnel(start: Vector3, end: Vector3, properties: Dictionary) -> void:
 	"""Create a single organic tunnel segment"""
 	var distance = start.distance_to(end)
 	var segments = max(4, int(distance / 2.0))  # More segments for longer tunnels
@@ -263,7 +273,7 @@ func create_tunnel_mesh(path_points: Array[Vector3], properties: Dictionary) -> 
 	
 	return mesh
 
-func create_chamber_spaces():
+func create_chamber_spaces() -> void:
 	"""Create larger chamber spaces at network nodes"""
 	var nodes = path_network.get_chamber_nodes()
 	
@@ -271,7 +281,7 @@ func create_chamber_spaces():
 		if randf() < chamber_probability:
 			create_organic_chamber(node.position, node.properties)
 
-func create_organic_chamber(center: Vector3, properties: Dictionary):
+func create_organic_chamber(center: Vector3, properties: Dictionary) -> void:
 	"""Create an organic chamber space"""
 	var chamber_radius = randf_range(4.0, 8.0)
 	var chamber_height = chamber_radius * randf_range(0.7, 1.3)
@@ -302,18 +312,18 @@ func create_organic_chamber(center: Vector3, properties: Dictionary):
 	
 	environment_container.add_child(chamber)
 
-func build_tunnel_system():
+func build_tunnel_system() -> void:
 	"""Build the main tunnel system meshes"""
 	# This is handled in create_rhizomatic_paths()
 	print("🏗️ Built %d tunnel segments" % path_meshes.size())
 
-func add_organic_details():
+func add_organic_details() -> void:
 	"""Add organic surface details and growth"""
 	add_surface_growths()
 	add_hanging_elements()
 	add_organic_textures()
 
-func add_surface_growths():
+func add_surface_growths() -> void:
 	"""Add small organic growths to tunnel walls"""
 	for mesh_instance in path_meshes:
 		var growth_count = randi_range(2, 6)
@@ -332,7 +342,7 @@ func add_surface_growths():
 			growth.material = material_system.get_growth_material()
 			mesh_instance.add_child(growth)
 
-func add_hanging_elements():
+func add_hanging_elements() -> void:
 	"""Add hanging organic elements like roots or tendrils"""
 	var hanging_count = randi_range(5, 12)
 	
@@ -345,7 +355,7 @@ func add_hanging_elements():
 		
 		create_hanging_tendril(hanging_pos)
 
-func create_hanging_tendril(start_pos: Vector3):
+func create_hanging_tendril(start_pos: Vector3) -> void:
 	"""Create a hanging organic tendril"""
 	var segments = randi_range(8, 15)
 	var current_pos = start_pos
@@ -370,12 +380,12 @@ func create_hanging_tendril(start_pos: Vector3):
 		
 		environment_container.add_child(segment)
 
-func add_organic_textures():
+func add_organic_textures() -> void:
 	"""Apply organic texture variations to surfaces"""
 	# This would integrate with your material system
 	pass
 
-func generate_navigation_system():
+func generate_navigation_system() -> void:
 	"""Create navigation waypoints for AI or player guidance"""
 	navigation_nodes.clear()
 	
@@ -403,7 +413,7 @@ func get_navigation_nodes() -> Array[Vector3]:
 	"""Get all navigation waypoints for external systems"""
 	return navigation_nodes
 
-func regenerate_maze():
+func regenerate_maze() -> void:
 	"""Regenerate the entire maze with new seed"""
 	# Clear existing
 	if environment_container:
@@ -418,3 +428,12 @@ func regenerate_maze():
 	setup_noise_systems()
 	setup_components()
 	generate_rhizomatic_maze()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

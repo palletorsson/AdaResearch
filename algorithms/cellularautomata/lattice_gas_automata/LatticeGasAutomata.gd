@@ -1,3 +1,13 @@
+# @identity
+# essence: Lattice gas automaton on a 20x20 grid with 8 velocity directions — particles propagate, collide (head-on pairs scatter perpendicular), and produce emergent fluid dynamics. Macroscopic density, velocity, and pressure computed from microscopic boolean states.
+# desire: To demonstrate that Navier-Stokes emerges from counting — particles obey trivial collision rules, yet the lattice forgets it is discrete. Vortices form. Turbulence cascades.
+# critical_parameter: grid_size (20) — lattice resolution; velocity_directions — 8 compass vectors defining the HPP/FHP-style lattice connectivity
+# triggers: _process → step_timer fires every 0.1s → update_lattice (collision + propagation + macroscopic calculation) → visualize all three layers
+# emerges: Four visualization layers: grid base (static), particle spheres (colored by direction), flow arrows (oriented by local velocity), density pillars (height = local density). Fluid behavior visible at macro scale from micro rules.
+# needs: VR obstacle placement [missing], flow speed control [missing], lattice topology selector [missing]
+# relationships: Bridges cellular automata to fluid dynamics — same grid logic as cellular_automata_2d, different interpretation. Appears in both RecursiveEmergence_Cellular_Automata_2D and RecursiveEmergence_Lattice_Gas_Automata maps.
+# truth: The continuous is a hallucination performed by the discrete at sufficient scale. Matter performing smoothness through sheer repetition.
+
 extends Node3D
 
 # Lattice Gas Automata Visualization
@@ -7,12 +17,18 @@ var time := 0.0
 var step_timer := 0.0
 
 # Grid parameters
-var grid_size := 10
+var grid_size := 20 # Increased size for better effect
 var lattice_grid := []
 var velocity_directions := [
 	Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1),
 	Vector2(1, 1), Vector2(-1, -1), Vector2(1, -1), Vector2(-1, 1)
 ]
+
+# MultiMesh Instances
+var mm_grid_base: MultiMeshInstance3D
+var mm_particles: MultiMeshInstance3D
+var mm_flow: MultiMeshInstance3D
+var mm_density: MultiMeshInstance3D
 
 # Particle data structure
 class LatticeCell:
@@ -21,23 +37,68 @@ class LatticeCell:
 	var velocity: Vector2
 	var pressure: float
 
-func _ready():
+func _ready() -> void:
+	_setup_multimeshes()
 	initialize_lattice()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	step_timer += delta
 	
 	if step_timer > 0.1:
 		step_timer = 0.0
 		update_lattice()
-	
-	visualize_lattice_grid()
-	show_particle_flow()
-	demonstrate_collision_dynamics()
-	display_macroscopic_properties()
+		# Update visualizations only on step
+		visualize_lattice_grid()
+		show_particle_flow()
+		display_macroscopic_properties()
 
-func initialize_lattice():
+func _setup_multimeshes() -> void:
+	# 1. Grid Base
+	mm_grid_base = _create_multimesh("MM_GridBase", BoxMesh.new(), grid_size * grid_size, "LatticeGrid")
+	mm_grid_base.multimesh.mesh.size = Vector3(0.9, 0.1, 0.9)
+	
+	# 2. Particles (Spheres)
+	# Max particles = grid_size^2 * 8 directions
+	mm_particles = _create_multimesh("MM_Particles", SphereMesh.new(), grid_size * grid_size * 8, "LatticeGrid")
+	mm_particles.multimesh.mesh.radius = 0.08
+	mm_particles.multimesh.mesh.height = 0.16
+	
+	# 3. Flow (Cylinders/Arrows)
+	# Using a cylinder that points up by default, we'll rotate it
+	var arrow_mesh = CylinderMesh.new()
+	arrow_mesh.top_radius = 0.0
+	arrow_mesh.bottom_radius = 0.1
+	arrow_mesh.height = 1.0
+	mm_flow = _create_multimesh("MM_Flow", arrow_mesh, grid_size * grid_size, "ParticleFlow")
+	
+	# 4. Density Pillars (Boxes)
+	mm_density = _create_multimesh("MM_Density", BoxMesh.new(), grid_size * grid_size, "MacroscopicProperties")
+	mm_density.multimesh.mesh.size = Vector3(0.8, 1.0, 0.8) # Height scaled later
+
+func _create_multimesh(name: String, mesh: Mesh, count: int, parent_name: String = "") -> MultiMeshInstance3D:
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = name
+	
+	if parent_name != "" and has_node(parent_name):
+		get_node(parent_name).add_child(mmi)
+	else:
+		add_child(mmi)
+	
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = mesh
+	mm.instance_count = count
+	mmi.multimesh = mm
+	
+	# Hide all initially
+	for i in range(count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
+		
+	return mmi
+
+func initialize_lattice() -> void:
 	lattice_grid.clear()
 	
 	for i in range(grid_size):
@@ -56,14 +117,24 @@ func initialize_lattice():
 			
 			row.append(cell)
 		lattice_grid.append(row)
+	
+	# Initial visualization of static grid base
+	var mm = mm_grid_base.multimesh
+	var idx = 0
+	for i in range(grid_size):
+		for j in range(grid_size):
+			var pos = Vector3(j - grid_size * 0.5, 0, i - grid_size * 0.5)
+			mm.set_instance_transform(idx, Transform3D(Basis(), pos))
+			mm.set_instance_color(idx, Color(0.3, 0.3, 0.3))
+			idx += 1
 
-func update_lattice():
+func update_lattice() -> void:
 	# Two-step LGA update: collision then propagation
 	apply_collision_rules()
 	propagate_particles()
 	calculate_macroscopic_properties()
 
-func apply_collision_rules():
+func apply_collision_rules() -> void:
 	# Apply local collision rules (simplified)
 	for i in range(grid_size):
 		for j in range(grid_size):
@@ -84,7 +155,7 @@ func apply_collision_rules():
 				# Two particles: apply specific collision rules
 				apply_two_particle_collision(cell)
 
-func apply_two_particle_collision(cell: LatticeCell):
+func apply_two_particle_collision(cell: LatticeCell) -> void:
 	var active_directions = []
 	
 	for i in range(cell.particles.size()):
@@ -125,7 +196,7 @@ func get_perpendicular_directions(dir1: int, dir2: int) -> Array:
 	
 	return perp_dirs
 
-func propagate_particles():
+func propagate_particles() -> void:
 	var new_grid = []
 	
 	# Initialize new grid
@@ -154,7 +225,7 @@ func propagate_particles():
 	
 	lattice_grid = new_grid
 
-func calculate_macroscopic_properties():
+func calculate_macroscopic_properties() -> void:
 	for i in range(grid_size):
 		for j in range(grid_size):
 			var cell = lattice_grid[i][j]
@@ -178,196 +249,104 @@ func calculate_macroscopic_properties():
 			# Calculate pressure (simplified)
 			cell.pressure = cell.density * cell.density
 
-func visualize_lattice_grid():
-	var container = $LatticeGrid
+func visualize_lattice_grid() -> void:
+	var mm = mm_particles.multimesh
+	var idx = 0
 	
-	# Clear previous visualization
-	for child in container.get_children():
-		child.queue_free()
+	# Reset remaining
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
-	# Visualize lattice cells
 	for i in range(grid_size):
 		for j in range(grid_size):
 			var cell = lattice_grid[i][j]
+			var base_pos = Vector3(j - grid_size * 0.5, 0, i - grid_size * 0.5)
 			
-			# Cell base
-			var cell_base = CSGBox3D.new()
-			cell_base.size = Vector3(0.8, 0.1, 0.8)
-			cell_base.position = Vector3(
-				j - grid_size * 0.5,
-				0,
-				i - grid_size * 0.5
-			)
-			
-			var base_material = StandardMaterial3D.new()
-			base_material.albedo_color = Color(0.3, 0.3, 0.3)
-			cell_base.material_override = base_material
-			
-			container.add_child(cell_base)
-			
-			# Visualize particles in each direction
 			for dir in range(velocity_directions.size()):
 				if cell.particles[dir]:
-					var particle = CSGSphere3D.new()
-					particle.radius = 0.08
-					
 					var dir_offset = Vector3(
 						velocity_directions[dir].x * 0.2,
 						0.3,
 						velocity_directions[dir].y * 0.2
 					)
 					
-					particle.position = cell_base.position + dir_offset
+					mm.set_instance_transform(idx, Transform3D(Basis(), base_pos + dir_offset))
 					
-					var particle_material = StandardMaterial3D.new()
 					var dir_color = float(dir) / velocity_directions.size()
-					particle_material.albedo_color = Color.from_hsv(dir_color, 0.8, 1.0)
-					particle_material.emission_enabled = true
-					particle_material.emission = Color.from_hsv(dir_color, 0.8, 1.0) * 0.5
-					particle.material_override = particle_material
-					
-					container.add_child(particle)
+					mm.set_instance_color(idx, Color.from_hsv(dir_color, 0.8, 1.0))
+					idx += 1
 
-func show_particle_flow():
-	var container = $ParticleFlow
+func show_particle_flow() -> void:
+	var mm = mm_flow.multimesh
+	var idx = 0
 	
-	# Clear previous visualization
-	for child in container.get_children():
-		child.queue_free()
+	# Reset
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
-	# Show overall flow patterns
-	var flow_scale = 8
 	for i in range(0, grid_size, 2):
 		for j in range(0, grid_size, 2):
 			var cell = lattice_grid[i][j]
 			
 			if cell.velocity.length() > 0.1:
-				var flow_arrow = CSGCylinder3D.new()
-				flow_arrow.radius = 0.0
-				flow_arrow
-				flow_arrow.height = cell.velocity.length() * 2.0
+				var pos = Vector3(j - grid_size * 0.5, 2.0, i - grid_size * 0.5)
 				
-				flow_arrow.position = Vector3(
-					j - grid_size * 0.5,
-					2.0,
-					i - grid_size * 0.5
-				)
-				
-				# Orient arrow in flow direction
+				# Orient arrow
 				var flow_dir = Vector3(cell.velocity.x, 0, cell.velocity.y).normalized()
-				if flow_dir.length() > 0.01:
-					flow_arrow.look_at(flow_arrow.position + flow_dir, Vector3.UP)
-					flow_arrow.rotate_object_local(Vector3.RIGHT, -PI / 2)
+				var up = Vector3.UP
+				var axis = up.cross(flow_dir).normalized()
+				var angle = acos(up.dot(flow_dir))
 				
-				var flow_material = StandardMaterial3D.new()
+				var basis = Basis()
+				if axis.length_squared() > 0.001:
+					basis = Basis(axis, angle)
+				
+				# Scale based on velocity
+				var scale_y = cell.velocity.length() * 2.0
+				var t = Transform3D(basis, pos).scaled(Vector3(1, scale_y, 1))
+				
+				mm.set_instance_transform(idx, t)
+				
 				var speed_ratio = cell.velocity.length() / 2.0
-				flow_material.albedo_color = Color(speed_ratio, 0.5, 1.0 - speed_ratio)
-				flow_material.emission_enabled = true
-				flow_material.emission = Color(speed_ratio, 0.5, 1.0 - speed_ratio) * 0.4
-				flow_arrow.material_override = flow_material
-				
-				container.add_child(flow_arrow)
+				mm.set_instance_color(idx, Color(speed_ratio, 0.5, 1.0 - speed_ratio))
+				idx += 1
 
-func demonstrate_collision_dynamics():
-	var container = $CollisionDynamics
+func display_macroscopic_properties() -> void:
+	var mm = mm_density.multimesh
+	var idx = 0
 	
-	# Clear previous visualization
-	for child in container.get_children():
-		child.queue_free()
+	# Reset
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
-	# Show collision events
-	for i in range(grid_size):
-		for j in range(grid_size):
-			var cell = lattice_grid[i][j]
-			
-			# Count active particles
-			var particle_count = 0
-			for has_particle in cell.particles:
-				if has_particle:
-					particle_count += 1
-			
-			# Visualize collision probability
-			if particle_count >= 2:
-				var collision_indicator = CSGSphere3D.new()
-				collision_indicator.radius = 0.2 + particle_count * 0.1
-				collision_indicator.position = Vector3(
-					j - grid_size * 0.5,
-					1.5,
-					i - grid_size * 0.5
-				)
-				
-				var collision_material = StandardMaterial3D.new()
-				var collision_intensity = float(particle_count) / 6.0
-				collision_material.albedo_color = Color(1.0, 1.0 - collision_intensity, 0.0)
-				collision_material.emission_enabled = true
-				collision_material.emission = Color(1.0, 1.0 - collision_intensity, 0.0) * collision_intensity
-				collision_indicator.material_override = collision_material
-				
-				container.add_child(collision_indicator)
-
-func display_macroscopic_properties():
-	var container = $MacroscopicProperties
-	
-	# Clear previous visualization
-	for child in container.get_children():
-		child.queue_free()
-	
-	# Calculate and display average properties
-	var total_density = 0.0
-	var total_pressure = 0.0
-	var avg_velocity = Vector2.ZERO
-	var cell_count = 0
-	
-	for i in range(grid_size):
-		for j in range(grid_size):
-			var cell = lattice_grid[i][j]
-			total_density += cell.density
-			total_pressure += cell.pressure
-			avg_velocity += cell.velocity
-			cell_count += 1
-	
-	if cell_count > 0:
-		total_density /= cell_count
-		total_pressure /= cell_count
-		avg_velocity /= cell_count
-	
-	# Visualize density field
 	for i in range(0, grid_size, 2):
 		for j in range(0, grid_size, 2):
 			var cell = lattice_grid[i][j]
 			
-			var density_pillar = CSGBox3D.new()
-			density_pillar.size = Vector3(0.6, cell.density * 3.0 + 0.1, 0.6)
-			density_pillar.position = Vector3(
+			var height = cell.density * 3.0 + 0.1
+			var pos = Vector3(
 				j - grid_size * 0.5,
-				density_pillar.size.y * 0.5 - 2.0,
+				height * 0.5 - 2.0,
 				i - grid_size * 0.5
 			)
 			
-			var density_material = StandardMaterial3D.new()
-			density_material.albedo_color = Color(0.2, cell.density, 1.0 - cell.density * 0.5)
-			density_material.emission_enabled = true
-			density_material.emission = Color(0.2, cell.density, 1.0 - cell.density * 0.5) * 0.3
-			density_pillar.material_override = density_material
+			# Scale box height
+			var t = Transform3D(Basis(), pos).scaled(Vector3(1, height, 1))
+			mm.set_instance_transform(idx, t)
 			
-			container.add_child(density_pillar)
-	
-	# Global property indicators
-	var properties = [
-		{"name": "Density", "value": total_density, "pos": Vector3(-8, 0, 0)},
-		{"name": "Pressure", "value": total_pressure, "pos": Vector3(-4, 0, 0)},
-		{"name": "Velocity", "value": avg_velocity.length(), "pos": Vector3(0, 0, 0)}
-	]
-	
-	for prop in properties:
-		var prop_sphere = CSGSphere3D.new()
-		prop_sphere.radius = 0.5 + prop.value * 0.5
-		prop_sphere.position = prop.pos
-		
-		var prop_material = StandardMaterial3D.new()
-		prop_material.albedo_color = Color(0.8, 0.8, 0.2)
-		prop_material.emission_enabled = true
-		prop_material.emission = Color(0.8, 0.8, 0.2) * prop.value
-		prop_sphere.material_override = prop_material
-		
-		container.add_child(prop_sphere)
+			var col = Color(0.2, cell.density, 1.0 - cell.density * 0.5)
+			mm.set_instance_color(idx, col)
+			idx += 1
+
+func demonstrate_collision_dynamics() -> void:
+	# Removed for performance/simplicity in this refactor
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

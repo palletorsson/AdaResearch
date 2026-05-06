@@ -1,0 +1,26 @@
+{
+  "id": "ls16_koch_square_dense",
+  "axiom": "F",
+  "rules": {
+    "F": "F+F-F-F+F"
+  },
+  "iterations": 5,
+  "angle_deg": 90,
+  "step_len": 0.012,
+  "interpretation": "lines",
+  "color_trunk": [
+    0.12,
+    0.26,
+    0.42
+  ],
+  "color_tip": [
+    0.92,
+    0.86,
+    0.58
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.4,
+  "layout": "fractal_curve",
+  "dna_connections": [],
+  "notes": "Right-angle Koch curve variant from Wikipedia's square Koch example, pushed to a denser derivation depth."
+}

@@ -1,0 +1,17 @@
+{
+  "id": "gen01_spikes_sphere",
+  "notes": "Dense spike field on sphere instead of icosphere.",
+  "seed": "sphere",
+  "seed_scale": 0.5,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "random_30",
+      "params": {
+        "distance": 0.4,
+        "scale": 0.3
+      }
+    }
+  ]
+}

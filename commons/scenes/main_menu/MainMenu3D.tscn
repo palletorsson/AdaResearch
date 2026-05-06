@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8x7y605w4v3v"]
+
+[ext_resource type="Script" uid="uid://dk7wy28djbxd2" path="res://commons/scenes/main_menu/MainMenu3D.gd" id="1_main_menu"]
+[ext_resource type="PackedScene" uid="uid://b8x7y605w4v3u" path="res://commons/scenes/main_menu/components/MenuButton3D.tscn" id="2_menu_button"]
+[ext_resource type="PackedScene" uid="uid://qlx2jgqvx1y" path="res://commons/context/clipboard/codeDisplay.tscn" id="3_code_display"]
+[ext_resource type="Script" uid="uid://b3ggwt00i8rw4" path="res://commons/scenes/main_menu/components/MenuFollower.gd" id="4_follower"]
+[ext_resource type="PackedScene" path="res://commons/scenes/main_menu/components/MenuParticles.tscn" id="5_particles"]
+[ext_resource type="PackedScene" uid="uid://cu76ua8qg2p0o" path="res://algorithms/randomness/noisetext/noisetext.tscn" id="6_noisetext"]
+
+[sub_resource type="Environment" id="Environment_menu"]
+background_mode = 1
+background_color = Color(0.02, 0.02, 0.03, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+
+[node name="MainMenu3D" type="Node3D"]
+script = ExtResource("1_main_menu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_menu")
+
+[node name="Noisetext" parent="." instance=ExtResource("6_noisetext")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.2, -0.5)
+
+[node name="MenuFollower" type="Node3D" parent="."]
+script = ExtResource("4_follower")
+height_offset = -0.2
+distance = 2.5
+
+[node name="MenuParticles" parent="." instance=ExtResource("5_particles")]
+
+[node name="Buttons" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
+
+[node name="NewGameButton" parent="Buttons" instance=ExtResource("2_menu_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+text = "New Game"
+
+[node name="LoadGameButton" parent="Buttons" instance=ExtResource("2_menu_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+text = "Load Game"
+color = Color(0.3, 0.7, 0.9, 1)
+
+[node name="BrowseButton" parent="Buttons" instance=ExtResource("2_menu_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+text = "Browse"
+color = Color(0.2, 0.8, 0.4, 1)
+
+[node name="SettingsButton" parent="Buttons" instance=ExtResource("2_menu_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "Settings"
+
+[node name="QuitButton" parent="Buttons" instance=ExtResource("2_menu_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+text = "Quit"
+
+[node name="AboutDisplay" parent="." instance=ExtResource("3_code_display")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.6, 0, 0)

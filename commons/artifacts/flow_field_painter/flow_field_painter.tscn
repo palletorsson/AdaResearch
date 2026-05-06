@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqx8mw9vn5p3k"]
+
+[ext_resource type="Script" path="res://commons/artifacts/flow_field_painter/flow_field_painter.gd" id="1_main"]
+
+[node name="FlowFieldPainter" type="Node3D"]
+script = ExtResource("1_main")

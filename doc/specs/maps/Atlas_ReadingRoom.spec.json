@@ -1,0 +1,249 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Atlas_ReadingRoom",
+  "home_sequence": "atlas",
+  "dimensions": {
+    "w": 20,
+    "d": 20
+  },
+  "signature": "- graph_lattice",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 400,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 20,
+        "d": 20
+      },
+      "centroid": [
+        9.5,
+        9.5
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [
+    {
+      "x": 3,
+      "z": 3,
+      "code": "@signature",
+      "params": [
+        "graph_lattice"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "graph_lattice"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "code": "@signature",
+      "params": [
+        "field_plinth"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "field_plinth"
+    },
+    {
+      "x": 11,
+      "z": 3,
+      "code": "@signature",
+      "params": [
+        "process_wheel"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "process_wheel"
+    },
+    {
+      "x": 15,
+      "z": 3,
+      "code": "@signature",
+      "params": [
+        "grammar_desk"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "grammar_desk"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "code": "@hold",
+      "params": [
+        "13",
+        "1"
+      ],
+      "footprint": {
+        "w": 13,
+        "d": 1
+      },
+      "key": null
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "code": "@signature",
+      "params": [
+        "symmetry_mirror"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "symmetry_mirror"
+    },
+    {
+      "x": 9,
+      "z": 7,
+      "code": "@signature",
+      "params": [
+        "fold_ladder"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "fold_ladder"
+    },
+    {
+      "x": 14,
+      "z": 7,
+      "code": "@signature",
+      "params": [
+        "gradient_slope"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "gradient_slope"
+    },
+    {
+      "x": 4,
+      "z": 9,
+      "code": "@hold",
+      "params": [
+        "11",
+        "1"
+      ],
+      "footprint": {
+        "w": 11,
+        "d": 1
+      },
+      "key": null
+    },
+    {
+      "x": 4,
+      "z": 11,
+      "code": "@signature",
+      "params": [
+        "feedback_ring"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "feedback_ring"
+    },
+    {
+      "x": 9,
+      "z": 11,
+      "code": "@signature",
+      "params": [
+        "flow_basin"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "flow_basin"
+    },
+    {
+      "x": 14,
+      "z": 11,
+      "code": "@signature",
+      "params": [
+        "probability_well"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "probability_well"
+    },
+    {
+      "x": 4,
+      "z": 13,
+      "code": "@hold",
+      "params": [
+        "11",
+        "1"
+      ],
+      "footprint": {
+        "w": 11,
+        "d": 1
+      },
+      "key": null
+    },
+    {
+      "x": 4,
+      "z": 15,
+      "code": "@signature",
+      "params": [
+        "phase_door"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "phase_door"
+    },
+    {
+      "x": 9,
+      "z": 15,
+      "code": "@signature",
+      "params": [
+        "emergence_pool"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "emergence_pool"
+    },
+    {
+      "x": 14,
+      "z": 15,
+      "code": "@signature",
+      "params": [
+        "membrane_gate"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "membrane_gate"
+    }
+  ],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 400,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "LSystems_Growth",
+  "home_sequence": "lsystems",
+  "dimensions": {
+    "w": 8,
+    "d": 10
+  },
+  "signature": "AnimatedTree renders step-by-step growth with visible generation transitions; ContextSensitiveTree demonstrates neighbor-dependent rule application; parametric_lsystem introduces continuous parameters modulated by environment.",
+  "style": null,
+  "echoes": [],
+  "density": 0.051,
+  "breath_zones": [
+    {
+      "size": 75,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.466666666666667,
+        4.453333333333333
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 3,
+      "token": "AnimatedTree"
+    },
+    {
+      "x": 6,
+      "z": 3,
+      "token": "ContextSensitiveTree"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "lsystem_tree"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "parametric_lsystem"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 79,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

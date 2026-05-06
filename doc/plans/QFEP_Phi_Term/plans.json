@@ -1,0 +1,62 @@
+{
+  "name": "QFEP_Phi_Term",
+  "title": "Rate Sensitivity and Becoming",
+  "description": "\u03c6\u0394E(S,t) \u2014 sensitivity to rate of change. Negative \u03c6 resists change (conservative). Positive \u03c6 embraces becoming (queer).",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 7,
+  "spawn": [
+    1,
+    1
+  ],
+  "teleport": [
+    9,
+    4
+  ],
+  "artifacts": [
+    {
+      "name": "rigid_sculpture",
+      "row": 2,
+      "col": 2,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "fluid_form",
+      "row": 2,
+      "col": 7,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "phi_slider",
+      "row": 4,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "preserved_pattern",
+      "row": 6,
+      "col": 1,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "transforming_pattern",
+      "row": 6,
+      "col": 7,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "tt",
+      "row": 8,
+      "col": 2,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "tt",
+      "row": 8,
+      "col": 6,
+      "family": "commons_artifacts"
+    }
+  ]
+}

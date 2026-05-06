@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://dpsa7x3kox8q7"]
+
+[ext_resource type="Script" path="res://commons/interactables/slider_smooth.gd" id="1_v4m4"]
+[ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2_v4m4"]
+[ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3_v4m4"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
+[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" uid="uid://ada_track_groove" path="res://commons/ui/materials/track_groove.tres" id="MatGroove"]
+[ext_resource type="Material" uid="uid://ada_handle_glow" path="res://commons/ui/materials/handle_glow.tres" id="MatHandle"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_slot"]
+size = Vector3(0.32, 0.06, 0.02)
+
+[sub_resource type="BoxMesh" id="BoxMesh_groove"]
+size = Vector3(0.30, 0.012, 0.008)
+
+[sub_resource type="BoxMesh" id="BoxMesh_handle"]
+size = Vector3(0.018, 0.048, 0.032)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_slot"]
+size = Vector3(0.34, 0.08, 0.03)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_handle"]
+radius = 0.025
+
+[node name="VRAudioControlSlider" type="Node3D"]
+script = ExtResource("1_v4m4")
+decimal_places = 1
+
+[node name="Frame" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
+shape = SubResource("BoxShape3D_slot")
+
+[node name="Backing" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+mesh = SubResource("BoxMesh_slot")
+surface_material_override/0 = ExtResource("MatPanel")
+
+[node name="SlotGroove" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.002)
+mesh = SubResource("BoxMesh_groove")
+surface_material_override/0 = ExtResource("MatGroove")
+
+[node name="Label3DValue" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0.01)
+pixel_size = 0.0005
+text = "0.0"
+font_size = 48
+font_color = Color(0.12, 0.12, 0.14, 1)
+outline_size = 0
+
+[node name="LabelName" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035, 0.01)
+pixel_size = 0.0005
+text = "PARAM"
+font_size = 20
+font_color = Color(0.40, 0.40, 0.44, 1)
+outline_size = 0
+uppercase = true
+
+[node name="SliderOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0, 0)
+
+[node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0, 0)
+script = ExtResource("2_v4m4")
+slider_limit_min = -0.14
+slider_limit_max = 0.14
+slider_position = 0.0
+default_position = 0.0
+
+[node name="HandleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="SliderOrigin/InteractableSlider/HandleOrigin"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
+mesh = SubResource("BoxMesh_handle")
+surface_material_override/0 = ExtResource("MatHandle")
+
+[node name="GrabPointRedirectLeft" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("4_v4m4")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.05, 0, 0)
+
+[node name="GrabPointRedirectRight" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("4_v4m4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.05, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+unit_size = 1.0
+max_db = -10.0

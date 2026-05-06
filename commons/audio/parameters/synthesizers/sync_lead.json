@@ -1,0 +1,21 @@
+{
+  "sync_lead": {
+    "_metadata": {
+      "sound_type": "sync_lead",
+      "description": "Aggressive hard-sync lead with animated sweep and biting harmonics.",
+      "instrument": "Analog Sync Lead",
+      "era": "1980s-1990s",
+      "tags": ["lead", "sync", "aggressive", "analog"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 2.0, "min": 0.3, "max": 8.0, "step": 0.1 },
+      "frequency": { "value": 220.0, "min": 55.0, "max": 1760.0, "step": 1.0 },
+      "sync_ratio": { "value": 2.7, "min": 1.0, "max": 6.0, "step": 0.01 },
+      "sync_sweep": { "value": 0.2, "min": -2.0, "max": 2.0, "step": 0.01 },
+      "filter_cutoff": { "value": 3200.0, "min": 200.0, "max": 10000.0, "step": 25.0 },
+      "filter_resonance": { "value": 0.55, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "amplitude": { "value": 0.43, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

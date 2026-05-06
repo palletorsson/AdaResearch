@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq8yjm3p1vh2k"]
+
+[ext_resource type="PackedScene" uid="uid://bxywkq1m1h8nc" path="res://commons/infoboards_3d/base/InfoBoardUI.tscn" id="1_base"]
+[ext_resource type="Script" path="res://commons/infoboards_3d/boards/ProceduralGeneration/ProceduralGenerationInfoBoard.gd" id="2_script"]
+
+[node name="InfoBoardUI" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+board_title = "Procedural Generation"
+category_color = Color(0.3, 0.8, 0.5, 1)

@@ -1,0 +1,80 @@
+{
+  "rack_info": {
+    "name": "LFO Modulator",
+    "description": "Rate × depth × shape selector × destination. Universal modulation source.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "archetype": "lfo",
+    "seed": 469521477
+  },
+  "layout": {
+    "padding_px": 18,
+    "gap_px": 14,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "lbl"
+    ],
+    [
+      "rate",
+      "depth"
+    ],
+    [
+      "shape",
+      "dest"
+    ],
+    [
+      "sync",
+      ""
+    ]
+  ],
+  "control_definitions": {
+    "lbl": {
+      "type": "label",
+      "text": "LFO",
+      "font_size": 18
+    },
+    "rate": {
+      "type": "slv",
+      "label": "RATE",
+      "parameter": "lfo_rate",
+      "min": 0.01,
+      "max": 20.0,
+      "default": 2.0
+    },
+    "depth": {
+      "type": "knob",
+      "label": "DEPTH",
+      "parameter": "lfo_depth",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    },
+    "shape": {
+      "type": "sls",
+      "label": "SHAPE",
+      "parameter": "lfo_shape",
+      "min": 0.0,
+      "max": 4.0,
+      "default": 0.0
+    },
+    "dest": {
+      "type": "sls",
+      "label": "DEST",
+      "parameter": "lfo_dest",
+      "min": 0.0,
+      "max": 7.0,
+      "default": 0.0
+    },
+    "sync": {
+      "type": "btn",
+      "label": "SYNC",
+      "parameter": "sync",
+      "action": "toggle",
+      "color": "#44ccff"
+    }
+  }
+}

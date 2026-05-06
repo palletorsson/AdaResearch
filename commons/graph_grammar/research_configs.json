@@ -1,0 +1,4763 @@
+{
+  "version": 1,
+  "description": "Seed library of graph grammar configs. Each entry renders via render_graph_grammar.gd. Covers tree, rhizome, coral, space-colonization, and iteration-driven growth.",
+  "configs": [
+    {
+      "id": "gg00_tree_classic",
+      "notes": "Iterative branching \u2014 each generation spawns 3 children from every leaf.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 4,
+      "color": [
+        0.45,
+        0.28,
+        0.18
+      ],
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.9,
+            "spread_deg": 35,
+            "radius_decay": 0.65
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_tree_narrow",
+      "notes": "Narrow conifer \u2014 less splay, smaller children.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 5,
+      "color": [
+        0.35,
+        0.45,
+        0.22
+      ],
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.8,
+            "spread_deg": 20,
+            "radius_decay": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_tree_wide",
+      "notes": "Wide oak \u2014 4 children per node with big splay.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.2
+      },
+      "iterations": 3,
+      "color": [
+        0.38,
+        0.28,
+        0.18
+      ],
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 4,
+            "length": 0.7,
+            "spread_deg": 60,
+            "radius_decay": 0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_rhizome_horizontal",
+      "notes": "Sideways-growing rhizome \u2014 root direction flipped to horizontal by tweaking initial spread past 90.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 4,
+      "color": [
+        0.55,
+        0.45,
+        0.3
+      ],
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.8,
+            "spread_deg": 85,
+            "radius_decay": 0.8,
+            "jitter": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_colonize_ellipsoid",
+      "notes": "Space colonization toward an ellipsoid canopy \u2014 natural tree silhouette.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 1,
+      "color": [
+        0.45,
+        0.3,
+        0.2
+      ],
+      "rules": [
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 60,
+            "attractor_count": 300,
+            "cloud_shape": "ellipsoid",
+            "cloud_size": [
+              1.8,
+              1.2,
+              1.8
+            ],
+            "cloud_center": [
+              0,
+              2.2,
+              0
+            ],
+            "influence_radius": 1.1,
+            "kill_radius": 0.25,
+            "step": 0.15,
+            "radius_decay": 0.96
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_colonize_cone",
+      "notes": "Space colonization toward a cone \u2014 cypress/pyramid silhouette.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 1,
+      "color": [
+        0.35,
+        0.45,
+        0.22
+      ],
+      "rules": [
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 80,
+            "attractor_count": 350,
+            "cloud_shape": "cone",
+            "cloud_size": [
+              1.2,
+              2.5,
+              1.2
+            ],
+            "cloud_center": [
+              0,
+              1.5,
+              0
+            ],
+            "influence_radius": 0.9,
+            "kill_radius": 0.2,
+            "step": 0.12,
+            "radius_decay": 0.97
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_colonize_torus",
+      "notes": "Attractors arranged in a torus \u2014 ring/crown topology.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 1,
+      "color": [
+        0.5,
+        0.35,
+        0.2
+      ],
+      "rules": [
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 60,
+            "attractor_count": 250,
+            "cloud_shape": "torus",
+            "cloud_size": [
+              2.0,
+              2.0,
+              2.0
+            ],
+            "cloud_center": [
+              0,
+              1.8,
+              0
+            ],
+            "influence_radius": 1.0,
+            "kill_radius": 0.25,
+            "step": 0.13,
+            "radius_decay": 0.96
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_compound_spawn_colonize",
+      "notes": "First spawn two levels, then let space colonization fill the canopy.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.2
+      },
+      "iterations": 1,
+      "color": [
+        0.4,
+        0.28,
+        0.18
+      ],
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 1.0,
+            "spread_deg": 10,
+            "radius_decay": 0.85
+          }
+        },
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.6,
+            "spread_deg": 40,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 40,
+            "attractor_count": 200,
+            "cloud_shape": "ellipsoid",
+            "cloud_size": [
+              2.0,
+              1.0,
+              2.0
+            ],
+            "cloud_center": [
+              0,
+              2.3,
+              0
+            ],
+            "influence_radius": 0.8,
+            "kill_radius": 0.2,
+            "step": 0.12,
+            "radius_decay": 0.97
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_tree_with_segments",
+      "notes": "Branches get subdivided after spawning \u2014 gives visible kinks/joints.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.16
+      },
+      "iterations": 3,
+      "color": [
+        0.45,
+        0.3,
+        0.2
+      ],
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 1.0,
+            "spread_deg": 30,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "subdivide_edge",
+          "selector": "all",
+          "params": {
+            "min_length": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg00_dense_branching",
+      "notes": "Dense 5-child branching, fewer generations \u2014 bush.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 3,
+      "color": [
+        0.3,
+        0.4,
+        0.2
+      ],
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 5,
+            "length": 0.45,
+            "spread_deg": 55,
+            "radius_decay": 0.6,
+            "jitter": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_tree_shaded",
+      "notes": "gen00 tree_classic with bark/plant shaders \u2014 leaves on leaves.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.9,
+            "spread_deg": 35,
+            "radius_decay": 0.65
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_tree_with_tufts",
+      "notes": "Tree with leaf_tuft foliage at the tips.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.2
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.9,
+            "spread_deg": 35,
+            "radius_decay": 0.65
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 12,
+            "length": 0.25,
+            "radius": 0.02,
+            "splay": 0.65
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_conifer",
+      "notes": "Cypress \u2014 narrow branching with bright green tufts.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.14
+      },
+      "iterations": 5,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.7,
+            "spread_deg": 22,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.18,
+            "radius": 0.015,
+            "splay": 0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_autumn_tree",
+      "notes": "Tree with red-orange foliage.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.2
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_red"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.85,
+            "spread_deg": 40,
+            "radius_decay": 0.65
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 16,
+            "length": 0.22,
+            "radius": 0.02,
+            "splay": 0.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_colonize_tree_shaded",
+      "notes": "Space colonization ellipsoid canopy with bark+plant shaders.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 1,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 50,
+            "attractor_count": 250,
+            "cloud_shape": "ellipsoid",
+            "cloud_size": [
+              1.6,
+              1.0,
+              1.6
+            ],
+            "cloud_center": [
+              0,
+              2.0,
+              0
+            ],
+            "influence_radius": 1.0,
+            "kill_radius": 0.22,
+            "step": 0.13,
+            "radius_decay": 0.97
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.15,
+            "radius": 0.02,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_coral_red",
+      "notes": "Dense red branching \u2014 coral/sea fan.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "flesh"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 50,
+            "radius_decay": 0.7,
+            "jitter": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_fern_spread",
+      "notes": "Low wide fern-like spread with green tufts.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.1
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.7,
+            "spread_deg": 70,
+            "radius_decay": 0.68,
+            "jitter": 0.6
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 14,
+            "length": 0.3,
+            "radius": 0.018,
+            "splay": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_dense_foliage",
+      "notes": "Dense tree with tiny tufts everywhere \u2014 grass-like.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 4,
+            "length": 0.5,
+            "spread_deg": 50,
+            "radius_decay": 0.6,
+            "jitter": 0.3
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 20,
+            "length": 0.15,
+            "radius": 0.012,
+            "splay": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_colonize_torus_fixed",
+      "notes": "Torus colonization with tighter cloud center \u2014 should reach the ring.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 1,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 60,
+            "attractor_count": 200,
+            "cloud_shape": "torus",
+            "cloud_size": [
+              1.5,
+              1.5,
+              1.5
+            ],
+            "cloud_center": [
+              0,
+              1.2,
+              0
+            ],
+            "influence_radius": 1.4,
+            "kill_radius": 0.3,
+            "step": 0.15,
+            "radius_decay": 0.97
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 6,
+            "length": 0.12,
+            "radius": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg01_bristle_ball",
+      "notes": "Pure leaf_tuft on root \u2014 explosion of bristles in all directions.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.1
+      },
+      "iterations": 1,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 60,
+            "length": 0.6,
+            "radius": 0.025,
+            "splay": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg02_urchin_metaball_soft",
+      "notes": "The red urchin \u2014 same topology, rendered as marching-cubes smooth union. Soft fusion at roots, bristles remain distinct.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.1
+      },
+      "iterations": 1,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.08,
+      "metaball_resolution": 96,
+      "materials": {
+        "default": [
+          0.72,
+          0.4,
+          0.38
+        ]
+      },
+      "rules": [
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 200,
+            "length": 0.35,
+            "radius": 0.02,
+            "splay": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg02_urchin_metaball_heavy",
+      "notes": "Heavy smoothing on a 64-bristle urchin \u2014 bristles blur into a spiked organ.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.1
+      },
+      "iterations": 1,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.18,
+      "metaball_resolution": 64,
+      "materials": {
+        "default": [
+          0.7,
+          0.35,
+          0.32
+        ]
+      },
+      "rules": [
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 64,
+            "length": 0.35,
+            "radius": 0.03,
+            "splay": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg02_tree_metaball",
+      "notes": "The classic tree but marching-cubes smooth. Branches fuse at forks like molten metal.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 4,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.12,
+      "metaball_resolution": 96,
+      "materials": {
+        "default": [
+          0.45,
+          0.3,
+          0.2
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.9,
+            "spread_deg": 35,
+            "radius_decay": 0.65
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg02_coral_metaball",
+      "notes": "Red coral \u2014 metaball version at 3 generations to keep segment count manageable.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 3,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.2,
+      "metaball_resolution": 64,
+      "materials": {
+        "default": [
+          0.68,
+          0.32,
+          0.3
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 50,
+            "radius_decay": 0.7,
+            "jitter": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg03_tree_noise_light",
+      "notes": "Classic tree + light position noise \u2014 subtle organic wobble.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.9,
+            "spread_deg": 35,
+            "radius_decay": 0.65
+          }
+        },
+        {
+          "op": "noise_displace",
+          "selector": "all",
+          "params": {
+            "amp": 0.12,
+            "freq": 1.2,
+            "seed": 5,
+            "preserve_root": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg03_tree_noise_heavy",
+      "notes": "Same tree with aggressive noise \u2014 gnarled wind-beaten form.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.9,
+            "spread_deg": 35,
+            "radius_decay": 0.65
+          }
+        },
+        {
+          "op": "noise_displace",
+          "selector": "all",
+          "params": {
+            "amp": 0.35,
+            "freq": 0.9,
+            "seed": 17,
+            "preserve_root": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg03_tree_knotty",
+      "notes": "Tree with noise-modulated radii \u2014 knotty bark-like thickness variation.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.2
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.85,
+            "spread_deg": 35,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "noise_radii",
+          "selector": "all",
+          "params": {
+            "amp": 0.6,
+            "freq": 3.0,
+            "seed": 22,
+            "floor": 0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg03_tree_both",
+      "notes": "Position AND radius noise \u2014 full organic variation.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.2
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.9,
+            "spread_deg": 35,
+            "radius_decay": 0.68
+          }
+        },
+        {
+          "op": "noise_displace",
+          "selector": "all",
+          "params": {
+            "amp": 0.2,
+            "freq": 1.0,
+            "seed": 33
+          }
+        },
+        {
+          "op": "noise_radii",
+          "selector": "all",
+          "params": {
+            "amp": 0.5,
+            "freq": 2.5,
+            "seed": 44,
+            "floor": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg03_rhizome_noise",
+      "notes": "Horizontal rhizome + XZ-only displacement \u2014 wild meander along the ground.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.8,
+            "spread_deg": 85,
+            "radius_decay": 0.82,
+            "jitter": 0.5
+          }
+        },
+        {
+          "op": "noise_displace",
+          "selector": "all",
+          "params": {
+            "amp": 0.4,
+            "freq": 0.6,
+            "seed": 9,
+            "axis_mask": [
+              1.0,
+              0.1,
+              1.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg03_canopy_windblown",
+      "notes": "Space-colonized canopy with horizontal noise bias \u2014 windblown.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 1,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 50,
+            "attractor_count": 250,
+            "cloud_shape": "ellipsoid",
+            "cloud_size": [
+              1.6,
+              1.0,
+              1.6
+            ],
+            "cloud_center": [
+              0,
+              2.0,
+              0
+            ],
+            "influence_radius": 1.0,
+            "kill_radius": 0.22,
+            "step": 0.13,
+            "radius_decay": 0.97
+          }
+        },
+        {
+          "op": "noise_displace",
+          "selector": "all",
+          "params": {
+            "amp": 0.25,
+            "freq": 0.8,
+            "seed": 77,
+            "axis_mask": [
+              1.0,
+              0.3,
+              0.5
+            ]
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.15,
+            "radius": 0.02,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg03_bristle_knotty",
+      "notes": "Bristle ball with radius noise \u2014 varied bristle thickness.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.1
+      },
+      "iterations": 1,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 60,
+            "length": 0.6,
+            "radius": 0.03,
+            "splay": 1.0
+          }
+        },
+        {
+          "op": "noise_radii",
+          "selector": "tag:leaf",
+          "params": {
+            "amp": 0.8,
+            "freq": 4.0,
+            "seed": 55,
+            "floor": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg04_coral_tangled",
+      "notes": "Coral metaball with high jitter \u2014 limbs cross and fuse in unexpected ways.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 3,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.2,
+      "metaball_resolution": 64,
+      "materials": {
+        "default": [
+          0.72,
+          0.36,
+          0.34
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.55,
+            "spread_deg": 55,
+            "radius_decay": 0.72,
+            "jitter": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg04_coral_chubby",
+      "notes": "Fewer iterations, fatter starting radius \u2014 chubby organism with short fat fingers.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.22
+      },
+      "iterations": 2,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.25,
+      "metaball_resolution": 64,
+      "materials": {
+        "default": [
+          0.7,
+          0.38,
+          0.35
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 4,
+            "length": 0.6,
+            "spread_deg": 60,
+            "radius_decay": 0.8,
+            "jitter": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg04_coral_fungal",
+      "notes": "Ochre fungal cluster \u2014 softer smoothing, warmer color, reads as mushroom growth.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 3,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.14,
+      "metaball_resolution": 72,
+      "materials": {
+        "default": [
+          0.68,
+          0.48,
+          0.28
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 50,
+            "radius_decay": 0.7,
+            "jitter": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg04_coral_bone",
+      "notes": "Ivory/bone coloring \u2014 reads as carved bone or coral skeleton.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 4,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.18,
+      "metaball_resolution": 72,
+      "materials": {
+        "default": [
+          0.92,
+          0.88,
+          0.78
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 50,
+            "radius_decay": 0.72,
+            "jitter": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg04_coral_paired",
+      "notes": "Two seed roots offset 0.8m apart \u2014 two creatures fusing at the hip.",
+      "seed": {
+        "roots": [
+          {
+            "pos": [
+              -0.5,
+              0,
+              0
+            ],
+            "radius": 0.12
+          },
+          {
+            "pos": [
+              0.5,
+              0,
+              0
+            ],
+            "radius": 0.12
+          }
+        ]
+      },
+      "iterations": 3,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.2,
+      "metaball_resolution": 72,
+      "materials": {
+        "default": [
+          0.7,
+          0.36,
+          0.34
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 55,
+            "radius_decay": 0.72,
+            "jitter": 0.55
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg04_coral_trinity",
+      "notes": "Three seeds in an equilateral triangle \u2014 trinity organism.",
+      "seed": {
+        "roots": [
+          {
+            "pos": [
+              -0.55,
+              0,
+              0.32
+            ],
+            "radius": 0.11
+          },
+          {
+            "pos": [
+              0.55,
+              0,
+              0.32
+            ],
+            "radius": 0.11
+          },
+          {
+            "pos": [
+              0.0,
+              0,
+              -0.63
+            ],
+            "radius": 0.11
+          }
+        ]
+      },
+      "iterations": 3,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.22,
+      "metaball_resolution": 72,
+      "materials": {
+        "default": [
+          0.72,
+          0.34,
+          0.32
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 55,
+            "radius_decay": 0.72,
+            "jitter": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg05_bamboo",
+      "notes": "Sine radii along depth \u2014 bamboo/reed segments.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 6,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.5,
+            "spread_deg": 10,
+            "radius_decay": 0.85
+          }
+        },
+        {
+          "op": "sine_radii",
+          "selector": "all",
+          "params": {
+            "amp": 0.55,
+            "freq": 0.5,
+            "along_axis": "depth",
+            "floor": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg05_serpentine_trunk",
+      "notes": "Serpentine trunk \u2014 sine displacement along height drives X-axis wiggle.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.2
+      },
+      "iterations": 6,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.6,
+            "spread_deg": 5,
+            "radius_decay": 0.85
+          }
+        },
+        {
+          "op": "sine_displace",
+          "selector": "all",
+          "params": {
+            "amp": 0.35,
+            "freq": 0.4,
+            "along_axis": "y",
+            "displace": [
+              1,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg05_pulsing_tree",
+      "notes": "Full tree with pulse-wave radii \u2014 rhythmic thickness along every branch.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.8,
+            "spread_deg": 35,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "sine_radii",
+          "selector": "all",
+          "params": {
+            "amp": 0.4,
+            "freq": 1.5,
+            "along_axis": "depth",
+            "floor": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg06_rd_spots",
+      "notes": "Dense tree with RD-spots displacement \u2014 Turing dots modulate Y-position, giving dappled canopy.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 4,
+            "length": 0.55,
+            "spread_deg": 50,
+            "radius_decay": 0.65,
+            "jitter": 0.3
+          }
+        },
+        {
+          "op": "rd_displace",
+          "selector": "tag:leaf",
+          "params": {
+            "pattern": "spots",
+            "amp": 0.35,
+            "iterations": 2500,
+            "grid_size": 80,
+            "world_size": 3.0,
+            "seed": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg06_rd_stripes",
+      "notes": "RD stripes pattern drives vertical displacement \u2014 ridged foliage.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.16
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.7,
+            "spread_deg": 40,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "rd_displace",
+          "selector": "all",
+          "params": {
+            "pattern": "stripes",
+            "amp": 0.25,
+            "iterations": 2500,
+            "grid_size": 72,
+            "world_size": 4.0,
+            "seed": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg06_rd_mazes_canopy",
+      "notes": "Space-colonized canopy + RD mazes displacement \u2014 organic labyrinth structure.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 1,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 40,
+            "attractor_count": 200,
+            "cloud_shape": "ellipsoid",
+            "cloud_size": [
+              1.5,
+              1.0,
+              1.5
+            ],
+            "cloud_center": [
+              0,
+              1.7,
+              0
+            ],
+            "influence_radius": 1.0,
+            "kill_radius": 0.22,
+            "step": 0.15,
+            "radius_decay": 0.97
+          }
+        },
+        {
+          "op": "rd_displace",
+          "selector": "all",
+          "params": {
+            "pattern": "mazes",
+            "amp": 0.2,
+            "iterations": 3000,
+            "grid_size": 80,
+            "world_size": 4.0,
+            "seed": 21
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 6,
+            "length": 0.12,
+            "radius": 0.02,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg07_scatter_forest",
+      "notes": "Seeder: 12 seeds scattered by Poisson disk across a disk, each grows a small tree. A forest from one config.",
+      "seed": {
+        "scatter": {
+          "count": 12,
+          "region_size": 2.5,
+          "min_dist": 0.6,
+          "shape": "disk",
+          "radius": 0.1,
+          "seed": 7
+        }
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 35,
+            "radius_decay": 0.7,
+            "jitter": 0.3
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.18,
+            "radius": 0.018,
+            "splay": 0.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg07_scatter_corals",
+      "notes": "8 scatter seeds + coral recipe + metaball \u2014 colony of fused creatures.",
+      "seed": {
+        "scatter": {
+          "count": 8,
+          "region_size": 1.8,
+          "min_dist": 0.5,
+          "shape": "disk",
+          "radius": 0.1,
+          "seed": 13
+        }
+      },
+      "iterations": 2,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.18,
+      "metaball_resolution": 72,
+      "materials": {
+        "default": [
+          0.7,
+          0.36,
+          0.33
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 55,
+            "radius_decay": 0.7,
+            "jitter": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg08_helix_vine",
+      "notes": "Single chain trunk displaced by helix curve \u2014 coiling vine.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.08
+      },
+      "iterations": 10,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.35,
+            "spread_deg": 5,
+            "radius_decay": 0.92
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "helix",
+            "t_source": "depth",
+            "t_scale": 1.2,
+            "amp": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg08_trefoil_vine",
+      "notes": "Chain trunk bent through a trefoil-knot trajectory \u2014 the branch knots itself.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.08
+      },
+      "iterations": 14,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.3,
+            "spread_deg": 5,
+            "radius_decay": 0.93
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "trefoil",
+            "t_source": "depth",
+            "t_scale": 0.5,
+            "amp": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg08_lissajous_branches",
+      "notes": "Branching tree + lissajous curve displacement \u2014 each branch bends through an interference pattern.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.7,
+            "spread_deg": 30,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "lissajous",
+            "t_source": "depth",
+            "t_scale": 0.5,
+            "amp": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg08_rose_canopy",
+      "notes": "Space-colonized canopy displaced by a 4-petal rose curve in XZ \u2014 radial petaled silhouette.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 1,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_red"
+      },
+      "rules": [
+        {
+          "op": "space_colonize",
+          "selector": "all",
+          "params": {
+            "iterations": 40,
+            "attractor_count": 180,
+            "cloud_shape": "ellipsoid",
+            "cloud_size": [
+              1.5,
+              0.8,
+              1.5
+            ],
+            "cloud_center": [
+              0,
+              1.7,
+              0
+            ],
+            "influence_radius": 1.0,
+            "kill_radius": 0.22,
+            "step": 0.14,
+            "radius_decay": 0.97
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "rose",
+            "t_source": "radial",
+            "t_scale": 1.2,
+            "amp": 0.25,
+            "axes": [
+              1,
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.15,
+            "radius": 0.02,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg08_spiral_tower",
+      "notes": "Archimedean spiral displacement on a simple stack \u2014 nodes climb while winding outward.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 12,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.3,
+            "spread_deg": 5,
+            "radius_decay": 0.92
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "spiral",
+            "t_source": "depth",
+            "t_scale": 0.7,
+            "amp": 1.0,
+            "axes": [
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg08_butterfly_bush",
+      "notes": "Dense bush + Fay butterfly-curve displacement \u2014 chaotic wing-like spread on the XY plane.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 4,
+            "length": 0.5,
+            "spread_deg": 55,
+            "radius_decay": 0.62
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "butterfly",
+            "t_source": "depth",
+            "t_scale": 0.6,
+            "amp": 0.35
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.15,
+            "radius": 0.018,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg09_figure_eight_vine",
+      "notes": "Chain displaced by the figure-eight knot curve \u2014 complex looping structure.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.09
+      },
+      "iterations": 18,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.25,
+            "spread_deg": 5,
+            "radius_decay": 0.95
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "figure_eight",
+            "t_source": "depth",
+            "t_scale": 0.4,
+            "amp": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg09_torus_knot",
+      "notes": "Torus (2,3) knot \u2014 classic pretzel traced by a capsule chain.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.08
+      },
+      "iterations": 22,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.2,
+            "spread_deg": 2,
+            "radius_decay": 0.96
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "torus_knot",
+            "t_source": "depth",
+            "t_scale": 0.3,
+            "amp": 0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg09_rose_5_bush",
+      "notes": "5-petal rose displacement on a dense bush \u2014 pentagonal flower cluster.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.14
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_red"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 4,
+            "length": 0.5,
+            "spread_deg": 55,
+            "radius_decay": 0.65
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "rose_5",
+            "t_source": "radial",
+            "t_scale": 1.5,
+            "amp": 0.3,
+            "axes": [
+              1,
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.15,
+            "radius": 0.018,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg09_seashell_vine",
+      "notes": "Seashell logarithmic spiral \u2014 tightens as it grows, organic fossil shape.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.1
+      },
+      "iterations": 18,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.22,
+            "spread_deg": 5,
+            "radius_decay": 0.94
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "seashell",
+            "t_source": "depth",
+            "t_scale": 0.4,
+            "amp": 1.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg09_wave_torus_canopy",
+      "notes": "Tree with 8-fold wave-torus displacement \u2014 radial flanged structure.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.16
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.7,
+            "spread_deg": 40,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "wave_torus",
+            "t_source": "radial",
+            "t_scale": 1.0,
+            "amp": 0.25
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.15,
+            "radius": 0.02,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg09_enneper_cluster",
+      "notes": "Enneper-surface-inspired displacement on a coral metaball \u2014 cusped organic form.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.14
+      },
+      "iterations": 3,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.18,
+      "metaball_resolution": 72,
+      "materials": {
+        "default": [
+          0.7,
+          0.38,
+          0.35
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.55,
+            "spread_deg": 50,
+            "radius_decay": 0.72,
+            "jitter": 0.4
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "enneper",
+            "t_source": "depth",
+            "t_scale": 0.6,
+            "amp": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg09_helicoid_growth",
+      "notes": "Helicoid displacement \u2014 radius-growing helix tower.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.1
+      },
+      "iterations": 12,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.3,
+            "spread_deg": 5,
+            "radius_decay": 0.93
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "helicoid",
+            "t_source": "depth",
+            "t_scale": 0.5,
+            "amp": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg09_breather_tree",
+      "notes": "Breather curve displacement \u2014 amplitude pulses over the trunk.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.16
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.7,
+            "spread_deg": 35,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "parametric_displace",
+          "selector": "all",
+          "params": {
+            "curve": "breather",
+            "t_source": "depth",
+            "t_scale": 0.8,
+            "amp": 0.22
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg10_mandala_4fold",
+      "notes": "Branch recipe + 4-fold symmetry = 4-arm mandala topology.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0.6
+        ],
+        "radius": 0.12
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.5,
+            "spread_deg": 35,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "symmetry",
+          "selector": "all",
+          "params": {
+            "count": 4,
+            "axis": "y",
+            "include_original": true
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.15,
+            "radius": 0.018,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg10_mandala_6fold",
+      "notes": "6-fold symmetry \u2014 hexagonal mandala.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0.5
+        ],
+        "radius": 0.1
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.4,
+            "spread_deg": 30,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "symmetry",
+          "selector": "all",
+          "params": {
+            "count": 6,
+            "axis": "y"
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.13,
+            "radius": 0.015,
+            "splay": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg10_mandala_creature",
+      "notes": "Coral recipe + 5-fold symmetry + metaball \u2014 starfish creature. Reduced depth for rendering feasibility.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0.4
+        ],
+        "radius": 0.12
+      },
+      "iterations": 2,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.22,
+      "metaball_resolution": 56,
+      "materials": {
+        "default": [
+          0.72,
+          0.36,
+          0.34
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.4,
+            "spread_deg": 50,
+            "radius_decay": 0.72,
+            "jitter": 0.3
+          }
+        },
+        {
+          "op": "symmetry",
+          "selector": "all",
+          "params": {
+            "count": 5,
+            "axis": "y"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg11_ca_conway",
+      "notes": "Scatter forest + Conway's Game of Life pruning \u2014 trees survive only in CA-alive cells.",
+      "seed": {
+        "scatter": {
+          "count": 40,
+          "region_size": 2.2,
+          "min_dist": 0.25,
+          "shape": "disk",
+          "radius": 0.08,
+          "seed": 3
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.4,
+            "spread_deg": 30,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "ca_prune",
+          "selector": "all",
+          "params": {
+            "rule": "conway",
+            "iterations": 15,
+            "grid_size": 28,
+            "world_size": 5.0,
+            "seed_density": 0.4,
+            "seed": 11
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.13,
+            "radius": 0.015,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg11_ca_seeds",
+      "notes": "Seeds rule (B2/S) \u2014 explosive growth pattern prunes forest into quickly-filling clusters.",
+      "seed": {
+        "scatter": {
+          "count": 50,
+          "region_size": 2.5,
+          "min_dist": 0.22,
+          "shape": "disk",
+          "radius": 0.08,
+          "seed": 9
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.35,
+            "spread_deg": 30,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "ca_prune",
+          "selector": "all",
+          "params": {
+            "rule": "seeds",
+            "iterations": 10,
+            "grid_size": 32,
+            "world_size": 5.0,
+            "seed_density": 0.15,
+            "seed": 5
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.13,
+            "radius": 0.015,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg11_ca_day_night",
+      "notes": "Day-and-night rule \u2014 symmetric patterns, produces stable islands and continents of growth.",
+      "seed": {
+        "scatter": {
+          "count": 60,
+          "region_size": 2.2,
+          "min_dist": 0.2,
+          "shape": "disk",
+          "radius": 0.07,
+          "seed": 23
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_red"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.35,
+            "spread_deg": 30,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "ca_prune",
+          "selector": "all",
+          "params": {
+            "rule": "day_and_night",
+            "iterations": 20,
+            "grid_size": 32,
+            "world_size": 5.0,
+            "seed_density": 0.5,
+            "seed": 42
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.13,
+            "radius": 0.016,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg12_organism_in_cage",
+      "notes": "Coral creature inside a convex hull 'cage' \u2014 wireframe membrane around the form.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 50,
+            "radius_decay": 0.72,
+            "jitter": 0.4
+          }
+        },
+        {
+          "op": "hull_shell",
+          "selector": "all",
+          "params": {
+            "shell_scale": 1.3,
+            "shell_radius": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg12_tree_in_hull",
+      "notes": "Tree + tight convex hull \u2014 branches pressing against a skin.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.15
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.8,
+            "spread_deg": 35,
+            "radius_decay": 0.68
+          }
+        },
+        {
+          "op": "hull_shell",
+          "selector": "all",
+          "params": {
+            "shell_scale": 1.08,
+            "shell_radius": 0.015
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg12_hull_metaball",
+      "notes": "Hull + metaball \u2014 organism fuses with its membrane into a single smooth shell.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.14
+      },
+      "iterations": 3,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.22,
+      "metaball_resolution": 72,
+      "materials": {
+        "default": [
+          0.72,
+          0.55,
+          0.4
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 55,
+            "radius_decay": 0.72,
+            "jitter": 0.4
+          }
+        },
+        {
+          "op": "hull_shell",
+          "selector": "all",
+          "params": {
+            "shell_scale": 1.25,
+            "shell_radius": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg13_ca_seeder_conway",
+      "notes": "Conway CA directly SEEDS the forest \u2014 one tree per alive cell. Ecology IS the CA pattern.",
+      "seed": {
+        "ca_scatter": {
+          "rule": "conway",
+          "iterations": 25,
+          "grid_size": 20,
+          "region_size": 2.5,
+          "y": 0,
+          "density": 0.45,
+          "seed": 11,
+          "radius": 0.1,
+          "jitter": 0.3
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.4,
+            "spread_deg": 30,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 9,
+            "length": 0.14,
+            "radius": 0.016,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg13_ca_seeder_highlife",
+      "notes": "HighLife CA (B36/S23) \u2014 produces replicators and gliders, seeds form moving patterns.",
+      "seed": {
+        "ca_scatter": {
+          "rule": "highlife",
+          "iterations": 30,
+          "grid_size": 22,
+          "region_size": 2.5,
+          "y": 0,
+          "density": 0.4,
+          "seed": 19,
+          "radius": 0.09,
+          "jitter": 0.25
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.35,
+            "spread_deg": 30,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 9,
+            "length": 0.13,
+            "radius": 0.015,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg13_ca_seeder_day_night",
+      "notes": "Day-and-Night CA \u2014 symmetric rules produce large stable islands and continents.",
+      "seed": {
+        "ca_scatter": {
+          "rule": "day_and_night",
+          "iterations": 40,
+          "grid_size": 24,
+          "region_size": 3.0,
+          "y": 0,
+          "density": 0.5,
+          "seed": 42,
+          "radius": 0.08,
+          "jitter": 0.2
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_red"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.35,
+            "spread_deg": 25,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 9,
+            "length": 0.12,
+            "radius": 0.015,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg13_ca_seeder_seeds",
+      "notes": "Seeds CA (B2/S) \u2014 maximally explosive rule. Produces oscillating patterns.",
+      "seed": {
+        "ca_scatter": {
+          "rule": "seeds",
+          "iterations": 10,
+          "grid_size": 24,
+          "region_size": 2.5,
+          "y": 0,
+          "density": 0.08,
+          "seed": 3,
+          "radius": 0.08
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.35,
+            "spread_deg": 30,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.12,
+            "radius": 0.015,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg13_ca_seeder_life_without_death",
+      "notes": "Life-without-Death (B3/S012345678) \u2014 cells once alive stay alive, growth accumulates. Produces dense labyrinths.",
+      "seed": {
+        "ca_scatter": {
+          "rule": "life_without_death",
+          "iterations": 50,
+          "grid_size": 24,
+          "region_size": 2.8,
+          "y": 0,
+          "density": 0.15,
+          "seed": 7,
+          "radius": 0.07
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.3,
+            "spread_deg": 25,
+            "radius_decay": 0.75
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.11,
+            "radius": 0.014,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg13_ca_conway_dense",
+      "notes": "Conway + higher density + more iterations \u2014 tighter ecological patches.",
+      "seed": {
+        "scatter": {
+          "count": 80,
+          "region_size": 2.5,
+          "min_dist": 0.18,
+          "shape": "disk",
+          "radius": 0.07,
+          "seed": 23
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.32,
+            "spread_deg": 28,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "ca_prune",
+          "selector": "all",
+          "params": {
+            "rule": "conway",
+            "iterations": 25,
+            "grid_size": 36,
+            "world_size": 5.0,
+            "seed_density": 0.48,
+            "seed": 91
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.13,
+            "radius": 0.015,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg13_ca_coral_seeder",
+      "notes": "CA-seeded CORAL forest + metaball \u2014 colonies form in CA patterns, fuse smoothly.",
+      "seed": {
+        "ca_scatter": {
+          "rule": "conway",
+          "iterations": 15,
+          "grid_size": 18,
+          "region_size": 2.0,
+          "y": 0,
+          "density": 0.4,
+          "seed": 29,
+          "radius": 0.1,
+          "jitter": 0.2
+        }
+      },
+      "iterations": 2,
+      "render_mode": "metaball",
+      "metaball_smoothness": 0.18,
+      "metaball_resolution": 64,
+      "materials": {
+        "default": [
+          0.7,
+          0.36,
+          0.34
+        ]
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.4,
+            "spread_deg": 55,
+            "radius_decay": 0.72,
+            "jitter": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg13_ca_seeder_autumn_forest",
+      "notes": "Wide autumn forest \u2014 Conway CA over larger region + red foliage.",
+      "seed": {
+        "ca_scatter": {
+          "rule": "conway",
+          "iterations": 22,
+          "grid_size": 28,
+          "region_size": 3.5,
+          "y": 0,
+          "density": 0.42,
+          "seed": 55,
+          "radius": 0.08,
+          "jitter": 0.3
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_red"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.3,
+            "spread_deg": 30,
+            "radius_decay": 0.72
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.11,
+            "radius": 0.014,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg14_mandelbrot_forest",
+      "notes": "Forest grows ONLY inside the Mandelbrot set. Fractal boundary as ecology.",
+      "seed": {
+        "scatter": {
+          "count": 150,
+          "region_size": 2.0,
+          "min_dist": 0.15,
+          "shape": "disk",
+          "radius": 0.07,
+          "seed": 3
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.3,
+            "spread_deg": 25,
+            "radius_decay": 0.75
+          }
+        },
+        {
+          "op": "fractal_prune",
+          "selector": "all",
+          "params": {
+            "fractal": "mandelbrot",
+            "max_iter": 40,
+            "scale": 1.3,
+            "offset": [
+              -0.5,
+              0
+            ]
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.11,
+            "radius": 0.014,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg14_julia_forest",
+      "notes": "Julia set (c = -0.7 + 0.27i) \u2014 dragon-like fractal shape in the forest.",
+      "seed": {
+        "scatter": {
+          "count": 200,
+          "region_size": 2.0,
+          "min_dist": 0.12,
+          "shape": "disk",
+          "radius": 0.06,
+          "seed": 7
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.28,
+            "spread_deg": 25,
+            "radius_decay": 0.75
+          }
+        },
+        {
+          "op": "fractal_prune",
+          "selector": "all",
+          "params": {
+            "fractal": "julia",
+            "julia_c": [
+              -0.7,
+              0.27
+            ],
+            "max_iter": 30,
+            "scale": 1.3
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.1,
+            "radius": 0.013,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg14_julia_forest_2",
+      "notes": "Different Julia c \u2014 different fractal shape, different forest.",
+      "seed": {
+        "scatter": {
+          "count": 200,
+          "region_size": 2.0,
+          "min_dist": 0.12,
+          "shape": "disk",
+          "radius": 0.06,
+          "seed": 19
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_red"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.28,
+            "spread_deg": 25,
+            "radius_decay": 0.75
+          }
+        },
+        {
+          "op": "fractal_prune",
+          "selector": "all",
+          "params": {
+            "fractal": "julia",
+            "julia_c": [
+              0.285,
+              0.01
+            ],
+            "max_iter": 35,
+            "scale": 1.3
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.1,
+            "radius": 0.013,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg14_burning_ship_forest",
+      "notes": "Burning Ship fractal \u2014 angular antenna-like boundary, produces geometric forest silhouettes.",
+      "seed": {
+        "scatter": {
+          "count": 200,
+          "region_size": 2.0,
+          "min_dist": 0.12,
+          "shape": "disk",
+          "radius": 0.06,
+          "seed": 23
+        }
+      },
+      "iterations": 2,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.28,
+            "spread_deg": 25,
+            "radius_decay": 0.75
+          }
+        },
+        {
+          "op": "fractal_prune",
+          "selector": "all",
+          "params": {
+            "fractal": "burning_ship",
+            "max_iter": 35,
+            "scale": 1.0,
+            "offset": [
+              -1.7,
+              0
+            ]
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 8,
+            "length": 0.1,
+            "radius": 0.013,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg14_koch_branches",
+      "notes": "Koch edge subdivision at depth 2 \u2014 every branch bumps into a triangular zigzag.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 1.2,
+            "spread_deg": 30,
+            "radius_decay": 0.75
+          }
+        },
+        {
+          "op": "koch_edge",
+          "selector": "all",
+          "params": {
+            "depth": 2,
+            "bump_height": 0.28,
+            "axis": "xy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg14_koch_lightning",
+      "notes": "Single chain + Koch depth 3 \u2014 fractal lightning bolt.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.08
+      },
+      "iterations": 4,
+      "materials": {
+        "default": "bark"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 1.5,
+            "spread_deg": 5,
+            "radius_decay": 0.92
+          }
+        },
+        {
+          "op": "koch_edge",
+          "selector": "all",
+          "params": {
+            "depth": 3,
+            "bump_height": 0.35,
+            "axis": "xy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg15_modulor_library",
+      "notes": "Room \u2192 2 tables \u2192 3 books per table \u2192 1 pen per book. Reads as a library left-to-right.",
+      "seed": {
+        "modulor": {
+          "level": 0,
+          "category": "room",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 1,
+      "render_mode": "boxes",
+      "camera_pitch": 0.65,
+      "camera_yaw": 0.7,
+      "rules": [
+        {
+          "op": "modulor_fold",
+          "selector": "tag:room",
+          "params": {
+            "count": 2,
+            "category_child": "table",
+            "spread_rad": 1.8,
+            "pitch": 1.3,
+            "distance_factor": 0.6,
+            "jitter": 0.05
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "tag:table",
+          "params": {
+            "count": 3,
+            "category_child": "book",
+            "spread_rad": 2.4,
+            "pitch": 1.0,
+            "distance_factor": 0.7,
+            "jitter": 0.1
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "tag:book",
+          "params": {
+            "count": 1,
+            "category_child": "pen",
+            "spread_rad": 0.4,
+            "pitch": 0.7,
+            "distance_factor": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg15_modulor_workshop",
+      "notes": "Workshop: room with multiple tables, each with cups and books.",
+      "seed": {
+        "modulor": {
+          "level": 0,
+          "category": "room",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 1,
+      "render_mode": "boxes",
+      "camera_pitch": 0.7,
+      "camera_yaw": 0.6,
+      "rules": [
+        {
+          "op": "modulor_fold",
+          "selector": "tag:room",
+          "params": {
+            "count": 4,
+            "category_child": "table",
+            "spread_rad": 3.0,
+            "pitch": 1.3,
+            "distance_factor": 0.75
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "tag:table",
+          "params": {
+            "count": 2,
+            "category_child": "cup",
+            "spread_rad": 2.0,
+            "pitch": 0.9,
+            "distance_factor": 0.5
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "tag:table",
+          "params": {
+            "count": 1,
+            "category_child": "book",
+            "spread_rad": 0.5,
+            "pitch": 0.8,
+            "distance_factor": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg15_modulor_body",
+      "notes": "Anthropometry: torso \u2192 2 arms \u2192 forearms \u2192 hands \u2192 fingers. Body as Modulor fold.",
+      "seed": {
+        "modulor": {
+          "level": 1,
+          "category": "table",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 1,
+      "render_mode": "capsule",
+      "materials": {
+        "default": "flesh"
+      },
+      "rules": [
+        {
+          "op": "modulor_fold",
+          "selector": "modulor_1",
+          "params": {
+            "count": 2,
+            "category_child": "shelf",
+            "spread_rad": 2.5,
+            "pitch": 1.4,
+            "distance_factor": 0.7
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "modulor_2",
+          "params": {
+            "count": 1,
+            "category_child": "cushion",
+            "spread_rad": 0.3,
+            "pitch": 0.6,
+            "distance_factor": 0.9
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "modulor_3",
+          "params": {
+            "count": 1,
+            "category_child": "book",
+            "spread_rad": 0.3,
+            "pitch": 0.4,
+            "distance_factor": 0.9
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "modulor_4",
+          "params": {
+            "count": 4,
+            "category_child": "pen",
+            "spread_rad": 1.5,
+            "pitch": 0.5,
+            "distance_factor": 0.75
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg15_modulor_kitchen",
+      "notes": "Kitchen counter with many cups and books.",
+      "seed": {
+        "modulor": {
+          "level": 0,
+          "category": "room",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 1,
+      "render_mode": "boxes",
+      "camera_pitch": 0.75,
+      "camera_yaw": 0.5,
+      "rules": [
+        {
+          "op": "modulor_fold",
+          "selector": "tag:room",
+          "params": {
+            "count": 3,
+            "category_child": "table",
+            "spread_rad": 2.6,
+            "pitch": 1.4,
+            "distance_factor": 0.72,
+            "jitter": 0.08
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "tag:table",
+          "params": {
+            "count": 5,
+            "category_child": "cup",
+            "spread_rad": 2.8,
+            "pitch": 0.9,
+            "distance_factor": 0.45,
+            "jitter": 0.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg15_modulor_nested_rooms",
+      "notes": "Room containing 3 smaller rooms (fold category OVERRIDE). Architectural nesting.",
+      "seed": {
+        "modulor": {
+          "level": 0,
+          "category": "room",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 1,
+      "render_mode": "boxes",
+      "camera_pitch": 0.7,
+      "camera_yaw": 0.65,
+      "rules": [
+        {
+          "op": "modulor_fold",
+          "selector": "tag:room",
+          "params": {
+            "count": 3,
+            "category_child": "table",
+            "spread_rad": 2.5,
+            "pitch": 1.3,
+            "distance_factor": 0.6
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "tag:table",
+          "params": {
+            "count": 2,
+            "category_child": "shelf",
+            "spread_rad": 1.8,
+            "pitch": 1.2,
+            "distance_factor": 0.65
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "tag:shelf",
+          "params": {
+            "count": 4,
+            "category_child": "book",
+            "spread_rad": 1.0,
+            "pitch": 1.1,
+            "distance_factor": 0.55
+          }
+        },
+        {
+          "op": "modulor_fold",
+          "selector": "tag:book",
+          "params": {
+            "count": 1,
+            "category_child": "pen",
+            "spread_rad": 0.3,
+            "pitch": 0.6,
+            "distance_factor": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg16_chandelier_adelman_3bulb",
+      "notes": "Lindsey Adelman Branching Bubble Chandelier (2006) \u2014 single trunk splits into 3 Y-branches, frosted glass bulbs at tips.",
+      "seed": {
+        "pos": [
+          0,
+          2.0,
+          0
+        ],
+        "radius": 0.015
+      },
+      "iterations": 1,
+      "render_mode": "chandelier",
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.6,
+      "chandelier": {
+        "edge_radius": 0.012,
+        "edge_color": [
+          0.1,
+          0.08,
+          0.07
+        ],
+        "bulb_radius": 0.13,
+        "bulb_color": [
+          1.0,
+          0.94,
+          0.82
+        ],
+        "bulb_emission": 2.0
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.6,
+            "spread_deg": 5,
+            "radius_decay": 0.95,
+            "pitch": 3.14
+          }
+        },
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.25,
+            "spread_deg": 15,
+            "radius_decay": 0.95
+          }
+        },
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.45,
+            "spread_deg": 55,
+            "radius_decay": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg16_chandelier_5bulb",
+      "notes": "Larger Adelman family \u2014 5 bulbs. Trunk splits into 5 branches.",
+      "seed": {
+        "pos": [
+          0,
+          2.0,
+          0
+        ],
+        "radius": 0.015
+      },
+      "iterations": 1,
+      "render_mode": "chandelier",
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.6,
+      "chandelier": {
+        "edge_radius": 0.012,
+        "edge_color": [
+          0.12,
+          0.1,
+          0.09
+        ],
+        "bulb_radius": 0.1,
+        "bulb_color": [
+          1.0,
+          0.92,
+          0.78
+        ],
+        "bulb_emission": 2.0
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.55,
+            "spread_deg": 5,
+            "radius_decay": 0.95,
+            "pitch": 3.14
+          }
+        },
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 5,
+            "length": 0.4,
+            "spread_deg": 65,
+            "radius_decay": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg16_chandelier_2gen",
+      "notes": "Two branching generations \u2014 6 final bulbs, richer tree.",
+      "seed": {
+        "pos": [
+          0,
+          2.0,
+          0
+        ],
+        "radius": 0.015
+      },
+      "iterations": 1,
+      "render_mode": "chandelier",
+      "camera_pitch": 0.15,
+      "camera_yaw": 0.6,
+      "chandelier": {
+        "edge_radius": 0.01,
+        "edge_color": [
+          0.1,
+          0.08,
+          0.07
+        ],
+        "bulb_radius": 0.08,
+        "bulb_color": [
+          0.95,
+          0.88,
+          0.7
+        ],
+        "bulb_emission": 2.2
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.4,
+            "spread_deg": 5,
+            "radius_decay": 0.95,
+            "pitch": 3.14
+          }
+        },
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.35,
+            "spread_deg": 45,
+            "radius_decay": 0.95
+          }
+        },
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.3,
+            "spread_deg": 60,
+            "radius_decay": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg16_chandelier_brass_7bulb",
+      "notes": "Brass-toned chandelier with 7 bulbs \u2014 richer, more ornate variant.",
+      "seed": {
+        "pos": [
+          0,
+          2.0,
+          0
+        ],
+        "radius": 0.015
+      },
+      "iterations": 1,
+      "render_mode": "chandelier",
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.6,
+      "chandelier": {
+        "edge_radius": 0.014,
+        "edge_color": [
+          0.48,
+          0.35,
+          0.18
+        ],
+        "edge_metallic": 1.0,
+        "edge_roughness": 0.25,
+        "bulb_radius": 0.09,
+        "bulb_color": [
+          1.0,
+          0.95,
+          0.85
+        ],
+        "bulb_emission": 1.8,
+        "show_joints": true
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 1,
+            "length": 0.5,
+            "spread_deg": 5,
+            "radius_decay": 0.95,
+            "pitch": 3.14
+          }
+        },
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 7,
+            "length": 0.4,
+            "spread_deg": 70,
+            "radius_decay": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg16_molecule_colored",
+      "notes": "Same chandelier grammar \u2192 molecule diagram. Big colored emissive spheres at every node (including joints) with colored rods between. Ada's teaching aesthetic.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.015
+      },
+      "iterations": 1,
+      "render_mode": "chandelier",
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.6,
+      "chandelier": {
+        "edge_radius": 0.02,
+        "edge_color": [
+          0.5,
+          0.5,
+          0.55
+        ],
+        "edge_metallic": 0.2,
+        "edge_roughness": 0.4,
+        "bulb_radius": 0.12,
+        "bulb_color": [
+          0.2,
+          0.75,
+          0.9
+        ],
+        "bulb_emission": 1.2,
+        "bulb_roughness": 0.3,
+        "show_joints": true,
+        "joint_radius": 0.08
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 4,
+            "length": 0.5,
+            "spread_deg": 70,
+            "radius_decay": 0.95
+          }
+        },
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 2,
+            "length": 0.35,
+            "spread_deg": 55,
+            "radius_decay": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg07_scatter_grove_rd",
+      "notes": "Scattered forest + RD spots displacement \u2014 a dappled grove, patterns emerge across trees.",
+      "seed": {
+        "scatter": {
+          "count": 10,
+          "region_size": 2.0,
+          "min_dist": 0.5,
+          "shape": "disk",
+          "radius": 0.1,
+          "seed": 33
+        }
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_bright"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 3,
+            "length": 0.5,
+            "spread_deg": 35,
+            "radius_decay": 0.7
+          }
+        },
+        {
+          "op": "rd_displace",
+          "selector": "tag:leaf",
+          "params": {
+            "pattern": "spots",
+            "amp": 0.3,
+            "iterations": 2000,
+            "grid_size": 72,
+            "world_size": 5.0,
+            "seed": 77
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.17,
+            "radius": 0.018,
+            "splay": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg03_dense_chaos",
+      "notes": "Dense branching + heavy noise on positions and radii \u2014 bramble.",
+      "seed": {
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.18
+      },
+      "iterations": 3,
+      "materials": {
+        "default": "bark",
+        "leaf": "plant_red"
+      },
+      "rules": [
+        {
+          "op": "spawn_branch",
+          "selector": "leaves",
+          "params": {
+            "count": 5,
+            "length": 0.45,
+            "spread_deg": 55,
+            "radius_decay": 0.6,
+            "jitter": 0.4
+          }
+        },
+        {
+          "op": "noise_displace",
+          "selector": "all",
+          "params": {
+            "amp": 0.25,
+            "freq": 1.5,
+            "seed": 88
+          }
+        },
+        {
+          "op": "noise_radii",
+          "selector": "all",
+          "params": {
+            "amp": 0.5,
+            "freq": 2.8,
+            "seed": 99,
+            "floor": 0.3
+          }
+        },
+        {
+          "op": "leaf_tuft",
+          "selector": "leaves",
+          "params": {
+            "count": 10,
+            "length": 0.15,
+            "radius": 0.015,
+            "splay": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gg_ls01_plant_chandelier",
+      "notes": "L-system plant DNA (F->F[+F]F[-F]F at 25.7\u00b0) rendered as a graph chandelier. Dark metal edges, frosted glass leaf spheres. Same DNA as lsystem-gallery ls03 tube-tree, now Adelman chandelier.",
+      "seed": {
+        "lsystem": {
+          "axiom": "F",
+          "rules": {
+            "F": "F[+F]F[-F]F"
+          },
+          "iterations": 4,
+          "angle_deg": 25.7,
+          "step_len": 0.25,
+          "step_shrink": 0.72,
+          "base_radius": 0.09,
+          "radius_shrink": 0.78,
+          "origin": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "render_mode": "chandelier",
+      "chandelier": {
+        "edge_color": [
+          0.12,
+          0.1,
+          0.08
+        ],
+        "leaf_color": [
+          0.95,
+          0.92,
+          0.85
+        ],
+        "leaf_emission": 1.5,
+        "edge_radius": 0.006,
+        "leaf_radius": 0.07
+      },
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.1,
+      "max_nodes": 3000
+    },
+    {
+      "id": "gg_ls02_plant_modulor_folded",
+      "notes": "Same L-system plant DNA, post-processed with Modulor fold. Each leaf selected and folded down one Modulor rung \u2014 the tree becomes scaled-down objects at each tip.",
+      "seed": {
+        "lsystem": {
+          "axiom": "F",
+          "rules": {
+            "F": "F[+F]F[-F]F"
+          },
+          "iterations": 4,
+          "angle_deg": 25.7,
+          "step_len": 0.25,
+          "step_shrink": 0.72,
+          "base_radius": 0.09,
+          "radius_shrink": 0.78,
+          "origin": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 1,
+      "rules": [
+        {
+          "op": "modulor_fold",
+          "selector": "leaves",
+          "params": {
+            "level": 3,
+            "category": "cup"
+          }
+        }
+      ],
+      "render_mode": "capsule",
+      "tag_colors": {
+        "lsystem": [
+          0.45,
+          0.28,
+          0.12
+        ],
+        "cup": [
+          0.85,
+          0.45,
+          0.2
+        ],
+        "leaf": [
+          0.25,
+          0.65,
+          0.25
+        ]
+      },
+      "camera_yaw": 0.4,
+      "camera_pitch": -0.15,
+      "max_nodes": 3000
+    },
+    {
+      "id": "gg_ls03_plant_koch_subdivided",
+      "notes": "Same L-system plant DNA, then koch_edge_op subdivides every edge with a Koch-style bump. The plant becomes a fractal zigzag \u2014 two grammars composed.",
+      "seed": {
+        "lsystem": {
+          "axiom": "F",
+          "rules": {
+            "F": "F[+F]F[-F]F"
+          },
+          "iterations": 4,
+          "angle_deg": 25.7,
+          "step_len": 0.25,
+          "step_shrink": 0.72,
+          "base_radius": 0.09,
+          "radius_shrink": 0.78,
+          "origin": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 1,
+      "rules": [
+        {
+          "op": "koch_edge",
+          "selector": "all",
+          "params": {
+            "iterations": 1,
+            "amplitude": 0.4
+          }
+        }
+      ],
+      "render_mode": "capsule",
+      "tag_colors": {
+        "lsystem": [
+          0.4,
+          0.25,
+          0.15
+        ],
+        "leaf": [
+          0.6,
+          0.7,
+          0.2
+        ]
+      },
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.1,
+      "max_nodes": 3000
+    },
+    {
+      "id": "gg_ls04_fallen_tree_chandelier",
+      "notes": "TRIPLE DNA BRIDGE: L-system plant \u2192 soft-body sim (140 steps, low stiffness, diagonal wind) \u2192 graph-grammar chandelier. The post-wind collapsed tree pose becomes a chandelier. Same DNA as sb_ls02_plant_wind_collapse but rendered as Adelman glass-and-metal.",
+      "seed": {
+        "soft_body_pose": {
+          "topology": "lsystem",
+          "lsystem": {
+            "axiom": "F",
+            "rules": {
+              "F": "F[+F]F[-F]F"
+            },
+            "iterations": 3,
+            "angle_deg": 25.7,
+            "step_len": 0.22,
+            "step_shrink": 0.72
+          },
+          "stiffness": 0.4,
+          "steps": 100,
+          "gravity": [
+            1.0,
+            -5.0,
+            0.3
+          ],
+          "damping": 0.992,
+          "floor_y": -0.5,
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "node_radius": 0.05
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "render_mode": "chandelier",
+      "chandelier": {
+        "edge_color": [
+          0.14,
+          0.1,
+          0.08
+        ],
+        "leaf_color": [
+          1.0,
+          0.85,
+          0.55
+        ],
+        "leaf_emission": 2.0,
+        "edge_radius": 0.006,
+        "leaf_radius": 0.05
+      },
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.15,
+      "max_nodes": 3000
+    },
+    {
+      "id": "gg_ls05_standing_tree_chandelier",
+      "notes": "TRIPLE DNA BRIDGE: Same L-system plant, but stiff + gentle gravity \u2014 60 steps, mostly stands. Chandelier traces a more vertical tree shape.",
+      "seed": {
+        "soft_body_pose": {
+          "topology": "lsystem",
+          "lsystem": {
+            "axiom": "F",
+            "rules": {
+              "F": "F[+F]F[-F]F"
+            },
+            "iterations": 3,
+            "angle_deg": 25.7,
+            "step_len": 0.22,
+            "step_shrink": 0.72
+          },
+          "stiffness": 0.85,
+          "steps": 60,
+          "gravity": [
+            0,
+            -9.8,
+            0
+          ],
+          "damping": 0.995,
+          "floor_y": -0.5,
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "node_radius": 0.04
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "render_mode": "chandelier",
+      "chandelier": {
+        "edge_color": [
+          0.12,
+          0.1,
+          0.08
+        ],
+        "leaf_color": [
+          0.92,
+          0.95,
+          1.0
+        ],
+        "leaf_emission": 1.8,
+        "edge_radius": 0.005,
+        "leaf_radius": 0.06
+      },
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.1,
+      "max_nodes": 3000
+    },
+    {
+      "id": "gg_noise01_plant_perturbed",
+      "notes": "DNA BRIDGE: L-system plant + universal noise-displace post-op. Every node jitters by 3D simplex noise \u2014 straight branches become organic wobbly branches. Same DNA plus noise as modifier.",
+      "seed": {
+        "lsystem": {
+          "axiom": "F",
+          "rules": {
+            "F": "F[+F]F[-F]F"
+          },
+          "iterations": 4,
+          "angle_deg": 25.7,
+          "step_len": 0.25,
+          "step_shrink": 0.72,
+          "base_radius": 0.09,
+          "radius_shrink": 0.78,
+          "origin": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "post_ops": [
+        {
+          "op": "noise_displace",
+          "amplitude": 0.08,
+          "frequency": 1.5,
+          "octaves": 3,
+          "persistence": 0.5,
+          "seed": 42,
+          "noise_type": "simplex",
+          "mode": "vector"
+        }
+      ],
+      "render_mode": "chandelier",
+      "chandelier": {
+        "edge_color": [
+          0.14,
+          0.1,
+          0.08
+        ],
+        "leaf_color": [
+          0.95,
+          0.88,
+          0.75
+        ],
+        "leaf_emission": 1.6,
+        "edge_radius": 0.006,
+        "leaf_radius": 0.06
+      },
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.12,
+      "max_nodes": 3000
+    },
+    {
+      "id": "gg_noise02_plant_cellular",
+      "notes": "DNA BRIDGE: Same L-system plant, but noise_type=cellular (Worley/Voronoi noise) with larger amplitude. Nodes snap to Voronoi-cell centers, producing a more crystalline shape. Noise-type as DNA variable.",
+      "seed": {
+        "lsystem": {
+          "axiom": "F",
+          "rules": {
+            "F": "F[+F]F[-F]F"
+          },
+          "iterations": 4,
+          "angle_deg": 25.7,
+          "step_len": 0.25,
+          "step_shrink": 0.72,
+          "base_radius": 0.09,
+          "radius_shrink": 0.78,
+          "origin": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "post_ops": [
+        {
+          "op": "noise_displace",
+          "amplitude": 0.15,
+          "frequency": 2.0,
+          "octaves": 2,
+          "seed": 9,
+          "noise_type": "cellular",
+          "mode": "vector"
+        }
+      ],
+      "render_mode": "capsule",
+      "tag_colors": {
+        "lsystem": [
+          0.35,
+          0.25,
+          0.15
+        ],
+        "leaf": [
+          0.6,
+          0.75,
+          0.35
+        ]
+      },
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.1,
+      "max_nodes": 3000
+    },
+    {
+      "id": "gg_quad01_ca_tapestry_chandelier",
+      "notes": "QUADRUPLE DNA BRIDGE: Life-without-Death CA \u2192 soft-body cloth (pinned corners, wind) \u2192 graph from post-sim pose \u2192 chandelier render. Four substrates in one config. DNA flows: rule \u2192 pattern \u2192 physics \u2192 topology \u2192 glass.",
+      "seed": {
+        "soft_body_pose": {
+          "topology": "ca_grid",
+          "ca": {
+            "rule": "life_without_death",
+            "grid_size": 18,
+            "iterations": 10,
+            "density": 0.35,
+            "seed": 11,
+            "cell_size": 0.11,
+            "pin_mode": "top_corners"
+          },
+          "stiffness": 0.6,
+          "steps": 120,
+          "gravity": [
+            0.5,
+            -9.8,
+            0.3
+          ],
+          "damping": 0.992,
+          "floor_y": -3.0,
+          "origin": [
+            0,
+            1.5,
+            0
+          ],
+          "node_radius": 0.035
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "render_mode": "chandelier",
+      "chandelier": {
+        "edge_color": [
+          0.15,
+          0.1,
+          0.08
+        ],
+        "leaf_color": [
+          1.0,
+          0.9,
+          0.65
+        ],
+        "leaf_emission": 2.2,
+        "edge_radius": 0.004,
+        "leaf_radius": 0.05
+      },
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.1,
+      "max_nodes": 4000
+    },
+    {
+      "id": "gg_quint01_ca_sb_noise",
+      "notes": "QUINTUPLE DNA BRIDGE: CA \u2192 soft-body \u2192 graph \u2192 noise-post-op \u2192 chandelier. All three bridge shapes stacked in one config: forward-seeder, reverse-pose, universal-post-op. DNA survives rule + physics + perturbation.",
+      "seed": {
+        "soft_body_pose": {
+          "topology": "ca_grid",
+          "ca": {
+            "rule": "life_without_death",
+            "grid_size": 16,
+            "iterations": 8,
+            "density": 0.32,
+            "seed": 23,
+            "cell_size": 0.11,
+            "pin_mode": "top_corners"
+          },
+          "stiffness": 0.6,
+          "steps": 100,
+          "gravity": [
+            0.3,
+            -9.8,
+            0.1
+          ],
+          "damping": 0.992,
+          "floor_y": -1.5,
+          "origin": [
+            0,
+            0.8,
+            0
+          ],
+          "node_radius": 0.03
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "post_ops": [
+        {
+          "op": "noise_displace",
+          "amplitude": 0.05,
+          "frequency": 2.5,
+          "octaves": 2,
+          "seed": 7,
+          "noise_type": "simplex",
+          "mode": "vector"
+        }
+      ],
+      "render_mode": "chandelier",
+      "chandelier": {
+        "edge_color": [
+          0.14,
+          0.1,
+          0.08
+        ],
+        "leaf_color": [
+          0.85,
+          0.95,
+          1.0
+        ],
+        "leaf_emission": 1.9,
+        "edge_radius": 0.004,
+        "leaf_radius": 0.04
+      },
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.2,
+      "max_nodes": 4000
+    },
+    {
+      "id": "gg_rd01_coral_chandelier",
+      "notes": "DNA BRIDGE: Gray-Scott coral pattern \u2192 graph (above-threshold cells as nodes, 4-neighbors as edges, V as height) \u2192 chandelier render. The coral reef becomes a glowing pearl constellation.",
+      "seed": {
+        "rd": {
+          "preset": "coral",
+          "grid_size": 54,
+          "iterations": 3500,
+          "seed": 17,
+          "threshold": 0.3,
+          "world_size": 1.8,
+          "height_amp": 0.5,
+          "node_radius": 0.025,
+          "origin": [
+            0,
+            0.3,
+            0
+          ]
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "render_mode": "chandelier",
+      "chandelier": {
+        "edge_color": [
+          0.15,
+          0.1,
+          0.08
+        ],
+        "leaf_color": [
+          1.0,
+          0.85,
+          0.55
+        ],
+        "leaf_emission": 1.8,
+        "edge_radius": 0.004,
+        "leaf_radius": 0.035
+      },
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.25,
+      "max_nodes": 5000
+    },
+    {
+      "id": "gg_rd02_stripes_capsule",
+      "notes": "DNA BRIDGE: Gray-Scott stripes pattern \u2192 graph \u2192 capsule render. Brain/fingerprint ridges materialized as green-teal capsule nodes following the V field.",
+      "seed": {
+        "rd": {
+          "preset": "stripes",
+          "grid_size": 54,
+          "iterations": 3500,
+          "seed": 3,
+          "threshold": 0.28,
+          "world_size": 1.8,
+          "height_amp": 0.35,
+          "node_radius": 0.03,
+          "origin": [
+            0,
+            0.2,
+            0
+          ]
+        }
+      },
+      "iterations": 0,
+      "rules": [],
+      "render_mode": "capsule",
+      "tag_colors": {
+        "rd": [
+          0.3,
+          0.6,
+          0.5
+        ],
+        "leaf": [
+          0.4,
+          0.85,
+          0.7
+        ]
+      },
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.45,
+      "max_nodes": 5000
+    }
+  ]
+}

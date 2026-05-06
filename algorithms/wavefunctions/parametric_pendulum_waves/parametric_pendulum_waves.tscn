@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://f9km1g2n5o7p9"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.gd" id="1_pendulum"]
+
+[node name="ParametricPendulumWaves" type="Node3D"]
+script = ExtResource("1_pendulum")
+num_pendulums = 15
+pendulum_spacing = 0.3
+base_height = 2.5
+shortest_length = 0.8
+longest_length = 1.5
+length_profile = "Linear"
+gravity = 9.8
+damping = 0.998
+release_all = false
+bob_radius = 0.08
+rod_thickness = 0.02
+show_pivot_bar = true
+trail_length = 100
+color_by_index = true
+auto_release = true
+release_angle = 0.5
+show_phase_info = true

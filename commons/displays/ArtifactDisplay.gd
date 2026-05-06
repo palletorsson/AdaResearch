@@ -266,12 +266,14 @@ func _get_sequence_color() -> Color:
 	match source:
 		"array_tutorial":
 			return Color.CYAN
-		"randomness_exploration":
+		"randomness":
 			return Color.MAGENTA
 		"geometric_algorithms":
 			return Color.GREEN
 		"advanced_concepts":
 			return Color.YELLOW
+		"testmaps":
+			return Color.ORANGE
 		_:
 			return Color.WHITE
 

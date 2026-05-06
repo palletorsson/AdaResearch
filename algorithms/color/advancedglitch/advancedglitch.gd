@@ -26,13 +26,13 @@ var corruption_buffer := []
 
 signal glitch_event_triggered(effect_name: String)
 
-func _ready():
+func _ready() -> void:
 	setup_demo_scene()
 	initialize_glitch_systems()
 	create_ui_controls()
-	print("🎨 Advanced Glitch System Initialized!")
+	print("ðŸŽ¨ Advanced Glitch System Initialized!")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * temporal_speed
 	if auto_animate:
 		update_all_glitch_effects(delta)
@@ -41,7 +41,7 @@ func _process(delta):
 # SCENE SETUP
 # ===================
 
-func setup_demo_scene():
+func setup_demo_scene() -> void:
 	# Create demo objects in a grid
 	var positions = [
 		Vector3(-4, 2, 0),   # Datamoshing
@@ -70,7 +70,7 @@ func setup_demo_scene():
 	for i in range(positions.size()):
 		create_demo_object(positions[i], effect_names[i], i)
 
-func create_demo_object(pos: Vector3, name: String, index: int):
+func create_demo_object(pos: Vector3, name: String, index: int) -> void:
 	# Create base geometry
 	var obj = CSGBox3D.new()
 	obj.size = Vector3(1.5, 1.5, 0.2)
@@ -99,7 +99,7 @@ func create_demo_object(pos: Vector3, name: String, index: int):
 # GLITCH SYSTEM INITIALIZATION
 # ===================
 
-func initialize_glitch_systems():
+func initialize_glitch_systems() -> void:
 	# Initialize datamosh vectors
 	datamosh_vectors.clear()
 	for i in range(100):
@@ -129,7 +129,7 @@ func initialize_glitch_systems():
 # MAIN UPDATE LOOP
 # ===================
 
-func update_all_glitch_effects(delta):
+func update_all_glitch_effects(delta) -> void:
 	for i in range(demo_objects.size()):
 		var material = materials[i]
 		var obj = demo_objects[i]
@@ -199,7 +199,7 @@ func update_datamosh_effect(delta) -> Color:
 	accumulated_color /= datamosh_vectors.size()
 	return Color(accumulated_color.x, accumulated_color.y, accumulated_color.z, 0.8)
 
-func apply_datamosh_transform(obj: Node3D, delta):
+func apply_datamosh_transform(obj: Node3D, delta) -> void:
 	# Apply motion vector corruption to geometry
 	var corruption_amount = sin(time * 3.0) * glitch_intensity
 	if abs(corruption_amount) > 0.7:
@@ -209,7 +209,7 @@ func apply_datamosh_transform(obj: Node3D, delta):
 		obj.scale = Vector3.ONE
 		obj.rotation.z = 0.0
 
-func update_pixel_sort_effect(delta) -> Color:
+func update_pixel_sort_effect(_delta) -> Color:
 	# Update pixel sort simulation
 	var sort_triggered = sin(time * 2.0) > 0.8
 	
@@ -289,7 +289,7 @@ func buffer_overflow_effect(t) -> Color:
 		# Normal operation
 		return Color(0.1, 0.8, 0.1, 1.0)
 
-func apply_overflow_geometry(obj: Node3D, t):
+func apply_overflow_geometry(obj: Node3D, t) -> void:
 	# Apply geometric corruption during overflow
 	var overflow_detected = fmod(t * 30.0, 120.0) > 100.0
 	if overflow_detected:
@@ -508,7 +508,7 @@ func overflow_cascade_effect(t, index) -> Color:
 # UI AND CONTROLS
 # ===================
 
-func create_ui_controls():
+func create_ui_controls() -> void:
 	# Create simple UI for real-time control
 	var ui_layer = CanvasLayer.new()
 	add_child(ui_layer)
@@ -530,19 +530,19 @@ func create_ui_controls():
 	intensity_slider.value_changed.connect(_on_intensity_changed)
 	control_panel.add_child(intensity_slider)
 
-func set_glitch_strength(value: float):
+func set_glitch_strength(value: float) -> void:
 	glitch_intensity = value
 
-func set_corruption_rate(value: float):
+func set_corruption_rate(value: float) -> void:
 	corruption_rate = value
 
-func set_temporal_speed(value: float):  
+func set_temporal_speed(value: float) -> void:  
 	temporal_speed = value
 
-func _on_intensity_changed(value: float):
+func _on_intensity_changed(value: float) -> void:
 	glitch_intensity = value
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -550,7 +550,16 @@ func _input(event):
 				print("Auto-animation: ", auto_animate)
 			KEY_R:
 				initialize_glitch_systems()
-				print("🔄 Glitch systems reset!")
+				print("ðŸ”„ Glitch systems reset!")
 			KEY_G:
 				corruption_seed = randi()
-				print("🎲 New corruption seed: ", corruption_seed)
+				print("ðŸŽ² New corruption seed: ", corruption_seed)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

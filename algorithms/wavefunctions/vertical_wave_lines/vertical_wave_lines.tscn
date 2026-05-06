@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqu2pj1lvwb14"]
+
+[ext_resource type="Script" uid="uid://b3hn1gegk04t3" path="res://algorithms/wavefunctions/vertical_wave_lines/vertical_wave_lines.gd" id="1_script"]
+
+[node name="VerticalWaveLines" type="Node3D"]
+script = ExtResource("1_script")
+grid_size = Vector2i(40, 40)
+spacing = 0.3
+line_thickness = 0.08
+speed = 1.5
+frequency = 0.8
+amplitude = 2.5
+
+[node name="Camera3D" type="Camera3D" parent="."]

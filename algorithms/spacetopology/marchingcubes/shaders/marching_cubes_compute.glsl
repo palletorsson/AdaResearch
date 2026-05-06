@@ -3,9 +3,7 @@
 // Compute shader for GPU-accelerated marching cubes
 // Based on Paul Bourke's implementation but optimized for Godot
 
-local_size_x = 8,
-local_size_y = 8,
-local_size_z = 1;
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
 
 // Input/Output buffers
 layout(set = 0, binding = 0, std430) restrict readonly buffer DensityBuffer {
@@ -30,7 +28,7 @@ layout(set = 0, binding = 4, std430) restrict buffer CounterBuffer {
 };
 
 // Uniforms
-layout(set = 0, binding = 5, std430) uniform Params {
+layout(set = 0, binding = 5, std140) uniform Params {
     ivec3 grid_size;        // Size of the density grid
     vec3 voxel_scale;       // Scale of each voxel
     vec3 grid_offset;       // Offset of the grid in world space

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://simple_ant_v2"]
+
+[ext_resource type="Script" path="res://algorithms/swarmintelligence/ants_v2/SimpleAnt.gd" id="1_simpleant"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ant"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ant"]
+radius = 0.1
+height = 0.5
+
+[node name="SimpleAnt" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_simpleant")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.25, 0)
+shape = SubResource("CapsuleShape3D_ant")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.25, 0)
+mesh = SubResource("CapsuleMesh_ant")

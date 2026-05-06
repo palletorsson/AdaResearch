@@ -1,0 +1,5 @@
+A rigid body is a lie agreed upon — infinite stiffness, zero deformation. Real objects flex, fracture, compress. But the rigid approximation buys something extraordinary: rotation becomes a first-class citizen. Apply force off-center and translation couples with spin. The inertia tensor — a 3×3 matrix encoding how mass distributes around axes — determines everything. A wrench tumbles differently than a sphere. Same force, different geometry, different dance.
+
+Throw objects through an obstacle course of walls and platforms. Watch angular momentum conserve itself through collisions — energy transfers, direction shifts, but the total spin of the system holds. Noether's theorem made physical: every symmetry produces a conservation law. Rotational symmetry gives you angular momentum for free.
+
+The rigid body doesn't bend. It tumbles, bounces, scatters. Order encoded in geometry, chaos emerging from contact.

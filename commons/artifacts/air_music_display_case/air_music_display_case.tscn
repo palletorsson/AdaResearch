@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dair_music_display"]
+
+[ext_resource type="PackedScene" uid="uid://3gyw37r83hf1" path="res://commons/primitives/line/cube_lines.tscn" id="1_frame"]
+[ext_resource type="PackedScene" uid="uid://dph30nsq0u8xh" path="res://commons/audio/systems/air_points/SystemsMusicTest.tscn" id="2_airmusic"]
+[ext_resource type="Script" uid="uid://air_music_display_case" path="res://commons/artifacts/air_music_display_case/air_music_display_case.gd" id="3_script"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+size = Vector3(1.0, 0.04, 1.0)
+
+[node name="AirMusicDisplayCase" type="Node3D"]
+script = ExtResource("3_script")
+
+[node name="Frame" parent="." instance=ExtResource("1_frame")]
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.52, 0)
+mesh = SubResource("BoxMesh_base")
+
+[node name="AirMusicContent" parent="." instance=ExtResource("2_airmusic")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, -0.025, 0)

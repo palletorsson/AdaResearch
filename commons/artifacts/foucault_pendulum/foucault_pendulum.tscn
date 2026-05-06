@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://foucault_pendulum_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/foucault_pendulum/foucault_pendulum.gd" id="1_script"]
+
+[node name="FoucaultPendulum" type="Node3D"]
+script = ExtResource("1_script")
+pendulum_length = 8.0
+cone_radius = 0.08
+cone_height = 0.25
+wire_thickness = 0.008
+initial_amplitude = 0.4
+initial_direction = 0.0
+tip_hover_height = 0.02
+gravity = 9.81
+damping = 0.0002
+earth_rotation_rate = 0.05
+latitude = 45.0
+drive_enabled = true
+target_amplitude = 0.4
+drive_strength = 0.02
+gravity_spheres_enabled = false
+num_gravity_spheres = 0
+sphere_gravity_strength = 0.0
+sphere_radius = 0.25
+sphere_influence_radius = 2.0
+sphere_color = Color(0.6, 0.3, 0.9, 1)
+canvas_size = 6.0
+canvas_color = Color(0.95, 0.93, 0.88, 1)
+marker_color = Color(0.08, 0.06, 0.04, 1)
+marker_width = 0.02
+max_trail_points = 8000
+draw_height = 0.01
+show_frame = false
+sine_modulation_enabled = true
+sine_modulation_amplitude = 0.08
+sine_modulation_frequency = 0.3

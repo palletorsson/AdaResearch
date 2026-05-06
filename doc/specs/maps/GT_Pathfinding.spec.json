@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "GT_Pathfinding",
+  "home_sequence": "graphtheory",
+  "dimensions": {
+    "w": 7,
+    "d": 12
+  },
+  "signature": "pathfinding3d implements the maze as a navigable graph with visible algorithmic overlays \u2014 showing which nodes have been visited",
+  "style": "rams",
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 82,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 12
+      },
+      "centroid": [
+        2.975609756097561,
+        5.451219512195122
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 83,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

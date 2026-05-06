@@ -1,0 +1,25 @@
+{
+  "id": "gen02_petals_on_spikes",
+  "notes": "Spikes first then petals on the up faces \u2014 dragon.",
+  "seed": "icosahedron",
+  "seed_scale": 0.35,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "random_50",
+      "params": {
+        "distance": 0.4,
+        "scale": 0.6
+      }
+    },
+    {
+      "op": "petal_splay",
+      "selector": "up",
+      "params": {
+        "splay": 0.4,
+        "length": 0.3
+      }
+    }
+  ]
+}

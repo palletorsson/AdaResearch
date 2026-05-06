@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://b068w0w3jvbkb"]
+
+[ext_resource type="PackedScene" uid="uid://c7jy4m8vxk2nf" path="res://commons/infoboards_3d/base/HandheldInfoBoard.tscn" id="1_handheld"]
+[ext_resource type="PackedScene" uid="uid://ctwhm3q6gdovk" path="res://commons/infoboards_3d/boards/Forces/ForcesInfoBoardUI.tscn" id="2_ui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_forces"]
+resource_local_to_scene = true
+size = Vector3(1.125, 0.84375, 0.09)
+
+[sub_resource type="BoxMesh" id="BoxMesh_forces"]
+resource_local_to_scene = true
+size = Vector3(1.125, 0.84375, 0.09)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_forces"]
+resource_local_to_scene = true
+resource_name = "FrameMaterial"
+albedo_color = Color(0.15, 0.12, 0.13, 1)
+metallic = 0.7
+roughness = 0.35
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_interact"]
+resource_local_to_scene = true
+size = Vector3(1.035, 0.776, 0.319604)
+
+[node name="ForcesInfoBoard" instance=ExtResource("1_handheld")]
+
+[node name="CollisionShape3D" parent="BoardFrame" index="0"]
+shape = SubResource("BoxShape3D_forces")
+
+[node name="MeshInstance3D" parent="BoardFrame" index="1"]
+mesh = SubResource("BoxMesh_forces")
+
+[node name="Viewport2Din3D" parent="BoardFrame/TabletFrame" index="0"]
+scene = ExtResource("2_ui")
+scene_properties_keys = PackedStringArray("ForcesInfoBoard.gd", "AlgorithmInfoBoardBase.gd", "board_title", "category_color", "auto_advance", "auto_advance_delay")
+
+[node name="Frame" parent="BoardFrame/TabletFrame" index="1"]
+mesh = SubResource("BoxMesh_forces")
+surface_material_override/0 = SubResource("StandardMaterial3D_forces")
+
+[node name="CollisionShape3D" parent="InteractionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.24)
+shape = SubResource("BoxShape3D_interact")
+
+[node name="VRInputHandler" type="Node3D" parent="."]
+

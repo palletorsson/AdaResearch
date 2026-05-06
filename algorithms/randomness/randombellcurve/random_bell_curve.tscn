@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck8e7lf40pj0t"]
+
+[ext_resource type="Script" uid="uid://c5aqa0ajsid5k" path="res://algorithms/randomness/randombellcurve/RandomBellCurve.gd" id="1_misp8"]
+
+[node name="RandomBellCurve" type="Node3D"]
+script = ExtResource("1_misp8")

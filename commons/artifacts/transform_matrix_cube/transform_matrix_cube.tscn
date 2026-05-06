@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwx8qmyl2k7vd"]
+
+[ext_resource type="Script" path="res://commons/artifacts/transform_matrix_cube/transform_matrix_cube.gd" id="1_main"]
+
+[node name="TransformMatrixCube" type="Node3D"]
+script = ExtResource("1_main")

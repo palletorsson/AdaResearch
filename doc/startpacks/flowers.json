@@ -1,0 +1,174 @@
+{
+  "query": "Flowers",
+  "matched_topic": "flowers",
+  "pack_slug": "flowers",
+  "title": "Flowers",
+  "category": "nature",
+  "tags": [
+    "flowers",
+    "botanical",
+    "signals",
+    "morphology",
+    "artifacts"
+  ],
+  "overview": "Flowers sit between the broader nature-system DNA route and standalone artifact route. Use this pack when you want to build new flowers or extend flower behavior specifically. The stable core is: flowers are parameterized signal organisms whose morphology, symmetry, and perception effects should remain legible to the learner.",
+  "read_first": [
+    {
+      "path": "algorithms/nature_system/morphology/flower_morphology.gd",
+      "reason": "System-level flower morphology generator.",
+      "exists": true
+    },
+    {
+      "path": "commons/artifacts/botanical_flower/botanical_flower.gd",
+      "reason": "Standalone flower artifact implementation.",
+      "exists": true
+    },
+    {
+      "path": "commons/artifacts/flower_lab/flower_lab.gd",
+      "reason": "Flower-specific experiment surface.",
+      "exists": true
+    },
+    {
+      "path": "commons/artifacts/water_flowers/water_flowers.gd",
+      "reason": "Existing water flower artifact implementation.",
+      "exists": true
+    },
+    {
+      "path": "commons/flora/botanical_flower.gd",
+      "reason": "Core procedural flower generator with botanical taxonomy and presets.",
+      "exists": true
+    },
+    {
+      "path": "doc/NATURE_SYSTEM_PLAN.md",
+      "reason": "Design contract for flower meaning, toxicity, and transmutation.",
+      "exists": true
+    }
+  ],
+  "principles": [
+    "Flowers are signal critters: they are meant to convey information, medicine, toxicity, attraction, or perception shifts, not just act as decoration.",
+    "Morphology should stay parameter-legible: petal count, symmetry, curvature, stem height, color, and inflorescence should produce visible conceptual differences a learner can read.",
+    "The core generator is anatomically structured: stem, leaves, sepals, petals, stamens, pistil, and inflorescence order matter more than arbitrary mesh styling.",
+    "Use real botanical patterns when possible: radial vs bilateral symmetry, phyllotaxis, inflorescence type, and species-like presets are part of the teaching value.",
+    "Standalone flower artifacts should stay thin wrappers over the core generator or morphology system, forwarding meaningful parameters rather than duplicating flower-building logic.",
+    "Perception changes are part of the flower contract: pollen, color, and morphology can change what the player sees or understands, not only what the player looks at."
+  ],
+  "constraints": [
+    "Flowers are signal critters in the nature-system design, not just decoration.",
+    "Flower changes can be either standalone artifacts or nature-system morphology work; decide which route you are taking.",
+    "BotanicalFlower already exposes taxonomy-level controls such as flower form, symmetry, leaf placement, and inflorescence presets; prefer extending that model over inventing parallel parameter vocabularies.",
+    "Flower Lab is already teaching the most impactful parameters through VR sliders, so new principles should remain teachable through a small set of high-leverage controls."
+  ],
+  "first_moves": [
+    "Decide whether this flower belongs in commons/artifacts as a standalone scene or in algorithms/nature_system as generated morphology.",
+    "If the flower should affect player perception or medicine/toxicity, align it with the transmutation model first.",
+    "Check whether the desired change belongs in the core BotanicalFlower generator, the DNA-driven FlowerMorphology path, or only in a wrapper artifact."
+  ],
+  "deepwiki_url": "https://deepwiki.com/palletorsson/AdaResearch",
+  "deepwiki_topics": [
+    "Artifacts & Interactables",
+    "Map & Content Definition"
+  ],
+  "encyclopedia": [
+    {
+      "label": "Nature layer persistence API",
+      "route": "",
+      "source": "src/app/api/game/save-nature-layer/route.ts",
+      "reason": "Relevant if flower placement becomes part of painted map nature.",
+      "exists": true
+    }
+  ],
+  "history_hits": [
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "# Garden Session — 2026-03-19",
+      "score": "2"
+    },
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "# Garden Session — 2026-03-19",
+      "score": "2"
+    }
+  ],
+  "doc_hits": [
+    {
+      "path": "doc/LOD_TREE.json",
+      "snippet": "\"flower_of_life_floor\",",
+      "score": "5"
+    },
+    {
+      "path": "doc/NATURE_SYSTEM_PLAN.md",
+      "snippet": "- **Breed** it with a flower → hybrid organism → new ability",
+      "score": "5"
+    },
+    {
+      "path": "doc/ENTRY.md",
+      "snippet": "python tools/dev_start.py flowers",
+      "score": "2"
+    },
+    {
+      "path": "doc/reports/PROJECT_SPINE_WORLD_MAP_REPORT.md",
+      "snippet": "- MachineLearning_Evolving_Flowers",
+      "score": "2"
+    },
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "# Garden Session — 2026-03-19",
+      "score": "2"
+    },
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "# Garden Session — 2026-03-19",
+      "score": "2"
+    }
+  ],
+  "repo_hits": [
+    "commons/testing/capture_botanical_flowers.gd",
+    "commons/testing/capture_botanical_flowers.gd.uid",
+    "algorithms/machinelearning/evolvingflowers/README.md",
+    "algorithms/machinelearning/evolvingflowers/code_prompt.txt",
+    "algorithms/machinelearning/evolvingflowers/evolvingflowers.gd",
+    "algorithms/machinelearning/evolvingflowers/evolvingflowers.gd.uid",
+    "algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+    "algorithms/machinelearning/evolvingflowers/evolvingflowers_tutorial.gd"
+  ],
+  "grounded_wiki": {
+    "project_slug": "adaresearch-case-study",
+    "points": [],
+    "claims": [],
+    "turns": [
+      {
+        "session_id": "531f69cf-2ddc-41b2-9bdb-3d1a36046289",
+        "turn_index": 493,
+        "role": "assistant",
+        "text": "...ll three facade editor improvements are done. Let me take a quick screenshot to verify, then pivot to the flower system: The facade editor looks great with all improvements - search bar, category count badges, keyboard shortcuts, zone labels with color pills, \"Load Classical Preset\" button, element counts, quick action..."
+      },
+      {
+        "session_id": "531f69cf-2ddc-41b2-9bdb-3d1a36046289",
+        "turn_index": 498,
+        "role": "assistant",
+        "text": "...s session are all in place: Everything is in place. Let me also check the encyclopedia for blog posts and flower sequence: One missing map: `Flower_Water`. Let me create it quickly, then we can look at the full change summary: Now let me get a full picture of everything to commit across both repos: This is a massive se..."
+      },
+      {
+        "session_id": "531f69cf-2ddc-41b2-9bdb-3d1a36046289",
+        "turn_index": 495,
+        "role": "assistant",
+        "text": "The background capture agent for body progression maps couldn't get Bash permissions, but the flower system agent already successfully captured botanical flower images and copied them to the encyclopedia. All three major systems are now complete with blog posts and images. Here's the final tally of everything built thi..."
+      },
+      {
+        "session_id": "531f69cf-2ddc-41b2-9bdb-3d1a36046289",
+        "turn_index": 450,
+        "role": "user",
+        "text": "...based system we need to continue to think and realize a facade system. We need to continue to work on the flower system. All this using multiagent. What is best to do now?"
+      }
+    ]
+  },
+  "trust_order": [
+    "repo files",
+    "doc/ and docs/ contracts",
+    "session handoffs and session summaries",
+    "grounded wiki chat points and turns",
+    "encyclopedia routes and source files",
+    "DeepWiki overview"
+  ],
+  "generated_at": "2026-04-04T11:50:52+00:00"
+}

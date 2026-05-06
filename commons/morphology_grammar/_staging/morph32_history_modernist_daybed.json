@@ -1,0 +1,103 @@
+{
+  "id": "morph32_history_modernist_daybed",
+  "family": "history_furniture",
+  "notes": "History-modernism pass: a low modernist daybed with a strong horizontal plinth, offset head bolster, and one guarding side plane.",
+  "camera_yaw": 0.84,
+  "camera_pitch": 0.28,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.46,
+      0.34,
+      0.88
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "daybed_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.14,
+        "scale": 1.34
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "daybed_pad",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.12,
+        "scale": 0.86,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.08,
+          0.02
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "daybed_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.38,
+        "scale": 0.42,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.1,
+          0.18,
+          0.0
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "daybed_guard",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.64,
+        "scale": 0.32,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.06,
+          0.34,
+          0.16
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

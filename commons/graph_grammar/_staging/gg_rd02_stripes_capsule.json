@@ -1,0 +1,39 @@
+{
+  "id": "gg_rd02_stripes_capsule",
+  "notes": "DNA BRIDGE: Gray-Scott stripes pattern \u2192 graph \u2192 capsule render. Brain/fingerprint ridges materialized as green-teal capsule nodes following the V field.",
+  "seed": {
+    "rd": {
+      "preset": "stripes",
+      "grid_size": 54,
+      "iterations": 3500,
+      "seed": 3,
+      "threshold": 0.28,
+      "world_size": 1.8,
+      "height_amp": 0.35,
+      "node_radius": 0.03,
+      "origin": [
+        0,
+        0.2,
+        0
+      ]
+    }
+  },
+  "iterations": 0,
+  "rules": [],
+  "render_mode": "capsule",
+  "tag_colors": {
+    "rd": [
+      0.3,
+      0.6,
+      0.5
+    ],
+    "leaf": [
+      0.4,
+      0.85,
+      0.7
+    ]
+  },
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.45,
+  "max_nodes": 5000
+}

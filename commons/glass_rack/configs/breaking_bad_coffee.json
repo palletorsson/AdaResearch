@@ -1,0 +1,91 @@
+{
+	"rack_info": {
+		"name": "Breaking Bad Coffee Maker",
+		"description": "Multi-level cold drip coffee / distillation apparatus with metal frame",
+		"version": "1.0"
+	},
+	"layout": {
+		"segment_length": 0.08,
+		"tube_radius": 0.01
+	},
+	"frame": {
+		"enabled": true,
+		"height": 0.8,
+		"width": 0.4,
+		"depth": 0.3,
+		"pole_radius": 0.008,
+		"levels": 3,
+		"material": {
+			"color": [0.3, 0.3, 0.35, 1.0],
+			"metallic": 0.9,
+			"roughness": 0.3
+		}
+	},
+	"vessels": [
+		{
+			"id": "top_flask",
+			"type": "flask",
+			"position": [0, 0.7, 0],
+			"params": {
+				"radius": 0.06,
+				"neck_radius": 0.012,
+				"neck_length": 0.04
+			},
+			"contents": "water"
+		},
+		{
+			"id": "upper_spiral",
+			"type": "spiral",
+			"position": [0, 0.55, 0],
+			"params": {
+				"height": 0.12,
+				"spiral_radius": 0.04,
+				"tube_radius": 0.008,
+				"turns": 3
+			}
+		},
+		{
+			"id": "middle_flask",
+			"type": "flask",
+			"position": [0, 0.35, 0],
+			"params": {
+				"radius": 0.05,
+				"neck_radius": 0.01,
+				"neck_length": 0.03
+			},
+			"contents": "coffee_grounds"
+		},
+		{
+			"id": "lower_spiral",
+			"type": "spiral",
+			"position": [0, 0.2, 0],
+			"params": {
+				"height": 0.1,
+				"spiral_radius": 0.035,
+				"tube_radius": 0.008,
+				"turns": 4
+			}
+		},
+		{
+			"id": "collection_beaker",
+			"type": "beaker",
+			"position": [0, 0.02, 0],
+			"params": {
+				"radius": 0.045,
+				"height": 0.08
+			},
+			"contents": "coffee"
+		}
+	],
+	"connections": [
+		{"from": "top_flask", "to": "upper_spiral", "type": "drip"},
+		{"from": "upper_spiral", "to": "middle_flask", "type": "tube"},
+		{"from": "middle_flask", "to": "lower_spiral", "type": "drip"},
+		{"from": "lower_spiral", "to": "collection_beaker", "type": "tube"}
+	],
+	"materials": {
+		"glass_color": [0.9, 0.95, 1.0, 0.2],
+		"liquid_color": [0.4, 0.25, 0.1, 0.7],
+		"show_liquid": true
+	}
+}

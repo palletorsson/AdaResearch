@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/transforms/matrix_viewer/matrix_4x4_viewer.gd" id="1_main"]
+
+[node name="Matrix4x4Viewer" type="Node3D"]
+script = ExtResource("1_main")

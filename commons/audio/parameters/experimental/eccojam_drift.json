@@ -1,0 +1,60 @@
+{
+    "_metadata": {
+        "sound_type": "eccojam_drift",
+        "display_name": "Eccojam Drift",
+        "description": "Oneohtrix Point Never / Chuck Person Eccojams-inspired. Slowed loops, heavy reverb, hypnotic repetition, vaporwave nostalgia.",
+        "category": "experimental",
+        "tags": ["opn", "vaporwave", "eccojam", "slowed", "reverb", "nostalgia"]
+    },
+    "parameters": {
+        "playback_speed": {
+            "min": 0.25,
+            "max": 1.0,
+            "value": 0.5,
+            "step": 0.05,
+            "description": "Playback speed multiplier"
+        },
+        "pitch_shift_semitones": {
+            "min": -24.0,
+            "max": 0.0,
+            "value": -12.0,
+            "step": 1.0,
+            "description": "Pitch shift in semitones"
+        },
+        "reverb_decay": {
+            "min": 1.0,
+            "max": 15.0,
+            "value": 8.0,
+            "step": 0.5,
+            "description": "Reverb decay time in seconds"
+        },
+        "reverb_wet": {
+            "min": 0.2,
+            "max": 0.95,
+            "value": 0.7,
+            "step": 0.05,
+            "description": "Reverb wet/dry mix"
+        },
+        "tape_warble_rate": {
+            "min": 0.05,
+            "max": 1.0,
+            "value": 0.2,
+            "step": 0.05,
+            "description": "Tape warble LFO rate"
+        },
+        "tape_warble_depth": {
+            "min": 0.0,
+            "max": 50.0,
+            "value": 15.0,
+            "step": 2.0,
+            "description": "Tape warble depth in cents"
+        },
+        "duration": {
+            "min": 4.0,
+            "max": 20.0,
+            "value": 10.0,
+            "step": 1.0,
+            "description": "Total duration in seconds"
+        }
+    }
+}

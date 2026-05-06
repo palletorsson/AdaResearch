@@ -1,0 +1,45 @@
+{
+  "id": "mg_op17_capsule_blossom_bonsai",
+  "notes": "UNDERUSED-OPS PASS: a small pedestal is extruded first, then an L-system canopy grows from the top and blossoms are scattered onto the tips. Makes the branch operator read as a whole artifact.",
+  "seed": "cylinder",
+  "seed_scale": 0.5,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.22,
+        "scale": 0.68
+      }
+    },
+    {
+      "op": "lsystem_branch",
+      "selector": "tag:extruded_top",
+      "params": {
+        "preset": "fractal_plant",
+        "lsystem_generations": 3,
+        "step_length": 0.16,
+        "step_taper": 0.86,
+        "start_radius": 0.024,
+        "angle_degrees": 24,
+        "tube_segments": 4,
+        "tube_rings": 3,
+        "max_branches": 40
+      }
+    },
+    {
+      "op": "scatter",
+      "selector": "tag:lsys_tip",
+      "params": {
+        "shape": "sphere",
+        "density": 1.0,
+        "min_size": 0.018,
+        "max_size": 0.032,
+        "offset": 0.01,
+        "align_to_normal": true,
+        "seed_value": 9
+      }
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+    "description": "Underwater Lab with submerged beats - deep pressure with muffled drums",
+    "category": "sci_fi_lofi_beats",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -18,
+            "bus": "Pressure",
+            "parameters": {
+                "base_freq": 35.0
+            }
+        },
+        {
+            "sound_id": "techno_noir.rain_segment",
+            "volume_db": -18,
+            "bus": "Water",
+            "parameters": {
+                "intensity": 0.2
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -16,
+            "bus": "Bass"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "house_drums.909_kick"
+            ],
+            "interval_range": [
+                2.0,
+                5.0
+            ],
+            "volume_range": [
+                -20,
+                -14
+            ],
+            "bus": "Kicks"
+        },
+        {
+            "sound_pool": [
+                "house_drums.909_hihat_closed"
+            ],
+            "interval_range": [
+                0.8,
+                2.0
+            ],
+            "volume_range": [
+                -28,
+                -22
+            ],
+            "bus": "HiHats"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren"
+            ],
+            "interval_range": [
+                6.0,
+                15.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Sonar"
+        }
+    ],
+    "buses": {
+        "Pressure": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 150
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.7
+                }
+            ]
+        },
+        "Water": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 1200
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.7,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "Bass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 80
+                }
+            ]
+        },
+        "Kicks": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 400
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.5
+                }
+            ]
+        },
+        "HiHats": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 4000
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "Sonar": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.6,
+                    "tap1_delay_ms": 800,
+                    "tap1_level_db": -4.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.8
+                }
+            ]
+        }
+    }
+}

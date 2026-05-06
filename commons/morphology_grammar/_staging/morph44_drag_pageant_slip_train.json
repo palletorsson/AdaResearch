@@ -1,0 +1,131 @@
+{
+  "id": "morph44_drag_pageant_slip_train",
+  "family": "drag_pageant",
+  "notes": "Transform-led pageant look: a narrow gown opens into a slipped side train, with a tilted wig slab and one restrained shoulder bloom.",
+  "camera_yaw": 0.78,
+  "camera_pitch": 0.31,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.74,
+      1.34,
+      0.54
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "slip_column",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.88,
+        "scale": 0.62
+      },
+      "child_role": "garment",
+      "budget_factor": 0.56
+    },
+    {
+      "id": "slip_train",
+      "when": {
+        "role": "garment",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.22
+      },
+      "selector": "back",
+      "op": "rotate_panel",
+      "params": {
+        "axis": "tangent",
+        "angle_deg": -18.0,
+        "tangent_offset": -0.18,
+        "bitangent_offset": -0.12,
+        "normal_offset": 0.04
+      },
+      "child_role": "garment",
+      "budget_factor": 0.46
+    },
+    {
+      "id": "slip_front_cut",
+      "when": {
+        "role": "garment",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.22
+      },
+      "selector": "front",
+      "op": "inset_panel",
+      "params": {
+        "scale": 0.74,
+        "depth": 0.08
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "slip_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.2,
+        "scale": 0.48
+      },
+      "child_role": "hair",
+      "budget_factor": 0.52
+    },
+    {
+      "id": "slip_wig",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.2
+      },
+      "selector": "up",
+      "op": "rotate_panel",
+      "params": {
+        "axis": "bitangent",
+        "angle_deg": 14.0,
+        "tangent_offset": -0.08,
+        "normal_offset": 0.08
+      },
+      "child_role": "hair",
+      "budget_factor": 0.32
+    },
+    {
+      "id": "slip_shoulder",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.26,
+        "scale": 0.32,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.02,
+          0.18,
+          0.08
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

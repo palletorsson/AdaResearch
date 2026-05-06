@@ -1,0 +1,132 @@
+[gd_scene load_steps=4 format=4 uid="uid://bqxvhxqxqxqxd"]
+
+[ext_resource type="Script" uid="uid://mnekcb32nfel" path="res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.gd" id="1_script"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayUI.gd" id="2_ui"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glass"]
+transparency = 1
+albedo_color = Color(0.2, 0.6, 0.9, 0.4)
+metallic = 0.5
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.2, 0.6, 0.9, 1)
+emission_energy_multiplier = 0.5
+rim_enabled = true
+rim = 0.5
+
+[node name="DelaunayTriangulation3DCell" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_glass")
+script = ExtResource("1_script")
+generations = 5
+initial_points = 25
+subdivision_factor = 0.7
+randomness = 0.4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ui")
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Delaunay Cell"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="GenerationsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Generations: 5"
+
+[node name="GenerationsSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+
+[node name="PointsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Initial Points: 25"
+
+[node name="PointsSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 50.0
+value = 25.0
+
+[node name="SubdivisionLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Subdivision: 0.7"
+
+[node name="SubdivisionSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 0.9
+step = 0.05
+value = 0.7
+
+[node name="RandomnessLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Randomness: 0.4"
+
+[node name="RandomnessSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+value = 0.4
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RotateCheck" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Auto Rotate"
+
+[node name="RegenerateButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate"
+
+[connection signal="drag_ended" from="UI/Control/Panel/VBoxContainer/GenerationsSlider" to="UI/Control" method="_on_generations_drag_ended"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/GenerationsSlider" to="UI/Control" method="_on_generations_changed"]
+[connection signal="drag_ended" from="UI/Control/Panel/VBoxContainer/PointsSlider" to="UI/Control" method="_on_points_drag_ended"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/PointsSlider" to="UI/Control" method="_on_points_changed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/SubdivisionSlider" to="UI/Control" method="_on_subdivision_changed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/RandomnessSlider" to="UI/Control" method="_on_randomness_changed"]
+[connection signal="toggled" from="UI/Control/Panel/VBoxContainer/RotateCheck" to="UI/Control" method="_on_rotate_toggled"]
+[connection signal="pressed" from="UI/Control/Panel/VBoxContainer/RegenerateButton" to="UI/Control" method="_on_regenerate_pressed"]

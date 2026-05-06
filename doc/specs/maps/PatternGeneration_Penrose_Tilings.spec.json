@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PatternGeneration_Penrose_Tilings",
+  "home_sequence": "patterngeneration",
+  "dimensions": {
+    "w": 9,
+    "d": 9
+  },
+  "signature": null,
+  "style": "escher",
+  "echoes": [],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 79,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 9
+      },
+      "centroid": [
+        4.0,
+        3.9746835443037973
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "koch_curve"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 80,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

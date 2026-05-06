@@ -1,0 +1,58 @@
+{
+  "id": "gm02_vase_in_tapered_mould",
+  "topology": "glass_blow",
+  "radius": 0.5,
+  "rings": 16,
+  "segments": 22,
+  "pin_top_fraction": 0.1,
+  "preinflate": 0.9,
+  "stiffness": 0.45,
+  "damping": 0.994,
+  "gravity": [
+    0,
+    -5.5,
+    0
+  ],
+  "floor_y": -3.5,
+  "constraint_passes": 5,
+  "steps": 260,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "mould": {
+    "type": "tapered_cylinder",
+    "mode": "contain",
+    "center": [
+      0,
+      1.5,
+      0
+    ],
+    "radius_top": 0.25,
+    "radius_bottom": 0.7,
+    "y_top": 2.1,
+    "y_bottom": 0.4
+  },
+  "camera_yaw": 0.35,
+  "camera_pitch": 0.12,
+  "render": {
+    "color": [
+      0.55,
+      0.72,
+      0.65,
+      0.9
+    ],
+    "roughness": 0.4,
+    "particle_radius": 0.018,
+    "show_wires": true,
+    "wire_color": [
+      0.15,
+      0.25,
+      0.22
+    ],
+    "double_sided": true
+  },
+  "layout": "frozen_form",
+  "notes": "GLASS MEETS MOULD: glass in a tapered mould \u2014 narrow top (r=0.25), wide bottom (r=0.7). Takes the shape of a classical amphora \u2014 narrow neck, bulging body. Same DNA as gl02 but with a mould: vessel proportions come from the mould cavity, not force balance."
+}

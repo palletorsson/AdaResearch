@@ -1,0 +1,129 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Trans_AxisDecomposition",
+  "home_sequence": "transformation",
+  "dimensions": {
+    "w": 9,
+    "d": 16
+  },
+  "signature": "x_translation_cube and z_translation_cube isolate single-axis displacement; translation_cube_demo presents decomposition as a demonstrable principle; toruscylinder introduces a non-rectilinear form to test whether axis logic holds for curved geometry; pickup_gate#pickups sequences the learning through gated progression.",
+  "style": null,
+  "echoes": [],
+  "density": 0.277,
+  "breath_zones": [
+    {
+      "size": 13,
+      "bounds": {
+        "x": 0,
+        "z": 7,
+        "w": 3,
+        "d": 5
+      },
+      "centroid": [
+        0.9230769230769231,
+        8.923076923076923
+      ]
+    },
+    {
+      "size": 9,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 3,
+        "d": 3
+      },
+      "centroid": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "size": 7,
+      "bounds": {
+        "x": 6,
+        "z": 7,
+        "w": 3,
+        "d": 3
+      },
+      "centroid": [
+        7.142857142857143,
+        7.857142857142857
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 2,
+      "token": "toruscylinder"
+    },
+    {
+      "x": 3,
+      "z": 6,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 11,
+      "token": "translation_cube_demo"
+    },
+    {
+      "x": 0,
+      "z": 12,
+      "token": "cube_scene"
+    },
+    {
+      "x": 1,
+      "z": 12,
+      "token": "cube_scene"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "cube_scene"
+    },
+    {
+      "x": 0,
+      "z": 13,
+      "token": "cube_scene"
+    },
+    {
+      "x": 2,
+      "z": 13,
+      "token": "cube_scene"
+    },
+    {
+      "x": 0,
+      "z": 14,
+      "token": "cube_scene"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "cube_scene"
+    },
+    {
+      "x": 0,
+      "z": 15,
+      "token": "cube_scene"
+    },
+    {
+      "x": 1,
+      "z": 15,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 2,
+      "z": 15,
+      "token": "cube_scene"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 13,
+    "walkable_cells": 47,
+    "breath_zone_count": 3,
+    "unique_tokens": 5
+  }
+}

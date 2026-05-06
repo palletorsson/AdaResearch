@@ -179,6 +179,7 @@ func _build_fairy_lights() -> void:
 
 	var bulb_mesh := SphereMesh.new()
 	bulb_mesh.radius = bulb_radius
+	bulb_mesh.height = bulb_radius * 2.0
 	bulb_mesh.radial_segments = 14
 	bulb_mesh.rings = 8
 
@@ -302,3 +303,12 @@ void fragment() {
 	ROUGHNESS = 0.35;
 }
 """
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

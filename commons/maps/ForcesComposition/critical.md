@@ -1,0 +1,15 @@
+# Superposition is a politics — net force, addition of pulls, and the decision to add
+
+The sum of forces determines the acceleration. Two pulls on one body become a single resultant; three pulls become a different resultant; any number of pulls sum into one net vector that Newton's second law applies to. Superposition is the rule, and it feels like arithmetic — forces are added because forces add, tautologically.
+
+Bruno Latour's actor-network theory argues that every apparent unity is the work of summing many heterogeneous contributions. A body moving under many forces is an actor-network whose motion is the emergent result of many pulls. The net force is a description of the result, not a cause of it. The forces that add to produce the net force are the actors. The body is the site where their summation is registered as motion.
+
+The map stages superposition as an uncluttered workbench. Two draggable arrows, A and B, sit in a shared workspace. A panel next to them shows their addition, subtraction, dot product, cross product, projection, and reflection simultaneously, each computed from the current positions. Rotating A rewrites every derived quantity live. Labels on each output name the operation and the formula, and the labels are deliberate: the operations are the work being done, and naming them makes the work visible.
+
+A small demonstration on one side extends the table into dynamics. Several force arrows attach to a single body; their sum is drawn in a contrasting colour as the net force. Adding or removing a force changes the sum immediately. The body accelerates along the net vector, so the learner sees superposition as the rule that turns any set of pulls into a single trajectory. Latour's insight lands directly: the body's trajectory is the summary of the pulls, not a fact about the body itself.
+
+The politics of superposition are in its generality. The rule says that any set of forces can be summed. It does not distinguish between forces the learner wants and forces the learner does not. A body experiences the net of every force acting on it, not the net of the forces it would have chosen. The superposition principle is democratic in an exhausting sense: every contribution counts, and the count is addition.
+
+The workbench stages the generality as a feature rather than as a limit. The panel's six operations — addition, subtraction, dot product, cross product, projection, reflection — are the complete toolkit the sequence's earlier maps built. The map consolidates them into a single table and shows that every operation is available on any pair of vectors, regardless of where the vectors came from. The consolidation is the closing gesture of the pure-vector sub-sequence.
+
+Within the sequence, Composition is the checkpoint. Every vector operation the learner has seen is here, simultaneously, on one workbench. The next maps — Systems, Chaos, Arena — take this toolkit and apply it at population scale. The toolkit is complete; the politics of what to do with it are about to become the substance of the work.

@@ -1,0 +1,31 @@
+{
+  "id": "ls01_algae",
+  "axiom": "A",
+  "rules": {
+    "A": "AB",
+    "B": "A"
+  },
+  "iterations": 8,
+  "angle_deg": 0,
+  "step_len": 0.05,
+  "interpretation": "primitives",
+  "primitive_shape": "cube",
+  "primitive_size": 0.03,
+  "color_trunk": [
+    0.2,
+    0.4,
+    0.3
+  ],
+  "color_tip": [
+    0.6,
+    0.85,
+    0.4
+  ],
+  "camera_yaw": 0.0,
+  "camera_pitch": 0.05,
+  "layout": "linear",
+  "dna_connections": [
+    "primitive_stack"
+  ],
+  "notes": "Lindenmayer's original algae model (1968). A -> AB, B -> A. Renders as a row of cubes \u00e2\u20ac\u201d the linear DNA of cell division. Fibonacci length growth."
+}

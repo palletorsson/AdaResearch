@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "auto_joystick_joystick_freq_5d5c0b",
+    "description": "JOYSTICK — x:freq y:threshold, color #88ff44",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "joystick",
+      "label": "FRE/THR",
+      "color": "#88ff44",
+      "parameter_x": "freq",
+      "parameter_y": "threshold"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "gg00_dense_branching",
+  "notes": "Dense 5-child branching, fewer generations \u00e2\u20ac\u201d bush.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 3,
+  "color": [
+    0.3,
+    0.4,
+    0.2
+  ],
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 5,
+        "length": 0.45,
+        "spread_deg": 55,
+        "radius_decay": 0.6,
+        "jitter": 0.4
+      }
+    }
+  ]
+}

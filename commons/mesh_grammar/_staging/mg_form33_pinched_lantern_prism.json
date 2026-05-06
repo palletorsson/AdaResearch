@@ -1,0 +1,48 @@
+{
+  "id": "mg_form33_pinched_lantern_prism",
+  "notes": "SELECT-TRANSFORM-ARTICULATE PASS: prism shaft is extruded, then the top is scaled down and inset before a small lantern is lifted out. More about narrowing and re-emergence than one continuous tower.",
+  "seed": "prism",
+  "seed_scale": 0.44,
+  "generations": 2,
+  "camera_pitch": 0.26,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.26,
+        "scale": 0.88,
+        "top_tag": "shaft_top",
+        "side_tag": "shaft_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:shaft_top",
+      "params": {
+        "scale": 0.72
+      }
+    },
+    {
+      "op": "inset",
+      "selector": "tag:shaft_top",
+      "params": {
+        "amount": 0.14,
+        "inner_tag": "lantern_core",
+        "border_tag": "lantern_rim"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:lantern_core",
+      "params": {
+        "distance": 0.14,
+        "scale": 0.56,
+        "top_tag": "lantern_top",
+        "side_tag": "lantern_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Wavefunctions_Colors",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 9,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.009,
+  "breath_zones": [
+    {
+      "size": 104,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 12
+      },
+      "centroid": [
+        3.9903846153846154,
+        5.461538461538462
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 107,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

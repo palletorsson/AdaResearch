@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Paint",
+  "home_sequence": "color",
+  "dimensions": {
+    "w": 11,
+    "d": 17
+  },
+  "signature": "ball_painting_demo is the primary interaction \u2014 spheres as canvases receiving color through physics; albers_wall_gallery provides the theoretical anchor",
+  "style": null,
+  "echoes": [],
+  "density": 0.016,
+  "breath_zones": [
+    {
+      "size": 183,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 17
+      },
+      "centroid": [
+        4.978142076502732,
+        7.956284153005464
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "ball_painting_demo"
+    },
+    {
+      "x": 5,
+      "z": 14,
+      "token": "albers_wall_gallery"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 186,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

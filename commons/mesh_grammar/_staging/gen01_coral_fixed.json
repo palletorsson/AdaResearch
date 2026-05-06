@@ -1,0 +1,24 @@
+{
+  "id": "gen01_coral_fixed",
+  "notes": "Coral with correct tag \u2014 inset then extrude the inner face.",
+  "seed": "sphere",
+  "seed_scale": 0.55,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "random_30",
+      "params": {
+        "amount": 0.12
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:inset",
+      "params": {
+        "distance": 0.2,
+        "scale": 1.0
+      }
+    }
+  ]
+}

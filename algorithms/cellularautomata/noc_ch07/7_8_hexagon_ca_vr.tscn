@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bkjeij3em1l55"]
 
-[ext_resource type="Script" path="res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bcwoqp33njwe4" path="res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.gd" id="1_script"]
 
 [node name="HexagonCAVR" type="Node3D"]
 script = ExtResource("1_script")
+hex_size = 0.5
+max_generations = 10
+layer_height = 0.3

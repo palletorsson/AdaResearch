@@ -1,0 +1,120 @@
+{
+  "map_info": {
+    "name": "Example Branch",
+    "lookup_name": "_Example_Branch",
+    "description": "An L-shaped map with a branching east wing. The main corridor teaches, the branch invites exploration, and the dead-end reflects before the player returns to exit.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 8,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "beginner",
+      "category": "example",
+      "estimated_time": "3-4 minutes",
+      "learning_objectives": [
+        "Example map — test only"
+      ]
+    },
+    "title": "The Branch That Returns"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "_Example_Branch - L-shaped exploration",
+    "layout": "9x8 L-shape: main corridor (cols 0-4) runs full depth, east wing (cols 4-8) branches at row 4.",
+    "objective": "Demonstrate branching layout with exploration and return.",
+    "key_elements": [
+      "Spawn at (1,0) facing south",
+      "CoordinateSystem3M at (2,2) — teaching",
+      "East wing branches at row 4 — all h=1, fully walkable",
+      "perspective_lines at (7,4) in east wing — exploration",
+      "dark_sphere + ds at (2,6) — reflection",
+      "Teleporter at (2,7) on void"
+    ]
+  },
+  "subtitles": {
+    "branch": "Every path not taken remains open."
+  },
+  "lighting": {
+    "ambient_color": [
+      0.35,
+      0.35,
+      0.45
+    ],
+    "ambient_energy": 0.5,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.85
+      ],
+      "energy": 1.0
+    }
+  },
+  "settings": {
+    "enter_type": "I",
+    "cube_size": 1,
+    "gutter": 0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": false,
+    "initial_tile_visibility": "hidden_except_corners",
+    "background": {
+      "type": "sky",
+      "color": [
+        0.15,
+        0.2,
+        0.5
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","0","0","0","0"],
+      ["1","1","1","1","1","0","0","0","0"],
+      ["1","1","1","1","1","0","0","0","0"],
+      ["1","1","1","1","1","0","0","0","0"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","0","0","0","0"],
+      ["1","1","1","1","1","0","0","0","0"],
+      ["0","0","0","0","0","0","0","0","0"]
+    ],
+    "utilities": [
+      [" ","sp"," "," ","an:180"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," ","t"," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," ","CoordinateSystem3M"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" ","cube_scene"," "," "," "," "," ","perspective_lines"," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," ","dark_sphere"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

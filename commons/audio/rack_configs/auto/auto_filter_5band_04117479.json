@@ -1,0 +1,123 @@
+{
+  "rack_info": {
+    "name": "5-Band Filter",
+    "description": "5 parametric bands spread log-geometrically 60 Hz to 8 kHz.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "archetype": "filter",
+    "seed": 68252793
+  },
+  "layout": {
+    "padding_px": 16,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "lbl"
+    ],
+    [
+      "f0",
+      "f1",
+      "f2",
+      "f3",
+      "f4"
+    ],
+    [
+      "g0",
+      "g1",
+      "g2",
+      "g3",
+      "g4"
+    ]
+  ],
+  "control_definitions": {
+    "lbl": {
+      "type": "label",
+      "text": "5-BAND EQ",
+      "font_size": 18
+    },
+    "f0": {
+      "type": "slv",
+      "label": "60Hz",
+      "parameter": "freq_0",
+      "min": 30.0,
+      "max": 120.0,
+      "default": 60.0
+    },
+    "g0": {
+      "type": "knob",
+      "label": "GAIN",
+      "parameter": "gain_0",
+      "min": -12.0,
+      "max": 12.0,
+      "default": 0.0
+    },
+    "f1": {
+      "type": "slv",
+      "label": "203Hz",
+      "parameter": "freq_1",
+      "min": 101.94265469082735,
+      "max": 407.7706187633094,
+      "default": 203.8853093816547
+    },
+    "g1": {
+      "type": "knob",
+      "label": "GAIN",
+      "parameter": "gain_1",
+      "min": -12.0,
+      "max": 12.0,
+      "default": 0.0
+    },
+    "f2": {
+      "type": "slv",
+      "label": "692Hz",
+      "parameter": "freq_2",
+      "min": 346.4101615137755,
+      "max": 1385.640646055102,
+      "default": 692.820323027551
+    },
+    "g2": {
+      "type": "knob",
+      "label": "GAIN",
+      "parameter": "gain_2",
+      "min": -12.0,
+      "max": 12.0,
+      "default": 0.0
+    },
+    "f3": {
+      "type": "slv",
+      "label": "2354Hz",
+      "parameter": "freq_3",
+      "min": 1177.1323825530849,
+      "max": 4708.5295302123395,
+      "default": 2354.2647651061698
+    },
+    "g3": {
+      "type": "knob",
+      "label": "GAIN",
+      "parameter": "gain_3",
+      "min": -12.0,
+      "max": 12.0,
+      "default": 0.0
+    },
+    "f4": {
+      "type": "slv",
+      "label": "8000Hz",
+      "parameter": "freq_4",
+      "min": 4000.0000000000005,
+      "max": 16000.000000000002,
+      "default": 8000.000000000001
+    },
+    "g4": {
+      "type": "knob",
+      "label": "GAIN",
+      "parameter": "gain_4",
+      "min": -12.0,
+      "max": 12.0,
+      "default": 0.0
+    }
+  }
+}

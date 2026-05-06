@@ -1,0 +1,27 @@
+{
+  "rack_info": {
+    "name": "Spiral Tube",
+    "description": "Simple spiral glass tube - classic lab condenser coil",
+    "system": "glass"
+  },
+  "layout": {
+    "segment_length": 0.1,
+    "tube_radius": 0.012
+  },
+  "path": "spiral",
+  "materials": {
+    "glass_color": [
+      0.85,
+      0.92,
+      1.0,
+      0.3
+    ],
+    "liquid_color": [
+      0.3,
+      0.7,
+      0.5,
+      0.5
+    ],
+    "show_liquid": true
+  }
+}

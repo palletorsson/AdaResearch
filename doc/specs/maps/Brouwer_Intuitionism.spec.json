@@ -1,0 +1,66 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Brouwer_Intuitionism",
+  "home_sequence": "foundationscrisis",
+  "dimensions": {
+    "w": 11,
+    "d": 14
+  },
+  "signature": "constructive_proof demonstrates the difference between classical and constructive existence; excluded_middle_demo lets the learner experience what's lost (and gained) when excluded middle is rejected; brouwer_choice_sequence shows the free-choice alternative.",
+  "style": null,
+  "echoes": [],
+  "density": 0.056,
+  "breath_zones": [
+    {
+      "size": 19,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 3
+      },
+      "centroid": [
+        5.0,
+        0.47368421052631576
+      ]
+    },
+    {
+      "size": 13,
+      "bounds": {
+        "x": 0,
+        "z": 12,
+        "w": 11,
+        "d": 2
+      },
+      "centroid": [
+        5.0,
+        12.846153846153847
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 4,
+      "token": "excluded_middle_demo"
+    },
+    {
+      "x": 9,
+      "z": 4,
+      "token": "constructive_proof"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "brouwer_choice_sequence"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 54,
+    "breath_zone_count": 2,
+    "unique_tokens": 3
+  }
+}

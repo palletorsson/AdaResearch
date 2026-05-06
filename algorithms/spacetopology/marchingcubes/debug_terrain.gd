@@ -3,20 +3,19 @@
 
 extends SceneTree
 
-func _ready():
+func _ready() -> void:
 	print("🔍 DETAILED MARCHING CUBES DIAGNOSTIC")
-	print("=" * 60)
+ 
 	
 	test_density_consistency()
 	test_marching_cubes_basic()
 	test_chunk_boundaries()
-	
-	print("=" * 60)
+ 
 	quit()
 
-func test_density_consistency():
+func test_density_consistency() -> void:
 	print("\n🧪 TEST 1: Density Calculation Consistency")
-	print("-" * 40)
+ 
 	
 	var terrain_gen = TerrainGenerator.new()
 	terrain_gen.configure_terrain({
@@ -43,9 +42,9 @@ func test_density_consistency():
 		else:
 			print("  ✅ Valid density")
 
-func test_marching_cubes_basic():
+func test_marching_cubes_basic() -> void:
 	print("\n🧪 TEST 2: Basic Marching Cubes Algorithm")
-	print("-" * 40)
+ 
 	
 	var mc = MarchingCubesGenerator.new()
 	
@@ -95,9 +94,9 @@ func test_marching_cubes_basic():
 			else:
 				print("    ✅ Triangle %d valid" % i)
 
-func test_chunk_boundaries():
+func test_chunk_boundaries() -> void:
 	print("\n🧪 TEST 3: Chunk Boundary Analysis")
-	print("-" * 40)
+ 
 	
 	var terrain_gen = TerrainGenerator.new()
 	terrain_gen.configure_terrain({

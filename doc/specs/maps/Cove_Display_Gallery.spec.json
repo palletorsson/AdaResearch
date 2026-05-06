@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Cove_Display_Gallery",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 5,
+    "d": 55
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 272,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 55
+      },
+      "centroid": [
+        1.9963235294117647,
+        27.283088235294116
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 274,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

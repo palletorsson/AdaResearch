@@ -1,0 +1,37 @@
+{
+  "id": "mg_form31_slipped_canopy_cube",
+  "notes": "SELECT-TRANSFORM-ARTICULATE PASS: top face becomes a lifted canopy by inset, rotate, then light extrusion. Tests whether transform can produce relational slip instead of only height.",
+  "seed": "cube",
+  "seed_scale": 0.62,
+  "generations": 2,
+  "camera_pitch": 0.3,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.18,
+        "inner_tag": "canopy_core",
+        "border_tag": "canopy_rim"
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:canopy_core",
+      "params": {
+        "angle_degrees": 18
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:canopy_core",
+      "params": {
+        "distance": 0.07,
+        "scale": 1.02,
+        "top_tag": "canopy_top",
+        "side_tag": "canopy_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

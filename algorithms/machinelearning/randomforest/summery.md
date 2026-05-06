@@ -1,0 +1,3 @@
+The `Random Forest Visualization` sandbox is a small theatre of learning. Within this floating promenade, the scene `random_forest_visualization.tscn` and its companion script `random_forest_visualization.gd` turns gradients into drift and pulse.
+
+Curious fingertips over `num_trees`, `max_depth`, `min_samples_split`, `max_features` change the rhythm of the system in an instant. Behind the scrim, functions such as `_init()`, `train()`, `build_tree()` keep the pulse steady. Helper forms like `DecisionTreeNode`, `DecisionTree` hold memory and meaning between beats. Every reset becomes another verse in the same idea.

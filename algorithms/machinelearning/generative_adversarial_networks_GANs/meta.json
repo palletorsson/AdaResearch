@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_generative_adversarial_networks_GANs",
+  "title": "Generative Adversarial Networks (GANs)",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/generative_adversarial_networks_GANs.tscn",
+  "script": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/README.md",
+    "tutorial": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/generative_adversarial_networks_GANs_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/summery.md"
+  },
+  "summary": "The `Generative Adversarial Networks (GANs)` sandbox investigates concepts from Generative Adversarial Networks (GANs) inside a real-time Godot lab.",
+  "keywords": [
+    "animate",
+    "competition",
+    "create",
+    "discriminator",
+    "feedback",
+    "flow"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

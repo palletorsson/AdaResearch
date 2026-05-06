@@ -1,0 +1,67 @@
+{
+  "id": "machinelearning_anomaly_detection",
+  "title": "Anomaly Detection Sandbox",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
+  "script": "res://algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/anomaly_detection/README.md",
+    "tutorial": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/anomaly_detection/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/anomaly_detection/summery.md"
+  },
+  "summary": "Synthetic 2D dataset with three anomaly scoring heuristics (z-score, isolation radius, autoencoder-style error) and live threshold visualisation.",
+  "keywords": [
+    "machine learning",
+    "anomaly detection",
+    "outliers",
+    "visualisation",
+    "z-score"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-10 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Static environment; only point scaling animates when thresholds change.",
+    "interaction": "Helper methods can be bound to VR controls for mode switching and reseeding.",
+    "performance": "<100 MeshInstance3D nodes and one translucent disc; trivial on desktop standalone."
+  },
+  "parameters": [
+    {
+      "name": "z_score_threshold",
+      "type": "float",
+      "default": 2.4,
+      "description": "Sensitivity for the |z\u2093| + |z\u1d67| detector."
+    },
+    {
+      "name": "isolation_radius_threshold",
+      "type": "float",
+      "default": 3.4,
+      "description": "Radius cutoff for the isolation heuristic."
+    },
+    {
+      "name": "autoencoder_error_threshold",
+      "type": "float",
+      "default": 1.1,
+      "description": "Accepted reconstruction error before flagging anomalies."
+    },
+    {
+      "name": "anomaly_scale_multiplier",
+      "type": "float",
+      "default": 1.35,
+      "description": "Visual scale boost applied to flagged points."
+    }
+  ],
+  "links": [
+    {
+      "title": "Chandola, Banerjee & Kumar (2009) - Anomaly Detection",
+      "type": "reference",
+      "url": "https://doi.org/10.1145/1541880.1541882"
+    },
+    {
+      "title": "Godot 4 MeshInstance3D",
+      "type": "documentation",
+      "url": "https://docs.godotengine.org/en/stable/classes/class_meshinstance3d.html"
+    }
+  ]
+}

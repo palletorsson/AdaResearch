@@ -1,0 +1,85 @@
+{
+  "goal_id": "biome_engine",
+  "goal_title": "Build the biome engine — make the world evolve across sequences",
+  "why": "soft_stages.json declares what each sequence's biome should do. grammar_operations.json declares what operations are available. BiomeRingComponent spawns creatures. But the three systems aren't wired into a single coherent engine. Once wired, walking from primitives to QFEP produces visible, legible world evolution — density 0.0 → 1.0, kingdoms unlocking, operations composing.",
+  "success_criteria": [
+    "BiomeRing reads current sequence and applies soft_stages rules automatically",
+    "Grammar operations registered per sequence gate what the biome can generate",
+    "Player sees visible biome change when crossing sequence boundaries",
+    "Sequence progression produces measurable visual difference: density, kingdoms, sky color, particles"
+  ],
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "biome_engine.001",
+      "title": "Audit current biome wiring across all maps",
+      "spec": "Grep for BiomeRingComponent, NatureRenderer, and soft_stages usage across commons/maps/. Which maps have it active? Which sequence-specific settings actually apply? Output: doc/tasks/_audits/biome_wiring_audit.md.",
+      "effort": "1h",
+      "skill": "research",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "output": "doc/tasks/_audits/biome_wiring_audit.md",
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture"
+      ]
+    },
+    {
+      "id": "biome_engine.002",
+      "title": "Make biome auto-load sequence stage",
+      "spec": "BiomeRingComponent should read the current map's sequence (via metadata or lookup) and apply the matching entry from commons/maps/soft_stages.json without needing per-map config. If this already works, document how; if not, wire it up.",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [
+        "biome_engine.001"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture"
+      ]
+    },
+    {
+      "id": "biome_engine.003",
+      "title": "Wire grammar_operations.json into biome spawning",
+      "spec": "The biome's kingdom spawning should filter by unlocked grammar operations. If an L-system operation hasn't been unlocked yet (player is in sequence 1–5), branch/tree generation shouldn't fire even if the biome supports it. Document the gating mechanism.",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [
+        "biome_engine.002"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture"
+      ]
+    },
+    {
+      "id": "biome_engine.004",
+      "title": "Capture biome at each sequence for docs",
+      "spec": "Use capture pipeline to screenshot the biome in the first map of each of the 19 sequences. Save to ada_encyclopedia/public/biome_evolution/<seq_id>.png. Shows the world-evolution progression as image sequence.",
+      "effort": "1h",
+      "skill": "verify",
+      "depends_on": [
+        "biome_engine.003"
+      ],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "contexts": [
+        "soft_stages_biome",
+        "grammar_operations",
+        "four_layer_architecture"
+      ]
+    }
+  ]
+}

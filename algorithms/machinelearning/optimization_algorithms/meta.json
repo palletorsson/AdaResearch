@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_optimization_algorithms",
+  "title": "Optimization Algorithms",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/optimization_algorithms/optimization_algorithms.tscn",
+  "script": "res://algorithms/machinelearning/optimization_algorithms/OptimizationAlgorithms.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/optimization_algorithms/README.md",
+    "tutorial": "res://algorithms/machinelearning/optimization_algorithms/optimization_algorithms_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/optimization_algorithms/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/optimization_algorithms/summery.md"
+  },
+  "summary": "The `Optimization Algorithms` sandbox investigates concepts from Optimization Algorithms inside a real-time Godot lab.",
+  "keywords": [
+    "animate",
+    "convergence",
+    "core",
+    "create",
+    "flow",
+    "get"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

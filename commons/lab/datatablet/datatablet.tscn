@@ -59,7 +59,7 @@ func refresh_research_data():
 func update_display_visuals():
 	# Screen brightness based on activity
 	var screen_brightness = 1.2 if tablet_state == 'active' else 0.8
-	tablet_screen.material_override.emission_energy = screen_brightness
+	tablet_screen.material_override.emission_energy_multiplier = screen_brightness
 	
 	# Status bar color based on system state
 	match tablet_state:
@@ -81,7 +81,7 @@ func animate_data_graphs():
 		var data_intensity = randf_range(0.5, 1.5)
 		
 		var graph_tween = create_tween()
-		graph_tween.tween_property(graph, 'material_override:emission_energy', data_intensity, 1.0)
+		graph_tween.tween_property(graph, 'material_override:emission_energy_multiplier', data_intensity, 1.0)
 
 func _on_area_3d_body_entered(body):
 	if body.is_in_group('player'):
@@ -93,8 +93,8 @@ func activate_tablet():
 	
 	# Screen activation animation
 	var activation_tween = create_tween()
-	activation_tween.tween_property(tablet_screen, 'material_override:emission_energy', 2.0, 0.5)
-	activation_tween.tween_property(tablet_screen, 'material_override:emission_energy', 1.5, 0.5)
+	activation_tween.tween_property(tablet_screen, 'material_override:emission_energy_multiplier', 2.0, 0.5)
+	activation_tween.tween_property(tablet_screen, 'material_override:emission_energy_multiplier', 1.5, 0.5)
 	
 	display_current_research_summary()
 
@@ -115,7 +115,7 @@ func enter_standby_mode():
 	
 	# Dim screen for standby
 	var standby_tween = create_tween()
-	standby_tween.tween_property(tablet_screen, 'material_override:emission_energy', 0.6, 1.0)
+	standby_tween.tween_property(tablet_screen, 'material_override:emission_energy_multiplier', 0.6, 1.0)
 
 func sync_with_lab_systems():
 	tablet_state = 'syncing'
@@ -134,7 +134,7 @@ func update_sync_progress(progress: float):
 	
 	# Visual sync indicator
 	var sync_intensity = progress / 100.0 * 2.0
-	status_bar.material_override.emission_energy = sync_intensity
+	status_bar.material_override.emission_energy_multiplier = sync_intensity
 
 func sync_complete_callback():
 	tablet_state = 'active'

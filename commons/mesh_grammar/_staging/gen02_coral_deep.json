@@ -1,0 +1,24 @@
+{
+  "id": "gen02_coral_deep",
+  "notes": "Coral with deeper inset + taller extrude \u2014 visible bumps.",
+  "seed": "sphere",
+  "seed_scale": 0.5,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "random_50",
+      "params": {
+        "amount": 0.2
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:inset",
+      "params": {
+        "distance": 0.3,
+        "scale": 0.9
+      }
+    }
+  ]
+}

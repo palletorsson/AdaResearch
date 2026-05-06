@@ -1,0 +1,7 @@
+Concept: No catalyst mode — the lesson is observation and arrangement rather than projection. The learner places obstacles and the grid agent adapts, so the chamber's teaching is about state and responsiveness rather than about firing.
+Sequence role: Catalyst chamber for the Array Tutorial sequence, the last map before returning to the Lab. The sequence taught array addressing across one, two, and three dimensions and closed with the dance-floor grid; this chamber converts the array from a data structure the learner reads into a data structure the learner composes for another agent to read.
+Technical angle: Catalyst mode none, because the interaction is not projection. Creature gridagent:copy traverses the floor grid in row-major order with detours around placed obstacles. Science Screen grid renders the agent's current plan as a sequence of cell indices and highlights which indices change as obstacles are added.
+Critical angle: The chamber reframes the array as a shared authored surface. The learner's compositions are readable by another agent; the agent's responses are readable by the learner; the grid is the medium of a mutual reading. Arrangement, not fire, is the practice the chamber teaches.
+Key artifacts: gridagent:copy carries the creature-side traversal algorithm; the learner's placeable blocks carry the authoring gesture; the Science Screen's index sequence reads the mutual composition as a changing list of addresses.
+
+Gap: No gap identified.

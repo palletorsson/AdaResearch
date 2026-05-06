@@ -146,7 +146,7 @@ func show_menu_animated():
 		item.scale = Vector3.ZERO
 		
 		var tween = create_tween()
-		tween.tween_delay(i * 0.1)  # Stagger appearance
+		tween.tween_interval(i * 0.1)  # Stagger appearance
 		tween.tween_property(item, "scale", Vector3.ONE, 0.3)
 		tween.tween_callback(item.get_node("InteractionArea").set_monitoring.bind(true))
 
@@ -155,7 +155,7 @@ func hide_menu_animated():
 	for i in range(menu_elements.size()):
 		var item = menu_elements[i]
 		var tween = create_tween()
-		tween.tween_delay(i * 0.05)
+		tween.tween_interval(i * 0.05)
 		tween.tween_property(item, "scale", Vector3.ZERO, 0.2)
 
 # VR specific methods
@@ -166,7 +166,7 @@ func setup_vr_interactions():
 			var area = item.get_node("InteractionArea")
 			area.set_monitoring(true)
 
-func _on_vr_controller_trigger(controller_id: int, item: Node3D):
+func _on_vr_controller_trigger(_controller_id: int, item: Node3D):
 	# Handle VR controller trigger on menu item
 	if item.has_method("activate"):
 		item.activate()

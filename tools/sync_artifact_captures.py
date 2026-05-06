@@ -1,0 +1,204 @@
+#!/usr/bin/env python
+"""
+sync_artifact_captures.py — move Godot multi-angle captures into the web
+public directory and write a manifest the encyclopedia can read.
+
+The Godot capture script (`commons/testing/capture_multi_angle.gd`) writes
+PNGs to `user://multi_shots/<token>/<angle>.png` — somewhere inside Godot's
+per-user data dir, unreachable from the web app. This tool:
+
+  1. Walks the Godot user data dir for any multi_shots folders
+  2. Copies each artifact's angle-named PNGs into
+       <encyclopedia>/public/artifact-gallery/captures/<token>/<angle>.png
+  3. Emits <encyclopedia>/public/artifact-gallery/captures/manifest.json
+     (one entry per token with present angles + timestamps)
+
+The encyclopedia's /api/artifact-captures endpoint reads that manifest; the
+artifact detail page renders all present angles as a mini-gallery.
+
+Usage::
+
+    python tools/sync_artifact_captures.py              # copy + manifest
+    python tools/sync_artifact_captures.py --dry-run    # list what would copy
+    python tools/sync_artifact_captures.py --token origin  # one token only
+
+Safe to re-run. Only copies when the source is newer than the destination.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import shutil
+import sys
+from pathlib import Path
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[attr-defined]
+except Exception:
+    pass
+
+REPO = Path(__file__).resolve().parent.parent
+DEFAULT_ENCYCLOPEDIA = Path(os.environ.get(
+    "ADA_ENCYCLOPEDIA_PATH",
+    str(REPO.parent / "ada_encyclopedia"),
+))
+
+# Godot user data dir on Windows. Override with --source for other platforms
+# or if the project renames its user dir.
+def default_godot_user_dir() -> Path:
+    # Godot resolves the user data dir from project.godot's `config/name`
+    # (sanitized — spaces become underscores in some versions). For this
+    # project the current name is "Ada Research Zero One". Falls through
+    # a small candidate list and returns the first that exists; otherwise
+    # returns the preferred name so the error message is legible.
+    names = [
+        "Ada Research Zero One",
+        "Ada_Research_Zero_One",
+        "AdaResearch_46",
+        "AdaResearch",
+    ]
+    if sys.platform == "win32":
+        base = Path(os.environ.get("APPDATA", Path.home() / "AppData/Roaming"))
+        root = base / "Godot" / "app_userdata"
+    elif sys.platform == "darwin":
+        root = Path.home() / "Library/Application Support/Godot/app_userdata"
+    else:
+        root = Path.home() / ".local/share/godot/app_userdata"
+    for n in names:
+        p = root / n
+        if (p / "multi_shots").exists():
+            return p
+    # None had multi_shots yet — return the preferred name for a legible
+    # "run capture_multi_angle.gd first" message
+    return root / names[0]
+
+
+VALID_ANGLES = {"front", "left", "right", "top", "above"}
+
+
+def discover(source_root: Path, only_token: str | None) -> list[tuple[str, dict[str, Path]]]:
+    """Walk source_root/multi_shots/<token>/ and collect angle files.
+    Returns [(token, {angle: path}), ...] sorted by token."""
+    multi = source_root / "multi_shots"
+    if not multi.exists():
+        return []
+    out = []
+    for token_dir in sorted(multi.iterdir()):
+        if not token_dir.is_dir():
+            continue
+        token = token_dir.name
+        if only_token and token != only_token:
+            continue
+        angles: dict[str, Path] = {}
+        for p in token_dir.iterdir():
+            if p.suffix.lower() != ".png":
+                continue
+            angle = p.stem.lower()
+            if angle in VALID_ANGLES:
+                angles[angle] = p
+        if angles:
+            out.append((token, angles))
+    return out
+
+
+def sync_one(token: str, angles: dict[str, Path], dest_root: Path, dry_run: bool) -> dict:
+    """Copy one token's angles into dest_root/<token>/ and return a manifest
+    entry: {token, angles: [..], mtimes: {...}}."""
+    dest_dir = dest_root / token
+    if not dry_run:
+        dest_dir.mkdir(parents=True, exist_ok=True)
+
+    entry_angles = []
+    mtimes = {}
+    copied = 0
+    for angle, src in angles.items():
+        dest = dest_dir / f"{angle}.png"
+        # Only copy if newer (or missing)
+        need_copy = True
+        if dest.exists():
+            try:
+                need_copy = src.stat().st_mtime > dest.stat().st_mtime + 0.5
+            except OSError:
+                need_copy = True
+        if need_copy and not dry_run:
+            shutil.copy2(src, dest)
+            copied += 1
+        entry_angles.append(angle)
+        try:
+            mtimes[angle] = int(src.stat().st_mtime)
+        except OSError:
+            pass
+    return {
+        "token": token,
+        "angles": sorted(entry_angles),
+        "mtimes": mtimes,
+        "copied_now": copied,
+    }
+
+
+def write_manifest(entries: list[dict], dest_root: Path, dry_run: bool) -> Path:
+    manifest_path = dest_root / "manifest.json"
+    manifest = {
+        "_doc": "Generated by tools/sync_artifact_captures.py. One entry per artifact with captured angles. Files live at /artifact-gallery/captures/<token>/<angle>.png.",
+        "schema_version": 1,
+        "generated_at": int(__import__("time").time()),
+        "count": len(entries),
+        "captures": {
+            e["token"]: {"angles": e["angles"], "mtimes": e["mtimes"]}
+            for e in entries
+        },
+    }
+    if not dry_run:
+        dest_root.mkdir(parents=True, exist_ok=True)
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+    return manifest_path
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--source", type=Path, default=default_godot_user_dir(),
+                    help="Godot user data dir (default: platform-specific)")
+    ap.add_argument("--dest", type=Path, default=DEFAULT_ENCYCLOPEDIA,
+                    help="Encyclopedia root dir (default: ../ada_encyclopedia)")
+    ap.add_argument("--token", help="only sync this artifact token")
+    ap.add_argument("--dry-run", action="store_true")
+    args = ap.parse_args()
+
+    if not args.source.exists():
+        print(f"[ERR] source does not exist: {args.source}")
+        print("Have you run capture_multi_angle.gd at least once?")
+        return 1
+
+    dest_root = args.dest / "public" / "artifact-gallery" / "captures"
+
+    entries = []
+    found = discover(args.source, args.token)
+    if not found:
+        print(f"No captures found in {args.source / 'multi_shots'}")
+        return 0
+
+    for token, angles in found:
+        entry = sync_one(token, angles, dest_root, args.dry_run)
+        entries.append(entry)
+
+    mpath = write_manifest(entries, dest_root, args.dry_run)
+
+    total_copied = sum(e["copied_now"] for e in entries)
+    print(f"{len(entries)} token(s) found, {total_copied} file(s) copied.")
+    print(f"Manifest: {mpath}")
+    if args.dry_run:
+        print("  (dry-run — nothing written)")
+    if len(entries) <= 20:
+        for e in entries:
+            angles = "/".join(e["angles"])
+            print(f"  {e['token']:<32s} [{angles}]")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

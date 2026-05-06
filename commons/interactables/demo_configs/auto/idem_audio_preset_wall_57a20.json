@@ -1,0 +1,150 @@
+{
+  "demo_info": {
+    "name": "Audio Preset Wall 57a20",
+    "description": "Auto-generated audio_preset_wall board composed from the InteractableDemo vocabulary.",
+    "family": "audio_preset_wall",
+    "auto_generated": true,
+    "auto_score": 13.12,
+    "selection_rank": 3
+  },
+  "titles": {
+    "main": "AUDIO PRESET WALL",
+    "row2": "SIGNAL METERS + MONITORS",
+    "row3": "CONTROL BANKS",
+    "row4": "AUDIO MAP TOKENS + RACK PRESETS"
+  },
+  "layout": {
+    "panel_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "frame_color": [
+      0.25,
+      0.23,
+      0.2,
+      1.0
+    ],
+    "accent_color": [
+      0.75,
+      0.38,
+      0.13,
+      1.0
+    ],
+    "dark_color": [
+      0.1,
+      0.1,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "spacing": 0.257,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.026,
+    "row2_y": 0.637,
+    "row3_y": 0.176,
+    "row4_y": -0.254,
+    "show_hand_scale_guides": false
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/slider_snap.tscn",
+      "label": "SNAP",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [],
+  "passive_elements": [
+    {
+      "monitor": "scope",
+      "slots": 3,
+      "label": "SCOPE WIDE",
+      "width": 3
+    },
+    {
+      "builder": "build_vu_meter_v",
+      "label": "VU METER V",
+      "width": 1
+    },
+    {
+      "monitor": "spectrum",
+      "slots": 2,
+      "label": "SPECTRUM",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_v",
+      "count": 2,
+      "label": "2x SLIDER V",
+      "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 4,
+      "label": "4x SLIDER V",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "audio_controller_preset",
+      "preset": "interface_prototypes",
+      "token": "AudioContr#preset:interface_prototypes#hide_selection:true",
+      "label": "INTERFACE\nPRESET",
+      "width": 3,
+      "knobs": 4,
+      "sliders": 1
+    },
+    {
+      "type": "audio_controller_preset",
+      "preset": "basic_mono",
+      "token": "AudioContr:-90#preset:basic_mono",
+      "label": "BASIC\nMONO",
+      "width": 3,
+      "knobs": 2,
+      "sliders": 2
+    },
+    {
+      "type": "audio_controller_preset",
+      "preset": "template_showcase",
+      "token": "AudioContr:90:0.1:0.9#preset:template_showcase",
+      "label": "TEMPLATE\nSHOW",
+      "width": 3,
+      "knobs": 3,
+      "sliders": 2
+    },
+    {
+      "type": "patch_matrix",
+      "label": "PATCH\nMATRIX",
+      "width": 1
+    },
+    {
+      "type": "live_audio_controller",
+      "preset": "interface_prototypes",
+      "token": "AudioContr#preset:interface_prototypes#hide_selection:true",
+      "label": "LIVE\nINTERFACE",
+      "width": 4,
+      "live_scale": 0.32
+    },
+    {
+      "type": "audio_token_strip",
+      "token": "AudioContr:90:0.2:1.1#config:slider_rack#col_spacing:0.26",
+      "label": "SPACING\nTOKEN",
+      "width": 3
+    }
+  ]
+}

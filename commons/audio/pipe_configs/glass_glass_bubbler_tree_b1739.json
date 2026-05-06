@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "Glass_bubbler_tree (glass)",
+    "description": "Auto-generated glass_bubbler_tree turtle-path for glass system. path='flask,f,cross,[,l,f,f,drip,],[,r,f,f,drip,],f,ypipe,[,l,f,drip,],[,r,f,beaker,],f,drip'",
+    "system": "glass",
+    "archetype": "glass_bubbler_tree",
+    "auto_generated": true
+  },
+  "layout": {
+    "segment_length": 0.137,
+    "pipe_radius": 0.02,
+    "tube_radius": 0.012
+  },
+  "path": "flask,f,cross,[,l,f,f,drip,],[,r,f,f,drip,],f,ypipe,[,l,f,drip,],[,r,f,beaker,],f,drip",
+  "materials": {
+    "glass_color": [
+      0.82,
+      0.9,
+      1.0,
+      0.3
+    ],
+    "liquid_color": [
+      0.9,
+      0.6,
+      0.2,
+      0.55
+    ],
+    "show_liquid": true
+  }
+}

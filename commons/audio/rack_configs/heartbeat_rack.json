@@ -1,0 +1,81 @@
+{
+	"rack_info": {
+		"name": "Heartbeat Rack",
+		"description": "Biological heartbeat with low frequency pulse - lub-dub rhythm",
+		"version": "1.0",
+		"sound_type": "heartbeat"
+	},
+	"layout": {
+		"padding_px": 20,
+		"gap_px": 15,
+		"hide_selection": true,
+		"hide_buttons": true,
+		"cable_accent_color": "#ff3366",
+		"cable_glow": 0.4
+	},
+	"grid": [
+		["lbl_title", " ", " ", "mtr_vol", "disp_waveform"],
+		["btn_on", "sl_bpm", "sl_amp"],
+		["btn_off", "sl_dur", "sl_depth"]
+	],
+	"control_definitions": {
+		"lbl_title": {
+			"type": "label",
+			"label": "HEARTBEAT"
+		},
+		"btn_on": {
+			"type": "btn",
+			"label": "PLAY",
+			"action": "play",
+			"color": "#ff3366"
+		},
+		"btn_off": {
+			"type": "btn",
+			"label": "STOP",
+			"action": "stop",
+			"color": "#990033"
+		},
+		"sl_bpm": {
+			"type": "slider",
+			"label": "BPM",
+			"parameter": "bpm",
+			"min": 40.0,
+			"max": 140.0,
+			"default": 70.0
+		},
+		"sl_amp": {
+			"type": "slider",
+			"label": "Volume",
+			"parameter": "amplitude",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.4
+		},
+		"sl_dur": {
+			"type": "slider",
+			"label": "Duration",
+			"parameter": "duration",
+			"min": 1.0,
+			"max": 15.0,
+			"default": 7.0
+		},
+		"sl_depth": {
+			"type": "slider",
+			"label": "Depth",
+			"parameter": "depth",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.8
+		},
+		"mtr_vol": {
+			"type": "meter",
+			"label": "VU",
+			"source": "rack"
+		},
+		"disp_waveform": {
+			"type": "simple_waveform",
+			"label": "PULSE",
+			"source": "rack"
+		}
+	}
+}

@@ -1,0 +1,117 @@
+{
+	"sequences": {
+		"devexamples": {
+			"name": "Dev Examples",
+			"truth": "Development is iteration. Test maps are the sketches behind the paintings.",
+			"qfep_term": "",
+			"qfep_connection": "",
+			"formula": "",
+			"description": "Development example maps for grid agent and info-board testing. Prototyping space for interaction mechanics before they enter the curriculum.",
+			"layer": "testing",
+			"prerequisites": [],
+			"unlocks": [],
+			"difficulty": "testing",
+			"estimated_time": "variable",
+			"learning_objectives": [
+				"Prototype validation",
+				"Interaction debugging"
+			],
+			"content": [
+				"gridagent_puzzle01_copy: Grid agent copy mechanic test",
+				"gridagent_puzzle02_translate: Grid agent translate mechanic test",
+				"gridagent_puzzle03_rotate: Grid agent rotate mechanic test",
+				"InfoBoards_Example: Info board display and interaction test"
+			],
+			"maps": [
+				"gridagent_puzzle01_copy",
+				"gridagent_puzzle02_translate",
+				"gridagent_puzzle03_rotate",
+				"InfoBoards_Example",
+				"Structure_Examples",
+				"Structure_Examples_VoxelGrammar_Principles"
+			],
+			"axiom_files": [],
+			"algorithm_paths": {},
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_init",
+			"unlock_requirements": [],
+			"completion_rewards": [],
+			"artifact_groups": [
+				{
+					"map": "gridagent_puzzle01_copy",
+					"position": "intro",
+					"artifacts": [
+						"algo_gun",
+						"gridagent"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "gridagent_puzzle02_translate",
+					"position": "foundation",
+					"artifacts": [
+						"algo_gun",
+						"gridagent"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "gridagent_puzzle03_rotate",
+					"position": "exploration",
+					"artifacts": [
+						"algo_gun",
+						"gridagent"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "InfoBoards_Example",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Structure_Examples",
+					"position": "integration",
+					"artifacts": [
+						"animated_cube",
+						"crystal_ball",
+						"cube_scene",
+						"fourier_transform",
+						"homagetothesquare",
+						"light_sphere",
+						"noisetorus",
+						"platonicsolids",
+						"probability_sphere",
+						"rainbow",
+						"rotating_cube",
+						"spectrum_display",
+						"unit_circle"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 13 artifacts"
+				},
+				{
+					"map": "Structure_Examples_VoxelGrammar_Principles",
+					"position": "synthesis",
+					"artifacts": [
+						"cube_scene",
+						"light_sphere",
+						"platonicsolids",
+						"probability_sphere",
+						"rainbow",
+						"rotating_cube"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 6 artifacts"
+				}
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
+}

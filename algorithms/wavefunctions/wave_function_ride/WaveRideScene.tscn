@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://wave_ride_scene"]
+
+[ext_resource type="PackedScene" uid="uid://ride_stick_001" path="res://algorithms/wavefunctions/wave_function_ride/RideStick.tscn" id="1_stick"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="2_player_body"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_climb.gd" id="3_climb_move"]
+[ext_resource type="PackedScene" uid="uid://b213rdrn5gq40" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_pickup"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_top_color = Color(0.1, 0.1, 0.2, 1)
+sky_horizon_color = Color(0.4, 0.2, 0.5, 1)
+ground_bottom_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_color = Color(0.2, 0.2, 0.4, 1)
+
+[node name="WaveRideScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
+shadow_enabled = true
+
+[node name="RideStick" parent="." instance=ExtResource("1_stick")]
+start_delay = 0.0
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="FunctionPickup" parent="XROrigin3D/LeftHand" instance=ExtResource("4_pickup")]
+range = 0.5
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+pose = &"aim"
+
+[node name="FunctionPickup" parent="XROrigin3D/RightHand" instance=ExtResource("4_pickup")]
+range = 0.5
+
+[node name="PlayerBody" parent="XROrigin3D" instance=ExtResource("2_player_body")]
+
+[node name="MovementClimb" type="Node3D" parent="XROrigin3D"]
+script = ExtResource("3_climb_move")
+left_pickup = NodePath("../LeftHand/FunctionPickup")
+right_pickup = NodePath("../RightHand/FunctionPickup")

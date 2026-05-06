@@ -1,0 +1,16 @@
+{
+  "id": "mg_prim03_torus_bulged",
+  "notes": "PRIMITIVE-AS-SEED: Godot TorusMesh as seed + bulge. The donut surface bumps outward uniformly.",
+  "seed": "torus",
+  "seed_scale": 0.7,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "all",
+      "params": {
+        "amount": 0.05
+      }
+    }
+  ]
+}

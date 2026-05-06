@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpnmssmnsg6lg"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2"]
+[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="3_shader"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+render_priority = 0
+shader = ExtResource("3_shader")
+shader_parameter/modelColor = Color(0.4, 0.6, 0.8, 1)
+shader_parameter/wireframeColor = Color(0.2, 0.7, 0.9, 1)
+shader_parameter/emissionColor = Color(0.3, 0.8, 0.6, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+material = SubResource("ShaderMaterial_1")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.1
+
+[node name="GrabCylinder" instance=ExtResource("1")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("CylinderShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("CylinderMesh_1")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("2")]

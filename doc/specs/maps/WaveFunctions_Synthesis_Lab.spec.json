@@ -1,0 +1,153 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_Synthesis_Lab",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": "additive_wave_demo is the Fourier synthesis tool; chladni_plate shows resonance as visible pattern; lissajous_curves demonstrate frequency ratios; UnitCircleTrig connects back to the unit circle foundation; oscilloscope/seismograph/spring_demo provide measurement; dna_specimen/double_helix_scene/petri_dish_worms extend oscillation to biology; SoundscapeRadioRack provides audio synthesis; dark_sphere anchors the research space.",
+  "style": "rams",
+  "echoes": [
+    "color"
+  ],
+  "density": 0.159,
+  "breath_zones": [
+    {
+      "size": 91,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        4.8791208791208796,
+        4.989010989010989
+      ]
+    },
+    {
+      "size": 8,
+      "bounds": {
+        "x": 5,
+        "z": 5,
+        "w": 3,
+        "d": 4
+      },
+      "centroid": [
+        5.75,
+        6.375
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "air_music_display_case"
+    },
+    {
+      "x": 9,
+      "z": 3,
+      "token": "microscope"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "chemicalapparatus"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "dna_specimen"
+    },
+    {
+      "x": 7,
+      "z": 4,
+      "token": "holographicdisplay"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "multimeter"
+    },
+    {
+      "x": 8,
+      "z": 5,
+      "token": "oscilloscope"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "samplevialrack"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "electronicscales"
+    },
+    {
+      "x": 7,
+      "z": 6,
+      "token": "additive_wave_demo"
+    },
+    {
+      "x": 2,
+      "z": 7,
+      "token": "petri_dish_worms"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "electronicscales"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "atmosphericmonitoring"
+    },
+    {
+      "x": 0,
+      "z": 9,
+      "token": "double_helix_scene"
+    },
+    {
+      "x": 2,
+      "z": 9,
+      "token": "seismograph"
+    },
+    {
+      "x": 6,
+      "z": 9,
+      "token": "chladni_plate"
+    },
+    {
+      "x": 3,
+      "z": 10,
+      "token": "biomagneticresonator"
+    },
+    {
+      "x": 7,
+      "z": 10,
+      "token": "spring_demo"
+    },
+    {
+      "x": 2,
+      "z": 11,
+      "token": "SoundscapeRadioRack"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 20,
+    "walkable_cells": 126,
+    "breath_zone_count": 2,
+    "unique_tokens": 19
+  }
+}

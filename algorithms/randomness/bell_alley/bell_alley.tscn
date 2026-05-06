@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bns24vxy1tv4s"]
+
+[ext_resource type="Script" uid="uid://bonh33k4gfp3f" path="res://algorithms/randomness/bell_alley/BellAlley.gd" id="1_bnt5i"]
+
+[node name="BellAlley" type="Node3D"]
+script = ExtResource("1_bnt5i")

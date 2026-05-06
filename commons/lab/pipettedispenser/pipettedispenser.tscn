@@ -44,7 +44,7 @@ func update_volume_display():
 	
 	# Brightness based on precision
 	var precision_factor = clamp(current_volume / max_volume, 0.3, 1.0)
-	volume_display.material_override.emission_energy = precision_factor
+	volume_display.material_override.emission_energy_multiplier = precision_factor
 
 func get_volume_color(volume: float) -> Color:
 	if volume < 10.0:
@@ -84,8 +84,8 @@ func adjust_volume(new_volume: float):
 	
 	# Visual feedback for volume adjustment
 	var adjust_tween = create_tween()
-	adjust_tween.tween_property(volume_display, 'material_override:emission_energy', 2.0, 0.2)
-	adjust_tween.tween_property(volume_display, 'material_override:emission_energy', 1.0, 0.8)
+	adjust_tween.tween_property(volume_display, 'material_override:emission_energy_multiplier', 2.0, 0.2)
+	adjust_tween.tween_property(volume_display, 'material_override:emission_energy_multiplier', 1.0, 0.8)
 
 func eject_tip():
 	if not has_tip:
@@ -153,7 +153,7 @@ func multi_dispense(num_aliquots: int):
 	# Sequential dispensing animation
 	for i in range(num_aliquots):
 		var delay_tween = create_tween()
-		delay_tween.tween_delay(i * 0.8)
+		delay_tween.tween_interval(i * 0.8)
 		delay_tween.tween_property(plunger, 'position:y', -0.008, 0.2)
 		delay_tween.tween_property(plunger, 'position:y', 0.0, 0.3)
 "

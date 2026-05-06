@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://uk3qbxqp6vlu"]
+
+[ext_resource type="Script" uid="uid://cf0hwjf0vuedu" path="res://commons/hazards/blockbuilderentity/blockbuilderentity.gd" id="1"]
+
+[node name="BlockBuilderEntity" type="CharacterBody3D"]
+script = ExtResource("1")

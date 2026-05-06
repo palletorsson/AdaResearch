@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "auto_joystick_joystick_freq_cd06d1",
+    "description": "JOYSTICK — x:drive y:threshold, color #4488ff",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "joystick",
+      "label": "DRI/THR",
+      "color": "#4488ff",
+      "parameter_x": "drive",
+      "parameter_y": "threshold"
+    }
+  }
+}

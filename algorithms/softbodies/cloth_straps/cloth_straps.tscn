@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://cen20pd8frjws"]
+
+[ext_resource type="Script" uid="uid://ral6s1jqdh5f" path="res://algorithms/softbodies/cloth_straps/cloth_straps.gd" id="1_cloth"]
+[ext_resource type="Shader" uid="uid://b7xys4jyhhogb" path="res://commons/resourses/shaders/rothko4.gdshader" id="2_qqpw0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_epmpf"]
+render_priority = 0
+shader = ExtResource("2_qqpw0")
+shader_parameter/color_top = Vector4(1, 0.3, 0.1, 1)
+shader_parameter/color_bottom = Vector4(1, 0.3, 0.1, 1)
+shader_parameter/color_border = Vector4(0.9, 0.7, 0.6, 1)
+shader_parameter/top_segment = 0.45
+shader_parameter/border_size = 0.03
+shader_parameter/blur_speed = 0.05
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gnj0u"]
+material = SubResource("ShaderMaterial_epmpf")
+subdivide_width = 6
+subdivide_depth = 12
+orientation = 2
+
+[node name="ClothStraps" type="Node3D"]
+script = ExtResource("1_cloth")
+
+[node name="SoftBodyStrip" type="SoftBody3D" parent="."]
+transform = Transform3D(0.145, 0, 0, 0, 1.74, 0, 0, 0, 1, -2.5710926, 1.8637631, 0)
+mesh = SubResource("PlaneMesh_gnj0u")
+simulation_precision = 19
+linear_stiffness = 0.34
+pinned_points = [104, 111, 105, 106, 107, 108, 109, 110, 99]
+attachments/0/point_index = 104
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 111
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+attachments/2/point_index = 105
+attachments/2/spatial_attachment_path = NodePath("")
+attachments/2/offset = Vector3(0, 0, 0)
+attachments/3/point_index = 106
+attachments/3/spatial_attachment_path = NodePath("")
+attachments/3/offset = Vector3(0, 0, 0)
+attachments/4/point_index = 107
+attachments/4/spatial_attachment_path = NodePath("")
+attachments/4/offset = Vector3(0, 0, 0)
+attachments/5/point_index = 108
+attachments/5/spatial_attachment_path = NodePath("")
+attachments/5/offset = Vector3(0, 0, 0)
+attachments/6/point_index = 109
+attachments/6/spatial_attachment_path = NodePath("")
+attachments/6/offset = Vector3(0, 0, 0)
+attachments/7/point_index = 110
+attachments/7/spatial_attachment_path = NodePath("")
+attachments/7/offset = Vector3(0, 0, 0)
+attachments/8/point_index = 99
+attachments/8/spatial_attachment_path = NodePath("")
+attachments/8/offset = Vector3(0, 0, 0)

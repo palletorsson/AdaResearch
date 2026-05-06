@@ -4,15 +4,26 @@ extends Node3D
 # Starts with a 1-meter equilateral triangle and subdivides it recursively
 # Creates a beautiful fractal pattern by removing the center triangle each time
 
+# @identity
+# essence: sierpinski(v1,v2,v3,d) = 3 * sierpinski(corners, midpoints, d+1), skip center triangle. D = log(3)/log(2) ~ 1.585.
+# desire: To be walked through — 10m triangle rotated vertical, extruded per iteration, creating a fractal wall of triangular portals
+# critical_parameter: extrusion_height — each iteration extrudes deeper, turning the 2D fractal into a 3D walkable relief
+# triggers: subdivision_interval tick → all current triangles split into 3 → center removed → depth hue-shifts rainbow
+# emerges: The central voids become corridors — the removed triangles are the spaces you walk through
+# needs: VR walking [has via geometry], iteration control [missing]
+# relationships: 2D cousin of sierpinski_pyramid and menger_sponge; the canonical D ~ 1.585 fractal dimension example
+# truth: The Sierpinski triangle has zero area and infinite perimeter — it is the shape that taught mathematics that removal creates structure.
+
 # Settings
 @export var subdivision_interval: float = 1.0  # Time between subdivisions
 @export var max_iterations: int = 6  # Maximum subdivision depth
 @export var auto_start: bool = true  # Auto-start subdivision
-@export var triangle_size: float = 1.0  # Size of initial triangle (meters)
-@export var triangle_thickness: float = 0.05  # Thickness of 3D triangles
+@export var triangle_size: float = 10.0  # Size of initial triangle (meters) - much larger for walking
+@export var triangle_thickness: float = 0.5  # Thickness of 3D triangles - thicker for visibility
 @export var extrude_on_subdivision: bool = true  # Extrude triangles upward with each iteration
-@export var extrusion_height: float = 0.15  # How much to extrude per iteration
+@export var extrusion_height: float = 1.5  # How much to extrude per iteration - larger for walking
 @export var colorize_by_depth: bool = true  # Color triangles by subdivision depth
+@export var initial_rotation_degrees: float = 90.0  # Rotate triangle to stand vertical for walking through
 
 # Internal state
 var current_iteration: int = 0
@@ -20,9 +31,13 @@ var subdivision_timer: float = 0.0
 var is_subdividing: bool = false
 var current_triangles: Array = []  # Array of triangle data
 
-func _ready():
+func _ready() -> void:
 	print("SierpinskiTriangle: Ready")
 	print("SierpinskiTriangle: Will subdivide to %d iterations" % max_iterations)
+
+	# Apply rotation to make triangle vertical for walking through
+	var rotation_rad = deg_to_rad(initial_rotation_degrees)
+	rotate_x(rotation_rad)
 
 	# Create the initial triangle
 	create_initial_triangle()
@@ -32,7 +47,7 @@ func _ready():
 		is_subdividing = true
 		print("SierpinskiTriangle: Auto-subdivision enabled")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_subdividing:
 		return
 
@@ -45,7 +60,7 @@ func _process(delta: float):
 		perform_subdivision()
 
 # Create the initial 1-meter equilateral triangle
-func create_initial_triangle():
+func create_initial_triangle() -> void:
 	# Create equilateral triangle vertices (1 meter)
 	var height = triangle_size * sqrt(3.0) / 2.0  # Height of equilateral triangle
 
@@ -67,7 +82,7 @@ func create_initial_triangle():
 	print("SierpinskiTriangle: Created initial triangle")
 
 # Perform one subdivision iteration
-func perform_subdivision():
+func perform_subdivision() -> void:
 	if current_iteration >= max_iterations:
 		print("SierpinskiTriangle: Reached maximum iterations (%d)" % max_iterations)
 		is_subdividing = false
@@ -147,7 +162,7 @@ func subdivide_triangle(triangle: Dictionary) -> Array:
 	return triangles
 
 # Create a 3D mesh for a triangle
-func create_triangle_mesh(triangle: Dictionary):
+func create_triangle_mesh(triangle: Dictionary) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = create_extruded_triangle_mesh(triangle)
 	mesh_instance.mesh = mesh
@@ -163,8 +178,11 @@ func create_triangle_mesh(triangle: Dictionary):
 		# Classic fractal colors
 		material.albedo_color = Color(0.2, 0.6, 0.9)
 
-	material.metallic = 0.3
-	material.roughness = 0.6
+	material.metallic = 0.0
+	material.roughness = 1.0
+
+	# Make material double-sided for walking through
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 
 	# Add slight emission for glowing effect
 	if triangle.depth > 0:
@@ -176,6 +194,10 @@ func create_triangle_mesh(triangle: Dictionary):
 
 	# Position at y_offset
 	mesh_instance.position.y = triangle.y_offset
+
+	# Hide first iteration (depth 0)
+	if triangle.depth == 0:
+		mesh_instance.visible = false
 
 	add_child(mesh_instance)
 
@@ -288,16 +310,16 @@ func create_extruded_triangle_mesh(triangle: Dictionary) -> ArrayMesh:
 	return mesh
 
 # Manual control functions
-func start_subdivision():
+func start_subdivision() -> void:
 	is_subdividing = true
 	subdivision_timer = 0.0
 	print("SierpinskiTriangle: Started manually")
 
-func stop_subdivision():
+func stop_subdivision() -> void:
 	is_subdividing = false
 	print("SierpinskiTriangle: Stopped manually")
 
-func reset():
+func reset() -> void:
 	# Clear all meshes
 	for child in get_children():
 		if child is MeshInstance3D:
@@ -313,5 +335,14 @@ func reset():
 
 	print("SierpinskiTriangle: Reset")
 
-func step():
+func step() -> void:
 	perform_subdivision()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

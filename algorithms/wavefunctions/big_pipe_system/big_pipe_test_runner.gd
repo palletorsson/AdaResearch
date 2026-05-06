@@ -1,0 +1,11 @@
+@tool
+extends Node3D
+
+func _ready() -> void:
+	# Allow time for children to be ready?
+	# Just call generate
+	if $SystemTest:
+		$SystemTest.generate_pipes("f,s,f,t,f,x,f,l,f,r,f,u,f,d,f,vu,f,vd,f,cap")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

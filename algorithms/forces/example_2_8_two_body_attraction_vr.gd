@@ -5,11 +5,20 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Two bodies pulling each other via inverse-square gravitation, producing closed orbits, escapes, or collisions
+# desire: To make the two-body problem visible — Kepler's elliptical solution emerges from F = G·m₁·m₂/r² applied symmetrically
+# critical_parameter: gravitational_constant and initial tangential velocity — together they decide circular, elliptical, parabolic, or hyperbolic
+# triggers: Low velocity collapses bodies into each other; tuned velocity yields stable ellipse; high velocity becomes escape trajectory
+# emerges: Conic sections appear without being coded — the orbit shape is not chosen, it is what the algebra of mutual attraction does
+# needs: per-body mass [has], inverse-square attraction force [has], trail visualization [has]
+# relationships: Bridge between forces/Newton's_Laws (single-body) and example_2_9_n_body (chaotic many-body). Anchor in forces/N-Body_and_Chaos
+# truth: An orbit is not a path drawn around a center — it is the trajectory two bodies negotiate when neither wants to let the other go.
 # ===========================================================================
 
 extends Node3D
 
-const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const DEFAULT_GRAVITY_STRENGTH := 0.4
 const ARROW_LENGTH_SCALE := 0.5
 const MIN_ARROW_LENGTH := 0.08
@@ -21,16 +30,19 @@ var body_b: Mover
 var gravity_strength: float = DEFAULT_GRAVITY_STRENGTH
 var show_force_vectors: bool = true
 
-var info_label: Label3D
-var instructions_label: Label3D
-var gravity_controller: ParameterController3D
+# UI — Ada rack panel
+var _panel: ForcesRackPanel
+var _gravity_slider: Node3D
 
 var arrow_a: Node3D
 var arrow_b: Node3D
 var auto_reset_timer: Timer
 
 func _ready() -> void:
-	create_ui()
+	# Scale down for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
+	_create_panel()
 	spawn_bodies()
 	setup_auto_reset()
 	print("Example 2.8: Two-body attraction")
@@ -43,7 +55,7 @@ func setup_auto_reset() -> void:
 	add_child(auto_reset_timer)
 
 func _process(_delta: float) -> void:
-	update_info_label()
+	pass  # Slider labels auto-update
 
 func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(body_a) or not is_instance_valid(body_b):
@@ -66,34 +78,18 @@ func _input(event: InputEvent) -> void:
 			KEY_T:
 				toggle_force_vectors()
 
-func create_ui() -> void:
-	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 28
-	info_label.outline_size = 4
-	info_label.modulate = Color(1.0, 0.9, 1.0)
-	info_label.position = Vector3(0, 0.68, 0)
-	add_child(info_label)
+func _create_panel() -> void:
+	_panel = ForcesRackPanel.new()
+	_panel.setup("2.8  Two-Body Attraction", 1, 3)
+	_panel.set_instructions("[T] Toggle arrows  [R] Reset")
 
-	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.9)
-	instructions_label.position = Vector3(0, 0.58, 0)
-	instructions_label.text = "[T] Toggle force arrows  |  [R] Reset"
-	add_child(instructions_label)
+	_gravity_slider = _panel.add_slider("Gravity", 0.1, 1.0, gravity_strength, 0.02)
+	_gravity_slider.slider_moved.connect(_on_gravity_slider_moved)
 
-	gravity_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	gravity_controller.parameter_name = "Gravity"
-	gravity_controller.min_value = 0.1
-	gravity_controller.max_value = 1.0
-	gravity_controller.default_value = gravity_strength
-	gravity_controller.step_size = 0.02
-	gravity_controller.position = Vector3(0, 0.48, 0.22)
-	gravity_controller.rotation_degrees = Vector3.ZERO
-	add_child(gravity_controller)
-	gravity_controller.value_changed.connect(_on_gravity_changed)
-	gravity_controller.set_value(gravity_strength)
+	# Position panel to the left, at chest height, angled toward viewer
+	_panel.position = Vector3(-0.45, 0.35, 0.1)
+	_panel.rotation_degrees = Vector3(0, 25, 0)
+	add_child(_panel)
 
 func spawn_bodies() -> void:
 	if is_instance_valid(body_a):
@@ -112,11 +108,11 @@ func spawn_bodies() -> void:
 	body_a.add_child(arrow_a)
 	body_b.add_child(arrow_b)
 
-func create_body(name: String, mass: float, position: Vector3, velocity: Vector3, rng: RandomNumberGenerator) -> Mover:
+func create_body(body_name: String, mass: float, pos: Vector3, velocity: Vector3, rng: RandomNumberGenerator) -> Mover:
 	var body := Mover.new()
-	body.name = name
+	body.name = body_name
 	body.mass = mass
-	body.position_v = position
+	body.position_v = pos
 	body.velocity = velocity
 	body.acceleration = Vector3.ZERO
 	body.bounce_damping = 0.5
@@ -145,7 +141,7 @@ func create_force_arrow() -> Node3D:
 	shaft.mesh = shaft_mesh
 	shaft.position = Vector3(0, 0, 0.5)
 	shaft.rotation_degrees = Vector3(-90, 0, 0)
-	shaft.material_override = create_arrow_material()
+	shaft.material_override = _create_attraction_arrow_material()
 	arrow_root.add_child(shaft)
 
 	var head := MeshInstance3D.new()
@@ -157,17 +153,18 @@ func create_force_arrow() -> Node3D:
 	head.mesh = head_mesh
 	head.position = Vector3(0, 0, 1.0)
 	head.rotation_degrees = Vector3(-90, 0, 0)
-	head.material_override = create_arrow_material()
+	head.material_override = _create_attraction_arrow_material()
 	arrow_root.add_child(head)
 
 	return arrow_root
 
-func create_arrow_material() -> StandardMaterial3D:
+func _create_attraction_arrow_material() -> StandardMaterial3D:
+	# Use Ada accent_orange for attraction arrows
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.6, 1.0, 0.2)
+	mat.albedo_color = Color(0.95, 0.45, 0.15, 0.25)
 	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.6, 1.0) * 0.3
-	mat.emission_energy_multiplier = 0.5
+	mat.emission = Color(0.95, 0.45, 0.15)
+	mat.emission_energy_multiplier = 0.4
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	return mat
 
@@ -209,14 +206,10 @@ func update_force_arrow(arrow: Node3D, force: Vector3) -> void:
 	var basis := Basis().looking_at(direction, up_vector)
 	arrow.transform = Transform3D(basis, Vector3.ZERO)
 
-func update_info_label() -> void:
-	if info_label:
-		info_label.text = "Example 2.8: Two-body attraction\nGravity %.2f" % gravity_strength
-
 func reset_scene() -> void:
 	gravity_strength = DEFAULT_GRAVITY_STRENGTH
-	if gravity_controller:
-		gravity_controller.set_value(gravity_strength)
+	if _panel:
+		_panel.set_slider_value(0, gravity_strength)
 	spawn_bodies()
 
 func toggle_force_vectors() -> void:
@@ -226,6 +219,14 @@ func toggle_force_vectors() -> void:
 	if is_instance_valid(arrow_b):
 		arrow_b.visible = show_force_vectors
 
-func _on_gravity_changed(value: float) -> void:
-	gravity_strength = value
+func _on_gravity_slider_moved(_position) -> void:
+	gravity_strength = _panel.get_slider_value(0)
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

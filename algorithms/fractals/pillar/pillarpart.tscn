@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdntqst07jhp7"]
+
+[sub_resource type="Curve" id="Curve_58doc"]
+_data = [Vector2(0, 0.9061599), 0.0, 0.0, 0, 0, Vector2(0.18750001, 0.9124159), 0.2681144, 0.2681144, 0, 0, Vector2(0.30750003, 0.549567), -0.22243603, -0.22243603, 0, 0, Vector2(0.46000004, 0.33686244), 0.0, 0.0, 0, 0, Vector2(0.75750005, 0.60587114), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_2gs8w"]
+radial_steps = 4
+curve = SubResource("Curve_58doc")
+
+[node name="pillarpart" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.99992955, -0.01186796, 0, 0.01186796, 0.99992955, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TubeTrailMesh_2gs8w")

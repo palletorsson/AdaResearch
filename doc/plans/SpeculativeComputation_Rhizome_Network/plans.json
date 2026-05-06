@@ -1,0 +1,26 @@
+{
+  "name": "SpeculativeComputation_Rhizome_Network",
+  "title": "Networks Without Hierarchy",
+  "description": "An organic cave with four interconnected chambers separated by wall bridges. No hierarchy \u2014 multiple paths connect every chamber. Rhizomatic.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    9,
+    1
+  ],
+  "teleport": [
+    8,
+    1
+  ],
+  "artifacts": [
+    {
+      "name": "rhizome_cave_demo",
+      "row": 5,
+      "col": 2,
+      "family": "isosurfaces"
+    }
+  ]
+}

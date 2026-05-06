@@ -1,0 +1,120 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcx4hj8k5m2yp"]
+
+[ext_resource type="Script" path="res://commons/scenes/world_map/ui/WorldMapUI.gd" id="1_ui"]
+[ext_resource type="Script" path="res://commons/scenes/world_map/ui/SubwayMapRenderer.gd" id="2_renderer"]
+
+[node name="WorldMapUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_ui")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.06, 0.06, 0.08, 1)
+
+[node name="SubwayMapRenderer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("2_renderer")
+station_radius = 24.0
+line_width = 12.0
+
+[node name="Legend" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -280.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 400.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="StatsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -60.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tooltip" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 400.0
+offset_bottom = 220.0
+mouse_filter = 1
+
+[node name="VBox" type="VBoxContainer" parent="Tooltip"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Title" type="Label" parent="Tooltip/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+
+[node name="Description" type="Label" parent="Tooltip/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="Progress" type="Label" parent="Tooltip/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.5, 0.8, 0.5, 1)
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.2, 0.85, 1.0, 1)
+text = "THRESHOLD PROTOCOL"
+horizontal_alignment = 1
+
+[node name="IntroLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -700.0
+offset_top = 70.0
+offset_right = 700.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.6, 0.6, 0.7, 1)
+text = "The world is no longer survivable. Inside the lab and its simulations, we build a new apparatus—making re-entry possible."
+horizontal_alignment = 1
+autowrap_mode = 2

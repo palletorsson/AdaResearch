@@ -1,0 +1,100 @@
+{
+  "spec_version": "0.1",
+  "artifact": {
+    "id": "xyz_slider_plate",
+    "name": "XYZ Slider Plate",
+    "qfep": "S",
+    "category": "primitive_point",
+    "essence": "three sliders (X, Y, Z) that move a point through space — coordinates made tangible",
+    "truth": "a coordinate is three independent measurements — the slider plate makes independence visible"
+  },
+  "parameters": [
+    { "id": "min_value",      "type": "float",   "default": -1.0 },
+    { "id": "max_value",      "type": "float",   "default":  1.0 },
+    { "id": "start_position", "type": "vec3",    "default": [0.0, 0.5, 0.0] },
+    { "id": "point_radius",   "type": "float",   "default": 0.025 },
+    { "id": "point_color",    "type": "color",   "default": [0.3, 0.8, 1.0] },
+    { "id": "line_to_origin", "type": "bool",    "default": true },
+    { "id": "panel_tilt_deg", "type": "float",   "default": -25.0 },
+    { "id": "panel_offset",   "type": "vec3",    "default": [0, 0, 0.25] }
+  ],
+  "state": [
+    { "id": "current_pos", "type": "vec3", "init": "$start_position" }
+  ],
+  "geometry": {
+    "kind": "compound",
+    "children": [
+      {
+        "id": "target_point",
+        "primitive": "sphere",
+        "params": { "radius": "$point_radius" },
+        "transform": { "translate": "$current_pos" },
+        "material": {
+          "kind": "pbr_standard",
+          "albedo": "$point_color",
+          "emission": "$point_color",
+          "emission_energy": 1.5,
+          "cast_shadow": false
+        }
+      },
+      {
+        "id": "coord_label",
+        "primitive": "label_3d",
+        "billboard": true,
+        "text": "format('(%.2f, %.2f, %.2f)', $current_pos)",
+        "transform": { "translate": "$current_pos + vec3(0, $point_radius + 0.04, 0)" },
+        "font_size": 32,
+        "outline_size": 4
+      },
+      {
+        "id": "origin_line",
+        "primitive": "cylinder",
+        "visible_when": "length($current_pos) > 0.001 && $line_to_origin",
+        "params": { "top_radius": 0.002, "bottom_radius": 0.002 },
+        "transform": {
+          "translate": "$current_pos / 2",
+          "look_at": "from origin to $current_pos",
+          "axis": "y"
+        },
+        "scale_y": "length($current_pos)",
+        "material": {
+          "kind": "pbr_standard",
+          "albedo": "alpha($point_color, 0.5)",
+          "emission": "$point_color",
+          "transparent": true,
+          "unshaded": true
+        }
+      },
+      {
+        "id": "control_panel",
+        "primitive": "panel",
+        "template": "rams.create_panel",
+        "title": "COORDINATES",
+        "rows": [
+          { "type": "slider_h", "label": "X", "binding": "current_pos.x",
+            "label_color": [1.0, 0.3, 0.3] },
+          { "type": "slider_h", "label": "Y", "binding": "current_pos.y",
+            "label_color": [0.3, 1.0, 0.3] },
+          { "type": "slider_h", "label": "Z", "binding": "current_pos.z",
+            "label_color": [0.3, 0.5, 1.0] }
+        ],
+        "value_range": { "min": "$min_value", "max": "$max_value" },
+        "transform": {
+          "translate": "$panel_offset",
+          "rotate_deg": ["$panel_tilt_deg", 0, 0]
+        },
+        "text_display": {
+          "binding": "format('(%.2f, %.2f, %.2f)', $current_pos)",
+          "position": [0, 0.16, 0.006]
+        }
+      }
+    ]
+  },
+  "behavior": {
+    "on_ready": ["build_geometry"],
+    "on_tick":  ["read_sliders -> current_pos", "update_target_point", "update_coord_label", "update_origin_line"]
+  },
+  "interaction": [
+    { "kind": "slider_drag", "axis_binding": ["current_pos.x", "current_pos.y", "current_pos.z"] }
+  ]
+}

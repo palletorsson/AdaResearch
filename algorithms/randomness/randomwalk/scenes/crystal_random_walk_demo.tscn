@@ -1,0 +1,117 @@
+[gd_scene load_steps=3 format=3 uid="uid://boqnx46qiroqc"]
+
+[ext_resource type="Script" uid="uid://dq45oeilt6bt2" path="res://algorithms/randomness/randomwalk/scripts/crystal_random_walk.gd" id="1_crystal"]
+[ext_resource type="Script" uid="uid://ml36ar3gmimg" path="res://algorithms/randomness/randomwalk/scripts/crystal_demo_controller.gd" id="2_controller"]
+
+[node name="CrystalRandomWalkDemo" type="Node3D"]
+script = ExtResource("2_controller")
+
+[node name="CrystalRandomWalk" type="Node3D" parent="."]
+script = ExtResource("1_crystal")
+taper_amount = 0.92
+rotation_chaos = 0.2
+color_start = Color(0.6, 0.9, 1, 1)
+emission_strength = 0.6
+random_seed = 42
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 12, 8, 12)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+shadow_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 600.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Crystal Random Walk"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StepsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Steps: 30"
+
+[node name="StepsSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 5.0
+value = 30.0
+
+[node name="BranchLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Branch Probability: 0.30"
+
+[node name="BranchSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="TaperLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Taper Amount: 0.92"
+
+[node name="TaperSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.5
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="ChaosLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Rotation Chaos: 0.20"
+
+[node name="ChaosSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 0.5
+step = 0.01
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RegenerateButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate Crystal"
+
+[node name="RandomSeedButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Random Seed"
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Prisms: 0"
+autowrap_mode = 3
