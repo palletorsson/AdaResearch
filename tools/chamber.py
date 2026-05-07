@@ -398,7 +398,10 @@ def cmd_init(args) -> int:
         "timestamp":   timestamp,
         "status":      "draft",
         "created_at":  datetime.datetime.now().isoformat(timespec="seconds"),
-        "worktree":    _short_path(worktree_path) \
+        # Store the REPO-relative path here, NOT the _short_path display
+        # string — finalize joins this to REPO and would otherwise see
+        # "godot/.claude/worktrees/..." which is not a real path.
+        "worktree":    worktree_path.relative_to(REPO).as_posix() \
                        if worktree_path.exists() else None,
         "rating":      None,
         "decision":    None,
