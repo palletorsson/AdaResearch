@@ -84,47 +84,82 @@ func _parse_args() -> void:
 
 
 func _run() -> void:
-	# Load the map via the catalog scene (same path map-mode multi_angle uses).
-	var catalog_scene: PackedScene = load(MAP_CATALOG_SCENE)
-	if catalog_scene == null:
-		push_error("capture_first_person: could not load %s" % MAP_CATALOG_SCENE)
+	# Use change_scene_to_file (not instantiate + add_child) so the
+	# catalog's autoloads / readiness wiring fires properly. Mirrors
+	# capture_multi_angle.gd::_run_map_capture.
+	print("capture_first_person: loading catalog + map '%s'..." % _target)
+	var change_err: int = change_scene_to_file(MAP_CATALOG_SCENE)
+	if change_err != OK:
+		push_error("capture_first_person: failed to load MapCatalog scene")
 		quit(1)
 		return
-	var catalog: Node = catalog_scene.instantiate()
-	get_root().add_child(catalog)
-	if catalog.has_method("set_target_map"):
-		catalog.call("set_target_map", _target)
-	elif "target_map_name" in catalog:
-		catalog.set("target_map_name", _target)
-
-	# Disable any existing cameras + overlay UI the catalog instantiated.
-	# The MapCatalog comes with a desktop UI (map browser sidebar, status
-	# label, comment writer panel, etc.) that would otherwise occupy
-	# half the viewport. Hide those — the player wouldn't see them.
-	await create_timer(0.4).timeout
 	await process_frame
-	_disable_cameras_recursive(catalog)
+	await process_frame
+
+	var catalog: Node = current_scene
+	if catalog == null:
+		push_error("capture_first_person: current_scene is null")
+		quit(1)
+		return
+
+	# Hide overlay UI so the capture shows only the rendered map.
 	_hide_overlay_nodes(catalog)
 
-	# Camera at player eye position, rotated by yaw+pitch.
-	var cam := Camera3D.new()
-	cam.fov = _fov
-	cam.near = 0.05
-	cam.far = 500.0
-	cam.current = true
-	get_root().add_child(cam)
+	# Ask the catalog to actually generate the map. This is the missing
+	# step that turns a green void into a real scene.
+	var loaded_ok: bool = bool(catalog.call("load_map_fresh", _target))
+	if not loaded_ok:
+		push_error("capture_first_person: failed to load map '%s'" % _target)
+		quit(1)
+		return
 
-	# Order matters: yaw first (around world Y), then pitch (around
-	# local X). Result is a typical FPS look-direction:
-	#   forward = -Z after rotation; up = +Y.
-	cam.global_position = _position
-	cam.rotation = Vector3.ZERO
-	cam.rotate_y(deg_to_rad(_yaw_deg))
-	cam.rotate_object_local(Vector3.RIGHT, deg_to_rad(_pitch_deg))
+	# Wait for grid generation to complete (signals + is_map_ready poll).
+	var ready_ok: bool = await _wait_for_map_ready(catalog, 30.0)
+	if not ready_ok:
+		push_warning("capture_first_person: map ready timeout, proceeding anyway")
 
-	# Wait for the map to render (foliage / shaders / lights etc.).
+	# Settle frames for shaders / lights / foliage.
 	await create_timer(_wait_seconds).timeout
 	await process_frame
+	await process_frame
+
+	# Reuse the catalog's preview camera instead of creating our own.
+	# That way we inherit the catalog's environment + lighting + projection
+	# defaults; we just override transform + fov to match the editor's
+	# scene-camera widget.
+	var camera: Camera3D = catalog.get("_preview_camera") if "_preview_camera" in catalog else null
+	if camera == null:
+		# Last-resort: walk the tree for any Camera3D and reuse it.
+		camera = _find_first_camera(catalog)
+	if camera == null:
+		push_error("capture_first_person: could not find a Camera3D in the catalog")
+		quit(1)
+		return
+
+	# Stop the catalog's auto-spin so the camera stays where we put it.
+	if catalog.has_method("set_camera_mode"):
+		catalog.call("set_camera_mode", 0)  # STATIC
+	if "_spin_speed" in catalog:
+		catalog.set("_spin_speed", 0.0)
+	await process_frame
+	# Belt-and-braces: re-set after a frame to clobber any deferred default.
+	if catalog.has_method("set_camera_mode"):
+		catalog.call("set_camera_mode", 0)
+	if "_spin_speed" in catalog:
+		catalog.set("_spin_speed", 0.0)
+
+	# Apply the requested camera config.
+	camera.fov = _fov
+	camera.global_position = _position
+	camera.rotation = Vector3.ZERO
+	camera.rotate_y(deg_to_rad(_yaw_deg))
+	camera.rotate_object_local(Vector3.RIGHT, deg_to_rad(_pitch_deg))
+	camera.current = true
+
+	# Final settle, then snapshot.
+	await process_frame
+	await process_frame
+	await create_timer(0.4).timeout
 	await process_frame
 
 	var img: Image = root.get_texture().get_image()
@@ -133,7 +168,6 @@ func _run() -> void:
 		quit(2)
 		return
 
-	# Save PNG + report.
 	var folder: String = _output_dir.path_join(_target)
 	var abs_folder: String = ProjectSettings.globalize_path(folder)
 	if not DirAccess.dir_exists_absolute(abs_folder):
@@ -165,13 +199,6 @@ func _run() -> void:
 	quit(0)
 
 
-func _disable_cameras_recursive(node: Node) -> void:
-	if node is Camera3D:
-		(node as Camera3D).current = false
-	for child in node.get_children():
-		_disable_cameras_recursive(child)
-
-
 # Hide MapCatalog overlay UI so first-person captures show ONLY the
 # map view — what the player would actually see, not the desktop
 # editor chrome. List mirrors capture_multi_angle.gd::_hide_overlay_nodes.
@@ -194,3 +221,44 @@ func _hide_overlay_nodes(catalog: Node) -> void:
 			(node as Node3D).visible = false
 		elif node is CanvasItem:
 			(node as CanvasItem).visible = false
+
+
+# Walk the scene tree for any Camera3D — last-resort fallback if
+# the catalog's _preview_camera property is absent.
+func _find_first_camera(node: Node) -> Camera3D:
+	if node is Camera3D:
+		return node as Camera3D
+	for child in node.get_children():
+		var found: Camera3D = _find_first_camera(child)
+		if found:
+			return found
+	return null
+
+
+# Mirror of capture_multi_angle.gd's helper — wait for the catalog's
+# grid system to signal map_generation_complete (or for is_map_ready
+# to return true). Without this, captures fire before the map renders.
+func _wait_for_map_ready(catalog: Node, timeout_seconds: float) -> bool:
+	var grid_system: Node = catalog.get("_grid_system") if "_grid_system" in catalog else null
+	if grid_system == null:
+		await create_timer(minf(timeout_seconds, 2.0)).timeout
+		return false
+
+	var done: bool = false
+	var on_done := func() -> void:
+		done = true
+	if grid_system.has_signal("map_generation_complete"):
+		grid_system.map_generation_complete.connect(on_done, CONNECT_ONE_SHOT)
+
+	var elapsed: float = 0.0
+	while elapsed < timeout_seconds and not done:
+		if grid_system.has_method("is_map_ready") and bool(grid_system.call("is_map_ready")):
+			done = true
+			break
+		await create_timer(0.1).timeout
+		elapsed += 0.1
+
+	if not done and grid_system.has_signal("map_generation_complete"):
+		if grid_system.map_generation_complete.is_connected(on_done):
+			grid_system.map_generation_complete.disconnect(on_done)
+	return done
