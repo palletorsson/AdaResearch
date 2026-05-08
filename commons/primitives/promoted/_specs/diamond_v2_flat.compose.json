@@ -1,0 +1,41 @@
+{
+  "_comment": "Elongated octahedron diamond cut: top apex + upper ring + lower ring + bottom apex. Composition of 3 stacked CylinderMesh frustums with radial_segments=4 (gem-faceted square cross-section). Cone 1 = top pyramid (apex up). Frustum = middle band (taper down). Cone 2 = bottom pyramid (apex down).",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [0.9, 0.0, 0.0],
+  "components": [
+    {
+      "_part": "top pyramid (apex at y=0.6, base at y=0.1)",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.0,
+        "bottom_radius": 0.354,
+        "height": 0.5,
+        "radial_segments": 4
+      },
+      "transform": {"position": [0, 0.35, 0]}
+    },
+    {
+      "_part": "middle band (frustum from upper ring 0.354 down to lower ring 0.212)",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.354,
+        "bottom_radius": 0.212,
+        "height": 0.2,
+        "radial_segments": 4
+      },
+      "transform": {"position": [0, 0.0, 0]}
+    },
+    {
+      "_part": "bottom pyramid (top ring 0.212 at y=-0.1, apex at y=-0.4)",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.212,
+        "bottom_radius": 0.0,
+        "height": 0.3,
+        "radial_segments": 4
+      },
+      "transform": {"position": [0, -0.25, 0]}
+    }
+  ]
+}

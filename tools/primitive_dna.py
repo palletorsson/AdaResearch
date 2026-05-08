@@ -425,6 +425,146 @@ def _cmd_promote_compose(args) -> int:
     return 0
 
 
+def _render_compose_scene_flat(
+        spec: dict[str, Any],
+        base_color: list[float],
+        token: str,
+        ) -> str:
+    """Compose .tscn with StandardMaterial3D per component."""
+    components = spec.get("components", [])
+    n_comp = len(components)
+
+    component_colors: list[list[float]] = []
+    for comp in components:
+        c = comp.get("color")
+        if c is None:
+            cc = list(base_color[:3]) + [1.0]
+        else:
+            cc = list(c[:3]) + [float(c[3]) if len(c) > 3 else 1.0]
+        component_colors.append(cc)
+
+    mesh_blocks: list[str] = []
+    for i, comp in enumerate(components):
+        primitive = comp["primitive"]
+        params = comp.get("params", {})
+        param_lines = []
+        for k, v in params.items():
+            if isinstance(v, float):
+                param_lines.append(f"{k} = {v:.6f}")
+            elif isinstance(v, list) and len(v) == 3:
+                param_lines.append(f"{k} = Vector3({v[0]}, {v[1]}, {v[2]})")
+            elif isinstance(v, list) and len(v) == 2:
+                param_lines.append(f"{k} = Vector2({v[0]}, {v[1]})")
+            else:
+                param_lines.append(f"{k} = {v}")
+        mesh_blocks.append(
+            f'[sub_resource type="{primitive}" id="Mesh_{i}"]\n'
+            + "\n".join(param_lines)
+        )
+
+    mat_blocks: list[str] = []
+    for i, color in enumerate(component_colors):
+        r, g, b, a = color[0], color[1], color[2], color[3]
+        mat_blocks.append(
+            f'[sub_resource type="StandardMaterial3D" id="Mat_{i}"]\n'
+            f'albedo_color = Color({r}, {g}, {b}, {a})\n'
+            f'emission_enabled = true\n'
+            f'emission = Color({r * 0.3}, {g * 0.3}, {b * 0.3}, 1.0)\n'
+            f'metallic = 0.0\n'
+            f'roughness = 0.5'
+        )
+
+    node_blocks: list[str] = []
+    for i, comp in enumerate(components):
+        transform = comp.get("transform", {})
+        pos = transform.get("position", [0, 0, 0])
+        node_lines = [
+            f'[node name="Part{i}" type="MeshInstance3D" parent="."]',
+            f'mesh = SubResource("Mesh_{i}")',
+            f'material_override = SubResource("Mat_{i}")',
+        ]
+        if pos != [0, 0, 0]:
+            node_lines.append(
+                f'transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, {pos[0]}, {pos[1]}, {pos[2]})'
+            )
+        node_blocks.append("\n".join(node_lines))
+
+    load_steps = n_comp * 2 + 1  # n meshes + n materials + node tree
+
+    return f"""[gd_scene load_steps={load_steps} format=3]
+
+; Promoted composition: {token} ({n_comp} components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as={token}
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+{chr(10).join(mesh_blocks)}
+
+{chr(10).join(mat_blocks)}
+
+[node name="{token.title().replace('_', '')}" type="Node3D"]
+
+{chr(10).join(node_blocks)}
+"""
+
+
+def _render_scene_flat(
+        primitive: str,
+        params: dict[str, Any],
+        base_color: list[float],
+        token: str,
+        ) -> str:
+    """Single-primitive .tscn with StandardMaterial3D — no edge shader.
+
+    Used when the goal is silhouette fidelity and the artifact's edges
+    aren't part of the teaching. Removes the "internal triangulation
+    showing through" problem that CylinderMesh-as-tetrahedron etc. suffers
+    with edge-highlighting shaders.
+    """
+    mesh_lines: list[str] = []
+    for k, v in params.items():
+        if isinstance(v, float):
+            mesh_lines.append(f"{k} = {v:.6f}")
+        elif isinstance(v, list) and len(v) == 3:
+            mesh_lines.append(f"{k} = Vector3({v[0]}, {v[1]}, {v[2]})")
+        elif isinstance(v, list) and len(v) == 2:
+            mesh_lines.append(f"{k} = Vector2({v[0]}, {v[1]})")
+        else:
+            mesh_lines.append(f"{k} = {v}")
+    mesh_block = "\n".join(mesh_lines)
+
+    r, g, b, a = base_color[0], base_color[1], base_color[2], base_color[3]
+    node_name = token.title().replace('_', '')
+    return f"""[gd_scene load_steps=3 format=3]
+
+; Promoted artifact: {token}
+; Source: primitive_dna.py promote {primitive} --shader=flat --as={token}
+;
+; Flat material: no edge shader. Pure albedo + soft emission.
+; Hides CylinderMesh's internal triangulation when the original was
+; rendered with flat shading too. Trade-off: loses the wireframe-grid
+; teaching pedagogy that --shader=edges or --shader=parametric provides.
+
+[sub_resource type="{primitive}" id="MeshRes"]
+{mesh_block}
+
+[sub_resource type="StandardMaterial3D" id="MatRes"]
+albedo_color = Color({r}, {g}, {b}, {a})
+emission_enabled = true
+emission = Color({r * 0.3}, {g * 0.3}, {b * 0.3}, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="{node_name}" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("MeshRes")
+material_override = SubResource("MatRes")
+"""
+
+
 def _render_compose_scene(
         spec: dict[str, Any],
         base_color: list[float],
@@ -439,6 +579,9 @@ def _render_compose_scene(
     transfers from the hand-coded original."""
     components = spec.get("components", [])
     n_comp = len(components)
+
+    if shader_choice == "flat":
+        return _render_compose_scene_flat(spec, base_color, token)
 
     if shader_choice == "parametric":
         shader_path = "res://commons/resourses/shaders/ParametricGrid.gdshader"
@@ -722,7 +865,14 @@ def _render_scene(
             mesh_lines.append(f"{k} = {v}")
     mesh_block = "\n".join(mesh_lines)
 
-    # Shader path + uniforms.
+    # Shader / material strategy.
+    if shader_choice == "flat":
+        # No shader — StandardMaterial3D. No edge highlighting, so
+        # CylinderMesh's internal triangulation doesn't show through.
+        # Best for promotions where silhouette is the goal and the
+        # original used flat shading too (bipyramid, diamond, tetrahedron).
+        return _render_scene_flat(primitive, params, base_color, token)
+
     if shader_choice == "parametric":
         shader_path = "res://commons/resourses/shaders/ParametricGrid.gdshader"
         shader_uniforms = (
@@ -831,8 +981,8 @@ def main() -> int:
                            help="primitive params, e.g. rings=2 radial_segments=4 (single mode)")
     p_promote.add_argument("--compose", default=None,
                            help="path to a composition spec JSON (compose mode)")
-    p_promote.add_argument("--shader", choices=["edges", "parametric"], default="edges",
-                           help="grid shader: edges (default, mesh-edge highlighting) or parametric (UV-grid)")
+    p_promote.add_argument("--shader", choices=["edges", "parametric", "flat"], default="edges",
+                           help="material strategy: edges (SimpleGrid, mesh-edge highlighting), parametric (ParametricGrid, UV-grid), or flat (StandardMaterial3D, no edges — best when CylinderMesh's internal triangulation would otherwise show through)")
     p_promote.add_argument("--color", default=None,
                            help="base color as 'r,g,b' (default 0.6,0.0,0.8 — bipyramid violet)")
     p_promote.add_argument("--lines-u", type=int, default=None,

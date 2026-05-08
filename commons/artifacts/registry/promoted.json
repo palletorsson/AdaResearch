@@ -289,6 +289,54 @@
         "spec_file": "commons\\primitives\\promoted\\_specs\\diamond_v2.compose.json"
       },
       "scene": "res://commons/primitives/promoted/diamond_v2/diamond_v2.tscn"
+    },
+    "diamond_v2_flat": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Composition of 3 primitives",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "diamond_v2_flat",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "diamond_v2_flat",
+      "promoted_from": {
+        "kind": "composition",
+        "n_components": 3,
+        "shader": "flat",
+        "spec_file": "commons\\primitives\\promoted\\_specs\\diamond_v2_flat.compose.json"
+      },
+      "scene": "res://commons/primitives/promoted/diamond_v2_flat/diamond_v2_flat.tscn"
+    },
+    "tetrahedron_v2_flat": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "CylinderMesh promoted to named artifact: {'top_radius': 0.0, 'bottom_radius': 0.6, 'height': 0.85, 'radial_segments': 3}",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "tetrahedron_v2_flat",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "tetrahedron_v2_flat",
+      "promoted_from": {
+        "primitive": "CylinderMesh",
+        "params": {
+          "top_radius": 0.0,
+          "bottom_radius": 0.6,
+          "height": 0.85,
+          "radial_segments": 3
+        },
+        "shader": "flat"
+      },
+      "scene": "res://commons/primitives/promoted/tetrahedron_v2_flat/tetrahedron_v2_flat.tscn"
     }
   }
 }

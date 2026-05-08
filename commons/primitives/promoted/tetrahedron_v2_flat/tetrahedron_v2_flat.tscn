@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3]
+
+; Promoted artifact: tetrahedron_v2_flat
+; Source: primitive_dna.py promote CylinderMesh --shader=flat --as=tetrahedron_v2_flat
+;
+; Flat material: no edge shader. Pure albedo + soft emission.
+; Hides CylinderMesh's internal triangulation when the original was
+; rendered with flat shading too. Trade-off: loses the wireframe-grid
+; teaching pedagogy that --shader=edges or --shader=parametric provides.
+
+[sub_resource type="CylinderMesh" id="MeshRes"]
+top_radius = 0.000000
+bottom_radius = 0.600000
+height = 0.850000
+radial_segments = 3
+
+[sub_resource type="StandardMaterial3D" id="MatRes"]
+albedo_color = Color(1.0, 0.0, 1.0, 1.0)
+emission_enabled = true
+emission = Color(0.3, 0.0, 0.3, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="TetrahedronV2Flat" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("MeshRes")
+material_override = SubResource("MatRes")
