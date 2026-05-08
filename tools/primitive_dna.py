@@ -58,7 +58,14 @@ GENOMES: dict[str, dict[str, Any]] = {
             "ring_segments": [3, 4, 5, 6, 8, 12, 16, 24],
         },
         "camera":   {"yaw_deg": 25.0, "pitch_deg": 25.0, "pad": 1.6},
-        "material": {"base_color": [0.62, 0.65, 0.74, 1.0]},
+        "material": {
+            "base_color":         [0.62, 0.65, 0.74, 1.0],
+            "line_color":         [0.95, 0.40, 0.45, 1.0],
+            "shader":             "parametric",
+            # TorusMesh UV: u = around major axis, v = around tube cross-section.
+            "line_count_axes":    {"u": "rings", "v": "ring_segments"},
+            "line_count_defaults": {"u": 8, "v": 8},
+        },
         "image":    {"width": 384, "height": 384},
         "truth":    "a torus is a 2D parameter space; rings × ring_segments names which corner the eye reads as 'donut'",
     },
@@ -72,7 +79,14 @@ GENOMES: dict[str, dict[str, Any]] = {
             "radial_segments": [3, 4, 5, 6, 8, 12, 16, 24],
         },
         "camera":   {"yaw_deg": 25.0, "pitch_deg": 25.0, "pad": 1.5},
-        "material": {"base_color": [0.62, 0.65, 0.74, 1.0]},
+        "material": {
+            "base_color":         [0.62, 0.65, 0.74, 1.0],
+            "line_color":         [0.95, 0.40, 0.45, 1.0],
+            "shader":             "parametric",
+            # SphereMesh UV: u = longitude (around), v = latitude (top->bottom).
+            "line_count_axes":    {"u": "radial_segments", "v": "rings"},
+            "line_count_defaults": {"u": 8, "v": 8},
+        },
         "image":    {"width": 384, "height": 384},
         "truth":    "a sphere is what the eye calls a polyhedron once both axes have enough segments",
     },
@@ -85,7 +99,15 @@ GENOMES: dict[str, dict[str, Any]] = {
             "radial_segments": [3, 4, 5, 6, 8, 12, 16, 24],
         },
         "camera":   {"yaw_deg": 25.0, "pitch_deg": 15.0, "pad": 1.5},
-        "material": {"base_color": [0.62, 0.65, 0.74, 1.0]},
+        "material": {
+            "base_color":         [0.62, 0.65, 0.74, 1.0],
+            "line_color":         [0.95, 0.40, 0.45, 1.0],
+            "shader":             "parametric",
+            # CapsuleMesh UV: u = longitude. Height is geometric, not
+            # segment-count, so v stays at default to read the proportion.
+            "line_count_axes":    {"u": "radial_segments"},
+            "line_count_defaults": {"u": 8, "v": 6},
+        },
         "image":    {"width": 384, "height": 512},
         "truth":    "a capsule is a sphere stretched along an axis; height vs segments names which 'pill' you mean",
     },
@@ -96,7 +118,17 @@ GENOMES: dict[str, dict[str, Any]] = {
             "subdivide_depth": [0, 1, 2, 4, 8],
         },
         "camera":   {"yaw_deg": 25.0, "pitch_deg": 25.0, "pad": 1.6},
-        "material": {"base_color": [0.62, 0.65, 0.74, 1.0]},
+        "material": {
+            "base_color":         [0.62, 0.65, 0.74, 1.0],
+            "line_color":         [0.95, 0.40, 0.45, 1.0],
+            "shader":             "parametric",
+            # BoxMesh UVs are per-face. The parametric grid will paint each
+            # face with the same N×M but the visual *meaning* is "this is
+            # how many subdivisions exist along each axis." Map the actual
+            # subdivisions to grid lines (+1 because N subdivisions = N+1 lines).
+            "line_count_axes":    {"u": "subdivide_width", "v": "subdivide_depth"},
+            "line_count_defaults": {"u": 2, "v": 2},
+        },
         "image":    {"width": 384, "height": 384},
         "truth":    "a box subdivided is still a box; its DNA is in what you do with the extra vertices",
     },
@@ -111,7 +143,13 @@ GENOMES: dict[str, dict[str, Any]] = {
             "radial_segments": [3, 4, 5, 6, 8, 12, 16, 24],
         },
         "camera":   {"yaw_deg": 25.0, "pitch_deg": 18.0, "pad": 1.5},
-        "material": {"base_color": [0.62, 0.65, 0.74, 1.0]},
+        "material": {
+            "base_color":         [0.62, 0.65, 0.74, 1.0],
+            "line_color":         [0.95, 0.40, 0.45, 1.0],
+            "shader":             "parametric",
+            "line_count_axes":    {"u": "radial_segments", "v": "rings"},
+            "line_count_defaults": {"u": 8, "v": 1},
+        },
         "image":    {"width": 384, "height": 480},
         "truth":    "a cylinder is what a prism becomes when you stop counting sides; segments=3 is a triangular prism, segments=24 is the eye giving up",
     },
@@ -124,7 +162,13 @@ GENOMES: dict[str, dict[str, Any]] = {
             "subdivide_width":   [0, 1, 2, 4],
         },
         "camera":   {"yaw_deg": 25.0, "pitch_deg": 25.0, "pad": 1.6},
-        "material": {"base_color": [0.62, 0.65, 0.74, 1.0]},
+        "material": {
+            "base_color":         [0.62, 0.65, 0.74, 1.0],
+            "line_color":         [0.95, 0.40, 0.45, 1.0],
+            "shader":             "parametric",
+            "line_count_axes":    {"u": "subdivide_width"},
+            "line_count_defaults": {"u": 2, "v": 4},
+        },
         "image":    {"width": 384, "height": 384},
         "truth":    "a prism is a wedge with one parameter to slide between right-angled and centered — left_to_right is the asymmetry of cut",
     },

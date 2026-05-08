@@ -27,6 +27,7 @@ extends SceneTree
 ## Output: <out>/<variant_id>.png for each variant + summary.json.
 
 const GRID_FACTORY := preload("res://commons/primitives/shared/grid_material_factory.gd")
+const PARAMETRIC_GRID_SHADER_PATH := "res://commons/resourses/shaders/ParametricGrid.gdshader"
 
 var _manifest_path: String = ""
 var _output_dir: String = "user://primitive_dna_out"
@@ -36,6 +37,17 @@ var _pad: float = 1.6
 var _width: int = 512
 var _height: int = 512
 var _base_color: Color = Color(0.65, 0.68, 0.74, 1.0)
+var _line_color: Color = Color(0.95, 0.40, 0.45, 1.0)
+# Shader strategy: "edges" = SimpleGrid (mesh-edge highlighting), "parametric"
+# = ParametricGrid (UV-space grid with caller-supplied line counts). Default
+# to parametric for the DNA gallery so high-tessellation variants stay
+# legible.
+var _shader_mode: String = "parametric"
+# When using the parametric shader, the manifest can specify which axes
+# of the variant feed lines_u and lines_v on the shader. Falls back to
+# fixed defaults if not supplied.
+var _line_count_axes: Dictionary = {}     # {"u": "rings", "v": "ring_segments"}
+var _line_count_defaults: Dictionary = {"u": 8, "v": 8}
 
 
 func _initialize() -> void:
@@ -66,6 +78,17 @@ func _initialize() -> void:
 		if bc is Array and bc.size() >= 3:
 			var a: float = float(bc[3]) if bc.size() > 3 else 1.0
 			_base_color = Color(float(bc[0]), float(bc[1]), float(bc[2]), a)
+		var lc = mat.get("line_color", null)
+		if lc is Array and lc.size() >= 3:
+			var la: float = float(lc[3]) if lc.size() > 3 else 1.0
+			_line_color = Color(float(lc[0]), float(lc[1]), float(lc[2]), la)
+		_shader_mode = String(mat.get("shader", _shader_mode))
+		var lca = mat.get("line_count_axes", null)
+		if lca is Dictionary:
+			_line_count_axes = lca
+		var lcd = mat.get("line_count_defaults", null)
+		if lcd is Dictionary:
+			_line_count_defaults = lcd
 
 	var primitive_name: String = String(manifest.get("primitive", ""))
 	if primitive_name.is_empty():
@@ -137,6 +160,32 @@ func _build_mesh(primitive_name: String, params: Dictionary) -> PrimitiveMesh:
 	return mesh
 
 
+# Build a fresh ShaderMaterial with the parametric grid shader and lines_u
+# / lines_v derived from this variant's params (via the manifest's
+# line_count_axes mapping). This is what makes the gallery's visual
+# encoding stay legible across the parameter sweep.
+func _build_parametric_material(shader: Shader, params: Dictionary) -> ShaderMaterial:
+	var m := ShaderMaterial.new()
+	m.shader = shader
+	m.set_shader_parameter("fill_color", _base_color)
+	m.set_shader_parameter("line_color", _line_color)
+
+	var lines_u: int = int(_line_count_defaults.get("u", 8))
+	var lines_v: int = int(_line_count_defaults.get("v", 8))
+	var u_axis: String = String(_line_count_axes.get("u", ""))
+	var v_axis: String = String(_line_count_axes.get("v", ""))
+	if u_axis != "" and params.has(u_axis):
+		lines_u = int(params[u_axis])
+	if v_axis != "" and params.has(v_axis):
+		lines_v = int(params[v_axis])
+	# Clamp to shader's hint_range (1, 64).
+	lines_u = clamp(lines_u, 1, 64)
+	lines_v = clamp(lines_v, 1, 64)
+	m.set_shader_parameter("lines_u", lines_u)
+	m.set_shader_parameter("lines_v", lines_v)
+	return m
+
+
 # JSON arrays come through as GDScript Arrays; some PrimitiveMesh properties
 # are typed (Vector3, Vector2). Coerce based on the property type Godot
 # reports so silent set-failures don't produce empty meshes (which is what
@@ -198,7 +247,19 @@ func _run_batch(primitive_name: String, variants: Array, output_abs: String) -> 
 	scene_root.add_child(camera)
 	camera.current = true
 
-	var material: Material = GRID_FACTORY.make(_base_color)
+	# Pre-load the parametric shader if we're in parametric mode; falls back
+	# to GridMaterialFactory for "edges" mode (mesh-triangle highlighting).
+	var parametric_shader: Shader = null
+	if _shader_mode == "parametric":
+		parametric_shader = load(PARAMETRIC_GRID_SHADER_PATH) as Shader
+		if parametric_shader == null:
+			push_warning("capture_primitive_dna: parametric shader missing, falling back to edges")
+			_shader_mode = "edges"
+	# Material reused across variants only when not parametric (parametric
+	# wants per-variant uniform values).
+	var shared_edge_material: Material = null
+	if _shader_mode == "edges":
+		shared_edge_material = GRID_FACTORY.make(_base_color)
 
 	var saved_ids: Array = []
 	var failed: int = 0
@@ -227,7 +288,14 @@ func _run_batch(primitive_name: String, variants: Array, output_abs: String) -> 
 
 		var mi := MeshInstance3D.new()
 		mi.mesh = pmesh
-		mi.material_override = material
+		# Per-variant material: in parametric mode, the line counts come
+		# from this variant's params (or fall back to defaults). The
+		# rendered grid then literally shows the parametric structure
+		# the variant claims, regardless of mesh tessellation.
+		if _shader_mode == "parametric":
+			mi.material_override = _build_parametric_material(parametric_shader, params)
+		else:
+			mi.material_override = shared_edge_material
 		scene_root.add_child(mi)
 
 		# Let the mesh build its AABB.
