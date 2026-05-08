@@ -1,0 +1,30 @@
+{
+  "artifacts": {
+    "bipyramid_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "SphereMesh promoted to named artifact: {'rings': 2, 'radial_segments': 4, 'radius': 0.424, 'height': 0.8}",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "bipyramid_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "bipyramid_v2",
+      "promoted_from": {
+        "primitive": "SphereMesh",
+        "params": {
+          "rings": 2,
+          "radial_segments": 4,
+          "radius": 0.424,
+          "height": 0.8
+        },
+        "shader": "parametric"
+      },
+      "scene": "res://commons/primitives/promoted/bipyramid_v2/bipyramid_v2.tscn"
+    }
+  }
+}

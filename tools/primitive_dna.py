@@ -325,6 +325,212 @@ def cmd_sweep(args) -> int:
     return 0
 
 
+def cmd_promote(args) -> int:
+    """Promote a primitive variant to a named artifact.
+
+    Generates a thin .tscn at commons/primitives/promoted/<token>/<token>.tscn
+    consisting of a single MeshInstance3D pointing at a PrimitiveMesh with
+    the supplied params. Adds a registry entry to
+    commons/artifacts/registry/promoted.json so the new token is
+    placeable in maps.
+
+    The point of this command is the proof: if a hand-coded primitive
+    (bipyramid.gd, with 6 vertices and 8 triangles in source) is
+    visually equivalent to a SphereMesh with the right parameters, the
+    hand-coded version is redundant. The promoted artifact takes its
+    place; bipyramid.gd can be retired.
+    """
+    primitive = args.primitive
+    if primitive not in GENOMES:
+        print(f"  !! unknown primitive '{primitive}'", file=sys.stderr)
+        return 1
+
+    token = args.as_token
+    if not token or not token.replace("_", "").isalnum():
+        print(f"  !! invalid --as=<token>: '{token}' (alphanumeric + underscores)",
+              file=sys.stderr)
+        return 1
+
+    # Parse param overrides from the CLI: --params radius=0.424 height=0.8 ...
+    params: dict[str, Any] = {}
+    for kv in args.params or []:
+        if "=" not in kv:
+            print(f"  !! malformed --params token '{kv}' (need key=value)",
+                  file=sys.stderr)
+            return 1
+        k, v = kv.split("=", 1)
+        # Coerce: int → int, float-with-dot → float, else str
+        if v.lstrip("-").isdigit():
+            params[k] = int(v)
+        else:
+            try:
+                params[k] = float(v)
+            except ValueError:
+                params[k] = v
+    if not params:
+        print(f"  !! --params required (e.g. --params rings=2 radial_segments=4)",
+              file=sys.stderr)
+        return 1
+
+    shader_choice = args.shader  # "edges" or "parametric"
+
+    # Derive parametric-grid line counts from the genome's line_count_axes
+    # mapping, so a promoted SphereMesh(rings=2, radial_segments=4) gets
+    # lines_u=4 lines_v=2 — exactly matching the actual edge structure.
+    # Caller can override with --lines-u / --lines-v.
+    lines_u: int = 8
+    lines_v: int = 8
+    genome_material = GENOMES[primitive].get("material", {})
+    line_axes = genome_material.get("line_count_axes", {})
+    line_defaults = genome_material.get("line_count_defaults", {"u": 8, "v": 8})
+    u_axis_name = line_axes.get("u", "")
+    v_axis_name = line_axes.get("v", "")
+    if u_axis_name and u_axis_name in params:
+        lines_u = int(params[u_axis_name])
+    else:
+        lines_u = int(line_defaults.get("u", 8))
+    if v_axis_name and v_axis_name in params:
+        lines_v = int(params[v_axis_name])
+    else:
+        lines_v = int(line_defaults.get("v", 8))
+    if args.lines_u is not None:
+        lines_u = args.lines_u
+    if args.lines_v is not None:
+        lines_v = args.lines_v
+    lines_u = max(1, min(64, lines_u))
+    lines_v = max(1, min(64, lines_v))
+
+    color = args.color or "0.6,0.0,0.8"
+    color_parts = [float(x) for x in color.split(",")]
+    if len(color_parts) < 3:
+        print(f"  !! --color needs 3 floats (r,g,b)", file=sys.stderr)
+        return 1
+    base_color = list(color_parts[:3]) + [1.0]
+
+    # Output paths.
+    scene_dir = REPO / "commons" / "primitives" / "promoted" / token
+    scene_path = scene_dir / f"{token}.tscn"
+    if scene_path.exists() and not args.force:
+        print(f"  !! {_short(scene_path)} already exists (use --force to overwrite)",
+              file=sys.stderr)
+        return 1
+    scene_dir.mkdir(parents=True, exist_ok=True)
+
+    # Build the .tscn text.
+    scene_text = _render_scene(primitive, params, base_color, shader_choice, token,
+                                lines_u, lines_v)
+    scene_path.write_text(scene_text, encoding="utf-8")
+    print(f"  scene:    {_short(scene_path)}")
+
+    # Update registry.
+    reg_path = REPO / "commons" / "artifacts" / "registry" / "promoted.json"
+    if reg_path.exists():
+        reg = json.loads(reg_path.read_text(encoding="utf-8"))
+    else:
+        reg = {"artifacts": {}}
+    reg.setdefault("artifacts", {})[token] = {
+        "category":      "primitives",
+        "complexity":    "beginner",
+        "description":   f"{primitive} promoted to named artifact: {dict(params)}",
+        "footprint":     [1, 1, 1],
+        "include_in_map_data": True,
+        "lookup_name":   token,
+        "map_ready":     True,
+        "map_sequences": [],
+        "name":          token,
+        "promoted_from": {
+            "primitive": primitive,
+            "params":    dict(params),
+            "shader":    shader_choice,
+        },
+        "scene":         f"res://commons/primitives/promoted/{token}/{token}.tscn",
+    }
+    reg_path.parent.mkdir(parents=True, exist_ok=True)
+    reg_path.write_text(json.dumps(reg, indent=2), encoding="utf-8")
+    print(f"  registry: {_short(reg_path)}")
+
+    print()
+    print("Verify with:")
+    print(f"  godot --xr-mode off --no-window --script "
+          f"res://commons/testing/capture_multi_angle.gd "
+          f"-- --mode=artifact --target={token}")
+    return 0
+
+
+def _render_scene(
+        primitive: str,
+        params: dict[str, Any],
+        base_color: list[float],
+        shader_choice: str,
+        token: str,
+        lines_u: int = 8,
+        lines_v: int = 8,
+        ) -> str:
+    """Render a minimal .tscn for the promoted artifact."""
+    # Build PrimitiveMesh sub-resource lines.
+    mesh_lines: list[str] = []
+    for k, v in params.items():
+        if isinstance(v, float):
+            mesh_lines.append(f"{k} = {v:.6f}")
+        else:
+            mesh_lines.append(f"{k} = {v}")
+    mesh_block = "\n".join(mesh_lines)
+
+    # Shader path + uniforms.
+    if shader_choice == "parametric":
+        shader_path = "res://commons/resourses/shaders/ParametricGrid.gdshader"
+        shader_uniforms = (
+            f'shader_parameter/fill_color = Color({base_color[0]}, {base_color[1]}, {base_color[2]}, {base_color[3]})\n'
+            f'shader_parameter/line_color = Color(1, 1, 1, 1)\n'
+            f'shader_parameter/lines_u = {lines_u}\n'
+            f'shader_parameter/lines_v = {lines_v}\n'
+            f'shader_parameter/line_width = 0.02\n'
+            f'shader_parameter/emission = 1.2\n'
+            f'shader_parameter/show_mesh_edges = false\n'
+            f'shader_parameter/mesh_edge_alpha = 0.15'
+        )
+    else:
+        # SimpleGrid path — uses camelCase uniform names.
+        shader_path = "res://commons/resourses/shaders/SimpleGrid.gdshader"
+        shader_uniforms = (
+            f'shader_parameter/modelColor = Color({base_color[0]}, {base_color[1]}, {base_color[2]}, {base_color[3]})\n'
+            f'shader_parameter/wireframeColor = Color(1, 1, 1, 1)\n'
+            f'shader_parameter/width = 2.0\n'
+            f'shader_parameter/emission_strength = 2.0\n'
+            f'shader_parameter/show_interior = true'
+        )
+
+    node_name = token.title().replace('_', '')
+    return f"""[gd_scene load_steps=4 format=3]
+
+; Promoted artifact: {token}
+; Source: primitive_dna.py promote {primitive} --as={token} --params {params}
+;
+; This scene is generated. The hand-coded primitive it replaces (if any)
+; lives in commons/primitives/<original>/. After verification, the
+; original .gd / .tscn pair can be retired.
+;
+; Structure: Node3D root with a MeshInstance3D child — matches the
+; convention used by hand-coded primitives so the artifact catalog and
+; capture pipeline both treat it identically.
+
+[ext_resource type="Shader" path="{shader_path}" id="1_shader"]
+
+[sub_resource type="{primitive}" id="MeshRes"]
+{mesh_block}
+
+[sub_resource type="ShaderMaterial" id="MatRes"]
+shader = ExtResource("1_shader")
+{shader_uniforms}
+
+[node name="{node_name}" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("MeshRes")
+material_override = SubResource("MatRes")
+"""
+
+
 def cmd_list(args) -> int:
     if not PRIMITIVE_RUNS.exists():
         print(f"  no primitive runs found ({PRIMITIVE_RUNS} doesn't exist)")
@@ -361,6 +567,28 @@ def main() -> int:
 
     p_list = sub.add_parser("list", help="list primitive runs on disk")
     p_list.set_defaults(func=cmd_list)
+
+    p_promote = sub.add_parser(
+        "promote",
+        help="promote a primitive variant to a named artifact (.tscn + registry entry)",
+    )
+    p_promote.add_argument("primitive", help=f"one of: {', '.join(sorted(GENOMES.keys()))}")
+    p_promote.add_argument("--as", dest="as_token", required=True,
+                           help="artifact token, e.g. bipyramid_v2")
+    p_promote.add_argument("--params", nargs="+", required=True,
+                           metavar="key=value",
+                           help="primitive params, e.g. rings=2 radial_segments=4 radius=0.424 height=0.8")
+    p_promote.add_argument("--shader", choices=["edges", "parametric"], default="edges",
+                           help="grid shader: edges (default, mesh-edge highlighting) or parametric (UV-grid)")
+    p_promote.add_argument("--color", default=None,
+                           help="base color as 'r,g,b' (default 0.6,0.0,0.8 — bipyramid violet)")
+    p_promote.add_argument("--lines-u", type=int, default=None,
+                           help="parametric shader: lines along u axis (default: from genome line_count_axes)")
+    p_promote.add_argument("--lines-v", type=int, default=None,
+                           help="parametric shader: lines along v axis (default: from genome line_count_axes)")
+    p_promote.add_argument("--force", action="store_true",
+                           help="overwrite if scene already exists")
+    p_promote.set_defaults(func=cmd_promote)
 
     args = parser.parse_args()
     return args.func(args)
