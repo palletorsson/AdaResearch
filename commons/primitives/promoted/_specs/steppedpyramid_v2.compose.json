@@ -1,0 +1,18 @@
+{
+  "_comment": "steppedpyramid as 10 stacked BoxMesh layers, each 0.1 tall and 0.2 narrower than the one below. Replaces the Blender-exported vertex array (~110 lines of hardcoded coords).",
+  "primitive": "Composition",
+  "shader": "edges",
+  "color": [0.65, 0.65, 0.65],
+  "components": [
+    {"primitive": "BoxMesh", "params": {"size": [2.0, 0.1, 2.0]}, "transform": {"position": [0, 0.05, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [1.8, 0.1, 1.8]}, "transform": {"position": [0, 0.15, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [1.6, 0.1, 1.6]}, "transform": {"position": [0, 0.25, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [1.4, 0.1, 1.4]}, "transform": {"position": [0, 0.35, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [1.2, 0.1, 1.2]}, "transform": {"position": [0, 0.45, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [1.0, 0.1, 1.0]}, "transform": {"position": [0, 0.55, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [0.8, 0.1, 0.8]}, "transform": {"position": [0, 0.65, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [0.6, 0.1, 0.6]}, "transform": {"position": [0, 0.75, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [0.4, 0.1, 0.4]}, "transform": {"position": [0, 0.85, 0]}},
+    {"primitive": "BoxMesh", "params": {"size": [0.2, 0.1, 0.2]}, "transform": {"position": [0, 0.95, 0]}}
+  ]
+}

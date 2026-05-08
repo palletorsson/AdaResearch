@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3]
+
+; Promoted composition: steppedpyramid_v2 (10 components)
+; Source: primitive_dna.py promote --compose=<spec> --as=steppedpyramid_v2
+;
+; Each component below is a MeshInstance3D child of a shared Node3D
+; root. Components can specify their own `color` in the spec to get a
+; per-component ShaderMaterial; otherwise they share Mat_global. This
+; lets compositions reproduce the surface patterns (stripes, alternating
+; fills) of the hand-coded artifacts they replace.
+
+[ext_resource type="Shader" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="1_shader"]
+
+[sub_resource type="BoxMesh" id="Mesh_0"]
+size = Vector3(2.0, 0.1, 2.0)
+[sub_resource type="BoxMesh" id="Mesh_1"]
+size = Vector3(1.8, 0.1, 1.8)
+[sub_resource type="BoxMesh" id="Mesh_2"]
+size = Vector3(1.6, 0.1, 1.6)
+[sub_resource type="BoxMesh" id="Mesh_3"]
+size = Vector3(1.4, 0.1, 1.4)
+[sub_resource type="BoxMesh" id="Mesh_4"]
+size = Vector3(1.2, 0.1, 1.2)
+[sub_resource type="BoxMesh" id="Mesh_5"]
+size = Vector3(1.0, 0.1, 1.0)
+[sub_resource type="BoxMesh" id="Mesh_6"]
+size = Vector3(0.8, 0.1, 0.8)
+[sub_resource type="BoxMesh" id="Mesh_7"]
+size = Vector3(0.6, 0.1, 0.6)
+[sub_resource type="BoxMesh" id="Mesh_8"]
+size = Vector3(0.4, 0.1, 0.4)
+[sub_resource type="BoxMesh" id="Mesh_9"]
+size = Vector3(0.2, 0.1, 0.2)
+
+[sub_resource type="ShaderMaterial" id="Mat_global"]
+shader = ExtResource("1_shader")
+shader_parameter/modelColor = Color(0.65, 0.65, 0.65, 1.0)
+shader_parameter/wireframeColor = Color(1, 1, 1, 1)
+shader_parameter/emissionColor = Color(0.65, 0.65, 0.65, 1.0)
+shader_parameter/width = 1.0
+shader_parameter/emission_strength = 1.0
+shader_parameter/show_interior = true
+
+[node name="SteppedpyramidV2" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+[node name="Part5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+[node name="Part6" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_6")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+[node name="Part7" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_7")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+[node name="Part8" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_8")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+[node name="Part9" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_9")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)

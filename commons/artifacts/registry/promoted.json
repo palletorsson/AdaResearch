@@ -175,6 +175,28 @@
         "spec_file": "commons\\primitives\\promoted\\_specs\\trafficcone_v3.compose.json"
       },
       "scene": "res://commons/primitives/promoted/trafficcone_v3/trafficcone_v3.tscn"
+    },
+    "steppedpyramid_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Composition of 10 primitives",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "steppedpyramid_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "steppedpyramid_v2",
+      "promoted_from": {
+        "kind": "composition",
+        "n_components": 10,
+        "shader": "edges",
+        "spec_file": "commons\\primitives\\promoted\\_specs\\steppedpyramid_v2.compose.json"
+      },
+      "scene": "res://commons/primitives/promoted/steppedpyramid_v2/steppedpyramid_v2.tscn"
     }
   }
 }
