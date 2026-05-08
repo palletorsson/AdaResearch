@@ -153,6 +153,28 @@
         "shader": "parametric"
       },
       "scene": "res://commons/primitives/promoted/trafficcone_v2/trafficcone_v2.tscn"
+    },
+    "trafficcone_v3": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Composition of 6 primitives",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "trafficcone_v3",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "trafficcone_v3",
+      "promoted_from": {
+        "kind": "composition",
+        "n_components": 6,
+        "shader": "edges",
+        "spec_file": "commons\\primitives\\promoted\\_specs\\trafficcone_v3.compose.json"
+      },
+      "scene": "res://commons/primitives/promoted/trafficcone_v3/trafficcone_v3.tscn"
     }
   }
 }

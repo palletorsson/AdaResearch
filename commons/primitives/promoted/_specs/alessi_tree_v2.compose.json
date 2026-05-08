@@ -5,7 +5,7 @@
   "color": [0.95, 0.92, 0.85],
   "components": [
     {
-      "_segment": "0..0.20 — wide foot tapering up to first narrow neck",
+      "_segment": "0..0.20 — wide foot tapering up to first narrow neck (RED tier)",
       "primitive": "CylinderMesh",
       "params": {
         "top_radius": 0.172,
@@ -14,10 +14,11 @@
         "radial_segments": 24,
         "rings": 0
       },
-      "transform": {"position": [0, 0.10, 0]}
+      "transform": {"position": [0, 0.10, 0]},
+      "color": [0.78, 0.18, 0.12]
     },
     {
-      "_segment": "0.20..0.40 — narrow neck out to next wide bulge",
+      "_segment": "0.20..0.40 — narrow neck out to next wide bulge (CREAM tier)",
       "primitive": "CylinderMesh",
       "params": {
         "top_radius": 0.288,
@@ -26,10 +27,11 @@
         "radial_segments": 24,
         "rings": 0
       },
-      "transform": {"position": [0, 0.30, 0]}
+      "transform": {"position": [0, 0.30, 0]},
+      "color": [0.93, 0.88, 0.78]
     },
     {
-      "_segment": "0.40..0.60 — bulge tapering to mid neck",
+      "_segment": "0.40..0.60 — bulge tapering to mid neck (RED tier)",
       "primitive": "CylinderMesh",
       "params": {
         "top_radius": 0.116,
@@ -38,10 +40,11 @@
         "radial_segments": 24,
         "rings": 0
       },
-      "transform": {"position": [0, 0.50, 0]}
+      "transform": {"position": [0, 0.50, 0]},
+      "color": [0.78, 0.18, 0.12]
     },
     {
-      "_segment": "0.60..0.80 — neck to next bulge (envelope smaller)",
+      "_segment": "0.60..0.80 — neck to next bulge (envelope smaller) (CREAM tier)",
       "primitive": "CylinderMesh",
       "params": {
         "top_radius": 0.176,
@@ -50,10 +53,11 @@
         "radial_segments": 24,
         "rings": 0
       },
-      "transform": {"position": [0, 0.70, 0]}
+      "transform": {"position": [0, 0.70, 0]},
+      "color": [0.93, 0.88, 0.78]
     },
     {
-      "_segment": "0.80..1.00 — bulge tapering to crown tip",
+      "_segment": "0.80..1.00 — bulge tapering to crown tip (GOLD tier)",
       "primitive": "CylinderMesh",
       "params": {
         "top_radius": 0.06,
@@ -62,7 +66,8 @@
         "radial_segments": 24,
         "rings": 0
       },
-      "transform": {"position": [0, 0.90, 0]}
+      "transform": {"position": [0, 0.90, 0]},
+      "color": [0.85, 0.65, 0.13]
     }
   ]
 }

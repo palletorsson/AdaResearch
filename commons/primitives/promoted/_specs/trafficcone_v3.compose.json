@@ -1,0 +1,77 @@
+{
+  "_comment": "trafficcone as a 6-component composition: 5 cone segments alternating orange/white/orange/white/orange (the safety stripes) + 1 BoxMesh base (the square plate at the bottom). Each cone segment is a CylinderMesh frustum with linearly interpolated radii. Per-component colors restore the visual identity that was lost in the single-CylinderMesh trafficcone_v2 (cone-only, monochrome).",
+  "primitive": "Composition",
+  "shader": "edges",
+  "color": [1.0, 0.4, 0.0],
+  "components": [
+    {
+      "_segment": "base square plate (orange)",
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [0.375, 0.03, 0.375]
+      },
+      "transform": {"position": [0, 0.015, 0]},
+      "color": [1.0, 0.4, 0.0]
+    },
+    {
+      "_segment": "orange bottom y=0.03..0.24, radius 0.150 -> 0.107",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.107,
+        "bottom_radius": 0.150,
+        "height": 0.21,
+        "radial_segments": 12
+      },
+      "transform": {"position": [0, 0.135, 0]},
+      "color": [1.0, 0.4, 0.0]
+    },
+    {
+      "_segment": "white stripe 1 y=0.24..0.324, radius 0.107 -> 0.090",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.090,
+        "bottom_radius": 0.107,
+        "height": 0.084,
+        "radial_segments": 12
+      },
+      "transform": {"position": [0, 0.282, 0]},
+      "color": [0.97, 0.97, 0.97]
+    },
+    {
+      "_segment": "orange middle y=0.324..0.415, radius 0.090 -> 0.072",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.072,
+        "bottom_radius": 0.090,
+        "height": 0.091,
+        "radial_segments": 12
+      },
+      "transform": {"position": [0, 0.3695, 0]},
+      "color": [1.0, 0.4, 0.0]
+    },
+    {
+      "_segment": "white stripe 2 y=0.415..0.499, radius 0.072 -> 0.055",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.055,
+        "bottom_radius": 0.072,
+        "height": 0.084,
+        "radial_segments": 12
+      },
+      "transform": {"position": [0, 0.457, 0]},
+      "color": [0.97, 0.97, 0.97]
+    },
+    {
+      "_segment": "orange top y=0.499..0.73, radius 0.055 -> 0.020",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.020,
+        "bottom_radius": 0.055,
+        "height": 0.231,
+        "radial_segments": 12
+      },
+      "transform": {"position": [0, 0.6145, 0]},
+      "color": [1.0, 0.4, 0.0]
+    }
+  ]
+}

@@ -431,38 +431,64 @@ def _render_compose_scene(
         shader_choice: str,
         token: str,
         ) -> str:
-    """Render a composition .tscn — multiple MeshInstance3D children sharing
-    a single material override per shader_choice."""
+    """Render a composition .tscn — multiple MeshInstance3D children, each
+    with its own optional per-component color. Components without a color
+    override share a single global ShaderMaterial; components with a
+    `color` field get their own ShaderMaterial sub-resource so the
+    artifact's surface pattern (stripes, gradients, alternating fills)
+    transfers from the hand-coded original."""
     components = spec.get("components", [])
     n_comp = len(components)
 
-    # Shader path + uniforms (one shared material across all components for now).
     if shader_choice == "parametric":
         shader_path = "res://commons/resourses/shaders/ParametricGrid.gdshader"
-        shader_uniforms = (
-            f'shader_parameter/fill_color = Color({base_color[0]}, {base_color[1]}, {base_color[2]}, {base_color[3]})\n'
-            f'shader_parameter/line_color = Color(1, 1, 1, 1)\n'
-            f'shader_parameter/lines_u = 8\n'
-            f'shader_parameter/lines_v = 4\n'
-            f'shader_parameter/line_width = 0.02\n'
-            f'shader_parameter/emission = 1.2\n'
-            f'shader_parameter/show_mesh_edges = false\n'
-            f'shader_parameter/mesh_edge_alpha = 0.15'
-        )
     else:
         shader_path = "res://commons/resourses/shaders/SimpleGrid.gdshader"
-        shader_uniforms = (
-            f'shader_parameter/modelColor = Color({base_color[0]}, {base_color[1]}, {base_color[2]}, {base_color[3]})\n'
-            f'shader_parameter/wireframeColor = Color(1, 1, 1, 1)\n'
-            f'shader_parameter/width = 2.0\n'
-            f'shader_parameter/emission_strength = 2.0\n'
-            f'shader_parameter/show_interior = true'
-        )
 
-    # load_steps = 1 ext_resource (shader) + n_comp mesh sub_resources + 1 material sub_resource + 1
-    load_steps = 1 + n_comp + 1 + 1
+    def _shader_uniform_block(color: list[float]) -> str:
+        a = color[3] if len(color) > 3 else 1.0
+        if shader_choice == "parametric":
+            return (
+                f'shader_parameter/fill_color = Color({color[0]}, {color[1]}, {color[2]}, {a})\n'
+                f'shader_parameter/line_color = Color(1, 1, 1, 1)\n'
+                f'shader_parameter/lines_u = 8\n'
+                f'shader_parameter/lines_v = 4\n'
+                f'shader_parameter/line_width = 0.02\n'
+                f'shader_parameter/emission = 1.2\n'
+                f'shader_parameter/show_mesh_edges = false\n'
+                f'shader_parameter/mesh_edge_alpha = 0.15'
+            )
+        else:
+            # SimpleGrid quirks:
+            #  - emissionColor defaults to RED; need to set it = modelColor
+            #    so per-component colors emit their own color, not red.
+            #  - width=2.0 makes wireframe dominate the surface; lowering
+            #    to 1.0 gives the surface a chance to show its color.
+            #  - emission_strength=2.0 saturates everything; 1.0 is enough.
+            return (
+                f'shader_parameter/modelColor = Color({color[0]}, {color[1]}, {color[2]}, {a})\n'
+                f'shader_parameter/wireframeColor = Color(1, 1, 1, 1)\n'
+                f'shader_parameter/emissionColor = Color({color[0]}, {color[1]}, {color[2]}, {a})\n'
+                f'shader_parameter/width = 1.0\n'
+                f'shader_parameter/emission_strength = 1.0\n'
+                f'shader_parameter/show_interior = true'
+            )
 
-    # Build sub_resource blocks for each mesh.
+    # Collect per-component colors. Components without their own color
+    # share a single "global" material (Mat_global) — saves sub-resources
+    # in the common case where everything matches.
+    component_colors: list[list[float] | None] = []
+    needs_global = False
+    for comp in components:
+        c = comp.get("color")
+        if c is None:
+            component_colors.append(None)
+            needs_global = True
+        else:
+            cc = list(c[:3]) + [float(c[3]) if len(c) > 3 else 1.0]
+            component_colors.append(cc)
+
+    # Build mesh sub-resources.
     mesh_blocks: list[str] = []
     for i, comp in enumerate(components):
         primitive = comp["primitive"]
@@ -472,11 +498,10 @@ def _render_compose_scene(
             if isinstance(v, float):
                 param_lines.append(f"{k} = {v:.6f}")
             elif isinstance(v, list):
-                # Vector3 etc.
                 if len(v) == 3:
-                    param_lines.append(
-                        f"{k} = Vector3({v[0]}, {v[1]}, {v[2]})"
-                    )
+                    param_lines.append(f"{k} = Vector3({v[0]}, {v[1]}, {v[2]})")
+                elif len(v) == 2:
+                    param_lines.append(f"{k} = Vector2({v[0]}, {v[1]})")
             else:
                 param_lines.append(f"{k} = {v}")
         mesh_blocks.append(
@@ -484,16 +509,35 @@ def _render_compose_scene(
             + "\n".join(param_lines)
         )
 
-    # Build node blocks for each component.
+    # Build material sub-resources. One global material if any component
+    # didn't supply a color, plus one per-component material for those
+    # that did.
+    mat_blocks: list[str] = []
+    if needs_global:
+        mat_blocks.append(
+            f'[sub_resource type="ShaderMaterial" id="Mat_global"]\n'
+            f'shader = ExtResource("1_shader")\n'
+            f'{_shader_uniform_block(base_color)}'
+        )
+    for i, color in enumerate(component_colors):
+        if color is not None:
+            mat_blocks.append(
+                f'[sub_resource type="ShaderMaterial" id="Mat_{i}"]\n'
+                f'shader = ExtResource("1_shader")\n'
+                f'{_shader_uniform_block(color)}'
+            )
+
+    # Build node blocks. Each node references the right material — its
+    # own per-component Mat_i if it has one, otherwise the global.
     node_blocks: list[str] = []
     for i, comp in enumerate(components):
         transform = comp.get("transform", {})
         pos = transform.get("position", [0, 0, 0])
-        rot = transform.get("rotation_degrees", [0, 0, 0])
+        mat_id = f"Mat_{i}" if component_colors[i] is not None else "Mat_global"
         node_lines = [
             f'[node name="Part{i}" type="MeshInstance3D" parent="."]',
             f'mesh = SubResource("Mesh_{i}")',
-            f'material_override = SubResource("Mat")',
+            f'material_override = SubResource("{mat_id}")',
         ]
         if pos != [0, 0, 0]:
             node_lines.append(
@@ -501,22 +545,25 @@ def _render_compose_scene(
             )
         node_blocks.append("\n".join(node_lines))
 
+    # Recompute load_steps: 1 ext_resource + n_comp meshes + n_mats
+    load_steps = 1 + n_comp + len(mat_blocks)
+
     return f"""[gd_scene load_steps={load_steps} format=3]
 
 ; Promoted composition: {token} ({n_comp} components)
 ; Source: primitive_dna.py promote --compose={spec.get('_spec_file', '<spec>')} --as={token}
 ;
-; Each component below is a separate MeshInstance3D child of a shared
-; Node3D root. They all use the same shader-material override. The
-; composition replaces a hand-coded multi-mesh artifact.
+; Each component below is a MeshInstance3D child of a shared Node3D
+; root. Components can specify their own `color` in the spec to get a
+; per-component ShaderMaterial; otherwise they share Mat_global. This
+; lets compositions reproduce the surface patterns (stripes, alternating
+; fills) of the hand-coded artifacts they replace.
 
 [ext_resource type="Shader" path="{shader_path}" id="1_shader"]
 
 {chr(10).join(mesh_blocks)}
 
-[sub_resource type="ShaderMaterial" id="Mat"]
-shader = ExtResource("1_shader")
-{shader_uniforms}
+{chr(10).join(mat_blocks)}
 
 [node name="{token.title().replace('_', '')}" type="Node3D"]
 
