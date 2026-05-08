@@ -131,8 +131,43 @@ func _build_mesh(primitive_name: String, params: Dictionary) -> PrimitiveMesh:
 			push_error("capture_primitive_dna: unsupported primitive '%s'" % primitive_name)
 			return null
 	for key in params.keys():
-		mesh.set(key, params[key])
+		var raw = params[key]
+		var value = _coerce_param_value(mesh, key, raw)
+		mesh.set(key, value)
 	return mesh
+
+
+# JSON arrays come through as GDScript Arrays; some PrimitiveMesh properties
+# are typed (Vector3, Vector2). Coerce based on the property type Godot
+# reports so silent set-failures don't produce empty meshes (which is what
+# happens when, e.g., PrismMesh.size receives an Array instead of Vector3).
+func _coerce_param_value(target: Object, key: String, raw):
+	if not (raw is Array):
+		return raw
+	# Find the property's expected type in the object's property list.
+	var expected_type: int = -1
+	for prop in target.get_property_list():
+		if prop.get("name") == key:
+			expected_type = int(prop.get("type", -1))
+			break
+	match expected_type:
+		TYPE_VECTOR3:
+			if raw.size() >= 3:
+				return Vector3(float(raw[0]), float(raw[1]), float(raw[2]))
+		TYPE_VECTOR2:
+			if raw.size() >= 2:
+				return Vector2(float(raw[0]), float(raw[1]))
+		TYPE_VECTOR3I:
+			if raw.size() >= 3:
+				return Vector3i(int(raw[0]), int(raw[1]), int(raw[2]))
+		TYPE_VECTOR2I:
+			if raw.size() >= 2:
+				return Vector2i(int(raw[0]), int(raw[1]))
+		TYPE_COLOR:
+			if raw.size() >= 3:
+				var a: float = float(raw[3]) if raw.size() > 3 else 1.0
+				return Color(float(raw[0]), float(raw[1]), float(raw[2]), a)
+	return raw
 
 
 func _run_batch(primitive_name: String, variants: Array, output_abs: String) -> void:

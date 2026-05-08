@@ -100,6 +100,34 @@ GENOMES: dict[str, dict[str, Any]] = {
         "image":    {"width": 384, "height": 384},
         "truth":    "a box subdivided is still a box; its DNA is in what you do with the extra vertices",
     },
+    "CylinderMesh": {
+        "fixed": {
+            "top_radius": 0.30,
+            "bottom_radius": 0.30,
+            "height": 0.80,
+        },
+        "axes": {
+            "rings":           [0, 1, 2, 4, 8, 16],
+            "radial_segments": [3, 4, 5, 6, 8, 12, 16, 24],
+        },
+        "camera":   {"yaw_deg": 25.0, "pitch_deg": 18.0, "pad": 1.5},
+        "material": {"base_color": [0.62, 0.65, 0.74, 1.0]},
+        "image":    {"width": 384, "height": 480},
+        "truth":    "a cylinder is what a prism becomes when you stop counting sides; segments=3 is a triangular prism, segments=24 is the eye giving up",
+    },
+    "PrismMesh": {
+        "fixed": {
+            "size":          [0.6, 0.6, 0.6],
+        },
+        "axes": {
+            "left_to_right":     [0.0, 0.25, 0.5, 0.75, 1.0],
+            "subdivide_width":   [0, 1, 2, 4],
+        },
+        "camera":   {"yaw_deg": 25.0, "pitch_deg": 25.0, "pad": 1.6},
+        "material": {"base_color": [0.62, 0.65, 0.74, 1.0]},
+        "image":    {"width": 384, "height": 384},
+        "truth":    "a prism is a wedge with one parameter to slide between right-angled and centered — left_to_right is the asymmetry of cut",
+    },
 }
 
 
