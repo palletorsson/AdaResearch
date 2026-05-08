@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3]
+
+; Promoted composition: crystalcluster_v2 (5 components)
+; Source: primitive_dna.py promote --compose=<spec> --as=crystalcluster_v2
+;
+; Each component below is a MeshInstance3D child of a shared Node3D
+; root. Components can specify their own `color` in the spec to get a
+; per-component ShaderMaterial; otherwise they share Mat_global. This
+; lets compositions reproduce the surface patterns (stripes, alternating
+; fills) of the hand-coded artifacts they replace.
+
+[ext_resource type="Shader" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="1_shader"]
+
+[sub_resource type="CylinderMesh" id="Mesh_0"]
+top_radius = 0.140000
+bottom_radius = 0.200000
+height = 0.300000
+radial_segments = 6
+[sub_resource type="CylinderMesh" id="Mesh_1"]
+top_radius = 0.105000
+bottom_radius = 0.150000
+height = 0.225000
+radial_segments = 6
+[sub_resource type="CylinderMesh" id="Mesh_2"]
+top_radius = 0.154000
+bottom_radius = 0.220000
+height = 0.330000
+radial_segments = 6
+[sub_resource type="CylinderMesh" id="Mesh_3"]
+top_radius = 0.091000
+bottom_radius = 0.130000
+height = 0.195000
+radial_segments = 6
+[sub_resource type="CylinderMesh" id="Mesh_4"]
+top_radius = 0.119000
+bottom_radius = 0.170000
+height = 0.255000
+radial_segments = 6
+
+[sub_resource type="ShaderMaterial" id="Mat_global"]
+shader = ExtResource("1_shader")
+shader_parameter/modelColor = Color(0.0, 0.4, 1.0, 1.0)
+shader_parameter/wireframeColor = Color(1, 1, 1, 1)
+shader_parameter/emissionColor = Color(0.0, 0.4, 1.0, 1.0)
+shader_parameter/width = 1.0
+shader_parameter/emission_strength = 1.0
+shader_parameter/show_interior = true
+
+[node name="CrystalclusterV2" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.05, 0.12)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.0, -0.15)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, -0.05, 0.18)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.08, -0.08)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.06, 0.05)

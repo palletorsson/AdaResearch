@@ -1,0 +1,13 @@
+{
+  "_comment": "5 hexagonal prism crystals as CylinderMesh(radial_segments=6) instances. Each tapers slightly (top_radius < bottom_radius). Positions chosen deterministically to spread the cluster. LIMITATION: original randomly rotates each crystal in 3D; this composition only handles position (no rotation_degrees in current compose renderer). Result is upright cluster — silhouette identical, dynamic-tilted feel lost.",
+  "primitive": "Composition",
+  "shader": "edges",
+  "color": [0.0, 0.4, 1.0],
+  "components": [
+    {"_part": "crystal 0 (size 0.20)", "primitive": "CylinderMesh", "params": {"top_radius": 0.14, "bottom_radius": 0.20, "height": 0.30, "radial_segments": 6}, "transform": {"position": [-0.18,  0.05,  0.12]}},
+    {"_part": "crystal 1 (size 0.15)", "primitive": "CylinderMesh", "params": {"top_radius": 0.105, "bottom_radius": 0.15, "height": 0.225, "radial_segments": 6}, "transform": {"position": [ 0.12,  0.00, -0.15]}},
+    {"_part": "crystal 2 (size 0.22)", "primitive": "CylinderMesh", "params": {"top_radius": 0.154, "bottom_radius": 0.22, "height": 0.33, "radial_segments": 6}, "transform": {"position": [ 0.05, -0.05,  0.18]}},
+    {"_part": "crystal 3 (size 0.13)", "primitive": "CylinderMesh", "params": {"top_radius": 0.091, "bottom_radius": 0.13, "height": 0.195, "radial_segments": 6}, "transform": {"position": [-0.12,  0.08, -0.08]}},
+    {"_part": "crystal 4 (size 0.17)", "primitive": "CylinderMesh", "params": {"top_radius": 0.119, "bottom_radius": 0.17, "height": 0.255, "radial_segments": 6}, "transform": {"position": [ 0.18,  0.06,  0.05]}}
+  ]
+}
