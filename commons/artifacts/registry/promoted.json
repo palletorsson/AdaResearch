@@ -241,6 +241,32 @@
         "spec_file": "commons\\primitives\\promoted\\_specs\\crystalcluster_v2.compose.json"
       },
       "scene": "res://commons/primitives/promoted/crystalcluster_v2/crystalcluster_v2.tscn"
+    },
+    "tetrahedron_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "CylinderMesh promoted to named artifact: {'top_radius': 0.0, 'bottom_radius': 0.6, 'height': 0.85, 'radial_segments': 3}",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "tetrahedron_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "tetrahedron_v2",
+      "promoted_from": {
+        "primitive": "CylinderMesh",
+        "params": {
+          "top_radius": 0.0,
+          "bottom_radius": 0.6,
+          "height": 0.85,
+          "radial_segments": 3
+        },
+        "shader": "edges"
+      },
+      "scene": "res://commons/primitives/promoted/tetrahedron_v2/tetrahedron_v2.tscn"
     }
   }
 }

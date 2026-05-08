@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3]
+
+; Promoted artifact: tetrahedron_v2
+; Source: primitive_dna.py promote CylinderMesh --as=tetrahedron_v2 --params {'top_radius': 0.0, 'bottom_radius': 0.6, 'height': 0.85, 'radial_segments': 3}
+;
+; This scene is generated. The hand-coded primitive it replaces (if any)
+; lives in commons/primitives/<original>/. After verification, the
+; original .gd / .tscn pair can be retired.
+;
+; Structure: Node3D root with a MeshInstance3D child — matches the
+; convention used by hand-coded primitives so the artifact catalog and
+; capture pipeline both treat it identically.
+
+[ext_resource type="Shader" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="1_shader"]
+
+[sub_resource type="CylinderMesh" id="MeshRes"]
+top_radius = 0.000000
+bottom_radius = 0.600000
+height = 0.850000
+radial_segments = 3
+
+[sub_resource type="ShaderMaterial" id="MatRes"]
+shader = ExtResource("1_shader")
+shader_parameter/modelColor = Color(1.0, 0.0, 1.0, 1.0)
+shader_parameter/wireframeColor = Color(1, 1, 1, 1)
+shader_parameter/width = 2.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/show_interior = true
+
+[node name="TetrahedronV2" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("MeshRes")
+material_override = SubResource("MatRes")
