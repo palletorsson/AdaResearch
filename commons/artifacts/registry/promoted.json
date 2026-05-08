@@ -47,6 +47,112 @@
         "spec_file": "commons\\primitives\\promoted\\_specs\\alessi_tree_v2.compose.json"
       },
       "scene": "res://commons/primitives/promoted/alessi_tree_v2/alessi_tree_v2.tscn"
+    },
+    "cube_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "BoxMesh promoted to named artifact: {'size': [1.0, 1.0, 1.0]}",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "cube_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "cube_v2",
+      "promoted_from": {
+        "primitive": "BoxMesh",
+        "params": {
+          "size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "shader": "parametric"
+      },
+      "scene": "res://commons/primitives/promoted/cube_v2/cube_v2.tscn"
+    },
+    "unitcube_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "BoxMesh promoted to named artifact: {'size': [1.0, 1.0, 1.0]}",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "unitcube_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "unitcube_v2",
+      "promoted_from": {
+        "primitive": "BoxMesh",
+        "params": {
+          "size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "shader": "parametric"
+      },
+      "scene": "res://commons/primitives/promoted/unitcube_v2/unitcube_v2.tscn"
+    },
+    "triangularprism_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "CylinderMesh promoted to named artifact: {'top_radius': 0.3, 'bottom_radius': 0.3, 'height': 0.6, 'radial_segments': 3}",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "triangularprism_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "triangularprism_v2",
+      "promoted_from": {
+        "primitive": "CylinderMesh",
+        "params": {
+          "top_radius": 0.3,
+          "bottom_radius": 0.3,
+          "height": 0.6,
+          "radial_segments": 3
+        },
+        "shader": "parametric"
+      },
+      "scene": "res://commons/primitives/promoted/triangularprism_v2/triangularprism_v2.tscn"
+    },
+    "trafficcone_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "CylinderMesh promoted to named artifact: {'top_radius': 0.02, 'bottom_radius': 0.15, 'height': 0.7, 'radial_segments': 12}",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "trafficcone_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "trafficcone_v2",
+      "promoted_from": {
+        "primitive": "CylinderMesh",
+        "params": {
+          "top_radius": 0.02,
+          "bottom_radius": 0.15,
+          "height": 0.7,
+          "radial_segments": 12
+        },
+        "shader": "parametric"
+      },
+      "scene": "res://commons/primitives/promoted/trafficcone_v2/trafficcone_v2.tscn"
     }
   }
 }

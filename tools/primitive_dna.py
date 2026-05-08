@@ -538,6 +538,7 @@ def _cmd_promote_single(args) -> int:
         return 1
 
     # Parse param overrides from the CLI: --params radius=0.424 height=0.8 ...
+    # Vector3 syntax: size=1.0,1.0,1.0 (3 comma-separated floats → Vector3 list)
     params: dict[str, Any] = {}
     for kv in args.params or []:
         if "=" not in kv:
@@ -545,8 +546,16 @@ def _cmd_promote_single(args) -> int:
                   file=sys.stderr)
             return 1
         k, v = kv.split("=", 1)
-        # Coerce: int → int, float-with-dot → float, else str
-        if v.lstrip("-").isdigit():
+        if "," in v:
+            # Strip optional brackets, then parse as comma-separated numbers.
+            v_clean = v.strip("[]()")
+            parts = v_clean.split(",")
+            try:
+                vec = [float(p) for p in parts]
+                params[k] = vec  # _render_scene converts list[3] → Vector3
+            except ValueError:
+                params[k] = v
+        elif v.lstrip("-").isdigit():
             params[k] = int(v)
         else:
             try:
@@ -658,6 +667,10 @@ def _render_scene(
     for k, v in params.items():
         if isinstance(v, float):
             mesh_lines.append(f"{k} = {v:.6f}")
+        elif isinstance(v, list) and len(v) == 3:
+            mesh_lines.append(f"{k} = Vector3({v[0]}, {v[1]}, {v[2]})")
+        elif isinstance(v, list) and len(v) == 2:
+            mesh_lines.append(f"{k} = Vector2({v[0]}, {v[1]})")
         else:
             mesh_lines.append(f"{k} = {v}")
     mesh_block = "\n".join(mesh_lines)
