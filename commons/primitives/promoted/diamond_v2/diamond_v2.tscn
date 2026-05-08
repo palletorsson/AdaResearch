@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3]
+
+; Promoted composition: diamond_v2 (3 components)
+; Source: primitive_dna.py promote --compose=<spec> --as=diamond_v2
+;
+; Each component below is a MeshInstance3D child of a shared Node3D
+; root. Components can specify their own `color` in the spec to get a
+; per-component ShaderMaterial; otherwise they share Mat_global. This
+; lets compositions reproduce the surface patterns (stripes, alternating
+; fills) of the hand-coded artifacts they replace.
+
+[ext_resource type="Shader" path="res://commons/resourses/shaders/ParametricGrid.gdshader" id="1_shader"]
+
+[sub_resource type="CylinderMesh" id="Mesh_0"]
+top_radius = 0.000000
+bottom_radius = 0.354000
+height = 0.500000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_1"]
+top_radius = 0.354000
+bottom_radius = 0.212000
+height = 0.200000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_2"]
+top_radius = 0.212000
+bottom_radius = 0.000000
+height = 0.300000
+radial_segments = 4
+
+[sub_resource type="ShaderMaterial" id="Mat_global"]
+shader = ExtResource("1_shader")
+shader_parameter/fill_color = Color(0.9, 0.0, 0.0, 1.0)
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/lines_u = 8
+shader_parameter/lines_v = 4
+shader_parameter/line_width = 0.02
+shader_parameter/emission = 1.2
+shader_parameter/show_mesh_edges = false
+shader_parameter/mesh_edge_alpha = 0.15
+
+[node name="DiamondV2" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_global")
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_global")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)

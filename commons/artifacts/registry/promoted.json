@@ -267,6 +267,28 @@
         "shader": "edges"
       },
       "scene": "res://commons/primitives/promoted/tetrahedron_v2/tetrahedron_v2.tscn"
+    },
+    "diamond_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Composition of 3 primitives",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "diamond_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "diamond_v2",
+      "promoted_from": {
+        "kind": "composition",
+        "n_components": 3,
+        "shader": "parametric",
+        "spec_file": "commons\\primitives\\promoted\\_specs\\diamond_v2.compose.json"
+      },
+      "scene": "res://commons/primitives/promoted/diamond_v2/diamond_v2.tscn"
     }
   }
 }

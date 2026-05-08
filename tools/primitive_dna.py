@@ -737,12 +737,16 @@ def _render_scene(
         )
     else:
         # SimpleGrid path — uses camelCase uniform names.
+        # Same emission fix as compose mode: shader's emissionColor uniform
+        # defaults to RED, which dominates at strength=2.0. Set it to match
+        # modelColor and lower strength so the actual color shows through.
         shader_path = "res://commons/resourses/shaders/SimpleGrid.gdshader"
         shader_uniforms = (
             f'shader_parameter/modelColor = Color({base_color[0]}, {base_color[1]}, {base_color[2]}, {base_color[3]})\n'
             f'shader_parameter/wireframeColor = Color(1, 1, 1, 1)\n'
-            f'shader_parameter/width = 2.0\n'
-            f'shader_parameter/emission_strength = 2.0\n'
+            f'shader_parameter/emissionColor = Color({base_color[0]}, {base_color[1]}, {base_color[2]}, {base_color[3]})\n'
+            f'shader_parameter/width = 1.0\n'
+            f'shader_parameter/emission_strength = 1.0\n'
             f'shader_parameter/show_interior = true'
         )
 
