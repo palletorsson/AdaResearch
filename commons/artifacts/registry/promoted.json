@@ -197,6 +197,28 @@
         "spec_file": "commons\\primitives\\promoted\\_specs\\steppedpyramid_v2.compose.json"
       },
       "scene": "res://commons/primitives/promoted/steppedpyramid_v2/steppedpyramid_v2.tscn"
+    },
+    "chair_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Composition of 4 primitives",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "chair_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "chair_v2",
+      "promoted_from": {
+        "kind": "composition",
+        "n_components": 4,
+        "shader": "edges",
+        "spec_file": "commons\\primitives\\promoted\\_specs\\chair_v2.compose.json"
+      },
+      "scene": "res://commons/primitives/promoted/chair_v2/chair_v2.tscn"
     }
   }
 }
