@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3]
+
+; Promoted composition: alessi_tree_v2 (5 components)
+; Source: primitive_dna.py promote --compose=<spec> --as=alessi_tree_v2
+;
+; Each component below is a separate MeshInstance3D child of a shared
+; Node3D root. They all use the same shader-material override. The
+; composition replaces a hand-coded multi-mesh artifact.
+
+[ext_resource type="Shader" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="1_shader"]
+
+[sub_resource type="CylinderMesh" id="Mesh_0"]
+top_radius = 0.172000
+bottom_radius = 0.400000
+height = 0.200000
+radial_segments = 24
+rings = 0
+[sub_resource type="CylinderMesh" id="Mesh_1"]
+top_radius = 0.288000
+bottom_radius = 0.172000
+height = 0.200000
+radial_segments = 24
+rings = 0
+[sub_resource type="CylinderMesh" id="Mesh_2"]
+top_radius = 0.116000
+bottom_radius = 0.288000
+height = 0.200000
+radial_segments = 24
+rings = 0
+[sub_resource type="CylinderMesh" id="Mesh_3"]
+top_radius = 0.176000
+bottom_radius = 0.116000
+height = 0.200000
+radial_segments = 24
+rings = 0
+[sub_resource type="CylinderMesh" id="Mesh_4"]
+top_radius = 0.060000
+bottom_radius = 0.176000
+height = 0.200000
+radial_segments = 24
+rings = 0
+
+[sub_resource type="ShaderMaterial" id="Mat"]
+shader = ExtResource("1_shader")
+shader_parameter/modelColor = Color(0.95, 0.92, 0.85, 1.0)
+shader_parameter/wireframeColor = Color(1, 1, 1, 1)
+shader_parameter/width = 2.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/show_interior = true
+
+[node name="AlessiTreeV2" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

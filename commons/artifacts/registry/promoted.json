@@ -25,6 +25,28 @@
         "shader": "parametric"
       },
       "scene": "res://commons/primitives/promoted/bipyramid_v2/bipyramid_v2.tscn"
+    },
+    "alessi_tree_v2": {
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Composition of 5 primitives",
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "alessi_tree_v2",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "alessi_tree_v2",
+      "promoted_from": {
+        "kind": "composition",
+        "n_components": 5,
+        "shader": "edges",
+        "spec_file": "commons\\primitives\\promoted\\_specs\\alessi_tree_v2.compose.json"
+      },
+      "scene": "res://commons/primitives/promoted/alessi_tree_v2/alessi_tree_v2.tscn"
     }
   }
 }

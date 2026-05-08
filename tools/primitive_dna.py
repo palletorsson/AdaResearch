@@ -328,18 +328,204 @@ def cmd_sweep(args) -> int:
 def cmd_promote(args) -> int:
     """Promote a primitive variant to a named artifact.
 
-    Generates a thin .tscn at commons/primitives/promoted/<token>/<token>.tscn
-    consisting of a single MeshInstance3D pointing at a PrimitiveMesh with
-    the supplied params. Adds a registry entry to
-    commons/artifacts/registry/promoted.json so the new token is
-    placeable in maps.
+    Two modes:
+      single — primitive variant from --params (one MeshInstance3D in scene)
+      compose — composition spec from --compose=<file.json> (multiple
+                MeshInstance3D children, each with its own primitive +
+                params + transform)
 
-    The point of this command is the proof: if a hand-coded primitive
-    (bipyramid.gd, with 6 vertices and 8 triangles in source) is
-    visually equivalent to a SphereMesh with the right parameters, the
-    hand-coded version is redundant. The promoted artifact takes its
-    place; bipyramid.gd can be retired.
+    Generates a thin .tscn at commons/primitives/promoted/<token>/<token>.tscn
+    plus a registry entry in commons/artifacts/registry/promoted.json.
     """
+    # Compose mode: read spec from JSON file.
+    if args.compose:
+        return _cmd_promote_compose(args)
+    return _cmd_promote_single(args)
+
+
+def _cmd_promote_compose(args) -> int:
+    """Composition mode: build a multi-primitive .tscn from a JSON spec.
+
+    Spec format:
+      {
+        "primitive": "Composition",      // sentinel
+        "shader": "edges" | "parametric",
+        "color": [r, g, b],
+        "components": [
+          {
+            "primitive": "CylinderMesh",
+            "params": { "top_radius": 0.4, "bottom_radius": 0.4, "height": 0.2, ... },
+            "transform": { "position": [0, 0.1, 0], "rotation_degrees": [0, 0, 0] }
+          },
+          ...
+        ]
+      }
+    """
+    token = args.as_token
+    spec_path = Path(args.compose)
+    if not spec_path.exists():
+        print(f"  !! compose spec not found: {spec_path}", file=sys.stderr)
+        return 1
+    spec = json.loads(spec_path.read_text(encoding="utf-8"))
+
+    components = spec.get("components", [])
+    if not components:
+        print(f"  !! compose spec has no components", file=sys.stderr)
+        return 1
+
+    shader_choice = spec.get("shader", args.shader or "edges")
+    color = spec.get("color", [0.6, 0.0, 0.8])
+    base_color = list(color[:3]) + [1.0]
+
+    scene_dir = REPO / "commons" / "primitives" / "promoted" / token
+    scene_path = scene_dir / f"{token}.tscn"
+    if scene_path.exists() and not args.force:
+        print(f"  !! {_short(scene_path)} already exists (use --force)",
+              file=sys.stderr)
+        return 1
+    scene_dir.mkdir(parents=True, exist_ok=True)
+
+    scene_text = _render_compose_scene(spec, base_color, shader_choice, token)
+    scene_path.write_text(scene_text, encoding="utf-8")
+    print(f"  scene:    {_short(scene_path)} ({len(components)} components)")
+
+    # Registry entry.
+    reg_path = REPO / "commons" / "artifacts" / "registry" / "promoted.json"
+    if reg_path.exists():
+        reg = json.loads(reg_path.read_text(encoding="utf-8"))
+    else:
+        reg = {"artifacts": {}}
+    reg.setdefault("artifacts", {})[token] = {
+        "category":      "primitives",
+        "complexity":    "beginner",
+        "description":   f"Composition of {len(components)} primitives",
+        "footprint":     [1, 1, 1],
+        "include_in_map_data": True,
+        "lookup_name":   token,
+        "map_ready":     True,
+        "map_sequences": [],
+        "name":          token,
+        "promoted_from": {
+            "kind":       "composition",
+            "n_components": len(components),
+            "shader":     shader_choice,
+            "spec_file":  str(spec_path),
+        },
+        "scene":         f"res://commons/primitives/promoted/{token}/{token}.tscn",
+    }
+    reg_path.parent.mkdir(parents=True, exist_ok=True)
+    reg_path.write_text(json.dumps(reg, indent=2), encoding="utf-8")
+    print(f"  registry: {_short(reg_path)}")
+
+    print()
+    print("Verify with:")
+    print(f"  godot --xr-mode off --no-window --script "
+          f"res://commons/testing/capture_multi_angle.gd "
+          f"-- --mode=artifact --target={token}")
+    return 0
+
+
+def _render_compose_scene(
+        spec: dict[str, Any],
+        base_color: list[float],
+        shader_choice: str,
+        token: str,
+        ) -> str:
+    """Render a composition .tscn — multiple MeshInstance3D children sharing
+    a single material override per shader_choice."""
+    components = spec.get("components", [])
+    n_comp = len(components)
+
+    # Shader path + uniforms (one shared material across all components for now).
+    if shader_choice == "parametric":
+        shader_path = "res://commons/resourses/shaders/ParametricGrid.gdshader"
+        shader_uniforms = (
+            f'shader_parameter/fill_color = Color({base_color[0]}, {base_color[1]}, {base_color[2]}, {base_color[3]})\n'
+            f'shader_parameter/line_color = Color(1, 1, 1, 1)\n'
+            f'shader_parameter/lines_u = 8\n'
+            f'shader_parameter/lines_v = 4\n'
+            f'shader_parameter/line_width = 0.02\n'
+            f'shader_parameter/emission = 1.2\n'
+            f'shader_parameter/show_mesh_edges = false\n'
+            f'shader_parameter/mesh_edge_alpha = 0.15'
+        )
+    else:
+        shader_path = "res://commons/resourses/shaders/SimpleGrid.gdshader"
+        shader_uniforms = (
+            f'shader_parameter/modelColor = Color({base_color[0]}, {base_color[1]}, {base_color[2]}, {base_color[3]})\n'
+            f'shader_parameter/wireframeColor = Color(1, 1, 1, 1)\n'
+            f'shader_parameter/width = 2.0\n'
+            f'shader_parameter/emission_strength = 2.0\n'
+            f'shader_parameter/show_interior = true'
+        )
+
+    # load_steps = 1 ext_resource (shader) + n_comp mesh sub_resources + 1 material sub_resource + 1
+    load_steps = 1 + n_comp + 1 + 1
+
+    # Build sub_resource blocks for each mesh.
+    mesh_blocks: list[str] = []
+    for i, comp in enumerate(components):
+        primitive = comp["primitive"]
+        params = comp.get("params", {})
+        param_lines = []
+        for k, v in params.items():
+            if isinstance(v, float):
+                param_lines.append(f"{k} = {v:.6f}")
+            elif isinstance(v, list):
+                # Vector3 etc.
+                if len(v) == 3:
+                    param_lines.append(
+                        f"{k} = Vector3({v[0]}, {v[1]}, {v[2]})"
+                    )
+            else:
+                param_lines.append(f"{k} = {v}")
+        mesh_blocks.append(
+            f'[sub_resource type="{primitive}" id="Mesh_{i}"]\n'
+            + "\n".join(param_lines)
+        )
+
+    # Build node blocks for each component.
+    node_blocks: list[str] = []
+    for i, comp in enumerate(components):
+        transform = comp.get("transform", {})
+        pos = transform.get("position", [0, 0, 0])
+        rot = transform.get("rotation_degrees", [0, 0, 0])
+        node_lines = [
+            f'[node name="Part{i}" type="MeshInstance3D" parent="."]',
+            f'mesh = SubResource("Mesh_{i}")',
+            f'material_override = SubResource("Mat")',
+        ]
+        if pos != [0, 0, 0]:
+            node_lines.append(
+                f'transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, {pos[0]}, {pos[1]}, {pos[2]})'
+            )
+        node_blocks.append("\n".join(node_lines))
+
+    return f"""[gd_scene load_steps={load_steps} format=3]
+
+; Promoted composition: {token} ({n_comp} components)
+; Source: primitive_dna.py promote --compose={spec.get('_spec_file', '<spec>')} --as={token}
+;
+; Each component below is a separate MeshInstance3D child of a shared
+; Node3D root. They all use the same shader-material override. The
+; composition replaces a hand-coded multi-mesh artifact.
+
+[ext_resource type="Shader" path="{shader_path}" id="1_shader"]
+
+{chr(10).join(mesh_blocks)}
+
+[sub_resource type="ShaderMaterial" id="Mat"]
+shader = ExtResource("1_shader")
+{shader_uniforms}
+
+[node name="{token.title().replace('_', '')}" type="Node3D"]
+
+{chr(10).join(node_blocks)}
+"""
+
+
+def _cmd_promote_single(args) -> int:
+    """Single-primitive mode (original behavior)."""
     primitive = args.primitive
     if primitive not in GENOMES:
         print(f"  !! unknown primitive '{primitive}'", file=sys.stderr)
@@ -572,12 +758,15 @@ def main() -> int:
         "promote",
         help="promote a primitive variant to a named artifact (.tscn + registry entry)",
     )
-    p_promote.add_argument("primitive", help=f"one of: {', '.join(sorted(GENOMES.keys()))}")
+    p_promote.add_argument("primitive", nargs="?",
+                           help=f"one of: {', '.join(sorted(GENOMES.keys()))} (omit if --compose)")
     p_promote.add_argument("--as", dest="as_token", required=True,
                            help="artifact token, e.g. bipyramid_v2")
-    p_promote.add_argument("--params", nargs="+", required=True,
+    p_promote.add_argument("--params", nargs="+", default=[],
                            metavar="key=value",
-                           help="primitive params, e.g. rings=2 radial_segments=4 radius=0.424 height=0.8")
+                           help="primitive params, e.g. rings=2 radial_segments=4 (single mode)")
+    p_promote.add_argument("--compose", default=None,
+                           help="path to a composition spec JSON (compose mode)")
     p_promote.add_argument("--shader", choices=["edges", "parametric"], default="edges",
                            help="grid shader: edges (default, mesh-edge highlighting) or parametric (UV-grid)")
     p_promote.add_argument("--color", default=None,

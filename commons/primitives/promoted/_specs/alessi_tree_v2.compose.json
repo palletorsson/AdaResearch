@@ -1,0 +1,68 @@
+{
+  "_comment": "Composition spec for alessi_tree promoted to a stack of CylinderMesh frustums. Replaces the hand-coded zigzag-revolution mesh in commons/primitives/design_classics/alessi_tree.gd. Tiers=5, height=1.0, base_radius=0.4. Each frustum is one body-segment between two profile points; frustums alternate wide-base / narrow-top to reproduce the zigzag silhouette.",
+  "primitive": "Composition",
+  "shader": "edges",
+  "color": [0.95, 0.92, 0.85],
+  "components": [
+    {
+      "_segment": "0..0.20 — wide foot tapering up to first narrow neck",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.172,
+        "bottom_radius": 0.40,
+        "height": 0.20,
+        "radial_segments": 24,
+        "rings": 0
+      },
+      "transform": {"position": [0, 0.10, 0]}
+    },
+    {
+      "_segment": "0.20..0.40 — narrow neck out to next wide bulge",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.288,
+        "bottom_radius": 0.172,
+        "height": 0.20,
+        "radial_segments": 24,
+        "rings": 0
+      },
+      "transform": {"position": [0, 0.30, 0]}
+    },
+    {
+      "_segment": "0.40..0.60 — bulge tapering to mid neck",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.116,
+        "bottom_radius": 0.288,
+        "height": 0.20,
+        "radial_segments": 24,
+        "rings": 0
+      },
+      "transform": {"position": [0, 0.50, 0]}
+    },
+    {
+      "_segment": "0.60..0.80 — neck to next bulge (envelope smaller)",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.176,
+        "bottom_radius": 0.116,
+        "height": 0.20,
+        "radial_segments": 24,
+        "rings": 0
+      },
+      "transform": {"position": [0, 0.70, 0]}
+    },
+    {
+      "_segment": "0.80..1.00 — bulge tapering to crown tip",
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.06,
+        "bottom_radius": 0.176,
+        "height": 0.20,
+        "radial_segments": 24,
+        "rings": 0
+      },
+      "transform": {"position": [0, 0.90, 0]}
+    }
+  ]
+}
