@@ -22,15 +22,21 @@ extends Node3D
 @export var wireframe_brightness: float = 2.0
 
 const GRID_SHADER_PATH = "res://commons/resourses/shaders/basic_grid.gdshader"
+const GridMaterialFactory = preload("res://commons/primitives/shared/grid_material_factory.gd")
+
+# When true (default), each sphere paints (radial_segments × rings) as
+# UV-space lines (longitudes × latitudes) via ParametricGrid. High-poly
+# spheres still read as their parameter values rather than smooth balls.
+@export var use_parametric_grid: bool = true
 
 var sphere_instances: Array[MeshInstance3D] = []
 var grid_shader: Shader
 
 func _ready():
-	# Load the grid shader
-	grid_shader = load(GRID_SHADER_PATH)
-	if not grid_shader:
-		push_error("Failed to load SimpleGrid shader from: " + GRID_SHADER_PATH)
+	if not use_parametric_grid:
+		grid_shader = load(GRID_SHADER_PATH)
+		if not grid_shader:
+			push_error("Failed to load SimpleGrid shader from: " + GRID_SHADER_PATH)
 
 	if color_gradient == null:
 		color_gradient = Gradient.new()
@@ -68,23 +74,25 @@ func create_sphere_at_position(pos: Vector3, rings: int, segments: int, gradient
 	mesh_instance.mesh = sphere_mesh
 	mesh_instance.position = pos
 
-	# Use basic_grid shader instead of StandardMaterial3D
-	if grid_shader:
+	var gradient_color: Color = color_gradient.sample(gradient_ratio) if color_gradient else Color(1, 1, 1, 1)
+
+	if use_parametric_grid:
+		# SphereMesh UV: u = longitude (radial_segments), v = latitude (rings).
+		var pg_material := GridMaterialFactory.make_parametric(
+			gradient_color, segments, rings,
+			{ "line_color": Color(0.3, 0.9, 1.0), "emission": wireframe_brightness }
+		)
+		if pg_material is ShaderMaterial:
+			(pg_material as ShaderMaterial).render_priority = 1
+		mesh_instance.material_override = pg_material
+	elif grid_shader:
 		var shader_material = ShaderMaterial.new()
 		shader_material.shader = grid_shader
-
-		# Get gradient color for this sphere
-		var gradient_color = color_gradient.sample(gradient_ratio) if color_gradient else Color(1, 1, 1, 1)
-
-		# Set shader parameters for basic_grid.gdshader
 		shader_material.set_shader_parameter("line_color", Vector3(0.3, 0.9, 1.0))
 		shader_material.set_shader_parameter("fill_color", Vector3(gradient_color.r, gradient_color.g, gradient_color.b))
-		shader_material.set_shader_parameter("line_width", wireframe_width * 10.0)  # Scale up for visibility
+		shader_material.set_shader_parameter("line_width", wireframe_width * 10.0)
 		shader_material.set_shader_parameter("emission_strength", wireframe_brightness)
-
-		# Set render priority to ensure it renders on top of background materials
 		shader_material.render_priority = 1
-
 		mesh_instance.material_override = shader_material
 	else:
 		# Fallback to standard material if shader fails to load

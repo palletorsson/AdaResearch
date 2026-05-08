@@ -22,15 +22,24 @@ extends Node3D
 @export var color_gradient: Gradient
 
 const GRID_SHADER_PATH = "res://commons/resourses/shaders/basic_grid.gdshader"
+const GridMaterialFactory = preload("res://commons/primitives/shared/grid_material_factory.gd")
+
+# When true (default), each torus paints exactly its (rings, ring_segments)
+# as UV-space lines via ParametricGrid. The visual encoding stays legible
+# at every density — at high values the player still sees the parametric
+# structure rather than a smooth gradient blob. Falls back to basic_grid
+# for backward compat when set false.
+@export var use_parametric_grid: bool = true
 
 var torus_instances: Array[MeshInstance3D] = []
 var grid_shader: Shader
 
 func _ready():
-	# Load the grid shader
-	grid_shader = load(GRID_SHADER_PATH)
-	if not grid_shader:
-		push_error("Failed to load Grid shader from: " + GRID_SHADER_PATH)
+	# Load the legacy grid shader (used only when use_parametric_grid=false).
+	if not use_parametric_grid:
+		grid_shader = load(GRID_SHADER_PATH)
+		if not grid_shader:
+			push_error("Failed to load Grid shader from: " + GRID_SHADER_PATH)
 
 	# Initialize color gradient if not set
 	if color_gradient == null:
@@ -84,23 +93,31 @@ func create_torus_at_position(pos: Vector3, rings: int, segments: int, gradient_
 	mesh_instance.mesh = torus_mesh
 	mesh_instance.position = pos
 
-	# Use basic_grid shader instead of StandardMaterial3D
-	if grid_shader:
+	var gradient_color: Color = color_gradient.sample(gradient_ratio) if color_gradient else base_color
+
+	if use_parametric_grid:
+		# ParametricGrid: each torus paints exactly its (rings, ring_segments)
+		# in UV space, regardless of how many triangles the mesh has. The
+		# whole point of the combine_torus parameter sweep — "this is what
+		# rings=4, segments=12 looks like" — becomes literal: the lines you
+		# count are the parameters this torus is teaching.
+		var pg_material := GridMaterialFactory.make_parametric(
+			gradient_color, rings, segments,
+			{ "line_color": Color(0.3, 0.9, 1.0), "emission": wireframe_brightness }
+		)
+		# Render priority preserves the legacy z-ordering.
+		if pg_material is ShaderMaterial:
+			(pg_material as ShaderMaterial).render_priority = 1
+		mesh_instance.material_override = pg_material
+	elif grid_shader:
+		# Legacy basic_grid path — fixed UV-grid density, kept as a fallback.
 		var shader_material = ShaderMaterial.new()
 		shader_material.shader = grid_shader
-
-		# Get gradient color for this torus
-		var gradient_color = color_gradient.sample(gradient_ratio) if color_gradient else base_color
-
-		# Set shader parameters for basic_grid.gdshader
 		shader_material.set_shader_parameter("line_color", Vector3(0.3, 0.9, 1.0))
 		shader_material.set_shader_parameter("fill_color", Vector3(gradient_color.r, gradient_color.g, gradient_color.b))
-		shader_material.set_shader_parameter("line_width", wireframe_width * 10.0)  # Scale up for visibility
+		shader_material.set_shader_parameter("line_width", wireframe_width * 10.0)
 		shader_material.set_shader_parameter("emission_strength", wireframe_brightness)
-
-		# Set render priority to ensure it renders on top of background materials
 		shader_material.render_priority = 1
-
 		mesh_instance.material_override = shader_material
 	else:
 		# Fallback to standard material if shader fails to load
