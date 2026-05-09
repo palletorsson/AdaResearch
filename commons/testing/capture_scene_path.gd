@@ -10,11 +10,16 @@ extends SceneTree
 ##     --scene=res://commons/interactables/slider_horizontal.tscn \
 ##     --out=user://interaction_dna_out/slider_horizontal
 
+# Angles tuned for panel-mounted interactables (sliders, dials, joysticks,
+# levers). Their key feature is the FACE of the panel — circular knob,
+# track and handle, ball-and-stem — which only reads correctly when the
+# camera is mostly head-on. Earlier 3/4 angles (yaw=0.4, pitch=0.4) made
+# dials look like extruded blobs because the rotation axis was hidden.
 const ARTIFACT_ANGLES: Array[Dictionary] = [
-	{ "name": "front",  "yaw": 0.4,    "pitch": 0.4   },
-	{ "name": "left",   "yaw": 1.97,   "pitch": 0.35  },
-	{ "name": "right",  "yaw": -1.17,  "pitch": 0.35  },
-	{ "name": "top",    "yaw": 0.001,  "pitch": 1.5607 },
+	{ "name": "front",  "yaw": 0.0,    "pitch": 0.1   },  # nearly head-on, slight downward
+	{ "name": "left",   "yaw": 0.6,    "pitch": 0.2   },  # 3/4 from left
+	{ "name": "right",  "yaw": -0.6,   "pitch": 0.2   },  # 3/4 from right
+	{ "name": "top",    "yaw": 0.001,  "pitch": 1.2   },  # mostly down, not straight
 ]
 
 var _scene_path: String = ""
