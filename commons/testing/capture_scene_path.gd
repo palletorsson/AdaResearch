@@ -53,15 +53,27 @@ func _initialize() -> void:
 	e.background_mode = Environment.BG_COLOR
 	e.background_color = Color(0.55, 0.62, 0.45, 1.0)  # sage green, matches other captures
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.40, 0.42, 0.45, 1.0)
-	e.ambient_light_energy = 1.0
+	e.ambient_light_color = Color(0.65, 0.67, 0.70, 1.0)
+	e.ambient_light_energy = 1.4   # brighter ambient so dark glossy materials show form
 	env.environment = e
 	scene_root.add_child(env)
 
-	var dir_light := DirectionalLight3D.new()
-	dir_light.rotation_degrees = Vector3(-50.0, 35.0, 0.0)
-	dir_light.light_energy = 1.2
-	scene_root.add_child(dir_light)
+	# Three-point lighting: key from upper-front-right, fill from upper-left,
+	# rim from behind to separate dark glossy knobs from background.
+	var key_light := DirectionalLight3D.new()
+	key_light.rotation_degrees = Vector3(-40.0, 30.0, 0.0)
+	key_light.light_energy = 1.2
+	scene_root.add_child(key_light)
+
+	var fill_light := DirectionalLight3D.new()
+	fill_light.rotation_degrees = Vector3(-30.0, -45.0, 0.0)
+	fill_light.light_energy = 0.6
+	scene_root.add_child(fill_light)
+
+	var rim_light := DirectionalLight3D.new()
+	rim_light.rotation_degrees = Vector3(20.0, 180.0, 0.0)
+	rim_light.light_energy = 0.5
+	scene_root.add_child(rim_light)
 
 	var camera := Camera3D.new()
 	camera.fov = 45.0
