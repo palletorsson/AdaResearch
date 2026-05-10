@@ -29,6 +29,12 @@ const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn
 @export var start_delay_s: float = 5.0       # warmup AFTER catalyst is armed
 @export var require_catalyst_armed: bool = true  # block emissions until player has the bracelet
 @export var pillar_height: float = 4.0       # visual only
+# Personality stage at which spawned foes start. Maps in early curriculum
+# sequences (Lab phase) seed "foe"; later sequences seed "wary" / "neutral"
+# / "curious" to match the creature personality arc. Accepts the same
+# names CatalystFoe.apply_grid_config takes: foe / wary / neutral /
+# curious / friend.
+@export var initial_state: String = "foe"
 
 var _emitted: int = 0
 var _timer: float = 0.0          # accumulates dt
@@ -144,6 +150,13 @@ func _emit_one() -> void:
 	parent.add_child(foe)
 	# Spawn at the vent's footprint, just above the floor.
 	foe.global_position = global_position + Vector3(0, 0.4, 0)
+	# Seed the foe's personality stage from the vent's initial_state.
+	# This is what makes the curriculum-arc real: a vent in a Lab-phase
+	# chamber spawns foes; a vent in a Nature-phase chamber spawns
+	# already-warmed creatures (curious, neutral); an Emergence-phase
+	# chamber spawns friends.
+	if foe.has_method("apply_grid_config"):
+		foe.call("apply_grid_config", {"initial_state": initial_state})
 	_emitted += 1
 	_live_count += 1
 	foe.tree_exited.connect(_on_foe_exited)
@@ -175,6 +188,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# catalyst is optional / not yet introduced.
 	if config_data.has("require_catalyst_armed"):
 		require_catalyst_armed = bool(config_data.get("require_catalyst_armed"))
+	# Seed the personality stage of every foe this vent spawns.
+	if config_data.has("initial_state"):
+		initial_state = String(config_data.get("initial_state"))
 
 
 # Diagnostic helpers ----------------------------------------------------
