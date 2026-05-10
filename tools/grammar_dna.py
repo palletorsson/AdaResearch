@@ -1563,7 +1563,7 @@ def gen_recursive_branching() -> list[dict]:
                  length * shrink, child_bottom_r, depth - 1, out,
                  is_root=False)
 
-    for max_depth in [1, 2, 3, 4]:
+    for max_depth in [1, 2, 3, 4, 5]:
         components: list = []
         # Trunk goes straight up
         grow([0, 0, 0], parent_dir=[0.0, 1.0, 0.0],
