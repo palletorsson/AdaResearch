@@ -1342,6 +1342,67 @@ def gen_tessellation_field() -> list[dict]:
                    "elements": ["square frame (4 boxes)", "+ cross"]},
     })
 
+    # ── Muqarnas: 3D stalactite vault decoration ─────────────────
+    # The Islamic architectural ornament — a honeycomb-like ceiling
+    # built from many small "cells" tiered concentrically, each
+    # projecting downward. We approximate with a 3-tier radial
+    # arrangement of small inverted frusta (point-down "stalactites").
+    components = []
+    n_outer = 12   # outer ring count
+    n_middle = 8   # middle ring
+    n_inner = 6    # inner ring
+    cell_h = 0.10
+    rings_data = [
+        # (count, ring_radius, cell_radius_top, cell_radius_bottom, tier_y)
+        (n_outer, 0.42, 0.06, 0.02, 0.00),  # bottom tier — widest ring, most cells
+        (n_middle, 0.28, 0.07, 0.02, 0.10),  # middle tier — narrower
+        (n_inner, 0.14, 0.08, 0.025, 0.20),  # top tier — innermost
+    ]
+    for n, ring_r, top_r, bot_r, ty in rings_data:
+        for i in range(n):
+            ang = 2.0 * math.pi * i / n
+            x = ring_r * math.cos(ang)
+            z = ring_r * math.sin(ang)
+            # Point-down frustum: bottom_r small (the "drip"), top_r wide
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(top_r, 4),
+                    "bottom_radius": round(bot_r, 4),
+                    "height": round(cell_h, 4),
+                    "radial_segments": 6,  # hex cross-section, classic muqarnas
+                },
+                "transform": {
+                    "position": [round(x, 5), round(ty + cell_h * 0.5, 5),
+                                  round(z, 5)],
+                },
+                "color": deep_color if (i + int(ring_r * 10)) % 2 == 0
+                                    else accent_color,
+            })
+    # Central "key" stalactite at top
+    components.append({
+        "primitive": "CylinderMesh",
+        "params": {
+            "top_radius": 0.10,
+            "bottom_radius": 0.025,
+            "height": 0.12,
+            "radial_segments": 8,
+        },
+        "transform": {"position": [0, 0.30 + 0.06, 0]},
+        "color": panel_color,
+    })
+    variants.append({
+        "id": "alhambra_muqarnas",
+        "spec": {
+            "_comment": "Muqarnas vault: 3 tiered concentric rings of inverted-frustum cells, hex cross-section",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "muqarnas vault",
+                   "tiers": 3,
+                   "elements": ["12 outer + 8 middle + 6 inner stalactites + key"]},
+    })
+
     return variants
 
 
