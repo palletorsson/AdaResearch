@@ -70,6 +70,11 @@ var _mesh: MeshInstance3D
 var _mat: StandardMaterial3D
 var _collision: CollisionShape3D
 var _step_timer: float = 0.0
+# Per-foe_mode badge — a small distinguishing marker added when the foe
+# becomes a FRIEND so its behavioural mode is legible at a glance.
+# GOO has no badge; TRANSPORT shows a wedge; SWARM shows orbiting cubes;
+# DRAINFRIEND shows a downward pyramid.
+var _badge: Node3D
 
 # ── References ───────────────────────────────────────────────────────
 var _player_ref: Node3D
@@ -522,6 +527,57 @@ func _nearest_other_foe() -> CatalystFoe:
 	return best
 
 
+func _build_friend_badge() -> void:
+	# Drop any previous badge (e.g. when re-applying state).
+	if _badge != null and is_instance_valid(_badge):
+		_badge.queue_free()
+		_badge = null
+	# Only FRIENDs get badges (the badge IS the friend signature).
+	if state != FoeState.FRIEND:
+		return
+	if foe_mode == FoeMode.GOO:
+		return  # GOO is the default — no badge
+	_badge = Node3D.new()
+	_badge.name = "FriendBadge"
+	add_child(_badge)
+	var badge_mat := StandardMaterial3D.new()
+	badge_mat.albedo_color = _mat.albedo_color
+	badge_mat.emission_enabled = true
+	badge_mat.emission = _mat.emission
+	badge_mat.emission_energy_multiplier = 2.0
+	if foe_mode == FoeMode.TRANSPORT:
+		# A small wedge on top — directional shove indicator.
+		var wedge := MeshInstance3D.new()
+		var pm := PrismMesh.new()
+		pm.size = Vector3(0.18, 0.10, 0.20)
+		wedge.mesh = pm
+		wedge.material_override = badge_mat
+		wedge.position = Vector3(0, 0.22, 0)
+		_badge.add_child(wedge)
+	elif foe_mode == FoeMode.SWARM:
+		# Three small satellite cubes orbiting (positioned statically at
+		# 120° apart around the parent body).
+		for i in range(3):
+			var sat := MeshInstance3D.new()
+			var sm := BoxMesh.new()
+			sm.size = Vector3(0.10, 0.10, 0.10)
+			sat.mesh = sm
+			sat.material_override = badge_mat
+			var ang: float = (i * TAU) / 3.0
+			sat.position = Vector3(cos(ang) * 0.30, 0.10, sin(ang) * 0.30)
+			_badge.add_child(sat)
+	elif foe_mode == FoeMode.DRAINFRIEND:
+		# A small downward-pointing pyramid below the body — drain.
+		var drain := MeshInstance3D.new()
+		var dm := PrismMesh.new()
+		dm.size = Vector3(0.18, 0.18, 0.18)
+		drain.mesh = dm
+		drain.material_override = badge_mat
+		drain.position = Vector3(0, -0.20, 0)
+		drain.rotation = Vector3(PI, 0, 0)  # flip to point down
+		_badge.add_child(drain)
+
+
 func _apply_state_visuals() -> void:
 	# Each state has a distinct palette so the personality arc is legible
 	# at a glance. The hue progression is: cold-grey → alarm-red →
@@ -552,11 +608,16 @@ func _apply_state_visuals() -> void:
 			_mat.emission_energy_multiplier = 1.4
 		FoeState.FRIEND:
 			# FRIEND keeps whatever colour the catalyst gave it (set in
-			# hit_by_catalyst_mode). If not set, default to friendly green.
+			# hit_by_catalyst_mode). If not set, derive a foe_mode-specific
+			# friendly hue (mint for GOO, sky-blue for TRANSPORT, orange
+			# for SWARM, violet for DRAINFRIEND).
 			if _mat.emission_energy_multiplier < 1.0:
-				_mat.albedo_color = Color(0.30, 0.78, 0.42)
-				_mat.emission = Color(0.42, 0.94, 0.56)
+				var hue: Color = _friend_hue_for_mode(foe_mode)
+				_mat.albedo_color = hue
+				_mat.emission = hue
 				_mat.emission_energy_multiplier = 1.6
+	# Add per-mode badge if appropriate (only for FRIENDs).
+	_build_friend_badge()
 
 
 # ── Signals ──────────────────────────────────────────────────────────
@@ -590,16 +651,45 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		"curious": FoeState.CURIOUS,
 		"friend":  FoeState.FRIEND,
 	}
+	# Optional foe_mode seeding (only meaningful when seeded as FRIEND).
+	# Accepts: goo, transport, swarm, drainfriend.
+	var FOE_MODE_BY_NAME: Dictionary = {
+		"goo":         FoeMode.GOO,
+		"transport":   FoeMode.TRANSPORT,
+		"swarm":       FoeMode.SWARM,
+		"drainfriend": FoeMode.DRAINFRIEND,
+	}
+	var foe_mode_str: String = String(config_data.get("foe_mode", "")).to_lower()
+	if FOE_MODE_BY_NAME.has(foe_mode_str):
+		foe_mode = FOE_MODE_BY_NAME[foe_mode_str]
+
 	if STATE_BY_NAME.has(initial_state):
 		var target_state: FoeState = STATE_BY_NAME[initial_state]
 		# Set state directly without firing personality_changed (this is
 		# initial seeding, not a catalyst hit).
 		state = target_state
-		# If seeded as FRIEND, also pick a hue + lock a foe_mode (default GOO).
+		# If seeded as FRIEND, pick a hue based on foe_mode for visual
+		# distinction across the four friend kinds.
 		if state == FoeState.FRIEND and _mat != null:
-			var hue: Color = FRIEND_HUES[randi() % FRIEND_HUES.size()]
+			var hue: Color = _friend_hue_for_mode(foe_mode)
 			_mat.albedo_color = hue
 			_mat.emission = hue
 			_mat.emission_energy_multiplier = 1.6
-		else:
-			_apply_state_visuals()
+		_apply_state_visuals()
+
+
+# Per-foe_mode hue selection — each friend kind gets a distinguishable
+# colour family, separate from the random palette. Lets a captured
+# gallery row of 4 friends read as four DIFFERENT kinds at a glance.
+func _friend_hue_for_mode(m: FoeMode) -> Color:
+	match m:
+		FoeMode.GOO:
+			return Color(0.30, 0.78, 0.42)   # mint green — the default friend
+		FoeMode.TRANSPORT:
+			return Color(0.20, 0.55, 0.95)   # sky blue — the pusher
+		FoeMode.SWARM:
+			return Color(0.95, 0.50, 0.18)   # warm orange — the leader
+		FoeMode.DRAINFRIEND:
+			return Color(0.65, 0.30, 0.85)   # violet — the entropy drain
+		_:
+			return Color(0.30, 0.78, 0.42)
