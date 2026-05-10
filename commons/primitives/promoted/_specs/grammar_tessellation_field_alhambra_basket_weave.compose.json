@@ -1,0 +1,892 @@
+{
+  "_comment": "Basket weave: pairs of perpendicular 2L\u00d7L rectangles in 2\u00d72 super-cells, alternating orientation in a checkerboard. Full floor by construction.",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.86,
+    0.78,
+    0.62
+  ],
+  "components": [
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.4,
+          0.03,
+          -0.35
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.4,
+          0.03,
+          -0.25
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.25,
+          0.03,
+          -0.3
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.15,
+          0.03,
+          -0.3
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.03,
+          -0.35
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.03,
+          -0.25
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.15,
+          0.03,
+          -0.3
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.25,
+          0.03,
+          -0.3
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.4,
+          0.03,
+          -0.35
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.4,
+          0.03,
+          -0.25
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.45,
+          0.03,
+          -0.1
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.35,
+          0.03,
+          -0.1
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.2,
+          0.03,
+          -0.15
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.2,
+          0.03,
+          -0.05
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.05,
+          0.03,
+          -0.1
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.05,
+          0.03,
+          -0.1
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.2,
+          0.03,
+          -0.15
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.2,
+          0.03,
+          -0.05
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.35,
+          0.03,
+          -0.1
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.45,
+          0.03,
+          -0.1
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.4,
+          0.03,
+          0.05
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.4,
+          0.03,
+          0.15
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.25,
+          0.03,
+          0.1
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.15,
+          0.03,
+          0.1
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.03,
+          0.05
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.03,
+          0.15
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.15,
+          0.03,
+          0.1
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.25,
+          0.03,
+          0.1
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.4,
+          0.03,
+          0.05
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.4,
+          0.03,
+          0.15
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.45,
+          0.03,
+          0.3
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.35,
+          0.03,
+          0.3
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.2,
+          0.03,
+          0.25
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.2,
+          0.03,
+          0.35
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.05,
+          0.03,
+          0.3
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.05,
+          0.03,
+          0.3
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.2,
+          0.03,
+          0.25
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.2,
+          0.06,
+          0.1
+        ]
+      },
+      "transform": {
+        "position": [
+          0.2,
+          0.03,
+          0.35
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.35,
+          0.03,
+          0.3
+        ]
+      },
+      "color": [
+        0.78,
+        0.62,
+        0.42
+      ]
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.1,
+          0.06,
+          0.2
+        ]
+      },
+      "transform": {
+        "position": [
+          0.45,
+          0.03,
+          0.3
+        ]
+      },
+      "color": [
+        0.52,
+        0.36,
+        0.24
+      ]
+    }
+  ]
+}

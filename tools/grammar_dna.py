@@ -1892,6 +1892,67 @@ def gen_tessellation_field() -> list[dict]:
                    "trajectory": "shifted from 2D tilings to vertical stack"},
     })
 
+    # ── Basket weave pattern (full floor) ────────────────────────
+    # Pairs of perpendicular rectangles in 2×2 super-cells. The
+    # super-cells alternate orientation in a checkerboard:
+    #   even cells have 2 horizontal rectangles stacked,
+    #   odd cells have 2 vertical rectangles side-by-side.
+    # Fills the plane perfectly because each super-cell is exactly
+    # 2L × 2L and the contents fill that square completely.
+    components = []
+    L_bw = 0.10
+    super_size = 2.0 * L_bw
+    rows, cols = 4, 5  # super-cell counts
+    bw_color_a = [0.78, 0.62, 0.42]  # warm wood
+    bw_color_b = [0.52, 0.36, 0.24]  # dark wood
+    for r in range(rows):
+        for c in range(cols):
+            super_cx = (c - (cols - 1) * 0.5) * super_size
+            super_cz = (r - (rows - 1) * 0.5) * super_size
+            if (r + c) % 2 == 0:
+                # 2 horizontal rectangles stacked top + bottom
+                # Each: size (2L, L), positioned ±L/2 in Z
+                for dz, color in [(-L_bw * 0.5, bw_color_a),
+                                  (+L_bw * 0.5, bw_color_b)]:
+                    components.append({
+                        "primitive": "BoxMesh",
+                        "params": {
+                            "size": [round(2 * L_bw, 4), plate_h, round(L_bw, 4)],
+                        },
+                        "transform": {
+                            "position": [round(super_cx, 5), plate_h * 0.5,
+                                          round(super_cz + dz, 5)],
+                        },
+                        "color": color,
+                    })
+            else:
+                # 2 vertical rectangles side-by-side left + right
+                # Each: size (L, 2L), positioned ±L/2 in X
+                for dx, color in [(-L_bw * 0.5, bw_color_a),
+                                  (+L_bw * 0.5, bw_color_b)]:
+                    components.append({
+                        "primitive": "BoxMesh",
+                        "params": {
+                            "size": [round(L_bw, 4), plate_h, round(2 * L_bw, 4)],
+                        },
+                        "transform": {
+                            "position": [round(super_cx + dx, 5), plate_h * 0.5,
+                                          round(super_cz, 5)],
+                        },
+                        "color": color,
+                    })
+    variants.append({
+        "id": "alhambra_basket_weave",
+        "spec": {
+            "_comment": "Basket weave: pairs of perpendicular 2L×L rectangles in 2×2 super-cells, alternating orientation in a checkerboard. Full floor by construction.",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "basket weave (2×2 super-cells)",
+                   "lattice": f"{rows}×{cols} super-cells",
+                   "rule": "even (r+c) → horizontal pair, odd → vertical pair"},
+    })
+
     return variants
 
 
