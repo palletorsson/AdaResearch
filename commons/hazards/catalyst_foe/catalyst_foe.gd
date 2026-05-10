@@ -27,8 +27,21 @@ class_name CatalystFoe
 # diagnosing transformation dispatch or vent emission.
 const DEBUG_LOG: bool = false
 
-# ── State ────────────────────────────────────────────────────────────
-enum FoeState { FOE, FRIEND }
+# ── State (5-step personality arc) ───────────────────────────────────
+# The catalyst doesn't flip a binary switch — it WALKS A CREATURE through
+# stages of warming. FOE is hostile; WARY keeps distance and watches;
+# NEUTRAL ignores the player and wanders; CURIOUS approaches peacefully
+# and may follow; FRIEND chases other foes to convert them. Each catalyst
+# hit advances ONE step. Per-sequence map data can also seed the starting
+# state via apply_grid_config(initial_state=...).
+#
+# Mapping to the curriculum's three acts (from doc/CATALYST design):
+#   Lab (seq 1-5)      → spawn as FOE
+#   Mid-lab (seq 6-8)  → spawn as WARY
+#   Nature (seq 9-11)  → spawn as NEUTRAL
+#   Nature-end (12-14) → spawn as CURIOUS
+#   Emergence (15+)    → spawn as FRIEND
+enum FoeState { FOE, WARY, NEUTRAL, CURIOUS, FRIEND }
 var state: FoeState = FoeState.FOE
 
 # Cells per second the body advances toward its goal.
@@ -169,8 +182,27 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 		if DEBUG_LOG:
 			print("[CatalystFoe] already FRIEND — ignoring")
 		return
-	state = FoeState.FRIEND
-	foe_mode = MODE_BY_ID.get(mode_id, FoeMode.GOO)
+	# Advance ONE step along the personality arc, not all the way to FRIEND.
+	# This is the queer-relational principle: the catalyst doesn't transform
+	# in one blow; it warms a creature one notch at a time. A foe needs 4
+	# hits across the curriculum to become a friend.
+	var prev_state: FoeState = state
+	state = (state + 1) as FoeState
+	# Lock in the foe_mode at the FIRST hit so the friend keeps the mode of
+	# the catalyst that started its arc.
+	if prev_state == FoeState.FOE:
+		foe_mode = MODE_BY_ID.get(mode_id, FoeMode.GOO)
+	# Update visuals for the new personality state. FRIEND-specific colour
+	# (palette / emission burst) is then applied below by the FRIEND path.
+	_apply_state_visuals()
+	personality_changed.emit(prev_state, state)
+	# Stages BEFORE FRIEND get a brief flash but no friend-coloured pop —
+	# their visuals are set by _apply_state_visuals above. Only on the
+	# FRIEND transition do we run the colour-locking pop + burst below.
+	if state != FoeState.FRIEND:
+		_spawn_hit_burst(_mat.emission)
+		_spawn_light_pulse(_mat.emission)
+		return
 	# Step rate per mode (matches editor's stepMul).
 	if foe_mode == FoeMode.SWARM:
 		step_period_s = max(0.3, step_period_s * 0.7)
@@ -224,11 +256,44 @@ func _physics_process(delta: float) -> void:
 	if not is_instance_valid(_player_ref):
 		_player_ref = _find_player()
 
+	# State-specific movement.
+	#   FOE      — chase player (current behaviour, with damage on touch)
+	#   WARY     — keep distance: flee when player is close, else hold ground
+	#   NEUTRAL  — ignore player, wander
+	#   CURIOUS  — approach player slowly, no damage on touch
+	#   FRIEND   — chase nearest non-friend foe to convert peer
 	var goal: Vector3
 	var has_goal := false
+	var step_mul: float = 1.0  # CURIOUS moves slower; WARY moves faster (alarm)
+
 	if state == FoeState.FOE and is_instance_valid(_player_ref):
 		goal = _player_ref.global_position
 		has_goal = true
+	elif state == FoeState.WARY and is_instance_valid(_player_ref):
+		# Flee if the player is too close; otherwise hold ground.
+		var dist := global_position.distance_to(_player_ref.global_position)
+		var watch_radius: float = 4.0
+		if dist < watch_radius:
+			# Pick a goal AWAY from the player.
+			var away_dir := (global_position - _player_ref.global_position)
+			away_dir.y = 0.0
+			if away_dir.length() > 0.001:
+				goal = global_position + away_dir.normalized() * 2.0
+				has_goal = true
+				step_mul = 0.85  # quick alert backstep
+		# else: just stand still this step
+	elif state == FoeState.NEUTRAL:
+		# Pure wander, ignore player.
+		var dirs: Array[Vector3] = [
+			Vector3(1, 0, 0), Vector3(-1, 0, 0),
+			Vector3(0, 0, 1), Vector3(0, 0, -1),
+		]
+		global_position += dirs[randi() % dirs.size()]
+		return
+	elif state == FoeState.CURIOUS and is_instance_valid(_player_ref):
+		goal = _player_ref.global_position
+		has_goal = true
+		step_mul = 1.4  # slower step (multiplier on period — bigger = slower)
 	elif state == FoeState.FRIEND:
 		var target := _nearest_other_foe()
 		if target != null:
@@ -236,13 +301,12 @@ func _physics_process(delta: float) -> void:
 			has_goal = true
 
 	if not has_goal:
-		# Wander when no goal — prevents the foe from sitting silently
-		# invisible. Picks a random cardinal direction every step.
-		var dirs: Array[Vector3] = [
+		# WARY at safe distance, or no player — gentle wander.
+		var dirs2: Array[Vector3] = [
 			Vector3(1, 0, 0), Vector3(-1, 0, 0),
 			Vector3(0, 0, 1), Vector3(0, 0, -1),
 		]
-		global_position += dirs[randi() % dirs.size()]
+		global_position += dirs2[randi() % dirs2.size()]
 		return
 
 	# Step one cell (1 m) toward the goal along the dominant axis.
@@ -256,6 +320,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		step = Vector3(0.0, 0.0, sign(diff.z))
 	global_position += step
+	# Apply step_mul to the next-step delay so CURIOUS lingers, WARY darts.
+	if step_mul != 1.0:
+		_step_timer = -step_period_s * (step_mul - 1.0)
 
 	# Contact resolution.
 	if state == FoeState.FRIEND:
@@ -285,6 +352,11 @@ func _physics_process(delta: float) -> void:
 			# inheritance after a cellular projectile.)
 			if foe_mode == FoeMode.DRAINFRIEND:
 				_drag_one_friend_back()
+	elif state == FoeState.CURIOUS and is_instance_valid(_player_ref):
+		# CURIOUS approaches but never harms — emits a soft signal so the
+		# game can react (small particle, sparkle, etc.) without damage.
+		if global_position.distance_to(_player_ref.global_position) < contact_radius * 2.0:
+			curious_contact.emit()
 
 
 # ── Hit visual effects (burst + light flash) ────────────────────────
@@ -384,18 +456,24 @@ func _mode_id_for_dispatch() -> String:
 		_:                   return "primitives"
 
 
-# Reverts one friend in the world back to foe — drainfriend entropy.
+# Reverts one friend (or near-friend) in the world by ONE step on the
+# personality arc — drainfriend entropy. Picks a random non-FOE creature
+# and walks it back: FRIEND → CURIOUS, CURIOUS → NEUTRAL, etc. Mirrors
+# the original behaviour but with the same one-step rhythm as forward
+# transformation. The catalyst gives ground evenly in both directions.
 func _drag_one_friend_back() -> void:
-	var friends: Array[CatalystFoe] = []
+	var candidates: Array[CatalystFoe] = []
 	for n in get_tree().get_nodes_in_group("catalyst_foe"):
 		var f := n as CatalystFoe
-		if f and f != self and f.state == FoeState.FRIEND:
-			friends.append(f)
-	if friends.is_empty():
+		if f and f != self and f.state != FoeState.FOE:
+			candidates.append(f)
+	if candidates.is_empty():
 		return
-	var v := friends[randi() % friends.size()]
-	v.state = FoeState.FOE
+	var v := candidates[randi() % candidates.size()]
+	var prev: FoeState = v.state
+	v.state = (v.state - 1) as FoeState
 	v._apply_state_visuals()
+	v.personality_changed.emit(prev, v.state)
 
 
 # ── Helpers ──────────────────────────────────────────────────────────
@@ -445,14 +523,46 @@ func _nearest_other_foe() -> CatalystFoe:
 
 
 func _apply_state_visuals() -> void:
-	if state == FoeState.FOE:
-		_mat.albedo_color = Color(0.10, 0.11, 0.14)
-		_mat.emission = Color(0.82, 0.83, 0.87)
-		_mat.emission_energy_multiplier = 0.7
+	# Each state has a distinct palette so the personality arc is legible
+	# at a glance. The hue progression is: cold-grey → alarm-red →
+	# neutral-tan → warm-amber → vivid-friend-hue. Emission energy rises
+	# as the creature warms.
+	if _mat == null:
+		return
+	match state:
+		FoeState.FOE:
+			# Cold biome-corrupt grey — the creature before catalysis
+			_mat.albedo_color = Color(0.10, 0.11, 0.14)
+			_mat.emission = Color(0.82, 0.83, 0.87)
+			_mat.emission_energy_multiplier = 0.7
+		FoeState.WARY:
+			# Alert red — alarmed, watching, defensive
+			_mat.albedo_color = Color(0.55, 0.18, 0.16)
+			_mat.emission = Color(0.92, 0.32, 0.20)
+			_mat.emission_energy_multiplier = 1.1
+		FoeState.NEUTRAL:
+			# Earth-tan — disinterested, just being
+			_mat.albedo_color = Color(0.52, 0.45, 0.32)
+			_mat.emission = Color(0.85, 0.78, 0.60)
+			_mat.emission_energy_multiplier = 0.9
+		FoeState.CURIOUS:
+			# Warm amber-yellow — approaching, soft glow
+			_mat.albedo_color = Color(0.92, 0.72, 0.28)
+			_mat.emission = Color(0.98, 0.82, 0.42)
+			_mat.emission_energy_multiplier = 1.4
+		FoeState.FRIEND:
+			# FRIEND keeps whatever colour the catalyst gave it (set in
+			# hit_by_catalyst_mode). If not set, default to friendly green.
+			if _mat.emission_energy_multiplier < 1.0:
+				_mat.albedo_color = Color(0.30, 0.78, 0.42)
+				_mat.emission = Color(0.42, 0.94, 0.56)
+				_mat.emission_energy_multiplier = 1.6
 
 
 # ── Signals ──────────────────────────────────────────────────────────
 signal caught_player
+signal curious_contact  # CURIOUS state touched the player (no damage)
+signal personality_changed(from_state: FoeState, to_state: FoeState)
 
 
 # ── Grid integration ─────────────────────────────────────────────────
@@ -468,6 +578,28 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	var dc := float(config_data.get("damage_cooldown_s", damage_cooldown_s))
 	if dc > 0.0:
 		damage_cooldown_s = dc
+	# initial_state accepts: foe, wary, neutral, curious, friend
+	# Each map can seed foes at a personality stage matching its sequence
+	# in the curriculum (Lab=FOE, Mid-lab=WARY, Nature=NEUTRAL,
+	# Nature-end=CURIOUS, Emergence=FRIEND).
 	var initial_state: String = String(config_data.get("initial_state", "foe")).to_lower()
-	if initial_state == "friend":
-		hit_by_projectile(Color(0, 0, 0, 0))
+	var STATE_BY_NAME: Dictionary = {
+		"foe":     FoeState.FOE,
+		"wary":    FoeState.WARY,
+		"neutral": FoeState.NEUTRAL,
+		"curious": FoeState.CURIOUS,
+		"friend":  FoeState.FRIEND,
+	}
+	if STATE_BY_NAME.has(initial_state):
+		var target_state: FoeState = STATE_BY_NAME[initial_state]
+		# Set state directly without firing personality_changed (this is
+		# initial seeding, not a catalyst hit).
+		state = target_state
+		# If seeded as FRIEND, also pick a hue + lock a foe_mode (default GOO).
+		if state == FoeState.FRIEND and _mat != null:
+			var hue: Color = FRIEND_HUES[randi() % FRIEND_HUES.size()]
+			_mat.albedo_color = hue
+			_mat.emission = hue
+			_mat.emission_energy_multiplier = 1.6
+		else:
+			_apply_state_visuals()
