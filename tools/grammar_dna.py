@@ -1827,6 +1827,61 @@ def gen_tessellation_field() -> list[dict]:
                    "decoration": "centre ring per brick"},
     })
 
+    # ── NEW TRAJECTORY (iter 6): stepped square pyramid ──────────
+    # 3D tiling: 5 stacked layers of square cylinder grids with
+    # decreasing extent. Bottom layer is the full floor; upper
+    # layers narrow toward a single peak block. Reads as a
+    # Mesoamerican step pyramid or ziggurat from the side; top view
+    # shows concentric square rings.
+    components = []
+    L_step = 0.10
+    R_step = L_step / math.sqrt(2.0)
+    layer_h = 0.06
+    # Layer 0 (bottom): 9×9 grid (FULL FLOOR)
+    # Layer 1: 7×7
+    # Layer 2: 5×5
+    # Layer 3: 3×3
+    # Layer 4 (top): 1×1
+    layer_specs = [
+        (9, 0,                   [0.62, 0.55, 0.42]),  # base sandstone
+        (7, layer_h * 1.0,       [0.72, 0.62, 0.46]),
+        (5, layer_h * 2.0,       [0.78, 0.66, 0.48]),
+        (3, layer_h * 3.0,       [0.85, 0.72, 0.50]),
+        (1, layer_h * 4.0,       [0.92, 0.80, 0.55]),  # peak
+    ]
+    for n, y_base, layer_color in layer_specs:
+        for r in range(n):
+            for c in range(n):
+                x = (c - (n - 1) * 0.5) * L_step
+                z = (r - (n - 1) * 0.5) * L_step
+                components.append({
+                    "primitive": "CylinderMesh",
+                    "params": {
+                        "top_radius": round(R_step, 4),
+                        "bottom_radius": round(R_step, 4),
+                        "height": round(layer_h, 4),
+                        "radial_segments": 4,
+                    },
+                    "transform": {
+                        "position": [round(x, 5),
+                                      round(y_base + layer_h * 0.5, 5),
+                                      round(z, 5)],
+                        "rotation_degrees": [0, 45, 0],
+                    },
+                    "color": layer_color,
+                })
+    variants.append({
+        "id": "alhambra_stepped_pyramid_3d",
+        "spec": {
+            "_comment": "3D stepped pyramid: 5 stacked square-grid layers with decreasing extent (9² → 7² → 5² → 3² → 1²). Bottom layer is full floor; reads as Mesoamerican step pyramid from the side, concentric squares from above.",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "3D stepped square pyramid",
+                   "layers": 5,
+                   "trajectory": "shifted from 2D tilings to vertical stack"},
+    })
+
     return variants
 
 
