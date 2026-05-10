@@ -1769,6 +1769,64 @@ def gen_tessellation_field() -> list[dict]:
                    "rule": "ring rotation = ((r+c) mod 4) * 15°"},
     })
 
+    # ── Running bond brick pattern (full floor) ──────────────────
+    # Classic running bond: rectangles 2L × L with alternating rows
+    # offset by L horizontally. Full floor by construction. Adds a
+    # small filled circle on each brick as a "rivet" mark.
+    components = []
+    rows, cols = 6, 5
+    L_brick = 0.16   # half-length of brick, so brick is 2L × L
+    h_brick = plate_h
+    brick_long = 2.0 * L_brick
+    brick_short = L_brick
+    brick_spacing_x = brick_long
+    brick_spacing_z = brick_short
+    brick_color_a = [0.72, 0.40, 0.30]   # terracotta
+    brick_color_b = [0.62, 0.34, 0.26]   # darker terracotta
+    rivet_color = [0.92, 0.86, 0.70]     # mortar / tan
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * brick_spacing_x
+            if r % 2 == 1:
+                x += brick_spacing_x * 0.5
+            z = (r - (rows - 1) * 0.5) * brick_spacing_z
+            # The brick (BoxMesh)
+            components.append({
+                "primitive": "BoxMesh",
+                "params": {
+                    "size": [round(brick_long, 4), h_brick, round(brick_short, 4)],
+                },
+                "transform": {
+                    "position": [round(x, 5), h_brick * 0.5, round(z, 5)],
+                },
+                "color": brick_color_a if (r + c) % 2 == 0 else brick_color_b,
+            })
+            # Small "rivet" cylinder centred on the brick (a torus ring)
+            components.append({
+                "primitive": "TorusMesh",
+                "params": {
+                    "inner_radius": round(L_brick * 0.10, 4),
+                    "outer_radius": round(L_brick * 0.20, 4),
+                    "rings": 16,
+                },
+                "transform": {
+                    "position": [round(x, 5), h_brick * 0.5 + 0.001, round(z, 5)],
+                },
+                "color": rivet_color,
+            })
+    variants.append({
+        "id": "alhambra_running_bond_brick",
+        "spec": {
+            "_comment": "Running bond brick pattern: 2L×L rectangles offset by L on alternate rows. Full floor by construction. Each brick has a small ring 'rivet' in the centre.",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "running bond (alternate-row offset bricks)",
+                   "lattice": f"{rows}x{cols} bricks",
+                   "brick_aspect": "2:1 with L=0.16",
+                   "decoration": "centre ring per brick"},
+    })
+
     return variants
 
 
