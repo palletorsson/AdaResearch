@@ -390,7 +390,11 @@ def gen_tessellation_field() -> list[dict]:
     geometric patterns reminiscent of Islamic architectural ornament.
     """
     variants = []
-    height = 0.4
+    # Thin plate height — when the prisms are tall, top-down captures
+    # show dark shadow gaps at the 3-way meeting points where adjacent
+    # prisms' side walls converge. Keeping the plates thin (0.06) makes
+    # them read as floor tiles rather than columns and the gaps vanish.
+    height = 0.06
     color = [0.40, 0.60, 0.45]
 
     # ── K=4: square tiling ─────────────────────────────────────────
@@ -460,6 +464,12 @@ def gen_tessellation_field() -> list[dict]:
                 "transform": {
                     "position": [round(x, 5), height * 0.5, round(z, 5)],
                     "rotation_degrees": [0, 30, 0],
+                    # 12% overshoot via scale forces adjacent hexes to overlap
+                    # significantly at 3-way meeting points to eliminate the
+                    # persistent shadow-gap rendering at edges. Without this
+                    # the geometry is correct but Godot's renderer shows tiny
+                    # triangular dark spots between hexes.
+                    "scale": [1.12, 1.0, 1.12],
                 },
             })
     variants.append({
