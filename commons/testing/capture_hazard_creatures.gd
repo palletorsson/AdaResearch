@@ -93,18 +93,26 @@ func _capture_creature(cid: String, scene_path: String, personality: String) -> 
 		return
 	root.add_child(creature)
 	creature.position = Vector3(0, 0.2, 0)
-	# Set personality. HazardCreatureBase subclasses expose set_personality.
+	# Set personality + zero out movement so the creature builds geometry
+	# in place (without patrolling out of camera frame). HazardCreatureBase's
+	# configure() accepts speed/chase_speed/detection_radius via apply_grid_config.
 	if creature.has_method("set_personality"):
 		creature.call("set_personality", personality)
-	# Some creatures build geometry over physics ticks — leave physics on
-	# but use a wider camera so wandering doesn't take them out of frame.
+	if creature.has_method("apply_grid_config"):
+		creature.call("apply_grid_config", {
+			"speed": 0.0,
+			"chase_speed": 0.0,
+			"detection_radius": 0.0,
+		})
 
-	# Camera — wide 3/4 view that frames a 6m volume around the spawn
+	# Camera — moderate 3/4 view. Initial aim is the spawn point; after
+	# the settle pass we recompute the camera using the creature's actual
+	# mesh AABB so each capture is properly framed.
 	var cam := Camera3D.new()
-	cam.position = Vector3(3.5, 2.8, 4.5)
-	cam.look_at(Vector3(0, 0.6, 0), Vector3.UP)
-	cam.fov = 50.0
+	cam.position = Vector3(2.0, 1.6, 2.6)
+	cam.fov = 42.0
 	root.add_child(cam)
+	cam.look_at(Vector3(0, 0.5, 0), Vector3.UP)
 
 	# Replace any existing scene
 	var prev := current_scene
@@ -113,10 +121,27 @@ func _capture_creature(cid: String, scene_path: String, personality: String) -> 
 	if prev != null and prev != root:
 		prev.queue_free()
 
-	# Settle frames — some creatures build geometry across many ticks
-	# (L-system iterations, fractal subdivisions, etc.). Wait ~3s.
+	# Settle frames — speed=0 means the creature builds geometry in place
+	# without wandering. ~3s gives time for L-system iterations,
+	# fractal subdivisions, animated rig settling.
 	for _i in range(180):
 		await process_frame
+
+	# After settle: compute the creature's mesh AABB so we can frame it.
+	# Many creatures build their visible geometry as descendants offset
+	# from the root, so creature.position alone doesn't reflect where
+	# the body actually is.
+	var aabb := _compute_visual_aabb(creature)
+	var center := Vector3(0, 0.5, 0)
+	var radius := 1.0
+	if aabb.size.length() > 0.001:
+		center = aabb.position + aabb.size * 0.5
+		radius = max(aabb.size.x, max(aabb.size.y, aabb.size.z)) * 0.6
+		radius = clamp(radius, 0.6, 4.0)
+	# Re-aim the camera at the AABB centre, pulling back proportional to size.
+	var cam_dir := Vector3(1.0, 0.7, 1.3).normalized()
+	cam.position = center + cam_dir * (radius * 2.4 + 1.2)
+	cam.look_at(center, Vector3.UP)
 
 	var vp: Viewport = root.get_viewport()
 	vp.size = Vector2i(800, 800)
@@ -129,3 +154,28 @@ func _capture_creature(cid: String, scene_path: String, personality: String) -> 
 	var out_path: String = "user://catalyst_runs/creatures/%s/%s.png" % [cid, personality]
 	img.save_png(out_path)
 	print("[hazard_creatures] saved %s_%s" % [cid, personality])
+
+
+func _compute_visual_aabb(node: Node3D) -> AABB:
+	# Walk the subtree, union the world-space AABBs of every visible
+	# MeshInstance3D. Floor + lights are siblings so we only walk inside
+	# the creature node.
+	var aabb := AABB()
+	var has_any := false
+	var stack: Array = [node]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n is MeshInstance3D and (n as MeshInstance3D).mesh != null:
+			var mi := n as MeshInstance3D
+			var local := mi.get_aabb()
+			var xf := mi.global_transform
+			var world_aabb := xf * local
+			if not has_any:
+				aabb = world_aabb
+				has_any = true
+			else:
+				aabb = aabb.merge(world_aabb)
+		for c in n.get_children():
+			if c is Node3D:
+				stack.append(c)
+	return aabb if has_any else AABB(Vector3(-0.5, 0.0, -0.5), Vector3(1.0, 1.0, 1.0))
