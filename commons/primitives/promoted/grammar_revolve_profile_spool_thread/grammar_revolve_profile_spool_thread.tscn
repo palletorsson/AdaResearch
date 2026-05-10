@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3]
+
+; Promoted composition: grammar_revolve_profile_spool_thread (1 components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_revolve_profile_spool_thread
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+[sub_resource type="Curve" id="Curve_0"]
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [Vector2(0.0, 0.95), 0.0, 0.0, 0, 0, Vector2(0.1, 0.95), 0.0, 0.0, 0, 0, Vector2(0.15, 0.5), 0.0, 0.0, 0, 0, Vector2(0.85, 0.5), 0.0, 0.0, 0, 0, Vector2(0.9, 0.95), 0.0, 0.0, 0, 0, Vector2(1.0, 0.95), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="TubeTrailMesh" id="Mesh_0"]
+radius = 0.280000
+radial_steps = 24
+sections = 12
+section_length = 0.075000
+section_rings = 4
+cap_top = true
+cap_bottom = true
+curve = SubResource("Curve_0")
+
+[sub_resource type="StandardMaterial3D" id="Mat_0"]
+albedo_color = Color(0.78, 0.66, 0.48, 1.0)
+emission_enabled = true
+emission = Color(0.23399999999999999, 0.198, 0.144, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="GrammarRevolveProfileSpoolThread" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_0")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.9, 0)

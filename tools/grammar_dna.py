@@ -1756,6 +1756,153 @@ def gen_negative_space() -> list[dict]:
     return variants
 
 
+# ── Category H: revolve profiles — true surfaces of revolution ──────
+# Where totem_pole approximates a revolve with stacked frusta, this
+# category uses Godot's TubeTrailMesh with a Curve resource to render
+# a *continuous* surface of revolution. The Curve defines radius along
+# the length axis; the mesh interpolates smoothly between control
+# points. This is the "actual revolve" Palle named after the
+# tube-trail-mesh principle.
+
+def gen_revolve_profile() -> list[dict]:
+    """6 surface-of-revolution variants, each defined by a profile curve."""
+    variants = []
+    color = [0.78, 0.66, 0.48]
+
+    def make_revolve(variant_id: str, label: str,
+                     profile: list[list[float]],
+                     radius: float = 0.30,
+                     sections: int = 12,
+                     section_length: float = 0.08,
+                     section_rings: int = 4,
+                     radial_steps: int = 24) -> dict:
+        """profile: list of [t, r] where t is fraction (0=top, 1=bottom)
+        and r is radius scale. The Curve interpolates between points.
+
+        TubeTrailMesh stacks downward in -Y by default. Total length =
+        sections * section_length. The mesh has total
+        (sections * section_rings) rings; each ring's radius is the
+        Curve sample at that y-fraction times the base `radius`."""
+        # Total mesh height for centering
+        total_len = sections * section_length
+        components = [{
+            "primitive": "TubeTrailMesh",
+            "params": {
+                "radius": round(radius, 4),
+                "radial_steps": radial_steps,
+                "sections": sections,
+                "section_length": round(section_length, 4),
+                "section_rings": section_rings,
+                "cap_top": True,
+                "cap_bottom": True,
+                "profile": profile,
+            },
+            # Translate up by half the height so the mesh sits on the
+            # ground plane (TubeTrailMesh extends in -Y from its origin)
+            "transform": {"position": [0, round(total_len, 4), 0]},
+        }]
+        return {
+            "id": variant_id,
+            "spec": {
+                "_comment": f"revolve profile: {label}",
+                "primitive": "Composition", "shader": "flat",
+                "color": color, "components": components,
+            },
+            "params": {"label": label, "profile_points": len(profile),
+                       "sections": sections},
+        }
+
+    # 1. Vase: classic vase profile — narrow neck, wide belly, narrow base
+    variants.append(make_revolve(
+        "vase_classical",
+        "narrow neck, wide belly, narrow base",
+        profile=[
+            [0.00, 0.40],   # top rim
+            [0.10, 0.45],   # neck collar
+            [0.18, 0.30],   # neck pinch
+            [0.40, 0.95],   # widest belly
+            [0.70, 0.85],   # lower belly
+            [0.90, 0.40],   # taper to foot
+            [1.00, 0.55],   # foot ring
+        ],
+        radius=0.30, sections=14, section_length=0.07, section_rings=4,
+    ))
+
+    # 2. Bottle: narrow tall neck, sharp shoulder, cylindrical body
+    variants.append(make_revolve(
+        "bottle_long_neck",
+        "narrow tall neck, sharp shoulder, cylindrical body",
+        profile=[
+            [0.00, 0.20],
+            [0.08, 0.22],
+            [0.30, 0.22],   # neck (constant)
+            [0.40, 0.85],   # sharp shoulder
+            [0.95, 0.85],   # body (constant)
+            [1.00, 0.85],
+        ],
+        radius=0.28, sections=16, section_length=0.075, section_rings=4,
+    ))
+
+    # 3. Lamp: wide flared base, narrow stem, flared shade
+    variants.append(make_revolve(
+        "lamp_stem",
+        "flared base + narrow stem + flared shade",
+        profile=[
+            [0.00, 0.95],   # shade brim (top-wide)
+            [0.10, 0.55],
+            [0.25, 0.20],   # stem
+            [0.65, 0.20],   # stem
+            [0.85, 0.65],
+            [1.00, 0.95],   # base ring
+        ],
+        radius=0.28, sections=14, section_length=0.08, section_rings=4,
+    ))
+
+    # 4. Onion dome: bulbous top with narrow stalk
+    variants.append(make_revolve(
+        "onion_dome",
+        "bulbous top, narrow stalk, wide base",
+        profile=[
+            [0.00, 0.05],   # finial point
+            [0.08, 0.20],
+            [0.25, 1.00],   # bulb peak
+            [0.45, 0.35],   # bulb pinch
+            [0.55, 0.35],   # stalk
+            [0.85, 0.65],   # base flare
+            [1.00, 0.80],
+        ],
+        radius=0.30, sections=16, section_length=0.07, section_rings=5,
+    ))
+
+    # 5. Spool: thread-spool with two flanges
+    variants.append(make_revolve(
+        "spool_thread",
+        "thread spool with two end flanges",
+        profile=[
+            [0.00, 0.95],   # top flange
+            [0.10, 0.95],
+            [0.15, 0.50],   # narrow shaft
+            [0.85, 0.50],
+            [0.90, 0.95],   # bottom flange
+            [1.00, 0.95],
+        ],
+        radius=0.28, sections=12, section_length=0.075, section_rings=4,
+    ))
+
+    # 6. Aalto-vase wave: undulating profile (modernist organic)
+    variants.append(make_revolve(
+        "aalto_wave",
+        "undulating sinusoidal profile (modernist)",
+        profile=[
+            [t, 0.55 + 0.30 * math.sin(2 * math.pi * t * 1.5)]
+            for t in [i / 16.0 for i in range(17)]
+        ],
+        radius=0.30, sections=18, section_length=0.07, section_rings=4,
+    ))
+
+    return variants
+
+
 # ── Generator dispatch ───────────────────────────────────────────────
 
 CATEGORIES: dict[str, dict[str, Any]] = {
@@ -1806,6 +1953,12 @@ CATEGORIES: dict[str, dict[str, Any]] = {
         "essence": "compositions where the empty space between primitives is the artifact — frames, brackets, apertures, niches",
         "primary_axis": "void_shape",
         "generator": gen_negative_space,
+    },
+    "revolve_profile": {
+        "title": "Revolve profiles (true surface of revolution)",
+        "essence": "TubeTrailMesh + Curve resource: a single continuous mesh whose radius varies smoothly along the length axis — vase, bottle, lamp, onion dome, spool, Aalto-wave. Where totem_pole approximates revolve with stacked frusta, this IS the revolve operation.",
+        "primary_axis": "label",
+        "generator": gen_revolve_profile,
     },
 }
 

@@ -1,0 +1,57 @@
+{
+  "_comment": "revolve profile: narrow tall neck, sharp shoulder, cylindrical body",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.78,
+    0.66,
+    0.48
+  ],
+  "components": [
+    {
+      "primitive": "TubeTrailMesh",
+      "params": {
+        "radius": 0.28,
+        "radial_steps": 24,
+        "sections": 16,
+        "section_length": 0.075,
+        "section_rings": 4,
+        "cap_top": true,
+        "cap_bottom": true,
+        "profile": [
+          [
+            0.0,
+            0.2
+          ],
+          [
+            0.08,
+            0.22
+          ],
+          [
+            0.3,
+            0.22
+          ],
+          [
+            0.4,
+            0.85
+          ],
+          [
+            0.95,
+            0.85
+          ],
+          [
+            1.0,
+            0.85
+          ]
+        ]
+      },
+      "transform": {
+        "position": [
+          0,
+          1.2,
+          0
+        ]
+      }
+    }
+  ]
+}

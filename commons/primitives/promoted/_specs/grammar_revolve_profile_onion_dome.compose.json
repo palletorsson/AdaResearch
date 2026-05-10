@@ -1,0 +1,61 @@
+{
+  "_comment": "revolve profile: bulbous top, narrow stalk, wide base",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.78,
+    0.66,
+    0.48
+  ],
+  "components": [
+    {
+      "primitive": "TubeTrailMesh",
+      "params": {
+        "radius": 0.3,
+        "radial_steps": 24,
+        "sections": 16,
+        "section_length": 0.07,
+        "section_rings": 5,
+        "cap_top": true,
+        "cap_bottom": true,
+        "profile": [
+          [
+            0.0,
+            0.05
+          ],
+          [
+            0.08,
+            0.2
+          ],
+          [
+            0.25,
+            1.0
+          ],
+          [
+            0.45,
+            0.35
+          ],
+          [
+            0.55,
+            0.35
+          ],
+          [
+            0.85,
+            0.65
+          ],
+          [
+            1.0,
+            0.8
+          ]
+        ]
+      },
+      "transform": {
+        "position": [
+          0,
+          1.12,
+          0
+        ]
+      }
+    }
+  ]
+}

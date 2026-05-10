@@ -491,13 +491,41 @@ def _render_compose_scene_flat(
             cc = list(c[:3]) + [float(c[3]) if len(c) > 3 else 1.0]
         component_colors.append(cc)
 
+    curve_blocks: list[str] = []
     mesh_blocks: list[str] = []
     for i, comp in enumerate(components):
         primitive = comp["primitive"]
-        params = comp.get("params", {})
+        params = dict(comp.get("params", {}))  # copy so we can mutate
+
+        # Special: a "profile" param on TubeTrailMesh becomes an embedded
+        # Curve sub_resource referenced via curve = SubResource("Curve_i")
+        if primitive == "TubeTrailMesh" and "profile" in params:
+            profile = params.pop("profile")  # list of [x, y] points
+            curve_id = f"Curve_{i}"
+            # Curve._data: each point is 5 entries:
+            #   Vector2(x, y), left_tangent, right_tangent, left_mode, right_mode
+            # Use mode 0 (TANGENT_FREE, smooth bezier) for organic curves.
+            data_parts = []
+            for px, py in profile:
+                data_parts.append(
+                    f"Vector2({px}, {py}), 0.0, 0.0, 0, 0"
+                )
+            curve_blocks.append(
+                f'[sub_resource type="Curve" id="{curve_id}"]\n'
+                f'min_value = 0.0\n'
+                f'max_value = 1.0\n'
+                f'bake_resolution = 100\n'
+                f'_data = [{", ".join(data_parts)}]\n'
+                f'point_count = {len(profile)}'
+            )
+            params["curve"] = f'SubResource("{curve_id}")'
+
         param_lines = []
         for k, v in params.items():
-            if isinstance(v, float):
+            if isinstance(v, bool):
+                # Godot .tscn expects lowercase true/false, not Python's True/False
+                param_lines.append(f"{k} = {'true' if v else 'false'}")
+            elif isinstance(v, float):
                 param_lines.append(f"{k} = {v:.6f}")
             elif isinstance(v, list) and len(v) == 3:
                 param_lines.append(f"{k} = Vector3({v[0]}, {v[1]}, {v[2]})")
@@ -537,7 +565,10 @@ def _render_compose_scene_flat(
             node_lines.append(_format_transform3d(pos, rot_deg, scale))
         node_blocks.append("\n".join(node_lines))
 
-    load_steps = n_comp * 2 + 1  # n meshes + n materials + node tree
+    load_steps = n_comp * 2 + len(curve_blocks) + 1
+    curve_section = (
+        "\n" + chr(10).join(curve_blocks) + "\n" if curve_blocks else ""
+    )
 
     return f"""[gd_scene load_steps={load_steps} format=3]
 
@@ -547,7 +578,7 @@ def _render_compose_scene_flat(
 ; Flat StandardMaterial3D per component — no edge highlighting.
 ; Used when the goal is silhouette fidelity and CylinderMesh's internal
 ; triangulation would otherwise show through with edge shaders.
-
+{curve_section}
 {chr(10).join(mesh_blocks)}
 
 {chr(10).join(mat_blocks)}
