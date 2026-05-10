@@ -1274,6 +1274,74 @@ def gen_tessellation_field() -> list[dict]:
                    "elements": ["pentagon_centre", "5 thick petals", "5 pentagon markers"]},
     })
 
+    # ── Chinese lattice (cross-and-frame pattern) ────────────────
+    # The repeating pattern of crossed bars + square frames found in
+    # Chinese ice-ray and lattice screens. Each cell has a square ring
+    # plus a small + (cross) inside — built from 4 thin boxes.
+    cell = 0.32
+    rows, cols = 4, 5
+    bar_t = 0.04          # bar thickness
+    frame_t = 0.05        # frame thickness
+    components = []
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * cell
+            z = (r - (rows - 1) * 0.5) * cell
+            # Square frame (4 boxes around the perimeter)
+            half = cell * 0.5 - frame_t * 0.5
+            # north (along X, at +Z)
+            components.append({
+                "primitive": "BoxMesh",
+                "params": {"size": [cell, plate_h, frame_t]},
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z + half, 5)]},
+                "color": deep_color,
+            })
+            # south
+            components.append({
+                "primitive": "BoxMesh",
+                "params": {"size": [cell, plate_h, frame_t]},
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z - half, 5)]},
+                "color": deep_color,
+            })
+            # east
+            components.append({
+                "primitive": "BoxMesh",
+                "params": {"size": [frame_t, plate_h, cell - 2 * frame_t]},
+                "transform": {"position": [round(x + half, 5), plate_h * 0.5, round(z, 5)]},
+                "color": deep_color,
+            })
+            # west
+            components.append({
+                "primitive": "BoxMesh",
+                "params": {"size": [frame_t, plate_h, cell - 2 * frame_t]},
+                "transform": {"position": [round(x - half, 5), plate_h * 0.5, round(z, 5)]},
+                "color": deep_color,
+            })
+            # Inner cross: + bar (along X)
+            components.append({
+                "primitive": "BoxMesh",
+                "params": {"size": [cell - 2 * frame_t, plate_h, bar_t]},
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z, 5)]},
+                "color": accent_color,
+            })
+            # Inner cross: | bar (along Z)
+            components.append({
+                "primitive": "BoxMesh",
+                "params": {"size": [bar_t, plate_h, cell - 2 * frame_t]},
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z, 5)]},
+                "color": accent_color,
+            })
+    variants.append({
+        "id": "alhambra_chinese_lattice",
+        "spec": {
+            "_comment": "Chinese lattice: square frame + inner cross per cell, repeated as ice-ray screen",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "chinese cross-and-frame",
+                   "elements": ["square frame (4 boxes)", "+ cross"]},
+    })
+
     return variants
 
 
