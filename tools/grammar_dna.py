@@ -125,6 +125,36 @@ PALETTES: dict[str, list[list[float]]] = {
         [0.57, 0.68, 0.85], [0.95, 0.95, 0.95], [0.78, 0.86, 0.93],
         [0.15, 0.23, 0.37],
     ],
+    "frida": [
+        [0.86, 0.08, 0.23], [0.00, 0.39, 0.00], [1.00, 0.65, 0.00],
+        [0.63, 0.13, 0.94], [0.94, 0.90, 0.55], [0.55, 0.27, 0.08],
+        [0.00, 0.75, 0.99], [1.00, 0.84, 0.00], [0.50, 0.00, 0.00],
+    ],
+    "neon": [
+        [1.00, 0.00, 1.00], [0.00, 1.00, 1.00], [0.00, 0.98, 0.60],
+        [1.00, 0.08, 0.58], [0.63, 0.13, 0.94], [1.00, 1.00, 0.00],
+        [0.00, 0.75, 0.99], [1.00, 0.27, 0.00],
+    ],
+    "harlem": [
+        [0.72, 0.53, 0.04], [0.10, 0.10, 0.44], [0.55, 0.27, 0.08],
+        [0.86, 0.08, 0.23], [0.05, 0.05, 0.05], [0.94, 0.90, 0.55],
+        [0.50, 0.00, 0.00], [0.18, 0.31, 0.31],
+    ],
+    "joy": [
+        [1.00, 0.84, 0.00], [1.00, 0.65, 0.00], [0.20, 0.80, 0.20],
+        [0.00, 0.75, 0.99], [1.00, 0.41, 0.71], [0.57, 0.93, 0.57],
+        [1.00, 1.00, 0.00], [1.00, 0.50, 0.00],
+    ],
+    "pinkness": [
+        [1.00, 0.75, 0.80], [1.00, 0.63, 0.48], [1.00, 0.41, 0.71],
+        [0.91, 0.30, 0.24], [1.00, 0.08, 0.58], [0.78, 0.08, 0.52],
+        [1.00, 0.27, 0.00], [0.86, 0.63, 0.86], [1.00, 0.00, 1.00],
+    ],
+    "industrial": [
+        [0.41, 0.41, 0.41], [0.25, 0.25, 0.25], [0.63, 0.63, 0.63],
+        [0.10, 0.10, 0.10], [0.50, 0.50, 0.50], [0.72, 0.53, 0.04],
+        [0.80, 0.50, 0.20], [0.18, 0.31, 0.31],
+    ],
 }
 
 
@@ -223,6 +253,74 @@ def gen_totem_pole() -> list[dict]:
         layers.append((rs[i], rs[i + 1], h * 0.90))
     variants.append(make_totem(
         "hokusai_wave", "hokusai", "sinusoidal (wave) radius schedule", layers
+    ))
+
+    # 7. Frida ziggurat: 7 segments with descending stepped landings,
+    # each layer's top equal to next layer's bottom
+    layers = []
+    rs = [R, R * 0.85, R * 0.85, R * 0.65, R * 0.65, R * 0.45, R * 0.45, R * 0.20]
+    heights = [h * 0.6, h * 0.9, h * 0.6, h * 0.9, h * 0.6, h * 0.9, h * 0.6]
+    for i in range(7):
+        layers.append((rs[i], rs[i + 1], heights[i]))
+    variants.append(make_totem(
+        "frida_ziggurat", "frida", "stepped ziggurat with landings", layers
+    ))
+
+    # 8. Neon spool: 5 alternating wide/narrow cube + frustum sections
+    layers = []
+    rs = [R * 0.7, R * 0.7, R * 0.3, R * 0.3, R * 0.7, R * 0.7]
+    heights = [h * 0.5, h * 0.6, h * 0.4, h * 0.6, h * 0.5]
+    for i in range(5):
+        layers.append((rs[i], rs[i + 1], heights[i]))
+    variants.append(make_totem(
+        "neon_spool", "neon", "alternating cube + frustum spool", layers
+    ))
+
+    # 9. Harlem column-and-capital: 6 segments, narrow column with
+    # broad capital and base
+    layers = []
+    rs = [R, R * 0.6, R * 0.5, R * 0.5, R * 0.6, R, R * 0.4]
+    heights = [h * 0.5, h * 0.4, h * 1.0, h * 1.0, h * 0.4, h * 0.5]
+    for i in range(6):
+        layers.append((rs[i], rs[i + 1], heights[i]))
+    variants.append(make_totem(
+        "harlem_column", "harlem", "broad-base column with capital and base", layers
+    ))
+
+    # 10. Joy bulb stack: 6 segments alternating bulbs (wide) and necks (narrow)
+    layers = []
+    rs = [R * 0.4, R * 0.95, R * 0.4, R * 0.85, R * 0.4, R * 0.75, R * 0.3]
+    for i in range(6):
+        layers.append((rs[i], rs[i + 1], h * 0.85))
+    variants.append(make_totem(
+        "joy_bulbs", "joy", "alternating bulbs and necks", layers
+    ))
+
+    # 11. Pinkness gradient sphere-tower: 8 progressively bulging then
+    # tapering — like stacked planets pinched at the equators
+    layers = []
+    rs = [R * 0.3]
+    for i in range(8):
+        if i % 2 == 0:
+            rs.append(R * (0.95 - i * 0.05))  # bulge
+        else:
+            rs.append(R * (0.45 - i * 0.04))  # neck
+    for i in range(8):
+        layers.append((rs[i], rs[i + 1], h * 0.85))
+    variants.append(make_totem(
+        "pinkness_planets", "pinkness", "stacked planets with pinched equators", layers
+    ))
+
+    # 12. Industrial smokestack: tall cylindrical column with
+    # a stepped industrial cap and base — single dominant shape
+    layers = []
+    rs = [R, R * 0.85, R * 0.5, R * 0.5, R * 0.5, R * 0.7, R * 0.7]
+    heights = [h * 0.4, h * 0.4, h * 1.4, h * 1.4, h * 0.5, h * 0.4]
+    for i in range(6):
+        layers.append((rs[i], rs[i + 1], heights[i]))
+    variants.append(make_totem(
+        "industrial_smokestack", "industrial",
+        "wide base, tall cylindrical body, stepped cap", layers
     ))
 
     return variants
@@ -880,6 +978,115 @@ def gen_tessellation_field() -> list[dict]:
         },
         "params": {"tiling": "4.8.8 truncated square", "torus_K": 8,
                    "filler_K": 4, "rotation": "octagons 22.5deg, squares 45deg"},
+    })
+
+    # ── Penrose tiles (P3): thick + thin rhombi, no gutters ──────
+    # Both rhombi have side L. Thick has angles 72°/108°; thin has
+    # angles 36°/144°. Built from 4-segment torus rings stretched by
+    # non-uniform scale: scale = (cos(half_acute), 1, sin(half_acute))
+    # so the ring's diamond shape becomes a rhombus with side L and
+    # the right diagonals.
+    L_pen = 0.22
+    pen_inner = L_pen * 0.82
+    pen_outer = L_pen
+    # Thick: half_acute = 36°, scale = (cos36°, 1, sin36°)
+    sx_thick = math.cos(math.radians(36.0))   # 0.809
+    sz_thick = math.sin(math.radians(36.0))   # 0.588
+    # Thin: half_acute = 18°, scale = (cos18°, 1, sin18°)
+    sx_thin = math.cos(math.radians(18.0))    # 0.951
+    sz_thin = math.sin(math.radians(18.0))    # 0.309
+    rhombus_thick_color = [0.85, 0.55, 0.35]   # warm terracotta
+    rhombus_thin_color = [0.30, 0.55, 0.55]    # teal
+
+    def rhombus(center: list[float], angle_deg: float, kind: str,
+                color: list[float]) -> dict:
+        """A Penrose rhombus tile using a stretched 4-torus.
+        kind ∈ {'thick', 'thin'}; angle_deg rotates around Y so the
+        long diagonal points along that bearing."""
+        if kind == "thick":
+            sx, sz = sx_thick, sz_thick
+        else:
+            sx, sz = sx_thin, sz_thin
+        return {
+            "primitive": "TorusMesh",
+            "params": {
+                "inner_radius": round(pen_inner, 4),
+                "outer_radius": round(pen_outer, 4),
+                "rings": 4,
+            },
+            "transform": {
+                "position": [round(center[0], 5), plate_h * 0.5, round(center[1], 5)],
+                "rotation_degrees": [0, angle_deg, 0],
+                "scale": [round(sx, 4), 1, round(sz, 4)],
+            },
+            "color": color,
+        }
+
+    # ── Penrose 1: sun (5 thick rhombi sharing acute vertex at centre)
+    # 5 thick rhombi × 72° acute = 360°, no gutters.
+    components = []
+    long_half = L_pen * sx_thick
+    for i in range(5):
+        ang_deg = i * 72.0
+        ang_rad = math.radians(ang_deg)
+        # Local acute corner is at +X (after scale, distance = long_half).
+        # Godot Y-rotation by ang_deg maps +X → (cos(ang), 0, -sin(ang)).
+        # We want the acute corner at world origin, so rhombus centre =
+        # -R * local_acute = (-long_half*cos, 0, +long_half*sin).
+        cx = -long_half * math.cos(ang_rad)
+        cz = +long_half * math.sin(ang_rad)
+        components.append(rhombus([cx, cz], ang_deg, "thick", rhombus_thick_color))
+    variants.append({
+        "id": "alhambra_penrose_sun",
+        "spec": {
+            "_comment": "Penrose P3 sun: 5 thick rhombi sharing acute vertex (5×72°=360°, no gutters)",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "Penrose P3 sun", "rhombi": "5 thick"},
+    })
+
+    # ── Penrose 2: D-vertex patch (2 thick + 4 thin = 360°) ──
+    # The D vertex configuration: two thick rhombi with their obtuse
+    # angles (108°) meeting + four thin rhombi with their acute
+    # angles (36°) filling the gaps. 2(108) + 4(36) = 360°.
+    components = []
+    # Layout:
+    # - 2 thick on horizontal axis (angles 0°, 180° from centre,
+    #   obtuse corners at centre)
+    # - 4 thin filling the wedges above and below
+    # Thick rhombus's obtuse corner is at the SHORT-axis end (Z direction
+    # in local). When obtuse corner is at origin, centre is offset by
+    # short_half along the direction the rhombus points.
+    short_half_thick = L_pen * sz_thick
+    long_half_thin = L_pen * sx_thin
+    # 2 thick rhombi flanking centre — obtuse corners (local +Z) at origin.
+    # Rotate by ang_deg+90° so local +Z points along ang_deg in world.
+    # Then centre = -R * local_obtuse where local_obtuse is at +Z (after scale).
+    # After rotation by (ang_deg+90°), local +Z → world (sin(ang+90°)??)
+    # Easier: position = -short_half * (direction in world) where direction is
+    # the world-frame ang_deg direction. Godot: ang_deg world direction =
+    # (cos(ang_deg), 0, -sin(ang_deg)).
+    for ang_deg in [0.0, 180.0]:
+        ang_rad = math.radians(ang_deg)
+        rot = ang_deg + 90.0
+        cx = -short_half_thick * math.cos(ang_rad)
+        cz = +short_half_thick * math.sin(ang_rad)
+        components.append(rhombus([cx, cz], rot, "thick", rhombus_thick_color))
+    # 4 thin rhombi — acute corners (local +X) at origin, long axes radial.
+    for ang_deg in [45.0, 135.0, 225.0, 315.0]:
+        ang_rad = math.radians(ang_deg)
+        cx = -long_half_thin * math.cos(ang_rad)
+        cz = +long_half_thin * math.sin(ang_rad)
+        components.append(rhombus([cx, cz], ang_deg, "thin", rhombus_thin_color))
+    variants.append({
+        "id": "alhambra_penrose_d_vertex",
+        "spec": {
+            "_comment": "Penrose P3 D-vertex: 2 thick (obtuse at centre) + 4 thin (acute at centre) = 360°",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "Penrose P3 D-vertex", "rhombi": "2 thick + 4 thin"},
     })
 
     return variants

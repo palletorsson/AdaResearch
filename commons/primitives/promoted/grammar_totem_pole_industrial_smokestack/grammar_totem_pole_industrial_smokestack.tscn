@@ -1,0 +1,103 @@
+[gd_scene load_steps=13 format=3]
+
+; Promoted composition: grammar_totem_pole_industrial_smokestack (6 components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_totem_pole_industrial_smokestack
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+[sub_resource type="CylinderMesh" id="Mesh_0"]
+top_radius = 0.255000
+bottom_radius = 0.300000
+height = 0.064000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_1"]
+top_radius = 0.150000
+bottom_radius = 0.255000
+height = 0.064000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_2"]
+top_radius = 0.150000
+bottom_radius = 0.150000
+height = 0.224000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_3"]
+top_radius = 0.150000
+bottom_radius = 0.150000
+height = 0.224000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_4"]
+top_radius = 0.210000
+bottom_radius = 0.150000
+height = 0.080000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_5"]
+top_radius = 0.210000
+bottom_radius = 0.210000
+height = 0.064000
+radial_segments = 4
+
+[sub_resource type="StandardMaterial3D" id="Mat_0"]
+albedo_color = Color(0.41, 0.41, 0.41, 1.0)
+emission_enabled = true
+emission = Color(0.12299999999999998, 0.12299999999999998, 0.12299999999999998, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_1"]
+albedo_color = Color(0.25, 0.25, 0.25, 1.0)
+emission_enabled = true
+emission = Color(0.075, 0.075, 0.075, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_2"]
+albedo_color = Color(0.63, 0.63, 0.63, 1.0)
+emission_enabled = true
+emission = Color(0.189, 0.189, 0.189, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_3"]
+albedo_color = Color(0.1, 0.1, 0.1, 1.0)
+emission_enabled = true
+emission = Color(0.03, 0.03, 0.03, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_4"]
+albedo_color = Color(0.5, 0.5, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.15, 0.15, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_5"]
+albedo_color = Color(0.72, 0.53, 0.04, 1.0)
+emission_enabled = true
+emission = Color(0.216, 0.159, 0.012, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="GrammarTotemPoleIndustrialSmokestack" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_0")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.032, 0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_1")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.096, 0)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_2")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.24, 0)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_3")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.464, 0)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_4")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.616, 0)
+[node name="Part5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_5")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.688, 0)

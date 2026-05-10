@@ -1,0 +1,159 @@
+{
+  "_comment": "totem pole: frida palette, stepped ziggurat with landings shape program",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "components": [
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.255,
+        "bottom_radius": 0.3,
+        "height": 0.096,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.048,
+          0
+        ]
+      },
+      "color": [
+        0.86,
+        0.08,
+        0.23
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.255,
+        "bottom_radius": 0.255,
+        "height": 0.144,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.168,
+          0
+        ]
+      },
+      "color": [
+        0.0,
+        0.39,
+        0.0
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.195,
+        "bottom_radius": 0.255,
+        "height": 0.096,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.288,
+          0
+        ]
+      },
+      "color": [
+        1.0,
+        0.65,
+        0.0
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.195,
+        "bottom_radius": 0.195,
+        "height": 0.144,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.408,
+          0
+        ]
+      },
+      "color": [
+        0.63,
+        0.13,
+        0.94
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.135,
+        "bottom_radius": 0.195,
+        "height": 0.096,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.528,
+          0
+        ]
+      },
+      "color": [
+        0.94,
+        0.9,
+        0.55
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.135,
+        "bottom_radius": 0.135,
+        "height": 0.144,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.648,
+          0
+        ]
+      },
+      "color": [
+        0.55,
+        0.27,
+        0.08
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.06,
+        "bottom_radius": 0.135,
+        "height": 0.096,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.768,
+          0
+        ]
+      },
+      "color": [
+        0.0,
+        0.75,
+        0.99
+      ]
+    }
+  ]
+}

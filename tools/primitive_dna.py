@@ -425,7 +425,8 @@ def _cmd_promote_compose(args) -> int:
     return 0
 
 
-def _format_transform3d(pos: list[float], rot_deg: list[float]) -> str:
+def _format_transform3d(pos: list[float], rot_deg: list[float],
+                         scale: list[float] | None = None) -> str:
     """Build a Transform3D() literal from position + Euler rotation (degrees).
 
     Order is YXZ (Godot's default Euler order for Vector3 rotations). Each
@@ -453,12 +454,21 @@ def _format_transform3d(pos: list[float], rot_deg: list[float]) -> str:
     # YXZ Euler: R = Ry * Rx * Rz
     R = matmul(matmul(Ry, Rx), Rz)
 
-    # Transform3D constructor takes basis columns: col0_x, col0_y, col0_z, col1_..., col2_...
-    # R[i][j] is the (i,j) entry; column j is R[:][j]
+    # Optional non-uniform scale via the 4th argument (defaults to [1,1,1]).
+    # We bake scale INTO the basis columns: column j multiplied by scale[j].
+    sx_, sy_, sz_ = (scale if scale else [1.0, 1.0, 1.0])
+
+    # Godot Transform3D(xx, xy, xz, yx, yy, yz, zx, zy, zz, ox, oy, oz) is
+    # ROW-MAJOR (verified in Godot source: Basis::set assigns args to
+    # rows[i][j] in order). So we iterate row-outer, column-inner.
+    # Without scale this produces R as written; with scale, column j
+    # is multiplied by scale[j] (so the j-th column = j-th basis vector
+    # is scaled).
     parts = []
-    for j in range(3):  # column index
-        for i in range(3):  # row index
-            parts.append(f"{R[i][j]:.6f}")
+    col_scales = [sx_, sy_, sz_]
+    for i in range(3):  # row index
+        for j in range(3):  # column index
+            parts.append(f"{R[i][j] * col_scales[j]:.6f}")
     parts.extend([f"{pos[0]}", f"{pos[1]}", f"{pos[2]}"])
     return f"transform = Transform3D({', '.join(parts)})"
 
@@ -517,13 +527,14 @@ def _render_compose_scene_flat(
         transform = comp.get("transform", {})
         pos = transform.get("position", [0, 0, 0])
         rot_deg = transform.get("rotation_degrees", [0, 0, 0])
+        scale = transform.get("scale", [1, 1, 1])
         node_lines = [
             f'[node name="Part{i}" type="MeshInstance3D" parent="."]',
             f'mesh = SubResource("Mesh_{i}")',
             f'material_override = SubResource("Mat_{i}")',
         ]
-        if pos != [0, 0, 0] or rot_deg != [0, 0, 0]:
-            node_lines.append(_format_transform3d(pos, rot_deg))
+        if pos != [0, 0, 0] or rot_deg != [0, 0, 0] or scale != [1, 1, 1]:
+            node_lines.append(_format_transform3d(pos, rot_deg, scale))
         node_blocks.append("\n".join(node_lines))
 
     load_steps = n_comp * 2 + 1  # n meshes + n materials + node tree
@@ -714,14 +725,15 @@ def _render_compose_scene(
         transform = comp.get("transform", {})
         pos = transform.get("position", [0, 0, 0])
         rot_deg = transform.get("rotation_degrees", [0, 0, 0])
+        scale = transform.get("scale", [1, 1, 1])
         mat_id = f"Mat_{i}" if component_colors[i] is not None else "Mat_global"
         node_lines = [
             f'[node name="Part{i}" type="MeshInstance3D" parent="."]',
             f'mesh = SubResource("Mesh_{i}")',
             f'material_override = SubResource("{mat_id}")',
         ]
-        if pos != [0, 0, 0] or rot_deg != [0, 0, 0]:
-            node_lines.append(_format_transform3d(pos, rot_deg))
+        if pos != [0, 0, 0] or rot_deg != [0, 0, 0] or scale != [1, 1, 1]:
+            node_lines.append(_format_transform3d(pos, rot_deg, scale))
         node_blocks.append("\n".join(node_lines))
 
     # Recompute load_steps: 1 ext_resource + n_comp meshes + n_mats

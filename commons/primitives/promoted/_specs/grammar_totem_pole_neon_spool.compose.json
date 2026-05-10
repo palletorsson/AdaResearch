@@ -1,0 +1,117 @@
+{
+  "_comment": "totem pole: neon palette, alternating cube + frustum spool shape program",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "components": [
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.21,
+        "bottom_radius": 0.21,
+        "height": 0.08,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.04,
+          0
+        ]
+      },
+      "color": [
+        1.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.09,
+        "bottom_radius": 0.21,
+        "height": 0.096,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.128,
+          0
+        ]
+      },
+      "color": [
+        0.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.09,
+        "bottom_radius": 0.09,
+        "height": 0.064,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.208,
+          0
+        ]
+      },
+      "color": [
+        0.0,
+        0.98,
+        0.6
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.21,
+        "bottom_radius": 0.09,
+        "height": 0.096,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.288,
+          0
+        ]
+      },
+      "color": [
+        1.0,
+        0.08,
+        0.58
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.21,
+        "bottom_radius": 0.21,
+        "height": 0.08,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.376,
+          0
+        ]
+      },
+      "color": [
+        0.63,
+        0.13,
+        0.94
+      ]
+    }
+  ]
+}

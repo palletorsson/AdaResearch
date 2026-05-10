@@ -1,0 +1,133 @@
+[gd_scene load_steps=17 format=3]
+
+; Promoted composition: grammar_totem_pole_pinkness_planets (8 components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_totem_pole_pinkness_planets
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+[sub_resource type="CylinderMesh" id="Mesh_0"]
+top_radius = 0.285000
+bottom_radius = 0.090000
+height = 0.136000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_1"]
+top_radius = 0.123000
+bottom_radius = 0.285000
+height = 0.136000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_2"]
+top_radius = 0.255000
+bottom_radius = 0.123000
+height = 0.136000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_3"]
+top_radius = 0.099000
+bottom_radius = 0.255000
+height = 0.136000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_4"]
+top_radius = 0.225000
+bottom_radius = 0.099000
+height = 0.136000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_5"]
+top_radius = 0.075000
+bottom_radius = 0.225000
+height = 0.136000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_6"]
+top_radius = 0.195000
+bottom_radius = 0.075000
+height = 0.136000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_7"]
+top_radius = 0.051000
+bottom_radius = 0.195000
+height = 0.136000
+radial_segments = 4
+
+[sub_resource type="StandardMaterial3D" id="Mat_0"]
+albedo_color = Color(1.0, 0.75, 0.8, 1.0)
+emission_enabled = true
+emission = Color(0.3, 0.22499999999999998, 0.24, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_1"]
+albedo_color = Color(1.0, 0.63, 0.48, 1.0)
+emission_enabled = true
+emission = Color(0.3, 0.189, 0.144, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_2"]
+albedo_color = Color(1.0, 0.41, 0.71, 1.0)
+emission_enabled = true
+emission = Color(0.3, 0.12299999999999998, 0.213, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_3"]
+albedo_color = Color(0.91, 0.3, 0.24, 1.0)
+emission_enabled = true
+emission = Color(0.273, 0.09, 0.072, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_4"]
+albedo_color = Color(1.0, 0.08, 0.58, 1.0)
+emission_enabled = true
+emission = Color(0.3, 0.024, 0.174, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_5"]
+albedo_color = Color(0.78, 0.08, 0.52, 1.0)
+emission_enabled = true
+emission = Color(0.23399999999999999, 0.024, 0.156, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_6"]
+albedo_color = Color(1.0, 0.27, 0.0, 1.0)
+emission_enabled = true
+emission = Color(0.3, 0.081, 0.0, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_7"]
+albedo_color = Color(0.86, 0.63, 0.86, 1.0)
+emission_enabled = true
+emission = Color(0.258, 0.189, 0.258, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="GrammarTotemPolePinknessPlanets" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_0")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.068, 0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_1")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.204, 0)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_2")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.34, 0)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_3")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.476, 0)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_4")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.612, 0)
+[node name="Part5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_5")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.748, 0)
+[node name="Part6" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_6")
+material_override = SubResource("Mat_6")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.884, 0)
+[node name="Part7" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_7")
+material_override = SubResource("Mat_7")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 1.02, 0)

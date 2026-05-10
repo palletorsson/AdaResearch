@@ -314,7 +314,7 @@ roughness = 0.5
 [node name="Part0" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_0")
 material_override = SubResource("Mat_0")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, -0.75, 0.03, -0.6)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, -0.75, 0.03, -0.6)
 [node name="Part1" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_1")
 material_override = SubResource("Mat_1")
@@ -322,7 +322,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part2" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_2")
 material_override = SubResource("Mat_2")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, -0.15, 0.03, -0.6)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, -0.15, 0.03, -0.6)
 [node name="Part3" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_3")
 material_override = SubResource("Mat_3")
@@ -330,7 +330,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part4" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_4")
 material_override = SubResource("Mat_4")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, 0.45, 0.03, -0.6)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, 0.45, 0.03, -0.6)
 [node name="Part5" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_5")
 material_override = SubResource("Mat_5")
@@ -342,7 +342,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part7" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_7")
 material_override = SubResource("Mat_7")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, -0.45, 0.03, -0.3)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, -0.45, 0.03, -0.3)
 [node name="Part8" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_8")
 material_override = SubResource("Mat_8")
@@ -350,7 +350,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part9" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_9")
 material_override = SubResource("Mat_9")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, 0.15, 0.03, -0.3)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, 0.15, 0.03, -0.3)
 [node name="Part10" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_10")
 material_override = SubResource("Mat_10")
@@ -358,11 +358,11 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part11" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_11")
 material_override = SubResource("Mat_11")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, 0.75, 0.03, -0.3)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, 0.75, 0.03, -0.3)
 [node name="Part12" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_12")
 material_override = SubResource("Mat_12")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, -0.75, 0.03, 0.0)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, -0.75, 0.03, 0.0)
 [node name="Part13" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_13")
 material_override = SubResource("Mat_13")
@@ -370,7 +370,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part14" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_14")
 material_override = SubResource("Mat_14")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, -0.15, 0.03, 0.0)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, -0.15, 0.03, 0.0)
 [node name="Part15" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_15")
 material_override = SubResource("Mat_15")
@@ -378,7 +378,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part16" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_16")
 material_override = SubResource("Mat_16")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, 0.45, 0.03, 0.0)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, 0.45, 0.03, 0.0)
 [node name="Part17" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_17")
 material_override = SubResource("Mat_17")
@@ -390,7 +390,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part19" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_19")
 material_override = SubResource("Mat_19")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, -0.45, 0.03, 0.3)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, -0.45, 0.03, 0.3)
 [node name="Part20" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_20")
 material_override = SubResource("Mat_20")
@@ -398,7 +398,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part21" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_21")
 material_override = SubResource("Mat_21")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, 0.15, 0.03, 0.3)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, 0.15, 0.03, 0.3)
 [node name="Part22" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_22")
 material_override = SubResource("Mat_22")
@@ -406,11 +406,11 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part23" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_23")
 material_override = SubResource("Mat_23")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, 0.75, 0.03, 0.3)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, 0.75, 0.03, 0.3)
 [node name="Part24" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_24")
 material_override = SubResource("Mat_24")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, -0.75, 0.03, 0.6)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, -0.75, 0.03, 0.6)
 [node name="Part25" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_25")
 material_override = SubResource("Mat_25")
@@ -418,7 +418,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part26" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_26")
 material_override = SubResource("Mat_26")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, -0.15, 0.03, 0.6)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, -0.15, 0.03, 0.6)
 [node name="Part27" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_27")
 material_override = SubResource("Mat_27")
@@ -426,7 +426,7 @@ transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.0000
 [node name="Part28" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_28")
 material_override = SubResource("Mat_28")
-transform = Transform3D(0.707107, 0.000000, -0.707107, 0.000000, 1.000000, 0.000000, 0.707107, 0.000000, 0.707107, 0.45, 0.03, 0.6)
+transform = Transform3D(0.707107, 0.000000, 0.707107, 0.000000, 1.000000, 0.000000, -0.707107, 0.000000, 0.707107, 0.45, 0.03, 0.6)
 [node name="Part29" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_29")
 material_override = SubResource("Mat_29")
