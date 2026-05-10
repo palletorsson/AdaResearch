@@ -1646,6 +1646,71 @@ def gen_tessellation_field() -> list[dict]:
                    "layers": ["filled outer square", "square ring", "filled centre"]},
     })
 
+    # ── NEW TRAJECTORY (iter 3): Truchet diagonal tile ───────────
+    # Square grid base (full-floor cylinder squares), with thin
+    # diagonal bars on each cell randomly oriented one of two ways
+    # (NW-SE or NE-SW). Adjacent matching diagonals form emergent
+    # continuous paths across the tiling — the classic Truchet
+    # phenomenon: simple local rule, complex global pattern.
+    components = []
+    rows, cols = 7, 8
+    L_cell = 0.18
+    R_cell = L_cell / math.sqrt(2.0)  # K=4 axis-aligned circumradius
+    bar_len = L_cell * math.sqrt(2.0) * 0.92  # diagonal length
+    bar_w = L_cell * 0.10
+    # Deterministic pseudo-random for reproducibility
+    def truchet_orient(r: int, c: int) -> int:
+        # Tausworthe-ish hash → 0 or 1
+        h = (r * 73856093) ^ (c * 19349663)
+        return (h ^ (h >> 13)) & 1
+
+    cream = [0.92, 0.86, 0.70]
+    bar_color = [0.30, 0.20, 0.16]
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * L_cell
+            z = (r - (rows - 1) * 0.5) * L_cell
+            # Floor: axis-aligned square cylinder (FULL FLOOR)
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(R_cell, 4),
+                    "bottom_radius": round(R_cell, 4),
+                    "height": plate_h,
+                    "radial_segments": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 45, 0],
+                },
+                "color": cream,
+            })
+            # Diagonal bar on top — orientation picked by hash
+            orient = truchet_orient(r, c)
+            bar_rot = 45.0 if orient == 0 else -45.0  # NE-SW vs NW-SE
+            components.append({
+                "primitive": "BoxMesh",
+                "params": {
+                    "size": [round(bar_len, 4), plate_h, round(bar_w, 4)],
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5 + 0.001, round(z, 5)],
+                    "rotation_degrees": [0, bar_rot, 0],
+                },
+                "color": bar_color,
+            })
+    variants.append({
+        "id": "alhambra_truchet_diagonal",
+        "spec": {
+            "_comment": "Truchet diagonal tile: square floor + thin diagonal bar (NW-SE or NE-SW per hash) — emergent continuous paths from local rules",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "Truchet diagonal (aperiodic via deterministic hash)",
+                   "lattice": f"{rows}x{cols} square",
+                   "rule": "per-cell diagonal orientation from (r,c) hash"},
+    })
+
     return variants
 
 
