@@ -1403,6 +1403,173 @@ def gen_tessellation_field() -> list[dict]:
                    "elements": ["12 outer + 8 middle + 6 inner stalactites + key"]},
     })
 
+    # ══════════════════════════════════════════════════════════════
+    # New loop (2026-05-10 afternoon): cylinder + torus ring tilings
+    # with NO GAPS — full floors. Each variant fills its plane.
+    # ══════════════════════════════════════════════════════════════
+
+    # ── Rhombitrihexagonal tiling (3.4.6.4) ──────────────────────
+    # The Archimedean uniform tiling where every vertex meets a
+    # triangle, square, hexagon, and another square. Three polygon
+    # types interlock to fill the plane perfectly.
+    #
+    # Construction: hexagons on a hex lattice, with squares between
+    # adjacent hexes (one square per shared edge), and triangles
+    # filling the remaining gaps (between triple-hex vertices).
+    # All polygons share edge length L.
+    components = []
+    L = 0.16  # common edge length
+    # Hexagon: circumradius = L (regular hex with side L has R = L)
+    # In our 3.4.6.4 lattice, hex centers form a triangular lattice
+    # with spacing = L*(1 + √3) (hex diameter = 2L plus a square's L).
+    # Actually: distance between adjacent hex centers in 3.4.6.4
+    # is L + L + L = no wait. Each hex's neighbour across a shared
+    # square: hex center → edge (L*√3/2 apothem) → square (L) → next
+    # edge (L*√3/2) → next center. Total: L*√3/2 + L + L*√3/2 = L(√3+1).
+    # Hmm actually: hex radius (vertex distance) R_hex = L (regular hex).
+    # Apothem = L*√3/2. Adjacent hex through square: 2*apothem + L = L√3 + L = L(√3+1).
+    # That's the centre-to-centre distance.
+    spacing = L * (math.sqrt(3.0) + 1.0)  # ≈ L * 2.732
+
+    rows, cols = 3, 4
+    R_hex = L  # hex circumradius
+    R_sq = L / math.sqrt(2.0)  # square circumradius (for K=4 cylinder rotated 45° to give axis-aligned square with side L)
+    R_tri = L / math.sqrt(3.0)  # triangle circumradius for K=3 cylinder with side L
+
+    deep = [0.55, 0.36, 0.24]
+    accent = [0.42, 0.62, 0.55]
+    soft = [0.85, 0.78, 0.62]
+
+    # Hex grid centres (axial coords, then converted to cartesian)
+    hex_centers = []
+    for r in range(rows):
+        for c in range(cols):
+            x = c * spacing
+            if r % 2 == 1:
+                x += spacing * 0.5
+            z = r * spacing * (math.sqrt(3.0) / 2.0)
+            hex_centers.append((x, z))
+    # Re-centre
+    cx_avg = sum(p[0] for p in hex_centers) / len(hex_centers)
+    cz_avg = sum(p[1] for p in hex_centers) / len(hex_centers)
+    hex_centers = [(p[0] - cx_avg, p[1] - cz_avg) for p in hex_centers]
+
+    # Hexagons (K=6 cylinders, pointy-top so vertex points along +Z)
+    for x, z in hex_centers:
+        components.append({
+            "primitive": "CylinderMesh",
+            "params": {
+                "top_radius": round(R_hex, 4),
+                "bottom_radius": round(R_hex, 4),
+                "height": plate_h,
+                "radial_segments": 6,
+            },
+            "transform": {
+                "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                "rotation_degrees": [0, 30, 0],  # pointy-top
+            },
+            "color": accent,
+        })
+
+    # Squares: between every pair of adjacent hex centres
+    placed_squares = set()
+    for i, (x1, z1) in enumerate(hex_centers):
+        for j, (x2, z2) in enumerate(hex_centers):
+            if j <= i:
+                continue
+            dx = x2 - x1
+            dz = z2 - z1
+            d = math.sqrt(dx * dx + dz * dz)
+            if abs(d - spacing) < 0.01:  # adjacent
+                mx = (x1 + x2) * 0.5
+                mz = (z1 + z2) * 0.5
+                # Square centre is at midpoint. Rotate so square edges
+                # face the two hexes (perpendicular to hex-hex axis).
+                ang = math.degrees(math.atan2(dz, dx))
+                # K=4 cylinder default has corners at 0/90/180/270.
+                # We want flat sides facing the hexes (perpendicular
+                # to dx,dz direction). Rotate so flat side is perp.
+                rot_y = -ang  # negate because Godot Y-rotation convention
+                key = (round(mx, 4), round(mz, 4))
+                if key in placed_squares:
+                    continue
+                placed_squares.add(key)
+                components.append({
+                    "primitive": "CylinderMesh",
+                    "params": {
+                        "top_radius": round(R_sq, 4),
+                        "bottom_radius": round(R_sq, 4),
+                        "height": plate_h,
+                        "radial_segments": 4,
+                    },
+                    "transform": {
+                        "position": [round(mx, 5), plate_h * 0.5, round(mz, 5)],
+                        "rotation_degrees": [0, rot_y, 0],
+                    },
+                    "color": deep,
+                })
+
+    # Triangles: at the 3-hex vertices (centroids of triangles
+    # formed by 3 mutually-adjacent hexes). For each triangle of
+    # adjacent centres, place a small triangle filling the gap.
+    placed_tris = set()
+    n_h = len(hex_centers)
+    for i in range(n_h):
+        for j in range(i + 1, n_h):
+            for k in range(j + 1, n_h):
+                p1 = hex_centers[i]
+                p2 = hex_centers[j]
+                p3 = hex_centers[k]
+                d12 = math.hypot(p1[0]-p2[0], p1[1]-p2[1])
+                d23 = math.hypot(p2[0]-p3[0], p2[1]-p3[1])
+                d13 = math.hypot(p1[0]-p3[0], p1[1]-p3[1])
+                if (abs(d12 - spacing) < 0.01 and abs(d23 - spacing) < 0.01
+                        and abs(d13 - spacing) < 0.01):
+                    cx = (p1[0] + p2[0] + p3[0]) / 3.0
+                    cz = (p1[1] + p2[1] + p3[1]) / 3.0
+                    key = (round(cx, 3), round(cz, 3))
+                    if key in placed_tris:
+                        continue
+                    placed_tris.add(key)
+                    # Determine triangle orientation: up-pointing
+                    # if the "top" hex (highest z) is the apex.
+                    # Up-pointing means apex at +z relative to centroid.
+                    # For our case: if any of p1,p2,p3 has max z > centroid_z,
+                    # determine if triangle "points up" or "down".
+                    zs = sorted([p1[1], p2[1], p3[1]])
+                    points_up = (zs[2] - cz) > (cz - zs[0])
+                    # K=3 cylinder default has vertex at +X (angle 0).
+                    # For triangle pointing up (+Z) we need rotation = 90.
+                    # For pointing down (-Z) we need rotation = -90 (or 270).
+                    rot_y = 90.0 if points_up else -90.0
+                    components.append({
+                        "primitive": "CylinderMesh",
+                        "params": {
+                            "top_radius": round(R_tri, 4),
+                            "bottom_radius": round(R_tri, 4),
+                            "height": plate_h,
+                            "radial_segments": 3,
+                        },
+                        "transform": {
+                            "position": [round(cx, 5), plate_h * 0.5, round(cz, 5)],
+                            "rotation_degrees": [0, rot_y, 0],
+                        },
+                        "color": soft,
+                    })
+
+    variants.append({
+        "id": "alhambra_hex_square_triangle_lattice",
+        "spec": {
+            "_comment": "Hex lattice with diamond-rotated squares between adjacent hexes + triangles at 3-hex vertices — Alhambra-style three-polygon decoration",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "hex + square + triangle decorative lattice",
+                   "elements": [f"{len(hex_centers)} hexagons (K=6)",
+                                f"{len(placed_squares)} squares (K=4 rotated)",
+                                f"{len(placed_tris)} triangles (K=3 alt up/down)"]},
+    })
+
     return variants
 
 
