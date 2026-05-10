@@ -1,0 +1,80 @@
+{
+  "_comment": "square ring of boxes; center hole is the artifact",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.55,
+    0.58,
+    0.66
+  ],
+  "components": [
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.8,
+          0.08,
+          0.08
+        ]
+      },
+      "transform": {
+        "position": [
+          0,
+          0.04,
+          0.36000000000000004
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.8,
+          0.08,
+          0.08
+        ]
+      },
+      "transform": {
+        "position": [
+          0,
+          0.04,
+          -0.36000000000000004
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.08,
+          0.08,
+          0.64
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.36000000000000004,
+          0.04,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.08,
+          0.08,
+          0.64
+        ]
+      },
+      "transform": {
+        "position": [
+          0.36000000000000004,
+          0.04,
+          0
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "_comment": "4 corner pillars frame an empty volume",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.55,
+    0.58,
+    0.66
+  ],
+  "components": [
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.06,
+        "bottom_radius": 0.06,
+        "height": 0.5,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          -0.32,
+          0.25,
+          -0.32
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.06,
+        "bottom_radius": 0.06,
+        "height": 0.5,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          -0.32,
+          0.25,
+          0.32
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.06,
+        "bottom_radius": 0.06,
+        "height": 0.5,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          0.32,
+          0.25,
+          -0.32
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.06,
+        "bottom_radius": 0.06,
+        "height": 0.5,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          0.32,
+          0.25,
+          0.32
+        ]
+      }
+    }
+  ]
+}

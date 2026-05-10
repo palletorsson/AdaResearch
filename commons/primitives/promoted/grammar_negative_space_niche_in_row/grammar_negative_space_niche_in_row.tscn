@@ -1,0 +1,103 @@
+[gd_scene load_steps=13 format=3]
+
+; Promoted composition: grammar_negative_space_niche_in_row (6 components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_negative_space_niche_in_row
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+[sub_resource type="CylinderMesh" id="Mesh_0"]
+top_radius = 0.050000
+bottom_radius = 0.050000
+height = 0.550000
+radial_segments = 12
+[sub_resource type="CylinderMesh" id="Mesh_1"]
+top_radius = 0.050000
+bottom_radius = 0.050000
+height = 0.550000
+radial_segments = 12
+[sub_resource type="CylinderMesh" id="Mesh_2"]
+top_radius = 0.050000
+bottom_radius = 0.050000
+height = 0.550000
+radial_segments = 12
+[sub_resource type="CylinderMesh" id="Mesh_3"]
+top_radius = 0.050000
+bottom_radius = 0.050000
+height = 0.550000
+radial_segments = 12
+[sub_resource type="CylinderMesh" id="Mesh_4"]
+top_radius = 0.050000
+bottom_radius = 0.050000
+height = 0.550000
+radial_segments = 12
+[sub_resource type="CylinderMesh" id="Mesh_5"]
+top_radius = 0.050000
+bottom_radius = 0.050000
+height = 0.550000
+radial_segments = 12
+
+[sub_resource type="StandardMaterial3D" id="Mat_0"]
+albedo_color = Color(0.55, 0.58, 0.66, 1.0)
+emission_enabled = true
+emission = Color(0.165, 0.174, 0.198, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_1"]
+albedo_color = Color(0.55, 0.58, 0.66, 1.0)
+emission_enabled = true
+emission = Color(0.165, 0.174, 0.198, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_2"]
+albedo_color = Color(0.55, 0.58, 0.66, 1.0)
+emission_enabled = true
+emission = Color(0.165, 0.174, 0.198, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_3"]
+albedo_color = Color(0.55, 0.58, 0.66, 1.0)
+emission_enabled = true
+emission = Color(0.165, 0.174, 0.198, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_4"]
+albedo_color = Color(0.55, 0.58, 0.66, 1.0)
+emission_enabled = true
+emission = Color(0.165, 0.174, 0.198, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_5"]
+albedo_color = Color(0.55, 0.58, 0.66, 1.0)
+emission_enabled = true
+emission = Color(0.165, 0.174, 0.198, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="GrammarNegativeSpaceNicheInRow" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_0")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, -0.39, 0.275, 0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_1")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, -0.26, 0.275, 0)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_2")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, -0.13, 0.275, 0)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_3")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.13, 0.275, 0)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_4")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.26, 0.275, 0)
+[node name="Part5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_5")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.39, 0.275, 0)

@@ -1,0 +1,204 @@
+{
+  "_comment": "12 cylinders form a circle around a void",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.55,
+    0.58,
+    0.66
+  ],
+  "components": [
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          0.32,
+          0.2,
+          0.0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          0.27712812921102037,
+          0.2,
+          0.15999999999999998
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          0.16000000000000003,
+          0.2,
+          0.27712812921102037
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          1.959434878635765e-17,
+          0.2,
+          0.32
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          -0.15999999999999992,
+          0.2,
+          0.27712812921102037
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          -0.27712812921102037,
+          0.2,
+          0.15999999999999998
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          -0.32,
+          0.2,
+          3.91886975727153e-17
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          -0.2771281292110204,
+          0.2,
+          -0.15999999999999992
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          -0.16000000000000014,
+          0.2,
+          -0.2771281292110203
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          -5.878304635907295e-17,
+          0.2,
+          -0.32
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          0.16000000000000003,
+          0.2,
+          -0.27712812921102037
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.05,
+        "bottom_radius": 0.05,
+        "height": 0.4,
+        "radial_segments": 12
+      },
+      "transform": {
+        "position": [
+          0.2771281292110203,
+          0.2,
+          -0.16000000000000014
+        ]
+      }
+    }
+  ]
+}

@@ -440,6 +440,176 @@ def gen_meeting_faces() -> list[dict]:
     return variants
 
 
+# ── Category G: negative-space pairings ─────────────────────────────
+# Arrangements where the EMPTY SPACE between primitives is the
+# intended shape. Without CSG we can't carve voids out of solids,
+# but we can frame voids by surrounding them.
+
+def gen_negative_space() -> list[dict]:
+    """6 variants where the void between primitives is the artifact."""
+    variants = []
+    color = [0.55, 0.58, 0.66]
+
+    def box(size_xyz: list[float], pos: list[float]) -> dict:
+        return {
+            "primitive": "BoxMesh",
+            "params": {"size": size_xyz},
+            "transform": {"position": pos},
+        }
+
+    def cyl(r: float, h: float, pos: list[float], segs: int = 12) -> dict:
+        return {
+            "primitive": "CylinderMesh",
+            "params": {
+                "top_radius": r, "bottom_radius": r, "height": h,
+                "radial_segments": segs,
+            },
+            "transform": {"position": pos},
+        }
+
+    # 1. Corner pillars — 4 vertical cylinders frame an empty cube of air
+    pillars: list = []
+    pad = 0.32
+    h = 0.5
+    r = 0.06
+    for sx in (-1, 1):
+        for sz in (-1, 1):
+            pillars.append(cyl(r, h, [sx * pad, h * 0.5, sz * pad]))
+    variants.append({
+        "id": "corner_pillars",
+        "spec": {
+            "_comment": "4 corner pillars frame an empty volume",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": pillars,
+        },
+        "params": {"void_shape": "cubical", "n_pillars": 4},
+    })
+
+    # 2. Square frame — 4 thin boxes arranged as a ring; the center hole
+    # is the artifact. Lying flat so the void reads from top.
+    frame: list = []
+    side = 0.8
+    bar_w = 0.08
+    bar_t = 0.08
+    # top bar (along X, at +Z)
+    frame.append(box([side, bar_t, bar_w], [0, bar_t * 0.5, side * 0.5 - bar_w * 0.5]))
+    # bottom bar
+    frame.append(box([side, bar_t, bar_w], [0, bar_t * 0.5, -side * 0.5 + bar_w * 0.5]))
+    # left bar (along Z, at -X)
+    frame.append(box([bar_w, bar_t, side - 2 * bar_w], [-side * 0.5 + bar_w * 0.5, bar_t * 0.5, 0]))
+    # right bar
+    frame.append(box([bar_w, bar_t, side - 2 * bar_w], [side * 0.5 - bar_w * 0.5, bar_t * 0.5, 0]))
+    variants.append({
+        "id": "square_frame",
+        "spec": {
+            "_comment": "square ring of boxes; center hole is the artifact",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": frame,
+        },
+        "params": {"void_shape": "square", "side": side},
+    })
+
+    # 3. Aperture — ring of small cylinders forming a circle; center
+    # void reads as a circular opening.
+    aperture: list = []
+    n_cyls = 12
+    ring_r = 0.32
+    for i in range(n_cyls):
+        ang = 2.0 * math.pi * i / n_cyls
+        x = ring_r * math.cos(ang)
+        z = ring_r * math.sin(ang)
+        aperture.append(cyl(0.05, 0.4, [x, 0.2, z]))
+    variants.append({
+        "id": "aperture",
+        "spec": {
+            "_comment": f"{n_cyls} cylinders form a circle around a void",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": aperture,
+        },
+        "params": {"void_shape": "circular", "n_cylinders": n_cyls},
+    })
+
+    # 4. Bracket pair — two L-shapes facing each other; gap between is
+    # the slot/void.
+    brackets: list = []
+    arm_long = 0.4
+    arm_short = 0.18
+    arm_t = 0.06
+    gap = 0.18
+    for sx in (-1, 1):
+        # Vertical arm
+        brackets.append(box(
+            [arm_t, arm_long, arm_t],
+            [sx * (gap * 0.5 + arm_t * 0.5), arm_long * 0.5, 0]
+        ))
+        # Horizontal arm at top, pointing inward
+        brackets.append(box(
+            [arm_short, arm_t, arm_t],
+            [sx * (gap * 0.5 + arm_t + arm_short * 0.5 - arm_t * 0.5),
+             arm_long - arm_t * 0.5, 0]
+        ))
+    variants.append({
+        "id": "bracket_pair",
+        "spec": {
+            "_comment": "two L-brackets framing a vertical slot",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": brackets,
+        },
+        "params": {"void_shape": "slot", "gap": gap},
+    })
+
+    # 5. Niche — row of pillars with the center two omitted; the gap
+    # in the middle is the niche.
+    niche: list = []
+    n_pillars = 7
+    pillar_h = 0.55
+    pillar_r = 0.05
+    spacing = 0.13
+    omit = {3}  # center
+    for i in range(n_pillars):
+        if i in omit:
+            continue
+        x = (i - (n_pillars - 1) * 0.5) * spacing
+        niche.append(cyl(pillar_r, pillar_h, [x, pillar_h * 0.5, 0]))
+    variants.append({
+        "id": "niche_in_row",
+        "spec": {
+            "_comment": f"row of {n_pillars} pillars with center omitted — niche",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": niche,
+        },
+        "params": {"void_shape": "niche", "omitted": sorted(omit)},
+    })
+
+    # 6. Tower interior — 4 walls of a small tower; viewed from above
+    # the empty interior is the void.
+    tower: list = []
+    inner = 0.45
+    wall_t = 0.06
+    wall_h = 0.5
+    # +X and -X walls (front/back)
+    tower.append(box([wall_t, wall_h, inner + 2 * wall_t],
+                     [inner * 0.5 + wall_t * 0.5, wall_h * 0.5, 0]))
+    tower.append(box([wall_t, wall_h, inner + 2 * wall_t],
+                     [-inner * 0.5 - wall_t * 0.5, wall_h * 0.5, 0]))
+    # +Z and -Z walls (sides), shorter to leave wall gap visible
+    tower.append(box([inner, wall_h, wall_t],
+                     [0, wall_h * 0.5, inner * 0.5 + wall_t * 0.5]))
+    tower.append(box([inner, wall_h, wall_t],
+                     [0, wall_h * 0.5, -inner * 0.5 - wall_t * 0.5]))
+    variants.append({
+        "id": "tower_interior",
+        "spec": {
+            "_comment": "4 walls frame an interior void; top view shows the room",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": tower,
+        },
+        "params": {"void_shape": "room", "inner_size": inner},
+    })
+
+    return variants
+
+
 # ── Generator dispatch ───────────────────────────────────────────────
 
 CATEGORIES: dict[str, dict[str, Any]] = {
@@ -478,6 +648,12 @@ CATEGORIES: dict[str, dict[str, Any]] = {
         "essence": "which face of A meets which face of B — face-to-face is clean, face-to-edge or rotated breaks the silhouette",
         "primary_axis": "label",
         "generator": gen_meeting_faces,
+    },
+    "negative_space": {
+        "title": "Negative-space pairings",
+        "essence": "compositions where the empty space between primitives is the artifact — frames, brackets, apertures, niches",
+        "primary_axis": "void_shape",
+        "generator": gen_negative_space,
     },
 }
 

@@ -1,0 +1,80 @@
+{
+  "_comment": "two L-brackets framing a vertical slot",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.55,
+    0.58,
+    0.66
+  ],
+  "components": [
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.06,
+          0.4,
+          0.06
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.12,
+          0.2,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.18,
+          0.06,
+          0.06
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.21,
+          0.37,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.06,
+          0.4,
+          0.06
+        ]
+      },
+      "transform": {
+        "position": [
+          0.12,
+          0.2,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.18,
+          0.06,
+          0.06
+        ]
+      },
+      "transform": {
+        "position": [
+          0.21,
+          0.37,
+          0
+        ]
+      }
+    }
+  ]
+}

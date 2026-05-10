@@ -1,0 +1,80 @@
+{
+  "_comment": "4 walls frame an interior void; top view shows the room",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.55,
+    0.58,
+    0.66
+  ],
+  "components": [
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.06,
+          0.5,
+          0.5700000000000001
+        ]
+      },
+      "transform": {
+        "position": [
+          0.255,
+          0.25,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.06,
+          0.5,
+          0.5700000000000001
+        ]
+      },
+      "transform": {
+        "position": [
+          -0.255,
+          0.25,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.45,
+          0.5,
+          0.06
+        ]
+      },
+      "transform": {
+        "position": [
+          0,
+          0.25,
+          0.255
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.45,
+          0.5,
+          0.06
+        ]
+      },
+      "transform": {
+        "position": [
+          0,
+          0.25,
+          -0.255
+        ]
+      }
+    }
+  ]
+}
