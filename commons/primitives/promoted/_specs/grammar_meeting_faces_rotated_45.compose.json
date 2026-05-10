@@ -1,0 +1,51 @@
+{
+  "_comment": "meeting-faces: face-to-face but rotated 45\u00b0 (broken silhouette) (broken)",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.74,
+    0.4,
+    0.36
+  ],
+  "components": [
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "transform": {
+        "position": [
+          0,
+          0.2,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "BoxMesh",
+      "params": {
+        "size": [
+          0.22,
+          0.22,
+          0.22
+        ]
+      },
+      "transform": {
+        "position": [
+          0,
+          0.51,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    }
+  ]
+}

@@ -179,6 +179,267 @@ def gen_tessellation_field() -> list[dict]:
     return variants
 
 
+# ── Category D: forced-perspective stacks ───────────────────────────
+# Stack of frusta with progressively shrinking radii — the eye reads
+# fake depth where there is none. Compare linear / exponential /
+# anti-perspective tapers.
+
+def gen_forced_perspective() -> list[dict]:
+    """5 variants of stacked frusta playing tricks with the eye."""
+    variants = []
+    n_layers = 8
+    layer_h = 0.12
+    base_r = 0.35
+
+    schedules = [
+        # (id, label, taper_function)
+        ("linear", "linear taper",
+         lambda i, n: 1.0 - (i / float(n))),
+        ("exp_strong", "exponential taper (forced perspective)",
+         lambda i, n: math.pow(0.62, i)),
+        ("exp_weak", "weak exponential",
+         lambda i, n: math.pow(0.85, i)),
+        ("inverted", "anti-perspective (top-heavy)",
+         lambda i, n: 0.2 + 0.9 * (i / float(n))),
+        ("zigzag", "zigzag depth-illusion",
+         lambda i, n: 1.0 - 0.7 * (i / float(n)) + 0.18 * math.sin(i * 1.4)),
+    ]
+
+    for sched_id, label, taper in schedules:
+        components = []
+        y_cursor = 0.0
+        for i in range(n_layers):
+            r_top = base_r * taper(i + 1, n_layers)
+            r_bot = base_r * taper(i, n_layers)
+            r_top = max(r_top, 0.01)
+            r_bot = max(r_bot, 0.01)
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(r_top, 4),
+                    "bottom_radius": round(r_bot, 4),
+                    "height": layer_h,
+                    "radial_segments": 4,
+                },
+                "transform": {"position": [0, y_cursor + layer_h * 0.5, 0]},
+            })
+            y_cursor += layer_h
+        spec = {
+            "_comment": f"forced-perspective stack: {label}",
+            "primitive": "Composition",
+            "shader": "flat",
+            "color": [0.55, 0.50, 0.62],
+            "components": components,
+        }
+        variants.append({
+            "id": f"persp_{sched_id}",
+            "spec": spec,
+            "params": {"n_layers": n_layers, "schedule": sched_id, "label": label},
+        })
+    return variants
+
+
+# ── Category E: recursive primitives — branching trees ──────────────
+# A trunk + N branches angled outward; each branch is itself a smaller
+# trunk + branches. Depth controls compounding complexity.
+
+def gen_recursive_branching() -> list[dict]:
+    """4 variants showing depth=1..4 branching."""
+    variants = []
+    branches_per_node = 3
+    branch_angle_deg = 30.0  # tilt each child relative to its parent's axis
+    shrink = 0.62
+    base_h = 0.45
+    base_r = 0.06
+
+    def rot_axis_angle(axis: list[float], angle: float) -> list[list[float]]:
+        """3x3 rotation matrix (Rodrigues) around unit axis by angle radians."""
+        x, y, z = axis
+        c, s = math.cos(angle), math.sin(angle)
+        C = 1 - c
+        return [
+            [c + x*x*C,    x*y*C - z*s, x*z*C + y*s],
+            [y*x*C + z*s,  c + y*y*C,   y*z*C - x*s],
+            [z*x*C - y*s,  z*y*C + x*s, c + z*z*C],
+        ]
+
+    def matvec(M: list[list[float]], v: list[float]) -> list[float]:
+        return [sum(M[i][j] * v[j] for j in range(3)) for i in range(3)]
+
+    def vlen(v: list[float]) -> float:
+        return math.sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2])
+
+    def normalize(v: list[float]) -> list[float]:
+        n = vlen(v) or 1.0
+        return [v[0]/n, v[1]/n, v[2]/n]
+
+    def cross(a: list[float], b: list[float]) -> list[float]:
+        return [
+            a[1]*b[2] - a[2]*b[1],
+            a[2]*b[0] - a[0]*b[2],
+            a[0]*b[1] - a[1]*b[0],
+        ]
+
+    def perp_axis(d: list[float]) -> list[float]:
+        """Return a unit vector perpendicular to d."""
+        ref = [0.0, 1.0, 0.0] if abs(d[1]) < 0.95 else [1.0, 0.0, 0.0]
+        return normalize(cross(d, ref))
+
+    def dir_to_euler_yxz(d: list[float]) -> list[float]:
+        """Euler angles (deg, YXZ order matching primitive_dna's matrix) so
+        that local +Y maps to direction d. We solve for yaw (Y) and pitch
+        (X) — roll (Z) stays 0."""
+        d = normalize(d)
+        # The matrix R = Ry(yaw) * Rx(pitch) * Rz(0) maps local +Y to:
+        #   (sin(yaw)*sin(pitch), cos(pitch), cos(yaw)*sin(pitch))
+        # Solve for pitch and yaw given d = (dx, dy, dz):
+        #   cos(pitch) = dy
+        #   sin(pitch) = sqrt(1 - dy*dy)
+        # Wait, this is wrong because the matrix in primitive_dna uses
+        # YXZ multiplication (Ry * Rx * Rz). Let me derive what +Y maps to.
+        # Local +Y = (0, 1, 0). Apply Rz first (no-op), then Rx, then Ry.
+        # After Rx(pitch): (0, cos(pitch), sin(pitch))
+        # After Ry(yaw):   (sin(yaw)*sin(pitch), cos(pitch), cos(yaw)*sin(pitch))
+        # So: dy = cos(pitch); dx = sin(yaw) * sin(pitch); dz = cos(yaw) * sin(pitch)
+        dx, dy, dz = d
+        pitch = math.acos(max(-1.0, min(1.0, dy)))
+        sp = math.sin(pitch)
+        if abs(sp) < 1e-6:
+            yaw = 0.0
+        else:
+            yaw = math.atan2(dx, dz)
+        # Note: primitive_dna's _format_transform3d takes [rx, ry, rz] in
+        # degrees and rotates Ry*Rx*Rz. So we return [pitch_deg, yaw_deg, 0].
+        return [math.degrees(pitch), math.degrees(yaw), 0.0]
+
+    def grow(parent_top: list[float], parent_dir: list[float],
+             length: float, radius: float, depth: int,
+             out: list, child_index: int = 0):
+        """Append a cylinder from parent_top going in parent_dir."""
+        # Place cylinder centered at midpoint, oriented along parent_dir
+        end = [parent_top[i] + parent_dir[i] * length for i in range(3)]
+        mid = [parent_top[i] + parent_dir[i] * length * 0.5 for i in range(3)]
+        rot = dir_to_euler_yxz(parent_dir)
+        out.append({
+            "primitive": "CylinderMesh",
+            "params": {
+                "top_radius": round(radius * 0.7, 4),
+                "bottom_radius": round(radius, 4),
+                "height": round(length, 4),
+                "radial_segments": 6,
+            },
+            "transform": {
+                "position": [round(m, 5) for m in mid],
+                "rotation_degrees": [round(r, 4) for r in rot],
+            },
+        })
+        if depth <= 0:
+            return
+        # Children tilt branch_angle_deg from parent_dir, spread around it.
+        # Build a stable perpendicular axis and rotate it for each child.
+        perp = perp_axis(parent_dir)
+        tilt_R = rot_axis_angle(perp, math.radians(branch_angle_deg))
+        tilted = matvec(tilt_R, parent_dir)
+        for k in range(branches_per_node):
+            spread_R = rot_axis_angle(
+                normalize(parent_dir),
+                k * (2.0 * math.pi / branches_per_node)
+            )
+            child_dir = normalize(matvec(spread_R, tilted))
+            grow(end, child_dir,
+                 length * shrink, radius * shrink, depth - 1, out, k)
+
+    for max_depth in [1, 2, 3, 4]:
+        components: list = []
+        # Trunk goes straight up
+        grow([0, 0, 0], parent_dir=[0.0, 1.0, 0.0],
+             length=base_h, radius=base_r,
+             depth=max_depth, out=components)
+        spec = {
+            "_comment": f"recursive branching tree, depth={max_depth}",
+            "primitive": "Composition",
+            "shader": "flat",
+            "color": [0.42, 0.30, 0.18],
+            "components": components,
+        }
+        variants.append({
+            "id": f"tree_d{max_depth}",
+            "spec": spec,
+            "params": {"depth": max_depth, "branches": branches_per_node,
+                       "shrink": shrink, "n_components": len(components)},
+        })
+    return variants
+
+
+# ── Category F: meeting-face rules ──────────────────────────────────
+# A host primitive (cube) + a guest primitive attached at different
+# locations. Some meetings are "clean" (face-to-face, axis-aligned);
+# others are "broken" (face-to-edge, face-to-vertex, off-axis).
+
+def gen_meeting_faces() -> list[dict]:
+    """6 variants showing valid vs broken primitive meetings."""
+    variants = []
+    host_size = 0.4  # cube edge length
+    guest_size = 0.22
+
+    def host_component() -> dict:
+        return {
+            "primitive": "BoxMesh",
+            "params": {"size": [host_size, host_size, host_size]},
+            "transform": {"position": [0, host_size * 0.5, 0]},
+        }
+
+    cases = [
+        # (id, label, guest_position_offset, guest_rot_deg, is_clean)
+        ("clean_top", "face-to-face (top, axis-aligned)",
+         [0, host_size + guest_size * 0.5, 0],
+         [0, 0, 0], True),
+        ("clean_side", "face-to-face (side, axis-aligned)",
+         [host_size * 0.5 + guest_size * 0.5, host_size * 0.5, 0],
+         [0, 0, 0], True),
+        ("face_off_center", "face-to-face but off-center",
+         [host_size * 0.25, host_size + guest_size * 0.5, host_size * 0.2],
+         [0, 0, 0], False),
+        ("edge_meeting", "face-to-edge (broken)",
+         [host_size * 0.5 + guest_size * 0.4, host_size + guest_size * 0.3, 0],
+         [0, 0, 0], False),
+        ("vertex_meeting", "face-to-vertex (very broken)",
+         [host_size * 0.5 + guest_size * 0.4,
+          host_size + guest_size * 0.4,
+          host_size * 0.5 + guest_size * 0.4],
+         [0, 0, 0], False),
+        ("rotated_45", "face-to-face but rotated 45° (broken silhouette)",
+         [0, host_size + guest_size * 0.5, 0],
+         [0, 45, 0], False),
+    ]
+
+    for cid, label, gpos, grot, clean in cases:
+        components = [
+            host_component(),
+            {
+                "primitive": "BoxMesh",
+                "params": {"size": [guest_size, guest_size, guest_size]},
+                "transform": {
+                    "position": gpos,
+                    "rotation_degrees": grot,
+                },
+            },
+        ]
+        spec = {
+            "_comment": f"meeting-faces: {label} ({'clean' if clean else 'broken'})",
+            "primitive": "Composition",
+            "shader": "flat",
+            "color": [0.70, 0.60, 0.42] if clean else [0.74, 0.40, 0.36],
+            "components": components,
+        }
+        variants.append({
+            "id": cid,
+            "spec": spec,
+            "params": {"label": label, "is_clean": clean},
+        })
+    return variants
+
+
 # ── Generator dispatch ───────────────────────────────────────────────
 
 CATEGORIES: dict[str, dict[str, Any]] = {
@@ -199,6 +460,24 @@ CATEGORIES: dict[str, dict[str, Any]] = {
         "essence": "fields of CylinderMesh(K) tiles — segments=3,4,6 tile the plane; 5,8,12 don't tile alone",
         "primary_axis": "radial_segments",
         "generator": gen_tessellation_field,
+    },
+    "forced_perspective": {
+        "title": "Forced-perspective stacks",
+        "essence": "stacks of frusta with engineered taper schedules — eye reads fake depth where none exists",
+        "primary_axis": "schedule",
+        "generator": gen_forced_perspective,
+    },
+    "recursive_branching": {
+        "title": "Recursive primitives",
+        "essence": "trees where each branch is itself a smaller tree — depth controls compounding complexity",
+        "primary_axis": "depth",
+        "generator": gen_recursive_branching,
+    },
+    "meeting_faces": {
+        "title": "Meeting-face rules",
+        "essence": "which face of A meets which face of B — face-to-face is clean, face-to-edge or rotated breaks the silhouette",
+        "primary_axis": "label",
+        "generator": gen_meeting_faces,
     },
 }
 
@@ -222,7 +501,18 @@ def cmd_sweep(args) -> int:
         print(f"     known: {', '.join(CATEGORIES.keys())}", file=sys.stderr)
         return 1
 
-    manifest_categories = {}
+    # Start from existing manifest if present so a filtered sweep
+    # only updates the swept category and preserves the others.
+    existing_manifest_path = GRAMMAR_RUNS / "manifest.json"
+    if existing_manifest_path.exists():
+        try:
+            existing = json.loads(existing_manifest_path.read_text(encoding="utf-8"))
+            manifest_categories = dict(existing.get("categories", {}))
+        except Exception:
+            manifest_categories = {}
+    else:
+        manifest_categories = {}
+
     for cat_id, cat in selected:
         print(f"\n=== {cat_id} ===")
         variants = cat["generator"]()
@@ -297,10 +587,19 @@ def cmd_sweep(args) -> int:
             "variants": manifest_variants,
         }
 
-    # Write manifest
+    # Write manifest — re-order categories to match CATEGORIES dict
+    # so the gallery flows in canonical (simple-to-complex) order
+    # regardless of which categories were swept last.
+    ordered = {cid: manifest_categories[cid]
+               for cid in CATEGORIES.keys()
+               if cid in manifest_categories}
+    # Keep any unknown legacy categories at the end (defensive).
+    for cid in manifest_categories:
+        if cid not in ordered:
+            ordered[cid] = manifest_categories[cid]
     manifest = {
         "generated_at": datetime.datetime.now().isoformat(timespec="seconds"),
-        "categories": manifest_categories,
+        "categories": ordered,
     }
     manifest_path = GRAMMAR_RUNS / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
