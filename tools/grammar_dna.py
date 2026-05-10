@@ -653,7 +653,7 @@ def gen_tessellation_field() -> list[dict]:
                     "params": {
                         "inner_radius": round(star_inner, 4),
                         "outer_radius": round(star_outer, 4),
-                        "ring_segments": 6,  # hex-shaped torus → star points
+                        "rings": 6,  # hex-ring (major-axis polygon) → star points
                     },
                     "transform": {
                         "position": [round(x, 5), plate_h * 0.5 + k * 0.001,
@@ -671,6 +671,215 @@ def gen_tessellation_field() -> list[dict]:
         },
         "params": {"tiling": "star_and_cross", "lattice": "triangular",
                    "elements": ["cylinder_centre", "torus_x3_rotated"]},
+    })
+
+    # ── Torus genome: K=3, 4(rot 45°), 5, 8 — the Alhambra polygonal
+    # ring grammar. TorusMesh has its own "K" parameter (ring_segments)
+    # exactly like CylinderMesh — low values give polygonal rings.
+    # Each ring count gets the right rotation to tessellate or compose
+    # cleanly.
+    deep = deep_color
+    accent = accent_color
+
+    # ── Torus 3: triangular ring tiling (alternating up/down) ────
+    # Triangular tiling: rows of alternating up- and down-pointing
+    # triangular rings. The 3-segment torus with rotation 0° has its
+    # vertex at +X (pointing right); rotated 180° flips the triangle.
+    # Use triangular lattice (col_dx = L, row_dz = L*√3/2).
+    components = []
+    rows, cols = 4, 5
+    L = 0.32  # triangle side length
+    R_t3 = L / math.sqrt(3.0)  # outer radius (circumradius)
+    inner_r = R_t3 * 0.55
+    outer_r = R_t3
+    col_dx = L
+    row_dz = L * math.sqrt(3.0) / 2.0
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * col_dx
+            z = (r - (rows - 1) * 0.5) * row_dz
+            # Alternate up/down by row + column parity
+            up = ((r + c) % 2 == 0)
+            rot_y = 0.0 if up else 60.0  # 60° flips a 3-segment ring
+            # Rotate +30° baseline so apex points in +Z direction
+            rot_y += 30.0
+            components.append({
+                "primitive": "TorusMesh",
+                "params": {
+                    "inner_radius": round(inner_r, 4),
+                    "outer_radius": round(outer_r, 4),
+                    "rings": 3,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, rot_y, 0],
+                },
+                "color": accent if up else deep,
+            })
+    variants.append({
+        "id": "alhambra_torus_3_triangular",
+        "spec": {
+            "_comment": "torus K=3 — triangular rings alternating up/down (matches K=3 triangular tiling)",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "triangular", "torus_K": 3, "rotation": "0/60deg alternating"},
+    })
+
+    # ── Torus 4 (rotated 45°): square ring tiling (diamond + axis) ──
+    # 4-segment torus default has corners at angles 0/90/180/270
+    # (cardinal directions). With rotation_degrees=[0, 45, 0] the
+    # corners go to 45/135/225/315 — an axis-aligned square ring.
+    # Tile on a square grid; adjacent rings interlock at the corners.
+    components = []
+    rows, cols = 5, 6
+    spacing = 0.30
+    inner_r = spacing * 0.42
+    outer_r = spacing * 0.62  # slightly > spacing/2 → corners overlap into neighbours
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * spacing
+            z = (r - (rows - 1) * 0.5) * spacing
+            # Alternate rotation: half at 45°, half at 0° → checkerboard
+            rot_y = 45.0 if (r + c) % 2 == 0 else 0.0
+            color = accent if (r + c) % 2 == 0 else deep
+            components.append({
+                "primitive": "TorusMesh",
+                "params": {
+                    "inner_radius": round(inner_r, 4),
+                    "outer_radius": round(outer_r, 4),
+                    "rings": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, rot_y, 0],
+                },
+                "color": color,
+            })
+    variants.append({
+        "id": "alhambra_torus_4_diamond",
+        "spec": {
+            "_comment": "torus K=4 — square rings alternating rotation 0/45deg (interlocked diamond + square)",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "interlocked_diamond", "torus_K": 4,
+                   "rotation": "0/45deg alternating"},
+    })
+
+    # ── Torus 5: pentagonal flower (5 doesn't tile — show the cluster)
+    # Pentagonal rings around a central pentagon, then 5 satellites,
+    # giving the Penrose-flower / 5-fold-symmetry demo. Demonstrates
+    # WHY 5 doesn't tile alone — adjacent pentagons leave 36°/72° gaps.
+    components = []
+    R_centre = 0.20
+    R_ring_inner = R_centre * 0.55
+    R_ring_outer = R_centre * 0.88
+    R_satellite_outer = R_centre * 0.55
+    R_satellite_inner = R_centre * 0.30
+    # Centre pentagonal ring
+    components.append({
+        "primitive": "TorusMesh",
+        "params": {
+            "inner_radius": round(R_ring_inner, 4),
+            "outer_radius": round(R_ring_outer, 4),
+            "rings": 5,
+        },
+        "transform": {
+            "position": [0, plate_h * 0.5, 0],
+            "rotation_degrees": [0, 0, 0],
+        },
+        "color": accent,
+    })
+    # 5 satellite pentagonal rings
+    sat_dist = R_centre * 1.8
+    for i in range(5):
+        ang = math.radians(i * 72.0 + 36.0)  # offset 36° so apex points outward
+        x = sat_dist * math.cos(ang)
+        z = sat_dist * math.sin(ang)
+        components.append({
+            "primitive": "TorusMesh",
+            "params": {
+                "inner_radius": round(R_satellite_inner, 4),
+                "outer_radius": round(R_satellite_outer, 4),
+                "rings": 5,
+            },
+            "transform": {
+                "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                "rotation_degrees": [0, math.degrees(ang) - 90.0, 0],
+            },
+            "color": deep,
+        })
+    variants.append({
+        "id": "alhambra_torus_5_flower",
+        "spec": {
+            "_comment": "torus K=5 — pentagonal rings in 5-fold flower (5 doesn't tile alone)",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "5_fold_flower", "torus_K": 5,
+                   "tessellates": False},
+    })
+
+    # ── Torus 8 + Cylinder 4: 4.8.8 truncated square tiling ──────
+    # Octagons + squares fill the plane — the 4.8.8 Archimedean tiling.
+    # Place 8-segment tori on a square grid, fill the diamond-shaped
+    # gaps with 4-segment cylinders rotated 45°.
+    components = []
+    rows, cols = 4, 5
+    # Octagon side length 'a': octagon diagonal (vertex-to-vertex) = a(1+√2)
+    # so circumradius = a*(1+√2)/2 ≈ a*1.207
+    a = 0.18
+    oct_outer = a * (1.0 + math.sqrt(2.0)) / 2.0  # circumradius
+    oct_inner = oct_outer * 0.62
+    spacing = a * (1.0 + math.sqrt(2.0))  # centre-to-centre = octagon "width"
+    # Octagonal rings on square grid
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * spacing
+            z = (r - (rows - 1) * 0.5) * spacing
+            components.append({
+                "primitive": "TorusMesh",
+                "params": {
+                    "inner_radius": round(oct_inner, 4),
+                    "outer_radius": round(oct_outer, 4),
+                    "rings": 8,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 22.5, 0],  # flat-top octagon
+                },
+                "color": accent,
+            })
+    # Squares filling the gaps (offset by half-spacing in both axes)
+    sq_R = a / math.sqrt(2.0)  # square circumradius (corner-to-corner / 2)
+    for r in range(rows - 1):
+        for c in range(cols - 1):
+            x = (c - (cols - 1) * 0.5 + 0.5) * spacing
+            z = (r - (rows - 1) * 0.5 + 0.5) * spacing
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(sq_R * 0.92, 4),
+                    "bottom_radius": round(sq_R * 0.92, 4),
+                    "height": plate_h,
+                    "radial_segments": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 45.0, 0],  # rotate diamond → square
+                },
+                "color": deep,
+            })
+    variants.append({
+        "id": "alhambra_torus_8_truncated_square",
+        "spec": {
+            "_comment": "torus K=8 + cylinder K=4(rot45°) — the 4.8.8 truncated square Archimedean tiling",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "4.8.8 truncated square", "torus_K": 8,
+                   "filler_K": 4, "rotation": "octagons 22.5deg, squares 45deg"},
     })
 
     return variants

@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3]
+
+; Promoted composition: grammar_tessellation_field_alhambra_torus_5_flower (6 components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_tessellation_field_alhambra_torus_5_flower
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+[sub_resource type="TorusMesh" id="Mesh_0"]
+inner_radius = 0.110000
+outer_radius = 0.176000
+rings = 5
+[sub_resource type="TorusMesh" id="Mesh_1"]
+inner_radius = 0.060000
+outer_radius = 0.110000
+rings = 5
+[sub_resource type="TorusMesh" id="Mesh_2"]
+inner_radius = 0.060000
+outer_radius = 0.110000
+rings = 5
+[sub_resource type="TorusMesh" id="Mesh_3"]
+inner_radius = 0.060000
+outer_radius = 0.110000
+rings = 5
+[sub_resource type="TorusMesh" id="Mesh_4"]
+inner_radius = 0.060000
+outer_radius = 0.110000
+rings = 5
+[sub_resource type="TorusMesh" id="Mesh_5"]
+inner_radius = 0.060000
+outer_radius = 0.110000
+rings = 5
+
+[sub_resource type="StandardMaterial3D" id="Mat_0"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_1"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_2"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_3"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_4"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_5"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="GrammarTessellationFieldAlhambraTorus5Flower" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_0")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.03, 0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_1")
+transform = Transform3D(0.587785, 0.000000, 0.809017, 0.000000, 1.000000, 0.000000, -0.809017, 0.000000, 0.587785, 0.29125, 0.03, 0.2116)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_2")
+transform = Transform3D(0.951057, 0.000000, -0.309017, 0.000000, 1.000000, 0.000000, 0.309017, 0.000000, 0.951057, -0.11125, 0.03, 0.34238)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_3")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, -0.36, 0.03, 0.0)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_4")
+transform = Transform3D(-0.951057, 0.000000, -0.309017, 0.000000, 1.000000, 0.000000, 0.309017, 0.000000, -0.951057, -0.11125, 0.03, -0.34238)
+[node name="Part5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_5")
+transform = Transform3D(-0.587785, 0.000000, 0.809017, 0.000000, 1.000000, 0.000000, -0.809017, 0.000000, -0.587785, 0.29125, 0.03, -0.2116)

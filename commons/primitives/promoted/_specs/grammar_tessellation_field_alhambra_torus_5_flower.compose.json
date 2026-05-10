@@ -1,0 +1,162 @@
+{
+  "_comment": "torus K=5 \u2014 pentagonal rings in 5-fold flower (5 doesn't tile alone)",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.86,
+    0.78,
+    0.62
+  ],
+  "components": [
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.11,
+        "outer_radius": 0.176,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0,
+          0.03,
+          0
+        ],
+        "rotation_degrees": [
+          0,
+          0,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.06,
+        "outer_radius": 0.11,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.29125,
+          0.03,
+          0.2116
+        ],
+        "rotation_degrees": [
+          0,
+          -54.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.06,
+        "outer_radius": 0.11,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.11125,
+          0.03,
+          0.34238
+        ],
+        "rotation_degrees": [
+          0,
+          18.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.06,
+        "outer_radius": 0.11,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.36,
+          0.03,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          90.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.06,
+        "outer_radius": 0.11,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.11125,
+          0.03,
+          -0.34238
+        ],
+        "rotation_degrees": [
+          0,
+          162.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.06,
+        "outer_radius": 0.11,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.29125,
+          0.03,
+          -0.2116
+        ],
+        "rotation_degrees": [
+          0,
+          234.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    }
+  ]
+}

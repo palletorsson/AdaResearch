@@ -1,0 +1,824 @@
+{
+  "_comment": "torus K=8 + cylinder K=4(rot45\u00b0) \u2014 the 4.8.8 truncated square Archimedean tiling",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.86,
+    0.78,
+    0.62
+  ],
+  "components": [
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          -0.86912,
+          0.03,
+          -0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          -0.43456,
+          0.03,
+          -0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.03,
+          -0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.43456,
+          0.03,
+          -0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.86912,
+          0.03,
+          -0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          -0.86912,
+          0.03,
+          -0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          -0.43456,
+          0.03,
+          -0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.03,
+          -0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.43456,
+          0.03,
+          -0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.86912,
+          0.03,
+          -0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          -0.86912,
+          0.03,
+          0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          -0.43456,
+          0.03,
+          0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.03,
+          0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.43456,
+          0.03,
+          0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.86912,
+          0.03,
+          0.21728
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          -0.86912,
+          0.03,
+          0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          -0.43456,
+          0.03,
+          0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.03,
+          0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.43456,
+          0.03,
+          0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "TorusMesh",
+      "params": {
+        "inner_radius": 0.1347,
+        "outer_radius": 0.2173,
+        "rings": 8
+      },
+      "transform": {
+        "position": [
+          0.86912,
+          0.03,
+          0.65184
+        ],
+        "rotation_degrees": [
+          0,
+          22.5,
+          0
+        ]
+      },
+      "color": [
+        0.42,
+        0.58,
+        0.5
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.65184,
+          0.03,
+          -0.43456
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.21728,
+          0.03,
+          -0.43456
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.21728,
+          0.03,
+          -0.43456
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.65184,
+          0.03,
+          -0.43456
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.65184,
+          0.03,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.21728,
+          0.03,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.21728,
+          0.03,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.65184,
+          0.03,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.65184,
+          0.03,
+          0.43456
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.21728,
+          0.03,
+          0.43456
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.21728,
+          0.03,
+          0.43456
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.1171,
+        "bottom_radius": 0.1171,
+        "height": 0.06,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.65184,
+          0.03,
+          0.43456
+        ],
+        "rotation_degrees": [
+          0,
+          45.0,
+          0
+        ]
+      },
+      "color": [
+        0.32,
+        0.2,
+        0.18
+      ]
+    }
+  ]
+}

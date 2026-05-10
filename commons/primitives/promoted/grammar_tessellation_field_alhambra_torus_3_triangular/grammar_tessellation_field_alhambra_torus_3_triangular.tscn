@@ -1,0 +1,293 @@
+[gd_scene load_steps=41 format=3]
+
+; Promoted composition: grammar_tessellation_field_alhambra_torus_3_triangular (20 components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_tessellation_field_alhambra_torus_3_triangular
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+[sub_resource type="TorusMesh" id="Mesh_0"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_1"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_2"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_3"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_4"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_5"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_6"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_7"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_8"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_9"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_10"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_11"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_12"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_13"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_14"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_15"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_16"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_17"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_18"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+[sub_resource type="TorusMesh" id="Mesh_19"]
+inner_radius = 0.101600
+outer_radius = 0.184800
+rings = 3
+
+[sub_resource type="StandardMaterial3D" id="Mat_0"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_1"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_2"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_3"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_4"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_5"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_6"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_7"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_8"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_9"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_10"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_11"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_12"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_13"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_14"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_15"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_16"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_17"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_18"]
+albedo_color = Color(0.42, 0.58, 0.5, 1.0)
+emission_enabled = true
+emission = Color(0.126, 0.174, 0.15, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_19"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="GrammarTessellationFieldAlhambraTorus3Triangular" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_0")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, -0.64, 0.03, -0.41569)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_1")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, -0.32, 0.03, -0.41569)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_2")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, 0.0, 0.03, -0.41569)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_3")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.32, 0.03, -0.41569)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_4")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, 0.64, 0.03, -0.41569)
+[node name="Part5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_5")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, -0.64, 0.03, -0.13856)
+[node name="Part6" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_6")
+material_override = SubResource("Mat_6")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, -0.32, 0.03, -0.13856)
+[node name="Part7" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_7")
+material_override = SubResource("Mat_7")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.0, 0.03, -0.13856)
+[node name="Part8" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_8")
+material_override = SubResource("Mat_8")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, 0.32, 0.03, -0.13856)
+[node name="Part9" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_9")
+material_override = SubResource("Mat_9")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.64, 0.03, -0.13856)
+[node name="Part10" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_10")
+material_override = SubResource("Mat_10")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, -0.64, 0.03, 0.13856)
+[node name="Part11" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_11")
+material_override = SubResource("Mat_11")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, -0.32, 0.03, 0.13856)
+[node name="Part12" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_12")
+material_override = SubResource("Mat_12")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, 0.0, 0.03, 0.13856)
+[node name="Part13" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_13")
+material_override = SubResource("Mat_13")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.32, 0.03, 0.13856)
+[node name="Part14" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_14")
+material_override = SubResource("Mat_14")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, 0.64, 0.03, 0.13856)
+[node name="Part15" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_15")
+material_override = SubResource("Mat_15")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, -0.64, 0.03, 0.41569)
+[node name="Part16" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_16")
+material_override = SubResource("Mat_16")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, -0.32, 0.03, 0.41569)
+[node name="Part17" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_17")
+material_override = SubResource("Mat_17")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.0, 0.03, 0.41569)
+[node name="Part18" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_18")
+material_override = SubResource("Mat_18")
+transform = Transform3D(0.866025, 0.000000, -0.500000, 0.000000, 1.000000, 0.000000, 0.500000, 0.000000, 0.866025, 0.32, 0.03, 0.41569)
+[node name="Part19" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_19")
+material_override = SubResource("Mat_19")
+transform = Transform3D(0.000000, 0.000000, -1.000000, 0.000000, 1.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.64, 0.03, 0.41569)
