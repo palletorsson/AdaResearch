@@ -1711,6 +1711,64 @@ def gen_tessellation_field() -> list[dict]:
                    "rule": "per-cell diagonal orientation from (r,c) hash"},
     })
 
+    # ── Square pinwheel: square floor + rotating ring decoration
+    # Square grid cylinder floor (verifiable full floor) with each
+    # cell carrying a torus ring rotated by 0°/15°/30°/45° based on
+    # (r + c) mod 4 — the rings spin progressively across the field,
+    # creating a gentle pinwheel rhythm.
+    components = []
+    rows, cols = 5, 6
+    L_sq = 0.20
+    R_sq = L_sq / math.sqrt(2.0)
+    # Rings near full cell size for high visibility
+    R_ring_outer_sq = (L_sq * 0.95) / math.sqrt(2.0)
+    R_ring_inner_sq = (L_sq * 0.45) / math.sqrt(2.0)
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * L_sq
+            z = (r - (rows - 1) * 0.5) * L_sq
+            # FLOOR: axis-aligned filled square (gap-free grid)
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(R_sq, 4),
+                    "bottom_radius": round(R_sq, 4),
+                    "height": plate_h,
+                    "radial_segments": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 45, 0],
+                },
+                "color": cream,
+            })
+            # Spinning square ring (4-rings torus) — rotates 0/15/30/45°
+            spin = ((r + c) % 4) * 15.0
+            components.append({
+                "primitive": "TorusMesh",
+                "params": {
+                    "inner_radius": round(R_ring_inner_sq, 4),
+                    "outer_radius": round(R_ring_outer_sq, 4),
+                    "rings": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5 + 0.001, round(z, 5)],
+                    "rotation_degrees": [0, 45.0 + spin, 0],
+                },
+                "color": accent if (r + c) % 2 == 0 else deep,
+            })
+    variants.append({
+        "id": "alhambra_square_pinwheel_rings",
+        "spec": {
+            "_comment": "Square cylinder floor (gap-free) + 4-segment torus ring rotated 0/15/30/45° per cell — pinwheel rhythm across the grid",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "square pinwheel (4-step rotation)",
+                   "lattice": f"{rows}x{cols} square",
+                   "rule": "ring rotation = ((r+c) mod 4) * 15°"},
+    })
+
     return variants
 
 
