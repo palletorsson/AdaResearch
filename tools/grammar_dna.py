@@ -1900,6 +1900,69 @@ def gen_revolve_profile() -> list[dict]:
         radius=0.30, sections=18, section_length=0.07, section_rings=4,
     ))
 
+    # 7. Column with capital: classical column — capital, shaft (entasis),
+    # base. Profile reads as a fluted Doric/Tuscan column.
+    variants.append(make_revolve(
+        "column_with_capital",
+        "Doric/Tuscan column: capital + shaft with entasis + base",
+        profile=[
+            [0.00, 0.85],   # abacus
+            [0.04, 0.80],
+            [0.08, 0.95],   # echinus (cushion under abacus)
+            [0.12, 0.55],   # neck
+            [0.18, 0.55],   # neck flat
+            [0.30, 0.62],   # entasis swell start
+            [0.55, 0.65],   # widest swell
+            [0.85, 0.55],   # taper toward base
+            [0.90, 0.85],   # torus
+            [0.95, 0.95],   # plinth
+            [1.00, 0.95],
+        ],
+        radius=0.26, sections=20, section_length=0.07, section_rings=5,
+    ))
+
+    # 8. Urn: classical Greek urn — wide shoulders, narrow waist,
+    # flared foot, crowned with a flat disc-cap
+    variants.append(make_revolve(
+        "urn_classical",
+        "Greek urn: shoulders + narrow waist + flared foot",
+        profile=[
+            [0.00, 0.45],   # cap top
+            [0.05, 0.85],   # cap rim
+            [0.10, 0.70],
+            [0.18, 0.95],   # shoulder
+            [0.30, 1.00],   # widest
+            [0.55, 0.55],   # waist
+            [0.75, 0.65],   # belly
+            [0.92, 0.40],   # narrow stem
+            [1.00, 0.80],   # foot
+        ],
+        radius=0.28, sections=20, section_length=0.06, section_rings=5,
+    ))
+
+    # 9. Candlestick: thin tall ornate stem with multiple knobs
+    variants.append(make_revolve(
+        "candlestick",
+        "ornate stem with stacked knobs + cup top + flared base",
+        profile=[
+            [0.00, 0.50],   # cup top
+            [0.04, 0.65],   # cup rim
+            [0.08, 0.30],   # neck
+            [0.13, 0.55],   # knob 1
+            [0.18, 0.30],
+            [0.26, 0.45],   # knob 2
+            [0.32, 0.25],
+            [0.45, 0.40],   # knob 3 (taller)
+            [0.55, 0.25],
+            [0.68, 0.55],   # knob 4 (largest, bulb)
+            [0.78, 0.35],
+            [0.85, 0.45],
+            [0.92, 0.85],   # foot flare
+            [1.00, 0.95],   # foot rim
+        ],
+        radius=0.22, sections=22, section_length=0.06, section_rings=4,
+    ))
+
     return variants
 
 
