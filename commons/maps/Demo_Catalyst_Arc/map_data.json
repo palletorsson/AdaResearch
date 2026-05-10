@@ -1,0 +1,37 @@
+{
+  "map_info": {
+    "name": "Demo: Catalyst Personality Arc",
+    "lookup_name": "Demo_Catalyst_Arc",
+    "description": "5 catalyst foes in a row, one at each personality stage (FOE / WARY / NEUTRAL / CURIOUS / FRIEND). Demo for the personality-arc visual gallery — not part of any spine sequence.",
+    "dimensions": {
+      "width": 11,
+      "depth": 3,
+      "max_height": 1
+    }
+  },
+  "settings": {
+    "cube_size": 1,
+    "gutter": 0,
+    "show_grid": false,
+    "enable_physics": false,
+    "enter_type": "I"
+  },
+  "utility_definitions": {},
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" ","catalyst_foe#initial_state:foe"," ","catalyst_foe#initial_state:wary"," ","catalyst_foe#initial_state:neutral"," ","catalyst_foe#initial_state:curious"," ","catalyst_foe#initial_state:friend"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}
