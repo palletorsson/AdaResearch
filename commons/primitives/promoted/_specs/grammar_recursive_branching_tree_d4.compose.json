@@ -11,10 +11,10 @@
     {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.042,
+        "top_radius": 0.0468,
         "bottom_radius": 0.06,
         "height": 0.45,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -30,12 +30,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0477,
+        "height": 0.0955,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.45,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.026,
-        "bottom_radius": 0.0372,
+        "top_radius": 0.0365,
+        "bottom_radius": 0.0468,
         "height": 0.279,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -51,12 +67,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.1395,
+          0.69162,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -72,12 +104,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.1395,
+          0.8646,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -93,12 +141,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.19312,
+          0.95748,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -114,12 +178,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.19312,
+          1.02397,
+          0.0
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.19312,
+          0.95748,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -135,12 +231,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.23631,
+          0.99904,
+          0.02879
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.19312,
+          0.95748,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -156,12 +284,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.23631,
+          0.99904,
+          -0.02879
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.1395,
+          0.8646,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -177,12 +337,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.11269,
+          0.95748,
+          -0.04644
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -198,12 +374,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.11269,
+          1.02397,
+          -0.04644
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.11269,
+          0.95748,
+          -0.04644
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -219,12 +427,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.11603,
+          0.99904,
+          -0.09824
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.11269,
+          0.95748,
+          -0.04644
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -240,12 +480,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.06616,
+          0.99904,
+          -0.06945
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.1395,
+          0.8646,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -261,12 +533,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.11269,
+          0.95748,
+          0.04644
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -282,12 +570,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.11269,
+          1.02397,
+          0.04644
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.11269,
+          0.95748,
+          0.04644
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -303,12 +623,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.06616,
+          0.99904,
+          0.06945
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.11269,
+          0.95748,
+          0.04644
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -324,12 +676,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.11603,
+          0.99904,
+          0.09824
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.1395,
+          0.69162,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -345,12 +729,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.25185,
+          0.79973,
+          0.0749
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -366,12 +766,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.28429,
+          0.89964,
+          0.09653
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -387,12 +803,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.27594,
+          0.96537,
+          0.09096
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.28429,
+          0.89964,
+          0.09653
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -408,12 +856,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.29863,
+          0.94724,
+          0.14069
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.28429,
+          0.89964,
+          0.09653
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -429,12 +909,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.33057,
+          0.94724,
+          0.09278
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.25185,
+          0.79973,
+          0.0749
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -450,12 +962,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.30036,
+          0.83685,
+          0.16306
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -471,12 +999,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.32086,
+          0.88798,
+          0.20031
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.30036,
+          0.83685,
+          0.16306
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -492,12 +1052,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.30396,
+          0.84119,
+          0.22931
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.30036,
+          0.83685,
+          0.16306
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -513,12 +1105,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.35441,
+          0.84119,
+          0.20155
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.25185,
+          0.79973,
+          0.0749
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -534,12 +1158,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.35188,
+          0.83685,
+          0.08578
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -555,12 +1195,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.39415,
+          0.88798,
+          0.09037
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.35188,
+          0.83685,
+          0.08578
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -576,12 +1248,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.4082,
+          0.84119,
+          0.12086
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.35188,
+          0.83685,
+          0.08578
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -597,12 +1301,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.41442,
+          0.84119,
+          0.06361
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.1395,
+          0.69162,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -618,12 +1354,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.25185,
+          0.79973,
+          -0.0749
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -639,12 +1391,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.28429,
+          0.89964,
+          -0.09653
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -660,12 +1428,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.27594,
+          0.96537,
+          -0.09096
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.28429,
+          0.89964,
+          -0.09653
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -681,12 +1481,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.33057,
+          0.94724,
+          -0.09278
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.28429,
+          0.89964,
+          -0.09653
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -702,12 +1534,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.29863,
+          0.94724,
+          -0.14069
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.25185,
+          0.79973,
+          -0.0749
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -723,12 +1587,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.35188,
+          0.83685,
+          -0.08578
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -744,12 +1624,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.39415,
+          0.88798,
+          -0.09037
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.35188,
+          0.83685,
+          -0.08578
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -765,12 +1677,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.41442,
+          0.84119,
+          -0.06361
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.35188,
+          0.83685,
+          -0.08578
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -786,12 +1730,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.4082,
+          0.84119,
+          -0.12086
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.25185,
+          0.79973,
+          -0.0749
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -807,12 +1783,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.30036,
+          0.83685,
+          -0.16306
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -828,12 +1820,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.32086,
+          0.88798,
+          -0.20031
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.30036,
+          0.83685,
+          -0.16306
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -849,12 +1873,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.35441,
+          0.84119,
+          -0.20155
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.30036,
+          0.83685,
+          -0.16306
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -870,12 +1926,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.30396,
+          0.84119,
+          -0.22931
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0477,
+        "height": 0.0955,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.45,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.026,
-        "bottom_radius": 0.0372,
+        "top_radius": 0.0365,
+        "bottom_radius": 0.0468,
         "height": 0.279,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -891,12 +1979,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.69162,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -912,12 +2016,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.8646,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -933,12 +2053,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.01613,
+          0.95748,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -954,12 +2090,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.01613,
+          1.02397,
+          -0.12081
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.01613,
+          0.95748,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -975,12 +2143,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.02706,
+          0.99904,
+          -0.09202
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.01613,
+          0.95748,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -996,12 +2196,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.02706,
+          0.99904,
+          -0.1496
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.8646,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1017,12 +2249,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          -0.16725
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1038,12 +2286,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          1.02397,
+          -0.16725
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          -0.16725
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1059,12 +2339,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09322,
+          0.99904,
+          -0.21905
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          -0.16725
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1080,12 +2392,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.14309,
+          0.99904,
+          -0.19026
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.8646,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1101,12 +2445,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          -0.07437
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1122,12 +2482,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          1.02397,
+          -0.07437
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          -0.07437
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1143,12 +2535,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.14309,
+          0.99904,
+          -0.05136
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          -0.07437
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1164,12 +2588,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09322,
+          0.99904,
+          -0.02257
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.69162,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1185,12 +2641,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06106,
+          0.79973,
+          -0.25556
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1206,12 +2678,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.05855,
+          0.89964,
+          -0.29447
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1227,12 +2715,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.0592,
+          0.96537,
+          -0.28445
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.05855,
+          0.89964,
+          -0.29447
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1248,12 +2768,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.02747,
+          0.94724,
+          -0.32896
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.05855,
+          0.89964,
+          -0.29447
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1269,12 +2821,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.08494,
+          0.94724,
+          -0.33267
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06106,
+          0.79973,
+          -0.25556
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1290,12 +2874,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.00897,
+          0.83685,
+          -0.34165
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1311,12 +2911,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.01304,
+          0.88798,
+          -0.37803
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.00897,
+          0.83685,
+          -0.34165
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1332,12 +2964,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.04661,
+          0.84119,
+          -0.37789
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.00897,
+          0.83685,
+          -0.34165
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1353,12 +3017,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.00266,
+          0.84119,
+          -0.4077
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06106,
+          0.79973,
+          -0.25556
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1374,12 +3070,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.10166,
+          0.83685,
+          -0.34763
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1395,12 +3107,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.11881,
+          0.88798,
+          -0.38653
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.10166,
+          0.83685,
+          -0.34763
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1416,12 +3160,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09943,
+          0.84119,
+          -0.41394
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.10166,
+          0.83685,
+          -0.34763
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1437,12 +3213,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.15212,
+          0.84119,
+          -0.39071
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.69162,
+          -0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1458,12 +3266,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.19079,
+          0.79973,
+          -0.18066
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1479,12 +3303,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.22574,
+          0.89964,
+          -0.19794
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1500,12 +3340,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.21675,
+          0.96537,
+          -0.19349
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.22574,
+          0.89964,
+          -0.19794
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1521,12 +3393,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.24563,
+          0.94724,
+          -0.23989
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.22574,
+          0.89964,
+          -0.19794
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1542,12 +3446,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.27115,
+          0.94724,
+          -0.18827
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.19079,
+          0.79973,
+          -0.18066
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1563,12 +3499,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.25023,
+          0.83685,
+          -0.26185
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1584,12 +3536,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.27534,
+          0.88798,
+          -0.29616
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.25023,
+          0.83685,
+          -0.26185
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1605,12 +3589,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.2623,
+          0.84119,
+          -0.3271
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.25023,
+          0.83685,
+          -0.26185
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1626,12 +3642,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.30877,
+          0.84119,
+          -0.29308
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.19079,
+          0.79973,
+          -0.18066
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1647,12 +3695,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.29139,
+          0.83685,
+          -0.17859
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1668,12 +3732,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.3339,
+          0.88798,
+          -0.17772
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.29139,
+          0.83685,
+          -0.17859
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1689,12 +3785,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.35175,
+          0.84119,
+          -0.20615
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.29139,
+          0.83685,
+          -0.17859
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1710,12 +3838,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.35057,
+          0.84119,
+          -0.14858
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0477,
+        "height": 0.0955,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.45,
+          0.0
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.026,
-        "bottom_radius": 0.0372,
+        "top_radius": 0.0365,
+        "bottom_radius": 0.0468,
         "height": 0.279,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1731,12 +3891,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.69162,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1752,12 +3928,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.8646,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1773,12 +3965,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.01613,
+          0.95748,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1794,12 +4002,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.01613,
+          1.02397,
+          0.12081
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.01613,
+          0.95748,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1815,12 +4055,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.02706,
+          0.99904,
+          0.1496
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.01613,
+          0.95748,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1836,12 +4108,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.02706,
+          0.99904,
+          0.09202
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.8646,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1857,12 +4161,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          0.07437
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1878,12 +4198,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          1.02397,
+          0.07437
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          0.07437
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1899,12 +4251,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09322,
+          0.99904,
+          0.02257
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          0.07437
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1920,12 +4304,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.14309,
+          0.99904,
+          0.05136
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.8646,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1941,12 +4357,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          0.16725
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1962,12 +4394,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          1.02397,
+          0.16725
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          0.16725
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -1983,12 +4447,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.14309,
+          0.99904,
+          0.19026
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.09656,
+          0.95748,
+          0.16725
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2004,12 +4500,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09322,
+          0.99904,
+          0.21905
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.69162,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2025,12 +4553,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.19079,
+          0.79973,
+          0.18066
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2046,12 +4590,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.22574,
+          0.89964,
+          0.19794
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2067,12 +4627,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.21675,
+          0.96537,
+          0.19349
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.22574,
+          0.89964,
+          0.19794
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2088,12 +4680,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.27115,
+          0.94724,
+          0.18827
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.22574,
+          0.89964,
+          0.19794
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2109,12 +4733,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.24563,
+          0.94724,
+          0.23989
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.19079,
+          0.79973,
+          0.18066
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2130,12 +4786,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.29139,
+          0.83685,
+          0.17859
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2151,12 +4823,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.3339,
+          0.88798,
+          0.17772
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.29139,
+          0.83685,
+          0.17859
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2172,12 +4876,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.35057,
+          0.84119,
+          0.14858
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.29139,
+          0.83685,
+          0.17859
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2193,12 +4929,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.35175,
+          0.84119,
+          0.20615
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.19079,
+          0.79973,
+          0.18066
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2214,12 +4982,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.25023,
+          0.83685,
+          0.26185
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2235,12 +5019,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.27534,
+          0.88798,
+          0.29616
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.25023,
+          0.83685,
+          0.26185
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2256,12 +5072,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.30877,
+          0.84119,
+          0.29308
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.25023,
+          0.83685,
+          0.26185
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2277,12 +5125,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.2623,
+          0.84119,
+          0.3271
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0372,
+        "height": 0.0745,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06975,
+          0.69162,
+          0.12081
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0161,
-        "bottom_radius": 0.0231,
+        "top_radius": 0.0285,
+        "bottom_radius": 0.0365,
         "height": 0.173,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2298,12 +5178,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06106,
+          0.79973,
+          0.25556
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2319,12 +5215,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.05855,
+          0.89964,
+          0.29447
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2340,12 +5252,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.0592,
+          0.96537,
+          0.28445
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.05855,
+          0.89964,
+          0.29447
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2361,12 +5305,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.08494,
+          0.94724,
+          0.33267
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.05855,
+          0.89964,
+          0.29447
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2382,12 +5358,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.02747,
+          0.94724,
+          0.32896
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06106,
+          0.79973,
+          0.25556
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2403,12 +5411,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.10166,
+          0.83685,
+          0.34763
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2424,12 +5448,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.11881,
+          0.88798,
+          0.38653
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.10166,
+          0.83685,
+          0.34763
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2445,12 +5501,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.15212,
+          0.84119,
+          0.39071
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.10166,
+          0.83685,
+          0.34763
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2466,12 +5554,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.09943,
+          0.84119,
+          0.41394
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.029,
+        "height": 0.0581,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.06106,
+          0.79973,
+          0.25556
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.01,
-        "bottom_radius": 0.0143,
+        "top_radius": 0.0222,
+        "bottom_radius": 0.0285,
         "height": 0.1072,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2487,12 +5607,28 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.00897,
+          0.83685,
+          0.34165
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2508,12 +5644,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.01304,
+          0.88798,
+          0.37803
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.00897,
+          0.83685,
+          0.34165
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2529,12 +5697,44 @@
       }
     },
     {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          -0.00266,
+          0.84119,
+          0.4077
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0227,
+        "height": 0.0453,
+        "radial_segments": 12,
+        "rings": 6
+      },
+      "transform": {
+        "position": [
+          -0.00897,
+          0.83685,
+          0.34165
+        ]
+      }
+    },
+    {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.0062,
-        "bottom_radius": 0.0089,
+        "top_radius": 0.0173,
+        "bottom_radius": 0.0222,
         "height": 0.0665,
-        "radial_segments": 6
+        "radial_segments": 8
       },
       "transform": {
         "position": [
@@ -2546,6 +5746,22 @@
           86.2622,
           56.8941,
           0.0
+        ]
+      }
+    },
+    {
+      "primitive": "SphereMesh",
+      "params": {
+        "radius": 0.0177,
+        "height": 0.0353,
+        "radial_segments": 10,
+        "rings": 5
+      },
+      "transform": {
+        "position": [
+          0.04661,
+          0.84119,
+          0.37789
         ]
       }
     }

@@ -1,0 +1,76 @@
+{
+  "_comment": "vertical morph stack: pyramid-base lantern with finial",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.62,
+    0.55,
+    0.42
+  ],
+  "components": [
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.32,
+        "bottom_radius": 0.016,
+        "height": 0.162,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.081,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.32,
+        "bottom_radius": 0.32,
+        "height": 0.108,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.216,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.16,
+        "bottom_radius": 0.32,
+        "height": 0.09,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.315,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.016,
+        "bottom_radius": 0.16,
+        "height": 0.108,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.414,
+          0
+        ]
+      }
+    }
+  ]
+}

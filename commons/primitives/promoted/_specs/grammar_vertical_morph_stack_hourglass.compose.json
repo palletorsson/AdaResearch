@@ -1,0 +1,44 @@
+{
+  "_comment": "vertical morph stack: frustum + inverted (pinch at middle)",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.62,
+    0.55,
+    0.42
+  ],
+  "components": [
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.08,
+        "bottom_radius": 0.32,
+        "height": 0.18,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.09,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.32,
+        "bottom_radius": 0.08,
+        "height": 0.18,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          0.27,
+          0
+        ]
+      }
+    }
+  ]
+}

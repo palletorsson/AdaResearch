@@ -1,0 +1,148 @@
+[gd_scene load_steps=19 format=3]
+
+; Promoted composition: grammar_vertical_morph_stack_vase (9 components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_vertical_morph_stack_vase
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+[sub_resource type="CylinderMesh" id="Mesh_0"]
+top_radius = 0.172600
+bottom_radius = 0.096000
+height = 0.072000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_1"]
+top_radius = 0.240000
+bottom_radius = 0.172600
+height = 0.072000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_2"]
+top_radius = 0.290000
+bottom_radius = 0.240000
+height = 0.072000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_3"]
+top_radius = 0.316600
+bottom_radius = 0.290000
+height = 0.072000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_4"]
+top_radius = 0.316600
+bottom_radius = 0.316600
+height = 0.072000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_5"]
+top_radius = 0.290000
+bottom_radius = 0.316600
+height = 0.072000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_6"]
+top_radius = 0.240000
+bottom_radius = 0.290000
+height = 0.072000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_7"]
+top_radius = 0.172600
+bottom_radius = 0.240000
+height = 0.072000
+radial_segments = 4
+[sub_resource type="CylinderMesh" id="Mesh_8"]
+top_radius = 0.096000
+bottom_radius = 0.172600
+height = 0.072000
+radial_segments = 4
+
+[sub_resource type="StandardMaterial3D" id="Mat_0"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_1"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_2"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_3"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_4"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_5"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_6"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_7"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_8"]
+albedo_color = Color(0.62, 0.55, 0.42, 1.0)
+emission_enabled = true
+emission = Color(0.186, 0.165, 0.126, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="GrammarVerticalMorphStackVase" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_0")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.036, 0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_1")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.108, 0)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_2")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.18, 0)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_3")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.252, 0)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_4")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.324, 0)
+[node name="Part5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_5")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.396, 0)
+[node name="Part6" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_6")
+material_override = SubResource("Mat_6")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.468, 0)
+[node name="Part7" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_7")
+material_override = SubResource("Mat_7")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.54, 0)
+[node name="Part8" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_8")
+material_override = SubResource("Mat_8")
+transform = Transform3D(1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0, 0.612, 0)

@@ -86,6 +86,104 @@ def _label_shape(r: float) -> str:
     return "mushroom_cap"
 
 
+# ── Category A.5: vertical morph stacks — 180-flip continuity ───────
+# Stack frusta vertically with each segment's top_radius matching the
+# next segment's bottom_radius. The shape changes silhouette (frustum,
+# inverted-frustum, cube, mushroom) but the EDGES stay continuous —
+# no abrupt jumps in cross-section. The 180-flip principle: a frustum
+# above an inverted-frustum (or vice versa) shares one radius and the
+# silhouette pinches/expands smoothly.
+
+def gen_vertical_morph_stack() -> list[dict]:
+    """6 variants of edge-continuous vertical stacks."""
+    variants = []
+    color = [0.62, 0.55, 0.42]
+
+    def stack(layers: list[tuple], variant_id: str, label: str) -> dict:
+        """layers: list of (bottom_r, top_r, height) tuples. Each layer's
+        bottom_r MUST equal the previous layer's top_r for edge continuity."""
+        components = []
+        y = 0.0
+        for bot, top, h in layers:
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(top, 4),
+                    "bottom_radius": round(bot, 4),
+                    "height": round(h, 4),
+                    "radial_segments": 4,
+                },
+                "transform": {"position": [0, round(y + h * 0.5, 5), 0]},
+            })
+            y += h
+        return {
+            "id": variant_id,
+            "spec": {
+                "_comment": f"vertical morph stack: {label}",
+                "primitive": "Composition", "shader": "flat",
+                "color": color, "components": components,
+            },
+            "params": {"label": label, "n_layers": len(layers),
+                       "edge_continuous": True},
+        }
+
+    R = 0.32  # outer radius
+    h = 0.18
+
+    # 1. Hourglass: frustum + inverted-frustum, meeting at a pinch
+    variants.append(stack(
+        [(R, R * 0.25, h), (R * 0.25, R, h)],
+        "hourglass", "frustum + inverted (pinch at middle)"
+    ))
+
+    # 2. Diamond: inverted-frustum + frustum, meeting at the widest point
+    variants.append(stack(
+        [(R * 0.25, R, h), (R, R * 0.25, h)],
+        "diamond", "inverted + frustum (bulge at middle)"
+    ))
+
+    # 3. Spool: 3-layer alternation
+    variants.append(stack(
+        [(R, R * 0.4, h * 0.7),
+         (R * 0.4, R, h * 0.7),
+         (R, R * 0.4, h * 0.7)],
+        "spool", "frustum + inverted + frustum (thread spool)"
+    ))
+
+    # 4. Totem: 5-layer asymmetric column with cube and pyramid sections
+    variants.append(stack(
+        [(R, R * 0.6, h * 0.8),         # frustum
+         (R * 0.6, R * 0.6, h * 0.5),    # cube section
+         (R * 0.6, R, h * 0.6),          # inverted frustum (capital)
+         (R, R, h * 0.4),                # cube cap
+         (R, R * 0.05, h * 0.9)],        # pyramid finial
+        "totem", "5-layer asymmetric column"
+    ))
+
+    # 5. Lantern: pyramid base + cube body + inverted-frustum top
+    variants.append(stack(
+        [(R * 0.05, R, h * 0.9),        # pyramid (point-down)
+         (R, R, h * 0.6),                # cube
+         (R, R * 0.5, h * 0.5),          # frustum
+         (R * 0.5, R * 0.05, h * 0.6)],  # pyramid finial
+        "lantern", "pyramid-base lantern with finial"
+    ))
+
+    # 6. Vase: continuous radius schedule across many short segments
+    # Showing that when each layer's top = next layer's bottom we get a
+    # smooth-looking vase even though every segment is a frustum.
+    n = 9
+    radii = [R * (0.3 + 0.7 * math.sin(math.pi * (i / float(n))))
+             for i in range(n + 1)]
+    layers = [(radii[i], radii[i + 1], h * 0.4) for i in range(n)]
+    variants.append(stack(
+        layers,
+        "vase", f"{n}-layer sinusoidal radius schedule"
+    ))
+
+    return variants
+
+
 # ── Category B: solomonic stack — rotation chirality ────────────────
 # N CylinderMesh(4) stacked with progressive rotation Δθ between each.
 
@@ -141,41 +239,180 @@ def gen_solomonic_stack() -> list[dict]:
 # N×N grid of CylinderMesh(K) prisms tiling the plane.
 
 def gen_tessellation_field() -> list[dict]:
-    """6 variants showing radial_segments K = 3, 4, 5, 6, 8, 12 tiles."""
+    """3 variants where the field actually FILLS the plane — no gaps.
+
+    K=4 (squares) and K=6 (hexagons) tile alone. K=3+K=6 (triangles +
+    hexagons) tile via the trihexagonal pattern. Other K values don't
+    tile, so they're omitted.
+    """
     variants = []
-    grid_n = 4
-    spacing = 0.5
-    radius = 0.22
     height = 0.4
-    segments_list = [3, 4, 5, 6, 8, 12]
-    for k in segments_list:
-        components = []
-        for i in range(grid_n):
-            for j in range(grid_n):
-                x = (i - (grid_n - 1) * 0.5) * spacing
-                z = (j - (grid_n - 1) * 0.5) * spacing
-                components.append({
-                    "primitive": "CylinderMesh",
-                    "params": {
-                        "top_radius": radius,
-                        "bottom_radius": radius,
-                        "height": height,
-                        "radial_segments": k,
-                    },
-                    "transform": {"position": [x, height * 0.5, z]},
-                })
-        spec = {
-            "_comment": f"{grid_n}×{grid_n} field of CylinderMesh(radial_segments={k})",
-            "primitive": "Composition",
-            "shader": "flat",
-            "color": [0.40, 0.60, 0.45],
-            "components": components,
-        }
-        variants.append({
-            "id": f"k{k:02d}",
-            "spec": spec,
-            "params": {"radial_segments": k, "grid_size": grid_n},
-        })
+    color = [0.40, 0.60, 0.45]
+
+    # ── K=4: square tiling ─────────────────────────────────────────
+    # CylinderMesh(4) without rotation has corners at distance R from
+    # the axis at angles 0,90,180,270 — that's a diamond. Rotate 45°
+    # to get an axis-aligned square with side L = R*sqrt(2). Spacing
+    # between centers = L for edge-to-edge tiling.
+    grid_n = 5
+    R = 0.22
+    L = R * math.sqrt(2.0)  # side length, also the spacing
+    components = []
+    for i in range(grid_n):
+        for j in range(grid_n):
+            x = (i - (grid_n - 1) * 0.5) * L
+            z = (j - (grid_n - 1) * 0.5) * L
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(R, 4),
+                    "bottom_radius": round(R, 4),
+                    "height": height,
+                    "radial_segments": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), height * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 45, 0],  # axis-align the square
+                },
+            })
+    variants.append({
+        "id": "k04_squares",
+        "spec": {
+            "_comment": f"{grid_n}x{grid_n} square tiling (K=4, axis-aligned)",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": components,
+        },
+        "params": {"radial_segments": 4, "tiling": "square",
+                   "side_length": round(L, 4), "grid_size": grid_n},
+    })
+
+    # ── K=6: hexagonal honeycomb tiling ───────────────────────────
+    # CylinderMesh(6) without rotation has vertex at angle 0 (in +X
+    # direction). With rotation_degrees=[0, 30, 0] we get a "pointy-Z"
+    # hexagon (vertex pointing along +Z). Honeycomb math:
+    #   - vertices at distance R from center, side length L = R
+    #   - row spacing in Z (along pointy axis): 1.5 * R
+    #   - column spacing in X (perpendicular): R * sqrt(3)
+    #   - alternate rows offset by half a column in X
+    R = 0.18
+    rows, cols = 5, 5
+    row_dz = 1.5 * R
+    col_dx = R * math.sqrt(3.0)
+    components = []
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * col_dx
+            if r % 2 == 1:
+                x += col_dx * 0.5
+            z = (r - (rows - 1) * 0.5) * row_dz
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(R, 4),
+                    "bottom_radius": round(R, 4),
+                    "height": height,
+                    "radial_segments": 6,
+                },
+                "transform": {
+                    "position": [round(x, 5), height * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 30, 0],
+                },
+            })
+    variants.append({
+        "id": "k06_honeycomb",
+        "spec": {
+            "_comment": f"{rows}x{cols} hexagonal honeycomb tiling (K=6)",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": components,
+        },
+        "params": {"radial_segments": 6, "tiling": "honeycomb",
+                   "side_length": round(R, 4), "grid": [rows, cols]},
+    })
+
+    # ── K=3 + K=6: trihexagonal tiling ────────────────────────────
+    # Triangles alone don't tile cleanly with our prim setup, but
+    # combined with hexagons in the trihexagonal pattern (3.6.3.6)
+    # they fill space perfectly. Each hexagon sits in a honeycomb
+    # lattice; six triangles fill the gaps between three hexagons.
+    # We render a small patch.
+    Rh = 0.16          # hexagon circumradius (vertex distance)
+    side = Rh          # for K=6 the side length equals the radius
+    Rt = side / math.sqrt(3.0)  # triangle circumradius for the same edge
+    rows, cols = 4, 4
+    row_dz = 1.5 * Rh
+    col_dx = Rh * math.sqrt(3.0)
+    components = []
+    # Hexagons at honeycomb lattice
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * col_dx
+            if r % 2 == 1:
+                x += col_dx * 0.5
+            z = (r - (rows - 1) * 0.5) * row_dz
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(Rh, 4),
+                    "bottom_radius": round(Rh, 4),
+                    "height": height,
+                    "radial_segments": 6,
+                },
+                "transform": {
+                    "position": [round(x, 5), height * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 30, 0],
+                },
+            })
+    # Triangles in the gaps. In trihexagonal tiling, each hex has
+    # 6 triangle neighbours, but each triangle is shared between
+    # 3 hexes. For a finite patch we place pairs (up + down) at the
+    # "joints" between adjacent hexes within rows.
+    for r in range(rows):
+        for c in range(cols - 1):
+            x_left = (c - (cols - 1) * 0.5) * col_dx
+            if r % 2 == 1:
+                x_left += col_dx * 0.5
+            x_mid = x_left + col_dx * 0.5
+            z = (r - (rows - 1) * 0.5) * row_dz
+            # Up-pointing triangle (vertex toward +Z)
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(Rt, 4),
+                    "bottom_radius": round(Rt, 4),
+                    "height": height,
+                    "radial_segments": 3,
+                },
+                "transform": {
+                    "position": [round(x_mid, 5), height * 0.5,
+                                 round(z + Rh * 0.5, 5)],
+                    "rotation_degrees": [0, 90, 0],
+                },
+            })
+            # Down-pointing triangle (vertex toward -Z), rotated 180°
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(Rt, 4),
+                    "bottom_radius": round(Rt, 4),
+                    "height": height,
+                    "radial_segments": 3,
+                },
+                "transform": {
+                    "position": [round(x_mid, 5), height * 0.5,
+                                 round(z - Rh * 0.5, 5)],
+                    "rotation_degrees": [0, -90, 0],
+                },
+            })
+    variants.append({
+        "id": "k36_trihexagonal",
+        "spec": {
+            "_comment": "trihexagonal tiling: hexagons + triangles fill plane",
+            "primitive": "Composition", "shader": "flat",
+            "color": color, "components": components,
+        },
+        "params": {"tiling": "trihexagonal", "K": [3, 6]},
+    })
+
     return variants
 
 
@@ -313,30 +550,77 @@ def gen_recursive_branching() -> list[dict]:
         return [math.degrees(pitch), math.degrees(yaw), 0.0]
 
     def grow(parent_top: list[float], parent_dir: list[float],
-             length: float, radius: float, depth: int,
-             out: list, child_index: int = 0):
-        """Append a cylinder from parent_top going in parent_dir."""
-        # Place cylinder centered at midpoint, oriented along parent_dir
+             length: float, bottom_r: float, depth: int,
+             out: list, is_root: bool = False):
+        """Append a cylinder from parent_top going in parent_dir.
+
+        Face-meeting principle (the L-system trick):
+        - Each segment's bottom_radius is set by the JOINT it attaches to
+        - Each segment's top_radius tapers by `taper_ratio`
+        - At every joint we place a SphereMesh with radius = joint radius;
+          this hides the angular discontinuity between segments meeting at
+          different angles. Without the sphere, the segments' flat
+          end-faces would intersect at non-perpendicular angles and leave
+          a visible gap. With it, each segment plunges into a sphere that
+          absorbs both, producing a clean L-system-style joint.
+        """
+        taper_ratio = 0.78  # top_r / bottom_r within a single segment
+        top_r = bottom_r * taper_ratio
         end = [parent_top[i] + parent_dir[i] * length for i in range(3)]
         mid = [parent_top[i] + parent_dir[i] * length * 0.5 for i in range(3)]
         rot = dir_to_euler_yxz(parent_dir)
+
+        # Joint sphere at the BASE of this segment (only when we're a child
+        # of a previous segment — root has no joint below it). Sphere
+        # radius matches the bottom of this segment so it absorbs the
+        # cylinder's bottom face cleanly even when the cylinder is tilted.
+        if not is_root:
+            out.append({
+                "primitive": "SphereMesh",
+                "params": {
+                    "radius": round(bottom_r * 1.02, 4),
+                    "height": round(bottom_r * 2.04, 4),
+                    "radial_segments": 12,
+                    "rings": 6,
+                },
+                "transform": {
+                    "position": [round(p, 5) for p in parent_top],
+                },
+            })
+
+        # The cylinder segment itself
         out.append({
             "primitive": "CylinderMesh",
             "params": {
-                "top_radius": round(radius * 0.7, 4),
-                "bottom_radius": round(radius, 4),
+                "top_radius": round(top_r, 4),
+                "bottom_radius": round(bottom_r, 4),
                 "height": round(length, 4),
-                "radial_segments": 6,
+                "radial_segments": 8,
             },
             "transform": {
                 "position": [round(m, 5) for m in mid],
                 "rotation_degrees": [round(r, 4) for r in rot],
             },
         })
+
         if depth <= 0:
+            # Cap the tip with a small sphere so terminals don't show flat circles
+            out.append({
+                "primitive": "SphereMesh",
+                "params": {
+                    "radius": round(top_r * 1.02, 4),
+                    "height": round(top_r * 2.04, 4),
+                    "radial_segments": 10,
+                    "rings": 5,
+                },
+                "transform": {
+                    "position": [round(e, 5) for e in end],
+                },
+            })
             return
-        # Children tilt branch_angle_deg from parent_dir, spread around it.
-        # Build a stable perpendicular axis and rotate it for each child.
+
+        # Children: bottom_r equals THIS segment's top_r → face continuity
+        child_bottom_r = top_r
         perp = perp_axis(parent_dir)
         tilt_R = rot_axis_angle(perp, math.radians(branch_angle_deg))
         tilted = matvec(tilt_R, parent_dir)
@@ -347,14 +631,15 @@ def gen_recursive_branching() -> list[dict]:
             )
             child_dir = normalize(matvec(spread_R, tilted))
             grow(end, child_dir,
-                 length * shrink, radius * shrink, depth - 1, out, k)
+                 length * shrink, child_bottom_r, depth - 1, out,
+                 is_root=False)
 
     for max_depth in [1, 2, 3, 4]:
         components: list = []
         # Trunk goes straight up
         grow([0, 0, 0], parent_dir=[0.0, 1.0, 0.0],
-             length=base_h, radius=base_r,
-             depth=max_depth, out=components)
+             length=base_h, bottom_r=base_r,
+             depth=max_depth, out=components, is_root=True)
         spec = {
             "_comment": f"recursive branching tree, depth={max_depth}",
             "primitive": "Composition",
@@ -618,6 +903,12 @@ CATEGORIES: dict[str, dict[str, Any]] = {
         "essence": "single float controls a 1-parameter family of shapes — pyramid, frustum, cube, mushroom cap",
         "primary_axis": "top_bottom_ratio",
         "generator": gen_cube_to_pyramid,
+    },
+    "vertical_morph_stack": {
+        "title": "Vertical morph stacks (180-flip continuity)",
+        "essence": "stacked frusta where each top_radius matches the next bottom_radius — silhouette can change at every layer but edges stay continuous (hourglass, diamond, totem, vase)",
+        "primary_axis": "label",
+        "generator": gen_vertical_morph_stack,
     },
     "solomonic_stack": {
         "title": "Solomonic stacks",

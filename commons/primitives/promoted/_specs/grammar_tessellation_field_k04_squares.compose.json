@@ -1,0 +1,537 @@
+{
+  "_comment": "5x5 square tiling (K=4, axis-aligned)",
+  "primitive": "Composition",
+  "shader": "flat",
+  "color": [
+    0.4,
+    0.6,
+    0.45
+  ],
+  "components": [
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.62225,
+          0.2,
+          -0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.62225,
+          0.2,
+          -0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.62225,
+          0.2,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.62225,
+          0.2,
+          0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.62225,
+          0.2,
+          0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.31113,
+          0.2,
+          -0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.31113,
+          0.2,
+          -0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.31113,
+          0.2,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.31113,
+          0.2,
+          0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          -0.31113,
+          0.2,
+          0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.2,
+          -0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.2,
+          -0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.2,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.2,
+          0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.2,
+          0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.31113,
+          0.2,
+          -0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.31113,
+          0.2,
+          -0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.31113,
+          0.2,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.31113,
+          0.2,
+          0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.31113,
+          0.2,
+          0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.62225,
+          0.2,
+          -0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.62225,
+          0.2,
+          -0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.62225,
+          0.2,
+          0.0
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.62225,
+          0.2,
+          0.31113
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.22,
+        "bottom_radius": 0.22,
+        "height": 0.4,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0.62225,
+          0.2,
+          0.62225
+        ],
+        "rotation_degrees": [
+          0,
+          45,
+          0
+        ]
+      }
+    }
+  ]
+}
