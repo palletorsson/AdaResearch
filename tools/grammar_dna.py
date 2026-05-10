@@ -1089,6 +1089,191 @@ def gen_tessellation_field() -> list[dict]:
         "params": {"tiling": "Penrose P3 D-vertex", "rhombi": "2 thick + 4 thin"},
     })
 
+    # ── Penrose 3: decagonal "sun + thins" patch ─────────────────
+    # The classic Penrose decagonal patch: a central sun (5 thick
+    # rhombi) wrapped by 5 thin rhombi at the gaps between adjacent
+    # thick tiles. The thins fit into the wedges between the OBTUSE
+    # corners of adjacent thick rhombi without gutters.
+    components = []
+    L = L_pen
+    long_half_t = L * sx_thick   # thick: 0.178
+    short_half_t = L * sz_thick  # thick: 0.130
+    long_half_n = L * sx_thin    # thin: 0.209
+    # Inner sun: 5 thick rhombi sharing acute at origin
+    for i in range(5):
+        ang_deg = i * 72.0
+        ang_rad = math.radians(ang_deg)
+        cx = -long_half_t * math.cos(ang_rad)
+        cz = +long_half_t * math.sin(ang_rad)
+        components.append(rhombus([cx, cz], ang_deg, "thick", rhombus_thick_color))
+    # Outer ring: 5 thin rhombi, each with their acute corner at the
+    # OUTER TIP of one thick rhombus. The thick's outer acute is at
+    # 2*long_half_t in direction ang_deg (rotated tile spans 2*long_half).
+    # Actually the OBTUSE corners of adjacent thick rhombi form the
+    # decagonal perimeter; place thin rhombi at those obtuse points
+    # pointing outward.
+    # A thick rhombus at angle θ has obtuse corners (local ±Z after
+    # scale) at:
+    #   centre + R(θ) * (0, 0, ±short_half_t)
+    # = (-long_half_t cos θ, +long_half_t sin θ) + ... let me compute.
+    # In Godot row-major: R(θ) maps local +Z → world (sin θ, 0, cos θ).
+    # So local (0, 0, +short_half_t) → world (short_half_t sin θ, 0,
+    # short_half_t cos θ). Plus centre.
+    # Obtuse corners at angle θ:
+    #   (-long_half_t cos θ + short_half_t sin θ,
+    #    +long_half_t sin θ + short_half_t cos θ)
+    # and the other obtuse:
+    #   (-long_half_t cos θ - short_half_t sin θ,
+    #    +long_half_t sin θ - short_half_t cos θ)
+    # The "outer" obtuse corner of a thick rhombus is the one farther
+    # from origin. Since all thicks point outward from origin, both
+    # obtuse corners are at ~equal radius but in different angular
+    # directions. They lie at angles θ ± 90° from the rhombus axis.
+    # Two thicks at θ and θ+72° share an obtuse corner if positioned
+    # right. We place a THIN rhombus radially outward at angle (θ+36°),
+    # midway between, with its acute tip pointing inward.
+    for i in range(5):
+        mid_ang_deg = i * 72.0 + 36.0
+        mid_ang_rad = math.radians(mid_ang_deg)
+        # Thin rhombus: long axis = 2 * long_half_n. Place so its INNER
+        # acute corner lies at the shared boundary of two thick obtuse
+        # corners — approximately at radius (long_half_t + short_half_t).
+        # We approximate by placing thin centre at radius
+        # (long_half_t + long_half_n) so the inner acute touches the
+        # thick boundary cleanly.
+        r_thin = long_half_t + long_half_n
+        cx = -r_thin * math.cos(mid_ang_rad)
+        cz = +r_thin * math.sin(mid_ang_rad)
+        components.append(rhombus([cx, cz], mid_ang_deg, "thin", rhombus_thin_color))
+    variants.append({
+        "id": "alhambra_penrose_decagon_patch",
+        "spec": {
+            "_comment": "Penrose P3 decagonal patch: central sun (5 thick) + 5 thin rhombi in outer ring",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "Penrose decagon patch",
+                   "rhombi": "5 thick (sun) + 5 thin (outer)"},
+    })
+
+    # ── Girih 1: 10-pointed star strapwork ───────────────────────
+    # The classic Islamic 10-pointed star (zellige). Built from 10 thin
+    # rhombi sharing acute vertices at the centre — 10 × 36° = 360°.
+    # This is the "deca-rhombus star" found across Andalusi tilework.
+    components = []
+    L_star = 0.20
+    sx_t10 = math.cos(math.radians(18.0))
+    sz_t10 = math.sin(math.radians(18.0))
+    long_half_10 = L_star * sx_t10
+    star_color_a = [0.50, 0.62, 0.55]
+    for i in range(10):
+        ang_deg = i * 36.0
+        ang_rad = math.radians(ang_deg)
+        cx = -long_half_10 * math.cos(ang_rad)
+        cz = +long_half_10 * math.sin(ang_rad)
+        # Use thin rhombus (36°/144°)
+        components.append({
+            "primitive": "TorusMesh",
+            "params": {
+                "inner_radius": round(L_star * 0.82, 4),
+                "outer_radius": round(L_star, 4),
+                "rings": 4,
+            },
+            "transform": {
+                "position": [round(cx, 5), plate_h * 0.5, round(cz, 5)],
+                "rotation_degrees": [0, ang_deg, 0],
+                "scale": [round(sx_t10, 4), 1, round(sz_t10, 4)],
+            },
+            "color": star_color_a if i % 2 == 0 else deep_color,
+        })
+    variants.append({
+        "id": "alhambra_girih_10_star",
+        "spec": {
+            "_comment": "Girih 10-pointed star: 10 thin rhombi sharing acute vertex (10×36°=360°)",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "girih 10-star", "rhombi": "10 thin"},
+    })
+
+    # ── Girih 2: pentagonal flower with strapwork ────────────────
+    # Central pentagonal cylinder (filled) + 5 thick rhombi radiating
+    # outward as petals + 5 surrounding pentagonal rings as bouquet
+    # markers. The kind of ornate tile centred on a 5-fold axis seen
+    # in Alhambra zellige.
+    components = []
+    R_centre = 0.10
+    L_petal = 0.18
+    sx_p_thick = math.cos(math.radians(36.0))
+    sz_p_thick = math.sin(math.radians(36.0))
+    long_half_p = L_petal * sx_p_thick
+    # Centre pentagonal disc
+    components.append({
+        "primitive": "CylinderMesh",
+        "params": {
+            "top_radius": round(R_centre, 4),
+            "bottom_radius": round(R_centre, 4),
+            "height": plate_h,
+            "radial_segments": 5,
+        },
+        "transform": {"position": [0, plate_h * 0.5, 0]},
+        "color": deep_color,
+    })
+    # 5 petal rhombi (thick) radiating outward, acute INWARD
+    for i in range(5):
+        ang_deg = i * 72.0 + 90.0  # offset 90° so first petal points +Z
+        ang_rad = math.radians(ang_deg)
+        # Acute corner sits at distance R_centre from origin (just
+        # outside the centre disc)
+        r_inner = R_centre + long_half_p
+        cx = -r_inner * math.cos(ang_rad)
+        cz = +r_inner * math.sin(ang_rad)
+        components.append({
+            "primitive": "TorusMesh",
+            "params": {
+                "inner_radius": round(L_petal * 0.78, 4),
+                "outer_radius": round(L_petal, 4),
+                "rings": 4,
+            },
+            "transform": {
+                "position": [round(cx, 5), plate_h * 0.5, round(cz, 5)],
+                "rotation_degrees": [0, ang_deg, 0],
+                "scale": [round(sx_p_thick, 4), 1, round(sz_p_thick, 4)],
+            },
+            "color": accent_color,
+        })
+    # 5 outer pentagonal rings as bouquet markers
+    R_outer_pent = 0.045
+    r_outer_ring = R_centre + 2 * long_half_p + R_outer_pent
+    for i in range(5):
+        ang_deg = i * 72.0 + 90.0
+        ang_rad = math.radians(ang_deg)
+        cx = -r_outer_ring * math.cos(ang_rad)
+        cz = +r_outer_ring * math.sin(ang_rad)
+        components.append({
+            "primitive": "TorusMesh",
+            "params": {
+                "inner_radius": round(R_outer_pent * 0.5, 4),
+                "outer_radius": round(R_outer_pent, 4),
+                "rings": 5,
+            },
+            "transform": {
+                "position": [round(cx, 5), plate_h * 0.5, round(cz, 5)],
+                "rotation_degrees": [0, ang_deg, 0],
+            },
+            "color": star_color_a,
+        })
+    variants.append({
+        "id": "alhambra_girih_pentagonal_rosette",
+        "spec": {
+            "_comment": "Girih pentagonal rosette: pentagon centre + 5 thick-rhombi petals + 5 pentagon ring markers",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "girih pentagonal rosette",
+                   "elements": ["pentagon_centre", "5 thick petals", "5 pentagon markers"]},
+    })
+
     return variants
 
 

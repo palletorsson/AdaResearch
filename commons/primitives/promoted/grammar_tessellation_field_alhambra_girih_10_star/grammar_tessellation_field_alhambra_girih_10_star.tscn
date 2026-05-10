@@ -1,0 +1,153 @@
+[gd_scene load_steps=21 format=3]
+
+; Promoted composition: grammar_tessellation_field_alhambra_girih_10_star (10 components, flat-shaded)
+; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_tessellation_field_alhambra_girih_10_star
+;
+; Flat StandardMaterial3D per component — no edge highlighting.
+; Used when the goal is silhouette fidelity and CylinderMesh's internal
+; triangulation would otherwise show through with edge shaders.
+
+[sub_resource type="TorusMesh" id="Mesh_0"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_1"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_2"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_3"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_4"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_5"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_6"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_7"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_8"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+[sub_resource type="TorusMesh" id="Mesh_9"]
+inner_radius = 0.164000
+outer_radius = 0.200000
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="Mat_0"]
+albedo_color = Color(0.5, 0.62, 0.55, 1.0)
+emission_enabled = true
+emission = Color(0.15, 0.186, 0.165, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_1"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_2"]
+albedo_color = Color(0.5, 0.62, 0.55, 1.0)
+emission_enabled = true
+emission = Color(0.15, 0.186, 0.165, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_3"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_4"]
+albedo_color = Color(0.5, 0.62, 0.55, 1.0)
+emission_enabled = true
+emission = Color(0.15, 0.186, 0.165, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_5"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_6"]
+albedo_color = Color(0.5, 0.62, 0.55, 1.0)
+emission_enabled = true
+emission = Color(0.15, 0.186, 0.165, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_7"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_8"]
+albedo_color = Color(0.5, 0.62, 0.55, 1.0)
+emission_enabled = true
+emission = Color(0.15, 0.186, 0.165, 1.0)
+metallic = 0.0
+roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_9"]
+albedo_color = Color(0.32, 0.2, 0.18, 1.0)
+emission_enabled = true
+emission = Color(0.096, 0.06, 0.054, 1.0)
+metallic = 0.0
+roughness = 0.5
+
+[node name="GrammarTessellationFieldAlhambraGirih10Star" type="Node3D"]
+
+[node name="Part0" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_0")
+transform = Transform3D(0.951100, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.309000, -0.19021, 0.03, 0.0)
+[node name="Part1" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_1")
+transform = Transform3D(0.769456, 0.000000, 0.181626, 0.000000, 1.000000, 0.000000, -0.559043, 0.000000, 0.249986, -0.15388, 0.03, 0.1118)
+[node name="Part2" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_2")
+transform = Transform3D(0.293906, 0.000000, 0.293876, 0.000000, 1.000000, 0.000000, -0.904550, 0.000000, 0.095486, -0.05878, 0.03, 0.1809)
+[node name="Part3" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_3")
+transform = Transform3D(-0.293906, 0.000000, 0.293876, 0.000000, 1.000000, 0.000000, -0.904550, 0.000000, -0.095486, 0.05878, 0.03, 0.1809)
+[node name="Part4" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_4")
+transform = Transform3D(-0.769456, 0.000000, 0.181626, 0.000000, 1.000000, 0.000000, -0.559043, 0.000000, -0.249986, 0.15388, 0.03, 0.1118)
+[node name="Part5" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_5")
+transform = Transform3D(-0.951100, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, -0.000000, 0.000000, -0.309000, 0.19021, 0.03, 0.0)
+[node name="Part6" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_6")
+material_override = SubResource("Mat_6")
+transform = Transform3D(-0.769456, 0.000000, -0.181626, 0.000000, 1.000000, 0.000000, 0.559043, 0.000000, -0.249986, 0.15388, 0.03, -0.1118)
+[node name="Part7" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_7")
+material_override = SubResource("Mat_7")
+transform = Transform3D(-0.293906, 0.000000, -0.293876, 0.000000, 1.000000, 0.000000, 0.904550, 0.000000, -0.095486, 0.05878, 0.03, -0.1809)
+[node name="Part8" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_8")
+material_override = SubResource("Mat_8")
+transform = Transform3D(0.293906, 0.000000, -0.293876, 0.000000, 1.000000, 0.000000, 0.904550, 0.000000, 0.095486, -0.05878, 0.03, -0.1809)
+[node name="Part9" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_9")
+material_override = SubResource("Mat_9")
+transform = Transform3D(0.769456, 0.000000, -0.181626, 0.000000, 1.000000, 0.000000, 0.559043, 0.000000, 0.249986, -0.15388, 0.03, -0.1118)
