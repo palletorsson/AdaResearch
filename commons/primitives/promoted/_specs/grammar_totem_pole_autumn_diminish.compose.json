@@ -1,67 +1,40 @@
 {
-  "_comment": "vertical morph stack: 9-layer sinusoidal radius schedule",
+  "_comment": "totem pole: autumn palette, exponential taper to a pyramid finial shape program",
   "primitive": "Composition",
   "shader": "flat",
   "color": [
-    0.62,
-    0.55,
-    0.42
+    0.5,
+    0.5,
+    0.5
   ],
   "components": [
     {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.1726,
-        "bottom_radius": 0.096,
-        "height": 0.072,
+        "top_radius": 0.255,
+        "bottom_radius": 0.3,
+        "height": 0.168,
         "radial_segments": 4
       },
       "transform": {
         "position": [
           0,
-          0.036,
+          0.084,
           0
         ]
-      }
-    },
-    {
-      "primitive": "CylinderMesh",
-      "params": {
-        "top_radius": 0.24,
-        "bottom_radius": 0.1726,
-        "height": 0.072,
-        "radial_segments": 4
       },
-      "transform": {
-        "position": [
-          0,
-          0.108,
-          0
-        ]
-      }
+      "color": [
+        0.72,
+        0.45,
+        0.2
+      ]
     },
     {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.29,
-        "bottom_radius": 0.24,
-        "height": 0.072,
-        "radial_segments": 4
-      },
-      "transform": {
-        "position": [
-          0,
-          0.18,
-          0
-        ]
-      }
-    },
-    {
-      "primitive": "CylinderMesh",
-      "params": {
-        "top_radius": 0.3166,
-        "bottom_radius": 0.29,
-        "height": 0.072,
+        "top_radius": 0.2167,
+        "bottom_radius": 0.255,
+        "height": 0.168,
         "radial_segments": 4
       },
       "transform": {
@@ -70,87 +43,138 @@
           0.252,
           0
         ]
-      }
+      },
+      "color": [
+        0.55,
+        0.27,
+        0.08
+      ]
     },
     {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.3166,
-        "bottom_radius": 0.3166,
-        "height": 0.072,
+        "top_radius": 0.1842,
+        "bottom_radius": 0.2167,
+        "height": 0.168,
         "radial_segments": 4
       },
       "transform": {
         "position": [
           0,
-          0.324,
+          0.42,
           0
         ]
-      }
+      },
+      "color": [
+        0.8,
+        0.5,
+        0.2
+      ]
     },
     {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.29,
-        "bottom_radius": 0.3166,
-        "height": 0.072,
+        "top_radius": 0.1566,
+        "bottom_radius": 0.1842,
+        "height": 0.168,
         "radial_segments": 4
       },
       "transform": {
         "position": [
           0,
-          0.396,
+          0.588,
           0
         ]
-      }
+      },
+      "color": [
+        0.86,
+        0.08,
+        0.23
+      ]
     },
     {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.24,
-        "bottom_radius": 0.29,
-        "height": 0.072,
+        "top_radius": 0.1331,
+        "bottom_radius": 0.1566,
+        "height": 0.168,
         "radial_segments": 4
       },
       "transform": {
         "position": [
           0,
-          0.468,
+          0.756,
           0
         ]
-      }
+      },
+      "color": [
+        0.94,
+        0.9,
+        0.55
+      ]
     },
     {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.1726,
-        "bottom_radius": 0.24,
-        "height": 0.072,
+        "top_radius": 0.1131,
+        "bottom_radius": 0.1331,
+        "height": 0.168,
         "radial_segments": 4
       },
       "transform": {
         "position": [
           0,
-          0.54,
+          0.924,
           0
         ]
-      }
+      },
+      "color": [
+        0.5,
+        0.1,
+        0.1
+      ]
     },
     {
       "primitive": "CylinderMesh",
       "params": {
-        "top_radius": 0.096,
-        "bottom_radius": 0.1726,
-        "height": 0.072,
+        "top_radius": 0.0962,
+        "bottom_radius": 0.1131,
+        "height": 0.168,
         "radial_segments": 4
       },
       "transform": {
         "position": [
           0,
-          0.612,
+          1.092,
           0
         ]
-      }
+      },
+      "color": [
+        0.18,
+        0.31,
+        0.31
+      ]
+    },
+    {
+      "primitive": "CylinderMesh",
+      "params": {
+        "top_radius": 0.0,
+        "bottom_radius": 0.0962,
+        "height": 0.168,
+        "radial_segments": 4
+      },
+      "transform": {
+        "position": [
+          0,
+          1.26,
+          0
+        ]
+      },
+      "color": [
+        0.72,
+        0.53,
+        0.04
+      ]
     }
   ]
 }

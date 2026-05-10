@@ -86,25 +86,62 @@ def _label_shape(r: float) -> str:
     return "mushroom_cap"
 
 
-# ── Category A.5: vertical morph stacks — 180-flip continuity ───────
-# Stack frusta vertically with each segment's top_radius matching the
-# next segment's bottom_radius. The shape changes silhouette (frustum,
-# inverted-frustum, cube, mushroom) but the EDGES stay continuous —
-# no abrupt jumps in cross-section. The 180-flip principle: a frustum
-# above an inverted-frustum (or vice versa) shares one radius and the
-# silhouette pinches/expands smoothly.
+# ── Category A.5: totem poles — edge-continuous + per-segment colors
+# A vertical column of N segments, each segment a frustum (or cube
+# section) where each top_radius MATCHES the next segment's bottom_radius
+# (the 180-flip continuity principle). Each segment is also a different
+# COLOR drawn from a named palette — like Color_Pillar's pillarcolorcollection
+# but stacking colors VERTICALLY within a single column instead of one
+# color per pillar. Concrete proof: edge-continuous shape changes + colour
+# rhythm = a totem pole.
 
-def gen_vertical_morph_stack() -> list[dict]:
-    """6 variants of edge-continuous vertical stacks."""
+# Palettes from algorithms/color/color_palettes.tres
+PALETTES: dict[str, list[list[float]]] = {
+    "rainbow": [
+        [0.95, 0.20, 0.25], [0.98, 0.55, 0.15], [1.00, 0.85, 0.20],
+        [0.30, 0.80, 0.30], [0.20, 0.65, 0.95], [0.40, 0.30, 0.85],
+        [0.62, 0.20, 0.85], [0.95, 0.30, 0.65],
+    ],
+    "bauhaus": [
+        [0.86, 0.08, 0.23], [0.00, 0.45, 0.70], [1.00, 0.84, 0.00],
+        [0.10, 0.10, 0.10], [0.95, 0.95, 0.95], [0.50, 0.50, 0.50],
+    ],
+    "mondrian": [
+        [0.95, 0.95, 0.95], [0.90, 0.10, 0.16], [0.05, 0.05, 0.05],
+        [0.00, 0.41, 0.78], [1.00, 0.86, 0.00], [0.05, 0.05, 0.05],
+    ],
+    "memphis": [
+        [1.00, 0.08, 0.58], [0.00, 0.98, 0.60], [0.00, 0.75, 0.99],
+        [1.00, 0.65, 0.00], [0.63, 0.13, 0.94], [0.20, 0.80, 0.20],
+        [1.00, 0.41, 0.71],
+    ],
+    "autumn": [
+        [0.72, 0.45, 0.20], [0.55, 0.27, 0.08], [0.80, 0.50, 0.20],
+        [0.86, 0.08, 0.23], [0.94, 0.90, 0.55], [0.50, 0.10, 0.10],
+        [0.18, 0.31, 0.31], [0.72, 0.53, 0.04],
+    ],
+    "hokusai": [
+        [0.06, 0.13, 0.31], [0.19, 0.27, 0.47], [0.38, 0.46, 0.65],
+        [0.57, 0.68, 0.85], [0.95, 0.95, 0.95], [0.78, 0.86, 0.93],
+        [0.15, 0.23, 0.37],
+    ],
+}
+
+
+def gen_totem_pole() -> list[dict]:
+    """6 totem poles — all edge-continuous, each with a different palette
+    and a different segment-shape sequence."""
     variants = []
-    color = [0.62, 0.55, 0.42]
 
-    def stack(layers: list[tuple], variant_id: str, label: str) -> dict:
-        """layers: list of (bottom_r, top_r, height) tuples. Each layer's
-        bottom_r MUST equal the previous layer's top_r for edge continuity."""
+    def make_totem(variant_id: str, palette_name: str, shape_program: str,
+                   layers: list[tuple]) -> dict:
+        """layers: list of (bottom_r, top_r, height) tuples, each top_r
+        equal to next bottom_r (edge continuity required)."""
+        palette = PALETTES[palette_name]
         components = []
         y = 0.0
-        for bot, top, h in layers:
+        for i, (bot, top, h) in enumerate(layers):
+            color = palette[i % len(palette)]
             components.append({
                 "primitive": "CylinderMesh",
                 "params": {
@@ -114,71 +151,78 @@ def gen_vertical_morph_stack() -> list[dict]:
                     "radial_segments": 4,
                 },
                 "transform": {"position": [0, round(y + h * 0.5, 5), 0]},
+                "color": color,
             })
             y += h
         return {
             "id": variant_id,
             "spec": {
-                "_comment": f"vertical morph stack: {label}",
+                "_comment": f"totem pole: {palette_name} palette, {shape_program} shape program",
                 "primitive": "Composition", "shader": "flat",
-                "color": color, "components": components,
+                "color": [0.5, 0.5, 0.5],  # ignored — per-component colors win
+                "components": components,
             },
-            "params": {"label": label, "n_layers": len(layers),
-                       "edge_continuous": True},
+            "params": {
+                "palette": palette_name, "shape_program": shape_program,
+                "n_layers": len(layers), "edge_continuous": True,
+            },
         }
 
-    R = 0.32  # outer radius
-    h = 0.18
+    R = 0.30
+    h = 0.16
 
-    # 1. Hourglass: frustum + inverted-frustum, meeting at a pinch
-    variants.append(stack(
-        [(R, R * 0.25, h), (R * 0.25, R, h)],
-        "hourglass", "frustum + inverted (pinch at middle)"
+    # 1. Rainbow tapered totem: 8 segments, each a frustum tapering inward
+    layers = []
+    radii = [R * (1.0 - 0.08 * i) for i in range(9)]
+    for i in range(8):
+        layers.append((radii[i], radii[i + 1], h))
+    variants.append(make_totem(
+        "rainbow_taper", "rainbow", "tapering frusta (linear)", layers
     ))
 
-    # 2. Diamond: inverted-frustum + frustum, meeting at the widest point
-    variants.append(stack(
-        [(R * 0.25, R, h), (R, R * 0.25, h)],
-        "diamond", "inverted + frustum (bulge at middle)"
+    # 2. Bauhaus pinched totem: 6 segments alternating thin/wide pinches
+    layers = []
+    rs = [R, R * 0.35, R * 0.85, R * 0.40, R * 0.90, R * 0.45, R * 0.20]
+    for i in range(6):
+        layers.append((rs[i], rs[i + 1], h * 1.1))
+    variants.append(make_totem(
+        "bauhaus_pinch", "bauhaus", "alternating wide/narrow pinches", layers
     ))
 
-    # 3. Spool: 3-layer alternation
-    variants.append(stack(
-        [(R, R * 0.4, h * 0.7),
-         (R * 0.4, R, h * 0.7),
-         (R, R * 0.4, h * 0.7)],
-        "spool", "frustum + inverted + frustum (thread spool)"
+    # 3. Mondrian cube totem: 6 cube segments (constant radius)
+    layers = [(R, R, h * 1.4) for _ in range(6)]
+    variants.append(make_totem(
+        "mondrian_cubes", "mondrian", "constant-radius cube stack", layers
     ))
 
-    # 4. Totem: 5-layer asymmetric column with cube and pyramid sections
-    variants.append(stack(
-        [(R, R * 0.6, h * 0.8),         # frustum
-         (R * 0.6, R * 0.6, h * 0.5),    # cube section
-         (R * 0.6, R, h * 0.6),          # inverted frustum (capital)
-         (R, R, h * 0.4),                # cube cap
-         (R, R * 0.05, h * 0.9)],        # pyramid finial
-        "totem", "5-layer asymmetric column"
+    # 4. Memphis bulge totem: 7 segments with bulging in/out radius schedule
+    layers = []
+    rs = [R * 0.4, R * 1.0, R * 0.6, R * 1.1, R * 0.5, R * 0.95, R * 0.3, R * 0.5]
+    for i in range(7):
+        layers.append((rs[i], rs[i + 1], h * 0.95))
+    variants.append(make_totem(
+        "memphis_bulge", "memphis", "bulging radius schedule", layers
     ))
 
-    # 5. Lantern: pyramid base + cube body + inverted-frustum top
-    variants.append(stack(
-        [(R * 0.05, R, h * 0.9),        # pyramid (point-down)
-         (R, R, h * 0.6),                # cube
-         (R, R * 0.5, h * 0.5),          # frustum
-         (R * 0.5, R * 0.05, h * 0.6)],  # pyramid finial
-        "lantern", "pyramid-base lantern with finial"
+    # 5. Autumn diminish totem: 8 sections shrinking exponentially,
+    # ending in a pyramid finial
+    layers = []
+    rs = [R * math.pow(0.85, i) for i in range(8)]
+    rs.append(0.0)  # pyramid tip
+    for i in range(8):
+        layers.append((rs[i], rs[i + 1], h * 1.05))
+    variants.append(make_totem(
+        "autumn_diminish", "autumn", "exponential taper to a pyramid finial", layers
     ))
 
-    # 6. Vase: continuous radius schedule across many short segments
-    # Showing that when each layer's top = next layer's bottom we get a
-    # smooth-looking vase even though every segment is a frustum.
-    n = 9
-    radii = [R * (0.3 + 0.7 * math.sin(math.pi * (i / float(n))))
-             for i in range(n + 1)]
-    layers = [(radii[i], radii[i + 1], h * 0.4) for i in range(n)]
-    variants.append(stack(
-        layers,
-        "vase", f"{n}-layer sinusoidal radius schedule"
+    # 6. Hokusai wave totem: 7 segments with sinusoidal radius (wave)
+    layers = []
+    n = 7
+    rs = [R * (0.55 + 0.40 * math.sin(2.0 * math.pi * (i / float(n - 1)))) for i in range(n + 1)]
+    for i in range(n):
+        layers.append((rs[i], rs[i + 1], h * 0.90))
+    variants.append(make_totem(
+        "hokusai_wave", "hokusai", "sinusoidal (wave) radius schedule", layers
     ))
 
     return variants
@@ -239,11 +283,13 @@ def gen_solomonic_stack() -> list[dict]:
 # N×N grid of CylinderMesh(K) prisms tiling the plane.
 
 def gen_tessellation_field() -> list[dict]:
-    """3 variants where the field actually FILLS the plane — no gaps.
+    """Alhambra grammar — plane-filling tessellations + cylinder/torus
+    wall combinators.
 
-    K=4 (squares) and K=6 (hexagons) tile alone. K=3+K=6 (triangles +
-    hexagons) tile via the trihexagonal pattern. Other K values don't
-    tile, so they're omitted.
+    First three are pure tilings (K=4 squares, K=6 honeycomb,
+    K=3+K=6 trihexagonal). The next three are Alhambra-style wall
+    combinators: cylinders + tori arranged to form interlaced
+    geometric patterns reminiscent of Islamic architectural ornament.
     """
     variants = []
     height = 0.4
@@ -411,6 +457,220 @@ def gen_tessellation_field() -> list[dict]:
             "color": color, "components": components,
         },
         "params": {"tiling": "trihexagonal", "K": [3, 6]},
+    })
+
+    # ── Alhambra grammar: cylinder + torus wall combinators ──────
+    # The Islamic geometric tradition combined filled circles
+    # (cylinders, from above) with rings (tori) to create patterns
+    # where solid centres alternate with open rings, sometimes
+    # interlaced. With our two primitives we can render four
+    # archetypal patterns.
+    plate_h = 0.06   # all elements very thin to read as a wall panel
+    panel_color = [0.86, 0.78, 0.62]  # warm sandstone / Alhambra cream
+    accent_color = [0.42, 0.58, 0.50]  # Alhambra zellige green-blue
+    deep_color = [0.32, 0.20, 0.18]    # carved-shadow brown
+
+    # ── Alhambra 1: rosette field — every honeycomb cell holds a
+    # filled cylinder surrounded by a torus ring. Adjacent rings touch.
+    rows, cols = 4, 5
+    Rh = 0.18  # honeycomb circumradius
+    row_dz = 1.5 * Rh
+    col_dx = Rh * math.sqrt(3.0)
+    cyl_R = Rh * 0.30
+    torus_inner = Rh * 0.55
+    torus_outer = Rh * 0.95
+    components = []
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * col_dx
+            if r % 2 == 1:
+                x += col_dx * 0.5
+            z = (r - (rows - 1) * 0.5) * row_dz
+            # Inner filled disc
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(cyl_R, 4),
+                    "bottom_radius": round(cyl_R, 4),
+                    "height": plate_h,
+                    "radial_segments": 24,
+                },
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z, 5)]},
+                "color": deep_color,
+            })
+            # Surrounding ring
+            components.append({
+                "primitive": "TorusMesh",
+                "params": {
+                    "inner_radius": round(torus_inner, 4),
+                    "outer_radius": round(torus_outer, 4),
+                    "ring_segments": 32,
+                },
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z, 5)]},
+                "color": accent_color,
+            })
+    variants.append({
+        "id": "alhambra_rosette_field",
+        "spec": {
+            "_comment": "Alhambra rosette field: filled disc + torus ring per honeycomb cell",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "rosette", "lattice": "honeycomb",
+                   "elements": ["cylinder_inner", "torus_ring"]},
+    })
+
+    # ── Alhambra 2: interlace lattice — rows of tori with cylinders
+    # at every junction; the cylinders tie the rings together.
+    rows, cols = 5, 6
+    spacing = 0.32
+    torus_inner = spacing * 0.42
+    torus_outer = spacing * 0.55
+    cyl_R = spacing * 0.16
+    components = []
+    # Lay tori on a square grid
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * spacing
+            z = (r - (rows - 1) * 0.5) * spacing
+            components.append({
+                "primitive": "TorusMesh",
+                "params": {
+                    "inner_radius": round(torus_inner, 4),
+                    "outer_radius": round(torus_outer, 4),
+                    "ring_segments": 24,
+                },
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z, 5)]},
+                "color": accent_color,
+            })
+    # Cylinders at the JUNCTIONS between tori (row + col offset by half)
+    for r in range(rows - 1):
+        for c in range(cols - 1):
+            x = (c - (cols - 1) * 0.5 + 0.5) * spacing
+            z = (r - (rows - 1) * 0.5 + 0.5) * spacing
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(cyl_R, 4),
+                    "bottom_radius": round(cyl_R, 4),
+                    "height": plate_h,
+                    "radial_segments": 16,
+                },
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z, 5)]},
+                "color": deep_color,
+            })
+    variants.append({
+        "id": "alhambra_interlace_lattice",
+        "spec": {
+            "_comment": "Alhambra interlace: torus grid with cylinder studs at junctions",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "interlace", "lattice": "square",
+                   "elements": ["torus_grid", "cylinder_junctions"]},
+    })
+
+    # ── Alhambra 3: nested concentric — a single cell with a cylinder
+    # at centre and three tori at increasing radii, repeated as a field.
+    rows, cols = 3, 4
+    spacing = 0.50
+    cyl_R = spacing * 0.10
+    ring_widths = [(0.16, 0.20), (0.26, 0.30), (0.36, 0.40)]  # (inner, outer) as fraction of spacing
+    components = []
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * spacing
+            z = (r - (rows - 1) * 0.5) * spacing
+            # Centre disc
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(cyl_R, 4),
+                    "bottom_radius": round(cyl_R, 4),
+                    "height": plate_h,
+                    "radial_segments": 24,
+                },
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z, 5)]},
+                "color": deep_color,
+            })
+            # Three concentric rings
+            for ri, (inner_f, outer_f) in enumerate(ring_widths):
+                ring_color = accent_color if ri % 2 == 0 else panel_color
+                components.append({
+                    "primitive": "TorusMesh",
+                    "params": {
+                        "inner_radius": round(spacing * inner_f, 4),
+                        "outer_radius": round(spacing * outer_f, 4),
+                        "ring_segments": 32,
+                    },
+                    "transform": {"position": [round(x, 5), plate_h * 0.5 + ri * 0.001,
+                                                round(z, 5)]},
+                    "color": ring_color,
+                })
+    variants.append({
+        "id": "alhambra_nested_concentric",
+        "spec": {
+            "_comment": "Alhambra nested concentric: cylinder + 3 tori per cell, square lattice",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "nested", "rings_per_cell": 3,
+                   "elements": ["cylinder_centre", "torus_x3"]},
+    })
+
+    # ── Alhambra 4: star-and-cross — 12-pointed star approximation
+    # using overlapping torus rings at three rotations + central
+    # cylinder, on a triangular lattice.
+    rows, cols = 3, 4
+    spacing = 0.42
+    cyl_R = spacing * 0.10
+    star_inner = spacing * 0.32
+    star_outer = spacing * 0.36
+    components = []
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * spacing
+            if r % 2 == 1:
+                x += spacing * 0.5
+            z = (r - (rows - 1) * 0.5) * spacing * 0.866  # √3/2 for equilateral
+            # Centre disc
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(cyl_R, 4),
+                    "bottom_radius": round(cyl_R, 4),
+                    "height": plate_h,
+                    "radial_segments": 12,
+                },
+                "transform": {"position": [round(x, 5), plate_h * 0.5, round(z, 5)]},
+                "color": deep_color,
+            })
+            # Three rotated tori (creating 6-fold star approximation)
+            for k in range(3):
+                rot_y = k * 60.0
+                components.append({
+                    "primitive": "TorusMesh",
+                    "params": {
+                        "inner_radius": round(star_inner, 4),
+                        "outer_radius": round(star_outer, 4),
+                        "ring_segments": 6,  # hex-shaped torus → star points
+                    },
+                    "transform": {
+                        "position": [round(x, 5), plate_h * 0.5 + k * 0.001,
+                                      round(z, 5)],
+                        "rotation_degrees": [0, rot_y, 0],
+                    },
+                    "color": accent_color if k == 0 else panel_color,
+                })
+    variants.append({
+        "id": "alhambra_star_and_cross",
+        "spec": {
+            "_comment": "Alhambra star-and-cross: 6-segment tori rotated 0/60/120deg → 6-pointed star",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "star_and_cross", "lattice": "triangular",
+                   "elements": ["cylinder_centre", "torus_x3_rotated"]},
     })
 
     return variants
@@ -904,11 +1164,11 @@ CATEGORIES: dict[str, dict[str, Any]] = {
         "primary_axis": "top_bottom_ratio",
         "generator": gen_cube_to_pyramid,
     },
-    "vertical_morph_stack": {
-        "title": "Vertical morph stacks (180-flip continuity)",
-        "essence": "stacked frusta where each top_radius matches the next bottom_radius — silhouette can change at every layer but edges stay continuous (hourglass, diamond, totem, vase)",
-        "primary_axis": "label",
-        "generator": gen_vertical_morph_stack,
+    "totem_pole": {
+        "title": "Totem poles (edge-continuous + per-segment colour)",
+        "essence": "vertical multi-segment columns where every joint has matching radii (180-flip continuity) and each segment is a different palette colour — the principle from Color_Pillar's pillarcolorcollection but stacking colours within one column",
+        "primary_axis": "palette",
+        "generator": gen_totem_pole,
     },
     "solomonic_stack": {
         "title": "Solomonic stacks",
@@ -917,9 +1177,9 @@ CATEGORIES: dict[str, dict[str, Any]] = {
         "generator": gen_solomonic_stack,
     },
     "tessellation_field": {
-        "title": "Tessellation fields",
-        "essence": "fields of CylinderMesh(K) tiles — segments=3,4,6 tile the plane; 5,8,12 don't tile alone",
-        "primary_axis": "radial_segments",
+        "title": "Tessellation fields & Alhambra grammar",
+        "essence": "first 3 are pure tilings (square, honeycomb, trihexagonal); next 4 are Alhambra wall combinators of cylinder + torus — rosettes, interlace, nested concentric rings, star-and-cross",
+        "primary_axis": "tiling",
         "generator": gen_tessellation_field,
     },
     "forced_perspective": {
