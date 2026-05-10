@@ -1570,6 +1570,82 @@ def gen_tessellation_field() -> list[dict]:
                                 f"{len(placed_tris)} triangles (K=3 alt up/down)"]},
     })
 
+    # ── Square concentric nested (bullseye lattice, full floor) ──
+    # Square grid where each cell contains: a filled outer square,
+    # a square ring on top (slightly smaller), and a small filled
+    # central square. The bottom layer of filled squares is gap-free
+    # by construction (axis-aligned, spacing = side length). Rings
+    # and centres sit on top as decoration. FULL FLOOR guaranteed.
+    components = []
+    rows, cols = 5, 6
+    L_sq = 0.20                       # cell side length
+    R_outer = L_sq / math.sqrt(2.0)   # K=4 cylinder circumradius for axis-aligned square of side L
+    L_ring_outer = L_sq * 0.78
+    L_ring_inner = L_sq * 0.50
+    R_ring_outer = L_ring_outer / math.sqrt(2.0)
+    R_ring_inner = L_ring_inner / math.sqrt(2.0)
+    L_center = L_sq * 0.32
+    R_center = L_center / math.sqrt(2.0)
+    for r in range(rows):
+        for c in range(cols):
+            x = (c - (cols - 1) * 0.5) * L_sq
+            z = (r - (rows - 1) * 0.5) * L_sq
+            # Outer filled square (the FLOOR — fills its cell exactly)
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(R_outer, 4),
+                    "bottom_radius": round(R_outer, 4),
+                    "height": plate_h,
+                    "radial_segments": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 45, 0],  # axis-aligned square
+                },
+                "color": panel_color,
+            })
+            # Square ring (torus K=4) on top
+            components.append({
+                "primitive": "TorusMesh",
+                "params": {
+                    "inner_radius": round(R_ring_inner, 4),
+                    "outer_radius": round(R_ring_outer, 4),
+                    "rings": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5 + 0.001, round(z, 5)],
+                    "rotation_degrees": [0, 45, 0],
+                },
+                "color": accent if (r + c) % 2 == 0 else deep,
+            })
+            # Small central filled square
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(R_center, 4),
+                    "bottom_radius": round(R_center, 4),
+                    "height": plate_h,
+                    "radial_segments": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5 + 0.002, round(z, 5)],
+                    "rotation_degrees": [0, 45, 0],
+                },
+                "color": deep if (r + c) % 2 == 0 else accent,
+            })
+    variants.append({
+        "id": "alhambra_square_bullseye_floor",
+        "spec": {
+            "_comment": "Square grid bullseye floor: filled square + ring + filled centre per cell. Underlying floor is gap-free by construction.",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "square bullseye full-floor",
+                   "lattice": f"{rows}x{cols} square",
+                   "layers": ["filled outer square", "square ring", "filled centre"]},
+    })
+
     return variants
 
 
