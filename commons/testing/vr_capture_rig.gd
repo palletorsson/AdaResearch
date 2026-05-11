@@ -79,6 +79,27 @@ const MODE_COLORS := {
 
 const DEFAULT_MODE_COLOR := Color(0.90, 0.90, 0.95)
 
+# Per-mode 3-stop palettes for the orb's noise shader. Each palette
+# tells the same story in three colours: a base, a deeper saturate,
+# and a highlight that gives the orb its texture under noise mixing.
+const MODE_PALETTES := {
+	"primitives":     [Color(0.20, 0.95, 0.55), Color(0.45, 1.00, 0.40), Color(0.85, 1.00, 0.65)],
+	"transformation": [Color(0.25, 0.55, 1.00), Color(0.40, 0.78, 1.00), Color(0.75, 0.92, 1.00)],
+	"chromatic":      [Color(0.95, 0.35, 0.78), Color(1.00, 0.55, 0.85), Color(1.00, 0.85, 0.92)],
+	"forces":         [Color(0.95, 0.65, 0.20), Color(0.95, 0.85, 0.30), Color(1.00, 1.00, 0.75)],
+	"waveform":       [Color(0.45, 0.30, 0.95), Color(0.65, 0.55, 1.00), Color(0.88, 0.82, 1.00)],
+	"chaos":          [Color(0.95, 0.20, 0.20), Color(1.00, 0.50, 0.30), Color(1.00, 0.82, 0.55)],
+	"fractal":        [Color(0.35, 0.95, 0.65), Color(0.55, 1.00, 0.85), Color(0.85, 1.00, 0.95)],
+	"cellular":       [Color(0.70, 0.70, 0.75), Color(0.92, 0.92, 0.95), Color(1.00, 1.00, 1.00)],
+	"branching":      [Color(0.30, 0.55, 0.30), Color(0.45, 0.85, 0.50), Color(0.85, 0.95, 0.70)],
+	"swarm":          [Color(0.85, 0.45, 0.05), Color(1.00, 0.75, 0.20), Color(1.00, 0.95, 0.65)],
+}
+
+const DEFAULT_PALETTE := [Color(0.40, 0.95, 0.60), Color(0.55, 0.95, 0.70), Color(0.85, 1.00, 0.85)]
+
+# The orb's noise+palette shader.
+const ORB_NOISE_SHADER := preload("res://commons/hazards/becoming_catalyst/orb_noise.gdshader")
+
 
 # ── Environment ─────────────────────────────────────────────────────────
 
@@ -345,6 +366,34 @@ static func build_cone_visual(
 ## neutral catalyst hue for unknown modes.
 static func color_for_mode(mode_id: String) -> Color:
 	return MODE_COLORS.get(mode_id, DEFAULT_MODE_COLOR)
+
+
+## Resolve a catalyst mode id to its 3-stop palette (Array of 3 Colors).
+## Used by the orb's noise+palette shader.
+static func palette_for_mode(mode_id: String) -> Array:
+	return MODE_PALETTES.get(mode_id, DEFAULT_PALETTE)
+
+
+## Replace the orb's StandardMaterial3D with the noise+palette ShaderMaterial,
+## using the per-mode palette. Walks the orb's MeshInstance3D children and
+## swaps their material_override. Pass an empty mode_id to use the default
+## palette. Capture-only — production VR uses the original material.
+static func apply_orb_noise_shader(orb: Node3D, mode_id: String, noise_amount: float = 0.06, emission_energy: float = 1.8) -> void:
+	var palette: Array = palette_for_mode(mode_id)
+	var mat := ShaderMaterial.new()
+	mat.shader = ORB_NOISE_SHADER
+	# Pass Colors — Godot converts source_color hinted vec3 from Color.
+	mat.set_shader_parameter("palette_a", palette[0] as Color)
+	mat.set_shader_parameter("palette_b", palette[1] as Color)
+	mat.set_shader_parameter("palette_c", palette[2] as Color)
+	mat.set_shader_parameter("noise_scale", 5.0)
+	mat.set_shader_parameter("noise_amount", noise_amount)
+	mat.set_shader_parameter("time_scale", 0.6)
+	mat.set_shader_parameter("emission_energy", emission_energy)
+	mat.set_shader_parameter("halo_softness", 0.4)
+	for c in orb.get_children():
+		if c is MeshInstance3D:
+			(c as MeshInstance3D).material_override = mat
 
 
 ## Build a capture-only stand-in for the catalyst bracelet — a short

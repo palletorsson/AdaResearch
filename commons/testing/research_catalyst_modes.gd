@@ -84,18 +84,15 @@ func _capture(mode_id: String) -> void:
 	# Now form the orb with this mode
 	if orb.has_method("form"):
 		orb.call("form", mode_id, orb_origin, aim_dir, true)
-		# Tone down emission + boost opacity so the mode color reads
-		# clearly. The production orb is intentionally hot-emissive for
-		# VR rendering; in capture it overwhelms the hue.
+		# Apply the noise+palette shader — same shader, mode-specific palette.
+		# Each mode's three-stop palette gives the orb its characteristic
+		# colour story (greens for primitives, fire for chaos, etc.).
+		VRCaptureRig.apply_orb_noise_shader(orb, mode_id, 0.06, 1.2)
 		for c in orb.get_children():
 			if c is OmniLight3D:
-				(c as OmniLight3D).light_energy = 0.4
-				(c as OmniLight3D).omni_range = 0.6
-			elif c is MeshInstance3D:
-				var mat: StandardMaterial3D = (c as MeshInstance3D).material_override as StandardMaterial3D
-				if mat != null:
-					mat.emission_energy_multiplier = 0.8
-					mat.albedo_color.a = 0.95
+				(c as OmniLight3D).light_energy = 0.3
+				(c as OmniLight3D).omni_range = 0.5
+				(c as OmniLight3D).light_color = mode_color
 
 	for _i in range(30):
 		await process_frame

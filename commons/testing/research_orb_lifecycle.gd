@@ -136,10 +136,14 @@ func _capture(state: String) -> void:
 	# Now the orb is fully in tree; form() can set global_position.
 	if orb != null and orb.has_method("form"):
 		orb.call("form", "primitives", orb_origin, aim_dir, true)
-		# Enrich the orb visual: keep production sphere + add an outer
-		# halo + dim the OmniLight so the mode color reads instead of
-		# blowing out to white.
-		_enrich_orb_visual(orb, VRCaptureRig.color_for_mode("primitives"))
+		# Apply the noise+palette shader so the orb reads as alive —
+		# 3D-noise-displaced sphere mixed across the mode's palette
+		# instead of one flat-emission sphere.
+		VRCaptureRig.apply_orb_noise_shader(orb, "primitives", 0.06, 1.2)
+		for c in orb.get_children():
+			if c is OmniLight3D:
+				(c as OmniLight3D).light_energy = 0.3
+				(c as OmniLight3D).omni_range = 0.5
 
 	# Settle (gives orb's _apply_pose time, creature personality, etc.).
 	for _i in range(40):
@@ -149,7 +153,8 @@ func _capture(state: String) -> void:
 		# the orb's material every frame, so we re-enrich afterwards.
 		if state == "shooting" and orb != null and orb.has_method("update_state"):
 			orb.call("update_state", "primitives", orb_origin, aim_dir, cone_length, true)
-			_enrich_orb_visual(orb, VRCaptureRig.color_for_mode("primitives"))
+			# Re-apply shader — update_state may have reset material_override.
+			VRCaptureRig.apply_orb_noise_shader(orb, "primitives", 0.06, 1.2)
 
 	# Capture.
 	var vp: Viewport = root.get_viewport()
