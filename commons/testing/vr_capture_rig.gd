@@ -236,6 +236,29 @@ static func stop_animation_players(node: Node) -> void:
 		stop_animation_players(c)
 
 
+## Natural rest basis — palms down, thumbs pointing inward, fingers
+## forward. This is the calibration baseline: every other gesture-pose
+## rotation should be defined as a delta from here.
+##
+## XR Tools mesh axes (verified empirically): the left and right GLBs
+## are MIRRORED versions of each other. Both have their fingers along
+## intrinsic +X and palm-back along intrinsic +Z, BUT the right mesh's
+## thumb is on its intrinsic -Y while the left's thumb is on +Y (or
+## vice-versa — observed via the orientation research run on 2026-05-11).
+##
+## So the same target-world basis applied to both meshes yields the
+## natural mirror-symmetric rest pose:
+##   x_world = (0, 0, -1)   fingers forward (away from player)
+##   y_world = (-1, 0, 0)   model +Y → world -X (mirror does the work)
+##   z_world = (0, +1, 0)   palm-back up → palm faces down
+static func natural_rest_basis(_is_left: bool = true) -> Basis:
+	return Basis(
+		Vector3(0, 0, -1),
+		Vector3(-1, 0, 0),
+		Vector3(0, 1, 0),
+	)
+
+
 ## Build a Basis for a VR hand pose.
 ##
 ##  point_dir — world direction along which fingers should point
