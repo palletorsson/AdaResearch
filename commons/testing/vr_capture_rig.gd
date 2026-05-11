@@ -259,39 +259,43 @@ static func natural_rest_basis(_is_left: bool = true) -> Basis:
 	)
 
 
-## Build a Basis for a VR hand pose.
+## Build a Basis for a VR hand pose, composed off natural_rest_basis().
 ##
 ##  point_dir — world direction along which fingers should point
-##  roll      — palm-orientation along the fingers axis:
-##                +1.0 → palm faces world +X (left hand cupping toward right)
-##                -1.0 → palm faces world -X (right hand cupping toward left)
-##                 0.0 → palm down (resting/presenting pose)
-##  is_left   — true for the left-hand mesh. The right mesh is intrinsically
-##              mirrored, so we apply a 180° yaw to bring its natural-side
-##              palm to face the left-hand position.
+##              (e.g., orb_dir for "fingers aim at orb's projection")
+##  roll      — palm-rotation around the fingers axis. Each unit is 90°:
+##                roll = 0   → palm-down (natural rest, aimed along point_dir)
+##                roll = +1  → +90° around fingers axis (palm rotates one way)
+##                roll = -1  → -90° around fingers axis (opposite)
+##              For two-handed cupping, pass roll_l=+1 / roll_r=-1
+##              (or vice-versa; visually test).
+##  is_left   — IGNORED. The L/R hand GLBs are already mirrored at the
+##              geometry level, so the same basis produces natural
+##              mirror-symmetric rest. (Kept in the signature for
+##              backward compatibility with existing callers.)
 ##
-## XR Tools hand model convention (verified empirically):
-##   Identity basis → fingers along world -Z, palm facing world +Y.
-##   local +X → thumb side
-##   local +Y → palm-up direction
-##   local -Z → fingers forward
-static func hand_basis(point_dir: Vector3, roll: float, is_left: bool) -> Basis:
-	var b := Basis.IDENTITY
-	# Roll around the model's local -Z (fingers axis) to bring palm from
-	# "up" to facing sideways. +90° turns palm to +X, -90° to -X.
+## Verified 2026-05-11 (orientation research run):
+##   XR Tools mesh has local +X = fingers, local +Z = palm-back.
+##   natural_rest_basis() encodes that into a clean world-frame baseline.
+static func hand_basis(point_dir: Vector3, roll: float = 0.0, _is_left: bool = true) -> Basis:
+	var rest := natural_rest_basis()  # fingers world -Z, palm down
+
+	# Rotate rest so fingers align with point_dir.
+	var rest_fingers := Vector3(0, 0, -1)
+	var target := point_dir.normalized()
+	var b := rest
+	if rest_fingers.distance_squared_to(target) > 0.000001:
+		var axis := rest_fingers.cross(target)
+		if axis.length_squared() > 0.000001:
+			var ang := rest_fingers.angle_to(target)
+			b = Basis(axis.normalized(), ang) * rest
+		elif rest_fingers.dot(target) < 0:
+			b = Basis(Vector3.UP, PI) * rest
+
+	# Roll around the (newly-rotated) fingers axis.
 	if abs(roll) > 0.01:
-		b = b.rotated(Vector3.FORWARD, deg_to_rad(90.0 * roll))
-	# Mirror right hand 180° around Y so the model's natural orientation
-	# faces back toward the left hand for cupping gestures.
-	if not is_left:
-		b = b.rotated(Vector3.UP, PI)
-	# Align local -Z to world point_dir.
-	var current_forward := -b.z
-	var target_forward := point_dir.normalized()
-	var rot_axis := current_forward.cross(target_forward)
-	if rot_axis.length_squared() > 0.0001:
-		var ang := current_forward.angle_to(target_forward)
-		b = Basis(rot_axis.normalized(), ang) * b
+		b = Basis(target, deg_to_rad(90.0 * roll)) * b
+
 	return b.orthonormalized()
 
 
