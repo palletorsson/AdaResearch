@@ -269,3 +269,47 @@ static func default_elevated_camera() -> Camera3D:
 		Vector3(-0.05, 0.85, -1.40),
 		50.0,
 	)
+
+
+## First-person camera at the player's eye height, tilted to look at
+## where the hands would be when extended forward. This is the view
+## the player ACTUALLY HAS in VR — looking down at their own hands.
+##
+##   eye_height    — usually 1.62 m (matches XROrigin3D defaults)
+##   look_at_target — where the player is gazing (the gesture origin)
+##   fov           — 90° matches a generous VR FOV; 70° is more cinematic
+static func first_person_camera(
+	eye_height: float = 1.62,
+	look_at_target: Vector3 = Vector3(0, 1.10, -0.80),
+	fov: float = 80.0,
+) -> Camera3D:
+	return build_camera(
+		Vector3(0.0, eye_height, 0.0),
+		look_at_target,
+		fov,
+	)
+
+
+## Add a head sphere + torso to root, but offset so the camera (at
+## origin/eye height) doesn't see the figure's own head/torso clipping.
+## For first-person captures, skip the head and put the torso below the
+## camera so a sliver of shoulder/chest reads at the bottom of the frame.
+static func build_first_person_figure(root: Node3D) -> void:
+	var skin_mat := StandardMaterial3D.new()
+	skin_mat.albedo_color = Color(0.85, 0.75, 0.68)
+	skin_mat.roughness = 0.7
+	# Torso just below where the camera will be — barely visible as a hint
+	# of chest/shoulders.
+	var torso := MeshInstance3D.new()
+	var torso_mesh := CylinderMesh.new()
+	torso_mesh.top_radius = 0.18
+	torso_mesh.bottom_radius = 0.22
+	torso_mesh.height = 0.70
+	torso.mesh = torso_mesh
+	var torso_mat := StandardMaterial3D.new()
+	torso_mat.albedo_color = Color(0.30, 0.32, 0.36)
+	torso_mat.roughness = 0.8
+	torso.material_override = torso_mat
+	# Position so the top of the torso is just below eye level.
+	torso.position = Vector3(0, 1.62 - 0.35 - 0.10, -0.05)
+	root.add_child(torso)
