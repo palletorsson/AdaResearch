@@ -65,17 +65,18 @@ func _capture(mode: String) -> void:
 		two_handed = false
 		cone_length = 1.9
 
-	# Hands — mirrored bases for left vs right.
+	# Hands — mirrored bases for left vs right, named poses applied via
+	# the XR Tools AnimationPlayer in the rig.
 	if two_handed:
 		VRCaptureRig.pose_hand(root, VRCaptureRig.LEFT_HAND_GLTF, left_pos,
-			VRCaptureRig.hand_basis(orb_dir, +1.0, true))
+			VRCaptureRig.hand_basis(orb_dir, +1.0, true), "Cup", true)
 		VRCaptureRig.pose_hand(root, VRCaptureRig.RIGHT_HAND_GLTF, right_pos,
-			VRCaptureRig.hand_basis(orb_dir, -1.0, false))
+			VRCaptureRig.hand_basis(orb_dir, -1.0, false), "Cup", false)
 	else:
 		VRCaptureRig.pose_hand(root, VRCaptureRig.LEFT_HAND_GLTF, left_pos,
-			VRCaptureRig.hand_basis(Vector3.FORWARD, +1.0, true))
+			VRCaptureRig.hand_basis(Vector3.FORWARD, +1.0, true), "Default pose", true)
 		VRCaptureRig.pose_hand(root, VRCaptureRig.RIGHT_HAND_GLTF, right_pos,
-			VRCaptureRig.hand_basis(orb_dir, 0.0, false))
+			VRCaptureRig.hand_basis(orb_dir, 0.0, false), "Straight", false)
 
 	# Orb (production scene) + cone visual (capture-only aid).
 	var orb: Node3D = CATALYST_ORB.instantiate()

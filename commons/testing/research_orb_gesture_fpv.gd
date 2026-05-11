@@ -30,22 +30,22 @@ func _init() -> void:
 		dir.make_dir_recursive("catalyst_runs/orb_gesture_research")
 
 	# Each entry: id, params dict
-	# orb_scale / orb_emission_mult / orb_alpha are optional — used by
-	# the forming-arc variants (09, 10, 11) to show the orb partway
-	# through materialisation.
+	# pose_l / pose_r: named XR Tools hand poses (see VRCaptureRig.POSE_*).
+	# orb_scale / orb_emission_mult / orb_alpha: optional — used by
+	# the forming-arc variants to show the orb partway through materialisation.
 	var variants: Array = [
-		{"id": "01_orb_only",            "show_hands": false, "two_handed": true, "roll_l": 0.0, "roll_r": 0.0,  "spacing": 0.20, "aim": Vector3(0, -0.55, -1), "label": "Just the orb — no hands"},
-		{"id": "02_two_handed_cupping",  "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.20, "aim": Vector3(0, -0.55, -1), "label": "Two-handed, palms cupping inward"},
-		{"id": "03_two_handed_pressing", "show_hands": true,  "two_handed": true, "roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.20, "aim": Vector3(0, -0.40, -1), "label": "Two-handed, palms down/pressing"},
-		{"id": "04_two_handed_palms_down","show_hands": true, "two_handed": true, "roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.14, "aim": Vector3(0, -0.55, -1), "label": "Two-handed, palms down close"},
-		{"id": "05_one_handed_present",  "show_hands": true,  "two_handed": false,"roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.0,  "aim": Vector3(0.05, -0.40, -1), "label": "One-handed, presenting forward"},
-		{"id": "06_one_handed_palm_up",  "show_hands": true,  "two_handed": false,"roll_l": 0.0,  "roll_r": -2.0, "spacing": 0.0,  "aim": Vector3(0.05, -0.30, -1), "label": "One-handed, palm up offering"},
-		{"id": "07_one_handed_burst",    "show_hands": true,  "two_handed": false,"roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.0,  "aim": Vector3(0.05, -0.55, -1), "label": "One-handed, burst aimed down"},
-		{"id": "08_two_handed_wide",     "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.28, "aim": Vector3(0, -0.55, -1), "label": "Two-handed, wider stance"},
-		# Forming arc: hands approach from far, orb materialises gradually.
-		{"id": "09_two_handed_approach", "show_hands": true,  "two_handed": true, "roll_l": +0.6, "roll_r": -0.6, "spacing": 0.32, "aim": Vector3(0, -0.55, -1), "label": "Two-handed approach — hands near threshold, orb just appearing", "orb_scale": 0.35, "orb_emission_mult": 0.4, "orb_alpha": 0.45},
-		{"id": "10_two_handed_forming",  "show_hands": true,  "two_handed": true, "roll_l": +0.8, "roll_r": -0.8, "spacing": 0.22, "aim": Vector3(0, -0.55, -1), "label": "Two-handed forming — gesture committing, orb materialising", "orb_scale": 0.65, "orb_emission_mult": 0.75, "orb_alpha": 0.75},
-		{"id": "11_two_handed_held",     "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.14, "aim": Vector3(0, -0.55, -1), "label": "Two-handed held — hands close, orb fully alive", "orb_emission_mult": 1.3},
+		{"id": "01_orb_only",            "show_hands": false, "two_handed": true, "roll_l": 0.0, "roll_r": 0.0,  "spacing": 0.20, "aim": Vector3(0, -0.55, -1), "pose_l": "Default pose", "pose_r": "Default pose", "label": "Just the orb — no hands"},
+		{"id": "02_two_handed_cupping",  "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.20, "aim": Vector3(0, -0.55, -1), "pose_l": "Cup", "pose_r": "Cup", "label": "Two-handed, palms cupping inward (Cup pose)"},
+		{"id": "03_two_handed_pressing", "show_hands": true,  "two_handed": true, "roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.20, "aim": Vector3(0, -0.40, -1), "pose_l": "Straight", "pose_r": "Straight", "label": "Two-handed, palms down pressing (Straight pose)"},
+		{"id": "04_two_handed_palms_down","show_hands": true, "two_handed": true, "roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.14, "aim": Vector3(0, -0.55, -1), "pose_l": "Rounded", "pose_r": "Rounded", "label": "Two-handed, palms down close (Rounded)"},
+		{"id": "05_one_handed_present",  "show_hands": true,  "two_handed": false,"roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.0,  "aim": Vector3(0.05, -0.40, -1), "pose_l": "Default pose", "pose_r": "Straight", "label": "One-handed, presenting forward (Straight)"},
+		{"id": "06_one_handed_palm_up",  "show_hands": true,  "two_handed": false,"roll_l": 0.0,  "roll_r": -2.0, "spacing": 0.0,  "aim": Vector3(0.05, -0.30, -1), "pose_l": "Default pose", "pose_r": "Cup", "label": "One-handed, palm up offering (Cup)"},
+		{"id": "07_one_handed_burst",    "show_hands": true,  "two_handed": false,"roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.0,  "aim": Vector3(0.05, -0.55, -1), "pose_l": "Default pose", "pose_r": "Sign_Point", "label": "One-handed, burst pointing (Sign_Point)"},
+		{"id": "08_two_handed_wide",     "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.28, "aim": Vector3(0, -0.55, -1), "pose_l": "Cup", "pose_r": "Cup", "label": "Two-handed, wider stance"},
+		# Forming arc — hands approach, orb materialises. Poses tighten as gesture commits.
+		{"id": "09_two_handed_approach", "show_hands": true,  "two_handed": true, "roll_l": +0.6, "roll_r": -0.6, "spacing": 0.32, "aim": Vector3(0, -0.55, -1), "pose_l": "Grip 5", "pose_r": "Grip 5", "label": "Approach — hands near threshold, orb just appearing", "orb_scale": 0.35, "orb_emission_mult": 0.4, "orb_alpha": 0.45},
+		{"id": "10_two_handed_forming",  "show_hands": true,  "two_handed": true, "roll_l": +0.8, "roll_r": -0.8, "spacing": 0.22, "aim": Vector3(0, -0.55, -1), "pose_l": "Rounded", "pose_r": "Rounded", "label": "Forming — gesture committing, orb materialising", "orb_scale": 0.65, "orb_emission_mult": 0.75, "orb_alpha": 0.75},
+		{"id": "11_two_handed_held",     "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.14, "aim": Vector3(0, -0.55, -1), "pose_l": "Cup", "pose_r": "Cup", "label": "Held — hands close, orb fully alive (Cup)", "orb_emission_mult": 1.3},
 	]
 
 	for v in variants:
@@ -77,18 +77,21 @@ func _capture(v: Dictionary) -> void:
 	var orb_origin: Vector3 = ((left_pos + right_pos) * 0.5) if two_handed else right_pos
 	var cone_length: float = 2.0
 
+	var pose_l: String = v.get("pose_l", "Default pose")
+	var pose_r: String = v.get("pose_r", "Default pose")
+
 	if show_hands:
 		if two_handed:
 			VRCaptureRig.pose_hand(root, VRCaptureRig.LEFT_HAND_GLTF, left_pos,
-				VRCaptureRig.hand_basis(aim, roll_l, true))
+				VRCaptureRig.hand_basis(aim, roll_l, true), pose_l, true)
 			VRCaptureRig.pose_hand(root, VRCaptureRig.RIGHT_HAND_GLTF, right_pos,
-				VRCaptureRig.hand_basis(aim, roll_r, false))
+				VRCaptureRig.hand_basis(aim, roll_r, false), pose_r, false)
 		else:
-			# One-handed: left hand at hip (rest pose, palm down).
+			# One-handed: left hand at hip (rest pose), right hand presenting.
 			VRCaptureRig.pose_hand(root, VRCaptureRig.LEFT_HAND_GLTF, Vector3(-0.25, 1.00, -0.05),
-				VRCaptureRig.hand_basis(Vector3.FORWARD, 0.0, true))
+				VRCaptureRig.hand_basis(Vector3.FORWARD, 0.0, true), "Default pose", true)
 			VRCaptureRig.pose_hand(root, VRCaptureRig.RIGHT_HAND_GLTF, right_pos,
-				VRCaptureRig.hand_basis(aim, roll_r, false))
+				VRCaptureRig.hand_basis(aim, roll_r, false), pose_r, false)
 
 	# Orb (production scene) + cone visual.
 	var orb: Node3D = CATALYST_ORB.instantiate()

@@ -27,8 +27,41 @@ class_name VRCaptureRig
 # ── Hand mesh paths ─────────────────────────────────────────────────────
 # Load the .gltf directly. The lowpoly_*.tscn scenes carry hand.gd,
 # which depends on XRToolsUserSettings autoload — won't compile headless.
-const LEFT_HAND_GLTF := preload("res://addons/godot-xr-tools/hands/model/Hand_Nails_low_L.gltf")
-const RIGHT_HAND_GLTF := preload("res://addons/godot-xr-tools/hands/model/Hand_Nails_low_R.gltf")
+# Hand_low_L/R (no nails) avoids the doubled-geometry artifact that the
+# Hand_Nails_low variants produce when their separate nails mesh isn't
+# materialised correctly.
+const LEFT_HAND_GLTF := preload("res://addons/godot-xr-tools/hands/model/Hand_low_L.gltf")
+const RIGHT_HAND_GLTF := preload("res://addons/godot-xr-tools/hands/model/Hand_low_R.gltf")
+
+# AnimationPlayer scenes — each holds 30+ named hand poses (Cup, OK,
+# Peace, Pinch Tight, Pistol, Rounded, Sign_Point, etc.). Instance one
+# of these as a child of the hand and play(pose_name) to apply a static
+# gesture.
+const LEFT_HAND_ANIM := preload("res://addons/godot-xr-tools/hands/animations/left/AnimationPlayer.tscn")
+const RIGHT_HAND_ANIM := preload("res://addons/godot-xr-tools/hands/animations/right/AnimationPlayer.tscn")
+
+# Default hand material (the same one base.tscn's hands use).
+const HAND_MATERIAL := preload("res://addons/godot-xr-tools/hands/materials/caucasian_hand.tres")
+
+# Curated subset of pose names from the AnimationPlayer — names suitable
+# for orb / catalyst gestures. The full list (see AnimationPlayer.tscn)
+# also has Pistol, OK, Peace, Sign_*, Horns, Metal, Surfer, etc.
+const POSE_DEFAULT     := "Default pose"
+const POSE_CUP         := "Cup"
+const POSE_ROUNDED     := "Rounded"
+const POSE_HOLD        := "Hold"
+const POSE_PINCH_FLAT  := "Pinch Flat"
+const POSE_PINCH_TIGHT := "Pinch Tight"
+const POSE_PINCH_UP    := "Pinch Up"
+const POSE_STRAIGHT    := "Straight"
+const POSE_GRIP        := "Grip"
+const POSE_GRIP_OPEN   := "Grip 5"
+const POSE_PISTOL      := "Pistol"
+const POSE_POINT       := "Sign_Point"
+const POSE_OK          := "OK"
+const POSE_PEACE       := "Peace"
+const POSE_PINKY       := "Pinky"
+const POSE_THUMB       := "Thumb"
 
 # ── Catalyst mode colours (shared between orb + cone-visual aids) ───────
 const MODE_COLORS := {
@@ -132,24 +165,64 @@ static func build_player_figure(
 
 # ── Hand posing ─────────────────────────────────────────────────────────
 
-## Instantiate a VR hand mesh at `pos` with the given `basis`, stop any
-## auto-playing animation so the rest pose is captured cleanly, and log
-## the resulting transform.
-static func pose_hand(parent: Node, scene: PackedScene, pos: Vector3, basis: Basis, verbose: bool = true) -> Node3D:
+## Instantiate a VR hand mesh at `pos` with the given `basis`, apply the
+## proper hand material, instance the AnimationPlayer that holds all the
+## named poses, and play the requested pose (e.g. POSE_CUP, POSE_POINT).
+## If pose_name is empty or unknown, holds the default pose.
+static func pose_hand(
+	parent: Node,
+	scene: PackedScene,
+	pos: Vector3,
+	basis: Basis,
+	pose_name: String = POSE_DEFAULT,
+	is_left: bool = true,
+	verbose: bool = true,
+) -> Node3D:
 	var hand: Node3D = scene.instantiate()
 	hand.position = pos
 	hand.transform.basis = basis
 	parent.add_child(hand)
+
+	# Material — without this the mesh renders washed-out / blown.
+	_apply_material_to_meshes(hand, HAND_MATERIAL)
+
+	# Stop any AnimationPlayers that came with the GLTF (rest skeletal
+	# motion) before we attach our own pose player.
 	for child in hand.get_children():
 		stop_animation_players(child)
+
+	# Pose: instance the pose AnimationPlayer scene and play(pose_name).
+	# The animation tracks target Armature/Skeleton3D bone paths which
+	# resolve once this player is a sibling of the GLTF's armature.
+	var anim_scene: PackedScene = LEFT_HAND_ANIM if is_left else RIGHT_HAND_ANIM
+	var anim_node: Node = anim_scene.instantiate()
+	hand.add_child(anim_node)
+	if anim_node is AnimationPlayer:
+		var ap := anim_node as AnimationPlayer
+		var target_pose := pose_name
+		if not ap.has_animation(target_pose):
+			target_pose = POSE_DEFAULT
+		if ap.has_animation(target_pose):
+			ap.play(target_pose)
+			# Hand poses are mostly single-frame; advance to the end so
+			# the skeleton settles on the target pose immediately.
+			ap.advance(ap.current_animation_length)
+
 	if verbose:
-		print("[vr_capture_rig] %s at %s, basis_x=%s y=%s z=%s" % [
-			hand.name, pos,
-			basis.x.snapped(Vector3.ONE * 0.01),
-			basis.y.snapped(Vector3.ONE * 0.01),
-			basis.z.snapped(Vector3.ONE * 0.01),
-		])
+		print("[vr_capture_rig] %s at %s, pose=%s" % [hand.name, pos, pose_name])
 	return hand
+
+
+## Apply a material override to every MeshInstance3D under `root`.
+## Uses material_override so the GLTF's surface materials are replaced
+## without modifying the imported scene's resources.
+static func _apply_material_to_meshes(root: Node, mat: Material) -> void:
+	if mat == null:
+		return
+	if root is MeshInstance3D:
+		(root as MeshInstance3D).material_override = mat
+	for c in root.get_children():
+		_apply_material_to_meshes(c, mat)
 
 
 ## Recursively stop any AnimationPlayer to freeze the model in rest pose.
