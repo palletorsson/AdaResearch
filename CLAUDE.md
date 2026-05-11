@@ -16,6 +16,20 @@
 
 - **Do not change core behavior like the grid system without deep consideration and notifying the user first.**
 
+## The Sieve — three questions for substantial decisions
+
+For any substantial design decision during a session, hold three questions. They are the operational form of the Self-Q recursion on QFEP (see `doc/ENTRY.md` § The Self-Q).
+
+1. **Does this thicken the cognitive water?** (relational handles, ways of moving through, things made thinkable)
+2. **What is foreclosed?** (thinking made harder under this structure)
+3. **What lives in the dark spot?** (what the encoding hides — generative habitat or sterilising seal?)
+
+Not a metric. A sieve. Q1 stops thin/optimised/scoreboard-shaped systems. Q2 stops confusing thick with good. Q3 stops over-specification.
+
+- **Tool:** `python tools/sieve.py <target>` (or `--record` to log a pass to `doc/sieve_passes/`)
+- **Skill:** `/sieve <target>` — conversation-routed
+- **Background:** [/blog/2026-05-11-cognitive-water](http://localhost:3003/blog/2026-05-11-cognitive-water), [/blog/2026-05-11-self-colonial-recognition](http://localhost:3003/blog/2026-05-11-self-colonial-recognition)
+
 ## Session Bootstrap — Fold first, file-walk second
 
 > *Five-minute rule: don't grep, don't glob, don't read 14 files when one fold answers the question. The fractal database is the project's compressed self-image.*

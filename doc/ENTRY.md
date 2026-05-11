@@ -44,6 +44,36 @@ QFE = F - lambda*E(S) + phi*dE(S,t)
 
 ---
 
+## The Self-Q (Recursive QFEP)
+
+The Q in QFEP was always *Queer* — the critical move on Friston's Free Energy Principle making it relational, non-binary, plural. As of 2026-05-11 the Q is **plural**: Queer + Self.
+
+The Self-Q adds the recognition that **every F, E, λ, φ choice is a maker-choice**, made by someone already shaped by prior structures they have made themselves think with. Making structure is, partially and ineliminably, a colonial gesture on your own future cognition. The formula was always recursive; we just hadn't named the recursion.
+
+The Self-Q expands the formula's reading:
+
+| Symbol | System reading (Queer-Q) | Maker reading (Self-Q) |
+|--------|--------------------------|-----------------------|
+| **F** | Order, prediction | What is the maker thickening? |
+| **λ·E(S)** | Entropy weighted | What is foreclosed by this choice? |
+| **φ·dE(S,t)** | Rate sensitivity | Is the dark spot generative or sterilising? |
+| *(implicit)* | — | The maker's own cognitive history |
+
+In practice: every substantial design decision passes through a **three-question sieve**:
+
+1. **Does this thicken the cognitive water?** (relational handles, ways of moving through, things made thinkable)
+2. **What is foreclosed?** (thinking made harder under this structure)
+3. **What lives in the dark spot?** (what the encoding hides — generative habitat or sterilising seal?)
+
+Not a metric. A sieve. The first stops thin/optimised/scoreboard-shaped systems. The second stops confusing thick with good. The third stops over-specification.
+
+**See:**
+- Blog: `/blog/2026-05-11-cognitive-water` (the frame), `/blog/2026-05-11-self-colonial-recognition` (the pattern)
+- Tool: `python tools/sieve.py <target>` — surface the questions for any decision
+- Skill: `/sieve <target>` — same, conversation-routed
+
+---
+
 ## Project Structure (Truth Sources)
 
 ### Primary Truth (Authoritative)
