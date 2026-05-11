@@ -18,6 +18,12 @@ const CATALYST_ORB := preload("res://commons/hazards/becoming_catalyst/catalyst_
 # Use catalyst_foe — its personality-stage colour signature (grey/red/tan/yellow/green)
 # is the cleanest still-image evidence of state change.
 const TEST_CREATURE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn")
+# Real VR hand meshes — loading the GLTF models directly. The full
+# lowpoly hand scenes carry hand.gd, which depends on XRToolsUserSettings
+# autoload and won't compile in headless capture. The GLBs are just the
+# skinned mesh + skeleton in rest pose — exactly what we want for a still.
+const LEFT_HAND_SCENE := preload("res://addons/godot-xr-tools/hands/model/Hand_Nails_low_L.gltf")
+const RIGHT_HAND_SCENE := preload("res://addons/godot-xr-tools/hands/model/Hand_Nails_low_R.gltf")
 
 
 func _init() -> void:
@@ -105,16 +111,17 @@ func _capture(mode: String) -> void:
 	var cone_length: float
 
 	if mode == "two_handed":
-		# Palms together, extended out from chest, aimed down at a floor creature.
-		# (In VR the player naturally tilts palms toward what they want to dose.)
-		left_pos = Vector3(-0.14, 1.30, -0.50)
-		right_pos = Vector3(0.14, 1.30, -0.50)
+		# For the capture: hands slightly wider apart than the detector's
+		# 30 cm threshold so both are clearly framed past the orb (in real
+		# VR play they'd be closer; gameplay uses 30 cm proximity).
+		left_pos = Vector3(-0.20, 1.30, -0.50)
+		right_pos = Vector3(0.20, 1.30, -0.50)
 		orb_origin = (left_pos + right_pos) * 0.5
 		orb_dir = Vector3(0, -0.55, -1).normalized()
 		two_handed = true
 		cone_length = 2.2
 	else:
-		# Right hand presenting forward + down, left hand at hip
+		# Right hand presenting forward + down, left hand resting at hip.
 		left_pos = Vector3(-0.25, 1.05, 0.05)
 		right_pos = Vector3(0.18, 1.28, -0.50)
 		orb_origin = right_pos
@@ -122,8 +129,23 @@ func _capture(mode: String) -> void:
 		two_handed = false
 		cone_length = 1.9
 
-	_add_hand(root, left_pos, skin_mat, mode == "one_handed" and false, true)
-	_add_hand(root, right_pos, skin_mat, true, false)
+	# Hands — instantiate the VR hand meshes. Each hand needs a basis
+	# that points fingers along orb_dir and rotates the model so the two
+	# hands appear as distinct units (left palm faces right hand, right
+	# palm faces left hand). The LEFT model is built for the left-hand
+	# controller; the RIGHT model is its mirror — so the same "fingers
+	# forward, palm inward" intent maps to MIRRORED rotations.
+	if mode == "two_handed":
+		_pose_hand(root, LEFT_HAND_SCENE, left_pos,
+			_hand_basis(orb_dir, +1.0, true))
+		_pose_hand(root, RIGHT_HAND_SCENE, right_pos,
+			_hand_basis(orb_dir, -1.0, false))
+	else:
+		# Left hand at rest at hip, right hand presenting forward.
+		_pose_hand(root, LEFT_HAND_SCENE, left_pos,
+			_hand_basis(Vector3.FORWARD, +1.0, true))
+		_pose_hand(root, RIGHT_HAND_SCENE, right_pos,
+			_hand_basis(orb_dir, 0.0, false))
 
 	# Orb (instantiated directly; no detector)
 	var orb: Node3D = CATALYST_ORB.instantiate()
@@ -191,10 +213,12 @@ func _capture(mode: String) -> void:
 	# head + both hands + orb + creature. Using look_at_from_position
 	# avoids the tree-state race that look_at(target) hits on the first
 	# capture (before current_scene is set).
+	# Elevated 3/4 from above-right: looking down at the gesture so the
+	# hands separate visually rather than aligning along one line of sight.
 	var cam := Camera3D.new()
-	cam.fov = 52.0
-	var cam_pos := Vector3(1.55, 1.85, 0.45)
-	var cam_target := Vector3(-0.05, 0.80, -1.50)
+	cam.fov = 50.0
+	var cam_pos := Vector3(1.30, 2.10, 0.35)
+	var cam_target := Vector3(-0.05, 0.85, -1.40)
 	cam.transform = Transform3D().looking_at(
 		cam_target - cam_pos,
 		Vector3.UP,
@@ -242,33 +266,63 @@ func _capture(mode: String) -> void:
 	print("[orb_gesture] saved %s" % mode)
 
 
-func _add_hand(parent: Node, pos: Vector3, skin_mat: StandardMaterial3D, _palm_forward: bool, _is_left: bool) -> void:
-	var hand_root := Node3D.new()
-	hand_root.position = pos
-	parent.add_child(hand_root)
-	# Palm (small flattened box)
-	var palm := MeshInstance3D.new()
-	var palm_mesh := BoxMesh.new()
-	palm_mesh.size = Vector3(0.085, 0.025, 0.105)
-	palm.mesh = palm_mesh
-	palm.material_override = skin_mat
-	hand_root.add_child(palm)
-	# Forearm hint (cylinder pointing back toward shoulder area)
-	var forearm := MeshInstance3D.new()
-	var fa_mesh := CylinderMesh.new()
-	fa_mesh.top_radius = 0.028
-	fa_mesh.bottom_radius = 0.032
-	fa_mesh.height = 0.22
-	forearm.mesh = fa_mesh
-	forearm.material_override = skin_mat
-	# Aim back toward torso position (0, 1.20, 0)
-	var to_torso: Vector3 = Vector3(0, 1.20, 0) - pos
-	forearm.position = to_torso * 0.5
-	if to_torso.length_squared() > 0.001:
-		var fa_basis := Basis()
-		var y := to_torso.normalized()
-		var ref := Vector3.UP if abs(y.dot(Vector3.UP)) < 0.99 else Vector3.RIGHT
-		var x := y.cross(ref).normalized()
-		var z := x.cross(y).normalized()
-		fa_basis = Basis(x, y, z)
-		forearm.transform.basis = fa_basis
+## Instantiate a VR hand model at pos with the given basis, and stop any
+## auto-playing animations so the static pose is what we set, not a
+## mid-grip frame. Prints final transform for diagnosis.
+func _pose_hand(parent: Node, scene: PackedScene, pos: Vector3, basis: Basis) -> void:
+	var hand: Node3D = scene.instantiate()
+	hand.position = pos
+	hand.transform.basis = basis
+	parent.add_child(hand)
+	for child in hand.get_children():
+		_stop_animation_players(child)
+	print("[hand] %s at %s, basis_x=%s y=%s z=%s" % [
+		hand.name, pos,
+		basis.x.snapped(Vector3.ONE * 0.01),
+		basis.y.snapped(Vector3.ONE * 0.01),
+		basis.z.snapped(Vector3.ONE * 0.01),
+	])
+
+
+static func _stop_animation_players(node: Node) -> void:
+	if node is AnimationPlayer:
+		(node as AnimationPlayer).stop()
+		(node as AnimationPlayer).process_mode = Node.PROCESS_MODE_DISABLED
+	for c in node.get_children():
+		_stop_animation_players(c)
+
+
+## Build a Basis for a VR hand pose.
+##
+##  point_dir — world direction along which fingers should point
+##  roll      — +1.0 rotates the hand so palm faces +X axis (right hand
+##              palm faces left hand for two-handed gesture); -1.0 mirrors;
+##              0.0 leaves palm down (typical resting/presenting pose).
+##  is_left   — true for left-hand mesh; both meshes are intrinsically
+##              mirrored, so we apply an additional 180° yaw to the right
+##              hand model so its natural-side palm faces the left hand.
+##
+## XR Tools hand model convention (verified empirically: identity basis
+## leaves fingers pointing along world -Z with palm facing world +Y):
+##   local +X → thumb side (left for left mesh, right for right mesh)
+##   local +Y → palm-up direction
+##   local -Z → fingers forward
+static func _hand_basis(point_dir: Vector3, roll: float, is_left: bool) -> Basis:
+	# Start from identity (fingers along -Z, palm facing +Y).
+	var b := Basis.IDENTITY
+	# Roll around the model's local -Z axis (fingers axis) to bring palm
+	# from "up" to facing inward / sideways. +90° rolls palm to face +X,
+	# -90° to face -X.
+	if abs(roll) > 0.01:
+		b = b.rotated(Vector3.FORWARD, deg_to_rad(90.0 * roll))
+	# Mirror right hand 180° around Y so it points across to the left.
+	if not is_left:
+		b = b.rotated(Vector3.UP, PI)
+	# Now rotate everything so model's local -Z aligns with world point_dir.
+	var current_forward := -b.z
+	var target_forward := point_dir.normalized()
+	var rot_axis := current_forward.cross(target_forward)
+	if rot_axis.length_squared() > 0.0001:
+		var ang := current_forward.angle_to(target_forward)
+		b = Basis(rot_axis.normalized(), ang) * b
+	return b.orthonormalized()
