@@ -39,11 +39,9 @@ signal personality_changed(from_personality: String, to_personality: String)
 
 
 # ── Personality arc ─────────────────────────────────────────────────
-# Each catalyst hit walks the creature ONE step along this list. The
-# string values match HazardCreatureBase._apply_personality matches.
-const PERSONALITY_ARC: Array[String] = [
-	"foe", "wary", "neutral", "curious", "friend",
-]
+# Inherited from HazardCreatureBase as of 2026-05-11 (moved up so all
+# subclasses can be walked along the arc by the catalyst orb's
+# receive_catalyst_field). See hazard_creature_base.gd.
 
 
 # ── Foe Mode ────────────────────────────────────────────────────────

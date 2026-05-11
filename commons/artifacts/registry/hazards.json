@@ -1,5 +1,32 @@
 {
   "artifacts": {
+    "orb_test_rig": {
+      "category": "hazards",
+      "complexity": "advanced",
+      "description": "Test fixture for the orb gesture slice. Place in a map to bootstrap OrbGestureDetector (under XR rig) and CatalystOrb (under self), and optionally spawn three test creatures around itself. Two-handed forms a sustained dose; one-handed fires a burst with per-hand cooldown. Replaces the catalyst projectile mechanic.",
+      "dev_themes": [
+        "catalyst",
+        "gesture",
+        "self-Q"
+      ],
+      "include_in_map_data": true,
+      "interaction": "immersive",
+      "lookup_name": "orb_test_rig",
+      "map_ready": true,
+      "map_sequences": [
+        "hazards"
+      ],
+      "name": "Orb Gesture Test Rig",
+      "qfep_connection": "Capability-as-relation. The orb is the relation between the palms while the gesture is held; it dissolves when palms part. No inventory item — see /blog/2026-05-11-cognitive-water and doc/ORB_GESTURE_SLICE.md.",
+      "scene": "res://commons/hazards/becoming_catalyst/orb_test_rig.tscn",
+      "tags": [
+        "catalyst",
+        "orb",
+        "gesture",
+        "test",
+        "self-Q"
+      ]
+    },
     "pusher_block": {
       "category": "hazards",
       "complexity": "intermediate",

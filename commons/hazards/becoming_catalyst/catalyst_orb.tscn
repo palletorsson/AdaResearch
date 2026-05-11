@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://corbcatorb001"]
+
+[ext_resource type="Script" path="res://commons/hazards/becoming_catalyst/catalyst_orb.gd" id="1_orb"]
+
+[node name="CatalystOrb" type="Node3D"]
+script = ExtResource("1_orb")

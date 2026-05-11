@@ -9,6 +9,14 @@ signal enemy_destroyed(enemy: Node3D)
 
 enum BaseState { IDLE, PATROL, DETECT, CHASE, ATTACK, STUNNED, DEAD }
 
+# Personality arc — each catalyst dose walks the creature ONE step.
+# Mirrors the constant in catalyst_foe; promoted to the base class so
+# every HazardCreatureBase child can be advanced by the catalyst orb's
+# receive_catalyst_field(). String values match _apply_personality cases.
+const PERSONALITY_ARC: Array[String] = [
+	"foe", "wary", "neutral", "curious", "friend",
+]
+
 # ── Exports ──────────────────────────────────────────────────────────────
 
 @export_group("Combat")
@@ -29,6 +37,20 @@ enum BaseState { IDLE, PATROL, DETECT, CHASE, ATTACK, STUNNED, DEAD }
 ## Personality determines high-level behavior: foe attacks, friend follows.
 ## Set by ProximitySpawner or configure(). Defaults to "foe" (legacy behavior).
 var _personality: String = "foe"
+
+# ── Catalyst field reception ────────────────────────────────────────────
+# Replaces the projectile-hit path. CatalystOrb's cone calls
+# receive_catalyst_field(dt, mode) per-frame while this creature is
+# inside the cone. Accumulates a dose; at threshold, advances personality
+# one step along PERSONALITY_ARC. Auto-resets if the creature has been
+# out of any field for catalyst_dose_idle_reset seconds.
+@export_group("Catalyst field")
+@export var catalyst_dose_window: float = 0.6
+@export var catalyst_dose_idle_reset: float = 0.4
+
+var _catalyst_dose: float = 0.0
+var _catalyst_last_tick: float = -999.0
+var _catalyst_last_mode: String = ""
 
 # Personality-derived behavior params (set in _apply_personality)
 var _can_chase: bool = true
@@ -449,6 +471,43 @@ func _apply_personality() -> void:
 			_follow_player = true
 			_approach_speed_factor = 0.6
 			contact_damage = 0.0
+
+# ── Catalyst field reception ────────────────────────────────────────────
+
+func receive_catalyst_field(dt: float, mode: String) -> void:
+	# Already at the friend pole — nothing more to advance to.
+	if _personality == "friend":
+		return
+	if dt <= 0.0:
+		return
+	var now: float = float(Time.get_ticks_msec()) * 0.001
+	# If the dose has gone stale (creature stepped out of any cone),
+	# reset before accumulating new contact.
+	if now - _catalyst_last_tick > catalyst_dose_idle_reset:
+		_catalyst_dose = 0.0
+	_catalyst_last_tick = now
+	_catalyst_last_mode = mode
+	_catalyst_dose += dt
+	if _catalyst_dose >= catalyst_dose_window:
+		_catalyst_dose = 0.0
+		_advance_catalyst_personality(mode)
+
+
+func _advance_catalyst_personality(mode: String) -> void:
+	# Subclass override: catalyst_foe routes through hit_by_catalyst_mode
+	# to do mode-locking + visual pop. For other creatures, advance one
+	# personality step along the arc using the base machinery.
+	if has_method("hit_by_catalyst_mode"):
+		# Use a neutral catalyst hue if the subclass needs a colour arg.
+		call("hit_by_catalyst_mode", Color(0.9, 0.95, 1.0), mode)
+		return
+	var idx: int = PERSONALITY_ARC.find(_personality)
+	if idx < 0:
+		idx = 0
+	var next_p: String = PERSONALITY_ARC[min(idx + 1, PERSONALITY_ARC.size() - 1)]
+	if next_p != _personality:
+		set_personality(next_p)
+
 
 func _query_hazard_manager() -> void:
 	var hm = get_node_or_null("/root/HazardManager")

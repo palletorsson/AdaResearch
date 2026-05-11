@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://corbgdetect001"]
+
+[ext_resource type="Script" path="res://commons/hazards/becoming_catalyst/orb_gesture_detector.gd" id="1_detect"]
+
+[node name="OrbGestureDetector" type="Node3D"]
+script = ExtResource("1_detect")

@@ -1,0 +1,102 @@
+{
+  "map_info": {
+    "name": "Orb Gesture Test Chamber",
+    "lookup_name": "OrbTestChamber",
+    "description": "Minimal tutorial-of-one for the orb gesture slice. The rig spawns three creatures around the player; bring palms together and project the field. No UI, no numbers, no toasts — felt right, not legible right.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 11,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "test",
+      "category": "catalyst",
+      "estimated_time": "3 minutes",
+      "learning_objectives": [
+        "Two-handed sustained dose",
+        "One-handed burst with per-hand cooldown",
+        "Catalyst as relation, not weapon"
+      ]
+    }
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return",
+      "properties": {
+        "action": "back_to_lab"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.35, 0.38, 0.42],
+    "ambient_energy": 0.55,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.4, -0.7, -0.4],
+      "color": [1.0, 0.96, 0.88],
+      "energy": 1.1
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": false,
+    "enable_physics": true,
+    "auto_reveal_on_entry": true,
+    "initial_tile_visibility": "all_visible",
+    "background": {
+      "type": "color",
+      "color": [0.18, 0.22, 0.28]
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","s"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","orb_test_rig:0:0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}
