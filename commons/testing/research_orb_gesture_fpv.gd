@@ -30,6 +30,9 @@ func _init() -> void:
 		dir.make_dir_recursive("catalyst_runs/orb_gesture_research")
 
 	# Each entry: id, params dict
+	# orb_scale / orb_emission_mult / orb_alpha are optional — used by
+	# the forming-arc variants (09, 10, 11) to show the orb partway
+	# through materialisation.
 	var variants: Array = [
 		{"id": "01_orb_only",            "show_hands": false, "two_handed": true, "roll_l": 0.0, "roll_r": 0.0,  "spacing": 0.20, "aim": Vector3(0, -0.55, -1), "label": "Just the orb — no hands"},
 		{"id": "02_two_handed_cupping",  "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.20, "aim": Vector3(0, -0.55, -1), "label": "Two-handed, palms cupping inward"},
@@ -39,6 +42,10 @@ func _init() -> void:
 		{"id": "06_one_handed_palm_up",  "show_hands": true,  "two_handed": false,"roll_l": 0.0,  "roll_r": -2.0, "spacing": 0.0,  "aim": Vector3(0.05, -0.30, -1), "label": "One-handed, palm up offering"},
 		{"id": "07_one_handed_burst",    "show_hands": true,  "two_handed": false,"roll_l": 0.0,  "roll_r": 0.0,  "spacing": 0.0,  "aim": Vector3(0.05, -0.55, -1), "label": "One-handed, burst aimed down"},
 		{"id": "08_two_handed_wide",     "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.28, "aim": Vector3(0, -0.55, -1), "label": "Two-handed, wider stance"},
+		# Forming arc: hands approach from far, orb materialises gradually.
+		{"id": "09_two_handed_approach", "show_hands": true,  "two_handed": true, "roll_l": +0.6, "roll_r": -0.6, "spacing": 0.32, "aim": Vector3(0, -0.55, -1), "label": "Two-handed approach — hands near threshold, orb just appearing", "orb_scale": 0.35, "orb_emission_mult": 0.4, "orb_alpha": 0.45},
+		{"id": "10_two_handed_forming",  "show_hands": true,  "two_handed": true, "roll_l": +0.8, "roll_r": -0.8, "spacing": 0.22, "aim": Vector3(0, -0.55, -1), "label": "Two-handed forming — gesture committing, orb materialising", "orb_scale": 0.65, "orb_emission_mult": 0.75, "orb_alpha": 0.75},
+		{"id": "11_two_handed_held",     "show_hands": true,  "two_handed": true, "roll_l": +1.0, "roll_r": -1.0, "spacing": 0.14, "aim": Vector3(0, -0.55, -1), "label": "Two-handed held — hands close, orb fully alive", "orb_emission_mult": 1.3},
 	]
 
 	for v in variants:
@@ -88,16 +95,29 @@ func _capture(v: Dictionary) -> void:
 	root.add_child(orb)
 	await process_frame
 	var orb_light: OmniLight3D = null
+	var orb_mesh: MeshInstance3D = null
 	for c in orb.get_children():
 		if c is OmniLight3D:
 			orb_light = c
-			break
+		elif c is MeshInstance3D:
+			orb_mesh = c
 	if orb_light != null:
 		orb_light.light_energy = 0.9
 		orb_light.omni_range = 0.8
 
+	# Forming-arc cone is also weaker — scales with orb_scale so the
+	# field reach reads as "still building" alongside the orb.
+	var cone_scale: float = 1.0
+	if "orb_scale" in v:
+		cone_scale = clamp(float(v["orb_scale"]) + 0.2, 0.3, 1.0)
 	var cone_vis := VRCaptureRig.build_cone_visual(
-		orb_origin, aim, cone_length, VRCaptureRig.color_for_mode("primitives"))
+		orb_origin, aim, cone_length * cone_scale,
+		VRCaptureRig.color_for_mode("primitives"),
+		0.35,
+		0.05,
+		0.18 * cone_scale,
+		0.45 * cone_scale,
+	)
 	root.add_child(cone_vis)
 
 	# First-person camera looking down at the gesture.
@@ -118,10 +138,19 @@ func _capture(v: Dictionary) -> void:
 	if orb.has_method("form"):
 		orb.call("form", "primitives", orb_origin, aim, two_handed)
 
+	# Forming-arc tweaks: apply AFTER form() so we override its defaults.
+	# Re-apply each frame because update_state() rewrites the visual.
+	var orb_scale_override: float = float(v.get("orb_scale", -1.0))
+	var orb_emission_override: float = float(v.get("orb_emission_mult", -1.0))
+	var orb_alpha_override: float = float(v.get("orb_alpha", -1.0))
+
 	for _i in range(60):
 		await process_frame
 		if orb.has_method("update_state"):
-			orb.call("update_state", "primitives", orb_origin, aim, cone_length, two_handed)
+			orb.call("update_state", "primitives", orb_origin, aim, cone_length * cone_scale, two_handed)
+		_apply_orb_overrides(orb_mesh, orb_scale_override, orb_emission_override, orb_alpha_override)
+		if orb_light != null and orb_emission_override > 0.0:
+			orb_light.light_energy = 0.9 * orb_emission_override
 
 	# Capture
 	var vp: Viewport = root.get_viewport()
@@ -135,3 +164,19 @@ func _capture(v: Dictionary) -> void:
 	var out_path: String = "user://catalyst_runs/orb_gesture_research/%s.png" % id
 	img.save_png(out_path)
 	print("[orb_research] saved %s — %s" % [id, v["label"]])
+
+
+## Apply forming-arc overrides to the orb visual after form() has run.
+## Each override is "use this value if > 0.0, otherwise leave as form set it".
+func _apply_orb_overrides(mesh: MeshInstance3D, scale_override: float, emission_override: float, alpha_override: float) -> void:
+	if mesh == null:
+		return
+	if scale_override > 0.0:
+		mesh.scale = Vector3.ONE * scale_override
+	var mat: StandardMaterial3D = mesh.material_override as StandardMaterial3D
+	if mat == null:
+		return
+	if emission_override > 0.0:
+		mat.emission_energy_multiplier = max(0.1, 3.0 * emission_override)
+	if alpha_override > 0.0:
+		mat.albedo_color.a = alpha_override
