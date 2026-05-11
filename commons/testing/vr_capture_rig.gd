@@ -347,6 +347,94 @@ static func color_for_mode(mode_id: String) -> Color:
 	return MODE_COLORS.get(mode_id, DEFAULT_MODE_COLOR)
 
 
+## Build a capture-only stand-in for the catalyst bracelet — a short
+## cylindrical band wrapped around the wrist, with three gems showing the
+## catalyst modes (centre gem = active). The real bracelet (capacity_bracelet)
+## carries game logic; this is still-image visualisation only.
+##
+##   pos:               world position of the wrist
+##   forearm_dir:       direction the forearm extends (away from hand). The
+##                      band's cylinder axis aligns with this. For natural
+##                      rest, this is ~Vector3(0.3, -0.1, 0.9).normalized().
+##   active_mode_color: hue for the centre gem
+static func build_bracelet(
+	parent: Node,
+	pos: Vector3,
+	forearm_dir: Vector3 = Vector3(0.3, -0.1, 0.9),
+	active_mode_color: Color = Color(0.40, 0.95, 0.60),
+) -> Node3D:
+	var root := Node3D.new()
+	root.name = "BraceletStandin"
+	root.position = pos
+	# Orient root so its local +Y axis aligns with forearm direction —
+	# then the cylinder's default Y-axis becomes the wrist axis.
+	var up_dir := forearm_dir.normalized()
+	var ref_v := Vector3.UP if abs(up_dir.dot(Vector3.UP)) < 0.99 else Vector3.RIGHT
+	var rx := up_dir.cross(ref_v).normalized()
+	var rz := rx.cross(up_dir).normalized()
+	root.transform.basis = Basis(rx, up_dir, rz)
+	parent.add_child(root)
+
+	# Torus ring — bracelet body with a visible hole so it reads as
+	# wrap-around rather than a solid disk. Torus default axis is local
+	# +Y, which the root's basis has already aligned with the forearm
+	# direction — so no inner rotation is needed.
+	var band := MeshInstance3D.new()
+	var torus := TorusMesh.new()
+	torus.inner_radius = 0.036
+	torus.outer_radius = 0.044
+	torus.ring_segments = 36
+	torus.rings = 12
+	band.mesh = torus
+	var band_mat := StandardMaterial3D.new()
+	band_mat.albedo_color = Color(0.18, 0.18, 0.22)
+	band_mat.metallic = 0.7
+	band_mat.roughness = 0.30
+	band.material_override = band_mat
+	root.add_child(band)
+
+	# Three gems on top of the band — sit ON the surface (radius outward).
+	var gem_colors := [
+		Color(0.35, 0.32, 0.40),
+		active_mode_color,
+		Color(0.35, 0.32, 0.40),
+	]
+	for i in range(3):
+		var gem := MeshInstance3D.new()
+		var sphere := SphereMesh.new()
+		sphere.radius = 0.009
+		sphere.height = 0.018
+		gem.mesh = sphere
+		var gem_mat := StandardMaterial3D.new()
+		gem_mat.albedo_color = gem_colors[i]
+		gem_mat.emission_enabled = true
+		gem_mat.emission = gem_colors[i]
+		gem_mat.emission_energy_multiplier = 3.0 if i == 1 else 0.8
+		gem_mat.metallic = 0.4
+		gem.material_override = gem_mat
+		# Gems on the torus's outer ring, on the TOP-facing side.
+		# Ring lies in local XZ plane; local +Z aligns with world +Y
+		# (top of the wrist) given the root basis. So we place gems
+		# clustered around local +Z direction.
+		var angle := deg_to_rad((i - 1) * 22.0 + 90.0)
+		var r := 0.044
+		gem.position = Vector3(cos(angle) * r, 0, sin(angle) * r)
+		if i == 1:
+			gem.scale = Vector3.ONE * 1.4
+		root.add_child(gem)
+
+	# Subtle glow from the active gem. Pulled in close + low energy so
+	# it lights only the gem itself, not the surrounding hand.
+	var glow := OmniLight3D.new()
+	glow.light_color = active_mode_color
+	glow.light_energy = 0.10
+	glow.omni_range = 0.05
+	glow.position = Vector3(0, 0, 0.045)
+	root.add_child(glow)
+
+	return root
+
+
 # ── Camera helpers ──────────────────────────────────────────────────────
 
 ## Build a Camera3D positioned at `pos` looking at `target`, without
