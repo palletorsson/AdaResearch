@@ -35,6 +35,9 @@ const CAMERA_PITCH: float = -0.30
 const FRAME_PADDING: float = 2.05
 
 var _output_dir: String = "user://props_shape_gallery"
+## Public URL base for image paths in the manifest. Manifests must use
+## absolute paths because the page URL strips the slug otherwise.
+const PUBLIC_BASE: String = "/props-shape-gallery"
 var _entries: Array = []
 var _viewport: SubViewport
 var _scene_holder: Node3D
@@ -239,6 +242,7 @@ func _capture_and_record(spec: Dictionary, index: int, aabb: AABB) -> void:
 			dna_clean[k] = v
 
 	var sidecar := {
+		"id": stem,
 		"prop": prop,
 		"variant_id": variant,
 		"label": spec.get("label", variant),
@@ -247,13 +251,14 @@ func _capture_and_record(spec: Dictionary, index: int, aabb: AABB) -> void:
 		"shape_axis": spec.get("shape_axis", ""),
 		"dna": dna_clean,
 		"aabb_size": [aabb.size.x, aabb.size.y, aabb.size.z],
-		"image": "%s.png" % stem,
+		"image": "%s/%s.png" % [PUBLIC_BASE, stem],
 	}
 	var sf := FileAccess.open("%s/%s.json" % [_output_dir, stem], FileAccess.WRITE)
 	sf.store_string(JSON.stringify(sidecar, "\t"))
 	sf.close()
 
 	_entries.append({
+		"id": stem,
 		"index": index,
 		"prop": prop,
 		"variant_id": variant,
@@ -261,8 +266,8 @@ func _capture_and_record(spec: Dictionary, index: int, aabb: AABB) -> void:
 		"subtitle": spec.get("subtitle", ""),
 		"notes": spec.get("notes", ""),
 		"shape_axis": spec.get("shape_axis", ""),
-		"image": "%s.png" % stem,
-		"config": "%s.json" % stem,
+		"image": "%s/%s.png" % [PUBLIC_BASE, stem],
+		"config": "%s/%s.json" % [PUBLIC_BASE, stem],
 		"dna": dna_clean,
 	})
 	print("[%2d] %s — %s saved (aabb %.2f×%.2f×%.2f)"

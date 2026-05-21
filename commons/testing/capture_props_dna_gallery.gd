@@ -36,6 +36,10 @@ const CAMERA_PITCH: float = -0.30
 const FRAME_PADDING: float = 1.95
 
 var _output_dir: String = "user://props_dna_gallery"
+## Public URL base for image paths in the manifest. Browsers resolve
+## relative paths against the page URL, which strips the gallery slug
+## off when the page route is at root — so we publish absolute paths.
+const PUBLIC_BASE: String = "/props-dna-gallery"
 var _entries: Array = []
 var _viewport: SubViewport
 var _scene_holder: Node3D
@@ -251,6 +255,7 @@ func _capture_and_record(spec: Dictionary, index: int, aabb: AABB) -> void:
 			dna_clean[k] = v
 
 	var sidecar := {
+		"id": stem,
 		"prop": prop,
 		"variant_id": variant,
 		"label": spec.get("label", variant),
@@ -258,21 +263,22 @@ func _capture_and_record(spec: Dictionary, index: int, aabb: AABB) -> void:
 		"notes": spec.get("notes", ""),
 		"dna": dna_clean,
 		"aabb_size": [aabb.size.x, aabb.size.y, aabb.size.z],
-		"image": "%s.png" % stem,
+		"image": "%s/%s.png" % [PUBLIC_BASE, stem],
 	}
 	var sf := FileAccess.open("%s/%s.json" % [_output_dir, stem], FileAccess.WRITE)
 	sf.store_string(JSON.stringify(sidecar, "\t"))
 	sf.close()
 
 	_entries.append({
+		"id": stem,
 		"index": index,
 		"prop": prop,
 		"variant_id": variant,
 		"label": spec.get("label", variant),
 		"subtitle": spec.get("subtitle", ""),
 		"notes": spec.get("notes", ""),
-		"image": "%s.png" % stem,
-		"config": "%s.json" % stem,
+		"image": "%s/%s.png" % [PUBLIC_BASE, stem],
+		"config": "%s/%s.json" % [PUBLIC_BASE, stem],
 		"dna": dna_clean,
 	})
 	print("[%2d] %s — %s saved (%dx%d, aabb %.2f×%.2f×%.2f)"
