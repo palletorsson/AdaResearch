@@ -3536,6 +3536,776 @@
 				"measured_footprint_cells": 2,
 				"footprint_source": "designed"
 			}
+		},
+		"autoclave": {
+			"lookup_name": "autoclave",
+			"scene": "res://commons/artifacts/autoclave/autoclave.tscn",
+			"class_name": "Autoclave",
+			"name": "Autoclave",
+			"description": "Front-loading sterilizer drum on a rectangular cabinet — chemistry / biolab vocabulary. Glossy-steel cabinet with a round dark-steel door inset into the front face, a wheel-handle latch on the right of the door, a darker recessed interior cavity visible behind it when the door is open, a small status LED in the top-right corner, a Portal-orange accent stripe across the top, and an 'AUTOCLAVE' Label3D above the door. The architectural form of HEAT-AND-PRESSURE-AS-PURIFICATION.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"autoclave",
+				"sterilizer",
+				"chemistry",
+				"biolab",
+				"appliance"
+			],
+			"parameters": {
+				"body_width": "Cabinet width in meters (default 0.6)",
+				"body_height": "Cabinet height in meters (default 0.9)",
+				"body_depth": "Cabinet depth in meters (default 0.7)",
+				"door_radius": "Round front door radius in meters (default 0.22)",
+				"body_color": "Cabinet glossy-steel color (default light steel)",
+				"door_color": "Door dark-steel color (default dark steel)",
+				"door_open": "Bool — when true the door swings 90° open around its left edge",
+				"interior_color": "Recessed interior cavity color (default very dark steel)",
+				"accent_color": "Top accent stripe color (default Portal orange)",
+				"status_indicator": "Bool — render a small emissive LED in the top-right corner",
+				"status_color": "LED color when running (default safety green)",
+				"signage_text": "Label3D text above the door (default 'AUTOCLAVE')",
+				"signage_color": "Signage label color (default white)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"sterilization",
+				"chemistry"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate_segments"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~280"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"fume_hood",
+					"glove_box",
+					"specimen_jar"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"chemistry_flask": {
+			"lookup_name": "chemistry_flask",
+			"scene": "res://commons/artifacts/chemistry_flask/chemistry_flask.tscn",
+			"class_name": "ChemistryFlask",
+			"name": "Chemistry Flask",
+			"description": "Bench-top chemistry flask — Erlenmeyer (wide cone + short neck), round-bottom (flattened sphere + thin neck), or volumetric (small bulb + long thin measurement neck). Translucent glass body, interior coloured content level filling content_height_fraction, optional dark stopper on top, small Label3D on the front naming the contents ('H₂SO₄'). The architectural form of A REAGENT WITH A NAME.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"chemistry",
+				"flask",
+				"glassware",
+				"reagent"
+			],
+			"parameters": {
+				"flask_shape": "'erlenmeyer' | 'round_bottom' | 'volumetric' — dispatches body geometry (default 'erlenmeyer')",
+				"flask_height": "Total flask height in meters (default 0.20)",
+				"flask_max_radius": "Widest point of the flask body in meters (default 0.06)",
+				"glass_color": "Translucent glass color with alpha (default faint blue)",
+				"content_height_fraction": "0-1 fraction of flask_height filled with content (default 0.55)",
+				"content_color": "Interior fluid color with alpha (default emerald translucent)",
+				"has_stopper": "Bool — render a stopper on top of the neck (default true)",
+				"stopper_color": "Stopper color (default dark grey)",
+				"label_text": "Front label text naming the contents (default 'H₂SO₄')",
+				"label_color": "Label color (default white)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"chemistry",
+				"glassware"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"scale_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "transparent",
+					"key_properties": [
+						"transparency",
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~220"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"test_tube_rack",
+					"clamp_stand",
+					"microscope",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"clamp_stand": {
+			"lookup_name": "clamp_stand",
+			"scene": "res://commons/artifacts/clamp_stand/clamp_stand.tscn",
+			"class_name": "ClampStand",
+			"name": "Clamp Stand",
+			"description": "Bench retort stand with parametric clamps — chemistry-lab vocabulary. Heavy rectangular cast-iron base, thin vertical pole offset toward -X, 0-3 horizontal clamp arms at evenly-spaced heights with 2-prong grippers, optional small stylised Erlenmeyer flask held by the top clamp, and a Portal-orange accent stripe around the base. The architectural form of HANDS THAT DO NOT TIRE.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"chemistry",
+				"clamp",
+				"stand",
+				"retort",
+				"holder"
+			],
+			"parameters": {
+				"base_width": "Base width in meters (default 0.16)",
+				"base_depth": "Base depth in meters (default 0.16)",
+				"base_height": "Base height in meters (default 0.02)",
+				"pole_height": "Pole height above the base in meters (default 0.55)",
+				"pole_radius": "Pole radius in meters (default 0.008)",
+				"clamp_count": "Number of clamp arms on the pole (0-3, default 1)",
+				"clamp_color": "Clamp dark-steel color (default dark steel)",
+				"pole_color": "Pole light-steel color (default light steel)",
+				"base_color": "Base dark-steel color (default dark steel)",
+				"accent_color": "Base accent stripe color (default Portal orange)",
+				"holding_flask": "Bool — render a small stylised flask in the top clamp's gripper (default false)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"chemistry",
+				"apparatus"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~260"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"chemistry_flask",
+					"test_tube_rack",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"iv_stand": {
+			"lookup_name": "iv_stand",
+			"scene": "res://commons/artifacts/iv_stand/iv_stand.tscn",
+			"class_name": "IVStand",
+			"name": "IV Stand",
+			"description": "Wheeled medical IV pole with hanging bag — hospital / clinic vocabulary. Round dark-steel base disc with 4-6 small caster wheels around its perimeter, tall glossy-steel vertical pole rising from base center, L-shaped hook at the top, optional translucent IV bag hanging from the hook with amber fluid filling bag_full_fraction of the interior, 'IV' Label3D on the bag, and a Portal-orange accent ring around the base. The architectural form of MOBILE INFUSION.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"medical",
+				"clinic",
+				"iv",
+				"infusion",
+				"wheeled"
+			],
+			"parameters": {
+				"pole_height": "Top of pole from the floor in meters (default 1.6)",
+				"base_radius": "Base disc radius in meters (default 0.25)",
+				"wheel_count": "Number of caster wheels (4-6, default 5)",
+				"pole_color": "Pole glossy-steel color (default light steel)",
+				"bag_color": "IV bag translucent color (default faint translucent)",
+				"bag_content_color": "IV fluid color (default amber)",
+				"bag_visible": "Bool — render the hanging bag (default true)",
+				"bag_full_fraction": "0-1 fraction of bag interior filled with fluid (default 0.75)",
+				"hook_color": "L-hook dark-steel color (default dark steel)",
+				"accent_color": "Base accent ring color (default Portal orange)",
+				"label_text": "Bag label text (default 'IV')",
+				"label_color": "Label color (default white)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"medical",
+				"clinic",
+				"mobile"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate_segments"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "transparent",
+					"key_properties": [
+						"transparency",
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~340"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"safety_shower",
+					"lab_stool",
+					"specimen_jar"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"lab_sink": {
+			"lookup_name": "lab_sink",
+			"scene": "res://commons/artifacts/lab_sink/lab_sink.tscn",
+			"class_name": "LabSink",
+			"name": "Lab Sink",
+			"description": "Rectangular lab counter with a recessed steel sink basin and a vertical faucet — Portal 2 / Half-Life utility-corner vocabulary. Glossy white counter top, polished steel basin sunk into it, faucet rising from the back (swan_neck = curved beak over the basin centerline, industrial = straight vertical pipe with perpendicular spout), twin valve handle discs at the base, an optional translucent water column when water_running=true, an optional twin-spout eyewash unit beside the faucet, and a Portal-orange accent stripe along the front edge. The lab's threshold between dirty-work and clean-work.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"sink",
+				"plumbing",
+				"chemistry",
+				"hygiene",
+				"portal"
+			],
+			"parameters": {
+				"sink_width": "Counter width along X in meters (default 0.60)",
+				"sink_depth": "Counter depth along Z in meters (default 0.45)",
+				"sink_height": "Counter top height in meters (default 0.95)",
+				"basin_depth_factor": "Basin well depth as a fraction of sink_height (default 0.20)",
+				"counter_color": "Counter top color (default glossy white)",
+				"basin_color": "Basin steel color (default polished steel)",
+				"faucet_color": "Faucet color (default glossy steel)",
+				"accent_color": "Front-edge accent stripe color (default Portal orange)",
+				"water_color": "Water column color with alpha (default faint translucent blue)",
+				"faucet_style": "swan_neck (curved beak) | industrial (straight perpendicular spout)",
+				"water_running": "Bool — render a thin translucent water column from the spout into the basin",
+				"eyewash_present": "Bool — add a small twin-spout eyewash unit beside the faucet"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"plumbing",
+				"hygiene"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~320"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"fume_hood",
+					"safety_shower",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"vacuum_chamber": {
+			"lookup_name": "vacuum_chamber",
+			"scene": "res://commons/artifacts/vacuum_chamber/vacuum_chamber.tscn",
+			"class_name": "VacuumChamber",
+			"name": "Vacuum Chamber",
+			"description": "Translucent bell-jar on a dark steel platform — Aperture / alchemy vocabulary for 'this is the controlled void'. Round CylinderMesh platform, a faintly-translucent glass cylinder topped with a hemispherical dome (SphereMesh, half-height-scaled), an emissive interior disc giving the chamber its inside-light, a small pressure gauge on the front of the platform with a status-colored needle (green=vacuum, white=atmospheric, red=over), an optional floating sphere specimen in the chamber center, and a Portal-orange accent stripe ringing the platform's top edge.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"vacuum",
+				"chamber",
+				"glass",
+				"alchemy",
+				"aperture",
+				"emissive"
+			],
+			"parameters": {
+				"jar_height": "Glass body + dome combined height in meters (default 0.65)",
+				"jar_radius": "Glass cylinder radius in meters (default 0.22)",
+				"platform_radius": "Platform base radius in meters (default 0.30)",
+				"platform_height": "Platform base height in meters (default 0.10)",
+				"glass_color": "Glass color with alpha (default faint translucent blue-white)",
+				"platform_color": "Platform color (default dark steel)",
+				"interior_color": "Interior glow color (default faint blue)",
+				"specimen_color": "Specimen color with alpha (default sickly green)",
+				"accent_color": "Platform-top accent stripe color (default Portal orange)",
+				"gauge_present": "Bool — render a pressure gauge on the platform front",
+				"pressure_status": "vacuum (green needle) | atmospheric (white needle) | over (red needle)",
+				"interior_glow": "Interior emissive disc energy 0-2 (default 0.5)",
+				"specimen_visible": "Bool — render a floating sphere specimen in the chamber center"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"glass",
+				"alchemy",
+				"aperture"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"sphere",
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"scale"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~240"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"specimen_jar",
+					"fume_hood",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"electrical_panel": {
+			"lookup_name": "electrical_panel",
+			"scene": "res://commons/artifacts/electrical_panel/electrical_panel.tscn",
+			"class_name": "ElectricalPanel",
+			"name": "Electrical Panel",
+			"description": "Wall-mounted breaker box — Aperture / industrial-utility-corridor vocabulary. Flat rectangular panel hung on a wall, a hinged dark-steel door that covers it when closed or pivots 90° around its left edge when open to reveal a grid of breakers, each breaker a small black BoxMesh with a white lever toggle (UP=ON, DOWN=OFF), a row of small emissive status LEDs along the top of the panel, a hazard-yellow diagonal accent stripe across one corner, and a 'MAIN PANEL' Label3D below the lights. The lab's confession that POWER is also POLITICS.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"electrical",
+				"breakers",
+				"panel",
+				"infrastructure",
+				"hazard",
+				"signage"
+			],
+			"parameters": {
+				"panel_width": "Panel width along X in meters (default 0.45)",
+				"panel_height": "Panel height along Y in meters (default 0.65)",
+				"panel_depth": "Panel depth from wall along Z in meters (default 0.08)",
+				"panel_color": "Panel body color (default light steel)",
+				"door_color": "Door color (default dark steel)",
+				"breaker_color": "Breaker body color (default near-black)",
+				"breaker_lever_color": "Breaker lever color (default white)",
+				"status_color": "Status LED color (default safety green)",
+				"accent_color": "Hazard accent stripe color (default hazard yellow)",
+				"signage_color": "Signage label color (default white)",
+				"door_open": "Bool — when true the door pivots 90° around its left edge, revealing breakers",
+				"breaker_count": "Number of breakers (6-24, default 12)",
+				"breakers_on_count": "Number of breakers with levers in the ON position (default 8)",
+				"status_lights_count": "Number of status LEDs along the panel top (default 3)",
+				"signage_text": "Label3D text below the status lights (default 'MAIN PANEL')"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"infrastructure",
+				"electrical",
+				"safety"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~360"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"cable_tray",
+					"emergency_button",
+					"exit_sign"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"floor_grate": {
+			"lookup_name": "floor_grate",
+			"scene": "res://commons/artifacts/floor_grate/floor_grate.tscn",
+			"class_name": "FloorGrate",
+			"name": "Floor Grate",
+			"description": "Walkable industrial metal grating — Portal 2 / Half-Life under-foot vocabulary. A perimeter steel frame around a regular lattice of crossing flat bars (bar_count_x running along +X, bar_count_z running along +Z), in dark steel. The bars sit BELOW the walking surface (origin = top walkable surface, Y=0). Optional Portal-orange safety stripe along the front edge, optional bar-by-bar brightness variation when wear_factor > 0. The lab admitting that the FLOOR itself is also infrastructure.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"floor",
+				"grate",
+				"grating",
+				"industrial",
+				"portal",
+				"infrastructure"
+			],
+			"parameters": {
+				"grate_width": "Grate width along X in meters (default 1.0)",
+				"grate_depth": "Grate depth along Z in meters (default 1.0)",
+				"grate_height": "Total grate thickness below the walkable surface in meters (default 0.05)",
+				"bar_count_x": "Number of bars running along the X axis (default 8)",
+				"bar_count_z": "Number of cross-bars running along the Z axis (default 8)",
+				"bar_color": "Bar color (default dark steel)",
+				"frame_color": "Perimeter frame color (default slightly darker steel)",
+				"accent_color": "Front-edge accent stripe color (default Portal orange)",
+				"frame_visible": "Bool — render the outer perimeter frame border (default true)",
+				"accent_visible": "Bool — paint an accent stripe along the -Z front edge (default false)",
+				"wear_factor": "0-1 — alternate bar brightness for a worn look (default 0.0)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"infrastructure",
+				"floor",
+				"industrial"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~360"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 0,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "on",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 0,
+				"cluster_with": [
+					"ceiling_vent",
+					"cable_tray"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
 		}
 	}
 }

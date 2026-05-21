@@ -816,6 +816,204 @@ func _build_sweep() -> Array:
 				"glove_color": Color(0.10, 0.10, 0.12),
 			}))
 
+	# ── autoclave: body size axis ──────────────────────────────────
+	var ac_specs := [
+		[0.40, 0.65, 0.50, 0.15, "compact",      "compact (0.40×0.65×0.50)"],
+		[0.50, 0.80, 0.60, 0.18, "small",        "small (0.50×0.80×0.60)"],
+		[0.60, 0.90, 0.70, 0.22, "standard",     "standard (0.60×0.90×0.70)"],
+		[0.80, 1.10, 0.85, 0.28, "industrial",   "industrial (0.80×1.10×0.85)"],
+		[1.10, 1.40, 1.00, 0.36, "twin_chamber", "twin-chamber (1.10×1.40×1.00)"],
+	]
+	for i in range(5):
+		var ac = ac_specs[i]
+		sweep.append(_p("autoclave", "%d_%s" % [i + 1, ac[4]],
+			ac[5], "body %.2f×%.2f×%.2fm, door radius %.2f" % [ac[0], ac[1], ac[2], ac[3]], "body size",
+			{
+				"body_width": float(ac[0]),
+				"body_height": float(ac[1]),
+				"body_depth": float(ac[2]),
+				"door_radius": float(ac[3]),
+				"door_open": false,
+				"status_indicator": true,
+				"status_color": Color(0.30, 0.85, 0.40),
+				"accent_color": k_accent,
+			}))
+
+	# ── chemistry_flask: flask_height axis ─────────────────────────
+	var cf_specs := [
+		[0.10, 0.030, "erlenmeyer",   "micro",     "micro (0.10m, Erlenmeyer)"],
+		[0.16, 0.045, "round_bottom", "compact",   "compact (0.16m, round-bottom)"],
+		[0.22, 0.065, "erlenmeyer",   "standard",  "standard (0.22m, Erlenmeyer)"],
+		[0.32, 0.090, "volumetric",   "large_vol", "large volumetric (0.32m)"],
+		[0.50, 0.135, "round_bottom", "demijohn",  "demijohn (0.50m, round-bottom)"],
+	]
+	for i in range(5):
+		var cf = cf_specs[i]
+		sweep.append(_p("chemistry_flask", "%d_%s" % [i + 1, cf[3]],
+			cf[4], "flask_height = %.2fm, %s shape" % [cf[0], cf[2]], "flask_height",
+			{
+				"flask_height": float(cf[0]),
+				"flask_max_radius": float(cf[1]),
+				"flask_shape": cf[2],
+				"content_height_fraction": 0.55,
+				"content_color": Color(0.30, 0.85, 0.55, 0.85),
+				"glass_color": Color(0.85, 0.92, 0.95, 0.40),
+				"label_text": "",
+				"has_stopper": true,
+				"stopper_color": Color(0.25, 0.25, 0.28),
+			}))
+
+	# ── clamp_stand: pole_height axis ──────────────────────────────
+	var cs_specs := [
+		[0.30, 1, false, "desk_short",      "desk-short (0.30m, 1 clamp)"],
+		[0.45, 1, true,  "small_focus",     "small focus (0.45m, 1 + flask)"],
+		[0.55, 2, true,  "standard_pair",   "standard pair (0.55m, 2 clamps)"],
+		[0.75, 3, true,  "tall_three",      "tall three (0.75m, 3 clamps)"],
+		[1.00, 3, false, "industrial_dist", "industrial dist (1.00m, 3 clamps)"],
+	]
+	for i in range(5):
+		var cs = cs_specs[i]
+		sweep.append(_p("clamp_stand", "%d_%s" % [i + 1, cs[3]],
+			cs[4], "pole_height = %.2fm, %d clamp(s)" % [cs[0], cs[1]], "pole_height",
+			{
+				"pole_height": float(cs[0]),
+				"clamp_count": int(cs[1]),
+				"holding_flask": bool(cs[2]),
+				"base_color": k_frame,
+				"pole_color": Color(0.80, 0.82, 0.84),
+				"clamp_color": Color(0.28, 0.28, 0.32),
+				"accent_color": k_accent,
+			}))
+
+	# ── iv_stand: pole_height axis (child → bariatric) ─────────────
+	var iv_specs := [
+		[1.20, 0.20, 4, "child",          "child (1.2m, 4 wheels)"],
+		[1.40, 0.22, 5, "junior",         "junior (1.4m, 5 wheels)"],
+		[1.60, 0.25, 5, "standard",       "standard (1.6m, 5 wheels)"],
+		[1.85, 0.28, 5, "tall",           "tall (1.85m, 5 wheels)"],
+		[2.10, 0.32, 6, "bariatric",      "bariatric (2.10m, 6 wheels)"],
+	]
+	for i in range(5):
+		var iv = iv_specs[i]
+		sweep.append(_p("iv_stand", "%d_%s" % [i + 1, iv[3]],
+			iv[4], "pole_height = %.2fm, base radius %.2fm, %d wheels" % [iv[0], iv[1], iv[2]], "pole_height",
+			{
+				"pole_height": float(iv[0]),
+				"base_radius": float(iv[1]),
+				"wheel_count": int(iv[2]),
+				"bag_visible": true,
+				"bag_full_fraction": 0.75,
+				"pole_color": Color(0.86, 0.86, 0.88),
+				"bag_color": Color(0.90, 0.95, 0.98, 0.55),
+				"bag_content_color": Color(0.95, 0.80, 0.45, 0.92),
+				"accent_color": k_accent,
+				"label_text": "IV",
+			}))
+
+	# ── lab_sink: sink_width axis (compact → double) ───────────────
+	var ls_specs := [
+		[0.40, 0.35, 0.85, "compact",         "compact (0.40×0.35)"],
+		[0.50, 0.40, 0.90, "standard_small",  "standard small (0.50×0.40)"],
+		[0.60, 0.45, 0.95, "standard",        "standard (0.60×0.45)"],
+		[0.85, 0.55, 0.95, "wide",            "wide (0.85×0.55)"],
+		[1.20, 0.60, 0.95, "double_basin",    "double basin (1.20×0.60)"],
+	]
+	for i in range(5):
+		var ls = ls_specs[i]
+		sweep.append(_p("lab_sink", "%d_%s" % [i + 1, ls[3]],
+			ls[4], "sink_width × sink_depth = %.2f × %.2fm" % [ls[0], ls[1]], "sink_width",
+			{
+				"sink_width": float(ls[0]),
+				"sink_depth": float(ls[1]),
+				"sink_height": float(ls[2]),
+				"basin_depth_factor": 0.20,
+				"faucet_style": "swan_neck",
+				"counter_color": Color(0.94, 0.94, 0.96),
+				"basin_color": Color(0.80, 0.82, 0.84),
+				"faucet_color": Color(0.82, 0.84, 0.86),
+				"accent_color": k_accent,
+			}))
+
+	# ── vacuum_chamber: jar_height × radius axis ───────────────────
+	var vc_specs := [
+		[0.30, 0.12, 0.18, "bell_jar_small",   "bell jar small (0.30m)"],
+		[0.50, 0.18, 0.25, "bench",            "bench (0.50m)"],
+		[0.65, 0.22, 0.30, "standard",         "standard (0.65m)"],
+		[0.95, 0.32, 0.40, "industrial",       "industrial (0.95m)"],
+		[1.40, 0.45, 0.55, "monumental",       "monumental (1.40m)"],
+	]
+	for i in range(5):
+		var vc = vc_specs[i]
+		sweep.append(_p("vacuum_chamber", "%d_%s" % [i + 1, vc[3]],
+			vc[4], "jar_height = %.2fm, jar_radius = %.2fm" % [vc[0], vc[1]], "jar_height",
+			{
+				"jar_height": float(vc[0]),
+				"jar_radius": float(vc[1]),
+				"platform_radius": float(vc[2]),
+				"platform_height": 0.10,
+				"pressure_status": "vacuum",
+				"specimen_visible": true,
+				"interior_glow": 0.6,
+				"glass_color": Color(0.78, 0.85, 0.92, 0.30),
+				"platform_color": k_frame,
+				"interior_color": Color(0.65, 0.85, 1.0),
+				"specimen_color": Color(0.40, 0.85, 0.55, 0.92),
+				"accent_color": k_accent,
+			}))
+
+	# ── electrical_panel: panel size × breaker_count axis ──────────
+	var ep_specs := [
+		[0.30, 0.40, 6,  "junction",            "junction (0.30×0.40, 6 breakers)"],
+		[0.38, 0.55, 8,  "small_panel",         "small panel (0.38×0.55, 8)"],
+		[0.45, 0.65, 12, "standard",            "standard (0.45×0.65, 12)"],
+		[0.60, 0.85, 18, "large",               "large (0.60×0.85, 18)"],
+		[0.75, 1.10, 24, "main_distribution",   "main distribution (0.75×1.10, 24)"],
+	]
+	for i in range(5):
+		var ep = ep_specs[i]
+		sweep.append(_p("electrical_panel", "%d_%s" % [i + 1, ep[3]],
+			ep[4], "panel %.2f × %.2fm, %d breakers" % [ep[0], ep[1], ep[2]], "size + breakers",
+			{
+				"panel_width": float(ep[0]),
+				"panel_height": float(ep[1]),
+				"panel_depth": 0.08,
+				"breaker_count": int(ep[2]),
+				"breakers_on_count": int(int(ep[2]) * 2 / 3),
+				"door_open": true,
+				"panel_color": Color(0.78, 0.80, 0.82),
+				"door_color": k_frame,
+				"breaker_color": Color(0.08, 0.08, 0.10),
+				"breaker_lever_color": Color(0.94, 0.94, 0.95),
+				"status_color": Color(0.30, 0.85, 0.40),
+				"accent_color": Color(0.98, 0.78, 0.12),
+				"signage_text": "PANEL",
+			}))
+
+	# ── floor_grate: grate_width × bar_count axis ──────────────────
+	var fg_specs := [
+		[0.60, 0.60, 4,  4,  "small_inspection", "small (0.6×0.6, 4×4 bars)"],
+		[1.00, 1.00, 8,  8,  "standard",         "standard (1.0×1.0, 8×8)"],
+		[1.50, 1.00, 12, 8,  "long_run",         "long run (1.5×1.0, 12×8)"],
+		[2.00, 1.50, 16, 12, "wide_platform",    "wide platform (2.0×1.5, 16×12)"],
+		[3.00, 2.00, 24, 16, "factory_floor",    "factory floor (3.0×2.0, 24×16)"],
+	]
+	for i in range(5):
+		var fg = fg_specs[i]
+		sweep.append(_p("floor_grate", "%d_%s" % [i + 1, fg[4]],
+			fg[5], "grate %.1f × %.1fm, lattice %d × %d bars" % [fg[0], fg[1], fg[2], fg[3]], "grate size + bar_count",
+			{
+				"grate_width": float(fg[0]),
+				"grate_depth": float(fg[1]),
+				"grate_height": 0.05,
+				"bar_count_x": int(fg[2]),
+				"bar_count_z": int(fg[3]),
+				"bar_color": Color(0.20, 0.22, 0.25),
+				"frame_color": Color(0.14, 0.14, 0.16),
+				"accent_color": k_accent,
+				"frame_visible": true,
+				"accent_visible": false,
+			}))
+
 	return sweep
 
 

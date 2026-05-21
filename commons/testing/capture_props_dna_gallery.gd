@@ -977,6 +977,221 @@ func _build_sweep() -> Array:
 			"accent_color": Color(0.902, 0.224, 0.275),
 		}))
 
+	# ── autoclave: critical_parameter = door_open ──────────────────
+	sweep.append(_p("autoclave", "1_active_cycle", "active cycle (door closed)",
+		"sealed and running — green status, door shut, sterilization in progress",
+		{
+			"door_open": false,
+			"status_indicator": true,
+			"status_color": Color(0.30, 0.85, 0.40),
+			"accent_color": Color(0.95, 0.50, 0.10),
+		}))
+	sweep.append(_p("autoclave", "2_between_uses_open", "between uses (door open)",
+		"door pivoted open — interior visible, ready for next load",
+		{
+			"door_open": true,
+			"status_indicator": false,
+			"accent_color": Color(0.95, 0.50, 0.10),
+		}))
+	sweep.append(_p("autoclave", "3_alarm_red", "alarm: cycle fault",
+		"red status — sterilization cycle interrupted, attention required",
+		{
+			"door_open": false,
+			"status_indicator": true,
+			"status_color": Color(0.95, 0.20, 0.20),
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}))
+
+	# ── chemistry_flask: critical_parameter = flask_shape ──────────
+	sweep.append(_p("chemistry_flask", "1_erlenmeyer_working", "Erlenmeyer (working)",
+		"swirl-and-react geometry — the canonical chemistry working flask",
+		{
+			"flask_shape": "erlenmeyer",
+			"flask_height": 0.20,
+			"content_height_fraction": 0.55,
+			"content_color": Color(0.30, 0.85, 0.55, 0.85),
+			"label_text": "H₂SO₄",
+			"has_stopper": true,
+		}))
+	sweep.append(_p("chemistry_flask", "2_round_bottom_heated", "round-bottom (heated)",
+		"uniform stress under flame — the flask designed to be set on fire",
+		{
+			"flask_shape": "round_bottom",
+			"flask_height": 0.22,
+			"content_height_fraction": 0.45,
+			"content_color": Color(0.95, 0.35, 0.30, 0.85),
+			"label_text": "C₆H₆",
+			"has_stopper": false,
+		}))
+	sweep.append(_p("chemistry_flask", "3_volumetric_measured", "volumetric (measured)",
+		"precision stoichiometry — bulb at the bottom, calibrated neck",
+		{
+			"flask_shape": "volumetric",
+			"flask_height": 0.24,
+			"content_height_fraction": 0.85,
+			"content_color": Color(0.45, 0.65, 0.95, 0.85),
+			"label_text": "100mL",
+			"has_stopper": true,
+		}))
+
+	# ── clamp_stand: critical_parameter = clamp_count ──────────────
+	sweep.append(_p("clamp_stand", "1_inert_zero", "inert (0 clamps)",
+		"furniture state — pole and base, nothing held, awaiting choreography",
+		{
+			"clamp_count": 0,
+			"holding_flask": false,
+			"accent_color": Color(0.95, 0.50, 0.10),
+		}))
+	sweep.append(_p("clamp_stand", "2_focused_one", "focused (1 clamp)",
+		"single experiment — one clamp at chest height, the active grip",
+		{
+			"clamp_count": 1,
+			"holding_flask": true,
+			"accent_color": Color(0.95, 0.50, 0.10),
+		}))
+	sweep.append(_p("clamp_stand", "3_layered_three", "layered (3 clamps)",
+		"distillation choreography — three clamps stacked, the apparatus full",
+		{
+			"clamp_count": 3,
+			"holding_flask": true,
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}))
+
+	# ── iv_stand: critical_parameter = bag_visible ─────────────────
+	sweep.append(_p("iv_stand", "1_in_use_amber", "in-use (amber)",
+		"hooked to a patient — full amber bag at 75%, delivering",
+		{
+			"bag_visible": true,
+			"bag_full_fraction": 0.75,
+			"bag_content_color": Color(0.95, 0.80, 0.45, 0.92),
+			"label_text": "IV",
+		}))
+	sweep.append(_p("iv_stand", "2_in_use_almost_empty", "in-use (almost empty)",
+		"nearly done — bag at 15%, the drip is finishing",
+		{
+			"bag_visible": true,
+			"bag_full_fraction": 0.15,
+			"bag_content_color": Color(0.85, 0.40, 0.50, 0.92),
+			"label_text": "ANTI-BIOT",
+		}))
+	sweep.append(_p("iv_stand", "3_staged_no_bag", "staged (no bag)",
+		"pole only — empty hook, parked between patients",
+		{
+			"bag_visible": false,
+			"label_text": "",
+		}))
+
+	# ── lab_sink: critical_parameter = faucet_style ────────────────
+	sweep.append(_p("lab_sink", "1_swan_biology", "swan-neck (biology)",
+		"swan-neck faucet — wet-lab vocabulary, biology bench cleaning",
+		{
+			"faucet_style": "swan_neck",
+			"water_running": false,
+			"eyewash_present": false,
+			"accent_color": Color(0.95, 0.50, 0.10),
+		}))
+	sweep.append(_p("lab_sink", "2_industrial_running", "industrial (running)",
+		"industrial straight spout — water on, the utility room mode",
+		{
+			"faucet_style": "industrial",
+			"water_running": true,
+			"eyewash_present": false,
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}))
+	sweep.append(_p("lab_sink", "3_with_eyewash", "with eyewash",
+		"safety variant — eyewash twin-spouts beside the main faucet",
+		{
+			"faucet_style": "swan_neck",
+			"water_running": false,
+			"eyewash_present": true,
+			"accent_color": Color(0.15, 0.65, 0.25),
+		}))
+
+	# ── vacuum_chamber: critical_parameter = pressure_status ───────
+	sweep.append(_p("vacuum_chamber", "1_vacuum_specimen", "vacuum (specimen)",
+		"vacuum drawn — green needle, faint blue glow, specimen floating",
+		{
+			"pressure_status": "vacuum",
+			"specimen_visible": true,
+			"specimen_color": Color(0.40, 0.85, 0.55, 0.92),
+			"interior_glow": 0.6,
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}))
+	sweep.append(_p("vacuum_chamber", "2_atmospheric_empty", "atmospheric (empty)",
+		"at atmospheric pressure — white needle, dim interior, no specimen",
+		{
+			"pressure_status": "atmospheric",
+			"specimen_visible": false,
+			"interior_glow": 0.2,
+			"accent_color": Color(0.85, 0.85, 0.85),
+		}))
+	sweep.append(_p("vacuum_chamber", "3_over_alarm", "over-pressure (alarm)",
+		"warning — red needle, red interior glow, specimen visible (caged)",
+		{
+			"pressure_status": "over",
+			"specimen_visible": true,
+			"specimen_color": Color(0.95, 0.30, 0.20, 0.92),
+			"interior_glow": 1.4,
+			"interior_color": Color(1.0, 0.55, 0.45),
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}))
+
+	# ── electrical_panel: critical_parameter = door_open ───────────
+	sweep.append(_p("electrical_panel", "1_secured_closed", "secured (closed)",
+		"door shut — production-mode, status LEDs all green",
+		{
+			"door_open": false,
+			"breakers_on_count": 12,
+			"breaker_count": 12,
+			"signage_text": "MAIN PANEL",
+			"accent_color": Color(0.98, 0.78, 0.12),
+		}))
+	sweep.append(_p("electrical_panel", "2_maintenance_open", "maintenance (open)",
+		"door open — breaker grid visible, most levers up, in inspection",
+		{
+			"door_open": true,
+			"breakers_on_count": 9,
+			"breaker_count": 12,
+			"signage_text": "MAIN PANEL",
+			"status_color": Color(0.30, 0.85, 0.40),
+		}))
+	sweep.append(_p("electrical_panel", "3_fault_partial", "fault (partial)",
+		"emergency — only 4 of 16 breakers on, status LEDs red",
+		{
+			"door_open": true,
+			"breakers_on_count": 4,
+			"breaker_count": 16,
+			"signage_text": "FAULT",
+			"status_color": Color(0.95, 0.20, 0.20),
+			"signage_color": Color(0.95, 0.20, 0.20),
+		}))
+
+	# ── floor_grate: critical_parameter = wear_factor ──────────────
+	sweep.append(_p("floor_grate", "1_new_install", "new install (clean)",
+		"freshly installed — uniform dark steel, no wear",
+		{
+			"wear_factor": 0.0,
+			"accent_visible": false,
+			"bar_count_x": 8,
+			"bar_count_z": 8,
+		}))
+	sweep.append(_p("floor_grate", "2_used_mottled", "used (mottled)",
+		"alternating brightness — the lab has remembered traffic patterns",
+		{
+			"wear_factor": 0.6,
+			"accent_visible": false,
+			"bar_count_x": 10,
+			"bar_count_z": 10,
+		}))
+	sweep.append(_p("floor_grate", "3_hazard_safety", "hazard safety",
+		"safety stripe — Portal-orange front edge marks the safe approach",
+		{
+			"wear_factor": 0.3,
+			"accent_visible": true,
+			"bar_count_x": 10,
+			"bar_count_z": 12,
+		}))
+
 	return sweep
 
 
