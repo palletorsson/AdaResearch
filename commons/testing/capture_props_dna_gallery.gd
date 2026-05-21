@@ -1192,6 +1192,196 @@ func _build_sweep() -> Array:
 			"bar_count_z": 12,
 		}))
 
+	# ── oscilloscope: critical_parameter = waveform_shape (Fourier)
+	sweep.append(_p("oscilloscope", "1_sine_fundamental", "sine (fundamental)",
+		"pure sine — the Fourier basis function, one frequency only",
+		{
+			"waveform_shape": "sine",
+			"waveform_frequency": 3,
+			"waveform_color": Color(0.40, 0.95, 0.55),
+			"grid_visible": true,
+		}))
+	sweep.append(_p("oscilloscope", "2_square_harmonics", "square (odd harmonics)",
+		"square wave — the discontinuous limit; Gibbs-phenomenon territory",
+		{
+			"waveform_shape": "square",
+			"waveform_frequency": 3,
+			"waveform_color": Color(0.95, 0.65, 0.30),
+			"grid_visible": true,
+		}))
+	sweep.append(_p("oscilloscope", "3_composite_series", "composite (truncated series)",
+		"sin(f) + sin(3f)/3 + sin(5f)/5 — the visible Fourier decomposition",
+		{
+			"waveform_shape": "composite",
+			"waveform_frequency": 2,
+			"waveform_color": Color(0.20, 0.55, 0.95),
+			"grid_visible": true,
+		}))
+
+	# ── bunsen_burner: critical_parameter = flame_color (T) ────────
+	sweep.append(_p("bunsen_burner", "1_cool_blue_ground", "cool blue (T→0)",
+		"the ground state — pure blue flame, minimum-energy convergence",
+		{
+			"flame_color": Color(0.30, 0.55, 1.0),
+			"flame_height": 0.10,
+			"valve_position": "low",
+		}))
+	sweep.append(_p("bunsen_burner", "2_hot_orange_exploration", "hot orange (T high)",
+		"high-T exploration — orange flame, escape from local minima",
+		{
+			"flame_color": Color(1.0, 0.55, 0.20),
+			"flame_height": 0.18,
+			"valve_position": "full",
+		}))
+	sweep.append(_p("bunsen_burner", "3_closed_no_flame", "closed (T = 0, no flame)",
+		"the schedule completed — valve closed, no flame, system frozen",
+		{
+			"flame_visible": false,
+			"valve_position": "closed",
+		}))
+
+	# ── petri_dish: critical_parameter = cell_pattern ──────────────
+	sweep.append(_p("petri_dish", "1_glider_traveler", "glider (the traveller)",
+		"the moving period-4 pattern — proves Life is non-trivial",
+		{
+			"cell_pattern": "glider",
+			"lid_present": true,
+			"cell_color": Color(0.20, 0.45, 0.20),
+		}))
+	sweep.append(_p("petri_dish", "2_blinker_oscillator", "blinker (oscillator)",
+		"the period-2 oscillator — the simplest non-static pattern",
+		{
+			"cell_pattern": "blinker",
+			"lid_present": false,
+			"cell_color": Color(0.95, 0.20, 0.20),
+		}))
+	sweep.append(_p("petri_dish", "3_random_chaos", "random (chaos)",
+		"random initial condition — the substrate before the rules take over",
+		{
+			"cell_pattern": "random",
+			"colony_density": 0.30,
+			"lid_present": true,
+			"cell_color": Color(0.30, 0.30, 0.65),
+			"grid_visible": true,
+		}))
+
+	# ── wall_clock: critical_parameter = is_digital + hands ────────
+	sweep.append(_p("wall_clock", "1_analog_three_oclock", "analog (3 o'clock)",
+		"classic analog — synchronization by shared rotation, no electronics",
+		{
+			"is_digital": false,
+			"hour_hand_angle": 90.0,
+			"minute_hand_angle": 0.0,
+			"second_hand_angle": 270.0,
+		}))
+	sweep.append(_p("wall_clock", "2_analog_quarter_past", "analog (quarter past)",
+			"the scheduler tick — minute hand at +15, the regular interrupt",
+			{
+				"is_digital": false,
+				"hour_hand_angle": 7.5,
+				"minute_hand_angle": 90.0,
+				"second_hand_angle": 30.0,
+			}))
+	sweep.append(_p("wall_clock", "3_digital_alarm", "digital (alarm)",
+		"digital readout — the wall-time precision; no hands, just bits",
+		{
+			"is_digital": true,
+			"digital_time_text": "23:59:54",
+			"digital_color": Color(0.95, 0.20, 0.20),
+		}))
+
+	# ── probability_box: critical_parameter = arrangement (sampling)
+	sweep.append(_p("probability_box", "1_scattered_iid", "scattered (i.i.d.)",
+		"the canonical Monte Carlo sample — 5 dice, random arrangement",
+		{
+			"dice_count": 5,
+			"arrangement": "scattered",
+			"face_values": PackedInt32Array([6, 4, 2, 5, 3]),
+		}))
+	sweep.append(_p("probability_box", "2_row_ordered", "row (ordered)",
+		"the ordered sample — same 5 dice in a row, every face shown",
+		{
+			"dice_count": 6,
+			"arrangement": "row",
+			"face_values": PackedInt32Array([1, 2, 3, 4, 5, 6]),
+		}))
+	sweep.append(_p("probability_box", "3_cluster_dependent", "cluster (correlated)",
+		"the correlated sample — 8 dice clustered, all showing 6",
+		{
+			"dice_count": 8,
+			"arrangement": "cluster",
+			"face_values": PackedInt32Array([6, 6, 6, 6, 6, 6, 6, 6]),
+		}))
+
+	# ── map_table: critical_parameter = path_visible + obstacle_count
+	sweep.append(_p("map_table", "1_path_clear", "path (clear)",
+		"path solved — emissive blue route from corner to corner, 0 obstacles",
+		{
+			"path_visible": true,
+			"obstacle_count": 0,
+			"grid_visible": true,
+		}))
+	sweep.append(_p("map_table", "2_path_obstacles", "path (with obstacles)",
+		"path solved around 8 obstacles — A* finds the detour",
+		{
+			"path_visible": true,
+			"obstacle_count": 8,
+			"grid_visible": true,
+		}))
+	sweep.append(_p("map_table", "3_search_in_progress", "search (in progress)",
+		"unsolved — 12 obstacles, no path drawn yet, the search is running",
+		{
+			"path_visible": false,
+			"obstacle_count": 12,
+			"grid_visible": true,
+		}))
+
+	# ── pendulum: critical_parameter = swing_angle_degrees ─────────
+	sweep.append(_p("pendulum", "1_at_rest", "at rest (θ = 0)",
+		"the ground state — string vertical, no swing, no kinetic energy",
+		{
+			"swing_angle_degrees": 0.0,
+			"bob_emission": 0.0,
+			"arc_visible": false,
+		}))
+	sweep.append(_p("pendulum", "2_mid_swing", "mid-swing (θ = 25°)",
+		"the oscillation snapshot — frozen mid-arc, maximum potential",
+		{
+			"swing_angle_degrees": 25.0,
+			"bob_emission": 0.3,
+			"arc_visible": true,
+		}))
+	sweep.append(_p("pendulum", "3_extreme_amplitude", "extreme (θ = 45°)",
+		"large amplitude — beyond the small-angle approximation",
+		{
+			"swing_angle_degrees": 45.0,
+			"bob_emission": 0.6,
+			"bob_color": Color(0.95, 0.20, 0.20),
+			"arc_visible": true,
+		}))
+
+	# ── prism: critical_parameter = light_out_visible (decomposition)
+	sweep.append(_p("prism", "1_white_in_no_spectrum", "white in (no decomposition)",
+		"the unanalysed signal — white light enters, no spectrum drawn",
+		{
+			"light_in_visible": true,
+			"light_out_visible": false,
+		}))
+	sweep.append(_p("prism", "2_full_decomposition", "full decomposition",
+		"the spectral basis — 7 rainbow bands fan out, Fourier in glass",
+		{
+			"light_in_visible": true,
+			"light_out_visible": true,
+			"spectrum_band_count": 7,
+		}))
+	sweep.append(_p("prism", "3_high_resolution_12", "high resolution (12 bands)",
+		"finer-grained decomposition — 12 spectral bands, denser basis",
+		{
+			"light_in_visible": true,
+			"light_out_visible": true,
+			"spectrum_band_count": 12,
+		}))
+
 	return sweep
 
 

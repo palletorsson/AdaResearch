@@ -4306,6 +4306,793 @@
 				"measured_footprint_cells": 1,
 				"footprint_source": "designed"
 			}
+		},
+		"probability_box": {
+			"lookup_name": "probability_box",
+			"scene": "res://commons/artifacts/probability_box/probability_box.tscn",
+			"class_name": "ProbabilityBox",
+			"name": "Probability Box",
+			"description": "A small wooden dice tray with a low rim and 1-8 cube dice arranged across its surface — Aperture / casino-lab vocabulary. In the lab's grammar the probability_box IS the MONTE CARLO METHOD in object form: the tray is the sample space, the dice are the draws, the up-face values are the realised sample. Arrangements: scattered (random deterministic), row (linear trial), stacked (rigged column), cluster (corner cluster). Each die shows pip dots 1-6 on its top face. A Portal-orange emissive accent stripe rings the front rim.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"probability",
+				"monte-carlo",
+				"dice",
+				"sampling",
+				"randomness",
+				"pedagogical"
+			],
+			"parameters": {
+				"tray_width": "Tray width along X in meters (default 0.22)",
+				"tray_depth": "Tray depth along Z in meters (default 0.16)",
+				"tray_rim_height": "Rim height above tray base in meters (default 0.015)",
+				"tray_color": "Tray wood color (default light maple)",
+				"dice_count": "Number of dice 1-8 (default 5)",
+				"dice_size": "Edge length of each die in meters (default 0.018)",
+				"dice_color": "Dice body color (default ivory)",
+				"dot_color": "Pip dot color (default near-black)",
+				"arrangement": "scattered | row | stacked | cluster (default scattered)",
+				"face_values": "PackedInt32Array of up-faces per die, 1-6 (default [6,4,2,5,3])",
+				"accent_color": "Rim accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"randomness",
+				"sampling",
+				"pedagogical",
+				"monte-carlo"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"albedo",
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~280"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"data_tablet",
+					"specimen_jar"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"map_table": {
+			"lookup_name": "map_table",
+			"scene": "res://commons/artifacts/map_table/map_table.tscn",
+			"class_name": "MapTable",
+			"name": "Map Table",
+			"description": "A heavy wooden tactical table with a parchment map laid flat on the tabletop — Aperture / war-room vocabulary. In the lab's grammar the map_table IS PATHFINDING (Dijkstra / A*) in object form: the grid is the graph, the dark obstacle boxes are closed nodes, the emissive Portal-blue path dots are the cost-minimising traversal, and the red start/end sphere markers are the source and sink. Tabletop on 4 corner legs, parchment surface, optional grid lines (grid_size cells along X), 0-15 deterministic obstacles, 11 path dots arcing diagonally corner-to-corner. Portal-orange emissive accent along the front edge.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"pathfinding",
+				"dijkstra",
+				"a-star",
+				"map",
+				"navigation",
+				"pedagogical"
+			],
+			"parameters": {
+				"table_width": "Tabletop width along X in meters (default 1.40)",
+				"table_depth": "Tabletop depth along Z in meters (default 0.90)",
+				"table_height": "Total table height in meters (default 0.85)",
+				"table_color": "Wood body color (default dark walnut)",
+				"map_color": "Parchment surface color (default off-white parchment)",
+				"grid_visible": "Bool — render the grid lines (default true)",
+				"grid_size": "Number of grid cells along width 4-40 (default 12)",
+				"grid_color": "Grid line color (default faint dark)",
+				"obstacle_count": "Number of dark obstacle boxes 0-15 (default 5)",
+				"obstacle_color": "Obstacle body color (default near-black)",
+				"path_visible": "Bool — render the emissive path dots (default true)",
+				"path_color": "Path emission color (default Portal blue)",
+				"path_glow": "Path emission energy 0-3 (default 1.2)",
+				"marker_color": "Start/end marker color (default warning red)",
+				"start_marker_visible": "Bool — render start sphere at -X-Z corner (default true)",
+				"end_marker_visible": "Bool — render end sphere at +X+Z corner (default true)",
+				"accent_color": "Tabletop accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"pathfinding",
+				"navigation",
+				"pedagogical",
+				"algorithm"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"albedo"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~720"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"data_tablet",
+					"control_board"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
+		},
+		"pendulum": {
+			"lookup_name": "pendulum",
+			"scene": "res://commons/artifacts/pendulum/pendulum.tscn",
+			"class_name": "Pendulum",
+			"name": "Pendulum",
+			"description": "An inverted-U metal stand with a string hanging from the center of the top bar, terminating in a polished brass bob — Aperture / lecture-hall vocabulary. In the lab's grammar the pendulum IS the HARMONIC OSCILLATOR in object form: length picks ω = √(g/L), angle picks the amplitude, and the bob holds the equation at a single frozen instant. The string is rotated by swing_angle_degrees around Z so the bob leans toward +X. Optional faint arc-dots trace the swept path between -angle and +angle. A Portal-orange emissive stripe rings the front of the top bar.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"pendulum",
+				"oscillator",
+				"harmonic",
+				"physics",
+				"pedagogical"
+			],
+			"parameters": {
+				"stand_height": "Total stand height in meters (default 0.55)",
+				"stand_width": "Distance between the two vertical posts (default 0.32)",
+				"post_thickness": "Post and bar thickness in meters (default 0.020)",
+				"stand_color": "Stand body color (default dark steel)",
+				"string_length": "String length in meters (default 0.40)",
+				"string_color": "String color (default near-black)",
+				"bob_radius": "Bob sphere radius in meters (default 0.035)",
+				"bob_color": "Bob color (default polished brass)",
+				"bob_emission": "Bob emission energy, 0=off (default 0.0)",
+				"swing_angle_degrees": "Frozen swing angle from vertical in degrees (default 25.0)",
+				"arc_visible": "Bool — render arc dots along the swept path (default false)",
+				"arc_dot_count": "Number of arc dots 1-21 (default 7)",
+				"arc_color": "Arc dot color (default faint grey)",
+				"accent_color": "Top-bar accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"oscillator",
+				"physics",
+				"pedagogical",
+				"harmonic"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~220"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"specimen_jar",
+					"control_board"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"prism": {
+			"lookup_name": "prism",
+			"scene": "res://commons/artifacts/prism/prism.tscn",
+			"class_name": "Prism",
+			"name": "Prism",
+			"description": "A small triangular glass prism on a dark cylindrical pedestal with an incoming emissive white beam from -X and a rainbow fan of N emissive beams exiting toward +X — Aperture / spectroscope vocabulary. In the lab's grammar the prism IS SPECTRAL DECOMPOSITION (Fourier in glass) in object form: the white beam is the composite time-domain signal, the rainbow fan is the frequency-domain spectrum, and the dispersion of the glass IS the basis transform. Bands are hue-evenly-spaced red→violet (HSV) and fan vertically. Faint glass emission, Portal-orange emissive torus accent at the pedestal top.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"prism",
+				"spectrum",
+				"fourier",
+				"optics",
+				"decomposition",
+				"pedagogical"
+			],
+			"parameters": {
+				"prism_size": "Edge length of the equilateral triangular face in meters (default 0.10)",
+				"prism_height": "Length of the prism along its axis in meters (default 0.18)",
+				"glass_color": "Glass color with alpha (default faint translucent blue-white)",
+				"glass_emission": "Glass emission energy 0-1 (default 0.08)",
+				"pedestal_visible": "Bool — render the pedestal under the prism (default true)",
+				"pedestal_radius": "Pedestal radius in meters (default 0.07)",
+				"pedestal_height": "Pedestal height in meters (default 0.03)",
+				"pedestal_color": "Pedestal color (default dark steel)",
+				"light_in_visible": "Bool — render the incoming white beam from -X (default true)",
+				"light_in_color": "Incoming beam color (default warm white)",
+				"light_out_visible": "Bool — render the outgoing rainbow fan toward +X (default true)",
+				"spectrum_band_count": "Number of rainbow bands 2-12 (default 7)",
+				"light_glow": "Beam emission intensity 0-3 (default 1.8)",
+				"accent_color": "Pedestal accent ring color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"optics",
+				"spectrum",
+				"fourier",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"prism",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~260"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"microscope",
+					"specimen_jar"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"oscilloscope": {
+			"lookup_name": "oscilloscope",
+			"scene": "res://commons/artifacts/oscilloscope/oscilloscope.tscn",
+			"class_name": "Oscilloscope",
+			"name": "Oscilloscope",
+			"description": "Bench oscilloscope — rectangular dark-steel chassis with a recessed phosphor screen face, a dim emissive 8x6 graticule, an emissive dot trace sampled along the chosen waveform (sine, square, sawtooth, triangle, or composite-Fourier), a row of small control knobs along the screen's lower band, and a single status LED at the top-right corner. In the lab's grammar the oscilloscope is the FOURIER DECOMPOSITION TABLE — the place where a signal becomes its shape. The composite shape draws the truncated square-wave Fourier series (sin(f) + sin(3f)/3 + sin(5f)/5) so the trace IS the decomposition.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"oscilloscope",
+				"fourier",
+				"signal",
+				"crt",
+				"phosphor",
+				"pedagogical"
+			],
+			"parameters": {
+				"body_width": "Chassis width in meters (default 0.45)",
+				"body_height": "Chassis height in meters (default 0.25)",
+				"body_depth": "Chassis depth in meters (default 0.30)",
+				"screen_width_factor": "Screen width as fraction of body width 0.3-0.95 (default 0.70)",
+				"screen_height_factor": "Screen height as fraction of body height 0.3-0.95 (default 0.65)",
+				"body_color": "Chassis color (default dark steel)",
+				"screen_bg_color": "Screen background color (default dark phosphor)",
+				"screen_emission": "Screen emission energy 0-3 (default 0.6)",
+				"waveform_shape": "sine | square | sawtooth | triangle | composite",
+				"waveform_color": "Trace color (default phosphor green)",
+				"waveform_amplitude": "Trace amplitude as fraction of screen height 0-1 (default 0.7)",
+				"waveform_frequency": "Cycles across screen 1-12 (default 3)",
+				"grid_visible": "Bool — render the 8x6 graticule (default true)",
+				"grid_color": "Graticule color (default dim green)",
+				"knob_count": "Number of control knobs 0-8 (default 4)",
+				"accent_color": "LED, knob indicator, and front-edge accent color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"signal",
+				"fourier",
+				"crt",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~480"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"control_board",
+					"large_table",
+					"prism"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"bunsen_burner": {
+			"lookup_name": "bunsen_burner",
+			"scene": "res://commons/artifacts/bunsen_burner/bunsen_burner.tscn",
+			"class_name": "BunsenBurner",
+			"name": "Bunsen Burner",
+			"description": "Bunsen burner — heavy short dark-steel base, a narrow vertical tube, a small valve disc on the +X side (tick rotated by valve_position), an optional black gas hose entering from -X, and a two-stack tapered flame above the tube (wider lower body + brighter inner tip), both in flame_color with high emission. In the lab's grammar the bunsen burner is the SIMULATED-ANNEALING TEMPERATURE DIAL — the cooling schedule made visible. Cool blue + low + closed = ground state (T → 0); hot orange/yellow + tall + full = high-T exploration. Reading the flame reads the scheduler.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"bunsen",
+				"burner",
+				"flame",
+				"annealing",
+				"temperature",
+				"pedagogical"
+			],
+			"parameters": {
+				"base_radius": "Base radius in meters (default 0.05)",
+				"base_height": "Base height in meters (default 0.03)",
+				"tube_height": "Tube height in meters (default 0.14)",
+				"tube_radius": "Tube radius in meters (default 0.012)",
+				"flame_visible": "Bool — render the flame (default true)",
+				"flame_height": "Total flame height in meters (default 0.10)",
+				"flame_width": "Flame base width in meters (default 0.045)",
+				"flame_color": "Flame color encoding TEMPERATURE (default cool blue = low T)",
+				"body_color": "Base and tube color (default dark steel)",
+				"gas_line_visible": "Bool — render the gas hose entering from -X (default true)",
+				"valve_position": "closed | low | medium | full",
+				"accent_color": "Valve tick and base accent ring color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"chemistry",
+				"flame",
+				"annealing",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~180"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 1,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"chemistry_flask",
+					"clamp_stand"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"petri_dish": {
+			"lookup_name": "petri_dish",
+			"scene": "res://commons/artifacts/petri_dish/petri_dish.tscn",
+			"class_name": "PetriDish",
+			"name": "Petri Dish",
+			"description": "Shallow translucent petri dish — pale yellow-white agar disc, a thin translucent glass wall around the rim, an optional flat lid in faint glass, and a small grid of dark cell cubes on the agar surface in one of five canonical Conway's Life patterns (glider, blinker, block, random, empty), with an optional faint 8x8 graticule on the agar. In the lab's grammar the petri dish is the CONWAY'S GAME OF LIFE SUBSTRATE — a 2D world where local rules produce global behavior. Glider reads MOTION, blinker reads OSCILLATION, block reads STASIS, random reads SOUP, empty reads VOID.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"petri",
+				"dish",
+				"cellular_automata",
+				"conway",
+				"game_of_life",
+				"pedagogical"
+			],
+			"parameters": {
+				"dish_radius": "Dish radius in meters (default 0.075)",
+				"dish_height": "Dish wall height in meters (default 0.025)",
+				"agar_color": "Agar gel color (default pale yellow-white)",
+				"glass_color": "Translucent glass color with alpha (default faint blue-white)",
+				"cell_color": "Cell cube color (default dark colony green)",
+				"grid_color": "Faint surface graticule color (default warm grey)",
+				"accent_color": "Base accent ring color (default Portal orange)",
+				"cell_pattern": "glider | blinker | block | random | empty",
+				"colony_density": "Density 0-1 for random pattern (default 0.25)",
+				"lid_present": "Bool — render a translucent lid on top (default true)",
+				"grid_visible": "Bool — render a faint 8x8 graticule on the agar surface (default false)"
+			},
+			"dev_themes": [
+				"lab",
+				"biology",
+				"cellular_automata",
+				"conway",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~220"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"microscope",
+					"large_table",
+					"specimen_jar"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"wall_clock": {
+			"lookup_name": "wall_clock",
+			"scene": "res://commons/artifacts/wall_clock/wall_clock.tscn",
+			"class_name": "WallClock",
+			"name": "Wall Clock",
+			"description": "Round wall clock — off-white face disc, dark steel torus frame ring, 12 radial tick marks, and three hands (hour + minute in dark, second hand in accent red) rotated by their respective hour/minute/second_hand_angle degrees CLOCKWISE from the 12 position; a small Portal-orange center cap covers the pivot. When is_digital=true the face is replaced by a large alarm-red digital readout Label3D. In the lab's grammar the wall clock is the SCHEDULER — the shared reference that lets concurrent processes synchronise.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"clock",
+				"time",
+				"scheduling",
+				"synchronization",
+				"pedagogical"
+			],
+			"parameters": {
+				"clock_radius": "Clock face radius in meters (default 0.18)",
+				"clock_depth": "Clock body depth in meters (default 0.04)",
+				"face_color": "Face disc color (default off-white)",
+				"frame_color": "Frame ring color (default dark steel)",
+				"hands_color": "Hour and minute hand color (default near-black)",
+				"tick_color": "Tick mark color (default near-black)",
+				"second_hand_color": "Second hand color (default alarm red)",
+				"accent_color": "Center cap color (default Portal orange)",
+				"digital_color": "Digital readout color when is_digital=true (default alarm red)",
+				"hour_hand_angle": "Hour hand rotation in degrees clockwise from 12 (default 270.0)",
+				"minute_hand_angle": "Minute hand rotation in degrees clockwise from 12 (default 0.0)",
+				"second_hand_angle": "Second hand rotation in degrees clockwise from 12 (default 30.0)",
+				"tick_count": "Number of tick marks 4-24 (default 12)",
+				"is_digital": "Bool — replace analog hands with a digital Label3D readout (default false)",
+				"digital_time_text": "Text shown in digital mode (default '12:00:30')"
+			},
+			"dev_themes": [
+				"lab",
+				"time",
+				"scheduling",
+				"signage",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"torus",
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~340"
+			},
+			"spatial_needs": {
+				"platform": "wall",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"exit_sign",
+					"info_screen",
+					"whiteboard"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
 		}
 	}
 }

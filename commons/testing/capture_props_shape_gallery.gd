@@ -1014,6 +1014,198 @@ func _build_sweep() -> Array:
 				"accent_visible": false,
 			}))
 
+	# ── oscilloscope: body_width axis (compact → wide) ─────────────
+	var osc_specs := [
+		[0.28, 0.18, 0.22, "compact",    "compact (0.28m)"],
+		[0.35, 0.22, 0.26, "bench",      "bench (0.35m)"],
+		[0.45, 0.25, 0.30, "standard",   "standard (0.45m)"],
+		[0.60, 0.32, 0.36, "wide",       "wide (0.60m)"],
+		[0.85, 0.42, 0.42, "lab_grade",  "lab-grade (0.85m)"],
+	]
+	for i in range(5):
+		var osc = osc_specs[i]
+		sweep.append(_p("oscilloscope", "%d_%s" % [i + 1, osc[3]],
+			osc[4], "body %.2f × %.2f × %.2fm" % [osc[0], osc[1], osc[2]], "body_width",
+			{
+				"body_width": float(osc[0]),
+				"body_height": float(osc[1]),
+				"body_depth": float(osc[2]),
+				"waveform_shape": "composite",
+				"waveform_frequency": 3,
+				"waveform_color": Color(0.40, 0.95, 0.55),
+				"grid_visible": true,
+				"accent_color": k_accent,
+			}))
+
+	# ── bunsen_burner: flame_height axis (low → roaring) ───────────
+	var bb_specs := [
+		[0.04, 0.03, "low_pilot",      "low pilot (0.04m flame)"],
+		[0.08, 0.05, "small",          "small (0.08m)"],
+		[0.12, 0.06, "standard",       "standard (0.12m)"],
+		[0.20, 0.08, "high",           "high (0.20m)"],
+		[0.32, 0.10, "roaring",        "roaring (0.32m)"],
+	]
+	for i in range(5):
+		var bb = bb_specs[i]
+		sweep.append(_p("bunsen_burner", "%d_%s" % [i + 1, bb[2]],
+			bb[3], "flame_height = %.2fm, flame_width = %.2fm" % [bb[0], bb[1]], "flame_height",
+			{
+				"flame_height": float(bb[0]),
+				"flame_width": float(bb[1]),
+				"flame_color": Color(0.40, 0.65, 1.0),
+				"flame_visible": true,
+				"valve_position": "medium",
+				"gas_line_visible": true,
+				"accent_color": k_accent,
+			}))
+
+	# ── petri_dish: dish_radius axis ───────────────────────────────
+	var pd_specs := [
+		[0.04, 0.015, "micro",      "micro (4cm)"],
+		[0.06, 0.020, "small",      "small (6cm)"],
+		[0.075, 0.025, "standard",  "standard (7.5cm)"],
+		[0.11, 0.030, "large",      "large (11cm)"],
+		[0.18, 0.045, "industrial", "industrial (18cm)"],
+	]
+	for i in range(5):
+		var pd = pd_specs[i]
+		sweep.append(_p("petri_dish", "%d_%s" % [i + 1, pd[2]],
+			pd[3], "dish_radius = %.3fm, dish_height = %.3fm" % [pd[0], pd[1]], "dish_radius",
+			{
+				"dish_radius": float(pd[0]),
+				"dish_height": float(pd[1]),
+				"cell_pattern": "random",
+				"colony_density": 0.30,
+				"lid_present": true,
+				"agar_color": Color(0.90, 0.92, 0.78),
+				"cell_color": Color(0.20, 0.45, 0.20),
+				"accent_color": k_accent,
+			}))
+
+	# ── wall_clock: clock_radius axis (wristwatch → bell tower) ────
+	var wc_specs := [
+		[0.06, 0.02, false, "wristwatch",   "wristwatch (6cm)"],
+		[0.12, 0.03, false, "desk",         "desk (12cm)"],
+		[0.18, 0.04, false, "standard",     "standard (18cm)"],
+		[0.30, 0.05, false, "lobby",        "lobby (30cm)"],
+		[0.50, 0.07, false, "bell_tower",   "bell tower (50cm)"],
+	]
+	for i in range(5):
+		var wc = wc_specs[i]
+		sweep.append(_p("wall_clock", "%d_%s" % [i + 1, wc[3]],
+			wc[4], "clock_radius = %.2fm, depth = %.2fm" % [wc[0], wc[1]], "clock_radius",
+			{
+				"clock_radius": float(wc[0]),
+				"clock_depth": float(wc[1]),
+				"is_digital": bool(wc[2]),
+				"hour_hand_angle": 60.0 + float(i) * 30.0,
+				"minute_hand_angle": float(i) * 60.0,
+				"second_hand_angle": float(i) * 90.0,
+				"face_color": Color(0.94, 0.94, 0.95),
+				"frame_color": k_frame,
+				"hands_color": Color(0.10, 0.10, 0.10),
+				"second_hand_color": Color(0.95, 0.20, 0.20),
+				"accent_color": k_accent,
+			}))
+
+	# ── probability_box: dice_count axis ───────────────────────────
+	var pb_specs := [
+		[1, "single",      "single die"],
+		[3, "trio",        "trio (3 dice)"],
+		[5, "five_pack",   "five-pack"],
+		[6, "six_full_set","six (full die set)"],
+		[8, "eight_max",   "eight (max)"],
+	]
+	for i in range(5):
+		var pb = pb_specs[i]
+		var values: Array = []
+		for j in range(int(pb[0])):
+			values.append((j % 6) + 1)
+		sweep.append(_p("probability_box", "%d_%s" % [i + 1, pb[1]],
+			pb[2], "dice_count = %d" % pb[0], "dice_count",
+			{
+				"dice_count": int(pb[0]),
+				"arrangement": "scattered",
+				"face_values": PackedInt32Array(values),
+				"tray_color": Color(0.78, 0.62, 0.42),
+				"dice_color": Color(0.95, 0.94, 0.88),
+				"dot_color": Color(0.10, 0.10, 0.10),
+				"accent_color": k_accent,
+			}))
+
+	# ── map_table: obstacle_count axis (clear → maze) ──────────────
+	var mt_specs := [
+		[0,  "empty_clear",   "empty (0 obstacles)"],
+		[3,  "sparse",        "sparse (3)"],
+		[8,  "moderate",      "moderate (8)"],
+		[15, "dense",         "dense (15)"],
+		[24, "maze",          "maze (24)"],
+	]
+	for i in range(5):
+		var mt = mt_specs[i]
+		sweep.append(_p("map_table", "%d_%s" % [i + 1, mt[1]],
+			mt[2], "obstacle_count = %d" % mt[0], "obstacle_count",
+			{
+				"obstacle_count": int(mt[0]),
+				"path_visible": true,
+				"grid_visible": true,
+				"grid_size": 12,
+				"table_color": Color(0.35, 0.25, 0.18),
+				"map_color": Color(0.85, 0.82, 0.72),
+				"path_color": Color(0.20, 0.55, 0.95),
+				"marker_color": Color(0.95, 0.20, 0.20),
+				"accent_color": k_accent,
+			}))
+
+	# ── pendulum: swing_angle_degrees axis ─────────────────────────
+	var pe_specs := [
+		[0.0,   "rest",         "at rest (θ = 0°)"],
+		[10.0,  "small_angle",  "small angle (θ = 10°)"],
+		[25.0,  "mid_swing",    "mid swing (θ = 25°)"],
+		[40.0,  "large_swing",  "large swing (θ = 40°)"],
+		[60.0,  "extreme",      "extreme (θ = 60°)"],
+	]
+	for i in range(5):
+		var pe = pe_specs[i]
+		sweep.append(_p("pendulum", "%d_%s" % [i + 1, pe[1]],
+			pe[2], "swing_angle = %.1f°" % pe[0], "swing_angle_degrees",
+			{
+				"swing_angle_degrees": float(pe[0]),
+				"stand_height": 0.55,
+				"string_length": 0.40,
+				"bob_radius": 0.035,
+				"bob_color": Color(0.85, 0.65, 0.20),
+				"bob_emission": float(i) * 0.15,
+				"arc_visible": i >= 2,
+				"stand_color": k_frame,
+				"string_color": Color(0.10, 0.10, 0.12),
+				"accent_color": k_accent,
+			}))
+
+	# ── prism: spectrum_band_count axis ────────────────────────────
+	var pr_specs := [
+		[3,  0.08, "low_res",       "low-res (3 bands)"],
+		[5,  0.10, "five_band",     "5-band"],
+		[7,  0.12, "rainbow",       "rainbow (7 bands)"],
+		[10, 0.14, "high_res",      "high-res (10 bands)"],
+		[18, 0.18, "near_continuous","near-continuous (18 bands)"],
+	]
+	for i in range(5):
+		var pr = pr_specs[i]
+		sweep.append(_p("prism", "%d_%s" % [i + 1, pr[2]],
+			pr[3], "spectrum_band_count = %d, prism_size = %.2fm" % [pr[0], pr[1]], "spectrum_band_count",
+			{
+				"spectrum_band_count": int(pr[0]),
+				"prism_size": float(pr[1]),
+				"prism_height": float(pr[1]) * 1.8,
+				"light_in_visible": true,
+				"light_out_visible": true,
+				"glass_color": Color(0.88, 0.92, 0.96, 0.30),
+				"pedestal_visible": true,
+				"pedestal_color": k_frame,
+				"accent_color": k_accent,
+			}))
+
 	return sweep
 
 
