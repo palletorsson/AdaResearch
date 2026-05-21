@@ -5093,6 +5093,805 @@
 				"measured_footprint_cells": 1,
 				"footprint_source": "designed"
 			}
+		},
+		"scales": {
+			"lookup_name": "scales",
+			"scene": "res://commons/artifacts/scales/scales.tscn",
+			"class_name": "LabScales",
+			"name": "Balance Scales",
+			"description": "A classical two-pan balance scale — polished brass base disc, short vertical column, horizontal beam crossing the top of the column tilted around the column's pivot by the load imbalance (left heavier tilts left-down), hanging 3-segment brass chains at each beam end, flat brass pans, and stacks of small dark-steel weight cubes sized to left_load and right_load. A small dark pointer arrow on the column reads the tilt against an implied zero. When tilt_from_loads=true the prop COMPUTES its own equilibrium from the load difference (a physical solver); otherwise tilt_degrees overrides directly. In the lab's grammar the scale is the ALGORITHM OF EQUILIBRIUM / ARGMIN — minimisation as object: beam = degree of freedom, loads = loss, equilibrium = argmin. Portal-orange torus accent ring at the base.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"scales",
+				"balance",
+				"equilibrium",
+				"optimization",
+				"argmin",
+				"pedagogical"
+			],
+			"parameters": {
+				"base_radius": "Base disc radius in meters (default 0.10)",
+				"column_height": "Vertical column height in meters (default 0.15)",
+				"beam_length": "Horizontal beam length in meters (default 0.32)",
+				"pan_radius": "Pan disc radius in meters (default 0.060)",
+				"left_load": "Visible weight units stacked on the LEFT pan (default 1.0)",
+				"right_load": "Visible weight units stacked on the RIGHT pan (default 1.0)",
+				"tilt_degrees": "Manual beam tilt in degrees (used only when tilt_from_loads=false; +30 = left heavier, -30 = right heavier; default 0.0)",
+				"tilt_from_loads": "Bool — when true the beam tilt is computed from left_load - right_load; ignores tilt_degrees (default true)",
+				"base_color": "Base disc color (default polished brass)",
+				"beam_color": "Beam color (default polished brass)",
+				"pan_color": "Pan color (default polished brass with slight emission)",
+				"weight_color": "Weight cube color (default dark steel)",
+				"accent_color": "Base accent ring color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"equilibrium",
+				"optimization",
+				"argmin",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"box",
+						"torus",
+						"prism"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"metallic",
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~420"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"chemistry_flask",
+					"specimen_jar"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"kaleidoscope": {
+			"lookup_name": "kaleidoscope",
+			"scene": "res://commons/artifacts/kaleidoscope/kaleidoscope.tscn",
+			"class_name": "LabKaleidoscope",
+			"name": "Kaleidoscope",
+			"description": "A small kaleidoscope on a low stand — a horizontal cylindrical brass-and-steel tube whose axis runs along +X, a smaller dark eyepiece at +X, and a flat disc at -X divided into pattern_segments emissive pie-wedge shards that alternate between three accent colors so the eye reads mirror_count-fold dihedral symmetry (D3 at default = 3 mirrors). A Portal-orange emissive accent torus rings the tube at its midpoint. In the lab's grammar the kaleidoscope is the DIHEDRAL SYMMETRY GROUP / REFLECTION ALGORITHM in object form: the wedge is the fundamental domain, the mirror_count is the group order, and the disc is the orbit. Change mirror_count and you change the group the prop embodies.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"kaleidoscope",
+				"symmetry",
+				"dihedral",
+				"group-theory",
+				"reflection",
+				"pedagogical"
+			],
+			"parameters": {
+				"tube_length": "Tube length along +X in meters (default 0.30)",
+				"tube_radius": "Tube radius in meters (default 0.04)",
+				"tube_color": "Tube color (default dark steel)",
+				"eyepiece_visible": "Bool — render the eyepiece at +X (default true)",
+				"eyepiece_color": "Eyepiece color (default dark)",
+				"mirror_count": "Order of the dihedral symmetry group 2-8 — 3 = D3 standard kaleidoscope (default 3)",
+				"pattern_radius": "Pattern disc radius at -X end in meters (default 0.05)",
+				"pattern_segments": "Number of pattern wedges in the disc 2-24 (default 6)",
+				"pattern_color_a": "First palette color (default Portal orange)",
+				"pattern_color_b": "Second palette color (default cool blue)",
+				"pattern_color_c": "Third palette color (default magenta)",
+				"pattern_emission": "Pattern wedge emission energy 0-3 (default 0.8)",
+				"accent_color": "Tube accent ring color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"symmetry",
+				"group-theory",
+				"reflection",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"torus",
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~360"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 1,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"prism",
+					"microscope"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"abacus": {
+			"lookup_name": "abacus",
+			"scene": "res://commons/artifacts/abacus/abacus.tscn",
+			"class_name": "LabAbacus",
+			"name": "Abacus",
+			"description": "A classical abacus — light-wood rectangular frame in the XY plane facing +Z, with N vertical steel rods evenly spaced inside the frame, each rod threaded with M small spherical beads. Per rod a configurable count of beads have been pushed to the TOP (accent-color, slightly emissive); the remainder rest at the BOTTOM (dark wood). Each rod is a DIGIT, the up-beads are the DIGIT VALUE, and the row of digits across the rods is a POSITIONAL NUMBER. By default the up-counts encode π to 7 digits (3, 1, 4, 1, 5, 9, 2). In the lab's grammar the abacus is the ALGORITHM OF POSITIONAL NUMERALS — place-value representation as object: rod = position, bead count = digit, rack = number. Portal-orange accent stripe across the bottom rail.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"abacus",
+				"positional",
+				"numerals",
+				"representation",
+				"counting",
+				"pedagogical"
+			],
+			"parameters": {
+				"frame_width": "Frame width along X in meters (default 0.35)",
+				"frame_height": "Frame height along Y in meters (default 0.20)",
+				"frame_depth": "Frame depth along Z in meters (default 0.025)",
+				"frame_color": "Frame color (default light wood)",
+				"rod_count": "Number of vertical rods (digit positions) 3-10 (default 7)",
+				"rod_color": "Rod color (default dark steel)",
+				"beads_per_rod": "Number of beads on each rod 4-10 (default 5)",
+				"bead_radius": "Bead radius in meters (default 0.012)",
+				"bead_color_low": "Color of beads in the LOW position (default dark wood)",
+				"bead_color_high": "Color of beads in the HIGH position (default accent red)",
+				"bead_positions": "PackedInt32Array — number of beads pushed HIGH per rod, leftmost first (default [3,1,4,1,5,9,2] encoding pi)",
+				"accent_color": "Bottom rail accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"representation",
+				"positional-numerals",
+				"counting",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~640"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"whiteboard",
+					"probability_box"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"mirror": {
+			"lookup_name": "mirror",
+			"scene": "res://commons/artifacts/mirror/mirror.tscn",
+			"class_name": "LabMirror",
+			"name": "Mirror",
+			"description": "A flat rectangular reflective glass pane in a dark wooden frame, optionally on a small base — a looking-glass standing in the lab. Multi-mirror arrangements compose: 'single' (one mirror, identity), 'parallel' (two mirrors facing each other 0.6m apart, infinite reflection cone), 'triangular' (three mirrors arranged as an equilateral triangle viewing inward, the kaleidoscope's parent geometry), or 'rect' (four mirrors arranged as a square, mutual reflection). Portal-orange accent stripe on the bottom of each frame. In the lab's grammar the mirror is the FIXED POINT / IDENTITY OPERATION — the algorithm whose answer is always 'the input again'. Composed with itself in parallel/triangular/rect arrangements, identity generates the dihedral group.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"mirror",
+				"identity",
+				"fixed-point",
+				"reflection",
+				"group-theory",
+				"pedagogical"
+			],
+			"parameters": {
+				"mirror_width": "Mirror width along X in meters (default 0.45)",
+				"mirror_height": "Mirror height along Y in meters (default 0.65)",
+				"mirror_depth": "Mirror thickness along Z in meters (default 0.04)",
+				"frame_thickness": "Frame strip thickness in meters (default 0.025)",
+				"frame_color": "Frame color (default dark wood)",
+				"glass_color": "Glass color (default near-perfect reflective light)",
+				"glass_emission": "Glass emission energy so the mirror reads 0-1 (default 0.15)",
+				"mirror_count": "Number of mirrors 1-4 (default 1)",
+				"mirror_arrangement": "Arrangement string — 'single' | 'parallel' | 'triangular' | 'rect' (default 'single')",
+				"mount_stand": "Bool — when true add a small stand under each mirror (default true)",
+				"accent_color": "Bottom accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"identity",
+				"reflection",
+				"group-theory",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"roughness"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~120"
+			},
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"whiteboard",
+					"prism",
+					"kaleidoscope"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"terrarium": {
+			"lookup_name": "terrarium",
+			"scene": "res://commons/artifacts/terrarium/terrarium.tscn",
+			"class_name": "Terrarium",
+			"name": "Terrarium",
+			"description": "A small rectangular glass terrarium tank — translucent walls in a thin dark-steel frame, a dark soil bed inside, scattered green plant prisms, white prey spheres ('rabbits'), and a larger reddish predator cube ('fox'), with a Portal-orange accent stripe along the top of the front face. In the lab's grammar the terrarium is the LOTKA-VOLTERRA PREDATOR-PREY SYSTEM — a closed dynamical system where prey graze on vegetation and predators eat prey, and the two populations oscillate in coupled cycles. The visible count of spheres and cubes IS the state vector x(t), y(t) at a frozen instant in time.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"terrarium",
+				"lotka_volterra",
+				"predator_prey",
+				"ecology",
+				"population_dynamics",
+				"closed_system",
+				"pedagogical"
+			],
+			"parameters": {
+				"tank_width": "Tank width in meters (default 0.40)",
+				"tank_depth": "Tank depth in meters (default 0.30)",
+				"tank_height": "Tank height in meters (default 0.35)",
+				"glass_color": "Translucent glass color with alpha (default faint blue-white)",
+				"frame_color": "Steel frame color (default dark steel)",
+				"floor_color": "Soil/floor color (default brown soil)",
+				"vegetation_count": "Number of plant prisms 0-20 (default 6)",
+				"vegetation_color": "Vegetation color (default plant green)",
+				"prey_count": "Number of prey spheres 0-20 (default 4)",
+				"prey_color": "Prey sphere color (default off-white)",
+				"predator_count": "Number of predator cubes 0-10 (default 1)",
+				"predator_color": "Predator cube color (default red)",
+				"accent_color": "Top-edge accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"ecology",
+				"lotka_volterra",
+				"population_dynamics",
+				"closed_system",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"prism"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~420"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"petri_dish",
+					"fishbowl",
+					"specimen_jar",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
+		},
+		"fishbowl": {
+			"lookup_name": "fishbowl",
+			"scene": "res://commons/artifacts/fishbowl/fishbowl.tscn",
+			"class_name": "Fishbowl",
+			"name": "Fishbowl",
+			"description": "A small spherical glass fishbowl — translucent walls, a faint-blue water volume filling about three-quarters of the bowl, several small orange fish sphere particles scattered inside, rising white bubble spheres, and a fading chain of fish_trail_visible trail dots showing the random-walk path of ONE fish. A Portal-orange accent ring sits at the top rim. In the lab's grammar the fishbowl is the BROWNIAN MOTION / RANDOM WALK CHAMBER — a bounded fluid where particles take hash-deterministic small jumps, with one fish's trail rendered as a discrete sample of dW (the Wiener-process increments Robert Brown saw in pollen).",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"fishbowl",
+				"brownian_motion",
+				"random_walk",
+				"wiener_process",
+				"diffusion",
+				"pedagogical"
+			],
+			"parameters": {
+				"bowl_radius": "Bowl radius in meters (default 0.18)",
+				"bowl_height": "Bowl height in meters (default 0.22)",
+				"glass_color": "Translucent glass color with alpha (default faint blue-white)",
+				"glass_emission": "Glass emission energy 0-1.5 (default 0.10)",
+				"water_color": "Faint-blue water color with alpha (default soft blue)",
+				"water_height_fraction": "Water fill fraction 0-1 (default 0.75)",
+				"fish_count": "Number of fish particles 0-20 (default 5)",
+				"fish_color": "Fish color (default warm orange)",
+				"fish_trail_visible": "Bool — render the random-walk trail of one fish (default true)",
+				"trail_color": "Trail dot color with alpha (default fish-orange faded)",
+				"trail_dot_count": "Number of dots in the random-walk trail 1-32 (default 8)",
+				"bubble_count": "Number of rising bubbles 0-12 (default 3)",
+				"accent_color": "Rim accent ring color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"random_walk",
+				"brownian_motion",
+				"diffusion",
+				"stochastic",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"scale"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~360"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"petri_dish",
+					"terrarium",
+					"specimen_jar"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"lock_box": {
+			"lookup_name": "lock_box",
+			"scene": "res://commons/artifacts/lock_box/lock_box.tscn",
+			"class_name": "LockBox",
+			"name": "Lock Box",
+			"description": "A small rectangular dark-steel strongbox with a slightly lighter pivoting lid hinged on its back edge by lid_open_amount × 90°, a row of brass combination dials across the front face (each with a red indicator notch rotated to a digit 0-9), an optional dark clasp on the lid front, a Label3D below the dials reading the combination as digits, and a Portal-orange accent stripe along the lid's leading edge. In the lab's grammar the lock_box is the HASH / COMMITMENT / ENCRYPTION OBJECT — a sealed container where dial_positions IS the key, the closed lid IS the commitment, and opening reveals a dark interior cavity (the decommitment). N dials at 10 positions each gives 10^N keys: 4 dials = 10000, the textbook combination-lock keyspace.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"lock_box",
+				"hash",
+				"commitment",
+				"encryption",
+				"cryptography",
+				"keyspace",
+				"pedagogical"
+			],
+			"parameters": {
+				"box_width": "Box width in meters (default 0.20)",
+				"box_height": "Box height in meters (default 0.16)",
+				"box_depth": "Box depth in meters (default 0.14)",
+				"body_color": "Box body color (default dark steel)",
+				"lid_color": "Lid color (default slightly lighter steel)",
+				"lid_open_amount": "Lid open fraction 0-1 — 0 closed, 1 pivoted 90° open (default 0.0)",
+				"combination_dial_count": "Number of dials 1-6 (default 4)",
+				"dial_color": "Dial disc color (default brass)",
+				"dial_indicator_color": "Dial indicator notch color (default alarm red)",
+				"dial_positions": "Per-dial position 0-9 as PackedInt32Array — pads/truncates to dial_count (default [3,7,1,5])",
+				"clasp_visible": "Bool — render a dark clasp on the lid front (default true)",
+				"clasp_color": "Clasp color (default near-black steel)",
+				"accent_color": "Lid-edge accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"cryptography",
+				"commitment",
+				"hashing",
+				"keyspace",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"roughness"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~280"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"specimen_jar",
+					"large_table",
+					"palm_scanner"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"slide_projector": {
+			"lookup_name": "slide_projector",
+			"scene": "res://commons/artifacts/slide_projector/slide_projector.tscn",
+			"class_name": "SlideProjector",
+			"name": "Slide Projector",
+			"description": "A rectangular dark-steel projector chassis with a translucent lamp-warm glass lens recessed into the front (+Z) face, an emissive cone of light exiting the lens along +Z when beam_visible is true, a round dark-steel slide carousel disc on top with slide_count radial slot strips arranged in a ring, and a Portal-orange Label3D on the chassis face reading the current frame number (FRAME N). An accent stripe runs along the lens housing. In the lab's grammar the slide_projector is the SEQUENTIAL-FRAME / TIME-STEPPING / ANIMATION ENGINE — the discrete loop made physical: current_slide_number IS the loop variable i, slide_count IS the array length, the beam IS the redraw step.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"slide_projector",
+				"animation",
+				"time_stepping",
+				"iteration",
+				"sequence",
+				"loop",
+				"pedagogical"
+			],
+			"parameters": {
+				"body_width": "Body width in meters (default 0.30)",
+				"body_height": "Body height in meters (default 0.18)",
+				"body_depth": "Body depth in meters (default 0.45)",
+				"body_color": "Chassis color (default dark steel)",
+				"lens_radius": "Lens radius in meters (default 0.040)",
+				"lens_color": "Translucent lens color with alpha (default warm glass)",
+				"lamp_on": "Bool — lens glows with lamp emission when true (default true)",
+				"lamp_color": "Lamp emission color (default warm white)",
+				"lamp_glow": "Lamp emission energy 0-4 (default 1.4)",
+				"beam_visible": "Bool — render an emissive light cone exiting the lens (default true)",
+				"beam_length": "Beam cone length in meters (default 0.60)",
+				"beam_color": "Beam emission color (default warm white)",
+				"current_slide_number": "Integer shown on the FRAME N label (default 7)",
+				"slide_carousel_visible": "Bool — render the circular slide tray on top (default true)",
+				"carousel_radius": "Carousel disc radius in meters (default 0.10)",
+				"slide_count": "Number of radial slot strips on the carousel 1-80 (default 40)",
+				"accent_color": "Lens-housing accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"lab",
+				"animation",
+				"iteration",
+				"time_stepping",
+				"discrete_loop",
+				"pedagogical"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~260"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"info_screen",
+					"whiteboard"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
 		}
 	}
 }

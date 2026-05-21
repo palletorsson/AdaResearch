@@ -1382,6 +1382,184 @@ func _build_sweep() -> Array:
 			"spectrum_band_count": 12,
 		}))
 
+	# ── scales: critical_parameter = left_load vs right_load (argmin)
+	sweep.append(_p("scales", "1_balanced_argmin", "balanced (argmin)",
+		"equilibrium — left and right loads equal, beam horizontal",
+		{
+			"left_load": 1.0,
+			"right_load": 1.0,
+			"tilt_from_loads": true,
+		}))
+	sweep.append(_p("scales", "2_left_heavy_descent", "left heavy (descent)",
+		"the gradient is on the left — beam tilts toward the heavier side",
+		{
+			"left_load": 3.0,
+			"right_load": 1.0,
+			"tilt_from_loads": true,
+		}))
+	sweep.append(_p("scales", "3_right_heavy_escape", "right heavy (escape)",
+		"the gradient flipped — right has more weight, beam tilts -",
+		{
+			"left_load": 1.0,
+			"right_load": 4.0,
+			"tilt_from_loads": true,
+		}))
+
+	# ── kaleidoscope: critical_parameter = mirror_count (group order)
+	sweep.append(_p("kaleidoscope", "1_d3_triangular", "D3 triangular",
+		"3-fold symmetry — the dihedral group D3, basic kaleidoscope",
+		{
+			"mirror_count": 3,
+			"pattern_segments": 6,
+		}))
+	sweep.append(_p("kaleidoscope", "2_d6_hexagonal", "D6 hexagonal",
+		"6-fold symmetry — D6, the snowflake group",
+		{
+			"mirror_count": 6,
+			"pattern_segments": 12,
+		}))
+	sweep.append(_p("kaleidoscope", "3_d8_dense", "D8 dense",
+		"8-fold symmetry — D8, the dense rosette",
+		{
+			"mirror_count": 8,
+			"pattern_segments": 16,
+		}))
+
+	# ── abacus: critical_parameter = bead_positions (digits)
+	sweep.append(_p("abacus", "1_pi_digits", "π digits",
+		"the canonical seven digits — 3.141592, base-10 positional",
+		{
+			"rod_count": 7,
+			"bead_positions": PackedInt32Array([3, 1, 4, 1, 5, 9, 2]),
+			"bead_color_high": Color(0.95, 0.20, 0.20),
+		}))
+	sweep.append(_p("abacus", "2_e_digits", "e digits",
+		"Euler's number — 2.71828, the second mathematical constant",
+		{
+			"rod_count": 7,
+			"bead_positions": PackedInt32Array([2, 7, 1, 8, 2, 8, 1]),
+			"bead_color_high": Color(0.20, 0.55, 0.95),
+		}))
+	sweep.append(_p("abacus", "3_zero_state", "zero state",
+		"all beads low — the abacus before any computation",
+		{
+			"rod_count": 7,
+			"bead_positions": PackedInt32Array([0, 0, 0, 0, 0, 0, 0]),
+			"bead_color_high": Color(0.20, 0.85, 0.40),
+		}))
+
+	# ── mirror: critical_parameter = mirror_arrangement ────────────
+	sweep.append(_p("mirror", "1_single_identity", "single (identity)",
+		"the identity element — one mirror, the trivial fixed point map",
+		{
+			"mirror_arrangement": "single",
+			"mirror_count": 1,
+		}))
+	sweep.append(_p("mirror", "2_parallel_infinite", "parallel (infinite)",
+		"two parallel mirrors — infinite reflections, the recursion cone",
+		{
+			"mirror_arrangement": "parallel",
+			"mirror_count": 2,
+		}))
+	sweep.append(_p("mirror", "3_triangular_d3", "triangular (D3)",
+			"three mirrors facing inward — D3 fundamental domain enclosure",
+			{
+				"mirror_arrangement": "triangular",
+				"mirror_count": 3,
+			}))
+
+	# ── terrarium: critical_parameter = predator_count vs prey ─────
+	sweep.append(_p("terrarium", "1_prey_dominant", "prey dominant",
+		"high prey, low predator — Lotka-Volterra at peak prey",
+		{
+			"prey_count": 8,
+			"predator_count": 1,
+			"vegetation_count": 12,
+		}))
+	sweep.append(_p("terrarium", "2_predator_surge", "predator surge",
+		"predators rising — system mid-cycle, prey falling",
+		{
+			"prey_count": 3,
+			"predator_count": 3,
+			"vegetation_count": 6,
+		}))
+	sweep.append(_p("terrarium", "3_overfishing_collapse", "collapse",
+		"predators dominate, prey crashed — the system about to reset",
+		{
+			"prey_count": 1,
+			"predator_count": 4,
+			"vegetation_count": 2,
+		}))
+
+	# ── fishbowl: critical_parameter = fish_trail_visible ──────────
+	sweep.append(_p("fishbowl", "1_trail_visible", "trail visible",
+		"the random walk drawn — 8 trail dots show Brownian path",
+		{
+			"fish_count": 5,
+			"fish_trail_visible": true,
+			"bubble_count": 3,
+		}))
+	sweep.append(_p("fishbowl", "2_no_trail", "no trail (instant)",
+		"snapshot — fish only, no history, the Markov assumption",
+		{
+			"fish_count": 8,
+			"fish_trail_visible": false,
+			"bubble_count": 2,
+		}))
+	sweep.append(_p("fishbowl", "3_single_walker", "single walker",
+		"one fish, full trail — the canonical 1D random walker",
+		{
+			"fish_count": 1,
+			"fish_trail_visible": true,
+			"bubble_count": 0,
+		}))
+
+	# ── lock_box: critical_parameter = lid_open_amount ─────────────
+	sweep.append(_p("lock_box", "1_locked_closed", "locked (closed)",
+		"committed — lid shut, combination set, contents hidden",
+		{
+			"lid_open_amount": 0.0,
+			"combination_dial_count": 4,
+			"dial_positions": PackedInt32Array([3, 7, 1, 5]),
+		}))
+	sweep.append(_p("lock_box", "2_half_open_reveal", "half open (reveal)",
+		"the commitment opening — lid lifting, dark cavity revealed",
+		{
+			"lid_open_amount": 0.5,
+			"combination_dial_count": 4,
+			"dial_positions": PackedInt32Array([0, 0, 0, 0]),
+		}))
+	sweep.append(_p("lock_box", "3_fully_open", "fully open",
+		"the secret revealed — lid vertical, contents exposed",
+		{
+			"lid_open_amount": 1.0,
+			"combination_dial_count": 6,
+			"dial_positions": PackedInt32Array([1, 4, 1, 5, 9, 2]),
+		}))
+
+	# ── slide_projector: critical_parameter = current_slide_number
+	sweep.append(_p("slide_projector", "1_frame_one_start", "frame 1 (start)",
+		"the first frame — t=0, the initial condition",
+		{
+			"current_slide_number": 1,
+			"lamp_on": true,
+			"beam_visible": true,
+		}))
+	sweep.append(_p("slide_projector", "2_frame_mid_running", "frame N (running)",
+		"mid-sequence — t=23, the time-stepping in progress",
+		{
+			"current_slide_number": 23,
+			"lamp_on": true,
+			"beam_visible": true,
+		}))
+	sweep.append(_p("slide_projector", "3_lamp_off_paused", "lamp off (paused)",
+		"the simulation paused — no beam, the carousel waits",
+		{
+			"current_slide_number": 17,
+			"lamp_on": false,
+			"beam_visible": false,
+		}))
+
 	return sweep
 
 

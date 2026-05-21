@@ -1206,6 +1206,201 @@ func _build_sweep() -> Array:
 				"accent_color": k_accent,
 			}))
 
+	# ── scales: beam_length axis (jeweller → grocery → market) ─────
+	var sc_specs := [
+		[0.15, 0.06, 0.035, "jeweller",    "jeweller (0.15m beam)"],
+		[0.24, 0.08, 0.050, "kitchen",     "kitchen (0.24m)"],
+		[0.32, 0.10, 0.060, "standard",    "standard (0.32m)"],
+		[0.48, 0.14, 0.080, "grocery",     "grocery (0.48m)"],
+		[0.70, 0.20, 0.110, "market",      "market (0.70m)"],
+	]
+	for i in range(5):
+		var s = sc_specs[i]
+		sweep.append(_p("scales", "%d_%s" % [i + 1, s[3]],
+			s[4], "beam_length = %.2fm, base = %.2fm" % [s[0], s[1]], "beam_length",
+			{
+				"beam_length": float(s[0]),
+				"base_radius": float(s[1]),
+				"pan_radius": float(s[2]),
+				"left_load": 2.0,
+				"right_load": 1.0,
+				"tilt_from_loads": true,
+				"base_color": Color(0.85, 0.65, 0.20),
+				"accent_color": k_accent,
+			}))
+
+	# ── kaleidoscope: mirror_count axis (D2 → D8) ──────────────────
+	var ka_specs := [
+		[2, 4,  "d2",  "D2 (mirror_count=2)"],
+		[3, 6,  "d3",  "D3 (canonical)"],
+		[5, 10, "d5",  "D5"],
+		[6, 12, "d6",  "D6 (snowflake)"],
+		[8, 16, "d8",  "D8 (dense rosette)"],
+	]
+	for i in range(5):
+		var k = ka_specs[i]
+		sweep.append(_p("kaleidoscope", "%d_%s" % [i + 1, k[2]],
+			k[3], "mirror_count = %d, pattern_segments = %d" % [k[0], k[1]], "mirror_count",
+			{
+				"mirror_count": int(k[0]),
+				"pattern_segments": int(k[1]),
+				"tube_length": 0.30,
+				"tube_color": k_frame,
+				"accent_color": k_accent,
+			}))
+
+	# ── abacus: rod_count axis (3 → 10 places) ─────────────────────
+	var ab_specs := [
+		[3,  "decimal_3",  "3-place decimal"],
+		[5,  "decimal_5",  "5-place"],
+		[7,  "decimal_7",  "7-place (π precision)"],
+		[8,  "octal",      "8-rod (octal)"],
+		[10, "ten_rod",    "10-rod (e and more)"],
+	]
+	for i in range(5):
+		var a = ab_specs[i]
+		var bps: Array = []
+		for j in range(int(a[0])):
+			bps.append((j + 1) % 6)
+		sweep.append(_p("abacus", "%d_%s" % [i + 1, a[1]],
+			a[2], "rod_count = %d" % a[0], "rod_count",
+			{
+				"rod_count": int(a[0]),
+				"bead_positions": PackedInt32Array(bps),
+				"frame_color": Color(0.78, 0.62, 0.42),
+				"bead_color_high": Color(0.95, 0.20, 0.20),
+				"accent_color": k_accent,
+			}))
+
+	# ── mirror: mirror_arrangement × mirror_count axis ─────────────
+	var mr_specs := [
+		[1, "single",     "single",        "single (identity)"],
+		[2, "parallel",   "parallel",      "parallel (inf reflections)"],
+		[3, "triangular", "triangular",    "triangular (D3 enclosure)"],
+		[4, "rect",       "rect",          "rect (D4 enclosure)"],
+		[1, "single",     "single_tall",   "tall single (1.2m × 0.6m)"],
+	]
+	for i in range(5):
+		var m = mr_specs[i]
+		var height: float = 0.65
+		var width: float = 0.45
+		if String(m[2]) == "single_tall":
+			height = 1.20
+			width = 0.60
+		sweep.append(_p("mirror", "%d_%s" % [i + 1, m[2]],
+			m[3], "arrangement = %s, mirror_count = %d" % [m[1], m[0]], "arrangement",
+			{
+				"mirror_arrangement": m[1],
+				"mirror_count": int(m[0]),
+				"mirror_width": width,
+				"mirror_height": height,
+				"frame_color": Color(0.30, 0.20, 0.15),
+				"glass_color": Color(0.90, 0.92, 0.95),
+				"accent_color": k_accent,
+			}))
+
+	# ── terrarium: tank_width axis (small → biome) ─────────────────
+	var tr_specs := [
+		[0.20, 0.15, 0.20, "specimen",   "specimen (0.20m)"],
+		[0.30, 0.22, 0.27, "small",      "small (0.30m)"],
+		[0.40, 0.30, 0.35, "standard",   "standard (0.40m)"],
+		[0.60, 0.40, 0.48, "exhibit",    "exhibit (0.60m)"],
+		[0.90, 0.55, 0.65, "biome",      "biome (0.90m)"],
+	]
+	for i in range(5):
+		var t = tr_specs[i]
+		sweep.append(_p("terrarium", "%d_%s" % [i + 1, t[3]],
+			t[4], "tank %.2f × %.2f × %.2fm" % [t[0], t[1], t[2]], "tank_size",
+			{
+				"tank_width": float(t[0]),
+				"tank_depth": float(t[1]),
+				"tank_height": float(t[2]),
+				"vegetation_count": 4 + i * 3,
+				"prey_count": 2 + i,
+				"predator_count": max(1, i),
+				"glass_color": Color(0.85, 0.92, 0.95, 0.30),
+				"frame_color": k_frame,
+				"accent_color": k_accent,
+			}))
+
+	# ── fishbowl: bowl_radius axis ─────────────────────────────────
+	var fb_specs := [
+		[0.10, 0.12, "goldfish",     "goldfish (0.10m)"],
+		[0.14, 0.16, "small",        "small (0.14m)"],
+		[0.18, 0.22, "standard",     "standard (0.18m)"],
+		[0.26, 0.32, "large",        "large (0.26m)"],
+		[0.40, 0.48, "aquarium_round","aquarium round (0.40m)"],
+	]
+	for i in range(5):
+		var fb = fb_specs[i]
+		sweep.append(_p("fishbowl", "%d_%s" % [i + 1, fb[2]],
+			fb[3], "bowl_radius = %.2fm, bowl_height = %.2fm" % [fb[0], fb[1]], "bowl_radius",
+			{
+				"bowl_radius": float(fb[0]),
+				"bowl_height": float(fb[1]),
+				"water_height_fraction": 0.75,
+				"fish_count": max(1, 2 + i),
+				"fish_trail_visible": true,
+				"bubble_count": i,
+				"glass_color": Color(0.85, 0.92, 0.95, 0.30),
+				"water_color": Color(0.55, 0.78, 0.95, 0.55),
+				"fish_color": Color(0.95, 0.65, 0.20),
+				"accent_color": k_accent,
+			}))
+
+	# ── lock_box: box_width × dial_count axis ──────────────────────
+	var lb_specs := [
+		[0.12, 0.10, 0.10, 1, "padlock",     "padlock (0.12m, 1 dial)"],
+		[0.16, 0.13, 0.12, 2, "small",       "small (0.16m, 2 dials)"],
+		[0.20, 0.16, 0.14, 4, "standard",    "standard (0.20m, 4)"],
+		[0.32, 0.22, 0.20, 5, "strong_box",  "strong-box (0.32m, 5)"],
+		[0.50, 0.32, 0.28, 6, "vault",       "vault (0.50m, 6)"],
+	]
+	for i in range(5):
+		var lb = lb_specs[i]
+		var positions: Array = []
+		for j in range(int(lb[3])):
+			positions.append((j + 3) % 10)
+		sweep.append(_p("lock_box", "%d_%s" % [i + 1, lb[4]],
+			lb[5], "box %.2f × %.2f × %.2fm, %d dials" % [lb[0], lb[1], lb[2], lb[3]], "box_size + dials",
+			{
+				"box_width": float(lb[0]),
+				"box_height": float(lb[1]),
+				"box_depth": float(lb[2]),
+				"combination_dial_count": int(lb[3]),
+				"dial_positions": PackedInt32Array(positions),
+				"lid_open_amount": 0.0,
+				"body_color": Color(0.20, 0.20, 0.24),
+				"lid_color": Color(0.28, 0.28, 0.32),
+				"dial_color": Color(0.85, 0.65, 0.20),
+				"accent_color": k_accent,
+			}))
+
+	# ── slide_projector: body_depth axis (compact → cinema) ────────
+	var sp_specs := [
+		[0.20, 0.12, 0.28, 0.030, "8mm",            "8mm (0.28m)"],
+		[0.26, 0.15, 0.36, 0.035, "carousel_small", "carousel small (0.36m)"],
+		[0.30, 0.18, 0.45, 0.040, "standard",       "standard (0.45m)"],
+		[0.38, 0.22, 0.58, 0.050, "auditorium",     "auditorium (0.58m)"],
+		[0.50, 0.30, 0.75, 0.065, "cinema",         "cinema (0.75m)"],
+	]
+	for i in range(5):
+		var sp = sp_specs[i]
+		sweep.append(_p("slide_projector", "%d_%s" % [i + 1, sp[4]],
+			sp[5], "body %.2f × %.2f × %.2fm" % [sp[0], sp[1], sp[2]], "body_depth",
+			{
+				"body_width": float(sp[0]),
+				"body_height": float(sp[1]),
+				"body_depth": float(sp[2]),
+				"lens_radius": float(sp[3]),
+				"lamp_on": true,
+				"beam_visible": true,
+				"current_slide_number": 7,
+				"body_color": Color(0.22, 0.22, 0.25),
+				"beam_color": Color(1.0, 0.95, 0.80),
+				"accent_color": k_accent,
+			}))
+
 	return sweep
 
 
