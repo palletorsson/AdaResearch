@@ -35,6 +35,7 @@ const SCENE_LARGE_TABLE: PackedScene = preload("res://commons/artifacts/large_ta
 const SCENE_WHITEBOARD: PackedScene = preload("res://commons/artifacts/whiteboard/whiteboard.tscn")
 const SCENE_LAB_STOOL: PackedScene = preload("res://commons/artifacts/lab_stool/lab_stool.tscn")
 const SCENE_SAFETY_SHOWER: PackedScene = preload("res://commons/artifacts/safety_shower/safety_shower.tscn")
+const SCENE_CATALYST_PICKUP: PackedScene = preload("res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn")
 
 @export var current_estimate: float = 0.6427
 @export var sample_count_so_far: int = 1024
@@ -192,5 +193,22 @@ func _build_apparatus() -> void:
 	shower.position = Vector3(2.7, 0.0, -2.6)
 	shower.rotation = Vector3(0.0, deg_to_rad(-45.0), 0.0)
 	add_child(shower)
+
+	# ── The closing gesture: the catalyst pickup pedestal ────────────
+	# Placed on the player's path between the workbench and the exit.
+	# Walking up to it grabs the chaos-mode token; LabManager records
+	# randomness as completed; the bracelet gains the chaos projectile.
+	var pickup: Node3D = SCENE_CATALYST_PICKUP.instantiate()
+	pickup.set("sequence_name", "randomness")
+	pickup.set("label_text", "CHAOS CATALYST")
+	pickup.set("orb_color", Color(0.95, 0.55, 0.20))  # chaos amber
+	pickup.set("accent_color", Color(0.95, 0.55, 0.20))
+	pickup.set("pedestal_color", Color(0.18, 0.18, 0.22))
+	pickup.set("pulsing", true)
+	pickup.set("claimed", false)
+	# Position on the +Z side of the workbench (between the workbench and
+	# the player spawn) so the player encounters it on the way back out.
+	pickup.position = Vector3(0.0, 0.0, 1.4)
+	add_child(pickup)
 
 	_built = true
