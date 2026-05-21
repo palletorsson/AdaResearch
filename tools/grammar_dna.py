@@ -1953,6 +1953,77 @@ def gen_tessellation_field() -> list[dict]:
                    "rule": "even (r+c) → horizontal pair, odd → vertical pair"},
     })
 
+    # ── Truncated square tiling 4.8.8 — Archimedean uniform (iter 8 FINALE)
+    # Regular octagons in a square lattice with squares filling the
+    # diagonal gaps. Vertex configuration 4.8.8: at every vertex, a
+    # square and two octagons meet. Plane-filling by construction —
+    # all edges share length s, and the geometry is verified below.
+    components = []
+    s_488 = 0.10                                    # shared edge length
+    a_8 = s_488 * (1.0 + math.sqrt(2.0)) * 0.5       # 8-gon apothem ≈ 0.1207
+    R_8 = s_488 / (2.0 * math.sin(math.pi / 8.0))    # 8-gon circumradius ≈ 0.1307
+    R_4_488 = s_488 / math.sqrt(2.0)                 # square circumradius ≈ 0.0707
+    grid_spacing_488 = 2.0 * a_8                     # ≈ 0.2414
+    rows_488, cols_488 = 4, 5                        # octagon counts
+    oct_color = [0.85, 0.74, 0.52]                   # warm sand
+    sq_color  = [0.42, 0.28, 0.20]                   # dark walnut
+    # Octagons on square lattice, rotated 22.5° so straight edges face
+    # N/S/E/W (shared with neighbours) and diagonal edges face the
+    # corners (shared with squares).
+    for r in range(rows_488):
+        for c in range(cols_488):
+            x = (c - (cols_488 - 1) * 0.5) * grid_spacing_488
+            z = (r - (rows_488 - 1) * 0.5) * grid_spacing_488
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(R_8, 4),
+                    "bottom_radius": round(R_8, 4),
+                    "height": plate_h,
+                    "radial_segments": 8,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5, round(z, 5)],
+                    "rotation_degrees": [0, 22.5, 0],
+                },
+                "color": oct_color,
+            })
+    # Squares at every interior intersection (between four octagons).
+    # rotation 0° → vertices at N/E/S/W, edges aligned with the
+    # diagonal edges of the surrounding octagons.
+    for r in range(rows_488 - 1):
+        for c in range(cols_488 - 1):
+            x = (c - (cols_488 - 1) * 0.5 + 0.5) * grid_spacing_488
+            z = (r - (rows_488 - 1) * 0.5 + 0.5) * grid_spacing_488
+            components.append({
+                "primitive": "CylinderMesh",
+                "params": {
+                    "top_radius": round(R_4_488, 4),
+                    "bottom_radius": round(R_4_488, 4),
+                    "height": plate_h,
+                    "radial_segments": 4,
+                },
+                "transform": {
+                    "position": [round(x, 5), plate_h * 0.5 + 0.0005, round(z, 5)],
+                    "rotation_degrees": [0, 0, 0],
+                },
+                "color": sq_color,
+            })
+    variants.append({
+        "id": "alhambra_truncated_square_488",
+        "spec": {
+            "_comment": "Archimedean uniform tiling 4.8.8 — regular octagons on a square lattice + squares filling the diagonal gaps. At every vertex a square and two octagons meet. Plane-filling by Euclidean geometry: octagon apothem = s(1+√2)/2, square diagonal = s, grid spacing = 2·apothem. Iter 8 finale — the most ornate of the regular uniform tilings.",
+            "primitive": "Composition", "shader": "flat",
+            "color": panel_color, "components": components,
+        },
+        "params": {"tiling": "Archimedean 4.8.8 (truncated square)",
+                   "lattice": f"{rows_488}×{cols_488} octagons + {rows_488-1}×{cols_488-1} squares",
+                   "vertex_configuration": "4.8.8 (one square + two octagons at each vertex)",
+                   "edge_length": s_488,
+                   "rule": "octagons rotated 22.5° (straight edges N/S/E/W), squares rotated 0° (vertices N/E/S/W)",
+                   "trajectory": "iter 8 finale — Moorish floor classic"},
+    })
+
     return variants
 
 
