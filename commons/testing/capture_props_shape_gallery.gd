@@ -475,6 +475,195 @@ func _build_sweep() -> Array:
 				"cable_colors": cable_palette,
 			}))
 
+	# ── lab_stool: seat_height axis (low → tall) ───────────────────
+	var stool_specs := [
+		[0.45, 0.18, 0.30, "five_star", "child_low",   "child low (0.45m)"],
+		[0.55, 0.18, 0.32, "five_star", "short",       "short (0.55m)"],
+		[0.65, 0.18, 0.32, "five_star", "standard",    "standard (0.65m)"],
+		[0.78, 0.20, 0.34, "ring",      "tall_ring",   "tall ring (0.78m)"],
+		[0.90, 0.20, 0.36, "ring",      "draft_max",   "draft height (0.90m)"],
+	]
+	for i in range(5):
+		var s = stool_specs[i]
+		sweep.append(_p("lab_stool", "%d_%s" % [i + 1, s[4]],
+			s[5], "seat_height = %.2fm, base_style = %s" % [s[0], s[3]], "seat_height",
+			{
+				"seat_height": float(s[0]),
+				"seat_radius": float(s[1]),
+				"base_radius": float(s[2]),
+				"base_style": s[3],
+				"seat_color": Color(0.08, 0.08, 0.10),
+				"post_color": k_frame,
+				"accent_color": k_accent,
+				"accent_strip": true,
+			}))
+
+	# ── fume_hood: hood_width × hood_height sweep ──────────────────
+	var hood_specs := [
+		[1.0, 1.6, 0.5, "compact",      "compact (1.0×1.6)"],
+		[1.4, 1.9, 0.6, "small",        "small (1.4×1.9)"],
+		[1.8, 2.1, 0.7, "standard",     "standard (1.8×2.1)"],
+		[2.4, 2.4, 0.8, "wide",         "wide (2.4×2.4)"],
+		[3.0, 2.6, 0.9, "industrial",   "industrial (3.0×2.6)"],
+	]
+	for i in range(5):
+		var h = hood_specs[i]
+		sweep.append(_p("fume_hood", "%d_%s" % [i + 1, h[3]],
+			h[4], "hood_width × hood_height = %.1f×%.1fm" % [h[0], h[1]], "size",
+			{
+				"hood_width": float(h[0]),
+				"hood_height": float(h[1]),
+				"hood_depth": float(h[2]),
+				"sash_open_amount": 0.45,
+				"interior_color": Color(0.74, 0.74, 0.76),
+				"accent_color": k_accent,
+				"frame_color": k_frame,
+				"interior_light": true,
+			}))
+
+	# ── server_rack: rack_height_u axis (sparse → tall) ────────────
+	var rack_specs := [
+		[8,  2,  "half_height",  "half-height (8U, 2 servers)"],
+		[16, 4,  "compact",      "compact (16U, 4 servers)"],
+		[24, 6,  "standard",     "standard (24U, 6 servers)"],
+		[36, 9,  "full_tall",    "full tall (36U, 9 servers)"],
+		[42, 12, "max_density",  "max density (42U, 12 servers)"],
+	]
+	for i in range(5):
+		var r = rack_specs[i]
+		sweep.append(_p("server_rack", "%d_%s" % [i + 1, r[2]],
+			r[3], "rack_height_u = %d, server_count = %d" % [r[0], r[1]], "rack_height_u",
+			{
+				"rack_height_u": int(r[0]),
+				"server_count": int(r[1]),
+				"led_density": 5,
+				"door_open": true,
+				"frame_color": k_frame,
+				"led_color": Color(0.20, 0.95, 0.45),
+				"accent_color": k_accent,
+			}))
+
+	# ── emergency_button: plate_width × button_radius axis ─────────
+	var btn_specs := [
+		[0.12, 0.035, "wall",   "small_wall",    "small wall (plate 0.12, btn 0.035)"],
+		[0.18, 0.050, "wall",   "standard_wall", "standard wall (0.18, 0.050)"],
+		[0.24, 0.065, "wall",   "large_wall",    "large wall (0.24, 0.065)"],
+		[0.30, 0.080, "podium", "podium_small",  "podium small (0.30, 0.080)"],
+		[0.40, 0.110, "podium", "podium_grand",  "podium grand (0.40, 0.110)"],
+	]
+	for i in range(5):
+		var b = btn_specs[i]
+		sweep.append(_p("emergency_button", "%d_%s" % [i + 1, b[3]],
+			b[4], "plate %.2fm × button radius %.3fm (mounting %s)" % [b[0], b[1], b[2]], "size",
+			{
+				"plate_width": float(b[0]),
+				"plate_height": float(b[0]),
+				"button_radius": float(b[1]),
+				"mounting": b[2],
+				"label_text": "STOP",
+				"button_color": Color(0.95, 0.10, 0.10),
+				"plate_color": Color(0.98, 0.85, 0.10),
+				"text_color": Color(0.05, 0.05, 0.05),
+				"pressed": false,
+			}))
+
+	# ── conveyor_belt: belt_length axis (short → long) ─────────────
+	var belt_specs := [
+		[1.0, 0.5, 2, 2, "short",       "short (1.0m, 2 arrows)"],
+		[2.0, 0.6, 4, 3, "personnel",   "personnel (2.0m, 4 arrows)"],
+		[3.0, 0.7, 6, 4, "transfer",    "transfer (3.0m, 6 arrows)"],
+		[4.5, 0.9, 9, 5, "freight",     "freight (4.5m, 9 arrows)"],
+		[6.0, 1.2, 12, 6, "factory",    "factory (6.0m, 12 arrows)"],
+	]
+	for i in range(5):
+		var c = belt_specs[i]
+		sweep.append(_p("conveyor_belt", "%d_%s" % [i + 1, c[4]],
+			c[5], "belt_length × belt_width = %.1f×%.1fm, %d arrows" % [c[0], c[1], c[2]], "length",
+			{
+				"belt_length": float(c[0]),
+				"belt_width": float(c[1]),
+				"belt_height": 0.18,
+				"direction_arrow_count": int(c[2]),
+				"support_legs": int(c[3]),
+				"belt_color": Color(0.10, 0.10, 0.11),
+				"support_color": k_frame,
+				"accent_color": k_accent,
+				"arrow_color": k_accent,
+			}))
+
+	# ── safety_shower: shower_height axis (low → tall) ─────────────
+	var shower_specs := [
+		[1.8, 0.35, 0.30, "low_wall",         "low wall (1.8m)"],
+		[2.0, 0.40, 0.32, "compact",          "compact (2.0m)"],
+		[2.2, 0.45, 0.35, "standard",         "standard (2.2m)"],
+		[2.5, 0.55, 0.42, "wide_basin",       "wide basin (2.5m)"],
+		[2.8, 0.70, 0.50, "industrial_tall",  "industrial tall (2.8m)"],
+	]
+	for i in range(5):
+		var sh = shower_specs[i]
+		sweep.append(_p("safety_shower", "%d_%s" % [i + 1, sh[3]],
+			sh[4], "shower_height = %.1fm, basin %.2f×%.2fm" % [sh[0], sh[1], sh[2]], "shower_height",
+			{
+				"shower_height": float(sh[0]),
+				"basin_width": float(sh[1]),
+				"basin_depth": float(sh[2]),
+				"pipe_orientation": "wall",
+				"chain_visible": true,
+				"signage_text": "SAFETY",
+				"pipe_color": k_frame,
+				"basin_color": Color(0.94, 0.94, 0.95),
+				"accent_color": Color(0.15, 0.65, 0.25),
+			}))
+
+	# ── microscope: body_height × eyepiece × objective sweep ───────
+	var scope_specs := [
+		[0.24, 1, 2, 0.18, "school_mono",      "school monocular (0.24m, 1 eye, 2 obj)"],
+		[0.30, 1, 3, 0.20, "intro_mono",       "intro mono (0.30m, 1 eye, 3 obj)"],
+		[0.38, 2, 4, 0.22, "standard_bin",     "standard binocular (0.38m, 2 eye, 4 obj)"],
+		[0.46, 2, 5, 0.24, "research_5",       "research 5-obj (0.46m, 2 eye, 5 obj)"],
+		[0.55, 3, 6, 0.28, "trinocular_max",   "trinocular max (0.55m, 3 eye, 6 obj)"],
+	]
+	for i in range(5):
+		var sc = scope_specs[i]
+		sweep.append(_p("microscope", "%d_%s" % [i + 1, sc[4]],
+			sc[5], "body_height = %.2fm, %d eyepiece, %d objective" % [sc[0], sc[1], sc[2]], "body_height",
+			{
+				"body_height": float(sc[0]),
+				"base_width": float(sc[3]),
+				"eyepiece_count": int(sc[1]),
+				"objective_count": int(sc[2]),
+				"light_on": true,
+				"body_color": k_frame,
+				"stage_color": Color(0.94, 0.94, 0.95),
+				"accent_color": k_accent,
+				"light_color": Color(1.0, 0.92, 0.78),
+			}))
+
+	# ── specimen_jar: jar_height × plinth × content_shape ──────────
+	var jar_specs := [
+		[0.25, 0.10, 0.30, "blob",     "tiny",      "tiny (0.25m, blob)"],
+		[0.40, 0.14, 0.38, "tendrils", "small",     "small (0.40m, tendrils)"],
+		[0.55, 0.14, 0.42, "blob",     "standard",  "standard (0.55m, blob)"],
+		[0.80, 0.18, 0.50, "crystal",  "large_xl",  "large (0.80m, crystal)"],
+		[1.20, 0.22, 0.62, "blob",     "monumental","monumental (1.20m, blob)"],
+	]
+	for i in range(5):
+		var j = jar_specs[i]
+		sweep.append(_p("specimen_jar", "%d_%s" % [i + 1, j[4]],
+			j[5], "jar_height = %.2fm, plinth %.2fm" % [j[0], j[2]], "jar_height",
+			{
+				"jar_height": float(j[0]),
+				"jar_radius": float(j[1]),
+				"plinth_width": float(j[2]),
+				"plinth_height": 0.20,
+				"content_shape": j[3],
+				"content_color": Color(0.40, 0.85, 0.55, 0.85),
+				"content_glow": 0.8,
+				"glass_color": Color(0.65, 0.78, 0.88, 0.35),
+				"label_text": "SPECIMEN",
+				"label_color": Color(0.95, 0.70, 0.20),
+			}))
+
 	return sweep
 
 

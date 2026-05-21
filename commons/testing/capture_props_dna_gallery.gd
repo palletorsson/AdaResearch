@@ -567,6 +567,256 @@ func _build_sweep() -> Array:
 			]),
 		}))
 
+	# ── lab_stool: critical_parameter = base_style ─────────────────
+	sweep.append(_p("lab_stool", "1_five_star_post", "five-star post",
+		"the lab default — gas piston on 5-star caster base",
+		{
+			"seat_height": 0.65,
+			"seat_radius": 0.18,
+			"base_style": "five_star",
+			"base_radius": 0.32,
+			"seat_color": Color(0.08, 0.08, 0.10),
+			"accent_color": Color(0.95, 0.55, 0.0),
+			"accent_strip": true,
+		}))
+	sweep.append(_p("lab_stool", "2_ring_base", "ring base",
+		"institutional — fixed-height ring base, no swivel",
+		{
+			"seat_height": 0.78,
+			"seat_radius": 0.20,
+			"base_style": "ring",
+			"base_radius": 0.36,
+			"seat_color": Color(0.30, 0.30, 0.32),
+			"accent_color": Color(0.20, 0.55, 0.95),
+			"accent_strip": true,
+		}))
+	sweep.append(_p("lab_stool", "3_low_padded", "low padded",
+		"the soft option — short, broad, no accent strip",
+		{
+			"seat_height": 0.45,
+			"seat_radius": 0.22,
+			"base_style": "five_star",
+			"base_radius": 0.30,
+			"seat_color": Color(0.85, 0.85, 0.88),
+			"accent_color": Color(0.95, 0.55, 0.0),
+			"accent_strip": false,
+		}))
+
+	# ── fume_hood: critical_parameter = sash_open_amount ───────────
+	sweep.append(_p("fume_hood", "1_closed", "closed",
+		"sash down — the chamber is sealed for active work",
+		{
+			"hood_width": 1.6, "hood_height": 2.1, "hood_depth": 0.7,
+			"sash_open_amount": 0.0,
+			"accent_color": Color(0.95, 0.55, 0.0),
+			"interior_light": true,
+		}))
+	sweep.append(_p("fume_hood", "2_half_open", "half open",
+		"the gesture — mid-work, hands inside, sash at chest height",
+		{
+			"hood_width": 1.6, "hood_height": 2.1, "hood_depth": 0.7,
+			"sash_open_amount": 0.55,
+			"accent_color": Color(0.902, 0.224, 0.275),
+			"interior_light": true,
+		}))
+	sweep.append(_p("fume_hood", "3_lights_off", "lights off",
+		"dormant — sash open, interior unlit, between sessions",
+		{
+			"hood_width": 1.8, "hood_height": 2.1, "hood_depth": 0.7,
+			"sash_open_amount": 1.0,
+			"accent_color": Color(0.20, 0.55, 0.95),
+			"interior_light": false,
+		}))
+
+	# ── server_rack: critical_parameter = door_open + led density ──
+	sweep.append(_p("server_rack", "1_door_closed", "door closed",
+		"front face only — solid panel, single accent strip",
+		{
+			"rack_height_u": 24,
+			"server_count": 6,
+			"led_density": 4,
+			"door_open": false,
+			"led_color": Color(0.20, 0.95, 0.45),
+			"accent_color": Color(0.95, 0.55, 0.0),
+		}))
+	sweep.append(_p("server_rack", "2_door_open", "door open: interior",
+		"servers visible — 8 units with green LEDs, blinkenlights",
+		{
+			"rack_height_u": 32,
+			"server_count": 8,
+			"led_density": 6,
+			"door_open": true,
+			"led_color": Color(0.20, 0.95, 0.45),
+			"accent_color": Color(0.95, 0.55, 0.0),
+		}))
+	sweep.append(_p("server_rack", "3_alarm_amber", "alarm: amber",
+		"warning state — amber LEDs, fewer servers, taller rack",
+		{
+			"rack_height_u": 42,
+			"server_count": 4,
+			"led_density": 8,
+			"door_open": true,
+			"led_color": Color(0.95, 0.65, 0.20),
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}))
+
+	# ── emergency_button: critical_parameter = pressed + mounting ──
+	sweep.append(_p("emergency_button", "1_ready_wall", "ready: wall",
+		"the canonical E-stop — armed, glowing, wall mounted",
+		{
+			"pressed": false,
+			"mounting": "wall",
+			"label_text": "EMERGENCY STOP",
+			"button_color": Color(0.95, 0.10, 0.10),
+			"plate_color": Color(0.98, 0.85, 0.10),
+		}))
+	sweep.append(_p("emergency_button", "2_pressed", "pressed: latched",
+		"the lab is halted — button depressed, signal sent",
+		{
+			"pressed": true,
+			"mounting": "wall",
+			"label_text": "HALTED",
+			"button_color": Color(0.55, 0.10, 0.10),
+			"plate_color": Color(0.98, 0.85, 0.10),
+		}))
+	sweep.append(_p("emergency_button", "3_podium_blue", "podium: blue",
+		"non-alarm action button — blue dome on dark plate, podium stand",
+		{
+			"pressed": false,
+			"mounting": "podium",
+			"label_text": "INITIATE",
+			"button_color": Color(0.20, 0.55, 0.95),
+			"plate_color": Color(0.22, 0.22, 0.25),
+			"text_color": Color(0.85, 0.85, 0.88),
+		}))
+
+	# ── conveyor_belt: critical_parameter = belt_length + arrow_count
+	sweep.append(_p("conveyor_belt", "1_short_quiet", "short, quiet",
+		"a short transfer — 1.2m belt with 3 arrows",
+		{
+			"belt_length": 1.2,
+			"belt_width": 0.6,
+			"direction_arrow_count": 3,
+			"support_legs": 2,
+			"belt_color": Color(0.10, 0.10, 0.11),
+			"accent_color": Color(0.95, 0.55, 0.0),
+			"arrow_color": Color(0.95, 0.55, 0.0),
+		}))
+	sweep.append(_p("conveyor_belt", "2_canonical", "canonical Aperture",
+		"Portal-2 baseline — 2.4m belt, 5 arrows, 4 legs",
+		{
+			"belt_length": 2.4,
+			"belt_width": 0.6,
+			"direction_arrow_count": 5,
+			"support_legs": 4,
+			"belt_color": Color(0.10, 0.10, 0.11),
+			"accent_color": Color(0.95, 0.55, 0.0),
+			"arrow_color": Color(0.95, 0.55, 0.0),
+		}))
+	sweep.append(_p("conveyor_belt", "3_freight_wide", "freight: wide",
+		"freight run — 4m belt, 1m wide, dense arrows, 6 legs",
+		{
+			"belt_length": 4.0,
+			"belt_width": 1.0,
+			"direction_arrow_count": 9,
+			"support_legs": 6,
+			"belt_color": Color(0.18, 0.18, 0.20),
+			"accent_color": Color(0.20, 0.55, 0.95),
+			"arrow_color": Color(0.20, 0.55, 0.95),
+		}))
+
+	# ── safety_shower: critical_parameter = pipe_orientation ───────
+	sweep.append(_p("safety_shower", "1_wall_canonical", "wall canonical",
+		"standard wall mount — pipe from the wall, chain visible",
+		{
+			"shower_height": 2.2,
+			"pipe_orientation": "wall",
+			"chain_visible": true,
+			"signage_text": "SAFETY SHOWER",
+			"accent_color": Color(0.15, 0.65, 0.25),
+		}))
+	sweep.append(_p("safety_shower", "2_ceiling_central", "ceiling central",
+		"the centre-of-room emergency drop — pipe descends from above",
+		{
+			"shower_height": 2.4,
+			"pipe_orientation": "ceiling",
+			"chain_visible": true,
+			"signage_text": "EMERGENCY WASH",
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}))
+	sweep.append(_p("safety_shower", "3_no_chain", "no chain: lever only",
+		"silent rig — chain hidden, lever-actuated valve only",
+		{
+			"shower_height": 2.2,
+			"pipe_orientation": "wall",
+			"chain_visible": false,
+			"signage_text": "EYE WASH STATION",
+			"accent_color": Color(0.15, 0.65, 0.25),
+		}))
+
+	# ── microscope: critical_parameter = eyepiece + objective count
+	sweep.append(_p("microscope", "1_binocular_standard", "binocular standard",
+		"the canonical bench microscope — 2 eyepieces, 4 objectives",
+		{
+			"body_height": 0.38,
+			"eyepiece_count": 2,
+			"objective_count": 4,
+			"light_on": true,
+			"light_color": Color(1.0, 0.92, 0.78),
+			"accent_color": Color(0.95, 0.55, 0.0),
+		}))
+	sweep.append(_p("microscope", "2_monocular_compact", "monocular compact",
+		"single eyepiece — school-lab geometry, smaller body",
+		{
+			"body_height": 0.30,
+			"eyepiece_count": 1,
+			"objective_count": 3,
+			"light_on": true,
+			"light_color": Color(1.0, 0.92, 0.78),
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}))
+	sweep.append(_p("microscope", "3_research_six_objective", "research: 6-objective",
+		"research-grade — 6-position turret, larger body, lamp off",
+		{
+			"body_height": 0.46,
+			"eyepiece_count": 2,
+			"objective_count": 6,
+			"light_on": false,
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}))
+
+	# ── specimen_jar: critical_parameter = content_shape ───────────
+	sweep.append(_p("specimen_jar", "1_blob_emerald", "blob: emerald",
+		"the canonical specimen — emerald blob, hazard amber label",
+		{
+			"jar_height": 0.55,
+			"content_shape": "blob",
+			"content_color": Color(0.40, 0.85, 0.55, 0.85),
+			"content_glow": 0.8,
+			"label_text": "SPECIMEN λ-S/Δ",
+			"label_color": Color(0.95, 0.70, 0.20),
+		}))
+	sweep.append(_p("specimen_jar", "2_tendrils", "tendrils: violet",
+		"tendrils — radiating violet rods, the cellular specimen",
+		{
+			"jar_height": 0.70,
+			"content_shape": "tendrils",
+			"content_color": Color(0.65, 0.35, 0.90, 0.85),
+			"content_glow": 1.2,
+			"label_text": "SPECIMEN φ-Q/T",
+			"label_color": Color(0.85, 0.85, 0.88),
+		}))
+	sweep.append(_p("specimen_jar", "3_empty_blue", "empty: blue light",
+		"the empty jar — no content, faint blue interior glow",
+		{
+			"jar_height": 0.45,
+			"content_shape": "empty",
+			"content_color": Color(0.20, 0.55, 0.95, 0.85),
+			"content_glow": 0.4,
+			"label_text": "SPECIMEN F-01",
+			"label_color": Color(0.20, 0.55, 0.95),
+		}))
+
 	return sweep
 
 

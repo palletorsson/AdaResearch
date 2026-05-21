@@ -14,6 +14,9 @@
 			"description": "Step into this pillar of light to enter the spine-runner corridor mode. Loads vr_spine_runner.tscn via VRStaging's standard scene transition.",
 			"category": "navigation",
 			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
 			"tags": [
 				"portal",
 				"navigation",
@@ -130,7 +133,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 2,
+				"footprint_cells": 3,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -142,7 +145,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -228,7 +233,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -240,7 +245,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -325,7 +332,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -337,7 +344,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -430,7 +439,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -442,7 +451,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 36,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -547,7 +558,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -640,7 +653,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -652,7 +665,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 12,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -756,7 +771,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -839,7 +856,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -851,7 +868,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -936,7 +955,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -948,7 +967,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1043,7 +1064,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1055,7 +1076,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 72,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1140,7 +1163,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1152,7 +1175,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1261,7 +1286,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1325,7 +1352,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1337,7 +1364,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1413,7 +1442,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1432,6 +1463,1513 @@
 				],
 				"max_dimension_m": 0.0,
 				"measured_at": "2026-04-29T07:09:56.762620Z"
+			}
+		},
+		"lab_room": {
+			"lookup_name": "lab_room",
+			"scene": "res://commons/artifacts/lab_room/lab_room.tscn",
+			"class_name": "LabRoom",
+			"name": "Lab Room",
+			"description": "Procedurally-generated Half-Life-style modern test chamber that frames a workbench. White tile floor, observation glass, accent-colored strip naming the QFEP phase, signage like 'TEST CHAMBER λ-S'. Takes a mounted_artifact_scene path and instantiates that workbench at the central plinth. The room IS the staging — same script, different DNA = different chamber.",
+			"category": "laboratory",
+			"complexity": "advanced",
+			"tags": [
+				"lab",
+				"chamber",
+				"room",
+				"staging",
+				"substrate",
+				"half-life",
+				"procedural",
+				"workbench-frame"
+			],
+			"interactions": [
+				"walk inside",
+				"read signage and wall annotations",
+				"observe the framed workbench at the central plinth"
+			],
+			"signals": [],
+			"parameters": {
+				"room_width": "Room width in meters (default 6.0)",
+				"room_depth": "Room depth in meters (default 6.0)",
+				"room_height": "Room height in meters (default 3.5)",
+				"accent_color": "QFEP phase color string 'r,g,b' (default lambda_edge red)",
+				"signage_top": "Large signage line, e.g. 'TEST CHAMBER λ-S'",
+				"signage_sub": "Smaller accent-tinted sub-line",
+				"mounted_artifact_scene": "Path to a workbench .tscn to instantiate at the central plinth"
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"environment",
+				"lab",
+				"staging",
+				"substrate"
+			],
+			"dev_category": "laboratory",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~512"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 36,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "inside",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 36,
+				"footprint_source": "designed"
+			}
+		},
+		"exit_sign": {
+			"lookup_name": "exit_sign",
+			"scene": "res://commons/artifacts/exit_sign/exit_sign.tscn",
+			"class_name": "ExitSign",
+			"name": "Exit Sign",
+			"description": "Wall-mounted illuminated EXIT sign in Portal 2 / Half-Life vocabulary — emissive rectangle with white text and directional arrow. Default emerald green; tints by sign_color export for phase/warning variants.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"sign",
+				"egress",
+				"emissive",
+				"half-life",
+				"portal"
+			],
+			"parameters": {
+				"text": "Sign text (default 'EXIT')",
+				"arrow_direction": "left | right | down | up | none",
+				"sign_color": "Sign body color (default emerald green)",
+				"text_color": "Text + arrow color (default white)",
+				"width": "Sign width in meters (default 0.45)",
+				"height": "Sign height in meters (default 0.18)",
+				"mount_offset_z": "Distance the sign protrudes from the wall (default 0.02)",
+				"glow_energy": "Emission intensity (default 1.5)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"signage"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~48"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sliding_door"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"sliding_door": {
+			"lookup_name": "sliding_door",
+			"scene": "res://commons/artifacts/sliding_door/sliding_door.tscn",
+			"class_name": "SlidingDoor",
+			"name": "Sliding Door",
+			"description": "Two-panel pneumatic sliding door — Portal 2 / Half-Life airlock vocabulary. Dark metal frame, near-white panels with thin orange accent stripe at chest height. Static by default; panels_open_amount drives the slide from closed (0) to fully open (1).",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"door",
+				"threshold",
+				"portal",
+				"half-life"
+			],
+			"parameters": {
+				"door_width": "Opening width when closed (default 1.8)",
+				"door_height": "Door height in meters (default 2.4)",
+				"frame_thickness": "Frame border thickness (default 0.08)",
+				"frame_color": "Dark metal frame color",
+				"panel_color": "Panel face color (default near-white)",
+				"accent_color": "Stripe color (default Portal orange)",
+				"gap_width": "Seam between panels when closed (default 0.04)",
+				"panels_open_amount": "0 = closed, 1 = fully open"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"threshold"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~128"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"exit_sign"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
+		},
+		"whiteboard": {
+			"lookup_name": "whiteboard",
+			"scene": "res://commons/artifacts/whiteboard/whiteboard.tscn",
+			"class_name": "Whiteboard",
+			"name": "Whiteboard",
+			"description": "Wall-mounted whiteboard — dark frame, near-white surface, optional pen tray. text_lines stacks Label3D rows on the surface so map_data can drop formulas, diagrams, or thinking onto walls. Curriculum-as-substrate.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"surface",
+				"writing",
+				"substrate",
+				"curriculum"
+			],
+			"parameters": {
+				"board_width": "Surface width in meters (default 2.4)",
+				"board_height": "Surface height in meters (default 1.2)",
+				"frame_color": "Frame color (default dark)",
+				"board_color": "Writing surface color (default near-white)",
+				"text_lines": "PackedStringArray of lines to render on the surface",
+				"text_color": "Text ink color (default near-black)",
+				"text_size": "Label3D font_size (default 24)",
+				"tray_color": "Pen tray ledge color"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"curriculum",
+				"substrate"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~96"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"large_table": {
+			"lookup_name": "large_table",
+			"scene": "res://commons/artifacts/large_table/large_table.tscn",
+			"class_name": "LargeTable",
+			"name": "Large Table",
+			"description": "Rectangular lab counter / workbench at standard 0.95m work height. White laminate top with dark legs — either four corner posts (movable) or two continuous side panels (institutional). Optional thin emissive accent strip along the front edge.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"table",
+				"counter",
+				"workbench",
+				"surface"
+			],
+			"parameters": {
+				"length": "Table length in meters (default 2.0)",
+				"depth": "Table depth in meters (default 0.8)",
+				"height": "Countertop height (default 0.95)",
+				"top_color": "Laminate top color",
+				"leg_color": "Leg / panel color",
+				"top_thickness": "Tabletop thickness (default 0.04)",
+				"leg_style": "post (4 corner legs) | panel (continuous side panels)",
+				"edge_strip": "Bool — emissive accent strip along front edge",
+				"accent_color": "Edge-strip color when edge_strip is true"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"furniture",
+				"surface"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~96"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"large_window": {
+			"lookup_name": "large_window",
+			"scene": "res://commons/artifacts/large_window/large_window.tscn",
+			"class_name": "LargeWindow",
+			"name": "Large Window",
+			"description": "Wall-mounted observation window — Portal 2 / Aperture vocabulary. Dark steel frame around a translucent grey-blue glass inset, with an optional thin Portal-orange emissive accent strip across the top of the frame. The membrane of mutual seeing between chamber and observer.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"window",
+				"observation",
+				"glass",
+				"aperture",
+				"portal"
+			],
+			"parameters": {
+				"window_width": "Window width in meters (default 2.4)",
+				"window_height": "Window height in meters (default 1.4)",
+				"frame_thickness": "Frame border thickness (default 0.08)",
+				"frame_color": "Frame body color (default dark steel)",
+				"glass_color": "Glass color with alpha (default translucent grey-blue)",
+				"glass_emission": "Subtle inner glow on the glass (default 0.15)",
+				"accent_strip": "Bool — thin emissive line at top of frame",
+				"accent_color": "Accent strip color (default Portal orange)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"observation",
+				"portal"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"info_screen": {
+			"lookup_name": "info_screen",
+			"scene": "res://commons/artifacts/info_screen/info_screen.tscn",
+			"class_name": "InfoScreen",
+			"name": "Info Screen",
+			"description": "Wall-mounted information display — Half-Life kiosk crossed with Aperture briefing screen. Dark plastic bezel around an emissive CRT-green screen face, configurable amber header and stacked terminal-green text lines. The chamber's structural form of LABELING.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"screen",
+				"display",
+				"emissive",
+				"crt",
+				"terminal",
+				"aperture",
+				"half-life"
+			],
+			"parameters": {
+				"screen_width": "Screen width in meters (default 1.0)",
+				"screen_height": "Screen height in meters (default 0.55)",
+				"frame_thickness": "Bezel thickness (default 0.04)",
+				"frame_color": "Bezel color (default dark plastic)",
+				"screen_bg_color": "Screen background color (default dark green-black CRT)",
+				"screen_emission": "Glow intensity of the screen (default 0.7)",
+				"text_lines": "PackedStringArray of body lines",
+				"text_color": "Body line color (default terminal green)",
+				"header_text": "Optional larger header (amber by default)",
+				"header_color": "Header color (default amber)",
+				"text_size": "Body line font size (default 18)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"display",
+				"signage"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~96"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"ceiling_vent": {
+			"lookup_name": "ceiling_vent",
+			"scene": "res://commons/artifacts/ceiling_vent/ceiling_vent.tscn",
+			"class_name": "CeilingVent",
+			"name": "Ceiling Vent",
+			"description": "Rectangular ceiling air vent — Aperture/Portal industrial vocabulary. Recessed cavity, dark steel frame, evenly-spaced light-gray slats. Optional subtle blue airflow glow behind the slats. Industrial cue: this is a built environment with HVAC running somewhere.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"vent",
+				"ceiling",
+				"industrial",
+				"hvac",
+				"aperture",
+				"portal"
+			],
+			"parameters": {
+				"vent_length": "Long dimension in meters (default 0.9)",
+				"vent_width": "Short dimension in meters (default 0.4)",
+				"recess_depth": "How deep the vent recesses into the ceiling (default 0.08)",
+				"frame_color": "Frame color (default dark steel)",
+				"slat_color": "Slat color (default light gray)",
+				"slat_count": "Number of evenly-spaced slats (default 8)",
+				"airflow_glow": "Bool — decorative airflow glow behind slats",
+				"airflow_color": "Airflow glow color (default cool blue)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"industrial",
+				"ceiling"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~192"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 0,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "below",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"cable_tray"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"cable_tray": {
+			"lookup_name": "cable_tray",
+			"scene": "res://commons/artifacts/cable_tray/cable_tray.tscn",
+			"class_name": "CableTray",
+			"name": "Cable Tray",
+			"description": "Ceiling-mounted cable tray — Aperture/Portal industrial vocabulary. Two dark steel side rails with evenly-spaced perpendicular rungs forming a ladder pattern, plus a small bundle of differently-colored cables running parallel along the length. The chamber as NODE in a wired facility.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"cable",
+				"tray",
+				"ceiling",
+				"industrial",
+				"infrastructure",
+				"aperture",
+				"portal"
+			],
+			"parameters": {
+				"tray_length": "Long dimension in meters (default 3.0)",
+				"tray_width": "Tray width in meters (default 0.18)",
+				"tray_height": "Tray rail height (default 0.08)",
+				"rung_count": "Number of perpendicular ladder rungs (default 12)",
+				"tray_color": "Tray steel color (default dark gray)",
+				"cable_count": "Number of cables in the tray (default 4)",
+				"cable_colors": "PackedColorArray palette of cable colors"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"industrial",
+				"infrastructure"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"roughness"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~288"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 0,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "below",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"ceiling_vent"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"lab_stool": {
+			"lookup_name": "lab_stool",
+			"scene": "res://commons/artifacts/lab_stool/lab_stool.tscn",
+			"class_name": "LabStool",
+			"name": "Lab Stool",
+			"description": "Adjustable swivel lab stool — Aperture / Black Mesa furniture vocabulary. Round soft-black seat on a vertical steel post, splayed five-pointed star base (office) OR continuous ring base (institutional), optional Portal-orange accent strip around the seat edge. base_style switches between movable and bolted-in postures.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"stool",
+				"seat",
+				"furniture",
+				"portal"
+			],
+			"parameters": {
+				"seat_height": "Top-of-seat height in meters (default 0.65, range 0.45-0.95)",
+				"seat_radius": "Round seat radius (default 0.18)",
+				"seat_color": "Seat color (default soft black)",
+				"base_style": "five_star (5 radiating legs) | ring (continuous torus base)",
+				"base_radius": "Footprint radius of the base (default 0.32)",
+				"post_color": "Post / base steel color (default dark)",
+				"accent_strip": "Bool — emissive stripe around the seat edge",
+				"accent_color": "Accent stripe color (default Portal orange)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"furniture",
+				"seating"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"box",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~192"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"fume_hood"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"fume_hood": {
+			"lookup_name": "fume_hood",
+			"scene": "res://commons/artifacts/fume_hood/fume_hood.tscn",
+			"class_name": "FumeHood",
+			"name": "Fume Hood",
+			"description": "Glass-fronted chemistry fume hood — Black Mesa / Aperture chemistry vocabulary. U-shaped enclosure (three solid walls plus ceiling, open front), a translucent glass sash that slides upward by sash_open_amount, an interior worktop, an emissive ceiling light strip, dark-steel front frame, and a Portal-orange accent stripe along the bottom of the frame.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"chemistry",
+				"hood",
+				"enclosure",
+				"glass",
+				"emissive",
+				"portal",
+				"black-mesa"
+			],
+			"parameters": {
+				"hood_width": "Hood width in meters (default 1.6)",
+				"hood_height": "Hood height in meters (default 2.1)",
+				"hood_depth": "Hood depth in meters (default 0.7)",
+				"sash_open_amount": "0 = closed, 1 = fully raised (default 0.5)",
+				"interior_color": "Interior wall color (default neutral grey)",
+				"accent_color": "Front accent stripe color (default Portal orange)",
+				"interior_light": "Bool — emissive ceiling light inside the hood",
+				"light_color": "Interior light color (default cool white)",
+				"frame_color": "Front frame steel color (default dark)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"chemistry",
+				"enclosure"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~240"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"lab_stool",
+					"emergency_button"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
+		},
+		"server_rack": {
+			"lookup_name": "server_rack",
+			"scene": "res://commons/artifacts/server_rack/server_rack.tscn",
+			"class_name": "ServerRack",
+			"name": "Server Rack",
+			"description": "19-inch vertical compute rack — Aperture / Black Mesa infrastructure vocabulary. Dark-steel rectangular frame on four small feet, interior subdivided into rack_height_u U-slot markers, a configurable number of server faces with rows of emerald LEDs, a single Portal-orange accent stripe near the top, and a door that toggles solid (production) vs. open (exposed interior).",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"server",
+				"rack",
+				"compute",
+				"infrastructure",
+				"led",
+				"emissive",
+				"portal"
+			],
+			"parameters": {
+				"rack_height_u": "Rack height in U units (default 24, range 8-42)",
+				"rack_width": "Rack width in meters (default 0.55)",
+				"rack_depth": "Rack depth in meters (default 0.6)",
+				"server_count": "Number of server faces (default 6, range 1-12)",
+				"led_density": "LEDs per server (default 4)",
+				"led_color": "LED emission color (default emerald)",
+				"frame_color": "Frame steel color (default dark)",
+				"accent_color": "Accent stripe color (default Portal orange)",
+				"door_open": "Bool — false hides interior behind a solid panel, true exposes the LEDs"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"infrastructure",
+				"compute"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~480"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"cable_tray",
+					"control_board"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"emergency_button": {
+			"lookup_name": "emergency_button",
+			"scene": "res://commons/artifacts/emergency_button/emergency_button.tscn",
+			"class_name": "EmergencyButton",
+			"name": "Emergency Button",
+			"description": "Red mushroom E-stop on a yellow hazard plate — universal industrial-safety vocabulary. Yellow plate with a glowing alarm-red mushroom dome on a black ring base, a black Label3D below reading EMERGENCY STOP. pressed=true depresses the mushroom and dims the glow. mounting=podium adds a short pillar so the button stands free instead of mounting to a wall.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"safety",
+				"button",
+				"e-stop",
+				"hazard",
+				"emissive",
+				"interactive"
+			],
+			"parameters": {
+				"button_color": "Mushroom color (default alarm red)",
+				"plate_color": "Hazard plate color (default hazard yellow)",
+				"button_radius": "Mushroom top radius (default 0.05)",
+				"plate_width": "Plate width in meters (default 0.18)",
+				"plate_height": "Plate height in meters (default 0.18)",
+				"label_text": "Label below the button (default 'EMERGENCY STOP')",
+				"text_color": "Label color (default black)",
+				"pressed": "Bool — true depresses the mushroom and dims the glow",
+				"mounting": "wall (flush) | podium (short standing pillar)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"safety",
+				"interactive"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~96"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"fume_hood",
+					"exit_sign"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"conveyor_belt": {
+			"lookup_name": "conveyor_belt",
+			"scene": "res://commons/artifacts/conveyor_belt/conveyor_belt.tscn",
+			"class_name": "ConveyorBelt",
+			"name": "Conveyor Belt",
+			"description": "Motorised conveyor belt — Portal 2 / industrial test-chamber vocabulary. Dark rubber deck on large end rollers and smaller underbelly rollers, vertical steel support legs, a Portal-orange accent strip along one long edge, and emissive triangular arrows along the deck pointing in the +X direction. Static-but-readable: the geometry SAYS the thing moves.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"belt",
+				"conveyor",
+				"industrial",
+				"portal",
+				"direction"
+			],
+			"parameters": {
+				"belt_length": "Belt length along X in meters (default 2.4)",
+				"belt_width": "Belt width along Z in meters (default 0.6)",
+				"belt_height": "Height of deck above floor (default 0.18)",
+				"direction_arrow_count": "Number of emissive arrows painted on deck (default 5)",
+				"belt_color": "Belt rubber color (default near-black)",
+				"support_color": "Steel support color (default dark steel)",
+				"accent_color": "Edge accent stripe color (default Portal orange)",
+				"arrow_color": "Emissive arrow color (default Portal orange)",
+				"support_legs": "Number of vertical support posts (default 4)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"industrial",
+				"direction"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~320"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"large_table",
+					"robotarm"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"safety_shower": {
+			"lookup_name": "safety_shower",
+			"scene": "res://commons/artifacts/safety_shower/safety_shower.tscn",
+			"class_name": "SafetyShower",
+			"name": "Safety Shower",
+			"description": "Emergency safety shower with eyewash basin — Half-Life decontamination-corner vocabulary. Vertical steel pipe (wall or ceiling), horizontal arm ending in a wide shower head, glossy white eyewash basin below with twin spouts and a valve handle, safety-green accent stripe around the basin, optional pull chain, and a SAFETY SHOWER Label3D above. The lab's confession that the experiment can wound.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"safety",
+				"shower",
+				"eyewash",
+				"emergency",
+				"half-life",
+				"signage"
+			],
+			"parameters": {
+				"shower_height": "Top of shower head from floor (default 2.2)",
+				"pipe_color": "Pipe and arm steel color (default dark steel)",
+				"basin_color": "Eyewash basin color (default glossy white)",
+				"accent_color": "Accent stripe color (default safety green)",
+				"basin_width": "Basin width in meters (default 0.45)",
+				"basin_depth": "Basin depth in meters (default 0.35)",
+				"pipe_orientation": "wall (rises from floor) | ceiling (descends from above)",
+				"signage_text": "Label3D text above the shower (default 'SAFETY SHOWER')",
+				"chain_visible": "Bool — render the pull chain below the shower arm"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"safety",
+				"signage"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~320"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"exit_sign"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
+		},
+		"microscope": {
+			"lookup_name": "microscope",
+			"scene": "res://commons/artifacts/microscope/microscope.tscn",
+			"class_name": "Microscope",
+			"name": "Microscope",
+			"description": "Bench-top optical microscope — Half-Life lab vocabulary. Heavy dark steel base, a slightly tilted column, a glossy white stage with two specimen clamps, an objective turret carrying short lenses, one or two tilted eyepieces, and a small emissive bulb illuminator below the stage. The architectural form of LOOKING-CLOSER.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"microscope",
+				"optics",
+				"instrument",
+				"bench"
+			],
+			"parameters": {
+				"body_height": "Total instrument height in meters (default 0.38)",
+				"base_width": "Base footprint side in meters (default 0.22)",
+				"body_color": "Body steel color (default dark steel)",
+				"stage_color": "Stage color (default glossy white)",
+				"accent_color": "Base accent strip color (default Portal orange)",
+				"eyepiece_count": "1 = monocular, 2 = binocular (default 2)",
+				"objective_count": "Turret lens count (default 4)",
+				"light_on": "Bool — illuminator emits warm light when true",
+				"light_color": "Illuminator bulb color (default warm white)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"instrument",
+				"bench"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"specimen_jar",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"specimen_jar": {
+			"lookup_name": "specimen_jar",
+			"scene": "res://commons/artifacts/specimen_jar/specimen_jar.tscn",
+			"class_name": "SpecimenJar",
+			"name": "Specimen Jar",
+			"description": "Cylindrical glass containment on a rectangular plinth — Aperture / Black Mesa specimen-room vocabulary. Translucent jar with slight inner glow, a small dark cap, an interior content (blob, tendrils, crystal, or empty), an emissive accent stripe around the top of the plinth, and an amber Label3D on the front face. The architectural form of CURATED DISTANCE.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"specimen",
+				"jar",
+				"containment",
+				"glass",
+				"aperture"
+			],
+			"parameters": {
+				"jar_height": "Jar height in meters (default 0.55, range 0.25-1.5)",
+				"jar_radius": "Jar radius in meters (default 0.14)",
+				"plinth_height": "Plinth height in meters (default 0.20)",
+				"plinth_width": "Plinth side in meters (default 0.42)",
+				"glass_color": "Translucent glass color with alpha (default faint blue)",
+				"content_color": "Interior content color (default sickly emerald)",
+				"content_shape": "blob | tendrils | crystal | empty",
+				"label_text": "Amber Label3D text on plinth front (default 'SPECIMEN λ-S/Δ')",
+				"label_color": "Label and accent strip color (default hazard amber)",
+				"content_glow": "Content emission strength 0-2 (default 0.8)",
+				"cap_color": "Jar cap color (default dark steel)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"containment",
+				"signage"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"sphere",
+						"prism"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~192"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"microscope",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
 			}
 		}
 	}
