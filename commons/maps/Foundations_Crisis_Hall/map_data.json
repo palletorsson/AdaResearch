@@ -1,0 +1,92 @@
+{
+  "map_info": {
+    "name": "Foundations Crisis Hall",
+    "lookup_name": "Foundations_Crisis_Hall",
+    "description": "Five stations down a long hall, each naming one of the five known limits of mathematics. Halting Problem (button), Cantor's Diagonal (microscope), Russell's Paradox (chamber-in-chamber), Gödel Incompleteness (electrical panel encoding statements), Hilbert's Program (locked box of the formalist dream). Built 2026-05-22 as the third algorithm-trajectory chamber.",
+    "manual_file": "",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 8,
+      "depth": 14,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "foundationscrisis",
+      "estimated_time": "6-9 minutes",
+      "learning_objectives": [
+        "Meet the five canonical limits of mathematics as physical stations",
+        "Read each prop's state as the impossibility it names",
+        "Walking the hall is reading the foundations crisis in order"
+      ]
+    }
+  },
+  "utility_definitions": {
+    "t": "Next",
+    "sp": "Spawn Point"
+  },
+  "spawn_points": {
+    "default": {
+      "position": [4.0, 1.2, 13.0],
+      "rotation": [0, 0, 0]
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.38, 0.40, 0.48],
+    "ambient_energy": 0.45
+  },
+  "settings": {
+    "ambient_preset": "lab"
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "0", "1", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "t", " ", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "lab_room#accent_color:0.902,0.224,0.275#signage_top:FOUNDATIONS CRISIS HALL#signage_sub:five known limits#annotation_top:halting · Cantor · Russell · Gödel · Hilbert#annotation_bottom:every formal system has its outside#room_width:8.0#room_depth:14.0#room_height:3.8#mounted_artifact_scene:res://commons/artifacts/foundations_crisis_apparatus/foundations_crisis_apparatus.tscn", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
+}

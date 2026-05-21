@@ -1,0 +1,77 @@
+{
+  "map_info": {
+    "name": "QFEP Phase Chamber",
+    "lookup_name": "QFEP_Phase_Chamber",
+    "description": "Seven phase stations arranged in a circle. F_order (crystal in jar), oscillation (pendulum mid-swing), E_entropy (flask reacting over bunsen), lambda_edge (vacuum chamber at over-pressure), integration (scales balanced), relation (kaleidoscope), synthesis (autoclave). Walking the circle IS walking the phase diagram. Built 2026-05-22 as the second algorithm-trajectory chamber; sister to Turing_Machine_Lab.",
+    "manual_file": "",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 9,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "qfeplaboratory",
+      "estimated_time": "5-7 minutes",
+      "learning_objectives": [
+        "Visit the seven QFEP phases as physical stations in a circle",
+        "Read each prop's state as the phase it embodies",
+        "Walk the chamber once = walk the phase diagram once"
+      ]
+    }
+  },
+  "utility_definitions": {
+    "t": "Next",
+    "sp": "Spawn Point"
+  },
+  "spawn_points": {
+    "default": {
+      "position": [4.5, 1.2, 8.0],
+      "rotation": [0, 0, 0]
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.42, 0.45, 0.55],
+    "ambient_energy": 0.55
+  },
+  "settings": {
+    "ambient_preset": "lab"
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "0", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "t", " ", " ", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "lab_room#accent_color:0.608,0.365,0.890#signage_top:QFEP PHASE CHAMBER#signage_sub:walk the phase diagram#annotation_top:seven stations, seven phases — F → ω → E → λ → φ → G → ∑#annotation_bottom:the chamber IS the landscape; the walk IS the trajectory#room_width:9.0#room_depth:9.0#room_height:3.8#mounted_artifact_scene:res://commons/artifacts/qfep_phase_apparatus/qfep_phase_apparatus.tscn", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
+}
