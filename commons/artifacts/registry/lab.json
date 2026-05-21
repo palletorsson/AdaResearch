@@ -2971,6 +2971,571 @@
 				"measured_footprint_cells": 1,
 				"footprint_source": "designed"
 			}
+		},
+		"fire_extinguisher": {
+			"lookup_name": "fire_extinguisher",
+			"scene": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
+			"class_name": "FireExtinguisher",
+			"name": "Fire Extinguisher",
+			"description": "Wall-mounted red fire extinguisher — Half-Life / industrial-corridor vocabulary. Alarm-red cylinder, narrow steel valve and pinch handle on top, coiled black hose curving down one side, steel wall bracket holding the cylinder against the wall, white accent band wrapping the middle, and a white 'FIRE' Label3D on the front. The architectural form of NAMED DANGER.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"safety",
+				"extinguisher",
+				"emergency",
+				"wall_mounted"
+			],
+			"parameters": {
+				"extinguisher_height": "Cylinder body height in meters (default 0.55)",
+				"extinguisher_radius": "Cylinder body radius in meters (default 0.075)",
+				"body_color": "Cylinder body color (default alarm red)",
+				"accent_color": "Middle accent band color (default white)",
+				"label_color": "Front label color (default white)",
+				"hose_visible": "Bool — coiled black hose hangs down one side when true (default true)",
+				"wall_bracket": "Bool — steel wall bracket sits behind the cylinder when true (default true)",
+				"label_text": "Front label text (default 'FIRE')"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"safety",
+				"corridor"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate_segments"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "standard",
+					"key_properties": [
+						"albedo",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~192"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"exit_sign",
+					"safety_shower"
+				],
+				"preferred_zone": "corridor",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"test_tube_rack": {
+			"lookup_name": "test_tube_rack",
+			"scene": "res://commons/artifacts/test_tube_rack/test_tube_rack.tscn",
+			"class_name": "TestTubeRack",
+			"name": "Test Tube Rack",
+			"description": "Bench-top wooden test tube rack — chemistry-classroom vocabulary. Light wooden base with four corner posts and an upper holding plate, a single row of evenly-spaced glass test tubes, the first few tubes containing coloured liquid content, an emissive Portal-orange accent strip along the front of the base. The architectural form of REPEATED ATTEMPTS.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"chemistry",
+				"tubes",
+				"rack",
+				"glass",
+				"bench"
+			],
+			"parameters": {
+				"rack_width": "Rack long axis in meters (default 0.32)",
+				"rack_depth": "Rack short axis in meters (default 0.10)",
+				"rack_height": "Rack overall height in meters (default 0.18)",
+				"tube_count": "Number of tubes in the row (default 6, range 3-12)",
+				"tube_height": "Tube height in meters (default 0.14)",
+				"tube_radius": "Tube radius in meters (default 0.012)",
+				"tube_content_count": "How many tubes (from left) contain content (default 3)",
+				"rack_color": "Rack wood color (default light wood)",
+				"tube_glass_color": "Translucent glass color with alpha (default faint blue)",
+				"content_color": "Liquid content color (default sickly green)",
+				"accent_color": "Front accent strip color (default Portal orange)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"chemistry",
+				"bench"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"microscope",
+					"specimen_jar",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"gas_canister": {
+			"lookup_name": "gas_canister",
+			"scene": "res://commons/artifacts/gas_canister/gas_canister.tscn",
+			"class_name": "GasCanister",
+			"name": "Gas Canister",
+			"description": "Pressurised gas cylinder on a steel cradle — industrial / hospital-supply vocabulary. Light teal body, tapered dark-steel shoulder cap, valve assembly (housing + red wheel handle + angled spout) on top, label naming the gas ('O₂') on the front, small emissive pressure indicator when pressurised, and a dark-steel cradle (vertical stand with ring, or horizontal arched supports). The architectural form of CONTAINED PRESSURE WAITING.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"gas",
+				"canister",
+				"pressure",
+				"supply"
+			],
+			"parameters": {
+				"canister_height": "Canister body height in meters (default 0.85)",
+				"canister_radius": "Canister body radius in meters (default 0.13)",
+				"body_color": "Canister body color (default light teal)",
+				"cap_color": "Shoulder cap color (default dark steel)",
+				"cradle_color": "Cradle steel color (default dark steel)",
+				"valve_handle_color": "Wheel handle color (default alarm red)",
+				"label_text": "Front label text naming the gas (default 'O₂')",
+				"label_color": "Label color (default white)",
+				"cradle_style": "vertical | horizontal — stand-with-ring or arched-cradle (default vertical)",
+				"pressure_indicator": "Bool — emissive dot showing pressurised state (default true)",
+				"pressure_color": "Pressure dot color (default safety green)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"supply",
+				"industrial"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"torus",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children",
+						"rotate_segments"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~320"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"fume_hood",
+					"safety_shower",
+					"fire_extinguisher"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"palm_scanner": {
+			"lookup_name": "palm_scanner",
+			"scene": "res://commons/artifacts/palm_scanner/palm_scanner.tscn",
+			"class_name": "PalmScanner",
+			"name": "Palm Scanner",
+			"description": "Wall-mounted (or podium-mounted) biometric palm reader — Portal 2 / Aperture threshold vocabulary. Dark plastic rectangular panel with an inset scan window (emerald glow when active, dark when inactive), a faint raised palm-disc + 4 finger boxes hand outline, a status LED in the corner (green=active / red=inactive), a Portal-orange accent strip across the top, and a PLACE HAND Label3D below the scan window. Mounting toggles between flush wall placement and a 1m vertical podium stand.",
+			"category": "lab_prop",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"biometric",
+				"scanner",
+				"interface",
+				"signage",
+				"portal",
+				"threshold"
+			],
+			"parameters": {
+				"panel_width": "Scanner panel width in meters (default 0.18)",
+				"panel_height": "Scanner panel height in meters (default 0.24)",
+				"panel_depth": "Scanner panel depth in meters (default 0.05)",
+				"panel_color": "Panel dark plastic color (default near-black)",
+				"scan_color": "Active scan window / palm outline color (default emerald)",
+				"scan_active": "Bool — when true the scan window glows and status LED is green",
+				"accent_color": "Top accent strip color (default Portal orange)",
+				"label_text": "Label3D text below the scan window (default 'PLACE HAND')",
+				"text_color": "Label color (default white)",
+				"mounting": "'wall' = flush panel | 'podium' = panel on a 1m vertical stand"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"interface",
+				"threshold"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~192"
+			},
+			"spatial_needs": {
+				"platform": "wall",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sliding_door",
+					"exit_sign"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"robot_arm": {
+			"lookup_name": "robot_arm",
+			"scene": "res://commons/artifacts/robot_arm/robot_arm.tscn",
+			"class_name": "RobotArm",
+			"name": "Robot Arm",
+			"description": "Articulated lab arm on an industrial pedestal — Aperture / Boston-Dynamics vocabulary. Round steel base disc, a vertical yaw joint, a chain of 2-4 box-and-sphere segments stacked with per-joint X-axis pitch angles (arm bends in the XZ plane), and an optional two-jaw parallel gripper at the end. Each joint wears a Portal-orange accent stripe. Frozen in a programmed pose — a static glyph of motion.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"robotics",
+				"arm",
+				"articulated",
+				"automation",
+				"gripper",
+				"aperture"
+			],
+			"parameters": {
+				"base_radius": "Base disc radius in meters (default 0.18)",
+				"base_height": "Base disc height in meters (default 0.10)",
+				"arm_segment_count": "Number of articulated arm segments (default 3, range 2-4)",
+				"segment_length": "Length of each arm segment in meters (default 0.32)",
+				"body_color": "Arm body steel color (default light steel)",
+				"joint_color": "Joint and base color (default dark accent)",
+				"accent_color": "Joint stripe color (default Portal orange)",
+				"gripper_visible": "Bool — render the two-jaw parallel gripper at the end",
+				"pose_angles_degrees": "PackedFloat32Array of joint angles bottom-up: [yaw, pitch_1, pitch_2, ...] — pads/truncates to segment_count+1 (default [0.0, -35.0, 70.0, -45.0])"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"robotics",
+				"automation"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"sphere",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"rotate_per_joint",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": "pose_angles_degrees",
+					"affects": [
+						"joint_rotation"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~384"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"conveyor_belt",
+					"specimen_jar",
+					"large_table"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "designed"
+			}
+		},
+		"glove_box": {
+			"lookup_name": "glove_box",
+			"scene": "res://commons/artifacts/glove_box/glove_box.tscn",
+			"class_name": "GloveBox",
+			"name": "Glove Box",
+			"description": "Sealed handling chamber on four legs — Aperture / chemistry-lab vocabulary for 'this work cannot be touched directly'. Glossy white BoxMesh enclosure with a translucent glass top, an emissive interior ceiling plate, 1-3 black rubber glove ports on the front face (each port = dark CylinderMesh disc ringed by a TorusMesh cuff), a Portal-orange accent stripe across the front-top, and optional 4 vertical leg pillars.",
+			"category": "lab_prop",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"prop",
+				"lab",
+				"chemistry",
+				"glovebox",
+				"containment",
+				"handling",
+				"sealed",
+				"aperture"
+			],
+			"parameters": {
+				"box_width": "Body width in meters (default 1.0)",
+				"box_height": "Body height in meters (default 0.75)",
+				"box_depth": "Body depth in meters (default 0.55)",
+				"body_color": "Body shell color (default glossy white)",
+				"glass_color": "Top glass color with alpha (default faint translucent blue)",
+				"frame_color": "Frame and leg color (default dark steel)",
+				"accent_color": "Front-top accent stripe color (default Portal orange)",
+				"glove_color": "Glove port disc color (default black rubber)",
+				"glove_count": "Number of glove ports on front face (1-3, default 2)",
+				"glove_radius": "Radius of each glove port in meters (default 0.07)",
+				"interior_light": "Bool — emissive ceiling plate inside the chamber",
+				"light_color": "Interior light color (default cool white)",
+				"legs_visible": "Bool — render 4 vertical leg pillars under the body",
+				"leg_height": "Leg length in meters (default 0.85)"
+			},
+			"dev_themes": [
+				"environment",
+				"lab",
+				"chemistry",
+				"containment"
+			],
+			"dev_category": "lab_prop",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~320"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"fume_hood",
+					"specimen_jar",
+					"lab_stool"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
 		}
 	}
 }

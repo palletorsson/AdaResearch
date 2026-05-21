@@ -217,7 +217,10 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 		if child is Node3D:
 			var sub_aabb: AABB = _get_combined_aabb(child)
 			if sub_aabb.size.length() > 0:
-				# transform sub_aabb into parent's space if child has a non-identity transform
+				# Propagate the child's local transform into parent space so
+				# nested rotated/translated joints (e.g. robot_arm) contribute
+				# their actual swept volume, not just their local AABB.
+				sub_aabb = (child as Node3D).transform * sub_aabb
 				if first:
 					result = sub_aabb
 					first = false
@@ -437,10 +440,7 @@ func _build_sweep() -> Array:
 		}))
 
 	# ── info_screen: critical_parameter = text content + colour ────
-	# text_size is INT (Label3D font_size). Default 18. The screen's
-	# internal text_root has a 180° Y rotation in info_screen.gd that
-	# mirrors text when viewed from the +Z-side camera — so we set
-	# rotation_y_180 to cancel it for the catalog shot.
+	# text_size is INT (Label3D font_size). Default 18.
 	sweep.append(_p("info_screen", "1_terminal_green", "terminal: green",
 		"classic phosphor — green text on dark, amber header",
 		{
@@ -454,8 +454,7 @@ func _build_sweep() -> Array:
 			"text_color": Color(0.45, 0.95, 0.55),
 			"header_color": Color(0.95, 0.72, 0.30),
 			"text_size": 18,
-		},
-		{"rotation_y_180": true}))
+		}))
 	sweep.append(_p("info_screen", "2_warning_red", "warning: red",
 		"alarm state — red text, urgent header",
 		{
@@ -469,8 +468,7 @@ func _build_sweep() -> Array:
 			"text_color": Color(0.95, 0.30, 0.32),
 			"header_color": Color(1.0, 0.40, 0.40),
 			"text_size": 20,
-		},
-		{"rotation_y_180": true}))
+		}))
 	sweep.append(_p("info_screen", "3_amber_civic", "amber: civic",
 		"civic dashboard — amber on neutral, calmer cadence",
 		{
@@ -484,8 +482,7 @@ func _build_sweep() -> Array:
 			"text_color": Color(0.95, 0.72, 0.30),
 			"header_color": Color(1.0, 1.0, 1.0),
 			"text_size": 22,
-		},
-		{"rotation_y_180": true}))
+		}))
 
 	# ── ceiling_vent: critical_parameter = slat_count + airflow ────
 	sweep.append(_p("ceiling_vent", "1_quiet_few_slats", "quiet: 6 slats",
@@ -817,11 +814,174 @@ func _build_sweep() -> Array:
 			"label_color": Color(0.20, 0.55, 0.95),
 		}))
 
+	# ── fire_extinguisher: critical_parameter = wall_bracket + hose
+	sweep.append(_p("fire_extinguisher", "1_wall_mounted_full", "wall mounted, full",
+		"the canonical extinguisher — bracket on the wall, hose coiled, white label",
+		{
+			"wall_bracket": true,
+			"hose_visible": true,
+			"label_text": "FIRE",
+			"body_color": Color(0.78, 0.08, 0.08),
+		}))
+	sweep.append(_p("fire_extinguisher", "2_freestanding", "freestanding, no hose",
+		"the bare can — no bracket, no hose, just the cylinder",
+		{
+			"wall_bracket": false,
+			"hose_visible": false,
+			"label_text": "CO₂",
+			"body_color": Color(0.18, 0.18, 0.22),
+		}))
+	sweep.append(_p("fire_extinguisher", "3_yellow_dry", "yellow dry chemical",
+		"hazard yellow — dry chemical class D for metal fires",
+		{
+			"wall_bracket": true,
+			"hose_visible": true,
+			"label_text": "DRY",
+			"body_color": Color(0.98, 0.78, 0.12),
+			"label_color": Color(0.10, 0.10, 0.12),
+		}))
+
+	# ── test_tube_rack: critical_parameter = tube_content_count ────
+	sweep.append(_p("test_tube_rack", "1_empty_setup", "empty (setup)",
+		"pre-experiment — six tubes, all empty, the rack as setup",
+		{
+			"tube_count": 6,
+			"tube_content_count": 0,
+			"content_color": Color(0.45, 0.85, 0.35, 0.92),
+			"rack_color": Color(0.78, 0.62, 0.42),
+		}))
+	sweep.append(_p("test_tube_rack", "2_partial_progress", "partial (in progress)",
+		"mid-run — 4 of 8 tubes filled, halfway through the assay",
+		{
+			"tube_count": 8,
+			"tube_content_count": 4,
+			"content_color": Color(0.85, 0.35, 0.55, 0.92),
+			"rack_color": Color(0.30, 0.30, 0.35),
+		}))
+	sweep.append(_p("test_tube_rack", "3_full_complete", "full (complete)",
+		"finished run — all 12 tubes filled with deep amber, ready for analysis",
+		{
+			"tube_count": 12,
+			"tube_content_count": 12,
+			"content_color": Color(0.92, 0.72, 0.30, 0.92),
+			"rack_color": Color(0.20, 0.20, 0.22),
+		}))
+
+	# ── gas_canister: critical_parameter = cradle_style ────────────
+	sweep.append(_p("gas_canister", "1_vertical_oxygen", "vertical: O₂",
+		"the at-the-ready position — oxygen, upright in vertical cradle",
+		{
+			"cradle_style": "vertical",
+			"label_text": "O₂",
+			"body_color": Color(0.94, 0.94, 0.95),
+			"pressure_indicator": true,
+			"pressure_color": Color(0.30, 0.85, 0.40),
+		}))
+	sweep.append(_p("gas_canister", "2_horizontal_argon", "horizontal: Ar",
+		"in-reserve — argon, lying in horizontal cradle, depressurised",
+		{
+			"cradle_style": "horizontal",
+			"label_text": "Ar",
+			"body_color": Color(0.55, 0.45, 0.75),
+			"pressure_indicator": false,
+		}))
+	sweep.append(_p("gas_canister", "3_vertical_nitrogen_red", "vertical: N₂ (alarm)",
+		"warning state — nitrogen with red pressure indicator (over-pressure)",
+		{
+			"cradle_style": "vertical",
+			"label_text": "N₂",
+			"body_color": Color(0.20, 0.30, 0.45),
+			"pressure_indicator": true,
+			"pressure_color": Color(0.95, 0.20, 0.20),
+		}))
+
+	# ── palm_scanner: critical_parameter = scan_active + mounting ──
+	sweep.append(_p("palm_scanner", "1_active_wall", "active: wall",
+		"checkpoint armed — emerald scan window lit, wall mounted",
+		{
+			"scan_active": true,
+			"mounting": "wall",
+			"label_text": "PLACE HAND",
+			"scan_color": Color(0.25, 0.92, 0.45),
+		}))
+	sweep.append(_p("palm_scanner", "2_locked_dark", "locked: dark",
+		"system inactive — scan window dark, red status LED",
+		{
+			"scan_active": false,
+			"mounting": "wall",
+			"label_text": "ACCESS DENIED",
+			"scan_color": Color(0.95, 0.20, 0.20),
+		}))
+	sweep.append(_p("palm_scanner", "3_active_podium", "active: podium",
+		"the lectern reader — scan armed, podium-mounted (entry to test chamber)",
+		{
+			"scan_active": true,
+			"mounting": "podium",
+			"label_text": "AUTHORISE",
+			"scan_color": Color(0.20, 0.55, 0.95),
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}))
+
+	# ── robot_arm: critical_parameter = pose_angles_degrees ────────
+	sweep.append(_p("robot_arm", "1_pose_idle", "pose: idle",
+		"the arm at rest — all joints near zero, gripper open",
+		{
+			"arm_segment_count": 3,
+			"pose_angles_degrees": PackedFloat32Array([0.0, -10.0, 15.0, -5.0]),
+			"gripper_visible": true,
+			"accent_color": Color(1.0, 0.45, 0.10),
+		}))
+	sweep.append(_p("robot_arm", "2_pose_reaching", "pose: reaching",
+		"mid-action — joints bent, the arm extending forward",
+		{
+			"arm_segment_count": 3,
+			"pose_angles_degrees": PackedFloat32Array([35.0, -50.0, 85.0, -55.0]),
+			"gripper_visible": true,
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}))
+	sweep.append(_p("robot_arm", "3_pose_parked", "pose: parked",
+		"end-of-shift — arm folded tight against base, no gripper",
+		{
+			"arm_segment_count": 4,
+			"pose_angles_degrees": PackedFloat32Array([0.0, -90.0, 95.0, -10.0, -45.0]),
+			"gripper_visible": false,
+			"accent_color": Color(0.40, 0.40, 0.42),
+		}))
+
+	# ── glove_box: critical_parameter = glove_count ────────────────
+	sweep.append(_p("glove_box", "1_single_glove", "single glove",
+		"surgical isolation — one glove port, the precision station",
+		{
+			"glove_count": 1,
+			"box_width": 0.7,
+			"interior_light": true,
+			"legs_visible": true,
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}))
+	sweep.append(_p("glove_box", "2_two_glove_canonical", "two glove canonical",
+		"the standard — two gloves for two hands, the canonical chamber",
+		{
+			"glove_count": 2,
+			"box_width": 1.0,
+			"interior_light": true,
+			"legs_visible": true,
+			"accent_color": Color(1.0, 0.45, 0.10),
+		}))
+	sweep.append(_p("glove_box", "3_three_glove_collaborative", "three glove collaborative",
+		"two operators — three gloves, wider box, collaborative work",
+		{
+			"glove_count": 3,
+			"box_width": 1.4,
+			"interior_light": true,
+			"legs_visible": true,
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}))
+
 	return sweep
 
 
 # Small helper to make sweep entries less verbose. `extra` may carry
-# capture-time hints (e.g. {"rotation_y_180": true}) — props that face
+# capture-time hints (e.g. ) — props that face
 # -Z get spun 180° around Y so text reads correctly from the camera.
 func _p(prop: String, variant_id: String, label: String, subtitle: String, dna: Dictionary, extra: Dictionary = {}) -> Dictionary:
 	var d := {

@@ -207,6 +207,10 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 		if child is Node3D:
 			var sub_aabb: AABB = _get_combined_aabb(child)
 			if sub_aabb.size.length() > 0:
+				# Propagate the child's local transform into parent space so
+				# nested rotated/translated joints (e.g. robot_arm) contribute
+				# their actual swept volume, not just their local AABB.
+				sub_aabb = (child as Node3D).transform * sub_aabb
 				if first:
 					result = sub_aabb
 					first = false
@@ -420,8 +424,7 @@ func _build_sweep() -> Array:
 				"text_color": Color(0.45, 0.95, 0.55),
 				"header_color": Color(0.95, 0.72, 0.30),
 				"text_size": int(s[2]),
-			},
-			{"rotation_y_180": true}))
+			}))
 
 	# ── ceiling_vent: slat_count axis (sparse → dense) ─────────────
 	var vents := [
@@ -662,6 +665,155 @@ func _build_sweep() -> Array:
 				"glass_color": Color(0.65, 0.78, 0.88, 0.35),
 				"label_text": "SPECIMEN",
 				"label_color": Color(0.95, 0.70, 0.20),
+			}))
+
+	# ── fire_extinguisher: extinguisher_height axis ────────────────
+	var fe_specs := [
+		[0.35, 0.060, "small_kitchen",  "small kitchen (0.35m)"],
+		[0.45, 0.070, "office",         "office (0.45m)"],
+		[0.55, 0.075, "standard",       "standard (0.55m)"],
+		[0.70, 0.090, "warehouse",      "warehouse (0.70m)"],
+		[0.95, 0.115, "industrial",     "industrial (0.95m)"],
+	]
+	for i in range(5):
+		var fe = fe_specs[i]
+		sweep.append(_p("fire_extinguisher", "%d_%s" % [i + 1, fe[2]],
+			fe[3], "extinguisher_height × radius = %.2f × %.3fm" % [fe[0], fe[1]], "extinguisher_height",
+			{
+				"extinguisher_height": float(fe[0]),
+				"extinguisher_radius": float(fe[1]),
+				"body_color": Color(0.78, 0.08, 0.08),
+				"accent_color": Color(0.96, 0.96, 0.96),
+				"hose_visible": true,
+				"wall_bracket": true,
+				"label_text": "FIRE",
+				"label_color": Color(0.98, 0.98, 0.98),
+			}))
+
+	# ── test_tube_rack: tube_count axis (sparse → packed) ──────────
+	var ttr_specs := [
+		[3,  0.20, 0.10, "trio",         "trio (3 tubes)"],
+		[6,  0.32, 0.10, "six_pack",     "six-pack (6 tubes)"],
+		[8,  0.40, 0.12, "eight",        "eight tubes"],
+		[10, 0.50, 0.12, "ten_dense",    "ten dense"],
+		[12, 0.60, 0.14, "twelve_full",  "twelve (full)"],
+	]
+	for i in range(5):
+		var t = ttr_specs[i]
+		sweep.append(_p("test_tube_rack", "%d_%s" % [i + 1, t[3]],
+			t[4], "tube_count = %d, rack_width = %.2fm" % [t[0], t[1]], "tube_count",
+			{
+				"tube_count": int(t[0]),
+				"rack_width": float(t[1]),
+				"rack_depth": float(t[2]),
+				"rack_height": 0.18,
+				"tube_height": 0.14,
+				"tube_radius": 0.012,
+				"tube_content_count": int(t[0]) / 2,
+				"rack_color": Color(0.78, 0.62, 0.42),
+				"content_color": Color(0.45, 0.85, 0.35, 0.92),
+				"accent_color": k_accent,
+			}))
+
+	# ── gas_canister: canister_height axis ─────────────────────────
+	var gc_specs := [
+		[0.45, 0.09, "vertical",   "personal",     "personal (0.45m)"],
+		[0.65, 0.11, "vertical",   "compact",      "compact (0.65m)"],
+		[0.85, 0.13, "vertical",   "standard",     "standard (0.85m)"],
+		[1.10, 0.16, "vertical",   "industrial",   "industrial (1.10m)"],
+		[1.40, 0.20, "horizontal", "bulk_reserve", "bulk reserve (1.40m, horiz)"],
+	]
+	for i in range(5):
+		var gc = gc_specs[i]
+		sweep.append(_p("gas_canister", "%d_%s" % [i + 1, gc[3]],
+			gc[4], "canister_height × radius = %.2f × %.2fm (%s)" % [gc[0], gc[1], gc[2]], "canister_height",
+			{
+				"canister_height": float(gc[0]),
+				"canister_radius": float(gc[1]),
+				"cradle_style": gc[2],
+				"body_color": Color(0.20, 0.55, 0.65),
+				"cap_color": k_frame,
+				"cradle_color": k_frame,
+				"valve_handle_color": Color(0.78, 0.08, 0.08),
+				"label_text": "GAS",
+				"label_color": Color(0.98, 0.98, 0.98),
+				"pressure_indicator": true,
+				"pressure_color": Color(0.30, 0.85, 0.40),
+			}))
+
+	# ── palm_scanner: panel_size axis ──────────────────────────────
+	var ps_specs := [
+		[0.12, 0.16, "wall",   "compact",       "compact wall (0.12×0.16)"],
+		[0.16, 0.22, "wall",   "small",         "small wall (0.16×0.22)"],
+		[0.18, 0.24, "wall",   "standard",      "standard (0.18×0.24)"],
+		[0.24, 0.32, "wall",   "large",         "large wall (0.24×0.32)"],
+		[0.32, 0.45, "podium", "lectern",       "lectern podium (0.32×0.45)"],
+	]
+	for i in range(5):
+		var ps = ps_specs[i]
+		sweep.append(_p("palm_scanner", "%d_%s" % [i + 1, ps[3]],
+			ps[4], "panel_width × panel_height = %.2f × %.2fm (%s)" % [ps[0], ps[1], ps[2]], "size",
+			{
+				"panel_width": float(ps[0]),
+				"panel_height": float(ps[1]),
+				"panel_depth": 0.05,
+				"mounting": ps[2],
+				"panel_color": k_frame,
+				"scan_color": Color(0.25, 0.92, 0.45),
+				"accent_color": k_accent,
+				"scan_active": true,
+				"label_text": "PLACE HAND",
+				"text_color": Color(0.95, 0.96, 0.98),
+			}))
+
+	# ── robot_arm: arm_segment_count + pose axis (folded → reach) ──
+	var ra_specs := [
+		[2, PackedFloat32Array([0.0, -10.0, 15.0]),                  "two_seg_idle",   "2-segment idle"],
+		[3, PackedFloat32Array([0.0, -10.0, 20.0, -10.0]),            "three_seg_idle", "3-segment idle"],
+		[3, PackedFloat32Array([20.0, -35.0, 55.0, -40.0]),           "three_seg_mid",  "3-segment mid-reach"],
+		[4, PackedFloat32Array([35.0, -55.0, 75.0, -45.0, 30.0]),     "four_seg_full",  "4-segment full extend"],
+		[4, PackedFloat32Array([0.0, -90.0, 100.0, -45.0, -55.0]),    "four_seg_parked","4-segment parked"],
+	]
+	for i in range(5):
+		var ra = ra_specs[i]
+		sweep.append(_p("robot_arm", "%d_%s" % [i + 1, ra[2]],
+			ra[3], "arm_segment_count = %d, pose = %s" % [ra[0], str(ra[1])], "arm_segment_count + pose",
+			{
+				"arm_segment_count": int(ra[0]),
+				"segment_length": 0.32,
+				"pose_angles_degrees": ra[1],
+				"body_color": Color(0.86, 0.86, 0.88),
+				"joint_color": k_frame,
+				"accent_color": k_accent,
+				"gripper_visible": true,
+			}))
+
+	# ── glove_box: box_width axis (single → collaborative) ─────────
+	var gb_specs := [
+		[0.6, 0.55, 0.45, 1, "single_compact",  "single-compact (0.6m, 1 glove)"],
+		[0.8, 0.65, 0.50, 2, "two_glove_small", "two-glove small (0.8m, 2)"],
+		[1.0, 0.75, 0.55, 2, "two_glove_std",   "two-glove standard (1.0m, 2)"],
+		[1.4, 0.80, 0.60, 3, "three_glove_wide","three-glove wide (1.4m, 3)"],
+		[1.8, 0.90, 0.70, 3, "industrial_3",    "industrial (1.8m, 3 gloves)"],
+	]
+	for i in range(5):
+		var g = gb_specs[i]
+		sweep.append(_p("glove_box", "%d_%s" % [i + 1, g[4]],
+			g[5], "box %.1f×%.2f×%.2fm, %d glove(s)" % [g[0], g[1], g[2], g[3]], "size + glove_count",
+			{
+				"box_width": float(g[0]),
+				"box_height": float(g[1]),
+				"box_depth": float(g[2]),
+				"glove_count": int(g[3]),
+				"glove_radius": 0.07,
+				"interior_light": true,
+				"legs_visible": true,
+				"leg_height": 0.85,
+				"body_color": Color(0.94, 0.94, 0.95),
+				"glass_color": Color(0.78, 0.85, 0.92, 0.40),
+				"frame_color": k_frame,
+				"accent_color": k_accent,
+				"glove_color": Color(0.10, 0.10, 0.12),
 			}))
 
 	return sweep

@@ -296,8 +296,7 @@ func _build_label() -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.no_depth_test = false
-	# Label3D default faces -Z; rotate so it reads from +Z.
-	label.rotation = Vector3(0.0, PI, 0.0)
+	# Label3D in Godot 4 defaults to facing +Z (readable from +Z viewers).
 	# Centered on front face of plinth.
 	label.position = Vector3(0.0, plinth_height * 0.6, plinth_width * 0.5 + 0.006)
 	add_child(label)
