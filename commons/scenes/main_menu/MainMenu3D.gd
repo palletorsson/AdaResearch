@@ -12,6 +12,8 @@ signal quit_requested
 @onready var about_display = $AboutDisplay
 
 const MAP_BROWSER_SCENE = preload("res://commons/scenes/main_menu/components/MapBrowser3D.tscn")
+const SEQUENCE_PICKER_SCENE = preload("res://commons/scenes/2din3dui/sequence_picker_3d.tscn")
+var sequence_picker_instance: Node3D = null
 const DESKTOP_MENU_PIXELS_PER_UNIT := 1800.0
 const MOBILE_MENU_PIXELS_PER_UNIT := 1200.0
 var map_browser_instance: Node3D = null
@@ -129,20 +131,55 @@ func _on_new_game_clicked():
 	start_game_requested.emit()
 
 func _on_load_game_clicked():
-	print("MainMenu: Load Game clicked")
-	
-	var checkpoint_manager = get_node_or_null("/root/CheckpointManager")
-	if checkpoint_manager and checkpoint_manager.has_method("has_checkpoint"):
-		if checkpoint_manager.has_checkpoint():
-			print("MainMenu: Resuming from checkpoint")
-			checkpoint_manager.respawn_at_checkpoint()
-			load_game_requested.emit()
-		else:
-			print("MainMenu: No save found, starting new game")
-			_on_new_game_clicked()
+	# Load Game now opens the sequence picker — a 2D-in-3D panel listing
+	# all spine sequences as info cards with Play buttons. Each card
+	# loads that sequence's first map via SceneManager.start_sequence.
+	# (The old behavior — resume from checkpoint OR start new game — was
+	# broken when no checkpoint existed and gave the player no way to
+	# pick a sequence. The picker fixes that.)
+	print("MainMenu: Load Game clicked — opening sequence picker")
+	_open_sequence_picker()
+
+
+func _open_sequence_picker():
+	# Close other panels if open
+	if settings_instance:
+		settings_instance.queue_free()
+		settings_instance = null
+	if map_browser_instance:
+		map_browser_instance.queue_free()
+		map_browser_instance = null
+
+	# Toggle: if already open, close it
+	if sequence_picker_instance:
+		sequence_picker_instance.queue_free()
+		sequence_picker_instance = null
+		if about_display:
+			about_display.visible = true
+		return
+
+	# Instantiate the picker
+	sequence_picker_instance = SEQUENCE_PICKER_SCENE.instantiate()
+	add_child(sequence_picker_instance)
+
+	# Connect signals
+	sequence_picker_instance.sequence_play_requested.connect(_on_sequence_selected)
+	sequence_picker_instance.back_requested.connect(_on_picker_back)
+
+	# Position in the About Display slot
+	if about_display:
+		sequence_picker_instance.transform = about_display.transform
+		about_display.visible = false
 	else:
-		print("MainMenu: CheckpointManager not available, starting new game")
-		_on_new_game_clicked()
+		sequence_picker_instance.position = Vector3(0.6, 0, 0)
+
+
+func _on_picker_back():
+	if sequence_picker_instance:
+		sequence_picker_instance.queue_free()
+		sequence_picker_instance = null
+	if about_display:
+		about_display.visible = true
 
 const SETTINGS_SCENE = preload("res://commons/scenes/main_menu/objects/settings_ui.tscn")
 var settings_instance: Node3D = null

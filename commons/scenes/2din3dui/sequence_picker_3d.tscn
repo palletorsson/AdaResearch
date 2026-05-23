@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1_v2d3"]
+[ext_resource type="PackedScene" path="res://commons/scenes/2din3dui/sequence_picker_content.tscn" id="2_content"]
+[ext_resource type="Script" path="res://commons/scenes/2din3dui/sequence_picker_3d.gd" id="3_picker"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_picker"]
+size = Vector2(0.96, 1.44)
+
+[node name="SequencePicker3D" type="Node3D"]
+script = ExtResource("3_picker")
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+mesh = SubResource("QuadMesh_picker")
+
+[node name="Viewport2Din3D" parent="Screen" instance=ExtResource("1_v2d3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+screen_size = Vector2(0.96, 1.44)
+scene = ExtResource("2_content")
+viewport_size = Vector2(640, 960)
