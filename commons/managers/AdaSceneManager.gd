@@ -41,6 +41,17 @@ var sequence_configs: Dictionary = {}
 const SEQUENCES_JSON_PATH = "res://commons/maps/map_sequences.json"
 const SEQUENCE_REGISTRY_PATH = "res://commons/maps/sequences/"
 
+# Sequence requested from the main-menu sequence picker. The lab (LabGridSystem
+# in VR, DesktopLabManager in desktop) reads this on _ready and routes it
+# through the SAME path as a lab teleporter, so picker-loaded sequences and
+# teleporter-loaded sequences behave identically.
+var pending_sequence_request: String = ""
+
+func take_pending_sequence_request() -> String:
+	var name = pending_sequence_request
+	pending_sequence_request = ""
+	return name
+
 # Signals
 signal scene_transition_started(from_scene: String, to_scene: String, transition_type: TransitionType)
 signal scene_transition_completed(scene_name: String, user_data: Dictionary)

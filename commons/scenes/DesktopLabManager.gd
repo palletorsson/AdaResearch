@@ -34,6 +34,22 @@ func _ready():
 	else:
 		push_error("DesktopLabManager: LabGridSystem not found!")
 
+	# If the player picked a sequence from the main-menu sequence picker
+	# BEFORE the lab loaded, the SceneManager carries it on
+	# `pending_sequence_request`. Pick it up now and start it through
+	# the same _start_sequence path that lab teleporters use.
+	var scene_manager = get_node_or_null("/root/SceneManager")
+	if scene_manager and "pending_sequence_request" in scene_manager:
+		var pending: String = scene_manager.take_pending_sequence_request() if scene_manager.has_method("take_pending_sequence_request") else String(scene_manager.pending_sequence_request)
+		if pending != "":
+			# Wait an extra frame so the lab finishes wiring before we start the sequence
+			await get_tree().process_frame
+			print("DesktopLabManager: 🎯 Picker-pending sequence detected: %s — starting via the lab path" % pending)
+			_start_sequence(pending)
+			# Also clear in case `take_pending_sequence_request` wasn't available
+			if "pending_sequence_request" in scene_manager:
+				scene_manager.pending_sequence_request = ""
+
 	print("DesktopLabManager: Ready")
 
 func _on_artifact_activated(artifact_id: String):
