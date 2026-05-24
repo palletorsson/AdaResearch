@@ -29,27 +29,66 @@ signal lab_state_changed(new_state: String, unlocked_artifacts: Array)
 
 func _ready():
 	print("LabManager: Initializing enhanced lab system with progression")
-	
+
 	# Get lab scene reference
 	lab_scene = get_parent()
-	
+
 	# Load JSON configurations
 	_load_json_data()
-	
+
 	# Load saved progression state
 	_load_progression_state()
-	
+
 	# Create artifacts based on current state
 	_create_artifacts_from_current_state()
-	
+
 	# Setup scene manager connection
 	_setup_scene_manager()
-	
+
 	# Connect to external progression signals
 	_connect_progression_signals()
-	
+
 	# Setup distance-based artifact activation timer
 	_setup_distance_activation()
+
+	# If the player picked a sequence from the main-menu sequence picker
+	# BEFORE the lab loaded, the SceneManager carries it on
+	# `pending_sequence_request`. Pick it up now and route it through
+	# the SAME teleporter-style request_transition call that
+	# LabGridSystem uses in VR mode. This keeps picker-loaded and
+	# teleporter-loaded sequences on the same code path.
+	_consume_pending_sequence_request()
+
+
+func _consume_pending_sequence_request() -> void:
+	var scene_manager = get_node_or_null("/root/SceneManager")
+	if scene_manager == null:
+		return
+	if not ("pending_sequence_request" in scene_manager):
+		return
+	var pending: String = ""
+	if scene_manager.has_method("take_pending_sequence_request"):
+		pending = scene_manager.take_pending_sequence_request()
+	else:
+		pending = String(scene_manager.pending_sequence_request)
+		scene_manager.pending_sequence_request = ""
+	if pending == "":
+		return
+
+	# Wait a frame so any remaining lab wiring finishes before we ask
+	# the SceneManager to transition again.
+	await get_tree().process_frame
+	print("LabManager: 🎯 Picker-pending sequence detected: %s — routing through lab-teleporter path" % pending)
+	if scene_manager.has_method("request_transition"):
+		scene_manager.request_transition({
+			"type": 1, # TransitionType.TELEPORTER — matches LabGridSystem
+			"action": "start_sequence",
+			"sequence": pending,
+			"source": "menu_sequence_picker",
+		})
+	elif scene_manager.has_method("start_sequence"):
+		# Fallback if request_transition isn't available (older builds)
+		scene_manager.start_sequence(pending)
 
 func _load_json_data():
 	"""Load both JSON files"""
