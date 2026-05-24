@@ -11,6 +11,7 @@ signal back_requested
 
 const SPINE_PATH: String = "res://commons/maps/curriculum_spine.json"
 const SEQUENCES_DIR: String = "res://commons/maps/sequences/"
+const GLYPH_SCRIPT: GDScript = preload("res://commons/scenes/2din3dui/sequence_glyph.gd")
 
 const PHASE_COLORS: Dictionary = {
 	"F_order":      Color(0.227, 0.482, 1.000),
@@ -139,7 +140,16 @@ func _build_card(entry: Dictionary) -> PanelContainer:
 	row.add_theme_constant_override("separation", 12)
 	card.add_child(row)
 
-	# ── Left column: text ─────────────────────────────────────────
+	# ── Left: sequence glyph (Portal-2-style chamber icon) ────────
+	var glyph: Control = Control.new()
+	glyph.set_script(GLYPH_SCRIPT)
+	glyph.set("sequence_id", String(entry.get("id", "")))
+	glyph.set("phase_color", color)
+	glyph.custom_minimum_size = Vector2(90, 90)
+	glyph.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(glyph)
+
+	# ── Middle column: text ───────────────────────────────────────
 	var col := VBoxContainer.new()
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	col.add_theme_constant_override("separation", 4)
