@@ -78,42 +78,16 @@ func _setup_about_text():
 		about_display.set_tutorial_from_text(about_text)
 
 func _update_load_button():
-	# Dim Load Game button if no save exists
-	var checkpoint_manager = get_node_or_null("/root/CheckpointManager")
-	var has_save = false
-	
-	if checkpoint_manager and checkpoint_manager.has_method("has_checkpoint"):
-		has_save = checkpoint_manager.has_checkpoint()
-	else:
-		# Fallback: check if save file exists
-		has_save = FileAccess.file_exists("user://checkpoint.save")
-	
-	if not load_game_button:
-		return
-	
-	var target_color: Color
-	var label_alpha: float
-	
-	if has_save:
-		target_color = Color(0.3, 0.7, 0.9, 1)  # Cyan
-		label_alpha = 1.0
-	else:
-		target_color = Color(0.3, 0.3, 0.3, 1)  # Gray/dimmed
-		label_alpha = 0.4
-	
-	# Update button color property
-	load_game_button.color = target_color
-	
-	# Update material if already created
-	var cube = load_game_button.get_node_or_null("InteractionCube")
-	if cube and cube.material_override:
-		cube.material_override.set_shader_parameter("modelColor", target_color)
-		cube.material_override.set_shader_parameter("emissionColor", target_color)
-	
-	# Update label opacity
-	var label = load_game_button.get_node_or_null("Label3D")
-	if label:
-		label.modulate.a = label_alpha
+	# The Sequences button (formerly "Load Game") opens the picker and
+	# does not depend on a saved checkpoint, so it stays at its scene
+	# colour at all times. This function used to dim it when no save
+	# existed — that behavior is obsolete now that the button always
+	# does something useful regardless of save state.
+	#
+	# Kept as a no-op so external callers (and the existing _ready
+	# hook) don't crash. Remove the call if/when the rest of the
+	# checkpoint UX is rewired.
+	return
 
 func _on_new_game_clicked():
 	print("MainMenu: New Game clicked")
