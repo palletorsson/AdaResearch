@@ -6,33 +6,97 @@ extends Node3D
 
 func _ready():
 	print("LabGridScene: Initializing progressive lab scene...")
-	
+
 	# Wait for SceneManager
 	var scene_manager = await SceneManagerHelper.wait_for_scene_manager(self)
-	
+
+	# If the player picked a sequence from the main-menu sequence picker
+	# BEFORE the lab loaded, the SceneManager autoload carries it on
+	# `pending_sequence_request`. We pick it up FIRST — before processing
+	# any default lab map data — and route it through the same
+	# request_transition({"action": "start_sequence"}) call a lab
+	# teleporter uses. That call loads grid.tscn with the first map of
+	# the sequence; the lab visit becomes a flicker rather than a
+	# destination.
+	#
+	# This is what fixes "I click a sequence and end up in the lab":
+	# previously the consumer lived in LabManager.gd, but LabManager is
+	# never instantiated in lab.tscn — LabGridScene is. So the pending
+	# request was never consumed.
+	#
+	# NOTE: SceneManagerHelper.get_scene_manager() returns a SCENE-LEVEL
+	# SceneManager. The pending request lives on the AUTOLOAD
+	# (/root/SceneManager → AdaSceneManager). We look up the autoload
+	# directly here.
+	var pending_scene_manager = get_node_or_null("/root/SceneManager")
+	if await _consume_pending_sequence_request(pending_scene_manager):
+		return
+
 	# Connect to lab grid system
 	if lab_grid_system:
 		if scene_manager and scene_manager.has_method("connect_to_grid_system"):
 			scene_manager.connect_to_grid_system(lab_grid_system)
 		else:
 			print("LabGridScene: No SceneManager available in this context; running without manager connection")
-		
+
 		# Connect lab-specific signals
 		if lab_grid_system.has_signal("lab_artifact_activated"):
 			lab_grid_system.lab_artifact_activated.connect(_on_lab_artifact_activated)
-		
+
 		if lab_grid_system.has_signal("lab_sequence_triggered"):
 			lab_grid_system.lab_sequence_triggered.connect(_on_lab_sequence_triggered)
-		
+
 		if lab_grid_system.has_signal("map_generation_complete"):
 			lab_grid_system.map_generation_complete.connect(_on_lab_generation_complete)
-	
+
 	# No LabManager in this scene - progressive maps handled by LabGridSystem
-	
+
 	# Handle scene user data and progressive map loading
 	_process_scene_user_data()
-	
+
 	print("LabGridScene: Progressive lab scene ready")
+
+
+func _consume_pending_sequence_request(scene_manager) -> bool:
+	"""
+	If SceneManager.pending_sequence_request is non-empty, fire the same
+	request_transition() call a lab teleporter uses and return true so the
+	caller can skip the rest of normal lab init. Returns false otherwise.
+	"""
+	if scene_manager == null:
+		return false
+	if not ("pending_sequence_request" in scene_manager):
+		return false
+
+	var pending: String = ""
+	if scene_manager.has_method("take_pending_sequence_request"):
+		pending = scene_manager.take_pending_sequence_request()
+	else:
+		pending = String(scene_manager.pending_sequence_request)
+		scene_manager.pending_sequence_request = ""
+
+	if pending == "":
+		return false
+
+	# Wait one frame so any remaining scene wiring finishes before we ask
+	# SceneManager to load the next scene.
+	await get_tree().process_frame
+	print("LabGridScene: 🎯 Picker-pending sequence detected: %s — routing through teleporter path (skipping lab default load)" % pending)
+
+	if scene_manager.has_method("request_transition"):
+		scene_manager.request_transition({
+			"type": 1, # TransitionType.TELEPORTER — matches a lab teleporter
+			"action": "start_sequence",
+			"sequence": pending,
+			"source": "menu_sequence_picker",
+		})
+		return true
+	elif scene_manager.has_method("start_sequence"):
+		# Fallback if request_transition isn't available (older builds)
+		scene_manager.start_sequence(pending)
+		return true
+
+	return false
 
 func _process_scene_user_data():
 	"""Process user data from staging/SceneManager with progressive map support"""
