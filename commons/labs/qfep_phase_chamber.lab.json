@@ -1,0 +1,143 @@
+{
+  "name": "qfep_phase_chamber",
+  "description": "Seven QFEP phases as a walkable ring. Each station is a prop whose state IS that phase. F_order = crystal (specimen jar), oscillation = pendulum, E_entropy = flask + burner, λ_edge = vacuum chamber, integration = scales, relation = kaleidoscope, synthesis = autoclave.",
+  "lab_room": {
+    "room_width": 9,
+    "room_depth": 9,
+    "room_height": 3.8,
+    "accent_color": [
+      0.608,
+      0.365,
+      0.835
+    ],
+    "signage_top": "QFEP PHASE CHAMBER",
+    "signage_sub": "walk the circle, walk the formula",
+    "show_back_window": true,
+    "back_window_size": [
+      6,
+      2.2
+    ],
+    "show_front_window": true,
+    "front_window_size": [
+      1.4,
+      0.7
+    ],
+    "show_sliding_door": true,
+    "door_wall": "east",
+    "show_floor_window": false,
+    "floor_window_size": [
+      3,
+      3
+    ]
+  },
+  "mounted_props": [
+    {
+      "id": "specimen_jar_q1",
+      "lookupName": "specimen_jar",
+      "displayName": "F_order (crystal)",
+      "position": [
+        3,
+        0,
+        -1.5
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "pendulum_q1",
+      "lookupName": "pendulum",
+      "displayName": "oscillation (periodic)",
+      "position": [
+        2.5,
+        0,
+        2
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "flask_q1",
+      "lookupName": "chemistry_flask",
+      "displayName": "E_entropy (heated)",
+      "position": [
+        0,
+        0,
+        3
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "burner_q1",
+      "lookupName": "bunsen_burner",
+      "displayName": "E_entropy (flame)",
+      "position": [
+        0.7,
+        0,
+        3
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "vacuum_q1",
+      "lookupName": "vacuum_chamber",
+      "displayName": "λ_edge (over-pressure)",
+      "position": [
+        -2.5,
+        0,
+        2
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "scales_q1",
+      "lookupName": "scales",
+      "displayName": "integration (balance)",
+      "position": [
+        -3,
+        0,
+        -1.5
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "kaleido_q1",
+      "lookupName": "kaleidoscope",
+      "displayName": "relation (D6 mirrors)",
+      "position": [
+        -1.5,
+        0,
+        -3
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "autoclave_q1",
+      "lookupName": "autoclave",
+      "displayName": "synthesis (running)",
+      "position": [
+        1.5,
+        0,
+        -3
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "whiteboard_q1",
+      "lookupName": "whiteboard",
+      "displayName": "QFE = F − λE(S) + φΔE(S,t)",
+      "position": [
+        0,
+        1.5,
+        -4.42
+      ],
+      "rotationY": 0,
+      "config": {}
+    }
+  ]
+}

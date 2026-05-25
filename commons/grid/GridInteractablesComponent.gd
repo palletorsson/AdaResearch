@@ -61,6 +61,7 @@ const CONFIG_PARAM_NAMES = [
 	"floor_tile_count", "panel_columns",
 	"window_size", "back_window_size", "front_window_size",
 	"front_window_offset_x", "front_window_y",
+	"show_floor_window", "floor_window_size", "floor_window_offset",
 	"door_wall", "door_width", "door_height",
 	"door_sensor_radius", "door_open_offset",
 	"show_floor_tiles", "show_observation_window", "window_wall",

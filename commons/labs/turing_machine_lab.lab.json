@@ -1,0 +1,119 @@
+{
+  "name": "turing_machine_lab",
+  "description": "The seven-station Turing apparatus laid out as a line. Conveyor belt = tape, robot arm = head, server rack = δ, electrical panel = state register q, info screen = output, emergency button = HALT, whiteboard = formal definition.",
+  "lab_room": {
+    "room_width": 8,
+    "room_depth": 7,
+    "room_height": 3.8,
+    "accent_color": [
+      0.227,
+      0.482,
+      1
+    ],
+    "signage_top": "TURING MACHINE LAB",
+    "signage_sub": "Rule 110 → universal computation",
+    "show_back_window": true,
+    "back_window_size": [
+      6.5,
+      2.4
+    ],
+    "show_front_window": true,
+    "front_window_size": [
+      1.4,
+      0.7
+    ],
+    "show_sliding_door": true,
+    "door_wall": "east",
+    "show_floor_window": false,
+    "floor_window_size": [
+      3,
+      3
+    ]
+  },
+  "mounted_props": [
+    {
+      "id": "conveyor_belt_t1",
+      "lookupName": "conveyor_belt",
+      "displayName": "Conveyor Belt (tape)",
+      "position": [
+        0,
+        0,
+        -1.2
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "robot_arm_t1",
+      "lookupName": "robot_arm",
+      "displayName": "Robot Arm (head)",
+      "position": [
+        -2.4,
+        0,
+        -1.2
+      ],
+      "rotationY": 90,
+      "config": {}
+    },
+    {
+      "id": "server_rack_t1",
+      "lookupName": "server_rack",
+      "displayName": "Server Rack (program δ)",
+      "position": [
+        -2.8,
+        0,
+        1.8
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "elec_panel_t1",
+      "lookupName": "electrical_panel",
+      "displayName": "State Register q",
+      "position": [
+        1.8,
+        1.5,
+        -3.42
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "info_screen_t1",
+      "lookupName": "info_screen",
+      "displayName": "Output / RUNNING",
+      "position": [
+        -1.8,
+        1.5,
+        -3.42
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "emer_btn_t1",
+      "lookupName": "emergency_button",
+      "displayName": "HALT",
+      "position": [
+        2.4,
+        0,
+        1.5
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "whiteboard_t1",
+      "lookupName": "whiteboard",
+      "displayName": "M = (Q, Σ, Γ, δ, q0, F)",
+      "position": [
+        0,
+        1.5,
+        -3.42
+      ],
+      "rotationY": 0,
+      "config": {}
+    }
+  ]
+}

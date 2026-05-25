@@ -119,6 +119,15 @@ class_name LabRoom
 @export var front_window_offset_x: float = 0.0
 @export var front_window_y: float = 2.45
 
+@export_group("Floor window")
+## Cut a translucent window into the floor — for "lab built over a
+## coordinate" placements (e.g. a chamber sitting above origin_zero
+## in the grid below). The floor is built as four strips around the
+## window; a tinted glass pane fills the opening.
+@export var show_floor_window: bool = false
+@export var floor_window_size: Vector2 = Vector2(3.0, 3.0)
+@export var floor_window_offset: Vector2 = Vector2(0.0, 0.0) # x,z offset of the centre
+
 @export_group("Sliding door")
 ## Working sliding door with proximity sensor on the upper frame.
 ## Two panels slide outward when a body enters the sensor radius.
@@ -217,6 +226,12 @@ func _read_metadata_overrides() -> void:
 		front_window_offset_x = float(String(get_meta("config_front_window_offset_x")))
 	if has_meta("config_front_window_y"):
 		front_window_y = float(String(get_meta("config_front_window_y")))
+	if has_meta("config_show_floor_window"):
+		show_floor_window = _parse_bool(String(get_meta("config_show_floor_window")), show_floor_window)
+	if has_meta("config_floor_window_size"):
+		floor_window_size = _parse_vec2(String(get_meta("config_floor_window_size")), floor_window_size)
+	if has_meta("config_floor_window_offset"):
+		floor_window_offset = _parse_vec2(String(get_meta("config_floor_window_offset")), floor_window_offset)
 	if has_meta("config_show_sliding_door"):
 		show_sliding_door = _parse_bool(String(get_meta("config_show_sliding_door")), show_sliding_door)
 	if has_meta("config_door_wall"):
@@ -274,22 +289,148 @@ func _build_room() -> void:
 # ── Floor ─────────────────────────────────────────────────────────────
 
 func _build_floor() -> void:
-	var floor_node := MeshInstance3D.new()
-	floor_node.name = "Floor"
-	var mesh := BoxMesh.new()
-	mesh.size = Vector3(room_width, FLOOR_THICKNESS, room_depth)
-	floor_node.mesh = mesh
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = floor_color
 	mat.roughness = 0.6
 	mat.metallic = 0.05
-	floor_node.material_override = mat
-	# Place floor centered at origin, top surface at y=0.
-	floor_node.position = Vector3(0.0, -FLOOR_THICKNESS * 0.5, 0.0)
-	add_child(floor_node)
+
+	if show_floor_window:
+		_build_floor_with_window(mat)
+	else:
+		var floor_node := MeshInstance3D.new()
+		floor_node.name = "Floor"
+		var mesh := BoxMesh.new()
+		mesh.size = Vector3(room_width, FLOOR_THICKNESS, room_depth)
+		floor_node.mesh = mesh
+		floor_node.material_override = mat
+		# Place floor centered at origin, top surface at y=0.
+		floor_node.position = Vector3(0.0, -FLOOR_THICKNESS * 0.5, 0.0)
+		add_child(floor_node)
 
 	if show_floor_tiles:
 		_build_floor_tile_lines()
+
+
+## Build the floor as four strips around a central cutout, with a
+## tinted glass pane filling the opening. Used when show_floor_window
+## is true — the lab is built over a coordinate in the grid below and
+## the player can see down through the floor.
+func _build_floor_with_window(mat: StandardMaterial3D) -> void:
+	var win_w: float = clamp(floor_window_size.x, 0.4, max(0.4, room_width - 0.4))
+	var win_d: float = clamp(floor_window_size.y, 0.4, max(0.4, room_depth - 0.4))
+	var cx: float = clamp(floor_window_offset.x, -room_width * 0.5 + win_w * 0.5 + 0.1, room_width * 0.5 - win_w * 0.5 - 0.1)
+	var cz: float = clamp(floor_window_offset.y, -room_depth * 0.5 + win_d * 0.5 + 0.1, room_depth * 0.5 - win_d * 0.5 - 0.1)
+
+	# Window bounds in lab-local space
+	var win_x_min := cx - win_w * 0.5
+	var win_x_max := cx + win_w * 0.5
+	var win_z_min := cz - win_d * 0.5
+	var win_z_max := cz + win_d * 0.5
+
+	var floor_y := -FLOOR_THICKNESS * 0.5
+
+	# West strip: x in [-W/2, win_x_min]
+	var w_west: float = win_x_min - (-room_width * 0.5)
+	if w_west > 0.001:
+		var n := MeshInstance3D.new()
+		n.name = "FloorWest"
+		var m := BoxMesh.new()
+		m.size = Vector3(w_west, FLOOR_THICKNESS, room_depth)
+		n.mesh = m
+		n.material_override = mat
+		n.position = Vector3(-room_width * 0.5 + w_west * 0.5, floor_y, 0.0)
+		add_child(n)
+
+	# East strip: x in [win_x_max, W/2]
+	var w_east: float = (room_width * 0.5) - win_x_max
+	if w_east > 0.001:
+		var n := MeshInstance3D.new()
+		n.name = "FloorEast"
+		var m := BoxMesh.new()
+		m.size = Vector3(w_east, FLOOR_THICKNESS, room_depth)
+		n.mesh = m
+		n.material_override = mat
+		n.position = Vector3(room_width * 0.5 - w_east * 0.5, floor_y, 0.0)
+		add_child(n)
+
+	# North strip (between west/east strips, z in [-D/2, win_z_min])
+	var w_inner: float = win_x_max - win_x_min
+	var d_north: float = win_z_min - (-room_depth * 0.5)
+	if d_north > 0.001 and w_inner > 0.001:
+		var n := MeshInstance3D.new()
+		n.name = "FloorNorth"
+		var m := BoxMesh.new()
+		m.size = Vector3(w_inner, FLOOR_THICKNESS, d_north)
+		n.mesh = m
+		n.material_override = mat
+		n.position = Vector3(cx, floor_y, -room_depth * 0.5 + d_north * 0.5)
+		add_child(n)
+
+	# South strip (between west/east strips, z in [win_z_max, D/2])
+	var d_south: float = (room_depth * 0.5) - win_z_max
+	if d_south > 0.001 and w_inner > 0.001:
+		var n := MeshInstance3D.new()
+		n.name = "FloorSouth"
+		var m := BoxMesh.new()
+		m.size = Vector3(w_inner, FLOOR_THICKNESS, d_south)
+		n.mesh = m
+		n.material_override = mat
+		n.position = Vector3(cx, floor_y, room_depth * 0.5 - d_south * 0.5)
+		add_child(n)
+
+	# Glass pane sitting in the opening, slightly above floor top so
+	# the player walking over it doesn't fall through.
+	var glass := MeshInstance3D.new()
+	glass.name = "FloorWindow"
+	var gm := BoxMesh.new()
+	gm.size = Vector3(w_inner, FLOOR_THICKNESS * 0.5, win_d)
+	glass.mesh = gm
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.55, 0.78, 0.95, 0.35)
+	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass_mat.roughness = 0.12
+	glass_mat.metallic = 0.0
+	glass_mat.refraction_enabled = false
+	glass.material_override = glass_mat
+	glass.position = Vector3(cx, -FLOOR_THICKNESS * 0.25, cz)
+	add_child(glass)
+
+	# Frame strips ringing the window opening.
+	var frame_mat := StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.12, 0.13, 0.16)
+	frame_mat.roughness = 0.4
+	frame_mat.metallic = 0.55
+	var ft := 0.05
+	# North/south frames
+	var fn := MeshInstance3D.new()
+	var fnm := BoxMesh.new()
+	fnm.size = Vector3(w_inner + ft * 2, ft, ft)
+	fn.mesh = fnm
+	fn.material_override = frame_mat
+	fn.position = Vector3(cx, ft * 0.5, win_z_min - ft * 0.5)
+	add_child(fn)
+	var fs := MeshInstance3D.new()
+	var fsm := BoxMesh.new()
+	fsm.size = Vector3(w_inner + ft * 2, ft, ft)
+	fs.mesh = fsm
+	fs.material_override = frame_mat
+	fs.position = Vector3(cx, ft * 0.5, win_z_max + ft * 0.5)
+	add_child(fs)
+	# East/west frames
+	var fe := MeshInstance3D.new()
+	var fem := BoxMesh.new()
+	fem.size = Vector3(ft, ft, win_d)
+	fe.mesh = fem
+	fe.material_override = frame_mat
+	fe.position = Vector3(win_x_max + ft * 0.5, ft * 0.5, cz)
+	add_child(fe)
+	var fwf := MeshInstance3D.new()
+	var fwm := BoxMesh.new()
+	fwm.size = Vector3(ft, ft, win_d)
+	fwf.mesh = fwm
+	fwf.material_override = frame_mat
+	fwf.position = Vector3(win_x_min - ft * 0.5, ft * 0.5, cz)
+	add_child(fwf)
 
 
 func _build_floor_tile_lines() -> void:
