@@ -55,6 +55,11 @@ class_name LabRoom
 ## Path to a workbench .tscn (or any Node3D scene) to instantiate at the
 ## mount_point. Empty = no auto-instantiate (use mount_point manually).
 @export var mounted_artifact_scene: String = ""
+## Optional: path to a lab.json produced by the encyclopedia's
+## /lab-editor. When set, LabLoader reads the JSON and instantiates
+## each prop at its authored position inside this room. Coexists with
+## mounted_artifact_scene — both can be active if needed.
+@export var mounted_lab_json: String = ""
 
 @export_group("Signage")
 @export var signage_top: String = "TEST CHAMBER λ-S"
@@ -164,6 +169,8 @@ func _read_metadata_overrides() -> void:
 		annotation_bottom = String(get_meta("config_annotation_bottom"))
 	if has_meta("config_mounted_artifact_scene"):
 		mounted_artifact_scene = String(get_meta("config_mounted_artifact_scene"))
+	if has_meta("config_mounted_lab_json"):
+		mounted_lab_json = String(get_meta("config_mounted_lab_json"))
 
 	# Colors as "r,g,b" strings.
 	if has_meta("config_accent_color"):
@@ -260,6 +267,8 @@ func _build_room() -> void:
 	_build_lighting()
 	if mounted_artifact_scene != "":
 		_instantiate_mounted_artifact()
+	if mounted_lab_json != "":
+		_instantiate_mounted_lab_json()
 
 
 # ── Floor ─────────────────────────────────────────────────────────────
@@ -1304,6 +1313,23 @@ func _instantiate_mounted_artifact() -> void:
 	var instance := packed.instantiate()
 	instance.name = "MountedArtifact"
 	mount_point.add_child(instance)
+
+
+func _instantiate_mounted_lab_json() -> void:
+	# Defer LabLoader to avoid a hard dependency at parse time —
+	# script load only when this path is configured.
+	const LAB_LOADER_PATH := "res://commons/artifacts/lab_room/lab_loader.gd"
+	if mounted_lab_json == "":
+		return
+	if not FileAccess.file_exists(mounted_lab_json):
+		push_warning("LabRoom: mounted_lab_json not found: %s" % mounted_lab_json)
+		return
+	var loader_script: GDScript = load(LAB_LOADER_PATH)
+	if loader_script == null:
+		push_warning("LabRoom: could not load LabLoader script")
+		return
+	# Static call — LabLoader is a class with static methods only.
+	loader_script.call("load_into", mount_point, mounted_lab_json)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

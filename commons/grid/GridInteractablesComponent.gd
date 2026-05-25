@@ -71,7 +71,7 @@ const CONFIG_PARAM_NAMES = [
 	"annotation_top", "annotation_bottom",
 	"accent_color", "floor_color", "wall_color", "ceiling_color",
 	"glass_color", "seam_color", "grout_color", "plinth_color",
-	"mounted_artifact_scene",
+	"mounted_artifact_scene", "mounted_lab_json",
 ]
 
 # References
