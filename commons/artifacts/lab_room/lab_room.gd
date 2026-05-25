@@ -943,30 +943,6 @@ func _build_sliding_door(parent: Node3D) -> void:
 	handler.set("closed_color", Color(0.90, 0.22, 0.27))
 	door_root.add_child(handler)
 
-	# Glass frame strips (thin dark borders) to read as "panel" not "void"
-	var frame_mat := StandardMaterial3D.new()
-	frame_mat.albedo_color = Color(0.15, 0.16, 0.18)
-	frame_mat.roughness = 0.4
-	frame_mat.metallic = 0.6
-
-	var frame_thickness := 0.04
-	# Top and bottom horizontal frames
-	var top_frame := MeshInstance3D.new()
-	var tm := BoxMesh.new()
-	tm.size = Vector3(room_width, frame_thickness, frame_thickness)
-	top_frame.mesh = tm
-	top_frame.material_override = frame_mat
-	top_frame.position = Vector3(0.0, room_height - frame_thickness * 0.5, room_depth * 0.5)
-	parent.add_child(top_frame)
-
-	var bottom_frame := MeshInstance3D.new()
-	var bm := BoxMesh.new()
-	bm.size = Vector3(room_width, frame_thickness, frame_thickness)
-	bottom_frame.mesh = bm
-	bottom_frame.material_override = frame_mat
-	bottom_frame.position = Vector3(0.0, frame_thickness * 0.5, room_depth * 0.5)
-	parent.add_child(bottom_frame)
-
 
 # ── Ceiling ───────────────────────────────────────────────────────────
 

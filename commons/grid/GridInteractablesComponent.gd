@@ -52,6 +52,26 @@ const CONFIG_PARAM_NAMES = [
 	"tile_resolution", "tile_world_size", "columns",
 	# Tiling coordinate system
 	"tiling",
+	# lab_room params — keep "key:numeric" parsed as key:value, not as
+	# shorthand transform syntax. Without these listed here the token
+	# parser treats e.g. "room_width:8.0" as tutorial_id="room_width"
+	# with rotation 8.0, and the lab silently falls back to defaults.
+	"room_width", "room_depth", "room_height",
+	"light_warmth", "light_energy", "accent_strip_energy",
+	"floor_tile_count", "panel_columns",
+	"window_size", "back_window_size", "front_window_size",
+	"front_window_offset_x", "front_window_y",
+	"door_wall", "door_width", "door_height",
+	"door_sensor_radius", "door_open_offset",
+	"show_floor_tiles", "show_observation_window", "window_wall",
+	"south_wall_is_glass", "show_back_window", "show_front_window",
+	"show_sliding_door", "show_wall_annotations", "show_plinth",
+	"wall_pattern", "ceiling_style",
+	"signage_top", "signage_sub",
+	"annotation_top", "annotation_bottom",
+	"accent_color", "floor_color", "wall_color", "ceiling_color",
+	"glass_color", "seam_color", "grout_color", "plinth_color",
+	"mounted_artifact_scene",
 ]
 
 # References
