@@ -1,0 +1,406 @@
+{
+  "version": 1,
+  "source_documents": [
+    "MIT T10 Lab Design Standards 2022 (https://web.mit.edu/facilities/maps/DesignStandards/T10%20-%20Lab%20Design%202022.pdf)",
+    "Richard Muther — Systematic Layout Planning (1961)",
+    "ANSI/ISEA Z358.1 — Emergency Eyewash and Shower Equipment",
+    "NFPA 30 — Flammable and Combustible Liquids Code",
+    "NEC 110.26 — Electrical equipment working space"
+  ],
+  "_doc_": {
+    "rel_chart": "Muther REL ratings between artifact pairs. A=absolutely necessary adjacent (+4), E=especially important (+3), I=important (+2), O=ordinary OK (+1), U=unimportant (0), X=undesirable / must be apart (-1). Keys are 'name_a|name_b' with the two names alphabetically sorted, so each unordered pair has exactly one entry.",
+    "ideal_distance": "Per-rating threshold in metres for an A/E pair to count as 'honoured' (i.e. close enough). Rating X uses the per-artifact min_clearance instead.",
+    "artifact_metrics": "Per-artifact spatial and hazard data extracted from the source documents above. footprint = [x, z] in metres; clearance_radius = free space around the artifact when in use; surface = where this artifact mounts; hazard_class = nullable {fire, chemical, gas, hv, cryo, biohazard}.",
+    "global_rules": "Constraints that apply to the whole lab, not a single pair."
+  },
+  "ideal_distance": {
+    "A": 1.5,
+    "E": 2.5,
+    "I": 4.0,
+    "O": 8.0,
+    "U": null,
+    "X": null
+  },
+  "geometry": {
+    "min_aisle_width": 1.52,
+    "min_door_width": 0.91,
+    "min_ghost_corridor": 1.52,
+    "_cite_": "MIT T10 § 2.1 Aisles, Dimensions"
+  },
+  "artifact_metrics": {
+    "fume_hood": {
+      "footprint": [1.5, 0.8],
+      "clearance_radius": 1.02,
+      "hazard_class": "chemical",
+      "surface": "floor",
+      "min_distance_from": {
+        "door": 1.52,
+        "supply_vent": 1.52,
+        "opposing_wall": 2.03,
+        "perp_bench": 0.5,
+        "side_wall": 0.30,
+        "self": 3.05
+      },
+      "avoid_near": ["lab_exit", "high_traffic"],
+      "cite": "MIT T10 § 5.9 rules 1–10"
+    },
+    "bunsen_burner": {
+      "footprint": [0.3, 0.3],
+      "clearance_radius": 0.5,
+      "hazard_class": "fire",
+      "surface": "table_top",
+      "prefers_inside": "fume_hood",
+      "cite": "MIT T10 § 6.4; common chemistry safety"
+    },
+    "gas_canister": {
+      "footprint": [0.4, 0.4],
+      "clearance_radius": 0.6,
+      "hazard_class": "gas",
+      "surface": "floor",
+      "must_be_secured": true,
+      "bracket_height_m": [0.81, 0.91],
+      "prohibited_in": ["exit_corridor"],
+      "cite": "MIT T10 § 3.1 Compressed Gases"
+    },
+    "chemistry_flask": {
+      "footprint": [0.25, 0.25],
+      "clearance_radius": 0.2,
+      "hazard_class": "chemical",
+      "surface": "table_top",
+      "cite": "general"
+    },
+    "autoclave": {
+      "footprint": [1.0, 0.9],
+      "clearance_radius": 0.6,
+      "hazard_class": "thermal",
+      "surface": "floor",
+      "min_distance_from": {
+        "self_side": 0.61,
+        "self_back": 0.46,
+        "public_walkway": 1.5
+      },
+      "requires_above": "ceiling_vent",
+      "cite": "MIT T10 § 7.4"
+    },
+    "electrical_panel": {
+      "footprint": [0.6, 0.2],
+      "clearance_radius": 0.91,
+      "hazard_class": "hv",
+      "surface": "wall",
+      "min_distance_from": {
+        "water_source": 1.83
+      },
+      "cite": "NEC 110.26; MIT T10 § 7.6"
+    },
+    "lab_sink": {
+      "footprint": [0.7, 0.6],
+      "clearance_radius": 0.5,
+      "surface": "floor",
+      "cite": "MIT T10 § 2.1"
+    },
+    "safety_shower": {
+      "footprint": [0.8, 0.8],
+      "clearance_radius": 0.5,
+      "surface": "floor",
+      "max_travel_to_hazard_m": 16.0,
+      "flow_gpm": 20,
+      "water_pressure_psi": [30, 45],
+      "cite": "ANSI/ISEA Z358.1; MIT T10 § 7.1"
+    },
+    "fire_extinguisher": {
+      "footprint": [0.2, 0.15],
+      "clearance_radius": 0.1,
+      "surface": "wall",
+      "max_distance_from_door_m": 3.0,
+      "mounting_height_m": 1.2,
+      "cite": "MIT T10 § 7.5 Safety Stations; NFPA 10"
+    },
+    "emergency_button": {
+      "footprint": [0.12, 0.05],
+      "clearance_radius": 0.1,
+      "surface": "wall",
+      "must_be_visible_from": "spawn",
+      "mounting_height_m": 1.4,
+      "cite": "MIT T10 § 3.1 Electrical"
+    },
+    "exit_sign": {
+      "footprint": [0.4, 0.1],
+      "clearance_radius": 0.0,
+      "surface": "wall",
+      "mounting_above": "door",
+      "cite": "NFPA 101"
+    },
+    "conveyor_belt": {
+      "footprint": [3.0, 0.6],
+      "clearance_radius": 0.4,
+      "surface": "floor",
+      "cite": "general"
+    },
+    "robot_arm": {
+      "footprint": [0.6, 0.6],
+      "clearance_radius": 0.9,
+      "hazard_class": "kinetic",
+      "surface": "floor_or_table",
+      "cite": "general"
+    },
+    "server_rack": {
+      "footprint": [0.6, 1.0],
+      "clearance_radius": 0.5,
+      "hazard_class": "hv",
+      "surface": "floor",
+      "cite": "general"
+    },
+    "terminal": {
+      "footprint": [0.4, 0.3],
+      "clearance_radius": 0.2,
+      "surface": "wall_or_table",
+      "mounting_height_m": 1.4,
+      "cite": "ergonomic golden zone"
+    },
+    "info_screen": {
+      "footprint": [0.6, 0.05],
+      "clearance_radius": 0.0,
+      "surface": "wall",
+      "mounting_height_m": 1.5,
+      "cite": "ergonomic golden zone"
+    },
+    "whiteboard": {
+      "footprint": [1.2, 0.05],
+      "clearance_radius": 0.0,
+      "surface": "wall",
+      "mounting_height_m": 1.2,
+      "cite": "golden zone, MIT T10 § 2.1"
+    },
+    "microscope": {
+      "footprint": [0.35, 0.4],
+      "clearance_radius": 0.25,
+      "surface": "table_top",
+      "cite": "general"
+    },
+    "lab_stool": {
+      "footprint": [0.35, 0.35],
+      "clearance_radius": 0.4,
+      "surface": "floor",
+      "cite": "general"
+    },
+    "chair2": {
+      "footprint": [0.5, 0.5],
+      "clearance_radius": 0.5,
+      "surface": "floor",
+      "cite": "general"
+    },
+    "large_table": {
+      "footprint": [2.0, 1.0],
+      "clearance_radius": 0.6,
+      "surface": "floor",
+      "cite": "MIT T10 § 2.1 modular design"
+    },
+    "glove_box": {
+      "footprint": [1.2, 0.8],
+      "clearance_radius": 0.5,
+      "hazard_class": "containment",
+      "surface": "floor",
+      "cite": "NSF 49; MIT T10 § 6"
+    },
+    "ceiling_vent": {
+      "footprint": [0.6, 0.6],
+      "clearance_radius": 0.0,
+      "surface": "ceiling",
+      "cite": "MIT T10 § 7.4"
+    },
+    "specimen_jar": {
+      "footprint": [0.2, 0.2],
+      "clearance_radius": 0.15,
+      "surface": "table_top",
+      "cite": "general"
+    },
+    "petri_dish": {
+      "footprint": [0.15, 0.15],
+      "clearance_radius": 0.1,
+      "surface": "table_top",
+      "cite": "general"
+    },
+    "vacuum_chamber": {
+      "footprint": [0.6, 0.6],
+      "clearance_radius": 0.4,
+      "hazard_class": "vacuum",
+      "surface": "table_top_or_floor",
+      "cite": "general"
+    },
+    "pendulum": {
+      "footprint": [0.4, 0.4],
+      "clearance_radius": 0.5,
+      "surface": "floor_or_ceiling_hang",
+      "cite": "general"
+    },
+    "scales": {
+      "footprint": [0.3, 0.3],
+      "clearance_radius": 0.2,
+      "surface": "table_top",
+      "cite": "general"
+    },
+    "spine_portal": {
+      "footprint": [1.0, 0.3],
+      "clearance_radius": 0.5,
+      "surface": "wall_or_floor",
+      "cite": "ada project"
+    },
+    "catalyst_pickup": {
+      "footprint": [0.4, 0.4],
+      "clearance_radius": 0.5,
+      "surface": "floor",
+      "cite": "ada project"
+    }
+  },
+  "rel_chart": {
+    "_format_": "key 'a|b' with names alphabetically sorted; value is one of A E I O U X",
+
+    "bunsen_burner|fume_hood": "A",
+    "bunsen_burner|gas_canister": "X",
+    "bunsen_burner|chemistry_flask": "A",
+    "bunsen_burner|clamp_stand": "A",
+    "bunsen_burner|fire_extinguisher": "E",
+    "bunsen_burner|safety_shower": "E",
+    "bunsen_burner|glove_box": "X",
+    "bunsen_burner|microscope": "X",
+    "bunsen_burner|server_rack": "X",
+    "bunsen_burner|whiteboard": "O",
+
+    "chemistry_flask|clamp_stand": "A",
+    "chemistry_flask|fume_hood": "A",
+    "chemistry_flask|lab_sink": "E",
+    "chemistry_flask|safety_shower": "E",
+    "chemistry_flask|scales": "E",
+    "chemistry_flask|pipettedispenser": "A",
+    "chemistry_flask|microscope": "O",
+
+    "conveyor_belt|robot_arm": "A",
+    "conveyor_belt|server_rack": "E",
+    "conveyor_belt|terminal": "E",
+    "conveyor_belt|info_screen": "E",
+    "conveyor_belt|emergency_button": "E",
+    "conveyor_belt|electrical_panel": "I",
+    "conveyor_belt|whiteboard": "O",
+    "conveyor_belt|cable_tray": "E",
+
+    "robot_arm|server_rack": "A",
+    "robot_arm|terminal": "E",
+    "robot_arm|info_screen": "E",
+    "robot_arm|emergency_button": "A",
+    "robot_arm|electrical_panel": "E",
+    "robot_arm|cable_tray": "A",
+
+    "electrical_panel|lab_sink": "X",
+    "electrical_panel|safety_shower": "X",
+    "electrical_panel|fire_extinguisher": "E",
+    "electrical_panel|emergency_button": "I",
+    "electrical_panel|cable_tray": "A",
+    "electrical_panel|server_rack": "E",
+
+    "fume_hood|lab_sink": "E",
+    "fume_hood|emergency_button": "E",
+    "fume_hood|fire_extinguisher": "I",
+    "fume_hood|safety_shower": "I",
+    "fume_hood|ceiling_vent": "E",
+    "fume_hood|exit_sign": "X",
+    "fume_hood|floor_grate": "X",
+    "fume_hood|gas_canister": "I",
+
+    "gas_canister|electrical_panel": "X",
+    "gas_canister|exit_sign": "X",
+    "gas_canister|fire_extinguisher": "E",
+    "gas_canister|emergency_button": "E",
+    "gas_canister|server_rack": "X",
+
+    "autoclave|ceiling_vent": "A",
+    "autoclave|lab_sink": "E",
+    "autoclave|chemistry_flask": "I",
+    "autoclave|petri_dish": "I",
+    "autoclave|specimen_jar": "I",
+    "autoclave|exit_sign": "X",
+    "autoclave|emergency_button": "I",
+
+    "exit_sign|fire_extinguisher": "A",
+    "exit_sign|emergency_button": "E",
+    "exit_sign|safety_shower": "E",
+    "exit_sign|spine_portal": "A",
+
+    "safety_shower|fire_extinguisher": "A",
+    "safety_shower|lab_sink": "E",
+
+    "microscope|lab_stool": "A",
+    "microscope|chair2": "A",
+    "microscope|large_table": "A",
+    "microscope|info_screen": "E",
+    "microscope|petri_dish": "A",
+    "microscope|specimen_jar": "E",
+    "microscope|prism": "I",
+    "microscope|lab_sink": "O",
+
+    "terminal|info_screen": "A",
+    "terminal|lab_stool": "A",
+    "terminal|chair2": "A",
+    "terminal|server_rack": "A",
+    "terminal|large_table": "A",
+    "terminal|cable_tray": "E",
+
+    "info_screen|server_rack": "E",
+    "info_screen|whiteboard": "O",
+
+    "lab_stool|large_table": "A",
+    "chair2|large_table": "A",
+
+    "ceiling_vent|bunsen_burner": "E",
+    "ceiling_vent|glove_box": "E",
+
+    "glove_box|chemistry_flask": "E",
+    "glove_box|fume_hood": "I",
+    "glove_box|specimen_jar": "E",
+
+    "pipettedispenser|petri_dish": "A",
+    "pipettedispenser|specimen_jar": "A",
+    "pipettedispenser|lab_sink": "E",
+
+    "scales|petri_dish": "O",
+    "scales|specimen_jar": "E",
+
+    "pendulum|info_screen": "E",
+
+    "spine_portal|emergency_button": "E",
+    "spine_portal|catalyst_pickup": "I",
+
+    "whiteboard|info_screen": "O"
+  },
+  "global_rules": [
+    {
+      "id": "emergency_button_visible_from_spawn",
+      "description": "At least one emergency_button must be present in any lab containing a hazardous artifact, and ideally raycast-visible from the spawn point.",
+      "severity": "warning",
+      "cite": "MIT T10 § 3.1 Electrical"
+    },
+    {
+      "id": "safety_shower_required_for_chemicals",
+      "description": "If any chemical-class artifact is present (bunsen_burner, chemistry_flask, fume_hood, gas_canister, autoclave), a safety_shower OR sink-eyewash must be present and within ~16 m unobstructed travel.",
+      "severity": "error",
+      "cite": "ANSI/ISEA Z358.1; MIT T10 § 7.1"
+    },
+    {
+      "id": "ventilation_above_thermal",
+      "description": "autoclave and bunsen_burner artifacts should have a ceiling_vent within 2 m horizontally.",
+      "severity": "warning",
+      "cite": "MIT T10 § 7.4; NFPA 91"
+    },
+    {
+      "id": "wall_mountable_must_be_on_wall",
+      "description": "Any artifact whose metric surface is 'wall' must be placed adjacent to a wall (within 0.2 m of room boundary).",
+      "severity": "error",
+      "cite": "structural rule"
+    },
+    {
+      "id": "no_blockage_of_egress",
+      "description": "Within 1.5 m of any door cell, no floor-mounted artifact may be placed.",
+      "severity": "error",
+      "cite": "MIT T10 § 2.1; NFPA 101"
+    }
+  ]
+}
