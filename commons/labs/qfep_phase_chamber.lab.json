@@ -138,6 +138,54 @@
       ],
       "rotationY": 0,
       "config": {}
+    },
+    {
+      "id": "lab_sink_q1",
+      "lookupName": "lab_sink",
+      "displayName": "wash station",
+      "position": [
+        -3.5,
+        0,
+        0
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "emer_btn_q1",
+      "lookupName": "emergency_button",
+      "displayName": "HALT — phase break",
+      "position": [
+        4.42,
+        1.5,
+        0
+      ],
+      "rotationY": -90,
+      "config": {}
+    },
+    {
+      "id": "vent_burner_q1",
+      "lookupName": "ceiling_vent",
+      "displayName": "burner exhaust",
+      "position": [
+        0.7,
+        3.7,
+        2.5
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "vent_auto_q1",
+      "lookupName": "ceiling_vent",
+      "displayName": "autoclave canopy",
+      "position": [
+        1.5,
+        3.7,
+        -3
+      ],
+      "rotationY": 0,
+      "config": {}
     }
   ]
 }

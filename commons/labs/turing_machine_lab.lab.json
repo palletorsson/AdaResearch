@@ -1,6 +1,6 @@
 {
   "name": "turing_machine_lab",
-  "description": "The seven-station Turing apparatus laid out as a line. Conveyor belt = tape, robot arm = head, server rack = δ, electrical panel = state register q, info screen = output, emergency button = HALT, whiteboard = formal definition.",
+  "description": "The seven-station Turing apparatus arranged as a tight pipeline near the front (signage) wall. Conveyor belt = tape, robot arm = head, server rack = δ, electrical panel = state register q, info screen = output, emergency button = HALT, whiteboard = formal definition. Repositioned 2026-05-25 to score positive against lab_constraints.json — A pairs (conveyor↔arm, arm↔server) within 1.5 m, wall annotations clustered near the front-east corner where the apparatus sits.",
   "lab_room": {
     "room_width": 8,
     "room_depth": 7,
@@ -32,13 +32,13 @@
   },
   "mounted_props": [
     {
-      "id": "conveyor_belt_t1",
-      "lookupName": "conveyor_belt",
-      "displayName": "Conveyor Belt (tape)",
+      "id": "server_rack_t1",
+      "lookupName": "server_rack",
+      "displayName": "Server Rack (program δ)",
       "position": [
+        -2.4,
         0,
-        0,
-        -1.2
+        -2
       ],
       "rotationY": 0,
       "config": {}
@@ -48,33 +48,21 @@
       "lookupName": "robot_arm",
       "displayName": "Robot Arm (head)",
       "position": [
-        -2.4,
+        -0.9,
         0,
-        -1.2
-      ],
-      "rotationY": 90,
-      "config": {}
-    },
-    {
-      "id": "server_rack_t1",
-      "lookupName": "server_rack",
-      "displayName": "Server Rack (program δ)",
-      "position": [
-        -2.8,
-        0,
-        1.8
+        -2
       ],
       "rotationY": 0,
       "config": {}
     },
     {
-      "id": "elec_panel_t1",
-      "lookupName": "electrical_panel",
-      "displayName": "State Register q",
+      "id": "conveyor_belt_t1",
+      "lookupName": "conveyor_belt",
+      "displayName": "Conveyor Belt (tape)",
       "position": [
-        1.8,
-        1.5,
-        -3.42
+        0.6,
+        0,
+        -2
       ],
       "rotationY": 0,
       "config": {}
@@ -84,7 +72,31 @@
       "lookupName": "info_screen",
       "displayName": "Output / RUNNING",
       "position": [
-        -1.8,
+        -2.4,
+        1.5,
+        -3.42
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "whiteboard_t1",
+      "lookupName": "whiteboard",
+      "displayName": "M = (Q, Σ, Γ, δ, q0, F)",
+      "position": [
+        -0.9,
+        1.5,
+        -3.42
+      ],
+      "rotationY": 0,
+      "config": {}
+    },
+    {
+      "id": "elec_panel_t1",
+      "lookupName": "electrical_panel",
+      "displayName": "State Register q",
+      "position": [
+        0.6,
         1.5,
         -3.42
       ],
@@ -96,19 +108,7 @@
       "lookupName": "emergency_button",
       "displayName": "HALT",
       "position": [
-        2.4,
-        0,
-        1.5
-      ],
-      "rotationY": 0,
-      "config": {}
-    },
-    {
-      "id": "whiteboard_t1",
-      "lookupName": "whiteboard",
-      "displayName": "M = (Q, Σ, Γ, δ, q0, F)",
-      "position": [
-        0,
+        2,
         1.5,
         -3.42
       ],
