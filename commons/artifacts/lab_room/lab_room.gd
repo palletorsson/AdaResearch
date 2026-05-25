@@ -98,6 +98,34 @@ class_name LabRoom
 @export var window_wall: String = "east"
 @export var window_size: Vector2 = Vector2(3.0, 1.6)
 
+@export_group("Forward / back windows")
+## Large window on the +Z back wall (looks "forward" into the biome
+## past the lab). When true, the back wall is rendered solid with the
+## window cut into it — overrides south_wall_is_glass.
+@export var show_back_window: bool = false
+@export var back_window_size: Vector2 = Vector2(5.0, 2.2)
+## Smaller window on the -Z front wall (looks "back" the way the
+## player came from). Coexists with signage — placed above the door
+## or beside the signage band.
+@export var show_front_window: bool = false
+@export var front_window_size: Vector2 = Vector2(1.6, 0.8)
+## Horizontal offset of the small front window from the wall centre,
+## so it doesn't collide with the centred signage / sliding door.
+@export var front_window_offset_x: float = 0.0
+@export var front_window_y: float = 2.45
+
+@export_group("Sliding door")
+## Working sliding door with proximity sensor on the upper frame.
+## Two panels slide outward when a body enters the sensor radius.
+@export var show_sliding_door: bool = false
+## Which wall hosts the door. "north"=-Z front, "south"=+Z back,
+## "east"=+X, "west"=-X.
+@export var door_wall: String = "east"
+@export var door_width: float = 1.4
+@export var door_height: float = 2.2
+@export var door_sensor_radius: float = 2.6
+@export var door_open_offset: float = 0.7
+
 @export_group("Ceiling")
 ## "tile_grid" = the default; "exposed" = visible cable trays + light fixtures;
 ## "skylight" = bright panels with frosted glass look.
@@ -168,6 +196,35 @@ func _read_metadata_overrides() -> void:
 		window_wall = String(get_meta("config_window_wall"))
 	if has_meta("config_ceiling_style"):
 		ceiling_style = String(get_meta("config_ceiling_style"))
+
+	# New: forward/back windows + sliding door.
+	if has_meta("config_show_back_window"):
+		show_back_window = _parse_bool(String(get_meta("config_show_back_window")), show_back_window)
+	if has_meta("config_back_window_size"):
+		back_window_size = _parse_vec2(String(get_meta("config_back_window_size")), back_window_size)
+	if has_meta("config_show_front_window"):
+		show_front_window = _parse_bool(String(get_meta("config_show_front_window")), show_front_window)
+	if has_meta("config_front_window_size"):
+		front_window_size = _parse_vec2(String(get_meta("config_front_window_size")), front_window_size)
+	if has_meta("config_front_window_offset_x"):
+		front_window_offset_x = float(String(get_meta("config_front_window_offset_x")))
+	if has_meta("config_front_window_y"):
+		front_window_y = float(String(get_meta("config_front_window_y")))
+	if has_meta("config_show_sliding_door"):
+		show_sliding_door = _parse_bool(String(get_meta("config_show_sliding_door")), show_sliding_door)
+	if has_meta("config_door_wall"):
+		door_wall = String(get_meta("config_door_wall"))
+	if has_meta("config_door_width"):
+		door_width = float(String(get_meta("config_door_width")))
+	if has_meta("config_door_height"):
+		door_height = float(String(get_meta("config_door_height")))
+	if has_meta("config_door_sensor_radius"):
+		door_sensor_radius = float(String(get_meta("config_door_sensor_radius")))
+	if has_meta("config_door_open_offset"):
+		door_open_offset = float(String(get_meta("config_door_open_offset")))
+	# Legacy passthrough: explicit "false" disables the default full-glass back wall.
+	if has_meta("config_south_wall_is_glass"):
+		south_wall_is_glass = _parse_bool(String(get_meta("config_south_wall_is_glass")), south_wall_is_glass)
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -313,9 +370,22 @@ func _build_walls() -> void:
 	west.position = Vector3(-room_width * 0.5 + WALL_THICKNESS * 0.5, room_height * 0.5, 0.0)
 	walls.add_child(west)
 
-	# Back wall (+Z) — glass or open
-	if south_wall_is_glass:
+	# Back wall (+Z) — three options, in priority order:
+	#  1. show_back_window: solid wall with a LARGE window cut into it (NEW)
+	#  2. south_wall_is_glass: full-wall glass (legacy)
+	#  3. neither: nothing — open observation gap
+	if show_back_window:
+		_build_back_solid_with_window(walls)
+	elif south_wall_is_glass:
 		_build_back_glass(walls)
+
+	# Front wall (-Z) — optional small "look back" window.
+	if show_front_window:
+		_build_front_small_window(walls)
+
+	# Sliding door with proximity sensor.
+	if show_sliding_door:
+		_build_sliding_door(walls)
 
 	# Panel seams overlaid on the walls (Portal 2 look)
 	if wall_pattern == "panels":
@@ -556,21 +626,322 @@ func _build_observation_window(parent: Node3D) -> void:
 	frame_root.add_child(rf)
 
 
-func _build_back_glass(parent: Node3D) -> void:
+func _build_back_solid_with_window(parent: Node3D) -> void:
+	# Build the +Z back wall as a solid panel split around a central large
+	# window — three strips above/below/sides of the window opening, then a
+	# tinted glass pane fills the opening. Reads as a real building wall.
+	var win_w: float = clamp(back_window_size.x, 0.5, max(0.5, room_width - 0.6))
+	var win_h: float = clamp(back_window_size.y, 0.5, max(0.5, room_height - 1.0))
+	var win_y: float = room_height * 0.5  # window centred vertically
+	var side_w: float = (room_width - win_w) * 0.5
+	var top_h: float = room_height - (win_y + win_h * 0.5)
+	var bot_h: float = win_y - win_h * 0.5
+	var z_plane: float = room_depth * 0.5 - WALL_THICKNESS * 0.5
+
+	var wall_mat := _make_wall_material()
+
+	if side_w > 0.001:
+		# Left strip
+		var left := MeshInstance3D.new()
+		left.name = "BackWallLeft"
+		var lm := BoxMesh.new()
+		lm.size = Vector3(side_w, room_height, WALL_THICKNESS)
+		left.mesh = lm
+		left.material_override = wall_mat
+		left.position = Vector3(-room_width * 0.5 + side_w * 0.5, room_height * 0.5, z_plane)
+		parent.add_child(left)
+
+		# Right strip
+		var right := MeshInstance3D.new()
+		right.name = "BackWallRight"
+		var rm := BoxMesh.new()
+		rm.size = Vector3(side_w, room_height, WALL_THICKNESS)
+		right.mesh = rm
+		right.material_override = wall_mat
+		right.position = Vector3(room_width * 0.5 - side_w * 0.5, room_height * 0.5, z_plane)
+		parent.add_child(right)
+
+	if bot_h > 0.001:
+		var bot := MeshInstance3D.new()
+		bot.name = "BackWallBot"
+		var bm := BoxMesh.new()
+		bm.size = Vector3(win_w, bot_h, WALL_THICKNESS)
+		bot.mesh = bm
+		bot.material_override = wall_mat
+		bot.position = Vector3(0.0, bot_h * 0.5, z_plane)
+		parent.add_child(bot)
+
+	if top_h > 0.001:
+		var top := MeshInstance3D.new()
+		top.name = "BackWallTop"
+		var tm := BoxMesh.new()
+		tm.size = Vector3(win_w, top_h, WALL_THICKNESS)
+		top.mesh = tm
+		top.material_override = wall_mat
+		top.position = Vector3(0.0, room_height - top_h * 0.5, z_plane)
+		parent.add_child(top)
+
+	# The glass pane filling the window opening.
 	var glass := MeshInstance3D.new()
-	glass.name = "WallBackGlass"
+	glass.name = "BackWindowGlass"
 	var gm := BoxMesh.new()
-	gm.size = Vector3(room_width, room_height, WALL_THICKNESS * 0.5)
+	gm.size = Vector3(win_w, win_h, WALL_THICKNESS * 0.5)
 	glass.mesh = gm
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = glass_color
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.roughness = 0.15
-	mat.metallic = 0.0
-	mat.refraction_enabled = false
-	glass.material_override = mat
-	glass.position = Vector3(0.0, room_height * 0.5, room_depth * 0.5 - WALL_THICKNESS * 0.25)
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.78, 0.86, 0.94, 0.30)
+	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass_mat.roughness = 0.12
+	glass_mat.metallic = 0.0
+	glass_mat.refraction_enabled = false
+	glass.material_override = glass_mat
+	glass.position = Vector3(0.0, win_y, z_plane)
 	parent.add_child(glass)
+
+	# Window frame (4 thin dark strips ringing the glass).
+	_build_window_frame_strips(parent, "BackWindowFrame", win_w, win_h, Vector3(0.0, win_y, z_plane), 0.0)
+
+
+func _build_front_small_window(parent: Node3D) -> void:
+	# Small window cut into the -Z front (signage) wall. Above signage by
+	# default; can be offset along X so it sits beside the centred signage.
+	var win_w: float = clamp(front_window_size.x, 0.3, max(0.3, room_width - 0.6))
+	var win_h: float = clamp(front_window_size.y, 0.3, max(0.3, room_height - 1.5))
+	var win_y: float = clamp(front_window_y, win_h * 0.5 + 0.1, room_height - win_h * 0.5 - 0.1)
+	var z_plane: float = -room_depth * 0.5 + WALL_THICKNESS * 0.5
+	var cx: float = clamp(front_window_offset_x, -room_width * 0.5 + win_w * 0.5 + 0.1, room_width * 0.5 - win_w * 0.5 - 0.1)
+
+	# Glass pane — placed slightly forward into the room so it reads as
+	# a hole in the existing front wall (rather than tearing the wall
+	# down, we layer a translucent panel inside the wall thickness).
+	var glass := MeshInstance3D.new()
+	glass.name = "FrontWindowGlass"
+	var gm := BoxMesh.new()
+	gm.size = Vector3(win_w, win_h, WALL_THICKNESS * 0.4)
+	glass.mesh = gm
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.30, 0.42, 0.58, 0.55)
+	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass_mat.roughness = 0.18
+	glass_mat.metallic = 0.0
+	glass_mat.emission_enabled = true
+	glass_mat.emission = Color(0.40, 0.55, 0.78)
+	glass_mat.emission_energy_multiplier = 0.30
+	glass.material_override = glass_mat
+	glass.position = Vector3(cx, win_y, z_plane + WALL_THICKNESS * 0.25)
+	parent.add_child(glass)
+
+	_build_window_frame_strips(parent, "FrontWindowFrame", win_w, win_h, Vector3(cx, win_y, z_plane + WALL_THICKNESS * 0.25), 0.0)
+
+
+func _build_window_frame_strips(parent: Node3D, root_name: String, win_w: float, win_h: float, centre: Vector3, y_rot: float) -> void:
+	# Four thin dark strips ringing a window opening. y_rot rotates the
+	# frame around vertical (used when frame is on east/west walls).
+	var frame_root := Node3D.new()
+	frame_root.name = root_name
+	frame_root.position = centre
+	frame_root.rotation = Vector3(0.0, y_rot, 0.0)
+	parent.add_child(frame_root)
+
+	var frame_mat := StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.12, 0.13, 0.16)
+	frame_mat.roughness = 0.4
+	frame_mat.metallic = 0.6
+
+	var ft: float = 0.05
+	var half_w: float = win_w * 0.5
+	var half_h: float = win_h * 0.5
+	var z_off: float = -WALL_THICKNESS * 0.25 # slight pull toward interior
+
+	# Top
+	var t := MeshInstance3D.new()
+	var tm := BoxMesh.new()
+	tm.size = Vector3(win_w + ft * 2.0, ft, ft)
+	t.mesh = tm
+	t.material_override = frame_mat
+	t.position = Vector3(0.0, half_h + ft * 0.5, z_off)
+	frame_root.add_child(t)
+	# Bottom
+	var b := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(win_w + ft * 2.0, ft, ft)
+	b.mesh = bm
+	b.material_override = frame_mat
+	b.position = Vector3(0.0, -half_h - ft * 0.5, z_off)
+	frame_root.add_child(b)
+	# Left
+	var l := MeshInstance3D.new()
+	var lm2 := BoxMesh.new()
+	lm2.size = Vector3(ft, win_h, ft)
+	l.mesh = lm2
+	l.material_override = frame_mat
+	l.position = Vector3(-half_w - ft * 0.5, 0.0, z_off)
+	frame_root.add_child(l)
+	# Right
+	var r := MeshInstance3D.new()
+	var rm2 := BoxMesh.new()
+	rm2.size = Vector3(ft, win_h, ft)
+	r.mesh = rm2
+	r.material_override = frame_mat
+	r.position = Vector3(half_w + ft * 0.5, 0.0, z_off)
+	frame_root.add_child(r)
+
+
+func _build_sliding_door(parent: Node3D) -> void:
+	const HANDLER_SCRIPT_PATH := "res://commons/artifacts/lab_room/lab_door_sensor.gd"
+	# Two-panel sliding door with proximity sensor (Area3D) on the upper
+	# frame. The panels slide outward into wall pockets when the player
+	# enters the sensor radius.
+	var door_root := Node3D.new()
+	door_root.name = "SlidingDoor"
+
+	# Place + orient the door according to door_wall. The local frame
+	# of door_root has X = door width, Y = up, Z = wall normal (outward).
+	var pos: Vector3 = Vector3.ZERO
+	var y_rot: float = 0.0
+	match door_wall:
+		"north":  # -Z front wall (signage wall — usually not chosen)
+			pos = Vector3(0.0, 0.0, -room_depth * 0.5 + WALL_THICKNESS * 0.5)
+			y_rot = PI
+		"south":  # +Z back wall
+			pos = Vector3(0.0, 0.0, room_depth * 0.5 - WALL_THICKNESS * 0.5)
+			y_rot = 0.0
+		"west":   # -X wall
+			pos = Vector3(-room_width * 0.5 + WALL_THICKNESS * 0.5, 0.0, 0.0)
+			y_rot = -PI * 0.5
+		"east", _:  # +X wall
+			pos = Vector3(room_width * 0.5 - WALL_THICKNESS * 0.5, 0.0, 0.0)
+			y_rot = PI * 0.5
+	door_root.position = pos
+	door_root.rotation = Vector3(0.0, y_rot, 0.0)
+	parent.add_child(door_root)
+
+	# Frame material (matt dark metal).
+	var frame_mat := StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.13, 0.14, 0.17)
+	frame_mat.roughness = 0.45
+	frame_mat.metallic = 0.55
+
+	# Door panels material (slightly lighter, more reflective — reads as
+	# steel doors against the dark frame).
+	var panel_mat := StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.18, 0.20, 0.23)
+	panel_mat.roughness = 0.35
+	panel_mat.metallic = 0.60
+
+	var ft: float = 0.08          # frame thickness
+	var fd: float = 0.14          # how far the frame sticks out from the wall (toward interior)
+	var dh: float = door_height   # opening height
+	var dw: float = door_width    # opening width
+	var half_dw: float = dw * 0.5
+	var pt: float = 0.06          # panel thickness
+
+	# Top beam
+	var top := MeshInstance3D.new()
+	var tm := BoxMesh.new()
+	tm.size = Vector3(dw + ft * 2.0, ft, fd)
+	top.mesh = tm
+	top.material_override = frame_mat
+	top.position = Vector3(0.0, dh + ft * 0.5, 0.0)
+	door_root.add_child(top)
+
+	# Left and right side frames
+	var left_f := MeshInstance3D.new()
+	var lfm := BoxMesh.new()
+	lfm.size = Vector3(ft, dh, fd)
+	left_f.mesh = lfm
+	left_f.material_override = frame_mat
+	left_f.position = Vector3(-half_dw - ft * 0.5, dh * 0.5, 0.0)
+	door_root.add_child(left_f)
+
+	var right_f := MeshInstance3D.new()
+	var rfm := BoxMesh.new()
+	rfm.size = Vector3(ft, dh, fd)
+	right_f.mesh = rfm
+	right_f.material_override = frame_mat
+	right_f.position = Vector3(half_dw + ft * 0.5, dh * 0.5, 0.0)
+	door_root.add_child(right_f)
+
+	# Upper sensor box — visibly mounted on top of the frame, slightly
+	# protruding toward the interior so the player sees it as they approach.
+	var sensor := MeshInstance3D.new()
+	var sm := BoxMesh.new()
+	sm.size = Vector3(0.30, 0.12, 0.18)
+	sensor.mesh = sm
+	var sensor_mat := StandardMaterial3D.new()
+	sensor_mat.albedo_color = Color(0.09, 0.10, 0.12)
+	sensor_mat.roughness = 0.42
+	sensor_mat.metallic = 0.35
+	sensor.material_override = sensor_mat
+	sensor.position = Vector3(0.0, dh + ft + 0.06, fd * 0.25)
+	door_root.add_child(sensor)
+
+	# Indicator LED dot on the sensor face.
+	var indicator := MeshInstance3D.new()
+	var idm := SphereMesh.new()
+	idm.radius = 0.035
+	idm.height = 0.07
+	indicator.mesh = idm
+	var ind_mat := StandardMaterial3D.new()
+	ind_mat.albedo_color = Color(0.9, 0.22, 0.27)
+	ind_mat.emission_enabled = true
+	ind_mat.emission = Color(0.9, 0.22, 0.27)
+	ind_mat.emission_energy_multiplier = 2.2
+	ind_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	indicator.material_override = ind_mat
+	indicator.position = Vector3(0.0, dh + ft + 0.06, fd * 0.25 + 0.10)
+	door_root.add_child(indicator)
+
+	# Two sliding panels. Default closed: panels meet at centre.
+	var panel_w: float = half_dw
+	var left_panel := MeshInstance3D.new()
+	left_panel.name = "DoorPanelLeft"
+	var lpm := BoxMesh.new()
+	lpm.size = Vector3(panel_w, dh, pt)
+	left_panel.mesh = lpm
+	left_panel.material_override = panel_mat
+	left_panel.position = Vector3(-panel_w * 0.5, dh * 0.5, 0.0)
+	door_root.add_child(left_panel)
+
+	var right_panel := MeshInstance3D.new()
+	right_panel.name = "DoorPanelRight"
+	var rpm := BoxMesh.new()
+	rpm.size = Vector3(panel_w, dh, pt)
+	right_panel.mesh = rpm
+	right_panel.material_override = panel_mat
+	right_panel.position = Vector3(panel_w * 0.5, dh * 0.5, 0.0)
+	door_root.add_child(right_panel)
+
+	# Proximity sensor Area3D. Place it on the door's interior side so it
+	# triggers as the player approaches from outside the room or from
+	# inside.
+	var area := Area3D.new()
+	area.name = "DoorSensorArea"
+	area.collision_layer = 0
+	area.collision_mask = 0xFFFFF  # everything — VR rig, desktop player, characters
+	var cs := CollisionShape3D.new()
+	var sphere := SphereShape3D.new()
+	sphere.radius = door_sensor_radius
+	cs.shape = sphere
+	cs.position = Vector3(0.0, dh * 0.5, 0.0)
+	area.add_child(cs)
+	door_root.add_child(area)
+
+	# Handler script — opens/closes the panels on body_entered / body_exited.
+	var handler_pack: GDScript = load(HANDLER_SCRIPT_PATH)
+	if handler_pack == null:
+		push_warning("LabRoom: could not load lab_door_sensor.gd")
+		return
+	var handler: Node3D = handler_pack.new()
+	handler.name = "DoorHandler"
+	handler.set("left_panel", left_panel)
+	handler.set("right_panel", right_panel)
+	handler.set("indicator", indicator)
+	handler.set("area", area)
+	handler.set("panel_width", panel_w)
+	handler.set("open_offset", door_open_offset)
+	handler.set("open_color", Color(0.40, 1.00, 0.55))
+	handler.set("closed_color", Color(0.90, 0.22, 0.27))
+	door_root.add_child(handler)
 
 	# Glass frame strips (thin dark borders) to read as "panel" not "void"
 	var frame_mat := StandardMaterial3D.new()
@@ -973,3 +1344,62 @@ func _parse_color(s: String, fallback: Color) -> Color:
 	if parts.size() >= 4:
 		a = float(parts[3])
 	return Color(r, g, b, a)
+
+
+func _parse_bool(s: String, fallback: bool) -> bool:
+	var t := s.strip_edges().to_lower()
+	if t == "true" or t == "1" or t == "yes" or t == "on":
+		return true
+	if t == "false" or t == "0" or t == "no" or t == "off":
+		return false
+	return fallback
+
+
+func _parse_vec2(s: String, fallback: Vector2) -> Vector2:
+	var parts := s.split(",")
+	if parts.size() < 2:
+		return fallback
+	return Vector2(float(parts[0]), float(parts[1]))
+
+
+# Legacy: full-wall glass on the +Z back wall. Kept so existing maps
+# (like Random_Walk) that rely on south_wall_is_glass continue working.
+# New maps should use show_back_window for a defined-size window.
+func _build_back_glass(parent: Node3D) -> void:
+	var glass := MeshInstance3D.new()
+	glass.name = "WallBackGlass"
+	var gm := BoxMesh.new()
+	gm.size = Vector3(room_width, room_height, WALL_THICKNESS * 0.5)
+	glass.mesh = gm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = glass_color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.roughness = 0.15
+	mat.metallic = 0.0
+	mat.refraction_enabled = false
+	glass.material_override = mat
+	glass.position = Vector3(0.0, room_height * 0.5, room_depth * 0.5 - WALL_THICKNESS * 0.25)
+	parent.add_child(glass)
+
+	# Glass frame strips (thin dark borders) to read as "panel" not "void".
+	var frame_mat := StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.15, 0.16, 0.18)
+	frame_mat.roughness = 0.4
+	frame_mat.metallic = 0.6
+
+	var frame_thickness := 0.04
+	var top_frame := MeshInstance3D.new()
+	var tm := BoxMesh.new()
+	tm.size = Vector3(room_width, frame_thickness, frame_thickness)
+	top_frame.mesh = tm
+	top_frame.material_override = frame_mat
+	top_frame.position = Vector3(0.0, room_height - frame_thickness * 0.5, room_depth * 0.5)
+	parent.add_child(top_frame)
+
+	var bottom_frame := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(room_width, frame_thickness, frame_thickness)
+	bottom_frame.mesh = bm
+	bottom_frame.material_override = frame_mat
+	bottom_frame.position = Vector3(0.0, frame_thickness * 0.5, room_depth * 0.5)
+	parent.add_child(bottom_frame)
