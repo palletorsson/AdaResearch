@@ -163,19 +163,57 @@ func _run() -> void:
 		temp_root.queue_free()
 		await get_root().get_tree().process_frame
 
-	# Write manifest.json
+	# Merge with existing manifest.json if present — later runs against
+	# different registries should APPEND to the index, not replace it.
+	# Dedupe by lookup_name (the current run's entry wins so re-exports
+	# refresh).
+	var manifest_path := "%s/manifest.json" % _output_dir
+	var existing_entries: Array = []
+	var existing_registries: Array = []
+	if FileAccess.file_exists(manifest_path):
+		var existing_raw: String = FileAccess.get_file_as_string(manifest_path)
+		var existing_parsed = JSON.parse_string(existing_raw)
+		if existing_parsed is Dictionary:
+			existing_entries = existing_parsed.get("entries", [])
+			if not (existing_entries is Array):
+				existing_entries = []
+			existing_registries = existing_parsed.get("registries", [])
+			if not (existing_registries is Array):
+				existing_registries = []
+	# Build a set of lookup_names from THIS run, then drop any matching
+	# entries from the existing list before appending.
+	var current_names: Dictionary = {}
+	for e in manifest_entries:
+		current_names[String(e.get("lookup_name", ""))] = true
+	var merged: Array = []
+	for e in existing_entries:
+		if not (e is Dictionary):
+			continue
+		var ln: String = String(e.get("lookup_name", ""))
+		if current_names.has(ln):
+			continue
+		merged.append(e)
+	for e in manifest_entries:
+		merged.append(e)
+	# Track which registries have ever been exported into this manifest.
+	var registries_set: Dictionary = {}
+	for r in existing_registries:
+		registries_set[String(r)] = true
+	registries_set[_registry_name] = true
+
 	var manifest := {
 		"version": 1,
-		"registry": _registry_name,
+		"registries": registries_set.keys(),
 		"settle_frames": SETTLE_FRAMES,
-		"exported_at": Time.get_datetime_string_from_system(),
-		"count": manifest_entries.size(),
-		"entries": manifest_entries,
+		"last_exported_registry": _registry_name,
+		"last_exported_at": Time.get_datetime_string_from_system(),
+		"count": merged.size(),
+		"entries": merged,
 	}
-	var manifest_path := "%s/manifest.json" % _output_dir
 	var mf := FileAccess.open(manifest_path, FileAccess.WRITE)
 	mf.store_string(JSON.stringify(manifest, "\t"))
 	mf.close()
+	print("[gltf-export] manifest now has %d total entries across registries %s" % [merged.size(), str(registries_set.keys())])
 
 	# Write log
 	var log_path := "%s/_export_log.txt" % _output_dir
