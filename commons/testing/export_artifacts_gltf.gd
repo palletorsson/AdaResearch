@@ -29,6 +29,7 @@ const REGISTRY_DIR: String = "res://commons/artifacts/registry/"
 var _registry_name: String = "lab"
 var _output_dir: String = "user://artifact_gltf"
 var _max_count: int = -1            # -1 = export every artifact in registry
+var _skip_set: Dictionary = {}      # lookup_names to bypass entirely
 
 
 func _initialize() -> void:
@@ -40,6 +41,10 @@ func _initialize() -> void:
 			_output_dir = arg.split("=", true, 1)[1]
 		elif arg.begins_with("--max="):
 			_max_count = int(arg.split("=", true, 1)[1])
+		elif arg.begins_with("--skip="):
+			var list := arg.split("=", true, 1)[1]
+			for name in list.split(","):
+				_skip_set[String(name).strip_edges()] = true
 	_run.call_deferred()
 
 
@@ -86,6 +91,12 @@ func _run() -> void:
 		var scene_path: String = String(entry.get("scene", ""))
 
 		var prefix := "[%3d/%3d]" % [i + 1, lookup_names.size()]
+
+		if _skip_set.has(lookup):
+			var line_s := "%s SKIP %s — in --skip= list" % [prefix, lookup]
+			print(line_s)
+			log_lines.append(line_s)
+			continue
 
 		if scene_path.is_empty() or not ResourceLoader.exists(scene_path):
 			failed += 1
@@ -163,10 +174,35 @@ func _run() -> void:
 		temp_root.queue_free()
 		await get_root().get_tree().process_frame
 
-	# Merge with existing manifest.json if present — later runs against
-	# different registries should APPEND to the index, not replace it.
-	# Dedupe by lookup_name (the current run's entry wins so re-exports
-	# refresh).
+		# Incremental manifest flush after EVERY successful export so a
+		# later crash leaves a clean index of what worked. Cheap (a few
+		# hundred KB JSON write per artifact).
+		if ok:
+			_flush_manifest(manifest_entries)
+
+	_flush_manifest(manifest_entries)
+
+	# Write log
+	var log_path := "%s/_export_log.txt" % _output_dir
+	var lf := FileAccess.open(log_path, FileAccess.WRITE)
+	lf.store_string("\n".join(log_lines))
+	lf.close()
+
+	print("\n[gltf-export] DONE: %d success, %d failed of %d artifacts" % [
+		success, failed, lookup_names.size()
+	])
+	print("[gltf-export] manifest: %s" % ProjectSettings.globalize_path("%s/manifest.json" % _output_dir))
+	quit(0)
+
+
+## Merge current-run entries with any existing manifest.json in the
+## output directory, then write. Called incrementally during the run
+## (every 10 artifacts) so a crash mid-batch still leaves the prior
+## successes' entries in the index. Dedupe is by lookup_name — the
+## current run's entry wins.
+func _flush_manifest(manifest_entries: Array) -> void:
+	if manifest_entries.is_empty():
+		return
 	var manifest_path := "%s/manifest.json" % _output_dir
 	var existing_entries: Array = []
 	var existing_registries: Array = []
@@ -180,8 +216,7 @@ func _run() -> void:
 			existing_registries = existing_parsed.get("registries", [])
 			if not (existing_registries is Array):
 				existing_registries = []
-	# Build a set of lookup_names from THIS run, then drop any matching
-	# entries from the existing list before appending.
+
 	var current_names: Dictionary = {}
 	for e in manifest_entries:
 		current_names[String(e.get("lookup_name", ""))] = true
@@ -195,7 +230,7 @@ func _run() -> void:
 		merged.append(e)
 	for e in manifest_entries:
 		merged.append(e)
-	# Track which registries have ever been exported into this manifest.
+
 	var registries_set: Dictionary = {}
 	for r in existing_registries:
 		registries_set[String(r)] = true
@@ -213,16 +248,3 @@ func _run() -> void:
 	var mf := FileAccess.open(manifest_path, FileAccess.WRITE)
 	mf.store_string(JSON.stringify(manifest, "\t"))
 	mf.close()
-	print("[gltf-export] manifest now has %d total entries across registries %s" % [merged.size(), str(registries_set.keys())])
-
-	# Write log
-	var log_path := "%s/_export_log.txt" % _output_dir
-	var lf := FileAccess.open(log_path, FileAccess.WRITE)
-	lf.store_string("\n".join(log_lines))
-	lf.close()
-
-	print("\n[gltf-export] DONE: %d success, %d failed of %d artifacts" % [
-		success, failed, lookup_names.size()
-	])
-	print("[gltf-export] manifest: %s" % ProjectSettings.globalize_path(manifest_path))
-	quit(0)
