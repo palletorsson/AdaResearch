@@ -74,19 +74,19 @@
       "id": "scaffold_exit_sign",
       "lookup_name": "exit_sign",
       "position": [
-        2.3229627954424537,
-        1.5,
-        1.8030809583778833
+        2.6,
+        2.55,
+        3.35
       ],
       "rotation_y": 0,
       "config": {},
       "lookupName": "exit_sign",
-      "rotationY": -90,
-      "displayName": "exit_sign"
+      "rotationY": 0,
+      "displayName": "EXIT (above door)"
     },
     {
       "id": "scaffold_info",
-      "lookup_name": "info_screen",
+      "lookup_name": "info_board",
       "position": [
         3.92,
         1.75,
@@ -94,9 +94,9 @@
       ],
       "rotation_y": -90,
       "config": {},
-      "lookupName": "info_screen",
+      "lookupName": "info_board",
       "rotationY": -90,
-      "displayName": "info_screen"
+      "displayName": "annotation board"
     }
   ]
 }

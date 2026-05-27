@@ -6,6 +6,70 @@
     "theoretical_grounding": "Embodied instrumentation and interface literacy in AdaResearch lab environments"
   },
   "artifacts": {
+    "info_board": {
+      "lookup_name": "info_board",
+      "scene": "res://commons/scenes/mapobjects/info_board.tscn",
+      "name": "Annotation Board",
+      "description": "Map-context annotation board — the same scene the 'an' utility loads. Wall-mounted info panel that displays the current map's title and description. Use inside labs in place of info_screen when you want the panel to inherit map info automatically.",
+      "category": "lab_prop",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": [
+        "prop",
+        "lab",
+        "annotation",
+        "info",
+        "wall",
+        "signage"
+      ]
+    },
+    "crate": {
+      "lookup_name": "crate",
+      "scene": "res://commons/artifacts/crate/crate.tscn",
+      "class_name": "Crate",
+      "name": "Shipping Crate",
+      "description": "Wooden shipping crate — a stout cuboid clad in vertical planks on every face, dark corner reinforcement strips, a diagonal X-brace on the front, and a stamped label plaque with an optional 'this end up' arrow. In the lab's grammar the crate is the room's confession that equipment ARRIVED here — it didn't invent itself. Single crate in a corner = recently delivered. Stack of crates = logistics hub. The lab is a node in a supply chain.",
+      "category": "lab_prop",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "tags": ["prop", "lab", "storage", "container", "shipping", "wood"],
+      "parameters": {
+        "crate_width": "Width in meters (default 0.72)",
+        "crate_depth": "Depth in meters (default 0.72)",
+        "crate_height": "Height in meters (default 0.68)",
+        "plank_count": "Number of vertical planks per face (default 5)",
+        "show_x_brace": "Show diagonal X-brace on the front face (default true)",
+        "show_stamp": "Show stencil stamp plaque on the front face (default true)",
+        "stamp_label": "Short stamp text — e.g. 'ADA-LAB' (default 'ADA-LAB')",
+        "show_up_arrow": "Show 'this end up' arrow plaque (default true)",
+        "plank_color": "Primary plank color RGB (default warm wood)"
+      }
+    },
+    "cctv_camera": {
+      "lookup_name": "cctv_camera",
+      "scene": "res://commons/artifacts/cctv_camera/cctv_camera.tscn",
+      "class_name": "CCTVCamera",
+      "name": "CCTV Camera",
+      "description": "Wall-mounted surveillance camera — small bracket arm extending from a flush back plate, a slightly-tapered metal camera body in a Black-Mesa silhouette, a cylindrical lens with a dark glass disc, and a small red emissive LED that says 'I am ON'. The bracket can be aimed via yaw_deg + pitch_deg to point INTO the room or OUT through a window. In the lab's grammar the CCTV is the WITNESS — the room's assertion that whatever happens here is being observed and recorded, the architectural form of 'you are not the only observer'.",
+      "category": "lab_prop",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "tags": ["prop", "lab", "camera", "surveillance", "safety", "watcher"],
+      "parameters": {
+        "yaw_deg": "Yaw degrees around the bracket — 0 looks straight away from wall, ±90 sweeps left/right (default 0)",
+        "pitch_deg": "Pitch degrees — negative tilts down toward the floor (default -10)",
+        "led_active": "Bool — show the red recording LED (default true)",
+        "led_color": "LED color RGB (default red 0.95,0.18,0.20)",
+        "body_color": "Camera body color (default dark steel)",
+        "bracket_length": "Length of the bracket arm in meters (default 0.18)",
+        "body_length": "Length of the camera body (default 0.16)"
+      }
+    },
     "spine_portal": {
       "lookup_name": "spine_portal",
       "scene": "res://commons/artifacts/spine_portal/spine_portal.tscn",
