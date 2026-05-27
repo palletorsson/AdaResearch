@@ -1,0 +1,102 @@
+{
+  "name": "primitives_test",
+  "description": "Minimal Point_One lab. Back wall (south, +Z) carries an exit sign + the auto-opening sliding door + a picture window beside the door (sized to leave solid wall around it). A floor window in the centre lets the player see the origin point glowing 1.6m below the lab floor. A ramp leads down from the door to the grid surface. Inside: an info board on the east wall. Nothing else — the lab is just the chamber, the threshold, and the visible 'point zero' below.",
+  "lab_room": {
+    "room_width": 8,
+    "room_depth": 7,
+    "room_height": 4.5,
+    "accent_color": [
+      0.227,
+      0.482,
+      1
+    ],
+    "signage_top": "POINT ZERO",
+    "signage_sub": "",
+    "show_back_window": true,
+    "back_window_size": [
+      3.6,
+      2
+    ],
+    "back_window_offset_x": -1.7,
+    "show_front_window": true,
+    "front_window_size": [
+      5.5,
+      2
+    ],
+    "front_window_offset_x": 0,
+    "show_sliding_door": true,
+    "single_door": true,
+    "door_wall": "south",
+    "door_offset_x": 2.6,
+    "door_sensor_radius": 1,
+    "show_floor_window": true,
+    "floor_window_size": [
+      3,
+      3
+    ],
+    "show_stairs": true,
+    "use_ramp": true,
+    "stairs_drop": 1.5,
+    "ramp_length": 3.5,
+    "show_plinth": false,
+    "show_wall_header": true,
+    "wall_header_height": 0.18,
+    "wall_header_color": [
+      0.32,
+      0.36,
+      0.34
+    ],
+    "show_wall_footer": true,
+    "wall_footer_height": 0.22,
+    "wall_footer_color": [
+      0.18,
+      0.2,
+      0.22
+    ],
+    "show_wall_band": true,
+    "wall_band_y_centre": 1.2,
+    "wall_band_height": 0.32,
+    "wall_band_color": [
+      0.12,
+      0.36,
+      0.95
+    ],
+    "show_ceiling_fixtures": true,
+    "ceiling_fixtures_seed": 42,
+    "ceiling_vent_count": 2,
+    "ceiling_sprinkler_count": 3,
+    "ceiling_sensor_count": 2,
+    "ceiling_speaker_count": 1,
+    "ceiling_light_count": 4
+  },
+  "mounted_props": [
+    {
+      "id": "scaffold_exit_sign",
+      "lookup_name": "exit_sign",
+      "position": [
+        2.3229627954424537,
+        1.5,
+        1.8030809583778833
+      ],
+      "rotation_y": 0,
+      "config": {},
+      "lookupName": "exit_sign",
+      "rotationY": -90,
+      "displayName": "exit_sign"
+    },
+    {
+      "id": "scaffold_info",
+      "lookup_name": "info_screen",
+      "position": [
+        3.92,
+        1.75,
+        0
+      ],
+      "rotation_y": -90,
+      "config": {},
+      "lookupName": "info_screen",
+      "rotationY": -90,
+      "displayName": "info_screen"
+    }
+  ]
+}

@@ -35,9 +35,13 @@ class_name LabRoom
 # ── DNA: dimensions ───────────────────────────────────────────────────
 
 @export_group("Dimensions")
-@export var room_width: float = 6.0
-@export var room_depth: float = 6.0
-@export var room_height: float = 3.5
+# Default dimensions match the encyclopedia's /lab-editor DEFAULT_LAB
+# (8 × 7 × 3.8 m) so the procedural GLB export and the lab JSON's
+# prop positions agree at room scale. Per-lab configs still override
+# these via mounted_lab_json or config metadata.
+@export var room_width: float = 8.0
+@export var room_depth: float = 7.0
+@export var room_height: float = 3.8
 
 @export_group("Accent")
 @export var accent_color: Color = Color(0.902, 0.224, 0.275)  # lambda_edge red
@@ -109,13 +113,17 @@ class_name LabRoom
 ## window cut into it — overrides south_wall_is_glass.
 @export var show_back_window: bool = false
 @export var back_window_size: Vector2 = Vector2(5.0, 2.2)
-## Smaller window on the -Z front wall (looks "back" the way the
-## player came from). Coexists with signage — placed above the door
-## or beside the signage band.
+## Offset of the back window along the back wall's X axis (metres).
+## 0 = centred. Lab editor drag-on-wall writes this.
+@export var back_window_offset_x: float = 0.0
+## Smaller window on the -Z front wall (the signage / entry-from-grid
+## side when door_wall=="south"). Off by default so the simple lab is
+## clean front-wall (signage only) and back-wall (door + big window).
 @export var show_front_window: bool = false
 @export var front_window_size: Vector2 = Vector2(1.6, 0.8)
-## Horizontal offset of the small front window from the wall centre,
-## so it doesn't collide with the centred signage / sliding door.
+## Horizontal offset of the front window from the wall centre. With
+## door_wall="north" and a centred door, leave at 0 to keep both
+## centred (window above the door + flanking wall segments).
 @export var front_window_offset_x: float = 0.0
 @export var front_window_y: float = 2.45
 
@@ -131,19 +139,107 @@ class_name LabRoom
 @export_group("Sliding door")
 ## Working sliding door with proximity sensor on the upper frame.
 ## Two panels slide outward when a body enters the sensor radius.
-@export var show_sliding_door: bool = false
+@export var show_sliding_door: bool = true
 ## Which wall hosts the door. "north"=-Z front, "south"=+Z back,
-## "east"=+X, "west"=-X.
-@export var door_wall: String = "east"
+## "east"=+X, "west"=-X. Default "north" puts the door on the
+## front (signage-side) wall, matching the large front_window so
+## the front face reads as "glass wall + glass door".
+## Default = "south" (back / +Z wall). Convention: the door is on the
+## same wall as the large picture window — entering player sees the
+## biome through the glass beside / above them.
+@export var door_wall: String = "south"
 @export var door_width: float = 1.4
 @export var door_height: float = 2.2
-@export var door_sensor_radius: float = 2.6
+## Distance in metres at which the sliding door triggers open. Default
+## 1.0m so the door stays closed unless the player walks right up to it.
+@export var door_sensor_radius: float = 1.0
 @export var door_open_offset: float = 0.7
+## If true, build ONE sliding panel of the full door width that slides
+## to one side (left by default) instead of two panels meeting at the
+## centre. Cleaner / more residential look. The sensor handler still
+## opens / closes automatically.
+@export var single_door: bool = true
+## Offset of the door along its host wall, in metres. 0 = centred.
+## Positive = +X direction on N/S walls or +Z on E/W walls. Negative =
+## opposite. Clamped to leave at least 0.2m wall on each side.
+@export var door_offset_x: float = 0.0
+
+@export_group("Entry stairs")
+## A short flight of steps OUTSIDE the door that descends from the
+## lab floor down to the grid surface. Bridges the typical 0.5 m
+## elevation so the player walks UP into the lab.
+@export var show_stairs: bool = true
+## Total vertical drop the stairs cover, in metres. Should equal the
+## elevation of the lab floor above the grid surface (default 0.5).
+@export var stairs_drop: float = 0.5
+## Number of step risers. 2–4 is plausible for a 0.5 m drop.
+@export var stairs_step_count: int = 3
+## Horizontal depth of each step tread, in metres.
+@export var stairs_step_depth: float = 0.32
+## Width of the stair flight. Defaults to ~1.5× door_width so the
+## landing reads as a small porch.
+@export var stairs_width: float = 0.0  # 0 = auto = door_width * 1.5
+@export var stairs_color: Color = Color(0.30, 0.30, 0.34)
+## If true, build a smooth sloped ramp instead of stepped stairs. Same
+## drop / width / outward direction. Useful for accessibility, transport
+## carts, or just a different visual language.
+@export var use_ramp: bool = false
+@export var ramp_length: float = 1.2  # how far the ramp extends outward
+
+@export_group("Wall bands")
+## Horizontal trim strips on every wall: a HEADER along the top edge,
+## a FOOTER along the bottom edge, and an optional MID-BAND between
+## them. Each band is a thin box pulled slightly into the room so it
+## reads as cladding / wainscot / accent stripe against the wall.
+## The look is HL2 / Black Mesa: vent-style footer, accent-coloured
+## header, tile/concrete mid-band.
+@export var show_wall_header: bool = true
+@export var wall_header_height: float = 0.18
+@export var wall_header_color: Color = Color(0.32, 0.36, 0.34)
+
+@export var show_wall_footer: bool = true
+@export var wall_footer_height: float = 0.22
+@export var wall_footer_color: Color = Color(0.20, 0.22, 0.24)
+
+## Optional mid-band — sits at wall_band_y_centre (defaults to chair
+## rail / wainscot height). Off by default.
+@export var show_wall_band: bool = false
+@export var wall_band_y_centre: float = 1.2
+@export var wall_band_height: float = 0.15
+@export var wall_band_color: Color = Color(0.16, 0.42, 0.62)
 
 @export_group("Ceiling")
 ## "tile_grid" = the default; "exposed" = visible cable trays + light fixtures;
 ## "skylight" = bright panels with frosted glass look.
 @export var ceiling_style: String = "tile_grid"
+
+@export_group("Ceiling fixtures")
+## Procedural ceiling-mounted props (vents, sprinklers, smoke sensors,
+## speakers, light panels) distributed deterministically across the
+## ceiling using ceiling_fixtures_seed. Each type's count is independent.
+## Layout: tile grid cells sized by ceiling_tile_size; each fixture
+## sits at the EXACT centre of its grid cell (no jitter).
+@export var show_ceiling_fixtures: bool = true
+@export var ceiling_fixtures_seed: int = 42
+@export_range(0, 12) var ceiling_vent_count: int = 2
+@export_range(0, 12) var ceiling_sprinkler_count: int = 3
+@export_range(0, 12) var ceiling_sensor_count: int = 2
+@export_range(0, 12) var ceiling_speaker_count: int = 1
+@export_range(0, 12) var ceiling_light_count: int = 4
+## Target acoustic-tile size for the ceiling grid. Actual cell size is
+## derived so an integer number of cells fits the room exactly.
+@export_range(0.5, 2.5, 0.1) var ceiling_tile_size: float = 1.2
+
+# ── Multi-element arrays (IKEA mode) ──────────────────────────────────
+# When these arrays are non-empty, lab_room uses them INSTEAD of the
+# single door_wall / show_front_window / show_back_window / show_stairs
+# config. Each entry is a Dictionary with at least { wall, offset_x }.
+# Populated by lab_loader from the lab JSON's doors[] / windows[] /
+# stairs[] arrays. Stored as runtime state, not @export — they're
+# defined per-lab, not per-scene-instance.
+var doors_cfg: Array = []
+var windows_cfg: Array = []
+var stairs_cfg: Array = []
 
 # ── Constants ─────────────────────────────────────────────────────────
 
@@ -164,89 +260,161 @@ func _ready() -> void:
 	# the room comes up correctly on the first build.
 	_read_metadata_overrides()
 	_build_room()
+	# After the room is built and the lab has been added to its parent
+	# (so global_position is valid), walk all wall ShaderMaterials and
+	# tell them where the lab sits in world Y. Deferred so the grid
+	# system has finished positioning us.
+	call_deferred("_patch_band_shader_world_y_offset")
 
 
 func _read_metadata_overrides() -> void:
 	# Strings — direct mapping.
 	if has_meta("config_signage_top"):
-		signage_top = String(get_meta("config_signage_top"))
+		signage_top = str(get_meta("config_signage_top"))
 	if has_meta("config_signage_sub"):
-		signage_sub = String(get_meta("config_signage_sub"))
+		signage_sub = str(get_meta("config_signage_sub"))
 	if has_meta("config_annotation_top"):
-		annotation_top = String(get_meta("config_annotation_top"))
+		annotation_top = str(get_meta("config_annotation_top"))
 	if has_meta("config_annotation_bottom"):
-		annotation_bottom = String(get_meta("config_annotation_bottom"))
+		annotation_bottom = str(get_meta("config_annotation_bottom"))
 	if has_meta("config_mounted_artifact_scene"):
-		mounted_artifact_scene = String(get_meta("config_mounted_artifact_scene"))
+		mounted_artifact_scene = str(get_meta("config_mounted_artifact_scene"))
 	if has_meta("config_mounted_lab_json"):
-		mounted_lab_json = String(get_meta("config_mounted_lab_json"))
+		mounted_lab_json = str(get_meta("config_mounted_lab_json"))
+
+	# If a lab JSON is set, lift its `lab_room` block into our config
+	# metadata BEFORE the rest of the overrides run. This lets the lab
+	# JSON (the source of truth saved by /lab-editor) control room
+	# dimensions, door wall + offset, window sizes, stairs/ramp etc.
+	# Token-level configs still win because they are applied after.
+	if mounted_lab_json != "":
+		_lift_lab_room_block_into_meta(mounted_lab_json)
 
 	# Colors as "r,g,b" strings.
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_floor_color"):
-		floor_color = _parse_color(String(get_meta("config_floor_color")), floor_color)
+		floor_color = _parse_color(str(get_meta("config_floor_color")), floor_color)
 	if has_meta("config_wall_color"):
-		wall_color = _parse_color(String(get_meta("config_wall_color")), wall_color)
+		wall_color = _parse_color(str(get_meta("config_wall_color")), wall_color)
 
 	# Floats / ints.
 	if has_meta("config_room_width"):
-		room_width = float(String(get_meta("config_room_width")))
+		room_width = float(str(get_meta("config_room_width")))
 	if has_meta("config_room_depth"):
-		room_depth = float(String(get_meta("config_room_depth")))
+		room_depth = float(str(get_meta("config_room_depth")))
 	if has_meta("config_room_height"):
-		room_height = float(String(get_meta("config_room_height")))
+		room_height = float(str(get_meta("config_room_height")))
 	if has_meta("config_light_warmth"):
-		light_warmth = clampf(float(String(get_meta("config_light_warmth"))), 0.0, 1.0)
+		light_warmth = clampf(float(str(get_meta("config_light_warmth"))), 0.0, 1.0)
 
 	# New: wall pattern / observation window / ceiling style.
 	if has_meta("config_wall_pattern"):
-		wall_pattern = String(get_meta("config_wall_pattern"))
+		wall_pattern = str(get_meta("config_wall_pattern"))
 	if has_meta("config_panel_columns"):
-		panel_columns = int(String(get_meta("config_panel_columns")))
+		panel_columns = int(str(get_meta("config_panel_columns")))
 	if has_meta("config_seam_color"):
-		seam_color = _parse_color(String(get_meta("config_seam_color")), seam_color)
+		seam_color = _parse_color(str(get_meta("config_seam_color")), seam_color)
 	if has_meta("config_show_observation_window"):
 		show_observation_window = bool(get_meta("config_show_observation_window"))
 	if has_meta("config_window_wall"):
-		window_wall = String(get_meta("config_window_wall"))
+		window_wall = str(get_meta("config_window_wall"))
 	if has_meta("config_ceiling_style"):
-		ceiling_style = String(get_meta("config_ceiling_style"))
+		ceiling_style = str(get_meta("config_ceiling_style"))
 
 	# New: forward/back windows + sliding door.
 	if has_meta("config_show_back_window"):
-		show_back_window = _parse_bool(String(get_meta("config_show_back_window")), show_back_window)
+		show_back_window = _parse_bool(str(get_meta("config_show_back_window")), show_back_window)
 	if has_meta("config_back_window_size"):
-		back_window_size = _parse_vec2(String(get_meta("config_back_window_size")), back_window_size)
+		back_window_size = _parse_vec2(str(get_meta("config_back_window_size")), back_window_size)
+	if has_meta("config_back_window_offset_x"):
+		back_window_offset_x = float(str(get_meta("config_back_window_offset_x")))
 	if has_meta("config_show_front_window"):
-		show_front_window = _parse_bool(String(get_meta("config_show_front_window")), show_front_window)
+		show_front_window = _parse_bool(str(get_meta("config_show_front_window")), show_front_window)
 	if has_meta("config_front_window_size"):
-		front_window_size = _parse_vec2(String(get_meta("config_front_window_size")), front_window_size)
+		front_window_size = _parse_vec2(str(get_meta("config_front_window_size")), front_window_size)
 	if has_meta("config_front_window_offset_x"):
-		front_window_offset_x = float(String(get_meta("config_front_window_offset_x")))
+		front_window_offset_x = float(str(get_meta("config_front_window_offset_x")))
 	if has_meta("config_front_window_y"):
-		front_window_y = float(String(get_meta("config_front_window_y")))
+		front_window_y = float(str(get_meta("config_front_window_y")))
 	if has_meta("config_show_floor_window"):
-		show_floor_window = _parse_bool(String(get_meta("config_show_floor_window")), show_floor_window)
+		show_floor_window = _parse_bool(str(get_meta("config_show_floor_window")), show_floor_window)
 	if has_meta("config_floor_window_size"):
-		floor_window_size = _parse_vec2(String(get_meta("config_floor_window_size")), floor_window_size)
+		floor_window_size = _parse_vec2(str(get_meta("config_floor_window_size")), floor_window_size)
 	if has_meta("config_floor_window_offset"):
-		floor_window_offset = _parse_vec2(String(get_meta("config_floor_window_offset")), floor_window_offset)
+		floor_window_offset = _parse_vec2(str(get_meta("config_floor_window_offset")), floor_window_offset)
 	if has_meta("config_show_sliding_door"):
-		show_sliding_door = _parse_bool(String(get_meta("config_show_sliding_door")), show_sliding_door)
+		show_sliding_door = _parse_bool(str(get_meta("config_show_sliding_door")), show_sliding_door)
 	if has_meta("config_door_wall"):
-		door_wall = String(get_meta("config_door_wall"))
+		door_wall = str(get_meta("config_door_wall"))
 	if has_meta("config_door_width"):
-		door_width = float(String(get_meta("config_door_width")))
+		door_width = float(str(get_meta("config_door_width")))
 	if has_meta("config_door_height"):
-		door_height = float(String(get_meta("config_door_height")))
+		door_height = float(str(get_meta("config_door_height")))
 	if has_meta("config_door_sensor_radius"):
-		door_sensor_radius = float(String(get_meta("config_door_sensor_radius")))
+		door_sensor_radius = float(str(get_meta("config_door_sensor_radius")))
 	if has_meta("config_door_open_offset"):
-		door_open_offset = float(String(get_meta("config_door_open_offset")))
+		door_open_offset = float(str(get_meta("config_door_open_offset")))
+	if has_meta("config_door_offset_x"):
+		door_offset_x = float(str(get_meta("config_door_offset_x")))
+	# Entry stairs / ramp config — overrides for the lab editor.
+	if has_meta("config_show_stairs"):
+		show_stairs = _parse_bool(str(get_meta("config_show_stairs")), show_stairs)
+	if has_meta("config_stairs_drop"):
+		stairs_drop = float(str(get_meta("config_stairs_drop")))
+	if has_meta("config_stairs_step_count"):
+		stairs_step_count = int(str(get_meta("config_stairs_step_count")))
+	if has_meta("config_stairs_step_depth"):
+		stairs_step_depth = float(str(get_meta("config_stairs_step_depth")))
+	if has_meta("config_stairs_width"):
+		stairs_width = float(str(get_meta("config_stairs_width")))
+	if has_meta("config_use_ramp"):
+		use_ramp = _parse_bool(str(get_meta("config_use_ramp")), use_ramp)
+	if has_meta("config_ramp_length"):
+		ramp_length = float(str(get_meta("config_ramp_length")))
+	# Wall band config (header / footer / optional mid-band).
+	if has_meta("config_show_wall_header"):
+		show_wall_header = _parse_bool(str(get_meta("config_show_wall_header")), show_wall_header)
+	if has_meta("config_wall_header_height"):
+		wall_header_height = float(str(get_meta("config_wall_header_height")))
+	if has_meta("config_wall_header_color"):
+		wall_header_color = _parse_color(str(get_meta("config_wall_header_color")), wall_header_color)
+	if has_meta("config_show_wall_footer"):
+		show_wall_footer = _parse_bool(str(get_meta("config_show_wall_footer")), show_wall_footer)
+	if has_meta("config_wall_footer_height"):
+		wall_footer_height = float(str(get_meta("config_wall_footer_height")))
+	if has_meta("config_wall_footer_color"):
+		wall_footer_color = _parse_color(str(get_meta("config_wall_footer_color")), wall_footer_color)
+	if has_meta("config_show_wall_band"):
+		show_wall_band = _parse_bool(str(get_meta("config_show_wall_band")), show_wall_band)
+	if has_meta("config_wall_band_y_centre"):
+		wall_band_y_centre = float(str(get_meta("config_wall_band_y_centre")))
+	if has_meta("config_wall_band_height"):
+		wall_band_height = float(str(get_meta("config_wall_band_height")))
+	if has_meta("config_wall_band_color"):
+		wall_band_color = _parse_color(str(get_meta("config_wall_band_color")), wall_band_color)
+	if has_meta("config_show_plinth"):
+		show_plinth = _parse_bool(str(get_meta("config_show_plinth")), show_plinth)
+	# Ceiling fixtures
+	if has_meta("config_show_ceiling_fixtures"):
+		show_ceiling_fixtures = _parse_bool(str(get_meta("config_show_ceiling_fixtures")), show_ceiling_fixtures)
+	if has_meta("config_ceiling_fixtures_seed"):
+		ceiling_fixtures_seed = int(str(get_meta("config_ceiling_fixtures_seed")))
+	if has_meta("config_ceiling_vent_count"):
+		ceiling_vent_count = int(str(get_meta("config_ceiling_vent_count")))
+	if has_meta("config_ceiling_sprinkler_count"):
+		ceiling_sprinkler_count = int(str(get_meta("config_ceiling_sprinkler_count")))
+	if has_meta("config_ceiling_sensor_count"):
+		ceiling_sensor_count = int(str(get_meta("config_ceiling_sensor_count")))
+	if has_meta("config_ceiling_speaker_count"):
+		ceiling_speaker_count = int(str(get_meta("config_ceiling_speaker_count")))
+	if has_meta("config_ceiling_light_count"):
+		ceiling_light_count = int(str(get_meta("config_ceiling_light_count")))
+	if has_meta("config_ceiling_tile_size"):
+		ceiling_tile_size = float(str(get_meta("config_ceiling_tile_size")))
 	# Legacy passthrough: explicit "false" disables the default full-glass back wall.
 	if has_meta("config_south_wall_is_glass"):
-		south_wall_is_glass = _parse_bool(String(get_meta("config_south_wall_is_glass")), south_wall_is_glass)
+		south_wall_is_glass = _parse_bool(str(get_meta("config_south_wall_is_glass")), south_wall_is_glass)
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -260,6 +428,40 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		_clear_built_children()
 		_built = false
 		_build_room()
+		# Rebuild created new wall materials — re-patch the world-Y offset.
+		call_deferred("_patch_band_shader_world_y_offset")
+
+
+## Read the lab_room block from the lab JSON and copy each key into
+## our `config_<key>` metadata. Keys that already have meta set (e.g.
+## from interactables-token configs) are NOT overwritten — tokens win
+## over JSON. Arrays like [w, h] are serialised as "w,h" strings so the
+## existing _parse_vec2 / _parse_color helpers can read them.
+func _lift_lab_room_block_into_meta(json_path: String) -> void:
+	if not FileAccess.file_exists(json_path):
+		return
+	var raw: String = FileAccess.get_file_as_string(json_path)
+	if raw.is_empty():
+		return
+	var parsed = JSON.parse_string(raw)
+	if not (parsed is Dictionary):
+		return
+	var lab_room_cfg = parsed.get("lab_room", null)
+	if not (lab_room_cfg is Dictionary):
+		return
+	for k in lab_room_cfg.keys():
+		var meta_key: String = "config_%s" % str(k)
+		# Token configs (already in meta) win over JSON.
+		if has_meta(meta_key):
+			continue
+		var v = lab_room_cfg[k]
+		if v is Array:
+			var parts: Array = []
+			for n in v:
+				parts.append(str(n))
+			set_meta(meta_key, ",".join(PackedStringArray(parts)))
+		else:
+			set_meta(meta_key, v)
 
 
 func _clear_built_children() -> void:
@@ -274,16 +476,335 @@ func _build_room() -> void:
 	_build_floor()
 	_build_walls()
 	_build_ceiling()
+	_build_ceiling_fixtures()
+	# Wall bands are PAINTED on the wall material via
+	# lab_wall_bands.gdshader. The shader uses (world_y - lab_world_y)
+	# so band thresholds in lab-local terms work regardless of where
+	# the grid system places the lab. The lab_world_y uniform is
+	# patched in _ready (deferred so global_position is valid).
+	# Old _build_wall_bands() mesh-strip path remains in the file as
+	# a fallback but is no longer called.
 	_build_accent_strip()
 	_build_plinth_and_mount()
 	_build_signage()
 	if show_wall_annotations:
 		_build_wall_annotations()
 	_build_lighting()
+	_build_colliders()
+	if show_stairs and show_sliding_door:
+		_build_stairs()
 	if mounted_artifact_scene != "":
 		_instantiate_mounted_artifact()
 	if mounted_lab_json != "":
 		_instantiate_mounted_lab_json()
+
+
+# ── Colliders ─────────────────────────────────────────────────────────
+# Build StaticBody3D + CollisionShape3D children for floor / ceiling /
+# walls so the VR rig and desktop player can walk on the lab floor and
+# bump into the walls. The sliding door's wall is split into two
+# segments with a gap matching door_width so the player can step
+# through it; the door panels themselves are decorative (no collision).
+# Windows are left solid because they're glass — visible but not
+# walkable. The floor window (if any) is also left solid: the glass
+# pane below the player carries them.
+
+const COLLIDER_THICK: float = 0.06
+
+func _build_colliders() -> void:
+	var body := StaticBody3D.new()
+	body.name = "LabColliders"
+	# Layer 1 = world / static geometry (matches Godot's default
+	# walkable surfaces). Mask 0 because we only block, never query.
+	body.collision_layer = 1
+	body.collision_mask = 0
+	add_child(body)
+
+	var hw := room_width * 0.5
+	var hd := room_depth * 0.5
+	var rh := room_height
+
+	# Floor — thin slab just below y=0 so the top surface is flush with
+	# the lab floor plane.
+	_add_box_collider(body, "FloorCollider",
+		Vector3(0, -COLLIDER_THICK * 0.5, 0),
+		Vector3(room_width, COLLIDER_THICK, room_depth))
+
+	# Ceiling — thin slab at y=room_height.
+	_add_box_collider(body, "CeilingCollider",
+		Vector3(0, rh + COLLIDER_THICK * 0.5, 0),
+		Vector3(room_width, COLLIDER_THICK, room_depth))
+
+	# Walls — one per side. If the sliding door is enabled on this wall,
+	# split into two segments leaving a door-shaped gap.
+	# Wall conventions: north=-Z (front), south=+Z (back),
+	# east=+X, west=-X. (Matches @export door_wall doc.)
+	_add_wall_collider(body, "WallNorth", "north", hw, hd, rh)
+	_add_wall_collider(body, "WallSouth", "south", hw, hd, rh)
+	_add_wall_collider(body, "WallEast",  "east",  hw, hd, rh)
+	_add_wall_collider(body, "WallWest",  "west",  hw, hd, rh)
+
+
+func _add_box_collider(parent: Node, n: String, pos: Vector3, size: Vector3) -> void:
+	var cs := CollisionShape3D.new()
+	cs.name = n
+	var box := BoxShape3D.new()
+	box.size = size
+	cs.shape = box
+	cs.position = pos
+	parent.add_child(cs)
+
+
+func _add_wall_collider(body: StaticBody3D, n: String, side: String,
+		hw: float, hd: float, rh: float) -> void:
+	# Compute wall centre + axis along which the wall extends.
+	# axis_len = wall length on its long axis (the room dimension parallel
+	# to the wall). For north/south walls that's room_width (X).
+	# For east/west walls that's room_depth (Z).
+	var centre: Vector3
+	var size: Vector3
+	var horizontal_axis_len: float
+	match side:
+		"north":
+			centre = Vector3(0, rh * 0.5, -hd)
+			size = Vector3(hw * 2.0, rh, COLLIDER_THICK)
+			horizontal_axis_len = hw * 2.0
+		"south":
+			centre = Vector3(0, rh * 0.5, hd)
+			size = Vector3(hw * 2.0, rh, COLLIDER_THICK)
+			horizontal_axis_len = hw * 2.0
+		"east":
+			centre = Vector3(hw, rh * 0.5, 0)
+			size = Vector3(COLLIDER_THICK, rh, hd * 2.0)
+			horizontal_axis_len = hd * 2.0
+		"west":
+			centre = Vector3(-hw, rh * 0.5, 0)
+			size = Vector3(COLLIDER_THICK, rh, hd * 2.0)
+			horizontal_axis_len = hd * 2.0
+		_:
+			return
+
+	# If the door is on this wall, split into two segments around the
+	# door gap. Door position along the wall is door_offset_x, clamped
+	# so the door never punches outside the wall.
+	if show_sliding_door and door_wall == side:
+		var gap_w: float = door_width
+		var half_axis: float = horizontal_axis_len * 0.5
+		var min_edge: float = 0.2  # keep at least 20cm wall on each side
+		var max_off: float = max(0.0, half_axis - gap_w * 0.5 - min_edge)
+		var off: float = clamp(door_offset_x, -max_off, max_off)
+		# Left + right segment widths (each measured from the wall's
+		# end up to the door edge).
+		var left_seg: float = half_axis + off - gap_w * 0.5
+		var right_seg: float = half_axis - off - gap_w * 0.5
+		if left_seg <= 0.01 and right_seg <= 0.01:
+			# Door fills the wall — fall back to no collider on this side.
+			return
+		var lintel_h: float = max(0.0, rh - door_height)
+		# Centre of each segment along the wall's long axis.
+		var left_centre_axis: float = -half_axis + left_seg * 0.5
+		var right_centre_axis: float = half_axis - right_seg * 0.5
+		match side:
+			"north", "south":
+				if left_seg > 0.01:
+					_add_box_collider(body, "%s_L" % n,
+						Vector3(left_centre_axis, centre.y, centre.z),
+						Vector3(left_seg, rh, COLLIDER_THICK))
+				if right_seg > 0.01:
+					_add_box_collider(body, "%s_R" % n,
+						Vector3(right_centre_axis, centre.y, centre.z),
+						Vector3(right_seg, rh, COLLIDER_THICK))
+				if lintel_h > 0.01:
+					_add_box_collider(body, "%s_Lintel" % n,
+						Vector3(off, door_height + lintel_h * 0.5, centre.z),
+						Vector3(gap_w, lintel_h, COLLIDER_THICK))
+			"east", "west":
+				if left_seg > 0.01:
+					_add_box_collider(body, "%s_L" % n,
+						Vector3(centre.x, centre.y, left_centre_axis),
+						Vector3(COLLIDER_THICK, rh, left_seg))
+				if right_seg > 0.01:
+					_add_box_collider(body, "%s_R" % n,
+						Vector3(centre.x, centre.y, right_centre_axis),
+						Vector3(COLLIDER_THICK, rh, right_seg))
+				if lintel_h > 0.01:
+					_add_box_collider(body, "%s_Lintel" % n,
+						Vector3(centre.x, door_height + lintel_h * 0.5, off),
+						Vector3(COLLIDER_THICK, lintel_h, gap_w))
+	else:
+		_add_box_collider(body, n, centre, size)
+
+
+# ── Stairs ────────────────────────────────────────────────────────────
+# Build a short flight outside the door that descends to the grid
+# surface. Each step is a box mesh + collider. Steps recede away from
+# the door (along the wall-outward normal) and drop by stairs_drop /
+# stairs_step_count each.
+
+func _build_stairs() -> void:
+	if stairs_drop <= 0.0:
+		return
+	if use_ramp:
+		_build_ramp()
+		return
+	if stairs_step_count <= 0:
+		return
+	var step_w: float = stairs_width if stairs_width > 0.01 else door_width * 1.5
+	var step_h: float = stairs_drop / float(stairs_step_count)
+	var step_d: float = stairs_step_depth
+
+	var hw := room_width * 0.5
+	var hd := room_depth * 0.5
+	var outward: Vector3
+	var origin: Vector3
+	match door_wall:
+		"north":
+			outward = Vector3(0, 0, -1)
+			origin = Vector3(0, 0, -hd)
+		"south":
+			outward = Vector3(0, 0, 1)
+			origin = Vector3(0, 0, hd)
+		"east":
+			outward = Vector3(1, 0, 0)
+			origin = Vector3(hw, 0, 0)
+		"west":
+			outward = Vector3(-1, 0, 0)
+			origin = Vector3(-hw, 0, 0)
+		_:
+			return
+
+	var stairs_root := Node3D.new()
+	stairs_root.name = "EntryStairs"
+	add_child(stairs_root)
+
+	var body := StaticBody3D.new()
+	body.name = "StairsCollider"
+	body.collision_layer = 1
+	body.collision_mask = 0
+	stairs_root.add_child(body)
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = stairs_color
+	mat.roughness = 0.6
+	mat.metallic = 0.2
+
+	# Step i = 0 is closest to door (highest, just below lab floor).
+	# Step i = stairs_step_count - 1 is farthest, at grid surface level.
+	# Each step's TOP surface = lab_floor - i*step_h.
+	# Apply door offset so stairs sit directly in front of the door,
+	# not always at wall centre.
+	var off_vec: Vector3 = Vector3.ZERO
+	match door_wall:
+		"north", "south":
+			off_vec = Vector3(door_offset_x, 0, 0)
+		"east", "west":
+			off_vec = Vector3(0, 0, door_offset_x)
+	for i in range(stairs_step_count):
+		var d: float = step_d * 0.5 + step_d * float(i)
+		var step_centre_y: float = -step_h * 0.5 - step_h * float(i)
+		var local_pos: Vector3 = origin + outward * d + off_vec
+		local_pos.y = step_centre_y
+
+		var step := MeshInstance3D.new()
+		step.name = "Step%d" % i
+		var bm := BoxMesh.new()
+		if outward.x != 0:
+			bm.size = Vector3(step_d, step_h, step_w)
+		else:
+			bm.size = Vector3(step_w, step_h, step_d)
+		step.mesh = bm
+		step.material_override = mat
+		step.position = local_pos
+		stairs_root.add_child(step)
+
+		var cs := CollisionShape3D.new()
+		cs.name = "StepCol%d" % i
+		var box := BoxShape3D.new()
+		box.size = bm.size
+		cs.shape = box
+		cs.position = local_pos
+		body.add_child(cs)
+
+
+# Sloped ramp variant of the entry. A single tilted box mesh +
+# collider that bridges from the lab floor (y=0) down to the grid
+# surface (y=-stairs_drop) over `ramp_length` meters outward from the
+# door wall. Width matches stairs_width / auto.
+func _build_ramp() -> void:
+	if stairs_drop <= 0.0 or ramp_length <= 0.01:
+		return
+	var ramp_w: float = stairs_width if stairs_width > 0.01 else door_width * 1.5
+	var hw := room_width * 0.5
+	var hd := room_depth * 0.5
+	var outward: Vector3
+	var origin: Vector3
+	match door_wall:
+		"north":
+			outward = Vector3(0, 0, -1); origin = Vector3(0, 0, -hd)
+		"south":
+			outward = Vector3(0, 0, 1); origin = Vector3(0, 0, hd)
+		"east":
+			outward = Vector3(1, 0, 0); origin = Vector3(hw, 0, 0)
+		"west":
+			outward = Vector3(-1, 0, 0); origin = Vector3(-hw, 0, 0)
+		_:
+			return
+
+	var off_vec: Vector3 = Vector3.ZERO
+	match door_wall:
+		"north", "south": off_vec = Vector3(door_offset_x, 0, 0)
+		"east", "west":   off_vec = Vector3(0, 0, door_offset_x)
+
+	# Hypotenuse + tilt angle.
+	var hyp: float = sqrt(ramp_length * ramp_length + stairs_drop * stairs_drop)
+	var tilt: float = atan2(stairs_drop, ramp_length)
+	# Centre point: midpoint between (origin) and (origin + outward*ramp_length, y=-drop).
+	var centre: Vector3 = origin + outward * (ramp_length * 0.5) + off_vec
+	centre.y = -stairs_drop * 0.5
+
+	var ramp_root := Node3D.new()
+	ramp_root.name = "EntryRamp"
+	add_child(ramp_root)
+
+	var body := StaticBody3D.new()
+	body.name = "RampCollider"
+	body.collision_layer = 1
+	body.collision_mask = 0
+	ramp_root.add_child(body)
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = stairs_color
+	mat.roughness = 0.65
+	mat.metallic = 0.2
+
+	var ramp := MeshInstance3D.new()
+	ramp.name = "Ramp"
+	var bm := BoxMesh.new()
+	# Box oriented along its long axis = hyp; tilt it about an axis
+	# perpendicular to outward direction.
+	if abs(outward.x) > 0.5:
+		# Outward along ±X — tilt about Z axis. The ramp's long axis
+		# is along X after rotation.
+		bm.size = Vector3(hyp, 0.08, ramp_w)
+		ramp.mesh = bm
+		ramp.rotation = Vector3(0, 0, sign(outward.x) * -tilt)
+	else:
+		# Outward along ±Z — tilt about X axis. Long axis along Z.
+		bm.size = Vector3(ramp_w, 0.08, hyp)
+		ramp.mesh = bm
+		ramp.rotation = Vector3(sign(outward.z) * tilt, 0, 0)
+	ramp.material_override = mat
+	ramp.position = centre
+	ramp_root.add_child(ramp)
+
+	# Collider mirrors the visual.
+	var cs := CollisionShape3D.new()
+	cs.name = "RampCol"
+	var box := BoxShape3D.new()
+	box.size = bm.size
+	cs.shape = box
+	cs.transform = ramp.transform
+	body.add_child(cs)
 
 
 # ── Floor ─────────────────────────────────────────────────────────────
@@ -315,7 +836,7 @@ func _build_floor() -> void:
 ## tinted glass pane filling the opening. Used when show_floor_window
 ## is true — the lab is built over a coordinate in the grid below and
 ## the player can see down through the floor.
-func _build_floor_with_window(mat: StandardMaterial3D) -> void:
+func _build_floor_with_window(mat: Material) -> void:
 	var win_w: float = clamp(floor_window_size.x, 0.4, max(0.4, room_width - 0.4))
 	var win_d: float = clamp(floor_window_size.y, 0.4, max(0.4, room_depth - 0.4))
 	var cx: float = clamp(floor_window_offset.x, -room_width * 0.5 + win_w * 0.5 + 0.1, room_width * 0.5 - win_w * 0.5 - 0.1)
@@ -436,6 +957,8 @@ func _build_floor_with_window(mat: StandardMaterial3D) -> void:
 func _build_floor_tile_lines() -> void:
 	# Thin grout-colored boxes overlaid on the floor — cheap tile grid
 	# without baking a texture. floor_tile_count divisions per side.
+	# If a floor window is enabled, lines that would cross the window
+	# are split into two segments so nothing visually bridges the glass.
 	if floor_tile_count <= 1:
 		return
 	var grout := Node3D.new()
@@ -454,29 +977,76 @@ func _build_floor_tile_lines() -> void:
 	mat.metallic = 0.0
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 
-	# Lines parallel to X axis (running along width), spaced in Z
+	# Floor-window bounds (lab-local) — used to break lines that cross it.
+	var win_active: bool = show_floor_window
+	var fw_x_min: float = 0.0
+	var fw_x_max: float = 0.0
+	var fw_z_min: float = 0.0
+	var fw_z_max: float = 0.0
+	if win_active:
+		var fw_w: float = clamp(floor_window_size.x, 0.4, max(0.4, room_width - 0.4))
+		var fw_d: float = clamp(floor_window_size.y, 0.4, max(0.4, room_depth - 0.4))
+		var fw_cx: float = clamp(floor_window_offset.x,
+			-room_width * 0.5 + fw_w * 0.5 + 0.1, room_width * 0.5 - fw_w * 0.5 - 0.1)
+		var fw_cz: float = clamp(floor_window_offset.y,
+			-room_depth * 0.5 + fw_d * 0.5 + 0.1, room_depth * 0.5 - fw_d * 0.5 - 0.1)
+		fw_x_min = fw_cx - fw_w * 0.5
+		fw_x_max = fw_cx + fw_w * 0.5
+		fw_z_min = fw_cz - fw_d * 0.5
+		fw_z_max = fw_cz + fw_d * 0.5
+
+	# Helper: add a grout line segment from (x_min, x_max) along X,
+	# at z=zc. Or from (z_min, z_max) along Z, at x=xc.
 	for i in range(1, floor_tile_count):
 		var z := -room_depth * 0.5 + i * cell_z
-		var line := MeshInstance3D.new()
-		var m := BoxMesh.new()
-		m.size = Vector3(room_width, line_height, line_thickness)
-		line.mesh = m
-		line.material_override = mat
-		line.position = Vector3(0.0, floor_top_y, z)
-		line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		grout.add_child(line)
+		# Horizontal line at z. If the window covers z, split into two segments.
+		if win_active and z > fw_z_min and z < fw_z_max:
+			# Left segment: from -W/2 to fw_x_min
+			var lw: float = fw_x_min - (-room_width * 0.5)
+			if lw > 0.01:
+				_add_grout(grout, mat,
+					Vector3(-room_width * 0.5 + lw * 0.5, floor_top_y, z),
+					Vector3(lw, line_height, line_thickness))
+			# Right segment: fw_x_max to W/2
+			var rw: float = (room_width * 0.5) - fw_x_max
+			if rw > 0.01:
+				_add_grout(grout, mat,
+					Vector3(room_width * 0.5 - rw * 0.5, floor_top_y, z),
+					Vector3(rw, line_height, line_thickness))
+		else:
+			_add_grout(grout, mat,
+				Vector3(0.0, floor_top_y, z),
+				Vector3(room_width, line_height, line_thickness))
 
-	# Lines parallel to Z axis (running along depth), spaced in X
 	for i in range(1, floor_tile_count):
 		var x := -room_width * 0.5 + i * cell_x
-		var line := MeshInstance3D.new()
-		var m := BoxMesh.new()
-		m.size = Vector3(line_thickness, line_height, room_depth)
-		line.mesh = m
-		line.material_override = mat
-		line.position = Vector3(x, floor_top_y, 0.0)
-		line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		grout.add_child(line)
+		if win_active and x > fw_x_min and x < fw_x_max:
+			var nd: float = fw_z_min - (-room_depth * 0.5)
+			if nd > 0.01:
+				_add_grout(grout, mat,
+					Vector3(x, floor_top_y, -room_depth * 0.5 + nd * 0.5),
+					Vector3(line_thickness, line_height, nd))
+			var sd: float = (room_depth * 0.5) - fw_z_max
+			if sd > 0.01:
+				_add_grout(grout, mat,
+					Vector3(x, floor_top_y, room_depth * 0.5 - sd * 0.5),
+					Vector3(line_thickness, line_height, sd))
+		else:
+			_add_grout(grout, mat,
+				Vector3(x, floor_top_y, 0.0),
+				Vector3(line_thickness, line_height, room_depth))
+
+
+func _add_grout(parent: Node3D, mat: Material,
+		pos: Vector3, size: Vector3) -> void:
+	var line := MeshInstance3D.new()
+	var m := BoxMesh.new()
+	m.size = size
+	line.mesh = m
+	line.material_override = mat
+	line.position = pos
+	line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(line)
 
 
 # ── Walls ─────────────────────────────────────────────────────────────
@@ -490,15 +1060,20 @@ func _build_walls() -> void:
 
 	var wall_mat := _make_wall_material()
 
-	# Front wall (-Z, signage wall, full panel)
-	var front := MeshInstance3D.new()
-	front.name = "WallFront"
-	var fm := BoxMesh.new()
-	fm.size = Vector3(room_width, room_height, WALL_THICKNESS)
-	front.mesh = fm
-	front.material_override = wall_mat
-	front.position = Vector3(0.0, room_height * 0.5, -room_depth * 0.5 + WALL_THICKNESS * 0.5)
-	walls.add_child(front)
+	# Front wall (-Z, signage wall). If a front window is enabled,
+	# build the wall in strips around the window opening; otherwise
+	# a single solid panel. This mirrors the back-wall builder.
+	if show_front_window:
+		_build_front_solid_with_window(walls)
+	else:
+		var front := MeshInstance3D.new()
+		front.name = "WallFront"
+		var fm := BoxMesh.new()
+		fm.size = Vector3(room_width, room_height, WALL_THICKNESS)
+		front.mesh = fm
+		front.material_override = wall_mat
+		front.position = Vector3(0.0, room_height * 0.5, -room_depth * 0.5 + WALL_THICKNESS * 0.5)
+		walls.add_child(front)
 
 	# East wall (+X)
 	var east := MeshInstance3D.new()
@@ -529,9 +1104,9 @@ func _build_walls() -> void:
 	elif south_wall_is_glass:
 		_build_back_glass(walls)
 
-	# Front wall (-Z) — optional small "look back" window.
-	if show_front_window:
-		_build_front_small_window(walls)
+	# Front-wall window is now drawn by _build_front_solid_with_window
+	# above (called when show_front_window is true and replaces the
+	# solid front-wall panel).
 
 	# Sliding door with proximity sensor.
 	if show_sliding_door:
@@ -546,26 +1121,59 @@ func _build_walls() -> void:
 		_build_observation_window(walls)
 
 
-func _make_wall_material() -> StandardMaterial3D:
+const WALL_BAND_SHADER := preload("res://commons/artifacts/lab_room/lab_wall_bands.gdshader")
+
+func _make_wall_material() -> Material:
+	# Use the shader-painted band material when ANY band is enabled.
+	# Bands are painted into the wall surface itself — they auto-conform
+	# to whatever wall geometry exists (window strips, door cutouts,
+	# side panels) and avoid the segment-bookkeeping the mesh-strip
+	# path needs. lab_world_y uniform is patched in _ready (deferred).
+	if show_wall_header or show_wall_footer or show_wall_band:
+		return _make_band_shader_material()
 	var mat := StandardMaterial3D.new()
 	match wall_pattern:
 		"concrete":
-			# Raw concrete: warmer gray, higher roughness, no metallic.
 			mat.albedo_color = Color(0.55, 0.53, 0.50)
 			mat.roughness = 0.85
 			mat.metallic = 0.0
 		"panels":
-			# Clean Aperture panels — same near-white but slightly brighter,
-			# very low roughness so the panel seams read as crisp edges.
 			mat.albedo_color = wall_color
 			mat.roughness = 0.45
 			mat.metallic = 0.02
 		_:
-			# "smooth" / default
 			mat.albedo_color = wall_color
 			mat.roughness = 0.65
 			mat.metallic = 0.0
 	return mat
+
+
+# Build a ShaderMaterial bound to lab_wall_bands.gdshader with the
+# current band config baked into its uniforms. Returned per call —
+# the bands look identical on every wall but each strip can carry its
+# own instance so a future variant could vary per surface.
+func _make_band_shader_material() -> ShaderMaterial:
+	var sm := ShaderMaterial.new()
+	sm.shader = WALL_BAND_SHADER
+	sm.set_shader_parameter("base_color", wall_color)
+	sm.set_shader_parameter("wall_roughness", 0.6 if wall_pattern != "concrete" else 0.85)
+	sm.set_shader_parameter("wall_metallic", 0.02 if wall_pattern == "panels" else 0.0)
+	# Header
+	sm.set_shader_parameter("header_on", show_wall_header and wall_header_height > 0.001)
+	sm.set_shader_parameter("header_color", wall_header_color)
+	sm.set_shader_parameter("header_y_min", room_height - wall_header_height)
+	sm.set_shader_parameter("header_y_max", room_height)
+	# Footer
+	sm.set_shader_parameter("footer_on", show_wall_footer and wall_footer_height > 0.001)
+	sm.set_shader_parameter("footer_color", wall_footer_color)
+	sm.set_shader_parameter("footer_y_min", 0.0)
+	sm.set_shader_parameter("footer_y_max", wall_footer_height)
+	# Mid-band
+	sm.set_shader_parameter("band_on", show_wall_band and wall_band_height > 0.001)
+	sm.set_shader_parameter("band_color", wall_band_color)
+	sm.set_shader_parameter("band_y_min", wall_band_y_centre - wall_band_height * 0.5)
+	sm.set_shader_parameter("band_y_max", wall_band_y_centre + wall_band_height * 0.5)
+	return sm
 
 
 func _build_panel_seams(parent: Node3D) -> void:
@@ -777,50 +1385,91 @@ func _build_observation_window(parent: Node3D) -> void:
 
 
 func _build_back_solid_with_window(parent: Node3D) -> void:
-	# Build the +Z back wall as a solid panel split around a central large
-	# window — three strips above/below/sides of the window opening, then a
-	# tinted glass pane fills the opening. Reads as a real building wall.
+	# Build the +Z back wall as a solid panel split around the picture
+	# window. The window can be OFFSET along x via back_window_offset_x.
+	# If the door is on this wall too, the BOTTOM strip is also split
+	# around the door footprint and the glass is built in pieces so the
+	# door's column is wall-free (player can walk through). Reads as a
+	# real building wall.
 	var win_w: float = clamp(back_window_size.x, 0.5, max(0.5, room_width - 0.6))
 	var win_h: float = clamp(back_window_size.y, 0.5, max(0.5, room_height - 1.0))
 	var win_y: float = room_height * 0.5  # window centred vertically
-	var side_w: float = (room_width - win_w) * 0.5
+	# Apply back_window_offset_x — clamp so window stays on the wall.
+	var max_off: float = max(0.0, (room_width - win_w) * 0.5 - 0.1)
+	var win_cx: float = clamp(back_window_offset_x, -max_off, max_off)
+	var win_left_x: float = win_cx - win_w * 0.5
+	var win_right_x: float = win_cx + win_w * 0.5
 	var top_h: float = room_height - (win_y + win_h * 0.5)
 	var bot_h: float = win_y - win_h * 0.5
 	var z_plane: float = room_depth * 0.5 - WALL_THICKNESS * 0.5
 
+	# Is the sliding door also on this (+Z south) wall?
+	var door_here: bool = show_sliding_door and door_wall == "south"
+	var dx_centre: float = door_offset_x
+	var dh: float = door_height
+	var dw: float = door_width
+	var d_left: float = dx_centre - dw * 0.5
+	var d_right: float = dx_centre + dw * 0.5
+	# Is the door FULLY INSIDE the window's x-range? Only then do we
+	# split the bottom strip + glass around it. If the door is outside
+	# the window (in a side strip), it cuts the side strip instead.
+	var door_in_win_x: bool = door_here \
+		and d_left >= win_left_x - 0.001 \
+		and d_right <= win_right_x + 0.001
+	# Is the door entirely OUTSIDE the window's x-range on one side?
+	var door_in_left_strip: bool = door_here and d_right < win_left_x
+	var door_in_right_strip: bool = door_here and d_left > win_right_x
+
 	var wall_mat := _make_wall_material()
 
-	if side_w > 0.001:
-		# Left strip
-		var left := MeshInstance3D.new()
-		left.name = "BackWallLeft"
-		var lm := BoxMesh.new()
-		lm.size = Vector3(side_w, room_height, WALL_THICKNESS)
-		left.mesh = lm
-		left.material_override = wall_mat
-		left.position = Vector3(-room_width * 0.5 + side_w * 0.5, room_height * 0.5, z_plane)
-		parent.add_child(left)
+	# ── Side strips ─────────────────────────────────────────────────
+	# Left strip: from wall left edge (-W/2) to window's left x.
+	# Right strip: from window's right x to wall right edge (+W/2).
+	# Either may be 0 if the window touches that wall edge.
+	if (win_left_x - (-room_width * 0.5)) > 0.001:
+		_build_back_side_strip(parent, wall_mat, "BackWallLeft",
+			-room_width * 0.5, win_left_x, z_plane,
+			door_in_left_strip, d_left, d_right, dh)
+	if (room_width * 0.5 - win_right_x) > 0.001:
+		_build_back_side_strip(parent, wall_mat, "BackWallRight",
+			win_right_x, room_width * 0.5, z_plane,
+			door_in_right_strip, d_left, d_right, dh)
 
-		# Right strip
-		var right := MeshInstance3D.new()
-		right.name = "BackWallRight"
-		var rm := BoxMesh.new()
-		rm.size = Vector3(side_w, room_height, WALL_THICKNESS)
-		right.mesh = rm
-		right.material_override = wall_mat
-		right.position = Vector3(room_width * 0.5 - side_w * 0.5, room_height * 0.5, z_plane)
-		parent.add_child(right)
-
+	# ── Bottom strip — sits at x = win_cx (centred under the window).
+	#    Split around door only if door is inside the window's x-range.
 	if bot_h > 0.001:
-		var bot := MeshInstance3D.new()
-		bot.name = "BackWallBot"
-		var bm := BoxMesh.new()
-		bm.size = Vector3(win_w, bot_h, WALL_THICKNESS)
-		bot.mesh = bm
-		bot.material_override = wall_mat
-		bot.position = Vector3(0.0, bot_h * 0.5, z_plane)
-		parent.add_child(bot)
+		if door_in_win_x:
+			var bl_w: float = d_left - win_left_x
+			if bl_w > 0.001:
+				var bl := MeshInstance3D.new()
+				bl.name = "BackWallBotLeft"
+				var blm := BoxMesh.new()
+				blm.size = Vector3(bl_w, bot_h, WALL_THICKNESS)
+				bl.mesh = blm
+				bl.material_override = wall_mat
+				bl.position = Vector3(win_left_x + bl_w * 0.5, bot_h * 0.5, z_plane)
+				parent.add_child(bl)
+			var br_w: float = win_right_x - d_right
+			if br_w > 0.001:
+				var br := MeshInstance3D.new()
+				br.name = "BackWallBotRight"
+				var brm := BoxMesh.new()
+				brm.size = Vector3(br_w, bot_h, WALL_THICKNESS)
+				br.mesh = brm
+				br.material_override = wall_mat
+				br.position = Vector3(win_right_x - br_w * 0.5, bot_h * 0.5, z_plane)
+				parent.add_child(br)
+		else:
+			var bot := MeshInstance3D.new()
+			bot.name = "BackWallBot"
+			var bm := BoxMesh.new()
+			bm.size = Vector3(win_w, bot_h, WALL_THICKNESS)
+			bot.mesh = bm
+			bot.material_override = wall_mat
+			bot.position = Vector3(win_cx, bot_h * 0.5, z_plane)
+			parent.add_child(bot)
 
+	# ── Top strip ───────────────────────────────────────────────────
 	if top_h > 0.001:
 		var top := MeshInstance3D.new()
 		top.name = "BackWallTop"
@@ -828,12 +1477,195 @@ func _build_back_solid_with_window(parent: Node3D) -> void:
 		tm.size = Vector3(win_w, top_h, WALL_THICKNESS)
 		top.mesh = tm
 		top.material_override = wall_mat
-		top.position = Vector3(0.0, room_height - top_h * 0.5, z_plane)
+		top.position = Vector3(win_cx, room_height - top_h * 0.5, z_plane)
 		parent.add_child(top)
 
-	# The glass pane filling the window opening.
+	# ── Glass pane ─────────────────────────────────────────────────
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.78, 0.86, 0.94, 0.30)
+	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass_mat.roughness = 0.12
+	glass_mat.metallic = 0.0
+	glass_mat.refraction_enabled = false
+
+	var win_bot: float = win_y - win_h * 0.5
+	var win_top: float = win_y + win_h * 0.5
+
+	if door_in_win_x and dh > win_bot:
+		# Door pokes into the window area. Build glass in 3 pieces:
+		# (a) above the door across full window width (centred at win_cx)
+		# (b) left of door from win_bot to dh
+		# (c) right of door from win_bot to dh
+		var above_h: float = max(0.0, win_top - dh)
+		if above_h > 0.001:
+			var gA := MeshInstance3D.new()
+			gA.name = "BackWindowGlassAbove"
+			var gam := BoxMesh.new()
+			gam.size = Vector3(win_w, above_h, WALL_THICKNESS * 0.5)
+			gA.mesh = gam
+			gA.material_override = glass_mat
+			gA.position = Vector3(win_cx, dh + above_h * 0.5, z_plane)
+			parent.add_child(gA)
+		var side_h: float = max(0.0, dh - win_bot)
+		if side_h > 0.001:
+			var glL_w: float = d_left - win_left_x
+			if glL_w > 0.001:
+				var gL := MeshInstance3D.new()
+				gL.name = "BackWindowGlassLeft"
+				var glm := BoxMesh.new()
+				glm.size = Vector3(glL_w, side_h, WALL_THICKNESS * 0.5)
+				gL.mesh = glm
+				gL.material_override = glass_mat
+				gL.position = Vector3(win_left_x + glL_w * 0.5, win_bot + side_h * 0.5, z_plane)
+				parent.add_child(gL)
+			var glR_w: float = win_right_x - d_right
+			if glR_w > 0.001:
+				var gR := MeshInstance3D.new()
+				gR.name = "BackWindowGlassRight"
+				var grm := BoxMesh.new()
+				grm.size = Vector3(glR_w, side_h, WALL_THICKNESS * 0.5)
+				gR.mesh = grm
+				gR.material_override = glass_mat
+				gR.position = Vector3(win_right_x - glR_w * 0.5, win_bot + side_h * 0.5, z_plane)
+				parent.add_child(gR)
+	else:
+		# No door on this wall (or door entirely below window) — single
+		# rectangular glass pane at the window's offset position.
+		var glass := MeshInstance3D.new()
+		glass.name = "BackWindowGlass"
+		var gm := BoxMesh.new()
+		gm.size = Vector3(win_w, win_h, WALL_THICKNESS * 0.5)
+		glass.mesh = gm
+		glass.material_override = glass_mat
+		glass.position = Vector3(win_cx, win_y, z_plane)
+		parent.add_child(glass)
+
+	# Window frame (visual trim around the glass opening, follows offset).
+	_build_window_frame_strips(parent, "BackWindowFrame", win_w, win_h, Vector3(win_cx, win_y, z_plane), 0.0)
+
+
+# Build one of the back-wall's side strips. If `door_in_this_strip` is
+# true, split the strip into an upper segment (above the door) +
+# two left/right segments around the door footprint, leaving a gap
+# the player can walk through.
+func _build_back_side_strip(parent: Node3D, mat: Material,
+		strip_name: String,
+		x_min: float, x_max: float, z_plane: float,
+		door_in_this_strip: bool,
+		d_left: float, d_right: float, d_height: float) -> void:
+	var strip_w: float = x_max - x_min
+	if strip_w <= 0.001:
+		return
+	if not door_in_this_strip:
+		var n := MeshInstance3D.new()
+		n.name = strip_name
+		var m := BoxMesh.new()
+		m.size = Vector3(strip_w, room_height, WALL_THICKNESS)
+		n.mesh = m
+		n.material_override = mat
+		n.position = Vector3((x_min + x_max) * 0.5, room_height * 0.5, z_plane)
+		parent.add_child(n)
+		return
+
+	# Door is in this strip — three pieces: top lintel + left + right.
+	var lintel_h: float = max(0.0, room_height - d_height)
+	if lintel_h > 0.001:
+		var top := MeshInstance3D.new()
+		top.name = "%s_Lintel" % strip_name
+		var tm := BoxMesh.new()
+		tm.size = Vector3(strip_w, lintel_h, WALL_THICKNESS)
+		top.mesh = tm
+		top.material_override = mat
+		top.position = Vector3((x_min + x_max) * 0.5, d_height + lintel_h * 0.5, z_plane)
+		parent.add_child(top)
+
+	var lw: float = d_left - x_min
+	if lw > 0.001:
+		var L := MeshInstance3D.new()
+		L.name = "%s_L" % strip_name
+		var lm := BoxMesh.new()
+		lm.size = Vector3(lw, d_height, WALL_THICKNESS)
+		L.mesh = lm
+		L.material_override = mat
+		L.position = Vector3(x_min + lw * 0.5, d_height * 0.5, z_plane)
+		parent.add_child(L)
+
+	var rw: float = x_max - d_right
+	if rw > 0.001:
+		var R := MeshInstance3D.new()
+		R.name = "%s_R" % strip_name
+		var rm := BoxMesh.new()
+		rm.size = Vector3(rw, d_height, WALL_THICKNESS)
+		R.mesh = rm
+		R.material_override = mat
+		R.position = Vector3(x_max - rw * 0.5, d_height * 0.5, z_plane)
+		parent.add_child(R)
+
+
+func _build_front_solid_with_window(parent: Node3D) -> void:
+	# Build the -Z front (signage) wall as a solid panel split around
+	# the front window. Same pattern as _build_back_solid_with_window,
+	# minus the door-cut logic (the door lives on south by default; if
+	# the user moves it to north, that's handled separately).
+	var win_w: float = clamp(front_window_size.x, 0.5, max(0.5, room_width - 0.6))
+	var win_h: float = clamp(front_window_size.y, 0.5, max(0.5, room_height - 1.0))
+	var win_y: float = room_height * 0.5  # centred vertically
+	var max_off: float = max(0.0, (room_width - win_w) * 0.5 - 0.1)
+	var win_cx: float = clamp(front_window_offset_x, -max_off, max_off)
+	var win_left_x: float = win_cx - win_w * 0.5
+	var win_right_x: float = win_cx + win_w * 0.5
+	var top_h: float = room_height - (win_y + win_h * 0.5)
+	var bot_h: float = win_y - win_h * 0.5
+	var z_plane: float = -room_depth * 0.5 + WALL_THICKNESS * 0.5
+
+	var wall_mat := _make_wall_material()
+
+	# Left strip
+	var left_w: float = win_left_x - (-room_width * 0.5)
+	if left_w > 0.001:
+		var L := MeshInstance3D.new()
+		L.name = "FrontWallLeft"
+		var lm := BoxMesh.new()
+		lm.size = Vector3(left_w, room_height, WALL_THICKNESS)
+		L.mesh = lm
+		L.material_override = wall_mat
+		L.position = Vector3(-room_width * 0.5 + left_w * 0.5, room_height * 0.5, z_plane)
+		parent.add_child(L)
+	# Right strip
+	var right_w: float = room_width * 0.5 - win_right_x
+	if right_w > 0.001:
+		var R := MeshInstance3D.new()
+		R.name = "FrontWallRight"
+		var rm := BoxMesh.new()
+		rm.size = Vector3(right_w, room_height, WALL_THICKNESS)
+		R.mesh = rm
+		R.material_override = wall_mat
+		R.position = Vector3(room_width * 0.5 - right_w * 0.5, room_height * 0.5, z_plane)
+		parent.add_child(R)
+	# Bottom strip
+	if bot_h > 0.001:
+		var B := MeshInstance3D.new()
+		B.name = "FrontWallBot"
+		var bm := BoxMesh.new()
+		bm.size = Vector3(win_w, bot_h, WALL_THICKNESS)
+		B.mesh = bm
+		B.material_override = wall_mat
+		B.position = Vector3(win_cx, bot_h * 0.5, z_plane)
+		parent.add_child(B)
+	# Top strip
+	if top_h > 0.001:
+		var T := MeshInstance3D.new()
+		T.name = "FrontWallTop"
+		var tm := BoxMesh.new()
+		tm.size = Vector3(win_w, top_h, WALL_THICKNESS)
+		T.mesh = tm
+		T.material_override = wall_mat
+		T.position = Vector3(win_cx, room_height - top_h * 0.5, z_plane)
+		parent.add_child(T)
+
+	# Glass pane filling the opening.
 	var glass := MeshInstance3D.new()
-	glass.name = "BackWindowGlass"
+	glass.name = "FrontWindowGlass"
 	var gm := BoxMesh.new()
 	gm.size = Vector3(win_w, win_h, WALL_THICKNESS * 0.5)
 	glass.mesh = gm
@@ -842,45 +1674,15 @@ func _build_back_solid_with_window(parent: Node3D) -> void:
 	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	glass_mat.roughness = 0.12
 	glass_mat.metallic = 0.0
-	glass_mat.refraction_enabled = false
 	glass.material_override = glass_mat
-	glass.position = Vector3(0.0, win_y, z_plane)
+	glass.position = Vector3(win_cx, win_y, z_plane)
 	parent.add_child(glass)
 
-	# Window frame (4 thin dark strips ringing the glass).
-	_build_window_frame_strips(parent, "BackWindowFrame", win_w, win_h, Vector3(0.0, win_y, z_plane), 0.0)
-
-
-func _build_front_small_window(parent: Node3D) -> void:
-	# Small window cut into the -Z front (signage) wall. Above signage by
-	# default; can be offset along X so it sits beside the centred signage.
-	var win_w: float = clamp(front_window_size.x, 0.3, max(0.3, room_width - 0.6))
-	var win_h: float = clamp(front_window_size.y, 0.3, max(0.3, room_height - 1.5))
-	var win_y: float = clamp(front_window_y, win_h * 0.5 + 0.1, room_height - win_h * 0.5 - 0.1)
-	var z_plane: float = -room_depth * 0.5 + WALL_THICKNESS * 0.5
-	var cx: float = clamp(front_window_offset_x, -room_width * 0.5 + win_w * 0.5 + 0.1, room_width * 0.5 - win_w * 0.5 - 0.1)
-
-	# Glass pane — placed slightly forward into the room so it reads as
-	# a hole in the existing front wall (rather than tearing the wall
-	# down, we layer a translucent panel inside the wall thickness).
-	var glass := MeshInstance3D.new()
-	glass.name = "FrontWindowGlass"
-	var gm := BoxMesh.new()
-	gm.size = Vector3(win_w, win_h, WALL_THICKNESS * 0.4)
-	glass.mesh = gm
-	var glass_mat := StandardMaterial3D.new()
-	glass_mat.albedo_color = Color(0.30, 0.42, 0.58, 0.55)
-	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	glass_mat.roughness = 0.18
-	glass_mat.metallic = 0.0
-	glass_mat.emission_enabled = true
-	glass_mat.emission = Color(0.40, 0.55, 0.78)
-	glass_mat.emission_energy_multiplier = 0.30
-	glass.material_override = glass_mat
-	glass.position = Vector3(cx, win_y, z_plane + WALL_THICKNESS * 0.25)
-	parent.add_child(glass)
-
-	_build_window_frame_strips(parent, "FrontWindowFrame", win_w, win_h, Vector3(cx, win_y, z_plane + WALL_THICKNESS * 0.25), 0.0)
+	# Frame trim around the opening — y_rot=PI so the frame's z_off
+	# (always -WALL_THICKNESS*0.5-ft*0.5 in local coords, pulling toward
+	# the room's interior for the back wall's z>0 plane) flips to point
+	# into the room from the front wall's z<0 plane instead.
+	_build_window_frame_strips(parent, "FrontWindowFrame", win_w, win_h, Vector3(win_cx, win_y, z_plane), PI)
 
 
 func _build_window_frame_strips(parent: Node3D, root_name: String, win_w: float, win_h: float, centre: Vector3, y_rot: float) -> void:
@@ -897,10 +1699,12 @@ func _build_window_frame_strips(parent: Node3D, root_name: String, win_w: float,
 	frame_mat.roughness = 0.4
 	frame_mat.metallic = 0.6
 
-	var ft: float = 0.05
+	# Frame: thicker (0.12 m chunks) and pulled clearly into the room
+	# so the frame edges don't co-plane with the wall mesh and z-fight.
+	var ft: float = 0.12
 	var half_w: float = win_w * 0.5
 	var half_h: float = win_h * 0.5
-	var z_off: float = -WALL_THICKNESS * 0.25 # slight pull toward interior
+	var z_off: float = -WALL_THICKNESS * 0.5 - ft * 0.5  # pull fully inside
 
 	# Top
 	var t := MeshInstance3D.new()
@@ -944,22 +1748,37 @@ func _build_sliding_door(parent: Node3D) -> void:
 	var door_root := Node3D.new()
 	door_root.name = "SlidingDoor"
 
-	# Place + orient the door according to door_wall. The local frame
-	# of door_root has X = door width, Y = up, Z = wall normal (outward).
+	# Place + orient the door according to door_wall. door_offset_x
+	# slides the door along the wall's long axis from its centre.
+	# Clamped so the door never overlaps the wall's perpendicular edge.
 	var pos: Vector3 = Vector3.ZERO
 	var y_rot: float = 0.0
+	var half_w: float = room_width * 0.5
+	var half_d: float = room_depth * 0.5
 	match door_wall:
-		"north":  # -Z front wall (signage wall — usually not chosen)
-			pos = Vector3(0.0, 0.0, -room_depth * 0.5 + WALL_THICKNESS * 0.5)
+		"north":  # -Z front wall — offset along X
+			var ox_n: float = clamp(door_offset_x,
+				-half_w + door_width * 0.5 + 0.2,
+				half_w - door_width * 0.5 - 0.2)
+			pos = Vector3(ox_n, 0.0, -half_d + WALL_THICKNESS * 0.5)
 			y_rot = PI
-		"south":  # +Z back wall
-			pos = Vector3(0.0, 0.0, room_depth * 0.5 - WALL_THICKNESS * 0.5)
+		"south":  # +Z back wall — offset along X
+			var ox_s: float = clamp(door_offset_x,
+				-half_w + door_width * 0.5 + 0.2,
+				half_w - door_width * 0.5 - 0.2)
+			pos = Vector3(ox_s, 0.0, half_d - WALL_THICKNESS * 0.5)
 			y_rot = 0.0
-		"west":   # -X wall
-			pos = Vector3(-room_width * 0.5 + WALL_THICKNESS * 0.5, 0.0, 0.0)
+		"west":   # -X wall — offset along Z
+			var oz_w: float = clamp(door_offset_x,
+				-half_d + door_width * 0.5 + 0.2,
+				half_d - door_width * 0.5 - 0.2)
+			pos = Vector3(-half_w + WALL_THICKNESS * 0.5, 0.0, oz_w)
 			y_rot = -PI * 0.5
-		"east", _:  # +X wall
-			pos = Vector3(room_width * 0.5 - WALL_THICKNESS * 0.5, 0.0, 0.0)
+		"east", _:  # +X wall — offset along Z
+			var oz_e: float = clamp(door_offset_x,
+				-half_d + door_width * 0.5 + 0.2,
+				half_d - door_width * 0.5 - 0.2)
+			pos = Vector3(half_w - WALL_THICKNESS * 0.5, 0.0, oz_e)
 			y_rot = PI * 0.5
 	door_root.position = pos
 	door_root.rotation = Vector3(0.0, y_rot, 0.0)
@@ -1041,25 +1860,32 @@ func _build_sliding_door(parent: Node3D) -> void:
 	indicator.position = Vector3(0.0, dh + ft + 0.06, fd * 0.25 + 0.10)
 	door_root.add_child(indicator)
 
-	# Two sliding panels. Default closed: panels meet at centre.
-	var panel_w: float = half_dw
+	# Sliding panel(s). When single_door is true, ONE full-width panel
+	# centred in the opening; it slides one direction (negative X, i.e.
+	# "left" relative to the door's local frame). When false, TWO
+	# half-width panels meet at centre and slide symmetrically outward.
+	var panel_w: float = dw if single_door else half_dw
 	var left_panel := MeshInstance3D.new()
 	left_panel.name = "DoorPanelLeft"
 	var lpm := BoxMesh.new()
 	lpm.size = Vector3(panel_w, dh, pt)
 	left_panel.mesh = lpm
 	left_panel.material_override = panel_mat
-	left_panel.position = Vector3(-panel_w * 0.5, dh * 0.5, 0.0)
+	# Single-door: panel sits in the centre of the opening.
+	# Two-door:  panel sits at -half_dw (its right edge meets the centre).
+	left_panel.position = Vector3((0.0 if single_door else -panel_w * 0.5), dh * 0.5, 0.0)
 	door_root.add_child(left_panel)
 
-	var right_panel := MeshInstance3D.new()
-	right_panel.name = "DoorPanelRight"
-	var rpm := BoxMesh.new()
-	rpm.size = Vector3(panel_w, dh, pt)
-	right_panel.mesh = rpm
-	right_panel.material_override = panel_mat
-	right_panel.position = Vector3(panel_w * 0.5, dh * 0.5, 0.0)
-	door_root.add_child(right_panel)
+	var right_panel: MeshInstance3D = null
+	if not single_door:
+		right_panel = MeshInstance3D.new()
+		right_panel.name = "DoorPanelRight"
+		var rpm := BoxMesh.new()
+		rpm.size = Vector3(panel_w, dh, pt)
+		right_panel.mesh = rpm
+		right_panel.material_override = panel_mat
+		right_panel.position = Vector3(panel_w * 0.5, dh * 0.5, 0.0)
+		door_root.add_child(right_panel)
 
 	# Proximity sensor Area3D. Place it on the door's interior side so it
 	# triggers as the player approaches from outside the room or from
@@ -1088,7 +1914,9 @@ func _build_sliding_door(parent: Node3D) -> void:
 	handler.set("indicator", indicator)
 	handler.set("area", area)
 	handler.set("panel_width", panel_w)
-	handler.set("open_offset", door_open_offset)
+	# Single door must slide the FULL door width to clear the opening.
+	# Two-door uses the configured open_offset per panel.
+	handler.set("open_offset", door_width if single_door else door_open_offset)
 	handler.set("open_color", Color(0.40, 1.00, 0.55))
 	handler.set("closed_color", Color(0.90, 0.22, 0.27))
 	door_root.add_child(handler)
@@ -1097,39 +1925,345 @@ func _build_sliding_door(parent: Node3D) -> void:
 # ── Ceiling ───────────────────────────────────────────────────────────
 
 func _build_ceiling() -> void:
+	# Thin substrate slab — the dark backing behind the tile grid.
+	# Without this, looking up between tiles would show through to
+	# the sky. Sits flush with the top of the room.
+	var substrate := MeshInstance3D.new()
+	substrate.name = "CeilingSubstrate"
+	var sm := BoxMesh.new()
+	sm.size = Vector3(room_width, CEILING_THICKNESS, room_depth)
+	substrate.mesh = sm
+	var substrate_mat := StandardMaterial3D.new()
+	substrate_mat.albedo_color = Color(0.10, 0.10, 0.12)
+	substrate_mat.roughness = 0.95
+	substrate.material_override = substrate_mat
+	substrate.position = Vector3(0.0, room_height - CEILING_THICKNESS * 0.5, 0.0)
+	add_child(substrate)
+
+	# Skylight + exposed variants keep their original behaviour — only
+	# the default tile_grid style now uses the reflective grid.
+	if ceiling_style == "skylight":
+		_build_skylight_panel()
+		_build_skylight_grid()
+		return
+	if ceiling_style == "exposed":
+		_build_exposed_ceiling()
+		return
+
+	# tile_grid (default): split the ceiling into ceiling_tile_size
+	# cells, render each tile as its own reflective panel, and draw
+	# thin T-grid lines between them.
+	var cols: int = max(1, int(round(room_width / ceiling_tile_size)))
+	var rows: int = max(1, int(round(room_depth / ceiling_tile_size)))
+	var cell_w: float = room_width / float(cols)
+	var cell_d: float = room_depth / float(rows)
+
+	# Reflective tile material — satin-gloss white with a hint of
+	# metallic so light fixtures and the floor read in the ceiling
+	# reflection. Roughness low enough to bounce specular highlights.
+	var tile_mat := StandardMaterial3D.new()
+	tile_mat.albedo_color = ceiling_color
+	tile_mat.roughness = 0.28
+	tile_mat.metallic = 0.18
+	tile_mat.metallic_specular = 0.75
+	tile_mat.clearcoat_enabled = true
+	tile_mat.clearcoat = 0.55
+	tile_mat.clearcoat_roughness = 0.18
+
+	# Grid line material — thin dark strips between tiles (the T-grid).
+	var grid_mat := StandardMaterial3D.new()
+	grid_mat.albedo_color = Color(0.18, 0.18, 0.21)
+	grid_mat.roughness = 0.65
+	grid_mat.metallic = 0.05
+
+	var tiles_root := Node3D.new()
+	tiles_root.name = "CeilingTiles"
+	add_child(tiles_root)
+
+	# Tiles hang BELOW the dark substrate so they're visible from inside
+	# the room. Substrate spans [room_height - CEILING_THICKNESS,
+	# room_height]; tiles sit centred just below that.
+	var tile_thick: float = 0.012
+	var tile_y: float = room_height - CEILING_THICKNESS - tile_thick * 0.5
+	var tile_gap: float = 0.04  # leaves room for the T-grid line between tiles
+
+	for i in range(cols):
+		for j in range(rows):
+			var tile := MeshInstance3D.new()
+			tile.name = "Tile_%d_%d" % [i, j]
+			var tm := BoxMesh.new()
+			tm.size = Vector3(cell_w - tile_gap, tile_thick, cell_d - tile_gap)
+			tile.mesh = tm
+			tile.material_override = tile_mat
+			var cx: float = -room_width * 0.5 + cell_w * (i + 0.5)
+			var cz: float = -room_depth * 0.5 + cell_d * (j + 0.5)
+			tile.position = Vector3(cx, tile_y, cz)
+			tiles_root.add_child(tile)
+
+	# Longitudinal grid lines (along Z, between columns).
+	for i in range(cols + 1):
+		var line := MeshInstance3D.new()
+		line.name = "GridLineZ_%d" % i
+		var lm := BoxMesh.new()
+		lm.size = Vector3(tile_gap, tile_thick * 0.5, room_depth)
+		line.mesh = lm
+		line.material_override = grid_mat
+		var lx: float = -room_width * 0.5 + cell_w * i
+		line.position = Vector3(lx, tile_y - tile_thick * 0.25, 0.0)
+		tiles_root.add_child(line)
+
+	# Transverse grid lines (along X, between rows).
+	for j in range(rows + 1):
+		var line := MeshInstance3D.new()
+		line.name = "GridLineX_%d" % j
+		var lm := BoxMesh.new()
+		lm.size = Vector3(room_width, tile_thick * 0.5, tile_gap)
+		line.mesh = lm
+		line.material_override = grid_mat
+		var lz: float = -room_depth * 0.5 + cell_d * j
+		line.position = Vector3(0.0, tile_y - tile_thick * 0.25, lz)
+		tiles_root.add_child(line)
+
+
+# Original simple ceiling slab (used by skylight variant via this helper).
+func _build_skylight_panel() -> void:
 	var ceil := MeshInstance3D.new()
 	ceil.name = "Ceiling"
 	var m := BoxMesh.new()
 	m.size = Vector3(room_width, CEILING_THICKNESS, room_depth)
 	ceil.mesh = m
 	var mat := StandardMaterial3D.new()
-	match ceiling_style:
-		"skylight":
-			# Bright frosted-glass panel feel — brighter albedo and slight emission.
-			mat.albedo_color = Color(0.96, 0.97, 1.0)
-			mat.roughness = 0.30
-			mat.metallic = 0.0
-			mat.emission_enabled = true
-			mat.emission = Color(1.0, 0.98, 0.92)
-			mat.emission_energy_multiplier = 0.55
-		"exposed":
-			# Darker industrial ceiling — the trays will read against it.
-			mat.albedo_color = Color(0.30, 0.30, 0.33)
-			mat.roughness = 0.85
-			mat.metallic = 0.1
-		_:
-			# default tile_grid (plain panel)
-			mat.albedo_color = ceiling_color
-			mat.roughness = 0.75
-			mat.metallic = 0.0
+	mat.albedo_color = Color(0.96, 0.97, 1.0)
+	mat.roughness = 0.30
+	mat.metallic = 0.0
+	mat.emission_enabled = true
+	mat.emission = Color(1.0, 0.98, 0.92)
+	mat.emission_energy_multiplier = 0.55
 	ceil.material_override = mat
 	ceil.position = Vector3(0.0, room_height - CEILING_THICKNESS * 0.5, 0.0)
 	add_child(ceil)
 
-	if ceiling_style == "exposed":
-		_build_exposed_ceiling()
-	elif ceiling_style == "skylight":
-		_build_skylight_grid()
+
+# ── Ceiling fixtures ──────────────────────────────────────────────────
+# Distribute vents / sprinklers / smoke sensors / speakers / light
+# panels deterministically across the ceiling. Uses a seeded RNG to
+# pick positions from a 6×4 candidate grid (with small jitter) so the
+# layout is reproducible — same seed = same pattern. Skips fixture
+# positions that overlap the floor window so the player can still see
+# through the floor.
+
+func _build_ceiling_fixtures() -> void:
+	if not show_ceiling_fixtures:
+		return
+	var fixtures_root := Node3D.new()
+	fixtures_root.name = "CeilingFixtures"
+	add_child(fixtures_root)
+
+	var rng := RandomNumberGenerator.new()
+	rng.seed = ceiling_fixtures_seed
+
+	# Use the SAME grid the ceiling tiles use, so each fixture sits at
+	# the exact centre of a tile cell (no jitter — they "sit in the
+	# grid" as the user requested).
+	var cols: int = max(1, int(round(room_width / ceiling_tile_size)))
+	var rows: int = max(1, int(round(room_depth / ceiling_tile_size)))
+	var cell_w: float = room_width / float(cols)
+	var cell_d: float = room_depth / float(rows)
+	var ceil_y: float = room_height - CEILING_THICKNESS
+
+	# Floor-window bounds (avoid placing fixtures directly above the
+	# glass so the player's downward view stays clear).
+	var fw_active: bool = show_floor_window
+	var fw_x_min: float = 0.0
+	var fw_x_max: float = 0.0
+	var fw_z_min: float = 0.0
+	var fw_z_max: float = 0.0
+	if fw_active:
+		var fw_w: float = floor_window_size.x
+		var fw_d: float = floor_window_size.y
+		fw_x_min = floor_window_offset.x - fw_w * 0.5
+		fw_x_max = floor_window_offset.x + fw_w * 0.5
+		fw_z_min = floor_window_offset.y - fw_d * 0.5
+		fw_z_max = floor_window_offset.y + fw_d * 0.5
+
+	# Build candidate position list at exact cell centres, excluding
+	# cells over the floor window.
+	var positions: Array = []
+	for i in range(cols):
+		for j in range(rows):
+			var x: float = -room_width * 0.5 + cell_w * (i + 0.5)
+			var z: float = -room_depth * 0.5 + cell_d * (j + 0.5)
+			if fw_active and x > fw_x_min and x < fw_x_max and z > fw_z_min and z < fw_z_max:
+				continue
+			positions.append(Vector3(x, ceil_y, z))
+
+	# Deterministic shuffle so the seeded RNG controls everything.
+	_seeded_shuffle(positions, rng)
+
+	# Consume positions in order — each fixture type uses N slots.
+	var idx: int = 0
+	for _i in range(ceiling_vent_count):
+		if idx >= positions.size(): break
+		_add_ceiling_vent_fixture(fixtures_root, positions[idx]); idx += 1
+	for _i in range(ceiling_sprinkler_count):
+		if idx >= positions.size(): break
+		_add_sprinkler_fixture(fixtures_root, positions[idx]); idx += 1
+	for _i in range(ceiling_sensor_count):
+		if idx >= positions.size(): break
+		_add_sensor_fixture(fixtures_root, positions[idx]); idx += 1
+	for _i in range(ceiling_speaker_count):
+		if idx >= positions.size(): break
+		_add_speaker_fixture(fixtures_root, positions[idx]); idx += 1
+	for _i in range(ceiling_light_count):
+		if idx >= positions.size(): break
+		_add_light_fixture(fixtures_root, positions[idx]); idx += 1
+
+
+# Fisher–Yates with our seeded RNG so positions order is reproducible.
+func _seeded_shuffle(arr: Array, rng: RandomNumberGenerator) -> void:
+	for i in range(arr.size() - 1, 0, -1):
+		var j: int = rng.randi_range(0, i)
+		var tmp = arr[i]
+		arr[i] = arr[j]
+		arr[j] = tmp
+
+
+# Each fixture is a small mesh mounted to the ceiling at the given
+# anchor (ceiling-bottom Y). Fixtures hang BELOW the ceiling plane
+# so they read as protrusions, not paint.
+
+func _add_ceiling_vent_fixture(parent: Node3D, anchor: Vector3) -> void:
+	# Square dark grate, 0.4×0.4 m, 0.04m deep.
+	var n := MeshInstance3D.new()
+	n.name = "Vent"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(0.40, 0.04, 0.40)
+	n.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.18, 0.20, 0.22)
+	mat.roughness = 0.55
+	mat.metallic = 0.5
+	n.material_override = mat
+	n.position = Vector3(anchor.x, anchor.y - 0.02, anchor.z)
+	parent.add_child(n)
+
+
+func _add_sprinkler_fixture(parent: Node3D, anchor: Vector3) -> void:
+	# Small disc (recessed in ceiling) + downward nozzle.
+	var disc := MeshInstance3D.new()
+	disc.name = "SprinklerDisc"
+	var dm := CylinderMesh.new()
+	dm.top_radius = 0.06
+	dm.bottom_radius = 0.06
+	dm.height = 0.012
+	disc.mesh = dm
+	var dmat := StandardMaterial3D.new()
+	dmat.albedo_color = Color(0.85, 0.85, 0.88)
+	dmat.roughness = 0.45
+	dmat.metallic = 0.3
+	disc.material_override = dmat
+	disc.position = Vector3(anchor.x, anchor.y - 0.006, anchor.z)
+	parent.add_child(disc)
+	# Brass-colored nozzle below the disc.
+	var nozzle := MeshInstance3D.new()
+	nozzle.name = "SprinklerNozzle"
+	var nm := CylinderMesh.new()
+	nm.top_radius = 0.022
+	nm.bottom_radius = 0.012
+	nm.height = 0.06
+	nozzle.mesh = nm
+	var nmat := StandardMaterial3D.new()
+	nmat.albedo_color = Color(0.82, 0.58, 0.22)  # brass
+	nmat.roughness = 0.35
+	nmat.metallic = 0.75
+	nozzle.material_override = nmat
+	nozzle.position = Vector3(anchor.x, anchor.y - 0.04, anchor.z)
+	parent.add_child(nozzle)
+
+
+func _add_sensor_fixture(parent: Node3D, anchor: Vector3) -> void:
+	# Smoke detector — white disc with red LED.
+	var disc := MeshInstance3D.new()
+	disc.name = "SmokeDetector"
+	var dm := CylinderMesh.new()
+	dm.top_radius = 0.075
+	dm.bottom_radius = 0.075
+	dm.height = 0.025
+	disc.mesh = dm
+	var dmat := StandardMaterial3D.new()
+	dmat.albedo_color = Color(0.94, 0.94, 0.95)
+	dmat.roughness = 0.45
+	dmat.metallic = 0.0
+	disc.material_override = dmat
+	disc.position = Vector3(anchor.x, anchor.y - 0.012, anchor.z)
+	parent.add_child(disc)
+	# LED dot
+	var led := MeshInstance3D.new()
+	led.name = "SensorLED"
+	var lm := SphereMesh.new()
+	lm.radius = 0.008
+	lm.height = 0.016
+	led.mesh = lm
+	var lmat := StandardMaterial3D.new()
+	lmat.albedo_color = Color(0.95, 0.20, 0.22)
+	lmat.emission_enabled = true
+	lmat.emission = Color(0.95, 0.20, 0.22)
+	lmat.emission_energy_multiplier = 2.2
+	lmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	led.material_override = lmat
+	led.position = Vector3(anchor.x + 0.03, anchor.y - 0.025, anchor.z + 0.02)
+	parent.add_child(led)
+
+
+func _add_speaker_fixture(parent: Node3D, anchor: Vector3) -> void:
+	# Round overhead speaker — disc + slightly proud rim.
+	var ring := MeshInstance3D.new()
+	ring.name = "SpeakerRim"
+	var rm := CylinderMesh.new()
+	rm.top_radius = 0.10
+	rm.bottom_radius = 0.10
+	rm.height = 0.015
+	ring.mesh = rm
+	var rmat := StandardMaterial3D.new()
+	rmat.albedo_color = Color(0.25, 0.26, 0.30)
+	rmat.roughness = 0.55
+	rmat.metallic = 0.35
+	ring.material_override = rmat
+	ring.position = Vector3(anchor.x, anchor.y - 0.007, anchor.z)
+	parent.add_child(ring)
+	# Cone (slightly recessed darker disc)
+	var cone := MeshInstance3D.new()
+	cone.name = "SpeakerCone"
+	var cm := CylinderMesh.new()
+	cm.top_radius = 0.075
+	cm.bottom_radius = 0.075
+	cm.height = 0.005
+	cone.mesh = cm
+	var cmat := StandardMaterial3D.new()
+	cmat.albedo_color = Color(0.08, 0.09, 0.11)
+	cmat.roughness = 0.85
+	cone.material_override = cmat
+	cone.position = Vector3(anchor.x, anchor.y - 0.018, anchor.z)
+	parent.add_child(cone)
+
+
+func _add_light_fixture(parent: Node3D, anchor: Vector3) -> void:
+	# Recessed flat light panel — 0.9 × 0.3 m, glows slightly.
+	var p := MeshInstance3D.new()
+	p.name = "LightPanel"
+	var pm := BoxMesh.new()
+	pm.size = Vector3(0.9, 0.03, 0.3)
+	p.mesh = pm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.96, 0.97, 1.00)
+	mat.emission_enabled = true
+	mat.emission = Color(1.0, 0.98, 0.92)
+	mat.emission_energy_multiplier = 0.9
+	mat.roughness = 0.25
+	mat.metallic = 0.0
+	p.material_override = mat
+	p.position = Vector3(anchor.x, anchor.y - 0.014, anchor.z)
+	parent.add_child(p)
 
 
 func _build_exposed_ceiling() -> void:
@@ -1217,6 +2351,162 @@ func _build_skylight_grid() -> void:
 		b.position = Vector3(0.0, ceiling_y, z)
 		b.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		beams.add_child(b)
+
+
+# ── Wall bands ────────────────────────────────────────────────────────
+# Header (top), footer (bottom), and optional mid-band — horizontal
+# strips on the INSIDE of every wall, pulled ~1cm into the room so they
+# read as cladding instead of co-planar wall paint.
+
+# Walk every MeshInstance3D in the lab and, for any using the wall-band
+# shader, set its lab_world_y uniform to our current global Y. Called
+# deferred from _ready so global_position is valid by then, and again
+# from apply_grid_config so the bands stay correct if the lab moves
+# after a config update.
+func _patch_band_shader_world_y_offset() -> void:
+	var y_off: float = global_position.y
+	_patch_band_shader_recurse(self, y_off)
+
+
+func _patch_band_shader_recurse(node: Node, y_off: float) -> void:
+	if node is MeshInstance3D:
+		var mi := node as MeshInstance3D
+		var m := mi.material_override
+		if m is ShaderMaterial:
+			var sm := m as ShaderMaterial
+			if sm.shader == WALL_BAND_SHADER:
+				sm.set_shader_parameter("lab_world_y", y_off)
+	for c in node.get_children():
+		_patch_band_shader_recurse(c, y_off)
+
+
+func _build_wall_bands() -> void:
+	if not (show_wall_header or show_wall_footer or show_wall_band):
+		return
+	var bands_root := Node3D.new()
+	bands_root.name = "WallBands"
+	add_child(bands_root)
+
+	if show_wall_header and wall_header_height > 0.001:
+		var hdr_y: float = room_height - wall_header_height * 0.5
+		_add_band_loop(bands_root, "WallHeader", hdr_y, wall_header_height, wall_header_color)
+	if show_wall_footer and wall_footer_height > 0.001:
+		var ftr_y: float = wall_footer_height * 0.5
+		_add_band_loop(bands_root, "WallFooter", ftr_y, wall_footer_height, wall_footer_color)
+	if show_wall_band and wall_band_height > 0.001:
+		_add_band_loop(bands_root, "WallBand", wall_band_y_centre, wall_band_height, wall_band_color)
+
+
+# Compute the list of [min, max] cutout x-ranges that intersect the
+# band at (band_y_centre, band_height) on the given wall side. Used to
+# split each band into segments instead of drawing across windows and
+# doorways.
+func _cutouts_intersecting_band(side: String, y_centre: float, h: float) -> Array:
+	var band_y_min: float = y_centre - h * 0.5
+	var band_y_max: float = y_centre + h * 0.5
+	var cutouts: Array = []
+	# Door
+	if show_sliding_door and door_wall == side:
+		if 0.0 <= band_y_max and door_height >= band_y_min:
+			cutouts.append([door_offset_x - door_width * 0.5,
+				door_offset_x + door_width * 0.5])
+	# Back / front window — vertically centred on the wall.
+	var win_y: float = room_height * 0.5
+	if side == "south" and show_back_window:
+		var bw_h: float = back_window_size.y
+		var bw_y_min: float = win_y - bw_h * 0.5
+		var bw_y_max: float = win_y + bw_h * 0.5
+		if bw_y_min <= band_y_max and bw_y_max >= band_y_min:
+			cutouts.append([back_window_offset_x - back_window_size.x * 0.5,
+				back_window_offset_x + back_window_size.x * 0.5])
+	if side == "north" and show_front_window:
+		var fw_h: float = front_window_size.y
+		var fw_y_min: float = win_y - fw_h * 0.5
+		var fw_y_max: float = win_y + fw_h * 0.5
+		if fw_y_min <= band_y_max and fw_y_max >= band_y_min:
+			cutouts.append([front_window_offset_x - front_window_size.x * 0.5,
+				front_window_offset_x + front_window_size.x * 0.5])
+	cutouts.sort_custom(func(a, b): return a[0] < b[0])
+	return cutouts
+
+
+# Add one band around the room's interior — segmented per wall so the
+# band doesn't draw across doors or windows. Each strip is pulled 1cm
+# toward the room interior so it doesn't z-fight with the wall mesh.
+func _add_band_loop(parent: Node3D, n: String, y_centre: float, h: float, c: Color) -> void:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = c
+	mat.roughness = 0.55
+	mat.metallic = 0.30
+	var inset: float = 0.01
+	var strip_t: float = 0.04
+
+	# Each wall built separately so each can split independently.
+	_add_band_wall_segments(parent, "%s_N" % n, "north",
+		y_centre, h, mat, inset, strip_t)
+	_add_band_wall_segments(parent, "%s_S" % n, "south",
+		y_centre, h, mat, inset, strip_t)
+	_add_band_wall_segments(parent, "%s_E" % n, "east",
+		y_centre, h, mat, inset, strip_t)
+	_add_band_wall_segments(parent, "%s_W" % n, "west",
+		y_centre, h, mat, inset, strip_t)
+
+
+# Build segmented band strips along ONE wall. Walks the wall's long
+# axis (X for N/S, Z for E/W), inserting cutouts where the band
+# would cross a window or doorway, drawing a strip between each gap.
+func _add_band_wall_segments(parent: Node3D, n: String, side: String,
+		y_centre: float, h: float, mat: Material,
+		inset: float, strip_t: float) -> void:
+	var cutouts: Array = _cutouts_intersecting_band(side, y_centre, h)
+	var axis_runs_x: bool = (side == "north" or side == "south")
+	var axis_extent: float = (room_width if axis_runs_x else room_depth) * 0.5
+
+	# Wall-plane position (perpendicular axis fixed).
+	var perp_pos: float
+	match side:
+		"north": perp_pos = -room_depth * 0.5 + WALL_THICKNESS + inset + strip_t * 0.5
+		"south": perp_pos =  room_depth * 0.5 - WALL_THICKNESS - inset - strip_t * 0.5
+		"east":  perp_pos =  room_width * 0.5 - WALL_THICKNESS - inset - strip_t * 0.5
+		"west":  perp_pos = -room_width * 0.5 + WALL_THICKNESS + inset + strip_t * 0.5
+		_: return
+
+	# Walk the axis adding segments.
+	var cursor: float = -axis_extent
+	var seg_index: int = 0
+	for cutout in cutouts:
+		var cut_left: float = max(cutout[0], -axis_extent)
+		var cut_right: float = min(cutout[1], axis_extent)
+		if cut_left > cursor:
+			_add_band_segment(parent, "%s_%d" % [n, seg_index], side,
+				cursor, cut_left, y_centre, h, mat, strip_t, perp_pos)
+			seg_index += 1
+		cursor = max(cursor, cut_right)
+	if cursor < axis_extent:
+		_add_band_segment(parent, "%s_%d" % [n, seg_index], side,
+			cursor, axis_extent, y_centre, h, mat, strip_t, perp_pos)
+
+
+func _add_band_segment(parent: Node3D, n: String, side: String,
+		axis_min: float, axis_max: float, y_centre: float, h: float,
+		mat: Material, strip_t: float, perp_pos: float) -> void:
+	var seg_len: float = axis_max - axis_min
+	if seg_len <= 0.001:
+		return
+	var seg_centre: float = (axis_min + axis_max) * 0.5
+	var m := MeshInstance3D.new()
+	m.name = n
+	var bm := BoxMesh.new()
+	var axis_runs_x: bool = (side == "north" or side == "south")
+	if axis_runs_x:
+		bm.size = Vector3(seg_len, h, strip_t)
+		m.position = Vector3(seg_centre, y_centre, perp_pos)
+	else:
+		bm.size = Vector3(strip_t, h, seg_len)
+		m.position = Vector3(perp_pos, y_centre, seg_centre)
+	m.mesh = bm
+	m.material_override = mat
+	parent.add_child(m)
 
 
 # ── Accent strip ──────────────────────────────────────────────────────
