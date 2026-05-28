@@ -38,16 +38,32 @@ var _force_shader_mat: ShaderMaterial = null
 @export var attraction_max_force: float = 40.0
 @export var attractor_collision_mask: int = 0xFFFFFFFF
 
-# ── Two-hand projectile fire ────────────────────────────────────────────
+# ── Projectile fire — shared params ────────────────────────────────────
 @export var ball_speed: float = 6.0
 @export var ball_radius: float = 0.04
 @export var ball_lifetime: float = 2.0
 @export var ball_color: Color = Color(1.0, 0.62, 0.18)
 @export var ball_emission_energy: float = 2.5
-## Minimum time between projectile spawns (prevents the orb_formed
-## signal from creating a stream of overlapping balls).
+## Minimum time between projectile spawns from the orb_formed signal.
 @export var ball_cooldown: float = 0.20
 var _ball_cooldown_t: float = 0.0
+
+# ── Fire-mode triggers (composable — leave them all on by default) ─────
+## When TRUE, projectiles fire continuously while both hands hold the
+## artifact (XRToolsPickable's SECOND mode). Releases the moment one
+## hand lets go. This is the default trigger the user can test in VR.
+@export var fire_on_double_grab: bool = true
+## Balls / second while double-grabbed.
+@export var double_grab_fire_rate: float = 4.0
+## When TRUE, the OrbGestureDetector two-hand close gesture also fires
+## a single ball per orb_formed. Leave on if you want both triggers
+## composing; turn off to isolate the double-grab test.
+@export var fire_on_orb_formed: bool = false
+
+# Tracked between grab + released callbacks. Goes TRUE the frame a
+# second hand joins, FALSE the frame either hand lets go.
+var _double_grabbed: bool = false
+var _double_grab_fire_t: float = 0.0
 
 # ── XR rig + gesture-detector refs ──────────────────────────────────────
 var _orb_detector: Node = null
@@ -60,6 +76,13 @@ func _ready() -> void:
 		return
 	_install_force_shader()
 	_connect_orb_detector()
+	# XRToolsPickable signals — grabbed/released fire for first AND
+	# second hand. We re-check _grab_driver.secondary after each to
+	# decide whether the artifact is double-grabbed RIGHT NOW.
+	if has_signal("grabbed") and not grabbed.is_connected(_on_grabbed_any):
+		grabbed.connect(_on_grabbed_any)
+	if has_signal("released") and not released.is_connected(_on_released_any):
+		released.connect(_on_released_any)
 
 
 # Replace the base class's _glow_material with our shader material so the
@@ -113,6 +136,20 @@ func _process(delta: float) -> void:
 	if _ball_cooldown_t > 0.0:
 		_ball_cooldown_t = max(0.0, _ball_cooldown_t - delta)
 
+	# Double-grab continuous fire. Gated on engaged morph so balls only
+	# flow after the field has actually formed (avoids spawning balls
+	# at pickup-instant before morph_t has climbed).
+	if fire_on_double_grab and _double_grabbed and _is_held and _morph_t >= morph_engage_threshold:
+		_double_grab_fire_t -= delta
+		if _double_grab_fire_t <= 0.0:
+			_double_grab_fire_t = 1.0 / max(double_grab_fire_rate, 0.1)
+			var dir: Vector3 = _double_grab_fire_direction()
+			_spawn_projectile_ball(global_position, dir)
+	else:
+		# Decay timer so the next double-grab fires immediately rather
+		# than waiting out a half-tick from the previous session.
+		_double_grab_fire_t = 0.0
+
 
 # Apply the force-field pull every physics tick.
 func _physics_process(_delta: float) -> void:
@@ -163,6 +200,8 @@ func _attract_nearby_bodies() -> void:
 func _on_orb_formed(_mode: String, origin: Vector3, direction: Vector3, two_handed: bool) -> void:
 	if Engine.is_editor_hint():
 		return
+	if not fire_on_orb_formed:
+		return
 	if not _is_held or _morph_t < morph_engage_threshold:
 		return
 	if not two_handed:
@@ -171,6 +210,44 @@ func _on_orb_formed(_mode: String, origin: Vector3, direction: Vector3, two_hand
 		return
 	_ball_cooldown_t = ball_cooldown
 	_spawn_projectile_ball(origin, direction)
+
+
+# XRToolsPickable fires `grabbed(self, by)` for first AND second hand.
+# After the signal, _grab_driver.secondary is non-null iff this is
+# the second hand. Track it so _process knows whether to fire.
+func _on_grabbed_any(_pickable, _by) -> void:
+	_double_grabbed = _is_currently_double_grabbed()
+	if _double_grabbed:
+		_double_grab_fire_t = 0.0  # fire immediately on engage
+
+
+# `released(self, by)` fires for either hand letting go. If after this
+# the secondary slot is null OR the whole grab driver is gone, we're
+# no longer double-grabbed.
+func _on_released_any(_pickable, _by) -> void:
+	_double_grabbed = _is_currently_double_grabbed()
+
+
+func _is_currently_double_grabbed() -> bool:
+	# _grab_driver is the XRToolsGrabDriver instance from the addon.
+	# Its .secondary field holds the second Grab when both hands are
+	# engaged; otherwise it's null.
+	if _grab_driver == null:
+		return false
+	if not is_instance_valid(_grab_driver):
+		return false
+	var sec = _grab_driver.get("secondary")
+	return sec != null
+
+
+# Forward direction for double-grab fire. The artifact's own basis
+# follows the primary grab point's orientation, so -Z gives "where
+# the hand is pointing" without needing to walk the rig manually.
+func _double_grab_fire_direction() -> Vector3:
+	var fwd: Vector3 = -global_transform.basis.z
+	if fwd.length_squared() < 0.001:
+		fwd = Vector3.FORWARD
+	return fwd.normalized()
 
 
 func _spawn_projectile_ball(origin: Vector3, direction: Vector3) -> void:
