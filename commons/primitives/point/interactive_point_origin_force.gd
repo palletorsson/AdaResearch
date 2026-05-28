@@ -25,6 +25,23 @@ class_name InteractivePointOriginForce
 
 const FORCE_SHADER: Shader = preload("res://commons/primitives/point/force_catalyst.gdshader")
 
+# ── Catalyst-mode palettes ──────────────────────────────────────────────
+# Three-stop colour ramps borrowed from CatalystOrb.gd so the artifact's
+# field shell + projectile balls + line-to-origin all line up visually
+# with the rest of the catalyst system. Palette = [deepest, mid, lightest].
+# Add new mode entries here; #mode:<name> in map_data tokens picks one.
+const MODE_PALETTES := {
+	"forces":    [Color(0.95, 0.65, 0.20), Color(0.95, 0.85, 0.30), Color(1.00, 1.00, 0.75)],
+	"branching": [Color(0.30, 0.55, 0.30), Color(0.45, 0.85, 0.50), Color(0.85, 0.95, 0.70)],
+	"swarm":     [Color(0.85, 0.45, 0.05), Color(1.00, 0.75, 0.20), Color(1.00, 0.95, 0.65)],
+	"primitives":[Color(0.20, 0.50, 0.95), Color(0.45, 0.80, 1.00), Color(0.85, 0.95, 1.00)],
+}
+
+# Which catalyst-mode palette to apply. Empty = leave the @export-set
+# colours alone. Driven from map_data tokens (#mode:forces) or set in
+# the editor on a per-instance basis.
+@export var mode: String = ""
+
 # ── Morph state ──────────────────────────────────────────────────────────
 @export var morph_speed: float = 1.4              # seconds 0 → 1
 @export var morph_engage_threshold: float = 0.5   # attraction + projectile fire above this
@@ -75,6 +92,11 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	_install_force_shader()
+	# Apply the named-mode palette AFTER the shader is installed so the
+	# force_color uniform is in scope, but BEFORE the orb detector
+	# hooks fire so projectile balls also pick up the mode colour.
+	if mode != "":
+		_apply_mode(mode)
 	_connect_orb_detector()
 	# XRToolsPickable signals — grabbed/released fire for first AND
 	# second hand. We re-check _grab_driver.secondary after each to
@@ -305,6 +327,9 @@ func _spawn_projectile_ball(origin: Vector3, direction: Vector3) -> void:
 
 
 # Allow per-instance tweaks from the lab editor / map_data tokens.
+# Example token in interactables layer:
+#   interactive_point_origin_force:0:1#mode:forces
+#   interactive_point_origin_force:0:1#mode:branching#ball_speed:8.0
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("attraction_radius"):
 		attraction_radius = float(config_data["attraction_radius"])
@@ -316,3 +341,41 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		ball_lifetime = float(config_data["ball_lifetime"])
 	if config_data.has("morph_speed"):
 		morph_speed = float(config_data["morph_speed"])
+	if config_data.has("mode"):
+		mode = str(config_data["mode"])
+		# Re-apply if we're already inside _ready / past the initial
+		# call. _apply_mode is safe to call multiple times.
+		_apply_mode(mode)
+
+
+# Apply a named catalyst-mode palette to every colour-bearing channel
+# the artifact owns: the force-field shader's deepest tone, the ball
+# projectiles' mid tone, the omni-light glow's lightest tone, and the
+# line-to-origin line for held mode. Unknown mode names log a warning
+# and leave the existing colours alone.
+func _apply_mode(mode_id: String) -> void:
+	if mode_id == "":
+		return
+	if not MODE_PALETTES.has(mode_id):
+		push_warning("interactive_point_origin_force: unknown mode '%s' (known: %s)"
+			% [mode_id, str(MODE_PALETTES.keys())])
+		return
+	var palette: Array = MODE_PALETTES[mode_id]
+	var deepest: Color = palette[0]
+	var mid: Color = palette[1]
+	var lightest: Color = palette[2]
+	# Shader force-colour uniform — the morphed-field shell tone.
+	if _force_shader_mat:
+		_force_shader_mat.set_shader_parameter("force_color", deepest)
+	# Projectile ball colour + emission tint.
+	ball_color = mid
+	# Held-line colour (inherited from interactive_point_origin). Set on
+	# the actual material if it's already built.
+	line_color = mid
+	if _line_material:
+		_line_material.albedo_color = mid
+		_line_material.emission = mid
+	# OmniLight glow (light_color on the inherited light, if present).
+	var omni: OmniLight3D = get_node_or_null("MeshInstance3D/OmniLight3D")
+	if omni:
+		omni.light_color = lightest

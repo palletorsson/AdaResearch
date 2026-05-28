@@ -24,7 +24,7 @@ const CONFIG_PARAM_NAMES = [
 	# Configurable portal / transform params
 	"rot_x", "rot_y", "rot_z", "pos_x", "pos_y", "pos_z",
 	"dest", "dest_x", "dest_y", "dest_z", "dest_map", "map", "spawn",
-	"label", "color1", "color2", "energy", "frame", "active", "cooldown",
+	"label", "color1", "color2", "energy", "frame", "active", "cooldown", "mode",
 	# Wave/burst pattern params
 	"wave", "wave_rows", "wave_flat", "wave_max", "wave_axis",
 	"burst", "burst_rotate", "burst_flat", "burst_axis",
