@@ -2,28 +2,39 @@
 extends Node3D
 
 # @identity
-# essence: X=red, Y=green, Z=blue axes at 3m length — the standard right-handed coordinate frame made visible
+# essence: X=red, Y=green, Z=blue axes at 3m length — the standard right-handed coordinate frame made visible, now built from the CoordinateLine primitive so every axis carries the same tick-mark ruler vocabulary
 # desire: learner stands inside the coordinate system and feels orientation as embodied direction
 # critical_parameter: axis_length = 3.0 — at half-scale (scale 0.5) these appear as 1.5m axes in world space
 # triggers: runtime adds info panel and gyroscope gadget showing orientation relative to viewer
-# emerges: the arbitrary nature of axis conventions — right-handed vs left-handed, Y-up vs Z-up are choices
-# needs: [has info panel [has], has gyroscope gadget [has], missing axis-label toggle or length slider]
-# relationships: used in vectors sequence; the gyroscope gadget adds interactive orientation feedback
-# truth: a coordinate system is a choice of three mutually perpendicular directions with an agreed origin
+# emerges: the arbitrary nature of axis conventions — right-handed vs left-handed, Y-up vs Z-up are choices; AND tick marks make the chosen frame's scale legible
+# needs: [has info panel [has], has gyroscope gadget [has], CoordinateLine primitive as shared axis vocabulary [present, 2026-05-19]]
+# relationships: used in vectors sequence; embedded by xyz_slider_plate as the workspace coordinate frame; the gyroscope gadget adds interactive orientation feedback; consumes CoordinateLine primitive (three instances, one per axis, rotated to +X/+Y/+Z)
+# truth: a coordinate system is a choice of three mutually perpendicular directions with an agreed origin — and the rulers along those directions tell you what the choice actually measures
 
 # Coordinate System Visualization
 # Illustrates X, Y, Z axes with 3m length.
 
 const GyroscopeGadgetScript = preload("res://algorithms/vectors/shared/gadgets/gyroscope_gadget.gd")
+const CoordinateLineScript = preload("res://commons/primitives/line/coordinate_line.gd")
 
 @export var axis_length: float = 3.0
 @export var axis_thickness: float = 0.02 # Thinner lines
+## Spacing for tick marks along each axis, in axis-length units. Default 0.5
+## gives ticks every 0.5 m along a 3 m axis — six ticks per axis, marking the
+## scale clearly. Set to 0.0 to suppress ticks.
+@export var tick_step: float = 0.5
+## Uniform scale applied in _ready(). 0.5 = half-size exhibition default
+## (was the hardcoded value). 1.5 = 3× exhibition size, useful inside
+## taller rooms where the coordinate frame should fill the space.
+## Driveable from map_data via `CoordinateSystem3M:0:0#display_scale:1.5`.
+@export var display_scale: float = 1.5
 
 var gyroscope: Node3D
 
 func _ready() -> void:
-	# Half-size for exhibition display
-	scale = Vector3(0.5, 0.5, 0.5)
+	# Uniform display scale — controlled by the display_scale @export
+	# (default 1.5 = 3× the original exhibition half-size).
+	scale = Vector3(display_scale, display_scale, display_scale)
 
 	# Clear existing children to avoid duplication if running in tool mode updates
 	for child in get_children():
@@ -140,58 +151,45 @@ func _add_gyroscope() -> void:
 	add_child(gyroscope)
 
 func create_axis(direction: Vector3, color: Color, label_text: String) -> void:
-	# 1. The Shaft (Cylinder)
-	var mesh_instance = MeshInstance3D.new()
-	var mesh = CylinderMesh.new()
-	mesh.top_radius = axis_thickness
-	mesh.bottom_radius = axis_thickness
-	mesh.height = axis_length
-	mesh_instance.mesh = mesh
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	
-	# Transparency settings
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.albedo_color.a = 0.5 # 50% Transparent
-	
-	mesh_instance.material_override = material
-	
-	# Position: The cylinder is centered at (0,0,0) by default.
-	# We want it to start at (0,0,0) and go to direction * length.
-	# So center should be at direction * (length / 2).
-	mesh_instance.position = direction * (axis_length / 2.0)
-	
-	# Orientation: Cylinder is Y-aligned by default.
-	# We need to rotate it to match 'direction'.
-	if direction != Vector3.UP:
-		var up = Vector3.UP
-		var axis = up.cross(direction).normalized()
-		var angle = up.angle_to(direction)
-		mesh_instance.rotate(axis, angle)
-		
-	add_child(mesh_instance)
-	
-	# 2. The Tip (Cone)
-	var cone_instance = MeshInstance3D.new()
-	var cone = CylinderMesh.new()
-	cone.top_radius = 0.0
-	cone.bottom_radius = axis_thickness * 2.5
-	cone.height = axis_thickness * 4.0
-	cone_instance.mesh = cone
-	cone_instance.material_override = material
-	
-	cone_instance.position = direction * axis_length
-	if direction != Vector3.UP:
-		var up = Vector3.UP
-		var axis = up.cross(direction).normalized()
-		var angle = up.angle_to(direction)
-		cone_instance.rotate(axis, angle)
-		
-	add_child(cone_instance)
-	
-	# 3. The Label (Label3D)
+	# Build a CoordinateLine instance for the shaft + arrow + ticks. Its internal
+	# geometry is along +X; we rotate the whole node to point at `direction`.
+	# This replaces the inline CylinderMesh+cone duplication that used to live
+	# here. The migration ensures tick marks propagate to every consumer
+	# (xyz_slider_plate, etc.) without changes there.
+	var axis_node: Node3D = Node3D.new()
+	axis_node.script = CoordinateLineScript
+	axis_node.length = axis_length
+	axis_node.thickness = axis_thickness
+	axis_node.color = color
+	axis_node.arrow_size = axis_thickness * 4.0       # match the old cone proportions
+	axis_node.from_origin = true                       # axis starts at origin, extends +length
+	axis_node.unshaded = true                          # match the old unshaded look
+	axis_node.alpha = 0.5                              # match the old 50% transparent look
+	axis_node.show_ticks = tick_step > 0.0
+	axis_node.tick_step = tick_step
+	axis_node.tick_size = axis_thickness * 2.5         # tick crosses are a bit wider than the shaft
+	axis_node.tick_thickness = axis_thickness * 0.6    # tick bars thinner than the shaft
+
+	# Rotate axis_node from local +X to the world direction. Three cases for the
+	# standard right-handed frame; falls back to a general from-+X rotation for
+	# any other unit vector.
+	if direction == Vector3.RIGHT:
+		pass                                            # identity — already points along +X
+	elif direction == Vector3.UP:
+		axis_node.rotate(Vector3.FORWARD, deg_to_rad(-90.0))   # +X → +Y
+	elif direction == Vector3.BACK:
+		axis_node.rotate(Vector3.UP, deg_to_rad(90.0))         # +X → +Z (Godot Vector3.BACK = +Z)
+	else:
+		var from := Vector3.RIGHT
+		var d := direction.normalized()
+		if from.cross(d).length_squared() > 1e-8:
+			var rot_axis := from.cross(d).normalized()
+			var angle := from.angle_to(d)
+			axis_node.rotate(rot_axis, angle)
+	add_child(axis_node)
+
+	# Label (Label3D) — kept here so the label-positioning logic stays a
+	# CoordinateSystem3M concern. CoordinateLine doesn't ship a label.
 	var label = Label3D.new()
 	label.text = label_text
 	label.modulate = color
@@ -207,4 +205,13 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# map_data tokens: CoordinateSystem3M:0:0#display_scale:1.5
+	if config.has("display_scale"):
+		display_scale = float(config["display_scale"])
+		scale = Vector3(display_scale, display_scale, display_scale)
+	if config.has("axis_length"):
+		axis_length = float(config["axis_length"])
+	if config.has("axis_thickness"):
+		axis_thickness = float(config["axis_thickness"])
+	if config.has("tick_step"):
+		tick_step = float(config["tick_step"])
