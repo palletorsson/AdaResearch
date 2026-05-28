@@ -76,6 +76,13 @@ const PLATE_TILT_DEG: float = 28.0
 const POSE_LEFT_PATH: String  = "res://addons/godot-xr-tools/hands/poses/pose_default_left.tres"
 const POSE_RIGHT_PATH: String = "res://addons/godot-xr-tools/hands/poses/pose_default_right.tres"
 const HAND_POSE_AREA_SCENE: String = "res://addons/godot-xr-tools/objects/hand_pose_area.tscn"
+## Pre-built XR Tools button — same one push_button.tscn uses. We
+## instance it on the scan plate so the detection chain (layers, signals,
+## hand-poke handling) is byte-for-byte identical to every other
+## working interactable in the project. See commons/interactables/
+## push_button.tscn + control_board.gd line 222 for the reference
+## pattern.
+const PUSH_BUTTON_SCENE: String = "res://commons/interactables/push_button.tscn"
 ## Rack-aesthetic materials shared with the interactables in
 ## res://commons/interactables — using the same palette keeps the
 ## scanner reading as "lab kit" rather than a one-off prop.
@@ -509,40 +516,64 @@ func _parse_color(s: String, fallback: Color) -> Color:
 
 # ── Interaction ───────────────────────────────────────────────────────
 
-# Build the scan-trigger Area3D in front of the scan window using the
-# proven push_button collision config:
-#   - layer 1048576 = bit 21 = XR Tools interactable-area layer (the
-#     layer hands monitor for "I can touch this").
-#   - mask  393216  = bits 18+19 = the layers XR Tools collision-hands
-#     and controller bodies actually sit on.
-# Same numbers as commons/interactables/push_button.tscn, which is the
-# known-working reference for "place a flat hand on a surface and have
-# the engine fire a signal".
+# Build the scan-trigger by INSTANCING push_button.tscn directly. The
+# push_button scene carries the proven XRToolsInteractableAreaButton
+# config (layers, masks, body/area entered+exited signals all hooked
+# in the script's _ready) plus its Rumbler + HandPoseArea siblings.
+# This is the same idiom every working interactable in the project
+# uses — see control_board.gd line 222 for the canonical example.
+#
+# Visual: we hide the round button mesh + accent ring + base so the
+# emerald scan window stays the dominant visual; only the proven
+# Area3D detection remains.
 func _build_scan_area() -> void:
 	if not scan_active:
 		return
 	var anchor: Node3D = get_node_or_null("Panel")
 	if anchor == null:
 		anchor = self
-	_scan_area = Area3D.new()
-	_scan_area.name = "ScanArea"
-	_scan_area.collision_layer = 1 << 20     # 1048576 — bit 21
-	_scan_area.collision_mask  = (1 << 17) | (1 << 18)   # 393216 — bits 18+19
-	_scan_area.monitoring = true
-	_scan_area.monitorable = true
 
-	var cs := CollisionShape3D.new()
-	var sphere := SphereShape3D.new()
-	sphere.radius = scan_radius
-	cs.shape = sphere
-	# Sit slightly proud of the scan window face (+Z) so the centre
-	# of the volume is where a player's palm naturally hovers.
-	cs.position = Vector3(0.0, 0.0, panel_depth * 0.5 + scan_radius * 0.5)
-	_scan_area.add_child(cs)
+	var btn_pack: PackedScene = load(PUSH_BUTTON_SCENE) as PackedScene
+	if btn_pack == null:
+		push_warning("PalmScanner: could not load push_button.tscn")
+		return
+	var btn: Node3D = btn_pack.instantiate()
+	if btn == null:
+		return
+	btn.name = "ScanButton"
 
-	_scan_area.body_entered.connect(_on_scan_body_entered)
-	_scan_area.area_entered.connect(_on_scan_area_entered)
-	anchor.add_child(_scan_area)
+	# Place at the scan window face, slightly forward.
+	var window_face_z: float = panel_depth * 0.5 + SCAN_DEPTH + 0.001
+	var window_y: float = panel_height * 0.06
+	btn.position = Vector3(0.0, window_y, window_face_z)
+	# push_button.tscn applies a -X rotation in its scene root that
+	# orients the button "press" axis along its parent's +Y. We re-
+	# rotate so the press axis points along our panel's +Z (the scan
+	# face). Concretely: rotate +90° on X to face forward.
+	btn.rotation = Vector3(deg_to_rad(90.0), 0.0, 0.0)
+	# Scale up so the InteractableAreaButton's sensing volume covers
+	# the whole scan window rather than the tiny 6cm button footprint.
+	var scale_factor: float = max(panel_width, panel_height) * SCAN_INSET_FACTOR / 0.085
+	btn.scale = Vector3.ONE * scale_factor
+
+	anchor.add_child(btn)
+	_scan_area = btn.get_node_or_null("InteractableAreaButton") as Area3D
+
+	# Hide the round button mesh + accent ring + base — we want the
+	# proven Area3D detection without the cosmetic button on top of
+	# our emerald scan plate.
+	for child_name in ["ButtonBase", "Button", "AccentRing"]:
+		var n: Node = btn.get_node_or_null(child_name)
+		if n is Node3D:
+			(n as Node3D).visible = false
+
+	# Listen for the push_button area's pressed/released signals — the
+	# exact same wiring every other button consumer uses.
+	if _scan_area != null:
+		if _scan_area.has_signal("button_pressed") and not _scan_area.is_connected("button_pressed", _on_scan_button_pressed):
+			_scan_area.button_pressed.connect(_on_scan_button_pressed)
+		if _scan_area.has_signal("button_released") and not _scan_area.is_connected("button_released", _on_scan_button_released):
+			_scan_area.button_released.connect(_on_scan_button_released)
 
 	# Auto-close timer.
 	_hold_timer = Timer.new()
@@ -553,16 +584,17 @@ func _build_scan_area() -> void:
 	add_child(_hold_timer)
 
 
-# A body entered the volume — usually an XRController3D or a paired
-# collision hand. Treat any of them as a successful scan.
-func _on_scan_body_entered(_body: Node3D) -> void:
+# Forwarded from the embedded push_button's InteractableAreaButton —
+# fires as soon as a hand body or area touches the sensor volume.
+func _on_scan_button_pressed(_button) -> void:
 	_trigger_scan()
 
 
-# Some XR Tools setups expose the hand as Area3D rather than a body
-# (e.g. the FunctionPickup proximity area). Treat both equally.
-func _on_scan_area_entered(_area: Area3D) -> void:
-	_trigger_scan()
+# Forwarded from the embedded push_button. We treat hand removal as a
+# "scan abandoned" signal but the hold timer still gates the door
+# release so a momentary lift doesn't slam the door shut mid-step.
+func _on_scan_button_released(_button) -> void:
+	pass
 
 
 func _trigger_scan() -> void:
