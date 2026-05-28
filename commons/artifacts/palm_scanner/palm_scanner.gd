@@ -509,9 +509,15 @@ func _parse_color(s: String, fallback: Color) -> Color:
 
 # ── Interaction ───────────────────────────────────────────────────────
 
-# Build the scan-trigger Area3D in front of the scan window. The XR
-# Tools hands + controllers each carry physics bodies; entering this
-# sphere fires palm_scanned.
+# Build the scan-trigger Area3D in front of the scan window using the
+# proven push_button collision config:
+#   - layer 1048576 = bit 21 = XR Tools interactable-area layer (the
+#     layer hands monitor for "I can touch this").
+#   - mask  393216  = bits 18+19 = the layers XR Tools collision-hands
+#     and controller bodies actually sit on.
+# Same numbers as commons/interactables/push_button.tscn, which is the
+# known-working reference for "place a flat hand on a surface and have
+# the engine fire a signal".
 func _build_scan_area() -> void:
 	if not scan_active:
 		return
@@ -520,14 +526,10 @@ func _build_scan_area() -> void:
 		anchor = self
 	_scan_area = Area3D.new()
 	_scan_area.name = "ScanArea"
-	# Layer 0 = the scanner doesn't COLLIDE with anything;
-	# Mask covers any of the layers XR Tools hands / controllers occupy.
-	# Use a permissive mask so it picks up controller bodies (typically
-	# layer 16 with XR Tools, but vary by project).
-	_scan_area.collision_layer = 0
-	_scan_area.collision_mask = 0xFFFFFFFF
+	_scan_area.collision_layer = 1 << 20     # 1048576 — bit 21
+	_scan_area.collision_mask  = (1 << 17) | (1 << 18)   # 393216 — bits 18+19
 	_scan_area.monitoring = true
-	_scan_area.monitorable = false
+	_scan_area.monitorable = true
 
 	var cs := CollisionShape3D.new()
 	var sphere := SphereShape3D.new()
