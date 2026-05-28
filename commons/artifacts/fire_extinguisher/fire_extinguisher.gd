@@ -36,6 +36,20 @@ class_name FireExtinguisher
 
 @export_group("Label")
 @export var label_text: String = "FIRE"
+## When TRUE (default), the label text is baked into the cylinder body's
+## albedo_texture via a SubViewport-rendered ImageTexture — the FIRE
+## reads as paint on the cylinder, lit by scene lights. When FALSE the
+## artifact falls back to the original Label3D floating in front.
+@export var bake_label_into_body: bool = true
+## U coordinate (0..1) around the cylinder where the baked text appears.
+## CylinderMesh default UV: 0=+X, 0.25=+Z (front), 0.5=-X, 0.75=-Z.
+@export_range(0.0, 1.0, 0.01) var label_uv_x: float = 0.5
+## V coordinate (0..1) along the cylinder height. 0.5 = middle.
+@export_range(0.0, 1.0, 0.01) var label_uv_y: float = 0.5
+
+# ── External helpers ──────────────────────────────────────────────────
+
+const BakedTextAlbedoScript := preload("res://commons/utils/baked_text_albedo.gd")
 
 # ── Constants ─────────────────────────────────────────────────────────
 
@@ -78,23 +92,23 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_extinguisher_height"):
-		extinguisher_height = float(String(get_meta("config_extinguisher_height")))
+		extinguisher_height = float(str(get_meta("config_extinguisher_height")))
 	if has_meta("config_extinguisher_radius"):
-		extinguisher_radius = float(String(get_meta("config_extinguisher_radius")))
+		extinguisher_radius = float(str(get_meta("config_extinguisher_radius")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_label_color"):
-		label_color = _parse_color(String(get_meta("config_label_color")), label_color)
+		label_color = _parse_color(str(get_meta("config_label_color")), label_color)
 	if has_meta("config_hose_visible"):
-		var hv := String(get_meta("config_hose_visible")).to_lower()
+		var hv := str(get_meta("config_hose_visible")).to_lower()
 		hose_visible = hv in ["true", "1", "yes", "on"]
 	if has_meta("config_wall_bracket"):
-		var wb := String(get_meta("config_wall_bracket")).to_lower()
+		var wb := str(get_meta("config_wall_bracket")).to_lower()
 		wall_bracket = wb in ["true", "1", "yes", "on"]
 	if has_meta("config_label_text"):
-		label_text = String(get_meta("config_label_text"))
+		label_text = str(get_meta("config_label_text"))
 
 
 func _clear_built_children() -> void:
@@ -111,10 +125,17 @@ func _build_extinguisher() -> void:
 	_build_body()
 	_build_neck_and_valve()
 	_build_handle()
-	_build_accent_band()
+	if not bake_label_into_body:
+		# Old path — separate band geometry + Label3D in front.
+		_build_accent_band()
 	if hose_visible:
 		_build_hose()
-	_build_label()
+	if bake_label_into_body:
+		# New path — label + band painted into the cylinder body's
+		# albedo texture, integrated with the surface shader.
+		_bake_label_into_body_albedo.call_deferred()
+	else:
+		_build_label()
 
 
 func _build_bracket() -> void:
@@ -326,6 +347,49 @@ func _build_label() -> void:
 	# Label3D in Godot 4 defaults to facing +Z (readable from +Z viewers).
 	label.position = Vector3(0.0, extinguisher_height * 0.50, extinguisher_radius + 0.004)
 	add_child(label)
+
+
+# Bake the FIRE text (and a thin white accent band) into the cylinder
+# body's albedo_texture. Replaces both the floating Label3D and the
+# separate accent-band cylinder with paint-on-metal that's part of the
+# shader output — the text reads as printed on the surface and is lit
+# by scene lights.
+func _bake_label_into_body_albedo() -> void:
+	if label_text == "":
+		return
+	var body: MeshInstance3D = get_node_or_null("Body")
+	if body == null:
+		return
+	var mat := body.material_override as StandardMaterial3D
+	if mat == null:
+		return
+	# Band V range matches the geometric band the old path drew at
+	# extinguisher_height * 0.55, half-height ACCENT_BAND_HEIGHT / 2.
+	# The body cylinder spans V 0..1 corresponding to its full height,
+	# so v_centre = 0.55, half-band-v = (ACCENT_BAND_HEIGHT / 2) / height.
+	var band_half_v: float = (ACCENT_BAND_HEIGHT * 0.5) / extinguisher_height
+	var band_centre_v: float = 0.55
+	var band_v_min: float = clamp(band_centre_v - band_half_v, 0.0, 1.0)
+	var band_v_max: float = clamp(band_centre_v + band_half_v, 0.0, 1.0)
+	var band_cfg := {
+		"color": accent_color,
+		"v_min": band_v_min,
+		"v_max": band_v_max,
+	}
+	var tex: ImageTexture = await BakedTextAlbedoScript.generate(
+		label_text,
+		self,
+		body_color,
+		label_color,
+		Vector2i(1024, 512),
+		192,
+		Vector2(label_uv_x, label_uv_y),
+		band_cfg)
+	if tex == null:
+		push_warning("fire_extinguisher: bake returned null texture")
+		return
+	mat.albedo_color = Color.WHITE
+	mat.albedo_texture = tex
 
 
 # ── Helpers ───────────────────────────────────────────────────────────
