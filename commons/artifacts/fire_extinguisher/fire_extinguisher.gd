@@ -125,15 +125,15 @@ func _build_extinguisher() -> void:
 	_build_body()
 	_build_neck_and_valve()
 	_build_handle()
-	if not bake_label_into_body:
-		# Old path — separate band geometry + Label3D in front.
-		_build_accent_band()
+	_build_accent_band()
 	if hose_visible:
 		_build_hose()
 	if bake_label_into_body:
-		# New path — label + band painted into the cylinder body's
-		# albedo texture, integrated with the surface shader.
-		_bake_label_into_body_albedo.call_deferred()
+		# New path — TextServer renders the label glyphs into an Image,
+		# the Image becomes a Decal's albedo, the Decal projects the
+		# label onto the cylinder body's surface. No SubViewport, no
+		# per-instance material composite. Works under --no-window.
+		_build_label_decal()
 	else:
 		_build_label()
 
@@ -349,47 +349,45 @@ func _build_label() -> void:
 	add_child(label)
 
 
-# Bake the FIRE text (and a thin white accent band) into the cylinder
-# body's albedo_texture. Replaces both the floating Label3D and the
-# separate accent-band cylinder with paint-on-metal that's part of the
-# shader output — the text reads as printed on the surface and is lit
-# by scene lights.
-func _bake_label_into_body_albedo() -> void:
+# Render the FIRE label via TextServer into a transparent-bg ImageTexture
+# and project it onto the cylinder body with a Decal node. No SubViewport,
+# no body material composition — the body cylinder keeps its plain red
+# albedo and the Decal contributes the printed text on top.
+func _build_label_decal() -> void:
 	if label_text == "":
 		return
-	var body: MeshInstance3D = get_node_or_null("Body")
-	if body == null:
-		return
-	var mat := body.material_override as StandardMaterial3D
-	if mat == null:
-		return
-	# Band V range matches the geometric band the old path drew at
-	# extinguisher_height * 0.55, half-height ACCENT_BAND_HEIGHT / 2.
-	# The body cylinder spans V 0..1 corresponding to its full height,
-	# so v_centre = 0.55, half-band-v = (ACCENT_BAND_HEIGHT / 2) / height.
-	var band_half_v: float = (ACCENT_BAND_HEIGHT * 0.5) / extinguisher_height
-	var band_centre_v: float = 0.55
-	var band_v_min: float = clamp(band_centre_v - band_half_v, 0.0, 1.0)
-	var band_v_max: float = clamp(band_centre_v + band_half_v, 0.0, 1.0)
-	var band_cfg := {
-		"color": accent_color,
-		"v_min": band_v_min,
-		"v_max": band_v_max,
-	}
-	var tex: ImageTexture = await BakedTextAlbedoScript.generate(
+	var tex: ImageTexture = BakedTextAlbedoScript.generate_text_image(
 		label_text,
-		self,
-		body_color,
 		label_color,
-		Vector2i(1024, 512),
-		192,
-		Vector2(label_uv_x, label_uv_y),
-		band_cfg)
+		Vector2i(512, 256),
+		160)
 	if tex == null:
-		push_warning("fire_extinguisher: bake returned null texture")
+		push_warning("fire_extinguisher: text image generation failed")
 		return
-	mat.albedo_color = Color.WHITE
-	mat.albedo_texture = tex
+
+	var decal := Decal.new()
+	decal.name = "LabelDecal"
+	decal.texture_albedo = tex
+	decal.albedo_mix = 1.0
+	decal.emission_energy = 0.0
+	decal.distance_fade_enabled = false
+	# Decal projects along its LOCAL -Y axis. Rotate +90° around X so
+	# local -Y points world -Z (projects onto cylinder front) AND
+	# local +Z maps to world +Y (texture V=0 at top, V=1 at bottom →
+	# text reads right-side-up). The -90° rotation projects the same
+	# direction but flips the texture vertically.
+	decal.rotation = Vector3(deg_to_rad(90.0), 0.0, 0.0)
+	# Larger projection area so the label reads from across the room.
+	# At default radius 0.075m, label is ~22cm wide × 8cm tall.
+	var label_world_w: float = extinguisher_radius * 3.0
+	var label_world_h: float = extinguisher_radius * 1.1
+	var proj_depth: float = extinguisher_radius * 2.4      # through cylinder
+	decal.size = Vector3(label_world_w, proj_depth, label_world_h)
+	decal.position = Vector3(
+		0.0,
+		extinguisher_height * 0.5,
+		extinguisher_radius + 0.005)
+	add_child(decal)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

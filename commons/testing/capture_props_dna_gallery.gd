@@ -144,7 +144,12 @@ func _run() -> void:
 		if bool(spec.get("rotation_y_180", false)):
 			node.rotation = Vector3(0.0, PI, 0.0)
 		_scene_holder.add_child(node)
-		await create_timer(0.10).timeout
+		# 0.4s — gives procedural artifacts that bake textures into
+		# their materials at startup (fire_extinguisher's FIRE label
+		# via commons/utils/baked_text_albedo.gd) enough process_frames
+		# for the SubViewport bake to complete before camera framing +
+		# capture run. Was 0.10s.
+		await create_timer(0.4).timeout
 
 		# Frame the camera from the prop's recursive AABB
 		var aabb: AABB = _get_combined_aabb(node)
