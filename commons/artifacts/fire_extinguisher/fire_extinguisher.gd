@@ -383,9 +383,15 @@ func _build_label_decal() -> void:
 	var label_world_h: float = extinguisher_radius * 1.1
 	var proj_depth: float = extinguisher_radius * 2.4      # through cylinder
 	decal.size = Vector3(label_world_w, proj_depth, label_world_h)
+	# Position the label DOWN from the band so there's a clean gap
+	# between the white stripe (geometric, at extinguisher_height *
+	# 0.55) and the printed text. Band centred at 0.55, half-height
+	# ACCENT_BAND_HEIGHT/2 ≈ 0.011; label centred at 0.40 with half
+	# height ≈ extinguisher_radius * 0.55, so gap ≈ 0.55 - 0.40 -
+	# 0.55*radius/height = roughly 8-10cm at default dimensions.
 	decal.position = Vector3(
 		0.0,
-		extinguisher_height * 0.5,
+		extinguisher_height * 0.40,
 		extinguisher_radius + 0.005)
 	add_child(decal)
 
