@@ -25,6 +25,28 @@ class_name InteractivePointOriginForce
 
 const FORCE_SHADER: Shader = preload("res://commons/primitives/point/force_catalyst.gdshader")
 
+# ── Catalyst-mode projectile dispatch ──────────────────────────────────
+# One CatalystProjectile subclass per canonical mode. Each defines its
+# own firing behaviour ('verb') — chaos arcs, swarm flocks, chromatic
+# paints, forces gathers. Map_data tokens use #mode:<name>, and when
+# the artifact fires during double-grab it instantiates the matching
+# projectile class instead of a plain emissive ball.
+#
+# Custom colours (hex / RGB / CSS name) still work — they fall through
+# to the generic glowing-ball fallback in _spawn_projectile_ball.
+const MODE_PROJECTILES := {
+	"primitives":     preload("res://commons/hazards/becoming_catalyst/modes/primitives_projectile.gd"),
+	"transformation": preload("res://commons/hazards/becoming_catalyst/modes/transformation_projectile.gd"),
+	"chromatic":      preload("res://commons/hazards/becoming_catalyst/modes/chromatic_projectile.gd"),
+	"forces":         preload("res://commons/hazards/becoming_catalyst/modes/forces_projectile.gd"),
+	"waveform":       preload("res://commons/hazards/becoming_catalyst/modes/waveform_projectile.gd"),
+	"chaos":          preload("res://commons/hazards/becoming_catalyst/modes/chaos_projectile.gd"),
+	"fractal":        preload("res://commons/hazards/becoming_catalyst/modes/fractal_projectile.gd"),
+	"cellular":       preload("res://commons/hazards/becoming_catalyst/modes/cellular_projectile.gd"),
+	"branching":      preload("res://commons/hazards/becoming_catalyst/modes/branching_projectile.gd"),
+	"swarm":          preload("res://commons/hazards/becoming_catalyst/modes/swarm_projectile.gd"),
+}
+
 # ── Catalyst-mode palettes ──────────────────────────────────────────────
 # The ten canonical catalyst modes mirrored from
 # commons/testing/vr_capture_rig.gd::MODE_PALETTES — the same palette
@@ -281,6 +303,15 @@ func _double_grab_fire_direction() -> Vector3:
 
 
 func _spawn_projectile_ball(origin: Vector3, direction: Vector3) -> void:
+	# Mode dispatch — if the current mode names a canonical catalyst
+	# verb (chaos arcs, swarm flocks, chromatic paints, etc.) we
+	# instantiate that mode's CatalystProjectile subclass instead of
+	# the generic glowing ball. The projectile is responsible for its
+	# own visual, behaviour, and hit-handling per the catalyst system.
+	if mode != "" and MODE_PROJECTILES.has(mode):
+		_spawn_catalyst_projectile(origin, direction, MODE_PROJECTILES[mode])
+		return
+
 	var ball := RigidBody3D.new()
 	ball.name = "ForceBall"
 	ball.gravity_scale = 0.3
@@ -332,6 +363,43 @@ func _spawn_projectile_ball(origin: Vector3, direction: Vector3) -> void:
 	t.timeout.connect(func(): if is_instance_valid(ball): ball.queue_free())
 	ball.add_child(t)
 	t.start()
+
+
+# Spawn a CatalystProjectile subclass of the mode's choosing. The
+# projectile's _ready() handles physics setup, visual, particles. We
+# just need to configure direction + colour + speed before it enters
+# the tree. The projectile uses its own gravity/trajectory rules
+# (forces gathers with a parabolic arc, chaos sparks unpredictably,
+# etc.) — those override the generic ball settings here.
+func _spawn_catalyst_projectile(origin: Vector3, direction: Vector3, projectile_script: GDScript) -> void:
+	var proj: Node = projectile_script.new()
+	if proj == null:
+		return
+	# Configure shared fields exposed by CatalystProjectile.
+	var dir: Vector3 = direction.normalized() if direction.length_squared() > 0.0 else Vector3.FORWARD
+	if "direction" in proj:
+		proj.direction = dir
+	if "speed" in proj:
+		proj.speed = ball_speed
+	if "lifetime" in proj:
+		proj.lifetime = ball_lifetime
+	if "projectile_scale" in proj:
+		proj.projectile_scale = max(0.5, ball_radius / 0.04)  # 0.04 is the default base
+	if "color_primary" in proj:
+		proj.color_primary = ball_color
+	if "color_secondary" in proj:
+		# Slightly darker secondary for two-tone projectiles.
+		proj.color_secondary = Color(ball_color.r * 0.6, ball_color.g * 0.6, ball_color.b * 0.6, ball_color.a)
+	if "emission_energy" in proj:
+		proj.emission_energy = ball_emission_energy
+	get_tree().current_scene.add_child(proj)
+	# Position slightly forward along the gesture direction so the
+	# projectile doesn't clip into the held mesh on its first frame.
+	if proj is Node3D:
+		var spawn_pos: Vector3 = global_position + dir * (ball_radius * 2.5)
+		if origin.distance_to(global_position) < 0.6:
+			spawn_pos = origin + dir * (ball_radius * 2.5)
+		proj.global_position = spawn_pos
 
 
 # Allow per-instance tweaks from the lab editor / map_data tokens.
