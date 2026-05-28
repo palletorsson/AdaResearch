@@ -292,10 +292,28 @@ func _is_currently_double_grabbed() -> bool:
 	return sec != null
 
 
-# Forward direction for double-grab fire. The artifact's own basis
-# follows the primary grab point's orientation, so -Z gives "where
-# the hand is pointing" without needing to walk the rig manually.
+# Forward direction for double-grab fire.
+#
+# Prefer the actual primary-hand controller's forward (-Z of the
+# XRController3D). The artifact's own basis follows the grab point's
+# transform — which is *close* but not always identical to the
+# controller's natural forward, because grab points are typically
+# offset/rotated to land the artifact comfortably in the palm.
+# Asking the controller directly means "where the hand is pointing"
+# is genuinely where the projectile flies.
+#
+# Falls back to the artifact's local -Z if the controller can't be
+# resolved (e.g. the grab driver hasn't fully wired up yet, or a
+# non-XR caller is firing for testing).
 func _double_grab_fire_direction() -> Vector3:
+	if _grab_driver != null and is_instance_valid(_grab_driver):
+		var primary = _grab_driver.get("primary")
+		if primary != null and "controller" in primary:
+			var ctrl = primary.controller
+			if ctrl != null and ctrl is Node3D and is_instance_valid(ctrl):
+				var hand_fwd: Vector3 = -ctrl.global_transform.basis.z
+				if hand_fwd.length_squared() > 0.001:
+					return hand_fwd.normalized()
 	var fwd: Vector3 = -global_transform.basis.z
 	if fwd.length_squared() < 0.001:
 		fwd = Vector3.FORWARD
