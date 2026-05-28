@@ -68,6 +68,21 @@ const FINGER_WIDTH_FACTOR: float = 0.045
 const FINGER_HEIGHT_FACTOR: float = 0.16
 const PODIUM_HEIGHT: float = 1.00
 const PODIUM_THICKNESS: float = 0.06
+## Forward tilt of the scan plate (degrees, around local X). Positive
+## values rake the face upward so a downward palm settles naturally.
+const PLATE_TILT_DEG: float = 28.0
+## Pose path used by HandPoseArea — the open-hand pose that reads as
+## "palm flat" while the player is scanning.
+const POSE_LEFT_PATH: String  = "res://addons/godot-xr-tools/hands/poses/pose_default_left.tres"
+const POSE_RIGHT_PATH: String = "res://addons/godot-xr-tools/hands/poses/pose_default_right.tres"
+const HAND_POSE_AREA_SCENE: String = "res://addons/godot-xr-tools/objects/hand_pose_area.tscn"
+## Rack-aesthetic materials shared with the interactables in
+## res://commons/interactables — using the same palette keeps the
+## scanner reading as "lab kit" rather than a one-off prop.
+const RACK_METAL_PATH: String       = "res://commons/interactables/materials/rack_metal.tres"
+const RACK_PANEL_PATH: String       = "res://commons/interactables/materials/rack_panel.tres"
+const RACK_PANEL_DARK_PATH: String  = "res://commons/interactables/materials/rack_panel_dark.tres"
+const RACK_ACCENT_PATH: String      = "res://commons/interactables/materials/rack_accent.tres"
 
 # ── Internal state ────────────────────────────────────────────────────
 
@@ -146,14 +161,26 @@ func _build_scanner() -> void:
 	# Panel origin offset depends on mounting: in podium mode, lift the
 	# panel up so its center sits at PODIUM_HEIGHT + panel_height/2.
 	var panel_center := Vector3.ZERO
+	var tilt_rad: float = 0.0
 	if mounting == "podium":
 		_build_podium()
 		var podium_top: float = PODIUM_HEIGHT
-		panel_center = Vector3(0.0, podium_top + panel_height * 0.5, 0.0)
+		# Pull the plate slightly forward of the stand so the wedge angles
+		# out over the player's approach instead of sitting flush atop a
+		# vertical column. Lowers the centre by a touch so the rim sits at
+		# ~elbow height — easier reach in VR.
+		panel_center = Vector3(
+			0.0,
+			podium_top + panel_height * 0.40,
+			panel_depth * 0.5 + 0.01)
+		# Rake the plate up so a flat palm laid downward kisses the face
+		# squarely instead of having to twist the wrist.
+		tilt_rad = -deg_to_rad(PLATE_TILT_DEG)
 
 	var panel_root := Node3D.new()
 	panel_root.name = "Panel"
 	panel_root.position = panel_center
+	panel_root.rotation = Vector3(tilt_rad, 0.0, 0.0)
 	add_child(panel_root)
 
 	_build_panel_body(panel_root)
@@ -162,6 +189,7 @@ func _build_scanner() -> void:
 	_build_status_led(panel_root)
 	_build_accent_strip(panel_root)
 	_build_label(panel_root)
+	_build_hand_pose_area(panel_root)
 
 
 func _build_panel_body(parent: Node3D) -> void:
@@ -358,19 +386,110 @@ func _build_label(parent: Node3D) -> void:
 
 
 func _build_podium(parent: Node3D = self) -> void:
-	# Vertical box stand rising from origin to PODIUM_HEIGHT.
-	var stand := MeshInstance3D.new()
-	stand.name = "PodiumStand"
-	var mesh := BoxMesh.new()
-	mesh.size = Vector3(PODIUM_THICKNESS, PODIUM_HEIGHT, PODIUM_THICKNESS)
-	stand.mesh = mesh
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(panel_color.r * 1.1, panel_color.g * 1.1, panel_color.b * 1.1)
-	mat.roughness = 0.4
-	mat.metallic = 0.55
-	stand.material_override = mat
-	stand.position = Vector3(0.0, PODIUM_HEIGHT * 0.5, 0.0)
-	parent.add_child(stand)
+	# Three-piece stand in the rack-interactables vocabulary:
+	#   1. A wide, low base plinth (rack_metal)        — visual weight on the floor
+	#   2. A slim vertical neck (rack_panel)           — the "column"
+	#   3. A chamfered top yoke (rack_panel_dark)      — collar the plate sits on
+	#   4. A glowing cyan rack_accent ring at the seam — matches the door rails
+	var metal_mat: Material   = _try_load_material(RACK_METAL_PATH)
+	var panel_mat: Material   = _try_load_material(RACK_PANEL_PATH)
+	var dark_mat: Material    = _try_load_material(RACK_PANEL_DARK_PATH)
+	var accent_mat: Material  = _try_load_material(RACK_ACCENT_PATH)
+
+	# 1. Base plinth — wide, short, machined block.
+	var base := MeshInstance3D.new()
+	base.name = "PodiumBase"
+	var base_mesh := BoxMesh.new()
+	var base_w: float = PODIUM_THICKNESS * 4.0
+	var base_h: float = 0.05
+	base_mesh.size = Vector3(base_w, base_h, base_w * 0.9)
+	base.mesh = base_mesh
+	base.material_override = metal_mat
+	base.position = Vector3(0.0, base_h * 0.5, 0.0)
+	parent.add_child(base)
+
+	# 2. Neck — slim column the panel sits on.
+	var neck := MeshInstance3D.new()
+	neck.name = "PodiumNeck"
+	var neck_mesh := BoxMesh.new()
+	var neck_h: float = PODIUM_HEIGHT - base_h - 0.04
+	neck_mesh.size = Vector3(PODIUM_THICKNESS, neck_h, PODIUM_THICKNESS * 0.85)
+	neck.mesh = neck_mesh
+	neck.material_override = panel_mat
+	neck.position = Vector3(0.0, base_h + neck_h * 0.5, 0.0)
+	parent.add_child(neck)
+
+	# 3. Yoke / collar — chamfered shelf the plate angles out from.
+	var yoke := MeshInstance3D.new()
+	yoke.name = "PodiumYoke"
+	var yoke_mesh := BoxMesh.new()
+	var yoke_h: float = 0.04
+	var yoke_w: float = panel_width * 1.05
+	var yoke_d: float = PODIUM_THICKNESS * 1.4
+	yoke_mesh.size = Vector3(yoke_w, yoke_h, yoke_d)
+	yoke.mesh = yoke_mesh
+	yoke.material_override = dark_mat
+	yoke.position = Vector3(0.0, PODIUM_HEIGHT - yoke_h * 0.5, 0.0)
+	parent.add_child(yoke)
+
+	# 4. Cyan accent line at the yoke-front — the running-light cue, same
+	# emission colour as the door rails so the scanner reads as paired
+	# hardware.
+	var seam := MeshInstance3D.new()
+	seam.name = "PodiumAccent"
+	var seam_mesh := BoxMesh.new()
+	seam_mesh.size = Vector3(yoke_w * 0.78, 0.006, 0.008)
+	seam.mesh = seam_mesh
+	seam.material_override = accent_mat
+	seam.position = Vector3(
+		0.0,
+		PODIUM_HEIGHT - yoke_h - 0.002,
+		yoke_d * 0.5 - 0.006)
+	parent.add_child(seam)
+
+
+func _build_hand_pose_area(parent: Node3D) -> void:
+	# Adds the XR Tools HandPoseArea so the hand visually opens to "palm
+	# flat" whenever it sits above the scan window — same pattern as
+	# push_button, lever, knob etc. Avoids the curled-fist grab pose that
+	# otherwise reads as "I'm gripping the wall".
+	if Engine.is_editor_hint():
+		return
+	var pose_scene: PackedScene = load(HAND_POSE_AREA_SCENE) as PackedScene
+	if pose_scene == null:
+		return
+	var area: Node = pose_scene.instantiate()
+	if area == null:
+		return
+	area.name = "HandPoseArea"
+	var pose_left = load(POSE_LEFT_PATH)
+	var pose_right = load(POSE_RIGHT_PATH)
+	if pose_left != null:
+		area.set("left_pose", pose_left)
+	if pose_right != null:
+		area.set("right_pose", pose_right)
+	# Cover the same volume as the scan trigger so any hand that crosses
+	# the scan sphere also flattens.
+	var cs := CollisionShape3D.new()
+	var sphere := SphereShape3D.new()
+	sphere.radius = scan_radius * 1.05
+	cs.shape = sphere
+	cs.position = Vector3(0.0, 0.0, panel_depth * 0.5 + scan_radius * 0.6)
+	area.add_child(cs)
+	parent.add_child(area)
+
+
+func _try_load_material(path: String) -> Material:
+	var res := load(path)
+	if res is Material:
+		return res
+	# Fallback to a colour so the artifact still renders if the rack
+	# materials ever go missing.
+	var fallback := StandardMaterial3D.new()
+	fallback.albedo_color = Color(0.18, 0.20, 0.23)
+	fallback.metallic = 0.45
+	fallback.roughness = 0.4
+	return fallback
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

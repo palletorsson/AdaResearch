@@ -1797,12 +1797,12 @@ func _build_sliding_door(parent: Node3D) -> void:
 	panel_mat.roughness = 0.35
 	panel_mat.metallic = 0.60
 
-	var ft: float = 0.08          # frame thickness
-	var fd: float = 0.14          # how far the frame sticks out from the wall (toward interior)
+	var ft: float = 0.14          # frame thickness — thick science-door jamb
+	var fd: float = 0.22          # how far the frame sticks out from the wall (toward interior)
 	var dh: float = door_height   # opening height
 	var dw: float = door_width    # opening width
 	var half_dw: float = dw * 0.5
-	var pt: float = 0.06          # panel thickness
+	var pt: float = 0.08          # panel thickness — heavier slab
 
 	# Top beam — dark matte science-lab metal.
 	var top := MeshInstance3D.new()
@@ -1930,6 +1930,13 @@ func _build_sliding_door(parent: Node3D) -> void:
 		right_panel.position = Vector3(panel_w * 0.5, dh * 0.5, 0.0)
 		door_root.add_child(right_panel)
 
+	# Science-door slab dressing: caution stripes on the leading edge,
+	# a small reinforced porthole, and a recessed grille band. These
+	# children parent under the panel so they slide with the door.
+	_decorate_science_door_panel(left_panel, panel_w, dh, pt)
+	if right_panel != null:
+		_decorate_science_door_panel(right_panel, panel_w, dh, pt, true)
+
 	# Proximity sensor Area3D. Place it on the door's interior side so it
 	# triggers as the player approaches from outside the room or from
 	# inside.
@@ -1963,6 +1970,152 @@ func _build_sliding_door(parent: Node3D) -> void:
 	handler.set("open_color", Color(0.40, 1.00, 0.55))
 	handler.set("closed_color", Color(0.90, 0.22, 0.27))
 	door_root.add_child(handler)
+
+
+# Adds science-door fittings onto a sliding door panel — caution stripes
+# on the leading edge, a small armoured porthole, and a recessed
+# louvre/grille band low on the panel. Stripes are mirrored (`mirror=true`)
+# for the right-hand panel so the yellow/black warning chevrons read
+# correctly on both halves of a double door.
+func _decorate_science_door_panel(panel: MeshInstance3D, panel_w: float, panel_h: float, panel_t: float, mirror: bool = false) -> void:
+	if panel == null:
+		return
+	# Caution stripe materials — flat yellow + flat black.
+	var yellow := StandardMaterial3D.new()
+	yellow.albedo_color = Color(0.96, 0.79, 0.18)
+	yellow.roughness = 0.7
+	yellow.metallic = 0.0
+	yellow.emission_enabled = true
+	yellow.emission = Color(0.96, 0.79, 0.18)
+	yellow.emission_energy_multiplier = 0.18
+	var black := StandardMaterial3D.new()
+	black.albedo_color = Color(0.07, 0.07, 0.08)
+	black.roughness = 0.75
+	black.metallic = 0.05
+
+	# Vertical caution band on the leading edge of the panel. Single-door
+	# slides one way, but we mark BOTH side edges so the door reads as a
+	# hazard threshold from any angle.
+	var stripe_w: float = panel_w * 0.06
+	var stripe_h: float = panel_h * 0.78
+	var stripe_t: float = 0.002
+	var stripe_z: float = panel_t * 0.5 + stripe_t * 0.5
+	for edge_sign in [-1.0, 1.0]:
+		var bar_x: float = edge_sign * (panel_w * 0.5 - stripe_w * 0.5 - 0.01)
+		# Background stripe — solid yellow.
+		var bg := MeshInstance3D.new()
+		bg.name = "CautionBG_%s" % ("R" if edge_sign > 0 else "L")
+		var bgm := BoxMesh.new()
+		bgm.size = Vector3(stripe_w, stripe_h, stripe_t)
+		bg.mesh = bgm
+		bg.material_override = yellow
+		bg.position = Vector3(bar_x, panel_h * 0.5, stripe_z)
+		panel.add_child(bg)
+		# Diagonal chevrons — six short black bars layered on top to read
+		# as the classic hazard-tape pattern.
+		var bars: int = 10
+		for k in range(bars):
+			var ch := MeshInstance3D.new()
+			ch.name = "CautionChevron_%s_%d" % ["R" if edge_sign > 0 else "L", k]
+			var chm := BoxMesh.new()
+			chm.size = Vector3(stripe_w * 0.95, stripe_h / float(bars) * 0.55, stripe_t * 0.5)
+			ch.mesh = chm
+			ch.material_override = black
+			var t_y: float = (float(k) + 0.5) / float(bars)
+			ch.position = Vector3(
+				bar_x,
+				panel_h * 0.5 - stripe_h * 0.5 + t_y * stripe_h,
+				stripe_z + stripe_t * 0.25)
+			# 45° diagonal — flip the angle for the right-hand panel so
+			# the chevrons point inward on both halves.
+			var ang: float = deg_to_rad(45.0)
+			if mirror:
+				ang = -ang
+			ch.rotation = Vector3(0.0, 0.0, ang)
+			panel.add_child(ch)
+
+	# Armoured porthole — a darker circular inset with a glowing cyan
+	# rim, centered on the upper third of the panel. Reads as "you can
+	# see through, but it's thick glass".
+	var porthole_r: float = min(panel_w, panel_h) * 0.12
+	var porthole_y: float = panel_h * 0.66
+	var port_glass := MeshInstance3D.new()
+	port_glass.name = "PortholeGlass"
+	var pgm := CylinderMesh.new()
+	pgm.top_radius = porthole_r
+	pgm.bottom_radius = porthole_r
+	pgm.height = panel_t * 1.05  # punches through the panel visually
+	port_glass.mesh = pgm
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.05, 0.08, 0.10, 0.85)
+	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass_mat.roughness = 0.05
+	glass_mat.metallic = 0.0
+	glass_mat.emission_enabled = true
+	glass_mat.emission = Color(0.10, 0.40, 0.55)
+	glass_mat.emission_energy_multiplier = 0.4
+	port_glass.material_override = glass_mat
+	port_glass.rotation = Vector3(deg_to_rad(90.0), 0.0, 0.0)
+	port_glass.position = Vector3(0.0, porthole_y, 0.0)
+	panel.add_child(port_glass)
+
+	var port_rim := MeshInstance3D.new()
+	port_rim.name = "PortholeRim"
+	var prm := TorusMesh.new()
+	prm.inner_radius = porthole_r
+	prm.outer_radius = porthole_r * 1.30
+	prm.rings = 28
+	prm.ring_segments = 12
+	port_rim.mesh = prm
+	var rim_mat := StandardMaterial3D.new()
+	rim_mat.albedo_color = Color(0.30, 0.95, 1.00)
+	rim_mat.emission_enabled = true
+	rim_mat.emission = Color(0.30, 0.95, 1.00)
+	rim_mat.emission_energy_multiplier = 1.2
+	rim_mat.roughness = 0.3
+	rim_mat.metallic = 0.2
+	port_rim.material_override = rim_mat
+	# Torus default plane is XZ — lay it flat against the panel face.
+	port_rim.rotation = Vector3(deg_to_rad(90.0), 0.0, 0.0)
+	port_rim.position = Vector3(0.0, porthole_y, panel_t * 0.5 + 0.001)
+	panel.add_child(port_rim)
+
+	# Recessed louvre band low on the panel — thin parallel slats that
+	# read as a ventilation grille. Builds the "this is a functional door,
+	# air moves through it" cue without modelling individual louvres.
+	var grille_y: float = panel_h * 0.22
+	var grille_w: float = panel_w * 0.55
+	var grille_h: float = panel_h * 0.10
+	var grille_bg := MeshInstance3D.new()
+	grille_bg.name = "GrilleBackplate"
+	var gbm := BoxMesh.new()
+	gbm.size = Vector3(grille_w, grille_h, 0.006)
+	grille_bg.mesh = gbm
+	var gb_mat := StandardMaterial3D.new()
+	gb_mat.albedo_color = Color(0.06, 0.06, 0.07)
+	gb_mat.roughness = 0.85
+	gb_mat.metallic = 0.05
+	grille_bg.material_override = gb_mat
+	grille_bg.position = Vector3(0.0, grille_y, panel_t * 0.5 - 0.001)
+	panel.add_child(grille_bg)
+
+	var slats: int = 6
+	var slat_h: float = grille_h * 0.10
+	var slat_mat := StandardMaterial3D.new()
+	slat_mat.albedo_color = Color(0.42, 0.44, 0.48)
+	slat_mat.roughness = 0.45
+	slat_mat.metallic = 0.5
+	for s in range(slats):
+		var slat := MeshInstance3D.new()
+		slat.name = "GrilleSlat_%d" % s
+		var slm := BoxMesh.new()
+		slm.size = Vector3(grille_w * 0.92, slat_h, 0.004)
+		slat.mesh = slm
+		slat.material_override = slat_mat
+		var step: float = grille_h / float(slats)
+		var y: float = grille_y - grille_h * 0.5 + step * 0.5 + step * float(s)
+		slat.position = Vector3(0.0, y, panel_t * 0.5 + 0.003)
+		panel.add_child(slat)
 
 
 # ── Ceiling ───────────────────────────────────────────────────────────
