@@ -74,14 +74,14 @@
       "id": "scaffold_exit_sign",
       "lookup_name": "exit_sign",
       "position": [
-        2.6,
-        2.55,
-        3.35
+        2.5,
+        2.65,
+        3.43
       ],
-      "rotation_y": 0,
+      "rotation_y": 180,
       "config": {},
       "lookupName": "exit_sign",
-      "rotationY": 0,
+      "rotationY": 180,
       "displayName": "EXIT (above door)"
     },
     {
@@ -97,6 +97,19 @@
       "lookupName": "info_board",
       "rotationY": -90,
       "displayName": "annotation board"
+    },
+    {
+      "id": "fire_extinguisher_dx366c",
+      "lookupName": "fire_extinguisher",
+      "displayName": "Fire Extinguisher",
+      "position": [
+        3.45,
+        0.35,
+        3.42
+      ],
+      "rotationY": 180,
+      "rotation_y": 180,
+      "config": {}
     }
   ]
 }
