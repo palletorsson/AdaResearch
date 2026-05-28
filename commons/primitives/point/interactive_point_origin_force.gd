@@ -25,26 +25,28 @@ class_name InteractivePointOriginForce
 
 const FORCE_SHADER: Shader = preload("res://commons/primitives/point/force_catalyst.gdshader")
 
-# ── Catalyst-mode projectile dispatch ──────────────────────────────────
-# One CatalystProjectile subclass per canonical mode. Each defines its
-# own firing behaviour ('verb') — chaos arcs, swarm flocks, chromatic
-# paints, forces gathers. Map_data tokens use #mode:<name>, and when
-# the artifact fires during double-grab it instantiates the matching
-# projectile class instead of a plain emissive ball.
+# ── Catalyst-mode factories ────────────────────────────────────────────
+# Use the canonical mode_<name>.gd scripts (NOT the <name>_projectile.gd
+# scripts directly). Each mode factory exposes a static
+#   create_projectile(spawn_pos, fire_dir) -> CatalystProjectile
+# that wraps a CatalystProjectile.new(), swaps in the projectile script,
+# and applies the mode's tunings (speed, lifetime, colour, per-mode
+# direction tweaks like chaos's 45° random cone).
 #
-# Custom colours (hex / RGB / CSS name) still work — they fall through
-# to the generic glowing-ball fallback in _spawn_projectile_ball.
-const MODE_PROJECTILES := {
-	"primitives":     preload("res://commons/hazards/becoming_catalyst/modes/primitives_projectile.gd"),
-	"transformation": preload("res://commons/hazards/becoming_catalyst/modes/transformation_projectile.gd"),
-	"chromatic":      preload("res://commons/hazards/becoming_catalyst/modes/chromatic_projectile.gd"),
-	"forces":         preload("res://commons/hazards/becoming_catalyst/modes/forces_projectile.gd"),
-	"waveform":       preload("res://commons/hazards/becoming_catalyst/modes/waveform_projectile.gd"),
-	"chaos":          preload("res://commons/hazards/becoming_catalyst/modes/chaos_projectile.gd"),
-	"fractal":        preload("res://commons/hazards/becoming_catalyst/modes/fractal_projectile.gd"),
-	"cellular":       preload("res://commons/hazards/becoming_catalyst/modes/cellular_projectile.gd"),
-	"branching":      preload("res://commons/hazards/becoming_catalyst/modes/branching_projectile.gd"),
-	"swarm":          preload("res://commons/hazards/becoming_catalyst/modes/swarm_projectile.gd"),
+# This is the same factory path becoming_catalyst.gd:_fire() takes when
+# the player triggers the bracelet, so the firing behaviour here is
+# identical to the trigger-shot in the Bracelet Zoo.
+const MODE_FACTORIES := {
+	"primitives":     preload("res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"),
+	"transformation": preload("res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"),
+	"chromatic":      preload("res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"),
+	"forces":         preload("res://commons/hazards/becoming_catalyst/modes/mode_forces.gd"),
+	"waveform":       preload("res://commons/hazards/becoming_catalyst/modes/mode_waveform.gd"),
+	"chaos":          preload("res://commons/hazards/becoming_catalyst/modes/mode_chaos.gd"),
+	"fractal":        preload("res://commons/hazards/becoming_catalyst/modes/mode_fractal.gd"),
+	"cellular":       preload("res://commons/hazards/becoming_catalyst/modes/mode_cellular.gd"),
+	"branching":      preload("res://commons/hazards/becoming_catalyst/modes/mode_branching.gd"),
+	"swarm":          preload("res://commons/hazards/becoming_catalyst/modes/mode_swarm.gd"),
 }
 
 # ── Catalyst-mode palettes ──────────────────────────────────────────────
@@ -322,12 +324,13 @@ func _double_grab_fire_direction() -> Vector3:
 
 func _spawn_projectile_ball(origin: Vector3, direction: Vector3) -> void:
 	# Mode dispatch — if the current mode names a canonical catalyst
-	# verb (chaos arcs, swarm flocks, chromatic paints, etc.) we
-	# instantiate that mode's CatalystProjectile subclass instead of
-	# the generic glowing ball. The projectile is responsible for its
-	# own visual, behaviour, and hit-handling per the catalyst system.
-	if mode != "" and MODE_PROJECTILES.has(mode):
-		_spawn_catalyst_projectile(origin, direction, MODE_PROJECTILES[mode])
+	# verb (chaos arcs, swarm flocks, chromatic paints, etc.) hand the
+	# spawn to the same mode factory the bracelet's _fire() uses, so
+	# the projectile's appearance + behaviour + initial direction tweak
+	# (chaos's random cone, swarm's spread, etc.) match the trigger
+	# shot from the Bracelet Zoo exactly.
+	if mode != "" and MODE_FACTORIES.has(mode):
+		_spawn_catalyst_projectile(origin, direction, MODE_FACTORIES[mode])
 		return
 
 	var ball := RigidBody3D.new()
@@ -383,41 +386,39 @@ func _spawn_projectile_ball(origin: Vector3, direction: Vector3) -> void:
 	t.start()
 
 
-# Spawn a CatalystProjectile subclass of the mode's choosing. The
-# projectile's _ready() handles physics setup, visual, particles. We
-# just need to configure direction + colour + speed before it enters
-# the tree. The projectile uses its own gravity/trajectory rules
-# (forces gathers with a parabolic arc, chaos sparks unpredictably,
-# etc.) — those override the generic ball settings here.
-func _spawn_catalyst_projectile(origin: Vector3, direction: Vector3, projectile_script: GDScript) -> void:
-	var proj: Node = projectile_script.new()
+# Hand the spawn to a canonical mode factory — the same call signature
+# becoming_catalyst.gd:_fire() uses for the bracelet's trigger shot:
+#   create_projectile(spawn_pos, fire_dir) -> CatalystProjectile
+# The factory configures the projectile's mode-specific tuning (visual,
+# speed, lifetime, colour, any per-mode direction tweak). We just need
+# to give it the right spawn position — the controller's tip, 15cm
+# forward of the hand, so the projectile leaves where the player feels
+# it ought to.
+func _spawn_catalyst_projectile(_origin: Vector3, direction: Vector3, factory_script: GDScript) -> void:
+	if factory_script == null:
+		return
+	var dir: Vector3 = direction.normalized() if direction.length_squared() > 0.0 else Vector3.FORWARD
+	var spawn_pos: Vector3 = _fire_spawn_position(dir)
+	var proj: Node = factory_script.create_projectile(spawn_pos, dir)
 	if proj == null:
 		return
-	# Configure shared fields exposed by CatalystProjectile.
-	var dir: Vector3 = direction.normalized() if direction.length_squared() > 0.0 else Vector3.FORWARD
-	if "direction" in proj:
-		proj.direction = dir
-	if "speed" in proj:
-		proj.speed = ball_speed
-	if "lifetime" in proj:
-		proj.lifetime = ball_lifetime
-	if "projectile_scale" in proj:
-		proj.projectile_scale = max(0.5, ball_radius / 0.04)  # 0.04 is the default base
-	if "color_primary" in proj:
-		proj.color_primary = ball_color
-	if "color_secondary" in proj:
-		# Slightly darker secondary for two-tone projectiles.
-		proj.color_secondary = Color(ball_color.r * 0.6, ball_color.g * 0.6, ball_color.b * 0.6, ball_color.a)
-	if "emission_energy" in proj:
-		proj.emission_energy = ball_emission_energy
 	get_tree().current_scene.add_child(proj)
-	# Position slightly forward along the gesture direction so the
-	# projectile doesn't clip into the held mesh on its first frame.
 	if proj is Node3D:
-		var spawn_pos: Vector3 = global_position + dir * (ball_radius * 2.5)
-		if origin.distance_to(global_position) < 0.6:
-			spawn_pos = origin + dir * (ball_radius * 2.5)
 		proj.global_position = spawn_pos
+
+
+# Mirror of becoming_catalyst.gd:_fire's spawn-position rule: 15cm
+# forward of the primary grabbing controller. Falls back to the
+# artifact's own position offset by ball_radius if no controller is
+# resolvable (e.g. test rig, mid-pickup transition).
+func _fire_spawn_position(dir: Vector3) -> Vector3:
+	if _grab_driver != null and is_instance_valid(_grab_driver):
+		var primary = _grab_driver.get("primary")
+		if primary != null and "controller" in primary:
+			var ctrl = primary.controller
+			if ctrl != null and ctrl is Node3D and is_instance_valid(ctrl):
+				return ctrl.global_position + dir * 0.15
+	return global_position + dir * (ball_radius * 2.5)
 
 
 # Allow per-instance tweaks from the lab editor / map_data tokens.
