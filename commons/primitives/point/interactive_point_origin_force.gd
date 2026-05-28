@@ -26,15 +26,23 @@ class_name InteractivePointOriginForce
 const FORCE_SHADER: Shader = preload("res://commons/primitives/point/force_catalyst.gdshader")
 
 # ── Catalyst-mode palettes ──────────────────────────────────────────────
-# Three-stop colour ramps borrowed from CatalystOrb.gd so the artifact's
-# field shell + projectile balls + line-to-origin all line up visually
-# with the rest of the catalyst system. Palette = [deepest, mid, lightest].
-# Add new mode entries here; #mode:<name> in map_data tokens picks one.
+# The ten canonical catalyst modes mirrored from
+# commons/testing/vr_capture_rig.gd::MODE_PALETTES — the same palette
+# the orb shader, the bracelet active-gem, and the cone visual aids
+# already use. Keeping the source-of-truth single means a `#mode:chaos`
+# token here lights the artifact the same colour the orb shows in the
+# bracelet capture gallery. Palette tuples are [base, deeper, highlight].
 const MODE_PALETTES := {
-	"forces":    [Color(0.95, 0.65, 0.20), Color(0.95, 0.85, 0.30), Color(1.00, 1.00, 0.75)],
-	"branching": [Color(0.30, 0.55, 0.30), Color(0.45, 0.85, 0.50), Color(0.85, 0.95, 0.70)],
-	"swarm":     [Color(0.85, 0.45, 0.05), Color(1.00, 0.75, 0.20), Color(1.00, 0.95, 0.65)],
-	"primitives":[Color(0.20, 0.50, 0.95), Color(0.45, 0.80, 1.00), Color(0.85, 0.95, 1.00)],
+	"primitives":     [Color(0.20, 0.95, 0.55), Color(0.45, 1.00, 0.40), Color(0.85, 1.00, 0.65)],
+	"transformation": [Color(0.25, 0.55, 1.00), Color(0.40, 0.78, 1.00), Color(0.75, 0.92, 1.00)],
+	"chromatic":      [Color(0.95, 0.35, 0.78), Color(1.00, 0.55, 0.85), Color(1.00, 0.85, 0.92)],
+	"forces":         [Color(0.95, 0.65, 0.20), Color(0.95, 0.85, 0.30), Color(1.00, 1.00, 0.75)],
+	"waveform":       [Color(0.45, 0.30, 0.95), Color(0.65, 0.55, 1.00), Color(0.88, 0.82, 1.00)],
+	"chaos":          [Color(0.95, 0.20, 0.20), Color(1.00, 0.50, 0.30), Color(1.00, 0.82, 0.55)],
+	"fractal":        [Color(0.35, 0.95, 0.65), Color(0.55, 1.00, 0.85), Color(0.85, 1.00, 0.95)],
+	"cellular":       [Color(0.70, 0.70, 0.75), Color(0.92, 0.92, 0.95), Color(1.00, 1.00, 1.00)],
+	"branching":      [Color(0.30, 0.55, 0.30), Color(0.45, 0.85, 0.50), Color(0.85, 0.95, 0.70)],
+	"swarm":          [Color(0.85, 0.45, 0.05), Color(1.00, 0.75, 0.20), Color(1.00, 0.95, 0.65)],
 }
 
 # Which catalyst-mode palette to apply. Empty = leave the @export-set
