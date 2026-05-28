@@ -486,9 +486,18 @@ func generate_interactables(interactable_data):
 			var token = str(row[x]).strip_edges()
 			
 			if token != " " and not token.is_empty():
+				# `#` prefix = COMMENT. The token stays in map_data.json
+				# as reference / intent ("I considered putting X here") but
+				# is skipped at generation time. Strip a single leading `#`
+				# to expose what's commented out for logging only — don't
+				# parse or place anything.
+				if token.begins_with("#"):
+					print("GridInteractablesComponent: skipping commented token '%s' at (%d,%d)" % [token.substr(1), x, z])
+					continue
+
 				# Check for special prefixes BEFORE parsing (mc:, gridagent:, etc.)
 				# These use the colon as part of their identifier, not as parameter separator
-				
+
 				# Check for custom Marching Cubes syntax mc:shape_name
 				if token.begins_with("mc:"):
 					var parsed = _parse_interactable_token(token)

@@ -192,6 +192,12 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 			if utility_cell.is_empty() or utility_cell == " ":
 				continue
 
+			# `#` prefix = COMMENT. Keep the token in the file as
+			# reference but skip generation at this cell.
+			if utility_cell.begins_with("#"):
+				print("GridUtilitiesComponent: skipping commented utility '%s' at (%d,%d)" % [utility_cell.substr(1), x, z])
+				continue
+
 			# Check if this is an info board utility (ib: prefix)
 			if utility_cell.begins_with("ib:"):
 				# Handle info board utilities
