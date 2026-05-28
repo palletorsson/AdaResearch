@@ -356,19 +356,31 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		_apply_mode(mode)
 
 
-# Apply a named catalyst-mode palette to every colour-bearing channel
-# the artifact owns: the force-field shader's deepest tone, the ball
+# Apply a catalyst-mode palette to every colour-bearing channel the
+# artifact owns: the force-field shader's deepest tone, the ball
 # projectiles' mid tone, the omni-light glow's lightest tone, and the
-# line-to-origin line for held mode. Unknown mode names log a warning
-# and leave the existing colours alone.
+# line-to-origin material's albedo/emission while held.
+#
+# `mode_id` accepts three forms:
+#   1. A named entry in MODE_PALETTES — e.g. "chaos", "branching".
+#      Uses the canonical 3-stop palette.
+#   2. A hex string — "#ff8800" or "ff8800". Generates a synthetic
+#      [deeper, base, highlight] palette around the parsed colour.
+#   3. A comma-separated RGB triple — "1,0,0" or "0.5,0.2,0.9".
+#      Same synthetic ramp.
+# Unparseable strings push a warning and leave the existing colours alone.
 func _apply_mode(mode_id: String) -> void:
 	if mode_id == "":
 		return
-	if not MODE_PALETTES.has(mode_id):
-		push_warning("interactive_point_origin_force: unknown mode '%s' (known: %s)"
-			% [mode_id, str(MODE_PALETTES.keys())])
-		return
-	var palette: Array = MODE_PALETTES[mode_id]
+	var palette: Array
+	if MODE_PALETTES.has(mode_id):
+		palette = MODE_PALETTES[mode_id]
+	else:
+		var custom_color: Variant = _parse_color_value(mode_id)
+		if custom_color == null:
+			push_warning("interactive_point_origin_force: unknown mode '%s' — pass a palette name (%s), a hex like #ff8800, or an RGB triple like 1,0.5,0" % [mode_id, str(MODE_PALETTES.keys())])
+			return
+		palette = _palette_from_color(custom_color)
 	var deepest: Color = palette[0]
 	var mid: Color = palette[1]
 	var lightest: Color = palette[2]
@@ -387,3 +399,50 @@ func _apply_mode(mode_id: String) -> void:
 	var omni: OmniLight3D = get_node_or_null("MeshInstance3D/OmniLight3D")
 	if omni:
 		omni.light_color = lightest
+
+
+# Try to parse `s` as a Color from one of three forms: a hex string
+# (with or without leading #), a comma-separated RGB[A] triple of
+# floats, or a Godot named colour like "red". Returns null on failure.
+func _parse_color_value(s: String) -> Variant:
+	var trimmed: String = s.strip_edges()
+	if trimmed.is_empty():
+		return null
+	# Hex form.
+	if trimmed.begins_with("#") or trimmed.length() in [6, 8] and trimmed.is_valid_hex_number(false):
+		var hex: String = trimmed if trimmed.begins_with("#") else "#" + trimmed
+		if Color.html_is_valid(hex):
+			return Color.html(hex)
+	# RGB[A] triple form.
+	if trimmed.contains(","):
+		var parts: PackedStringArray = trimmed.split(",", false)
+		if parts.size() >= 3:
+			var floats: Array[float] = []
+			for p in parts:
+				var v: String = p.strip_edges()
+				if not v.is_valid_float():
+					return null
+				floats.append(clamp(float(v), 0.0, 1.0))
+			if floats.size() >= 4:
+				return Color(floats[0], floats[1], floats[2], floats[3])
+			return Color(floats[0], floats[1], floats[2])
+	# Named-colour fallback. Godot lacks a runtime named-colour table,
+	# so we rely on Color.html which accepts named CSS colours.
+	if Color.html_is_valid(trimmed):
+		return Color.html(trimmed)
+	return null
+
+
+# Derive a 3-stop [base, mid, highlight] palette from a single user-
+# supplied colour. The base is a darker / more saturated variant for
+# the field shell, mid is the input colour itself for projectile balls
+# and the line-to-origin, highlight is a brighter / desaturated tone
+# for the OmniLight glow.
+func _palette_from_color(c: Color) -> Array:
+	var deeper := Color(c.r * 0.7, c.g * 0.7, c.b * 0.7, c.a)
+	var brighter := Color(
+		clamp(c.r * 0.4 + 0.6, 0.0, 1.0),
+		clamp(c.g * 0.4 + 0.6, 0.0, 1.0),
+		clamp(c.b * 0.4 + 0.6, 0.0, 1.0),
+		c.a)
+	return [deeper, c, brighter]
