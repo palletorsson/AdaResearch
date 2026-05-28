@@ -41,6 +41,19 @@ class_name PalmScanner
 ## "podium" — panel sits on a 1.0m vertical stand rising from origin.
 @export var mounting: String = "wall"
 
+@export_group("Interaction")
+## Sphere radius in front of the scan window that detects a hand.
+## XR controllers + XRToolsHand instances entering this volume fire
+## the palm_scanned signal.
+@export var scan_radius: float = 0.18
+## How long (seconds) the door stays open after a successful scan
+## before the scanner emits palm_released and closes it again.
+@export var scan_hold_seconds: float = 5.0
+## When TRUE the scanner locates a LabDoorSensor via the
+## "lab_door_sensors" group and wires palm_scanned → its open path
+## and palm_released → its close path automatically.
+@export var auto_connect_door: bool = true
+
 # ── Constants ─────────────────────────────────────────────────────────
 
 const SCAN_INSET_FACTOR: float = 0.70   # scan window is 70% of panel width
@@ -59,12 +72,32 @@ const PODIUM_THICKNESS: float = 0.06
 # ── Internal state ────────────────────────────────────────────────────
 
 var _built: bool = false
+var _scan_area: Area3D = null
+var _hold_timer: Timer = null
+var _status_led_mesh: MeshInstance3D = null
+var _scan_window_mat: StandardMaterial3D = null
+var _scanning: bool = false
+
+# ── Signals ───────────────────────────────────────────────────────────
+
+## Fired when a VR hand / controller enters the scan area for the first
+## time (only refires after a release). Subscribers should drive door
+## opening, lock unlocking, etc.
+signal palm_scanned
+## Fired when the scan_hold_seconds timer expires after a successful
+## scan. Subscribers should close the door, re-lock, etc.
+signal palm_released
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
 func _ready() -> void:
 	_read_metadata_overrides()
 	_build_scanner()
+	if Engine.is_editor_hint():
+		return
+	_build_scan_area()
+	if auto_connect_door:
+		call_deferred("_auto_connect_to_door")
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -79,26 +112,26 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_panel_width"):
-		panel_width = float(String(get_meta("config_panel_width")))
+		panel_width = float(str(get_meta("config_panel_width")))
 	if has_meta("config_panel_height"):
-		panel_height = float(String(get_meta("config_panel_height")))
+		panel_height = float(str(get_meta("config_panel_height")))
 	if has_meta("config_panel_depth"):
-		panel_depth = float(String(get_meta("config_panel_depth")))
+		panel_depth = float(str(get_meta("config_panel_depth")))
 	if has_meta("config_panel_color"):
-		panel_color = _parse_color(String(get_meta("config_panel_color")), panel_color)
+		panel_color = _parse_color(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_scan_color"):
-		scan_color = _parse_color(String(get_meta("config_scan_color")), scan_color)
+		scan_color = _parse_color(str(get_meta("config_scan_color")), scan_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_text_color"):
-		text_color = _parse_color(String(get_meta("config_text_color")), text_color)
+		text_color = _parse_color(str(get_meta("config_text_color")), text_color)
 	if has_meta("config_scan_active"):
-		var v := String(get_meta("config_scan_active")).to_lower()
+		var v := str(get_meta("config_scan_active")).to_lower()
 		scan_active = v in ["true", "1", "yes", "on"]
 	if has_meta("config_label_text"):
-		label_text = String(get_meta("config_label_text"))
+		label_text = str(get_meta("config_label_text"))
 	if has_meta("config_mounting"):
-		mounting = String(get_meta("config_mounting")).to_lower()
+		mounting = str(get_meta("config_mounting")).to_lower()
 
 
 func _clear_built_children() -> void:
@@ -170,6 +203,9 @@ func _build_scan_window(parent: Node3D) -> void:
 	mat.metallic = 0.0
 	win.material_override = mat
 	win.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	# Cache the material so the interaction code can flash it brighter
+	# during an active scan and dim it back to resting.
+	_scan_window_mat = mat
 	# Slight downward bias so label below has space; window sits centered
 	# vertically with a small lift.
 	var y_offset: float = panel_height * 0.06
@@ -264,6 +300,8 @@ func _build_status_led(parent: Node3D) -> void:
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
 	led.material_override = mat
 	led.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	# Cache for interaction (flash brighter during scan).
+	_status_led_mesh = led
 	# Lay along +Z so it pokes out of the front face.
 	led.rotation = Vector3(deg_to_rad(90.0), 0.0, 0.0)
 	# Upper-right corner of the panel.
@@ -348,3 +386,121 @@ func _parse_color(s: String, fallback: Color) -> Color:
 	if parts.size() >= 4:
 		a = float(parts[3])
 	return Color(r, g, b, a)
+
+
+# ── Interaction ───────────────────────────────────────────────────────
+
+# Build the scan-trigger Area3D in front of the scan window. The XR
+# Tools hands + controllers each carry physics bodies; entering this
+# sphere fires palm_scanned.
+func _build_scan_area() -> void:
+	if not scan_active:
+		return
+	var anchor: Node3D = get_node_or_null("Panel")
+	if anchor == null:
+		anchor = self
+	_scan_area = Area3D.new()
+	_scan_area.name = "ScanArea"
+	# Layer 0 = the scanner doesn't COLLIDE with anything;
+	# Mask covers any of the layers XR Tools hands / controllers occupy.
+	# Use a permissive mask so it picks up controller bodies (typically
+	# layer 16 with XR Tools, but vary by project).
+	_scan_area.collision_layer = 0
+	_scan_area.collision_mask = 0xFFFFFFFF
+	_scan_area.monitoring = true
+	_scan_area.monitorable = false
+
+	var cs := CollisionShape3D.new()
+	var sphere := SphereShape3D.new()
+	sphere.radius = scan_radius
+	cs.shape = sphere
+	# Sit slightly proud of the scan window face (+Z) so the centre
+	# of the volume is where a player's palm naturally hovers.
+	cs.position = Vector3(0.0, 0.0, panel_depth * 0.5 + scan_radius * 0.5)
+	_scan_area.add_child(cs)
+
+	_scan_area.body_entered.connect(_on_scan_body_entered)
+	_scan_area.area_entered.connect(_on_scan_area_entered)
+	anchor.add_child(_scan_area)
+
+	# Auto-close timer.
+	_hold_timer = Timer.new()
+	_hold_timer.name = "HoldTimer"
+	_hold_timer.one_shot = true
+	_hold_timer.wait_time = scan_hold_seconds
+	_hold_timer.timeout.connect(_on_hold_timeout)
+	add_child(_hold_timer)
+
+
+# A body entered the volume — usually an XRController3D or a paired
+# collision hand. Treat any of them as a successful scan.
+func _on_scan_body_entered(_body: Node3D) -> void:
+	_trigger_scan()
+
+
+# Some XR Tools setups expose the hand as Area3D rather than a body
+# (e.g. the FunctionPickup proximity area). Treat both equally.
+func _on_scan_area_entered(_area: Area3D) -> void:
+	_trigger_scan()
+
+
+func _trigger_scan() -> void:
+	if _scanning:
+		return
+	_scanning = true
+	# Flash the scan window brighter and bias the LED green.
+	if _scan_window_mat != null:
+		_scan_window_mat.emission = scan_color * 1.6
+		_scan_window_mat.emission_energy_multiplier = 1.4
+	if _status_led_mesh != null:
+		var lmat := _status_led_mesh.material_override as StandardMaterial3D
+		if lmat != null:
+			lmat.albedo_color = scan_color
+			lmat.emission = scan_color
+			lmat.emission_energy_multiplier = 3.0
+	palm_scanned.emit()
+	if _hold_timer != null:
+		_hold_timer.stop()
+		_hold_timer.start(scan_hold_seconds)
+
+
+func _on_hold_timeout() -> void:
+	_scanning = false
+	# Return to resting state — emerald glow at default energy.
+	if _scan_window_mat != null:
+		_scan_window_mat.emission = scan_color
+		_scan_window_mat.emission_energy_multiplier = 0.9
+	if _status_led_mesh != null:
+		var lmat := _status_led_mesh.material_override as StandardMaterial3D
+		if lmat != null:
+			lmat.albedo_color = scan_color
+			lmat.emission = scan_color
+			lmat.emission_energy_multiplier = 1.5
+	palm_released.emit()
+
+
+# Search the scene tree for a LabDoorSensor (registered in the group
+# "lab_door_sensors") and connect palm_scanned/released to its open /
+# close methods. The group registration is done by lab_door_sensor.gd's
+# _ready(), so this call_deferred sequence reliably finds the handler.
+func _auto_connect_to_door() -> void:
+	var tree := get_tree()
+	if tree == null:
+		return
+	var sensors: Array = tree.get_nodes_in_group("lab_door_sensors")
+	if sensors.is_empty():
+		return
+	# Pick the closest one (single-lab maps will have exactly one).
+	var nearest: Node = sensors[0]
+	if sensors.size() > 1:
+		var best_d: float = INF
+		for s in sensors:
+			if s is Node3D and self is Node3D:
+				var d: float = s.global_position.distance_to(global_position)
+				if d < best_d:
+					best_d = d
+					nearest = s
+	if nearest.has_method("_open_door") and not palm_scanned.is_connected(nearest._open_door):
+		palm_scanned.connect(nearest._open_door)
+	if nearest.has_method("_close_door") and not palm_released.is_connected(nearest._close_door):
+		palm_released.connect(nearest._close_door)

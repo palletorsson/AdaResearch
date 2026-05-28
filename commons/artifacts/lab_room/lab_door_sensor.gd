@@ -23,6 +23,10 @@ var _right_closed_x: float = 0.0
 
 
 func _ready() -> void:
+	# Register so external triggers (palm_scanner, key_card readers,
+	# scripted events) can find this handler via
+	# get_tree().get_nodes_in_group("lab_door_sensors").
+	add_to_group("lab_door_sensors")
 	# Cache closed positions so we can return panels exactly there.
 	if left_panel:
 		_left_closed_x = left_panel.position.x

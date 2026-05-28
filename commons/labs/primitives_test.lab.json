@@ -20,10 +20,10 @@
     "back_window_offset_x": -1.7,
     "show_front_window": true,
     "front_window_size": [
-      5.5,
+      4,
       2
     ],
-    "front_window_offset_x": 0,
+    "front_window_offset_x": 0.4,
     "show_sliding_door": true,
     "single_door": true,
     "door_wall": "south",
@@ -103,13 +103,32 @@
       "lookupName": "fire_extinguisher",
       "displayName": "Fire Extinguisher",
       "position": [
-        3.45,
+        3.6507272824504993,
         0.35,
         3.42
       ],
       "rotationY": 180,
       "rotation_y": 180,
       "config": {}
+    },
+    {
+      "id": "palm_scanner_door",
+      "lookup_name": "palm_scanner",
+      "lookupName": "palm_scanner",
+      "displayName": "Palm Scanner (door entry)",
+      "position": [
+        1.6,
+        0,
+        2.65
+      ],
+      "rotation_y": 0,
+      "rotationY": 0,
+      "config": {
+        "scan_active": true,
+        "mounting": "podium",
+        "scan_hold_seconds": 5.0,
+        "auto_connect_door": true
+      }
     }
   ]
 }

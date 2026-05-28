@@ -1804,7 +1804,7 @@ func _build_sliding_door(parent: Node3D) -> void:
 	var half_dw: float = dw * 0.5
 	var pt: float = 0.06          # panel thickness
 
-	# Top beam
+	# Top beam — dark matte science-lab metal.
 	var top := MeshInstance3D.new()
 	var tm := BoxMesh.new()
 	tm.size = Vector3(dw + ft * 2.0, ft, fd)
@@ -1812,6 +1812,49 @@ func _build_sliding_door(parent: Node3D) -> void:
 	top.material_override = frame_mat
 	top.position = Vector3(0.0, dh + ft * 0.5, 0.0)
 	door_root.add_child(top)
+
+	# Cyan accent strip across the top beam — the kind of running
+	# indicator strip that gives the door a sci-fi airlock feel.
+	# Sits flush with the interior face of the frame, slightly inset
+	# from the edges so it reads as a single continuous bar.
+	var accent_mat := StandardMaterial3D.new()
+	accent_mat.albedo_color = Color(0.30, 0.95, 1.00)
+	accent_mat.emission_enabled = true
+	accent_mat.emission = Color(0.30, 0.95, 1.00)
+	accent_mat.emission_energy_multiplier = 1.4
+	accent_mat.roughness = 0.2
+	accent_mat.metallic = 0.0
+
+	var accent_strip := MeshInstance3D.new()
+	accent_strip.name = "TopAccentStrip"
+	var as_mesh := BoxMesh.new()
+	as_mesh.size = Vector3((dw + ft * 2.0) * 0.86, 0.008, 0.012)
+	accent_strip.mesh = as_mesh
+	accent_strip.material_override = accent_mat
+	# Sit on the interior face of the top beam (+Z relative to the
+	# door's local frame), with the strip running through the
+	# lower-third of the beam height for that running-light look.
+	accent_strip.position = Vector3(
+		0.0,
+		dh + ft * 0.20,
+		fd * 0.5 - 0.005)
+	door_root.add_child(accent_strip)
+
+	# Two vertical guide rails — one on each side of the opening, on
+	# the interior face of the side frames. Thin emissive strips that
+	# match the top accent, giving the door a clear "approach me" cue.
+	for sign in [-1.0, 1.0]:
+		var rail := MeshInstance3D.new()
+		rail.name = "GuideRail_%s" % ("R" if sign > 0 else "L")
+		var rm := BoxMesh.new()
+		rm.size = Vector3(0.010, dh * 0.85, 0.010)
+		rail.mesh = rm
+		rail.material_override = accent_mat
+		rail.position = Vector3(
+			sign * (half_dw + ft * 0.5 - 0.012),
+			dh * 0.5,
+			fd * 0.5 - 0.005)
+		door_root.add_child(rail)
 
 	# Left and right side frames
 	var left_f := MeshInstance3D.new()
