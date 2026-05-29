@@ -1,5 +1,49 @@
 {
 	"artifacts": {
+		"floating_sphere_field": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"biome",
+				"ambient"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "floating_sphere_field",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Floating Sphere Field",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "ambient"
+			},
+			"scene": "res://commons/primitives/sphere_field/floating_sphere_field.tscn",
+			"size_group": "ambient",
+			"tags": [
+				"sphere",
+				"particles",
+				"gpu",
+				"ambient",
+				"biome",
+				"void",
+				"drift",
+				"kusama"
+			],
+			"qfep_connection": "The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed coordinates for the truth that presence does not require a position — the F term loosening before λE(S)."
+		},
 		"xyz_slider_plate": {
 			"category": "primitives",
 			"complexity": "beginner",
