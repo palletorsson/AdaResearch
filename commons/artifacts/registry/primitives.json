@@ -1,5 +1,39 @@
 {
 	"artifacts": {
+		"pixel_heart": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A pixel-art heart extruded into a field of small 3D cubes on a single MultiMesh (one draw call). The 'love' reaction in the project's own cube vocabulary — warm red voxels, beveled, readable across a room.",
+			"dev_themes": ["commons", "primitives", "reaction", "voxel"],
+			"footprint": [1, 1, 1],
+			"include_in_map_data": true,
+			"lookup_name": "pixel_heart",
+			"map_ready": true,
+			"map_sequences": ["primitives"],
+			"name": "Pixel Heart",
+			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"scene": "res://commons/primitives/pixel_icon/pixel_heart.tscn",
+			"size_group": "compact",
+			"tags": ["heart", "voxel", "pixel", "reaction", "love", "multimesh"],
+			"qfep_connection": "A reaction is a primitive feeling, so it is a primitive object — the heart was always pixels; we gave the pixels depth."
+		},
+		"pixel_thumb": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A pixel-art thumbs-up extruded into a field of small 3D cubes on a single MultiMesh (one draw call). The 'friend / approved' reaction in the project's own cube vocabulary — cool blue voxels, beveled.",
+			"dev_themes": ["commons", "primitives", "reaction", "voxel"],
+			"footprint": [1, 1, 1],
+			"include_in_map_data": true,
+			"lookup_name": "pixel_thumb",
+			"map_ready": true,
+			"map_sequences": ["primitives"],
+			"name": "Pixel Thumb",
+			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"scene": "res://commons/primitives/pixel_icon/pixel_thumb.tscn",
+			"size_group": "compact",
+			"tags": ["thumb", "voxel", "pixel", "reaction", "friend", "multimesh"],
+			"qfep_connection": "The thumb says yes in the grammar of the grid — the catalyst's foe-to-friend arc made into a solid object."
+		},
 		"floating_sphere_field": {
 			"category": "primitives",
 			"complexity": "beginner",

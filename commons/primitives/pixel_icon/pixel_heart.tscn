@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/primitives/pixel_icon/pixel_icon.gd" id="1"]
+
+[node name="PixelHeart" type="Node3D"]
+script = ExtResource("1")
+icon_shape = "heart"
+color = Color(0.93, 0.16, 0.28, 1)
