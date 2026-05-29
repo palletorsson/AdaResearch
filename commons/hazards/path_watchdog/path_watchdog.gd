@@ -42,6 +42,11 @@ class_name PathWatchdog
 ## Height above floor to probe — high enough to miss the floor slab,
 ## low enough to catch any standing block / wall.
 @export var probe_height: float = 0.6
+## How far below the walking surface a floor may sit and still count as
+## "there is ground here". A cell with no ground within this drop is a
+## void and never joins the path. Set <= 0 to disable the floor test
+## (flat maps with a continuous floor).
+@export var floor_drop: float = 1.4
 ## Physics layers a blocker can live on. Default: everything.
 @export_flags_3d_physics var blocker_mask: int = 0xFFFFFFFF
 ## Bodies in any of these groups are RAMPS/PASSABLE — they don't block
@@ -288,7 +293,10 @@ func _find_route(start_w: Vector3, goal_w: Vector3) -> Array:
 			if c == start_c or c == goal_c:
 				walkable[c] = true
 			else:
-				walkable[c] = not _cell_blocked(space, c)
+				# Passable = there is floor to stand on AND nothing walls it.
+				# The floor test stops the route from cutting across voids
+				# (the "0" cells of a real map's gaps).
+				walkable[c] = _cell_has_floor(space, c) and not _cell_blocked(space, c)
 
 	# BFS (4-connectivity → grid-honest, no diagonal squeezing).
 	var came_from := {}
@@ -350,6 +358,24 @@ func _cell_blocked(space: PhysicsDirectSpaceState3D, cell: Vector2i) -> bool:
 		if not _is_walkable_body(col):
 			return true
 	return false
+
+
+# Is there ground to stand on in this cell? A downward ray from just
+# above the walking surface; a hit within floor_drop means floor, no hit
+# means void. Disabled when floor_drop <= 0 (flat continuous-floor maps).
+func _cell_has_floor(space: PhysicsDirectSpaceState3D, cell: Vector2i) -> bool:
+	if floor_drop <= 0.0:
+		return true
+	var top := _to_world(cell)
+	top.y = _floor_ref_y + 0.25
+	var bottom := top
+	bottom.y = _floor_ref_y - floor_drop
+	var params := PhysicsRayQueryParameters3D.create(top, bottom)
+	params.collision_mask = blocker_mask
+	params.collide_with_areas = false
+	params.collide_with_bodies = true
+	var hit := space.intersect_ray(params)
+	return not hit.is_empty()
 
 
 # Walk the collider's ancestor chain looking for a walkable-group tag —
