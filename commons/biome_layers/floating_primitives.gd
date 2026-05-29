@@ -19,8 +19,32 @@ const TYPE_SEGMENT := "segment"
 const TYPE_TRIANGLE := "triangle"
 const TYPE_CUBE := "cube"
 
+# The seq-1 field has TWO faces, chosen by the CURRENT map's stage:
+#
+#   • Primitives stage (the maps that teach seq 1) → a sparse GPU
+#     particle sphere field. Soft motes drifting in the void —
+#     presence-by-scarcity, the subtle successor to the rigid dot grid.
+#   • Foundation beneath any LATER sequence (stage ≥ 2) → the original
+#     MultiMesh dot lattice. Later layers (animated_primitives seq 2,
+#     color_tint seq 3, force_field/lattice_snap/wave_displace seq 4–6)
+#     find this layer's MultiMeshInstance3D children by name and
+#     animate / tint / displace them. They need the lattice to exist,
+#     so the foundation keeps rendering it.
+#
+# So: in the primitives sequence you see the drift; once you reach
+# transformation, the substrate beneath everything is the lattice that
+# the higher layers then bring to life.
+const SPHERE_FIELD_SCENE := preload("res://commons/primitives/sphere_field/floating_sphere_field.tscn")
+
 
 func apply(ctx: Dictionary) -> void:
+	# Stage gate. Default 999 → if stage is somehow unknown, render the
+	# lattice (the accrual-safe choice that never starves later layers).
+	var stage_order: int = int(ctx.get("stage_order", 999))
+	if stage_order <= 1:
+		_apply_sphere_field(ctx)
+		return
+
 	var params: Dictionary = ctx.get("params", {})
 	var bounds: float = float(params.get("bounds", 22.0))
 	var types: Array = params.get("types", [TYPE_POINT])
@@ -76,6 +100,55 @@ func apply(ctx: Dictionary) -> void:
 		if transforms.is_empty():
 			continue
 		_spawn_multimesh(str(kind), transforms)
+
+
+# Primitives-stage face: instance the floating_sphere_field artifact
+# (single source of truth for the GPU-particle look), sized to the grid
+# and centred over it. Params from the contribution entry can override
+# the field's DNA so the biome stays tunable from biome_contributions.json.
+func _apply_sphere_field(ctx: Dictionary) -> void:
+	var params: Dictionary = ctx.get("params", {})
+	var grid_center: Vector3 = ctx.get("grid_center", Vector3.ZERO)
+	var grid_dims: Vector3i = ctx.get("grid_dims", Vector3i(20, 1, 20))
+	var cube_size: float = ctx.get("cube_size", 1.0)
+
+	var half_x: float = float(grid_dims.x) * cube_size * 0.5
+	var half_z: float = float(grid_dims.z) * cube_size * 0.5
+
+	var field: Node3D = SPHERE_FIELD_SCENE.instantiate()
+	# Set DNA BEFORE add_child so _ready()/_build_field use these values.
+	# (apply_grid_config's string round-trip is for map_data tokens; here
+	# we own typed values, so assign the @export vars directly.)
+	field.bounds = Vector3(
+		float(params.get("field_half_x", half_x + 1.0)),
+		float(params.get("field_half_y", 2.6)),
+		float(params.get("field_half_z", half_z + 1.0)))
+	# Centre the drift volume a little above the floor.
+	field.volume_offset = Vector3(0.0, float(params.get("field_centre_y", 2.6)), 0.0)
+	field.sphere_count = int(params.get("sphere_count", 60))
+	field.sphere_radius = float(params.get("sphere_radius", 0.06))
+	field.drift_speed = float(params.get("drift_speed", 0.18))
+	field.turbulence = float(params.get("turbulence", 0.6))
+	field.emission_energy = float(params.get("emission_energy", 1.6))
+	if params.has("color"):
+		field.color = _parse_color_param(params.get("color"))
+
+	field.position = grid_center
+	add_child(field)
+	print("  [floating_primitives] sphere-field face — count=%d bounds=%s" % [
+		field.sphere_count, str(field.bounds)])
+
+
+func _parse_color_param(v) -> Color:
+	if v is Color:
+		return v
+	var s := str(v)
+	if s.begins_with("#"):
+		return Color(s)
+	var parts := s.split(",")
+	if parts.size() >= 3:
+		return Color(float(parts[0]), float(parts[1]), float(parts[2]))
+	return Color(0.72, 0.88, 1.0)
 
 
 func _posmod(a: int, b: int) -> int:

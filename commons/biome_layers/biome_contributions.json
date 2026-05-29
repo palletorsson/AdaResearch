@@ -3,7 +3,7 @@
   "description": "Each sequence contributes one layer to the biome. Layers accrue in order. The biome at stage N = sum of layers 1..N. Before seq 8 the biome is NOT a nature biome — it is abstract mathematical forms floating in space, Kusama-like.",
   "layer_kinds": {
     "floating_points": "Sparse points in void. The Kusama field. Seq 1.",
-    "floating_primitives": "Lines, triangles, polygons, solids in void. Seq 1 (extends).",
+    "floating_primitives": "Seq 1. TWO faces by stage: at the primitives stage it renders a sparse GPU-particle sphere field (soft motes drifting in void); beneath any later sequence it renders the MultiMesh dot lattice that animated_primitives/color_tint/force_field/lattice_snap/wave_displace transform.",
     "animated_primitives": "Existing primitives rotate, scale, translate. No new spawns. Seq 2.",
     "color_tint": "Tints all existing layers by space position. No spawns. Seq 3.",
     "force_field": "Primitives drift/collide under gravity or springs. No new spawns. Seq 4.",
@@ -26,8 +26,9 @@
   },
   "sequences": [
     { "order": 1,  "seq": "primitives",            "kind": "floating_primitives",
-      "params": { "bounds": 22.0, "step": 1.2, "y_tiers": [1.6, 3.2], "types": ["point"], "emit_light": true },
-      "truth": "forms exist in void as a regular array — Kusama-style dots — teaching presence before shape, rhythm before variety" },
+      "params": { "bounds": 22.0, "step": 1.2, "y_tiers": [1.6, 3.2], "types": ["point"], "emit_light": true,
+                  "sphere_count": 60, "sphere_radius": 0.06, "drift_speed": 0.18, "turbulence": 0.6, "emission_energy": 1.6, "color": "#b8e0ff", "field_centre_y": 2.6 },
+      "truth": "in the primitives sequence, forms drift in the void as a sparse field of soft glowing spheres — presence-by-scarcity, not a counted lattice; beneath later sequences the same layer is the dot array those sequences bring to life" },
     { "order": 2,  "seq": "transformation",        "kind": "animated_primitives",
       "params": { "rotate_speed_range": [0.1, 0.8], "scale_pulse": 0.15, "drift_speed": 0.3 },
       "truth": "the primitives that exist begin to move — rotate, scale, translate — invariants revealed by motion" },
