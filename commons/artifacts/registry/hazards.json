@@ -1,5 +1,20 @@
 {
 	"artifacts": {
+		"path_builder_foe": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "The path-and-block antagonist: a CatalystFoe that walks and BUILDS — dropping primitive blocks (pyramid/wedge/cube by curriculum stage) to wall the player's route. Befriend it with the catalyst and it stops building and clears the wall it made. Win by outrunning it to the exit, or by changing its mind.",
+			"dev_themes": ["gameplay", "hazards", "catalyst"],
+			"include_in_map_data": true,
+			"lookup_name": "path_builder_foe",
+			"map_ready": true,
+			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"name": "Path Builder Foe",
+			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"scene": "res://commons/hazards/path_builder_foe/path_builder_foe.tscn",
+			"tags": ["foe", "builder", "catalyst", "block", "game", "befriendable"],
+			"qfep_connection": "The wall and the one who builds it are the same problem, solved the same way — you do not break the maze, you befriend its author."
+		},
 		"path_game_controller": {
 			"category": "hazards",
 			"complexity": "intermediate",
