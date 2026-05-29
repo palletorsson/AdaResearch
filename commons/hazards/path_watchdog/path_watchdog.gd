@@ -44,6 +44,11 @@ class_name PathWatchdog
 @export var probe_height: float = 0.6
 ## Physics layers a blocker can live on. Default: everything.
 @export_flags_3d_physics var blocker_mask: int = 0xFFFFFFFF
+## Bodies in any of these groups are RAMPS/PASSABLE — they don't block
+## the path even though they have a collider. A wedge or pyramid the
+## player can walk up is tagged here; a cube wall is not. This is the
+## cube-vs-wedge distinction that gives the game its texture.
+@export var walkable_groups: Array[String] = ["path_passable", "ramp"]
 
 @export_group("Ribbon")
 @export var ribbon_width: float = 0.16
@@ -329,8 +334,36 @@ func _cell_blocked(space: PhysicsDirectSpaceState3D, cell: Vector2i) -> bool:
 	params.collision_mask = blocker_mask
 	params.collide_with_areas = false
 	params.collide_with_bodies = true
-	var hits := space.intersect_shape(params, 1)
-	return not hits.is_empty()
+	# Look at several overlaps, not just one — a cell can hold both a
+	# ramp and (a neighbour's) wall edge.
+	var hits := space.intersect_shape(params, 8)
+	if hits.is_empty():
+		return false
+	# Blocked only if SOME overlapping body is a real wall. Bodies that
+	# are all walkable ramps (wedge/pyramid) leave the cell passable.
+	for h in hits:
+		var col = h.get("collider")
+		if col == null:
+			continue
+		if not _is_walkable_body(col):
+			return true
+	return false
+
+
+# Walk the collider's ancestor chain looking for a walkable-group tag —
+# the StaticBody is often a child of the artifact node that carries the
+# group.
+func _is_walkable_body(node) -> bool:
+	var n = node
+	var depth := 0
+	while n != null and depth < 4:
+		if n is Node:
+			for g in walkable_groups:
+				if n.is_in_group(g):
+					return true
+		n = n.get_parent()
+		depth += 1
+	return false
 
 
 func _to_cell(w: Vector3) -> Vector2i:

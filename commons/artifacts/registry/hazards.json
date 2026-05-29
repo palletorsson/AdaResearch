@@ -1,5 +1,47 @@
 {
 	"artifacts": {
+		"path_cube": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Path-and-block game brick: a solid cube wall. Has a collider and is NOT path_passable, so the path watchdog routes around it. The foe's blocking primitive.",
+			"dev_themes": ["gameplay", "hazards", "primitives"],
+			"include_in_map_data": true,
+			"lookup_name": "path_cube",
+			"map_ready": true,
+			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"name": "Path Cube (wall)",
+			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"scene": "res://commons/hazards/path_block/path_cube.tscn",
+			"tags": ["cube", "wall", "block", "game", "collider"]
+		},
+		"path_wedge": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Path-and-block game brick: a walkable ramp. Tagged path_passable so the path watchdog routes THROUGH it — a cube the player can climb. The gate primitive.",
+			"dev_themes": ["gameplay", "hazards", "primitives"],
+			"include_in_map_data": true,
+			"lookup_name": "path_wedge",
+			"map_ready": true,
+			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"name": "Path Wedge (ramp)",
+			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"scene": "res://commons/hazards/path_block/path_wedge.tscn",
+			"tags": ["wedge", "ramp", "block", "game", "passable"]
+		},
+		"path_pyramid": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Path-and-block game brick: a climbable pyramid mound. Tagged path_passable so the path routes over it. The first primitive in the foe's progression.",
+			"dev_themes": ["gameplay", "hazards", "primitives"],
+			"include_in_map_data": true,
+			"lookup_name": "path_pyramid",
+			"map_ready": true,
+			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"name": "Path Pyramid (mound)",
+			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"scene": "res://commons/hazards/path_block/path_pyramid.tscn",
+			"tags": ["pyramid", "mound", "block", "game", "passable"]
+		},
 		"path_watchdog": {
 			"category": "hazards",
 			"complexity": "intermediate",
