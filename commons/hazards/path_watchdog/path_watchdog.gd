@@ -92,6 +92,8 @@ var _floor_ref_y: float = 0.0
 
 
 func _ready() -> void:
+	# Register so the game controller can find the referee.
+	add_to_group("path_watchdog")
 	_read_metadata_overrides()
 	_build_ribbon()
 	call_deferred("_resolve_endpoints")

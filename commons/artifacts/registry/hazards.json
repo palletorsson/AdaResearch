@@ -1,5 +1,20 @@
 {
 	"artifacts": {
+		"path_game_controller": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Win/lose controller for the path-and-block game. Wins on reaching the teleporter OR befriending every foe; loses on the watchdog's blocked-path timeout. Pops a pixel thumb over a befriended foe and a pixel heart on a win.",
+			"dev_themes": ["gameplay", "hazards"],
+			"include_in_map_data": true,
+			"lookup_name": "path_game_controller",
+			"map_ready": true,
+			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"name": "Path Game Controller",
+			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"scene": "res://commons/hazards/path_game/path_game_controller.tscn",
+			"tags": ["game", "win", "lose", "controller", "catalyst", "reaction"],
+			"qfep_connection": "A game is two truths and a verdict — can you still cross, and did you have to destroy anything to do it; the thumb answers the second."
+		},
 		"path_cube": {
 			"category": "hazards",
 			"complexity": "beginner",
