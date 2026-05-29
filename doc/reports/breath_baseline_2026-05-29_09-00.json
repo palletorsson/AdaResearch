@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-05-29T09:00:00",
+  "phase": "baseline",
+  "scheduled_task": "ada-morning-breath",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "honest_head_avg": 5.864,
+    "head_distribution": {
+      "change": "stage 2 documentation (Doc/Art/Map 0%)",
+      "randomness": "stage 7 polish",
+      "other_20_sequences": "stage 6 vr_testing"
+    },
+    "lone_outlier": "change (HEAD=2, only spine sequence below stage 6)"
+  },
+  "heat_map_top_5": [
+    "shader 65 (active)",
+    "primitive 65 (active)",
+    "softbodies stage 2 cleared 60 (deep discovery)",
+    "gallery_marker_<sequence> 60 (deep discovery)",
+    "scorer_comment_prefix 60 (deep discovery)"
+  ],
+  "garden_health": {
+    "total_artifacts": 2061,
+    "voiced": 1008,
+    "voice_coverage_pct": 48,
+    "embodiment_rate_pct": 32,
+    "phantom_limbs": 815
+  },
+  "release_gates": {
+    "overall": "FAIL",
+    "passing": "3/4",
+    "A_sequence_contract": "FAIL (missing_declared_maps: 8, undeclared_map_folders: 623)",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (grade_A 901, grade_B 144, grade_C 139, grade_F 0)",
+    "D_lab_progression": "PASS"
+  }
+}

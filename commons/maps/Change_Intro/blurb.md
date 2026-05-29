@@ -1,0 +1,3 @@
+A curve hangs in the space in front of you. A tangent line rides along it, and where the two touch, a number reads out — the slope at that single point. Move the contact and the number changes. That number is the derivative, and you are watching it before anyone has named it.
+
+The `slope_tangent_demo` is the curve and the line that grazes it. The `derivative_pair` holds two plots side by side: the function above, its slope-as-a-function below, so you can see the derivative is itself a curve. The `code_display` shows f(x) and f'(x) as text, the symbolic shadow of the geometry. The `science_screen` mirrors the live readout in 2D. Change, here, is local — it is what the curve is doing right where you are standing, not where it has been or where it is going.

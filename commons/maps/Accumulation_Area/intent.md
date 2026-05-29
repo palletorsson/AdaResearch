@@ -1,0 +1,7 @@
+Concept: The integral as accumulated area under a curve. A slider moves the upper bound; the shaded area and its readout track the total. The accumulation, plotted against the bound, is itself a function — setting up the inverse relationship with the derivative.
+Sequence role: Fourth map of Change, opening the accumulation cluster. The conceptual pivot from rate (maps 1-3) to total. Prepares both the Riemann sum (next map, the discrete approximation) and the Fundamental Theorem (map 8, where accumulation and rate are shown to undo each other).
+Technical angle: Numerically integrating f(x) from a fixed left bound to a movable right bound, shading the region, and reading out the running area. Plotting area-as-a-function-of-bound produces the antiderivative, which the science_screen displays alongside the original.
+Critical angle: Change reversed into total. Where the derivative discards everything but the local instant, the integral keeps everything behind the boundary. The two are the sequence's central pair — local versus global, rate versus accumulation — and this map establishes the second term so the reconciliation map can join them.
+Key artifacts: integral_area carries the curve and the slider-driven fill; code_display shows the integral notation and running value; science_screen plots area as a function of the bound.
+
+Gap: integral_area is a scaffolded name; the scene is reused in Accumulation_Riemann and should be built to serve both.

@@ -1,0 +1,3 @@
+The curve becomes a surface. Where before you read one slope at a point, now there are two — how the height changes as you step east, and how it changes as you step north. These are the partial derivatives, and the terrain shows them as a pair of arrows planted at wherever you look, one for each direction.
+
+The `partial_derivative_terrain` is the landscape z = f(x,y) and the slope arrows that ride it. The `science_screen` holds the 2D readout: the two numbers that describe the tilt of the ground beneath a single footstep. A slope on a curve needed one number. A slope on a surface needs a direction first — and that is the seed of the next map, where the arrows detach from the ground entirely and become a field.

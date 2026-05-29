@@ -5,12 +5,15 @@
       "timestamp": "2026-03-29T08:15:52.982449+00:00",
       "topic": "LOD system",
       "insight": "Built 3-tool LOD onboarding: generator, query, session writer. Tree has 55 sequences, 498 maps, 1670 artifacts.",
-      "lod": 0
+      "lod": 0,
+      "status": "resolved",
+      "resolved_at": "2026-05-13T09:57:05.433033Z",
+      "resolved_reason": "Achievement: LOD onboarding tooling built. Not a reusable playbook."
     },
     {
       "timestamp": "2026-03-29T21:15:51.391176+00:00",
       "topic": "map_building",
-      "insight": "Maps are narrative spaces: entry(spawn+context) → teaching(main artifact) → exploration(related artifacts) → reflection(text+darkness) → exit(teleporter). Artifact params: name:rotation:y_offset. Structure 0=void 1=floor 2+=wall. Utilities: sp/t/ds/r/m:x:y:z:delay/an:angle/sub:scene/3t:text. The Map Studio at /map-studio understands all 3 layers.",
+      "insight": "Maps are narrative spaces: entry(spawn+context) â†’ teaching(main artifact) â†’ exploration(related artifacts) â†’ reflection(text+darkness) â†’ exit(teleporter). Artifact params: name:rotation:y_offset. Structure 0=void 1=floor 2+=wall. Utilities: sp/t/ds/r/m:x:y:z:delay/an:angle/sub:scene/3t:text. The Map Studio at /map-studio understands all 3 layers.",
       "lod": 2,
       "tags": [
         "map",
@@ -42,13 +45,19 @@
         "primitives",
         "design",
         "study"
-      ]
+      ],
+      "status": "resolved",
+      "resolved_at": "2026-05-13T09:57:05.433033Z",
+      "resolved_reason": "Achievement: Primitives maps studied. One-shot research pass, not a recurring action."
     },
     {
       "timestamp": "2026-04-11T08:34:39.273912+00:00",
       "topic": "pipeline_scorer_validation_timeout",
       "insight": "Pipeline scorer validation stage runs pathfinder with 10s subprocess timeout per map. Maps pass individually but batch scoring reports 0% because cumulative processing exceeds limits. Fix: increase timeout or cache validation results.",
-      "lod": 3
+      "lod": 3,
+      "status": "resolved",
+      "resolved_breath_id": "2026-04-18T08:00",
+      "resolution": "Fixed by checking \" 0 FAIL\" with leading space in result_text instead of bare \"0 FAIL\". Scorer correctly reads validation results from pathfinder summary line."
     },
     {
       "timestamp": "2026-04-12T07:13:51.536145+00:00",
@@ -59,7 +68,7 @@
     {
       "timestamp": "2026-04-14T05:39:27.631743+00:00",
       "topic": "registry_repair",
-      "insight": "Two registry files (qfep.json, transforms.json) had _comment_* string values in artifacts dict causing 'str object has no attribute get' — entire files silently skipped by pipeline scorer. Fix: remove comment keys. This pattern may exist in other registry files.",
+      "insight": "Two registry files (qfep.json, transforms.json) had _comment_* string values in artifacts dict causing 'str object has no attribute get' â€” entire files silently skipped by pipeline scorer. Fix: remove comment keys. This pattern may exist in other registry files.",
       "lod": 3
     },
     {
@@ -95,7 +104,7 @@
     {
       "timestamp": "2026-04-17T07:12:43.802508+00:00",
       "topic": "artifact_lookup_patterns",
-      "insight": "laser_sward in Point_Lines was a typo for laser_sword. Pattern: when scorer shows 99% artifacts, check for misspellings in map_data.json interactables — the scorer does exact string matching against registry keys.",
+      "insight": "laser_sward in Point_Lines was a typo for laser_sword. Pattern: when scorer shows 99% artifacts, check for misspellings in map_data.json interactables â€” the scorer does exact string matching against registry keys.",
       "lod": 3
     },
     {
@@ -107,14 +116,17 @@
     {
       "timestamp": "2026-04-18T08:48:50.963618+00:00",
       "topic": "pipeline_scoring",
-      "insight": "Validation scorer had 'FAIL not in text' bug — pathfinder always outputs '0 FAIL' so all maps failed. Fix: check ' 0 FAIL' in result_text. All 19 sequences advanced stage 5→6.",
+      "insight": "Validation scorer had 'FAIL not in text' bug â€” pathfinder always outputs '0 FAIL' so all maps failed. Fix: check ' 0 FAIL' in result_text. All 19 sequences advanced stage 5â†’6.",
       "lod": 3
     },
     {
       "timestamp": "2026-04-18T08:48:51.083406+00:00",
       "topic": "release_gates",
       "insight": "All 4 gates pass for first time. Gate B: 55 tscn stubs in commons/artifacts/. Gate A: map_has_data() now strips ': Display Title' colon suffix before folder lookup.",
-      "lod": 3
+      "lod": 3,
+      "status": "resolved",
+      "resolved_at": "2026-05-13T09:57:05.433033Z",
+      "resolved_reason": "Achievement: All 4 release gates passed first time on 2026-04-18. Milestone, not a recurring action."
     },
     {
       "timestamp": "2026-04-19T10:09:52.192680+00:00",
@@ -126,7 +138,10 @@
       "timestamp": "2026-04-19T10:09:52.298121+00:00",
       "topic": "primitives_garden_threshold",
       "insight": "Primitives garden state: SCATTERED->GROWING at 70% voiced threshold. 64/91 artifacts voiced after adding @identity to 9 files. Next: add @identity to grab_octahedron, laser_measure, triangle, vectorline to push toward LIVING.",
-      "lod": 2
+      "lod": 2,
+      "status": "resolved",
+      "resolved_at": "2026-05-13T09:57:05.433033Z",
+      "resolved_reason": "Achievement: primitives sequence SCATTERED->GROWING via 64/91 voicings on 2026-04-19. One-shot, not a recurring action."
     },
     {
       "timestamp": "2026-04-20T07:14:43.143039+00:00",
@@ -137,7 +152,7 @@
     {
       "timestamp": "2026-04-21T07:17:01.899891+00:00",
       "topic": "garden_identity_leverage",
-      "insight": "floor_plan_space is a cross-sequence ultra-high-leverage artifact — one @identity voiced it 28+ times across patterngeneration AND mosaicanalysis simultaneously. Infrastructure artifacts serving as spatial containers for multiple maps have far higher leverage than algorithm-specific artifacts.",
+      "insight": "floor_plan_space is a cross-sequence ultra-high-leverage artifact â€” one @identity voiced it 28+ times across patterngeneration AND mosaicanalysis simultaneously. Infrastructure artifacts serving as spatial containers for multiple maps have far higher leverage than algorithm-specific artifacts.",
       "lod": 3
     },
     {
@@ -155,13 +170,13 @@
     {
       "timestamp": "2026-04-23T07:26:35.423937+00:00",
       "topic": "duplicate artifact files",
-      "insight": "branching_growth_algorithm exists in two dirs (branchinggrowthalgorithm/ and branchinggrowthalgorithmcontinued/). garden_listener cache last-write-wins — the latter file shadows the former. Always check for duplicate .gd filenames when a file has @identity but garden still shows it as voiceless.",
+      "insight": "branching_growth_algorithm exists in two dirs (branchinggrowthalgorithm/ and branchinggrowthalgorithmcontinued/). garden_listener cache last-write-wins â€” the latter file shadows the former. Always check for duplicate .gd filenames when a file has @identity but garden still shows it as voiceless.",
       "lod": 3
     },
     {
       "timestamp": "2026-04-28T07:13:15.766769+00:00",
       "topic": "garden_embodiment_cache_cascade",
-      "insight": "Voicing artifacts with 'apply_grid_config [has]' in @identity 'needs' field reveals previously-invisible embodied artifacts. Forces sequence jumped from 0 to 68 embodied after voicing 14 artifacts that declared apply_grid_config — the embodiment was already there in code, just not declared in @identity. Pattern: SCATTERED sequences with low embodiment may actually be heavily embodied but voiceless. Voice + declare to surface existing work.",
+      "insight": "Voicing artifacts with 'apply_grid_config [has]' in @identity 'needs' field reveals previously-invisible embodied artifacts. Forces sequence jumped from 0 to 68 embodied after voicing 14 artifacts that declared apply_grid_config â€” the embodiment was already there in code, just not declared in @identity. Pattern: SCATTERED sequences with low embodiment may actually be heavily embodied but voiceless. Voice + declare to surface existing work.",
       "lod": 3
     },
     {
@@ -174,19 +189,93 @@
       "timestamp": "2026-05-03T06:48:32.860062+00:00",
       "topic": "pipeline_scorer empty sequence schema",
       "insight": "score_sequence early-return on empty maps left stages 2-7 unpopulated, crashing main() display loop with KeyError. Fix: when maps==[] populate all 7 stage keys with done=0 total=0 pct=0 before return. Schema invariant matters for downstream JSON consumers too.",
-      "lod": 3
+      "lod": 3,
+      "status": "resolved",
+      "resolved_breath_id": "2026-05-03T06:36",
+      "resolution": "Fixed by populating stages 2-7 with done=0/total=0/pct=0 before early return when maps==[]."
     },
     {
       "timestamp": "2026-05-03T06:48:32.989986+00:00",
       "topic": "tscn uid path drift",
-      "insight": "branchinggrowthalgorithmcontinued/.tscn had a stale path (missing growth_systems/) AND a uid pointing to the OTHER folder's script — Godot resolved by uid and silently loaded the wrong .gd. Pattern: when two files share a name across folders, check that each .tscn references its sibling's uid not the other folder's. Two distinct symbols (uid + path) must agree.",
-      "lod": 3
+      "insight": "branchinggrowthalgorithmcontinued/.tscn had a stale path (missing growth_systems/) AND a uid pointing to the OTHER folder's script â€” Godot resolved by uid and silently loaded the wrong .gd. Pattern: when two files share a name across folders, check that each .tscn references its sibling's uid not the other folder's. Two distinct symbols (uid + path) must agree.",
+      "lod": 3,
+      "status": "resolved",
+      "resolved_breath_id": "2026-05-03T06:36",
+      "resolution": "Fixed by rewriting ext_resource line in branchinggrowthalgorithmcontinued/.tscn with correct subdir path AND its own uid (6n96tsdpij6bc, not the sibling cdswj66fc5evr)."
     },
     {
       "timestamp": "2026-05-03T17:07:58.501423+00:00",
       "topic": "catalyst_foe_system",
       "insight": "Unified enemy: vent emits cube foes; catalyst projectile flips them to friend; friend converts peers. 4 kinds (goo/transport/swarm/drainfriend) dispatch on projectile mode_id. Editor /editor + VR commons/hazards/catalyst_foe/. 10 test maps Catalyst_01..10 chained. Save through /api/voxel-editor for compact-rows JSON.",
       "lod": 2
+    },
+    {
+      "timestamp": "2026-05-05T05:37:00.147572+00:00",
+      "topic": "garden_voicing_targeting",
+      "insight": "Voicing artifacts via registry membership LEAKS into gallery sequence. Garden listener counts voices per (sequence map, artifact instance) where artifact .gd stem matches lookup name. To advance a SPECIFIC sequence's garden state, intersect unvoiced artifacts with that sequence's map interactables FIRST, then voice. Voicing by registry-membership scattershots into whichever sequence happens to place each artifact - usually gallery.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-09T06:35:04.605936+00:00",
+      "topic": "randomness_scattered_to_growing",
+      "insight": "11 map-presence-targeted @identity adds (digital_materiality_glitch, PickupCubePlacer, random_object_spawner, RotateGridCubes, GaussianBlurCircle, GaussianPaintSplatter, GaussianBlurShader, BubblesRandom, bubble_particles, SculptOne, RandomSpace) advanced randomness 41/73 (56.2%) to 52/73 (71.2%) â€” crossed 70% voiced + 46% embodied = GROWING. Two-state jump (SCATTERED -> GROWING) skipping REACHING because embodiment was already past 20%.",
+      "lod": 3,
+      "status": "resolved",
+      "resolved_at": "2026-05-12T08:28:07",
+      "resolved_breath_id": "2026-05-12T08:30",
+      "resolution_note": "Logged as historical achievement; randomness sequence now stable at GROWING. Heat map should surface next-target voicing work, not past wins."
+    },
+    {
+      "timestamp": "2026-05-09T06:35:09.838646+00:00",
+      "topic": "heat_map_resolved_decay",
+      "insight": "Heat map generator now filters status=='resolved' from LOD_DISCOVERIES feed. Three resolved entries marked: pipeline_scorer_validation_timeout (resolved 2026-04-18), pipeline_scorer empty sequence schema (resolved 2026-05-03), tscn uid path drift (resolved 2026-05-03). Heat map now surfaces fresher unresolved discoveries (garden_embodiment_cache_cascade, pipeline_scorer_token_parsing, garden_voicing_targeting) instead of stale ones.",
+      "lod": 3,
+      "status": "resolved",
+      "resolved_at": "2026-05-12T08:28:07",
+      "resolved_breath_id": "2026-05-12T08:30",
+      "resolution_note": "Tool fix shipped 2026-05-09 (filters status==resolved). Self-referential insight no longer needs to surface."
+    },
+    {
+      "timestamp": "2026-05-12T06:31:35.369228+00:00",
+      "topic": "gate_b_promoted_stale_decay",
+      "insight": "Gate B repair pattern: when commits rename or drop composition variants without regenerating .tscn (e.g., ba85050c7 dropped tessellation_field_k0X, 4f0b5551c added alhambra variants without specs), the registry retains orphan entries. Audit-artifacts catches via unresolved_scene_files. Fix: cross-reference each unresolved entry against (folder exists? spec exists? map references? git history). If all three are missing, deletion is safe — the registry add ran ahead of scene generation. Prune them. Pattern recurs on average every ~5 days of promotion-tool runs.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-19T07:17:07.279205+00:00",
+      "topic": "softbodies_documentation_pipeline",
+      "insight": "Imported soft-body gallery maps (sb01-sb08, gl01-05, gm01-04, sb_rd, sb_ls, sb_ca, sb_noise — 24 total) share the gallery_marker_soft-body artifact pattern and can be doc-batched by theme cluster (cloth/jelly/glass/reaction-diffusion/L-system DNA bridges). Each blurb stays close to the source DNA gallery title, intent adds Concept/Sequence-role/Technical/Critical/Key-artifacts/Gap structure. Voice: pareidolic, force-narrative, end on small reveal.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-21T18:49:36.614534+00:00",
+      "topic": "softbodies_documentation_pipeline",
+      "insight": "Theme-cluster doc batching with already-docced sister maps lets each pair frame a contrast (boundary topology, stiffness, parameter trajectory, RD regime). 5 paired theme-contrasts give the cluster pedagogical structure rather than 10 isolated rooms. softbodies stage_2 doc moved 44% -> 59% in 10 files, single breath.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-26T07:17:41.347721+00:00",
+      "topic": "softbodies stage 2 cleared",
+      "insight": "Theme-cluster pair-contrast batching cleared softbodies stage_2_documentation 100% in one breath (7 maps, 14 doc files). Pairs used: sb_noise01 single (closing rule-as-loom set rd/ls/ca/noise), gl04+gl05 (param variation vs param breakdown — glass cluster finishes), gm01+gm02 (constant-radius vs varying-radius mould — opens mould cluster), gm03+gm04 (inside-cavity vs outside-obstacle — topological inversion closes the cluster). HEAD advanced 2->3 (artifacts at 62%). First stage advance in 26 days. Cumulative documentation_writing skill now 55/55.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-27T07:21:09.410069+00:00",
+      "topic": "gallery_marker_<sequence>",
+      "insight": "Project-wide phantom artifact pattern: 24 cells in softbodies (and ~20+ in facades) reference gallery_marker_<sequence_token> with no implementation. Single shared scene at commons/artifacts/gallery_marker + per-sequence registry alias (label fed via apply_grid_config) resolves the whole pattern. Pre-doc-batch audits should grep for non-registered interactable tokens.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-28T07:14:11.719892+00:00",
+      "topic": "scorer_comment_prefix",
+      "insight": "Grid system comment-out convention '#'-prefix added in commit c679a7b4c requires downstream sweep across pipeline scorer, pathfinder, garden listener, release gates, capture pipeline, sequence verifier, and map studio. Pipeline scorer fix landed 2026-05-28 - skip cells starting with '#' at cell filter step in tools/sequence_pipeline_scorer.py.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-29T07:11:10.695597+00:00",
+      "topic": "change sequence documentation",
+      "insight": "Pipeline scorer stage 2 (documentation) checks ONLY blurb.md OR intent.md existence, fully decoupled from map_data.json. A 4-breath-old deferral claimed change docs were blocked on Map Studio authoring; this was a scorer misread. Writing 16 docs alone advanced change HEAD stage 2->3 with zero maps on disk. Re-validate a deferral premise before re-deferring.",
+      "lod": 3
     }
   ]
 }
