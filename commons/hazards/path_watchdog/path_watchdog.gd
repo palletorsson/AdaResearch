@@ -91,6 +91,8 @@ var _cleared: bool = false
 # The route found by the most recent scan (world points), published for a
 # builder foe to target. Empty when the path is blocked.
 var _current_path: Array = []
+# Raw structure layer (rows of "0"/"1"/"2") — pathfinding runs on level 1.
+var _struct_grid: Array = []
 # True only when an actual player rig was found. The restart/countdown
 # is gated on this so the watchdog is inert in capture / gallery / editor
 # contexts where there is no player to fail.
@@ -151,10 +153,70 @@ func get_path_points() -> Array:
 func _resolve_endpoints() -> void:
 	_start_node = _find_player()
 	_goal_node = _find_teleport()
+	_struct_grid = _find_structure_grid()
 	_resolved = true
 	# Run one scan immediately so the ribbon shows on the first frame
 	# (VR + headless capture).
 	_scan()
+
+
+# The raw structure layer (layers.structure: rows of "0"/"1"/"2"), read
+# from the map's data component. This is the runtime source of truth for
+# walkable terrain — get_height_at() uses the voxel-editor's editable
+# copy which is empty at play time. Returns [] in standalone scenes (then
+# the watchdog falls back to physics floor-probing).
+func _find_structure_grid() -> Array:
+	var n: Node = get_parent()
+	while n != null:
+		var grid := _structure_from(n)
+		if not grid.is_empty():
+			return grid
+		n = n.get_parent()
+	# Fallback: search the whole scene for a node exposing the layer.
+	return _search_structure(get_tree().current_scene)
+
+
+func _structure_from(n: Node) -> Array:
+	if n == null:
+		return []
+	# GridSystem → data_component → json_loader.get_structure_layer()
+	if "data_component" in n and n.get("data_component") != null:
+		var dc = n.get("data_component")
+		if "json_loader" in dc and dc.get("json_loader") != null \
+				and dc.json_loader.has_method("get_structure_layer"):
+			return dc.json_loader.get_structure_layer()
+	if n.has_method("get_structure_layer"):
+		return n.call("get_structure_layer")
+	return []
+
+
+func _search_structure(node: Node) -> Array:
+	if node == null:
+		return []
+	var grid := _structure_from(node)
+	if not grid.is_empty():
+		return grid
+	for c in node.get_children():
+		var r := _search_structure(c)
+		if not r.is_empty():
+			return r
+	return []
+
+
+# Structure level at a lattice cell (cell.x = world x = column, cell.y =
+# world z = row). 0 = void, 1 = walkable floor, 2 = raised, -1 = unknown.
+func _structure_height(cell: Vector2i) -> int:
+	if _struct_grid.is_empty():
+		return -1
+	var z: int = cell.y
+	var x: int = cell.x
+	if z < 0 or z >= _struct_grid.size():
+		return 0
+	var row = _struct_grid[z]
+	if not (row is Array) or x < 0 or x >= row.size():
+		return 0
+	var v := str(row[x]).strip_edges()
+	return int(v) if v.is_valid_int() else 0
 
 
 func _find_player() -> Node3D:
@@ -319,10 +381,17 @@ func _find_route(start_w: Vector3, goal_w: Vector3) -> Array:
 			if c == start_c or c == goal_c:
 				walkable[c] = true
 			else:
-				# Passable = there is floor to stand on AND nothing walls it.
-				# The floor test stops the route from cutting across voids
-				# (the "0" cells of a real map's gaps).
-				walkable[c] = _cell_has_floor(space, c) and not _cell_blocked(space, c)
+				# Terrain: walk only on structure LEVEL 1. Level 0 (void)
+				# and level 2 (raised) are not walkable. When the structure
+				# grid isn't available (standalone scenes), fall back to a
+				# physics floor-probe.
+				var terrain_ok: bool
+				if not _struct_grid.is_empty():
+					terrain_ok = (_structure_height(c) == 1)
+				else:
+					terrain_ok = _cell_has_floor(space, c)
+				# A placed block (raising the cell toward level 2) walls it.
+				walkable[c] = terrain_ok and not _cell_blocked(space, c)
 
 	# BFS (4-connectivity → grid-honest, no diagonal squeezing).
 	var came_from := {}

@@ -43,14 +43,68 @@ const BLOCK_SCENES := {
 
 var _build_timer: float = 0.0
 var _placed: Array = []
+# Raw structure layer (rows of "0"/"1"/"2") — placement allowed only on
+# level 1 (walkable floor). Empty in standalone scenes (physics fallback).
+var _struct_grid: Array = []
 
 
 func _on_ready() -> void:
 	super._on_ready()
 	add_to_group("path_builder")
+	_struct_grid = _find_structure_grid()
 	# Listen to our own arc so we can react to becoming a friend.
 	if not personality_changed.is_connected(_on_builder_personality):
 		personality_changed.connect(_on_builder_personality)
+
+
+# Read the raw structure layer (rows of "0"/"1"/"2") from the map's data
+# component. Source of truth for walkable level-1 cells. [] → standalone.
+func _find_structure_grid() -> Array:
+	var n: Node = get_parent()
+	while n != null:
+		var grid := _structure_from(n)
+		if not grid.is_empty():
+			return grid
+		n = n.get_parent()
+	return _search_structure(get_tree().current_scene)
+
+
+func _structure_from(n: Node) -> Array:
+	if n == null:
+		return []
+	if "data_component" in n and n.get("data_component") != null:
+		var dc = n.get("data_component")
+		if "json_loader" in dc and dc.get("json_loader") != null \
+				and dc.json_loader.has_method("get_structure_layer"):
+			return dc.json_loader.get_structure_layer()
+	if n.has_method("get_structure_layer"):
+		return n.call("get_structure_layer")
+	return []
+
+
+func _search_structure(node: Node) -> Array:
+	if node == null:
+		return []
+	var grid := _structure_from(node)
+	if not grid.is_empty():
+		return grid
+	for c in node.get_children():
+		var r := _search_structure(c)
+		if not r.is_empty():
+			return r
+	return []
+
+
+func _structure_height(cx: float, cz: float) -> int:
+	var z: int = int(roundf(cz))
+	var x: int = int(roundf(cx))
+	if z < 0 or z >= _struct_grid.size():
+		return 0
+	var row = _struct_grid[z]
+	if not (row is Array) or x < 0 or x >= row.size():
+		return 0
+	var v := str(row[x]).strip_edges()
+	return int(v) if v.is_valid_int() else 0
 
 
 # Map-token config (path_builder_foe#build_shape:pyramid#use_grid_shader:1 …).
@@ -167,13 +221,17 @@ func _cell_filled(cx: float, cz: float) -> bool:
 	return false
 
 
-# Is there a WALKABLE floor cube under this cell? Cast down from well
-# above (to catch raised tops) and accept only ground at roughly the
-# foe's own walking level — a height-1 "1" cell. Reject:
-#   • void ("0")  → no hit
-#   • raised ("2") → its top sits ~1m above where the player walks, so
-#     the player can't stand there and the foe must not build there.
+# Can the foe build on this cell? Only on structure LEVEL 1 — the
+# walkable floor. The placed block raises that cell toward level 2 and
+# blocks the level-1 path. Rejects, straight from the structure data:
+#   • level 0 / out of bounds → void or outside the structure
+#   • level 2+ → already raised; the player can't walk there anyway
+# Falls back to a physics floor-probe only when no structure grid exists
+# (standalone test scenes).
 func _has_floor_at(cx: float, cz: float) -> bool:
+	if not _struct_grid.is_empty():
+		return _structure_height(cx, cz) == 1
+	# Physics fallback (no structure grid).
 	var space := get_world_3d().direct_space_state
 	var from := Vector3(cx, global_position.y + 2.5, cz)
 	var to := Vector3(cx, global_position.y - 2.0, cz)
@@ -185,8 +243,6 @@ func _has_floor_at(cx: float, cz: float) -> bool:
 	var hit := space.intersect_ray(params)
 	if hit.is_empty():
 		return false
-	# Only same-level floor. A raised cell's surface is ~1m higher than
-	# the foe's feet, so anything noticeably above the foe is off-limits.
 	return float(hit.position.y) <= global_position.y + 0.5
 
 
