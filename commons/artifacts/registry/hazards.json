@@ -61,7 +61,7 @@
 		"path_pyramid": {
 			"category": "hazards",
 			"complexity": "beginner",
-			"description": "Path-and-block game brick: a climbable pyramid mound. Tagged path_passable so the path routes over it. The first primitive in the foe's progression.",
+			"description": "Path-and-block game brick: a 1m-base pyramid mound that BLOCKS the path (you can't cross a peak). Supports the grid wireframe shader. The first primitive in the foe's progression.",
 			"dev_themes": ["gameplay", "hazards", "primitives"],
 			"include_in_map_data": true,
 			"lookup_name": "path_pyramid",

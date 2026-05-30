@@ -26,8 +26,15 @@ class_name PathBlock
 @export var ramp_color: Color = Color(0.42, 0.85, 0.55)   # green = "you may pass"
 @export var metallic: float = 0.15
 @export var roughness: float = 0.5
+## Render the block with the grid wireframe shader (same look as the
+## floor) instead of a flat colour — so dropped blocks read as grid
+## geometry growing out of the map.
+@export var use_grid_shader: bool = false
+@export var grid_wire_color: Color = Color(1.0, 0.2, 0.8)   # magenta, like the floor
+@export var grid_fill_color: Color = Color(0.68, 0.73, 0.85)
 
 const PASSABLE_GROUP := "path_passable"
+const GRID_SHADER := preload("res://commons/resourses/shaders/Grid.gdshader")
 
 var _built: bool = false
 
@@ -56,6 +63,9 @@ func _read_metadata_overrides() -> void:
 		size = float(str(get_meta("config_size")))
 	if has_meta("config_height"):
 		height = float(str(get_meta("config_height")))
+	if has_meta("config_use_grid_shader"):
+		var v := str(get_meta("config_use_grid_shader")).to_lower()
+		use_grid_shader = v in ["true", "1", "yes", "on"]
 
 
 func _build() -> void:
@@ -67,11 +77,13 @@ func _build() -> void:
 
 	match shape:
 		"wedge":
+			# Wedge is a RAMP — the one walkable block (the gate).
 			_make_wedge(mesh_inst, coll)
 			add_to_group(PASSABLE_GROUP)
 		"pyramid":
+			# Pyramid is a peaked MOUND — you can't cross a 1m point, so
+			# it BLOCKS the path (not in the passable group).
 			_make_pyramid(mesh_inst, coll)
-			add_to_group(PASSABLE_GROUP)
 		_:  # cube (default) — a wall
 			_make_cube(mesh_inst, coll)
 
@@ -84,7 +96,7 @@ func _make_cube(mi: MeshInstance3D, cs: CollisionShape3D) -> void:
 	bm.size = Vector3(size, height, size)
 	mi.mesh = bm
 	mi.position = Vector3(0, height * 0.5, 0)
-	mi.material_override = _mat(cube_color)
+	mi.material_override = _build_material(cube_color)
 	var box := BoxShape3D.new()
 	box.size = Vector3(size, height, size)
 	cs.shape = box
@@ -100,7 +112,7 @@ func _make_wedge(mi: MeshInstance3D, cs: CollisionShape3D) -> void:
 	pm.left_to_right = 0.0   # right triangle → a clean ramp face
 	mi.mesh = pm
 	mi.position = Vector3(0, height * 0.5, 0)
-	mi.material_override = _mat(ramp_color)
+	mi.material_override = _build_material(ramp_color)
 	# Convex collision from the prism so the player can actually walk up.
 	var convex := pm.create_convex_shape()
 	cs.shape = convex
@@ -108,20 +120,38 @@ func _make_wedge(mi: MeshInstance3D, cs: CollisionShape3D) -> void:
 
 
 func _make_pyramid(mi: MeshInstance3D, cs: CollisionShape3D) -> void:
-	# A 4-sided pyramid (cylinder with 4 sides, top radius 0).
+	# A 4-sided pyramid (cylinder with 4 sides, top radius 0), rotated 45°
+	# so its square base aligns to the cell. For a 45°-rotated 4-gon the
+	# base EDGE = bottom_radius * sqrt(2), so radius = size/sqrt(2) gives a
+	# base edge of `size` — a full 1m base when size = 1.0.
 	var cm := CylinderMesh.new()
 	cm.top_radius = 0.0
-	cm.bottom_radius = size * 0.62
+	cm.bottom_radius = size * 0.70710678   # base edge ≈ size (1m at size 1.0)
 	cm.height = height
 	cm.radial_segments = 4
 	mi.mesh = cm
 	mi.position = Vector3(0, height * 0.5, 0)
 	mi.rotation = Vector3(0, deg_to_rad(45.0), 0)   # square base aligns to cell
-	mi.material_override = _mat(ramp_color)
+	mi.material_override = _build_material(ramp_color)
 	var convex := cm.create_convex_shape()
 	cs.shape = convex
 	cs.position = Vector3(0, height * 0.5, 0)
 	cs.rotation = Vector3(0, deg_to_rad(45.0), 0)
+
+
+# Flat coloured material, or the grid wireframe shader when use_grid_shader.
+func _build_material(c: Color) -> Material:
+	if use_grid_shader:
+		var sm := ShaderMaterial.new()
+		sm.shader = GRID_SHADER
+		sm.set_shader_parameter("modelColor", grid_fill_color)
+		sm.set_shader_parameter("wireframeColor", grid_wire_color)
+		sm.set_shader_parameter("emissionColor", grid_wire_color)
+		sm.set_shader_parameter("emission_strength", 2.0)
+		sm.set_shader_parameter("width", 2.0)
+		sm.set_shader_parameter("show_interior", true)
+		return sm
+	return _mat(c)
 
 
 func _mat(c: Color) -> StandardMaterial3D:

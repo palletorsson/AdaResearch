@@ -27,6 +27,7 @@ const CONFIG_PARAM_NAMES = [
 	"label", "color1", "color2", "energy", "frame", "active", "cooldown", "mode",
 	# Path-and-block game params
 	"debug_test", "grace_seconds", "cell_size", "shape", "win_on_all_befriended",
+	"build_shape", "build_interval", "build_ahead", "max_blocks", "build_size", "use_grid_shader",
 	# Wave/burst pattern params
 	"wave", "wave_rows", "wave_flat", "wave_max", "wave_axis",
 	"burst", "burst_rotate", "burst_flat", "burst_axis",

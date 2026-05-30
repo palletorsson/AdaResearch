@@ -25,6 +25,10 @@ class_name PathBuilderFoe
 @export var build_ahead: float = 1.3
 ## Cap so a single foe can't carpet the map.
 @export var max_blocks: int = 10
+## Edge size of each dropped block (1.0 = fills a 1m cell).
+@export var build_size: float = 1.0
+## Render dropped blocks with the grid wireframe shader (floor look).
+@export var build_use_grid_shader: bool = false
 ## Free the blocks it placed when it becomes a friend (the wall opens).
 @export var clear_blocks_on_befriend: bool = true
 
@@ -44,6 +48,24 @@ func _on_ready() -> void:
 	# Listen to our own arc so we can react to becoming a friend.
 	if not personality_changed.is_connected(_on_builder_personality):
 		personality_changed.connect(_on_builder_personality)
+
+
+# Map-token config (path_builder_foe#build_shape:pyramid#use_grid_shader:1 …).
+# The base only reads health/speed/etc., so read the build params here.
+func apply_grid_config(config: Dictionary) -> void:
+	super.apply_grid_config(config)
+	if config.has("build_shape"):
+		build_shape = String(config["build_shape"]).to_lower()
+	if config.has("build_interval"):
+		build_interval = float(config["build_interval"])
+	if config.has("build_ahead"):
+		build_ahead = float(config["build_ahead"])
+	if config.has("max_blocks"):
+		max_blocks = int(config["max_blocks"])
+	if config.has("build_size"):
+		build_size = float(config["build_size"])
+	if config.has("use_grid_shader"):
+		build_use_grid_shader = String(config["use_grid_shader"]).to_lower() in ["1", "true", "yes", "on"]
 
 
 func _physics_process(delta: float) -> void:
@@ -95,6 +117,9 @@ func _cell_filled(cx: float, cz: float) -> bool:
 func _spawn_block_at(cx: float, cz: float) -> void:
 	var scene: PackedScene = BLOCK_SCENES.get(build_shape, BLOCK_SCENES["cube"])
 	var block: Node3D = scene.instantiate()
+	# Set DNA before add_child so the block's _ready/_build uses it.
+	block.set("size", build_size)
+	block.set("use_grid_shader", build_use_grid_shader)
 	var root := get_parent()
 	if root == null:
 		root = get_tree().current_scene
