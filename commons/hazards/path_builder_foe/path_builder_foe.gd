@@ -35,17 +35,35 @@ class_name PathBuilderFoe
 ## Free the blocks it placed when it becomes a friend (the wall opens).
 @export var clear_blocks_on_befriend: bool = true
 
+@export_group("Walk-Build cycle")
+## How fast the builder walks to its next build spot (m/s).
+@export var walk_speed: float = 1.6
+## Pause after each placement while the pyramid "hatches" (seconds).
+@export var hatch_seconds: float = 1.0
+## How close to the target cell the foe must get before it places.
+@export var arrive_distance: float = 1.2
+## Give up walking to a target after this long (stuck) and pick another.
+@export var walk_timeout: float = 5.0
+
 const BLOCK_SCENES := {
 	"cube": preload("res://commons/hazards/path_block/path_cube.tscn"),
 	"wedge": preload("res://commons/hazards/path_block/path_wedge.tscn"),
 	"pyramid": preload("res://commons/hazards/path_block/path_pyramid.tscn"),
 }
 
-var _build_timer: float = 0.0
 var _placed: Array = []
 # Raw structure layer (rows of "0"/"1"/"2") — placement allowed only on
 # level 1 (walkable floor). Empty in standalone scenes (physics fallback).
 var _struct_grid: Array = []
+
+# Walk → place → hatch cycle.
+enum BState { WALK, PLACE, HATCH }
+var _bstate: int = BState.WALK
+var _target_cell: Vector2i = Vector2i.ZERO
+var _has_target: bool = false
+var _walk_time: float = 0.0
+var _hatch_timer: float = 0.0
+const _NO_CELL := Vector2i(-99999, -99999)
 
 
 func _on_ready() -> void:
@@ -125,77 +143,117 @@ func apply_grid_config(config: Dictionary) -> void:
 		build_use_grid_shader = String(config["use_grid_shader"]).to_lower() in ["1", "true", "yes", "on"]
 
 
-func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
-	# Only a foe builds; a friend has laid down its tools.
-	if _personality == "friend":
-		return
+# The builder no longer drops blocks remotely on a timer — it WALKS to a
+# spot, PLACES a pyramid, then HATCHES (pauses) before walking to the
+# next spot. We drive movement ourselves (constant walking height; the
+# grid floor is flat) rather than the base chase, so the cadence reads.
+func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(_player_node):
+		_find_player()
+	# Befriended, out of budget, or no player → stand still.
+	if _personality == "friend" or _player_node == null or _placed.size() >= max_blocks:
+		velocity = Vector3.ZERO
+		move_and_slide()
 		return
-	_build_timer += delta
-	if _build_timer >= build_interval:
-		_build_timer = 0.0
-		_place_block()
+	match _bstate:
+		BState.WALK:  _state_walk(_delta)
+		BState.PLACE: _state_place()
+		BState.HATCH: _state_hatch(_delta)
+	# Keep to the walking surface — flat level-1 floor, no gravity needed
+	# (the foe's collision mask is 0, so move_and_slide just integrates).
+	velocity.y = 0.0
+	move_and_slide()
 
 
-func _place_block() -> void:
-	if _placed.size() >= max_blocks:
+func _state_walk(delta: float) -> void:
+	if not _has_target:
+		if not _choose_build_target():
+			velocity = Vector3.ZERO
+			return
+		_walk_time = 0.0
+	_walk_time += delta
+	var tw := _cell_world(_target_cell)
+	var to := Vector3(tw.x - global_position.x, 0.0, tw.z - global_position.z)
+	var d := to.length()
+	if d <= arrive_distance:
+		velocity = Vector3.ZERO
+		_bstate = BState.PLACE
 		return
-	# First choice: drop ONTO the player's live route to the exit, so each
-	# block forces a reroute and the map progressively seals. Falls back to
-	# a wall toward the player when no route is published.
-	if _block_the_route():
+	if _walk_time > walk_timeout:   # stuck → pick a new target
+		_has_target = false
+		velocity = Vector3.ZERO
 		return
+	var dir: Vector3 = to / maxf(d, 0.001)
+	velocity.x = dir.x * walk_speed
+	velocity.z = dir.z * walk_speed
 
+
+func _state_place() -> void:
+	var cx := float(_target_cell.x)
+	var cz := float(_target_cell.y)
+	if not _cell_filled(cx, cz) and _has_floor_at(cx, cz):
+		_spawn_block_at(cx, cz)
+	_has_target = false
+	_hatch_timer = hatch_seconds
+	_bstate = BState.HATCH
+
+
+func _state_hatch(delta: float) -> void:
+	velocity = Vector3.ZERO
+	_hatch_timer -= delta
+	if _hatch_timer <= 0.0:
+		_bstate = BState.WALK
+
+
+# World centre of a cell at the foe's walking height.
+func _cell_world(cell: Vector2i) -> Vector3:
+	return Vector3(float(cell.x), global_position.y, float(cell.y))
+
+
+# Choose the next cell to wall: prefer a cell on the player's live route
+# to the exit; else the first reachable empty floor cell toward the
+# player. Returns false when nothing valid is found.
+func _choose_build_target() -> bool:
+	var rc := _route_target_cell()
+	if rc != _NO_CELL:
+		_target_cell = rc
+		_has_target = true
+		return true
 	var to_player: Vector3 = _player_node.global_position - global_position
 	to_player.y = 0.0
 	var dist: float = to_player.length()
 	if dist < 0.05:
-		return
+		return false
 	var dir: Vector3 = to_player.normalized()
-	# Perpendicular (in the floor plane) to the approach — the wall grows
-	# ACROSS the player's line of approach, not toward them, so it
-	# actually blocks rather than trailing a thin line.
-	var perp := Vector3(-dir.z, 0.0, dir.x)
-	# Wall centre sits a little ahead of the foe, toward the player.
-	var center := global_position + dir * build_ahead
-
-	# Fill the wall outward from the centre: 0, +1, -1, +2, -2 … Each
-	# interval drops at the first still-empty floor cell in that order, so
-	# the wall widens across the route over time.
-	for i in range(wall_width):
-		var off: int = _wall_offset(i)
-		var spot := center + perp * float(off)
-		var cx: float = roundf(spot.x)
-		var cz: float = roundf(spot.z)
+	for k in range(max(2, int(ceil(dist)))):
+		var drop := global_position + dir * (build_ahead + float(k))
+		var cx: float = roundf(drop.x)
+		var cz: float = roundf(drop.z)
 		if _cell_filled(cx, cz):
 			continue
-		# Only build on an EXISTING floor cube — never float over the void.
 		if not _has_floor_at(cx, cz):
 			continue
-		_spawn_block_at(cx, cz)
-		return
+		_target_cell = Vector2i(int(cx), int(cz))
+		_has_target = true
+		return true
+	return false
 
 
-# Map 0,1,2,3,4 → 0,+1,-1,+2,-2 so the wall fills outward from its centre.
+# Map 0,1,2,3,4 → 0,+1,-1,+2,-2 so a search fans outward from the centre.
 func _wall_offset(i: int) -> int:
 	var step: int = (i + 1) / 2
 	return step if (i % 2 == 1) else -step
 
 
-# Drop a block on the watchdog's current player→exit route, in the middle
-# stretch (not on the player's feet or the exit pad). Returns true if it
-# placed one. Each placement forces the watchdog to reroute, so over
-# successive intervals the foe chases the route until the map is sealed.
-func _block_the_route() -> bool:
+# A cell on the watchdog's current player→exit route (middle stretch,
+# empty, walkable level-1) to walk to and wall. _NO_CELL if none.
+func _route_target_cell() -> Vector2i:
 	var wd = get_tree().get_first_node_in_group("path_watchdog")
 	if wd == null or not wd.has_method("get_path_points"):
-		return false
+		return _NO_CELL
 	var pts: Array = wd.get_path_points()
 	if pts.size() < 3:
-		return false
-	# Search the middle of the route outward from its centre, so the wall
-	# lands between the player and the exit rather than at either end.
+		return _NO_CELL
 	var n: int = pts.size()
 	var mid: int = n / 2
 	for d in range(n):
@@ -209,9 +267,8 @@ func _block_the_route() -> bool:
 			continue
 		if not _has_floor_at(cx, cz):
 			continue
-		_spawn_block_at(cx, cz)
-		return true
-	return false
+		return Vector2i(int(cx), int(cz))
+	return _NO_CELL
 
 
 func _cell_filled(cx: float, cz: float) -> bool:
