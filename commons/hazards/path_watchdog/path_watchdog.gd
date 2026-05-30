@@ -56,10 +56,12 @@ class_name PathWatchdog
 @export var walkable_groups: Array[String] = ["path_passable", "ramp"]
 
 @export_group("Ribbon")
-@export var ribbon_width: float = 0.16
-@export var ribbon_height: float = 0.06    # above the walking surface
-@export var color_open: Color = Color(0.30, 0.95, 0.55)
-@export var color_blocked: Color = Color(1.0, 0.28, 0.22)
+@export var ribbon_width: float = 0.18
+@export var ribbon_height: float = 0.22    # floats clearly above the walking surface
+@export var color_open: Color = Color(0.25, 1.0, 0.5)
+@export var color_blocked: Color = Color(1.0, 0.26, 0.2)
+## Base glow of the ribbon (brightens further as the fail clock runs).
+@export var ribbon_glow: float = 2.6
 
 @export_group("Behaviour")
 ## When true, expiry triggers a restart. Off = scoreboard only (debug).
@@ -215,12 +217,21 @@ func _process(delta: float) -> void:
 		# Pulse the ribbon brightness with the countdown urgency.
 		if _ribbon_mat:
 			var urgency: float = 1.0 - clampf(_countdown / maxf(grace_seconds, 0.01), 0.0, 1.0)
-			_ribbon_mat.emission_energy_multiplier = 1.5 + urgency * 3.0
+			_ribbon_mat.emission_energy_multiplier = ribbon_glow + urgency * 3.0
 		if _countdown <= 0.0:
 			_fail()
 
 
 func _scan() -> void:
+	# Keep looking for the real player rig — it may spawn AFTER the
+	# watchdog (deferred player setup, late-loaded VR rig, sim injection).
+	# Once found, it becomes the path start and arms the fail clock.
+	if not _has_real_player:
+		var p := _find_player()
+		if p != null and _has_real_player:
+			_start_node = p
+	if _goal_node == null:
+		_goal_node = _find_teleport()
 	if _start_node == null or _goal_node == null:
 		return
 	# Track the walking surface off the start node (player feet / spawn).
@@ -249,7 +260,7 @@ func _enter_open() -> void:
 	_blocked = false
 	_countdown = grace_seconds
 	if _ribbon_mat:
-		_ribbon_mat.emission_energy_multiplier = 1.5
+		_ribbon_mat.emission_energy_multiplier = ribbon_glow
 	path_opened.emit()
 
 
@@ -417,7 +428,7 @@ func _build_ribbon() -> void:
 	_ribbon_mat.albedo_color = color_open
 	_ribbon_mat.emission_enabled = true
 	_ribbon_mat.emission = color_open
-	_ribbon_mat.emission_energy_multiplier = 1.5
+	_ribbon_mat.emission_energy_multiplier = ribbon_glow
 	_ribbon_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_ribbon_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	add_child(_ribbon)
