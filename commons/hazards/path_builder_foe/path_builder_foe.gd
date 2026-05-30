@@ -167,19 +167,27 @@ func _cell_filled(cx: float, cz: float) -> bool:
 	return false
 
 
-# Is there a floor cube under this cell? Downward ray from just above the
-# foe's walking surface; a hit means solid ground to build on, no hit
-# means void (don't place there).
+# Is there a WALKABLE floor cube under this cell? Cast down from well
+# above (to catch raised tops) and accept only ground at roughly the
+# foe's own walking level — a height-1 "1" cell. Reject:
+#   • void ("0")  → no hit
+#   • raised ("2") → its top sits ~1m above where the player walks, so
+#     the player can't stand there and the foe must not build there.
 func _has_floor_at(cx: float, cz: float) -> bool:
 	var space := get_world_3d().direct_space_state
-	var from := Vector3(cx, global_position.y + 0.6, cz)
+	var from := Vector3(cx, global_position.y + 2.5, cz)
 	var to := Vector3(cx, global_position.y - 2.0, cz)
 	var params := PhysicsRayQueryParameters3D.create(from, to)
 	params.collision_mask = 0xFFFFFFFF
 	params.collide_with_areas = false
 	params.collide_with_bodies = true
 	params.exclude = [get_rid()]
-	return not space.intersect_ray(params).is_empty()
+	var hit := space.intersect_ray(params)
+	if hit.is_empty():
+		return false
+	# Only same-level floor. A raised cell's surface is ~1m higher than
+	# the foe's feet, so anything noticeably above the foe is off-limits.
+	return float(hit.position.y) <= global_position.y + 0.5
 
 
 func _spawn_block_at(cx: float, cz: float) -> void:
