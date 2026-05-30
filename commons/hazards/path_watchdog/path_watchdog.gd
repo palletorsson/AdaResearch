@@ -234,8 +234,11 @@ func _scan() -> void:
 		_goal_node = _find_teleport()
 	if _start_node == null or _goal_node == null:
 		return
-	# Track the walking surface off the start node (player feet / spawn).
-	_floor_ref_y = _start_node.global_position.y
+	# Track the actual walking SURFACE, not the start node's origin. In
+	# VR the XROrigin often sits at the tracking floor (y≈0) while the
+	# grid's walkable top is at y≈1 (height-1 blocks) — using the node's
+	# y put the ribbon under the floor. Raycast down to the real surface.
+	_floor_ref_y = _resolve_floor_y(_start_node.global_position)
 	var path := _find_route(_start_node.global_position, _goal_node.global_position)
 	if path.is_empty():
 		_enter_blocked()
@@ -369,6 +372,42 @@ func _cell_blocked(space: PhysicsDirectSpaceState3D, cell: Vector2i) -> bool:
 		if not _is_walkable_body(col):
 			return true
 	return false
+
+
+# Find the walking-surface Y under a world position by raycasting down
+# through a generous vertical range. Falls back to the position's own y
+# if nothing is hit (player over a gap).
+func _resolve_floor_y(world_pos: Vector3) -> float:
+	var space := get_world_3d().direct_space_state
+	var from := Vector3(world_pos.x, world_pos.y + 6.0, world_pos.z)
+	var to := Vector3(world_pos.x, world_pos.y - 6.0, world_pos.z)
+	var params := PhysicsRayQueryParameters3D.create(from, to)
+	params.collision_mask = blocker_mask
+	params.collide_with_areas = false
+	params.collide_with_bodies = true
+	# Don't let the ray hit the player's own body collider (it would
+	# report the player's head as "the floor"). Exclude the start rig.
+	params.exclude = _rids_under(_start_node)
+	var hit := space.intersect_ray(params)
+	if hit.is_empty():
+		return world_pos.y
+	return float(hit.position.y)
+
+
+# Collect the RIDs of every CollisionObject3D in a node subtree, for
+# physics-query exclusion.
+func _rids_under(node: Node) -> Array[RID]:
+	var rids: Array[RID] = []
+	if node == null:
+		return rids
+	var stack: Array = [node]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		if n is CollisionObject3D:
+			rids.append((n as CollisionObject3D).get_rid())
+		for c in n.get_children():
+			stack.append(c)
+	return rids
 
 
 # Is there ground to stand on in this cell? A downward ray from just

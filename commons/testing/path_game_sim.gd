@@ -27,6 +27,7 @@ var _player_y: float = 1.0
 var _befriend_at: float = -1.0
 var _out_dir: String = "user://path_sim"
 var _tag: String = ""
+var _walk: bool = true
 
 
 func _init() -> void:
@@ -51,6 +52,7 @@ func _parse_args() -> void:
 			"befriend-at": _befriend_at = float(val)
 			"out": _out_dir = val
 			"tag": _tag = val
+			"walk": _walk = val not in ["0", "false", "no", "off"]
 			"player":
 				var p := val.split(",")
 				if p.size() >= 2:
@@ -108,7 +110,7 @@ func _run() -> void:
 	var walk_from := player.global_position
 	var walk_to := walk_from
 	var tp := _find_class_node(current_scene, "Teleport")
-	if tp:
+	if tp and _walk:
 		walk_to = Vector3(tp.global_position.x, walk_from.y, tp.global_position.z)
 	print("path_game_sim: player walks %s -> %s" % [walk_from, walk_to])
 

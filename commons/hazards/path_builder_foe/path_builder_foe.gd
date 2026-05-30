@@ -62,29 +62,45 @@ func _physics_process(delta: float) -> void:
 func _place_block() -> void:
 	if _placed.size() >= max_blocks:
 		return
-	var dir: Vector3 = _player_node.global_position - global_position
-	dir.y = 0.0
-	if dir.length() < 0.05:
+	var to_player: Vector3 = _player_node.global_position - global_position
+	to_player.y = 0.0
+	var dist: float = to_player.length()
+	if dist < 0.05:
 		return
-	dir = dir.normalized()
+	var dir: Vector3 = to_player.normalized()
 
-	# Grid-snapped drop point a bit ahead toward the player.
-	var drop := global_position + dir * build_ahead
-	var cx: float = roundf(drop.x)
-	var cz: float = roundf(drop.z)
-	# Don't stack on a cell we already filled.
+	# March a LINE of blocks from the foe toward the player: each interval
+	# drop at the FIRST still-empty cell along that line. This builds a
+	# growing wall toward the player even when the foe is standing still —
+	# without it, a stationary foe re-targets the same cell and only ever
+	# places one block.
+	var steps: int = max(2, int(ceil(dist)))
+	for k in range(steps):
+		var drop := global_position + dir * (build_ahead + float(k))
+		var cx: float = roundf(drop.x)
+		var cz: float = roundf(drop.z)
+		if _cell_filled(cx, cz):
+			continue
+		_spawn_block_at(cx, cz)
+		return
+
+
+func _cell_filled(cx: float, cz: float) -> bool:
 	for b in _placed:
 		if is_instance_valid(b) and absf(b.global_position.x - cx) < 0.5 and absf(b.global_position.z - cz) < 0.5:
-			return
+			return true
+	return false
 
+
+func _spawn_block_at(cx: float, cz: float) -> void:
 	var scene: PackedScene = BLOCK_SCENES.get(build_shape, BLOCK_SCENES["cube"])
 	var block: Node3D = scene.instantiate()
 	var root := get_parent()
 	if root == null:
 		root = get_tree().current_scene
 	root.add_child(block)
-	# Block origin is its base — sit it on the foe's walking surface
-	# (foe is a 0.3m cube, so its base is ~0.15 below its origin).
+	# Sit the block base on the foe's walking surface (foe is a 0.3m
+	# cube, so its base is ~0.15 below its origin).
 	block.global_position = Vector3(cx, global_position.y - 0.15, cz)
 	_placed.append(block)
 
