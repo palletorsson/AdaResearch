@@ -88,6 +88,9 @@ var _ribbon: MeshInstance3D = null
 var _ribbon_mat: StandardMaterial3D = null
 var _resolved: bool = false
 var _cleared: bool = false
+# The route found by the most recent scan (world points), published for a
+# builder foe to target. Empty when the path is blocked.
+var _current_path: Array = []
 # True only when an actual player rig was found. The restart/countdown
 # is gated on this so the watchdog is inert in capture / gallery / editor
 # contexts where there is no player to fail.
@@ -138,6 +141,12 @@ func _num_meta(key: String, fallback: float) -> float:
 
 
 # ── Endpoint discovery ────────────────────────────────────────────────
+
+## The current player→exit route as world points (empty if blocked).
+## A builder foe reads this to drop blocks ONTO the live path.
+func get_path_points() -> Array:
+	return _current_path.duplicate()
+
 
 func _resolve_endpoints() -> void:
 	_start_node = _find_player()
@@ -240,6 +249,9 @@ func _scan() -> void:
 	# y put the ribbon under the floor. Raycast down to the real surface.
 	_floor_ref_y = _resolve_floor_y(_start_node.global_position)
 	var path := _find_route(_start_node.global_position, _goal_node.global_position)
+	# Publish the current route so a builder foe can target it (block the
+	# player's actual path to the exit, not just build near itself).
+	_current_path = path
 	if path.is_empty():
 		_enter_blocked()
 		# Keep the last ribbon but recolour it red as a "this route died" cue.
