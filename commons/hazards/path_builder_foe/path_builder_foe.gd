@@ -103,6 +103,10 @@ func _place_block() -> void:
 		var cz: float = roundf(drop.z)
 		if _cell_filled(cx, cz):
 			continue
+		# Only build on an EXISTING floor cube — never float a block over
+		# the void. Skip empty cells and march on to the next solid one.
+		if not _has_floor_at(cx, cz):
+			continue
 		_spawn_block_at(cx, cz)
 		return
 
@@ -112,6 +116,21 @@ func _cell_filled(cx: float, cz: float) -> bool:
 		if is_instance_valid(b) and absf(b.global_position.x - cx) < 0.5 and absf(b.global_position.z - cz) < 0.5:
 			return true
 	return false
+
+
+# Is there a floor cube under this cell? Downward ray from just above the
+# foe's walking surface; a hit means solid ground to build on, no hit
+# means void (don't place there).
+func _has_floor_at(cx: float, cz: float) -> bool:
+	var space := get_world_3d().direct_space_state
+	var from := Vector3(cx, global_position.y + 0.6, cz)
+	var to := Vector3(cx, global_position.y - 2.0, cz)
+	var params := PhysicsRayQueryParameters3D.create(from, to)
+	params.collision_mask = 0xFFFFFFFF
+	params.collide_with_areas = false
+	params.collide_with_bodies = true
+	params.exclude = [get_rid()]
+	return not space.intersect_ray(params).is_empty()
 
 
 func _spawn_block_at(cx: float, cz: float) -> void:
