@@ -276,6 +276,18 @@
       "topic": "change sequence documentation",
       "insight": "Pipeline scorer stage 2 (documentation) checks ONLY blurb.md OR intent.md existence, fully decoupled from map_data.json. A 4-breath-old deferral claimed change docs were blocked on Map Studio authoring; this was a scorer misread. Writing 16 docs alone advanced change HEAD stage 2->3 with zero maps on disk. Re-validate a deferral premise before re-deferring.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-05-30T07:11:44.023366+00:00",
+      "topic": "change sequence",
+      "insight": "change HEAD 3->6: blocker was missing map_data.json, not missing scenes (all 10 change scenes + 4 reuses already on disk). Authoring 8 map_data.json closed Gate A and pushed all 22 spine sequences to HEAD>=6; release gates FAIL->PASS.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-31T07:13:16.072870+00:00",
+      "topic": "boolean_surfaces",
+      "insight": "Informal one-line '# @identity:' headers read as voiceless: read_identity() returns falsy empty dict {}. Garden voice requires the 8-field structured block.",
+      "lod": 3
     }
   ]
 }

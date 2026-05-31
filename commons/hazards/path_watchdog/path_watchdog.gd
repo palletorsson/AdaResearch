@@ -80,6 +80,10 @@ signal level_cleared
 const PLAYER_GROUPS := ["player", "vr_player", "player_body"]
 
 var _start_node: Node3D = null
+# The player's HEAD (XRCamera3D). In room-scale VR the player walks
+# physically, so the head moves while the XROrigin stays at the play-space
+# origin — the path must start from the head, not the rig root.
+var _player_cam: Node3D = null
 var _goal_node: Node3D = null
 var _scan_timer: float = 0.0
 var _blocked: bool = false
@@ -219,11 +223,42 @@ func _structure_height(cell: Vector2i) -> int:
 	return int(v) if v.is_valid_int() else 0
 
 
+# The player's live ground position — the HEAD if we have it (tracks
+# physical walking), else the rig / synthetic player node.
+func _player_world() -> Vector3:
+	if is_instance_valid(_player_cam):
+		return (_player_cam as Node3D).global_position
+	if is_instance_valid(_start_node):
+		return _start_node.global_position
+	return global_position
+
+
+func _find_xr_camera() -> Node3D:
+	for o in get_tree().get_nodes_in_group("xr_origin"):
+		for c in o.get_children():
+			if c is XRCamera3D:
+				return c
+	return _find_camera_rec(get_tree().current_scene)
+
+
+func _find_camera_rec(node: Node) -> Node3D:
+	if node == null:
+		return null
+	if node is XRCamera3D:
+		return node
+	for c in node.get_children():
+		var r := _find_camera_rec(c)
+		if r != null:
+			return r
+	return null
+
+
 func _find_player() -> Node3D:
 	for g in PLAYER_GROUPS:
 		var nodes := get_tree().get_nodes_in_group(g)
 		if not nodes.is_empty() and nodes[0] is Node3D:
 			_has_real_player = true
+			_player_cam = _find_xr_camera()
 			return nodes[0]
 	# Fallback: a spawn marker, else this node's own position. These are
 	# NOT a real player, so the failure clock stays disarmed.
@@ -268,11 +303,12 @@ func _process(delta: float) -> void:
 	if not _resolved or _cleared:
 		return
 
-	# Win check — player reached the goal.
+	# Win check — player reached the goal (use the live head position).
 	if _start_node and _goal_node:
+		var pw := _player_world()
 		var d: float = Vector2(
-			_start_node.global_position.x - _goal_node.global_position.x,
-			_start_node.global_position.z - _goal_node.global_position.z).length()
+			pw.x - _goal_node.global_position.x,
+			pw.z - _goal_node.global_position.z).length()
 		if d <= reach_distance:
 			_on_cleared()
 			return
@@ -303,14 +339,20 @@ func _scan() -> void:
 			_start_node = p
 	if _goal_node == null:
 		_goal_node = _find_teleport()
+	# Re-acquire the head if it appeared after the rig (XR rig builds in
+	# stages); keeps the path starting from where the player actually is.
+	if _player_cam == null and _has_real_player:
+		_player_cam = _find_xr_camera()
 	if _start_node == null or _goal_node == null:
 		return
-	# Track the actual walking SURFACE, not the start node's origin. In
-	# VR the XROrigin often sits at the tracking floor (y≈0) while the
-	# grid's walkable top is at y≈1 (height-1 blocks) — using the node's
-	# y put the ribbon under the floor. Raycast down to the real surface.
-	_floor_ref_y = _resolve_floor_y(_start_node.global_position)
-	var path := _find_route(_start_node.global_position, _goal_node.global_position)
+	# Pathfind from the player's CURRENT position (head in VR), recomputed
+	# every scan so the route updates as they physically walk.
+	var player_w := _player_world()
+	# Track the actual walking SURFACE, not the node's origin. In VR the
+	# XROrigin sits at the tracking floor (y≈0) while the grid's walkable
+	# top is at y≈1 — raycast down to the real surface for the ribbon.
+	_floor_ref_y = _resolve_floor_y(player_w)
+	var path := _find_route(player_w, _goal_node.global_position)
 	# Publish the current route so a builder foe can target it (block the
 	# player's actual path to the exit, not just build near itself).
 	_current_path = path

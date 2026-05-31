@@ -1670,6 +1670,84 @@
         "doc/reports/improvement_trajectory.json"
       ],
       "duration_minutes": 20
+    },
+    {
+      "breath_id": "2026-05-30T09:05",
+      "mode": "full",
+      "baseline_avg": 5.909,
+      "post_avg": 6.045,
+      "delta": 0.136,
+      "items_attempted": [
+        "change_sequence_stage3_artifacts_via_map_data"
+      ],
+      "items_succeeded": [
+        "change_sequence_stage3_artifacts_via_map_data"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather",
+        "ada-map-expert",
+        "map_pathfinder"
+      ],
+      "skill_effectiveness": {
+        "map_data_authoring": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "MILESTONE: all 22 spine sequences reached HEAD >= 6 (vr_testing) for the first time (21 at stage 6, randomness at 7). Zero programmatically-actionable HEAD movement remains below stage 6 on the spine.",
+        "Release gates flipped Overall FAIL -> PASS (3/4 -> 4/4) for the first time: Gate A missing_declared_maps 8 -> 0 by authoring the 8 change maps.",
+        "Correction of 2026-05-29's intent Gap line: all 10 change scenes + 4 reuses already existed on disk; the only blocker was missing map_data.json (which unlocked stages 3,4,5 together)."
+      ],
+      "files_changed": [
+        "commons/maps/change/* (8 map_data.json authored)"
+      ],
+      "duration_minutes": 30,
+      "_reconstructed": "Re-added 2026-05-31 after a git checkout during the 05-31 breath discarded this uncommitted entry. Content faithful to improvement_trajectory.json global_avg_history[2026-05-30]."
+    },
+    {
+      "breath_id": "2026-05-31T09:05",
+      "mode": "full",
+      "baseline_avg": 6.045,
+      "post_avg": 6.045,
+      "delta": 0.0,
+      "delta_note": "Pipeline avg unchanged by design. The spine is walled at stage 6 (vr_testing, human-gated) and stage 7 (polish, needs Godot GPU captures). Per 2026-05-30's explicit retarget directive, this breath pursued garden voicing instead. Real measured win is garden-voice, not pipeline.",
+      "garden_delta": "boolean_surfaces voice 0/5 -> 5/5 (100%); state DORMANT -> LIVING GARDEN; all 5 artifacts EMBODIED",
+      "items_attempted": [
+        "boolean_surfaces_voice_5_artifacts"
+      ],
+      "items_succeeded": [
+        "boolean_surfaces_voice_5_artifacts"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather",
+        "garden_listener"
+      ],
+      "skill_effectiveness": {
+        "garden_voicing_inline": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "boolean_surfaces (spine seq, order 12.7) had 5 artifacts with only an informal one-line '# @identity:' header, NOT the 8-field structured block. read_identity() returns an empty dict {} for these, which is falsy, so assess_potential flags them voiceless. Fix: add the structured block (essence/desire/critical_parameter/triggers/emerges/needs/relationships/truth). All 5 jumped straight to EMBODIED because the narrative headers already implied the needs/has fields.",
+        "Godot 4.6 CONSOLE exe is gone from Desktop (only non-console 4.6 + 4.3 console remain); CLAUDE.md + memory capture-pipeline path is stale. multi_shots CAPTURES_DIR does not exist at all, so EVERY sequence stage-7 polish is structurally 0% in this environment. randomness only reads stage-7-HEAD because a randomness map name happens to appear in desktop_feedback.md (the stage-6 gate is a substring match, not real VR evidence).",
+        "Confirmed 2026-05-30's retarget: spine HEAD-advance is fully exhausted. Three remaining autonomous levers: (a) garden voicing of 0-voice clusters [DID THIS], (b) Godot GPU captures for polish [blocked: stale exe path + unattended-render risk], (c) non-spine sequences like resourcemanagement [empty, off-FOCUS_VECTOR]."
+      ],
+      "files_changed": [
+        "algorithms/boolean_surfaces/csg_union_demo.gd",
+        "algorithms/boolean_surfaces/csg_intersection_demo.gd",
+        "algorithms/boolean_surfaces/csg_difference_demo.gd",
+        "algorithms/boolean_surfaces/csg_compose_workbench.gd",
+        "algorithms/boolean_surfaces/csg_architecture_cavity.gd"
+      ],
+      "duration_minutes": 20
     }
   ]
 }

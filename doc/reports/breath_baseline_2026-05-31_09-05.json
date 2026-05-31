@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-05-31T09:05",
+  "phase": "baseline",
+  "mode": "full",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "honest_head_sum_avg": 6.045,
+    "distribution": "21 spine sequences at HEAD=6 (vr_testing), randomness at HEAD=7 (polish)",
+    "note": "Spine HEAD-advance era is over (since 2026-05-30). All programmatically-actionable HEAD movement below stage 6 is exhausted. Stage 6 (vr_testing) is human-gated; advancing it autonomously would require faking desktop_feedback.md content (refused as metric-gaming). Stage 7 (polish) needs Godot GPU captures."
+  },
+  "heat_map_top_5": [
+    "floor 75 (active commits, continuation not a discrete fix)",
+    "primitive 70 (active commits)",
+    "shader 65 (active commits)",
+    "scorer_comment_prefix 60 (stale deep-discovery follow-up, resolved 2026-05-28)",
+    "change sequence 60 (stale; change now at stage 6 as of 2026-05-30)"
+  ],
+  "garden_health": {
+    "global_voiced_sum_approx": 1025,
+    "boolean_surfaces": "DORMANT (5 artifacts, 0 voiced) before this breath",
+    "other_zero_voice_clusters": ["bricolage 43/0", "atlas 9/0", "constraint_solvers 4/0", "speculativecomputation 4/0", "searchpathfinding 3/0"]
+  },
+  "release_gates": {
+    "overall": "PASS",
+    "enabled_passing": "4/4",
+    "A_sequence_contract": "PASS (missing_declared_maps 0)",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (grade_A 911, grade_B 144, grade_C 139, grade_F 0)",
+    "D_lab_progression": "PASS"
+  },
+  "environment_findings": {
+    "godot_4_6_console_exe_missing": "C:/Users/palle/Desktop/Godot_v4.6-stable_win64_console.exe no longer exists; only Godot_v4.6-stable_win64.exe (non-console) and 4.3 console remain. CLAUDE.md capture-pipeline path is stale.",
+    "captures_dir_missing": "%LOCALAPPDATA%/Godot/app_userdata/Ada Research Zero One/multi_shots does not exist. randomness stage-7 polish reads 0% because no captures have ever been generated in this environment, not because work is owed."
+  }
+}
