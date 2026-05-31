@@ -49,6 +49,11 @@ class_name PalmScanner
 ## How long (seconds) the door stays open after a successful scan
 ## before the scanner emits palm_released and closes it again.
 @export var scan_hold_seconds: float = 5.0
+## Seconds the hand must dwell on the plate before access is granted — the
+## "scanning" beat that makes the read legible (like the gadget hand scanner).
+@export var scan_dwell: float = 0.8
+## Play a procedural two-tone chime when access is granted.
+@export var play_chime: bool = true
 ## When TRUE the scanner locates a LabDoorSensor via the
 ## "lab_door_sensors" group and wires palm_scanned → its open path
 ## and palm_released → its close path automatically.
@@ -76,13 +81,6 @@ const PLATE_TILT_DEG: float = 28.0
 const POSE_LEFT_PATH: String  = "res://addons/godot-xr-tools/hands/poses/pose_default_left.tres"
 const POSE_RIGHT_PATH: String = "res://addons/godot-xr-tools/hands/poses/pose_default_right.tres"
 const HAND_POSE_AREA_SCENE: String = "res://addons/godot-xr-tools/objects/hand_pose_area.tscn"
-## Pre-built XR Tools button — same one push_button.tscn uses. We
-## instance it on the scan plate so the detection chain (layers, signals,
-## hand-poke handling) is byte-for-byte identical to every other
-## working interactable in the project. See commons/interactables/
-## push_button.tscn + control_board.gd line 222 for the reference
-## pattern.
-const PUSH_BUTTON_SCENE: String = "res://commons/interactables/push_button.tscn"
 ## Rack-aesthetic materials shared with the interactables in
 ## res://commons/interactables — using the same palette keeps the
 ## scanner reading as "lab kit" rather than a one-off prop.
@@ -99,6 +97,18 @@ var _hold_timer: Timer = null
 var _status_led_mesh: MeshInstance3D = null
 var _scan_window_mat: StandardMaterial3D = null
 var _scanning: bool = false
+
+# Scan state machine (mirrors the gadget hand_scanner: IDLE -> SCANNING ->
+# GRANTED) so the feedback reads clearly: amber sweep while scanning, then a
+# green flash + chime + open door on grant.
+enum ScanState { IDLE, SCANNING, GRANTED }
+var _state: int = ScanState.IDLE
+var _dwell: float = 0.0
+var _anim_phase: float = 0.0
+var _sweep_mesh: MeshInstance3D = null
+var _sweep_mat: StandardMaterial3D = null
+var _audio: AudioStreamPlayer3D = null
+var _prompt_label: Label3D = null
 
 # ── Signals ───────────────────────────────────────────────────────────
 
@@ -129,7 +139,28 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if _built:
 		_clear_built_children()
 		_built = false
+		# _clear_built_children() just freed the ScanArea + hold timer that
+		# _ready() created — drop the dangling refs and reset detection state.
+		_scan_area = null
+		_hold_timer = null
+		_scanning = false
+		_audio = null
+		_sweep_mesh = null
+		_sweep_mat = null
+		_state = ScanState.IDLE
+		_dwell = 0.0
+		_absent_time = 999.0
 		_build_scanner()
+		# CRITICAL: rebuild the detection volume too. Without this, a config
+		# applied AFTER _ready (which is exactly how lab_loader delivers
+		# scan_active / mounting — via a deferred apply_grid_config) wipes the
+		# ScanArea built in _ready and never recreates it, leaving an
+		# active-looking scanner that can never detect a hand. This was the
+		# reason the palm scanner "did nothing" in the lab.
+		if not Engine.is_editor_hint():
+			_build_scan_area()
+			if auto_connect_door:
+				call_deferred("_auto_connect_to_door")
 
 
 func _read_metadata_overrides() -> void:
@@ -157,7 +188,15 @@ func _read_metadata_overrides() -> void:
 
 
 func _clear_built_children() -> void:
+	# Detach IMMEDIATELY (remove_child), not just queue_free. queue_free
+	# defers to end-of-frame, so a rebuild running in the same frame would
+	# still see these dying nodes: get_node_or_null("Panel") would return the
+	# old, about-to-be-freed Panel, the new ScanArea would be parented under
+	# it, and it would be freed at end of frame — an active-looking scanner
+	# with no detection volume. Removing first guarantees the rebuild binds
+	# to the freshly-created Panel.
 	for c in get_children():
+		remove_child(c)
 		c.queue_free()
 
 
@@ -247,6 +286,28 @@ func _build_scan_window(parent: Node3D) -> void:
 	# Push very slightly forward of the panel face.
 	win.position = Vector3(0.0, y_offset, panel_depth * 0.5 + SCAN_DEPTH * 0.5)
 	parent.add_child(win)
+
+	# Scan sweep bar — a bright line that travels down the window face while
+	# scanning (the "being read" cue, like the gadget-wall hand scanner).
+	var sweep := MeshInstance3D.new()
+	sweep.name = "ScanSweep"
+	var sweep_w: float = panel_width * SCAN_INSET_FACTOR * 0.96
+	var swm := BoxMesh.new()
+	swm.size = Vector3(sweep_w, 0.012, 0.004)
+	sweep.mesh = swm
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color(1, 1, 1)
+	smat.emission_enabled = true
+	smat.emission = Color(1, 1, 1)
+	smat.emission_energy_multiplier = 3.0
+	smat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	sweep.material_override = smat
+	sweep.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	sweep.position = Vector3(0.0, y_offset, panel_depth * 0.5 + SCAN_DEPTH + 0.004)
+	sweep.visible = false
+	parent.add_child(sweep)
+	_sweep_mesh = sweep
+	_sweep_mat = smat
 
 
 func _build_hand_outline(parent: Node3D) -> void:
@@ -373,6 +434,9 @@ func _build_label(parent: Node3D) -> void:
 		return
 	var label := Label3D.new()
 	label.name = "Label"
+	# Cache so the scan state machine can rewrite this to SCANNING… /
+	# ACCESS GRANTED. Without this the text feedback silently never updates.
+	_prompt_label = label
 	label.text = label_text
 	# Sizing — target height ~12% of panel_height.
 	var target_h: float = panel_height * 0.10
@@ -516,16 +580,19 @@ func _parse_color(s: String, fallback: Color) -> Color:
 
 # ── Interaction ───────────────────────────────────────────────────────
 
-# Build the scan-trigger by INSTANCING push_button.tscn directly. The
-# push_button scene carries the proven XRToolsInteractableAreaButton
-# config (layers, masks, body/area entered+exited signals all hooked
-# in the script's _ready) plus its Rumbler + HandPoseArea siblings.
-# This is the same idiom every working interactable in the project
-# uses — see control_board.gd line 222 for the canonical example.
+# Build the scan trigger as a DIRECT Area3D in front of the scan
+# window. This is the same proven pattern as hand_scanner / push_button:
+# an Area3D whose collision_mask is the player-hand layers (18 Player
+# Hands + 19 Grab Handles = 393216), no monitorable/collision layer of
+# its own. A hand body or hand-area crossing the volume fires the scan.
 #
-# Visual: we hide the round button mesh + accent ring + base so the
-# emerald scan window stays the dominant visual; only the proven
-# Area3D detection remains.
+# Earlier this borrowed push_button.tscn and read its inner
+# InteractableAreaButton, but scaling + hiding that scene left the
+# sensing volume offset from where the hand actually goes, so "place
+# hand" did nothing. A direct Area3D sized to the scan window removes
+# that whole fragile chain.
+const HAND_LAYER_MASK := 393216  # bits 18 (Player Hands) + 19 (Grab Handles)
+
 func _build_scan_area() -> void:
 	if not scan_active:
 		return
@@ -533,47 +600,37 @@ func _build_scan_area() -> void:
 	if anchor == null:
 		anchor = self
 
-	var btn_pack: PackedScene = load(PUSH_BUTTON_SCENE) as PackedScene
-	if btn_pack == null:
-		push_warning("PalmScanner: could not load push_button.tscn")
-		return
-	var btn: Node3D = btn_pack.instantiate()
-	if btn == null:
-		return
-	btn.name = "ScanButton"
+	var area := Area3D.new()
+	area.name = "ScanArea"
+	area.collision_layer = 0
+	area.collision_mask = HAND_LAYER_MASK
+	area.monitoring = true
+	area.monitorable = false
 
-	# Place at the scan window face, slightly forward.
+	# A box volume sitting just in front of the (tilted) scan window so a
+	# palm presented to the plate registers. Sized generously to the scan
+	# window + scan_radius depth so the hand needn't hit an exact pixel.
+	var win_w: float = panel_width * SCAN_INSET_FACTOR
+	var win_h: float = panel_height * SCAN_HEIGHT_FACTOR
+	var depth: float = max(scan_radius, 0.12)
+	var cs := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(win_w * 1.4, win_h * 1.4, depth)
+	cs.shape = box
 	var window_face_z: float = panel_depth * 0.5 + SCAN_DEPTH + 0.001
 	var window_y: float = panel_height * 0.06
-	btn.position = Vector3(0.0, window_y, window_face_z)
-	# push_button.tscn applies a -X rotation in its scene root that
-	# orients the button "press" axis along its parent's +Y. We re-
-	# rotate so the press axis points along our panel's +Z (the scan
-	# face). Concretely: rotate +90° on X to face forward.
-	btn.rotation = Vector3(deg_to_rad(90.0), 0.0, 0.0)
-	# Scale up so the InteractableAreaButton's sensing volume covers
-	# the whole scan window rather than the tiny 6cm button footprint.
-	var scale_factor: float = max(panel_width, panel_height) * SCAN_INSET_FACTOR / 0.085
-	btn.scale = Vector3.ONE * scale_factor
+	# Centre the volume out in front of the plate by half its depth so it
+	# straddles the face and the approaching hand.
+	cs.position = Vector3(0.0, window_y, window_face_z + depth * 0.5)
+	area.add_child(cs)
+	anchor.add_child(area)
+	_scan_area = area
 
-	anchor.add_child(btn)
-	_scan_area = btn.get_node_or_null("InteractableAreaButton") as Area3D
-
-	# Hide the round button mesh + accent ring + base — we want the
-	# proven Area3D detection without the cosmetic button on top of
-	# our emerald scan plate.
-	for child_name in ["ButtonBase", "Button", "AccentRing"]:
-		var n: Node = btn.get_node_or_null(child_name)
-		if n is Node3D:
-			(n as Node3D).visible = false
-
-	# Listen for the push_button area's pressed/released signals — the
-	# exact same wiring every other button consumer uses.
-	if _scan_area != null:
-		if _scan_area.has_signal("button_pressed") and not _scan_area.is_connected("button_pressed", _on_scan_button_pressed):
-			_scan_area.button_pressed.connect(_on_scan_button_pressed)
-		if _scan_area.has_signal("button_released") and not _scan_area.is_connected("button_released", _on_scan_button_released):
-			_scan_area.button_released.connect(_on_scan_button_released)
+	# NOTE: detection is frame-SAMPLED in _physics_process (see _hand_present),
+	# not driven by enter/exit signals. In real VR the hand collider flickers
+	# in and out of the volume every few frames; counting those events kept
+	# resetting the dwell so the door never opened. We keep monitoring on so
+	# get_overlapping_bodies/areas() works, but read it every frame instead.
 
 	# Auto-close timer.
 	_hold_timer = Timer.new()
@@ -583,53 +640,230 @@ func _build_scan_area() -> void:
 	_hold_timer.timeout.connect(_on_hold_timeout)
 	add_child(_hold_timer)
 
-
-# Forwarded from the embedded push_button's InteractableAreaButton —
-# fires as soon as a hand body or area touches the sensor volume.
-func _on_scan_button_pressed(_button) -> void:
-	_trigger_scan()
-
-
-# Forwarded from the embedded push_button. We treat hand removal as a
-# "scan abandoned" signal but the hold timer still gates the door
-# release so a momentary lift doesn't slam the door shut mid-step.
-func _on_scan_button_released(_button) -> void:
-	pass
+	# Procedural "access granted" chime.
+	if play_chime and _audio == null:
+		_audio = AudioStreamPlayer3D.new()
+		_audio.name = "Chime"
+		_audio.volume_db = -10.0
+		_audio.max_distance = 10.0
+		_audio.stream = _build_chime()
+		add_child(_audio)
 
 
-func _trigger_scan() -> void:
-	if _scanning:
+# ── Hand presence detection (frame-sampled, NOT event-counted) ────────
+# Earlier versions counted Area3D enter/exit signals, but in real VR the
+# hand collider flickers in and out of the volume every few frames, which
+# kept resetting the dwell so access was never granted and the DOOR NEVER
+# MOVED. Instead we SAMPLE presence every physics frame from three sources
+# at once (controller proximity + body overlaps + area overlaps) and smooth
+# brief dropouts with a short grace window — robust against layer quirks,
+# tracking jitter, and hand-collider flicker.
+const POLL_REACH_PAD := 0.12     # controller ~= wrist; pad the box for reach
+const PRESENCE_GRACE := 0.30     # seconds of "lost" hand tolerated before reset
+
+var _controllers: Array = []
+var _ctrl_search_frames: int = 0
+var _absent_time: float = 999.0  # seconds since the hand was last seen
+
+
+func _physics_process(dt: float) -> void:
+	if not scan_active or _scan_area == null:
 		return
-	_scanning = true
-	# Flash the scan window brighter and bias the LED green.
+	# Re-discover controllers for the first ~10 s in case the player rig
+	# spawns after the scanner (map load order).
+	if _controllers.is_empty() and _ctrl_search_frames < 600:
+		_ctrl_search_frames += 1
+		if _ctrl_search_frames % 20 == 0:
+			_find_controllers()
+
+	# Sample presence from every available source, smoothed by a grace window
+	# so a one-frame dropout doesn't abort an in-progress scan.
+	if _hand_present():
+		_absent_time = 0.0
+	else:
+		_absent_time += dt
+	var present: bool = _absent_time < PRESENCE_GRACE
+
+	_anim_phase += dt
+	match _state:
+		ScanState.IDLE:
+			if present:
+				_begin_scan()
+		ScanState.SCANNING:
+			if not present:
+				_set_idle()
+			else:
+				_dwell += dt
+				# Slide the sweep bar down the window face.
+				if _sweep_mesh != null:
+					var u: float = clamp(_dwell / max(0.05, scan_dwell), 0.0, 1.0)
+					var travel: float = panel_height * SCAN_HEIGHT_FACTOR * 0.5
+					_sweep_mesh.position.y = panel_height * 0.06 + lerp(travel, -travel, u)
+				if _dwell >= scan_dwell:
+					_grant_access()
+		ScanState.GRANTED:
+			# Pulse the granted window.
+			if _scan_window_mat != null:
+				_scan_window_mat.emission_energy_multiplier = 1.8 + 0.5 * sin(_anim_phase * 8.0)
+			# Keep the door open while the hand stays; once it leaves, run the
+			# hold-timer countdown to close it.
+			if _hold_timer != null:
+				if present:
+					_hold_timer.stop()
+				elif _hold_timer.is_stopped():
+					_hold_timer.start(scan_hold_seconds)
+
+
+# TRUE if a hand is in the scan volume by ANY measure: a tracked controller
+# inside the box (layer-independent), or a body / area overlapping on the
+# hand mask. Sampling all three each frame is what makes detection reliable.
+func _hand_present() -> bool:
+	if _controller_in_box():
+		return true
+	if _scan_area != null:
+		if _scan_area.get_overlapping_bodies().size() > 0:
+			return true
+		if _scan_area.get_overlapping_areas().size() > 0:
+			return true
+	return false
+
+
+func _find_controllers() -> void:
+	_controllers.clear()
+	var vp := get_viewport()
+	if vp != null:
+		_collect_controllers(vp)
+
+
+func _collect_controllers(n: Node) -> void:
+	if n is XRController3D:
+		_controllers.append(n)
+	for c in n.get_children():
+		_collect_controllers(c)
+
+
+func _controller_in_box() -> bool:
+	var cs: CollisionShape3D = null
+	for c in _scan_area.get_children():
+		if c is CollisionShape3D:
+			cs = c
+			break
+	if cs == null or not (cs.shape is BoxShape3D):
+		return false
+	var half: Vector3 = (cs.shape as BoxShape3D).size * 0.5 + Vector3(POLL_REACH_PAD, POLL_REACH_PAD, POLL_REACH_PAD)
+	var inv := cs.global_transform.affine_inverse()
+	for ctrl in _controllers:
+		if not is_instance_valid(ctrl):
+			continue
+		var lp: Vector3 = inv * (ctrl as Node3D).global_position
+		if absf(lp.x) <= half.x and absf(lp.y) <= half.y and absf(lp.z) <= half.z:
+			return true
+	return false
+
+
+# Begin the "scanning" phase — amber wash, sweep bar visible, label reads
+# SCANNING. The dwell is accumulated in _physics_process; when it reaches
+# scan_dwell, _grant_access() fires.
+func _begin_scan() -> void:
+	_state = ScanState.SCANNING
+	_dwell = 0.0
+	if _sweep_mesh != null:
+		_sweep_mesh.visible = true
+	var amber := Color(1.0, 0.78, 0.18)
 	if _scan_window_mat != null:
-		_scan_window_mat.emission = scan_color * 1.6
+		_scan_window_mat.emission = amber
 		_scan_window_mat.emission_energy_multiplier = 1.4
-	if _status_led_mesh != null:
-		var lmat := _status_led_mesh.material_override as StandardMaterial3D
-		if lmat != null:
-			lmat.albedo_color = scan_color
-			lmat.emission = scan_color
-			lmat.emission_energy_multiplier = 3.0
+	_set_led(amber, 3.0)
+	if _prompt_label != null:
+		_prompt_label.text = "SCANNING…"
+		_prompt_label.modulate = amber
+
+
+# Access granted — bright green flash, chime, haptic, door opens. Holds for
+# scan_hold_seconds, then _on_hold_timeout() closes + resets to idle.
+func _grant_access() -> void:
+	_state = ScanState.GRANTED
+	_scanning = true
+	if _sweep_mesh != null:
+		_sweep_mesh.visible = false
+	if _scan_window_mat != null:
+		_scan_window_mat.emission = scan_color * 1.8
+		_scan_window_mat.emission_energy_multiplier = 2.2
+	_set_led(scan_color, 4.0)
+	if _prompt_label != null:
+		_prompt_label.text = "ACCESS GRANTED"
+		_prompt_label.modulate = scan_color
+	if _audio != null:
+		_audio.play()
+	_pulse_haptic()
 	palm_scanned.emit()
 	if _hold_timer != null:
 		_hold_timer.stop()
 		_hold_timer.start(scan_hold_seconds)
 
 
-func _on_hold_timeout() -> void:
+# Return to the resting "PLACE HAND" state — emerald glow, green LED.
+func _set_idle() -> void:
+	_state = ScanState.IDLE
+	_dwell = 0.0
 	_scanning = false
-	# Return to resting state — emerald glow at default energy.
+	if _sweep_mesh != null:
+		_sweep_mesh.visible = false
 	if _scan_window_mat != null:
 		_scan_window_mat.emission = scan_color
 		_scan_window_mat.emission_energy_multiplier = 0.9
-	if _status_led_mesh != null:
-		var lmat := _status_led_mesh.material_override as StandardMaterial3D
-		if lmat != null:
-			lmat.albedo_color = scan_color
-			lmat.emission = scan_color
-			lmat.emission_energy_multiplier = 1.5
+	_set_led(scan_color, 1.5)
+	if _prompt_label != null:
+		_prompt_label.text = label_text
+		_prompt_label.modulate = text_color
+
+
+func _set_led(c: Color, energy: float) -> void:
+	if _status_led_mesh == null:
+		return
+	var lmat := _status_led_mesh.material_override as StandardMaterial3D
+	if lmat != null:
+		lmat.albedo_color = c
+		lmat.emission = c
+		lmat.emission_energy_multiplier = energy
+
+
+func _on_hold_timeout() -> void:
+	# Access window expired — close the door and reset to the resting state.
+	_set_idle()
 	palm_released.emit()
+
+
+# Two-tone rising "access granted" chime, generated procedurally so the
+# artifact needs no audio asset (mirrors the gadget-wall hand scanner).
+func _build_chime() -> AudioStreamWAV:
+	var stream := AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = 22050
+	stream.stereo = false
+	var dur := 0.22
+	var n := int(stream.mix_rate * dur)
+	var data := PackedByteArray()
+	data.resize(n * 2)
+	for i in n:
+		var tt := float(i) / stream.mix_rate
+		var prog := float(i) / float(max(1, n - 1))
+		var f := 660.0 if prog < 0.5 else 990.0
+		var env := exp(-prog * 4.0) * (1.0 - prog * 0.3)
+		var s := sin(TAU * f * tt) * env * 0.30
+		var si := int(clamp(s, -1.0, 1.0) * 32767.0)
+		data[2 * i] = si & 0xFF
+		data[2 * i + 1] = (si >> 8) & 0xFF
+	stream.data = data
+	return stream
+
+
+func _pulse_haptic() -> void:
+	# Best-effort short rumble on tracked controllers (safe no-op if the rig
+	# has none / handles haptics elsewhere).
+	for ctrl in _controllers:
+		if is_instance_valid(ctrl) and ctrl.has_method("trigger_haptic_pulse"):
+			ctrl.trigger_haptic_pulse("haptic", 0.0, 0.3, 0.08, 0.0)
 
 
 # Search the scene tree for a LabDoorSensor (registered in the group
@@ -641,6 +875,14 @@ func _auto_connect_to_door() -> void:
 	if tree == null:
 		return
 	var sensors: Array = tree.get_nodes_in_group("lab_door_sensors")
+	# The door sensor may register its group a few frames after us (build
+	# order, deferred adds, lab_loader instantiation sequence). Poll for a
+	# short while before giving up so a late-built door still gets wired.
+	var tries: int = 0
+	while sensors.is_empty() and tries < 120:
+		await tree.process_frame
+		tries += 1
+		sensors = tree.get_nodes_in_group("lab_door_sensors")
 	if sensors.is_empty():
 		return
 	# Pick the closest one (single-lab maps will have exactly one).

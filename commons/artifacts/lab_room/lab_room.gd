@@ -1784,18 +1784,17 @@ func _build_sliding_door(parent: Node3D) -> void:
 	door_root.rotation = Vector3(0.0, y_rot, 0.0)
 	parent.add_child(door_root)
 
-	# Frame material (matt dark metal).
+	# Frame material — light grey jamb framing the white door.
 	var frame_mat := StandardMaterial3D.new()
-	frame_mat.albedo_color = Color(0.13, 0.14, 0.17)
+	frame_mat.albedo_color = Color(0.78, 0.80, 0.83)
 	frame_mat.roughness = 0.45
-	frame_mat.metallic = 0.55
+	frame_mat.metallic = 0.25
 
-	# Door panels material (slightly lighter, more reflective — reads as
-	# steel doors against the dark frame).
+	# Door panels material — white slabs (clean clinic / airlock look).
 	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.18, 0.20, 0.23)
-	panel_mat.roughness = 0.35
-	panel_mat.metallic = 0.60
+	panel_mat.albedo_color = Color(0.93, 0.94, 0.96)
+	panel_mat.roughness = 0.40
+	panel_mat.metallic = 0.10
 
 	var ft: float = 0.14          # frame thickness — thick science-door jamb
 	var fd: float = 0.22          # how far the frame sticks out from the wall (toward interior)
