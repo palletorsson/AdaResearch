@@ -29,6 +29,10 @@
     "door_wall": "south",
     "door_offset_x": 2.6,
     "door_sensor_radius": 1,
+    "lab_offset_z": -2,
+    "signage_wall": "west",
+    "show_chalkboard": true,
+    "chalkboard_lookup": "point_chalkboard",
     "show_floor_window": true,
     "floor_window_size": [
       3,
@@ -105,7 +109,7 @@
       "position": [
         3.6507272824504993,
         0.35,
-        3.42
+        3.33
       ],
       "rotationY": 180,
       "rotation_y": 180,
@@ -131,18 +135,34 @@
       }
     },
     {
-      "id": "gadget_wall_west",
+      "id": "gadget_wall_east",
       "lookup_name": "gadget_wall",
       "lookupName": "gadget_wall",
       "displayName": "Hand Gadgets — every interaction",
       "position": [
-        -3.9,
+        3.9,
         0,
         0
       ],
+      "rotation_y": -90,
+      "rotationY": -90,
+      "config": {}
+    },
+    {
+      "id": "point_board",
+      "lookup_name": "point_chalkboard",
+      "lookupName": "point_chalkboard",
+      "displayName": "Chalkboard — THE POINT (movable)",
+      "position": [
+        -3.9,
+        1.6,
+        1.0
+      ],
       "rotation_y": 90,
       "rotationY": 90,
-      "config": {}
+      "config": {
+        "no_collider": true
+      }
     }
   ]
 }

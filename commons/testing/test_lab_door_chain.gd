@@ -105,10 +105,14 @@ func _run() -> void:
 	await _phys(80)   # allow the ~0.8s scan dwell to complete before grant
 
 	var opened: bool = bool(door.get("_open"))
-	print("[chain] 5. hand on plate -> door open: %s   (scanner _scanning=%s)" %
-		[opened, scanner.get("_scanning")])
+	# Assert the panel PHYSICALLY moved, not just the _open flag — the door
+	# tween must actually slide the slab clear of the opening.
+	var panel: Node3D = door.get("left_panel")
+	var moved: bool = panel != null and absf(panel.position.x) > 0.5
+	print("[chain] 5. hand on plate -> door open: %s  panel_x=%s  (scanner _scanning=%s)" %
+		[opened, (panel.position.x if panel else "n/a"), scanner.get("_scanning")])
 
-	var ok: bool = wired and opened
+	var ok: bool = wired and opened and moved
 	print("\n[chain] RESULT: %s" %
 		("PASS — full VR chain works in the real lab" if ok else "FAIL — see step above"))
 	quit(0 if ok else 1)

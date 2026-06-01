@@ -50,13 +50,26 @@ func _ready():
 
 func _delayed_initialization():
 	"""Delayed initialization to ensure utilities are placed first"""
+	# This runs via call_deferred from _ready, by which point the node may
+	# already have been removed from the tree (e.g. a parent that rebuilds
+	# its children, like lab_room's apply_grid_config). get_tree() is null on
+	# a detached node, so bail out instead of crashing on .process_frame.
+	if not is_inside_tree():
+		return
 	print("AnnotationInfoBoard: Starting delayed initialization...")
-	
-	# Wait additional frames to ensure grid utilities are fully loaded
+
+	# Wait additional frames to ensure grid utilities are fully loaded.
+	# Re-check after each await — the node can be freed/detached mid-wait.
 	await get_tree().process_frame
+	if not is_inside_tree():
+		return
 	await get_tree().process_frame
+	if not is_inside_tree():
+		return
 	await get_tree().process_frame
-	
+	if not is_inside_tree():
+		return
+
 	# Check for sequence parameter from utility placement
 	_check_for_sequence_parameter()
 	

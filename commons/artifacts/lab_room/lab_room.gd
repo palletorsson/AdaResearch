@@ -68,6 +68,9 @@ class_name LabRoom
 @export_group("Signage")
 @export var signage_top: String = "TEST CHAMBER λ-S"
 @export var signage_sub: String = "Shannon Bound Probe"
+## Which wall the title signage hangs on: "front"/"south", "back"/"north",
+## "west", or "east". Default front wall (above the door / accent strip).
+@export var signage_wall: String = "front"
 
 @export_group("Lighting")
 ## 0.0 = warm yellow tint, 1.0 = cool blue tint on the directional light.
@@ -150,6 +153,17 @@ class_name LabRoom
 @export var door_wall: String = "south"
 @export var door_width: float = 1.4
 @export var door_height: float = 2.2
+## Shift the whole lab along Z (metres) AFTER the grid system positions it.
+## Negative = move "back" (−Z), away from the door wall. Lets a map nudge
+## the lab off the grid origin without touching the grid system itself.
+@export var lab_offset_z: float = 0.0
+## Hang a teaching chalkboard on the wall OPPOSITE the door (so the entering
+## player faces it). On by default for every lab.
+@export var show_chalkboard: bool = true
+## Which concept board to mount. "" = the default triangle chalkboard
+## (lookup "chalkboard"); otherwise a registry lookup_name like
+## "point_chalkboard", "line_chalkboard", etc.
+@export var chalkboard_lookup: String = "chalkboard"
 ## Distance in metres at which the sliding door triggers open. Default
 ## 1.0m so the door stays closed unless the player walks right up to it.
 @export var door_sensor_radius: float = 1.0
@@ -244,6 +258,11 @@ var stairs_cfg: Array = []
 # ── Constants ─────────────────────────────────────────────────────────
 
 const WALL_THICKNESS: float = 0.05
+
+# Tile cell footprint, captured during ceiling-fixture layout so the light
+# panels can be sized to fill their tile.
+var _fixture_cell_w: float = 1.2
+var _fixture_cell_d: float = 1.2
 const FLOOR_THICKNESS: float = 0.05
 const CEILING_THICKNESS: float = 0.05
 
@@ -265,30 +284,42 @@ func _ready() -> void:
 	# tell them where the lab sits in world Y. Deferred so the grid
 	# system has finished positioning us.
 	call_deferred("_patch_band_shader_world_y_offset")
+	# Nudge the whole lab along Z AFTER the grid system has placed us, so a
+	# map can pull the lab "back" off the grid origin. Deferred for the same
+	# reason — the grid sets our transform during/after add_child.
+	if lab_offset_z != 0.0:
+		call_deferred("_apply_lab_offset_z")
+
+
+func _apply_lab_offset_z() -> void:
+	position.z += lab_offset_z
 
 
 func _read_metadata_overrides() -> void:
+	# FIRST: resolve the lab JSON and lift its `lab_room` block into our
+	# config metadata, BEFORE reading any individual key below. Otherwise a
+	# key read here (signage_top/_wall, etc.) runs before the lift has
+	# populated its meta, so the JSON value is silently ignored and the
+	# hardcoded default wins — the bug that pinned signage to "TEST CHAMBER
+	# λ-S" / the front wall regardless of the lab JSON.
+	if has_meta("config_mounted_lab_json"):
+		mounted_lab_json = str(get_meta("config_mounted_lab_json"))
+	if mounted_lab_json != "":
+		_lift_lab_room_block_into_meta(mounted_lab_json)
+
 	# Strings — direct mapping.
 	if has_meta("config_signage_top"):
 		signage_top = str(get_meta("config_signage_top"))
 	if has_meta("config_signage_sub"):
 		signage_sub = str(get_meta("config_signage_sub"))
+	if has_meta("config_signage_wall"):
+		signage_wall = str(get_meta("config_signage_wall")).to_lower()
 	if has_meta("config_annotation_top"):
 		annotation_top = str(get_meta("config_annotation_top"))
 	if has_meta("config_annotation_bottom"):
 		annotation_bottom = str(get_meta("config_annotation_bottom"))
 	if has_meta("config_mounted_artifact_scene"):
 		mounted_artifact_scene = str(get_meta("config_mounted_artifact_scene"))
-	if has_meta("config_mounted_lab_json"):
-		mounted_lab_json = str(get_meta("config_mounted_lab_json"))
-
-	# If a lab JSON is set, lift its `lab_room` block into our config
-	# metadata BEFORE the rest of the overrides run. This lets the lab
-	# JSON (the source of truth saved by /lab-editor) control room
-	# dimensions, door wall + offset, window sizes, stairs/ramp etc.
-	# Token-level configs still win because they are applied after.
-	if mounted_lab_json != "":
-		_lift_lab_room_block_into_meta(mounted_lab_json)
 
 	# Colors as "r,g,b" strings.
 	if has_meta("config_accent_color"):
@@ -357,6 +388,12 @@ func _read_metadata_overrides() -> void:
 		door_open_offset = float(str(get_meta("config_door_open_offset")))
 	if has_meta("config_door_offset_x"):
 		door_offset_x = float(str(get_meta("config_door_offset_x")))
+	if has_meta("config_lab_offset_z"):
+		lab_offset_z = float(str(get_meta("config_lab_offset_z")))
+	if has_meta("config_show_chalkboard"):
+		show_chalkboard = _parse_bool(str(get_meta("config_show_chalkboard")), show_chalkboard)
+	if has_meta("config_chalkboard_lookup"):
+		chalkboard_lookup = str(get_meta("config_chalkboard_lookup"))
 	# Entry stairs / ramp config — overrides for the lab editor.
 	if has_meta("config_show_stairs"):
 		show_stairs = _parse_bool(str(get_meta("config_show_stairs")), show_stairs)
@@ -465,7 +502,16 @@ func _lift_lab_room_block_into_meta(json_path: String) -> void:
 
 
 func _clear_built_children() -> void:
+	# Detach IMMEDIATELY (remove_child) before queue_free. queue_free defers
+	# to end-of-frame, so the OLD door sensor would linger in the
+	# "lab_door_sensors" group while the rebuilt scanner's deferred
+	# auto-connect runs — the scanner then wires palm_scanned to the dying
+	# door, the grant fires into a freed node, and the door never opens.
+	# Removing first (which also exits groups) guarantees the rebuild's
+	# scanner only ever finds the fresh door. Same fix as palm_scanner's
+	# own _clear_built_children.
 	for c in get_children():
+		remove_child(c)
 		c.queue_free()
 
 
@@ -497,6 +543,139 @@ func _build_room() -> void:
 		_instantiate_mounted_artifact()
 	if mounted_lab_json != "":
 		_instantiate_mounted_lab_json()
+	# Auto-mount a chalkboard ONLY if the lab JSON didn't already place one
+	# itself (an author-placed board — a mounted_props entry whose lookup
+	# ends in "chalkboard" — wins, so the board is movable per-map). Deferred
+	# so the mounted props from _instantiate_mounted_lab_json have been added
+	# and can be detected.
+	if show_chalkboard:
+		call_deferred("_auto_mount_chalkboard_if_absent")
+
+
+func _auto_mount_chalkboard_if_absent() -> void:
+	if not show_chalkboard:
+		return
+	if _has_mounted_chalkboard():
+		return
+	_build_chalkboard()
+
+
+# True if any descendant is a Chalkboard (author-placed via mounted_props),
+# so the auto-mount can stand down and let the authored board's position win.
+func _has_mounted_chalkboard() -> bool:
+	return _find_chalkboard(self) != null
+
+
+func _find_chalkboard(n: Node) -> Node:
+	if n != self and (n is Chalkboard or n.get_class() == "Chalkboard"):
+		return n
+	# Match by script too (subclasses like PointChalkboard).
+	var scr = n.get_script()
+	if n != self and scr != null and str(scr.resource_path).find("chalkboard") != -1:
+		return n
+	for c in n.get_children():
+		var f := _find_chalkboard(c)
+		if f != null:
+			return f
+	return null
+
+
+# Hang a teaching chalkboard on the wall OPPOSITE the door, centred, at
+# reading height, facing into the room. Loaded from the artifact registry
+# so any concept board (point/line/triangle/…) can be dropped in via
+# chalkboard_lookup. Skipped silently if the scene can't be found.
+func _build_chalkboard() -> void:
+	const REG_DIR := "res://commons/artifacts/registry/"
+	var lookup: String = chalkboard_lookup if chalkboard_lookup != "" else "chalkboard"
+	var scene_path: String = _lookup_artifact_scene(lookup)
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		# Fall back to the chalkboard scene directly so a missing registry
+		# entry still gives every lab its board.
+		scene_path = "res://commons/primitives/chalkboard/chalkboard.tscn"
+	if not ResourceLoader.exists(scene_path):
+		return
+	var packed: PackedScene = load(scene_path)
+	if packed == null:
+		return
+	var board: Node3D = packed.instantiate()
+	board.name = "LabChalkboard"
+
+	# Wall opposite the door. Board front faces +Z in its local space, so
+	# rotate it to face inward from whichever wall it hangs on.
+	var half_w: float = room_width * 0.5
+	var half_d: float = room_depth * 0.5
+	var inset: float = WALL_THICKNESS + 0.05   # sit just off the wall face
+	var y: float = room_height * 0.42          # reading height, below signage
+	var board_w: float = float(board.get("board_width")) if "board_width" in board else 1.6
+	var pos := Vector3.ZERO
+	var rot_y: float = 0.0
+	# The back/front windows sit on the −Z (north/back) and +Z (south/front)
+	# walls. When the board lands on a windowed wall, slide it sideways to
+	# the clear half so it doesn't overlap the glass.
+	var horiz: float = _chalkboard_clear_offset(door_wall, board_w, half_w)
+	match door_wall:
+		"south":   # door on +Z → board on −Z (north, the back wall), facing +Z
+			pos = Vector3(horiz, y, -half_d + inset); rot_y = 0.0
+		"north":   # door on −Z → board on +Z (south, the front wall), facing −Z
+			pos = Vector3(horiz, y, half_d - inset); rot_y = PI
+		"west":    # door on −X → board on +X (east, a side wall), facing −X
+			pos = Vector3(half_w - inset, y, 0.0); rot_y = -PI * 0.5
+		"east", _: # door on +X → board on −X (west, a side wall), facing +X
+			pos = Vector3(-half_w + inset, y, 0.0); rot_y = PI * 0.5
+	board.position = pos
+	board.rotation = Vector3(0.0, rot_y, 0.0)
+	add_child(board)
+
+
+# When the board's wall carries a window, return a horizontal offset that
+# moves the board to the wall's clear half (away from the window). Returns 0
+# for a windowless wall (side walls, or no window configured).
+func _chalkboard_clear_offset(wall: String, board_w: float, half_w: float) -> float:
+	var has_win: bool = false
+	var win_w: float = 0.0
+	var win_off: float = 0.0
+	if wall == "south" and show_back_window:        # board lands on north/back wall
+		has_win = true; win_w = back_window_size.x; win_off = back_window_offset_x
+	elif wall == "north" and show_front_window:      # board lands on south/front wall
+		has_win = true; win_w = front_window_size.x; win_off = front_window_offset_x
+	if not has_win:
+		return 0.0
+	# Put the board centre on the opposite side of the wall centre from the
+	# window, just past the window edge, clamped so it stays on the wall.
+	var margin: float = 0.15
+	var limit: float = half_w - board_w * 0.5 - 0.2
+	var target: float
+	if win_off <= 0.0:
+		# window sits on the −X half → board goes to +X half
+		target = win_off + win_w * 0.5 + board_w * 0.5 + margin
+	else:
+		target = win_off - win_w * 0.5 - board_w * 0.5 - margin
+	return clampf(target, -limit, limit)
+
+
+# Look up an artifact scene path by lookup_name across the registry JSON
+# files (same idea as LabLoader, kept local so chalkboard mounting has no
+# hard dependency on the loader).
+func _lookup_artifact_scene(lookup: String) -> String:
+	const REG_DIR := "res://commons/artifacts/registry/"
+	var dir := DirAccess.open(REG_DIR)
+	if dir == null:
+		return ""
+	dir.list_dir_begin()
+	var fname := dir.get_next()
+	while fname != "":
+		if fname.ends_with(".json"):
+			var raw := FileAccess.get_file_as_string(REG_DIR + fname)
+			if not raw.is_empty():
+				var parsed = JSON.parse_string(raw)
+				if parsed is Dictionary and parsed.has(lookup):
+					var entry = parsed[lookup]
+					if entry is Dictionary and entry.has("scene"):
+						dir.list_dir_end()
+						return str(entry["scene"])
+		fname = dir.get_next()
+	dir.list_dir_end()
+	return ""
 
 
 # ── Colliders ─────────────────────────────────────────────────────────
@@ -2264,7 +2443,14 @@ func _build_ceiling_fixtures() -> void:
 	var rows: int = max(1, int(round(room_depth / ceiling_tile_size)))
 	var cell_w: float = room_width / float(cols)
 	var cell_d: float = room_depth / float(rows)
-	var ceil_y: float = room_height - CEILING_THICKNESS
+	# Mount fixtures on the UNDERSIDE of the tile layer (which hangs below the
+	# dark substrate), not at the substrate bottom — otherwise small fixtures
+	# end up embedded inside the ceiling instead of hanging below it.
+	var tile_thick: float = 0.012
+	var ceil_y: float = room_height - CEILING_THICKNESS - tile_thick
+	# Remember the tile cell footprint so the light panels can fill a tile.
+	_fixture_cell_w = cell_w
+	_fixture_cell_d = cell_d
 
 	# Floor-window bounds (avoid placing fixtures directly above the
 	# glass so the player's downward view stays clear).
@@ -2328,71 +2514,78 @@ func _seeded_shuffle(arr: Array, rng: RandomNumberGenerator) -> void:
 # so they read as protrusions, not paint.
 
 func _add_ceiling_vent_fixture(parent: Node3D, anchor: Vector3) -> void:
-	# Square dark grate, 0.4×0.4 m, 0.04m deep.
+	# Square dark grate, 0.4×0.4 m, 0.04m deep. anchor.y is the tile
+	# underside; hang the grate just below it (top flush to the ceiling).
+	var depth: float = 0.04
 	var n := MeshInstance3D.new()
 	n.name = "Vent"
 	var bm := BoxMesh.new()
-	bm.size = Vector3(0.40, 0.04, 0.40)
+	bm.size = Vector3(0.40, depth, 0.40)
 	n.mesh = bm
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.18, 0.20, 0.22)
 	mat.roughness = 0.55
 	mat.metallic = 0.5
 	n.material_override = mat
-	n.position = Vector3(anchor.x, anchor.y - 0.02, anchor.z)
+	n.position = Vector3(anchor.x, anchor.y - depth * 0.5, anchor.z)
 	parent.add_child(n)
 
 
 func _add_sprinkler_fixture(parent: Node3D, anchor: Vector3) -> void:
-	# Small disc (recessed in ceiling) + downward nozzle.
+	# Flush ceiling disc + downward nozzle. anchor.y is the tile underside;
+	# the disc top sits flush against it, the nozzle drops below.
+	var disc_h: float = 0.012
 	var disc := MeshInstance3D.new()
 	disc.name = "SprinklerDisc"
 	var dm := CylinderMesh.new()
 	dm.top_radius = 0.06
 	dm.bottom_radius = 0.06
-	dm.height = 0.012
+	dm.height = disc_h
 	disc.mesh = dm
 	var dmat := StandardMaterial3D.new()
 	dmat.albedo_color = Color(0.85, 0.85, 0.88)
 	dmat.roughness = 0.45
 	dmat.metallic = 0.3
 	disc.material_override = dmat
-	disc.position = Vector3(anchor.x, anchor.y - 0.006, anchor.z)
+	disc.position = Vector3(anchor.x, anchor.y - disc_h * 0.5, anchor.z)
 	parent.add_child(disc)
-	# Brass-colored nozzle below the disc.
+	# Brass-colored nozzle hanging below the disc.
+	var noz_h: float = 0.06
 	var nozzle := MeshInstance3D.new()
 	nozzle.name = "SprinklerNozzle"
 	var nm := CylinderMesh.new()
 	nm.top_radius = 0.022
 	nm.bottom_radius = 0.012
-	nm.height = 0.06
+	nm.height = noz_h
 	nozzle.mesh = nm
 	var nmat := StandardMaterial3D.new()
 	nmat.albedo_color = Color(0.82, 0.58, 0.22)  # brass
 	nmat.roughness = 0.35
 	nmat.metallic = 0.75
 	nozzle.material_override = nmat
-	nozzle.position = Vector3(anchor.x, anchor.y - 0.04, anchor.z)
+	nozzle.position = Vector3(anchor.x, anchor.y - disc_h - noz_h * 0.5, anchor.z)
 	parent.add_child(nozzle)
 
 
 func _add_sensor_fixture(parent: Node3D, anchor: Vector3) -> void:
-	# Smoke detector — white disc with red LED.
+	# Smoke detector — white disc with red LED. anchor.y is the tile
+	# underside; the disc top sits flush, the body hangs below.
+	var disc_h: float = 0.025
 	var disc := MeshInstance3D.new()
 	disc.name = "SmokeDetector"
 	var dm := CylinderMesh.new()
 	dm.top_radius = 0.075
 	dm.bottom_radius = 0.075
-	dm.height = 0.025
+	dm.height = disc_h
 	disc.mesh = dm
 	var dmat := StandardMaterial3D.new()
 	dmat.albedo_color = Color(0.94, 0.94, 0.95)
 	dmat.roughness = 0.45
 	dmat.metallic = 0.0
 	disc.material_override = dmat
-	disc.position = Vector3(anchor.x, anchor.y - 0.012, anchor.z)
+	disc.position = Vector3(anchor.x, anchor.y - disc_h * 0.5, anchor.z)
 	parent.add_child(disc)
-	# LED dot
+	# LED dot on the underside of the detector.
 	var led := MeshInstance3D.new()
 	led.name = "SensorLED"
 	var lm := SphereMesh.new()
@@ -2406,27 +2599,29 @@ func _add_sensor_fixture(parent: Node3D, anchor: Vector3) -> void:
 	lmat.emission_energy_multiplier = 2.2
 	lmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	led.material_override = lmat
-	led.position = Vector3(anchor.x + 0.03, anchor.y - 0.025, anchor.z + 0.02)
+	led.position = Vector3(anchor.x + 0.03, anchor.y - disc_h - 0.004, anchor.z + 0.02)
 	parent.add_child(led)
 
 
 func _add_speaker_fixture(parent: Node3D, anchor: Vector3) -> void:
-	# Round overhead speaker — disc + slightly proud rim.
+	# Round overhead speaker — rim + recessed cone. anchor.y is the tile
+	# underside; the rim top sits flush, the cone tucks just inside it.
+	var rim_h: float = 0.015
 	var ring := MeshInstance3D.new()
 	ring.name = "SpeakerRim"
 	var rm := CylinderMesh.new()
 	rm.top_radius = 0.10
 	rm.bottom_radius = 0.10
-	rm.height = 0.015
+	rm.height = rim_h
 	ring.mesh = rm
 	var rmat := StandardMaterial3D.new()
 	rmat.albedo_color = Color(0.25, 0.26, 0.30)
 	rmat.roughness = 0.55
 	rmat.metallic = 0.35
 	ring.material_override = rmat
-	ring.position = Vector3(anchor.x, anchor.y - 0.007, anchor.z)
+	ring.position = Vector3(anchor.x, anchor.y - rim_h * 0.5, anchor.z)
 	parent.add_child(ring)
-	# Cone (slightly recessed darker disc)
+	# Cone (slightly recessed darker disc, just inside the rim).
 	var cone := MeshInstance3D.new()
 	cone.name = "SpeakerCone"
 	var cm := CylinderMesh.new()
@@ -2438,16 +2633,22 @@ func _add_speaker_fixture(parent: Node3D, anchor: Vector3) -> void:
 	cmat.albedo_color = Color(0.08, 0.09, 0.11)
 	cmat.roughness = 0.85
 	cone.material_override = cmat
-	cone.position = Vector3(anchor.x, anchor.y - 0.018, anchor.z)
+	cone.position = Vector3(anchor.x, anchor.y - rim_h + 0.0025, anchor.z)
 	parent.add_child(cone)
 
 
 func _add_light_fixture(parent: Node3D, anchor: Vector3) -> void:
-	# Recessed flat light panel — 0.9 × 0.3 m, glows slightly.
+	# Flat light panel sized to FILL its ceiling tile (small inset so the
+	# T-grid still frames it). anchor.y is the tile underside; the panel
+	# hangs flush just below it.
+	var panel_h: float = 0.03
+	var inset: float = 0.06   # leave the grid line visible around the panel
+	var pw: float = max(0.2, _fixture_cell_w - inset)
+	var pd: float = max(0.2, _fixture_cell_d - inset)
 	var p := MeshInstance3D.new()
 	p.name = "LightPanel"
 	var pm := BoxMesh.new()
-	pm.size = Vector3(0.9, 0.03, 0.3)
+	pm.size = Vector3(pw, panel_h, pd)
 	p.mesh = pm
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.96, 0.97, 1.00)
@@ -2457,7 +2658,7 @@ func _add_light_fixture(parent: Node3D, anchor: Vector3) -> void:
 	mat.roughness = 0.25
 	mat.metallic = 0.0
 	p.material_override = mat
-	p.position = Vector3(anchor.x, anchor.y - 0.014, anchor.z)
+	p.position = Vector3(anchor.x, anchor.y - panel_h * 0.5, anchor.z)
 	parent.add_child(p)
 
 
@@ -2781,20 +2982,25 @@ func _build_plinth_and_mount() -> void:
 # ── Signage ───────────────────────────────────────────────────────────
 
 func _build_signage() -> void:
-	# Mounted on the front wall (-Z, same wall as the accent strip).
+	# Mount the title on the chosen wall, facing into the room. Labels face
+	# +Z by default, so each wall needs its own Y-rotation to read correctly.
 	var signage_root := Node3D.new()
 	signage_root.name = "Signage"
-	# Just in front of the front wall, at chest-to-head height.
-	# Front wall faces +Z, so signage labels (which face -Z by default)
-	# need to be flipped 180° to face +Z (readable from inside).
-	signage_root.position = Vector3(
-		0.0,
-		room_height * 0.62,
-		-room_depth * 0.5 + WALL_THICKNESS + 0.06
-	)
-	# Label3D in Godot 4 defaults to facing +Z (readable from +Z-side
-	# viewers). The player is at +Z looking toward -Z, so default
-	# orientation reads correctly. No rotation needed.
+	var y: float = room_height * 0.62
+	var off: float = WALL_THICKNESS + 0.06
+	match signage_wall:
+		"west":            # -X wall, read from +X side → face +X
+			signage_root.position = Vector3(-room_width * 0.5 + off, y, 0.0)
+			signage_root.rotation = Vector3(0.0, PI * 0.5, 0.0)
+		"east":            # +X wall, read from -X side → face -X
+			signage_root.position = Vector3(room_width * 0.5 - off, y, 0.0)
+			signage_root.rotation = Vector3(0.0, -PI * 0.5, 0.0)
+		"back", "south":   # +Z wall (the door wall), read from -Z side → face -Z
+			signage_root.position = Vector3(0.0, y, room_depth * 0.5 - off)
+			signage_root.rotation = Vector3(0.0, PI, 0.0)
+		"front", "north", _:  # -Z wall (ORIGINAL DEFAULT), read from +Z → face +Z
+			signage_root.position = Vector3(0.0, y, -room_depth * 0.5 + off)
+			signage_root.rotation = Vector3.ZERO
 	add_child(signage_root)
 
 	# TOP line: large white identifier.

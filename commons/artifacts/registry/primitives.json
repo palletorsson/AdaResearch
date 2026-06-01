@@ -4,34 +4,84 @@
 			"category": "primitives",
 			"complexity": "beginner",
 			"description": "A pixel-art heart extruded into a field of small 3D cubes on a single MultiMesh (one draw call). The 'love' reaction in the project's own cube vocabulary — warm red voxels, beveled, readable across a room.",
-			"dev_themes": ["commons", "primitives", "reaction", "voxel"],
-			"footprint": [1, 1, 1],
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"reaction",
+				"voxel"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
 			"include_in_map_data": true,
 			"lookup_name": "pixel_heart",
 			"map_ready": true,
-			"map_sequences": ["primitives"],
+			"map_sequences": [
+				"primitives"
+			],
 			"name": "Pixel Heart",
-			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"scene": "res://commons/primitives/pixel_icon/pixel_heart.tscn",
 			"size_group": "compact",
-			"tags": ["heart", "voxel", "pixel", "reaction", "love", "multimesh"],
+			"tags": [
+				"heart",
+				"voxel",
+				"pixel",
+				"reaction",
+				"love",
+				"multimesh"
+			],
 			"qfep_connection": "A reaction is a primitive feeling, so it is a primitive object — the heart was always pixels; we gave the pixels depth."
 		},
 		"pixel_thumb": {
 			"category": "primitives",
 			"complexity": "beginner",
 			"description": "A pixel-art thumbs-up extruded into a field of small 3D cubes on a single MultiMesh (one draw call). The 'friend / approved' reaction in the project's own cube vocabulary — cool blue voxels, beveled.",
-			"dev_themes": ["commons", "primitives", "reaction", "voxel"],
-			"footprint": [1, 1, 1],
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"reaction",
+				"voxel"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
 			"include_in_map_data": true,
 			"lookup_name": "pixel_thumb",
 			"map_ready": true,
-			"map_sequences": ["primitives"],
+			"map_sequences": [
+				"primitives"
+			],
 			"name": "Pixel Thumb",
-			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"scene": "res://commons/primitives/pixel_icon/pixel_thumb.tscn",
 			"size_group": "compact",
-			"tags": ["thumb", "voxel", "pixel", "reaction", "friend", "multimesh"],
+			"tags": [
+				"thumb",
+				"voxel",
+				"pixel",
+				"reaction",
+				"friend",
+				"multimesh"
+			],
 			"qfep_connection": "The thumb says yes in the grammar of the grid — the catalyst's foe-to-friend arc made into a solid object."
 		},
 		"floating_sphere_field": {
@@ -81,7 +131,7 @@
 		"xyz_slider_plate": {
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "Dieter Rams plate with three sliders (X, Y, Z) that move a glowing point through space. Live coordinate display and line to origin. Teaches axis independence \u2014 moving one slider doesn't affect the others.",
+			"description": "Dieter Rams plate with three sliders (X, Y, Z) that move a glowing point through space. Live coordinate display and line to origin. Teaches axis independence — moving one slider doesn't affect the others.",
 			"dev_themes": [
 				"commons",
 				"primitives",
@@ -117,7 +167,7 @@
 				"interactive",
 				"dieter_rams"
 			],
-			"qfep_connection": "Axis independence as felt experience \u2014 the hand learns that three degrees of freedom are orthogonal by moving each one alone.",
+			"qfep_connection": "Axis independence as felt experience — the hand learns that three degrees of freedom are orthogonal by moving each one alone.",
 			"measurements": {
 				"aabb_size": [
 					0.26,
@@ -150,7 +200,7 @@
 		"laser_sword": {
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "Grabbable glowing blade on a Rams handle \u2014 pick it up and the blade ignites with a layered hum. Swing speed modulates pitch and glow intensity. Teaches directed line segment as embodied intention.",
+			"description": "Grabbable glowing blade on a Rams handle — pick it up and the blade ignites with a layered hum. Swing speed modulates pitch and glow intensity. Teaches directed line segment as embodied intention.",
 			"dev_themes": [
 				"commons",
 				"primitives"
@@ -185,7 +235,7 @@
 				"sword",
 				"interactive"
 			],
-			"qfep_connection": "Direction as embodied will \u2014 the blade points where you point, making directed line segment a felt experience before a mathematical concept.",
+			"qfep_connection": "Direction as embodied will — the blade points where you point, making directed line segment a felt experience before a mathematical concept.",
 			"measurements": {
 				"aabb_size": [
 					0.06,
@@ -218,7 +268,7 @@
 		"grabbable_line": {
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "A line segment you grab as one object \u2014 pick up anywhere along its length to move it through space. Fixed length, visible endpoints, integer-resistance glitch. Complements the endpoint-first line by teaching whole-before-parts.",
+			"description": "A line segment you grab as one object — pick up anywhere along its length to move it through space. Fixed length, visible endpoints, integer-resistance glitch. Complements the endpoint-first line by teaching whole-before-parts.",
 			"dev_themes": [
 				"commons",
 				"primitives"
@@ -252,7 +302,7 @@
 				"measurement",
 				"resistance"
 			],
-			"qfep_connection": "Holding a line whole before decomposing it into endpoints \u2014 unity precedes analysis, the body grasps the relation before the mind names the parts.",
+			"qfep_connection": "Holding a line whole before decomposing it into endpoints — unity precedes analysis, the body grasps the relation before the mind names the parts.",
 			"measurements": {
 				"aabb_size": [
 					0.28,
@@ -285,7 +335,7 @@
 		"code_evolution_screen": {
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "Dual-panel VR code viewer \u2014 watch code build up stage by stage with parallel thinking narration. Uses SubViewport + RichTextLabel with Catppuccin Mocha syntax highlighting.",
+			"description": "Dual-panel VR code viewer — watch code build up stage by stage with parallel thinking narration. Uses SubViewport + RichTextLabel with Catppuccin Mocha syntax highlighting.",
 			"dev_themes": [
 				"commons",
 				"primitives",
@@ -320,7 +370,7 @@
 				"2d_in_3d",
 				"subviewport"
 			],
-			"qfep_connection": "Code as temporal process \u2014 each line is a decision, each stage is a conceptual leap. Understanding emerges from watching construction, not reading completion.",
+			"qfep_connection": "Code as temporal process — each line is a decision, each stage is a conceptual leap. Understanding emerges from watching construction, not reading completion.",
 			"measurements": {
 				"aabb_size": [
 					0.96,
@@ -1073,7 +1123,7 @@
 		"array_rotate": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Array + Rotate. rotation[i] = i \u00c3\u2014 angle. The fan/wheel: cumulative rotation around axis.",
+			"description": "Array + Rotate. rotation[i] = i Ã— angle. The fan/wheel: cumulative rotation around axis.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -1281,7 +1331,7 @@
 		"array_translate": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Array + Translate. position[i] = i \u00c3\u2014 offset. The staircase: cumulative translation.",
+			"description": "Array + Translate. position[i] = i Ã— offset. The staircase: cumulative translation.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -4575,7 +4625,7 @@
 		"dgrid": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Standing perspective grid frame inspired by Albrecht D\u00c3\u00bcrer. Use dgrid:90:1:1#config:10:10 for 10x10 grid.",
+			"description": "Standing perspective grid frame inspired by Albrecht DÃ¼rer. Use dgrid:90:1:1#config:10:10 for 10x10 grid.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -4591,7 +4641,7 @@
 			"map_sequences": [
 				"primitives"
 			],
-			"name": "D\u00c3\u00bcrer Grid",
+			"name": "DÃ¼rer Grid",
 			"parameters": {
 				"footprint": [
 					1,
@@ -5082,7 +5132,7 @@
 		"dome": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Half-sphere primitive produced by boolean subtraction \u2014 used as reference geometry for enclosures and shelters.",
+			"description": "Half-sphere primitive produced by boolean subtraction — used as reference geometry for enclosures and shelters.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -5270,7 +5320,7 @@
 		"draw_dot": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "sample(hand_position) \u2192 ImmediateMesh trail \u2014 the hand writes points in 3D space",
+			"description": "sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -5505,7 +5555,7 @@
 		"draw_triangle_faces": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "fan_triangulate(loop) \u2192 colored mesh face \u2014 closed point loops become surfaces",
+			"description": "fan_triangulate(loop) → colored mesh face — closed point loops become surfaces",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -6252,7 +6302,7 @@
 		"folded_strip": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "triangle_strip(24) \u2014 alternating-height vertices forming a pleated ribbon of connected faces",
+			"description": "triangle_strip(24) — alternating-height vertices forming a pleated ribbon of connected faces",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -6989,7 +7039,7 @@
 		"glass_planes_empty": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "2.5D: Array of transparent glass planes. Pure repetition \u00e2\u20ac\u201d depth from layered transparency. No noise.",
+			"description": "2.5D: Array of transparent glass planes. Pure repetition â€” depth from layered transparency. No noise.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -8270,7 +8320,7 @@
 		"grab_octahedron": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "octahedron \u2014 6 vertices, 12 edges, 8 triangular faces: dual of the cube, Platonic solid",
+			"description": "octahedron — 6 vertices, 12 edges, 8 triangular faces: dual of the cube, Platonic solid",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -8702,7 +8752,7 @@
 		"grab_sphere_point_snap": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "snap(position) = round(position / grid_size) * grid_size \u2014 discretise continuous space",
+			"description": "snap(position) = round(position / grid_size) * grid_size — discretise continuous space",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -9131,7 +9181,7 @@
 		"grab_trihedron": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "trihedron \u2014 4 vertices, 3 triangular faces and 1 quad base: the wedge as 3D primitive",
+			"description": "trihedron — 4 vertices, 3 triangular faces and 1 quad base: the wedge as 3D primitive",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -9245,7 +9295,7 @@
 		"grid_lines": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "grid = {x=i*step, z=j*step : i,j \u2208 \u2124} \u2014 the XZ plane made legible as a lattice of lines",
+			"description": "grid = {x=i*step, z=j*step : i,j ∈ ℤ} — the XZ plane made legible as a lattice of lines",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -9871,14 +9921,26 @@
 				"forces",
 				"catalyst"
 			],
-			"footprint": [1, 1, 1],
+			"footprint": [
+				1,
+				1,
+				1
+			],
 			"include_in_map_data": true,
 			"lookup_name": "interactive_point_origin_force",
 			"map_ready": true,
-			"map_sequences": ["primitives"],
+			"map_sequences": [
+				"primitives"
+			],
 			"name": "1.0.2 Interactive Point — Force Catalyst",
 			"scene": "res://commons/primitives/point/interactive_point_origin_force.tscn",
-			"tags": ["primitive", "force", "catalyst", "two_hand", "vertex_shader"],
+			"tags": [
+				"primitive",
+				"force",
+				"catalyst",
+				"two_hand",
+				"vertex_shader"
+			],
 			"parameters": {
 				"attraction_radius": "Sphere radius (m) within which RigidBody3D bodies feel the pull. Default 1.5.",
 				"attraction_strength": "Pull-force coefficient k in F = k / d². Default 8.0.",
@@ -11005,7 +11067,7 @@
 		"line_demo": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "snap_connection(pointA, pointB) \u2192 line \u2014 demonstrate the SnapConnectionManager wiring",
+			"description": "snap_connection(pointA, pointB) → line — demonstrate the SnapConnectionManager wiring",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -11931,7 +11993,7 @@
 		"origin": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "(0, 0, 0) \u2014 the reference from which all coordinates are measured",
+			"description": "(0, 0, 0) — the reference from which all coordinates are measured",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -12437,7 +12499,7 @@
 		"perspective_lines": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "all lines \u2192 (0,0,0) \u2014 convergence to a single vanishing point as perspective law",
+			"description": "all lines → (0,0,0) — convergence to a single vanishing point as perspective law",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -12649,7 +12711,7 @@
 		"pickup_cube_rotating": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Pickup cube that rotates continuously \u2014 wraps pick_up_cube.gd and disables internal collision so the player can walk into the pickup area freely.",
+			"description": "Pickup cube that rotates continuously — wraps pick_up_cube.gd and disables internal collision so the player can walk into the pickup area freely.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -15150,7 +15212,7 @@
 		"pythagorean_triangle_angles": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "a\u00b2 + b\u00b2 = c\u00b2 \u2014 the Pythagorean theorem made spatial: three squares grown from triangle sides",
+			"description": "a² + b² = c² — the Pythagorean theorem made spatial: three squares grown from triangle sides",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -16918,7 +16980,7 @@
 		"rotation_match_puzzle": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Vera Moln\u00c3\u00a1r-inspired rotation puzzle. Match cube rotations to ghost targets. Config: style:molnar|interruptions|random|gradient, grid_x:3, grid_z:3, max_rot:45, tolerance:10, axis:z",
+			"description": "Vera MolnÃ¡r-inspired rotation puzzle. Match cube rotations to ghost targets. Config: style:molnar|interruptions|random|gradient, grid_x:3, grid_z:3, max_rot:45, tolerance:10, axis:z",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -17141,7 +17203,7 @@
 		"scale_lines": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "[100m, 10m, 1m, 10cm, 1mm] \u2014 a logarithmic ladder of reference lengths made tangible",
+			"description": "[100m, 10m, 1m, 10cm, 1mm] — a logarithmic ladder of reference lengths made tangible",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -19896,7 +19958,7 @@
 		"transform_staircase_fibonacci": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Fibonacci spiral: array + golden angle (137.5\u00c2\u00b0) + scaling. Nature's growth pattern.",
+			"description": "Fibonacci spiral: array + golden angle (137.5Â°) + scaling. Nature's growth pattern.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -20004,7 +20066,7 @@
 		"transform_staircase_mobius": {
 			"category": "unknown",
 			"complexity": "expert",
-			"description": "M\u00c3\u00b6bius strip: array + rotation + twist. One-sided surface, topological oddity.",
+			"description": "MÃ¶bius strip: array + rotation + twist. One-sided surface, topological oddity.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -20111,7 +20173,7 @@
 		"transform_staircase_showcase": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "All five staircase types together: Linear, Spiral, DNA, Fibonacci, M\u00c3\u00b6bius. Culmination of arrays + transformation.",
+			"description": "All five staircase types together: Linear, Spiral, DNA, Fibonacci, MÃ¶bius. Culmination of arrays + transformation.",
 			"dev_themes": [
 				"biology",
 				"core",
@@ -21313,7 +21375,7 @@
 		"truncatedtetrahedron": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "tetrahedron with corners cut \u2014 each vertex replaced by a triangular face, adding 4 new faces",
+			"description": "tetrahedron with corners cut — each vertex replaced by a triangular face, adding 4 new faces",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -21715,7 +21777,7 @@
 		"achilles_tortoise": {
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "Zeno's paradox of Achilles and the Tortoise. Watch infinite steps converge to a finite limit: A_n = L*(1-1/2^n). Each step halves the gap \u2014 infinite steps, finite distance. The paradox dissolves in the limit.",
+			"description": "Zeno's paradox of Achilles and the Tortoise. Watch infinite steps converge to a finite limit: A_n = L*(1-1/2^n). Each step halves the gap — infinite steps, finite distance. The paradox dissolves in the limit.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -21902,6 +21964,1153 @@
 				"derived_at": "2026-04-29T09:39:46.190559Z",
 				"derived_from": "aabb_size + category"
 			}
+		},
+		"klee_walking_point": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A luminous point that sets itself in motion and leaves a trail of points - the trail IS a line. Klee's Pedagogical Sketchbook page one: an active line on a walk. walk_style: 'meander' (queer wander) vs 'straight' (collapsed shortest path).",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"point",
+				"line",
+				"klee"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "klee_walking_point",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Klee Walking Point",
+			"parameters": {
+				"walk_style": "meander",
+				"trail_points": 48,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/klee_walking_point/klee_walking_point.tscn",
+			"size_group": "compact",
+			"tags": [
+				"point",
+				"line",
+				"klee",
+				"motion",
+				"didactic",
+				"meander"
+			],
+			"qfep_connection": "A line is a point that refused to stay still. The straight walk learned nothing; the meander is the line at the edge of chaos."
+		},
+		"fontana_puncture": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A solid cube with an oversized sphere subtracted (CSG, baked) so the void breaches every face - Fontana's Concetto Spaziale in 3D. A luminous point floats at the centre.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"point",
+				"dimension",
+				"fontana"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fontana_puncture",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Fontana Puncture",
+			"parameters": {
+				"cube_size": 0.5,
+				"sphere_radius": 0.34,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/fontana_puncture/fontana_puncture.tscn",
+			"size_group": "compact",
+			"tags": [
+				"point",
+				"dimension",
+				"fontana",
+				"csg",
+				"boolean",
+				"didactic"
+			],
+			"qfep_connection": "The point given a radius and aimed at solid matter becomes the absence that defines the form. Subtraction as meaning - the first boolean."
+		},
+		"you_are_here": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A text decal on the floor - YOU ARE HERE lying flat underfoot, the wayfinding locator. A flat indexical inscription you stand ON. TextMesh. pride_gradient reclaims the corporate blue dot.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"point",
+				"locator",
+				"wayfinding"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "you_are_here",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "You Are Here",
+			"parameters": {
+				"text": "YOU ARE HERE",
+				"pride_gradient": false,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/you_are_here/you_are_here.tscn",
+			"size_group": "compact",
+			"tags": [
+				"point",
+				"locator",
+				"wayfinding",
+				"decal",
+				"floor",
+				"didactic"
+			],
+			"qfep_connection": "'You are here' is what a civilisation writes when it renders every body as a coordinate it has already labelled. The friendliest face of algorithmic capture."
+		},
+		"two_points_line": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Two luminous endpoints and the segment between them - Euclid's first postulate. Different-coloured points with a messenger travelling A<->B so the line reads as a live channel of relation.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"line",
+				"point",
+				"relation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "two_points_line",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Two Points Line",
+			"parameters": {
+				"length": 1.4,
+				"show_messenger": true,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/two_points_line/two_points_line.tscn",
+			"size_group": "compact",
+			"tags": [
+				"line",
+				"point",
+				"relation",
+				"euclid",
+				"connection",
+				"didactic"
+			],
+			"qfep_connection": "A line is the first relation in geometry - relation, not substance. Collapse is A=B; the move is difference held apart and bridged without being erased."
+		},
+		"horizon_line": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A horizon - sky over ground meeting at a bright seam that overhangs the frame. Friedrich, Rothko, Munoz's queer horizon: the line as the not-yet, approached and never reached.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"line",
+				"horizon",
+				"futurity"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "horizon_line",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Horizon Line",
+			"parameters": {
+				"panel_width": 2.0,
+				"panel_height": 1.5,
+				"seam_offset": 0.0,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/horizon_line/horizon_line.tscn",
+			"size_group": "compact",
+			"tags": [
+				"line",
+				"horizon",
+				"futurity",
+				"munoz",
+				"colour-field",
+				"didactic"
+			],
+			"qfep_connection": "Futurity installed as a primitive: the only line whose definition includes your never reaching it. Munoz's world that is not enough yet."
+		},
+		"redline": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A red line on the floor with two faintly different fields either side - the line that divides. HOLC redlining (1935), the analog ancestor of the classifier's decision boundary. Steppable, which the originals were not.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"line",
+				"border",
+				"redline"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "redline",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Redline",
+			"parameters": {
+				"line_length": 2.4,
+				"show_regions": true,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/redline/redline.tscn",
+			"size_group": "compact",
+			"tags": [
+				"line",
+				"border",
+				"redline",
+				"division",
+				"decision-boundary",
+				"didactic"
+			],
+			"qfep_connection": "The same primitive that connects can sort - sorting, drawn and enforced, is the ancestor of every algorithmic fence. The decision boundary with its map returned."
+		},
+		"three_points_triangle": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Three points, three edges, the moment they close into a surface - the first plane, the GPU's atom. Corner points, edges, a real filled face, the face normal. Everything smooth is secretly faceted.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"triangle",
+				"plane",
+				"gpu"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "three_points_triangle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Three Points Triangle",
+			"parameters": {
+				"tri_width": 1.2,
+				"tri_height": 1.1,
+				"show_normal": true,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/three_points_triangle/three_points_triangle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"triangle",
+				"plane",
+				"gpu",
+				"render-primitive",
+				"mesh",
+				"didactic"
+			],
+			"qfep_connection": "Point->line->triangle is the curriculum's first complete sentence: a position, a relation, an enclosed inside. The founding act of all computer graphics."
+		},
+		"tensegrity_triangle": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A triangle of three struts and three joints holding its shape under a load that would fold any other polygon. Fuller: the triangle is the only rigid polygon. A compression pulse it visibly springs back from.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"triangle",
+				"structure",
+				"fuller"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tensegrity_triangle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Tensegrity Triangle",
+			"parameters": {
+				"tri_width": 1.2,
+				"tri_height": 1.1,
+				"load_amplitude": 0.035,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/tensegrity_triangle/tensegrity_triangle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"triangle",
+				"structure",
+				"fuller",
+				"tensegrity",
+				"rigid",
+				"didactic"
+			],
+			"qfep_connection": "The triangle as relation made rigid - the first structure that holds itself up. Nature stabilises with triangles because nothing else stays true under load."
+		},
+		"pink_triangle": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A pink triangle on black - the Nazi camp badge turned point-UP by Silence=Death and ACT UP, a banner of refusal. Its orientation is the whole argument. inverted=false is the reclaimed form.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"triangle",
+				"symbol",
+				"queer"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pink_triangle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Pink Triangle",
+			"parameters": {
+				"field_size": 1.5,
+				"inverted": false,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/pink_triangle/pink_triangle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"triangle",
+				"symbol",
+				"queer",
+				"act-up",
+				"reclamation",
+				"didactic"
+			],
+			"qfep_connection": "Queerness coded into the most elementary form - a hinge to the QFEP thesis. Form is never neutral once a body has worn it; the reclaiming 180 degrees is the move made history."
+		},
+		"triangle_whiteboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A lab whiteboard with the science of the triangle in marker (TextMesh) - diagram, angle sum, rigidity, the GPU fact. The first scientific-register board (later superseded by the hand-chalk chalkboard).",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"triangle",
+				"whiteboard",
+				"didactic"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "triangle_whiteboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Triangle Whiteboard",
+			"parameters": {
+				"diagram": "triangle",
+				"title": "THE TRIANGLE",
+				"board_width": 1.5,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/triangle_whiteboard/triangle_whiteboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"triangle",
+				"whiteboard",
+				"didactic",
+				"science",
+				"diagram"
+			],
+			"qfep_connection": "The scientific register - the flat truth behind the poetry. A curriculum needs a surface where the answer is written."
+		},
+		"chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A framed blackboard with hand-chalked notation in Turing's hand - a ScribbleControl draws real math as wobbly chalk strokes (no font), mapped onto a 3D board. Default: the triangle facts. Content is the lines array.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"scribble",
+				"handwriting"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Chalkboard",
+			"parameters": {
+				"diagram": "triangle",
+				"board_width": 1.6,
+				"glyph_height": 130,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/chalkboard/chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"scribble",
+				"handwriting",
+				"math",
+				"science",
+				"turing"
+			],
+			"qfep_connection": "A queer-humanist curriculum needs the answer written by a HAND, not typeset by a machine that pretends mathematics fell from the sky. Even 180 degrees was thought by somebody, at a board."
+		},
+		"point_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for THE POINT - a chalk dot with crosshair guides: P=(x,y,z), 0 dimensions, the seed of all form.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"point",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "point_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Point Chalkboard",
+			"parameters": {
+				"diagram": "point",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point_chalkboard/point_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"point",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "Even 'nothing' has a definition - the dimensionless seed every shape grows from."
+		},
+		"line_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for THE LINE - endpoints A,B and midpoint M: shortest path, length |B-A|, M=(A+B)/2, 1 dimension.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"line",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "line_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Line Chalkboard",
+			"parameters": {
+				"diagram": "line",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line_chalkboard/line_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"line",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The line as pure relation - two points imply a unique straight path. The first relation, stated by hand."
+		},
+		"quad_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for THE QUAD - a rectangle with the diagonal: 4 vertices, area w*h, GPU draws 2 triangles, the screen is a quad.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"quad",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "quad_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Quad Chalkboard",
+			"parameters": {
+				"diagram": "quad",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/quad_chalkboard/quad_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"quad",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "Every screen is two triangles pretending to be a rectangle. The triangle never left."
+		},
+		"qfep_chalkboard": {
+			"category": "primitives",
+			"complexity": "advanced",
+			"description": "A wide chalkboard for the QUEER FREE ENERGY PRINCIPLE - QFE = F - lambda E(S) + phi dE beside an edge-of-chaos curve peaking at lambda~0.4 where life sits between order and noise.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"qfep",
+				"theory"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "qfep_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			],
+			"name": "QFEP Chalkboard",
+			"parameters": {
+				"diagram": "qfep",
+				"board_width": 2.2,
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "wide"
+			},
+			"scene": "res://commons/primitives/qfep_chalkboard/qfep_chalkboard.tscn",
+			"size_group": "wide",
+			"tags": [
+				"chalkboard",
+				"qfep",
+				"theory",
+				"scribble",
+				"turing"
+			],
+			"qfep_connection": "This IS the QFEP, stated. Life at the edge, not frozen and not noise. The phi-term is the queer one - refusing to settle."
+		},
+		"endlessness_chalkboard": {
+			"category": "primitives",
+			"complexity": "advanced",
+			"description": "A chalkboard for ENDLESSNESS - potential vs actual infinity, an inward spiral that never closes. The limit approached but never reached.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"spiral",
+				"theory"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "endlessness_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"name": "Endlessness Chalkboard",
+			"parameters": {
+				"diagram": "spiral",
+				"board_width": 2.0,
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "wide"
+			},
+			"scene": "res://commons/primitives/endlessness_chalkboard/endlessness_chalkboard.tscn",
+			"size_group": "wide",
+			"tags": [
+				"chalkboard",
+				"spiral",
+				"theory",
+				"scribble",
+				"turing"
+			],
+			"qfep_connection": "Two infinities: a process with no last step, and the completed whole. Reaching the limit would end the endlessness."
+		},
+		"thrownness_chalkboard": {
+			"category": "primitives",
+			"complexity": "advanced",
+			"description": "A chalkboard for THROWNNESS - Heidegger's Geworfenheit: a figure dropped along an arrow into a bounded grid it did not choose. Made literal: spawn is a throw.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"thrown",
+				"theory"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "thrownness_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Thrownness Chalkboard",
+			"parameters": {
+				"diagram": "thrown",
+				"board_width": 2.0,
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "wide"
+			},
+			"scene": "res://commons/primitives/thrownness_chalkboard/thrownness_chalkboard.tscn",
+			"size_group": "wide",
+			"tags": [
+				"chalkboard",
+				"thrown",
+				"theory",
+				"scribble",
+				"turing"
+			],
+			"qfep_connection": "You wake already IN a world, at a place not of your choosing. The grid was here before you. You are here - and here was not your decision."
+		},
+		"network_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Lines, Networks, Measure', hand-chalked on the scribble engine: a network diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"network",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "network_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Network Chalkboard",
+			"parameters": {
+				"diagram": "network",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/network_chalkboard/network_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"network",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Lines, Networks, Measure' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
+		},
+		"trace_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Duration and Residue', hand-chalked on the scribble engine: a trace diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"trace",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "trace_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Trace Chalkboard",
+			"parameters": {
+				"diagram": "trace",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/trace_chalkboard/trace_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"trace",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Duration and Residue' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
+		},
+		"grid_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Grid Quantizes Movement', hand-chalked on the scribble engine: a grid diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"grid",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grid_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Grid Chalkboard",
+			"parameters": {
+				"diagram": "grid",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/grid_chalkboard/grid_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"grid",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Grid Quantizes Movement' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
+		},
+		"mesh_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Triangles Applied', hand-chalked on the scribble engine: a mesh diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"mesh",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mesh_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Mesh Chalkboard",
+			"parameters": {
+				"diagram": "mesh",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/mesh_chalkboard/mesh_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"mesh",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Triangles Applied' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
+		},
+		"polyhedra_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Trihedra and First Solids', hand-chalked on the scribble engine: a polyhedra diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"polyhedra",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "polyhedra_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Polyhedra Chalkboard",
+			"parameters": {
+				"diagram": "polyhedra",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/polyhedra_chalkboard/polyhedra_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"polyhedra",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Trihedra and First Solids' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
+		},
+		"cube_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Cube Assembly from Primitives', hand-chalked on the scribble engine: a cube diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"cube",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cube_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Cube Chalkboard",
+			"parameters": {
+				"diagram": "cube",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cube_chalkboard/cube_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"cube",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Cube Assembly from Primitives' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
+		},
+		"ignorance_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Limits of Geometric Knowledge', hand-chalked on the scribble engine: a ignorance diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"ignorance",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ignorance_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Ignorance Chalkboard",
+			"parameters": {
+				"diagram": "ignorance",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/ignorance_chalkboard/ignorance_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"ignorance",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Limits of Geometric Knowledge' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
+		},
+		"circle_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Circular Approximation and Limits', hand-chalked on the scribble engine: a circle diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"circle",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "circle_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Circle Chalkboard",
+			"parameters": {
+				"diagram": "circle",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/circle_chalkboard/circle_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"circle",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Circular Approximation and Limits' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
+		},
+		"melencolia_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A chalkboard for the primitives principle 'Melancholy of Finitude', hand-chalked on the scribble engine: a melencolia diagram beside the principle's facts. The scientific register of the primitives sequence.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"melencolia",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "melencolia_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Melencolia Chalkboard",
+			"parameters": {
+				"diagram": "melencolia",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/melencolia_chalkboard/melencolia_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"melencolia",
+				"scribble",
+				"handwriting",
+				"didactic"
+			],
+			"qfep_connection": "The principle 'Melancholy of Finitude' stated by a hand, not typeset - chalk insisting an elementary fact was thought by somebody, in a body, at a board."
 		}
 	},
 	"registry_info": {
