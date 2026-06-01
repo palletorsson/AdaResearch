@@ -191,16 +191,18 @@ func _on_browse_clicked():
 		map_browser_instance.position = Vector3(0.6, 0, 0)
 
 func _on_sequence_selected(sequence_name: String):
-	# Route the picker through the SAME flow as the New Game button + the
-	# Lab teleporter: load the lab via vrStaging, and the lab picks up the
-	# pending sequence on _ready (DesktopLabManager / LabGridSystem read
-	# SceneManager.pending_sequence_request and call their own
-	# _start_sequence — the canonical path that teleporters use).
+	# Load the chosen sequence's FIRST MAP directly — bypassing the lab.
 	#
-	# Calling SceneManager.start_sequence() directly from the main menu
-	# bypassed vrStaging, loaded grid.tscn cold, and left the player
-	# "somewhere wrong" without lab setup. The lab IS the hub; everything
-	# starts there.
+	# The old flow stashed pending_sequence_request and loaded lab.tscn; the
+	# lab then consumed it and fired the transition. But the lab SKIPS its
+	# own default map load when a pending request exists, so if that hand-off
+	# raced during the lab's _ready the player was stranded in an empty lab
+	# scene (no lab map, no sequence map) — the "green void".
+	#
+	# start_sequence() goes through _load_scene_with_data → _get_vr_staging(),
+	# i.e. the SAME staging-aware path a teleporter uses, so the VR rig is
+	# preserved. Calling it from the stable menu context avoids the empty-lab
+	# limbo entirely. When the sequence ends it still returns_to "lab".
 	print("MainMenu: Sequence picker selected: %s" % sequence_name)
 
 	# Close the picker
@@ -208,18 +210,19 @@ func _on_sequence_selected(sequence_name: String):
 		sequence_picker_instance.queue_free()
 		sequence_picker_instance = null
 
-	# Stash the pending sequence on the SceneManager autoload so the lab
-	# can pick it up after it loads.
 	var scene_manager = get_node_or_null("/root/SceneManager")
-	if scene_manager and "pending_sequence_request" in scene_manager:
-		scene_manager.pending_sequence_request = sequence_name
-		print("MainMenu: Set pending_sequence_request = %s" % sequence_name)
+	if scene_manager and scene_manager.has_method("start_sequence"):
+		# Clear any stale pending request so a later lab load can't double-fire.
+		if "pending_sequence_request" in scene_manager:
+			scene_manager.pending_sequence_request = ""
+		print("MainMenu: Starting sequence directly (bypassing lab): %s" % sequence_name)
+		scene_manager.start_sequence(sequence_name)
 	else:
-		push_warning("MainMenu: SceneManager has no pending_sequence_request — lab will load without auto-starting the sequence")
-
-	# Fire the existing Start Game signal — vrStaging handles it by loading
-	# lab.tscn, the canonical hub. The lab then auto-starts the sequence.
-	start_game_requested.emit()
+		# Fallback (older builds): old pending + lab-hub path.
+		push_warning("MainMenu: SceneManager.start_sequence unavailable — falling back to lab-hub path")
+		if scene_manager and "pending_sequence_request" in scene_manager:
+			scene_manager.pending_sequence_request = sequence_name
+		start_game_requested.emit()
 
 func _on_map_selected(map_name: String):
 	print("MainMenu: Loading map: %s" % map_name)
