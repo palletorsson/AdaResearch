@@ -42,6 +42,17 @@ class_name KleeWalkingPoint
 @export var dim_energy: float = 0.10
 @export var lit_energy: float = 2.2
 
+@export_group("Placement")
+## When TRUE (default) the whole walk is shifted up so its LOWEST point
+## rests on the floor (artifact origin = floor). Without this the walk is
+## centred on the origin, so on a floor-placed instance the bottom half of
+## the trail sinks below the floor. Set FALSE to hang it like a picture
+## (centred on origin) on a wall.
+@export var lift_to_floor: bool = true
+## Small gap (m) kept between the lowest trail point and the floor when
+## lift_to_floor is on, so it reads as resting ON the floor, not in it.
+@export var floor_clearance: float = 0.03
+
 # ── State ─────────────────────────────────────────────────────────────
 
 var _built: bool = false
@@ -99,6 +110,18 @@ func _parse_color(raw: String, fallback: Color) -> Color:
 func _build() -> void:
 	_built = true
 	_points = _walk_path(walk_style)
+
+	# Lift the whole walk so its lowest point sits ON the floor (artifact
+	# origin = floor level). The walk is generated centred on the origin, so
+	# without this the bottom half of the trail sinks below a floor-placed
+	# instance. Shift by enough that even the larger head sphere clears.
+	if lift_to_floor and _points.size() > 0:
+		var min_y: float = _points[0].y
+		for p in _points:
+			min_y = minf(min_y, p.y)
+		var shift: float = -min_y + floor_clearance + head_radius
+		for i in range(_points.size()):
+			_points[i] = _points[i] + Vector3(0.0, shift, 0.0)
 
 	# Trail: one small sphere per sample point, each with its own
 	# material so it can light independently as the head passes.

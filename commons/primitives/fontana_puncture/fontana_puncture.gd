@@ -33,6 +33,17 @@ class_name FontanaPuncture
 @export var depth_energy: float = 2.6
 @export var center_radius: float = 0.03
 
+@export_group("Embedded point")
+## When set, instantiate a LIVE artifact at the void centre instead of the
+## static glint — so the point the cube was carved around is the real,
+## interactive point (e.g. "interactive_point_origin_force"). The cube is
+## hollow (the void breaches every face), so the embedded point is reachable
+## and grabbable through the openings. Empty = keep the static glint.
+@export var embed_artifact: String = ""
+## Mode forwarded to the embedded point (its #mode: config), e.g.
+## "transformation", "chromatic", "waveform".
+@export var embed_mode: String = ""
+
 # ── State ─────────────────────────────────────────────────────────────
 
 var _built: bool = false
@@ -68,6 +79,10 @@ func _read_metadata_overrides() -> void:
 		show_center_point = s == "true" or s == "1" or s == "yes"
 	if has_meta("config_depth_color"):
 		depth_color = _parse_color(str(get_meta("config_depth_color")), depth_color)
+	if has_meta("config_embed_artifact"):
+		embed_artifact = str(get_meta("config_embed_artifact")).strip_edges()
+	if has_meta("config_embed_mode"):
+		embed_mode = str(get_meta("config_embed_mode")).strip_edges()
 
 
 func _parse_color(raw: String, fallback: Color) -> Color:
@@ -111,8 +126,12 @@ func _build() -> void:
 	add_child(_combiner)
 
 	# The point that carved the void — suspended at the sphere centre,
-	# visible through the face-mouths.
-	if show_center_point:
+	# visible (and, if embedded, grabbable) through the face-mouths.
+	if embed_artifact != "":
+		# Embed a LIVE artifact (e.g. interactive_point_origin_force) at the
+		# void centre — the cube is carved AROUND the real interactive point.
+		_embed_live_point()
+	elif show_center_point:
 		var glint := MeshInstance3D.new()
 		glint.name = "CenterPoint"
 		var gm := SphereMesh.new()
@@ -134,6 +153,60 @@ func _build() -> void:
 	# CSG; the live CSG is freed once baked. Fallback: keep CSG if bake
 	# returns nothing (e.g. very early headless frame).
 	call_deferred("_bake_and_replace", mat)
+
+
+# Instantiate a live artifact (looked up by name in the registry) at the
+# void centre, forwarding its mode config. Used to nest the real interactive
+# point inside the puncture it carved.
+func _embed_live_point() -> void:
+	var scene_path: String = _lookup_artifact_scene(embed_artifact)
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		push_warning("FontanaPuncture: embed_artifact '%s' not found in registry" % embed_artifact)
+		return
+	var packed: PackedScene = load(scene_path)
+	if packed == null:
+		return
+	var pt: Node = packed.instantiate()
+	pt.name = "EmbeddedPoint"
+	# Forward the mode (the interactive point reads config_mode).
+	if embed_mode != "" and pt.has_method("apply_grid_config"):
+		pt.set_meta("config_mode", embed_mode)
+	if pt is Node3D:
+		(pt as Node3D).position = sphere_offset
+	add_child(pt)
+	if embed_mode != "" and pt.has_method("apply_grid_config"):
+		pt.call_deferred("apply_grid_config", {"mode": embed_mode})
+
+
+func _lookup_artifact_scene(lookup: String) -> String:
+	const REG_DIR := "res://commons/artifacts/registry/"
+	var dir := DirAccess.open(REG_DIR)
+	if dir == null:
+		return ""
+	dir.list_dir_begin()
+	var fname := dir.get_next()
+	while fname != "":
+		if fname.ends_with(".json"):
+			var raw := FileAccess.get_file_as_string(REG_DIR + fname)
+			if not raw.is_empty():
+				var parsed = JSON.parse_string(raw)
+				# Registries come in two shapes: entries at the root, or
+				# nested under an "artifacts" key. Check both.
+				var table = null
+				if parsed is Dictionary:
+					if parsed.has(lookup):
+						table = parsed
+					elif parsed.has("artifacts") and (parsed["artifacts"] is Dictionary) \
+							and parsed["artifacts"].has(lookup):
+						table = parsed["artifacts"]
+				if table != null:
+					var entry = table[lookup]
+					if entry is Dictionary and entry.has("scene"):
+						dir.list_dir_end()
+						return str(entry["scene"])
+		fname = dir.get_next()
+	dir.list_dir_end()
+	return ""
 
 
 func _bake_and_replace(mat: StandardMaterial3D) -> void:

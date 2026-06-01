@@ -93,18 +93,23 @@
       "displayName": "EXIT (above door)"
     },
     {
-      "id": "scaffold_info",
-      "lookup_name": "info_board",
+      "id": "scaffold_placard",
+      "lookup_name": "wall_placard",
+      "lookupName": "wall_placard",
+      "displayName": "Wall placard (curatorial caption)",
       "position": [
         3.92,
-        1.75,
+        1.6,
         0
       ],
       "rotation_y": -90,
-      "config": {},
-      "lookupName": "info_board",
       "rotationY": -90,
-      "displayName": "annotation board"
+      "config": {
+        "title": "THE POINT",
+        "meta": "PRIMITIVES · 01 · 2036",
+        "body": "Position without extension. Zero dimensions. The seed of all form.",
+        "no_collider": true
+      }
     },
     {
       "id": "fire_extinguisher_dx366c",
@@ -137,20 +142,6 @@
         "scan_hold_seconds": 5.0,
         "auto_connect_door": true
       }
-    },
-    {
-      "id": "gadget_wall_east",
-      "lookup_name": "gadget_wall",
-      "lookupName": "gadget_wall",
-      "displayName": "Hand Gadgets — every interaction",
-      "position": [
-        3.9,
-        0,
-        0
-      ],
-      "rotation_y": -90,
-      "rotationY": -90,
-      "config": {}
     },
     {
       "id": "point_board",

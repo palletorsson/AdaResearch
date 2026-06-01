@@ -22464,6 +22464,51 @@
 			],
 			"qfep_connection": "A queer-humanist curriculum needs the answer written by a HAND, not typeset by a machine that pretends mathematics fell from the sky. Even 180 degrees was thought by somebody, at a board."
 		},
+		"wall_placard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A museum wall caption — TITLE, a thin accent rule, sequence-date metadata, and one sentence of intent, in gallery-label typography. The curatorial register of the lab: it CAPTIONS the work (where the chalkboard states the science and the gem enacts it). Replaces the old AnnotationInfoBoard HUD (XP/health/barcode) as the wall caption. Procedural 2D-in-3D, baked to a mipmapped texture so the small body text stays legible at VR distance.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"placard",
+				"curation",
+				"museum"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "wall_placard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Wall Placard",
+			"parameters": {
+				"title": "THE POINT",
+				"meta": "PRIMITIVES · 2036",
+				"body": "Position without extension. Zero dimensions. The seed of all form.",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/wall_placard/wall_placard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"placard",
+				"caption",
+				"museum",
+				"curation",
+				"didactic"
+			],
+			"qfep_connection": "Curation is a choice about what is made thinkable; the label decides the one sentence the visitor carries."
+		},
 		"point_chalkboard": {
 			"category": "primitives",
 			"complexity": "beginner",
