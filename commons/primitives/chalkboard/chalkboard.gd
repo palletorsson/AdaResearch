@@ -102,12 +102,22 @@ func _build() -> void:
 	_built = true
 	var depth := 0.05
 
-	# SubViewport that renders the scribble canvas.
+	# SubViewport that renders the scribble canvas ONCE. The chalk never
+	# animates, so we let the viewport draw a single frame, then BAKE it to a
+	# static ImageTexture WITH MIPMAPS and discard the live viewport.
+	#
+	# Why bake: a ViewportTexture has NO mipmaps. On a flat monitor that's
+	# fine, but in VR at an oblique angle each thin chalk stroke maps to a
+	# sub-pixel and, with no mipmaps, the GPU point-samples — so thin letters
+	# fall BETWEEN texels and vanish entirely (only heavy marks like =,(,)
+	# survive). That's the "symbols but no text" bug. A baked ImageTexture
+	# with generated mipmaps fades thin strokes to faint gray at distance
+	# instead of dropping them, so the words stay legible at any range.
 	var vp := SubViewport.new()
 	vp.name = "ScribbleViewport"
 	vp.size = Vector2i(viewport_width, viewport_height)
 	vp.transparent_bg = false
-	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	vp.render_target_update_mode = SubViewport.UPDATE_ONCE
 	vp.disable_3d = true
 	add_child(vp)
 
@@ -123,7 +133,9 @@ func _build() -> void:
 	ctrl.custom_minimum_size = Vector2(viewport_width, viewport_height)
 	vp.add_child(ctrl)
 
-	# Board quad textured with the viewport.
+	# Board quad. The texture is baked in deferred (after the viewport has
+	# rendered its one frame); until then the board shows the live viewport
+	# texture so it's never blank.
 	var board := MeshInstance3D.new()
 	board.name = "BoardSurface"
 	var qm := QuadMesh.new()
@@ -132,12 +144,12 @@ func _build() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_texture = vp.get_texture()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	# Anisotropic keeps the chalk text sharp at distance / grazing angles,
-	# where plain linear-mipmap blurred the thin glyphs into the board.
 	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 	board.material_override = mat
 	board.position = Vector3(0, 0, depth * 0.5 + 0.001)
 	add_child(board)
+	# Bake the viewport → mipmapped ImageTexture once it has drawn.
+	_bake_board_texture.call_deferred(vp, mat)
 
 	# Backing slab behind the quad (so it's solid from behind).
 	var backing := MeshInstance3D.new()
@@ -164,6 +176,42 @@ func _build() -> void:
 	_add_box("FrameL", Vector3(-hw - ft * 0.5, 0, 0), Vector3(ft, board_height, depth + 0.02), fmat)
 	_add_box("FrameR", Vector3(hw + ft * 0.5, 0, 0), Vector3(ft, board_height, depth + 0.02), fmat)
 	_add_box("ChalkTray", Vector3(0, -hh - ft - 0.02, depth * 0.5 + 0.05), Vector3(board_width * 0.7, 0.035, 0.10), fmat)
+
+
+# Wait for the SubViewport to finish its one render, then snapshot it into a
+# static ImageTexture WITH mipmaps and point the board material at it. The
+# live viewport is freed afterward — the chalk is fixed, so there's no reason
+# to keep rendering it, and the mipmapped still is what keeps thin strokes
+# legible in VR (a ViewportTexture has no mipmaps; thin glyphs vanish at
+# distance/angle). Falls back to leaving the live texture if the grab fails.
+func _bake_board_texture(vp: SubViewport, mat: StandardMaterial3D) -> void:
+	if not is_instance_valid(vp) or not is_instance_valid(mat):
+		return
+	# Wait for frames so the Control's _draw() has rendered into the viewport.
+	# This runs deferred, by which point an apply_grid_config rebuild may have
+	# already detached this chalkboard from the tree — get_tree() is null on a
+	# detached node, so DON'T await on it. Wait on the SceneTree we capture up
+	# front, and re-check validity after each await (the node/viewport can be
+	# freed mid-wait). Bail cleanly if anything went away — the live
+	# ViewportTexture stays as a (no-mipmap) fallback.
+	var tree := get_tree()
+	if tree == null:
+		return
+	await tree.process_frame
+	if not is_instance_valid(vp) or not is_instance_valid(mat):
+		return
+	await tree.process_frame
+	if not is_instance_valid(vp) or not is_instance_valid(mat):
+		return
+	var img: Image = vp.get_texture().get_image()
+	if img == null or img.is_empty():
+		return  # keep the live ViewportTexture as a fallback
+	img.generate_mipmaps()
+	var baked := ImageTexture.create_from_image(img)
+	mat.albedo_texture = baked
+	# Drop the live viewport — its job is done.
+	if is_instance_valid(vp):
+		vp.queue_free()
 
 
 func _add_box(n: String, pos: Vector3, size: Vector3, mat: StandardMaterial3D) -> void:

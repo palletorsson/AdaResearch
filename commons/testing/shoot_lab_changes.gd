@@ -81,6 +81,9 @@ func _run() -> void:
 	await _shoot(cam, c + Vector3(2.5, 1.6, 0.5), c + Vector3(-3.9, 1.5, 0.3), "lab_west_wall")
 	# 6. The EAST wall (+X): the gadget wall should now be here.
 	await _shoot(cam, c + Vector3(-2.5, 1.6, 0.5), c + Vector3(3.9, 1.4, 0.0), "lab_east_wall")
+	# 7. Looking DOWN at the floor window — should be a 2×2 pane centred over
+	#    the origin (world 0,0 = lab-local (-1, 2)).
+	await _shoot(cam, Vector3(-1.0, 2.2, 1.2), Vector3(-1.0, 0.0, 2.0), "lab_floor_window")
 
 	print("[lab] DONE -> %s" % OUT)
 	quit(0)

@@ -38,13 +38,15 @@ func _run() -> void:
 		await process_frame
 
 	var cam := Camera3D.new()
-	cam.fov = 60.0
+	cam.fov = 70.0
 	world.add_child(cam)
 	cam.make_current()
-	# REAL in-lab viewing distance — player stands ~5m back across the room.
-	cam.global_position = Vector3(0, 0.0, 5.0)
-	cam.look_at(Vector3(0, 0, 0), Vector3.UP)
-	for i in range(6):
+	# Match the VR screenshot: oblique angle, off to the side and below, where
+	# the thin font text was vanishing. This is the real stress test.
+	cam.global_position = Vector3(-1.6, -0.3, 1.7)
+	cam.look_at(Vector3(0.2, 0, 0), Vector3.UP)
+	# Give the deferred bake time to swap in the mipmapped texture.
+	for i in range(12):
 		await process_frame
 
 	DirAccess.make_dir_recursive_absolute(OUT.get_base_dir())
