@@ -151,6 +151,22 @@
         "body": "Three points, three lines: the first enclosed plane. Rigidity born from relation.",
         "no_collider": true
       }
+    },
+    {
+      "id": "triangle_transformer",
+      "lookup_name": "transformer",
+      "lookupName": "transformer",
+      "displayName": "Transformer cabinet (danger triangle)",
+      "position": [
+        1.4,
+        0,
+        -3.25
+      ],
+      "rotation_y": 0,
+      "rotationY": 0,
+      "config": {
+        "hazard_shape": "triangle"
+      }
     }
   ]
 }
