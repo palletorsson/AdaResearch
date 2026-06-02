@@ -1,0 +1,340 @@
+{
+  "artifacts": {
+    "half_life_manometer": {
+      "name": "Half-Life Manometer",
+      "lookup_name": "half_life_manometer",
+      "description": "Reads ΦΔE — the rate of becoming. A vortessence column beside a dial whose needle twitches toward 0.4. The cost of delta, given a needle.",
+      "scene": "res://commons/instruments/half_life_manometer.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "halting_lantern": {
+      "name": "Halting Lantern",
+      "lookup_name": "halting_lantern",
+      "description": "A lamp wired to a computation proven unpredictable — it burns forever or goes dark, and you can only watch. Undecidability as furniture.",
+      "scene": "res://commons/instruments/halting_lantern.tscn",
+      "category": "instruments",
+      "sequence": "foundationscrisis",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "imitation_gate": {
+      "name": "Imitation Gate",
+      "lookup_name": "imitation_gate",
+      "description": "Two doors and a slit: which is human? It tests how long you bear not knowing — the imitation game as the closet rebuilt as apparatus.",
+      "scene": "res://commons/instruments/imitation_gate.tscn",
+      "category": "instruments",
+      "sequence": "foundationscrisis",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "morphogen_tide_pool": {
+      "name": "Morphogen Tide-Pool",
+      "lookup_name": "morphogen_tide_pool",
+      "description": "Turing's reaction-diffusion in a shallow pool with a λ dial; spots are born and stay alive at λ≈0.4. Morphogenesis = QFEP twice.",
+      "scene": "res://commons/instruments/morphogen_tide_pool.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "apple_cell": {
+      "name": "Apple Cell",
+      "lookup_name": "apple_cell",
+      "description": "A battery fuelled only by difference — the tax on being other made into the current. The cost of delta, Turing's own. Handle with both hands.",
+      "scene": "res://commons/instruments/apple_cell.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "vortessence_tap": {
+      "name": "Vortessence Tap",
+      "lookup_name": "vortessence_tap",
+      "description": "A tap into the shared field that binds all life across time. The needle was reading your node in a field of all becoming. The beyond.",
+      "scene": "res://commons/instruments/vortessence_tap.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "universal_lathe": {
+      "name": "Universal Lathe",
+      "lookup_name": "universal_lathe",
+      "description": "A machine that becomes any machine its tape describes — itself included. The universal machine, the bench every instrument sits on.",
+      "scene": "res://commons/instruments/universal_lathe.tscn",
+      "category": "instruments",
+      "sequence": "foundationscrisis",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "lambda_organ": {
+      "name": "Lambda Organ",
+      "lookup_name": "lambda_organ",
+      "description": "One master slider runs order (0) to noise (1); the sample crystallises, dissolves, or — at λ≈0.4 — lives. The entropy drive given a hand.",
+      "scene": "res://commons/instruments/lambda_organ.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "delta_forge": {
+      "name": "Delta Forge",
+      "lookup_name": "delta_forge",
+      "description": "An anvil that strikes two same tokens until one is other than the other. The blow is the cost; the sparks are what difference throws off.",
+      "scene": "res://commons/instruments/delta_forge.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "entropy_bellows": {
+      "name": "Entropy Bellows",
+      "lookup_name": "entropy_bellows",
+      "description": "A bellows pumping disorder (λE) into an ordered lattice until form loosens — weighted entropy made into breath.",
+      "scene": "res://commons/instruments/entropy_bellows.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "order_loom": {
+      "name": "Order Loom",
+      "lookup_name": "order_loom",
+      "description": "A loom weaving noise back into pattern — the F term, order as labour against entropy, something done not given.",
+      "scene": "res://commons/instruments/order_loom.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "becoming_hourglass": {
+      "name": "Becoming Hourglass",
+      "lookup_name": "becoming_hourglass",
+      "description": "Sand that transmutes mid-fall, amber above and green below — the half-life given a body, every grain paying at the waist.",
+      "scene": "res://commons/instruments/becoming_hourglass.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "observer_cage": {
+      "name": "Observer Cage",
+      "lookup_name": "observer_cage",
+      "description": "A booth whose external gauge moves the moment you enter. To measure a becoming is to be a force inside it.",
+      "scene": "res://commons/instruments/observer_cage.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "incompleteness_scale": {
+      "name": "Incompleteness Scale",
+      "lookup_name": "incompleteness_scale",
+      "description": "A balance that cannot weigh itself, tilting forever — Gödel as furniture, the limit built into the shape of the thing.",
+      "scene": "res://commons/instruments/incompleteness_scale.tscn",
+      "category": "instruments",
+      "sequence": "foundationscrisis",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "enigma_rotor_stack": {
+      "name": "Enigma Rotor Stack",
+      "lookup_name": "enigma_rotor_stack",
+      "description": "Toothed rotors and a lampboard that surface signal from noise — Turing's faith that structure hides inside the random.",
+      "scene": "res://commons/instruments/enigma_rotor_stack.tscn",
+      "category": "instruments",
+      "sequence": "foundationscrisis",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "strange_loop_stair": {
+      "name": "Strange Loop Stair",
+      "lookup_name": "strange_loop_stair",
+      "description": "A staircase that climbs all the way around back to itself — self-reference made walkable, the loop that holds computation together.",
+      "scene": "res://commons/instruments/strange_loop_stair.tscn",
+      "category": "instruments",
+      "sequence": "foundationscrisis",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "phase_chamber_bell": {
+      "name": "Phase Chamber Bell",
+      "lookup_name": "phase_chamber_bell",
+      "description": "A bell jar over a specimen oscillating F↔E with a phase needle. Life is the swing between the poles, not either pole.",
+      "scene": "res://commons/instruments/phase_chamber_bell.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "catalyst_altar": {
+      "name": "Catalyst Altar",
+      "lookup_name": "catalyst_altar",
+      "description": "A pedestal holding the catalyst's three modes — cube, wedge, off — on a ring. The power to phase-shift foe to friend, solid to walkable.",
+      "scene": "res://commons/instruments/catalyst_altar.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "cost_ledger": {
+      "name": "Cost Ledger",
+      "lookup_name": "cost_ledger",
+      "description": "An abacus tallying what difference has cost, bead by bead — the cost of delta refused the comfort of staying abstract.",
+      "scene": "res://commons/instruments/cost_ledger.tscn",
+      "category": "instruments",
+      "sequence": "postfoundationscrisis",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "vortigaunt_lattice_harp": {
+      "name": "Vortigaunt Lattice Harp",
+      "lookup_name": "vortigaunt_lattice_harp",
+      "description": "Pluck one light-string and all answer, because they are not separate — a body for the truth that the living field is one.",
+      "scene": "res://commons/instruments/vortigaunt_lattice_harp.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "half_life_clock": {
+      "name": "Half-Life Clock",
+      "lookup_name": "half_life_clock",
+      "description": "Hands that tell not the time but the remaining sameness — ALL, HALF, NONE — and move only one way. The title made literal.",
+      "scene": "res://commons/instruments/half_life_clock.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    }
+  }
+}
