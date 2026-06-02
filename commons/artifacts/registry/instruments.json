@@ -335,6 +335,54 @@
         "becoming",
         "delta"
       ]
+    },
+    "delta_butterfly": {
+      "name": "Delta Butterfly",
+      "lookup_name": "delta_butterfly",
+      "description": "Two trajectories begin a hair apart and end in different worlds — sensitive dependence, where the smallest Δ is amplified until it decides everything. The bridge between difference and cost.",
+      "scene": "res://commons/instruments/delta_butterfly.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "time_ratchet": {
+      "name": "Time Ratchet",
+      "lookup_name": "time_ratchet",
+      "description": "A toothed wheel and pawl that turn one way only — the second law as a mechanism. Why the half-life runs forward and the cost of delta is never refunded.",
+      "scene": "res://commons/instruments/time_ratchet.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
+    },
+    "coupling_resonator": {
+      "name": "Coupling Resonator",
+      "lookup_name": "coupling_resonator",
+      "description": "Two manometers joined by a glowing rod; move one needle and the other answers. Two becomings entangled — the smallest unit of relation.",
+      "scene": "res://commons/instruments/coupling_resonator.tscn",
+      "category": "instruments",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "tags": [
+        "qfep",
+        "turing",
+        "instrument",
+        "becoming",
+        "delta"
+      ]
     }
   }
 }
