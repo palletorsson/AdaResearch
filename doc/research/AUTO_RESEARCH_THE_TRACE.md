@@ -106,6 +106,30 @@ delta off it — the same idea at two scales.
 
 ---
 
+## Built this pass: the trace triad — wax · database · skin
+
+The Mystic Pad asks how a surface *keeps* a hand. Two more artifacts ask how a
+surface *receives* one — and the three together stage the politics of the trace
+as three materials. All three read the same input (a hand) and differ only in
+what kind of surface meets it.
+
+- **`mystic_writing_pad`** — **WAX**. Keeps the trace as buried residue under a surface that pretends to be clean. (Freud/Derrida.)
+- **`hand_telemetry_display`** — **DATABASE**. A big Half-Life-2 / Combine-style ops monitor on a grey pipe-clamp arm, streaming the **right hand's** live world position: large orange X/Y/Z numerals over a scrolling timecoded coordinate log, newest bright and fading down, a blinking REC dot. The point *that is watched*. Closes the **F6 export / surveillance** facet — *"you are at (0.42, 1.13, −0.88)"* spoken as a service and kept as a feed. (Reference: the surveillance-monitor wall; falls back to a demo drift so the feed reads full in capture.)
+- **`living_paper`** — **SKIN**. A hanging sheet of warm paper that *breathes* (a standing-wave ripple) and reads the **right hand** into itself: the paper bulges toward the nearby hand like skin under a touch and blooms a fading ink trace of dots where it passes. The point *that is felt*. Closes the **F4 decay + body-weight** facet — the trace received and softly kept, where it is hard to say whether being read by a living surface is tenderness or a gentler capture.
+
+Both new artifacts find the right-hand `XRController3D` (`tracker == "right_hand"`,
+with name + demo fallbacks), so the *same hand* is rendered three ways at once —
+cold log, kept wax, warm skin. Placed in `Point_Trace`: the monitor (west) and
+the paper (east) face each other across the corridor at row 12, with the Mystic
+Pad just north — a small museum of what a surface does with a hand. Pathfinder OK
+(7 artifacts, 0 issues).
+
+> Rig note: `living_paper`'s per-frame `ArrayMesh` defeats the artifact-mode
+> capture framing (a `custom_aabb` is set, but the rig samples earlier); it
+> renders correctly in-map. Standalone gallery capture is a known limitation.
+
+---
+
 ## The method, generalised — the point, then the line
 
 The same sweep is ready to run on the rest of the **point** (verbs on a

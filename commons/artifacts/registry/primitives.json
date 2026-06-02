@@ -22148,6 +22148,102 @@
 			],
 			"qfep_connection": "The Mystic Pad lies the way every memory system lies: it shows a clean surface and keeps the wax. 'Clear' is the politest word a machine knows for 'kept, where you can no longer see it' - the trace as the friendly face, and the log, of algorithmic memory."
 		},
+		"hand_telemetry_display": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A big dark Half-Life-2 / Combine-style ops monitor on a grey pipe-clamp arm, streaming the player's RIGHT HAND world position in real time: large orange X/Y/Z numerals plus a scrolling timecoded coordinate log, newest bright and fading down. The point that is watched. Falls back to a demo drift when no XR hand is present.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"point",
+				"trace",
+				"surveillance"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hand_telemetry_display",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Hand Telemetry Display",
+			"parameters": {
+				"sample_interval": 0.12,
+				"row_count": 18,
+				"world_coords": true,
+				"brand_text": "ADA · OVERSIGHT",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://commons/primitives/hand_telemetry_display/hand_telemetry_display.tscn",
+			"size_group": "standard",
+			"tags": [
+				"point",
+				"trace",
+				"telemetry",
+				"surveillance",
+				"screen",
+				"hand",
+				"didactic"
+			],
+			"qfep_connection": "The display helps you and records you in the same orange glow: 'you are at (0.42, 1.13, -0.88)' means 'we have you at (0.42, 1.13, -0.88), and at every value before it.' The friendliest face of capture is a monitor that calls surveillance a service."
+		},
+		"living_paper": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A hanging sheet of warm paper that is alive: it breathes (a standing-wave ripple) and reads the player's RIGHT HAND into itself - the paper bulges toward the nearby hand like skin under a touch and blooms a fading ink trace of dots where it passes. The warm counterpart to the telemetry monitor: the trace received, not logged. Phantom-hand fallback for capture.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"point",
+				"trace",
+				"softbody"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "living_paper",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Living Paper",
+			"parameters": {
+				"breath_amount": 0.035,
+				"bulge_amount": 0.1,
+				"trail_length": 80,
+				"demo_hand": true,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/living_paper/living_paper.tscn",
+			"size_group": "compact",
+			"tags": [
+				"point",
+				"trace",
+				"living",
+				"paper",
+				"softbody",
+				"hand",
+				"didactic"
+			],
+			"qfep_connection": "The paper that leans toward you and inks your wandering is the tenderest face of the same act the monitor performs coldly: it receives you, keeps a little of you, and it is hard to say where care ends and capture begins - which is exactly the trace."
+		},
 		"two_points_line": {
 			"category": "primitives",
 			"complexity": "beginner",
