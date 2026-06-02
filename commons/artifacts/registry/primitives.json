@@ -22100,6 +22100,54 @@
 			],
 			"qfep_connection": "'You are here' is what a civilisation writes when it renders every body as a coordinate it has already labelled. The friendliest face of algorithmic capture."
 		},
+		"mystic_writing_pad": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Freud's Mystic Writing-Pad (Wunderblock, 1925) as the trace apparatus: a red-framed magic slate where a stylus writes a bright trace of points on a clearing sheet, and every lift sinks the trace into the wax below as a faint warm ghost. The surface forgets; the depth remembers. Derrida's model of the trace, made a thing you stand before.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"point",
+				"trace",
+				"memory"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mystic_writing_pad",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Mystic Writing Pad",
+			"parameters": {
+				"clear_interval": 3.2,
+				"ghost_persistence": 0.85,
+				"ghost_count": 7,
+				"pride_ghosts": false,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/mystic_writing_pad/mystic_writing_pad.tscn",
+			"size_group": "compact",
+			"tags": [
+				"point",
+				"trace",
+				"memory",
+				"freud",
+				"derrida",
+				"palimpsest",
+				"didactic"
+			],
+			"qfep_connection": "The Mystic Pad lies the way every memory system lies: it shows a clean surface and keeps the wax. 'Clear' is the politest word a machine knows for 'kept, where you can no longer see it' - the trace as the friendly face, and the log, of algorithmic memory."
+		},
 		"two_points_line": {
 			"category": "primitives",
 			"complexity": "beginner",
