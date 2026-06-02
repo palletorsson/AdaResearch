@@ -28,7 +28,7 @@ CONTENT = {
     "point_line": {"board": "line_chalkboard", "placard": {
         "title": "THE LINE", "meta": "PRIMITIVES · 02 · 2036",
         "body": "A line is a point that refused to stay still — the first relation: distance, direction, between."}},
-    "point_triangle": {"board": None, "placard": {
+    "point_triangle": {"board": "triangle_chalkboard", "placard": {
         "title": "THE TRIANGLE", "meta": "PRIMITIVES · 04 · 2036",
         "body": "Three points, three lines: the first enclosed plane. Rigidity born from relation."}},
     "primitives_polythedra": {"board": "polyhedra_chalkboard", "placard": {

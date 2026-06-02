@@ -68,7 +68,7 @@
     "ceiling_sensor_count": 2,
     "ceiling_speaker_count": 1,
     "ceiling_light_count": 4,
-    "chalkboard_lookup": "chalkboard"
+    "chalkboard_lookup": "triangle_chalkboard"
   },
   "mounted_props": [
     {
@@ -87,7 +87,7 @@
     },
     {
       "id": "scaffold_info",
-      "lookup_name": "chalkboard",
+      "lookup_name": "triangle_chalkboard",
       "position": [
         3.92,
         1.75,
@@ -97,9 +97,9 @@
       "config": {
         "no_collider": true
       },
-      "lookupName": "chalkboard",
+      "lookupName": "triangle_chalkboard",
       "rotationY": -90,
-      "displayName": "Chalkboard (default board)"
+      "displayName": "Triangle Chalkboard"
     },
     {
       "id": "fire_extinguisher_dx366c",

@@ -22792,6 +22792,49 @@
 			],
 			"qfep_connection": "Even 'nothing' has a definition - the dimensionless seed every shape grows from."
 		},
+		"triangle_chalkboard": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A mystical chalkboard for THE TRIANGLE - the labelled triangle plus Δ as both shape and symbol: the first plane to close, the only rigid polygon, and change/difference. Ends on a koan, not a formula: 'what is the cost of Δ?'",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"chalkboard",
+				"triangle",
+				"scribble"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "triangle_chalkboard",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Triangle Chalkboard",
+			"parameters": {
+				"diagram": "triangle",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/triangle_chalkboard/triangle_chalkboard.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chalkboard",
+				"triangle",
+				"delta",
+				"mystical",
+				"didactic"
+			],
+			"qfep_connection": "Δ is form, change, and difference in one symbol - and to differ, to close a new plane, is never free. The board names the cost without paying it."
+		},
 		"line_chalkboard": {
 			"category": "primitives",
 			"complexity": "beginner",
