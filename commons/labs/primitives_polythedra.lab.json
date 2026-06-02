@@ -1,5 +1,5 @@
 {
-  "name": "primitives_test",
+  "name": "primitives_polythedra",
   "description": "Minimal Point_One lab. Back wall (south, +Z) carries an exit sign + the auto-opening sliding door + a picture window beside the door (sized to leave solid wall around it). A floor window in the centre lets the player see the origin point glowing 1.6m below the lab floor. A ramp leads down from the door to the grid surface. Inside: an info board on the east wall. Nothing else \u2014 the lab is just the chamber, the threshold, and the visible 'point zero' below.",
   "lab_room": {
     "room_width": 8,
@@ -10,7 +10,7 @@
       0.482,
       1
     ],
-    "signage_top": "POINT ZERO",
+    "signage_top": "LINE",
     "signage_sub": "",
     "show_back_window": true,
     "back_window_size": [
@@ -18,7 +18,7 @@
       2
     ],
     "back_window_offset_x": -1.7,
-    "show_front_window": true,
+    "show_front_window": false,
     "front_window_size": [
       4,
       2
@@ -29,7 +29,7 @@
     "door_wall": "south",
     "door_offset_x": 2.6,
     "door_sensor_radius": 1,
-    "show_floor_window": true,
+    "show_floor_window": false,
     "floor_window_size": [
       3,
       3
@@ -114,28 +114,29 @@
       "config": {}
     },
     {
-      "id": "palm_scanner_door",
+      "id": "palm_scanner_xfer_mpvrf66x0",
       "lookup_name": "palm_scanner",
       "lookupName": "palm_scanner",
       "displayName": "Palm Scanner (door entry)",
       "position": [
-        1.6,
+        0.8,
         0,
         2.65
       ],
-      "rotation_y": 0,
-      "rotationY": 0,
+      "rotation_y": 180,
+      "rotationY": 180,
       "config": {
         "scan_active": true,
         "mounting": "podium",
-        "scan_hold_seconds": 5.0,
+        "scan_hold_seconds": 5,
         "auto_connect_door": true
       }
     },
     {
-      "id": "base_wall_placard",
+      "id": "wall_placard_xfer_mpvrfqsy0",
       "lookup_name": "wall_placard",
       "lookupName": "wall_placard",
+      "displayName": "Wall placard (curatorial caption)",
       "position": [
         3.92,
         1.9395274470779431,
@@ -144,12 +145,11 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "PRIMITIVES TEST",
-        "meta": "",
-        "body": "",
+        "title": "THE POINT",
+        "meta": "PRIMITIVES \u00b7 01 \u00b7 2036",
+        "body": "Position without extension. Zero dimensions. The seed of all form.",
         "no_collider": true
-      },
-      "displayName": "Wall placard (curatorial caption)"
+      }
     }
   ]
 }

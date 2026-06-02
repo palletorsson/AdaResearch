@@ -1,6 +1,6 @@
 {
   "name": "qfep_phase_chamber",
-  "description": "Seven QFEP phases as a walkable ring. Each station is a prop whose state IS that phase. F_order = crystal (specimen jar), oscillation = pendulum, E_entropy = flask + burner, λ_edge = vacuum chamber, integration = scales, relation = kaleidoscope, synthesis = autoclave.",
+  "description": "Seven QFEP phases as a walkable ring. Each station is a prop whose state IS that phase. F_order = crystal (specimen jar), oscillation = pendulum, E_entropy = flask + burner, \u03bb_edge = vacuum chamber, integration = scales, relation = kaleidoscope, synthesis = autoclave.",
   "lab_room": {
     "room_width": 9,
     "room_depth": 9,
@@ -82,7 +82,7 @@
     {
       "id": "vacuum_q1",
       "lookupName": "vacuum_chamber",
-      "displayName": "λ_edge (over-pressure)",
+      "displayName": "\u03bb_edge (over-pressure)",
       "position": [
         -2.5,
         0,
@@ -129,15 +129,18 @@
     },
     {
       "id": "whiteboard_q1",
-      "lookupName": "whiteboard",
-      "displayName": "QFE = F − λE(S) + φΔE(S,t)",
+      "lookupName": "chalkboard",
+      "displayName": "Chalkboard (default board)",
       "position": [
         0,
         1.5,
         -4.42
       ],
       "rotationY": 0,
-      "config": {}
+      "config": {
+        "no_collider": true
+      },
+      "lookup_name": "chalkboard"
     },
     {
       "id": "lab_sink_q1",
@@ -154,7 +157,7 @@
     {
       "id": "emer_btn_q1",
       "lookupName": "emergency_button",
-      "displayName": "HALT — phase break",
+      "displayName": "HALT \u2014 phase break",
       "position": [
         4.42,
         1.5,
@@ -186,6 +189,72 @@
       ],
       "rotationY": 0,
       "config": {}
+    },
+    {
+      "id": "base_exit_sign",
+      "lookup_name": "exit_sign",
+      "lookupName": "exit_sign",
+      "position": [
+        2.75,
+        0.45,
+        3.5
+      ],
+      "rotation_y": 180,
+      "rotationY": 180,
+      "config": {},
+      "displayName": "EXIT (above door)"
+    },
+    {
+      "id": "base_palm_scanner",
+      "lookup_name": "palm_scanner",
+      "lookupName": "palm_scanner",
+      "position": [
+        0.8,
+        0,
+        2.65
+      ],
+      "rotation_y": 180,
+      "rotationY": 180,
+      "config": {
+        "scan_active": true,
+        "mounting": "podium",
+        "scan_hold_seconds": 5,
+        "auto_connect_door": true
+      },
+      "displayName": "Palm Scanner (door entry)"
+    },
+    {
+      "id": "base_fire_extinguisher",
+      "lookup_name": "fire_extinguisher",
+      "lookupName": "fire_extinguisher",
+      "position": [
+        3.6507272824504993,
+        0.35,
+        3.33
+      ],
+      "rotation_y": 180,
+      "rotationY": 180,
+      "config": {},
+      "displayName": "Fire Extinguisher"
+    },
+    {
+      "id": "base_wall_placard",
+      "lookup_name": "wall_placard",
+      "lookupName": "wall_placard",
+      "position": [
+        3.92,
+        1.9395274470779431,
+        2.139437066008143
+      ],
+      "rotation_y": -90,
+      "rotationY": -90,
+      "config": {
+        "title": "QFEP PHASE CHAMBER",
+        "meta": "",
+        "body": "",
+        "no_collider": true
+      },
+      "displayName": "Wall placard (curatorial caption)"
     }
   ]
 }

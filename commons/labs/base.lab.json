@@ -1,6 +1,6 @@
 {
-  "name": "primitives_test",
-  "description": "Minimal Point_One lab. Back wall (south, +Z) carries an exit sign + the auto-opening sliding door + a picture window beside the door (sized to leave solid wall around it). A floor window in the centre lets the player see the origin point glowing 1.6m below the lab floor. A ramp leads down from the door to the grid surface. Inside: an info board on the east wall. Nothing else \u2014 the lab is just the chamber, the threshold, and the visible 'point zero' below.",
+  "name": "base",
+  "description": "Minimal Point_One lab. Back wall (south, +Z) carries an exit sign + the auto-opening sliding door + a picture window beside the door (sized to leave solid wall around it). A floor window in the centre lets the player see the origin point glowing 1.6m below the lab floor. A ramp leads down from the door to the grid surface. Inside: an info board on the east wall. Nothing else — the lab is just the chamber, the threshold, and the visible 'point zero' below.",
   "lab_room": {
     "room_width": 8,
     "room_depth": 7,
@@ -10,7 +10,7 @@
       0.482,
       1
     ],
-    "signage_top": "POINT ZERO",
+    "signage_top": "BASE",
     "signage_sub": "",
     "show_back_window": true,
     "back_window_size": [
@@ -18,7 +18,7 @@
       2
     ],
     "back_window_offset_x": -1.7,
-    "show_front_window": true,
+    "show_front_window": false,
     "front_window_size": [
       4,
       2
@@ -29,11 +29,20 @@
     "door_wall": "south",
     "door_offset_x": 2.6,
     "door_sensor_radius": 1,
-    "show_floor_window": true,
+    "lab_offset_z": -2,
+    "signage_wall": "west",
+    "show_chalkboard": true,
+    "chalkboard_lookup": "point_chalkboard",
+    "show_floor_window": false,
     "floor_window_size": [
-      3,
-      3
+      2,
+      2
     ],
+    "floor_window_offset": [
+      -1,
+      2
+    ],
+    "show_wall_annotations": false,
     "show_stairs": true,
     "use_ramp": true,
     "stairs_drop": 1.5,
@@ -74,9 +83,9 @@
       "id": "scaffold_exit_sign",
       "lookup_name": "exit_sign",
       "position": [
-        2.5,
-        2.65,
-        3.43
+        2.75,
+        0.45,
+        3.5
       ],
       "rotation_y": 180,
       "config": {},
@@ -85,20 +94,23 @@
       "displayName": "EXIT (above door)"
     },
     {
-      "id": "scaffold_info",
-      "lookup_name": "chalkboard",
+      "id": "scaffold_placard",
+      "lookup_name": "wall_placard",
+      "lookupName": "wall_placard",
+      "displayName": "Wall placard (curatorial caption)",
       "position": [
         3.92,
-        1.75,
-        0
+        1.9395274470779431,
+        2.139437066008143
       ],
       "rotation_y": -90,
-      "config": {
-        "no_collider": true
-      },
-      "lookupName": "chalkboard",
       "rotationY": -90,
-      "displayName": "Chalkboard (default board)"
+      "config": {
+        "title": "THE POINT",
+        "meta": "PRIMITIVES · 01 · 2036",
+        "body": "Position without extension. Zero dimensions. The seed of all form.",
+        "no_collider": true
+      }
     },
     {
       "id": "fire_extinguisher_dx366c",
@@ -107,7 +119,7 @@
       "position": [
         3.6507272824504993,
         0.35,
-        3.42
+        3.33
       ],
       "rotationY": 180,
       "rotation_y": 180,
@@ -119,37 +131,34 @@
       "lookupName": "palm_scanner",
       "displayName": "Palm Scanner (door entry)",
       "position": [
-        1.6,
+        0.8,
         0,
         2.65
       ],
-      "rotation_y": 0,
-      "rotationY": 0,
+      "rotation_y": 180,
+      "rotationY": 180,
       "config": {
         "scan_active": true,
         "mounting": "podium",
-        "scan_hold_seconds": 5.0,
+        "scan_hold_seconds": 5,
         "auto_connect_door": true
       }
     },
     {
-      "id": "base_wall_placard",
-      "lookup_name": "wall_placard",
-      "lookupName": "wall_placard",
+      "id": "point_board",
+      "lookup_name": "point_chalkboard",
+      "lookupName": "point_chalkboard",
+      "displayName": "Chalkboard — THE POINT (movable)",
       "position": [
-        3.92,
-        1.9395274470779431,
-        2.139437066008143
+        -3.9,
+        2.15,
+        1
       ],
-      "rotation_y": -90,
-      "rotationY": -90,
+      "rotation_y": 90,
+      "rotationY": 90,
       "config": {
-        "title": "PRIMITIVES TEST",
-        "meta": "",
-        "body": "",
         "no_collider": true
-      },
-      "displayName": "Wall placard (curatorial caption)"
+      }
     }
   ]
 }

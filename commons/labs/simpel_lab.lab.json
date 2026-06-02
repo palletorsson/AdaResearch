@@ -1,112 +1,103 @@
 {
-  "name": "monte_carlo_room",
-  "description": "Randomness experimentation. Probability box for samples, scales for measurement, oscilloscope for time-series, info_screen for live statistics. The whiteboard carries the law of large numbers.",
+  "name": "simpel_lab",
+  "description": "",
   "lab_room": {
-    "room_width": 7,
+    "room_width": 8,
     "room_depth": 7,
-    "room_height": 3.5,
+    "room_height": 3.8,
     "accent_color": [
-      0.957,
-      0.635,
-      0.38
+      0.227,
+      0.482,
+      1
     ],
-    "signage_top": "MONTE CARLO ROOM",
-    "signage_sub": "every sample is independent \u2014 the average is the integral",
+    "signage_top": "NEW LAB",
+    "signage_sub": "drag props from the left",
     "show_back_window": true,
     "back_window_size": [
-      5.5,
-      2.2
+      6.5,
+      2.4
     ],
     "show_front_window": true,
     "front_window_size": [
-      1.4,
-      0.7
+      5.5,
+      2
     ],
     "show_sliding_door": true,
-    "door_wall": "east",
+    "door_wall": "north",
     "show_floor_window": false,
     "floor_window_size": [
       3,
       3
-    ]
+    ],
+    "show_stairs": true,
+    "stairs_drop": 0.5,
+    "stairs_step_count": 3
   },
   "mounted_props": [
     {
-      "id": "prob_box_mc",
-      "lookupName": "probability_box",
-      "displayName": "samples",
+      "id": "scaffold_exit_sign",
+      "lookupName": "exit_sign",
+      "displayName": "EXIT",
       "position": [
-        -1.5,
-        0,
-        -0.5
+        3.92,
+        2.4,
+        0
+      ],
+      "rotationY": -90,
+      "config": {}
+    },
+    {
+      "id": "scaffold_vent",
+      "lookupName": "ceiling_vent",
+      "displayName": "vent",
+      "position": [
+        0.5,
+        3.68,
+        -0.4
       ],
       "rotationY": 0,
       "config": {}
     },
     {
-      "id": "scales_mc",
-      "lookupName": "scales",
-      "displayName": "measure each sample",
-      "position": [
-        1.5,
-        0,
-        -0.5
-      ],
-      "rotationY": 0,
-      "config": {}
-    },
-    {
-      "id": "oscilloscope_mc",
-      "lookupName": "oscilloscope",
-      "displayName": "time-series of the mean",
-      "position": [
-        -2.4,
-        1.5,
-        -3.42
-      ],
-      "rotationY": 0,
-      "config": {}
-    },
-    {
-      "id": "info_screen_mc",
+      "id": "scaffold_whiteboard",
       "lookupName": "chalkboard",
       "displayName": "Chalkboard (default board)",
       "position": [
-        2.4,
-        1.5,
-        -3.42
+        -3.92,
+        1.2,
+        91.01055351154801
       ],
-      "rotationY": 0,
+      "rotationY": 90,
       "config": {
         "no_collider": true
       },
       "lookup_name": "chalkboard"
     },
     {
-      "id": "petri_mc",
-      "lookupName": "petri_dish",
-      "displayName": "stochastic culture",
+      "id": "scaffold_grate",
+      "lookupName": "floor_grate",
+      "displayName": "floor grate",
       "position": [
+        -1.7754050549369227,
         0,
-        0,
-        1.8
+        2.2158785293749816
       ],
       "rotationY": 0,
       "config": {}
     },
     {
-      "id": "base_exit_sign",
-      "lookup_name": "exit_sign",
-      "lookupName": "exit_sign",
+      "id": "scaffold_cctv_out",
+      "lookupName": "cctv_camera",
+      "displayName": "CCTV (biome watch)",
       "position": [
-        2.75,
-        0.45,
-        3.5
+        -2.5,
+        2.9,
+        3.42
       ],
-      "rotation_y": 180,
       "rotationY": 180,
-      "config": {},
-      "displayName": "EXIT (above door)"
+      "config": {
+        "pitch_deg": -8
+      }
     },
     {
       "id": "base_palm_scanner",
@@ -153,7 +144,7 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "MONTE CARLO ROOM",
+        "title": "SIMPEL LAB",
         "meta": "",
         "body": "",
         "no_collider": true

@@ -42,6 +42,7 @@
       -1,
       2
     ],
+    "show_wall_annotations": false,
     "show_stairs": true,
     "use_ramp": true,
     "stairs_drop": 1.5,
@@ -82,9 +83,9 @@
       "id": "scaffold_exit_sign",
       "lookup_name": "exit_sign",
       "position": [
-        2.5,
-        2.65,
-        3.43
+        2.75,
+        0.45,
+        3.5
       ],
       "rotation_y": 180,
       "config": {},
@@ -99,8 +100,8 @@
       "displayName": "Wall placard (curatorial caption)",
       "position": [
         3.92,
-        1.6,
-        0
+        1.9395274470779431,
+        2.139437066008143
       ],
       "rotation_y": -90,
       "rotationY": -90,
@@ -130,7 +131,7 @@
       "lookupName": "palm_scanner",
       "displayName": "Palm Scanner (door entry)",
       "position": [
-        1.6,
+        0.8,
         0,
         2.65
       ],
@@ -139,7 +140,7 @@
       "config": {
         "scan_active": true,
         "mounting": "podium",
-        "scan_hold_seconds": 5.0,
+        "scan_hold_seconds": 5,
         "auto_connect_door": true
       }
     },
@@ -150,8 +151,8 @@
       "displayName": "Chalkboard — THE POINT (movable)",
       "position": [
         -3.9,
-        1.6,
-        1.0
+        2.15,
+        1
       ],
       "rotation_y": 90,
       "rotationY": 90,

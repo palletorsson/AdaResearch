@@ -1,6 +1,6 @@
 {
   "name": "foundations_crisis_hall",
-  "description": "The mathematical foundations crisis as architecture. Whiteboards carry the famous statements, fire extinguishers stand in for the contradictions, a specimen jar for Russell's paradox, emergency buttons for Gödel's halt.",
+  "description": "The mathematical foundations crisis as architecture. Whiteboards carry the famous statements, fire extinguishers stand in for the contradictions, a specimen jar for Russell's paradox, emergency buttons for G\u00f6del's halt.",
   "lab_room": {
     "room_width": 10,
     "room_depth": 8,
@@ -11,7 +11,7 @@
       0.275
     ],
     "signage_top": "FOUNDATIONS CRISIS HALL",
-    "signage_sub": "Russell · Gödel · Turing — the limits of formalism",
+    "signage_sub": "Russell \u00b7 G\u00f6del \u00b7 Turing \u2014 the limits of formalism",
     "show_back_window": true,
     "back_window_size": [
       7,
@@ -33,39 +33,18 @@
   "mounted_props": [
     {
       "id": "wb_russell",
-      "lookupName": "whiteboard",
-      "displayName": "{x : x ∉ x} ?",
+      "lookupName": "chalkboard",
+      "displayName": "Chalkboard (default board)",
       "position": [
         -3,
         1.5,
         -3.92
       ],
       "rotationY": 0,
-      "config": {}
-    },
-    {
-      "id": "wb_godel",
-      "lookupName": "whiteboard",
-      "displayName": "G(¬Prov(G))",
-      "position": [
-        0,
-        1.5,
-        -3.92
-      ],
-      "rotationY": 0,
-      "config": {}
-    },
-    {
-      "id": "wb_turing",
-      "lookupName": "whiteboard",
-      "displayName": "Halt(M, w) is undecidable",
-      "position": [
-        3,
-        1.5,
-        -3.92
-      ],
-      "rotationY": 0,
-      "config": {}
+      "config": {
+        "no_collider": true
+      },
+      "lookup_name": "chalkboard"
     },
     {
       "id": "specimen_paradox",
@@ -104,18 +83,6 @@
       "config": {}
     },
     {
-      "id": "info_screen_fc",
-      "lookupName": "info_screen",
-      "displayName": "the crisis log",
-      "position": [
-        4.92,
-        1.5,
-        -0.5
-      ],
-      "rotationY": -90,
-      "config": {}
-    },
-    {
       "id": "terminal_fc",
       "lookupName": "terminal",
       "displayName": "a proof assistant",
@@ -126,6 +93,58 @@
       ],
       "rotationY": 90,
       "config": {}
+    },
+    {
+      "id": "base_exit_sign",
+      "lookup_name": "exit_sign",
+      "lookupName": "exit_sign",
+      "position": [
+        2.75,
+        0.45,
+        3.5
+      ],
+      "rotation_y": 180,
+      "rotationY": 180,
+      "config": {},
+      "displayName": "EXIT (above door)"
+    },
+    {
+      "id": "base_palm_scanner",
+      "lookup_name": "palm_scanner",
+      "lookupName": "palm_scanner",
+      "position": [
+        0.8,
+        0,
+        2.65
+      ],
+      "rotation_y": 180,
+      "rotationY": 180,
+      "config": {
+        "scan_active": true,
+        "mounting": "podium",
+        "scan_hold_seconds": 5,
+        "auto_connect_door": true
+      },
+      "displayName": "Palm Scanner (door entry)"
+    },
+    {
+      "id": "base_wall_placard",
+      "lookup_name": "wall_placard",
+      "lookupName": "wall_placard",
+      "position": [
+        3.92,
+        1.9395274470779431,
+        2.139437066008143
+      ],
+      "rotation_y": -90,
+      "rotationY": -90,
+      "config": {
+        "title": "FOUNDATIONS CRISIS HALL",
+        "meta": "",
+        "body": "",
+        "no_collider": true
+      },
+      "displayName": "Wall placard (curatorial caption)"
     }
   ]
 }
