@@ -32,7 +32,7 @@
     "lab_offset_z": -2,
     "signage_wall": "west",
     "show_chalkboard": true,
-    "chalkboard_lookup": "point_chalkboard",
+    "chalkboard_lookup": "trace_chalkboard",
     "show_floor_window": false,
     "floor_window_size": [
       2,
@@ -106,9 +106,9 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "THE POINT",
-        "meta": "PRIMITIVES · 01 · 2036",
-        "body": "Position without extension. Zero dimensions. The seed of all form.",
+        "title": "THE TRACE",
+        "meta": "PRIMITIVES · 03 · 2036",
+        "body": "Duration and residue — geometry as lived process. No original behind the trace, only encodings.",
         "no_collider": true
       }
     },
@@ -146,9 +146,9 @@
     },
     {
       "id": "point_board",
-      "lookup_name": "point_chalkboard",
-      "lookupName": "point_chalkboard",
-      "displayName": "Chalkboard — THE POINT (movable)",
+      "lookup_name": "trace_chalkboard",
+      "lookupName": "trace_chalkboard",
+      "displayName": "Trace Chalkboard",
       "position": [
         -3.9,
         2.15,

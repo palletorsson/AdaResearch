@@ -31,7 +31,8 @@
     ],
     "show_stairs": true,
     "stairs_drop": 0.5,
-    "stairs_step_count": 3
+    "stairs_step_count": 3,
+    "chalkboard_lookup": "chalkboard"
   },
   "mounted_props": [
     {
@@ -144,9 +145,9 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "SIMPEL LAB",
-        "meta": "",
-        "body": "",
+        "title": "THE LAB",
+        "meta": "ADA · 2036",
+        "body": "A safe room — state the concept, hold it in the hand, then step out to the grid.",
         "no_collider": true
       },
       "displayName": "Wall placard (curatorial caption)"

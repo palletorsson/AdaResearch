@@ -1,6 +1,6 @@
 {
   "name": "foundations_crisis_hall",
-  "description": "The mathematical foundations crisis as architecture. Whiteboards carry the famous statements, fire extinguishers stand in for the contradictions, a specimen jar for Russell's paradox, emergency buttons for G\u00f6del's halt.",
+  "description": "The mathematical foundations crisis as architecture. Whiteboards carry the famous statements, fire extinguishers stand in for the contradictions, a specimen jar for Russell's paradox, emergency buttons for Gödel's halt.",
   "lab_room": {
     "room_width": 10,
     "room_depth": 8,
@@ -11,7 +11,7 @@
       0.275
     ],
     "signage_top": "FOUNDATIONS CRISIS HALL",
-    "signage_sub": "Russell \u00b7 G\u00f6del \u00b7 Turing \u2014 the limits of formalism",
+    "signage_sub": "Russell · Gödel · Turing — the limits of formalism",
     "show_back_window": true,
     "back_window_size": [
       7,
@@ -28,13 +28,14 @@
     "floor_window_size": [
       3,
       3
-    ]
+    ],
+    "chalkboard_lookup": "ignorance_chalkboard"
   },
   "mounted_props": [
     {
       "id": "wb_russell",
-      "lookupName": "chalkboard",
-      "displayName": "Chalkboard (default board)",
+      "lookupName": "ignorance_chalkboard",
+      "displayName": "Ignorance Chalkboard",
       "position": [
         -3,
         1.5,
@@ -44,7 +45,7 @@
       "config": {
         "no_collider": true
       },
-      "lookup_name": "chalkboard"
+      "lookup_name": "ignorance_chalkboard"
     },
     {
       "id": "specimen_paradox",
@@ -139,9 +140,9 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "FOUNDATIONS CRISIS HALL",
-        "meta": "",
-        "body": "",
+        "title": "THE FOUNDATIONS CRISIS",
+        "meta": "SYNTHESIS · 17 · 2036",
+        "body": "Gödel, Russell: any system that can count cannot prove its own consistency. The limit is structural.",
         "no_collider": true
       },
       "displayName": "Wall placard (curatorial caption)"

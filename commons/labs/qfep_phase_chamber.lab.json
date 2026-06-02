@@ -1,6 +1,6 @@
 {
   "name": "qfep_phase_chamber",
-  "description": "Seven QFEP phases as a walkable ring. Each station is a prop whose state IS that phase. F_order = crystal (specimen jar), oscillation = pendulum, E_entropy = flask + burner, \u03bb_edge = vacuum chamber, integration = scales, relation = kaleidoscope, synthesis = autoclave.",
+  "description": "Seven QFEP phases as a walkable ring. Each station is a prop whose state IS that phase. F_order = crystal (specimen jar), oscillation = pendulum, E_entropy = flask + burner, λ_edge = vacuum chamber, integration = scales, relation = kaleidoscope, synthesis = autoclave.",
   "lab_room": {
     "room_width": 9,
     "room_depth": 9,
@@ -28,7 +28,8 @@
     "floor_window_size": [
       3,
       3
-    ]
+    ],
+    "chalkboard_lookup": "qfep_chalkboard"
   },
   "mounted_props": [
     {
@@ -82,7 +83,7 @@
     {
       "id": "vacuum_q1",
       "lookupName": "vacuum_chamber",
-      "displayName": "\u03bb_edge (over-pressure)",
+      "displayName": "λ_edge (over-pressure)",
       "position": [
         -2.5,
         0,
@@ -129,8 +130,8 @@
     },
     {
       "id": "whiteboard_q1",
-      "lookupName": "chalkboard",
-      "displayName": "Chalkboard (default board)",
+      "lookupName": "qfep_chalkboard",
+      "displayName": "Qfep Chalkboard",
       "position": [
         0,
         1.5,
@@ -140,7 +141,7 @@
       "config": {
         "no_collider": true
       },
-      "lookup_name": "chalkboard"
+      "lookup_name": "qfep_chalkboard"
     },
     {
       "id": "lab_sink_q1",
@@ -157,7 +158,7 @@
     {
       "id": "emer_btn_q1",
       "lookupName": "emergency_button",
-      "displayName": "HALT \u2014 phase break",
+      "displayName": "HALT — phase break",
       "position": [
         4.42,
         1.5,
@@ -249,9 +250,9 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "QFEP PHASE CHAMBER",
-        "meta": "",
-        "body": "",
+        "title": "QFEP LABORATORY",
+        "meta": "SYNTHESIS · 18 · 2036",
+        "body": "The whole formula embodied: form and entropy oscillating across the edge toward synthesis.",
         "no_collider": true
       },
       "displayName": "Wall placard (curatorial caption)"

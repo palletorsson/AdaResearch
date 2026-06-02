@@ -1,6 +1,6 @@
 {
   "name": "primitives_test",
-  "description": "Minimal Point_One lab. Back wall (south, +Z) carries an exit sign + the auto-opening sliding door + a picture window beside the door (sized to leave solid wall around it). A floor window in the centre lets the player see the origin point glowing 1.6m below the lab floor. A ramp leads down from the door to the grid surface. Inside: an info board on the east wall. Nothing else \u2014 the lab is just the chamber, the threshold, and the visible 'point zero' below.",
+  "description": "Minimal Point_One lab. Back wall (south, +Z) carries an exit sign + the auto-opening sliding door + a picture window beside the door (sized to leave solid wall around it). A floor window in the centre lets the player see the origin point glowing 1.6m below the lab floor. A ramp leads down from the door to the grid surface. Inside: an info board on the east wall. Nothing else — the lab is just the chamber, the threshold, and the visible 'point zero' below.",
   "lab_room": {
     "room_width": 8,
     "room_depth": 7,
@@ -67,7 +67,8 @@
     "ceiling_sprinkler_count": 3,
     "ceiling_sensor_count": 2,
     "ceiling_speaker_count": 1,
-    "ceiling_light_count": 4
+    "ceiling_light_count": 4,
+    "chalkboard_lookup": "chalkboard"
   },
   "mounted_props": [
     {
@@ -144,9 +145,9 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "PRIMITIVES TEST",
-        "meta": "",
-        "body": "",
+        "title": "PRIMITIVES",
+        "meta": "PRIMITIVES · 00 · 2036",
+        "body": "The atoms of computation: dimensionless points become lines, planes, worlds.",
         "no_collider": true
       },
       "displayName": "Wall placard (curatorial caption)"

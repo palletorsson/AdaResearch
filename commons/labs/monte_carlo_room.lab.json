@@ -11,7 +11,7 @@
       0.38
     ],
     "signage_top": "MONTE CARLO ROOM",
-    "signage_sub": "every sample is independent \u2014 the average is the integral",
+    "signage_sub": "every sample is independent — the average is the integral",
     "show_back_window": true,
     "back_window_size": [
       5.5,
@@ -28,7 +28,8 @@
     "floor_window_size": [
       3,
       3
-    ]
+    ],
+    "chalkboard_lookup": "chalkboard"
   },
   "mounted_props": [
     {
@@ -153,9 +154,9 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "MONTE CARLO ROOM",
-        "meta": "",
-        "body": "",
+        "title": "RANDOMNESS",
+        "meta": "ENTROPY · 07 · 2036",
+        "body": "Disorder as a creative force. Monte Carlo — approach the truth by sampling chance.",
         "no_collider": true
       },
       "displayName": "Wall placard (curatorial caption)"

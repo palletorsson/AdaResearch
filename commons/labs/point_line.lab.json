@@ -1,6 +1,6 @@
 {
   "name": "point_line",
-  "description": "Minimal Point_One lab. Back wall (south, +Z) carries an exit sign + the auto-opening sliding door + a picture window beside the door (sized to leave solid wall around it). A floor window in the centre lets the player see the origin point glowing 1.6m below the lab floor. A ramp leads down from the door to the grid surface. Inside: an info board on the east wall. Nothing else \u2014 the lab is just the chamber, the threshold, and the visible 'point zero' below.",
+  "description": "Minimal Point_One lab. Back wall (south, +Z) carries an exit sign + the auto-opening sliding door + a picture window beside the door (sized to leave solid wall around it). A floor window in the centre lets the player see the origin point glowing 1.6m below the lab floor. A ramp leads down from the door to the grid surface. Inside: an info board on the east wall. Nothing else — the lab is just the chamber, the threshold, and the visible 'point zero' below.",
   "lab_room": {
     "room_width": 8,
     "room_depth": 7,
@@ -67,7 +67,8 @@
     "ceiling_sprinkler_count": 3,
     "ceiling_sensor_count": 2,
     "ceiling_speaker_count": 1,
-    "ceiling_light_count": 4
+    "ceiling_light_count": 4,
+    "chalkboard_lookup": "line_chalkboard"
   },
   "mounted_props": [
     {
@@ -86,7 +87,7 @@
     },
     {
       "id": "scaffold_info",
-      "lookup_name": "chalkboard",
+      "lookup_name": "line_chalkboard",
       "position": [
         3.92,
         1.75,
@@ -96,9 +97,9 @@
       "config": {
         "no_collider": true
       },
-      "lookupName": "chalkboard",
+      "lookupName": "line_chalkboard",
       "rotationY": -90,
-      "displayName": "Chalkboard (default board)"
+      "displayName": "Line Chalkboard"
     },
     {
       "id": "fire_extinguisher_dx366c",
@@ -145,9 +146,9 @@
       "rotation_y": -90,
       "rotationY": -90,
       "config": {
-        "title": "THE POINT",
-        "meta": "PRIMITIVES \u00b7 01 \u00b7 2036",
-        "body": "Position without extension. Zero dimensions. The seed of all form.",
+        "title": "THE LINE",
+        "meta": "PRIMITIVES · 02 · 2036",
+        "body": "A line is a point that refused to stay still — the first relation: distance, direction, between.",
         "no_collider": true
       }
     }
