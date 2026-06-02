@@ -25,6 +25,10 @@ class_name HandTelemetryDisplay
 @export var bg_color: Color = Color(0.02, 0.02, 0.03)
 @export var accent_color: Color = Color(0.96, 0.45, 0.05)   # ops orange
 @export var brand_text: String = "ADA · OVERSIGHT"
+## Which hand to track: "right" or "left".
+@export var hand: String = "right"
+## Show the pipe-clamp arm mount (off when composed into a diptych).
+@export var show_mount: bool = true
 
 @export_group("Feed")
 ## Seconds between samples written to the log.
@@ -86,6 +90,11 @@ func _read_metadata_overrides() -> void:
 		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_brand_text"):
 		brand_text = str(get_meta("config_brand_text"))
+	if has_meta("config_hand"):
+		hand = str(get_meta("config_hand")).to_lower().strip_edges()
+	if has_meta("config_show_mount"):
+		var sm: String = str(get_meta("config_show_mount")).to_lower()
+		show_mount = sm == "true" or sm == "1" or sm == "yes"
 	if has_meta("config_world_coords"):
 		var s: String = str(get_meta("config_world_coords")).to_lower()
 		world_coords = s == "true" or s == "1" or s == "yes"
@@ -157,7 +166,8 @@ func _build() -> void:
 	glow.shadow_enabled = false
 	add_child(glow)
 
-	_build_pipe_arm(cy)
+	if show_mount:
+		_build_pipe_arm(cy)
 
 
 # Grey pipe-clamp arm rising off the top-right of the panel and bending back —
@@ -235,10 +245,12 @@ func _process(delta: float) -> void:
 			_cur = _cur - global_position
 	else:
 		var t: float = float(Time.get_ticks_msec() - _t0_msec) / 1000.0
+		var mir: float = -1.0 if hand == "left" else 1.0
+		var ph: float = 1.7 if hand == "left" else 0.0
 		_cur = Vector3(
-			0.35 * sin(t * 0.9) + 0.15 * sin(t * 2.3),
-			1.20 + 0.18 * sin(t * 0.7 + 1.0),
-			-0.30 + 0.22 * sin(t * 1.3 + 0.5))
+			mir * (0.35 * sin(t * 0.9 + ph) + 0.15 * sin(t * 2.3 + ph)),
+			1.20 + 0.18 * sin(t * 0.7 + 1.0 + ph),
+			-0.30 + 0.22 * sin(t * 1.3 + 0.5 + ph))
 
 	_sample_timer += delta
 	if _sample_timer >= sample_interval:
@@ -266,11 +278,11 @@ func _find_right_controller() -> XRController3D:
 func _search_controller(node: Node, mode: String) -> XRController3D:
 	if node is XRController3D:
 		var ctrl := node as XRController3D
-		if mode == "tracker" and String(ctrl.tracker) == "right_hand":
+		if mode == "tracker" and String(ctrl.tracker) == hand + "_hand":
 			return ctrl
 		if mode == "name":
 			var n: String = ctrl.name.to_lower()
-			if "right" in n:
+			if hand in n:
 				return ctrl
 	for c in node.get_children():
 		var found := _search_controller(c, mode)
@@ -310,7 +322,7 @@ class _TelemetryCanvas extends Control:
 		# little triangle glyph
 		var tri := PackedVector2Array([Vector2(w - 40, 30), Vector2(w - 24, 30), Vector2(w - 32, 16)])
 		draw_colored_polygon(tri, accent)
-		draw_string(font, Vector2(mx, 66), "RIGHT-HAND TELEMETRY", HORIZONTAL_ALIGNMENT_LEFT, -1, 13, dim)
+		draw_string(font, Vector2(mx, 66), "%s-HAND TELEMETRY" % d.hand.to_upper(), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, dim)
 		var coord_tag: String = "WORLD" if d.world_coords else "LOCAL"
 		draw_string(font, Vector2(w - 120, 66), "FRAME · %s" % coord_tag, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, dim)
 		draw_line(Vector2(mx, 80), Vector2(w - mx, 80), Color(accent, 0.6), 2.0)

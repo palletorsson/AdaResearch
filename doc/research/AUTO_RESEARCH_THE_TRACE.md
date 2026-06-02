@@ -128,6 +128,19 @@ Pad just north — a small museum of what a surface does with a hand. Pathfinder
 > capture framing (a `custom_aabb` is set, but the rig samples earlier); it
 > renders correctly in-map. Standalone gallery capture is a known limitation.
 
+### In the lab: the diptych and the writing desk
+
+The set moved into the lab room (`trace.lab.json` mounted props) and grew two
+members that read the body as *parts*:
+
+- **`hand_telemetry_diptych`** — the database, doubled. Two ops monitors on one pipe-clamp mount: **left hand** (cyan) and **right hand** (orange), each its own live coordinate log. A Renaissance diptych re-cast as a security desk — the body split down the middle and read in stereo. Composes two `hand_telemetry_display` panels (now parametrised by `hand` + `show_mount`). Mounted on the lab's north wall.
+- **`automatic_writing_desk`** — a new driver: the **head**. A desk whose paper writes itself from the **headset's motion** — a pen sweeps left→right, drops a row at the margin, fills the page top→bottom with **asemic script** whose jaggedness scales with head speed (still = a calm ruled line, moving = jagged handwriting). Surrealist automatic writing / the spiritualist planchette, the headset as medium; it transcribes your *attention*, the one input you can't hold still, in a hand you can't read. Driven by `XRCamera3D`; demo head-drift fallback. Mounted on the lab floor in front of the diptych — warm desk, cold monitors behind.
+
+So the trace set now spans three drivers — **hand** (diptych), **head** (desk),
+and **drawn gesture** (mystic_writing_pad) — and three temperatures — database,
+skin/attention, wax. The lab is becoming a small museum of what a surface does
+with a body.
+
 ---
 
 ## The method, generalised — the point, then the line

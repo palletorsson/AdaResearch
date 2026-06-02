@@ -22244,6 +22244,102 @@
 			],
 			"qfep_connection": "The paper that leans toward you and inks your wandering is the tenderest face of the same act the monitor performs coldly: it receives you, keeps a little of you, and it is hard to say where care ends and capture begins - which is exactly the trace."
 		},
+		"hand_telemetry_diptych": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Two Half-Life-2 / Combine-style ops monitors side by side on one grey pipe-clamp mount - a diptych. The LEFT panel (cyan) streams the left hand's live world position, the RIGHT panel (orange) the right hand's, each a scrolling coordinate log. The tracked body split down the middle and read in stereo. Composes two hand_telemetry_display panels.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"point",
+				"trace",
+				"surveillance"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hand_telemetry_diptych",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Hand Telemetry Diptych",
+			"parameters": {
+				"panel_width": 1.0,
+				"panel_height": 1.42,
+				"gap": 0.09,
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "wide"
+			},
+			"scene": "res://commons/primitives/hand_telemetry_diptych/hand_telemetry_diptych.tscn",
+			"size_group": "wide",
+			"tags": [
+				"point",
+				"trace",
+				"telemetry",
+				"surveillance",
+				"diptych",
+				"hands",
+				"didactic"
+			],
+			"qfep_connection": "You were never watched as a whole, only as a set of hands, each on its own bright channel. The diptych is honest about the plural: a fully captured body is just a list of points, one feed per part."
+		},
+		"automatic_writing_desk": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A desk with a sheet of paper that the headset writes by itself: a pen sweeps left-to-right and drops a row at the margin, filling the page top-to-bottom with asemic script whose jaggedness scales with HEAD speed (still = flat ruled line, moving = jagged handwriting). Surrealist automatic writing / the spiritualist planchette, with the head as the medium. Driven by XRCamera3D; demo head-drift fallback.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"point",
+				"trace",
+				"head"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "automatic_writing_desk",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Automatic Writing Desk",
+			"parameters": {
+				"rows": 11,
+				"letters_freq": 7.0,
+				"write_speed": 0.32,
+				"head_speed_scale": 1.4,
+				"run_demo": true,
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://commons/primitives/automatic_writing_desk/automatic_writing_desk.tscn",
+			"size_group": "standard",
+			"tags": [
+				"point",
+				"trace",
+				"automatic-writing",
+				"asemic",
+				"head",
+				"desk",
+				"didactic"
+			],
+			"qfep_connection": "The desk transcribes the one thing you never agreed to author: your attention. A head, sampled as it turns toward whatever it cannot help looking at, is a confession written in a hand you can't read - kept on the page after you walk away."
+		},
 		"two_points_line": {
 			"category": "primitives",
 			"complexity": "beginner",
