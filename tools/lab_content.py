@@ -85,6 +85,11 @@ def apply_content(lab, data, spec):
     if board_now and room.get("chalkboard_lookup") != board_now:
         room["chalkboard_lookup"] = board_now
         changes.append("room.chalkboard_lookup -> %s" % board_now)
+    # the big room sign is per-theme content too — keep it = the placard title
+    sig = spec["placard"]["title"]
+    if room.get("signage_top") != sig:
+        room["signage_top"] = sig
+        changes.append("signage_top -> %s" % sig)
     return changes
 
 def main():
