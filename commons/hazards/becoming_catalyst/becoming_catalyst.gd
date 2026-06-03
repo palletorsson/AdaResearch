@@ -130,8 +130,11 @@ func _physics_process(delta: float) -> void:
 	fire_cooldown = maxf(0.0, fire_cooldown - delta)
 	_stick_debounce = maxf(0.0, _stick_debounce - delta)
 
-	# Mode label — always visible when held, shows current mode + index
+	# Mode label — always visible when held, shows current mode + index.
+	# top_level label lives in world space; keep it hovering above the hand.
 	if is_held and _mode_label:
+		if is_instance_valid(controller):
+			_mode_label.global_position = controller.global_position + Vector3(0.0, 0.18, 0.0)
 		if _mode_label_timer > 0.0:
 			_mode_label_timer -= delta
 			# After the flash period, show a dimmer persistent label
@@ -211,9 +214,12 @@ func _on_controller_button(button_name: String) -> void:
 					_handle_wedge_remove()
 		"by_button":
 			# B = save the edited grid back to the repo's map_data.json.
+			print("[Catalyst] B (by_button) pressed — mode=%s" % mode_id)
 			match mode_id:
 				"voxel_editor", "wedge_placer":
 					_save_map()
+				_:
+					_flash_label("B SAVES IN VOXEL MODE", Color(1.0, 0.8, 0.3))
 
 
 ## Voxel mode: trigger/AX = ADD cube on the cardinal neighbor you're facing.
@@ -240,7 +246,9 @@ func _handle_voxel_remove() -> void:
 ## interactables, lighting and settings are preserved untouched. Edit the map
 ## inside VR, press B, and the change lands on disk in the repo.
 func _save_map() -> void:
+	print("[Catalyst] _save_map() called")
 	if not _voxel_controller or not _voxel_controller.structure_component:
+		print("[Catalyst] _save_map: no voxel controller / structure component — nothing to save")
 		_flash_label("NOTHING TO SAVE", Color(1.0, 0.5, 0.2))
 		return
 	var map_name := ""
@@ -251,9 +259,12 @@ func _save_map() -> void:
 		_flash_label("NO MAP NAME", Color(1.0, 0.4, 0.3))
 		return
 	var structure: GridStructureComponent = _voxel_controller.structure_component
-	# Local write — works only when running from the editor (res:// = the repo).
-	# On a packaged / Quest build res:// is read-only, so this is a harmless no-op.
-	VoxelSaveManager.save(map_name, structure)
+	# Local write — only works when running from the editor (res:// = the repo).
+	# On a packaged / Quest build res:// is read-only, so skip it there (it would
+	# only spam "Invalid JSON / read-only" errors). The HTTP POST below is the
+	# path that actually reaches the PC on the headset via `adb reverse`.
+	if not OS.has_feature("android"):
+		VoxelSaveManager.save(map_name, structure)
 	# HTTP POST to the PC — works on the headset over `adb reverse tcp:3003 tcp:3003`.
 	_save_map_over_http(map_name, structure.get_editable_layout())
 	_flash_label("SAVING  " + map_name + " ...", Color(0.6, 0.85, 1.0))
@@ -276,6 +287,7 @@ func _flash_label(text: String, color: Color) -> void:
 ## map_data.json (preserving the other layers). On the headset this reaches the
 ## PC over `adb reverse tcp:3003 tcp:3003`.
 func _save_map_over_http(map_name: String, layout: Array) -> void:
+	print("[Catalyst] POSTing '%s' (%d rows) -> %s" % [map_name, layout.size(), MAP_SAVE_URL])
 	var http := HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(_on_map_save_completed.bind(http))
@@ -862,6 +874,12 @@ func _build_mode_label() -> void:
 	_mode_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_mode_label.no_depth_test = true
 	_mode_label.visible = false
+	# When held, the catalyst is shrunk to scale 0.01 ("absorbed into hand") so
+	# the body is invisible. A normal child label would shrink with it to 1/100th
+	# and never be seen. top_level makes the label ignore the parent transform; we
+	# place it in world space above the controller each frame (see _physics_process).
+	_mode_label.top_level = true
+	_mode_label.pixel_size = 0.0012
 	add_child(_mode_label)
 
 # ═════════════════════════════════════════════════════════════════════════
