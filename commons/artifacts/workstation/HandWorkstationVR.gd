@@ -203,6 +203,12 @@ func _finalize_pickable(pickable: Node, inst: Node) -> void:
 	_attach_highlight_box(pickable, aabb)
 	if pickable.has_signal("highlight_updated") and not pickable.is_connected("highlight_updated", _on_pickable_highlight):
 		pickable.connect("highlight_updated", _on_pickable_highlight)
+	# Let the player pass through it: a placed artifact must stay on the
+	# "Pickable Objects" layer (the only layer ranged-grab scans), but the
+	# player body also scans that layer, so walking into a frozen artifact
+	# launches you. Collision exceptions stop the physical push without
+	# touching grab (grab is Area-based and ignores body exceptions).
+	_exclude_player_collision(pickable)
 	if pickable is RigidBody3D:
 		if pickable.has_meta("vr_grid_object") and bool(pickable.get_meta("vr_grid_object")):
 			(pickable as RigidBody3D).freeze = true   # grid object: stays snapped
@@ -242,6 +248,20 @@ func _on_pickable_highlight(pickable, enable: bool) -> void:
 	var box = pickable.get_node_or_null("VrHighlightBox")
 	if box:
 		box.visible = enable
+
+## Add collision exceptions so the placed artifact never physically pushes the
+## player rig (body + collision hands). Grab still works — it's Area-based.
+func _exclude_player_collision(pickable: Node) -> void:
+	var co := pickable as CollisionObject3D
+	if co == null:
+		return
+	var origin := _find_xr_origin()
+	if origin == null:
+		return
+	for body in origin.find_children("*", "PhysicsBody3D", true, false):
+		var pb := body as PhysicsBody3D
+		if pb:
+			co.add_collision_exception_with(pb)
 
 func _find_xr_origin() -> XROrigin3D:
 	var n: Node = get_parent()
@@ -359,13 +379,19 @@ func _on_placed_artifact_dropped(pickable) -> void:
 	var x := clampi(int(round(local.x)), 0, maxi(dims.x - 1, 0))
 	var z := clampi(int(round(local.z)), 0, maxi(dims.z - 1, 0))
 	var y_pos: int = structure.find_highest_y_at(x, z)
+	# snap rotation too: stand it upright and yaw to the nearest 90°, so it
+	# aligns to the grid like a cube (and saves as lookup:yaw).
+	var yaw_deg: float = rad_to_deg((pickable as Node3D).global_rotation.y)
+	var snapped_yaw: float = round(yaw_deg / 90.0) * 90.0
+	(pickable as Node3D).global_rotation = Vector3(0.0, deg_to_rad(snapped_yaw), 0.0)
 	(pickable as Node3D).global_position = grid_origin + Vector3(x, y_pos, z) * total_size
 	pickable.set_meta("grid_cell", Vector2i(x, z))
+	pickable.set_meta("grid_rotation_y", fposmod(snapped_yaw, 360.0))
 	if pickable is RigidBody3D:
 		(pickable as RigidBody3D).linear_velocity = Vector3.ZERO
 		(pickable as RigidBody3D).angular_velocity = Vector3.ZERO
 		(pickable as RigidBody3D).freeze = true
-	print("[HandWorkstation] re-snapped artifact to cell (%d,%d) y=%d" % [x, z, y_pos])
+	print("[HandWorkstation] re-snapped artifact to cell (%d,%d) y=%d yaw=%d" % [x, z, y_pos, int(snapped_yaw)])
 
 ## Depth-first search for a node by exact name (rare calls: place / drop).
 func _find_node_by_name(root: Node, target_name: String) -> Node:
