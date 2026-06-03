@@ -61,6 +61,10 @@ var _voxel_data_component: Node = null  # holds current map name, for B-to-save
 var _voxel_activate_retries: int = 0
 const VOXEL_MAX_RETRIES := 10
 const VOXEL_RETRY_DELAY := 0.3  # seconds between retries
+# B-save POSTs the edited structure to the PC encyclopedia, which writes it into
+# the repo's map_data.json. On the headset this reaches the PC over
+# `adb reverse tcp:3003 tcp:3003`.
+const MAP_SAVE_URL := "http://localhost:3003/api/game/save-layers"
 
 # Head raycast (Minecraft style) — look where you want to place
 var _xr_camera: XRCamera3D = null
@@ -246,16 +250,15 @@ func _save_map() -> void:
 		push_warning("[Catalyst] B-save aborted — no current map name")
 		_flash_label("NO MAP NAME", Color(1.0, 0.4, 0.3))
 		return
-	var ok: bool = VoxelSaveManager.save(map_name, _voxel_controller.structure_component)
-	if ok:
-		print("[Catalyst] B-save: wrote '%s' to disk" % map_name)
-		_flash_label("SAVED  " + map_name, Color(0.4, 1.0, 0.6))
-		if controller:
-			controller.trigger_haptic_pulse("haptic", 0.0, 0.2, 0.6, 0.0)  # strong confirm
-	else:
-		_flash_label("SAVE FAILED", Color(1.0, 0.3, 0.3))
-		if controller:
-			controller.trigger_haptic_pulse("haptic", 0.0, 0.1, 0.3, 0.0)
+	var structure: GridStructureComponent = _voxel_controller.structure_component
+	# Local write — works only when running from the editor (res:// = the repo).
+	# On a packaged / Quest build res:// is read-only, so this is a harmless no-op.
+	VoxelSaveManager.save(map_name, structure)
+	# HTTP POST to the PC — works on the headset over `adb reverse tcp:3003 tcp:3003`.
+	_save_map_over_http(map_name, structure.get_editable_layout())
+	_flash_label("SAVING  " + map_name + " ...", Color(0.6, 0.85, 1.0))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.4, 0.0)
 
 
 ## Flash a transient message on the held tool's mode label, then revert.
@@ -267,6 +270,38 @@ func _flash_label(text: String, color: Color) -> void:
 	_mode_label.modulate.a = 1.0
 	_mode_label.visible = true
 	_mode_label_timer = 2.0
+
+
+## POST the edited structure to the PC's encyclopedia so it lands in the repo's
+## map_data.json (preserving the other layers). On the headset this reaches the
+## PC over `adb reverse tcp:3003 tcp:3003`.
+func _save_map_over_http(map_name: String, layout: Array) -> void:
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(_on_map_save_completed.bind(http))
+	var headers := PackedStringArray(["Content-Type: application/json"])
+	var payload := {"mapName": map_name, "layers": {"structure": layout}}
+	http.set_meta("map_name", map_name)
+	var err := http.request(MAP_SAVE_URL, headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
+	if err != OK:
+		http.queue_free()
+		_flash_label("POST FAILED: %s" % error_string(err), Color(1.0, 0.3, 0.3))
+
+
+func _on_map_save_completed(result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray, http: HTTPRequest) -> void:
+	var mn := String(http.get_meta("map_name", ""))
+	http.queue_free()
+	if result == HTTPRequest.RESULT_SUCCESS and response_code >= 200 and response_code < 300:
+		print("[Catalyst] B-save: '%s' written on the PC (HTTP %d)" % [mn, response_code])
+		_flash_label("SAVED -> PC  " + mn, Color(0.4, 1.0, 0.6))
+		if controller:
+			controller.trigger_haptic_pulse("haptic", 0.0, 0.2, 0.6, 0.0)
+	else:
+		var hint := ""
+		if result == HTTPRequest.RESULT_CANT_CONNECT:
+			hint = "  (adb reverse tcp:3003 tcp:3003)"
+		_flash_label("SAVE FAILED %d/%d%s" % [result, response_code, hint], Color(1.0, 0.35, 0.35))
+		push_warning("[Catalyst] map save HTTP failed result=%d code=%d" % [result, response_code])
 
 # ═══════════════════════════════════════════════════════════════════════════
 # WEDGE PLACEMENT — PrismMesh slopes on the grid
