@@ -12,7 +12,7 @@ extends XRToolsStaging
 @export var main_lab_scene: String = "res://commons/scenes/lab.tscn"
 @export var preferred_grid_map: String = "Lab"
 @export var skip_menu: bool = false  # Skip menu and load directly into lab
-@export var spawn_map_loader_button_actions: PackedStringArray = PackedStringArray(["primary_click"])
+@export var spawn_map_loader_button_actions: PackedStringArray = PackedStringArray()  # disabled 2026-06-03 — no controller button spawns the VR map-loader kiosk (was ["primary_click"]; B is reserved for catalyst map-save). Re-add to restore.
 @export var spawn_map_loader_keyboard_key: Key = KEY_B
 @export var map_loader_spawn_distance: float = 1.8
 @export var map_loader_spawn_height: float = 1.6

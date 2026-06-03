@@ -9,7 +9,7 @@ extends CanvasLayer
 @export var next_map_key: Key = KEY_N
 @export var clean_scene_key: Key = KEY_C
 @export var spawn_kiosk_key: Key = KEY_B
-@export var spawn_kiosk_actions: PackedStringArray = PackedStringArray(["vr_button_b", "by_button"])
+@export var spawn_kiosk_actions: PackedStringArray = PackedStringArray()  # disabled 2026-06-03 — B is reserved for the catalyst's map-save. (Was ["vr_button_b","by_button"]; re-add to restore the VR map-loader kiosk on B.)
 @export var kiosk_spawn_distance: float = 2.5
 @export var open_on_start: bool = true
 @export var refresh_on_open: bool = true
