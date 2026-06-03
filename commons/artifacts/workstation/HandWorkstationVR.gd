@@ -23,6 +23,7 @@ var _tilt: Node3D
 var _preview_area: Node3D
 var _current_artifact: Node = null
 var _ui_instance: Control = null
+var _current_lookup: String = ""
 
 func _ready() -> void:
 	# Everything lives under a tilted pivot so the panel reads on the wrist;
@@ -87,6 +88,8 @@ func _connect_ui(viewport: Node) -> void:
 			break
 	if _ui_instance and _ui_instance.has_signal("artifact_changed"):
 		_ui_instance.artifact_changed.connect(_on_artifact_changed)
+		if _ui_instance.has_signal("place_requested"):
+			_ui_instance.place_requested.connect(_spawn_into_world)
 		if _ui_instance.has_method("_get_current_lookup"):
 			_load_artifact(_ui_instance._get_current_lookup())
 		print("[HandWorkstation] UI connected")
@@ -94,7 +97,61 @@ func _connect_ui(viewport: Node) -> void:
 		print("[HandWorkstation] Could not connect UI")
 
 func _on_artifact_changed(lookup_name: String) -> void:
+	_current_lookup = lookup_name
 	_load_artifact(lookup_name)
+
+## PLACE — spawn the current artifact into the world, ~1.6 m in front of the
+## player at floor level. v1 placement: a real instance you can walk up to.
+## (grab / move / gravity-stick is the next pass.)
+func _spawn_into_world(lookup_name: String) -> void:
+	var art: Dictionary = ArtifactCatalogDataProvider.get_artifact_by_lookup_name(lookup_name)
+	var scene_path: String = str(art.get("scene", ""))
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		return
+	var packed: PackedScene = _safe_load(scene_path)
+	if not packed:
+		return
+	var inst: Node = _safe_instantiate(packed)
+	if not inst:
+		return
+	_disable_cameras_recursive(inst)
+	var scene_root := get_tree().current_scene
+	if scene_root == null:
+		return
+	scene_root.add_child(inst)
+	if not is_instance_valid(inst):
+		return
+	if inst is Node3D:
+		var n := inst as Node3D
+		var cam := _find_xr_camera()
+		var origin := _find_xr_origin()
+		var fwd := Vector3(0, 0, -1)
+		var base_pos := global_position
+		if cam:
+			fwd = -cam.global_transform.basis.z
+			fwd.y = 0.0
+			if fwd.length() > 0.01:
+				fwd = fwd.normalized()
+			base_pos = cam.global_position
+		var floor_y: float = origin.global_position.y if origin else base_pos.y
+		n.global_position = Vector3(base_pos.x, floor_y, base_pos.z) + fwd * 1.6
+	print("[HandWorkstation] placed '%s' in the world" % lookup_name)
+
+func _find_xr_origin() -> XROrigin3D:
+	var n: Node = get_parent()
+	while n:
+		if n is XROrigin3D:
+			return n as XROrigin3D
+		n = n.get_parent()
+	return null
+
+func _find_xr_camera() -> XRCamera3D:
+	var o := _find_xr_origin()
+	if o:
+		for c in o.get_children():
+			if c is XRCamera3D:
+				return c as XRCamera3D
+	return null
 
 func _load_artifact(lookup_name: String) -> void:
 	if is_instance_valid(_current_artifact):

@@ -218,7 +218,9 @@ script = ExtResource("19_bounds")
 [node name="EntryZone" type="Node3D" parent="." index="7" unique_id=2098305078]
 
 [node name="OversightVoiceBridge" type="Node" parent="." index="8"]
+process_mode = 4
 script = ExtResource("32_voice_bridge")
+enabled = false
 secondary_push_to_talk_action = &""
 controller_push_to_talk_button = &"by_button"
 controller_push_to_talk_tracker = &"left_hand"

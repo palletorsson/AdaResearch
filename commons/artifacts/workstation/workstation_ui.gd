@@ -4,6 +4,7 @@ extends Control
 ## Rendered onto a 3D panel via viewport_2d_in_3d
 
 signal artifact_changed(lookup_name: String)
+signal place_requested(lookup_name: String)
 
 var _all_artifacts: Array = []
 var _current_list: Array = []
@@ -51,6 +52,17 @@ func _ready() -> void:
 	if mode_btn: mode_btn.pressed.connect(_on_mode)
 	if gprev_btn: gprev_btn.pressed.connect(_on_group_prev)
 	if gnext_btn: gnext_btn.pressed.connect(_on_group_next)
+
+	# PLACE button — spawn the current artifact into the world. Added in code so
+	# no .tscn edit is needed; appended to the existing button row.
+	var button_row = get_node_or_null("VBox/ButtonRow")
+	if button_row:
+		var place_btn := Button.new()
+		place_btn.name = "PlaceButton"
+		place_btn.text = "▼ PLACE"
+		place_btn.modulate = Color(0.5, 1.0, 0.6)
+		place_btn.pressed.connect(_on_place)
+		button_row.add_child(place_btn)
 
 	_load_data()
 	_build_badges()
@@ -150,6 +162,11 @@ func _build_type_groups() -> void:
 		_group_index = 0
 	_current_group = _groups[_group_index] if _groups.size() > 0 else ""
 	_current_list = tmap.get(_current_group, [])
+
+func _on_place() -> void:
+	if _current_list.is_empty(): return
+	var idx: int = clampi(_current_index, 0, _current_list.size() - 1)
+	place_requested.emit(str(_current_list[idx].get("lookup_name", "")))
 
 func _on_prev() -> void:
 	if _current_list.size() == 0: return
