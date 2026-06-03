@@ -26,6 +26,12 @@ var _current_artifact: Node = null
 var _ui_instance: Control = null
 var _current_lookup: String = ""
 
+# grid placement preview ("where will this land")
+var _grid_structure: GridStructureComponent = null
+var _grid_search_cooldown: float = 0.0
+var _place_ghost: MeshInstance3D = null
+var _ghost_pulse: float = 0.0
+
 func _ready() -> void:
 	# Everything lives under a tilted pivot so the panel reads on the wrist;
 	# the parent (LeftHand) transform only has to position it.
@@ -80,6 +86,7 @@ func _build_preview_area() -> void:
 func _process(delta: float) -> void:
 	if is_instance_valid(_current_artifact) and _current_artifact is Node3D:
 		(_current_artifact as Node3D).rotate_y(delta * 0.8)
+	_update_place_ghost(delta)
 
 func _connect_ui(viewport: Node) -> void:
 	for i in range(12):
@@ -190,11 +197,51 @@ func _finalize_pickable(pickable: Node, inst: Node) -> void:
 		box.size = s
 		cs.shape = box
 		cs.position = aabb.get_center()
+	# Hover indicator: a glow box that lights up whenever a hand's grab/laser
+	# targets this artifact (XRTools fires highlight_updated on close OR ranged
+	# focus). This is the "you're pointing at a grabbable thing" cue.
+	_attach_highlight_box(pickable, aabb)
+	if pickable.has_signal("highlight_updated") and not pickable.is_connected("highlight_updated", _on_pickable_highlight):
+		pickable.connect("highlight_updated", _on_pickable_highlight)
 	if pickable is RigidBody3D:
 		if pickable.has_meta("vr_grid_object") and bool(pickable.get_meta("vr_grid_object")):
 			(pickable as RigidBody3D).freeze = true   # grid object: stays snapped
 		else:
 			(pickable as RigidBody3D).freeze = false  # free object: rests by gravity
+
+## Build a hidden glow box around the artifact; shown on hover/aim highlight.
+func _attach_highlight_box(pickable: Node, aabb: AABB) -> void:
+	if pickable.get_node_or_null("VrHighlightBox") != null:
+		return
+	var box := MeshInstance3D.new()
+	box.name = "VrHighlightBox"
+	var bm := BoxMesh.new()
+	var s: Vector3 = aabb.size
+	if s.length() < 0.05:
+		s = Vector3(0.3, 0.3, 0.3)
+	bm.size = s * 1.08
+	box.mesh = bm
+	box.position = aabb.get_center()
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.35, 0.85, 1.0, 0.16)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.emission_enabled = true
+	mat.emission = Color(0.35, 0.85, 1.0)
+	mat.emission_energy_multiplier = 0.8
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	box.material_override = mat
+	box.visible = false
+	pickable.add_child(box)
+
+## XRTools highlight callback — toggle the glow box when this artifact is the
+## hand's grab/laser target (close or ranged up to 5 m).
+func _on_pickable_highlight(pickable, enable: bool) -> void:
+	if not is_instance_valid(pickable):
+		return
+	var box = pickable.get_node_or_null("VrHighlightBox")
+	if box:
+		box.visible = enable
 
 func _find_xr_origin() -> XROrigin3D:
 	var n: Node = get_parent()
@@ -215,11 +262,64 @@ func _find_xr_camera() -> XRCamera3D:
 # ── grid placement ─────────────────────────────────────────────────────────
 
 ## Find the live grid structure component (same discovery the catalyst uses).
+## Cached — it only re-walks the tree when the reference goes stale (map change).
 func _find_grid_structure() -> GridStructureComponent:
+	if is_instance_valid(_grid_structure):
+		return _grid_structure
 	var n := _find_node_by_name(get_tree().root, "GridStructureComponent")
 	if n is GridStructureComponent:
-		return n as GridStructureComponent
+		_grid_structure = n as GridStructureComponent
+		return _grid_structure
 	return null
+
+## Live preview of where the next PLACE will land: a translucent green cell that
+## sits on top of the structure column you're aiming at — the same cell the
+## artifact will occupy. Matches the voxel editor's green add-ghost.
+func _update_place_ghost(delta: float) -> void:
+	if not is_instance_valid(_grid_structure):
+		_grid_search_cooldown -= delta
+		if _grid_search_cooldown <= 0.0:
+			_grid_search_cooldown = 0.5
+			_grid_structure = _find_grid_structure()
+	var have_target := is_instance_valid(_grid_structure) and is_instance_valid(_current_artifact)
+	if not have_target:
+		if _place_ghost:
+			_place_ghost.visible = false
+		return
+	var total_size: float = _grid_structure.cube_size + _grid_structure.gutter
+	var grid_origin := _grid_origin(_grid_structure)
+	var cell := _target_cell(_grid_structure, total_size, grid_origin)
+	var y_pos: int = _grid_structure.find_highest_y_at(cell.x, cell.y)
+	if _place_ghost == null:
+		_build_place_ghost(total_size)
+	_place_ghost.visible = true
+	_place_ghost.global_position = grid_origin + Vector3(cell.x, y_pos, cell.y) * total_size
+	# gentle pulse so it reads as a live target
+	_ghost_pulse += delta * 3.0
+	var mat := _place_ghost.material_override as StandardMaterial3D
+	if mat:
+		mat.albedo_color.a = 0.16 + 0.10 * (0.5 + 0.5 * sin(_ghost_pulse))
+		mat.emission_energy_multiplier = 0.35 + 0.25 * (0.5 + 0.5 * sin(_ghost_pulse))
+
+func _build_place_ghost(cell_size: float) -> void:
+	_place_ghost = MeshInstance3D.new()
+	_place_ghost.name = "PlaceGhost"
+	_place_ghost.top_level = true  # world space — ignore the moving wrist transform
+	var bm := BoxMesh.new()
+	bm.size = Vector3.ONE * cell_size * 0.92
+	_place_ghost.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.3, 1.0, 0.45, 0.18)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.emission_enabled = true
+	mat.emission = Color(0.3, 1.0, 0.45)
+	mat.emission_energy_multiplier = 0.4
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.no_depth_test = true
+	_place_ghost.material_override = mat
+	_place_ghost.visible = false
+	add_child(_place_ghost)
 
 ## World position of grid cell (0,0,0). The structure component is a plain Node;
 ## its parent (GridSystem) is the Node3D that carries the world transform.
