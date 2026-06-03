@@ -6,7 +6,7 @@ extends Node
 ## User presses X button to confirm → Godot writes inbox.json → Claude pulls via adb.
 ## Screenshots via: adb shell "screencap -p /sdcard/claude_bridge/screen.png"
 
-@export var enabled: bool = true
+@export var enabled: bool = false  # disabled 2026-06-03: left-hand console + voice push-to-talk on by_button (B) collided with the catalyst's B-to-save. Set true (+ re-add the autoload) to restore.
 @export var poll_interval: float = 1.0
 @export var confirm_button_name: String = "ax_button"
 @export var panel_font_size: int = 36
