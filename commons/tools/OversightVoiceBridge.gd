@@ -68,6 +68,13 @@ func _ready() -> void:
 		push_warning("OversightVoiceBridge: duplicate scene instance disabled, using /root/OversightVoiceBridge singleton")
 		return
 
+	# Master switch — when disabled, do NOT wire audio, HTTP, controller signals,
+	# or the status label. (Previously _ready set these up regardless of enabled,
+	# so the controller B button still triggered recording.)
+	if not enabled:
+		print("OversightVoiceBridge: disabled (enabled=false) — bridge inactive, no wiring")
+		return
+
 	print("OversightVoiceBridge: ready (enabled=%s, base_url=%s, push_action=%s, secondary_action=%s)" % [
 		enabled,
 		oversight_base_url,
