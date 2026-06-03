@@ -56,6 +56,7 @@ const STICK_COOLDOWN := 0.5  # Short cooldown — smooth lerp handles the visual
 # Voxel editing (tool mode)
 var _voxel_controller: VoxelEditController = null
 var _voxel_active: bool = false
+var _voxel_data_component: Node = null  # holds current map name, for B-to-save
 # Voxel activation retry (grid may not be ready on map transition)
 var _voxel_activate_retries: int = 0
 const VOXEL_MAX_RETRIES := 10
@@ -204,6 +205,11 @@ func _on_controller_button(button_name: String) -> void:
 					_handle_voxel_remove()
 				"wedge_placer":
 					_handle_wedge_remove()
+		"by_button":
+			# B = save the edited grid back to the repo's map_data.json.
+			match mode_id:
+				"voxel_editor", "wedge_placer":
+					_save_map()
 
 
 ## Voxel mode: trigger/AX = ADD cube on the cardinal neighbor you're facing.
@@ -223,6 +229,44 @@ func _handle_voxel_remove() -> void:
 	_voxel_controller.try_remove()
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+
+
+## B button = SAVE the edited grid back to the repo's map_data.json.
+## Writes only the structure layer (the cubes you placed/removed); utilities,
+## interactables, lighting and settings are preserved untouched. Edit the map
+## inside VR, press B, and the change lands on disk in the repo.
+func _save_map() -> void:
+	if not _voxel_controller or not _voxel_controller.structure_component:
+		_flash_label("NOTHING TO SAVE", Color(1.0, 0.5, 0.2))
+		return
+	var map_name := ""
+	if _voxel_data_component and _voxel_data_component.has_method("get_current_map_name"):
+		map_name = _voxel_data_component.get_current_map_name()
+	if map_name == "":
+		push_warning("[Catalyst] B-save aborted — no current map name")
+		_flash_label("NO MAP NAME", Color(1.0, 0.4, 0.3))
+		return
+	var ok: bool = VoxelSaveManager.save(map_name, _voxel_controller.structure_component)
+	if ok:
+		print("[Catalyst] B-save: wrote '%s' to disk" % map_name)
+		_flash_label("SAVED  " + map_name, Color(0.4, 1.0, 0.6))
+		if controller:
+			controller.trigger_haptic_pulse("haptic", 0.0, 0.2, 0.6, 0.0)  # strong confirm
+	else:
+		_flash_label("SAVE FAILED", Color(1.0, 0.3, 0.3))
+		if controller:
+			controller.trigger_haptic_pulse("haptic", 0.0, 0.1, 0.3, 0.0)
+
+
+## Flash a transient message on the held tool's mode label, then revert.
+func _flash_label(text: String, color: Color) -> void:
+	if not _mode_label:
+		return
+	_mode_label.text = text
+	_mode_label.modulate = color
+	_mode_label.modulate.a = 1.0
+	_mode_label.visible = true
+	_mode_label_timer = 2.0
 
 # ═══════════════════════════════════════════════════════════════════════════
 # WEDGE PLACEMENT — PrismMesh slopes on the grid
@@ -458,6 +502,7 @@ func _activate_voxel_mode() -> void:
 		print("[Catalyst] Grid data not available after %d retries" % VOXEL_MAX_RETRIES)
 		return
 	_voxel_activate_retries = 0
+	_voxel_data_component = data  # remember it so B can save back to the right map
 	if data.has_method("get_structure_data"):
 		(structure as GridStructureComponent).enable_editing(data.get_structure_data())
 	_voxel_controller = VoxelEditController.new()
