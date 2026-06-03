@@ -13,6 +13,7 @@ extends Node3D
 
 const VIEWPORT_2D_3D = preload("res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn")
 const UI_SCENE = preload("res://commons/artifacts/workstation/workstation_ui.tscn")
+const PICKABLE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
 
 const PANEL_W := 0.14
 const PANEL_H := 0.115
@@ -118,24 +119,51 @@ func _spawn_into_world(lookup_name: String) -> void:
 	var scene_root := get_tree().current_scene
 	if scene_root == null:
 		return
-	scene_root.add_child(inst)
-	if not is_instance_valid(inst):
+
+	# Wrap the artifact in an XRTools pickable (RigidBody3D, grab layer 4) so
+	# either hand can grab and move it — close, or ranged up to 5 m. Frozen
+	# until its collider is sized; then released to gravity + grabbing.
+	var pickable := PICKABLE.instantiate() as RigidBody3D
+	if pickable == null:
+		scene_root.add_child(inst)  # fallback: place raw
 		return
-	if inst is Node3D:
-		var n := inst as Node3D
-		var cam := _find_xr_camera()
-		var origin := _find_xr_origin()
-		var fwd := Vector3(0, 0, -1)
-		var base_pos := global_position
-		if cam:
-			fwd = -cam.global_transform.basis.z
-			fwd.y = 0.0
-			if fwd.length() > 0.01:
-				fwd = fwd.normalized()
-			base_pos = cam.global_position
-		var floor_y: float = origin.global_position.y if origin else base_pos.y
-		n.global_position = Vector3(base_pos.x, floor_y, base_pos.z) + fwd * 1.6
-	print("[HandWorkstation] placed '%s' in the world" % lookup_name)
+	pickable.freeze = true
+	pickable.add_child(inst)
+	scene_root.add_child(pickable)
+
+	# position ~1.6 m in front of the player at floor level
+	var cam := _find_xr_camera()
+	var origin := _find_xr_origin()
+	var fwd := Vector3(0, 0, -1)
+	var base_pos := global_position
+	if cam:
+		fwd = -cam.global_transform.basis.z
+		fwd.y = 0.0
+		if fwd.length() > 0.01:
+			fwd = fwd.normalized()
+		base_pos = cam.global_position
+	var floor_y: float = origin.global_position.y if origin else base_pos.y
+	pickable.global_position = Vector3(base_pos.x, floor_y + 0.05, base_pos.z) + fwd * 1.6
+
+	# size the grab collider once the artifact has built its geometry
+	call_deferred("_finalize_pickable", pickable, inst)
+	print("[HandWorkstation] placed '%s' (grabbable) in the world" % lookup_name)
+
+func _finalize_pickable(pickable: Node, inst: Node) -> void:
+	if not is_instance_valid(pickable) or not is_instance_valid(inst) or not inst is Node3D:
+		return
+	var aabb := _get_aabb(inst as Node3D)
+	var cs := pickable.get_node_or_null("CollisionShape3D") as CollisionShape3D
+	if cs:
+		var box := BoxShape3D.new()
+		var s: Vector3 = aabb.size
+		if s.length() < 0.05:
+			s = Vector3(0.3, 0.3, 0.3)
+		box.size = s
+		cs.shape = box
+		cs.position = aabb.get_center()
+	if pickable is RigidBody3D:
+		(pickable as RigidBody3D).freeze = false  # now grabbable + rests by gravity
 
 func _find_xr_origin() -> XROrigin3D:
 	var n: Node = get_parent()
