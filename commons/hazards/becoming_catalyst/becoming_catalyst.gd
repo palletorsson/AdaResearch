@@ -266,7 +266,9 @@ func _save_map() -> void:
 	if not OS.has_feature("android"):
 		VoxelSaveManager.save(map_name, structure)
 	# HTTP POST to the PC — works on the headset over `adb reverse tcp:3003 tcp:3003`.
-	_save_map_over_http(map_name, structure.get_editable_layout())
+	# Also carry any artifacts placed in VR (workstation PLACE) so they save into
+	# the map's interactables layer alongside the cubes.
+	_save_map_over_http(map_name, structure.get_editable_layout(), _collect_vr_placements())
 	_flash_label("SAVING  " + map_name + " ...", Color(0.6, 0.85, 1.0))
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.4, 0.0)
@@ -286,13 +288,35 @@ func _flash_label(text: String, color: Color) -> void:
 ## POST the edited structure to the PC's encyclopedia so it lands in the repo's
 ## map_data.json (preserving the other layers). On the headset this reaches the
 ## PC over `adb reverse tcp:3003 tcp:3003`.
-func _save_map_over_http(map_name: String, layout: Array) -> void:
-	print("[Catalyst] POSTing '%s' (%d rows) -> %s" % [map_name, layout.size(), MAP_SAVE_URL])
+## Collect artifacts placed in VR (group "vr_placed_artifact", tagged by the
+## hand workstation) into a list of {x, z, token} cell placements. The save
+## endpoint overlays these onto the map's existing interactables layer.
+func _collect_vr_placements() -> Array:
+	var placements: Array = []
+	for node in get_tree().get_nodes_in_group("vr_placed_artifact"):
+		if not is_instance_valid(node):
+			continue
+		var lookup := String(node.get_meta("artifact_lookup_name", ""))
+		var cell: Vector2i = node.get_meta("grid_cell", Vector2i(-1, -1))
+		if lookup == "" or cell.x < 0 or cell.y < 0:
+			continue
+		var token := lookup
+		var rot := int(round(float(node.get_meta("grid_rotation_y", 0.0))))
+		if rot != 0:
+			token = "%s:%d" % [lookup, rot]
+		placements.append({"x": cell.x, "z": cell.y, "token": token})
+	return placements
+
+
+func _save_map_over_http(map_name: String, layout: Array, placements: Array = []) -> void:
+	print("[Catalyst] POSTing '%s' (%d rows, %d placed artifacts) -> %s" % [map_name, layout.size(), placements.size(), MAP_SAVE_URL])
 	var http := HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(_on_map_save_completed.bind(http))
 	var headers := PackedStringArray(["Content-Type: application/json"])
 	var payload := {"mapName": map_name, "layers": {"structure": layout}}
+	if not placements.is_empty():
+		payload["interactablePlacements"] = placements
 	http.set_meta("map_name", map_name)
 	var err := http.request(MAP_SAVE_URL, headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
 	if err != OK:

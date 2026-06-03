@@ -101,9 +101,11 @@ func _on_artifact_changed(lookup_name: String) -> void:
 	_current_lookup = lookup_name
 	_load_artifact(lookup_name)
 
-## PLACE — spawn the current artifact into the world, ~1.6 m in front of the
-## player at floor level. v1 placement: a real instance you can walk up to.
-## (grab / move / gravity-stick is the next pass.)
+## PLACE — spawn the current artifact onto the grid: snapped to the cell you're
+## aiming at, sitting on TOP of the structure column there (find_highest_y_at) —
+## the same spot the map loader uses, so what you place is what reloads. It's a
+## grid object: grabbable and re-snapping on release, and it saves into the map's
+## interactables layer when you press B. Falls back to a floor drop if no grid.
 func _spawn_into_world(lookup_name: String) -> void:
 	var art: Dictionary = ArtifactCatalogDataProvider.get_artifact_by_lookup_name(lookup_name)
 	var scene_path: String = str(art.get("scene", ""))
@@ -131,23 +133,49 @@ func _spawn_into_world(lookup_name: String) -> void:
 	pickable.add_child(inst)
 	scene_root.add_child(pickable)
 
-	# position ~1.6 m in front of the player at floor level
-	var cam := _find_xr_camera()
-	var origin := _find_xr_origin()
-	var fwd := Vector3(0, 0, -1)
-	var base_pos := global_position
-	if cam:
-		fwd = -cam.global_transform.basis.z
-		fwd.y = 0.0
-		if fwd.length() > 0.01:
-			fwd = fwd.normalized()
-		base_pos = cam.global_position
-	var floor_y: float = origin.global_position.y if origin else base_pos.y
-	pickable.global_position = Vector3(base_pos.x, floor_y + 0.05, base_pos.z) + fwd * 1.6
+	# Grid placement: snap onto the cell you're aiming at, on TOP of the
+	# structure column there — exactly where the map loader would put it
+	# (find_highest_y_at). The placed artifact counts with the grid and saves
+	# with B. Falls back to a floor drop if there's no grid in this scene.
+	var structure := _find_grid_structure()
+	if structure != null:
+		var total_size: float = structure.cube_size + structure.gutter
+		var grid_origin := _grid_origin(structure)
+		var cell := _target_cell(structure, total_size, grid_origin)
+		var y_pos: int = structure.find_highest_y_at(cell.x, cell.y)
+		pickable.global_position = grid_origin + Vector3(cell.x, y_pos, cell.y) * total_size
+		# Mark it a grid object: freeze on release so it stays snapped (never
+		# falls). Re-snapped to the nearest column-top each time it's dropped.
+		pickable.set_meta("vr_grid_object", true)
+		# pickable is typed RigidBody3D here; release_mode / dropped are
+		# XRToolsPickable members, so reach them by string to avoid a static
+		# type error. 1 = XRToolsPickable.ReleaseMode.FROZEN (freeze on release).
+		pickable.set("release_mode", 1)
+		pickable.add_to_group("vr_placed_artifact")
+		pickable.set_meta("artifact_lookup_name", lookup_name)
+		pickable.set_meta("grid_cell", cell)
+		pickable.set_meta("grid_rotation_y", 0.0)
+		if pickable.has_signal("dropped") and not pickable.is_connected("dropped", _on_placed_artifact_dropped):
+			pickable.connect("dropped", _on_placed_artifact_dropped)
+		print("[HandWorkstation] placed '%s' on grid cell (%d,%d) y=%d" % [lookup_name, cell.x, cell.y, y_pos])
+	else:
+		# Fallback (no grid): ~1.6 m in front at floor level, rests by gravity.
+		var cam := _find_xr_camera()
+		var origin := _find_xr_origin()
+		var fwd := Vector3(0, 0, -1)
+		var base_pos := global_position
+		if cam:
+			fwd = -cam.global_transform.basis.z
+			fwd.y = 0.0
+			if fwd.length() > 0.01:
+				fwd = fwd.normalized()
+			base_pos = cam.global_position
+		var floor_y: float = origin.global_position.y if origin else base_pos.y
+		pickable.global_position = Vector3(base_pos.x, floor_y + 0.05, base_pos.z) + fwd * 1.6
+		print("[HandWorkstation] placed '%s' (grabbable, no grid) in the world" % lookup_name)
 
 	# size the grab collider once the artifact has built its geometry
 	call_deferred("_finalize_pickable", pickable, inst)
-	print("[HandWorkstation] placed '%s' (grabbable) in the world" % lookup_name)
 
 func _finalize_pickable(pickable: Node, inst: Node) -> void:
 	if not is_instance_valid(pickable) or not is_instance_valid(inst) or not inst is Node3D:
@@ -163,7 +191,10 @@ func _finalize_pickable(pickable: Node, inst: Node) -> void:
 		cs.shape = box
 		cs.position = aabb.get_center()
 	if pickable is RigidBody3D:
-		(pickable as RigidBody3D).freeze = false  # now grabbable + rests by gravity
+		if pickable.has_meta("vr_grid_object") and bool(pickable.get_meta("vr_grid_object")):
+			(pickable as RigidBody3D).freeze = true   # grid object: stays snapped
+		else:
+			(pickable as RigidBody3D).freeze = false  # free object: rests by gravity
 
 func _find_xr_origin() -> XROrigin3D:
 	var n: Node = get_parent()
@@ -180,6 +211,72 @@ func _find_xr_camera() -> XRCamera3D:
 			if c is XRCamera3D:
 				return c as XRCamera3D
 	return null
+
+# ── grid placement ─────────────────────────────────────────────────────────
+
+## Find the live grid structure component (same discovery the catalyst uses).
+func _find_grid_structure() -> GridStructureComponent:
+	var n := _find_node_by_name(get_tree().root, "GridStructureComponent")
+	if n is GridStructureComponent:
+		return n as GridStructureComponent
+	return null
+
+## World position of grid cell (0,0,0). The structure component is a plain Node;
+## its parent (GridSystem) is the Node3D that carries the world transform.
+func _grid_origin(structure: GridStructureComponent) -> Vector3:
+	var p := structure.get_parent()
+	return (p as Node3D).global_position if p is Node3D else Vector3.ZERO
+
+## The grid cell (x,z) the player is aiming at: project the camera's flattened
+## forward a few cells ahead, convert to grid space, and clamp to the grid.
+func _target_cell(structure: GridStructureComponent, total_size: float, grid_origin: Vector3) -> Vector2i:
+	var dims := structure.get_grid_dimensions()
+	var aim := global_position
+	var cam := _find_xr_camera()
+	if cam:
+		var fwd := -cam.global_transform.basis.z
+		fwd.y = 0.0
+		if fwd.length() > 0.01:
+			fwd = fwd.normalized()
+		aim = cam.global_position + fwd * (total_size * 2.5)
+	var local := (aim - grid_origin) / total_size
+	var x := clampi(int(round(local.x)), 0, maxi(dims.x - 1, 0))
+	var z := clampi(int(round(local.z)), 0, maxi(dims.z - 1, 0))
+	return Vector2i(x, z)
+
+## When a placed artifact is dropped after a move, re-snap it to the nearest
+## column-top so it stays a clean grid object (and saves to the right cell).
+func _on_placed_artifact_dropped(pickable) -> void:
+	if not is_instance_valid(pickable):
+		return
+	var structure := _find_grid_structure()
+	if structure == null:
+		return
+	var total_size: float = structure.cube_size + structure.gutter
+	var grid_origin := _grid_origin(structure)
+	var dims := structure.get_grid_dimensions()
+	var local := ((pickable as Node3D).global_position - grid_origin) / total_size
+	var x := clampi(int(round(local.x)), 0, maxi(dims.x - 1, 0))
+	var z := clampi(int(round(local.z)), 0, maxi(dims.z - 1, 0))
+	var y_pos: int = structure.find_highest_y_at(x, z)
+	(pickable as Node3D).global_position = grid_origin + Vector3(x, y_pos, z) * total_size
+	pickable.set_meta("grid_cell", Vector2i(x, z))
+	if pickable is RigidBody3D:
+		(pickable as RigidBody3D).linear_velocity = Vector3.ZERO
+		(pickable as RigidBody3D).angular_velocity = Vector3.ZERO
+		(pickable as RigidBody3D).freeze = true
+	print("[HandWorkstation] re-snapped artifact to cell (%d,%d) y=%d" % [x, z, y_pos])
+
+## Depth-first search for a node by exact name (rare calls: place / drop).
+func _find_node_by_name(root: Node, target_name: String) -> Node:
+	if root.name == target_name:
+		return root
+	for child in root.get_children():
+		var found := _find_node_by_name(child, target_name)
+		if found:
+			return found
+	return null
+
 
 func _load_artifact(lookup_name: String) -> void:
 	if is_instance_valid(_current_artifact):
