@@ -29,6 +29,9 @@ class_name WallPlacard
 @export_group("Look")
 @export var card_width: float = 0.62
 @export var card_height: float = 0.42
+## How far the plaque stands off the wall (metres). Thicker = a more solid
+## mounted plaque that sits clearly proud of the wall, not a thin sticker.
+@export var card_depth: float = 0.06
 @export var card_color: Color = Color(0.96, 0.96, 0.94)     # warm museum white
 @export var ink_color: Color = Color(0.10, 0.11, 0.13)      # near-black label ink
 @export var accent: Color = Color(0.227, 0.482, 1.0)        # rule + underline
@@ -104,7 +107,7 @@ func _parse_color(raw: String, fallback: Color) -> Color:
 
 func _build() -> void:
 	_built = true
-	var depth := 0.025
+	var depth := card_depth
 
 	# SubViewport renders the label art once; baked to a mipmapped texture.
 	var vp := SubViewport.new()
