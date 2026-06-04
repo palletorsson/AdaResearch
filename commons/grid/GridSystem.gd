@@ -699,6 +699,12 @@ func _handle_biome_ring():
 			"biome_paint": painted_layer,
 			"stage_order": stage_order,
 			"biome_overrides": biome_overrides,
+			# Phase 4b: the ground_ring accrual layer (wraps BiomeRingComponent)
+			# needs density / terrain_mode / kingdoms. GridSystem no longer
+			# special-cases the ring — it is just another accrual layer now.
+			"density": density,
+			"terrain_mode": eco.get_terrain_mode() if eco.has_method("get_terrain_mode") else "flat",
+			"kingdoms": kingdoms,
 		})
 
 	# ── Ground paint layer (G3.7 + smart fallback) ────────────────────
@@ -750,26 +756,13 @@ func _handle_biome_ring():
 				   ground_stats.get("draw_calls", 0),
 				   src.get("explicit", 0), src.get("kingdom", 0), src.get("terrain", 0)])
 
-	if density < 0.05:
-		print("GridSystem: Density too low (%.2f < 0.05) — no biome ring" % density)
-		return  # No ring for barren maps
-
-	# Remove old ring if reloading
-	var old_ring = get_node_or_null("BiomeRing")
-	if old_ring:
-		old_ring.queue_free()
-
-	var ring := BiomeRingComponent.new()
-	ring.name = "BiomeRing"
-	add_child(ring)
-	ring.generate(
-		data_component.get_grid_dimensions(),
-		cube_size,
-		eco.get_terrain_mode() if eco.has_method("get_terrain_mode") else "flat",
-		eco.get_allowed_kingdoms() if eco.has_method("get_allowed_kingdoms") else [],
-		density
-	)
-	print("GridSystem: 🌿 Biome ring generated (density=%.2f)" % density)
+	# CONSOLIDATION Phase 4b (2026-06-04): the biome ring is no longer a
+	# GridSystem special-case. It is now the `ground_ring` accrual layer
+	# (order 1, always) — wrapping BiomeRingComponent — applied by
+	# BiomeAccrualManager above, along with every other biome layer. The
+	# density gate + barren-map skip now live inside the layer. This makes
+	# the accrual stack the single biome populator and gives the ring per-map
+	# biome_overrides support for free. See commons/biome_layers/ground_ring.gd.
 
 
 ## Advance EcosystemManager to the sequence that owns the current map.

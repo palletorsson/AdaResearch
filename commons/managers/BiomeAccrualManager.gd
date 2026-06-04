@@ -105,8 +105,12 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 		if order > target_order:
 			break
 		var kind: String = str(entry.get("kind", ""))
-		# In lab mode, only apply the lab_only-flagged entries themselves.
-		if lab_only_active and not bool(entry.get("lab_only", false)):
+		# In lab mode, only apply the lab_only-flagged entries themselves —
+		# EXCEPT layers flagged "always": true (e.g. ground_ring), which are
+		# foundational and must render in every mode. Without this, the lab
+		# maps (Biome_Spine / Biome_Zoo) would lose the surrounding ground +
+		# fog the GridSystem ring used to draw unconditionally.
+		if lab_only_active and not bool(entry.get("lab_only", false)) and not bool(entry.get("always", false)):
 			skipped.append(kind + "(lab_only_active)")
 			continue
 		if _disabled_kinds.has(kind):

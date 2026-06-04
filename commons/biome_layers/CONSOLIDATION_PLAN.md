@@ -125,16 +125,36 @@ Split into two independently-shippable halves; 4a (low risk) lands first.
   → only the painted dispatcher applies. Delete the save (`%APPDATA%/Godot/app_userdata/Ada
   Research Zero One/ecosystem_progression.json`) before capture-verifying real-map staging.
 
-#### Phase 4b — Migrate the ring's *landscape* into accrual ⏳ PENDING (HIGH risk)
-- Move `_build_ring_ground` (surrounding ground plane + fog-fade dissolve) into a dedicated
-  `ground_ring` accrual layer so the world still extends into mist past the grid edge.
-- Then remove the `BiomeRingComponent.generate()` call from `GridSystem._handle_biome_ring()`
-  and the density-gate early-return (the accrual resolver owns density now), and delete the
-  dead `_spawn_dna_*` methods + `BiomeRingComponent.gd`.
-- **Risk: HIGH.** Capture every representative map and confirm the surrounding landscape + fog
-  fade survive (the ring's concentric placement differs from accrual layer params).
-- **Watch:** the `biome_lab` maps (`Biome_Spine`, `Biome_Zoo`) use the painted dispatcher in
-  lab-only mode — confirm they still render after the ring is gone.
+#### Phase 4b — Fold the ring into the accrual stack ✅ DONE + VERIFIED (2026-06-04)
+**Deviation from the original plan, deliberately:** the plan said "delete `BiomeRingComponent.gd`."
+On inspection the ring owns TWO spatially-distinct contributions, not one — `_build_ring_ground`
+(landscape + fog + **the walkable ground collider players stand on**) AND `_place_foliage` (the
+ring-*zone* MultiMesh ground-cover annulus). The accrual organism layers operate on/near the grid;
+neither covers the annulus. So rather than reimplement collision + foliage code (high risk for the
+one biome piece that affects locomotion), the ring is now **wrapped** as a `ground_ring` accrual
+layer that invokes the existing, tested `BiomeRingComponent.generate()` byte-for-byte. Same output,
+different invocation site. This still achieves the plan's intent — **one populator** (everything
+flows through `BiomeAccrualManager`); GridSystem no longer special-cases the ring; the ring inherits
+per-map `biome_overrides` for free.
+- `commons/biome_layers/ground_ring.gd` (new): `apply(ctx)` reads density/grid_dims/cube_size/
+  terrain_mode/kingdoms from ctx, density-gates barren maps (< 0.05), instantiates
+  `BiomeRingComponent` and calls `generate(...)`.
+- `biome_contributions.json`: `ground_ring` entry at order 1 with `"always": true`.
+- `BiomeAccrualManager`: lab-mode skip now respects `"always": true` (so `ground_ring` applies even
+  in `biome_lab` mode, matching the old unconditional GridSystem call).
+- `GridSystem._handle_biome_ring()`: threads density/terrain_mode/kingdoms into the accrual ctx;
+  the ring instantiation + density gate + `generate()` call are **removed** (only comments remain).
+- **Verification (clean ecosystem state):**
+  - `LSystems_Growth` (order 11): `applied=["ground_ring", …]`; `[ground_ring] accrual layer → ring
+    generated`; ground+fog landscape visually identical to pre-4b; pathfinder OK.
+  - `Biome_Spine` (biome_lab, stage 99, lab-only): `applied=["ground_ring", "biome_paint_dispatcher"]`
+    — the `always` flag let `ground_ring` through while all 19 spine layers stayed skipped; ground+fog
+    preserved; dispatcher intact; pathfinder OK.
+  - No `GridSystem: 🌿 Biome ring generated` line (old special-case gone); no parse/runtime errors.
+- **Leftover (tiny follow-up):** the dead `_spawn_dna_trees/_creatures/_organisms` inside
+  `BiomeRingComponent.gd` (retired in Phase 4a) are still on disk, now confirmed unreferenced. A
+  cleanup pass can delete them and decide whether to fully absorb the component into `ground_ring.gd`
+  vs keep the wrapper. Not blocking.
 
 ### Phase 5 — Single resolver owns the running total (bridge to schema-v2)
 - With one populator, add a `budget_scale` float to the accrual `ctx`. Even a stub that

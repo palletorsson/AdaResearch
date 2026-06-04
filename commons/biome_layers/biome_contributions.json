@@ -2,6 +2,7 @@
   "schema": "adaresearch.biome_contributions.v1",
   "description": "Each sequence contributes one layer to the biome. Layers accrue in order. The biome at stage N = sum of layers 1..N. Before seq 8 the biome is NOT a nature biome — it is abstract mathematical forms floating in space, Kusama-like.",
   "layer_kinds": {
+    "ground_ring": "Order 1, always. The surrounding ground plane + fog-fade landscape and the ring-zone ground-cover (grass/flower/mushroom annulus) + the walkable ground collider. Wraps BiomeRingComponent. `always` keeps it in biome_lab mode. Density-gated: skips barren seq 1-2.",
     "floating_points": "Sparse points in void. The Kusama field. Seq 1.",
     "floating_primitives": "Seq 1. TWO faces by stage: at the primitives stage it renders a sparse GPU-particle sphere field (soft motes drifting in void); beneath any later sequence it renders the MultiMesh dot lattice that animated_primitives/color_tint/force_field/lattice_snap/wave_displace transform.",
     "animated_primitives": "Existing primitives rotate, scale, translate. No new spawns. Seq 2.",
@@ -25,6 +26,9 @@
     "biome_paint_dispatcher": "Reads the map's biome_paint layer and spawns one substrate per painted cell. Curriculum-honest: each kingdom only renders past its unlock_order. Falls back to kingdom-coloured primitives when a substrate path isn't yet wired. Used by the biome_lab sequence (Biome_Spine, Biome_Zoo) and any future map that paints cells."
   },
   "sequences": [
+    { "order": 1,  "seq": "primitives",            "kind": "ground_ring", "always": true,
+      "params": {},
+      "truth": "the world extends past the grid edge into mist — a ground plane + fog-fade landscape and the ring-zone ground-cover; foundational, present from the first sequence whose density crosses the barren threshold" },
     { "order": 1,  "seq": "primitives",            "kind": "floating_primitives",
       "params": { "bounds": 22.0, "step": 1.2, "y_tiers": [1.6, 3.2], "types": ["point"], "emit_light": true,
                   "sphere_count": 60, "sphere_radius": 0.06, "drift_speed": 0.18, "turbulence": 0.6, "emission_energy": 1.6, "color": "#b8e0ff", "field_centre_y": 2.6 },
