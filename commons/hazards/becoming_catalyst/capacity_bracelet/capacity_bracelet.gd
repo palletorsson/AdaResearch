@@ -57,7 +57,15 @@ var _label_timer: float = 0.0
 var _last_hinge_step: int = 0
 var _active := false
 var _mode_switch_cooldown: float = 0.0
-const MODE_SWITCH_COOLDOWN := 0.5  # Short — smooth lerp handles the visual
+const MODE_SWITCH_COOLDOWN := 0.3  # gate after each jog-step so a fast turn can't spin
+
+# Jog-wheel rotation: turning the hinge a bit in a direction steps ONE stone,
+# regardless of absolute angle — so every stone is equally reachable and you
+# stop exactly where you want (no detents pulling you to fixed positions).
+var _hinge_last_angle: float = 0.0
+var _hinge_accum: float = 0.0
+const HINGE_STEP_DEG := 26.0  # rotate this far to advance one stone
+const BRACELET_SCALE := 1.5   # overall size — bigger = easier to grab + read
 
 # ── Signals ────────────────────────────────────────────────────────────────
 
@@ -91,12 +99,9 @@ func _process(delta: float) -> void:
 	# Pulse active gem
 	_pulse_active_gem(delta)
 
-	# Mode switch cooldown — and walk one stone at a time toward where the hinge
-	# was turned, so the stones never spin through several modes at once.
+	# Mode switch cooldown (jog-wheel steps directly in _on_hinge_moved)
 	if _mode_switch_cooldown > 0.0:
 		_mode_switch_cooldown -= delta
-	elif _target_mode_index != _current_mode_index and _unlocked_modes.size() > 1:
-		_advance_one_mode_step()
 
 	# Fade label timer
 	if _label_timer > 0.0:
@@ -137,7 +142,7 @@ func activate(modes: Array, controller: XRController3D, animate: bool = true, al
 	# Make bracelet visible — skip tween for reliability, set scale directly
 	visible = true
 	_active = true
-	scale = Vector3.ONE
+	scale = Vector3.ONE * BRACELET_SCALE
 
 	# Glow disabled — gems are self-lit via emission
 	if _bracelet_glow:
@@ -173,18 +178,12 @@ func sync_to_mode(index: int) -> void:
 	if index == _current_mode_index:
 		return
 	_current_mode_index = clampi(index, 0, maxi(0, _unlocked_modes.size() - 1))
-	_target_mode_index = _current_mode_index  # external set — don't auto-step
+	# The gems show the selection; with the jog-wheel the hinge is a relative
+	# input device, so we DON'T move it here (moving it would fire hinge_moved
+	# and jog a spurious step). Just keep the jog accumulator from drifting.
+	_hinge_accum = 0.0
 	_highlight_current_gem()
 	_show_mode_label()
-
-	# Rotate hinge so the selected gem physically arrives at the top
-	if _hinge and _unlocked_modes.size() > 1:
-		var step_deg := 360.0 / _unlocked_modes.size()
-		var target_angle := -_current_mode_index * step_deg  # Negative = gem i rotates to top
-		if _hinge.has_method("move_hinge"):
-			_hinge.move_hinge(deg_to_rad(target_angle))
-		elif "hinge_position" in _hinge:
-			_hinge.hinge_position = target_angle
 
 ## For testing — configure via grid system.
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -539,28 +538,37 @@ func _pulse_active_gem(_delta: float) -> void:
 func _update_hinge_steps() -> void:
 	if not _hinge:
 		return
-	var count := _unlocked_modes.size()
-	if count <= 1:
-		_hinge.set("hinge_steps", 0.0)  # No stepping with 0-1 modes
-		return
-	_hinge.set("hinge_steps", 360.0 / count)
+	# Free rotation — no detents. The jog-wheel in _on_hinge_moved does the
+	# stepping (one stone per HINGE_STEP_DEG of turn), which is what makes every
+	# stone equally reachable instead of pinned to a fixed angle.
+	_hinge.set("hinge_steps", 0.0)
 	_last_hinge_step = _current_mode_index
+	_hinge_last_angle = 0.0
+	_hinge_accum = 0.0
 
 func _on_hinge_moved(angle: float) -> void:
+	if _unlocked_modes.size() <= 1:
+		return
+	# Jog-wheel: accumulate the turn since the last step; once you've turned
+	# HINGE_STEP_DEG in a direction, advance ONE stone and reset. Absolute angle
+	# doesn't matter, so no stone is "easier" by where it sits in the circle, and
+	# you stop exactly on the one you want.
+	var d: float = angle - _hinge_last_angle
+	_hinge_last_angle = angle
+	if _mode_switch_cooldown > 0.0:
+		return  # ignore input mid-cooldown (anti-spin); last_angle still tracked
+	_hinge_accum += d
+	if _hinge_accum >= HINGE_STEP_DEG:
+		_hinge_accum = 0.0
+		_step_mode(1)
+	elif _hinge_accum <= -HINGE_STEP_DEG:
+		_hinge_accum = 0.0
+		_step_mode(-1)
+
+## Advance the selection by one stone (dir = +1 / -1, wrapping), arm the cooldown.
+func _step_mode(dir: int) -> void:
 	var count := _unlocked_modes.size()
 	if count <= 1:
-		return
-	# Record where the hinge points; _process walks the stones there one at a
-	# time (one per cooldown), so turning the hinge never spins through modes.
-	var step_deg := 360.0 / count
-	var raw_step := int(round(-angle / step_deg))  # Negative because rotation is opposite
-	_target_mode_index = ((raw_step % count) + count) % count
-
-## Move the selection ONE stone toward the hinge target, then arm the cooldown.
-func _advance_one_mode_step() -> void:
-	var count := _unlocked_modes.size()
-	var dir := _shortest_ring_dir(_current_mode_index, _target_mode_index, count)
-	if dir == 0:
 		return
 	_current_mode_index = ((_current_mode_index + dir) % count + count) % count
 	_last_hinge_step = _current_mode_index
@@ -573,19 +581,12 @@ func _advance_one_mode_step() -> void:
 	_show_mode_label()
 
 	if _controller:
-		_controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
+		_controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.25, 0.0)  # crisp detent tick
 
 	if _current_mode_index < _unlocked_modes.size():
 		bracelet_mode_selected.emit(str(_unlocked_modes[_current_mode_index]))
 
-	print("[Bracelet] Stepped to mode: %s" % str(_unlocked_modes[_current_mode_index]))
-
-## Shortest direction (+1 / -1) around a ring of `count` from→to, 0 if equal.
-func _shortest_ring_dir(from_index: int, to_index: int, count: int) -> int:
-	var diff := ((to_index - from_index) % count + count) % count
-	if diff == 0:
-		return 0
-	return 1 if diff * 2 <= count else -1
+	print("[Bracelet] Jog -> mode: %s" % str(_unlocked_modes[_current_mode_index]))
 
 # ═══════════════════════════════════════════════════════════════════════════
 # HANDLE GUARD — Prevent bracelet hand from grabbing its own bracelet
