@@ -28,6 +28,7 @@ const MODE_DEFS: Array[Dictionary] = [
 	{"id": "voxel_editor",   "order": 0,  "name": "Voxel Editor",   "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_voxel_editor.gd"},
 	{"id": "wedge_placer",   "order": 0,  "name": "Wedge Placer",  "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_wedge_placer.gd"},
 	{"id": "artifact_edit",  "order": 0,  "name": "Edit",           "sequence": "",                   "script": ""},
+	{"id": "lab_edit",       "order": 0,  "name": "Lab",            "sequence": "",                   "script": ""},
 	{"id": "primitives",     "order": 1,  "name": "Primitives",     "sequence": "primitives",         "script": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"},
 	{"id": "transformation", "order": 2,  "name": "Transformation", "sequence": "transformation",     "script": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"},
 	{"id": "chromatic",      "order": 3,  "name": "Chromatic",      "sequence": "color",              "script": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"},
@@ -41,7 +42,7 @@ const MODE_DEFS: Array[Dictionary] = [
 ]
 
 # ── State ─────────────────────────────────────────────────────────────────
-var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "off"]
+var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "off"]
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
@@ -82,6 +83,8 @@ var _edit_grabbed: Node3D = null       # artifact currently being moved
 var _edit_grab_offset: Transform3D = Transform3D.IDENTITY  # controller→artifact at grab
 var _edit_trigger_was_down: bool = false
 var _edit_highlight: MeshInstance3D = null
+var _edit_is_lab: bool = false  # lab_edit mode → net-snap lab props (0.1m in-plane)
+const LAB_SAVE_URL := "http://localhost:3003/api/labs/save"
 const EDIT_MAX_RANGE := 8.0
 const EDIT_RAY_RADIUS := 0.6  # how close to the laser line an artifact must be
 const EDIT_HOLD_DISTANCE := 1.5  # how far in front of the hand a grabbed artifact floats
@@ -183,8 +186,10 @@ func _physics_process(delta: float) -> void:
 		if _wedge_ghost:
 			_wedge_ghost.visible = false
 
-	# Artifact Edit mode — laser-grab existing artifacts, move/rotate, snap on release
-	if is_held and _cur_mode_id == "artifact_edit":
+	# Artifact Edit / Lab modes — laser-grab artifacts, move, snap on release.
+	# artifact_edit → grid (map) artifacts; lab_edit → lab props (net 0.1m snap).
+	if is_held and (_cur_mode_id == "artifact_edit" or _cur_mode_id == "lab_edit"):
+		_edit_is_lab = (_cur_mode_id == "lab_edit")
 		_update_edit_mode(delta)
 	elif _edit_target != null or _edit_grabbed != null or (_edit_highlight and _edit_highlight.visible):
 		_end_edit_mode()
@@ -221,7 +226,7 @@ func _on_controller_button(button_name: String) -> void:
 					_handle_voxel_add()
 				"wedge_placer":
 					_handle_wedge_add()
-				"artifact_edit":
+				"artifact_edit", "lab_edit":
 					pass  # grab/move handled by polling in _update_edit_mode
 				_:
 					if not _is_hand_busy():
@@ -238,6 +243,8 @@ func _on_controller_button(button_name: String) -> void:
 			match mode_id:
 				"voxel_editor", "wedge_placer", "artifact_edit":
 					_save_map()
+				"lab_edit":
+					_save_lab()
 				_:
 					_flash_label("B SAVES IN EDIT/VOXEL MODE", Color(1.0, 0.8, 0.3))
 
@@ -766,7 +773,8 @@ func _update_edit_mode(_delta: float) -> void:
 func _find_edit_target(ray_origin: Vector3, ray_dir: Vector3) -> Node3D:
 	var best: Node3D = null
 	var best_score: float = INF
-	for n in get_tree().get_nodes_in_group("vr_editable_artifact"):
+	var group_name := "vr_lab_prop" if _edit_is_lab else "vr_editable_artifact"
+	for n in get_tree().get_nodes_in_group(group_name):
 		if not (n is Node3D) or not is_instance_valid(n):
 			continue
 		var node := n as Node3D
@@ -801,6 +809,9 @@ func _edit_release() -> void:
 	var node := _edit_grabbed
 	_edit_grabbed = null
 	if not is_instance_valid(node):
+		return
+	if _edit_is_lab:
+		_edit_release_lab(node)
 		return
 	var structure := _get_edit_structure()
 	if structure == null:
@@ -886,6 +897,130 @@ func _build_edit_highlight() -> void:
 	_edit_highlight.material_override = mat
 	_edit_highlight.visible = false
 	add_child(_edit_highlight)
+
+# ── Lab net editing — props stick to their face, snap in-plane to 0.1m ───────
+
+func _edit_release_lab(node: Node3D) -> void:
+	if not is_instance_valid(node):
+		return
+	var dims_v: Vector3 = node.get_meta("lab_room_dims", Vector3(8.0, 7.0, 4.5))  # (W, D, H)
+	var rw: float = dims_v.x
+	var rd: float = dims_v.y
+	var rh: float = dims_v.z
+	# node.position is local to the lab_room (floor-centre origin) — the same
+	# frame the lab JSON stores. Classify which face it's on, then snap the two
+	# in-plane axes to 0.1m, leaving the off-face (depth) axis where you dropped it.
+	var lp: Vector3 = node.position
+	var face := _lab_classify_face(lp, rw, rd, rh)
+	node.position = _lab_snap_inplane(lp, face)
+	node.rotation = Vector3(0.0, node.rotation.y, 0.0)  # keep upright, preserve yaw
+	if not node.is_in_group("vr_lab_moved"):
+		node.add_to_group("vr_lab_moved")  # B will save it
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.5, 0.0)
+	_flash_label("MOVED  %s · %s" % [String(node.get_meta("lab_lookup", "")), face], Color(0.4, 1.0, 0.6))
+	print("[Catalyst] Lab move: %s face=%s local=%s" % [String(node.get_meta("lab_prop_id", "")), face, str(node.position)])
+
+func _lab_classify_face(p: Vector3, rw: float, rd: float, rh: float) -> String:
+	var low := 0.85
+	var near := 0.9
+	if p.y <= low:
+		return "floor"
+	if p.y >= rh - low:
+		return "ceiling"
+	var dn: float = absf(p.z + rd / 2.0)
+	var ds: float = absf(p.z - rd / 2.0)
+	var de: float = absf(p.x - rw / 2.0)
+	var dw: float = absf(p.x + rw / 2.0)
+	var best := "north"
+	var bv := dn
+	if ds < bv:
+		bv = ds
+		best = "south"
+	if de < bv:
+		bv = de
+		best = "east"
+	if dw < bv:
+		bv = dw
+		best = "west"
+	return best if bv <= near else "floating"
+
+func _lab_snap_inplane(p: Vector3, face: String) -> Vector3:
+	var q := p
+	match face:
+		"floor", "ceiling":
+			q.x = _snap01(p.x)
+			q.z = _snap01(p.z)
+		"north", "south":
+			q.x = _snap01(p.x)
+			q.y = _snap01(p.y)
+		"east", "west":
+			q.y = _snap01(p.y)
+			q.z = _snap01(p.z)
+		_:
+			q.x = _snap01(p.x)
+			q.y = _snap01(p.y)
+			q.z = _snap01(p.z)
+	return q
+
+func _snap01(v: float) -> float:
+	return round(v / 0.1) * 0.1
+
+## B in Lab mode: POST the moved lab props back to their lab JSON (by id), over
+## adb reverse, so the change lands in commons/labs/<name>.lab.json.
+func _save_lab() -> void:
+	print("[Catalyst] _save_lab() called")
+	var updates: Array = []
+	var lab_name := ""
+	for node in get_tree().get_nodes_in_group("vr_lab_moved"):
+		if not is_instance_valid(node):
+			continue
+		var pid := String(node.get_meta("lab_prop_id", ""))
+		if pid == "":
+			continue
+		if lab_name == "":
+			var jp := String(node.get_meta("lab_json_path", ""))
+			lab_name = jp.get_file().trim_suffix(".json").trim_suffix(".lab")
+		var pos: Vector3 = node.position
+		updates.append({
+			"id": pid,
+			"position": [pos.x, pos.y, pos.z],
+			"rotation_y": rad_to_deg(node.rotation.y),
+		})
+	if lab_name == "" or updates.is_empty():
+		_flash_label("NO LAB EDITS", Color(1.0, 0.5, 0.2))
+		return
+	_save_lab_over_http(lab_name, updates)
+	_flash_label("SAVING LAB  " + lab_name + " ...", Color(0.6, 0.85, 1.0))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.4, 0.0)
+
+func _save_lab_over_http(lab_name: String, updates: Array) -> void:
+	print("[Catalyst] POSTing lab '%s' (%d prop updates) -> %s" % [lab_name, updates.size(), LAB_SAVE_URL])
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(_on_lab_save_completed.bind(http))
+	var headers := PackedStringArray(["Content-Type: application/json"])
+	var payload := {"name": lab_name, "propUpdates": updates}
+	http.set_meta("lab_name", lab_name)
+	var err := http.request(LAB_SAVE_URL, headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
+	if err != OK:
+		http.queue_free()
+		_flash_label("POST FAILED: %s" % error_string(err), Color(1.0, 0.3, 0.3))
+
+func _on_lab_save_completed(result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray, http: HTTPRequest) -> void:
+	var ln := String(http.get_meta("lab_name", ""))
+	http.queue_free()
+	if result == HTTPRequest.RESULT_SUCCESS and response_code >= 200 and response_code < 300:
+		_flash_label("LAB SAVED -> PC  " + ln, Color(0.4, 1.0, 0.6))
+		if controller:
+			controller.trigger_haptic_pulse("haptic", 0.0, 0.2, 0.6, 0.0)
+	else:
+		var hint := ""
+		if result == HTTPRequest.RESULT_CANT_CONNECT:
+			hint = "  (adb reverse tcp:3003 tcp:3003)"
+		_flash_label("LAB SAVE FAILED %d/%d%s" % [result, response_code, hint], Color(1.0, 0.35, 0.35))
+		push_warning("[Catalyst] lab save HTTP failed result=%d code=%d" % [result, response_code])
 
 
 func _voxel_save() -> void:
