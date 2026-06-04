@@ -53,10 +53,22 @@ var _status_msg: String = ""             # transient HUD line (e.g. "saved")
 var _accrual: Node = null
 var _host: Node3D = null
 var _camera: Camera3D = null
-var _hud: Label = null
+var _hud: Label = null               # error overlay only (normal info → labels below)
 var _perf: Label = null
+var _perf_panel: PanelContainer = null
 var _panel: VBoxContainer = null
 var _panel_root: Control = null
+# Header labels (replace the old single cramped multi-line label).
+var _title_lbl: Label = null
+var _stage_big: Label = null
+var _seq_lbl: Label = null
+var _truth_lbl: Label = null
+var _controls_lbl: Label = null
+var _toast_lbl: Label = null
+# Stage timeline — the signature "scrubber" widget: 19 ticks, filled to the
+# current stage. Built once, recoloured on every stage change.
+var _timeline: HBoxContainer = null
+var _tick_rects: Array = []          # Array[ColorRect], one per stage 1..MAX
 var _stage: int = 1
 var _orbit_yaw: float = 0.6
 var _orbit_pitch: float = -0.45
@@ -336,48 +348,121 @@ func _save_overrides() -> void:
 
 # ── HUD + side panel ──────────────────────────────────────────────────
 func _update_hud() -> void:
+	if _stage_big == null:
+		return
 	var seq_name := _seq_of_kind_for_stage()
 	var truth := _truth_for_stage()
 	var on := 0
 	for k in _active_kinds:
 		if not _disabled.has(k): on += 1
-	var lines := []
-	var where := "map: %s (%d×%d)" % [_loaded_map, grid_w, grid_d] if _loaded_map != "" else "synthetic %d×%d" % [grid_w, grid_d]
-	lines.append("BIOME SCRUBBER   stage %d / %d   [ %s ]   layers %d/%d on   %s" % [
-		_stage, MAX_STAGE, seq_name, on, _active_kinds.size(), where])
-	if truth != "":
-		lines.append("“%s”" % truth)
-	var save_hint := "  W save→map" if _loaded_map != "" else ""
-	lines.append("] step  ↑↓ select  Space toggle  S solo  A all  R reset%s  Tab panel" % save_hint)
-	if _status_msg != "":
-		lines.append(_status_msg)
-	_set_hud("\n".join(lines))
+	# Big stage readout.
+	_stage_big.text = "STAGE %d · LAB" % _stage if _stage > MAX_STAGE else "STAGE %d / %d" % [_stage, MAX_STAGE]
+	# Context line: sequence · layers on · where.
+	var where := "%s  %d×%d" % [_loaded_map, grid_w, grid_d] if _loaded_map != "" else "synthetic  %d×%d" % [grid_w, grid_d]
+	var seq_show := seq_name if seq_name != "?" else "—"
+	_seq_lbl.text = "%s    ·    %d/%d layers on    ·    %s" % [seq_show, on, _active_kinds.size(), where]
+	# Truth quote.
+	_truth_lbl.text = ("“%s”" % truth) if truth != "" else ""
+	# Controls footer.
+	var save_hint := "      W save→map" if _loaded_map != "" else ""
+	_controls_lbl.text = "[ / ]  stage      ↑ ↓  select      Space  toggle      S  solo      A  all      R  reset      Tab  panel%s" % save_hint
+	# Transient toast.
+	_toast_lbl.text = _status_msg
+	_recolor_timeline()
+
+
+## Colour the 19 timeline ticks: past = teal, current = gold, future = dim.
+func _recolor_timeline() -> void:
+	if _tick_rects.is_empty():
+		return
+	var cur := clampi(_stage, MIN_STAGE, MAX_STAGE)
+	for i in range(_tick_rects.size()):
+		var s := i + MIN_STAGE
+		var rect: ColorRect = _tick_rects[i]
+		if s == cur:
+			rect.color = C_GOLD
+		elif s < cur:
+			rect.color = C_ACCENT
+		else:
+			rect.color = Color(0.20, 0.23, 0.29, 0.9)
+
+
+## A readable colour family per layer, grouped by what the layer spawns —
+## so the inspector dots visually map to the kingdoms on screen.
+func _kind_color(kind: String) -> Color:
+	match kind:
+		"floating_primitives", "floating_points", "animated_primitives":
+			return Color(0.55, 0.70, 1.0)    # abstract — blue
+		"color_tint":
+			return Color(0.90, 0.62, 1.0)    # spectrum — violet
+		"force_field", "lattice_snap", "wave_displace", "jitter_seed", "noise_dust":
+			return Color(0.66, 0.78, 0.94)   # field transforms — pale blue
+		"ca_surface":
+			return Color(0.80, 0.55, 0.95)   # fungus/CA — purple
+		"fractal_bloom", "softbody_flora":
+			return Color(1.0, 0.55, 0.76)    # flower — pink
+		"lsystem_trees", "ground_ring":
+			return Color(0.45, 0.85, 0.50)   # tree/ground — green
+		"dna_creatures", "swarm_creatures", "adaptive_behavior":
+			return Color(1.0, 0.70, 0.36)    # creatures — orange
+		"paradox_zones", "tunable_field", "critical_overlay", "graph_connections", "biome_paint_dispatcher":
+			return Color(0.55, 0.92, 0.95)   # qfep/late — teal
+	return Color(0.60, 0.63, 0.70)
 
 
 func _refresh_panel() -> void:
 	if _panel == null: return
 	for c in _panel.get_children():
 		c.queue_free()
-	var title := Label.new()
-	title.text = "LAYERS (↑↓ select · Space toggle · S solo)"
-	title.add_theme_font_size_override("font_size", 12)
-	title.add_theme_color_override("font_color", Color(0.7, 0.75, 0.85))
-	_panel.add_child(title)
+	_mk_label(_panel, "LAYERS", 13, C_ACCENT)
+	_mk_label(_panel, "↑↓ select · Space toggle · S solo", 11, C_DIM)
+	var spacer := Control.new()
+	spacer.custom_minimum_size = Vector2(0, 4)
+	_panel.add_child(spacer)
+
 	for i in range(_active_kinds.size()):
 		var k: String = _active_kinds[i]
-		var row := Label.new()
 		var order: int = _order_of_kind.get(k, 0)
 		var seq: String = _seq_of_kind.get(k, "")
-		var mark := "▶ " if i == _selected else "  "
-		var state := "·" if _disabled.has(k) else "●"
-		row.text = "%s%s %02d %s" % [mark, state, order, k]
-		row.add_theme_font_size_override("font_size", 13)
-		var col := Color(0.45, 0.47, 0.52) if _disabled.has(k) else Color(0.9, 0.94, 1.0)
-		if i == _selected:
-			col = Color(1.0, 0.78, 0.35)
-		row.add_theme_color_override("font_color", col)
-		row.tooltip_text = seq
-		_panel.add_child(row)
+		var off := _disabled.has(k)
+		var sel := (i == _selected)
+
+		# Row wrapper — selected row gets a faint gold highlight bar.
+		var rowp := PanelContainer.new()
+		var rsb := StyleBoxFlat.new()
+		rsb.bg_color = Color(1.0, 0.78, 0.35, 0.15) if sel else Color(0, 0, 0, 0)
+		rsb.content_margin_left = 6; rsb.content_margin_right = 6
+		rsb.content_margin_top = 3;  rsb.content_margin_bottom = 3
+		if sel:
+			rsb.corner_radius_top_left = 4; rsb.corner_radius_top_right = 4
+			rsb.corner_radius_bottom_left = 4; rsb.corner_radius_bottom_right = 4
+		rowp.add_theme_stylebox_override("panel", rsb)
+		rowp.tooltip_text = seq
+		_panel.add_child(rowp)
+
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 9)
+		rowp.add_child(row)
+
+		# Kingdom colour dot (dimmed when the layer is off).
+		var dot := ColorRect.new()
+		dot.custom_minimum_size = Vector2(10, 10)
+		dot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		var kc := _kind_color(k)
+		dot.color = kc if not off else Color(kc.r, kc.g, kc.b, 0.25)
+		row.add_child(dot)
+
+		# Order badge.
+		_mk_label(row, "%02d" % order, 12, C_DIM)
+
+		# Layer name — fills, gold when selected, dim when off.
+		var nm := _mk_label(row, k, 13, C_DIM if off else C_TEXT)
+		if sel:
+			nm.add_theme_color_override("font_color", C_GOLD)
+		nm.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+		# On/off state pill.
+		_mk_label(row, "ON" if not off else "off", 11, C_GOOD if not off else C_DIM)
 
 
 func _seq_of_kind_for_stage() -> String:
@@ -465,7 +550,12 @@ func _process(delta: float) -> void:
 		var dc := int(Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME))
 		var obj := int(Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME))
 		var prim := int(Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME))
-		_perf.text = "draw calls: %d   objects: %d   prims: %s" % [dc, obj, _commafy(prim)]
+		_perf.text = "▮ %s draw calls     %s objects     %s prims" % [_commafy(dc), _commafy(obj), _commafy(prim)]
+		# Threshold colour — VR wants low draw calls, so flag heavy stages.
+		var col := C_GOOD
+		if dc >= 200: col = C_BAD
+		elif dc >= 80: col = C_WARN
+		_perf.add_theme_color_override("font_color", col)
 	if _capture_frames > 0:
 		_capture_frames -= 1
 		if _capture_frames == 0:
@@ -521,46 +611,136 @@ func _build_camera() -> void:
 	add_child(_camera)
 
 
+## Palette — one place so the whole HUD reads as a designed surface.
+const C_BG       := Color(0.05, 0.06, 0.09, 0.86)
+const C_BG_SOFT  := Color(0.08, 0.10, 0.14, 0.78)
+const C_ACCENT   := Color(0.42, 0.86, 0.95)   # teal — brand
+const C_TEXT     := Color(0.93, 0.96, 1.0)
+const C_DIM      := Color(0.58, 0.63, 0.72)
+const C_GOLD     := Color(1.0, 0.78, 0.35)    # selection
+const C_GOOD     := Color(0.50, 0.95, 0.62)
+const C_WARN     := Color(1.0, 0.80, 0.35)
+const C_BAD      := Color(1.0, 0.45, 0.42)
+const PANEL_W    := 332.0
+const BAR_H      := 128.0
+
+
+func _new_stylebox(bg: Color, accent_border_bottom := 0.0, radius := 0.0) -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = bg
+	sb.content_margin_left = 12; sb.content_margin_right = 12
+	sb.content_margin_top = 9;  sb.content_margin_bottom = 9
+	if radius > 0.0:
+		sb.corner_radius_top_left = int(radius); sb.corner_radius_top_right = int(radius)
+		sb.corner_radius_bottom_left = int(radius); sb.corner_radius_bottom_right = int(radius)
+	if accent_border_bottom > 0.0:
+		sb.border_width_bottom = int(accent_border_bottom)
+		sb.border_color = C_ACCENT
+	return sb
+
+
+func _mk_label(parent: Node, txt: String, size: int, col: Color, pos := Vector2.ZERO) -> Label:
+	var l := Label.new()
+	l.text = txt
+	l.position = pos
+	l.add_theme_font_size_override("font_size", size)
+	l.add_theme_color_override("font_color", col)
+	parent.add_child(l)
+	return l
+
+
 func _build_ui() -> void:
 	var layer := CanvasLayer.new()
 	layer.name = "HUD"
 	add_child(layer)
-	# Top status bar.
-	var bar := ColorRect.new()
-	bar.color = Color(0, 0, 0, 0.45)
+
+	# ── Top bar ───────────────────────────────────────────────────────
+	var bar := Panel.new()
 	bar.anchor_right = 1.0
-	bar.offset_bottom = 64.0
+	bar.offset_bottom = BAR_H
+	bar.add_theme_stylebox_override("panel", _new_stylebox(C_BG, 2.0))
+	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	layer.add_child(bar)
-	_hud = Label.new()
-	_hud.position = Vector2(16, 8)
-	_hud.add_theme_font_size_override("font_size", 15)
-	_hud.add_theme_color_override("font_color", Color(0.92, 0.95, 1.0))
-	layer.add_child(_hud)
-	# Live perf readout (bottom-left) — draw calls + object count this
-	# frame. The whole point of a perf tool: see the cost as you scrub.
+
+	# Brand (top-left) + context (top-right, right-aligned clear of the panel).
+	_title_lbl = _mk_label(layer, "◆  BIOME  SCRUBBER", 12, C_ACCENT, Vector2(20, 11))
+	_seq_lbl = _mk_label(layer, "", 13, C_DIM, Vector2(0, 11))
+	_seq_lbl.anchor_right = 1.0
+	_seq_lbl.offset_right = -(PANEL_W + 24.0)
+	_seq_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	# Big stage readout, its own row below the brand.
+	_stage_big = _mk_label(layer, "STAGE 1", 28, C_TEXT, Vector2(18, 30))
+
+	# Stage timeline — 19 ticks filling the bar width, recoloured per stage.
+	_timeline = HBoxContainer.new()
+	_timeline.anchor_right = 1.0
+	_timeline.offset_left = 20.0
+	_timeline.offset_right = -20.0
+	_timeline.offset_top = 74.0
+	_timeline.offset_bottom = 90.0
+	_timeline.add_theme_constant_override("separation", 3)
+	_timeline.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(_timeline)
+	_tick_rects.clear()
+	for i in range(MIN_STAGE, MAX_STAGE + 1):
+		var tick := ColorRect.new()
+		tick.custom_minimum_size = Vector2(0, 14)
+		tick.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		tick.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_timeline.add_child(tick)
+		_tick_rects.append(tick)
+
+	# Truth quote — dim line INSIDE the bar (so it stays readable over a bright
+	# biome), below the timeline, spanning nearly the full width.
+	_truth_lbl = _mk_label(layer, "", 14, C_DIM, Vector2(20, 96))
+	_truth_lbl.anchor_right = 1.0
+	_truth_lbl.offset_right = -24.0
+	_truth_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+
+	# Controls footer — dim, bottom strip.
+	_controls_lbl = _mk_label(layer, "", 13, C_DIM)
+	_controls_lbl.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	_controls_lbl.offset_left = 20.0
+	_controls_lbl.offset_top = -26.0
+
+	# Transient toast (e.g. "✓ saved") — near the footer, gold.
+	_toast_lbl = _mk_label(layer, "", 14, C_GOLD)
+	_toast_lbl.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	_toast_lbl.offset_left = 20.0
+	_toast_lbl.offset_top = -48.0
+
+	# ── Live perf readout (bottom-left panel) ─────────────────────────
+	# The point of a perf tool: see the cost as you scrub. Draw calls are
+	# threshold-coloured (green/amber/red) so a heavy stage is obvious.
+	_perf_panel = PanelContainer.new()
+	_perf_panel.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+	_perf_panel.offset_left = 14.0
+	_perf_panel.offset_top = -84.0
+	_perf_panel.add_theme_stylebox_override("panel", _new_stylebox(C_BG_SOFT, 0.0, 6.0))
+	_perf_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(_perf_panel)
 	_perf = Label.new()
-	_perf.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
-	_perf.position = Vector2(16, -28)
 	_perf.add_theme_font_size_override("font_size", 14)
-	_perf.add_theme_color_override("font_color", Color(0.6, 1.0, 0.7))
-	layer.add_child(_perf)
-	# Right-side layer panel.
+	_perf.add_theme_color_override("font_color", C_GOOD)
+	_perf_panel.add_child(_perf)
+
+	# ── Right-side layer panel ────────────────────────────────────────
 	_panel_root = PanelContainer.new()
 	_panel_root.anchor_left = 1.0
 	_panel_root.anchor_right = 1.0
 	_panel_root.anchor_top = 0.0
-	_panel_root.offset_left = -320.0
-	_panel_root.offset_top = 72.0
+	_panel_root.offset_left = -(PANEL_W + 8.0)
+	_panel_root.offset_top = BAR_H + 8.0
 	_panel_root.offset_right = -8.0
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0, 0, 0, 0.5)
-	sb.content_margin_left = 10; sb.content_margin_right = 10
-	sb.content_margin_top = 8; sb.content_margin_bottom = 8
-	_panel_root.add_theme_stylebox_override("panel", sb)
+	_panel_root.add_theme_stylebox_override("panel", _new_stylebox(C_BG, 0.0, 8.0))
 	layer.add_child(_panel_root)
 	_panel = VBoxContainer.new()
-	_panel.add_theme_constant_override("separation", 2)
+	_panel.add_theme_constant_override("separation", 3)
 	_panel_root.add_child(_panel)
+
+	# Error overlay label (normally hidden) — used only when an autoload
+	# is missing, before the info labels have anything to show.
+	_hud = _mk_label(layer, "", 15, C_BAD, Vector2(20, BAR_H + 8))
 
 
 # ── Headless capture ─────────────────────────────────────────────────
