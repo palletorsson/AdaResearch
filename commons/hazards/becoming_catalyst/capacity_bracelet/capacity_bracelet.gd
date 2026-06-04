@@ -40,6 +40,7 @@ var _catalyst: Node = null  # BecomingCatalyst reference
 var _controller: XRController3D = null
 var _unlocked_modes: Array = []  # Array of String mode IDs
 var _current_mode_index: int = 0
+var _target_mode_index: int = 0  # where the hinge points; stones walk here one at a time
 
 # Scene nodes
 var _ring_mesh: MeshInstance3D = null
@@ -90,9 +91,12 @@ func _process(delta: float) -> void:
 	# Pulse active gem
 	_pulse_active_gem(delta)
 
-	# Mode switch cooldown
+	# Mode switch cooldown — and walk one stone at a time toward where the hinge
+	# was turned, so the stones never spin through several modes at once.
 	if _mode_switch_cooldown > 0.0:
 		_mode_switch_cooldown -= delta
+	elif _target_mode_index != _current_mode_index and _unlocked_modes.size() > 1:
+		_advance_one_mode_step()
 
 	# Fade label timer
 	if _label_timer > 0.0:
@@ -123,6 +127,7 @@ func activate(modes: Array, controller: XRController3D, animate: bool = true, al
 			_all_display_modes.append(str(m))
 
 	_current_mode_index = clampi(_current_mode_index, 0, maxi(0, _unlocked_modes.size() - 1))
+	_target_mode_index = _current_mode_index
 
 	# Build gems for ALL modes (dim locked ones)
 	_rebuild_gems()
@@ -168,6 +173,7 @@ func sync_to_mode(index: int) -> void:
 	if index == _current_mode_index:
 		return
 	_current_mode_index = clampi(index, 0, maxi(0, _unlocked_modes.size() - 1))
+	_target_mode_index = _current_mode_index  # external set — don't auto-step
 	_highlight_current_gem()
 	_show_mode_label()
 
@@ -544,41 +550,42 @@ func _on_hinge_moved(angle: float) -> void:
 	var count := _unlocked_modes.size()
 	if count <= 1:
 		return
-	if _mode_switch_cooldown > 0.0:
-		return
-
-	# As gems rotate with the hinge, the gem at the "top" (angle=0 in world)
-	# is the one whose initial angle + hinge rotation ≈ 0 (mod TAU).
-	# Each gem i was placed at angle = (TAU/count)*i.
-	# After hinge rotation of `angle` degrees, gem i is now at:
-	#   effective_angle = (TAU/count)*i + deg_to_rad(angle)
-	# The gem closest to the top (angle 0) is selected.
+	# Record where the hinge points; _process walks the stones there one at a
+	# time (one per cooldown), so turning the hinge never spins through modes.
 	var step_deg := 360.0 / count
 	var raw_step := int(round(-angle / step_deg))  # Negative because rotation is opposite
-	var step_index := ((raw_step % count) + count) % count
+	_target_mode_index = ((raw_step % count) + count) % count
 
-	if step_index == _last_hinge_step:
+## Move the selection ONE stone toward the hinge target, then arm the cooldown.
+func _advance_one_mode_step() -> void:
+	var count := _unlocked_modes.size()
+	var dir := _shortest_ring_dir(_current_mode_index, _target_mode_index, count)
+	if dir == 0:
 		return
-
+	_current_mode_index = ((_current_mode_index + dir) % count + count) % count
+	_last_hinge_step = _current_mode_index
 	_mode_switch_cooldown = MODE_SWITCH_COOLDOWN
-	_last_hinge_step = step_index
-	_current_mode_index = step_index
 
-	# Update catalyst via its public API
 	if _catalyst and _catalyst.has_method("set_mode_index"):
 		_catalyst.set_mode_index(_current_mode_index)
 
 	_highlight_current_gem()
 	_show_mode_label()
 
-	# Haptic snap
 	if _controller:
 		_controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
 
 	if _current_mode_index < _unlocked_modes.size():
 		bracelet_mode_selected.emit(str(_unlocked_modes[_current_mode_index]))
 
-	print("[Bracelet] Rotated to mode: %s" % str(_unlocked_modes[_current_mode_index]))
+	print("[Bracelet] Stepped to mode: %s" % str(_unlocked_modes[_current_mode_index]))
+
+## Shortest direction (+1 / -1) around a ring of `count` from→to, 0 if equal.
+func _shortest_ring_dir(from_index: int, to_index: int, count: int) -> int:
+	var diff := ((to_index - from_index) % count + count) % count
+	if diff == 0:
+		return 0
+	return 1 if diff * 2 <= count else -1
 
 # ═══════════════════════════════════════════════════════════════════════════
 # HANDLE GUARD — Prevent bracelet hand from grabbing its own bracelet
