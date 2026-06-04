@@ -83,7 +83,9 @@ var _edit_grabbed: Node3D = null       # artifact currently being moved
 var _edit_grab_offset: Transform3D = Transform3D.IDENTITY  # controller→artifact at grab
 var _edit_trigger_was_down: bool = false
 var _edit_highlight: MeshInstance3D = null
-var _edit_is_lab: bool = false  # lab_edit mode → net-snap lab props (0.1m in-plane)
+var _edit_is_lab: bool = false  # lab_edit mode → surface-magnetism for lab props
+var _lab_surfaces: Array = []   # cached other-prop tops (room-local) for table-stacking
+const LAB_SNAP_DIST := 0.25     # m: within this of a surface, the prop sticks flush
 const LAB_SAVE_URL := "http://localhost:3003/api/labs/save"
 const EDIT_MAX_RANGE := 8.0
 const EDIT_RAY_RADIUS := 0.6  # how close to the laser line an artifact must be
@@ -754,8 +756,11 @@ func _update_edit_mode(_delta: float) -> void:
 	var trig_down: bool = controller.is_button_pressed("trigger_click")
 
 	if is_instance_valid(_edit_grabbed):
-		# Move/rotate: the artifact rigidly follows the hand at the hold offset.
+		# Move: rigid follow. Lab props also magnetise — when near a wall/floor/
+		# ceiling/prop-top they stick flush; otherwise they move freely.
 		_edit_grabbed.global_transform = controller.global_transform * _edit_grab_offset
+		if _edit_is_lab:
+			_apply_lab_magnetism(_edit_grabbed)
 		_show_edit_highlight(_edit_grabbed)
 		if _edit_trigger_was_down and not trig_down:
 			_edit_release()
@@ -801,6 +806,8 @@ func _edit_grab() -> void:
 	var rel: Transform3D = controller.global_transform.affine_inverse() * _edit_grabbed.global_transform
 	rel.origin = Vector3(0.0, 0.0, -EDIT_HOLD_DISTANCE)
 	_edit_grab_offset = rel
+	if _edit_is_lab:
+		_cache_lab_surfaces(_edit_grabbed)  # snapshot other props' tops for stacking
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.4, 0.0)
 	print("[Catalyst] Edit grab: %s" % String(_edit_grabbed.get_meta("artifact_lookup_name", "?")))
@@ -903,65 +910,114 @@ func _build_edit_highlight() -> void:
 func _edit_release_lab(node: Node3D) -> void:
 	if not is_instance_valid(node):
 		return
-	var dims_v: Vector3 = node.get_meta("lab_room_dims", Vector3(8.0, 7.0, 4.5))  # (W, D, H)
-	var rw: float = dims_v.x
-	var rd: float = dims_v.y
-	var rh: float = dims_v.z
-	# node.position is local to the lab_room (floor-centre origin) — the same
-	# frame the lab JSON stores. Classify which face it's on, then snap the two
-	# in-plane axes to 0.1m, leaving the off-face (depth) axis where you dropped it.
-	var lp: Vector3 = node.position
-	var face := _lab_classify_face(lp, rw, rd, rh)
-	node.position = _lab_snap_inplane(lp, face)
+	_apply_lab_magnetism(node)  # final stick to whatever surface it's near
 	node.rotation = Vector3(0.0, node.rotation.y, 0.0)  # keep upright, preserve yaw
 	if not node.is_in_group("vr_lab_moved"):
 		node.add_to_group("vr_lab_moved")  # B will save it
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.5, 0.0)
-	_flash_label("MOVED  %s · %s" % [String(node.get_meta("lab_lookup", "")), face], Color(0.4, 1.0, 0.6))
-	print("[Catalyst] Lab move: %s face=%s local=%s" % [String(node.get_meta("lab_prop_id", "")), face, str(node.position)])
+	var stuck := bool(node.get_meta("lab_stuck", false))
+	var suffix: String = "  (stuck)" if stuck else "  (free)"
+	_flash_label("MOVED  %s%s" % [String(node.get_meta("lab_lookup", "")), suffix], Color(0.4, 1.0, 0.6))
+	print("[Catalyst] Lab move: %s local=%s stuck=%s" % [String(node.get_meta("lab_prop_id", "")), str(node.position), str(stuck)])
 
-func _lab_classify_face(p: Vector3, rw: float, rd: float, rh: float) -> String:
-	var low := 0.85
-	var near := 0.9
-	if p.y <= low:
-		return "floor"
-	if p.y >= rh - low:
-		return "ceiling"
-	var dn: float = absf(p.z + rd / 2.0)
-	var ds: float = absf(p.z - rd / 2.0)
-	var de: float = absf(p.x - rw / 2.0)
-	var dw: float = absf(p.x + rw / 2.0)
-	var best := "north"
-	var bv := dn
-	if ds < bv:
-		bv = ds
-		best = "south"
-	if de < bv:
-		bv = de
-		best = "east"
-	if dw < bv:
-		bv = dw
-		best = "west"
-	return best if bv <= near else "floating"
+## Surface magnetism: a held lab prop moves freely, but within LAB_SNAP_DIST of a
+## wall / floor / ceiling (or the top of another prop) it sticks flush to that
+## surface, gridded to 0.1m along it. Pull it away to un-stick. Works in the
+## lab_room's local frame (prop positions are room-local).
+func _apply_lab_magnetism(node: Node3D) -> void:
+	var dims_v: Vector3 = node.get_meta("lab_room_dims", Vector3(8.0, 7.0, 4.5))
+	var rw: float = dims_v.x
+	var rd: float = dims_v.y
+	var rh: float = dims_v.z
+	var p: Vector3 = node.position
+	var s: Vector3 = p
+	var stuck := false
+	# floor / ceiling
+	if p.y <= LAB_SNAP_DIST:
+		s.y = 0.0
+		stuck = true
+	elif p.y >= rh - LAB_SNAP_DIST:
+		s.y = rh
+		stuck = true
+	# walls
+	if absf(p.x - rw / 2.0) <= LAB_SNAP_DIST:
+		s.x = rw / 2.0
+		stuck = true
+	elif absf(p.x + rw / 2.0) <= LAB_SNAP_DIST:
+		s.x = -rw / 2.0
+		stuck = true
+	if absf(p.z - rd / 2.0) <= LAB_SNAP_DIST:
+		s.z = rd / 2.0
+		stuck = true
+	elif absf(p.z + rd / 2.0) <= LAB_SNAP_DIST:
+		s.z = -rd / 2.0
+		stuck = true
+	# table — stick on top of another prop the held one is hovering over
+	for surf in _lab_surfaces:
+		if absf(p.x - surf["cx"]) <= surf["hx"] + 0.1 and absf(p.z - surf["cz"]) <= surf["hz"] + 0.1:
+			if absf(p.y - surf["top"]) <= LAB_SNAP_DIST and p.y >= surf["top"] - 0.05:
+				s.y = surf["top"]
+				stuck = true
+				break
+	if stuck:
+		s.x = _snap01(s.x)
+		s.y = _snap01(s.y)
+		s.z = _snap01(s.z)
+	node.position = s
+	node.set_meta("lab_stuck", stuck)
 
-func _lab_snap_inplane(p: Vector3, face: String) -> Vector3:
-	var q := p
-	match face:
-		"floor", "ceiling":
-			q.x = _snap01(p.x)
-			q.z = _snap01(p.z)
-		"north", "south":
-			q.x = _snap01(p.x)
-			q.y = _snap01(p.y)
-		"east", "west":
-			q.y = _snap01(p.y)
-			q.z = _snap01(p.z)
-		_:
-			q.x = _snap01(p.x)
-			q.y = _snap01(p.y)
-			q.z = _snap01(p.z)
-	return q
+## Snapshot the OTHER lab props' tops + footprints (room-local) so the held prop
+## can stick on them (tables). Assumes the lab_room is axis-aligned in the world.
+func _cache_lab_surfaces(grabbed: Node3D) -> void:
+	_lab_surfaces.clear()
+	var room := grabbed.get_parent()
+	if not (room is Node3D):
+		return
+	var room_origin: Vector3 = (room as Node3D).global_position
+	for n in get_tree().get_nodes_in_group("vr_lab_prop"):
+		if n == grabbed or not is_instance_valid(n) or not (n is Node3D):
+			continue
+		var g := _global_aabb(n as Node3D)
+		if g.size.y <= 0.001:
+			continue
+		_lab_surfaces.append({
+			"cx": g.position.x + g.size.x * 0.5 - room_origin.x,
+			"cz": g.position.z + g.size.z * 0.5 - room_origin.z,
+			"hx": g.size.x * 0.5,
+			"hz": g.size.z * 0.5,
+			"top": g.position.y + g.size.y - room_origin.y,
+		})
+
+## World-space AABB of a node's visible meshes.
+func _global_aabb(node: Node3D) -> AABB:
+	var result := AABB()
+	var first := true
+	var stack: Array = [node]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		if n is VisualInstance3D:
+			var vi := n as VisualInstance3D
+			var a: AABB = vi.get_aabb()
+			if a.size.length() > 0.0001:
+				var gt: Transform3D = vi.global_transform
+				for i in 8:
+					var c: Vector3 = a.position
+					if i & 1:
+						c.x += a.size.x
+					if i & 2:
+						c.y += a.size.y
+					if i & 4:
+						c.z += a.size.z
+					var wc: Vector3 = gt * c
+					if first:
+						result = AABB(wc, Vector3.ZERO)
+						first = false
+					else:
+						result = result.expand(wc)
+		for ch in n.get_children():
+			stack.append(ch)
+	return result
 
 func _snap01(v: float) -> float:
 	return round(v / 0.1) * 0.1
