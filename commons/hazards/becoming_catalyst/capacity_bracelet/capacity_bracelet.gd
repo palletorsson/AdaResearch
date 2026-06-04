@@ -59,13 +59,18 @@ var _active := false
 var _mode_switch_cooldown: float = 0.0
 const MODE_SWITCH_COOLDOWN := 0.3  # gate after each jog-step so a fast turn can't spin
 
-# Jog-wheel rotation: turning the hinge a bit in a direction steps ONE stone,
-# regardless of absolute angle — so every stone is equally reachable and you
-# stop exactly where you want (no detents pulling you to fixed positions).
-var _hinge_last_angle: float = 0.0
-var _hinge_accum: float = 0.0
-const HINGE_STEP_DEG := 26.0  # rotate this far to advance one stone
 const BRACELET_SCALE := 1.5   # overall size — bigger = easier to grab + read
+
+# Touch-to-cycle: bring the OTHER hand near the bracelet and the stones advance
+# one by one with a short delay; the closer to the centre, the faster. Pull the
+# hand away to stop on the current stone. No rotation, no detents — the absolute
+# position of a stone in the ring no longer matters.
+var _touch_cycle_accum: float = 0.0
+var _touch_active: bool = false
+const TOUCH_RADIUS := 0.17        # m: other hand within this of bracelet centre = touching
+const TOUCH_INNER := 0.05         # m: at/under this counts as "centre" (fastest)
+const CYCLE_INTERVAL_FAST := 0.13 # s between stones near the centre
+const CYCLE_INTERVAL_SLOW := 0.55 # s between stones at the rim
 
 # ── Signals ────────────────────────────────────────────────────────────────
 
@@ -99,7 +104,11 @@ func _process(delta: float) -> void:
 	# Pulse active gem
 	_pulse_active_gem(delta)
 
-	# Mode switch cooldown (jog-wheel steps directly in _on_hinge_moved)
+	# Touch-to-cycle: the other hand near the bracelet auto-advances the stones
+	# one by one; closer to the centre cycles faster. Pull away to stop.
+	_update_touch_cycle(delta)
+
+	# Mode switch cooldown (unused by touch-cycle; kept for any external nudge)
 	if _mode_switch_cooldown > 0.0:
 		_mode_switch_cooldown -= delta
 
@@ -178,10 +187,8 @@ func sync_to_mode(index: int) -> void:
 	if index == _current_mode_index:
 		return
 	_current_mode_index = clampi(index, 0, maxi(0, _unlocked_modes.size() - 1))
-	# The gems show the selection; with the jog-wheel the hinge is a relative
-	# input device, so we DON'T move it here (moving it would fire hinge_moved
-	# and jog a spurious step). Just keep the jog accumulator from drifting.
-	_hinge_accum = 0.0
+	# The gems show the selection; the hinge isn't used to select anymore, so we
+	# don't move it here.
 	_highlight_current_gem()
 	_show_mode_label()
 
@@ -538,41 +545,62 @@ func _pulse_active_gem(_delta: float) -> void:
 func _update_hinge_steps() -> void:
 	if not _hinge:
 		return
-	# Free rotation — no detents. The jog-wheel in _on_hinge_moved does the
-	# stepping (one stone per HINGE_STEP_DEG of turn), which is what makes every
-	# stone equally reachable instead of pinned to a fixed angle.
+	# Free rotation, no detents — selection is touch-to-cycle now, not rotation.
 	_hinge.set("hinge_steps", 0.0)
 	_last_hinge_step = _current_mode_index
-	_hinge_last_angle = 0.0
-	_hinge_accum = 0.0
 
-func _on_hinge_moved(angle: float) -> void:
+## Rotation no longer selects — selection is touch-to-cycle (_update_touch_cycle).
+func _on_hinge_moved(_angle: float) -> void:
+	pass
+
+## Touch-to-cycle: while the other hand is within TOUCH_RADIUS of the bracelet
+## centre, advance one stone every `interval`, where `interval` shrinks the
+## closer the hand is to the centre. Pull the hand away to stop.
+func _update_touch_cycle(delta: float) -> void:
 	if _unlocked_modes.size() <= 1:
 		return
-	# Jog-wheel: accumulate the turn since the last step; once you've turned
-	# HINGE_STEP_DEG in a direction, advance ONE stone and reset. Absolute angle
-	# doesn't matter, so no stone is "easier" by where it sits in the circle, and
-	# you stop exactly on the one you want.
-	var d: float = angle - _hinge_last_angle
-	_hinge_last_angle = angle
-	if _mode_switch_cooldown > 0.0:
-		return  # ignore input mid-cooldown (anti-spin); last_angle still tracked
-	_hinge_accum += d
-	if _hinge_accum >= HINGE_STEP_DEG:
-		_hinge_accum = 0.0
+	var other := _get_other_controller()
+	if other == null:
+		_touch_active = false
+		_touch_cycle_accum = 0.0
+		return
+	var r: float = other.global_position.distance_to(global_position)
+	if r > TOUCH_RADIUS:
+		_touch_active = false
+		_touch_cycle_accum = 0.0
+		return
+	# touching — interval by radius (near centre = fast, rim = slow)
+	var t: float = clampf((r - TOUCH_INNER) / maxf(TOUCH_RADIUS - TOUCH_INNER, 0.001), 0.0, 1.0)
+	var interval: float = lerpf(CYCLE_INTERVAL_FAST, CYCLE_INTERVAL_SLOW, t)
+	if not _touch_active:
+		_touch_active = true
+		_touch_cycle_accum = interval  # step on first contact for responsiveness
+	_touch_cycle_accum += delta
+	if _touch_cycle_accum >= interval:
+		_touch_cycle_accum = 0.0
 		_step_mode(1)
-	elif _hinge_accum <= -HINGE_STEP_DEG:
-		_hinge_accum = 0.0
-		_step_mode(-1)
 
-## Advance the selection by one stone (dir = +1 / -1, wrapping), arm the cooldown.
+## The hand that is NOT wearing the bracelet (the one that touches it).
+func _get_other_controller() -> XRController3D:
+	if not is_instance_valid(_controller):
+		return null
+	var origin: Node = _controller.get_parent()
+	while origin and not (origin is XROrigin3D):
+		origin = origin.get_parent()
+	if origin == null:
+		return null
+	for c in origin.find_children("*", "XRController3D", true, false):
+		if c != _controller and c is XRController3D and (c as XRController3D).get_is_active():
+			return c as XRController3D
+	return null
+
+## Advance the selection by one stone (dir = +1 / -1, wrapping).
 func _step_mode(dir: int) -> void:
 	var count := _unlocked_modes.size()
 	if count <= 1:
 		return
 	_current_mode_index = ((_current_mode_index + dir) % count + count) % count
 	_last_hinge_step = _current_mode_index
-	_mode_switch_cooldown = MODE_SWITCH_COOLDOWN
 
 	if _catalyst and _catalyst.has_method("set_mode_index"):
 		_catalyst.set_mode_index(_current_mode_index)
@@ -581,12 +609,12 @@ func _step_mode(dir: int) -> void:
 	_show_mode_label()
 
 	if _controller:
-		_controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.25, 0.0)  # crisp detent tick
+		_controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.25, 0.0)  # crisp tick per stone
 
 	if _current_mode_index < _unlocked_modes.size():
 		bracelet_mode_selected.emit(str(_unlocked_modes[_current_mode_index]))
 
-	print("[Bracelet] Jog -> mode: %s" % str(_unlocked_modes[_current_mode_index]))
+	print("[Bracelet] Cycle -> mode: %s" % str(_unlocked_modes[_current_mode_index]))
 
 # ═══════════════════════════════════════════════════════════════════════════
 # HANDLE GUARD — Prevent bracelet hand from grabbing its own bracelet
