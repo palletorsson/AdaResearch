@@ -27,6 +27,7 @@ class_name BecomingCatalyst
 const MODE_DEFS: Array[Dictionary] = [
 	{"id": "voxel_editor",   "order": 0,  "name": "Voxel Editor",   "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_voxel_editor.gd"},
 	{"id": "wedge_placer",   "order": 0,  "name": "Wedge Placer",  "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_wedge_placer.gd"},
+	{"id": "artifact_edit",  "order": 0,  "name": "Edit",           "sequence": "",                   "script": ""},
 	{"id": "primitives",     "order": 1,  "name": "Primitives",     "sequence": "primitives",         "script": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"},
 	{"id": "transformation", "order": 2,  "name": "Transformation", "sequence": "transformation",     "script": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"},
 	{"id": "chromatic",      "order": 3,  "name": "Chromatic",      "sequence": "color",              "script": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"},
@@ -40,7 +41,7 @@ const MODE_DEFS: Array[Dictionary] = [
 ]
 
 # ── State ─────────────────────────────────────────────────────────────────
-var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "off"]
+var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "off"]
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
@@ -74,6 +75,16 @@ var _xr_origin: XROrigin3D = null
 var _placed_wedges: Array[Dictionary] = []  # {node, grid_x, grid_z, direction}
 var _wedge_ghost: MeshInstance3D = null
 var _wedge_ghost_dir: float = 0.0  # Y rotation in degrees
+
+# Artifact Edit mode — laser-grab existing artifacts and move/rotate/snap them
+var _edit_target: Node3D = null        # artifact under the laser (not grabbed)
+var _edit_grabbed: Node3D = null       # artifact currently being moved
+var _edit_grab_offset: Transform3D = Transform3D.IDENTITY  # controller→artifact at grab
+var _edit_trigger_was_down: bool = false
+var _edit_highlight: MeshInstance3D = null
+const EDIT_MAX_RANGE := 8.0
+const EDIT_RAY_RADIUS := 0.6  # how close to the laser line an artifact must be
+const EDIT_HOLD_DISTANCE := 1.5  # how far in front of the hand a grabbed artifact floats
 
 # Tip marker — where projectiles spawn
 var _tip: Marker3D = null
@@ -171,6 +182,12 @@ func _physics_process(delta: float) -> void:
 		if _wedge_ghost:
 			_wedge_ghost.visible = false
 
+	# Artifact Edit mode — laser-grab existing artifacts, move/rotate, snap on release
+	if is_held and _cur_mode_id == "artifact_edit":
+		_update_edit_mode(delta)
+	elif _edit_target != null or _edit_grabbed != null or (_edit_highlight and _edit_highlight.visible):
+		_end_edit_mode()
+
 	# Mode switching disabled on controller thumbstick — use the bracelet instead
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -203,6 +220,8 @@ func _on_controller_button(button_name: String) -> void:
 					_handle_voxel_add()
 				"wedge_placer":
 					_handle_wedge_add()
+				"artifact_edit":
+					pass  # grab/move handled by polling in _update_edit_mode
 				_:
 					if not _is_hand_busy():
 						_fire()
@@ -216,10 +235,10 @@ func _on_controller_button(button_name: String) -> void:
 			# B = save the edited grid back to the repo's map_data.json.
 			print("[Catalyst] B (by_button) pressed — mode=%s" % mode_id)
 			match mode_id:
-				"voxel_editor", "wedge_placer":
+				"voxel_editor", "wedge_placer", "artifact_edit":
 					_save_map()
 				_:
-					_flash_label("B SAVES IN VOXEL MODE", Color(1.0, 0.8, 0.3))
+					_flash_label("B SAVES IN EDIT/VOXEL MODE", Color(1.0, 0.8, 0.3))
 
 
 ## Voxel mode: trigger/AX = ADD cube on the cardinal neighbor you're facing.
@@ -247,31 +266,40 @@ func _handle_voxel_remove() -> void:
 ## inside VR, press B, and the change lands on disk in the repo.
 func _save_map() -> void:
 	print("[Catalyst] _save_map() called")
-	if not _voxel_controller or not _voxel_controller.structure_component:
-		print("[Catalyst] _save_map: no voxel controller / structure component — nothing to save")
-		_flash_label("NOTHING TO SAVE", Color(1.0, 0.5, 0.2))
-		return
+	# Map name from the live grid data — works in voxel mode AND edit mode.
+	var data := _get_grid_data_component()
 	var map_name := ""
-	if _voxel_data_component and _voxel_data_component.has_method("get_current_map_name"):
-		map_name = _voxel_data_component.get_current_map_name()
+	if data and data.has_method("get_current_map_name"):
+		map_name = data.get_current_map_name()
 	if map_name == "":
 		push_warning("[Catalyst] B-save aborted — no current map name")
 		_flash_label("NO MAP NAME", Color(1.0, 0.4, 0.3))
 		return
-	var structure: GridStructureComponent = _voxel_controller.structure_component
-	# Local write — only works when running from the editor (res:// = the repo).
-	# On a packaged / Quest build res:// is read-only, so skip it there (it would
-	# only spam "Invalid JSON / read-only" errors). The HTTP POST below is the
-	# path that actually reaches the PC on the headset via `adb reverse`.
-	if not OS.has_feature("android"):
-		VoxelSaveManager.save(map_name, structure)
+	# Structure layer only when we're actually voxel-editing cubes. In Edit mode
+	# (artifacts) there's no voxel controller — we save placements only, leaving
+	# the structure layer on disk untouched.
+	var layout: Array = []
+	if _voxel_controller and _voxel_controller.structure_component:
+		var structure: GridStructureComponent = _voxel_controller.structure_component
+		# Local write — editor only; res:// is read-only on a packaged/Quest build.
+		if not OS.has_feature("android"):
+			VoxelSaveManager.save(map_name, structure)
+		layout = structure.get_editable_layout()
+	var placements := _collect_vr_placements()
+	if layout.is_empty() and placements.is_empty():
+		_flash_label("NOTHING TO SAVE", Color(1.0, 0.5, 0.2))
+		return
 	# HTTP POST to the PC — works on the headset over `adb reverse tcp:3003 tcp:3003`.
-	# Also carry any artifacts placed in VR (workstation PLACE) so they save into
-	# the map's interactables layer alongside the cubes.
-	_save_map_over_http(map_name, structure.get_editable_layout(), _collect_vr_placements())
+	_save_map_over_http(map_name, layout, placements)
 	_flash_label("SAVING  " + map_name + " ...", Color(0.6, 0.85, 1.0))
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.4, 0.0)
+
+## The live GridDataComponent — the one voxel mode cached, or a fresh lookup.
+func _get_grid_data_component() -> Node:
+	if _voxel_data_component and is_instance_valid(_voxel_data_component):
+		return _voxel_data_component
+	return _find_node_by_name(get_tree().root, "GridDataComponent")
 
 
 ## Flash a transient message on the held tool's mode label, then revert.
@@ -288,11 +316,15 @@ func _flash_label(text: String, color: Color) -> void:
 ## POST the edited structure to the PC's encyclopedia so it lands in the repo's
 ## map_data.json (preserving the other layers). On the headset this reaches the
 ## PC over `adb reverse tcp:3003 tcp:3003`.
-## Collect artifacts placed in VR (group "vr_placed_artifact", tagged by the
-## hand workstation) into a list of {x, z, token} cell placements. The save
-## endpoint overlays these onto the map's existing interactables layer.
+## Collect artifacts placed/moved in VR (group "vr_placed_artifact") into a list
+## of {x, z, token} cell placements that the save endpoint overlays onto the
+## map's interactables layer. When an artifact has MOVED since it was last
+## saved (or since it spawned, for existing artifacts), we first emit a CLEAR
+## for its old cell so it doesn't leave a duplicate behind. Clears are emitted
+## before sets so a clear can never wipe a freshly-set cell.
 func _collect_vr_placements() -> Array:
-	var placements: Array = []
+	var clears: Array = []
+	var sets: Array = []
 	for node in get_tree().get_nodes_in_group("vr_placed_artifact"):
 		if not is_instance_valid(node):
 			continue
@@ -304,8 +336,14 @@ func _collect_vr_placements() -> Array:
 		var rot := int(round(float(node.get_meta("grid_rotation_y", 0.0))))
 		if rot != 0:
 			token = "%s:%d" % [lookup, rot]
-		placements.append({"x": cell.x, "z": cell.y, "token": token})
-	return placements
+		# Clear the previous cell if this artifact moved.
+		var saved: Vector2i = node.get_meta("vr_saved_cell", Vector2i(-1, -1))
+		if saved.x >= 0 and saved.y >= 0 and saved != cell:
+			clears.append({"x": saved.x, "z": saved.y, "token": " "})
+		sets.append({"x": cell.x, "z": cell.y, "token": token})
+		# Remember where it now lives, so the next move can clear this cell.
+		node.set_meta("vr_saved_cell", cell)
+	return clears + sets
 
 
 func _save_map_over_http(map_name: String, layout: Array, placements: Array = []) -> void:
@@ -314,7 +352,9 @@ func _save_map_over_http(map_name: String, layout: Array, placements: Array = []
 	add_child(http)
 	http.request_completed.connect(_on_map_save_completed.bind(http))
 	var headers := PackedStringArray(["Content-Type: application/json"])
-	var payload := {"mapName": map_name, "layers": {"structure": layout}}
+	var payload := {"mapName": map_name}
+	if not layout.is_empty():
+		payload["layers"] = {"structure": layout}
 	if not placements.is_empty():
 		payload["interactablePlacements"] = placements
 	http.set_meta("map_name", map_name)
@@ -670,6 +710,163 @@ func _update_voxel_raycast() -> void:
 	var add := Vector3i(neighbor_x, height, neighbor_z)
 
 	_voxel_controller.set_target_direct(target, add)
+
+
+# ═════════════════════════════════════════════════════════════════════════
+# ARTIFACT EDIT MODE — laser gravity-gun for existing map artifacts
+# Point the catalyst at an artifact, hold trigger to grab it (it floats in
+# front of the hand and follows your aim + twist), release to snap it onto the
+# grid (cell on top of the structure, upright, yaw to 90°). Artifacts keep all
+# their normal interactivity — nothing about them changes outside Edit mode.
+# ═════════════════════════════════════════════════════════════════════════
+
+func _update_edit_mode(_delta: float) -> void:
+	if not is_instance_valid(controller):
+		return
+	var ray_dir: Vector3 = -controller.global_transform.basis.z
+	if ray_dir.length() < 0.001:
+		return
+	ray_dir = ray_dir.normalized()
+	var ray_origin: Vector3 = controller.global_position
+	var trig_down: bool = controller.is_button_pressed("trigger_click")
+
+	if is_instance_valid(_edit_grabbed):
+		# Move/rotate: the artifact rigidly follows the hand at the hold offset.
+		_edit_grabbed.global_transform = controller.global_transform * _edit_grab_offset
+		_show_edit_highlight(_edit_grabbed)
+		if _edit_trigger_was_down and not trig_down:
+			_edit_release()
+	else:
+		_edit_target = _find_edit_target(ray_origin, ray_dir)
+		if _edit_target:
+			_show_edit_highlight(_edit_target)
+		else:
+			_hide_edit_highlight()
+		if trig_down and not _edit_trigger_was_down and _edit_target:
+			_edit_grab()
+	_edit_trigger_was_down = trig_down
+
+## Nearest editable artifact to the laser line (no collider needed).
+func _find_edit_target(ray_origin: Vector3, ray_dir: Vector3) -> Node3D:
+	var best: Node3D = null
+	var best_score: float = INF
+	for n in get_tree().get_nodes_in_group("vr_editable_artifact"):
+		if not (n is Node3D) or not is_instance_valid(n):
+			continue
+		var node := n as Node3D
+		var to_obj: Vector3 = node.global_position - ray_origin
+		var along: float = to_obj.dot(ray_dir)
+		if along < 0.2 or along > EDIT_MAX_RANGE:
+			continue
+		var closest: Vector3 = ray_origin + ray_dir * along
+		var perp: float = node.global_position.distance_to(closest)
+		if perp > EDIT_RAY_RADIUS:
+			continue
+		var score: float = perp + along * 0.05
+		if score < best_score:
+			best_score = score
+			best = node
+	return best
+
+func _edit_grab() -> void:
+	if not is_instance_valid(_edit_target):
+		return
+	_edit_grabbed = _edit_target
+	# Reel it to a comfortable hold distance in front of the hand, keeping its
+	# current orientation + scale relative to the controller.
+	var rel: Transform3D = controller.global_transform.affine_inverse() * _edit_grabbed.global_transform
+	rel.origin = Vector3(0.0, 0.0, -EDIT_HOLD_DISTANCE)
+	_edit_grab_offset = rel
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.4, 0.0)
+	print("[Catalyst] Edit grab: %s" % String(_edit_grabbed.get_meta("artifact_lookup_name", "?")))
+
+func _edit_release() -> void:
+	var node := _edit_grabbed
+	_edit_grabbed = null
+	if not is_instance_valid(node):
+		return
+	var structure := _get_edit_structure()
+	if structure == null:
+		print("[Catalyst] Edit release: no grid — left in place")
+		return
+	var total_size: float = structure.cube_size + structure.gutter
+	var grid_origin := _grid_origin_of(structure)
+	var dims := structure.get_grid_dimensions()
+	var local: Vector3 = (node.global_position - grid_origin) / total_size
+	var x: int = clampi(int(round(local.x)), 0, maxi(dims.x - 1, 0))
+	var z: int = clampi(int(round(local.z)), 0, maxi(dims.z - 1, 0))
+	var y_pos: int = structure.find_highest_y_at(x, z)
+	# snap rotation: upright, yaw to nearest 90°
+	var yaw_deg: float = rad_to_deg(node.global_rotation.y)
+	var snapped_yaw: float = round(yaw_deg / 90.0) * 90.0
+	node.global_rotation = Vector3(0.0, deg_to_rad(snapped_yaw), 0.0)
+	node.global_position = grid_origin + Vector3(x, y_pos, z) * total_size
+	node.set_meta("grid_cell", Vector2i(x, z))
+	node.set_meta("grid_rotation_y", fposmod(snapped_yaw, 360.0))
+	if not node.is_in_group("vr_placed_artifact"):
+		node.add_to_group("vr_placed_artifact")  # now it'll save with B
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.5, 0.0)
+	_flash_label("MOVED  %s" % String(node.get_meta("artifact_lookup_name", "")), Color(0.4, 1.0, 0.6))
+	print("[Catalyst] Edit drop -> cell (%d,%d) y=%d yaw=%d" % [x, z, y_pos, int(snapped_yaw)])
+
+func _end_edit_mode() -> void:
+	if is_instance_valid(_edit_grabbed):
+		_edit_release()
+	_edit_grabbed = null
+	_edit_target = null
+	_edit_trigger_was_down = false
+	_hide_edit_highlight()
+
+func _get_edit_structure() -> GridStructureComponent:
+	if _voxel_controller and _voxel_controller.structure_component:
+		return _voxel_controller.structure_component
+	var n := _find_node_by_name(get_tree().root, "GridStructureComponent")
+	if n is GridStructureComponent:
+		return n as GridStructureComponent
+	return null
+
+func _grid_origin_of(structure: GridStructureComponent) -> Vector3:
+	var p := structure.get_parent()
+	if p is Node3D:
+		return (p as Node3D).global_position
+	return Vector3.ZERO
+
+func _show_edit_highlight(node: Node3D) -> void:
+	if _edit_highlight == null:
+		_build_edit_highlight()
+	var size: float = 1.0
+	var structure := _get_edit_structure()
+	if structure:
+		size = structure.cube_size + structure.gutter
+	_edit_highlight.scale = Vector3.ONE * size
+	_edit_highlight.global_position = node.global_position
+	_edit_highlight.visible = true
+
+func _hide_edit_highlight() -> void:
+	if _edit_highlight:
+		_edit_highlight.visible = false
+
+func _build_edit_highlight() -> void:
+	_edit_highlight = MeshInstance3D.new()
+	_edit_highlight.name = "EditHighlight"
+	_edit_highlight.top_level = true  # world space — ignore the shrunk catalyst
+	var bm := BoxMesh.new()
+	bm.size = Vector3.ONE * 0.95
+	_edit_highlight.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.4, 1.0, 0.6, 0.18)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.emission_enabled = true
+	mat.emission = Color(0.4, 1.0, 0.6)
+	mat.emission_energy_multiplier = 0.6
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.no_depth_test = true
+	_edit_highlight.material_override = mat
+	_edit_highlight.visible = false
+	add_child(_edit_highlight)
 
 
 func _voxel_save() -> void:

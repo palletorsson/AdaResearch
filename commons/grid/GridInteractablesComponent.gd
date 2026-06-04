@@ -76,6 +76,35 @@ const CONFIG_PARAM_NAMES = [
 	"accent_color", "floor_color", "wall_color", "ceiling_color",
 	"glass_color", "seam_color", "grout_color", "plinth_color",
 	"mounted_artifact_scene", "mounted_lab_json",
+	"lab_offset_z", "signage_wall", "show_chalkboard", "chalkboard_lookup",
+	# tentacle_placer params — same issue as lab_room: without these
+	# listed, e.g. "travel_speed:0.6" gets misparsed as a transform
+	# shorthand and the value becomes the boolean `true`, which then
+	# converts to 0.0 when read as float — so the tentacle never moves.
+	"place_positions", "sky_height", "rest_target", "travel_speed",
+	"arrive_threshold", "dwell_seconds", "pyramid_size", "pyramid_height",
+	"pyramid_color", "pyramid_lifetime", "cube_size", "cube_color",
+	"body_color", "joint_ring_color", "show_pedestal", "show_claw",
+	"pedestal_radius", "pedestal_height", "claw_finger_count",
+	"claw_finger_length", "radial_segments", "base_radius", "tip_radius",
+	"debug_log", "use_manual_ik",
+	"claw_offset_segments", "wrist_rod_radius", "max_joint_angle_deg",
+	# origin beam params — "beam_height:10.5" was parsed as a shorthand
+	# transform (tutorial_id=beam_height, rotation 10.5) so the beam got
+	# height true→1.0; listing them keeps key:numeric as key:value.
+	"beam_height", "beam_radius", "beam_label",
+	# fontana_puncture embed params
+	"embed_artifact", "embed_mode",
+	# CoordinateSystem3M / coordinate_line
+	"tick_step", "axis_length", "axis_thickness", "display_scale",
+	# wall_placard params
+	"title", "meta", "body", "card_color", "ink_color", "accent",
+	# chalkboard params
+	"diagram", "lines", "board_width", "board_height", "board_color",
+	# palm_scanner params
+	"scan_active", "mounting", "scan_hold_seconds", "auto_connect_door", "scan_dwell",
+	# generic
+	"no_collider",
 ]
 
 # References
@@ -934,6 +963,14 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 			print("    Set puzzle trigger_action: '%s'" % trigger_action)
 
 	parent_node.add_child(artifact_object)
+
+	# Make it editable in VR: the catalyst's Edit-mode laser targets this group,
+	# and the B-save uses grid_cell / vr_saved_cell to move it (clearing the old
+	# cell). This only TAGS the artifact — it stays fully interactive.
+	if artifact_object is Node3D:
+		artifact_object.add_to_group("vr_editable_artifact")
+		artifact_object.set_meta("grid_cell", Vector2i(x, z))
+		artifact_object.set_meta("vr_saved_cell", Vector2i(x, z))
 
 	# Set owner for editor
 	if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:

@@ -159,6 +159,7 @@ func _spawn_into_world(lookup_name: String) -> void:
 		# type error. 1 = XRToolsPickable.ReleaseMode.FROZEN (freeze on release).
 		pickable.set("release_mode", 1)
 		pickable.add_to_group("vr_placed_artifact")
+		pickable.add_to_group("vr_editable_artifact")  # catalyst Edit-mode laser can grab it too
 		pickable.set_meta("artifact_lookup_name", lookup_name)
 		pickable.set_meta("grid_cell", cell)
 		pickable.set_meta("grid_rotation_y", 0.0)

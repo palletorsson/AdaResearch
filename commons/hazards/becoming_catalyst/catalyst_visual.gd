@@ -22,6 +22,7 @@ const MODE_COLORS := {
 	"off":            Color(0.3, 0.3, 0.3),
 	"voxel_editor":   Color(0.3, 0.7, 1.0),
 	"wedge_placer":   Color(0.85, 0.55, 0.2),
+	"artifact_edit":  Color(0.4, 1.0, 0.6),
 	"primitives":     Color(0.85, 0.85, 0.9),
 	"transformation": Color(0.7, 0.3, 0.85),
 	"chromatic":      Color(1.0, 0.4, 0.4),
