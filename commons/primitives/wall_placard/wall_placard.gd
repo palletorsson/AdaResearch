@@ -38,9 +38,27 @@ class_name WallPlacard
 @export var viewport_width: int = 1024
 @export var viewport_height: int = 694
 
+## Degrees added to the lab editor's wall-facing yaw. The placard's visible card
+## is on the +Z side but it reads as the "back" to the wall-align convention, so
+## it needs a half turn to face the room when stuck to a wall.
+@export var wall_facing_offset_deg: float = 180.0
+
+@export_group("Mounting")
+## When true the placard is grabbable and SLIDES VERTICALLY along the wall:
+## grab it, move your hand up/down, the card follows on its local Y only
+## (the wall plane — local X/Z — stays fixed), clamped to [drag_min, drag_max]
+## metres from its mounted start. Release leaves it where you let go.
+@export var wall_draggable: bool = true
+## Lowest the card may slide, relative to its placed Y (metres, negative = down).
+@export var drag_min: float = -0.6
+## Highest the card may slide, relative to its placed Y (metres).
+@export var drag_max: float = 0.6
+
 # ── State ─────────────────────────────────────────────────────────────
 
 var _built: bool = false
+var _base_y: float = 0.0          # the card's placed local Y (drag is relative to this)
+var _drag_offset: float = 0.0     # current slide, clamped to [drag_min, drag_max]
 
 
 func _ready() -> void:
@@ -149,6 +167,18 @@ func _build() -> void:
 	_add_box("FrameL", Vector3(-hw - ft * 0.5, 0, 0), Vector3(ft, card_height, depth + 0.01), fmat)
 	_add_box("FrameR", Vector3(hw + ft * 0.5, 0, 0), Vector3(ft, card_height, depth + 0.01), fmat)
 
+	# Wall-mount drag: a grabbable grip covering the card that, while held,
+	# slides the WHOLE placard vertically along the wall (local Y only).
+	if wall_draggable and not Engine.is_editor_hint():
+		_base_y = position.y
+		_drag_offset = 0.0
+		var grip := _PlacardGrip.new()
+		grip.name = "SlideGrip"
+		grip.placard = self
+		grip.card_size = Vector2(card_width, card_height)
+		grip.depth = depth
+		add_child(grip)
+
 
 func _add_box(n: String, pos: Vector3, size: Vector3, mat: StandardMaterial3D) -> void:
 	var b := MeshInstance3D.new()
@@ -183,6 +213,14 @@ func _bake_card_texture(vp: SubViewport, mat: StandardMaterial3D) -> void:
 	mat.albedo_texture = ImageTexture.create_from_image(img)
 	if is_instance_valid(vp):
 		vp.queue_free()
+
+
+# Slide the placard vertically along the wall by `delta_y` metres (called by
+# the grip while held). Clamped to [drag_min, drag_max] relative to the placed
+# Y; only local Y changes, so the card stays flush on the wall plane.
+func slide_by(delta_y: float) -> void:
+	_drag_offset = clampf(_drag_offset + delta_y, drag_min, drag_max)
+	position.y = _base_y + _drag_offset
 
 
 # ── 2D canvas: the museum label typography ────────────────────────────
@@ -224,3 +262,65 @@ class _PlacardCanvas extends Control:
 		var body_y: float = meta_y + body_px * 1.9
 		draw_multiline_string(font, Vector2(margin, body_y), body,
 			HORIZONTAL_ALIGNMENT_LEFT, w - margin * 2, body_px, -1, ink_color)
+
+
+# ── Wall-drag grip ────────────────────────────────────────────────────
+# A handle-driven grab covering the card. Grab it and move your hand up/down;
+# the grip reads the grab handle's offset projected onto the placard's local
+# Y and slides the WHOLE placard along the wall (slide_by clamps + keeps the
+# wall plane fixed). Same proven pattern as commons/interactables/slider_axis
+# and every lever/slider in the lab — the handle tracks the hand freely while
+# the driven node stays constrained to one axis.
+class _PlacardGrip extends XRToolsInteractableHandleDriven:
+	var placard: Node = null          # the WallPlacard to slide
+	var card_size: Vector2 = Vector2(0.6, 0.4)
+	var depth: float = 0.025
+	var _accum: float = 0.0           # how far the placard has slid this grab
+
+	func _ready() -> void:
+		super()
+		# Collision area covering the whole card so the hand can grab anywhere
+		# on it (this node IS the interactable; XRToolsInteractable wants a
+		# CollisionShape on itself).
+		var cs := CollisionShape3D.new()
+		cs.name = "CollisionShape3D"
+		var box := BoxShape3D.new()
+		box.size = Vector3(card_size.x, card_size.y, depth + 0.06)
+		cs.shape = box
+		add_child(cs)
+		# An invisible handle the hand actually grabs; it moves with the hand,
+		# and we read its displacement each frame.
+		var handle := _make_handle()
+		add_child(handle)
+
+	func _make_handle() -> Node3D:
+		var h := XRToolsInteractableHandle.new()
+		h.name = "GripHandle"
+		var hcs := CollisionShape3D.new()
+		var hbox := BoxShape3D.new()
+		hbox.size = Vector3(card_size.x * 0.9, card_size.y * 0.9, depth + 0.05)
+		hcs.shape = hbox
+		h.add_child(hcs)
+		return h
+
+	func _process(_delta: float) -> void:
+		if grabbed_handles.is_empty() or placard == null:
+			return
+		# Read each held handle's displacement from its origin, projected onto
+		# our local Y (the wall's vertical), drive the placard by that delta,
+		# THEN re-centre the handle to IDENTITY. The re-centre is the key: it
+		# consumes the displacement we just applied AND cancels any X/Z drift,
+		# so the card never leaves the wall plane — only Y is honoured, and the
+		# motion is incremental rather than compounding. (slider_axis gets this
+		# for free because moving the slider carries the handle's origin; our
+		# grip drives the PARENT placard, so we re-centre the handle by hand.)
+		var offset_y := 0.0
+		for item in grabbed_handles:
+			var handle := item as XRToolsInteractableHandle
+			if handle:
+				var diff: Vector3 = handle.global_transform.origin - handle.handle_origin.global_transform.origin
+				offset_y += diff.dot(global_transform.basis.y)
+				handle.transform = Transform3D.IDENTITY   # re-centre: kill X/Z drift, consume Y
+		offset_y /= float(grabbed_handles.size())
+		if not is_zero_approx(offset_y) and placard.has_method("slide_by"):
+			placard.slide_by(offset_y)

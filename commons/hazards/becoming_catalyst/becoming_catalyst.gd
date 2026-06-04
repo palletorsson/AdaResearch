@@ -958,7 +958,13 @@ func _apply_lab_magnetism(node: Node3D) -> void:
 		else:
 			np.z = wcoord[bw]
 		node.position = np
-		node.rotation = Vector3(0.0, deg_to_rad(wyaw[bw]), 0.0)  # align: face the room
+		# align: face the room. An artifact may declare wall_facing_offset_deg if
+		# its front is the opposite of the +Z convention (e.g. wall_placard = 180).
+		var face_off: float = 0.0
+		var fo = node.get("wall_facing_offset_deg")
+		if fo != null:
+			face_off = float(fo)
+		node.rotation = Vector3(0.0, deg_to_rad(wyaw[bw] + face_off), 0.0)
 		# Flush: push the prop's wall-side edge exactly onto the wall plane.
 		var ab: AABB = node.transform * _held_aabb
 		if wisx[bw]:
