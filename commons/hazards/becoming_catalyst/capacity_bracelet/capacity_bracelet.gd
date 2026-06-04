@@ -61,16 +61,13 @@ const MODE_SWITCH_COOLDOWN := 0.3  # gate after each jog-step so a fast turn can
 
 const BRACELET_SCALE := 1.5   # overall size — bigger = easier to grab + read
 
-# Touch-to-cycle: bring the OTHER hand near the bracelet and the stones advance
-# one by one with a short delay; the closer to the centre, the faster. Pull the
-# hand away to stop on the current stone. No rotation, no detents — the absolute
-# position of a stone in the ring no longer matters.
-var _touch_cycle_accum: float = 0.0
-var _touch_active: bool = false
-const TOUCH_RADIUS := 0.17        # m: other hand within this of bracelet centre = touching
-const TOUCH_INNER := 0.05         # m: at/under this counts as "centre" (fastest)
-const CYCLE_INTERVAL_FAST := 0.13 # s between stones near the centre
-const CYCLE_INTERVAL_SLOW := 0.55 # s between stones at the rim
+# Direct touch selection: the stones are FIXED in the ring (no rotation). Reach
+# the other hand toward the stone you want — the nearest stone previews, and
+# commits as the mode after a short settle. No dial, no cycling, no timing race.
+var _hover_gem: int = -1
+var _hover_time: float = 0.0
+const SELECT_RANGE := 0.18  # m: other hand within this of bracelet centre = engaged
+const SELECT_DWELL := 0.18  # s: hold near a stone this long to commit it
 
 # ── Signals ────────────────────────────────────────────────────────────────
 
@@ -104,11 +101,9 @@ func _process(delta: float) -> void:
 	# Pulse active gem
 	_pulse_active_gem(delta)
 
-	# Touch-to-cycle: the other hand near the bracelet auto-advances the stones
-	# one by one; closer to the centre cycles faster. Pull away to stop.
-	_update_touch_cycle(delta)
+	# Direct touch selection: reach the other hand toward a stone to select it.
+	_update_touch_select(delta)
 
-	# Mode switch cooldown (unused by touch-cycle; kept for any external nudge)
 	if _mode_switch_cooldown > 0.0:
 		_mode_switch_cooldown -= delta
 
@@ -505,27 +500,24 @@ func _highlight_current_gem() -> void:
 	if _unlocked_modes.is_empty():
 		return
 
-	var count: int = _unlocked_modes.size()
-
-	# Smoothly rotate gem_container so active gem is at top
-	if _gem_container and count > 1:
-		var step_angle: float = TAU / float(count)
-		var target_y: float = -step_angle * _current_mode_index
-		# Smooth lerp every frame
-		_gem_container.rotation.y = lerpf(_gem_container.rotation.y, target_y, 0.12)
-	elif _gem_container and count == 1:
-		_gem_container.rotation.y = 0.0  # Single stone always at top
+	# Stones are FIXED — no rotation. The active stone glows big; the stone your
+	# hand is currently aiming at (hover) previews at a middle size.
+	if _gem_container:
+		_gem_container.rotation.y = 0.0
 
 	for i in _gem_meshes.size():
-		var is_active := (i == _current_mode_index)
 		var gem := _gem_meshes[i]
 		var mat := _gem_materials[i]
-
-		if is_active:
+		if not is_instance_valid(gem):
+			continue
+		if i == _current_mode_index:
 			gem.scale = Vector3.ONE * 2.0
 			mat.emission_energy_multiplier = GEM_ACTIVE_EMISSION
+		elif i == _hover_gem:
+			gem.scale = Vector3.ONE * 1.5
+			mat.emission_energy_multiplier = GEM_ACTIVE_EMISSION * 0.75
 		else:
-			gem.scale = Vector3.ONE * 0.7
+			gem.scale = Vector3.ONE * 0.85
 			mat.emission_energy_multiplier = GEM_INACTIVE_EMISSION
 
 	if _bracelet_glow:
@@ -549,36 +541,63 @@ func _update_hinge_steps() -> void:
 	_hinge.set("hinge_steps", 0.0)
 	_last_hinge_step = _current_mode_index
 
-## Rotation no longer selects — selection is touch-to-cycle (_update_touch_cycle).
+## Rotation does nothing — selection is direct touch (_update_touch_select).
 func _on_hinge_moved(_angle: float) -> void:
 	pass
 
-## Touch-to-cycle: while the other hand is within TOUCH_RADIUS of the bracelet
-## centre, advance one stone every `interval`, where `interval` shrinks the
-## closer the hand is to the centre. Pull the hand away to stop.
-func _update_touch_cycle(delta: float) -> void:
+## Reach the other hand toward a stone: the nearest stone previews, and after a
+## short settle (SELECT_DWELL) it commits as the active mode. Move to another
+## stone to re-aim; pull the hand away to keep what's selected.
+func _update_touch_select(delta: float) -> void:
 	if _unlocked_modes.size() <= 1:
 		return
 	var other := _get_other_controller()
 	if other == null:
-		_touch_active = false
-		_touch_cycle_accum = 0.0
+		_clear_hover()
 		return
-	var r: float = other.global_position.distance_to(global_position)
-	if r > TOUCH_RADIUS:
-		_touch_active = false
-		_touch_cycle_accum = 0.0
+	var hp: Vector3 = other.global_position
+	if hp.distance_to(global_position) > SELECT_RANGE:
+		_clear_hover()
 		return
-	# touching — interval by radius (near centre = fast, rim = slow)
-	var t: float = clampf((r - TOUCH_INNER) / maxf(TOUCH_RADIUS - TOUCH_INNER, 0.001), 0.0, 1.0)
-	var interval: float = lerpf(CYCLE_INTERVAL_FAST, CYCLE_INTERVAL_SLOW, t)
-	if not _touch_active:
-		_touch_active = true
-		_touch_cycle_accum = interval  # step on first contact for responsiveness
-	_touch_cycle_accum += delta
-	if _touch_cycle_accum >= interval:
-		_touch_cycle_accum = 0.0
-		_step_mode(1)
+	# nearest stone to the hand (aim by direction — no precise poke needed)
+	var best := -1
+	var best_d := INF
+	for i in _gem_meshes.size():
+		var g := _gem_meshes[i]
+		if not is_instance_valid(g):
+			continue
+		var d: float = hp.distance_to(g.global_position)
+		if d < best_d:
+			best_d = d
+			best = i
+	if best < 0:
+		_clear_hover()
+		return
+	if best == _hover_gem:
+		_hover_time += delta
+	else:
+		_hover_gem = best
+		_hover_time = 0.0
+	if _hover_time >= SELECT_DWELL and best != _current_mode_index:
+		_commit_mode(best)
+
+func _clear_hover() -> void:
+	_hover_gem = -1
+	_hover_time = 0.0
+
+## Commit a stone as the active mode (direct selection — no wrapping/cycling).
+func _commit_mode(idx: int) -> void:
+	if idx < 0 or idx >= _unlocked_modes.size():
+		return
+	_current_mode_index = idx
+	_last_hinge_step = idx
+	if _catalyst and _catalyst.has_method("set_mode_index"):
+		_catalyst.set_mode_index(idx)
+	_show_mode_label()
+	if _controller:
+		_controller.trigger_haptic_pulse("haptic", 0.0, 0.1, 0.4, 0.0)  # firm "selected"
+	bracelet_mode_selected.emit(str(_unlocked_modes[idx]))
+	print("[Bracelet] Touch-select -> mode: %s" % str(_unlocked_modes[idx]))
 
 ## The hand that is NOT wearing the bracelet (the one that touches it).
 func _get_other_controller() -> XRController3D:
@@ -593,28 +612,6 @@ func _get_other_controller() -> XRController3D:
 		if c != _controller and c is XRController3D and (c as XRController3D).get_is_active():
 			return c as XRController3D
 	return null
-
-## Advance the selection by one stone (dir = +1 / -1, wrapping).
-func _step_mode(dir: int) -> void:
-	var count := _unlocked_modes.size()
-	if count <= 1:
-		return
-	_current_mode_index = ((_current_mode_index + dir) % count + count) % count
-	_last_hinge_step = _current_mode_index
-
-	if _catalyst and _catalyst.has_method("set_mode_index"):
-		_catalyst.set_mode_index(_current_mode_index)
-
-	_highlight_current_gem()
-	_show_mode_label()
-
-	if _controller:
-		_controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.25, 0.0)  # crisp tick per stone
-
-	if _current_mode_index < _unlocked_modes.size():
-		bracelet_mode_selected.emit(str(_unlocked_modes[_current_mode_index]))
-
-	print("[Bracelet] Cycle -> mode: %s" % str(_unlocked_modes[_current_mode_index]))
 
 # ═══════════════════════════════════════════════════════════════════════════
 # HANDLE GUARD — Prevent bracelet hand from grabbing its own bracelet
