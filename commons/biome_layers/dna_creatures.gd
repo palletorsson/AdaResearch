@@ -45,6 +45,8 @@ func apply(ctx: Dictionary) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = int(ctx.get("rng_seed", 0)) + 12
 	var count: int = rng.randi_range(int(count_range[0]), int(count_range[1]))
+	# Phase 5: scale the target count by the population budget (1.0 = unchanged).
+	count = maxi(0, int(round(float(count) * float(ctx.get("budget_scale", 1.0)))))
 
 	# Place around the floor footprint. Same ring math as the previous
 	# placeholder so the spatial arrangement is unchanged — only the

@@ -30,6 +30,12 @@ var _contributions: Array = []    # Array of Dictionary — ordered by .order
 var _layer_scripts: Dictionary = {}  # kind -> loaded GDScript
 var _stage_override: int = -1
 var _disabled_kinds: Dictionary = {}
+# Phase 5: single population-budget chokepoint. Injected into every layer's
+# ctx as "budget_scale"; each spawn layer multiplies its target count by it.
+# <0 = unset (resolve to per-map override, else 1.0). The future
+# performance_budget epic computes this from frame-time / draw-call headroom;
+# for now it is a 1.0 stub + a manual knob (set_budget_scale / per-map override).
+var _budget_scale: float = -1.0
 
 
 func _ready() -> void:
@@ -72,6 +78,10 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 	for k in overrides.get("disable", []):
 		override_disable[str(k)] = true
 	var override_params: Dictionary = overrides.get("params", {}) if (overrides.get("params") is Dictionary) else {}
+
+	# Phase 5: resolve the single population budget once. Every layer ctx gets
+	# it as "budget_scale"; spawn layers multiply their target count by it.
+	var budget_scale: float = _resolve_budget_scale(overrides)
 
 	var target_order: int = _current_stage_order()
 	if _stage_override < 0 and overrides.has("stage_order"):
@@ -137,6 +147,7 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 		layer_ctx["order"] = order
 		layer_ctx["seq"] = entry.get("seq", "")
 		layer_ctx["accrual_root"] = accrual  # Later layers can find/modify prior layers
+		layer_ctx["budget_scale"] = budget_scale  # Phase 5 population budget
 		if layer_node.has_method("apply"):
 			layer_node.call("apply", layer_ctx)
 		applied.append(kind)
@@ -158,11 +169,12 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 		actx["order"] = target_order
 		actx["seq"] = "map_add"
 		actx["accrual_root"] = accrual
+		actx["budget_scale"] = budget_scale  # Phase 5 population budget
 		if an.has_method("apply"):
 			an.call("apply", actx)
 		applied.append(ak + "(added)")
 
-	print("BiomeAccrual: stage=%d applied=%s skipped=%s" % [target_order, str(applied), str(skipped)])
+	print("BiomeAccrual: stage=%d budget=%.2f applied=%s skipped=%s" % [target_order, budget_scale, str(applied), str(skipped)])
 	return accrual
 
 
@@ -198,6 +210,30 @@ func get_active_kinds() -> Array[String]:
 		result.append(str(entry.get("kind", "")))
 	return result
 
+
+# ─────────────────────────────────────────────────────────────
+# Population budget (Phase 5)
+# ─────────────────────────────────────────────────────────────
+
+## Debug / runtime knob for the scrubber and tests. >=0 forces that scale;
+## <0 returns to "unset" (resolve from per-map override, else 1.0).
+func set_budget_scale(s: float) -> void:
+	_budget_scale = s
+
+func get_budget_scale() -> float:
+	return _budget_scale
+
+## The single chokepoint. Phase 5 stub: 1.0 unless a debug override
+## (set_budget_scale) or a per-map override (settings.biome_overrides.budget_scale)
+## sets it. The future performance_budget epic replaces the body with a
+## frame-time / draw-call headroom computation; every spawn layer already reads
+## the result via ctx.budget_scale, so that epic touches only this function.
+func _resolve_budget_scale(overrides: Dictionary) -> float:
+	if _budget_scale >= 0.0:
+		return _budget_scale
+	if overrides.has("budget_scale"):
+		return maxf(0.0, float(overrides["budget_scale"]))
+	return 1.0
 
 # ─────────────────────────────────────────────────────────────
 # Internal

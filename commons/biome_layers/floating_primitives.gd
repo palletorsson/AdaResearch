@@ -125,7 +125,8 @@ func _apply_sphere_field(ctx: Dictionary) -> void:
 		float(params.get("field_half_z", half_z + 1.0)))
 	# Centre the drift volume a little above the floor.
 	field.volume_offset = Vector3(0.0, float(params.get("field_centre_y", 2.6)), 0.0)
-	field.sphere_count = int(params.get("sphere_count", 60))
+	# Phase 5: scale the field population by the budget (1.0 = unchanged).
+	field.sphere_count = maxi(0, int(round(float(params.get("sphere_count", 60)) * float(ctx.get("budget_scale", 1.0)))))
 	field.sphere_radius = float(params.get("sphere_radius", 0.06))
 	field.drift_speed = float(params.get("drift_speed", 0.18))
 	field.turbulence = float(params.get("turbulence", 0.6))

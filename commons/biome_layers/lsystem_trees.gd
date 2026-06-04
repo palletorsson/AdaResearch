@@ -36,7 +36,8 @@ func apply(ctx: Dictionary) -> void:
 
 	# Place trees in a ring just outside the map footprint.
 	var radius: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.9 + 3.0
-	var tree_count: int = 8
+	# Phase 5: scale the target count by the population budget (1.0 = unchanged).
+	var tree_count: int = maxi(0, int(round(8.0 * float(ctx.get("budget_scale", 1.0)))))
 	for i in tree_count:
 		var theta: float = float(i) / float(tree_count) * TAU + 0.15
 		var pos: Vector3 = grid_center + Vector3(

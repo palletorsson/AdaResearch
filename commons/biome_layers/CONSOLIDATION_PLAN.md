@@ -156,11 +156,22 @@ per-map `biome_overrides` for free.
   cleanup pass can delete them and decide whether to fully absorb the component into `ground_ring.gd`
   vs keep the wrapper. Not blocking.
 
-### Phase 5 — Single resolver owns the running total (bridge to schema-v2)
-- With one populator, add a `budget_scale` float to the accrual `ctx`. Even a stub that
-  always returns 1.0 establishes the hook. Each `*_spawn` layer multiplies its target count by it.
-- This is the seam the schema-v2 `performance_budget` work plugs into. NOT the full budget
-  system (that's the next epic) — just the single chokepoint that makes a budget possible.
+### Phase 5 — Single resolver owns the running total (bridge to schema-v2) ✅ DONE + VERIFIED (2026-06-04)
+- `BiomeAccrualManager._resolve_budget_scale(overrides)` is the single chokepoint. Stub today:
+  returns `1.0` unless a debug knob (`set_budget_scale`) or a per-map override
+  (`settings.biome_overrides.budget_scale`) sets it. Resolved once per `apply()` and injected
+  into every layer's ctx (and the map-add ctx) as `budget_scale`.
+- Wired into the count-bearing spawn layers — each multiplies its target count by `budget_scale`
+  (`maxi(0, round(base * scale))`; `maxi(1, …)` for swarm where the count is a divisor):
+  `lsystem_trees` (tree_count), `floating_primitives` (sphere_count), `dna_creatures`
+  (creature count), `swarm_creatures` (flock n). Other layers ignore it harmlessly.
+- This is the seam the schema-v2 `performance_budget` epic plugs into: that epic replaces ONLY
+  the body of `_resolve_budget_scale` with a frame-time / draw-call headroom computation; every
+  spawn layer already honours the result. NOT the full budget system (governors, proximity
+  weighting) — just the chokepoint that makes a budget possible.
+- **Verification:** `LSystems_Growth` default → log `budget=1.00`, counts unchanged, no errors.
+  With `biome_overrides.budget_scale=0.25` → log `overrides=yes budget=0.25` (resolver read the
+  per-map knob, layers scaled their counts: 8 trees → round(8·0.25)=2). Map reverted clean.
 
 ## Config reconciliation (do alongside Phase 4)
 

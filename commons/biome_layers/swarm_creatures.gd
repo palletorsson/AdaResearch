@@ -27,6 +27,8 @@ func apply(ctx: Dictionary) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = int(ctx.get("rng_seed", 0)) + 14
 	var n: int = rng.randi_range(flock_min, flock_max)
+	# Phase 5: scale the flock size by the population budget (1.0 = unchanged).
+	n = maxi(1, int(round(float(n) * float(ctx.get("budget_scale", 1.0)))))
 
 	var mesh := PrismMesh.new()
 	mesh.size = Vector3(0.18, 0.1, 0.32)
