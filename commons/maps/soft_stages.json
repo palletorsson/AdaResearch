@@ -32,6 +32,12 @@
 					"snap"
 				],
 				"catalyst_mode": "primitives",
+				"catalyst_affordances": [
+					"orb",
+					"wand",
+					"spell",
+					"agent"
+				],
 				"movement_abilities": [
 					"teleport"
 				]
@@ -67,6 +73,11 @@
 					"translate_object"
 				],
 				"catalyst_mode": "transformation",
+				"catalyst_affordances": [
+					"shift",
+					"rotate",
+					"shrink"
+				],
 				"movement_abilities": [
 					"teleport"
 				]
@@ -77,7 +88,7 @@
 			}
 		},
 		"color": {
-			"order": 3,
+			"order": 4,
 			"ecosystem": {
 				"allow_flags": [
 					"color"
@@ -106,6 +117,11 @@
 					"shoot_color"
 				],
 				"catalyst_mode": "chromatic",
+				"catalyst_affordances": [
+					"paint",
+					"rainbow-arc",
+					"context-tint"
+				],
 				"movement_abilities": [
 					"teleport"
 				]
@@ -115,8 +131,54 @@
 				"comment": "Catalyst foe variant for the color sequence."
 			}
 		},
+		"change": {
+			"order": 4.5,
+			"_provenance": "Added 2026-05-13 â€” calculus substrate sequence proposed in doc/sequence_proposals/2026-05-13_change-sequence.md. Sits between color and forces. Introduces the `sustain` catalyst affordance (catalyst-as-accumulation).",
+			"ecosystem": {
+				"allow_flags": [
+					"function_visualization",
+					"rate_arrows",
+					"field_arrows"
+				],
+				"nature_kingdoms": [
+					"flower"
+				],
+				"vegetation_density": 0.08,
+				"terrain_mode": "flat",
+				"ambient_preset": "calc_lab"
+			},
+			"hazards": {
+				"unlock_types": [],
+				"spawner_behavior": "dormant",
+				"personality_shift": {},
+				"max_concurrent": 1
+			},
+			"capability": {
+				"capacity_level": 4,
+				"hand_verbs": [
+					"observe",
+					"grab",
+					"snap",
+					"trace",
+					"sustain"
+				],
+				"catalyst_mode": "change",
+				"catalyst_affordances": [
+					"accumulate",
+					"trace-rate",
+					"flow-along"
+				],
+				"movement_abilities": [
+					"teleport"
+				]
+			},
+			"enemies": {
+				"kind": "goo",
+				"comment": "Foe variant for the calculus sequence â€” same goo, but tickled by sustained contact rather than one-shot impact. The new affordance teaches a new way to engage."
+			}
+		},
 		"forces": {
-			"order": 4,
+			"order": 5,
 			"ecosystem": {
 				"allow_flags": [
 					"force"
@@ -154,6 +216,10 @@
 				"catalyst_mode": "forces",
 				"movement_abilities": [
 					"teleport"
+				],
+				"catalyst_affordances": [
+					"drive",
+					"push"
 				]
 			},
 			"enemies": {
@@ -162,7 +228,7 @@
 			}
 		},
 		"array_tutorial": {
-			"order": 5,
+			"order": 3,
 			"ecosystem": {
 				"allow_flags": [
 					"arrays"
@@ -189,7 +255,11 @@
 					"snap_place",
 					"reorder"
 				],
-				"catalyst_mode": null,
+				"catalyst_mode": "array",
+				"catalyst_affordances": [
+					"grid-stamp",
+					"pattern"
+				],
 				"movement_abilities": [
 					"teleport"
 				]
@@ -232,6 +302,9 @@
 				"catalyst_mode": "waveform",
 				"movement_abilities": [
 					"teleport"
+				],
+				"catalyst_affordances": [
+					"oscillate"
 				]
 			},
 			"enemies": {
@@ -276,6 +349,9 @@
 				"catalyst_mode": "chaos",
 				"movement_abilities": [
 					"teleport"
+				],
+				"catalyst_affordances": [
+					"scatter"
 				]
 			},
 			"enemies": {
@@ -316,6 +392,9 @@
 				"movement_abilities": [
 					"teleport",
 					"climb"
+				],
+				"catalyst_affordances": [
+					"flow"
 				]
 			},
 			"enemies": {
@@ -361,6 +440,9 @@
 				"movement_abilities": [
 					"teleport",
 					"climb"
+				],
+				"catalyst_affordances": [
+					"evolve"
 				]
 			},
 			"enemies": {
@@ -405,6 +487,9 @@
 				"movement_abilities": [
 					"teleport",
 					"climb"
+				],
+				"catalyst_affordances": [
+					"split"
 				]
 			},
 			"enemies": {
@@ -451,6 +536,9 @@
 				"movement_abilities": [
 					"teleport",
 					"climb"
+				],
+				"catalyst_affordances": [
+					"grow"
 				]
 			},
 			"enemies": {
@@ -495,6 +583,9 @@
 				"movement_abilities": [
 					"teleport",
 					"climb"
+				],
+				"catalyst_affordances": [
+					"seed"
 				]
 			},
 			"enemies": {
@@ -503,7 +594,7 @@
 			}
 		},
 		"softbodies": {
-			"order": 13,
+			"order": 14,
 			"ecosystem": {
 				"allow_flags": [
 					"morphogenesis",
@@ -540,6 +631,10 @@
 				"movement_abilities": [
 					"teleport",
 					"climb"
+				],
+				"catalyst_affordances": [
+					"flex",
+					"drape"
 				]
 			},
 			"enemies": {
@@ -548,7 +643,7 @@
 			}
 		},
 		"swarmintelligence": {
-			"order": 14,
+			"order": 13,
 			"ecosystem": {
 				"allow_flags": [
 					"swarm_behavior",
@@ -585,6 +680,9 @@
 					"teleport",
 					"climb",
 					"flight"
+				],
+				"catalyst_affordances": [
+					"flock"
 				]
 			},
 			"enemies": {
@@ -630,6 +728,9 @@
 					"teleport",
 					"climb",
 					"flight"
+				],
+				"catalyst_affordances": [
+					"learn"
 				]
 			},
 			"enemies": {
@@ -638,7 +739,7 @@
 			}
 		},
 		"foundationscrisis": {
-			"order": 16,
+			"order": 17,
 			"ecosystem": {
 				"allow_flags": [
 					"contradiction",
@@ -675,6 +776,9 @@
 					"teleport",
 					"climb",
 					"flight"
+				],
+				"catalyst_affordances": [
+					"paradox"
 				]
 			},
 			"enemies": {
@@ -683,7 +787,7 @@
 			}
 		},
 		"qfeplaboratory": {
-			"order": 17,
+			"order": 18,
 			"ecosystem": {
 				"allow_flags": [
 					"tunable_becoming",
@@ -720,6 +824,9 @@
 					"teleport",
 					"climb",
 					"flight"
+				],
+				"catalyst_affordances": [
+					"tune"
 				]
 			},
 			"enemies": {
@@ -728,7 +835,7 @@
 			}
 		},
 		"postfoundationscrisis": {
-			"order": 18,
+			"order": 19,
 			"ecosystem": {
 				"allow_flags": [
 					"applied_limits"
@@ -762,6 +869,9 @@
 					"teleport",
 					"climb",
 					"flight"
+				],
+				"catalyst_affordances": [
+					"compose"
 				]
 			},
 			"enemies": {
@@ -810,7 +920,7 @@
 			}
 		},
 		"graphtheory": {
-			"order": 19,
+			"order": 16,
 			"ecosystem": {
 				"allow_flags": [
 					"connection_topology",
@@ -849,6 +959,9 @@
 					"teleport",
 					"climb",
 					"flight"
+				],
+				"catalyst_affordances": [
+					"connect"
 				]
 			},
 			"enemies": {
@@ -858,7 +971,7 @@
 		},
 		"biome_lab": {
 			"order": 99,
-			"comment": "Lab sequence — Biome_Spine and Biome_Zoo. All kingdoms unlocked, max density. Lets the dispatcher work test code through every substrate.",
+			"comment": "Lab sequence ï¿½ Biome_Spine and Biome_Zoo. All kingdoms unlocked, max density. Lets the dispatcher work test code through every substrate.",
 			"ecosystem": {
 				"allow_flags": [
 					"all_kingdoms",
@@ -899,7 +1012,83 @@
 			},
 			"enemies": {
 				"kind": "none",
-				"comment": "No combat — these are visualization labs."
+				"comment": "No combat ï¿½ these are visualization labs."
+			}
+		},
+		"isosurfaces": {
+			"order": 4.6,
+			"ecosystem": {
+				"allow_flags": [
+					"field_volumes",
+					"extracted_surfaces"
+				],
+				"nature_kingdoms": [],
+				"vegetation_density": 0.0,
+				"terrain_mode": "voxel_marched",
+				"ambient_preset": "empty_lab"
+			},
+			"hazards": {
+				"unlock_types": [],
+				"spawner_behavior": "dormant",
+				"personality_shift": {},
+				"max_concurrent": 1
+			},
+			"capability": {
+				"capacity_level": 1,
+				"hand_verbs": [
+					"observe",
+					"grab",
+					"snap"
+				],
+				"catalyst_mode": "isosurface",
+				"catalyst_affordances": [
+					"threshold-extract"
+				],
+				"movement_abilities": [
+					"teleport"
+				]
+			},
+			"enemies": {
+				"kind": "goo",
+				"comment": "F_order geometry: minimal hazards, density crossing the threshold becomes mesh."
+			}
+		},
+		"boolean_surfaces": {
+			"order": 4.7,
+			"ecosystem": {
+				"allow_flags": [
+					"static_geometry",
+					"composed_solids"
+				],
+				"nature_kingdoms": [],
+				"vegetation_density": 0.0,
+				"terrain_mode": "flat",
+				"ambient_preset": "empty_lab"
+			},
+			"hazards": {
+				"unlock_types": [],
+				"spawner_behavior": "dormant",
+				"personality_shift": {},
+				"max_concurrent": 1
+			},
+			"capability": {
+				"capacity_level": 1,
+				"hand_verbs": [
+					"observe",
+					"grab",
+					"snap"
+				],
+				"catalyst_mode": "csg",
+				"catalyst_affordances": [
+					"csg-compose"
+				],
+				"movement_abilities": [
+					"teleport"
+				]
+			},
+			"enemies": {
+				"kind": "goo",
+				"comment": "F_order geometry: union, intersection, difference as composition algebra."
 			}
 		}
 	}

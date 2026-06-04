@@ -639,6 +639,15 @@ func _handle_biome_ring():
 	if not _runtime_flag_enabled("biome_enabled", true):
 		print("GridSystem: biome_enabled=false in ada_run/runtime_flags.json — skipping biome")
 		return
+	# Per-map opt-out — set `"disable_biome": true` in the map's
+	# settings block to keep abstract biome layers (floating_primitives
+	# etc.) from spawning. Used for maps that ARE the lab (no need for
+	# decorative spheres around it).
+	if data_component:
+		var map_settings: Dictionary = data_component.get_settings()
+		if bool(map_settings.get("disable_biome", false)):
+			print("GridSystem: map %s has disable_biome=true in settings — skipping biome" % map_name)
+			return
 
 	var eco = get_node_or_null("/root/EcosystemManager")
 	if not eco:
@@ -657,6 +666,13 @@ func _handle_biome_ring():
 	# Accrual stack runs regardless of density — the old density gate is
 	# a property of BiomeRingComponent, not the curriculum. Abstract layers
 	# (floating_primitives) must render even at density 0.
+	# Read biome paint once at function scope so the ground-paint
+	# block below can use it as a fallback signal even when the
+	# accrual-early branch didn't fire.
+	var painted_layer: Array = []
+	if data_component.has_method("get_biome_paint_layer"):
+		painted_layer = data_component.get_biome_paint_layer()
+
 	# (Gated by the runtime flag above — early return already handled.)
 	var accrual_early = get_node_or_null("/root/BiomeAccrualManager")
 	if accrual_early and accrual_early.has_method("apply"):
@@ -666,12 +682,14 @@ func _handle_biome_ring():
 		# the deposit list, the stage_order for kingdom-unlock guard.
 		# Other layers (floating_primitives, lsystem_trees, …) ignore
 		# them — they only consume their own params.
-		var painted_layer: Array = []
-		if data_component.has_method("get_biome_paint_layer"):
-			painted_layer = data_component.get_biome_paint_layer()
 		var stage_order: int = 0
 		if eco and eco.has_method("get_current_stage_order"):
 			stage_order = int(eco.get_current_stage_order())
+		# Per-map biome overrides (settings.biome_overrides): lets a map
+		# add / remove / change biome layers on top of its sequence default.
+		var biome_overrides: Dictionary = {}
+		if data_component:
+			biome_overrides = data_component.get_settings().get("biome_overrides", {})
 		accrual_early.apply(self, {
 			"grid_dims": dims_early,
 			"grid_center": Vector3(float(dims_early.x) * cube_size * 0.5, 0.0, float(dims_early.z) * cube_size * 0.5),
@@ -680,7 +698,57 @@ func _handle_biome_ring():
 			"map_name": map_name,
 			"biome_paint": painted_layer,
 			"stage_order": stage_order,
+			"biome_overrides": biome_overrides,
 		})
+
+	# ── Ground paint layer (G3.7 + smart fallback) ────────────────────
+	# Reads commons/maps/<map>/map_data.json's optional `ground_paint`
+	# layer and renders one MultiMeshInstance3D per used type via
+	# GroundLayerComponent. Smart fallback chain:
+	#   explicit ground_paint  →  kingdom-inferred from biome_paint
+	#                          →  stage's terrain_mode default
+	# So authors usually paint only biome_paint and the ground
+	# "just works"; ground_paint is the override for orthogonal cases
+	# (stone path through grass, fungus on a fallen log, etc.).
+	# Runs BEFORE the density gate so ground tiles even on barren maps.
+	var ground_paint: Array = []
+	if data_component.has_method("get_ground_paint_layer"):
+		ground_paint = data_component.get_ground_paint_layer()
+	# Determine if there's anything to render — explicit ground_paint
+	# OR a non-empty biome_paint OR a non-default terrain_mode.
+	var terrain_mode_str: String = ""
+	if eco and eco.has_method("get_terrain_mode"):
+		terrain_mode_str = String(eco.get_terrain_mode())
+	if not ground_paint.is_empty() or not painted_layer.is_empty() or not terrain_mode_str.is_empty():
+		var dims_ground: Vector3i = data_component.get_grid_dimensions()
+		var GroundLayerScript = preload("res://commons/biome_layers/ground_layer_component.gd")
+		# Drop any prior ground layer (idempotent reload).
+		var old_ground = get_node_or_null("GroundLayer")
+		if old_ground:
+			old_ground.queue_free()
+		var ground_layer = GroundLayerScript.new()
+		ground_layer.name = "GroundLayer"
+		add_child(ground_layer)
+		var ground_stats: Dictionary = ground_layer.apply(ground_paint, {
+			"grid_center": Vector3(
+				float(dims_ground.x) * cube_size * 0.5,
+				0.0,
+				float(dims_ground.z) * cube_size * 0.5
+			),
+			"grid_dims": dims_ground,
+			"cube_size": cube_size,
+			"biome_paint": painted_layer,
+			"terrain_mode": terrain_mode_str,
+		})
+		# If no tiles ended up rendered (all sources empty), drop the node.
+		if int(ground_stats.get("tiles", 0)) == 0:
+			ground_layer.queue_free()
+		else:
+			var src: Dictionary = ground_stats.get("by_source", {})
+			print("GridSystem: 🟫 Ground paint applied — %d tiles in %d draw calls (explicit=%d, kingdom=%d, terrain=%d)"
+				% [ground_stats.get("tiles", 0),
+				   ground_stats.get("draw_calls", 0),
+				   src.get("explicit", 0), src.get("kingdom", 0), src.get("terrain", 0)])
 
 	if density < 0.05:
 		print("GridSystem: Density too low (%.2f < 0.05) — no biome ring" % density)

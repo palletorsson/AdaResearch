@@ -44,6 +44,8 @@ const TreeMorphologyClass = preload("res://algorithms/nature_system/morphology/t
 # uses this directly. We share one spawner across all creature deposits
 # so its trait_mapper is loaded once.
 const CritterSpawnerClass = preload("res://algorithms/nature_system/systems/spawner.gd")
+# Shared tree/creature DNA recipe + tree build (consolidation Phase 1).
+const SpawnService = preload("res://commons/biome_layers/spawn_service.gd")
 
 # Per-kingdom substrate scenes / classes. The dispatcher matches on
 # kingdom and forwards to one of these. Intensity influences the
@@ -193,8 +195,11 @@ func _spawn_flower(deposit: Dictionary, ctx: Dictionary,
 		"overall_scale": overall_scale,
 		"seed": int(deposit.get("x", 0)) * 31 + int(deposit.get("z", 0)),
 	})
-	flower.global_position = _cell_to_world(deposit, ctx)
+	# add_child BEFORE setting global_position — global_position on a node
+	# not yet in the tree fails ("!is_inside_tree()") and silently places
+	# it at origin. (Pre-existing bug, found during the consolidation.)
 	parent.add_child(flower)
+	flower.global_position = _cell_to_world(deposit, ctx)
 
 
 # Fungus kingdom — wraps MoldNetwork (a CellularAutomata3D_Flexible
@@ -228,8 +233,9 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 	# not generic white. Pulled from biome_config.json:kingdoms.fungus.
 	mold.color_alive = BiomeConfigLoaderClass.get_kingdom_color(KINGDOM_FUNGUS)
 	mold.use_gradient = false  # solid kingdom-color is more legible at biome scale
-	mold.global_position = _cell_to_world(deposit, ctx)
+	# add_child before global_position (see _spawn_flower note).
 	parent.add_child(mold)
+	mold.global_position = _cell_to_world(deposit, ctx)
 
 
 # Tree kingdom — wraps TreeMorphology.build (production DNA-driven
@@ -268,29 +274,19 @@ func _spawn_tree(deposit: Dictionary, ctx: Dictionary,
 	var ang_base: float = float(s.get("branch_angle_base", 18.0))
 	var ang_jit: float = float(s.get("branch_angle_jitter", 16.0))
 
-	var dna: CritterDNA = CritterDNAClass.new()
-	dna.body_type = 0.0  # Tree
+	# Shared tree-3 recipe (constants: branch_decay, primary/tertiary
+	# colour, symmetry, roughness, metallic); override the intensity-
+	# scaled fields from biome_config:intensity_scaling.tree.
+	var dna: CritterDNA = SpawnService.tree_dna_from_seed(seed)
 	dna.segments = seg_base + seg_per * float(intensity)
 	dna.scale = scale_base + scale_per * float(intensity)
 	dna.branch_angle = ang_base + float(seed % int(max(ang_jit, 1.0)))
-	dna.branch_decay = 0.65 + 0.05 * (float(seed >> 4 & 7) / 7.0)
 	dna.leaf_density = leaf_base + leaf_per * float(intensity)
-	# Earth-bark trunk + leaf-green crown.
-	dna.primary_color = Color(0.32 + 0.05 * (seed & 3) * 0.1, 0.22, 0.12)
 	dna.secondary_color = Color(0.14, 0.45 + 0.1 * float(intensity) / 5.0, 0.12)
-	dna.tertiary_color = Color(0.20, 0.55, 0.15)
-	dna.symmetry = 3.0 + float(seed % 3)  # 3..5 branch fans
-	dna.roughness = 0.85
-	dna.metallic = 0.0
-
-	# Build under a small wrapper Node3D so we can position it.
-	var tree_root := Node3D.new()
-	tree_root.name = "PaintedTree_%d_%d" % [x, z]
-	parent.add_child(tree_root)
-	tree_root.global_position = _cell_to_world(deposit, ctx)
 
 	var lod: int = clampi(intensity - 2, 0, 3)  # 0,0,1,2,3 for i=1..5
-	TreeMorphologyClass.build(dna, tree_root, _get_trait_mapper(), lod)
+	SpawnService.build_tree(dna, parent, _get_trait_mapper(), lod,
+		"PaintedTree_%d_%d" % [x, z], _cell_to_world(deposit, ctx))
 
 
 # Creature kingdom — wraps CritterSpawner.spawn (production
@@ -324,23 +320,13 @@ func _spawn_creature(deposit: Dictionary, ctx: Dictionary,
 	var mob_base: float = float(s.get("mobility_base", 0.4))
 	var mob_per: float = float(s.get("mobility_per_intensity", 0.1))
 
-	var dna: CritterDNA = CritterDNAClass.new()
-	dna.body_type = 1.0  # walker
+	# Shared walker recipe (symmetry, temperament, HSV colours, finish);
+	# override the intensity-scaled fields from intensity_scaling.creature.
+	var dna: CritterDNA = SpawnService.creature_dna_from_seed(seed)
 	dna.segments = seg_base + seg_per * float(intensity)
-	dna.symmetry = 2.0 + float(seed % 4)  # 2..5
 	dna.scale = scale_base + scale_per * float(intensity)
 	dna.mobility = mob_base + mob_per * float(intensity)
-	dna.aggression = 0.05 + 0.03 * float(seed & 7) / 7.0
-	dna.sociality = 0.5 + 0.4 * (float(seed >> 4 & 7) / 7.0)
-	dna.curiosity = 0.6
-	# Bright per-cell creature colours — read against grass/biome.
-	var hue_base: float = float(seed % 360) / 360.0
-	dna.primary_color = Color.from_hsv(hue_base, 0.65, 0.85)
-	dna.secondary_color = Color.from_hsv(fposmod(hue_base + 0.15, 1.0), 0.5, 0.7)
-	dna.tertiary_color = Color.from_hsv(fposmod(hue_base + 0.45, 1.0), 0.7, 0.9)
 	dna.iridescence = 0.1 + 0.1 * float(intensity) / 5.0
-	dna.roughness = 0.5
-	dna.metallic = 0.05
 
 	var spawner: CritterSpawner = _get_critter_spawner(parent)
 	spawner.spawn(dna, _cell_to_world(deposit, ctx))

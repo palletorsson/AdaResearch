@@ -13,7 +13,9 @@ extends Node3D
 
 const CritterDNAClass = preload("res://algorithms/nature_system/dna/critter_dna.gd")
 const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/critter_trait_mapper.gd")
-const TreeMorphologyClass = preload("res://algorithms/nature_system/morphology/tree_morphology.gd")
+# SpawnService preloaded (not referenced by global class_name) so it
+# resolves on headless runs before the global class cache is rebuilt.
+const SpawnService = preload("res://commons/biome_layers/spawn_service.gd")
 
 # Shared trait mapper — built lazily on first apply(), reused across all
 # trees in this layer instance. Heavy (loads the critter DNA shader);
@@ -45,30 +47,10 @@ func apply(ctx: Dictionary) -> void:
 
 # Build one DNA-driven tree at `pos`. The seed (i) gives each tree in the ring
 # a slightly different DNA without RNG — deterministic, curriculum-friendly.
+# DNA recipe + build now live in BiomeSpawnService (consolidation Phase 1);
+# this layer uses the shared tree-3 defaults verbatim.
 func _spawn_tree(pos: Vector3, i: int) -> void:
 	var seed: int = (i * 31 + 7) & 0xFFFF
-
-	var dna: CritterDNA = CritterDNAClass.new()
-	dna.body_type = 0.0  # 0 = tree in MorphologyRouter's encoding
-	# Medium-tier tree (intensity 3 of 5). Mirrors dispatcher's tree-3 config.
-	dna.segments = 5.0
-	dna.scale = 1.0
-	dna.branch_angle = 18.0 + float(seed % 16)         # 18..33 deg
-	dna.branch_decay = 0.65 + 0.05 * (float(seed >> 4 & 7) / 7.0)
-	dna.leaf_density = 0.55
-	# Earth-bark trunk + leaf-green crown — matches the dispatcher palette
-	# so painted t-cells and ring trees read as the same kingdom.
-	dna.primary_color = Color(0.32 + 0.05 * float(seed & 3) * 0.1, 0.22, 0.12)
-	dna.secondary_color = Color(0.14, 0.55, 0.12)
-	dna.tertiary_color = Color(0.20, 0.55, 0.15)
-	dna.symmetry = 3.0 + float(seed % 3)  # 3..5 branch fans
-	dna.roughness = 0.85
-	dna.metallic = 0.0
-
-	var tree_root := Node3D.new()
-	tree_root.name = "RingTree_%d" % i
-	add_child(tree_root)
-	tree_root.global_position = pos
-
+	var dna: CritterDNA = SpawnService.tree_dna_from_seed(seed)
 	# LOD 1: 4-sided tubes, ~80 branch cap. Cheap enough to ring 8 maps with.
-	TreeMorphologyClass.build(dna, tree_root, _get_trait_mapper(), 1)
+	SpawnService.build_tree(dna, self, _get_trait_mapper(), 1, "RingTree_%d" % i, pos)

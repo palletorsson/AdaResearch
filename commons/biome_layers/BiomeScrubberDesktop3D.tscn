@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cgos0rovpxkv7"]
+
+[ext_resource type="Script" uid="uid://bcs8s58anf0nl" path="res://commons/biome_layers/BiomeScrubberDesktop3D.gd" id="1_script"]
+
+[node name="BiomeScrubberDesktop3D" type="Node3D" unique_id=701150844]
+script = ExtResource("1_script")

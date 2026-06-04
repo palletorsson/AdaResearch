@@ -57,9 +57,28 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 	accrual.name = "BiomeAccrual"
 	grid_root.add_child(accrual)
 
+	# ── Per-map overrides ─────────────────────────────────────────────
+	# A map's settings.biome_overrides lets it ADD / REMOVE / CHANGE the
+	# biome on top of its sequence default:
+	#   { "stage_order": 12, "disable": ["paradox_zones"],
+	#     "params": { "lsystem_trees": { "spawn_density": 0.2 } },
+	#     "add": [ { "kind": "flora_spawn", "params": {...} } ] }
+	# The sequence provides the default; the map overrides it. A debug
+	# set_stage_override (the scrubber) still wins over stage_order.
+	var overrides: Dictionary = context.get("biome_overrides", {})
+	if not (overrides is Dictionary):
+		overrides = {}
+	var override_disable: Dictionary = {}
+	for k in overrides.get("disable", []):
+		override_disable[str(k)] = true
+	var override_params: Dictionary = overrides.get("params", {}) if (overrides.get("params") is Dictionary) else {}
+
 	var target_order: int = _current_stage_order()
-	print("🌿 BiomeAccrual.apply() START — map=%s stage_order=%d contributions=%d" % [
-		str(context.get("map_name", "?")), target_order, _contributions.size()
+	if _stage_override < 0 and overrides.has("stage_order"):
+		target_order = int(overrides["stage_order"])
+	print("🌿 BiomeAccrual.apply() START — map=%s stage_order=%d contributions=%d overrides=%s" % [
+		str(context.get("map_name", "?")), target_order, _contributions.size(),
+		"yes" if not overrides.is_empty() else "no"
 	])
 	if target_order == 0:
 		push_warning("BiomeAccrual: stage_order=0 — no layers will apply. Check EcosystemManager.sync_to_map for this map.")
@@ -93,6 +112,9 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 		if _disabled_kinds.has(kind):
 			skipped.append(kind + "(disabled)")
 			continue
+		if override_disable.has(kind):
+			skipped.append(kind + "(map_override)")
+			continue
 		if not _layer_scripts.has(kind):
 			skipped.append(kind + "(unimplemented)")
 			continue
@@ -103,13 +125,38 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 		accrual.add_child(layer_node)
 
 		var layer_ctx := context.duplicate()
-		layer_ctx["params"] = entry.get("params", {})
+		# Merge per-map param overrides over the sequence-default params.
+		var merged_params: Dictionary = (entry.get("params", {}) as Dictionary).duplicate(true)
+		if override_params.has(kind) and override_params[kind] is Dictionary:
+			merged_params.merge(override_params[kind], true)
+		layer_ctx["params"] = merged_params
 		layer_ctx["order"] = order
 		layer_ctx["seq"] = entry.get("seq", "")
 		layer_ctx["accrual_root"] = accrual  # Later layers can find/modify prior layers
 		if layer_node.has_method("apply"):
 			layer_node.call("apply", layer_ctx)
 		applied.append(kind)
+
+	# ── Per-map ADD: extra layers beyond the sequence default ─────────
+	for add_entry in overrides.get("add", []):
+		if not (add_entry is Dictionary):
+			continue
+		var ak: String = str(add_entry.get("kind", ""))
+		if ak == "" or not _layer_scripts.has(ak):
+			skipped.append(str(ak) + "(add:unavailable)")
+			continue
+		var an: Node3D = Node3D.new()
+		an.name = "Layer_ADD_%s" % ak
+		an.set_script(_layer_scripts[ak])
+		accrual.add_child(an)
+		var actx := context.duplicate()
+		actx["params"] = add_entry.get("params", {})
+		actx["order"] = target_order
+		actx["seq"] = "map_add"
+		actx["accrual_root"] = accrual
+		if an.has_method("apply"):
+			an.call("apply", actx)
+		applied.append(ak + "(added)")
 
 	print("BiomeAccrual: stage=%d applied=%s skipped=%s" % [target_order, str(applied), str(skipped)])
 	return accrual
