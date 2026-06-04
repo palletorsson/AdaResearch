@@ -41,10 +41,10 @@ class_name WallPlacard
 @export var viewport_width: int = 1024
 @export var viewport_height: int = 694
 
-## Degrees added to the lab editor's wall-facing yaw. The placard's visible card
-## is on the +Z side but it reads as the "back" to the wall-align convention, so
-## it needs a half turn to face the room when stuck to a wall.
-@export var wall_facing_offset_deg: float = 180.0
+## Degrees added to the lab editor's wall-facing yaw, for artifacts whose front
+## is the opposite of the +Z convention. The placard is +Z-front (same as the
+## chalkboard), so 0 — it faces the room with no extra turn.
+@export var wall_facing_offset_deg: float = 0.0
 
 @export_group("Mounting")
 ## When true the placard is grabbable and SLIDES VERTICALLY along the wall:
