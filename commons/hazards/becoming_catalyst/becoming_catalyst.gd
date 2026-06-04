@@ -937,7 +937,7 @@ func _apply_lab_magnetism(node: Node3D) -> void:
 	# Nearest wall within snap distance (the wall to align + sit flush against).
 	var wd: Array = [absf(p.x - rw / 2.0), absf(p.x + rw / 2.0), absf(p.z - rd / 2.0), absf(p.z + rd / 2.0)]
 	var wcoord: Array = [rw / 2.0, -rw / 2.0, rd / 2.0, -rd / 2.0]
-	var wyaw: Array = [90.0, 270.0, 180.0, 0.0]  # face INTO the room (front to viewer)
+	var wyaw: Array = [270.0, 90.0, 0.0, 180.0]  # face INTO the room (front to viewer; +Z-forward)
 	var wisx: Array = [true, true, false, false]
 	var bw := -1
 	var bd: float = LAB_SNAP_DIST + 0.001
@@ -974,6 +974,7 @@ func _apply_lab_magnetism(node: Node3D) -> void:
 				node.position.z += wcoord[bw] - ab.position.z
 			node.position.x = _snap01(node.position.x)
 		node.position.y = _snap01(node.position.y)
+		_clamp_prop_to_room(node, rw, rd, rh)
 		node.set_meta("lab_stuck", true)
 		return
 
@@ -1001,7 +1002,32 @@ func _apply_lab_magnetism(node: Node3D) -> void:
 		node.position.x = _snap01(node.position.x)
 		node.position.y = _snap01(node.position.y)
 		node.position.z = _snap01(node.position.z)
+	_clamp_prop_to_room(node, rw, rd, rh)
 	node.set_meta("lab_stuck", stuck)
+
+## Keep the prop's body inside the room — never let any part cross a wall, the
+## floor, or the ceiling. Uses its AABB; pushes it back in if an edge pokes out.
+## Guarantees an artifact always sits on the room side of every plane.
+func _clamp_prop_to_room(node: Node3D, rw: float, rd: float, rh: float) -> void:
+	var ab: AABB = node.transform * _held_aabb
+	if ab.size.length() <= 0.0001:
+		return
+	var lo: Vector3 = ab.position
+	var hi: Vector3 = ab.position + ab.size
+	var push := Vector3.ZERO
+	if lo.x < -rw / 2.0:
+		push.x = -rw / 2.0 - lo.x
+	elif hi.x > rw / 2.0:
+		push.x = rw / 2.0 - hi.x
+	if lo.z < -rd / 2.0:
+		push.z = -rd / 2.0 - lo.z
+	elif hi.z > rd / 2.0:
+		push.z = rd / 2.0 - hi.z
+	if lo.y < 0.0:
+		push.y = -lo.y
+	elif hi.y > rh:
+		push.y = rh - hi.y
+	node.position += push
 
 ## AABB of a node's visible meshes in the node's OWN local frame (constant; cached
 ## on grab). node.transform * this gives the room-local AABB (exact for the 90°-
