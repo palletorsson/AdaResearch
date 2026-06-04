@@ -85,6 +85,7 @@ var _edit_highlight: MeshInstance3D = null
 const EDIT_MAX_RANGE := 8.0
 const EDIT_RAY_RADIUS := 0.6  # how close to the laser line an artifact must be
 const EDIT_HOLD_DISTANCE := 1.5  # how far in front of the hand a grabbed artifact floats
+const EDIT_MAX_Y_LEVEL := 6  # artifacts can float up to this grid level when dropped in air
 
 # Tip marker — where projectiles spawn
 var _tip: Marker3D = null
@@ -325,6 +326,10 @@ func _flash_label(text: String, color: Color) -> void:
 func _collect_vr_placements() -> Array:
 	var clears: Array = []
 	var sets: Array = []
+	var structure := _get_edit_structure()
+	var total_size: float = 1.0
+	if structure:
+		total_size = structure.cube_size + structure.gutter
 	for node in get_tree().get_nodes_in_group("vr_placed_artifact"):
 		if not is_instance_valid(node):
 			continue
@@ -332,9 +337,20 @@ func _collect_vr_placements() -> Array:
 		var cell: Vector2i = node.get_meta("grid_cell", Vector2i(-1, -1))
 		if lookup == "" or cell.x < 0 or cell.y < 0:
 			continue
-		var token := lookup
 		var rot := int(round(float(node.get_meta("grid_rotation_y", 0.0))))
-		if rot != 0:
+		# Free-height drops: encode the vertical offset from the column top as the
+		# token's y_position param, so the artifact reloads at the same level.
+		var y_token := ""
+		if structure and node.has_meta("grid_y_level"):
+			var y_level: int = int(node.get_meta("grid_y_level", 0))
+			var base: int = structure.find_highest_y_at(cell.x, cell.y)
+			var y_off: float = float(y_level - base) * total_size
+			if absf(y_off) > 0.001:
+				y_token = String.num(y_off, 3).rstrip("0").rstrip(".")
+		var token := lookup
+		if y_token != "":
+			token = "%s:%d:%s" % [lookup, rot, y_token]  # lookup:yaw:y_offset
+		elif rot != 0:
 			token = "%s:%d" % [lookup, rot]
 		# Clear the previous cell if this artifact moved.
 		var saved: Vector2i = node.get_meta("vr_saved_cell", Vector2i(-1, -1))
@@ -796,20 +812,23 @@ func _edit_release() -> void:
 	var local: Vector3 = (node.global_position - grid_origin) / total_size
 	var x: int = clampi(int(round(local.x)), 0, maxi(dims.x - 1, 0))
 	var z: int = clampi(int(round(local.z)), 0, maxi(dims.z - 1, 0))
-	var y_pos: int = structure.find_highest_y_at(x, z)
+	# Respect the height you dropped it at: snap Y to the nearest integer level.
+	# Dropped low it lands on the surface; lifted, it stays floating at that level.
+	var y_level: int = clampi(int(round(local.y)), 0, maxi(dims.y - 1, EDIT_MAX_Y_LEVEL))
 	# snap rotation: upright, yaw to nearest 90°
 	var yaw_deg: float = rad_to_deg(node.global_rotation.y)
 	var snapped_yaw: float = round(yaw_deg / 90.0) * 90.0
 	node.global_rotation = Vector3(0.0, deg_to_rad(snapped_yaw), 0.0)
-	node.global_position = grid_origin + Vector3(x, y_pos, z) * total_size
+	node.global_position = grid_origin + Vector3(x, y_level, z) * total_size
 	node.set_meta("grid_cell", Vector2i(x, z))
+	node.set_meta("grid_y_level", y_level)
 	node.set_meta("grid_rotation_y", fposmod(snapped_yaw, 360.0))
 	if not node.is_in_group("vr_placed_artifact"):
 		node.add_to_group("vr_placed_artifact")  # now it'll save with B
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.5, 0.0)
 	_flash_label("MOVED  %s" % String(node.get_meta("artifact_lookup_name", "")), Color(0.4, 1.0, 0.6))
-	print("[Catalyst] Edit drop -> cell (%d,%d) y=%d yaw=%d" % [x, z, y_pos, int(snapped_yaw)])
+	print("[Catalyst] Edit drop -> cell (%d,%d) y=%d yaw=%d" % [x, z, y_level, int(snapped_yaw)])
 
 func _end_edit_mode() -> void:
 	if is_instance_valid(_edit_grabbed):
