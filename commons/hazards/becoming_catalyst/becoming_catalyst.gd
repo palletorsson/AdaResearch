@@ -85,6 +85,7 @@ var _edit_trigger_was_down: bool = false
 var _edit_highlight: MeshInstance3D = null
 var _edit_is_lab: bool = false  # lab_edit mode → surface-magnetism for lab props
 var _lab_surfaces: Array = []   # cached other-prop tops (room-local) for table-stacking
+var _held_aabb: AABB = AABB()   # the grabbed prop's own AABB (prop-local), for flush offset
 const LAB_SNAP_DIST := 0.25     # m: within this of a surface, the prop sticks flush
 const LAB_SAVE_URL := "http://localhost:3003/api/labs/save"
 const EDIT_MAX_RANGE := 8.0
@@ -808,6 +809,7 @@ func _edit_grab() -> void:
 	_edit_grab_offset = rel
 	if _edit_is_lab:
 		_cache_lab_surfaces(_edit_grabbed)  # snapshot other props' tops for stacking
+		_held_aabb = _local_aabb(_edit_grabbed)  # its own size, for flush-to-wall
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.4, 0.0)
 	print("[Catalyst] Edit grab: %s" % String(_edit_grabbed.get_meta("artifact_lookup_name", "?")))
@@ -931,41 +933,112 @@ func _apply_lab_magnetism(node: Node3D) -> void:
 	var rd: float = dims_v.y
 	var rh: float = dims_v.z
 	var p: Vector3 = node.position
+
+	# Nearest wall within snap distance (the wall to align + sit flush against).
+	var wd: Array = [absf(p.x - rw / 2.0), absf(p.x + rw / 2.0), absf(p.z - rd / 2.0), absf(p.z + rd / 2.0)]
+	var wcoord: Array = [rw / 2.0, -rw / 2.0, rd / 2.0, -rd / 2.0]
+	var wyaw: Array = [90.0, 270.0, 180.0, 0.0]  # face INTO the room (front to viewer)
+	var wisx: Array = [true, true, false, false]
+	var bw := -1
+	var bd: float = LAB_SNAP_DIST + 0.001
+	for i in 4:
+		if wd[i] < bd:
+			bd = wd[i]
+			bw = i
+
+	if bw >= 0:
+		# stick to the wall, ALIGN the facing to it, and offset so it sits flush.
+		var np: Vector3 = p
+		if p.y <= LAB_SNAP_DIST:
+			np.y = 0.0  # a wall prop near the floor also stands on it
+		elif p.y >= rh - LAB_SNAP_DIST:
+			np.y = rh
+		if wisx[bw]:
+			np.x = wcoord[bw]
+		else:
+			np.z = wcoord[bw]
+		node.position = np
+		node.rotation = Vector3(0.0, deg_to_rad(wyaw[bw]), 0.0)  # align: face the room
+		# Flush: push the prop's wall-side edge exactly onto the wall plane.
+		var ab: AABB = node.transform * _held_aabb
+		if wisx[bw]:
+			if wcoord[bw] > 0.0:
+				node.position.x += wcoord[bw] - (ab.position.x + ab.size.x)
+			else:
+				node.position.x += wcoord[bw] - ab.position.x
+			node.position.z = _snap01(node.position.z)  # grid along the wall
+		else:
+			if wcoord[bw] > 0.0:
+				node.position.z += wcoord[bw] - (ab.position.z + ab.size.z)
+			else:
+				node.position.z += wcoord[bw] - ab.position.z
+			node.position.x = _snap01(node.position.x)
+		node.position.y = _snap01(node.position.y)
+		node.set_meta("lab_stuck", true)
+		return
+
+	# No wall — floor / ceiling / table for the vertical axis (free rotation kept).
 	var s: Vector3 = p
 	var stuck := false
-	# floor / ceiling
 	if p.y <= LAB_SNAP_DIST:
 		s.y = 0.0
 		stuck = true
 	elif p.y >= rh - LAB_SNAP_DIST:
 		s.y = rh
 		stuck = true
-	# walls
-	if absf(p.x - rw / 2.0) <= LAB_SNAP_DIST:
-		s.x = rw / 2.0
-		stuck = true
-	elif absf(p.x + rw / 2.0) <= LAB_SNAP_DIST:
-		s.x = -rw / 2.0
-		stuck = true
-	if absf(p.z - rd / 2.0) <= LAB_SNAP_DIST:
-		s.z = rd / 2.0
-		stuck = true
-	elif absf(p.z + rd / 2.0) <= LAB_SNAP_DIST:
-		s.z = -rd / 2.0
-		stuck = true
-	# table — stick on top of another prop the held one is hovering over
 	for surf in _lab_surfaces:
 		if absf(p.x - surf["cx"]) <= surf["hx"] + 0.1 and absf(p.z - surf["cz"]) <= surf["hz"] + 0.1:
 			if absf(p.y - surf["top"]) <= LAB_SNAP_DIST and p.y >= surf["top"] - 0.05:
 				s.y = surf["top"]
 				stuck = true
 				break
-	if stuck:
-		s.x = _snap01(s.x)
-		s.y = _snap01(s.y)
-		s.z = _snap01(s.z)
 	node.position = s
+	# floor flush — push the prop's bottom onto the floor (base-origin → no change)
+	if stuck and is_zero_approx(s.y):
+		var ab2: AABB = node.transform * _held_aabb
+		node.position.y += -ab2.position.y
+	if stuck:
+		node.position.x = _snap01(node.position.x)
+		node.position.y = _snap01(node.position.y)
+		node.position.z = _snap01(node.position.z)
 	node.set_meta("lab_stuck", stuck)
+
+## AABB of a node's visible meshes in the node's OWN local frame (constant; cached
+## on grab). node.transform * this gives the room-local AABB (exact for the 90°-
+## multiple facing yaws we use), which drives the flush-to-wall offset.
+func _local_aabb(root: Node3D) -> AABB:
+	var result := AABB()
+	var first := true
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		if n is VisualInstance3D:
+			var vi := n as VisualInstance3D
+			var a: AABB = vi.get_aabb()
+			if a.size.length() > 0.0001:
+				var t := Transform3D.IDENTITY
+				var cur: Node = n
+				while cur != null and cur != root:
+					if cur is Node3D:
+						t = (cur as Node3D).transform * t
+					cur = cur.get_parent()
+				for i in 8:
+					var c: Vector3 = a.position
+					if i & 1:
+						c.x += a.size.x
+					if i & 2:
+						c.y += a.size.y
+					if i & 4:
+						c.z += a.size.z
+					var lc: Vector3 = t * c
+					if first:
+						result = AABB(lc, Vector3.ZERO)
+						first = false
+					else:
+						result = result.expand(lc)
+		for ch in n.get_children():
+			stack.append(ch)
+	return result
 
 ## Snapshot the OTHER lab props' tops + footprints (room-local) so the held prop
 ## can stick on them (tables). Assumes the lab_room is axis-aligned in the world.
