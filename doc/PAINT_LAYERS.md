@@ -17,12 +17,12 @@ element       what it places / modulates          engine (today)
 ground        heightfield / bump (substrate)       — (step-2b, not wired)
 shader        ground-shader drain + paint           — (research jewel, later)
 particle      CPU/GPU particle field                — (later)
-object        any artifact, by density              biome_paint_dispatcher
+object        any artifact, by density              biome_paint_dispatcher (infra-heavy, TODO)
 flower        flowers                               softbody_flora      ✅ wired
-mushroom      fungus / CA surface                   ca_surface
+mushroom      earthy/toadstool softbodies           softbody_flora      ✅ wired
 tree          L-system trees                        lsystem_trees       ✅ wired
 critter       small DNA creatures                   dna_creatures       ✅ wired
-large_critter big creatures                          swarm_creatures
+large_critter big DNA creatures (≈3× scale)         dna_creatures       ✅ wired
 ```
 
 9 named layers, but only ~4 distinct **engines**: three substrate fields

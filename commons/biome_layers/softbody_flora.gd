@@ -35,43 +35,59 @@ func apply(ctx: Dictionary) -> void:
 			positions.append(grid_center + Vector3(cos(angle) * r, 0.0, sin(angle) * r))
 
 	for pos in positions:
+		_spawn_flora(pos, rng, stiffness, pressure, false)
 
-		var root := Node3D.new()
-		root.position = pos
-		add_child(root)
+	# Paint-only "mushroom" tier — same softbody form, earthy domed caps.
+	# Same engine, different element. See doc/PAINT_LAYERS.md.
+	if DistributionField.has_layer_for(ctx, "mushroom"):
+		for pos in DistributionField.placements_for(ctx, "mushroom"):
+			_spawn_flora(pos, rng, stiffness, pressure, true)
 
-		# Stem
-		var stem := MeshInstance3D.new()
-		var sm := CylinderMesh.new()
-		sm.top_radius = 0.05
-		sm.bottom_radius = 0.08
-		sm.height = 0.6
-		sm.radial_segments = 6
-		stem.mesh = sm
-		stem.position.y = 0.3
-		_apply_mat(stem, Color(0.85, 0.82, 0.7))
-		root.add_child(stem)
 
-		# Cap (the "soft" part)
-		var cap := MeshInstance3D.new()
-		var cm := SphereMesh.new()
-		cm.radius = 0.22
-		cm.height = 0.36
-		cm.radial_segments = 8
-		cm.rings = 6
-		cap.mesh = cm
-		cap.position.y = 0.7
-		var hue: float = rng.randf()
-		_apply_mat(cap, Color.from_hsv(hue, 0.5, 0.95))
-		root.add_child(cap)
+## One softbody stem+cap at `pos`. `is_mushroom` → flatter earthy/toadstool cap
+## (vs the bright flower cap). Registers it for the _process wobble.
+func _spawn_flora(pos: Vector3, rng: RandomNumberGenerator, stiffness: float, pressure: float, is_mushroom: bool) -> void:
+	var root := Node3D.new()
+	root.position = pos
+	add_child(root)
 
-		_flora.append({
-			"cap": cap,
-			"phase": rng.randf() * TAU,
-			"stiffness": stiffness,
-			"pressure": pressure,
-			"base_scale": cap.scale,
-		})
+	# Stem
+	var stem := MeshInstance3D.new()
+	var sm := CylinderMesh.new()
+	sm.top_radius = 0.05
+	sm.bottom_radius = 0.08
+	sm.height = 0.5 if is_mushroom else 0.6
+	sm.radial_segments = 6
+	stem.mesh = sm
+	stem.position.y = sm.height * 0.5
+	_apply_mat(stem, Color(0.92, 0.90, 0.84) if is_mushroom else Color(0.85, 0.82, 0.7))
+	root.add_child(stem)
+
+	# Cap (the "soft" part)
+	var cap := MeshInstance3D.new()
+	var cm := SphereMesh.new()
+	cm.radius = 0.26 if is_mushroom else 0.22
+	cm.height = 0.26 if is_mushroom else 0.36   # flatter dome for mushrooms
+	cm.radial_segments = 8
+	cm.rings = 6
+	cap.mesh = cm
+	cap.position.y = sm.height + (0.04 if is_mushroom else 0.1)
+	var col: Color
+	if is_mushroom:
+		# Earthy caps — brown/tan, with the odd toadstool red.
+		col = Color(0.74, 0.18, 0.16) if rng.randf() < 0.25 else Color.from_hsv(0.07 + rng.randf() * 0.04, 0.45, 0.55 + rng.randf() * 0.2)
+	else:
+		col = Color.from_hsv(rng.randf(), 0.5, 0.95)
+	_apply_mat(cap, col)
+	root.add_child(cap)
+
+	_flora.append({
+		"cap": cap,
+		"phase": rng.randf() * TAU,
+		"stiffness": stiffness,
+		"pressure": pressure,
+		"base_scale": cap.scale,
+	})
 
 
 func _process(_delta: float) -> void:

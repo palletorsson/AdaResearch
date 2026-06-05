@@ -63,26 +63,35 @@ func apply(ctx: Dictionary) -> void:
 			positions.append(grid_center + Vector3(cos(angle) * r, 0.0, sin(angle) * r))
 
 	for pos in positions:
-		var seed: int = (int(pos.x * 13.0) * 41 + int(pos.z * 13.0) * 23) & 0xFFFF
+		_spawn_creature(pos, false)
 
-		# Walker-tuned DNA — same shape as biome_paint_dispatcher's
-		# _spawn_creature, slightly smaller / less aggressive (decorative).
-		var dna: CritterDNA = CritterDNAClass.new()
-		dna.body_type = 1.0  # walker
-		dna.segments = 4.0 + float(seed % 4)               # 4..7
-		dna.symmetry = 2.0 + float(seed % 4)               # 2..5
-		dna.scale = 0.4 + 0.20 * (float(seed >> 3 & 7) / 7.0)  # ~0.4..0.6
-		dna.mobility = 0.4 + 0.10 * (float(seed >> 5 & 7) / 7.0)
-		dna.aggression = 0.05 + 0.03 * float(seed & 7) / 7.0
-		dna.sociality = 0.5 + 0.4 * (float(seed >> 4 & 7) / 7.0)
-		dna.curiosity = 0.6
-		# Bright per-creature colours — read against grass + tree biome.
-		var hue_base: float = float(seed % 360) / 360.0
-		dna.primary_color = Color.from_hsv(hue_base, 0.65, 0.85)
-		dna.secondary_color = Color.from_hsv(fposmod(hue_base + 0.15, 1.0), 0.5, 0.7)
-		dna.tertiary_color = Color.from_hsv(fposmod(hue_base + 0.45, 1.0), 0.7, 0.9)
-		dna.iridescence = 0.10
-		dna.roughness = 0.5
-		dna.metallic = 0.05
+	# Paint-only "large_critter" tier — bigger, bolder DNA, no default ring.
+	# Same engine, different scale: the "same principle, different element"
+	# the paint-layer model is built on. See doc/PAINT_LAYERS.md.
+	if DistributionField.has_layer_for(ctx, "large_critter"):
+		for pos in DistributionField.placements_for(ctx, "large_critter"):
+			_spawn_creature(pos, true)
 
-		_get_spawner().spawn(dna, pos)
+
+## One walker creature at `pos`. `big` → the large_critter tier (≈3× scale,
+## more segments, a touch bolder). Deterministic DNA from the position seed.
+func _spawn_creature(pos: Vector3, big: bool) -> void:
+	var seed: int = (int(pos.x * 13.0) * 41 + int(pos.z * 13.0) * 23) & 0xFFFF
+	var dna: CritterDNA = CritterDNAClass.new()
+	dna.body_type = 1.0  # walker
+	dna.segments = (6.0 + float(seed % 5)) if big else (4.0 + float(seed % 4))   # big 6..10
+	dna.symmetry = 2.0 + float(seed % 4)               # 2..5
+	dna.scale = (1.1 + 0.5 * (float(seed >> 3 & 7) / 7.0)) if big else (0.4 + 0.20 * (float(seed >> 3 & 7) / 7.0))
+	dna.mobility = 0.4 + 0.10 * (float(seed >> 5 & 7) / 7.0)
+	dna.aggression = (0.20 + 0.10 * float(seed & 7) / 7.0) if big else (0.05 + 0.03 * float(seed & 7) / 7.0)
+	dna.sociality = 0.5 + 0.4 * (float(seed >> 4 & 7) / 7.0)
+	dna.curiosity = 0.6
+	# Bright per-creature colours — read against grass + tree biome.
+	var hue_base: float = float(seed % 360) / 360.0
+	dna.primary_color = Color.from_hsv(hue_base, 0.65, 0.85)
+	dna.secondary_color = Color.from_hsv(fposmod(hue_base + 0.15, 1.0), 0.5, 0.7)
+	dna.tertiary_color = Color.from_hsv(fposmod(hue_base + 0.45, 1.0), 0.7, 0.9)
+	dna.iridescence = 0.10
+	dna.roughness = 0.5
+	dna.metallic = 0.05
+	_get_spawner().spawn(dna, pos)

@@ -78,7 +78,7 @@ var _timeline: HBoxContainer = null
 var _tick_rects: Array = []          # Array[ColorRect], one per stage 1..MAX
 # Brush painting (step 3) — left-drag paints a per-cell density field for the
 # active element; the wired spawn layers place by it; W saves to the map.
-var _paint_elements: Array = ["tree", "critter", "flower"]
+var _paint_elements: Array = ["tree", "critter", "flower", "mushroom", "large_critter"]
 var _paint_idx: int = -1             # -1 = not painting; else index into _paint_elements
 var _brush_fields: Dictionary = {}   # element -> PackedFloat32Array (grid_w*grid_d)
 var _brush_radius: int = 2
@@ -888,6 +888,8 @@ func _element_color(el: String) -> Color:
 		"tree": return Color(0.45, 0.85, 0.50)
 		"critter": return Color(1.0, 0.70, 0.36)
 		"flower": return Color(1.0, 0.55, 0.76)
+		"mushroom": return Color(0.80, 0.55, 0.40)
+		"large_critter": return Color(0.95, 0.45, 0.30)
 	return Color(0.7, 0.7, 0.7)
 
 
