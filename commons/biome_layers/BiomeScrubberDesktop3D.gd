@@ -35,6 +35,9 @@ extends Node3D
 
 const MIN_STAGE := 1
 const MAX_STAGE := 19
+# Reuse the VR brush menu (element grid + size + pressure sliders) as the
+# desktop's right-side brush-settings panel — one menu, both editors.
+const BrushMenuScene = preload("res://commons/hazards/becoming_catalyst/biome_brush_menu_ui.tscn")
 @export var grid_size: int = 20          # synthetic default (square)
 @export var cube_size: float = 1.0
 @export var auto_spin: bool = false   # OFF — a spinning scene fights painting (R-drag still orbits)
@@ -87,6 +90,7 @@ var _brush_erase: bool = false
 var _painting: bool = false
 var _brush_dirty: bool = false       # set while dragging; triggers rebuild on release
 var _brush_overlay: MultiMeshInstance3D = null
+var _brush_menu_ui: Control = null   # right-side brush-settings panel (reused VR menu)
 var _brushtest: String = ""          # --brushtest=<element> headless proof
 var _brushsave: bool = false         # --brushsave: save after brushtest (headless save proof)
 var _stage: int = 1
@@ -831,19 +835,39 @@ func _build_ui() -> void:
 	_perf.add_theme_color_override("font_color", C_GOOD)
 	_perf_panel.add_child(_perf)
 
-	# ── Right-side layer panel ────────────────────────────────────────
+	# ── LEFT-side layer panel (moved from the right to make room for the
+	#    brush-settings menu) ──────────────────────────────────────────
 	_panel_root = PanelContainer.new()
-	_panel_root.anchor_left = 1.0
-	_panel_root.anchor_right = 1.0
+	_panel_root.anchor_left = 0.0
+	_panel_root.anchor_right = 0.0
 	_panel_root.anchor_top = 0.0
-	_panel_root.offset_left = -(PANEL_W + 8.0)
+	_panel_root.offset_left = 8.0
 	_panel_root.offset_top = BAR_H + 8.0
-	_panel_root.offset_right = -8.0
+	_panel_root.offset_right = 8.0 + PANEL_W
 	_panel_root.add_theme_stylebox_override("panel", _new_stylebox(C_BG, 0.0, 8.0))
 	layer.add_child(_panel_root)
 	_panel = VBoxContainer.new()
 	_panel.add_theme_constant_override("separation", 3)
 	_panel_root.add_child(_panel)
+
+	# ── Right-side BRUSH SETTINGS menu (reused VR menu: element grid +
+	#    size + pressure). The pointer selects; signals drive the brush. ──
+	var brush_wrap := Control.new()
+	brush_wrap.anchor_left = 1.0; brush_wrap.anchor_right = 1.0
+	brush_wrap.anchor_top = 0.0; brush_wrap.anchor_bottom = 1.0
+	brush_wrap.offset_left = -498.0
+	brush_wrap.offset_top = BAR_H + 8.0
+	brush_wrap.offset_right = -8.0
+	brush_wrap.offset_bottom = -8.0
+	layer.add_child(brush_wrap)
+	_brush_menu_ui = BrushMenuScene.instantiate()
+	brush_wrap.add_child(_brush_menu_ui)
+	if _brush_menu_ui.has_signal("element_selected"):
+		_brush_menu_ui.element_selected.connect(_on_menu_element)
+	if _brush_menu_ui.has_signal("size_changed"):
+		_brush_menu_ui.size_changed.connect(_on_menu_size)
+	if _brush_menu_ui.has_signal("pressure_changed"):
+		_brush_menu_ui.pressure_changed.connect(_on_menu_pressure)
 
 	# Error overlay label (normally hidden) — used only when an autoload
 	# is missing, before the info labels have anything to show.
@@ -885,7 +909,32 @@ func _cycle_paint_element() -> void:
 		_paint_idx = -1
 	if _brush_overlay:
 		_brush_overlay.visible = _paint_idx >= 0
+	# Keep the right-side menu highlight in sync with the keyboard cycle.
+	if _brush_menu_ui and _paint_idx >= 0 and _brush_menu_ui.has_method("set_selected_element"):
+		_brush_menu_ui.set_selected_element(str(_paint_elements[_paint_idx]))
 	_update_brush_overlay()
+	_update_hud()
+
+
+# ── Right-side brush-settings menu signals ────────────────────────────
+func _on_menu_element(element_name: String) -> void:
+	var idx := _paint_elements.find(element_name)
+	if idx < 0:
+		return
+	_paint_idx = idx
+	if _brush_overlay:
+		_brush_overlay.visible = true
+	_update_brush_overlay()
+	_update_hud()
+
+
+func _on_menu_size(r: int) -> void:
+	_brush_radius = clampi(r, 0, 8)
+	_update_hud()
+
+
+func _on_menu_pressure(p: float) -> void:
+	_brush_strength = clampf(p, 0.1, 1.0)
 	_update_hud()
 
 
