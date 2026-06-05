@@ -313,7 +313,9 @@ func _rebuild() -> void:
 		"grid_dims": dims,
 		"grid_center": Vector3(float(grid_w) * cube_size * 0.5, 0.0, float(grid_d) * cube_size * 0.5),
 		"cube_size": cube_size,
-		"rng_seed": 0xB10E,  # stable seed so scrubbing is deterministic
+		# Seed parity: match GridSystem's hash(map_name) so the scrubber preview is
+		# the SAME arrangement the game renders. Synthetic mode keeps a fixed seed.
+		"rng_seed": (hash(_loaded_map) if _loaded_map != "" else 0xB10E),
 		"map_name": _loaded_map if _loaded_map != "" else "BiomeScrubber",
 		"biome_paint": _map_paint,
 		"stage_order": _stage,
@@ -452,7 +454,11 @@ func _save_overrides() -> void:
 		dis.append(k)
 	if not dis.is_empty():
 		ov["disable"] = dis
-	ov["stage_order"] = _stage
+	# Only persist a DELIBERATE stage override — not the map's natural sequence
+	# stage (which map-walk derives into _stage). Writing it unconditionally pinned
+	# every saved map to a fixed stage, desyncing it from curriculum reordering.
+	if _stage != start_stage:
+		ov["stage_order"] = _stage
 	# Preserve param/add overrides that the scrubber doesn't edit yet.
 	if _map_overrides.has("params"):
 		ov["params"] = _map_overrides["params"]
@@ -485,6 +491,7 @@ func _save_overrides() -> void:
 		return
 	f.store_string(JSON.stringify(_map_data, "\t"))
 	f.close()
+	SequenceAccrualLib.invalidate(_loaded_map)   # this map's accrual cache is now stale
 	_map_overrides = ov
 	_status_msg = "✓ saved → %s  (disable=%d, stage=%d, brush=%d)" % [_loaded_map, dis.size(), _stage, _brush_fields.size()]
 	_update_hud()

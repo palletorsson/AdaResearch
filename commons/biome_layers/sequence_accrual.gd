@@ -20,10 +20,27 @@ class_name SequenceAccrual
 
 const MAPS_DIR := "res://commons/maps/"
 
+# Session cache of each map's own paint_layers, keyed by map name. A late map in a
+# long sequence accrues from dozens of earlier maps; without this every map load
+# (and every live brush rebuild) re-opened + re-parsed all of them on the main
+# thread. Invalidated per-map on save (invalidate) — see the brush save paths.
+static var _paint_cache: Dictionary = {}
+
+
+## Drop a map's cached paint_layers (call after writing its map_data.json so the
+## next accrual re-reads the fresh layers). No arg clears the whole cache.
+static func invalidate(map_name: String = "") -> void:
+	if map_name == "":
+		_paint_cache.clear()
+	else:
+		_paint_cache.erase(map_name)
+
 
 ## The effective paint layers for `map_name`: every earlier map's layers (sequence
-## order) followed by `own_layers` (own last → own wins for same-element overrides
-## the consumers resolve). `eco` is the EcosystemManager autoload (may be null).
+## order) followed by `own_layers` (own last). Same-element layers ACCUMULATE; the
+## consumer (DistributionField.placements_for) dedupes per cell and caps the
+## per-element total, so accrual thickens the distribution without unbounded count.
+## `eco` is the EcosystemManager autoload (may be null → returns own_layers).
 static func accrued_layers(eco, map_name: String, own_layers: Array) -> Array:
 	if eco == null or not eco.has_method("get_sequence_for_map") or not eco.has_method("get_sequence_maps"):
 		return own_layers
@@ -66,18 +83,21 @@ static func compose(preceding_lists: Array, own_layers: Array) -> Array:
 	return out
 
 
-## Read a map's own top-level paint_layers[] from disk. [] if missing/unreadable.
+## Read a map's own top-level paint_layers[] from disk (cached). [] if missing.
 static func _load_paint_layers(map_name: String) -> Array:
+	if _paint_cache.has(map_name):
+		return _paint_cache[map_name]
+	var result: Array = []
 	var path := MAPS_DIR + map_name + "/map_data.json"
-	if not FileAccess.file_exists(path):
-		return []
-	var f := FileAccess.open(path, FileAccess.READ)
-	if f == null:
-		return []
-	var text := f.get_as_text()
-	f.close()
-	var json := JSON.new()
-	if json.parse(text) != OK or not (json.data is Dictionary):
-		return []
-	var pl = (json.data as Dictionary).get("paint_layers", [])
-	return pl if pl is Array else []
+	if FileAccess.file_exists(path):
+		var f := FileAccess.open(path, FileAccess.READ)
+		if f != null:
+			var text := f.get_as_text()
+			f.close()
+			var json := JSON.new()
+			if json.parse(text) == OK and json.data is Dictionary:
+				var pl = (json.data as Dictionary).get("paint_layers", [])
+				if pl is Array:
+					result = pl
+	_paint_cache[map_name] = result
+	return result

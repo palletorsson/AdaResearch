@@ -135,6 +135,34 @@ static func placements_for(ctx: Dictionary, element: String) -> Array:
 			continue
 		out.append_array(placements(layer, dims.x, dims.z, cube, base + idx * 131 + 7, budget))
 		idx += 1
+	if out.size() <= 1:
+		return out
+	# Sequence accrual UNIONS same-element layers (a map builds on the maps before
+	# it), so the same high-density cells get placed many times and a long sequence
+	# would multiply the organism count without bound — the VR draw-call cliff.
+	# Collapse to one placement per grid cell, then cap the ELEMENT TOTAL (not each
+	# layer). See doc/PAINT_LAYERS.md § Sequence accrual.
+	out = _dedupe_by_cell(out, cube)
+	var union_cap: int = maxi(1, int(round(float(ctx.get("union_max", DEFAULT_MAX)) * clampf(budget, 0.05, 1.0))))
+	if out.size() > union_cap:
+		var rng := RandomNumberGenerator.new()
+		rng.seed = base + 99
+		_shuffle(out, rng)
+		out.resize(union_cap)
+	return out
+
+
+## Collapse placements that land in the same grid cell to one (keep the first).
+## Stacked same-element layers from accrual otherwise pile many organisms on the
+## same high-density cells — wasted budget + z-fighting clumps.
+static func _dedupe_by_cell(pts: Array, cube: float) -> Array:
+	var seen: Dictionary = {}
+	var out: Array = []
+	for p in pts:
+		var key := Vector2i(int(floor(p.x / cube)), int(floor(p.z / cube)))
+		if not seen.has(key):
+			seen[key] = true
+			out.append(p)
 	return out
 
 

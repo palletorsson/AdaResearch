@@ -53,7 +53,10 @@ A map opts in with a top-level `paint_layers` array in its `map_data.json`:
 *replaces* that element's default placement for this map.
 
 You may have **several layers for the same element** (e.g. a noise grove + a
-hand-brushed cluster of trees) — their placements union.
+hand-brushed cluster of trees) — their placements **accumulate**, then collapse to
+one per grid cell and cap at a per-element ceiling (`union_max`, default 160,
+× budget). So same-element layers *thicken* the distribution but can't multiply the
+organism count without bound — the cap is what keeps sequence accrual VR-safe.
 
 ## One layer = one entry
 
@@ -183,10 +186,14 @@ Shader strength is firm (~0.92), bleed is soft (~0.55). Both editors expose a
 A map's `paint_layers[]` is its **own** contribution — saved per map (the delta).
 But maps live in a sequence, so the biome should *build on what came before*. At
 **load time**, a map's effective layers are the union, in sequence order, of every
-earlier map's layers **+ its own** (own last, so it sits on top). The biome visibly
-thickens as you walk the sequence — and nothing is duplicated on disk: each map_data
-still stores only its own delta. Composed fresh every load (`sequence_accrual.gd`,
-wired in `GridSystem._handle_biome_ring`).
+earlier map's layers **+ its own** (own last). The biome visibly thickens as you
+walk the sequence — and nothing is duplicated on disk: each map_data still stores
+only its own delta. Composed fresh every load (`sequence_accrual.gd`, wired in
+`GridSystem._handle_biome_ring`). Each earlier map's `paint_layers` is parsed once
+and **cached** (`SequenceAccrual` static cache, invalidated on save) so a deep map
+doesn't re-read dozens of files every load. Same-element layers across the accrued
+set **accumulate but are deduped-per-cell and capped** (see above) — accrual
+thickens the *distribution*, it does not multiply the organism count.
 
 Maps in a sequence have **different grid sizes**, so nothing copies cell-for-cell:
 
