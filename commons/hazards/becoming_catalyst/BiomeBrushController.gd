@@ -110,7 +110,7 @@ func paint_layers_payload() -> Array:
 	var painted: Dictionary = {}
 	for el in _fields:
 		painted[el] = true
-		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _rows(_fields[el])}
+		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _brush_payload(_fields[el])}
 		if el == "ground":
 			layer["height"] = 1.5   # painted bumps rise to ~1.5 m
 		elif el == "shader":
@@ -180,15 +180,10 @@ func _stamp(cx: int, cz: int, erase: bool) -> void:
 				field[i] = minf(1.0, field[i] + _strength * fall)
 
 
-func _rows(field: PackedFloat32Array) -> Array:
-	var rows: Array = []
-	for z in grid_d:
-		var row: Array = []
-		for x in grid_w:
-			var i: int = z * grid_w + x
-			row.append(snappedf(field[i] if i < field.size() else 0.0, 0.01))
-		rows.append(row)
-	return rows
+## Brush field → compact sparse {w,d,cells} form for the saved/payload layer
+## (only painted cells, not a dense grid of zeros). Distribution._read_brush decodes.
+func _brush_payload(field: PackedFloat32Array) -> Dictionary:
+	return DistributionField.field_to_sparse(field, grid_w, grid_d)
 
 
 func _elem_colour(el: String) -> Color:

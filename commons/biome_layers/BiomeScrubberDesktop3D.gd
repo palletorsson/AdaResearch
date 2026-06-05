@@ -44,6 +44,7 @@ const BrushMenuScene = preload("res://commons/hazards/becoming_catalyst/biome_br
 # map-to-map shows the biome thicken across a sequence. See sequence_accrual.gd.
 const SequenceAccrualLib = preload("res://commons/biome_layers/sequence_accrual.gd")
 const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
+const DistributionFieldLib = preload("res://commons/biome_layers/distribution_field.gd")
 @export var grid_size: int = 20          # synthetic default (square)
 @export var cube_size: float = 1.0
 @export var auto_spin: bool = false   # OFF — a spinning scene fights painting (R-drag still orbits)
@@ -478,7 +479,7 @@ func _save_overrides() -> void:
 			if layer is Dictionary and not _brush_fields.has(str(layer.get("element", ""))):
 				kept.append(layer)
 		for el in _brush_fields:
-			var gl := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])}
+			var gl := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_brush(_brush_fields[el])}
 			if el == "ground":
 				gl["height"] = 1.5
 			kept.append(gl)
@@ -1121,7 +1122,7 @@ func _effective_paint_layers() -> Array:
 	var painted: Dictionary = {}
 	for el in _brush_fields:
 		painted[el] = true
-		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])}
+		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_brush(_brush_fields[el])}
 		if el == "ground":
 			layer["height"] = 1.5   # painted bumps rise to ~1.5 m
 		elif el == "shader":
@@ -1140,15 +1141,10 @@ func _effective_paint_layers() -> Array:
 	return out
 
 
-func _field_to_rows(field: PackedFloat32Array) -> Array:
-	var rows: Array = []
-	for z in grid_d:
-		var row: Array = []
-		for x in grid_w:
-			var i := z * grid_w + x
-			row.append(snappedf(field[i] if i < field.size() else 0.0, 0.01))
-		rows.append(row)
-	return rows
+## Brush field → compact sparse {w,d,cells} form (only painted cells, not a dense
+## grid of zeros — keeps map_data.json + git diffs small). _read_brush decodes it.
+func _field_to_brush(field: PackedFloat32Array) -> Dictionary:
+	return DistributionFieldLib.field_to_sparse(field, grid_w, grid_d)
 
 
 ## --brushtest=<element>: stamp a filled disc and rebuild — headless proof of

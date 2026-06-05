@@ -145,8 +145,16 @@ driven by a controller raycast instead of the mouse.
 `ground` is a **substrate** layer, not a scatter one: its field is a HEIGHT map,
 not a placement density. The `ground_substrate` accrual layer is **on by default**
 on every biome map (order 1, `always`) — a flat level ground you can raise into
-hills. It extends the walkgrids `TopologySpace`, so the deformed mesh is walkable
-(trimesh collider follows the bumps).
+hills. It extends the walkgrids `TopologySpace`, so the deformed mesh carries a
+trimesh collider that follows the bumps.
+
+> **Decision (2026-06-05): the substrate is a backdrop a metre below the grid floor**,
+> not the surface organisms stand on. The walkable surface is the grid itself; the
+> substrate adds landscape depth beneath it. So painted organisms (tree/flower/critter)
+> place on the **grid floor (y=0)**, and a `ground` bump is scenery below them, not a
+> walkable hill. A reviewer may flag the y=0 placement as "ignoring terrain" — under
+> this decision it is correct, not a bug. (If walkable sculpted terrain is wanted later,
+> that's the alternative: lift the substrate to the floor and couple placement-y to it.)
 
 ```json
 { "element": "ground", "mode": "noise", "scale": 0.16, "threshold": 0.0, "density": 1.0, "height": 2.0 }

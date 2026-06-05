@@ -207,11 +207,44 @@ static func _shape(falloff: String, t: float) -> float:
 			return smoothstep(0.0, 1.0, 1.0 - t)
 
 
+## Hand-painted brush mask → a compact, git-friendly sparse form: only the painted
+## cells, not a dense grid_w×grid_d array of mostly-zeros. {w, d, cells:[[x,z,v]…]}.
+static func field_to_sparse(field: PackedFloat32Array, grid_w: int, grid_d: int, eps: float = 0.01) -> Dictionary:
+	var cells: Array = []
+	for z in grid_d:
+		for x in grid_w:
+			var i: int = z * grid_w + x
+			var v: float = field[i] if i < field.size() else 0.0
+			if v > eps:
+				cells.append([x, z, snappedf(v, 0.01)])
+	return {"w": grid_w, "d": grid_d, "cells": cells}
+
+
+## Sparse {w,d,cells} → dense 2D rows, so the resample path below handles it.
+static func _sparse_to_rows(spec: Dictionary) -> Array:
+	var w: int = int(spec.get("w", spec.get("brush_w", 0)))
+	var d: int = int(spec.get("d", spec.get("brush_d", 0)))
+	var rows: Array = []
+	for z in d:
+		var row: Array = []
+		row.resize(w)
+		row.fill(0.0)
+		rows.append(row)
+	for c in spec.get("cells", []):
+		if c is Array and (c as Array).size() >= 3:
+			var x: int = int(c[0]); var z: int = int(c[1])
+			if z >= 0 and z < d and x >= 0 and x < w:
+				rows[z][x] = float(c[2])
+	return rows
+
+
 static func _read_brush(brush, field: PackedFloat32Array, grid_w: int, grid_d: int, density: float) -> void:
-	# brush may be a 2D array (rows) or a flat array. A 2D mask whose native size
-	# differs from the target grid (e.g. an earlier sequence map's stroke blooming
-	# on THIS map's grid — see sequence_accrual.gd) is bilinear-resampled so the
-	# shape carries proportionally. Same size = crisp direct copy.
+	# brush may be a sparse {w,d,cells} dict (new, compact), a 2D array (rows), or a
+	# flat array. A mask whose native size differs from the target grid (e.g. an
+	# earlier sequence map's stroke blooming on THIS map's grid — see
+	# sequence_accrual.gd) is bilinear-resampled. Same size = crisp direct copy.
+	if brush is Dictionary and brush.has("cells"):
+		brush = _sparse_to_rows(brush)
 	if brush is Array and brush.size() > 0 and brush[0] is Array:
 		var bd: int = brush.size()
 		var bw: int = (brush[0] as Array).size()
