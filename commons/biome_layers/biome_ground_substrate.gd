@@ -19,6 +19,7 @@ var _fd: int = 1
 var _max_h: float = 1.2          # metres at field value 1.0
 var _paint_layers: Array = []    # for the colour overlay: shader paint + plant bleed
 var _rng_seed: int = 0
+var _stage_order: int = 999      # curriculum gate: bleed only elements unlocked by this stage (999 = ungated)
 
 
 ## Size + place the ground to cover the grid (call BEFORE add_child).
@@ -41,9 +42,10 @@ func set_field(field: PackedFloat32Array, fw: int, fd: int, max_h: float) -> voi
 ## The full paint-layer list — used for the ground's COLOUR overlay: "shader"
 ## layers paint their colour; plant layers (tree/flower/…) bleed their kingdom
 ## colour into the texture. Call before add_child (or before a rebuild).
-func set_paint_layers(layers: Array, rng_seed: int) -> void:
+func set_paint_layers(layers: Array, rng_seed: int, stage_order: int = 999) -> void:
 	_paint_layers = layers
 	_rng_seed = rng_seed
+	_stage_order = stage_order
 
 
 ## TopologySpace._ready() calls this after building static_body/mesh_instance.
@@ -86,6 +88,11 @@ func _compose_paint_texture() -> ImageTexture:
 		if not (layer is Dictionary):
 			continue
 		var el := str(layer.get("element", ""))
+		# Curriculum honesty: don't bleed a kingdom's colour before its unlock stage
+		# (matches the spawn gate — trees only render from seq 11, etc.). The spawn
+		# layers were already order-gated; this closes the soil-tint leak.
+		if BiomeElementsLib.unlock_order(el) > _stage_order:
+			continue
 		var tint := _bleed_colour(el, layer)
 		if tint.a <= 0.0:
 			continue

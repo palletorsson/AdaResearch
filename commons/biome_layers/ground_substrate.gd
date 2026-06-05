@@ -35,7 +35,8 @@ func apply(ctx: Dictionary) -> void:
 	sub.configure(gw, gd, cube, center)
 	sub.set_field(field, gw, gd, max_h)
 	# The full layer list drives the ground COLOUR overlay: "shader" layers paint
-	# their colour, plant layers (tree/flower/…) bleed their kingdom colour.
-	sub.set_paint_layers(ctx.get("paint_layers", []), int(ctx.get("rng_seed", 0)))
+	# their colour, plant layers (tree/flower/…) bleed their kingdom colour — but
+	# only once the kingdom is curriculum-unlocked (stage_order gate, matching spawn).
+	sub.set_paint_layers(ctx.get("paint_layers", []), int(ctx.get("rng_seed", 0)), int(ctx.get("stage_order", 999)))
 	add_child(sub)
 	print("[ground_substrate] %dx%d ground, max_height=%.2f%s" % [gw, gd, max_h, "  (flat default)" if max_h == 0.0 else ""])
