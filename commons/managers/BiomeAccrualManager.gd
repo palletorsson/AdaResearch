@@ -82,6 +82,9 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 	# Phase 5: resolve the single population budget once. Every layer ctx gets
 	# it as "budget_scale"; spawn layers multiply their target count by it.
 	var budget_scale: float = _resolve_budget_scale(overrides)
+	# ground_only: keep just the walkable ground layers (for clean maps that want
+	# terrain but not the abstract biome). Set by GridSystem from settings.ground_only.
+	var only_ground: bool = bool(context.get("only_ground", false))
 
 	var target_order: int = _current_stage_order()
 	if _stage_override < 0 and overrides.has("stage_order"):
@@ -128,6 +131,11 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 			continue
 		if override_disable.has(kind):
 			skipped.append(kind + "(map_override)")
+			continue
+		# ground_only maps (e.g. the clean primitives maps) keep just the walkable
+		# ground layers — the abstract field + organisms are suppressed.
+		if only_ground and kind != "ground_substrate" and kind != "ground_ring":
+			skipped.append(kind + "(ground_only)")
 			continue
 		if not _layer_scripts.has(kind):
 			skipped.append(kind + "(unimplemented)")

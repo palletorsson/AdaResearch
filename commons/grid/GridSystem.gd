@@ -744,6 +744,9 @@ func _handle_biome_ring():
 			"density": density,
 			"terrain_mode": eco.get_terrain_mode() if eco.has_method("get_terrain_mode") else "flat",
 			"kingdoms": kingdoms,
+			# ground_only (settings.ground_only): keep just the walkable ground —
+			# for clean maps (e.g. primitives) that want terrain, not the abstract biome.
+			"only_ground": bool(data_component.get_settings().get("ground_only", false)) if data_component else false,
 		})
 
 	# ── Ground paint layer (G3.7 + smart fallback) ────────────────────
