@@ -27,6 +27,9 @@ extends Node3D
 ##   --solo-sheet=<b>     <b>_<kind>.png — each layer ALONE at max stage
 ##   --solo=<kind>        one shot of a single layer alone
 ##   --dims=N             synthetic grid size (default 20)
+##   --paint=el:mode:d[:scale:thr]  inject a paint layer to test a distribution,
+##                        e.g. --paint=tree:plane:0.6  --paint=flower:noise:0.8:0.25:0.4
+##                        (a loaded map's own paint_layers render automatically)
 
 const MIN_STAGE := 1
 const MAX_STAGE := 19
@@ -45,6 +48,8 @@ var _map_arg: String = ""                # --map=<Name>; "" = synthetic
 var _loaded_map: String = ""
 var _map_seq: String = ""
 var _map_paint: Array = []               # the map's biome_paint layer
+var _map_paint_layers: Array = []        # the map's paint_layers[] (distribution authoring)
+var _cli_paint: Array = []               # --paint synthetic layers (override map's, for quick tests)
 var _stage_explicit: bool = false        # true if --stage given (allows >MAX for lab dispatcher@99)
 var _map_data: Dictionary = {}           # full parsed map_data.json (for write-back)
 var _map_overrides: Dictionary = {}      # settings.biome_overrides from the map
@@ -154,6 +159,27 @@ func _parse_cli() -> void:
 		elif a.begins_with("--solo-sheet="): _solo_base = a.split("=", true, 1)[1]
 		elif a.begins_with("--solo="): _solo_one = a.split("=", true, 1)[1]
 		elif a.begins_with("--map="): _map_arg = a.split("=", true, 1)[1]
+		elif a.begins_with("--paint="): _add_cli_paint(a.split("=", true, 1)[1])
+
+
+## --paint=element:mode:density[:scale:threshold] — inject a synthetic paint
+## layer for quick distribution testing without editing a map. Repeatable.
+## e.g. --paint=tree:plane:0.6   --paint=flower:noise:0.8:0.25:0.4
+func _add_cli_paint(spec: String) -> void:
+	var parts := spec.split(":")
+	if parts.size() < 2:
+		return
+	var layer := {"element": str(parts[0]), "mode": str(parts[1])}
+	if parts.size() >= 3:
+		layer["density"] = float(parts[2])
+	match str(parts[1]):
+		"noise":
+			if parts.size() >= 4: layer["scale"] = float(parts[3])
+			if parts.size() >= 5: layer["threshold"] = float(parts[4])
+		"curve":
+			layer["axis"] = str(parts[3]) if parts.size() >= 4 else "radial"
+			layer["falloff"] = str(parts[4]) if parts.size() >= 5 else "smooth"
+	_cli_paint.append(layer)
 
 
 ## Per-map mode: read the map's dimensions + biome_paint, and sync the
@@ -179,6 +205,10 @@ func _load_map(name: String) -> void:
 	var bp = layers.get("biome_paint", [])
 	if bp is Array:
 		_map_paint = bp
+	# paint_layers[] is top-level (distribution authoring), not under layers.
+	var pl = data.get("paint_layers", [])
+	if pl is Array:
+		_map_paint_layers = pl
 	_loaded_map = name
 	_map_data = data
 	# Read existing per-map overrides so the scrubber opens with this
@@ -246,6 +276,10 @@ func _rebuild() -> void:
 		# Pass only the map's PARAM overrides live — disable + stage are
 		# driven by the scrubber's own mechanisms (enable_layer / override).
 		"biome_overrides": {"params": _map_overrides.get("params", {})},
+		# Paint layers: --paint synthetic layers win over the map's; the wired
+		# spawn layers (tree/critter/flower) place by these distributions.
+		"paint_layers": _cli_paint if not _cli_paint.is_empty() else _map_paint_layers,
+		"budget_scale": 1.0,
 	})
 	_refresh_active_kinds()
 	_update_hud()
@@ -360,7 +394,9 @@ func _update_hud() -> void:
 	# Context line: sequence · layers on · where.
 	var where := "%s  %d×%d" % [_loaded_map, grid_w, grid_d] if _loaded_map != "" else "synthetic  %d×%d" % [grid_w, grid_d]
 	var seq_show := seq_name if seq_name != "?" else "—"
-	_seq_lbl.text = "%s    ·    %d/%d layers on    ·    %s" % [seq_show, on, _active_kinds.size(), where]
+	var active_paint: Array = _cli_paint if not _cli_paint.is_empty() else _map_paint_layers
+	var paint_tag := "    ·    🖌 %d paint" % active_paint.size() if active_paint.size() > 0 else ""
+	_seq_lbl.text = "%s    ·    %d/%d layers on    ·    %s%s" % [seq_show, on, _active_kinds.size(), where, paint_tag]
 	# Truth quote.
 	_truth_lbl.text = ("“%s”" % truth) if truth != "" else ""
 	# Controls footer.

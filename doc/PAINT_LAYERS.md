@@ -107,6 +107,21 @@ map_data.json  paint_layers[]
 The accrual stack stays the **single populator**; paint layers are per-map
 authoring that the existing spawn layers consult. No second populator.
 
+## Inspect (desktop)
+
+The biome scrubber renders paint layers, so you can see a distribution before
+committing it to a map. A loaded map's own `paint_layers` render automatically;
+or inject one for a quick test:
+
+```
+godot --path . res://commons/biome_layers/BiomeScrubberDesktop3D.tscn -- \
+  --stage=11 --paint=tree:plane:0.6 --solo=lsystem_trees
+```
+
+`--paint=element:mode:density[:scale:threshold]` is repeatable. Solo the layer
+(`S`, or `--solo=lsystem_trees`) to see just that distribution. This is the
+desktop half of step 3 — the brush (writing `brush` fields) is the other half.
+
 ## Not yet (next steps)
 
 - **Substrate engines** — `ground` (heightfield), `shader` (the *drain* jewel:
