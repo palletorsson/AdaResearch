@@ -1,3 +1,13 @@
+# @identity
+# essence: many emitters at once — each with its own colour, position, and emission profile
+# desire: see how independent sources superpose — interleaved streams that don't know about each other
+# critical_parameter: per-emitter colour and position — the catalog of distinct origins
+# triggers: _ready() builds the emitter array with colored configs; _process() ticks all in parallel
+# emerges: a layered scene where each source's signature remains readable inside the mixture
+# needs: per-emitter on/off toggles [missing]; global rate multiplier [missing]; colour assignment dial [present as config]
+# relationships: parallelizes example_4_3_particle_emitter_vr; sets up the bookkeeping needed before example_4_5_inheritance_polymorphism_vr varies particle KIND
+# truth: Superposition is the cheapest plurality — N independent processes summed into one frame. The world is built this way.
+
 # ===========================================================================
 # NOC Example 4.4: Multiple Emitters
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com

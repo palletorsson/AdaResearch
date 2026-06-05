@@ -1,3 +1,13 @@
+# @identity
+# essence: the VR hand is a repeller — drag the controller through the swarm and feel the force law you've selected
+# desire: make a force law tactile — the difference between 1/r² and e^(-r) and r³ becomes a hand-feel, not a graph
+# critical_parameter: force law selection (INVERSE_SQUARE / EXPONENTIAL / POLYNOMIAL) — it changes the falloff profile and therefore the response radius
+# triggers: _ready() spawns particles + immediate mesh viz; _physics_process() reads controller transform and applies the chosen law to every particle
+# emerges: a felt difference between gentle long-range push (inverse square) and sharp short-range slap (exponential / polynomial)
+# needs: law selector dial [present]; strength slider [present]; particle count slider [present]
+# relationships: hand-driven inverse of example_4_1_single_particle_vr (static fields); culmination of chapter 4 particle examples; bridges to physicssimulation where hand-controlled forces become physically modeled
+# truth: A force law is a verb. Letting the player conjugate it with their own hand turns abstract physics into an interface — every gesture is an experiment.
+
 # ===========================================================================
 # NOC Example 4.6: Particle Repeller — VR Hand Interaction
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com

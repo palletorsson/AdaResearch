@@ -1,3 +1,13 @@
+# @identity
+# essence: random ascent in a contained bowl — bubbles spawn, rise, fade, sometimes carry a soft pink light
+# desire: watch petri-dish life: spawn, rise, scale-down, vanish — each bubble a tiny histogram of luck
+# critical_parameter: spawn_rate — bubbles per second, the carrier wave of the whole composition
+# triggers: bubble_timer accumulates dt; per spawn, a sphere is randomized in size, speed, and position within the dish
+# emerges: a soft tower of overlapping translucent spheres rising at random rates, lit by a fraction of pink point-lights
+# needs: spawn rate dial [missing]; bubble size range sliders [missing]; light density toggle [missing]
+# relationships: sibling of bubble_particles (different parent path, same physics); kin to GaussianPaintSplatter as visible probability density
+# truth: Randomness with a ceiling and a floor is still randomness. The dish is the constraint that lets the dispersion be read.
+
 extends Node3D
 
 # Bubble particle properties

@@ -1,3 +1,13 @@
+# @identity
+# essence: a corridor whose two walls are layered sine waves — walk between standing waveforms
+# desire: feel the body inside the wave — left and right walls phasing against each other across 24m
+# critical_parameter: phase_offset_between_walls — how much the right wall lags the left, gating the beat-pattern between them
+# triggers: _ready() rebuilds wall meshes on parameter change; animate_at_runtime tweens the phase across animation_speed
+# emerges: a 200-column waveform corridor with three superposed wave_layers, plush shader gradient bottom→mid→top, walkable collision
+# needs: phase offset slider [missing]; frequency multiplier dial [missing]; layer count picker [missing]
+# relationships: cousin of OscillatingWave (single wave) and HarmonicBuilder (sum of sines); contrast to SineSpace (floor as wave, this is walls as wave)
+# truth: A wave is not a thing but a relationship. Walking between two of them turns the body into a probe — the corridor reads you back.
+
 @tool
 extends Node3D
 

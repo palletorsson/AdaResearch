@@ -4,6 +4,16 @@ class_name ShannonEntropyMeter
 ## Wall-mounted Shannon entropy gauge — generates random sequences,
 ## computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x).
 
+# @identity
+# essence: a wall gauge that turns a random sequence into a number — the average information per symbol, in bits
+# desire: to make the abstract "amount of randomness" a thing on a wall the player can read like a thermometer
+# critical_parameter: num_symbols — sets the maximum possible entropy log₂(N), the ceiling against which the actual is measured
+# triggers: continuous re-sampling of a random stream, frequency histogram bars updating, entropy bar climbing toward log₂(N)
+# emerges: the visual fact that uniform distributions have HIGHER entropy than skewed ones — randomness IS evenness
+# needs: num_symbols[has] sequence_length[has] entropy_label[has] frequency_bars[has] vr_distribution_picker[missing]
+# relationships: the measurement instrument for the randomness sequence — pairs with distribution_sampler and entropy_jar
+# truth: information IS uncertainty resolved — H = -Σ p(x) log₂ p(x) is the formula for "how surprised should you be?"
+
 # --- Configuration ---
 @export var panel_size: Vector2 = Vector2(0.7, 0.5)
 @export var num_symbols: int = 10

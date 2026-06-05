@@ -1,3 +1,13 @@
+# @identity
+# essence: one massive attractor surrounded by movers — gravity-as-1/r² made visible with escape velocity and Roche-limit rings
+# desire: feel the regimes — bound orbit, escape, tidal tear — as distinct states of the same physics
+# critical_parameter: gravity strength and mover initial velocity — together they place each body in a regime
+# triggers: _ready() spawns attractor + mover ring; _physics_process() integrates gravitational pulls between all bodies
+# emerges: orbits, parabolic escapes, and Roche-stretched movers that visibly stretch as they near the boundary
+# needs: gravity slider [present]; mode switch single/multi-body [present]; mover seed reset [present]
+# relationships: forces-chapter origin for the gravity question revisited in example_4_1_single_particle_vr (multi-field) and chaos/strangeattractors
+# truth: Gravity is a regime detector. The same equation produces an orbit, an escape, or a shredded mover depending on initial speed — physics is a multi-stable system.
+
 # ===========================================================================
 # NOC Example 2.6: Single Attractor (Elevated)
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com

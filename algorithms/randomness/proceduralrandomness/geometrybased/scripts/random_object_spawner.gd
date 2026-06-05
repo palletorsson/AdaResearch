@@ -1,3 +1,13 @@
+# @identity
+# essence: continuous emission — one wooden cube at a time with synthesized clack
+# desire: hear and watch a slow stochastic rhythm of objects appearing on the table
+# critical_parameter: next_spawn_time — gates the inter-arrival jitter that makes the rhythm feel alive
+# triggers: spawn_timer accumulates dt; on each emit, audio generator synthesizes a wood-tap envelope and a new cube drops
+# emerges: a small sonic ecology of timing-jittered objects, capped at MAX_CUBES so the table never floods
+# needs: rate slider [missing]; volume slider [missing]; clear-table button [missing]
+# relationships: kin to PickupCubePlacer (one-shot scatter); contrast to deterministic timed releases
+# truth: A timer that hesitates is more random than a coin. Variability of interval, not the object, carries the entropy.
+
 extends Node3D
 @export var cube_size: float = 1.0
 @export var gutter: float = 0.0

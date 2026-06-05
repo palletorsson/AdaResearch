@@ -1,3 +1,13 @@
+# @identity
+# essence: a 3D placard that pulls tutorial text from a library by ID — the in-world reader for code / explanation content
+# desire: bring authored text into the scene without breaking immersion — readable, formatted, addressable by name
+# critical_parameter: current_tutorial_id — picks which entry from tutorial_text.json is shown
+# triggers: _ready() instantiates TutorialTextLibrary and waits a frame to locate the RichTextLabel inside the Viewport2Din3D
+# emerges: a readable in-VR text panel that the map-author addresses by tt:<name> tokens
+# needs: TutorialTextLibrary [present]; Viewport2Din3D child [scene-required]; rich text label resolution [present, deferred]
+# relationships: clipboard/context companion to science_screen (in-world readout) and reader_table (extended reading); the placement-by-token side of the tutorial-content pipeline
+# truth: A tutorial is a placement-of-words. The library holds the words, the placard holds the placement — separating them lets the same text appear in many maps.
+
 extends Node3D
 
 # Tutorial Text Display component

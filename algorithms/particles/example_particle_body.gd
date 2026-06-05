@@ -1,3 +1,13 @@
+# @identity
+# essence: particles bound into a body — a swarm with internal springs so it moves as a jiggly creature
+# desire: feel the line between "crowd of points" and "single soft organism" — body is what holds the points together
+# critical_parameter: particle count and body update rate — too few and it's a cloud, too few updates and it stutters
+# triggers: _ready() configures emitter (no gravity, eternal lifetime) and body; _process() rebuilds the body 20× per second
+# emerges: a blobfish that drifts, deforms, recovers — animated by particle interaction not skeleton
+# needs: jiggle strength slider [missing]; spring stiffness dial [missing]; visible spring debug [missing]
+# relationships: extends example_4_3_particle_emitter_vr by adding ParticleBody bonds; kin to soft-body morphologies in the nature_system
+# truth: A body is a topology imposed on a swarm. Without the springs the particles are sand; with them they are a creature.
+
 extends Node3D
 
 ## Blobfish Particle Body Example

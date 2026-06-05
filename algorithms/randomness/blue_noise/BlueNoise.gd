@@ -1,3 +1,13 @@
+# @identity
+# essence: random sampling that refuses clusters — Poisson-disk by construction
+# desire: watch points appear one by one, each rejecting any neighbor closer than min_distance
+# critical_parameter: min_distance — the radius of mutual repulsion that defines the blue spectrum
+# triggers: start_poisson_disk_sampling() seeds an active list; generation_timer ticks new candidates every 0.1s
+# emerges: an even, hole-free distribution where no two points are too close — the spectrum has a hard low-frequency cutoff
+# needs: distance field [has]; voronoi cell visualization [has]; min_distance tuning [has]
+# relationships: opposite of white_noise (uniform but clumpy); kin to worley_noise (each cell guards its center); precursor to dithering algorithms
+# truth: True randomness clumps; blue noise is randomness with manners — it preserves uncertainty while refusing redundancy.
+
 extends Node3D
 
 var time = 0.0

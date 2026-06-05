@@ -1,3 +1,13 @@
+# @identity
+# essence: a walkable floor sculpted as a 2D sine surface — sin(x)*cos(z) under the feet
+# desire: stand on the equation, walk the periodicity, feel resolution and amplitude as physical
+# critical_parameter: wave_frequency — controls the ridge spacing across the walkable resolution grid
+# triggers: generate_space() samples heights at every (x,z) of the resolution grid, builds mesh and trimesh collision
+# emerges: a smooth metallic surveillance-aesthetic floor whose ridges and troughs invite directional walking
+# needs: frequency slider [missing]; amplitude slider [missing]; phase X/Z dials [missing]
+# relationships: subclass of TopologySpace; sibling of RandomSpace (chaotic, animated) — they mark the deterministic and stochastic poles of walkable topology
+# truth: A floor that obeys an equation is not less random than one that doesn't — it is randomness collapsed to its rule, made walkable.
+
 # SineSpace.gd - Perfect mathematical waves
 extends TopologySpace
 class_name SineSpace

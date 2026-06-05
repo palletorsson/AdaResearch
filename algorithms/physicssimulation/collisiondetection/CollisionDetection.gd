@@ -1,3 +1,13 @@
+# @identity
+# essence: a small zoo of collision shapes — boxes, spheres, capsules — that flash colour when they touch
+# desire: make collision a visible event, not an invisible inference — the contact ITSELF should be the signal
+# critical_parameter: object_count — too few and contacts are rare, too many and the scene becomes noise
+# triggers: _ready() spawns the bodies; physics callbacks fire colour changes on contact
+# emerges: a small chaotic pile where every brief touch produces a brief flash — collision-as-percept
+# needs: shape-mix slider [missing]; spawn position randomization [present]; persistent-contact vs ephemeral toggle [missing]
+# relationships: physicssim-bodies primitive; foundation for spring_mass_system (contacts that don't separate), constraints (contacts as joints), and soft_bodies (contacts that deform)
+# truth: Collision is the simplest binary relation between two volumes. Drawing it with colour turns physics into a sociogram — who is touching whom, right now.
+
 ## Collision Detection — Godot's built-in collision system
 ## Shows different collision shapes and visualizes contact with color changes
 extends Node3D

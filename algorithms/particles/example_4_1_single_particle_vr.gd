@@ -1,3 +1,13 @@
+# @identity
+# essence: one particle in a sandbox of forces — gravity wells, repellers, drag zones — visualized as it moves
+# desire: feel the difference between force types by watching a single mover respond
+# critical_parameter: force field configuration — type, position, strength, radius shape the entire trajectory
+# triggers: _ready() seeds particle + UI; _physics_process() integrates Euler each tick
+# emerges: a velocity-coloured trail with live force arrows showing each contributing field
+# needs: VR sliders for field parameters [present]; toggle for arrow visualization [present]
+# relationships: foundation for example_4_2_array_particles_vr (scale to many) and example_4_6_particle_repeller_vr (hand-controlled fields)
+# truth: A particle is a probe. The shape of its path is the field made legible — every curve tells you what the space wanted.
+
 # ===========================================================================
 # NOC Example 4.1: Single Particle — Force Field Playground
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com

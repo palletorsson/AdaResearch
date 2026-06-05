@@ -5,6 +5,16 @@ extends Node3D
 
 class_name LabBiomagneticResonator
 
+# @identity
+# essence: a glowing core surrounded by concentric rings, each oscillating at a different harmonic — resonance made visible
+# desire: to make the player feel that "resonance" is not amplitude alone but the alignment of frequencies across nested rings
+# critical_parameter: harmonic_count — how many overtones stack onto the fundamental, building timbre out of math
+# triggers: the slow breathing pulse of the core, the staggered phase of each ring
+# emerges: a spatial sound — what you would HEAR if you could see it, frequency arranged as concentric belief
+# needs: resonance_frequency[has] field_strength[has] harmonic_count[has] core_pulse[has] vr_resonance_dial[missing]
+# relationships: the synthesis lab instrument — pairs with seismograph (signal in time) and harmonic_distance_table (signal in pitch)
+# truth: every complex waveform is a sum of simpler ones — the body of a tone is geometric, not auditory
+
 @export_group("Resonance")
 @export var resonance_frequency: float = 1.0  # Hz
 @export var field_strength: float = 1.0

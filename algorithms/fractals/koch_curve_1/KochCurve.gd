@@ -1,6 +1,16 @@
 # This script generates a VR-optimized Koch snowflake fractal.
 # It uses a single ArrayMesh instead of multiple CSG nodes for performance.
 
+# @identity
+# essence: koch(seg) = [seg[0..1/3], seg[1/3..1/3 + bump], seg[2/3..1/3 + bump], seg[2/3..1]]; replace each segment with four shorter ones at 60° kink. Length × 4/3 per iteration, area finite.
+# desire: To make infinite perimeter graspable — VR-optimized ArrayMesh redraws each generation so the eye can track the snowflake's coastline doubling.
+# critical_parameter: max_iterations — at 4, each segment is 1/81 of the original; at 6 the GPU starts to feel it. iteration_interval times the rhythm.
+# triggers: iteration_timer tick → generate_next_iteration() → rebuild ArrayMesh with 4× segments → hue shifts per generation
+# emerges: A curve that is everywhere not differentiable — the visual proof that "smooth" is an assumption, not a property of curves.
+# needs: VR iteration trigger [missing], generation slider [missing]
+# relationships: Companion to cantor_set (1D removal) and sierpinski (2D Cantor); appears in fractals and patterngeneration sequences as the canonical self-similar curve.
+# truth: Length goes to infinity, area stays finite — a fractal proves that "perimeter" was always a measurement of resolution, not boundary.
+
 extends Node3D
 
 # VR-Optimized State Variables

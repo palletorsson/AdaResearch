@@ -4,6 +4,16 @@ extends Node3D
 # Demonstrates true vs pseudo-random number generation
 # Uses MultiMesh for all dynamic visualization (no per-frame CSG creation)
 
+# @identity
+# essence: two parallel machines side by side — one harvesting physical noise, one running an algorithm — both pretending to be random
+# desire: to expose pseudo-randomness as deterministic theatre, while showing what TRUE randomness actually feels like
+# critical_parameter: prng_seed — change it and the entire pseudo-stream is reborn the same way; nothing about the TRNG stream changes
+# triggers: side-by-side bar charts, statistical comparison, entropy histories diverging in real time
+# emerges: the visual lie — a PRNG output is indistinguishable from TRNG until you reset the seed and see history repeat
+# needs: prng_seed[has] entropy_sources[has] statistical_comparison[has] entropy_history[has] vr_seed_dial[missing]
+# relationships: pairs with seed_replay_demo (PRNG determinism) and slot_machine (gambler's view of randomness)
+# truth: a pseudo-random number generator is determinism wearing a mask — the seed is the face underneath
+
 var time := 0.0
 var sample_timer := 0.0
 

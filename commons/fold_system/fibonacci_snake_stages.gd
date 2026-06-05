@@ -2,6 +2,16 @@ class_name FibonacciSnakeStages
 extends Node3D
 ## Five stages: Fibonacci spiral → sine snake. Same verts, same faces.
 
+# @identity
+# essence: For t in [0..1], lerp(spiral_verts(φ-spiral), snake_verts(sine_wave), t). Five frozen poses share one vertex topology; folding is a parameter, not a transformation of shape.
+# desire: To show that "two animals" can be one mesh — a phi-spiral fossil and a sine snake share faces, and the unfold lever is just a number from 0 to 1.
+# critical_parameter: STAGE_FOLDS = [0.0, 0.25, 0.5, 0.75, 1.0] sets the snapshots; _segment_count controls resolution; PHI fixes the spiral growth rate.
+# triggers: _ready() → _generate_spiral_verts() + _generate_faces() → _build_stages() draws all 5 side-by-side. Static display — no per-frame update.
+# emerges: A typology of one — the same skeleton in five poses, making "topology vs morphology" visible without animation.
+# needs: VR fold slider [missing], stage-pick controller [missing]
+# relationships: Foundation artifact of the fold_system; cousin to deltahedron_stages and helix_fold in Folding_Zoo; the snake-spiral pair anchors the curriculum claim that folding is universal.
+# truth: Same vertices, same faces, different shape — folding is a coordinate, not a creature, and the snake was always inside the spiral.
+
 const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")
 const PHI: float = 1.618033988749895
 const STAGE_FOLDS: PackedFloat64Array = [0.0, 0.25, 0.5, 0.75, 1.0]

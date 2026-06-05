@@ -1,3 +1,13 @@
+# @identity
+# essence: a mixed array of Particle and ConfettiParticle — same loop, different bodies — OOP made visible
+# desire: see polymorphism in motion — one update call dispatches by type
+# critical_parameter: spawn_confetti_mode and the mixed-array ratio — they control how much of the population is which kind
+# triggers: _ready() seeds the array; _process() spawns by mode and ticks every entry through its own update()
+# emerges: two species in one swarm — round particles tumbling next to spinning confetti rectangles, no special-casing in the loop
+# needs: ratio dial [present as toggle]; per-species count readout [missing]; ConfettiParticle prefab swap [hardcoded]
+# relationships: builds on example_4_4_multiple_emitters_vr (many sources, same kind) by varying the KIND not just the source
+# truth: Inheritance is interface-sharing. When two things answer the same call differently, the loop becomes a ritual that doesn't care who shows up.
+
 # ===========================================================================
 # NOC Example 4.5: Inheritance and Polymorphism
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com

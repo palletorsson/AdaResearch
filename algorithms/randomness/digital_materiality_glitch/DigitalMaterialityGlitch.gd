@@ -1,3 +1,13 @@
+# @identity
+# essence: error as aesthetic — corruption rendered as form
+# desire: watch a clean digital grid degrade into datamosh, scan-lines, chromatic-shift, overflow
+# critical_parameter: corruption_rate — how fast cells flip from intact to glitched
+# triggers: glitch_timer cycles populate MultiMesh transforms each frame; error_cascade propagates through neighbors
+# emerges: a visual ledger of digital pathologies — 64-cell data grid speckled with compression artifacts and pixel-sort streaks
+# needs: corruption_rate slider [missing]; reset button [missing]; cascade speed control [missing]
+# relationships: kin to noise visualizations but biased — distortion has direction; sibling to digital_archaeology that reads ruins
+# truth: A glitch is not failure; it is the substrate making itself visible. Randomness with a wound becomes signature.
+
 extends Node3D
 
 # Digital Materiality & Glitch Visualization

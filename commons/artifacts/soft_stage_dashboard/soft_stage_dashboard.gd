@@ -5,6 +5,16 @@ class_name SoftStageDashboard
 ## HazardManager, and CatalystCapabilityManager. Three-column layout with
 ## a rolling signal log at the bottom.
 
+# @identity
+# essence: read(EcosystemManager) + read(HazardManager) + read(CatalystCapabilityManager) → three columns of Label3D + scrolling log. A passive observer of three managers' shared world state.
+# desire: To make the invisible game state legible — soft-stage progression is hidden in autoload singletons until this panel pins it to a wall and lets you read where you are in the curriculum.
+# critical_parameter: panel_size sets footprint; MAX_LOG = 8 caps the rolling signal log; the labels update from manager signals, not polling, so refresh cost is zero between events.
+# triggers: manager signal (stage_advanced, hazard_befriended, capability_unlocked) → label update + log append → scroll oldest out
+# emerges: A diegetic UI — game state becomes architecture, and "the rules of this room" are something you read off a wall instead of inferring from feel.
+# needs: read-only (no inputs), but pairs with progression_driver as its writable twin
+# relationships: Wall-mounted partner to progression_driver (read vs write); appears in Hazards_Zoo_4 onward where soft-stage transitions become curriculum events.
+# truth: Hidden state is hostile state — once managers' fields are pinned to a Label3D, the world has receipts, and the player can finally find out what the curriculum thinks it's doing.
+
 # --- Configuration ---
 @export var panel_size: Vector2 = Vector2(1.2, 0.9)
 

@@ -4,6 +4,16 @@ extends Node3D
 ## A sphere oscillates vertically, tracing a sine wave in 3D space
 ## The wave position controls sound parameters
 ##
+## @identity
+## essence: a single sine made walkable — vertical motion becomes a curve in space and a tone in air
+## desire: watch a sphere bob up and down, leave a trail, and hear the pitch rise as it speeds up
+## critical_parameter: angular frequency (omega) — the only knob that turns motion into pitch
+## triggers: _process(delta) advances time; sphere.position.y = amplitude * sin(omega * t); trail_multimesh records positions; audio_player.pitch_scale tracks omega
+## emerges: a spatial graph of y vs t identical to the audio waveform — the same equation drawn twice
+## needs: oscillating_sphere mesh [has]; trail multimesh + reference curve multimesh [has]; AudioStreamPlayer3D [has]
+## relationships: atomic case for harmonic_builder (one harmonic only); analog of beat_frequencies with one wave instead of two; visual cousin of Lissajous3D when paired
+## truth: Motion in time becomes form in space and pitch in air — sine is the bridge between three different senses.
+##
 ## Concept: Motion (oscillation) → Form (sine curve) → Sound
 ## - Horizontal position (x): Frequency
 ## - Vertical position (y): Amplitude

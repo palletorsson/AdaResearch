@@ -1,3 +1,13 @@
+# @identity
+# essence: random distribution as scatter — N cubes placed by chosen pattern across the grid
+# desire: see what "random placement" actually looks like inside a constrained spatial system
+# critical_parameter: placement_pattern — random/grid/circle/line determines distribution character
+# triggers: _ready() defers grid lookup; place_pickup_cubes() fires when grid system is ready
+# emerges: a population of grabbable pickup cubes that read the grid's occupancy and respect avoid_occupied_spaces
+# needs: pattern picker dial [missing]; cube count slider [missing]; reseed button [missing]
+# relationships: kin to random_object_spawner (continuous spawning) and bubbles_random (animated emission); contrast to grid-locked utilities
+# truth: Distribution is a question of measure. Where the cube lands tells you what randomness chose to honor — uniformity, geometry, or refusal.
+
 # PickupCubePlacer.gd
 # Script to place multiple pickup cubes in the grid system
 

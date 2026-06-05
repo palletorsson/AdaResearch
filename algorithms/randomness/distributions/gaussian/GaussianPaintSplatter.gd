@@ -1,3 +1,13 @@
+# @identity
+# essence: gaussian sampling as paint — dots fall in a normal distribution around a safe zone
+# desire: see how often a sample lands far from center vs near center, mediated by stddev
+# critical_parameter: stddev — the standard deviation that controls splatter spread vs concentration
+# triggers: timer ticks every splatter_update_interval; each tick samples (x,y) from gaussian and stamps a translucent dot
+# emerges: a painting that IS the gaussian PDF — densest at center, sparser at the tails, with edge detection tracing the boundary
+# needs: stddev slider [missing]; safe zone radius dial [missing]; clear-canvas button [missing]
+# relationships: kin to GaussianBlurCircle (gaussian as smear); contrast to BlueNoise (rejection-based) and probability_distributions_3d (3D variant)
+# truth: A bell curve drawn in the air, made visible by the dots that miss. Density is the proof of distribution.
+
 extends MeshInstance3D
 class_name GaussianPaintSplatter
 

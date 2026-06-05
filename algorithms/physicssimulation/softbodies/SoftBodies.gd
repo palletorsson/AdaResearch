@@ -1,3 +1,13 @@
+# @identity
+# essence: three Godot-native soft bodies side by side — jelly cube, rubber ball, inflated balloon — same primitive, different parameter family
+# desire: see how a single Godot feature (SoftBody3D) covers a wide phenomenology by parameter alone
+# critical_parameter: stiffness vs pressure ratio — jelly is high-damping/low-pressure, balloon is high-pressure/low-damping
+# triggers: _ready() creates a floor and instantiates each of the three demos at fixed positions
+# emerges: a small comparative shelf where three named substances jiggle, bounce, and balloon with different signatures
+# needs: per-body parameter sliders [missing]; floor toggle [present]; reset button [missing]
+# relationships: Godot-native counterpart to spring_mass_system (manual); placement-companion to particle_body (particle-bound soft); home for softbodies-sequence comparison demos
+# truth: A soft body is a parameter family pretending to be three substances. The same equation makes jelly, rubber, and air-pressure — the substance is in the numbers, not in the model.
+
 ## Soft Bodies — Multiple SoftBody3D demos with different parameters
 ## Jelly cube, rubber ball, inflated balloon — all using Godot's native SoftBody3D
 extends Node3D

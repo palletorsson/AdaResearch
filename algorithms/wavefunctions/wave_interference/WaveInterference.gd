@@ -1,6 +1,16 @@
 extends Node3D
 class_name WaveInterference
 
+# @identity
+# essence: two wave sources whose ripples meet — the interference field between them is the truth of wave addition
+# desire: to make the player walk through nodal lines and antinodes, feeling where waves cancel and where they double
+# critical_parameter: frequency1 vs frequency2 — small mismatch produces beats, equal frequency produces standing patterns
+# triggers: the field of grid points oscillating, each point summing both wave influences in real time
+# emerges: a checkerboard of constructive and destructive interference that no single wave could create
+# needs: frequency1[has] frequency2[has] amplitude[has] grid_field[has] vr_source_drag[missing]
+# relationships: pairs with wave_propagation_3d (one source) and coupled_oscillator_lattice (lattice coupling)
+# truth: when two waves meet they do not fight — they add, and the pattern they make holds more information than either alone
+
 var time: float = 0.0
 var wave_speed: float = 2.0
 var frequency1: float = 1.0

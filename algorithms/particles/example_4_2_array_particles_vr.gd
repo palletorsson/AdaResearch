@@ -1,3 +1,13 @@
+# @identity
+# essence: many particles managed as an array — spawn, integrate, retire — the population pattern
+# desire: see that "system" is just bookkeeping over many copies of one rule
+# critical_parameter: max_particles and spawn_rate — they set the population's standing density
+# triggers: _ready() creates the array; _process() spawns at rate; per-particle update each frame
+# emerges: a steady-state cloud whose density holds while individuals come and go
+# needs: spawn rate slider [present]; max-particles cap [present]; clear button [missing]
+# relationships: scales up example_4_1_single_particle_vr; precursor to example_4_3_particle_emitter_vr (encapsulating spawn into an emitter class)
+# truth: A particle system is identity reframed — the population persists by replacing its members. The pattern is the pattern of replacements.
+
 # ===========================================================================
 # NOC Example 4.2: Array of Particles
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com

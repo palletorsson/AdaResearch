@@ -1,3 +1,13 @@
+# @identity
+# essence: GPU-accelerated gaussian blur — same dissolution, real-time, larger kernel possible
+# desire: see the same hard-to-soft transition that GaussianBlurCircle shows, but at frame rate
+# critical_parameter: max_blur_radius — controlled to 40 here vs 8 on CPU; GPU permits a wider kernel without lag
+# triggers: shader_material runs the blur each frame using the animated current_blur_radius parameter
+# emerges: a 512x512 image that blurs in real time, demonstrating the cost-of-precision tradeoff between CPU and GPU
+# needs: GPU/CPU toggle [missing]; live kernel size slider [missing]; quality dial [missing]
+# relationships: GPU twin of GaussianBlurCircle; both share the time-as-blur premise but differ in where the work happens
+# truth: The kernel is the same; only the substrate is faster. Hardware decides what randomness can afford.
+
 extends MeshInstance3D
 class_name GaussianBlurShader
 

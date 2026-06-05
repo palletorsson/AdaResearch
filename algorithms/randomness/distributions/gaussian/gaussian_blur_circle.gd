@@ -1,3 +1,13 @@
+# @identity
+# essence: gaussian blur as time — sharp circle slowly dissolves into a soft mound
+# desire: watch a hard edge surrender to the kernel, frame by frame
+# critical_parameter: max_blur_radius — the asymptotic spread that determines how blurred "fully blurred" looks
+# triggers: blur_time accumulates each frame; current_blur_radius interpolates and CPU re-blurs the image to the texture
+# emerges: a 128x128 image that mirrors the gaussian PDF — a black disc relaxing into a fading bell
+# needs: blur radius slider [missing]; reset button [missing]; pause toggle [missing]
+# relationships: paired with GaussianBlurShader (GPU sibling, same idea, faster); cousin of GaussianPaintSplatter (gaussian as scatter, not smear)
+# truth: Blur is integration in disguise. The pixel does not move — it averages with all its neighbors, weighted by distance, until certainty becomes a guess.
+
 extends MeshInstance3D
 class_name GaussianBlurCircle
 

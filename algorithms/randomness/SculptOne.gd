@@ -1,3 +1,13 @@
+# @identity
+# essence: random material composition — glossy liquids and grainy fabrics arranged by noise
+# desire: lean into texture as substance, see how surface roughness narrates a soft-randomness aesthetic
+# critical_parameter: noise — the FastNoiseLite seed that determines where each shape lands and how it deforms
+# triggers: _ready() builds materials, samples noise to place a curated palette of glossy/fabric/granular blobs
+# emerges: an Omoss-style still-life — pinks and yellows soft against glossy red and clear, a tactile composition rendered procedurally
+# needs: palette swap dial [missing]; reseed button [missing]; gloss-to-fabric ratio slider [missing]
+# relationships: cousin of softbodies sequence (material as actor); contrast to deterministic still-lifes
+# truth: Materials are choices, not surfaces. Glossy plastic is a different randomness than woven cotton, even at the same noise seed.
+
 extends Node3D
 
 # Liquid Fabric Composition inspired by Albert Omoss style

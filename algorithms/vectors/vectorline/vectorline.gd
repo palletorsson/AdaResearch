@@ -1,3 +1,13 @@
+# @identity
+# essence: two grab-spheres with a line drawn between them — the most concrete vector you can hold
+# desire: feel that a vector IS the relation between two points — move either endpoint and the magnitude updates live
+# critical_parameter: grab-sphere positions — the entire vector is determined by where the two points sit
+# triggers: _ready() wires the dropped signals; _process() refreshes geometry every frame from current endpoint positions
+# emerges: a live line + arrow tip + length label that you can stretch, rotate, and reposition by grabbing
+# needs: grab-sphere endpoint controllers [present]; length label [present]; arrow tip visualization [present]
+# relationships: line primitive companion to point primitive; foundation for line_builder_3d (chain of vectors) and vectors-chapter examples
+# truth: A vector is not a thing, it is a relation. Naming "from" and "to" produces it; moving either redraws everything that depends on it.
+
 extends Node3D
 
 @export var line_thickness: float = 0.01

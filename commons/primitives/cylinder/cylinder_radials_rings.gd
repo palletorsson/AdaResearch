@@ -1,6 +1,17 @@
 # cylinder_radials_rings.gd - Configurable cylinder with radial segments and rings
 # Usage: cylinder:90:1:#config:4:3 for 4 radial segments and 3 rings
 extends Node3D
+class_name Cylinder
+
+# @identity
+# essence: a configurable cylinder body — radius and height controlled by exports, radial_segments × rings deciding how "faceted" vs "smooth" it reads against the grid
+# desire: a single procedural cylinder primitive that any map cell, compound shape, or column-like artifact can drop in, instead of stamping out one-off CylinderMesh sub-resources
+# critical_parameter: radial_segments — 4 reads as a square prism, 8 as a tower, 16 as a smooth column. The same primitive becomes a different shape at each setting
+# triggers: _ready() reads optional config metadata from the grid system, builds the parametric vertex/face arrays, then attaches the collision body for grabbable use
+# emerges: the surface as a sweep — the player can SEE the wireframe lines that mark "where the segments are", learning that round things are polygons-in-disguise
+# needs: SurfaceTool + grid material [present]; collision body [present]; class_name + @identity [present, 2026-05-19]
+# relationships: foundational with cube (square cell) and sphere (round cell) — the three cover the grid's "what is a cell" vocabulary; consumed by cylinder.tscn (default 4-segment look) and cone.tscn (top_radius = 0); sibling-vocabulary with laser_measure / laser_sword (cylinder handle is the same shape with a different name)
+# truth: a smooth-looking cylinder is a lie. Increase radial_segments until the player notices the lie disappear — that's the moment continuous geometry becomes a choice about resolution.
 
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 

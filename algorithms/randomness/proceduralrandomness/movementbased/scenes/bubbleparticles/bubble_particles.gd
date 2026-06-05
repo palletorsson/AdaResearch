@@ -1,3 +1,13 @@
+# @identity
+# essence: stochastic emission with sound — bubbles rise on randomized speeds with synthesized pops
+# desire: hear a faint clicking ecology while watching translucent spheres ascend and fade
+# critical_parameter: sound_play_chance — gates how often a synthesized pop accompanies a new bubble
+# triggers: bubble_timer fires spawns; each bubble samples size, rise_speed, and a sound variation from the synthesized pool
+# emerges: a multi-channel audio-visual installation — visual rise paired with subtle audible texture
+# needs: spawn rate slider [missing]; sound chance dial [missing]; mute toggle [missing]
+# relationships: parent variant of bubbles_random (no sound, smaller dish); cousin of random_object_spawner (similar synth-tap rhythm)
+# truth: Sound is a slower frame rate. When randomness chooses to be heard, its tempo gives the eye time to catch up.
+
 extends Node3D
 
 # Bubble particle properties

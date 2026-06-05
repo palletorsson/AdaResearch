@@ -4,6 +4,16 @@ extends Node3D
 ## 6 attractor types with velocity-colored trails, real-time Lyapunov exponent,
 ## parameter space exploration, and VR slider controls.
 
+# @identity
+# essence: x_{n+1} = f(x_n, params); for Lorenz/Clifford/De Jong/Bedhead/Svensson/Ikeda, iterate a nonlinear map. The trajectory is bounded but never repeats — a structure that exists without converging.
+# desire: To make chaos look like a place — velocity-colored trails turn the attractor into a sculpted ribbon you can walk around in VR, while the Lyapunov exponent reads out divergence as you adjust parameters.
+# critical_parameter: attractor_type (which map) + max_points (memory budget for the visible trail) + parameter sliders that lerp toward target_params for smooth basin-to-basin morphing.
+# triggers: _process tick → iterate the map iterations_per_frame times → append to _trail_points → rebuild ImmediateMesh ribbon → update Lyapunov readout
+# emerges: A stable shape from a divergent process — nearby trajectories separate exponentially (positive Lyapunov), yet the cloud they trace settles into the same skeleton every time.
+# needs: VR parameter sliders [missing], type-cycle button [missing]
+# relationships: Belongs in fractals as the chaos-side of self-similarity (attractors have fractal dimension); pairs with logistic_map and lorenz_demo in the chaos arc.
+# truth: An attractor is a memory the system can't escape — every orbit forgets where it started but remembers what shape it lives inside.
+
 enum AttractorType { LORENZ, CLIFFORD, DE_JONG, BEDHEAD, SVENSSON, IKEDA }
 
 @export var attractor_type: AttractorType = AttractorType.LORENZ

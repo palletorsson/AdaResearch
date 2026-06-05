@@ -5,6 +5,16 @@ extends Node3D
 # Low Z = perfectly ordered grid (zero entropy)
 # High Z = maximum chaos (high entropy)
 
+# @identity
+# essence: a corridor of points that begins as a perfect grid and ends as a cloud — entropy as a walk
+# desire: to make the player WALK from order into chaos, feeling the moment grid stops being grid
+# critical_parameter: max_randomness — how far points can drift from their lattice anchor at the chaos end
+# triggers: walking the Z axis from low (ordered) toward high (chaotic), watching the lattice dissolve underfoot
+# emerges: an embodied gradient — order has a texture in the soles, chaos has a different texture
+# needs: grid_size_x[has] grid_size_y[has] grid_size_z[has] max_randomness[has] entropy_curve[has] vr_step_marker[missing]
+# relationships: the opening axiom of the randomness sequence — every later randomness artifact assumes this gradient exists
+# truth: entropy is not decay — it is freedom from the lattice, the space the algorithm cannot predict
+
 @export var grid_size_x: int = 10
 @export var grid_size_y: int = 10
 @export var grid_size_z: int = 40

@@ -1,3 +1,13 @@
+# @identity
+# essence: animated topological chaos — a walkable surface whose heights breathe with noise
+# desire: feel the floor breathe; walk a terrain whose elevation is renegotiated every frame
+# critical_parameter: chaos_level — amplifies how much the surface deviates from its initial heights
+# triggers: each animation tick re-samples heights according to AnimationType (WAVE/RIPPLE/RANDOM_WALK/CHAOTIC)
+# emerges: a VR-walkable random landscape that updates collision at collision_update_interval to keep frame rate
+# needs: chaos slider [has]; animation type picker [has]; seed reseed button [missing]
+# relationships: subclass of TopologySpace; sibling of SineSpace (deterministic) and other walkgrid topologies
+# truth: A floor is a contract; a chaotic floor is a question. Walking it is research — randomness underfoot teaches what stability means.
+
 # RandomSpace.gd - Animated chaos optimized for VR
 extends TopologySpace
 class_name RandomSpace

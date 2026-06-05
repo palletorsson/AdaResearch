@@ -5,6 +5,16 @@ extends Node2D
 ## projection lines, phase trail, and interactive VR controls.
 ## Core math concept: how circular motion projects to sinusoidal waves.
 
+# @identity
+# essence: a unit circle and its shadow — rotation projected onto a line is the sine wave itself
+# desire: to make the player see that "sine" is not a function but the SHADOW of something turning
+# critical_parameter: angular_velocity — controls how fast rotation becomes wave
+# triggers: watching a rotating dot drop a vertical line onto a horizontal axis
+# emerges: the same motion read two ways — circular as space, sinusoidal as time
+# needs: angular_velocity[has] amplitude[has] frequency[has] phase_trail[has] vr_slider[missing]
+# relationships: parent of every wavefunctions artifact — the unit circle is where oscillation begins
+# truth: a sine wave is not invented — it is the inevitable shadow of constant rotation
+
 signal cycle_complete(cycles: int)
 signal phase_changed(phase: float)
 

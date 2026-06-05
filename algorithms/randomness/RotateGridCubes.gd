@@ -1,3 +1,13 @@
+# @identity
+# essence: choreographed permutation — rows of grid cubes rotated in axis-banded segments
+# desire: read the grid as a score: 6 rows Z, 4 flat, 6 Y, 4 flat, 6 X-negative, 4 flat, 6 all, 8 flat
+# critical_parameter: PATTERN — the ordered list of (row_count, axis) bands that defines the cycle length
+# triggers: _ready() computes section starts and binds to the GridMultiMesh; tween animations apply rotation per section
+# emerges: a moving stripe of axis-aligned tilts that sweeps through the grid revealing structural anisotropy
+# needs: pattern editor [missing]; per-axis amount sliders [missing]; cycle pause control [missing]
+# relationships: cousin of RotateScaleCubes (combined transforms); contrast to BlueNoise which redistributes positions, this redistributes orientations
+# truth: The grid is a stack of choices. Which axis turns where, in which order, IS the music — randomness lives in the score, not the dance.
+
 extends Node3D
 class_name RotateGridCubes
 

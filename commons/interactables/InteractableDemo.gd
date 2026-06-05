@@ -1,3 +1,13 @@
+# @identity
+# essence: a sampler rack — one row of every VR control with labels, for inspection and tuning
+# desire: stand in front and grab each control type once; learn which lever does what without reading code
+# critical_parameter: DEFAULT_CONTROLS — the ordered list that defines what shows up and in what arrangement
+# triggers: _ready() instantiates each control scene at row positions; rows 2-4 add buttons, prototype modules, and labels
+# emerges: a teaching rack: button, knob, sliders, snap, zero, lever, wheel, joystick, XY pad, prototype modules — all live, all grabbable
+# needs: row toggle [missing]; per-row hide/show [missing]; reset-all-positions button [missing]
+# relationships: meta-artifact — the dictionary for every other interactable; cousin of GlassRack (curated thematic racks)
+# truth: An interface is a vocabulary. Putting one of each in a row reveals the vocabulary as such — the rack is a definition you can touch.
+
 extends Node3D
 
 const RackPassiveElementsScript = preload("res://commons/interactables/RackPassiveElements.gd")

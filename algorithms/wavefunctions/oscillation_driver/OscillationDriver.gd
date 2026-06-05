@@ -4,6 +4,16 @@ extends Node3D
 ## Demonstrates the concept of a "Driver" (Oscillator) producing a "Product" (Scale transformation)
 ## Agent-VisualizationExpert: Wave function visualization
 ## Protocol: IACP v2.2
+##
+## @identity
+## essence: oscillation as causal source — one bouncing ball drives a remote object's scale via the same sine
+## desire: see that the cube grows and shrinks not because the cube oscillates, but because the ball does
+## critical_parameter: frequency — driver and product share it, but the relationship is one-way
+## triggers: _process(delta) updates time; driver_ball.position.y = sin(omega*t)*amplitude; product_cube.scale = base_scale + |sin(omega*t)|
+## emerges: action-at-a-distance made visible — the connection_line traces the invisible coupling
+## needs: driver_ball mesh [has]; product_cube mesh [has]; connection_line for visualization [has]
+## relationships: building block for PendulumGrid3x3 (many drivers, many products); kin to OscillatingWave (single driver, no product); base case for any forced oscillator
+## truth: A wave is not just a shape — it is a way that one thing's motion becomes another thing's law.
 
 # The Driver: An oscillating ball
 @onready var driver_ball: MeshInstance3D = $DriverBall

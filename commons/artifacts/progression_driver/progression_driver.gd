@@ -5,6 +5,16 @@ class_name ProgressionDriver
 ## and reset progression on all three managers. Slider selects sequence,
 ## buttons trigger force_advance_to or reset_progression.
 
+# @identity
+# essence: slider(sequence_order) + button(force_advance_to) + button(befriend_hazard) + button(reset) → write to EcosystemManager + HazardManager + CatalystCapabilityManager. A VR control surface for the curriculum's hidden state machine.
+# desire: To turn the soft_stages.json progression from a thing that happens to you into a thing you can scrub through — letting playtesters jump to seq 12 to feel "ecology turned on" without grinding 11 levels.
+# critical_parameter: STAGES_PATH = res://commons/maps/soft_stages.json (the single source of truth); _sequence_order is sorted by order field; befriend buttons enumerate all hazard types currently registered.
+# triggers: slider_changed → _selected_sequence updates → status_label refresh; button_pressed → force_advance_to(seq) on all 3 managers + emit signals → soft_stage_dashboard reflects change
+# emerges: A debug-grade time machine for the curriculum — VR-native, no console, no save edits; pair with soft_stage_dashboard to see your writes echo on the wall.
+# needs: VR slider [has], push buttons [has], all three managers as autoloads [required]
+# relationships: Writable twin of soft_stage_dashboard (which only reads); appears in Hazards_Zoo_4+ where the player gains agency over their own curriculum progression.
+# truth: Hidden state becomes survivable once you can rewind it — the curriculum that can only advance is a trap, but a slider that lets you go back is a learning aid.
+
 
 # --- Configuration ---
 @export var panel_width: float = 0.9

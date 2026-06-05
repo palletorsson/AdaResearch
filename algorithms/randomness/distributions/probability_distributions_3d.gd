@@ -3,10 +3,16 @@ class_name ProbabilityDistributions3D
 
 # ============================================================================
 # Probability Distributions Visualization for Ada Research VR Project
-# 
-# This script creates 3D visualizations of different probability
-# distributions that can be interacted with in VR. It includes
-# Gaussian (Normal), Exponential, Uniform, and Multimodal distributions.
+#
+# @identity
+# essence: four distributions side by side — Gaussian, Exponential, Uniform, Multimodal — as 3D landscapes of likelihood
+# desire: switch between distributions and feel that each is a different shape of "what is allowed to happen"
+# critical_parameter: current_distribution — the live selector that swaps the underlying probability density function
+# triggers: _process(delta) accumulates time when animate_distribution=true; particles redraw to follow the current PDF
+# emerges: terrains where height equals likelihood — the shape IS the law constraining 4000 random samples
+# needs: 4000-point particle pool [has]; per-distribution sigma/lambda/range parameters [has]; animation toggle [has]
+# relationships: gallery view of distribution_comparator (one shape vs many); analytical limit of galton_board for the gaussian case; lens for noise families (white/blue/perlin sample different distributions)
+# truth: Every distribution is a constraint on randomness — the shape of what remains possible after all impossibility has been removed.
 # ============================================================================
 
 # Distribution parameters - can be adjusted in editor or via code

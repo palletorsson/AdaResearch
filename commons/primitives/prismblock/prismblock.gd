@@ -1,4 +1,13 @@
-# PrismBlock.gd - Rectangular base tapering to central ridge
+# @identity
+# essence: a rectangular base tapering to a central ridge — the simplest non-trivial prism beyond a box
+# desire: introduce roof-like geometry early — a shape that demonstrates "asymmetry along one axis"
+# critical_parameter: ridge offset relative to base — controls how steep / pitched the prism reads
+# triggers: _ready() calls create_prism_block(); _prism_geometry() generates the vertex/face arrays
+# emerges: a faceted wedge with five faces (two triangles, three rectangles) that already feels architectural
+# needs: base_color export [present]; edge_width material setting [present]; ridge-position parameter [hardcoded]
+# relationships: primitive sibling of cube_one and pyramidblock; reused as roof / awning piece in compound primitive demos and in transformation-chapter scale exercises
+# truth: A prism is the first shape that has a TOP different from its BOTTOM. The ridge is where geometry stops being symmetrical and starts being directional.
+
 extends Node3D
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")

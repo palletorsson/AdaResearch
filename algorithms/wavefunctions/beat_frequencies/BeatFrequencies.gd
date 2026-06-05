@@ -3,6 +3,16 @@ extends Node3D
 ## Beat Frequencies Interactive Demo
 ## Educational demonstration of interference between close frequencies
 ##
+## @identity
+## essence: two sine waves at neighboring frequencies become a third wave that pulses — interference made audible
+## desire: hold sliders for f1 and f2, slowly close the gap, hear the beats slow until they vanish
+## critical_parameter: |f1 - f2| — the beat frequency, audible as periodic loudness modulation
+## triggers: slider1 / slider2 update freq1 and freq2; toggle_button starts AudioStreamPlayer3D mixing both tones
+## emerges: a slow throbbing envelope when frequencies are close, a single tone when they match — the ear becomes a frequency comparator
+## needs: dual sliders [has]; on/off toggle [has]; AudioStreamPlayer3D for live mix [has]
+## relationships: superposition base case for harmonic_builder; piano-tuner's tool from oscillating_wave; the auditory analog of moiré
+## truth: Two close frequencies do not blur — they pulse, and the pulse rate is the difference itself.
+##
 ## Concept: When two frequencies are close (e.g., 440 Hz and 442 Hz),
 ## they interfere to create a "beat" pattern - periodic loudness variation
 ## Beat frequency = |f1 - f2| (e.g., |440-442| = 2 Hz = 2 beats per second)

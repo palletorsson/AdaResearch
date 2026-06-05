@@ -1,3 +1,13 @@
+# @identity
+# essence: an enum of joint types (hinge, slider, pendulum, spring) demonstrated as constrained rigid bodies — physics as restricted motion
+# desire: show that "joints" are negative space — degrees of freedom REMOVED — and that each named joint is a different removal
+# critical_parameter: current_constraint_type — picks which degree-of-freedom restriction is on stage
+# triggers: _process() advances the simulation; type-switch button or input rotates through ConstraintType enum
+# emerges: a single piece of rigid hardware that becomes a door (hinge), drawer (slider), bob (pendulum), or sproing (spring) by enum value
+# needs: type selector [present]; reset button [missing]; per-type tuning sliders [missing]
+# relationships: physicssim-bodies primitive that builds on collision_detection (touch) and spring_mass_system (continuous force); foundation for the joints sequence (FOUR named freedoms)
+# truth: A joint is the act of forbidding. Each named joint is a different sentence of the form "you cannot move along axis X." The motion you see is what's left after the forbidding. [Note: this is the deprecated demo; the active interactive version lives at algorithms/physicssimulation/constraints/Constraints_Interactive.gd.]
+
 extends Node3D
 
 class_name Constraints

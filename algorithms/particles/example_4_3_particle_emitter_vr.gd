@@ -1,3 +1,13 @@
+# @identity
+# essence: an emitter class owns the spawn — one object emits a stream of particles with shared birth rules
+# desire: separate "the source" from "the swarm" — the source has location, the particles have life
+# critical_parameter: emitter position and emission_rate — they fix both where and how often
+# triggers: _ready() instantiates one ParticleEmitter; _process() ticks emission and per-particle update
+# emerges: a coherent stream with a clear origin — fountain, smoke, exhaust — whatever the parameters describe
+# needs: rate slider [present]; emitter position handle [missing]; lifetime dial [present]
+# relationships: encapsulates the array logic from example_4_2_array_particles_vr; opens the way to example_4_4_multiple_emitters_vr (many sources)
+# truth: A source is a function over time. Naming "emitter" makes the function a thing — and once it's a thing, you can have two.
+
 # ===========================================================================
 # NOC Example 4.3: Particle Emitter
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com

@@ -2,6 +2,16 @@ extends Node3D
 ## BellCurveTerrain.gd
 ## Builds a 20×20 quad grid (Y up) shaped into a 3D bell curve.
 ## Uses HeightMapShape3D for smooth player collisions.
+##
+## @identity
+## essence: a Gaussian made walkable — the central limit theorem as terrain you climb
+## desire: stand on the slope and feel that this exact shape is what randomness LOOKS like at scale
+## critical_parameter: spread (sigma) — wider sigma means flatter terrain, tighter sigma means sharper peak
+## triggers: _build_flat_grid() lays a 20x20 quad mesh; height_at(x,z) applies exp(-(r²)/(2σ²)) per vertex
+## emerges: a 3D HeightMapShape3D that is the integral of countless independent random walks — the bell shape is inevitable
+## needs: HeightMapShape3D for player collisions [has]; configurable sigma + height [has]; subtle Z-noise option [has]
+## relationships: galton_board's analytical limit (infinite bins, infinite balls); kin to distribution_comparator; one cross-section of probability_distributions_3d
+## truth: The bell curve is not chosen — it is what every sum of independent randomness becomes.
 
 @export var quads_x: int = 20
 @export var quads_z: int = 20

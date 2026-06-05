@@ -1,6 +1,16 @@
 extends Node3D
 ## PipeScreensaver3D.gd
 ## Generates a neon "Windows Pipes"-style path with smoother materials and bounds-aware growth.
+##
+## @identity
+## essence: a self-avoiding 3D random walk that rounds its corners — the screensaver as memory of childhood computers
+## desire: watch a pipe explore a sealed cube, choosing each turn live, never crossing itself, until the cube is full
+## critical_parameter: continue_straight_chance — the inertia parameter that decides how often the walker keeps going vs turns
+## triggers: _grow_segment() fires every turn_interval seconds; bounds-aware growth halts if next cell exits bounds_extent
+## emerges: a tangle of luminous pipes that fills space without overlap — same problem as Hilbert curves, solved stochastically
+## needs: cardinal direction set [has]; head light + emissive material [has]; configurable bounds [has]; growth tween [has]
+## relationships: kin to random_walk_terrarium (constrained walk in a vessel); cousin of Hilbert/Peano curves (deterministic space-fillers); echoes pipe_walker patterns in stigmergy
+## truth: A walker that remembers where it has been is no longer just random — it becomes a maker of structure.
 
 @export_group("Geometry")
 @export var pipe_radius: float = 0.12

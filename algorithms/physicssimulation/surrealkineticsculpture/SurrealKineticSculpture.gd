@@ -1,3 +1,13 @@
+# @identity
+# essence: a kinetic sculpture — three black Tanguy pistons driving colorful Niki de Saint Phalle organic forms — physics as choreography
+# desire: stage rigid mechanism producing soft consequence — the visible cause-and-effect of art-physics
+# critical_parameter: piston_speed_multiplier × mechanical_precision — together they set the tempo and the precision of the motion
+# triggers: _ready() builds the sculpture; _process() drives the pistons and the connected organic forms each frame
+# emerges: a quietly working machine where rigid black geometry produces colorful organic motion — aesthetic translation of mechanical work
+# needs: speed dial [present]; color intensity [present]; precision slider [present]
+# relationships: physicssim-aesthetics outlier; kin to grammar_gallery (cultural-form physics) and to the catalyst-of-becoming pieces in sequence-end chambers
+# truth: A sculpture is a choreography frozen in materials. Naming the parts after artists (Tanguy / Niki) makes the physics legible as a tradition, not just a simulation.
+
 extends Node3D
 class_name SurrealKineticSculpture
 

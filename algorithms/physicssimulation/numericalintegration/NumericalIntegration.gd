@@ -1,3 +1,13 @@
+# @identity
+# essence: three integrators racing the same trajectory — Euler, RK4, and Godot's ground-truth physics — visualized side by side
+# desire: see numerical accuracy as a thing, not an abstract claim — the trail divergence is the error made spatial
+# critical_parameter: time_step — small dt makes Euler tolerable; large dt makes RK4's superiority obvious
+# triggers: _ready() spawns the trio; _physics_process() steps each integrator independently and records its trail
+# emerges: blue (Godot), green (RK4), red (Euler) trails — same initial conditions, different futures, the gap = the integration error
+# needs: time_step slider [present as export]; reset button [missing]; trail length cap [present]
+# relationships: physicssim-foundations primitive that grounds the change-and-derivative work of sequence "change" and every force-based example
+# truth: There is no such thing as "the trajectory" — only an integrator's opinion about it. Naming three integrators makes the choice visible.
+
 ## Numerical Integration — Compares Euler, RK4, and Godot's built-in integrator
 ## The blue ball uses RigidBody3D (Godot physics = "ground truth")
 ## Red and green trails show how Euler and RK4 approximate the same trajectory

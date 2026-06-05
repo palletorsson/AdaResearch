@@ -1,6 +1,13 @@
-# light_rod.gd - Glowing vertical light rods
-# Usage: lightrod:90:0:1#config:4:1 for 4 rods with 1m spacing
-# Format: lightrod[:rotation:height:scale]#config:count:spacing
+# @identity
+# essence: a row of glowing vertical rods placed by a single config string — the cheapest light-as-line primitive
+# desire: get a measured rhythm of light from a single token (lightrod#config:N:spacing) without touching scene tree
+# critical_parameter: count and spacing — they define a discrete rhythm of vertical lines in the map
+# triggers: _ready() reads config meta; _build_rods() spawns count copies at spacing intervals
+# emerges: a colonnade of cyan glow strokes that read as both structure and decoration
+# needs: rod color export [present]; emission strength export [present]; height export [present]
+# relationships: line-primitive sibling of vectorline (single line) and laser_measure (single beam); used in map-editor lighting passes for theatrical mood
+# truth: A row of light rods is a punctuation mark for space — they don't illuminate the room, they tell you how to read it.
+
 extends Node3D
 
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")

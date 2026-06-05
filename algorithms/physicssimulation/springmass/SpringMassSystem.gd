@@ -1,3 +1,13 @@
+# @identity
+# essence: point masses connected by springs — the canonical soft-body precursor — manual integration, no Godot physics
+# desire: feel that elasticity is just lots of small forces summed every tick — soft is hard plus N
+# critical_parameter: spring_stiffness and damping — stiffness sets oscillation rate, damping sets how quickly it settles
+# triggers: _physics_process() applies gravity then spring forces then integrates positions for every mass point each tick
+# emerges: a network of bouncing masses that oscillates, settles, or sproings depending on the stiffness/damping pair
+# needs: stiffness slider [present as export]; damping slider [present]; pause toggle [present]; topology selector [missing]
+# relationships: bridges collision_detection (rigid contacts) and soft_bodies (Godot-native softbody); foundation for joints, blobby creatures, particle_body, and cloth simulations
+# truth: A spring is a contract between two points: "if you stretch us, we pull you back." Composing many of these contracts makes any rigid shape you want, with optional give built in.
+
 extends Node3D
 
 class_name SpringMassSystem

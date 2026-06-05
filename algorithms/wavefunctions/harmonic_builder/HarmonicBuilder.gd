@@ -3,6 +3,16 @@ extends Node3D
 ## Harmonic Series Interactive Synthesizer
 ## Build musical tones by adding harmonics - demonstrates Fourier synthesis
 ##
+## @identity
+## essence: Fourier synthesis as instrument — any periodic sound is a sum of integer harmonics
+## desire: pull eight sliders to set harmonic amplitudes and hear the timbre shift from sine to square to sawtooth
+## critical_parameter: per-harmonic amplitude (slider 1..8) — together they define the spectral signature
+## triggers: harmonic_sliders adjust amplitudes; preset buttons set canonical mixes (sine/square/saw/triangle); frequency_wheel sets fundamental
+## emerges: timbre as geometry — a violin and a clarinet differ only in which harmonic sliders are loud
+## needs: 8 vertical sliders [has]; preset push buttons [has]; FrequencyWheel for fundamental [has]
+## relationships: dual to spectrum analysis (this builds, FFT decomposes); the additive opposite of subtractive synthesis; kin to beat_frequencies (interference of two) extended to N
+## truth: Every periodic sound is a chord — what we call "tone color" is which notes of the harmonic chord are loud.
+##
 ## Concept: ANY periodic sound = sum of harmonics (integer multiples of fundamental)
 ## - Fundamental (1×): Base pitch
 ## - 2nd harmonic (2×): Octave above

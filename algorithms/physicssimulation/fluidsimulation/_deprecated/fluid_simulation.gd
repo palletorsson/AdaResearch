@@ -1,3 +1,13 @@
+# @identity
+# essence: a particle-based fluid sim — N particles with attraction + repulsion + viscosity — fluid as cooperative crowd
+# desire: feel that fluid is not "a substance" but a crowd-rule — each particle obeys only its neighbours, the wave is emergent
+# critical_parameter: particle_count and viscosity — count sets resolution, viscosity sets how much memory each particle retains
+# triggers: _physics_process() evaluates per-particle neighbour forces every tick and integrates positions
+# emerges: a sloshing volume that fills containers, splashes, and settles into a flat surface — fluid behaviour from local rules
+# needs: count slider [present]; viscosity slider [present]; container shape selector [missing]
+# relationships: precursor to the active SPH FluidSimulation.gd (MultiMesh-optimised) and to particle_body / soft_bodies (bound-particle variants)
+# truth: A fluid is a crowd that has agreed to be smooth. The agreement is purely local — neighbour forces only — and the global shape is what emerges. [Note: this is the deprecated demo; the active optimised SPH version lives at algorithms/physicssimulation/fluidsimulation/FluidSimulation.gd.]
+
 extends Node3D
 
 # Simple Fluid Simulation using Particle-Based Method
