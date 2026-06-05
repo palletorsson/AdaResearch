@@ -546,6 +546,8 @@ func _connect_biome_menu(vp: Node) -> void:
 		_biome_menu_ui.element_selected.connect(_on_biome_menu_element)
 	if _biome_menu_ui.has_signal("size_changed") and not _biome_menu_ui.size_changed.is_connected(_on_biome_menu_size):
 		_biome_menu_ui.size_changed.connect(_on_biome_menu_size)
+	if _biome_menu_ui.has_signal("pressure_changed") and not _biome_menu_ui.pressure_changed.is_connected(_on_biome_menu_pressure):
+		_biome_menu_ui.pressure_changed.connect(_on_biome_menu_pressure)
 	print("[Catalyst] Biome menu connected")
 
 
@@ -558,6 +560,11 @@ func _on_biome_menu_element(element_name: String) -> void:
 func _on_biome_menu_size(radius: int) -> void:
 	if _biome_brush:
 		_biome_brush.set_radius(radius)
+
+
+func _on_biome_menu_pressure(strength: float) -> void:
+	if _biome_brush:
+		_biome_brush.set_strength(strength)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

@@ -6,6 +6,7 @@ extends Control
 
 signal element_selected(element_name: String)
 signal size_changed(radius: int)
+signal pressure_changed(strength: float)
 
 const ELEMENTS: Array = ["ground", "tree", "critter", "flower", "mushroom", "large_critter"]
 const LABELS: Array = ["Ground", "Tree", "Critter", "Flower", "Mushroom", "Big Critter"]
@@ -17,6 +18,7 @@ const COLORS: Array = [
 var _buttons: Array = []
 var _selected: int = 0
 var _size_label: Label = null
+var _pressure_label: Label = null
 
 
 func _ready() -> void:
@@ -89,6 +91,29 @@ func _ready() -> void:
 	_size_label.custom_minimum_size = Vector2(48, 0)
 	size_row.add_child(_size_label)
 
+	# Brush pressure (stroke strength / for ground, how fast it rises).
+	var p_row := HBoxContainer.new()
+	p_row.add_theme_constant_override("separation", 12)
+	root.add_child(p_row)
+	var p_cap := Label.new()
+	p_cap.text = "PRESS"
+	p_cap.add_theme_font_size_override("font_size", 15)
+	p_cap.add_theme_color_override("font_color", Color(0.6, 0.64, 0.72))
+	p_cap.custom_minimum_size = Vector2(58, 0)
+	p_row.add_child(p_cap)
+	var p_slider := HSlider.new()
+	p_slider.min_value = 0.1; p_slider.max_value = 1.0; p_slider.step = 0.1; p_slider.value = 0.6
+	p_slider.custom_minimum_size = Vector2(300, 40)
+	p_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	p_slider.value_changed.connect(_on_pressure)
+	p_row.add_child(p_slider)
+	_pressure_label = Label.new()
+	_pressure_label.text = "0.6"
+	_pressure_label.add_theme_font_size_override("font_size", 20)
+	_pressure_label.add_theme_color_override("font_color", Color(0.93, 0.96, 1.0))
+	_pressure_label.custom_minimum_size = Vector2(48, 0)
+	p_row.add_child(_pressure_label)
+
 	_refresh()
 	# Emit the initial selection so the brush starts in sync.
 	call_deferred("emit_signal", "element_selected", str(ELEMENTS[_selected]))
@@ -105,6 +130,12 @@ func _on_size(v: float) -> void:
 	if _size_label:
 		_size_label.text = "r%d" % r
 	size_changed.emit(r)
+
+
+func _on_pressure(v: float) -> void:
+	if _pressure_label:
+		_pressure_label.text = "%.1f" % v
+	pressure_changed.emit(v)
 
 
 ## Called by the 3D wrapper when the brush cycles element via Ax, to keep the

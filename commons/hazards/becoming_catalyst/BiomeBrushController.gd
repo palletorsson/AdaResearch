@@ -63,6 +63,11 @@ func set_radius(r: int) -> void:
 	_radius = clampi(r, 0, 8)
 
 
+## Set the brush pressure / strength (from the menu's pressure slider).
+func set_strength(s: float) -> void:
+	_strength = clampf(s, 0.1, 1.0)
+
+
 func has_strokes() -> bool:
 	return not _fields.is_empty()
 

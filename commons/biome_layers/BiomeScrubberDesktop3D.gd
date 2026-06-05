@@ -19,8 +19,8 @@ extends Node3D
 ##   ] / →  next stage     [ / ←  prev stage     1-9,0 jump    - / =  ends
 ##   ↑ / ↓  select layer    Space  toggle layer    S  solo selected    A  all on
 ##   R  reset to progression    Tab  hide/show panel    R-drag orbit    wheel zoom
-##   B  brush element (tree→critter→flower→off)   L-drag  paint   E  erase
-##   C  clear brush   , / .  brush radius   W  save brush+overrides → map
+##   B  brush element (ground→tree→critter→…→off)   L-drag  paint   E  erase
+##   , / .  brush size    ; / '  pressure    C  clear    W  save brush+overrides → map
 ##
 ## CLI (headless):
 ##   --stage=N            start stage
@@ -37,7 +37,7 @@ const MIN_STAGE := 1
 const MAX_STAGE := 19
 @export var grid_size: int = 20          # synthetic default (square)
 @export var cube_size: float = 1.0
-@export var auto_spin: bool = true
+@export var auto_spin: bool = false   # OFF — a spinning scene fights painting (R-drag still orbits)
 @export var spin_speed: float = 0.18
 @export var start_stage: int = 1
 
@@ -441,8 +441,8 @@ func _update_hud() -> void:
 	# Controls footer — brush controls when a paint element is active.
 	if _paint_idx >= 0:
 		var el: String = _paint_elements[_paint_idx]
-		_controls_lbl.text = "🖌 PAINT %s  (r%d%s)      L-drag paint      B element      E erase      C clear      , . radius      W save" % [
-			el.to_upper(), _brush_radius, "  ERASE" if _brush_erase else ""]
+		_controls_lbl.text = "🖌 PAINT %s  (size %d · pressure %.1f%s)   L-drag paint   B element   E erase   , . size   ; ' pressure   C clear   W save" % [
+			el.to_upper(), _brush_radius, _brush_strength, "  · ERASE" if _brush_erase else ""]
 		_controls_lbl.add_theme_color_override("font_color", _element_color(el))
 	else:
 		var save_hint := "      W save→map" if _loaded_map != "" else ""
@@ -602,6 +602,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					_rebuild()
 			KEY_COMMA:  _brush_radius = maxi(0, _brush_radius - 1); _update_hud()
 			KEY_PERIOD: _brush_radius = mini(8, _brush_radius + 1); _update_hud()
+			KEY_SEMICOLON:  _brush_strength = clampf(_brush_strength - 0.1, 0.1, 1.0); _update_hud()
+			KEY_APOSTROPHE: _brush_strength = clampf(_brush_strength + 0.1, 0.1, 1.0); _update_hud()
 			KEY_TAB:
 				if _panel_root: _panel_root.visible = not _panel_root.visible
 			KEY_R:
@@ -642,7 +644,8 @@ func _select(delta: int) -> void:
 
 # ── Per-frame camera orbit + capture countdown ───────────────────────
 func _process(delta: float) -> void:
-	if auto_spin and not _dragging:
+	# Never auto-spin while painting (a moving target is unpaintable).
+	if auto_spin and not _dragging and _paint_idx < 0:
 		_orbit_yaw += spin_speed * delta
 	if _camera:
 		var x := _orbit_center.x + _orbit_radius * cos(_orbit_pitch) * sin(_orbit_yaw)
