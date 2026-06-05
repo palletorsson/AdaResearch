@@ -60,7 +60,11 @@ const STICK_COOLDOWN := 0.5  # Short cooldown — smooth lerp handles the visual
 var _voxel_controller: VoxelEditController = null
 var _voxel_active: bool = false
 # Biome Brush (tool mode) — paints biome density on the floor; B saves paint_layers.
-var _biome_brush: BiomeBrushController = null
+# preload (NOT the global class_name) so the type resolves regardless of the
+# script-class cache load order at runtime — the class_name isn't yet registered
+# when this script parses on a fresh game load.
+const BiomeBrushControllerClass = preload("res://commons/hazards/becoming_catalyst/BiomeBrushController.gd")
+var _biome_brush: BiomeBrushControllerClass = null
 var _voxel_data_component: Node = null  # holds current map name, for B-to-save
 # Voxel activation retry (grid may not be ready on map transition)
 var _voxel_activate_retries: int = 0
@@ -204,7 +208,7 @@ func _physics_process(delta: float) -> void:
 	# element's density; on release the biome rebuilds live. B saves paint_layers.
 	if is_held and _cur_mode_id == "biome_brush":
 		if _biome_brush == null:
-			_biome_brush = BiomeBrushController.new()
+			_biome_brush = BiomeBrushControllerClass.new()
 			_biome_brush.name = "BiomeBrushCtrl"
 			add_child(_biome_brush)
 			_biome_brush.setup()
