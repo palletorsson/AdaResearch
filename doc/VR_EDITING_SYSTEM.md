@@ -106,10 +106,27 @@ stone**, because `paint_layers` are cell-based:
    as `interactablePlacements`). `res://` write is editor-only; the headset POSTs.
 4. Reuses `DistributionField` + the stamp math proven on the desktop scrubber.
 
-**Element sub-selection** within the brush should follow the bracelet idiom (reach /
-workstation), **not** a button-cycle — TBD with the bracelet's interaction owner.
+### Status (2026-06-05): stone built, in-headset verify pending
 
-> Note: `commons/grid/BiomePaintVR.gd` (a standalone, `res://`-writing draft) was a
-> first pass before this architecture was clear. It is superseded by the stone
-> approach above; its stamp/field logic moves into the shared brush core. Keep only
-> as desktop reference until the stone lands, then remove.
+Built + parse-clean (editor import):
+- `modes/mode_biome_brush.gd` — the stone (tool mode, green). In `MODE_DEFS` +
+  `unlocked_modes`.
+- `BiomeBrushController.gd` — the logic (ray→cell→stamp→ghost→`repaint_biome`,
+  `paint_layers_payload()`). The catalyst feeds it the controller pose each frame.
+- `becoming_catalyst.gd` — additive, mode-gated: `_process` biome branch (poll
+  trigger/grip), `_on_controller_button` early-return (Ax cycles element, By saves,
+  trigger/grip polled → never fires), `_save_biome` → POSTs `paintLayers`.
+- `/api/game/save-layers` accepts `paintLayers` (verified end-to-end) ·
+  `GridSystem.repaint_biome` (live rebuild).
+
+**Element sub-selection** is **Ax-cycles-element** for now (the button budget —
+trigger/grip/by are taken — forces it off a reach gesture). The left-wrist
+workstation is the intended home; revisit in-headset.
+
+> `commons/grid/BiomePaintVR.gd` (the standalone `res://`-writing draft) is
+> **removed** — superseded by the stone; its stamp/field logic now lives in
+> `BiomeBrushController.gd`.
+
+**Verify in-headset:** enable the `biome_brush` stone, reach-select it, paint the
+floor, watch the biome rebuild on release, press B → `SAVED → PC`, reload the map.
+Feedback via `ada_run/desktop_feedback.md`.

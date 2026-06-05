@@ -29,6 +29,7 @@ const MODE_DEFS: Array[Dictionary] = [
 	{"id": "wedge_placer",   "order": 0,  "name": "Wedge Placer",  "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_wedge_placer.gd"},
 	{"id": "artifact_edit",  "order": 0,  "name": "Edit",           "sequence": "",                   "script": ""},
 	{"id": "lab_edit",       "order": 0,  "name": "Lab",            "sequence": "",                   "script": ""},
+	{"id": "biome_brush",    "order": 0,  "name": "Biome Brush",    "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_biome_brush.gd"},
 	{"id": "primitives",     "order": 1,  "name": "Primitives",     "sequence": "primitives",         "script": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"},
 	{"id": "transformation", "order": 2,  "name": "Transformation", "sequence": "transformation",     "script": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"},
 	{"id": "chromatic",      "order": 3,  "name": "Chromatic",      "sequence": "color",              "script": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"},
@@ -42,7 +43,7 @@ const MODE_DEFS: Array[Dictionary] = [
 ]
 
 # ── State ─────────────────────────────────────────────────────────────────
-var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "off"]
+var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "biome_brush", "off"]
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
@@ -58,6 +59,8 @@ const STICK_COOLDOWN := 0.5  # Short cooldown — smooth lerp handles the visual
 # Voxel editing (tool mode)
 var _voxel_controller: VoxelEditController = null
 var _voxel_active: bool = false
+# Biome Brush (tool mode) — paints biome density on the floor; B saves paint_layers.
+var _biome_brush: BiomeBrushController = null
 var _voxel_data_component: Node = null  # holds current map name, for B-to-save
 # Voxel activation retry (grid may not be ready on map transition)
 var _voxel_activate_retries: int = 0
@@ -197,6 +200,29 @@ func _physics_process(delta: float) -> void:
 	elif _edit_target != null or _edit_grabbed != null or (_edit_highlight and _edit_highlight.visible):
 		_end_edit_mode()
 
+	# Biome Brush — point at the floor, trigger paints / grip erases the active
+	# element's density; on release the biome rebuilds live. B saves paint_layers.
+	if is_held and _cur_mode_id == "biome_brush":
+		if _biome_brush == null:
+			_biome_brush = BiomeBrushController.new()
+			_biome_brush.name = "BiomeBrushCtrl"
+			add_child(_biome_brush)
+			_biome_brush.setup()
+		if controller:
+			var b_origin: Vector3 = controller.global_position
+			var b_fwd: Vector3 = -controller.global_transform.basis.z
+			var b_paint: bool = controller.is_button_pressed("trigger_click")
+			var b_erase: bool = controller.is_button_pressed("grip_click")
+			_biome_brush.update(b_origin, b_fwd, b_paint, b_erase)
+		# Hide voxel ghosts while painting biome.
+		if _voxel_controller:
+			if _voxel_controller._ghost_add:
+				_voxel_controller._ghost_add.visible = false
+			if _voxel_controller._ghost_remove:
+				_voxel_controller._ghost_remove.visible = false
+	elif _biome_brush:
+		_biome_brush.set_idle()
+
 	# Mode switching disabled on controller thumbstick — use the bracelet instead
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -221,6 +247,19 @@ func action() -> void:
 func _on_controller_button(button_name: String) -> void:
 	var mode_def := _get_current_mode_def()
 	var mode_id: String = mode_def.get("id", "") if not mode_def.is_empty() else ""
+
+	# Biome Brush intercepts its buttons before the firing/voxel dispatch:
+	# trigger/grip painting is POLLED in _process; Ax cycles the element; By saves.
+	# (The early return prevents trigger_click from falling through to _fire().)
+	if mode_id == "biome_brush":
+		match button_name:
+			"ax_button":
+				if _biome_brush:
+					_biome_brush.cycle_element()
+					_flash_label("BRUSH: " + _biome_brush.active_element().to_upper(), Color(0.6, 0.95, 0.7))
+			"by_button":
+				_save_biome()
+		return
 
 	match button_name:
 		"ax_button", "trigger_click":
@@ -404,6 +443,44 @@ func _on_map_save_completed(result: int, response_code: int, _headers: PackedStr
 			hint = "  (adb reverse tcp:3003 tcp:3003)"
 		_flash_label("SAVE FAILED %d/%d%s" % [result, response_code, hint], Color(1.0, 0.35, 0.35))
 		push_warning("[Catalyst] map save HTTP failed result=%d code=%d" % [result, response_code])
+
+# ═══════════════════════════════════════════════════════════════════════════
+# BIOME BRUSH SAVE — POST paint_layers to the PC, same tunnel as map saves
+# ═══════════════════════════════════════════════════════════════════════════
+
+## B (biome_brush mode) = save the painted density fields to the repo's
+## map_data.json `paint_layers[]` via /api/game/save-layers (merged by element,
+## non-destructive). res:// is read-only on Quest, so it POSTs over the tunnel.
+func _save_biome() -> void:
+	if _biome_brush == null or not _biome_brush.has_strokes():
+		_flash_label("NOTHING PAINTED", Color(1.0, 0.5, 0.2))
+		return
+	var data := _get_grid_data_component()
+	var map_name := ""
+	if data and data.has_method("get_current_map_name"):
+		map_name = data.get_current_map_name()
+	if map_name == "":
+		_flash_label("NO MAP NAME", Color(1.0, 0.4, 0.3))
+		return
+	_save_biome_over_http(map_name, _biome_brush.paint_layers_payload())
+	_flash_label("SAVING BIOME  " + map_name + " ...", Color(0.6, 0.85, 1.0))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.4, 0.0)
+
+
+func _save_biome_over_http(map_name: String, paint_layers: Array) -> void:
+	print("[Catalyst] POSTing biome '%s' (%d paint layers) -> %s" % [map_name, paint_layers.size(), MAP_SAVE_URL])
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(_on_map_save_completed.bind(http))  # reuse SAVED→PC flash
+	var headers := PackedStringArray(["Content-Type: application/json"])
+	var payload := {"mapName": map_name, "paintLayers": paint_layers}
+	http.set_meta("map_name", map_name)
+	var err := http.request(MAP_SAVE_URL, headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
+	if err != OK:
+		http.queue_free()
+		_flash_label("POST FAILED: %s" % error_string(err), Color(1.0, 0.3, 0.3))
+
 
 # ═══════════════════════════════════════════════════════════════════════════
 # WEDGE PLACEMENT — PrismMesh slopes on the grid
