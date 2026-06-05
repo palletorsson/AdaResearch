@@ -21,7 +21,7 @@ func configure(grid_w: int, grid_d: int, cube: float, center: Vector3) -> void:
 	# Smooth-ish bumps: a couple of mesh quads per grid cell, capped for perf.
 	resolution = clampi(maxi(grid_w, grid_d) * 2, 16, 80)
 	height_scale = 1.0
-	position = Vector3(center.x, center.y + 0.02, center.z)  # flush, just above floor
+	position = Vector3(center.x, center.y - 1.0, center.z)   # base ground a metre below the floor
 
 
 ## Set the height field (the bump map). `field` is row-major fw*fd, values 0..1.
