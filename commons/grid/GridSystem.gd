@@ -644,7 +644,7 @@ func _handle_audio_start():
 ## map's own paint_layers). Additive — does not change default map loading.
 func repaint_biome(layers: Array) -> void:
 	_runtime_paint_layers = layers if layers is Array else []
-	_handle_biome_ring()
+	_handle_biome_ring(true)   # live brush: skip the ecosystem re-sync (same map)
 
 
 ## Live mesh-only preview of the ground while the biome brush paints "ground".
@@ -668,7 +668,10 @@ func _find_descendant_named(root: Node, nm: String) -> Node:
 	return null
 
 
-func _handle_biome_ring():
+## `live_repaint` = called by the biome brush on a stroke (repaint_biome), where
+## the map hasn't changed — so skip the ecosystem re-sync, which otherwise advances
+## the monotonic progression AND writes the ecosystem save to disk on EVERY stroke.
+func _handle_biome_ring(live_repaint: bool = false):
 	# Runtime flag — let the encyclopedia /shortcuts surface flip this
 	# off for clean map captures and architecture debugging.
 	if not _runtime_flag_enabled("biome_enabled", true):
@@ -692,9 +695,12 @@ func _handle_biome_ring():
 		print("GridSystem: EcosystemManager missing get_vegetation_density")
 		return
 
-	# Auto-advance ecosystem to the current map's sequence so biome matches context
+	# Auto-advance ecosystem to the current map's sequence so biome matches context.
+	# Skipped on a live brush repaint — the map (hence its sequence/stage) is
+	# unchanged, and the sync writes the ecosystem save to disk each call.
 	var density_before: float = eco.get_vegetation_density()
-	_sync_ecosystem_to_current_map(eco)
+	if not live_repaint:
+		_sync_ecosystem_to_current_map(eco)
 	var density: float = eco.get_vegetation_density()
 	var kingdoms = eco.get_allowed_kingdoms() if eco.has_method("get_allowed_kingdoms") else []
 	print("GridSystem: Biome check — map='%s' density_before=%.2f density_after=%.2f kingdoms=%s" % [map_name, density_before, density, str(kingdoms)])
