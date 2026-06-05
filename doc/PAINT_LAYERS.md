@@ -14,7 +14,7 @@ Every layer is the same shape. Only the `element` changes:
 ```
 element       what it places / modulates          engine (today)
 ───────────   ─────────────────────────────────   ──────────────────────
-ground        heightfield / bump (substrate)       — (step-2b, not wired)
+ground        heightfield / bump → walkable mesh   ground_substrate    ✅ wired (default-on, flat)
 shader        ground-shader drain + paint           — (research jewel, later)
 particle      CPU/GPU particle field                — (later)
 object        any artifact, by density              biome_paint_dispatcher (infra-heavy, TODO)
@@ -134,6 +134,23 @@ Open the scrubber on a map and paint a density field by hand:
 The wired spawn layers place by the painted field immediately on mouse-release.
 This is the desktop precursor to the VR brush (step 4): the same stamp logic,
 driven by a controller raycast instead of the mouse.
+
+## Ground (the bump-map terrain)
+
+`ground` is a **substrate** layer, not a scatter one: its field is a HEIGHT map,
+not a placement density. The `ground_substrate` accrual layer is **on by default**
+on every biome map (order 1, `always`) — a flat level ground you can raise into
+hills. It extends the walkgrids `TopologySpace`, so the deformed mesh is walkable
+(trimesh collider follows the bumps).
+
+```json
+{ "element": "ground", "mode": "noise", "scale": 0.16, "threshold": 0.0, "density": 1.0, "height": 2.0 }
+```
+
+- Any distribution `mode` works (plane = flat raise, curve = a slope/hill, noise =
+  rolling terrain, brush = hand-sculpted).
+- `height` (metres) scales the field → max bump height. No `ground` layer = flat.
+- Toggle the whole thing off per map: `settings.biome_overrides.disable = ["ground_substrate"]`.
 
 ## Not yet (next steps)
 
