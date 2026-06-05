@@ -8,11 +8,11 @@ signal element_selected(element_name: String)
 signal size_changed(radius: int)
 signal pressure_changed(strength: float)
 
-const ELEMENTS: Array = ["ground", "tree", "critter", "flower", "mushroom", "large_critter"]
-const LABELS: Array = ["Ground", "Tree", "Critter", "Flower", "Mushroom", "Big Critter"]
+const ELEMENTS: Array = ["ground", "shader", "tree", "critter", "flower", "mushroom", "large_critter"]
+const LABELS: Array = ["Ground", "Shader", "Tree", "Critter", "Flower", "Mushroom", "Big Critter"]
 const COLORS: Array = [
-	Color(0.55, 0.45, 0.32), Color(0.45, 0.85, 0.50), Color(1.0, 0.70, 0.36),
-	Color(1.0, 0.55, 0.76), Color(0.80, 0.55, 0.40), Color(0.95, 0.45, 0.30),
+	Color(0.55, 0.45, 0.32), Color(0.18, 0.62, 0.55), Color(0.45, 0.85, 0.50),
+	Color(1.0, 0.70, 0.36), Color(1.0, 0.55, 0.76), Color(0.80, 0.55, 0.40), Color(0.95, 0.45, 0.30),
 ]
 
 var _buttons: Array = []

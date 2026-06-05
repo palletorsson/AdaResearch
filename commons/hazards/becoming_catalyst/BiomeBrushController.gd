@@ -10,7 +10,7 @@ class_name BiomeBrushController
 extends Node3D
 
 const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
-const ELEMENTS: Array = ["ground", "tree", "critter", "flower", "mushroom", "large_critter"]
+const ELEMENTS: Array = ["ground", "shader", "tree", "critter", "flower", "mushroom", "large_critter"]
 
 var grid_w: int = 10
 var grid_d: int = 10
@@ -112,6 +112,9 @@ func paint_layers_payload() -> Array:
 		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _rows(_fields[el])}
 		if el == "ground":
 			layer["height"] = 1.5   # painted bumps rise to ~1.5 m
+		elif el == "shader":
+			var c := _elem_colour(el)
+			layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture
 		out.append(layer)
 	if _data and _data.has_method("get_paint_layers"):
 		for layer in _data.get_paint_layers():
@@ -190,6 +193,7 @@ func _rows(field: PackedFloat32Array) -> Array:
 func _elem_colour(el: String) -> Color:
 	match el:
 		"ground": return Color(0.55, 0.45, 0.32)
+		"shader": return Color(0.18, 0.62, 0.55)
 		"tree": return Color(0.45, 0.85, 0.50)
 		"critter": return Color(1.0, 0.70, 0.36)
 		"flower": return Color(1.0, 0.55, 0.76)

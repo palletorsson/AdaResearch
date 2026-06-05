@@ -81,7 +81,7 @@ var _timeline: HBoxContainer = null
 var _tick_rects: Array = []          # Array[ColorRect], one per stage 1..MAX
 # Brush painting (step 3) — left-drag paints a per-cell density field for the
 # active element; the wired spawn layers place by it; W saves to the map.
-var _paint_elements: Array = ["ground", "tree", "critter", "flower", "mushroom", "large_critter"]
+var _paint_elements: Array = ["ground", "shader", "tree", "critter", "flower", "mushroom", "large_critter"]
 var _paint_idx: int = -1             # -1 = not painting; else index into _paint_elements
 var _brush_fields: Dictionary = {}   # element -> PackedFloat32Array (grid_w*grid_d)
 var _brush_radius: int = 2
@@ -941,6 +941,7 @@ func _on_menu_pressure(p: float) -> void:
 func _element_color(el: String) -> Color:
 	match el:
 		"ground": return Color(0.55, 0.45, 0.32)
+		"shader": return Color(0.18, 0.62, 0.55)
 		"tree": return Color(0.45, 0.85, 0.50)
 		"critter": return Color(1.0, 0.70, 0.36)
 		"flower": return Color(1.0, 0.55, 0.76)
@@ -1038,6 +1039,9 @@ func _effective_paint_layers() -> Array:
 		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])}
 		if el == "ground":
 			layer["height"] = 1.5   # painted bumps rise to ~1.5 m
+		elif el == "shader":
+			var c := _element_color(el)
+			layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture
 		out.append(layer)
 	var base: Array = _cli_paint if not _cli_paint.is_empty() else _map_paint_layers
 	for layer in base:

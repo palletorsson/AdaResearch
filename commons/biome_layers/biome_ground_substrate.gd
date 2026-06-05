@@ -9,10 +9,15 @@
 
 extends "res://commons/context/walkgrids/TopologySpace.gd"
 
+const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
+const PAINT_RES := 96            # resolution of the colour/bleed paint texture
+
 var _field: PackedFloat32Array = PackedFloat32Array()  # per-cell [0..1] (the bump map)
 var _fw: int = 1
 var _fd: int = 1
 var _max_h: float = 1.2          # metres at field value 1.0
+var _paint_layers: Array = []    # for the colour overlay: shader paint + plant bleed
+var _rng_seed: int = 0
 
 
 ## Size + place the ground to cover the grid (call BEFORE add_child).
@@ -32,15 +37,109 @@ func set_field(field: PackedFloat32Array, fw: int, fd: int, max_h: float) -> voi
 	_max_h = max_h
 
 
+## The full paint-layer list — used for the ground's COLOUR overlay: "shader"
+## layers paint their colour; plant layers (tree/flower/…) bleed their kingdom
+## colour into the texture. Call before add_child (or before a rebuild).
+func set_paint_layers(layers: Array, rng_seed: int) -> void:
+	_paint_layers = layers
+	_rng_seed = rng_seed
+
+
 ## TopologySpace._ready() calls this after building static_body/mesh_instance.
 func generate_space() -> void:
 	var mesh: ArrayMesh = create_mesh_from_heights(_build_heights())
 	mesh_instance.mesh = mesh
 	create_collision_from_mesh(mesh)
-	# Earthy ground; height-tinted so bumps read. Subtle when flat.
-	apply_height_shader(
-		Color(0.26, 0.22, 0.17), Color(0.34, 0.40, 0.26), Color(0.62, 0.66, 0.52),
-		0.0, maxf(0.4, _max_h), false)
+	_apply_ground_material()
+
+
+## Height-banded earth + a painted/bled colour overlay (shader paint + plant
+## bleed). Falls back to a plain material if the shader is missing.
+func _apply_ground_material() -> void:
+	var shader = load("res://commons/biome_layers/biome_ground.gdshader")
+	if shader == null:
+		apply_standard_material(Color(0.30, 0.28, 0.24), 0.9, 0.0)
+		return
+	var mat := ShaderMaterial.new()
+	mat.shader = shader
+	mat.set_shader_parameter("color_low", Vector3(0.26, 0.22, 0.17))
+	mat.set_shader_parameter("color_mid", Vector3(0.34, 0.40, 0.26))
+	mat.set_shader_parameter("color_high", Vector3(0.62, 0.66, 0.52))
+	mat.set_shader_parameter("height_min", 0.0)
+	mat.set_shader_parameter("height_max", maxf(0.4, _max_h))
+	mat.set_shader_parameter("paint_tex", _compose_paint_texture())
+	mesh_instance.material_override = mat
+
+
+## Compose the RGBA paint texture by sampling each layer's field PER PIXEL
+## (bilinear) — a smooth, organic overlay that follows the noise/curve/brush
+## exactly. "shader" layers paint a chosen colour (strong); plant layers seep
+## their kingdom colour (the bleed, softer).
+func _compose_paint_texture() -> ImageTexture:
+	var img := Image.create(PAINT_RES, PAINT_RES, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0, 0, 0, 0))
+	# Build each contributing layer's field + colour once.
+	var contribs: Array = []   # [{field, color, strength}]
+	var idx := 0
+	for layer in _paint_layers:
+		if not (layer is Dictionary):
+			continue
+		var el := str(layer.get("element", ""))
+		var tint := _bleed_colour(el, layer)
+		if tint.a <= 0.0:
+			continue
+		contribs.append({
+			"field": DistributionField.build_field(layer, _fw, _fd, _rng_seed + idx * 17),
+			"color": tint,
+			"strength": 0.92 if el == "shader" else 0.55,
+		})
+		idx += 1
+	if contribs.is_empty():
+		return ImageTexture.create_from_image(img)
+	for py in PAINT_RES:
+		var v := (float(py) + 0.5) / float(PAINT_RES)
+		for px in PAINT_RES:
+			var u := (float(px) + 0.5) / float(PAINT_RES)
+			var r := 0.0; var g := 0.0; var b := 0.0; var a := 0.0
+			for c in contribs:
+				var fv := _sample_array(c.field, u, v)
+				if fv <= 0.02:
+					continue
+				var la := clampf(fv * float(c.strength), 0.0, 0.92)
+				var col: Color = c.color
+				r = lerpf(r, col.r, la); g = lerpf(g, col.g, la); b = lerpf(b, col.b, la)
+				a = maxf(a, la)
+			if a > 0.001:
+				img.set_pixel(px, py, Color(r, g, b, a))
+	return ImageTexture.create_from_image(img)
+
+
+## Bilinear sample a per-cell field at normalized (u, v).
+func _sample_array(field: PackedFloat32Array, u: float, v: float) -> float:
+	if field.is_empty():
+		return 0.0
+	var fx := clampf(u * float(_fw) - 0.5, 0.0, float(_fw - 1))
+	var fz := clampf(v * float(_fd) - 0.5, 0.0, float(_fd - 1))
+	var x0 := int(floor(fx)); var z0 := int(floor(fz))
+	var x1 := mini(x0 + 1, _fw - 1); var z1 := mini(z0 + 1, _fd - 1)
+	var tx := fx - float(x0); var tz := fz - float(z0)
+	var aa := field[z0 * _fw + x0]; var bb := field[z0 * _fw + x1]
+	var cc := field[z1 * _fw + x0]; var dd := field[z1 * _fw + x1]
+	return lerpf(lerpf(aa, bb, tx), lerpf(cc, dd, tx), tz)
+
+
+func _bleed_colour(el: String, layer: Dictionary) -> Color:
+	match el:
+		"tree": return Color(0.24, 0.50, 0.24, 1.0)        # leaf green
+		"flower": return Color(0.95, 0.45, 0.72, 1.0)       # pink
+		"mushroom": return Color(0.55, 0.30, 0.22, 1.0)     # earthy red-brown
+		"critter", "large_critter": return Color(0.92, 0.62, 0.30, 1.0)  # warm
+		"shader":
+			var c = layer.get("color", [0.18, 0.62, 0.55])
+			if c is Array and c.size() >= 3:
+				return Color(float(c[0]), float(c[1]), float(c[2]), 1.0)
+			return Color(0.18, 0.62, 0.55, 1.0)
+	return Color(0, 0, 0, 0)
 
 
 ## LIVE preview while brushing — rebuild the MESH only (skip the trimesh

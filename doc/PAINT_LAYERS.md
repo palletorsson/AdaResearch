@@ -15,7 +15,7 @@ Every layer is the same shape. Only the `element` changes:
 element       what it places / modulates          engine (today)
 ───────────   ─────────────────────────────────   ──────────────────────
 ground        heightfield / bump → walkable mesh   ground_substrate    ✅ wired (default-on, flat)
-shader        ground-shader drain + paint           — (research jewel, later)
+shader        paint a colour into the ground tex    ground_substrate    ✅ wired (paint + plant bleed)
 particle      CPU/GPU particle field                — (later)
 object        any artifact, by density              biome_paint_dispatcher (infra-heavy, TODO)
 flower        flowers                               softbody_flora      ✅ wired
@@ -152,13 +152,36 @@ hills. It extends the walkgrids `TopologySpace`, so the deformed mesh is walkabl
 - `height` (metres) scales the field → max bump height. No `ground` layer = flat.
 - Toggle the whole thing off per map: `settings.biome_overrides.disable = ["ground_substrate"]`.
 
+## Shader (paint a colour into the ground texture) + plant bleed
+
+The same `ground_substrate` also owns the ground's **colour overlay** — a per-grid
+RGBA texture (`biome_ground.gdshader`'s `paint_tex`, composed per-pixel with
+bilinear field sampling, so noise/curve/brush read smooth and organic, not gridded).
+Two sources feed it:
+
+```json
+{ "element": "shader", "mode": "brush", "color": [0.18, 0.62, 0.55], "brush": [[…]] }
+```
+
+- **`shader` layers** paint their `color` strongly into the ground texture (a
+  chosen colour, hand-brushed or via any distribution `mode`). Colour-only — a
+  `shader` layer never spawns geometry (no spawn layer queries `"shader"`).
+- **Plant bleed (the *drain*)** — every plant layer (`tree`/`flower`/`mushroom`/
+  `critter`/`large_critter`) also seeps its **kingdom colour** softly into the
+  ground under it: leaf-green for trees, pink for flowers, earthy red-brown for
+  mushrooms, warm for critters. No coupling — the ground just reads the same
+  paint-layer fields the spawn layers do, and bleeds their colour. Painting a
+  flower grove tints the soil beneath it.
+
+Shader strength is firm (~0.92), bleed is soft (~0.55). Both editors expose a
+`shader` brush element (VR Tilt-Brush menu + desktop scrubber).
+
 ## Not yet (next steps)
 
-- **Substrate engines** — `ground` (heightfield), `shader` (the *drain* jewel:
-  material seeping from a plant into the ground shader — reaction-diffusion),
-  `particle`. They reuse `build_field`; they consume the field, not placements.
-- **`object` / `mushroom` / `large_critter`** wiring (same pattern as the three
-  already wired).
-- **Step 3** — desktop painter (extend the scrubber / map-builder with a brush).
-- **Step 4** — the VR brush (catalyst-bracelet-family tool: select layer, paint
-  density, grip-erase, rotate to switch mode/element).
+- **Substrate engines** — `particle` (CPU/GPU particle field). Reuses
+  `build_field`; consumes the field, not placements. (`ground` heightfield and
+  `shader` colour overlay are now wired.)
+- **`object` / `mushroom` / `large_critter`** spawn wiring (same pattern as the
+  three already wired).
+- **Per-shader colour palette** — `shader` paints one colour at a time (the menu's
+  element colour); a palette to pick arbitrary colours mid-stroke is future work.
