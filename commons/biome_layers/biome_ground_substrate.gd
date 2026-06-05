@@ -10,6 +10,7 @@
 extends "res://commons/context/walkgrids/TopologySpace.gd"
 
 const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
+const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
 const PAINT_RES := 96            # resolution of the colour/bleed paint texture
 
 var _field: PackedFloat32Array = PackedFloat32Array()  # per-cell [0..1] (the bump map)
@@ -129,17 +130,13 @@ func _sample_array(field: PackedFloat32Array, u: float, v: float) -> float:
 
 
 func _bleed_colour(el: String, layer: Dictionary) -> Color:
-	match el:
-		"tree": return Color(0.24, 0.50, 0.24, 1.0)        # leaf green
-		"flower": return Color(0.95, 0.45, 0.72, 1.0)       # pink
-		"mushroom": return Color(0.55, 0.30, 0.22, 1.0)     # earthy red-brown
-		"critter", "large_critter": return Color(0.92, 0.62, 0.30, 1.0)  # warm
-		"shader":
-			var c = layer.get("color", [0.18, 0.62, 0.55])
-			if c is Array and c.size() >= 3:
-				return Color(float(c[0]), float(c[1]), float(c[2]), 1.0)
-			return Color(0.18, 0.62, 0.55, 1.0)
-	return Color(0, 0, 0, 0)
+	# shader paints its OWN chosen colour into the soil (the layer's "color");
+	# every other element uses its kingdom bleed from the element registry.
+	if el == "shader":
+		var c = layer.get("color", null)
+		if c is Array and (c as Array).size() >= 3:
+			return Color(float(c[0]), float(c[1]), float(c[2]), 1.0)
+	return BiomeElementsLib.bleed_color(el)
 
 
 ## LIVE preview while brushing — rebuild the MESH only (skip the trimesh

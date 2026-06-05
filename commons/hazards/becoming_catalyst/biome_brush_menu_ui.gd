@@ -8,12 +8,9 @@ signal element_selected(element_name: String)
 signal size_changed(radius: int)
 signal pressure_changed(strength: float)
 
-const ELEMENTS: Array = ["ground", "shader", "tree", "critter", "flower", "mushroom", "large_critter"]
-const LABELS: Array = ["Ground", "Shader", "Tree", "Critter", "Flower", "Mushroom", "Big Critter"]
-const COLORS: Array = [
-	Color(0.55, 0.45, 0.32), Color(0.18, 0.62, 0.55), Color(0.45, 0.85, 0.50),
-	Color(1.0, 0.70, 0.36), Color(1.0, 0.55, 0.76), Color(0.80, 0.55, 0.40), Color(0.95, 0.45, 0.30),
-]
+const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
+const ELEMENTS: Array = BiomeElementsLib.NAMES   # single source of truth (BiomeElements)
+# Labels + tile colours come from BiomeElementsLib.label() / .ui_color() per element.
 
 var _buttons: Array = []
 var _selected: int = 0
@@ -60,7 +57,7 @@ func _ready() -> void:
 	root.add_child(grid)
 	for i in ELEMENTS.size():
 		var b := Button.new()
-		b.text = str(LABELS[i])
+		b.text = BiomeElementsLib.label(str(ELEMENTS[i]))
 		b.custom_minimum_size = Vector2(146, 86)
 		b.add_theme_font_size_override("font_size", 18)
 		b.focus_mode = Control.FOCUS_NONE
@@ -150,7 +147,7 @@ func set_selected_element(element_name: String) -> void:
 func _refresh() -> void:
 	for i in _buttons.size():
 		var b: Button = _buttons[i]
-		var c: Color = COLORS[i]
+		var c: Color = BiomeElementsLib.ui_color(str(ELEMENTS[i]))
 		var sb := StyleBoxFlat.new()
 		sb.bg_color = Color(c.r, c.g, c.b, 0.30 if i != _selected else 0.85)
 		sb.corner_radius_top_left = 8; sb.corner_radius_top_right = 8

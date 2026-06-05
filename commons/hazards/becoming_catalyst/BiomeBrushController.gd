@@ -10,7 +10,8 @@ class_name BiomeBrushController
 extends Node3D
 
 const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
-const ELEMENTS: Array = ["ground", "shader", "tree", "critter", "flower", "mushroom", "large_critter"]
+const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
+const ELEMENTS: Array = BiomeElementsLib.NAMES   # single source of truth (BiomeElements)
 
 var grid_w: int = 10
 var grid_d: int = 10
@@ -191,15 +192,7 @@ func _rows(field: PackedFloat32Array) -> Array:
 
 
 func _elem_colour(el: String) -> Color:
-	match el:
-		"ground": return Color(0.55, 0.45, 0.32)
-		"shader": return Color(0.18, 0.62, 0.55)
-		"tree": return Color(0.45, 0.85, 0.50)
-		"critter": return Color(1.0, 0.70, 0.36)
-		"flower": return Color(1.0, 0.55, 0.76)
-		"mushroom": return Color(0.80, 0.55, 0.40)
-		"large_critter": return Color(0.95, 0.45, 0.30)
-	return Color(0.7, 0.7, 0.7)
+	return BiomeElementsLib.ui_color(el)
 
 
 func _build_ghost() -> void:

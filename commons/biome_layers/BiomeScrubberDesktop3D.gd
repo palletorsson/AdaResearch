@@ -43,6 +43,7 @@ const BrushMenuScene = preload("res://commons/hazards/becoming_catalyst/biome_br
 # (the scrubber builds the accrual directly, not via GridSystem) so walking
 # map-to-map shows the biome thicken across a sequence. See sequence_accrual.gd.
 const SequenceAccrualLib = preload("res://commons/biome_layers/sequence_accrual.gd")
+const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
 @export var grid_size: int = 20          # synthetic default (square)
 @export var cube_size: float = 1.0
 @export var auto_spin: bool = false   # OFF — a spinning scene fights painting (R-drag still orbits)
@@ -91,7 +92,7 @@ var _timeline: HBoxContainer = null
 var _tick_rects: Array = []          # Array[ColorRect], one per stage 1..MAX
 # Brush painting (step 3) — left-drag paints a per-cell density field for the
 # active element; the wired spawn layers place by it; W saves to the map.
-var _paint_elements: Array = ["ground", "shader", "tree", "critter", "flower", "mushroom", "large_critter"]
+var _paint_elements: Array = BiomeElementsLib.NAMES   # single source of truth (BiomeElements)
 var _paint_idx: int = -1             # -1 = not painting; else index into _paint_elements
 var _brush_fields: Dictionary = {}   # element -> PackedFloat32Array (grid_w*grid_d)
 var _brush_radius: int = 2
@@ -1031,15 +1032,7 @@ func _on_menu_pressure(p: float) -> void:
 
 
 func _element_color(el: String) -> Color:
-	match el:
-		"ground": return Color(0.55, 0.45, 0.32)
-		"shader": return Color(0.18, 0.62, 0.55)
-		"tree": return Color(0.45, 0.85, 0.50)
-		"critter": return Color(1.0, 0.70, 0.36)
-		"flower": return Color(1.0, 0.55, 0.76)
-		"mushroom": return Color(0.80, 0.55, 0.40)
-		"large_critter": return Color(0.95, 0.45, 0.30)
-	return Color(0.7, 0.7, 0.7)
+	return BiomeElementsLib.ui_color(el)
 
 
 ## Raycast the mouse onto the ground plane (y=0) → grid cell → stamp the brush.
