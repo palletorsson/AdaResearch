@@ -1,91 +1,115 @@
-# VR Editing System — principles
+# VR Editing System
 
-> Ada has three in-VR world editors. They share one idiom. This doc extracts
-> that idiom so new editors (the biome paint brush, future tools) fit it.
->
-> (Created 2026-06-05 — the principles already lived in code; this names them.)
+> Edit the game world from inside VR, and press a button to write it back to the
+> repo on your PC. No desk, no export step. **What you place in the headset is
+> what reloads from disk.** Arc: blog `2026-06-03-what-you-see-is-what-you-keep`.
 
-## The three editors
+## The tool: the catalyst bracelet
 
-| Editor | File | Edits |
-|--------|------|-------|
-| **Voxel editor** | `commons/grid/VoxelEditVR.gd` | the structure grid — add/remove cubes |
-| **Catalyst bracelet** | `commons/hazards/becoming_catalyst/` | places blocks/wedges; the player's evolving tool |
-| **Artifact mover** ("Off the floor") | in-VR gravity-gun | grab/move/rotate placed artifacts, snap to grid height |
+You hold the catalyst in one hand (it shrinks into your palm). A bracelet of
+**stones** sits on that wrist — each stone is a **mode**.
 
-## The shared idiom
+**Mode selection is by reach, not rotation.** Reach your other hand toward the
+stone you want: the nearest stone previews (grows / brightens) and **commits after
+a short settle, with a haptic tick**. No dial, no jog, no cycle — a stone's
+position in the ring doesn't matter. (Final design after several iterations;
+rotate/jog/cycle all fought the geometry. **Do not reintroduce rotation.**)
 
-1. **The tool is a component on the controller (or wrist).**
-   `VoxelEditVR extends Node3D`, added as a child of an `XRController3D`. It reads
-   the controller's pose directly (`_controller.global_position`,
-   `-_controller.global_transform.basis.z`). The bracelet lives on the wrist.
+### The editing stones
 
-2. **`enable()` / `disable()` toggle the mode.** An editor is a *mode* you turn
-   on, not always-on. While on, it shows its ray + HUD; while off, nothing.
+| Stone | What it edits | Data model |
+|-------|---------------|------------|
+| **Voxel Editor** | structure cubes (floors/walls) | grid |
+| **Wedge Placer** | walkable ramp prisms | grid |
+| **Edit** | existing grid-map artifacts (1 m-cell curriculum props) | grid |
+| **Lab** | lab-room props (free-metre fittings) | lab |
+| **off** | dormant — everything interactive | — |
 
-3. **One button vocabulary, everywhere:**
-   - **trigger** → the primary act (add cube / place block / **paint**)
-   - **grip** → the inverse (remove / erase / remove-last)
-   - **ax_button** → **save**
-   - **by_button** → undo
-   - **bracelet rotation (other hand)** → **switch mode/sub-tool** (the bracelet's
-     way of cycling voxel ↔ wedge ↔ off; a paint brush cycles *element* the same way)
+(In code: `becoming_catalyst.gd` → `MODE_DEFS` + `unlocked_modes`; each mode is a
+tiny script in `modes/` declaring `get_mode_type()` = `"tool"`/`"projectile"` and a
+colour. The *behaviour* lives in `becoming_catalyst.gd`, gated on the current mode.)
 
-4. **A ray + a ghost + a Label3D.** A thin cylinder ray from the controller
-   (`top/bottom_radius 0.002`, unshaded, alpha ~0.4), a ghost/preview of what will
-   land, and a small `Label3D` near the controller showing the current target and
-   the control hints. All hidden when the tool is disabled.
+## Two things you edit, two data models
 
-5. **Raycast in `_process`, act on button.** Every frame: cast from the controller,
-   resolve the target (a grid cell, a surface point), update the ghost + label.
-   The button handler just commits whatever the ray currently targets.
+1. **The grid** — `commons/maps/<Name>/map_data.json` — 3 layers
+   (structure / utilities / interactables), all **cell-based (integer x,z)**.
+   Cubes and curriculum artifacts live here, snapped to 1 m cells.
+   *(Biome `paint_layers` are also grid/cell-based — they belong to this model.)*
+2. **Lab props** — `commons/labs/<name>.lab.json` — `mounted_props` in **free metres**
+   (so they can hold 0.1 m positions): wall placards, exit signs, scanners — what
+   `LabLoader` spawns inside a `lab_room`.
 
-6. **Edit logic is separate from VR I/O.** `VoxelEditVR` (input/visuals) delegates
-   to `VoxelEditController` (add/remove/undo on the structure). Keeps the VR layer
-   thin and the logic testable on the desktop.
+## The editing modes in detail
 
-7. **Persistence: in-memory now, disk on demand.** Edits survive map transitions
-   within a session (in-memory). A deliberate **save** (ax) writes to disk
-   (`VoxelSaveManager.save(map_name, structure)`). Fresh each launch unless saved.
+- **Voxel Editor** — face a cell, **trigger** adds a cube on top of that column,
+  **grip** removes one. A green ghost shows where it'll land.
+- **Edit (grid artifacts)** — point the laser at an artifact, **hold trigger** to
+  grab (it floats at the laser, follows your hand), **release** → snaps to the cell
+  on top of the structure + 90° rotation + upright. Pass through you (no launch).
+- **Lab (lab props)** — point + grab a lab prop; **surface magnetism**: free in open
+  space, but within ~0.25 m of a wall/floor/ceiling/other-prop-top it sticks flush,
+  gridded to 0.1 m along the surface. On a wall it aligns facing to the room and
+  offsets by its own thickness (flush); a clamp prevents embedding. Artifacts can
+  declare `wall_facing_offset_deg` if authored backward.
 
-8. **Find the world by walking the tree.** Editors locate `GridStructureComponent` /
-   `GridDataComponent` / `GridSystem` via a recursive name search from the root —
-   no hard wiring, so the same component drops into any map.
+## Placing new artifacts: the left-wrist workstation
 
-## Enabling an editor (from `vrStaging.gd`)
+A panel on the left wrist browses every registered artifact with a live preview.
+**PLACE** drops the selected artifact onto the grid cell you're aiming at, on top
+of the structure — grabbable, re-snapping, with a hover highlight.
 
-```gdscript
-var tool := SomeEditVR.new()
-right_controller.add_child(tool)
-tool.enable()      # …and disable() to leave the mode
-```
+## The save pipeline — press B
 
-## The biome paint brush within this idiom
+`res://` is **read-only on a Quest build**, so the edit has to phone home:
 
-`commons/grid/BiomePaintVR.gd` (the desktop scrubber's brush, ported to VR):
+- POST over **`adb reverse tcp:3003 tcp:3003`** (USB tunnel).
+- **Map edits → `/api/game/save-layers`** — full structure layer +
+  `interactablePlacements`, overlaid onto existing interactables **non-destructively**.
+- **Lab edits → `/api/labs/save`** with `propUpdates` (merged by prop id, preserving
+  what you didn't touch).
+- The encyclopedia (Next.js, port 3003) **writes the repo**. The bracelet flashes
+  `SAVED → PC` (or a red reason if the tunnel's down).
 
-- Component on the right `XRController3D`; `enable()/disable()`.
-- Ray → the **ground plane** → grid cell (not a structure voxel — the floor).
-- **trigger** stamps the active element's density field (radial brush); **grip**
-  erases; held-drag paints continuously (raycast each `_process` while held).
-- **by_button** (or bracelet rotation) cycles the element:
-  tree → critter → flower → mushroom → large_critter.
-- **ax_button** saves: the runtime field → the map's `paint_layers[]`
-  (`mode:"brush"`), exactly like the scrubber's `W`.
-- Label3D shows the active element + brush radius; a cell overlay shows the field.
-- On stroke-release it asks `GridSystem.repaint_biome(layers)` to rebuild the
-  biome live with the painted field (additive runtime override; empty = the
-  map's own paint_layers, so default behaviour is unchanged).
-- Reuses `DistributionField` + the same `_stamp` math the scrubber proved — the
-  desktop brush and the VR brush are the same logic, two input devices.
+Code: `becoming_catalyst.gd._save_map_over_http(map, layout, placements)` →
+`MAP_SAVE_URL` / `LAB_SAVE_URL`.
 
-**Could later become a bracelet mode** (`biome_brush`) alongside voxel/wedge —
-the bracelet's mode list is the natural home once it's proven standalone.
+## The web twin: `/lab-net`
 
-## Verifying VR work
+The encyclopedia's net editor unfolds the room flat (all six faces at once) and
+lets you drag artifacts + the architecture (door, windows, room size), saving to
+the **same lab JSON** VR Lab mode reads. One source of truth, two editors.
 
-VR can't be captured headlessly (no headset in CLI). The loop:
-1. Parse-check the component (headless preload).
-2. Enable it in `vrStaging.gd`, walk a map in the headset.
-3. Feedback comes back via the bridge — `ada_run/desktop_feedback.md`
-   (`/ada-bridge-listener`). Iterate from there.
+## Supporting pieces
+
+- Placement ghost (green cell preview) + hover highlight (laser-target glow).
+- Collision **pass-through** — placed/edited artifacts never shove the player.
+- Grouping/metadata so save knows where each thing goes: `vr_placed_artifact`,
+  `vr_editable_artifact`, `vr_lab_prop`, `vr_lab_moved` — each tagged with its
+  cell / lookup / lab-json.
+
+---
+
+## Adding the biome brush as a stone (plan)
+
+The biome paint brush (`doc/PAINT_LAYERS.md`) fits this system as a **grid-model
+stone**, because `paint_layers` are cell-based:
+
+1. **`modes/mode_biome_brush.gd`** — declares `get_mode_type() == "tool"` + a colour.
+   Add to `MODE_DEFS` + `unlocked_modes`.
+2. **Brush behaviour in `becoming_catalyst.gd`** (gated on mode) — ray → ground cell;
+   **trigger** stamps the active element's radial density field, **grip** erases;
+   element sub-selection (tree/critter/flower/mushroom/large_critter); green ghost
+   at the target cell. On stroke-release, call **`GridSystem.repaint_biome(layers)`**
+   (already built) to rebuild the biome live.
+3. **B-save** → extend `/api/game/save-layers` with a `paintLayers` field, written
+   to `map_data.json`'s top-level `paint_layers[]` non-destructively (same pattern
+   as `interactablePlacements`). `res://` write is editor-only; the headset POSTs.
+4. Reuses `DistributionField` + the stamp math proven on the desktop scrubber.
+
+**Element sub-selection** within the brush should follow the bracelet idiom (reach /
+workstation), **not** a button-cycle — TBD with the bracelet's interaction owner.
+
+> Note: `commons/grid/BiomePaintVR.gd` (a standalone, `res://`-writing draft) was a
+> first pass before this architecture was clear. It is superseded by the stone
+> approach above; its stamp/field logic moves into the shared brush core. Keep only
+> as desktop reference until the stone lands, then remove.
