@@ -50,6 +50,19 @@ func cycle_element() -> void:
 	_recolour_ghost()
 
 
+## Set the active element by name (from the left-hand menu). No-op if unknown.
+func set_element(element_name: String) -> void:
+	var idx: int = ELEMENTS.find(element_name)
+	if idx >= 0:
+		_elem_idx = idx
+		_recolour_ghost()
+
+
+## Set the brush radius in cells (from the menu's size slider).
+func set_radius(r: int) -> void:
+	_radius = clampi(r, 0, 8)
+
+
 func has_strokes() -> bool:
 	return not _fields.is_empty()
 

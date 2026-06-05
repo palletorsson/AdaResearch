@@ -65,6 +65,11 @@ var _voxel_active: bool = false
 # when this script parses on a fresh game load.
 const BiomeBrushControllerClass = preload("res://commons/hazards/becoming_catalyst/BiomeBrushController.gd")
 var _biome_brush: BiomeBrushControllerClass = null
+# Left-hand Tilt-Brush-style menu (viewport_2d_in_3d) — choose element + brush size.
+const BiomeMenuViewport = preload("res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn")
+const BiomeMenuUIScene = preload("res://commons/hazards/becoming_catalyst/biome_brush_menu_ui.tscn")
+var _biome_menu: Node = null         # viewport_2d_in_3d on the off hand
+var _biome_menu_ui: Control = null   # the 2D menu Control inside it
 var _voxel_data_component: Node = null  # holds current map name, for B-to-save
 # Voxel activation retry (grid may not be ready on map transition)
 var _voxel_activate_retries: int = 0
@@ -212,6 +217,9 @@ func _physics_process(delta: float) -> void:
 			_biome_brush.name = "BiomeBrushCtrl"
 			add_child(_biome_brush)
 			_biome_brush.setup()
+		_ensure_biome_menu()
+		if _biome_menu:
+			_biome_menu.visible = true
 		if controller:
 			var b_origin: Vector3 = controller.global_position
 			var b_fwd: Vector3 = -controller.global_transform.basis.z
@@ -226,6 +234,8 @@ func _physics_process(delta: float) -> void:
 				_voxel_controller._ghost_remove.visible = false
 	elif _biome_brush:
 		_biome_brush.set_idle()
+		if _biome_menu:
+			_biome_menu.visible = false
 
 	# Mode switching disabled on controller thumbstick — use the bracelet instead
 
@@ -260,6 +270,8 @@ func _on_controller_button(button_name: String) -> void:
 			"ax_button":
 				if _biome_brush:
 					_biome_brush.cycle_element()
+					if _biome_menu_ui and _biome_menu_ui.has_method("set_selected_element"):
+						_biome_menu_ui.set_selected_element(_biome_brush.active_element())
 					_flash_label("BRUSH: " + _biome_brush.active_element().to_upper(), Color(0.6, 0.95, 0.7))
 			"by_button":
 				_save_biome()
@@ -484,6 +496,68 @@ func _save_biome_over_http(map_name: String, paint_layers: Array) -> void:
 	if err != OK:
 		http.queue_free()
 		_flash_label("POST FAILED: %s" % error_string(err), Color(1.0, 0.3, 0.3))
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# BIOME BRUSH MENU — Tilt-Brush-style panel on the off hand (element + size)
+# ═══════════════════════════════════════════════════════════════════════════
+
+## The off-hand XRController3D (the one NOT holding the catalyst).
+func _get_left_controller() -> XRController3D:
+	if controller == null:
+		return null
+	var origin := controller.get_parent()
+	if origin == null:
+		return null
+	for c in origin.get_children():
+		if c is XRController3D and c != controller:
+			return c as XRController3D
+	return null
+
+
+## Build the left-hand menu viewport once, on first biome_brush use.
+func _ensure_biome_menu() -> void:
+	if _biome_menu and is_instance_valid(_biome_menu):
+		return
+	var left := _get_left_controller()
+	if left == null:
+		return
+	var vp = BiomeMenuViewport.instantiate()
+	vp.name = "BiomeBrushMenu"
+	vp.scene = BiomeMenuUIScene
+	vp.screen_size = Vector2(0.22, 0.18)
+	vp.viewport_size = Vector2(500, 420)
+	# Tilted up off the wrist, toward the face — glanceable like Tilt Brush.
+	vp.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-45)), Vector3(0.0, 0.05, -0.11))
+	left.add_child(vp)
+	_biome_menu = vp
+	call_deferred("_connect_biome_menu", vp)
+
+
+func _connect_biome_menu(vp: Node) -> void:
+	for i in range(15):
+		await get_tree().process_frame
+		_biome_menu_ui = vp.get_scene_instance() if vp.has_method("get_scene_instance") else null
+		if _biome_menu_ui:
+			break
+	if _biome_menu_ui == null:
+		return
+	if _biome_menu_ui.has_signal("element_selected") and not _biome_menu_ui.element_selected.is_connected(_on_biome_menu_element):
+		_biome_menu_ui.element_selected.connect(_on_biome_menu_element)
+	if _biome_menu_ui.has_signal("size_changed") and not _biome_menu_ui.size_changed.is_connected(_on_biome_menu_size):
+		_biome_menu_ui.size_changed.connect(_on_biome_menu_size)
+	print("[Catalyst] Biome menu connected")
+
+
+func _on_biome_menu_element(element_name: String) -> void:
+	if _biome_brush:
+		_biome_brush.set_element(element_name)
+	_flash_label("BRUSH: " + element_name.to_upper(), Color(0.6, 0.95, 0.7))
+
+
+func _on_biome_menu_size(radius: int) -> void:
+	if _biome_brush:
+		_biome_brush.set_radius(radius)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
