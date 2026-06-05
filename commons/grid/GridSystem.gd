@@ -19,6 +19,9 @@ const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
 
 # Configuration
 @export var cube_size: float = 1.0
+## Runtime paint-layer override (set by a live brush via repaint_biome()).
+## Empty → the map's own paint_layers / default behaviour. See doc/PAINT_LAYERS.md.
+var _runtime_paint_layers: Array = []
 @export var gutter: float = 0.0
 @export var map_name: String = "Tutorial_Start"
 # Spine-corridor mode: when set, prefer map_data.corridor.json over map_data.json
@@ -633,6 +636,14 @@ func _handle_audio_start():
 # ═══════════════════════════════════════════════════════════════
 
 ## Generate a biome ring around the grid if vegetation density > 0.
+## Live-repaint hook for the VR/desktop biome brush. Sets a runtime paint-layer
+## override and rebuilds the biome with it. Pass [] to clear (revert to the
+## map's own paint_layers). Additive — does not change default map loading.
+func repaint_biome(layers: Array) -> void:
+	_runtime_paint_layers = layers if layers is Array else []
+	_handle_biome_ring()
+
+
 func _handle_biome_ring():
 	# Runtime flag — let the encyclopedia /shortcuts surface flip this
 	# off for clean map captures and architecture debugging.
@@ -693,7 +704,9 @@ func _handle_biome_ring():
 		# Paint layers (top-level paint_layers[]): per-map authored distribution
 		# for the population layers (tree/critter/flower/…). Opt-in — absent =
 		# the spawn layers keep their default ring. See doc/PAINT_LAYERS.md.
-		var paint_layers: Array = data_component.get_paint_layers() if data_component else []
+		# A live VR/desktop brush can override via repaint_biome() (runtime wins).
+		var paint_layers: Array = _runtime_paint_layers if not _runtime_paint_layers.is_empty() \
+			else (data_component.get_paint_layers() if data_component else [])
 		accrual_early.apply(self, {
 			"grid_dims": dims_early,
 			"grid_center": Vector3(float(dims_early.x) * cube_size * 0.5, 0.0, float(dims_early.z) * cube_size * 0.5),
