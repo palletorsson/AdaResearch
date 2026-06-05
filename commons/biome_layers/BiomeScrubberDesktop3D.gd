@@ -562,8 +562,8 @@ func _recolor_timeline() -> void:
 ## so the inspector dots visually map to the kingdoms on screen.
 func _kind_color(kind: String) -> Color:
 	match kind:
-		"floating_primitives", "floating_points", "animated_primitives":
-			return Color(0.55, 0.70, 1.0)    # abstract — blue
+		"floating_primitives", "floating_points", "animated_primitives", "ambient_particles":
+			return Color(0.55, 0.70, 1.0)    # abstract / ambient motes — blue
 		"color_tint":
 			return Color(0.90, 0.62, 1.0)    # spectrum — violet
 		"force_field", "lattice_snap", "wave_displace", "jitter_seed", "noise_dust":
