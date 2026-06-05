@@ -78,7 +78,7 @@ var _timeline: HBoxContainer = null
 var _tick_rects: Array = []          # Array[ColorRect], one per stage 1..MAX
 # Brush painting (step 3) — left-drag paints a per-cell density field for the
 # active element; the wired spawn layers place by it; W saves to the map.
-var _paint_elements: Array = ["tree", "critter", "flower", "mushroom", "large_critter"]
+var _paint_elements: Array = ["ground", "tree", "critter", "flower", "mushroom", "large_critter"]
 var _paint_idx: int = -1             # -1 = not painting; else index into _paint_elements
 var _brush_fields: Dictionary = {}   # element -> PackedFloat32Array (grid_w*grid_d)
 var _brush_radius: int = 2
@@ -399,7 +399,10 @@ func _save_overrides() -> void:
 			if layer is Dictionary and not _brush_fields.has(str(layer.get("element", ""))):
 				kept.append(layer)
 		for el in _brush_fields:
-			kept.append({"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])})
+			var gl := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])}
+			if el == "ground":
+				gl["height"] = 1.5
+			kept.append(gl)
 		_map_data["paint_layers"] = kept
 	var path := "res://commons/maps/%s/map_data.json" % _loaded_map
 	var f := FileAccess.open(path, FileAccess.WRITE)
@@ -885,6 +888,7 @@ func _cycle_paint_element() -> void:
 
 func _element_color(el: String) -> Color:
 	match el:
+		"ground": return Color(0.55, 0.45, 0.32)
 		"tree": return Color(0.45, 0.85, 0.50)
 		"critter": return Color(1.0, 0.70, 0.36)
 		"flower": return Color(1.0, 0.55, 0.76)
@@ -962,7 +966,10 @@ func _effective_paint_layers() -> Array:
 	var painted: Dictionary = {}
 	for el in _brush_fields:
 		painted[el] = true
-		out.append({"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])})
+		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])}
+		if el == "ground":
+			layer["height"] = 1.5   # painted bumps rise to ~1.5 m
+		out.append(layer)
 	var base: Array = _cli_paint if not _cli_paint.is_empty() else _map_paint_layers
 	for layer in base:
 		if layer is Dictionary and not painted.has(str(layer.get("element", ""))):
