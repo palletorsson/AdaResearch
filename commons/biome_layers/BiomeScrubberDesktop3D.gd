@@ -991,6 +991,23 @@ func _stamp(cx: int, cz: int) -> void:
 	_brush_fields[el] = field
 	_brush_dirty = true
 	_update_brush_overlay()
+	# Live ground terrain preview — see the mesh rise as you paint (mesh only;
+	# the full rebuild + collider lands on mouse-release via _rebuild()).
+	if el == "ground" and _host:
+		var sub := _find_descendant(_host, "BiomeGroundSubstrate")
+		if sub and sub.has_method("apply_height_preview"):
+			sub.apply_height_preview(field, grid_w, grid_d, 1.5)
+
+
+func _find_descendant(root: Node, nm: String) -> Node:
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		for c in n.get_children():
+			if c.name == nm:
+				return c
+			stack.append(c)
+	return null
 
 
 func _update_brush_overlay() -> void:

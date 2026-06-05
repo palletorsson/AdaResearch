@@ -644,6 +644,27 @@ func repaint_biome(layers: Array) -> void:
 	_handle_biome_ring()
 
 
+## Live mesh-only preview of the ground while the biome brush paints "ground".
+## Far cheaper than repaint_biome — rebuilds just the ground mesh (no collider,
+## no other layers), so the terrain rises under the brush in real time. The full
+## rebuild (collider included) lands on stroke-release via repaint_biome.
+func preview_ground(field: PackedFloat32Array, fw: int, fd: int, max_h: float) -> void:
+	var sub := _find_descendant_named(self, "BiomeGroundSubstrate")
+	if sub and sub.has_method("apply_height_preview"):
+		sub.apply_height_preview(field, fw, fd, max_h)
+
+
+func _find_descendant_named(root: Node, nm: String) -> Node:
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		for c in n.get_children():
+			if c.name == nm:
+				return c
+			stack.append(c)
+	return null
+
+
 func _handle_biome_ring():
 	# Runtime flag — let the encyclopedia /shortcuts surface flip this
 	# off for clean map captures and architecture debugging.

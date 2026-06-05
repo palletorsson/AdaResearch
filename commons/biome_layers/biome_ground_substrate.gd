@@ -34,20 +34,31 @@ func set_field(field: PackedFloat32Array, fw: int, fd: int, max_h: float) -> voi
 
 ## TopologySpace._ready() calls this after building static_body/mesh_instance.
 func generate_space() -> void:
-	var heights: Array = []
-	heights.resize((resolution + 1) * (resolution + 1))
-	for z in range(resolution + 1):
-		for x in range(resolution + 1):
-			var u: float = float(x) / float(resolution)
-			var v: float = float(z) / float(resolution)
-			heights[z * (resolution + 1) + x] = _sample(u, v) * _max_h
-	var mesh: ArrayMesh = create_mesh_from_heights(heights)
+	var mesh: ArrayMesh = create_mesh_from_heights(_build_heights())
 	mesh_instance.mesh = mesh
 	create_collision_from_mesh(mesh)
 	# Earthy ground; height-tinted so bumps read. Subtle when flat.
 	apply_height_shader(
 		Color(0.26, 0.22, 0.17), Color(0.34, 0.40, 0.26), Color(0.62, 0.66, 0.52),
 		0.0, maxf(0.4, _max_h), false)
+
+
+## LIVE preview while brushing — rebuild the MESH only (skip the trimesh
+## collider, which is the expensive part). The collider catches up on the full
+## rebuild at stroke-end. Lets you see the terrain rise under the brush.
+func apply_height_preview(field: PackedFloat32Array, fw: int, fd: int, max_h: float) -> void:
+	set_field(field, fw, fd, max_h)
+	if mesh_instance:
+		mesh_instance.mesh = create_mesh_from_heights(_build_heights())
+
+
+func _build_heights() -> Array:
+	var heights: Array = []
+	heights.resize((resolution + 1) * (resolution + 1))
+	for z in range(resolution + 1):
+		for x in range(resolution + 1):
+			heights[z * (resolution + 1) + x] = _sample(float(x) / float(resolution), float(z) / float(resolution)) * _max_h
+	return heights
 
 
 ## Rebuild from a new field (live brush updates).

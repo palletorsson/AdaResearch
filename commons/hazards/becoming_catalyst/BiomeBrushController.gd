@@ -23,6 +23,7 @@ var _radius: int = 2
 var _strength: float = 0.6
 var _fields: Dictionary = {}         # element -> PackedFloat32Array (grid_w*grid_d)
 var _stroking: bool = false
+var _preview_tick: int = 0
 
 var _ghost: MeshInstance3D = null
 var _ghost_mat: StandardMaterial3D = null
@@ -95,6 +96,7 @@ func update(origin: Vector3, forward: Vector3, paint: bool, erase: bool) -> void
 	if paint or erase:
 		_stamp(cell.x, cell.y, erase)
 		_stroking = true
+		_live_ground_preview()
 	elif _stroking:
 		_stroking = false
 		_commit()
@@ -122,6 +124,18 @@ func paint_layers_payload() -> Array:
 func _commit() -> void:
 	if _grid and _grid.has_method("repaint_biome"):
 		_grid.repaint_biome(paint_layers_payload())
+
+
+## While painting "ground", rebuild just the ground mesh live (throttled) so the
+## terrain rises under the brush — the full rebuild (collider) lands on release.
+func _live_ground_preview() -> void:
+	if ELEMENTS[_elem_idx] != "ground":
+		return
+	_preview_tick += 1
+	if _preview_tick % 3 != 0:
+		return
+	if _grid and _grid.has_method("preview_ground") and _fields.has("ground"):
+		_grid.preview_ground(_fields["ground"], grid_w, grid_d, 1.5)
 
 
 func _ray_cell(origin: Vector3, forward: Vector3) -> Vector2i:
