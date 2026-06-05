@@ -4,6 +4,8 @@
 
 extends Node3D
 
+const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
+
 var _flora: Array = []
 
 
@@ -19,14 +21,20 @@ func apply(ctx: Dictionary) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = int(ctx.get("rng_seed", 0)) + 13
 
-	var radius: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.75 + 4.0
-	var exclude: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.5 + 1.0
-	var count: int = 14
+	# Paint layers (opt-in): a "flower" distribution authored on the map places
+	# by that field; otherwise the default ring footprint. See doc/PAINT_LAYERS.md.
+	var positions: Array = []
+	if DistributionField.has_layer_for(ctx, "flower"):
+		positions = DistributionField.placements_for(ctx, "flower")
+	else:
+		var radius: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.75 + 4.0
+		var exclude: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.5 + 1.0
+		for i in 14:
+			var angle: float = rng.randf() * TAU
+			var r: float = rng.randf_range(exclude, radius)
+			positions.append(grid_center + Vector3(cos(angle) * r, 0.0, sin(angle) * r))
 
-	for i in count:
-		var angle: float = rng.randf() * TAU
-		var r: float = rng.randf_range(exclude, radius)
-		var pos: Vector3 = grid_center + Vector3(cos(angle) * r, 0.0, sin(angle) * r)
+	for pos in positions:
 
 		var root := Node3D.new()
 		root.position = pos

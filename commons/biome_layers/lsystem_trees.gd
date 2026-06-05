@@ -16,6 +16,7 @@ const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/crit
 # SpawnService preloaded (not referenced by global class_name) so it
 # resolves on headless runs before the global class cache is rebuilt.
 const SpawnService = preload("res://commons/biome_layers/spawn_service.gd")
+const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
 
 # Shared trait mapper — built lazily on first apply(), reused across all
 # trees in this layer instance. Heavy (loads the critter DNA shader);
@@ -34,7 +35,19 @@ func apply(ctx: Dictionary) -> void:
 	var grid_dims: Vector3i = ctx.get("grid_dims", Vector3i(10, 1, 10))
 	var cube_size: float = ctx.get("cube_size", 1.0)
 
-	# Place trees in a ring just outside the map footprint.
+	# Paint layers (opt-in): if the map authored a "tree" distribution, place
+	# trees by that field instead of the default perimeter ring. The accrual
+	# stack stays the single populator — this is per-map authoring it consults.
+	# See doc/PAINT_LAYERS.md.
+	if DistributionField.has_layer_for(ctx, "tree"):
+		var painted: Array = DistributionField.placements_for(ctx, "tree")
+		var pi: int = 0
+		for p in painted:
+			_spawn_tree(p, pi)
+			pi += 1
+		return
+
+	# Default: place trees in a ring just outside the map footprint.
 	var radius: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.9 + 3.0
 	# Phase 5: scale the target count by the population budget (1.0 = unchanged).
 	var tree_count: int = maxi(0, int(round(8.0 * float(ctx.get("budget_scale", 1.0)))))

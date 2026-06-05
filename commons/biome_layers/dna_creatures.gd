@@ -15,6 +15,7 @@ extends Node3D
 const CritterDNAClass = preload("res://algorithms/nature_system/dna/critter_dna.gd")
 const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/critter_trait_mapper.gd")
 const CritterSpawnerClass = preload("res://algorithms/nature_system/systems/spawner.gd")
+const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
 
 var _trait_mapper: CritterTraitMapper = null
 var _spawner: CritterSpawner = null
@@ -48,16 +49,20 @@ func apply(ctx: Dictionary) -> void:
 	# Phase 5: scale the target count by the population budget (1.0 = unchanged).
 	count = maxi(0, int(round(float(count) * float(ctx.get("budget_scale", 1.0)))))
 
-	# Place around the floor footprint. Same ring math as the previous
-	# placeholder so the spatial arrangement is unchanged — only the
-	# rendered creature is upgraded.
-	var radius: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.6 + 5.0
-	var exclude: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.5 + 0.5
+	# Paint layers (opt-in): a "critter" distribution authored on the map places
+	# by that field; otherwise the default ring footprint. See doc/PAINT_LAYERS.md.
+	var positions: Array = []
+	if DistributionField.has_layer_for(ctx, "critter"):
+		positions = DistributionField.placements_for(ctx, "critter")
+	else:
+		var radius: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.6 + 5.0
+		var exclude: float = maxf(float(grid_dims.x), float(grid_dims.z)) * cube_size * 0.5 + 0.5
+		for i in count:
+			var angle: float = rng.randf() * TAU
+			var r: float = rng.randf_range(exclude, radius)
+			positions.append(grid_center + Vector3(cos(angle) * r, 0.0, sin(angle) * r))
 
-	for i in count:
-		var angle: float = rng.randf() * TAU
-		var r: float = rng.randf_range(exclude, radius)
-		var pos: Vector3 = grid_center + Vector3(cos(angle) * r, 0.0, sin(angle) * r)
+	for pos in positions:
 		var seed: int = (int(pos.x * 13.0) * 41 + int(pos.z * 13.0) * 23) & 0xFFFF
 
 		# Walker-tuned DNA — same shape as biome_paint_dispatcher's

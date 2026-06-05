@@ -690,6 +690,10 @@ func _handle_biome_ring():
 		var biome_overrides: Dictionary = {}
 		if data_component:
 			biome_overrides = data_component.get_settings().get("biome_overrides", {})
+		# Paint layers (top-level paint_layers[]): per-map authored distribution
+		# for the population layers (tree/critter/flower/…). Opt-in — absent =
+		# the spawn layers keep their default ring. See doc/PAINT_LAYERS.md.
+		var paint_layers: Array = data_component.get_paint_layers() if data_component else []
 		accrual_early.apply(self, {
 			"grid_dims": dims_early,
 			"grid_center": Vector3(float(dims_early.x) * cube_size * 0.5, 0.0, float(dims_early.z) * cube_size * 0.5),
@@ -699,6 +703,7 @@ func _handle_biome_ring():
 			"biome_paint": painted_layer,
 			"stage_order": stage_order,
 			"biome_overrides": biome_overrides,
+			"paint_layers": paint_layers,
 			# Phase 4b: the ground_ring accrual layer (wraps BiomeRingComponent)
 			# needs density / terrain_mode / kingdoms. GridSystem no longer
 			# special-cases the ring — it is just another accrual layer now.

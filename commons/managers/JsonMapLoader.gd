@@ -95,6 +95,25 @@ func get_interactables_layer() -> Array:
 func get_biome_paint_layer() -> Array:
 	return map_data.get("layers", {}).get("biome_paint", [])
 
+
+## Optional 5th layer for per-cell ground TYPE. See
+## commons/biome_layers/ground_types.json for the catalog and
+## commons/biome_layers/ground_layer_component.gd for the renderer.
+## Token language: short two-char ids (mo / so / st / sd / sn / as /
+## wd / vd) or long ids (moss / soil / stone / sand / snow / ash /
+## wood / void). Returns [] if absent — backward-compatible.
+func get_ground_paint_layer() -> Array:
+	return map_data.get("layers", {}).get("ground_paint", [])
+
+
+## Optional per-map biome AUTHORING: a list of paint-layer specs
+## (element × distribution × density). See doc/PAINT_LAYERS.md and
+## commons/biome_layers/distribution_field.gd. Top-level key (not a grid
+## layer). Returns [] if absent — fully backward-compatible.
+func get_paint_layers() -> Array:
+	var pl = map_data.get("paint_layers", [])
+	return pl if pl is Array else []
+
 # Get definitions
 func get_utility_definitions() -> Dictionary:
 	return map_data.get("utility_definitions", {})

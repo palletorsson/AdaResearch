@@ -168,6 +168,23 @@ func get_biome_paint_layer() -> Array:
 		return json_loader.get_biome_paint_layer()
 	return []
 
+
+## Optional 5th layer: per-cell ground TYPE. See
+## commons/biome_layers/ground_types.json for the catalog. Returns []
+## when the map has no ground_paint layer (backward-compatible).
+func get_ground_paint_layer() -> Array:
+	if json_loader:
+		return json_loader.get_ground_paint_layer()
+	return []
+
+
+## Per-map biome AUTHORING: paint-layer specs (element × distribution ×
+## density). See doc/PAINT_LAYERS.md. Returns [] when the map has none.
+func get_paint_layers() -> Array:
+	if json_loader and json_loader.has_method("get_paint_layers"):
+		return json_loader.get_paint_layers()
+	return []
+
 # Get lighting settings from loaded data
 func get_lighting_settings() -> Dictionary:
 	if json_loader:
