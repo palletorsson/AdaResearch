@@ -2,7 +2,8 @@ extends Node3D
 ## BiomeScrubberDesktop3D — scrub AND inspect the biome accrual stack.
 ##
 ## Two questions this tool answers:
-##   1. ACCRUAL  — what does the biome look like at sequence N?  (stage slider)
+##   1. WALK  — step map-to-map through the spine; each map's biome builds on the
+##      maps before it in its sequence (sequence accrual). [ / ] walk maps.
 ##   2. CONTRIBUTION — what does each single layer add?  (solo / toggle)
 ##
 ## This is the ACTUAL Godot renderer driving `BiomeAccrualManager` — not a web
@@ -16,7 +17,7 @@ extends Node3D
 ##   reset_overrides() · get_active_kinds() · get_contributions()
 ##
 ## Controls:
-##   ] / →  next stage     [ / ←  prev stage     1-9,0 jump    - / =  ends
+##   ] / →  next map       [ / ←  prev map       - / =  first/last    1-9,0  map in seq
 ##   ↑ / ↓  select layer    Space  toggle layer    S  solo selected    A  all on
 ##   R  reset to progression    Tab  hide/show panel    R-drag orbit    wheel zoom
 ##   B  brush element (ground→tree→critter→…→off)   L-drag  paint   E  erase
@@ -38,6 +39,10 @@ const MAX_STAGE := 19
 # Reuse the VR brush menu (element grid + size + pressure sliders) as the
 # desktop's right-side brush-settings panel — one menu, both editors.
 const BrushMenuScene = preload("res://commons/hazards/becoming_catalyst/biome_brush_menu_ui.tscn")
+# Sequence accrual: a map's biome builds on the maps before it. Applied here too
+# (the scrubber builds the accrual directly, not via GridSystem) so walking
+# map-to-map shows the biome thicken across a sequence. See sequence_accrual.gd.
+const SequenceAccrualLib = preload("res://commons/biome_layers/sequence_accrual.gd")
 @export var grid_size: int = 20          # synthetic default (square)
 @export var cube_size: float = 1.0
 @export var auto_spin: bool = false   # OFF — a spinning scene fights painting (R-drag still orbits)
@@ -52,6 +57,11 @@ var grid_d: int = 20
 var _map_arg: String = ""                # --map=<Name>; "" = synthetic
 var _loaded_map: String = ""
 var _map_seq: String = ""
+# Map-to-map walk: the scrubber steps through the ordered curriculum maps
+# (EcosystemManager.get_ordered_map_list) rather than abstract sequence stages.
+var _all_maps: Array = []                # ordered map names across the whole spine
+var _map_index: int = -1                 # position in _all_maps; -1 = synthetic / off-list
+var _eco: Node = null                    # EcosystemManager (cached: map list + accrual)
 var _map_paint: Array = []               # the map's biome_paint layer
 var _map_paint_layers: Array = []        # the map's paint_layers[] (distribution authoring)
 var _cli_paint: Array = []               # --paint synthetic layers (override map's, for quick tests)
@@ -122,6 +132,12 @@ func _ready() -> void:
 	# we size the camera / floor to the grid.
 	if _map_arg != "":
 		_load_map(_map_arg)
+	# Build the ordered map list so ]/[ walk the curriculum map-to-map.
+	_eco = get_node_or_null("/root/EcosystemManager")
+	if _eco and _eco.has_method("get_ordered_map_list"):
+		_all_maps = _eco.get_ordered_map_list()
+	if _loaded_map != "":
+		_map_index = _all_maps.find(_loaded_map)
 	var span := float(maxi(grid_w, grid_d))
 	_orbit_center = Vector3(float(grid_w) * cube_size * 0.5, 1.5, float(grid_d) * cube_size * 0.5)
 	_orbit_radius = span * cube_size * 1.05
@@ -336,6 +352,58 @@ func _set_stage(n: int) -> void:
 	_rebuild()
 
 
+# ── Map-to-map walk (primary navigation) ──────────────────────────────
+## Step to map `index` in the spine-ordered list: load its real grid + paint +
+## sequence (which drives the stage), re-centre the view, and rebuild with
+## sequence accrual so the biome's build-up across the sequence is visible.
+func _goto_map(index: int) -> void:
+	if _all_maps.is_empty():
+		# No map list (e.g. EcosystemManager absent) — fall back to stage stepping.
+		_set_stage(_stage + (1 if index > _map_index else -1))
+		return
+	var target := clampi(index, 0, _all_maps.size() - 1)
+	if target == _map_index:
+		return
+	_map_index = target
+	# A different map → its own brush-in-progress no longer applies; the map's
+	# saved paint_layers load from disk. Clear the live brush so we don't smear
+	# one map's strokes (sized to its grid) onto the next.
+	_brush_fields.clear()
+	_paint_idx = -1
+	_stage_explicit = false   # let the new map's sequence drive the stage
+	_load_map(str(_all_maps[_map_index]))
+	_stage = start_stage if _stage_explicit else clampi(start_stage, MIN_STAGE, MAX_STAGE)
+	_recenter_for_grid()
+	_rebuild()
+
+
+## Jump to the Nth map (1-based) of the current map's sequence — quick hop within
+## a sequence while staying map-based.
+func _goto_map_in_current_sequence(n: int) -> void:
+	if _eco == null or _map_seq == "" or not _eco.has_method("get_sequence_maps"):
+		return
+	var seq_maps: Array = _eco.get_sequence_maps(_map_seq)
+	if n >= 1 and n <= seq_maps.size():
+		var gi: int = _all_maps.find(str(seq_maps[n - 1]))
+		if gi >= 0:
+			_goto_map(gi)
+
+
+## Grid dims differ between maps → re-centre the orbit and rebuild the grid-sized
+## visuals (reference floor + brush overlay).
+func _recenter_for_grid() -> void:
+	_orbit_center = Vector3(float(grid_w) * cube_size * 0.5, 1.5, float(grid_d) * cube_size * 0.5)
+	_orbit_radius = float(maxi(grid_w, grid_d)) * cube_size * 1.05
+	var old_floor := get_node_or_null("ReferenceFloor")
+	if old_floor:
+		old_floor.free()
+	_build_floor()
+	var old_overlay := get_node_or_null("BrushOverlay")
+	if old_overlay:
+		old_overlay.free()
+	_build_brush_overlay()
+
+
 # ── Layer inspection ──────────────────────────────────────────────────
 func _toggle_selected() -> void:
 	if _selected < 0 or _selected >= _active_kinds.size(): return
@@ -424,6 +492,20 @@ func _save_overrides() -> void:
 
 
 # ── HUD + side panel ──────────────────────────────────────────────────
+## "map 2/10  ·  #14/503" — position within the current sequence and overall.
+func _map_position_text() -> String:
+	if _loaded_map == "" or _eco == null:
+		return ""
+	var seq_maps: Array = _eco.get_sequence_maps(_map_seq) if _eco.has_method("get_sequence_maps") else []
+	var local: int = seq_maps.find(_loaded_map) + 1
+	var glob: int = _map_index + 1
+	if local >= 1 and seq_maps.size() > 0:
+		return "map %d/%d  ·  #%d/%d" % [local, seq_maps.size(), glob, _all_maps.size()]
+	if glob >= 1:
+		return "#%d/%d" % [glob, _all_maps.size()]
+	return ""
+
+
 func _update_hud() -> void:
 	if _stage_big == null:
 		return
@@ -433,13 +515,16 @@ func _update_hud() -> void:
 	for k in _active_kinds:
 		if not _disabled.has(k): on += 1
 	# Big stage readout.
-	_stage_big.text = "STAGE %d · LAB" % _stage if _stage > MAX_STAGE else "STAGE %d / %d" % [_stage, MAX_STAGE]
-	# Context line: sequence · layers on · where.
-	var where := "%s  %d×%d" % [_loaded_map, grid_w, grid_d] if _loaded_map != "" else "synthetic  %d×%d" % [grid_w, grid_d]
-	var seq_show := seq_name if seq_name != "?" else "—"
+	_stage_big.text = _loaded_map if _loaded_map != "" else ("SYNTHETIC · STAGE %d" % _stage)
+	# Context line: sequence · map position · stage · grid · paint.
+	var where := "%d×%d" % [grid_w, grid_d]
+	var seq_show := _map_seq if _map_seq != "" else (seq_name if seq_name != "?" else "—")
+	var pos := _map_position_text()
+	var pos_tag := ("    ·    %s" % pos) if pos != "" else ""
+	var stage_tag := "    ·    stage %d" % _stage
 	var active_paint: Array = _cli_paint if not _cli_paint.is_empty() else _map_paint_layers
 	var paint_tag := "    ·    🖌 %d paint" % active_paint.size() if active_paint.size() > 0 else ""
-	_seq_lbl.text = "%s    ·    %d/%d layers on    ·    %s%s" % [seq_show, on, _active_kinds.size(), where, paint_tag]
+	_seq_lbl.text = "%s%s%s    ·    %d/%d layers    ·    %s%s" % [seq_show, pos_tag, stage_tag, on, _active_kinds.size(), where, paint_tag]
 	# Truth quote.
 	_truth_lbl.text = ("“%s”" % truth) if truth != "" else ""
 	# Controls footer — brush controls when a paint element is active.
@@ -450,7 +535,7 @@ func _update_hud() -> void:
 		_controls_lbl.add_theme_color_override("font_color", _element_color(el))
 	else:
 		var save_hint := "      W save→map" if _loaded_map != "" else ""
-		_controls_lbl.text = "[ / ] stage    ↑↓ select    Space toggle    S solo    A all    R reset    B brush    Tab panel%s" % save_hint
+		_controls_lbl.text = "[ / ] map    - = first/last    1-9 map in seq    ↑↓ select    Space toggle    S solo    A all    B brush    Tab panel%s" % save_hint
 		_controls_lbl.add_theme_color_override("font_color", C_DIM)
 	# Transient toast.
 	_toast_lbl.text = _status_msg
@@ -585,10 +670,10 @@ func _commafy(n: int) -> String:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
-			KEY_BRACKETRIGHT, KEY_RIGHT: _set_stage(_stage + 1)
-			KEY_BRACKETLEFT, KEY_LEFT:   _set_stage(_stage - 1)
-			KEY_MINUS:  _set_stage(MIN_STAGE)
-			KEY_EQUAL:  _set_stage(MAX_STAGE)
+			KEY_BRACKETRIGHT, KEY_RIGHT: _goto_map((_map_index + 1) if _map_index >= 0 else 0)
+			KEY_BRACKETLEFT, KEY_LEFT:   _goto_map((_map_index - 1) if _map_index > 0 else 0)
+			KEY_MINUS:  _goto_map(0)
+			KEY_EQUAL:  _goto_map(_all_maps.size() - 1)
 			KEY_UP:     _select(-1)
 			KEY_DOWN:   _select(1)
 			KEY_SPACE:  _toggle_selected()
@@ -614,8 +699,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				if _accrual.has_method("reset_overrides"): _accrual.reset_overrides()
 				_disabled.clear(); _rebuild()
 			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9:
-				_set_stage(event.keycode - KEY_0)
-			KEY_0: _set_stage(10)
+				_goto_map_in_current_sequence(event.keycode - KEY_0)
+			KEY_0: _goto_map_in_current_sequence(10)
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and _paint_idx >= 0:
 			# Left-drag paints the active element's brush; rebuild on release.
@@ -1047,6 +1132,11 @@ func _effective_paint_layers() -> Array:
 	for layer in base:
 		if layer is Dictionary and not painted.has(str(layer.get("element", ""))):
 			out.append(layer)
+	# Sequence accrual: prepend the earlier maps' painted layers so the biome
+	# builds on what came before (same as in-game). Only for a real loaded map
+	# in a sequence; synthetic / --paint tests stay isolated.
+	if _loaded_map != "" and _eco != null:
+		return SequenceAccrualLib.accrued_layers(_eco, _loaded_map, out)
 	return out
 
 

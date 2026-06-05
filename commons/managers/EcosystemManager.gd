@@ -93,6 +93,23 @@ func get_sequence_for_map(map_name: String) -> String:
 func get_sequence_maps(sequence_name: String) -> Array:
 	return _sequence_maps.get(sequence_name, [])
 
+## Every map across every sequence, flattened in stage_order (then maps[] order
+## within each sequence). The canonical "walk the whole curriculum, map by map"
+## list — the biome scrubber steps through this instead of sequence stages.
+func get_ordered_map_list() -> Array:
+	var pairs: Array = []
+	for s in _sequence_maps.keys():
+		pairs.append({"seq": s, "order": int(_all_stages.get(s, {}).get("order", 999))})
+	pairs.sort_custom(func(a, b):
+		if int(a["order"]) == int(b["order"]):
+			return str(a["seq"]) < str(b["seq"])
+		return int(a["order"]) < int(b["order"]))
+	var out: Array = []
+	for p in pairs:
+		for m in _sequence_maps[p["seq"]]:
+			out.append(m)
+	return out
+
 ## Auto-advance ecosystem to the sequence that owns the given map.
 ## Called by GridSystem on every map load so biome matches context.
 ## Monotonic: never walks backwards (walking from QFEP → primitives keeps max density).
