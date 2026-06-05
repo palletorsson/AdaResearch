@@ -119,8 +119,21 @@ godot --path . res://commons/biome_layers/BiomeScrubberDesktop3D.tscn -- \
 ```
 
 `--paint=element:mode:density[:scale:threshold]` is repeatable. Solo the layer
-(`S`, or `--solo=lsystem_trees`) to see just that distribution. This is the
-desktop half of step 3 — the brush (writing `brush` fields) is the other half.
+(`S`, or `--solo=lsystem_trees`) to see just that distribution.
+
+### The brush (step 3, interactive)
+
+Open the scrubber on a map and paint a density field by hand:
+
+- **`B`** cycles the active paint element (tree → critter → flower → off).
+- **left-drag** paints density into that element's field (a live heatmap overlay
+  shows it); **`E`** toggles erase; **`C`** clears; **`,` / `.`** size the brush.
+- **`W`** saves — the brush field is written into the map's `paint_layers[]` as a
+  `mode:"brush"` layer (alongside any `biome_overrides`). Reload and it renders.
+
+The wired spawn layers place by the painted field immediately on mouse-release.
+This is the desktop precursor to the VR brush (step 4): the same stamp logic,
+driven by a controller raycast instead of the mouse.
 
 ## Not yet (next steps)
 

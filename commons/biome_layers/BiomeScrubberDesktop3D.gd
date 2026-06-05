@@ -19,6 +19,8 @@ extends Node3D
 ##   ] / →  next stage     [ / ←  prev stage     1-9,0 jump    - / =  ends
 ##   ↑ / ↓  select layer    Space  toggle layer    S  solo selected    A  all on
 ##   R  reset to progression    Tab  hide/show panel    R-drag orbit    wheel zoom
+##   B  brush element (tree→critter→flower→off)   L-drag  paint   E  erase
+##   C  clear brush   , / .  brush radius   W  save brush+overrides → map
 ##
 ## CLI (headless):
 ##   --stage=N            start stage
@@ -74,6 +76,19 @@ var _toast_lbl: Label = null
 # current stage. Built once, recoloured on every stage change.
 var _timeline: HBoxContainer = null
 var _tick_rects: Array = []          # Array[ColorRect], one per stage 1..MAX
+# Brush painting (step 3) — left-drag paints a per-cell density field for the
+# active element; the wired spawn layers place by it; W saves to the map.
+var _paint_elements: Array = ["tree", "critter", "flower"]
+var _paint_idx: int = -1             # -1 = not painting; else index into _paint_elements
+var _brush_fields: Dictionary = {}   # element -> PackedFloat32Array (grid_w*grid_d)
+var _brush_radius: int = 2
+var _brush_strength: float = 0.6
+var _brush_erase: bool = false
+var _painting: bool = false
+var _brush_dirty: bool = false       # set while dragging; triggers rebuild on release
+var _brush_overlay: MultiMeshInstance3D = null
+var _brushtest: String = ""          # --brushtest=<element> headless proof
+var _brushsave: bool = false         # --brushsave: save after brushtest (headless save proof)
 var _stage: int = 1
 var _orbit_yaw: float = 0.6
 var _orbit_pitch: float = -0.45
@@ -112,6 +127,7 @@ func _ready() -> void:
 	_build_floor()
 	_build_camera()
 	_build_ui()
+	_build_brush_overlay()
 
 	_host = Node3D.new()
 	_host.name = "BiomeHost"
@@ -131,6 +147,12 @@ func _ready() -> void:
 	# Explicit --stage may exceed MAX (e.g. 99 to fire the lab dispatcher).
 	_stage = start_stage if _stage_explicit else clampi(start_stage, MIN_STAGE, MAX_STAGE)
 	_rebuild()
+
+	# Headless brush proof: stamp a disc, rebuild, then fall through to capture.
+	if _brushtest != "":
+		_apply_brushtest(_brushtest)
+		if _brushsave:
+			_save_overrides()
 
 	if _solo_base != "":
 		_run_solo_sheet.call_deferred()
@@ -160,6 +182,8 @@ func _parse_cli() -> void:
 		elif a.begins_with("--solo="): _solo_one = a.split("=", true, 1)[1]
 		elif a.begins_with("--map="): _map_arg = a.split("=", true, 1)[1]
 		elif a.begins_with("--paint="): _add_cli_paint(a.split("=", true, 1)[1])
+		elif a.begins_with("--brushtest="): _brushtest = a.split("=", true, 1)[1]
+		elif a == "--brushsave": _brushsave = true
 
 
 ## --paint=element:mode:density[:scale:threshold] — inject a synthetic paint
@@ -276,9 +300,9 @@ func _rebuild() -> void:
 		# Pass only the map's PARAM overrides live — disable + stage are
 		# driven by the scrubber's own mechanisms (enable_layer / override).
 		"biome_overrides": {"params": _map_overrides.get("params", {})},
-		# Paint layers: --paint synthetic layers win over the map's; the wired
+		# Paint layers: brush fields + (--paint synthetic | the map's); the wired
 		# spawn layers (tree/critter/flower) place by these distributions.
-		"paint_layers": _cli_paint if not _cli_paint.is_empty() else _map_paint_layers,
+		"paint_layers": _effective_paint_layers(),
 		"budget_scale": 1.0,
 	})
 	_refresh_active_kinds()
@@ -365,6 +389,18 @@ func _save_overrides() -> void:
 	var settings: Dictionary = _map_data.get("settings", {})
 	settings["biome_overrides"] = ov
 	_map_data["settings"] = settings
+	# Persist painted brush fields into the map's top-level paint_layers[].
+	# A painted element replaces any existing layer for that element; other
+	# layers (plane/noise/etc. the scrubber doesn't paint) are preserved.
+	if not _brush_fields.is_empty():
+		var existing: Array = _map_data.get("paint_layers", []) if (_map_data.get("paint_layers") is Array) else []
+		var kept: Array = []
+		for layer in existing:
+			if layer is Dictionary and not _brush_fields.has(str(layer.get("element", ""))):
+				kept.append(layer)
+		for el in _brush_fields:
+			kept.append({"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])})
+		_map_data["paint_layers"] = kept
 	var path := "res://commons/maps/%s/map_data.json" % _loaded_map
 	var f := FileAccess.open(path, FileAccess.WRITE)
 	if f == null:
@@ -375,7 +411,7 @@ func _save_overrides() -> void:
 	f.store_string(JSON.stringify(_map_data, "\t"))
 	f.close()
 	_map_overrides = ov
-	_status_msg = "✓ saved biome_overrides → %s  (disable=%d, stage=%d)" % [_loaded_map, dis.size(), _stage]
+	_status_msg = "✓ saved → %s  (disable=%d, stage=%d, brush=%d)" % [_loaded_map, dis.size(), _stage, _brush_fields.size()]
 	_update_hud()
 	print("[scrubber] saved overrides to %s: %s" % [_loaded_map, str(ov)])
 
@@ -399,9 +435,16 @@ func _update_hud() -> void:
 	_seq_lbl.text = "%s    ·    %d/%d layers on    ·    %s%s" % [seq_show, on, _active_kinds.size(), where, paint_tag]
 	# Truth quote.
 	_truth_lbl.text = ("“%s”" % truth) if truth != "" else ""
-	# Controls footer.
-	var save_hint := "      W save→map" if _loaded_map != "" else ""
-	_controls_lbl.text = "[ / ]  stage      ↑ ↓  select      Space  toggle      S  solo      A  all      R  reset      Tab  panel%s" % save_hint
+	# Controls footer — brush controls when a paint element is active.
+	if _paint_idx >= 0:
+		var el: String = _paint_elements[_paint_idx]
+		_controls_lbl.text = "🖌 PAINT %s  (r%d%s)      L-drag paint      B element      E erase      C clear      , . radius      W save" % [
+			el.to_upper(), _brush_radius, "  ERASE" if _brush_erase else ""]
+		_controls_lbl.add_theme_color_override("font_color", _element_color(el))
+	else:
+		var save_hint := "      W save→map" if _loaded_map != "" else ""
+		_controls_lbl.text = "[ / ] stage    ↑↓ select    Space toggle    S solo    A all    R reset    B brush    Tab panel%s" % save_hint
+		_controls_lbl.add_theme_color_override("font_color", C_DIM)
 	# Transient toast.
 	_toast_lbl.text = _status_msg
 	_recolor_timeline()
@@ -545,6 +588,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_S:      _solo_selected()
 			KEY_A:      _all_on()
 			KEY_W:      _save_overrides()
+			KEY_B:      _cycle_paint_element()
+			KEY_E:
+				_brush_erase = not _brush_erase
+				_update_hud()
+			KEY_C:
+				if _paint_idx >= 0:
+					_brush_fields.erase(_paint_elements[_paint_idx])
+					_update_brush_overlay()
+					_rebuild()
+			KEY_COMMA:  _brush_radius = maxi(0, _brush_radius - 1); _update_hud()
+			KEY_PERIOD: _brush_radius = mini(8, _brush_radius + 1); _update_hud()
 			KEY_TAB:
 				if _panel_root: _panel_root.visible = not _panel_root.visible
 			KEY_R:
@@ -554,15 +608,26 @@ func _unhandled_input(event: InputEvent) -> void:
 				_set_stage(event.keycode - KEY_0)
 			KEY_0: _set_stage(10)
 	elif event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.button_index == MOUSE_BUTTON_LEFT and _paint_idx >= 0:
+			# Left-drag paints the active element's brush; rebuild on release.
+			_painting = event.pressed
+			if event.pressed:
+				_paint_at_mouse()
+			elif _brush_dirty:
+				_brush_dirty = false
+				_rebuild()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			_dragging = event.pressed
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_orbit_radius = maxf(2.0, _orbit_radius - 1.5)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_orbit_radius += 1.5
-	elif event is InputEventMouseMotion and _dragging:
-		_orbit_yaw -= event.relative.x * 0.006
-		_orbit_pitch = clampf(_orbit_pitch - event.relative.y * 0.006, -1.4, -0.05)
+	elif event is InputEventMouseMotion:
+		if _painting:
+			_paint_at_mouse()
+		elif _dragging:
+			_orbit_yaw -= event.relative.x * 0.006
+			_orbit_pitch = clampf(_orbit_pitch - event.relative.y * 0.006, -1.4, -0.05)
 
 
 func _select(delta: int) -> void:
@@ -777,6 +842,159 @@ func _build_ui() -> void:
 	# Error overlay label (normally hidden) — used only when an autoload
 	# is missing, before the info labels have anything to show.
 	_hud = _mk_label(layer, "", 15, C_BAD, Vector2(20, BAR_H + 8))
+
+
+# ── Brush painting (step 3) ──────────────────────────────────────────
+## A flat grid of per-cell quads over the ground; alpha = the active element's
+## brush density. Built once, recoloured as you paint.
+func _build_brush_overlay() -> void:
+	_brush_overlay = MultiMeshInstance3D.new()
+	_brush_overlay.name = "BrushOverlay"
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true                 # MUST precede instance_count
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(cube_size * 0.92, cube_size * 0.92)
+	mm.mesh = plane
+	mm.instance_count = grid_w * grid_d
+	_brush_overlay.multimesh = mm
+	var mat := StandardMaterial3D.new()
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.vertex_color_use_as_albedo = true
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_brush_overlay.material_override = mat
+	add_child(_brush_overlay)
+	for z in grid_d:
+		for x in grid_w:
+			var i := z * grid_w + x
+			mm.set_instance_transform(i, Transform3D(Basis(), Vector3((x + 0.5) * cube_size, 0.06, (z + 0.5) * cube_size)))
+			mm.set_instance_color(i, Color(0, 0, 0, 0))
+	_brush_overlay.visible = false
+
+
+func _cycle_paint_element() -> void:
+	_paint_idx += 1
+	if _paint_idx >= _paint_elements.size():
+		_paint_idx = -1
+	if _brush_overlay:
+		_brush_overlay.visible = _paint_idx >= 0
+	_update_brush_overlay()
+	_update_hud()
+
+
+func _element_color(el: String) -> Color:
+	match el:
+		"tree": return Color(0.45, 0.85, 0.50)
+		"critter": return Color(1.0, 0.70, 0.36)
+		"flower": return Color(1.0, 0.55, 0.76)
+	return Color(0.7, 0.7, 0.7)
+
+
+## Raycast the mouse onto the ground plane (y=0) → grid cell → stamp the brush.
+func _paint_at_mouse() -> void:
+	if _camera == null or _paint_idx < 0:
+		return
+	var mp := get_viewport().get_mouse_position()
+	var origin := _camera.project_ray_origin(mp)
+	var dir := _camera.project_ray_normal(mp)
+	if absf(dir.y) < 1e-5:
+		return
+	var t := -origin.y / dir.y
+	if t < 0.0:
+		return
+	var hit := origin + dir * t
+	_stamp(int(floor(hit.x / cube_size)), int(floor(hit.z / cube_size)))
+
+
+func _stamp(cx: int, cz: int) -> void:
+	var el: String = _paint_elements[_paint_idx]
+	if not _brush_fields.has(el):
+		var nf := PackedFloat32Array()
+		nf.resize(grid_w * grid_d)
+		_brush_fields[el] = nf
+	var field: PackedFloat32Array = _brush_fields[el]
+	var r := _brush_radius
+	for dz in range(-r, r + 1):
+		for dx in range(-r, r + 1):
+			var x := cx + dx
+			var z := cz + dz
+			if x < 0 or x >= grid_w or z < 0 or z >= grid_d:
+				continue
+			var dist := sqrt(float(dx * dx + dz * dz))
+			if dist > float(r) + 0.001:
+				continue
+			var falloff := 1.0 - dist / (float(r) + 0.0001)
+			var i := z * grid_w + x
+			if _brush_erase:
+				field[i] = maxf(0.0, field[i] - _brush_strength * falloff)
+			else:
+				field[i] = minf(1.0, field[i] + _brush_strength * falloff)
+	_brush_fields[el] = field
+	_brush_dirty = true
+	_update_brush_overlay()
+
+
+func _update_brush_overlay() -> void:
+	if _brush_overlay == null:
+		return
+	var mm: MultiMesh = _brush_overlay.multimesh
+	if _paint_idx < 0:
+		for i in grid_w * grid_d:
+			mm.set_instance_color(i, Color(0, 0, 0, 0))
+		return
+	var el: String = _paint_elements[_paint_idx]
+	var col := _element_color(el)
+	var field: PackedFloat32Array = _brush_fields.get(el, PackedFloat32Array())
+	for z in grid_d:
+		for x in grid_w:
+			var i := z * grid_w + x
+			var v: float = field[i] if i < field.size() else 0.0
+			mm.set_instance_color(i, Color(col.r, col.g, col.b, v * 0.75))
+
+
+## Brush fields (as mode:"brush" layers) + the map's/CLI's other layers.
+## A painted element overrides the map's layer for that element.
+func _effective_paint_layers() -> Array:
+	var out: Array = []
+	var painted: Dictionary = {}
+	for el in _brush_fields:
+		painted[el] = true
+		out.append({"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_rows(_brush_fields[el])})
+	var base: Array = _cli_paint if not _cli_paint.is_empty() else _map_paint_layers
+	for layer in base:
+		if layer is Dictionary and not painted.has(str(layer.get("element", ""))):
+			out.append(layer)
+	return out
+
+
+func _field_to_rows(field: PackedFloat32Array) -> Array:
+	var rows: Array = []
+	for z in grid_d:
+		var row: Array = []
+		for x in grid_w:
+			var i := z * grid_w + x
+			row.append(snappedf(field[i] if i < field.size() else 0.0, 0.01))
+		rows.append(row)
+	return rows
+
+
+## --brushtest=<element>: stamp a filled disc and rebuild — headless proof of
+## the brush → field → placement path without a mouse.
+func _apply_brushtest(el: String) -> void:
+	var idx := _paint_elements.find(el)
+	if idx < 0:
+		return
+	_paint_idx = idx
+	if _brush_overlay:
+		_brush_overlay.visible = true
+	var cx := grid_w / 2
+	var cz := grid_d / 2
+	var saved := _brush_radius
+	_brush_radius = maxi(3, mini(grid_w, grid_d) / 3)
+	_stamp(cx, cz)
+	_brush_radius = saved
+	_rebuild()
 
 
 # ── Headless capture ─────────────────────────────────────────────────
