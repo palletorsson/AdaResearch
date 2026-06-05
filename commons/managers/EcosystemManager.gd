@@ -14,6 +14,9 @@ var _all_stages: Dictionary = {}
 var _completed_sequences: Array[String] = []
 # map_name -> sequence_name, built once from commons/maps/sequences/*.json
 var _map_to_sequence: Dictionary = {}
+# sequence_name -> ordered Array[String] of its map names (for biome accrual:
+# a map builds on the painted layers of the maps before it). See sequence_accrual.gd.
+var _sequence_maps: Dictionary = {}
 var _allowed_flags: Dictionary = {}  # flag_name -> true (acts as Set)
 var _current_kingdoms: Array[String] = []
 var _current_vegetation_density: float = 0.0
@@ -84,6 +87,11 @@ func get_current_stage_order() -> int:
 ## Index is built once at boot from commons/maps/sequences/*.json.
 func get_sequence_for_map(map_name: String) -> String:
 	return _map_to_sequence.get(map_name, "")
+
+## Ordered list of map names in a sequence (the maps[] order from its JSON).
+## Used by sequence_accrual.gd so a map can build its biome on the maps before it.
+func get_sequence_maps(sequence_name: String) -> Array:
+	return _sequence_maps.get(sequence_name, [])
 
 ## Auto-advance ecosystem to the sequence that owns the given map.
 ## Called by GridSystem on every map load so biome matches context.
@@ -258,6 +266,7 @@ func _load_stages() -> void:
 ## Done once at boot so GridSystem doesn't scan every map load.
 func _load_map_sequence_index() -> void:
 	_map_to_sequence.clear()
+	_sequence_maps.clear()
 	var seq_dir := DirAccess.open(SEQUENCES_DIR)
 	if not seq_dir:
 		push_warning("EcosystemManager: Could not open " + SEQUENCES_DIR)
@@ -286,10 +295,15 @@ func _index_sequence_file(path: String) -> void:
 		var seq_data = seqs[seq_name]
 		if not seq_data is Dictionary:
 			continue
+		var ordered: Array = []
 		for m in seq_data.get("maps", []):
 			var mn: String = str(m.get("name", m)) if m is Dictionary else str(m)
 			if mn != "" and not _map_to_sequence.has(mn):
 				_map_to_sequence[mn] = str(seq_name)
+			if mn != "":
+				ordered.append(mn)
+		if not ordered.is_empty():
+			_sequence_maps[str(seq_name)] = ordered
 
 # ---------------------------------------------------------------------------
 # Save / Load

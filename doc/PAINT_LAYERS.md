@@ -3,9 +3,11 @@
 > The biome as a stack of painted layers. One principle, repeated:
 > **`element × distribution × density`**. Per map. Eventually VR-editable.
 >
-> Status (2026-06-05): **Steps 1–2 landed** — schema + distribution engine,
-> wired into the population spawn layers (tree, critter, flower) as *opt-in*.
-> Steps 3 (desktop painter) and 4 (VR brush) are not built yet.
+> Status (2026-06-05): **Steps 1–4 landed** — schema + distribution engine wired
+> into the population spawn layers; walkable `ground` substrate + `shader` colour
+> overlay + plant bleed; desktop scrubber + VR Tilt-Brush catalyst stone; and
+> **sequence accrual** (a map builds on the maps before it). Opt-in / additive
+> throughout — a map with no `paint_layers` is unchanged.
 
 ## The model
 
@@ -175,6 +177,35 @@ Two sources feed it:
 
 Shader strength is firm (~0.92), bleed is soft (~0.55). Both editors expose a
 `shader` brush element (VR Tilt-Brush menu + desktop scrubber).
+
+## Sequence accrual (a map builds on the maps before it)
+
+A map's `paint_layers[]` is its **own** contribution — saved per map (the delta).
+But maps live in a sequence, so the biome should *build on what came before*. At
+**load time**, a map's effective layers are the union, in sequence order, of every
+earlier map's layers **+ its own** (own last, so it sits on top). The biome visibly
+thickens as you walk the sequence — and nothing is duplicated on disk: each map_data
+still stores only its own delta. Composed fresh every load (`sequence_accrual.gd`,
+wired in `GridSystem._handle_biome_ring`).
+
+Maps in a sequence have **different grid sizes**, so nothing copies cell-for-cell:
+
+- **Procedural layers** (`plane`/`random`/`curve`/`noise`) re-evaluate on each map's
+  own grid — they're resolution-independent recipes.
+- **Brush masks** bilinear-**resample** to the current grid (`DistributionField._read_brush`),
+  so a hand-painted stroke re-blooms proportionally on the next map's footprint.
+
+Accrual is **layer-recipe** level, not painted-pixel level. It's additive + safe:
+with no sequence, or for the first map in one, a map just gets its own layers. Inherited
+layers carry a `_accrued_from` tag (which map they came from) for editor/debug; the
+field engine ignores it. Order in `EcosystemManager._sequence_maps` (the sequence
+JSON's `maps[]` order) defines "before".
+
+```
+Point_One   paints: ground-curve, flower-noise           → renders: [own]
+Point_Lines paints: tree-noise                            → renders: [Point_One's 2] + [tree]
+Point_Trace paints: shader-wash                           → renders: [Point_One's 2] + [tree] + [shader]
+```
 
 ## Not yet (next steps)
 

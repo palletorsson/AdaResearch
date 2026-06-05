@@ -16,6 +16,9 @@ const WallComponentScript = preload("res://commons/grid/GridWallComponent.gd")
 const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
 const TimelineComponentScript = preload("res://commons/grid/GridTimelineComponent.gd")
 const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
+# Biome paint layers build on the earlier maps in a sequence (render-time accrual).
+# Preloaded by path (not the SequenceAccrual global) to dodge class-cache ordering.
+const SequenceAccrualLib = preload("res://commons/biome_layers/sequence_accrual.gd")
 
 # Configuration
 @export var cube_size: float = 1.0
@@ -728,6 +731,7 @@ func _handle_biome_ring():
 		# A live VR/desktop brush can override via repaint_biome() (runtime wins).
 		var paint_layers: Array = _runtime_paint_layers if not _runtime_paint_layers.is_empty() \
 			else (data_component.get_paint_layers() if data_component else [])
+		paint_layers = SequenceAccrualLib.accrued_layers(eco, map_name, paint_layers)
 		accrual_early.apply(self, {
 			"grid_dims": dims_early,
 			"grid_center": Vector3(float(dims_early.x) * cube_size * 0.5, 0.0, float(dims_early.z) * cube_size * 0.5),

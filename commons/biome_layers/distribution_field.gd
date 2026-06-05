@@ -180,16 +180,49 @@ static func _shape(falloff: String, t: float) -> float:
 
 
 static func _read_brush(brush, field: PackedFloat32Array, grid_w: int, grid_d: int, density: float) -> void:
-	# brush may be a 2D array (rows of grid_w) or a flat array of grid_w*grid_d.
+	# brush may be a 2D array (rows) or a flat array. A 2D mask whose native size
+	# differs from the target grid (e.g. an earlier sequence map's stroke blooming
+	# on THIS map's grid — see sequence_accrual.gd) is bilinear-resampled so the
+	# shape carries proportionally. Same size = crisp direct copy.
 	if brush is Array and brush.size() > 0 and brush[0] is Array:
-		for z in mini(grid_d, brush.size()):
-			var row = brush[z]
-			if row is Array:
-				for x in mini(grid_w, row.size()):
-					field[z * grid_w + x] = density * clampf(float(row[x]), 0.0, 1.0)
+		var bd: int = brush.size()
+		var bw: int = (brush[0] as Array).size()
+		if bw <= 0:
+			return
+		if bw == grid_w and bd == grid_d:
+			for z in grid_d:
+				var row = brush[z]
+				if row is Array:
+					for x in mini(grid_w, row.size()):
+						field[z * grid_w + x] = density * clampf(float(row[x]), 0.0, 1.0)
+		else:
+			for z in grid_d:
+				var v: float = (float(z) + 0.5) / float(grid_d)
+				for x in grid_w:
+					var u: float = (float(x) + 0.5) / float(grid_w)
+					field[z * grid_w + x] = density * clampf(_brush_bilinear(brush, bw, bd, u, v), 0.0, 1.0)
 	elif brush is Array:
 		for i in mini(field.size(), brush.size()):
 			field[i] = density * clampf(float(brush[i]), 0.0, 1.0)
+
+
+static func _brush_bilinear(brush: Array, bw: int, bd: int, u: float, v: float) -> float:
+	var fx: float = clampf(u * float(bw) - 0.5, 0.0, float(bw - 1))
+	var fz: float = clampf(v * float(bd) - 0.5, 0.0, float(bd - 1))
+	var x0: int = int(floor(fx)); var z0: int = int(floor(fz))
+	var x1: int = mini(x0 + 1, bw - 1); var z1: int = mini(z0 + 1, bd - 1)
+	var tx: float = fx - float(x0); var tz: float = fz - float(z0)
+	return lerpf(lerpf(_brush_cell(brush, x0, z0), _brush_cell(brush, x1, z0), tx),
+				 lerpf(_brush_cell(brush, x0, z1), _brush_cell(brush, x1, z1), tx), tz)
+
+
+static func _brush_cell(brush: Array, x: int, z: int) -> float:
+	if z < 0 or z >= brush.size():
+		return 0.0
+	var row = brush[z]
+	if not (row is Array) or x < 0 or x >= row.size():
+		return 0.0
+	return clampf(float(row[x]), 0.0, 1.0)
 
 
 static func _shuffle(arr: Array, rng: RandomNumberGenerator) -> void:
