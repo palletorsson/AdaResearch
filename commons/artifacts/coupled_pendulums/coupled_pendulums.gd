@@ -9,6 +9,37 @@ extends Node3D
 
 class_name CoupledPendulums
 
+# @identity
+# essence: two pendulums hanging side by side, joined by a spring. Start one
+#   swinging and the other is still — but the spring leaks momentum across, and
+#   over time the motion crosses the gap entirely: the first falls quiet while
+#   the second swings wide, then the trade reverses. It is the COUPLED OSCILLATOR
+#   made physical — two systems that cannot stay independent once a link exists.
+# desire: to show that coupling is not addition but CONVERSATION. The pair wants
+#   to make the beat phenomenon visible — that energy poured into one mode
+#   reappears in another, periodically, and that the rate of exchange is a thing
+#   you can dial. It wants the invisible normal modes to become a slow visible
+#   pulse.
+# critical_parameter: coupling_strength — the spring constant that sets how fast
+#   energy crosses. Near zero the pendulums are strangers, each keeping its swing;
+#   turned up, the beats quicken until the two lock into a single shared motion.
+#   This IS the QFEP λ dial: the strength of relation between two identities.
+# triggers: _physics_process integrates the two coupled angular equations each
+#   frame; coupling_strength setter syncs the VR slider; apply_grid_config
+#   rebuilds with new initial angles
+# emerges: weak coupling reads INDEPENDENT / SLOW-EXCHANGE; strong coupling reads
+#   LOCKED / FAST-BEATS; equal initial angles read NORMAL-MODE (no exchange at
+#   all). Same two bobs, the spring constant IS the relationship
+# relationships: peer to spring_demo (both make a restoring force visible, but
+#   the pendulums show what a spring does BETWEEN bodies, not within one); cousin
+#   to wave artifacts (both are oscillation, the pendulums discrete where waves
+#   are continuous); sibling to any two-body system where λ names the bond
+# truth: coupled oscillators are the rule that two linked harmonic systems do not
+#   keep their own energy — the motion decomposes into normal modes, and what
+#   looks like one pendulum "giving" its swing to the other is really both modes
+#   beating against each other. The spring does not move energy; it makes the two
+#   pendulums one system that was never really two.
+
 ## Pendulum parameters
 @export var pendulum_length: float = 0.5
 @export var bob_radius: float = 0.04

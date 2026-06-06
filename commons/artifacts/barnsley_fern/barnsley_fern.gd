@@ -4,6 +4,36 @@ class_name BarnsleyFern
 ## Barnsley fern — iterated function system rendered as a point cloud on a floor-lying quad.
 ## Four affine transforms with weighted probabilities produce the classic fern shape.
 
+# @identity
+# essence: a floor-lying quad whose texture is painted by the chaos game — a
+#   single point is hit 50,000 times by one of four affine maps chosen at
+#   random, and where it lands it deposits green. No point knows it is a fern;
+#   the fern is the SET the maps agree on. This is the ITERATED FUNCTION SYSTEM
+#   made visible: a shape defined not by its outline but by the transforms that
+#   leave it invariant.
+# desire: to prove that infinite detail can be stored in four little matrices.
+#   The fern wants to show that a living-looking form needs no designer of
+#   leaves — only a rule, a die, and patience. It is the smallest argument that
+#   self-similarity is compression.
+# critical_parameter: num_points — the number of chaos-game iterations. Too few
+#   and the attractor is a scatter of dust; enough and the fern condenses out of
+#   the noise. The seed (_rng.seed = 42) fixes WHICH dust, but the COUNT decides
+#   whether the fern exists at all.
+# triggers: _ready() builds the floor quad then runs the chaos game into a
+#   256x256 image, splatting one of four weighted affine transforms per step
+# emerges: low num_points reads NOISE / NOT-YET-FORM; full count reads FERN /
+#   ATTRACTOR. Same four transforms, the iteration count IS the difference
+#   between dust and frond
+# relationships: sibling to other fractals (all define shape by recursion, not
+#   by boundary); cousin to noise artifacts (both fill a plane from randomness,
+#   but the fern's randomness CONVERGES while noise's stays scattered); peer to
+#   l-system growth (both grow a plant from a rule, the fern by probability, the
+#   l-system by rewriting)
+# truth: an iterated function system is the rule that a fractal is the unique
+#   compact set fixed by a finite collection of contraction maps. The fern IS
+#   that fixed point — drawn not by deciding where leaves go, but by letting the
+#   maps decide, forever, until only the invariant set remains lit.
+
 # --- Configuration ---
 
 @export var quad_size: Vector2 = Vector2(0.6, 0.8)

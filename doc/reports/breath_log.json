@@ -1748,6 +1748,128 @@
         "algorithms/boolean_surfaces/csg_architecture_cavity.gd"
       ],
       "duration_minutes": 20
+    },
+    {
+      "breath_id": "2026-06-02T09:05",
+      "mode": "full",
+      "baseline_avg": 5.9995,
+      "post_avg": 6.0455,
+      "delta": 0.046,
+      "items_attempted": [
+        "scorer_captures_dir_path_fix",
+        "randomness_stage7_polish_captures"
+      ],
+      "items_succeeded": [
+        "scorer_captures_dir_path_fix",
+        "randomness_stage7_polish_captures"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "(reconstructed entry \u2014 original lost to a truncating write on 2026-06-06; avg values approximate)"
+      ],
+      "files_changed": [],
+      "duration_minutes": null,
+      "_reconstructed": true
+    },
+    {
+      "breath_id": "2026-06-05T09:05",
+      "mode": "full",
+      "baseline_avg": 6.0455,
+      "post_avg": 6.0909,
+      "delta": 0.0,
+      "items_attempted": [
+        "primitives_stage7_captures",
+        "near_complete_polish_sweep"
+      ],
+      "items_succeeded": [
+        "primitives_stage7_captures",
+        "near_complete_polish_sweep"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "STRUCTURAL CEILING: 21 of 22 spine sequences sit at HEAD stage 6 (vr_testing), which only completes when a map name appears in ada_run/desktop_feedback.md (human-in-headset). Autonomous breaths CANNOT move the HEAD-sum metric. The only autonomous lever there is stage-7 polish (captures), which is PAST the head and invisible to head-sum. Recommend tracking COMPLETED-stages-sum as the primary autonomous-progress metric.",
+        "Capturing 1 map for a near-complete sequence is the highest value-per-action autonomous move: 4 sequences were each 1 map short of 100% polish; one capture each finished all four.",
+        "capture_multi_angle.gd under --no-window emits harmless Parameter material is null spam to stderr but still writes all 5 PNGs per map. Verify by PNG presence, not exit-stream cleanliness."
+      ],
+      "files_changed": [],
+      "duration_minutes": null,
+      "_reconstructed": true
+    },
+    {
+      "breath_id": "2026-06-06T09:05",
+      "mode": "full",
+      "baseline_avg": 6.0909,
+      "post_avg": 6.0909,
+      "delta": 0.0,
+      "secondary_metric": {
+        "name": "garden_voice_coverage_pct",
+        "baseline": 48,
+        "post": 49,
+        "delta": 1
+      },
+      "items_attempted": [
+        "voice_barnsley_fern",
+        "voice_coupled_pendulums",
+        "voice_doppler_effect_demo",
+        "voice_graph_coloring",
+        "voice_decision_boundary_viewer"
+      ],
+      "items_succeeded": [
+        "voice_barnsley_fern",
+        "voice_coupled_pendulums",
+        "voice_doppler_effect_demo",
+        "voice_graph_coloring",
+        "voice_decision_boundary_viewer"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "SECOND AUTONOMOUS LEVER: pipeline head-sum is saturated (prior breath finding), but garden VOICE COVERAGE (query_identities / garden_listener) is a fully independent, non-gated metric an autonomous breath CAN move. 94 artifact .gd files lacked @identity; voicing 5 teaching artifacts raised coverage 48pct->49pct. Future breaths should alternate stage-7 captures AND @identity voicing.",
+        "query_identities.py is the cheapest verification for @identity work: a target appearing in its output confirms the block is well-formed without launching Godot. grep -rL @identity commons/artifacts --include=*.gd gives the worklist (89 remain; filter out catalog/UI infra which does not need voice).",
+        "High-value voiceless teaching artifacts remaining: cave_generator, flow_field_painter, glitch_body, graph_grammar_station, control_board, form_studio_station. Skip catalog/*, *UI*, *Presenter*, *Planner*.",
+        "HAZARD: json.dump(open(path,\"w\")) truncates the target before serialization; if serialization raises (e.g. a stray surrogate from a prior emoji/arrow in the existing data), the file is left truncated and uncommitted history is lost. Always serialize to a string first, then write; or write to a temp file and replace. The 2026-06-02 and 2026-06-05 entries were reconstructed after exactly this failure."
+      ],
+      "files_changed": [
+        "commons/artifacts/barnsley_fern/barnsley_fern.gd",
+        "commons/artifacts/coupled_pendulums/coupled_pendulums.gd",
+        "commons/artifacts/doppler_effect_demo/doppler_effect_demo.gd",
+        "commons/artifacts/graph_coloring/graph_coloring.gd",
+        "commons/artifacts/decision_boundary_viewer/decision_boundary_viewer.gd",
+        "doc/reports/breath_log.json"
+      ],
+      "duration_minutes": 25
     }
   ]
 }

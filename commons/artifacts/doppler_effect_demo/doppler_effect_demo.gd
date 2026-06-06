@@ -5,6 +5,38 @@ class_name DopplerEffectDemo
 ## Each ring expands from its emission position, not the current source position,
 ## naturally showing wavelength compression (blue shift) and stretching (red shift).
 
+# @identity
+# essence: a moving source that drops an expanding ring at every tick, each ring
+#   growing from WHERE it was born, not where the source is now. Because the
+#   source keeps moving, the rings pile up ahead and spread out behind — and the
+#   geometry alone, no extra physics, produces the Doppler shift. The DOPPLER
+#   EFFECT shown as pure kinematics: frequency change is just emission positions
+#   left behind by motion.
+# desire: to dissolve the mystery of pitch-shift into something you can see. The
+#   demo wants to prove that the rising siren and the falling one are the SAME
+#   sound — that the shift lives not in the source but in the relationship
+#   between motion and the listener's place. It wants the observer marker to read
+#   blue ahead and red behind from one unchanged emitter.
+# critical_parameter: source_speed relative to wave_expand_speed — their ratio is
+#   the Mach number. Below 1 the rings nest and shift; approaching 1 they bunch
+#   into a wall ahead (the shock cone); the ratio IS how much compression the
+#   observer hears.
+# triggers: _process advances the source, emits a ring every emit_interval, and
+#   expands every live ring; rings store their birth position so expansion is
+#   anchored to emission, not to the source
+# emerges: ahead of the source reads BLUE-SHIFT / COMPRESSED; behind reads
+#   RED-SHIFT / STRETCHED; ratio near 1 reads SHOCK / PILE-UP. Same emitter, the
+#   observer's POSITION relative to motion IS the pitch
+# relationships: cousin to wave and oscillation artifacts (all propagate from a
+#   source, but the Doppler demo adds a MOVING origin); peer to coupled_pendulums
+#   only loosely (both are about relation, here between source and observer);
+#   sibling to any artifact where the same signal reads differently by vantage
+# truth: the Doppler effect is the rule that observed frequency depends on the
+#   relative motion of source and observer — and this demo shows the deeper fact
+#   that it is not a property of the wave but of GEOMETRY: rings centered on past
+#   positions, seen from a place the source is moving toward or away from. Pitch
+#   is parallax for sound.
+
 # --- Configuration ---
 @export var arena_size: float = 0.8
 @export var source_speed: float = 0.15

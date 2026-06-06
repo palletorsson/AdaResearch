@@ -5,6 +5,38 @@ class_name GraphColoring
 ## 10 nodes, 15 edges. Nodes are colored step-by-step with the greedy algorithm:
 ## each node gets the lowest color not used by any neighbor.
 
+# @identity
+# essence: the Petersen graph — 10 nodes, 15 edges, the textbook troublemaker —
+#   colored one node at a time by the greedy rule: take the lowest color no
+#   neighbor already wears. Watching the colors fill in is watching a CONSTRAINT
+#   SATISFACTION resolve itself, where the only law is "adjacent nodes must
+#   differ" and the goal is to obey it with as few colors as possible.
+# desire: to make the chromatic number tangible — to show that "how few colors?"
+#   is a real, hard question with a visible answer (3 for the Petersen graph).
+#   The artifact wants to demonstrate that greedy is fast but not always optimal,
+#   that node order changes the outcome, and that a coloring is a PROOF of
+#   separability.
+# critical_parameter: the adjacency structure together with the visiting order —
+#   the graph fixes the constraints, but the order in which greedy walks the nodes
+#   decides how many colors it spends. Same graph, different order, different
+#   color count: order is the hidden variable in greedy algorithms.
+# triggers: _process steps the greedy coloring every color_step_delay, assigning
+#   each node the minimum free color among its neighbors; the chromatic label
+#   updates as colors are committed
+# emerges: an uncolored node reads UNDECIDED / OPEN-CONSTRAINT; a freshly colored
+#   one reads RESOLVED; the final count reads CHROMATIC-NUMBER. Same Petersen
+#   graph, the coloring IS a partition into independent sets
+# relationships: sibling to other graphtheory artifacts (all treat structure as
+#   nodes-and-edges); cousin to map_table and grid artifacts (both are about
+#   indexing, but coloring indexes by CONFLICT not position); peer to any
+#   constraint-satisfaction or scheduling artifact (exams, registers, frequencies
+#   are all graph coloring in disguise)
+# truth: graph coloring is the rule that the nodes of a graph can be partitioned
+#   into the fewest groups such that no edge joins two members of the same group —
+#   and the chromatic number is the size of that minimum partition. The greedy
+#   walk does not find it by magic; it finds A coloring, and the gap between that
+#   and the true minimum is exactly why the problem is hard.
+
 # --- Configuration ---
 
 @export var node_radius: float = 0.018

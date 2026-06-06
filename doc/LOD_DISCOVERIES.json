@@ -288,6 +288,30 @@
       "topic": "boolean_surfaces",
       "insight": "Informal one-line '# @identity:' headers read as voiceless: read_identity() returns falsy empty dict {}. Garden voice requires the 8-field structured block.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-06-02T07:14:37.400955+00:00",
+      "topic": "stage7 polish captures",
+      "insight": "sequence_pipeline_scorer CAPTURES_DIR was AppData/Local/Godot (nonexistent); Godot writes to AppData/Roaming/Godot. Fixed. randomness now first complete spine sequence (polish 0->100%, 13/13 maps captured via Godot_v4.6-stable_win64.exe non-console).",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-06-04T12:24:02.999056+00:00",
+      "topic": "biome_contributions reorder",
+      "insight": "spine v1.4 order (array=3,color=4,forces=5) differs from biome_contributions.json order (forces=4,array=5). Reorder must adopt spine v1.4. affordances-list schema needs BiomeAccrualManager inner loop change from one-kind-per-entry to per-affordance.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-06-05T07:13:44.652168+00:00",
+      "topic": "autonomous_breath_ceiling",
+      "insight": "21/22 spine sequences are gated at stage 6 vr_testing (human-in-headset only). Autonomous breaths cannot move the head-sum metric; the only lever is stage-7 polish captures. Track COMPLETED-stages-sum, not head-sum, for autonomous progress. One-map-short sequences are the highest value-per-action target.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-06-06T14:16:37.201851+00:00",
+      "topic": "garden_voicing",
+      "insight": "Voice coverage (query_identities/@identity) is the second autonomous lever independent of the human-gated pipeline head-sum. 89 voiceless artifact .gd files remain; filter out catalog/UI/Presenter/Planner infra and voice teaching artifacts with 7-field @identity blocks.",
+      "lod": 3
     }
   ]
 }

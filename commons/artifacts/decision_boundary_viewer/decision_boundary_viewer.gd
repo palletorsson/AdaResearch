@@ -7,6 +7,37 @@ class_name DecisionBoundaryViewer
 ## colored by classification region (light blue vs light red). VR sliders control
 ## w1, w2, and bias. Label3D shows live accuracy %.
 
+# @identity
+# essence: a floor plot scattered with two clusters of dots — class A and class B
+#   — divided by a single straight line you steer with three sliders. The line is
+#   w1*x + w2*y + bias = 0; everything on one side is called blue, the other red,
+#   and the accuracy label tells you how many dots the line got right. It is the
+#   LINEAR CLASSIFIER laid bare: learning reduced to placing one cut.
+# desire: to demystify "the model decides" by letting you BE the model. The
+#   viewer wants to show that a classifier is nothing but a boundary, that
+#   training is just moving that boundary to reduce error, and that some clusters
+#   simply cannot be split by a line — making the need for non-linear models felt,
+#   not asserted.
+# critical_parameter: the weight vector (w1, w2) and bias together — w1 and w2
+#   set the line's ANGLE (its normal direction), bias sets its OFFSET from origin.
+#   These three numbers ARE the model; everything the classifier knows lives in
+#   them, and dragging a slider is gradient descent done by hand.
+# triggers: slider callbacks update w1/w2/bias and recompute the region texture,
+#   reclassify every point, and refresh the accuracy label; _ready seeds the two
+#   clusters and builds the plot quad
+# emerges: a well-placed line reads SEPARATED / HIGH-ACCURACY; a bad angle reads
+#   CONFUSED / CHANCE; overlapping clusters read NOT-LINEARLY-SEPARABLE no matter
+#   the line. Same dots, the three weights ARE the decision
+# relationships: sibling to other machinelearning artifacts (all make a learned
+#   function visible); cousin to graph_coloring (both partition a set under a
+#   rule, here a geometric cut instead of a conflict constraint); peer to any
+#   threshold or boundary artifact where a single parameter divides a continuum
+# truth: a linear classifier is the rule that two classes are separated by a
+#   hyperplane defined by a weight vector and a bias, and classification is just
+#   the sign of w·x + b. This viewer shows the rule's reach and its limit at once:
+#   when the dots interleave, no line is right, and accuracy below 100% is not the
+#   model failing — it is the data refusing to be linear.
+
 # --- Configuration ---
 
 @export var plot_size: float = 0.7
