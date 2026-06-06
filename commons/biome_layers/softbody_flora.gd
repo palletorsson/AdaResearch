@@ -15,6 +15,7 @@ const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/crit
 const CritterSpawnerClass = preload("res://algorithms/nature_system/systems/spawner.gd")
 const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
 
+const KINGDOM_TREE := 0
 const KINGDOM_FLOWER := 2
 const KINGDOM_FUNGUS := 3
 
@@ -54,6 +55,12 @@ func apply(ctx: Dictionary) -> void:
 		for pos in DistributionField.placements_for(ctx, "mushroom"):
 			_spawn(KINGDOM_FUNGUS, pos)
 
+	# plant: paint-only leafy foliage — a small, bushy Tree-kingdom form (the tree
+	# morphology carries real batched leaves), distinct from a tall tree or a bloom.
+	if DistributionField.has_layer_for(ctx, "plant"):
+		for pos in DistributionField.placements_for(ctx, "plant"):
+			_spawn_plant(pos)
+
 
 ## Scatter `n` points in the ring annulus around the grid (the default footprint
 ## when no paint layer authors a distribution).
@@ -73,4 +80,21 @@ func _ring_positions(center: Vector3, dims: Vector3i, cube: float, rng: RandomNu
 func _spawn(kingdom: int, pos: Vector3) -> void:
 	var seed: int = (int(pos.x * 13.0) * 41 + int(pos.z * 13.0) * 23) & 0xFFFF
 	var dna: CritterDNA = CritterDNAClass.random_kingdom(kingdom, seed)
+	_get_spawner().spawn(dna, pos)
+
+
+## A "plant" — a small, bushy, leafy Tree-kingdom form. Reuses the tree morphology
+## (real batched foliage) shrunk down and de-mobilised so it reads as greenery, not
+## a tall tree or a flowering bloom.
+func _spawn_plant(pos: Vector3) -> void:
+	var seed: int = (int(pos.x * 13.0) * 41 + int(pos.z * 13.0) * 23) & 0xFFFF
+	var dna: CritterDNA = CritterDNAClass.random_kingdom(KINGDOM_TREE, seed)
+	dna.scale = 0.22 + 0.10 * (float(seed >> 3 & 7) / 7.0)   # small (shrub/plant sized)
+	dna.segments = 3.0 + float(seed % 2)                      # low depth → bushy, not tall
+	dna.leaf_density = 0.85                                   # lots of foliage
+	dna.mobility = 0.0                                        # never a walking tree
+	var h: float = 0.28 + 0.06 * (float(seed % 7) / 7.0)     # leafy green palette
+	dna.primary_color = Color.from_hsv(h, 0.55, 0.48)
+	dna.secondary_color = Color.from_hsv(h + 0.02, 0.50, 0.42)
+	dna.tertiary_color = Color.from_hsv(h - 0.02, 0.60, 0.55)
 	_get_spawner().spawn(dna, pos)

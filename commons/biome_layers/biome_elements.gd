@@ -13,33 +13,34 @@ class_name BiomeElements
 
 ## Paint order = brush/menu order. ground + shader are the substrate; the rest are
 ## the living kingdoms.
-const NAMES: Array = ["ground", "shader", "tree", "critter", "flower", "mushroom", "large_critter"]
+const NAMES: Array = ["ground", "shader", "tree", "plant", "critter", "flower", "mushroom", "large_critter"]
 
 const LABELS: Dictionary = {
-	"ground": "Ground", "shader": "Shader", "tree": "Tree", "critter": "Critter",
+	"ground": "Ground", "shader": "Shader", "tree": "Tree", "plant": "Plant", "critter": "Critter",
 	"flower": "Flower", "mushroom": "Mushroom", "large_critter": "Big Critter",
 }
 
 # Bright selection colour — brush ghost, menu tile, scrubber overlay.
 const _UI: Dictionary = {
 	"ground": [0.55, 0.45, 0.32], "shader": [0.18, 0.62, 0.55], "tree": [0.45, 0.85, 0.50],
-	"critter": [1.0, 0.70, 0.36], "flower": [1.0, 0.55, 0.76], "mushroom": [0.80, 0.55, 0.40],
-	"large_critter": [0.95, 0.45, 0.30],
+	"plant": [0.40, 0.72, 0.34], "critter": [1.0, 0.70, 0.36], "flower": [1.0, 0.55, 0.76],
+	"mushroom": [0.80, 0.55, 0.40], "large_critter": [0.95, 0.45, 0.30],
 }
 
 # Earthy kingdom colour that bleeds into the ground texture beneath the element.
 # Missing entry (e.g. ground) → no bleed. shader bleeds its own painted "color";
 # the value here is just its fallback.
 const _BLEED: Dictionary = {
-	"shader": [0.18, 0.62, 0.55], "tree": [0.24, 0.50, 0.24], "critter": [0.92, 0.62, 0.30],
-	"large_critter": [0.92, 0.62, 0.30], "flower": [0.95, 0.45, 0.72], "mushroom": [0.55, 0.30, 0.22],
+	"shader": [0.18, 0.62, 0.55], "tree": [0.24, 0.50, 0.24], "plant": [0.30, 0.54, 0.28],
+	"critter": [0.92, 0.62, 0.30], "large_critter": [0.92, 0.62, 0.30],
+	"flower": [0.95, 0.45, 0.72], "mushroom": [0.55, 0.30, 0.22],
 }
 
 # Earliest stage_order at which the element is curriculum-honest (its spawn layer's
 # contribution order in biome_contributions.json). ground/shader are always (0).
 # Data only for now — the bleed/menu gate is a separate follow-up.
 const UNLOCK_ORDER: Dictionary = {
-	"ground": 0, "shader": 0, "tree": 11, "critter": 12, "large_critter": 12,
+	"ground": 0, "shader": 0, "tree": 11, "plant": 13, "critter": 12, "large_critter": 12,
 	"flower": 13, "mushroom": 13,
 }
 

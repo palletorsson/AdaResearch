@@ -31,8 +31,9 @@ func _run() -> void:
 		"params": {}, "grid_dims": Vector3i(10, 1, 10), "cube_size": 1.0,
 		"grid_center": Vector3(5, 0, 5), "rng_seed": 7, "budget_scale": 1.0,
 		"paint_layers": [
-			{"element": "flower", "mode": "plane", "density": 0.5},
+			{"element": "flower", "mode": "plane", "density": 0.4},
 			{"element": "mushroom", "mode": "random", "density": 0.3},
+			{"element": "plant", "mode": "random", "density": 0.3},
 		],
 	})
 
