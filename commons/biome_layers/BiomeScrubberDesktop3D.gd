@@ -106,6 +106,11 @@ var _brush_dirty: bool = false       # set while dragging; triggers rebuild on r
 var _undo_stack: Array = []
 var _redo_stack: Array = []
 const UNDO_CAP := 30
+# Distribution mode per element (M cycles the active one). "brush" = hand-painted
+# mask; the others fill the whole grid by the engine's distribution — reaching the
+# noise/curve/plane/random the brush alone can't gesture. See doc/PAINT_LAYERS.md.
+const PAINT_MODES: Array = ["brush", "noise", "curve", "plane", "random"]
+var _element_mode: Dictionary = {}   # element -> mode (absent = "brush")
 var _brush_overlay: MultiMeshInstance3D = null
 var _brush_menu_ui: Control = null   # right-side brush-settings panel (reused VR menu)
 var _brushtest: String = ""          # --brushtest=<element> headless proof
@@ -544,8 +549,8 @@ func _update_hud() -> void:
 	# Controls footer — brush controls when a paint element is active.
 	if _paint_idx >= 0:
 		var el: String = _paint_elements[_paint_idx]
-		_controls_lbl.text = "🖌 PAINT %s  (size %d · pressure %.1f%s)   L-drag paint · Shift erase   Ctrl+Z undo   B element   , . size   ; ' pressure   C clear   W save" % [
-			el.to_upper(), _brush_radius, _brush_strength, "  · ERASE" if _brush_erase else ""]
+		_controls_lbl.text = "🖌 PAINT %s · %s  (size %d · pressure %.1f%s)   L-drag · Shift erase · M mode · Ctrl+Z undo · B element · , . size · ; ' press · C clear · W save" % [
+			el.to_upper(), _mode_of(el).to_upper(), _brush_radius, _brush_strength, "  · ERASE" if _brush_erase else ""]
 		_controls_lbl.add_theme_color_override("font_color", _element_color(el))
 	else:
 		var save_hint := "      W save→map" if _loaded_map != "" else ""
@@ -695,6 +700,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_A:      _all_on()
 			KEY_W:      _save_overrides()
 			KEY_B:      _cycle_paint_element()
+			KEY_M:      _cycle_paint_mode()
 			KEY_E:
 				_brush_erase = not _brush_erase
 				_update_hud()
@@ -1022,6 +1028,48 @@ func _cycle_paint_element() -> void:
 	_update_hud()
 
 
+func _mode_of(el: String) -> String:
+	return str(_element_mode.get(el, "brush"))
+
+
+## M cycles the active element through brush → noise → curve → plane → random.
+## Non-brush modes fill the grid by distribution (no painting); the overlay + 3D
+## rebuild show the result immediately.
+func _cycle_paint_mode() -> void:
+	if _paint_idx < 0:
+		return
+	var el: String = _paint_elements[_paint_idx]
+	var ni: int = (PAINT_MODES.find(_mode_of(el)) + 1) % PAINT_MODES.size()
+	_element_mode[el] = str(PAINT_MODES[ni])
+	_status_msg = "%s → %s" % [el, _element_mode[el]]
+	_update_brush_overlay()
+	_rebuild()
+	_update_hud()
+
+
+## The paint-layer spec a non-brush element contributes (density from the pressure
+## slider; sensible defaults per mode).
+func _distribution_layer(el: String, mode: String) -> Dictionary:
+	var layer: Dictionary = {"element": el, "mode": mode, "density": _brush_strength}
+	match mode:
+		"noise":
+			layer["scale"] = 0.3
+			layer["threshold"] = 0.45
+		"curve":
+			layer["axis"] = "radial"
+			layer["falloff"] = "smooth"
+	if el == "ground":
+		layer["height"] = 1.5
+	elif el == "shader":
+		var c := _element_color(el)
+		layer["color"] = [c.r, c.g, c.b]
+	return layer
+
+
+func _overlay_seed() -> int:
+	return hash(_loaded_map) if _loaded_map != "" else 0xB10E
+
+
 # ── Right-side brush-settings menu signals ────────────────────────────
 func _on_menu_element(element_name: String) -> void:
 	var idx := _paint_elements.find(element_name)
@@ -1109,6 +1157,7 @@ func _redo() -> void:
 
 func _stamp(cx: int, cz: int) -> void:
 	var el: String = _paint_elements[_paint_idx]
+	_element_mode[el] = "brush"   # painting a mask implies brush mode for this element
 	if not _brush_fields.has(el):
 		var nf := PackedFloat32Array()
 		nf.resize(grid_w * grid_d)
@@ -1164,7 +1213,13 @@ func _update_brush_overlay() -> void:
 		return
 	var el: String = _paint_elements[_paint_idx]
 	var col := _element_color(el)
-	var field: PackedFloat32Array = _brush_fields.get(el, PackedFloat32Array())
+	# Brush mode → show the painted mask. Distribution mode → show the generated
+	# field so you SEE where noise/curve/plane/random will place.
+	var field: PackedFloat32Array
+	if _mode_of(el) == "brush":
+		field = _brush_fields.get(el, PackedFloat32Array())
+	else:
+		field = DistributionFieldLib.build_field(_distribution_layer(el, _mode_of(el)), grid_w, grid_d, _overlay_seed())
 	for z in grid_d:
 		for x in grid_w:
 			var i := z * grid_w + x
@@ -1177,15 +1232,28 @@ func _update_brush_overlay() -> void:
 func _effective_paint_layers() -> Array:
 	var out: Array = []
 	var painted: Dictionary = {}
+	# Elements the user has authored: brush-painted, or set to a distribution mode.
+	var active: Dictionary = {}
 	for el in _brush_fields:
-		painted[el] = true
-		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_brush(_brush_fields[el])}
-		if el == "ground":
-			layer["height"] = 1.5   # painted bumps rise to ~1.5 m
-		elif el == "shader":
-			var c := _element_color(el)
-			layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture
-		out.append(layer)
+		active[el] = true
+	for el in _element_mode:
+		if _mode_of(el) != "brush":
+			active[el] = true
+	for el in active:
+		if _mode_of(el) == "brush":
+			if not _brush_fields.has(el):
+				continue
+			painted[el] = true
+			var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_brush(_brush_fields[el])}
+			if el == "ground":
+				layer["height"] = 1.5   # painted bumps rise to ~1.5 m
+			elif el == "shader":
+				var c := _element_color(el)
+				layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture
+			out.append(layer)
+		else:
+			painted[el] = true
+			out.append(_distribution_layer(el, _mode_of(el)))
 	var base: Array = _cli_paint if not _cli_paint.is_empty() else _map_paint_layers
 	for layer in base:
 		if layer is Dictionary and not painted.has(str(layer.get("element", ""))):
