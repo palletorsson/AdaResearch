@@ -13,18 +13,18 @@ class_name BiomeElements
 
 ## Paint order = brush/menu order. ground + shader are the substrate; the rest are
 ## the living kingdoms.
-const NAMES: Array = ["ground", "shader", "tree", "plant", "critter", "flower", "mushroom", "large_critter"]
+const NAMES: Array = ["ground", "shader", "tree", "plant", "critter", "flower", "mushroom", "large_critter", "object"]
 
 const LABELS: Dictionary = {
 	"ground": "Ground", "shader": "Shader", "tree": "Tree", "plant": "Plant", "critter": "Critter",
-	"flower": "Flower", "mushroom": "Mushroom", "large_critter": "Big Critter",
+	"flower": "Flower", "mushroom": "Mushroom", "large_critter": "Big Critter", "object": "Object",
 }
 
 # Bright selection colour — brush ghost, menu tile, scrubber overlay.
 const _UI: Dictionary = {
 	"ground": [0.55, 0.45, 0.32], "shader": [0.18, 0.62, 0.55], "tree": [0.45, 0.85, 0.50],
 	"plant": [0.40, 0.72, 0.34], "critter": [1.0, 0.70, 0.36], "flower": [1.0, 0.55, 0.76],
-	"mushroom": [0.80, 0.55, 0.40], "large_critter": [0.95, 0.45, 0.30],
+	"mushroom": [0.80, 0.55, 0.40], "large_critter": [0.95, 0.45, 0.30], "object": [0.85, 0.45, 0.95],
 }
 
 # Earthy kingdom colour that bleeds into the ground texture beneath the element.
@@ -41,7 +41,7 @@ const _BLEED: Dictionary = {
 # Data only for now — the bleed/menu gate is a separate follow-up.
 const UNLOCK_ORDER: Dictionary = {
 	"ground": 0, "shader": 0, "tree": 11, "plant": 13, "critter": 12, "large_critter": 12,
-	"flower": 13, "mushroom": 13,
+	"flower": 13, "mushroom": 13, "object": 1,
 }
 
 

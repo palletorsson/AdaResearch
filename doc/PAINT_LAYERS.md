@@ -19,7 +19,7 @@ element       what it places / modulates          engine (today)
 ground        heightfield / bump → walkable mesh   ground_substrate    ✅ wired (default-on, flat)
 shader        paint a colour into the ground tex    ground_substrate    ✅ wired (paint + plant bleed)
 particle      CPU/GPU particle field                — (later)
-object        any artifact, by density              biome_paint_dispatcher (infra-heavy, TODO)
+object        any registered artifact, scattered     object_scatter      ✅ wired (spine-gated palette)
 flower        flowers                               softbody_flora      ✅ wired
 mushroom      earthy/toadstool softbodies           softbody_flora      ✅ wired
 tree          L-system trees                        lsystem_trees       ✅ wired
@@ -222,12 +222,36 @@ Point_Lines paints: tree-noise                            → renders: [Point_On
 Point_Trace paints: shader-wash                           → renders: [Point_One's 2] + [tree] + [shader]
 ```
 
+## Object scatter (any artifact — pop-art, prefab, DNA, mesh, debris)
+
+The `object` element is the generic artifact placer: it scatters a **registered
+artifact** at the painted placements, named in the layer's `params.artifact`
+(default `prefab_sculpture`). One layer, the whole artifact catalogue.
+
+```json
+{ "element": "object", "mode": "random", "density": 0.2, "params": { "artifact": "prefab_sculpture" } }
+```
+
+- `ArtifactPalette` (`artifact_palette.gd`) scans `commons/artifacts/registry/*.json`
+  → `name → scene` (2000+ artifacts) and `name → unlock_order` (the spine `order`
+  of the artifact's `sequence`; no sequence → available from the start).
+- **The palette widens as the spine progresses.** `object_scatter` only places an
+  artifact once `stage_order ≥ its unlock_order` — so the made-world possibilities
+  the biome can seed grow with the curriculum (`ArtifactPalette.available(stage)`).
+- Kept **sparse** (`MAX_OBJECTS`) — real artifacts are heavy.
+- `params` (minus `artifact`) is handed to the artifact's `apply_grid_config` (mode,
+  colour, seed…), so e.g. `prefab_sculpture` can be slid between raw / pop / bio.
+
+Future: an in-tool **artifact picker** (choose the artifact + browse the unlocked
+palette) instead of authoring `params.artifact` by hand; mesh-instance batching for
+dense scatter.
+
 ## Not yet (next steps)
 
 - **Substrate engines** — `particle` (CPU/GPU particle field). Reuses
   `build_field`; consumes the field, not placements. (`ground` heightfield and
   `shader` colour overlay are now wired.)
-- **`object` / `mushroom` / `large_critter`** spawn wiring (same pattern as the
-  three already wired).
+- **`mushroom` / `large_critter`** already wire via softbody_flora / dna_creatures;
+  `object` scatter is wired (above).
 - **Per-shader colour palette** — `shader` paints one colour at a time (the menu's
   element colour); a palette to pick arbitrary colours mid-stroke is future work.
