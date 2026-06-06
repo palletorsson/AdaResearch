@@ -88,9 +88,9 @@ func _spawn(kingdom: int, pos: Vector3) -> void:
 func _build_plant_tufts(positions: Array, base_seed: int) -> void:
 	if positions.is_empty():
 		return
-	var blades_per := 9
+	var blades_per := 11
 	var blade := QuadMesh.new()
-	blade.size = Vector2(0.07, 1.0)            # unit-tall blade; stretched per instance
+	blade.size = Vector2(0.07, 1.0)            # unit blade; width/height stretched per instance
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.use_colors = true                       # must precede instance_count
@@ -103,12 +103,16 @@ func _build_plant_tufts(positions: Array, base_seed: int) -> void:
 	for pos in positions:
 		for b in blades_per:
 			var yaw: float = rng.randf() * TAU
-			var lean: float = deg_to_rad(rng.randf_range(6.0, 30.0))
-			var h: float = 0.30 + rng.randf() * 0.45
+			var lean: float = deg_to_rad(rng.randf_range(4.0, 34.0))
+			# Mix broad leaves and thin blades: wide → short, thin → tall (like real
+			# foliage — a few leaves with grass between them).
+			var wide: float = rng.randf()
+			var w: float = lerpf(0.5, 1.7, wide)
+			var h: float = lerpf(0.55, 0.30, wide) + rng.randf() * 0.12
 			var rot := Basis.from_euler(Vector3(lean, yaw, 0.0))
 			var origin: Vector3 = pos + (rot * Vector3.UP) * (h * 0.5)   # root the base at pos
-			mm.set_instance_transform(i, Transform3D(rot.scaled(Vector3(1.0, h, 1.0)), origin))
-			mm.set_instance_color(i, Color.from_hsv(0.26 + rng.randf() * 0.10, 0.5 + rng.randf() * 0.2, 0.38 + rng.randf() * 0.22))
+			mm.set_instance_transform(i, Transform3D(rot.scaled(Vector3(w, h, 1.0)), origin))
+			mm.set_instance_color(i, Color.from_hsv(0.25 + rng.randf() * 0.11, 0.5 + rng.randf() * 0.22, 0.34 + rng.randf() * 0.24))
 			i += 1
 
 	var mmi := MultiMeshInstance3D.new()
