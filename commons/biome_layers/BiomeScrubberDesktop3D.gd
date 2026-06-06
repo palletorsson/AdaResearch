@@ -45,6 +45,7 @@ const BrushMenuScene = preload("res://commons/hazards/becoming_catalyst/biome_br
 const SequenceAccrualLib = preload("res://commons/biome_layers/sequence_accrual.gd")
 const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
 const DistributionFieldLib = preload("res://commons/biome_layers/distribution_field.gd")
+const ArtifactPaletteLib = preload("res://commons/biome_layers/artifact_palette.gd")
 @export var grid_size: int = 20          # synthetic default (square)
 @export var cube_size: float = 1.0
 @export var auto_spin: bool = false   # OFF — a spinning scene fights painting (R-drag still orbits)
@@ -111,6 +112,16 @@ const UNDO_CAP := 30
 # noise/curve/plane/random the brush alone can't gesture. See doc/PAINT_LAYERS.md.
 const PAINT_MODES: Array = ["brush", "noise", "curve", "plane", "random", "fractal"]
 var _element_mode: Dictionary = {}   # element -> mode (absent = "brush")
+# Per-element artifact list (the picker, toggled with O). When non-empty, the
+# element's emitted layer carries `artifacts: [...]` → object_scatter scatters them
+# (picked per placement) by the layer's distribution, instead of the morphology.
+var _element_artifacts: Dictionary = {}   # element -> Array[name]
+var _picker_root: PanelContainer = null
+var _picker_filter: LineEdit = null
+var _picker_list: VBoxContainer = null
+var _picker_header: Label = null
+var _picker_sel: Label = null
+var _picker_visible: bool = false
 var _brush_overlay: MultiMeshInstance3D = null
 var _brush_menu_ui: Control = null   # right-side brush-settings panel (reused VR menu)
 var _brushtest: String = ""          # --brushtest=<element> headless proof
@@ -479,19 +490,36 @@ func _save_overrides() -> void:
 	var settings: Dictionary = _map_data.get("settings", {})
 	settings["biome_overrides"] = ov
 	_map_data["settings"] = settings
-	# Persist painted brush fields into the map's top-level paint_layers[].
-	# A painted element replaces any existing layer for that element; other
-	# layers (plane/noise/etc. the scrubber doesn't paint) are preserved.
-	if not _brush_fields.is_empty():
+	# Persist the authored layers into the map's top-level paint_layers[]: brush
+	# fields, distribution modes, and picked artifact lists. An authored element
+	# replaces any existing layer for it; other layers are preserved.
+	var authored: Dictionary = {}
+	for el in _brush_fields:
+		authored[el] = true
+	for el in _element_mode:
+		if _mode_of(el) != "brush":
+			authored[el] = true
+	for el in _element_artifacts:
+		if not (_element_artifacts[el] as Array).is_empty():
+			authored[el] = true
+	if not authored.is_empty():
 		var existing: Array = _map_data.get("paint_layers", []) if (_map_data.get("paint_layers") is Array) else []
 		var kept: Array = []
 		for layer in existing:
-			if layer is Dictionary and not _brush_fields.has(str(layer.get("element", ""))):
+			if layer is Dictionary and not authored.has(str(layer.get("element", ""))):
 				kept.append(layer)
-		for el in _brush_fields:
-			var gl := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_brush(_brush_fields[el])}
-			if el == "ground":
-				gl["height"] = 1.5
+		for el in authored:
+			var gl: Dictionary
+			if _brush_fields.has(el) and _mode_of(el) == "brush":
+				gl = {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_brush(_brush_fields[el])}
+				if el == "ground":
+					gl["height"] = 1.5
+				elif el == "shader":
+					var c := _element_color(el)
+					gl["color"] = [c.r, c.g, c.b]
+			else:
+				gl = _distribution_layer(el, _mode_of(el))
+			_attach_artifacts(gl, el)
 			kept.append(gl)
 		_map_data["paint_layers"] = kept
 	var path := "res://commons/maps/%s/map_data.json" % _loaded_map
@@ -549,8 +577,10 @@ func _update_hud() -> void:
 	# Controls footer — brush controls when a paint element is active.
 	if _paint_idx >= 0:
 		var el: String = _paint_elements[_paint_idx]
-		_controls_lbl.text = "🖌 PAINT %s · %s  (size %d · pressure %.1f%s)   L-drag · Shift erase · M mode · Ctrl+Z undo · B element · , . size · ; ' press · C clear · W save" % [
-			el.to_upper(), _mode_of(el).to_upper(), _brush_radius, _brush_strength, "  · ERASE" if _brush_erase else ""]
+		var art_n: int = _element_artifacts.get(el, []).size()
+		var art_tag: String = ("  · %d artifacts" % art_n) if art_n > 0 else ""
+		_controls_lbl.text = "🖌 PAINT %s · %s%s  (size %d · pressure %.1f%s)   L-drag · Shift erase · M mode · O artifacts · Ctrl+Z undo · B element · , . size · C clear · W save" % [
+			el.to_upper(), _mode_of(el).to_upper(), art_tag, _brush_radius, _brush_strength, "  · ERASE" if _brush_erase else ""]
 		_controls_lbl.add_theme_color_override("font_color", _element_color(el))
 	else:
 		var save_hint := "      W save→map" if _loaded_map != "" else ""
@@ -701,6 +731,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_W:      _save_overrides()
 			KEY_B:      _cycle_paint_element()
 			KEY_M:      _cycle_paint_mode()
+			KEY_O:      _toggle_picker()
+			KEY_ESCAPE:
+				if _picker_visible: _toggle_picker()
 			KEY_E:
 				_brush_erase = not _brush_erase
 				_update_hud()
@@ -981,6 +1014,8 @@ func _build_ui() -> void:
 	if _brush_menu_ui.has_signal("pressure_changed"):
 		_brush_menu_ui.pressure_changed.connect(_on_menu_pressure)
 
+	_build_picker(layer)
+
 	# Error overlay label (normally hidden) — used only when an autoload
 	# is missing, before the info labels have anything to show.
 	_hud = _mk_label(layer, "", 15, C_BAD, Vector2(20, BAR_H + 8))
@@ -989,6 +1024,109 @@ func _build_ui() -> void:
 # ── Brush painting (step 3) ──────────────────────────────────────────
 ## A flat grid of per-cell quads over the ground; alpha = the active element's
 ## brush density. Built once, recoloured as you paint.
+# ── Artifact picker (O) — compose the active element's artifact list ──────
+func _build_picker(layer: CanvasLayer) -> void:
+	_picker_root = PanelContainer.new()
+	_picker_root.anchor_left = 0.5; _picker_root.anchor_right = 0.5
+	_picker_root.anchor_top = 1.0;  _picker_root.anchor_bottom = 1.0
+	_picker_root.offset_left = -280.0; _picker_root.offset_right = 280.0
+	_picker_root.offset_top = -382.0;  _picker_root.offset_bottom = -18.0
+	_picker_root.add_theme_stylebox_override("panel", _new_stylebox(C_BG, 0.0, 8.0))
+	_picker_root.visible = false
+	layer.add_child(_picker_root)
+	var margin := MarginContainer.new()
+	for m in ["margin_left", "margin_right", "margin_top", "margin_bottom"]:
+		margin.add_theme_constant_override(m, 10)
+	_picker_root.add_child(margin)
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 5)
+	margin.add_child(vb)
+	_picker_header = _mk_label(vb, "ARTIFACTS", 14, C_ACCENT)
+	_picker_filter = LineEdit.new()
+	_picker_filter.placeholder_text = "filter artifacts…"
+	_picker_filter.custom_minimum_size = Vector2(520, 28)
+	_picker_filter.text_changed.connect(_on_picker_filter_changed)
+	vb.add_child(_picker_filter)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(520, 250)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	vb.add_child(scroll)
+	_picker_list = VBoxContainer.new()
+	_picker_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_picker_list.add_theme_constant_override("separation", 2)
+	scroll.add_child(_picker_list)
+	_picker_sel = _mk_label(vb, "", 11, C_DIM)
+
+
+func _active_paint_element() -> String:
+	return str(_paint_elements[_paint_idx]) if _paint_idx >= 0 else "object"
+
+
+func _toggle_picker() -> void:
+	_picker_visible = not _picker_visible
+	if _picker_root:
+		_picker_root.visible = _picker_visible
+	if _picker_visible:
+		_refresh_picker()
+		if _picker_filter:
+			_picker_filter.grab_focus()
+
+
+func _on_picker_filter_changed(_t: String) -> void:
+	_refresh_picker()
+
+
+## Rebuild the filtered artifact list (the unlocked palette at this stage, narrowed
+## by the filter), marking the ones already in the active element's list.
+func _refresh_picker() -> void:
+	if _picker_root == null or not _picker_visible:
+		return
+	var el := _active_paint_element()
+	_picker_header.text = "ARTIFACTS  ·  %s   (click toggles · O/Esc closes)" % el.to_upper()
+	for c in _picker_list.get_children():
+		c.queue_free()
+	var sel: Array = _element_artifacts.get(el, [])
+	var q := _picker_filter.text.strip_edges().to_lower()
+	var avail: Array = ArtifactPaletteLib.available(_stage)
+	var shown := 0
+	for raw in avail:
+		if shown >= 50:
+			break
+		var nm := str(raw)
+		if q != "" and not nm.to_lower().contains(q):
+			continue
+		var b := Button.new()
+		b.text = ("✓  " if nm in sel else "+  ") + nm
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.focus_mode = Control.FOCUS_NONE
+		b.add_theme_font_size_override("font_size", 12)
+		b.add_theme_color_override("font_color", C_GOLD if nm in sel else C_TEXT)
+		b.pressed.connect(_on_pick_artifact.bind(nm))
+		_picker_list.add_child(b)
+		shown += 1
+	_picker_sel.text = "%s list: %d selected   ·   showing %d / %d unlocked @stage %d" % [el, sel.size(), shown, avail.size(), _stage]
+
+
+func _on_pick_artifact(nm: String) -> void:
+	var el := _active_paint_element()
+	var lst: Array = _element_artifacts.get(el, [])
+	if nm in lst:
+		lst.erase(nm)
+	else:
+		lst.append(nm)
+	_element_artifacts[el] = lst
+	_refresh_picker()
+	_rebuild()
+
+
+## Attach the active artifact list (if any) to an emitted paint layer, so
+## object_scatter places those artifacts instead of the element's morphology.
+func _attach_artifacts(layer: Dictionary, el: String) -> void:
+	var lst: Array = _element_artifacts.get(el, [])
+	if not lst.is_empty():
+		layer["artifacts"] = lst.duplicate()
+
+
 func _build_brush_overlay() -> void:
 	_brush_overlay = MultiMeshInstance3D.new()
 	_brush_overlay.name = "BrushOverlay"
@@ -1243,9 +1381,19 @@ func _effective_paint_layers() -> Array:
 	for el in _element_mode:
 		if _mode_of(el) != "brush":
 			active[el] = true
+	for el in _element_artifacts:
+		if not (_element_artifacts[el] as Array).is_empty():
+			active[el] = true   # a picked artifact list is enough to populate the field
 	for el in active:
 		if _mode_of(el) == "brush":
 			if not _brush_fields.has(el):
+				# Artifacts picked but no brush stroke → scatter them across the map
+				# by a default distribution, so picking alone populates the field.
+				if not (_element_artifacts.get(el, []) as Array).is_empty():
+					painted[el] = true
+					var dl0 := _distribution_layer(el, "random")
+					_attach_artifacts(dl0, el)
+					out.append(dl0)
 				continue
 			painted[el] = true
 			var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _field_to_brush(_brush_fields[el])}
@@ -1254,10 +1402,13 @@ func _effective_paint_layers() -> Array:
 			elif el == "shader":
 				var c := _element_color(el)
 				layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture
+			_attach_artifacts(layer, el)   # picked artifacts → object_scatter places them here
 			out.append(layer)
 		else:
 			painted[el] = true
-			out.append(_distribution_layer(el, _mode_of(el)))
+			var dl := _distribution_layer(el, _mode_of(el))
+			_attach_artifacts(dl, el)
+			out.append(dl)
 	var base: Array = _cli_paint if not _cli_paint.is_empty() else _map_paint_layers
 	for layer in base:
 		if layer is Dictionary and not painted.has(str(layer.get("element", ""))):

@@ -252,9 +252,15 @@ sees it, so the element's default ring is suppressed.
 - `params` (minus `artifact`) is handed to the artifact's `apply_grid_config` (mode,
   colour, seed…), so e.g. `prefab_sculpture` can be slid between raw / pop / bio.
 
-Future: an in-tool **artifact picker** (choose the artifact + browse the unlocked
-palette) instead of authoring `params.artifact` by hand; mesh-instance batching for
-dense scatter.
+**Composing the list — the picker.** In the desktop scrubber, press **O** to open
+the artifact picker for the active element: a filter box over the unlocked palette
+(`ArtifactPalette.available(stage)`), click an artifact to toggle it into that
+element's list. The list is attached to the element's painted/distribution layer
+(any element), so picking + a mode (or a brush stroke) scatters it; picking alone
+scatters by a default distribution. **W** saves the lists into the map's
+`paint_layers`. Per-element lists are independent (mushroom list ≠ object list).
+
+Future: mesh-instance batching for dense scatter; the same picker in the VR menu.
 
 ## Not yet (next steps)
 
