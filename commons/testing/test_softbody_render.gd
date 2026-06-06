@@ -33,7 +33,7 @@ func _run() -> void:
 		"paint_layers": [
 			{"element": "flower", "mode": "plane", "density": 0.4},
 			{"element": "mushroom", "mode": "random", "density": 0.3},
-			{"element": "plant", "mode": "random", "density": 0.3},
+			{"element": "plant", "mode": "random", "density": 0.4},
 		],
 	})
 

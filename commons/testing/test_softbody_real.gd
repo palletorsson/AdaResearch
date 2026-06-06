@@ -29,19 +29,20 @@ func _initialize() -> void:
 	await process_frame
 	await process_frame
 
-	var flower := 0; var fungus := 0; var tree := 0; var total := 0
+	var flower := 0; var fungus := 0; var total := 0
+	var plant_blades := 0
 	for c in node.get_children():
 		if c.has_method("get_kingdom_name"):
 			total += 1
 			match c.get_kingdom_name():
 				"flower": flower += 1
 				"fungus": fungus += 1
-				"tree": tree += 1
-	print("spawned entities: total=%d flower=%d fungus=%d plant(tree)=%d" % [total, flower, fungus, tree])
-	_ok(total > 0, "spawned real DNA CritterEntity organisms (not placeholder meshes)")
-	_ok(flower > 0, "flowers are Flower-kingdom DNA")
-	_ok(fungus > 0, "mushrooms are Fungus-kingdom DNA")
-	_ok(tree > 0, "plants are (small, bushy) Tree-kingdom DNA")
+		elif c.name == "PlantFoliage" and c is MultiMeshInstance3D:
+			plant_blades = c.multimesh.instance_count
+	print("spawned: flower=%d fungus=%d (DNA), plant blades=%d (foliage MultiMesh)" % [flower, fungus, plant_blades])
+	_ok(flower > 0, "flowers are Flower-kingdom DNA meshes")
+	_ok(fungus > 0, "mushrooms are Fungus-kingdom DNA meshes")
+	_ok(plant_blades > 0, "plants are batched grass-tuft foliage (one MultiMesh)")
 
 	print("RESULT: ", "OK" if _fails == 0 else "%d FAIL" % _fails)
 	quit(_fails)

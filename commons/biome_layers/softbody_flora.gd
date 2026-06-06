@@ -15,7 +15,6 @@ const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/crit
 const CritterSpawnerClass = preload("res://algorithms/nature_system/systems/spawner.gd")
 const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
 
-const KINGDOM_TREE := 0
 const KINGDOM_FLOWER := 2
 const KINGDOM_FUNGUS := 3
 
@@ -55,11 +54,11 @@ func apply(ctx: Dictionary) -> void:
 		for pos in DistributionField.placements_for(ctx, "mushroom"):
 			_spawn(KINGDOM_FUNGUS, pos)
 
-	# plant: paint-only leafy foliage — a small, bushy Tree-kingdom form (the tree
-	# morphology carries real batched leaves), distinct from a tall tree or a bloom.
+	# plant: leafy grass-tuft FOLIAGE — a batched fan of thin green blades per
+	# cluster. One draw call for all plants; reads as ground foliage, distinct from
+	# trees, blooms, and mushrooms.
 	if DistributionField.has_layer_for(ctx, "plant"):
-		for pos in DistributionField.placements_for(ctx, "plant"):
-			_spawn_plant(pos)
+		_build_plant_tufts(DistributionField.placements_for(ctx, "plant"), int(ctx.get("rng_seed", 0)))
 
 
 ## Scatter `n` points in the ring annulus around the grid (the default footprint
@@ -83,18 +82,42 @@ func _spawn(kingdom: int, pos: Vector3) -> void:
 	_get_spawner().spawn(dna, pos)
 
 
-## A "plant" — a small, bushy, leafy Tree-kingdom form. Reuses the tree morphology
-## (real batched foliage) shrunk down and de-mobilised so it reads as greenery, not
-## a tall tree or a flowering bloom.
-func _spawn_plant(pos: Vector3) -> void:
-	var seed: int = (int(pos.x * 13.0) * 41 + int(pos.z * 13.0) * 23) & 0xFFFF
-	var dna: CritterDNA = CritterDNAClass.random_kingdom(KINGDOM_TREE, seed)
-	dna.scale = 0.22 + 0.10 * (float(seed >> 3 & 7) / 7.0)   # small (shrub/plant sized)
-	dna.segments = 3.0 + float(seed % 2)                      # low depth → bushy, not tall
-	dna.leaf_density = 0.85                                   # lots of foliage
-	dna.mobility = 0.0                                        # never a walking tree
-	var h: float = 0.28 + 0.06 * (float(seed % 7) / 7.0)     # leafy green palette
-	dna.primary_color = Color.from_hsv(h, 0.55, 0.48)
-	dna.secondary_color = Color.from_hsv(h + 0.02, 0.50, 0.42)
-	dna.tertiary_color = Color.from_hsv(h - 0.02, 0.60, 0.55)
-	_get_spawner().spawn(dna, pos)
+## Leafy grass-tuft foliage: one batched MultiMesh of thin green blades fanning up
+## from each plant position. Cheap (1 draw call for all plants) and unmistakably
+## foliage — no trunk, no bloom, no glossy sheen. Deterministic from the seed.
+func _build_plant_tufts(positions: Array, base_seed: int) -> void:
+	if positions.is_empty():
+		return
+	var blades_per := 9
+	var blade := QuadMesh.new()
+	blade.size = Vector2(0.07, 1.0)            # unit-tall blade; stretched per instance
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true                       # must precede instance_count
+	mm.mesh = blade
+	mm.instance_count = positions.size() * blades_per
+
+	var rng := RandomNumberGenerator.new()
+	rng.seed = base_seed + 137
+	var i := 0
+	for pos in positions:
+		for b in blades_per:
+			var yaw: float = rng.randf() * TAU
+			var lean: float = deg_to_rad(rng.randf_range(6.0, 30.0))
+			var h: float = 0.30 + rng.randf() * 0.45
+			var rot := Basis.from_euler(Vector3(lean, yaw, 0.0))
+			var origin: Vector3 = pos + (rot * Vector3.UP) * (h * 0.5)   # root the base at pos
+			mm.set_instance_transform(i, Transform3D(rot.scaled(Vector3(1.0, h, 1.0)), origin))
+			mm.set_instance_color(i, Color.from_hsv(0.26 + rng.randf() * 0.10, 0.5 + rng.randf() * 0.2, 0.38 + rng.randf() * 0.22))
+			i += 1
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "PlantFoliage"
+	mmi.multimesh = mm
+	var mat := StandardMaterial3D.new()
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED      # blades visible from both sides
+	mat.vertex_color_use_as_albedo = true
+	mat.roughness = 0.9
+	mmi.material_override = mat
+	add_child(mmi)
+	print("  [softbody_flora] %d plant tufts (%d blades) → 1 draw call" % [positions.size(), mm.instance_count])
