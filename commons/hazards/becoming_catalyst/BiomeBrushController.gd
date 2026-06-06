@@ -23,6 +23,7 @@ var _elem_idx: int = 0
 var _radius: int = 2
 var _strength: float = 0.6
 var _fields: Dictionary = {}         # element -> PackedFloat32Array (grid_w*grid_d)
+var _element_artifacts: Dictionary = {}  # element -> Array[name] (the VR picker's lists)
 var _stroking: bool = false
 var _preview_tick: int = 0
 
@@ -58,6 +59,25 @@ func set_element(element_name: String) -> void:
 	if idx >= 0:
 		_elem_idx = idx
 		_recolour_ghost()
+
+
+## Toggle an artifact in the ACTIVE element's list (from the menu's picker). The
+## element's painted layer then carries `artifacts: [...]` so object_scatter places
+## those instead of the default morphology. Returns the updated list.
+func toggle_artifact(artifact_name: String) -> Array:
+	var el: String = active_element()
+	var lst: Array = _element_artifacts.get(el, [])
+	if artifact_name in lst:
+		lst.erase(artifact_name)
+	else:
+		lst.append(artifact_name)
+	_element_artifacts[el] = lst
+	return lst
+
+
+## The active element's artifact list (for the menu to mark selected entries).
+func active_artifacts() -> Array:
+	return _element_artifacts.get(active_element(), [])
 
 
 ## Set the brush radius in cells (from the menu's size slider).
@@ -116,7 +136,18 @@ func paint_layers_payload() -> Array:
 		elif el == "shader":
 			var c := _elem_colour(el)
 			layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture
+		var arts: Array = _element_artifacts.get(el, [])
+		if not arts.is_empty():
+			layer["artifacts"] = arts.duplicate()   # object_scatter places these here
 		out.append(layer)
+	# Elements with a picked artifact list but no brush stroke → scatter them by a
+	# default distribution so picking alone populates the field (matches desktop).
+	for el in _element_artifacts:
+		if painted.has(el) or (_element_artifacts[el] as Array).is_empty():
+			continue
+		painted[el] = true
+		out.append({"element": el, "mode": "random", "density": _strength,
+			"artifacts": (_element_artifacts[el] as Array).duplicate()})
 	if _data and _data.has_method("get_paint_layers"):
 		for layer in _data.get_paint_layers():
 			if layer is Dictionary and not painted.has(str(layer.get("element", ""))):

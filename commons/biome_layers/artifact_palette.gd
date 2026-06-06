@@ -14,6 +14,7 @@ const SPINE_PATH := "res://commons/maps/curriculum_spine.json"
 
 static var _scene_by_name: Dictionary = {}   # name -> scene path
 static var _order_by_name: Dictionary = {}   # name -> unlock stage_order
+static var _cat_by_name: Dictionary = {}     # name -> registry category
 static var _loaded: bool = false
 
 
@@ -51,6 +52,7 @@ static func _ensure() -> void:
 			# sequence → 1 (available from the start, e.g. lab props, branches).
 			var seq := str(e.get("sequence", ""))
 			_order_by_name[name] = int(seq_order.get(seq, 1))
+			_cat_by_name[name] = str(e.get("category", "misc")).strip_edges() if str(e.get("category", "")) != "" else "misc"
 
 
 static func _load_spine_orders() -> Dictionary:
@@ -107,3 +109,33 @@ static func available(stage_order: int) -> Array:
 static func count() -> int:
 	_ensure()
 	return _scene_by_name.size()
+
+
+## The registry category of an artifact ("misc" if untagged).
+static func category_of(name: String) -> String:
+	_ensure()
+	return str(_cat_by_name.get(name, "misc"))
+
+
+## All categories that have at least one artifact unlocked at `stage_order`, sorted.
+## The VR picker browses by these (no keyboard needed).
+static func categories(stage_order: int = 9999) -> Array:
+	_ensure()
+	var seen: Dictionary = {}
+	for name in _cat_by_name:
+		if int(_order_by_name.get(name, 1)) <= stage_order:
+			seen[str(_cat_by_name[name])] = true
+	var out: Array = seen.keys()
+	out.sort()
+	return out
+
+
+## Artifact names in `cat` unlocked at `stage_order`, sorted (the picker's page set).
+static func names_in_category(cat: String, stage_order: int = 9999) -> Array:
+	_ensure()
+	var out: Array = []
+	for name in _cat_by_name:
+		if str(_cat_by_name[name]) == cat and int(_order_by_name.get(name, 1)) <= stage_order:
+			out.append(name)
+	out.sort()
+	return out

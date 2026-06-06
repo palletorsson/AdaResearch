@@ -548,13 +548,26 @@ func _connect_biome_menu(vp: Node) -> void:
 		_biome_menu_ui.size_changed.connect(_on_biome_menu_size)
 	if _biome_menu_ui.has_signal("pressure_changed") and not _biome_menu_ui.pressure_changed.is_connected(_on_biome_menu_pressure):
 		_biome_menu_ui.pressure_changed.connect(_on_biome_menu_pressure)
+	if _biome_menu_ui.has_signal("artifact_toggle_requested") and not _biome_menu_ui.artifact_toggle_requested.is_connected(_on_biome_menu_artifact):
+		_biome_menu_ui.artifact_toggle_requested.connect(_on_biome_menu_artifact)
 	print("[Catalyst] Biome menu connected")
 
 
 func _on_biome_menu_element(element_name: String) -> void:
 	if _biome_brush:
 		_biome_brush.set_element(element_name)
+		if _biome_menu_ui and _biome_menu_ui.has_method("refresh_artifact_marks"):
+			_biome_menu_ui.refresh_artifact_marks(_biome_brush.active_artifacts())
 	_flash_label("BRUSH: " + element_name.to_upper(), Color(0.6, 0.95, 0.7))
+
+
+func _on_biome_menu_artifact(artifact_name: String) -> void:
+	if not _biome_brush:
+		return
+	var lst: Array = _biome_brush.toggle_artifact(artifact_name)
+	if _biome_menu_ui and _biome_menu_ui.has_method("refresh_artifact_marks"):
+		_biome_menu_ui.refresh_artifact_marks(lst)
+	_flash_label("ARTIFACT: " + artifact_name, Color(0.85, 0.6, 0.95))
 
 
 func _on_biome_menu_size(radius: int) -> void:
