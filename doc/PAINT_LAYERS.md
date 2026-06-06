@@ -248,7 +248,13 @@ sees it, so the element's default ring is suppressed.
 - **The palette widens as the spine progresses.** `object_scatter` only places an
   artifact once `stage_order ≥ its unlock_order` — so the made-world possibilities
   the biome can seed grow with the curriculum (`ArtifactPalette.available(stage)`).
-- Kept **sparse** (`MAX_OBJECTS`) — real artifacts are heavy.
+- **Density-aware rendering.** Small/sparse repeats are real, interactive scene
+  instances (full fidelity + collision), capped at `INSTANCE_CAP` (24, total). When
+  one artifact repeats `≥ BATCH_AT` (8) times the layer **bakes** its static meshes
+  into `MultiMeshInstance3D`(s) — one draw call per source mesh regardless of copy
+  count — so dense pop / prefab / DNA / mesh **debris** scatters to `BATCH_CAP` (800)
+  cheaply. A fully procedural artifact (no readable static mesh) falls back to capped
+  instancing.
 - `params` (minus `artifact`) is handed to the artifact's `apply_grid_config` (mode,
   colour, seed…), so e.g. `prefab_sculpture` can be slid between raw / pop / bio.
 
@@ -260,7 +266,12 @@ element's list. The list is attached to the element's painted/distribution layer
 scatters by a default distribution. **W** saves the lists into the map's
 `paint_layers`. Per-element lists are independent (mushroom list ≠ object list).
 
-Future: mesh-instance batching for dense scatter; the same picker in the VR menu.
+**In VR**, the biome-brush left-hand menu has an **Artifacts** page (pointer-driven,
+no keyboard): toggle to it, cycle artifact categories (`ArtifactPalette.categories()`),
+page through the unlocked palette, and tap an artifact to toggle it into the active
+element's list — `artifact_toggle_requested` → `BiomeBrushController.toggle_artifact`,
+with `refresh_artifact_marks` echoing the ✓ marks back. Picked lists ride the same
+`paint_layers` payload as the desktop, so VR and desktop compose layers identically.
 
 ## Not yet (next steps)
 
