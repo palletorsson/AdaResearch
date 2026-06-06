@@ -101,6 +101,11 @@ var _brush_strength: float = 0.6
 var _brush_erase: bool = false
 var _painting: bool = false
 var _brush_dirty: bool = false       # set while dragging; triggers rebuild on release
+# Stroke-level undo/redo: each entry is a deep snapshot of _brush_fields, pushed at
+# stroke-start + before a clear. Ctrl+Z / Ctrl+Y. Capped so it can't grow unbounded.
+var _undo_stack: Array = []
+var _redo_stack: Array = []
+const UNDO_CAP := 30
 var _brush_overlay: MultiMeshInstance3D = null
 var _brush_menu_ui: Control = null   # right-side brush-settings panel (reused VR menu)
 var _brushtest: String = ""          # --brushtest=<element> headless proof
@@ -539,7 +544,7 @@ func _update_hud() -> void:
 	# Controls footer — brush controls when a paint element is active.
 	if _paint_idx >= 0:
 		var el: String = _paint_elements[_paint_idx]
-		_controls_lbl.text = "🖌 PAINT %s  (size %d · pressure %.1f%s)   L-drag paint   B element   E erase   , . size   ; ' pressure   C clear   W save" % [
+		_controls_lbl.text = "🖌 PAINT %s  (size %d · pressure %.1f%s)   L-drag paint · Shift erase   Ctrl+Z undo   B element   , . size   ; ' pressure   C clear   W save" % [
 			el.to_upper(), _brush_radius, _brush_strength, "  · ERASE" if _brush_erase else ""]
 		_controls_lbl.add_theme_color_override("font_color", _element_color(el))
 	else:
@@ -693,8 +698,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_E:
 				_brush_erase = not _brush_erase
 				_update_hud()
+			KEY_Z:
+				if event.ctrl_pressed and event.shift_pressed: _redo()
+				elif event.ctrl_pressed: _undo()
+			KEY_Y:
+				if event.ctrl_pressed: _redo()
 			KEY_C:
 				if _paint_idx >= 0:
+					_push_undo()
 					_brush_fields.erase(_paint_elements[_paint_idx])
 					_update_brush_overlay()
 					_rebuild()
@@ -715,6 +726,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			# Left-drag paints the active element's brush; rebuild on release.
 			_painting = event.pressed
 			if event.pressed:
+				_push_undo()                 # snapshot before the stroke (for Ctrl+Z)
 				_paint_at_mouse()
 			elif _brush_dirty:
 				_brush_dirty = false
@@ -1052,6 +1064,49 @@ func _paint_at_mouse() -> void:
 	_stamp(int(floor(hit.x / cube_size)), int(floor(hit.z / cube_size)))
 
 
+# ── Undo / redo (stroke-level) ─────────────────────────────────────────
+func _snapshot() -> Dictionary:
+	var snap: Dictionary = {}
+	for el in _brush_fields:
+		snap[el] = (_brush_fields[el] as PackedFloat32Array).duplicate()
+	return snap
+
+
+## Record the pre-stroke state. Called at stroke-start + before a clear.
+func _push_undo() -> void:
+	_undo_stack.append(_snapshot())
+	if _undo_stack.size() > UNDO_CAP:
+		_undo_stack.pop_front()
+	_redo_stack.clear()
+
+
+func _restore_fields(snap: Dictionary) -> void:
+	_brush_fields = {}
+	for el in snap:
+		_brush_fields[el] = (snap[el] as PackedFloat32Array).duplicate()
+	_update_brush_overlay()
+	_rebuild()
+	_update_hud()
+
+
+func _undo() -> void:
+	if _undo_stack.is_empty():
+		_status_msg = "nothing to undo"; _update_hud(); return
+	_redo_stack.append(_snapshot())
+	var prev: Dictionary = _undo_stack.pop_back()
+	_status_msg = "↩ undo"
+	_restore_fields(prev)
+
+
+func _redo() -> void:
+	if _redo_stack.is_empty():
+		_status_msg = "nothing to redo"; _update_hud(); return
+	_undo_stack.append(_snapshot())
+	var nxt: Dictionary = _redo_stack.pop_back()
+	_status_msg = "↪ redo"
+	_restore_fields(nxt)
+
+
 func _stamp(cx: int, cz: int) -> void:
 	var el: String = _paint_elements[_paint_idx]
 	if not _brush_fields.has(el):
@@ -1060,6 +1115,8 @@ func _stamp(cx: int, cz: int) -> void:
 		_brush_fields[el] = nf
 	var field: PackedFloat32Array = _brush_fields[el]
 	var r := _brush_radius
+	# Hold Shift to erase temporarily (no need to toggle the E mode and back).
+	var erasing := _brush_erase or Input.is_key_pressed(KEY_SHIFT)
 	for dz in range(-r, r + 1):
 		for dx in range(-r, r + 1):
 			var x := cx + dx
@@ -1071,7 +1128,7 @@ func _stamp(cx: int, cz: int) -> void:
 				continue
 			var falloff := 1.0 - dist / (float(r) + 0.0001)
 			var i := z * grid_w + x
-			if _brush_erase:
+			if erasing:
 				field[i] = maxf(0.0, field[i] - _brush_strength * falloff)
 			else:
 				field[i] = minf(1.0, field[i] + _brush_strength * falloff)
