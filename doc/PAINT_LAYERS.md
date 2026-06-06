@@ -66,7 +66,8 @@ and the eventual editor simple):
 | field | type | meaning |
 |-------|------|---------|
 | `element` | string | which engine: `tree` `flower` `mushroom` `critter` `large_critter` `object` `ground` `shader` `particle` |
-| `mode` | string | distribution: `plane` · `random` · `curve` · `noise` · `brush` |
+| `mode` | string | distribution: `plane` · `random` · `curve` · `noise` · `fractal` · `brush` |
+| `artifacts` | array (optional) | artifact names this layer scatters (object_scatter). Present ⇒ the element's default morphology defers; the list is placed by `mode`. |
 | `density` | float 0..1 | the master dial — how much |
 | `max` | int (optional) | hard ceiling on placements (default 160), scaled by `budget_scale` |
 | _mode params_ | — | flat on the entry (`scale`, `threshold`, `axis`, `falloff`, `invert`, `brush`) — see below |
@@ -224,13 +225,22 @@ Point_Trace paints: shader-wash                           → renders: [Point_On
 
 ## Object scatter (any artifact — pop-art, prefab, DNA, mesh, debris)
 
-The `object` element is the generic artifact placer: it scatters a **registered
-artifact** at the painted placements, named in the layer's `params.artifact`
-(default `prefab_sculpture`). One layer, the whole artifact catalogue.
+**Any element layer** can carry an `artifacts` list — and then `object_scatter`
+places those registered artifacts at the layer's placements, picking one per
+placement, by the layer's distribution (`plane`/`noise`/`fractal`/`brush`/…). So
+every field, mushroom to plant to pop-mesh, can be populated by its own per-map
+artifact set, distributed however its `mode` says. A layer **without** a list uses
+its element's default morphology (softbody_flora etc.); the dedicated `object`
+element with no list defaults to `prefab_sculpture`.
 
 ```json
-{ "element": "object", "mode": "random", "density": 0.2, "params": { "artifact": "prefab_sculpture" } }
+{ "element": "mushroom", "mode": "fractal", "density": 0.4, "artifacts": ["toadstool", "shelf_fungus"] }
+{ "element": "object",   "mode": "random",  "density": 0.2, "artifacts": ["prefab_sculpture", "rock_primitive"] }
 ```
+
+When a layer has an `artifacts` list, `DistributionField.placements_for` skips it
+(so the default morphology doesn't double-populate) — but `has_layer_for` still
+sees it, so the element's default ring is suppressed.
 
 - `ArtifactPalette` (`artifact_palette.gd`) scans `commons/artifacts/registry/*.json`
   → `name → scene` (2000+ artifacts) and `name → unlock_order` (the spine `order`

@@ -22,6 +22,7 @@ const MODE_PLANE := "plane"
 const MODE_RANDOM := "random"
 const MODE_CURVE := "curve"
 const MODE_NOISE := "noise"
+const MODE_FRACTAL := "fractal"
 const MODE_BRUSH := "brush"
 
 const DEFAULT_MAX := 160   ## safety ceiling per layer (before budget scaling)
@@ -61,6 +62,22 @@ static func build_field(spec: Dictionary, grid_w: int, grid_d: int, rng_seed: in
 					var nv: float = (noise.get_noise_2d(float(x), float(z)) + 1.0) * 0.5
 					nv = clampf((nv - thr) / (1.0 - thr), 0.0, 1.0)
 					field[z * grid_w + x] = density * nv
+		MODE_FRACTAL:
+			# Self-similar clumping: multi-octave fBm noise — detail at many scales,
+			# the "fractal" step past plain noise. Higher octaves = more recursion.
+			var fnoise := FastNoiseLite.new()
+			fnoise.seed = rng_seed
+			fnoise.frequency = maxf(0.001, float(spec.get("scale", 0.16)))
+			fnoise.fractal_type = FastNoiseLite.FRACTAL_FBM
+			fnoise.fractal_octaves = clampi(int(spec.get("octaves", 4)), 1, 8)
+			fnoise.fractal_lacunarity = float(spec.get("lacunarity", 2.0))
+			fnoise.fractal_gain = float(spec.get("gain", 0.5))
+			var fthr: float = clampf(float(spec.get("threshold", 0.5)), 0.0, 0.99)
+			for z in grid_d:
+				for x in grid_w:
+					var fv: float = (fnoise.get_noise_2d(float(x), float(z)) + 1.0) * 0.5
+					fv = clampf((fv - fthr) / (1.0 - fthr), 0.0, 1.0)
+					field[z * grid_w + x] = density * fv
 		MODE_BRUSH:
 			_read_brush(spec.get("brush", []), field, grid_w, grid_d, density)
 		_:
@@ -115,9 +132,24 @@ static func placements(spec: Dictionary, grid_w: int, grid_d: int, cube_size: fl
 	return pts
 
 
+## True if a layer carries an explicit artifact list (`artifacts: [...]` or the
+## legacy `params.artifact`). Such layers are placed by object_scatter — any
+## element with a list scatters those artifacts by its distribution, instead of
+## the element's default morphology. See doc/PAINT_LAYERS.md § Object scatter.
+static func is_artifact_layer(layer) -> bool:
+	if not (layer is Dictionary):
+		return false
+	var arts = layer.get("artifacts", null)
+	if arts is Array and not (arts as Array).is_empty():
+		return true
+	var p = layer.get("params", null)
+	return p is Dictionary and p.has("artifact")
+
+
 ## Union of placements across every paint layer in `ctx.paint_layers` whose
 ## `element` matches. A population layer calls this; if it returns non-empty,
 ## the layer places there instead of its default ring. Empty → default behaviour.
+## Artifact-layers are skipped (object_scatter handles those).
 static func placements_for(ctx: Dictionary, element: String) -> Array:
 	var out: Array = []
 	var layers = ctx.get("paint_layers", [])
@@ -132,6 +164,11 @@ static func placements_for(ctx: Dictionary, element: String) -> Array:
 		if not (layer is Dictionary):
 			continue
 		if str(layer.get("element", "")) != element:
+			continue
+		# An artifacts-layer (carries an explicit artifact list) is placed by
+		# object_scatter, not the default morphology — skip it here so we don't
+		# double-populate. has_layer_for still sees it (suppresses the ring).
+		if is_artifact_layer(layer):
 			continue
 		out.append_array(placements(layer, dims.x, dims.z, cube, base + idx * 131 + 7, budget))
 		idx += 1

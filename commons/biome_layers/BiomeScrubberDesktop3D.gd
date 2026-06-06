@@ -109,7 +109,7 @@ const UNDO_CAP := 30
 # Distribution mode per element (M cycles the active one). "brush" = hand-painted
 # mask; the others fill the whole grid by the engine's distribution — reaching the
 # noise/curve/plane/random the brush alone can't gesture. See doc/PAINT_LAYERS.md.
-const PAINT_MODES: Array = ["brush", "noise", "curve", "plane", "random"]
+const PAINT_MODES: Array = ["brush", "noise", "curve", "plane", "random", "fractal"]
 var _element_mode: Dictionary = {}   # element -> mode (absent = "brush")
 var _brush_overlay: MultiMeshInstance3D = null
 var _brush_menu_ui: Control = null   # right-side brush-settings panel (reused VR menu)
@@ -1055,6 +1055,10 @@ func _distribution_layer(el: String, mode: String) -> Dictionary:
 		"noise":
 			layer["scale"] = 0.3
 			layer["threshold"] = 0.45
+		"fractal":
+			layer["scale"] = 0.16
+			layer["threshold"] = 0.5
+			layer["octaves"] = 4
 		"curve":
 			layer["axis"] = "radial"
 			layer["falloff"] = "smooth"
