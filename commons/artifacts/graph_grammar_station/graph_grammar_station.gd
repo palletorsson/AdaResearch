@@ -6,6 +6,37 @@
 # Mirrors commons/artifacts/form_studio_station/ but drives the graph
 # grammar system (commons/graph_grammar/) instead of the SDF body recipes.
 
+# @identity
+# essence: a workbench where you grow a plant by editing its GRAMMAR, not its
+#   geometry. A row of buttons selects a rewrite ruleset (tree, conifer, coral,
+#   bristle ball); a column of sliders tunes that ruleset's DNA; and the central
+#   pedestal regrows the whole graph live as nodes spawn branches, edges
+#   subdivide, and space-colonization fills the canopy. You never touch a vertex
+#   — you touch the rule, and the rule grows the form.
+# desire: to put the generative rule itself in the player's hands. It wants the
+#   visitor to feel that a coral and a conifer are not different models but
+#   different RULES over the same growth machinery, and that switching one is
+#   switching the other. It wants grammar to feel tactile.
+# critical_parameter: the active preset's DNA exposed on up to four sliders —
+#   branch angle, subdivision depth, colonization reach, leaf density. These are
+#   the production rules' free parameters; nudging one re-runs the grammar and
+#   the plant reorganizes around the new rule. The preset choice is the coarse
+#   knob, the sliders the fine grain.
+# triggers: push-buttons fire preset selection; slider_moved signals rewrite the
+#   active DNA and re-run graph_grammar over graph_state, graph_to_mesh rebuilds
+#   the pedestal mesh with bark + plant shaders
+# emerges: a sparse low-depth DNA reads SEED / TWIG; a deep high-reach DNA reads
+#   TREE / CANOPY. Same operations (spawn, subdivide, colonize, tuft), the DNA
+#   IS the difference between a sprig and a forest crown
+# relationships: twin to form_studio_station (identical UI, but it drives graph
+#   rewriting where the studio drives SDF recipes); child of the graph_grammar
+#   system (commons/graph_grammar/); cousin to l-system artifacts (both grow
+#   plants by rewriting, the grammar on a graph, the l-system on a string)
+# truth: a graph grammar is the claim that growth is rewriting — that a complex
+#   organism is the trace of a small ruleset applied to itself again and again.
+#   The station is that claim made grippable: edit the rule, watch the body
+#   it implies assemble in front of you.
+
 extends Node3D
 
 const GraphStateScript    = preload("res://commons/graph_grammar/graph_state.gd")

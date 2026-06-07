@@ -7,6 +7,35 @@
 ##
 ## QFEP: Noise as structured randomness — not chaos, not order, but λ-edge
 
+# @identity
+# essence: a small canvas across which hundreds of particles drift, each one
+#   blindly obeying the local angle of a Perlin noise field and dragging a
+#   colored trail behind it. No particle is told where to go; it only reads the
+#   field beneath its feet and steps. The image is the AGGREGATE of those steps
+#   — paint laid down by a crowd that never agreed on a destination.
+# desire: to make an invisible vector field visible by letting things FALL
+#   through it. The field has no color, no shape, no edge; only when bodies
+#   advect along it do its grain and swirls appear. It wants to show that
+#   structure can be felt before it can be seen.
+# critical_parameter: noise_scale — the spatial frequency of the field. Low and
+#   the particles sweep in broad laminar rivers; high and the field shatters
+#   into tight turbulent eddies. It is the dial between calm and chaos without
+#   ever touching the particles themselves. (noise_speed evolves the field in
+#   time so no frame's flow is the last word.)
+# triggers: _ready() builds the canvas and seeds particles; _process(dt)
+#   advances _time, samples the noise gradient at each particle, advects it by
+#   particle_speed, and redraws fading trails into an ImmediateMesh
+# emerges: large scale reads CURRENT / RIVER; small scale reads TURBULENCE /
+#   STORM. Same particles, the field's frequency IS the difference between flow
+#   that reads as ordered and flow that reads as chaotic — the λ-edge made paint
+# relationships: sibling to other noise artifacts (all turn structured
+#   randomness into form); cousin to forces/flocking artifacts (both move bodies
+#   by a field rather than by command); peer to barnsley_fern (both fill a plane
+#   from many cheap iterations, but the fern's points CONVERGE while these flow)
+# truth: noise is not the absence of order but order at a length scale you have
+#   not yet named. The painter is that thesis enacted — randomness given a
+#   frequency becomes a current, and a current given bodies becomes a picture.
+
 extends Node3D
 
 class_name FlowFieldPainter

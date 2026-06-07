@@ -5,6 +5,35 @@ class_name GlitchBody
 ## with time-varying vertex perturbation. HSV hue cycling colors. A body in continuous
 ## becoming, resisting fixed categorization. The queer theory artifact.
 
+# @identity
+# essence: a body that will not hold still. A unit sphere is computed once, then
+#   every single frame its vertices are pushed outward by layered time-varying
+#   noise and its surface is recolored by a cycling hue, so the mesh you see is
+#   never the mesh of the previous instant. It is a form whose only stable
+#   property is that it has no stable form.
+# desire: to refuse the demand that a body settle into a fixed category. It
+#   wants to stay in the act of becoming — neither sphere nor blob nor creature,
+#   but the continuous transition between all of them. Its desire is to make
+#   instability legible as a positive condition rather than a defect.
+# critical_parameter: noise_amplitude — how far the surface is allowed to depart
+#   from the sphere. At zero the body snaps back to a clean, classifiable sphere
+#   (the closet of fixed form); raised, it swells into something that can no
+#   longer be named. The parameter IS the pressure between category and escape.
+# triggers: _ready() computes the base sphere and labels; _process advances
+#   _time and rebuilds the surface each frame, summing deformation_layers of
+#   noise into vertex offsets and rotating the hue by hue_cycle_speed
+# emerges: zero amplitude reads SPHERE / NAMED; full amplitude reads CREATURE /
+#   UNNAMEABLE. Same vertices, the amplitude IS the difference between a body
+#   that submits to a category and a body that keeps slipping out of one
+# relationships: the explicit queer-theory sibling of the whole catalog — kin to
+#   the catalyst/becoming system (both stage transformation as identity);
+#   cousin to noise artifacts (it borrows their randomness but spends it on a
+#   body instead of a plane); peer to morphology bodies (they fix a form from
+#   DNA, the glitch body un-fixes form on purpose)
+# truth: identity is a topology, not a point — a thing can stay continuously
+#   itself while never repeating a shape. The glitch body is that claim given a
+#   surface: it is most fully what it is precisely when it is still becoming.
+
 # --- Configuration ---
 
 @export var body_radius: float = 0.25

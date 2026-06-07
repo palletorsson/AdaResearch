@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-06-07T09:08:02.322398",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "note": "1 COMPLETE (randomness), 21 at HEAD stage 6 vr_testing (human-in-headset gated)"
+  },
+  "heat_map_top_5": [
+    "shader 65 (active)",
+    "biome_contributions reorder 60",
+    "autonomous_breath_ceiling 60",
+    "garden_voicing 60",
+    "sequence:resourcemanagement 50 (empty)"
+  ],
+  "garden_health": {
+    "artifacts_with_identity_before": 257,
+    "high_value_voiceless_before": 72
+  },
+  "release_gates": {
+    "A": "PASS",
+    "B": "PASS",
+    "C": "PASS",
+    "D": "PASS",
+    "overall": "PASS"
+  }
+}

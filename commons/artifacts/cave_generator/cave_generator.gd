@@ -6,6 +6,36 @@ class_name CaveGeneratorCA
 ## flood-fill to find the largest connected region, fill the rest with walls.
 ## Entrance (green) and exit (red) placed at extremes of the largest region.
 
+# @identity
+# essence: a floor-lying grid that grows its own cave. It starts as static —
+#   ~45% of cells flipped to wall by a coin toss — then a cellular automaton
+#   votes the noise into rooms: a cell becomes wall if enough of its neighbors
+#   are wall, floor if enough are floor. After five votes the static has
+#   condensed into chambers and passages no designer drew. A flood-fill then
+#   keeps only the largest connected hollow and seals the rest.
+# desire: to show that a CAVE is not a thing you carve but a thing that EMERGES
+#   from one local rule applied everywhere at once. It wants to prove that
+#   "level design" can be a consequence of majority-vote smoothing rather than
+#   an act of authorship.
+# critical_parameter: wall_threshold — the neighbor count at which a cell turns
+#   to wall. At 4 the world floods solid; at 5 it balances into caves; at 6 the
+#   walls dissolve into open floor. The whole topology swings on this single
+#   integer. (smooth_passes decides how far the vote propagates.)
+# triggers: _ready() seeds the rng, fills the grid by wall_chance, runs
+#   smooth_passes of the CA rule, flood-fills the largest region, then paints
+#   floor/wall/entrance/exit into a nearest-filtered texture
+# emerges: zero passes reads STATIC / TV-SNOW; a few passes read CAVE /
+#   CONNECTED ROOM. Same random seed, the smoothing count IS the difference
+#   between noise and navigable space
+# relationships: sibling to other cellularautomata artifacts (all let a local
+#   rule decide global form); cousin to proceduralgeneration room/grammar
+#   artifacts (both build playable space without hand-placement); peer to noise
+#   artifacts (the cave BEGINS as noise, then the CA rule makes it legible)
+# truth: a cellular automaton is the claim that global structure can be the
+#   fixed point of a purely local rule. The cave is that claim walked through —
+#   no cell knows it is the wall of a room, yet rooms appear, because every cell
+#   keeps agreeing with its neighbors until only coherent hollows remain.
+
 # --- Configuration ---
 @export var display_size: float = 0.8
 @export var grid_size: int = 64

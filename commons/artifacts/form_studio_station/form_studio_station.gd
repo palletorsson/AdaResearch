@@ -7,6 +7,38 @@
 # Usage: drop artifact `form_studio_station` into any map's interactables
 # layer. No DNA config required — all data lives in the script.
 
+# @identity
+# essence: a single pedestal holding a live body you sculpt by gene, not by
+#   hand. Buttons swap which form occupies the center — flower, fungus, walker,
+#   tree, classical column, Klein bottle, Koch curve, supershape — and a column
+#   of sliders edits that form's DNA in real time, the SDF or parametric recipe
+#   re-evaluating into mesh as you move them. One studio, a whole bestiary of
+#   morphologies, all reachable from the same rack of controls.
+# desire: to reveal that wildly different forms — a flower and a Möbius strip, a
+#   walker and an amphora — are siblings under one parameterization. It wants the
+#   visitor to discover that "what KIND of thing is this" and "what are its gene
+#   VALUES" are the same question asked at two scales, and that the studio lets
+#   you slide between answers.
+# critical_parameter: the active form's exposed DNA genes on up to four sliders.
+#   Each form publishes its own slider specs, so the critical parameter is
+#   itself swappable — the studio's deepest move is that the meaning of the
+#   knobs changes with the form on the pedestal. Form choice selects the
+#   parameter space; the sliders explore it.
+# triggers: push-buttons select a FormDef; slider_moved rewrites that form's DNA
+#   and re-runs its recipe (sdf / morphology / fractal / parametric) into the
+#   pedestal mesh with plant / flesh / bark shaders
+# emerges: default DNA reads ARCHETYPE / TEXTBOOK-FORM; pushed DNA reads MUTANT /
+#   EDGE-CASE. Same recipe, the gene values ARE the difference between the
+#   canonical specimen and the strange cousin at the parameter space's rim
+# relationships: twin to graph_grammar_station (same UI, drives SDF/parametric
+#   recipes instead of graph rewriting); hub of the morphology system
+#   (commons/morphology/); mirror of the web /form-studio; cousin to glitch_body
+#   (both deform a body, but the studio fixes a form from DNA where the glitch
+#   body refuses to fix one)
+# truth: form is a point in a parameter space, and a species is a region of it.
+#   The studio is that thesis made walk-up-and-grab — every creature on the
+#   pedestal is one address in a continuous catalog you steer with your hands.
+
 extends Node3D
 
 const FlowerBody    = preload("res://commons/morphology/sdf/flower_body.gd")
