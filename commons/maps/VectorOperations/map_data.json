@@ -12,13 +12,7 @@
       "category": "vectors",
       "difficulty": "beginner",
       "estimated_time": "8-12 minutes",
-      "learning_objectives": [
-        "Dot product and projection angles",
-        "Cross product and normal vectors",
-        "Right-hand rule",
-        "Vector projection and reflection",
-        "Mirror symmetry"
-      ],
+      "learning_objectives": ["Dot product and projection angles","Cross product and normal vectors","Right-hand rule","Vector projection and reflection","Mirror symmetry"],
       "spatial_temperature": 0.3
     },
     "name": "Vector Operations: Dot Product, Cross Product & Projection",
@@ -41,23 +35,11 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
+      "color": [1.0,0.9,0.8],
+      "direction": [-0.4,-0.7,-0.4],
       "enabled": true,
       "energy": 1.2
     }
@@ -65,11 +47,7 @@
   "settings": {
     "auto_reveal_on_entry": false,
     "background": {
-      "color": [
-        0.15,
-        0.2,
-        0.4
-      ],
+      "color": [0.15,0.2,0.4],
       "type": "sky"
     },
     "cube_size": 1.0,
@@ -123,9 +101,9 @@
       [" "," "," ","VectorCrossProduct"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," ","dark_sphere"," "," "," "," "," "," "," "," "," "," ","VectorBasics"," ","basis_vectors_rig:180:-0.5"," ","science_screen:180:1.5#mode:scatter"," "],
       [" "," "," "," "," "," ","dot_product_projector"," "," "," "," "," "," "," "," "," "," "," ","dark_sphere"," "," "," "],
+      [" "," ","vector_dot_product_xl"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","vector_cross_product_xl"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","vector_projection_demo"," "," ","normal_force_demo"," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","catalyst_target#shape:cube"," "," "," "," "],

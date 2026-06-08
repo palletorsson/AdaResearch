@@ -12,12 +12,7 @@
       "category": "vectors",
       "difficulty": "advanced",
       "estimated_time": "10-15 minutes",
-      "learning_objectives": [
-        "Torque and rotational mechanics",
-        "Bouncing and random acceleration",
-        "Steering behavior and attraction forces",
-        "Projectile trajectories and throwing vectors"
-      ],
+      "learning_objectives": ["Torque and rotational mechanics","Bouncing and random acceleration","Steering behavior and attraction forces","Projectile trajectories and throwing vectors"],
       "spatial_temperature": 0.35
     },
     "name": "Vector Advanced: Torque, Dynamics & Throwing",
@@ -40,23 +35,11 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
+      "color": [1.0,0.9,0.8],
+      "direction": [-0.4,-0.7,-0.4],
       "enabled": true,
       "energy": 1.2
     }
@@ -64,11 +47,7 @@
   "settings": {
     "auto_reveal_on_entry": false,
     "background": {
-      "color": [
-        0.15,
-        0.2,
-        0.4
-      ],
+      "color": [0.15,0.2,0.4],
       "type": "sky"
     },
     "cube_size": 1.0,
@@ -123,7 +102,7 @@
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","VectorFieldFlow"," "," "," "," "," "],
-      [" "," "," ","VectorTorque"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","VectorTorque"," "," ","vector_projection_reflection_xl"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","VectorTorque"," "," "," "],
       [" "," "," ","dark_sphere"," "," "," "," "," "," "," "," "," "," "," "," ","exercise_1_3_solution_3_d_bouncing_ball_vr"," ","dark_sphere"," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","proximity_spawner#type:miura_crawler"," "," ","example_1_9_motion_101_velocity_and_random_acceleration_vr"," "," "," "],

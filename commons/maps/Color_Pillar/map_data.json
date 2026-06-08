@@ -14,11 +14,7 @@
 	  "difficulty": "beginner",
 	  "category": "color",
 	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [
-		"Color collection",
-		"Light and color",
-        "Visual color mixing"
-	  ]
+	  "learning_objectives": ["Color collection","Light and color","Visual color mixing"]
 	},
 	"title": "Color Mixing and Collection"
   },
@@ -41,32 +37,15 @@
 	"summary": "Color_5 - Pillar Color Gauntlet",
 	"layout": "7x21 columned runway framed by 2-high walls and evenly spaced light pairs.",
 	"objective": "Advance through pillar color stations to reach the exit teleporter.",
-	"key_elements": [
-	  "`pillarcolorcollection:0:-0.5` stations along the center lane",
-	  "Repeating extra lights `el` guiding progression",
-	  "`dark_sphere` observation canopy near the far end",
-      "Teleporter `t` with score cube `sp` at the southern plaza"
-	]
+	"key_elements": ["`pillarcolorcollection:0:-0.5` stations along the center lane","Repeating extra lights `el` guiding progression","`dark_sphere` observation canopy near the far end","Teleporter `t` with score cube `sp` at the southern plaza"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1.0,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1.0,0.9,0.8],
 	  "energy": 1.2
 	}
   },
@@ -79,22 +58,10 @@
 	"initial_tile_visibility": "hidden_except_corners",
 	"background": {
 	  "type": "color",
-	  "color": [
-		0.95,
-		0.93,
-		0.9
-	  ]
+	  "color": [0.95,0.93,0.9]
 	},
-	"wall_color": [
-	  0.95,
-	  0.93,
-	  0.9
-	],
-	"floor_color": [
-	  0.88,
-	  0.86,
-	  0.82
-	]
+	"wall_color": [0.95,0.93,0.9],
+	"floor_color": [0.88,0.86,0.82]
   },
   "layers": {
 	"structure": [
@@ -149,7 +116,7 @@
 	  [" "," "," "," "," ",""," "," "," "," "," "," "],
 	  [" "," "," ",""," "," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" ","pillarcolorcollection:0:-0.5"," "," "," "," "," "," "," "," "," "," "],
+	  [" ","pillarcolorcollection:0:-0.5"," "," "," "," "," "," ","loom_drum_persian_p6"," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "," "," "],
 	  [" "," "," ","visual_color_mixing:0:-0.4:0.9"," "," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "," "," "],
