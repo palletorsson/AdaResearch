@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/force_pad/force_pad.gd" id="1_fp"]
+
+[node name="ForcePad" type="Node3D"]
+script = ExtResource("1_fp")

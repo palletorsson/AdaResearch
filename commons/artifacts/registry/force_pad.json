@@ -1,0 +1,38 @@
+{
+	"id": "force_pad",
+	"name": "Force Pad",
+	"description": "A 1x1 m launch pad. Step on it and it throws the VR player UP and FORWARD on a ballistic arc — a force vector you trigger with your feet. Glowing plate with forward chevrons and a live launch-vector arrow (up + forward) showing exactly where you'll fly. Uses the proven jump_pad / XRToolsPlayerBody.velocity player-launch path. DNA: forward_force, up_force, cooldown_time.",
+	"category": "vectors",
+	"theoreticalGrounding": "A launch is just a velocity you're given. v0 = forward*forward_force + up*up_force; gravity does the rest. Impulse made bodily.",
+	"artifacts": {
+		"force_pad": {
+			"lookup_name": "force_pad",
+			"name": "Force Pad",
+			"description": "1x1 m glowing launch pad. An Area3D on the player_body layer fires on contact, setting the player CharacterBody3D's velocity to forward+up. Pulsing surface, forward chevrons, live launch-vector arrow. DNA: forward_force (6), up_force (7), cooldown_time.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/force_pad/force_pad.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"footprint": [1, 1, 1],
+			"tags": ["forces", "launch", "jump_pad", "player_launch", "velocity", "impulse", "vector", "vr", "placeable"],
+			"qfep_connection": "F_force: a velocity handed to the body (up + forward); gravity returns it to ground.",
+			"parameters": {
+				"forward_force": 6.0,
+				"up_force": 7.0,
+				"cooldown_time": 0.8,
+				"footprint": [1, 1, 1],
+				"size_group": "small"
+			},
+			"size_group": "small",
+			"spatial_profile": {
+				"dir_group": "directional",
+				"range": 3,
+				"density": "low",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			}
+		}
+	}
+}
