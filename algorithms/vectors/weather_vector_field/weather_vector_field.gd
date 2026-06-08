@@ -35,8 +35,8 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 # scene's *unit* space (pre-scale), used for grid spread, cloud wrap, rain spawn.
 @export var world_size: float = 5.0      # target walkable size in metres (~5x5 m)
 @export var arrow_grid_size: int = 12    # arrows per side (12x12 = 144) — MultiMesh
-@export var rain_count: int = 400        # rain streak particles — GPUParticles3D
-@export var cloud_count: int = 48         # cloud slab quads — GPUParticles3D
+@export var rain_count: int = 460        # rain streak particles — GPUParticles3D
+@export var cloud_count: int = 26         # cloud wisp quads — GPUParticles3D (fewer = no grey wall)
 
 var world_scale: float = 1.0             # extra multiplier on SCENE_SCALE (derived)
 var domain_extent: float = 3.0           # half-extent in unit space (derived)
@@ -50,6 +50,11 @@ func _sc() -> float:
 var wind_a: Node3D
 var wind_b: Node3D
 var resultant: Node3D
+# Soft additive glow halo riding the resultant's tip — the summed wind reads as
+# the brightest thing in the chamber. Pulses gently in _process.
+var _resultant_glow: MeshInstance3D
+var _resultant_glow_mat: StandardMaterial3D
+var _glow_pulse_t: float = 0.0
 
 # ── Caching for per-frame reads ──
 var _cached_a: Dictionary = {}
@@ -74,6 +79,9 @@ var gravity_strength: float = 1.0
 var _rain_gpu: GPUParticles3D
 var _rain_mat: ParticleProcessMaterial
 var _rain_draw_mat: StandardMaterial3D
+# Splash sub-emitter — tiny outward flecks where a drop dies near the floor.
+var _splash_gpu: GPUParticles3D
+var _splash_mat: ParticleProcessMaterial
 
 # ── Cloud slab (GPUParticles3D — big soft drifting billboards) ──
 var _cloud_gpu: GPUParticles3D
@@ -98,13 +106,17 @@ var _lightning_bolt_mat: StandardMaterial3D
 var _lightning_sparks: GPUParticles3D
 var _lightning_light: OmniLight3D
 var _lightning_cooldown: float = 0.0
-var _lightning_flash: float = 0.0        # 0..1 decaying flash intensity
+var _lightning_flash: float = 0.0        # 0..1 decaying flash intensity (bolt visibility)
+var _lightning_glow: float = 0.0         # 0..1 slow afterglow that lights the field after the bolt fades
+var _thunder_delay: float = 0.0          # seconds until the delayed afterglow swell fires
+var _thunder_pending: bool = false
 
 # ── Calm-mode sun shaft (faint cone + rising motes) ──
 var _sun_shaft: MeshInstance3D
 var _sun_shaft_mat: StandardMaterial3D
 var _sun_motes: GPUParticles3D
 var _sun_motes_mat: ParticleProcessMaterial
+var _sun_pulse_t: float = 0.0
 
 # ── Pressure zones ──
 var high_pressure: Node3D
@@ -194,37 +206,49 @@ func _ready() -> void:
 ## Builds the per-mode particle palettes. Called once in _ready (the dicts hold
 ## Color/Vector3, which can't be const-folded, so they live in a runtime array).
 func _init_mode_palettes() -> void:
+	# NOTE on cloud/mist alpha: these emitters use additive-style soft quads now,
+	# so a LITTLE alpha goes a long way. Cloud alphas are deliberately tiny
+	# (~0.05–0.16) — light accumulates where wisps overlap instead of stacking into
+	# a grey wall. `ground_tint` drives a per-mode color-grade on the floor sheen.
 	_mode_palettes = [
-		# Calm — sparse, soft, sun shaft on, no lightning.
+		# Calm — sparse warm light, sun shaft on, no lightning. Golden-hour palette.
 		{
-			"amount": 0.35, "scale": 1.0, "drift_gain": 0.25, "lightning": false,
-			"rain_color": Color(0.55, 0.7, 1.0, 0.55),
-			"mist_color": Color(0.7, 0.78, 0.9, 0.12),
-			"cloud_color": Color(0.85, 0.87, 0.92, 0.35),
+			"amount": 0.3, "scale": 0.9, "drift_gain": 0.25, "lightning": false,
+			"rain_color": Color(0.6, 0.74, 1.0, 0.45),
+			"mist_color": Color(0.78, 0.82, 0.92, 0.05),
+			"cloud_color": Color(1.0, 0.93, 0.82, 0.07),
+			"ground_tint": Color(0.18, 0.14, 0.11),
+			"wet": 0.0,
 			"sun": true,
 		},
-		# Breezy — moderate rain, light drift, no lightning.
+		# Breezy — moderate rain, light drift, cool-neutral, no lightning.
 		{
-			"amount": 0.7, "scale": 1.0, "drift_gain": 0.45, "lightning": false,
-			"rain_color": Color(0.5, 0.65, 1.0, 0.7),
-			"mist_color": Color(0.65, 0.72, 0.85, 0.16),
-			"cloud_color": Color(0.7, 0.73, 0.8, 0.45),
+			"amount": 0.62, "scale": 0.95, "drift_gain": 0.45, "lightning": false,
+			"rain_color": Color(0.58, 0.74, 1.0, 0.7),
+			"mist_color": Color(0.68, 0.76, 0.9, 0.07),
+			"cloud_color": Color(0.74, 0.8, 0.92, 0.08),
+			"ground_tint": Color(0.1, 0.13, 0.18),
+			"wet": 0.45,
 			"sun": false,
 		},
-		# Storm — dense rain, strong drift, lightning fires.
+		# Storm — dense bright rain, strong drift, lightning fires. Deep cool blue.
 		{
-			"amount": 1.0, "scale": 1.15, "drift_gain": 0.7, "lightning": true,
-			"rain_color": Color(0.55, 0.68, 1.0, 0.85),
-			"mist_color": Color(0.5, 0.56, 0.7, 0.2),
-			"cloud_color": Color(0.35, 0.37, 0.45, 0.65),
+			"amount": 1.0, "scale": 1.1, "drift_gain": 0.7, "lightning": true,
+			"rain_color": Color(0.66, 0.82, 1.0, 0.95),
+			"mist_color": Color(0.42, 0.5, 0.68, 0.1),
+			"cloud_color": Color(0.4, 0.46, 0.62, 0.14),
+			"ground_tint": Color(0.06, 0.1, 0.2),
+			"wet": 1.0,
 			"sun": false,
 		},
 		# Blizzard — white snow, low gravity, wide spread, lightning fires.
 		{
-			"amount": 1.0, "scale": 1.4, "drift_gain": 0.85, "lightning": true,
-			"rain_color": Color(0.95, 0.97, 1.0, 0.9),
-			"mist_color": Color(0.9, 0.93, 1.0, 0.3),
-			"cloud_color": Color(0.78, 0.8, 0.86, 0.6),
+			"amount": 0.95, "scale": 1.35, "drift_gain": 0.85, "lightning": true,
+			"rain_color": Color(0.96, 0.98, 1.0, 0.95),
+			"mist_color": Color(0.86, 0.9, 1.0, 0.12),
+			"cloud_color": Color(0.82, 0.86, 0.96, 0.13),
+			"ground_tint": Color(0.12, 0.15, 0.22),
+			"wet": 0.7,
 			"sun": false,
 			"snow": true,
 		},
@@ -283,6 +307,18 @@ func _process(delta: float) -> void:
 
 	# Update computed resultant
 	_update_vector_fast(resultant, sum, _cached_sum)
+
+	# Pulse the resultant glow — brighter + larger with the summed magnitude, with
+	# a gentle breathing pulse so it always reads as the live, important vector.
+	if _resultant_glow_mat and _resultant_glow:
+		_glow_pulse_t += delta
+		var mag: float = sum.length()
+		var pulse: float = 0.85 + 0.15 * sin(_glow_pulse_t * 3.0)
+		var energy: float = (2.2 + clampf(mag, 0.0, 4.0) * 0.6) * pulse
+		_resultant_glow_mat.emission_energy_multiplier = energy
+		var halo: float = (0.7 + clampf(mag, 0.0, 4.0) * 0.18) * pulse
+		_resultant_glow.scale = Vector3.ONE * halo
+		_resultant_glow.visible = mag > 0.05
 
 	# Update parallelogram dotted lines
 	_update_dotted_lines(a, b, sum)
@@ -365,9 +401,13 @@ func _build_ground_plane() -> void:
 	plane.size = Vector2(span, span)
 	ground_mesh.mesh = plane
 	ground_material = StandardMaterial3D.new()
-	ground_material.albedo_color = Color(0.08, 0.1, 0.14, 0.85)
+	ground_material.albedo_color = Color(0.08, 0.1, 0.14, 0.9)
 	ground_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	ground_material.roughness = 0.9
+	# Start matte/dry; _update_temperature_tint raises metallic + lowers roughness
+	# per the active mode's `wet` value so the storm floor turns reflective.
+	ground_material.roughness = 0.85
+	ground_material.metallic = 0.0
+	ground_material.metallic_specular = 0.7
 	ground_material.emission_enabled = true
 	ground_material.emission = Color(0.05, 0.06, 0.09)
 	ground_material.emission_energy_multiplier = 0.3
@@ -441,6 +481,39 @@ func _spawn_wind_vectors() -> void:
 	_cache_vector_nodes(wind_b, _cached_b)
 	_cache_vector_nodes(resultant, _cached_sum)
 
+	# Glow halo on the resultant tip — the summed wind glows brightest of all.
+	_build_resultant_glow()
+
+
+## A soft additive billboard quad parented to the resultant's tip. It rides the
+## tip every frame and pulses, marking the summed vector as the chamber's
+## brightest, most important light. No extra dynamic light — pure emissive quad.
+func _build_resultant_glow() -> void:
+	var end_node: Node3D = _cached_sum.get("end")
+	if end_node == null:
+		return
+	_resultant_glow = MeshInstance3D.new()
+	_resultant_glow.name = "ResultantGlow"
+	var quad := QuadMesh.new()
+	# Sized in the resultant's local space (it inherits SCENE_SCALE from the arrow).
+	quad.size = Vector2(0.42, 0.42)
+	_resultant_glow_mat = StandardMaterial3D.new()
+	_resultant_glow_mat.albedo_color = Color(1.0, 0.92, 0.35, 0.9)
+	_resultant_glow_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_resultant_glow_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	_resultant_glow_mat.emission_enabled = true
+	_resultant_glow_mat.emission = Color(1.0, 0.88, 0.3)
+	_resultant_glow_mat.emission_energy_multiplier = 3.2
+	_resultant_glow_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_resultant_glow_mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	_resultant_glow_mat.billboard_keep_scale = true
+	_resultant_glow_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_resultant_glow_mat.disable_receive_shadows = true
+	quad.material = _resultant_glow_mat
+	_resultant_glow.mesh = quad
+	_resultant_glow.position = Vector3.ZERO
+	end_node.add_child(_resultant_glow)
+
 
 func _build_parallelogram() -> void:
 	if _dot_mesh == null:
@@ -512,7 +585,10 @@ func _field_mm_material() -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
 	mat.emission_enabled = true
-	mat.emission_energy_multiplier = 1.0
+	# Brighter unshaded glow so the field arrows pop against the dark storm. Their
+	# per-instance vertex colour already encodes magnitude (blue->yellow->red); the
+	# emission energy makes those colours read as light, not paint.
+	mat.emission_energy_multiplier = 2.0
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	return mat
 
@@ -544,27 +620,33 @@ func _build_rain_particles() -> void:
 	_rain_mat.emission_box_extents = Vector3(domain_extent * 0.95, 0.1, domain_extent * 0.95) * sc
 	_rain_mat.direction = Vector3(0.0, -1.0, 0.0)
 	_rain_mat.spread = 4.0
-	_rain_mat.initial_velocity_min = 0.5 * sc
-	_rain_mat.initial_velocity_max = 1.2 * sc
+	# Faster drops so streaks read as motion, not floating dashes.
+	_rain_mat.initial_velocity_min = 0.8 * sc
+	_rain_mat.initial_velocity_max = 1.6 * sc
 	# Gravity is overwritten each frame as (down*gravity_strength + wind) * sc.
 	_rain_mat.gravity = Vector3(0.0, -gravity_strength, 0.0) * 9.8 * sc
+	# Per-drop length variety; _drive_rain stretches the whole sheet with speed.
 	_rain_mat.scale_min = 0.7
-	_rain_mat.scale_max = 1.1
-	_rain_mat.color = Color(0.55, 0.68, 1.0, 0.85)
+	_rain_mat.scale_max = 1.3
+	_rain_mat.color = Color(0.66, 0.82, 1.0, 0.95)
 	_rain_gpu.process_material = _rain_mat
 
 	# Tall, thin quad = a streak. BILLBOARD_PARTICLES orients the quad along the
 	# particle's velocity, so when the gravity vector is (down + wind) the streak
 	# tilts to the true resultant slant angle — the lesson, drawn by the geometry.
 	var streak := QuadMesh.new()
-	streak.size = Vector2(0.012, 0.32) * sc
+	# Thinner + longer than before for a sharp bright line of falling light.
+	streak.size = Vector2(0.009, 0.46) * sc
 	_rain_draw_mat = StandardMaterial3D.new()
 	_rain_draw_mat.vertex_color_use_as_albedo = true
-	_rain_draw_mat.albedo_color = Color(0.55, 0.68, 1.0, 0.85)
+	_rain_draw_mat.albedo_color = Color(0.66, 0.82, 1.0, 0.95)
 	_rain_draw_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	# Additive so each streak catches light against the dark storm — bright,
+	# cool, and never muddy when streaks cross.
+	_rain_draw_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
 	_rain_draw_mat.emission_enabled = true
-	_rain_draw_mat.emission = Color(0.5, 0.62, 1.0)
-	_rain_draw_mat.emission_energy_multiplier = 0.8
+	_rain_draw_mat.emission = Color(0.55, 0.74, 1.0)
+	_rain_draw_mat.emission_energy_multiplier = 2.2
 	_rain_draw_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_rain_draw_mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
 	_rain_draw_mat.billboard_keep_scale = true
@@ -572,6 +654,61 @@ func _build_rain_particles() -> void:
 	streak.material = _rain_draw_mat
 	_rain_gpu.draw_pass_1 = streak
 	environment_root.add_child(_rain_gpu)
+
+	# Splash ring sub-emitter: when a drop expires near the floor it spawns a tiny
+	# burst of low outward flecks — a wet "tick" on the ground. Bounded + cheap.
+	_build_rain_splash(sc)
+
+
+## A small splash burst emitter wired as the rain's sub-emitter. Godot spawns a
+## few of these at each parent particle's death position, giving a faint wet ring
+## of flecks where rain meets the floor. Capped (amount 20) for VR perf.
+func _build_rain_splash(sc: float) -> void:
+	_splash_gpu = GPUParticles3D.new()
+	_splash_gpu.name = "RainSplash"
+	_splash_gpu.amount = 20
+	_splash_gpu.lifetime = 0.45
+	_splash_gpu.emitting = false   # only emits when triggered by the parent's death
+	_splash_gpu.local_coords = false
+	_splash_gpu.visibility_aabb = AABB(
+		Vector3(-domain_extent - 1.0, -0.5, -domain_extent - 1.0) * sc,
+		Vector3(2.0 * domain_extent + 2.0, 2.0, 2.0 * domain_extent + 2.0) * sc
+	)
+	_splash_mat = ParticleProcessMaterial.new()
+	_splash_mat.direction = Vector3(0.0, 1.0, 0.0)
+	_splash_mat.spread = 75.0
+	_splash_mat.flatness = 0.85   # bias the burst outward/flat like a ring
+	_splash_mat.initial_velocity_min = 0.15 * sc
+	_splash_mat.initial_velocity_max = 0.5 * sc
+	_splash_mat.gravity = Vector3(0.0, -4.0, 0.0) * sc
+	_splash_mat.scale_min = 0.4
+	_splash_mat.scale_max = 0.8
+	_splash_mat.color = Color(0.7, 0.85, 1.0, 0.85)
+	_splash_gpu.process_material = _splash_mat
+
+	var fleck := QuadMesh.new()
+	fleck.size = Vector2(0.012, 0.012) * sc
+	var fleck_draw := StandardMaterial3D.new()
+	fleck_draw.albedo_color = Color(0.7, 0.85, 1.0, 0.85)
+	fleck_draw.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	fleck_draw.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	fleck_draw.emission_enabled = true
+	fleck_draw.emission = Color(0.55, 0.75, 1.0)
+	fleck_draw.emission_energy_multiplier = 1.6
+	fleck_draw.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	fleck_draw.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	fleck_draw.billboard_keep_scale = true
+	fleck_draw.cull_mode = BaseMaterial3D.CULL_DISABLED
+	fleck.material = fleck_draw
+	_splash_gpu.draw_pass_1 = fleck
+	environment_root.add_child(_splash_gpu)
+
+	# Wire it as the rain's sub-emitter: a few flecks at each drop's death point.
+	if _rain_mat:
+		_rain_mat.sub_emitter_mode = ParticleProcessMaterial.SUB_EMITTER_AT_END
+		_rain_mat.sub_emitter_amount_at_end = 3
+	if _rain_gpu:
+		_rain_gpu.sub_emitter = _rain_gpu.get_path_to(_splash_gpu)
 
 
 # ── Cloud slab: GPUParticles3D big soft drifting billboards ──
@@ -584,8 +721,10 @@ func _build_cloud_slab() -> void:
 	_cloud_gpu = GPUParticles3D.new()
 	_cloud_gpu.name = "CloudGPU"
 	_cloud_gpu.amount = max(1, cloud_count)
-	_cloud_gpu.lifetime = 9.0
-	_cloud_gpu.position = Vector3(0.0, 2.7, 0.0) * sc
+	# Longer life + slow spawn = sparse coverage. Fewer puffs on screen at once,
+	# so they read as drifting wisps instead of an overlapping fog wall.
+	_cloud_gpu.lifetime = 13.0
+	_cloud_gpu.position = Vector3(0.0, 2.85, 0.0) * sc
 	_cloud_gpu.visibility_aabb = AABB(
 		Vector3(-2.0 * domain_extent, -1.0, -2.0 * domain_extent) * sc,
 		Vector3(4.0 * domain_extent, 4.0, 4.0 * domain_extent) * sc
@@ -593,35 +732,45 @@ func _build_cloud_slab() -> void:
 
 	_cloud_mat = ParticleProcessMaterial.new()
 	_cloud_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
-	_cloud_mat.emission_box_extents = Vector3(domain_extent * 1.1, 0.4, domain_extent * 1.1) * sc
+	# Spread the spawn box wider + thicker so the few puffs distribute in depth
+	# (less stacking on one plane = less opaque overlap).
+	_cloud_mat.emission_box_extents = Vector3(domain_extent * 1.3, 0.7, domain_extent * 1.3) * sc
 	_cloud_mat.direction = Vector3(1.0, 0.0, 0.0)
 	_cloud_mat.spread = 8.0
 	_cloud_mat.initial_velocity_min = 0.02 * sc
 	_cloud_mat.initial_velocity_max = 0.08 * sc
 	_cloud_mat.gravity = Vector3.ZERO          # set to wind drift each frame
-	_cloud_mat.scale_min = 1.6
-	_cloud_mat.scale_max = 3.0
-	# Soft expand over life so each puff swells like a real cloud.
+	# Smaller min so puffs don't all blanket the sky; range gives size variety.
+	_cloud_mat.scale_min = 0.9
+	_cloud_mat.scale_max = 2.2
+	# Soft expand over life so each wisp swells then thins like real cloud edges.
 	var cloud_scale_curve := _make_grow_curve_texture()
 	_cloud_mat.scale_curve = cloud_scale_curve
-	_cloud_mat.color = Color(0.7, 0.73, 0.8, 0.45)
-	# Fade in then out so slab edges are soft (smoke-style alpha curve).
-	_cloud_mat.color_ramp = _make_soft_alpha_ramp(Color(0.7, 0.73, 0.8))
+	_cloud_mat.color = Color(0.74, 0.8, 0.92, 0.12)
+	# Fade in then out so wisp edges are soft (smoke-style alpha curve).
+	_cloud_mat.color_ramp = _make_soft_alpha_ramp(Color(0.74, 0.8, 0.92))
 	_cloud_gpu.process_material = _cloud_mat
 
 	var puff := QuadMesh.new()
-	puff.size = Vector2(0.9, 0.9) * sc
+	# Smaller base quad — overlap now adds light gently rather than blocking it.
+	puff.size = Vector2(0.6, 0.6) * sc
 	_cloud_draw_mat = StandardMaterial3D.new()
-	_cloud_draw_mat.albedo_color = Color(0.7, 0.73, 0.8, 0.45)
+	_cloud_draw_mat.albedo_color = Color(0.74, 0.8, 0.92, 0.12)
 	_cloud_draw_mat.vertex_color_use_as_albedo = true
 	_cloud_draw_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	# Additive-ish blend: overlapping wisps brighten softly instead of forming an
+	# opaque grey wall. This is the core washout fix.
+	_cloud_draw_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
 	_cloud_draw_mat.emission_enabled = true
-	_cloud_draw_mat.emission = Color(0.6, 0.63, 0.7)
-	_cloud_draw_mat.emission_energy_multiplier = 0.3
+	_cloud_draw_mat.emission = Color(0.55, 0.62, 0.78)
+	_cloud_draw_mat.emission_energy_multiplier = 0.45
+	_cloud_draw_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_cloud_draw_mat.roughness = 1.0
 	_cloud_draw_mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
 	_cloud_draw_mat.billboard_keep_scale = true
 	_cloud_draw_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	# Render behind rain/instruments so additive haze never washes foreground glow.
+	_cloud_draw_mat.render_priority = -2
 	puff.material = _cloud_draw_mat
 	_cloud_gpu.draw_pass_1 = puff
 	environment_root.add_child(_cloud_gpu)
@@ -643,15 +792,17 @@ func _build_ground_mist() -> void:
 
 	_mist_mat = ParticleProcessMaterial.new()
 	_mist_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
-	_mist_mat.emission_box_extents = Vector3(domain_extent * 1.2, 0.05, domain_extent * 1.2) * sc
+	# Keep the spawn box thin and low so wisps cling to the floor.
+	_mist_mat.emission_box_extents = Vector3(domain_extent * 1.2, 0.04, domain_extent * 1.2) * sc
 	_mist_mat.direction = Vector3(1.0, 0.0, 0.0)
 	_mist_mat.spread = 10.0
 	_mist_mat.initial_velocity_min = 0.01 * sc
 	_mist_mat.initial_velocity_max = 0.05 * sc
 	_mist_mat.gravity = Vector3.ZERO           # set to wind drift each frame
-	_mist_mat.scale_min = 2.0
-	_mist_mat.scale_max = 3.5
-	_mist_mat.color = Color(0.7, 0.78, 0.9, 0.12)
+	_mist_mat.scale_min = 1.8
+	_mist_mat.scale_max = 3.2
+	_mist_mat.scale_curve = _make_grow_curve_texture()   # wisps swell + thin
+	_mist_mat.color = Color(0.7, 0.78, 0.9, 0.08)
 	_mist_mat.color_ramp = _make_soft_alpha_ramp(Color(0.7, 0.78, 0.9))
 	_mist_gpu.process_material = _mist_mat
 
@@ -660,16 +811,19 @@ func _build_ground_mist() -> void:
 	# Lay the mist quads flat-ish by orienting them as billboards (they read as
 	# soft ground fog either way; keeping billboard avoids edge-on disappearance).
 	_mist_draw_mat = StandardMaterial3D.new()
-	_mist_draw_mat.albedo_color = Color(0.7, 0.78, 0.9, 0.12)
+	_mist_draw_mat.albedo_color = Color(0.7, 0.78, 0.9, 0.08)
 	_mist_draw_mat.vertex_color_use_as_albedo = true
 	_mist_draw_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	# Additive low wisps: soft glow near the floor instead of a flat grey sheet.
+	_mist_draw_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
 	_mist_draw_mat.emission_enabled = true
-	_mist_draw_mat.emission = Color(0.6, 0.66, 0.78)
-	_mist_draw_mat.emission_energy_multiplier = 0.2
+	_mist_draw_mat.emission = Color(0.5, 0.6, 0.78)
+	_mist_draw_mat.emission_energy_multiplier = 0.35
 	_mist_draw_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_mist_draw_mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
 	_mist_draw_mat.billboard_keep_scale = true
 	_mist_draw_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_mist_draw_mat.render_priority = -3
 	slab.material = _mist_draw_mat
 	_mist_gpu.draw_pass_1 = slab
 	environment_root.add_child(_mist_gpu)
@@ -741,13 +895,16 @@ func _build_lightning() -> void:
 	_lightning_bolt_mesh = ImmediateMesh.new()
 	_lightning_bolt.mesh = _lightning_bolt_mesh
 	_lightning_bolt_mat = StandardMaterial3D.new()
-	_lightning_bolt_mat.albedo_color = Color(0.9, 0.95, 1.0)
+	_lightning_bolt_mat.albedo_color = Color(0.92, 0.97, 1.0)
 	_lightning_bolt_mat.vertex_color_use_as_albedo = true
 	_lightning_bolt_mat.emission_enabled = true
-	_lightning_bolt_mat.emission = Color(0.8, 0.9, 1.0)
-	_lightning_bolt_mat.emission_energy_multiplier = 6.0
+	_lightning_bolt_mat.emission = Color(0.85, 0.93, 1.0)
+	# Much hotter core + additive blend so the bolt blooms white-hot.
+	_lightning_bolt_mat.emission_energy_multiplier = 14.0
 	_lightning_bolt_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_lightning_bolt_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_lightning_bolt_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	_lightning_bolt_mat.render_priority = 4
 	_lightning_bolt.material_override = _lightning_bolt_mat
 	_lightning_bolt.visible = false
 	_lightning_root.add_child(_lightning_bolt)
@@ -780,21 +937,26 @@ func _build_lightning() -> void:
 	spark_mesh.radial_segments = 6
 	spark_mesh.rings = 3
 	var spark_draw := StandardMaterial3D.new()
-	spark_draw.albedo_color = Color(0.9, 0.95, 1.0)
+	spark_draw.albedo_color = Color(0.92, 0.96, 1.0)
 	spark_draw.emission_enabled = true
-	spark_draw.emission = Color(0.8, 0.9, 1.0)
-	spark_draw.emission_energy_multiplier = 3.0
+	spark_draw.emission = Color(0.85, 0.93, 1.0)
+	spark_draw.emission_energy_multiplier = 5.0
+	spark_draw.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
 	spark_draw.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	spark_mesh.material = spark_draw
 	_lightning_sparks.draw_pass_1 = spark_mesh
 	_lightning_root.add_child(_lightning_sparks)
 
-	# Flash light.
+	# Flash light — one pulsed OmniLight that briefly lights the whole field +
+	# clouds. Wide range, high peak energy; energy is driven to 0 between strikes
+	# so it costs nothing when idle. This is the only dynamic light we add.
 	_lightning_light = OmniLight3D.new()
 	_lightning_light.name = "Flash"
-	_lightning_light.light_color = Color(0.85, 0.92, 1.0)
+	_lightning_light.light_color = Color(0.82, 0.9, 1.0)
 	_lightning_light.light_energy = 0.0
-	_lightning_light.omni_range = 6.0 * sc * 2.0
+	# Reach across the whole chamber so the strike actually illuminates the room.
+	_lightning_light.omni_range = (2.0 * domain_extent + 3.0) * sc
+	_lightning_light.omni_attenuation = 0.6
 	_lightning_root.add_child(_lightning_light)
 
 	_lightning_cooldown = randf_range(2.5, 5.0)
@@ -815,14 +977,20 @@ func _build_sun_shaft() -> void:
 	_sun_shaft.position = Vector3(domain_extent * 0.45, 1.7, -domain_extent * 0.45) * sc
 	_sun_shaft.scale = Vector3.ONE * sc
 	_sun_shaft_mat = StandardMaterial3D.new()
-	_sun_shaft_mat.albedo_color = Color(1.0, 0.95, 0.7, 0.06)
+	# Faint warm volume. Additive so the shaft adds golden light without occluding
+	# anything behind it — a believable god-ray, not a solid cone.
+	_sun_shaft_mat.albedo_color = Color(1.0, 0.93, 0.62, 0.05)
 	_sun_shaft_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_sun_shaft_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
 	_sun_shaft_mat.emission_enabled = true
-	_sun_shaft_mat.emission = Color(1.0, 0.92, 0.6)
-	_sun_shaft_mat.emission_energy_multiplier = 0.5
+	_sun_shaft_mat.emission = Color(1.0, 0.9, 0.55)
+	_sun_shaft_mat.emission_energy_multiplier = 0.9
 	_sun_shaft_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_sun_shaft_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_sun_shaft_mat.render_priority = -1
 	_sun_shaft.material_override = _sun_shaft_mat
+	# Tilt the shaft so it rakes across the floor like low sun through a window.
+	_sun_shaft.rotation_degrees = Vector3(0, 0, 14)
 	_sun_shaft.visible = false
 	environment_root.add_child(_sun_shaft)
 
@@ -850,11 +1018,13 @@ func _build_sun_shaft() -> void:
 	var mote := QuadMesh.new()
 	mote.size = Vector2(0.03, 0.03) * sc
 	var mote_draw := StandardMaterial3D.new()
-	mote_draw.albedo_color = Color(1.0, 0.95, 0.7, 0.5)
+	mote_draw.albedo_color = Color(1.0, 0.95, 0.7, 0.6)
 	mote_draw.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	# Additive warm specks drifting up the shaft — dust catching the light.
+	mote_draw.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
 	mote_draw.emission_enabled = true
-	mote_draw.emission = Color(1.0, 0.92, 0.6)
-	mote_draw.emission_energy_multiplier = 1.0
+	mote_draw.emission = Color(1.0, 0.9, 0.55)
+	mote_draw.emission_energy_multiplier = 2.2
 	mote_draw.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mote_draw.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
 	mote.material = mote_draw
@@ -962,15 +1132,23 @@ func _build_decomposition_display() -> void:
 
 
 func _create_decomp_arrow(color: Color) -> MeshInstance3D:
-	## A simple cylinder arrow for the decomposition display
+	## A simple cylinder arrow for the decomposition display. Own emissive material
+	## (not the shared cache) so we can crank the glow without affecting other
+	## scenes — the decomposition arrows should read as bright bars of light.
 	var mesh := MeshInstance3D.new()
 	var cyl := CylinderMesh.new()
 	cyl.height = 1.0
-	cyl.top_radius = 0.006
-	cyl.bottom_radius = 0.006
-	cyl.radial_segments = 6
+	cyl.top_radius = 0.008
+	cyl.bottom_radius = 0.008
+	cyl.radial_segments = 8
 	mesh.mesh = cyl
-	mesh.material_override = _get_shared_material(color, true)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy_multiplier = 2.2
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mesh.material_override = mat
 	return mesh
 
 
@@ -1029,7 +1207,8 @@ func _build_windsock() -> void:
 	windsock_material.albedo_color = Color(0.95, 0.4, 0.15)
 	windsock_material.emission_enabled = true
 	windsock_material.emission = Color(0.9, 0.35, 0.1)
-	windsock_material.emission_energy_multiplier = 0.8
+	# Warm glow so the sock reads as a beacon against the cool storm.
+	windsock_material.emission_energy_multiplier = 1.8
 	windsock_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	windsock_sleeve.material_override = windsock_material
 	windsock_yaw.add_child(windsock_sleeve)
@@ -1072,7 +1251,13 @@ func _build_anemometer() -> void:
 	anemometer_spinner.position = Vector3(0, 1.0, 0) * sc
 	root.add_child(anemometer_spinner)
 
-	var cup_mat := _get_shared_material(Color(0.85, 0.85, 0.9), false)
+	# Own emissive cup material so the spinner glows cyan-white and reads as it
+	# spins — a little light moving with the wind speed.
+	var cup_mat := StandardMaterial3D.new()
+	cup_mat.albedo_color = Color(0.85, 0.9, 1.0)
+	cup_mat.emission_enabled = true
+	cup_mat.emission = Color(0.5, 0.75, 1.0)
+	cup_mat.emission_energy_multiplier = 1.4
 	var arm_mat := _get_shared_material(Color(0.6, 0.62, 0.66), false)
 	for i in range(3):
 		var ang := float(i) * TAU / 3.0
@@ -1180,8 +1365,8 @@ func _build_compass_rose() -> void:
 	var needle_mat := StandardMaterial3D.new()
 	needle_mat.albedo_color = Color(1.0, 0.3, 0.3)
 	needle_mat.emission_enabled = true
-	needle_mat.emission = Color(0.9, 0.2, 0.2)
-	needle_mat.emission_energy_multiplier = 0.8
+	needle_mat.emission = Color(0.95, 0.25, 0.25)
+	needle_mat.emission_energy_multiplier = 2.0
 	needle_mesh.material_override = needle_mat
 	compass_needle.add_child(needle_mesh)
 
@@ -1365,7 +1550,15 @@ func _drive_rain(sum: Vector3) -> void:
 	# "rain = gravity + wind" decomposition.
 	var grav_term := Vector3(0.0, -gravity_strength * 9.8, 0.0)
 	var wind_term := Vector3(sum.x, 0.0, sum.z) * 3.0   # gain to read clearly
-	_rain_mat.gravity = (grav_term + wind_term) * sc
+	var resultant_v := grav_term + wind_term
+	_rain_mat.gravity = resultant_v * sc
+	# Stretch the streaks with the resultant SPEED — faster fall/blow = longer
+	# light-trails. Snow (blizzard) stays short/round; storm rain reads as rain.
+	if not bool(_palette().get("snow", false)):
+		var spd: float = resultant_v.length()
+		var stretch: float = clampf(0.55 + spd * 0.04, 0.6, 1.7)
+		_rain_mat.scale_min = stretch * 0.8
+		_rain_mat.scale_max = stretch * 1.35
 
 
 ## Clouds: drift the slab on the horizontal wind by writing wind into the
@@ -1519,18 +1712,38 @@ func _drive_lightning(delta: float, sum: Vector3) -> void:
 	var palette := _palette()
 	var allowed: bool = bool(palette.get("lightning", false))
 
-	# Decay the flash + spark visibility every frame.
+	# Phase 1 — the bolt itself: a fast, bright, flickering decay (the visible
+	# zig-zag and the initial hard flash).
 	if _lightning_flash > 0.0:
-		_lightning_flash = maxf(0.0, _lightning_flash - delta * 4.0)
-		_lightning_light.light_energy = _lightning_flash * 4.0
-		var a: float = clampf(_lightning_flash, 0.0, 1.0)
-		_lightning_bolt_mat.albedo_color = Color(0.9, 0.95, 1.0, a)
-		_lightning_bolt.visible = _lightning_flash > 0.05
+		_lightning_flash = maxf(0.0, _lightning_flash - delta * 5.5)
+		# Flicker the bolt alpha so it reads as a crackling discharge, not a fade.
+		var flicker: float = 0.7 + 0.3 * sin(Time.get_ticks_msec() * 0.08)
+		var a: float = clampf(_lightning_flash * flicker, 0.0, 1.0)
+		_lightning_bolt_mat.albedo_color = Color(0.92, 0.97, 1.0, a)
+		_lightning_bolt.visible = _lightning_flash > 0.04
 	else:
 		_lightning_bolt.visible = false
-		_lightning_light.light_energy = 0.0
+
+	# Phase 2 — thunder-delayed afterglow: after a short delay the whole field
+	# swells with a softer blue glow (the "boom" you feel as light), then fades.
+	if _thunder_pending:
+		_thunder_delay -= delta
+		if _thunder_delay <= 0.0:
+			_thunder_pending = false
+			_lightning_glow = maxf(_lightning_glow, 0.7)   # the swell
+	if _lightning_glow > 0.0:
+		_lightning_glow = maxf(0.0, _lightning_glow - delta * 1.6)
+
+	# The flash light = hard bolt spike + soft thunder swell, combined.
+	# Peak ~7 for a brief moment, so the room really lights up.
+	var bolt_e: float = _lightning_flash * 7.0
+	var glow_e: float = _lightning_glow * 2.2
+	_lightning_light.light_energy = bolt_e + glow_e
 
 	if not allowed:
+		# Make sure nothing lingers when we leave a lightning mode mid-decay.
+		if _lightning_flash <= 0.0 and _lightning_glow <= 0.0:
+			_lightning_light.light_energy = 0.0
 		return
 
 	_lightning_cooldown -= delta
@@ -1560,23 +1773,53 @@ func _strike_lightning(sum: Vector3) -> void:
 		lean = -horiz.normalized() * 0.4
 	var top_pt := ground_pt + Vector3(lean.x, 3.0, lean.z)
 
-	# Zig-zag the bolt as a poly-line in unit space, scaled by _sc().
-	_lightning_bolt_mesh.clear_surfaces()
-	_lightning_bolt_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	_lightning_bolt_mesh.surface_set_color(Color(0.95, 0.98, 1.0))
-	var segs := 8
+	# Build the main channel as a jittered poly-line, remembering each node so we
+	# can hang a few forks off the middle of the bolt.
+	var main_pts: Array = []
+	var segs := 9
 	for i in range(segs + 1):
 		var t: float = float(i) / float(segs)
 		var base_pt := top_pt.lerp(ground_pt, t)
 		# Jitter sideways, more in the middle, zero at the ends.
-		var jitter: float = sin(t * PI) * 0.35
+		var jitter: float = sin(t * PI) * 0.4
 		var off := Vector3(randf_range(-jitter, jitter), 0.0, randf_range(-jitter, jitter))
-		_lightning_bolt_mesh.surface_add_vertex((base_pt + off) * sc)
+		main_pts.append(base_pt + off)
+
+	_lightning_bolt_mesh.clear_surfaces()
+	_lightning_bolt_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	_lightning_bolt_mesh.surface_set_color(Color(0.96, 0.98, 1.0))
+	for p in main_pts:
+		_lightning_bolt_mesh.surface_add_vertex((p as Vector3) * sc)
 	_lightning_bolt_mesh.surface_end()
+
+	# A few branching forks: short jagged offshoots from interior nodes, drawn as
+	# separate dimmer line strips in the same ImmediateMesh (cheap, no new node).
+	var fork_count: int = randi_range(2, 3)
+	for f in range(fork_count):
+		var node_i: int = randi_range(2, main_pts.size() - 3)
+		var root_pt: Vector3 = main_pts[node_i]
+		# Fork heads outward + downward from the channel.
+		var fork_dir := Vector3(randf_range(-1.0, 1.0), randf_range(-0.9, -0.2), randf_range(-1.0, 1.0)).normalized()
+		var fork_len: float = randf_range(0.5, 1.1)
+		var fork_segs := 4
+		_lightning_bolt_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		_lightning_bolt_mesh.surface_set_color(Color(0.8, 0.9, 1.0, 0.85))
+		var cur := root_pt
+		_lightning_bolt_mesh.surface_add_vertex(cur * sc)
+		for s in range(fork_segs):
+			var step_len: float = fork_len / float(fork_segs)
+			cur += fork_dir * step_len + Vector3(randf_range(-0.18, 0.18), randf_range(-0.18, 0.0), randf_range(-0.18, 0.18))
+			_lightning_bolt_mesh.surface_add_vertex(cur * sc)
+		_lightning_bolt_mesh.surface_end()
 
 	_lightning_bolt.visible = true
 	_lightning_flash = 1.0
-	_lightning_light.position = ground_pt * sc + Vector3(0.0, 0.5, 0.0) * sc
+	_lightning_light.position = ground_pt * sc + Vector3(0.0, 1.2, 0.0) * sc
+
+	# Arm the delayed thunder afterglow — a short, believable light-lag before the
+	# field swells with the soft "boom" glow.
+	_thunder_pending = true
+	_thunder_delay = randf_range(0.18, 0.5)
 
 	if _lightning_sparks:
 		_lightning_sparks.position = ground_pt * sc
@@ -1585,13 +1828,17 @@ func _strike_lightning(sum: Vector3) -> void:
 
 
 ## Calm-mode sun shaft: show only in calm mode, slowly bob, rising motes.
-func _drive_sun_shaft(_delta: float, _sum: Vector3) -> void:
+func _drive_sun_shaft(delta: float, _sum: Vector3) -> void:
 	if _sun_shaft == null:
 		return
 	var want: bool = bool(_palette().get("sun", false))
 	_sun_shaft.visible = want
 	if _sun_motes:
 		_sun_motes.emitting = want
+	# Gentle breathing of the shaft brightness so the calm light feels alive.
+	if want and _sun_shaft_mat:
+		_sun_pulse_t += delta
+		_sun_shaft_mat.emission_energy_multiplier = 0.75 + 0.25 * sin(_sun_pulse_t * 0.8)
 
 
 func _update_streamlines(a: Vector3, b: Vector3) -> void:
@@ -1622,18 +1869,38 @@ func _update_streamlines(a: Vector3, b: Vector3) -> void:
 func _update_temperature_tint(sum: Vector3) -> void:
 	## Warm/cool tint of the ground driven by the wind's vertical sign:
 	## updraft (warm air rising) -> warm; downdraft -> cool. Also nudged by speed.
+	## On top of the thermal tint we color-grade toward the active mode's
+	## `ground_tint` and raise the floor's metallic/sheen with the mode's `wet`
+	## value so a wet storm floor mirrors the rain and lightning.
 	if ground_material == null:
 		return
 	# -1 (cool/down) .. +1 (warm/up)
 	var thermal: float = clampf(sum.y * 0.6, -1.0, 1.0)
 	var t: float = (thermal + 1.0) * 0.5   # 0..1
-	var cool := Color(0.06, 0.1, 0.18, 0.85)
-	var warm := Color(0.16, 0.11, 0.08, 0.85)
+	var cool := Color(0.06, 0.1, 0.18, 0.9)
+	var warm := Color(0.16, 0.11, 0.08, 0.9)
 	var base := cool.lerp(warm, t)
-	ground_material.albedo_color = base
+
+	# Per-mode color grade pulls the floor toward the mode's signature tint.
+	var pal := _palette()
+	var mode_tint: Color = pal.get("ground_tint", Color(0.08, 0.1, 0.14))
+	var graded := base.lerp(Color(mode_tint.r, mode_tint.g, mode_tint.b, base.a), 0.6)
+	ground_material.albedo_color = graded
+
 	var cool_em := Color(0.04, 0.06, 0.12)
 	var warm_em := Color(0.14, 0.07, 0.03)
 	ground_material.emission = cool_em.lerp(warm_em, t)
+
+	# Wet sheen: a wet floor is darker, glossier, and a touch metallic so the
+	# emissive rain + lightning flash reflect off it. Lerp toward the wet look so
+	# mode changes feel like the floor drying / soaking.
+	var wet: float = clampf(float(pal.get("wet", 0.0)), 0.0, 1.0)
+	var target_rough: float = lerpf(0.85, 0.12, wet)
+	var target_metal: float = lerpf(0.0, 0.55, wet)
+	ground_material.roughness = lerpf(ground_material.roughness, target_rough, 0.08)
+	ground_material.metallic = lerpf(ground_material.metallic, target_metal, 0.08)
+	# Brighten the floor's own glow slightly when wet so reflections read in VR.
+	ground_material.emission_energy_multiplier = lerpf(0.3, 0.6, wet)
 
 
 func _update_info_text(a: Vector3, b: Vector3, sum: Vector3) -> void:
@@ -1983,12 +2250,21 @@ func grid_arrows_reset() -> void:
 	_lightning_sparks = null
 	_lightning_light = null
 	_lightning_flash = 0.0
+	_lightning_glow = 0.0
+	_thunder_delay = 0.0
+	_thunder_pending = false
+	_splash_gpu = null
+	_splash_mat = null
 	_sun_shaft = null
 	_sun_shaft_mat = null
 	_sun_motes = null
 	_sun_motes_mat = null
+	_sun_pulse_t = 0.0
 	_streamline_mm = null
 	_streamline_seeds = PackedVector3Array()
+	_resultant_glow = null
+	_resultant_glow_mat = null
+	_glow_pulse_t = 0.0
 	_cached_a = {}
 	_cached_b = {}
 	_cached_sum = {}

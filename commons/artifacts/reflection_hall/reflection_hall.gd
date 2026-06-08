@@ -49,11 +49,42 @@ const WORLD_LAYER: int = 1            # walls + floor live here (balls collide w
 var incident_color: Color = Color(1.0, 0.5, 0.3, 1.0)   # orange  = d (incident)
 var normal_color: Color = Color(0.3, 0.8, 1.0, 1.0)     # cyan    = n̂ (normal)
 var reflected_color: Color = Color(1.0, 0.7, 1.0, 1.0)  # magenta = r (reflected)
-var wall_color: Color = Color(0.16, 0.17, 0.22, 1.0)
-var floor_color: Color = Color(0.10, 0.11, 0.14, 1.0)
+
+# ── Neon holodeck palette ───────────────────────────────────────────────────
+# Dark base so the room reads as a void; emissive grid lines do the glowing.
+var wall_color: Color = Color(0.025, 0.03, 0.05, 1.0)
+var floor_color: Color = Color(0.02, 0.025, 0.045, 1.0)
 var ball_color: Color = Color(0.95, 0.75, 0.25, 1.0)
 
+# Per-wall accent hues — each surface reads as its own plane. Keyed by wall name.
+var _wall_accents: Dictionary = {
+	"Floor": Color(0.20, 0.95, 0.85, 1.0),         # teal
+	"Ceiling": Color(0.55, 0.45, 1.0, 1.0),        # violet
+	"WallXPlus": Color(1.0, 0.35, 0.65, 1.0),      # rose
+	"WallXMinus": Color(0.35, 0.80, 1.0, 1.0),     # sky cyan
+	"WallZPlus": Color(0.55, 1.0, 0.45, 1.0),      # lime
+	"EntranceLeft": Color(1.0, 0.70, 0.25, 1.0),   # amber
+	"EntranceRight": Color(1.0, 0.70, 0.25, 1.0),  # amber
+	"EntranceLintel": Color(1.0, 0.55, 0.20, 1.0), # deep amber
+	"DoorwayCurtain": Color(1.0, 0.55, 0.20, 1.0),
+}
+
+# Distinct neon palette cycled per launched ball.
+const BALL_PALETTE: Array = [
+	Color(1.0, 0.45, 0.20, 1.0),   # neon orange
+	Color(0.30, 0.95, 1.0, 1.0),   # electric cyan
+	Color(1.0, 0.30, 0.85, 1.0),   # hot magenta
+	Color(0.55, 1.0, 0.35, 1.0),   # acid green
+	Color(1.0, 0.85, 0.25, 1.0),   # gold
+	Color(0.65, 0.45, 1.0, 1.0),   # violet
+]
+var _ball_color_idx: int = 0
+
 const ARROW_THICKNESS: float = 0.02
+
+# Grid line spacing on walls (metres) and how strongly the lines glow.
+const GRID_SPACING: float = 0.5
+const GRID_EMISSION: float = 2.6
 
 # Grab-throw ball scene (primary VR interaction). Falls back gracefully if missing.
 const THROW_BALL_SCENE_PATH: String = "res://algorithms/vectors/08_vector_throwing/throw_ball.tscn"
@@ -65,10 +96,15 @@ var _walls: Array = []
 var _ball_container: Node3D = null
 var _annotation_container: Node3D = null
 var _trail_container: Node3D = null
+var _ripple_container: Node3D = null
 var _rack_root: Node3D = null
 var _console_root: Node3D = null
 var _info_label: Label3D = null
 var _bounce_counter_label: Label3D = null
+
+# Per-wall permanent normal arrow (Node3D) keyed by wall_idx → flares on a hit.
+var _wall_normal_arrows: Dictionary = {}   # int wall_idx → Node3D arrow
+var _wall_glow_lights: Array = []          # OmniLight3D accent glows (capped)
 
 var _throw_ball_scene: PackedScene = null
 var _live_balls: Array = []           # Array of RigidBody3D (our launched/console balls)
@@ -104,11 +140,17 @@ func _ready() -> void:
 	_trail_container.name = "Trails"
 	add_child(_trail_container)
 
+	_ripple_container = Node3D.new()
+	_ripple_container.name = "Ripples"
+	add_child(_ripple_container)
+
 	if ResourceLoader.exists(THROW_BALL_SCENE_PATH):
 		_throw_ball_scene = load(THROW_BALL_SCENE_PATH)
 
 	_build_room()
 	_build_doorway_curtain()
+	_build_wall_normals()        # permanent soft-glowing normal on each surface
+	_build_lighting()            # OmniLights + floor accent so the interior glows
 	_build_info_panel()
 	_build_ball_rack()
 	_build_console()
@@ -120,6 +162,8 @@ func _process(delta: float) -> void:
 	# Update fading trails for every live ball.
 	_update_trails()
 	_age_annotations(delta)
+	_age_ripples(delta)
+	_decay_wall_normal_flares(delta)
 
 	# Desktop / headless fallback: auto-launch a ball into the hall periodically so a
 	# capture shows bounces + annotations + trails even without VR controllers.
@@ -268,12 +312,24 @@ func _add_wall(wall_name: String, center: Vector3, size: Vector3,
 	col.shape = shape
 	body.add_child(col)
 
+	# Dark base panel: a near-black emissive slab so the wall is faintly lit, not flat.
+	var accent: Color = _wall_accents.get(wall_name, Color(0.4, 0.7, 1.0, 1.0))
 	var mesh := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = size
 	mesh.mesh = box
-	mesh.material_override = _make_material(color, 0.0, 0.85, 0.05)
+	var base_mat := _make_material(color, 0.0, 0.55, 0.0)
+	base_mat.emission_enabled = true
+	base_mat.emission = accent
+	base_mat.emission_energy_multiplier = 0.10   # very faint inner glow
+	mesh.material_override = base_mat
 	body.add_child(mesh)
+
+	# Glowing wireframe grid drawn on the inward face of the panel.
+	_add_wall_grid(body, size, inward_normal.normalized(), accent)
+
+	# Neon edge trim: a bright emissive frame around the inward face perimeter.
+	_add_wall_trim(body, size, inward_normal.normalized(), accent)
 
 	# Tag the wall body with its index into _walls so a ball's body_entered handler
 	# can recover the normal. (StaticBody3D has no body_entered signal — the moving
@@ -284,7 +340,127 @@ func _add_wall(wall_name: String, center: Vector3, size: Vector3,
 		"normal": inward_normal.normalized(),
 		"anchor": label_anchor,
 		"name": wall_name,
+		"accent": accent,
 	})
+
+
+## Draw an emissive wireframe grid on the INWARD face of a wall panel.
+## The grid is an ImmediateMesh of line segments, offset a hair off the surface so
+## it never z-fights, glowing in the wall's accent hue. This is what lights the room
+## from within and gives every surface its holodeck reading.
+func _add_wall_grid(body: StaticBody3D, size: Vector3, inward: Vector3, accent: Color) -> void:
+	# Work out the two in-plane axes (u, v) and the surface offset along the inward
+	# normal. The panel is a box; the inward face sits half a thickness toward centre.
+	var n: Vector3 = inward.normalized()
+	var u: Vector3 = Vector3.ZERO
+	var v: Vector3 = Vector3.ZERO
+	var half_u: float = 0.0
+	var half_v: float = 0.0
+	var offset: float = 0.0
+	if absf(n.y) > 0.5:
+		# Floor / ceiling: plane spans X (u) and Z (v); offset along Y.
+		u = Vector3(1, 0, 0); v = Vector3(0, 0, 1)
+		half_u = size.x * 0.5; half_v = size.z * 0.5; offset = size.y * 0.5
+	elif absf(n.x) > 0.5:
+		# +X / -X wall: plane spans Z (u) and Y (v); offset along X.
+		u = Vector3(0, 0, 1); v = Vector3(0, 1, 0)
+		half_u = size.z * 0.5; half_v = size.y * 0.5; offset = size.x * 0.5
+	else:
+		# +Z / -Z wall: plane spans X (u) and Y (v); offset along Z.
+		u = Vector3(1, 0, 0); v = Vector3(0, 1, 0)
+		half_u = size.x * 0.5; half_v = size.y * 0.5; offset = size.z * 0.5
+
+	# Surface centre in the body's local space (a hair inside the face).
+	var surf: Vector3 = n * (offset - 0.006)
+
+	var mi := MeshInstance3D.new()
+	mi.name = "Grid"
+	var im := ImmediateMesh.new()
+	mi.mesh = im
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = accent
+	mat.emission_energy_multiplier = GRID_EMISSION
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mi.material_override = mat
+
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	var line_col: Color = accent
+	line_col.a = 0.85
+	# Lines parallel to v (vary along u).
+	var nu: int = int(half_u / GRID_SPACING)
+	for iu in range(-nu, nu + 1):
+		var cu: float = float(iu) * GRID_SPACING
+		if absf(cu) > half_u:
+			continue
+		im.surface_set_color(line_col)
+		im.surface_add_vertex(surf + u * cu - v * half_v)
+		im.surface_set_color(line_col)
+		im.surface_add_vertex(surf + u * cu + v * half_v)
+	# Lines parallel to u (vary along v).
+	var nv: int = int(half_v / GRID_SPACING)
+	for iv in range(-nv, nv + 1):
+		var cv: float = float(iv) * GRID_SPACING
+		if absf(cv) > half_v:
+			continue
+		im.surface_set_color(line_col)
+		im.surface_add_vertex(surf - u * half_u + v * cv)
+		im.surface_set_color(line_col)
+		im.surface_add_vertex(surf + u * half_u + v * cv)
+	im.surface_end()
+
+	body.add_child(mi)
+
+
+## Bright neon perimeter trim around the inward face — a glowing frame where walls meet.
+func _add_wall_trim(body: StaticBody3D, size: Vector3, inward: Vector3, accent: Color) -> void:
+	var n: Vector3 = inward.normalized()
+	var u: Vector3 = Vector3.ZERO
+	var v: Vector3 = Vector3.ZERO
+	var half_u: float = 0.0
+	var half_v: float = 0.0
+	var offset: float = 0.0
+	if absf(n.y) > 0.5:
+		u = Vector3(1, 0, 0); v = Vector3(0, 0, 1)
+		half_u = size.x * 0.5; half_v = size.z * 0.5; offset = size.y * 0.5
+	elif absf(n.x) > 0.5:
+		u = Vector3(0, 0, 1); v = Vector3(0, 1, 0)
+		half_u = size.z * 0.5; half_v = size.y * 0.5; offset = size.x * 0.5
+	else:
+		u = Vector3(1, 0, 0); v = Vector3(0, 1, 0)
+		half_u = size.x * 0.5; half_v = size.y * 0.5; offset = size.z * 0.5
+
+	var surf: Vector3 = n * (offset - 0.004)
+
+	var mi := MeshInstance3D.new()
+	mi.name = "Trim"
+	var im := ImmediateMesh.new()
+	mi.mesh = im
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = accent
+	mat.emission_energy_multiplier = GRID_EMISSION * 1.6
+	mi.material_override = mat
+
+	# Four corners of the inward face.
+	var c0: Vector3 = surf - u * half_u - v * half_v
+	var c1: Vector3 = surf + u * half_u - v * half_v
+	var c2: Vector3 = surf + u * half_u + v * half_v
+	var c3: Vector3 = surf - u * half_u + v * half_v
+	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	var bright: Color = accent
+	bright.a = 1.0
+	for p in [c0, c1, c2, c3, c0]:
+		im.surface_set_color(bright)
+		im.surface_add_vertex(p)
+	im.surface_end()
+
+	body.add_child(mi)
 
 
 ## Invisible "doorway curtain" across the entrance gap.
@@ -324,7 +500,178 @@ func _build_doorway_curtain() -> void:
 		"normal": Vector3(0.0, 0.0, 1.0),
 		"anchor": Vector3(0.0, door_height * 0.6, z_anchor),
 		"name": "DoorwayCurtain",
+		"accent": _wall_accents.get("DoorwayCurtain", Color(1.0, 0.55, 0.20, 1.0)),
 	})
+
+
+# ═════════════════════════════════════════════════════════════════════════
+# WALL NORMALS + LIGHTING (the holodeck glow)
+# ═════════════════════════════════════════════════════════════════════════
+
+## A soft, always-visible normal arrow on every reflective surface so the geometry's
+## normals are legible BEFORE any bounce. They sit low-intensity and brighten (flare)
+## for a moment when a ball strikes that wall — see _flare_wall_normal.
+func _build_wall_normals() -> void:
+	for idx in range(_walls.size()):
+		var wall: Dictionary = _walls[idx]
+		var wname: String = wall.get("name", "")
+		# Skip the doorway curtain — it shares the entrance plane with the lintel/panels
+		# and an arrow floating in the doorway would clutter the threshold.
+		if wname == "DoorwayCurtain":
+			continue
+		var body = wall.get("body")
+		if body == null or not is_instance_valid(body):
+			continue
+		var n_local: Vector3 = wall.get("normal", Vector3.UP)
+		var accent: Color = wall.get("accent", normal_color)
+
+		# Anchor the arrow on the surface, pointing inward. Parent it to self so it's
+		# in the hall's local frame; place it at the wall body's position projected to
+		# the inward face, nudged toward the room centre.
+		var holder := Node3D.new()
+		holder.name = "WallNormal_%d" % idx
+		holder.position = body.position
+		add_child(holder)
+
+		var arrow := _create_arrow("Normal", accent)
+		holder.add_child(arrow)
+		# A short fixed-length normal, soft by default.
+		_position_arrow(arrow, n_local * 0.08, n_local * 0.55)
+		_set_arrow_energy(arrow, 0.5)
+
+		_wall_normal_arrows[idx] = arrow
+
+
+## A handful of OmniLights + a spotlight to lift the interior out of darkness, plus a
+## glowing floor accent disc at room centre. Light count is capped for VR.
+func _build_lighting() -> void:
+	var hw: float = room_width * 0.5
+	var hd: float = room_depth * 0.5
+
+	# Two warm/cool fill omnis high in the room, opposite corners — even, dramatic fill.
+	var fills: Array = [
+		{ "pos": Vector3(-hw * 0.55, room_height * 0.78, -hd * 0.45), "col": Color(0.45, 0.70, 1.0), "energy": 2.2 },
+		{ "pos": Vector3(hw * 0.55, room_height * 0.78, hd * 0.45), "col": Color(1.0, 0.55, 0.80), "energy": 2.2 },
+		{ "pos": Vector3(0.0, room_height * 0.35, 0.0), "col": Color(0.7, 0.9, 1.0), "energy": 1.4 },
+	]
+	for spec in fills:
+		var omni := OmniLight3D.new()
+		omni.position = spec["pos"]
+		omni.light_color = spec["col"]
+		omni.light_energy = spec["energy"]
+		omni.omni_range = room_width * 1.2
+		omni.light_specular = 0.3
+		omni.shadow_enabled = false
+		add_child(omni)
+		_wall_glow_lights.append(omni)
+
+	# A downward spotlight over centre to pool light on the floor accent.
+	var spot := SpotLight3D.new()
+	spot.position = Vector3(0.0, room_height - 0.1, 0.0)
+	spot.rotation = Vector3(deg_to_rad(-90.0), 0.0, 0.0)
+	spot.light_color = Color(0.85, 0.95, 1.0)
+	spot.light_energy = 3.0
+	spot.spot_range = room_height + 0.5
+	spot.spot_angle = 42.0
+	spot.shadow_enabled = false
+	add_child(spot)
+
+	# Glowing floor accent: a thin emissive disc + ring at room centre.
+	var disc := MeshInstance3D.new()
+	disc.name = "FloorAccent"
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = 1.1
+	cyl.bottom_radius = 1.1
+	cyl.height = 0.012
+	cyl.radial_segments = 48
+	disc.mesh = cyl
+	var disc_mat := StandardMaterial3D.new()
+	disc_mat.albedo_color = Color(0.05, 0.5, 0.55, 0.35)
+	disc_mat.emission_enabled = true
+	disc_mat.emission = Color(0.20, 0.95, 0.90)
+	disc_mat.emission_energy_multiplier = 1.8
+	disc_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	disc_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	disc.material_override = disc_mat
+	disc.position = Vector3(0.0, 0.012, 0.0)
+	add_child(disc)
+
+	# Neon doorway frame: a bright U-frame around the entrance gap so the threshold reads.
+	_build_entrance_frame()
+
+
+## A bright neon U-frame (two jambs + lintel edge) around the entrance gap so the
+## doorway is an obvious glowing threshold.
+func _build_entrance_frame() -> void:
+	var hd: float = room_depth * 0.5
+	var t: float = wall_thickness
+	var z_face: float = -hd + 0.02   # just inside the entrance plane
+	var half_door: float = door_width * 0.5
+	var frame_col: Color = Color(1.0, 0.6, 0.2, 1.0)
+
+	var mi := MeshInstance3D.new()
+	mi.name = "EntranceFrame"
+	var im := ImmediateMesh.new()
+	mi.mesh = im
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = frame_col
+	mat.emission_energy_multiplier = 3.2
+	mi.material_override = mat
+
+	# U-shape: up the left jamb, across the lintel, down the right jamb.
+	var pts: Array = [
+		Vector3(-half_door, 0.02, z_face),
+		Vector3(-half_door, door_height, z_face),
+		Vector3(half_door, door_height, z_face),
+		Vector3(half_door, 0.02, z_face),
+	]
+	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	for p in pts:
+		im.surface_set_color(frame_col)
+		im.surface_add_vertex(p)
+	im.surface_end()
+	add_child(mi)
+
+
+## Brighten a wall's permanent normal arrow at the instant a ball hits it; the flare
+## decays back to the soft baseline in _decay_wall_normal_flares.
+func _flare_wall_normal(wall_idx: int) -> void:
+	if not _wall_normal_arrows.has(wall_idx):
+		return
+	var arrow = _wall_normal_arrows[wall_idx]
+	if arrow == null or not is_instance_valid(arrow):
+		return
+	_set_arrow_energy(arrow, 4.0)
+	arrow.set_meta("flare", 1.0)
+
+
+## Each frame, ease every flared normal arrow back toward its soft baseline energy.
+func _decay_wall_normal_flares(delta: float) -> void:
+	for key in _wall_normal_arrows.keys():
+		var arrow = _wall_normal_arrows[key]
+		if arrow == null or not is_instance_valid(arrow):
+			continue
+		var flare: float = float(arrow.get_meta("flare", 0.0))
+		if flare <= 0.0:
+			continue
+		flare = maxf(0.0, flare - delta * 2.0)
+		arrow.set_meta("flare", flare)
+		# Baseline 0.5 → peak 4.0 scaled by flare.
+		_set_arrow_energy(arrow, lerp(0.5, 4.0, flare))
+
+
+## Set the emission energy on both meshes of an arrow (shaft + head share one mat).
+func _set_arrow_energy(arrow: Node3D, energy: float) -> void:
+	if arrow == null or not is_instance_valid(arrow):
+		return
+	var shaft = arrow.get_node_or_null("Shaft")
+	if shaft is MeshInstance3D:
+		var mat = (shaft as MeshInstance3D).material_override
+		if mat is StandardMaterial3D:
+			(mat as StandardMaterial3D).emission_energy_multiplier = energy
 
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -342,14 +689,40 @@ func _build_info_panel() -> void:
 	panel.rotation = Vector3(0.0, deg_to_rad(-90.0), 0.0)
 	add_child(panel)
 
+	# Dark translucent backing with a faint cyan inner glow — a holo-readout slab.
 	var backing := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = Vector3(1.8, 1.0, 0.02)
 	backing.mesh = box
-	backing.material_override = _make_material(Color(0.04, 0.05, 0.07, 0.92), 0.0, 0.85, 0.1)
+	var back_mat := _make_material(Color(0.02, 0.04, 0.06, 0.88), 0.0, 0.6, 0.0)
+	back_mat.emission_enabled = true
+	back_mat.emission = Color(0.10, 0.45, 0.65)
+	back_mat.emission_energy_multiplier = 0.5
+	backing.material_override = back_mat
 	panel.add_child(backing)
 
-	var title := _make_label("LAW OF REFLECTION", Color(0.9, 0.95, 1.0), 26)
+	# Bright neon frame around the panel edge.
+	var frame := MeshInstance3D.new()
+	var frame_im := ImmediateMesh.new()
+	frame.mesh = frame_im
+	var frame_mat := StandardMaterial3D.new()
+	frame_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	frame_mat.vertex_color_use_as_albedo = true
+	frame_mat.emission_enabled = true
+	frame_mat.emission = Color(0.3, 0.85, 1.0)
+	frame_mat.emission_energy_multiplier = 2.8
+	frame.material_override = frame_mat
+	var fw: float = 0.92
+	var fh: float = 0.52
+	var fz: float = 0.022
+	frame_im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	for p in [Vector3(-fw, -fh, fz), Vector3(fw, -fh, fz), Vector3(fw, fh, fz), Vector3(-fw, fh, fz), Vector3(-fw, -fh, fz)]:
+		frame_im.surface_set_color(Color(0.3, 0.85, 1.0))
+		frame_im.surface_add_vertex(p)
+	frame_im.surface_end()
+	panel.add_child(frame)
+
+	var title := _make_label("LAW OF REFLECTION", Color(0.55, 0.95, 1.0), 26)
 	title.position = Vector3(0.0, 0.36, 0.02)
 	panel.add_child(title)
 
@@ -374,29 +747,36 @@ func _build_ball_rack() -> void:
 	_rack_root.position = Vector3(-room_width * 0.5 + 0.6, 0.0, -hd + 0.7)
 	add_child(_rack_root)
 
-	# A simple shelf for the balls to rest on.
+	# A glowing neon shelf for the balls to rest on.
 	var shelf := MeshInstance3D.new()
 	var shelf_box := BoxMesh.new()
 	shelf_box.size = Vector3(1.0, 0.05, 0.3)
 	shelf.mesh = shelf_box
-	shelf.material_override = _make_material(Color(0.2, 0.21, 0.25), 0.0, 0.7, 0.2)
+	var shelf_mat := _make_material(Color(0.04, 0.06, 0.09), 0.0, 0.5, 0.0)
+	shelf_mat.emission_enabled = true
+	shelf_mat.emission = Color(1.0, 0.70, 0.25)
+	shelf_mat.emission_energy_multiplier = 1.2
+	shelf.material_override = shelf_mat
 	shelf.position = Vector3(0.0, 0.9, 0.0)
 	_rack_root.add_child(shelf)
 
-	var rack_label := _make_label("THROW ME", Color(0.95, 0.8, 0.3), 18)
+	var rack_label := _make_label("THROW ME", Color(1.0, 0.78, 0.30), 18)
 	rack_label.position = Vector3(0.0, 1.25, 0.0)
 	_rack_root.add_child(rack_label)
 
-	# Instance up to 3 grab-throw balls resting on the shelf.
+	# Instance up to 3 grab-throw balls resting on the shelf, each a distinct neon hue.
 	if _throw_ball_scene != null:
 		var offsets: Array = [-0.32, 0.0, 0.32]
+		var slot: int = 0
 		for ox in offsets:
 			var b = _throw_ball_scene.instantiate()
 			if b == null:
 				continue
+			var hue: Color = BALL_PALETTE[slot % BALL_PALETTE.size()]
+			slot += 1
 			b.position = Vector3(ox, 1.0, 0.0)
 			if b.has_method("set_ball_color"):
-				b.call("set_ball_color", ball_color)
+				b.call("set_ball_color", hue)
 			_rack_root.add_child(b)
 			# The grab-throw ball masks world layer 1 (walls) by default; add
 			# BALL_LAYER so it also collides with the doorway curtain and stays in.
@@ -406,9 +786,11 @@ func _build_ball_rack() -> void:
 				# Track it for bounce capture (prev_vel cache + trail + annotation).
 				# It starts frozen; the _physics_process cache only writes while moving,
 				# so prev_vel becomes valid once the player throws it.
+				rb.set_meta("ball_hue", hue)
 				rb.set_meta("prev_vel", Vector3.ZERO)
 				rb.set_meta("trail", PackedVector3Array())
-				rb.set_meta("trail_mesh", _make_trail_mesh(rb))
+				rb.set_meta("trail_mesh", _make_trail_mesh(rb, hue))
+				_add_ball_glow(rb, hue)
 				_register_ball(rb, false)
 
 
@@ -532,12 +914,22 @@ func _launch_console_ball() -> void:
 	phys.friction = ball_friction
 	ball.physics_material_override = phys
 
+	# Distinct neon hue cycled per launch.
+	var hue: Color = BALL_PALETTE[_ball_color_idx % BALL_PALETTE.size()]
+	_ball_color_idx += 1
+	ball.set_meta("ball_hue", hue)
+
+	# Bright emissive core sphere.
 	var mesh := MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = ball_radius
 	sphere.height = ball_radius * 2.0
 	mesh.mesh = sphere
-	mesh.material_override = _make_material(ball_color, 0.6, 0.4, 0.1)
+	var core_mat := _make_material(hue, 0.0, 0.25, 0.0)
+	core_mat.emission_enabled = true
+	core_mat.emission = hue
+	core_mat.emission_energy_multiplier = 4.5
+	mesh.material_override = core_mat
 	ball.add_child(mesh)
 
 	var col := CollisionShape3D.new()
@@ -546,8 +938,11 @@ func _launch_console_ball() -> void:
 	col.shape = shape
 	ball.add_child(col)
 
-	# A velocity arrow riding the ball.
-	var vel_arrow := _create_arrow("BallVelocity", reflected_color)
+	# Soft colored glow halo around the core + a small point light that travels with it.
+	_add_ball_glow(ball, hue)
+
+	# A velocity arrow riding the ball, tinted to the ball's hue.
+	var vel_arrow := _create_arrow("BallVelocity", hue)
 	ball.add_child(vel_arrow)
 	ball.set_meta("vel_arrow", vel_arrow)
 
@@ -562,10 +957,47 @@ func _launch_console_ball() -> void:
 	ball.linear_velocity = v_world
 	ball.set_meta("prev_vel", v_world)
 	ball.set_meta("trail", PackedVector3Array())
-	ball.set_meta("trail_mesh", _make_trail_mesh(ball))
+	ball.set_meta("trail_mesh", _make_trail_mesh(ball, hue))
 
 	_register_ball(ball)
 	_orient_ball_arrow(ball, v_world)
+
+
+## Give a ball a soft additive glow halo + a small travelling point light, so it reads
+## as a light source streaking through the room. Capped: one omni per ball, no shadows.
+func _add_ball_glow(ball: RigidBody3D, hue: Color) -> void:
+	# Translucent additive halo sphere, ~2.2x the core radius.
+	var halo := MeshInstance3D.new()
+	halo.name = "Glow"
+	var hsphere := SphereMesh.new()
+	hsphere.radius = ball_radius * 2.2
+	hsphere.height = ball_radius * 4.4
+	hsphere.radial_segments = 12
+	hsphere.rings = 6
+	halo.mesh = hsphere
+	var halo_mat := StandardMaterial3D.new()
+	halo_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	halo_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	halo_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	halo_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var halo_col: Color = hue
+	halo_col.a = 0.30
+	halo_mat.albedo_color = halo_col
+	halo_mat.emission_enabled = true
+	halo_mat.emission = hue
+	halo_mat.emission_energy_multiplier = 2.0
+	halo.material_override = halo_mat
+	ball.add_child(halo)
+
+	# A small travelling light (no shadow, modest range) — one per ball, capped by the
+	# ball cap (max_live_balls). Keeps the streak feeling like real light.
+	var light := OmniLight3D.new()
+	light.name = "BallLight"
+	light.light_color = hue
+	light.light_energy = 1.6
+	light.omni_range = 1.6
+	light.shadow_enabled = false
+	ball.add_child(light)
 
 
 ## Register a ball: track it, connect bounce reporting, and (for launched balls only)
@@ -652,6 +1084,14 @@ func _on_ball_body_entered(wall_body: Node, ball: Node) -> void:
 
 	_spawn_annotation(hit_world, d_world, n_world, r_world, d_dot_n, ok)
 
+	# Brighten this wall's permanent normal arrow at the impact instant.
+	_flare_wall_normal(wall_idx)
+
+	# A glowing ripple ring blooms on the wall at the contact point, oriented to face
+	# along the surface normal, tinted to the wall's accent.
+	var accent: Color = wall.get("accent", normal_color)
+	_spawn_ripple(hit_world, n_world, accent)
+
 	_bounce_count += 1
 	if _bounce_counter_label:
 		_bounce_counter_label.text = "bounces: %d" % _bounce_count
@@ -680,29 +1120,69 @@ func _spawn_annotation(hit_world: Vector3, d_world: Vector3, n_world: Vector3,
 	var inc_arrow := _create_arrow("Incident", incident_color)
 	cluster.add_child(inc_arrow)
 	_position_arrow(inc_arrow, -d_world * vscale, Vector3.ZERO)
+	_set_arrow_energy(inc_arrow, 3.5)
 
 	# Normal n̂: short fixed-length arrow along the inward normal.
 	var norm_arrow := _create_arrow("Normal", normal_color)
 	cluster.add_child(norm_arrow)
 	_position_arrow(norm_arrow, Vector3.ZERO, n_world * 0.5)
+	_set_arrow_energy(norm_arrow, 3.5)
 
 	# Reflected r: leaving the hit point along r.
 	var refl_arrow := _create_arrow("Reflected", reflected_color)
 	cluster.add_child(refl_arrow)
 	_position_arrow(refl_arrow, Vector3.ZERO, r_world * vscale)
+	_set_arrow_energy(refl_arrow, 3.5)
+
+	# Holographic backing slab behind the formula label — translucent, faintly glowing.
+	var holo := MeshInstance3D.new()
+	holo.name = "HoloBack"
+	var holo_box := BoxMesh.new()
+	holo_box.size = Vector3(0.9, 0.62, 0.008)
+	holo.mesh = holo_box
+	var holo_mat := StandardMaterial3D.new()
+	holo_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	holo_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	holo_mat.albedo_color = Color(0.05, 0.55, 0.75, 0.32)
+	holo_mat.emission_enabled = true
+	holo_mat.emission = Color(0.15, 0.7, 0.95)
+	holo_mat.emission_energy_multiplier = 1.6
+	holo_mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	holo.material_override = holo_mat
+	holo.position = Vector3(0.0, 0.45, 0.0)
+	cluster.add_child(holo)
 
 	# Live-formula label with numbers + verification check.
 	var check_str: String = "✓ r ≈ v_out" if ok else "~ r vs v_out"
-	var label := _make_label(
+	var formula := _make_label(
 		"r = d - 2(d.n̂)n̂\nd=(%.1f, %.1f, %.1f)\nn̂=(%.1f, %.1f, %.1f)\nd·n̂=%.2f\nr=(%.1f, %.1f, %.1f)\n%s" % [
 			d_world.x, d_world.y, d_world.z,
 			n_world.x, n_world.y, n_world.z,
 			d_dot_n,
 			r_world.x, r_world.y, r_world.z,
 			check_str],
-		Color(0.9, 0.95, 1.0), 14)
-	label.position = Vector3(0.0, 0.35, 0.0)
-	cluster.add_child(label)
+		Color(0.75, 0.98, 1.0), 14)
+	formula.position = Vector3(0.0, 0.45, 0.006)
+	cluster.add_child(formula)
+
+	# A bright impact flash sphere at the hit point — pops, then the cluster fade
+	# (driven by _age_annotations) eases it away with everything else.
+	var flash := MeshInstance3D.new()
+	flash.name = "Flash"
+	var fsphere := SphereMesh.new()
+	fsphere.radius = ball_radius * 1.8
+	fsphere.height = ball_radius * 3.6
+	flash.mesh = fsphere
+	var flash_mat := StandardMaterial3D.new()
+	flash_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	flash_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	flash_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	flash_mat.albedo_color = Color(1.0, 1.0, 1.0, 0.9)
+	flash_mat.emission_enabled = true
+	flash_mat.emission = Color(1.0, 1.0, 1.0)
+	flash_mat.emission_energy_multiplier = 5.0
+	flash.material_override = flash_mat
+	cluster.add_child(flash)
 
 	# Age the cluster so it fades and frees itself.
 	cluster.set_meta("age", 0.0)
@@ -720,6 +1200,15 @@ func _age_annotations(delta: float) -> void:
 		var u: float = clampf(age / annotation_lifetime, 0.0, 1.0)
 		var alpha: float = 1.0 - u
 		_fade_node_tree(cluster, alpha)
+		# The impact flash pops big then collapses fast in the first ~0.25s.
+		var flash := cluster.get_node_or_null("Flash")
+		if flash is MeshInstance3D:
+			var fu: float = clampf(age / 0.25, 0.0, 1.0)
+			var s: float = lerp(0.4, 2.6, fu)
+			flash.scale = Vector3(s, s, s)
+			var fmat = (flash as MeshInstance3D).material_override
+			if fmat is StandardMaterial3D:
+				(fmat as StandardMaterial3D).emission_energy_multiplier = lerp(6.0, 0.0, fu)
 		if age >= annotation_lifetime:
 			cluster.queue_free()
 
@@ -745,12 +1234,82 @@ func _fade_node_tree(node: Node, alpha: float) -> void:
 
 
 # ═════════════════════════════════════════════════════════════════════════
+# IMPACT RIPPLES — a glowing ring blooms on the wall where a ball strikes
+# ═════════════════════════════════════════════════════════════════════════
+
+## Spawn an expanding, fading neon ring lying flat on the struck wall, centred at the
+## hit point and oriented so its plane faces along the surface normal.
+func _spawn_ripple(hit_world: Vector3, n_world: Vector3, accent: Color) -> void:
+	if _ripple_container == null:
+		return
+	# Cap concurrent ripples for VR.
+	if _ripple_container.get_child_count() >= 8:
+		var oldest := _ripple_container.get_child(0)
+		if is_instance_valid(oldest):
+			oldest.queue_free()
+
+	var ring := MeshInstance3D.new()
+	ring.name = "Ripple"
+	var torus := TorusMesh.new()
+	torus.inner_radius = 0.05
+	torus.outer_radius = 0.08
+	torus.rings = 24
+	torus.ring_segments = 6
+	ring.mesh = torus
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	mat.albedo_color = accent
+	mat.emission_enabled = true
+	mat.emission = accent
+	mat.emission_energy_multiplier = 4.0
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	ring.material_override = mat
+	_ripple_container.add_child(ring)
+
+	# TorusMesh lies in the XZ plane (axis = +Y). Rotate so its axis aligns with the
+	# inward normal, and sit it a hair off the surface (toward room centre).
+	ring.global_position = hit_world + n_world * 0.02
+	var axis: Vector3 = Vector3.UP.cross(n_world)
+	if axis.length() > 0.0001:
+		var ang: float = Vector3.UP.angle_to(n_world)
+		ring.global_transform = ring.global_transform.rotated_local(axis.normalized(), ang)
+	ring.set_meta("age", 0.0)
+
+
+## Expand + fade every ripple over its short lifetime, then free it.
+func _age_ripples(delta: float) -> void:
+	if _ripple_container == null:
+		return
+	var ripple_life: float = 0.7
+	for ring in _ripple_container.get_children():
+		if not (ring is MeshInstance3D):
+			continue
+		var age: float = float(ring.get_meta("age", 0.0)) + delta
+		ring.set_meta("age", age)
+		var u: float = clampf(age / ripple_life, 0.0, 1.0)
+		var s: float = lerp(0.4, 6.0, u)
+		ring.scale = Vector3(s, s, s)
+		var mat = (ring as MeshInstance3D).material_override
+		if mat is StandardMaterial3D:
+			var sm := mat as StandardMaterial3D
+			var c: Color = sm.albedo_color
+			c.a = 1.0 - u
+			sm.albedo_color = c
+			sm.emission_energy_multiplier = lerp(4.0, 0.0, u)
+		if age >= ripple_life:
+			ring.queue_free()
+
+
+# ═════════════════════════════════════════════════════════════════════════
 # FADING TRAILS — per-ball ring buffer → ImmediateMesh line strip
 # ═════════════════════════════════════════════════════════════════════════
 
 ## Build a dedicated trail mesh instance for a ball (lives under _trail_container,
-## drawn in this node's local space).
-func _make_trail_mesh(_ball: RigidBody3D) -> MeshInstance3D:
+## drawn in this node's local space). Tinted to the ball's hue; rendered as a wide
+## additive ribbon so it reads as a light streak.
+func _make_trail_mesh(_ball: RigidBody3D, hue: Color) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
 	mi.name = "Trail"
 	var im := ImmediateMesh.new()
@@ -758,11 +1317,14 @@ func _make_trail_mesh(_ball: RigidBody3D) -> MeshInstance3D:
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mat.vertex_color_use_as_albedo = true
 	mat.emission_enabled = true
-	mat.emission = ball_color
-	mat.emission_energy_multiplier = 0.6
+	mat.emission = hue
+	mat.emission_energy_multiplier = 2.4
 	mi.material_override = mat
+	mi.set_meta("hue", hue)
 	_trail_container.add_child(mi)
 	return mi
 
@@ -794,22 +1356,54 @@ func _update_trails() -> void:
 		k -= 1
 
 
+## Redraw a ball's trail as a camera-facing ribbon (a triangle strip), widening and
+## brightening from faint tail to bright head — a light streak rather than a thin line.
 func _redraw_trail(mesh_instance: MeshInstance3D, buf: PackedVector3Array) -> void:
 	var im := mesh_instance.mesh as ImmediateMesh
 	if im == null:
 		return
 	im.clear_surfaces()
-	if buf.size() < 2:
-		return
-	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	var count: int = buf.size()
+	if count < 2:
+		return
+
+	var hue: Color = mesh_instance.get_meta("hue", Color(0.95, 0.75, 0.25, 1.0))
+
+	# View point in this node's local space (buf is stored local). Used to make the
+	# ribbon face the camera. Fall back to a fixed up-axis offset if no camera.
+	var view_local: Vector3 = Vector3(0.0, 100.0, 0.0)
+	var cam := get_viewport().get_camera_3d()
+	if cam != null:
+		view_local = to_local(cam.global_position)
+
+	var max_width: float = ball_radius * 1.4
+
+	im.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 	for idx in range(count):
-		# Fade from faint tail (idx 0) to bright head (idx count-1).
 		var frac: float = float(idx) / float(max(count - 1, 1))
-		var c: Color = ball_color
-		c.a = frac
+		# Tangent along the path (use neighbours; clamp at the ends).
+		var prev_i: int = max(idx - 1, 0)
+		var next_i: int = min(idx + 1, count - 1)
+		var tangent: Vector3 = buf[next_i] - buf[prev_i]
+		if tangent.length() < 0.0001:
+			tangent = Vector3.FORWARD
+		tangent = tangent.normalized()
+		# Direction toward the viewer at this sample.
+		var to_view: Vector3 = (view_local - buf[idx])
+		if to_view.length() < 0.0001:
+			to_view = Vector3.UP
+		to_view = to_view.normalized()
+		var side: Vector3 = tangent.cross(to_view)
+		if side.length() < 0.0001:
+			side = tangent.cross(Vector3.UP)
+		side = side.normalized()
+		var half_w: float = max_width * frac + 0.004
+		var c: Color = hue
+		c.a = frac * frac
 		im.surface_set_color(c)
-		im.surface_add_vertex(buf[idx])
+		im.surface_add_vertex(buf[idx] - side * half_w)
+		im.surface_set_color(c)
+		im.surface_add_vertex(buf[idx] + side * half_w)
 	im.surface_end()
 
 
