@@ -1,0 +1,43 @@
+{
+	"id": "mortar_vector_siege",
+	"name": "Mortar Vector Siege",
+	"description": "A player-held VR MORTAR vs a drone swarm. Grab the tube, TILT your hand to set the launch angle, HOLD the trigger to charge force, then RELEASE to lob a RigidBody shell on a ballistic arc. A live parabola, a green velocity arrow, a red gravity arrow, and a ground AoE ring preview where the shell will fall — computed analytically, so the preview never waits on physics. The shell detonates on the earlier of floor-contact or analytic impact, area-bombing every flying drone inside the splash radius. Indirect-fire sibling of the direct-fire `hl_turret_vectors`: there you point AT the target, here you aim a parabola so its FOOT lands on it. Desktop/headless: auto-aims at a roaming drone and auto-fires so a capture shows the arc + a shell + the swarm.",
+	"category": "vectors",
+	"theoreticalGrounding": "v0 = aim_dir * force; p(t) = p0 + v0*t + 0.5*g*t^2. Hand tilt sets direction, charge time sets magnitude — together they fix where the parabola crosses the floor. Gravity is not the obstacle to the shot, it IS the shot. Indirect fire makes the velocity vector and the constant gravity vector legible as the curve they sum to.",
+	"artifacts": {
+		"mortar_vector_siege": {
+			"lookup_name": "mortar_vector_siege",
+			"name": "Mortar Vector Siege",
+			"description": "Grabbable mortar tube (XRToolsPickable) on a base, over a ground disc, facing a wandering swarm of flying drones. Aim = -tube.basis.z; muzzle Marker3D = p0. Hold trigger to charge _force (min->max over ~1.2s), release to fire a RigidBody shell (gravity_scale=g/9.8, contact_monitor, continuous arc). Live velocity/gravity arrows + dotted parabola + analytic floor AoE ring. Shell detonates on floor contact OR y<=floor_y, popping drones within aoe_radius. Grip or cooldown reloads the cosmetic shell. Scoring on drone_destroyed. DNA: min_force, max_force, gravity_magnitude, aoe_radius, drone_count.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/mortar_vector_siege/mortar_vector_siege.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"footprint": [3, 1, 3],
+			"tags": ["forces", "vectors", "mortar", "projectile", "ballistic", "trajectory", "aoe", "splash", "drone", "swarm", "targeting", "velocity", "gravity", "vr", "held", "placeable"],
+			"qfep_connection": "F_force: launch velocity + constant gravity = a parabola whose foot is the strike. Indirect fire teaches the vector sum as a felt aim, not a watched arc.",
+			"parameters": {
+				"min_force": 6.0,
+				"max_force": 22.0,
+				"gravity_magnitude": 9.8,
+				"charge_time": 1.2,
+				"aoe_radius": 2.2,
+				"reload_cooldown": 1.4,
+				"drone_count": 6,
+				"arena_radius": 9.0,
+				"footprint": [3, 1, 3],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 9,
+				"density": "high",
+				"reading_radius": 4,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

@@ -1,28 +1,30 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
-## Weather Vector Field — Applied Teaching Artifact (Weather Station edition)
+## Weather Vector Field — Applied Teaching Artifact (Storm Chamber edition)
 ##
 ## Two grabbable wind vectors (Wind A, Wind B) combine via vector addition.
 ## The user drags arrow endpoints in VR to feel how wind directions sum.
-## A dense field of display arrows shows the resulting wind field. Rain
-## particles fall under gravity + wind, their diagonal paths demonstrating
-## force superposition visibly.
+## A dense field of display arrows shows the resulting wind field. Real
+## GPUParticles3D weather — slanting rain, drifting cloud slabs, swaying ground
+## mist, wind-blown debris, and storm lightning — all blow at the true resultant
+## angle, demonstrating force superposition visibly.
 ##
-## The space is now a walkable weather station (~5x5 m). Real instruments ring
-## the perimeter — a windsock, a 3-cup anemometer, a compass rose, a drifting
-## cloud layer, and fading wind streamlines — every one of them DRIVEN by the
-## live summed wind vector. Change the mode preset or drag the wind handles and
-## the whole station reacts. The field and ground tint warm/cool with the wind's
-## thermal sign (updraft = warm, downdraft = cool).
+## The space is a walkable STORM CHAMBER (~5x5 m). Real instruments ring the
+## perimeter — a windsock, a 3-cup anemometer, a compass rose, and fading wind
+## streamlines — every one of them DRIVEN by the live summed wind vector, and so
+## is every particle system: rain gravity = down + wind, debris direction =
+## wind.normalized(), clouds/mist drift on wind. Change the weather mode (calm /
+## breezy / storm / blizzard) or drag the wind handles and the whole chamber
+## reacts. The field and ground tint warm/cool with the wind's thermal sign.
 ##
 ## @identity
-## essence: R = A + B; F_rain = gravity + wind. Vector addition drives both the field and the particles. Superposition made meteorological — and now instrumented.
-## desire: To let the learner walk inside a weather station, drag two wind arrows, and watch every instrument (sock, anemometer, compass, clouds, streamlines) answer the same summed vector.
-## critical_parameter: gravity_strength — it competes with wind. High gravity = rain falls nearly vertical; low gravity = rain flies nearly horizontal. The ratio is the angle.
-## triggers: Drag wind handles → field arrows recolor/reorient, rain re-trajects, windsock yaws + lifts, anemometer spins faster, compass needle swings, clouds advect, streamlines redraw, ground tints warm/cool. Mode button → trade/cross/opposing/updraft presets. Pressure slider → zones drift and distort the field.
-## emerges: Rain streaking diagonally as the decomposition display shows wind + gravity = trajectory. A windsock standing straight out in a gale, slack in calm. The whole station agreeing on one vector.
-## needs: VR grabbable wind vectors [has], mode/grid/reset buttons [has], gravity/pressure sliders [has], temperature gradient coloring [has], weather instruments [has].
-## relationships: Applied extension of vector_addition_demo and VectorFieldFlow (MultiMesh field), and particle_flow_swarm (advecting clouds). Demonstrates the same addition in a narrative (weather) context.
-## truth: Wind is a vector field. Rain is a particle advected through two fields at once. Every instrument in a weather station is a different read of the same vector.
+## essence: R = A + B; F_rain = gravity + wind. Vector addition drives the field, the instruments, and every GPU particle system at once. Superposition made meteorological — a whole storm chamber that agrees on one vector.
+## desire: To let the learner walk inside a storm, drag two wind arrows, and watch real rain slant, debris streak downwind, clouds and mist drift, lightning strike downwind — all at the resultant angle, while the classic instruments read the same vector.
+## critical_parameter: gravity_strength — it competes with wind. High gravity = rain falls nearly vertical; low gravity = rain flies nearly horizontal. The ratio is the slant angle, and the rain emitter's gravity is literally down + wind.
+## triggers: Drag wind handles → field arrows reorient, rain re-slants, debris reaims downwind, clouds/mist advect, windsock yaws, anemometer spins, compass swings, ground tints. Mode button → calm/breezy/storm/blizzard palettes (amount, scale, color, drift, lightning). Pressure slider → zones distort the field.
+## emerges: Rain streaking diagonally as the decomposition display shows wind + gravity = trajectory. Debris flung downwind as the headline vector in flight. Lightning forking out of a storm sky, biased downwind. A blizzard of slow white snow when the mode flips.
+## needs: VR grabbable wind vectors [has], mode/grid/reset buttons [has], gravity/pressure sliders [has], temperature gradient coloring [has], weather instruments [has], GPU particle storm [has].
+## relationships: Applied extension of vector_addition_demo and VectorFieldFlow (MultiMesh field). Particle systems built on the GPUParticles3D taxonomy in physicssimulation/particlesystems (rain from snow box-emitter), particle_campfire (cloud color curves), sub_emitters (lightning spark burst), lifetime_curves (flash/fade), NatureRenderer (ambient GPU drift).
+## truth: Wind is a vector field. Rain is a particle advected through two fields at once. Every instrument AND every particle in a storm is a different read of the same vector.
 
 
 # ── Sizing / domain ──
@@ -33,8 +35,8 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 # scene's *unit* space (pre-scale), used for grid spread, cloud wrap, rain spawn.
 @export var world_size: float = 5.0      # target walkable size in metres (~5x5 m)
 @export var arrow_grid_size: int = 12    # arrows per side (12x12 = 144) — MultiMesh
-@export var rain_count: int = 200        # rain droplets — MultiMesh
-@export var cloud_count: int = 36        # cloud puffs — MultiMesh
+@export var rain_count: int = 400        # rain streak particles — GPUParticles3D
+@export var cloud_count: int = 48         # cloud slab quads — GPUParticles3D
 
 var world_scale: float = 1.0             # extra multiplier on SCENE_SCALE (derived)
 var domain_extent: float = 3.0           # half-extent in unit space (derived)
@@ -67,10 +69,42 @@ var _arrow_count: int = 0
 var _arrow_shaft_mm: MultiMeshInstance3D
 var _arrow_head_mm: MultiMeshInstance3D
 
-# ── Rain particles (MultiMesh) ──
+# ── Rain particles (GPUParticles3D — box emission above the field) ──
 var gravity_strength: float = 1.0
-var _rain_state: Array = []              # Array of {pos: Vector3, vel: Vector3}
-var _rain_mm: MultiMeshInstance3D
+var _rain_gpu: GPUParticles3D
+var _rain_mat: ParticleProcessMaterial
+var _rain_draw_mat: StandardMaterial3D
+
+# ── Cloud slab (GPUParticles3D — big soft drifting billboards) ──
+var _cloud_gpu: GPUParticles3D
+var _cloud_mat: ParticleProcessMaterial
+var _cloud_draw_mat: StandardMaterial3D
+
+# ── Ground mist (GPUParticles3D — wide faint slab swaying with wind) ──
+var _mist_gpu: GPUParticles3D
+var _mist_mat: ParticleProcessMaterial
+var _mist_draw_mat: StandardMaterial3D
+
+# ── Wind-blown debris / leaves (GPUParticles3D — the vector in flight) ──
+var _debris_gpu: GPUParticles3D
+var _debris_mat: ParticleProcessMaterial
+var _debris_draw_mat: StandardMaterial3D
+
+# ── Lightning (emissive zig-zag bolt + spark burst + flash light) ──
+var _lightning_root: Node3D
+var _lightning_bolt: MeshInstance3D
+var _lightning_bolt_mesh: ImmediateMesh
+var _lightning_bolt_mat: StandardMaterial3D
+var _lightning_sparks: GPUParticles3D
+var _lightning_light: OmniLight3D
+var _lightning_cooldown: float = 0.0
+var _lightning_flash: float = 0.0        # 0..1 decaying flash intensity
+
+# ── Calm-mode sun shaft (faint cone + rising motes) ──
+var _sun_shaft: MeshInstance3D
+var _sun_shaft_mat: StandardMaterial3D
+var _sun_motes: GPUParticles3D
+var _sun_motes_mat: ParticleProcessMaterial
 
 # ── Pressure zones ──
 var high_pressure: Node3D
@@ -99,8 +133,6 @@ var windsock_material: StandardMaterial3D
 var anemometer_spinner: Node3D           # spins; rate tracks wind speed
 var _anemometer_angle: float = 0.0
 var compass_needle: Node3D               # swings to wind heading
-var _cloud_state: Array = []             # Array of {pos: Vector3}
-var _cloud_mm: MultiMeshInstance3D
 const STREAMLINE_COUNT := 5
 const STREAMLINE_SEGMENTS := 16
 var _streamline_mm: MultiMeshInstance3D
@@ -108,20 +140,30 @@ var _streamline_seeds: PackedVector3Array = PackedVector3Array()
 static var _stream_dot_mesh: SphereMesh
 
 # ── Weather modes ──
+# Each mode preloads a wind pair (A, B) AND a particle palette. The palette is a
+# small dict applied to the GPU emitters by _apply_weather_palette(mode):
+#   amount      — droplet/debris density multiplier baseline
+#   scale       — particle size multiplier
+#   color       — base tint for rain/mist
+#   drift_gain  — how strongly clouds/mist advect on wind
+#   lightning   — whether storm lightning may fire in this mode
 var current_mode: int = 0
-const MODE_NAMES := ["Trade Winds", "Crosswinds", "Opposing Winds", "Updraft"]
+const MODE_NAMES := ["Calm", "Breezy", "Storm", "Blizzard"]
 const MODE_VECTORS_A := [
-	Vector3(2.0, 0.0, 0.0),     # Trade: pure east
-	Vector3(1.0, 0.0, 0.0),     # Cross: east
-	Vector3(1.0, 0.0, 0.0),     # Opposing: east
-	Vector3(0.0, 0.5, 0.0),     # Updraft: up
+	Vector3(0.3, 0.0, 0.0),     # Calm: barely east
+	Vector3(1.2, 0.0, 0.4),     # Breezy: gentle ESE
+	Vector3(2.4, 0.0, 0.8),     # Storm: hard east
+	Vector3(2.0, 0.0, -1.0),    # Blizzard: strong cross
 ]
 const MODE_VECTORS_B := [
-	Vector3(0.0, 0.0, 0.0),     # Trade: none
-	Vector3(0.0, 0.0, 1.0),     # Cross: north
-	Vector3(-0.8, 0.0, 0.0),    # Opposing: west
-	Vector3(0.0, 0.8, 0.0),     # Updraft: more up
+	Vector3(0.0, 0.05, 0.0),    # Calm: faint updraft
+	Vector3(0.3, 0.0, 0.6),     # Breezy: NE component
+	Vector3(0.6, 0.0, 1.4),     # Storm: strong N
+	Vector3(1.0, 0.0, 1.2),     # Blizzard: more N
 ]
+# Palettes indexed by mode. Plain typed dicts (no const — Color/Vector aren't
+# const-foldable inside a const array in 4.x, so build them as a normal var).
+var _mode_palettes: Array = []
 
 # ── Floating labels for parallelogram ──
 var label_a_copy: Label3D
@@ -144,8 +186,49 @@ func _ready() -> void:
 	super._ready()
 	scale = Vector3(0.5, 0.5, 0.5)
 
+	_init_mode_palettes()
 	_recompute_sizing()
 	_build_all()
+
+
+## Builds the per-mode particle palettes. Called once in _ready (the dicts hold
+## Color/Vector3, which can't be const-folded, so they live in a runtime array).
+func _init_mode_palettes() -> void:
+	_mode_palettes = [
+		# Calm — sparse, soft, sun shaft on, no lightning.
+		{
+			"amount": 0.35, "scale": 1.0, "drift_gain": 0.25, "lightning": false,
+			"rain_color": Color(0.55, 0.7, 1.0, 0.55),
+			"mist_color": Color(0.7, 0.78, 0.9, 0.12),
+			"cloud_color": Color(0.85, 0.87, 0.92, 0.35),
+			"sun": true,
+		},
+		# Breezy — moderate rain, light drift, no lightning.
+		{
+			"amount": 0.7, "scale": 1.0, "drift_gain": 0.45, "lightning": false,
+			"rain_color": Color(0.5, 0.65, 1.0, 0.7),
+			"mist_color": Color(0.65, 0.72, 0.85, 0.16),
+			"cloud_color": Color(0.7, 0.73, 0.8, 0.45),
+			"sun": false,
+		},
+		# Storm — dense rain, strong drift, lightning fires.
+		{
+			"amount": 1.0, "scale": 1.15, "drift_gain": 0.7, "lightning": true,
+			"rain_color": Color(0.55, 0.68, 1.0, 0.85),
+			"mist_color": Color(0.5, 0.56, 0.7, 0.2),
+			"cloud_color": Color(0.35, 0.37, 0.45, 0.65),
+			"sun": false,
+		},
+		# Blizzard — white snow, low gravity, wide spread, lightning fires.
+		{
+			"amount": 1.0, "scale": 1.4, "drift_gain": 0.85, "lightning": true,
+			"rain_color": Color(0.95, 0.97, 1.0, 0.9),
+			"mist_color": Color(0.9, 0.93, 1.0, 0.3),
+			"cloud_color": Color(0.78, 0.8, 0.86, 0.6),
+			"sun": false,
+			"snow": true,
+		},
+	]
 
 
 func _build_all() -> void:
@@ -154,6 +237,11 @@ func _build_all() -> void:
 	_build_parallelogram()
 	_build_grid_arrows()
 	_build_rain_particles()
+	_build_cloud_slab()
+	_build_ground_mist()
+	_build_debris()
+	_build_lightning()
+	_build_sun_shaft()
 	_build_pressure_zones()
 	_build_decomposition_display()
 	_build_instruments()
@@ -214,15 +302,19 @@ func _process(delta: float) -> void:
 	if grid_visible:
 		_update_grid_arrows(a, b)
 
-	# Move rain particles (MultiMesh)
-	_move_particles(delta, a, b)
+	# Drive every GPU particle system from the live summed wind vector.
+	_drive_rain(sum)
+	_drive_clouds(sum)
+	_drive_mist(sum)
+	_drive_debris(sum)
+	_drive_lightning(delta, sum)
+	_drive_sun_shaft(delta, sum)
 
 	# Update decomposition arrows
 	_update_decomposition(sum)
 
 	# Weather instruments — all driven by the live summed wind vector
 	_update_instruments(delta, sum)
-	_update_clouds(delta, a, b)
 	_update_streamlines(a, b)
 	_update_temperature_tint(sum)
 
@@ -425,37 +517,374 @@ func _field_mm_material() -> StandardMaterial3D:
 	return mat
 
 
-# ── Rain: MultiMesh droplets (pattern from particle_campfire.gd) ──
+# ── Rain: GPUParticles3D streaks (box emitter above the field, from the snow
+#    box-emitter in physicssimulation/particlesystems/ParticleSystems.gd) ──
+#
+# Lives under environment_root, which inherits the 0.5 root scale. As with the
+# old MultiMesh, every world quantity is multiplied by _sc() only (NOT by 0.5);
+# the root 0.5 is applied by the node transform. So gravity/velocity/extent are
+# all scaled by _sc() to keep the rain falling at a believable rate.
 
 func _build_rain_particles() -> void:
-	_rain_state.clear()
-	var rain_mm := MultiMesh.new()
-	rain_mm.transform_format = MultiMesh.TRANSFORM_3D
-	rain_mm.use_colors = true
-	rain_mm.instance_count = rain_count
-	var sphere := SphereMesh.new()
-	sphere.radius = 0.02
-	sphere.height = 0.05
-	sphere.radial_segments = 6
-	sphere.rings = 3
-	rain_mm.mesh = sphere
-	_rain_mm = MultiMeshInstance3D.new()
-	_rain_mm.name = "RainMM"
-	_rain_mm.multimesh = rain_mm
-	var mat := StandardMaterial3D.new()
-	mat.vertex_color_use_as_albedo = true
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.emission_enabled = true
-	mat.emission_energy_multiplier = 1.2
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	_rain_mm.material_override = mat
-	environment_root.add_child(_rain_mm)
+	var sc := _sc()
+	_rain_gpu = GPUParticles3D.new()
+	_rain_gpu.name = "RainGPU"
+	_rain_gpu.amount = max(1, rain_count)
+	_rain_gpu.lifetime = 1.6
+	# Emit from a box high above the field; particles fall through it.
+	_rain_gpu.position = Vector3(0.0, 3.4, 0.0) * sc
+	# Generous AABB so streaks aren't culled while they fall across the chamber.
+	_rain_gpu.visibility_aabb = AABB(
+		Vector3(-domain_extent - 1.0, -2.0, -domain_extent - 1.0) * sc,
+		Vector3(2.0 * domain_extent + 2.0, 8.0, 2.0 * domain_extent + 2.0) * sc
+	)
 
-	for i in range(rain_count):
-		_rain_state.append({
-			"pos": _random_rain_start(),
-			"vel": Vector3.ZERO,
-		})
+	_rain_mat = ParticleProcessMaterial.new()
+	_rain_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	_rain_mat.emission_box_extents = Vector3(domain_extent * 0.95, 0.1, domain_extent * 0.95) * sc
+	_rain_mat.direction = Vector3(0.0, -1.0, 0.0)
+	_rain_mat.spread = 4.0
+	_rain_mat.initial_velocity_min = 0.5 * sc
+	_rain_mat.initial_velocity_max = 1.2 * sc
+	# Gravity is overwritten each frame as (down*gravity_strength + wind) * sc.
+	_rain_mat.gravity = Vector3(0.0, -gravity_strength, 0.0) * 9.8 * sc
+	_rain_mat.scale_min = 0.7
+	_rain_mat.scale_max = 1.1
+	_rain_mat.color = Color(0.55, 0.68, 1.0, 0.85)
+	_rain_gpu.process_material = _rain_mat
+
+	# Tall, thin quad = a streak. BILLBOARD_PARTICLES orients the quad along the
+	# particle's velocity, so when the gravity vector is (down + wind) the streak
+	# tilts to the true resultant slant angle — the lesson, drawn by the geometry.
+	var streak := QuadMesh.new()
+	streak.size = Vector2(0.012, 0.32) * sc
+	_rain_draw_mat = StandardMaterial3D.new()
+	_rain_draw_mat.vertex_color_use_as_albedo = true
+	_rain_draw_mat.albedo_color = Color(0.55, 0.68, 1.0, 0.85)
+	_rain_draw_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_rain_draw_mat.emission_enabled = true
+	_rain_draw_mat.emission = Color(0.5, 0.62, 1.0)
+	_rain_draw_mat.emission_energy_multiplier = 0.8
+	_rain_draw_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_rain_draw_mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	_rain_draw_mat.billboard_keep_scale = true
+	_rain_draw_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	streak.material = _rain_draw_mat
+	_rain_gpu.draw_pass_1 = streak
+	environment_root.add_child(_rain_gpu)
+
+
+# ── Cloud slab: GPUParticles3D big soft drifting billboards ──
+# Slow, large, expanding quads at mid-height. Drift is applied each frame by
+# writing the wind into process_material.gravity (a horizontal "gravity" pushes
+# the slab sideways on the wind). Colour curve from particle_campfire smoke.
+
+func _build_cloud_slab() -> void:
+	var sc := _sc()
+	_cloud_gpu = GPUParticles3D.new()
+	_cloud_gpu.name = "CloudGPU"
+	_cloud_gpu.amount = max(1, cloud_count)
+	_cloud_gpu.lifetime = 9.0
+	_cloud_gpu.position = Vector3(0.0, 2.7, 0.0) * sc
+	_cloud_gpu.visibility_aabb = AABB(
+		Vector3(-2.0 * domain_extent, -1.0, -2.0 * domain_extent) * sc,
+		Vector3(4.0 * domain_extent, 4.0, 4.0 * domain_extent) * sc
+	)
+
+	_cloud_mat = ParticleProcessMaterial.new()
+	_cloud_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	_cloud_mat.emission_box_extents = Vector3(domain_extent * 1.1, 0.4, domain_extent * 1.1) * sc
+	_cloud_mat.direction = Vector3(1.0, 0.0, 0.0)
+	_cloud_mat.spread = 8.0
+	_cloud_mat.initial_velocity_min = 0.02 * sc
+	_cloud_mat.initial_velocity_max = 0.08 * sc
+	_cloud_mat.gravity = Vector3.ZERO          # set to wind drift each frame
+	_cloud_mat.scale_min = 1.6
+	_cloud_mat.scale_max = 3.0
+	# Soft expand over life so each puff swells like a real cloud.
+	var cloud_scale_curve := _make_grow_curve_texture()
+	_cloud_mat.scale_curve = cloud_scale_curve
+	_cloud_mat.color = Color(0.7, 0.73, 0.8, 0.45)
+	# Fade in then out so slab edges are soft (smoke-style alpha curve).
+	_cloud_mat.color_ramp = _make_soft_alpha_ramp(Color(0.7, 0.73, 0.8))
+	_cloud_gpu.process_material = _cloud_mat
+
+	var puff := QuadMesh.new()
+	puff.size = Vector2(0.9, 0.9) * sc
+	_cloud_draw_mat = StandardMaterial3D.new()
+	_cloud_draw_mat.albedo_color = Color(0.7, 0.73, 0.8, 0.45)
+	_cloud_draw_mat.vertex_color_use_as_albedo = true
+	_cloud_draw_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_cloud_draw_mat.emission_enabled = true
+	_cloud_draw_mat.emission = Color(0.6, 0.63, 0.7)
+	_cloud_draw_mat.emission_energy_multiplier = 0.3
+	_cloud_draw_mat.roughness = 1.0
+	_cloud_draw_mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	_cloud_draw_mat.billboard_keep_scale = true
+	_cloud_draw_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	puff.material = _cloud_draw_mat
+	_cloud_gpu.draw_pass_1 = puff
+	environment_root.add_child(_cloud_gpu)
+
+
+# ── Ground mist: wide thin GPUParticles3D slab at y≈0.1, huge faint quads ──
+
+func _build_ground_mist() -> void:
+	var sc := _sc()
+	_mist_gpu = GPUParticles3D.new()
+	_mist_gpu.name = "MistGPU"
+	_mist_gpu.amount = max(1, int(cloud_count * 0.6))
+	_mist_gpu.lifetime = 7.0
+	_mist_gpu.position = Vector3(0.0, 0.1, 0.0) * sc
+	_mist_gpu.visibility_aabb = AABB(
+		Vector3(-2.0 * domain_extent, -0.5, -2.0 * domain_extent) * sc,
+		Vector3(4.0 * domain_extent, 2.0, 4.0 * domain_extent) * sc
+	)
+
+	_mist_mat = ParticleProcessMaterial.new()
+	_mist_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	_mist_mat.emission_box_extents = Vector3(domain_extent * 1.2, 0.05, domain_extent * 1.2) * sc
+	_mist_mat.direction = Vector3(1.0, 0.0, 0.0)
+	_mist_mat.spread = 10.0
+	_mist_mat.initial_velocity_min = 0.01 * sc
+	_mist_mat.initial_velocity_max = 0.05 * sc
+	_mist_mat.gravity = Vector3.ZERO           # set to wind drift each frame
+	_mist_mat.scale_min = 2.0
+	_mist_mat.scale_max = 3.5
+	_mist_mat.color = Color(0.7, 0.78, 0.9, 0.12)
+	_mist_mat.color_ramp = _make_soft_alpha_ramp(Color(0.7, 0.78, 0.9))
+	_mist_gpu.process_material = _mist_mat
+
+	var slab := QuadMesh.new()
+	slab.size = Vector2(1.2, 1.2) * sc
+	# Lay the mist quads flat-ish by orienting them as billboards (they read as
+	# soft ground fog either way; keeping billboard avoids edge-on disappearance).
+	_mist_draw_mat = StandardMaterial3D.new()
+	_mist_draw_mat.albedo_color = Color(0.7, 0.78, 0.9, 0.12)
+	_mist_draw_mat.vertex_color_use_as_albedo = true
+	_mist_draw_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_mist_draw_mat.emission_enabled = true
+	_mist_draw_mat.emission = Color(0.6, 0.66, 0.78)
+	_mist_draw_mat.emission_energy_multiplier = 0.2
+	_mist_draw_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_mist_draw_mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	_mist_draw_mat.billboard_keep_scale = true
+	_mist_draw_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	slab.material = _mist_draw_mat
+	_mist_gpu.draw_pass_1 = slab
+	environment_root.add_child(_mist_gpu)
+
+
+# ── Wind-blown debris / leaves: the headline "vector in flight" ──
+# Direction + initial_velocity are aimed downwind each frame, so the streak of
+# debris IS the wind vector made visible. Emitted from the upwind edge.
+
+func _build_debris() -> void:
+	var sc := _sc()
+	_debris_gpu = GPUParticles3D.new()
+	_debris_gpu.name = "DebrisGPU"
+	_debris_gpu.amount = 60
+	_debris_gpu.lifetime = 2.4
+	_debris_gpu.position = Vector3(0.0, 0.5, 0.0) * sc
+	_debris_gpu.visibility_aabb = AABB(
+		Vector3(-2.0 * domain_extent, -1.0, -2.0 * domain_extent) * sc,
+		Vector3(4.0 * domain_extent, 4.0, 4.0 * domain_extent) * sc
+	)
+
+	_debris_mat = ParticleProcessMaterial.new()
+	_debris_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	_debris_mat.emission_box_extents = Vector3(domain_extent * 0.9, 0.6, domain_extent * 0.9) * sc
+	_debris_mat.direction = Vector3(1.0, 0.0, 0.0)   # aimed downwind each frame
+	_debris_mat.spread = 18.0
+	_debris_mat.initial_velocity_min = 0.4 * sc
+	_debris_mat.initial_velocity_max = 0.9 * sc
+	# Light downward gravity so leaves settle; wind drift added each frame.
+	_debris_mat.gravity = Vector3(0.0, -0.5, 0.0) * sc
+	_debris_mat.scale_min = 0.6
+	_debris_mat.scale_max = 1.2
+	_debris_mat.angular_velocity_min = -180.0
+	_debris_mat.angular_velocity_max = 180.0
+	_debris_mat.color = Color(0.8, 0.7, 0.4, 0.9)
+	_debris_gpu.process_material = _debris_mat
+
+	var leaf := QuadMesh.new()
+	leaf.size = Vector2(0.06, 0.04) * sc
+	_debris_draw_mat = StandardMaterial3D.new()
+	_debris_draw_mat.albedo_color = Color(0.8, 0.7, 0.4, 0.9)
+	_debris_draw_mat.vertex_color_use_as_albedo = true
+	_debris_draw_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_debris_draw_mat.emission_enabled = true
+	_debris_draw_mat.emission = Color(0.5, 0.42, 0.2)
+	_debris_draw_mat.emission_energy_multiplier = 0.4
+	_debris_draw_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_debris_draw_mat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	_debris_draw_mat.billboard_keep_scale = true
+	leaf.material = _debris_draw_mat
+	_debris_gpu.draw_pass_1 = leaf
+	environment_root.add_child(_debris_gpu)
+
+
+# ── Lightning: emissive zig-zag ImmediateMesh bolt + one-shot spark burst +
+#    OmniLight3D flash. Fires only in storm/blizzard modes, strike biased
+#    downwind. (Spark burst pattern from sub_emitters; flash/fade from
+#    lifetime_curves.) ──
+
+func _build_lightning() -> void:
+	var sc := _sc()
+	_lightning_root = Node3D.new()
+	_lightning_root.name = "Lightning"
+	environment_root.add_child(_lightning_root)
+
+	# Bolt — rebuilt as a fresh zig-zag each strike.
+	_lightning_bolt = MeshInstance3D.new()
+	_lightning_bolt.name = "Bolt"
+	_lightning_bolt_mesh = ImmediateMesh.new()
+	_lightning_bolt.mesh = _lightning_bolt_mesh
+	_lightning_bolt_mat = StandardMaterial3D.new()
+	_lightning_bolt_mat.albedo_color = Color(0.9, 0.95, 1.0)
+	_lightning_bolt_mat.vertex_color_use_as_albedo = true
+	_lightning_bolt_mat.emission_enabled = true
+	_lightning_bolt_mat.emission = Color(0.8, 0.9, 1.0)
+	_lightning_bolt_mat.emission_energy_multiplier = 6.0
+	_lightning_bolt_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_lightning_bolt_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_lightning_bolt.material_override = _lightning_bolt_mat
+	_lightning_bolt.visible = false
+	_lightning_root.add_child(_lightning_bolt)
+
+	# One-shot spark burst at the strike point.
+	_lightning_sparks = GPUParticles3D.new()
+	_lightning_sparks.name = "StrikeSparks"
+	_lightning_sparks.amount = 40
+	_lightning_sparks.lifetime = 0.6
+	_lightning_sparks.one_shot = true
+	_lightning_sparks.emitting = false
+	_lightning_sparks.explosiveness = 1.0
+	_lightning_sparks.visibility_aabb = AABB(
+		Vector3(-domain_extent, -0.5, -domain_extent) * sc,
+		Vector3(2.0 * domain_extent, 3.0, 2.0 * domain_extent) * sc
+	)
+	var spark_mat := ParticleProcessMaterial.new()
+	spark_mat.direction = Vector3(0.0, 1.0, 0.0)
+	spark_mat.spread = 80.0
+	spark_mat.initial_velocity_min = 1.0 * sc
+	spark_mat.initial_velocity_max = 3.0 * sc
+	spark_mat.gravity = Vector3(0.0, -6.0, 0.0) * sc
+	spark_mat.scale_min = 0.4
+	spark_mat.scale_max = 0.8
+	spark_mat.color = Color(0.9, 0.95, 1.0, 1.0)
+	_lightning_sparks.process_material = spark_mat
+	var spark_mesh := SphereMesh.new()
+	spark_mesh.radius = 0.012 * sc
+	spark_mesh.height = 0.024 * sc
+	spark_mesh.radial_segments = 6
+	spark_mesh.rings = 3
+	var spark_draw := StandardMaterial3D.new()
+	spark_draw.albedo_color = Color(0.9, 0.95, 1.0)
+	spark_draw.emission_enabled = true
+	spark_draw.emission = Color(0.8, 0.9, 1.0)
+	spark_draw.emission_energy_multiplier = 3.0
+	spark_draw.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	spark_mesh.material = spark_draw
+	_lightning_sparks.draw_pass_1 = spark_mesh
+	_lightning_root.add_child(_lightning_sparks)
+
+	# Flash light.
+	_lightning_light = OmniLight3D.new()
+	_lightning_light.name = "Flash"
+	_lightning_light.light_color = Color(0.85, 0.92, 1.0)
+	_lightning_light.light_energy = 0.0
+	_lightning_light.omni_range = 6.0 * sc * 2.0
+	_lightning_root.add_child(_lightning_light)
+
+	_lightning_cooldown = randf_range(2.5, 5.0)
+
+
+# ── Calm-mode sun shaft: faint emissive cone + slow rising motes ──
+
+func _build_sun_shaft() -> void:
+	var sc := _sc()
+	_sun_shaft = MeshInstance3D.new()
+	_sun_shaft.name = "SunShaft"
+	var cone := CylinderMesh.new()
+	cone.top_radius = 0.15
+	cone.bottom_radius = 0.9
+	cone.height = 3.2
+	cone.radial_segments = 16
+	_sun_shaft.mesh = cone
+	_sun_shaft.position = Vector3(domain_extent * 0.45, 1.7, -domain_extent * 0.45) * sc
+	_sun_shaft.scale = Vector3.ONE * sc
+	_sun_shaft_mat = StandardMaterial3D.new()
+	_sun_shaft_mat.albedo_color = Color(1.0, 0.95, 0.7, 0.06)
+	_sun_shaft_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_sun_shaft_mat.emission_enabled = true
+	_sun_shaft_mat.emission = Color(1.0, 0.92, 0.6)
+	_sun_shaft_mat.emission_energy_multiplier = 0.5
+	_sun_shaft_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_sun_shaft_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_sun_shaft.material_override = _sun_shaft_mat
+	_sun_shaft.visible = false
+	environment_root.add_child(_sun_shaft)
+
+	_sun_motes = GPUParticles3D.new()
+	_sun_motes.name = "SunMotes"
+	_sun_motes.amount = 30
+	_sun_motes.lifetime = 5.0
+	_sun_motes.position = Vector3(domain_extent * 0.45, 0.3, -domain_extent * 0.45) * sc
+	_sun_motes.visibility_aabb = AABB(
+		Vector3(-domain_extent, -0.5, -domain_extent) * sc,
+		Vector3(2.0 * domain_extent, 4.0, 2.0 * domain_extent) * sc
+	)
+	_sun_motes_mat = ParticleProcessMaterial.new()
+	_sun_motes_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	_sun_motes_mat.emission_box_extents = Vector3(0.6, 0.1, 0.6) * sc
+	_sun_motes_mat.direction = Vector3(0.0, 1.0, 0.0)
+	_sun_motes_mat.spread = 20.0
+	_sun_motes_mat.initial_velocity_min = 0.05 * sc
+	_sun_motes_mat.initial_velocity_max = 0.15 * sc
+	_sun_motes_mat.gravity = Vector3(0.0, 0.05, 0.0) * sc   # gentle rise
+	_sun_motes_mat.scale_min = 0.4
+	_sun_motes_mat.scale_max = 0.9
+	_sun_motes_mat.color = Color(1.0, 0.95, 0.7, 0.5)
+	_sun_motes.process_material = _sun_motes_mat
+	var mote := QuadMesh.new()
+	mote.size = Vector2(0.03, 0.03) * sc
+	var mote_draw := StandardMaterial3D.new()
+	mote_draw.albedo_color = Color(1.0, 0.95, 0.7, 0.5)
+	mote_draw.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mote_draw.emission_enabled = true
+	mote_draw.emission = Color(1.0, 0.92, 0.6)
+	mote_draw.emission_energy_multiplier = 1.0
+	mote_draw.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mote_draw.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	mote.material = mote_draw
+	_sun_motes.draw_pass_1 = mote
+	_sun_motes.emitting = false
+	environment_root.add_child(_sun_motes)
+
+
+# ── Curve/ramp helpers for the GPU emitters ──
+
+## A scale curve that grows particles from small to large over their life.
+func _make_grow_curve_texture() -> CurveTexture:
+	var curve := Curve.new()
+	curve.add_point(Vector2(0.0, 0.4))
+	curve.add_point(Vector2(1.0, 1.0))
+	var tex := CurveTexture.new()
+	tex.curve = curve
+	return tex
+
+
+## A colour ramp that fades alpha in then out (soft edges), tinted by `base`.
+func _make_soft_alpha_ramp(base: Color) -> GradientTexture1D:
+	var grad := Gradient.new()
+	grad.set_color(0, Color(base.r, base.g, base.b, 0.0))
+	grad.add_point(0.2, Color(base.r, base.g, base.b, 1.0))
+	grad.add_point(0.8, Color(base.r, base.g, base.b, 1.0))
+	grad.set_color(1, Color(base.r, base.g, base.b, 0.0))
+	var tex := GradientTexture1D.new()
+	tex.gradient = grad
+	return tex
 
 
 func _build_pressure_zones() -> void:
@@ -553,7 +982,6 @@ func _build_instruments() -> void:
 	_build_windsock()
 	_build_anemometer()
 	_build_compass_rose()
-	_build_cloud_layer()
 	_build_streamlines()
 
 
@@ -758,43 +1186,6 @@ func _build_compass_rose() -> void:
 	compass_needle.add_child(needle_mesh)
 
 
-## Cloud layer — MultiMesh puffs at mid-height that advect with the wind and
-## wrap at the domain edge (pattern from particle_flow_swarm.gd).
-func _build_cloud_layer() -> void:
-	_cloud_state.clear()
-	var cloud_mm := MultiMesh.new()
-	cloud_mm.transform_format = MultiMesh.TRANSFORM_3D
-	cloud_mm.use_colors = true
-	cloud_mm.instance_count = cloud_count
-	var puff := SphereMesh.new()
-	puff.radius = 0.5
-	puff.height = 1.0
-	puff.radial_segments = 8
-	puff.rings = 5
-	cloud_mm.mesh = puff
-	_cloud_mm = MultiMeshInstance3D.new()
-	_cloud_mm.name = "CloudMM"
-	_cloud_mm.multimesh = cloud_mm
-	var mat := StandardMaterial3D.new()
-	mat.vertex_color_use_as_albedo = true
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.emission_enabled = true
-	mat.emission_energy_multiplier = 0.5
-	mat.roughness = 1.0
-	_cloud_mm.material_override = mat
-	environment_root.add_child(_cloud_mm)
-
-	for i in range(cloud_count):
-		_cloud_state.append({
-			"pos": Vector3(
-				randf_range(-domain_extent, domain_extent),
-				randf_range(2.2, 3.2),
-				randf_range(-domain_extent, domain_extent)
-			),
-			"size": randf_range(0.6, 1.4),
-		})
-
-
 ## Wind streamlines — a few fading dotted trails seeded across the field, redrawn
 ## each frame by stepping through the wind field. Uses one MultiMesh of dots.
 func _build_streamlines() -> void:
@@ -957,40 +1348,79 @@ func _update_grid_arrows(a: Vector3, b: Vector3) -> void:
 		head_mm.set_instance_color(i, color)
 
 
-func _move_particles(delta: float, a: Vector3, b: Vector3) -> void:
-	if not _rain_mm:
+# ════════════════════════════════════════════════════════════════════
+#  GPU PARTICLE DRIVERS  (every system reads the live summed wind vector)
+# ════════════════════════════════════════════════════════════════════
+
+## Rain: the streak slant IS gravity + wind. We write the resultant straight
+## into process_material.gravity, exactly the decomposition the panel shows.
+## Both terms are scaled by _sc() so the fall rate stays believable at scene
+## scale (the node also inherits the 0.5 root scale via its transform).
+func _drive_rain(sum: Vector3) -> void:
+	if _rain_mat == null:
 		return
 	var sc := _sc()
-	var grav := Vector3(0, -gravity_strength, 0)
-	var rain_mm := _rain_mm.multimesh
-	var splash := domain_extent + 1.5
+	# Gravity term: down * gravity_strength * 9.8 (so the slider sweeps a real
+	# fall rate). Wind term: the horizontal resultant. Keep the exact
+	# "rain = gravity + wind" decomposition.
+	var grav_term := Vector3(0.0, -gravity_strength * 9.8, 0.0)
+	var wind_term := Vector3(sum.x, 0.0, sum.z) * 3.0   # gain to read clearly
+	_rain_mat.gravity = (grav_term + wind_term) * sc
 
-	for i in range(_rain_state.size()):
-		var p: Dictionary = _rain_state[i]
-		var pos: Vector3 = p["pos"]
-		var vel: Vector3 = p["vel"]
 
-		# Force = gravity + wind at position
-		var wind := _wind_at(pos, a, b)
-		var force := grav + wind
+## Clouds: drift the slab on the horizontal wind by writing wind into the
+## process material's gravity (a sideways "gravity" carries the puffs downwind).
+func _drive_clouds(sum: Vector3) -> void:
+	if _cloud_mat == null:
+		return
+	var sc := _sc()
+	var gain: float = float(_palette().get("drift_gain", 0.5))
+	var drift := Vector3(sum.x, 0.0, sum.z) * gain * 0.6
+	_cloud_mat.gravity = drift * sc
 
-		# Velocity lerp (smooth, not instant)
-		vel = vel.lerp(force, 3.0 * delta)
-		pos += vel * delta
 
-		# Respawn if below ground or too far
-		if pos.y < -0.5 or pos.length() > splash:
-			pos = _random_rain_start()
-			vel = Vector3.ZERO
+## Ground mist: same drift idea, a touch slower, swaying near the floor.
+func _drive_mist(sum: Vector3) -> void:
+	if _mist_mat == null:
+		return
+	var sc := _sc()
+	var gain: float = float(_palette().get("drift_gain", 0.5))
+	var drift := Vector3(sum.x, 0.0, sum.z) * gain * 0.4
+	_mist_mat.gravity = drift * sc
 
-		p["pos"] = pos
-		p["vel"] = vel
 
-		# Color: cooler blue when slow, brighter when fast-moving
-		var speed: float = vel.length()
-		var rc := Color(0.45, 0.6, 1.0, 0.85).lerp(Color(0.7, 0.85, 1.0, 0.95), clampf(speed / 3.0, 0.0, 1.0))
-		rain_mm.set_instance_color(i, rc)
-		rain_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, pos * sc))
+## Debris: the headline vector in flight. Aim emission direction + velocity
+## straight downwind (sum.normalized) so the streak of leaves draws the wind.
+func _drive_debris(sum: Vector3) -> void:
+	if _debris_mat == null:
+		return
+	var sc := _sc()
+	var horiz := Vector3(sum.x, 0.0, sum.z)
+	var speed: float = horiz.length()
+	if speed < 0.05:
+		# Near-calm: drift gently down/settle, low emission.
+		_debris_mat.direction = Vector3(0.0, -1.0, 0.0)
+		_debris_mat.gravity = Vector3(0.0, -0.5, 0.0) * sc
+		_set_debris_amount(12)
+		return
+	var dir := horiz / speed
+	_debris_mat.direction = dir
+	# Velocity proportional to wind speed; gravity pulls leaves slightly down
+	# PLUS pushes them downwind so they keep streaking.
+	_debris_mat.initial_velocity_min = (0.3 + speed * 0.4) * sc
+	_debris_mat.initial_velocity_max = (0.6 + speed * 0.7) * sc
+	_debris_mat.gravity = (dir * speed * 1.5 + Vector3(0.0, -0.6, 0.0)) * sc
+	# More debris in stronger wind, capped. Quantize to avoid reallocating the
+	# particle buffer every frame (changing `amount` restarts the system).
+	var amt: int = clampi(int(round((20.0 + speed * 25.0) / 10.0)) * 10, 10, 90)
+	_set_debris_amount(amt)
+
+
+## Only write GPUParticles3D.amount when it actually changes (it triggers a
+## buffer realloc/restart), keeping the per-frame cost bounded.
+func _set_debris_amount(amt: int) -> void:
+	if _debris_gpu and _debris_gpu.amount != amt:
+		_debris_gpu.amount = amt
 
 
 func _update_pressure_zones() -> void:
@@ -1080,36 +1510,88 @@ func _update_instruments(delta: float, sum: Vector3) -> void:
 		compass_needle.rotation.y = lerp_angle(compass_needle.rotation.y, target, 0.15)
 
 
-func _update_clouds(delta: float, a: Vector3, b: Vector3) -> void:
-	if not _cloud_mm:
+## Lightning: count down a cooldown; when it elapses (and the active palette
+## permits) fire a strike biased downwind — fresh zig-zag bolt, spark burst,
+## and a flash that decays over the next frames (flash/fade from lifetime_curves).
+func _drive_lightning(delta: float, sum: Vector3) -> void:
+	if _lightning_root == null:
 		return
-	var sc := _sc()
-	var cloud_mm := _cloud_mm.multimesh
-	for i in range(_cloud_state.size()):
-		var c: Dictionary = _cloud_state[i]
-		var pos: Vector3 = c["pos"]
-		# Advect with horizontal wind at this height (use base wind only — cheap).
-		var wind := a + b
-		pos.x += wind.x * delta * 0.4
-		pos.z += wind.z * delta * 0.4
-		# Wrap at domain edge.
-		if pos.x > domain_extent:
-			pos.x -= 2.0 * domain_extent
-		elif pos.x < -domain_extent:
-			pos.x += 2.0 * domain_extent
-		if pos.z > domain_extent:
-			pos.z -= 2.0 * domain_extent
-		elif pos.z < -domain_extent:
-			pos.z += 2.0 * domain_extent
-		c["pos"] = pos
+	var palette := _palette()
+	var allowed: bool = bool(palette.get("lightning", false))
 
-		var size: float = c["size"]
-		var xform := Transform3D(Basis().scaled(Vector3.ONE * size * 0.45 * sc), pos * sc)
-		cloud_mm.set_instance_transform(i, xform)
-		# Whiter/brighter clouds when wind is strong, greyer when calm.
-		var st: float = clampf(Vector2(wind.x, wind.z).length() / 3.0, 0.0, 1.0)
-		var grey: float = lerp(0.55, 0.85, st)
-		cloud_mm.set_instance_color(i, Color(grey, grey, grey * 1.02, 0.5))
+	# Decay the flash + spark visibility every frame.
+	if _lightning_flash > 0.0:
+		_lightning_flash = maxf(0.0, _lightning_flash - delta * 4.0)
+		_lightning_light.light_energy = _lightning_flash * 4.0
+		var a: float = clampf(_lightning_flash, 0.0, 1.0)
+		_lightning_bolt_mat.albedo_color = Color(0.9, 0.95, 1.0, a)
+		_lightning_bolt.visible = _lightning_flash > 0.05
+	else:
+		_lightning_bolt.visible = false
+		_lightning_light.light_energy = 0.0
+
+	if not allowed:
+		return
+
+	_lightning_cooldown -= delta
+	if _lightning_cooldown > 0.0:
+		return
+	_lightning_cooldown = randf_range(2.5, 6.0)
+	_strike_lightning(sum)
+
+
+## Build a fresh zig-zag bolt from a high downwind point to the ground, fire the
+## spark burst at the ground point, and arm the flash.
+func _strike_lightning(sum: Vector3) -> void:
+	var sc := _sc()
+	var horiz := Vector3(sum.x, 0.0, sum.z)
+	# Bias the strike downwind: base point offset along the wind direction.
+	var bias := Vector3.ZERO
+	if horiz.length() > 0.05:
+		bias = horiz.normalized() * domain_extent * 0.4
+	var ground_pt := Vector3(
+		clampf(bias.x + randf_range(-0.6, 0.6), -domain_extent, domain_extent),
+		0.05,
+		clampf(bias.z + randf_range(-0.6, 0.6), -domain_extent, domain_extent)
+	)
+	# The bolt leans slightly upwind at the top (cloud anchor a touch back).
+	var lean := Vector3.ZERO
+	if horiz.length() > 0.05:
+		lean = -horiz.normalized() * 0.4
+	var top_pt := ground_pt + Vector3(lean.x, 3.0, lean.z)
+
+	# Zig-zag the bolt as a poly-line in unit space, scaled by _sc().
+	_lightning_bolt_mesh.clear_surfaces()
+	_lightning_bolt_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	_lightning_bolt_mesh.surface_set_color(Color(0.95, 0.98, 1.0))
+	var segs := 8
+	for i in range(segs + 1):
+		var t: float = float(i) / float(segs)
+		var base_pt := top_pt.lerp(ground_pt, t)
+		# Jitter sideways, more in the middle, zero at the ends.
+		var jitter: float = sin(t * PI) * 0.35
+		var off := Vector3(randf_range(-jitter, jitter), 0.0, randf_range(-jitter, jitter))
+		_lightning_bolt_mesh.surface_add_vertex((base_pt + off) * sc)
+	_lightning_bolt_mesh.surface_end()
+
+	_lightning_bolt.visible = true
+	_lightning_flash = 1.0
+	_lightning_light.position = ground_pt * sc + Vector3(0.0, 0.5, 0.0) * sc
+
+	if _lightning_sparks:
+		_lightning_sparks.position = ground_pt * sc
+		_lightning_sparks.restart()
+		_lightning_sparks.emitting = true
+
+
+## Calm-mode sun shaft: show only in calm mode, slowly bob, rising motes.
+func _drive_sun_shaft(_delta: float, _sum: Vector3) -> void:
+	if _sun_shaft == null:
+		return
+	var want: bool = bool(_palette().get("sun", false))
+	_sun_shaft.visible = want
+	if _sun_motes:
+		_sun_motes.emitting = want
 
 
 func _update_streamlines(a: Vector3, b: Vector3) -> void:
@@ -1299,8 +1781,68 @@ func _apply_mode(mode_idx: int) -> void:
 	if lc_b and lc_b.has_method("refresh_connections"):
 		lc_b.refresh_connections()
 
-	# Reset particles for new mode
+	# Swap the particle palette to match the mode (amount/scale/color/etc).
+	_apply_weather_palette(mode_idx)
+
+	# Restart emitters so the new look takes immediately.
 	_reset_particles()
+
+
+## Returns the palette dict for the current mode (safe fallback).
+func _palette() -> Dictionary:
+	if _mode_palettes.is_empty():
+		return {}
+	var idx: int = clampi(current_mode, 0, _mode_palettes.size() - 1)
+	return _mode_palettes[idx]
+
+
+## Applies a mode palette to every GPU emitter: density (amount), particle size
+## (scale), tint (color), and the snow/blizzard variant (low gravity, white,
+## wide spread). drift_gain + lightning + sun are read live in the drivers.
+func _apply_weather_palette(mode_idx: int) -> void:
+	if _mode_palettes.is_empty():
+		return
+	var idx: int = clampi(mode_idx, 0, _mode_palettes.size() - 1)
+	var pal: Dictionary = _mode_palettes[idx]
+	var amt_mult: float = float(pal.get("amount", 1.0))
+	var scl_mult: float = float(pal.get("scale", 1.0))
+	var is_snow: bool = bool(pal.get("snow", false))
+
+	# Rain / snow.
+	if _rain_gpu and _rain_mat:
+		_rain_gpu.amount = max(1, int(rain_count * amt_mult))
+		var rc: Color = pal.get("rain_color", Color(0.55, 0.68, 1.0, 0.85))
+		_rain_mat.color = rc
+		if _rain_draw_mat:
+			_rain_draw_mat.albedo_color = rc
+			_rain_draw_mat.emission = Color(rc.r, rc.g, rc.b)
+		if is_snow:
+			# Blizzard: white snow — slow fall, wide spread, round flakes.
+			_rain_mat.spread = 35.0
+			_rain_mat.scale_min = 0.9 * scl_mult
+			_rain_mat.scale_max = 1.4 * scl_mult
+			_rain_gpu.lifetime = 4.0
+		else:
+			_rain_mat.spread = 4.0
+			_rain_mat.scale_min = 0.7 * scl_mult
+			_rain_mat.scale_max = 1.1 * scl_mult
+			_rain_gpu.lifetime = 1.6
+
+	# Clouds.
+	if _cloud_gpu and _cloud_mat:
+		var cc: Color = pal.get("cloud_color", Color(0.7, 0.73, 0.8, 0.45))
+		_cloud_mat.color = cc
+		_cloud_mat.color_ramp = _make_soft_alpha_ramp(Color(cc.r, cc.g, cc.b))
+		if _cloud_draw_mat:
+			_cloud_draw_mat.albedo_color = cc
+
+	# Mist.
+	if _mist_gpu and _mist_mat:
+		var mc: Color = pal.get("mist_color", Color(0.7, 0.78, 0.9, 0.12))
+		_mist_mat.color = mc
+		_mist_mat.color_ramp = _make_soft_alpha_ramp(Color(mc.r, mc.g, mc.b))
+		if _mist_draw_mat:
+			_mist_draw_mat.albedo_color = mc
 
 
 func _toggle_grid() -> void:
@@ -1319,19 +1861,17 @@ func reset() -> void:
 	_reset_particles()
 
 
+## Restart the continuous GPU emitters so a mode/reset change reads immediately.
+## (Lightning/sun motes are one-shot/driven and need no restart here.)
 func _reset_particles() -> void:
-	for p in _rain_state:
-		p["pos"] = _random_rain_start()
-		p["vel"] = Vector3.ZERO
-
-
-func _random_rain_start() -> Vector3:
-	var e := domain_extent * 0.85
-	return Vector3(
-		randf_range(-e, e),
-		randf_range(2.0, 4.0),
-		randf_range(-e, e)
-	)
+	if _rain_gpu:
+		_rain_gpu.restart()
+	if _cloud_gpu:
+		_cloud_gpu.restart()
+	if _mist_gpu:
+		_mist_gpu.restart()
+	if _debris_gpu:
+		_debris_gpu.restart()
 
 
 # ════════════════════════════════════════════════════════════════════
@@ -1423,10 +1963,30 @@ func grid_arrows_reset() -> void:
 	_arrow_count = 0
 	_arrow_shaft_mm = null
 	_arrow_head_mm = null
-	_rain_state.clear()
-	_rain_mm = null
-	_cloud_state.clear()
-	_cloud_mm = null
+	# GPU particle handles (freed with environment_root above; null the refs).
+	_rain_gpu = null
+	_rain_mat = null
+	_rain_draw_mat = null
+	_cloud_gpu = null
+	_cloud_mat = null
+	_cloud_draw_mat = null
+	_mist_gpu = null
+	_mist_mat = null
+	_mist_draw_mat = null
+	_debris_gpu = null
+	_debris_mat = null
+	_debris_draw_mat = null
+	_lightning_root = null
+	_lightning_bolt = null
+	_lightning_bolt_mesh = null
+	_lightning_bolt_mat = null
+	_lightning_sparks = null
+	_lightning_light = null
+	_lightning_flash = 0.0
+	_sun_shaft = null
+	_sun_shaft_mat = null
+	_sun_motes = null
+	_sun_motes_mat = null
 	_streamline_mm = null
 	_streamline_seeds = PackedVector3Array()
 	_cached_a = {}
