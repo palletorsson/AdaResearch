@@ -1,0 +1,43 @@
+{
+	"id": "force_vortex",
+	"name": "Force Vortex",
+	"description": "A rotating force field — a whirlpool that drags the VR player toward its glowing core, spins them around it on a tangential current, then flings them back out (outward + up) when they cross the core radius. Force as a place you're caught in, not an arrow you read. Spiral arms rotate; ground ring marks the field. Uses the proven XRToolsPlayerBody.velocity launch path, applied continuously. DNA: field_radius, pull_strength, spin_strength, lift, eject_radius, eject_force, eject_up.",
+	"category": "vectors",
+	"theoreticalGrounding": "A force field assigns a velocity to every point in space. Here v_in = -r̂·pull + (ŷ×r)·spin (inward + swirl); cross the core and v_out = r̂·eject + ŷ·up. Centripetal in, centrifugal out — felt in the body.",
+	"artifacts": {
+		"force_vortex": {
+			"lookup_name": "force_vortex",
+			"name": "Force Vortex",
+			"description": "Rotating whirlpool force field. An Area3D (cylinder, player_body layer) captures the player; each physics frame the field overwrites their velocity with inward pull + tangential spin + gentle lift, spiralling them toward the core; crossing eject_radius throws them outward + up, then a cooldown. Rotating spiral arms + glowing core + boundary ring. DNA: field_radius (3.5), pull/spin/lift, eject_force/up.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/force_vortex/force_vortex.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"footprint": [4, 3, 4],
+			"tags": ["forces", "vortex", "force_field", "whirlpool", "centripetal", "spin", "player_launch", "velocity", "vr", "placeable"],
+			"qfep_connection": "F_force: a field is a velocity per point — pulled in, spun, thrown out; the body rides the vector current.",
+			"parameters": {
+				"field_radius": 3.5,
+				"pull_strength": 4.5,
+				"spin_strength": 6.5,
+				"lift": 1.4,
+				"eject_radius": 0.9,
+				"eject_force": 13.0,
+				"eject_up": 8.0,
+				"cooldown_time": 1.6,
+				"footprint": [4, 3, 4],
+				"size_group": "medium"
+			},
+			"size_group": "medium",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 6,
+				"density": "medium",
+				"reading_radius": 4,
+				"derived_from": "manual"
+			}
+		}
+	}
+}
