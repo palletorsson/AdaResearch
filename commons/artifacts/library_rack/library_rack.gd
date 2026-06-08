@@ -298,15 +298,22 @@ func _build_filled_slot(slot: Node3D, entry: Dictionary) -> void:
 	var scene_path: String = entry["scene"]
 	var inner_size: float = cube_size * 0.8
 
-	# For .tscn scenes — instantiate the actual artifact scaled down
+	# For .tscn scenes — instantiate the actual artifact scaled down.
+	# Only Node3D roots can live in a 3D shelf slot. Control/Node2D-rooted
+	# artifacts (e.g. colorsheets.gd extends Control) would crash on the
+	# Vector3 `scale` assignment, so they fall through to the placeholder cube.
 	if scene_path.ends_with(".tscn") and ResourceLoader.exists(scene_path):
 		var scene := load(scene_path) as PackedScene
 		if scene:
 			var instance := scene.instantiate()
-			instance.scale = Vector3.ONE * inner_size
-			instance.name = "ArtifactInstance"
-			slot.add_child(instance)
-			return
+			if instance is Node3D:
+				instance.scale = Vector3.ONE * inner_size
+				instance.name = "ArtifactInstance"
+				slot.add_child(instance)
+				return
+			else:
+				push_warning("[library_rack] '%s' root is %s, not Node3D — using placeholder cube" % [scene_path, instance.get_class()])
+				instance.free()
 
 	# For .gdshader — apply to a cube
 	if scene_path.ends_with(".gdshader") and ResourceLoader.exists(scene_path):
