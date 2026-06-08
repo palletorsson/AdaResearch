@@ -1,0 +1,426 @@
+{
+	"id": "pattern_loom",
+	"name": "Pattern Loom",
+	"description": "A sci-fi loom that manufactures wallpaper. The 17 wallpaper groups become output — a carpet woven on glowing warp threads and fed continuously out of the machine, the symmetry group scrolling past like fabric off a mill. Re-bodies the pattern editors (pattern_maker_station, pattern_tile_plate, vr_tile_editor) as a machine: those edit the carpet, this manufactures it. Reuses PatternSim.render_to_image and machine vocabulary from props-dna-gallery.",
+	"category": "dna_grammar",
+	"theoreticalGrounding": "A pattern is produced, not given. The wallpaper group is the program; the loom is the press that runs it. loom_style (roller | warp | mirror) gives the same wallpaper engine three machine bodies.",
+	"artifacts": {
+		"pattern_loom": {
+			"lookup_name": "pattern_loom",
+			"name": "Pattern Loom",
+			"description": "Dark machine frame with emissive accents, glowing warp threads + a pulsing weave bar, and a wallpaper-textured cloth that scrolls out of the weave line. DNA: group (p1..p6m), palette, motif_seed, loom_style (roller carpet-press / warp tapestry / mirror twin-panel), density.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/pattern_loom/pattern_loom.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial",
+				"color",
+				"artmathematics"
+			],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"tags": [
+				"dna",
+				"pattern",
+				"wallpaper",
+				"loom",
+				"machine",
+				"carpet",
+				"scifi",
+				"placeable"
+			],
+			"qfep_connection": "F_order: the 17 wallpaper groups as a manufacturing program — constraint multiplied into endless fabric.",
+			"parameters": {
+				"group": "p4m",
+				"palette": "alhambra",
+				"loom_style": "roller",
+				"motif_seed": 7,
+				"footprint": [
+					2,
+					3,
+					2
+				],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 7,
+				"density": "high",
+				"reading_radius": 4,
+				"derived_from": "manual"
+			}
+		},
+		"loom_alhambra_p6m": {
+			"lookup_name": "loom_alhambra_p6m",
+			"name": "Loom: Alhambra p6m (roller)",
+			"description": "Carpet-press loom weaving an Alhambra-palette p6m tiling onto the floor.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p6m",
+				"palette": "alhambra",
+				"loom_style": "roller",
+				"motif_seed": 13
+			}
+		},
+		"loom_bauhaus_p4m": {
+			"lookup_name": "loom_bauhaus_p4m",
+			"name": "Loom: Bauhaus p4m (roller)",
+			"description": "Carpet-press loom weaving a Bauhaus-palette p4m tiling.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p4m",
+				"palette": "bauhaus",
+				"loom_style": "roller",
+				"motif_seed": 7
+			}
+		},
+		"loom_persian_warp": {
+			"lookup_name": "loom_persian_warp",
+			"name": "Loom: Persian (warp tapestry)",
+			"description": "Upright tapestry loom dropping a Persian-palette banner.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				1,
+				3
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "pmm",
+				"palette": "persian",
+				"loom_style": "warp",
+				"motif_seed": 21
+			}
+		},
+		"loom_tatami_warp": {
+			"lookup_name": "loom_tatami_warp",
+			"name": "Loom: Tatami (warp tapestry)",
+			"description": "Upright tapestry loom dropping a tatami-palette banner.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				1,
+				3
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "cmm",
+				"palette": "tatami",
+				"loom_style": "warp",
+				"motif_seed": 5
+			}
+		},
+		"loom_memphis_mirror": {
+			"lookup_name": "loom_memphis_mirror",
+			"name": "Loom: Memphis (mirror twin-panel)",
+			"description": "Mirror-loom weaving a Memphis-palette pattern against its reflection.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				1,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p4g",
+				"palette": "memphis",
+				"loom_style": "mirror",
+				"motif_seed": 33
+			}
+		},
+		"loom_escher_mirror": {
+			"lookup_name": "loom_escher_mirror",
+			"name": "Loom: Escher (mirror twin-panel)",
+			"description": "Mirror-loom weaving a monochrome Escher-palette pattern against its reflection.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				1,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p6",
+				"palette": "escher",
+				"loom_style": "mirror",
+				"motif_seed": 9
+			}
+		},
+		"loom_drum_bauhaus_p4m": {
+			"lookup_name": "loom_drum_bauhaus_p4m",
+			"name": "Loom: Bauhaus p4m (rotary drum)",
+			"description": "Rotary print-drum press feeding a Bauhaus p4m carpet.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"machine",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p4m",
+				"palette": "bauhaus",
+				"loom_style": "drum",
+				"motif_seed": 7
+			}
+		},
+		"loom_drum_persian_p6": {
+			"lookup_name": "loom_drum_persian_p6",
+			"name": "Loom: Persian p6 (rotary drum)",
+			"description": "Rotary print-drum press feeding a Persian p6 carpet.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"machine",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p6",
+				"palette": "persian",
+				"loom_style": "drum",
+				"motif_seed": 13
+			}
+		},
+		"loom_bolt_memphis_p4g": {
+			"lookup_name": "loom_bolt_memphis_p4g",
+			"name": "Loom: Memphis p4g (wall bolt)",
+			"description": "Wall dispenser unrolling a Memphis p4g wallpaper bolt.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"machine",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p4g",
+				"palette": "memphis",
+				"loom_style": "bolt",
+				"motif_seed": 33
+			}
+		},
+		"loom_bolt_escher_pmm": {
+			"lookup_name": "loom_bolt_escher_pmm",
+			"name": "Loom: Escher pmm (wall bolt)",
+			"description": "Wall dispenser unrolling a monochrome Escher pmm bolt.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"machine",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "pmm",
+				"palette": "escher",
+				"loom_style": "bolt",
+				"motif_seed": 9
+			}
+		},
+		"loom_fountain_alhambra_p6m": {
+			"lookup_name": "loom_fountain_alhambra_p6m",
+			"name": "Loom: Alhambra p6m (radial fountain)",
+			"description": "Radial fountain spinning out a round Alhambra p6m rug.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"machine",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p6m",
+				"palette": "alhambra",
+				"loom_style": "fountain",
+				"motif_seed": 21
+			}
+		},
+		"loom_fountain_pastel_p4": {
+			"lookup_name": "loom_fountain_pastel_p4",
+			"name": "Loom: Pastel p4 (radial fountain)",
+			"description": "Radial fountain spinning out a round pastel p4 rug.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"loom",
+				"machine",
+				"live"
+			],
+			"qfep_connection": "F_order: a named carpet program.",
+			"delegate_to": "pattern_loom",
+			"delegate_params": {
+				"group": "p4",
+				"palette": "pastel",
+				"loom_style": "fountain",
+				"motif_seed": 5
+			}
+		}
+	}
+}

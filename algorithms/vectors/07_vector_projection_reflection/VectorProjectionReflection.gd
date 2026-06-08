@@ -9,6 +9,12 @@ var plane_mesh: MeshInstance3D
 var projection_drop_line: MeshInstance3D
 var _projection_drop_mesh: ImmediateMesh
 var info_label: Label3D
+var readout_label: Label3D
+var magnitude_slider: Node3D
+
+# Slider range for |incident|.
+var _slider_min_mag: float = 0.3
+var _slider_max_mag: float = 3.0
 
 # Cached nodes
 var _cached_incident_nodes: Dictionary = {}
@@ -23,8 +29,10 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready() -> void:
 	super._ready()
-	# Match the compact exhibition presentation used by other advanced vector scenes.
-	scale = Vector3(0.5, 0.5, 0.5)
+
+func build_scene() -> void:
+	# Scaled exhibition presentation (compact at 1.0, walk-inside at 5.0).
+	scale = base_scale()
 	create_axes(1.5)
 	incident_vector = spawn_vector(Vector3.ZERO, Vector3(1.2, 1.3, 0.5), Color(1.0, 0.5, 0.3, 1.0), "Incident")
 	normal_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.6, 0.6), Color(0.3, 0.8, 1.0, 1.0), "Normal")
@@ -37,7 +45,7 @@ func _ready() -> void:
 		"Normal Component",
 		false
 	)
-	
+
 	plane_mesh = _create_plane_mesh()
 	environment_root.add_child(plane_mesh)
 	projection_drop_line = _create_projection_drop_line()
@@ -50,6 +58,14 @@ func _ready() -> void:
 		"Decompose incident vector into plane + normal components"
 	)
 
+	# Live readout: projection length and the reflected vector.
+	readout_label = create_readout(Vector3(0.0, 2.0, 0.0), Color(0.75, 1.0, 0.6, 1.0))
+
+	# Magnitude slider controlling |incident|.
+	magnitude_slider = create_magnitude_slider(Vector3(0.0, 0.4, 1.6), "|incident|", _slider_min_mag, _slider_max_mag, 0.5)
+	if magnitude_slider and magnitude_slider.has_signal("slider_moved"):
+		magnitude_slider.connect("slider_moved", Callable(self, "_on_magnitude_slider_moved"))
+
 	# Cache nodes
 	_cache_vector_nodes(incident_vector, _cached_incident_nodes)
 	_cache_vector_nodes(normal_vector, _cached_normal_nodes)
@@ -57,23 +73,36 @@ func _ready() -> void:
 	_cache_vector_nodes(reflection_vector, _cached_refl_nodes)
 	_cache_vector_nodes(normal_component_vector, _cached_normal_component_nodes)
 
+func _on_magnitude_slider_moved(_position) -> void:
+	if magnitude_slider == null:
+		return
+	var norm: float = 0.5
+	if magnitude_slider.has_method("get_normalized_value"):
+		norm = float(magnitude_slider.call("get_normalized_value"))
+	var target_mag: float = lerp(_slider_min_mag, _slider_max_mag, norm)
+	var inc: Vector3 = _get_vector_fast(incident_vector, _cached_incident_nodes)
+	var dir: Vector3 = inc.normalized()
+	if dir.length() < 0.001:
+		dir = Vector3(1.0, 1.0, 0.0).normalized()
+	_update_vector_fast(incident_vector, dir * target_mag, _cached_incident_nodes)
+
 func _process(delta: float) -> void:
 	var incident = _get_vector_fast(incident_vector, _cached_incident_nodes)
 	var normal = _get_vector_fast(normal_vector, _cached_normal_nodes)
 	if normal.length() < 0.001:
 		normal = Vector3.UP
 	var n_unit = normal.normalized()
-	
+
 	var normal_component = n_unit * incident.dot(n_unit)
 	var projection = incident - normal_component
 	var reflection = incident - 2.0 * normal_component
-	
+
 	_update_vector_fast(plane_projection, projection, _cached_proj_nodes)
 	_update_vector_fast(reflection_vector, reflection, _cached_refl_nodes)
 	_update_vector_fast(normal_component_vector, normal_component, _cached_normal_component_nodes)
 	_update_plane_orientation(n_unit)
 	_update_projection_drop_line(incident, projection)
-	
+
 	_time_since_last_text_update += delta
 	if _time_since_last_text_update >= TEXT_UPDATE_INTERVAL:
 		_time_since_last_text_update = 0.0
@@ -150,6 +179,8 @@ func _update_info(incident: Vector3, normal: Vector3, projection: Vector3, refle
 		angle = acos(clamp(incident.normalized().dot(n_unit), -1.0, 1.0))
 	builder.append("Angle to Plane Normal ~= %.1f deg" % rad_to_deg(angle))
 	info_label.text = "\n".join(builder)
+	if readout_label:
+		readout_label.text = "proj length = %.2f\nreflect = (%.2f, %.2f, %.2f)" % [projection.length(), reflection.x, reflection.y, reflection.z]
 
 # --- Caching Helpers (Local Implementation) ---
 
@@ -180,7 +211,3 @@ func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-
-
-func apply_grid_config(config: Dictionary) -> void:
-	pass

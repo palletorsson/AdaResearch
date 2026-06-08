@@ -3,7 +3,22 @@ extends Node3D
 class_name VectorSceneBase
 
 const VECTOR_SCENE := preload("res://commons/primitives/line/line.tscn")
+const SLIDER_SCENE := preload("res://commons/interactables/slider_horizontal.tscn")
 const SCENE_SCALE: float = 0.33
+
+# Size control.
+# Default 1.0 reproduces the historical "compact" exhibition size (a 0.5 root
+# scale, applied by subclasses via base_scale()). Larger values produce the
+# walk-inside XL variants. Delivered through delegate_params -> apply_grid_config.
+@export var scale_multiplier: float = 1.0
+
+# Base root scale that the compact presentation used. The effective root scale a
+# subclass should apply is base_scale() == BASE_ROOT_SCALE * scale_multiplier.
+const BASE_ROOT_SCALE: float = 0.5
+
+# Set true once a subclass has built its scene, so apply_grid_config() knows it
+# must tear down + rebuild rather than letting _ready() build for the first time.
+var _scene_built: bool = false
 
 # Shared Resources (Lazy Initialization)
 static var _shared_cylinder_mesh: CylinderMesh
@@ -25,6 +40,12 @@ func _ready() -> void:
 	add_child(info_root)
 	_init_shared_resources()
 	_create_origin_marker()
+	# Subclasses build their scene by overriding build_scene(). They still call
+	# super._ready() first; the call below runs after that returns. We guard with
+	# _scene_built so a subclass that builds inline (legacy) is not double-built.
+	if not _scene_built:
+		build_scene()
+		_scene_built = true
 
 func _init_shared_resources() -> void:
 	if _shared_cylinder_mesh == null:
@@ -96,8 +117,35 @@ func spawn_vector(origin: Vector3, vector: Vector3, color: Color, name: String, 
 	if not allow_grab:
 		_disable_grab_sphere(start_node)
 		_disable_grab_sphere(end_node)
+	else:
+		# Keep endpoints comfortably grabbable when the scene is enlarged.
+		# The root node scale already grows the spheres in world space, but we
+		# boost them a little extra so the hit target stays generous at XL size.
+		_boost_grab_sphere(start_node)
+		_boost_grab_sphere(end_node)
 	add_child(arrow)
 	return arrow
+
+## Enlarge a grab sphere's collision + visible mesh proportional to
+## scale_multiplier so vector endpoints stay easy to grab when the scene is big.
+## The local radius starts ~0.06; at scale_multiplier 5 the effective world
+## radius is ~0.06 * 0.5 * 5 (root scale) * extra_boost -> well over 0.15 m.
+func _boost_grab_sphere(grab_node: Node) -> void:
+	if grab_node == null:
+		return
+	# Only boost beyond the default size; at scale_multiplier 1.0 leave as-is.
+	var extra: float = max(1.0, scale_multiplier * 0.6)
+	if extra <= 1.0001:
+		return
+	var collider: CollisionShape3D = grab_node.get_node_or_null("CollisionShape3D")
+	if collider and collider.shape is SphereShape3D:
+		var shape: SphereShape3D = collider.shape.duplicate()
+		shape.radius = 0.06 * extra
+		collider.shape = shape
+	# Enlarge the visible marker mesh too (snap_point uses a Sphere child).
+	var mesh_root := grab_node.get_node_or_null("MeshInstance3D")
+	if mesh_root:
+		mesh_root.scale = Vector3.ONE * extra
 
 func update_vector(arrow: Node3D, vector: Vector3) -> void:
 	if arrow == null:
@@ -445,5 +493,91 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
+## A large billboarded numeric readout placed at a logical position (pre-scale).
+## Returns the Label3D so subclasses can update its text every frame. Sized to be
+## legible from across the room when the scene is enlarged.
+func create_readout(logical_position: Vector3, color: Color = Color(0.85, 1.0, 0.9, 1.0)) -> Label3D:
+	var label := Label3D.new()
+	label.name = "Readout"
+	label.text = ""
+	label.font_size = 64
+	label.modulate = color
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.no_depth_test = true
+	label.render_priority = 110
+	label.outline_size = 12
+	label.outline_modulate = Color(0.0, 0.0, 0.0, 0.85)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.pixel_size = 0.0012
+	label.position = logical_position * SCENE_SCALE
+	info_root.add_child(label)
+	return label
+
+## Spawn a horizontal magnitude slider at a logical position (pre-scale) and
+## wire its range + label. Returns the slider Node3D (base-typed). The caller
+## connects `slider_moved` and reads `get_normalized_value()`.
+## param_name: the text under the handle. min_val/max_val: logical range shown.
+func create_magnitude_slider(logical_position: Vector3, param_name: String, min_val: float, max_val: float, start_norm: float = 0.5) -> Node3D:
+	var slider: Node3D = SLIDER_SCENE.instantiate()
+	slider.name = "MagnitudeSlider_" + param_name.replace(" ", "_")
+	slider.position = logical_position * SCENE_SCALE
+	# Tilt the panel slightly toward the player so it reads while standing.
+	slider.rotation_degrees = Vector3(-25.0, 0.0, 0.0)
+	add_child(slider)
+	# Use dynamic set/call so this works even though `slider` is base-typed and
+	# the slider script is not a known class_name at compile time.
+	if slider.has_method("set_range"):
+		slider.call("set_range", min_val, max_val)
+	if slider.has_method("set_param_name"):
+		slider.call("set_param_name", param_name)
+	if slider.has_method("set_normalized_value"):
+		slider.call("set_normalized_value", start_norm)
+	return slider
+
+## Effective root scale a subclass should apply to its own `scale`.
+## Replaces the old hardcoded Vector3(0.5, 0.5, 0.5).
+func base_scale() -> Vector3:
+	var s: float = BASE_ROOT_SCALE * scale_multiplier
+	return Vector3(s, s, s)
+
+## Subclasses override this to build their whole scene (vectors, gadgets,
+## panels, etc). It is invoked from _ready() and re-invoked by rebuild() after a
+## scale change. Subclasses should set self.scale = base_scale() at the top.
+func build_scene() -> void:
 	pass
+
+## Tear down and rebuild the scene at the current scale_multiplier. Used when
+## scale_multiplier arrives via apply_grid_config() after _ready() already ran.
+func rebuild() -> void:
+	# Free everything we created (vectors, gadgets, environment, info, labels).
+	for child in get_children():
+		# Only free the dynamic content; keep nothing persistent here since
+		# environment_root / info_root are recreated in _ready of the base.
+		child.queue_free()
+	environment_root = null
+	info_root = null
+	# Re-create the base scaffolding that _ready() normally provides.
+	environment_root = Node3D.new()
+	environment_root.name = "Environment"
+	add_child(environment_root)
+	info_root = Node3D.new()
+	info_root.name = "Info"
+	add_child(info_root)
+	_create_origin_marker()
+	_scene_built = false
+	build_scene()
+	_scene_built = true
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config == null:
+		return
+	if config.has("scale_multiplier"):
+		var new_mult: float = float(config["scale_multiplier"])
+		if new_mult > 0.0 and not is_equal_approx(new_mult, scale_multiplier):
+			scale_multiplier = new_mult
+			# If the scene already built at the old size, rebuild at the new one.
+			if _scene_built:
+				rebuild()
+			else:
+				scale = base_scale()

@@ -1,0 +1,1049 @@
+# pattern_mill.gd — THE PATTERN MILL
+#
+# One apparatus that EDITS and MANUFACTURES a wallpaper-group carpet. The player
+# touch-paints a small motif grid on the machine head; the mill re-tiles that
+# fragment through one of the 17 wallpaper groups into a live texture and feeds
+# the carpet forward off a roller/tray (uv1_offset scroll). Spinning mirror-wedge
+# ROTORS make the symmetry mechanical — their blade count tracks the current
+# group's rotational order (2/3/4/6-fold), so cycling the GROUP re-geometries the
+# machine. Painting updates the carpet live; a discrete PRESS lever punches the
+# head down and re-stamps, the tactile "I made this" stroke.
+#
+# This is the synthesis of four prototypes:
+#   A (Jacquard loom)  — touch-toggle head, CPU re-tile via get_symmetric_color,
+#                        _read_overrides meta pattern.
+#   B (Holo press)     — bake-on-edit into ONE reusable ImageTexture (.update());
+#                        dual output (vertical proof sheet + floor carpet) from one
+#                        texture; the WORKING palette resolution from PatternSim.PALETTES.
+#   C (Kaleidoscope)   — FOLD-ORDER ROTORS whose blade count = group rotational order;
+#                        one freeable rotor container + material discipline on rebuild.
+#   D (Tile-stamp)     — discrete operate-stroke: press head on guide rods + pull lever
+#                        that punches down with a flash; conveyor output tray.
+#
+# @identity
+# essence: motif_grid(NxN) -> wallpaper_group -> live carpet. An editable
+#   manufacturing machine: paint a handful of cells on the head, watch spinning
+#   mirror rotors multiply the fragment, and the mill feeds out endless symmetric
+#   fabric. The symmetry IS the visible mechanism.
+# desire: to fuse the editor and the machine — pattern_maker_station edits,
+#   pattern_loom manufactures; the mill does both, and makes the group's fold
+#   order legible as rotating mirror blades you can watch change when you cycle.
+# critical_parameter: wallpaper_group — the symmetry operator. A few painted cells,
+#   read through one of 17 groups, become a carpet. Cycling the group re-counts the
+#   rotor blades (2/3/4/6 fold), so the program is written into the machine's body.
+# triggers: touch-paint the head grid (Area3D); INK row picks paint colour; GROUP
+#   cycles all 17 symmetry programs + rebuilds the rotors; SEED rerolls a procedural
+#   motif; CLEAR blanks the grid; PRESS pulls the lever (head punch + flash + re-stamp).
+#   Every edit re-tiles the live carpet.
+# emerges: the federated move — reuse WallpaperGroups.get_symmetric_color +
+#   PatternSim.PALETTES, wrap them in an interactive apparatus with a stroke.
+# needs: [has] push_button INK + control row; [has] Area3D touch-paint head;
+#   [has] fold-order mirror-wedge rotors; [has] press head + lever + guide rods;
+#   [has] live carpet + proof sheet via one reusable texture; [has] output tray.
+# relationships: sibling to pattern_loom (manufactures) and pattern_maker_station
+#   (edits) — this does both. Reuses WallpaperGroups + PatternSim. Machine vocabulary
+#   from pattern_loom / conveyor_belt / props-dna-gallery.
+# truth: a pattern is a program plus a fragment. Hand someone the fragment and the
+#   press — and the rotors that show them the rule turning — and they discover that
+#   structure comes from constraint, not complexity. You mill architecture from almost
+#   nothing.
+
+extends Node3D
+class_name PatternMill
+
+const PatternSim = preload("res://commons/pattern_grammar/pattern_sim.gd")
+const WallpaperGroupsScript = preload("res://commons/primitives/arrays/wallpaper_groups.gd")
+
+# ── DNA ──────────────────────────────────────────────────────────────────
+## Wallpaper symmetry group (p1..p6m) — the mirrors the rotor enforces.
+@export var group: String = "p4m"
+## Palette name: bauhaus, escher, alhambra, tatami, pastel, memphis, persian, monochrome.
+@export var palette: String = "bauhaus"
+## Motif seed — deterministic starting motif; rerolled by SEED.
+@export var motif_seed: int = 7
+## Editable head grid (NxN cells the player paints). 3..8.
+@export var motif_size: int = 5
+## Fill density when (re)seeding the motif.
+@export var density: float = 0.5
+
+@export_group("Machine")
+@export var frame_color: Color = Color(0.11, 0.12, 0.16)     # dark industrial
+@export var metal_color: Color = Color(0.32, 0.34, 0.40)     # brushed metal
+@export var accent_color: Color = Color(0.95, 0.55, 0.18)    # warm amber accent
+@export var core_color: Color = Color(0.35, 0.9, 1.0)        # cyan core glow
+@export var carpet_width: float = 1.3                        # output carpet width (m)
+@export var carpet_length: float = 2.6                       # floor carpet run (m)
+@export var sheet_height: float = 1.0                        # vertical proof-sheet height (m)
+@export var carpet_repeats: int = 8                          # domain repeats across the carpet
+@export var rotor_speed: float = 0.6                         # rad/s base rotor spin
+@export var scroll_speed: float = 0.14                       # uv feed speed
+
+# ── Group order (string + enum, indexed for cycling) ──────────────────────
+const GROUP_NAMES: Array = [
+	"p1", "p2", "pm", "pg", "cm", "pmm", "pmg", "pgg", "cmm",
+	"p4", "p4m", "p4g", "p3", "p3m1", "p31m", "p6", "p6m",
+]
+
+# ── Layout constants ──────────────────────────────────────────────────────
+const HEAD_Y: float = 1.25            # height of the editable head grid
+const HEAD_CELL: float = 0.075        # metres per head cell
+const CORE_Y: float = 0.95            # rotor / core height
+const HEAD_Z: float = -0.05           # head sits just behind machine origin
+
+# ── State ─────────────────────────────────────────────────────────────────
+var _grid: Array = []                 # head cells [y][x] -> color index into _palette
+var _palette: Array = []              # Array of Color, resolved from PatternSim.PALETTES
+var _ink: int = 1                     # selected paint index
+var _group_index: int = 10            # index into GROUP_NAMES (p4m default)
+var _current_group: int = WallpaperGroupsScript.Group.P4M
+var _spin_dir: float = 1.0
+var _elapsed: float = 0.0
+
+# ── Scene refs ────────────────────────────────────────────────────────────
+var PUSH_BUTTON: PackedScene
+var _head_root: Node3D                # holds the editable cell grid
+var _cell_mats: Array = []            # [y][x] -> StandardMaterial3D (head cells)
+var _ink_indicators: Array[MeshInstance3D] = []
+var _touch_area: Area3D
+var _last_cell: Vector2i = Vector2i(-1, -1)
+
+var _output_tex: ImageTexture        # ONE reusable texture feeding both outputs
+var _carpet_mat: StandardMaterial3D  # floor carpet
+var _sheet_mat: StandardMaterial3D   # vertical proof sheet
+var _group_label: Label3D
+
+# Animated machine parts
+var _rotor_assembly: Node3D          # ONE freeable container for the whole rotor drum
+var _rotor_ring_mat: StandardMaterial3D
+var _rotor_pivot: Node3D             # the spinning pivot carrying the wedges
+var _core_mat: StandardMaterial3D
+var _warp_mats: Array[StandardMaterial3D] = []
+var _accent_mats: Array[StandardMaterial3D] = []
+var _chute_mat: StandardMaterial3D   # scrolls a feed band down the chute
+
+# Press stroke (discrete operate)
+var _press_head: Node3D
+var _lever: Node3D
+var _press_anim: float = -1.0         # <0 idle, else 0..1 stroke progress
+var _stamped_this_stroke: bool = false
+
+# ═══════════════════════════════════════════════════════════════════════════
+# LIFECYCLE
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _ready() -> void:
+	PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
+	_read_overrides()
+	motif_size = clampi(motif_size, 3, 8)
+	_group_index = _name_to_index(group)
+	_current_group = _index_to_enum(_group_index)
+	_resolve_palette()
+	_seed_motif()
+
+	_build_base_and_frame()
+	_build_core_and_rotors()
+	_build_warp_cage()
+	_build_head_grid()
+	_build_palette_row()
+	_build_control_row()
+	_build_press_head_and_lever()
+	_build_output_chute()
+	_build_carpet()
+	_build_proof_sheet()
+	_build_touch_area()
+	_build_labels()
+	_build_capture_camera()
+	_rebake_output()
+
+	print("[PatternMill] Built — %dx%d head, group %s, palette %s" % [
+		motif_size, motif_size, GROUP_NAMES[_group_index], palette])
+
+
+func _process(delta: float) -> void:
+	_elapsed += delta
+	_check_touch_paint()
+
+	# Spin the kaleidoscope mirror wedges — the symmetry made mechanism.
+	if is_instance_valid(_rotor_pivot):
+		_rotor_pivot.rotation.y += rotor_speed * _spin_dir * delta
+
+	# Carpet + proof sheet feed (uv1_offset scroll).
+	if _carpet_mat:
+		var co := _carpet_mat.uv1_offset
+		co.y = fposmod(co.y + scroll_speed * delta, 1.0)
+		_carpet_mat.uv1_offset = co
+	if _sheet_mat:
+		var so := _sheet_mat.uv1_offset
+		so.y = fposmod(so.y - scroll_speed * delta, 1.0)
+		_sheet_mat.uv1_offset = so
+
+	# Pulse the glowing core.
+	if _core_mat:
+		_core_mat.emission_energy_multiplier = 1.8 + 1.0 * (0.5 + 0.5 * sin(_elapsed * 3.0))
+	# Travelling shimmer along the warp threads.
+	for i in range(_warp_mats.size()):
+		_warp_mats[i].emission_energy_multiplier = 0.6 + 0.6 * (0.5 + 0.5 * sin(_elapsed * 4.0 - i * 0.4))
+	# Accent rails breathe (press face flashes harder during a stroke).
+	var ap := 1.4 + 0.8 * (0.5 + 0.5 * sin(_elapsed * 2.2))
+	if _press_anim >= 0.0:
+		ap += 2.5 * sin(clampf(_press_anim, 0.0, 1.0) * PI)
+	for m in _accent_mats:
+		m.emission_energy_multiplier = ap
+	# Output chute feeds the carpet band forward.
+	if _chute_mat:
+		var o := _chute_mat.uv1_offset
+		o.y = fposmod(o.y + 0.18 * delta, 1.0)
+		_chute_mat.uv1_offset = o
+
+	_animate_press(delta)
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.has("group"):
+		group = str(config["group"])
+	if config.has("wallpaper_group"):
+		_group_index = clampi(int(config["wallpaper_group"]), 0, GROUP_NAMES.size() - 1)
+		group = GROUP_NAMES[_group_index]
+	if config.has("palette"): palette = str(config["palette"])
+	if config.has("motif_seed"): motif_seed = int(config["motif_seed"])
+	if config.has("motif_size"): motif_size = clampi(int(config["motif_size"]), 3, 8)
+	if config.has("density"): density = clampf(float(config["density"]), 0.0, 1.0)
+	if config.has("carpet_width"): carpet_width = float(config["carpet_width"])
+	if config.has("carpet_length"): carpet_length = float(config["carpet_length"])
+	if config.has("carpet_repeats"): carpet_repeats = maxi(1, int(config["carpet_repeats"]))
+	if config.has("rotor_speed"): rotor_speed = float(config["rotor_speed"])
+	if config.has("scroll_speed"): scroll_speed = float(config["scroll_speed"])
+	# Rebuild from scratch with the new DNA.
+	for c in get_children():
+		c.queue_free()
+	_cell_mats.clear(); _ink_indicators.clear()
+	_warp_mats.clear(); _accent_mats.clear()
+	_grid.clear(); _palette.clear()
+	_core_mat = null; _chute_mat = null
+	_rotor_assembly = null; _rotor_ring_mat = null; _rotor_pivot = null
+	_carpet_mat = null; _sheet_mat = null; _output_tex = null
+	_press_head = null; _lever = null
+	_last_cell = Vector2i(-1, -1)
+	_press_anim = -1.0
+	call_deferred("_ready")
+
+
+func _read_overrides() -> void:
+	for k in ["group", "palette"]:
+		if has_meta("config_%s" % k):
+			set(k, str(get_meta("config_%s" % k)))
+	if has_meta("config_motif_seed"):
+		motif_seed = int(str(get_meta("config_motif_seed")))
+	if has_meta("config_motif_size"):
+		motif_size = clampi(int(str(get_meta("config_motif_size"))), 3, 8)
+	if has_meta("config_density"):
+		density = clampf(float(str(get_meta("config_density"))), 0.0, 1.0)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DATA — palette + motif
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _resolve_palette() -> void:
+	# B's working palette resolution: map the named palette from PatternSim.PALETTES
+	# into actual Colors. This is the bit prototype A admitted it never wired up.
+	var raw: Array = PatternSim.PALETTES.get(palette, PatternSim.PALETTES["bauhaus"])
+	_palette.clear()
+	for c in raw:
+		_palette.append(Color(float(c[0]), float(c[1]), float(c[2])))
+	# Guarantee at least two inks (index 0 = ground/empty).
+	while _palette.size() < 2:
+		_palette.append(Color(0.1, 0.1, 0.12))
+
+
+func _seed_motif() -> void:
+	# Deterministic starting motif from the seed — a fragment the player then edits.
+	var n_colors: int = _palette.size()
+	_grid = PatternSim.generate_motif(motif_size, n_colors, motif_seed, density)
+	# generate_motif returns grid[y][x] indices already in 0..n_colors-1.
+
+# ═══════════════════════════════════════════════════════════════════════════
+# BUILDERS — MACHINE BODY
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _build_base_and_frame() -> void:
+	var half := carpet_width * 0.5 + 0.22
+	# Heavy base plinth.
+	_box(Vector3(half * 2.0, 0.12, 1.4), Vector3(0, 0.06, -0.2), frame_color, 0.4, 0.6)
+	# Four bolted feet.
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			_cyl(0.10, 0.07, Vector3(sx * (half - 0.12), 0.05, -0.2 + sz * 0.55), metal_color, 0.7, 0.4)
+	# Two side gantry columns rising to the head.
+	for sx in [-1.0, 1.0]:
+		_box(Vector3(0.10, HEAD_Y + 0.2, 0.12), Vector3(sx * half, (HEAD_Y + 0.2) * 0.5, -0.42), frame_color, 0.5, 0.5)
+	# Top crossbeam carrying the head.
+	_box(Vector3(half * 2.0 + 0.10, 0.10, 0.14), Vector3(0, HEAD_Y + 0.18, -0.42), frame_color, 0.5, 0.5)
+	# Emissive accent rail along the crossbeam — "powered apparatus".
+	_accent_mats.append(_emissive_box(Vector3(half * 2.0 - 0.1, 0.018, 0.018), Vector3(0, HEAD_Y + 0.10, -0.34), accent_color, 1.6))
+	# Side service panel (reads as electrical panel).
+	_box(Vector3(0.34, 0.5, 0.06), Vector3(-half, 0.55, 0.30), metal_color.darkened(0.2), 0.4, 0.6)
+	for i in range(3):
+		_accent_mats.append(_emissive_box(Vector3(0.05, 0.05, 0.02), Vector3(-half + (i - 1) * 0.09, 0.72, 0.34), accent_color, 1.2))
+	# Central feed column connecting the core up to the head.
+	_cyl(HEAD_Y - CORE_Y + 0.3, 0.09, Vector3(0, (CORE_Y + HEAD_Y) * 0.5, -0.42), metal_color, 0.6, 0.4)
+
+
+func _build_core_and_rotors() -> void:
+	# Everything in the rotor head lives under ONE container so the whole drum can
+	# be replaced wholesale when the group (and thus the fold order) changes.
+	var assembly := Node3D.new()
+	assembly.name = "RotorAssembly"
+	add_child(assembly)
+	_rotor_assembly = assembly
+
+	# Mill housing — a drum where the kaleidoscope rotors live.
+	var housing := MeshInstance3D.new()
+	var hcm := CylinderMesh.new()
+	hcm.top_radius = 0.34; hcm.bottom_radius = 0.34
+	hcm.height = 0.40; hcm.radial_segments = 20
+	housing.mesh = hcm
+	housing.material_override = _mat(frame_color.lightened(0.05), 0.5, 0.5)
+	housing.position = Vector3(0, CORE_Y, -0.42)
+	housing.rotation_degrees = Vector3(90, 0, 0)   # drum faces +Z toward the player
+	assembly.add_child(housing)
+
+	# Glowing inner core (the feedstock burns bright here).
+	var core := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = 0.13; sm.height = 0.26
+	core.mesh = sm
+	core.position = Vector3(0, CORE_Y, -0.42)
+	_core_mat = StandardMaterial3D.new()
+	_core_mat.albedo_color = core_color
+	_core_mat.emission_enabled = true
+	_core_mat.emission = core_color
+	_core_mat.emission_energy_multiplier = 2.0
+	core.material_override = _core_mat
+	assembly.add_child(core)
+
+	# Mirror-wedge ROTORS — the visible symmetry. The wedge count reflects the
+	# rotational order of the current group (2 / 3 / 4 / 6 fold).
+	var fold := _rotor_fold_for_group(_group_index)
+	var wedge_mat := StandardMaterial3D.new()
+	wedge_mat.albedo_color = Color(0.85, 0.88, 0.95)
+	wedge_mat.metallic = 0.9
+	wedge_mat.roughness = 0.12       # mirror-like
+	wedge_mat.emission_enabled = true
+	wedge_mat.emission = core_color
+	wedge_mat.emission_energy_multiplier = 0.25
+
+	# A pivot we spin; wedges radiate from the core front face toward the player.
+	var pivot := Node3D.new()
+	pivot.name = "RotorPivot"
+	pivot.position = Vector3(0, CORE_Y, -0.18)
+	assembly.add_child(pivot)
+	_rotor_pivot = pivot
+
+	for i in range(fold):
+		var wedge := MeshInstance3D.new()
+		var pm := PrismMesh.new()
+		pm.size = Vector3(0.06, 0.30, 0.02)
+		wedge.mesh = pm
+		wedge.material_override = wedge_mat
+		var ang := TAU * float(i) / float(fold)
+		wedge.position = Vector3(sin(ang) * 0.14, cos(ang) * 0.14, 0.0)
+		wedge.rotation = Vector3(PI * 0.5, 0.0, -ang)
+		pivot.add_child(wedge)
+
+	# A bright reflective ring framing the rotor.
+	var ring := MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = 0.30; tm.outer_radius = 0.345
+	tm.rings = 28; tm.ring_segments = 14
+	ring.mesh = tm
+	ring.position = Vector3(0, CORE_Y, -0.16)
+	_rotor_ring_mat = _assign_emissive(ring, accent_color, 1.5, metal_color)
+	_accent_mats.append(_rotor_ring_mat)
+	assembly.add_child(ring)
+
+	# Fold-order readout etched on the rotor (2/3/4/6).
+	var fold_lbl := Label3D.new()
+	fold_lbl.name = "FoldLabel"
+	fold_lbl.text = "%d-FOLD" % fold
+	fold_lbl.pixel_size = 0.0009
+	fold_lbl.font_size = 12
+	fold_lbl.modulate = core_color
+	fold_lbl.position = Vector3(0, CORE_Y - 0.30, -0.12)
+	assembly.add_child(fold_lbl)
+
+
+func _build_warp_cage() -> void:
+	# Glowing warp threads across the front of the head — the loom vocabulary,
+	# reading the fed motif into the mill.
+	var count := 13
+	var span := carpet_width * 0.8
+	var base_x := -span * 0.5
+	for i in range(count):
+		var t := MeshInstance3D.new()
+		var cm := CylinderMesh.new()
+		cm.top_radius = 0.004; cm.bottom_radius = 0.004
+		cm.height = 0.55; cm.radial_segments = 6
+		t.mesh = cm
+		var x := base_x + span * float(i) / float(maxi(1, count - 1))
+		t.position = Vector3(x, CORE_Y + 0.02, -0.30)
+		var m := StandardMaterial3D.new()
+		m.albedo_color = core_color
+		m.emission_enabled = true
+		m.emission = core_color
+		m.emission_energy_multiplier = 0.9
+		t.material_override = m
+		_warp_mats.append(m)
+		add_child(t)
+
+	# Weave bar across the warp line.
+	var bar := MeshInstance3D.new()
+	var bcm := CylinderMesh.new()
+	bcm.top_radius = 0.022; bcm.bottom_radius = 0.022
+	bcm.height = span + 0.12; bcm.radial_segments = 12
+	bar.mesh = bcm
+	bar.rotation_degrees = Vector3(0, 0, 90)
+	bar.position = Vector3(0, CORE_Y + 0.30, -0.28)
+	_accent_mats.append(_assign_emissive(bar, accent_color, 2.0, accent_color))
+	add_child(bar)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# BUILDERS — INTERACTIVE HEAD GRID (touch-paint)
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _build_head_grid() -> void:
+	# The head is an upright tray on the machine head facing the player (+Z).
+	_head_root = Node3D.new()
+	_head_root.name = "Head"
+	_head_root.position = Vector3(0, HEAD_Y, HEAD_Z)
+	add_child(_head_root)
+
+	var total := motif_size * HEAD_CELL
+	var start := -total * 0.5
+
+	# Backing plate.
+	var plate := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(total + 0.05, total + 0.05, 0.03)
+	plate.mesh = bm
+	plate.material_override = _mat(Color(0.16, 0.17, 0.20), 0.4, 0.6)
+	plate.position = Vector3(0, 0, -0.02)
+	_head_root.add_child(plate)
+
+	# Bezel frame (4 bars).
+	var fw := 0.014
+	var bz := _mat(frame_color, 0.5, 0.5)
+	var half := (total + 0.05) * 0.5
+	for d in [
+		[Vector3(total + 0.05 + fw, fw, 0.04), Vector3(0, half, 0.0)],
+		[Vector3(total + 0.05 + fw, fw, 0.04), Vector3(0, -half, 0.0)],
+		[Vector3(fw, total + 0.05, 0.04), Vector3(-half, 0, 0.0)],
+		[Vector3(fw, total + 0.05, 0.04), Vector3(half, 0, 0.0)],
+	]:
+		var b := MeshInstance3D.new()
+		var bbm := BoxMesh.new(); bbm.size = d[0]
+		b.mesh = bbm; b.material_override = bz
+		b.position = d[1]
+		_head_root.add_child(b)
+
+	# Editable cells.
+	_cell_mats.clear()
+	for y in motif_size:
+		var row_mat: Array = []
+		for x in motif_size:
+			var cell := MeshInstance3D.new()
+			var qm := QuadMesh.new()
+			qm.size = Vector2(HEAD_CELL * 0.9, HEAD_CELL * 0.9)
+			cell.mesh = qm
+			var ci: int = _grid[y][x]
+			var cm := StandardMaterial3D.new()
+			cm.albedo_color = _color_for(ci)
+			cm.roughness = 0.8
+			if ci != 0:
+				cm.emission_enabled = true
+				cm.emission = _color_for(ci)
+				cm.emission_energy_multiplier = 0.25
+			cell.material_override = cm
+			cell.position = Vector3(
+				start + x * HEAD_CELL + HEAD_CELL * 0.5,
+				start + (motif_size - 1 - y) * HEAD_CELL + HEAD_CELL * 0.5,
+				0.01)
+			_head_root.add_child(cell)
+			row_mat.append(cm)
+		_cell_mats.append(row_mat)
+
+	# Grid lines.
+	var line_mat := StandardMaterial3D.new()
+	line_mat.albedo_color = Color(0.5, 0.52, 0.55, 0.8)
+	line_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	for i in motif_size + 1:
+		var vl := MeshInstance3D.new()
+		var vm := BoxMesh.new(); vm.size = Vector3(0.0015, total, 0.0015)
+		vl.mesh = vm; vl.material_override = line_mat
+		vl.position = Vector3(start + i * HEAD_CELL, 0, 0.012)
+		_head_root.add_child(vl)
+		var hl := MeshInstance3D.new()
+		var hm := BoxMesh.new(); hm.size = Vector3(total, 0.0015, 0.0015)
+		hl.mesh = hm; hl.material_override = line_mat
+		hl.position = Vector3(0, start + i * HEAD_CELL, 0.012)
+		_head_root.add_child(hl)
+
+
+func _build_touch_area() -> void:
+	# Touch volume over the head grid (paints cells under the player's hand).
+	_touch_area = Area3D.new()
+	_touch_area.name = "TouchArea"
+	_touch_area.collision_layer = 1048576   # bit 20 (interactive)
+	_touch_area.collision_mask = 393216     # bits 18+19 (hands + pointers)
+	_touch_area.monitoring = true
+	_touch_area.monitorable = false
+	var total := motif_size * HEAD_CELL
+	var col := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(total + 0.02, total + 0.02, 0.12)
+	col.shape = shape
+	col.position = Vector3(0, 0, 0.02)
+	_touch_area.add_child(col)
+	_head_root.add_child(_touch_area)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# BUILDERS — CONTROLS
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _build_palette_row() -> void:
+	# Ink selectors along the left gantry column, facing the player.
+	var half := carpet_width * 0.5 + 0.22
+	var col_x := -half
+	var base_y := 0.45
+	var spacing := 0.085
+	_ink_indicators.clear()
+	for i in _palette.size():
+		var btn := PUSH_BUTTON.instantiate()
+		btn.name = "InkBtn_%d" % i
+		btn.position = Vector3(col_x, base_y + i * spacing, 0.10)
+		btn.scale = Vector3(0.45, 0.45, 0.45)
+		btn.set("pressed_color", _palette[i])
+		btn.set("released_color", _palette[i].darkened(0.35))
+		add_child(btn)
+		var idx := i
+		_connect_btn(btn, func(): _select_ink(idx))
+		# Glow indicator dot next to the button.
+		var dot := MeshInstance3D.new()
+		var dm := SphereMesh.new(); dm.radius = 0.009; dm.height = 0.018
+		dot.mesh = dm
+		var dmat := StandardMaterial3D.new()
+		dmat.albedo_color = _palette[i]
+		dmat.emission_enabled = true
+		dmat.emission = _palette[i]
+		dmat.emission_energy_multiplier = 2.5 if i == _ink else 0.0
+		dot.material_override = dmat
+		dot.position = Vector3(col_x + 0.07, base_y + i * spacing, 0.10)
+		add_child(dot)
+		_ink_indicators.append(dot)
+
+	var lbl := Label3D.new()
+	lbl.text = "INK"
+	lbl.pixel_size = 0.0009
+	lbl.font_size = 10
+	lbl.modulate = accent_color
+	lbl.position = Vector3(col_x, base_y - 0.08, 0.10)
+	add_child(lbl)
+
+
+func _build_control_row() -> void:
+	# Control buttons along the right gantry column.
+	var half := carpet_width * 0.5 + 0.22
+	var col_x := half
+	var by := 0.95
+
+	var group_btn := PUSH_BUTTON.instantiate()
+	group_btn.name = "GroupCycle"
+	group_btn.position = Vector3(col_x, by, 0.10)
+	group_btn.scale = Vector3(0.55, 0.55, 0.55)
+	group_btn.set("pressed_color", accent_color)
+	group_btn.set("released_color", accent_color.darkened(0.5))
+	add_child(group_btn)
+	_connect_btn(group_btn, _cycle_group)
+	_add_btn_label(group_btn, "GROUP")
+
+	var seed_btn := PUSH_BUTTON.instantiate()
+	seed_btn.name = "Seed"
+	seed_btn.position = Vector3(col_x, by - 0.16, 0.10)
+	seed_btn.scale = Vector3(0.45, 0.45, 0.45)
+	seed_btn.set("pressed_color", Color(0.4, 0.8, 0.4))
+	seed_btn.set("released_color", frame_color)
+	add_child(seed_btn)
+	_connect_btn(seed_btn, _reseed_motif)
+	_add_btn_label(seed_btn, "SEED")
+
+	var clear_btn := PUSH_BUTTON.instantiate()
+	clear_btn.name = "Clear"
+	clear_btn.position = Vector3(col_x, by - 0.30, 0.10)
+	clear_btn.scale = Vector3(0.45, 0.45, 0.45)
+	clear_btn.set("pressed_color", Color(0.85, 0.2, 0.2))
+	clear_btn.set("released_color", frame_color)
+	add_child(clear_btn)
+	_connect_btn(clear_btn, _clear_head)
+	_add_btn_label(clear_btn, "CLEAR")
+
+	var press_btn := PUSH_BUTTON.instantiate()
+	press_btn.name = "Press"
+	press_btn.position = Vector3(col_x, by - 0.44, 0.10)
+	press_btn.scale = Vector3(0.6, 0.6, 0.6)
+	press_btn.set("pressed_color", Color(0.2, 0.9, 0.4))
+	press_btn.set("released_color", Color(0.12, 0.40, 0.20))
+	add_child(press_btn)
+	_connect_btn(press_btn, _pull_press)
+	_add_btn_label(press_btn, "PRESS")
+
+
+func _build_press_head_and_lever() -> void:
+	# Press head slides on guide rods directly above the editable head grid.
+	# (D's tactile operate-stroke.)
+	var span: float = motif_size * HEAD_CELL
+	_press_head = Node3D.new()
+	_press_head.name = "PressHead"
+	_press_head.position = Vector3(0, HEAD_Y + 0.42, HEAD_Z + 0.04)
+	add_child(_press_head)
+
+	var head := MeshInstance3D.new()
+	var hb := BoxMesh.new()
+	hb.size = Vector3(span + 0.14, 0.10, 0.20)
+	head.mesh = hb
+	head.material_override = _mat(frame_color.lightened(0.12), 0.55, 0.4)
+	_press_head.add_child(head)
+	# Glowing punch face underneath the head.
+	var face := MeshInstance3D.new()
+	var fb := BoxMesh.new()
+	fb.size = Vector3(span + 0.04, 0.02, 0.14)
+	face.mesh = fb
+	var fm := _mat(accent_color, 0.2, 0.5)
+	fm.emission_enabled = true
+	fm.emission = accent_color
+	fm.emission_energy_multiplier = 1.5
+	face.material_override = fm
+	face.position = Vector3(0, -0.06, 0)
+	_press_head.add_child(face)
+	_accent_mats.append(fm)
+
+	# Two guide rods from the crossbeam down past the head.
+	for sx in [-1.0, 1.0]:
+		var rod := _cyl(0.95, 0.018, Vector3(sx * (span * 0.5 + 0.06), HEAD_Y + 0.18, HEAD_Z + 0.04),
+			Color(0.55, 0.55, 0.60), 0.7, 0.3)
+		rod.rotation_degrees = Vector3(0, 0, 0)
+
+	# Pull lever on the right — pivots, reads as the "operate" handle.
+	var half := carpet_width * 0.5 + 0.22
+	_lever = Node3D.new()
+	_lever.name = "Lever"
+	_lever.position = Vector3(half - 0.06, HEAD_Y - 0.05, 0.05)
+	add_child(_lever)
+	var arm := MeshInstance3D.new()
+	var am := CylinderMesh.new()
+	am.top_radius = 0.02; am.bottom_radius = 0.02; am.height = 0.40
+	arm.mesh = am
+	arm.material_override = _mat(Color(0.5, 0.5, 0.55), 0.7, 0.3)
+	arm.position = Vector3(0.0, 0.18, 0.10)
+	arm.rotation_degrees = Vector3(-30, 0, 0)
+	_lever.add_child(arm)
+	var knob := MeshInstance3D.new()
+	var km := SphereMesh.new(); km.radius = 0.05; km.height = 0.10
+	knob.mesh = km
+	var kmat := _mat(accent_color, 0.2, 0.4)
+	kmat.emission_enabled = true; kmat.emission = accent_color
+	kmat.emission_energy_multiplier = 1.6
+	knob.material_override = kmat
+	knob.position = Vector3(0.0, 0.34, 0.20)
+	_lever.add_child(knob)
+	_accent_mats.append(kmat)
+
+
+func _build_output_chute() -> void:
+	# A slanted chute the carpet rolls out of, from the head down to the floor in
+	# front of the machine. Visually connects mill -> carpet.
+	var chute := MeshInstance3D.new()
+	var pm := PlaneMesh.new()
+	pm.size = Vector2(carpet_width, 0.7)
+	chute.mesh = pm
+	chute.rotation_degrees = Vector3(-58, 0, 0)
+	chute.position = Vector3(0, 0.55, 0.30)
+	_chute_mat = StandardMaterial3D.new()
+	_chute_mat.albedo_color = metal_color.darkened(0.1)
+	_chute_mat.metallic = 0.6
+	_chute_mat.roughness = 0.35
+	_chute_mat.emission_enabled = true
+	_chute_mat.emission = accent_color
+	_chute_mat.emission_energy_multiplier = 0.15
+	chute.material_override = _chute_mat
+	add_child(chute)
+
+	# Chute side rails.
+	for sx in [-1.0, 1.0]:
+		var rail := MeshInstance3D.new()
+		var rm := BoxMesh.new(); rm.size = Vector3(0.03, 0.78, 0.03)
+		rail.mesh = rm
+		rail.rotation_degrees = Vector3(-58, 0, 0)
+		rail.position = Vector3(sx * carpet_width * 0.5, 0.55, 0.30)
+		_accent_mats.append(_assign_emissive(rail, accent_color, 1.2, metal_color))
+		add_child(rail)
+
+	# Output roller at the chute lip where the carpet meets the floor.
+	var roller := _cyl(carpet_width + 0.16, 0.05, Vector3(0, 0.05, 0.62), metal_color.lightened(0.1), 0.7, 0.3)
+	roller.rotation_degrees = Vector3(0, 0, 90)
+
+	# Output tray rails running forward along the carpet (conveyor vocabulary).
+	for sx in [-1.0, 1.0]:
+		var trail := _box(Vector3(0.03, 0.06, carpet_length), Vector3(
+			sx * (carpet_width * 0.5 + 0.05), 0.05, 0.62 + carpet_length * 0.5),
+			frame_color, 0.4, 0.5)
+		var em := _mat(accent_color, 0.2, 0.5)
+		em.emission_enabled = true; em.emission = accent_color
+		em.emission_energy_multiplier = 1.0
+		trail.material_override = em
+		_accent_mats.append(em)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# BUILDERS — OUTPUT (carpet + proof sheet from ONE reusable texture)
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _build_carpet() -> void:
+	var carpet := MeshInstance3D.new()
+	carpet.name = "MilledCarpet"
+	var pm := PlaneMesh.new()
+	pm.size = Vector2(carpet_width, carpet_length)
+	carpet.mesh = pm
+	# Lies flat, in front of the machine where the chute feeds it out.
+	carpet.position = Vector3(0, 0.01, 0.62 + carpet_length * 0.5)
+	_carpet_mat = StandardMaterial3D.new()
+	_carpet_mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST  # crisp tiles
+	_carpet_mat.roughness = 0.9
+	_carpet_mat.metallic = 0.0
+	# uv1_scale.y > 1 so the carpet shows several courses along its length.
+	_carpet_mat.uv1_scale = Vector3(1.0, carpet_length / carpet_width, 1.0)
+	carpet.material_override = _carpet_mat
+	add_child(carpet)
+
+
+func _build_proof_sheet() -> void:
+	# B's dual output: a short vertical "proof sheet" rising from the head, fed by
+	# the SAME texture as the carpet. Lit from within so it reads as freshly milled.
+	var sheet := MeshInstance3D.new()
+	sheet.name = "ProofSheet"
+	var pm := PlaneMesh.new()
+	pm.size = Vector2(carpet_width * 0.7, sheet_height)
+	pm.orientation = PlaneMesh.FACE_Z
+	sheet.mesh = pm
+	sheet.position = Vector3(0, CORE_Y + 0.55 + sheet_height * 0.5, -0.26)
+	_sheet_mat = StandardMaterial3D.new()
+	_sheet_mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	_sheet_mat.roughness = 0.8
+	_sheet_mat.metallic = 0.0
+	_sheet_mat.uv1_scale = Vector3(1.0, sheet_height / (carpet_width * 0.7), 1.0)
+	sheet.material_override = _sheet_mat
+	add_child(sheet)
+
+
+func _build_labels() -> void:
+	var title := Label3D.new()
+	title.text = "PATTERN MILL"
+	title.pixel_size = 0.0011
+	title.font_size = 24
+	title.modulate = accent_color
+	title.position = Vector3(0, HEAD_Y + 0.30, -0.20)
+	title.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	add_child(title)
+
+	var half := carpet_width * 0.5 + 0.22
+	_group_label = Label3D.new()
+	_group_label.text = GROUP_NAMES[_group_index].to_upper()
+	_group_label.pixel_size = 0.0012
+	_group_label.font_size = 20
+	_group_label.modulate = core_color
+	_group_label.position = Vector3(half, 1.12, 0.12)
+	add_child(_group_label)
+
+
+func _build_capture_camera() -> void:
+	var cam := Camera3D.new()
+	cam.name = "CaptureCamera"
+	cam.fov = 60.0
+	cam.position = Vector3(2.2, 2.0, 3.2)
+	cam.rotation_degrees = Vector3(-26, 30, 0)
+	add_child(cam)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# INTERACTIONS
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _select_ink(idx: int) -> void:
+	_ink = clampi(idx, 0, _palette.size() - 1)
+	for i in _ink_indicators.size():
+		var m: StandardMaterial3D = _ink_indicators[i].material_override
+		m.emission_energy_multiplier = 2.5 if i == _ink else 0.0
+	print("[PatternMill] ink -> %d" % _ink)
+
+
+func _cycle_group() -> void:
+	_group_index = (_group_index + 1) % GROUP_NAMES.size()
+	group = GROUP_NAMES[_group_index]
+	_current_group = _index_to_enum(_group_index)
+	if _group_label:
+		_group_label.text = group.to_upper()
+	# Rebuild the rotors so the mirror count matches the new group's fold order.
+	_rebuild_rotors()
+	_rebake_output()
+	print("[PatternMill] group -> %s (%d-fold)" % [group, _rotor_fold_for_group(_group_index)])
+
+
+func _reseed_motif() -> void:
+	motif_seed = (motif_seed * 1103515245 + 12345) & 0x7fffffff
+	var n := _palette.size()
+	var motif: Array = PatternSim.generate_dot_motif(motif_size, n, motif_seed, 0.4)
+	for y in motif_size:
+		for x in motif_size:
+			_grid[y][x] = clampi(int(motif[y][x]), 0, n - 1)
+	_refresh_head_visuals()
+	_rebake_output()
+	print("[PatternMill] reseeded motif (seed=%d)" % motif_seed)
+
+
+func _clear_head() -> void:
+	for y in motif_size:
+		for x in motif_size:
+			_grid[y][x] = 0
+	_refresh_head_visuals()
+	_rebake_output()
+
+
+func _pull_press() -> void:
+	# Kick off the press stroke; carpet re-stamps at the bottom of the punch.
+	_press_anim = 0.0
+	_stamped_this_stroke = false
+
+
+func _paint_cell(gx: int, gy: int) -> void:
+	if gx < 0 or gx >= motif_size or gy < 0 or gy >= motif_size:
+		return
+	if _grid[gy][gx] == _ink:
+		return
+	_grid[gy][gx] = _ink
+	_apply_cell_visual(gx, gy)
+	_rebake_output()
+
+
+func _check_touch_paint() -> void:
+	if _touch_area == null or _head_root == null:
+		return
+	var bodies := _touch_area.get_overlapping_bodies()
+	if bodies.is_empty():
+		_last_cell = Vector2i(-1, -1)
+		return
+	var total := motif_size * HEAD_CELL
+	var start := -total * 0.5
+	for body in bodies:
+		var local_pos := _head_root.to_local(body.global_position)
+		var gx := int((local_pos.x - start) / HEAD_CELL)
+		var gy := motif_size - 1 - int((local_pos.y - start) / HEAD_CELL)
+		if gx >= 0 and gx < motif_size and gy >= 0 and gy < motif_size:
+			var cell := Vector2i(gx, gy)
+			if cell != _last_cell:
+				_last_cell = cell
+				_paint_cell(gx, gy)
+			return
+
+
+func _apply_cell_visual(gx: int, gy: int) -> void:
+	var ci: int = _grid[gy][gx]
+	var m: StandardMaterial3D = _cell_mats[gy][gx]
+	m.albedo_color = _color_for(ci)
+	m.emission_enabled = ci != 0
+	if ci != 0:
+		m.emission = _color_for(ci)
+		m.emission_energy_multiplier = 0.25
+	else:
+		m.emission_energy_multiplier = 0.0
+
+
+func _refresh_head_visuals() -> void:
+	for y in motif_size:
+		for x in motif_size:
+			_apply_cell_visual(x, y)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# OUTPUT — symmetrise the fragment, bake ONE texture, feed carpet + proof sheet
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _rebake_output() -> void:
+	# CPU-tile the head grid through the active wallpaper group into ONE texture.
+	# Same engine call as pattern_maker_station / loom / press, driven by the live
+	# painted grid. Texture is created once then updated in place (B's pattern).
+	var tex_size: int = carpet_repeats * motif_size
+	if tex_size <= 0:
+		return
+	var n_colors: int = _palette.size()
+	var img := Image.create(tex_size, tex_size, false, Image.FORMAT_RGBA8)
+	for py in tex_size:
+		for px in tex_size:
+			var ci: int = WallpaperGroupsScript.get_symmetric_color(
+				px, py, motif_size, _grid, _current_group)
+			ci = clampi(ci, 0, n_colors - 1)
+			img.set_pixel(px, py, _palette[ci])
+	if _output_tex:
+		_output_tex.update(img)
+	else:
+		_output_tex = ImageTexture.create_from_image(img)
+		if _carpet_mat:
+			_carpet_mat.albedo_texture = _output_tex
+		if _sheet_mat:
+			_sheet_mat.albedo_texture = _output_tex
+			_sheet_mat.emission_enabled = true
+			_sheet_mat.emission = Color(1, 1, 1)
+			_sheet_mat.emission_texture = _output_tex
+			_sheet_mat.emission_energy_multiplier = 0.25
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PRESS STROKE (discrete operate — D's lever/head punch)
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _animate_press(delta: float) -> void:
+	if _press_anim < 0.0:
+		return
+	_press_anim += delta * 2.2     # ~0.45s full stroke
+	var p: float = _press_anim
+	var down: float = sin(clampf(p, 0.0, 1.0) * PI)   # 0 -> 1 -> 0
+	if is_instance_valid(_press_head):
+		_press_head.position.y = HEAD_Y + 0.42 - 0.38 * down
+	if is_instance_valid(_lever):
+		_lever.rotation_degrees.z = -45.0 * down
+	if p >= 0.5 and not _stamped_this_stroke:
+		# At the bottom of the stroke: re-stamp once. (Output already updates live;
+		# the stroke makes the production read explicit and tactile.)
+		_stamped_this_stroke = true
+		_rebake_output()
+	if p >= 1.0:
+		_press_anim = -1.0
+		if is_instance_valid(_press_head):
+			_press_head.position.y = HEAD_Y + 0.42
+		if is_instance_valid(_lever):
+			_lever.rotation_degrees.z = 0.0
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ROTOR REBUILD (mirror count tracks the group's rotational order)
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _rebuild_rotors() -> void:
+	# REBUILD DISCIPLINE: free the whole previous drum (housing, core, pivot, ring,
+	# fold label) in ONE shot, then rebuild so the mirror-wedge count matches the new
+	# group's fold order. Erase any animated material that belonged to the dead drum
+	# from the arrays so _process() never pokes a freed node.
+	if is_instance_valid(_rotor_assembly):
+		if _rotor_ring_mat:
+			_accent_mats.erase(_rotor_ring_mat)   # ring accent lived under the drum
+		_rotor_assembly.queue_free()
+	_rotor_assembly = null
+	_rotor_ring_mat = null
+	_rotor_pivot = null
+	_core_mat = null            # core glow lived under the drum too
+	_build_core_and_rotors()
+
+
+func _rotor_fold_for_group(gi: int) -> int:
+	# Rotational order implied by the group name (visible mirror count).
+	var gname: String = GROUP_NAMES[gi]
+	if gname.begins_with("p6"):
+		return 6
+	if gname.begins_with("p4"):
+		return 4
+	if gname.begins_with("p3") or gname.begins_with("p31"):
+		return 3
+	if gname == "p2" or gname == "pmm" or gname == "pmg" or gname == "pgg" or gname == "cmm":
+		return 2
+	return 2   # p1/pm/pg/cm — minimal 2-blade rotor
+
+# ═══════════════════════════════════════════════════════════════════════════
+# GROUP / COLOR HELPERS
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _name_to_index(n: String) -> int:
+	var idx := GROUP_NAMES.find(n.to_lower())
+	return idx if idx >= 0 else 10   # default p4m
+
+
+func _index_to_enum(gi: int) -> int:
+	return PatternSim.group_enum(GROUP_NAMES[gi])
+
+
+func _color_for(ci: int) -> Color:
+	if ci >= 0 and ci < _palette.size():
+		return _palette[ci]
+	return _palette[0] if _palette.size() > 0 else Color(0.9, 0.9, 0.9)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PRIMITIVE BUILDERS
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _mat(color: Color, metallic: float = 0.0, roughness: float = 0.5) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = color
+	m.metallic = metallic
+	m.roughness = roughness
+	return m
+
+
+func _box(size: Vector3, pos: Vector3, color: Color, metallic: float = 0.35, roughness: float = 0.5) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new(); bm.size = size
+	mi.mesh = bm; mi.position = pos
+	mi.material_override = _mat(color, metallic, roughness)
+	add_child(mi)
+	return mi
+
+
+func _cyl(height: float, radius: float, pos: Vector3, color: Color, metallic: float = 0.6, roughness: float = 0.35) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = radius; cm.bottom_radius = radius
+	cm.height = height; cm.radial_segments = 20
+	mi.mesh = cm; mi.position = pos
+	mi.material_override = _mat(color, metallic, roughness)
+	add_child(mi)
+	return mi
+
+
+func _emissive_box(size: Vector3, pos: Vector3, color: Color, energy: float) -> StandardMaterial3D:
+	var mi := _box(size, pos, color, 0.4, 0.5)
+	var m: StandardMaterial3D = mi.material_override
+	m.emission_enabled = true
+	m.emission = color
+	m.emission_energy_multiplier = energy
+	return m
+
+
+func _assign_emissive(mi: MeshInstance3D, emit: Color, energy: float, albedo: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = albedo
+	m.metallic = 0.6
+	m.roughness = 0.3
+	m.emission_enabled = true
+	m.emission = emit
+	m.emission_energy_multiplier = energy
+	mi.material_override = m
+	return m
+
+
+func _connect_btn(btn: Node, callback: Callable) -> void:
+	# push_button's inner InteractableAreaButton emits button_pressed(button).
+	var area := btn.get_node_or_null("InteractableAreaButton")
+	if area and area.has_signal("button_pressed"):
+		area.connect("button_pressed", func(_b): callback.call())
+	elif btn.has_signal("pressed"):
+		btn.connect("pressed", callback)
+
+
+func _add_btn_label(btn: Node, text: String) -> void:
+	var lbl := Label3D.new()
+	lbl.text = text
+	lbl.pixel_size = 0.0013
+	lbl.font_size = 9
+	lbl.modulate = Color(0.85, 0.85, 0.88)
+	lbl.position = Vector3(0, 0, 0.06)
+	btn.add_child(lbl)

@@ -1,0 +1,96 @@
+{
+	"id": "catapult",
+	"name": "Catapult",
+	"description": "A procedural siege catapult that teaches force and velocity vectors as a projectile launch. Two levers compose the throw — a LAUNCH ANGLE slider tilts the throwing arm and a FORCE slider sets the release speed — and a live dotted parabola previews where the stone will land before you fire. The launch velocity vector (green, from the basket) and the constant gravity vector (red, downward) stay visible: the arc is literally their sum. Press FIRE and the arm swings, hurling a RigidBody3D ball along the predicted path under gravity.",
+	"category": "vectors",
+	"theoreticalGrounding": "Projectile motion p(t) = p0 + v0*t + 0.5*g*t^2. The release velocity v0 = launch_direction(angle) * force is the entire initial condition; gravity is constant. Horizontal motion is constant velocity, vertical motion is constant acceleration, and together they trace the parabola. A throw is an initial condition — after release, physics decides the rest.",
+	"artifacts": {
+		"catapult": {
+			"lookup_name": "catapult",
+			"name": "Catapult",
+			"description": "Procedural wooden catapult: A-frame base, torsion pivot, a long throwing arm with a basket at the tip and a counterweight at the short end. A console with ANGLE + FORCE sliders and a FIRE push-button sits in front. Changing a control retilts the arm and redraws a live predicted-trajectory parabola; FIRE swings the arm and launches a ball that follows the arc. Always-on velocity (green) and gravity (red) vector arrows with labels make the parabola = initial velocity + constant gravity legible.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/catapult/catapult.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"vectors"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors",
+				"physics"
+			],
+			"footprint": [
+				2,
+				2,
+				3
+			],
+			"tags": [
+				"vector",
+				"velocity",
+				"force",
+				"gravity",
+				"projectile",
+				"trajectory",
+				"parabola",
+				"catapult",
+				"physics",
+				"interactive",
+				"placeable"
+			],
+			"qfep_connection": "F_force: a throw is an initial condition. You write direction and magnitude at release; gravity, constant and given, bends the rest. The parabola is the sum of what you give and what is given.",
+			"parameters": {
+				"gravity": 9.8,
+				"default_angle": 50.0,
+				"default_force": 9.0,
+				"min_force": 3.0,
+				"max_force": 16.0,
+				"min_angle": 10.0,
+				"max_angle": 80.0,
+				"footprint": [
+					2,
+					2,
+					3
+				],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 6,
+				"clearance": {
+					"front": 4,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"combined_forces_demo",
+					"turret_targeting",
+					"weather_vector_field"
+				],
+				"preferred_zone": "teaching",
+				"measured_footprint_cells": 6,
+				"footprint_source": "estimated"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 8,
+				"density": "high",
+				"reading_radius": 4,
+				"min_clearance": 2,
+				"stack_priority": 0.7,
+				"approach_dir": "front",
+				"derived_from": "manual"
+			}
+		}
+	}
+}

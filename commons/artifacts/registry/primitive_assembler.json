@@ -1,0 +1,39 @@
+{
+	"id": "primitive_assembler",
+	"name": "Primitive Assembler",
+	"description": "An assembly line for the DNA primitives. A conveyor carries primitives in one at a time; each lifts off the belt and snaps onto a growing vertical stack on the assembly pedestal — the '+' of assemblage made watchable. The animated, interactive form of primitive_stack.build(): the y_cursor loop externalised into space and time. Bridges the spine: primitives in, array/transform motion on the belt, colour assemblage out.",
+	"category": "dna_grammar",
+	"theoreticalGrounding": "Assemblage is a verb, not a noun. A static stack shows the sum; the assembler shows the addition. The 'mode' parameter gives colour its three readings across the colour theme's bloom: a property (constant), a function of index (gradient), a relation to the neighbour (relational).",
+	"artifacts": {
+		"primitive_assembler": {
+			"lookup_name": "primitive_assembler",
+			"name": "Primitive Assembler",
+			"description": "Conveyor-fed assembly station. Primitives ride in on a directional belt and snap onto a growing stack on an illuminated pedestal, a live formula placard assembling in step (● + ■ + ▲). Loops: assemble, hold (turntable), clear, repeat. Reuses the exact DNA alphabet from primitive_stack.",
+			"category": "dna_grammar",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/primitive_assembler/primitive_assembler.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["color", "array_tutorial", "primitives"],
+			"footprint": [4, 2, 3],
+			"tags": ["dna", "primitive", "assembler", "conveyor", "assemblage", "colour", "teaching", "placeable"],
+			"qfep_connection": "F_order: structure as a sequence of additions, run in time — the loop made watchable.",
+			"parameters": {
+				"sequence": "cuboid,cube,cylinder,sphere,cone",
+				"palette": "bauhaus",
+				"mode": "gradient",
+				"base_scale": 0.34,
+				"footprint": [4, 2, 3],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 7,
+				"density": "high",
+				"reading_radius": 4,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

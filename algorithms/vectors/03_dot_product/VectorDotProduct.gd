@@ -18,11 +18,17 @@ var projection_vector: Node3D
 var rejection_vector: Node3D
 var info_label: Label3D
 var angle_label: Label3D
+var readout_label: Label3D
+var magnitude_slider: Node3D
 var hinge_gadget: Node3D
 var _angle_arc: MultiMeshInstance3D
 static var _arc_dot_mesh: SphereMesh
 var _proj_dot: MeshInstance3D
 static var _proj_dot_mesh: SphereMesh
+
+# Slider range for |b|.
+var _slider_min_mag: float = 0.2
+var _slider_max_mag: float = 2.5
 
 # Cached nodes
 var _cached_vector_a_nodes: Dictionary = {}
@@ -36,8 +42,10 @@ const TEXT_UPDATE_INTERVAL: float = 0.1 # 10Hz
 
 func _ready() -> void:
 	super._ready()
-	# Half-size for exhibition display
-	scale = Vector3(0.5, 0.5, 0.5)
+
+func build_scene() -> void:
+	# Scaled exhibition presentation (compact at 1.0, walk-inside at 5.0).
+	scale = base_scale()
 
 	create_axes(1.0)
 
@@ -66,6 +74,27 @@ func _ready() -> void:
 
 	info_label = create_info_panel("Dot Product", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "A . B = |A||B|cos(theta)", "Projection and angle")
 	angle_label = create_info_panel("theta", Vector3(0.0, 0.22, 0.0))
+
+	# Live readout: the dot value and the angle between, big and billboarded.
+	readout_label = create_readout(Vector3(0.0, 1.8, 0.0), Color(0.6, 1.0, 0.7, 1.0))
+
+	# Magnitude slider controlling |b|.
+	magnitude_slider = create_magnitude_slider(Vector3(0.0, 0.4, 1.4), "|b|", _slider_min_mag, _slider_max_mag, 0.45)
+	if magnitude_slider and magnitude_slider.has_signal("slider_moved"):
+		magnitude_slider.connect("slider_moved", Callable(self, "_on_magnitude_slider_moved"))
+
+func _on_magnitude_slider_moved(_position) -> void:
+	if magnitude_slider == null:
+		return
+	var norm: float = 0.5
+	if magnitude_slider.has_method("get_normalized_value"):
+		norm = float(magnitude_slider.call("get_normalized_value"))
+	var target_mag: float = lerp(_slider_min_mag, _slider_max_mag, norm)
+	var b: Vector3 = _get_vector_fast(vector_b, _cached_vector_b_nodes)
+	var dir: Vector3 = b.normalized()
+	if dir.length() < 0.001:
+		dir = Vector3(0.0, 1.0, 0.0)
+	_update_vector_fast(vector_b, dir * target_mag, _cached_vector_b_nodes)
 
 func _process(delta: float) -> void:
 	var a_vec: Vector3 = _get_vector_fast(vector_a, _cached_vector_a_nodes)
@@ -123,8 +152,10 @@ func _update_info(a_vec: Vector3, b_vec: Vector3, dot: float, proj: Vector3, rej
 	builder.append("proj_b(a) = (%.2f, %.2f, %.2f)" % [proj.x, proj.y, proj.z])
 	builder.append("rej_b(a) = (%.2f, %.2f, %.2f)" % [rej.x, rej.y, rej.z])
 	info_label.text = "\n".join(builder)
+	if readout_label:
+		readout_label.text = "a . b = %.2f\ntheta = %.1f deg" % [dot, rad_to_deg(theta)]
 
-# â”€â”€ Angle arc helpers â”€â”€
+# -- Angle arc helpers --
 
 func _create_angle_arc() -> MultiMeshInstance3D:
 	if _arc_dot_mesh == null:
@@ -210,7 +241,3 @@ func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-
-
-func apply_grid_config(config: Dictionary) -> void:
-	pass

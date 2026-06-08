@@ -1,0 +1,147 @@
+{
+	"id": "pattern_mill",
+	"name": "Pattern Mill",
+	"description": "An editable manufacturing machine for wallpaper-group carpets. The player touch-paints a small motif grid on the machine head; the mill re-tiles that fragment through one of the 17 wallpaper groups into a live carpet that feeds forward off a roller/tray. Spinning mirror-wedge ROTORS make the symmetry mechanical — their blade count tracks the current group's rotational order (2/3/4/6-fold), so cycling the GROUP re-geometries the machine. Painting updates the carpet live; a discrete PRESS lever punches the head down and re-stamps. Synthesises four prototypes: A (Jacquard touch-toggle + CPU re-tile), B (one reusable texture + dual output), C (fold-order rotors + rebuild discipline), D (operate-stroke + conveyor tray). Reuses WallpaperGroups.get_symmetric_color and PatternSim.PALETTES.",
+	"category": "dna_grammar",
+	"theoreticalGrounding": "A pattern is a program plus a fragment. The wallpaper group is the program; the mill is the press that runs it AND the editor that writes it. The fold-order rotors make the group's rotational order a visible, turning mechanism — cycling the group re-counts the blades, so the math is written into the machine's body.",
+	"artifacts": {
+		"pattern_mill": {
+			"lookup_name": "pattern_mill",
+			"name": "Pattern Mill",
+			"description": "Dark industrial frame with emissive accents, a glowing core and fold-order mirror rotors, a glowing warp cage, an editable touch-paint head grid, a press head on guide rods + pull lever, and a live wallpaper-group carpet feeding off a chute/tray plus a vertical proof sheet — both from one reusable texture. Touch-paint the head to edit; GROUP cycles all 17 groups and rebuilds the rotors to the new fold; SEED rerolls a procedural motif; CLEAR blanks it; PRESS punches the head down and re-stamps. DNA: group (p1..p6m), palette (bauhaus/escher/alhambra/tatami/pastel/memphis/persian/monochrome), motif_seed, density, motif_size, machine params.",
+			"category": "dna_grammar",
+			"complexity": "advanced",
+			"scene": "res://commons/artifacts/pattern_mill/pattern_mill.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["array_tutorial", "color", "artmathematics", "patterngeneration"],
+			"footprint": [2, 3, 2],
+			"tags": ["dna", "pattern", "wallpaper", "mill", "machine", "carpet", "interactive", "editable", "rotor", "scifi", "placeable"],
+			"qfep_connection": "F_order: the 17 wallpaper groups as an editable manufacturing program — constraint multiplied into endless fabric, with the rotational order made a turning mechanism you can edit.",
+			"parameters": {
+				"group": "p4m",
+				"palette": "bauhaus",
+				"motif_seed": 7,
+				"density": 0.5,
+				"footprint": [2, 3, 2],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 7,
+				"density": "high",
+				"reading_radius": 4,
+				"derived_from": "manual"
+			}
+		},
+		"mill_bauhaus_p4m": {
+			"lookup_name": "mill_bauhaus_p4m",
+			"name": "Mill: Bauhaus p4m (4-fold)",
+			"description": "Pattern mill milling a Bauhaus-palette p4m tiling — 4-fold mirror rotors.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "p4m", "palette": "bauhaus", "motif_seed": 7, "density": 0.5}
+		},
+		"mill_alhambra_p6m": {
+			"lookup_name": "mill_alhambra_p6m",
+			"name": "Mill: Alhambra p6m (6-fold)",
+			"description": "Pattern mill milling an Alhambra-palette p6m tiling — 6-fold mirror rotors.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "p6m", "palette": "alhambra", "motif_seed": 13, "density": 0.55}
+		},
+		"mill_persian_p6": {
+			"lookup_name": "mill_persian_p6",
+			"name": "Mill: Persian p6 (6-fold)",
+			"description": "Pattern mill milling a Persian-palette p6 tiling — 6-fold rotors, no mirrors.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "p6", "palette": "persian", "motif_seed": 21, "density": 0.5}
+		},
+		"mill_memphis_p3": {
+			"lookup_name": "mill_memphis_p3",
+			"name": "Mill: Memphis p3 (3-fold)",
+			"description": "Pattern mill milling a Memphis-palette p3 tiling — 3-fold triangular rotors.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "p3", "palette": "memphis", "motif_seed": 33, "density": 0.45}
+		},
+		"mill_tatami_p3m1": {
+			"lookup_name": "mill_tatami_p3m1",
+			"name": "Mill: Tatami p3m1 (3-fold)",
+			"description": "Pattern mill milling a tatami-palette p3m1 tiling — 3-fold mirror rotors.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "p3m1", "palette": "tatami", "motif_seed": 5, "density": 0.5}
+		},
+		"mill_escher_p4g": {
+			"lookup_name": "mill_escher_p4g",
+			"name": "Mill: Escher p4g (4-fold)",
+			"description": "Pattern mill milling a monochrome Escher-palette p4g tiling — 4-fold off-center rotors.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "p4g", "palette": "escher", "motif_seed": 9, "density": 0.6}
+		},
+		"mill_pastel_cmm": {
+			"lookup_name": "mill_pastel_cmm",
+			"name": "Mill: Pastel cmm (2-fold)",
+			"description": "Pattern mill milling a pastel-palette cmm tiling — 2-fold rotors, centered mirrors.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "cmm", "palette": "pastel", "motif_seed": 17, "density": 0.4}
+		},
+		"mill_monochrome_pmm": {
+			"lookup_name": "mill_monochrome_pmm",
+			"name": "Mill: Monochrome pmm (2-fold)",
+			"description": "Pattern mill milling a monochrome pmm tiling — 2-fold rotors, double mirrors.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "pmm", "palette": "monochrome", "motif_seed": 3, "density": 0.5}
+		},
+		"mill_persian_p4": {
+			"lookup_name": "mill_persian_p4",
+			"name": "Mill: Persian p4 (4-fold)",
+			"description": "Pattern mill milling a Persian-palette p4 tiling — 4-fold rotors, pure rotation.",
+			"category": "dna_grammar", "complexity": "advanced",
+			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
+			"footprint": [2, 3, 2], "size_group": "large",
+			"tags": ["dna", "pattern", "mill", "interactive", "live"],
+			"qfep_connection": "F_order: a named, editable carpet program.",
+			"delegate_to": "pattern_mill",
+			"delegate_params": {"group": "p4", "palette": "persian", "motif_seed": 42, "density": 0.55}
+		}
+	}
+}

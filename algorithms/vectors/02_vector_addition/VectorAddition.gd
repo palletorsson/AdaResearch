@@ -16,6 +16,8 @@ var vector_a: Node3D
 var vector_b: Node3D
 var sum_vector: Node3D
 var info_label: Label3D
+var readout_label: Label3D
+var magnitude_slider: Node3D
 var dotted_line_a: MultiMeshInstance3D
 var dotted_line_b: MultiMeshInstance3D
 var piston_gadget: Node3D
@@ -24,6 +26,11 @@ var piston_gadget: Node3D
 var label_a_copy: Label3D
 var label_b_copy: Label3D
 var _label_offset := Vector3(0.0, 0.08, 0.0)
+
+# Slider range for |a|. The slider sets |a| while preserving the direction the
+# player last dragged it toward.
+var _slider_min_mag: float = 0.2
+var _slider_max_mag: float = 3.0
 
 # Cached nodes
 var _cached_vector_a_nodes: Dictionary = {}
@@ -39,8 +46,11 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready() -> void:
 	super._ready()
-	# Half-size for exhibition display
-	scale = Vector3(0.5, 0.5, 0.5)
+
+func build_scene() -> void:
+	# Scaled exhibition presentation (compact at scale_multiplier 1.0,
+	# walk-inside at 5.0). base_scale() == 0.5 * scale_multiplier.
+	scale = base_scale()
 
 	create_axes(1.5)
 
@@ -67,7 +77,7 @@ func _ready() -> void:
 		_dot_mesh.height = 0.03 * SCENE_SCALE
 		_dot_mesh.radial_segments = 8
 		_dot_mesh.rings = 4
-	
+
 	# Dotted lines color-coded to their source vector
 	dotted_line_a = _create_dotted_line_multimesh(Color(0.9, 0.4, 0.3, 0.45))  # a's color (coral)
 	dotted_line_b = _create_dotted_line_multimesh(Color(0.3, 0.8, 0.9, 0.45))  # b's color (cyan)
@@ -80,6 +90,28 @@ func _ready() -> void:
 
 	info_label = create_info_panel("Vector Addition", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "C = A + B", "Parallelogram rule")
 
+	# Live readout floating above the sum vector's region (centered, billboarded).
+	readout_label = create_readout(Vector3(0.0, 2.0, 0.0), Color(0.7, 1.0, 0.55, 1.0))
+
+	# Magnitude slider controlling |a|. Placed low and forward so the player can
+	# reach it while standing among the vectors.
+	magnitude_slider = create_magnitude_slider(Vector3(0.0, 0.4, 1.4), "|a|", _slider_min_mag, _slider_max_mag, 0.6)
+	if magnitude_slider and magnitude_slider.has_signal("slider_moved"):
+		magnitude_slider.connect("slider_moved", Callable(self, "_on_magnitude_slider_moved"))
+
+func _on_magnitude_slider_moved(_position) -> void:
+	if magnitude_slider == null:
+		return
+	var norm: float = 0.5
+	if magnitude_slider.has_method("get_normalized_value"):
+		norm = float(magnitude_slider.call("get_normalized_value"))
+	var target_mag: float = lerp(_slider_min_mag, _slider_max_mag, norm)
+	var a: Vector3 = _get_vector_fast(vector_a, _cached_vector_a_nodes)
+	var dir: Vector3 = a.normalized()
+	if dir.length() < 0.001:
+		dir = Vector3(1.0, 0.0, 0.0)
+	_update_vector_fast(vector_a, dir * target_mag, _cached_vector_a_nodes)
+
 func _process(delta: float) -> void:
 	var a = _get_vector_fast(vector_a, _cached_vector_a_nodes)
 	var b = _get_vector_fast(vector_b, _cached_vector_b_nodes)
@@ -89,13 +121,13 @@ func _process(delta: float) -> void:
 	_update_dotted_lines(a, b, result)
 	if piston_gadget:
 		piston_gadget.update_from_vectors(a, b)
-	
+
 	# Update Pedagogical Labels
 	# label_b_copy sits at the midpoint of the dotted line extending from a
 	label_b_copy.position = (a + b * 0.5) * SCENE_SCALE + _label_offset * SCENE_SCALE
 	# label_a_copy sits at the midpoint of the dotted line extending from b
 	label_a_copy.position = (b + a * 0.5) * SCENE_SCALE + _label_offset * SCENE_SCALE
-	
+
 	_time_since_last_text_update += delta
 	if _time_since_last_text_update >= TEXT_UPDATE_INTERVAL:
 		_time_since_last_text_update = 0.0
@@ -108,6 +140,8 @@ func _update_info(a: Vector3, b: Vector3, result: Vector3) -> void:
 	builder.append("a + b = (%.2f, %.2f, %.2f)" % [result.x, result.y, result.z])
 	builder.append("|a + b| = %.2f" % result.length())
 	info_label.text = "\n".join(builder)
+	if readout_label:
+		readout_label.text = "a + b = (%.2f, %.2f, %.2f)\n|a + b| = %.2f" % [result.x, result.y, result.z, result.length()]
 
 func _create_dotted_line_multimesh(color: Color = Color(0.7, 0.7, 0.7, 0.5)) -> MultiMeshInstance3D:
 	var mmi = MultiMeshInstance3D.new()
@@ -147,13 +181,13 @@ func _update_single_dotted_line_multimesh(mmi: MultiMeshInstance3D, start: Vecto
 	mmi.visible = true
 	var spacing = 0.15 * SCENE_SCALE # Scale spacing
 	var num_dots = int(distance / spacing) + 1
-	
+
 	# Resize buffer if needed (rare, but safe)
 	if num_dots > mmi.multimesh.instance_count:
 		mmi.multimesh.instance_count = num_dots + 50
-	
+
 	mmi.multimesh.visible_instance_count = num_dots
-	
+
 	for i in range(num_dots):
 		var t = float(i) / float(num_dots - 1) if num_dots > 1 else 0.0
 		var pos = start.lerp(end, t)
@@ -200,7 +234,3 @@ func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-
-
-func apply_grid_config(config: Dictionary) -> void:
-	pass

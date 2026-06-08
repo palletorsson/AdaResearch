@@ -1,0 +1,38 @@
+{
+	"id": "primitive_combo_puzzle",
+	"name": "Primitive Combo Puzzle",
+	"description": "A grab-and-stack version of the primitive assembler, descended from balance_puzzle: a target 'sign combo' (● + ▲ + ▮) is posed, and a tray of FREE, grabbable physics primitives is dealt. The player picks them up and stacks them on the plinth in the right order; match the sequence and hold it steady, and the round is solved — then a fresh combo is dealt. Order under gravity: a stack is a sequence you must also keep standing.",
+	"category": "dna_grammar",
+	"theoreticalGrounding": "Composition is precarious. A stack is not a set — order is content — and under gravity that order must also balance. The puzzle hands the assembler's '+' to the player's hands and asks them to compose the grammar physically; the reward is a tower that stands.",
+	"artifacts": {
+		"primitive_combo_puzzle": {
+			"lookup_name": "primitive_combo_puzzle",
+			"name": "Primitive Combo Puzzle",
+			"description": "Goal plinth with the sign combo placard + a translucent ghost of the target stack; a low tray that deals real grabbable XRToolsPickable primitives (sphere/cube/cylinder/cone/disc) around its rim; a glowing centre ring marking the stacking column. Grab the pieces and stack them bottom-to-top in the target order; when the central column's shapes match and settle (stability_time), the combo solves with a ring-pulse celebration, then a new one is dealt. Reuses the DNA alphabet from primitive_stack and the project's grab_* pickables.",
+			"category": "dna_grammar",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/primitive_combo_puzzle/primitive_combo_puzzle.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["primitives", "color", "array_tutorial"],
+			"footprint": [3, 2, 2],
+			"tags": ["dna", "primitive", "puzzle", "assemblage", "combo", "interactive", "grab", "physics", "vr", "placeable"],
+			"qfep_connection": "F_order: sequence as content — the player composes an ordered combo and the machine confirms the grammar.",
+			"parameters": {
+				"combo_length": 4,
+				"base_scale": 0.3,
+				"show_ghost": true,
+				"footprint": [3, 2, 2],
+				"size_group": "medium"
+			},
+			"size_group": "medium",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 6,
+				"density": "high",
+				"reading_radius": 3,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

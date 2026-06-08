@@ -17,7 +17,13 @@ var vector_b: Node3D
 var cross_vector: Node3D
 var parallelogram: MeshInstance3D
 var info_label: Label3D
+var readout_label: Label3D
+var magnitude_slider: Node3D
 var paddle_gadget: Node3D
+
+# Slider range for |b|.
+var _slider_min_mag: float = 0.2
+var _slider_max_mag: float = 2.5
 
 # Cached nodes
 var _cached_vector_a_nodes: Dictionary = {}
@@ -30,8 +36,10 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready() -> void:
 	super._ready()
-	# Half-size for exhibition display
-	scale = Vector3(0.5, 0.5, 0.5)
+
+func build_scene() -> void:
+	# Scaled exhibition presentation (compact at 1.0, walk-inside at 5.0).
+	scale = base_scale()
 
 	create_axes(1.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.6, 0.2, 1.0), Color(1.0, 0.55, 0.2, 1.0), "Vector a")
@@ -42,21 +50,42 @@ func _ready() -> void:
 	environment_root.add_child(parallelogram)
 	info_label = create_info_panel("Cross Product", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "A x B = |A||B|sin(theta) n-hat", "Perpendicular vector, area of parallelogram")
 
+	# Live readout: |a x b| plus the perpendicularity guarantee.
+	readout_label = create_readout(Vector3(0.0, 2.0, 0.0), Color(0.8, 0.65, 1.0, 1.0))
+
 	# Paddle wheel gadget
 	paddle_gadget = PaddleWheelScript.new()
 	paddle_gadget.position = Vector3(-0.6, 0, 0)
 	add_child(paddle_gadget)
+
+	# Magnitude slider controlling |b|.
+	magnitude_slider = create_magnitude_slider(Vector3(0.0, 0.4, 1.4), "|b|", _slider_min_mag, _slider_max_mag, 0.5)
+	if magnitude_slider and magnitude_slider.has_signal("slider_moved"):
+		magnitude_slider.connect("slider_moved", Callable(self, "_on_magnitude_slider_moved"))
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)
 	_cache_vector_nodes(vector_b, _cached_vector_b_nodes)
 	_cache_vector_nodes(cross_vector, _cached_cross_nodes)
 
+func _on_magnitude_slider_moved(_position) -> void:
+	if magnitude_slider == null:
+		return
+	var norm: float = 0.5
+	if magnitude_slider.has_method("get_normalized_value"):
+		norm = float(magnitude_slider.call("get_normalized_value"))
+	var target_mag: float = lerp(_slider_min_mag, _slider_max_mag, norm)
+	var b: Vector3 = _get_vector_fast(vector_b, _cached_vector_b_nodes)
+	var dir: Vector3 = b.normalized()
+	if dir.length() < 0.001:
+		dir = Vector3(0.0, 1.0, 0.0)
+	_update_vector_fast(vector_b, dir * target_mag, _cached_vector_b_nodes)
+
 func _process(delta: float) -> void:
 	var a = _get_vector_fast(vector_a, _cached_vector_a_nodes)
 	var b = _get_vector_fast(vector_b, _cached_vector_b_nodes)
 	var cross = a.cross(b)
-	
+
 	_update_vector_fast(cross_vector, cross, _cached_cross_nodes)
 	_update_parallelogram(a, b)
 	if paddle_gadget:
@@ -140,6 +169,13 @@ func _update_info(a: Vector3, b: Vector3, cross: Vector3) -> void:
 		var sine = area / (mag_a * mag_b)
 		builder.append("sin(angle) ~= %.2f" % clamp(sine, -1.0, 1.0))
 	info_label.text = "\n".join(builder)
+	if readout_label:
+		# Confirm perpendicularity numerically (dot of cross with each input ~0).
+		var perp_a: float = absf(cross.dot(a))
+		var perp_b: float = absf(cross.dot(b))
+		var perp_ok: bool = perp_a < 0.01 and perp_b < 0.01
+		var perp_text: String = "perp to a and b" if perp_ok else "perp to a and b (~0)"
+		readout_label.text = "|a x b| = %.2f\n%s" % [area, perp_text]
 
 # --- Caching Helpers (Local Implementation) ---
 
@@ -172,7 +208,3 @@ func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-
-
-func apply_grid_config(config: Dictionary) -> void:
-	pass

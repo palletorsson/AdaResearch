@@ -9,6 +9,7 @@
 			"lookup_name": "dna_facade_classical",
 			"name": "DNA: Classical",
 			"description": "Promoted from /dna facade-gallery entry 'classical'.",
+			"scene": "res://commons/artifacts/facade_builder/facade_builder.tscn",
 			"category": "dna_promoted",
 			"complexity": "intermediate",
 			"include_in_map_data": true,
@@ -36,6 +37,7 @@
 			"lookup_name": "dna_mesh_grammar_gen00_petals",
 			"name": "DNA: Gen00 Petals",
 			"description": "Promoted from /dna mesh-grammar-gallery entry 'gen00_petals'.",
+			"scene": "res://commons/artifacts/mesh_grammar_artifact/mesh_grammar_artifact.tscn",
 			"category": "dna_promoted",
 			"complexity": "intermediate",
 			"include_in_map_data": true,
@@ -57,6 +59,385 @@
 			"delegate_to": "mesh_grammar_artifact",
 			"delegate_params": {
 				"config_path": "res://commons/generated/gallery_best_of/configs/mesh-grammar-gallery__gen00_petals.json"
+			}
+		},
+		"dna_primitive_stack_ps01_bauhaus_totem_green": {
+			"lookup_name": "dna_primitive_stack_ps01_bauhaus_totem_green",
+			"name": "DNA: Ps01 Bauhaus Totem Green",
+			"description": "Promoted from /dna primitive-stack-gallery entry 'ps01_bauhaus_totem_green'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"primitive-stack-gallery",
+				"live"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "composition_artifact",
+			"delegate_params": {
+				"config_path": "res://commons/generated/gallery_best_of/configs/primitive-stack-gallery__ps01_bauhaus_totem_green.json",
+				"grammar": "primitive_stack"
+			}
+		},
+		"dna_color_stacks_stack_complementary_red_green": {
+			"lookup_name": "dna_color_stacks_stack_complementary_red_green",
+			"name": "DNA: Stack Complementary Red Green",
+			"description": "Promoted from /dna color-stacks-gallery entry 'stack_complementary_red_green'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-stacks-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-stacks-gallery__stack_complementary_red_green.tscn"
+			}
+		},
+		"dna_color_stacks_stack_triadic_primary": {
+			"lookup_name": "dna_color_stacks_stack_triadic_primary",
+			"name": "DNA: Stack Triadic Primary",
+			"description": "Promoted from /dna color-stacks-gallery entry 'stack_triadic_primary'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-stacks-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-stacks-gallery__stack_triadic_primary.tscn"
+			}
+		},
+		"dna_color_stacks_stack_value_steps_warm": {
+			"lookup_name": "dna_color_stacks_stack_value_steps_warm",
+			"name": "DNA: Stack Value Steps Warm",
+			"description": "Promoted from /dna color-stacks-gallery entry 'stack_value_steps_warm'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-stacks-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-stacks-gallery__stack_value_steps_warm.tscn"
+			}
+		},
+		"dna_color_stacks_stack_simultaneous_contrast": {
+			"lookup_name": "dna_color_stacks_stack_simultaneous_contrast",
+			"name": "DNA: Stack Simultaneous Contrast",
+			"description": "Promoted from /dna color-stacks-gallery entry 'stack_simultaneous_contrast'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-stacks-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-stacks-gallery__stack_simultaneous_contrast.tscn"
+			}
+		},
+		"dna_color_stacks_stack_monochrome_blue": {
+			"lookup_name": "dna_color_stacks_stack_monochrome_blue",
+			"name": "DNA: Stack Monochrome Blue",
+			"description": "Promoted from /dna color-stacks-gallery entry 'stack_monochrome_blue'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-stacks-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-stacks-gallery__stack_monochrome_blue.tscn"
+			}
+		},
+		"dna_color_furniture_furniture_vignelli_metafora_primary": {
+			"lookup_name": "dna_color_furniture_furniture_vignelli_metafora_primary",
+			"name": "DNA: Furniture Vignelli Metafora Primary",
+			"description": "Promoted from /dna color-furniture-gallery entry 'furniture_vignelli_metafora_primary'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-furniture-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-furniture-gallery__furniture_vignelli_metafora_primary.tscn"
+			}
+		},
+		"dna_color_furniture_furniture_coco_pendant_warm": {
+			"lookup_name": "dna_color_furniture_furniture_coco_pendant_warm",
+			"name": "DNA: Furniture Coco Pendant Warm",
+			"description": "Promoted from /dna color-furniture-gallery entry 'furniture_coco_pendant_warm'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-furniture-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-furniture-gallery__furniture_coco_pendant_warm.tscn"
+			}
+		},
+		"dna_color_furniture_furniture_becker_utensilo_bauhaus": {
+			"lookup_name": "dna_color_furniture_furniture_becker_utensilo_bauhaus",
+			"name": "DNA: Furniture Becker Utensilo Bauhaus",
+			"description": "Promoted from /dna color-furniture-gallery entry 'furniture_becker_utensilo_bauhaus'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-furniture-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-furniture-gallery__furniture_becker_utensilo_bauhaus.tscn"
+			}
+		},
+		"dna_color_furniture_furniture_lamp_warm_glow": {
+			"lookup_name": "dna_color_furniture_furniture_lamp_warm_glow",
+			"name": "DNA: Furniture Lamp Warm Glow",
+			"description": "Promoted from /dna color-furniture-gallery entry 'furniture_lamp_warm_glow'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"color-furniture-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/color-furniture-gallery__furniture_lamp_warm_glow.tscn"
+			}
+		},
+		"dna_modern_art_albers_homage_warm": {
+			"lookup_name": "dna_modern_art_albers_homage_warm",
+			"name": "DNA: Albers Homage Warm",
+			"description": "Promoted from /dna modern-art-gallery entry 'albers_homage_warm'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"modern-art-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/modern-art-gallery__albers_homage_warm.tscn"
+			}
+		},
+		"dna_modern_art_mondrian_de_stijl": {
+			"lookup_name": "dna_modern_art_mondrian_de_stijl",
+			"name": "DNA: Mondrian De Stijl",
+			"description": "Promoted from /dna modern-art-gallery entry 'mondrian_de_stijl'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"modern-art-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/modern-art-gallery__mondrian_de_stijl.tscn"
+			}
+		},
+		"dna_modern_art_rothko_chromatic_field": {
+			"lookup_name": "dna_modern_art_rothko_chromatic_field",
+			"name": "DNA: Rothko Chromatic Field",
+			"description": "Promoted from /dna modern-art-gallery entry 'rothko_chromatic_field'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"modern-art-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/modern-art-gallery__rothko_chromatic_field.tscn"
+			}
+		},
+		"dna_modern_art_kandinsky_bauhaus_triad": {
+			"lookup_name": "dna_modern_art_kandinsky_bauhaus_triad",
+			"name": "DNA: Kandinsky Bauhaus Triad",
+			"description": "Promoted from /dna modern-art-gallery entry 'kandinsky_bauhaus_triad'.",
+			"category": "dna_promoted",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"tags": [
+				"dna",
+				"promoted",
+				"modern-art-gallery",
+				"prebaked"
+			],
+			"qfep_connection": "F_order: a curated finding given a name in the registry.",
+			"size_group": "compact",
+			"delegate_to": "prebaked_loader",
+			"delegate_params": {
+				"scene_path": "res://commons/generated/gallery_best_of/scenes/modern-art-gallery__kandinsky_bauhaus_triad.tscn"
 			}
 		}
 	}

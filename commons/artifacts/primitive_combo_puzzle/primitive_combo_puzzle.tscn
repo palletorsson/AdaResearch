@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/primitive_combo_puzzle/primitive_combo_puzzle.gd" id="1_pcp"]
+
+[node name="PrimitiveComboPuzzle" type="Node3D"]
+script = ExtResource("1_pcp")

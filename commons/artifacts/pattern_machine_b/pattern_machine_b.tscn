@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/pattern_machine_b/pattern_machine_b.gd" id="1_pmb"]
+
+[node name="PatternMachineB" type="Node3D"]
+script = ExtResource("1_pmb")

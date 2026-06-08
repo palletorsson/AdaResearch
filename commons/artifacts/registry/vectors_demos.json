@@ -57,7 +57,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -74,7 +74,9 @@
 					"weather_vector_field",
 					"superposition"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -161,7 +163,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -179,7 +181,9 @@
 					"energy",
 					"conservation"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -268,7 +272,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -286,7 +290,9 @@
 					"example_3_2",
 					"angular"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -378,7 +384,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -396,7 +402,9 @@
 					"fluid_resistance",
 					"another"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -494,7 +502,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -506,7 +514,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 64,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -546,7 +556,7 @@
 			"lookup_name": "weather_vector_field",
 			"scene": "res://algorithms/vectors/weather_vector_field/weather_vector_field.tscn",
 			"name": "Weather Vector Field",
-			"description": "Applied vector addition as weather \u2014 two grabbable wind vectors combine in real-time. Drag arrow endpoints to feel how wind directions sum. Rain particles fall under gravity + wind, their diagonal paths demonstrating force superposition. Pressure zones add local variation to the field.",
+			"description": "A walkable weather station (~5x5 m) built on vector addition \u2014 two grabbable wind vectors combine in real-time. Drag arrow endpoints to feel how wind directions sum. A dense MultiMesh field of arrows and 200 rain droplets reorient under gravity + wind, demonstrating force superposition. Real instruments ring the perimeter \u2014 a yawing windsock, a spinning 3-cup anemometer, a ground compass rose, a drifting cloud layer, and fading wind streamlines \u2014 each one driven by the live summed wind vector. Pressure zones distort the field; the ground tints warm/cool with the wind's vertical sign.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"tags": [
@@ -557,7 +567,14 @@
 				"vector_field",
 				"rain",
 				"pressure",
-				"interactive"
+				"interactive",
+				"weather_station",
+				"windsock",
+				"anemometer",
+				"compass",
+				"clouds",
+				"streamlines",
+				"multimesh"
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -601,19 +618,27 @@
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~96"
 			},
+			"parameters": {
+				"footprint": [
+					6,
+					3,
+					6
+				],
+				"size_group": "room_scale"
+			},
 			"spatial_needs": {
-				"platform": "pedestal",
-				"footprint_cells": 2,
+				"platform": "none",
+				"footprint_cells": 36,
 				"clearance": {
 					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
+					"back": 2,
+					"left": 2,
+					"right": 2
 				},
-				"player_position": "front",
+				"player_position": "inside",
 				"wall_backing": false,
 				"orientation": "face_approach",
-				"isolation": 0,
+				"isolation": 1,
 				"cluster_with": [
 					"extension",
 					"vector_addition_demo",
@@ -621,40 +646,42 @@
 					"narrative",
 					"weather"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "center",
+				"measured_footprint_cells": 36,
+				"footprint_source": "estimated_post_enlarge"
 			},
 			"measurements": {
 				"aabb_size": [
-					2.31,
-					2.14,
-					1.98
+					6.0,
+					4.0,
+					6.0
 				],
 				"aabb_center": [
-					-0.17,
-					0.62,
+					0.0,
+					1.0,
 					0.0
 				],
 				"grid_cells": [
-					3.0,
-					2.0
+					6.0,
+					6.0
 				],
-				"max_dimension_m": 2.31,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-06-08T00:00:00.000000Z"
 			},
 			"footprint_measured": [
-				3.0,
+				6.0,
 				1,
-				2.0
+				6.0
 			],
 			"spatial_profile": {
 				"dir_group": "floor",
-				"range": 6,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
 				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.301010Z",
-				"derived_from": "aabb_size + category"
+				"derived_at": "2026-06-08T00:00:00.000000Z",
+				"derived_from": "aabb_size + category (post-enlarge)"
 			}
 		},
 		"vector_reflection_demo": {
@@ -683,7 +710,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -692,7 +719,9 @@
 				},
 				"wall_backing": false,
 				"isolation": 0,
-				"preferred_zone": "middle"
+				"preferred_zone": "middle",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [

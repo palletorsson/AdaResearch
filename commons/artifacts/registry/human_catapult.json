@@ -1,0 +1,38 @@
+{
+	"id": "human_catapult",
+	"name": "Human Catapult",
+	"description": "A catapult that launches the VR PLAYER. Walk into the player-sized basket, set the ANGLE and FORCE on the console, then hit FIRE — the arm swings and the player's body is given a ballistic launch velocity, arcing up and away under gravity. A live launch-velocity arrow and predicted parabola preview where you'll land. Sibling of the teaching `catapult` (which throws a ball); here YOU are the projectile, so the trajectory is felt, not watched. Uses the proven jump_pad / XRToolsPlayerBody.velocity player-launch pattern.",
+	"category": "vectors",
+	"theoreticalGrounding": "The surest way to understand a launch vector is to be the projectile. p(t)=p0+v0*t+0.5*g*t^2 — angle and force set v0; gravity owns you the instant you leave the cup.",
+	"artifacts": {
+		"human_catapult": {
+			"lookup_name": "human_catapult",
+			"name": "Human Catapult",
+			"description": "Heavy timber frame + throwing arm + a player-sized basket (StaticBody floor you stand on, low walls, harness). An Area3D (player_body layer) arms the seat when you step in; ANGLE/FORCE sliders + a FIRE button launch you. Live velocity arrow + parabola preview. DNA: launch_force, launch_angle, gravity_magnitude.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/human_catapult/human_catapult.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"footprint": [2, 4, 2],
+			"tags": ["forces", "catapult", "player_launch", "velocity", "gravity", "projectile", "trajectory", "vr", "ride", "placeable"],
+			"qfep_connection": "F_force: launch velocity + gravity = the arc you fly; the player becomes the projectile.",
+			"parameters": {
+				"launch_force": 12.0,
+				"launch_angle": 52.0,
+				"gravity_magnitude": 9.8,
+				"footprint": [2, 4, 2],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 8,
+				"density": "high",
+				"reading_radius": 4,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

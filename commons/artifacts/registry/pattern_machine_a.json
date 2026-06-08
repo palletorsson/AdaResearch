@@ -1,0 +1,41 @@
+{
+	"id": "pattern_machine_a",
+	"name": "Pattern Machine A — Jacquard Punch-Card Loom",
+	"description": "An interactive sci-fi weaving machine whose program is a physical PUNCH CARD. The player toggles pegs on the NxN card mounted on the machine head (touch-toggle via hands, or the PUNCH/GROUP/WEAVE/CLEAR buttons), and the loom weaves the corresponding wallpaper-group carpet LIVE — scrolling it continuously out over the feed roller onto the floor. Combines pattern_maker_station's interactivity with pattern_loom's machine vocabulary: edit the card, the woven output updates the same frame. Reuses WallpaperGroups.get_symmetric_color for live per-cell tiling.",
+	"category": "dna_grammar",
+	"theoreticalGrounding": "The Jacquard loom was the first programmable machine — the pattern was never woven by hand, it was punched into a card and read by a rule. Here the punch card IS the motif grid and the 17 wallpaper groups ARE the weaving programs; a handful of toggled pegs becomes endless fabric.",
+	"artifacts": {
+		"pattern_machine_a": {
+			"lookup_name": "pattern_machine_a",
+			"name": "Pattern Machine A — Jacquard Punch-Card Loom",
+			"description": "Dark machine frame with side posts, top crossbeam, glowing amber warp threads, a pulsing weave bar and feed roller. On the head sits an interactive NxN punch card: touch a peg to toggle it (empty <-> punched color), PUNCH cycles the paint color, GROUP cycles the 17 symmetry programs, WEAVE re-rolls a fresh motif, CLEAR blanks it. Every edit re-weaves the live wallpaper carpet that scrolls out across the floor. DNA: group (p1..p6m), palette, motif_seed, card_size, density, carpet_repeats.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/pattern_machine_a/pattern_machine_a.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["array_tutorial", "color", "artmathematics"],
+			"footprint": [2, 3, 2],
+			"tags": ["dna", "pattern", "wallpaper", "loom", "jacquard", "machine", "carpet", "interactive", "punch_card", "scifi", "placeable"],
+			"qfep_connection": "F_order: the punch card as the first programmable substrate — constraint, punched by hand, multiplied by symmetry into endless fabric.",
+			"parameters": {
+				"group": "p4m",
+				"palette": "bauhaus",
+				"motif_seed": 7,
+				"card_size": 5,
+				"density": 0.5,
+				"carpet_repeats": 8,
+				"footprint": [2, 3, 2],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 7,
+				"density": "high",
+				"reading_radius": 4,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

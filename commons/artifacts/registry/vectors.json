@@ -81,7 +81,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -99,7 +99,9 @@
 					"gadget",
 					"interactive"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 20,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -223,7 +225,9 @@
 					"combined_forces_demo",
 					"multiple"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -339,7 +343,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -351,7 +355,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -380,6 +386,78 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_addition_xl": {
+			"capacity": "WALK between two force arrows and feel their sum reach across the room as the green diagonal of an invisible parallelogram",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"description": "The walk-inside vector addition exhibit. Two grabbable vectors fan out from a shared origin at ~5x5 m so you stand among them; a magnitude slider stretches |a| while a large live readout shows the sum components and length. Drag either tip and the green sum vector and dotted parallelogram update in real time.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"delegate_to": "VectorAddition",
+			"delegate_params": {
+				"scale_multiplier": 5.0
+			},
+			"footprint": [
+				5,
+				3,
+				5
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"walk between the vectors",
+				"grab and drag either vector tip",
+				"drag the |a| magnitude slider",
+				"read the live sum readout"
+			],
+			"lookup_name": "vector_addition_xl",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Vector Addition (Walk-Inside)",
+			"parameters": {
+				"footprint": [
+					5,
+					3,
+					5
+				],
+				"size_group": "room_scale"
+			},
+			"qfep_connection": "F-composition at body scale — superposition becomes a place you stand inside rather than a diagram you read.",
+			"size_group": "room_scale",
+			"tags": [
+				"vector_addition",
+				"superposition",
+				"net_force",
+				"walk_inside",
+				"interactive",
+				"slider",
+				"vectors",
+				"xl"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "inside",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 9,
+				"footprint_source": "declared"
 			}
 		},
 		"VectorBasics": {
@@ -467,7 +545,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -485,7 +563,9 @@
 					"basis_vectors_rig",
 					"decomposition"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -600,7 +680,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -612,7 +692,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -641,6 +723,79 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_cross_product_xl": {
+			"capacity": "WALK around two arrows and watch the cross product pop straight up perpendicular to both, its length the area of the parallelogram you stand on",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"description": "The walk-inside cross product exhibit at ~5x5 m. Two grabbable vectors span a glowing parallelogram; the purple a x b vector rises perpendicular to both. A magnitude slider stretches |b| and a large live readout shows |a x b| and confirms perpendicularity. The paddle wheel spins by the right-hand rule.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"delegate_to": "VectorCrossProduct",
+			"delegate_params": {
+				"scale_multiplier": 5.0
+			},
+			"footprint": [
+				5,
+				4,
+				5
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"walk around the parallelogram",
+				"grab and drag either vector tip",
+				"drag the |b| magnitude slider",
+				"read the live |a x b| readout"
+			],
+			"lookup_name": "vector_cross_product_xl",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Cross Product (Walk-Inside)",
+			"parameters": {
+				"footprint": [
+					5,
+					4,
+					5
+				],
+				"size_group": "room_scale"
+			},
+			"qfep_connection": "F-perpendicularity at body scale \u2014 the orthogonal axis of rotation becomes a thing you can stand beneath.",
+			"size_group": "room_scale",
+			"tags": [
+				"cross_product",
+				"torque",
+				"right_hand_rule",
+				"perpendicular",
+				"walk_inside",
+				"interactive",
+				"slider",
+				"vectors",
+				"xl"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "inside",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 9,
+				"footprint_source": "declared"
 			}
 		},
 		"VectorDotProduct": {
@@ -728,7 +883,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -740,7 +895,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -769,6 +926,78 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_dot_product_xl": {
+			"capacity": "STAND between two arrows and watch the dot value swing from full agreement to zero as the angle between them opens to a right angle",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"description": "The walk-inside dot product exhibit at ~5x5 m. Two grabbable vectors share an origin; the green projection and pink rejection split a along b. A magnitude slider stretches |b| and a large live readout shows a . b and the angle between. The hinge gadget makes the angle physical.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"delegate_to": "VectorDotProduct",
+			"delegate_params": {
+				"scale_multiplier": 5.0
+			},
+			"footprint": [
+				5,
+				3,
+				5
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"walk between the vectors",
+				"grab and drag either vector tip",
+				"drag the |b| magnitude slider",
+				"read the live dot + angle readout"
+			],
+			"lookup_name": "vector_dot_product_xl",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Dot Product (Walk-Inside)",
+			"parameters": {
+				"footprint": [
+					5,
+					3,
+					5
+				],
+				"size_group": "room_scale"
+			},
+			"qfep_connection": "F-projection at body scale — alignment becomes an angle you walk into, and zero work is a right angle you can feel.",
+			"size_group": "room_scale",
+			"tags": [
+				"dot_product",
+				"work",
+				"projection",
+				"alignment",
+				"walk_inside",
+				"interactive",
+				"slider",
+				"vectors",
+				"xl"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "inside",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 9,
+				"footprint_source": "declared"
 			}
 		},
 		"VectorFieldFlow": {
@@ -841,7 +1070,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 8,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -859,7 +1088,9 @@
 					"different",
 					"rendering"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 8,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -952,7 +1183,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -964,7 +1195,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1058,7 +1291,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1070,7 +1303,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1166,7 +1401,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1178,7 +1413,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1207,6 +1444,77 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
+			}
+		},
+		"vector_projection_reflection_xl": {
+			"capacity": "WALK onto the plane and watch an incident arrow split into the part that lies flat and the part that bounces back across the normal",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"description": "The walk-inside projection and reflection exhibit at ~5x5 m. A grabbable incident vector decomposes against a glowing plane into its in-plane projection and its reflection. Grab the normal to tilt the plane. A magnitude slider stretches the incident vector and a large live readout shows the projection length and the reflected vector.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"delegate_to": "VectorProjectionReflection",
+			"delegate_params": {
+				"scale_multiplier": 5.0
+			},
+			"footprint": [
+				5,
+				3,
+				5
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"walk onto the projection plane",
+				"grab and drag the incident or normal tip",
+				"drag the |incident| magnitude slider",
+				"read the live projection + reflection readout"
+			],
+			"lookup_name": "vector_projection_reflection_xl",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Projection & Reflection (Walk-Inside)",
+			"parameters": {
+				"footprint": [
+					5,
+					3,
+					5
+				],
+				"size_group": "room_scale"
+			},
+			"qfep_connection": "F-decomposition at body scale — the plane and its normal become a floor you stand on and an axis you bounce across.",
+			"size_group": "room_scale",
+			"tags": [
+				"projection",
+				"reflection",
+				"plane",
+				"normal",
+				"decomposition",
+				"walk_inside",
+				"interactive",
+				"slider",
+				"vectors",
+				"xl"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "inside",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 9,
+				"footprint_source": "declared"
 			}
 		},
 		"VectorSubtraction": {
@@ -1278,7 +1586,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1290,7 +1598,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1386,7 +1696,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 8,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1404,7 +1714,9 @@
 					"normalization",
 					"hl_turret_vectors"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 8,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1509,7 +1821,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1630,7 +1944,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1742,7 +2058,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1754,7 +2070,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1869,7 +2187,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -1887,7 +2205,9 @@
 					"understanding",
 					"components"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1986,7 +2306,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2004,7 +2324,9 @@
 					"position",
 					"dependent"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2098,7 +2420,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2110,7 +2432,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2219,7 +2543,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -2231,7 +2555,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2330,7 +2656,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2342,7 +2668,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2434,7 +2762,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2452,7 +2780,9 @@
 					"system",
 					"subsystems"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 40,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2560,7 +2890,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -2578,7 +2908,9 @@
 					"check",
 					"product"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2693,7 +3025,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2801,7 +3135,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2911,7 +3247,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3021,7 +3359,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3119,7 +3459,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -3131,7 +3471,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3241,7 +3583,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3350,7 +3694,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3460,7 +3806,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3572,7 +3920,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3707,7 +4057,9 @@
 					"exercise_1_8",
 					"attraction"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3840,7 +4192,9 @@
 					"instead",
 					"bouncing"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3972,7 +4326,9 @@
 					"nbody_simulation",
 					"attractors"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4064,7 +4420,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 3,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4076,7 +4432,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4220,7 +4578,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -4238,7 +4596,9 @@
 					"through",
 					"weather_vector_field"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 220,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4352,7 +4712,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4364,7 +4724,9 @@
 				"orientation": "face_approach",
 				"isolation": 3,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 64,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4481,7 +4843,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4493,7 +4855,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4592,7 +4956,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -4610,7 +4974,9 @@
 					"spheres",
 					"computational"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 28,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4720,7 +5086,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4820,7 +5188,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 3,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4832,7 +5200,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5040,7 +5410,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 4,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5058,7 +5428,9 @@
 					"vector",
 					"addition"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5177,7 +5549,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 4,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5194,7 +5566,9 @@
 					"vector_addition_demo",
 					"basis_vectors_rig"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5290,7 +5664,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -5308,7 +5682,9 @@
 					"controlled",
 					"targeting"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5400,7 +5776,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -5412,7 +5788,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5531,7 +5909,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5543,7 +5921,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 324,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5665,7 +6045,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5785,7 +6167,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5894,7 +6278,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -5912,7 +6296,9 @@
 					"normal_force_demo",
 					"force"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6016,7 +6402,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 4,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -6034,7 +6420,9 @@
 					"target",
 					"turret"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 12,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6130,7 +6518,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 3,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -6142,7 +6530,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6243,7 +6633,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -6255,7 +6645,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6349,7 +6741,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -6361,7 +6753,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
