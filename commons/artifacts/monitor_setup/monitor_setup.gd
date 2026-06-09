@@ -65,16 +65,32 @@ class_name MonitorSetup
 #     "pitch_deg": float,             # pitch around X
 #     "color":     Color,             # accent / background theme for this panel
 #     "mount":     "pole"|"base",     # clamp arm to the pole, or stand on the base
+#     # ── markdown content sources (info screens) ──────────────────────
+#     "md":        String,            # res:// path to a .md file. If set, the file's
+#                                     #   first H1 (or first line) becomes the title and
+#                                     #   the next meaningful lines, markdown-stripped to
+#                                     #   plain log text, become the body. OVERRIDES
+#                                     #   title/body (which still serve as fallback if the
+#                                     #   file is missing). See _load_md_screen().
+#     "lines":     int,               # how many body lines to pull from "md" (default 5)
+#     "md_dir":    String,            # res:// dir to scan for *.md — builds a LOG FEED
+#                                     #   body where each line is "<stem>: <first line>".
+#     "md_count":  int,               # how many docs to roll into the md_dir log feed.
 #   }
-# Missing fields fall back to safe defaults (see _coerce_screen).
+# Missing fields fall back to safe defaults (see _coerce_screen). "md" / "md_dir" are read
+# at BUILD time so the board narrates the repo's own words; a missing file degrades to the
+# title + "— no data —" rather than crashing.
 #
-# DEFAULT STORY — "NIGHT SHIFT AT BLOCK 9": a small coherent sequence an author would
-# replace. Five panels read top-to-bottom / left-to-right as a tiny narrative: a station
-# announces itself, logs a quiet night, raises an anomaly, telemetry spikes, then the
-# breach poster watches from below. Override this entire array via apply_grid_config()
-# or the inspector to tell your own story.
+# DEFAULT STORY — "NIGHT SHIFT AT BLOCK 9", now narrated by the repo itself: the station
+# screen reads from the project entry doc, the map-file screen reads a real map's technical
+# note, telemetry stays procedural, the LOG screen rolls a real map's doc folder as a feed,
+# and the breach poster watches from below. Override the whole array via apply_grid_config()
+# or the inspector to tell your own story (point "md" at any res:// .md file).
 @export var screens: Array = [
 	{
+		# Reads res://doc/ENTRY.md — the project's own entry point becomes the station header.
+		"md": "res://doc/ENTRY.md",
+		"lines": 4,
 		"title": "BLOCK 9",
 		"body": "NIGHT WATCH STATION\nshift 03 — operator on duty\nall systems nominal",
 		"type": "info",
@@ -86,8 +102,11 @@ class_name MonitorSetup
 		"mount": "pole",
 	},
 	{
-		"title": "LOG",
-		"body": "02:14 corridor C quiet\n02:51 door 7 cycled\n03:06 nothing moves\n03:09 still nothing",
+		# Reads a real map's technical note — the screen shows actual curriculum text.
+		"md": "res://commons/maps/CA_GameOfLife/technical.md",
+		"lines": 5,
+		"title": "MAP FILE",
+		"body": "loading map record…\nstand by",
 		"type": "info",
 		"size": Vector2(0.42, 0.32),
 		"pos": Vector3(-0.36, 1.5, -0.02),
@@ -119,11 +138,25 @@ class_name MonitorSetup
 		"mount": "pole",
 	},
 	{
+		# LOG FEED — rolls every doc in a real map's folder as a log line.
+		"md_dir": "res://commons/maps/CA_GameOfLife/",
+		"md_count": 5,
+		"title": "LOG",
+		"body": "scanning records…",
+		"type": "info",
+		"size": Vector2(0.5, 0.34),
+		"pos": Vector3(0.38, 1.16, 0.06),
+		"angle_deg": -16.0,
+		"pitch_deg": 4.0,
+		"color": Color(0.55, 0.8, 1.0),
+		"mount": "base",
+	},
+	{
 		"title": "SECURITY BREACH",
 		"body": "INTRUDER — BLOCK 9\nlockdown engaged",
 		"type": "poster",
 		"size": Vector2(0.5, 0.32),
-		"pos": Vector3(0.42, 1.17, 0.14),
+		"pos": Vector3(0.72, 1.17, 0.16),
 		"angle_deg": -12.0,
 		"pitch_deg": 4.0,
 		"color": Color(0.95, 0.12, 0.1),
@@ -300,12 +333,392 @@ func _coerce_screen(entry: Dictionary) -> Dictionary:
 	if m != "base" and m != "pole":
 		m = "pole"
 	out["mount"] = m
+	# Markdown content sources (carried through so apply_grid_config / inspector entries
+	# keep them; resolved later at build time in _resolve_md_content).
+	out["md"] = str(entry.get("md", ""))
+	out["lines"] = int(_to_float(entry.get("lines", 5.0), 5.0))
+	out["md_dir"] = str(entry.get("md_dir", ""))
+	out["md_count"] = int(_to_float(entry.get("md_count", 4.0), 4.0))
 	return out
 
 
 func _clear_built_children() -> void:
 	for c in get_children():
 		c.queue_free()
+
+
+# ── Markdown content sources ──────────────────────────────────────────
+# An info screen can source its text from a real .md file ("md") or roll a whole
+# directory of docs into a log feed ("md_dir"). Both are resolved at build time and
+# OVERRIDE the hand-typed title/body, which remain as graceful fallbacks.
+
+func _resolve_md_content(s: Dictionary) -> void:
+	# Mutates s["title"]/s["body"] in place from "md" or "md_dir" when present.
+	var dir_path: String = str(s.get("md_dir", "")).strip_edges()
+	if dir_path != "":
+		var feed: Dictionary = _load_md_dir_feed(dir_path, int(s.get("md_count", 4)))
+		if str(feed.get("body", "")) != "":
+			# Keep the author's LOG heading if they set one, else use the folder name.
+			if str(s.get("title", "")).strip_edges() == "":
+				s["title"] = str(feed.get("title", "LOG"))
+			s["body"] = str(feed["body"])
+		else:
+			# Degrade gracefully: keep title, show a no-data line.
+			s["body"] = "— no data —"
+		return
+
+	var md_path: String = str(s.get("md", "")).strip_edges()
+	if md_path == "":
+		return  # No markdown source — keep the hand-typed title/body as-is.
+
+	var parsed: Dictionary = _load_md_screen(md_path, int(s.get("lines", 5)))
+	var p_title: String = str(parsed.get("title", ""))
+	var p_body: String = str(parsed.get("body", ""))
+	if p_title != "":
+		s["title"] = p_title
+	if p_body != "":
+		s["body"] = p_body
+	elif p_title != "" and str(s.get("body", "")).strip_edges() == "":
+		# Title parsed but no body and no fallback body — show a no-data marker.
+		s["body"] = "— no data —"
+
+
+# Read one .md file and distil it into clean monitor-log text.
+# Returns {title, body}. Empty strings signal "use the caller's fallback".
+func _load_md_screen(path: String, max_lines: int) -> Dictionary:
+	var result: Dictionary = {"title": "", "body": ""}
+	if not FileAccess.file_exists(path):
+		# Filename stem upper-cased as a last-resort title so a missing file still labels.
+		result["title"] = _path_stem(path).to_upper()
+		return result
+
+	var f: FileAccess = FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		result["title"] = _path_stem(path).to_upper()
+		return result
+
+	var text: String = f.get_as_text()
+	f.close()
+	if text.strip_edges() == "":
+		result["title"] = _path_stem(path).to_upper()
+		return result
+
+	var raw_lines: PackedStringArray = text.replace("\r\n", "\n").replace("\r", "\n").split("\n", true)
+
+	# Pass 1: find the title (first H1, else first non-empty line, else stem).
+	# While walking, skip front-matter and code fences so the title is real content.
+	var lines: int = max_lines
+	if lines < 1:
+		lines = 1
+
+	var title: String = ""
+	var in_fence: bool = false
+	var in_front: bool = false
+	var first_nonempty: String = ""
+	for i in raw_lines.size():
+		var ln: String = str(raw_lines[i])
+		var trimmed: String = ln.strip_edges()
+		# Front-matter: a leading "---" block at the very top of the file.
+		if trimmed == "---":
+			if i == 0:
+				in_front = true
+				continue
+			if in_front:
+				in_front = false
+				continue
+		if in_front:
+			continue
+		if trimmed.begins_with("```"):
+			in_fence = not in_fence
+			continue
+		if in_fence:
+			continue
+		if trimmed == "":
+			continue
+		if first_nonempty == "":
+			first_nonempty = trimmed
+		if trimmed.begins_with("# "):
+			title = _strip_md_inline(trimmed.substr(2)).strip_edges()
+			break
+	if title == "":
+		if first_nonempty != "":
+			title = _strip_md_inline(first_nonempty).strip_edges()
+		else:
+			title = _path_stem(path).to_upper()
+
+	# Pass 2: collect body lines — meaningful content, markdown-stripped, after the title.
+	var body_lines: PackedStringArray = []
+	in_fence = false
+	in_front = false
+	var passed_title: bool = false
+	# If there is no H1, the title was drawn from the first content line, so we must
+	# skip that exact line when gathering the body to avoid duplicating it.
+	var title_is_first_line: bool = (not _has_h1(raw_lines))
+	for i in raw_lines.size():
+		if body_lines.size() >= lines:
+			break
+		var ln2: String = str(raw_lines[i])
+		var t2: String = ln2.strip_edges()
+		if t2 == "---":
+			if i == 0:
+				in_front = true
+				continue
+			if in_front:
+				in_front = false
+				continue
+		if in_front:
+			continue
+		if t2.begins_with("```"):
+			in_fence = not in_fence
+			continue
+		if in_fence:
+			continue
+		if t2 == "":
+			continue
+		# Skip the H1 title line itself.
+		if t2.begins_with("# ") and not passed_title:
+			passed_title = true
+			continue
+		# Skip the first content line when it was promoted to the title.
+		if title_is_first_line and not passed_title:
+			passed_title = true
+			continue
+		var cleaned: String = _clean_md_line(t2)
+		if cleaned == "":
+			continue
+		body_lines.append(cleaned)
+
+	result["title"] = title
+	result["body"] = "\n".join(body_lines)
+	return result
+
+
+# Scan a directory for *.md and build a log-feed body: one line per doc,
+# "<stem>: <first heading or first line>". Returns {title, body}.
+func _load_md_dir_feed(dir_path: String, count: int) -> Dictionary:
+	var feed: Dictionary = {"title": "LOG", "body": ""}
+	var d: DirAccess = DirAccess.open(dir_path)
+	if d == null:
+		return feed
+
+	var names: PackedStringArray = []
+	d.list_dir_begin()
+	var entry: String = d.get_next()
+	while entry != "":
+		if not d.current_is_dir() and entry.to_lower().ends_with(".md"):
+			names.append(entry)
+		entry = d.get_next()
+	d.list_dir_end()
+	if names.is_empty():
+		return feed
+	names.sort()
+
+	var want: int = count
+	if want < 1:
+		want = 1
+	if want > names.size():
+		want = names.size()
+
+	# Normalise the directory so we can join file paths cleanly.
+	var base: String = dir_path
+	if not base.ends_with("/"):
+		base += "/"
+
+	var rolled: PackedStringArray = []
+	for i in want:
+		var fname: String = str(names[i])
+		var stem: String = _path_stem(fname)
+		var head: String = _first_md_line(base + fname)
+		var line: String = stem + ": " + head
+		rolled.append(_trim_width(line, 64))
+
+	feed["body"] = "\n".join(rolled)
+	return feed
+
+
+# First meaningful line of a .md file (H1 text if present, else first content line),
+# stripped to plain text. Returns "" on any read failure.
+func _first_md_line(path: String) -> String:
+	if not FileAccess.file_exists(path):
+		return ""
+	var f: FileAccess = FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		return ""
+	var text: String = f.get_as_text()
+	f.close()
+	var raw_lines: PackedStringArray = text.replace("\r\n", "\n").replace("\r", "\n").split("\n", true)
+	var in_fence: bool = false
+	var in_front: bool = false
+	var fallback: String = ""
+	for i in raw_lines.size():
+		var ln: String = str(raw_lines[i])
+		var t: String = ln.strip_edges()
+		if t == "---":
+			if i == 0:
+				in_front = true
+				continue
+			if in_front:
+				in_front = false
+				continue
+		if in_front:
+			continue
+		if t.begins_with("```"):
+			in_fence = not in_fence
+			continue
+		if in_fence:
+			continue
+		if t == "":
+			continue
+		if t.begins_with("# "):
+			return _strip_md_inline(t.substr(2)).strip_edges()
+		if fallback == "":
+			fallback = _clean_md_line(t)
+	return fallback
+
+
+# True if any (non-fenced) line is an H1 heading.
+func _has_h1(raw_lines: PackedStringArray) -> bool:
+	var in_fence: bool = false
+	for i in raw_lines.size():
+		var t: String = str(raw_lines[i]).strip_edges()
+		if t.begins_with("```"):
+			in_fence = not in_fence
+			continue
+		if in_fence:
+			continue
+		if t.begins_with("# "):
+			return true
+	return false
+
+
+# Strip leading block markers (#, ##, >, -, *, "1.") from a line, then clean inline
+# markdown and HTML, drop table pipes, and trim to a readable width. "" = skip the line.
+func _clean_md_line(line: String) -> String:
+	var s: String = line.strip_edges()
+	if s == "":
+		return ""
+	# Drop horizontal rules / leftover fences.
+	if s == "---" or s == "***" or s.begins_with("```"):
+		return ""
+	# Markdown table rows: "| a | b |" or separator "|---|---|" — skip them.
+	if s.begins_with("|"):
+		return ""
+	# Strip leading heading hashes.
+	while s.begins_with("#"):
+		s = s.substr(1)
+	# Strip a leading blockquote marker.
+	while s.begins_with(">"):
+		s = s.substr(1).strip_edges()
+	# Strip a leading list bullet ("- " or "* " or "+ ").
+	if s.begins_with("- ") or s.begins_with("* ") or s.begins_with("+ "):
+		s = s.substr(2)
+	# Strip a leading ordered-list marker like "1." / "12)" (hand-rolled, no regex).
+	s = _strip_ordered_marker(s)
+	s = _strip_md_inline(s)
+	s = s.strip_edges()
+	return _trim_width(s, 56)
+
+
+# Remove inline markdown / HTML from a single line: links → text, **bold**/*em*/`code`
+# → inner text, and any <tag> dropped. Hand-rolled (no regex).
+func _strip_md_inline(line: String) -> String:
+	var s: String = line
+	# Links / images: [text](url) → text ; ![alt](url) → alt. Resolve left-to-right.
+	s = _flatten_links(s)
+	# Emphasis / code markers: drop the markup characters, keep the inner text.
+	s = s.replace("**", "")
+	s = s.replace("__", "")
+	s = s.replace("`", "")
+	s = s.replace("~~", "")
+	# Lone * and _ used as emphasis — remove them (word chars and content remain).
+	s = s.replace("*", "")
+	# Strip any HTML tags <...>.
+	s = _strip_html_tags(s)
+	# Unescape the few common backslash escapes.
+	s = s.replace("\\_", "_")
+	s = s.replace("\\*", "*")
+	s = s.replace("\\#", "#")
+	return s
+
+
+# Convert every [text](url) (and ![alt](url)) to just its visible text. No regex.
+func _flatten_links(line: String) -> String:
+	var s: String = line
+	var out: String = ""
+	var i: int = 0
+	var n: int = s.length()
+	while i < n:
+		var ch: String = s[i]
+		if ch == "!" and i + 1 < n and s[i + 1] == "[":
+			i += 1  # skip the image bang, fall through to the "[" handler next loop
+			continue
+		if ch == "[":
+			var close_b: int = s.find("]", i + 1)
+			if close_b != -1 and close_b + 1 < n and s[close_b + 1] == "(":
+				var close_p: int = s.find(")", close_b + 2)
+				if close_p != -1:
+					out += s.substr(i + 1, close_b - i - 1)
+					i = close_p + 1
+					continue
+			# Not a real link — keep the bracket literally.
+			out += ch
+			i += 1
+			continue
+		out += ch
+		i += 1
+	return out
+
+
+# Drop any <...> HTML tags, keeping the text between them. No regex.
+func _strip_html_tags(line: String) -> String:
+	if line.find("<") == -1:
+		return line
+	var out: String = ""
+	var i: int = 0
+	var n: int = line.length()
+	var in_tag: bool = false
+	while i < n:
+		var ch: String = line[i]
+		if ch == "<":
+			in_tag = true
+		elif ch == ">":
+			in_tag = false
+		elif not in_tag:
+			out += ch
+		i += 1
+	return out
+
+
+# Strip a leading ordered-list marker: digits followed by "." or ")" then a space.
+# e.g. "1. Foo" → "Foo", "12) Bar" → "Bar". No regex.
+func _strip_ordered_marker(line: String) -> String:
+	var i: int = 0
+	var n: int = line.length()
+	while i < n and line[i] >= "0" and line[i] <= "9":
+		i += 1
+	if i > 0 and i < n and (line[i] == "." or line[i] == ")"):
+		var rest: String = line.substr(i + 1)
+		if rest.begins_with(" "):
+			return rest.strip_edges()
+	return line
+
+
+# Trim a line to a sane width, adding an ellipsis when it was cut.
+func _trim_width(line: String, width: int) -> String:
+	if line.length() <= width:
+		return line
+	return line.substr(0, maxi(1, width - 1)).strip_edges() + "…"
+
+
+# Filename stem (no directory, no ".md" extension).
+func _path_stem(path: String) -> String:
+	var base: String = path.get_file()
+	if base == "":
+		base = path
+	var dot: int = base.rfind(".")
+	if dot > 0:
+		base = base.substr(0, dot)
+	return base
 
 
 # ── Build orchestration ───────────────────────────────────────────────
@@ -554,6 +967,9 @@ func _build_screens() -> void:
 
 
 func _build_one_screen(index: int, s: Dictionary) -> void:
+	# Resolve any markdown content source into title/body before drawing the panel.
+	_resolve_md_content(s)
+
 	var size: Vector2 = s["size"]
 	var pos: Vector3 = s["pos"]
 	var yaw_deg: float = s["angle_deg"]
@@ -626,10 +1042,17 @@ func _build_face_info(root: Node3D, size: Vector2, title: String, body: String, 
 	var has_title: bool = title.strip_edges() != ""
 
 	# Font sizing scaled to panel height so text fits varied sizes.
-	var title_font: int = maxi(9, int(round(size.y * 150.0)))
-	var body_font: int = maxi(7, int(round(size.y * 78.0)))
-	var title_step: float = float(title_font) * TEXT_PIXEL_SIZE * 1.5
-	var body_step: float = float(body_font) * TEXT_PIXEL_SIZE * 1.45
+	var title_font: int = maxi(9, int(round(size.y * 128.0)))
+	var body_font: int = maxi(7, int(round(size.y * 70.0)))
+	var title_step: float = float(title_font) * TEXT_PIXEL_SIZE * 1.55
+	var body_step: float = float(body_font) * TEXT_PIXEL_SIZE * 1.4
+
+	# Clamp the body to ONLY the lines that fit the panel height — no overflow into
+	# neighbouring screens. Truncate the rest (the screen shows what fits).
+	var title_h: float = title_step if has_title else 0.0
+	var max_body: int = maxi(1, int(floor((size.y * 0.92 - title_h) / body_step)))
+	if lines.size() > max_body:
+		lines = lines.slice(0, max_body)
 
 	var total_h: float = 0.0
 	if has_title:
@@ -640,11 +1063,14 @@ func _build_face_info(root: Node3D, size: Vector2, title: String, body: String, 
 	# Title accent: bright accent; body: soft near-white tinted by accent.
 	var title_col: Color = accent.lerp(Color(1, 1, 1), 0.25)
 	var body_col: Color = Color(0.92, 0.95, 0.98).lerp(accent, 0.15)
+	# Char budgets so each line fills the panel WIDTH without wrapping (char ≈ 0.58·height).
+	var title_chars: int = maxi(4, int(size.x / (float(title_font) * TEXT_PIXEL_SIZE * 0.62)))
+	var body_chars: int = maxi(6, int(size.x / (float(body_font) * TEXT_PIXEL_SIZE * 0.56)))
 
 	if has_title:
 		var head := Label3D.new()
 		head.name = "Title"
-		head.text = title
+		head.text = _fit_text(title, title_chars)
 		head.font_size = title_font
 		head.outline_size = 2
 		head.pixel_size = TEXT_PIXEL_SIZE
@@ -654,8 +1080,7 @@ func _build_face_info(root: Node3D, size: Vector2, title: String, body: String, 
 		head.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		head.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		head.no_depth_test = true
-		head.width = int(maxf(120.0, size.x / TEXT_PIXEL_SIZE))
-		head.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		head.autowrap_mode = TextServer.AUTOWRAP_OFF
 		head.position = Vector3(0.0, cursor_y - title_step * 0.5, 0.0)
 		text_root.add_child(head)
 		cursor_y -= title_step
@@ -663,7 +1088,7 @@ func _build_face_info(root: Node3D, size: Vector2, title: String, body: String, 
 	for i in lines.size():
 		var line := Label3D.new()
 		line.name = "Body%d" % i
-		line.text = str(lines[i])
+		line.text = _fit_text(str(lines[i]), body_chars)
 		line.font_size = body_font
 		line.outline_size = 1
 		line.pixel_size = TEXT_PIXEL_SIZE
@@ -673,11 +1098,18 @@ func _build_face_info(root: Node3D, size: Vector2, title: String, body: String, 
 		line.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		line.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		line.no_depth_test = true
-		line.width = int(maxf(120.0, size.x / TEXT_PIXEL_SIZE))
-		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		line.autowrap_mode = TextServer.AUTOWRAP_OFF
 		line.position = Vector3(0.0, cursor_y - body_step * 0.5, 0.0)
 		text_root.add_child(line)
 		cursor_y -= body_step
+
+
+## Truncate `s` to at most `max_chars`, adding an ellipsis if cut, so a line fills the
+## panel width without wrapping into a neighbour.
+func _fit_text(s: String, max_chars: int) -> String:
+	if s.length() <= max_chars:
+		return s
+	return s.substr(0, maxi(1, max_chars - 1)).strip_edges() + "…"
 
 
 func _build_face_textured(root: Node3D, size: Vector2, tex: ImageTexture) -> void:
