@@ -126,10 +126,10 @@ func _apply_label_font() -> void:
 		_label.add_theme_font_override("normal_font", _mono_font)
 		_label.add_theme_font_override("bold_font", _mono_font)
 		_label.add_theme_font_override("mono_font", _mono_font)
-	_label.add_theme_font_size_override("normal_font_size", 13)
-	_label.add_theme_font_size_override("bold_font_size", 13)
-	_label.add_theme_font_size_override("mono_font_size", 13)
-	_label.add_theme_constant_override("line_separation", 2)
+	_label.add_theme_font_size_override("normal_font_size", 19)
+	_label.add_theme_font_size_override("bold_font_size", 19)
+	_label.add_theme_font_size_override("mono_font_size", 19)
+	_label.add_theme_constant_override("line_separation", 3)
 
 
 # ── Public API ──────────────────────────────────────────────────────────
@@ -192,7 +192,7 @@ func _process(delta: float) -> void:
 func _position_cursor(body_line_count: int) -> void:
 	if _cursor == null:
 		return
-	var line_h: float = 17.0          # ~font size 13 + leading
+	var line_h: float = 24.0          # ~font size 19 + leading
 	var top_pad: float = 10.0
 	var left_pad: float = 14.0
 	# Header line (row 0) + body lines → cursor sits on the next row.

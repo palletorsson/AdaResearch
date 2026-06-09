@@ -40,7 +40,7 @@ void fragment() {
 	// ── ROLLING SCANLINES ──
 	// A sine over UV.y scrolled by TIME so the bands creep upward in sync on every screen.
 	float scan = sin((uv.y * scan_density) - (TIME * scan_speed * 6.2831853));
-	float scan_band = mix(0.78, 1.0, scan * 0.5 + 0.5); // gentle — keeps text legible
+	float scan_band = mix(0.88, 1.0, scan * 0.5 + 0.5); // gentle — keeps text legible
 
 	// ── FLICKER ──
 	// Two desynced sines of TIME → a small global brightness wobble, identical per screen.
@@ -64,6 +64,7 @@ void fragment() {
 	col *= intensity;
 
 	// Keep a near-black albedo; the life is in EMISSION so the tube glows unlit.
+	// Boosted so the small terminal text reads clearly through the glass.
 	ALBEDO = src * 0.04;
-	EMISSION = col;
+	EMISSION = col * 1.7;
 }
