@@ -15,8 +15,21 @@ extends Node3D
 ## GRID tab → height ops via GridOps.stroke() over a small brush footprint
 ## (GridOps.brush_cells, 1..4) read/written through the structure component's
 ## get_height_at / set_height_at. PAINT row → ModifierStack (colorize / random /
-## clear) over the same footprint → set_cell_color per cell. ARTIFACTS / BIOME
-## tabs are present but light stubs (a toast) — the grid is the focus.
+## clear) over the same footprint → set_cell_color per cell.
+##
+## ARTIFACTS tab → a selected artifact (the catalog's map-ready lookups, sorted).
+## PREV/NEXT cycle the selection; LEFT-click PLACES it (writes the interactables
+## layer cell + spawns it via GridInteractablesComponent); RIGHT-click clears the
+## cell. The hovered-cell ghost shows the selected artifact name.
+##
+## BIOME tab → the SAME brush model as BiomeScrubberDesktop3D: a per-element
+## per-cell density field. The right-panel element/size/pressure set the active
+## element + radius + strength; LEFT-drag stamps the field; on release the fields
+## become paint_layers and GridSystem.repaint_biome() rebuilds the biome live.
+##
+## SAVE (W) is non-destructive read-merge-write: it replaces layers.structure +
+## top-level modifiers (GRID), layers.interactables (ARTIFACTS), and top-level
+## paint_layers (BIOME), preserving every other key.
 ##
 ## Controls:
 ##   RIGHT-drag orbit   ·   wheel zoom   ·   WASD/Q/E fly (optional)
@@ -33,6 +46,11 @@ const TabbedEditorPanelScene = preload("res://commons/hazards/becoming_catalyst/
 const GridSystemScene = preload("res://commons/grid/grid_system.tscn")
 const GridOpsLib = preload("res://commons/modifiers/grid_ops.gd")
 const ModifierStackLib = preload("res://commons/modifiers/modifier_stack.gd")
+# ARTIFACTS tab — the placeable-artifact catalog (map-ready lookups).
+const CatalogProvider = preload("res://commons/artifacts/catalog/ArtifactCatalogDataProvider.gd")
+# BIOME tab — the same paint model the scrubber uses (one source of truth).
+const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
+const DistributionFieldLib = preload("res://commons/biome_layers/distribution_field.gd")
 
 @export var cube_size: float = 1.0
 @export var fly_speed: float = 6.0
@@ -63,11 +81,29 @@ var _active_tab: String = "GRID"
 # ── Modifier (paint) op-stack — persisted top-level on save ───────────
 var _modifier_stack: Array = []           # Array[Dictionary] colorize/random/normalize ops
 
+# ── ARTIFACTS tab state ───────────────────────────────────────────────
+var _artifact_list: Array = []            # sorted lookup_names (map-ready catalog)
+var _artifact_idx: int = -1               # index into _artifact_list; -1 = none/unavailable
+# Live interactables layer, rows[z][col] = token string (" " = empty). Built from
+# the loaded map's layer (or blank) and edited by placement; saved into map_data.
+var _interactables: Array = []
+var _interactables_comp: GridInteractablesComponent = null
+
+# ── BIOME tab state (mirrors the scrubber's brush model) ──────────────
+var _biome_elements: Array = BiomeElementsLib.NAMES   # single source of truth
+var _biome_idx: int = -1                  # active element index; -1 = none
+var _brush_fields: Dictionary = {}        # element -> PackedFloat32Array (grid_w*grid_d)
+var _brush_radius: int = 2
+var _brush_strength: float = 0.6
+var _biome_dirty: bool = false            # a biome stamp happened this stroke → rebuild on release
+
 # ── Hover + brush ghost ───────────────────────────────────────────────
 var _hover_cell: Vector2i = Vector2i(-1, -1)   # (row, col) = (z, x)
 var _hover_valid: bool = false
 var _hover_highlight: MeshInstance3D = null    # single cell under the cursor
-var _ghost: MultiMeshInstance3D = null         # brush footprint preview
+var _ghost: MultiMeshInstance3D = null         # brush footprint preview (GRID/PAINT)
+var _artifact_ghost: MeshInstance3D = null     # selected-artifact marker (ARTIFACTS)
+var _biome_overlay: MultiMeshInstance3D = null # per-cell density field (BIOME)
 var _painting: bool = false                    # left-button held → continuous apply
 
 # ── Undo / redo (snapshot heights + colors before each stroke) ────────
@@ -207,9 +243,24 @@ func _build_real_grid() -> void:
 	if "cube_size" in _structure:
 		cube_size = _structure.cube_size
 
+	# Cache the interactables component for artifact placement (may be absent in
+	# synthetic mode — guarded everywhere it's used).
+	if _grid_system.has_method("get_interactables_component"):
+		_interactables_comp = _grid_system.get_interactables_component()
+	if _interactables_comp == null:
+		_interactables_comp = _grid_system.find_child("GridInteractablesComponent", true, false) as GridInteractablesComponent
+
+	# ARTIFACTS: seed the placeable-artifact list + the live interactables layer.
+	_load_artifact_catalog()
+	_load_interactables_layer()
+
+	# BIOME: size the per-element brush overlay to the (now known) grid.
+	_resize_biome_overlay()
+
 	_editing_ready = true
 	_recenter_for_grid()
 	_update_hover_grid_sized()
+	_sync_biome_size()
 	_update_hud()
 	print("[grid-editor] ready: map=%s  %dx%d  maxH=%d" % [
 		(_loaded_map if _loaded_map != "" else "SYNTHETIC"), _grid_w, _grid_d, _grid_max_h])
@@ -343,6 +394,43 @@ func _build_hover_visuals() -> void:
 	_ghost.visible = false
 	add_child(_ghost)
 
+	# ── Artifact ghost — a single upright marker box at the hovered cell (shown
+	#    only on the ARTIFACTS tab; the selected artifact's footprint preview). ──
+	_artifact_ghost = MeshInstance3D.new()
+	_artifact_ghost.name = "ArtifactGhost"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(cube_size * 0.5, cube_size * 0.9, cube_size * 0.5)
+	_artifact_ghost.mesh = bm
+	var amat := StandardMaterial3D.new()
+	amat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	amat.albedo_color = Color(C_ACCENT.r, C_ACCENT.g, C_ACCENT.b, 0.45)
+	amat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	amat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_artifact_ghost.material_override = amat
+	_artifact_ghost.visible = false
+	add_child(_artifact_ghost)
+
+	# ── Biome brush overlay — a per-cell quad grid, alpha = the active element's
+	#    painted density (shown only on the BIOME tab). Sized once the grid loads. ──
+	_biome_overlay = MultiMeshInstance3D.new()
+	_biome_overlay.name = "BiomeBrushOverlay"
+	var bmm := MultiMesh.new()
+	bmm.transform_format = MultiMesh.TRANSFORM_3D
+	bmm.use_colors = true                  # MUST precede instance_count
+	var bpl := PlaneMesh.new()
+	bpl.size = Vector2(cube_size * 0.92, cube_size * 0.92)
+	bmm.mesh = bpl
+	bmm.instance_count = 0
+	_biome_overlay.multimesh = bmm
+	var bmat := StandardMaterial3D.new()
+	bmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	bmat.vertex_color_use_as_albedo = true
+	bmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	bmat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_biome_overlay.material_override = bmat
+	_biome_overlay.visible = false
+	add_child(_biome_overlay)
+
 
 ## Resize hover quads to the (possibly map-derived) cube size.
 func _update_hover_grid_sized() -> void:
@@ -350,6 +438,10 @@ func _update_hover_grid_sized() -> void:
 		(_hover_highlight.mesh as PlaneMesh).size = Vector2(cube_size * 0.96, cube_size * 0.96)
 	if _ghost and _ghost.multimesh and _ghost.multimesh.mesh is PlaneMesh:
 		(_ghost.multimesh.mesh as PlaneMesh).size = Vector2(cube_size * 0.86, cube_size * 0.86)
+	if _artifact_ghost and _artifact_ghost.mesh is BoxMesh:
+		(_artifact_ghost.mesh as BoxMesh).size = Vector3(cube_size * 0.5, cube_size * 0.9, cube_size * 0.5)
+	if _biome_overlay and _biome_overlay.multimesh and _biome_overlay.multimesh.mesh is PlaneMesh:
+		(_biome_overlay.multimesh.mesh as PlaneMesh).size = Vector2(cube_size * 0.92, cube_size * 0.92)
 
 
 # ── HUD ────────────────────────────────────────────────────────────────
@@ -461,9 +553,16 @@ func _connect_panel_signals() -> void:
 # ── Panel signal handlers ──────────────────────────────────────────────
 func _on_tab_changed(tab_id: String) -> void:
 	_active_tab = tab_id
-	# GRID tab drives structure; BIOME/ARTIFACTS are stubs but keep the mode sane.
+	# Each tab edits its own layer; the GRID mode toggle (grid vs paint) only
+	# matters on the GRID tab. The other tabs read their own active selection.
 	if tab_id == "GRID":
 		_active_mode = TOOL_GRID
+	# Show the right overlays per tab; the per-frame hover refresh handles the rest.
+	if _biome_overlay:
+		_biome_overlay.visible = (tab_id == "BIOME")
+	if _active_tab == "BIOME":
+		_update_biome_overlay()
+	_position_hover_visuals()
 	_update_hud()
 
 
@@ -502,23 +601,53 @@ func _on_color_selected(color: Color) -> void:
 
 
 func _on_element_selected(element_name: String) -> void:
-	# BIOME tab is a stub here — the grid is the focus. Acknowledge, don't crash.
-	_status_msg = "biome element '%s' — paint biome in the Scrubber" % element_name
+	# BIOME tab: set the active brush element (mirrors the scrubber's element grid).
+	var idx := _biome_elements.find(element_name)
+	if idx < 0:
+		_status_msg = "unknown biome element '%s'" % element_name
+		_update_hud()
+		return
+	_biome_idx = idx
+	_active_tab = "BIOME"
+	if _biome_overlay:
+		_biome_overlay.visible = true
+	_update_biome_overlay()
+	_status_msg = "biome element: %s" % element_name.to_upper()
 	_update_hud()
 
 
-func _on_biome_size_changed(_radius: int) -> void:
-	pass  # stub — biome brush not wired in the grid editor
+func _on_biome_size_changed(radius: int) -> void:
+	# Maps to the brush radius (the scrubber uses the same panel slider 1..6/8).
+	_brush_radius = clampi(radius, 0, 8)
+	_update_hud()
 
 
-func _on_biome_pressure_changed(_strength: float) -> void:
-	pass  # stub
+func _on_biome_pressure_changed(strength: float) -> void:
+	_brush_strength = clampf(strength, 0.1, 1.0)
+	_update_hud()
 
 
 func _on_artifact_action(action: String) -> void:
-	# ARTIFACTS tab is a stub — acknowledge with a toast.
-	_status_msg = "artifacts: '%s' — placement lives in the artifact editor" % action
-	_update_hud()
+	# ARTIFACTS tab: PREV/NEXT cycle the selected artifact; PLACE stamps it at the
+	# hovered cell. The panel emits "◀ PREV" / "NEXT ▶" / "PLACE"; match loosely so
+	# a panel-label tweak (or a future "REMOVE") still routes correctly.
+	_active_tab = "ARTIFACTS"
+	var up := action.to_upper()
+	if _artifact_list.is_empty():
+		_status_msg = "no map-ready artifacts in the catalog"
+		_update_hud()
+		return
+	if up.contains("PREV"):
+		_cycle_artifact(-1)
+	elif up.contains("NEXT"):
+		_cycle_artifact(1)
+	elif up.contains("REMOVE") or up.contains("CLEAR"):
+		_clear_artifact_at_hover()
+	elif up.contains("PLACE"):
+		_place_artifact_at_hover()
+	else:
+		_status_msg = "artifacts: '%s'" % action
+		_update_hud()
 
 
 # ── Input ──────────────────────────────────────────────────────────────
@@ -539,20 +668,15 @@ func _unhandled_input(event: InputEvent) -> void:
 				if event.ctrl_pressed: _redo()
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			_painting = event.pressed
-			if event.pressed:
-				_push_undo()       # snapshot before the stroke
-				_stroke_dirty = false
-				_apply_at_hover()
-			else:
-				if _stroke_dirty:
-					_stroke_dirty = false
-				else:
-					# Click placed nothing useful → discard the snapshot we pushed.
-					if not _undo_stack.is_empty():
-						_undo_stack.pop_back()
+			_on_left_button(event.pressed)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			_orbiting = event.pressed
+			# On ARTIFACTS, RIGHT-click clears the hovered cell (instead of orbiting),
+			# so artifact remove is a one-click gesture. Press only; drag still orbits
+			# on the other tabs.
+			if event.pressed and _active_tab == "ARTIFACTS":
+				_clear_artifact_at_hover()
+			else:
+				_orbiting = event.pressed
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_orbit_radius = maxf(2.0, _orbit_radius - 1.5)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
@@ -563,8 +687,45 @@ func _unhandled_input(event: InputEvent) -> void:
 			_orbit_pitch = clampf(_orbit_pitch - event.relative.y * 0.006, -1.45, -0.05)
 		else:
 			_update_hover()
+			# Continuous apply while dragging: GRID/PAINT strokes structure/paint;
+			# BIOME stamps the brush field. ARTIFACTS is click-to-place (no drag-paint).
 			if _painting:
-				_apply_at_hover()
+				if _active_tab == "BIOME":
+					_stamp_biome_at_hover()
+				elif _active_tab != "ARTIFACTS":
+					_apply_at_hover()
+
+
+## LEFT-button press/release, routed by the active tab. GRID/PAINT keep the
+## original stroke+undo flow; BIOME runs a biome-brush stroke (rebuild on release);
+## ARTIFACTS places the selected artifact at the hovered cell on press.
+func _on_left_button(pressed: bool) -> void:
+	if _active_tab == "ARTIFACTS":
+		if pressed:
+			_place_artifact_at_hover()
+		return
+	if _active_tab == "BIOME":
+		_painting = pressed
+		if pressed:
+			_biome_dirty = false
+			_stamp_biome_at_hover()
+		elif _biome_dirty:
+			_biome_dirty = false
+			_repaint_biome_live()   # full live rebuild on stroke-release
+		return
+	# GRID / PAINT — original behaviour, unchanged.
+	_painting = pressed
+	if pressed:
+		_push_undo()       # snapshot before the stroke
+		_stroke_dirty = false
+		_apply_at_hover()
+	else:
+		if _stroke_dirty:
+			_stroke_dirty = false
+		else:
+			# Click placed nothing useful → discard the snapshot we pushed.
+			if not _undo_stack.is_empty():
+				_undo_stack.pop_back()
 
 
 # ── Per-frame: camera orbit + fly + capture countdown ─────────────────
@@ -631,12 +792,18 @@ func _update_hover() -> void:
 	_position_hover_visuals()
 
 
+## Hide the hovered-cell visuals. The persistent biome overlay is independent (its
+## visibility is tab-driven), so it's not touched here.
 func _set_hover_visible(v: bool) -> void:
-	if _hover_highlight: _hover_highlight.visible = v
-	if _ghost: _ghost.visible = v
+	if _hover_highlight: _hover_highlight.visible = v and _active_tab != "ARTIFACTS"
+	if _ghost: _ghost.visible = v and (_active_tab == "GRID")
+	if _artifact_ghost: _artifact_ghost.visible = v and (_active_tab == "ARTIFACTS")
 
 
-## Place the single-cell highlight and stamp the brush footprint into the ghost.
+## Place the single-cell highlight and the per-tab ghost at the hovered cell.
+##   GRID      → footprint MultiMesh ghost (structure/paint brush)
+##   ARTIFACTS → upright marker box for the selected artifact
+##   BIOME     → single-cell highlight (the density field overlay carries the rest)
 func _position_hover_visuals() -> void:
 	if not _hover_valid:
 		_set_hover_visible(false)
@@ -644,11 +811,26 @@ func _position_hover_visuals() -> void:
 	var col := _hover_cell.y   # x
 	var row := _hover_cell.x   # z
 	var top_y := 0.06 + _column_top_y(col, row)
+
+	# Single-cell highlight (hidden on ARTIFACTS, where the marker box stands in).
 	if _hover_highlight:
-		_hover_highlight.visible = true
+		_hover_highlight.visible = _active_tab != "ARTIFACTS"
 		_hover_highlight.position = Vector3((col + 0.5) * cube_size, top_y, (row + 0.5) * cube_size)
 
+	# Artifact marker ghost.
+	if _artifact_ghost:
+		_artifact_ghost.visible = (_active_tab == "ARTIFACTS")
+		if _active_tab == "ARTIFACTS":
+			var bh := cube_size * 0.9
+			if _artifact_ghost.mesh is BoxMesh:
+				bh = (_artifact_ghost.mesh as BoxMesh).size.y
+			_artifact_ghost.position = Vector3((col + 0.5) * cube_size, top_y + bh * 0.5, (row + 0.5) * cube_size)
+
+	# Footprint ghost — GRID/PAINT only.
 	if _ghost == null or _ghost.multimesh == null:
+		return
+	if _active_tab != "GRID":
+		_ghost.visible = false
 		return
 	var mm := _ghost.multimesh
 	var center := Vector2i(row, col)   # GridOps expects Vector2i(row, col)
@@ -771,6 +953,296 @@ func _build_paint_op(cell_list: Array) -> Dictionary:
 			}
 
 
+# ══════════════════════════════════════════════════════════════════════
+# ARTIFACTS tab — place artifacts into the interactables layer + spawn them
+# ══════════════════════════════════════════════════════════════════════
+
+## Build the sorted list of placeable lookups: the catalog's map-ready artifacts
+## (map_ready OR include_in_map_data true). Degrades to an empty list (toast) if the
+## provider is missing — no crash in synthetic mode.
+func _load_artifact_catalog() -> void:
+	_artifact_list.clear()
+	_artifact_idx = -1
+	if CatalogProvider == null:
+		return
+	var all: Array = CatalogProvider.get_all_artifacts()  # static
+	var names: Array = []
+	for a in all:
+		if not (a is Dictionary):
+			continue
+		# Skip placeholders — they have no real scene to spawn.
+		if str(a.get("artifact_type", "")) == "placeholder":
+			continue
+		if not (bool(a.get("map_ready", false)) or bool(a.get("include_in_map_data", false))):
+			continue
+		var lk := str(a.get("lookup_name", "")).strip_edges()
+		if lk != "" and not names.has(lk):
+			names.append(lk)
+	names.sort()
+	_artifact_list = names
+	if not _artifact_list.is_empty():
+		_artifact_idx = 0
+	print("[grid-editor] artifact catalog: %d map-ready lookups" % _artifact_list.size())
+
+
+## Seed the live interactables layer from the loaded map (or a blank grid). Stored
+## as rows[z] = Array[col] of token strings; " " marks an empty cell.
+func _load_interactables_layer() -> void:
+	_interactables = _blank_interactables()
+	var layers = _map_data.get("layers", {})
+	if not (layers is Dictionary):
+		return
+	var existing = layers.get("interactables", [])
+	if not (existing is Array):
+		return
+	for z in range(mini(_grid_d, existing.size())):
+		var row = existing[z]
+		if not (row is Array):
+			continue
+		for x in range(mini(_grid_w, row.size())):
+			_interactables[z][x] = str(row[x])
+
+
+func _blank_interactables() -> Array:
+	var rows: Array = []
+	for z in range(_grid_d):
+		var row: Array = []
+		for x in range(_grid_w):
+			row.append(" ")
+		rows.append(row)
+	return rows
+
+
+func _selected_artifact() -> String:
+	if _artifact_idx < 0 or _artifact_idx >= _artifact_list.size():
+		return ""
+	return str(_artifact_list[_artifact_idx])
+
+
+## PREV/NEXT — cycle the selected artifact and surface its name in the toast/HUD.
+func _cycle_artifact(delta: int) -> void:
+	if _artifact_list.is_empty():
+		_status_msg = "no map-ready artifacts"
+		_update_hud()
+		return
+	_artifact_idx = wrapi(_artifact_idx + delta, 0, _artifact_list.size())
+	_status_msg = "artifact: %s   (%d/%d)" % [_selected_artifact(), _artifact_idx + 1, _artifact_list.size()]
+	_update_hud()
+
+
+## LEFT-click on ARTIFACTS: write interactables[row][col] = lookup, then spawn it on
+## the real grid via GridInteractablesComponent (zero drift). Clears any prior
+## occupant of the cell first so placements don't stack.
+func _place_artifact_at_hover() -> void:
+	if not _editing_ready or not _hover_valid:
+		return
+	var lookup := _selected_artifact()
+	if lookup == "":
+		_status_msg = "no artifact selected"
+		_update_hud()
+		return
+	var col := _hover_cell.y   # x
+	var row := _hover_cell.x   # z
+	if row < 0 or row >= _interactables.size() or col < 0 or col >= _interactables[row].size():
+		return
+	_push_artifact_undo()
+	# Remove a prior spawned object at this cell (data + scene), then place fresh.
+	_despawn_artifact_at(col, row)
+	_interactables[row][col] = lookup
+	if not _spawn_artifact(col, row, lookup):
+		_status_msg = "placed '%s' in layer (no live spawn — synthetic?)" % lookup
+	else:
+		_status_msg = "placed '%s' at (%d,%d)" % [lookup, row, col]
+	_update_hud()
+
+
+## RIGHT-click / REMOVE: clear the hovered cell (data + spawned scene).
+func _clear_artifact_at_hover() -> void:
+	if not _editing_ready or not _hover_valid:
+		return
+	var col := _hover_cell.y
+	var row := _hover_cell.x
+	if row < 0 or row >= _interactables.size() or col < 0 or col >= _interactables[row].size():
+		return
+	if str(_interactables[row][col]).strip_edges() in ["", " "]:
+		_status_msg = "cell (%d,%d) already empty" % [row, col]
+		_update_hud()
+		return
+	_push_artifact_undo()
+	_despawn_artifact_at(col, row)
+	_interactables[row][col] = " "
+	_status_msg = "cleared (%d,%d)" % [row, col]
+	_update_hud()
+
+
+## Spawn one artifact on the real grid at column (x=col, z=row) using the
+## interactables component's existing placement path. Returns false if the
+## subsystem is absent (synthetic mode) so the caller can toast a hint.
+func _spawn_artifact(col: int, row: int, lookup: String) -> bool:
+	if _interactables_comp == null:
+		return false
+	var y_pos := 0
+	if _structure and _structure.has_method("find_highest_y_at"):
+		y_pos = _structure.find_highest_y_at(col, row)
+	var total_size: float = cube_size
+	if "cube_size" in _interactables_comp:
+		total_size = _interactables_comp.cube_size + _interactables_comp.gutter
+	if not _interactables_comp.has_method("_place_artifact"):
+		return false
+	# _place_artifact adds the spawned node as a child of parent_node and records
+	# it in interactable_objects[Vector3i(x,y,z)] with grid_cell meta — the same
+	# path generate_interactables uses, so what spawns here matches the game.
+	return bool(_interactables_comp._place_artifact(col, y_pos, row, lookup, total_size))
+
+
+## Remove any spawned interactable object(s) at column (x=col, z=row). The component
+## keys interactable_objects by Vector3i(x,y,z); we don't know y, so scan the column.
+func _despawn_artifact_at(col: int, row: int) -> void:
+	if _interactables_comp == null:
+		return
+	if not ("interactable_objects" in _interactables_comp):
+		return
+	var objs: Dictionary = _interactables_comp.interactable_objects
+	var to_free: Array = []
+	for key in objs.keys():
+		if key is Vector3i and key.x == col and key.z == row:
+			to_free.append(key)
+	for key in to_free:
+		var node = objs[key]
+		if is_instance_valid(node):
+			node.queue_free()
+		objs.erase(key)
+
+
+# ══════════════════════════════════════════════════════════════════════
+# BIOME tab — paint a per-element density field → paint_layers → repaint live
+# (the brush model is lifted from BiomeScrubberDesktop3D, not re-derived)
+# ══════════════════════════════════════════════════════════════════════
+
+func _active_biome_element() -> String:
+	if _biome_idx < 0 or _biome_idx >= _biome_elements.size():
+		return ""
+	return str(_biome_elements[_biome_idx])
+
+
+func _biome_color(el: String) -> Color:
+	return BiomeElementsLib.ui_color(el)
+
+
+## Raycast the mouse to the ground plane → grid cell → stamp the active element's
+## brush field (radial falloff, Shift = erase). Mirrors the scrubber's _stamp.
+func _stamp_biome_at_hover() -> void:
+	if not _editing_ready or not _hover_valid:
+		return
+	var el := _active_biome_element()
+	if el == "":
+		_status_msg = "pick a biome element first"
+		_update_hud()
+		return
+	var cx := _hover_cell.y   # x
+	var cz := _hover_cell.x   # z
+	if not _brush_fields.has(el):
+		var nf := PackedFloat32Array()
+		nf.resize(_grid_w * _grid_d)
+		_brush_fields[el] = nf
+	var field: PackedFloat32Array = _brush_fields[el]
+	var r := _brush_radius
+	var erasing := Input.is_key_pressed(KEY_SHIFT)
+	for dz in range(-r, r + 1):
+		for dx in range(-r, r + 1):
+			var x := cx + dx
+			var z := cz + dz
+			if x < 0 or x >= _grid_w or z < 0 or z >= _grid_d:
+				continue
+			var dist := sqrt(float(dx * dx + dz * dz))
+			if dist > float(r) + 0.001:
+				continue
+			var falloff := 1.0 - dist / (float(r) + 0.0001)
+			var i := z * _grid_w + x
+			if erasing:
+				field[i] = maxf(0.0, field[i] - _brush_strength * falloff)
+			else:
+				field[i] = minf(1.0, field[i] + _brush_strength * falloff)
+	_brush_fields[el] = field
+	_biome_dirty = true
+	_update_biome_overlay()
+
+
+## (Re)allocate the biome overlay's per-cell instances to the current grid and lay
+## them out flat on the floor. Called when the grid dims are known / change.
+func _resize_biome_overlay() -> void:
+	if _biome_overlay == null or _biome_overlay.multimesh == null:
+		return
+	var mm := _biome_overlay.multimesh
+	mm.instance_count = _grid_w * _grid_d
+	for z in range(_grid_d):
+		for x in range(_grid_w):
+			var i := z * _grid_w + x
+			mm.set_instance_transform(i, Transform3D(Basis(), Vector3((x + 0.5) * cube_size, 0.07, (z + 0.5) * cube_size)))
+			mm.set_instance_color(i, Color(0, 0, 0, 0))
+
+
+## Tint each overlay cell by the active element's painted density. No-op off BIOME.
+func _update_biome_overlay() -> void:
+	if _biome_overlay == null or _biome_overlay.multimesh == null:
+		return
+	var mm := _biome_overlay.multimesh
+	if mm.instance_count != _grid_w * _grid_d:
+		_resize_biome_overlay()
+	var el := _active_biome_element()
+	if _active_tab != "BIOME" or el == "":
+		for i in range(mm.instance_count):
+			mm.set_instance_color(i, Color(0, 0, 0, 0))
+		return
+	var col := _biome_color(el)
+	var field: PackedFloat32Array = _brush_fields.get(el, PackedFloat32Array())
+	for z in range(_grid_d):
+		for x in range(_grid_w):
+			var i := z * _grid_w + x
+			var v: float = field[i] if i < field.size() else 0.0
+			mm.set_instance_color(i, Color(col.r, col.g, col.b, v * 0.75))
+
+
+## Build paint_layers from the painted fields (mirrors the scrubber's payload:
+## one mode:"brush" layer per element, compact sparse mask), then live-rebuild the
+## biome on the real grid via GridSystem.repaint_biome. Degrades to a toast if the
+## grid system can't repaint (synthetic mode).
+func _biome_paint_layers() -> Array:
+	var out: Array = []
+	for el in _brush_fields:
+		var field: PackedFloat32Array = _brush_fields[el]
+		var layer := {
+			"element": str(el),
+			"mode": "brush",
+			"density": 1.0,
+			"brush": DistributionFieldLib.field_to_sparse(field, _grid_w, _grid_d),
+		}
+		if str(el) == "ground":
+			layer["height"] = 1.5
+		elif str(el) == "shader":
+			var c := _biome_color(str(el))
+			layer["color"] = [c.r, c.g, c.b]
+		out.append(layer)
+	return out
+
+
+func _repaint_biome_live() -> void:
+	var layers := _biome_paint_layers()
+	if _grid_system and _grid_system.has_method("repaint_biome"):
+		_grid_system.repaint_biome(layers)
+		_status_msg = "biome repainted (%d element field%s)" % [layers.size(), "" if layers.size() == 1 else "s"]
+	else:
+		_status_msg = "painted %d biome field%s — no live grid to repaint" % [_brush_fields.size(), "" if _brush_fields.size() == 1 else "s"]
+	_update_hud()
+
+
+## Sync the active brush radius/strength readouts (no-op placeholder for parity with
+## the scrubber; kept so HUD reads correctly right after load).
+func _sync_biome_size() -> void:
+	_brush_radius = clampi(_brush_radius, 0, 8)
+	_brush_strength = clampf(_brush_strength, 0.1, 1.0)
+
+
 # ── Undo / redo (snapshot heights + colors before each stroke) ────────
 func _snapshot() -> Dictionary:
 	# Heights: dense map of every column. Colors: the current modifier stack
@@ -792,6 +1264,27 @@ func _push_undo() -> void:
 	_redo_stack.clear()
 
 
+## ARTIFACTS edits also snapshot the interactables layer (data only). Restoring it
+## re-spawns the layer so undo brings back / clears the right cells. Same stack as
+## the structure undo — Ctrl+Z walks them in order.
+func _push_artifact_undo() -> void:
+	if not _editing_ready:
+		return
+	var snap := _snapshot()
+	snap["interactables"] = _dup_interactables()
+	_undo_stack.append(snap)
+	if _undo_stack.size() > UNDO_CAP:
+		_undo_stack.pop_front()
+	_redo_stack.clear()
+
+
+func _dup_interactables() -> Array:
+	var out: Array = []
+	for row in _interactables:
+		out.append((row as Array).duplicate())
+	return out
+
+
 func _restore(snap: Dictionary) -> void:
 	if _structure == null:
 		return
@@ -804,8 +1297,37 @@ func _restore(snap: Dictionary) -> void:
 	# Restore colors by replaying the snapshot's modifier stack on the real grid.
 	_modifier_stack = (snap.get("modifiers", []) as Array).duplicate(true)
 	_replay_modifiers()
+	# Restore the interactables layer + re-spawn, when the snapshot carried it.
+	if snap.has("interactables"):
+		_restore_interactables(snap["interactables"])
 	_position_hover_visuals()
 	_update_hud()
+
+
+## Re-apply a snapshotted interactables layer: clear all spawned objects, replace the
+## live layer, then spawn each non-empty cell back. Keeps data + scene in sync on undo.
+func _restore_interactables(rows) -> void:
+	if not (rows is Array):
+		return
+	# Despawn everything currently placed.
+	if _interactables_comp and ("interactable_objects" in _interactables_comp):
+		var objs: Dictionary = _interactables_comp.interactable_objects
+		for key in objs.keys():
+			var node = objs[key]
+			if is_instance_valid(node):
+				node.queue_free()
+		objs.clear()
+	# Replace the live layer (deep copy so the snapshot stays immutable).
+	_interactables = []
+	for row in rows:
+		_interactables.append((row as Array).duplicate())
+	# Re-spawn non-empty cells.
+	for z in range(_interactables.size()):
+		var row: Array = _interactables[z]
+		for x in range(row.size()):
+			var tok := str(row[x]).strip_edges()
+			if tok != "" and tok != " ":
+				_spawn_artifact(x, z, tok)
 
 
 ## Re-tint every cell touched by the current modifier stack (and reset others to
@@ -880,6 +1402,16 @@ func _save() -> void:
 		data["layers"] = {}
 	data["layers"]["structure"] = layout
 
+	# ARTIFACTS — write the interactables layer (placed artifacts). Only when the
+	# live layer holds at least one token, so a GRID-only edit never clobbers an
+	# existing interactables layer with blanks.
+	var inter_count := _write_interactables_layer(data)
+
+	# BIOME — merge the painted fields into top-level paint_layers[]: an authored
+	# element replaces its prior layer; other layers (and CLI/distribution ones the
+	# editor didn't touch) are preserved. Omitted entirely when nothing's painted.
+	var paint_count := _write_paint_layers(data)
+
 	# Persist the paint as the top-level modifiers op-stack (additive). Omit when
 	# empty so untouched maps stay diff-clean.
 	if not _modifier_stack.is_empty():
@@ -896,9 +1428,57 @@ func _save() -> void:
 	f.store_string(JSON.stringify(data, "\t") + "\n")
 	f.close()
 	_map_data = data
-	_status_msg = "✓ saved → repo  (%s · %d rows · %d mods)" % [_loaded_map, layout.size(), _modifier_stack.size()]
+	_status_msg = "✓ saved → repo  (%s · %d rows · %d mods · %d artifacts · %d paint)" % [
+		_loaded_map, layout.size(), _modifier_stack.size(), inter_count, paint_count]
 	_update_hud()
-	print("[grid-editor] saved %s (%d rows, %d modifiers)" % [_loaded_map, layout.size(), _modifier_stack.size()])
+	print("[grid-editor] saved %s (%d rows, %d modifiers, %d artifacts, %d paint layers)" % [
+		_loaded_map, layout.size(), _modifier_stack.size(), inter_count, paint_count])
+
+
+## Write the live interactables layer into data.layers.interactables, preserving the
+## existing layer when nothing has been placed. Returns the count of non-empty cells.
+func _write_interactables_layer(data: Dictionary) -> int:
+	var count := 0
+	var rows: Array = []
+	for z in range(_interactables.size()):
+		var src: Array = _interactables[z]
+		var row: Array = []
+		for x in range(src.size()):
+			var tok := str(src[x])
+			if tok.strip_edges() != "" and tok.strip_edges() != " ":
+				count += 1
+				row.append(tok)
+			else:
+				row.append(" ")
+		rows.append(row)
+	# A blank live layer should not erase a hand-authored interactables layer that
+	# the editor simply didn't touch (e.g. GRID-only session). Only write when we
+	# actually hold tokens, OR when there is no existing layer to protect.
+	var has_existing: bool = data.has("layers") and (data["layers"] is Dictionary) and bool(data["layers"].has("interactables"))
+	if count > 0 or not has_existing:
+		if not data.has("layers") or not (data["layers"] is Dictionary):
+			data["layers"] = {}
+		data["layers"]["interactables"] = rows
+	return count
+
+
+## Merge painted biome fields into top-level paint_layers[]. Authored elements
+## replace their existing layer; untouched layers are kept. Returns layers written.
+func _write_paint_layers(data: Dictionary) -> int:
+	var authored := _biome_paint_layers()
+	if authored.is_empty():
+		return 0
+	var authored_elements: Dictionary = {}
+	for layer in authored:
+		authored_elements[str(layer.get("element", ""))] = true
+	var existing: Array = data.get("paint_layers", []) if (data.get("paint_layers") is Array) else []
+	var kept: Array = []
+	for layer in existing:
+		if layer is Dictionary and not authored_elements.has(str(layer.get("element", ""))):
+			kept.append(layer)
+	kept.append_array(authored)
+	data["paint_layers"] = kept
+	return authored.size()
 
 
 # ── HUD refresh ─────────────────────────────────────────────────────────
@@ -906,19 +1486,37 @@ func _update_hud() -> void:
 	if _ctx_lbl == null:
 		return
 	var map_show := _loaded_map if _loaded_map != "" else "SYNTHETIC"
-	_ctx_lbl.text = "%s    ·    %d×%d    ·    maxH %d" % [map_show, _grid_w, _grid_d, _grid_max_h]
-	# Active tool line.
-	if _active_mode == TOOL_PAINT:
+	_ctx_lbl.text = "%s    ·    %d×%d    ·    maxH %d    ·    [%s]" % [map_show, _grid_w, _grid_d, _grid_max_h, _active_tab]
+	# Active tool line — per tab.
+	var save_hint := "   ·   W save→repo" if _loaded_map != "" else ""
+	if _active_tab == "ARTIFACTS":
+		var sel := _selected_artifact()
+		if _artifact_list.is_empty():
+			_tool_lbl.text = "ARTIFACTS · no map-ready artifacts in the catalog"
+			_tool_lbl.add_theme_color_override("font_color", C_BAD)
+		else:
+			_tool_lbl.text = "ARTIFACTS · %s   (%d/%d)" % [sel, _artifact_idx + 1, _artifact_list.size()]
+			_tool_lbl.add_theme_color_override("font_color", C_GOLD)
+		_controls_lbl.text = "PREV/NEXT cycle   ·   L-click place   ·   R-click remove   ·   R-drag orbit   ·   Tab panel%s" % save_hint
+	elif _active_tab == "BIOME":
+		var el := _active_biome_element()
+		if el == "":
+			_tool_lbl.text = "BIOME · pick an element to paint"
+			_tool_lbl.add_theme_color_override("font_color", C_DIM)
+		else:
+			_tool_lbl.text = "BIOME · %s   ·   radius %d   ·   pressure %.1f" % [el.to_upper(), _brush_radius, _brush_strength]
+			_tool_lbl.add_theme_color_override("font_color", _biome_color(el))
+		_controls_lbl.text = "L-drag paint   ·   Shift erase   ·   R-drag orbit   ·   element/size/pressure in panel   ·   Tab panel%s" % save_hint
+	elif _active_mode == TOOL_PAINT:
 		_tool_lbl.text = "PAINT · %s   ·   brush %dx%d   ·   #%s" % [
 			_active_paint_op.to_upper(), _active_brush_size, _active_brush_size, _active_color.to_html(false)]
 		_tool_lbl.add_theme_color_override("font_color", _active_color)
+		_controls_lbl.text = "L-drag apply   ·   R-drag orbit   ·   wheel zoom   ·   WASD/QE fly   ·   Ctrl+Z undo   ·   Tab panel%s" % save_hint
 	else:
 		_tool_lbl.text = "GRID · %s   ·   brush %dx%d   ·   level %d" % [
 			_active_grid_op.to_upper(), _active_brush_size, _active_brush_size, _active_level]
 		_tool_lbl.add_theme_color_override("font_color", C_TEXT)
-	# Controls footer.
-	var save_hint := "   ·   W save→repo" if _loaded_map != "" else ""
-	_controls_lbl.text = "L-drag apply   ·   R-drag orbit   ·   wheel zoom   ·   WASD/QE fly   ·   Ctrl+Z undo   ·   Tab panel%s" % save_hint
+		_controls_lbl.text = "L-drag apply   ·   R-drag orbit   ·   wheel zoom   ·   WASD/QE fly   ·   Ctrl+Z undo   ·   Tab panel%s" % save_hint
 	# Toast.
 	_toast_lbl.text = _status_msg
 
