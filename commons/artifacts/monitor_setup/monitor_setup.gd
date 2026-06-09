@@ -7,8 +7,11 @@ class_name MonitorSetup
 #   position, angle and CONTENT (title + body + type). The default board tells a small
 #   coherent story; an author swaps the content to tell their own. Blade Runner
 #   street-vendor energy meets a briefing wall: some screens carry real readable text
-#   (info), some keep the old neon-poster look (poster), some show a procedural readout
-#   (data). Cables drape between the screens and the base.
+#   (info — styled as a CRT TERMINAL: phosphor-green monospace on a near-black tube, with
+#   a prompt header, faint scanlines and a blinking cursor), some keep the old neon-poster
+#   look (poster), some show a procedural readout (data), and some render a glowing
+#   POINT-CLOUD scatter drifting toward a bright central point (points). Cables drape
+#   between the screens and the base.
 # desire: a lab needs a corner that BROADCASTS A NARRATIVE — not a single nameplate
 #   (info_screen does that) but a CLUSTER of competing, authorable signals. A wall where
 #   the content is data, so a map/registry/delegate can pour a story into the rig.
@@ -16,9 +19,11 @@ class_name MonitorSetup
 #   what TYPE each is, and how hard they glow (screen_emission). Swap the array, swap the
 #   whole story; the rig vocabulary (desk/tower/keyboard/pole/cables) stays constant.
 # triggers: _ready() builds the desk/tower/keyboard, the clamp-pole sized to span the
-#   configured screens, and one panel per `screens` entry (info=Label3D text, poster=neon
-#   texture, data=graph texture), plus draping cables. apply_grid_config() reads a whole
-#   `screens` array (CONTENT INPUT) + theme/scale/screen_count and rebuilds.
+#   configured screens, and one panel per `screens` entry (info=Label3D terminal text,
+#   poster=neon texture, data=graph texture, points=MultiMesh scatter field), plus draping
+#   cables. _process() blinks the terminal cursors and drifts the point fields.
+#   apply_grid_config() reads a whole `screens` array (CONTENT INPUT) + theme/scale/
+#   screen_count and rebuilds.
 # emerges: the room gains a watcher that can TELL. The player reads a sequence across the
 #   panels — a small narrative staged in light. Mediated presence as an authorable stack.
 # needs: a floor to stand on (origin at the desk base, rig grows +Y); a viewer roughly on
@@ -32,8 +37,9 @@ class_name MonitorSetup
 ## A CONFIGURABLE INFO BOARD built as a cyberpunk screen-rig. A clamp-pole of panels
 ## rises from a desk with a vented tower + keyboard; EACH panel's size, position, angle
 ## and CONTENT (title + body + type) is data-driven via the `screens` array, so an author
-## can make the board tell a story. Panel types: "info" (Label3D title+body), "poster"
-## (procedural neon texture), "data" (procedural graph texture). Cables drape to the base.
+## can make the board tell a story. Panel types: "info" (Label3D title+body, CRT-terminal
+## styled when terminal_style is on), "poster" (procedural neon texture), "data" (procedural
+## graph texture), "points" (glowing MultiMesh scatter field). Cables drape to the base.
 ##
 ## All procedural. Origin sits at the desk base; the rig grows upward in +Y and the
 ## panels face roughly +Z. Re-entrant: apply_grid_config() rebuilds from scratch.
@@ -43,6 +49,10 @@ class_name MonitorSetup
 @export_group("Toggles")
 @export var show_cables: bool = true
 @export var screen_glow: bool = true
+## CRT TERMINAL aesthetic on info screens: near-black phosphor backing, monospace
+## phosphor-green/amber/cyan text, a prompt-style header, faint scanlines and a blinking
+## cursor. Turn OFF for the old flat-panel info look (light text on accent-tinted dark).
+@export var terminal_style: bool = true
 
 @export_group("Glow")
 @export_range(0.0, 4.0) var screen_emission: float = 1.3
@@ -58,7 +68,13 @@ class_name MonitorSetup
 #   {
 #     "title":     String,            # big headline (info type), short
 #     "body":      String,            # multi-line body; "\n"-separated lines
-#     "type":      "info"|"poster"|"data",
+#     "type":      "info"|"poster"|"data"|"points",
+#                                     # "info" = readable Label3D text (CRT terminal when
+#                                     #   terminal_style is on); "poster" = neon texture;
+#                                     # "data" = procedural graph; "points" = a glowing
+#                                     #   POINT-CLOUD / scatter field (MultiMesh) drifting
+#                                     #   toward a brighter central point — a data-viz panel
+#                                     #   evoking the project's "point" reduction idea.
 #     "size":      Vector2,           # panel face size in metres (w × h)
 #     "pos":       Vector3,           # local offset on the rig (metres)
 #     "angle_deg": float,             # yaw around Y
@@ -100,11 +116,15 @@ class_name MonitorSetup
 # The screens are laid out top→down / left→right so reading order matches page order:
 #   md_page 0 → top-centre        md_page 1 → upper-left
 #   md_page 2 → upper-right       md_page 3 → mid-left
-# A procedural TELEMETRY (data) screen and a SECURITY-BREACH poster ride the base for
+# A POINT FIELD (points) scatter screen and a SECURITY-BREACH poster ride the base for
 # variety, but the BOARD ITSELF IS THE DOCUMENT. Override the whole array via
 # apply_grid_config() or the inspector to spread ANY res:// .md across ANY screens
 # (set "md" + "md_page" 0,1,2,… and "lines" as the per-screen page size).
 const DEFAULT_DOC: String = "res://doc/ENTRY.md"
+
+# Monospace terminal font (JetBrains Mono) for the CRT look. Preloaded once; assigned to
+# every Label3D when terminal_style is on. Falls back to the engine default if absent.
+const MONO_FONT_PATH: String = "res://commons/font/JetBrainsMono-Medium.ttf"
 @export var screens: Array = [
 	{
 		# PAGE 0 — top-centre. The document's real H1 title + its first body chunk.
@@ -167,15 +187,16 @@ const DEFAULT_DOC: String = "res://doc/ENTRY.md"
 		"mount": "pole",
 	},
 	{
-		# Procedural telemetry — variety on the base, not part of the document.
-		"title": "TELEMETRY",
-		"body": "live signal — sector 4",
-		"type": "data",
+		# POINT FIELD — a glowing scatter drifting toward a brighter central point. Not part
+		# of the document; a data-viz panel echoing the project's "point" reduction idea.
+		"title": "POINT FIELD",
+		"body": "reduction",
+		"type": "points",
 		"size": Vector2(0.46, 0.28),
 		"pos": Vector3(0.4, 1.16, 0.06),
 		"angle_deg": -16.0,
 		"pitch_deg": 4.0,
-		"color": Color(0.2, 1.0, 0.5),
+		"color": Color(0.35, 1.0, 0.45),
 		"mount": "base",
 	},
 	{
@@ -215,6 +236,25 @@ var _metal_mat: StandardMaterial3D
 var _dark_mat: StandardMaterial3D
 var _cable_mat: StandardMaterial3D
 
+# Monospace terminal font, loaded once at build. null = file missing → engine default font
+# (terminal colours still apply). See _ensure_mono_font().
+var _mono_font: Font = null
+var _mono_checked: bool = false
+
+# ── Terminal animation state (driven by _process) ─────────────────────
+# Blinking cursors: the bright block at the end of each terminal screen's last line. Toggled
+# visible at ~1.5 Hz. Collected here so _process can blink them all cheaply.
+var _cursors: Array = []          # Array[MeshInstance3D]
+var _cursor_on: bool = true
+var _blink_accum: float = 0.0
+const BLINK_PERIOD: float = 0.66  # seconds per on/off phase (~1.5 Hz)
+
+# Point-field MultiMeshes: one per "points" screen, with the base local layout cached so we
+# can jitter a few points each frame without re-seeding the whole field.
+# Each entry: { "mm": MultiMesh, "base": PackedVector3Array, "count": int, "rng_seed": int }
+var _point_fields: Array = []
+var _points_time: float = 0.0
+
 # Parsed-markdown cache. Keyed by res:// path → a Dictionary:
 #   { "title": String, "lines": PackedStringArray (all cleaned body lines) }
 # Each .md is read + cleaned ONCE per build; every screen that paginates the same doc
@@ -225,6 +265,22 @@ var _md_cache: Dictionary = {}
 
 func _ready() -> void:
 	_build_all()
+
+
+func _process(delta: float) -> void:
+	# Cheap per-frame terminal life: blink the cursors and gently animate the point fields.
+	# Both no-op when their arrays are empty (terminal_style off / no points screens).
+	if not _cursors.is_empty():
+		_blink_accum += delta
+		if _blink_accum >= BLINK_PERIOD:
+			_blink_accum -= BLINK_PERIOD
+			_cursor_on = not _cursor_on
+			for c in _cursors:
+				if is_instance_valid(c):
+					(c as MeshInstance3D).visible = _cursor_on
+	if not _point_fields.is_empty():
+		_points_time += delta
+		_animate_point_fields()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -354,7 +410,7 @@ func _coerce_screen(entry: Dictionary) -> Dictionary:
 	out["title"] = str(entry.get("title", ""))
 	out["body"] = str(entry.get("body", ""))
 	var t: String = str(entry.get("type", "info")).strip_edges().to_lower()
-	if t != "poster" and t != "data" and t != "info":
+	if t != "poster" and t != "data" and t != "info" and t != "points":
 		t = "info"
 	out["type"] = t
 	out["size"] = _to_vec2(entry.get("size", null), Vector2(0.45, 0.3))
@@ -801,6 +857,9 @@ func _path_stem(path: String) -> String:
 func _build_all() -> void:
 	_built = true
 	_md_cache.clear()  # fresh parse per build so the board reflects current file state
+	_cursors.clear()       # animation refs point at freed nodes after a rebuild — drop them
+	_point_fields.clear()
+	_ensure_mono_font()
 	_build_shared_materials()
 	_build_desk_base()
 	_build_tower()
@@ -1084,8 +1143,10 @@ func _build_one_screen(index: int, s: Dictionary) -> void:
 		_build_face_textured(root, size, _make_poster_texture(accent, s["title"]))
 	elif stype == "data":
 		_build_face_textured(root, size, _make_data_texture(accent))
+	elif stype == "points":
+		_build_face_points(root, index, size, accent, s["title"])
 	else:
-		_build_face_info(root, size, s["title"], s["body"], accent)
+		_build_face_info(root, index, size, s["title"], s["body"], accent)
 
 	# Mount hardware: clamp arm to the pole, or a stand neck to the base.
 	if mount == "base":
@@ -1094,18 +1155,31 @@ func _build_one_screen(index: int, s: Dictionary) -> void:
 		_build_clamp_arm(root, pos)
 
 
-func _build_face_info(root: Node3D, size: Vector2, title: String, body: String, accent: Color) -> void:
+func _build_face_info(root: Node3D, index: int, size: Vector2, title: String, body: String, accent: Color) -> void:
+	# CRT TERMINAL look (terminal_style on) or the old flat info panel (off). Terminal mode:
+	# near-black phosphor tube, monospace phosphor text, prompt-style header, left-aligned
+	# with a tiny margin, scanline overlay + a blinking cursor at the last line's end.
+	var term: bool = terminal_style
+	var phos: Dictionary = _phosphor_for(accent)
+
 	# Emissive backing colour (the info-board glow) PLUS real readable Label3D text.
 	var face := MeshInstance3D.new()
 	face.name = "Face"
 	var qm := QuadMesh.new()
 	qm.size = size
 	face.mesh = qm
-	# Dark, slightly accent-tinted backing so light text reads on it.
+	# Terminal: dim glowing phosphor tube (very dark). Flat: accent-tinted dark backing.
 	var bg: Color = Color(0.04, 0.05, 0.07).lerp(accent, 0.18)
-	face.material_override = _make_emissive_color_mat(bg, _glow_energy() * 0.5)
+	if term:
+		bg = phos["bg"]
+	var bg_energy: float = _glow_energy() * (0.35 if term else 0.5)
+	face.material_override = _make_emissive_color_mat(bg, bg_energy)
 	face.position = Vector3(0.0, 0.0, 0.013)
 	root.add_child(face)
+
+	# Scanline overlay (terminal only): faint dark horizontal rows in front of the tube.
+	if term:
+		_add_scanlines(root, size)
 
 	# Text sits just in front of the panel face; billboard OFF so it stays planar.
 	var text_root := Node3D.new()
@@ -1113,9 +1187,14 @@ func _build_face_info(root: Node3D, size: Vector2, title: String, body: String, 
 	text_root.position = Vector3(0.0, 0.0, 0.018)
 	root.add_child(text_root)
 
+	# Terminal header: a prompt/path line built from the title (short). Flat: the title as-is.
+	var header: String = title
+	if term and title.strip_edges() != "":
+		header = "block9:~$ " + title.strip_edges()
+
 	# Body lines from "\n"-separated body string.
 	var lines: PackedStringArray = body.split("\n", false)
-	var has_title: bool = title.strip_edges() != ""
+	var has_title: bool = header.strip_edges() != ""
 
 	# Font sizing scaled to panel height so text fits varied sizes.
 	var title_font: int = maxi(9, int(round(size.y * 128.0)))
@@ -1136,48 +1215,133 @@ func _build_face_info(root: Node3D, size: Vector2, title: String, body: String, 
 	total_h += body_step * float(lines.size())
 	var cursor_y: float = total_h * 0.5
 
-	# Title accent: bright accent; body: soft near-white tinted by accent.
+	# Terminal: phosphor header + slightly dimmer phosphor body, left-aligned with a margin.
+	# Flat: bright accent title + soft near-white body, centred.
 	var title_col: Color = accent.lerp(Color(1, 1, 1), 0.25)
 	var body_col: Color = Color(0.92, 0.95, 0.98).lerp(accent, 0.15)
+	if term:
+		title_col = (phos["text"] as Color).lerp(Color(1, 1, 1), 0.15)
+		body_col = (phos["text"] as Color) * 0.82
+		body_col.a = 1.0
+	var h_align: int = HORIZONTAL_ALIGNMENT_LEFT if term else HORIZONTAL_ALIGNMENT_CENTER
+	# Terminal: left-justify all lines to a SHARED left edge by giving each Label3D a fixed
+	# pixel `width` box (centred on the node at x=0) and aligning LEFT inside it — so a tiny
+	# left margin appears and lines don't centre individually. Flat: no width box, centred.
+	var text_w_world: float = size.x * 0.88
+	var label_width_px: float = text_w_world / TEXT_PIXEL_SIZE  # Label3D width is in pixels
+
 	# Char budgets so each line fills the panel WIDTH without wrapping (char ≈ 0.58·height).
-	var title_chars: int = maxi(4, int(size.x / (float(title_font) * TEXT_PIXEL_SIZE * 0.62)))
-	var body_chars: int = maxi(6, int(size.x / (float(body_font) * TEXT_PIXEL_SIZE * 0.56)))
+	# Terminal text is left-aligned within a margin box, so it has slightly less usable width.
+	var width_frac: float = 0.86 if term else 1.0
+	var title_chars: int = maxi(4, int(size.x * width_frac / (float(title_font) * TEXT_PIXEL_SIZE * 0.62)))
+	var body_chars: int = maxi(6, int(size.x * width_frac / (float(body_font) * TEXT_PIXEL_SIZE * 0.56)))
 
 	if has_title:
-		var head := Label3D.new()
-		head.name = "Title"
-		head.text = _fit_text(title, title_chars)
-		head.font_size = title_font
-		head.outline_size = 2
-		head.pixel_size = TEXT_PIXEL_SIZE
-		head.modulate = title_col
-		head.outline_modulate = Color(0, 0, 0, 0.9)
-		head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		head.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		head.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-		head.no_depth_test = true
-		head.autowrap_mode = TextServer.AUTOWRAP_OFF
+		var head: Label3D = _new_term_label("Title", _fit_text(header, title_chars), title_font, 2, title_col, h_align, term, label_width_px)
 		head.position = Vector3(0.0, cursor_y - title_step * 0.5, 0.0)
 		text_root.add_child(head)
 		cursor_y -= title_step
 
+	# Track the last body line's geometry so the blinking cursor sits at its end.
+	var last_line_y: float = cursor_y - body_step * 0.5
+	var last_line_chars: int = 0
 	for i in lines.size():
-		var line := Label3D.new()
-		line.name = "Body%d" % i
-		line.text = _fit_text(str(lines[i]), body_chars)
-		line.font_size = body_font
-		line.outline_size = 1
-		line.pixel_size = TEXT_PIXEL_SIZE
-		line.modulate = body_col
-		line.outline_modulate = Color(0, 0, 0, 0.9)
-		line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		line.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		line.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-		line.no_depth_test = true
-		line.autowrap_mode = TextServer.AUTOWRAP_OFF
-		line.position = Vector3(0.0, cursor_y - body_step * 0.5, 0.0)
+		var line: Label3D = _new_term_label("Body%d" % i, _fit_text(str(lines[i]), body_chars), body_font, 1, body_col, h_align, term, label_width_px)
+		last_line_y = cursor_y - body_step * 0.5
+		line.position = Vector3(0.0, last_line_y, 0.0)
+		last_line_chars = line.text.length()
 		text_root.add_child(line)
 		cursor_y -= body_step
+
+	# Blinking cursor (terminal only): a bright phosphor block just after the last line.
+	# The text box's left edge sits at -text_w_world*0.5; the cursor advances from there.
+	if term:
+		_add_terminal_cursor(text_root, size, body_font, body_step, last_line_y, last_line_chars, -text_w_world * 0.5, phos["text"])
+
+
+## Build a Label3D with the terminal/flat shared settings. Applies the monospace font when
+## terminal_style is on and the font loaded; otherwise the engine default font is used. In
+## terminal mode a fixed pixel `width` box + LEFT alignment justify every line to a shared
+## left edge (the box is centred on the node); flat mode leaves width unset so it centres.
+func _new_term_label(node_name: String, content: String, fsize: int, outline: int, col: Color, h_align: int, term: bool, width_px: float) -> Label3D:
+	var lbl := Label3D.new()
+	lbl.name = node_name
+	lbl.text = content
+	lbl.font_size = fsize
+	lbl.outline_size = outline
+	lbl.pixel_size = TEXT_PIXEL_SIZE
+	lbl.modulate = col
+	lbl.outline_modulate = Color(0, 0, 0, 0.9)
+	lbl.horizontal_alignment = h_align
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	lbl.no_depth_test = true
+	lbl.autowrap_mode = TextServer.AUTOWRAP_OFF
+	if term:
+		# A fixed width box gives the lines a shared left edge; we already truncate to fit,
+		# so wrapping stays off and text never spills past the box.
+		lbl.width = width_px
+		if _mono_font != null:
+			lbl.font = _mono_font
+	return lbl
+
+
+## A small bright phosphor block at the end of the terminal's last line. Registered in
+## _cursors so _process can blink it at ~1.5 Hz. Width ≈ one monospace cell.
+func _add_terminal_cursor(text_root: Node3D, size: Vector2, body_font: int, body_step: float, line_y: float, line_chars: int, left_margin: float, glow: Color) -> void:
+	var cell_w: float = float(body_font) * TEXT_PIXEL_SIZE * 0.56  # ≈ one mono char width
+	var cur_w: float = cell_w * 0.85
+	var cur_h: float = body_step * 0.62
+	var cursor := MeshInstance3D.new()
+	cursor.name = "Cursor"
+	var qm := QuadMesh.new()
+	qm.size = Vector2(cur_w, cur_h)
+	cursor.mesh = qm
+	cursor.material_override = _make_emissive_color_mat(glow.lerp(Color(1, 1, 1), 0.2), _glow_energy() * 1.2)
+	# Sit just after the last line's text (left margin + line width + a small gap), clamped
+	# so a long line keeps the cursor inside the panel.
+	var line_w: float = float(line_chars) * cell_w
+	var cx: float = left_margin + line_w + cell_w * 0.5
+	var max_x: float = size.x * 0.5 - cur_w * 0.5
+	cx = clampf(cx, left_margin, max_x)
+	cursor.position = Vector3(cx, line_y, 0.001)
+	cursor.visible = _cursor_on
+	text_root.add_child(cursor)
+	_cursors.append(cursor)
+
+
+## A faint scanline overlay: a procedural ImageTexture of alternating dark rows drawn on a
+## transparent quad slightly in front of the tube. Subtle — keeps the text legible.
+func _add_scanlines(root: Node3D, size: Vector2) -> void:
+	var quad := MeshInstance3D.new()
+	quad.name = "Scanlines"
+	var qm := QuadMesh.new()
+	qm.size = size
+	quad.mesh = qm
+	quad.material_override = _make_scanline_material()
+	quad.position = Vector3(0.0, 0.0, 0.0205)  # in front of face (0.013) and text (0.018)
+	root.add_child(quad)
+
+
+func _make_scanline_material() -> StandardMaterial3D:
+	# A tall 1×N stripe texture: every other row a low-alpha dark line, rest transparent.
+	var rows: int = 64
+	var img := Image.create(2, rows, false, Image.FORMAT_RGBA8)
+	var dark := Color(0.0, 0.0, 0.0, 0.28)
+	var clear := Color(0.0, 0.0, 0.0, 0.0)
+	for y in rows:
+		var col: Color = dark if (y % 2 == 0) else clear
+		img.set_pixel(0, y, col)
+		img.set_pixel(1, y, col)
+	var tex := ImageTexture.create_from_image(img)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_texture = tex
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	mat.no_depth_test = false
+	return mat
 
 
 ## Truncate `s` to at most `max_chars`, adding an ellipsis if cut, so a line fills the
@@ -1197,6 +1361,166 @@ func _build_face_textured(root: Node3D, size: Vector2, tex: ImageTexture) -> voi
 	face.material_override = _make_screen_material(tex)
 	face.position = Vector3(0.0, 0.0, 0.013)
 	root.add_child(face)
+
+
+# ── "points" type — glowing point-cloud / scatter field (MultiMesh) ────
+# A dark tube backing + a field of dozens of tiny emissive quads scattered in the panel
+# plane and a shallow volume just in front of it, seeded by a fixed RNG so the layout is
+# stable across rebuilds. The points cluster/drift toward a brighter CENTRAL point. A faint
+# wireframe frame and a small phosphor title ("POINT FIELD" / "REDUCTION") label it. The
+# field is registered in _point_fields so _process can pulse/jitter it cheaply.
+func _build_face_points(root: Node3D, index: int, size: Vector2, accent: Color, title: String) -> void:
+	# Dark glowing tube backing (matches the terminal look).
+	var phos: Dictionary = _phosphor_for(accent)
+	var glow: Color = phos["text"]
+	var back := MeshInstance3D.new()
+	back.name = "Face"
+	var qm := QuadMesh.new()
+	qm.size = size
+	back.mesh = qm
+	back.material_override = _make_emissive_color_mat(phos["bg"], _glow_energy() * 0.3)
+	back.position = Vector3(0.0, 0.0, 0.013)
+	root.add_child(back)
+
+	# Faint wireframe frame: four thin emissive bars around the panel rect.
+	_add_points_frame(root, size, glow * 0.6)
+
+	# The point field MultiMesh — tiny emissive quads, dozens of them.
+	var count: int = 96
+	var rng := RandomNumberGenerator.new()
+	var seed_val: int = 13577 + index * 911     # fixed per screen → stable layout
+	rng.seed = seed_val
+
+	var mesh := QuadMesh.new()
+	var dot: float = clampf(minf(size.x, size.y) * 0.022, 0.004, 0.012)
+	mesh.size = Vector2(dot, dot)
+	var pmat := StandardMaterial3D.new()
+	# Per-instance colour carries each point's brightness (centre bright, rim dim). Unshaded
+	# so the colour shows directly; a modest emission keeps every point glowing as phosphor.
+	pmat.albedo_color = Color(1, 1, 1)
+	pmat.vertex_color_use_as_albedo = true
+	pmat.emission_enabled = true
+	pmat.emission = glow
+	pmat.emission_energy_multiplier = _glow_energy() * 0.9
+	pmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	pmat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mesh.material = pmat
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = mesh
+	mm.instance_count = count
+
+	# Half-extents of the scatter region (a little inside the panel rect), and the shallow
+	# depth in front of the face that the volume occupies.
+	var hx: float = size.x * 0.42
+	var hy: float = size.y * 0.40
+	var depth: float = 0.03
+	var base_pts := PackedVector3Array()
+	base_pts.resize(count)
+
+	for i in count:
+		var p: Vector3
+		var col: Color
+		if i == 0:
+			# The bright CENTRAL point the field clusters toward.
+			p = Vector3(0.0, 0.0, 0.016 + depth * 0.6)
+			col = glow.lerp(Color(1, 1, 1), 0.55)
+		else:
+			# Scatter biased toward the centre (square the radius factor → denser core).
+			var ang: float = rng.randf() * TAU
+			var rad: float = pow(rng.randf(), 0.65)
+			var px: float = cos(ang) * rad * hx
+			var py: float = sin(ang) * rad * hy
+			var pz: float = 0.015 + rng.randf() * depth
+			p = Vector3(px, py, pz)
+			# Brighter near the centre, dimmer at the rim.
+			var bright: float = 1.0 - rad * 0.55
+			col = glow * clampf(bright, 0.35, 1.0)
+			col.a = 1.0
+		base_pts[i] = p
+		var basis := Basis().scaled(Vector3.ONE if i != 0 else Vector3(1.6, 1.6, 1.6))
+		mm.set_instance_transform(i, Transform3D(basis, p))
+		mm.set_instance_color(i, col)
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "PointField"
+	mmi.multimesh = mm
+	root.add_child(mmi)
+
+	_point_fields.append({"mm": mm, "base": base_pts, "count": count, "seed": seed_val})
+
+	# Small phosphor label naming the viz.
+	var label_text: String = title.strip_edges()
+	if label_text == "":
+		label_text = "POINT FIELD"
+	var lbl := Label3D.new()
+	lbl.name = "PointsLabel"
+	lbl.text = label_text
+	lbl.font_size = maxi(7, int(round(size.y * 60.0)))
+	lbl.outline_size = 1
+	lbl.pixel_size = TEXT_PIXEL_SIZE
+	lbl.modulate = glow.lerp(Color(1, 1, 1), 0.2)
+	lbl.outline_modulate = Color(0, 0, 0, 0.9)
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	lbl.no_depth_test = true
+	lbl.autowrap_mode = TextServer.AUTOWRAP_OFF
+	if terminal_style and _mono_font != null:
+		lbl.font = _mono_font
+	lbl.position = Vector3(0.0, -size.y * 0.5 + size.y * 0.10, 0.02)
+	root.add_child(lbl)
+
+
+# Four thin emissive bars framing the panel rect (a faint wireframe for the scatter).
+func _add_points_frame(root: Node3D, size: Vector2, col: Color) -> void:
+	var t: float = 0.004
+	var mat: StandardMaterial3D = _make_emissive_color_mat(col, _glow_energy() * 0.8)
+	var specs: Array = [
+		[Vector3(0.0, size.y * 0.5, 0.014), Vector2(size.x, t)],   # top
+		[Vector3(0.0, -size.y * 0.5, 0.014), Vector2(size.x, t)],  # bottom
+		[Vector3(-size.x * 0.5, 0.0, 0.014), Vector2(t, size.y)],  # left
+		[Vector3(size.x * 0.5, 0.0, 0.014), Vector2(t, size.y)],   # right
+	]
+	for i in specs.size():
+		var bar := MeshInstance3D.new()
+		bar.name = "Frame%d" % i
+		var qm := QuadMesh.new()
+		qm.size = specs[i][1]
+		bar.mesh = qm
+		bar.material_override = mat
+		bar.position = specs[i][0]
+		root.add_child(bar)
+
+
+# Gentle per-frame life for every point field: pulse the whole field's scale a touch and
+# jitter a handful of points each frame (cheap — only a few instances rewritten). Stable
+# because each field re-derives its jitter from its own seed + a slow time phase.
+func _animate_point_fields() -> void:
+	var pulse: float = 1.0 + 0.06 * sin(_points_time * 2.2)
+	for field in _point_fields:
+		var mm = field.get("mm", null)
+		if not (mm is MultiMesh):
+			continue
+		var base: PackedVector3Array = field["base"]
+		var count: int = int(field["count"])
+		# Jitter up to ~10 points this frame, chosen by a rolling window over time.
+		var jitter_n: int = mini(10, maxi(0, count - 1))
+		var start_idx: int = 1 + (int(_points_time * 8.0) % maxi(1, count - 1))
+		for k in jitter_n:
+			var i: int = 1 + ((start_idx + k) % maxi(1, count - 1))
+			var bp: Vector3 = base[i]
+			var ph: float = float(i) * 1.7 + _points_time * 1.5
+			var jx: float = sin(ph) * 0.0025
+			var jy: float = cos(ph * 1.3) * 0.0025
+			var sc: Vector3 = Vector3(pulse, pulse, 1.0)
+			var b := Basis().scaled(sc)
+			mm.set_instance_transform(i, Transform3D(b, bp + Vector3(jx, jy, 0.0)))
+		# Pulse the central point's scale a little more so it breathes.
+		var cb := Basis().scaled(Vector3(1.6 * pulse, 1.6 * pulse, 1.0))
+		mm.set_instance_transform(0, Transform3D(cb, base[0]))
 
 
 func _build_clamp_arm(root: Node3D, pos: Vector3) -> void:
@@ -1308,6 +1632,44 @@ func _glow_energy() -> float:
 	if screen_glow:
 		return screen_emission
 	return 0.0
+
+
+# Load the monospace terminal font once (lazy, cached). Leaves _mono_font null if the file
+# is missing — terminal text then uses the engine default font but keeps the phosphor look.
+func _ensure_mono_font() -> void:
+	if _mono_checked:
+		return
+	_mono_checked = true
+	if ResourceLoader.exists(MONO_FONT_PATH):
+		var res = load(MONO_FONT_PATH)
+		if res is Font:
+			_mono_font = res
+
+
+# ── Terminal phosphor palette ─────────────────────────────────────────
+# Map a screen's accent `color` to a CRT phosphor variant. The accent's HUE picks the tube:
+# greens → phosphor GREEN (default), warm reds/oranges/yellows → AMBER, blues/cyans → CYAN.
+# Returns { "text": bright phosphor text colour, "bg": near-black glowing tube colour }.
+func _phosphor_for(accent: Color) -> Dictionary:
+	var green: Color = Color(0.35, 1.0, 0.45)
+	var amber: Color = Color(1.0, 0.72, 0.22)
+	var cyan: Color = Color(0.3, 0.95, 1.0)
+	var text: Color = green
+	var bg: Color = Color(0.02, 0.045, 0.03)        # dark green-black tube by default
+	# Use hue only when the accent is colourful enough to read as a deliberate choice.
+	var h: float = accent.h
+	var s: float = accent.s
+	if s > 0.18:
+		if h >= 0.5 and h <= 0.72:
+			# Blue/cyan band → cyan phosphor on a dark blue-black tube.
+			text = cyan
+			bg = Color(0.02, 0.035, 0.05)
+		elif h < 0.12 or h > 0.92 or (h >= 0.06 and h <= 0.18):
+			# Reds / oranges / yellows → amber phosphor on a dark amber-black tube.
+			text = amber
+			bg = Color(0.05, 0.03, 0.012)
+		# else: greens (and everything else) keep the default green phosphor.
+	return {"text": text, "bg": bg}
 
 
 func _make_emissive_mat(color: Color, energy: float) -> StandardMaterial3D:
