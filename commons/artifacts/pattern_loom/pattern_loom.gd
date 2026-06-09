@@ -40,6 +40,10 @@ const PatternSim = preload("res://commons/pattern_grammar/pattern_sim.gd")
 @export var loom_style: String = "roller"
 ## Fill density of the source motif.
 @export var density: float = 0.55
+## When true, a reachable VR console runs out from the loom with live pattern-maker
+## controls (group/palette/density/seed + preview). Default false keeps every
+## existing loom variant pixel-identical.
+@export var interactive: bool = false
 
 @export_group("Machine")
 @export var frame_color: Color = Color(0.12, 0.12, 0.15)
@@ -58,10 +62,33 @@ var _warp_mats: Array[StandardMaterial3D] = []
 var _spinners: Array = []          # [{node, axis, speed}] — drum/roller/disc rotation
 var _elapsed: float = 0.0
 
+# ── Interactive console state ──────────────────────────────────────────
+const GROUP_NAMES: Array = [
+	"p1", "p2", "pm", "pg", "cm", "pmm", "pmg", "pgg", "cmm",
+	"p4", "p4m", "p4g", "p3", "p3m1", "p31m", "p6", "p6m",
+]
+const PALETTE_NAMES: Array = [
+	"bauhaus", "escher", "alhambra", "tatami",
+	"pastel", "memphis", "persian", "monochrome",
+]
+const SEED_MAX: int = 40           # SEED slider runs 0..SEED_MAX (integer-stepped)
+
+var PUSH_BUTTON: PackedScene        # loaded in _ready (may be null headless)
+var SLIDER_H: PackedScene
+var _group_index: int = 10          # index into GROUP_NAMES
+var _palette_index: int = 2         # index into PALETTE_NAMES
+var _preview_mat: StandardMaterial3D
+var _group_label: Label3D
+var _palette_label: Label3D
+var _seed_label: Label3D
+var _density_slider: Node          # SliderHorizontal instance (or null)
+var _seed_slider: Node             # SliderHorizontal instance (or null)
+
 
 func _ready() -> void:
 	_read_overrides()
-	_gen_texture()
+	_sync_indices()
+	_render_pattern()
 	match loom_style:
 		"warp":     _build_warp()
 		"mirror":   _build_mirror()
@@ -69,6 +96,8 @@ func _ready() -> void:
 		"bolt":     _build_bolt()
 		"fountain": _build_fountain()
 		_:          _build_roller()
+	if interactive:
+		_build_console()
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
@@ -77,8 +106,15 @@ func apply_grid_config(cfg: Dictionary) -> void:
 	if cfg.has("motif_seed"): motif_seed = int(cfg["motif_seed"])
 	if cfg.has("loom_style"): loom_style = str(cfg["loom_style"])
 	if cfg.has("density"): density = float(cfg["density"])
+	if cfg.has("interactive"): interactive = _to_bool(cfg["interactive"])
+	if cfg.has("scale"):
+		var s: float = float(cfg["scale"])
+		if s > 0.0: scale = Vector3.ONE * s
 	for c in get_children(): c.queue_free()
 	_weave_mats.clear(); _warp_mats.clear(); _spinners.clear()
+	_preview_mat = null; _carpet_mat = null
+	_group_label = null; _palette_label = null; _seed_label = null
+	_density_slider = null; _seed_slider = null
 	call_deferred("_ready")
 
 
@@ -86,17 +122,48 @@ func _read_overrides() -> void:
 	for k in ["group", "palette", "loom_style"]:
 		if has_meta("config_%s" % k): set(k, str(get_meta("config_%s" % k)))
 	if has_meta("config_motif_seed"): motif_seed = int(str(get_meta("config_motif_seed")))
+	if has_meta("config_density"): density = float(str(get_meta("config_density")))
+	if has_meta("config_interactive"): interactive = _to_bool(get_meta("config_interactive"))
+
+
+## Coerce a config value (bool / int / string "true"/"1") to bool.
+func _to_bool(v: Variant) -> bool:
+	if v is bool: return bool(v)
+	if v is int or v is float: return float(v) != 0.0
+	if v is String:
+		var s: String = (v as String).strip_edges().to_lower()
+		return s == "true" or s == "1" or s == "yes"
+	return false
+
+
+## Keep the cycling indices in step with the current group/palette strings.
+func _sync_indices() -> void:
+	var gi: int = GROUP_NAMES.find(group.to_lower())
+	_group_index = gi if gi >= 0 else 10            # default p4m
+	group = GROUP_NAMES[_group_index]
+	var pi: int = PALETTE_NAMES.find(palette.to_lower())
+	_palette_index = pi if pi >= 0 else 2           # default alhambra
+	palette = PALETTE_NAMES[_palette_index]
+	density = clampf(density, 0.1, 0.95)
+	motif_seed = clampi(motif_seed, 0, SEED_MAX)
 
 
 # ── Wallpaper texture ──────────────────────────────────────────────────
 
-func _gen_texture() -> void:
+## Reusable render: rebuild the wallpaper Image from the current DNA and feed it
+## into the SHARED ImageTexture. Every carpet/banner/drum/preview material points
+## at _carpet_tex, so updating it in place re-textures the whole machine live.
+## Called once at build time and again on every console control change.
+func _render_pattern() -> void:
 	var cfg := {
 		"group": group, "palette": palette, "motif_seed": motif_seed,
 		"tile_size": 16, "canvas_size": 256, "density": density,
 	}
 	var img: Image = PatternSim.render_to_image(cfg)
-	_carpet_tex = ImageTexture.create_from_image(img)
+	if _carpet_tex:
+		_carpet_tex.update(img)          # in-place: all sharers re-paint, no re-link
+	else:
+		_carpet_tex = ImageTexture.create_from_image(img)
 
 
 func _make_carpet_material(rep_x: float, rep_y: float) -> StandardMaterial3D:
@@ -397,3 +464,308 @@ func _process(delta: float) -> void:
 	# Warp threads shimmer in a travelling wave.
 	for i in range(_warp_mats.size()):
 		_warp_mats[i].emission_energy_multiplier = 0.6 + 0.6 * (0.5 + 0.5 * sin(_elapsed * 4.0 - i * 0.5))
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# INTERACTIVE CONSOLE — a reachable lectern that runs out from the loom
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Console geometry (metres). Lectern top sits at standing reach; the desk juts
+# FORWARD (+Z) on a short pedestal, off to the +X side so it never lands on the
+# feeding carpet. The top is angled ~15° toward the player.
+const CON_RUN_Z: float = 0.55            # how far the desk juts toward the player
+const CON_TOP_Y: float = 1.10            # top surface height (standing reach)
+const CON_TILT_DEG: float = -15.0        # pitch the top toward the player
+const CON_W: float = 0.62                # console desk width
+const CON_D: float = 0.34                # console desk depth
+
+
+func _build_console() -> void:
+	# Load VR interactables; degrade to plain geometry if they fail (headless).
+	if PUSH_BUTTON == null:
+		PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
+	if SLIDER_H == null:
+		SLIDER_H = load("res://commons/interactables/slider_horizontal.tscn")
+
+	# Place the lectern on the +X front corner of the machine, jutting forward.
+	var side_x: float = carpet_width * 0.5 + 0.55
+	var console := Node3D.new()
+	console.name = "Console"
+	console.position = Vector3(side_x, 0.0, CON_RUN_Z * 0.5)
+	# Yaw the whole console ~22° inward so its face turns toward a player standing
+	# in front of the machine, and the desk reads as "running out" from the frame.
+	console.rotation_degrees = Vector3(0, -22, 0)
+	add_child(console)
+
+	# Short pedestal up to the desk.
+	var ped := MeshInstance3D.new()
+	var pcm := CylinderMesh.new()
+	pcm.top_radius = 0.10; pcm.bottom_radius = 0.14
+	pcm.height = CON_TOP_Y - 0.10; pcm.radial_segments = 16
+	ped.mesh = pcm
+	ped.position = Vector3(0, (CON_TOP_Y - 0.10) * 0.5, 0)
+	ped.material_override = _con_mat(frame_color, 0.4, 0.6)
+	console.add_child(ped)
+	# Base foot.
+	var foot := MeshInstance3D.new()
+	var fcm := CylinderMesh.new()
+	fcm.top_radius = 0.20; fcm.bottom_radius = 0.24
+	fcm.height = 0.05; fcm.radial_segments = 20
+	foot.mesh = fcm
+	foot.position = Vector3(0, 0.025, 0)
+	foot.material_override = _con_mat(frame_color.lightened(0.05), 0.5, 0.5)
+	console.add_child(foot)
+
+	# Angled desk top (the lectern surface the controls sit on).
+	var desk := Node3D.new()
+	desk.name = "DeskTop"
+	desk.position = Vector3(0, CON_TOP_Y, 0.04)
+	desk.rotation_degrees = Vector3(CON_TILT_DEG, 0, 0)
+	console.add_child(desk)
+
+	var slab := MeshInstance3D.new()
+	var sbm := BoxMesh.new()
+	sbm.size = Vector3(CON_W, 0.04, CON_D)
+	slab.mesh = sbm
+	slab.material_override = _con_mat(frame_color.lightened(0.08), 0.4, 0.55)
+	desk.add_child(slab)
+	# Emissive lip along the desk's front edge — "powered console".
+	var lip := MeshInstance3D.new()
+	var lbm := BoxMesh.new()
+	lbm.size = Vector3(CON_W, 0.015, 0.015)
+	lip.mesh = lbm
+	lip.position = Vector3(0, 0.02, CON_D * 0.5)
+	var lmat := _con_mat(accent_color, 0.2, 0.5)
+	lmat.emission_enabled = true; lmat.emission = accent_color
+	lmat.emission_energy_multiplier = 1.6
+	lip.material_override = lmat
+	_weave_mats.append(lmat)   # let it breathe with the rest of the machine
+	desk.add_child(lip)
+
+	# Controls + preview live on the desk surface (local space of `desk`).
+	_build_console_controls(desk)
+	_build_console_preview(desk)
+	_build_console_labels(desk)
+
+
+func _build_console_controls(desk: Node3D) -> void:
+	# Surface is in the desk's local XY (Z+ toward player after the tilt). Buttons
+	# and sliders lie flat on the top, slightly proud in +Y.
+	var top_y: float = 0.03
+	var row_z: float = -CON_D * 0.30          # back row (toward the loom)
+
+	# GROUP  ◀ / ▶  with a row of cycle controls along the left.
+	_make_arrow_pair(desk, Vector3(-CON_W * 0.32, top_y, row_z),
+		func(): _cycle_group(-1), func(): _cycle_group(1), "GROUP")
+
+	# PALETTE  ◀ / ▶
+	_make_arrow_pair(desk, Vector3(CON_W * 0.10, top_y, row_z),
+		func(): _cycle_palette(-1), func(): _cycle_palette(1), "PALETTE")
+
+	# DENSITY slider (front-left) — 0.1 .. 0.95.
+	_density_slider = _make_slider(desk, Vector3(-CON_W * 0.22, top_y, CON_D * 0.22),
+		"DENSITY", 0.1, 0.95, density, func(n): _on_density(n))
+
+	# SEED slider (front-right) — 0 .. SEED_MAX, integer-stepped, plus ◀ / ▶ nudge.
+	_seed_slider = _make_slider(desk, Vector3(CON_W * 0.16, top_y, CON_D * 0.22),
+		"SEED", 0.0, float(SEED_MAX), float(motif_seed), func(n): _on_seed(n))
+	_make_arrow_pair(desk, Vector3(CON_W * 0.16, top_y, -CON_D * 0.02),
+		func(): _nudge_seed(-1), func(): _nudge_seed(1), "")
+
+
+func _build_console_preview(desk: Node3D) -> void:
+	# A small lit quad (~0.3m) on the back of the desk showing the live pattern.
+	var quad := MeshInstance3D.new()
+	quad.name = "PreviewPlate"
+	var qm := QuadMesh.new()
+	qm.size = Vector2(0.30, 0.30)
+	quad.mesh = qm
+	# Stand it up slightly, facing the player, at the back of the desk.
+	quad.position = Vector3(0, 0.18, -CON_D * 0.5 + 0.02)
+	quad.rotation_degrees = Vector3(90.0 - CON_TILT_DEG * 0.0, 0, 0)  # face +Z/up toward player
+	_preview_mat = StandardMaterial3D.new()
+	_preview_mat.albedo_texture = _carpet_tex
+	_preview_mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	_preview_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_preview_mat.roughness = 0.7
+	# Self-lit so it reads as a freshly-rendered proof under any lighting.
+	_preview_mat.emission_enabled = true
+	_preview_mat.emission = Color(1, 1, 1)
+	_preview_mat.emission_texture = _carpet_tex
+	_preview_mat.emission_energy_multiplier = 0.6
+	quad.material_override = _preview_mat
+	desk.add_child(quad)
+	# Bezel frame around the preview.
+	var bez := MeshInstance3D.new()
+	var bbm := BoxMesh.new()
+	bbm.size = Vector3(0.34, 0.34, 0.012)
+	bez.mesh = bbm
+	bez.position = Vector3(0, 0.18, -CON_D * 0.5)
+	bez.rotation_degrees = Vector3(90, 0, 0)
+	bez.material_override = _con_mat(frame_color, 0.5, 0.5)
+	desk.add_child(bez)
+
+
+func _build_console_labels(desk: Node3D) -> void:
+	_group_label = _con_label(desk, group.to_upper(),
+		Vector3(-CON_W * 0.32, 0.05, -CON_D * 0.30 - 0.06), accent_color, 12)
+	_palette_label = _con_label(desk, palette.to_upper(),
+		Vector3(CON_W * 0.16, 0.05, -CON_D * 0.30 - 0.06), warp_color, 11)
+	_seed_label = _con_label(desk, "SEED %d" % motif_seed,
+		Vector3(CON_W * 0.16, 0.05, CON_D * 0.34), Color(0.85, 0.9, 0.95), 10)
+	# Console title plate.
+	_con_label(desk, "RE-PATTERN", Vector3(0, 0.05, -CON_D * 0.5 + 0.20),
+		accent_color, 9)
+
+
+# ── Console widget factories (guard every interactable; degrade gracefully) ──
+
+func _make_arrow_pair(desk: Node3D, base: Vector3, on_prev: Callable,
+		on_next: Callable, label_text: String) -> void:
+	var dx: float = 0.085
+	var prev := _spawn_button(desk, base + Vector3(-dx * 0.5, 0, 0),
+		accent_color.darkened(0.2), on_prev)
+	var nxt := _spawn_button(desk, base + Vector3(dx * 0.5, 0, 0),
+		accent_color, on_next)
+	# Glyph caps (◀ / ▶) — Label3D so they read even if the button is degraded.
+	_con_label(desk, "<", base + Vector3(-dx * 0.5, 0.03, 0), Color(0.95, 0.95, 1.0), 14)
+	_con_label(desk, ">", base + Vector3(dx * 0.5, 0.03, 0), Color(0.95, 0.95, 1.0), 14)
+	if prev == null and nxt == null and label_text != "":
+		# Both interactables failed — leave a static plate so the console still loads.
+		pass
+
+
+# Spawn a push_button laid flat on the desk top, wired to `cb`. Returns the node
+# (or null if the scene failed to load — caller degrades to plain geometry).
+func _spawn_button(desk: Node3D, pos: Vector3, color: Color, cb: Callable) -> Node:
+	if PUSH_BUTTON == null:
+		_con_stub(desk, pos, color)      # static cap so the spot isn't empty
+		return null
+	var btn: Node = PUSH_BUTTON.instantiate()
+	if btn == null:
+		_con_stub(desk, pos, color)
+		return null
+	btn.position = pos
+	# push_button's local +Y is its press axis; the scene roots it lying down, so
+	# placing it on the (tilted) desk top already orients the cap upward.
+	btn.scale = Vector3(0.55, 0.55, 0.55)
+	if btn.has_method("set"):
+		btn.set("pressed_color", color)
+		btn.set("released_color", color.darkened(0.45))
+	desk.add_child(btn)
+	_connect_btn(btn, cb)
+	return btn
+
+
+# Spawn a slider_horizontal on the desk, wired to `cb(normalized)`. Returns node
+# or null (degrades to a static groove plate).
+func _make_slider(desk: Node3D, pos: Vector3, pname: String, rng_min: float,
+		rng_max: float, init_value: float, cb: Callable) -> Node:
+	if SLIDER_H == null:
+		_con_stub(desk, pos, frame_color.lightened(0.1))
+		_con_label(desk, pname, pos + Vector3(0, 0.03, -0.05), Color(0.8, 0.8, 0.85), 9)
+		return null
+	var sl: Node = SLIDER_H.instantiate()
+	if sl == null:
+		_con_stub(desk, pos, frame_color.lightened(0.1))
+		return null
+	sl.position = pos
+	sl.scale = Vector3(0.8, 0.8, 0.8)
+	desk.add_child(sl)
+	# Configure AFTER add_child so the slider's _ready has run and nodes exist.
+	if sl.has_method("set_range"):
+		sl.set_range(rng_min, rng_max)
+	if sl.has_method("set_param_name"):
+		sl.set_param_name(pname)
+	if sl.has_method("set_normalized_value") and rng_max > rng_min:
+		var norm: float = clampf((init_value - rng_min) / (rng_max - rng_min), 0.0, 1.0)
+		sl.set_normalized_value(norm)
+	if sl.has_signal("slider_moved"):
+		sl.connect("slider_moved", func(_v): cb.call(_slider_norm(sl)))
+	return sl
+
+
+# Read a slider's 0..1 value, guarding the method.
+func _slider_norm(sl: Node) -> float:
+	if sl != null and is_instance_valid(sl) and sl.has_method("get_normalized_value"):
+		return clampf(sl.get_normalized_value(), 0.0, 1.0)
+	return 0.5
+
+
+# Connect a push_button instance's inner area signal to `cb` (no-arg).
+# push_button's inner InteractableAreaButton emits button_pressed(button).
+func _connect_btn(btn: Node, cb: Callable) -> void:
+	var area := btn.get_node_or_null("InteractableAreaButton")
+	if area and area.has_signal("button_pressed"):
+		area.connect("button_pressed", func(_b): cb.call())
+	elif btn.has_signal("pressed"):
+		btn.connect("pressed", cb)
+
+
+# Static cap used when an interactable fails to load — keeps the console legible.
+func _con_stub(desk: Node3D, pos: Vector3, color: Color) -> void:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = 0.022; cm.bottom_radius = 0.024; cm.height = 0.014
+	mi.mesh = cm
+	mi.position = pos
+	mi.material_override = _con_mat(color, 0.4, 0.5)
+	desk.add_child(mi)
+
+
+func _con_label(desk: Node3D, text: String, pos: Vector3, color: Color, size: int) -> Label3D:
+	var lbl := Label3D.new()
+	lbl.text = text
+	lbl.pixel_size = 0.0011
+	lbl.font_size = size
+	lbl.modulate = color
+	lbl.position = pos
+	lbl.rotation_degrees = Vector3(-90, 0, 0)   # lie flat-readable on the tilted desk
+	lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	desk.add_child(lbl)
+	return lbl
+
+
+func _con_mat(color: Color, metallic: float, roughness: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = color
+	m.metallic = metallic
+	m.roughness = roughness
+	return m
+
+
+# ── Console interactions → live re-render ────────────────────────────────
+
+func _cycle_group(dir: int) -> void:
+	_group_index = wrapi(_group_index + dir, 0, GROUP_NAMES.size())
+	group = GROUP_NAMES[_group_index]
+	if _group_label: _group_label.text = group.to_upper()
+	_render_pattern()
+
+
+func _cycle_palette(dir: int) -> void:
+	_palette_index = wrapi(_palette_index + dir, 0, PALETTE_NAMES.size())
+	palette = PALETTE_NAMES[_palette_index]
+	if _palette_label: _palette_label.text = palette.to_upper()
+	_render_pattern()
+
+
+func _on_density(norm: float) -> void:
+	density = clampf(lerpf(0.1, 0.95, norm), 0.1, 0.95)
+	_render_pattern()
+
+
+func _on_seed(norm: float) -> void:
+	motif_seed = clampi(int(round(lerpf(0.0, float(SEED_MAX), norm))), 0, SEED_MAX)
+	if _seed_label: _seed_label.text = "SEED %d" % motif_seed
+	_render_pattern()
+
+
+func _nudge_seed(dir: int) -> void:
+	motif_seed = clampi(motif_seed + dir, 0, SEED_MAX)
+	if _seed_label: _seed_label.text = "SEED %d" % motif_seed
+	# Keep the SEED slider handle in step with the nudge.
+	if _seed_slider != null and is_instance_valid(_seed_slider) \
+			and _seed_slider.has_method("set_normalized_value"):
+		_seed_slider.set_normalized_value(clampf(float(motif_seed) / float(SEED_MAX), 0.0, 1.0))
+	_render_pattern()

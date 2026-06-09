@@ -239,7 +239,7 @@
 		"loom_drum_bauhaus_p4m": {
 			"lookup_name": "loom_drum_bauhaus_p4m",
 			"name": "Loom: Bauhaus p4m (rotary drum)",
-			"description": "Rotary print-drum press feeding a Bauhaus p4m carpet.",
+			"description": "Rotary print-drum press feeding a Bauhaus p4m carpet. Carries a reachable interactive console — walk up and re-pattern it live: cycle the wallpaper group and palette, drag density/seed sliders, watch the preview plate and the whole carpet re-weave.",
 			"category": "dna_grammar",
 			"complexity": "intermediate",
 			"include_in_map_data": true,
@@ -264,7 +264,8 @@
 				"group": "p4m",
 				"palette": "bauhaus",
 				"loom_style": "drum",
-				"motif_seed": 7
+				"motif_seed": 7,
+				"interactive": true
 			}
 		},
 		"loom_drum_persian_p6": {
