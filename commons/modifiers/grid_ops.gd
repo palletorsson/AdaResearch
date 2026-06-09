@@ -12,6 +12,27 @@ extends RefCounted
 ## NEW grid; base is never mutated; random ops are seeded → reproducible.
 
 const MAX_H := 5
+const MAX_BRUSH := 4   ## VR cap: a single stroke never exceeds 4x4 cells (local editing)
+
+
+## The footprint of one VR stroke: a small square (1..4 per side, capped) of cells
+## centred on the cell you point at. This is the ONLY way the Grid tab applies an op
+## in VR — never "all" / large regions. Returns [[row,col],...] for op.target.cells.
+static func brush_cells(center: Vector2i, size: int) -> Array:
+	var s: int = clampi(size, 1, MAX_BRUSH)
+	var start_r: int = center.x - (s - 1) / 2
+	var start_c: int = center.y - (s - 1) / 2
+	var cells: Array = []
+	for dr in range(s):
+		for dc in range(s):
+			cells.append([start_r + dr, start_c + dc])
+	return cells
+
+
+## One VR stroke: apply `op` to the brush footprint at `center` (size capped 1..4).
+static func stroke(base: Dictionary, op_name: String, center: Vector2i, size: int, params: Dictionary = {}, op_seed: int = 0) -> Dictionary:
+	var op: Dictionary = {"op": op_name, "target": {"cells": brush_cells(center, size)}, "params": params, "seed": op_seed}
+	return apply(base, op)
 
 
 static func apply_stack(base: Dictionary, ops: Array) -> Dictionary:

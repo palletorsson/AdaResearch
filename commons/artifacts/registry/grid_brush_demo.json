@@ -1,0 +1,28 @@
+{
+	"id": "grid_brush_demo",
+	"name": "Grid Brush Demo",
+	"description": "What a VR grid stroke actually is: small and local. A 16x16 floor with a handful of strokes, each at most 4x4 cells (the VR cap), centred where you point — raise 4x4, randomize 3x3, fill 2x2, add 1x1, checker 4x4, erase 2x2 — with one glowing 4x4 brush footprint marking the max stroke. The Grid tab applies GridOps only through GridOps.brush_cells/stroke (capped 1..4), never whole-grid.",
+	"category": "grids",
+	"theoreticalGrounding": "In VR you tend what you can reach; the brush is capped at 4x4 so editing stays local, legible, and around-you.",
+	"artifacts": {
+		"grid_brush_demo": {
+			"lookup_name": "grid_brush_demo",
+			"name": "Grid Brush Demo",
+			"description": "16x16 floor with several local strokes (each <=4x4) + a glowing 4x4 brush footprint. Uses GridOps.stroke (brush size capped 1..4). DNA: none (static demo).",
+			"category": "grids",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/grid_brush_demo/grid_brush_demo.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["primitives"],
+			"footprint": [16, 1, 16],
+			"tags": ["grid", "editing", "brush", "stroke", "local", "4x4", "vr"],
+			"qfep_connection": "lambda: small local strokes — tend what you can reach, not the whole field at once.",
+			"parameters": {
+				"footprint": [16, 1, 16],
+				"size_group": "large"
+			},
+			"size_group": "large"
+		}
+	}
+}
