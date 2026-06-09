@@ -139,6 +139,24 @@ const MONO_FONT_PATH: String = "res://commons/font/JetBrainsMono-Medium.ttf"
 # ResourceLoader.exists). When crt_shader is on the info tube face uses a ShaderMaterial
 # built from this; when the file is missing the build degrades to the static-scanline look.
 const CRT_SHADER_PATH: String = "res://commons/ui/shaders/crt_terminal.gdshader"
+
+# ── 2D-IN-3D info screens ─────────────────────────────────────────────
+# When use_viewport_screens is on, info screens render their terminal text through a
+# SubViewport Control (the dna_workstation pattern) instead of Label3D — so the screen
+# shows RICH monospace terminal pixels, with the CRT glass shader (crt_screen.gdshader)
+# applied OVER the rendered texture. The xr-tools viewport + the 2D terminal Control are
+# loaded lazily and guarded; if either is missing the build falls back to the Label3D path.
+const VIEWPORT_2D_3D_PATH: String = "res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn"
+const SCREEN_UI_PATH: String = "res://commons/artifacts/monitor_setup/monitor_screen_ui.tscn"
+# CRT glass shader that SAMPLES the viewport texture (vs crt_terminal which is content-free).
+const CRT_SCREEN_SHADER_PATH: String = "res://commons/ui/shaders/crt_screen.gdshader"
+
+## 2D-IN-3D INFO SCREENS: render each info screen's terminal text via a SubViewport Control
+## (rich monospace RichTextLabel, scanlines, blinking cursor) mapped onto the panel quad —
+## the same pattern dna_workstation uses — instead of Label3D. The CRT glass shader is then
+## applied OVER the rendered text. Turn OFF (or let the xr-tools addon / UI scene be missing)
+## to use the original Label3D terminal path. Only affects "info" screens in terminal mode.
+@export var use_viewport_screens: bool = true
 @export var screens: Array = [
 	{
 		# PAGE 0 — top-centre. The document's real H1 title + its first body chunk.
@@ -259,6 +277,16 @@ var _mono_checked: bool = false
 # scanline fallback. See _ensure_crt_shader().
 var _crt_shader: Shader = null
 var _crt_checked: bool = false
+
+# ── 2D-in-3D resources (loaded once, lazily, guarded) ─────────────────
+# _viewport_scene: the xr-tools viewport_2d_in_3d.tscn (renders a 2D Control onto a quad).
+# _screen_ui_scene: monitor_screen_ui.tscn (the 2D terminal Control).
+# _crt_screen_shader: crt_screen.gdshader (CRT glass that SAMPLES the viewport texture).
+# All null when their file is missing → info screens fall back to the Label3D path.
+var _viewport_scene: PackedScene = null
+var _screen_ui_scene: PackedScene = null
+var _crt_screen_shader: Shader = null
+var _viewport_checked: bool = false
 
 # ── Terminal animation state (driven by _process) ─────────────────────
 # Blinking cursors: the bright block at the end of each terminal screen's last line. Toggled
@@ -880,6 +908,7 @@ func _build_all() -> void:
 	_point_fields.clear()
 	_ensure_mono_font()
 	_ensure_crt_shader()
+	_ensure_viewport_resources()
 	_build_shared_materials()
 	_build_desk_base()
 	_build_tower()
@@ -1175,12 +1204,115 @@ func _build_one_screen(index: int, s: Dictionary) -> void:
 		_build_clamp_arm(root, pos)
 
 
+# ── 2D-IN-3D info face (SubViewport terminal Control on the panel quad) ────────────────
+# Mounts the xr-tools viewport_2d_in_3d sized to the panel, sets its scene to
+# monitor_screen_ui.tscn, and (once the 2D scene instance is live, a frame after add_child)
+# calls render_screen(title, body_lines, phosphor) with the SAME content the Label3D path
+# uses. After the viewport texture exists, the CRT glass shader is layered OVER it by
+# overriding the viewport's Screen mesh surface material with a ShaderMaterial that samples
+# the ViewportTexture. Capture-safe: 2d-in-3d renders in --no-window (confirmed via
+# dna_workstation).
+func _build_face_info_viewport(root: Node3D, size: Vector2, title: String, body: String, phos: Dictionary) -> void:
+	var viewport: Node3D = _viewport_scene.instantiate()
+	viewport.name = "InfoViewport"
+	# Physical (metric) size of the rendered quad = the panel face size.
+	viewport.screen_size = size
+	# Texture resolution — 4:3-ish, scaled a touch by panel width so wider panels stay crisp.
+	var vw: int = clampi(int(round(size.x * 900.0)), 360, 720)
+	var vh: int = clampi(int(round(size.y * 900.0)), 240, 540)
+	viewport.viewport_size = Vector2(float(vw), float(vh))
+	viewport.scene = _screen_ui_scene
+	# Sit just in front of the backing (face quad lived at z=0.013 in the Label3D path).
+	viewport.position = Vector3(0.0, 0.0, 0.013)
+	root.add_child(viewport)
+
+	# The 2D scene instance is null until a frame after add_child — defer the content fill
+	# and the CRT-glass overlay. Carry the resolved phosphor text colour through.
+	var phos_text: Color = phos["text"]
+	call_deferred("_render_info_viewport", viewport, title, body, phos_text, size)
+
+
+# Deferred: wait for the viewport's 2D scene instance, push the terminal content, and
+# override the Screen mesh material with the CRT-over-text glass (when its shader loaded).
+func _render_info_viewport(viewport: Node, title: String, body: String, phos_text: Color, size: Vector2) -> void:
+	if not is_instance_valid(viewport):
+		return
+	# Body lines from the "\n"-separated body string (markdown already cleaned upstream).
+	var lines: PackedStringArray = body.split("\n", false)
+
+	# The xr-tools viewport instantiates its scene inside _update_render (called from its
+	# _ready / set_scene). Poll a few frames for get_scene_instance(), like dna_workstation.
+	var ui: Node = null
+	for _i in range(20):
+		await get_tree().process_frame
+		if not is_instance_valid(viewport):
+			return
+		if viewport.has_method("get_scene_instance"):
+			ui = viewport.get_scene_instance()
+		if ui != null:
+			break
+	if ui != null and ui.has_method("render_screen"):
+		ui.render_screen(title, lines, phos_text)
+
+	# Layer the CRT glass OVER the rendered viewport texture by overriding the Screen mesh's
+	# surface material with a ShaderMaterial that samples the ViewportTexture. Optional — if
+	# the shader didn't load, the plain rendered terminal (with its own 2D scanlines) stands.
+	if crt_shader and _crt_screen_shader != null:
+		_apply_crt_over_viewport(viewport, phos_text, size)
+
+
+# Override the xr-tools viewport's Screen MeshInstance3D material with the CRT-over-text
+# glass shader, fed the viewport's own ViewportTexture as screen_tex. TIME inside the shader
+# syncs every screen's scanlines/flicker automatically (no per-node time set here).
+func _apply_crt_over_viewport(viewport: Node, phos_text: Color, size: Vector2) -> void:
+	var screen_node = viewport.get_node_or_null("Screen")
+	if screen_node == null or not (screen_node is MeshInstance3D):
+		return
+	var screen_mi: MeshInstance3D = screen_node
+	# Grab the ViewportTexture the xr-tools script wired onto the screen material's albedo.
+	var sub_vp = viewport.get_node_or_null("Viewport")
+	var vtex: Texture = null
+	if sub_vp is SubViewport:
+		vtex = (sub_vp as SubViewport).get_texture()
+	if vtex == null:
+		# Nothing to sample — leave the xr-tools StandardMaterial (plain rendered terminal).
+		return
+
+	var mat := ShaderMaterial.new()
+	mat.shader = _crt_screen_shader
+	mat.set_shader_parameter("screen_tex", vtex)
+	mat.set_shader_parameter("phosphor", phos_text)
+	mat.set_shader_parameter("scan_speed", 1.0)
+	# ~3.2 lines per cm of panel height → a steady CRT pitch regardless of panel size.
+	var density: float = clampf(size.y * 640.0, 80.0, 520.0)
+	mat.set_shader_parameter("scan_density", density)
+	mat.set_shader_parameter("flicker_amt", 0.06)
+	mat.set_shader_parameter("glow", 0.35)
+	mat.set_shader_parameter("vignette_amt", 0.45)
+	mat.set_shader_parameter("aberration", 0.5)
+	var energy: float = _glow_energy()
+	if energy <= 0.0:
+		energy = 1.0
+	var master: float = clampf(crt_intensity * (0.7 + 0.3 * energy), 0.0, 2.0)
+	mat.set_shader_parameter("intensity", master)
+	screen_mi.set_surface_override_material(0, mat)
+
+
 func _build_face_info(root: Node3D, index: int, size: Vector2, title: String, body: String, accent: Color) -> void:
 	# CRT TERMINAL look (terminal_style on) or the old flat info panel (off). Terminal mode:
 	# near-black phosphor tube, monospace phosphor text, prompt-style header, left-aligned
 	# with a tiny margin, scanline overlay + a blinking cursor at the last line's end.
 	var term: bool = terminal_style
 	var phos: Dictionary = _phosphor_for(accent)
+
+	# 2D-IN-3D path: in terminal mode, when the toggle is on and the xr-tools viewport + the
+	# 2D terminal Control loaded, render the terminal text through a SubViewport mapped onto
+	# the panel quad (rich monospace pixels) with the CRT glass sampling that texture. The
+	# SAME title/body the Label3D path computes is passed in. Falls through to Label3D below
+	# when unavailable, so the screen always renders something readable.
+	if term and _viewport_screens_ready():
+		_build_face_info_viewport(root, size, title, body, phos)
+		return
 
 	# Is the animated CRT glass shader active for this face? Only in terminal mode, only
 	# when the crt_shader toggle is on AND the shader file actually loaded; otherwise we use
@@ -1715,6 +1847,33 @@ func _ensure_crt_shader() -> void:
 		var res = load(CRT_SHADER_PATH)
 		if res is Shader:
 			_crt_shader = res
+
+
+# Load the 2D-in-3D resources once (lazy, cached, guarded). Any missing file leaves its
+# cache null so _viewport_screens_ready() reports false and info screens use Label3D.
+func _ensure_viewport_resources() -> void:
+	if _viewport_checked:
+		return
+	_viewport_checked = true
+	if ResourceLoader.exists(VIEWPORT_2D_3D_PATH):
+		var vs = load(VIEWPORT_2D_3D_PATH)
+		if vs is PackedScene:
+			_viewport_scene = vs
+	if ResourceLoader.exists(SCREEN_UI_PATH):
+		var us = load(SCREEN_UI_PATH)
+		if us is PackedScene:
+			_screen_ui_scene = us
+	if ResourceLoader.exists(CRT_SCREEN_SHADER_PATH):
+		var cs = load(CRT_SCREEN_SHADER_PATH)
+		if cs is Shader:
+			_crt_screen_shader = cs
+
+
+# True when the 2D-in-3D info path can be used: the toggle is on AND both the xr-tools
+# viewport scene and the 2D terminal Control scene loaded. The CRT-over-text shader is
+# optional (its absence just skips the glass overlay, text still renders).
+func _viewport_screens_ready() -> bool:
+	return use_viewport_screens and _viewport_scene != null and _screen_ui_scene != null
 
 
 # ── Terminal phosphor palette ─────────────────────────────────────────
