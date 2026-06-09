@@ -95,6 +95,26 @@ var _artifact_seq_filter: String = "ALL"  # active sequence filter ("ALL" = no f
 # the loaded map's layer (or blank) and edited by placement; saved into map_data.
 var _interactables: Array = []
 var _interactables_comp: GridInteractablesComponent = null
+# ARTIFACTS MOVE — a pick-then-place gesture. When _artifact_move_mode is on, the first
+# LEFT-click on an occupied cell PICKS UP (remembers token + cell, despawns it); the next
+# LEFT-click MOVES it to the target. Esc / right-click cancels.
+var _artifact_move_mode: bool = false
+var _artifact_move_picked: bool = false
+var _artifact_move_token: String = ""
+var _artifact_move_from: Vector2i = Vector2i(-1, -1)   # (row, col) = (z, x)
+
+# ── UTILITY tab state (the utilities layer) ───────────────────────────
+# Live utilities layer, rows[z][col] = code string (" " = empty). Loaded from the map's
+# layers.utilities (or blank) and edited by the UTILITY tab; saved into map_data.
+var _utilities: Array = []
+var _utilities_comp: GridUtilitiesComponent = null
+var _util_code: String = "s"          # active utility type code (set by the panel)
+var _util_op: String = "ADD"          # active op: ADD / MOVE / ROTATE / REMOVE
+# UTILITY MOVE — same pick-then-place gesture as artifact MOVE, on the utilities layer.
+var _util_move_picked: bool = false
+var _util_move_token: String = ""
+var _util_move_from: Vector2i = Vector2i(-1, -1)
+var _util_ghost: MeshInstance3D = null   # hover marker for the selected utility type
 
 # ── BIOME tab state (mirrors the scrubber's brush model) ──────────────
 var _biome_elements: Array = BiomeElementsLib.NAMES   # single source of truth
@@ -265,6 +285,11 @@ func _build_real_grid() -> void:
 			_grid_w = maxi(1, dims.x)
 			_grid_d = maxi(1, dims.z)
 			_grid_max_h = maxi(1, dims.y)
+		# Building terrain (ADD = +1) needs vertical headroom: a flat map's grid_y is
+		# often 1, and the structure clamps every set_height_at to grid_y AND only renders
+		# stacks up to grid_y. Without this, ADD silently caps at the map's tiny grid_y.
+		# Grow the structure's vertical capacity to GridOps.MAX_H so ADD can build up.
+		_ensure_build_height()
 		# Cache the full map_data.json for non-destructive write-back.
 		_load_map_data(_map_arg)
 	else:
@@ -281,9 +306,19 @@ func _build_real_grid() -> void:
 	if _interactables_comp == null:
 		_interactables_comp = _grid_system.find_child("GridInteractablesComponent", true, false) as GridInteractablesComponent
 
+	# Cache the utilities component for live utility placement. In synthetic mode the
+	# component exists but is never initialize()'d (no map load) — its parent_node stays
+	# null, so live spawn degrades gracefully and the UTILITY tab edits data only.
+	if _grid_system.has_method("get_utilities_component"):
+		_utilities_comp = _grid_system.get_utilities_component()
+	if _utilities_comp == null:
+		_utilities_comp = _grid_system.find_child("GridUtilitiesComponent", true, false) as GridUtilitiesComponent
+
 	# ARTIFACTS: seed the placeable-artifact list + the live interactables layer.
 	_load_artifact_catalog()
 	_load_interactables_layer()
+	# UTILITY: seed the live utilities layer (and spawn whatever the map already carries).
+	_load_utilities_layer()
 
 	# BIOME: size the per-element brush overlay to the (now known) grid.
 	_resize_biome_overlay()
@@ -328,6 +363,8 @@ func _synthesize_flat_grid() -> void:
 		_structure.generate_structure(synth, Vector3i(_grid_w, _grid_max_h, _grid_d))
 	if _structure.has_method("enable_editing"):
 		_structure.enable_editing(synth)
+	# Synthetic grids already generate at MAX_H, but normalise so ADD has headroom.
+	_ensure_build_height()
 	_loaded_map = ""
 
 
@@ -335,6 +372,53 @@ func _synthesize_flat_grid() -> void:
 ## `layout_data` member the structure component reads.
 class _SynthStructureData extends RefCounted:
 	var layout_data: Array = []
+
+
+## Give the structure vertical headroom so the GRID "ADD" op can RAISE terrain.
+##
+## The structure component (GridStructureComponent) clamps every set_height_at write to
+## its grid_y AND only renders stacks up to grid_y in _rebuild_from_layout. Loaded maps
+## carry the map's own grid_y, which for flat maps is 1 — so ADD (+1) would be silently
+## capped and look like a no-op. We grow grid_y to GridOps.MAX_H and reallocate the
+## structure's backing `grid` array to match (mirroring _initialize_grid's x/y/z shape),
+## then rebuild from the editable layout so existing cubes are preserved. _grid_max_h is
+## bumped in lockstep so the editor's own write-back clamp matches.
+func _ensure_build_height() -> void:
+	if _structure == null:
+		return
+	var want_h: int = GridOpsLib.MAX_H
+	_grid_max_h = maxi(_grid_max_h, want_h)
+	if not ("grid_y" in _structure):
+		return
+	var cur_h: int = int(_structure.grid_y)
+	if cur_h >= want_h:
+		return
+	# Resolve current x/z extents (prefer the structure's own dims).
+	var gx: int = _grid_w
+	var gz: int = _grid_d
+	if "grid_x" in _structure:
+		gx = maxi(1, int(_structure.grid_x))
+	if "grid_z" in _structure:
+		gz = maxi(1, int(_structure.grid_z))
+	_structure.grid_y = want_h
+	# Reallocate the bool backing array grid[x][y][z] at the taller height.
+	if "grid" in _structure:
+		var new_grid: Array = []
+		new_grid.resize(gx)
+		for x in range(gx):
+			var y_arr: Array = []
+			y_arr.resize(want_h)
+			for y in range(want_h):
+				var z_arr: Array = []
+				z_arr.resize(gz)
+				for z in range(gz):
+					z_arr[z] = false
+				y_arr[y] = z_arr
+			new_grid[x] = y_arr
+		_structure.grid = new_grid
+	# Rebuild the rendered stacks from the editable layout into the taller grid.
+	if _structure.has_method("_rebuild_from_layout"):
+		_structure._rebuild_from_layout()
 
 
 func _load_map_data(map_name: String) -> void:
@@ -450,6 +534,22 @@ func _build_hover_visuals() -> void:
 	_artifact_ghost.visible = false
 	add_child(_artifact_ghost)
 
+	# ── Utility ghost — a single upright marker (UTILITY tab) tinted the UTILITY tab's
+	#    colour, for the selected utility type at the hovered cell. ──
+	_util_ghost = MeshInstance3D.new()
+	_util_ghost.name = "UtilityGhost"
+	var um := BoxMesh.new()
+	um.size = Vector3(cube_size * 0.4, cube_size * 0.7, cube_size * 0.4)
+	_util_ghost.mesh = um
+	var umat := StandardMaterial3D.new()
+	umat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	umat.albedo_color = Color(0.85, 0.5, 0.95, 0.5)   # matches the panel's UTILITY tab colour
+	umat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	umat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_util_ghost.material_override = umat
+	_util_ghost.visible = false
+	add_child(_util_ghost)
+
 	# ── Biome brush overlay — a per-cell quad grid, alpha = the active element's
 	#    painted density (shown only on the BIOME tab). Sized once the grid loads. ──
 	_biome_overlay = MultiMeshInstance3D.new()
@@ -480,6 +580,8 @@ func _update_hover_grid_sized() -> void:
 		(_ghost.multimesh.mesh as PlaneMesh).size = Vector2(cube_size * 0.86, cube_size * 0.86)
 	if _artifact_ghost and _artifact_ghost.mesh is BoxMesh:
 		(_artifact_ghost.mesh as BoxMesh).size = Vector3(cube_size * 0.5, cube_size * 0.9, cube_size * 0.5)
+	if _util_ghost and _util_ghost.mesh is BoxMesh:
+		(_util_ghost.mesh as BoxMesh).size = Vector3(cube_size * 0.4, cube_size * 0.7, cube_size * 0.4)
 	if _biome_overlay and _biome_overlay.multimesh and _biome_overlay.multimesh.mesh is PlaneMesh:
 		(_biome_overlay.multimesh.mesh as PlaneMesh).size = Vector2(cube_size * 0.92, cube_size * 0.92)
 
@@ -808,6 +910,12 @@ func _connect_panel_signals() -> void:
 		_panel.artifact_action.connect(_on_artifact_action)
 	if _panel.has_signal("artifact_sequence_changed"):
 		_panel.artifact_sequence_changed.connect(_on_artifact_sequence_changed)
+	# UTILITY tab — the utilities layer (guarded so an older panel without these
+	# signals still loads the rest of the editor).
+	if _panel.has_signal("utility_type_changed"):
+		_panel.utility_type_changed.connect(_on_utility_type_changed)
+	if _panel.has_signal("utility_op_selected"):
+		_panel.utility_op_selected.connect(_on_utility_op_selected)
 
 
 # ── Panel signal handlers ──────────────────────────────────────────────
@@ -822,6 +930,12 @@ func _on_tab_changed(tab_id: String) -> void:
 	# panel's element grid can still change it afterwards.
 	if tab_id == "BIOME":
 		_ensure_biome_element()
+	# Leaving ARTIFACTS mid-MOVE shouldn't strand a picked-up artifact.
+	if tab_id != "ARTIFACTS":
+		_cancel_artifact_move()
+	# Leaving UTILITY mid-MOVE shouldn't strand a picked-up utility.
+	if tab_id != "UTILITY":
+		_cancel_utility_move()
 	# Show the right overlays per tab; the per-frame hover refresh handles the rest.
 	if _biome_overlay:
 		_biome_overlay.visible = (tab_id == "BIOME")
@@ -920,9 +1034,14 @@ func _on_artifact_action(action: String) -> void:
 		_cycle_artifact(-1)
 	elif up.contains("NEXT"):
 		_cycle_artifact(1)
+	elif up.contains("MOVE"):
+		_toggle_artifact_move()
 	elif up.contains("REMOVE") or up.contains("CLEAR"):
 		_clear_artifact_at_hover()
 	elif up.contains("PLACE"):
+		# PLACE leaves MOVE mode (so the next click drops the palette artifact).
+		_artifact_move_mode = false
+		_cancel_artifact_move()
 		_place_artifact_at_hover()
 	else:
 		_status_msg = "artifacts: '%s'" % action
@@ -945,10 +1064,36 @@ func _on_artifact_sequence_changed(seq: String) -> void:
 	_update_hud()
 
 
+## UTILITY tab: the panel selected a utility TYPE (code). Cancel any pending utility
+## move (the held token belongs to the previous type) and surface the new selection.
+func _on_utility_type_changed(code: String) -> void:
+	_active_tab = "UTILITY"
+	_cancel_utility_move()
+	_util_code = str(code).strip_edges()
+	_status_msg = "utility: %s  (%s)" % [_util_friendly_name(_util_code), _util_code]
+	_update_hud()
+
+
+## UTILITY tab: the panel selected an OP (ADD / MOVE / ROTATE / REMOVE). Switching away
+## from MOVE cancels any pickup so it never strands.
+func _on_utility_op_selected(op: String) -> void:
+	_active_tab = "UTILITY"
+	var up := op.strip_edges().to_upper()
+	if up != "MOVE":
+		_cancel_utility_move()
+	_util_op = up
+	_status_msg = "utility op: %s" % up
+	_update_hud()
+
+
 # ── Input ──────────────────────────────────────────────────────────────
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
+			KEY_ESCAPE:
+				# Cancel an in-progress MOVE pickup (artifact or utility) without dropping it.
+				_cancel_artifact_move()
+				_cancel_utility_move()
 			KEY_TAB:
 				if _panel_root:
 					_panel_root.visible = not _panel_root.visible
@@ -965,11 +1110,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			_on_left_button(event.pressed)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			# On ARTIFACTS, RIGHT-click clears the hovered cell (instead of orbiting),
-			# so artifact remove is a one-click gesture. Press only; drag still orbits
-			# on the other tabs.
+			# On ARTIFACTS/UTILITY, RIGHT-click clears the hovered cell (instead of
+			# orbiting) — a one-click remove. If a MOVE pickup is in progress it cancels
+			# that instead. Press only; drag still orbits on the other tabs.
 			if event.pressed and _active_tab == "ARTIFACTS":
-				_clear_artifact_at_hover()
+				if _artifact_move_picked:
+					_cancel_artifact_move()
+				else:
+					_clear_artifact_at_hover()
+			elif event.pressed and _active_tab == "UTILITY":
+				if _util_move_picked:
+					_cancel_utility_move()
+				else:
+					_clear_utility_at_hover()
 			else:
 				_orbiting = event.pressed
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
@@ -983,11 +1136,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			_update_hover()
 			# Continuous apply while dragging: GRID/PAINT strokes structure/paint;
-			# BIOME stamps the brush field. ARTIFACTS is click-to-place (no drag-paint).
+			# BIOME stamps the brush field. ARTIFACTS / UTILITY are click-only (no
+			# drag-paint) — _painting is never set on those tabs, but exclude explicitly.
 			if _painting:
 				if _active_tab == "BIOME":
 					_stamp_biome_at_hover()
-				elif _active_tab != "ARTIFACTS":
+				elif _active_tab != "ARTIFACTS" and _active_tab != "UTILITY":
 					_apply_at_hover()
 
 
@@ -997,7 +1151,14 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_left_button(pressed: bool) -> void:
 	if _active_tab == "ARTIFACTS":
 		if pressed:
-			_place_artifact_at_hover()
+			if _artifact_move_mode:
+				_artifact_move_click()
+			else:
+				_place_artifact_at_hover()
+		return
+	if _active_tab == "UTILITY":
+		if pressed:
+			_utility_left_click()
 		return
 	if _active_tab == "BIOME":
 		_painting = pressed
@@ -1098,6 +1259,7 @@ func _set_hover_visible(v: bool) -> void:
 	if _hover_highlight: _hover_highlight.visible = v and _active_tab != "ARTIFACTS"
 	if _ghost: _ghost.visible = v and (_active_tab == "GRID")
 	if _artifact_ghost: _artifact_ghost.visible = v and (_active_tab == "ARTIFACTS")
+	if _util_ghost: _util_ghost.visible = v and (_active_tab == "UTILITY")
 
 
 ## Place the single-cell highlight and the per-tab ghost at the hovered cell.
@@ -1125,6 +1287,15 @@ func _position_hover_visuals() -> void:
 			if _artifact_ghost.mesh is BoxMesh:
 				bh = (_artifact_ghost.mesh as BoxMesh).size.y
 			_artifact_ghost.position = Vector3((col + 0.5) * cube_size, top_y + bh * 0.5, (row + 0.5) * cube_size)
+
+	# Utility marker ghost.
+	if _util_ghost:
+		_util_ghost.visible = (_active_tab == "UTILITY")
+		if _active_tab == "UTILITY":
+			var uh := cube_size * 0.7
+			if _util_ghost.mesh is BoxMesh:
+				uh = (_util_ghost.mesh as BoxMesh).size.y
+			_util_ghost.position = Vector3((col + 0.5) * cube_size, top_y + uh * 0.5, (row + 0.5) * cube_size)
 
 	# Footprint ghost — GRID/PAINT only.
 	if _ghost == null or _ghost.multimesh == null:
@@ -1421,6 +1592,94 @@ func _clear_artifact_at_hover() -> void:
 	_update_hud()
 
 
+# ── ARTIFACTS MOVE — pick-then-place an existing artifact ─────────────
+## Toggle MOVE mode on/off (the MOVE button). Turning it off cancels any pending
+## pickup so a half-finished move never lingers.
+func _toggle_artifact_move() -> void:
+	_artifact_move_mode = not _artifact_move_mode
+	if not _artifact_move_mode:
+		_cancel_artifact_move()
+		_status_msg = "MOVE off — L-click places the selected artifact"
+	else:
+		_artifact_move_picked = false
+		_status_msg = "MOVE on — L-click an occupied cell to pick it up"
+	_update_hud()
+
+
+## One LEFT-click while MOVE mode is active: pick up if nothing is held, else drop.
+func _artifact_move_click() -> void:
+	if _util_move_picked:
+		return
+	if not _artifact_move_picked:
+		_artifact_pick_up()
+	else:
+		_artifact_drop()
+
+
+## Pick up the artifact at the hovered cell: remember its token + cell, despawn its
+## live scene, blank the data cell, highlight the source. No-op on an empty cell.
+func _artifact_pick_up() -> void:
+	if not _editing_ready or not _hover_valid:
+		return
+	var col := _hover_cell.y   # x
+	var row := _hover_cell.x   # z
+	if row < 0 or row >= _interactables.size() or col < 0 or col >= _interactables[row].size():
+		return
+	var tok := str(_interactables[row][col]).strip_edges()
+	if tok == "" or tok == " ":
+		_status_msg = "MOVE — cell (%d,%d) is empty, pick an occupied cell" % [row, col]
+		_update_hud()
+		return
+	_push_artifact_undo()   # snapshot the whole layer so undo reverts the move
+	_despawn_artifact_at(col, row)
+	_interactables[row][col] = " "
+	_artifact_move_token = tok
+	_artifact_move_from = Vector2i(row, col)
+	_artifact_move_picked = true
+	_status_msg = "MOVE — picked '%s' from (%d,%d); L-click a target cell" % [tok, row, col]
+	_update_hud()
+
+
+## Drop the held artifact at the hovered target cell: clear any occupant there, write the
+## token + spawn it. The undo snapshot was taken at pick-up, so one undo reverts the move.
+func _artifact_drop() -> void:
+	if not _hover_valid:
+		return
+	var col := _hover_cell.y   # x
+	var row := _hover_cell.x   # z
+	if row < 0 or row >= _interactables.size() or col < 0 or col >= _interactables[row].size():
+		return
+	_despawn_artifact_at(col, row)
+	_interactables[row][col] = _artifact_move_token
+	var moved := _artifact_move_token
+	var spawned := _spawn_artifact(col, row, _artifact_move_token)
+	_artifact_move_picked = false
+	_artifact_move_token = ""
+	_artifact_move_from = Vector2i(-1, -1)
+	if spawned:
+		_status_msg = "MOVE — '%s' → (%d,%d)" % [moved, row, col]
+	else:
+		_status_msg = "MOVE — '%s' moved to (%d,%d) in layer (no live spawn — synthetic?)" % [moved, row, col]
+	_update_hud()
+
+
+## Cancel a pending artifact pickup: respawn the held token back at its source cell and
+## restore the data so nothing is lost. No-op when nothing is held.
+func _cancel_artifact_move() -> void:
+	if not _artifact_move_picked:
+		return
+	var row := _artifact_move_from.x   # z
+	var col := _artifact_move_from.y   # x
+	if row >= 0 and row < _interactables.size() and col >= 0 and col < _interactables[row].size():
+		_interactables[row][col] = _artifact_move_token
+		_spawn_artifact(col, row, _artifact_move_token)
+	_artifact_move_picked = false
+	_artifact_move_token = ""
+	_artifact_move_from = Vector2i(-1, -1)
+	_status_msg = "MOVE cancelled"
+	_update_hud()
+
+
 ## Spawn one artifact on the real grid at column (x=col, z=row) using the
 ## interactables component's existing placement path. Returns false if the
 ## subsystem is absent (synthetic mode) so the caller can toast a hint.
@@ -1458,6 +1717,306 @@ func _despawn_artifact_at(col: int, row: int) -> void:
 		if is_instance_valid(node):
 			node.queue_free()
 		objs.erase(key)
+
+
+# ══════════════════════════════════════════════════════════════════════
+# UTILITY tab — edit the utilities layer (spawn/teleporter/ramp/…) + spawn live
+# via GridUtilitiesComponent. The layer is utilities[row][col] = "<code>" (some carry
+# params/rotation as a colon suffix). Live spawn degrades gracefully in synthetic mode
+# (the component is never initialize()'d without a --map, so its parent_node is null).
+# ══════════════════════════════════════════════════════════════════════
+
+## Seed the live utilities layer from the loaded map (or a blank grid), and spawn whatever
+## the map already carries so the UTILITY tab starts from the real scene. Stored as
+## rows[z] = Array[col] of code strings; " " marks an empty cell.
+func _load_utilities_layer() -> void:
+	_utilities = _blank_utilities()
+	var layers = _map_data.get("layers", {})
+	if layers is Dictionary:
+		var existing = layers.get("utilities", [])
+		if existing is Array:
+			for z in range(mini(_grid_d, existing.size())):
+				var row = existing[z]
+				if not (row is Array):
+					continue
+				for x in range(mini(_grid_w, row.size())):
+					_utilities[z][x] = str(row[x])
+	# Spawn the existing utilities live (so what loads matches the game). The map's own
+	# generate path already spawned them during GridSystem build; avoid double-spawning by
+	# only seeding the layer here. We do NOT re-spawn — the grid already rendered them.
+
+
+func _blank_utilities() -> Array:
+	var rows: Array = []
+	for z in range(_grid_d):
+		var row: Array = []
+		for x in range(_grid_w):
+			row.append(" ")
+		rows.append(row)
+	return rows
+
+
+## Friendly name for a utility code (registry name, else the code). Tolerates codes that
+## carry a param suffix (e.g. "t:next") by reading only the base before the first colon.
+func _util_friendly_name(code: String) -> String:
+	var base := code
+	if ":" in base:
+		base = base.split(":")[0]
+	if UtilityRegistry.is_valid_utility_type(base):
+		return UtilityRegistry.get_utility_name(base)
+	return code
+
+
+## LEFT-click on the UTILITY tab: dispatch the active op at the hovered cell.
+func _utility_left_click() -> void:
+	if not _editing_ready or not _hover_valid:
+		return
+	match _util_op:
+		"ADD": _add_utility_at_hover()
+		"REMOVE": _clear_utility_at_hover()
+		"ROTATE": _rotate_utility_at_hover()
+		"MOVE": _utility_move_click()
+		_: _add_utility_at_hover()
+
+
+## ADD: write utilities[row][col] = code and spawn it live (clearing any prior occupant).
+func _add_utility_at_hover() -> void:
+	var col := _hover_cell.y   # x
+	var row := _hover_cell.x   # z
+	if row < 0 or row >= _utilities.size() or col < 0 or col >= _utilities[row].size():
+		return
+	if _util_code.strip_edges() == "":
+		_status_msg = "pick a utility type first"
+		_update_hud()
+		return
+	_push_utility_undo()
+	_despawn_utility_at(col, row)
+	_utilities[row][col] = _util_code
+	if _spawn_utility(col, row, _util_code):
+		_status_msg = "placed %s at (%d,%d)" % [_util_friendly_name(_util_code), row, col]
+	else:
+		_status_msg = "placed %s in layer (no live spawn — synthetic?)" % _util_friendly_name(_util_code)
+	_update_hud()
+
+
+## REMOVE: clear the hovered cell (data + spawned scene).
+func _clear_utility_at_hover() -> void:
+	var col := _hover_cell.y
+	var row := _hover_cell.x
+	if row < 0 or row >= _utilities.size() or col < 0 or col >= _utilities[row].size():
+		return
+	if str(_utilities[row][col]).strip_edges() in ["", " "]:
+		_status_msg = "utility cell (%d,%d) already empty" % [row, col]
+		_update_hud()
+		return
+	_push_utility_undo()
+	_despawn_utility_at(col, row)
+	_utilities[row][col] = " "
+	_status_msg = "cleared utility (%d,%d)" % [row, col]
+	_update_hud()
+
+
+## ROTATE: advance the utility's facing by 90°. Rotation rides on the cell token as a
+## trailing numeric param (the registry's convention for s/t/an/wp etc.: a degrees suffix).
+## We parse the current token, bump the rotation param, rewrite the cell, and respawn.
+func _rotate_utility_at_hover() -> void:
+	var col := _hover_cell.y
+	var row := _hover_cell.x
+	if row < 0 or row >= _utilities.size() or col < 0 or col >= _utilities[row].size():
+		return
+	var tok := str(_utilities[row][col]).strip_edges()
+	if tok in ["", " "]:
+		_status_msg = "nothing to rotate at (%d,%d)" % [row, col]
+		_update_hud()
+		return
+	_push_utility_undo()
+	var rotated := _bump_rotation_token(tok)
+	_despawn_utility_at(col, row)
+	_utilities[row][col] = rotated
+	_spawn_utility(col, row, rotated)
+	_status_msg = "rotated %s → '%s' at (%d,%d)" % [_util_friendly_name(tok), rotated, row, col]
+	_update_hud()
+
+
+## Append/advance a rotation (degrees) param on a utility token by +90°, wrapping 0..270.
+## "<code>" → "<code>:90"; "<code>:90" → "<code>:180"; preserves any non-rotation params by
+## treating only a trailing pure-integer param as the rotation slot.
+func _bump_rotation_token(tok: String) -> String:
+	var parts: PackedStringArray = tok.split(":")
+	if parts.size() == 0:
+		return tok
+	var base := str(parts[0])
+	# If the last part is a pure integer, treat it as the existing rotation and bump it.
+	if parts.size() >= 2 and str(parts[parts.size() - 1]).is_valid_int():
+		var deg := int(str(parts[parts.size() - 1]))
+		deg = wrapi(deg + 90, 0, 360)
+		parts[parts.size() - 1] = str(deg)
+		return ":".join(parts)
+	# Otherwise append a fresh rotation param after whatever params exist.
+	var out := base
+	for i in range(1, parts.size()):
+		out += ":" + str(parts[i])
+	out += ":90"
+	return out
+
+
+# ── UTILITY MOVE — pick-then-place on the utilities layer ─────────────
+func _utility_move_click() -> void:
+	if _artifact_move_picked:
+		return
+	if not _util_move_picked:
+		_utility_pick_up()
+	else:
+		_utility_drop()
+
+
+func _utility_pick_up() -> void:
+	var col := _hover_cell.y
+	var row := _hover_cell.x
+	if row < 0 or row >= _utilities.size() or col < 0 or col >= _utilities[row].size():
+		return
+	var tok := str(_utilities[row][col]).strip_edges()
+	if tok in ["", " "]:
+		_status_msg = "MOVE — utility cell (%d,%d) is empty" % [row, col]
+		_update_hud()
+		return
+	_push_utility_undo()
+	_despawn_utility_at(col, row)
+	_utilities[row][col] = " "
+	_util_move_token = tok
+	_util_move_from = Vector2i(row, col)
+	_util_move_picked = true
+	_status_msg = "MOVE — picked %s from (%d,%d); L-click a target" % [_util_friendly_name(tok), row, col]
+	_update_hud()
+
+
+func _utility_drop() -> void:
+	var col := _hover_cell.y
+	var row := _hover_cell.x
+	if row < 0 or row >= _utilities.size() or col < 0 or col >= _utilities[row].size():
+		return
+	_despawn_utility_at(col, row)
+	_utilities[row][col] = _util_move_token
+	var moved := _util_move_token
+	var spawned := _spawn_utility(col, row, _util_move_token)
+	_util_move_picked = false
+	_util_move_token = ""
+	_util_move_from = Vector2i(-1, -1)
+	if spawned:
+		_status_msg = "MOVE — %s → (%d,%d)" % [_util_friendly_name(moved), row, col]
+	else:
+		_status_msg = "MOVE — %s moved to (%d,%d) in layer (no live spawn — synthetic?)" % [_util_friendly_name(moved), row, col]
+	_update_hud()
+
+
+func _cancel_utility_move() -> void:
+	if not _util_move_picked:
+		return
+	var row := _util_move_from.x
+	var col := _util_move_from.y
+	if row >= 0 and row < _utilities.size() and col >= 0 and col < _utilities[row].size():
+		_utilities[row][col] = _util_move_token
+		_spawn_utility(col, row, _util_move_token)
+	_util_move_picked = false
+	_util_move_token = ""
+	_util_move_from = Vector2i(-1, -1)
+	_status_msg = "utility MOVE cancelled"
+	_update_hud()
+
+
+## Spawn one utility on the real grid at column (x=col, z=row) via the utilities
+## component's existing _place_utility path (zero drift). Returns false if the subsystem
+## is absent / uninitialised (synthetic mode) so the caller can toast a hint.
+func _spawn_utility(col: int, row: int, token: String) -> bool:
+	if _utilities_comp == null:
+		return false
+	# Without a --map the component is never initialize()'d, so parent_node is null and
+	# _place_utility would crash on add_child. Guard on parent_node before spawning.
+	if not ("parent_node" in _utilities_comp) or _utilities_comp.parent_node == null:
+		return false
+	if not _utilities_comp.has_method("_place_utility"):
+		return false
+	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(token)
+	var code := str(parsed.get("type", "")).strip_edges()
+	if code == "" or code == " ":
+		return false
+	if not UtilityRegistry.is_valid_utility_type(code):
+		return false
+	# Some codes carry no scene file (authorial annotations, f:/bp: handled elsewhere) —
+	# skip live spawn for those but the data write still stands.
+	if UtilityRegistry.get_utility_scene_path(code) == "":
+		return false
+	var params: Array = parsed.get("parameters", [])
+	var y_pos := 0
+	if _structure and _structure.has_method("find_highest_y_at"):
+		y_pos = _structure.find_highest_y_at(col, row)
+	var total_size: float = cube_size
+	if "gutter" in _utilities_comp:
+		total_size = cube_size + float(_utilities_comp.gutter)
+	_utilities_comp._place_utility(col, y_pos, row, code, params, {}, total_size)
+	return true
+
+
+## Remove any spawned utility object(s) at column (x=col, z=row). The component keys
+## utility_objects by Vector3i(x,y,z); y is unknown here, so scan the column.
+func _despawn_utility_at(col: int, row: int) -> void:
+	if _utilities_comp == null:
+		return
+	if not ("utility_objects" in _utilities_comp):
+		return
+	var objs: Dictionary = _utilities_comp.utility_objects
+	var to_free: Array = []
+	for key in objs.keys():
+		if key is Vector3i and key.x == col and key.z == row:
+			to_free.append(key)
+	for key in to_free:
+		var node = objs[key]
+		if is_instance_valid(node):
+			node.queue_free()
+		objs.erase(key)
+
+
+## UTILITY edits snapshot the utilities layer (data only) onto the shared undo stack, so
+## Ctrl+Z reverts an ADD/REMOVE/MOVE/ROTATE. Restoring re-spawns the layer.
+func _push_utility_undo() -> void:
+	if not _editing_ready:
+		return
+	var snap := _snapshot()
+	snap["utilities"] = _dup_utilities()
+	_undo_stack.append(snap)
+	if _undo_stack.size() > UNDO_CAP:
+		_undo_stack.pop_front()
+	_redo_stack.clear()
+
+
+func _dup_utilities() -> Array:
+	var out: Array = []
+	for row in _utilities:
+		out.append((row as Array).duplicate())
+	return out
+
+
+## Re-apply a snapshotted utilities layer: clear all spawned utilities, replace the live
+## layer, then spawn each non-empty cell back. Keeps data + scene in sync on undo.
+func _restore_utilities(rows) -> void:
+	if not (rows is Array):
+		return
+	if _utilities_comp and ("utility_objects" in _utilities_comp):
+		var objs: Dictionary = _utilities_comp.utility_objects
+		for key in objs.keys():
+			var node = objs[key]
+			if is_instance_valid(node):
+				node.queue_free()
+		objs.clear()
+	_utilities = []
+	for row in rows:
+		_utilities.append((row as Array).duplicate())
+	for z in range(_utilities.size()):
+		var r: Array = _utilities[z]
+		for x in range(r.size()):
+			var tok := str(r[x]).strip_edges()
+			if tok != "" and tok != " ":
+				_spawn_utility(x, z, tok)
 
 
 # ══════════════════════════════════════════════════════════════════════
@@ -1782,6 +2341,9 @@ func _restore(snap: Dictionary) -> void:
 	# Restore the interactables layer + re-spawn, when the snapshot carried it.
 	if snap.has("interactables"):
 		_restore_interactables(snap["interactables"])
+	# Restore the utilities layer + re-spawn, when the snapshot carried it.
+	if snap.has("utilities"):
+		_restore_utilities(snap["utilities"])
 	_position_hover_visuals()
 	_update_hud()
 
@@ -1889,6 +2451,11 @@ func _save() -> void:
 	# existing interactables layer with blanks.
 	var inter_count := _write_interactables_layer(data)
 
+	# UTILITY — write the utilities layer (placed spawn/teleporter/ramp/…). Same
+	# guard: only when the live layer holds a token, so a non-UTILITY session never
+	# clobbers a hand-authored utilities layer with blanks.
+	var util_count := _write_utilities_layer(data)
+
 	# BIOME — merge the painted fields into top-level paint_layers[]: an authored
 	# element replaces its prior layer; other layers (and CLI/distribution ones the
 	# editor didn't touch) are preserved. Omitted entirely when nothing's painted.
@@ -1910,11 +2477,11 @@ func _save() -> void:
 	f.store_string(JSON.stringify(data, "\t") + "\n")
 	f.close()
 	_map_data = data
-	_status_msg = "✓ saved → repo  (%s · %d rows · %d mods · %d artifacts · %d paint)" % [
-		_loaded_map, layout.size(), _modifier_stack.size(), inter_count, paint_count]
+	_status_msg = "✓ saved → repo  (%s · %d rows · %d mods · %d artifacts · %d util · %d paint)" % [
+		_loaded_map, layout.size(), _modifier_stack.size(), inter_count, util_count, paint_count]
 	_update_hud()
-	print("[grid-editor] saved %s (%d rows, %d modifiers, %d artifacts, %d paint layers)" % [
-		_loaded_map, layout.size(), _modifier_stack.size(), inter_count, paint_count])
+	print("[grid-editor] saved %s (%d rows, %d modifiers, %d artifacts, %d utilities, %d paint layers)" % [
+		_loaded_map, layout.size(), _modifier_stack.size(), inter_count, util_count, paint_count])
 
 
 ## Write the live interactables layer into data.layers.interactables, preserving the
@@ -1941,6 +2508,31 @@ func _write_interactables_layer(data: Dictionary) -> int:
 		if not data.has("layers") or not (data["layers"] is Dictionary):
 			data["layers"] = {}
 		data["layers"]["interactables"] = rows
+	return count
+
+
+## Write the live utilities layer into data.layers.utilities, preserving an existing
+## hand-authored layer when the editor placed nothing. Returns the count of non-empty
+## cells. Mirrors _write_interactables_layer's non-destructive guard.
+func _write_utilities_layer(data: Dictionary) -> int:
+	var count := 0
+	var rows: Array = []
+	for z in range(_utilities.size()):
+		var src: Array = _utilities[z]
+		var row: Array = []
+		for x in range(src.size()):
+			var tok := str(src[x])
+			if tok.strip_edges() != "" and tok.strip_edges() != " ":
+				count += 1
+				row.append(tok)
+			else:
+				row.append(" ")
+		rows.append(row)
+	var has_existing: bool = data.has("layers") and (data["layers"] is Dictionary) and bool(data["layers"].has("utilities"))
+	if count > 0 or not has_existing:
+		if not data.has("layers") or not (data["layers"] is Dictionary):
+			data["layers"] = {}
+		data["layers"]["utilities"] = rows
 	return count
 
 
@@ -1973,13 +2565,23 @@ func _update_hud() -> void:
 	var save_hint := "   ·   W save→repo" if _loaded_map != "" else ""
 	if _active_tab == "ARTIFACTS":
 		var sel := _selected_artifact()
+		var move_tag := "  [MOVE]" if _artifact_move_mode else ""
+		if _artifact_move_picked:
+			move_tag = "  [MOVE: holding '%s']" % _artifact_move_token
 		if _artifact_list.is_empty():
 			_tool_lbl.text = "ARTIFACTS · no map-ready artifacts in the catalog"
 			_tool_lbl.add_theme_color_override("font_color", C_BAD)
 		else:
-			_tool_lbl.text = "ARTIFACTS · %s   (%d/%d)" % [sel, _artifact_idx + 1, _artifact_list.size()]
+			_tool_lbl.text = "ARTIFACTS · %s   (%d/%d)%s" % [sel, _artifact_idx + 1, _artifact_list.size(), move_tag]
 			_tool_lbl.add_theme_color_override("font_color", C_GOLD)
-		_controls_lbl.text = "PREV/NEXT cycle   ·   L-click place   ·   R-click remove   ·   R-drag orbit   ·   Tab panel%s" % save_hint
+		_controls_lbl.text = "PREV/NEXT cycle   ·   L-click place   ·   MOVE pick→drop   ·   R-click remove   ·   Esc cancel   ·   Tab panel%s" % save_hint
+	elif _active_tab == "UTILITY":
+		var move_tag2 := ""
+		if _util_move_picked:
+			move_tag2 = "  [MOVE: holding '%s']" % _util_move_token
+		_tool_lbl.text = "UTILITY · %s (%s)   ·   op %s%s" % [_util_friendly_name(_util_code), _util_code, _util_op, move_tag2]
+		_tool_lbl.add_theme_color_override("font_color", Color(0.85, 0.5, 0.95))
+		_controls_lbl.text = "L-click apply op   ·   type+op in panel   ·   R-click remove   ·   Esc cancel   ·   R-drag orbit   ·   Tab panel%s" % save_hint
 	elif _active_tab == "BIOME":
 		var el := _active_biome_element()
 		if el == "":

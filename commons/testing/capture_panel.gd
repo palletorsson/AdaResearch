@@ -13,7 +13,7 @@ func _run() -> void:
 	panel.position = Vector2(20, 20)
 	await process_frame
 	await process_frame
-	for tab in ["GRID", "ARTIFACTS", "BIOME"]:
+	for tab in ["GRID", "ARTIFACTS", "UTILITY", "BIOME"]:
 		panel.set_active_tab(tab)
 		await process_frame
 		await RenderingServer.frame_post_draw

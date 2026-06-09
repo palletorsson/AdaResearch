@@ -1,9 +1,10 @@
 extends Control
 ## The ONE unified editor interface — a minimal wrist panel (rendered via
-## viewport_2d_in_3d) with THREE tabs: GRID · ARTIFACTS · BIOME. Same flat,
+## viewport_2d_in_3d) with FOUR tabs: GRID · ARTIFACTS · UTILITY · BIOME. Same flat,
 ## pointer-driven (FOCUS_NONE) style as the artifact/biome wrist interfaces.
-## GRID folds structure-height ops AND paint (colorize) into one tab. Tapping a
-## tab emits tab_changed; tool buttons emit their own signals. See doc/VR_EDITING_SYSTEM.md.
+## GRID folds structure-height ops AND paint (colorize) into one tab. UTILITY edits the
+## utilities layer (spawn/teleporter/ramp/etc). Tapping a tab emits tab_changed; tool
+## buttons emit their own signals. See doc/VR_EDITING_SYSTEM.md.
 
 signal tab_changed(tab_id: String)
 # GRID — structure
@@ -20,14 +21,28 @@ signal pressure_changed(strength: float)
 # ARTIFACTS
 signal artifact_action(action: String)
 signal artifact_sequence_changed(seq: String)
+# UTILITY — the utilities layer (s/t/r/...)
+signal utility_type_changed(code: String)
+signal utility_op_selected(op: String)
 
 const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
 
-const TABS: Array = ["GRID", "ARTIFACTS", "BIOME"]
-const TAB_COLORS: Array = [Color(0.45, 0.75, 1.0), Color(0.95, 0.7, 0.35), Color(0.5, 0.9, 0.6)]
+const TABS: Array = ["GRID", "ARTIFACTS", "UTILITY", "BIOME"]
+const TAB_COLORS: Array = [Color(0.45, 0.75, 1.0), Color(0.95, 0.7, 0.35), Color(0.85, 0.5, 0.95), Color(0.5, 0.9, 0.6)]
 const GRID_OPS: Array = ["add", "remove", "fill", "raise", "randomize", "ground", "checker", "frame", "ring", "smooth"]
 const PAINT_OPS: Array = ["colorize", "random", "clear"]
 const PALETTE: Array = ["#e08a2a", "#d23b3b", "#2a8ae0", "#3bcf6a", "#c33bd2", "#e0d02a", "#888c95", "#101216"]
+# UTILITY — the common, placeable utility codes (subset of UtilityRegistry.UTILITY_TYPES).
+# Each row: [code, label]. Authorial @-annotations and param-only codes are omitted; this
+# is the everyday palette (spawn, teleporter, ramp/walkway, doors, hazards, text, light…).
+const UTILITY_CODES: Array = [
+	["s", "SPAWN"], ["t", "TELEPORT"], ["d", "DOOR"], ["wp", "WALKWAY"],
+	["r", "RESET"], ["m", "MOVE-PL"], ["cp", "CHECK"], ["jp", "JUMP"],
+	["tc", "TRANSP"], ["br", "BRIDGE"], ["rc", "ROTATE"], ["sc", "SCALE"],
+	["a", "WALL"], ["w", "WINDOW"], ["el", "LIGHT"], ["3t", "TEXT"],
+	["an", "INFO"], ["h", "HAZARD"], ["ds", "DARK"], ["q", "QUIT"],
+]
+const UTILITY_OPS: Array = ["ADD", "MOVE", "ROTATE", "REMOVE"]
 
 const BG := Color(0.07, 0.08, 0.11, 1.0)
 const FG := Color(0.90, 0.93, 1.0)
@@ -49,6 +64,12 @@ var _artifact_sequences: Array = ["ALL"]   # set by the host via set_artifact_se
 var _seq_idx: int = 0
 var _seq_label: Label = null
 var _artifact_preview: Label = null
+
+# UTILITY — selected type (index into UTILITY_CODES) + active op (index into UTILITY_OPS).
+var _util_type_buttons: Array = []
+var _util_type_active: int = 0
+var _util_op_buttons: Array = []
+var _util_op_active: int = 0   # default ADD
 
 
 func _ready() -> void:
@@ -85,10 +106,12 @@ func _ready() -> void:
 		_pages.append(page)
 	_build_grid_page(_pages[0])
 	_build_artifact_page(_pages[1])
-	_build_biome_page(_pages[2])
+	_build_utility_page(_pages[2])
+	_build_biome_page(_pages[3])
 
 	_refresh_tabs()
 	_refresh_grid_ops()
+	_refresh_util()
 
 
 # ── GRID tab: structure heights + paint ───────────────────────────────
@@ -165,7 +188,7 @@ func _refresh_grid_ops() -> void:
 
 # ── BIOME tab ─────────────────────────────────────────────────────────
 func _build_biome_page(parent: VBoxContainer) -> void:
-	_section(parent, "LAYER", TAB_COLORS[2])
+	_section(parent, "LAYER", TAB_COLORS[3])
 	var grid := GridContainer.new()
 	grid.columns = 3
 	grid.add_theme_constant_override("h_separation", 8)
@@ -183,7 +206,7 @@ func _build_biome_page(parent: VBoxContainer) -> void:
 
 func _on_elem(i: int) -> void:
 	_elem_active = i
-	_highlight(_elem_buttons, _elem_active, TAB_COLORS[2])
+	_highlight(_elem_buttons, _elem_active, TAB_COLORS[3])
 	element_selected.emit(str(BiomeElementsLib.NAMES[i]))
 
 
@@ -233,10 +256,19 @@ func _build_artifact_page(parent: VBoxContainer) -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
 	parent.add_child(row)
-	for action in ["◀ PREV", "NEXT ▶", "PLACE"]:
+	for action in ["◀ PREV", "NEXT ▶"]:
 		var b := _tool_button(action, Vector2(158, 56))
 		b.pressed.connect(func(): artifact_action.emit(action))
 		row.add_child(b)
+	# PLACE + MOVE on a second row. MOVE arms a pick-then-place gesture in the host:
+	# first click on an occupied cell picks the artifact up, the next click drops it.
+	var row2 := HBoxContainer.new()
+	row2.add_theme_constant_override("separation", 8)
+	parent.add_child(row2)
+	for action in ["PLACE", "MOVE"]:
+		var b2 := _tool_button(action, Vector2(158, 56))
+		b2.pressed.connect(func(): artifact_action.emit(action))
+		row2.add_child(b2)
 
 
 ## Host API — set the cycleable sequence list (e.g. ["ALL", "forces", "color", …]).
@@ -271,6 +303,53 @@ func _cycle_sequence(delta: int) -> void:
 	if _seq_label:
 		_seq_label.text = str(_artifact_sequences[_seq_idx])
 	artifact_sequence_changed.emit(str(_artifact_sequences[_seq_idx]))
+
+
+# ── UTILITY tab: the utilities layer (spawn / teleporter / ramp / …) ──
+## A grid of common utility TYPES (tap to select → utility_type_changed) over a row of
+## op buttons ADD / MOVE / ROTATE / REMOVE (tap → utility_op_selected). The host applies
+## the active op with the selected type at the hovered cell.
+func _build_utility_page(parent: VBoxContainer) -> void:
+	_section(parent, "TYPE", TAB_COLORS[2])
+	var grid := GridContainer.new()
+	grid.columns = 4
+	grid.add_theme_constant_override("h_separation", 6)
+	grid.add_theme_constant_override("v_separation", 6)
+	parent.add_child(grid)
+	for i in UTILITY_CODES.size():
+		var entry: Array = UTILITY_CODES[i]
+		var b := _tool_button(str(entry[1]), Vector2(118, 44))
+		b.tooltip_text = "%s  (%s)" % [str(entry[1]), str(entry[0])]
+		b.pressed.connect(_on_util_type.bind(i))
+		grid.add_child(b)
+		_util_type_buttons.append(b)
+
+	_section(parent, "OP", DIM)
+	var op_row := HBoxContainer.new()
+	op_row.add_theme_constant_override("separation", 8)
+	parent.add_child(op_row)
+	for i in UTILITY_OPS.size():
+		var ob := _tool_button(str(UTILITY_OPS[i]), Vector2(116, 50))
+		ob.pressed.connect(_on_util_op.bind(i))
+		op_row.add_child(ob)
+		_util_op_buttons.append(ob)
+
+
+func _on_util_type(i: int) -> void:
+	_util_type_active = clampi(i, 0, UTILITY_CODES.size() - 1)
+	_refresh_util()
+	utility_type_changed.emit(str(UTILITY_CODES[_util_type_active][0]))
+
+
+func _on_util_op(i: int) -> void:
+	_util_op_active = clampi(i, 0, UTILITY_OPS.size() - 1)
+	_refresh_util()
+	utility_op_selected.emit(str(UTILITY_OPS[_util_op_active]))
+
+
+func _refresh_util() -> void:
+	_highlight(_util_type_buttons, _util_type_active, TAB_COLORS[2])
+	_highlight(_util_op_buttons, _util_op_active, TAB_COLORS[2])
 
 
 # ── shared helpers ────────────────────────────────────────────────────
