@@ -1015,21 +1015,13 @@ func _get_right_controller() -> XRController3D:
 
 ## Build the left-hand menu viewport once, on first biome_brush use.
 func _ensure_biome_menu() -> void:
+	# REMOVED: the separate biome menu (with its artifact-scatter palette) sat on the
+	# LEFT wrist. The unified tabbed panel now occupies that wrist and its BIOME tab
+	# covers element/size/pressure, so we no longer mount this menu — free any stray
+	# instance and bail. Biome painting still works (the panel's BIOME tab drives it).
 	if _biome_menu and is_instance_valid(_biome_menu):
-		return
-	var left := _get_left_controller()
-	if left == null:
-		return
-	var vp = BiomeMenuViewport.instantiate()
-	vp.name = "BiomeBrushMenu"
-	vp.scene = BiomeMenuUIScene
-	vp.screen_size = Vector2(0.22, 0.18)
-	vp.viewport_size = Vector2(500, 420)
-	# Tilted up off the wrist, toward the face — glanceable like Tilt Brush.
-	vp.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-45)), Vector3(0.0, 0.05, -0.11))
-	left.add_child(vp)
-	_biome_menu = vp
-	call_deferred("_connect_biome_menu", vp)
+		_biome_menu.queue_free()
+	_biome_menu = null
 
 
 func _connect_biome_menu(vp: Node) -> void:
@@ -1108,18 +1100,19 @@ func _on_biome_menu_pressure(strength: float) -> void:
 func _ensure_editor_panel() -> void:
 	if _editor_panel and is_instance_valid(_editor_panel):
 		return
-	var right := _get_right_controller()
-	if right == null:
+	var left := _get_left_controller()
+	if left == null:
 		return
 	var vp = EditorPanelViewport.instantiate()
 	vp.name = "TabbedEditorPanelVP"
 	vp.scene = EditorPanelUIScene
 	vp.screen_size = Vector2(0.24, 0.22)
 	vp.viewport_size = Vector2(540, 500)
-	# Mirror the wrist offset to the right hand (x flipped) so it sits glanceable
-	# above the right wrist, the way the biome menu sits above the left.
-	vp.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-45)), Vector3(-0.14, 0.04, -0.11))
-	right.add_child(vp)
+	# The ONE editor interface sits on the LEFT wrist (glanceable, Tilt-Brush style);
+	# you point + tap + edit with the right (catalyst) hand. It takes the spot the old
+	# biome menu used — which is now removed (the BIOME tab replaces it).
+	vp.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-45)), Vector3(0.0, 0.05, -0.11))
+	left.add_child(vp)
 	_editor_panel = vp
 	call_deferred("_connect_editor_panel", vp)
 
