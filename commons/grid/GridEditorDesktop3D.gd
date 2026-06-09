@@ -22,10 +22,12 @@ extends Node3D
 ## layer cell + spawns it via GridInteractablesComponent); RIGHT-click clears the
 ## cell. The hovered-cell ghost shows the selected artifact name.
 ##
-## BIOME tab → the SAME brush model as BiomeScrubberDesktop3D: a per-element
-## per-cell density field. The right-panel element/size/pressure set the active
-## element + radius + strength; LEFT-drag stamps the field; on release the fields
-## become paint_layers and GridSystem.repaint_biome() rebuilds the biome live.
+## BIOME tab → the SAME brush model AND the SAME renderer as BiomeScrubberDesktop3D.
+## The right-panel element/size/pressure set the active element + radius + strength;
+## LEFT-drag stamps a per-cell density field (the painted overlay is the cursor); on
+## release the fields become paint_layers and BiomeAccrualManager.apply() rebuilds REAL
+## foliage (trees/critters/flowers) onto a dedicated "EditorBiomeHost" — visible biome,
+## not a flat tint. Stage = the loaded map's sequence stage (else 12 so foliage shows).
 ##
 ## SAVE (W) is non-destructive read-merge-write: it replaces layers.structure +
 ## top-level modifiers (GRID), layers.interactables (ARTIFACTS), and top-level
@@ -101,6 +103,12 @@ var _brush_fields: Dictionary = {}        # element -> PackedFloat32Array (grid_
 var _brush_radius: int = 2
 var _brush_strength: float = 0.6
 var _biome_dirty: bool = false            # a biome stamp happened this stroke → rebuild on release
+# REAL foliage: the SAME accrual path BiomeScrubberDesktop3D drives. The brush fields
+# become paint_layers; BiomeAccrualManager renders trees/critters/flowers onto _biome_host
+# (NOT the grid — so the painted overlay stays a cursor, the host carries visible biome).
+var _accrual: Node = null                 # /root/BiomeAccrualManager autoload (may be absent)
+var _biome_host: Node3D = null            # the host the accrual renders foliage onto
+var _biome_stage: int = 12                # stage_order fed to the accrual (resolved per map)
 
 # ── Hover + brush ghost ───────────────────────────────────────────────
 var _hover_cell: Vector2i = Vector2i(-1, -1)   # (row, col) = (z, x)
@@ -136,6 +144,19 @@ var _controls_lbl: Label = null
 var _toast_lbl: Label = null
 var _hud_err: Label = null
 var _status_msg: String = ""
+
+# ── ARTIFACTS 3D preview (corner HUD card, embedded in this CanvasLayer — NOT the
+#    shared wrist panel, to dodge nested-viewport issues in VR) ────────────────
+var _preview_panel: PanelContainer = null  # top-right card hosting the 3D view
+var _preview_viewport: SubViewport = null  # renders the selected artifact in 3D
+var _preview_world_root: Node3D = null     # holds the spin pivot + cam + light
+var _preview_pivot: Node3D = null          # rotates in place; the artifact mounts under it
+var _preview_camera: Camera3D = null
+var _preview_node: Node3D = null           # the currently-instanced artifact (freed on cycle)
+var _preview_lookup: String = ""           # what's currently shown (skip redundant rebuilds)
+var _preview_name_lbl: Label = null        # name caption under the 3D view
+var _preview_spin: float = 0.0             # idle yaw so the preview reads as 3D
+const PREVIEW_PX := 240.0                  # square viewport edge (px)
 
 # ── Headless capture ──────────────────────────────────────────────────
 var _shot_path: String = ""
@@ -266,6 +287,9 @@ func _build_real_grid() -> void:
 
 	# BIOME: size the per-element brush overlay to the (now known) grid.
 	_resize_biome_overlay()
+	# BIOME: wire the REAL accrual path (host + autoload + stage) — the brush fields
+	# render as visible foliage exactly like BiomeScrubberDesktop3D, not as a flat field.
+	_setup_biome_accrual()
 
 	_editing_ready = true
 	_recenter_for_grid()
@@ -523,12 +547,13 @@ func _build_ui() -> void:
 	_hud_err = _mk_label(_hud_layer, "", 15, C_BAD, Vector2(20, BAR_H + 8))
 
 	# ── Right-side TabbedEditorPanel (one menu, both editors) ──────────
+	# Pushed down to leave room for the 3D artifact-preview card above it (top-right).
 	_panel_root = Control.new()
 	_panel_root.name = "PanelRoot"
 	_panel_root.anchor_left = 1.0; _panel_root.anchor_right = 1.0
 	_panel_root.anchor_top = 0.0; _panel_root.anchor_bottom = 1.0
 	_panel_root.offset_left = -(PANEL_W + 8.0)
-	_panel_root.offset_top = BAR_H + 8.0
+	_panel_root.offset_top = BAR_H + 8.0 + PREVIEW_PX + 36.0
 	_panel_root.offset_right = -8.0
 	_panel_root.offset_bottom = -8.0
 	_hud_layer.add_child(_panel_root)
@@ -537,6 +562,223 @@ func _build_ui() -> void:
 	_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_panel_root.add_child(_panel)
 	_connect_panel_signals()
+
+	# ── ARTIFACTS 3D preview card (top-right corner of THIS CanvasLayer) ──
+	# A SubViewport rendering the selected artifact's scene in 3D, sized ~260px.
+	# Embedded here (not in the shared wrist panel) so VR avoids nested-viewport
+	# pickups. Degrades gracefully — if it can't build, the panel's name label remains.
+	_build_artifact_preview_card()
+
+
+# ══════════════════════════════════════════════════════════════════════
+# ARTIFACTS 3D preview — a corner card that instantiates the selected
+# artifact's scene into a SubViewport, framed + idly spun, so the picker
+# shows what it's about to place. (ArtifactPreview.gd is a 2D detail panel
+# with no scene of its own, so wiring it directly would crash on its null
+# @onready refs; this builds the equivalent 3D view inline instead.)
+# ══════════════════════════════════════════════════════════════════════
+
+## Build the top-right preview card: a PanelContainer wrapping a SubViewportContainer
+## (the 3D render) over a name caption. Fully guarded — any failure leaves the rest of
+## the HUD intact and the panel's own name/preview label still informs the selection.
+func _build_artifact_preview_card() -> void:
+	_preview_panel = PanelContainer.new()
+	_preview_panel.name = "ArtifactPreviewCard"
+	_preview_panel.anchor_left = 1.0; _preview_panel.anchor_right = 1.0
+	_preview_panel.anchor_top = 0.0; _preview_panel.anchor_bottom = 0.0
+	_preview_panel.offset_left = -(PANEL_W + 8.0)
+	_preview_panel.offset_right = -8.0
+	_preview_panel.offset_top = BAR_H + 8.0
+	_preview_panel.offset_bottom = BAR_H + 8.0 + PREVIEW_PX + 32.0
+	_preview_panel.add_theme_stylebox_override("panel", _new_stylebox(C_BG, 0.0, 8.0))
+	_preview_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_preview_panel.visible = false   # shown only on the ARTIFACTS tab
+	_hud_layer.add_child(_preview_panel)
+
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 4)
+	vb.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_preview_panel.add_child(vb)
+
+	# The 3D view: a SubViewportContainer hosting our own SubViewport + world.
+	var svc := SubViewportContainer.new()
+	svc.stretch = true
+	svc.custom_minimum_size = Vector2(PREVIEW_PX, PREVIEW_PX)
+	svc.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vb.add_child(svc)
+
+	_preview_viewport = SubViewport.new()
+	_preview_viewport.size = Vector2i(int(PREVIEW_PX), int(PREVIEW_PX))
+	_preview_viewport.transparent_bg = true
+	_preview_viewport.own_world_3d = true   # isolate from the editor scene's world
+	_preview_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	svc.add_child(_preview_viewport)
+
+	# World root: spin pivot (artifact mount) + framing camera + a soft light.
+	_preview_world_root = Node3D.new()
+	_preview_world_root.name = "PreviewWorld"
+	_preview_viewport.add_child(_preview_world_root)
+
+	# Pivot at world origin: the artifact is centred under it (AABB centre → origin),
+	# so rotating the pivot spins the artifact in place rather than orbiting it.
+	_preview_pivot = Node3D.new()
+	_preview_pivot.name = "PreviewPivot"
+	_preview_world_root.add_child(_preview_pivot)
+
+	_preview_camera = Camera3D.new()
+	_preview_camera.fov = 45.0
+	_preview_camera.current = true
+	_preview_world_root.add_child(_preview_camera)
+
+	var plight := DirectionalLight3D.new()
+	plight.rotation = Vector3(deg_to_rad(-50), deg_to_rad(35), 0)
+	plight.light_energy = 1.2
+	_preview_world_root.add_child(plight)
+
+	# Caption under the 3D view.
+	_preview_name_lbl = _mk_label(vb, "", 13, C_TEXT)
+	_preview_name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_preview_name_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+
+
+## Refresh the 3D preview to the current selection. Called on PREV/NEXT and sequence
+## filter changes. No-op when the card failed to build; re-instantiates the artifact
+## scene into the SubViewport and frames it. Same selection → skip (avoids re-spawn).
+func _update_artifact_3d_preview() -> void:
+	if _preview_panel == null:
+		return
+	var on_artifacts := _active_tab == "ARTIFACTS"
+	_preview_panel.visible = on_artifacts
+	if not on_artifacts:
+		return
+	var lookup := _selected_artifact()
+	if lookup == _preview_lookup and _preview_node != null:
+		return   # already showing this one
+	_preview_lookup = lookup
+	_clear_preview_node()
+	if _preview_name_lbl:
+		_preview_name_lbl.text = lookup if lookup != "" else "no artifact selected"
+	if lookup == "" or _preview_viewport == null:
+		return
+	var node := _instantiate_preview(lookup)
+	if node == null:
+		return
+	_preview_spin = 0.0
+	if _preview_pivot:
+		_preview_pivot.rotation = Vector3.ZERO
+		_preview_pivot.add_child(node)
+	else:
+		_preview_world_root.add_child(node)
+	_preview_node = node
+	# Frame now (cheap default if geometry isn't built yet) AND again next frame, after
+	# procedural artifacts populate their meshes in _ready() — so the AABB is real.
+	_frame_preview(node)
+	call_deferred("_reframe_preview", node)
+
+
+## Deferred re-frame: procedural artifacts build meshes in _ready() (one frame after
+## add_child), so the first _frame_preview can see an empty AABB. Re-run once the node
+## is still the active preview, giving a correctly-fit shot.
+func _reframe_preview(node: Node3D) -> void:
+	if node == null or not is_instance_valid(node) or node != _preview_node:
+		return
+	_frame_preview(node)
+
+
+## Free the currently-shown preview artifact (if any), so cycling never stacks nodes.
+func _clear_preview_node() -> void:
+	if _preview_node and is_instance_valid(_preview_node):
+		_preview_node.queue_free()
+	_preview_node = null
+
+
+## Resolve a lookup → scene → Node3D instance, with the catalog's placeholder fallback
+## (mirrors ArtifactCatalogDesktop3D). Returns null if nothing instantiable (degrades to
+## the name caption only). Never crashes the editor.
+func _instantiate_preview(lookup: String) -> Node3D:
+	if CatalogProvider == null:
+		return null
+	var info: Dictionary = CatalogProvider.get_artifact_by_lookup_name(lookup)
+	var scene_path := ""
+	if info is Dictionary:
+		scene_path = str(info.get("scene", "")).strip_edges()
+	# The catalog's placeholder scene (a const on the provider) — the fallback when an
+	# artifact has no scene / a bad path. Kept in a local so the resolution below is flat.
+	var placeholder := str(CatalogProvider.PLACEHOLDER_ARTIFACT_SCENE_PATH)
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		scene_path = placeholder
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		return null
+	var scene = ResourceLoader.load(scene_path)
+	if scene == null and placeholder != "" and ResourceLoader.exists(placeholder):
+		scene = ResourceLoader.load(placeholder)
+	if scene == null or not (scene is PackedScene):
+		return null
+	var inst = scene.instantiate()
+	if inst == null:
+		return null
+	if not (inst is Node3D):
+		# Non-3D root can't be framed in a 3D viewport → drop it, try the placeholder.
+		inst.queue_free()
+		if placeholder == "" or not ResourceLoader.exists(placeholder):
+			return null
+		var ph = ResourceLoader.load(placeholder)
+		if ph == null or not (ph is PackedScene):
+			return null
+		inst = ph.instantiate()
+		if inst == null or not (inst is Node3D):
+			if inst:
+				inst.queue_free()
+			return null
+	return inst as Node3D
+
+
+## Centre + distance the preview camera from the artifact's AABB so it fills the frame.
+## Uses the visual AABB when available; falls back to a fixed pull-back for empty bounds.
+func _frame_preview(node: Node3D) -> void:
+	if _preview_camera == null or node == null:
+		return
+	var aabb := _node_visual_aabb(node)
+	if aabb.size.length() < 0.001:
+		# No measurable geometry yet (procedural _ready may populate later) — safe default.
+		node.position = Vector3(0.0, 0.0, 0.0)
+		_preview_camera.position = Vector3(2.0, 1.6, 3.4)
+		_preview_camera.look_at(Vector3(0.0, 0.6, 0.0), Vector3.UP)
+		return
+	var center := aabb.get_center()
+	# Sit the artifact's base near the origin so the camera frames it consistently.
+	node.position = -center
+	node.position.y += -aabb.position.y
+	var max_dim: float = maxf(aabb.size.x, maxf(aabb.size.y, aabb.size.z))
+	var dist: float = maxf(1.5, max_dim * 1.9)
+	var focus := Vector3(0.0, aabb.size.y * 0.5, 0.0)
+	_preview_camera.position = focus + Vector3(dist * 0.7, dist * 0.55, dist * 0.9)
+	_preview_camera.look_at(focus, Vector3.UP)
+
+
+## Recursive visual AABB across the node's MeshInstance3D children (global → local of
+## the node). Avoids a hard PerfectShotFramer dependency; tolerant of empty subtrees.
+func _node_visual_aabb(node: Node3D) -> AABB:
+	var out := AABB()
+	var has := false
+	var stack: Array = [node]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		if n is MeshInstance3D and (n as MeshInstance3D).mesh != null:
+			var mi := n as MeshInstance3D
+			var local := mi.get_aabb()
+			# Transform the mesh AABB into `node`'s local space.
+			var xf := node.global_transform.affine_inverse() * mi.global_transform
+			var world_aabb := xf * local
+			if not has:
+				out = world_aabb
+				has = true
+			else:
+				out = out.merge(world_aabb)
+		for c in n.get_children():
+			if c is Node3D:
+				stack.append(c)
+	return out
 
 
 ## Wire every TabbedEditorPanel signal to editor state. Each guard checks the
@@ -585,6 +827,8 @@ func _on_tab_changed(tab_id: String) -> void:
 		_biome_overlay.visible = (tab_id == "BIOME")
 	if _active_tab == "BIOME":
 		_update_biome_overlay()
+	# The 3D artifact-preview card lives on the ARTIFACTS tab only.
+	_update_artifact_3d_preview()
 	_position_hover_visuals()
 	_update_hud()
 
@@ -691,6 +935,7 @@ func _on_artifact_sequence_changed(seq: String) -> void:
 	_active_tab = "ARTIFACTS"
 	_apply_artifact_filter(seq)
 	_update_artifact_preview()
+	_update_artifact_3d_preview()   # filter changed the selection → re-render the 3D card
 	if _artifact_list.is_empty():
 		_status_msg = "sequence '%s' — no map-ready artifacts" % _artifact_seq_filter
 	else:
@@ -787,6 +1032,11 @@ func _process(delta: float) -> void:
 		var z := _orbit_center.z + _orbit_radius * cos(_orbit_pitch) * cos(_orbit_yaw)
 		_camera.position = Vector3(x, y, z)
 		_camera.look_at(_orbit_center, Vector3.UP)
+
+	# Idle-spin the ARTIFACTS preview so it reads as a 3D object, not a flat icon.
+	if _preview_pivot and _preview_node and is_instance_valid(_preview_node) and _preview_panel and _preview_panel.visible:
+		_preview_spin += delta * 0.7
+		_preview_pivot.rotation.y = _preview_spin
 
 	if _capture_frames > 0:
 		_capture_frames -= 1
@@ -1122,6 +1372,7 @@ func _cycle_artifact(delta: int) -> void:
 	_artifact_idx = wrapi(_artifact_idx + delta, 0, _artifact_list.size())
 	_status_msg = "artifact: %s   (%d/%d)" % [_selected_artifact(), _artifact_idx + 1, _artifact_list.size()]
 	_update_artifact_preview()
+	_update_artifact_3d_preview()   # render the newly-selected artifact in the 3D card
 	_update_hud()
 
 
@@ -1355,10 +1606,10 @@ func _update_biome_overlay() -> void:
 			mm.set_instance_color(i, Color(col.r, col.g, col.b, v * 0.75))
 
 
-## Build paint_layers from the painted fields (mirrors the scrubber's payload:
-## one mode:"brush" layer per element, compact sparse mask), then live-rebuild the
-## biome on the real grid via GridSystem.repaint_biome. Degrades to a toast if the
-## grid system can't repaint (synthetic mode).
+## Build paint_layers from the painted fields (mirrors the scrubber's _effective_paint_layers
+## brush payload: one mode:"brush" layer per element, compact sparse mask via DistributionField).
+## Fed straight into BiomeAccrualManager.apply() as ctx.paint_layers — the wired spawn layers
+## (tree/critter/flower) place visible foliage by these distributions. Also persisted on save.
 func _biome_paint_layers() -> Array:
 	var out: Array = []
 	for el in _brush_fields:
@@ -1378,13 +1629,92 @@ func _biome_paint_layers() -> Array:
 	return out
 
 
+## On stroke-release: rebuild the REAL biome (visible foliage) from the painted
+## fields. Was GridSystem.repaint_biome (a flat overlay, no foliage); now drives
+## BiomeAccrualManager on a dedicated host, exactly like the scrubber.
 func _repaint_biome_live() -> void:
+	_rebuild_biome()
+
+
+## Wire the accrual path once the grid is known: grab the autoload, create the host,
+## and resolve the stage from the loaded map's sequence (else a high stage so foliage
+## is visibly present). Degrades to the overlay-only fallback if the autoload is absent.
+func _setup_biome_accrual() -> void:
+	if _biome_host == null:
+		_biome_host = Node3D.new()
+		_biome_host.name = "EditorBiomeHost"
+		add_child(_biome_host)
+	_accrual = get_node_or_null("/root/BiomeAccrualManager")
+	if _accrual == null:
+		_status_msg = "BiomeAccrualManager autoload missing — biome overlay only"
+		push_warning("[grid-editor] BiomeAccrualManager autoload missing; painted-field overlay is the only biome feedback")
+		return
+	_biome_stage = _resolve_biome_stage()
+
+
+## The stage_order to feed the accrual. With a real map, sync EcosystemManager to it
+## and read its true stage (the scrubber's path). Otherwise fall back to a high stage
+## (12) so painted foliage is clearly present even in synthetic mode.
+func _resolve_biome_stage() -> int:
+	var fallback := 12
+	if _loaded_map == "":
+		return fallback
+	var eco := get_node_or_null("/root/EcosystemManager")
+	if eco == null:
+		return fallback
+	if eco.has_method("sync_to_map"):
+		eco.sync_to_map(_loaded_map)
+	if eco.has_method("get_current_stage_order"):
+		var order := int(eco.get_current_stage_order())
+		# Lab maps return 99 (uncapped) so the lab dispatcher is reachable; keep it.
+		# A real low/zero order shouldn't blank the preview, so floor non-lab stages at 1.
+		if order > 0:
+			return mini(order, 99)
+	return fallback
+
+
+## Rebuild the visible biome from the painted fields — MIRRORS BiomeScrubberDesktop3D
+## ._rebuild(): free the host's children immediately, set the stage override, sync the
+## enabled layers, then BiomeAccrualManager.apply(host, ctx) with the SAME ctx keys.
+## paint_layers = the editor's painted brush fields (_biome_paint_layers); rng_seed =
+## hash(_loaded_map) for parity with the game's arrangement. No autoload → overlay only.
+func _rebuild_biome() -> void:
+	if _accrual == null or _biome_host == null:
+		# No accrual path available → keep the painted overlay as the only feedback.
+		_status_msg = "painted %d biome field%s — no accrual to render foliage" % [
+			_brush_fields.size(), "" if _brush_fields.size() == 1 else "s"]
+		_update_hud()
+		return
+	# Immediate free (not queue_free) — apply()'s internal queue_free defers to
+	# frame-end, and we may re-apply several times per frame, so clear now to avoid
+	# suffixed leftovers piling up under the host (the scrubber's reasoning).
+	for c in _biome_host.get_children():
+		_biome_host.remove_child(c)
+		c.free()
+	if _accrual.has_method("set_stage_override"):
+		_accrual.set_stage_override(_biome_stage)
+	if _accrual.has_method("enable_layer") and _accrual.has_method("get_contributions"):
+		for entry in _accrual.get_contributions():
+			if entry is Dictionary:
+				_accrual.enable_layer(str(entry.get("kind", "")), true)
 	var layers := _biome_paint_layers()
-	if _grid_system and _grid_system.has_method("repaint_biome"):
-		_grid_system.repaint_biome(layers)
-		_status_msg = "biome repainted (%d element field%s)" % [layers.size(), "" if layers.size() == 1 else "s"]
-	else:
-		_status_msg = "painted %d biome field%s — no live grid to repaint" % [_brush_fields.size(), "" if _brush_fields.size() == 1 else "s"]
+	var ctx := {
+		"grid_dims": Vector3i(_grid_w, 1, _grid_d),
+		"grid_center": Vector3(float(_grid_w) * cube_size * 0.5, 0.0, float(_grid_d) * cube_size * 0.5),
+		"cube_size": cube_size,
+		# Seed parity with GridSystem (hash(map_name)) so the editor preview is the SAME
+		# arrangement the game renders. Synthetic mode uses a fixed seed.
+		"rng_seed": (hash(_loaded_map) if _loaded_map != "" else 0xB10E),
+		"map_name": _loaded_map if _loaded_map != "" else "GridEditor",
+		"biome_paint": [],
+		"stage_order": _biome_stage,
+		"biome_overrides": {"params": {}},
+		"paint_layers": layers,
+		"budget_scale": 1.0,
+	}
+	_accrual.apply(_biome_host, ctx)
+	_status_msg = "biome rebuilt — %d element field%s @ stage %d" % [
+		layers.size(), "" if layers.size() == 1 else "s", _biome_stage]
 	_update_hud()
 
 
