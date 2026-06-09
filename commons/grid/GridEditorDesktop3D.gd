@@ -54,6 +54,12 @@ const CatalogProvider = preload("res://commons/artifacts/catalog/ArtifactCatalog
 const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
 const DistributionFieldLib = preload("res://commons/biome_layers/distribution_field.gd")
 
+# Biome painting wraps a MARGIN RING around the grid: the paintable/foliage area
+# spans grid cells [-M, _grid_w+M) × [-M, _grid_d+M), so you can paint (and foliage
+# renders) all the way AROUND the grid, not just on its cells. GRID/ARTIFACTS/UTILITY
+# editing stays clamped to the grid [0,_grid_w)×[0,_grid_d) — only BIOME uses the ring.
+const BIOME_MARGIN := 12   # cells of paintable ground on every side of the grid
+
 @export var cube_size: float = 1.0
 @export var fly_speed: float = 6.0
 
@@ -121,7 +127,7 @@ var _util_ghost: MeshInstance3D = null   # hover marker for the selected utility
 # ── BIOME tab state (mirrors the scrubber's brush model) ──────────────
 var _biome_elements: Array = BiomeElementsLib.NAMES   # single source of truth
 var _biome_idx: int = -1                  # active element index; -1 = none
-var _brush_fields: Dictionary = {}        # element -> PackedFloat32Array (grid_w*grid_d)
+var _brush_fields: Dictionary = {}        # element -> PackedFloat32Array (_biome_w*_biome_d, margin-offset)
 var _brush_radius: int = 2
 var _brush_strength: float = 0.6
 var _biome_dirty: bool = false            # a biome stamp happened this stroke → rebuild on release
@@ -1497,7 +1503,15 @@ func _update_hover() -> void:
 	var hit := origin + ndir * t
 	var cx := int(floor(hit.x / cube_size))
 	var cz := int(floor(hit.z / cube_size))
-	if cx < 0 or cx >= _grid_w or cz < 0 or cz >= _grid_d:
+	if _active_tab == "BIOME":
+		# BIOME paints the whole biome AREA (grid + margin ring), so accept any cell in
+		# [-M, _grid_w+M) × [-M, _grid_d+M) — cx/cz may be NEGATIVE. Reject only outside
+		# the ring. The grid clamp below is for the grid-editing tabs alone.
+		if cx < -BIOME_MARGIN or cx >= _grid_w + BIOME_MARGIN or cz < -BIOME_MARGIN or cz >= _grid_d + BIOME_MARGIN:
+			_set_hover_visible(false)
+			return
+	elif cx < 0 or cx >= _grid_w or cz < 0 or cz >= _grid_d:
+		# GRID / ARTIFACTS / UTILITY edit grid cells only → clamp to the grid (unchanged).
 		_set_hover_visible(false)
 		return
 	# (row, col) = (z, x) to match map_data + ModifierStack/GridOps cell convention.
@@ -2283,6 +2297,30 @@ func _active_biome_element() -> String:
 	return str(_biome_elements[_biome_idx])
 
 
+## Biome-area dimensions = grid + a margin ring on every side. The painted field,
+## the density overlay, and the accrual grid_dims are all sized to this, and the
+## biome host is offset by -M cells so its local [0,dims) maps to world
+## [-M, grid+M] — foliage scatters around the grid, not just on it.
+func _biome_w() -> int:
+	return _grid_w + 2 * BIOME_MARGIN
+
+
+func _biome_d() -> int:
+	return _grid_d + 2 * BIOME_MARGIN
+
+
+## Margin-offset field index for a grid cell (cx, cz), where cx/cz may be negative
+## (in the margin ring). Returns -1 if the cell falls outside the biome area.
+func _biome_field_index(cx: int, cz: int) -> int:
+	var bw := _biome_w()
+	var bd := _biome_d()
+	var fx := cx + BIOME_MARGIN
+	var fz := cz + BIOME_MARGIN
+	if fx < 0 or fx >= bw or fz < 0 or fz >= bd:
+		return -1
+	return fz * bw + fx
+
+
 func _biome_color(el: String) -> Color:
 	return BiomeElementsLib.ui_color(el)
 
@@ -2313,27 +2351,34 @@ func _stamp_biome_at_hover() -> void:
 
 ## Stamp the element's per-cell density field with a radial-falloff brush at (cx,cz).
 ## Pure field math (no input/hover deps) — reused by the mouse stroke AND the headless
-## --paintbiome proof. Allocates the field lazily; clamps to [0,1] (or floors at 0
-## when erasing).
+## --paintbiome proof. Allocates the field lazily (sized to the biome AREA); clamps to
+## [0,1] (or floors at 0 when erasing). Uses the margin-OFFSET field index, so cx/cz (and
+## the brush footprint) may be NEGATIVE — anywhere in the biome area [-M, grid+M). The
+## radial blob is clamped to the biome AREA (via _biome_field_index returning -1 outside
+## the ring), NOT the grid.
 func _stamp_biome_field(el: String, cx: int, cz: int, r: int, erasing: bool) -> void:
 	if el == "" or _grid_w <= 0 or _grid_d <= 0:
 		return
+	var need := _biome_w() * _biome_d()
 	if not _brush_fields.has(el):
 		var nf := PackedFloat32Array()
-		nf.resize(_grid_w * _grid_d)
+		nf.resize(need)
 		_brush_fields[el] = nf
 	var field: PackedFloat32Array = _brush_fields[el]
+	# Grow a stale field if the grid (and thus the biome area) changed since allocation.
+	if field.size() != need:
+		field.resize(need)
 	for dz in range(-r, r + 1):
 		for dx in range(-r, r + 1):
 			var x := cx + dx
 			var z := cz + dz
-			if x < 0 or x >= _grid_w or z < 0 or z >= _grid_d:
+			var i := _biome_field_index(x, z)
+			if i < 0:
 				continue
 			var dist := sqrt(float(dx * dx + dz * dz))
 			if dist > float(r) + 0.001:
 				continue
 			var falloff := 1.0 - dist / (float(r) + 0.0001)
-			var i := z * _grid_w + x
 			if erasing:
 				field[i] = maxf(0.0, field[i] - _brush_strength * falloff)
 			else:
@@ -2363,14 +2408,24 @@ func _headless_paint_biome(element: String) -> void:
 	# field clearly registers regardless of brush radius.
 	var ccx := int(_grid_w / 2)
 	var ccz := int(_grid_d / 2)
-	var rad := maxi(_brush_radius, 3)
-	for off in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
-		_stamp_biome_field(el, ccx + off.x, ccz + off.y, rad, false)
+	var rad := maxi(_brush_radius, 4)
+	var m := int(BIOME_MARGIN / 2)   # stamp into the margin ring, just outside the grid
+	# Centre + a ring of spots AROUND the grid (cells in the margin, outside [0,grid)) —
+	# proves painting + foliage now wrap the grid, not only +x/+z.
+	var spots := [
+		Vector2i(ccx, ccz),
+		Vector2i(-m, ccz), Vector2i(_grid_w + m, ccz),               # west / east
+		Vector2i(ccx, -m), Vector2i(ccx, _grid_d + m),               # south / north
+		Vector2i(-m, -m), Vector2i(_grid_w + m, -m),                 # corners
+		Vector2i(-m, _grid_d + m), Vector2i(_grid_w + m, _grid_d + m),
+	]
+	for sp in spots:
+		_stamp_biome_field(el, sp.x, sp.y, rad, false)
 	_biome_dirty = true
 	_update_biome_overlay()
 	_repaint_biome_live()
-	print("[grid-editor] --paintbiome=%s: stamped at (%d,%d) r=%d, %d field cell(s)" % [
-		el, ccx, ccz, rad, _painted_cell_count(el)])
+	print("[grid-editor] --paintbiome=%s: stamped centre+ring (margin %d) r=%d, %d field cell(s)" % [
+		el, m, rad, _painted_cell_count(el)])
 
 
 ## Count of cells with non-zero painted density for `el` (proof diagnostic).
@@ -2389,11 +2444,19 @@ func _resize_biome_overlay() -> void:
 	if _biome_overlay == null or _biome_overlay.multimesh == null:
 		return
 	var mm := _biome_overlay.multimesh
-	mm.instance_count = _grid_w * _grid_d
-	for z in range(_grid_d):
-		for x in range(_grid_w):
-			var i := z * _grid_w + x
-			mm.set_instance_transform(i, Transform3D(Basis(), Vector3((x + 0.5) * cube_size, 0.07, (z + 0.5) * cube_size)))
+	var bw := _biome_w()
+	var bd := _biome_d()
+	mm.instance_count = bw * bd
+	# The overlay covers the WHOLE biome area: instance (x,z) at biome-local cell (x,z)
+	# sits at world cell (x - M, z - M), so the ring extends M cells past the grid on
+	# every side. World position uses the grid origin (no host offset — the overlay is a
+	# direct child of the editor, NOT under _biome_host).
+	for z in range(bd):
+		for x in range(bw):
+			var i := z * bw + x
+			var wx := (float(x - BIOME_MARGIN) + 0.5) * cube_size
+			var wz := (float(z - BIOME_MARGIN) + 0.5) * cube_size
+			mm.set_instance_transform(i, Transform3D(Basis(), Vector3(wx, 0.07, wz)))
 			mm.set_instance_color(i, Color(0, 0, 0, 0))
 
 
@@ -2402,7 +2465,9 @@ func _update_biome_overlay() -> void:
 	if _biome_overlay == null or _biome_overlay.multimesh == null:
 		return
 	var mm := _biome_overlay.multimesh
-	if mm.instance_count != _grid_w * _grid_d:
+	var bw := _biome_w()
+	var bd := _biome_d()
+	if mm.instance_count != bw * bd:
 		_resize_biome_overlay()
 	var el := _active_biome_element()
 	if _active_tab != "BIOME" or el == "":
@@ -2411,9 +2476,10 @@ func _update_biome_overlay() -> void:
 		return
 	var col := _biome_color(el)
 	var field: PackedFloat32Array = _brush_fields.get(el, PackedFloat32Array())
-	for z in range(_grid_d):
-		for x in range(_grid_w):
-			var i := z * _grid_w + x
+	# Overlay index == field index (both are biome-area, margin-offset, row-major over bw*bd).
+	for z in range(bd):
+		for x in range(bw):
+			var i := z * bw + x
 			var v: float = field[i] if i < field.size() else 0.0
 			mm.set_instance_color(i, Color(col.r, col.g, col.b, v * 0.75))
 
@@ -2424,13 +2490,18 @@ func _update_biome_overlay() -> void:
 ## (tree/critter/flower) place visible foliage by these distributions. Also persisted on save.
 func _biome_paint_layers() -> Array:
 	var out: Array = []
+	var bw := _biome_w()
+	var bd := _biome_d()
 	for el in _brush_fields:
 		var field: PackedFloat32Array = _brush_fields[el]
+		# Sparse mask is built over the biome AREA (bw×bd), so the accrual scatters foliage
+		# across the whole ring around the grid. The host offset (see _rebuild_biome) maps
+		# biome-local cell 0 → world cell -M, so foliage lands around the grid in world space.
 		var layer := {
 			"element": str(el),
 			"mode": "brush",
 			"density": 1.0,
-			"brush": DistributionFieldLib.field_to_sparse(field, _grid_w, _grid_d),
+			"brush": DistributionFieldLib.field_to_sparse(field, bw, bd),
 		}
 		if str(el) == "ground":
 			layer["height"] = 1.5
@@ -2455,6 +2526,9 @@ func _setup_biome_accrual() -> void:
 	if _biome_host == null:
 		_biome_host = Node3D.new()
 		_biome_host.name = "EditorBiomeHost"
+		# Offset by -M cells so the accrual's local biome-area frame lands as a margin ring
+		# around the grid in world space (re-asserted each rebuild in _rebuild_biome).
+		_biome_host.position = Vector3(-float(BIOME_MARGIN) * cube_size, 0.0, -float(BIOME_MARGIN) * cube_size)
 		add_child(_biome_host)
 	_accrual = get_node_or_null("/root/BiomeAccrualManager")
 	if _accrual == null:
@@ -2509,10 +2583,18 @@ func _rebuild_biome() -> void:
 		for entry in _accrual.get_contributions():
 			if entry is Dictionary:
 				_accrual.enable_layer(str(entry.get("kind", "")), true)
+	# Offset the host so its local [0,dims) maps to world [-M, grid+M]: the accrual
+	# scatters foliage in the host's LOCAL frame over the biome-area dims, and this
+	# shift places that area as a margin ring AROUND the grid in world space.
+	_biome_host.position = Vector3(-float(BIOME_MARGIN) * cube_size, 0.0, -float(BIOME_MARGIN) * cube_size)
+	var bw := _biome_w()
+	var bd := _biome_d()
 	var layers := _biome_paint_layers()
 	var ctx := {
-		"grid_dims": Vector3i(_grid_w, 1, _grid_d),
-		"grid_center": Vector3(float(_grid_w) * cube_size * 0.5, 0.0, float(_grid_d) * cube_size * 0.5),
+		# grid_dims spans the whole biome AREA (grid + margin ring) so foliage scatters
+		# across it; grid_center is that area's centre in the host's LOCAL frame.
+		"grid_dims": Vector3i(bw, 1, bd),
+		"grid_center": Vector3(float(bw) * cube_size * 0.5, 0.0, float(bd) * cube_size * 0.5),
 		"cube_size": cube_size,
 		# Seed parity with GridSystem (hash(map_name)) so the editor preview is the SAME
 		# arrangement the game renders. Synthetic mode uses a fixed seed.
