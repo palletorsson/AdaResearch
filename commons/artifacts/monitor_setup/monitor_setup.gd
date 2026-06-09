@@ -64,7 +64,7 @@ class_name MonitorSetup
 @export_range(0.0, 2.0) var crt_intensity: float = 1.0
 
 @export_group("Glow")
-@export_range(0.0, 4.0) var screen_emission: float = 1.3
+@export_range(0.0, 4.0) var screen_emission: float = 1.8
 
 @export_group("Board")
 ## Uniform scale applied to the whole rig (desk + pole + every screen offset/size).
@@ -1202,6 +1202,23 @@ func _build_one_screen(index: int, s: Dictionary) -> void:
 		_build_stand_neck(root, size)
 	else:
 		_build_clamp_arm(root, pos)
+
+	# GLOW: a soft screen-coloured OmniLight in front of each panel so it casts a real CRT
+	# glow onto the desk / pole / air — not just emissive pixels. Colour from the phosphor
+	# (info terminals) or the screen accent (poster/data/points).
+	var glow_col: Color = accent
+	if stype == "info":
+		glow_col = _phosphor_for(accent)["text"]
+	var lamp := OmniLight3D.new()
+	lamp.name = "ScreenGlow"
+	lamp.light_color = glow_col
+	lamp.light_energy = clampf(0.9 + 0.6 * screen_emission, 0.5, 3.0)
+	lamp.omni_range = maxf(size.x, size.y) * 2.2 + 0.45
+	lamp.omni_attenuation = 1.4
+	lamp.light_specular = 0.15
+	lamp.shadow_enabled = false
+	lamp.position = Vector3(0.0, 0.0, 0.16)
+	root.add_child(lamp)
 
 
 # ── 2D-IN-3D info face (SubViewport terminal Control on the panel quad) ────────────────
