@@ -234,7 +234,7 @@ const CRT_SCREEN_SHADER_PATH: String = "res://commons/ui/shaders/crt_screen.gdsh
 	{
 		"title": "SECURITY BREACH",
 		"body": "INTRUDER — BLOCK 9\nlockdown engaged",
-		"type": "poster",
+		"type": "points",
 		"size": Vector2(0.5, 0.32),
 		"pos": Vector3(0.72, 1.17, 0.16),
 		"angle_deg": -12.0,
@@ -982,8 +982,8 @@ func _build_tower() -> void:
 	var tower_w: float = 0.26
 	var tower_h: float = 0.5
 	var tower_d: float = 0.42
-	var base_x: float = -DESK_W * 0.5 + tower_w * 0.5 + 0.05
-	var base_y: float = DESK_TOP_Y + tower_h * 0.5
+	var base_x: float = -0.30                # tucked UNDER the desk, between the legs
+	var base_y: float = tower_h * 0.5        # sits on the floor (under the table)
 
 	var tower := MeshInstance3D.new()
 	tower.name = "Tower"
