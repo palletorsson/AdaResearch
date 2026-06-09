@@ -84,6 +84,11 @@ const EditorPanelUIScene = preload("res://commons/hazards/becoming_catalyst/tabb
 const GridOpsLib = preload("res://commons/modifiers/grid_ops.gd")
 var _editor_panel: Node = null          # viewport_2d_in_3d on the off hand
 var _editor_panel_ui: Control = null    # the TabbedEditorPanel Control inside it
+# Re-entrancy guard: when the GRID tab's tool buttons (structure vs paint) flip
+# the bracelet mode, the resulting _sync_editor_panel_tab() can re-fire the
+# panel's tab_changed → _on_editor_tab_changed and fight the mode we just set.
+# Set true around our own mode flips so the tab-changed handler no-ops.
+var _editor_tab_routing: bool = false
 # Live GRID tool state driven by the panel. Defaults are chosen so the GRID tab
 # is a no-op-vs-original until the player touches the panel: op "add" + brush 1
 # means the first trigger goes straight to the legacy single-cube _handle_voxel_add.
@@ -258,9 +263,17 @@ func _physics_process(delta: float) -> void:
 			_biome_brush.name = "BiomeBrushCtrl"
 			add_child(_biome_brush)
 			_biome_brush.setup()
-		_ensure_biome_menu()
-		if _biome_menu:
-			_biome_menu.visible = true
+		# ONE INTERFACE: when the unified editor panel is present it owns the biome
+		# UI (its BIOME tab), so don't build or show the separate biome menu. The
+		# biome brush itself (painting below) is untouched — only the 2nd panel is
+		# suppressed. Without the unified panel, the legacy wrist menu still shows.
+		if _editor_panel and is_instance_valid(_editor_panel):
+			if _biome_menu and is_instance_valid(_biome_menu):
+				_biome_menu.visible = false
+		else:
+			_ensure_biome_menu()
+			if _biome_menu:
+				_biome_menu.visible = true
 		if controller:
 			var b_origin: Vector3 = controller.global_position
 			var b_fwd: Vector3 = -controller.global_transform.basis.z
@@ -751,8 +764,13 @@ func _collect_vr_placements() -> Array:
 	return clears + sets
 
 
-func _save_map_over_http(map_name: String, layout: Array, placements: Array = []) -> void:
-	print("[Catalyst] POSTing '%s' (%d rows, %d placed artifacts) -> %s" % [map_name, layout.size(), placements.size(), MAP_SAVE_URL])
+## POST the edited layers to the PC's save-layers endpoint. ADDITIVE 4th arg:
+## `modifiers` — when non-empty it's sent as the top-level `modifiers` field so
+## the modifier op-stack persists over the SAME adb-reverse tunnel as structure
+## and placements (route.ts merges it non-destructively). Existing callers that
+## omit `modifiers` behave exactly as before.
+func _save_map_over_http(map_name: String, layout: Array, placements: Array = [], modifiers: Array = []) -> void:
+	print("[Catalyst] POSTing '%s' (%d rows, %d placed artifacts, %d modifiers) -> %s" % [map_name, layout.size(), placements.size(), modifiers.size(), MAP_SAVE_URL])
 	var http := HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(_on_map_save_completed.bind(http))
@@ -762,6 +780,8 @@ func _save_map_over_http(map_name: String, layout: Array, placements: Array = []
 		payload["layers"] = {"structure": layout}
 	if not placements.is_empty():
 		payload["interactablePlacements"] = placements
+	if not modifiers.is_empty():
+		payload["modifiers"] = modifiers
 	http.set_meta("map_name", map_name)
 	var err := http.request(MAP_SAVE_URL, headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
 	if err != OK:
@@ -788,11 +808,11 @@ func _on_map_save_completed(result: int, response_code: int, _headers: PackedStr
 # MODIFIER SAVE — write only the `modifiers` key into map_data.json (additive)
 # ═══════════════════════════════════════════════════════════════════════════
 
-## B (modifier mode) = persist the modifier op-stack into the repo's
-## map_data.json. Read-merge-write: ONLY the top-level `modifiers` key is
-## touched — structure/utilities/interactables/settings and every other key are
-## preserved exactly. res:// is read-only on Quest, so the local write is
-## editor-only (skipped on android, like the structure save).
+## B (modifier / GRID-paint mode) = persist the modifier op-stack into the repo's
+## map_data.json. Now POSTs the `modifiers` array over the SAME adb-reverse tunnel
+## as structure + placements (/api/game/save-layers), which read-merges ONLY the
+## top-level `modifiers` key — every other key is preserved. This works on the
+## Quest (where res:// is read-only) exactly like the structure / biome saves.
 func _save_modifiers() -> void:
 	var data := _get_grid_data_component()
 	var map_name := ""
@@ -804,41 +824,14 @@ func _save_modifiers() -> void:
 	if _modifier_stack.is_empty():
 		_flash_label("NOTHING TO SAVE", Color(1.0, 0.5, 0.2))
 		return
-	if OS.has_feature("android"):
-		# res:// is read-only on a packaged Quest build — nothing to write to.
-		_flash_label("MODIFIERS: PC-ONLY SAVE", Color(1.0, 0.8, 0.3))
-		return
 
-	var path := _map_data_path_for(map_name)
-	if not FileAccess.file_exists(path):
-		_flash_label("NO map_data.json", Color(1.0, 0.4, 0.3))
-		push_warning("[Catalyst] modifier save: file not found %s" % path)
-		return
-
-	# Read existing JSON, merge only the modifiers key, write back.
-	var rf := FileAccess.open(path, FileAccess.READ)
-	if rf == null:
-		_flash_label("READ FAILED", Color(1.0, 0.35, 0.35))
-		return
-	var text := rf.get_as_text()
-	rf.close()
-	var json := JSON.new()
-	if json.parse(text) != OK or not (json.data is Dictionary):
-		_flash_label("BAD JSON", Color(1.0, 0.35, 0.35))
-		push_warning("[Catalyst] modifier save: parse failed at %s" % path)
-		return
-	var doc: Dictionary = json.data
-	doc["modifiers"] = _modifier_stack.duplicate(true)
-	var wf := FileAccess.open(path, FileAccess.WRITE)
-	if wf == null:
-		_flash_label("WRITE FAILED", Color(1.0, 0.35, 0.35))
-		return
-	wf.store_string(JSON.stringify(doc, "\t"))
-	wf.close()
-	_flash_label("SAVED MODIFIERS  %s  (%d)" % [map_name, _modifier_stack.size()], Color(0.4, 1.0, 0.6))
-	print("[Catalyst] modifier save: wrote %d ops -> %s" % [_modifier_stack.size(), path])
+	# Primary path: POST the stack to the PC (works on headset over adb reverse).
+	# No structure/placements here — only the modifiers field, so the endpoint
+	# touches just the `modifiers` key and leaves the rest of map_data.json intact.
+	_save_map_over_http(map_name, [], [], _modifier_stack.duplicate(true))
+	_flash_label("SAVING MODIFIERS  %s ..." % map_name, Color(0.6, 0.85, 1.0))
 	if controller:
-		controller.trigger_haptic_pulse("haptic", 0.0, 0.2, 0.6, 0.0)
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.4, 0.0)
 
 
 ## Resolve a map name to its map_data.json path (mirrors GridDataComponent).
@@ -903,6 +896,39 @@ func _get_left_controller() -> XRController3D:
 		if c is XRController3D and c != controller:
 			return c as XRController3D
 	return null
+
+
+## The RIGHT-hand XRController3D. Mirrors _get_left_controller (walks the same
+## XROrigin children) but resolves the right hand explicitly: first by the
+## tracker StringName ("right_hand"), then by a node-name hint ("RightHand" /
+## "Right" / "right"). Falls back to "any controller that isn't the catalyst's
+## own" so the editor panel still mounts even on rigs that don't label hands.
+## Additive — does not touch the left-hand lookup the biome menu relies on.
+func _get_right_controller() -> XRController3D:
+	if controller == null:
+		return null
+	var origin := controller.get_parent()
+	if origin == null:
+		return null
+	var fallback: XRController3D = null
+	for c in origin.get_children():
+		if not (c is XRController3D):
+			continue
+		var xc := c as XRController3D
+		# Tracker is the authoritative signal (StringName "right_hand").
+		if String(xc.tracker) == "right_hand":
+			return xc
+		# Node-name hint as a secondary cue.
+		var nm := String(xc.name).to_lower()
+		if nm.find("right") != -1:
+			return xc
+		# Remember any non-catalyst controller as a last resort.
+		if xc != controller:
+			fallback = xc
+	# If the catalyst is itself the right hand, mount on it (still a valid wrist).
+	if String(controller.tracker) == "right_hand" or String(controller.name).to_lower().find("right") != -1:
+		return controller
+	return fallback
 
 
 ## Build the left-hand menu viewport once, on first biome_brush use.
@@ -977,21 +1003,24 @@ func _on_biome_menu_pressure(strength: float) -> void:
 # Nothing here removes or alters the biome menu — both can coexist on the wrist.
 # ═══════════════════════════════════════════════════════════════════════════
 
-## Build the left-wrist tabbed editor viewport once, on first edit-mode use.
+## Build the right-wrist tabbed editor viewport once, on first edit-mode use.
+## The panel now mounts on the RIGHT controller (the biome menu stays on the
+## left). Only the controller reference changed; the offset/scene are unchanged.
 func _ensure_editor_panel() -> void:
 	if _editor_panel and is_instance_valid(_editor_panel):
 		return
-	var left := _get_left_controller()
-	if left == null:
+	var right := _get_right_controller()
+	if right == null:
 		return
 	var vp = EditorPanelViewport.instantiate()
 	vp.name = "TabbedEditorPanelVP"
 	vp.scene = EditorPanelUIScene
 	vp.screen_size = Vector2(0.24, 0.22)
 	vp.viewport_size = Vector2(540, 500)
-	# Sit a touch outboard/below the biome menu so both are glanceable on the wrist.
-	vp.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-45)), Vector3(0.14, 0.04, -0.11))
-	left.add_child(vp)
+	# Mirror the wrist offset to the right hand (x flipped) so it sits glanceable
+	# above the right wrist, the way the biome menu sits above the left.
+	vp.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-45)), Vector3(-0.14, 0.04, -0.11))
+	right.add_child(vp)
 	_editor_panel = vp
 	call_deferred("_connect_editor_panel", vp)
 
@@ -1043,12 +1072,18 @@ func _update_editor_panel_visibility() -> void:
 		_ensure_editor_panel()
 		if _editor_panel:
 			_editor_panel.visible = true
+			# ONE INTERFACE: the panel's BIOME tab is now the biome UI. While the
+			# unified panel is up, keep the SEPARATE biome menu hidden (handlers
+			# stay wired — only the second 2D panel is suppressed). Additive.
+			if _editor_panel.visible and _biome_menu and is_instance_valid(_biome_menu):
+				_biome_menu.visible = false
 	elif _editor_panel:
 		_editor_panel.visible = false
 
 
-## Push the current mode onto the panel's tab row (guarded, additive). Only the
-## four tabbed modes map to a tab; other edit modes leave the panel as-is.
+## Push the current mode onto the panel's tab row (guarded, additive). The 3-tab
+## panel folds structure + paint into GRID, so BOTH voxel_editor and modifier
+## modes map to GRID; only the tabbed modes map to a tab, others leave it as-is.
 func _sync_editor_panel_tab() -> void:
 	if _editor_panel_ui == null or not is_instance_valid(_editor_panel_ui):
 		return
@@ -1059,20 +1094,26 @@ func _sync_editor_panel_tab() -> void:
 	var tab_id := ""
 	match mode_id:
 		"voxel_editor": tab_id = "GRID"
-		"artifact_edit": tab_id = "ARTIFACT"
-		"modifier": tab_id = "MODIFIER"
+		"modifier": tab_id = "GRID"  # paint lives in the GRID tab now
+		"artifact_edit": tab_id = "ARTIFACTS"
 		"biome_brush": tab_id = "BIOME"
 	if tab_id != "":
 		_editor_panel_ui.set_active_tab(tab_id)
 
 
 ## tab_changed → switch the bracelet mode via the EXISTING set_mode_index path.
+## 3-tab panel: GRID folds structure + paint, so it lands on voxel_editor by
+## default (PAINT ops re-route to "modifier" in _on_editor_modifier_op).
 func _on_editor_tab_changed(tab_id: String) -> void:
+	# Ignore tab_changed echoes triggered by our own grid-op mode routing —
+	# the GRID tab maps to BOTH voxel_editor and modifier, so a re-sync to GRID
+	# must not yank us back to voxel_editor mid-paint.
+	if _editor_tab_routing:
+		return
 	var target_mode := ""
 	match tab_id.to_upper():
 		"GRID": target_mode = "voxel_editor"
-		"ARTIFACT": target_mode = "artifact_edit"
-		"MODIFIER": target_mode = "modifier"
+		"ARTIFACTS": target_mode = "artifact_edit"
 		"BIOME": target_mode = "biome_brush"
 	if target_mode == "":
 		return
@@ -1084,8 +1125,28 @@ func _on_editor_tab_changed(tab_id: String) -> void:
 		set_mode_index(idx)
 
 
-## grid_op_selected → remember the live GRID operation for the next stroke.
+## Flip the bracelet to `mode_id` via the EXISTING set_mode_index path, with the
+## tab-routing guard raised so the resulting tab re-sync doesn't echo back into
+## _on_editor_tab_changed and undo the switch. No-op if already in that mode or
+## the mode isn't unlocked. Returns true if we are (now) in the requested mode.
+func _route_bracelet_mode(mode_id: String) -> bool:
+	var cur_def := _get_current_mode_def()
+	var cur_id: String = cur_def.get("id", "") if not cur_def.is_empty() else ""
+	if cur_id == mode_id:
+		return true
+	var idx: int = unlocked_modes.find(mode_id)
+	if idx < 0:
+		return false
+	_editor_tab_routing = true
+	set_mode_index(idx)
+	_editor_tab_routing = false
+	return true
+
+
+## grid_op_selected (a STRUCTURE op) → make sure we're in voxel_editor mode so
+## the next trigger runs the structure stroke, then remember the live op.
 func _on_editor_grid_op(op: String) -> void:
+	_route_bracelet_mode("voxel_editor")
 	_active_grid_op = op
 	_flash_label("GRID: " + op.to_upper(), Color(0.45, 0.75, 1.0))
 
@@ -1100,10 +1161,12 @@ func _on_editor_level(level: int) -> void:
 	_active_grid_level = clampi(level, 0, GridOpsLib.MAX_H)
 
 
-## modifier_op_selected → map the panel's op names onto the existing MODIFIER_OPS
-## and sync _modifier_op_index so trigger applies the chosen op.
+## modifier_op_selected (a PAINT op from the GRID tab) → switch the bracelet into
+## "modifier" mode so painting works without leaving the GRID tab, then map the
+## panel's op names onto the existing MODIFIER_OPS and sync _modifier_op_index.
 ##   panel "colorize" -> "colorize"; "random" -> "random_colors"; "clear" -> "normalize".
 func _on_editor_modifier_op(op: String) -> void:
+	_route_bracelet_mode("modifier")
 	var mapped := op
 	match op:
 		"random": mapped = "random_colors"
