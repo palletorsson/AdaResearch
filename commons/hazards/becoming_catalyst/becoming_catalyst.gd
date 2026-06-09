@@ -31,6 +31,9 @@ const MODE_DEFS: Array[Dictionary] = [
 	{"id": "lab_edit",       "order": 0,  "name": "Lab",            "sequence": "",                   "script": ""},
 	{"id": "biome_brush",    "order": 0,  "name": "Biome Brush",    "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_biome_brush.gd"},
 	{"id": "modifier",       "order": 0,  "name": "Modifier",       "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_modifier.gd"},
+	# ADDITIVE: in-headset editing of the utilities layer (spawn/teleporter/ramp/door/…).
+	# No factory script — dispatched inline in _physics_process (mirrors the biome block).
+	{"id": "utility_edit",   "order": 0,  "name": "Utility",        "sequence": "",                   "script": ""},
 	{"id": "primitives",     "order": 1,  "name": "Primitives",     "sequence": "primitives",         "script": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"},
 	{"id": "transformation", "order": 2,  "name": "Transformation", "sequence": "transformation",     "script": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"},
 	{"id": "chromatic",      "order": 3,  "name": "Chromatic",      "sequence": "color",              "script": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"},
@@ -44,7 +47,7 @@ const MODE_DEFS: Array[Dictionary] = [
 ]
 
 # ── State ─────────────────────────────────────────────────────────────────
-var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "biome_brush", "modifier", "off"]
+var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "biome_brush", "modifier", "utility_edit", "off"]
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
@@ -130,6 +133,23 @@ const MODIFIER_PALETTE: Array = [
 	"#e08a2a", "#3aa0e0", "#7ad06a", "#e05a8a", "#d0c23a", "#9a6ae0", "#e0e0e0",
 ]
 var _modifier_palette_index: int = 0
+
+# ── Utility Edit mode (ADDITIVE) ──────────────────────────────────────────
+# Edits the utilities layer (map_data.layers.utilities[row][col]="<code>") in VR,
+# mirroring the desktop GridEditorDesktop3D utility CRUD. Reuses the shared voxel
+# controller's targeted cell (target_cell) for the (x,z) to edit, and the live
+# GridUtilitiesComponent (_place_utility / utility_objects) for zero-drift spawn.
+# Tracked in-memory so B can rebuild + POST the whole utilities layer.
+var _vr_util_code: String = "s"            # active utility type (panel sets it)
+var _vr_util_op: String = "ADD"            # active op: ADD / MOVE / ROTATE / REMOVE
+var _vr_utilities_comp: Node = null        # cached GridUtilitiesComponent (live spawn path)
+var _vr_utilities: Array = []              # in-memory utilities layer (rows[z][x]="<code>")
+var _vr_utilities_seeded_map: String = ""  # map name _vr_utilities was seeded from ("" = never)
+var _vr_util_trigger_was_down: bool = false  # debounce: one trigger pull = one op
+var _vr_util_move_picked: bool = false     # MOVE: have we picked a cell yet?
+var _vr_util_move_token: String = ""       # MOVE: the held utility token
+var _vr_util_move_from: Vector2i = Vector2i(-1, -1)  # MOVE: source cell (row, col)
+var _vr_util_ghost: MeshInstance3D = null  # simple cell ghost in utility_edit mode
 
 # Artifact Edit mode — laser-grab existing artifacts and move/rotate/snap them
 var _edit_target: Node3D = null        # artifact under the laser (not grabbed)
@@ -287,6 +307,14 @@ func _physics_process(delta: float) -> void:
 		if _biome_menu:
 			_biome_menu.visible = false
 
+	# Utility Edit — point at a cell (shared voxel target_cell), trigger applies the
+	# active op (ADD/REMOVE/ROTATE/MOVE) on the utilities layer. Mirrors the desktop
+	# utility CRUD; debounced so one trigger pull = one op. B saves the layer.
+	if is_held and _cur_mode_id == "utility_edit":
+		_update_utility_edit()
+	elif _vr_util_ghost and is_instance_valid(_vr_util_ghost):
+		_vr_util_ghost.visible = false
+
 	# Mode switching disabled on controller thumbstick — use the bracelet instead
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -342,6 +370,23 @@ func _on_controller_button(button_name: String) -> void:
 				_handle_modifier_undo()
 			"by_button":
 				_save_modifiers()
+		return
+
+	# Utility Edit mode intercepts its buttons before the firing/voxel dispatch
+	# (additive — mirrors the biome_brush / modifier early-returns so trigger never
+	# falls through to _fire()). trigger = apply the active op (POLLED + debounced in
+	# _update_utility_edit, so the event itself is a no-op here); Ax = cycle the op;
+	# grip = cancel an in-flight MOVE; By = save the utilities layer.
+	if mode_id == "utility_edit":
+		match button_name:
+			"ax_button":
+				_cycle_vr_utility_op()
+			"grip_click":
+				if _vr_util_move_picked:
+					_cancel_vr_utility_move()
+					_flash_label("MOVE CANCELLED", Color(1.0, 0.8, 0.4))
+			"by_button":
+				_save_utilities()
 		return
 
 	match button_name:
@@ -1070,6 +1115,12 @@ func _connect_editor_panel(vp: Node) -> void:
 		ui.pressure_changed.connect(_on_biome_menu_pressure)
 	if ui.has_signal("artifact_action") and not ui.artifact_action.is_connected(_on_editor_artifact_action):
 		ui.artifact_action.connect(_on_editor_artifact_action)
+	# UTILITY tab — pick the active utility type + op (the host applies them on a
+	# trigger press at the targeted cell). Guarded like every other connect above.
+	if ui.has_signal("utility_type_changed") and not ui.utility_type_changed.is_connected(_on_editor_utility_type):
+		ui.utility_type_changed.connect(_on_editor_utility_type)
+	if ui.has_signal("utility_op_selected") and not ui.utility_op_selected.is_connected(_on_editor_utility_op):
+		ui.utility_op_selected.connect(_on_editor_utility_op)
 	# Sync the panel's active tab to whatever mode we're already in.
 	_sync_editor_panel_tab()
 	print("[Catalyst] Tabbed editor panel connected")
@@ -1080,7 +1131,7 @@ func _connect_editor_panel(vp: Node) -> void:
 func _update_editor_panel_visibility() -> void:
 	var mode_def := _get_current_mode_def()
 	var mode_id: String = mode_def.get("id", "") if not mode_def.is_empty() else ""
-	var edit_modes: Array = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "modifier", "biome_brush"]
+	var edit_modes: Array = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "modifier", "biome_brush", "utility_edit"]
 	if is_held and mode_id in edit_modes:
 		_ensure_editor_panel()
 		if _editor_panel:
@@ -1109,6 +1160,7 @@ func _sync_editor_panel_tab() -> void:
 		"voxel_editor": tab_id = "GRID"
 		"modifier": tab_id = "GRID"  # paint lives in the GRID tab now
 		"artifact_edit": tab_id = "ARTIFACTS"
+		"utility_edit": tab_id = "UTILITY"
 		"biome_brush": tab_id = "BIOME"
 	if tab_id != "":
 		_editor_panel_ui.set_active_tab(tab_id)
@@ -1127,6 +1179,7 @@ func _on_editor_tab_changed(tab_id: String) -> void:
 	match tab_id.to_upper():
 		"GRID": target_mode = "voxel_editor"
 		"ARTIFACTS": target_mode = "artifact_edit"
+		"UTILITY": target_mode = "utility_edit"
 		"BIOME": target_mode = "biome_brush"
 	if target_mode == "":
 		return
@@ -1201,6 +1254,454 @@ func _on_editor_color(color: Color) -> void:
 ## (Wire to a real palette browser in a follow-up.)
 func _on_editor_artifact_action(action: String) -> void:
 	_flash_label("ARTIFACT " + action, Color(0.95, 0.7, 0.35))
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# UTILITY EDIT MODE (ADDITIVE) — edit the utilities layer in VR
+# Mirrors the desktop GridEditorDesktop3D utility CRUD. Point at a cell (the
+# shared voxel controller's target_cell), pick a TYPE + OP on the panel's UTILITY
+# tab, and pull the trigger to apply: ADD places the type, REMOVE clears it,
+# ROTATE bumps its facing +90°, MOVE picks-then-places. Spawns live through the
+# real GridUtilitiesComponent (_place_utility / utility_objects) for zero drift,
+# and tracks every edit in _vr_utilities so B can save the whole layer.
+# ═══════════════════════════════════════════════════════════════════════════
+
+## utility_type_changed → remember the active utility code (panel sends the bare
+## code, e.g. "s"/"t"/"wp"). Switches the bracelet into utility_edit so the next
+## trigger edits the utilities layer (mirrors _on_editor_grid_op's mode route).
+func _on_editor_utility_type(code: String) -> void:
+	_route_bracelet_mode("utility_edit")
+	var c := code.strip_edges()
+	if c != "":
+		_vr_util_code = c
+	_flash_label("UTIL: " + _util_friendly_code(_vr_util_code), Color(0.85, 0.5, 0.95))
+
+
+## utility_op_selected → remember the active op (ADD/MOVE/ROTATE/REMOVE). Defaults
+## to ADD for any unknown value. Switching op cancels an in-flight MOVE pick.
+func _on_editor_utility_op(op: String) -> void:
+	_route_bracelet_mode("utility_edit")
+	var up := op.strip_edges().to_upper()
+	if up != "ADD" and up != "MOVE" and up != "ROTATE" and up != "REMOVE":
+		up = "ADD"
+	if up != "MOVE":
+		_cancel_vr_utility_move()
+	_vr_util_op = up
+	_flash_label("UTIL OP: " + up, Color(0.85, 0.5, 0.95))
+
+
+## Ax convenience — cycle the active op ADD → MOVE → ROTATE → REMOVE without the
+## panel. Cancels an in-flight MOVE when leaving it. Mirrors _on_editor_utility_op.
+func _cycle_vr_utility_op() -> void:
+	var ops: Array = ["ADD", "MOVE", "ROTATE", "REMOVE"]
+	var idx: int = ops.find(_vr_util_op)
+	if idx < 0:
+		idx = 0
+	idx = (idx + 1) % ops.size()
+	var up: String = str(ops[idx])
+	if up != "MOVE":
+		_cancel_vr_utility_move()
+	_vr_util_op = up
+	_flash_label("UTIL OP: " + up, Color(0.85, 0.5, 0.95))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
+
+
+## Per-frame utility_edit driver. Shows a ghost at the targeted cell and, on a
+## trigger press-edge, applies the active op once (debounced). Reuses the shared
+## voxel controller's target_cell — already updated every frame by
+## _update_voxel_raycast (voxel mode is active in utility_edit, see set_mode_index).
+func _update_utility_edit() -> void:
+	if not is_instance_valid(controller):
+		return
+	# Resolve the faced cell from the shared voxel controller (Vector3i x,y,z).
+	var col := -1
+	var row := -1
+	if _voxel_controller and _voxel_controller.has_target:
+		var tc: Vector3i = _voxel_controller.target_cell
+		if tc.x >= 0 and tc.z >= 0:
+			col = tc.x
+			row = tc.z
+	_update_vr_utility_ghost(col, row)
+	# Hide the voxel add/remove ghosts — the utility ghost is the preview here.
+	if _voxel_controller:
+		if _voxel_controller._ghost_add:
+			_voxel_controller._ghost_add.visible = false
+		if _voxel_controller._ghost_remove:
+			_voxel_controller._ghost_remove.visible = false
+	# Debounced trigger: one pull = one op.
+	var trig_down: bool = controller.is_button_pressed("trigger_click")
+	if trig_down and not _vr_util_trigger_was_down:
+		if col >= 0 and row >= 0:
+			_apply_vr_utility_op(col, row)
+		else:
+			_flash_label("AIM AT A CELL", Color(1.0, 0.7, 0.3))
+	_vr_util_trigger_was_down = trig_down
+
+
+## Apply the active op at column (x=col, z=row). Mirrors _utility_left_click on
+## desktop. Every branch keeps _vr_utilities (the in-memory layer) in sync so the
+## B-save reconstructs the correct whole layer.
+func _apply_vr_utility_op(col: int, row: int) -> void:
+	_ensure_vr_utilities_seeded()
+	match _vr_util_op:
+		"ADD": _vr_utility_add(col, row)
+		"REMOVE": _vr_utility_remove(col, row)
+		"ROTATE": _vr_utility_rotate(col, row)
+		"MOVE": _vr_utility_move_click(col, row)
+		_: _vr_utility_add(col, row)
+
+
+## ADD: clear any occupant, write the type into the layer, and spawn it live.
+func _vr_utility_add(col: int, row: int) -> void:
+	if not _vr_util_cell_valid(row, col):
+		return
+	if _vr_util_code.strip_edges() == "":
+		_flash_label("PICK A UTILITY TYPE", Color(1.0, 0.7, 0.3))
+		return
+	_vr_despawn_utility_at(col, row)
+	_vr_utilities[row][col] = _vr_util_code
+	var ok := _vr_spawn_utility(col, row, _vr_util_code)
+	if ok:
+		_flash_label("PLACED %s (%d,%d)" % [_util_friendly_code(_vr_util_code), row, col], Color(0.4, 1.0, 0.6))
+	else:
+		_flash_label("PLACED %s (data only)" % _util_friendly_code(_vr_util_code), Color(0.7, 0.9, 0.6))
+	fire_cooldown = 0.15
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.25, 0.0)
+
+
+## REMOVE: clear the cell's data and despawn its live object.
+func _vr_utility_remove(col: int, row: int) -> void:
+	if not _vr_util_cell_valid(row, col):
+		return
+	var tok := str(_vr_utilities[row][col]).strip_edges()
+	if tok == "" or tok == " ":
+		_flash_label("CELL (%d,%d) EMPTY" % [row, col], Color(1.0, 0.7, 0.3))
+		return
+	_vr_despawn_utility_at(col, row)
+	_vr_utilities[row][col] = " "
+	_flash_label("CLEARED (%d,%d)" % [row, col], Color(1.0, 0.8, 0.4))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+
+
+## ROTATE: bump the cell's facing +90° on its token, rewrite the layer, respawn.
+func _vr_utility_rotate(col: int, row: int) -> void:
+	if not _vr_util_cell_valid(row, col):
+		return
+	var tok := str(_vr_utilities[row][col]).strip_edges()
+	if tok == "" or tok == " ":
+		_flash_label("NOTHING TO ROTATE", Color(1.0, 0.7, 0.3))
+		return
+	var rotated := _vr_bump_rotation_token(tok)
+	_vr_despawn_utility_at(col, row)
+	_vr_utilities[row][col] = rotated
+	_vr_spawn_utility(col, row, rotated)
+	_flash_label("ROTATED (%d,%d)" % [row, col], Color(0.6, 0.85, 1.0))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.25, 0.0)
+
+
+## MOVE: pick-then-place. First trigger on an occupied cell lifts it; the next
+## trigger drops it on the targeted cell (mirrors desktop _utility_move_click).
+func _vr_utility_move_click(col: int, row: int) -> void:
+	if not _vr_util_move_picked:
+		_vr_utility_pick_up(col, row)
+	else:
+		_vr_utility_drop(col, row)
+
+
+func _vr_utility_pick_up(col: int, row: int) -> void:
+	if not _vr_util_cell_valid(row, col):
+		return
+	var tok := str(_vr_utilities[row][col]).strip_edges()
+	if tok == "" or tok == " ":
+		_flash_label("MOVE — (%d,%d) EMPTY" % [row, col], Color(1.0, 0.7, 0.3))
+		return
+	_vr_despawn_utility_at(col, row)
+	_vr_utilities[row][col] = " "
+	_vr_util_move_token = tok
+	_vr_util_move_from = Vector2i(row, col)
+	_vr_util_move_picked = true
+	_flash_label("MOVE — PICKED (%d,%d)" % [row, col], Color(0.85, 0.6, 0.95))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.06, 0.3, 0.0)
+
+
+func _vr_utility_drop(col: int, row: int) -> void:
+	if not _vr_util_cell_valid(row, col):
+		return
+	_vr_despawn_utility_at(col, row)
+	_vr_utilities[row][col] = _vr_util_move_token
+	var moved := _vr_util_move_token
+	_vr_spawn_utility(col, row, _vr_util_move_token)
+	_vr_util_move_picked = false
+	_vr_util_move_token = ""
+	_vr_util_move_from = Vector2i(-1, -1)
+	_flash_label("MOVE — %s → (%d,%d)" % [_util_friendly_code(moved), row, col], Color(0.4, 1.0, 0.6))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.1, 0.4, 0.0)
+
+
+## Abort an in-flight MOVE pick, restoring the picked utility to its source cell.
+func _cancel_vr_utility_move() -> void:
+	if not _vr_util_move_picked:
+		return
+	var row := _vr_util_move_from.x
+	var col := _vr_util_move_from.y
+	if row >= 0 and col >= 0 and _vr_util_cell_valid(row, col):
+		_vr_utilities[row][col] = _vr_util_move_token
+		_vr_spawn_utility(col, row, _vr_util_move_token)
+	_vr_util_move_picked = false
+	_vr_util_move_token = ""
+	_vr_util_move_from = Vector2i(-1, -1)
+
+
+## Spawn one utility at column (x=col, z=row) via the live GridUtilitiesComponent's
+## _place_utility — the SAME path the desktop _spawn_utility uses (zero drift).
+## Returns false if the component is absent / synthetic / the code has no scene.
+func _vr_spawn_utility(col: int, row: int, token: String) -> bool:
+	var comp := _get_vr_utilities_comp()
+	if comp == null:
+		return false
+	if not ("parent_node" in comp) or comp.parent_node == null:
+		return false
+	if not comp.has_method("_place_utility"):
+		return false
+	var parsed: Dictionary = UtilityRegistry.parse_utility_cell(token)
+	var code := str(parsed.get("type", "")).strip_edges()
+	if code == "" or code == " ":
+		return false
+	if not UtilityRegistry.is_valid_utility_type(code):
+		return false
+	if UtilityRegistry.get_utility_scene_path(code) == "":
+		return false  # authorial / param-only codes: data write stands, no live spawn
+	var params: Array = parsed.get("parameters", [])
+	var y_pos := 0
+	var structure := _get_edit_structure()
+	if structure and structure.has_method("find_highest_y_at"):
+		y_pos = structure.find_highest_y_at(col, row)
+	var total_size: float = 1.0
+	if structure:
+		total_size = structure.cube_size + structure.gutter
+	elif "gutter" in comp:
+		total_size = 1.0 + float(comp.gutter)
+	comp._place_utility(col, y_pos, row, code, params, {}, total_size)
+	return true
+
+
+## Despawn any spawned utility object(s) at column (x=col, z=row). The component
+## keys utility_objects by Vector3i(x,y,z); y is unknown, so scan the column.
+func _vr_despawn_utility_at(col: int, row: int) -> void:
+	var comp := _get_vr_utilities_comp()
+	if comp == null or not ("utility_objects" in comp):
+		return
+	var objs: Dictionary = comp.utility_objects
+	var to_free: Array = []
+	for key in objs.keys():
+		if key is Vector3i and key.x == col and key.z == row:
+			to_free.append(key)
+	for key in to_free:
+		var node = objs[key]
+		if is_instance_valid(node):
+			node.queue_free()
+		objs.erase(key)
+
+
+## Bump a rotation (degrees) param on a utility token by +90°, wrapping 0..270.
+## Mirrors the desktop _bump_rotation_token exactly: a trailing pure-integer param
+## is the rotation slot; otherwise append ":90". PackedStringArray from split(":").
+func _vr_bump_rotation_token(tok: String) -> String:
+	var parts: PackedStringArray = tok.split(":")
+	if parts.size() == 0:
+		return tok
+	var base := str(parts[0])
+	if parts.size() >= 2 and str(parts[parts.size() - 1]).is_valid_int():
+		var deg := int(str(parts[parts.size() - 1]))
+		deg = wrapi(deg + 90, 0, 360)
+		parts[parts.size() - 1] = str(deg)
+		return ":".join(parts)
+	var out := base
+	for i in range(1, parts.size()):
+		out += ":" + str(parts[i])
+	out += ":90"
+	return out
+
+
+## The live GridUtilitiesComponent — cached, or a fresh lookup by node name.
+func _get_vr_utilities_comp() -> Node:
+	if _vr_utilities_comp and is_instance_valid(_vr_utilities_comp):
+		return _vr_utilities_comp
+	# Prefer the GridSystem accessor; fall back to a tree search by name.
+	var gs := _find_node_by_name(get_tree().root, "GridSystem")
+	if gs and gs.has_method("get_utilities_component"):
+		var c = gs.get_utilities_component()
+		if c != null:
+			_vr_utilities_comp = c
+			return _vr_utilities_comp
+	var n := _find_node_by_name(get_tree().root, "GridUtilitiesComponent")
+	if n != null:
+		_vr_utilities_comp = n
+	return _vr_utilities_comp
+
+
+## True when (row, col) is inside the in-memory utilities layer.
+func _vr_util_cell_valid(row: int, col: int) -> bool:
+	if row < 0 or row >= _vr_utilities.size():
+		return false
+	var r: Array = _vr_utilities[row]
+	return col >= 0 and col < r.size()
+
+
+## Friendly label for a utility code (registry name when known, else the code).
+func _util_friendly_code(code: String) -> String:
+	var base := code
+	if ":" in base:
+		base = base.split(":")[0]
+	if UtilityRegistry.is_valid_utility_type(base):
+		return UtilityRegistry.get_utility_name(base)
+	return code
+
+
+## Seed _vr_utilities from the loaded map, so the B-save sends the WHOLE layer
+## (existing utilities + this session's edits). Re-seeds when the current map name
+## changes (map transition) so edits never leak across maps. Primary source is the
+## live component's cached layout (what actually spawned); falls back to the data
+## component's utility layout, then to a blank grid sized to the structure.
+func _ensure_vr_utilities_seeded() -> void:
+	# Current map name — re-seed if it changed (or first use).
+	var cur_map := ""
+	var dc := _get_grid_data_component()
+	if dc and dc.has_method("get_current_map_name"):
+		cur_map = dc.get_current_map_name()
+	if _vr_utilities_seeded_map == cur_map and not _vr_utilities.is_empty():
+		return
+	# A map transition invalidates any in-flight MOVE pick + cached component.
+	_vr_util_move_picked = false
+	_vr_util_move_token = ""
+	_vr_util_move_from = Vector2i(-1, -1)
+	_vr_utilities_comp = null
+	var rows: Array = []
+	# 1) live component's cached layout (the truth of what's rendered)
+	var comp := _get_vr_utilities_comp()
+	if comp and ("_cached_utility_layout" in comp):
+		var cached = comp._cached_utility_layout
+		if cached is Array and (cached as Array).size() > 0:
+			rows = _dup_util_rows(cached)
+	# 2) data component's utility layout_data
+	if rows.is_empty():
+		var data := _get_grid_data_component()
+		if data and data.has_method("get_utility_data"):
+			var ud = data.get_utility_data()
+			if ud != null and ("layout_data" in ud) and ud.layout_data is Array:
+				rows = _dup_util_rows(ud.layout_data)
+	# 3) blank grid sized to the structure (last resort)
+	if rows.is_empty():
+		var structure := _get_edit_structure()
+		var w := 8
+		var d := 8
+		if structure and structure.has_method("get_grid_dimensions"):
+			var dims: Vector3i = structure.get_grid_dimensions()
+			w = maxi(1, dims.x)
+			d = maxi(1, dims.z)
+		for z in range(d):
+			var blank: Array = []
+			for x in range(w):
+				blank.append(" ")
+			rows.append(blank)
+	_vr_utilities = rows
+	_vr_utilities_seeded_map = cur_map
+
+
+## Deep-ish copy of a utilities layout, normalising every cell to a String so the
+## save payload is clean text (the source may hold StringName / mixed types).
+func _dup_util_rows(src: Array) -> Array:
+	var out: Array = []
+	for row in src:
+		var r: Array = []
+		if row is Array:
+			for cell in row:
+				var s := str(cell)
+				if s == "":
+					s = " "
+				r.append(s)
+		out.append(r)
+	return out
+
+
+## Build / update a simple translucent ghost cube at the targeted cell so the
+## player sees where the next utility op will land. Mirrors the wedge ghost shape.
+func _update_vr_utility_ghost(col: int, row: int) -> void:
+	var structure := _get_edit_structure()
+	if structure == null or col < 0 or row < 0:
+		if _vr_util_ghost and is_instance_valid(_vr_util_ghost):
+			_vr_util_ghost.visible = false
+		return
+	var total_size: float = structure.cube_size + structure.gutter
+	var grid_origin := _grid_origin_of(structure)
+	var y_level: int = structure.find_highest_y_at(col, row)
+	if _vr_util_ghost == null:
+		_vr_util_ghost = MeshInstance3D.new()
+		_vr_util_ghost.name = "UtilityGhost"
+		_vr_util_ghost.top_level = true
+		var bm := BoxMesh.new()
+		bm.size = Vector3.ONE * (total_size * 0.92)
+		_vr_util_ghost.mesh = bm
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(0.85, 0.5, 0.95, 0.16)
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.emission_enabled = true
+		mat.emission = Color(0.85, 0.5, 0.95)
+		mat.emission_energy_multiplier = 0.4
+		mat.no_depth_test = true
+		_vr_util_ghost.material_override = mat
+		add_child(_vr_util_ghost)
+	_vr_util_ghost.visible = true
+	_vr_util_ghost.global_position = grid_origin + Vector3(
+		float(col) * total_size,
+		float(y_level) * total_size,
+		float(row) * total_size
+	)
+
+
+## B (utility_edit mode) = save the whole utilities layer back to the repo's
+## map_data.json via /api/game/save-layers (layers.utilities = whole-layer replace).
+## Reconstructs the layer from the seeded-from-map + live-edited _vr_utilities array,
+## then POSTs over the SAME adb-reverse tunnel as the structure / biome / modifier saves.
+func _save_utilities() -> void:
+	_ensure_vr_utilities_seeded()
+	var data := _get_grid_data_component()
+	var map_name := ""
+	if data and data.has_method("get_current_map_name"):
+		map_name = data.get_current_map_name()
+	if map_name == "":
+		_flash_label("NO MAP NAME", Color(1.0, 0.4, 0.3))
+		return
+	if _vr_utilities.is_empty():
+		_flash_label("NOTHING TO SAVE", Color(1.0, 0.5, 0.2))
+		return
+	_save_utilities_over_http(map_name, _vr_utilities)
+	_flash_label("SAVING UTILITIES  " + map_name + " ...", Color(0.6, 0.85, 1.0))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.4, 0.0)
+
+
+## POST the utilities layer to /api/game/save-layers as a whole-layer replace.
+## Same HTTPRequest pattern + SAVED→PC flash as _save_map_over_http / _save_biome_over_http.
+func _save_utilities_over_http(map_name: String, rows: Array) -> void:
+	print("[Catalyst] POSTing utilities '%s' (%d rows) -> %s" % [map_name, rows.size(), MAP_SAVE_URL])
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(_on_map_save_completed.bind(http))  # reuse SAVED→PC flash
+	var headers := PackedStringArray(["Content-Type: application/json"])
+	var payload := {"mapName": map_name, "layers": {"utilities": rows}}
+	http.set_meta("map_name", map_name)
+	var err := http.request(MAP_SAVE_URL, headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
+	if err != OK:
+		http.queue_free()
+		_flash_label("POST FAILED: %s" % error_string(err), Color(1.0, 0.3, 0.3))
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -2025,9 +2526,9 @@ func _switch_mode(direction: int) -> void:
 	_show_mode_label()
 	mode_changed.emit(mode_id)
 
-	# Activate/deactivate grid editing based on mode (voxel + wedge + modifier
-	# share the same voxel controller — it supplies the targeted cell)
-	if mode_id in ["voxel_editor", "wedge_placer", "modifier"]:
+	# Activate/deactivate grid editing based on mode (voxel + wedge + modifier +
+	# utility_edit share the same voxel controller — it supplies the targeted cell)
+	if mode_id in ["voxel_editor", "wedge_placer", "modifier", "utility_edit"]:
 		_activate_voxel_mode()
 	else:
 		_deactivate_voxel_mode()
@@ -2058,8 +2559,8 @@ func set_mode_index(index: int) -> void:
 	_rebuild_visual()
 	mode_changed.emit(mode_id)
 
-	# Activate/deactivate grid editing (voxel + wedge + modifier share the controller)
-	if mode_id in ["voxel_editor", "wedge_placer", "modifier"]:
+	# Activate/deactivate grid editing (voxel + wedge + modifier + utility_edit share the controller)
+	if mode_id in ["voxel_editor", "wedge_placer", "modifier", "utility_edit"]:
 		_activate_voxel_mode()
 	else:
 		_deactivate_voxel_mode()
