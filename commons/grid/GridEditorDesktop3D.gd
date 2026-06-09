@@ -175,7 +175,10 @@ var _status_msg: String = ""
 # Top-bar controls: an explicit SAVE button + a MAP dropdown (open any map in-editor).
 var _save_btn: Button = null
 var _map_dropdown: OptionButton = null
-var _map_names: Array = []                # sorted map names backing the dropdown (index-aligned)
+var _map_names: Array = []                # filtered map names backing the dropdown (index-aligned)
+var _all_map_names: Array = []            # full scanned map set (cached; filtered into _map_names)
+var _map_filter: String = ""              # lower-cased substring narrowing the dropdown
+var _map_filter_edit: LineEdit = null     # the filter text field
 
 # ── ARTIFACTS 3D preview (corner HUD card, embedded in this CanvasLayer — NOT the
 #    shared wrist panel, to dodge nested-viewport issues in VR) ────────────────
@@ -741,12 +744,33 @@ func _build_top_bar_controls() -> void:
 	_save_btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	_save_btn.anchor_left = 1.0; _save_btn.anchor_right = 1.0
 	_save_btn.anchor_top = 0.0; _save_btn.anchor_bottom = 0.0
-	_save_btn.offset_top = 10.0
-	_save_btn.offset_bottom = 40.0
+	_save_btn.offset_top = 8.0
+	_save_btn.offset_bottom = 32.0
 	_save_btn.offset_right = right_off
 	_save_btn.offset_left = right_off - 140.0
 	_save_btn.pressed.connect(_on_save_pressed)
 	_hud_layer.add_child(_save_btn)
+
+	# MAP FILTER — narrows the dropdown as you type (case-insensitive substring on the name).
+	# Focusable so it can take text; _update_fly + the focus check suppress WASD/shortcuts while typing.
+	_map_filter_edit = LineEdit.new()
+	_map_filter_edit.name = "MapFilter"
+	_map_filter_edit.placeholder_text = "filter maps…"
+	_map_filter_edit.focus_mode = Control.FOCUS_CLICK
+	_map_filter_edit.clear_button_enabled = true
+	_map_filter_edit.add_theme_font_size_override("font_size", 14)
+	_map_filter_edit.add_theme_color_override("font_color", C_TEXT)
+	_map_filter_edit.add_theme_color_override("font_placeholder_color", Color(0.55, 0.60, 0.70))
+	_map_filter_edit.add_theme_stylebox_override("normal", _new_stylebox(C_BG_SOFT, 0.0, 6.0))
+	_map_filter_edit.add_theme_stylebox_override("focus", _new_stylebox(Color(0.14, 0.17, 0.22, 0.95), 0.0, 6.0))
+	_map_filter_edit.anchor_left = 1.0; _map_filter_edit.anchor_right = 1.0
+	_map_filter_edit.anchor_top = 0.0; _map_filter_edit.anchor_bottom = 0.0
+	_map_filter_edit.offset_top = 38.0
+	_map_filter_edit.offset_bottom = 62.0
+	_map_filter_edit.offset_right = right_off
+	_map_filter_edit.offset_left = right_off - 260.0
+	_map_filter_edit.text_changed.connect(_on_map_filter_changed)
+	_hud_layer.add_child(_map_filter_edit)
 
 	# MAP dropdown — every available map (DirAccess scan), pre-selecting the loaded one.
 	_map_dropdown = OptionButton.new()
@@ -760,8 +784,8 @@ func _build_top_bar_controls() -> void:
 	_map_dropdown.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	_map_dropdown.anchor_left = 1.0; _map_dropdown.anchor_right = 1.0
 	_map_dropdown.anchor_top = 0.0; _map_dropdown.anchor_bottom = 0.0
-	_map_dropdown.offset_top = 48.0
-	_map_dropdown.offset_bottom = 78.0
+	_map_dropdown.offset_top = 68.0
+	_map_dropdown.offset_bottom = 92.0
 	_map_dropdown.offset_right = right_off
 	_map_dropdown.offset_left = right_off - 260.0
 	_hud_layer.add_child(_map_dropdown)
@@ -797,7 +821,13 @@ func _scan_map_names() -> Array:
 func _populate_map_dropdown() -> void:
 	if _map_dropdown == null:
 		return
-	_map_names = _scan_map_names()
+	if _all_map_names.is_empty():
+		_all_map_names = _scan_map_names()
+	# Filter the full set by the current substring (empty filter = all maps).
+	_map_names = []
+	for m in _all_map_names:
+		if _map_filter == "" or str(m).to_lower().contains(_map_filter):
+			_map_names.append(m)
 	_map_dropdown.clear()
 	# When running synthetic (no loaded map), surface that as a non-selectable first item.
 	var item_base := 0
@@ -809,8 +839,9 @@ func _populate_map_dropdown() -> void:
 		_map_dropdown.add_item(str(_map_names[i]))
 		# Stash the map name as item metadata so selection is robust to index offsets.
 		_map_dropdown.set_item_metadata(item_base + i, str(_map_names[i]))
-	if _map_names.is_empty() and _loaded_map == "":
-		_map_dropdown.add_item("(no maps found)")
+	if _map_names.is_empty():
+		var msg: String = "(no match)" if _map_filter != "" else "(no maps found)"
+		_map_dropdown.add_item(msg)
 		_map_dropdown.set_item_disabled(_map_dropdown.get_item_count() - 1, true)
 	_sync_map_dropdown_selection()
 
@@ -834,6 +865,13 @@ func _sync_map_dropdown_selection() -> void:
 ## SAVE button → the SAME save path as the W key. The toast surfaces the result.
 func _on_save_pressed() -> void:
 	_save()
+
+
+## MAP FILTER changed → narrow the dropdown to names containing the substring (re-selects
+## the loaded map if it's still in the filtered list). Cached scan = no disk hit per keystroke.
+func _on_map_filter_changed(text: String) -> void:
+	_map_filter = text.strip_edges().to_lower()
+	_populate_map_dropdown()
 
 
 ## MAP dropdown selection → reload the editor with that map. Resolves the chosen item's
@@ -1485,6 +1523,8 @@ func _process(delta: float) -> void:
 func _update_fly(delta: float) -> void:
 	if _orbiting or _camera == null:
 		return
+	if _map_filter_edit and _map_filter_edit.has_focus():
+		return   # typing in the map filter — W/A/S/D are text, not camera fly
 	var dir := Vector3.ZERO
 	if Input.is_key_pressed(KEY_W): dir.z -= 1.0
 	if Input.is_key_pressed(KEY_S): dir.z += 1.0
