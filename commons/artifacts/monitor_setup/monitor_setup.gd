@@ -162,7 +162,7 @@ const CRT_SCREEN_SHADER_PATH: String = "res://commons/ui/shaders/crt_screen.gdsh
 		# PAGE 0 — top-centre. The document's real H1 title + its first body chunk.
 		"md": DEFAULT_DOC,
 		"md_page": 0,
-		"lines": 5,
+		"lines": 12,
 		"title": "ENTRY",
 		"body": "loading document…\nstand by",
 		"type": "info",
@@ -177,7 +177,7 @@ const CRT_SCREEN_SHADER_PATH: String = "res://commons/ui/shaders/crt_screen.gdsh
 		# PAGE 1 — upper-left. Continuation: same doc, next chunk.
 		"md": DEFAULT_DOC,
 		"md_page": 1,
-		"lines": 5,
+		"lines": 12,
 		"title": "ENTRY",
 		"body": "…continued",
 		"type": "info",
@@ -192,7 +192,7 @@ const CRT_SCREEN_SHADER_PATH: String = "res://commons/ui/shaders/crt_screen.gdsh
 		# PAGE 2 — upper-right. Continuation: same doc, next chunk.
 		"md": DEFAULT_DOC,
 		"md_page": 2,
-		"lines": 5,
+		"lines": 12,
 		"title": "ENTRY",
 		"body": "…continued",
 		"type": "info",
@@ -207,7 +207,7 @@ const CRT_SCREEN_SHADER_PATH: String = "res://commons/ui/shaders/crt_screen.gdsh
 		# PAGE 3 — mid-left. Continuation: same doc, next chunk.
 		"md": DEFAULT_DOC,
 		"md_page": 3,
-		"lines": 5,
+		"lines": 12,
 		"title": "ENTRY",
 		"body": "…continued",
 		"type": "info",
