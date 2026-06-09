@@ -165,6 +165,7 @@ var _orbit_pitch: float = -0.55
 var _orbit_radius: float = 0.0
 var _orbit_center: Vector3 = Vector3.ZERO
 var _orbiting: bool = false
+var _left_is_orbit: bool = false          # the current LEFT-drag began off-grid → orbit, not edit
 
 # ── Panel + HUD ───────────────────────────────────────────────────────
 var _panel: Control = null
@@ -1527,7 +1528,24 @@ func _unhandled_input(event: InputEvent) -> void:
 				if event.ctrl_pressed: _redo()
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			_on_left_button(event.pressed)
+			if event.pressed:
+				# Click OUTSIDE the edit area (off the grid / biome ring) → rotate the map
+				# (orbit). Click ON it → edit. So a left-drag on empty space spins the view,
+				# while a left-drag on the grid still paints/places.
+				_update_hover()
+				if not _hover_valid:
+					_orbiting = true
+					_left_is_orbit = true
+					_set_hover_visible(false)
+				else:
+					_left_is_orbit = false
+					_on_left_button(true)
+			else:
+				if _left_is_orbit:
+					_orbiting = false
+					_left_is_orbit = false
+				else:
+					_on_left_button(false)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			# On ARTIFACTS/UTILITY, RIGHT-click clears the hovered cell (instead of
 			# orbiting) — a one-click remove. If a MOVE pickup is in progress it cancels
