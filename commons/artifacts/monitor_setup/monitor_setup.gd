@@ -53,6 +53,15 @@ class_name MonitorSetup
 ## phosphor-green/amber/cyan text, a prompt-style header, faint scanlines and a blinking
 ## cursor. Turn OFF for the old flat-panel info look (light text on accent-tinted dark).
 @export var terminal_style: bool = true
+## SHADER-DRIVEN CRT GLASS: when on (and terminal_style is on), the info screen's tube
+## face uses the crt_terminal.gdshader instead of the STATIC scanline texture — rolling
+## scanlines, faint flicker, a phosphor bloom, vignette and edge aberration, all animated
+## by the built-in TIME uniform so EVERY screen syncs automatically. The readable text
+## stays as Label3D on top (capture-safe). Off → the original static-scanline look. If the
+## shader file is missing it degrades silently to the static-scanline fallback.
+@export var crt_shader: bool = true
+## Master brightness/strength of the CRT glass shader (feeds its `intensity` uniform).
+@export_range(0.0, 2.0) var crt_intensity: float = 1.0
 
 @export_group("Glow")
 @export_range(0.0, 4.0) var screen_emission: float = 1.3
@@ -125,6 +134,11 @@ const DEFAULT_DOC: String = "res://doc/ENTRY.md"
 # Monospace terminal font (JetBrains Mono) for the CRT look. Preloaded once; assigned to
 # every Label3D when terminal_style is on. Falls back to the engine default if absent.
 const MONO_FONT_PATH: String = "res://commons/font/JetBrainsMono-Medium.ttf"
+
+# CRT terminal screen-glass shader. Loaded once at build (lazy, guarded by
+# ResourceLoader.exists). When crt_shader is on the info tube face uses a ShaderMaterial
+# built from this; when the file is missing the build degrades to the static-scanline look.
+const CRT_SHADER_PATH: String = "res://commons/ui/shaders/crt_terminal.gdshader"
 @export var screens: Array = [
 	{
 		# PAGE 0 — top-centre. The document's real H1 title + its first body chunk.
@@ -240,6 +254,11 @@ var _cable_mat: StandardMaterial3D
 # (terminal colours still apply). See _ensure_mono_font().
 var _mono_font: Font = null
 var _mono_checked: bool = false
+
+# CRT terminal screen-glass shader, loaded once at build. null = file missing → static
+# scanline fallback. See _ensure_crt_shader().
+var _crt_shader: Shader = null
+var _crt_checked: bool = false
 
 # ── Terminal animation state (driven by _process) ─────────────────────
 # Blinking cursors: the bright block at the end of each terminal screen's last line. Toggled
@@ -860,6 +879,7 @@ func _build_all() -> void:
 	_cursors.clear()       # animation refs point at freed nodes after a rebuild — drop them
 	_point_fields.clear()
 	_ensure_mono_font()
+	_ensure_crt_shader()
 	_build_shared_materials()
 	_build_desk_base()
 	_build_tower()
@@ -1162,6 +1182,11 @@ func _build_face_info(root: Node3D, index: int, size: Vector2, title: String, bo
 	var term: bool = terminal_style
 	var phos: Dictionary = _phosphor_for(accent)
 
+	# Is the animated CRT glass shader active for this face? Only in terminal mode, only
+	# when the crt_shader toggle is on AND the shader file actually loaded; otherwise we use
+	# the static emissive backing (+ static scanline overlay) exactly as before.
+	var use_crt: bool = term and crt_shader and _crt_shader != null
+
 	# Emissive backing colour (the info-board glow) PLUS real readable Label3D text.
 	var face := MeshInstance3D.new()
 	face.name = "Face"
@@ -1173,12 +1198,18 @@ func _build_face_info(root: Node3D, index: int, size: Vector2, title: String, bo
 	if term:
 		bg = phos["bg"]
 	var bg_energy: float = _glow_energy() * (0.35 if term else 0.5)
-	face.material_override = _make_emissive_color_mat(bg, bg_energy)
+	if use_crt:
+		# Shader-driven glass: rolling scanlines, flicker, bloom, vignette, aberration —
+		# animated by TIME so every screen syncs. The Label3D text rides on top (capture-safe).
+		face.material_override = _make_crt_glass_material(phos, size)
+	else:
+		face.material_override = _make_emissive_color_mat(bg, bg_energy)
 	face.position = Vector3(0.0, 0.0, 0.013)
 	root.add_child(face)
 
 	# Scanline overlay (terminal only): faint dark horizontal rows in front of the tube.
-	if term:
+	# Skipped when the CRT shader is active — the shader already rolls its own scanlines.
+	if term and not use_crt:
 		_add_scanlines(root, size)
 
 	# Text sits just in front of the panel face; billboard OFF so it stays planar.
@@ -1341,6 +1372,34 @@ func _make_scanline_material() -> StandardMaterial3D:
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	mat.no_depth_test = false
+	return mat
+
+
+## Build the animated CRT screen-glass ShaderMaterial for one info tube face. Uses the
+## preloaded crt_terminal.gdshader (caller already verified _crt_shader != null). The
+## phosphor glow colour comes from the screen's _phosphor_for(accent) tube; scan_density is
+## scaled to the panel HEIGHT so taller panels keep a consistent line pitch; intensity rides
+## the crt_intensity export folded with the rig's glow energy. TIME inside the shader makes
+## every instance of this material animate IN SYNC — no per-node time is set here.
+func _make_crt_glass_material(phos: Dictionary, size: Vector2) -> ShaderMaterial:
+	var mat := ShaderMaterial.new()
+	mat.shader = _crt_shader
+	var glow_col: Color = phos["text"]
+	mat.set_shader_parameter("phosphor", glow_col)
+	mat.set_shader_parameter("scan_speed", 1.0)
+	# ~3.2 lines per cm of panel height → a steady CRT pitch regardless of panel size.
+	var density: float = clampf(size.y * 640.0, 80.0, 520.0)
+	mat.set_shader_parameter("scan_density", density)
+	mat.set_shader_parameter("flicker_amt", 0.06)
+	mat.set_shader_parameter("glow", 0.6)
+	mat.set_shader_parameter("vignette_amt", 0.5)
+	mat.set_shader_parameter("aberration", 0.5)
+	# Fold the rig's glow energy into the master intensity, then clamp to the shader's range.
+	var energy: float = _glow_energy()
+	if energy <= 0.0:
+		energy = 1.0  # screen_glow off → keep the glass visible, just unscaled by emission
+	var master: float = clampf(crt_intensity * (0.7 + 0.3 * energy), 0.0, 2.0)
+	mat.set_shader_parameter("intensity", master)
 	return mat
 
 
@@ -1644,6 +1703,18 @@ func _ensure_mono_font() -> void:
 		var res = load(MONO_FONT_PATH)
 		if res is Font:
 			_mono_font = res
+
+
+# Load the CRT screen-glass shader once (lazy, cached). Leaves _crt_shader null if the file
+# is missing — the info tube face then falls back to the static-scanline texture look.
+func _ensure_crt_shader() -> void:
+	if _crt_checked:
+		return
+	_crt_checked = true
+	if ResourceLoader.exists(CRT_SHADER_PATH):
+		var res = load(CRT_SHADER_PATH)
+		if res is Shader:
+			_crt_shader = res
 
 
 # ── Terminal phosphor palette ─────────────────────────────────────────
