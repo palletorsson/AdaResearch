@@ -43,7 +43,7 @@ var _loaded_map: String = ""              # the map actually being edited (may b
 var _synthetic_dims: int = 16             # --dims=N synthetic square size
 var _grid_w: int = 16
 var _grid_d: int = 16
-var _grid_max_h: int = 5
+var _grid_max_h: int = 6
 var _grid_system: Node3D = null           # the REAL GridSystem (zero drift)
 var _structure: GridStructureComponent = null
 var _editing_ready: bool = false
@@ -56,7 +56,7 @@ var _active_mode: String = TOOL_GRID      # which row drives a left-click
 var _active_grid_op: String = "add"       # GridOps op name
 var _active_paint_op: String = "colorize" # ModifierStack op name
 var _active_brush_size: int = 2           # 1..4 (GridOps.MAX_BRUSH)
-var _active_level: int = 3                # height value for fill/raise/etc.
+var _active_level: int = 1                # height value for fill/raise/etc. (base = 1)
 var _active_color: Color = Color(0.9, 0.6, 0.2)
 var _active_tab: String = "GRID"
 

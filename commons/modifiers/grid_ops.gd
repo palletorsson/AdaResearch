@@ -11,7 +11,7 @@ extends RefCounted
 ## ModifierStack (commons/modifiers/modifier_stack.gd): apply(base, op) returns a
 ## NEW grid; base is never mutated; random ops are seeded → reproducible.
 
-const MAX_H := 5
+const MAX_H := 6
 const MAX_BRUSH := 4   ## VR cap: a single stroke never exceeds 4x4 cells (local editing)
 
 

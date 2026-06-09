@@ -98,7 +98,7 @@ func _build_grid_page(parent: VBoxContainer) -> void:
 		grid.add_child(b)
 		_grid_op_buttons.append(b)
 	_brush_label = _slider_row(parent, "BRUSH", 1, 4, 1, 2, _on_brush, "2x2")
-	_level_label = _slider_row(parent, "LEVEL", 1, 5, 1, 3, _on_level, "3")
+	_level_label = _slider_row(parent, "LEVEL", 1, 6, 1, 1, _on_level, "1")
 
 	_section(parent, "PAINT", Color(0.7, 0.6, 1.0))
 	var prow := HBoxContainer.new()
