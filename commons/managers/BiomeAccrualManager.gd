@@ -62,6 +62,15 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 	var accrual := Node3D.new()
 	accrual.name = "BiomeAccrual"
 	grid_root.add_child(accrual)
+	# Biome origin offset (live brush margin ring): the catalyst biome brush paints a ring
+	# AROUND the grid and asks GridSystem to render the biome over grid+2*margin, offset by
+	# -margin cells. Every layer scatters/builds in THIS root's local frame, so shifting the
+	# root lands that whole area as a ring in world space (biome-local cell 0 → world cell
+	# -margin). Absent / Vector3.ZERO (the normal game biome and the desktop host path) =
+	# the root sits at the grid origin exactly as before — completely additive.
+	var origin_offset = context.get("biome_origin_offset", Vector3.ZERO)
+	if origin_offset is Vector3 and origin_offset != Vector3.ZERO:
+		accrual.position = origin_offset
 
 	# ── Per-map overrides ─────────────────────────────────────────────
 	# A map's settings.biome_overrides lets it ADD / REMOVE / CHANGE the

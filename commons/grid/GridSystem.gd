@@ -28,6 +28,11 @@ const ModifierStackLib = preload("res://commons/modifiers/modifier_stack.gd")
 ## Runtime paint-layer override (set by a live brush via repaint_biome()).
 ## Empty → the map's own paint_layers / default behaviour. See doc/PAINT_LAYERS.md.
 var _runtime_paint_layers: Array = []
+## Margin ring (in cells) for a live brush repaint. The catalyst biome brush paints a
+## ring AROUND the grid (see BiomeBrushController.BIOME_MARGIN); it passes that margin so
+## the substrate + scatter span grid+2*margin and are offset by -margin cells (foliage/
+## ground wrap the grid). 0 = the normal game biome, sized to the grid exactly (unchanged).
+var _runtime_biome_margin: int = 0
 @export var gutter: float = 0.0
 @export var map_name: String = "Tutorial_Start"
 # Spine-corridor mode: when set, prefer map_data.corridor.json over map_data.json
@@ -684,8 +689,14 @@ func _handle_audio_start():
 ## Live-repaint hook for the VR/desktop biome brush. Sets a runtime paint-layer
 ## override and rebuilds the biome with it. Pass [] to clear (revert to the
 ## map's own paint_layers). Additive — does not change default map loading.
-func repaint_biome(layers: Array) -> void:
+##
+## `margin` (cells) > 0 means the layers were painted over a biome AREA = grid + a
+## margin ring on every side (the catalyst brush's BIOME_MARGIN). The biome renders
+## across that area, offset by -margin cells so it wraps the grid. Defaults to 0 (the
+## normal game biome, grid-sized) so non-brush callers are unaffected.
+func repaint_biome(layers: Array, margin: int = 0) -> void:
 	_runtime_paint_layers = layers if layers is Array else []
+	_runtime_biome_margin = maxi(0, margin)
 	_handle_biome_ring(true)   # live brush: skip the ecosystem re-sync (same map)
 
 
@@ -693,7 +704,13 @@ func repaint_biome(layers: Array) -> void:
 ## Far cheaper than repaint_biome — rebuilds just the ground mesh (no collider,
 ## no other layers), so the terrain rises under the brush in real time. The full
 ## rebuild (collider included) lands on stroke-release via repaint_biome.
-func preview_ground(field: PackedFloat32Array, fw: int, fd: int, max_h: float) -> void:
+##
+## `fw`/`fd` are the FIELD dimensions — for the catalyst brush these span the biome
+## AREA (grid + 2*margin); the substrate created at the last commit was already sized
+## + offset to that area, so the in-place mesh rebuild lands correctly. `margin` is
+## accepted for API symmetry with repaint_biome (the offset lives on the substrate's
+## node position from commit time, so it isn't re-applied here). Defaults to 0.
+func preview_ground(field: PackedFloat32Array, fw: int, fd: int, max_h: float, margin: int = 0) -> void:
 	var sub := _find_descendant_named(self, "BiomeGroundSubstrate")
 	if sub and sub.has_method("apply_height_preview"):
 		# Lift the (backdrop-positioned) substrate to the grid floor surface so the live
@@ -720,6 +737,11 @@ func _find_descendant_named(root: Node, nm: String) -> Node:
 ## the map hasn't changed — so skip the ecosystem re-sync, which otherwise advances
 ## the monotonic progression AND writes the ecosystem save to disk on EVERY stroke.
 func _handle_biome_ring(live_repaint: bool = false):
+	# The biome margin ring is STRICTLY a live-brush opt-in: a fresh map load / any
+	# non-brush render never wraps the grid. Clear any stale margin from a prior brush
+	# stroke so the normal game biome is always grid-sized (margin 0), unchanged.
+	if not live_repaint:
+		_runtime_biome_margin = 0
 	# Runtime flag — let the encyclopedia /shortcuts surface flip this
 	# off for clean map captures and architecture debugging.
 	if not _runtime_flag_enabled("biome_enabled", true):
@@ -766,6 +788,19 @@ func _handle_biome_ring(live_repaint: bool = false):
 	var accrual_early = get_node_or_null("/root/BiomeAccrualManager")
 	if accrual_early and accrual_early.has_method("apply"):
 		var dims_early: Vector3i = data_component.get_grid_dimensions()
+		# BIOME MARGIN (live brush only): when the catalyst biome brush painted a ring
+		# AROUND the grid, _runtime_biome_margin > 0. The substrate + scatter then span
+		# the biome AREA (grid + 2*margin) and are offset by -margin cells so they wrap
+		# the grid. dims_biome / center_biome / origin_offset describe that area; with
+		# margin 0 (the normal game biome, and every non-brush caller) they collapse to
+		# the grid dims / grid centre / zero offset — i.e. completely unchanged.
+		var m: int = _runtime_biome_margin
+		var dims_biome: Vector3i = Vector3i(dims_early.x + 2 * m, dims_early.y, dims_early.z + 2 * m)
+		var center_biome: Vector3 = Vector3(float(dims_biome.x) * cube_size * 0.5, 0.0, float(dims_biome.z) * cube_size * 0.5)
+		# Offset the accrual root by -margin cells: the layers scatter/build in the root's
+		# LOCAL frame over the biome-area dims, and this shift lands that area as a ring in
+		# world space (biome-local cell 0 → world cell -margin). Zero when margin is 0.
+		var origin_offset: Vector3 = Vector3(-float(m) * cube_size, 0.0, -float(m) * cube_size)
 		# Thread biome_paint + stage_order into the layer context. The
 		# biome_paint_dispatcher layer reads both: the painted layer for
 		# the deposit list, the stage_order for kingdom-unlock guard.
@@ -787,8 +822,13 @@ func _handle_biome_ring(live_repaint: bool = false):
 			else (data_component.get_paint_layers() if data_component else [])
 		paint_layers = SequenceAccrualLib.accrued_layers(eco, map_name, paint_layers)
 		accrual_early.apply(self, {
-			"grid_dims": dims_early,
-			"grid_center": Vector3(float(dims_early.x) * cube_size * 0.5, 0.0, float(dims_early.z) * cube_size * 0.5),
+			# grid_dims / grid_center span the biome AREA (grid + 2*margin); with margin 0
+			# they ARE the grid dims / grid centre (the normal game biome, unchanged).
+			"grid_dims": dims_biome,
+			"grid_center": center_biome,
+			# biome_origin_offset shifts the accrual root so its local frame lands as a ring
+			# around the grid. Zero when margin 0 → the accrual sits at the grid origin as before.
+			"biome_origin_offset": origin_offset,
 			"cube_size": cube_size,
 			"rng_seed": hash(map_name),
 			"map_name": map_name,
