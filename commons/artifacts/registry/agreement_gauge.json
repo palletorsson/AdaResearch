@@ -1,0 +1,40 @@
+{
+	"id": "agreement_gauge",
+	"name": "Agreement Gauge",
+	"description": "A laboratory alignment gauge for the DOT PRODUCT. Two grabbable arrows rise from the origin — a (warm amber) and b (cooler orange). A floating slab shows a self-substituting three-line equation: a.b = ax*bx + ay*by + az*bz, the same with the numbers plugged in, and the result; stacked beneath it the geometric form a.b = |a||b|cos(theta) lands on the SAME number. The live angle theta reads at the arc midpoint. A red->grey->green rail with a sliding puck tracks cos(theta) so the sign of the dot product is readable without a digit: green = agreeing, grey notch = perpendicular (a.b = 0, strangers), red = opposing. A |b| dial scales b without turning it; a SNAP 90 button parks b perpendicular to a. The result is computed, never grabbed.",
+	"category": "vectors",
+	"theoreticalGrounding": "The dot product does not measure length — it measures how much two directions agree. a.b = |a||b|cos(theta): at 0 degrees the product peaks at |a||b| (full agreement), at 90 degrees it is zero (pure perpendicularity, strangers), past 90 it goes negative (opposition). The algebraic component sum and the geometric magnitude*cosine form are visibly the same scalar.",
+	"artifacts": {
+		"agreement_gauge": {
+			"lookup_name": "agreement_gauge",
+			"name": "Agreement Gauge",
+			"description": "Dark slate plinth + brass rim + etched integer ground-lattice. Two grabbable arrows (a amber, b orange) from the origin; a dotted slerp arc with a live theta label between their tips. A floating formula slab renders the three-line self-substituting equation plus the |a||b|cos(theta) geometric form, both landing on the same value. A red->grey->green agreement rail carries a sliding puck driven to cos(theta) (pure transform, scale-pulse at the 90-degree zero crossing). A |b| dial isolates magnitude-scaling at fixed angle; a SNAP 90 button parks b perpendicular to a. The derived number (cyan-violet) is computed, not grabbable. DNA: initial_a, initial_b, bar_half_width, slider_min_mag, slider_max_mag.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/agreement_gauge/agreement_gauge.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"footprint": [1, 2, 1],
+			"tags": ["vector", "dot_product", "angle", "machine", "vr", "vectors", "projection", "placeable"],
+			"qfep_connection": "F_force: a.b = |a||b|cos(theta) is one scalar that says how much two directions agree — alignment made legible as a single red-to-green reading.",
+			"parameters": {
+				"initial_a": [0.9, 0.55, 0.2],
+				"initial_b": [0.35, 0.85, 0.6],
+				"bar_half_width": 0.55,
+				"slider_min_mag": 0.2,
+				"slider_max_mag": 2.5,
+				"footprint": [1, 2, 1],
+				"size_group": "small"
+			},
+			"size_group": "small",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"reading_radius": 3,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

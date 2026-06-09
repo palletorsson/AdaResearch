@@ -1,0 +1,40 @@
+{
+	"id": "length_lantern",
+	"name": "Length Lantern",
+	"description": "A vector-MAGNITUDE machine for The Vector Bench. Grab the glowing cyan lantern at the tip of one amber arrow and pull it through the air — the machine instantly measures how far it reaches from the origin, |v| = sqrt(x^2+y^2+z^2), drawing its own right-triangle scaffolding in light. The three component legs (x along red, z on the floor, y rising) chain tip-to-tail, a faint right-angle box makes the Pythagoras construction explicit, and a floor diagonal sqrt(x^2+z^2) feeds the final rise so you watch sqrt nest inside sqrt. The lantern bead brightens to white-hot and a vertical cyan-violet ruler fills as |v| grows; near-zero length flips red. A SNAP-to-triple button (and slider release) plays a one-shot two-step resolve proof. Sibling of the catapult/force-bench teaching vectors.",
+	"category": "vectors",
+	"theoreticalGrounding": "A magnitude is not a number you are told — it is a diagonal you can see the construction of. 3D length is two Pythagoras theorems stacked: one on the floor (sqrt(x^2+z^2)), one rising to meet it, resolving to |v| = sqrt(x^2+y^2+z^2).",
+	"artifacts": {
+		"length_lantern": {
+			"lookup_name": "length_lantern",
+			"name": "Length Lantern",
+			"description": "Dark slate pedestal + brass rim + etched integer ground lattice on a 0.6 m bench plate. One grabbable amber vector whose GrabSphere2 tip carries a glass lantern bead; pulling it redraws the faint x,y,z component legs, the explicit Pythagoras box, the floor diagonal sqrt(x^2+z^2), live numbers (components, squares, running sum, |v|), the lantern glow, and a vertical magnitude ruler. x/y/z precision sliders + a SNAP button trigger a 1.2 s eased two-stage resolve animation that makes sqrt-inside-sqrt temporally legible. DNA: reach, max_magnitude, degenerate_threshold, show_sliders, arrow_thickness.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/length_lantern/length_lantern.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"footprint": [1, 2, 1],
+			"tags": ["vector", "magnitude", "length", "machine", "vr", "pythagoras", "sqrt", "vector_bench", "placeable"],
+			"qfep_connection": "F_force: magnitude is the felt size of a vector — |v| is the diagonal the three components frame, length you can hold and watch brighten in your hand.",
+			"parameters": {
+				"reach": 1.5,
+				"max_magnitude": 2.6,
+				"degenerate_threshold": 0.18,
+				"show_sliders": true,
+				"arrow_thickness": 0.014,
+				"footprint": [1, 2, 1],
+				"size_group": "small"
+			},
+			"size_group": "small",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 3,
+				"density": "medium",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

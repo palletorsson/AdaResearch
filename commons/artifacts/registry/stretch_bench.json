@@ -1,0 +1,38 @@
+{
+	"id": "stretch_bench",
+	"name": "Stretch Bench",
+	"description": "A machinist's setting-out bench for scalar multiplication k*v. One amber reference arrow v is clamped to a graduated brass rail; turn the single brass 'k' crank (it physically slides along the rail, so the scalar's POSITION on the number line IS the input) and a twin arrow grows, shrinks, collapses to a glowing dot at k=0, and flips 180 degrees through its own tail when k goes negative. The twin reads cyan-violet for k>=0 and RED when reversed. k*v and |k*v|=|k|*|v| tick live the whole way. A SNAP button locks k to integers so you can land exactly on k=-1 (mirror) and k=2 (double). slider_horizontal stays wired as the desktop fallback.",
+	"category": "vectors",
+	"theoreticalGrounding": "To multiply a vector by a number is to choose a length and a direction-sign on a line you have already drawn. Scalar multiplication never touches the line's direction — only its magnitude and sign. |k*v| = |k|*|v|, always; negative k is reversal, k=0 is collapse, |k|>1 is stretch.",
+	"artifacts": {
+		"stretch_bench": {
+			"lookup_name": "stretch_bench",
+			"name": "Stretch Bench",
+			"description": "Dark slate pedestal + brass rim + graduated rail (the number line for k). A grabbable brass crank slides along the rail to set k in [-3,+3]; the amber base vector v is grabbable (re-aim the reference line), the derived twin k*v snaps to it and is never grabbable — cyan-violet when k>=0, red when k<0, a glowing dot at k=0. Etched integer ground-lattice (-3v..3v), a bead + brass 'k' dial needle, live k*v and |k||v| readout, SNAP integer-lock button, and a slider_horizontal desktop fallback. DNA: default_k, min_k, max_k, base_vector.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/stretch_bench/stretch_bench.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"footprint": [1, 2, 1],
+			"tags": ["vector", "scalar", "multiply", "machine", "vr", "scalar_multiplication", "forces", "placeable"],
+			"qfep_connection": "F_field / scalar: one number reshapes one vector — length and sign on a fixed line. k<0 reverses, k=0 collapses, |k|>1 stretches; the twin is the field-value of v under the scalar.",
+			"parameters": {
+				"default_k": 1.0,
+				"min_k": -3.0,
+				"max_k": 3.0,
+				"footprint": [1, 2, 1],
+				"size_group": "small"
+			},
+			"size_group": "small",
+			"spatial_profile": {
+				"dir_group": "directional",
+				"range": 3,
+				"density": "low",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

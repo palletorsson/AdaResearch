@@ -1,0 +1,39 @@
+{
+	"id": "adder_board",
+	"name": "The Adder's Drafting Board",
+	"description": "A tilted navigator's chart table for vector ADDITION. Drag two glowing tip-pucks across an etched integer grid: amber a springs from the origin pin, orange b draws tip-to-tail off a's tip, and the cyan-violet resultant a+b snaps from origin to b's tip the same frame. Faint dashed ghosts complete the PARALLELOGRAM so both constructions show at once, and a push-button flips emphasis between the tip-to-tail chain and the parallelogram. A floating two-column plate pens the arithmetic live (components left, substituting formula right), and a billboarded triangle-inequality readout shows |a+b| <= |a|+|b| with a brass needle that pegs to equality only when a and b go parallel. Inputs are grabbable; results never are. Part of The Vector Bench collection.",
+	"category": "vectors",
+	"theoreticalGrounding": "a + b = (ax+bx, ay+by). Tip-to-tail and the parallelogram are the same truth drawn two ways; the diagonal is the sum, and its length is bounded by the detour: |a+b| <= |a|+|b|, with equality exactly when a and b are parallel.",
+	"artifacts": {
+		"adder_board": {
+			"lookup_name": "adder_board",
+			"name": "The Adder's Drafting Board",
+			"description": "Dark slate pedestal with a brass rim and a black drafting slab tilted ~20deg toward the player, etched with an integer lattice and a glowing origin pin. Two grabbable GrabSphere tip-pucks set a (amber) and b (orange); emissive catapult-style arrows redraw the tip-to-tail chain + the cyan-violet resultant + dashed parallelogram ghosts every frame. Two precision sliders set |a|,|b| to clean integers; a push-button toggles chain-glow vs parallelogram-glow. Live two-column formula plate + billboarded readouts including the triangle-inequality |a+b| <= |a|+|b| with a brass equality needle. DNA: a_start, b_start, snap_to_grid, pedestal_height.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/adder_board/adder_board.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"footprint": [1, 2, 1],
+			"tags": ["vector", "addition", "machine", "vr", "vectors", "tip-to-tail", "parallelogram", "triangle-inequality", "vector-bench", "placeable"],
+			"qfep_connection": "F_force: two displacements taken in sequence equal one displacement — addition is composition, and the detour is never shorter than the diagonal (|a+b| <= |a|+|b|).",
+			"parameters": {
+				"a_start": [3.0, 2.0],
+				"b_start": [1.0, 3.0],
+				"snap_to_grid": true,
+				"pedestal_height": 0.9,
+				"footprint": [1, 2, 1],
+				"size_group": "small"
+			},
+			"size_group": "small",
+			"spatial_profile": {
+				"dir_group": "front",
+				"range": 3,
+				"density": "medium",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			}
+		}
+	}
+}
