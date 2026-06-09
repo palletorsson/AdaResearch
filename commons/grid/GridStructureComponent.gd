@@ -686,6 +686,38 @@ func get_cube_count() -> int:
 func get_all_cube_positions() -> Array:
 	return cube_positions.duplicate()
 
+# ═══════════════════════════════════════════════════════════════
+# MODIFIER STACK SUPPORT (additive) — per-cell color tint
+# ═══════════════════════════════════════════════════════════════
+
+## Tint the top cube of a grid column.
+##
+## The modifier stack (commons/modifiers/modifier_stack.gd) addresses cells as
+## Vector2i(row, col) = (z, x), matching map_data.json's row/col layout. This
+## maps that cell to the visible (top) cube of column (x=col, z=row) and tints
+## its MultiMesh instance — the same set_instance_color() channel the height
+## tint and DiscoFloor algorithms use. No-op if the grid isn't ready or the
+## column is empty. Visual-only: it never changes structure/grid state.
+func set_cell_color(cell: Vector2i, color: Color) -> void:
+	if not multimesh or not multimesh.use_colors:
+		return
+	if cube_positions.is_empty():
+		return
+	# cell.x = row → grid z ; cell.y = col → grid x
+	var col: int = cell.y
+	var row: int = cell.x
+	# Find the top (highest-y) cube instance in this column.
+	var best_idx: int = -1
+	var best_y: int = -1
+	for i in range(cube_positions.size()):
+		var pos: Vector3i = cube_positions[i]
+		if pos.x == col and pos.z == row and pos.y > best_y:
+			best_y = pos.y
+			best_idx = i
+	if best_idx < 0 or best_idx >= multimesh.instance_count:
+		return
+	multimesh.set_instance_color(best_idx, color)
+
 # Get all cubes from the group
 # Returns collision bodies (StaticBody3D) that represent each cube
 func get_all_cubes() -> Array[Node]:

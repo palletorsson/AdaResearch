@@ -30,6 +30,7 @@ const MODE_DEFS: Array[Dictionary] = [
 	{"id": "artifact_edit",  "order": 0,  "name": "Edit",           "sequence": "",                   "script": ""},
 	{"id": "lab_edit",       "order": 0,  "name": "Lab",            "sequence": "",                   "script": ""},
 	{"id": "biome_brush",    "order": 0,  "name": "Biome Brush",    "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_biome_brush.gd"},
+	{"id": "modifier",       "order": 0,  "name": "Modifier",       "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_modifier.gd"},
 	{"id": "primitives",     "order": 1,  "name": "Primitives",     "sequence": "primitives",         "script": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"},
 	{"id": "transformation", "order": 2,  "name": "Transformation", "sequence": "transformation",     "script": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"},
 	{"id": "chromatic",      "order": 3,  "name": "Chromatic",      "sequence": "color",              "script": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"},
@@ -43,7 +44,7 @@ const MODE_DEFS: Array[Dictionary] = [
 ]
 
 # ── State ─────────────────────────────────────────────────────────────────
-var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "biome_brush", "off"]
+var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "biome_brush", "modifier", "off"]
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
@@ -88,6 +89,19 @@ var _xr_origin: XROrigin3D = null
 var _placed_wedges: Array[Dictionary] = []  # {node, grid_x, grid_z, direction}
 var _wedge_ghost: MeshInstance3D = null
 var _wedge_ghost_dir: float = 0.0  # Y rotation in degrees
+
+# Modifier mode (additive) — each touch appends one op to this non-destructive
+# stack (the map_data.json `modifiers` array shape). Trigger cycles colorize ->
+# random_colors -> normalize/clear; B saves the stack to disk; grip undoes (pop).
+# See commons/modifiers/modifier_stack.gd + doc/BRACELET_GARDEN_MODIFIERS.md.
+const ModifierStackLib = preload("res://commons/modifiers/modifier_stack.gd")
+var _modifier_stack: Array = []
+var _modifier_op_index: int = 0  # 0=colorize, 1=random_colors, 2=normalize/clear
+const MODIFIER_OPS: Array[String] = ["colorize", "random_colors", "normalize"]
+const MODIFIER_PALETTE: Array = [
+	"#e08a2a", "#3aa0e0", "#7ad06a", "#e05a8a", "#d0c23a", "#9a6ae0", "#e0e0e0",
+]
+var _modifier_palette_index: int = 0
 
 # Artifact Edit mode — laser-grab existing artifacts and move/rotate/snap them
 var _edit_target: Node3D = null        # artifact under the laser (not grabbed)
@@ -277,6 +291,23 @@ func _on_controller_button(button_name: String) -> void:
 				_save_biome()
 		return
 
+	# Modifier mode intercepts its buttons before the firing/voxel dispatch
+	# (additive — mirrors the biome_brush early-return so trigger never falls
+	# through to _fire()). trigger = apply the active op on the targeted cell;
+	# Ax = cycle the op (colorize/random/clear); grip = undo (pop); By = save.
+	if mode_id == "modifier":
+		match button_name:
+			"trigger_click":
+				if not _is_hand_busy():
+					_handle_modifier_apply()
+			"ax_button":
+				_cycle_modifier_op()
+			"grip_click":
+				_handle_modifier_undo()
+			"by_button":
+				_save_modifiers()
+		return
+
 	match button_name:
 		"ax_button", "trigger_click":
 			match mode_id:
@@ -324,6 +355,136 @@ func _handle_voxel_remove() -> void:
 	_voxel_controller.try_remove()
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+
+
+# ═════════════════════════════════════════════════════════════════════════
+# MODIFIER MODE — colorize / random / clear grid cells (additive)
+# Each touch records one op on a non-destructive stack (the map_data.json
+# `modifiers` array shape) and applies it live via the ModifierStack. B saves
+# the stack to disk; on load GridSystem re-applies it. Reaches the targeted cell
+# through the shared voxel controller's target_cell (the top cube being faced).
+# ═════════════════════════════════════════════════════════════════════════
+
+## Ax = cycle the active op: colorize -> random_colors -> normalize(clear).
+func _cycle_modifier_op() -> void:
+	_modifier_op_index = (_modifier_op_index + 1) % MODIFIER_OPS.size()
+	var op_name: String = MODIFIER_OPS[_modifier_op_index]
+	var col := Color(0.6, 0.95, 0.7)
+	match op_name:
+		"colorize": col = Color(0.9, 0.7, 0.3)
+		"random_colors": col = Color(0.5, 0.8, 1.0)
+		"normalize": col = Color(0.8, 0.8, 0.85)
+	_flash_label("MOD: " + op_name.to_upper(), col)
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
+
+
+## The cell currently targeted by the shared voxel controller, as a modifier
+## cell Vector2i(row, col) = (grid z, grid x). Returns Vector2i(-1,-1) if no
+## valid target / no controller.
+func _modifier_target_cell() -> Vector2i:
+	if not _voxel_controller or not _voxel_controller.has_target:
+		return Vector2i(-1, -1)
+	var tc: Vector3i = _voxel_controller.target_cell
+	if tc.x < 0 or tc.z < 0:
+		return Vector2i(-1, -1)
+	return Vector2i(tc.z, tc.x)  # (row, col)
+
+
+## trigger = apply the active op to the targeted cell. Builds one op dict, appends
+## it to the stack, and tints the cell live by recomputing its colour through the
+## pure ModifierStack over a single-cell base.
+func _handle_modifier_apply() -> void:
+	var cell: Vector2i = _modifier_target_cell()
+	if cell.x < 0 or cell.y < 0:
+		_flash_label("AIM AT A CELL", Color(1.0, 0.7, 0.3))
+		return
+	var op_name: String = MODIFIER_OPS[_modifier_op_index]
+	var op: Dictionary = {}
+	match op_name:
+		"colorize":
+			var hex: String = String(MODIFIER_PALETTE[_modifier_palette_index])
+			_modifier_palette_index = (_modifier_palette_index + 1) % MODIFIER_PALETTE.size()
+			op = {
+				"op": "colorize",
+				"target": {"cells": [[cell.x, cell.y]]},
+				"params": {"color": hex},
+			}
+		"random_colors":
+			op = {
+				"op": "random_colors",
+				"target": {"cells": [[cell.x, cell.y]]},
+				"params": {"palette": "spectrum"},
+				"seed": _modifier_stack.size(),
+			}
+		"normalize":
+			op = {
+				"op": "normalize",
+				"target": {"cells": [[cell.x, cell.y]]},
+				"params": {},
+			}
+	_modifier_stack.append(op)
+	_apply_modifier_cell_live(cell)
+	_flash_label("MOD %s  (%d)" % [op_name.to_upper(), _modifier_stack.size()], Color(0.6, 0.95, 0.7))
+	fire_cooldown = 0.15
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.2, 0.0)
+
+
+## grip = undo: pop the last op, then re-apply the whole stack's colours to every
+## cell it ever touched (popped cells fall back to the structure's base tint).
+func _handle_modifier_undo() -> void:
+	if _modifier_stack.is_empty():
+		_flash_label("NOTHING TO UNDO", Color(1.0, 0.6, 0.3))
+		return
+	_modifier_stack.pop_back()
+	_reapply_modifier_stack_to_grid()
+	_flash_label("UNDO  (%d)" % _modifier_stack.size(), Color(1.0, 0.8, 0.4))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+
+
+## Recompute one cell's colour from the full stack and push it to the grid.
+func _apply_modifier_cell_live(cell: Vector2i) -> void:
+	var structure := _get_edit_structure()
+	if structure == null:
+		return
+	var base: Dictionary = {cell: {"height": 1, "color": ModifierStackLib.DEFAULT_COLOR}}
+	var result: Dictionary = ModifierStackLib.apply(base, _modifier_stack)
+	var out: Dictionary = result.get(cell, {})
+	var col: Color = out.get("color", ModifierStackLib.DEFAULT_COLOR)
+	if structure.has_method("set_cell_color"):
+		structure.set_cell_color(cell, col)
+
+
+## Re-apply the entire stack's colours to every cell any op has touched. Used by
+## undo so popped cells revert. Cells that resolve to the default tint are reset
+## to that default (the structure's neutral grey) rather than left stale.
+func _reapply_modifier_stack_to_grid() -> void:
+	var structure := _get_edit_structure()
+	if structure == null or not structure.has_method("set_cell_color"):
+		return
+	# Gather every cell referenced by any op in the stack (their `target.cells`).
+	var touched: Dictionary = {}  # Vector2i -> true
+	for op in _modifier_stack:
+		if typeof(op) != TYPE_DICTIONARY:
+			continue
+		var target = op.get("target", null)
+		if typeof(target) == TYPE_DICTIONARY and target.has("cells"):
+			for rc in target["cells"]:
+				if typeof(rc) == TYPE_ARRAY and rc.size() >= 2:
+					touched[Vector2i(int(rc[0]), int(rc[1]))] = true
+	if touched.is_empty():
+		return
+	# Build a base over exactly those cells and run the (possibly shortened) stack.
+	var base: Dictionary = {}
+	for k in touched.keys():
+		base[k] = {"height": 1, "color": ModifierStackLib.DEFAULT_COLOR}
+	var result: Dictionary = ModifierStackLib.apply(base, _modifier_stack)
+	for k in touched.keys():
+		var out: Dictionary = result.get(k, {})
+		var col: Color = out.get("color", ModifierStackLib.DEFAULT_COLOR)
+		structure.set_cell_color(k, col)
 
 
 ## B button = SAVE the edited grid back to the repo's map_data.json.
@@ -459,6 +620,72 @@ func _on_map_save_completed(result: int, response_code: int, _headers: PackedStr
 			hint = "  (adb reverse tcp:3003 tcp:3003)"
 		_flash_label("SAVE FAILED %d/%d%s" % [result, response_code, hint], Color(1.0, 0.35, 0.35))
 		push_warning("[Catalyst] map save HTTP failed result=%d code=%d" % [result, response_code])
+
+# ═══════════════════════════════════════════════════════════════════════════
+# MODIFIER SAVE — write only the `modifiers` key into map_data.json (additive)
+# ═══════════════════════════════════════════════════════════════════════════
+
+## B (modifier mode) = persist the modifier op-stack into the repo's
+## map_data.json. Read-merge-write: ONLY the top-level `modifiers` key is
+## touched — structure/utilities/interactables/settings and every other key are
+## preserved exactly. res:// is read-only on Quest, so the local write is
+## editor-only (skipped on android, like the structure save).
+func _save_modifiers() -> void:
+	var data := _get_grid_data_component()
+	var map_name := ""
+	if data and data.has_method("get_current_map_name"):
+		map_name = data.get_current_map_name()
+	if map_name == "":
+		_flash_label("NO MAP NAME", Color(1.0, 0.4, 0.3))
+		return
+	if _modifier_stack.is_empty():
+		_flash_label("NOTHING TO SAVE", Color(1.0, 0.5, 0.2))
+		return
+	if OS.has_feature("android"):
+		# res:// is read-only on a packaged Quest build — nothing to write to.
+		_flash_label("MODIFIERS: PC-ONLY SAVE", Color(1.0, 0.8, 0.3))
+		return
+
+	var path := _map_data_path_for(map_name)
+	if not FileAccess.file_exists(path):
+		_flash_label("NO map_data.json", Color(1.0, 0.4, 0.3))
+		push_warning("[Catalyst] modifier save: file not found %s" % path)
+		return
+
+	# Read existing JSON, merge only the modifiers key, write back.
+	var rf := FileAccess.open(path, FileAccess.READ)
+	if rf == null:
+		_flash_label("READ FAILED", Color(1.0, 0.35, 0.35))
+		return
+	var text := rf.get_as_text()
+	rf.close()
+	var json := JSON.new()
+	if json.parse(text) != OK or not (json.data is Dictionary):
+		_flash_label("BAD JSON", Color(1.0, 0.35, 0.35))
+		push_warning("[Catalyst] modifier save: parse failed at %s" % path)
+		return
+	var doc: Dictionary = json.data
+	doc["modifiers"] = _modifier_stack.duplicate(true)
+	var wf := FileAccess.open(path, FileAccess.WRITE)
+	if wf == null:
+		_flash_label("WRITE FAILED", Color(1.0, 0.35, 0.35))
+		return
+	wf.store_string(JSON.stringify(doc, "\t"))
+	wf.close()
+	_flash_label("SAVED MODIFIERS  %s  (%d)" % [map_name, _modifier_stack.size()], Color(0.4, 1.0, 0.6))
+	print("[Catalyst] modifier save: wrote %d ops -> %s" % [_modifier_stack.size(), path])
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.2, 0.6, 0.0)
+
+
+## Resolve a map name to its map_data.json path (mirrors GridDataComponent).
+func _map_data_path_for(a_map_name: String) -> String:
+	var maps_path := "res://commons/maps/"
+	if a_map_name == "Lab":
+		return maps_path + "Lab/map_data.json"
+	if a_map_name.begins_with("Lab/"):
+		return maps_path + "Lab/" + a_map_name.substr(4) + ".json"
+	return maps_path + a_map_name + "/map_data.json"
 
 # ═══════════════════════════════════════════════════════════════════════════
 # BIOME BRUSH SAVE — POST paint_layers to the PC, same tunnel as map saves
@@ -1402,8 +1629,9 @@ func _switch_mode(direction: int) -> void:
 	_show_mode_label()
 	mode_changed.emit(mode_id)
 
-	# Activate/deactivate grid editing based on mode (voxel + wedge share the controller)
-	if mode_id in ["voxel_editor", "wedge_placer"]:
+	# Activate/deactivate grid editing based on mode (voxel + wedge + modifier
+	# share the same voxel controller — it supplies the targeted cell)
+	if mode_id in ["voxel_editor", "wedge_placer", "modifier"]:
 		_activate_voxel_mode()
 	else:
 		_deactivate_voxel_mode()
@@ -1431,8 +1659,8 @@ func set_mode_index(index: int) -> void:
 	_rebuild_visual()
 	mode_changed.emit(mode_id)
 
-	# Activate/deactivate grid editing (voxel + wedge share the controller)
-	if mode_id in ["voxel_editor", "wedge_placer"]:
+	# Activate/deactivate grid editing (voxel + wedge + modifier share the controller)
+	if mode_id in ["voxel_editor", "wedge_placer", "modifier"]:
 		_activate_voxel_mode()
 	else:
 		_deactivate_voxel_mode()

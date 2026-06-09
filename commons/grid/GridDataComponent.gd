@@ -248,6 +248,17 @@ func get_interactable_data():
 func is_data_loaded() -> bool:
 	return structure_data_instance != null
 
+# Get the modifier op-stack from the loaded map (additive).
+# Returns the map_data.json top-level `modifiers` array (a list of op dicts;
+# see doc/BRACELET_GARDEN_MODIFIERS.md). Empty array if the key is absent —
+# existing maps without modifiers are unaffected.
+func get_modifiers() -> Array:
+	if json_loader and json_loader.map_data is Dictionary:
+		var mods = json_loader.map_data.get("modifiers", [])
+		if mods is Array:
+			return mods
+	return []
+
 # Get current map name
 func get_current_map_name() -> String:
 	return map_name

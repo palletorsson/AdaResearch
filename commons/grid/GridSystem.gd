@@ -19,6 +19,9 @@ const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
 # Biome paint layers build on the earlier maps in a sequence (render-time accrual).
 # Preloaded by path (not the SequenceAccrual global) to dodge class-cache ordering.
 const SequenceAccrualLib = preload("res://commons/biome_layers/sequence_accrual.gd")
+# Modifier op-stack — non-destructive grid colorize/normalize pass applied at
+# load (additive; see doc/BRACELET_GARDEN_MODIFIERS.md). Preloaded by path.
+const ModifierStackLib = preload("res://commons/modifiers/modifier_stack.gd")
 
 # Configuration
 @export var cube_size: float = 1.0
@@ -460,11 +463,50 @@ func _update_player_bounds(dimensions: Vector3i):
 # Handle structure generation completion
 func _on_structure_complete(cube_count: int):
 	print("GridSystem: Structure generation complete (%d cubes)" % cube_count)
-	
+
+	# Apply the (optional) modifier op-stack on top of the freshly-built grid.
+	# Additive + non-destructive: no map without a `modifiers` key is affected.
+	_apply_modifier_stack()
+
 	# Generate utilities
 	var utility_data = data_component.get_utility_data()
 	var utility_definitions = data_component.get_utility_definitions()
 	utilities_component.generate_utilities(utility_data, utility_definitions)
+
+# Apply the map's modifier op-stack to the generated structure (additive).
+# Reads map_data.json's top-level `modifiers` array, builds a base cell model
+# from the structure heights, runs ModifierStack.apply non-destructively, then
+# tints each cell whose resulting colour differs from the default. Guards on an
+# absent/empty stack so existing maps see no behaviour change.
+func _apply_modifier_stack() -> void:
+	if not data_component or not data_component.has_method("get_modifiers"):
+		return
+	var mods: Array = data_component.get_modifiers()
+	if mods.is_empty():
+		return
+	if not structure_component:
+		return
+	# Build the base cell model: Vector2i(row, col) = (z, x) -> {height, color}.
+	var base: Dictionary = {}
+	var dims: Vector3i = structure_component.get_grid_dimensions()
+	for z in range(dims.z):
+		for x in range(dims.x):
+			var h: int = structure_component.find_highest_y_at(x, z)
+			if h <= 0:
+				continue  # empty column — nothing visible to tint
+			base[Vector2i(z, x)] = {"height": h, "color": ModifierStackLib.DEFAULT_COLOR}
+	if base.is_empty():
+		return
+	var result: Dictionary = ModifierStackLib.apply(base, mods)
+	var tinted: int = 0
+	for k in result.keys():
+		var cell: Dictionary = result[k]
+		var col: Color = cell.get("color", ModifierStackLib.DEFAULT_COLOR)
+		if col == ModifierStackLib.DEFAULT_COLOR:
+			continue  # unchanged — leave the cube on its native material colour
+		structure_component.set_cell_color(k, col)
+		tinted += 1
+	print("GridSystem: Modifier stack applied (%d ops, %d cells tinted)" % [mods.size(), tinted])
 
 # Handle grid animation started
 func _on_grid_animation_started():
