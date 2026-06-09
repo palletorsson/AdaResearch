@@ -27,14 +27,16 @@ func apply(ctx: Dictionary) -> void:
 	var painted: bool = false
 	for layer in ctx.get("paint_layers", []):
 		if layer is Dictionary and str(layer.get("element", "")) == "ground":
-			# The ground field is a HEIGHT map, not a scatter density — build it at full
-			# strength (density 1.0) so the painted SHAPE drives the terrain and only the
-			# `height` (max_h) scales it. DistributionField.build_field otherwise multiplies
-			# a brush field by the layer's `density`, which would shrink the hills whenever
-			# the DEFINE/density slider (a scatter knob) is lowered. Height owns height.
+			# The ground field is a HEIGHT map whose brush cells store HEIGHTS IN METRES
+			# (0..4), baked per-cell at paint time. Build it UNCLAMPED (build_height_field,
+			# NOT build_field — the latter clamps every cell to [0,1], which would flatten any
+			# painted height above 1 metre to a uniform plateau) at full strength (density 1.0)
+			# so the painted SHAPE drives the terrain. The layer now carries height=1.0, so the
+			# field value IS the metre height: max_h × field = 1.0 × field. The DEFINE/density
+			# scatter knob never touches ground height (height owns height).
 			var ground_spec: Dictionary = (layer as Dictionary).duplicate()
 			ground_spec["density"] = 1.0
-			field = DistributionField.build_field(ground_spec, gw, gd, int(ctx.get("rng_seed", 0)))
+			field = DistributionField.build_height_field(ground_spec, gw, gd, 4.0)
 			max_h = float(layer.get("height", 1.4))
 			painted = true
 			break

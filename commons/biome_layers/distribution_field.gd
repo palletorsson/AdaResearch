@@ -86,6 +86,65 @@ static func build_field(spec: Dictionary, grid_w: int, grid_d: int, rng_seed: in
 	return field
 
 
+## Build a brush field WITHOUT the [0..1] clamp — for the "ground" HEIGHT map, whose
+## brush cells store HEIGHTS IN METRES (0..max_cap), not 0..1 density. The normal
+## build_field / _read_brush path clamps every cell to [0,1] (correct for scatter
+## density), which would flatten any painted height above 1 metre. This reads the same
+## sparse {w,d,cells} (or rows / flat) brush at full magnitude, only ceiling it at
+## `max_cap` (the slider's top, 4.0). density still scales (kept at 1.0 by the ground
+## path so the painted SHAPE owns the terrain). Same resample rules as _read_brush.
+static func build_height_field(spec: Dictionary, grid_w: int, grid_d: int, max_cap: float = 4.0) -> PackedFloat32Array:
+	var n: int = maxi(0, grid_w * grid_d)
+	var field := PackedFloat32Array()
+	field.resize(n)
+	var density: float = clampf(float(spec.get("density", 1.0)), 0.0, 1.0)
+	var brush = spec.get("brush", [])
+	if brush is Dictionary and brush.has("cells"):
+		brush = _sparse_to_rows(brush)
+	if brush is Array and brush.size() > 0 and brush[0] is Array:
+		var bd: int = brush.size()
+		var bw: int = (brush[0] as Array).size()
+		if bw <= 0:
+			return field
+		if bw == grid_w and bd == grid_d:
+			for z in grid_d:
+				var row = brush[z]
+				if row is Array:
+					for x in mini(grid_w, row.size()):
+						field[z * grid_w + x] = density * clampf(float(row[x]), 0.0, max_cap)
+		else:
+			for z in grid_d:
+				var v: float = (float(z) + 0.5) / float(grid_d)
+				for x in grid_w:
+					var u: float = (float(x) + 0.5) / float(grid_w)
+					field[z * grid_w + x] = density * clampf(_height_bilinear(brush, bw, bd, u, v), 0.0, max_cap)
+	elif brush is Array:
+		for i in mini(field.size(), brush.size()):
+			field[i] = density * clampf(float(brush[i]), 0.0, max_cap)
+	return field
+
+
+## Bilinear sample for the unclamped height field (mirrors _brush_bilinear but does NOT
+## clamp the per-cell value to [0,1], so metres > 1 survive the resample).
+static func _height_bilinear(brush: Array, bw: int, bd: int, u: float, v: float) -> float:
+	var fx: float = clampf(u * float(bw) - 0.5, 0.0, float(bw - 1))
+	var fz: float = clampf(v * float(bd) - 0.5, 0.0, float(bd - 1))
+	var x0: int = int(floor(fx)); var z0: int = int(floor(fz))
+	var x1: int = mini(x0 + 1, bw - 1); var z1: int = mini(z0 + 1, bd - 1)
+	var tx: float = fx - float(x0); var tz: float = fz - float(z0)
+	return lerpf(lerpf(_height_cell(brush, x0, z0), _height_cell(brush, x1, z0), tx),
+				 lerpf(_height_cell(brush, x0, z1), _height_cell(brush, x1, z1), tx), tz)
+
+
+static func _height_cell(brush: Array, x: int, z: int) -> float:
+	if z < 0 or z >= brush.size():
+		return 0.0
+	var row = brush[z]
+	if not (row is Array) or x < 0 or x >= row.size():
+		return 0.0
+	return maxf(0.0, float(row[x]))
+
+
 ## World-space placement positions (y = 0, on the grid floor) for ONE paint
 ## layer spec. `budget` (Phase-5 population budget) scales the final count.
 static func placements(spec: Dictionary, grid_w: int, grid_d: int, cube_size: float,

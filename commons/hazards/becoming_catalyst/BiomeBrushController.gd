@@ -22,7 +22,7 @@ var _data: Node = null               # GridDataComponent (existing paint_layers)
 var _elem_idx: int = 0
 var _radius: int = 2
 var _strength: float = 0.6
-var _height: float = 1.5             # painted ground/biome rise (BIOME tab HEIGHT slider; was hardcoded 1.5)
+var _height: float = 1.5             # TARGET height (metres) for the CURRENT ground stroke (BIOME tab HEIGHT slider, 0.5..4.0). Baked into the ground field per-cell at paint time; different strokes keep different heights.
 var _density: float = 1.0            # scatter density for every painted layer (BIOME tab DEFINE slider; was 1.0)
 var _fields: Dictionary = {}         # element -> PackedFloat32Array (grid_w*grid_d)
 var _element_artifacts: Dictionary = {}  # element -> Array[name] (the VR picker's lists)
@@ -144,7 +144,11 @@ func paint_layers_payload() -> Array:
 		painted[el] = true
 		var layer := {"element": el, "mode": "brush", "density": _density, "brush": _brush_payload(_fields[el])}
 		if el == "ground":
-			layer["height"] = _height   # painted bumps rise to the HEIGHT slider value
+			# The ground field now stores the actual height PER CELL (in metres), so the
+			# substrate renders the field DIRECTLY: height = field × 1.0. HEIGHT is baked into
+			# the field per-cell at paint time (see _stamp), so it must NOT be re-applied here —
+			# otherwise the slider would scale ALL painted ground uniformly (a flat plateau).
+			layer["height"] = 1.0
 		elif el == "shader":
 			var c := _elem_colour(el)
 			layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture
@@ -182,9 +186,10 @@ func _live_ground_preview() -> void:
 	if _preview_tick % 3 != 0:
 		return
 	if _grid and _grid.has_method("preview_ground") and _fields.has("ground"):
-		# Use the HEIGHT slider (_height), not a hardcoded 1.5, so the live terrain rises
-		# to the same height the committed ground will — taller at HEIGHT=4 than 0.5.
-		_grid.preview_ground(_fields["ground"], grid_w, grid_d, _height)
+		# The ground field IS the height (metres) per cell now, so render it directly: max_h=1.0
+		# (height = field × 1.0). The HEIGHT slider is baked into the field per-cell at paint
+		# time (see _stamp), not re-applied here — different strokes keep their own heights.
+		_grid.preview_ground(_fields["ground"], grid_w, grid_d, 1.0)
 
 
 func _ray_cell(origin: Vector3, forward: Vector3) -> Vector2i:
@@ -201,6 +206,14 @@ func _ray_cell(origin: Vector3, forward: Vector3) -> Vector2i:
 	return Vector2i(cx, cz)
 
 
+## Stamp the active element's per-cell field with a radial-falloff brush. ELEMENT-AWARE:
+##   • "ground" — the field stores HEIGHTS IN METRES (not 0..1 density). Each painted cell
+##     eases toward a per-cell target lerpf(0.5, HEIGHT, falloff): centre reaches the HEIGHT
+##     slider value, edge lands on the 0.5 minimum; moved by the brush strength, clamped to
+##     [0, 4]. ERASE eases the cell toward 0. So HEIGHT is the TARGET for THIS stroke —
+##     different strokes at different HEIGHT values keep their different heights, and painted
+##     ground never drops below 0.5.
+##   • non-ground — the EXISTING 0..1 scatter density (add/subtract strength·falloff). UNCHANGED.
 func _stamp(cx: int, cz: int, erase: bool) -> void:
 	var el: String = ELEMENTS[_elem_idx]
 	if not _fields.has(el):
@@ -208,6 +221,7 @@ func _stamp(cx: int, cz: int, erase: bool) -> void:
 		nf.resize(grid_w * grid_d)
 		_fields[el] = nf
 	var field: PackedFloat32Array = _fields[el]
+	var is_ground: bool = (el == "ground")
 	for dz in range(-_radius, _radius + 1):
 		for dx in range(-_radius, _radius + 1):
 			var x: int = cx + dx
@@ -219,10 +233,20 @@ func _stamp(cx: int, cz: int, erase: bool) -> void:
 				continue
 			var fall: float = 1.0 - dist / (float(_radius) + 0.0001)
 			var i: int = z * grid_w + x
-			if erase:
-				field[i] = maxf(0.0, field[i] - _strength * fall)
+			if is_ground:
+				# Field holds METRES. Ease toward the per-cell target height (centre = HEIGHT
+				# slider, edge = 0.5 floor); erase eases toward 0. Clamp to [0, 4].
+				if erase:
+					field[i] = clampf(lerpf(field[i], 0.0, _strength * fall), 0.0, 4.0)
+				else:
+					var target: float = lerpf(0.5, _height, fall)
+					field[i] = clampf(lerpf(field[i], target, _strength * fall), 0.0, 4.0)
 			else:
-				field[i] = minf(1.0, field[i] + _strength * fall)
+				# Non-ground: 0..1 scatter density (unchanged).
+				if erase:
+					field[i] = maxf(0.0, field[i] - _strength * fall)
+				else:
+					field[i] = minf(1.0, field[i] + _strength * fall)
 
 
 ## Brush field → compact sparse {w,d,cells} form for the saved/payload layer

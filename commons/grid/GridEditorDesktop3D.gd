@@ -134,7 +134,7 @@ var _biome_idx: int = -1                  # active element index; -1 = none
 var _brush_fields: Dictionary = {}        # element -> PackedFloat32Array (_biome_w*_biome_d, margin-offset)
 var _brush_radius: int = 2
 var _brush_strength: float = 0.6
-var _biome_height: float = 1.5            # painted ground/biome rise (BIOME tab HEIGHT slider; was hardcoded 1.5)
+var _biome_height: float = 1.5            # TARGET height (metres) for the CURRENT ground stroke (BIOME tab HEIGHT slider, 0.5..4.0). Baked into the ground field per-cell at paint time; different strokes keep different heights.
 var _biome_density: float = 1.0           # scatter density for every painted layer (BIOME tab DEFINE slider; was 1.0)
 var _biome_dirty: bool = false            # a biome stamp happened this stroke → rebuild on release
 var _biome_preview_tick: int = 0          # throttle for the live ground-height preview (every 3rd stamp)
@@ -2655,13 +2655,21 @@ func _stamp_biome_at_hover() -> void:
 		_live_ground_preview()
 
 
-## Stamp the element's per-cell density field with a radial-falloff brush at (cx,cz).
+## Stamp the element's per-cell field with a radial-falloff brush at (cx,cz). ELEMENT-AWARE:
+##   • "ground" — the field stores HEIGHTS IN METRES (not 0..1 density). Each painted cell
+##     under the brush eases toward a per-cell target height lerpf(0.5, HEIGHT, falloff): the
+##     centre reaches the HEIGHT slider value, the edge lands on the 0.5 minimum. The cell
+##     moves toward that target by the brush strength (so multiple passes converge), clamped
+##     to [0, 4]. ERASE eases the cell toward 0. Because the field IS the height, HEIGHT is
+##     the TARGET for THIS stroke — different strokes at different HEIGHT values give terrain
+##     of different heights, and painted ground never sits below 0.5.
+##   • non-ground (tree/flower/…) — the EXISTING 0..1 scatter density: add strength·falloff
+##     (clamped to 1), erase subtracts (floored at 0). UNCHANGED.
 ## Pure field math (no input/hover deps) — reused by the mouse stroke AND the headless
-## --paintbiome proof. Allocates the field lazily (sized to the biome AREA); clamps to
-## [0,1] (or floors at 0 when erasing). Uses the margin-OFFSET field index, so cx/cz (and
-## the brush footprint) may be NEGATIVE — anywhere in the biome area [-M, grid+M). The
-## radial blob is clamped to the biome AREA (via _biome_field_index returning -1 outside
-## the ring), NOT the grid.
+## --paintbiome proof. Allocates the field lazily (sized to the biome AREA). Uses the
+## margin-OFFSET field index, so cx/cz (and the brush footprint) may be NEGATIVE — anywhere
+## in the biome area [-M, grid+M). The radial blob is clamped to the biome AREA (via
+## _biome_field_index returning -1 outside the ring), NOT the grid.
 func _stamp_biome_field(el: String, cx: int, cz: int, r: int, erasing: bool) -> void:
 	if el == "" or _grid_w <= 0 or _grid_d <= 0:
 		return
@@ -2674,6 +2682,7 @@ func _stamp_biome_field(el: String, cx: int, cz: int, r: int, erasing: bool) -> 
 	# Grow a stale field if the grid (and thus the biome area) changed since allocation.
 	if field.size() != need:
 		field.resize(need)
+	var is_ground := (el == "ground")
 	for dz in range(-r, r + 1):
 		for dx in range(-r, r + 1):
 			var x := cx + dx
@@ -2685,10 +2694,20 @@ func _stamp_biome_field(el: String, cx: int, cz: int, r: int, erasing: bool) -> 
 			if dist > float(r) + 0.001:
 				continue
 			var falloff := 1.0 - dist / (float(r) + 0.0001)
-			if erasing:
-				field[i] = maxf(0.0, field[i] - _brush_strength * falloff)
+			if is_ground:
+				# Field holds METRES. Ease the cell toward its per-cell target height (centre
+				# = HEIGHT slider, edge = 0.5 floor); erase eases toward 0. Clamp to [0, 4].
+				if erasing:
+					field[i] = clampf(lerpf(field[i], 0.0, _brush_strength * falloff), 0.0, 4.0)
+				else:
+					var target := lerpf(0.5, _biome_height, falloff)
+					field[i] = clampf(lerpf(field[i], target, _brush_strength * falloff), 0.0, 4.0)
 			else:
-				field[i] = minf(1.0, field[i] + _brush_strength * falloff)
+				# Non-ground: 0..1 scatter density (unchanged).
+				if erasing:
+					field[i] = maxf(0.0, field[i] - _brush_strength * falloff)
+				else:
+					field[i] = minf(1.0, field[i] + _brush_strength * falloff)
 	_brush_fields[el] = field
 
 
@@ -2725,7 +2744,13 @@ func _headless_paint_biome(element: String) -> void:
 		Vector2i(-m, -m), Vector2i(_grid_w + m, -m),                 # corners
 		Vector2i(-m, _grid_d + m), Vector2i(_grid_w + m, _grid_d + m),
 	]
-	for sp in spots:
+	# For GROUND, paint each spot at a DIFFERENT HEIGHT so the proof shows varied terrain
+	# (tall hills + short mounds), not a uniform plateau. Non-ground keeps one stamp value.
+	var demo_heights: Array = [4.0, 1.0, 3.0, 0.8, 2.5, 1.5, 3.5, 0.6, 2.0]
+	for i in range(spots.size()):
+		var sp: Vector2i = spots[i]
+		if el == "ground":
+			_biome_height = float(demo_heights[i % demo_heights.size()])
 		_stamp_biome_field(el, sp.x, sp.y, rad, false)
 	_biome_dirty = true
 	_update_biome_overlay()
@@ -2851,12 +2876,15 @@ func _update_biome_overlay() -> void:
 		return
 	var col := _biome_color(el)
 	var field: PackedFloat32Array = _brush_fields.get(el, PackedFloat32Array())
+	# The "ground" field stores HEIGHTS IN METRES (0..4), not 0..1 density, so normalise it
+	# by /4.0 to read back as a 0..1 tint alpha. Non-ground fields are already 0..1 density.
+	var norm := 0.25 if el == "ground" else 1.0   # /4.0 for ground metres → [0,1]
 	# Overlay index == field index (both are biome-area, margin-offset, row-major over bw*bd).
 	for z in range(bd):
 		for x in range(bw):
 			var i := z * bw + x
-			var v: float = field[i] if i < field.size() else 0.0
-			mm.set_instance_color(i, Color(col.r, col.g, col.b, v * 0.75))
+			var v: float = (field[i] * norm) if i < field.size() else 0.0
+			mm.set_instance_color(i, Color(col.r, col.g, col.b, clampf(v, 0.0, 1.0) * 0.75))
 
 
 ## Build paint_layers from the painted fields (mirrors the scrubber's _effective_paint_layers
@@ -2879,7 +2907,12 @@ func _biome_paint_layers() -> Array:
 			"brush": DistributionFieldLib.field_to_sparse(field, bw, bd),
 		}
 		if str(el) == "ground":
-			layer["height"] = _biome_height
+			# The ground field now stores the actual height PER CELL (in metres), so the
+			# substrate renders the field DIRECTLY: height = field value × 1.0. (Previously
+			# the field was 0..1 density × the HEIGHT slider, which scaled ALL painted ground
+			# uniformly — a flat plateau.) HEIGHT is baked into the field per-cell at paint
+			# time, so it must NOT be re-applied here.
+			layer["height"] = 1.0
 		elif str(el) == "shader":
 			var c := _biome_color(str(el))
 			layer["color"] = [c.r, c.g, c.b]
@@ -2946,7 +2979,10 @@ func _live_ground_preview() -> void:
 	if sub.has_method("set_base_offset"):
 		sub.set_base_offset(cube_size * 0.5 + 0.02)
 	var field: PackedFloat32Array = _brush_fields["ground"]
-	sub.apply_height_preview(field, _biome_w(), _biome_d(), _biome_height)
+	# The ground field IS the height (metres) per cell now, so render it directly: max_h=1.0
+	# (height = field × 1.0). The HEIGHT slider is baked into the field per-cell at paint time
+	# (see _stamp_biome_field), not re-applied here — different strokes keep their heights.
+	sub.apply_height_preview(field, _biome_w(), _biome_d(), 1.0)
 
 
 ## Wire the accrual path once the grid is known: grab the autoload, create the host,
