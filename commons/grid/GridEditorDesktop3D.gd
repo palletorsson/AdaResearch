@@ -99,6 +99,10 @@ var _artifact_idx: int = -1               # index into _artifact_list; -1 = none
 var _artifact_seqs_by_lookup: Dictionary = {}
 var _artifact_sequences: Array = []       # sorted unique sequence names present (for the panel)
 var _artifact_seq_filter: String = "ALL"  # active sequence filter ("ALL" = no filter)
+# NAME filter — a HUD LineEdit narrowing _artifact_list by lookup-name substring (mirrors
+# the MAP filter). Composes with the sequence filter: a lookup must match BOTH to appear.
+var _artifact_filter: String = ""         # lower-cased substring narrowing the artifact list
+var _artifact_filter_edit: LineEdit = null # the artifact name filter text field
 # Live interactables layer, rows[z][col] = token string (" " = empty). Built from
 # the loaded map's layer (or blank) and edited by placement; saved into map_data.
 var _interactables: Array = []
@@ -144,6 +148,7 @@ var _hover_valid: bool = false
 var _hover_highlight: MeshInstance3D = null    # single cell under the cursor
 var _ghost: MultiMeshInstance3D = null         # brush footprint preview (GRID/PAINT)
 var _artifact_ghost: MeshInstance3D = null     # selected-artifact marker (ARTIFACTS)
+var _move_select_box: MeshInstance3D = null    # bright wireframe box marking the MOVE source / pick-this cell
 var _biome_overlay: MultiMeshInstance3D = null # per-cell density field (BIOME)
 var _painting: bool = false                    # left-button held → continuous apply
 
@@ -608,6 +613,71 @@ func _build_hover_visuals() -> void:
 	add_child(_biome_overlay)
 
 
+# ── MOVE select box ──────────────────────────────────────────────────
+## Lazily build the bright wireframe MOVE box: the 12 edges of a unit cube as a LINES
+## ArrayMesh, with an unshaded emissive material so it glows regardless of scene light.
+## Built once, sized to one cell, hidden until a MOVE is armed. Cheap (one MeshInstance3D).
+func _ensure_move_select_box() -> void:
+	if _move_select_box and is_instance_valid(_move_select_box):
+		return
+	_move_select_box = MeshInstance3D.new()
+	_move_select_box.name = "MoveSelectBox"
+	# Unit cube spanning [-0.5,0.5]³; positioned + scaled per cell at hover time.
+	var h := 0.5
+	var c := [
+		Vector3(-h, -h, -h), Vector3(h, -h, -h), Vector3(h, -h, h), Vector3(-h, -h, h),  # bottom
+		Vector3(-h, h, -h), Vector3(h, h, -h), Vector3(h, h, h), Vector3(-h, h, h),       # top
+	]
+	var edges := [
+		0, 1, 1, 2, 2, 3, 3, 0,   # bottom ring
+		4, 5, 5, 6, 6, 7, 7, 4,   # top ring
+		0, 4, 1, 5, 2, 6, 3, 7,   # verticals
+	]
+	var verts := PackedVector3Array()
+	for e in edges:
+		verts.append(c[int(e)])
+	var arr := []
+	arr.resize(Mesh.ARRAY_MAX)
+	arr[Mesh.ARRAY_VERTEX] = verts
+	var am := ArrayMesh.new()
+	am.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arr)
+	_move_select_box.mesh = am
+	var emat := StandardMaterial3D.new()
+	emat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	emat.albedo_color = Color(0.4, 1.0, 0.55)            # bright green edge
+	emat.emission_enabled = true
+	emat.emission = Color(0.4, 1.0, 0.55)
+	emat.emission_energy_multiplier = 2.0
+	emat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	emat.disable_receive_shadows = true
+	_move_select_box.material_override = emat
+	_move_select_box.visible = false
+	add_child(_move_select_box)
+
+
+## Show/hide + position the MOVE select box, given a target (row, col) cell. Scales the unit
+## cube to ~one cell and floats it on the column top. tint sets the edge/emission colour so
+## the held-source ("pick this" / origin) and the drop-target read differently.
+func _set_move_box(show_box: bool, row: int = -1, col: int = -1, tint: Color = Color(0.4, 1.0, 0.55)) -> void:
+	if not show_box:
+		if _move_select_box and is_instance_valid(_move_select_box):
+			_move_select_box.visible = false
+		return
+	_ensure_move_select_box()
+	if row < 0 or row >= _grid_d or col < 0 or col >= _grid_w:
+		_move_select_box.visible = false
+		return
+	var bh := cube_size * 0.96
+	_move_select_box.scale = Vector3(cube_size * 0.96, bh, cube_size * 0.96)
+	var top_y := 0.06 + _column_top_y(col, row)
+	_move_select_box.position = Vector3((col + 0.5) * cube_size, top_y + bh * 0.5, (row + 0.5) * cube_size)
+	var emat := _move_select_box.material_override as StandardMaterial3D
+	if emat:
+		emat.albedo_color = tint
+		emat.emission = tint
+	_move_select_box.visible = true
+
+
 ## Resize hover quads to the (possibly map-derived) cube size.
 func _update_hover_grid_sized() -> void:
 	if _hover_highlight and _hover_highlight.mesh is PlaneMesh:
@@ -1055,6 +1125,31 @@ func _build_artifact_preview_card() -> void:
 	_preview_name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_preview_name_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
+	# ── ARTIFACT NAME filter — a flat dark LineEdit just below the preview card, mirroring
+	# the MAP filter (cached substring, case-insensitive). Anchored top-right of the HUD so it
+	# sits directly under the card; shown only on the ARTIFACTS tab (toggled in _on_tab_changed
+	# alongside the card). Focusable so it can take text; _update_fly + the focus check suppress
+	# WASD/shortcuts while typing (a focused LineEdit consumes its keys, pre-empting _unhandled_input).
+	_artifact_filter_edit = LineEdit.new()
+	_artifact_filter_edit.name = "ArtifactFilter"
+	_artifact_filter_edit.placeholder_text = "filter artifacts…"
+	_artifact_filter_edit.focus_mode = Control.FOCUS_CLICK
+	_artifact_filter_edit.clear_button_enabled = true
+	_artifact_filter_edit.add_theme_font_size_override("font_size", 14)
+	_artifact_filter_edit.add_theme_color_override("font_color", C_TEXT)
+	_artifact_filter_edit.add_theme_color_override("font_placeholder_color", Color(0.55, 0.60, 0.70))
+	_artifact_filter_edit.add_theme_stylebox_override("normal", _new_stylebox(C_BG_SOFT, 0.0, 6.0))
+	_artifact_filter_edit.add_theme_stylebox_override("focus", _new_stylebox(Color(0.14, 0.17, 0.22, 0.95), 0.0, 6.0))
+	_artifact_filter_edit.anchor_left = 1.0; _artifact_filter_edit.anchor_right = 1.0
+	_artifact_filter_edit.anchor_top = 0.0; _artifact_filter_edit.anchor_bottom = 0.0
+	_artifact_filter_edit.offset_left = -(PANEL_W + 8.0)
+	_artifact_filter_edit.offset_right = -8.0
+	_artifact_filter_edit.offset_top = BAR_H + 8.0 + PREVIEW_PX + 36.0
+	_artifact_filter_edit.offset_bottom = BAR_H + 8.0 + PREVIEW_PX + 64.0
+	_artifact_filter_edit.text_changed.connect(_on_artifact_filter_changed)
+	_artifact_filter_edit.visible = false   # shown only on the ARTIFACTS tab
+	_hud_layer.add_child(_artifact_filter_edit)
+
 
 ## Refresh the 3D preview to the current selection. Called on PREV/NEXT and sequence
 ## filter changes. No-op when the card failed to build; re-instantiates the artifact
@@ -1064,6 +1159,9 @@ func _update_artifact_3d_preview() -> void:
 		return
 	var on_artifacts := _active_tab == "ARTIFACTS"
 	_preview_panel.visible = on_artifacts
+	# The artifact NAME filter field rides with the preview card (ARTIFACTS tab only).
+	if _artifact_filter_edit:
+		_artifact_filter_edit.visible = on_artifacts
 	if not on_artifacts:
 		return
 	var lookup := _selected_artifact()
@@ -1072,7 +1170,12 @@ func _update_artifact_3d_preview() -> void:
 	_preview_lookup = lookup
 	_clear_preview_node()
 	if _preview_name_lbl:
-		_preview_name_lbl.text = lookup if lookup != "" else "no artifact selected"
+		if lookup != "":
+			_preview_name_lbl.text = lookup
+		elif _artifact_filter != "":
+			_preview_name_lbl.text = "(no match)"
+		else:
+			_preview_name_lbl.text = "no artifact selected"
 	if lookup == "" or _preview_viewport == null:
 		return
 	var node := _instantiate_preview(lookup)
@@ -1340,7 +1443,10 @@ func _on_artifact_action(action: String) -> void:
 	_active_tab = "ARTIFACTS"
 	var up := action.to_upper()
 	if _artifact_list.is_empty():
-		_status_msg = "no map-ready artifacts in the catalog"
+		if _artifact_filter != "":
+			_status_msg = "no artifact matches filter '%s'" % _artifact_filter
+		else:
+			_status_msg = "no map-ready artifacts in the catalog"
 		_update_hud()
 		return
 	if up.contains("PREV"):
@@ -1525,6 +1631,8 @@ func _update_fly(delta: float) -> void:
 		return
 	if _map_filter_edit and _map_filter_edit.has_focus():
 		return   # typing in the map filter — W/A/S/D are text, not camera fly
+	if _artifact_filter_edit and _artifact_filter_edit.has_focus():
+		return   # typing in the artifact filter — W/A/S/D are text, not camera fly
 	var dir := Vector3.ZERO
 	if Input.is_key_pressed(KEY_W): dir.z -= 1.0
 	if Input.is_key_pressed(KEY_S): dir.z += 1.0
@@ -1583,6 +1691,13 @@ func _set_hover_visible(v: bool) -> void:
 	if _ghost: _ghost.visible = v and (_active_tab == "GRID")
 	if _artifact_ghost: _artifact_ghost.visible = v and (_active_tab == "ARTIFACTS")
 	if _util_ghost: _util_ghost.visible = v and (_active_tab == "UTILITY")
+	# MOVE select box: while HOLDING it anchors to the source cell (independent of the
+	# cursor, so it stays put when the hover goes invalid); otherwise it only follows a
+	# valid hover, so hide it here when hover is lost or we leave ARTIFACTS.
+	if _active_tab == "ARTIFACTS" and _artifact_move_picked:
+		_set_move_box(true, _artifact_move_from.x, _artifact_move_from.y, Color(0.4, 1.0, 0.55))
+	elif not v or _active_tab != "ARTIFACTS":
+		_set_move_box(false)
 
 
 ## Place the single-cell highlight and the per-tab ghost at the hovered cell.
@@ -1610,6 +1725,26 @@ func _position_hover_visuals() -> void:
 			if _artifact_ghost.mesh is BoxMesh:
 				bh = (_artifact_ghost.mesh as BoxMesh).size.y
 			_artifact_ghost.position = Vector3((col + 0.5) * cube_size, top_y + bh * 0.5, (row + 0.5) * cube_size)
+			# While HOLDING a moved artifact, tint the hovered ghost as the DROP TARGET (warm
+			# gold) so it reads as "lands here"; otherwise the normal blue selection tint.
+			var amat := _artifact_ghost.material_override as StandardMaterial3D
+			if amat:
+				if _artifact_move_picked:
+					amat.albedo_color = Color(C_GOLD.r, C_GOLD.g, C_GOLD.b, 0.55)
+				else:
+					amat.albedo_color = Color(C_ACCENT.r, C_ACCENT.g, C_ACCENT.b, 0.45)
+
+	# MOVE select box — the visual anchor of a MOVE gesture (ARTIFACTS tab only):
+	#   HOLDING        → mark the SOURCE cell (origin of the held artifact) in green.
+	#   ARMED, EMPTY   → follow the hovered cell as a "pick this" cue, but only when that
+	#                    cell is occupied (nothing to pick on an empty cell).
+	#   otherwise      → hidden.
+	if _active_tab == "ARTIFACTS" and _artifact_move_picked:
+		_set_move_box(true, _artifact_move_from.x, _artifact_move_from.y, Color(0.4, 1.0, 0.55))
+	elif _active_tab == "ARTIFACTS" and _artifact_move_mode and _artifact_occupied_at(row, col):
+		_set_move_box(true, row, col, Color(0.4, 1.0, 0.55))
+	else:
+		_set_move_box(false)
 
 	# Utility marker ghost.
 	if _util_ghost:
@@ -1797,23 +1932,52 @@ func _load_artifact_catalog() -> void:
 		_artifact_list.size(), _artifact_sequences.size()])
 
 
-## Rebuild _artifact_list from the full catalog filtered by `seq` ("ALL" = every
-## map-ready artifact; else only artifacts whose map_sequences contains `seq`). Sorts
-## the result and resets the selection to the first entry.
+## Set the active sequence filter, then rebuild the composed list. Kept for the
+## sequence-change call site ("ALL" = no sequence narrowing); the actual list build is in
+## _rebuild_artifact_list so name + sequence predicates compose in one place.
 func _apply_artifact_filter(seq: String) -> void:
 	_artifact_seq_filter = seq if seq != "" else "ALL"
+	_rebuild_artifact_list()
+
+
+## Rebuild _artifact_list from the FULL catalog applying BOTH active predicates:
+##   sequence — "ALL" = every map-ready artifact; else map_sequences must contain it
+##   name     — _artifact_filter empty = no narrowing; else the lookup must contain it
+## Sorts the result and resets the selection to the first entry (or -1 when nothing matches).
+func _rebuild_artifact_list() -> void:
 	var names: Array = []
 	var want_all: bool = _artifact_seq_filter.to_upper() == "ALL"
 	for lk in _artifact_seqs_by_lookup.keys():
-		if want_all:
-			names.append(lk)
-		else:
+		# Sequence predicate.
+		if not want_all:
 			var seqs: Array = _artifact_seqs_by_lookup[lk]
-			if seqs.has(_artifact_seq_filter):
-				names.append(lk)
+			if not seqs.has(_artifact_seq_filter):
+				continue
+		# Name predicate (case-insensitive substring on the lookup name).
+		if _artifact_filter != "" and not str(lk).to_lower().contains(_artifact_filter):
+			continue
+		names.append(lk)
 	names.sort()
 	_artifact_list = names
 	_artifact_idx = 0 if not _artifact_list.is_empty() else -1
+
+
+## ARTIFACT NAME filter changed → cache the lower-cased substring, recompose the list with
+## the active sequence filter, reset the selection, and refresh the preview + 3D card. PREV/
+## NEXT then cycle the narrowed list. Empty match leaves an empty list (PLACE guards on it).
+func _on_artifact_filter_changed(text: String) -> void:
+	_active_tab = "ARTIFACTS"
+	_artifact_filter = text.strip_edges().to_lower()
+	_rebuild_artifact_list()
+	_update_artifact_preview()
+	_update_artifact_3d_preview()   # filter changed the selection → re-render the 3D card
+	if _artifact_list.is_empty():
+		_status_msg = "filter '%s' — no match   (0 total)" % _artifact_filter
+	else:
+		_status_msg = "filter '%s' — %d artifact%s   ·   %s" % [
+			_artifact_filter, _artifact_list.size(),
+			"" if _artifact_list.size() == 1 else "s", _selected_artifact()]
+	_update_hud()
 
 
 ## Push the current selection to the panel's preview label (name + n/total).
@@ -1916,6 +2080,16 @@ func _clear_artifact_at_hover() -> void:
 
 
 # ── ARTIFACTS MOVE — pick-then-place an existing artifact ─────────────
+## True when the interactables cell (row=z, col=x) holds a placed artifact (not blank).
+## Bounds-guarded; used to gate the MOVE select box's "pick this" cue.
+func _artifact_occupied_at(row: int, col: int) -> bool:
+	if row < 0 or row >= _interactables.size():
+		return false
+	if col < 0 or col >= _interactables[row].size():
+		return false
+	return str(_interactables[row][col]).strip_edges() not in ["", " "]
+
+
 ## Toggle MOVE mode on/off (the MOVE button). Turning it off cancels any pending
 ## pickup so a half-finished move never lingers.
 func _toggle_artifact_move() -> void:
@@ -1926,6 +2100,7 @@ func _toggle_artifact_move() -> void:
 	else:
 		_artifact_move_picked = false
 		_status_msg = "MOVE on — L-click an occupied cell to pick it up"
+	_position_hover_visuals()   # refresh the select box for the new MOVE state
 	_update_hud()
 
 
@@ -1960,6 +2135,7 @@ func _artifact_pick_up() -> void:
 	_artifact_move_from = Vector2i(row, col)
 	_artifact_move_picked = true
 	_status_msg = "MOVE — picked '%s' from (%d,%d); L-click a target cell" % [tok, row, col]
+	_position_hover_visuals()   # anchor the select box to the source cell
 	_update_hud()
 
 
@@ -1979,10 +2155,12 @@ func _artifact_drop() -> void:
 	_artifact_move_picked = false
 	_artifact_move_token = ""
 	_artifact_move_from = Vector2i(-1, -1)
+	_set_move_box(false)   # dropped — clear the source marker
 	if spawned:
 		_status_msg = "MOVE — '%s' → (%d,%d)" % [moved, row, col]
 	else:
 		_status_msg = "MOVE — '%s' moved to (%d,%d) in layer (no live spawn — synthetic?)" % [moved, row, col]
+	_position_hover_visuals()   # re-evaluate the pick-cue for the now-empty hand
 	_update_hud()
 
 
@@ -1999,6 +2177,7 @@ func _cancel_artifact_move() -> void:
 	_artifact_move_picked = false
 	_artifact_move_token = ""
 	_artifact_move_from = Vector2i(-1, -1)
+	_set_move_box(false)   # cancelled — clear the source marker
 	_status_msg = "MOVE cancelled"
 	_update_hud()
 
