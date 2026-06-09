@@ -258,11 +258,7 @@ func _physics_process(delta: float) -> void:
 	# Biome Brush — point at the floor, trigger paints / grip erases the active
 	# element's density; on release the biome rebuilds live. B saves paint_layers.
 	if is_held and _cur_mode_id == "biome_brush":
-		if _biome_brush == null:
-			_biome_brush = BiomeBrushControllerClass.new()
-			_biome_brush.name = "BiomeBrushCtrl"
-			add_child(_biome_brush)
-			_biome_brush.setup()
+		_ensure_biome_brush()
 		# ONE INTERFACE: when the unified editor panel is present it owns the biome
 		# UI (its BIOME tab), so don't build or show the separate biome menu. The
 		# biome brush itself (painting below) is untouched — only the 2nd panel is
@@ -969,7 +965,22 @@ func _connect_biome_menu(vp: Node) -> void:
 	print("[Catalyst] Biome menu connected")
 
 
+## Create the biome brush on demand (idempotent) so the panel's BIOME tab can set the
+## element/size/pressure BEFORE the first hold (the physics paint loop uses the same path).
+## Without this, picking "tree" in the panel before pointing+holding was silently dropped
+## and you'd paint the default element — reading as "can't edit the biome".
+func _ensure_biome_brush() -> void:
+	if _biome_brush == null:
+		_biome_brush = BiomeBrushControllerClass.new()
+		_biome_brush.name = "BiomeBrushCtrl"
+		add_child(_biome_brush)
+		_biome_brush.setup()
+	elif ("_grid" in _biome_brush) and _biome_brush._grid == null and _biome_brush.has_method("setup"):
+		_biome_brush.setup()   # an earlier setup ran before the map was ready — re-find the grid
+
+
 func _on_biome_menu_element(element_name: String) -> void:
+	_ensure_biome_brush()
 	if _biome_brush:
 		_biome_brush.set_element(element_name)
 		if _biome_menu_ui and _biome_menu_ui.has_method("refresh_artifact_marks"):
@@ -987,11 +998,13 @@ func _on_biome_menu_artifact(artifact_name: String) -> void:
 
 
 func _on_biome_menu_size(radius: int) -> void:
+	_ensure_biome_brush()
 	if _biome_brush:
 		_biome_brush.set_radius(radius)
 
 
 func _on_biome_menu_pressure(strength: float) -> void:
+	_ensure_biome_brush()
 	if _biome_brush:
 		_biome_brush.set_strength(strength)
 
