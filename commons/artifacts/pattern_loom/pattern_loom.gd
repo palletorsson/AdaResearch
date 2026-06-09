@@ -52,6 +52,11 @@ const PatternSim = preload("res://commons/pattern_grammar/pattern_sim.gd")
 @export var carpet_width: float = 1.2
 @export var carpet_length: float = 2.6
 @export var scroll_speed: float = 0.16
+## Procedural industrial detailing (props-dna-gallery vocabulary): a machine
+## plinth, pipes + valves, a cable tray, an electrical panel, gauges and a hazard
+## band. Dresses every loom variant by default so the thing reads as a serious
+## lab machine. Set false for a bare frame (lightest variant).
+@export var dress_machine: bool = true
 
 # ── Runtime ────────────────────────────────────────────────────────────
 var _carpet_tex: ImageTexture
@@ -61,6 +66,15 @@ var _weave_mats: Array[StandardMaterial3D] = []
 var _warp_mats: Array[StandardMaterial3D] = []
 var _spinners: Array = []          # [{node, axis, speed}] — drum/roller/disc rotation
 var _elapsed: float = 0.0
+
+# ── Industrial-dressing shared materials (built once per (re)build) ──────
+# All dressing geometry reuses these so the props-dna detailing adds a handful
+# of materials, not one per mesh. Rebuilt fresh each _ready/apply_grid_config.
+var _mat_dark: StandardMaterial3D       # plinth / housing dark steel
+var _mat_steel: StandardMaterial3D      # pipes / panel body / brushed metal
+var _mat_accent: StandardMaterial3D     # emissive cyan accent (animated)
+var _mat_hazard: StandardMaterial3D     # hazard-yellow band
+var _gauge_needles: Array = []          # [{node, base_deg, amp_deg, speed}]
 
 # ── Interactive console state ──────────────────────────────────────────
 const GROUP_NAMES: Array = [
@@ -96,8 +110,12 @@ func _ready() -> void:
 		"bolt":     _build_bolt()
 		"fountain": _build_fountain()
 		_:          _build_roller()
+	if dress_machine:
+		_build_machine_dressing()
 	if interactive:
 		_build_console()
+		if dress_machine:
+			_build_cable_run_to_console()
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
@@ -107,11 +125,14 @@ func apply_grid_config(cfg: Dictionary) -> void:
 	if cfg.has("loom_style"): loom_style = str(cfg["loom_style"])
 	if cfg.has("density"): density = float(cfg["density"])
 	if cfg.has("interactive"): interactive = _to_bool(cfg["interactive"])
+	if cfg.has("dress_machine"): dress_machine = _to_bool(cfg["dress_machine"])
 	if cfg.has("scale"):
 		var s: float = float(cfg["scale"])
 		if s > 0.0: scale = Vector3.ONE * s
 	for c in get_children(): c.queue_free()
 	_weave_mats.clear(); _warp_mats.clear(); _spinners.clear()
+	_gauge_needles.clear()
+	_mat_dark = null; _mat_steel = null; _mat_accent = null; _mat_hazard = null
 	_preview_mat = null; _carpet_mat = null
 	_group_label = null; _palette_label = null; _seed_label = null
 	_density_slider = null; _seed_slider = null
@@ -124,6 +145,7 @@ func _read_overrides() -> void:
 	if has_meta("config_motif_seed"): motif_seed = int(str(get_meta("config_motif_seed")))
 	if has_meta("config_density"): density = float(str(get_meta("config_density")))
 	if has_meta("config_interactive"): interactive = _to_bool(get_meta("config_interactive"))
+	if has_meta("config_dress_machine"): dress_machine = _to_bool(get_meta("config_dress_machine"))
 
 
 ## Coerce a config value (bool / int / string "true"/"1") to bool.
@@ -445,6 +467,329 @@ func _build_fountain() -> void:
 	add_child(ring)
 
 
+# ═══════════════════════════════════════════════════════════════════════════
+# INDUSTRIAL DRESSING — props-dna-gallery vocabulary (pipes, valves, cable tray,
+# electrical panel, gauges, hazard band). Procedural, shared materials, applied
+# to EVERY loom variant so the machine reads as serious lab kit, not a bare frame.
+# Gate with `dress_machine = false` for the lightest variant.
+# ═══════════════════════════════════════════════════════════════════════════
+
+const DR_HALF_GAP: float = 0.42          # how far out to the side the housing reaches
+
+
+## Build the four shared dressing materials once, then assemble the props. Holds
+## the whole dressing to ~4 materials no matter how many meshes it spawns.
+func _build_machine_dressing() -> void:
+	_mat_dark = _con_mat(frame_color.darkened(0.35), 0.45, 0.6)
+	_mat_steel = _con_mat(Color(0.40, 0.42, 0.46), 0.75, 0.4)
+	_mat_accent = StandardMaterial3D.new()
+	_mat_accent.albedo_color = accent_color
+	_mat_accent.metallic = 0.2
+	_mat_accent.roughness = 0.45
+	_mat_accent.emission_enabled = true
+	_mat_accent.emission = accent_color
+	_mat_accent.emission_energy_multiplier = 1.6
+	_weave_mats.append(_mat_accent)        # breathes with the rest of the machine
+	_mat_hazard = StandardMaterial3D.new()
+	_mat_hazard.albedo_color = Color(0.98, 0.78, 0.12)
+	_mat_hazard.metallic = 0.1
+	_mat_hazard.roughness = 0.6
+	_mat_hazard.emission_enabled = true
+	_mat_hazard.emission = Color(0.98, 0.78, 0.12)
+	_mat_hazard.emission_energy_multiplier = 0.5
+
+	_build_machine_base()
+	_build_side_housing()
+	_build_frame_pipes()
+	_build_electrical_panel()
+	_build_gauges()
+	_build_hazard_band()
+
+
+## Reusable plain box with one of the shared dressing materials.
+func _dr_box(size: Vector3, pos: Vector3, mat: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new(); bm.size = size
+	mi.mesh = bm; mi.position = pos
+	mi.material_override = mat
+	add_child(mi)
+	return mi
+
+
+## Reusable cylinder (pipe / valve hub / gauge ring) with a shared material.
+func _dr_cyl(height: float, radius: float, pos: Vector3, mat: StandardMaterial3D,
+		segments: int = 16) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = radius; cm.bottom_radius = radius; cm.height = height
+	cm.radial_segments = segments
+	mi.mesh = cm; mi.position = pos
+	mi.material_override = mat
+	add_child(mi)
+	return mi
+
+
+# ── Chunky dark plinth the drum + console sit on ───────────────────────
+
+func _build_machine_base() -> void:
+	# A low dark plinth running under the machine footprint, slightly into the
+	# feed direction so the drum/frame visibly sit ON something.
+	var base_w: float = carpet_width + DR_HALF_GAP * 2.0 + 0.3
+	var base_d: float = 0.7
+	var base_h: float = 0.12
+	_dr_box(Vector3(base_w, base_h, base_d), Vector3(0, base_h * 0.5, -0.05), _mat_dark)
+	# A thin brushed-steel skirt cap for a machined edge.
+	_dr_box(Vector3(base_w + 0.04, 0.025, base_d + 0.04),
+		Vector3(0, base_h, -0.05), _mat_steel)
+	# Four stubby feet so it reads as freestanding kit.
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			_dr_cyl(0.06, 0.05,
+				Vector3(sx * base_w * 0.42, 0.03, -0.05 + sz * base_d * 0.4),
+				_mat_steel, 10)
+
+
+# ── Boxy machine housing flanking the frame (the +X side, opposite console) ──
+
+func _build_side_housing() -> void:
+	# A boxy enclosure on the -X side of the frame: the "guts" the electrical panel
+	# and gauges mount onto, and the cable tray runs from. Kept off the carpet lane.
+	var hx: float = -(carpet_width * 0.5 + DR_HALF_GAP)
+	var hous := _dr_box(Vector3(0.34, 0.95, 0.5), Vector3(hx, 0.6, -0.02), _mat_dark)
+	hous.name = "DrumHousing"
+	# Brushed-steel top plate + a couple of louvre slots (thin dark insets).
+	_dr_box(Vector3(0.36, 0.03, 0.52), Vector3(hx, 1.08, -0.02), _mat_steel)
+	for i in range(3):
+		_dr_box(Vector3(0.26, 0.012, 0.02),
+			Vector3(hx, 0.78 + float(i) * 0.07, 0.24), _mat_steel)
+	# Emissive accent rib down the housing face.
+	_dr_box(Vector3(0.02, 0.7, 0.02), Vector3(hx + 0.18, 0.62, 0.16), _mat_accent)
+
+
+# ── Pipes with elbow bends + round valve wheels along the frame ────────
+
+func _build_frame_pipes() -> void:
+	var hx: float = -(carpet_width * 0.5 + DR_HALF_GAP)
+	# A horizontal run of pipe across the top of the housing, with a vertical
+	# down-leg joined by an elbow, ending at a valve wheel near the base.
+	var pipe_r: float = 0.035
+	var run_y: float = 0.92
+	var run_len: float = 0.55
+	var run := _dr_cyl(run_len, pipe_r, Vector3(hx + 0.05, run_y, 0.28), _mat_steel)
+	run.rotation_degrees = Vector3(0, 0, 90)        # lay horizontal along X
+	# Elbow joint (a small sphere) at the bend.
+	var elbow := MeshInstance3D.new()
+	var esm := SphereMesh.new(); esm.radius = pipe_r * 1.25; esm.height = pipe_r * 2.5
+	elbow.mesh = esm
+	elbow.position = Vector3(hx + 0.05 - run_len * 0.5, run_y, 0.28)
+	elbow.material_override = _mat_steel
+	add_child(elbow)
+	# Vertical down-leg from the elbow.
+	var leg_len: float = 0.6
+	_dr_cyl(leg_len, pipe_r,
+		Vector3(hx + 0.05 - run_len * 0.5, run_y - leg_len * 0.5, 0.28), _mat_steel)
+	# Round valve wheel at the bottom of the leg.
+	_build_valve_wheel(Vector3(hx + 0.05 - run_len * 0.5, run_y - leg_len, 0.34), 0.09)
+	# A second, shorter pipe + valve higher up the frame on the same side.
+	var leg2_len: float = 0.35
+	_dr_cyl(leg2_len, pipe_r * 0.8,
+		Vector3(hx + 0.05 + run_len * 0.5, run_y - leg2_len * 0.5 - 0.05, 0.28), _mat_steel)
+	_build_valve_wheel(Vector3(hx + 0.05 + run_len * 0.5, run_y - 0.05, 0.34), 0.06)
+
+
+## A valve hand-wheel: a hub + a torus rim + four spokes, facing +Z.
+func _build_valve_wheel(pos: Vector3, radius: float) -> void:
+	var wheel := Node3D.new()
+	wheel.position = pos
+	add_child(wheel)
+	# Rim.
+	var rim := MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = radius * 0.78; tm.outer_radius = radius
+	tm.rings = 8; tm.ring_segments = 16
+	rim.mesh = tm
+	rim.rotation_degrees = Vector3(90, 0, 0)        # ring faces +Z
+	rim.material_override = _mat_accent
+	wheel.add_child(rim)
+	# Hub.
+	var hub := MeshInstance3D.new()
+	var hc := CylinderMesh.new()
+	hc.top_radius = radius * 0.22; hc.bottom_radius = radius * 0.22
+	hc.height = 0.03; hc.radial_segments = 12
+	hub.mesh = hc
+	hub.rotation_degrees = Vector3(90, 0, 0)
+	hub.material_override = _mat_steel
+	wheel.add_child(hub)
+	# Four spokes.
+	for i in range(4):
+		var spoke := MeshInstance3D.new()
+		var sbm := BoxMesh.new()
+		sbm.size = Vector3(radius * 1.5, 0.012, 0.012)
+		spoke.mesh = sbm
+		spoke.rotation_degrees = Vector3(0, 0, 45.0 * float(i))
+		spoke.material_override = _mat_steel
+		wheel.add_child(spoke)
+
+
+# ── Electrical panel: box + door + breaker toggles + indicator LEDs ────
+
+func _build_electrical_panel() -> void:
+	# Mounts on the +Z face of the side housing, turned to face the player (+Z).
+	var hx: float = -(carpet_width * 0.5 + DR_HALF_GAP)
+	var panel := Node3D.new()
+	panel.name = "ElectricalPanel"
+	panel.position = Vector3(hx, 0.62, 0.26)
+	add_child(panel)
+	# Panel body (boxy unit).
+	var body := MeshInstance3D.new()
+	var bbm := BoxMesh.new(); bbm.size = Vector3(0.26, 0.34, 0.05)
+	body.mesh = bbm
+	body.material_override = _mat_steel
+	panel.add_child(body)
+	# Hinged door, cracked slightly open so the breakers read.
+	var door_pivot := Node3D.new()
+	door_pivot.position = Vector3(-0.13, 0.0, 0.026)
+	door_pivot.rotation_degrees = Vector3(0, -32.0, 0)
+	panel.add_child(door_pivot)
+	var door := MeshInstance3D.new()
+	var dbm := BoxMesh.new(); dbm.size = Vector3(0.26, 0.34, 0.012)
+	door.mesh = dbm
+	door.position = Vector3(0.13, 0.0, 0.006)
+	door.material_override = _mat_dark
+	door_pivot.add_child(door)
+	# A few breaker toggles in two columns on the body face.
+	var brk_mat: StandardMaterial3D = _con_mat(Color(0.08, 0.08, 0.10), 0.2, 0.55)
+	var lev_mat: StandardMaterial3D = _con_mat(Color(0.92, 0.92, 0.94), 0.15, 0.4)
+	for i in range(6):
+		var col: int = i % 2
+		var row: int = i / 2
+		var bx: float = -0.06 + float(col) * 0.12
+		var by: float = 0.08 - float(row) * 0.07
+		var bz: float = 0.026
+		var bdy := MeshInstance3D.new()
+		var bdm := BoxMesh.new(); bdm.size = Vector3(0.05, 0.035, 0.014)
+		bdy.mesh = bdm; bdy.position = Vector3(bx, by, bz)
+		bdy.material_override = brk_mat
+		panel.add_child(bdy)
+		# Lever tilts up (ON) for even breakers, down for odd.
+		var lev := MeshInstance3D.new()
+		var lvm := BoxMesh.new(); lvm.size = Vector3(0.006, 0.02, 0.006)
+		lev.mesh = lvm
+		var tilt: float = -22.0 if (i % 2 == 0) else 22.0
+		lev.rotation_degrees = Vector3(0, 0, tilt)
+		lev.position = Vector3(bx, by, bz + 0.012)
+		lev.material_override = lev_mat
+		panel.add_child(lev)
+	# Indicator LED row along the panel top — share the animated accent glow.
+	# Built panel-relative (NOT via _dr_cyl, which parents to the loom root).
+	for i in range(3):
+		var led := MeshInstance3D.new()
+		var lcm := CylinderMesh.new()
+		lcm.top_radius = 0.009; lcm.bottom_radius = 0.009
+		lcm.height = 0.006; lcm.radial_segments = 10
+		led.mesh = lcm
+		led.position = Vector3(-0.07 + float(i) * 0.07, 0.15, 0.028)
+		led.rotation_degrees = Vector3(90, 0, 0)
+		led.material_override = _mat_accent
+		panel.add_child(led)
+
+
+# ── Gauges: dial + sweeping needle on the housing ──────────────────────
+
+func _build_gauges() -> void:
+	var hx: float = -(carpet_width * 0.5 + DR_HALF_GAP)
+	# Two round gauges on the housing face above the panel.
+	_build_gauge(Vector3(hx - 0.09, 0.95, 0.26), 0.07, 0.9, 38.0)
+	_build_gauge(Vector3(hx + 0.07, 0.95, 0.26), 0.05, 1.4, 24.0)
+
+
+## A single dial gauge: bezel ring + face + a needle pivot that sweeps in _process.
+func _build_gauge(pos: Vector3, radius: float, speed: float, amp_deg: float) -> void:
+	var gauge := Node3D.new()
+	gauge.position = pos
+	add_child(gauge)
+	# Bezel ring.
+	var bez := MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = radius * 0.82; tm.outer_radius = radius
+	tm.rings = 8; tm.ring_segments = 18
+	bez.mesh = tm
+	bez.rotation_degrees = Vector3(90, 0, 0)
+	bez.material_override = _mat_steel
+	gauge.add_child(bez)
+	# Dark dial face.
+	var face := MeshInstance3D.new()
+	var fc := CylinderMesh.new()
+	fc.top_radius = radius * 0.82; fc.bottom_radius = radius * 0.82
+	fc.height = 0.01; fc.radial_segments = 24
+	face.mesh = fc
+	face.rotation_degrees = Vector3(90, 0, 0)
+	face.position = Vector3(0, 0, -0.01)
+	face.material_override = _con_mat(Color(0.06, 0.07, 0.09), 0.1, 0.5)
+	gauge.add_child(face)
+	# Needle on its own pivot (so _process can sweep it cheaply).
+	var needle_pivot := Node3D.new()
+	needle_pivot.position = Vector3(0, 0, 0.005)
+	gauge.add_child(needle_pivot)
+	var needle := MeshInstance3D.new()
+	var nbm := BoxMesh.new(); nbm.size = Vector3(0.006, radius * 1.3, 0.004)
+	needle.mesh = nbm
+	needle.position = Vector3(0, radius * 0.45, 0)   # offset so it pivots near the dial centre
+	needle.material_override = _mat_accent
+	needle_pivot.add_child(needle)
+	_gauge_needles.append({
+		"node": needle_pivot, "base_deg": 0.0, "amp_deg": amp_deg, "speed": speed,
+	})
+
+
+# ── Hazard stripe band ─────────────────────────────────────────────────
+
+func _build_hazard_band() -> void:
+	# A readable hazard band along the front lip of the plinth: alternating
+	# yellow/dark angled chevrons. Sits low so it never crosses the carpet.
+	var band_z: float = 0.28
+	var band_w: float = carpet_width + DR_HALF_GAP * 1.4
+	var n: int = 14
+	var seg_w: float = band_w / float(n)
+	for i in range(n):
+		var x: float = -band_w * 0.5 + seg_w * (float(i) + 0.5)
+		var chev := MeshInstance3D.new()
+		var cbm := BoxMesh.new()
+		cbm.size = Vector3(seg_w * 0.9, 0.06, 0.012)
+		chev.mesh = cbm
+		chev.position = Vector3(x, 0.135, band_z)
+		chev.rotation_degrees = Vector3(0, 0, 28.0)
+		var use_hazard: bool = (i % 2 == 0)
+		chev.material_override = _mat_hazard if use_hazard else _mat_dark
+		add_child(chev)
+
+
+# ── Cable tray: shallow channel + bundled cables, housing → console ────
+
+func _build_cable_run_to_console() -> void:
+	# Only when interactive (a console exists to run to). A shallow tray with a
+	# couple of bundled cables sweeping from the side housing toward the console.
+	if _mat_dark == null:
+		return                              # dressing was gated off — nothing to run from
+	var hx: float = -(carpet_width * 0.5 + DR_HALF_GAP)
+	var console_x: float = CON_SIDE * (carpet_width * 0.5 + 0.5)
+	var mid_x: float = (hx + console_x) * 0.5
+	var run_len: float = absf(console_x - hx) + 0.1
+	var tray_y: float = 0.16
+	var tray_z: float = -0.18
+	# Tray floor + two low side walls forming a channel.
+	_dr_box(Vector3(run_len, 0.015, 0.1), Vector3(mid_x, tray_y, tray_z), _mat_dark)
+	for sz in [-1.0, 1.0]:
+		_dr_box(Vector3(run_len, 0.035, 0.012),
+			Vector3(mid_x, tray_y + 0.018, tray_z + sz * 0.05), _mat_steel)
+	# Bundled cables: thin emissive-accent + steel cylinders lying in the tray.
+	for i in range(3):
+		var cz: float = tray_z - 0.025 + float(i) * 0.025
+		var cab := _dr_cyl(run_len * 0.96, 0.011,
+			Vector3(mid_x, tray_y + 0.03, cz), _mat_steel if i != 1 else _mat_accent)
+		cab.rotation_degrees = Vector3(0, 0, 90)   # lie along X
+
+
 # ── Animate: the machine is always producing ───────────────────────────
 
 func _process(delta: float) -> void:
@@ -464,20 +809,29 @@ func _process(delta: float) -> void:
 	# Warp threads shimmer in a travelling wave.
 	for i in range(_warp_mats.size()):
 		_warp_mats[i].emission_energy_multiplier = 0.6 + 0.6 * (0.5 + 0.5 * sin(_elapsed * 4.0 - i * 0.5))
+	# Gauge needles ease back and forth around their rest angle — the machine "reads".
+	for g in _gauge_needles:
+		var n: Node3D = g["node"] as Node3D
+		if n != null and is_instance_valid(n):
+			var sweep: float = g["base_deg"] + g["amp_deg"] * sin(_elapsed * g["speed"])
+			n.rotation_degrees = Vector3(0, 0, sweep)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
 # INTERACTIVE CONSOLE — a reachable lectern that runs out from the loom
 # ═══════════════════════════════════════════════════════════════════════════
 
-# Console geometry (metres). Lectern top sits at standing reach; the desk juts
-# FORWARD (+Z) on a short pedestal, off to the +X side so it never lands on the
-# feeding carpet. The top is angled ~15° toward the player.
-const CON_RUN_Z: float = 0.55            # how far the desk juts toward the player
+# Console geometry (metres). The lectern lives at the OUTPUT end — beside where
+# the carpet feeds out the front (+Z) — so a player watching the cloth emerge can
+# reach the controls. It sits off to one side of the carpet lane (never on it),
+# near the start of the feed line, and the whole desk FACES the player (toward
+# +Z). The top surface is angled ~15° up toward the standing viewer.
 const CON_TOP_Y: float = 1.10            # top surface height (standing reach)
 const CON_TILT_DEG: float = -15.0        # pitch the top toward the player
 const CON_W: float = 0.62                # console desk width
 const CON_D: float = 0.34                # console desk depth
+const CON_SIDE: float = 1.0              # which side of the lane: -1 left, +1 right
+const CON_FEED_Z: float = 0.45           # z near the output/feed start
 
 
 func _build_console() -> void:
@@ -487,14 +841,19 @@ func _build_console() -> void:
 	if SLIDER_H == null:
 		SLIDER_H = load("res://commons/interactables/slider_horizontal.tscn")
 
-	# Place the lectern on the +X front corner of the machine, jutting forward.
-	var side_x: float = carpet_width * 0.5 + 0.55
+	# Park the lectern at the OUTPUT/front, beside the carpet lane so it never
+	# covers the feeding cloth. x is one desk-width clear of the lane edge; z is
+	# down at the feed/output start where the player stands to watch.
+	var side_x: float = CON_SIDE * (carpet_width * 0.5 + 0.5)
 	var console := Node3D.new()
 	console.name = "Console"
-	console.position = Vector3(side_x, 0.0, CON_RUN_Z * 0.5)
-	# Yaw the whole console ~22° inward so its face turns toward a player standing
-	# in front of the machine, and the desk reads as "running out" from the frame.
-	console.rotation_degrees = Vector3(0, -22, 0)
+	console.position = Vector3(side_x, 0.0, CON_FEED_Z)
+	# The console's local +Z (the direction the desk tilt and labels face) must
+	# point toward the player, who stands out in front of the output at large +Z.
+	# So keep yaw near 0 (face +Z) and cant it slightly inward toward the lane so
+	# an operator beside the carpet sees the controls square-on. CON_SIDE=+1 puts
+	# the desk on the +X side, so cant -ve (toward -X / the lane); mirror for left.
+	console.rotation_degrees = Vector3(0, -CON_SIDE * 22.0, 0)
 	add_child(console)
 
 	# Short pedestal up to the desk.
