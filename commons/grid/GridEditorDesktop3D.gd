@@ -59,7 +59,9 @@ const DistributionFieldLib = preload("res://commons/biome_layers/distribution_fi
 
 # ── Map / grid state ──────────────────────────────────────────────────
 var _map_arg: String = ""                 # --map=<Name>; "" = synthetic
+var _target_map: String = ""              # the map _build_real_grid should build (set by CLI or _reload_map)
 var _loaded_map: String = ""              # the map actually being edited (may be synthetic)
+var _reloading: bool = false              # guard: a _reload_map teardown→rebuild is in flight
 var _synthetic_dims: int = 16             # --dims=N synthetic square size
 var _grid_w: int = 16
 var _grid_d: int = 16
@@ -164,6 +166,10 @@ var _controls_lbl: Label = null
 var _toast_lbl: Label = null
 var _hud_err: Label = null
 var _status_msg: String = ""
+# Top-bar controls: an explicit SAVE button + a MAP dropdown (open any map in-editor).
+var _save_btn: Button = null
+var _map_dropdown: OptionButton = null
+var _map_names: Array = []                # sorted map names backing the dropdown (index-aligned)
 
 # ── ARTIFACTS 3D preview (corner HUD card, embedded in this CanvasLayer — NOT the
 #    shared wrist panel, to dodge nested-viewport issues in VR) ────────────────
@@ -199,6 +205,8 @@ const BAR_H    := 96.0
 
 func _ready() -> void:
 	_parse_cli()
+	# The first build targets the CLI map (if any); _reload_map retargets it later.
+	_target_map = _map_arg
 	# Resolve initial grid dims (synthetic until a real map loads).
 	_grid_w = _synthetic_dims
 	_grid_d = _synthetic_dims
@@ -240,11 +248,9 @@ func _build_real_grid() -> void:
 		_fail("ERROR: grid_system.tscn failed to preload.")
 		return
 
-	var target_map := _map_arg
-	if target_map == "":
-		# Synthetic: synthesize a flat grid map on disk-equivalent, but we just
-		# load a real GridSystem and override its editable layout after build.
-		target_map = ""
+	# The map this build targets: _map_arg on the CLI path, or whatever _reload_map set.
+	# "" = synthetic (flat --dims grid). _target_map is the single source the build reads.
+	var target_map := _target_map
 
 	# Free any previous grid (re-entrancy guard for live reload).
 	var old := get_node_or_null("GridSystem")
@@ -254,8 +260,8 @@ func _build_real_grid() -> void:
 
 	_grid_system = GridSystemScene.instantiate()
 	_grid_system.name = "GridSystem"
-	if _map_arg != "" and ("map_name" in _grid_system):
-		_grid_system.map_name = _map_arg
+	if target_map != "" and ("map_name" in _grid_system):
+		_grid_system.map_name = target_map
 	add_child(_grid_system)
 
 	# Wait for the map to finish generating.
@@ -276,9 +282,9 @@ func _build_real_grid() -> void:
 
 	# Enable editing so get_height_at / set_height_at operate on a real layout.
 	var data_comp := _grid_system.find_child("GridDataComponent", true, false)
-	if _map_arg != "" and data_comp and data_comp.has_method("get_structure_data"):
+	if target_map != "" and data_comp and data_comp.has_method("get_structure_data"):
 		_structure.enable_editing(data_comp.get_structure_data())
-		_loaded_map = _map_arg
+		_loaded_map = target_map
 		# Read the map's real dimensions for camera + ghost sizing.
 		if data_comp.has_method("get_grid_dimensions"):
 			var dims: Vector3i = data_comp.get_grid_dimensions()
@@ -291,7 +297,7 @@ func _build_real_grid() -> void:
 		# Grow the structure's vertical capacity to GridOps.MAX_H so ADD can build up.
 		_ensure_build_height()
 		# Cache the full map_data.json for non-destructive write-back.
-		_load_map_data(_map_arg)
+		_load_map_data(target_map)
 	else:
 		# Synthetic: build a flat editable layout directly on the structure.
 		_synthesize_flat_grid()
@@ -330,6 +336,11 @@ func _build_real_grid() -> void:
 	_recenter_for_grid()
 	_update_hover_grid_sized()
 	_sync_biome_size()
+	# Refresh the MAP dropdown to the post-build truth: drops the "SYNTHETIC" header once a
+	# real map is up and re-selects whatever actually loaded (CLI map or _reload_map target).
+	# clear()/add_item()/select() never emit item_selected, so this can't re-fire a reload.
+	_populate_map_dropdown()
+	_reloading = false
 	_update_hud()
 	print("[grid-editor] ready: map=%s  %dx%d  maxH=%d" % [
 		(_loaded_map if _loaded_map != "" else "SYNTHETIC"), _grid_w, _grid_d, _grid_max_h])
@@ -648,6 +659,11 @@ func _build_ui() -> void:
 	# Error overlay (normally empty).
 	_hud_err = _mk_label(_hud_layer, "", 15, C_BAD, Vector2(20, BAR_H + 8))
 
+	# ── Top-bar controls: SAVE button + MAP dropdown ──────────────────
+	# Real, clickable controls in the header (the bar Panel ignores the mouse, so these
+	# siblings receive clicks). Anchored to the right edge, clear of the side panel.
+	_build_top_bar_controls()
+
 	# ── Right-side TabbedEditorPanel (one menu, both editors) ──────────
 	# Pushed down to leave room for the 3D artifact-preview card above it (top-right).
 	_panel_root = Control.new()
@@ -670,6 +686,243 @@ func _build_ui() -> void:
 	# Embedded here (not in the shared wrist panel) so VR avoids nested-viewport
 	# pickups. Degrades gracefully — if it can't build, the panel's name label remains.
 	_build_artifact_preview_card()
+
+
+# ══════════════════════════════════════════════════════════════════════
+# Top-bar controls — an explicit SAVE button + a MAP selector (open any map
+# in-editor). Built as real Controls on the HUD CanvasLayer; the header bar
+# Panel ignores the mouse so these siblings receive the clicks. Fully guarded:
+# any failure here leaves the rest of the HUD (and the W-key save) intact.
+# ══════════════════════════════════════════════════════════════════════
+
+## Mount the SAVE button + MAP dropdown in the top bar, anchored to the right edge so
+## they clear the left-aligned brand/tool labels and the side panel. Populates the map
+## list (DirAccess scan) and pre-selects the loaded map.
+func _build_top_bar_controls() -> void:
+	if _hud_layer == null:
+		return
+	# Right edge of the controls cluster sits just left of the side panel's column.
+	var right_off := -(PANEL_W + 24.0)
+
+	# SAVE → repo button (flat, dark, accent text — matches the surface).
+	_save_btn = Button.new()
+	_save_btn.name = "SaveButton"
+	_save_btn.text = "SAVE → repo"
+	_save_btn.focus_mode = Control.FOCUS_NONE   # never steal keyboard focus from the editor
+	_save_btn.add_theme_font_size_override("font_size", 14)
+	_save_btn.add_theme_color_override("font_color", C_GOLD)
+	_save_btn.add_theme_color_override("font_hover_color", C_TEXT)
+	_save_btn.add_theme_color_override("font_pressed_color", C_TEXT)
+	_save_btn.add_theme_stylebox_override("normal", _new_stylebox(C_BG_SOFT, 0.0, 6.0))
+	_save_btn.add_theme_stylebox_override("hover", _new_stylebox(Color(0.14, 0.17, 0.22, 0.92), 0.0, 6.0))
+	_save_btn.add_theme_stylebox_override("pressed", _new_stylebox(Color(0.10, 0.12, 0.16, 0.95), 0.0, 6.0))
+	_save_btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	_save_btn.anchor_left = 1.0; _save_btn.anchor_right = 1.0
+	_save_btn.anchor_top = 0.0; _save_btn.anchor_bottom = 0.0
+	_save_btn.offset_top = 10.0
+	_save_btn.offset_bottom = 40.0
+	_save_btn.offset_right = right_off
+	_save_btn.offset_left = right_off - 140.0
+	_save_btn.pressed.connect(_on_save_pressed)
+	_hud_layer.add_child(_save_btn)
+
+	# MAP dropdown — every available map (DirAccess scan), pre-selecting the loaded one.
+	_map_dropdown = OptionButton.new()
+	_map_dropdown.name = "MapDropdown"
+	_map_dropdown.focus_mode = Control.FOCUS_NONE
+	_map_dropdown.add_theme_font_size_override("font_size", 14)
+	_map_dropdown.add_theme_color_override("font_color", C_TEXT)
+	_map_dropdown.add_theme_stylebox_override("normal", _new_stylebox(C_BG_SOFT, 0.0, 6.0))
+	_map_dropdown.add_theme_stylebox_override("hover", _new_stylebox(Color(0.14, 0.17, 0.22, 0.92), 0.0, 6.0))
+	_map_dropdown.add_theme_stylebox_override("pressed", _new_stylebox(Color(0.10, 0.12, 0.16, 0.95), 0.0, 6.0))
+	_map_dropdown.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	_map_dropdown.anchor_left = 1.0; _map_dropdown.anchor_right = 1.0
+	_map_dropdown.anchor_top = 0.0; _map_dropdown.anchor_bottom = 0.0
+	_map_dropdown.offset_top = 48.0
+	_map_dropdown.offset_bottom = 78.0
+	_map_dropdown.offset_right = right_off
+	_map_dropdown.offset_left = right_off - 260.0
+	_hud_layer.add_child(_map_dropdown)
+
+	_populate_map_dropdown()
+	# Connect AFTER populating so the initial pre-select doesn't fire a reload.
+	_map_dropdown.item_selected.connect(_on_map_dropdown_selected)
+
+
+## Scan res://commons/maps/ for subdirectories that contain map_data.json — the
+## authoritative map set. Returns a sorted Array[String] of map names. Tolerant of a
+## missing maps dir (returns empty); never crashes.
+func _scan_map_names() -> Array:
+	var out: Array = []
+	var base := "res://commons/maps"
+	var dir := DirAccess.open(base)
+	if dir == null:
+		push_warning("[grid-editor] map scan: cannot open %s" % base)
+		return out
+	for sub in dir.get_directories():
+		var map_name := str(sub).strip_edges()
+		if map_name == "" or map_name.begins_with("."):
+			continue
+		if FileAccess.file_exists("%s/%s/map_data.json" % [base, map_name]):
+			out.append(map_name)
+	out.sort()
+	return out
+
+
+## Fill the dropdown from the scanned map set + pre-select the loaded map. Rebuildable
+## (clears first) so a later refresh stays consistent. Synthetic mode shows a disabled
+## "SYNTHETIC" header item so the control still reads sensibly.
+func _populate_map_dropdown() -> void:
+	if _map_dropdown == null:
+		return
+	_map_names = _scan_map_names()
+	_map_dropdown.clear()
+	# When running synthetic (no loaded map), surface that as a non-selectable first item.
+	var item_base := 0
+	if _loaded_map == "":
+		_map_dropdown.add_item("— SYNTHETIC —")
+		_map_dropdown.set_item_disabled(0, true)
+		item_base = 1
+	for i in range(_map_names.size()):
+		_map_dropdown.add_item(str(_map_names[i]))
+		# Stash the map name as item metadata so selection is robust to index offsets.
+		_map_dropdown.set_item_metadata(item_base + i, str(_map_names[i]))
+	if _map_names.is_empty() and _loaded_map == "":
+		_map_dropdown.add_item("(no maps found)")
+		_map_dropdown.set_item_disabled(_map_dropdown.get_item_count() - 1, true)
+	_sync_map_dropdown_selection()
+
+
+## Point the dropdown's selected entry at the currently-loaded map (no signal — selection
+## is set programmatically). No-op when the control is absent or the map isn't listed.
+func _sync_map_dropdown_selection() -> void:
+	if _map_dropdown == null:
+		return
+	if _loaded_map == "":
+		# Synthetic: select the disabled "SYNTHETIC" header if present.
+		if _map_dropdown.get_item_count() > 0:
+			_map_dropdown.select(0)
+		return
+	for i in range(_map_dropdown.get_item_count()):
+		if str(_map_dropdown.get_item_metadata(i)) == _loaded_map:
+			_map_dropdown.select(i)
+			return
+
+
+## SAVE button → the SAME save path as the W key. The toast surfaces the result.
+func _on_save_pressed() -> void:
+	_save()
+
+
+## MAP dropdown selection → reload the editor with that map. Resolves the chosen item's
+## metadata (the map name), ignores re-selecting the loaded map, and routes to _reload_map.
+func _on_map_dropdown_selected(index: int) -> void:
+	if _map_dropdown == null:
+		return
+	if index < 0 or index >= _map_dropdown.get_item_count():
+		return
+	if _map_dropdown.is_item_disabled(index):
+		_sync_map_dropdown_selection()   # snap back off the disabled header
+		return
+	var picked := str(_map_dropdown.get_item_metadata(index)).strip_edges()
+	if picked == "":
+		picked = str(_map_dropdown.get_item_text(index)).strip_edges()
+	if picked == "" or picked == _loaded_map:
+		return
+	_reload_map(picked)
+
+
+## Tear down the current grid + all grid-referencing editor state, then rebuild the SAME
+## way the --map CLI path does (via _build_real_grid, retargeted through _target_map). Frees
+## the GridSystem + its components, the biome host, every spawned ghost/preview that pointed
+## at the old grid, and clears the layers/undo stacks — so switching maps never leaks an old
+## grid or double-spawns. Guards a missing map (toast + keep current state) and re-entrancy.
+func _reload_map(map_name: String) -> void:
+	var want := str(map_name).strip_edges()
+	if want == "":
+		return
+	if _reloading:
+		return   # a reload is already in flight — ignore the spurious second selection
+	# Validate the target exists before touching anything, so a bad pick keeps the prior map.
+	if not FileAccess.file_exists("res://commons/maps/%s/map_data.json" % want):
+		_status_msg = "map '%s' not found — keeping %s" % [want, (_loaded_map if _loaded_map != "" else "SYNTHETIC")]
+		_sync_map_dropdown_selection()
+		_update_hud()
+		return
+
+	_reloading = true
+	# Freeze editing so no stray input mutates a half-torn-down grid during the await.
+	_editing_ready = false
+
+	# ── Tear down the old grid + everything that referenced it ──────────
+	# Cancel any in-progress MOVE so a held token doesn't dangle into the new grid.
+	_artifact_move_picked = false
+	_artifact_move_mode = false
+	_artifact_move_token = ""
+	_artifact_move_from = Vector2i(-1, -1)
+	_util_move_picked = false
+	_util_move_token = ""
+	_util_move_from = Vector2i(-1, -1)
+
+	# Free the biome host (and its accrued foliage children) — _setup_biome_accrual rebuilds it.
+	if _biome_host and is_instance_valid(_biome_host):
+		for c in _biome_host.get_children():
+			_biome_host.remove_child(c)
+			c.free()
+		_biome_host.queue_free()
+	_biome_host = null
+	_accrual = null
+
+	# Free the real GridSystem; its component children (structure/interactables/utilities)
+	# go with it, so just drop our cached refs (their spawned nodes were grid children).
+	if _grid_system and is_instance_valid(_grid_system):
+		_grid_system.queue_free()
+	_grid_system = null
+	_structure = null
+	_interactables_comp = null
+	_utilities_comp = null
+
+	# Clear the live layers, painted fields, modifier + undo/redo stacks, and the cached map.
+	_interactables = []
+	_utilities = []
+	_brush_fields = {}
+	_biome_dirty = false
+	_modifier_stack = []
+	_undo_stack = []
+	_redo_stack = []
+	_stroke_dirty = false
+	_map_data = {}
+	_hover_valid = false
+	_painting = false
+
+	# Drop the ARTIFACTS 3D preview's spawned node (it lived in the preview viewport, not
+	# the grid, but clear it so the next selection re-instances cleanly).
+	_clear_preview_node()
+	_preview_lookup = ""
+
+	# Hide the hover visuals until the new grid is up.
+	_set_hover_visible(false)
+	if _biome_overlay:
+		_biome_overlay.visible = false
+
+	# Let the queue_free()s settle before rebuilding.
+	await get_tree().process_frame
+
+	# ── Rebuild via the SAME path as --map ──────────────────────────────
+	_target_map = want
+	_status_msg = "loading %s…" % want
+	_update_hud()
+	await _build_real_grid()
+	# _build_real_grid clears _reloading on its success tail; force-clear here too so an
+	# early-return failure path inside the build can't leave reloads permanently locked.
+	_reloading = false
+	# _build_real_grid already recenters the camera + syncs the dropdown on success.
+	if _loaded_map == want:
+		_status_msg = "loaded %s" % want
+	else:
+		# Build fell through to synthetic (e.g. data component missing) — report honestly.
+		_status_msg = "load of '%s' incomplete — see log" % want
+	_update_hud()
 
 
 # ══════════════════════════════════════════════════════════════════════

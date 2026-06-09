@@ -91,8 +91,10 @@ func _ready() -> void:
 	for i in TABS.size():
 		var b := Button.new()
 		b.text = str(TABS[i])
-		b.custom_minimum_size = Vector2(160, 50)
-		b.add_theme_font_size_override("font_size", 19)
+		b.custom_minimum_size = Vector2(92, 48)             # smaller so all 4 tabs fit
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL  # share the row width evenly
+		b.clip_text = true
+		b.add_theme_font_size_override("font_size", 16)
 		b.focus_mode = Control.FOCUS_NONE
 		b.pressed.connect(_on_tab.bind(i))
 		tab_row.add_child(b)
