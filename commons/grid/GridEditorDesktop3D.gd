@@ -82,8 +82,13 @@ var _active_tab: String = "GRID"
 var _modifier_stack: Array = []           # Array[Dictionary] colorize/random/normalize ops
 
 # ── ARTIFACTS tab state ───────────────────────────────────────────────
-var _artifact_list: Array = []            # sorted lookup_names (map-ready catalog)
+var _artifact_list: Array = []            # sorted lookup_names (the CURRENT filtered view)
 var _artifact_idx: int = -1               # index into _artifact_list; -1 = none/unavailable
+# Full map-ready catalog: lookup_name -> map_sequences (Array[String]). Source for the
+# sequence filter; _artifact_list is a filtered slice of its keys.
+var _artifact_seqs_by_lookup: Dictionary = {}
+var _artifact_sequences: Array = []       # sorted unique sequence names present (for the panel)
+var _artifact_seq_filter: String = "ALL"  # active sequence filter ("ALL" = no filter)
 # Live interactables layer, rows[z][col] = token string (" " = empty). Built from
 # the loaded map's layer (or blank) and edited by placement; saved into map_data.
 var _interactables: Array = []
@@ -135,6 +140,9 @@ var _status_msg: String = ""
 # ── Headless capture ──────────────────────────────────────────────────
 var _shot_path: String = ""
 var _capture_frames: int = 0
+# --paintbiome=<element>: headless proof that biome painting renders. Auto-selects
+# the element, stamps the brush at grid centre, updates the overlay + live rebuild.
+var _paintbiome_arg: String = ""
 
 # ── Palette (matches the scrubber's designed surface) ─────────────────
 const C_BG     := Color(0.05, 0.06, 0.09, 0.86)
@@ -178,6 +186,8 @@ func _parse_cli() -> void:
 			_synthetic_dims = maxi(2, int(a.split("=", true, 1)[1]))
 		elif a.begins_with("--shot="):
 			_shot_path = a.split("=", true, 1)[1]
+		elif a.begins_with("--paintbiome="):
+			_paintbiome_arg = a.split("=", true, 1)[1].strip_edges()
 
 
 # ── Build the REAL GridSystem renderer (zero drift) ───────────────────
@@ -264,6 +274,12 @@ func _build_real_grid() -> void:
 	_update_hud()
 	print("[grid-editor] ready: map=%s  %dx%d  maxH=%d" % [
 		(_loaded_map if _loaded_map != "" else "SYNTHETIC"), _grid_w, _grid_d, _grid_max_h])
+
+	# Headless biome-paint proof — stamp a brush blob at the grid centre and run the
+	# live rebuild, so a --map=<X> --paintbiome=<el> --shot=<p> run renders painted
+	# biome without a mouse. Runs once the grid is ready, before the --shot countdown.
+	if _paintbiome_arg != "":
+		_headless_paint_biome(_paintbiome_arg)
 
 
 ## Synthetic mode: stamp a flat one-high layout into the structure so the editor
@@ -548,6 +564,8 @@ func _connect_panel_signals() -> void:
 		_panel.pressure_changed.connect(_on_biome_pressure_changed)
 	if _panel.has_signal("artifact_action"):
 		_panel.artifact_action.connect(_on_artifact_action)
+	if _panel.has_signal("artifact_sequence_changed"):
+		_panel.artifact_sequence_changed.connect(_on_artifact_sequence_changed)
 
 
 # ── Panel signal handlers ──────────────────────────────────────────────
@@ -557,6 +575,11 @@ func _on_tab_changed(tab_id: String) -> void:
 	# matters on the GRID tab. The other tabs read their own active selection.
 	if tab_id == "GRID":
 		_active_mode = TOOL_GRID
+	# BIOME: auto-select the first element the moment the tab opens, so painting
+	# works immediately (no silent "pick a biome element first" dead-click). The
+	# panel's element grid can still change it afterwards.
+	if tab_id == "BIOME":
+		_ensure_biome_element()
 	# Show the right overlays per tab; the per-frame hover refresh handles the rest.
 	if _biome_overlay:
 		_biome_overlay.visible = (tab_id == "BIOME")
@@ -564,6 +587,18 @@ func _on_tab_changed(tab_id: String) -> void:
 		_update_biome_overlay()
 	_position_hover_visuals()
 	_update_hud()
+
+
+## Default the active biome element to the first one (BiomeElements.NAMES[0]) when
+## none is selected, so the BIOME tab paints from the first click without needing a
+## prior element tap. No-op once any element is chosen.
+func _ensure_biome_element() -> void:
+	if _biome_idx >= 0 and _biome_idx < _biome_elements.size():
+		return
+	if _biome_elements.is_empty():
+		return
+	_biome_idx = 0
+	_status_msg = "biome element: %s" % str(_biome_elements[0]).to_upper()
 
 
 func _on_grid_op_selected(op: String) -> void:
@@ -648,6 +683,21 @@ func _on_artifact_action(action: String) -> void:
 	else:
 		_status_msg = "artifacts: '%s'" % action
 		_update_hud()
+
+
+## ARTIFACTS sequence filter changed (panel ◀/▶): re-filter the placeable list to the
+## artifacts in that sequence ("ALL" = no filter), reset the index, refresh the preview.
+func _on_artifact_sequence_changed(seq: String) -> void:
+	_active_tab = "ARTIFACTS"
+	_apply_artifact_filter(seq)
+	_update_artifact_preview()
+	if _artifact_list.is_empty():
+		_status_msg = "sequence '%s' — no map-ready artifacts" % _artifact_seq_filter
+	else:
+		_status_msg = "sequence '%s' — %d artifact%s   ·   %s" % [
+			_artifact_seq_filter, _artifact_list.size(),
+			"" if _artifact_list.size() == 1 else "s", _selected_artifact()]
+	_update_hud()
 
 
 # ── Input ──────────────────────────────────────────────────────────────
@@ -963,10 +1013,13 @@ func _build_paint_op(cell_list: Array) -> Dictionary:
 func _load_artifact_catalog() -> void:
 	_artifact_list.clear()
 	_artifact_idx = -1
+	_artifact_seqs_by_lookup.clear()
+	_artifact_sequences.clear()
+	_artifact_seq_filter = "ALL"
 	if CatalogProvider == null:
 		return
 	var all: Array = CatalogProvider.get_all_artifacts()  # static
-	var names: Array = []
+	var seq_set: Dictionary = {}
 	for a in all:
 		if not (a is Dictionary):
 			continue
@@ -976,13 +1029,54 @@ func _load_artifact_catalog() -> void:
 		if not (bool(a.get("map_ready", false)) or bool(a.get("include_in_map_data", false))):
 			continue
 		var lk := str(a.get("lookup_name", "")).strip_edges()
-		if lk != "" and not names.has(lk):
+		if lk == "" or _artifact_seqs_by_lookup.has(lk):
+			continue
+		# Capture map_sequences for the per-sequence filter (mirrors the web /editor).
+		var seqs: Array = []
+		var raw_seqs = a.get("map_sequences", [])
+		if raw_seqs is Array:
+			for s in raw_seqs:
+				var sn := str(s).strip_edges()
+				if sn != "":
+					seqs.append(sn)
+					seq_set[sn] = true
+		_artifact_seqs_by_lookup[lk] = seqs
+	_artifact_sequences = seq_set.keys()
+	_artifact_sequences.sort()
+	# Build the initial (unfiltered) list.
+	_apply_artifact_filter("ALL")
+	# Hand the panel the sequence list it can cycle through, then prime the preview.
+	if _panel and _panel.has_method("set_artifact_sequences"):
+		_panel.set_artifact_sequences(_artifact_sequences)
+	_update_artifact_preview()
+	print("[grid-editor] artifact catalog: %d map-ready lookups, %d sequences" % [
+		_artifact_list.size(), _artifact_sequences.size()])
+
+
+## Rebuild _artifact_list from the full catalog filtered by `seq` ("ALL" = every
+## map-ready artifact; else only artifacts whose map_sequences contains `seq`). Sorts
+## the result and resets the selection to the first entry.
+func _apply_artifact_filter(seq: String) -> void:
+	_artifact_seq_filter = seq if seq != "" else "ALL"
+	var names: Array = []
+	var want_all: bool = _artifact_seq_filter.to_upper() == "ALL"
+	for lk in _artifact_seqs_by_lookup.keys():
+		if want_all:
 			names.append(lk)
+		else:
+			var seqs: Array = _artifact_seqs_by_lookup[lk]
+			if seqs.has(_artifact_seq_filter):
+				names.append(lk)
 	names.sort()
 	_artifact_list = names
-	if not _artifact_list.is_empty():
-		_artifact_idx = 0
-	print("[grid-editor] artifact catalog: %d map-ready lookups" % _artifact_list.size())
+	_artifact_idx = 0 if not _artifact_list.is_empty() else -1
+
+
+## Push the current selection to the panel's preview label (name + n/total).
+func _update_artifact_preview() -> void:
+	if _panel == null or not _panel.has_method("set_artifact_preview"):
+		return
+	_panel.set_artifact_preview(_selected_artifact(), _artifact_idx, _artifact_list.size())
 
 
 ## Seed the live interactables layer from the loaded map (or a blank grid). Stored
@@ -1027,6 +1121,7 @@ func _cycle_artifact(delta: int) -> void:
 		return
 	_artifact_idx = wrapi(_artifact_idx + delta, 0, _artifact_list.size())
 	_status_msg = "artifact: %s   (%d/%d)" % [_selected_artifact(), _artifact_idx + 1, _artifact_list.size()]
+	_update_artifact_preview()
 	_update_hud()
 
 
@@ -1132,8 +1227,14 @@ func _biome_color(el: String) -> Color:
 ## Raycast the mouse to the ground plane → grid cell → stamp the active element's
 ## brush field (radial falloff, Shift = erase). Mirrors the scrubber's _stamp.
 func _stamp_biome_at_hover() -> void:
-	if not _editing_ready or not _hover_valid:
+	# Biome painting only needs valid grid dims + a hovered cell + the overlay — it
+	# does NOT depend on structure-editing readiness (that gate is for GRID/PAINT
+	# height/colour ops). Guard on dims + hover, not _editing_ready.
+	if not _hover_valid or _grid_w <= 0 or _grid_d <= 0:
 		return
+	# Auto-select the first element if none is active, so the very first stroke paints
+	# instead of dead-clicking with a "pick an element" toast.
+	_ensure_biome_element()
 	var el := _active_biome_element()
 	if el == "":
 		_status_msg = "pick a biome element first"
@@ -1141,13 +1242,24 @@ func _stamp_biome_at_hover() -> void:
 		return
 	var cx := _hover_cell.y   # x
 	var cz := _hover_cell.x   # z
+	var erasing := Input.is_key_pressed(KEY_SHIFT)
+	_stamp_biome_field(el, cx, cz, _brush_radius, erasing)
+	_biome_dirty = true
+	_update_biome_overlay()
+
+
+## Stamp the element's per-cell density field with a radial-falloff brush at (cx,cz).
+## Pure field math (no input/hover deps) — reused by the mouse stroke AND the headless
+## --paintbiome proof. Allocates the field lazily; clamps to [0,1] (or floors at 0
+## when erasing).
+func _stamp_biome_field(el: String, cx: int, cz: int, r: int, erasing: bool) -> void:
+	if el == "" or _grid_w <= 0 or _grid_d <= 0:
+		return
 	if not _brush_fields.has(el):
 		var nf := PackedFloat32Array()
 		nf.resize(_grid_w * _grid_d)
 		_brush_fields[el] = nf
 	var field: PackedFloat32Array = _brush_fields[el]
-	var r := _brush_radius
-	var erasing := Input.is_key_pressed(KEY_SHIFT)
 	for dz in range(-r, r + 1):
 		for dx in range(-r, r + 1):
 			var x := cx + dx
@@ -1164,8 +1276,48 @@ func _stamp_biome_at_hover() -> void:
 			else:
 				field[i] = minf(1.0, field[i] + _brush_strength * falloff)
 	_brush_fields[el] = field
+
+
+## Headless biome-paint proof (--paintbiome=<element>). Selects the element, stamps a
+## brush blob at the grid centre over a few cells, lights the overlay, and runs the
+## live rebuild — so a screenshot proves biome painting renders without a mouse.
+func _headless_paint_biome(element: String) -> void:
+	var el := element.strip_edges()
+	var idx := _biome_elements.find(el)
+	if idx < 0:
+		# Unknown element name → fall back to the first, so the proof still produces output.
+		push_warning("[grid-editor] --paintbiome: unknown element '%s', using '%s'" % [el, str(_biome_elements[0]) if not _biome_elements.is_empty() else ""])
+		_ensure_biome_element()
+		el = _active_biome_element()
+	else:
+		_biome_idx = idx
+	if el == "":
+		return
+	_active_tab = "BIOME"
+	if _biome_overlay:
+		_biome_overlay.visible = true
+	# Stamp a generous blob at the grid centre across a small cluster of cells, so the
+	# field clearly registers regardless of brush radius.
+	var ccx := int(_grid_w / 2)
+	var ccz := int(_grid_d / 2)
+	var rad := maxi(_brush_radius, 3)
+	for off in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		_stamp_biome_field(el, ccx + off.x, ccz + off.y, rad, false)
 	_biome_dirty = true
 	_update_biome_overlay()
+	_repaint_biome_live()
+	print("[grid-editor] --paintbiome=%s: stamped at (%d,%d) r=%d, %d field cell(s)" % [
+		el, ccx, ccz, rad, _painted_cell_count(el)])
+
+
+## Count of cells with non-zero painted density for `el` (proof diagnostic).
+func _painted_cell_count(el: String) -> int:
+	var field: PackedFloat32Array = _brush_fields.get(el, PackedFloat32Array())
+	var n := 0
+	for v in field:
+		if v > 0.01:
+			n += 1
+	return n
 
 
 ## (Re)allocate the biome overlay's per-cell instances to the current grid and lay

@@ -19,6 +19,7 @@ signal size_changed(radius: int)
 signal pressure_changed(strength: float)
 # ARTIFACTS
 signal artifact_action(action: String)
+signal artifact_sequence_changed(seq: String)
 
 const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
 
@@ -42,6 +43,12 @@ var _brush_label: Label = null
 var _level_label: Label = null
 var _elem_buttons: Array = []
 var _elem_active: int = 0
+
+# ARTIFACTS — sequence filter (cycled by ◀/▶) + the live preview label.
+var _artifact_sequences: Array = ["ALL"]   # set by the host via set_artifact_sequences()
+var _seq_idx: int = 0
+var _seq_label: Label = null
+var _artifact_preview: Label = null
 
 
 func _ready() -> void:
@@ -188,6 +195,41 @@ func _build_artifact_page(parent: VBoxContainer) -> void:
 	note.add_theme_font_size_override("font_size", 15)
 	note.add_theme_color_override("font_color", DIM)
 	parent.add_child(note)
+
+	# SEQUENCE selector row — [◀] <sequence> [▶] cycles the filter (mirrors the web
+	# /editor's sequence dropdown). The host fills the list via set_artifact_sequences.
+	_section(parent, "SEQUENCE", DIM)
+	var seq_row := HBoxContainer.new()
+	seq_row.add_theme_constant_override("separation", 8)
+	parent.add_child(seq_row)
+	var seq_prev := _tool_button("◀", Vector2(56, 50))
+	seq_prev.pressed.connect(func(): _cycle_sequence(-1))
+	seq_row.add_child(seq_prev)
+	_seq_label = Label.new()
+	_seq_label.text = "ALL"
+	_seq_label.add_theme_font_size_override("font_size", 18)
+	_seq_label.add_theme_color_override("font_color", TAB_COLORS[1])
+	_seq_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_seq_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_seq_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_seq_label.custom_minimum_size = Vector2(160, 50)
+	seq_row.add_child(_seq_label)
+	var seq_next := _tool_button("▶", Vector2(56, 50))
+	seq_next.pressed.connect(func(): _cycle_sequence(1))
+	seq_row.add_child(seq_next)
+
+	# PREVIEW — the currently selected artifact's name + index, set by the host on
+	# every PREV/NEXT/filter change via set_artifact_preview(). The hover ghost in the
+	# 3D view previews placement; this names what's about to drop.
+	_section(parent, "SELECTED", TAB_COLORS[1])
+	_artifact_preview = Label.new()
+	_artifact_preview.text = "—"
+	_artifact_preview.add_theme_font_size_override("font_size", 20)
+	_artifact_preview.add_theme_color_override("font_color", FG)
+	_artifact_preview.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_artifact_preview.custom_minimum_size = Vector2(0, 56)
+	parent.add_child(_artifact_preview)
+
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
 	parent.add_child(row)
@@ -195,6 +237,40 @@ func _build_artifact_page(parent: VBoxContainer) -> void:
 		var b := _tool_button(action, Vector2(158, 56))
 		b.pressed.connect(func(): artifact_action.emit(action))
 		row.add_child(b)
+
+
+## Host API — set the cycleable sequence list (e.g. ["ALL", "forces", "color", …]).
+## Always keeps "ALL" first; resets the active index to it.
+func set_artifact_sequences(seqs: Array) -> void:
+	var list: Array = ["ALL"]
+	for s in seqs:
+		var seq_name := str(s).strip_edges()
+		if seq_name != "" and seq_name.to_upper() != "ALL" and not list.has(seq_name):
+			list.append(seq_name)
+	_artifact_sequences = list
+	_seq_idx = 0
+	if _seq_label:
+		_seq_label.text = str(_artifact_sequences[_seq_idx])
+
+
+## Host API — update the live preview to the selected artifact (name + n/total).
+func set_artifact_preview(art_name: String, idx: int, total: int) -> void:
+	if _artifact_preview == null:
+		return
+	if total <= 0 or art_name.strip_edges() == "":
+		_artifact_preview.text = "—"
+		return
+	_artifact_preview.text = "%s\n(%d/%d)" % [art_name, idx + 1, total]
+
+
+## Cycle the sequence filter and emit the new selection so the host re-filters.
+func _cycle_sequence(delta: int) -> void:
+	if _artifact_sequences.is_empty():
+		return
+	_seq_idx = wrapi(_seq_idx + delta, 0, _artifact_sequences.size())
+	if _seq_label:
+		_seq_label.text = str(_artifact_sequences[_seq_idx])
+	artifact_sequence_changed.emit(str(_artifact_sequences[_seq_idx]))
 
 
 # ── shared helpers ────────────────────────────────────────────────────
