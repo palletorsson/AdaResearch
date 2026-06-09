@@ -20,6 +20,24 @@ var _max_h: float = 1.2          # metres at field value 1.0
 var _paint_layers: Array = []    # for the colour overlay: shader paint + plant bleed
 var _rng_seed: int = 0
 var _stage_order: int = 999      # curriculum gate: bleed only elements unlocked by this stage (999 = ungated)
+# Base elevation of the field-zero plane, relative to the grid center.y. The default
+# −1.0 keeps the historic BACKDROP behaviour (a flat scenery ground a metre below the
+# grid floor — see PAINT_LAYERS.md decision B). A PAINTED ground field lifts this to
+# the floor surface (set_base_offset) so its hills rise VISIBLY above the grid floor
+# instead of staying buried under the opaque floor cubes. Set BEFORE configure().
+var _base_offset: float = -1.0
+var _center: Vector3 = Vector3.ZERO   # cached so set_base_offset can re-place after configure()
+
+
+## Set the field-zero base elevation (relative to center.y). Usually called BEFORE
+## configure(); if called AFTER (e.g. a live preview lifting an already-placed substrate
+## from backdrop to floor) it re-positions the node in place. −1.0 = the historic backdrop
+## (flat scenery below the floor); a small positive value (≈ floor top) makes a painted
+## height-map's hills rise visibly above the grid floor.
+func set_base_offset(base_offset: float) -> void:
+	_base_offset = base_offset
+	if is_inside_tree():
+		position = Vector3(_center.x, _center.y + _base_offset, _center.z)
 
 
 ## Size + place the ground to cover the grid (call BEFORE add_child).
@@ -28,7 +46,11 @@ func configure(grid_w: int, grid_d: int, cube: float, center: Vector3) -> void:
 	# Smooth-ish bumps: a couple of mesh quads per grid cell, capped for perf.
 	resolution = clampi(maxi(grid_w, grid_d) * 2, 16, 80)
 	height_scale = 1.0
-	position = Vector3(center.x, center.y - 1.0, center.z)   # base ground a metre below the floor
+	_center = center
+	# Base = grid center plus the configured offset. Flat/backdrop default keeps the
+	# ground a metre below the floor; a painted field lifts it to the floor surface so
+	# the terrain reads as visible undulating hills (set via set_base_offset).
+	position = Vector3(center.x, center.y + _base_offset, center.z)
 
 
 ## Set the height field (the bump map). `field` is row-major fw*fd, values 0..1.

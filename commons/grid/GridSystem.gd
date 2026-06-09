@@ -696,6 +696,12 @@ func repaint_biome(layers: Array) -> void:
 func preview_ground(field: PackedFloat32Array, fw: int, fd: int, max_h: float) -> void:
 	var sub := _find_descendant_named(self, "BiomeGroundSubstrate")
 	if sub and sub.has_method("apply_height_preview"):
+		# Lift the (backdrop-positioned) substrate to the grid floor surface so the live
+		# preview hills rise VISIBLY above the floor — matching the committed terrain the
+		# accrual rebuilds on stroke-release. Without this the live preview stays buried a
+		# metre under the opaque floor cubes (the historic backdrop base).
+		if max_h > 0.0 and sub.has_method("set_base_offset"):
+			sub.set_base_offset(cube_size * 0.5 + 0.02)
 		sub.apply_height_preview(field, fw, fd, max_h)
 
 

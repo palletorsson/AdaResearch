@@ -137,6 +137,7 @@ var _brush_strength: float = 0.6
 var _biome_height: float = 1.5            # painted ground/biome rise (BIOME tab HEIGHT slider; was hardcoded 1.5)
 var _biome_density: float = 1.0           # scatter density for every painted layer (BIOME tab DEFINE slider; was 1.0)
 var _biome_dirty: bool = false            # a biome stamp happened this stroke → rebuild on release
+var _biome_preview_tick: int = 0          # throttle for the live ground-height preview (every 3rd stamp)
 # REAL foliage: the SAME accrual path BiomeScrubberDesktop3D drives. The brush fields
 # become paint_layers; BiomeAccrualManager renders trees/critters/flowers onto _biome_host
 # (NOT the grid — so the painted overlay stays a cursor, the host carries visible biome).
@@ -2647,6 +2648,11 @@ func _stamp_biome_at_hover() -> void:
 	_stamp_biome_field(el, cx, cz, _brush_radius, erasing)
 	_biome_dirty = true
 	_update_biome_overlay()
+	# LIVE terrain rise while painting "ground": rebuild just the existing substrate's
+	# MESH (no collider, no full accrual) so the hills grow under the brush in real time.
+	# The full rebuild (collider + colour) lands on stroke-release via _repaint_biome_live.
+	if el == "ground":
+		_live_ground_preview()
 
 
 ## Stamp the element's per-cell density field with a radial-falloff brush at (cx,cz).
@@ -2915,6 +2921,32 @@ func _load_biome_paint_layers() -> void:
 ## BiomeAccrualManager on a dedicated host, exactly like the scrubber.
 func _repaint_biome_live() -> void:
 	_rebuild_biome()
+
+
+## LIVE terrain preview while painting "ground" — rebuild just the existing substrate's
+## MESH (skip the trimesh collider + full accrual, the expensive parts) so the hills rise
+## under the brush in real time. Throttled (every 3rd stamp) to stay cheap. Lifts the
+## substrate to the floor surface so the terrain is VISIBLE above the floor. Mirrors the
+## VR path (BiomeBrushController._live_ground_preview → GridSystem.preview_ground). No
+## substrate yet (nothing committed this session) → no-op; the stroke-release rebuild
+## builds one. The field is over the biome AREA (bw×bd), matching the substrate's dims.
+func _live_ground_preview() -> void:
+	_biome_preview_tick += 1
+	if _biome_preview_tick % 3 != 0:
+		return
+	if _biome_host == null or not is_instance_valid(_biome_host):
+		return
+	if not _brush_fields.has("ground"):
+		return
+	var sub := _biome_host.find_child("BiomeGroundSubstrate", true, false)
+	if sub == null or not sub.has_method("apply_height_preview"):
+		return
+	# Lift the (backdrop) substrate to the grid floor so the live hills clear the floor,
+	# matching the committed terrain the accrual rebuilds on release.
+	if sub.has_method("set_base_offset"):
+		sub.set_base_offset(cube_size * 0.5 + 0.02)
+	var field: PackedFloat32Array = _brush_fields["ground"]
+	sub.apply_height_preview(field, _biome_w(), _biome_d(), _biome_height)
 
 
 ## Wire the accrual path once the grid is known: grab the autoload, create the host,

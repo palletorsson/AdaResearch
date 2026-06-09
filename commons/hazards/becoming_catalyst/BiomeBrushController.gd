@@ -182,7 +182,9 @@ func _live_ground_preview() -> void:
 	if _preview_tick % 3 != 0:
 		return
 	if _grid and _grid.has_method("preview_ground") and _fields.has("ground"):
-		_grid.preview_ground(_fields["ground"], grid_w, grid_d, 1.5)
+		# Use the HEIGHT slider (_height), not a hardcoded 1.5, so the live terrain rises
+		# to the same height the committed ground will — taller at HEIGHT=4 than 0.5.
+		_grid.preview_ground(_fields["ground"], grid_w, grid_d, _height)
 
 
 func _ray_cell(origin: Vector3, forward: Vector3) -> Vector2i:
