@@ -1,79 +1,75 @@
 extends Control
-## Unified left-wrist editor panel — one Tilt-Brush-style 2D panel (rendered via
-## viewport_2d_in_3d) with FOUR pointer-driven TABS: GRID · ARTIFACT · MODIFIER ·
-## BIOME. Tapping a tab emits tab_changed (the 3D wrapper sets the bracelet mode,
-## synced with the reach-stones — no rotation). Each tab's tool buttons emit their
-## own signals. Mirrors biome_brush_menu_ui.gd's style. See doc/VR_EDITING_SYSTEM.md.
+## The ONE unified editor interface — a minimal wrist panel (rendered via
+## viewport_2d_in_3d) with THREE tabs: GRID · ARTIFACTS · BIOME. Same flat,
+## pointer-driven (FOCUS_NONE) style as the artifact/biome wrist interfaces.
+## GRID folds structure-height ops AND paint (colorize) into one tab. Tapping a
+## tab emits tab_changed; tool buttons emit their own signals. See doc/VR_EDITING_SYSTEM.md.
 
 signal tab_changed(tab_id: String)
-# GRID
+# GRID — structure
 signal grid_op_selected(op: String)
 signal brush_size_changed(size: int)
 signal level_changed(level: int)
-# MODIFIER
+# GRID — paint (folded-in modifier)
 signal modifier_op_selected(op: String)
 signal color_selected(color: Color)
-# BIOME (reused names from the biome menu)
+# BIOME
 signal element_selected(element_name: String)
 signal size_changed(radius: int)
 signal pressure_changed(strength: float)
-# ARTIFACT
+# ARTIFACTS
 signal artifact_action(action: String)
 
 const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
 
-const TABS: Array = ["GRID", "ARTIFACT", "MODIFIER", "BIOME"]
-const TAB_COLORS: Array = [Color(0.45, 0.75, 1.0), Color(0.95, 0.7, 0.35), Color(0.7, 0.55, 1.0), Color(0.5, 0.9, 0.6)]
+const TABS: Array = ["GRID", "ARTIFACTS", "BIOME"]
+const TAB_COLORS: Array = [Color(0.45, 0.75, 1.0), Color(0.95, 0.7, 0.35), Color(0.5, 0.9, 0.6)]
 const GRID_OPS: Array = ["add", "remove", "fill", "raise", "randomize", "ground", "checker", "frame", "ring", "smooth"]
-const MODIFIER_OPS: Array = ["colorize", "random", "clear"]
+const PAINT_OPS: Array = ["colorize", "random", "clear"]
 const PALETTE: Array = ["#e08a2a", "#d23b3b", "#2a8ae0", "#3bcf6a", "#c33bd2", "#e0d02a", "#888c95", "#101216"]
+
+const BG := Color(0.07, 0.08, 0.11, 1.0)
+const FG := Color(0.90, 0.93, 1.0)
+const DIM := Color(0.55, 0.60, 0.70)
 
 var _tab_buttons: Array = []
 var _pages: Array = []
 var _active_tab: int = 0
-
 var _grid_op_buttons: Array = []
 var _grid_op_active: int = 0
+var _paint_op_buttons: Array = []
 var _brush_label: Label = null
 var _level_label: Label = null
-
-var _mod_op_buttons: Array = []
-var _mod_op_active: int = 0
-
 var _elem_buttons: Array = []
 var _elem_active: int = 0
 
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(540, 500)
-
+	custom_minimum_size = Vector2(540, 540)
 	var bg := ColorRect.new()
-	bg.color = Color(0.06, 0.07, 0.10, 1.0)
+	bg.color = BG
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 
 	var root := VBoxContainer.new()
 	root.set_anchors_preset(Control.PRESET_FULL_RECT)
-	root.offset_left = 16; root.offset_top = 12
-	root.offset_right = -16; root.offset_bottom = -12
-	root.add_theme_constant_override("separation", 10)
+	root.offset_left = 18; root.offset_top = 14; root.offset_right = -18; root.offset_bottom = -14
+	root.add_theme_constant_override("separation", 14)
 	add_child(root)
 
-	# Tab row.
 	var tab_row := HBoxContainer.new()
-	tab_row.add_theme_constant_override("separation", 6)
+	tab_row.add_theme_constant_override("separation", 8)
 	root.add_child(tab_row)
 	for i in TABS.size():
 		var b := Button.new()
 		b.text = str(TABS[i])
-		b.custom_minimum_size = Vector2(124, 46)
-		b.add_theme_font_size_override("font_size", 18)
+		b.custom_minimum_size = Vector2(160, 50)
+		b.add_theme_font_size_override("font_size", 19)
 		b.focus_mode = Control.FOCUS_NONE
 		b.pressed.connect(_on_tab.bind(i))
 		tab_row.add_child(b)
 		_tab_buttons.append(b)
 
-	# Pages.
 	for i in TABS.size():
 		var page := VBoxContainer.new()
 		page.add_theme_constant_override("separation", 10)
@@ -82,39 +78,64 @@ func _ready() -> void:
 		_pages.append(page)
 	_build_grid_page(_pages[0])
 	_build_artifact_page(_pages[1])
-	_build_modifier_page(_pages[2])
-	_build_biome_page(_pages[3])
+	_build_biome_page(_pages[2])
 
 	_refresh_tabs()
 	_refresh_grid_ops()
 
 
-# ── GRID tab ──────────────────────────────────────────────────────────
+# ── GRID tab: structure heights + paint ───────────────────────────────
 func _build_grid_page(parent: VBoxContainer) -> void:
-	_section(parent, "OPERATION", Color(0.6, 0.78, 1.0))
+	_section(parent, "STRUCTURE", TAB_COLORS[0])
 	var grid := GridContainer.new()
 	grid.columns = 3
 	grid.add_theme_constant_override("h_separation", 8)
 	grid.add_theme_constant_override("v_separation", 8)
 	parent.add_child(grid)
 	for i in GRID_OPS.size():
-		var b := Button.new()
-		b.text = str(GRID_OPS[i]).to_upper()
-		b.custom_minimum_size = Vector2(158, 56)
-		b.add_theme_font_size_override("font_size", 16)
-		b.focus_mode = Control.FOCUS_NONE
+		var b := _tool_button(str(GRID_OPS[i]).to_upper(), Vector2(158, 50))
 		b.pressed.connect(_on_grid_op.bind(i))
 		grid.add_child(b)
 		_grid_op_buttons.append(b)
-	# Brush size is HARD-CAPPED 1..4 (local strokes only).
 	_brush_label = _slider_row(parent, "BRUSH", 1, 4, 1, 2, _on_brush, "2x2")
 	_level_label = _slider_row(parent, "LEVEL", 1, 5, 1, 3, _on_level, "3")
+
+	_section(parent, "PAINT", Color(0.7, 0.6, 1.0))
+	var prow := HBoxContainer.new()
+	prow.add_theme_constant_override("separation", 8)
+	parent.add_child(prow)
+	for i in PAINT_OPS.size():
+		var pb := _tool_button(str(PAINT_OPS[i]).to_upper(), Vector2(158, 46))
+		pb.pressed.connect(func(): _on_paint_op(i))
+		prow.add_child(pb)
+		_paint_op_buttons.append(pb)
+	var pal := GridContainer.new()
+	pal.columns = 8
+	pal.add_theme_constant_override("h_separation", 6)
+	parent.add_child(pal)
+	for hexc in PALETTE:
+		var sw := Button.new()
+		sw.custom_minimum_size = Vector2(54, 46)
+		sw.focus_mode = Control.FOCUS_NONE
+		var sb := StyleBoxFlat.new()
+		sb.bg_color = Color.html(str(hexc))
+		sb.set_corner_radius_all(6)
+		sw.add_theme_stylebox_override("normal", sb)
+		sw.add_theme_stylebox_override("hover", sb)
+		sw.add_theme_stylebox_override("pressed", sb)
+		sw.pressed.connect(func(): color_selected.emit(Color.html(str(hexc))))
+		pal.add_child(sw)
 
 
 func _on_grid_op(i: int) -> void:
 	_grid_op_active = i
 	_refresh_grid_ops()
 	grid_op_selected.emit(str(GRID_OPS[i]))
+
+
+func _on_paint_op(i: int) -> void:
+	_highlight(_paint_op_buttons, i, Color(0.7, 0.55, 1.0))
+	modifier_op_selected.emit(str(PAINT_OPS[i]))
 
 
 func _on_brush(v: float) -> void:
@@ -132,52 +153,12 @@ func _on_level(v: float) -> void:
 
 
 func _refresh_grid_ops() -> void:
-	_highlight(_grid_op_buttons, _grid_op_active, Color(0.45, 0.75, 1.0))
-
-
-# ── MODIFIER tab ──────────────────────────────────────────────────────
-func _build_modifier_page(parent: VBoxContainer) -> void:
-	_section(parent, "OPERATION", Color(0.7, 0.6, 1.0))
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 8)
-	parent.add_child(row)
-	for i in MODIFIER_OPS.size():
-		var b := Button.new()
-		b.text = str(MODIFIER_OPS[i]).to_upper()
-		b.custom_minimum_size = Vector2(158, 56)
-		b.add_theme_font_size_override("font_size", 16)
-		b.focus_mode = Control.FOCUS_NONE
-		b.pressed.connect(_on_mod_op.bind(i))
-		row.add_child(b)
-		_mod_op_buttons.append(b)
-	_section(parent, "COLOR", Color(0.7, 0.6, 1.0))
-	var pal := GridContainer.new()
-	pal.columns = 8
-	pal.add_theme_constant_override("h_separation", 6)
-	parent.add_child(pal)
-	for hexc in PALETTE:
-		var sw := Button.new()
-		sw.custom_minimum_size = Vector2(56, 56)
-		sw.focus_mode = Control.FOCUS_NONE
-		var sb := StyleBoxFlat.new()
-		sb.bg_color = Color.html(str(hexc))
-		sb.set_corner_radius_all(8)
-		sw.add_theme_stylebox_override("normal", sb)
-		sw.add_theme_stylebox_override("hover", sb)
-		sw.add_theme_stylebox_override("pressed", sb)
-		sw.pressed.connect(func(): color_selected.emit(Color.html(str(hexc))))
-		pal.add_child(sw)
-
-
-func _on_mod_op(i: int) -> void:
-	_mod_op_active = i
-	_highlight(_mod_op_buttons, _mod_op_active, Color(0.7, 0.55, 1.0))
-	modifier_op_selected.emit(str(MODIFIER_OPS[i]))
+	_highlight(_grid_op_buttons, _grid_op_active, TAB_COLORS[0])
 
 
 # ── BIOME tab ─────────────────────────────────────────────────────────
 func _build_biome_page(parent: VBoxContainer) -> void:
-	_section(parent, "LAYER", Color(0.5, 0.9, 0.6))
+	_section(parent, "LAYER", TAB_COLORS[2])
 	var grid := GridContainer.new()
 	grid.columns = 3
 	grid.add_theme_constant_override("h_separation", 8)
@@ -185,11 +166,7 @@ func _build_biome_page(parent: VBoxContainer) -> void:
 	parent.add_child(grid)
 	var names: Array = BiomeElementsLib.NAMES
 	for i in names.size():
-		var b := Button.new()
-		b.text = BiomeElementsLib.label(str(names[i]))
-		b.custom_minimum_size = Vector2(158, 60)
-		b.add_theme_font_size_override("font_size", 16)
-		b.focus_mode = Control.FOCUS_NONE
+		var b := _tool_button(BiomeElementsLib.label(str(names[i])), Vector2(158, 56))
 		b.pressed.connect(_on_elem.bind(i))
 		grid.add_child(b)
 		_elem_buttons.append(b)
@@ -199,36 +176,41 @@ func _build_biome_page(parent: VBoxContainer) -> void:
 
 func _on_elem(i: int) -> void:
 	_elem_active = i
-	_highlight(_elem_buttons, _elem_active, Color(0.45, 0.85, 0.55))
+	_highlight(_elem_buttons, _elem_active, TAB_COLORS[2])
 	element_selected.emit(str(BiomeElementsLib.NAMES[i]))
 
 
-# ── ARTIFACT tab ──────────────────────────────────────────────────────
+# ── ARTIFACTS tab ─────────────────────────────────────────────────────
 func _build_artifact_page(parent: VBoxContainer) -> void:
-	_section(parent, "ARTIFACT", Color(0.95, 0.7, 0.35))
+	_section(parent, "PALETTE", TAB_COLORS[1])
 	var note := Label.new()
-	note.text = "Browse the registered palette, then PLACE\non the cell you point at (grabbable, re-snapping)."
+	note.text = "Browse the registered artifacts, then PLACE\non the cell you point at — grabbable, re-snapping."
 	note.add_theme_font_size_override("font_size", 15)
-	note.add_theme_color_override("font_color", Color(0.8, 0.84, 0.9))
+	note.add_theme_color_override("font_color", DIM)
 	parent.add_child(note)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
 	parent.add_child(row)
 	for action in ["◀ PREV", "NEXT ▶", "PLACE"]:
-		var b := Button.new()
-		b.text = action
-		b.custom_minimum_size = Vector2(158, 56)
-		b.add_theme_font_size_override("font_size", 16)
-		b.focus_mode = Control.FOCUS_NONE
+		var b := _tool_button(action, Vector2(158, 56))
 		b.pressed.connect(func(): artifact_action.emit(action))
 		row.add_child(b)
 
 
-# ── shared helpers (mirror biome_brush_menu_ui) ───────────────────────
+# ── shared helpers ────────────────────────────────────────────────────
+func _tool_button(txt: String, sz: Vector2) -> Button:
+	var b := Button.new()
+	b.text = txt
+	b.custom_minimum_size = sz
+	b.add_theme_font_size_override("font_size", 16)
+	b.focus_mode = Control.FOCUS_NONE
+	return b
+
+
 func _section(parent: VBoxContainer, txt: String, col: Color) -> void:
 	var l := Label.new()
 	l.text = txt
-	l.add_theme_font_size_override("font_size", 15)
+	l.add_theme_font_size_override("font_size", 14)
 	l.add_theme_color_override("font_color", col)
 	parent.add_child(l)
 
@@ -239,20 +221,20 @@ func _slider_row(parent: VBoxContainer, cap: String, lo: float, hi: float, step:
 	parent.add_child(row)
 	var c := Label.new()
 	c.text = cap
-	c.add_theme_font_size_override("font_size", 15)
-	c.add_theme_color_override("font_color", Color(0.6, 0.64, 0.72))
+	c.add_theme_font_size_override("font_size", 14)
+	c.add_theme_color_override("font_color", DIM)
 	c.custom_minimum_size = Vector2(64, 0)
 	row.add_child(c)
 	var slider := HSlider.new()
 	slider.min_value = lo; slider.max_value = hi; slider.step = step; slider.value = val
-	slider.custom_minimum_size = Vector2(300, 40)
+	slider.custom_minimum_size = Vector2(300, 38)
 	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	slider.value_changed.connect(cb)
 	row.add_child(slider)
 	var lbl := Label.new()
 	lbl.text = init_txt
-	lbl.add_theme_font_size_override("font_size", 20)
-	lbl.add_theme_color_override("font_color", Color(0.93, 0.96, 1.0))
+	lbl.add_theme_font_size_override("font_size", 19)
+	lbl.add_theme_color_override("font_color", FG)
 	lbl.custom_minimum_size = Vector2(56, 0)
 	row.add_child(lbl)
 	return lbl
@@ -268,33 +250,25 @@ func _on_tab(i: int) -> void:
 
 func _refresh_tabs() -> void:
 	for i in _tab_buttons.size():
-		var b: Button = _tab_buttons[i]
-		var c: Color = TAB_COLORS[i]
-		var sb := StyleBoxFlat.new()
-		sb.bg_color = Color(c.r, c.g, c.b, 0.85 if i == _active_tab else 0.22)
-		sb.set_corner_radius_all(8)
-		if i == _active_tab:
-			sb.set_border_width_all(3)
-			sb.border_color = Color(1, 1, 1, 0.9)
-		b.add_theme_stylebox_override("normal", sb)
-		b.add_theme_stylebox_override("hover", sb)
-		b.add_theme_stylebox_override("pressed", sb)
-		b.add_theme_color_override("font_color", Color(0.05, 0.06, 0.09) if i == _active_tab else Color(0.9, 0.93, 1.0))
+		_style(_tab_buttons[i], TAB_COLORS[i], i == _active_tab)
 
 
 func _highlight(buttons: Array, active: int, col: Color) -> void:
 	for i in buttons.size():
-		var b: Button = buttons[i]
-		var sb := StyleBoxFlat.new()
-		sb.bg_color = Color(col.r, col.g, col.b, 0.85 if i == active else 0.25)
-		sb.set_corner_radius_all(8)
-		if i == active:
-			sb.set_border_width_all(3)
-			sb.border_color = Color(1, 1, 1, 0.9)
-		b.add_theme_stylebox_override("normal", sb)
-		b.add_theme_stylebox_override("hover", sb)
-		b.add_theme_stylebox_override("pressed", sb)
-		b.add_theme_color_override("font_color", Color(0.05, 0.06, 0.09) if i == active else Color(0.92, 0.95, 1.0))
+		_style(buttons[i], col, i == active)
+
+
+func _style(b: Button, col: Color, on: bool) -> void:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(col.r, col.g, col.b, 0.85 if on else 0.20)
+	sb.set_corner_radius_all(7)
+	if on:
+		sb.set_border_width_all(3)
+		sb.border_color = Color(1, 1, 1, 0.9)
+	b.add_theme_stylebox_override("normal", sb)
+	b.add_theme_stylebox_override("hover", sb)
+	b.add_theme_stylebox_override("pressed", sb)
+	b.add_theme_color_override("font_color", Color(0.05, 0.06, 0.09) if on else FG)
 
 
 ## 3D wrapper → keep the active tab in sync when a reach-stone selects a mode.
