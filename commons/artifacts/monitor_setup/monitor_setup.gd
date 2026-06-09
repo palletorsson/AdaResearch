@@ -71,8 +71,18 @@ class_name MonitorSetup
 #                                     #   the next meaningful lines, markdown-stripped to
 #                                     #   plain log text, become the body. OVERRIDES
 #                                     #   title/body (which still serve as fallback if the
-#                                     #   file is missing). See _load_md_screen().
-#     "lines":     int,               # how many body lines to pull from "md" (default 5)
+#                                     #   file is missing). See _md_lines() / _md_title().
+#     "lines":     int,               # body lines per screen (default 5). With "md" this
+#                                     #   is ALSO the PAGE SIZE: how many cleaned body lines
+#                                     #   one screen shows of the document.
+#     "md_page":   int,               # PAGINATION (default 0). A screen with "md" shows the
+#                                     #   document's cleaned body CHUNK for this page —
+#                                     #   lines [md_page*lines : (md_page+1)*lines]. Point
+#                                     #   several screens at the SAME "md" with md_page
+#                                     #   0,1,2,… and the document CONTINUES across them.
+#                                     #   Page 0 shows the real H1 title; pages > 0 show a
+#                                     #   continuation header "<TITLE> · cont."; a page past
+#                                     #   the end shows "<TITLE> · end" + "— end —".
 #     "md_dir":    String,            # res:// dir to scan for *.md — builds a LOG FEED
 #                                     #   body where each line is "<stem>: <first line>".
 #     "md_count":  int,               # how many docs to roll into the md_dir log feed.
@@ -81,74 +91,91 @@ class_name MonitorSetup
 # at BUILD time so the board narrates the repo's own words; a missing file degrades to the
 # title + "— no data —" rather than crashing.
 #
-# DEFAULT STORY — "NIGHT SHIFT AT BLOCK 9", now narrated by the repo itself: the station
-# screen reads from the project entry doc, the map-file screen reads a real map's technical
-# note, telemetry stays procedural, the LOG screen rolls a real map's doc folder as a feed,
-# and the breach poster watches from below. Override the whole array via apply_grid_config()
-# or the inspector to tell your own story (point "md" at any res:// .md file).
+# DEFAULT STORY — "THE BRIEFING WALL READS THE PROJECT": one real document,
+# res://doc/ENTRY.md, CONTINUES across the four pole-mounted info screens. Each screen
+# points at the SAME "md" with a different "md_page" (0,1,2,3) and shows that page's chunk
+# of the document's markdown-stripped body — so the player's eye flows screen→screen and
+# reads the doc straight through. Page 0 carries the doc's real title; later pages carry a
+# "· cont." continuation header; a page past the end shows an "— end —" marker.
+# The screens are laid out top→down / left→right so reading order matches page order:
+#   md_page 0 → top-centre        md_page 1 → upper-left
+#   md_page 2 → upper-right       md_page 3 → mid-left
+# A procedural TELEMETRY (data) screen and a SECURITY-BREACH poster ride the base for
+# variety, but the BOARD ITSELF IS THE DOCUMENT. Override the whole array via
+# apply_grid_config() or the inspector to spread ANY res:// .md across ANY screens
+# (set "md" + "md_page" 0,1,2,… and "lines" as the per-screen page size).
+const DEFAULT_DOC: String = "res://doc/ENTRY.md"
 @export var screens: Array = [
 	{
-		# Reads res://doc/ENTRY.md — the project's own entry point becomes the station header.
-		"md": "res://doc/ENTRY.md",
-		"lines": 4,
-		"title": "BLOCK 9",
-		"body": "NIGHT WATCH STATION\nshift 03 — operator on duty\nall systems nominal",
+		# PAGE 0 — top-centre. The document's real H1 title + its first body chunk.
+		"md": DEFAULT_DOC,
+		"md_page": 0,
+		"lines": 5,
+		"title": "ENTRY",
+		"body": "loading document…\nstand by",
 		"type": "info",
 		"size": Vector2(0.54, 0.36),
-		"pos": Vector3(0.02, 1.84, 0.0),
-		"angle_deg": 8.0,
+		"pos": Vector3(0.02, 1.86, 0.0),
+		"angle_deg": 6.0,
 		"pitch_deg": -10.0,
 		"color": Color(0.05, 0.85, 0.95),
 		"mount": "pole",
 	},
 	{
-		# Reads a real map's technical note — the screen shows actual curriculum text.
-		"md": "res://commons/maps/CA_GameOfLife/technical.md",
+		# PAGE 1 — upper-left. Continuation: same doc, next chunk.
+		"md": DEFAULT_DOC,
+		"md_page": 1,
 		"lines": 5,
-		"title": "MAP FILE",
-		"body": "loading map record…\nstand by",
+		"title": "ENTRY",
+		"body": "…continued",
 		"type": "info",
-		"size": Vector2(0.42, 0.32),
-		"pos": Vector3(-0.36, 1.5, -0.02),
-		"angle_deg": 28.0,
+		"size": Vector2(0.44, 0.34),
+		"pos": Vector3(-0.4, 1.52, -0.02),
+		"angle_deg": 26.0,
 		"pitch_deg": -4.0,
 		"color": Color(0.6, 0.95, 0.4),
 		"mount": "pole",
 	},
 	{
-		"title": "ANOMALY",
-		"body": "heat bloom — sector 4\nunlisted signature\nholding for confirm",
+		# PAGE 2 — upper-right. Continuation: same doc, next chunk.
+		"md": DEFAULT_DOC,
+		"md_page": 2,
+		"lines": 5,
+		"title": "ENTRY",
+		"body": "…continued",
 		"type": "info",
-		"size": Vector2(0.42, 0.3),
-		"pos": Vector3(0.36, 1.52, -0.02),
-		"angle_deg": -26.0,
+		"size": Vector2(0.44, 0.34),
+		"pos": Vector3(0.4, 1.52, -0.02),
+		"angle_deg": -24.0,
 		"pitch_deg": -4.0,
 		"color": Color(0.98, 0.7, 0.1),
 		"mount": "pole",
 	},
 	{
+		# PAGE 3 — mid-left. Continuation: same doc, next chunk.
+		"md": DEFAULT_DOC,
+		"md_page": 3,
+		"lines": 5,
+		"title": "ENTRY",
+		"body": "…continued",
+		"type": "info",
+		"size": Vector2(0.5, 0.34),
+		"pos": Vector3(-0.34, 1.16, 0.02),
+		"angle_deg": 18.0,
+		"pitch_deg": 2.0,
+		"color": Color(0.55, 0.8, 1.0),
+		"mount": "pole",
+	},
+	{
+		# Procedural telemetry — variety on the base, not part of the document.
 		"title": "TELEMETRY",
 		"body": "live signal — sector 4",
 		"type": "data",
 		"size": Vector2(0.46, 0.28),
-		"pos": Vector3(-0.32, 1.18, 0.02),
-		"angle_deg": 18.0,
-		"pitch_deg": 2.0,
-		"color": Color(0.2, 1.0, 0.5),
-		"mount": "pole",
-	},
-	{
-		# LOG FEED — rolls every doc in a real map's folder as a log line.
-		"md_dir": "res://commons/maps/CA_GameOfLife/",
-		"md_count": 5,
-		"title": "LOG",
-		"body": "scanning records…",
-		"type": "info",
-		"size": Vector2(0.5, 0.34),
-		"pos": Vector3(0.38, 1.16, 0.06),
+		"pos": Vector3(0.4, 1.16, 0.06),
 		"angle_deg": -16.0,
 		"pitch_deg": 4.0,
-		"color": Color(0.55, 0.8, 1.0),
+		"color": Color(0.2, 1.0, 0.5),
 		"mount": "base",
 	},
 	{
@@ -187,6 +214,12 @@ var _built: bool = false
 var _metal_mat: StandardMaterial3D
 var _dark_mat: StandardMaterial3D
 var _cable_mat: StandardMaterial3D
+
+# Parsed-markdown cache. Keyed by res:// path → a Dictionary:
+#   { "title": String, "lines": PackedStringArray (all cleaned body lines) }
+# Each .md is read + cleaned ONCE per build; every screen that paginates the same doc
+# slices its page from this cache instead of re-reading the file. Cleared on rebuild.
+var _md_cache: Dictionary = {}
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
@@ -337,6 +370,7 @@ func _coerce_screen(entry: Dictionary) -> Dictionary:
 	# keep them; resolved later at build time in _resolve_md_content).
 	out["md"] = str(entry.get("md", ""))
 	out["lines"] = int(_to_float(entry.get("lines", 5.0), 5.0))
+	out["md_page"] = int(_to_float(entry.get("md_page", 0.0), 0.0))
 	out["md_dir"] = str(entry.get("md_dir", ""))
 	out["md_count"] = int(_to_float(entry.get("md_count", 4.0), 4.0))
 	return out
@@ -371,53 +405,97 @@ func _resolve_md_content(s: Dictionary) -> void:
 	if md_path == "":
 		return  # No markdown source — keep the hand-typed title/body as-is.
 
-	var parsed: Dictionary = _load_md_screen(md_path, int(s.get("lines", 5)))
-	var p_title: String = str(parsed.get("title", ""))
-	var p_body: String = str(parsed.get("body", ""))
-	if p_title != "":
-		s["title"] = p_title
-	if p_body != "":
-		s["body"] = p_body
-	elif p_title != "" and str(s.get("body", "")).strip_edges() == "":
-		# Title parsed but no body and no fallback body — show a no-data marker.
+	# ── Pagination ──
+	# Per-screen page size (also the screen's "lines" field). The document's full cleaned
+	# body lives in the cache; this screen shows the chunk for its page.
+	var per_page: int = maxi(1, int(s.get("lines", 5)))
+	var page: int = maxi(0, int(s.get("md_page", 0)))
+
+	var all_lines: PackedStringArray = _md_lines(md_path)  # cached, cleaned, whole doc
+	var doc_title: String = _md_title(md_path)             # cached H1 / first line / stem
+
+	# Slice math: page P covers body lines [P*per_page : (P+1)*per_page].
+	var start_line: int = page * per_page
+	var end_line: int = start_line + per_page
+
+	# Title per page: page 0 → real title; page > 0 → "<TITLE> · cont.";
+	# a page entirely past the end → "<TITLE> · end".
+	if page == 0:
+		s["title"] = doc_title
+	elif start_line >= all_lines.size():
+		s["title"] = _trim_width(doc_title + " · end", 40)
+	else:
+		s["title"] = _trim_width(doc_title + " · cont.", 40)
+
+	if all_lines.size() == 0:
+		# File missing / empty / no usable body — title stands, body marks no data.
 		s["body"] = "— no data —"
+		return
+
+	if start_line >= all_lines.size():
+		# Page past the document — clean end marker rather than empty garbage.
+		s["body"] = "— end —"
+		return
+
+	# Clamp the slice end to the document length (last page may be short).
+	if end_line > all_lines.size():
+		end_line = all_lines.size()
+	var page_lines: PackedStringArray = all_lines.slice(start_line, end_line)
+	s["body"] = "\n".join(page_lines)
 
 
-# Read one .md file and distil it into clean monitor-log text.
-# Returns {title, body}. Empty strings signal "use the caller's fallback".
-func _load_md_screen(path: String, max_lines: int) -> Dictionary:
-	var result: Dictionary = {"title": "", "body": ""}
+# All cleaned body lines of a .md file (whole document), cached per path. The body
+# EXCLUDES the title line (H1, or the first content line when it was promoted to title)
+# so pagination never duplicates the header. Returns an empty array on read failure.
+func _md_lines(path: String) -> PackedStringArray:
+	_ensure_md_cached(path)
+	var entry = _md_cache.get(path, null)
+	if entry is Dictionary and entry.has("lines"):
+		return entry["lines"]
+	return PackedStringArray()
+
+
+# The document title: first H1, else first content line, else filename stem (upper-cased).
+# Cached per path alongside the body lines.
+func _md_title(path: String) -> String:
+	_ensure_md_cached(path)
+	var entry = _md_cache.get(path, null)
+	if entry is Dictionary and entry.has("title"):
+		return str(entry["title"])
+	return _path_stem(path).to_upper()
+
+
+# Parse a .md file ONCE into {title, lines} and store it in _md_cache. No-op if already
+# cached. Reads the whole document; pagination slices the cached array per screen.
+func _ensure_md_cached(path: String) -> void:
+	if _md_cache.has(path):
+		return
+
+	var entry: Dictionary = {"title": _path_stem(path).to_upper(), "lines": PackedStringArray()}
+
 	if not FileAccess.file_exists(path):
-		# Filename stem upper-cased as a last-resort title so a missing file still labels.
-		result["title"] = _path_stem(path).to_upper()
-		return result
-
+		_md_cache[path] = entry
+		return
 	var f: FileAccess = FileAccess.open(path, FileAccess.READ)
 	if f == null:
-		result["title"] = _path_stem(path).to_upper()
-		return result
-
+		_md_cache[path] = entry
+		return
 	var text: String = f.get_as_text()
 	f.close()
 	if text.strip_edges() == "":
-		result["title"] = _path_stem(path).to_upper()
-		return result
+		_md_cache[path] = entry
+		return
 
 	var raw_lines: PackedStringArray = text.replace("\r\n", "\n").replace("\r", "\n").split("\n", true)
 
 	# Pass 1: find the title (first H1, else first non-empty line, else stem).
-	# While walking, skip front-matter and code fences so the title is real content.
-	var lines: int = max_lines
-	if lines < 1:
-		lines = 1
-
+	# Skip front-matter and code fences so the title is real content.
 	var title: String = ""
 	var in_fence: bool = false
 	var in_front: bool = false
 	var first_nonempty: String = ""
 	for i in raw_lines.size():
-		var ln: String = str(raw_lines[i])
-		var trimmed: String = ln.strip_edges()
+		var trimmed: String = str(raw_lines[i]).strip_edges()
 		# Front-matter: a leading "---" block at the very top of the file.
 		if trimmed == "---":
 			if i == 0:
@@ -446,7 +524,7 @@ func _load_md_screen(path: String, max_lines: int) -> Dictionary:
 		else:
 			title = _path_stem(path).to_upper()
 
-	# Pass 2: collect body lines — meaningful content, markdown-stripped, after the title.
+	# Pass 2: collect ALL meaningful body lines — markdown-stripped, after the title.
 	var body_lines: PackedStringArray = []
 	in_fence = false
 	in_front = false
@@ -455,10 +533,7 @@ func _load_md_screen(path: String, max_lines: int) -> Dictionary:
 	# skip that exact line when gathering the body to avoid duplicating it.
 	var title_is_first_line: bool = (not _has_h1(raw_lines))
 	for i in raw_lines.size():
-		if body_lines.size() >= lines:
-			break
-		var ln2: String = str(raw_lines[i])
-		var t2: String = ln2.strip_edges()
+		var t2: String = str(raw_lines[i]).strip_edges()
 		if t2 == "---":
 			if i == 0:
 				in_front = true
@@ -488,9 +563,9 @@ func _load_md_screen(path: String, max_lines: int) -> Dictionary:
 			continue
 		body_lines.append(cleaned)
 
-	result["title"] = title
-	result["body"] = "\n".join(body_lines)
-	return result
+	entry["title"] = title
+	entry["lines"] = body_lines
+	_md_cache[path] = entry
 
 
 # Scan a directory for *.md and build a log-feed body: one line per doc,
@@ -725,6 +800,7 @@ func _path_stem(path: String) -> String:
 
 func _build_all() -> void:
 	_built = true
+	_md_cache.clear()  # fresh parse per build so the board reflects current file state
 	_build_shared_materials()
 	_build_desk_base()
 	_build_tower()
