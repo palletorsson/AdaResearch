@@ -167,6 +167,22 @@ const EDIT_RAY_RADIUS := 0.6  # how close to the laser line an artifact must be
 const EDIT_HOLD_DISTANCE := 1.5  # how far in front of the hand a grabbed artifact floats
 const EDIT_MAX_Y_LEVEL := 6  # artifacts can float up to this grid level when dropped in air
 
+# ── Artifact PALETTE (ADDITIVE) — PLACE-from-catalog inside artifact_edit ─────
+# Mirrors the desktop GridEditorDesktop3D ARTIFACTS tab: a sequence-filterable
+# list of map-ready lookups the panel's PREV/NEXT cycle and PLACE stamps at the
+# pointer cell. Coexists with the EXISTING laser grab/move — placing browses the
+# catalog, grabbing moves an existing artifact. The two never fight: grab acts on
+# the laser target, PLACE acts on the shared voxel target_cell (the faced cell).
+const ArtifactCatalogProvider = preload("res://commons/artifacts/catalog/ArtifactCatalogDataProvider.gd")
+var _vr_artifact_list: Array = []          # current (filtered) placeable lookups, sorted
+var _vr_artifact_idx: int = -1             # selected index into _vr_artifact_list
+var _vr_artifact_seqs: Dictionary = {}     # lookup -> Array[String] of map_sequences
+var _vr_artifact_seq: String = "ALL"       # active sequence filter ("ALL" = no narrowing)
+var _vr_artifact_catalog_built: bool = false  # lazily built once on first artifact use
+var _vr_interactables_comp: Node = null    # cached live GridInteractablesComponent
+var _vr_artifact_placements: Dictionary = {}  # Vector2i(x,z) -> token; placed-from-palette set (for B-save)
+var _vr_artifact_ghost: MeshInstance3D = null  # place-preview marker at the pointer cell
+
 # Tip marker — where projectiles spawn
 var _tip: Marker3D = null
 var _mode_label: Label3D = null
@@ -272,8 +288,23 @@ func _physics_process(delta: float) -> void:
 	if is_held and (_cur_mode_id == "artifact_edit" or _cur_mode_id == "lab_edit"):
 		_edit_is_lab = (_cur_mode_id == "lab_edit")
 		_update_edit_mode(delta)
+		# ADDITIVE: artifact_edit also PLACES from the palette at the pointer cell.
+		# Show a place-preview ghost there and suppress the shared voxel add/remove
+		# ghosts (the voxel controller is active in artifact_edit only to supply the
+		# targeted cell). lab_edit keeps its own behaviour (no palette).
+		if _cur_mode_id == "artifact_edit":
+			_update_vr_artifact_ghost()
+			if _voxel_controller:
+				if _voxel_controller._ghost_add:
+					_voxel_controller._ghost_add.visible = false
+				if _voxel_controller._ghost_remove:
+					_voxel_controller._ghost_remove.visible = false
+		elif _vr_artifact_ghost and is_instance_valid(_vr_artifact_ghost):
+			_vr_artifact_ghost.visible = false
 	elif _edit_target != null or _edit_grabbed != null or (_edit_highlight and _edit_highlight.visible):
 		_end_edit_mode()
+		if _vr_artifact_ghost and is_instance_valid(_vr_artifact_ghost):
+			_vr_artifact_ghost.visible = false
 
 	# Biome Brush — point at the floor, trigger paints / grip erases the active
 	# element's density; on release the biome rebuilds live. B saves paint_layers.
@@ -720,16 +751,26 @@ func _save_map() -> void:
 		_flash_label("NO MAP NAME", Color(1.0, 0.4, 0.3))
 		return
 	# Structure layer only when we're actually voxel-editing cubes. In Edit mode
-	# (artifacts) there's no voxel controller — we save placements only, leaving
-	# the structure layer on disk untouched.
+	# (artifacts) we save placements only, leaving the structure layer on disk
+	# untouched. NOTE: artifact_edit now shares the voxel controller (for the
+	# pointer cell), so we ALSO gate on the current mode being a structure mode —
+	# otherwise a B-save in artifact_edit would clobber the structure layer.
+	var _save_mode_def := _get_current_mode_def()
+	var _save_mode_id: String = _save_mode_def.get("id", "") if not _save_mode_def.is_empty() else ""
+	var _is_structure_mode: bool = _save_mode_id == "voxel_editor" or _save_mode_id == "wedge_placer"
 	var layout: Array = []
-	if _voxel_controller and _voxel_controller.structure_component:
+	if _is_structure_mode and _voxel_controller and _voxel_controller.structure_component:
 		var structure: GridStructureComponent = _voxel_controller.structure_component
 		# Local write — editor only; res:// is read-only on a packaged/Quest build.
 		if not OS.has_feature("android"):
 			VoxelSaveManager.save(map_name, structure)
 		layout = structure.get_editable_layout()
 	var placements := _collect_vr_placements()
+	# ADDITIVE: also save artifacts PLACED from the palette (artifact_edit PLACE).
+	# Appended AFTER the grab/move sets so an explicit palette PLACE wins on a
+	# shared cell (the endpoint applies rows in order: later token wins).
+	for pl in _collect_vr_artifact_palette_placements():
+		placements.append(pl)
 	if layout.is_empty() and placements.is_empty():
 		_flash_label("NOTHING TO SAVE", Color(1.0, 0.5, 0.2))
 		return
@@ -1115,6 +1156,9 @@ func _connect_editor_panel(vp: Node) -> void:
 		ui.pressure_changed.connect(_on_biome_menu_pressure)
 	if ui.has_signal("artifact_action") and not ui.artifact_action.is_connected(_on_editor_artifact_action):
 		ui.artifact_action.connect(_on_editor_artifact_action)
+	# ARTIFACT PALETTE sequence filter cycler (rebuilds the placeable list).
+	if ui.has_signal("artifact_sequence_changed") and not ui.artifact_sequence_changed.is_connected(_on_editor_artifact_seq):
+		ui.artifact_sequence_changed.connect(_on_editor_artifact_seq)
 	# UTILITY tab — pick the active utility type + op (the host applies them on a
 	# trigger press at the targeted cell). Guarded like every other connect above.
 	if ui.has_signal("utility_type_changed") and not ui.utility_type_changed.is_connected(_on_editor_utility_type):
@@ -1249,11 +1293,347 @@ func _on_editor_color(color: Color) -> void:
 	_modifier_color_from_panel = true
 
 
-## artifact_action — the panel's PREV/NEXT/PLACE buttons. The catalyst has no
-## artifact-palette browser yet, so these are guarded stubs that flash a hint.
-## (Wire to a real palette browser in a follow-up.)
+## artifact_action — the panel's PREV / NEXT / PLACE / MOVE buttons for the
+## ARTIFACT PALETTE. ADDITIVE: this REPLACES the old flash-only stub with real
+## routing that mirrors the desktop GridEditorDesktop3D._on_artifact_action.
+##   PREV/NEXT → cycle the selected palette artifact (flash name + n/total)
+##   PLACE     → spawn the selected lookup at the pointer cell (despawn first)
+##   MOVE      → leave the EXISTING laser grab/move untouched (just a hint flash)
+##   REMOVE    → clear the artifact at the pointer cell (via the laser target if any)
+## Matched loosely (contains) so a panel-label tweak still routes. Tapping the
+## ARTIFACTS tab already routed us into artifact_edit mode (the laser grab/move
+## stays live the whole time — this only adds the catalog-place path).
 func _on_editor_artifact_action(action: String) -> void:
-	_flash_label("ARTIFACT " + action, Color(0.95, 0.7, 0.35))
+	_route_bracelet_mode("artifact_edit")
+	_ensure_vr_artifact_catalog()
+	var up := action.to_upper()
+	if up.contains("PREV"):
+		_cycle_vr_artifact(-1)
+	elif up.contains("NEXT"):
+		_cycle_vr_artifact(1)
+	elif up.contains("PLACE"):
+		_place_vr_artifact_at_pointer()
+	elif up.contains("REMOVE") or up.contains("CLEAR"):
+		_remove_vr_artifact_at_pointer()
+	elif up.contains("MOVE"):
+		# MOVE is the EXISTING laser grab/move — point at an artifact and hold the
+		# trigger. Nothing to toggle here; just remind the player how it works.
+		_flash_label("MOVE: aim + hold trigger to grab", Color(0.85, 0.6, 0.95))
+	else:
+		_flash_label("ARTIFACT " + action, Color(0.95, 0.7, 0.35))
+
+
+## artifact_sequence_changed (panel ◀/▶) → set the active sequence filter, rebuild
+## the placeable list, reset the index, and flash the new selection. Mirrors the
+## desktop _on_artifact_sequence_changed.
+func _on_editor_artifact_seq(seq: String) -> void:
+	_route_bracelet_mode("artifact_edit")
+	_ensure_vr_artifact_catalog()
+	var s := seq.strip_edges()
+	_vr_artifact_seq = s if s != "" else "ALL"
+	_rebuild_vr_artifact_list()
+	if _vr_artifact_list.is_empty():
+		_flash_label("SEQ %s: none" % _vr_artifact_seq, Color(1.0, 0.7, 0.3))
+	else:
+		_flash_label("SEQ %s: %d  %s" % [_vr_artifact_seq, _vr_artifact_list.size(), _selected_vr_artifact()], Color(0.95, 0.7, 0.35))
+	_update_vr_artifact_panel_preview()
+
+
+## Build the placeable-artifact catalog ONCE (lazily) from the static provider,
+## mirroring the desktop _load_artifact_catalog: keep only map-ready lookups
+## (map_ready OR include_in_map_data), skip placeholders, capture map_sequences
+## for the per-sequence filter. Then push the sequence list to the panel and
+## prime the list. Safe to call repeatedly — the build only runs the first time.
+func _ensure_vr_artifact_catalog() -> void:
+	if _vr_artifact_catalog_built:
+		return
+	_vr_artifact_catalog_built = true
+	_vr_artifact_seqs.clear()
+	if ArtifactCatalogProvider == null:
+		return
+	var all: Array = ArtifactCatalogProvider.get_all_artifacts()  # static
+	var seq_set: Dictionary = {}
+	for a in all:
+		if not (a is Dictionary):
+			continue
+		if str(a.get("artifact_type", "")) == "placeholder":
+			continue
+		if not (bool(a.get("map_ready", false)) or bool(a.get("include_in_map_data", false))):
+			continue
+		var lk := str(a.get("lookup_name", "")).strip_edges()
+		if lk == "" or _vr_artifact_seqs.has(lk):
+			continue
+		var seqs: Array = []
+		var raw_seqs = a.get("map_sequences", [])
+		if raw_seqs is Array:
+			for sv in raw_seqs:
+				var sn := str(sv).strip_edges()
+				if sn != "":
+					seqs.append(sn)
+					seq_set[sn] = true
+		_vr_artifact_seqs[lk] = seqs
+	# Hand the panel the cycleable sequence list (it always keeps "ALL" first).
+	var seq_list: Array = seq_set.keys()
+	seq_list.sort()
+	if _editor_panel_ui and is_instance_valid(_editor_panel_ui) and _editor_panel_ui.has_method("set_artifact_sequences"):
+		_editor_panel_ui.set_artifact_sequences(seq_list)
+	_rebuild_vr_artifact_list()
+	_update_vr_artifact_panel_preview()
+	print("[Catalyst] artifact palette: %d map-ready lookups, %d sequences" % [_vr_artifact_list.size(), seq_list.size()])
+
+
+## Rebuild _vr_artifact_list from the full catalog applying the active sequence
+## filter ("ALL" = every map-ready lookup; else map_sequences must contain it).
+## Sorts and resets the selection to the first entry (or -1 when nothing matches).
+func _rebuild_vr_artifact_list() -> void:
+	var names: Array = []
+	var want_all: bool = _vr_artifact_seq.to_upper() == "ALL"
+	for lk in _vr_artifact_seqs.keys():
+		if not want_all:
+			var seqs: Array = _vr_artifact_seqs[lk]
+			if not seqs.has(_vr_artifact_seq):
+				continue
+		names.append(lk)
+	names.sort()
+	_vr_artifact_list = names
+	_vr_artifact_idx = 0 if not _vr_artifact_list.is_empty() else -1
+
+
+## The currently selected palette lookup ("" when the list is empty / no selection).
+func _selected_vr_artifact() -> String:
+	if _vr_artifact_idx < 0 or _vr_artifact_idx >= _vr_artifact_list.size():
+		return ""
+	return str(_vr_artifact_list[_vr_artifact_idx])
+
+
+## PREV/NEXT — cycle the selection (wrapping) and flash the name + n/total.
+func _cycle_vr_artifact(delta: int) -> void:
+	if _vr_artifact_list.is_empty():
+		_flash_label("NO MAP-READY ARTIFACTS", Color(1.0, 0.6, 0.3))
+		return
+	_vr_artifact_idx = wrapi(_vr_artifact_idx + delta, 0, _vr_artifact_list.size())
+	_flash_label("%s  (%d/%d)" % [_selected_vr_artifact(), _vr_artifact_idx + 1, _vr_artifact_list.size()], Color(0.95, 0.7, 0.35))
+	_update_vr_artifact_panel_preview()
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
+
+
+## Push the current selection to the panel's preview label (name + n/total).
+func _update_vr_artifact_panel_preview() -> void:
+	if _editor_panel_ui and is_instance_valid(_editor_panel_ui) and _editor_panel_ui.has_method("set_artifact_preview"):
+		_editor_panel_ui.set_artifact_preview(_selected_vr_artifact(), _vr_artifact_idx, _vr_artifact_list.size())
+
+
+## The cell the catalyst is pointing at, from the shared voxel controller's
+## target_cell (col=x, row=z). Returns Vector2i(-1,-1) when nothing is targeted.
+func _vr_artifact_pointer_cell() -> Vector2i:
+	if _voxel_controller and _voxel_controller.has_target:
+		var tc: Vector3i = _voxel_controller.target_cell
+		if tc.x >= 0 and tc.z >= 0:
+			return Vector2i(tc.x, tc.z)  # (col=x, row=z)
+	return Vector2i(-1, -1)
+
+
+## PLACE — spawn the selected palette artifact at the pointer cell via the LIVE
+## GridInteractablesComponent (the same _place_artifact path the map build uses,
+## so the spawn matches the game). Despawns any existing artifact at that cell
+## first (group "vr_editable_artifact" by meta grid_cell, like desktop
+## _despawn_artifact_at), then records the placement so B can save it.
+func _place_vr_artifact_at_pointer() -> void:
+	_ensure_vr_artifact_catalog()
+	var lookup := _selected_vr_artifact()
+	if lookup == "":
+		_flash_label("NO ARTIFACT SELECTED", Color(1.0, 0.7, 0.3))
+		return
+	var cell := _vr_artifact_pointer_cell()
+	if cell.x < 0 or cell.y < 0:
+		_flash_label("AIM AT A CELL", Color(1.0, 0.7, 0.3))
+		return
+	var col := cell.x  # x
+	var row := cell.y  # z
+	_vr_despawn_artifact_at(col, row)
+	var ok := _vr_spawn_artifact(col, row, lookup)
+	if ok:
+		_vr_artifact_placements[Vector2i(col, row)] = _vr_artifact_token_for(lookup)
+		_flash_label("PLACED %s (%d,%d)" % [lookup, col, row], Color(0.4, 1.0, 0.6))
+		fire_cooldown = 0.15
+		if controller:
+			controller.trigger_haptic_pulse("haptic", 0.0, 0.06, 0.3, 0.0)
+	else:
+		# Live spawn failed (synthetic / missing scene) — still record the token so
+		# the cell is written on B-save, mirroring the desktop "layer only" fallback.
+		_vr_artifact_placements[Vector2i(col, row)] = _vr_artifact_token_for(lookup)
+		_flash_label("PLACED %s (data only)" % lookup, Color(0.7, 0.9, 0.6))
+
+
+## REMOVE — clear the artifact at the pointer cell (data + live scene). Records a
+## blank token at the cell so B writes the clear back. If nothing is at that cell,
+## flashes an empty hint. The laser grab/move path is unaffected.
+func _remove_vr_artifact_at_pointer() -> void:
+	var cell := _vr_artifact_pointer_cell()
+	if cell.x < 0 or cell.y < 0:
+		_flash_label("AIM AT A CELL", Color(1.0, 0.7, 0.3))
+		return
+	var col := cell.x
+	var row := cell.y
+	var had := _vr_artifact_present_at(col, row)
+	_vr_despawn_artifact_at(col, row)
+	if had:
+		_vr_artifact_placements[Vector2i(col, row)] = " "
+		_flash_label("CLEARED (%d,%d)" % [col, row], Color(1.0, 0.8, 0.4))
+		if controller:
+			controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+	else:
+		_flash_label("CELL (%d,%d) EMPTY" % [col, row], Color(1.0, 0.7, 0.3))
+
+
+## True if a live editable artifact occupies cell (col=x, row=z).
+func _vr_artifact_present_at(col: int, row: int) -> bool:
+	if not is_inside_tree():
+		return false
+	var cell := Vector2i(col, row)
+	for node in get_tree().get_nodes_in_group("vr_editable_artifact"):
+		if is_instance_valid(node) and node.has_meta("grid_cell") and node.get_meta("grid_cell") == cell:
+			return true
+	return false
+
+
+## Build a save token for a placed lookup. Bare lookups stay bare; a "lookup:rot:yoff"
+## selection (the palette never adds one today, but mirror the desktop contract)
+## passes through unchanged so the saved cell reloads identically.
+func _vr_artifact_token_for(lookup: String) -> String:
+	return lookup.strip_edges()
+
+
+## Spawn one artifact at column (x=col, z=row) via the live GridInteractablesComponent's
+## _place_artifact — the SAME path the desktop _spawn_artifact uses (zero drift).
+## Parses a "lookup:rot:yoff" suffix into the bare lookup + overrides exactly like
+## desktop. Returns false if the component / scene is unavailable.
+func _vr_spawn_artifact(col: int, row: int, lookup: String) -> bool:
+	var comp := _get_vr_interactables_comp()
+	if comp == null:
+		return false
+	if not comp.has_method("_place_artifact"):
+		return false
+	# Parse "lookup:rot:yoff" → bare lookup + overrides (mirrors desktop _spawn_artifact).
+	var parts: PackedStringArray = lookup.split(":", false)
+	var bare: String = lookup.strip_edges()
+	var overrides: Dictionary = {}
+	if parts.size() >= 1:
+		bare = str(parts[0]).strip_edges()
+	if parts.size() >= 2 and str(parts[1]).strip_edges() != "":
+		overrides["rotation_y_degrees"] = float(str(parts[1]))
+	if parts.size() >= 3 and str(parts[2]).strip_edges() != "":
+		overrides["y_offset"] = float(str(parts[2]))
+	if bare == "" or bare == " ":
+		return false
+	var y_pos := 0
+	var structure := _get_edit_structure()
+	if structure and structure.has_method("find_highest_y_at"):
+		y_pos = structure.find_highest_y_at(col, row)
+	var total_size: float = 1.0
+	if structure:
+		total_size = structure.cube_size + structure.gutter
+	elif "cube_size" in comp and "gutter" in comp:
+		total_size = float(comp.cube_size) + float(comp.gutter)
+	return bool(comp._place_artifact(col, y_pos, row, bare, total_size, overrides))
+
+
+## Despawn any spawned editable artifact at column (x=col, z=row). Scans group
+## "vr_editable_artifact" by meta grid_cell (where _place_artifact tags normal
+## artifacts), then sweeps interactable_objects for the special types that key
+## there. Mirrors the desktop _despawn_artifact_at.
+func _vr_despawn_artifact_at(col: int, row: int) -> void:
+	var cell := Vector2i(col, row)  # (x, z)
+	if is_inside_tree():
+		for node in get_tree().get_nodes_in_group("vr_editable_artifact"):
+			if is_instance_valid(node) and node.has_meta("grid_cell") and node.get_meta("grid_cell") == cell:
+				node.queue_free()
+	var comp := _get_vr_interactables_comp()
+	if comp and ("interactable_objects" in comp):
+		var objs: Dictionary = comp.interactable_objects
+		var to_free: Array = []
+		for key in objs.keys():
+			if key is Vector3i and key.x == col and key.z == row:
+				to_free.append(key)
+		for key in to_free:
+			var node = objs[key]
+			if is_instance_valid(node):
+				node.queue_free()
+			objs.erase(key)
+
+
+## The live GridInteractablesComponent — cached, via GridSystem accessor or a
+## tree search by node name. Mirrors _get_vr_utilities_comp.
+func _get_vr_interactables_comp() -> Node:
+	if _vr_interactables_comp and is_instance_valid(_vr_interactables_comp):
+		return _vr_interactables_comp
+	var gs := _find_node_by_name(get_tree().root, "GridSystem")
+	if gs and gs.has_method("get_interactables_component"):
+		var c = gs.get_interactables_component()
+		if c != null:
+			_vr_interactables_comp = c
+			return _vr_interactables_comp
+	var n := _find_node_by_name(get_tree().root, "GridInteractablesComponent")
+	if n != null:
+		_vr_interactables_comp = n
+	return _vr_interactables_comp
+
+
+## Build/update a translucent place-preview ghost at the pointer cell so the player
+## sees where PLACE will drop. Shown only in artifact_edit when a palette artifact
+## is selected AND nothing is being laser-grabbed (the grab highlight owns the view
+## then). Reuses the _edit_highlight pattern; this is the place-preview twin.
+func _update_vr_artifact_ghost() -> void:
+	var show := is_held and _selected_vr_artifact() != "" and not is_instance_valid(_edit_grabbed)
+	var cell := _vr_artifact_pointer_cell() if show else Vector2i(-1, -1)
+	var structure := _get_edit_structure()
+	if not show or structure == null or cell.x < 0 or cell.y < 0:
+		if _vr_artifact_ghost and is_instance_valid(_vr_artifact_ghost):
+			_vr_artifact_ghost.visible = false
+		return
+	var col := cell.x
+	var row := cell.y
+	var total_size: float = structure.cube_size + structure.gutter
+	var grid_origin := _grid_origin_of(structure)
+	var y_level: int = structure.find_highest_y_at(col, row)
+	if _vr_artifact_ghost == null:
+		_vr_artifact_ghost = MeshInstance3D.new()
+		_vr_artifact_ghost.name = "ArtifactPlaceGhost"
+		_vr_artifact_ghost.top_level = true
+		var bm := BoxMesh.new()
+		bm.size = Vector3.ONE * (total_size * 0.9)
+		_vr_artifact_ghost.mesh = bm
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(0.95, 0.7, 0.35, 0.16)
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.emission_enabled = true
+		mat.emission = Color(0.95, 0.7, 0.35)
+		mat.emission_energy_multiplier = 0.4
+		mat.no_depth_test = true
+		_vr_artifact_ghost.material_override = mat
+		add_child(_vr_artifact_ghost)
+	_vr_artifact_ghost.visible = true
+	_vr_artifact_ghost.global_position = grid_origin + Vector3(
+		float(col) * total_size,
+		float(y_level) * total_size,
+		float(row) * total_size
+	)
+
+
+## Collect palette placements as save rows [{x, z, token}] for the B-save overlay.
+## Mirrors the existing _collect_vr_placements shape. A blank token (" ") clears a cell.
+func _collect_vr_artifact_palette_placements() -> Array:
+	var out: Array = []
+	for cell in _vr_artifact_placements.keys():
+		if not (cell is Vector2i):
+			continue
+		var tok := str(_vr_artifact_placements[cell])
+		if tok == "":
+			tok = " "
+		out.append({"x": cell.x, "z": cell.y, "token": tok})
+	return out
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -2101,6 +2481,13 @@ func _edit_grab() -> void:
 	if not is_instance_valid(_edit_target):
 		return
 	_edit_grabbed = _edit_target
+	# ADDITIVE: if this artifact was just PLACED from the palette, hand it over to
+	# the grab/move save path (clear-old + set-new) by dropping its palette entry,
+	# so the two save sets never fight over its cell.
+	if _edit_grabbed.has_meta("grid_cell"):
+		var _gc: Vector2i = _edit_grabbed.get_meta("grid_cell", Vector2i(-1, -1))
+		if _vr_artifact_placements.has(_gc):
+			_vr_artifact_placements.erase(_gc)
 	# Reel it to a comfortable hold distance in front of the hand, keeping its
 	# current orientation + scale relative to the controller.
 	var rel: Transform3D = controller.global_transform.affine_inverse() * _edit_grabbed.global_transform
@@ -2528,7 +2915,7 @@ func _switch_mode(direction: int) -> void:
 
 	# Activate/deactivate grid editing based on mode (voxel + wedge + modifier +
 	# utility_edit share the same voxel controller — it supplies the targeted cell)
-	if mode_id in ["voxel_editor", "wedge_placer", "modifier", "utility_edit"]:
+	if mode_id in ["voxel_editor", "wedge_placer", "modifier", "utility_edit", "artifact_edit"]:
 		_activate_voxel_mode()
 	else:
 		_deactivate_voxel_mode()
@@ -2560,7 +2947,7 @@ func set_mode_index(index: int) -> void:
 	mode_changed.emit(mode_id)
 
 	# Activate/deactivate grid editing (voxel + wedge + modifier + utility_edit share the controller)
-	if mode_id in ["voxel_editor", "wedge_placer", "modifier", "utility_edit"]:
+	if mode_id in ["voxel_editor", "wedge_placer", "modifier", "utility_edit", "artifact_edit"]:
 		_activate_voxel_mode()
 	else:
 		_deactivate_voxel_mode()
