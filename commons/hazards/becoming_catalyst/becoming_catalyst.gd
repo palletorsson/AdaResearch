@@ -72,6 +72,29 @@ const BiomeMenuUIScene = preload("res://commons/hazards/becoming_catalyst/biome_
 var _biome_menu: Node = null         # viewport_2d_in_3d on the off hand
 var _biome_menu_ui: Control = null   # the 2D menu Control inside it
 var _voxel_data_component: Node = null  # holds current map name, for B-to-save
+
+# ── Unified Tabbed Editor Panel (ADDITIVE — step 3 of the VR editor) ──────────
+# A SECOND left-wrist viewport_2d_in_3d holding TabbedEditorPanel: GRID · ARTIFACT
+# · MODIFIER · BIOME tabs. Tapping a tab drives the bracelet mode (no rotation);
+# tool buttons set live edit state; the GRID tab paints small (<=4x4) strokes
+# through the existing voxel controller + GridOps. Mounted ALONGSIDE the biome
+# menu — neither replaces the other. See doc/VR_EDITING_SYSTEM.md.
+const EditorPanelViewport = preload("res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn")
+const EditorPanelUIScene = preload("res://commons/hazards/becoming_catalyst/tabbed_editor_panel.tscn")
+const GridOpsLib = preload("res://commons/modifiers/grid_ops.gd")
+var _editor_panel: Node = null          # viewport_2d_in_3d on the off hand
+var _editor_panel_ui: Control = null    # the TabbedEditorPanel Control inside it
+# Live GRID tool state driven by the panel. Defaults are chosen so the GRID tab
+# is a no-op-vs-original until the player touches the panel: op "add" + brush 1
+# means the first trigger goes straight to the legacy single-cube _handle_voxel_add.
+var _active_grid_op: String = "add"
+var _active_brush_size: int = 1
+var _active_grid_level: int = 3
+# Live MODIFIER colour driven by the panel's palette (used by colorize).
+var _active_modifier_color: Color = Color(0.88, 0.54, 0.16)
+# True once the panel has supplied a colour — only then does colorize override
+# the original cycling MODIFIER_PALETTE (keeps non-panel behaviour byte-identical).
+var _modifier_color_from_panel: bool = false
 # Voxel activation retry (grid may not be ready on map transition)
 var _voxel_activate_retries: int = 0
 const VOXEL_MAX_RETRIES := 10
@@ -199,6 +222,10 @@ func _physics_process(delta: float) -> void:
 	# Update cardinal neighbor targeting (shared by voxel + wedge modes)
 	_update_voxel_raycast()
 
+	# ADDITIVE: keep the unified tabbed editor panel shown/hidden per mode. Runs
+	# alongside the biome menu's own show/hide below — neither overrides the other.
+	_update_editor_panel_visibility()
+
 	# Update mode-specific ghost preview
 	var _cur_mode_id := ""
 	if current_mode_index >= 0 and current_mode_index < unlocked_modes.size():
@@ -312,7 +339,10 @@ func _on_controller_button(button_name: String) -> void:
 		"ax_button", "trigger_click":
 			match mode_id:
 				"voxel_editor":
-					_handle_voxel_add()
+					# ADDITIVE: route through the panel-driven stroke dispatcher.
+					# It falls back to the original single-cube _handle_voxel_add()
+					# whenever no panel op is in play (brush 1 + "add").
+					_handle_grid_stroke(true)
 				"wedge_placer":
 					_handle_wedge_add()
 				"artifact_edit", "lab_edit":
@@ -323,7 +353,9 @@ func _on_controller_button(button_name: String) -> void:
 		"grip_click":
 			match mode_id:
 				"voxel_editor":
-					_handle_voxel_remove()
+					# ADDITIVE: panel-driven remove stroke (brush footprint); falls
+					# back to the original single-cube _handle_voxel_remove().
+					_handle_grid_stroke(false)
 				"wedge_placer":
 					_handle_wedge_remove()
 		"by_button":
@@ -355,6 +387,131 @@ func _handle_voxel_remove() -> void:
 	_voxel_controller.try_remove()
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+
+
+## ADDITIVE — panel-driven GRID stroke. `is_primary` true = trigger/AX (add side),
+## false = grip (remove side). Brushes a small <=4x4 footprint through GridOps.
+##
+## Preserves the ORIGINAL single-cube behaviour: when the active op is plain
+## add/remove AND the brush is 1x1, this just delegates to _handle_voxel_add /
+## _handle_voxel_remove (no behavioural change vs. before this panel existed).
+##
+## For larger brushes and the height ops (fill/raise/randomize/ground/checker/
+## frame/ring/smooth) it builds a height-model over the footprint, runs the pure
+## GridOps stroke, and writes each resulting height back via set_height_at —
+## which is safe because GridStructureComponent rebuilds its MultiMesh from the
+## layout on every set (instance_count is reallocated, not a fixed buffer).
+func _handle_grid_stroke(is_primary: bool) -> void:
+	if not _voxel_controller or not _voxel_controller.has_target:
+		# Nothing targeted — keep the original no-op contract.
+		return
+	var brush: int = clampi(_active_brush_size, 1, 4)
+
+	# ── GRIP side: ALWAYS remove (legacy contract). At brush 1 this delegates to
+	# the original single-cube _handle_voxel_remove, byte-identical to before. At
+	# brush >1 it removes across the footprint. The panel op never changes what
+	# grip does — grip is the eraser.
+	if not is_primary:
+		if brush <= 1:
+			_handle_voxel_remove()
+			return
+		_grid_footprint_stack("remove", brush)
+		return
+
+	# ── TRIGGER side: drive by the active panel op ──
+	var op_name := _active_grid_op
+
+	# Plain add at brush 1 → original single-cube placement (legacy feel preserved).
+	if op_name == "add" and brush <= 1:
+		_handle_voxel_add()
+		return
+	# Explicit remove/erase op on the trigger → footprint remove (or single cube).
+	if op_name == "remove" or op_name == "erase":
+		if brush <= 1:
+			_handle_voxel_remove()
+		else:
+			_grid_footprint_stack("remove", brush)
+		return
+	# Footprint add.
+	if op_name == "add":
+		_grid_footprint_stack("add", brush)
+		return
+
+	# ── Height ops (fill/raise/randomize/ground/checker/frame/ring/smooth) ──
+	var structure: GridStructureComponent = _voxel_controller.structure_component
+	if structure == null:
+		# Can't reach the heightfield — degrade to a plain add so the button isn't dead.
+		_handle_voxel_add()
+		return
+	var grid_op_name := op_name
+	match op_name:
+		"fill": grid_op_name = "fill"
+		"raise": grid_op_name = "raise"
+		"randomize": grid_op_name = "randomize"
+		"ground": grid_op_name = "ground_plane"
+		"checker": grid_op_name = "checker"
+		"frame": grid_op_name = "frame"
+		"ring": grid_op_name = "ring"
+		"smooth": grid_op_name = "smooth"
+		_:
+			# Unknown op — degrade to a plain add rather than do nothing.
+			_grid_footprint_stack("add", brush)
+			return
+	# Centre the footprint on the cube being faced (target_cell). GridOps cell
+	# model is Vector2i(row, col) = (grid z, grid x).
+	var tc: Vector3i = _voxel_controller.target_cell
+	if tc.x < 0 or tc.z < 0:
+		return
+	var center := Vector2i(tc.z, tc.x)
+	var cells: Array = GridOpsLib.brush_cells(center, brush)
+	# Build a height-model over the footprint from the CURRENT layout.
+	var base: Dictionary = {}
+	for rc in cells:
+		var hz: int = int(rc[0])
+		var hx: int = int(rc[1])
+		base[Vector2i(hz, hx)] = structure.get_height_at(hx, hz)
+	var params: Dictionary = {"value": clampi(_active_grid_level, 0, GridOpsLib.MAX_H)}
+	var op_seed: int = Time.get_ticks_msec()
+	var result: Dictionary = GridOpsLib.stroke(base, grid_op_name, center, brush, params, op_seed)
+	# Write each resulting height back. set_height_at rebuilds the MultiMesh.
+	for k in result.keys():
+		structure.set_height_at(int(k.y), int(k.x), int(result[k]))
+	fire_cooldown = 0.15
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.06, 0.3, 0.0)
+	_flash_label("%s %dx%d" % [op_name.to_upper(), brush, brush], Color(0.45, 0.75, 1.0))
+
+
+## ADDITIVE — apply a plain add/remove stack op across the brush footprint via
+## the existing VoxelEditController. Drives each cell with set_target_direct +
+## try_add/try_remove (the same primitives the single-cube path uses), then
+## restores live targeting. Footprint is centred on the faced cell (add → the
+## empty add_cell so new cubes appear in front of you; remove → target_cell).
+func _grid_footprint_stack(kind: String, brush: int) -> void:
+	if _voxel_controller == null or not _voxel_controller.has_target:
+		return
+	var center_cell: Vector3i = _voxel_controller.add_cell if kind == "add" else _voxel_controller.target_cell
+	if center_cell.x < 0 or center_cell.z < 0:
+		return
+	# GridOps cell model is Vector2i(row, col) = (grid z, grid x).
+	var center := Vector2i(center_cell.z, center_cell.x)
+	var cells: Array = GridOpsLib.brush_cells(center, clampi(brush, 1, 4))
+	var saved_target: Vector3i = _voxel_controller.target_cell
+	var saved_add: Vector3i = _voxel_controller.add_cell
+	for rc in cells:
+		var cz: int = int(rc[0])
+		var cx: int = int(rc[1])
+		_voxel_controller.set_target_direct(Vector3i(cx, 0, cz), Vector3i(cx, 0, cz))
+		if kind == "add":
+			_voxel_controller.try_add()
+		else:
+			_voxel_controller.try_remove()
+	# Restore the live target so ghosts/raycast stay coherent until next frame.
+	_voxel_controller.set_target_direct(saved_target, saved_add)
+	fire_cooldown = 0.15
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.25, 0.0)
+	_flash_label("%s %dx%d" % [kind.to_upper(), brush, brush], Color(0.45, 0.75, 1.0))
 
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -403,8 +560,14 @@ func _handle_modifier_apply() -> void:
 	var op: Dictionary = {}
 	match op_name:
 		"colorize":
-			var hex: String = String(MODIFIER_PALETTE[_modifier_palette_index])
-			_modifier_palette_index = (_modifier_palette_index + 1) % MODIFIER_PALETTE.size()
+			# ADDITIVE: if the panel chose a swatch, use it; otherwise keep the
+			# original cycling palette behaviour untouched.
+			var hex: String = ""
+			if _modifier_color_from_panel:
+				hex = "#" + _active_modifier_color.to_html(false)
+			else:
+				hex = String(MODIFIER_PALETTE[_modifier_palette_index])
+				_modifier_palette_index = (_modifier_palette_index + 1) % MODIFIER_PALETTE.size()
 			op = {
 				"op": "colorize",
 				"target": {"cells": [[cell.x, cell.y]]},
@@ -805,6 +968,163 @@ func _on_biome_menu_size(radius: int) -> void:
 func _on_biome_menu_pressure(strength: float) -> void:
 	if _biome_brush:
 		_biome_brush.set_strength(strength)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# UNIFIED TABBED EDITOR PANEL (ADDITIVE) — left-wrist GRID/ARTIFACT/MODIFIER/BIOME
+# Mirrors _ensure_biome_menu/_connect_biome_menu but mounts the TabbedEditorPanel
+# on the left controller and wires its signals to the existing dispatch paths.
+# Nothing here removes or alters the biome menu — both can coexist on the wrist.
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Build the left-wrist tabbed editor viewport once, on first edit-mode use.
+func _ensure_editor_panel() -> void:
+	if _editor_panel and is_instance_valid(_editor_panel):
+		return
+	var left := _get_left_controller()
+	if left == null:
+		return
+	var vp = EditorPanelViewport.instantiate()
+	vp.name = "TabbedEditorPanelVP"
+	vp.scene = EditorPanelUIScene
+	vp.screen_size = Vector2(0.24, 0.22)
+	vp.viewport_size = Vector2(540, 500)
+	# Sit a touch outboard/below the biome menu so both are glanceable on the wrist.
+	vp.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-45)), Vector3(0.14, 0.04, -0.11))
+	left.add_child(vp)
+	_editor_panel = vp
+	call_deferred("_connect_editor_panel", vp)
+
+
+## Wire every panel signal to a handler. Guarded: each connect checks has_signal
+## and is_connected first, so a re-connect is a no-op.
+func _connect_editor_panel(vp: Node) -> void:
+	for i in range(15):
+		await get_tree().process_frame
+		_editor_panel_ui = vp.get_scene_instance() if vp.has_method("get_scene_instance") else null
+		if _editor_panel_ui:
+			break
+	if _editor_panel_ui == null:
+		return
+	var ui := _editor_panel_ui
+	if ui.has_signal("tab_changed") and not ui.tab_changed.is_connected(_on_editor_tab_changed):
+		ui.tab_changed.connect(_on_editor_tab_changed)
+	if ui.has_signal("grid_op_selected") and not ui.grid_op_selected.is_connected(_on_editor_grid_op):
+		ui.grid_op_selected.connect(_on_editor_grid_op)
+	if ui.has_signal("brush_size_changed") and not ui.brush_size_changed.is_connected(_on_editor_brush_size):
+		ui.brush_size_changed.connect(_on_editor_brush_size)
+	if ui.has_signal("level_changed") and not ui.level_changed.is_connected(_on_editor_level):
+		ui.level_changed.connect(_on_editor_level)
+	if ui.has_signal("modifier_op_selected") and not ui.modifier_op_selected.is_connected(_on_editor_modifier_op):
+		ui.modifier_op_selected.connect(_on_editor_modifier_op)
+	if ui.has_signal("color_selected") and not ui.color_selected.is_connected(_on_editor_color):
+		ui.color_selected.connect(_on_editor_color)
+	# BIOME tab reuses the existing biome handlers — just connect, no new logic.
+	if ui.has_signal("element_selected") and not ui.element_selected.is_connected(_on_biome_menu_element):
+		ui.element_selected.connect(_on_biome_menu_element)
+	if ui.has_signal("size_changed") and not ui.size_changed.is_connected(_on_biome_menu_size):
+		ui.size_changed.connect(_on_biome_menu_size)
+	if ui.has_signal("pressure_changed") and not ui.pressure_changed.is_connected(_on_biome_menu_pressure):
+		ui.pressure_changed.connect(_on_biome_menu_pressure)
+	if ui.has_signal("artifact_action") and not ui.artifact_action.is_connected(_on_editor_artifact_action):
+		ui.artifact_action.connect(_on_editor_artifact_action)
+	# Sync the panel's active tab to whatever mode we're already in.
+	_sync_editor_panel_tab()
+	print("[Catalyst] Tabbed editor panel connected")
+
+
+## Show the panel whenever an edit mode is active; hide in off/projectile modes.
+## Called alongside the biome-menu show/hide so both stay in step.
+func _update_editor_panel_visibility() -> void:
+	var mode_def := _get_current_mode_def()
+	var mode_id: String = mode_def.get("id", "") if not mode_def.is_empty() else ""
+	var edit_modes: Array = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "modifier", "biome_brush"]
+	if is_held and mode_id in edit_modes:
+		_ensure_editor_panel()
+		if _editor_panel:
+			_editor_panel.visible = true
+	elif _editor_panel:
+		_editor_panel.visible = false
+
+
+## Push the current mode onto the panel's tab row (guarded, additive). Only the
+## four tabbed modes map to a tab; other edit modes leave the panel as-is.
+func _sync_editor_panel_tab() -> void:
+	if _editor_panel_ui == null or not is_instance_valid(_editor_panel_ui):
+		return
+	if not _editor_panel_ui.has_method("set_active_tab"):
+		return
+	var mode_def := _get_current_mode_def()
+	var mode_id: String = mode_def.get("id", "") if not mode_def.is_empty() else ""
+	var tab_id := ""
+	match mode_id:
+		"voxel_editor": tab_id = "GRID"
+		"artifact_edit": tab_id = "ARTIFACT"
+		"modifier": tab_id = "MODIFIER"
+		"biome_brush": tab_id = "BIOME"
+	if tab_id != "":
+		_editor_panel_ui.set_active_tab(tab_id)
+
+
+## tab_changed → switch the bracelet mode via the EXISTING set_mode_index path.
+func _on_editor_tab_changed(tab_id: String) -> void:
+	var target_mode := ""
+	match tab_id.to_upper():
+		"GRID": target_mode = "voxel_editor"
+		"ARTIFACT": target_mode = "artifact_edit"
+		"MODIFIER": target_mode = "modifier"
+		"BIOME": target_mode = "biome_brush"
+	if target_mode == "":
+		return
+	var idx: int = unlocked_modes.find(target_mode)
+	if idx < 0:
+		_flash_label("MODE LOCKED: " + tab_id, Color(1.0, 0.6, 0.3))
+		return
+	if idx != current_mode_index:
+		set_mode_index(idx)
+
+
+## grid_op_selected → remember the live GRID operation for the next stroke.
+func _on_editor_grid_op(op: String) -> void:
+	_active_grid_op = op
+	_flash_label("GRID: " + op.to_upper(), Color(0.45, 0.75, 1.0))
+
+
+## brush_size_changed → cap to 1..4 (local strokes only).
+func _on_editor_brush_size(size: int) -> void:
+	_active_brush_size = clampi(size, 1, 4)
+
+
+## level_changed → target height for fill/raise/checker/etc.
+func _on_editor_level(level: int) -> void:
+	_active_grid_level = clampi(level, 0, GridOpsLib.MAX_H)
+
+
+## modifier_op_selected → map the panel's op names onto the existing MODIFIER_OPS
+## and sync _modifier_op_index so trigger applies the chosen op.
+##   panel "colorize" -> "colorize"; "random" -> "random_colors"; "clear" -> "normalize".
+func _on_editor_modifier_op(op: String) -> void:
+	var mapped := op
+	match op:
+		"random": mapped = "random_colors"
+		"clear": mapped = "normalize"
+	var idx: int = MODIFIER_OPS.find(mapped)
+	if idx >= 0:
+		_modifier_op_index = idx
+		_flash_label("MOD: " + mapped.to_upper(), Color(0.7, 0.55, 1.0))
+
+
+## color_selected → live colour for the modifier colorize op.
+func _on_editor_color(color: Color) -> void:
+	_active_modifier_color = color
+	_modifier_color_from_panel = true
+
+
+## artifact_action — the panel's PREV/NEXT/PLACE buttons. The catalyst has no
+## artifact-palette browser yet, so these are guarded stubs that flash a hint.
+## (Wire to a real palette browser in a follow-up.)
+func _on_editor_artifact_action(action: String) -> void:
+	_flash_label("ARTIFACT " + action, Color(0.95, 0.7, 0.35))
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -1647,6 +1967,9 @@ func _switch_mode(direction: int) -> void:
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
 
+	# ADDITIVE: keep the tabbed editor panel's tab in step with this mode.
+	_sync_editor_panel_tab()
+
 	print("[Catalyst] Switched to mode: %s" % mode_id)
 
 ## Set mode by absolute index (called by capacity bracelet).
@@ -1668,6 +1991,8 @@ func set_mode_index(index: int) -> void:
 	# Don't call bracelet.sync_to_mode here — the bracelet initiated this change
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
+	# ADDITIVE: keep the tabbed editor panel's tab in step with this mode.
+	_sync_editor_panel_tab()
 	print("[Catalyst] Set mode to: %s" % mode_id)
 
 func _show_mode_label() -> void:
