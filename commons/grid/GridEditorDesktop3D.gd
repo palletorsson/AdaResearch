@@ -196,6 +196,8 @@ var _capture_frames: int = 0
 # --paintbiome=<element>: headless proof that biome painting renders. Auto-selects
 # the element, stamps the brush at grid centre, updates the overlay + live rebuild.
 var _paintbiome_arg: String = ""
+var _testmove: bool = false               # --testmove: headless proof that moving an EXISTING artifact respawns
+var _testpersist: bool = false            # --testpersist: headless proof that painted biome survives save→reload
 
 # ── Palette (matches the scrubber's designed surface) ─────────────────
 const C_BG     := Color(0.05, 0.06, 0.09, 0.86)
@@ -243,6 +245,10 @@ func _parse_cli() -> void:
 			_shot_path = a.split("=", true, 1)[1]
 		elif a.begins_with("--paintbiome="):
 			_paintbiome_arg = a.split("=", true, 1)[1].strip_edges()
+		elif a == "--testmove":
+			_testmove = true
+		elif a == "--testpersist":
+			_testpersist = true
 
 
 # ── Build the REAL GridSystem renderer (zero drift) ───────────────────
@@ -342,6 +348,12 @@ func _build_real_grid() -> void:
 	_recenter_for_grid()
 	_update_hover_grid_sized()
 	_sync_biome_size()
+	# Restore a previously-painted biome so it PERSISTS across save→reload: re-seed the
+	# brush fields from the map's saved paint_layers + rebuild the foliage. Without this,
+	# the editor's biome host starts empty even though paint_layers were saved.
+	_load_biome_paint_layers()
+	if not _brush_fields.is_empty():
+		_rebuild_biome()
 	# Refresh the MAP dropdown to the post-build truth: drops the "SYNTHETIC" header once a
 	# real map is up and re-selects whatever actually loaded (CLI map or _reload_map target).
 	# clear()/add_item()/select() never emit item_selected, so this can't re-fire a reload.
@@ -356,6 +368,10 @@ func _build_real_grid() -> void:
 	# biome without a mouse. Runs once the grid is ready, before the --shot countdown.
 	if _paintbiome_arg != "":
 		_headless_paint_biome(_paintbiome_arg)
+	if _testmove:
+		_headless_test_move()
+	if _testpersist:
+		_headless_test_persist()
 
 
 ## Synthetic mode: stamp a flat one-high layout into the structure so the editor
@@ -1953,6 +1969,20 @@ func _cancel_artifact_move() -> void:
 func _spawn_artifact(col: int, row: int, lookup: String) -> bool:
 	if _interactables_comp == null:
 		return false
+	# Map tokens carry a "lookup:rot:yoff" suffix (e.g. "force_pad:0:0"); _place_artifact
+	# wants the BARE lookup + overrides. Parse it here — WITHOUT this, moving an EXISTING
+	# (suffixed) artifact despawns it but the respawn fails and it vanishes.
+	var parts: PackedStringArray = lookup.split(":", false)
+	var bare: String = lookup.strip_edges()
+	var overrides: Dictionary = {}
+	if parts.size() >= 1:
+		bare = str(parts[0]).strip_edges()
+	if parts.size() >= 2 and str(parts[1]).strip_edges() != "":
+		overrides["rotation_y_degrees"] = float(str(parts[1]))
+	if parts.size() >= 3 and str(parts[2]).strip_edges() != "":
+		overrides["y_offset"] = float(str(parts[2]))
+	if bare == "" or bare == " ":
+		return false
 	var y_pos := 0
 	if _structure and _structure.has_method("find_highest_y_at"):
 		y_pos = _structure.find_highest_y_at(col, row)
@@ -1961,29 +1991,34 @@ func _spawn_artifact(col: int, row: int, lookup: String) -> bool:
 		total_size = _interactables_comp.cube_size + _interactables_comp.gutter
 	if not _interactables_comp.has_method("_place_artifact"):
 		return false
-	# _place_artifact adds the spawned node as a child of parent_node and records
-	# it in interactable_objects[Vector3i(x,y,z)] with grid_cell meta — the same
-	# path generate_interactables uses, so what spawns here matches the game.
-	return bool(_interactables_comp._place_artifact(col, y_pos, row, lookup, total_size))
+	# Same path generate_interactables uses → spawns match the game. The bare lookup +
+	# parsed overrides make moving a suffixed/existing artifact respawn correctly.
+	return bool(_interactables_comp._place_artifact(col, y_pos, row, bare, total_size, overrides))
 
 
 ## Remove any spawned interactable object(s) at column (x=col, z=row). The component
 ## keys interactable_objects by Vector3i(x,y,z); we don't know y, so scan the column.
 func _despawn_artifact_at(col: int, row: int) -> void:
-	if _interactables_comp == null:
-		return
-	if not ("interactable_objects" in _interactables_comp):
-		return
-	var objs: Dictionary = _interactables_comp.interactable_objects
-	var to_free: Array = []
-	for key in objs.keys():
-		if key is Vector3i and key.x == col and key.z == row:
-			to_free.append(key)
-	for key in to_free:
-		var node = objs[key]
-		if is_instance_valid(node):
-			node.queue_free()
-		objs.erase(key)
+	# Normal artifacts (map-built AND editor-placed) are NOT in interactable_objects —
+	# _place_artifact tags them with group "vr_editable_artifact" + meta grid_cell=Vector2i(x,z).
+	# Despawn by the group first (this is what makes MOVE work on EXISTING artifacts), then
+	# also sweep interactable_objects for the special types (mc/agent/generator) that DO record there.
+	var cell := Vector2i(col, row)   # (x, z)
+	if is_inside_tree():
+		for node in get_tree().get_nodes_in_group("vr_editable_artifact"):
+			if is_instance_valid(node) and node.has_meta("grid_cell") and node.get_meta("grid_cell") == cell:
+				node.queue_free()
+	if _interactables_comp and ("interactable_objects" in _interactables_comp):
+		var objs: Dictionary = _interactables_comp.interactable_objects
+		var to_free: Array = []
+		for key in objs.keys():
+			if key is Vector3i and key.x == col and key.z == row:
+				to_free.append(key)
+		for key in to_free:
+			var node = objs[key]
+			if is_instance_valid(node):
+				node.queue_free()
+			objs.erase(key)
 
 
 # ══════════════════════════════════════════════════════════════════════
@@ -2438,6 +2473,75 @@ func _painted_cell_count(el: String) -> int:
 	return n
 
 
+## Headless proof for moving an EXISTING (map-loaded) artifact (--testmove): find the
+## first occupied interactables cell, pick it up + drop it on an adjacent cell, and report
+## whether it respawned at the target. Proves the suffixed-token respawn fix end-to-end.
+func _headless_test_move() -> void:
+	_active_tab = "ARTIFACTS"
+	var from := Vector2i(-1, -1)
+	for z in range(_interactables.size()):
+		for x in range(_interactables[z].size()):
+			if str(_interactables[z][x]).strip_edges() not in ["", " "]:
+				from = Vector2i(z, x)
+				break
+		if from.x >= 0:
+			break
+	if from.x < 0:
+		print("[grid-editor] --testmove: no existing artifacts to move")
+		return
+	var tok := str(_interactables[from.x][from.y]).strip_edges()
+	_hover_cell = from
+	_hover_valid = true
+	_artifact_move_mode = true
+	_artifact_move_picked = false
+	_artifact_pick_up()
+	var picked := _artifact_move_picked
+	# Pick an EMPTY target cell that has floor (so _place_artifact can spawn on it).
+	var to := Vector2i(-1, -1)
+	for dx in [1, 2, -1, -2, 3, -3]:
+		var tx: int = from.y + int(dx)
+		if tx < 0 or tx >= _grid_w:
+			continue
+		if str(_interactables[from.x][tx]).strip_edges() not in ["", " "]:
+			continue
+		if _structure and _structure.has_method("get_height_at") and int(_structure.get_height_at(tx, from.x)) > 0:
+			to = Vector2i(from.x, tx)
+			break
+	if to.x < 0:
+		to = Vector2i(from.x, clampi(from.y + 2, 0, _grid_w - 1))
+	_hover_cell = to
+	_artifact_drop()
+	var respawned := false
+	var target := Vector2i(to.y, to.x)   # (x, z)
+	if is_inside_tree():
+		for node in get_tree().get_nodes_in_group("vr_editable_artifact"):
+			if is_instance_valid(node) and not node.is_queued_for_deletion() and node.has_meta("grid_cell") and node.get_meta("grid_cell") == target:
+				respawned = true
+				break
+	print("[grid-editor] --testmove: tok='%s' picked=%s  (%d,%d)->(%d,%d)  respawned=%s  data='%s'" % [
+		tok, str(picked), from.x, from.y, to.x, to.y, str(respawned), str(_interactables[to.x][to.y])])
+
+
+## Headless proof that a painted biome PERSISTS across save→reload (--testpersist): paint a
+## blob, serialize to paint_layers (as the save does), wipe the live fields, then reload from
+## paint_layers (the persistence path) and confirm the field came back.
+func _headless_test_persist() -> void:
+	_ensure_biome_element()
+	var el := _active_biome_element()
+	if el == "":
+		print("[grid-editor] --testpersist: no biome element")
+		return
+	_stamp_biome_field(el, int(_grid_w / 2), int(_grid_d / 2), maxi(_brush_radius, 4), false)
+	var before := _painted_cell_count(el)
+	_map_data["paint_layers"] = _biome_paint_layers()   # serialize as save would
+	_brush_fields.clear()                                # wipe live fields (simulate reload)
+	var cleared := _painted_cell_count(el)
+	_load_biome_paint_layers()                           # reload from saved paint_layers
+	var after := _painted_cell_count(el)
+	print("[grid-editor] --testpersist: el='%s' painted=%d  cleared=%d  reloaded=%d  persists=%s" % [
+		el, before, cleared, after, str(after > 0 and after == before)])
+
+
 ## (Re)allocate the biome overlay's per-cell instances to the current grid and lay
 ## them out flat on the floor. Called when the grid dims are known / change.
 func _resize_biome_overlay() -> void:
@@ -2510,6 +2614,35 @@ func _biome_paint_layers() -> Array:
 			layer["color"] = [c.r, c.g, c.b]
 		out.append(layer)
 	return out
+
+
+## Inverse of _biome_paint_layers: re-seed _brush_fields from the loaded map's saved
+## paint_layers so a painted biome PERSISTS across save→reload. Each brush-mode layer's
+## sparse {w,d,cells:[[x,z,v]]} → a field over the current biome area.
+func _load_biome_paint_layers() -> void:
+	var pls = _map_data.get("paint_layers", [])
+	if not (pls is Array):
+		return
+	var bw := _biome_w()
+	var bd := _biome_d()
+	for layer in pls:
+		if not (layer is Dictionary):
+			continue
+		var el := str(layer.get("element", "")).strip_edges()
+		if el == "":
+			continue
+		var brush = layer.get("brush", null)
+		if not (brush is Dictionary) or not brush.has("cells"):
+			continue
+		var field := PackedFloat32Array()
+		field.resize(bw * bd)
+		for c in brush.get("cells", []):
+			if c is Array and (c as Array).size() >= 3:
+				var x := int(c[0])
+				var z := int(c[1])
+				if x >= 0 and x < bw and z >= 0 and z < bd:
+					field[z * bw + x] = float(c[2])
+		_brush_fields[el] = field
 
 
 ## On stroke-release: rebuild the REAL biome (visible foliage) from the painted
