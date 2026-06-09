@@ -71,7 +71,7 @@ var _map_data: Dictionary = {}            # full parsed map_data.json (for write
 const TOOL_GRID := "grid"
 const TOOL_PAINT := "paint"
 var _active_mode: String = TOOL_GRID      # which row drives a left-click
-var _active_grid_op: String = "add"       # GridOps op name
+var _active_grid_op: String = "fill"      # GridOps op name — paint the selected LEVEL (not +1)
 var _active_paint_op: String = "colorize" # ModifierStack op name
 var _active_brush_size: int = 2           # 1..4 (GridOps.MAX_BRUSH)
 var _active_level: int = 1                # height value for fill/raise/etc. (base = 1)
