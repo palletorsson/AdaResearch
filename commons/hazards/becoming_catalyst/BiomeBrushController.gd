@@ -22,6 +22,8 @@ var _data: Node = null               # GridDataComponent (existing paint_layers)
 var _elem_idx: int = 0
 var _radius: int = 2
 var _strength: float = 0.6
+var _height: float = 1.5             # painted ground/biome rise (BIOME tab HEIGHT slider; was hardcoded 1.5)
+var _density: float = 1.0            # scatter density for every painted layer (BIOME tab DEFINE slider; was 1.0)
 var _fields: Dictionary = {}         # element -> PackedFloat32Array (grid_w*grid_d)
 var _element_artifacts: Dictionary = {}  # element -> Array[name] (the VR picker's lists)
 var _stroking: bool = false
@@ -90,6 +92,16 @@ func set_strength(s: float) -> void:
 	_strength = clampf(s, 0.1, 1.0)
 
 
+## Set the painted ground/biome rise (from the menu's HEIGHT slider).
+func set_height(h: float) -> void:
+	_height = clampf(h, 0.5, 4.0)
+
+
+## Set the scatter density applied to every painted layer (from the menu's DEFINE slider).
+func set_density(d: float) -> void:
+	_density = clampf(d, 0.1, 1.0)
+
+
 func has_strokes() -> bool:
 	return not _fields.is_empty()
 
@@ -130,9 +142,9 @@ func paint_layers_payload() -> Array:
 	var painted: Dictionary = {}
 	for el in _fields:
 		painted[el] = true
-		var layer := {"element": el, "mode": "brush", "density": 1.0, "brush": _brush_payload(_fields[el])}
+		var layer := {"element": el, "mode": "brush", "density": _density, "brush": _brush_payload(_fields[el])}
 		if el == "ground":
-			layer["height"] = 1.5   # painted bumps rise to ~1.5 m
+			layer["height"] = _height   # painted bumps rise to the HEIGHT slider value
 		elif el == "shader":
 			var c := _elem_colour(el)
 			layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture

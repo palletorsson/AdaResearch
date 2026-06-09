@@ -18,6 +18,8 @@ signal color_selected(color: Color)
 signal element_selected(element_name: String)
 signal size_changed(radius: int)
 signal pressure_changed(strength: float)
+signal height_changed(height: float)
+signal definition_changed(density: float)
 # ARTIFACTS
 signal artifact_action(action: String)
 signal artifact_sequence_changed(seq: String)
@@ -204,6 +206,8 @@ func _build_biome_page(parent: VBoxContainer) -> void:
 		_elem_buttons.append(b)
 	_slider_row(parent, "SIZE", 1, 6, 1, 2, func(v): size_changed.emit(int(v)), "r2")
 	_slider_row(parent, "PRESS", 0.1, 1.0, 0.1, 0.6, func(v): pressure_changed.emit(v), "0.6")
+	_slider_row(parent, "HEIGHT", 0.5, 4.0, 0.1, 1.5, func(v): height_changed.emit(v), "1.5")
+	_slider_row(parent, "DEFINE", 0.1, 1.0, 0.1, 1.0, func(v): definition_changed.emit(v), "1.0")
 
 
 func _on_elem(i: int) -> void:

@@ -1087,6 +1087,22 @@ func _on_biome_menu_pressure(strength: float) -> void:
 		_biome_brush.set_strength(strength)
 
 
+## HEIGHT slider (panel BIOME tab) → the painted ground/biome rise on the brush.
+func _on_biome_menu_height(h: float) -> void:
+	_ensure_biome_brush()
+	if _biome_brush:
+		_biome_brush.set_height(h)
+		_flash_label("HEIGHT: %.1f" % h, Color(0.6, 0.95, 0.7))
+
+
+## DEFINE slider (panel BIOME tab) → the scatter density on every painted layer.
+func _on_biome_menu_definition(d: float) -> void:
+	_ensure_biome_brush()
+	if _biome_brush:
+		_biome_brush.set_density(d)
+		_flash_label("DEFINE: %.1f" % d, Color(0.6, 0.95, 0.7))
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # UNIFIED TABBED EDITOR PANEL (ADDITIVE) — left-wrist GRID/ARTIFACT/MODIFIER/BIOME
 # Mirrors _ensure_biome_menu/_connect_biome_menu but mounts the TabbedEditorPanel
@@ -1147,6 +1163,10 @@ func _connect_editor_panel(vp: Node) -> void:
 		ui.size_changed.connect(_on_biome_menu_size)
 	if ui.has_signal("pressure_changed") and not ui.pressure_changed.is_connected(_on_biome_menu_pressure):
 		ui.pressure_changed.connect(_on_biome_menu_pressure)
+	if ui.has_signal("height_changed") and not ui.height_changed.is_connected(_on_biome_menu_height):
+		ui.height_changed.connect(_on_biome_menu_height)
+	if ui.has_signal("definition_changed") and not ui.definition_changed.is_connected(_on_biome_menu_definition):
+		ui.definition_changed.connect(_on_biome_menu_definition)
 	if ui.has_signal("artifact_action") and not ui.artifact_action.is_connected(_on_editor_artifact_action):
 		ui.artifact_action.connect(_on_editor_artifact_action)
 	# ARTIFACT PALETTE sequence filter cycler (rebuilds the placeable list).

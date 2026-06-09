@@ -134,6 +134,8 @@ var _biome_idx: int = -1                  # active element index; -1 = none
 var _brush_fields: Dictionary = {}        # element -> PackedFloat32Array (_biome_w*_biome_d, margin-offset)
 var _brush_radius: int = 2
 var _brush_strength: float = 0.6
+var _biome_height: float = 1.5            # painted ground/biome rise (BIOME tab HEIGHT slider; was hardcoded 1.5)
+var _biome_density: float = 1.0           # scatter density for every painted layer (BIOME tab DEFINE slider; was 1.0)
 var _biome_dirty: bool = false            # a biome stamp happened this stroke → rebuild on release
 # REAL foliage: the SAME accrual path BiomeScrubberDesktop3D drives. The brush fields
 # become paint_layers; BiomeAccrualManager renders trees/critters/flowers onto _biome_host
@@ -1323,6 +1325,10 @@ func _connect_panel_signals() -> void:
 		_panel.size_changed.connect(_on_biome_size_changed)
 	if _panel.has_signal("pressure_changed"):
 		_panel.pressure_changed.connect(_on_biome_pressure_changed)
+	if _panel.has_signal("height_changed"):
+		_panel.height_changed.connect(_on_biome_height_changed)
+	if _panel.has_signal("definition_changed"):
+		_panel.definition_changed.connect(_on_biome_definition_changed)
 	if _panel.has_signal("artifact_action"):
 		_panel.artifact_action.connect(_on_artifact_action)
 	if _panel.has_signal("artifact_sequence_changed"):
@@ -1434,6 +1440,28 @@ func _on_biome_size_changed(radius: int) -> void:
 
 func _on_biome_pressure_changed(strength: float) -> void:
 	_brush_strength = clampf(strength, 0.1, 1.0)
+	_update_hud()
+
+
+## HEIGHT slider → the painted ground/biome rise (the ground layer's "height"). A live
+## biome rebuild picks it up so an already-painted field updates immediately; the next
+## stroke also reads the new value.
+func _on_biome_height_changed(h: float) -> void:
+	_biome_height = clampf(h, 0.5, 4.0)
+	_status_msg = "biome height: %.1f" % _biome_height
+	if not _brush_fields.is_empty():
+		_rebuild_biome()
+	_update_hud()
+
+
+## DEFINE slider → the scatter density on EVERY painted layer. A live biome rebuild
+## picks it up so an already-painted field re-scatters at the new density; the next
+## stroke also reads the new value.
+func _on_biome_definition_changed(d: float) -> void:
+	_biome_density = clampf(d, 0.1, 1.0)
+	_status_msg = "biome density: %.1f" % _biome_density
+	if not _brush_fields.is_empty():
+		_rebuild_biome()
 	_update_hud()
 
 
@@ -2841,11 +2869,11 @@ func _biome_paint_layers() -> Array:
 		var layer := {
 			"element": str(el),
 			"mode": "brush",
-			"density": 1.0,
+			"density": _biome_density,
 			"brush": DistributionFieldLib.field_to_sparse(field, bw, bd),
 		}
 		if str(el) == "ground":
-			layer["height"] = 1.5
+			layer["height"] = _biome_height
 		elif str(el) == "shader":
 			var c := _biome_color(str(el))
 			layer["color"] = [c.r, c.g, c.b]
