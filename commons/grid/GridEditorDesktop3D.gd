@@ -205,7 +205,7 @@ const C_TEXT   := Color(0.93, 0.96, 1.0)
 const C_DIM    := Color(0.58, 0.63, 0.72)
 const C_GOLD   := Color(1.0, 0.78, 0.35)
 const C_BAD    := Color(1.0, 0.45, 0.42)
-const PANEL_W  := 360.0
+const PANEL_W  := 540.0   # match the TabbedEditorPanel's 540px content width (else it overflows off-screen)
 const BAR_H    := 96.0
 
 
