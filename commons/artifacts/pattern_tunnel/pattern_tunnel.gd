@@ -176,7 +176,7 @@ func _add_tile(pos: Vector3, rot_deg: Vector3, seg: int, v: int, surf_frac: floa
 	mi.material_override = _white_mat
 	add_child(mi)
 	var ci: int = _pattern_index(seg, v)
-	_tiles.append({"mi": mi, "seg": seg, "threshold": float(seg) + surf_frac, "color_idx": ci, "revealed": false})
+	_tiles.append({"mi": mi, "seg": seg, "v": v, "threshold": float(seg) + surf_frac, "color_idx": ci, "revealed": false})
 
 
 func _pattern_index(seg: int, v: int) -> int:
@@ -226,15 +226,10 @@ func reskin(new_group: int = -1, new_motif: int = -1, new_period: int = -1) -> v
 	if new_group >= 0:
 		group_index = new_group
 	for t in _tiles:
-		t["color_idx"] = _pattern_index(t["seg"], _tile_v(t))
+		t["color_idx"] = _pattern_index(t["seg"], t["v"])
 		if t["revealed"]:
 			(t["mi"] as MeshInstance3D).material_override = _pattern_mat(t["color_idx"])
 	boost()
-
-
-func _tile_v(t: Dictionary) -> int:
-	# recover the perimeter index from the tile's stored order
-	return _tiles.find(t) % _perimeter
 
 
 # ── materials ────────────────────────────────────────────────────────────────
