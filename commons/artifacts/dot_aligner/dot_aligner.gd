@@ -28,13 +28,19 @@ class_name DotAligner
 const MAX_ANGLE_DEG := 72.0
 const LOCK_DOT := 0.985   # cosθ above which the foe is converted
 
-var _built := false
+const SLIDER_SCENE := "res://commons/interactables/slider_horizontal.tscn"
+const DISPLAY_SIZE := 0.78   # the demo is scaled to sit on the console top
+
 var _rng := RandomNumberGenerator.new()
+var _rack_built := false
+var _demo_root: Node3D
+var _monitor_label: Label3D
+var _slider: Node
 
 
 func _ready() -> void:
-	if not _built:
-		_build()
+	_ensure_rack()
+	_build_demo()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -49,7 +55,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	accent = _parse_color(config_data.get("accent", accent), accent)
 	foe_color = _parse_color(config_data.get("foe_color", foe_color), foe_color)
 	friend_color = _parse_color(config_data.get("friend_color", friend_color), friend_color)
-	_build()
+	_ensure_rack()
+	_build_demo()
 
 
 func _parse_color(value: Variant, fallback: Color) -> Color:
@@ -62,17 +69,19 @@ func _parse_color(value: Variant, fallback: Color) -> Color:
 	return fallback
 
 
-func _build() -> void:
-	# Self-clearing so the deferred _ready build + apply_grid_config build never stack.
-	for child in get_children():
-		remove_child(child)
+## Rebuilds ONLY the demo (the rack + slider persist). Called once at _ready and
+## again every time the slider moves.
+func _build_demo() -> void:
+	if _demo_root == null:
+		return
+	for child in _demo_root.get_children():
+		_demo_root.remove_child(child)
 		child.queue_free()
-	_built = true
 	_rng.seed = hash(seed)
 
 	var rig := Node3D.new()
 	rig.name = "DotAlignerRig"
-	add_child(rig)
+	_demo_root.add_child(rig)
 
 	# --- geometry of the problem -------------------------------------------------
 	var head_y: float = 1.05
@@ -140,24 +149,103 @@ func _build() -> void:
 	var ring := _torus(head, 0.30, 0.022, _glow_mat(accent, 0.4 + lock * 3.2))
 	rig.add_child(ring)
 
-	# --- readout -----------------------------------------------------------------
-	var status: String = "✓ FRIEND" if converted else ("▶ LOCKING" if dot > 0.7 else "· SEEKING")
-	var label := Label3D.new()
-	label.text = "a · b = cos θ = %.3f\nθ = %d°\n%s" % [dot, int(roundf(theta_deg)), status]
-	label.font_size = 28
-	label.modulate = Color(0.96, 0.98, 1.0)
-	label.outline_size = 10
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.no_depth_test = true
-	label.position = head + Vector3(0.0, 0.55, 0.0)
-	rig.add_child(label)
+	# --- readout -> the monitor (not a billboard) --------------------------------
+	var status: String = "FRIEND" if converted else ("LOCKING" if dot > 0.7 else "SEEKING")
+	if _monitor_label:
+		_monitor_label.text = "DOT  a · b\n\ncos θ = %.3f\nθ = %d°\n\n%s" % [dot, int(roundf(theta_deg)), status]
+		_monitor_label.modulate = friend_color.lerp(Color(0.6, 1.0, 0.75), 0.4) if converted else Color(0.55, 0.92, 1.0)
 
 	_settle(rig)
+
+
+## Builds the console ONCE — the one surface: a body, a monitor screen on the left
+## (the readout), a slider on the right (drives alignment), and a mount for the demo.
+func _ensure_rack() -> void:
+	if _rack_built:
+		return
+	_rack_built = true
+
+	# console body + top trim
+	add_child(_box(Vector3(0.0, 0.46, 0.0), Vector3(1.5, 0.92, 0.62), _panel_mat(Color(0.10, 0.11, 0.13))))
+	add_child(_box(Vector3(0.0, 0.93, 0.0), Vector3(1.54, 0.04, 0.66), _panel_mat(Color(0.17, 0.18, 0.21))))
+
+	# the monitor (left): a dark screen with the readout on its face
+	var scr := Vector3(-0.48, 1.16, 0.10)
+	add_child(_box(scr + Vector3(0.0, 0.0, -0.02), Vector3(0.54, 0.46, 0.05), _panel_mat(Color(0.04, 0.04, 0.06))))
+	add_child(_box(scr, Vector3(0.48, 0.40, 0.01), _screen_mat()))
+	_monitor_label = Label3D.new()
+	_monitor_label.name = "MonitorReadout"
+	_monitor_label.font_size = 36
+	_monitor_label.pixel_size = 0.0011
+	_monitor_label.modulate = Color(0.55, 0.92, 1.0)
+	_monitor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_monitor_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_monitor_label.position = scr + Vector3(0.0, 0.0, 0.012)
+	_monitor_label.text = "DOT"
+	add_child(_monitor_label)
+	add_child(_label_plate("DOT-PRODUCT ALIGNER", Vector3(-0.48, 1.42, 0.10), 24, Color(0.78, 0.84, 0.94)))
+
+	# the slider (right): drives the alignment DNA parameter
+	if ResourceLoader.exists(SLIDER_SCENE):
+		var s: Node = load(SLIDER_SCENE).instantiate()
+		s.name = "AlignmentSlider"
+		add_child(s)
+		(s as Node3D).position = Vector3(0.46, 0.95, 0.16)
+		if s.has_method("set_param_name"): s.call("set_param_name", "ALIGNMENT")
+		if s.has_method("set_range"): s.call("set_range", 0.0, 1.0)
+		if s.has_method("set_normalized_value"): s.call("set_normalized_value", alignment)
+		if s.has_signal("slider_moved") and not s.is_connected("slider_moved", _on_slider_moved):
+			s.connect("slider_moved", _on_slider_moved)
+		_slider = s
+	add_child(_label_plate("ALIGNMENT  (drag →)", Vector3(0.46, 1.06, 0.16), 20, Color(0.7, 0.8, 0.9)))
+
+	# the demo mount — the 3D demonstration stands on the console top
+	_demo_root = Node3D.new()
+	_demo_root.name = "DemoMount"
+	_demo_root.position = Vector3(0.12, 0.95, -0.02)
+	add_child(_demo_root)
+
+
+## The slider drives alignment, then only the demo rebuilds.
+func _on_slider_moved(_value: Variant = null) -> void:
+	if _slider and _slider.has_method("get_normalized_value"):
+		alignment = clampf(_slider.call("get_normalized_value"), 0.0, 1.0)
+	elif _value != null:
+		alignment = clampf(float(_value), 0.0, 1.0)
+	_build_demo()
 
 
 # ---------------------------------------------------------------------------
 # materials
 # ---------------------------------------------------------------------------
+
+func _panel_mat(c: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.metallic = 0.25
+	m.roughness = 0.8
+	return m
+
+
+func _screen_mat() -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(0.02, 0.05, 0.05)
+	m.emission_enabled = true
+	m.emission = Color(0.05, 0.16, 0.13)
+	m.emission_energy_multiplier = 0.7
+	return m
+
+
+func _label_plate(text: String, pos: Vector3, font: int, col: Color) -> Label3D:
+	var l := Label3D.new()
+	l.text = text
+	l.font_size = font
+	l.pixel_size = 0.0011
+	l.modulate = col
+	l.outline_size = 6
+	l.position = pos
+	return l
+
 
 func _steel_mat(c: Color) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
@@ -301,9 +389,10 @@ func _settle(rig: Node3D) -> void:
 	if aabb.size.length() < 0.001:
 		return
 	var span: float = maxf(aabb.size.x, maxf(aabb.size.y, aabb.size.z))
-	var target: float = maxf(sculpt_height, sculpt_width)
+	var target: float = DISPLAY_SIZE
 	var s: float = 1.0 if span <= 0.001 else clampf(target / span, 0.2, 4.0)
 	rig.scale = Vector3.ONE * s
+	# Sit the demo on the console: centre it in X/Z, base at the mount origin.
 	var c: Vector3 = aabb.get_center() * s
 	rig.position = Vector3(-c.x, -aabb.position.y * s, -c.z)
 
