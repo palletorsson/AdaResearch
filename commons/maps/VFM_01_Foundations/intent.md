@@ -1,0 +1,1 @@
+Entry hall. The coordinate frame you can stand inside, the walk-in addition parallelogram, and two plinth rows of the basics — magnitude, normalize, scalar multiplication, displacement, the Vector Bench. Teaches the vocabulary every later hall assumes.

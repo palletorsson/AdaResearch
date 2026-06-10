@@ -1,0 +1,1 @@
+Firing ranges. Catapult and throwing lanes, the walled mortar bay, the turret with its vector-math signage, fireworks overhead — and two machines that launch the PLAYER: the human catapult's landing run and the slingshot's 27-metre lane.

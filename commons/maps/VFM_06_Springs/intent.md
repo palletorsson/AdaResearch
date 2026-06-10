@@ -1,0 +1,1 @@
+The kinetic sculpture turns at the centre; around it the spring family (Hooke plinth, damping regimes, lattice, coupled pendulums), the joint machines (crank, slider, chain, cone-twist), and the six-station joint playground.

@@ -1,0 +1,1 @@
+The 8m bouncing-ball chamber anchors a motion gallery: a/v/p arrows, steering arrival, fluid resistance, friction threshold, momentum cradle, flocking box — and the collision crasher prowling the far corner behind a warning.

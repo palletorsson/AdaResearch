@@ -1,0 +1,1 @@
+The 14m walk-through vector field is the centerpiece; the Storm Chamber, the vortex that throws you, tactile force zones, and a flow wall ring it. A plinth row of field visualizers along the south edge for the small readings.

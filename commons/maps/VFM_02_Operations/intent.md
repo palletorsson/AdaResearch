@@ -1,0 +1,1 @@
+The three XL walk-in operations (dot, cross, projection/reflection) plus the all-ops workbench, with a plinth row of the quantitative pieces: agreement gauge, work-energy integrator, torque lever, angle-between. Where vectors start computing things.
