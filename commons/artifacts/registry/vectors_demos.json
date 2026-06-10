@@ -6,6 +6,39 @@
 		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
 	},
 	"artifacts": {
+		"circle_train": {
+			"lookup_name": "circle_train",
+			"scene": "res://commons/artifacts/circle_train/circle_train.tscn",
+			"class_name": "CircleTrain",
+			"name": "Circle Train (centripetal force, a = v²/r)",
+			"description": "Centripetal force made playable - a sci-fi intermezzo for the embodied vectors-forces arc. A high-speed neon maglev loop: the train's velocity is always tangent to the ring (grows with v) and its force always points inward toward the centre (grows with v^2/r). The payoff you can dial: double the speed and the inward force quadruples - the velocity arrow stretches linearly while the centripetal force arrow explodes. Glowing torus track, a banking train of cars, speed streaks, the tangent + inward vectors, and a v / a / F_c readout. DNA: speed 0..1 dials the train (velocity ~v linear, centripetal force ~v^2 quadratic); seed sets the train position; color_a neon track, color_b velocity, accent centripetal force, train_color the cars.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [ "forces" ],
+			"tags": [ "force", "centripetal", "circular-motion", "velocity", "acceleration", "embodied", "sci-fi" ],
+			"parameters": {
+				"seed": "Train position around the loop (default 0)",
+				"speed": "0..1 train speed - velocity grows linearly, centripetal force quadratically (default 0.7)",
+				"complexity": "Detail (default 6)",
+				"color_a": "Neon track",
+				"color_b": "Velocity vector (tangent)",
+				"accent": "Centripetal force vector (inward)",
+				"train_color": "The glowing train cars",
+				"emissive": "Bool - lift glow (default true)",
+				"sculpt_height": "Height in meters",
+				"sculpt_width": "Footprint width in meters"
+			},
+			"dev_themes": [ "forces", "centripetal", "circular_motion", "vectors" ],
+			"spatial_needs": {
+				"platform": "none", "footprint_cells": 3,
+				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+				"player_position": "front", "wall_backing": false, "orientation": "any",
+				"isolation": 1, "cluster_with": [], "preferred_zone": "any",
+				"measured_footprint_cells": 3, "footprint_source": "designed"
+			}
+		},
 		"launch_arc": {
 			"lookup_name": "launch_arc",
 			"scene": "res://commons/artifacts/launch_arc/launch_arc.tscn",
