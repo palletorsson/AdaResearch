@@ -21,6 +21,7 @@ const PERIOD_NAMES := ["Republican","Imperial","Cosmatesque","Renaissance","Baro
 @export var motif_index: int = 2
 @export var period_index: int = 4
 @export var fill_speed: float = 2.2
+@export var tunnel_length: int = 14      # rings down -Z (shorten to fit a busy map)
 @export_range(0.0, 1.0, 0.01) var start_reveal: float = 0.0   # >0 for captures / a pre-painted start
 
 var _tunnel: Node = null
@@ -42,6 +43,7 @@ func _build() -> void:
 	# the tunnel itself, extending down -Z from the mouth
 	_tunnel = TunnelScene.instantiate()
 	_tunnel.name = "Tunnel"
+	_tunnel.set("tunnel_length", tunnel_length)
 	_tunnel.set("group_index", group_index)
 	_tunnel.set("motif_index", motif_index)
 	_tunnel.set("period_index", period_index)
@@ -207,5 +209,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("motif_index"): motif_index = int(config_data["motif_index"])
 	if config_data.has("period_index"): period_index = int(config_data["period_index"])
 	if config_data.has("fill_speed"): fill_speed = float(config_data["fill_speed"])
+	if config_data.has("tunnel_length"): tunnel_length = int(config_data["tunnel_length"])
 	_built = false
 	_build()
