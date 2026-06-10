@@ -17,6 +17,9 @@ extends Node3D
 ## and call _console_ready() from their own _ready().
 
 const SLIDER_SCENE := "res://commons/interactables/slider_horizontal.tscn"
+const DIAL_SCENE := "res://commons/interactables/dial_smooth.tscn"
+const PAD_SCENE := "res://commons/interactables/slider_plane.tscn"
+const PAD_LIMIT := 0.2       # slider_plane's default ±travel on each axis
 const DISPLAY_SIZE := 0.78   # the demo is scaled to sit on the console top
 
 @export var emissive: bool = true
@@ -26,6 +29,7 @@ var _rack_built := false
 var demo_root: Node3D
 var monitor_label: Label3D
 var _slider: Node
+var _controls_built: Array = []
 
 
 # --- to be overridden by the toy --------------------------------------------
@@ -40,6 +44,13 @@ func _param_set(_v: float) -> void:
 
 func _console_meta() -> Dictionary:
 	return {"title": "TOY", "slider": "PARAM"}
+
+## Override to return an ordered MULTI-control bank instead of the single slider:
+##   {"label": String, "kind": "slider"|"dial"|"pad", "get": Callable, "set": Callable}
+## slider/dial: get()->float (0..1), set(float 0..1).   pad: get()->Vector2 (-1..1
+## each axis), set(Vector2 -1..1). Return [] (default) to keep the single-slider path.
+func _controls() -> Array:
+	return []
 
 
 # --- lifecycle ---------------------------------------------------------------
@@ -75,19 +86,12 @@ func _ensure_rack() -> void:
 	add_child(monitor_label)
 	add_child(_label_plate(String(meta.get("title", "TOY")), Vector3(-0.48, 1.42, 0.10), 24, Color(0.78, 0.84, 0.94)))
 
-	# the slider (right): drives the toy's DNA parameter
-	if ResourceLoader.exists(SLIDER_SCENE):
-		var s: Node = load(SLIDER_SCENE).instantiate()
-		s.name = "ParamSlider"
-		add_child(s)
-		(s as Node3D).position = Vector3(0.46, 0.95, 0.16)
-		if s.has_method("set_param_name"): s.call("set_param_name", String(meta.get("slider", "PARAM")))
-		if s.has_method("set_range"): s.call("set_range", 0.0, 1.0)
-		if s.has_method("set_normalized_value"): s.call("set_normalized_value", _param_get())
-		if s.has_signal("slider_moved") and not s.is_connected("slider_moved", _on_slider_moved):
-			s.connect("slider_moved", _on_slider_moved)
-		_slider = s
-	add_child(_label_plate(String(meta.get("slider", "PARAM")) + "  (drag →)", Vector3(0.46, 1.06, 0.16), 20, Color(0.7, 0.8, 0.9)))
+	# the control(s): a multi-control bank if _controls() is overridden, else one slider
+	var specs: Array = _controls()
+	if specs.is_empty():
+		_build_single_slider(meta)
+	else:
+		_build_control_bank(specs)
 
 	# the demo mount — the 3D demonstration stands on the console top
 	demo_root = Node3D.new()
@@ -103,6 +107,92 @@ func _on_slider_moved(_value: Variant = null) -> void:
 	elif _value != null:
 		_param_set(clampf(float(_value), 0.0, 1.0))
 	_build_demo()
+
+
+# --- the single-slider path (legacy — all the one-param toys) ---------------
+func _build_single_slider(meta: Dictionary) -> void:
+	if ResourceLoader.exists(SLIDER_SCENE):
+		var s: Node = load(SLIDER_SCENE).instantiate()
+		s.name = "ParamSlider"
+		add_child(s)
+		(s as Node3D).position = Vector3(0.46, 0.95, 0.16)
+		if s.has_method("set_param_name"): s.call("set_param_name", String(meta.get("slider", "PARAM")))
+		if s.has_method("set_range"): s.call("set_range", 0.0, 1.0)
+		if s.has_method("set_normalized_value"): s.call("set_normalized_value", _param_get())
+		if s.has_signal("slider_moved") and not s.is_connected("slider_moved", _on_slider_moved):
+			s.connect("slider_moved", _on_slider_moved)
+		_slider = s
+	add_child(_label_plate(String(meta.get("slider", "PARAM")) + "  (drag →)", Vector3(0.46, 1.06, 0.16), 20, Color(0.7, 0.8, 0.9)))
+
+
+# --- the multi-control bank (sliders / dials / 2D pads in a row) -------------
+func _build_control_bank(specs: Array) -> void:
+	var n: int = specs.size()
+	for i in range(n):
+		var spec: Dictionary = specs[i]
+		var kind: String = String(spec.get("kind", "slider"))
+		var t: float = 0.0 if n <= 1 else float(i) / float(n - 1)
+		if kind == "pad":
+			_build_pad(spec, lerpf(0.04, 0.56, t))
+		else:
+			_build_scalar(spec, kind, lerpf(0.0, 0.58, t))
+
+
+func _build_pad(spec: Dictionary, x: float) -> void:
+	if not ResourceLoader.exists(PAD_SCENE):
+		return
+	var pad: Node = load(PAD_SCENE).instantiate()
+	pad.name = "Pad_" + String(spec.get("label", ""))
+	add_child(pad)
+	# drafting-table angle on the front lip, below the demo so the top reads clearly
+	(pad as Node3D).position = Vector3(x, 0.86, 0.34)
+	(pad as Node3D).rotation = Vector3(deg_to_rad(-58.0), 0.0, 0.0)
+	(pad as Node3D).scale = Vector3.ONE * 1.5
+	# bind the INNER node (slider_plane.gd) — its slider_position is a true Vector2
+	var inner: Node = pad.get_node_or_null("SliderOrigin/InteractableSlider")
+	if inner:
+		var iv: Vector2 = spec["get"].call()
+		inner.set("slider_position", Vector2(clampf(iv.x, -1.0, 1.0), clampf(iv.y, -1.0, 1.0)) * PAD_LIMIT)
+		var handler: Callable = _make_pad_handler(spec)
+		if inner.has_signal("slider_moved") and not inner.is_connected("slider_moved", handler):
+			inner.connect("slider_moved", handler)
+	_controls_built.append(pad)
+	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.02, 0.30), 18, Color(0.72, 0.82, 0.94)))
+
+
+func _build_scalar(spec: Dictionary, kind: String, x: float) -> void:
+	var scene_path: String = DIAL_SCENE if kind == "dial" else SLIDER_SCENE
+	if not ResourceLoader.exists(scene_path):
+		return
+	var c: Node = load(scene_path).instantiate()
+	c.name = "Ctl_" + String(spec.get("label", ""))
+	add_child(c)
+	(c as Node3D).position = Vector3(x, 0.95, 0.18)
+	if c.has_method("set_param_name"): c.call("set_param_name", String(spec.get("label", "")))
+	if c.has_method("set_range"): c.call("set_range", 0.0, 1.0)
+	if c.has_method("set_normalized_value"): c.call("set_normalized_value", clampf(spec["get"].call(), 0.0, 1.0))
+	var sig: String = "hinge_moved" if kind == "dial" else "slider_moved"
+	var handler: Callable = _make_scalar_handler(c, spec)
+	if c.has_signal(sig) and not c.is_connected(sig, handler):
+		c.connect(sig, handler)
+	_controls_built.append(c)
+	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.06, 0.18), 18, Color(0.72, 0.82, 0.94)))
+
+
+# pad signal carries a Vector2 in ±PAD_LIMIT → normalize to -1..1, push, rebuild.
+func _make_pad_handler(spec: Dictionary) -> Callable:
+	return func(pos: Vector2):
+		spec["set"].call(Vector2(pos.x / PAD_LIMIT, pos.y / PAD_LIMIT))
+		_build_demo()
+
+# slider/dial: re-read the control's own normalized value (signal arg is raw).
+func _make_scalar_handler(node: Node, spec: Dictionary) -> Callable:
+	return func(_a = null, _b = null):
+		var v: float = 0.5
+		if node.has_method("get_normalized_value"):
+			v = clampf(node.call("get_normalized_value"), 0.0, 1.0)
+		spec["set"].call(v)
+		_build_demo()
 
 
 func set_readout(text: String, color: Color = Color(0.55, 0.92, 1.0)) -> void:

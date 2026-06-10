@@ -6,6 +6,60 @@
 		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
 	},
 	"artifacts": {
+		"vector_add": {
+			"lookup_name": "vector_add",
+			"scene": "res://commons/artifacts/vector_op_console/vector_op_console.tscn",
+			"class_name": "VectorOpConsole",
+			"name": "Vector Addition (a + b, two-pad console)",
+			"description": "Vector addition made playable - the entry operation of the embodied vectors-forces arc, a ToyConsole with a TWO-PAD control surface (synthesised from three interaction-design passes). Two 2D pads on the front lip, one per vector: drag a pad and that vector's tip follows your hand (a grabbed handle in VR, a pointer-drag on desktop). The two arrows draw head-to-tail on the console top and the resultant a+b swings live; the monitor shows the full component breakdown (a, b, a+b, |a+b|, angle). The control IS the vector tip. seed sets the starting a and b.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [ "forces" ],
+			"tags": [ "vector", "addition", "head-to-tail", "resultant", "embodied", "two-pad" ],
+			"parameters": {
+				"seed": "Starting a and b (default 0)",
+				"op": "add or sub (default add)",
+				"color_a": "vector a", "color_b": "vector b", "color_c": "the resultant",
+				"emissive": "Bool - lift glow (default true)"
+			},
+			"dev_themes": [ "vectors", "addition", "operations" ],
+			"spatial_needs": {
+				"platform": "none", "footprint_cells": 3,
+				"clearance": { "front": 2, "back": 1, "left": 1, "right": 1 },
+				"player_position": "front", "wall_backing": false, "orientation": "front",
+				"isolation": 1, "cluster_with": [ "vector_sub", "dot_aligner" ], "preferred_zone": "any",
+				"measured_footprint_cells": 3, "footprint_source": "designed"
+			}
+		},
+		"vector_sub": {
+			"lookup_name": "vector_sub",
+			"scene": "res://commons/artifacts/vector_op_console/vector_sub.tscn",
+			"class_name": "VectorOpConsole",
+			"name": "Vector Subtraction (a − b, two-pad console)",
+			"description": "Vector subtraction made playable - the same two-pad ToyConsole as vector_add, flipped to a - b = a + (-b). Two 2D pads place the tips of a and b; the demo draws a, then the negated b head-to-tail, and the resultant a-b, with a faint ghost of the original +b so the flip reads as the whole idea. The monitor shows a, b, a-b, |a-b| and the angle. The control IS the vector tip; seed sets the starting a and b.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [ "forces" ],
+			"tags": [ "vector", "subtraction", "negation", "head-to-tail", "resultant", "embodied", "two-pad" ],
+			"parameters": {
+				"seed": "Starting a and b (default 0)",
+				"op": "forced to sub by the scene",
+				"color_a": "vector a", "color_b": "vector b", "color_c": "the resultant",
+				"emissive": "Bool - lift glow (default true)"
+			},
+			"dev_themes": [ "vectors", "subtraction", "operations" ],
+			"spatial_needs": {
+				"platform": "none", "footprint_cells": 3,
+				"clearance": { "front": 2, "back": 1, "left": 1, "right": 1 },
+				"player_position": "front", "wall_backing": false, "orientation": "front",
+				"isolation": 1, "cluster_with": [ "vector_add", "dot_aligner" ], "preferred_zone": "any",
+				"measured_footprint_cells": 3, "footprint_source": "designed"
+			}
+		},
 		"orbit_pair": {
 			"lookup_name": "orbit_pair",
 			"scene": "res://commons/artifacts/orbit_pair/orbit_pair.tscn",
