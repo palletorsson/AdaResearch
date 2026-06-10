@@ -126,7 +126,8 @@ func _build() -> void:
 	label.outline_size = 10
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label.no_depth_test = true
-	label.position = hub + Vector3(0.0, tau_len + 0.45, 0.0)
+	# Keep the readout low and in front of the rig so a tall τ arrow can't push it off-frame.
+	label.position = hub + Vector3(0.0, 0.6, 0.55)
 	rig.add_child(label)
 
 	_settle(rig)
