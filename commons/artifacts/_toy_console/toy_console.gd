@@ -22,6 +22,16 @@ const PAD_SCENE := "res://commons/interactables/slider_plane.tscn"
 const PAD_LIMIT := 0.2       # slider_plane's default ±travel on each axis
 const DISPLAY_SIZE := 0.78   # the demo is scaled to sit on the console top
 
+# --- Dieter Rams / Braun palette: light matte housing, one warm accent, calm
+#     dark display, dark functional type. "Less, but better" — the housing recedes
+#     so the vector is the only expressive thing.
+const BRAUN_ACCENT := Color(0.86, 0.34, 0.11)    # the one warm element — the grab points
+const PANEL_LIGHT := Color(0.81, 0.79, 0.75)     # warm off-white body
+const PANEL_TRIM := Color(0.70, 0.68, 0.64)      # slightly darker light grey
+const DISPLAY_DARK := Color(0.12, 0.12, 0.135)   # the calm anthracite screen (no glow, no green)
+const TEXT_DARK := Color(0.17, 0.17, 0.19)       # functional labels on the light housing
+const TEXT_DISPLAY := Color(0.90, 0.89, 0.85)    # warm off-white readout on the dark screen
+
 @export var emissive: bool = true
 
 var _rng := RandomNumberGenerator.new()
@@ -66,25 +76,27 @@ func _ensure_rack() -> void:
 	_rack_built = true
 	var meta: Dictionary = _console_meta()
 
-	# console body + top trim
-	add_child(_box(Vector3(0.0, 0.46, 0.0), Vector3(1.5, 0.92, 0.62), _panel_mat(Color(0.10, 0.11, 0.13))))
-	add_child(_box(Vector3(0.0, 0.93, 0.0), Vector3(1.54, 0.04, 0.66), _panel_mat(Color(0.17, 0.18, 0.21))))
+	# light matte housing + top trim (Braun: the body recedes)
+	add_child(_box(Vector3(0.0, 0.46, 0.0), Vector3(1.5, 0.92, 0.62), _panel_mat(PANEL_LIGHT)))
+	add_child(_box(Vector3(0.0, 0.93, 0.0), Vector3(1.54, 0.04, 0.66), _panel_mat(PANEL_TRIM)))
+	# one thin warm accent line along the front top edge — the single Braun gesture
+	add_child(_box(Vector3(0.0, 0.885, 0.315), Vector3(1.5, 0.014, 0.012), _accent_mat()))
 
-	# the monitor (left): a dark screen with the readout on its face
+	# the monitor (left): a calm dark display in a light bezel (the Braun inversion)
 	var scr := Vector3(-0.48, 1.16, 0.10)
-	add_child(_box(scr + Vector3(0.0, 0.0, -0.02), Vector3(0.54, 0.46, 0.05), _panel_mat(Color(0.04, 0.04, 0.06))))
-	add_child(_box(scr, Vector3(0.48, 0.40, 0.01), _screen_mat()))
+	add_child(_box(scr + Vector3(0.0, 0.0, -0.02), Vector3(0.56, 0.48, 0.05), _panel_mat(PANEL_TRIM)))   # light bezel
+	add_child(_box(scr, Vector3(0.48, 0.40, 0.01), _screen_mat()))                                       # dark display
 	monitor_label = Label3D.new()
 	monitor_label.name = "MonitorReadout"
 	monitor_label.font_size = 36
 	monitor_label.pixel_size = 0.0011
-	monitor_label.modulate = Color(0.55, 0.92, 1.0)
+	monitor_label.modulate = TEXT_DISPLAY
 	monitor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	monitor_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	monitor_label.position = scr + Vector3(0.0, 0.0, 0.012)
 	monitor_label.text = "..."
 	add_child(monitor_label)
-	add_child(_label_plate(String(meta.get("title", "TOY")), Vector3(-0.48, 1.42, 0.10), 24, Color(0.78, 0.84, 0.94)))
+	add_child(_label_plate(String(meta.get("title", "TOY")), Vector3(-0.48, 1.43, 0.10), 22, TEXT_DARK))
 
 	# the control(s): a multi-control bank if _controls() is overridden, else one slider
 	var specs: Array = _controls()
@@ -121,8 +133,9 @@ func _build_single_slider(meta: Dictionary) -> void:
 		if s.has_method("set_normalized_value"): s.call("set_normalized_value", _param_get())
 		if s.has_signal("slider_moved") and not s.is_connected("slider_moved", _on_slider_moved):
 			s.connect("slider_moved", _on_slider_moved)
+		_accent_handles(s)
 		_slider = s
-	add_child(_label_plate(String(meta.get("slider", "PARAM")) + "  (drag →)", Vector3(0.46, 1.06, 0.16), 20, Color(0.7, 0.8, 0.9)))
+	add_child(_label_plate(String(meta.get("slider", "PARAM")) + "  (drag →)", Vector3(0.46, 1.06, 0.16), 20, TEXT_DARK))
 
 
 # --- the multi-control bank (sliders / dials / 2D pads in a row) -------------
@@ -156,8 +169,9 @@ func _build_pad(spec: Dictionary, x: float) -> void:
 		var handler: Callable = _make_pad_handler(spec)
 		if inner.has_signal("slider_moved") and not inner.is_connected("slider_moved", handler):
 			inner.connect("slider_moved", handler)
+	_accent_handles(pad)
 	_controls_built.append(pad)
-	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.02, 0.30), 18, Color(0.72, 0.82, 0.94)))
+	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.02, 0.30), 18, TEXT_DARK))
 
 
 func _build_scalar(spec: Dictionary, kind: String, x: float) -> void:
@@ -175,8 +189,9 @@ func _build_scalar(spec: Dictionary, kind: String, x: float) -> void:
 	var handler: Callable = _make_scalar_handler(c, spec)
 	if c.has_signal(sig) and not c.is_connected(sig, handler):
 		c.connect(sig, handler)
+	_accent_handles(c)
 	_controls_built.append(c)
-	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.06, 0.18), 18, Color(0.72, 0.82, 0.94)))
+	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.06, 0.18), 18, TEXT_DARK))
 
 
 # pad signal carries a Vector2 in ±PAD_LIMIT → normalize to -1..1, push, rebuild.
@@ -198,7 +213,7 @@ func _make_scalar_handler(node: Node, spec: Dictionary) -> Callable:
 func set_readout(text: String, color: Color = Color(0.55, 0.92, 1.0)) -> void:
 	if monitor_label:
 		monitor_label.text = text
-		monitor_label.modulate = color
+		monitor_label.modulate = color.lerp(TEXT_DISPLAY, 0.55)   # calm the per-toy tint toward warm white
 
 
 ## Fresh demo container — call at the top of _build_demo(), build into the returned rig.
@@ -221,18 +236,39 @@ func _fresh_demo_rig(rig_name: String) -> Node3D:
 func _panel_mat(c: Color) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = c
-	m.metallic = 0.25
-	m.roughness = 0.8
+	m.metallic = 0.0
+	m.roughness = 0.92   # matte, soft — the Braun housing
 	return m
 
 
 func _screen_mat() -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
-	m.albedo_color = Color(0.02, 0.05, 0.05)
+	m.albedo_color = DISPLAY_DARK
+	m.metallic = 0.1
+	m.roughness = 0.35   # a calm dark display, faintly lit for legibility — no green, no glow
 	m.emission_enabled = true
-	m.emission = Color(0.05, 0.16, 0.13)
-	m.emission_energy_multiplier = 0.7
+	m.emission = DISPLAY_DARK
+	m.emission_energy_multiplier = 0.5
 	return m
+
+
+func _accent_mat() -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = BRAUN_ACCENT
+	m.roughness = 0.5
+	m.emission_enabled = true
+	m.emission = BRAUN_ACCENT
+	m.emission_energy_multiplier = 0.25 if emissive else 0.0
+	return m
+
+
+## The one warm element: tint every grabbable handle mesh Braun-orange, so the
+## thing you touch is the only saturated thing on the housing.
+func _accent_handles(root: Node) -> void:
+	for child in root.get_children():
+		if child is MeshInstance3D and String(child.name).findn("handle") != -1:
+			(child as MeshInstance3D).material_override = _accent_mat()
+		_accent_handles(child)
 
 
 func _label_plate(text: String, pos: Vector3, font: int, col: Color) -> Label3D:
@@ -241,7 +277,8 @@ func _label_plate(text: String, pos: Vector3, font: int, col: Color) -> Label3D:
 	l.font_size = font
 	l.pixel_size = 0.0011
 	l.modulate = col
-	l.outline_size = 6
+	l.outline_size = 4
+	l.outline_modulate = Color(0.86, 0.84, 0.80, 0.9)   # soft light halo so dark type reads on the housing
 	l.position = pos
 	return l
 
