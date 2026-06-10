@@ -89,7 +89,8 @@ func _build() -> void:
 	var aim_dir: Vector3 = dir_to_foe.rotated(Vector3.UP, miss_angle).normalized()
 	var dot: float = clampf(aim_dir.dot(dir_to_foe), -1.0, 1.0)
 	var theta_deg: float = rad_to_deg(acos(dot))
-	var lock: float = clampf((dot - 0.5) / (LOCK_DOT - 0.5), 0.0, 1.0)
+	# Stay enemy-red until the aim genuinely closes; only then warm toward friend-green.
+	var lock: float = clampf((dot - 0.78) / (LOCK_DOT - 0.78), 0.0, 1.0)
 	var converted: bool = dot >= LOCK_DOT
 
 	# --- the rig -----------------------------------------------------------------
@@ -148,7 +149,7 @@ func _build() -> void:
 	label.outline_size = 10
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label.no_depth_test = true
-	label.position = head + Vector3(0.0, 0.95, 0.0)
+	label.position = head + Vector3(0.0, 0.55, 0.0)
 	rig.add_child(label)
 
 	_settle(rig)

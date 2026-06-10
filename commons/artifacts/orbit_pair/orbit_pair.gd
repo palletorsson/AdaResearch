@@ -98,7 +98,8 @@ func _build() -> void:
 	var r1: float = 0.13 * pow(m1, 0.34)
 	var r2: float = 0.13 * pow(m2, 0.34)
 	rig.add_child(_sphere(p1, r1, _glow_mat(color_a, 1.6)))                          # star (glows)
-	rig.add_child(_sphere(p1, r1 * 1.7, _halo_mat(color_a)))                         # star halo
+	# Halo scales with mass dominance, so an equal binary reads as two equal bodies.
+	rig.add_child(_sphere(p1, r1 * (1.15 + mass_ratio * 0.95), _halo_mat(color_a)))  # star halo
 	rig.add_child(_sphere(p2, r2, _body_mat(color_b)))                              # planet
 
 	# --- the gravity vectors: equal and opposite, along the connecting line ------
@@ -120,7 +121,7 @@ func _build() -> void:
 	label.outline_size = 10
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label.no_depth_test = true
-	label.position = bary + Vector3(0.0, maxf(d1, d2) + 0.55, 0.0)
+	label.position = bary + Vector3(0.0, maxf(d1, d2) + 0.32, 0.0)
 	rig.add_child(label)
 
 	_settle(rig)
