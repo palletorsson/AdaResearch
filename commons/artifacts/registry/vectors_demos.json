@@ -6,6 +6,168 @@
 		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
 	},
 	"artifacts": {
+		"projection_shadow": {
+			"lookup_name": "projection_shadow",
+			"scene": "res://commons/artifacts/projection_shadow/projection_shadow.tscn",
+			"class_name": "ProjectionShadow",
+			"name": "Projection Shadow ((a·n̂)n̂ as a shadow)",
+			"description": "Vector projection made playable - the third operations toy with dot_aligner (dot) and torque_crank (cross). A sun overhead, an object floating off a rail; the object's shadow lands on the rail, and the shadow's distance from the origin IS a*n_hat - the projection of the object's position onto the axis n_hat. The perpendicular drop from object to shadow is the rejection (what doesn't live along n_hat). DNA: projection 0..1 swings the object from perpendicular (a perp n, no shadow) to along the rail (a parallel n, full shadow); seed jitters length; color_a rail/axis, color_b the vector a, accent the projection shadow, sun_color the light.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"vector",
+				"projection",
+				"dot-product",
+				"shadow",
+				"rejection",
+				"embodied"
+			],
+			"parameters": {
+				"seed": "Length jitter (default 0)",
+				"projection": "0..1 swings the object from perpendicular to along the rail - drives a*n_hat and the shadow length (default 0.7)",
+				"complexity": "Detail (default 6)",
+				"color_a": "Rail / axis n_hat",
+				"color_b": "The vector a",
+				"accent": "The projection shadow",
+				"sun_color": "The light",
+				"emissive": "Bool - lift glow (default true)",
+				"sculpt_height": "Height in meters",
+				"sculpt_width": "Footprint width in meters"
+			},
+			"dev_themes": [
+				"linear_algebra",
+				"projection",
+				"dot_product",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [ "dot_aligner", "torque_crank" ],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
+		},
+		"torque_crank": {
+			"lookup_name": "torque_crank",
+			"scene": "res://commons/artifacts/torque_crank/torque_crank.tscn",
+			"class_name": "TorqueCrank",
+			"name": "Torque Crank (r × F you can feel)",
+			"description": "The cross product made playable - the operations pair to dot_aligner. A lever arm r and a push F meet at the hub of a flywheel; the torque tau = r x F = |r||F|sin(theta) points up the axle and spins the wheel. Force along the arm does nothing (sin 0); force across it spins hardest (sin 90). Shows r (cyan), F (orange), the tau torque axis (gold, up the axle), spin arrows and an rpm readout. DNA: leverage 0..1 sets the angle between r and F (0 = along the arm, 1 = perpendicular); seed jitters the arm bearing; color_a steel rig, color_b arm, force_color push, accent torque axis + flywheel glow.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"vector",
+				"cross-product",
+				"torque",
+				"leverage",
+				"rotation",
+				"embodied"
+			],
+			"parameters": {
+				"seed": "Arm bearing jitter (default 0)",
+				"leverage": "0..1 angle of the push F from the arm r - drives the torque sin(theta), the tau vector length and the spin (default 0.78)",
+				"complexity": "Flywheel spokes + spin-arc resolution (default 6)",
+				"color_a": "Steel rig",
+				"color_b": "The arm vector r",
+				"force_color": "The push F",
+				"accent": "The torque axis tau + flywheel glow",
+				"emissive": "Bool - lift glow (default true)",
+				"sculpt_height": "Height in meters",
+				"sculpt_width": "Footprint width in meters"
+			},
+			"dev_themes": [
+				"linear_algebra",
+				"cross_product",
+				"torque",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [ "dot_aligner" ],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
+		},
+		"dot_aligner": {
+			"lookup_name": "dot_aligner",
+			"scene": "res://commons/artifacts/dot_aligner/dot_aligner.tscn",
+			"class_name": "DotAligner",
+			"name": "Dot-Aligner (aim · foe = mercy)",
+			"description": "The dot product made playable, and the embodied vectors-forces arc's operations toy. A swivel turret on a pedestal aims at a drifting foe-cube; the gold AIM vector (a) and the cyan DIRECTION-TO-FOE vector (b) meet at an angle, and a*b = cos(theta) is the charge. As alignment rises the angle closes, a lock BEAM ignites, and the foe converts FOE -> FRIEND (red -> green) - agreement here is mercy, not a kill. DNA: alignment 0..1 sets how locked the aim is (drives cos(theta), the beam, the conversion); seed jitters the foe bearing; color_a steel rig, color_b vectors, accent lock beam, foe_color/friend_color the conversion.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"vector",
+				"dot-product",
+				"alignment",
+				"targeting",
+				"catalyst",
+				"foe-to-friend",
+				"embodied"
+			],
+			"parameters": {
+				"seed": "Foe bearing jitter (default 0)",
+				"alignment": "0..1 how closely the aim points at the foe - drives cos(theta), the beam, and the conversion (default 0.78)",
+				"complexity": "Angle-arc resolution (default 6)",
+				"color_a": "Steel rig / barrel",
+				"color_b": "The vectors a and b",
+				"accent": "Lock beam / charge ring",
+				"foe_color": "Enemy state (default red)",
+				"friend_color": "Befriended state (default green)",
+				"emissive": "Bool - lift glow (default true)",
+				"sculpt_height": "Height in meters",
+				"sculpt_width": "Footprint width in meters"
+			},
+			"dev_themes": [
+				"linear_algebra",
+				"dot_product",
+				"vectors",
+				"catalyst",
+				"qfep"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": { "front": 2, "back": 1, "left": 1, "right": 1 },
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
+		},
 		"combined_forces_demo": {
 			"lookup_name": "combined_forces_demo",
 			"scene": "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.tscn",
