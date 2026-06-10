@@ -6,6 +6,72 @@
 		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
 	},
 	"artifacts": {
+		"launch_arc": {
+			"lookup_name": "launch_arc",
+			"scene": "res://commons/artifacts/launch_arc/launch_arc.tscn",
+			"class_name": "LaunchArc",
+			"name": "Launch Arc (projectile motion)",
+			"description": "Projectile motion made playable - the launch / F=ma toy for the embodied vectors-forces arc (the pad that throws you). A launch pad fires at angle theta with speed v; gravity bends the straight launch vector into a parabola. The launch velocity decomposes into a horizontal vx (carries you) and a vertical vy (fights gravity); the trade between them sets the range = v^2 sin(2theta)/g - which peaks at 45 degrees. Shows the tilted glowing pad, the stroboscopic projectile arc, the launch vector + its vx/vy components, and apex / range markers. DNA: angle 0..1 sets the launch angle (flat to steep), power 0..1 the launch speed; color_a pad + components, color_b the arc + launch vector, accent pad glow + apex/range.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [ "forces" ],
+			"tags": [ "force", "gravity", "projectile", "f=ma", "decomposition", "embodied" ],
+			"parameters": {
+				"seed": "Unused structural seed (default 0)",
+				"angle": "0..1 launch angle, flat to steep - range peaks at 45 deg (default 0.5)",
+				"power": "0..1 launch speed v0 (default 0.6)",
+				"complexity": "Arc sample count (default 6)",
+				"color_a": "Pad + component arrows",
+				"color_b": "The arc + launch vector",
+				"accent": "Pad glow + apex / range markers",
+				"emissive": "Bool - lift glow (default true)",
+				"sculpt_height": "Height in meters",
+				"sculpt_width": "Footprint width in meters"
+			},
+			"dev_themes": [ "forces", "gravity", "projectile", "vectors" ],
+			"spatial_needs": {
+				"platform": "none", "footprint_cells": 3,
+				"clearance": { "front": 1, "back": 1, "left": 2, "right": 1 },
+				"player_position": "front", "wall_backing": false, "orientation": "front",
+				"isolation": 1, "cluster_with": [ "drag_lane" ], "preferred_zone": "any",
+				"measured_footprint_cells": 3, "footprint_source": "designed"
+			}
+		},
+		"drag_lane": {
+			"lookup_name": "drag_lane",
+			"scene": "res://commons/artifacts/drag_lane/drag_lane.tscn",
+			"class_name": "DragLane",
+			"name": "Drag Lane (F = -b·v you feel)",
+			"description": "Friction / drag made felt - a forces toy for the embodied vectors-forces arc. A runner enters a resistant medium at full tilt and slows under F = -b*v, so its velocity decays v ~ e^(-bt). Frozen stroboscopically, the runner's snapshots bunch together and its velocity arrows shrink as the drag eats the motion - run through air, water, honey and each pulls back harder. DNA: drag 0..1 sweeps from glide (snapshots evenly spread) to dead-stop (piled up fast); seed jitters the medium motes; color_a lane, color_b runner + velocity, accent drag particles, medium_color the resistant volume.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [ "forces" ],
+			"tags": [ "force", "friction", "drag", "velocity", "decay", "embodied" ],
+			"parameters": {
+				"seed": "Medium-mote jitter (default 0)",
+				"drag": "0..1 drag strength - sweeps the velocity decay from glide to dead-stop (default 0.5)",
+				"complexity": "Snapshot count (default 6)",
+				"color_a": "Lane / rig",
+				"color_b": "Runner + velocity arrows",
+				"accent": "Drag particles",
+				"medium_color": "The resistant medium volume",
+				"emissive": "Bool - lift glow (default true)",
+				"sculpt_height": "Height in meters",
+				"sculpt_width": "Footprint width in meters"
+			},
+			"dev_themes": [ "forces", "friction", "drag", "vectors" ],
+			"spatial_needs": {
+				"platform": "none", "footprint_cells": 3,
+				"clearance": { "front": 1, "back": 1, "left": 2, "right": 1 },
+				"player_position": "front", "wall_backing": false, "orientation": "front",
+				"isolation": 1, "cluster_with": [], "preferred_zone": "any",
+				"measured_footprint_cells": 3, "footprint_source": "designed"
+			}
+		},
 		"projection_shadow": {
 			"lookup_name": "projection_shadow",
 			"scene": "res://commons/artifacts/projection_shadow/projection_shadow.tscn",
