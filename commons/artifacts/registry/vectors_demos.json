@@ -6,6 +6,39 @@
 		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
 	},
 	"artifacts": {
+		"orbit_pair": {
+			"lookup_name": "orbit_pair",
+			"scene": "res://commons/artifacts/orbit_pair/orbit_pair.tscn",
+			"class_name": "OrbitPair",
+			"name": "Orbit Pair (gravity, F = G m₁m₂/r²)",
+			"description": "Gravity and orbits made playable - the clean rebuild of the old two-body sim, for the embodied vectors-forces arc. Two bodies pull on each other along the line between them, equal and opposite (Newton's third law), and orbit their shared centre of mass (the barycenter). Make one heavier and the barycenter slides toward it while the orbits resize - an equal binary becomes a star with a far-flung planet. Shows the two bodies on their dotted orbits, the equal-and-opposite gravity vectors, velocity tangents, the barycenter and the line of attraction, with an F = G m1m2/r^2 readout. DNA: mass_ratio 0..1 from a symmetric binary to a dominant star+planet; seed sets the orbital phase; color_a star, color_b planet, accent gravity vectors, orbit_color the paths.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [ "forces" ],
+			"tags": [ "force", "gravity", "orbit", "inverse-square", "two-body", "barycenter", "embodied" ],
+			"parameters": {
+				"seed": "Orbital phase (default 0)",
+				"mass_ratio": "0..1 from equal binary to dominant star+planet - shifts the barycenter and resizes the orbits (default 0.6)",
+				"complexity": "Orbit-ring resolution (default 6)",
+				"color_a": "The heavier body (star)",
+				"color_b": "The lighter body (planet)",
+				"accent": "Gravity force vectors",
+				"orbit_color": "The orbit paths",
+				"emissive": "Bool - lift glow (default true)",
+				"sculpt_height": "Height in meters",
+				"sculpt_width": "Footprint width in meters"
+			},
+			"dev_themes": [ "forces", "gravity", "orbital_mechanics", "vectors" ],
+			"spatial_needs": {
+				"platform": "none", "footprint_cells": 3,
+				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+				"player_position": "front", "wall_backing": false, "orientation": "any",
+				"isolation": 1, "cluster_with": [ "circle_train" ], "preferred_zone": "any",
+				"measured_footprint_cells": 3, "footprint_source": "designed"
+			}
+		},
 		"circle_train": {
 			"lookup_name": "circle_train",
 			"scene": "res://commons/artifacts/circle_train/circle_train.tscn",

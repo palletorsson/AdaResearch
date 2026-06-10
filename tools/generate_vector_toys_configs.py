@@ -48,6 +48,24 @@ TOYS = {
         "speed", [0.25, 0.62, 1.0], 1.4, 2.8,
         "centripetal — a = v²/r; velocity grows linearly, the inward force quadratically", {},
     ),
+    "orbit_pair": (
+        "res://commons/artifacts/orbit_pair/orbit_pair.tscn",
+        "mass_ratio", [0.0, 0.5, 1.0], 1.6, 2.6,
+        "gravity — F = G m₁m₂/r²; mass ratio slides the barycenter from binary to star+planet", {},
+    ),
+}
+
+# Existing physics-sim scenes promoted into the gallery as-is (one specimen each, no
+# DNA sweep) so the self-improving loop can pick them up alongside the clean toys.
+PROMOTED = {
+    "newton_cradle":   ("res://algorithms/physicssimulation/newtoncradle/newtoncradle.tscn",
+                        "momentum conservation — p = mv passes through the still middle balls"),
+    "bouncing_ball":   ("res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
+                        "restitution — balls bounce in a box, velocity reflecting on each wall"),
+    "viscosity_layers":("res://algorithms/physicssimulation/viscositylayers/viscositylayers.tscn",
+                        "viscosity — drag through air / water / honey, each column resisting more"),
+    "rigid_body":      ("res://algorithms/physicssimulation/rigidbody/rigidbody.tscn",
+                        "rigid-body dynamics — collisions and stacking under force"),
 }
 
 LABELS = ["low", "mid", "high"]
@@ -72,6 +90,18 @@ def main() -> int:
                             "config": "/vector-toys-gallery/%s.json" % cid,
                             "notes": "%s — %s" % (name, desc)})
             render.append("%s\t%s" % (cid, scene))
+    # Promoted existing physics scenes (no DNA sweep) — one specimen each.
+    for key, (scene, note) in PROMOTED.items():
+        cid = "vt_promoted_%s" % key
+        name = key.replace("_", " ").title()
+        json.dump({"id": cid, "name": name, "description": note, "family": "promoted",
+                   "scene": scene, "dna": {}},
+                  open(os.path.join(GAL, cid + ".json"), "w", encoding="utf-8"),
+                  indent=2, ensure_ascii=False)
+        entries.append({"id": cid, "image": "/vector-toys-gallery/%s.png" % cid,
+                        "config": "/vector-toys-gallery/%s.json" % cid,
+                        "notes": "%s — %s (existing sim, promoted for the loop)" % (name, note)})
+        render.append("%s\t%s" % (cid, scene))
     json.dump({"version": 1,
                "description": "Embodied vector & force toys — six playable artifacts each sweeping its principle's DNA parameter: dot_aligner (dot) / torque_crank (cross) / projection_shadow (projection) / drag_lane (friction) / launch_arc (projectile) / circle_train (centripetal). The grammar is vectors and forces; you feel each one move.",
                "entries": entries},
