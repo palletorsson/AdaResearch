@@ -30,7 +30,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("projection"): projection = clampf(float(config_data["projection"]), 0.0, 1.0)
 	if config_data.has("complexity"): complexity = int(config_data["complexity"])
-	if config_data.has("emissive"): emissive = bool(config_data["emissive"])
+	apply_base_config(config_data)
 	color_a = _parse_color(config_data.get("color_a", color_a), color_a)
 	color_b = _parse_color(config_data.get("color_b", color_b), color_b)
 	accent = _parse_color(config_data.get("accent", accent), accent)

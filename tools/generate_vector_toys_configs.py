@@ -78,7 +78,7 @@ def main() -> int:
         for i, val in enumerate(values):
             tag = LABELS[i] if i < len(LABELS) else str(i)
             cid = "vt_%s_%s" % (toy, tag)
-            dna = {param: val, "complexity": 7, "sculpt_height": sh, "sculpt_width": sw}
+            dna = {param: val, "complexity": 7, "demo_only": True, "sculpt_height": sh, "sculpt_width": sw}
             dna.update(extra)
             name = "%s — %s %.2f" % (toy.replace("_", " ").title(), param, val)
             desc = "%s  (%s = %.2f)" % (principle, param, val)
@@ -111,7 +111,7 @@ def main() -> int:
             word = "addition" if op == "add" else "subtraction"
             json.dump({"id": cid, "name": "Vector %s (seed %d)" % (op.title(), s),
                        "description": "two-pad %s console — drag each pad to place a vector tip; a,b head-to-tail, resultant live" % word,
-                       "family": "vector_%s" % op, "scene": VOP_SCENE, "dna": {"seed": s, "op": op}},
+                       "family": "vector_%s" % op, "scene": VOP_SCENE, "dna": {"seed": s, "op": op, "demo_only": True}},
                       open(os.path.join(GAL, cid + ".json"), "w", encoding="utf-8"), indent=2, ensure_ascii=False)
             entries.append({"id": cid, "image": "/vector-toys-gallery/%s.png" % cid,
                             "config": "/vector-toys-gallery/%s.json" % cid,

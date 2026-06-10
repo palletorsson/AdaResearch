@@ -41,7 +41,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("op"):
 		op = Op.SUB if String(config_data["op"]).to_lower().begins_with("sub") else Op.ADD
-	if config_data.has("emissive"): emissive = bool(config_data["emissive"])
+	apply_base_config(config_data)
 	color_a = _parse_color(config_data.get("color_a", color_a), color_a)
 	color_b = _parse_color(config_data.get("color_b", color_b), color_b)
 	color_c = _parse_color(config_data.get("color_c", color_c), color_c)

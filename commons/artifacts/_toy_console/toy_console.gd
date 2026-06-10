@@ -33,6 +33,11 @@ const TEXT_DARK := Color(0.17, 0.17, 0.19)       # functional labels on the ligh
 const TEXT_DISPLAY := Color(0.90, 0.89, 0.85)    # warm off-white readout on the dark screen
 
 @export var emissive: bool = true
+## Capture/gallery mode: skip the rack entirely — just the demo at full size with a
+## billboard readout. The in-map/VR artifact keeps demo_only=false (the full console).
+@export var demo_only: bool = false
+
+const DEMO_ONLY_SIZE := 1.9   # demo scale target when there's no console under it
 
 var _rng := RandomNumberGenerator.new()
 var _rack_built := false
@@ -69,12 +74,55 @@ func _console_ready() -> void:
 	_build_demo()
 
 
+## Parse the base-level DNA keys — call from each toy's apply_grid_config
+## BEFORE _ensure_rack(), since demo_only changes what the rack builds.
+func apply_base_config(config_data: Dictionary) -> void:
+	if config_data.has("emissive"): emissive = bool(config_data["emissive"])
+	if config_data.has("demo_only"):
+		var v: bool = bool(config_data["demo_only"])
+		# _ready may have already built the other mode (config arrives after add-to-tree):
+		# tear the console down so _ensure_rack() rebuilds in the requested mode.
+		if v != demo_only and _rack_built:
+			_reset_console()
+		demo_only = v
+
+
+func _reset_console() -> void:
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
+	_rack_built = false
+	demo_root = null
+	monitor_label = null
+	_slider = null
+	_controls_built = []
+
+
 ## Builds the console ONCE: body, monitor screen (left), slider (right), demo mount.
 func _ensure_rack() -> void:
 	if _rack_built:
 		return
 	_rack_built = true
 	var meta: Dictionary = _console_meta()
+
+	# demo_only: no rack — a free-standing demo with a billboard readout (gallery captures)
+	if demo_only:
+		monitor_label = Label3D.new()
+		monitor_label.name = "BillboardReadout"
+		monitor_label.font_size = 30
+		monitor_label.pixel_size = 0.0011
+		monitor_label.modulate = TEXT_DISPLAY
+		monitor_label.outline_size = 8
+		monitor_label.outline_modulate = Color(0.10, 0.10, 0.12, 0.85)
+		monitor_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		monitor_label.no_depth_test = true
+		monitor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		monitor_label.position = Vector3(0.0, DEMO_ONLY_SIZE + 0.30, 0.0)
+		add_child(monitor_label)
+		demo_root = Node3D.new()
+		demo_root.name = "DemoMount"
+		add_child(demo_root)
+		return
 
 	# light matte housing + top trim (Braun: the body recedes)
 	add_child(_box(Vector3(0.0, 0.46, 0.0), Vector3(1.5, 0.92, 0.62), _panel_mat(PANEL_LIGHT)))
@@ -421,7 +469,8 @@ func _settle(rig: Node3D) -> void:
 	if aabb.size.length() < 0.001:
 		return
 	var span: float = maxf(aabb.size.x, maxf(aabb.size.y, aabb.size.z))
-	var s: float = 1.0 if span <= 0.001 else clampf(DISPLAY_SIZE / span, 0.2, 4.0)
+	var target: float = DEMO_ONLY_SIZE if demo_only else DISPLAY_SIZE
+	var s: float = 1.0 if span <= 0.001 else clampf(target / span, 0.2, 4.0)
 	rig.scale = Vector3.ONE * s
 	var c: Vector3 = aabb.get_center() * s
 	rig.position = Vector3(-c.x, -aabb.position.y * s, -c.z)
