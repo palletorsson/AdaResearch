@@ -14,7 +14,7 @@ const PLATE_SCENE := "res://commons/artifacts/pattern_tunnel/pattern_control_pla
 
 @export var body_color: Color = Color(0.55, 0.56, 0.59)   # brushed grey metal
 @export var trim_color: Color = Color(0.28, 0.29, 0.32)   # dark trim
-@export var plate_scale: float = 0.85   # board scaled down a bit; the plate counter-scales its XR controls back to world-1.0
+@export var plate_scale: float = 0.78   # board scaled down; the plate counter-scales its XR controls back to world-1.0
 @export var tilt_deg: float = 28.0
 
 # the slanted face is centred here (a point on the upper-front of the cabinet)
@@ -67,7 +67,7 @@ func _build() -> void:
 	var pocket := CSGBox3D.new()
 	pocket.name = "Pocket"
 	pocket.operation = CSGShape3D.OPERATION_SUBTRACTION
-	pocket.size = Vector3(1.32, 1.24, 0.08)
+	pocket.size = Vector3(1.22, 1.16, 0.08)
 	pocket.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
 	pocket.position = FACE_CENTER
 	body.add_child(pocket)

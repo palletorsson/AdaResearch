@@ -78,8 +78,10 @@ func _build_console() -> void:
 			{"key": "speed", "label": "SPEED", "names": [], "init": fill_speed},
 		])
 	add_child(plate)
-	(plate as Node3D).position = Vector3(2.7, 0.0, 1.2)
-	(plate as Node3D).rotation_degrees = Vector3(0.0, -58.0, 0.0)
+	# in front of the mouth, facing the player, so you watch the tube paint itself PAST it
+	# (same line of sight: console result + the live tunnel beyond)
+	(plate as Node3D).position = Vector3(0.0, 0.0, 2.3)
+	(plate as Node3D).rotation_degrees = Vector3(0.0, 0.0, 0.0)
 	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate_change):
 		plate.connect("changed", _on_plate_change)
 	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
