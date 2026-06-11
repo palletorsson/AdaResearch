@@ -1,10 +1,11 @@
 extends Node3D
 
-## Display Console — a grey-metal kiosk body that carries a control plate as its
-## reclined screen face. The pattern_control_plate sits on top, tilted back ~28° like
-## a lectern / data console, a bit smaller than free-standing. Forwards configure() to
-## the plate and relays its `changed` / `randomized` signals, so a machine can drop a
-## display_console in place of the bare plate and get the same wiring.
+## Display Console — a grey-metal kiosk whose slanted screen face is a real CSG cut.
+##
+## A CSGCombiner3D: a cabinet block, minus a 28°-rotated wedge (the angled top face),
+## minus a shallow pocket where the control plate is recessed — so the board sits INSIDE
+## the console, framed by the metal bezel, like the reference data consoles. Forwards
+## configure() to the plate and relays its changed / randomized signals.
 
 signal changed(key: String, value: float)
 signal randomized()
@@ -15,6 +16,9 @@ const PLATE_SCENE := "res://commons/artifacts/pattern_tunnel/pattern_control_pla
 @export var trim_color: Color = Color(0.28, 0.29, 0.32)   # dark trim
 @export var plate_scale: float = 0.5
 @export var tilt_deg: float = 28.0
+
+# the slanted face is centred here (a point on the upper-front of the cabinet)
+const FACE_CENTER := Vector3(0.0, 1.12, 0.13)
 
 var _plate: Node = null
 var _cfg_title: String = "PATTERN CONTROL"
@@ -37,15 +41,43 @@ func configure(title: String, specs: Array) -> void:
 func _build() -> void:
 	_built = true
 
-	# --- the cabinet body (a grey-metal podium) ---------------------------------
-	add_child(_box(Vector3(0.0, 0.56, -0.04), Vector3(0.92, 1.12, 0.58), _mat(body_color, 0.45, 0.4)))
-	add_child(_box(Vector3(0.0, 0.04, 0.0), Vector3(0.98, 0.08, 0.66), _mat(trim_color, 0.6, 0.2)))     # base plinth
-	add_child(_box(Vector3(0.0, 1.13, -0.02), Vector3(0.96, 0.06, 0.64), _mat(trim_color, 0.6, 0.2)))   # top lip
-	# a small dark front panel detail (like the reference consoles)
-	add_child(_box(Vector3(0.0, 0.42, 0.27), Vector3(0.46, 0.5, 0.012), _mat(trim_color, 0.7, 0.15)))
-	add_child(_box(Vector3(0.20, 0.42, 0.28), Vector3(0.02, 0.08, 0.012), _mat(Color(0.7, 0.68, 0.64), 0.5, 0.3)))  # handle
+	# --- the cabinet body, cut by CSG -------------------------------------------
+	var body := CSGCombiner3D.new()
+	body.name = "Body"
+	add_child(body)
 
-	# --- the control plate, reclined on top -------------------------------------
+	var block := CSGBox3D.new()
+	block.name = "Block"
+	block.size = Vector3(0.92, 1.5, 0.58)
+	block.position = Vector3(0.0, 0.75, 0.0)
+	block.material = _mat(body_color, 0.45, 0.4)
+	body.add_child(block)
+
+	# the 28° wedge: a big box reclined by tilt, sitting above the face plane, whose
+	# under-side slices the top of the block into the slanted screen face.
+	var wedge := CSGBox3D.new()
+	wedge.name = "Cut28"
+	wedge.operation = CSGShape3D.OPERATION_SUBTRACTION
+	wedge.size = Vector3(1.4, 1.2, 1.4)
+	wedge.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
+	wedge.position = FACE_CENTER + Vector3(0.0, 0.0, 0.0) + _face_normal() * 0.6
+	body.add_child(wedge)
+
+	# a shallow pocket in the slanted face so the plate sits recessed (the bezel)
+	var pocket := CSGBox3D.new()
+	pocket.name = "Pocket"
+	pocket.operation = CSGShape3D.OPERATION_SUBTRACTION
+	pocket.size = Vector3(0.78, 0.7, 0.06)
+	pocket.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
+	pocket.position = FACE_CENTER + _face_normal() * 0.0
+	body.add_child(pocket)
+
+	# --- detailing (regular boxes) ----------------------------------------------
+	add_child(_box(Vector3(0.0, 0.04, 0.0), Vector3(0.98, 0.08, 0.66), _mat(trim_color, 0.6, 0.2)))   # base plinth
+	add_child(_box(Vector3(0.0, 0.42, 0.30), Vector3(0.46, 0.5, 0.012), _mat(trim_color, 0.7, 0.15))) # door
+	add_child(_box(Vector3(0.20, 0.42, 0.31), Vector3(0.02, 0.08, 0.012), _mat(Color(0.7, 0.68, 0.64), 0.5, 0.3)))  # handle
+
+	# --- the control plate, recessed flush in the slanted pocket ----------------
 	var plate: Node = load(PLATE_SCENE).instantiate()
 	plate.name = "Plate"
 	if plate.has_method("configure"):
@@ -53,14 +85,22 @@ func _build() -> void:
 	add_child(plate)
 	(plate as Node3D).scale = Vector3.ONE * plate_scale
 	(plate as Node3D).rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
-	# seated on the reclined top: board bottom (sliders) at the cabinet front edge,
-	# the screen row rising up-and-back
-	(plate as Node3D).position = Vector3(0.0, 1.1, 0.24)
+	# the plate's local board centre is ~0.62 above its origin; offset so the board
+	# centre lands on FACE_CENTER, just proud of the pocket floor.
+	var face_n := _face_normal()
+	var down_face := Vector3(0.0, -cos(deg_to_rad(tilt_deg)), sin(deg_to_rad(tilt_deg)))  # plate's local -Y in world
+	(plate as Node3D).position = FACE_CENTER + down_face * (0.62 * plate_scale) + face_n * 0.012
 	if plate.has_signal("changed"):
 		plate.connect("changed", func(k, v): changed.emit(k, v))
 	if plate.has_signal("randomized"):
 		plate.connect("randomized", func(): randomized.emit())
 	_plate = plate
+
+
+## Outward normal of the reclined face (plate's local +Z, tilted -tilt about X).
+func _face_normal() -> Vector3:
+	var t := deg_to_rad(tilt_deg)
+	return Vector3(0.0, sin(t), cos(t))
 
 
 func _box(pos: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
