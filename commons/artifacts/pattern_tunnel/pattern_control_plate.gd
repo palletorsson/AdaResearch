@@ -146,29 +146,32 @@ func _build_slider_box(spec: Dictionary, cx: float, cy: float) -> void:
 		s.call("set_param_name", "")
 	var names: Array = spec.get("names", [])
 	var count: int = names.size()
+	var mn: float = float(spec.get("min", 0.5))
+	var mx: float = float(spec.get("max", 8.0))
 	var init_norm: float = 0.5
 	if count > 1:
 		init_norm = float(int(spec.get("init", 0))) / float(count - 1)
-	else:
-		init_norm = clampf((float(spec.get("init", 0.5)) - 0.5) / 7.5, 0.0, 1.0)  # continuous 0.5..8
+	elif mx > mn:
+		init_norm = clampf((float(spec.get("init", mn)) - mn) / (mx - mn), 0.0, 1.0)
 	if s.has_method("set_normalized_value"):
 		s.call("set_normalized_value", init_norm)
 	if s.has_signal("slider_moved"):
-		s.connect("slider_moved", func(_v): _on_slider(key, s, names))
+		s.connect("slider_moved", func(_v): _on_slider(spec, s))
 
 
-func _on_slider(key: String, s: Node, names: Array) -> void:
+func _on_slider(spec: Dictionary, s: Node) -> void:
 	if not s.has_method("get_normalized_value"):
 		return
 	var norm: float = clampf(s.call("get_normalized_value"), 0.0, 1.0)
+	var names: Array = spec.get("names", [])
 	var value: float
 	if names.size() > 1:
 		value = float(clampi(roundi(norm * float(names.size() - 1)), 0, names.size() - 1))
 	else:
-		value = lerpf(0.5, 8.0, norm)
-	_values[key] = value
+		value = lerpf(float(spec.get("min", 0.5)), float(spec.get("max", 8.0)), norm)
+	_values[spec["key"]] = value
 	_update_monitor()
-	changed.emit(key, value)
+	changed.emit(spec["key"], value)
 
 
 func _update_monitor() -> void:
