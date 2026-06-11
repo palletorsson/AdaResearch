@@ -58,11 +58,12 @@ func _build() -> void:
 # ── the console ──────────────────────────────────────────────────────────────
 
 func _build_console() -> void:
-	# the Dieter Rams pattern control plate, to the right of the mouth, angled toward
-	# the player at the entrance. The plate carries the sliders + cube button + monitor;
-	# we just wire its signals to the tunnel.
-	var plate: Node = load("res://commons/artifacts/pattern_tunnel/pattern_control_plate.tscn").instantiate()
-	plate.name = "ControlPlate"
+	# the display-console kiosk, on the floor to the right of the mouth, angled toward the
+	# player at the entrance. The console recesses the control plate (sliders + cube + the
+	# pattern rect) in its 28° screen face and relays its signals; we wire those to the
+	# tunnel. (Position / facing is a quick VR tweak.)
+	var plate: Node = load("res://commons/artifacts/pattern_tunnel/display_console.tscn").instantiate()
+	plate.name = "ControlConsole"
 	if plate.has_method("configure"):
 		plate.call("configure", "PATTERN  TUNNEL", [
 			{"key": "group", "label": "GROUP", "names": GROUPS, "init": group_index},
@@ -71,8 +72,8 @@ func _build_console() -> void:
 			{"key": "speed", "label": "SPEED", "names": [], "init": fill_speed},
 		])
 	add_child(plate)
-	(plate as Node3D).position = Vector3(2.0, 0.0, 1.0)
-	(plate as Node3D).rotation_degrees = Vector3(0.0, -64.0, 0.0)
+	(plate as Node3D).position = Vector3(2.7, 0.0, 1.2)
+	(plate as Node3D).rotation_degrees = Vector3(0.0, -58.0, 0.0)
 	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate_change):
 		plate.connect("changed", _on_plate_change)
 	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
