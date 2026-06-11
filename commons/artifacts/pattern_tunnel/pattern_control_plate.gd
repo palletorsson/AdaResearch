@@ -41,7 +41,9 @@ const PANEL_TRIM := Color(0.69, 0.67, 0.63)
 const FRAME_GREY := Color(0.55, 0.53, 0.50)
 const DISPLAY_DARK := Color(0.11, 0.11, 0.125)
 const TEXT_DARK := Color(0.17, 0.17, 0.19)
-const TEXT_DISPLAY := Color(0.90, 0.89, 0.85)
+const TEXT_MUTED := Color(0.42, 0.40, 0.40)     # secondary labels (param names) — recede behind the value
+const TEXT_DISPLAY := Color(0.95, 0.94, 0.90)   # monitor value text — high contrast on dark glass
+const TEXT_DISPLAY_DIM := Color(0.58, 0.62, 0.66)  # monitor row labels — dimmer than the value
 const ACCENT := Color(0.86, 0.34, 0.11)
 
 # fixed anchors (chosen so a 4-control config matches the tunnel's tuned look)
@@ -57,7 +59,8 @@ var title: String = "PATTERN CONTROL"
 var control_scale: float = 1.0   # counter-scale for the XR sliders/cube so they stay world-1.0 when the plate is scaled
 var _specs: Array = []
 var _values: Dictionary = {}
-var _monitor: Label3D = null
+var _monitor: Label3D = null          # bright value column (the live readout)
+var _monitor_labels: Label3D = null   # dim param-name column to its left
 var _preview_mat: StandardMaterial3D = null
 var _built := false
 
@@ -127,8 +130,15 @@ func _build() -> void:
 func _build_monitor(c: Vector3, w: float, h: float) -> void:
 	add_child(_box(Vector3(c.x, c.y, FLUSH_Z), Vector3(w, h, 0.006), _emat(DISPLAY_DARK, 0.0)))
 	_frame(c.x, c.y, w + 0.03, h + 0.03)
-	_monitor = _text(c.x - w * 0.5 + 0.025, c.y, "", 17, TEXT_DISPLAY, HORIZONTAL_ALIGNMENT_LEFT)
+	# header strip, dimmer + smaller, so the live readout below is what the eye lands on
+	_text(c.x, c.y + h * 0.5 + 0.038, "SELECTION", 14, TEXT_MUTED, HORIZONTAL_ALIGNMENT_CENTER)
+	# two columns: dim param names (left) + bright values (right). Values are the readout.
+	_monitor_labels = _text(c.x - w * 0.5 + 0.028, c.y, "", 16, TEXT_DISPLAY_DIM, HORIZONTAL_ALIGNMENT_LEFT)
+	_monitor_labels.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_monitor_labels.line_spacing = 8.0
+	_monitor = _text(c.x - w * 0.5 + 0.165, c.y, "", 21, TEXT_DISPLAY, HORIZONTAL_ALIGNMENT_LEFT)
 	_monitor.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_monitor.line_spacing = 8.0
 
 
 ## The live "pattern rect" — a wallpaper swatch of the current group + motif.
@@ -146,7 +156,7 @@ func _build_preview(c: Vector3, w: float, h: float) -> void:
 	q.position = Vector3(c.x, c.y, FLUSH_Z + 0.002)
 	add_child(q)
 	_frame(c.x, c.y, w + 0.03, h + 0.03)
-	_text(c.x, c.y + h * 0.5 + 0.03, "PATTERN", 15, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	_text(c.x, c.y + h * 0.5 + 0.03, "PATTERN", 18, TEXT_MUTED, HORIZONTAL_ALIGNMENT_CENTER)
 	_regen_preview()
 
 
@@ -184,9 +194,10 @@ func _build_cube(c: Vector3) -> void:
 
 
 func _build_slider_box(spec: Dictionary, cx: float, cy: float) -> void:
-	# a thin frame outline hugging the slider; the label sits above
+	# a thin frame outline hugging the slider; the param label sits above (secondary),
+	# the chosen NAME (primary) is rendered big on the slider's own value label.
 	_frame(cx, cy, 0.34, 0.16)
-	_text(cx, cy + 0.125, String(spec["label"]), 22, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	_text(cx, cy + 0.118, String(spec["label"]), 17, TEXT_MUTED, HORIZONTAL_ALIGNMENT_CENTER)
 	if not ResourceLoader.exists(SLIDER_SCENE):
 		return
 	var s: Node = load(SLIDER_SCENE).instantiate()
@@ -197,6 +208,9 @@ func _build_slider_box(spec: Dictionary, cx: float, cy: float) -> void:
 	# control_scale counters the plate's own scale so the slider ends at world-scale 1.0.
 	(s as Node3D).position = Vector3(cx, cy - 0.012, 0.02)
 	(s as Node3D).scale = Vector3.ONE * control_scale
+	# Make the chosen NAME the most legible thing on the panel: enlarge the slider's
+	# own value label (a Label3D — touching its text props only, NOT the slider scale).
+	_boost_value_label(s)
 	var names: Array = spec.get("names", [])
 	var count: int = names.size()
 	if count > 1 and s.has_method("set_choices"):
@@ -234,7 +248,8 @@ func _on_slider(spec: Dictionary, s: Node) -> void:
 func _update_monitor() -> void:
 	if _monitor == null:
 		return
-	var lines: PackedStringArray = []
+	var label_lines: PackedStringArray = []
+	var value_lines: PackedStringArray = []
 	for spec in _specs:
 		var v: float = float(_values.get(spec["key"], 0))
 		var names: Array = spec.get("names", [])
@@ -243,12 +258,31 @@ func _update_monitor() -> void:
 			disp = String(names[clampi(int(v), 0, names.size() - 1)])
 		else:
 			disp = "%.1f" % v
-		lines.append("%s   %s" % [String(spec["label"]).rpad(8), disp])
-	_monitor.text = "\n".join(lines)
+		label_lines.append(String(spec["label"]))
+		value_lines.append(disp)
+	if _monitor_labels != null:
+		_monitor_labels.text = "\n".join(label_lines)
+	_monitor.text = "\n".join(value_lines)
 	_regen_preview()
 
 
 # ── builders ──────────────────────────────────────────────────────────────────
+
+## The chosen NAME is the single most important thing the operator reads. The slider
+## scene ships it tiny (font 14, pixel_size 0.0008). We enlarge ONLY that Label3D's
+## text properties — never the slider node's scale (which would break XR-Tools grab math).
+func _boost_value_label(s: Node) -> void:
+	var lbl := s.get_node_or_null("Frame/Label3DValue") as Label3D
+	if lbl == null:
+		return
+	lbl.font_size = 30
+	lbl.pixel_size = 0.0016
+	lbl.modulate = TEXT_DARK
+	lbl.outline_size = 10
+	lbl.outline_modulate = Color(PANEL_LIGHT.r, PANEL_LIGHT.g, PANEL_LIGHT.b, 1.0)
+	# lift it clear of the track so the bigger glyphs read against the board, not the groove
+	lbl.position = Vector3(lbl.position.x, 0.052, 0.012)
+
 
 func _frame(cx: float, cy: float, w: float, h: float, thick: float = 0.012) -> void:
 	var mat := _mat(FRAME_GREY, 0.55)
