@@ -196,3 +196,77 @@ static func generate_panel_image(
 				var out_b: float = tpx.b * tpx.a + bpx.b * (1.0 - tpx.a)
 				panel.set_pixel(x, y, Color(out_r, out_g, out_b, 1.0))
 	return ImageTexture.create_from_image(panel)
+
+
+# ── Drop-in mesh helpers — the integrated-text principle ──────────────
+# These return a ready-to-place MeshInstance3D (a QuadMesh facing +Z) whose
+# albedo is baked text, so a prop can paint its signage ONTO its surface instead
+# of floating a Label3D in front of it (the fire_extinguisher principle). Size the
+# quad in METERS roughly where the old Label3D sat; the font auto-fits the width.
+
+## A lit, transparent-background text quad — text painted across the surface, the
+## bare-letters case (no plate). `world_size` is the quad size in meters. Pass
+## `unshaded=true` for a self-lit readout (screens), false (default) for paint that
+## takes scene light. Returns a MeshInstance3D (QuadMesh, +Z normal) or null.
+static func make_label_mesh(text: String, text_color: Color, world_size: Vector2,
+		px_per_m: int = 1400, unshaded: bool = false) -> MeshInstance3D:
+	if text.is_empty():
+		return null
+	var img_sz := _image_size_for(world_size, px_per_m)
+	var fs := _fit_font_size(text, img_sz)
+	var tex: ImageTexture = generate_text_image(text, text_color, img_sz, fs)
+	if tex == null:
+		return null
+	return _text_quad(tex, world_size, true, unshaded)
+
+
+## An opaque label PLATE — background colour everywhere + text on top (the
+## EMPLOYEES-ONLY / printed-patch case). Replaces a coloured BoxMesh plate plus its
+## Label3D with one textured quad. `band` is forwarded to generate_panel_image.
+static func make_panel_mesh(text: String, bg_color: Color, text_color: Color,
+		world_size: Vector2, px_per_m: int = 1400, unshaded: bool = false,
+		band: Dictionary = {}) -> MeshInstance3D:
+	if text.is_empty():
+		return null
+	var img_sz := _image_size_for(world_size, px_per_m)
+	var fs := _fit_font_size(text, img_sz)
+	var tex: ImageTexture = generate_panel_image(text, bg_color, text_color, img_sz, fs, band)
+	if tex == null:
+		return null
+	return _text_quad(tex, world_size, false, unshaded)
+
+
+## Image resolution matching the quad's aspect (so glyphs aren't stretched),
+## capped so a long thin sign doesn't allocate a giant texture.
+static func _image_size_for(world_size: Vector2, px_per_m: int) -> Vector2i:
+	var w: int = clampi(int(round(maxf(0.01, world_size.x) * float(px_per_m))), 16, 2048)
+	var h: int = clampi(int(round(maxf(0.01, world_size.y) * float(px_per_m))), 16, 2048)
+	return Vector2i(w, h)
+
+
+## Largest font that keeps `text` inside ~90% of the image width AND ~70% of its
+## height — so the text fills the quad without clipping at the edges.
+static func _fit_font_size(text: String, img_sz: Vector2i) -> int:
+	var n: int = maxi(1, text.length())
+	# Fallback-font glyphs advance ~0.58·font on average; solve for the width fit.
+	var by_width: int = int(0.90 * float(img_sz.x) / (0.58 * float(n)))
+	var by_height: int = int(0.70 * float(img_sz.y))
+	return clampi(mini(by_width, by_height), 8, 480)
+
+
+static func _text_quad(tex: ImageTexture, world_size: Vector2, transparent: bool, unshaded: bool) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var qm := QuadMesh.new()
+	qm.size = world_size
+	mi.mesh = qm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_texture = tex
+	mat.albedo_color = Color.WHITE
+	if transparent:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED if unshaded else BaseMaterial3D.SHADING_MODE_PER_PIXEL
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	mi.material_override = mat
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	return mi

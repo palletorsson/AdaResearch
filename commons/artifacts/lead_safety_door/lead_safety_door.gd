@@ -44,6 +44,10 @@ class_name LeadSafetyDoor
 @export var handle_side: String = "left"        # "left" | "right" (hinges go on the opposite edge)
 @export var door_open: bool = false
 
+# ── External helpers ──────────────────────────────────────────────────
+
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # ── Constants ─────────────────────────────────────────────────────────
 
 const FRAME_MARGIN: float = 0.045       # how far the frame extends beyond the slab (x/y)
@@ -316,19 +320,15 @@ func _build_attention_sign(pivot: Node3D, slab_cx: float) -> void:
 	ex_dot.rotation = Vector3(PI * 0.5, 0.0, 0.0)
 	ex_dot.position = Vector3(slab_cx, tri_cy - h * 0.26, iz)
 	root.add_child(ex_dot)
-	# ATTENTION caption below the triangle, dark text on the yellow plate.
-	var cap := Label3D.new()
-	cap.name = "AttentionCaption"
-	cap.text = "ATTENTION"
-	cap.font_size = ATTN_FONT_SIZE
-	cap.outline_size = 0
-	cap.pixel_size = ATTN_PIXEL_SIZE
-	cap.modulate = Color(0.07, 0.07, 0.08)
-	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	cap.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	cap.no_depth_test = false
-	cap.position = Vector3(slab_cx, cy - ATTENTION_SIZE * 0.38, iz)
-	root.add_child(cap)
+	# ATTENTION caption baked onto the plate — paint on the surface, not a floating
+	# Label3D (the fire_extinguisher principle, via BakedText.make_label_mesh).
+	var cap := BakedText.make_label_mesh(
+		"ATTENTION", Color(0.07, 0.07, 0.08),
+		Vector2(ATTENTION_SIZE * 0.84, ATTENTION_SIZE * 0.17))
+	if cap:
+		cap.name = "AttentionCaption"
+		cap.position = Vector3(slab_cx, cy - ATTENTION_SIZE * 0.34, iz)
+		root.add_child(cap)
 
 
 func _build_hazard_sign(pivot: Node3D, slab_cx: float) -> void:
@@ -466,33 +466,16 @@ func _build_restricted_plate(pivot: Node3D, slab_cx: float) -> void:
 	pivot.add_child(root)
 
 	var cy: float = 0.42                       # low on the slab
-	var plate := MeshInstance3D.new()
+	# Black plate + white text baked into ONE textured quad — a single printed patch
+	# on the door (BakedText.make_panel_mesh), not a box with a floating Label3D.
+	var plate := BakedText.make_panel_mesh(
+		restricted_text, Color(0.05, 0.05, 0.06), Color(0.96, 0.96, 0.96),
+		Vector2(PLATE_SIZE.x, PLATE_SIZE.y))
+	if plate == null:
+		return
 	plate.name = "Plate"
-	var pm := BoxMesh.new()
-	pm.size = Vector3(PLATE_SIZE.x, PLATE_SIZE.y, SIGN_PLATE_DEPTH)
-	plate.mesh = pm
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.05, 0.05, 0.06)
-	mat.roughness = 0.5
-	mat.metallic = 0.1
-	plate.material_override = mat
 	plate.position = Vector3(slab_cx, cy, _front_z() + SIGN_PROUD + SIGN_PLATE_DEPTH * 0.5)
 	root.add_child(plate)
-
-	var label := Label3D.new()
-	label.name = "RestrictedLabel"
-	label.text = restricted_text
-	label.font_size = LABEL_FONT_SIZE
-	label.outline_size = 4
-	label.pixel_size = LABEL_PIXEL_SIZE
-	label.modulate = Color(0.96, 0.96, 0.96)
-	label.outline_modulate = Color(0.03, 0.03, 0.03)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.no_depth_test = false
-	# Default Label3D faces +Z. Sit it just proud of the black plate.
-	label.position = Vector3(slab_cx, cy, _front_z() + SIGN_PROUD + SIGN_PLATE_DEPTH + 0.004)
-	root.add_child(label)
 
 
 func _build_handle(pivot: Node3D, slab_cx: float, hinge_right: bool) -> void:
