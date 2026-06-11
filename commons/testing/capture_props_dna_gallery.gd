@@ -41,15 +41,26 @@ var _output_dir: String = "user://props_dna_gallery"
 ## off when the page route is at root — so we publish absolute paths.
 const PUBLIC_BASE: String = "/props-dna-gallery"
 var _entries: Array = []
+## When non-empty (via --only=a,b,c), the sweep is filtered to just these props
+## so a few new props can be (re)captured without re-rendering the whole gallery.
+## The written manifest is then PARTIAL — merge it into the published one.
+var _only_props: Array = []
 var _viewport: SubViewport
 var _scene_holder: Node3D
 var _camera: Camera3D
 
 
 func _initialize() -> void:
-	for arg in OS.get_cmdline_args():
+	# Args after `--` land in get_cmdline_user_args(); scan both so --out / --only
+	# work whether passed before or after the `--` separator.
+	var all_args: Array = []
+	all_args.append_array(OS.get_cmdline_args())
+	all_args.append_array(OS.get_cmdline_user_args())
+	for arg in all_args:
 		if arg.begins_with("--out="):
 			_output_dir = arg.split("=")[1]
+		elif arg.begins_with("--only="):
+			_only_props = Array(arg.split("=")[1].split(","))
 	_run.call_deferred()
 
 
@@ -124,6 +135,13 @@ func _run() -> void:
 
 	# ── Sweep ──────────────────────────────────────────────────────
 	var sweep: Array = _build_sweep()
+	if not _only_props.is_empty():
+		var filtered: Array = []
+		for spec in sweep:
+			if str(spec.get("prop", "")) in _only_props:
+				filtered.append(spec)
+		sweep = filtered
+		print("FILTER — capturing only %d entries for props %s" % [sweep.size(), str(_only_props)])
 	var index: int = 0
 	for spec in sweep:
 		index += 1
@@ -1563,6 +1581,117 @@ func _build_sweep() -> Array:
 			"current_slide_number": 17,
 			"lamp_on": false,
 			"beam_visible": false,
+		}))
+
+# ── wooden_pallet: critical_parameter = box_arrangement ────────
+	sweep.append(_p("wooden_pallet", "1_single_box", "single box",
+		"one box on the deck — the minimal load, no markings",
+		{
+			"box_arrangement": "single",
+			"show_decals": false,
+		}))
+	sweep.append(_p("wooden_pallet", "2_pair_flat", "pair (two flat)",
+		"two boxes side by side — a half load, FRAGILE-marked",
+		{
+			"box_arrangement": "pair",
+			"show_decals": true,
+		}))
+	sweep.append(_p("wooden_pallet", "3_pyramid_setup_c", "pyramid (Setup C)",
+		"two boxes plus one on top — the canonical loaded pallet",
+		{
+			"box_arrangement": "pyramid",
+			"show_decals": true,
+			"tape_color": Color(0.85, 0.18, 0.18),
+		}))
+
+	# ── metal_storage_cabinet: critical_parameter = doors_open_amount
+	sweep.append(_p("metal_storage_cabinet", "1_closed_white", "closed (white)",
+		"doors shut — the flat white institutional face",
+		{
+			"doors_open_amount": 0.0,
+			"door_count": 2,
+			"shelf_count": 3,
+		}))
+	sweep.append(_p("metal_storage_cabinet", "2_open_shelves", "open (shelves)",
+		"doors swung wide — four interior shelves revealed",
+		{
+			"doors_open_amount": 0.9,
+			"door_count": 2,
+			"shelf_count": 4,
+		}))
+	sweep.append(_p("metal_storage_cabinet", "3_grey_locker", "grey locker (single)",
+		"a single-door grey locker — institutional, closed",
+		{
+			"door_count": 1,
+			"doors_open_amount": 0.0,
+			"body_color": Color(0.40, 0.42, 0.45),
+			"door_color": Color(0.46, 0.48, 0.52),
+			"shelf_count": 4,
+		}))
+
+	# ── fire_hose_box: critical_parameter = door_open ──────────────
+	sweep.append(_p("fire_hose_box", "1_closed_window", "closed (window)",
+		"door shut — the coiled hose seen through the square window",
+		{
+			"door_open": false,
+			"has_window": true,
+		}))
+	sweep.append(_p("fire_hose_box", "2_door_open", "door open (reel)",
+		"door swung open — the full reel and brass nozzle exposed",
+		{
+			"door_open": true,
+			"has_window": true,
+		}))
+	sweep.append(_p("fire_hose_box", "3_solid_door", "solid (no window)",
+		"a solid-fronted variant — just the FIRE HOSE label and side pictogram",
+		{
+			"door_open": false,
+			"has_window": false,
+			"show_pictogram": true,
+		}))
+
+	# ── computer_console: critical_parameter = screen_content ──────
+	sweep.append(_p("computer_console", "1_diagram_active", "diagram (active)",
+		"teal data-viz with a colour spectrogram — the console at work",
+		{
+			"screen_on": true,
+			"screen_content": "diagram",
+			"screen_color": Color(0.22, 0.55, 0.72),
+		}))
+	sweep.append(_p("computer_console", "2_alert_red", "alert (red)",
+		"red warning screen — the console raising an alarm",
+		{
+			"screen_on": true,
+			"screen_content": "alert",
+			"screen_color": Color(0.85, 0.25, 0.25),
+		}))
+	sweep.append(_p("computer_console", "3_screen_off", "screen off",
+		"dark glass — the terminal powered down, cable still draped",
+		{
+			"screen_on": false,
+			"screen_content": "off",
+		}))
+
+	# ── computer_keyboard: critical_parameter = layout ─────────────
+	sweep.append(_p("computer_keyboard", "1_full_numpad", "full (numpad)",
+		"full-size layout — main block plus the numpad",
+		{
+			"layout": "full",
+			"has_numpad": true,
+		}))
+	sweep.append(_p("computer_keyboard", "2_tenkeyless", "tenkeyless",
+		"TKL — the numpad dropped, a tighter desk footprint",
+		{
+			"layout": "tkl",
+			"has_numpad": false,
+		}))
+	sweep.append(_p("computer_keyboard", "3_compact_accent", "compact (accent)",
+		"a compact board with a highlighted top row",
+		{
+			"layout": "compact",
+			"has_numpad": false,
+			"accent_color": Color(0.95, 0.55, 0.20),
+			"key_color": Color(0.42, 0.46, 0.54),
 		}))
 
 	return sweep
