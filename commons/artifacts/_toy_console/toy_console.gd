@@ -213,16 +213,24 @@ func _build_pad(spec: Dictionary, x: float) -> void:
 	pad.rotation = Vector3(deg_to_rad(-52.0), 0.0, 0.0)   # face tilts up toward the player
 	pad.scale = Vector3.ONE * 1.4
 
-	# plate body + recessed dark face
-	pad.add_child(_box(Vector3.ZERO, Vector3(0.24, 0.24, 0.02), _panel_mat(PANEL_TRIM)))
-	pad.add_child(_box(Vector3(0.0, 0.0, 0.013), Vector3(0.20, 0.20, 0.004), _screen_mat()))
-	# faint accent cross-hair on the face
-	pad.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.20, 0.004, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
-	pad.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.004, 0.20, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
-	# the knob ON the plate at the value (clamped to the face), on a short stem
-	var kp := Vector2(clampf(iv.x, -1.0, 1.0), clampf(iv.y, -1.0, 1.0)) * 0.09
-	pad.add_child(_cylinder_between(Vector3(kp.x, kp.y, 0.016), Vector3(kp.x, kp.y, 0.05), 0.014, _accent_mat()))
-	pad.add_child(_sphere(Vector3(kp.x, kp.y, 0.056), 0.028, _accent_mat()))
+	# The PLATE is its own node; the knob is parented UNDER it, so the knob inherits the
+	# plate's transform and can only ever sit on its surface (this is exactly what
+	# slider_plane got wrong — there the knob was a sibling on a separate branch).
+	var plate := Node3D.new()
+	plate.name = "Plate"
+	pad.add_child(plate)
+	plate.add_child(_box(Vector3.ZERO, Vector3(0.24, 0.24, 0.02), _panel_mat(PANEL_TRIM)))          # bezel
+	plate.add_child(_box(Vector3(0.0, 0.0, 0.013), Vector3(0.20, 0.20, 0.004), _screen_mat()))      # recessed face
+	plate.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.20, 0.004, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))  # cross-hair
+	plate.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.004, 0.20, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
+
+	# the knob — a child of the plate — at the vector's value on the face (clamped)
+	var knob := Node3D.new()
+	knob.name = "Knob"
+	knob.position = Vector3(clampf(iv.x, -1.0, 1.0) * 0.09, clampf(iv.y, -1.0, 1.0) * 0.09, 0.0)
+	plate.add_child(knob)
+	knob.add_child(_cylinder_between(Vector3(0, 0, 0.016), Vector3(0, 0, 0.05), 0.014, _accent_mat()))  # stem
+	knob.add_child(_sphere(Vector3(0, 0, 0.056), 0.028, _accent_mat()))                                 # knob
 
 	_controls_built.append(pad)
 	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.04, 0.30), 18, TEXT_DARK))
