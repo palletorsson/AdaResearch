@@ -1,6 +1,8 @@
 extends Node3D
 class_name GasCanister
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a pressurised gas cylinder on a cradle — industrial-corridor / hospital-supply vocabulary. A tall teal cylinder with a tapered dark-steel shoulder cap on top, a small valve assembly (boxy housing + red wheel handle + angled spout) at the very top, a label naming the contained gas ("O₂") on the front, a small emissive pressure indicator beside the valve when pressurised, and a dark-steel cradle — either a vertical stand with a ring the canister sits in, or a horizontal cradle of two arched supports the canister lies across
 # desire: every lab wants a way to make INVISIBLE FORCE visible. The canister wants to be the architectural form of HELD PRESSURE. Heavy, named, with a colour code for what is inside. The valve at the top is the threshold between contained and released — the place where the question of WHAT this gas IS becomes practical
@@ -60,8 +62,6 @@ const WHEEL_THICKNESS: float = 0.012
 const SPOUT_LENGTH: float = 0.07
 const SPOUT_RADIUS: float = 0.012
 const PRESSURE_DOT_RADIUS: float = 0.011
-const LABEL_PIXEL_SIZE: float = 0.0030
-const LABEL_FONT_SIZE: int = 44
 const HORIZONTAL_SUPPORT_WIDTH: float = 0.06
 const HORIZONTAL_SUPPORT_HEIGHT_FACTOR: float = 1.1   # vs canister_radius
 const HORIZONTAL_SUPPORT_DEPTH: float = 0.05
@@ -89,28 +89,28 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_canister_height"):
-		canister_height = float(String(get_meta("config_canister_height")))
+		canister_height = float(str(get_meta("config_canister_height")))
 	if has_meta("config_canister_radius"):
-		canister_radius = float(String(get_meta("config_canister_radius")))
+		canister_radius = float(str(get_meta("config_canister_radius")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_cap_color"):
-		cap_color = _parse_color(String(get_meta("config_cap_color")), cap_color)
+		cap_color = _parse_color(str(get_meta("config_cap_color")), cap_color)
 	if has_meta("config_cradle_color"):
-		cradle_color = _parse_color(String(get_meta("config_cradle_color")), cradle_color)
+		cradle_color = _parse_color(str(get_meta("config_cradle_color")), cradle_color)
 	if has_meta("config_valve_handle_color"):
-		valve_handle_color = _parse_color(String(get_meta("config_valve_handle_color")), valve_handle_color)
+		valve_handle_color = _parse_color(str(get_meta("config_valve_handle_color")), valve_handle_color)
 	if has_meta("config_label_color"):
-		label_color = _parse_color(String(get_meta("config_label_color")), label_color)
+		label_color = _parse_color(str(get_meta("config_label_color")), label_color)
 	if has_meta("config_label_text"):
-		label_text = String(get_meta("config_label_text"))
+		label_text = str(get_meta("config_label_text"))
 	if has_meta("config_cradle_style"):
-		cradle_style = String(get_meta("config_cradle_style")).to_lower()
+		cradle_style = str(get_meta("config_cradle_style")).to_lower()
 	if has_meta("config_pressure_indicator"):
-		var pi := String(get_meta("config_pressure_indicator")).to_lower()
+		var pi := str(get_meta("config_pressure_indicator")).to_lower()
 		pressure_indicator = pi in ["true", "1", "yes", "on"]
 	if has_meta("config_pressure_color"):
-		pressure_color = _parse_color(String(get_meta("config_pressure_color")), pressure_color)
+		pressure_color = _parse_color(str(get_meta("config_pressure_color")), pressure_color)
 
 
 func _clear_built_children() -> void:
@@ -294,19 +294,12 @@ func _build_body(y_base: float, horizontal: bool) -> void:
 		dot.material_override = dmat
 		dot.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
-	# Label.
-	var label: Label3D = null
+	# Label — baked onto the cylinder surface as a tangent quad (flat, proud of radius).
+	var label: MeshInstance3D = null
 	if label_text != "":
-		label = Label3D.new()
-		label.name = "Label"
-		label.text = label_text
-		label.font_size = LABEL_FONT_SIZE
-		label.outline_size = 4
-		label.pixel_size = LABEL_PIXEL_SIZE
-		label.modulate = label_color
-		label.outline_modulate = Color(0.05, 0.10, 0.13)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label = BakedText.make_label_mesh(label_text, label_color, Vector2(0.12, 0.06))
+		if label != null:
+			label.name = "Label"
 
 	if horizontal:
 		# Canister axis runs along +X — rotate body and cap 90° around Z.
@@ -354,9 +347,9 @@ func _build_body(y_base: float, horizontal: bool) -> void:
 			)
 			add_child(dot)
 
-		# Label on the +Z side of the body.
+		# Label quad tangent to the +Z face of the body, flat/proud of the cylinder surface.
 		if label:
-			label.position = Vector3(0.0, y_base, canister_radius + 0.004)
+			label.position = Vector3(0.0, y_base, canister_radius + 0.005)
 			add_child(label)
 
 	else:
@@ -399,9 +392,9 @@ func _build_body(y_base: float, horizontal: bool) -> void:
 			)
 			add_child(dot)
 
-		# Label on the +Z face of the body, mid-height.
+		# Label quad tangent to the +Z face of the body, mid-height, flat/proud of surface.
 		if label:
-			label.position = Vector3(0.0, y_base + canister_height * 0.55, canister_radius + 0.004)
+			label.position = Vector3(0.0, y_base + canister_height * 0.55, canister_radius + 0.005)
 			add_child(label)
 
 

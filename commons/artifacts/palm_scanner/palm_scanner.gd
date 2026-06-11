@@ -1,13 +1,15 @@
 extends Node3D
 class_name PalmScanner
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a wall-mounted (or podium-mounted) biometric palm reader — Portal 2 / Aperture vocabulary for "you are recognised here, or you are not". A dark plastic rectangular panel, an inset scan window with a faint hand outline (palm disc + four finger boxes), a small status LED in the corner, a Portal-orange accent strip across the top, and a PLACE HAND Label3D beneath the scan window. When active, the scan window and outline glow emerald; when inactive, the window goes dark and the status LED glows red.
 # desire: the scanner wants to be the room's THRESHOLD — the question "are you on the list?" made architectural. A door asks you to push; a scanner asks you to PROVE. It wants palms specifically: a palm is asymmetric, irreproducible, distinctly yours. The scanner converts identity into permission.
 # critical_parameter: scan_active — true reads as "the system is listening, present your hand" (emerald glow, green LED), false reads as "this entry is locked, do not bother" (dark panel, red LED). Same hardware, the entire room's posture flips.
 # triggers: _ready() builds panel + scan window + hand outline + status LED + accent strip + label + optional podium stand from exports; apply_grid_config rebuilds
 # emerges: scan_active=true + mounting=wall = "checkpoint at the door"; scan_active=false = "this corridor is closed"; mounting=podium = "free-standing checkpoint, mid-room", the scanner asks for the hand in open air rather than against the wall
-# needs: rectangular dark panel [present]; inset scan window with emissive material [present]; hand outline (palm disc + 4 finger boxes) [present]; corner status LED with red/green state [present]; Portal-orange accent stripe [present]; PLACE HAND Label3D [present]; optional vertical podium stand [present]
+# needs: rectangular dark panel [present]; inset scan window with emissive material [present]; hand outline (palm disc + 4 finger boxes) [present]; corner status LED with red/green state [present]; Portal-orange accent stripe [present]; PLACE HAND baked-text quad (unshaded, glows with scan colour) [present]; optional vertical podium stand [present]
 # relationships: sibling to sliding_door (the scanner is the QUESTION the door asks before it opens — together they form the threshold ritual); cousin to emergency_button (both are interactive surfaces, one says STOP one says PROVE); peer to exit_sign (both are signage with intent, but exit_sign says "go here" while palm_scanner says "earn this")
 # truth: a palm scanner is not just a sensor. It is the lab's declaration that BODIES are credentials. The hand is not merely flesh in this frame — it is a key, a barcode, a signature. The scanner reduces the human to the readable.
 
@@ -108,7 +110,10 @@ var _anim_phase: float = 0.0
 var _sweep_mesh: MeshInstance3D = null
 var _sweep_mat: StandardMaterial3D = null
 var _audio: AudioStreamPlayer3D = null
-var _prompt_label: Label3D = null
+var _prompt_label: MeshInstance3D = null   # baked-text quad — replaces Label3D
+var _prompt_label_parent: Node3D = null    # Panel root; used by _update_prompt_label
+var _prompt_label_pos: Vector3 = Vector3.ZERO
+var _prompt_label_size: Vector2 = Vector2.ZERO
 
 # ── Signals ───────────────────────────────────────────────────────────
 
@@ -432,28 +437,51 @@ func _build_accent_strip(parent: Node3D) -> void:
 func _build_label(parent: Node3D) -> void:
 	if label_text == "":
 		return
-	var label := Label3D.new()
-	label.name = "Label"
-	# Cache so the scan state machine can rewrite this to SCANNING… /
-	# ACCESS GRANTED. Without this the text feedback silently never updates.
-	_prompt_label = label
-	label.text = label_text
-	# Sizing — target height ~12% of panel_height.
-	var target_h: float = panel_height * 0.10
-	label.pixel_size = target_h / 96.0
-	label.font_size = 96
-	label.outline_size = 2
-	label.modulate = text_color
-	label.outline_modulate = Color(0.02, 0.02, 0.02)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.no_depth_test = false
-	# Label3D faces -Z by default; rotate so it reads from +Z.
-	# Position below the scan window.
+	# Sizing: width spans ~90% of the panel, height is ~10% of panel height.
+	# Matches the old Label3D footprint: target_h = panel_height * 0.10,
+	# pixel_size = target_h / 96 → the visible quad was ≈ panel_width×0.10.
+	var w: float = panel_width * 0.90
+	var h: float = panel_height * 0.10 * 1.3   # 1.3 so descenders don't clip
 	var ly: float = -panel_height * 0.35
 	var lz: float = panel_depth * 0.5 + 0.006
-	label.position = Vector3(0.0, ly, lz)
-	parent.add_child(label)
+	# Store context so _update_prompt_label can swap the mesh at runtime.
+	_prompt_label_parent = parent
+	_prompt_label_pos    = Vector3(0.0, ly, lz)
+	_prompt_label_size   = Vector2(w, h)
+	# Build the initial quad — glowing with text_color (unshaded = true so
+	# the letters read as emissive, matching the scan-window aesthetic).
+	var mesh: MeshInstance3D = BakedText.make_label_mesh(
+			label_text, text_color, _prompt_label_size, 1400, true)
+	if mesh == null:
+		return
+	mesh.name = "Label"
+	mesh.position = _prompt_label_pos
+	mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(mesh)
+	_prompt_label = mesh
+
+
+## Swap out the baked-text quad for new text/colour (called by the scan
+## state machine in place of the old _prompt_label.text / .modulate writes).
+func _update_prompt_label(new_text: String, new_color: Color) -> void:
+	if _prompt_label_parent == null:
+		return
+	# Remove the old mesh.
+	if _prompt_label != null and is_instance_valid(_prompt_label):
+		_prompt_label_parent.remove_child(_prompt_label)
+		_prompt_label.queue_free()
+		_prompt_label = null
+	if new_text.is_empty():
+		return
+	var mesh: MeshInstance3D = BakedText.make_label_mesh(
+			new_text, new_color, _prompt_label_size, 1400, true)
+	if mesh == null:
+		return
+	mesh.name = "Label"
+	mesh.position = _prompt_label_pos
+	mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_prompt_label_parent.add_child(mesh)
+	_prompt_label = mesh
 
 
 func _build_podium(parent: Node3D = self) -> void:
@@ -774,9 +802,7 @@ func _begin_scan() -> void:
 		_scan_window_mat.emission = amber
 		_scan_window_mat.emission_energy_multiplier = 1.4
 	_set_led(amber, 3.0)
-	if _prompt_label != null:
-		_prompt_label.text = "SCANNING…"
-		_prompt_label.modulate = amber
+	_update_prompt_label("SCANNING...", amber)
 
 
 # Access granted — bright green flash, chime, haptic, door opens. Holds for
@@ -790,9 +816,7 @@ func _grant_access() -> void:
 		_scan_window_mat.emission = scan_color * 1.8
 		_scan_window_mat.emission_energy_multiplier = 2.2
 	_set_led(scan_color, 4.0)
-	if _prompt_label != null:
-		_prompt_label.text = "ACCESS GRANTED"
-		_prompt_label.modulate = scan_color
+	_update_prompt_label("ACCESS GRANTED", scan_color)
 	if _audio != null:
 		_audio.play()
 	_pulse_haptic()
@@ -813,9 +837,7 @@ func _set_idle() -> void:
 		_scan_window_mat.emission = scan_color
 		_scan_window_mat.emission_energy_multiplier = 0.9
 	_set_led(scan_color, 1.5)
-	if _prompt_label != null:
-		_prompt_label.text = label_text
-		_prompt_label.modulate = text_color
+	_update_prompt_label(label_text, text_color)
 
 
 func _set_led(c: Color, energy: float) -> void:

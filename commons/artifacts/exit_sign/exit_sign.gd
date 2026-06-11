@@ -1,13 +1,15 @@
 extends Node3D
 class_name ExitSign
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a wall-mounted illuminated EXIT sign — Portal 2 / Half-Life vocabulary. A small emissive rectangle that names a way out and points at it. The cheapest, most legible piece of architectural narrative the room can hold.
 # desire: every lab/chamber that has an exit gets a sign that SAYS so — readable from across the room, glowing enough to be a beacon, small enough to be ambient
 # critical_parameter: sign_color — green = safe egress (the standard), red = warning/alarm exit, accent-color tint = "this exit belongs to THIS phase". The text stays white.
 # triggers: _ready() builds the body, text, and arrow from exports; rebuilds on apply_grid_config
 # emerges: same script, four signs — green "EXIT →", red "EMERGENCY ↓", phase-tinted "λ-S LAB ←", contextual "RETURN ↑"
-# needs: emissive material with high glow_energy [present]; Label3D with no_depth_test for legibility [present]; arrow as a triangle MeshInstance3D, rotated per arrow_direction [present]
+# needs: emissive material with high glow_energy [present]; baked text quads painted onto the sign face [present]; arrow glyph baked as unshaded quad [present]
 # relationships: sibling to lab_room (a chamber with no exit sign is a sealed room — the sign is the seal's release valve); peer to sliding_door (the sign names the door); descendant of the Half-Life test-chamber visual vocabulary the lab_room inherits from
 # truth: a sign is not the way out. The sign is the PROMISE that there IS a way out. A room without an exit sign is a trap. A room with one is a stage.
 
@@ -123,34 +125,32 @@ func _build_body() -> void:
 
 
 func _build_text() -> void:
-	# Label3D positioned on the front face of the body. EXIT is left-shifted
-	# if the arrow lives on the right, right-shifted if the arrow lives on
-	# the left, centered otherwise.
-	var label := Label3D.new()
-	label.name = "Text"
-	label.text = text
-	# Font sizing is calibrated so EXIT fills ~60% of width at default size.
-	var target_text_h := height * 0.55
-	label.pixel_size = target_text_h / 96.0  # roughly matches font_size=96
-	label.font_size = 96
-	label.outline_size = 0
-	label.modulate = text_color
-	label.no_depth_test = true
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	# Baked text quad painted on the front face of the sign body.
+	# Emissive/glowing sign — unshaded=true so the text reads as self-lit.
+	if text.is_empty():
+		return
 
-	# Shift text horizontally based on arrow location.
+	# Horizontal space: narrower when arrow shares the sign, full width otherwise.
 	var dir := arrow_direction.to_lower()
-	var text_x_offset := 0.0
 	var arrow_width := height * 0.45
+	var text_w: float
+	var text_x_offset := 0.0
 	if dir == "right" or dir == "left":
-		text_x_offset = (-arrow_width * 0.6) if dir == "right" else (arrow_width * 0.6)
-	# (up / down / none keep the text centered)
+		# Arrow occupies ~arrow_width on one side; text takes the rest with a small gap.
+		text_w = width - arrow_width - 0.01
+		text_x_offset = (-arrow_width * 0.5) if dir == "right" else (arrow_width * 0.5)
+	else:
+		text_w = width - 0.02
 
-	# Push slightly forward of the body face to avoid z-fighting.
-	var z_face := mount_offset_z + thickness + 0.001
-	label.position = Vector3(text_x_offset, 0.0, z_face)
-	add_child(label)
+	var text_h := height * 0.55
+	var quad := BakedText.make_label_mesh(text, text_color, Vector2(text_w, text_h), 1400, true)
+	if quad == null:
+		return
+	quad.name = "Text"
+	# Push slightly forward of the body face.
+	var z_face := mount_offset_z + thickness + 0.003
+	quad.position = Vector3(text_x_offset, 0.0, z_face)
+	add_child(quad)
 
 
 func _build_arrow() -> void:
@@ -158,24 +158,20 @@ func _build_arrow() -> void:
 	if dir == "none":
 		return
 
-	# Arrow is a small Label3D containing a unicode arrow glyph.
-	# Cheap, scalable, no custom mesh needed.
-	var arrow := Label3D.new()
-	arrow.name = "Arrow"
+	# Arrow is a baked unicode glyph quad — unshaded so it glows with the sign.
+	var glyph: String
 	match dir:
-		"left":  arrow.text = "←"
-		"right": arrow.text = "→"
-		"up":    arrow.text = "↑"
-		"down":  arrow.text = "↓"
-		_:       arrow.text = "→"
-	var target_h := height * 0.65
-	arrow.pixel_size = target_h / 96.0
-	arrow.font_size = 96
-	arrow.outline_size = 0
-	arrow.modulate = text_color
-	arrow.no_depth_test = true
-	arrow.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	arrow.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		"left":  glyph = "←"
+		"right": glyph = "→"
+		"up":    glyph = "↑"
+		"down":  glyph = "↓"
+		_:       glyph = "→"
+
+	var arrow_size := height * 0.65
+	var quad := BakedText.make_label_mesh(glyph, text_color, Vector2(arrow_size, arrow_size), 1400, true)
+	if quad == null:
+		return
+	quad.name = "Arrow"
 
 	# Place arrow on the side opposite the text shift.
 	var arrow_x_offset := 0.0
@@ -184,9 +180,9 @@ func _build_arrow() -> void:
 	elif dir == "left":
 		arrow_x_offset = -width * 0.32
 
-	var z_face := mount_offset_z + thickness + 0.001
-	arrow.position = Vector3(arrow_x_offset, 0.0, z_face)
-	add_child(arrow)
+	var z_face := mount_offset_z + thickness + 0.003
+	quad.position = Vector3(arrow_x_offset, 0.0, z_face)
+	add_child(quad)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

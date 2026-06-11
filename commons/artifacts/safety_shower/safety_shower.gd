@@ -1,13 +1,15 @@
 extends Node3D
 class_name SafetyShower
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: an emergency safety shower with an eyewash basin — Half-Life decontamination corner vocabulary. Vertical steel pipe rising from the floor (or descending from the ceiling) with a wide horizontal arm ending in a wide circular shower head; below it, a glossy white basin with two small twin eyewash spouts and a vertical valve handle; a green-painted accent stripe around the basin; a "SAFETY SHOWER" sign above. A pull chain dangles from the shower arm. Always present, never used, structurally announcing risk
 # desire: every lab MUST contain its accident — a safety shower is the architectural admission that this place can hurt you. The shower wants to be the most visible piece of infrastructure in the room. Green = safety = "if it goes wrong, come here"
 # critical_parameter: pipe_orientation — "wall" (rising from the floor against a wall) vs "ceiling" (descending from above the lab), changes the whole vertical reading of the chamber. Wall = corner safety station. Ceiling = fixed emergency point in the open
 # triggers: _ready() builds pipe + arm + head + basin + spouts + valve + chain + accent + signage from exports; apply_grid_config rebuilds
 # emerges: shower without basin = generic decontamination. Shower with basin + label = "this lab has chemicals". Green stripe + signage = code-compliant industrial safety. The presence DOES the labelling — no narration needed
-# needs: vertical pipe + horizontal arm + wide circular head [present]; eyewash basin with two spouts + valve [present]; green accent stripe around basin [present]; optional pull chain [present]; Label3D for signage_text [present]
+# needs: vertical pipe + horizontal arm + wide circular head [present]; eyewash basin with two spouts + valve [present]; green accent stripe around basin [present]; optional pull chain [present]; baked-text panel sign for signage_text [present]
 # relationships: peer to exit_sign (both say "in case of emergency, this way"); sibling to ceiling_vent (both are industrial infrastructure cues); cousin to fire alarm / first aid station (the lab's vocabulary of CARE under risk); the QFEP chamber's confession that the experiment can wound
 # truth: a safety shower is the only piece of architecture in a lab that PRESUMES failure. Tables presume success. Whiteboards presume thinking. Doors presume passage. The safety shower presumes the chemical spill, the burn, the contaminated eye. It is the room's apology in advance. Its presence acknowledges that knowledge production is also bodily harm
 
@@ -60,8 +62,6 @@ const ACCENT_STRIP_DEPTH: float = 0.006
 const CHAIN_SEGMENTS: int = 7
 const CHAIN_SEGMENT_HEIGHT: float = 0.045
 const CHAIN_SEGMENT_THICKNESS: float = 0.014
-const LABEL_PIXEL_SIZE: float = 0.0035
-const LABEL_FONT_SIZE: int = 32
 
 # ── Internal state ────────────────────────────────────────────────────
 
@@ -86,23 +86,23 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_shower_height"):
-		shower_height = float(String(get_meta("config_shower_height")))
+		shower_height = float(str(get_meta("config_shower_height")))
 	if has_meta("config_basin_width"):
-		basin_width = float(String(get_meta("config_basin_width")))
+		basin_width = float(str(get_meta("config_basin_width")))
 	if has_meta("config_basin_depth"):
-		basin_depth = float(String(get_meta("config_basin_depth")))
+		basin_depth = float(str(get_meta("config_basin_depth")))
 	if has_meta("config_pipe_color"):
-		pipe_color = _parse_color(String(get_meta("config_pipe_color")), pipe_color)
+		pipe_color = _parse_color(str(get_meta("config_pipe_color")), pipe_color)
 	if has_meta("config_basin_color"):
-		basin_color = _parse_color(String(get_meta("config_basin_color")), basin_color)
+		basin_color = _parse_color(str(get_meta("config_basin_color")), basin_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_pipe_orientation"):
-		pipe_orientation = String(get_meta("config_pipe_orientation")).to_lower()
+		pipe_orientation = str(get_meta("config_pipe_orientation")).to_lower()
 	if has_meta("config_signage_text"):
-		signage_text = String(get_meta("config_signage_text"))
+		signage_text = str(get_meta("config_signage_text"))
 	if has_meta("config_chain_visible"):
-		var v := String(get_meta("config_chain_visible")).to_lower()
+		var v := str(get_meta("config_chain_visible")).to_lower()
 		chain_visible = v in ["true", "1", "yes", "on"]
 
 
@@ -410,22 +410,22 @@ func _build_pull_chain() -> void:
 
 
 func _build_signage() -> void:
-	# Label3D above the shower head, facing +Z.
+	# Green safety sign plate with text baked into the surface — no floating Label3D.
+	# make_panel_mesh faces +Z already, so no rotation needed.
 	if signage_text == "":
 		return
-	var sign := Label3D.new()
+	# Panel size: wide enough for the text, short band — typical ANSI safety sign proportions.
+	var sign_w := 0.50
+	var sign_h := 0.12
+	var sign := BakedText.make_panel_mesh(
+		signage_text,
+		accent_color,                          # green background
+		Color(0.97, 0.97, 0.97),              # white text
+		Vector2(sign_w, sign_h))
+	if sign == null:
+		return
 	sign.name = "Signage"
-	sign.text = signage_text
-	sign.font_size = LABEL_FONT_SIZE
-	sign.outline_size = 4
-	sign.pixel_size = LABEL_PIXEL_SIZE
-	sign.modulate = accent_color
-	sign.outline_modulate = Color(0.05, 0.06, 0.05)
-	sign.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	sign.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	sign.no_depth_test = false
-	# Faces +Z by default (Label3D default faces -Z), so rotate 180°.
-	sign.rotation = Vector3(0.0, PI, 0.0)
+	# Position above the shower head, slightly proud of the arm's Z mid-point.
 	sign.position = Vector3(0.0, shower_height + 0.18, ARM_LENGTH * 0.5)
 	add_child(sign)
 

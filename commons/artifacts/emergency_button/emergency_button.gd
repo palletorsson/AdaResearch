@@ -7,7 +7,7 @@ class_name EmergencyButton
 # critical_parameter: pressed — false reads as "armed, alert, hot" (mushroom proud, glowing, label readable), true reads as "fired, latched, locked-out" (mushroom depressed, glow dim, the room is in alarm-state). The button has two postures, and they ARE the two states the room can be in.
 # triggers: _ready() builds plate + mushroom + ring base + label + optional podium stand from exports; apply_grid_config rebuilds
 # emerges: armed + wall = "every chamber's standard safety"; pressed + podium = "this is a museum piece, an interrupted experiment"; black-text label + bright dome = "instructions for the body in emergency"; podium mount + dim = "props, theatrical"
-# needs: yellow hazard plate BoxMesh [present]; red mushroom CylinderMesh top_radius > bottom_radius [present]; small ring base CylinderMesh around the dome [present]; Label3D for "EMERGENCY STOP" text [present]; emissive glow when not pressed [present]; depression offset when pressed [present]; optional podium pillar [present]
+# needs: yellow hazard plate BoxMesh [present]; red mushroom CylinderMesh top_radius > bottom_radius [present]; small ring base CylinderMesh around the dome [present]; baked label_text quad painted on plate face [present]; emissive glow when not pressed [present]; depression offset when pressed [present]; optional podium pillar [present]
 # relationships: sibling to exit_sign (both are the room's emergency vocabulary — the sign promises escape, the button promises stop); cousin to control_board (the control_board operates an experiment, the button TERMINATES it — they are bookends); peer to fume_hood (a hood without a nearby E-stop is a hood the lab doesn't trust)
 # truth: an emergency button is not just a switch. It is the room's MORAL ESCAPE HATCH — the promise that consent to participate in the experiment includes the right to withdraw it instantly. The mushroom shape is so that a falling body, slumping, palm-down, will press it.
 
@@ -17,6 +17,8 @@ class_name EmergencyButton
 ## front face of the plate is at +Z and the mushroom points +Z. When
 ## mounting="podium", a short stand drops below origin. When mounting="wall",
 ## the back of the plate is at z=0 so it mounts flush to a wall plane.
+
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # ── DNA ───────────────────────────────────────────────────────────────
 
@@ -78,24 +80,24 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_button_color"):
-		button_color = _parse_color(String(get_meta("config_button_color")), button_color)
+		button_color = _parse_color(str(get_meta("config_button_color")), button_color)
 	if has_meta("config_plate_color"):
-		plate_color = _parse_color(String(get_meta("config_plate_color")), plate_color)
+		plate_color = _parse_color(str(get_meta("config_plate_color")), plate_color)
 	if has_meta("config_text_color"):
-		text_color = _parse_color(String(get_meta("config_text_color")), text_color)
+		text_color = _parse_color(str(get_meta("config_text_color")), text_color)
 	if has_meta("config_button_radius"):
-		button_radius = float(String(get_meta("config_button_radius")))
+		button_radius = float(str(get_meta("config_button_radius")))
 	if has_meta("config_plate_width"):
-		plate_width = float(String(get_meta("config_plate_width")))
+		plate_width = float(str(get_meta("config_plate_width")))
 	if has_meta("config_plate_height"):
-		plate_height = float(String(get_meta("config_plate_height")))
+		plate_height = float(str(get_meta("config_plate_height")))
 	if has_meta("config_label_text"):
-		label_text = String(get_meta("config_label_text"))
+		label_text = str(get_meta("config_label_text"))
 	if has_meta("config_pressed"):
-		var v := String(get_meta("config_pressed")).to_lower()
+		var v := str(get_meta("config_pressed")).to_lower()
 		pressed = v in ["true", "1", "yes", "on"]
 	if has_meta("config_mounting"):
-		mounting = String(get_meta("config_mounting")).to_lower()
+		mounting = str(get_meta("config_mounting")).to_lower()
 
 
 func _clear_built_children() -> void:
@@ -232,21 +234,24 @@ func _build_mushroom() -> void:
 
 
 func _build_label() -> void:
-	var label := Label3D.new()
-	label.name = "Label"
-	label.text = label_text
-	label.font_size = 64
-	label.pixel_size = 0.0011
-	label.modulate = text_color
-	label.outline_size = 0
-	label.no_depth_test = false
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	# Position below the mushroom on the plate face.
+	# Bake the label text directly onto the plate surface — no floating Label3D.
+	# world_size: width spans ~88% of the plate; height is ~18% (one text row).
+	var w: float = plate_width * 0.88
+	var h: float = plate_height * 0.18
+	var quad: MeshInstance3D = BakedText.make_panel_mesh(
+		label_text,
+		plate_color,
+		text_color,
+		Vector2(w, h)
+	)
+	if quad == null:
+		return
+	quad.name = "LabelBaked"
+	# Position: same y as old Label3D (below centre), z proud of plate front by 0.003m.
 	var y := -plate_height * LABEL_Y_OFFSET_FRAC
-	var z := _plate_front_z() + 0.002
-	label.position = Vector3(0.0, y, z)
-	add_child(label)
+	var z := _plate_front_z() + 0.003
+	quad.position = Vector3(0.0, y, z)
+	add_child(quad)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

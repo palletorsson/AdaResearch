@@ -1,13 +1,15 @@
 extends Node3D
 class_name ElectricalPanel
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
-# essence: a wall-mounted breaker box — Aperture / industrial-utility-corridor vocabulary for "this room runs on electricity, and somebody decides which circuits ARE ON". A flat rectangular panel hanging on a wall, a hinged dark-steel door that either covers it (production) or swings 90° open (maintenance), an interior grid of black breakers with white levers (UP for ON, DOWN for OFF), a row of small status LEDs along the top, a hazard-yellow diagonal accent stripe in one corner, and a MAIN PANEL Label3D below the lights. The lab's confession that POWER is also POLITICS — somebody, somewhere, chose what is ON.
+# essence: a wall-mounted breaker box — Aperture / industrial-utility-corridor vocabulary for "this room runs on electricity, and somebody decides which circuits ARE ON". A flat rectangular panel hanging on a wall, a hinged dark-steel door that either covers it (production) or swings 90° open (maintenance), an interior grid of black breakers with white levers (UP for ON, DOWN for OFF), a row of small status LEDs along the top, a hazard-yellow diagonal accent stripe in one corner, and a MAIN PANEL signage label baked onto the panel face below the status LEDs. The lab's confession that POWER is also POLITICS — somebody, somewhere, chose what is ON.
 # desire: every powered lab wants its electricity to be VISIBLE — a single architectural object that says "this is where the room's circuits are controlled, here, by these levers". The panel wants to read as INFRASTRUCTURE-with-a-state. The state isn't decorative — it's the room's posture toward LIVE vs DARK.
 # critical_parameter: door_open — false reads as "secured / production / do not touch" (a closed dark face with one yellow hazard corner, the only legible thing is the warning), true reads as "maintenance / inspect / show me what is ON" (rows of breakers visible, each one's lever revealing whether that circuit is live). Same panel, two completely different rooms: one is locked-down, the other is being WORKED ON.
 # triggers: _ready() builds wall panel + door (closed flat OR rotated 90° around its left edge) + interior breakers (with levers UP for first breakers_on_count, DOWN for the rest) + status LEDs + hazard accent stripe + signage from exports; apply_grid_config rebuilds
 # emerges: door_open + most breakers ON = "fully operational, just inspecting"; door_open + most breakers OFF = "this lab is being decommissioned"; door_closed + LEDs lit = "power is live behind that door, don't open it carelessly"; status_lights count 1 = "just a master indicator"; count many = "multi-circuit health check". The breaker count + on_count combination tells the player what the LAB IS DOING WITH ITS POWER.
-# needs: wall-mountable rectangular panel with back-flush mounting (origin on back face) [present]; hinged door covering the front when closed, rotating 90° about its left edge when open [present]; door handle on the right side of the door [present]; interior breakers in 2 columns × N rows [present]; breaker levers UP/DOWN to express ON/OFF [present]; status LED row along top [present]; hazard accent stripe across one corner [present]; signage Label3D at default rotation [present]
+# needs: wall-mountable rectangular panel with back-flush mounting (origin on back face) [present]; hinged door covering the front when closed, rotating 90° about its left edge when open [present]; door handle on the right side of the door [present]; interior breakers in 2 columns × N rows [present]; breaker levers UP/DOWN to express ON/OFF [present]; status LED row along top [present]; hazard accent stripe across one corner [present]; signage baked onto panel front face [present]
 # relationships: sibling to emergency_button (both are the lab's INTERRUPTERS — the e-stop says "halt the experiment NOW", the panel says "halt this specific circuit, here, by hand"); cousin to control_board (both are interfaces, but the control_board is for OPERATING the experiment, the panel is for KEEPING THE EXPERIMENT POSSIBLE); peer to cable_tray (a panel with no cable tray overhead is an island — they presume each other architecturally)
 # truth: an electrical panel is not just a box of switches. It is the lab's CIRCULATORY MAP — every chamber's power passes through it, every chamber's life depends on it, and every breaker is a small political decision about WHICH PARTS OF THE LAB DESERVE POWER RIGHT NOW. The panel makes infrastructure decidable, and decidability is the room's true confession that not everything can be ON at once.
 
@@ -90,36 +92,36 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_panel_width"):
-		panel_width = float(String(get_meta("config_panel_width")))
+		panel_width = float(str(get_meta("config_panel_width")))
 	if has_meta("config_panel_height"):
-		panel_height = float(String(get_meta("config_panel_height")))
+		panel_height = float(str(get_meta("config_panel_height")))
 	if has_meta("config_panel_depth"):
-		panel_depth = float(String(get_meta("config_panel_depth")))
+		panel_depth = float(str(get_meta("config_panel_depth")))
 	if has_meta("config_panel_color"):
-		panel_color = _parse_color(String(get_meta("config_panel_color")), panel_color)
+		panel_color = _parse_color(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_door_color"):
-		door_color = _parse_color(String(get_meta("config_door_color")), door_color)
+		door_color = _parse_color(str(get_meta("config_door_color")), door_color)
 	if has_meta("config_breaker_color"):
-		breaker_color = _parse_color(String(get_meta("config_breaker_color")), breaker_color)
+		breaker_color = _parse_color(str(get_meta("config_breaker_color")), breaker_color)
 	if has_meta("config_breaker_lever_color"):
-		breaker_lever_color = _parse_color(String(get_meta("config_breaker_lever_color")), breaker_lever_color)
+		breaker_lever_color = _parse_color(str(get_meta("config_breaker_lever_color")), breaker_lever_color)
 	if has_meta("config_status_color"):
-		status_color = _parse_color(String(get_meta("config_status_color")), status_color)
+		status_color = _parse_color(str(get_meta("config_status_color")), status_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_signage_color"):
-		signage_color = _parse_color(String(get_meta("config_signage_color")), signage_color)
+		signage_color = _parse_color(str(get_meta("config_signage_color")), signage_color)
 	if has_meta("config_door_open"):
-		var dv := String(get_meta("config_door_open")).to_lower()
+		var dv := str(get_meta("config_door_open")).to_lower()
 		door_open = dv in ["true", "1", "yes", "on"]
 	if has_meta("config_breaker_count"):
-		breaker_count = int(String(get_meta("config_breaker_count")))
+		breaker_count = int(str(get_meta("config_breaker_count")))
 	if has_meta("config_breakers_on_count"):
-		breakers_on_count = int(String(get_meta("config_breakers_on_count")))
+		breakers_on_count = int(str(get_meta("config_breakers_on_count")))
 	if has_meta("config_status_lights_count"):
-		status_lights_count = int(String(get_meta("config_status_lights_count")))
+		status_lights_count = int(str(get_meta("config_status_lights_count")))
 	if has_meta("config_signage_text"):
-		signage_text = String(get_meta("config_signage_text"))
+		signage_text = str(get_meta("config_signage_text"))
 
 
 func _clear_built_children() -> void:
@@ -201,20 +203,17 @@ func _build_status_lights() -> void:
 func _build_signage() -> void:
 	if signage_text == "":
 		return
-	var label := Label3D.new()
+	# Width: panel face minus interior insets. Height: ~one cap-height of the
+	# old LABEL_FONT_SIZE * LABEL_PIXEL_SIZE stack (32 * 0.0026 * 1.3 ≈ 0.108 m).
+	var w: float = panel_width - INTERIOR_INSET * 2.0
+	var h: float = float(LABEL_FONT_SIZE) * LABEL_PIXEL_SIZE * 1.3
+	var label := BakedText.make_label_mesh(signage_text, signage_color, Vector2(w, h))
+	if label == null:
+		return
 	label.name = "Signage"
-	label.text = signage_text
-	label.font_size = LABEL_FONT_SIZE
-	label.outline_size = 4
-	label.pixel_size = LABEL_PIXEL_SIZE
-	label.modulate = signage_color
-	label.outline_modulate = Color(0.05, 0.05, 0.05)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.no_depth_test = false
-	# Default Label3D rotation — text faces +Z, which is the panel's front.
+	# Position where the old Label3D sat, proud of the panel front face.
 	var y: float = panel_height * 0.5 - 0.13
-	var z: float = _front_z() + 0.002
+	var z: float = _front_z() + 0.003
 	label.position = Vector3(0.0, y, z)
 	add_child(label)
 
