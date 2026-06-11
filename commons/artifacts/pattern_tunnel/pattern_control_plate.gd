@@ -275,13 +275,13 @@ func _boost_value_label(s: Node) -> void:
 	var lbl := s.get_node_or_null("Frame/Label3DValue") as Label3D
 	if lbl == null:
 		return
-	lbl.font_size = 30
-	lbl.pixel_size = 0.0016
+	lbl.font_size = 24
+	lbl.pixel_size = 0.0011
 	lbl.modulate = TEXT_DARK
-	lbl.outline_size = 10
+	lbl.outline_size = 6
 	lbl.outline_modulate = Color(PANEL_LIGHT.r, PANEL_LIGHT.g, PANEL_LIGHT.b, 1.0)
-	# lift it clear of the track so the bigger glyphs read against the board, not the groove
-	lbl.position = Vector3(lbl.position.x, 0.052, 0.012)
+	# lift it clear of the track so the glyphs read against the board, not the groove
+	lbl.position = Vector3(lbl.position.x, 0.046, 0.012)
 
 
 func _frame(cx: float, cy: float, w: float, h: float, thick: float = 0.012) -> void:
