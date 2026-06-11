@@ -52,8 +52,8 @@ const PatternSim = preload("res://commons/pattern_grammar/pattern_sim.gd")
 @export var accent_color: Color = Color(1.0, 0.55, 0.12)    # press-orange accent
 @export var ink_glow_color: Color = Color(1.0, 0.7, 0.25)
 ## Side length of the printed carpet that feeds off the tray (metres).
-@export var carpet_width: float = 1.1
-@export var carpet_length: float = 2.4
+@export var carpet_width: float = 2.0
+@export var carpet_length: float = 3.8
 ## How many matrix repeats span the carpet width.
 @export var carpet_repeats: int = 8
 @export var feed_speed: float = 0.10
@@ -159,9 +159,9 @@ func _build_control_plate() -> void:
 		])
 	# operator station: a step the player stands on (the carpet stamps out toward +Z), with
 	# the console at its front edge facing the player, so they look DOWN past it at the output.
-	_build_operator_platform(Vector3(0.0, 0.0, 3.9), Vector3(2.4, 0.36, 1.7))
+	_build_operator_platform(Vector3(0.0, 0.0, 4.9), Vector3(2.6, 0.36, 1.7))
 	add_child(plate)
-	(plate as Node3D).position = Vector3(0.0, 0.36, 3.3)
+	(plate as Node3D).position = Vector3(0.0, 0.36, 4.3)
 	(plate as Node3D).rotation_degrees = Vector3(0.0, 0.0, 0.0)   # screen faces the player at +Z
 	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate):
 		plate.connect("changed", _on_plate)

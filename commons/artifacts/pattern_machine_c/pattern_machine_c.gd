@@ -62,7 +62,7 @@ const WallpaperGroupsScript = preload("res://commons/primitives/arrays/wallpaper
 @export var metal_color: Color = Color(0.32, 0.34, 0.40)      # brushed metal
 @export var accent_color: Color = Color(1.0, 0.55, 0.15)      # warm amber accent
 @export var core_color: Color = Color(0.35, 0.9, 1.0)         # cyan core glow
-@export var carpet_world_size: float = 4.0                    # carpet side length (m)
+@export var carpet_world_size: float = 5.4                    # carpet side length (m)
 @export var carpet_repeats: int = 9                           # domain repeats across carpet
 @export var rotor_speed: float = 0.6                          # rad/s base spin of mirror wedges
 
@@ -172,9 +172,9 @@ func _build_control_plate() -> void:
 		])
 	# operator station: a step the player stands on (the carpet mills out toward +Z), with the
 	# console at its front edge facing the player, so they look DOWN past it at the carpet.
-	_build_operator_platform(Vector3(0.0, 0.0, 4.0), Vector3(2.4, 0.36, 1.7))
+	_build_operator_platform(Vector3(0.0, 0.0, 6.4), Vector3(2.4, 0.36, 1.7))
 	add_child(plate)
-	(plate as Node3D).position = Vector3(0.0, 0.36, 3.4)
+	(plate as Node3D).position = Vector3(0.0, 0.36, 5.8)
 	(plate as Node3D).rotation_degrees = Vector3(0.0, 0.0, 0.0)   # screen faces the player at +Z
 	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate):
 		plate.connect("changed", _on_plate)
