@@ -22,6 +22,19 @@ const GROUPS := ["P1","P2","PM","PG","PMM","PMG","PGG","CM","CMM","P4","P4M","P4
 const MOTIFS := ["Checkerboard","Greek Key","Hex Rosette","Eight-Point Star"]
 const PERIODS := ["Republican","Imperial","Cosmatesque","Renaissance","Baroque"]
 
+# --- live pattern preview (the "pattern rect") ------------------------------
+const WallpaperGroups = preload("res://commons/primitives/arrays/wallpaper_groups.gd")
+const MOTIF_GRIDS := [
+	{"size": 2, "data": [[0,1],[1,0]]},
+	{"size": 8, "data": [[1,1,1,1,1,1,1,0],[0,0,0,0,0,0,1,0],[0,1,1,1,1,0,1,0],[0,1,0,0,1,0,1,0],[0,1,0,1,1,0,1,0],[0,1,0,0,0,0,1,0],[0,1,1,1,1,1,1,0],[0,0,0,0,0,0,0,0]]},
+	{"size": 8, "data": [[0,0,0,1,1,0,0,0],[0,0,1,2,2,1,0,0],[0,1,2,1,1,2,1,0],[1,2,1,0,0,1,2,1],[1,2,1,0,0,1,2,1],[0,1,2,1,1,2,1,0],[0,0,1,2,2,1,0,0],[0,0,0,1,1,0,0,0]]},
+	{"size": 8, "data": [[0,0,0,1,1,0,0,0],[0,0,1,1,1,1,0,0],[0,1,1,0,0,1,1,0],[1,1,0,0,0,0,1,1],[1,1,0,0,0,0,1,1],[0,1,1,0,0,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,1,1,0,0,0]]},
+]
+const PREVIEW_PAL := [
+	Color(0.95, 0.93, 0.88), Color(0.85, 0.20, 0.28), Color(0.13, 0.45, 0.78),
+	Color(0.97, 0.78, 0.18), Color(0.20, 0.62, 0.45), Color(0.10, 0.10, 0.13),
+]
+
 # Braun / Dieter Rams palette
 const PANEL_LIGHT := Color(0.81, 0.79, 0.75)
 const PANEL_TRIM := Color(0.69, 0.67, 0.63)
@@ -44,6 +57,7 @@ var title: String = "PATTERN CONTROL"
 var _specs: Array = []
 var _values: Dictionary = {}
 var _monitor: Label3D = null
+var _preview_mat: StandardMaterial3D = null
 var _built := false
 
 
@@ -93,9 +107,10 @@ func _build() -> void:
 	add_child(_box(Vector3(0.0, BOARD_TOP - 0.07, 0.006), Vector3(1.34, 0.012, 0.008), _emat(ACCENT, 0.2)))
 	_text(0.0, BOARD_TOP - 0.135, title, 34, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
 
-	# --- top row: inset monitor (left) + cube socket (right) --------------------
-	_build_monitor(Vector3(-0.31, MON_Y, 0.0), 0.74, 0.34)
-	_build_cube(Vector3(0.50, MON_Y, 0.0))
+	# --- top row: text monitor (left) + pattern rect (centre) + cube (right) ----
+	_build_monitor(Vector3(-0.50, MON_Y, 0.0), 0.40, 0.34)
+	_build_preview(Vector3(0.06, MON_Y, 0.0), 0.42, 0.34)
+	_build_cube(Vector3(0.58, MON_Y, 0.0))
 
 	# --- the slider grid (2 columns) --------------------------------------------
 	for i in range(n):
@@ -111,8 +126,44 @@ func _build() -> void:
 func _build_monitor(c: Vector3, w: float, h: float) -> void:
 	add_child(_box(Vector3(c.x, c.y, FLUSH_Z), Vector3(w, h, 0.006), _emat(DISPLAY_DARK, 0.0)))
 	_frame(c.x, c.y, w + 0.03, h + 0.03)
-	_monitor = _text(c.x - w * 0.5 + 0.03, c.y, "", 22, TEXT_DISPLAY, HORIZONTAL_ALIGNMENT_LEFT)
+	_monitor = _text(c.x - w * 0.5 + 0.025, c.y, "", 17, TEXT_DISPLAY, HORIZONTAL_ALIGNMENT_LEFT)
 	_monitor.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+
+
+## The live "pattern rect" — a wallpaper swatch of the current group + motif.
+func _build_preview(c: Vector3, w: float, h: float) -> void:
+	_preview_mat = StandardMaterial3D.new()
+	_preview_mat.roughness = 0.85
+	_preview_mat.metallic = 0.0
+	_preview_mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	_preview_mat.albedo_color = Color.WHITE
+	var q := MeshInstance3D.new()
+	var qm := QuadMesh.new()
+	qm.size = Vector2(w, h)
+	q.mesh = qm
+	q.material_override = _preview_mat
+	q.position = Vector3(c.x, c.y, FLUSH_Z + 0.002)
+	add_child(q)
+	_frame(c.x, c.y, w + 0.03, h + 0.03)
+	_text(c.x, c.y + h * 0.5 + 0.03, "PATTERN", 15, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	_regen_preview()
+
+
+func _regen_preview() -> void:
+	if _preview_mat == null:
+		return
+	var gi: int = clampi(int(_values.get("group", 10)), 0, 16)
+	var mi: int = clampi(int(_values.get("motif", 0)), 0, MOTIF_GRIDS.size() - 1)
+	var m: Dictionary = MOTIF_GRIDS[mi]
+	var grid: Array = m["data"]
+	var gs: int = int(m["size"])
+	var n: int = 4 * gs
+	var img := Image.create(n, n, false, Image.FORMAT_RGBA8)
+	for py in range(n):
+		for px in range(n):
+			var ci: int = WallpaperGroups.get_symmetric_color(px, py, gs, grid, gi)
+			img.set_pixel(px, py, PREVIEW_PAL[ci % PREVIEW_PAL.size()])
+	_preview_mat.albedo_texture = ImageTexture.create_from_image(img)
 
 
 func _build_cube(c: Vector3) -> void:
@@ -188,6 +239,7 @@ func _update_monitor() -> void:
 			disp = "%.1f" % v
 		lines.append("%s   %s" % [String(spec["label"]).rpad(8), disp])
 	_monitor.text = "\n".join(lines)
+	_regen_preview()
 
 
 # ── builders ──────────────────────────────────────────────────────────────────
