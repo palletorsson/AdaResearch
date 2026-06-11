@@ -1,13 +1,15 @@
 extends Node3D
 class_name SlideProjector
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a rectangular dark-steel projector chassis with a translucent lamp-warm glass lens recessed into its front face, an emissive cone of light exiting the lens along +Z, a round slide carousel on top with `slide_count` radial slot strips, and a Label3D on the side reading the current frame number ("FRAME 7"). In the lab's grammar, the slide_projector is the SEQUENTIAL-FRAME / TIME-STEPPING / ANIMATION ENGINE — the textbook device for "the world is a sequence of static images shown one at a time, fast enough to look continuous".
 # desire: every iteration / animation algorithm wants to be SEEN as a discrete sequence of frames. The slide_projector wants to be the architectural form of "here is the current frame number, here is the carousel of frames waiting, here is the BEAM that lights one frame at a time, and here is the time-step from one slide to the next". It wants the player to read current_slide_number as the loop variable i, and the carousel as the array being indexed.
 # critical_parameter: current_slide_number — together with slide_count, this IS the time-stepping statement of the prop. slide_count is the total number of frames (the array length); current_slide_number is the index i ∈ [0, slide_count). Same projector, different stories: slide 0 = INITIAL STATE, slide_count/2 = MIDPOINT, slide_count-1 = TERMINAL STATE. The projector is the animation loop made physical.
 # triggers: _ready() builds chassis + lens + beam + carousel disc + slide-count slot strips + frame label + accent stripe from exports; apply_grid_config rebuilds
 # emerges: a projector with beam_visible reads as "the loop is RUNNING — one frame at a time". The carousel with many slots reads as DEEP TIME / many iterations remaining. The Label3D reading "FRAME 7" reads as the loop counter i=7 — the prop ENACTS the for-loop in geometry.
-# needs: rectangular chassis [present]; recessed translucent lens [present]; emissive light cone exiting lens [present when beam_visible]; circular slide carousel disc on top [present when slide_carousel_visible]; radial slot strips on carousel [present]; frame-number Label3D on side [present]; accent stripe along lens housing [present]
+# needs: rectangular chassis [present]; recessed translucent lens [present]; emissive light cone exiting lens [present when beam_visible]; circular slide carousel disc on top [present when slide_carousel_visible]; radial slot strips on carousel [present]; frame-number baked text on front face [present, unshaded]; accent stripe along lens housing [present]
 # relationships: sibling to oscilloscope (both VISUALISE the unfolding of a signal — scope shows a whole waveform at once, projector shows ONE FRAME at a time); cousin to wall_clock (both NAME the passage of time — clock is continuous, projector is discrete-stepped); peer to terrarium (both bound a small system — terrarium bounds a population in glass, projector bounds an animation in a carousel)
 # truth: animation IS time-stepping: you advance an index, you redraw, you advance again. Numerical integration is animation with physics; iterative algorithms are animation with logic. The slide_projector is the lab's reminder that "for i in range(n)" is the same shape as "the carousel clicks one slot forward and the beam shows the next frame".
 
@@ -78,42 +80,42 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_body_width"):
-		body_width = float(String(get_meta("config_body_width")))
+		body_width = float(str(get_meta("config_body_width")))
 	if has_meta("config_body_height"):
-		body_height = float(String(get_meta("config_body_height")))
+		body_height = float(str(get_meta("config_body_height")))
 	if has_meta("config_body_depth"):
-		body_depth = float(String(get_meta("config_body_depth")))
+		body_depth = float(str(get_meta("config_body_depth")))
 	if has_meta("config_lens_radius"):
-		lens_radius = float(String(get_meta("config_lens_radius")))
+		lens_radius = float(str(get_meta("config_lens_radius")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_lens_color"):
-		lens_color = _parse_color(String(get_meta("config_lens_color")), lens_color)
+		lens_color = _parse_color(str(get_meta("config_lens_color")), lens_color)
 	if has_meta("config_lamp_color"):
-		lamp_color = _parse_color(String(get_meta("config_lamp_color")), lamp_color)
+		lamp_color = _parse_color(str(get_meta("config_lamp_color")), lamp_color)
 	if has_meta("config_beam_color"):
-		beam_color = _parse_color(String(get_meta("config_beam_color")), beam_color)
+		beam_color = _parse_color(str(get_meta("config_beam_color")), beam_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_lamp_on"):
-		var lv := String(get_meta("config_lamp_on")).to_lower()
+		var lv := str(get_meta("config_lamp_on")).to_lower()
 		lamp_on = lv in ["true", "1", "yes", "on"]
 	if has_meta("config_lamp_glow"):
-		lamp_glow = float(String(get_meta("config_lamp_glow")))
+		lamp_glow = float(str(get_meta("config_lamp_glow")))
 	if has_meta("config_beam_visible"):
-		var bv := String(get_meta("config_beam_visible")).to_lower()
+		var bv := str(get_meta("config_beam_visible")).to_lower()
 		beam_visible = bv in ["true", "1", "yes", "on"]
 	if has_meta("config_beam_length"):
-		beam_length = float(String(get_meta("config_beam_length")))
+		beam_length = float(str(get_meta("config_beam_length")))
 	if has_meta("config_slide_carousel_visible"):
-		var scv := String(get_meta("config_slide_carousel_visible")).to_lower()
+		var scv := str(get_meta("config_slide_carousel_visible")).to_lower()
 		slide_carousel_visible = scv in ["true", "1", "yes", "on"]
 	if has_meta("config_carousel_radius"):
-		carousel_radius = float(String(get_meta("config_carousel_radius")))
+		carousel_radius = float(str(get_meta("config_carousel_radius")))
 	if has_meta("config_slide_count"):
-		slide_count = int(String(get_meta("config_slide_count")))
+		slide_count = int(str(get_meta("config_slide_count")))
 	if has_meta("config_current_slide_number"):
-		current_slide_number = int(String(get_meta("config_current_slide_number")))
+		current_slide_number = int(str(get_meta("config_current_slide_number")))
 
 
 func _clear_built_children() -> void:
@@ -256,19 +258,20 @@ func _build_carousel() -> void:
 
 
 func _build_frame_label() -> void:
-	# Label3D on the side (-X face) of the body showing the current frame number.
-	var label := Label3D.new()
-	label.name = "FrameLabel"
-	label.text = "FRAME %d" % current_slide_number
-	label.modulate = accent_color
-	label.font_size = 56
-	label.outline_size = 6
-	label.pixel_size = 0.0008
-	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	label.no_depth_test = false
-	# Default Label3D faces +Z. Put it on the chassis +Z front face (right above the lens housing strip).
-	label.position = Vector3(body_width * 0.30, body_height * 0.78, body_depth * 0.5 + 0.006)
-	add_child(label)
+	# Baked text quad on the +Z front face of the chassis showing the current frame number.
+	# Replaces the old Label3D. unshaded=true because the readout sits next to the emissive
+	# accent strip and should glow with the same lamp-warm feel.
+	var text := "FRAME %d" % current_slide_number
+	# world_size: roughly the footprint the Label3D occupied (~80% of body_width × a thin strip)
+	var quad: MeshInstance3D = BakedText.make_label_mesh(
+			text, accent_color,
+			Vector2(body_width * 0.80, body_height * 0.14),
+			1400, true)
+	if quad:
+		quad.name = "FrameLabel"
+		# Position proud of the +Z face, same height as the old Label3D.
+		quad.position = Vector3(body_width * 0.30, body_height * 0.78, body_depth * 0.5 + 0.006)
+		add_child(quad)
 
 
 func _build_accent_strip() -> void:

@@ -7,7 +7,7 @@ class_name ComputerConsole
 # critical_parameter: screen_content — "diagram" reads as "all nominal, here is the data, come look" (teal/blue line graphs + a colourful spectrogram, the living reference); "alert" reads as "something is wrong, attend NOW" (a red wash, red bars, an ! ALERT legend); "off" reads as "this station is dark — powered down, unwatched, the room is not reporting" (a flat grey dead screen, no emission, no graphics, only the cable still hanging as proof the thing exists). Same cabinet, three completely different rooms: one is monitored, one is in crisis, one is abandoned.
 # triggers: _ready() builds cabinet + front door (slim handle) + tilted bezel housing + emissive monitor (graphics chosen by screen_content) + pull-out keyboard tray with a key grid + a drooping right-side cable from exports; apply_grid_config rebuilds
 # emerges: screen_content="diagram" + tray out = "an active workstation, mid-session"; screen_content="alert" = "the lab just tripped a threshold, the red is calling someone"; screen_on=false = "decommissioned terminal, the cable is the only remaining infrastructure"; remove the cable and the console becomes a sealed kiosk; widen the cabinet and it becomes a server pedestal. The glass + cable combination tells the player whether the room is BEING WATCHED.
-# needs: floor-standing vertical cabinet with a flat base (origin at base center on the floor) [present]; single front door with a slim vertical pull handle [present]; top housing that tilts the screen back ~20° toward a standing reader [present]; bezel framing an emissive monitor [present]; data-viz on the glass — line-graph bars + a multi-stripe spectrogram block [present]; alert variant — red wash + ! ALERT legend [present]; off variant — dark non-emissive glass [present]; pull-out keyboard tray under the screen holding a grid of small keys [present]; thick black cable looping out the +X side and drooping to the floor [present]
+# needs: floor-standing vertical cabinet with a flat base (origin at base center on the floor) [present]; single front door with a slim vertical pull handle [present]; top housing that tilts the screen back ~20° toward a standing reader [present]; bezel framing an emissive monitor [present]; data-viz on the glass — line-graph bars + a multi-stripe spectrogram block [present]; alert variant — red wash + ! ALERT legend baked onto the screen surface (self-glowing, unshaded quad) [present]; off variant — dark non-emissive glass [present]; pull-out keyboard tray under the screen holding a grid of small keys [present]; thick black cable looping out the +X side and drooping to the floor [present]
 # relationships: sibling to electrical_panel (both are the lab's INTERFACES, but the panel is where you DECIDE what is on and the console is where you READ what is happening — decision vs witness); cousin to control_board (both are operated standing, but the control_board acts ON the experiment and the console only REPORTS it); peer to the cable_tray and the breaker (a console with no cable is a screenshot, not a machine — the cable is its umbilical to the room's power and signal)
 # truth: a computer console is not a screen. It is the place a room PUTS ITS FACE so a body can read it — the architecture of attention. The cabinet raises the glass to eye height, the tilt angles it toward you, the keyboard tray invites your hands, and the cable confesses that all of this only works because it is plugged into something larger. The console makes the room's interior state STANDABLE-IN-FRONT-OF, and that posture — the going-to-look — is the lab's true confession that data only matters when somebody is watching.
 
@@ -43,6 +43,10 @@ class_name ComputerConsole
 @export var cable_visible: bool = true
 @export var cable_color: Color = Color(0.07, 0.07, 0.08)
 
+# ── External helpers ──────────────────────────────────────────────────
+
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # ── Constants ─────────────────────────────────────────────────────────
 
 const CABINET_FRACTION: float = 0.64       # cabinet height as fraction of total
@@ -61,8 +65,6 @@ const KEY_ROWS: int = 4
 const KEY_GAP: float = 0.004
 const CABLE_RADIUS: float = 0.018
 const CABLE_SEGMENTS: int = 10             # short cylinders forming the droop loop
-const LABEL_PIXEL_SIZE: float = 0.0026
-const LABEL_FONT_SIZE: int = 30
 
 # ── Internal state ────────────────────────────────────────────────────
 
@@ -354,20 +356,19 @@ func _build_alert_graphics(parent: Node3D, cy: float, gw: float, gh: float, z: f
 		Vector3(0.0, cy - gh * 0.04, z),
 		red, 2.8)
 
-	var label := Label3D.new()
-	label.name = "AlertLabel"
-	label.text = "! ALERT"
-	label.font_size = LABEL_FONT_SIZE
-	label.outline_size = 5
-	label.pixel_size = LABEL_PIXEL_SIZE
-	label.modulate = Color(1.0, 0.92, 0.90)
-	label.outline_modulate = Color(0.20, 0.0, 0.0)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.no_depth_test = false
-	# Default Label3D faces +Z, which is the glass front in the tilted frame.
-	label.position = Vector3(0.0, cy - gh * 0.22, z + 0.004)
-	parent.add_child(label)
+	# "! ALERT" baked onto the screen surface — unshaded so it self-glows with
+	# the screen (the fire_extinguisher principle, via BakedText.make_label_mesh).
+	# Parented under the same tilted pivot the Label3D used, at the same local
+	# position, so it tilts with the screen housing. world_size matches the old
+	# Label3D footprint on the glass.
+	var quad := BakedText.make_label_mesh(
+		"! ALERT", Color(1.0, 0.92, 0.90),
+		Vector2(gw * 0.60, gh * 0.14), 1400, true)
+	if quad:
+		quad.name = "AlertLabel"
+		# Place proud of the glass face, same Y as the old Label3D.
+		quad.position = Vector3(0.0, cy - gh * 0.22, z + 0.004)
+		parent.add_child(quad)
 
 
 func _build_keyboard_tray() -> void:

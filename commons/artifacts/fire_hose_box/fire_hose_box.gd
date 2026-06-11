@@ -1,13 +1,15 @@
 extends Node3D
 class_name FireHoseBox
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a wall-mounted fire-hose cabinet — corridor / emergency-infrastructure vocabulary for "this building knows it can burn, and somebody pre-decided where the water lives". A deep fire-red metal box bolted to the wall, a hinged door with a square glass window through which a flat-coiled hose and its brass nozzle wait, FIRE HOSE in white capitals across the door's foot, a small latch on the left edge, hinges on the right, and a white reel pictogram on the side panel. The building's standing promise that the moment of fire has already been answered, here, behind this red door.
 # desire: every occupied building wants its means-of-rescue to be VISIBLE and FINDABLE — a single red architectural object that says "if it burns, the water is HERE, reach through this window, take this nozzle". The box wants to read as DORMANT-READINESS: not in use, but never neutral. Its whole posture is "in case", and "in case" is the most political stance a wall can take.
 # critical_parameter: door_open — false reads as "sealed / ready / do not disturb" (the coiled hose seen calmly through the square window, the building at rest, the promise intact and untouched), true reads as "engaged / emergency / the hose is being reached for" (door swung wide on its right-edge hinge, the full reel and nozzle exposed, the dormant promise now an active grab). Same red box, two utterly different rooms: one is a corridor on an ordinary day, the other is a corridor on fire.
 # triggers: _ready() builds the red wall box + interior coiled hose (concentric rings) + central nozzle + door (a closed window-frame OR a solid slab, pivoted shut OR swung ~100° on its right edge) + left-edge latch + FIRE HOSE label + side reel pictogram from exports; apply_grid_config rebuilds
 # emerges: door_open=false + has_window=true = "the reference, the everyday corridor, the promise visible and intact"; door_open=true = "someone has reached in, the emergency is now"; has_window=false + door_open=false = "a blind sealed cabinet, the hose present but hidden, trust without sight". The window + door-state combination tells the player whether the building is RESTING, ACTING, or merely ASSERTING its readiness.
-# needs: wall-mountable deep red box with back-flush mounting (origin on back face) [present]; interior flat-coiled hose of concentric rings always present so it shows through the window and when open [present]; central brass nozzle resting in the coil [present]; hinged door covering the front, a square window cut-out (4-bar frame) when has_window, rotating ~100° about its RIGHT edge when open [present]; small latch/handle on the LEFT edge of the door [present]; FIRE HOSE Label3D along the door's bottom, facing +Z [present]; white reel pictogram + caption on the +X side panel [present]; hinges on the right edge [present]
+# needs: wall-mountable deep red box with back-flush mounting (origin on back face) [present]; interior flat-coiled hose of concentric rings always present so it shows through the window and when open [present]; central brass nozzle resting in the coil [present]; hinged door covering the front, a square window cut-out (4-bar frame) when has_window, rotating ~100° about its RIGHT edge when open [present]; small latch/handle on the LEFT edge of the door [present]; FIRE HOSE baked-text quad along the door's bottom, facing +Z (text painted onto the red surface, no floating Label3D) [present]; white reel pictogram + baked-text caption on the +X side panel [present]; hinges on the right edge [present]
 # relationships: sibling to emergency_button (both are the corridor's PRE-COMMITMENTS to disaster — the e-stop says "halt the machine NOW", the hose box says "fight the fire HERE, with this"); cousin to electrical_panel (both are red/utility cabinets with a door that is closed-in-production and open-in-crisis, both make an invisible system decidable by hand); peer to the exit sign and extinguisher (a hose box with no extinguisher nearby is half a promise — emergency hardware presumes its companions along the same wall)
 # truth: a fire-hose box is not just a coil behind glass. It is the building's STANDING APOLOGY for its own flammability — a red admission, mounted at eye level, that fire was always possible and so the water was placed in advance. The window makes the promise auditable: you can see, on any ordinary day, that the coil is there, that the nozzle is there, that the answer to the worst day is already waiting. The door's state is the difference between a promise kept in reserve and a promise being spent.
 
@@ -358,31 +360,25 @@ func _build_window_door(pivot: Node3D, mat: StandardMaterial3D) -> void:
 
 
 func _build_label() -> void:
-	# FIRE HOSE in white capitals along the BOTTOM of the door, facing +Z.
+	# FIRE HOSE baked onto the BOTTOM bar of the door, facing +Z.
+	# Replaces a Label3D with a BakedText quad painted onto the red surface.
 	if label_text == "":
 		return
 	var pivot := get_node_or_null("DoorPivot")
 	if pivot == null:
 		return
-	var label := Label3D.new()
-	label.name = "Label"
-	label.text = label_text
-	label.font_size = LABEL_FONT_SIZE
-	label.outline_size = 5
-	label.pixel_size = LABEL_PIXEL_SIZE
-	label.modulate = label_color
-	label.outline_modulate = Color(0.05, 0.05, 0.05)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.no_depth_test = false
-	# Default Label3D faces +Z. Sit it on the door's bottom bar, slightly proud.
-	var cx: float = -box_width * 0.5
-	var y: float = -box_height * 0.5 + FRAME_BAR_WIDTH * 0.5
-	if not has_window:
-		y = -box_height * 0.5 + 0.06
-	var z: float = DOOR_DEPTH + 0.004
-	label.position = Vector3(cx, y, z)
-	pivot.add_child(label)
+	# world_size: full door width × bottom-bar height (matching the old Label3D footprint).
+	var w: float = box_width
+	var h: float = FRAME_BAR_WIDTH if has_window else 0.06
+	var quad := BakedText.make_label_mesh(label_text, label_color, Vector2(w, h))
+	if quad:
+		quad.name = "Label"
+		# Same position as the old Label3D: bottom-bar centre, proud of door face.
+		var cx: float = -box_width * 0.5
+		var y: float = -box_height * 0.5 + h * 0.5
+		var z: float = DOOR_DEPTH + 0.004
+		quad.position = Vector3(cx, y, z)
+		pivot.add_child(quad)
 
 
 func _build_side_pictogram() -> void:
@@ -448,21 +444,18 @@ func _build_side_pictogram() -> void:
 	handle.position = Vector3(0.005, picto_r + 0.025, 0.0)
 	root.add_child(handle)
 
-	# Small FIRE HOSE caption below the pictogram, reading along +X.
-	var cap := Label3D.new()
-	cap.name = "PictoCaption"
-	cap.text = label_text
-	cap.font_size = PICTO_FONT_SIZE
-	cap.outline_size = 3
-	cap.pixel_size = PICTO_PIXEL_SIZE
-	cap.modulate = Color(0.96, 0.96, 0.96)
-	cap.outline_modulate = Color(0.05, 0.05, 0.05)
-	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	cap.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	# Rotate so the caption faces +X like the rest of the pictogram.
-	cap.rotation = Vector3(0.0, PI * 0.5, 0.0)
-	cap.position = Vector3(0.006, -picto_r - 0.05, 0.0)
-	root.add_child(cap)
+	# Small FIRE HOSE caption below the pictogram — baked quad facing +X.
+	# Replaces a Label3D with a BakedText quad rotated to face the +X side panel.
+	var cap_w: float = float(label_text.length()) * PICTO_FONT_SIZE * PICTO_PIXEL_SIZE * 0.6
+	var cap_h: float = PICTO_FONT_SIZE * PICTO_PIXEL_SIZE * 1.3
+	var cap := BakedText.make_label_mesh(label_text, Color(0.96, 0.96, 0.96),
+			Vector2(cap_w, cap_h))
+	if cap:
+		cap.name = "PictoCaption"
+		# Rotate the quad so its +Z normal points toward +X (face the side panel).
+		cap.rotation = Vector3(0.0, PI * 0.5, 0.0)
+		cap.position = Vector3(0.006, -picto_r - 0.05, 0.0)
+		root.add_child(cap)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

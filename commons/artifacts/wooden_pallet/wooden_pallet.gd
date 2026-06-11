@@ -1,6 +1,8 @@
 extends Node3D
 class_name WoodenPallet
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a standard block/EUR shipping pallet with cardboard cartons stacked on its deck — the logistics-warehouse vocabulary for "this stuff is MID-JOURNEY, palletised, waiting to move". A slatted pale-timber platform (six deck boards with finger-gaps, stringer blocks lifting it off the floor to leave forklift slots on every side) carrying light kraft cardboard boxes sealed with tape, marked FRAGILE in red, this-way-up arrows in black, a barcode and a small yellow shipping label. The warehouse's confession that everything is FREIGHT before it is a thing — boxed, labelled, lifted, and bound for somewhere else.
 # desire: every loaded pallet wants to read as a UNIT OF TRANSIT — one liftable, stackable, addressable parcel of the world. It wants the timber to say "lift me here, by the forks" and the boxes to say "handle me thus, send me there". The pallet wants to be the smallest legible quantum of supply: not a box, not a crate, but the standardised slab on which commerce agrees to move.
@@ -62,8 +64,7 @@ const BARCODE_BARS: int = 11
 const LABEL_W: float = 0.13
 const LABEL_H: float = 0.085
 const LABEL_DEPTH: float = 0.004
-const LABEL_PIXEL_SIZE: float = 0.0026
-const LABEL_FONT_SIZE: int = 32
+# LABEL_PIXEL_SIZE / LABEL_FONT_SIZE removed — Label3Ds replaced by BakedText quads.
 
 # ── Internal state ────────────────────────────────────────────────────
 
@@ -330,21 +331,20 @@ func _decorate_front(box_root: Node3D) -> void:
 	strip.position = Vector3(-box_w * 0.30, 0.0, fz)
 	box_root.add_child(strip)
 
-	# FRAGILE text down the red strip (rotated 90° about Z so it reads vertically),
-	# still facing +Z.
-	var frag := Label3D.new()
-	frag.name = "FragileText"
-	frag.text = "FRAGILE"
-	frag.font_size = LABEL_FONT_SIZE
-	frag.outline_size = 4
-	frag.pixel_size = LABEL_PIXEL_SIZE * 0.62
-	frag.modulate = Color(0.98, 0.97, 0.95)
-	frag.outline_modulate = Color(0.30, 0.03, 0.03)
-	frag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	frag.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	frag.rotation = Vector3(0.0, 0.0, deg_to_rad(90.0))  # vertical text, still faces +Z
-	frag.position = Vector3(-box_w * 0.30, 0.0, fz + FRAGILE_STRIP_DEPTH + 0.001)
-	box_root.add_child(frag)
+	# FRAGILE text baked onto the red strip — rotated 90° about Z so it reads
+	# vertically, still facing +Z.  world_size matches the tape: strip height as
+	# the "width" dimension, strip width as the "height" dimension (we rotate the
+	# quad so they swap visually).
+	var frag: MeshInstance3D = BakedText.make_label_mesh(
+		"FRAGILE",
+		Color(0.98, 0.97, 0.95),
+		Vector2(box_h * 0.9, FRAGILE_STRIP_WIDTH)
+	)
+	if frag:
+		frag.name = "FragileText"
+		frag.rotation = Vector3(0.0, 0.0, deg_to_rad(90.0))  # vertical text, still faces +Z
+		frag.position = Vector3(-box_w * 0.30, 0.0, fz + FRAGILE_STRIP_DEPTH + 0.001)
+		box_root.add_child(frag)
 
 	# 2) Two "this way up" pictogram squares (black border, white field, ↑) stacked
 	#    on the right of the front face.
@@ -389,19 +389,16 @@ func _make_arrow_panel(box_root: Node3D, pos: Vector3) -> void:
 	border.position = pos - Vector3(0.0, 0.0, ARROW_PANEL_DEPTH * 0.3)
 	box_root.add_child(border)
 
-	# Up-arrow glyph, facing +Z.
-	var glyph := Label3D.new()
-	glyph.name = "ArrowGlyph"
-	glyph.text = "↑↑"  # ↑↑
-	glyph.font_size = LABEL_FONT_SIZE
-	glyph.outline_size = 2
-	glyph.pixel_size = LABEL_PIXEL_SIZE * 0.85
-	glyph.modulate = Color(0.08, 0.08, 0.08)
-	glyph.outline_modulate = Color(0.95, 0.95, 0.93)
-	glyph.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	glyph.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	glyph.position = pos + Vector3(0.0, 0.0, ARROW_PANEL_DEPTH * 0.5 + 0.001)
-	box_root.add_child(glyph)
+	# Up-arrow glyph baked onto the arrow panel, facing +Z.
+	var glyph: MeshInstance3D = BakedText.make_label_mesh(
+		"↑↑",
+		Color(0.08, 0.08, 0.08),
+		Vector2(ARROW_PANEL_SIZE, ARROW_PANEL_SIZE)
+	)
+	if glyph:
+		glyph.name = "ArrowGlyph"
+		glyph.position = pos + Vector3(0.0, 0.0, ARROW_PANEL_DEPTH * 0.5 + 0.001)
+		box_root.add_child(glyph)
 
 
 func _make_barcode(box_root: Node3D, pos: Vector3) -> void:
@@ -445,32 +442,18 @@ func _make_barcode(box_root: Node3D, pos: Vector3) -> void:
 
 
 func _make_shipping_label(box_root: Node3D, pos: Vector3) -> void:
-	# Small pale-yellow label panel with a couple of address-ish text lines.
-	var panel := MeshInstance3D.new()
-	panel.name = "ShippingLabel"
-	var pm := BoxMesh.new()
-	pm.size = Vector3(LABEL_W, LABEL_H, LABEL_DEPTH)
-	panel.mesh = pm
-	var lab_mat := StandardMaterial3D.new()
-	lab_mat.albedo_color = label_color
-	lab_mat.roughness = 0.6
-	lab_mat.metallic = 0.0
-	panel.material_override = lab_mat
-	panel.position = pos
-	box_root.add_child(panel)
-
-	var txt := Label3D.new()
-	txt.name = "LabelText"
-	txt.text = "SHIP TO\nADA-46"
-	txt.font_size = LABEL_FONT_SIZE
-	txt.outline_size = 2
-	txt.pixel_size = LABEL_PIXEL_SIZE * 0.5
-	txt.modulate = Color(0.10, 0.10, 0.12)
-	txt.outline_modulate = Color(0.95, 0.92, 0.70)
-	txt.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	txt.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	txt.position = pos + Vector3(0.0, 0.0, LABEL_DEPTH * 0.5 + 0.001)
-	box_root.add_child(txt)
+	# Small pale-yellow label panel — baked text (bg + text) replaces the
+	# separate coloured-box + Label3D pair with one textured quad.
+	var panel: MeshInstance3D = BakedText.make_panel_mesh(
+		"SHIP TO\nADA-46",
+		label_color,
+		Color(0.10, 0.10, 0.12),
+		Vector2(LABEL_W, LABEL_H)
+	)
+	if panel:
+		panel.name = "ShippingLabel"
+		panel.position = pos + Vector3(0.0, 0.0, LABEL_DEPTH * 0.5)
+		box_root.add_child(panel)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

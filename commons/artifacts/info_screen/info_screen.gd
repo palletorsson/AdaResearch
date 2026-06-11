@@ -1,13 +1,15 @@
 extends Node3D
 class_name InfoScreen
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a wall-mounted information display — dark plastic bezel around an emissive CRT-green screen. Half-Life kiosk crossed with an Aperture briefing display. Configurable header (amber) + body lines (terminal green) glow against the dark face. The screen reads as LIT FROM WITHIN — it's not paper, it's a device
 # desire: every lab needs a way to label what the player is looking at, without breaking immersion. Voiceover would be intrusive; signage above the artifact would be didactic; an info_screen IS the artifact's nameplate, but readable, but in-world
 # critical_parameter: text_lines + header_text — the screen says what it says. Change those strings and the whole semantic role of the screen changes. The screen is a CONTAINER, the text is the content
-# triggers: _ready() builds bezel (4 box pieces) + emissive screen face + Label3D for header + stacked Label3Ds for text_lines. apply_grid_config() rebuilds when grid system injects DNA (including text_lines as comma-joined string)
+# triggers: _ready() builds bezel (4 box pieces) + emissive screen face + a baked-text header quad + a stacked baked-text block for text_lines, all painted ONTO the screen face (unshaded so they glow like a CRT). apply_grid_config() rebuilds when grid system injects DNA (including text_lines as comma-joined string)
 # emerges: the room reads as an INTERFACE, not just a space. The screen makes the experiment legible. Player learns the chamber's purpose from the screen, not from a tooltip
-# needs: text_lines and/or header_text (else screen is just a glow); a wall to mount against (faces +Z by default); monospace-style legibility (Label3D no_depth_test, large pixel_size)
+# needs: text_lines and/or header_text (else screen is just a glow); a wall to mount against (faces +Z by default); legible glyphs baked into the surface (present: text is light emitted by the screen, not floating signage — header + body are unshaded quads proud of the face)
 # relationships: pairs with large_window (one shows the experiment, one labels it); sibling to lab_room's signage (same vocabulary, different scale); cousin to whiteboard (one is hand-written, this one is computed)
 # truth: the info_screen is the structural form of LABELING. The lab is not silent — it announces itself. Aperture's whole pedagogical aesthetic is "the room tells you what to do." This is that voice in artifact form
 
@@ -64,28 +66,28 @@ func _ready() -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_screen_width"):
-		screen_width = float(String(get_meta("config_screen_width")))
+		screen_width = float(str(get_meta("config_screen_width")))
 	if has_meta("config_screen_height"):
-		screen_height = float(String(get_meta("config_screen_height")))
+		screen_height = float(str(get_meta("config_screen_height")))
 	if has_meta("config_frame_thickness"):
-		frame_thickness = float(String(get_meta("config_frame_thickness")))
+		frame_thickness = float(str(get_meta("config_frame_thickness")))
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_screen_bg_color"):
-		screen_bg_color = _parse_color(String(get_meta("config_screen_bg_color")), screen_bg_color)
+		screen_bg_color = _parse_color(str(get_meta("config_screen_bg_color")), screen_bg_color)
 	if has_meta("config_screen_emission"):
-		screen_emission = float(String(get_meta("config_screen_emission")))
+		screen_emission = float(str(get_meta("config_screen_emission")))
 	if has_meta("config_text_color"):
-		text_color = _parse_color(String(get_meta("config_text_color")), text_color)
+		text_color = _parse_color(str(get_meta("config_text_color")), text_color)
 	if has_meta("config_header_color"):
-		header_color = _parse_color(String(get_meta("config_header_color")), header_color)
+		header_color = _parse_color(str(get_meta("config_header_color")), header_color)
 	if has_meta("config_header_text"):
-		header_text = String(get_meta("config_header_text"))
+		header_text = str(get_meta("config_header_text"))
 	if has_meta("config_text_size"):
-		text_size = int(String(get_meta("config_text_size")))
+		text_size = int(str(get_meta("config_text_size")))
 	# text_lines: comma-or-newline separated when coming through metadata
 	if has_meta("config_text_lines"):
-		var raw := String(get_meta("config_text_lines"))
+		var raw := str(get_meta("config_text_lines"))
 		var parts: PackedStringArray
 		if raw.contains("\n"):
 			parts = raw.split("\n")
@@ -191,24 +193,35 @@ func _build_screen_face() -> void:
 	add_child(screen)
 
 
-# ── Text: header (optional) + stacked body lines ──────────────────────
+# ── Text: header (optional) + stacked body lines, BAKED onto the face ──
+# The text is painted into the screen surface as unshaded quads (the
+# fire_extinguisher "integrate text into the prop" principle) instead of
+# floating Label3Ds. Quads face +Z exactly like the old Label3Ds, so the
+# gallery's rotation_y_180 capture flag still aligns the readout to camera.
 
 func _build_text() -> void:
 	var text_root := Node3D.new()
 	text_root.name = "Text"
-	# Label3D in Godot 4 defaults to facing +Z (readable from +Z viewers).
-	text_root.position = Vector3(0.0, 0.0, SCREEN_DEPTH + TEXT_Z_OFFSET)
+	# Baked QuadMesh faces +Z (readable from +Z viewers), matching the
+	# original Label3D orientation. Sit just proud of the screen face.
+	text_root.position = Vector3(0.0, 0.0, SCREEN_DEPTH + TEXT_Z_OFFSET + 0.004)
 	add_child(text_root)
 
 	var has_header := header_text != ""
 	var n_lines := text_lines.size()
 
-	# Vertical layout: header at top, lines stacked below
+	# Vertical layout: header at top, lines stacked below — same metrics as
+	# the former Label3D stack so the composition is unchanged.
 	var header_size := int(round(float(text_size) * HEADER_FONT_SCALE))
 	var line_step := text_size * TEXT_PIXEL_SIZE * LINE_SPACING_FACTOR
 	var header_step := header_size * TEXT_PIXEL_SIZE * LINE_SPACING_FACTOR
 
-	# Compute total stack height so we can center it inside the screen
+	# Per-line glyph box (a touch shorter than the step leaves the gap).
+	var header_h := header_size * TEXT_PIXEL_SIZE
+	var line_h := text_size * TEXT_PIXEL_SIZE
+	var max_width := screen_width * 0.9
+
+	# Compute total stack height so we can center it inside the screen.
 	var total_h := 0.0
 	if has_header:
 		total_h += header_step
@@ -216,34 +229,27 @@ func _build_text() -> void:
 	var cursor_y := total_h * 0.5  # start at top
 
 	if has_header:
-		var header := Label3D.new()
-		header.name = "Header"
-		header.text = header_text
-		header.font_size = header_size
-		header.outline_size = 2
-		header.pixel_size = TEXT_PIXEL_SIZE
-		header.modulate = header_color
-		header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		header.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		header.no_depth_test = true
-		header.position = Vector3(0.0, cursor_y - header_step * 0.5, 0.0)
-		text_root.add_child(header)
+		var header_q := BakedText.make_label_mesh(
+			header_text, header_color, Vector2(max_width, header_h), 1400, true)
+		if header_q:
+			header_q.name = "Header"
+			header_q.position = Vector3(0.0, cursor_y - header_step * 0.5, 0.0)
+			text_root.add_child(header_q)
 		cursor_y -= header_step
 
-	for i in range(n_lines):
-		var line := Label3D.new()
-		line.name = "Line%d" % i
-		line.text = String(text_lines[i])
-		line.font_size = text_size
-		line.outline_size = 1
-		line.pixel_size = TEXT_PIXEL_SIZE
-		line.modulate = text_color
-		line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		line.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		line.no_depth_test = true
-		line.position = Vector3(0.0, cursor_y - line_step * 0.5, 0.0)
-		text_root.add_child(line)
-		cursor_y -= line_step
+	if n_lines > 0:
+		# One stacked block for the body. make_text_block centres itself on
+		# its origin, so place that origin at the middle of the body area.
+		var gap := line_h * 0.25
+		var block := BakedText.make_text_block(
+			Array(text_lines), text_color, line_h, max_width, gap, true)
+		if block:
+			block.name = "Body"
+			# Body occupies the span from the current cursor (top of body)
+			# down by line_step per line; centre the block on that span.
+			var body_center_y := cursor_y - (line_step * float(n_lines)) * 0.5
+			block.position = Vector3(0.0, body_center_y, 0.0)
+			text_root.add_child(block)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────
