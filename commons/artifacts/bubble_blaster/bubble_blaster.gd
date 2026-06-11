@@ -54,11 +54,12 @@ func _build() -> void:
 	var nozzle := Vector3(0.32, 0.55, 0.0)
 	var ring := _torus(nozzle, 0.10, 0.03, white); ring.rotation.z = PI * 0.5
 	rig.add_child(ring)                                                                     # muzzle ring
-	# trigger handle (angled down-back)
-	var grip := _box(Vector3(-0.14, 0.30, 0.0), Vector3(0.16, 0.34, 0.13), pink)
-	grip.rotation.z = deg_to_rad(16.0)
+	# trigger handle — a proper pistol grip: hangs down and angles back toward the shooter
+	var grip := _box(Vector3(-0.16, 0.32, 0.0), Vector3(0.15, 0.38, 0.13), pink)
+	grip.rotation.z = deg_to_rad(-24.0)
 	rig.add_child(grip)
-	rig.add_child(_box(Vector3(-0.02, 0.44, 0.0), Vector3(0.05, 0.10, 0.06), white))        # trigger
+	rig.add_child(_box(Vector3(-0.20, 0.16, 0.0), Vector3(0.17, 0.07, 0.12), _matte_mat(body_color.darkened(0.1), 0.5)))  # grip base
+	rig.add_child(_box(Vector3(-0.05, 0.46, 0.0), Vector3(0.05, 0.11, 0.06), white))               # trigger
 	# soap reservoir under the barrel (translucent, with fluid)
 	var tank := _cylinder(Vector3(0.04, 0.33, 0.0), 0.11, 0.26, _glass_mat(Color(0.95, 0.97, 1.0), 0.22))
 	tank.rotation.x = PI * 0.5

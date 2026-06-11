@@ -58,9 +58,14 @@ func _build() -> void:
 	rig.add_child(_cylinder(Vector3(0.20, 0.46, 0.0), 0.05, 0.10, steel))                                                # exhaust
 	for sx in [-0.30, 0.30]:
 		for sz in [-0.26, 0.26]:
+			# wheels roll in +X: disc vertical (XY plane), axle along Z
 			var w := _torus(Vector3(sx, 0.10, sz), 0.11, 0.045, _matte_mat(Color(0.12, 0.12, 0.14), 0.9))
-			w.rotation.z = PI * 0.5
+			w.rotation.x = PI * 0.5
 			rig.add_child(w)
+			# hub cap + a spoke mark so the roll reads
+			var hub := _cylinder(Vector3(sx, 0.10, sz), 0.035, 0.10, _steel_mat(steel_color))
+			hub.rotation.x = PI * 0.5
+			rig.add_child(hub)
 	# cutting deck shadow line
 	rig.add_child(_box(Vector3(0.0, 0.02, 0.0), Vector3(0.66, 0.02, 0.46), _matte_mat(Color(0.1, 0.1, 0.12), 1.0)))
 
