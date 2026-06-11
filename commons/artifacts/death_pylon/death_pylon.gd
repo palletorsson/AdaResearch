@@ -19,7 +19,7 @@ class_name DeathPylon
 @export var charge_time: float = 4.2
 @export var fire_time: float = 1.6
 @export var cooldown_time: float = 1.5
-@export var kill_range: float = 9.0          # the jet kills the player within this radius
+@export var kill_range: float = 6.0          # the jet kills the player within this radius
 @export var grid_n: int = 5                  # NxN ground grid that gets sucked in
 @export var energy_color: Color = Color(0.32, 0.86, 1.0)   # the drawn-in energy (electric cyan)
 @export var fire_color: Color = Color(1.0, 0.42, 0.10)     # the discharge fire
