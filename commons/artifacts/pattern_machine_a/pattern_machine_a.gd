@@ -177,13 +177,15 @@ func _read_overrides() -> void:
 # ═══════════════════════════════════════════════════════════════════════
 
 func _build_control_plate() -> void:
-	if has_node("ControlPlate"):
+	if has_node("ControlConsole"):
 		return
-	var scene := load("res://commons/artifacts/pattern_tunnel/pattern_control_plate.tscn")
+	# the same display_console kiosk the Pattern Tunnel uses (plate recessed in a 28°
+	# CSG face); it carries the plate at scale 1.0 so the XR sliders work.
+	var scene := load("res://commons/artifacts/pattern_tunnel/display_console.tscn")
 	if scene == null:
 		return
 	var plate: Node = scene.instantiate()
-	plate.name = "ControlPlate"
+	plate.name = "ControlConsole"
 	if plate.has_method("configure"):
 		var gnames: Array = []
 		for g in GROUP_NAMES:
@@ -194,10 +196,9 @@ func _build_control_plate() -> void:
 			{"key": "density", "label": "DENSITY", "names": [], "min": 0.0, "max": 1.0, "init": density},
 		])
 	add_child(plate)
-	# to the player's right of the loom (the head faces -Z); a quick VR tweak if off
-	(plate as Node3D).position = Vector3(1.35, 0.0, -0.4)
-	(plate as Node3D).rotation_degrees = Vector3(0.0, 206.0, 0.0)
-	(plate as Node3D).scale = Vector3.ONE * 0.62
+	# floor kiosk to the player's right of the loom (the head faces -Z); a VR tweak if off
+	(plate as Node3D).position = Vector3(2.0, 0.0, -0.2)
+	(plate as Node3D).rotation_degrees = Vector3(0.0, 214.0, 0.0)
 	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate):
 		plate.connect("changed", _on_plate)
 	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
