@@ -180,6 +180,67 @@ func _build_control_plate() -> void:
 		plate.connect("changed", _on_plate)
 	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
 		plate.connect("randomized", _on_plate_random)
+	# a reachable 4x4 motif editor at the station — the hopper is now far across the carpet
+	_build_motif_editor(Vector3(0.98, 1.02, 5.95))
+
+
+## A reachable NxN motif editor at the station: each cell is a button that cycles its
+## colour, writing into _grid_data so the milled carpet updates live (the same grid the
+## far-away hopper edits). Lets you change the 4x4 pattern from the console.
+func _build_motif_editor(center: Vector3) -> void:
+	var n: int = hopper_size
+	if PUSH_BUTTON == null:
+		PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
+	var cell := 0.14
+	var span := float(n) * cell
+	var panel := Node3D.new()
+	panel.name = "MotifEditor"
+	panel.position = center
+	panel.rotation_degrees = Vector3(-46.0, 0.0, 0.0)   # tilt up toward the player
+	add_child(panel)
+	var board := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(span + 0.06, span + 0.14, 0.03)
+	board.mesh = bm
+	board.material_override = _flat_mat(Color(0.19, 0.20, 0.23), 0.82)
+	panel.add_child(board)
+	var lbl := Label3D.new()
+	lbl.text = "MOTIF  %d×%d" % [n, n]
+	lbl.font_size = 22
+	lbl.pixel_size = 0.0011
+	lbl.modulate = Color(0.86, 0.88, 0.92)
+	lbl.position = Vector3(0.0, span * 0.5 + 0.05, 0.02)
+	panel.add_child(lbl)
+	var start := -(float(n) - 1.0) * cell * 0.5
+	for gy in n:
+		for gx in n:
+			var btn: Node = PUSH_BUTTON.instantiate()
+			panel.add_child(btn)
+			(btn as Node3D).position = Vector3(start + float(gx) * cell, start + float(n - 1 - gy) * cell, 0.03)
+			btn.set("released_color", PALETTE[clampi(int(_grid_data[gy][gx]), 0, PALETTE.size() - 1)])
+			var ix := gx
+			var iy := gy
+			var b := btn
+			if btn.has_signal("pressed"):
+				btn.connect("pressed", func(): _cycle_cell(ix, iy, b))
+
+
+## Cycle one motif cell to the next palette colour; the carpet + the hopper update live.
+func _cycle_cell(gx: int, gy: int, btn: Node) -> void:
+	var ci: int = (int(_grid_data[gy][gx]) + 1) % PALETTE.size()
+	_grid_data[gy][gx] = ci
+	_apply_cell_visual(gx, gy)   # keep the far hopper in sync
+	_update_carpet()
+	if btn != null:
+		btn.set("released_color", PALETTE[ci])
+
+
+func _flat_mat(c: Color, rough: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = 0.0
+	return m
 
 
 func _on_plate(key: String, value: float) -> void:
