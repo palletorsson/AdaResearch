@@ -23,6 +23,7 @@ const PERIOD_NAMES := ["Republican","Imperial","Cosmatesque","Renaissance","Baro
 @export var fill_speed: float = 2.2
 @export var tunnel_length: int = 14      # rings down -Z (shorten to fit a busy map)
 @export_range(0.0, 1.0, 0.01) var start_reveal: float = 0.0   # >0 for captures / a pre-painted start
+@export var randomize_on_start: bool = true   # pick a fresh group/motif/palette each load
 
 var _tunnel: Node = null
 var _monitor: Label3D = null
@@ -39,6 +40,11 @@ func _build() -> void:
 	_built = true
 	for c in get_children():
 		c.queue_free()
+
+	if randomize_on_start:
+		group_index = randi() % GROUPS.size()
+		motif_index = randi() % MOTIF_NAMES.size()
+		period_index = randi() % PERIOD_NAMES.size()
 
 	# the tunnel itself, extending down -Z from the mouth
 	_tunnel = TunnelScene.instantiate()
@@ -209,10 +215,18 @@ func _accent(c: Color) -> StandardMaterial3D:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	if config_data.has("group_index"): group_index = int(config_data["group_index"])
-	if config_data.has("motif_index"): motif_index = int(config_data["motif_index"])
-	if config_data.has("period_index"): period_index = int(config_data["period_index"])
+	# an explicit pattern in the map pins it (turns off start-randomisation)
+	if config_data.has("group_index"):
+		group_index = int(config_data["group_index"])
+		randomize_on_start = false
+	if config_data.has("motif_index"):
+		motif_index = int(config_data["motif_index"])
+		randomize_on_start = false
+	if config_data.has("period_index"):
+		period_index = int(config_data["period_index"])
+		randomize_on_start = false
 	if config_data.has("fill_speed"): fill_speed = float(config_data["fill_speed"])
 	if config_data.has("tunnel_length"): tunnel_length = int(config_data["tunnel_length"])
+	if config_data.has("randomize_on_start"): randomize_on_start = bool(config_data["randomize_on_start"])
 	_built = false
 	_build()

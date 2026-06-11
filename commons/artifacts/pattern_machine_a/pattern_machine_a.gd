@@ -49,6 +49,8 @@ class_name PatternMachineA
 @export var card_size: int = 5
 ## Fill density of the seeded card.
 @export var density: float = 0.5
+## Pick a fresh random group / motif / density each load (a map that pins one turns this off).
+@export var randomize_on_start: bool = true
 
 @export_group("Machine")
 @export var frame_color: Color = Color(0.11, 0.12, 0.16)
@@ -108,6 +110,10 @@ func _ready() -> void:
 	_group_index = clampi(GROUP_NAMES.find(group.to_lower()), 0, GROUP_NAMES.size() - 1)
 	if _group_index < 0:
 		_group_index = 0
+	if randomize_on_start:
+		_group_index = randi() % GROUP_NAMES.size()
+		motif_seed = 1 + randi() % 8
+		density = randf_range(0.3, 0.7)
 	_seed_card()
 
 	_card_root = Node3D.new()
@@ -147,6 +153,10 @@ func _process(delta: float) -> void:
 		_warp_mats[i].emission_energy_multiplier = 0.6 + 0.6 * (0.5 + 0.5 * sin(_elapsed * 4.0 - i * 0.5))
 
 func apply_grid_config(config: Dictionary) -> void:
+	# an explicit pattern in the map pins it (turns off start-randomisation)
+	if config.has("group") or config.has("motif_seed") or config.has("density"):
+		randomize_on_start = false
+	if config.has("randomize_on_start"): randomize_on_start = bool(config["randomize_on_start"])
 	if config.has("group"): group = str(config["group"])
 	if config.has("palette"): palette = str(config["palette"])  # reserved; PALETTE is fixed textile set
 	if config.has("motif_seed"): motif_seed = int(config["motif_seed"])
