@@ -31,6 +31,12 @@ var _roll: float = 0.0
 var _readout: Label3D                         # the W = F d cos θ display (updates live)
 var _dist: float = 0.0                        # distance pushed so far → d in the work
 var _theta: float = 0.0
+var _lawn: Node3D                             # the stationary lawn the mower mows (a sibling)
+var _blades: Array = []                       # [{node, wx, wz}] world XZ of each uncut blade
+
+const LAWN_HX := 3.2                          # lawn half-extents (world units) — a big patch
+const LAWN_HZ := 2.4
+const CUT_R := 0.42                           # cutting-deck radius
 
 
 func _ready() -> void:
@@ -39,6 +45,46 @@ func _ready() -> void:
 	_ensure_collision(Vector3(3.0, 2.4, 1.4))
 	_build()
 	_last_pos = global_position
+	call_deferred("_ensure_lawn")            # spawn the lawn as a sibling (stays put while we mow)
+
+
+# A stationary lawn at the mower's spawn — a sibling so it does NOT move with the mower.
+func _ensure_lawn() -> void:
+	if _lawn != null or not is_inside_tree():
+		return
+	var host := get_parent()
+	if host == null:
+		return
+	_lawn = Node3D.new()
+	_lawn.name = "MowerLawn"
+	host.add_child(_lawn)
+	_lawn.global_position = global_position
+	_lawn.global_rotation = Vector3.ZERO
+	var lrng := RandomNumberGenerator.new()
+	lrng.seed = hash(seed) ^ 0x5A17
+	# a thin soil/cut base so the field reads as a plot
+	_lawn.add_child(_box(Vector3(0, 0.03, 0), Vector3(LAWN_HX * 2.0 + 0.5, 0.06, LAWN_HZ * 2.0 + 0.5), _glow_mat(Color(0.30, 0.50, 0.22), 0.45)))
+	# tall blades on top
+	for _i in range(440):
+		var bx: float = lrng.randf_range(-LAWN_HX, LAWN_HX)
+		var bz: float = lrng.randf_range(-LAWN_HZ, LAWN_HZ)
+		var h: float = lrng.randf_range(0.14, 0.26)
+		var g: float = lrng.randf_range(0.0, 0.22)
+		var blade := _box(Vector3(bx, 0.06 + h * 0.5, bz), Vector3(0.034, h, 0.034), _matte_mat(Color(0.24 + g, 0.54 + g, 0.19), 0.95))
+		blade.rotation.z = lrng.randf_range(-0.22, 0.22)
+		_lawn.add_child(blade)
+		_blades.append({"node": blade, "wx": _lawn.global_position.x + bx, "wz": _lawn.global_position.z + bz, "h": h})
+	# clear a patch under the mower at spawn so it sits on cut grass
+	var vis := get_node_or_null("Visual")
+	if vis:
+		_cut_at((vis as Node3D).to_global(Vector3(0.0, 0.02, 0.0)))
+
+
+func _exit_tree() -> void:
+	if is_instance_valid(_lawn):
+		_lawn.queue_free()
+	_lawn = null
+	_blades.clear()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -64,19 +110,6 @@ func _build() -> void:
 	var theta: float = lerpf(deg_to_rad(16.0), deg_to_rad(64.0), push_angle)
 	_theta = theta
 	var steel := _steel_mat(steel_color)
-
-	# --- grass pallet: the mower stands on its own patch of lawn -----------------
-	rig.add_child(_box(Vector3(0.0, -0.05, 0.0), Vector3(1.8, 0.08, 1.15), _matte_mat(Color(0.27, 0.19, 0.10), 1.0)))  # soil
-	var grass_lo := _matte_mat(Color(0.30, 0.60, 0.22), 0.95)
-	var grass_hi := _matte_mat(Color(0.41, 0.75, 0.27), 0.95)
-	for _gi in range(54):
-		var gx: float = _rng.randf_range(-0.85, 0.86)
-		var gz: float = _rng.randf_range(-0.55, 0.55)
-		var tall: bool = gx > 0.16                       # ahead of the mower = not yet cut (taller)
-		var h: float = _rng.randf_range(0.11, 0.19) if tall else _rng.randf_range(0.03, 0.06)
-		var blade := _box(Vector3(gx, -0.01 + h * 0.5, gz), Vector3(0.026, h, 0.026), grass_hi if tall else grass_lo)
-		blade.rotation.z = _rng.randf_range(-0.18, 0.18)
-		rig.add_child(blade)
 
 	# --- the mower (moves in +X) ------------------------------------------------
 	rig.add_child(_box(Vector3(0.0, 0.20, 0.0), Vector3(0.74, 0.26, 0.52), _matte_mat(body_color, 0.6)))
@@ -151,6 +184,30 @@ func _process(_delta: float) -> void:
 	if _readout:
 		_readout.text = "W = F d cos θ\nθ = %d°\nF cos θ = %.2f\nd = %.2f m\nW = %.2f" % [
 			int(roundf(rad_to_deg(_theta))), F_MAG * cos(_theta), _dist, F_MAG * _dist * cos(_theta)]
+	# mow: cut the blades the deck passes over
+	var vis := get_node_or_null("Visual")
+	if vis:
+		_cut_at((vis as Node3D).to_global(Vector3(0.0, 0.02, 0.0)))
+
+
+# Hide every uncut blade within the cutting radius of a world point.
+func _cut_at(p: Vector3) -> void:
+	if _blades.is_empty():
+		return
+	var r2: float = CUT_R * CUT_R
+	var i: int = _blades.size() - 1
+	while i >= 0:
+		var bd: Dictionary = _blades[i]
+		var dx: float = p.x - float(bd["wx"])
+		var dz: float = p.z - float(bd["wz"])
+		if dx * dx + dz * dz < r2:
+			# mow it down to short stubble (stays as cut grass, not a hole)
+			var node: Node3D = bd["node"]
+			var h: float = float(bd["h"])
+			node.scale = Vector3(1.0, 0.16, 1.0)
+			node.position.y = 0.06 + h * 0.16 * 0.5
+			_blades.remove_at(i)
+		i -= 1
 
 
 func _add_arc(parent: Node3D, center: Vector3, va: Vector3, vb: Vector3, radius: float, mat: Material) -> void:
