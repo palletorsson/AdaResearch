@@ -63,7 +63,7 @@ func _build() -> void:
 	add_child(_box(Vector3(0.0, BOARD_CY, -0.052), Vector3(BOARD_W + 0.04, BOARD_H + 0.04, 0.03), _mat(PANEL_TRIM, 0.85)))
 	# one thin warm accent line near the top — the single Braun gesture
 	add_child(_box(Vector3(0.0, BOARD_CY + BOARD_H * 0.5 - 0.07, 0.006), Vector3(BOARD_W - 0.10, 0.012, 0.008), _emat(ACCENT, 0.2)))
-	_text(0.0, BOARD_CY + BOARD_H * 0.5 - 0.13, "PATTERN  CONTROL", 24, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	_text(0.0, BOARD_CY + BOARD_H * 0.5 - 0.135, "PATTERN  CONTROL", 34, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
 
 	# --- top row: inset monitor (left) + cube socket (right) --------------------
 	_build_monitor(Vector3(-0.31, 0.90, 0.0), 0.74, 0.34)
@@ -91,39 +91,35 @@ func _build_monitor(c: Vector3, w: float, h: float) -> void:
 	_monitor.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
 
-func _build_cube_socket(c: Vector3, s: float) -> void:
-	add_child(_box(Vector3(c.x, c.y, FLUSH_Z), Vector3(s, s, 0.008), _mat(WELL_DARK, 0.7)))        # recessed well floor
-	_frame(c.x, c.y, s + 0.02, s + 0.02)                                                           # raised socket rim
-	_text(c.x, c.y - s * 0.5 - 0.03, "RANDOM", 16, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
-	if ResourceLoader.exists(CUBE_SCENE):
-		var cube: Node = load(CUBE_SCENE).instantiate()
-		cube.name = "RandomCube"
-		cube.set("show_plate", false)       # the socket IS its box
-		cube.set("label", "")
-		cube.set("cube_size", 0.07)
-		add_child(cube)
-		(cube as Node3D).position = Vector3(c.x, c.y, 0.03)   # sits low on the board, inside the socket
-		if cube.has_signal("pressed"):
-			cube.connect("pressed", func(): randomized.emit())
+func _build_cube_socket(c: Vector3, _s: float) -> void:
+	# the cube button brings its own plate + rim (the box); the label sits above it
+	_text(c.x, c.y + 0.135, "RANDOM", 24, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	if not ResourceLoader.exists(CUBE_SCENE):
+		return
+	var cube: Node = load(CUBE_SCENE).instantiate()
+	cube.name = "RandomCube"
+	cube.set("show_plate", true)
+	cube.set("label", "")
+	cube.set("cube_size", 0.08)
+	add_child(cube)
+	(cube as Node3D).position = Vector3(c.x, c.y, 0.014)
+	if cube.has_signal("pressed"):
+		cube.connect("pressed", func(): randomized.emit())
 
 
 func _build_slider_box(r: Dictionary) -> void:
 	var cx: float = r["x"]
 	var cy: float = r["y"]
-	var bw := 0.64
-	var bh := 0.24
-	_frame(cx, cy, bw, bh)                                                                          # the control's box
-	# label INSIDE the box, top-left
-	_text(cx - bw * 0.5 + 0.04, cy + bh * 0.5 - 0.045, String(r["label"]), 22, TEXT_DARK, HORIZONTAL_ALIGNMENT_LEFT)
+	# the slider's OWN frame is the box; the label sits above it
+	_text(cx, cy + 0.135, String(r["label"]), 24, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
 	if not ResourceLoader.exists(SLIDER_SCENE):
 		return
 	var s: Node = load(SLIDER_SCENE).instantiate()
 	var key: String = r["key"]
 	s.name = "Slider_%s" % key
 	add_child(s)
-	# the slider FILLS the lower half of its box, sitting low on the board
-	(s as Node3D).position = Vector3(cx, cy - 0.05, 0.02)
-	(s as Node3D).scale = Vector3.ONE * 1.7
+	(s as Node3D).position = Vector3(cx, cy, 0.02)
+	(s as Node3D).scale = Vector3.ONE * 1.85
 	if s.has_method("set_param_name"):
 		s.call("set_param_name", "")
 	var count: int = int(r["count"])

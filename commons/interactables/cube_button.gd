@@ -1,22 +1,23 @@
 extends Node3D
 
-## Cube Button — a cube-shaped pressable button on a Dieter Rams plate.
+## Cube Button — a cube-shaped pressable button seated in a Dieter Rams plate.
 ##
-## Wraps the proven push_button interactable (the XR area button + press sound) but
-## swaps its cylindrical cap for a cube, and sits it on a light backing plate with a
-## thin warm accent edge. Emits `pressed` when worked (relayed from push_button).
-## Built once in _ready; reusable across the pattern / forces machines.
+## Wraps the proven push_button interactable (XR area button + press sound) but hides
+## push_button's own round cap base + accent ring and swaps the cap mesh for a cube, so
+## the only visual is a clean cube sitting in a light plate with a raised rim (the box).
+## Emits `pressed` (relayed). Reusable across the pattern / forces machines.
 
 signal pressed
 
 const PB_SCENE := "res://commons/interactables/push_button.tscn"
 
-@export var cube_size: float = 0.055
+@export var cube_size: float = 0.06
 @export var show_plate: bool = true
 @export var label: String = ""
 @export var cap_color: Color = Color(0.28, 0.28, 0.31)   # calm dark cube (Braun)
-@export var accent: Color = Color(0.86, 0.34, 0.11)      # the one warm element
-@export var plate_color: Color = Color(0.70, 0.68, 0.64) # light grey backing board
+@export var accent: Color = Color(0.86, 0.34, 0.11)      # warm press colour
+@export var plate_color: Color = Color(0.72, 0.70, 0.66) # light grey plate
+@export var frame_color: Color = Color(0.55, 0.53, 0.50) # raised rim
 
 var _built := false
 
@@ -30,34 +31,27 @@ func _build() -> void:
 	_built = true
 
 	if show_plate:
-		var plate := MeshInstance3D.new()
-		plate.name = "Plate"
-		var pb := BoxMesh.new()
-		pb.size = Vector3(0.12, 0.12, 0.012)
-		plate.mesh = pb
-		plate.material_override = _mat(plate_color, 0.0, 0.85)
-		plate.position = Vector3(0.0, 0.0, -0.009)
-		add_child(plate)
-		# one thin warm accent line along the bottom (the single Braun gesture)
-		var edge := MeshInstance3D.new()
-		var eb := BoxMesh.new()
-		eb.size = Vector3(0.12, 0.006, 0.005)
-		edge.mesh = eb
-		edge.material_override = _mat(accent, 0.2, 0.4)
-		edge.position = Vector3(0.0, -0.057, -0.002)
-		add_child(edge)
+		add_child(_box(Vector3(0.0, 0.0, -0.012), Vector3(0.15, 0.15, 0.014), _mat(plate_color, 0.85)))
+		_rim(0.14, 0.14, 0.012)
 
 	if ResourceLoader.exists(PB_SCENE):
 		var btn: Node = load(PB_SCENE).instantiate()
 		btn.name = "PushButton"
 		add_child(btn)
-		# swap the cap mesh for a cube + give it a calm Braun material
+		# hide push_button's own base plate + accent ring — the plate/rim above IS the box
+		var base: Node = btn.get_node_or_null("ButtonBase")
+		if base is Node3D:
+			(base as Node3D).visible = false
+		var ring: Node = btn.get_node_or_null("AccentRing")
+		if ring is Node3D:
+			(ring as Node3D).visible = false
+		# swap the round cap for a cube
 		var bm: Node = btn.get_node_or_null("Button/ButtonMesh")
 		if bm is MeshInstance3D:
 			var cube := BoxMesh.new()
 			cube.size = Vector3.ONE * cube_size
 			(bm as MeshInstance3D).mesh = cube
-			(bm as MeshInstance3D).material_override = _mat(cap_color, 0.0, 0.4, 0.3)
+			(bm as MeshInstance3D).material_override = _mat(cap_color, 0.4, 0.3)
 		btn.set("released_color", cap_color)
 		btn.set("pressed_color", accent)
 		if btn.has_signal("pressed") and not btn.is_connected("pressed", _relay):
@@ -66,25 +60,42 @@ func _build() -> void:
 	if label != "":
 		var l := Label3D.new()
 		l.text = label
-		l.font_size = 22
-		l.pixel_size = 0.0009
+		l.font_size = 20
+		l.pixel_size = 0.0011
 		l.modulate = Color(0.17, 0.17, 0.19)
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		l.position = Vector3(0.0, 0.078, 0.004)
+		l.position = Vector3(0.0, 0.10, 0.004)
 		add_child(l)
+
+
+func _rim(w: float, h: float, thick: float) -> void:
+	var m := _mat(frame_color, 0.55)
+	var hw := w * 0.5
+	var hh := h * 0.5
+	var z := 0.006
+	add_child(_box(Vector3(0.0, hh, z), Vector3(w + thick, thick, 0.012), m))
+	add_child(_box(Vector3(0.0, -hh, z), Vector3(w + thick, thick, 0.012), m))
+	add_child(_box(Vector3(-hw, 0.0, z), Vector3(thick, h, 0.012), m))
+	add_child(_box(Vector3(hw, 0.0, z), Vector3(thick, h, 0.012), m))
 
 
 func _relay() -> void:
 	pressed.emit()
 
 
-func _mat(c: Color, emit: float, rough: float, metal: float = 0.1) -> StandardMaterial3D:
+func _box(pos: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var b := BoxMesh.new()
+	b.size = size
+	mi.mesh = b
+	mi.position = pos
+	mi.material_override = mat
+	return mi
+
+
+func _mat(c: Color, rough: float, metal: float = 0.1) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = c
 	m.metallic = metal
 	m.roughness = rough
-	if emit > 0.0:
-		m.emission_enabled = true
-		m.emission = c
-		m.emission_energy_multiplier = emit
 	return m
