@@ -1,7 +1,7 @@
 {
 	"registry_info": {
 		"name": "vectors_demos",
-		"description": "Vector concept demonstration artifacts \u2014 applied physics demos showing vectors in action: force addition, work/energy, torque, reflection, and targeting.",
+		"description": "Vector concept demonstration artifacts — applied physics demos showing vectors in action: force addition, work/energy, torque, reflection, and targeting.",
 		"category": "vectors",
 		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
 	},
@@ -16,21 +16,50 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "vector", "addition", "head-to-tail", "resultant", "embodied", "two-pad" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"vector",
+				"addition",
+				"head-to-tail",
+				"resultant",
+				"embodied",
+				"two-pad"
+			],
 			"parameters": {
 				"seed": "Starting a and b (default 0)",
 				"op": "add or sub (default add)",
-				"color_a": "vector a", "color_b": "vector b", "color_c": "the resultant",
+				"color_a": "vector a",
+				"color_b": "vector b",
+				"color_c": "the resultant",
 				"emissive": "Bool - lift glow (default true)"
 			},
-			"dev_themes": [ "vectors", "addition", "operations" ],
+			"dev_themes": [
+				"vectors",
+				"addition",
+				"operations"
+			],
 			"spatial_needs": {
-				"platform": "none", "footprint_cells": 3,
-				"clearance": { "front": 2, "back": 1, "left": 1, "right": 1 },
-				"player_position": "front", "wall_backing": false, "orientation": "front",
-				"isolation": 1, "cluster_with": [ "vector_sub", "dot_aligner" ], "preferred_zone": "any",
-				"measured_footprint_cells": 3, "footprint_source": "designed"
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [
+					"vector_sub",
+					"dot_aligner"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
 			}
 		},
 		"vector_sub": {
@@ -43,21 +72,51 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "vector", "subtraction", "negation", "head-to-tail", "resultant", "embodied", "two-pad" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"vector",
+				"subtraction",
+				"negation",
+				"head-to-tail",
+				"resultant",
+				"embodied",
+				"two-pad"
+			],
 			"parameters": {
 				"seed": "Starting a and b (default 0)",
 				"op": "forced to sub by the scene",
-				"color_a": "vector a", "color_b": "vector b", "color_c": "the resultant",
+				"color_a": "vector a",
+				"color_b": "vector b",
+				"color_c": "the resultant",
 				"emissive": "Bool - lift glow (default true)"
 			},
-			"dev_themes": [ "vectors", "subtraction", "operations" ],
+			"dev_themes": [
+				"vectors",
+				"subtraction",
+				"operations"
+			],
 			"spatial_needs": {
-				"platform": "none", "footprint_cells": 3,
-				"clearance": { "front": 2, "back": 1, "left": 1, "right": 1 },
-				"player_position": "front", "wall_backing": false, "orientation": "front",
-				"isolation": 1, "cluster_with": [ "vector_add", "dot_aligner" ], "preferred_zone": "any",
-				"measured_footprint_cells": 3, "footprint_source": "designed"
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [
+					"vector_add",
+					"dot_aligner"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
 			}
 		},
 		"orbit_pair": {
@@ -70,8 +129,18 @@
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "force", "gravity", "orbit", "inverse-square", "two-body", "barycenter", "embodied" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"gravity",
+				"orbit",
+				"inverse-square",
+				"two-body",
+				"barycenter",
+				"embodied"
+			],
 			"parameters": {
 				"seed": "Orbital phase (default 0)",
 				"mass_ratio": "0..1 from equal binary to dominant star+planet - shifts the barycenter and resizes the orbits (default 0.6)",
@@ -84,13 +153,31 @@
 				"sculpt_height": "Height in meters",
 				"sculpt_width": "Footprint width in meters"
 			},
-			"dev_themes": [ "forces", "gravity", "orbital_mechanics", "vectors" ],
+			"dev_themes": [
+				"forces",
+				"gravity",
+				"orbital_mechanics",
+				"vectors"
+			],
 			"spatial_needs": {
-				"platform": "none", "footprint_cells": 3,
-				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
-				"player_position": "front", "wall_backing": false, "orientation": "any",
-				"isolation": 1, "cluster_with": [ "circle_train" ], "preferred_zone": "any",
-				"measured_footprint_cells": 3, "footprint_source": "designed"
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 1,
+				"cluster_with": [
+					"circle_train"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
 			}
 		},
 		"circle_train": {
@@ -103,8 +190,18 @@
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "force", "centripetal", "circular-motion", "velocity", "acceleration", "embodied", "sci-fi" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"centripetal",
+				"circular-motion",
+				"velocity",
+				"acceleration",
+				"embodied",
+				"sci-fi"
+			],
 			"parameters": {
 				"seed": "Train position around the loop (default 0)",
 				"speed": "0..1 train speed - velocity grows linearly, centripetal force quadratically (default 0.7)",
@@ -117,13 +214,29 @@
 				"sculpt_height": "Height in meters",
 				"sculpt_width": "Footprint width in meters"
 			},
-			"dev_themes": [ "forces", "centripetal", "circular_motion", "vectors" ],
+			"dev_themes": [
+				"forces",
+				"centripetal",
+				"circular_motion",
+				"vectors"
+			],
 			"spatial_needs": {
-				"platform": "none", "footprint_cells": 3,
-				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
-				"player_position": "front", "wall_backing": false, "orientation": "any",
-				"isolation": 1, "cluster_with": [], "preferred_zone": "any",
-				"measured_footprint_cells": 3, "footprint_source": "designed"
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
 			}
 		},
 		"launch_arc": {
@@ -136,8 +249,17 @@
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "force", "gravity", "projectile", "f=ma", "decomposition", "embodied" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"gravity",
+				"projectile",
+				"f=ma",
+				"decomposition",
+				"embodied"
+			],
 			"parameters": {
 				"seed": "Unused structural seed (default 0)",
 				"angle": "0..1 launch angle, flat to steep - range peaks at 45 deg (default 0.5)",
@@ -150,13 +272,31 @@
 				"sculpt_height": "Height in meters",
 				"sculpt_width": "Footprint width in meters"
 			},
-			"dev_themes": [ "forces", "gravity", "projectile", "vectors" ],
+			"dev_themes": [
+				"forces",
+				"gravity",
+				"projectile",
+				"vectors"
+			],
 			"spatial_needs": {
-				"platform": "none", "footprint_cells": 3,
-				"clearance": { "front": 1, "back": 1, "left": 2, "right": 1 },
-				"player_position": "front", "wall_backing": false, "orientation": "front",
-				"isolation": 1, "cluster_with": [ "drag_lane" ], "preferred_zone": "any",
-				"measured_footprint_cells": 3, "footprint_source": "designed"
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 2,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [
+					"drag_lane"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
 			}
 		},
 		"drag_lane": {
@@ -169,8 +309,17 @@
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "force", "friction", "drag", "velocity", "decay", "embodied" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"friction",
+				"drag",
+				"velocity",
+				"decay",
+				"embodied"
+			],
 			"parameters": {
 				"seed": "Medium-mote jitter (default 0)",
 				"drag": "0..1 drag strength - sweeps the velocity decay from glide to dead-stop (default 0.5)",
@@ -183,13 +332,29 @@
 				"sculpt_height": "Height in meters",
 				"sculpt_width": "Footprint width in meters"
 			},
-			"dev_themes": [ "forces", "friction", "drag", "vectors" ],
+			"dev_themes": [
+				"forces",
+				"friction",
+				"drag",
+				"vectors"
+			],
 			"spatial_needs": {
-				"platform": "none", "footprint_cells": 3,
-				"clearance": { "front": 1, "back": 1, "left": 2, "right": 1 },
-				"player_position": "front", "wall_backing": false, "orientation": "front",
-				"isolation": 1, "cluster_with": [], "preferred_zone": "any",
-				"measured_footprint_cells": 3, "footprint_source": "designed"
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 2,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
 			}
 		},
 		"projection_shadow": {
@@ -234,12 +399,20 @@
 			"spatial_needs": {
 				"platform": "none",
 				"footprint_cells": 2,
-				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": false,
 				"orientation": "front",
 				"isolation": 1,
-				"cluster_with": [ "dot_aligner", "torque_crank" ],
+				"cluster_with": [
+					"dot_aligner",
+					"torque_crank"
+				],
 				"preferred_zone": "any",
 				"measured_footprint_cells": 2,
 				"footprint_source": "designed"
@@ -287,12 +460,19 @@
 			"spatial_needs": {
 				"platform": "none",
 				"footprint_cells": 2,
-				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": false,
 				"orientation": "front",
 				"isolation": 1,
-				"cluster_with": [ "dot_aligner" ],
+				"cluster_with": [
+					"dot_aligner"
+				],
 				"preferred_zone": "any",
 				"measured_footprint_cells": 2,
 				"footprint_source": "designed"
@@ -343,7 +523,12 @@
 			"spatial_needs": {
 				"platform": "none",
 				"footprint_cells": 2,
-				"clearance": { "front": 2, "back": 1, "left": 1, "right": 1 },
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": false,
 				"orientation": "front",
@@ -358,7 +543,7 @@
 			"lookup_name": "combined_forces_demo",
 			"scene": "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.tscn",
 			"name": "Combined Forces Demo",
-			"description": "Vector addition as force combination \u2014 multiple forces acting on a body, visualized as arrows that add head-to-tail. The resultant force emerges from superposition.",
+			"description": "Vector addition as force combination — multiple forces acting on a body, visualized as arrows that add head-to-tail. The resultant force emerges from superposition.",
 			"category": "vectors",
 			"complexity": "beginner",
 			"tags": [
@@ -464,7 +649,7 @@
 			"lookup_name": "work_energy_demo",
 			"scene": "res://algorithms/vectors/03_dot_product/WorkEnergyDemo.tscn",
 			"name": "Work-Energy Demo",
-			"description": "Dot product as physical work \u2014 force dotted with displacement gives energy transfer. See why pushing perpendicular to motion does zero work.",
+			"description": "Dot product as physical work — force dotted with displacement gives energy transfer. See why pushing perpendicular to motion does zero work.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"tags": [
@@ -571,7 +756,7 @@
 			"lookup_name": "torque_demo",
 			"scene": "res://algorithms/vectors/06_vector_cross_product/TorqueDemo.tscn",
 			"name": "Torque Demo",
-			"description": "Cross product as torque \u2014 force applied at a lever arm produces rotation perpendicular to both. The right-hand rule determines which way things spin.",
+			"description": "Cross product as torque — force applied at a lever arm produces rotation perpendicular to both. The right-hand rule determines which way things spin.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"tags": [
@@ -680,7 +865,7 @@
 			"lookup_name": "normal_force_demo",
 			"scene": "res://algorithms/vectors/07_vector_projection_reflection/NormalForceDemo.tscn",
 			"name": "Normal Force & Reflection Demo",
-			"description": "Vector projection and reflection \u2014 decompose velocity into normal and tangent components, then reflect. The math behind every bouncing ball and billiard shot.",
+			"description": "Vector projection and reflection — decompose velocity into normal and tangent components, then reflect. The math behind every bouncing ball and billiard shot.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"tags": [
@@ -792,7 +977,7 @@
 			"lookup_name": "turret_targeting",
 			"scene": "res://algorithms/vectors/11_turret_targeting/TurretTargeting.tscn",
 			"name": "Turret Targeting",
-			"description": "Applied vector math for targeting \u2014 calculate direction, lead the target, account for projectile speed. Vectors solving the ancient problem of aiming at a moving target.",
+			"description": "Applied vector math for targeting — calculate direction, lead the target, account for projectile speed. Vectors solving the ancient problem of aiming at a moving target.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"tags": [
@@ -903,8 +1088,8 @@
 		"weather_vector_field": {
 			"lookup_name": "weather_vector_field",
 			"scene": "res://algorithms/vectors/weather_vector_field/weather_vector_field.tscn",
-			"name": "Weather Vector Field \u2014 Storm Chamber",
-			"description": "A walkable storm chamber (~5x5 m) built on vector addition \u2014 two grabbable wind vectors combine in real-time. Drag arrow endpoints to feel how wind directions sum, then watch a real GPUParticles3D storm answer the resultant: rain streaks slant at the true gravity + wind angle, wind-blown debris streaks downwind (the vector in flight), drifting cloud slabs and swaying ground mist advect on the wind, and forked lightning strikes downwind in stormy weather. A MultiMesh field of arrows plus classic instruments \u2014 a yawing windsock, a spinning 3-cup anemometer, a ground compass rose, and fading streamlines \u2014 all read the same live summed vector. Four weather modes (calm / breezy / storm / blizzard) swap density, scale, colour, drift and lightning; calm adds a sun shaft with rising motes; blizzard turns the rain to slow white snow. Pressure zones distort the field; the ground tints warm/cool with the wind's vertical sign.",
+			"name": "Weather Vector Field — Storm Chamber",
+			"description": "A walkable storm chamber (~5x5 m) built on vector addition — two grabbable wind vectors combine in real-time. Drag arrow endpoints to feel how wind directions sum, then watch a real GPUParticles3D storm answer the resultant: rain streaks slant at the true gravity + wind angle, wind-blown debris streaks downwind (the vector in flight), drifting cloud slabs and swaying ground mist advect on the wind, and forked lightning strikes downwind in stormy weather. A MultiMesh field of arrows plus classic instruments — a yawing windsock, a spinning 3-cup anemometer, a ground compass rose, and fading streamlines — all read the same live summed vector. Four weather modes (calm / breezy / storm / blizzard) swap density, scale, colour, drift and lightning; calm adds a sun shaft with rising motes; blizzard turns the rain to slow white snow. Pressure zones distort the field; the ground tints warm/cool with the wind's vertical sign.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"tags": [
@@ -1042,7 +1227,7 @@
 		"vector_reflection_demo": {
 			"name": "Vector Reflection Demo",
 			"lookup_name": "vector_reflection_demo",
-			"description": "Interactive vector reflection off a rotatable surface. An incoming vector (blue), surface normal (green), and reflected vector (red) update in real time as sliders control the surface angle and incoming direction. Demonstrates r = v - 2(v\u00b7n)n.",
+			"description": "Interactive vector reflection off a rotatable surface. An incoming vector (blue), surface normal (green), and reflected vector (red) update in real time as sliders control the surface angle and incoming direction. Demonstrates r = v - 2(v·n)n.",
 			"scene": "res://algorithms/vectors/vector_reflection/vector_reflection_demo.tscn",
 			"category": "vectors",
 			"complexity": "beginner",
@@ -1110,6 +1295,277 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.301010Z",
 				"derived_from": "aabb_size + category"
+			}
+		},
+		"bounce_well": {
+			"lookup_name": "bounce_well",
+			"scene": "res://commons/artifacts/bounce_well/bounce_well.tscn",
+			"class_name": "BounceWell",
+			"name": "Bounce Well (restitution)",
+			"description": "Restitution made playable - a console toy for the embodied vectors-forces arc (the clean rebuild of the bouncing-ball sim). A ball dropped into a well bounces, each bounce returning to e times the last height; frozen stroboscopically the arcs shrink geometrically. restitution 0..1 from a dead thud to a perpetual bounce.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"restitution",
+				"bouncing",
+				"energy",
+				"embodied"
+			],
+			"parameters": {
+				"restitution": "0..1 dead thud to perpetual bounce",
+				"seed": "variation seed",
+				"complexity": "detail (default 6)",
+				"color_a": "rig / primary",
+				"color_b": "motion / secondary",
+				"accent": "highlight",
+				"emissive": "bool glow (default true)",
+				"demo_only": "capture mode: drop the console, demo only"
+			},
+			"dev_themes": [
+				"forces",
+				"physics",
+				"embodied"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 2,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"firework_burst": {
+			"lookup_name": "firework_burst",
+			"scene": "res://commons/artifacts/firework_burst/firework_burst.tscn",
+			"class_name": "FireworkBurst",
+			"name": "Firework Burst (projectile fountain)",
+			"description": "The firework as pure projectile motion - a mortar throws sparks up in a cone and gravity arcs every one into a parabola. The console rebuild of the firework launcher. burst 0..1 from a tight low column to a wide high canopy of falling embers.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"gravity",
+				"projectile",
+				"particles",
+				"embodied"
+			],
+			"parameters": {
+				"burst": "0..1 tight column to wide canopy",
+				"seed": "variation seed",
+				"complexity": "detail (default 6)",
+				"color_a": "rig / primary",
+				"color_b": "motion / secondary",
+				"accent": "highlight",
+				"emissive": "bool glow (default true)",
+				"demo_only": "capture mode: drop the console, demo only"
+			},
+			"dev_themes": [
+				"forces",
+				"physics",
+				"embodied"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 2,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"momentum_cradle": {
+			"lookup_name": "momentum_cradle",
+			"scene": "res://commons/artifacts/momentum_cradle/momentum_cradle.tscn",
+			"class_name": "MomentumCradle",
+			"name": "Momentum Cradle (p = mv conserved)",
+			"description": "Momentum conservation made playable - Newton's cradle, rebuilt as a console. Lift an end ball and the blow travels through the still middle balls untouched and kicks the far ball out to the same height: one in, one out, p = mv conserved. lift 0..1 sets the swing amplitude.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"momentum",
+				"collision",
+				"conservation",
+				"embodied"
+			],
+			"parameters": {
+				"lift": "0..1 swing amplitude (momentum carried)",
+				"seed": "variation seed",
+				"complexity": "detail (default 6)",
+				"color_a": "rig / primary",
+				"color_b": "motion / secondary",
+				"accent": "highlight",
+				"emissive": "bool glow (default true)",
+				"demo_only": "capture mode: drop the console, demo only"
+			},
+			"dev_themes": [
+				"forces",
+				"physics",
+				"embodied"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 2,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"slingshot_pull": {
+			"lookup_name": "slingshot_pull",
+			"scene": "res://commons/artifacts/slingshot_pull/slingshot_pull.tscn",
+			"class_name": "SlingshotPull",
+			"name": "Slingshot (elastic launch, PE = 1/2 k x^2)",
+			"description": "The slingshot as stored energy - draw the pouch back and the band stores PE = 1/2 k x^2; release and it becomes launch speed, the projectile arcing away. The console rebuild of the slingshot launcher. draw 0..1; pull twice as far, store four times the energy.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"elastic",
+				"spring",
+				"energy",
+				"launch",
+				"embodied"
+			],
+			"parameters": {
+				"draw": "0..1 draw distance (PE grows as draw squared)",
+				"seed": "variation seed",
+				"complexity": "detail (default 6)",
+				"color_a": "rig / primary",
+				"color_b": "motion / secondary",
+				"accent": "highlight",
+				"emissive": "bool glow (default true)",
+				"demo_only": "capture mode: drop the console, demo only"
+			},
+			"dev_themes": [
+				"forces",
+				"physics",
+				"embodied"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 2,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"collision_carts": {
+			"lookup_name": "collision_carts",
+			"scene": "res://commons/artifacts/collision_carts/collision_carts.tscn",
+			"class_name": "CollisionCarts",
+			"name": "Collision Carts (momentum exchange)",
+			"description": "Rigid-body collision made playable - a heavy cart meets a light one and momentum before equals momentum after, but the velocities split by mass. Shows the before and after lanes with carts sized by mass and their velocity vectors. The console rebuild of the rigid-body sim. mass_ratio 0..1 from a light striker to a heavy one.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"momentum",
+				"collision",
+				"rigid-body",
+				"embodied"
+			],
+			"parameters": {
+				"mass_ratio": "0..1 light striker to heavy one",
+				"seed": "variation seed",
+				"complexity": "detail (default 6)",
+				"color_a": "rig / primary",
+				"color_b": "motion / secondary",
+				"accent": "highlight",
+				"emissive": "bool glow (default true)",
+				"demo_only": "capture mode: drop the console, demo only"
+			},
+			"dev_themes": [
+				"forces",
+				"physics",
+				"embodied"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 2,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
 			}
 		}
 	}
