@@ -18,7 +18,7 @@ const PLATE_SCENE := "res://commons/artifacts/pattern_tunnel/pattern_control_pla
 @export var tilt_deg: float = 28.0
 
 # the slanted face is centred here (a point on the upper-front of the cabinet)
-const FACE_CENTER := Vector3(0.0, 1.12, 0.13)
+const FACE_CENTER := Vector3(0.0, 1.26, 0.13)
 
 var _plate: Node = null
 var _cfg_title: String = "PATTERN CONTROL"
@@ -48,8 +48,8 @@ func _build() -> void:
 
 	var block := CSGBox3D.new()
 	block.name = "Block"
-	block.size = Vector3(0.92, 1.5, 0.58)
-	block.position = Vector3(0.0, 0.75, 0.0)
+	block.size = Vector3(0.92, 1.66, 0.58)
+	block.position = Vector3(0.0, 0.83, 0.0)
 	block.material = _mat(body_color, 0.45, 0.4)
 	body.add_child(block)
 
