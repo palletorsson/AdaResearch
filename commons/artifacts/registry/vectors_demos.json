@@ -16,19 +16,50 @@
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "force", "inclined-plane", "free-body", "decomposition", "friction", "embodied" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"inclined-plane",
+				"free-body",
+				"decomposition",
+				"friction",
+				"embodied"
+			],
 			"parameters": {
 				"incline": "0..1 incline angle θ (12° to 55°) - past tan θ = μ the block slides (default 0.5)",
 				"mu": "friction coefficient (default 0.28)",
-				"wedge_color": "The ramp", "block_color": "The primitive", "emissive": "Bool (default true)"
+				"wedge_color": "The ramp",
+				"block_color": "The primitive",
+				"emissive": "Bool (default true)"
 			},
-			"dev_themes": [ "forces", "decomposition", "friction", "vectors" ],
-			"spatial_needs": { "platform": "none", "footprint_cells": 3,
-				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
-				"player_position": "front", "wall_backing": false, "orientation": "front",
-				"isolation": 1, "cluster_with": [ "force_mower" ], "preferred_zone": "any",
-				"measured_footprint_cells": 3, "footprint_source": "designed" }
+			"dev_themes": [
+				"forces",
+				"decomposition",
+				"friction",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [
+					"force_mower"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
 		},
 		"force_mower": {
 			"lookup_name": "force_mower",
@@ -40,19 +71,49 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "force", "work", "cos-theta", "decomposition", "embodied", "diagram" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"work",
+				"cos-theta",
+				"decomposition",
+				"embodied",
+				"diagram"
+			],
 			"parameters": {
 				"push_angle": "0..1 handle/push angle θ (flat to steep) - cos θ shrinks the work (default 0.45)",
-				"body_color": "The mower", "force_color": "F (the push)", "work_color": "F cos θ",
-				"disp_color": "d (displacement)", "emissive": "Bool (default true)"
+				"body_color": "The mower",
+				"force_color": "F (the push)",
+				"work_color": "F cos θ",
+				"disp_color": "d (displacement)",
+				"emissive": "Bool (default true)"
 			},
-			"dev_themes": [ "forces", "work", "dot_product", "vectors" ],
-			"spatial_needs": { "platform": "none", "footprint_cells": 4,
-				"clearance": { "front": 2, "back": 2, "left": 1, "right": 1 },
-				"player_position": "back", "wall_backing": false, "orientation": "front",
-				"isolation": 1, "cluster_with": [], "preferred_zone": "any",
-				"measured_footprint_cells": 4, "footprint_source": "designed" }
+			"dev_themes": [
+				"forces",
+				"work",
+				"dot_product",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "back",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "designed"
+			}
 		},
 		"force_cube": {
 			"lookup_name": "force_cube",
@@ -64,18 +125,46 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "force", "vector", "components", "grab", "embodied" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"vector",
+				"components",
+				"grab",
+				"embodied"
+			],
 			"parameters": {
-				"push": "0..1 force magnitude (default 0.6)", "seed": "force direction (default 0)",
-				"cube_color": "The cube", "force_color": "The resultant F", "emissive": "Bool (default true)"
+				"push": "0..1 force magnitude (default 0.6)",
+				"seed": "force direction (default 0)",
+				"cube_color": "The cube",
+				"force_color": "The resultant F",
+				"emissive": "Bool (default true)"
 			},
-			"dev_themes": [ "forces", "vectors", "components" ],
-			"spatial_needs": { "platform": "none", "footprint_cells": 2,
-				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
-				"player_position": "front", "wall_backing": false, "orientation": "any",
-				"isolation": 1, "cluster_with": [], "preferred_zone": "any",
-				"measured_footprint_cells": 2, "footprint_source": "designed" }
+			"dev_themes": [
+				"forces",
+				"vectors",
+				"components"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
 		},
 		"bubble_blaster": {
 			"lookup_name": "bubble_blaster",
@@ -87,18 +176,48 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [ "forces" ],
-			"tags": [ "force", "velocity", "particles", "emitter", "embodied", "playful" ],
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"velocity",
+				"particles",
+				"emitter",
+				"embodied",
+				"playful"
+			],
 			"parameters": {
 				"output": "0..1 launch output - vector length, spread, bubble count (default 0.6)",
-				"seed": "bubble jitter (default 0)", "body_color": "The gun", "force_color": "Output vector", "emissive": "Bool (default true)"
+				"seed": "bubble jitter (default 0)",
+				"body_color": "The gun",
+				"force_color": "Output vector",
+				"emissive": "Bool (default true)"
 			},
-			"dev_themes": [ "forces", "velocity", "particles", "vectors" ],
-			"spatial_needs": { "platform": "none", "footprint_cells": 3,
-				"clearance": { "front": 2, "back": 1, "left": 1, "right": 1 },
-				"player_position": "back", "wall_backing": false, "orientation": "front",
-				"isolation": 1, "cluster_with": [], "preferred_zone": "any",
-				"measured_footprint_cells": 3, "footprint_source": "designed" }
+			"dev_themes": [
+				"forces",
+				"velocity",
+				"particles",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "back",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
 		},
 		"vector_add": {
 			"lookup_name": "vector_add",
@@ -1659,6 +1778,194 @@
 				"cluster_with": [],
 				"preferred_zone": "any",
 				"measured_footprint_cells": 3,
+				"footprint_source": "designed"
+			}
+		},
+		"weather_vane": {
+			"lookup_name": "weather_vane",
+			"scene": "res://commons/artifacts/weather_vane/weather_vane.tscn",
+			"class_name": "WeatherVane",
+			"name": "Weather Vane (wind ∝ v²)",
+			"description": "Wind made playable - F_drag = ½ρv²C_dA. A ToyConsole: the WIND slider sets the speed; a weather vane swings to point downwind while a flag streams off the pole and the drag vector grows with the SQUARE of the speed - double the wind, quadruple the push, the flag snapping from a lazy ripple to horizontal. The clean toy the old wind-tunnel / windmill examples never became.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"wind",
+				"weather",
+				"drag",
+				"embodied"
+			],
+			"parameters": {
+				"wind": "0..1 wind speed - the drag force climbs as v² (default 0.55)",
+				"emissive": "Bool (default true)"
+			},
+			"dev_themes": [
+				"forces",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "designed"
+			}
+		},
+		"pendulum_swing": {
+			"lookup_name": "pendulum_swing",
+			"scene": "res://commons/artifacts/pendulum_swing/pendulum_swing.tscn",
+			"class_name": "PendulumSwing",
+			"name": "Pendulum (T = 2π√(L/g))",
+			"description": "The pendulum made playable - T = 2π√(L/g), restoring force = mg sin θ. A ToyConsole: the LENGTH slider sets L; the bob hangs at amplitude with gravity (down), tension (along the string) and the restoring component mg sin θ (along the swing), plus the swept arc. Lengthen the string and the swing slows by √L. The clean toy the old swinging-pendulum example never became.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"pendulum",
+				"gravity",
+				"tension",
+				"oscillation"
+			],
+			"parameters": {
+				"length": "0..1 string length - period grows with √L (default 0.5)",
+				"emissive": "Bool (default true)"
+			},
+			"dev_themes": [
+				"forces",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "designed"
+			}
+		},
+		"spring_bob": {
+			"lookup_name": "spring_bob",
+			"scene": "res://commons/artifacts/spring_bob/spring_bob.tscn",
+			"class_name": "SpringBob",
+			"name": "Spring (F = −k x)",
+			"description": "Hooke's law made playable - F = −kx, T = 2π√(m/k). A ToyConsole: the STIFFNESS slider sets k; a mass hangs on a coil where the spring force (+kx, up) balances the weight (down) at rest, and the stretch x is marked. Stiffen the spring and it barely gives - and it ticks faster, period shrinking as 1/√k. The clean toy the old spring-connection / mass-spring-damper examples never became.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"spring",
+				"hooke",
+				"oscillation",
+				"shm"
+			],
+			"parameters": {
+				"stiffness": "0..1 spring stiffness k - less stretch, faster period as 1/√k (default 0.45)",
+				"emissive": "Bool (default true)"
+			},
+			"dev_themes": [
+				"forces",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "designed"
+			}
+		},
+		"lever_balance": {
+			"lookup_name": "lever_balance",
+			"scene": "res://commons/artifacts/lever_balance/lever_balance.tscn",
+			"class_name": "LeverBalance",
+			"name": "Lever (τ = F·d)",
+			"description": "The law of the lever made playable - τ = F·d, balanced when F₁d₁ = F₂d₂. A ToyConsole: the LOAD slider slides the right weight along the arm, changing its TORQUE (force times distance) not its weight; the beam tips toward the bigger torque and sits level only when the two are equal. A lever trades force for distance. The clean toy the old balance-puzzle / scale examples never became.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"lever",
+				"torque",
+				"balance",
+				"mechanical-advantage"
+			],
+			"parameters": {
+				"load": "0..1 load position along the arm - tips, balances, tips (default 0.5)",
+				"emissive": "Bool (default true)"
+			},
+			"dev_themes": [
+				"forces",
+				"vectors"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 6,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 6,
 				"footprint_source": "designed"
 			}
 		}

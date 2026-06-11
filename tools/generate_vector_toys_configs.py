@@ -18,6 +18,26 @@ GAL = r"C:\Users\palle\Documents\GitHub\ada_encyclopedia\public\vector-toys-gall
 
 # toy -> (scene, sweep_param, [values], sculpt_height, sculpt_width, principle, extra_dna)
 TOYS = {
+    "weather_vane": (
+        "res://commons/artifacts/weather_vane/weather_vane.tscn",
+        "wind", [0.2, 0.5, 0.9], 1.9, 2.3,
+        "wind drag F = ½ρv²C_dA ∝ v²; the flag snaps toward horizontal as the force quadruples", {},
+    ),
+    "pendulum_swing": (
+        "res://commons/artifacts/pendulum_swing/pendulum_swing.tscn",
+        "length", [0.15, 0.5, 0.92], 2.1, 2.0,
+        "pendulum T = 2π√(L/g); lengthen the string and the swing slows by √L, restoring = mg sin θ", {},
+    ),
+    "spring_bob": (
+        "res://commons/artifacts/spring_bob/spring_bob.tscn",
+        "stiffness", [0.15, 0.5, 0.85], 2.1, 1.8,
+        "Hooke's law F = −kx; stiffen the spring → less stretch and faster period ∝ 1/√k", {},
+    ),
+    "lever_balance": (
+        "res://commons/artifacts/lever_balance/lever_balance.tscn",
+        "load", [0.18, 0.5, 0.82], 1.6, 2.8,
+        "lever τ = F·d; slide the load to change its torque — it tips, balances, then tips the other way", {},
+    ),
     "dot_aligner": (
         "res://commons/artifacts/dot_aligner/dot_aligner.tscn",
         "alignment", [0.30, 0.60, 0.92], 2.0, 2.4,
