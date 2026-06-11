@@ -1,30 +1,41 @@
-extends "res://commons/artifacts/_embodied/embodied_prop.gd"
+extends "res://commons/artifacts/_embodied/pickable_prop.gd"
 class_name ForceCube
 
 ## @identity
-## lineage: a vector you hold — grab the cube, and the force you apply draws itself as an
-##   arrow out of its centre, split into its x / y / z components. An embodied force-display
-##   prop (the grabbable that shows what your hand is doing to it).
-## essence: the cube IS the tail of the vector; wherever you push it, the arrow points, and
-##   the three coloured component arrows show how that one push is really three — so much
-##   right, so much up, so much forward. Let go and the arrow falls to zero.
-## truth: a force has no existence apart from the thing it acts on; bolt the vector to the
-##   cube and "direction and magnitude" stop being abstract — they're where you shoved it.
+## lineage: a vector you hold — grab the cube and the force you apply draws itself as an
+##   arrow out of its centre, split into x / y / z components. An embodied force-display
+##   prop, now genuinely grabbable (XRTools pickable).
+## essence: the cube IS the tail of the vector; move it and the arrow points the way it's
+##   going, its length the speed; the three coloured component arrows show how that one
+##   motion is really three. Hold it still and it shows its resting force.
+## truth: a force has no existence apart from the thing it acts on — bolt the vector to the
+##   cube and "direction and magnitude" become where, and how hard, you shoved it.
 ##
-## DNA: push 0..1 is the magnitude of the applied force; seed sets its direction. (Live,
-## the direction + magnitude come from the grabbing hand's motion.)
+## Grab it (VR) or pointer-drag it; the live vector is the cube's own velocity. seed/push
+## set the resting vector shown when it isn't moving (and in the gallery).
 
 @export var seed: int = 0
 @export_range(0.0, 1.0, 0.01) var push: float = 0.6
-@export var cube_color: Color = Color(0.42, 0.78, 0.98)   # the cube
-@export var force_color: Color = Color(0.98, 0.84, 0.32)  # the resultant force F
-@export var x_color: Color = Color(0.95, 0.42, 0.40)      # Fx
-@export var y_color: Color = Color(0.50, 0.92, 0.52)      # Fy
-@export var z_color: Color = Color(0.46, 0.66, 0.98)      # Fz
+@export var cube_color: Color = Color(0.42, 0.78, 0.98)
+@export var force_color: Color = Color(0.98, 0.84, 0.32)
+@export var x_color: Color = Color(0.95, 0.42, 0.40)
+@export var y_color: Color = Color(0.50, 0.92, 0.52)
+@export var z_color: Color = Color(0.46, 0.66, 0.98)
+
+const CUBE := 0.40
+
+var _last_pos: Vector3
+var _last_f: Vector3 = Vector3.INF
 
 
 func _ready() -> void:
-	_build()
+	super()                                  # pickable_prop._ready -> pickable.gd._ready + set_process
+	freeze = true
+	_ensure_collision(Vector3(CUBE, CUBE, CUBE))
+	_build_body()
+	demo_root = Node3D.new(); demo_root.name = "Vec"; add_child(demo_root)
+	_last_pos = global_position
+	_redraw(_resting_force())
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -33,59 +44,59 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("emissive"): emissive = bool(config_data["emissive"])
 	cube_color = _parse_color(config_data.get("cube_color", cube_color), cube_color)
 	force_color = _parse_color(config_data.get("force_color", force_color), force_color)
-	_build()
+	if demo_root == null:
+		demo_root = Node3D.new(); demo_root.name = "Vec"; add_child(demo_root)
+	_redraw(_resting_force())
 
 
-func _build() -> void:
-	for c in get_children():
-		remove_child(c); c.queue_free()
-	var rig := Node3D.new()
-	rig.name = "ForceCubeRig"
-	add_child(rig)
+# the resting/default vector (seeded) — shown when the cube isn't being moved
+func _resting_force() -> Vector3:
 	_rng.seed = hash(seed)
-
-	var center := Vector3(0.0, 0.7, 0.0)
 	var mag: float = lerpf(0.55, 1.7, push)
-	# seeded direction — biased forward + up so the components read
-	var dir := Vector3(_rng.randf_range(0.4, 1.0), _rng.randf_range(0.2, 0.9), _rng.randf_range(-0.7, 0.7)).normalized()
-	var f: Vector3 = dir * mag
-	var tip: Vector3 = center + f
+	return Vector3(_rng.randf_range(0.4, 1.0), _rng.randf_range(0.2, 0.9), _rng.randf_range(-0.7, 0.7)).normalized() * mag
 
-	# --- the cube (the grabbable, the tail of the vector) -----------------------
-	rig.add_child(_box(center, Vector3(0.42, 0.42, 0.42), _glass_mat(cube_color, 0.30)))
-	rig.add_child(_box(center, Vector3(0.30, 0.30, 0.30), _glow_mat(cube_color, 0.9)))
-	# edge frame
-	for ex in [-0.21, 0.21]:
-		for ey in [-0.21, 0.21]:
-			rig.add_child(_cylinder_between(center + Vector3(ex, ey, -0.21), center + Vector3(ex, ey, 0.21), 0.008, _glow_mat(cube_color.lerp(Color.WHITE, 0.4), 1.4)))
 
-	# --- the component decomposition (a dashed box: F = Fx + Fy + Fz) -----------
-	var cx := center + Vector3(f.x, 0, 0)
-	var cxy := center + Vector3(f.x, f.y, 0)
+func _build_body() -> void:
+	if has_node("Body"):
+		return
+	var b := Node3D.new(); b.name = "Body"; add_child(b)
+	b.add_child(_box(Vector3.ZERO, Vector3(CUBE, CUBE, CUBE), _glass_mat(cube_color, 0.30)))
+	b.add_child(_box(Vector3.ZERO, Vector3(0.30, 0.30, 0.30), _glow_mat(cube_color, 0.9)))
+	for ex in [-0.20, 0.20]:
+		for ey in [-0.20, 0.20]:
+			b.add_child(_cylinder_between(Vector3(ex, ey, -0.20), Vector3(ex, ey, 0.20), 0.008, _glow_mat(cube_color.lerp(Color.WHITE, 0.4), 1.4)))
+
+
+# --- per-frame: the live vector is the cube's own velocity -------------------
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	var vel: Vector3 = (global_position - _last_pos) / maxf(delta, 0.0001)
+	_last_pos = global_position
+	var f_world: Vector3 = vel * 0.5
+	if f_world.length() < 0.12:
+		f_world = global_transform.basis * _resting_force()   # at rest → resting vector
+	# draw in body-local so the arrow keeps pointing the world way it's moving
+	_redraw(global_transform.basis.inverse() * f_world)
+
+
+func _redraw(f: Vector3) -> void:
+	if demo_root == null or f.distance_to(_last_f) < 0.02:
+		return
+	_last_f = f
+	for c in demo_root.get_children():
+		demo_root.remove_child(c); c.queue_free()
+	var tip := f
+	# component decomposition box
 	var dim := _glow_mat(Color(0.6, 0.62, 0.68), 0.35)
-	rig.add_child(_dashed(center, cx, 0.006, dim))
-	rig.add_child(_dashed(cx, cxy, 0.006, dim))
-	rig.add_child(_dashed(cxy, tip, 0.006, dim))
-
-	# --- the component arrows (x / y / z) ---------------------------------------
-	if absf(f.x) > 0.05: rig.add_child(_arrow(center, cx, 0.016, _glow_mat(x_color, 1.2)))
-	if absf(f.y) > 0.05: rig.add_child(_arrow(center, center + Vector3(0, f.y, 0), 0.016, _glow_mat(y_color, 1.2)))
-	if absf(f.z) > 0.05: rig.add_child(_arrow(center, center + Vector3(0, 0, f.z), 0.016, _glow_mat(z_color, 1.2)))
-
-	# --- the resultant force F (the hero arrow) ---------------------------------
-	rig.add_child(_arrow(center, tip, 0.03, _glow_mat(force_color, 1.8)))
-
-	# --- a faint motion trail behind the cube (opposite F) ----------------------
-	for i in range(1, 4):
-		var t := float(i) / 4.0
-		rig.add_child(_box(center - f.normalized() * (0.18 * i), Vector3(0.30, 0.30, 0.30) * (1.0 - 0.2 * i),
-			_glass_mat(cube_color, 0.12 * (1.0 - t))))
-
-	# --- readout ----------------------------------------------------------------
-	var lbl := _billboard_label(
-		"F = (%+.2f, %+.2f, %+.2f)\n|F| = %.2f" % [f.x, f.y, f.z, mag],
-		center + Vector3(0.0, mag * 0.6 + 0.7, 0.0), 28, force_color.lerp(Color.WHITE, 0.3))
+	demo_root.add_child(_dashed(Vector3.ZERO, Vector3(f.x, 0, 0), 0.006, dim))
+	demo_root.add_child(_dashed(Vector3(f.x, 0, 0), Vector3(f.x, f.y, 0), 0.006, dim))
+	demo_root.add_child(_dashed(Vector3(f.x, f.y, 0), tip, 0.006, dim))
+	if absf(f.x) > 0.05: demo_root.add_child(_arrow(Vector3.ZERO, Vector3(f.x, 0, 0), 0.016, _glow_mat(x_color, 1.2)))
+	if absf(f.y) > 0.05: demo_root.add_child(_arrow(Vector3.ZERO, Vector3(0, f.y, 0), 0.016, _glow_mat(y_color, 1.2)))
+	if absf(f.z) > 0.05: demo_root.add_child(_arrow(Vector3.ZERO, Vector3(0, 0, f.z), 0.016, _glow_mat(z_color, 1.2)))
+	demo_root.add_child(_arrow(Vector3.ZERO, tip, 0.03, _glow_mat(force_color, 1.8)))
+	var lbl := _billboard_label("F = (%+.2f, %+.2f, %+.2f)\n|F| = %.2f" % [f.x, f.y, f.z, f.length()],
+		Vector3(0.0, f.length() * 0.6 + 0.55, 0.0), 26, force_color.lerp(Color.WHITE, 0.3))
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	rig.add_child(lbl)
-
-	_settle(rig, 1.9)
+	demo_root.add_child(lbl)

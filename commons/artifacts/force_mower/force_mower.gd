@@ -1,4 +1,4 @@
-extends "res://commons/artifacts/_embodied/embodied_prop.gd"
+extends "res://commons/artifacts/_embodied/pickable_prop.gd"
 class_name ForceMower
 
 ## @identity
@@ -25,9 +25,17 @@ class_name ForceMower
 const F_MAG := 0.95
 const D_MAG := 1.7
 
+var _wheels: Array[Node3D] = []
+var _last_pos: Vector3
+var _roll: float = 0.0
+
 
 func _ready() -> void:
+	super()                                  # pickable.gd._ready — grab the handle to push
+	freeze = true
+	_ensure_collision(Vector3(2.4, 1.6, 0.7))
 	_build()
+	_last_pos = global_position
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -42,10 +50,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _build() -> void:
-	for c in get_children():
-		remove_child(c); c.queue_free()
+	_wheels.clear()
+	var old := get_node_or_null("Visual")
+	if old: old.queue_free()
 	var rig := Node3D.new()
-	rig.name = "ForceMowerRig"
+	rig.name = "Visual"
 	add_child(rig)
 
 	var theta: float = lerpf(deg_to_rad(16.0), deg_to_rad(64.0), push_angle)
@@ -58,14 +67,19 @@ func _build() -> void:
 	rig.add_child(_cylinder(Vector3(0.20, 0.46, 0.0), 0.05, 0.10, steel))                                                # exhaust
 	for sx in [-0.30, 0.30]:
 		for sz in [-0.26, 0.26]:
-			# wheels roll in +X: disc vertical (XY plane), axle along Z
-			var w := _torus(Vector3(sx, 0.10, sz), 0.11, 0.045, _matte_mat(Color(0.12, 0.12, 0.14), 0.9))
+			# each wheel spins on a pivot at its centre (axle along Z, rolls in X)
+			var pivot := Node3D.new()
+			pivot.position = Vector3(sx, 0.10, sz)
+			rig.add_child(pivot)
+			var w := _torus(Vector3.ZERO, 0.11, 0.045, _matte_mat(Color(0.12, 0.12, 0.14), 0.9))
 			w.rotation.x = PI * 0.5
-			rig.add_child(w)
-			# hub cap + a spoke mark so the roll reads
-			var hub := _cylinder(Vector3(sx, 0.10, sz), 0.035, 0.10, _steel_mat(steel_color))
+			pivot.add_child(w)
+			var hub := _cylinder(Vector3.ZERO, 0.035, 0.10, _steel_mat(steel_color))
 			hub.rotation.x = PI * 0.5
-			rig.add_child(hub)
+			pivot.add_child(hub)
+			# a radial spoke mark so the roll is visible
+			pivot.add_child(_box(Vector3(0.0, 0.0, 0.055), Vector3(0.02, 0.17, 0.01), _steel_mat(steel_color.lerp(Color.WHITE, 0.4))))
+			_wheels.append(pivot)
 	# cutting deck shadow line
 	rig.add_child(_box(Vector3(0.0, 0.02, 0.0), Vector3(0.66, 0.02, 0.46), _matte_mat(Color(0.1, 0.1, 0.12), 1.0)))
 
@@ -100,6 +114,19 @@ func _build() -> void:
 		grip + Vector3(0.1, 0.6, 0.0), 30, Color(0.96, 0.98, 1.0)))
 
 	_settle(rig, 2.2)
+
+
+## Spin the wheels as the mower is pushed (grab the handle and move it).
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint() or _wheels.is_empty():
+		return
+	var fwd: float = (global_position - _last_pos).dot(global_transform.basis.x)
+	_last_pos = global_position
+	if absf(fwd) < 0.0001:
+		return
+	_roll += fwd * 5.5
+	for p in _wheels:
+		(p as Node3D).rotation.z = -_roll
 
 
 func _add_arc(parent: Node3D, center: Vector3, va: Vector3, vb: Vector3, radius: float, mat: Material) -> void:

@@ -1,4 +1,4 @@
-extends "res://commons/artifacts/_embodied/embodied_prop.gd"
+extends "res://commons/artifacts/_embodied/pickable_prop.gd"
 class_name BubbleBlaster
 
 ## @identity
@@ -23,6 +23,9 @@ class_name BubbleBlaster
 
 
 func _ready() -> void:
+	super()                                  # pickable.gd._ready — grabbable
+	freeze = true
+	_ensure_collision(Vector3(1.2, 0.7, 0.4))
 	_build()
 
 
@@ -36,10 +39,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _build() -> void:
-	for c in get_children():
-		remove_child(c); c.queue_free()
+	# clear only the Visual child — never the CollisionShape the grab needs
+	var old := get_node_or_null("Visual")
+	if old: old.queue_free()
 	var rig := Node3D.new()
-	rig.name = "BubbleBlasterRig"
+	rig.name = "Visual"
 	add_child(rig)
 	_rng.seed = hash(seed)
 
