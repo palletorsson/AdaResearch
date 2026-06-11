@@ -1694,6 +1694,27 @@ func _build_sweep() -> Array:
 			"key_color": Color(0.42, 0.46, 0.54),
 		}))
 
+# ── lead_safety_door: critical_parameter = hazard_type ─────────
+	sweep.append(_p("lead_safety_door", "1_radiation_employees", "radiation (employees)",
+		"the lead shield — radiation trefoil, EMPLOYEES ONLY",
+		{
+			"hazard_type": "radiation",
+			"restricted_text": "EMPLOYEES ONLY",
+		}))
+	sweep.append(_p("lead_safety_door", "2_biohazard_authorized", "biohazard (authorized)",
+		"a containment door — biohazard symbol, AUTHORIZED ONLY",
+		{
+			"hazard_type": "biohazard",
+			"restricted_text": "AUTHORIZED ONLY",
+			"hazard_color": Color(0.98, 0.62, 0.10),
+		}))
+	sweep.append(_p("lead_safety_door", "3_high_voltage_danger", "high voltage (danger)",
+		"a high-tension room — lightning bolt, DANGER · HV",
+		{
+			"hazard_type": "electrical",
+			"restricted_text": "DANGER · HV",
+		}))
+
 	return sweep
 
 

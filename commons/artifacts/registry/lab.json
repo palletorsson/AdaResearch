@@ -6,6 +6,34 @@
     "theoretical_grounding": "Embodied instrumentation and interface literacy in AdaResearch lab environments"
   },
   "artifacts": {
+    "lead_safety_door": {
+      "lookup_name": "lead_safety_door",
+      "scene": "res://commons/artifacts/lead_safety_door/lead_safety_door.tscn",
+      "class_name": "LeadSafetyDoor",
+      "name": "Lead Safety Door",
+      "description": "A heavy lead-lined radiation safety door — lab / restricted-access vocabulary. A thick white shielding slab in a dark charcoal frame, carrying an ATTENTION warning sign, a hazard pictogram, and a black EMPLOYEES ONLY plate, with a lever handle on the left and hinges on the right. hazard_type swaps the central pictogram — radiation trefoil, biohazard, or electrical lightning — so the door declares WHAT KIND of forbidden room is behind it.",
+      "category": "lab_prop",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "tags": ["prop", "door", "safety", "radiation", "hazard", "signage", "restricted", "lab"],
+      "parameters": {
+        "door_width": "Door width along X in meters (default 0.9)",
+        "door_height": "Door height in meters (default 2.0)",
+        "door_thickness": "Slab thickness along Z in meters — lead is thick (default 0.12)",
+        "frame_color": "Frame color (default near-black charcoal)",
+        "door_color": "Door slab color (default white)",
+        "handle_color": "Lever handle color (default metal grey)",
+        "hazard_type": "radiation | biohazard | electrical | none — the central pictogram (default radiation)",
+        "hazard_color": "Hazard sign color (default hazard yellow)",
+        "show_attention_sign": "Bool — the yellow ATTENTION triangle sign (default true)",
+        "restricted_text": "Black plate text (default 'EMPLOYEES ONLY')",
+        "handle_side": "left | right — handle edge; hinges go opposite (default left)",
+        "door_open": "Bool — slab pivots ~90 degrees on the hinge edge (default false)"
+      },
+      "dev_themes": ["environment", "lab", "safety", "radiation", "signage"]
+    },
     "wooden_pallet": {
       "lookup_name": "wooden_pallet",
       "scene": "res://commons/artifacts/wooden_pallet/wooden_pallet.tscn",
