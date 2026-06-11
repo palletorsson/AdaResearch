@@ -142,6 +142,25 @@ def main() -> int:
                             "config": "/vector-toys-gallery/%s.json" % cid,
                             "notes": "Vector %s — seed %d (two-pad surface)" % (op.title(), s)})
             render.append("%s\t%s" % (cid, VOP_SCENE))
+    # Embodied force-display PROPS (free-world objects, no console) — single tiles.
+    PROPS = {
+        "force_mower": ("res://commons/artifacts/force_mower/force_mower.tscn", "push_angle",
+                        "work — W = F d cos θ; raise the handle and more push is wasted into the dirt"),
+        "force_cube": ("res://commons/artifacts/force_cube/force_cube.tscn", "push",
+                       "a force vector bolted to a grabbable cube, split into x / y / z components"),
+        "bubble_blaster": ("res://commons/artifacts/bubble_blaster/bubble_blaster.tscn", "output",
+                           "a bubble gun wearing its output velocity vector + spread cone on the muzzle"),
+    }
+    for tok, (scene, param, note) in PROPS.items():
+        for i, v in enumerate([0.25, 0.55, 0.88]):
+            cid = "vt_%s_%s" % (tok, LABELS[i])
+            json.dump({"id": cid, "name": "%s — %s %.2f" % (tok.replace("_"," ").title(), param, v),
+                       "description": "%s  (%s = %.2f)" % (note, param, v), "family": tok,
+                       "scene": scene, "dna": {param: v, "seed": i + 1}},
+                      open(os.path.join(GAL, cid + ".json"), "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+            entries.append({"id": cid, "image": "/vector-toys-gallery/%s.png" % cid,
+                            "config": "/vector-toys-gallery/%s.json" % cid, "notes": "%s — %s %.2f" % (tok, param, v)})
+            render.append("%s	%s" % (cid, scene))
     json.dump({"version": 1,
                "description": "Embodied vector & force toys — six playable artifacts each sweeping its principle's DNA parameter: dot_aligner (dot) / torque_crank (cross) / projection_shadow (projection) / drag_lane (friction) / launch_arc (projectile) / circle_train (centripetal). The grammar is vectors and forces; you feel each one move.",
                "entries": entries},
