@@ -53,6 +53,31 @@ TOYS = {
         "mass_ratio", [0.0, 0.5, 1.0], 1.6, 2.6,
         "gravity — F = G m₁m₂/r²; mass ratio slides the barycenter from binary to star+planet", {},
     ),
+    "bounce_well": (
+        "res://commons/artifacts/bounce_well/bounce_well.tscn",
+        "restitution", [0.35, 0.60, 0.88], 1.8, 2.6,
+        "restitution — h' = e·h; the bounces decay geometrically from dead thud to perpetual", {},
+    ),
+    "firework_burst": (
+        "res://commons/artifacts/firework_burst/firework_burst.tscn",
+        "burst", [0.30, 0.60, 0.90], 1.8, 2.4,
+        "projectile fountain — a mortar's sparks all arc under g; burst widens the canopy", {},
+    ),
+    "momentum_cradle": (
+        "res://commons/artifacts/momentum_cradle/momentum_cradle.tscn",
+        "lift", [0.30, 0.60, 0.92], 1.6, 2.6,
+        "momentum — p = mv conserved; Newton's cradle, one ball in one ball out", {},
+    ),
+    "slingshot_pull": (
+        "res://commons/artifacts/slingshot_pull/slingshot_pull.tscn",
+        "draw", [0.30, 0.62, 0.90], 1.8, 2.6,
+        "elastic — PE = ½kx²; the draw stores energy as the square, released as launch", {},
+    ),
+    "collision_carts": (
+        "res://commons/artifacts/collision_carts/collision_carts.tscn",
+        "mass_ratio", [0.20, 0.50, 0.85], 1.8, 2.6,
+        "collision — p = mv conserved; the velocities split by mass (before / after)", {},
+    ),
 }
 
 # Existing physics-sim scenes promoted into the gallery as-is (one specimen each, no
