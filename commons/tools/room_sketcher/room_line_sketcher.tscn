@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b2o0jveixxxgh"]
+
+[ext_resource type="Script" uid="uid://dtuufmvhoq7tx" path="res://commons/tools/room_sketcher/room_line_sketcher.gd" id="1_sketcher"]
+
+[node name="RoomLineSketcher" type="Node3D" unique_id=1864617988]
+script = ExtResource("1_sketcher")
