@@ -28,12 +28,15 @@ const D_MAG := 1.7
 var _wheels: Array[Node3D] = []
 var _last_pos: Vector3
 var _roll: float = 0.0
+var _readout: Label3D                         # the W = F d cos θ display (updates live)
+var _dist: float = 0.0                        # distance pushed so far → d in the work
+var _theta: float = 0.0
 
 
 func _ready() -> void:
 	super()                                  # pickable.gd._ready — grab the handle to push
 	freeze = true
-	_ensure_collision(Vector3(2.4, 1.6, 0.7))
+	_ensure_collision(Vector3(3.0, 2.4, 1.4))
 	_build()
 	_last_pos = global_position
 
@@ -56,10 +59,24 @@ func _build() -> void:
 	var rig := Node3D.new()
 	rig.name = "Visual"
 	add_child(rig)
+	_rng.seed = hash(seed)
 
 	var theta: float = lerpf(deg_to_rad(16.0), deg_to_rad(64.0), push_angle)
-	var work: float = F_MAG * D_MAG * cos(theta)
+	_theta = theta
 	var steel := _steel_mat(steel_color)
+
+	# --- grass pallet: the mower stands on its own patch of lawn -----------------
+	rig.add_child(_box(Vector3(0.0, -0.05, 0.0), Vector3(1.8, 0.08, 1.15), _matte_mat(Color(0.27, 0.19, 0.10), 1.0)))  # soil
+	var grass_lo := _matte_mat(Color(0.30, 0.60, 0.22), 0.95)
+	var grass_hi := _matte_mat(Color(0.41, 0.75, 0.27), 0.95)
+	for _gi in range(54):
+		var gx: float = _rng.randf_range(-0.85, 0.86)
+		var gz: float = _rng.randf_range(-0.55, 0.55)
+		var tall: bool = gx > 0.16                       # ahead of the mower = not yet cut (taller)
+		var h: float = _rng.randf_range(0.11, 0.19) if tall else _rng.randf_range(0.03, 0.06)
+		var blade := _box(Vector3(gx, -0.01 + h * 0.5, gz), Vector3(0.026, h, 0.026), grass_hi if tall else grass_lo)
+		blade.rotation.z = _rng.randf_range(-0.18, 0.18)
+		rig.add_child(blade)
 
 	# --- the mower (moves in +X) ------------------------------------------------
 	rig.add_child(_box(Vector3(0.0, 0.20, 0.0), Vector3(0.74, 0.26, 0.52), _matte_mat(body_color, 0.6)))
@@ -108,25 +125,32 @@ func _build() -> void:
 	var d0 := Vector3(-0.1, 0.12, 0.0)
 	rig.add_child(_arrow(d0, d0 + Vector3(D_MAG, 0.0, 0.0), 0.03, _glow_mat(disp_color, 1.4)))
 
-	# --- readout ----------------------------------------------------------------
-	rig.add_child(_billboard_label(
-		"W = F d cos θ\n\nθ = %d°\nF cos θ = %.2f\nW = %.2f" % [int(roundf(rad_to_deg(theta))), F_MAG * cos(theta), work],
-		grip + Vector3(0.1, 0.6, 0.0), 30, Color(0.96, 0.98, 1.0)))
+	# --- readout (d + W climb as you push it) -----------------------------------
+	_readout = _billboard_label(
+		"W = F d cos θ\nθ = %d°\nF cos θ = %.2f\nd = %.2f m\nW = %.2f"
+			% [int(roundf(rad_to_deg(theta))), F_MAG * cos(theta), _dist, F_MAG * _dist * cos(theta)],
+		grip + Vector3(0.1, 0.6, 0.0), 28, Color(0.96, 0.98, 1.0))
+	rig.add_child(_readout)
 
-	_settle(rig, 2.2)
+	_settle(rig, 2.8)
 
 
-## Spin the wheels as the mower is pushed (grab the handle and move it).
+## Spin the wheels + climb the work readout as the mower is pushed.
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or _wheels.is_empty():
 		return
-	var fwd: float = (global_position - _last_pos).dot(global_transform.basis.x)
+	var disp: Vector3 = global_position - _last_pos
 	_last_pos = global_position
-	if absf(fwd) < 0.0001:
+	if disp.length() < 0.0002:
 		return
-	_roll += fwd * 5.5
+	# wheels roll by the forward distance; d (the work's displacement) climbs by the path
+	_roll += disp.dot(global_transform.basis.x) * 5.5
 	for p in _wheels:
 		(p as Node3D).rotation.z = -_roll
+	_dist += disp.length()
+	if _readout:
+		_readout.text = "W = F d cos θ\nθ = %d°\nF cos θ = %.2f\nd = %.2f m\nW = %.2f" % [
+			int(roundf(rad_to_deg(_theta))), F_MAG * cos(_theta), _dist, F_MAG * _dist * cos(_theta)]
 
 
 func _add_arc(parent: Node3D, center: Vector3, va: Vector3, vb: Vector3, radius: float, mat: Material) -> void:

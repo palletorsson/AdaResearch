@@ -21,12 +21,31 @@ class_name BubbleBlaster
 @export var force_color: Color = Color(0.40, 0.86, 1.0)   # the output velocity vector
 @export var fluid_color: Color = Color(0.98, 0.62, 0.80)  # soap reservoir
 
+# fire-when-held state
+var _bubbles: Array = []          # [{node, mat, ar, radf, phase, size, alpha}]
+var _fire_level: float = 0.0      # 0 idle (dim slow drift) -> 1 firing (bright fast stream)
+var _fire_target: float = 0.0
+var _stream_t: float = 0.0
+var _noz: Vector3
+var _maxd: float = 1.0
+var _spr: float = 0.2
+
 
 func _ready() -> void:
 	super()                                  # pickable.gd._ready — grabbable
 	freeze = true
 	_ensure_collision(Vector3(1.2, 0.7, 0.4))
 	_build()
+	# picking it up starts the spray; dropping it stops
+	if not grabbed.is_connected(_on_grab): grabbed.connect(_on_grab)
+	if not dropped.is_connected(_on_drop): dropped.connect(_on_drop)
+
+
+func _on_grab(_p: Variant, _by: Variant) -> void:
+	_fire_target = 1.0
+
+func _on_drop(_p: Variant) -> void:
+	_fire_target = 0.0
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -74,16 +93,22 @@ func _build() -> void:
 	# the bubble window (round, with foam) on the barrel side
 	rig.add_child(_sphere(Vector3(-0.05, 0.55, 0.085), 0.07, _glass_mat(Color(0.9, 0.95, 1.0), 0.3)))
 
-	# --- the bubble stream (a spreading cone of bubbles) ------------------------
-	var count: int = int(lerpf(9.0, 26.0, output))
+	# --- the bubble stream — a pool _process animates (drifts idle, streams when held) ---
+	_bubbles.clear()
+	_noz = nozzle
+	_maxd = 0.9 * (0.7 + v_out * 0.6)
+	_spr = spread
+	var stream := Node3D.new(); stream.name = "Stream"; rig.add_child(stream)
+	var count: int = int(lerpf(11.0, 26.0, output))
 	for i in range(count):
-		var dist: float = _rng.randf_range(0.12, 1.0) * (0.7 + v_out * 0.6)
-		var ar: float = _rng.randf_range(0.0, TAU)
-		var rad: float = tan(spread) * dist * _rng.randf_range(0.2, 1.0)
-		var p: Vector3 = nozzle + Vector3(dist, sin(ar) * rad, cos(ar) * rad)
-		var sz: float = _rng.randf_range(0.018, 0.055) * (1.0 - dist * 0.3)
-		var hue: float = fposmod(0.55 + dist * 0.4 + float(i) * 0.05, 1.0)
-		rig.add_child(_sphere(p, maxf(sz, 0.012), _glass_mat(Color.from_hsv(hue, 0.35, 1.0), 0.4)))
+		var hue: float = fposmod(0.55 + float(i) * 0.07, 1.0)
+		var mat := _glass_mat(Color.from_hsv(hue, 0.35, 1.0), 0.4)
+		var node := _sphere(Vector3.ZERO, 1.0, mat)   # unit sphere, scaled per-frame
+		stream.add_child(node)
+		_bubbles.append({"node": node, "mat": mat, "ar": _rng.randf_range(0.0, TAU),
+			"radf": _rng.randf_range(0.25, 1.0), "phase": float(i) / float(count),
+			"size": _rng.randf_range(0.020, 0.055)})
+	_place_bubbles()
 
 	# --- the output velocity vector + spread cone -------------------------------
 	rig.add_child(_arrow(nozzle, nozzle + Vector3(v_out, 0.0, 0.0), 0.028, _glow_mat(force_color, 1.8)))
@@ -98,3 +123,29 @@ func _build() -> void:
 		nozzle + Vector3(0.3, 0.5, 0.0), 28, force_color.lerp(Color.WHITE, 0.3)))
 
 	_settle(rig, 1.9)
+
+
+# --- the spray: each bubble flies the nozzle→cone path, recycling -------------
+func _place_bubbles() -> void:
+	for bdata in _bubbles:
+		_place_one(bdata, float(bdata["phase"]))
+
+
+func _place_one(bdata: Dictionary, ph: float) -> void:
+	var dist: float = lerpf(0.05, _maxd, ph)
+	var rad: float = tan(_spr) * dist * float(bdata["radf"])
+	var ar: float = float(bdata["ar"])
+	var node: Node3D = bdata["node"]
+	node.position = _noz + Vector3(dist, sin(ar) * rad, cos(ar) * rad)
+	node.scale = Vector3.ONE * (float(bdata["size"]) * (0.5 + 0.5 * sin(ph * PI)))   # born, swell, pop
+	var mat: StandardMaterial3D = bdata["mat"]
+	mat.emission_energy_multiplier = (0.3 + 1.2 * _fire_level) if emissive else 0.0   # glows when firing
+
+
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint() or _bubbles.is_empty():
+		return
+	_fire_level = lerpf(_fire_level, _fire_target, clampf(delta * 4.0, 0.0, 1.0))
+	_stream_t += delta * lerpf(0.10, 0.9, _fire_level)        # idle drift → fast stream when held
+	for bdata in _bubbles:
+		_place_one(bdata, fposmod(float(bdata["phase"]) + _stream_t, 1.0))

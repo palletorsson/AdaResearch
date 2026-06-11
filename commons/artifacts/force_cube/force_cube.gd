@@ -31,6 +31,12 @@ var _last_f: Vector3 = Vector3.INF
 func _ready() -> void:
 	super()                                  # pickable_prop._ready -> pickable.gd._ready + set_process
 	freeze = true
+	# zero-gravity throw: on release it unfreezes and keeps the throw velocity (let_go sets
+	# linear_velocity); with no gravity it flies straight off the way you let it go.
+	gravity_scale = 0.0
+	linear_damp = 0.3                        # drifts to a slow stop so it stays recoverable
+	angular_damp = 0.5
+	release_mode = 0                         # ReleaseMode.UNFROZEN — become dynamic on release
 	_ensure_collision(Vector3(CUBE, CUBE, CUBE))
 	_build_body()
 	demo_root = Node3D.new(); demo_root.name = "Vec"; add_child(demo_root)
@@ -73,7 +79,7 @@ func _process(delta: float) -> void:
 		return
 	var vel: Vector3 = (global_position - _last_pos) / maxf(delta, 0.0001)
 	_last_pos = global_position
-	var f_world: Vector3 = vel * 0.5
+	var f_world: Vector3 = (vel * 0.5).limit_length(2.6)
 	if f_world.length() < 0.12:
 		f_world = global_transform.basis * _resting_force()   # at rest → resting vector
 	# draw in body-local so the arrow keeps pointing the world way it's moving
