@@ -63,13 +63,16 @@ func _build_console() -> void:
 	# we just wire its signals to the tunnel.
 	var plate: Node = load("res://commons/artifacts/pattern_tunnel/pattern_control_plate.tscn").instantiate()
 	plate.name = "ControlPlate"
+	if plate.has_method("configure"):
+		plate.call("configure", "PATTERN  TUNNEL", [
+			{"key": "group", "label": "GROUP", "names": GROUPS, "init": group_index},
+			{"key": "motif", "label": "MOTIF", "names": MOTIF_NAMES, "init": motif_index},
+			{"key": "period", "label": "PALETTE", "names": PERIOD_NAMES, "init": period_index},
+			{"key": "speed", "label": "SPEED", "names": [], "init": fill_speed},
+		])
 	add_child(plate)
 	(plate as Node3D).position = Vector3(2.0, 0.0, 1.0)
 	(plate as Node3D).rotation_degrees = Vector3(0.0, -64.0, 0.0)
-	plate.set("group_index", group_index)
-	plate.set("motif_index", motif_index)
-	plate.set("period_index", period_index)
-	plate.set("fill_speed", fill_speed)
 	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate_change):
 		plate.connect("changed", _on_plate_change)
 	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
