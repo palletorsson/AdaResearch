@@ -33,6 +33,7 @@ var _dist: float = 0.0                        # distance pushed so far → d in 
 var _theta: float = 0.0
 var _lawn: Node3D                             # the stationary lawn the mower mows (a sibling)
 var _blades: Array = []                       # [{node, wx, wz}] world XZ of each uncut blade
+var _ground_y: float = 0.0                    # locked floor height while grabbed (grounded)
 
 const LAWN_HX := 3.2                          # lawn half-extents (world units) — a big patch
 const LAWN_HZ := 2.4
@@ -42,10 +43,36 @@ const CUT_R := 0.42                           # cutting-deck radius
 func _ready() -> void:
 	super()                                  # pickable.gd._ready — grab the handle to push
 	freeze = true
+	process_physics_priority = 100           # constrain AFTER the grab driver has moved us
 	_ensure_collision(Vector3(3.0, 2.4, 1.4))
 	_build()
 	_last_pos = global_position
+	_ground_y = global_position.y
 	call_deferred("_ensure_lawn")            # spawn the lawn as a sibling (stays put while we mow)
+
+
+# A real mower stays on the ground and steers — it never lifts or tilts. While grabbed we
+# clamp the transform to the ground plane: floor height locked, upright, yaw (turning) only.
+# Runs after the grab driver (high physics priority) so it has the final say each frame.
+func _physics_process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	if is_picked_up():
+		global_transform = _grounded_transform(global_transform)
+	else:
+		_ground_y = global_position.y            # remember the resting floor height
+
+
+func _grounded_transform(t: Transform3D) -> Transform3D:
+	var fwd: Vector3 = t.basis.x                  # the mower's forward (+X), as the hand turned it
+	fwd.y = 0.0
+	if fwd.length() < 0.001:
+		fwd = Vector3.RIGHT
+	fwd = fwd.normalized()
+	var side: Vector3 = fwd.cross(Vector3.UP).normalized()
+	t.basis = Basis(fwd, Vector3.UP, side)        # upright, yaw only — no pitch, no roll
+	t.origin.y = _ground_y                        # locked to the floor — no lifting
+	return t
 
 
 # A stationary lawn at the mower's spawn — a sibling so it does NOT move with the mower.
