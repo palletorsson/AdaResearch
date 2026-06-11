@@ -14,11 +14,11 @@ const PLATE_SCENE := "res://commons/artifacts/pattern_tunnel/pattern_control_pla
 
 @export var body_color: Color = Color(0.55, 0.56, 0.59)   # brushed grey metal
 @export var trim_color: Color = Color(0.28, 0.29, 0.32)   # dark trim
-@export var plate_scale: float = 1.0   # 1.0 — the plate carries XR sliders, which must NOT be scaled
+@export var plate_scale: float = 0.85   # board scaled down a bit; the plate counter-scales its XR controls back to world-1.0
 @export var tilt_deg: float = 28.0
 
 # the slanted face is centred here (a point on the upper-front of the cabinet)
-const FACE_CENTER := Vector3(0.0, 1.55, 0.2)
+const FACE_CENTER := Vector3(0.0, 1.64, 0.22)
 
 var _plate: Node = null
 var _cfg_title: String = "PATTERN CONTROL"
@@ -67,7 +67,7 @@ func _build() -> void:
 	var pocket := CSGBox3D.new()
 	pocket.name = "Pocket"
 	pocket.operation = CSGShape3D.OPERATION_SUBTRACTION
-	pocket.size = Vector3(1.5, 1.42, 0.08)
+	pocket.size = Vector3(1.32, 1.24, 0.08)
 	pocket.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
 	pocket.position = FACE_CENTER
 	body.add_child(pocket)
@@ -80,6 +80,7 @@ func _build() -> void:
 	# --- the control plate, recessed flush in the slanted pocket ----------------
 	var plate: Node = load(PLATE_SCENE).instantiate()
 	plate.name = "Plate"
+	plate.set("control_scale", 1.0 / maxf(plate_scale, 0.01))   # XR controls stay world-1.0 despite the scaled plate
 	if plate.has_method("configure"):
 		plate.call("configure", _cfg_title, _cfg_specs)
 	add_child(plate)

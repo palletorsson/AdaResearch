@@ -54,6 +54,7 @@ const FLUSH_Z := 0.004
 const TEXT_Z := 0.016
 
 var title: String = "PATTERN CONTROL"
+var control_scale: float = 1.0   # counter-scale for the XR sliders/cube so they stay world-1.0 when the plate is scaled
 var _specs: Array = []
 var _values: Dictionary = {}
 var _monitor: Label3D = null
@@ -177,6 +178,7 @@ func _build_cube(c: Vector3) -> void:
 	cube.set("cube_size", 0.08)
 	add_child(cube)
 	(cube as Node3D).position = Vector3(c.x, c.y, 0.014)
+	(cube as Node3D).scale = Vector3.ONE * control_scale
 	if cube.has_signal("pressed"):
 		cube.connect("pressed", func(): randomized.emit())
 
@@ -191,9 +193,10 @@ func _build_slider_box(spec: Dictionary, cx: float, cy: float) -> void:
 	var key: String = spec["key"]
 	s.name = "Slider_%s" % key
 	add_child(s)
-	# XR-Tools sliders break under scale (the grab math multiplies by basis incl. scale),
-	# so keep the slider at scale 1.0 — never scale it.
+	# XR-Tools sliders break under parent scale (grab math multiplies by basis incl. scale);
+	# control_scale counters the plate's own scale so the slider ends at world-scale 1.0.
 	(s as Node3D).position = Vector3(cx, cy - 0.012, 0.02)
+	(s as Node3D).scale = Vector3.ONE * control_scale
 	var names: Array = spec.get("names", [])
 	var count: int = names.size()
 	if count > 1 and s.has_method("set_choices"):
