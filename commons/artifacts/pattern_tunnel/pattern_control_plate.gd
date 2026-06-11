@@ -110,8 +110,9 @@ func _build_cube_socket(c: Vector3, _s: float) -> void:
 func _build_slider_box(r: Dictionary) -> void:
 	var cx: float = r["x"]
 	var cy: float = r["y"]
-	# the slider's OWN frame is the box; the label sits above it
-	_text(cx, cy + 0.135, String(r["label"]), 24, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	# a thin frame outline around the slider; the label sits above it
+	_frame(cx, cy, 0.62, 0.22)
+	_text(cx, cy + 0.16, String(r["label"]), 24, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
 	if not ResourceLoader.exists(SLIDER_SCENE):
 		return
 	var s: Node = load(SLIDER_SCENE).instantiate()
