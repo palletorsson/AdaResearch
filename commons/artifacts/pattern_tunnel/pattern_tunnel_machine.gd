@@ -58,41 +58,41 @@ func _build() -> void:
 # ── the console ──────────────────────────────────────────────────────────────
 
 func _build_console() -> void:
-	var root := Node3D.new()
-	root.name = "Console"
-	# to the right of the mouth, angled toward the player standing at the entrance
-	root.position = Vector3(2.05, 0.0, 0.9)
-	root.rotation_degrees = Vector3(0.0, -64.0, 0.0)
-	add_child(root)
+	# the Dieter Rams pattern control plate, to the right of the mouth, angled toward
+	# the player at the entrance. The plate carries the sliders + cube button + monitor;
+	# we just wire its signals to the tunnel.
+	var plate: Node = load("res://commons/artifacts/pattern_tunnel/pattern_control_plate.tscn").instantiate()
+	plate.name = "ControlPlate"
+	add_child(plate)
+	(plate as Node3D).position = Vector3(2.0, 0.0, 1.0)
+	(plate as Node3D).rotation_degrees = Vector3(0.0, -64.0, 0.0)
+	plate.set("group_index", group_index)
+	plate.set("motif_index", motif_index)
+	plate.set("period_index", period_index)
+	plate.set("fill_speed", fill_speed)
+	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate_change):
+		plate.connect("changed", _on_plate_change)
+	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
+		plate.connect("randomized", _on_plate_random)
 
-	# backing panel (a large ticket-machine console)
-	root.add_child(_box(Vector3(0.0, 0.95, -0.06), Vector3(1.25, 1.9, 0.10), _panel(Color(0.12, 0.13, 0.16))))
-	root.add_child(_box(Vector3(0.0, 0.95, -0.02), Vector3(1.18, 1.83, 0.04), _panel(Color(0.16, 0.17, 0.21))))
-	root.add_child(_box(Vector3(0.0, 1.86, 0.0), Vector3(1.2, 0.04, 0.08), _accent(Color(0.75, 0.38, 0.13))))  # copper top
-	# a stand
-	root.add_child(_box(Vector3(0.0, 0.18, -0.04), Vector3(0.4, 0.36, 0.3), _panel(Color(0.10, 0.10, 0.12))))
 
-	# title
-	root.add_child(_text("PATTERN  TUNNEL", Vector3(0.0, 1.72, 0.03), 30, Color(0.85, 0.88, 0.95), HORIZONTAL_ALIGNMENT_CENTER))
+func _on_plate_change(key: String, value: float) -> void:
+	if _tunnel == null:
+		return
+	match key:
+		"group":  _tunnel.call("reskin", int(value), -1, -1)
+		"motif":  _tunnel.call("reskin", -1, int(value), -1)
+		"period": _tunnel.call("reskin", -1, -1, int(value))
+		"speed":
+			_tunnel.set("fill_speed", value)
+			_tunnel.call("boost")
 
-	# monitor — current selection
-	root.add_child(_box(Vector3(0.0, 1.42, 0.02), Vector3(1.0, 0.4, 0.012), _screen()))
-	_monitor = _text("", Vector3(-0.46, 1.56, 0.03), 26, Color(0.55, 0.95, 0.8), HORIZONTAL_ALIGNMENT_LEFT)
-	root.add_child(_monitor)
 
-	# four sliders
-	var rows := [
-		{"key": "group", "label": "GROUP", "count": GROUPS.size(), "idx": group_index},
-		{"key": "motif", "label": "MOTIF", "count": MOTIF_NAMES.size(), "idx": motif_index},
-		{"key": "period", "label": "PALETTE", "count": PERIOD_NAMES.size(), "idx": period_index},
-		{"key": "speed", "label": "SPEED", "count": 0, "idx": 0},
-	]
-	var y := 1.02
-	for r in rows:
-		_add_slider(root, r, y)
-		y -= 0.27
-
-	_update_monitor()
+func _on_plate_random() -> void:
+	if _tunnel == null:
+		return
+	_tunnel.call("reskin", randi() % GROUPS.size(), randi() % MOTIF_NAMES.size(), randi() % PERIOD_NAMES.size())
+	_tunnel.call("boost", 12.0)
 
 
 func _add_slider(root: Node3D, r: Dictionary, y: float) -> void:
