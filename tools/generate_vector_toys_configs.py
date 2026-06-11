@@ -144,6 +144,8 @@ def main() -> int:
             render.append("%s\t%s" % (cid, VOP_SCENE))
     # Embodied force-display PROPS (free-world objects, no console) — single tiles.
     PROPS = {
+        "wedge_slide": ("res://commons/artifacts/wedge_slide/wedge_slide.tscn", "incline",
+                        "inclined-plane free body — mg splits into mg sinθ (down) + mg cosθ (into); slides past tanθ=μ"),
         "force_mower": ("res://commons/artifacts/force_mower/force_mower.tscn", "push_angle",
                         "work — W = F d cos θ; raise the handle and more push is wasted into the dirt"),
         "force_cube": ("res://commons/artifacts/force_cube/force_cube.tscn", "push",

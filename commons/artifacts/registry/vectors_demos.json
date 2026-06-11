@@ -6,6 +6,30 @@
 		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
 	},
 	"artifacts": {
+		"wedge_slide": {
+			"lookup_name": "wedge_slide",
+			"scene": "res://commons/artifacts/wedge_slide/wedge_slide.tscn",
+			"class_name": "WedgeSlide",
+			"name": "Wedge Slide (inclined-plane free body)",
+			"description": "The inclined-plane free-body problem made playable - a primitive on a wedge, the force-decomposition toy for the embodied vectors-forces arc. A ToyConsole: the INCLINE slider sets the angle θ; the 3D demo shows the block on the slope with its force vectors (weight mg, normal N, friction f, and the net down-slope force); and the MONITOR draws the flat 2D free-body section - the textbook triangle with mg resolved into mg sinθ (down the slope) and mg cosθ (into it), N, friction, and the θ arc, auto-fit to the screen. Tilt past tan θ = μ and it goes from STATIC to SLIDING. mu is the (fixed) friction coefficient.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [ "forces" ],
+			"tags": [ "force", "inclined-plane", "free-body", "decomposition", "friction", "embodied" ],
+			"parameters": {
+				"incline": "0..1 incline angle θ (12° to 55°) - past tan θ = μ the block slides (default 0.5)",
+				"mu": "friction coefficient (default 0.28)",
+				"wedge_color": "The ramp", "block_color": "The primitive", "emissive": "Bool (default true)"
+			},
+			"dev_themes": [ "forces", "decomposition", "friction", "vectors" ],
+			"spatial_needs": { "platform": "none", "footprint_cells": 3,
+				"clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+				"player_position": "front", "wall_backing": false, "orientation": "front",
+				"isolation": 1, "cluster_with": [ "force_mower" ], "preferred_zone": "any",
+				"measured_footprint_cells": 3, "footprint_source": "designed" }
+		},
 		"force_mower": {
 			"lookup_name": "force_mower",
 			"scene": "res://commons/artifacts/force_mower/force_mower.tscn",
