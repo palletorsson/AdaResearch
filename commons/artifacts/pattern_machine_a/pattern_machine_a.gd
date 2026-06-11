@@ -205,14 +205,39 @@ func _build_control_plate() -> void:
 			{"key": "motif",   "label": "MOTIF",   "names": ["I","II","III","IV","V","VI","VII","VIII"], "init": clampi(motif_seed - 1, 0, 7)},
 			{"key": "density", "label": "DENSITY", "names": [], "min": 0.0, "max": 1.0, "init": density},
 		])
+	# operator station: a step the player stands on (the carpet weaves out toward -Z), with
+	# the console at its front edge facing the player, so they look DOWN past the console at
+	# the carpet the loom is producing — interface + production in one line of sight.
+	_build_operator_platform(Vector3(0.0, 0.0, 3.7), Vector3(2.4, 0.36, 1.7))
 	add_child(plate)
-	# floor kiosk to the player's right of the loom (the head faces -Z); a VR tweak if off
-	(plate as Node3D).position = Vector3(2.0, 0.0, -0.2)
-	(plate as Node3D).rotation_degrees = Vector3(0.0, 214.0, 0.0)
+	(plate as Node3D).position = Vector3(0.0, 0.36, 3.1)
+	(plate as Node3D).rotation_degrees = Vector3(0.0, 0.0, 0.0)   # screen faces the player at +Z, carpet weaves toward them
 	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate):
 		plate.connect("changed", _on_plate)
 	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
 		plate.connect("randomized", _on_plate_random)
+
+
+## A small collidable step the player stands on to look down on the production.
+func _build_operator_platform(center: Vector3, size: Vector3) -> void:
+	var body := StaticBody3D.new()
+	body.name = "OperatorPlatform"
+	body.position = center + Vector3(0.0, size.y * 0.5, 0.0)
+	var cs := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = size
+	cs.shape = shape
+	body.add_child(cs)
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.30, 0.31, 0.34)
+	mat.roughness = 0.85
+	mi.material_override = mat
+	body.add_child(mi)
+	add_child(body)
 
 
 func _on_plate(key: String, value: float) -> void:
