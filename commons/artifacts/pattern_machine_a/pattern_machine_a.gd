@@ -125,6 +125,7 @@ func _ready() -> void:
 	_build_controls()
 	_build_touch_area()
 	_build_carpet()
+	_build_control_plate()
 	_build_capture_camera()
 	_reweave()
 	print("[PatternMachineA] Jacquard loom built — %dx%d card, group %s" % [
@@ -169,6 +170,77 @@ func _read_overrides() -> void:
 		motif_seed = int(str(get_meta("config_motif_seed")))
 	if has_meta("config_card_size"):
 		card_size = clampi(int(str(get_meta("config_card_size"))), 4, 8)
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# CONTROL PLATE — the shared Dieter Rams interface (pattern_control_plate)
+# ═══════════════════════════════════════════════════════════════════════
+
+func _build_control_plate() -> void:
+	if has_node("ControlPlate"):
+		return
+	var scene := load("res://commons/artifacts/pattern_tunnel/pattern_control_plate.tscn")
+	if scene == null:
+		return
+	var plate: Node = scene.instantiate()
+	plate.name = "ControlPlate"
+	if plate.has_method("configure"):
+		var gnames: Array = []
+		for g in GROUP_NAMES:
+			gnames.append(String(g).to_upper())
+		plate.call("configure", "JACQUARD  LOOM", [
+			{"key": "group",   "label": "GROUP",   "names": gnames, "init": _group_index},
+			{"key": "motif",   "label": "MOTIF",   "names": ["I","II","III","IV","V","VI","VII","VIII"], "init": clampi(motif_seed - 1, 0, 7)},
+			{"key": "density", "label": "DENSITY", "names": [], "min": 0.0, "max": 1.0, "init": density},
+		])
+	add_child(plate)
+	# to the player's right of the loom (the head faces -Z); a quick VR tweak if off
+	(plate as Node3D).position = Vector3(1.35, 0.0, -0.4)
+	(plate as Node3D).rotation_degrees = Vector3(0.0, 206.0, 0.0)
+	(plate as Node3D).scale = Vector3.ONE * 0.62
+	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate):
+		plate.connect("changed", _on_plate)
+	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
+		plate.connect("randomized", _on_plate_random)
+
+
+func _on_plate(key: String, value: float) -> void:
+	match key:
+		"group":
+			_group_index = clampi(int(value), 0, GROUP_NAMES.size() - 1)
+		"motif":
+			motif_seed = int(value) + 1
+			_seed_card()
+			_refresh_pegs()
+		"density":
+			density = clampf(value, 0.0, 1.0)
+			_seed_card()
+			_refresh_pegs()
+	_reweave()
+
+
+func _on_plate_random() -> void:
+	_group_index = randi() % GROUP_NAMES.size()
+	motif_seed = 1 + randi() % 8
+	density = randf_range(0.25, 0.78)
+	_seed_card()
+	_refresh_pegs()
+	_reweave()
+
+
+## Recolour the existing peg meshes from the current card (no rebuild).
+func _refresh_pegs() -> void:
+	for y in range(_peg_mats.size()):
+		var row: Array = _peg_mats[y]
+		for x in range(row.size()):
+			var mat: StandardMaterial3D = row[x]
+			if mat == null:
+				continue
+			var ci: int = 0
+			if y < _card.size() and x < _card[y].size():
+				ci = int(_card[y][x])
+			var col: Color = PALETTE[ci] if ci > 0 and ci < PALETTE.size() else COL_PEG_HOLE
+			mat.albedo_color = col
 
 # ═══════════════════════════════════════════════════════════════════════
 # CARD DATA
