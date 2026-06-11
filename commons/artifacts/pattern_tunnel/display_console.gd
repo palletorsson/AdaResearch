@@ -14,11 +14,11 @@ const PLATE_SCENE := "res://commons/artifacts/pattern_tunnel/pattern_control_pla
 
 @export var body_color: Color = Color(0.55, 0.56, 0.59)   # brushed grey metal
 @export var trim_color: Color = Color(0.28, 0.29, 0.32)   # dark trim
-@export var plate_scale: float = 0.5
+@export var plate_scale: float = 1.0   # 1.0 — the plate carries XR sliders, which must NOT be scaled
 @export var tilt_deg: float = 28.0
 
 # the slanted face is centred here (a point on the upper-front of the cabinet)
-const FACE_CENTER := Vector3(0.0, 1.26, 0.13)
+const FACE_CENTER := Vector3(0.0, 1.55, 0.2)
 
 var _plate: Node = null
 var _cfg_title: String = "PATTERN CONTROL"
@@ -48,8 +48,8 @@ func _build() -> void:
 
 	var block := CSGBox3D.new()
 	block.name = "Block"
-	block.size = Vector3(0.92, 1.66, 0.58)
-	block.position = Vector3(0.0, 0.83, 0.0)
+	block.size = Vector3(1.74, 2.1, 0.72)
+	block.position = Vector3(0.0, 1.05, 0.0)
 	block.material = _mat(body_color, 0.45, 0.4)
 	body.add_child(block)
 
@@ -58,24 +58,24 @@ func _build() -> void:
 	var wedge := CSGBox3D.new()
 	wedge.name = "Cut28"
 	wedge.operation = CSGShape3D.OPERATION_SUBTRACTION
-	wedge.size = Vector3(1.4, 1.2, 1.4)
+	wedge.size = Vector3(2.4, 1.8, 2.4)
 	wedge.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
-	wedge.position = FACE_CENTER + Vector3(0.0, 0.0, 0.0) + _face_normal() * 0.6
+	wedge.position = FACE_CENTER + _face_normal() * 1.0
 	body.add_child(wedge)
 
 	# a shallow pocket in the slanted face so the plate sits recessed (the bezel)
 	var pocket := CSGBox3D.new()
 	pocket.name = "Pocket"
 	pocket.operation = CSGShape3D.OPERATION_SUBTRACTION
-	pocket.size = Vector3(0.78, 0.7, 0.06)
+	pocket.size = Vector3(1.5, 1.42, 0.08)
 	pocket.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
-	pocket.position = FACE_CENTER + _face_normal() * 0.0
+	pocket.position = FACE_CENTER
 	body.add_child(pocket)
 
 	# --- detailing (regular boxes) ----------------------------------------------
-	add_child(_box(Vector3(0.0, 0.04, 0.0), Vector3(0.98, 0.08, 0.66), _mat(trim_color, 0.6, 0.2)))   # base plinth
-	add_child(_box(Vector3(0.0, 0.42, 0.30), Vector3(0.46, 0.5, 0.012), _mat(trim_color, 0.7, 0.15))) # door
-	add_child(_box(Vector3(0.20, 0.42, 0.31), Vector3(0.02, 0.08, 0.012), _mat(Color(0.7, 0.68, 0.64), 0.5, 0.3)))  # handle
+	add_child(_box(Vector3(0.0, 0.05, 0.0), Vector3(1.84, 0.1, 0.82), _mat(trim_color, 0.6, 0.2)))    # base plinth
+	add_child(_box(Vector3(0.0, 0.62, 0.37), Vector3(0.82, 0.84, 0.014), _mat(trim_color, 0.7, 0.15)))# door
+	add_child(_box(Vector3(0.34, 0.62, 0.38), Vector3(0.025, 0.12, 0.014), _mat(Color(0.7, 0.68, 0.64), 0.5, 0.3)))  # handle
 
 	# --- the control plate, recessed flush in the slanted pocket ----------------
 	var plate: Node = load(PLATE_SCENE).instantiate()

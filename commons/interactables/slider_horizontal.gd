@@ -16,6 +16,7 @@ signal slider_moved(value)
 @onready var _slider: Node = get_node_or_null(slider_node)
 @onready var _label: Label3D = get_node_or_null(label_node)
 var _last_display_text: String = ""
+var _value_labels: Array = []     # when set, the slider is a discrete chooser showing names
 
 # Desktop pointer drag state
 var _pointer_dragging: bool = false
@@ -105,10 +106,13 @@ func _update_label(value) -> void:
 		if s_max == null: s_max = 1.0
 		norm = remap(scalar_value, s_min, s_max, 0.0, 1.0)
 
-	# Map to logical range
-	var logical_value = lerp(range_min, range_max, norm)
-
-	var text := _format_value(logical_value)
+	# the displayed text: a choice NAME if this is a chooser, else the numeric value
+	var text: String
+	if _value_labels.size() > 0:
+		var idx := clampi(roundi(norm * float(_value_labels.size() - 1)), 0, _value_labels.size() - 1)
+		text = String(_value_labels[idx])
+	else:
+		text = _format_value(lerp(range_min, range_max, norm))
 	if text == _last_display_text:
 		return
 	_last_display_text = text
@@ -117,6 +121,18 @@ func _update_label(value) -> void:
 func set_param_name(text: String):
 	var name_label = get_node_or_null("Frame/LabelName")
 	if name_label: name_label.text = text
+
+## Make this a discrete chooser: one detent per name (so every choice is reachable),
+## and the value label shows the chosen NAME instead of a number. Pass [] for numeric.
+func set_choices(names: Array) -> void:
+	_value_labels = names
+	if _slider and names.size() > 1:
+		var s_min = _slider.get("slider_limit_min")
+		var s_max = _slider.get("slider_limit_max")
+		if s_min == null: s_min = 0.0
+		if s_max == null: s_max = 1.0
+		_slider.set("slider_steps", (float(s_max) - float(s_min)) / float(names.size() - 1))
+	_update_label(_current_slider_value())
 
 func _ensure_label() -> bool:
 	if _label:

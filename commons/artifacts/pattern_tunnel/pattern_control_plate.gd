@@ -182,21 +182,24 @@ func _build_cube(c: Vector3) -> void:
 
 
 func _build_slider_box(spec: Dictionary, cx: float, cy: float) -> void:
-	# a thin frame outline with an even gutter; the label sits above
-	_frame(cx, cy, 0.46, 0.22)
-	_text(cx, cy + 0.155, String(spec["label"]), 24, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
+	# a thin frame outline hugging the slider; the label sits above
+	_frame(cx, cy, 0.34, 0.16)
+	_text(cx, cy + 0.125, String(spec["label"]), 22, TEXT_DARK, HORIZONTAL_ALIGNMENT_CENTER)
 	if not ResourceLoader.exists(SLIDER_SCENE):
 		return
 	var s: Node = load(SLIDER_SCENE).instantiate()
 	var key: String = spec["key"]
 	s.name = "Slider_%s" % key
 	add_child(s)
-	(s as Node3D).position = Vector3(cx, cy, 0.02)
-	(s as Node3D).scale = Vector3.ONE * 1.5
-	if s.has_method("set_param_name"):
-		s.call("set_param_name", "")
+	# XR-Tools sliders break under scale (the grab math multiplies by basis incl. scale),
+	# so keep the slider at scale 1.0 — never scale it.
+	(s as Node3D).position = Vector3(cx, cy - 0.012, 0.02)
 	var names: Array = spec.get("names", [])
 	var count: int = names.size()
+	if count > 1 and s.has_method("set_choices"):
+		s.call("set_choices", names)             # discrete chooser: one detent per choice, shows names
+	elif s.has_method("set_param_name"):
+		s.call("set_param_name", "")
 	var mn: float = float(spec.get("min", 0.5))
 	var mx: float = float(spec.get("max", 8.0))
 	var init_norm: float = 0.5
