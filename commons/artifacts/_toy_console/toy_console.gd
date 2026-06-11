@@ -19,7 +19,7 @@ extends Node3D
 const SLIDER_SCENE := "res://commons/interactables/slider_horizontal.tscn"
 const DIAL_SCENE := "res://commons/interactables/dial_smooth.tscn"
 const PAD_SCENE := "res://commons/interactables/slider_plane.tscn"
-const PAD_LIMIT := 0.2       # slider_plane's default ±travel on each axis
+const PAD_LIMIT := 0.07      # ±handle travel on each axis — matches the plate's track half-width
 const DISPLAY_SIZE := 0.78   # the demo is scaled to sit on the console top
 
 # --- Dieter Rams / Braun palette: light matte housing, one warm accent, calm
@@ -199,27 +199,33 @@ func _build_control_bank(specs: Array) -> void:
 			_build_scalar(spec, kind, lerpf(0.0, 0.58, t))
 
 
+## A control plate drawn directly (light bezel + recessed face + accent cross-hair),
+## with the knob sitting ON the plate at the vector's value — guaranteed aligned. The
+## plate tilts up toward the player on the front lip. (slider_plane's plate and handle
+## live on separate branches and can't be kept coplanar; the live VR grab is wired
+## separately as a constrained handle.)
 func _build_pad(spec: Dictionary, x: float) -> void:
-	if not ResourceLoader.exists(PAD_SCENE):
-		return
-	var pad: Node = load(PAD_SCENE).instantiate()
+	var iv: Vector2 = spec["get"].call()
+	var pad := Node3D.new()
 	pad.name = "Pad_" + String(spec.get("label", ""))
 	add_child(pad)
-	# drafting-table angle on the front lip, below the demo so the top reads clearly
-	(pad as Node3D).position = Vector3(x, 0.86, 0.34)
-	(pad as Node3D).rotation = Vector3(deg_to_rad(-58.0), 0.0, 0.0)
-	(pad as Node3D).scale = Vector3.ONE * 1.5
-	# bind the INNER node (slider_plane.gd) — its slider_position is a true Vector2
-	var inner: Node = pad.get_node_or_null("SliderOrigin/InteractableSlider")
-	if inner:
-		var iv: Vector2 = spec["get"].call()
-		inner.set("slider_position", Vector2(clampf(iv.x, -1.0, 1.0), clampf(iv.y, -1.0, 1.0)) * PAD_LIMIT)
-		var handler: Callable = _make_pad_handler(spec)
-		if inner.has_signal("slider_moved") and not inner.is_connected("slider_moved", handler):
-			inner.connect("slider_moved", handler)
-	_accent_handles(pad)
+	pad.position = Vector3(x, 0.90, 0.32)
+	pad.rotation = Vector3(deg_to_rad(-52.0), 0.0, 0.0)   # face tilts up toward the player
+	pad.scale = Vector3.ONE * 1.4
+
+	# plate body + recessed dark face
+	pad.add_child(_box(Vector3.ZERO, Vector3(0.24, 0.24, 0.02), _panel_mat(PANEL_TRIM)))
+	pad.add_child(_box(Vector3(0.0, 0.0, 0.013), Vector3(0.20, 0.20, 0.004), _screen_mat()))
+	# faint accent cross-hair on the face
+	pad.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.20, 0.004, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
+	pad.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.004, 0.20, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
+	# the knob ON the plate at the value (clamped to the face), on a short stem
+	var kp := Vector2(clampf(iv.x, -1.0, 1.0), clampf(iv.y, -1.0, 1.0)) * 0.09
+	pad.add_child(_cylinder_between(Vector3(kp.x, kp.y, 0.016), Vector3(kp.x, kp.y, 0.05), 0.014, _accent_mat()))
+	pad.add_child(_sphere(Vector3(kp.x, kp.y, 0.056), 0.028, _accent_mat()))
+
 	_controls_built.append(pad)
-	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.02, 0.30), 18, TEXT_DARK))
+	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.04, 0.30), 18, TEXT_DARK))
 
 
 func _build_scalar(spec: Dictionary, kind: String, x: float) -> void:
