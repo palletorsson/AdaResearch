@@ -46,8 +46,9 @@ class_name LeadSafetyDoor
 
 # ── Constants ─────────────────────────────────────────────────────────
 
-const FRAME_MARGIN: float = 0.06        # how far the frame extends beyond the slab (x/y)
-const FRAME_DEPTH_EXTRA: float = 0.04   # how much deeper the frame is than the slab
+const FRAME_MARGIN: float = 0.045       # how far the frame extends beyond the slab (x/y)
+const FRAME_DEPTH_EXTRA: float = 0.06   # how much deeper the frame is than the slab (sits BEHIND)
+const SLAB_PROUD: float = 0.015         # how far the white slab front stands proud of the frame front
 const SIGN_PROUD: float = 0.006         # how far signage sits proud of the white face
 const SIGN_PLATE_DEPTH: float = 0.006   # thickness of a sign plate
 const ICON_DEPTH: float = 0.004         # thickness of dark icon meshes on a plate
@@ -143,10 +144,12 @@ func _hinge_on_right() -> bool:
 
 
 func _build_frame() -> void:
-	# Near-black charcoal frame surrounding the slab on all four edges, slightly
-	# larger in X/Y and a touch deeper in Z. Built as a single box behind the slab
-	# plus four border bars so the white slab reads as set INTO the frame. The frame
-	# does NOT swing with the door — it is the fixed jamb.
+	# Near-black charcoal jamb surrounding the slab, sitting BEHIND its front face.
+	# A single box whose front is recessed SLAB_PROUD behind the white slab front, so
+	# the white face is the frontmost (proud) surface — it stays fully lit and the
+	# frame never casts a shadow across it. The frame reads as a slim dark border +
+	# reveal around the edges (the right jamb is the dark hinge edge at angle). The
+	# frame is the fixed jamb; it does NOT swing with the door.
 	var root := Node3D.new()
 	root.name = "Frame"
 	add_child(root)
@@ -159,43 +162,17 @@ func _build_frame() -> void:
 	var fw: float = door_width + FRAME_MARGIN * 2.0
 	var fh: float = door_height + FRAME_MARGIN * 2.0
 	var fd: float = door_thickness + FRAME_DEPTH_EXTRA
-	var cy: float = door_height * 0.5   # frame vertical centre (door bottom at y=0)
+	var cy: float = door_height * 0.5             # frame vertical centre (door bottom at y=0)
+	var frame_front: float = _front_z() - SLAB_PROUD   # front recessed behind the white slab
 
-	# Backing slab (the jamb body the slab is recessed against).
 	var back := MeshInstance3D.new()
-	back.name = "FrameBack"
+	back.name = "FrameJamb"
 	var bm := BoxMesh.new()
 	bm.size = Vector3(fw, fh, fd)
 	back.mesh = bm
 	back.material_override = mat
-	# Centre so the frame back face is behind the slab, frame front flush with slab front.
-	back.position = Vector3(0.0, cy, _front_z() - fd * 0.5)
+	back.position = Vector3(0.0, cy, frame_front - fd * 0.5)
 	root.add_child(back)
-
-	# Four border bars proud of the frame front, framing the white slab opening.
-	var bar_w: float = FRAME_MARGIN          # border thickness
-	var bar_z: float = _front_z() + SIGN_PLATE_DEPTH * 0.5
-	# Top + bottom bars (full frame width).
-	for sy in [1.0, -1.0]:
-		var bar := MeshInstance3D.new()
-		bar.name = "FrameBarH_%d" % int(sy)
-		var hm := BoxMesh.new()
-		hm.size = Vector3(fw, bar_w, SIGN_PLATE_DEPTH)
-		bar.mesh = hm
-		bar.material_override = mat
-		bar.position = Vector3(0.0, cy + sy * (fh * 0.5 - bar_w * 0.5), bar_z)
-		root.add_child(bar)
-	# Left + right bars (between the H bars).
-	var v_h: float = fh - bar_w * 2.0
-	for sx in [1.0, -1.0]:
-		var bar := MeshInstance3D.new()
-		bar.name = "FrameBarV_%d" % int(sx)
-		var vm := BoxMesh.new()
-		vm.size = Vector3(bar_w, v_h, SIGN_PLATE_DEPTH)
-		bar.mesh = vm
-		bar.material_override = mat
-		bar.position = Vector3(sx * (fw * 0.5 - bar_w * 0.5), cy, bar_z)
-		root.add_child(bar)
 
 
 func _build_slab_and_signage() -> void:
