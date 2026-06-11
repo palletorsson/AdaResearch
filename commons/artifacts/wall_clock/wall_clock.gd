@@ -2,12 +2,12 @@ extends Node3D
 class_name WallClock
 
 # @identity
-# essence: a round-faced clock with a dark steel frame, twelve tick marks, and three hands (hour, minute, second in accent color) — Black Mesa / office vocabulary for "this is where time is read". Optional digital-readout mode replaces the analog face with a red Label3D. In the lab's grammar, the wall clock is the SCHEDULER — the shared reference that lets concurrent processes synchronise.
+# essence: a round-faced clock with a dark steel frame, twelve tick marks, and three hands (hour, minute, second in accent color) — Black Mesa / office vocabulary for "this is where time is read". Optional digital-readout mode replaces the analog face with an emissive baked-text display panel. In the lab's grammar, the wall clock is the SCHEDULER — the shared reference that lets concurrent processes synchronise.
 # desire: every concurrent system wants a clock. The wall clock wants to be the architectural form of "this is the same time for all of us". It wants the player to look at it and trust that the next event will happen ON TIME — to read the face as the assertion that scheduling exists.
 # critical_parameter: hour_hand_angle + minute_hand_angle + second_hand_angle — together they ARE the scheduler's state. The hands are the algorithm's read-cursor across a continuous schedule. is_digital toggles the same idea between analog (continuous angles) and digital (discrete characters) — both name the same algorithm differently.
 # triggers: _ready() builds frame ring + face disc + tick marks + three hands (or digital readout) from exports; apply_grid_config rebuilds
 # emerges: 12:00 reads as RESET / START. A second hand at 30 reads as MID-CYCLE. A digital "00:00:00" in red reads as ALARM / EVENT. Analog reads SMOOTH-TIME, digital reads DISCRETE-TICK — same scheduler, two modes of address.
-# needs: round face disc [present]; frame ring around the face [present]; tick marks radiating from center [present]; hour + minute hands [present]; second hand in accent color [present]; optional digital Label3D in alarm red replacing hands when is_digital [present]
+# needs: round face disc [present]; frame ring around the face [present]; tick marks radiating from center [present]; hour + minute hands [present]; second hand in accent color [present]; optional emissive baked-text readout painted onto the face when is_digital [present]
 # relationships: peer to oscilloscope (both NAME a time variable — scope's t is local-frame, clock's t is wall-time); ancestor to control_board (the board would coordinate around this clock); cousin to exit_sign (both are NAMING-IN-THE-ROOM — the sign names a place, the clock names a moment)
 # truth: scheduling is the algorithm that asks "when?". The wall clock is the lab's affirmation that there IS a shared answer. It does not say what comes next — it says only that what comes next will happen at a TIME, and that time is the same time everyone reads. Synchronisation is the entire algorithm; the clock is its monument.
 
@@ -42,6 +42,8 @@ class_name WallClock
 @export_group("Digital mode")
 @export var is_digital: bool = false
 @export var digital_time_text: String = "12:00:30"
+
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # ── Constants ─────────────────────────────────────────────────────────
 
@@ -86,36 +88,36 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_clock_radius"):
-		clock_radius = float(String(get_meta("config_clock_radius")))
+		clock_radius = float(str(get_meta("config_clock_radius")))
 	if has_meta("config_clock_depth"):
-		clock_depth = float(String(get_meta("config_clock_depth")))
+		clock_depth = float(str(get_meta("config_clock_depth")))
 	if has_meta("config_face_color"):
-		face_color = _parse_color(String(get_meta("config_face_color")), face_color)
+		face_color = _parse_color(str(get_meta("config_face_color")), face_color)
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_hands_color"):
-		hands_color = _parse_color(String(get_meta("config_hands_color")), hands_color)
+		hands_color = _parse_color(str(get_meta("config_hands_color")), hands_color)
 	if has_meta("config_tick_color"):
-		tick_color = _parse_color(String(get_meta("config_tick_color")), tick_color)
+		tick_color = _parse_color(str(get_meta("config_tick_color")), tick_color)
 	if has_meta("config_second_hand_color"):
-		second_hand_color = _parse_color(String(get_meta("config_second_hand_color")), second_hand_color)
+		second_hand_color = _parse_color(str(get_meta("config_second_hand_color")), second_hand_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_digital_color"):
-		digital_color = _parse_color(String(get_meta("config_digital_color")), digital_color)
+		digital_color = _parse_color(str(get_meta("config_digital_color")), digital_color)
 	if has_meta("config_hour_hand_angle"):
-		hour_hand_angle = float(String(get_meta("config_hour_hand_angle")))
+		hour_hand_angle = float(str(get_meta("config_hour_hand_angle")))
 	if has_meta("config_minute_hand_angle"):
-		minute_hand_angle = float(String(get_meta("config_minute_hand_angle")))
+		minute_hand_angle = float(str(get_meta("config_minute_hand_angle")))
 	if has_meta("config_second_hand_angle"):
-		second_hand_angle = float(String(get_meta("config_second_hand_angle")))
+		second_hand_angle = float(str(get_meta("config_second_hand_angle")))
 	if has_meta("config_tick_count"):
-		tick_count = int(String(get_meta("config_tick_count")))
+		tick_count = int(str(get_meta("config_tick_count")))
 	if has_meta("config_is_digital"):
-		var dv := String(get_meta("config_is_digital")).to_lower()
+		var dv := str(get_meta("config_is_digital")).to_lower()
 		is_digital = dv in ["true", "1", "yes", "on"]
 	if has_meta("config_digital_time_text"):
-		digital_time_text = String(get_meta("config_digital_time_text"))
+		digital_time_text = str(get_meta("config_digital_time_text"))
 
 
 func _clear_built_children() -> void:
@@ -289,21 +291,22 @@ func _build_center_cap() -> void:
 
 
 func _build_digital_label() -> void:
-	# Replace analog hands/ticks with a Label3D readout in alarm color.
-	var label := Label3D.new()
-	label.name = "DigitalReadout"
-	label.text = digital_time_text
-	label.font_size = DIGITAL_FONT_SIZE
-	label.outline_size = 4
-	label.pixel_size = DIGITAL_PIXEL_SIZE
-	label.modulate = digital_color
-	label.outline_modulate = Color(0.05, 0.0, 0.0)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.no_depth_test = false
-	# Label3D defaults to facing +Z. Position it slightly in front of the face.
-	label.position = Vector3(0.0, 0.0, clock_depth * 0.25 + 0.002)
-	add_child(label)
+	# Replace analog hands/ticks with a baked-text readout painted onto the
+	# face surface — unshaded=true gives it the emissive screen look.
+	if digital_time_text.is_empty():
+		return
+	# World size: full display strip across the face (width) × a comfortable
+	# single-line height. Scales with clock_radius so config overrides work.
+	var w: float = clock_radius * 1.5
+	var h: float = clock_radius * 0.48
+	var quad: MeshInstance3D = BakedText.make_label_mesh(
+			digital_time_text, digital_color, Vector2(w, h), 1400, true)
+	if quad == null:
+		return
+	quad.name = "DigitalReadout"
+	# Sit flush+tiny-proud of the face surface (same z as old Label3D).
+	quad.position = Vector3(0.0, 0.0, clock_depth * 0.25 + 0.002)
+	add_child(quad)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

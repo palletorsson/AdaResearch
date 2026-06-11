@@ -1,13 +1,15 @@
 extends Node3D
 class_name ChemistryFlask
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a small bench-top glass flask — Erlenmeyer, round-bottom, or volumetric — chemistry-lab vocabulary. A translucent thin-walled glass body, an interior coloured content level (fluid stops short of the neck), an optional dark stopper on top, and a tiny Label3D on the front naming the contents. The glass admits light but defends what is inside
 # desire: every chemistry lab wants to make LIQUID-AS-NAMED visible — to declare "this is H₂SO₄, that is acetone, this is the buffer". The flask wants to be the architectural form of A REAGENT WITH A NAME. Tilt-pourable, scaled, sealed when the experiment moves between rooms. The label is the proof that this fluid is KNOWN
 # critical_parameter: flask_shape — "erlenmeyer" reads as WORKING glass (wide base, narrow neck — for swirling during a reaction). "round_bottom" reads as HEATED glass (uniform stress under flame, for boiling). "volumetric" reads as MEASURED glass (thin neck, fill line — for stoichiometry). Same fluid, three different gestures of HOW THIS FLUID IS USED in the lab's choreography
 # triggers: _ready() dispatches on flask_shape, builds glass body (cone+neck OR sphere+neck OR bulb+long-neck) + interior content + optional stopper + Label3D from exports; apply_grid_config rebuilds
 # emerges: an erlenmeyer reads ACTIVELY WORKING. A round-bottom reads OVER THE FLAME. A volumetric reads PRECISELY MEASURED. Stopper on = "this is at-rest, contents preserved". Stopper off = "currently being used". Content level near full = "fresh". Near empty = "almost spent". Same script, eight states of bench-glass life
-# needs: glass body shape dispatched on flask_shape [present]; interior content filling to content_height_fraction [present]; optional stopper on top [present]; small front Label3D naming the contents [present]
+# needs: glass body shape dispatched on flask_shape [present]; interior content filling to content_height_fraction [present]; optional stopper on top [present]; small front baked-text quad naming the contents (BakedText.make_label_mesh, just proud of the glass) [present]
 # relationships: peer to specimen_jar (both = transparent vessels with named contents; jar = display, flask = use). Sibling to gas_canister (flask = liquid input, canister = gas input — the lab's vocabulary of FLUID PHASE INPUTS). Cousin to test_tube_rack (a flask is one-large-fluid-at-rest; the rack is many-small-fluids-at-rest — different scales of holding). The architectural confession that chemistry happens in glass
 # truth: a chemistry flask is the architectural form of A FLUID THAT KNOWS ITS NAME. The label says: this is not just liquid, this is THIS liquid. The shape says: this is the gesture required to use it. Without flasks, the lab pretends its reactions emerge from nowhere; with them, the lab admits that every reaction needs a SOURCE, a NAMED ORIGIN, a STORED form before becoming an experiment
 
@@ -61,8 +63,6 @@ const VOL_BULB_HEIGHT_FRAC: float = 0.30
 const VOL_NECK_HEIGHT_FRAC: float = 0.70
 const STOPPER_HEIGHT: float = 0.018
 const STOPPER_RADIUS_FACTOR: float = 1.05       # vs neck radius
-const LABEL_PIXEL_SIZE: float = 0.0022
-const LABEL_FONT_SIZE: int = 22
 
 # ── Internal state ────────────────────────────────────────────────────
 
@@ -87,26 +87,26 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_flask_shape"):
-		flask_shape = String(get_meta("config_flask_shape")).to_lower()
+		flask_shape = str(get_meta("config_flask_shape")).to_lower()
 	if has_meta("config_flask_height"):
-		flask_height = float(String(get_meta("config_flask_height")))
+		flask_height = float(str(get_meta("config_flask_height")))
 	if has_meta("config_flask_max_radius"):
-		flask_max_radius = float(String(get_meta("config_flask_max_radius")))
+		flask_max_radius = float(str(get_meta("config_flask_max_radius")))
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_content_height_fraction"):
-		content_height_fraction = float(String(get_meta("config_content_height_fraction")))
+		content_height_fraction = float(str(get_meta("config_content_height_fraction")))
 	if has_meta("config_content_color"):
-		content_color = _parse_color(String(get_meta("config_content_color")), content_color)
+		content_color = _parse_color(str(get_meta("config_content_color")), content_color)
 	if has_meta("config_has_stopper"):
-		var s := String(get_meta("config_has_stopper")).to_lower()
+		var s := str(get_meta("config_has_stopper")).to_lower()
 		has_stopper = s in ["true", "1", "yes", "on"]
 	if has_meta("config_stopper_color"):
-		stopper_color = _parse_color(String(get_meta("config_stopper_color")), stopper_color)
+		stopper_color = _parse_color(str(get_meta("config_stopper_color")), stopper_color)
 	if has_meta("config_label_text"):
-		label_text = String(get_meta("config_label_text"))
+		label_text = str(get_meta("config_label_text"))
 	if has_meta("config_label_color"):
-		label_color = _parse_color(String(get_meta("config_label_color")), label_color)
+		label_color = _parse_color(str(get_meta("config_label_color")), label_color)
 
 
 func _clear_built_children() -> void:
@@ -358,22 +358,20 @@ func _build_stopper(neck_top_y: float, neck_radius: float) -> void:
 
 
 func _build_label() -> void:
-	var label := Label3D.new()
-	label.name = "Label"
-	label.text = label_text
-	label.font_size = LABEL_FONT_SIZE
-	label.outline_size = 2
-	label.pixel_size = LABEL_PIXEL_SIZE
-	label.modulate = label_color
-	label.outline_modulate = Color(0.05, 0.08, 0.10)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	# Place label on the +Z face of the widest part of the body, low-mid height.
-	# Default Label3D faces +Z — leave default rotation.
-	var y: float = flask_height * 0.30
-	var z: float = flask_max_radius + 0.004
-	label.position = Vector3(0.0, y, z)
-	add_child(label)
+	# Bake the formula text onto a small quad proud of the glass front (+Z face).
+	# world_size: width spans ~60 % of the widest body diameter; height is ~1.4× that
+	# so Unicode subscripts / small characters have enough pixel rows.
+	var quad_w: float = flask_max_radius * 1.20
+	var quad_h: float = quad_w * 0.55
+	var quad: MeshInstance3D = BakedText.make_label_mesh(
+		label_text, label_color, Vector2(quad_w, quad_h))
+	if quad:
+		quad.name = "LabelQuad"
+		# Sit at the low-mid height of the body, just proud of the glass surface.
+		var y: float = flask_height * 0.30
+		var z: float = flask_max_radius + 0.003
+		quad.position = Vector3(0.0, y, z)
+		add_child(quad)
 
 
 # ── Materials ─────────────────────────────────────────────────────────

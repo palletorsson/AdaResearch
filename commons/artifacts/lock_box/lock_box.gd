@@ -1,13 +1,15 @@
 extends Node3D
 class_name LockBox
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a small rectangular dark-steel strongbox with a slightly lighter steel lid that pivots open along its back edge, a row of brass combination dials across the front face (each with a red indicator notch rotated to a specific digit 0-9), a dark clasp on the lid front, a Label3D showing the combination as a number, and an accent stripe across the lid's leading edge. In the lab's grammar, the lock_box is the HASH / COMMITMENT / ENCRYPTION OBJECT — a box whose CONTENTS are concealed by its CLOSED STATE, where a specific configuration of dial positions is the KEY that authorises opening, and the configuration itself is publicly visible (a commitment) without revealing what is inside.
 # desire: every cryptographic primitive wants to be SEEN as a closed object that COULD be opened. The lock_box wants to be the architectural form of "here is an opaque container; here are the dials whose positions are the key; here is the lid, and you can see whether it is open or closed". It wants the player to read dial_positions as a literal password / hash digest and lid_open_amount as a 0-to-1 reveal slider.
 # critical_parameter: dial_positions — together with combination_dial_count, this IS the cryptographic statement of the prop. Each dial has 10 positions (0-9), so combination_dial_count dials encode a number in [0, 10^N): 4 dials = 10000 keys, the textbook combination-lock keyspace. The dial_positions array IS the secret (when closed) or the witness (when revealed). The same box with [0,0,0,0] reads as DEFAULT / UNINITIALISED; with [3,7,1,5] reads as a SPECIFIC COMMITMENT. The dials are public-visible — the BOX is the encrypted message.
 # triggers: _ready() builds box body + pivoting lid + dial discs with indicator notches + clasp + combination label + accent stripe from exports; apply_grid_config rebuilds
 # emerges: a closed box with random-looking dial positions reads as SEALED COMMITMENT. A box with lid_open_amount=1 reveals a dark interior cavity, reading as REVEAL / DECOMMITMENT. Same DNA, two phases of the same cryptographic protocol — the box LITERALLY enacts cryptographic commit-then-reveal.
-# needs: rectangular box body [present]; lid pivoting on back edge by lid_open_amount × 90° [present]; combination_dial_count brass dials with indicator notches [present]; dark clasp on lid front [present]; combination label below dials [present]; accent stripe across lid's leading edge [present]
+# needs: rectangular box body [present]; lid pivoting on back edge by lid_open_amount × 90° [present]; combination_dial_count brass dials with indicator notches [present]; dark clasp on lid front [present]; combination label below dials [present — baked text quad, not Label3D]; accent stripe across lid's leading edge [present]
 # relationships: sibling to specimen_jar (both CONTAIN something — jar transparent and observable, lock_box opaque and SEALED); cousin to safe_deposit_box / lockable cabinet vocabulary (the lock_box is the small bench version); peer to oscilloscope (both EMBODY an algorithm in physical form — scope shows Fourier in shape, lock_box shows cryptographic commitment in geometry)
 # truth: a hash function maps a large input to a small fixed-size digest, and a commitment scheme lets you commit to a value without revealing it. A combination lock is the everyday version: you commit to a number by setting the dials and closing the lid; the LID's closed state binds your commitment. The lock_box is the lab's physical-form proof that "encryption" is just "a hidden volume behind a publicly-visible key configuration".
 
@@ -74,32 +76,32 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_box_width"):
-		box_width = float(String(get_meta("config_box_width")))
+		box_width = float(str(get_meta("config_box_width")))
 	if has_meta("config_box_height"):
-		box_height = float(String(get_meta("config_box_height")))
+		box_height = float(str(get_meta("config_box_height")))
 	if has_meta("config_box_depth"):
-		box_depth = float(String(get_meta("config_box_depth")))
+		box_depth = float(str(get_meta("config_box_depth")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_lid_color"):
-		lid_color = _parse_color(String(get_meta("config_lid_color")), lid_color)
+		lid_color = _parse_color(str(get_meta("config_lid_color")), lid_color)
 	if has_meta("config_dial_color"):
-		dial_color = _parse_color(String(get_meta("config_dial_color")), dial_color)
+		dial_color = _parse_color(str(get_meta("config_dial_color")), dial_color)
 	if has_meta("config_dial_indicator_color"):
-		dial_indicator_color = _parse_color(String(get_meta("config_dial_indicator_color")), dial_indicator_color)
+		dial_indicator_color = _parse_color(str(get_meta("config_dial_indicator_color")), dial_indicator_color)
 	if has_meta("config_clasp_color"):
-		clasp_color = _parse_color(String(get_meta("config_clasp_color")), clasp_color)
+		clasp_color = _parse_color(str(get_meta("config_clasp_color")), clasp_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_lid_open_amount"):
-		lid_open_amount = float(String(get_meta("config_lid_open_amount")))
+		lid_open_amount = float(str(get_meta("config_lid_open_amount")))
 	if has_meta("config_combination_dial_count"):
-		combination_dial_count = int(String(get_meta("config_combination_dial_count")))
+		combination_dial_count = int(str(get_meta("config_combination_dial_count")))
 	if has_meta("config_dial_positions"):
-		var raw := String(get_meta("config_dial_positions"))
+		var raw := str(get_meta("config_dial_positions"))
 		dial_positions = _parse_int_array(raw)
 	if has_meta("config_clasp_visible"):
-		var cv := String(get_meta("config_clasp_visible")).to_lower()
+		var cv := str(get_meta("config_clasp_visible")).to_lower()
 		clasp_visible = cv in ["true", "1", "yes", "on"]
 
 
@@ -284,22 +286,23 @@ func _build_clasp() -> void:
 
 
 func _build_combination_label() -> void:
-	# Label3D showing the combination as digits separated by spaces, below the dials on the body face.
+	# Baked-text quad showing the combination digits separated by spaces,
+	# below the dials on the body face (+Z surface). Replaces the old Label3D.
 	var body_h: float = max(0.001, box_height - LID_THICKNESS)
-	var label := Label3D.new()
-	label.name = "CombinationLabel"
 	var text_parts: Array = []
 	for i in range(combination_dial_count):
 		text_parts.append(str(_digit_at(i)))
-	label.text = " ".join(text_parts)
-	label.modulate = accent_color
-	label.font_size = 64
-	label.outline_size = 6
-	label.pixel_size = 0.0008
-	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	label.no_depth_test = false
-	label.position = Vector3(0.0, body_h * 0.18, box_depth * 0.5 + 0.006)
-	add_child(label)
+	var combo_text: String = " ".join(text_parts)
+	# World size: width spans ~75% of box_width, height ~one-digit row.
+	var quad_w: float = box_width * 0.75
+	var quad_h: float = quad_w * 0.28
+	var quad: MeshInstance3D = BakedText.make_label_mesh(
+		combo_text, accent_color, Vector2(quad_w, quad_h))
+	if quad:
+		quad.name = "CombinationLabel"
+		# Same position as the old Label3D — slightly proud of the front face.
+		quad.position = Vector3(0.0, body_h * 0.18, box_depth * 0.5 + 0.006)
+		add_child(quad)
 
 
 func _build_accent_strip() -> void:
@@ -363,7 +366,7 @@ func _parse_int_array(s: String) -> PackedInt32Array:
 	cleaned = cleaned.replace("[", "").replace("]", "")
 	var parts := cleaned.split(",")
 	for p in parts:
-		var ps: String = String(p).strip_edges()
+		var ps: String = str(p).strip_edges()
 		if ps == "":
 			continue
 		out.append(int(ps))

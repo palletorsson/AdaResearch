@@ -1,13 +1,15 @@
 extends Node3D
 class_name Autoclave
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a front-loading sterilizer drum — chemistry / biolab vocabulary. A rectangular glossy-steel cabinet with a heavy round door inset into the front face, a wheel-handle latch on the side of the door, a darker recessed interior cavity visible behind it, a small status LED in the top corner, a Portal-orange accent stripe across the top, and an "AUTOCLAVE" Label3D above the door. The architectural form of HEAT-AND-PRESSURE-AS-PURIFICATION
 # desire: every lab wants a way to make the small ritual of decontamination visible — to say "things go in dirty, come out clean". The autoclave wants to be the architectural form of CONTAINED TRANSFORMATION via heat. A box with a circular threshold that closes against the world, locks, and applies pressure inside. The wheel-handle says: this is a serious door
 # critical_parameter: door_open — closed reads as ACTIVE-CYCLE (sealed, working, do not interrupt), open reads as BETWEEN-USES (load in, take out, the interior visible). Same cabinet, two very different moments in the lab's cycle of cleanliness. The door is a hinge between phases
 # triggers: _ready() builds cabinet body + recessed front door (closed or swung 90° open on left edge) + interior cavity + wheel handle + accent stripe + status LED + signage label; apply_grid_config rebuilds
 # emerges: closed door + green LED = "cycle running, don't open". Open door + green LED = "ready for next load". Open door + no LED = "out of service". Status_indicator off entirely = "ambiguous, undecided". Same shell, four narratives of operational state
-# needs: rectangular cabinet body [present]; round front door inset slightly [present]; wheel handle on the right of the door [present]; darker interior cavity when door open [present]; status LED in top-right [present]; accent stripe across top [present]; "AUTOCLAVE" label above door [present]
+# needs: rectangular cabinet body [present]; round front door inset slightly [present]; wheel handle on the right of the door [present]; darker interior cavity when door open [present]; status LED in top-right [present]; accent stripe across top [present]; "AUTOCLAVE" baked text above door [present]
 # relationships: peer to fume_hood (both = contained-transformation enclosures; hood = release-vapors, autoclave = sterilize-with-pressure); sibling to specimen_jar (autoclave processes containers TO MAKE specimen-jars-able-to-hold-clean-things — the jar's enabling condition); cousin to safety_shower + fire_extinguisher (the lab's vocabulary of HARM-RECOVERY — but the autoclave PREVENTS, the others RESPOND); the architectural admission that lab work generates contamination and contamination must be cycled out
 # truth: an autoclave is the architectural form of the lab's RITUAL OF CLEANLINESS. The circle of the door is the cycle. The wheel handle says: closing requires effort, opening requires effort, this is a threshold defended against accident. Without it, the lab would have to pretend that everything stays clean by itself. WITH it, the lab admits that contamination is a constant input and decontamination must be made architectural
 
@@ -89,33 +91,33 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_body_width"):
-		body_width = float(String(get_meta("config_body_width")))
+		body_width = float(str(get_meta("config_body_width")))
 	if has_meta("config_body_height"):
-		body_height = float(String(get_meta("config_body_height")))
+		body_height = float(str(get_meta("config_body_height")))
 	if has_meta("config_body_depth"):
-		body_depth = float(String(get_meta("config_body_depth")))
+		body_depth = float(str(get_meta("config_body_depth")))
 	if has_meta("config_door_radius"):
-		door_radius = float(String(get_meta("config_door_radius")))
+		door_radius = float(str(get_meta("config_door_radius")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_door_color"):
-		door_color = _parse_color(String(get_meta("config_door_color")), door_color)
+		door_color = _parse_color(str(get_meta("config_door_color")), door_color)
 	if has_meta("config_interior_color"):
-		interior_color = _parse_color(String(get_meta("config_interior_color")), interior_color)
+		interior_color = _parse_color(str(get_meta("config_interior_color")), interior_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_door_open"):
-		var d := String(get_meta("config_door_open")).to_lower()
+		var d := str(get_meta("config_door_open")).to_lower()
 		door_open = d in ["true", "1", "yes", "on"]
 	if has_meta("config_status_indicator"):
-		var s := String(get_meta("config_status_indicator")).to_lower()
+		var s := str(get_meta("config_status_indicator")).to_lower()
 		status_indicator = s in ["true", "1", "yes", "on"]
 	if has_meta("config_status_color"):
-		status_color = _parse_color(String(get_meta("config_status_color")), status_color)
+		status_color = _parse_color(str(get_meta("config_status_color")), status_color)
 	if has_meta("config_signage_text"):
-		signage_text = String(get_meta("config_signage_text"))
+		signage_text = str(get_meta("config_signage_text"))
 	if has_meta("config_signage_color"):
-		signage_color = _parse_color(String(get_meta("config_signage_color")), signage_color)
+		signage_color = _parse_color(str(get_meta("config_signage_color")), signage_color)
 
 
 func _clear_built_children() -> void:
@@ -289,21 +291,17 @@ func _build_status_led() -> void:
 
 
 func _build_signage() -> void:
-	var label := Label3D.new()
-	label.name = "Signage"
-	label.text = signage_text
-	label.font_size = LABEL_FONT_SIZE
-	label.outline_size = 3
-	label.pixel_size = LABEL_PIXEL_SIZE
-	label.modulate = signage_color
-	label.outline_modulate = Color(0.05, 0.05, 0.07)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	# Above the door, on the front face. Default Label3D faces +Z — leave default rotation.
-	var y: float = body_height * 0.55 + door_radius + 0.06
-	var z: float = body_depth * 0.5 + 0.005
-	label.position = Vector3(0.0, y, z)
-	add_child(label)
+	# Width fits within the cabinet face; height is one text-row tall.
+	# unshaded=false: plain painted lettering that takes scene light.
+	var quad: MeshInstance3D = BakedText.make_label_mesh(
+		signage_text, signage_color, Vector2(0.50, 0.07))
+	if quad:
+		quad.name = "Signage"
+		# Same position as the old Label3D — above the door, proud of the front face.
+		var y: float = body_height * 0.55 + door_radius + 0.06
+		var z: float = body_depth * 0.5 + 0.005
+		quad.position = Vector3(0.0, y, z)
+		add_child(quad)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

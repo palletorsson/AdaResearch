@@ -1,13 +1,15 @@
 extends Node3D
 class_name IVStand
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
-# essence: a wheeled medical IV pole with a hanging bag — hospital / clinic vocabulary. A round dark-steel base disc with 4-6 small caster wheels around its perimeter, a tall glossy-steel vertical pole rising from the base center, a small L-shaped hook at the top, an optional translucent IV bag hanging from the hook with amber fluid filling part of it, a small "IV" Label3D on the bag, and a Portal-orange accent ring around the base. The architectural form of MEDICATION-IN-MOTION
+# essence: a wheeled medical IV pole with a hanging bag — hospital / clinic vocabulary. A round dark-steel base disc with 4-6 small caster wheels around its perimeter, a tall glossy-steel vertical pole rising from the base center, a small L-shaped hook at the top, an optional translucent IV bag hanging from the hook with amber fluid filling part of it, a small "IV" baked label on the bag, and a Portal-orange accent ring around the base. The architectural form of MEDICATION-IN-MOTION
 # desire: every clinic wants a way to keep a continuous drip BESIDE the body — to follow the patient between bed and chair and corridor without disconnecting the line. The IV stand wants to be the architectural form of MOBILE INFUSION. The wheels make it portable; the pole makes it tall; the hook makes it ready to receive a bag. It is gravity weaponised for medicine
 # critical_parameter: bag_visible — TRUE reads as IN-USE (this stand is currently delivering, hooked to a patient). FALSE reads as STAGED-AND-WAITING (cleaned, parked, ready for the next bag). The bag is the difference between MEDICATION-IN-PROGRESS and EQUIPMENT-AT-REST. Same pole, two phases of the clinical cycle
-# triggers: _ready() builds base disc + wheels + pole + L-hook + optional bag (translucent with internal fluid level) + Label3D + accent ring; apply_grid_config rebuilds
+# triggers: _ready() builds base disc + wheels + pole + L-hook + optional bag (translucent with internal fluid level) + baked label quad + accent ring; apply_grid_config rebuilds
 # emerges: bag with high bag_full_fraction = "just hung, full dose ahead". Bag near empty = "almost done, change soon". Bag invisible = "between patients". Wheels visible at base = "this can roll with the patient". Same script, four narratives of clinical use
-# needs: round base disc [present]; wheel_count small caster wheels around the perimeter [present]; vertical pole from base center [present]; L-shaped hook at top of pole [present]; optional translucent bag hanging from hook [present]; bag content filling bag_full_fraction of the interior [present]; "IV" Label3D on the bag [present]; accent ring around the base [present]
+# needs: round base disc [present]; wheel_count small caster wheels around the perimeter [present]; vertical pole from base center [present]; L-shaped hook at top of pole [present]; optional translucent bag hanging from hook [present]; bag content filling bag_full_fraction of the interior [present]; label_text baked onto the bag face [present]; accent ring around the base [present]
 # relationships: peer to safety_shower (both = wall-of-the-clinic safety-net equipment, but the shower is fixed and the stand is mobile — vocabularies of EMERGENCY vs CONTINUOUS-CARE). Sibling to chemistry_flask (both = container-of-fluid-with-label, but the flask is bench-top static and the stand is hospital-mobile). Cousin to autoclave + glove_box (the lab's medical-adjacent vocabulary of CARE-OF-BODIES through STERILE-INSTRUMENTS). The architectural admission that the clinic IS a moving choreography of held-fluids
 # truth: an IV stand is the architectural form of THE BODY TETHERED TO ITS MEDICINE THROUGH GRAVITY. The pole's height matters: above the heart, so the drip flows down. The wheels matter: the patient must be able to walk to the bathroom without disconnecting. The L-hook matters: the bag must hang free, swinging slightly with motion, not pinned. The whole thing is a refusal to let the line be broken just because the body needs to move
 
@@ -62,8 +64,6 @@ const BAG_HEIGHT: float = 0.22
 const BAG_DEPTH: float = 0.04
 const ACCENT_STRIP_HEIGHT: float = 0.008
 const ACCENT_STRIP_DEPTH: float = 0.005
-const LABEL_PIXEL_SIZE: float = 0.0035
-const LABEL_FONT_SIZE: int = 32
 
 # ── Internal state ────────────────────────────────────────────────────
 
@@ -88,30 +88,30 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_pole_height"):
-		pole_height = float(String(get_meta("config_pole_height")))
+		pole_height = float(str(get_meta("config_pole_height")))
 	if has_meta("config_base_radius"):
-		base_radius = float(String(get_meta("config_base_radius")))
+		base_radius = float(str(get_meta("config_base_radius")))
 	if has_meta("config_wheel_count"):
-		wheel_count = int(String(get_meta("config_wheel_count")))
+		wheel_count = int(str(get_meta("config_wheel_count")))
 	if has_meta("config_pole_color"):
-		pole_color = _parse_color(String(get_meta("config_pole_color")), pole_color)
+		pole_color = _parse_color(str(get_meta("config_pole_color")), pole_color)
 	if has_meta("config_bag_color"):
-		bag_color = _parse_color(String(get_meta("config_bag_color")), bag_color)
+		bag_color = _parse_color(str(get_meta("config_bag_color")), bag_color)
 	if has_meta("config_bag_content_color"):
-		bag_content_color = _parse_color(String(get_meta("config_bag_content_color")), bag_content_color)
+		bag_content_color = _parse_color(str(get_meta("config_bag_content_color")), bag_content_color)
 	if has_meta("config_bag_visible"):
-		var b := String(get_meta("config_bag_visible")).to_lower()
+		var b := str(get_meta("config_bag_visible")).to_lower()
 		bag_visible = b in ["true", "1", "yes", "on"]
 	if has_meta("config_bag_full_fraction"):
-		bag_full_fraction = float(String(get_meta("config_bag_full_fraction")))
+		bag_full_fraction = float(str(get_meta("config_bag_full_fraction")))
 	if has_meta("config_hook_color"):
-		hook_color = _parse_color(String(get_meta("config_hook_color")), hook_color)
+		hook_color = _parse_color(str(get_meta("config_hook_color")), hook_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_label_text"):
-		label_text = String(get_meta("config_label_text"))
+		label_text = str(get_meta("config_label_text"))
 	if has_meta("config_label_color"):
-		label_color = _parse_color(String(get_meta("config_label_color")), label_color)
+		label_color = _parse_color(str(get_meta("config_label_color")), label_color)
 
 
 func _clear_built_children() -> void:
@@ -310,20 +310,12 @@ func _build_bag() -> void:
 		content.position = Vector3(bag_center_x, content_bottom + content_h * 0.5, bag_z)
 		add_child(content)
 
-	# Label on the +Z face of the bag, default Label3D rotation (faces +Z).
-	if label_text != "":
-		var label := Label3D.new()
-		label.name = "BagLabel"
-		label.text = label_text
-		label.font_size = LABEL_FONT_SIZE
-		label.outline_size = 3
-		label.pixel_size = LABEL_PIXEL_SIZE
-		label.modulate = label_color
-		label.outline_modulate = Color(0.10, 0.06, 0.04)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		label.position = Vector3(bag_center_x, bag_center_y + BAG_HEIGHT * 0.25, bag_z + BAG_DEPTH * 0.5 + 0.005)
-		add_child(label)
+	# Baked label on the +Z face of the bag — text painted onto the surface.
+	var quad := BakedText.make_label_mesh(label_text, label_color, Vector2(0.10, 0.06))
+	if quad:
+		quad.name = "BagLabel"
+		quad.position = Vector3(bag_center_x, bag_center_y + BAG_HEIGHT * 0.25, bag_z + BAG_DEPTH * 0.5 + 0.003)
+		add_child(quad)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

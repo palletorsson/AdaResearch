@@ -1,13 +1,15 @@
 extends Node3D
 class_name SpecimenJar
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a cylindrical glass containment vessel on a rectangular plinth — Aperture / Black Mesa specimen-room vocabulary. A translucent jar with a slight inner glow, a small dark cap, an interior content (blob / tendrils / crystal / empty), an emissive accent stripe wrapping the top of the plinth, and a small amber Label3D on the front face naming the specimen. Looks innocuous; reads as ominous
 # desire: every lab wants a way to display its captives — what it has caught, isolated, contained. The jar wants to be the architectural form of HAVING-CAPTURED. Visible, but separated by glass. The viewer can look but not touch
 # critical_parameter: content_shape — "blob" (organic mass), "tendrils" (radial filaments), "crystal" (geometric fragments), "empty" (the void of having released or never having captured) are four very different presences from the same script. The jar's shape is constant; the content is the punctum
 # triggers: _ready() builds plinth + jar cylinder + cap + interior content + accent stripe + Label3D from exports; apply_grid_config rebuilds
 # emerges: a blob jar reads ALIVE. A tendril jar reads ALIEN. A crystal jar reads MINERAL. An empty jar reads RECENTLY-OPENED. Same shape, four narratives. The specimen LABEL ('λ-S', 'Δ-Iπ') ties it into the QFEP curriculum without saying so
-# needs: rectangular plinth at the bottom [present]; translucent cylindrical jar with slight emission [present]; small dark cap [present]; interior content per content_shape [present]; Label3D on front face [present]; emissive accent at top of plinth [present]
+# needs: rectangular plinth at the bottom [present]; translucent cylindrical jar with slight emission [present]; small dark cap [present]; interior content per content_shape [present]; baked amber label panel on front face of plinth [present]; emissive accent at top of plinth [present]
 # relationships: peer to microscope (jar = thing-being-looked-at; microscope = act-of-looking); sibling to small_containment (both are display vessels — jar = passive, containment = active); cousin to exit_sign + safety_shower (the lab's vocabulary of CONTROLLED THINGS); the QFEP's confession that some questions are kept behind glass
 # truth: a specimen jar is the only artifact that EXPLICITLY contains something. A table holds (transparently). A door opens (transparently). A jar contains-and-displays — the glass admits the asymmetry of seeing without reaching. It is the architectural form of CURATED DISTANCE. The label says: this is named, this is bounded, this is mine
 
@@ -74,27 +76,27 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_jar_height"):
-		jar_height = float(String(get_meta("config_jar_height")))
+		jar_height = float(str(get_meta("config_jar_height")))
 	if has_meta("config_jar_radius"):
-		jar_radius = float(String(get_meta("config_jar_radius")))
+		jar_radius = float(str(get_meta("config_jar_radius")))
 	if has_meta("config_plinth_height"):
-		plinth_height = float(String(get_meta("config_plinth_height")))
+		plinth_height = float(str(get_meta("config_plinth_height")))
 	if has_meta("config_plinth_width"):
-		plinth_width = float(String(get_meta("config_plinth_width")))
+		plinth_width = float(str(get_meta("config_plinth_width")))
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_content_color"):
-		content_color = _parse_color(String(get_meta("config_content_color")), content_color)
+		content_color = _parse_color(str(get_meta("config_content_color")), content_color)
 	if has_meta("config_cap_color"):
-		cap_color = _parse_color(String(get_meta("config_cap_color")), cap_color)
+		cap_color = _parse_color(str(get_meta("config_cap_color")), cap_color)
 	if has_meta("config_label_color"):
-		label_color = _parse_color(String(get_meta("config_label_color")), label_color)
+		label_color = _parse_color(str(get_meta("config_label_color")), label_color)
 	if has_meta("config_content_shape"):
-		content_shape = String(get_meta("config_content_shape")).to_lower()
+		content_shape = str(get_meta("config_content_shape")).to_lower()
 	if has_meta("config_label_text"):
-		label_text = String(get_meta("config_label_text"))
+		label_text = str(get_meta("config_label_text"))
 	if has_meta("config_content_glow"):
-		content_glow = float(String(get_meta("config_content_glow")))
+		content_glow = float(str(get_meta("config_content_glow")))
 
 
 func _clear_built_children() -> void:
@@ -285,21 +287,22 @@ func _build_crystal(parent: Node3D, cy: float, r_in: float, mat: StandardMateria
 func _build_label() -> void:
 	if label_text == "":
 		return
-	var label := Label3D.new()
-	label.name = "Label"
-	label.text = label_text
-	label.font_size = LABEL_FONT_SIZE
-	label.outline_size = 3
-	label.pixel_size = LABEL_PIXEL_SIZE
-	label.modulate = label_color
-	label.outline_modulate = Color(0.07, 0.05, 0.02)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.no_depth_test = false
-	# Label3D in Godot 4 defaults to facing +Z (readable from +Z viewers).
-	# Centered on front face of plinth.
-	label.position = Vector3(0.0, plinth_height * 0.6, plinth_width * 0.5 + 0.006)
-	add_child(label)
+	# Baked panel: amber background + dark text, printed onto the plinth front face.
+	# World size: 82 % of plinth width × ~55 % of plinth height (matches old Label3D footprint).
+	var w: float = plinth_width * 0.82
+	var h: float = plinth_height * 0.55
+	var quad: MeshInstance3D = BakedText.make_panel_mesh(
+		label_text,
+		label_color,                    # amber background
+		Color(0.07, 0.05, 0.02),        # dark brown text (matches old outline_modulate)
+		Vector2(w, h)
+	)
+	if quad:
+		quad.name = "Label"
+		# Position at the same spot the Label3D was: centred on the plinth front face,
+		# proud by 0.006 m so it sits on the surface.
+		quad.position = Vector3(0.0, plinth_height * 0.6, plinth_width * 0.5 + 0.006)
+		add_child(quad)
 
 
 func _build_accent_strip() -> void:
