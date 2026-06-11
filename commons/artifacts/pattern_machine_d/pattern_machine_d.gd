@@ -44,6 +44,8 @@ const PatternSim = preload("res://commons/pattern_grammar/pattern_sim.gd")
 @export var motif_seed: int = 7
 ## Edited stamp-matrix side length (2-6).
 @export var matrix_size: int = 3
+## Pick a fresh random group / motif each load (a map that pins one turns this off).
+@export var randomize_on_start: bool = true
 
 @export_group("Machine")
 @export var frame_color: Color = Color(0.13, 0.12, 0.16)
@@ -114,6 +116,9 @@ func _ready() -> void:
 	_read_overrides()
 	matrix_size = clampi(matrix_size, 2, 6)
 	_group_index = _index_of_group(group)
+	if randomize_on_start:
+		_group_index = randi() % GROUP_ORDER.size()
+		motif_seed = 1 + randi() % 8
 	_current_group = GROUP_ORDER[_group_index]
 	PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
 	_init_grid()
@@ -127,8 +132,86 @@ func _ready() -> void:
 	_build_touch_area()
 	_build_capture_camera()
 	_update_carpet()
+	_build_control_plate()
 	print("[PatternMachineD] Tile-stamp press built — %dx%d matrix, group %s" % [
 		matrix_size, matrix_size, WallpaperGroups.get_group_name(_current_group)])
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# CONTROL CONSOLE — the shared display_console (same as loom / mill / tunnel)
+# ═══════════════════════════════════════════════════════════════════════
+
+func _build_control_plate() -> void:
+	if has_node("ControlConsole"):
+		return
+	var scene := load("res://commons/artifacts/pattern_tunnel/display_console.tscn")
+	if scene == null:
+		return
+	var plate: Node = scene.instantiate()
+	plate.name = "ControlConsole"
+	if plate.has_method("configure"):
+		var gnames: Array = []
+		for g in GROUP_ORDER:
+			gnames.append(WallpaperGroups.get_group_name(g).to_upper())
+		plate.call("configure", "TILE-STAMP  PRESS", [
+			{"key": "group", "label": "GROUP", "names": gnames, "init": _group_index},
+			{"key": "motif", "label": "MOTIF", "names": ["I","II","III","IV","V","VI","VII","VIII"], "init": clampi(motif_seed - 1, 0, 7)},
+		])
+	# operator station: a step the player stands on (the carpet stamps out toward +Z), with
+	# the console at its front edge facing the player, so they look DOWN past it at the output.
+	_build_operator_platform(Vector3(0.0, 0.0, 3.9), Vector3(2.4, 0.36, 1.7))
+	add_child(plate)
+	(plate as Node3D).position = Vector3(0.0, 0.36, 3.3)
+	(plate as Node3D).rotation_degrees = Vector3(0.0, 0.0, 0.0)   # screen faces the player at +Z
+	if plate.has_signal("changed") and not plate.is_connected("changed", _on_plate):
+		plate.connect("changed", _on_plate)
+	if plate.has_signal("randomized") and not plate.is_connected("randomized", _on_plate_random):
+		plate.connect("randomized", _on_plate_random)
+
+
+func _on_plate(key: String, value: float) -> void:
+	match key:
+		"group":
+			_group_index = clampi(int(value), 0, GROUP_ORDER.size() - 1)
+			_current_group = GROUP_ORDER[_group_index]
+			group = WallpaperGroups.get_group_name(_current_group)
+			if _group_label:
+				_group_label.text = WallpaperGroups.get_group_name(_current_group).to_upper()
+		"motif":
+			motif_seed = int(value) + 1
+	_update_carpet()
+
+
+func _on_plate_random() -> void:
+	_group_index = randi() % GROUP_ORDER.size()
+	_current_group = GROUP_ORDER[_group_index]
+	group = WallpaperGroups.get_group_name(_current_group)
+	if _group_label:
+		_group_label.text = WallpaperGroups.get_group_name(_current_group).to_upper()
+	motif_seed = 1 + randi() % 8
+	_update_carpet()
+
+
+## A small collidable step the player stands on to look down on the production.
+func _build_operator_platform(center: Vector3, size: Vector3) -> void:
+	var body := StaticBody3D.new()
+	body.name = "OperatorPlatform"
+	body.position = center + Vector3(0.0, size.y * 0.5, 0.0)
+	var cs := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = size
+	cs.shape = shape
+	body.add_child(cs)
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.30, 0.31, 0.34)
+	mat.roughness = 0.85
+	mi.material_override = mat
+	body.add_child(mi)
+	add_child(body)
 
 
 func _process(delta: float) -> void:
@@ -140,6 +223,9 @@ func _process(delta: float) -> void:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("group") or config_data.has("motif_seed"):
+		randomize_on_start = false
+	if config_data.has("randomize_on_start"): randomize_on_start = bool(config_data["randomize_on_start"])
 	if config_data.has("group"):
 		group = str(config_data["group"])
 		_group_index = _index_of_group(group)
