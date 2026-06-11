@@ -4,73 +4,184 @@
 			"category": "hazards",
 			"complexity": "advanced",
 			"description": "The path-and-block antagonist: a CatalystFoe that walks and BUILDS — dropping primitive blocks (pyramid/wedge/cube by curriculum stage) to wall the player's route. Befriend it with the catalyst and it stops building and clears the wall it made. Win by outrunning it to the exit, or by changing its mind.",
-			"dev_themes": ["gameplay", "hazards", "catalyst"],
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"catalyst"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "path_builder_foe",
 			"map_ready": true,
-			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"map_sequences": [
+				"primitives",
+				"transformation",
+				"color",
+				"array_tutorial"
+			],
 			"name": "Path Builder Foe",
-			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"scene": "res://commons/hazards/path_builder_foe/path_builder_foe.tscn",
-			"tags": ["foe", "builder", "catalyst", "block", "game", "befriendable"],
+			"tags": [
+				"foe",
+				"builder",
+				"catalyst",
+				"block",
+				"game",
+				"befriendable"
+			],
 			"qfep_connection": "The wall and the one who builds it are the same problem, solved the same way — you do not break the maze, you befriend its author."
 		},
 		"path_game_controller": {
 			"category": "hazards",
 			"complexity": "intermediate",
 			"description": "Win/lose controller for the path-and-block game. Wins on reaching the teleporter OR befriending every foe; loses on the watchdog's blocked-path timeout. Pops a pixel thumb over a befriended foe and a pixel heart on a win.",
-			"dev_themes": ["gameplay", "hazards"],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "path_game_controller",
 			"map_ready": true,
-			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"map_sequences": [
+				"primitives",
+				"transformation",
+				"color",
+				"array_tutorial"
+			],
 			"name": "Path Game Controller",
-			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"scene": "res://commons/hazards/path_game/path_game_controller.tscn",
-			"tags": ["game", "win", "lose", "controller", "catalyst", "reaction"],
+			"tags": [
+				"game",
+				"win",
+				"lose",
+				"controller",
+				"catalyst",
+				"reaction"
+			],
 			"qfep_connection": "A game is two truths and a verdict — can you still cross, and did you have to destroy anything to do it; the thumb answers the second."
 		},
 		"path_cube": {
 			"category": "hazards",
 			"complexity": "beginner",
 			"description": "Path-and-block game brick: a solid cube wall. Has a collider and is NOT path_passable, so the path watchdog routes around it. The foe's blocking primitive.",
-			"dev_themes": ["gameplay", "hazards", "primitives"],
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"primitives"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "path_cube",
 			"map_ready": true,
-			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"map_sequences": [
+				"primitives",
+				"transformation",
+				"color",
+				"array_tutorial"
+			],
 			"name": "Path Cube (wall)",
-			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"scene": "res://commons/hazards/path_block/path_cube.tscn",
-			"tags": ["cube", "wall", "block", "game", "collider"]
+			"tags": [
+				"cube",
+				"wall",
+				"block",
+				"game",
+				"collider"
+			]
 		},
 		"path_wedge": {
 			"category": "hazards",
 			"complexity": "beginner",
 			"description": "Path-and-block game brick: a walkable ramp. Tagged path_passable so the path watchdog routes THROUGH it — a cube the player can climb. The gate primitive.",
-			"dev_themes": ["gameplay", "hazards", "primitives"],
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"primitives"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "path_wedge",
 			"map_ready": true,
-			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"map_sequences": [
+				"primitives",
+				"transformation",
+				"color",
+				"array_tutorial"
+			],
 			"name": "Path Wedge (ramp)",
-			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"scene": "res://commons/hazards/path_block/path_wedge.tscn",
-			"tags": ["wedge", "ramp", "block", "game", "passable"]
+			"tags": [
+				"wedge",
+				"ramp",
+				"block",
+				"game",
+				"passable"
+			]
 		},
 		"path_pyramid": {
 			"category": "hazards",
 			"complexity": "beginner",
 			"description": "Path-and-block game brick: a 1m-base pyramid mound that BLOCKS the path (you can't cross a peak). Supports the grid wireframe shader. The first primitive in the foe's progression.",
-			"dev_themes": ["gameplay", "hazards", "primitives"],
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"primitives"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "path_pyramid",
 			"map_ready": true,
-			"map_sequences": ["primitives", "transformation", "color", "array_tutorial"],
+			"map_sequences": [
+				"primitives",
+				"transformation",
+				"color",
+				"array_tutorial"
+			],
 			"name": "Path Pyramid (mound)",
-			"parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"scene": "res://commons/hazards/path_block/path_pyramid.tscn",
-			"tags": ["pyramid", "mound", "block", "game", "passable"]
+			"tags": [
+				"pyramid",
+				"mound",
+				"block",
+				"game",
+				"passable"
+			]
 		},
 		"path_watchdog": {
 			"category": "hazards",
@@ -126,7 +237,7 @@
 				"hazards"
 			],
 			"name": "Orb Gesture Test Rig",
-			"qfep_connection": "Capability-as-relation. The orb is the relation between the palms while the gesture is held; it dissolves when palms part. No inventory item \u2014 see /blog/2026-05-11-cognitive-water and doc/ORB_GESTURE_SLICE.md.",
+			"qfep_connection": "Capability-as-relation. The orb is the relation between the palms while the gesture is held; it dissolves when palms part. No inventory item — see /blog/2026-05-11-cognitive-water and doc/ORB_GESTURE_SLICE.md.",
 			"scene": "res://commons/hazards/becoming_catalyst/orb_test_rig.tscn",
 			"tags": [
 				"catalyst",
@@ -153,7 +264,7 @@
 				"hazards"
 			],
 			"name": "Pusher Block",
-			"qfep_connection": "Translation as force \u2014 the simplest transformation becomes the most direct threat. The block does to the player what the player does to objects.",
+			"qfep_connection": "Translation as force — the simplest transformation becomes the most direct threat. The block does to the player what the player does to objects.",
 			"scene": "res://commons/hazards/transformation_blocks/pusher_block.tscn",
 			"tags": [
 				"hazard",
@@ -255,7 +366,7 @@
 		"sweeper_block": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "A blue beam that rotates around a central pivot, sweeping players off edges into pits. Don Quixote's windmill \u2014 the world spins and you must time your crossing. Uses AnimatableBody3D.",
+			"description": "A blue beam that rotates around a central pivot, sweeping players off edges into pits. Don Quixote's windmill — the world spins and you must time your crossing. Uses AnimatableBody3D.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -269,7 +380,7 @@
 				"hazards"
 			],
 			"name": "Sweeper Block",
-			"qfep_connection": "Rotation as sweep \u2014 the transformation you feel in your inner ear. The windmill doesn't attack you; you attack it, and it wins because it is the world.",
+			"qfep_connection": "Rotation as sweep — the transformation you feel in your inner ear. The windmill doesn't attack you; you attack it, and it wins because it is the world.",
 			"scene": "res://commons/hazards/transformation_blocks/sweeper_block.tscn",
 			"tags": [
 				"hazard",
@@ -384,7 +495,7 @@
 				"hazards"
 			],
 			"name": "Grower Block",
-			"qfep_connection": "Scale as pressure \u2014 the uncanny transformation that changes everything while appearing to change nothing. You don't move; the world moves into you.",
+			"qfep_connection": "Scale as pressure — the uncanny transformation that changes everything while appearing to change nothing. You don't move; the world moves into you.",
 			"scene": "res://commons/hazards/transformation_blocks/grower_block.tscn",
 			"tags": [
 				"hazard",
@@ -700,7 +811,7 @@
 		"becoming_catalyst": {
 			"category": "tools",
 			"complexity": "advanced",
-			"description": "An evolving hand force that grows alongside the player. Not a weapon of destruction but a tool of transformation, becoming, and boundary dissolution. Each Lab sequence unlocks a new expressive mode \u2014 from slow cubes to calming fields to swarm intelligence.",
+			"description": "An evolving hand force that grows alongside the player. Not a weapon of destruction but a tool of transformation, becoming, and boundary dissolution. Each Lab sequence unlocks a new expressive mode — from slow cubes to calming fields to swarm intelligence.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -818,7 +929,7 @@
 		"catalyst_pedestal": {
 			"category": "tools",
 			"complexity": "simple",
-			"description": "A one-meter wireframe cube display case with the Becoming Catalyst crystal floating and rotating inside. Place this in lab spawn areas. The player walks up, sees the glowing crystal, and grabs it \u2014 the cage fades away as the crystal absorbs into their hand.",
+			"description": "A one-meter wireframe cube display case with the Becoming Catalyst crystal floating and rotating inside. Place this in lab spawn areas. The player walks up, sees the glowing crystal, and grabs it — the cage fades away as the crystal absorbs into their hand.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -833,7 +944,7 @@
 				"testmaps"
 			],
 			"name": "Catalyst Pedestal",
-			"qfep_connection": "The cage frames the invitation. Not protection but presentation \u2014 the moment before transformation, when the tool exists waiting to be claimed.",
+			"qfep_connection": "The cage frames the invitation. Not protection but presentation — the moment before transformation, when the tool exists waiting to be claimed.",
 			"scene": "res://commons/hazards/becoming_catalyst/catalyst_pedestal.tscn",
 			"tags": [
 				"tool",
@@ -1058,7 +1169,7 @@
 		"blockbuilderentity": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "A creature that builds with blocks \u2014 constructing and deconstructing grid structures as it moves. The world-shaping hazard that treats the grid as raw material.",
+			"description": "A creature that builds with blocks — constructing and deconstructing grid structures as it moves. The world-shaping hazard that treats the grid as raw material.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -1288,7 +1399,7 @@
 		"bricoleur_golem": {
 			"category": "hazards",
 			"complexity": "beginner",
-			"description": "Asymmetric golem built from mismatched primitives. Rebuilds itself from random parts after damage \u2014 each reconstruction unique. Exhausts after 3 rebuilds. Teaches bricolage: creation from whatever is at hand.",
+			"description": "Asymmetric golem built from mismatched primitives. Rebuilds itself from random parts after damage — each reconstruction unique. Exhausts after 3 rebuilds. Teaches bricolage: creation from whatever is at hand.",
 			"dev_themes": [
 				"education",
 				"gameplay",
@@ -1525,7 +1636,7 @@
 		"chromatic_field": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "RGB zone hazard with three overlapping translucent spheres cycling through hue. Damage type depends on the dominant color channel \u2014 red heat, green poison, blue cold. Teaches color mixing and perception.",
+			"description": "RGB zone hazard with three overlapping translucent spheres cycling through hue. Damage type depends on the dominant color channel — red heat, green poison, blue cold. Teaches color mixing and perception.",
 			"dev_themes": [
 				"education",
 				"gameplay",
@@ -1750,7 +1861,7 @@
 		"constraint_web": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "5x5 grid of superposition tiles representing a constraint satisfaction problem. Tiles collapse on step; contradictions explode. Graph coloring as minefield \u2014 no two adjacent tiles may share a color.",
+			"description": "5x5 grid of superposition tiles representing a constraint satisfaction problem. Tiles collapse on step; contradictions explode. Graph coloring as minefield — no two adjacent tiles may share a color.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -1972,7 +2083,7 @@
 		"deltahedron_creature": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "A creature whose body IS its mesh net. Flat at fold_amount=0, assembled convex solid at fold_amount=1. All equilateral triangles \u2014 Cauchy's rigidity theorem guarantees structural integrity when closed. Species: tetrahedron (4), octahedron (8), icosahedron (20).",
+			"description": "A creature whose body IS its mesh net. Flat at fold_amount=0, assembled convex solid at fold_amount=1. All equilateral triangles — Cauchy's rigidity theorem guarantees structural integrity when closed. Species: tetrahedron (4), octahedron (8), icosahedron (20).",
 			"dev_themes": [
 				"fold_system"
 			],
@@ -2186,7 +2297,7 @@
 		"edible_mushroom": {
 			"category": "items",
 			"complexity": "intermediate",
-			"description": "Pickable mushroom with transformative effects. RAND Corporation 1955 meets fungal spores \u2014 historical randomness made edible. Consume to trigger perceptual shifts.",
+			"description": "Pickable mushroom with transformative effects. RAND Corporation 1955 meets fungal spores — historical randomness made edible. Consume to trigger perceptual shifts.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -2410,7 +2521,7 @@
 		"fallingblocks": {
 			"category": "hazards",
 			"complexity": "beginner",
-			"description": "Environmental hazard that spawns falling block formations. Gravity as threat \u2014 the grid raining down. Dodge, shelter, or ride the cascade.",
+			"description": "Environmental hazard that spawns falling block formations. Gravity as threat — the grid raining down. Dodge, shelter, or ride the cascade.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -2515,7 +2626,7 @@
 		"fibonacci_snake": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "Triangle strip coiled in a golden spiral unfolds into a slithering sine-wave snake. Phi encodes rest, sin encodes motion. Same vertices, same faces \u2014 only positions change.",
+			"description": "Triangle strip coiled in a golden spiral unfolds into a slithering sine-wave snake. Phi encodes rest, sin encodes motion. Same vertices, same faces — only positions change.",
 			"dev_themes": [
 				"fold_system"
 			],
@@ -2723,7 +2834,7 @@
 		"five_leg_critter": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Five-legged procedural walker. Odd symmetry forces asymmetric gait patterns \u2014 starfish-like radial locomotion.",
+			"description": "Five-legged procedural walker. Odd symmetry forces asymmetric gait patterns — starfish-like radial locomotion.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -2946,7 +3057,7 @@
 		"fold_demo_critter": {
 			"category": "hazards",
 			"complexity": "beginner",
-			"description": "Four-segment folding creature \u2014 wings spread open and tail lifts as fold_amount increases. Demonstrates BoneFoldSolver with spring dynamics, energy gating, and misfold. The simplest possible folding body.",
+			"description": "Four-segment folding creature — wings spread open and tail lifts as fold_amount increases. Demonstrates BoneFoldSolver with spring dynamics, energy gating, and misfold. The simplest possible folding body.",
 			"dev_themes": [
 				"gameplay",
 				"fold_system"
@@ -3161,7 +3272,7 @@
 		"folding_zoo": {
 			"category": "hazards",
 			"complexity": "exhibition",
-			"description": "Six-zone interactive showcase of the fold system \u2014 bone fold, chain fold, shell fold, state parade, misfold, and spring tension. All three solvers demonstrated with debug overlays.",
+			"description": "Six-zone interactive showcase of the fold system — bone fold, chain fold, shell fold, state parade, misfold, and spring tension. All three solvers demonstrated with debug overlays.",
 			"dev_themes": [
 				"fold_system"
 			],
@@ -3277,7 +3388,7 @@
 		"foliage_showcase": {
 			"category": "hazards",
 			"complexity": "beginner",
-			"description": "All 8 synthetic plant types side by side \u2014 grass, flower, fern, mushroom, reed, tree, bush, vine. Low-poly procedural meshes for MultiMesh instancing.",
+			"description": "All 8 synthetic plant types side by side — grass, flower, fern, mushroom, reed, tree, bush, vine. Low-poly procedural meshes for MultiMesh instancing.",
 			"dev_themes": [
 				"fold_system"
 			],
@@ -3488,7 +3599,7 @@
 		"four_leg_critter": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Four-legged procedural walker. Quadruped gait with diagonal pairing \u2014 walk, trot, gallop emerge from phase relationships between legs.",
+			"description": "Four-legged procedural walker. Quadruped gait with diagonal pairing — walk, trot, gallop emerge from phase relationships between legs.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -3610,7 +3721,7 @@
 		"fractal_hydra": {
 			"category": "hazards",
 			"complexity": "beginner",
-			"description": "Central body with branching heads on cylinder necks. Damage splits a head into two half-size copies \u2014 fractal branching up to depth 3. More heads means more attacks but less damage each. Cut one head, two grow back.",
+			"description": "Central body with branching heads on cylinder necks. Damage splits a head into two half-size copies — fractal branching up to depth 3. More heads means more attacks but less damage each. Cut one head, two grow back.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -3718,7 +3829,7 @@
 		"goomba_box": {
 			"category": "hazards",
 			"complexity": "beginner",
-			"description": "Folding cardboard box that patrols corridors. Stomp from above to flatten it \u2014 topology as vulnerability. Side contact deals damage.",
+			"description": "Folding cardboard box that patrols corridors. Stomp from above to flatten it — topology as vulnerability. Side contact deals damage.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -3821,7 +3932,7 @@
 		"gradient_hunter": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "Sleek predator with orbiting sample-point particles. Gradient descent pathfinding toward player \u2014 gets stuck in local minima, anneals out with random teleport. Machine learning as locomotion strategy.",
+			"description": "Sleek predator with orbiting sample-point particles. Gradient descent pathfinding toward player — gets stuck in local minima, anneals out with random teleport. Machine learning as locomotion strategy.",
 			"dev_themes": [
 				"education",
 				"gameplay",
@@ -3933,7 +4044,7 @@
 		"grammar_markov": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "Tetrahedron with 4 colored state-faces. Markov chain transition matrix determines attack patterns \u2014 visible transition probabilities. Matrix mutates over time. Stochastic grammar made combative.",
+			"description": "Tetrahedron with 4 colored state-faces. Markov chain transition matrix determines attack patterns — visible transition probabilities. Matrix mutates over time. Stochastic grammar made combative.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -4481,7 +4592,7 @@
 		"helix_cylinder_creature": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Runtime fold creature \u2014 flat triangle grid folds into twisted faceted cylinder. Pineapple topology. Same vertices, same faces, only positions change. Driven by fold_amount.",
+			"description": "Runtime fold creature — flat triangle grid folds into twisted faceted cylinder. Pineapple topology. Same vertices, same faces, only positions change. Driven by fold_amount.",
 			"dev_themes": [
 				"fold_system"
 			],
@@ -4689,7 +4800,7 @@
 		"hull_crusher": {
 			"category": "hazards",
 			"complexity": "beginner",
-			"description": "Morphing convex polyhedron with orbiting point-nodes. Fires points as projectiles \u2014 each launch shrinks the convex hull. Points respawn over time. Teaches computational geometry through combat.",
+			"description": "Morphing convex polyhedron with orbiting point-nodes. Fires points as projectiles — each launch shrinks the convex hull. Points respawn over time. Teaches computational geometry through combat.",
 			"dev_themes": [
 				"education",
 				"gameplay",
@@ -4910,7 +5021,7 @@
 		"inflate_flock": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "Icosphere inflates from a point using vertex flocking \u2014 pressure pushes out, separation prevents overlap, cohesion holds shape. Organic breathing inflation. Same vertices, same faces.",
+			"description": "Icosphere inflates from a point using vertex flocking — pressure pushes out, separation prevents overlap, cohesion holds shape. Organic breathing inflation. Same vertices, same faces.",
 			"dev_themes": [
 				"fold_system"
 			],
@@ -5127,7 +5238,7 @@
 		"joint_articulator": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "Central body with 6 limbs, each using a different joint type \u2014 hinge, ball, slider, revolute, prismatic, fixed. Each limb moves per its constraint. Joint physics made visible.",
+			"description": "Central body with 6 limbs, each using a different joint type — hinge, ball, slider, revolute, prismatic, fixed. Each limb moves per its constraint. Joint physics made visible.",
 			"dev_themes": [
 				"art",
 				"gameplay",
@@ -5569,7 +5680,7 @@
 		"loving_triangle": {
 			"category": "companions",
 			"complexity": "advanced",
-			"description": "A triangle-shaped companion that dances with the Becoming Catalyst. Triangles are the atom of all 3D worlds \u2014 every mesh reduces to triangles. This entity makes that visible. Not an enemy \u2014 a relational partner. It responds to each catalyst mode with its own transformation: folding, tiling, compressing, expanding. Evolves through tiers as lab sequences complete.",
+			"description": "A triangle-shaped companion that dances with the Becoming Catalyst. Triangles are the atom of all 3D worlds — every mesh reduces to triangles. This entity makes that visible. Not an enemy — a relational partner. It responds to each catalyst mode with its own transformation: folding, tiling, compressing, expanding. Evolves through tiers as lab sequences complete.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -5583,7 +5694,7 @@
 				"lab"
 			],
 			"name": "Loving Triangle",
-			"qfep_connection": "The triangle embodies relational identity: the self constituted through encounter. Same potential (catalyst projectile), different relational context (triangle vs wall vs enemy), different manifestation. The simplest polygon that creates enclosure \u2014 the other that completes the becoming.",
+			"qfep_connection": "The triangle embodies relational identity: the self constituted through encounter. Same potential (catalyst projectile), different relational context (triangle vs wall vs enemy), different manifestation. The simplest polygon that creates enclosure — the other that completes the becoming.",
 			"scene": "res://commons/hazards/loving_triangle/loving_triangle.tscn",
 			"tags": [
 				"companion",
@@ -5795,7 +5906,7 @@
 		"mesh_morpher": {
 			"category": "hazards",
 			"complexity": "expert",
-			"description": "Shape-shifting creature morphing between sphere, cube, torus, and cylinder. Each topology has a different attack pattern \u2014 roll, slam, spin, sweep. Mesh topology as combat strategy.",
+			"description": "Shape-shifting creature morphing between sphere, cube, torus, and cylinder. Each topology has a different attack pattern — roll, slam, spin, sweep. Mesh topology as combat strategy.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -6018,7 +6129,7 @@
 		"noise_field": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "10x10 grid of height-varying tiles driven by Perlin noise. High tiles are danger zones, low tiles are safe. Noise scrolls continuously \u2014 the landscape of randomness shifts under your feet.",
+			"description": "10x10 grid of height-varying tiles driven by Perlin noise. High tiles are danger zones, low tiles are safe. Noise scrolls continuously — the landscape of randomness shifts under your feet.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -6242,7 +6353,7 @@
 		"octapod_ik": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "Eight-legged IK walker variant. Pure inverse kinematics locomotion without CharacterBody3D physics \u2014 legs find surfaces procedurally. The mathematical octapod.",
+			"description": "Eight-legged IK walker variant. Pure inverse kinematics locomotion without CharacterBody3D physics — legs find surfaces procedurally. The mathematical octapod.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -6315,7 +6426,7 @@
 		"one_leg": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Single IK leg demo \u2014 the fundamental unit of procedural locomotion. One joint chain finding ground contact. The building block from which all multi-legged creatures emerge.",
+			"description": "Single IK leg demo — the fundamental unit of procedural locomotion. One joint chain finding ground contact. The building block from which all multi-legged creatures emerge.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -6436,7 +6547,7 @@
 		"origami_bird": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "Origami crane that progresses through four fold stages: egg seed (0.0) \u2192 standing crane (0.4) \u2192 walking with alternating gait (0.6) \u2192 full wingspan flight (1.0). Twelve segments, paper-white materials, spring-damped fold dynamics. One fold_amount variable drives the entire lifecycle.",
+			"description": "Origami crane that progresses through four fold stages: egg seed (0.0) → standing crane (0.4) → walking with alternating gait (0.6) → full wingspan flight (1.0). Twelve segments, paper-white materials, spring-damped fold dynamics. One fold_amount variable drives the entire lifecycle.",
 			"dev_themes": [
 				"fold_system",
 				"gameplay"
@@ -6660,7 +6771,7 @@
 		"origami_pyre_plane": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "A folded-paper rectangle of fire that sits beneath transport cubes. Its creased surface cycles through affine transformations \u2014 scale pulses, rotation sweeps, positional drift \u2014 while the rectangular shape remains invariant. Demonstrates that identity persists under transformation. Lethal on contact.",
+			"description": "A folded-paper rectangle of fire that sits beneath transport cubes. Its creased surface cycles through affine transformations — scale pulses, rotation sweeps, positional drift — while the rectangular shape remains invariant. Demonstrates that identity persists under transformation. Lethal on contact.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -7120,7 +7231,7 @@
 		"plasma_critter": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Shapeshifting energy substance \u2014 a critter that takes form based on relational context. Raw form shocks on contact. Touch with a stick \u2192 fire torch. Touch water \u2192 healing aura. Touch crystal \u2192 power orb. Q-FEP: same potential, different restraint.",
+			"description": "Shapeshifting energy substance — a critter that takes form based on relational context. Raw form shocks on contact. Touch with a stick → fire torch. Touch water → healing aura. Touch crystal → power orb. Q-FEP: same potential, different restraint.",
 			"dev_themes": [
 				"gameplay",
 				"hazards",
@@ -7320,7 +7431,7 @@
 		"qfep_calibrator": {
 			"category": "hazards",
 			"complexity": "advanced",
-			"description": "Morphing dodecahedron with 3 parameter beams \u2014 phi (rotation speed), delta_e (damage), constraint (detection). Parameters oscillate, creating emergent behavior from their interaction. The QFEP laboratory's creature.",
+			"description": "Morphing dodecahedron with 3 parameter beams — phi (rotation speed), delta_e (damage), constraint (detection). Parameters oscillate, creating emergent behavior from their interaction. The QFEP laboratory's creature.",
 			"dev_themes": [
 				"gameplay",
 				"hazards",
@@ -7768,7 +7879,7 @@
 		"shell_roller": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Icosahedron creature that retracts into a kickable shell. Kick it to send it rolling \u2014 it bounces off walls and damages other enemies on contact.",
+			"description": "Icosahedron creature that retracts into a kickable shell. Kick it to send it rolling — it bounces off walls and damages other enemies on contact.",
 			"dev_themes": [
 				"gameplay",
 				"hazards",
@@ -7872,7 +7983,7 @@
 		"six_leg_critter": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Six-legged procedural walker. Insect-like alternating tripod gait \u2014 three legs always grounded. The most common arthropod configuration.",
+			"description": "Six-legged procedural walker. Insect-like alternating tripod gait — three legs always grounded. The most common arthropod configuration.",
 			"dev_themes": [
 				"art",
 				"gameplay",
@@ -7995,7 +8106,7 @@
 		"spatial_voronoi": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Ground plane divided into Voronoi cells by drifting seed points. Each cell has a different danger type \u2014 safe, damage, slow, heal. Seeds drift and types shuffle, remapping the partition. Spatial decomposition as territory.",
+			"description": "Ground plane divided into Voronoi cells by drifting seed points. Each cell has a different danger type — safe, damage, slow, heal. Seeds drift and types shuffle, remapping the partition. Spatial decomposition as territory.",
 			"dev_themes": [
 				"biology",
 				"gameplay",
@@ -8222,7 +8333,7 @@
 		"spring_hopper": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Coil spring creature that bounces rhythmically. Land on top when compressed to get launched upward \u2014 Hooke's law as creature.",
+			"description": "Coil spring creature that bounces rhythmically. Land on top when compressed to get launched upward — Hooke's law as creature.",
 			"dev_themes": [
 				"gameplay",
 				"hazards",
@@ -8438,7 +8549,7 @@
 		"stick_tool": {
 			"category": "tools",
 			"complexity": "intermediate",
-			"description": "A simple wooden stick the player can grab. Hold near a Plasma Critter to transform it into a torch. The mediator between player and plasma \u2014 the relational bridge.",
+			"description": "A simple wooden stick the player can grab. Hold near a Plasma Critter to transform it into a torch. The mediator between player and plasma — the relational bridge.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -8662,7 +8773,7 @@
 		"techstrider": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Tall mechanical strider with long articulated legs. Patrols elevated paths, steps over obstacles. A walking architecture \u2014 the legs ARE the structure.",
+			"description": "Tall mechanical strider with long articulated legs. Patrols elevated paths, steps over obstacles. A walking architecture — the legs ARE the structure.",
 			"dev_themes": [
 				"art",
 				"gameplay",
@@ -8777,7 +8888,7 @@
 		"tentacle_cube": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "A cube with procedural tentacles extending from its faces. Combines rigid geometry with fluid organic motion \u2014 the grid cell that grew limbs.",
+			"description": "A cube with procedural tentacles extending from its faces. Combines rigid geometry with fluid organic motion — the grid cell that grew limbs.",
 			"dev_themes": [
 				"biology",
 				"gameplay",
@@ -8889,7 +9000,7 @@
 		"tesseract_phaser": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Wireframe hypercube with 16 vertices and 32 edges. 4D rotation phases parts in and out of hittability \u2014 vertex alpha based on W-depth. The fourth dimension as combat mechanic.",
+			"description": "Wireframe hypercube with 16 vertices and 32 edges. 4D rotation phases parts in and out of hittability — vertex alpha based on W-depth. The fourth dimension as combat mechanic.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -9001,7 +9112,7 @@
 		"three_leg_critter": {
 			"category": "hazards",
 			"complexity": "intermediate",
-			"description": "Three-legged procedural walker. Tripod gait \u2014 the minimum legs for static stability. Always has a support triangle.",
+			"description": "Three-legged procedural walker. Tripod gait — the minimum legs for static stability. Always has a support triangle.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -9575,7 +9686,7 @@
 			"complexity": "intermediate",
 			"lookup_name": "catalyst_foe",
 			"name": "Catalyst Foe",
-			"description": "Biome-borne grey-goo foe. Walks toward the player one cell every step_period_s. When the catalyst projectile hits it (any mode \u2014 uses hit_by_projectile contract), phase-shifts to FRIEND state, takes the projectile color, and walks toward the nearest remaining foe to convert it on contact. The unifying enemy of Ada Research: the angry are biome-borne, the catalyst doesn't kill, transformation propagates.",
+			"description": "Biome-borne grey-goo foe. Walks toward the player one cell every step_period_s. When the catalyst projectile hits it (any mode — uses hit_by_projectile contract), phase-shifts to FRIEND state, takes the projectile color, and walks toward the nearest remaining foe to convert it on contact. The unifying enemy of Ada Research: the angry are biome-borne, the catalyst doesn't kill, transformation propagates.",
 			"interaction": "passive",
 			"map_ready": true,
 			"include_in_map_data": true,
@@ -9639,6 +9750,67 @@
 				"vr"
 			],
 			"scene": "res://commons/hazards/catalyst_foe/catalyst_vent.tscn"
+		},
+		"death_pylon": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "A pylon stand that breathes death in a cycle. During the charge it drinks energy from the ground - a wide field of grid-cells and energy motes is sucked up into its swelling, brightening core (a GPUParticlesAttractorSphere3D pulling everything inward through the glowing intake ring). At full charge it fires a jet of fire straight at the player and, within kill_range, kills them via the DeathEffect autoload. Then it dims, gathers again, and repeats. The lesson is conservation: it takes from the world a long time before it gives it all back at once. Particle technique adapted from the godot-xr-tools particle galleries (additive fire gradient, attractor suck).",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"particles",
+				"energy"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "death_pylon",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Death Pylon",
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					3
+				],
+				"size_group": "large",
+				"charge_time": "seconds to fully charge before firing (default 4.2)",
+				"fire_time": "seconds the fire jet lasts (default 1.6)",
+				"cooldown_time": "seconds to recover before charging again (default 1.5)",
+				"kill_range": "radius within which the discharge kills the player (default 9.0)",
+				"grid_n": "NxN ground grid that gets sucked in (default 5)",
+				"energy_color": "the drawn-in energy colour",
+				"fire_color": "the discharge fire colour",
+				"preview": "0..1 - jump into the charge for a still capture",
+				"preview_fire": "bool - force the discharge for a capture"
+			},
+			"scene": "res://commons/artifacts/death_pylon/death_pylon.tscn",
+			"tags": [
+				"hazard",
+				"pylon",
+				"fire",
+				"energy",
+				"particles",
+				"death",
+				"cycle"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 4,
+					"back": 4,
+					"left": 4,
+					"right": 4
+				},
+				"player_position": "any",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "center",
+				"measured_footprint_cells": 9,
+				"footprint_source": "designed"
+			}
 		}
 	}
 }
