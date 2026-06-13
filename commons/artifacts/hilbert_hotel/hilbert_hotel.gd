@@ -1,6 +1,16 @@
 extends Node3D
 class_name HilbertHotel
 
+# @identity
+# essence: Hilbert's fully-booked infinite hotel, animated as a row of rooms. Every room holds a guest; a new guest arrives at a hotel with no vacancy; instead of turning them away, every occupant shifts from room n to room n+1, freeing room 0 — and the new guest checks in. The cycle loops through phases (full → shifting → new guest enters → pause), with a status label narrating that infinity + 1 = infinity.
+# desire: learner's intuition breaks productively — "full" and "room for one more" are contradictory only for finite sets; with countable infinity, a bijection makes room from nowhere.
+# critical_parameter: the shift map n ↦ n+1 — the bijection that proves |ℕ| = |ℕ + 1|. num_rooms is only the visible window onto an unbounded row; shift_duration paces the demonstration.
+# triggers: _ready() builds base, rooms, guests and the new guest; _process drives the phase machine — animating every guest's slide to the next room, then walking the new guest into the vacated room 0, then pausing and repeating.
+# emerges: countability made physical — the felt proof that a proper part of an infinite set can be the same size as the whole, the property Dedekind used to *define* infinity.
+# needs: MeshInstance3D rooms + guests with their materials [self]; Label3D room numbers + status narration [self]; phase timer [self]
+# relationships: lives with cantor_diagonal_workbench, russell_paradox_workbench and halting_workbench in the limits-of-X / foundations corner; the countable-infinity counterpart to Cantor's uncountable diagonal — together they bound the two sizes of infinity the curriculum needs.
+# truth: with the infinite, the part can equal the whole. "No vacancy" is a finite word; shift everyone up by one and the fully-booked hotel always has room. Infinity + 1 = infinity, and you can watch the guests walk it.
+
 ## Interactive Hilbert's Hotel paradox — a row of rooms with occupants
 ## that shift when a new guest arrives, showing infinity + 1 = infinity.
 

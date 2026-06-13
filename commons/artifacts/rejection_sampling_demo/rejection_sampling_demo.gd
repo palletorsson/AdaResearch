@@ -1,6 +1,16 @@
 extends Node3D
 class_name RejectionSamplingDemo
 
+# @identity
+# essence: the accept/reject method made visible. ~2000 uniform random points are scattered into a bounding rectangle; a Gaussian bell curve is drawn across the plot; every point below the curve is accepted (green), every point above is rejected (red). The surviving green points are distributed exactly like the bell — a complicated distribution sampled using nothing but uniform noise and a yes/no test.
+# desire: learner sees how to sample any shape you can draw: throw darts uniformly, keep the ones under the curve. The shape of the kept points *is* the target distribution, conjured from flat randomness.
+# critical_parameter: the envelope tightness — how closely the bounding rectangle hugs the target curve sets the acceptance ratio (shown live); a loose envelope wastes most samples, a tight one is efficient. _mu/_sigma define the target Gaussian being sampled.
+# triggers: _ready() seeds the RNG (seed_value 42 for reproducibility), builds the floor quad, then generates the samples and renders accepted/rejected points plus the curve and the acceptance-ratio label.
+# emerges: a Gaussian histogram precipitating out of uniform noise — proof that you can sample a distribution you can evaluate but cannot invert, by filtering rather than transforming.
+# needs: RandomNumberGenerator [self]; MeshInstance3D point cloud + curve overlay [self]; Label3D for acceptance ratio + distribution name [self]
+# relationships: sibling to monte_carlo_estimator (both classify uniform random points against a region — one counts to estimate, the other keeps to sample) in the randomness sequence; the inverse-free counterpart to direct sampling. A building block under the noise and generative sequences.
+# truth: you do not need to invert a distribution to sample it — you only need to recognise it. Throw uniform darts, keep what falls under the curve, and the kept points wear the shape you wanted. Rejection is selection.
+
 ## Rejection Sampling Demo — visual scatter plot of the accept/reject method.
 ## Generates ~2000 uniform random (x,y) points inside a bounding rectangle.
 ## A target distribution curve (Gaussian bell curve) is drawn across the plot.

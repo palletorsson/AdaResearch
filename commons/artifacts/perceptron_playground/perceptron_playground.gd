@@ -1,6 +1,16 @@
 extends Node3D
 class_name PerceptronPlayground
 
+# @identity
+# essence: a single neuron you can steer by hand. Two classes of points (blue/red) sit on a 2D scatter plot; three sliders set the neuron's weights w1, w2 and bias, and the decision boundary line w1·x + w2·y + bias = 0 sweeps across the plot in real time. An ImmediateMesh diagram redraws inputs→weights→output so you see the same equation as both a line and a wiring diagram.
+# desire: learner discovers that "learning" is just moving a line — classification is a half-plane test, and a perceptron is one weighted sum and a threshold, nothing more mysterious.
+# critical_parameter: w1, w2, bias — the three numbers that define the boundary; w1/w2 set its slope/orientation, bias slides it off the origin. The whole of single-layer learning is finding values that separate the two clouds.
+# triggers: _ready() builds the plot, neuron diagram and three sliders; each slider's signal updates w1/w2/bias and re-renders the boundary line and recolours misclassified points live.
+# emerges: the geometry of a linear classifier — and, by failing on non-separable data, the reason a single perceptron cannot learn XOR and why hidden layers had to be invented.
+# needs: slider_horizontal ×3 (W1/W2/Bias) [ControlPanel]; QuadMesh scatter plot + ImmediateMesh neuron diagram [self]; RandomNumberGenerator for the point clouds [self]
+# relationships: the foundation stone of the machinelearning sequence — precursor to LearnWorldStacked and the multi-layer nets; sibling to the gradient-descent and loss-surface artifacts. Where monte_carlo accumulates samples, the perceptron accumulates weight nudges.
+# truth: a neuron is a line with a knob on each side. Intelligence does not begin as magic; it begins as w1·x + w2·y + bias > 0, and everything deep is this move, stacked.
+
 ## Perceptron Playground — single neuron with adjustable weights (w1, w2, bias).
 ## Draws a 2D scatter plot of two classes on a QuadMesh, with a decision boundary
 ## line (w1*x + w2*y + bias = 0) that updates in real-time as sliders change.

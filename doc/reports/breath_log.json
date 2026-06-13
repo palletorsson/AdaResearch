@@ -21,7 +21,7 @@
     "validation_investigation"
    ],
    "failure_reasons": {
-    "validation_investigation": "pathfinder passes individually (5/5 maps OK) but pipeline scorer reports 0% \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d likely timeout issue in batch subprocess (10s per map). Maps ARE valid but scorer can't confirm in time."
+    "validation_investigation": "pathfinder passes individually (5/5 maps OK) but pipeline scorer reports 0% \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? likely timeout issue in batch subprocess (10s per map). Maps ARE valid but scorer can't confirm in time."
    },
    "skills_used": [
     "documentation_writing",
@@ -40,9 +40,9 @@
     }
    },
    "discoveries": [
-    "Pipeline scorer validation stage runs pathfinder with 10s timeout per map \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d maps pass individually but fail in batch due to cumulative timeout. The scorer reports 0% validation even for structurally valid maps.",
+    "Pipeline scorer validation stage runs pathfinder with 10s timeout per map \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? maps pass individually but fail in batch due to cumulative timeout. The scorer reports 0% validation even for structurally valid maps.",
     "Primitives Lab_Death and Point_Line were missing docs. Transformation Trans_Pit was missing docs. Writing 5 doc files (2 blurb + 3 intent) advanced both sequences from stage 2 to stage 3.",
-    "Documentation gaps are the cheapest HEAD to advance \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d 5 small files move 2 sequences forward."
+    "Documentation gaps are the cheapest HEAD to advance \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? 5 small files move 2 sequences forward."
    ],
    "files_changed": [
     "commons/maps/Lab_Death/blurb.md",
@@ -127,10 +127,10 @@
     }
    },
    "discoveries": [
-    "Registry files with _comment_* string values (not dicts) cause silent load failure in pipeline scorer \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d entire file skipped. qfep.json and transforms.json both had this. Fix: remove string-valued keys from artifacts dict.",
-    "Wrong res:// paths are common: array vs arrays directory, recursiveemergence vs fractals, light vs postprocessing. Pattern: scorer shows 95-99% for a sequence \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d 1-4 artifacts have stale paths from renames.",
+    "Registry files with _comment_* string values (not dicts) cause silent load failure in pipeline scorer \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? entire file skipped. qfep.json and transforms.json both had this. Fix: remove string-valued keys from artifacts dict.",
+    "Wrong res:// paths are common: array vs arrays directory, recursiveemergence vs fractals, light vs postprocessing. Pattern: scorer shows 95-99% for a sequence \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? 1-4 artifacts have stale paths from renames.",
     "tt and 3t are grid utilities (codeDisplay.tscn, word_is.tscn) appearing in interactables layer. Registering them in commons_artifacts.json allows scorer to count them as present artifacts.",
-    "Single breathe session advanced ALL 6 stage-3 sequences to stage 5 \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d 19/19 sequences now at stage 5. Registry repair is the highest-leverage action when sequences are stuck at stage 3."
+    "Single breathe session advanced ALL 6 stage-3 sequences to stage 5 \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? 19/19 sequences now at stage 5. Registry repair is the highest-leverage action when sequences are stuck at stage 3."
    ],
    "files_changed": [
     "commons/artifacts/registry/qfep.json",
@@ -183,13 +183,13 @@
    },
    "discoveries": [
     "grade-F maps come from validate_map.py --all --json, not pathfinder --all. grade_F = json_valid failure OR has_required_fields failure.",
-    "Art_History_Gallery used OLD flat format (name/gridWidth/structure at top level) \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d missing map_info and layers wrapper. Validator requires new format. Fix: wrap in map_info + layers.",
-    "Point_Zero had trailing comma after last structure row + blank line \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d standard trailing-comma JSON error. Fix: strip trailing commas iteratively before ] or }.",
-    "Registry scene path key is \"scene\" not \"scene_path\" \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d workbench audit uses value.get(\"scene\") to build scene_path. Previous attempt to fix via scene_path key did nothing.",
-    "algorithms_misc.json paths for context_free_grammars, tree_generation were already correct. rorschach_* paths were already correct but files resolve and exist \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d workbench still flags them (bug or cache).",
+    "Art_History_Gallery used OLD flat format (name/gridWidth/structure at top level) \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? missing map_info and layers wrapper. Validator requires new format. Fix: wrap in map_info + layers.",
+    "Point_Zero had trailing comma after last structure row + blank line \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? standard trailing-comma JSON error. Fix: strip trailing commas iteratively before ] or }.",
+    "Registry scene path key is \"scene\" not \"scene_path\" \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? workbench audit uses value.get(\"scene\") to build scene_path. Previous attempt to fix via scene_path key did nothing.",
+    "algorithms_misc.json paths for context_free_grammars, tree_generation were already correct. rorschach_* paths were already correct but files resolve and exist \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? workbench still flags them (bug or cache).",
     "arrays.json used array/ (singular) prefix, actual files are in arrays/ (plural). 3 entries fixed. Pattern: directory renames leave stale registry paths.",
     "Release gate improvement: Gate C (Map Validation) went from FAIL to PASS. Gate D was already passing. 2/4 gates now pass (was 1/4). grade_F: 2->0, unresolved_scene_files: 62->55.",
-    "Pipeline scorer avg unchanged at 4.05 \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d validation stage 0% is a known timeout artifact, not actual validation failures. Maps structurally valid."
+    "Pipeline scorer avg unchanged at 4.05 \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? validation stage 0% is a known timeout artifact, not actual validation failures. Maps structurally valid."
    ],
    "files_changed": [
     "commons/maps/Art_History_Gallery/map_data.json",
@@ -250,10 +250,10 @@
     }
    },
    "discoveries": [
-    "6 physics_simulation.json and 1 procgen_extra.json entries used scene_path key instead of scene key \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d workbench.py reads value.get('scene') only. Fix: add scene key copying from scene_path. All 7 files existed on disk.",
-    "14 missing_map_ready and 19 missing_include_in_map_data entries resolved by adding false defaults. These are curation metadata \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d false means unreviewed, not broken.",
-    "array_tutorial.json had Tutorial_Pattern at indices [0,6] \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d removed index 6. Gate A duplicate_entries_within_sequence: 1\u00c3\u00a2\u00e2\u20ac\u00a0\u00e2\u20ac\u21220.",
-    "Gate B remaining blocker: 55 unresolved_scene_files are aspirational artifacts in commons_artifacts.json that point to .tscn files not yet built. Not fixable by registry repair \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d requires building scenes.",
+    "6 physics_simulation.json and 1 procgen_extra.json entries used scene_path key instead of scene key \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? workbench.py reads value.get('scene') only. Fix: add scene key copying from scene_path. All 7 files existed on disk.",
+    "14 missing_map_ready and 19 missing_include_in_map_data entries resolved by adding false defaults. These are curation metadata \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? false means unreviewed, not broken.",
+    "array_tutorial.json had Tutorial_Pattern at indices [0,6] \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? removed index 6. Gate A duplicate_entries_within_sequence: 1\u00c3\u00a2\u00e2\u20ac\u00a0\u00e2\u20ac\u21220.",
+    "Gate B remaining blocker: 55 unresolved_scene_files are aspirational artifacts in commons_artifacts.json that point to .tscn files not yet built. Not fixable by registry repair \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? requires building scenes.",
     "Pattern: scene_path vs scene key mismatch is a common entry-format inconsistency. Check physics_simulation.json and procgen_extra.json for future entries."
    ],
    "files_changed": [
@@ -348,10 +348,10 @@
    "discoveries": [
     "primitives stage 3 (99% artifacts): laser_sward in Point_Lines was a typo for laser_sword (correct name registered). Fixing the map_data.json typo advanced primitives to stage 5.",
     "graphtheory stage 3 (93% artifacts): topological_sort used in GT_Connectivity but registry had topological_sort_algorithm pointing to same scene. Added topological_sort as alias entry in algorithms_misc.json. Both sequences now at stage 5.",
-    "Pipeline scorer strips '#' from interactable lookups (c.split(':')[0].split('#')[0]) \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d quad_line_puzzle#fillhole and becoming_catalyst#start_mode both resolve to registered base names. These are NOT the cause of missing artifact % scores.",
+    "Pipeline scorer strips '#' from interactable lookups (c.split(':')[0].split('#')[0]) \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? quad_line_puzzle#fillhole and becoming_catalyst#start_mode both resolve to registered base names. These are NOT the cause of missing artifact % scores.",
     "Gate A missing_declared_maps: 44 in the gate but 83 found in full scan. Lab sequence has path-like entries (Lab/map_data_back, Lab/map_data_init etc.) that are file variant references accidentally placed in maps list. computationalgeometry, datastructures, recursiveemergence, pokemonstudio are fully aspirational unbuilt sequences.",
-    "Heat map items registry_repair (tt/3t) and map_data_format are stale \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d both already resolved. Heat map generator reads from LOD discoveries and git signals, not current state. These entries should decay on next regeneration.",
-    "All 19 spine sequences now at stage 5 (validation head). The next advancement requires VR testing or actual validation runs \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d not registry or typo fixes."
+    "Heat map items registry_repair (tt/3t) and map_data_format are stale \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? both already resolved. Heat map generator reads from LOD discoveries and git signals, not current state. These entries should decay on next regeneration.",
+    "All 19 spine sequences now at stage 5 (validation head). The next advancement requires VR testing or actual validation runs \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? not registry or typo fixes."
    ],
    "files_changed": [
     "commons/maps/Point_Lines/map_data.json",
@@ -378,7 +378,7 @@
     "C": true,
     "D": true,
     "passing": 2,
-    "note": "Gates unchanged this breath \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\udc9d fixes advanced pipeline stages not gate counts"
+    "note": "Gates unchanged this breath \u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac? fixes advanced pipeline stages not gate counts"
    }
   },
   {
@@ -1906,7 +1906,7 @@
    },
    "discoveries": [
     "Voiced the 5 high-value teaching artifacts the 2026-06-06 breath flagged as next (cave_generator, flow_field_painter, glitch_body, graph_grammar_station, form_studio_station). All recognized by query_identities.py with truth statements, 7/7 fields. Comment-only edits cannot break GDScript parse, so query_identities recognition IS the verification - no Godot launch needed.",
-    "HAZARD CONFIRMED LIVE (the 2026-06-06 warning): json.dumps(..., ensure_ascii=False) then f.write() truncates breath_log.json to 0 bytes because the existing file holds a lone surrogate (\udc9d) that utf-8 cannot encode - and open(w) truncates BEFORE the failed write. FIX: dump with ensure_ascii=True (escapes the surrogate back to \udc9d safely). Recovered via git checkout. NEVER use ensure_ascii=False on this file.",
+    "HAZARD CONFIRMED LIVE (the 2026-06-06 warning): json.dumps(..., ensure_ascii=False) then f.write() truncates breath_log.json to 0 bytes because the existing file holds a lone surrogate (?) that utf-8 cannot encode - and open(w) truncates BEFORE the failed write. FIX: dump with ensure_ascii=True (escapes the surrogate back to ? safely). Recovered via git checkout. NEVER use ensure_ascii=False on this file.",
     "graph_grammar_station and form_studio_station are explicit UI TWINS (identical slider+button rack); voiced with cross-references. Treat paired artifacts as a voicing batch.",
     "VOICELESS WORKLIST now 67. Next high-value teaching targets: control_board, lenia_continuous, monte_carlo_estimator, perceptron_playground, hilbert_hotel, turing_machine (halting_workbench), rejection_sampling_demo, room_grammar.",
     "4th breath running: autonomous breaths cannot move HEAD-sum; voice coverage is the sustainable autonomous metric. Recommend daily morning breath voice 5 artifacts until the 67-item worklist is exhausted."
@@ -1919,6 +1919,91 @@
     "commons/artifacts/form_studio_station/form_studio_station.gd"
    ],
    "duration_minutes": 13
+  },
+  {
+   "breath_id": "2026-06-11T09:10",
+   "mode": "full",
+   "baseline_head_sum": 127,
+   "post_head_sum": 134,
+   "head_sum_delta": 7,
+   "baseline_completed_stage_sum": 118,
+   "post_completed_stage_sum": 121,
+   "completed_stage_delta": 3,
+   "baseline_avg": 5.364,
+   "post_avg": 5.5,
+   "delta": 0.136,
+   "items_attempted": [
+    "scorer_delegate_to_resolution",
+    "color_context_placed_docs"
+   ],
+   "items_succeeded": [
+    "scorer_delegate_to_resolution",
+    "color_context_placed_docs"
+   ],
+   "items_failed": [],
+   "failure_reasons": {},
+   "skills_used": [],
+   "skill_effectiveness": {},
+   "discoveries": [
+    "PIPELINE HEAD WAS NOT FULLY SATURATED. Prior breaths believed all 22 spine sequences sat at HEAD>=6 with only voicing/captures left. FALSE: forces sat at HEAD 3 (artifacts 97pct) and color at HEAD 2 (doc 88pct, artifacts 72pct), both depressed by a scorer bug not real gaps.",
+    "ROOT CAUSE = delegate_to blindness in sequence_pipeline_scorer.load_all_registry_scenes(): only artifacts with a literal scene field were recorded. The /dna-promoted + pattern-loader convention (dna_*, loom_*, mill_*, vector *_xl) uses delegate_to + map_ready and no own scene; GridInteractablesComponent.gd:387 resolves these to the target scene by registry-key lookup at runtime. 4 forces + 19 color interactables undercounted. Same convention-drift pattern as breath 2026-05-28 (the hash comment sigil).",
+    "FIX: two-pass loader following delegate_to chains (cycle-guarded) to the target scene, mirroring the runtime resolver. All delegate targets are registry keys whose scenes exist on disk (verified before fixing) - honest correction.",
+    "RESULT: forces HEAD 3->6, color HEAD 2->6. All 22 spine sequences now genuinely at HEAD>=6. First non-zero pipeline delta in 5 breaths."
+   ],
+   "files_changed": [
+    "tools/sequence_pipeline_scorer.py",
+    "commons/maps/Color_Context_Placed/blurb.md",
+    "commons/maps/Color_Context_Placed/intent.md"
+   ],
+   "duration_minutes": 22
+  },
+  {
+   "breath_id": "2026-06-13T09:10",
+   "mode": "full",
+   "baseline_voice_coverage_pct": 51,
+   "post_voice_coverage_pct": 51,
+   "note": "5 artifacts voiced; rounded coverage unchanged at 51%, absolute voiced count +5. HEAD-sum unmovable autonomously (all 22 spine seq at HEAD>=6 / vr_testing).",
+   "items_attempted": [
+    "voice_lenia_continuous",
+    "voice_monte_carlo_estimator",
+    "voice_perceptron_playground",
+    "voice_hilbert_hotel",
+    "voice_rejection_sampling_demo"
+   ],
+   "items_succeeded": [
+    "voice_lenia_continuous",
+    "voice_monte_carlo_estimator",
+    "voice_perceptron_playground",
+    "voice_hilbert_hotel",
+    "voice_rejection_sampling_demo"
+   ],
+   "items_failed": [],
+   "failure_reasons": {},
+   "skills_used": [
+    "ada-breather"
+   ],
+   "skill_effectiveness": {
+    "ada-breather": {
+     "calls": 1,
+     "succeeded": 1,
+     "failed": 0
+    }
+   },
+   "discoveries": [
+    "Voiced 5 of the 8 high-value teaching artifacts the 2026-06-12 breath named (lenia_continuous, monte_carlo_estimator, perceptron_playground, hilbert_hotel, rejection_sampling_demo). All recognized by query_identities.py with 7-field @identity + truth statements; cross-references (monte_carlo <-> rejection_sampling) resolve.",
+    "REMAINING from that worklist: control_board (UI chassis, lower teaching value), room_grammar. halting_workbench already voiced. After these the next batch must come from a fresh voiceless scan.",
+    "VOICELESS WORKLIST drops from 67 to ~62. Voice coverage rounds to 51% (denominator ~2342 artifacts) so single-digit batches won't shift the rounded percent - track absolute voiced count, not the percentage, as the per-breath signal.",
+    "Confirmed the 2026-06-12 hazard handling: append to breath_log.json with ensure_ascii=True; load via encoding='utf-8'. No truncation this run.",
+    "5th consecutive autonomous breath: HEAD-sum is saturated (all spine at vr_testing, a human-in-headset gate). Voicing is the only honest autonomous lever left. Recommend continuing 5-artifact voicing batches, but flag for the user that further pipeline progress REQUIRES a VR walk session - autonomous breaths cannot cross stage 6."
+   ],
+   "files_changed": [
+    "commons/artifacts/lenia_continuous/lenia_continuous.gd",
+    "commons/artifacts/monte_carlo_estimator/monte_carlo_estimator.gd",
+    "commons/artifacts/perceptron_playground/perceptron_playground.gd",
+    "commons/artifacts/hilbert_hotel/hilbert_hotel.gd",
+    "commons/artifacts/rejection_sampling_demo/rejection_sampling_demo.gd"
+   ],
+   "duration_minutes": 12
   }
  ]
 }

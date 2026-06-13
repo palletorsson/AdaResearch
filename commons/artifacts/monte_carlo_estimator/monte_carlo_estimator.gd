@@ -10,6 +10,16 @@ extends Node3D
 
 class_name MonteCarloEstimator
 
+# @identity
+# essence: a square dartboard with an inscribed circle. Darts (up to max_darts, ~20/sec) rain down at uniform random positions; each is coloured by whether it landed inside the circle (blue) or outside (red). The running estimate π ≈ 4 × inside/total ticks toward 3.14159 and visibly jitters less as the count climbs — the law of large numbers made watchable.
+# desire: learner feels convergence in their gut — early estimates swing wildly, late ones barely move; precision is bought with samples, and each extra digit costs roughly 100× more darts.
+# critical_parameter: max_darts (and darts_per_second) — how many samples accumulate; more darts = tighter estimate but with diminishing 1/√N returns. board_size scales the geometry without changing the ratio.
+# triggers: _process throws darts each frame while auto_throw is true, classifying each against the inscribed circle and re-rendering the running π estimate into the Label3D; stops at max_darts.
+# emerges: a stable number (π) precipitating out of pure randomness through accumulation — order from noise, the QFEP move made arithmetic.
+# needs: Label3D for the live estimate [self]; MeshInstance3D dart markers + circle/grid overlay [self]; RandomNumberGenerator [self]
+# relationships: sibling to rejection_sampling_demo (both accept/reject random points against a region) and to the randomness sequence's law-of-large-numbers artifacts; the estimation counterpart to noise's generation. A worked example of "order emerges from randomness through accumulation."
+# truth: randomness is not the opposite of precision — it is a slow road to it. Throw enough darts and the ratio of areas writes π for you, one decimal place per hundredfold of patience.
+
 # -- Constants --
 const BOARD_THICKNESS := 0.02
 const GRID_LINE_THICKNESS := 0.002

@@ -1,6 +1,16 @@
 extends Node3D
 class_name LeniaContinuous
 
+# @identity
+# essence: a continuous cellular automaton on a 64×64 floor — not Conway's black-and-white cells but a smooth [0,1] field that breathes. A ring-shaped kernel samples each cell's neighbourhood, a bell-curve growth function (growth_mu 0.135, growth_sigma 0.015) decides whether each point should rise or fall, and the result is integrated forward by a small dt every 0.05s. Lifelike blobs coalesce out of seeded noise and drift across the texture, mapped black→blue→cyan.
+# desire: learner sees that "alive-looking" needs neither discreteness nor rules-per-cell — continuity plus one bell curve is enough for organisms to emerge, persist, and move.
+# critical_parameter: growth_mu / growth_sigma — the centre and width of the bell decide between death (everything decays to 0), explosion (everything saturates to 1), and the narrow band where Lenia organisms live; kernel_radius sets the interaction scale.
+# triggers: _ready() seeds the grid from hash("lenia_continuous"), precomputes the ring kernel weights/offsets, builds the display mesh+texture; _process accumulates time and steps the convolution+growth integration into _grid_next, then swaps and re-uploads the image.
+# emerges: self-organising blobs — coherent travelling structures written nowhere in the code, only in the interaction of kernel and growth function. The continuous analogue of a glider.
+# needs: PackedFloat32Array grids + precomputed kernel [self]; ImageTexture on a StandardMaterial3D quad [self]; a seed for reproducibility
+# relationships: the continuous cousin of the discrete CA artifacts (Conway life, ca_surface) in cellularautomata; sibling to reaction-diffusion and softbody_flora as field-based emergence substrates. Where halting_workbench shows computation's limit, Lenia shows computation's lifelikeness.
+# truth: life is not a property of cells but of dynamics. Make the rule continuous and tune one bell curve to its living band, and organisms appear — they are the dynamics, not the grid.
+
 ## Lenia — continuous cellular automaton producing smooth lifelike organisms.
 ## Uses a ring-shaped kernel, bell-curve growth function, and continuous [0,1] states.
 ## Displayed as an animated floor texture with black→blue→cyan color mapping.
