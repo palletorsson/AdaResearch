@@ -1,0 +1,637 @@
+{
+  "concepts": [
+    "Coordinate system",
+    "Vector basics",
+    "Magnitude / length",
+    "Unit vector / normalize",
+    "Addition",
+    "Subtraction",
+    "Scaling",
+    "Dot product",
+    "Projection / reflection",
+    "Cross product / torque",
+    "Vector field / flow",
+    "Motion / velocity",
+    "Work (F.d)",
+    "Friction / drag",
+    "Projectile / launch",
+    "Centripetal",
+    "Gravity / orbit",
+    "Spring / Hooke",
+    "Pendulum",
+    "Momentum / collision",
+    "Restitution / bounce",
+    "Lever / balance",
+    "Wind / weather",
+    "Force field (zone)",
+    "General force / pad"
+  ],
+  "groups": {
+    "Coordinate system": [
+      {
+        "lookup": "CoordinateSystem3M",
+        "name": "CoordinateSystem3M",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "basis_vectors_rig",
+        "name": "Basis Vectors Rig",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "coordinate_system_switcher",
+        "name": "Coordinate System Switcher",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "coordinates",
+        "name": "coordinates",
+        "registry": "vectors.json",
+        "has_image": true
+      }
+    ],
+    "Vector basics": [
+      {
+        "lookup": "VectorBasics",
+        "name": "VectorBasics",
+        "registry": "vectors.json",
+        "has_image": true
+      }
+    ],
+    "Magnitude / length": [
+      {
+        "lookup": "ForceMagnitudeDemo",
+        "name": "ForceMagnitudeDemo",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "example_1_5_vector_magnitude_vr",
+        "name": "Vector Magnitude VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_field_visualizer",
+        "name": "Vector Field Visualizer",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_magnitude_demo",
+        "name": "Vector Magnitude",
+        "registry": "vectors.json",
+        "has_image": true
+      }
+    ],
+    "Unit vector / normalize": [
+      {
+        "lookup": "example_1_6_vector_normalize_vr",
+        "name": "Vector Normalize VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_normalize_demo",
+        "name": "Vector Normalization",
+        "registry": "vectors.json",
+        "has_image": true
+      }
+    ],
+    "Addition": [
+      {
+        "lookup": "VectorAddition",
+        "name": "VectorAddition",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "combined_forces_demo",
+        "name": "Combined Forces Demo",
+        "registry": "vectors_demos.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_add",
+        "name": "Vector Addition (a + b, two-pad console)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "vector_addition_demo",
+        "name": "Vector Addition",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_addition_walk",
+        "name": "Vector Addition Walk (Room Scale)",
+        "registry": "vectors.json",
+        "has_image": false
+      },
+      {
+        "lookup": "vector_addition_xl",
+        "name": "Vector Addition (Walk-Inside)",
+        "registry": "vectors.json",
+        "has_image": false
+      },
+      {
+        "lookup": "vector_addition_xl_laser",
+        "name": "Vector Addition (Laser, 4 m+)",
+        "registry": "vectors.json",
+        "has_image": false
+      }
+    ],
+    "Subtraction": [
+      {
+        "lookup": "VectorSubtraction",
+        "name": "VectorSubtraction",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "example_1_3_vector_subtraction_vr",
+        "name": "Vector Subtraction VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "hl_turret_vectors",
+        "name": "Half-Life Turret - Vector Compendium",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "laser_turret",
+        "name": "Laser Turret",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "turret_boll_infoboard",
+        "name": "Turret-Boll Vector Diagram",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_drone",
+        "name": "vector_drone",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_joint_playground",
+        "name": "Vector-Joint Playground",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_sub",
+        "name": "Vector Subtraction (a − b, two-pad console)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "vector_subtraction_demo",
+        "name": "Vector Subtraction",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_subtraction_xl_laser",
+        "name": "Vector Subtraction (Laser, 4 m+)",
+        "registry": "vectors.json",
+        "has_image": false
+      }
+    ],
+    "Dot product": [
+      {
+        "lookup": "dot_aligner",
+        "name": "Dot-Aligner (aim · foe = mercy)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "dot_product_projector",
+        "name": "Dot Product Projector",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_dot_product_xl",
+        "name": "Dot Product (Walk-Inside)",
+        "registry": "vectors.json",
+        "has_image": false
+      }
+    ],
+    "Projection / reflection": [
+      {
+        "lookup": "VectorProjectionReflection",
+        "name": "VectorProjectionReflection",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "normal_force_demo",
+        "name": "Normal Force & Reflection Demo",
+        "registry": "vectors_demos.json",
+        "has_image": true
+      },
+      {
+        "lookup": "projection_shadow",
+        "name": "Projection Shadow ((a·n̂)n̂ as a shadow)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "vector_projection_demo",
+        "name": "Vector Projection",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_projection_reflection_xl",
+        "name": "Projection & Reflection (Walk-Inside)",
+        "registry": "vectors.json",
+        "has_image": false
+      },
+      {
+        "lookup": "vector_reflection_demo",
+        "name": "Vector Reflection Demo",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "Cross product / torque": [
+      {
+        "lookup": "VectorCrossProduct",
+        "name": "VectorCrossProduct",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "VectorTorque",
+        "name": "VectorTorque",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "cross_product_demo",
+        "name": "Cross Product Demo",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "torque_crank",
+        "name": "Torque Crank (r × F you can feel)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "torque_demo",
+        "name": "Torque Demo",
+        "registry": "vectors_demos.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_cross_product_xl",
+        "name": "Cross Product (Walk-Inside)",
+        "registry": "vectors.json",
+        "has_image": false
+      }
+    ],
+    "Vector field / flow": [
+      {
+        "lookup": "VectorFieldFlow",
+        "name": "VectorFieldFlow",
+        "registry": "vectors.json",
+        "has_image": true
+      }
+    ],
+    "Motion / velocity": [
+      {
+        "lookup": "VectorMotion",
+        "name": "VectorMotion",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "VectorThrowing",
+        "name": "VectorThrowing",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "bubble_blaster",
+        "name": "Bubble Blaster (output velocity vector)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "example_1_7_motion_101_velocity_vr",
+        "name": "Motion 101 Velocity VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+        "name": "Motion 101 Velocity and Constant Acceleration VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+        "name": "Motion 101 Velocity and Random Acceleration VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "throw_ball",
+        "name": "throw_ball",
+        "registry": "vectors.json",
+        "has_image": true
+      }
+    ],
+    "Work (F.d)": [
+      {
+        "lookup": "VectorDotProduct",
+        "name": "VectorDotProduct",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "VectorWorkbench",
+        "name": "Vector Workbench",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "force_mower",
+        "name": "Force Mower (W = F d cos θ)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "work_energy_demo",
+        "name": "Work-Energy Demo",
+        "registry": "vectors_demos.json",
+        "has_image": true
+      }
+    ],
+    "Friction / drag": [
+      {
+        "lookup": "drag_lane",
+        "name": "Drag Lane (F = -b·v you feel)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "wedge_slide",
+        "name": "Wedge Slide (inclined-plane free body)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "Projectile / launch": [
+      {
+        "lookup": "firework_burst",
+        "name": "Firework Burst (projectile fountain)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "launch_arc",
+        "name": "Launch Arc (projectile motion)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "return_launcher",
+        "name": "Return Launcher (the way home)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "turret_targeting",
+        "name": "Turret Targeting",
+        "registry": "vectors_demos.json",
+        "has_image": true
+      }
+    ],
+    "Centripetal": [
+      {
+        "lookup": "circle_train",
+        "name": "Circle Train (centripetal force, a = v²/r)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "Gravity / orbit": [
+      {
+        "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
+        "name": "Attraction and Orbit",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "gravity_gun_test_scene",
+        "name": "gravity_gun_test_scene",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "orbit_pair",
+        "name": "Orbit Pair (gravity, F = G m₁m₂/r²)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "Spring / Hooke": [
+      {
+        "lookup": "slingshot_pull",
+        "name": "Slingshot (elastic launch, PE = 1/2 k x^2)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "spring_bob",
+        "name": "Spring (F = −k x)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "Pendulum": [
+      {
+        "lookup": "pendulum_swing",
+        "name": "Pendulum (T = 2π√(L/g))",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "Momentum / collision": [
+      {
+        "lookup": "collision_carts",
+        "name": "Collision Carts (momentum exchange)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "momentum_cradle",
+        "name": "Momentum Cradle (p = mv conserved)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "Restitution / bounce": [
+      {
+        "lookup": "bounce_well",
+        "name": "Bounce Well (restitution)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "example_1_1_bouncing_ball_with_no_vectors_vr",
+        "name": "Bouncing Ball with No Vectors VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "example_1_2_bouncing_ball_with_vectors_vr",
+        "name": "Bouncing Ball with Vectors VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+        "name": "3D Bouncing Ball",
+        "registry": "vectors.json",
+        "has_image": true
+      }
+    ],
+    "Lever / balance": [
+      {
+        "lookup": "calder_mobile",
+        "name": "Calder Mobile (balanced, real weights)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "calder_object_mobile",
+        "name": "Calder Mobile (project primitives)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "lever_balance",
+        "name": "Lever (τ = F·d)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "Wind / weather": [
+      {
+        "lookup": "weather_vane",
+        "name": "Weather Vane (wind ∝ v²)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "weather_vector_field",
+        "name": "Weather Vector Field — Storm Chamber",
+        "registry": "vectors_demos.json",
+        "has_image": true
+      }
+    ],
+    "Force field (zone)": [
+      {
+        "lookup": "force_field_zone",
+        "name": "Force Field Zone (a force made into a place)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "vector_machine",
+        "name": "Vector Machine (the dial of gravity)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      }
+    ],
+    "General force / pad": [
+      {
+        "lookup": "VectorForces",
+        "name": "VectorForces",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "ball_dropper",
+        "name": "Ball Dropper",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "destructible_marching_cube",
+        "name": "destructible_marching_cube",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "destructibles_test_scene",
+        "name": "destructibles_test_scene",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "example_1_4_vector_multiplication_vr",
+        "name": "Vector Multiplication VR",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+        "name": "Accelerate and Decelerate",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "force_cube",
+        "name": "Force Cube (a vector you hold)",
+        "registry": "vectors_demos.json",
+        "has_image": false
+      },
+      {
+        "lookup": "sentry_turret",
+        "name": "Sentry Turret",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "sphere_splitting_showcase",
+        "name": "sphere_splitting_showcase",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vector_translation_demo",
+        "name": "Vector Translation",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vectorline",
+        "name": "vectorline",
+        "registry": "vectors.json",
+        "has_image": true
+      },
+      {
+        "lookup": "vectorpoint",
+        "name": "VectorPoint",
+        "registry": "vectors.json",
+        "has_image": true
+      }
+    ]
+  }
+}
