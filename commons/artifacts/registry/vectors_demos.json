@@ -1968,6 +1968,109 @@
 				"measured_footprint_cells": 6,
 				"footprint_source": "designed"
 			}
+		},
+		"force_field_zone": {
+			"lookup_name": "force_field_zone",
+			"scene": "res://commons/artifacts/force_field_zone/force_field_zone.tscn",
+			"class_name": "ForceFieldZone",
+			"name": "Force Field Zone (a force made into a place)",
+			"description": "A 4 m cube of space where one vector replaces gravity. Throw a cube in - or step in yourself - and inside the field the only force is field_vector: point it down and everything falls into the void below; point it up-and-across and the same cube (and the same player) is carried to the far side. RigidBodies inside get gravity_scale 0 and velocity += field·dt; the player_body gets velocity += (field − its gravity)·dt. The wireframe cube, the grid of field-line arrows and the central vector show which way the world pushes. Driven by the vector_machine via group 'force_field'.",
+			"category": "vectors",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"field",
+				"vector",
+				"gravity",
+				"void",
+				"interactive"
+			],
+			"parameters": {
+				"size": "cube edge in metres (default 4)",
+				"field_vector": "the force vector (default 0,-9.8,0)",
+				"grid_n": "field-line arrows per axis (default 3)",
+				"emissive": "Bool"
+			},
+			"dev_themes": [
+				"forces",
+				"vectors",
+				"gameplay"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 16,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "any",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 2,
+				"cluster_with": [
+					"vector_machine"
+				],
+				"preferred_zone": "center",
+				"measured_footprint_cells": 16,
+				"footprint_source": "designed"
+			}
+		},
+		"vector_machine": {
+			"lookup_name": "vector_machine",
+			"scene": "res://commons/artifacts/vector_machine/vector_machine.tscn",
+			"class_name": "VectorMachine",
+			"name": "Vector Machine (the dial of gravity)",
+			"description": "A console that aims and sizes the one vector ruling every force_field in the room. Three grabbable sliders - PITCH (down to up), YAW (which way across) and FORCE (how hard) - compose a single force vector, drawn live as a big arrow, and pushed straight into every force_field via set_field_vector(). The default is gravity: straight down, 9.8. Tilt it up-and-across and the void next door becomes a bridge.",
+			"category": "vectors",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"vector",
+				"control",
+				"sliders",
+				"force",
+				"interactive"
+			],
+			"parameters": {
+				"force_max": "max magnitude the FORCE slider reaches (default 15)",
+				"emissive": "Bool"
+			},
+			"dev_themes": [
+				"forces",
+				"vectors",
+				"controls"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "front",
+				"isolation": 1,
+				"cluster_with": [
+					"force_field_zone"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "designed"
+			}
 		}
 	}
 }
