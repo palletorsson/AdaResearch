@@ -14,51 +14,30 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 
 
+def _ser(o, ind: int) -> str:
+    """Canonical compact-rows serialiser: dicts indent=2, scalar-only lists (the grid
+    rows, tags, etc.) on one line, lists-with-nesting multi-line. Matches the format the
+    live maps + the voxel-editor use (e.g. ForcesArena)."""
+    pad = "  " * ind
+    cpad = "  " * (ind + 1)
+    if isinstance(o, dict):
+        if not o:
+            return "{}"
+        return "{\n" + ",\n".join('%s"%s": %s' % (cpad, k, _ser(v, ind + 1)) for k, v in o.items()) + "\n" + pad + "}"
+    if isinstance(o, list):
+        if not o:
+            return "[]"
+        if all(not isinstance(e, (dict, list)) for e in o):
+            return json.dumps(o, separators=(",", ":"), ensure_ascii=False)
+        return "[\n" + ",\n".join(cpad + _ser(e, ind + 1) for e in o) + "\n" + pad + "]"
+    return json.dumps(o, ensure_ascii=False)
+
+
 def compact_map(path: Path) -> str:
-    """Reformat a map_data.json to readable-compact format."""
+    """Reformat a map_data.json to readable compact-rows format (lossless)."""
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
-
-    # Build output with controlled formatting
-    lines = ["{"]
-
-    # map_info — expanded
-    if "map_info" in data:
-        lines.append('  "map_info": ' + json.dumps(data["map_info"], indent=4, ensure_ascii=False).replace("\n", "\n  ") + ",")
-
-    # All other top-level keys except layers — expanded
-    for key in data:
-        if key in ("map_info", "layers"):
-            continue
-        val = json.dumps(data[key], indent=4, ensure_ascii=False)
-        lines.append(f'  "{key}": ' + val.replace("\n", "\n  ") + ",")
-
-    # layers — compact: one row per line
-    if "layers" in data:
-        lines.append('  "layers": {')
-        layer_names = list(data["layers"].keys())
-        for li, layer_name in enumerate(layer_names):
-            grid = data["layers"][layer_name]
-            lines.append(f'    "{layer_name}": [')
-            for ri, row in enumerate(grid):
-                row_str = json.dumps(row, ensure_ascii=False)
-                comma = "," if ri < len(grid) - 1 else ""
-                lines.append(f"      {row_str}{comma}")
-            comma = "," if li < len(layer_names) - 1 else ""
-            lines.append(f"    ]{comma}")
-        lines.append("  }")
-
-    # Close
-    # Remove trailing comma from last non-layers entry if layers is last
-    result = "\n".join(lines)
-    if result.endswith(","):
-        result = result[:-1]
-    result += "\n}\n"
-
-    # Fix double trailing commas before "layers"
-    result = result.replace(",\n  \"layers\"", ",\n  \"layers\"")
-
-    return result
+    return _ser(data, 0) + "\n"
 
 
 def process_file(path: Path):

@@ -12,13 +12,7 @@
       "category": "forces",
       "difficulty": "advanced",
       "estimated_time": "10-15 minutes",
-      "learning_objectives": [
-        "Three-body problem and n-body simulation",
-        "Two-body attraction and orbital dynamics",
-        "Chaos attractors and strange dynamics",
-        "Force-directed graph layout",
-        "Particle systems and springs"
-      ],
+      "learning_objectives": ["Three-body problem and n-body simulation","Two-body attraction and orbital dynamics","Chaos attractors and strange dynamics","Force-directed graph layout","Particle systems and springs"],
       "spatial_temperature": 0.45
     },
     "name": "Forces Chaos: N-Body & Strange Attractors",
@@ -41,23 +35,11 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.3,
-      0.3,
-      0.45
-    ],
+    "ambient_color": [0.3,0.3,0.45],
     "ambient_energy": 0.45,
     "directional_light": {
-      "color": [
-        1.0,
-        0.8,
-        0.65
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
+      "color": [1.0,0.8,0.65],
+      "direction": [-0.4,-0.7,-0.4],
       "enabled": true,
       "energy": 0.9
     }
@@ -65,11 +47,7 @@
   "settings": {
     "auto_reveal_on_entry": false,
     "background": {
-      "color": [
-        0.1,
-        0.12,
-        0.3
-      ],
+      "color": [0.1,0.12,0.3],
       "type": "sky"
     },
     "cube_size": 1.0,

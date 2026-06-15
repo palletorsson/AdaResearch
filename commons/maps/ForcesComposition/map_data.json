@@ -12,12 +12,7 @@
       "category": "forces",
       "difficulty": "intermediate",
       "estimated_time": "10-15 minutes",
-      "learning_objectives": [
-        "Force superposition: multiple forces as vector sum",
-        "Work as dot product of force and displacement",
-        "Momentum conservation in collisions",
-        "Embodied vector addition at room scale"
-      ],
+      "learning_objectives": ["Force superposition: multiple forces as vector sum","Work as dot product of force and displacement","Momentum conservation in collisions","Embodied vector addition at room scale"],
       "spatial_temperature": 0.4
     },
     "name": "Forces Composition: Superposition and Energy",
@@ -40,23 +35,11 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.35,
-      0.35,
-      0.5
-    ],
+    "ambient_color": [0.35,0.35,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
-      "color": [
-        1.0,
-        0.95,
-        0.85
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
+      "color": [1.0,0.95,0.85],
+      "direction": [-0.4,-0.7,-0.4],
       "enabled": true,
       "energy": 1.2
     }
@@ -64,11 +47,7 @@
   "settings": {
     "auto_reveal_on_entry": true,
     "background": {
-      "color": [
-        0.15,
-        0.2,
-        0.4
-      ],
+      "color": [0.15,0.2,0.4],
       "type": "sky"
     },
     "cube_size": 1.0,

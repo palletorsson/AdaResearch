@@ -12,12 +12,7 @@
       "category": "forces",
       "difficulty": "intermediate",
       "estimated_time": "10-15 minutes",
-      "learning_objectives": [
-        "Attractor systems and gravitational interaction",
-        "Force fields and superposition",
-        "Springs, oscillation, and Hooke's law",
-        "Particle systems and statistical emergence"
-      ],
+      "learning_objectives": ["Attractor systems and gravitational interaction","Force fields and superposition","Springs, oscillation, and Hooke's law","Particle systems and statistical emergence"],
       "spatial_temperature": 0.4
     },
     "name": "Forces Systems: Attractors, Fields, Springs & Particles",
@@ -40,23 +35,11 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
+      "color": [1.0,0.9,0.8],
+      "direction": [-0.4,-0.7,-0.4],
       "enabled": true,
       "energy": 1.2
     }
@@ -64,11 +47,7 @@
   "settings": {
     "auto_reveal_on_entry": false,
     "background": {
-      "color": [
-        0.15,
-        0.2,
-        0.4
-      ],
+      "color": [0.15,0.2,0.4],
       "type": "sky"
     },
     "cube_size": 1.0,
