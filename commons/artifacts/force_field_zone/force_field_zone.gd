@@ -15,14 +15,15 @@ class_name ForceFieldZone
 ## gravity_scale 0 + velocity += field·dt; the player_body: velocity += (field − its gravity)·dt).
 ## The vector_machine finds this via group "force_field" and calls set_field_vector().
 
-@export var size: float = 4.0
+@export var size: float = 5.0
 @export var field_vector: Vector3 = Vector3(0.0, -9.8, 0.0)   # default: gravity, down
 @export var edge_color: Color = Color(0.40, 0.78, 1.0)
 @export var arrow_color: Color = Color(0.55, 0.90, 1.0)
-@export var grid_n: int = 3
+
+const FLOW_SHADER := preload("res://commons/artifacts/force_field_zone/force_flow.gdshader")
 
 var _area: Area3D
-var _arrows: Array[Node3D] = []          # the field-line arrows (re-pointed on change)
+var _flow_mat: ShaderMaterial            # the force-flow shader on the six faces
 var _central: Node3D
 var _readout: Label3D
 var _scale_mat: StandardMaterial3D
@@ -38,13 +39,11 @@ func _ready() -> void:
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("size"): size = float(config_data["size"])
-	if config_data.has("grid_n"): grid_n = int(config_data["grid_n"])
 	if config_data.has("emissive"): emissive = bool(config_data["emissive"])
 	field_vector = _parse_vec(config_data.get("field_vector", field_vector))
 	edge_color = _parse_color(config_data.get("edge_color", edge_color), edge_color)
 	for c in get_children():
 		remove_child(c); c.queue_free()
-	_arrows.clear()
 	_build()
 
 
@@ -71,20 +70,18 @@ func _build() -> void:
 		add_child(_cylinder_between(c[e[0]], c[e[1]], 0.025, em))
 	for v in c:
 		add_child(_sphere(v, 0.05, em))
-	# faint volume
-	add_child(_box(Vector3(0, h, 0), Vector3.ONE * size, _haze(edge_color)))
 
-	# --- the field-line arrows (a grid, re-pointed by the vector) ---------------
-	var step := size / float(grid_n + 1)
-	for ix in range(grid_n):
-		for iy in range(grid_n):
-			for iz in range(grid_n):
-				var p := Vector3((ix + 1) * step - h, (iy + 1) * step, (iz + 1) * step - h)
-				var a := Node3D.new()
-				a.position = p
-				add_child(a)
-				a.add_child(_arrow(Vector3.ZERO, Vector3(0, step * 0.6, 0), 0.018, _glow_mat(arrow_color, 1.0)))
-				_arrows.append(a)
+	# --- the force shader on the six faces (chevrons stream the way F points) ----
+	_flow_mat = ShaderMaterial.new()
+	_flow_mat.shader = FLOW_SHADER
+	_flow_mat.set_shader_parameter("flow_color", arrow_color)
+	var faces := MeshInstance3D.new()
+	faces.name = "Faces"
+	var bm := BoxMesh.new(); bm.size = Vector3.ONE * size
+	faces.mesh = bm
+	faces.material_override = _flow_mat
+	faces.position = Vector3(0, h, 0)
+	add_child(faces)
 
 	# --- the big central vector + readout ---------------------------------------
 	_central = Node3D.new(); _central.position = Vector3(0, h, 0); add_child(_central)
@@ -101,8 +98,9 @@ func _apply_vector() -> void:
 	var mag: float = field_vector.length()
 	var dir: Vector3 = field_vector.normalized() if mag > 0.001 else Vector3.DOWN
 	var b := Basis(_basis_y_to(dir))
-	for a in _arrows:
-		a.basis = b
+	if _flow_mat:
+		_flow_mat.set_shader_parameter("force_dir", dir)
+		_flow_mat.set_shader_parameter("force_mag", mag)
 	if _central:
 		_central.basis = b
 		_central.scale = Vector3.ONE * clampf(mag / 9.8, 0.3, 2.2)
