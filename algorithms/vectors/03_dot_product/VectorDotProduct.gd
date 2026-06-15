@@ -16,7 +16,7 @@ var vector_a: Node3D
 var vector_b: Node3D
 var projection_vector: Node3D
 var rejection_vector: Node3D
-var info_label: Label3D
+var info_label: Label
 var angle_label: Label3D
 var readout_label: Label3D
 var magnitude_slider: Node3D
@@ -73,7 +73,16 @@ func build_scene() -> void:
 	environment_root.add_child(_proj_dot)
 
 	info_label = create_info_panel("Dot Product", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "A . B = |A||B|cos(theta)", "Projection and angle")
-	angle_label = create_info_panel("theta", Vector3(0.0, 0.22, 0.0))
+	# angle label — a small billboarded theta, repositioned each frame near the arc
+	angle_label = Label3D.new()
+	angle_label.text = "theta"
+	angle_label.font_size = 44
+	angle_label.modulate = Color(0.85, 0.88, 1.0)
+	angle_label.outline_size = 8
+	angle_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	angle_label.no_depth_test = true
+	angle_label.position = Vector3(0.0, 0.22, 0.0)
+	environment_root.add_child(angle_label)
 
 	# Live readout: the dot value and the angle between, big and billboarded.
 	readout_label = create_readout(Vector3(0.0, 1.8, 0.0), Color(0.6, 1.0, 0.7, 1.0))
