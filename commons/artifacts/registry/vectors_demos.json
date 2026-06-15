@@ -2230,6 +2230,61 @@
 				"measured_footprint_cells": 9,
 				"footprint_source": "designed"
 			}
+		},
+		"pendulum_hall": {
+			"lookup_name": "pendulum_hall",
+			"scene": "res://commons/artifacts/pendulum_hall/pendulum_hall.tscn",
+			"class_name": "PendulumHall",
+			"name": "Pendulum Hall (walk-in)",
+			"description": "The body-scale, walk-in twin of pendulum_swing: a real, large pendulum (default L = 4.6 m) hung from a 6 m gantry, swinging live at its true period T = 2π√(L/g) = ~4.3 s. The restoring force mg sin θ hauls the bob back through bottom-dead-centre; a glowing arc on the floor records the swept path; the weight / tension / restoring vectors ride the bob at the scale of your own body. Stand in the hall and watch the giant bob pass. The large half of the 'intimate toy -> walk-in installation' pair (clusters with pendulum_swing).",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"pendulum",
+				"gravity",
+				"tension",
+				"walk-in",
+				"installation",
+				"large"
+			],
+			"parameters": {
+				"arm_length": "pendulum length L in m (default 4.6) - sets the period",
+				"amplitude": "swing amplitude rad (default 0.42)",
+				"pivot_height": "gantry height (default 6.0)",
+				"bob_color": "the bob",
+				"emissive": "Bool"
+			},
+			"dev_themes": [
+				"forces",
+				"pendulum",
+				"oscillation"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 12,
+				"clearance": {
+					"front": 4,
+					"back": 4,
+					"left": 4,
+					"right": 4
+				},
+				"player_position": "any",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 2,
+				"cluster_with": [
+					"pendulum_swing"
+				],
+				"preferred_zone": "center",
+				"measured_footprint_cells": 12,
+				"footprint_source": "designed"
+			}
 		}
 	}
 }
