@@ -2291,7 +2291,7 @@
 			"scene": "res://commons/artifacts/centrifuge_ring/centrifuge_ring.tscn",
 			"class_name": "CentrifugeRing",
 			"name": "Centrifuge Ring (walk-in centripetal)",
-			"description": "The body-scale, walk-in twin of circle_train: a pod laps a big neon ring (default r = 3.4 m) while its velocity (tangent) and centripetal force (inward, proportional to v²/r) ride it at your scale. Crank the speed and the velocity arrow stretches while the inward arrow explodes - a = v²/r, why fast turns throw you. Stand inside the loop and watch the pull toward the centre you never reach. The large half of the circle_train pair.",
+			"description": "The body-scale, walk-in twin of circle_train: a pod laps a big neon ring while the velocity (tangent) and centripetal force (inward, ∝ v²/r) ride it at your own scale. Velocity is always tangent, the force always toward the centre you never reach; crank the speed and the inward arrow explodes as the square. a = v²/r made into a ridden loop you stand inside.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"include_in_map_data": true,
@@ -2303,37 +2303,34 @@
 				"force",
 				"centripetal",
 				"circular",
-				"velocity",
 				"walk-in",
-				"large",
-				"installation"
+				"installation",
+				"large"
 			],
 			"parameters": {
 				"radius": "ring radius m (default 3.4)",
 				"speed": "0..1 angular speed",
-				"track_color": "neon",
 				"emissive": "Bool"
 			},
 			"dev_themes": [
 				"forces",
-				"centripetal"
+				"centripetal",
+				"circular-motion"
 			],
 			"spatial_needs": {
 				"platform": "none",
 				"footprint_cells": 12,
 				"clearance": {
-					"front": 4,
-					"back": 4,
-					"left": 4,
-					"right": 4
+					"front": 3,
+					"back": 3,
+					"left": 3,
+					"right": 3
 				},
 				"player_position": "any",
 				"wall_backing": false,
 				"orientation": "any",
 				"isolation": 2,
-				"cluster_with": [
-					"circle_train"
-				],
+				"cluster_with": [],
 				"preferred_zone": "center",
 				"measured_footprint_cells": 12,
 				"footprint_source": "designed"
@@ -2344,7 +2341,7 @@
 			"scene": "res://commons/artifacts/spring_tower/spring_tower.tscn",
 			"class_name": "SpringTower",
 			"name": "Spring Tower (walk-in Hooke)",
-			"description": "The body-scale, walk-in twin of spring_bob: a heavy mass bobs on a giant coil at its real period T = 2π√(m/k), the helix stretching and compressing live while the weight (down) and the spring force (up, longer the more it's stretched) trade dominance - F = −kx, the signature of everything that keeps time. Stand beside the tower and watch it tick. The large half of the spring_bob pair.",
+			"description": "The body-scale, walk-in twin of spring_bob: a heavy mass bobs on a giant coil at its real period T = 2π√(m/k); the coil stretches and compresses while the spring force (−kx) and the weight trade places at body scale. F = −kx, the signature of everything that keeps time. Stand beside the tower and watch it tick.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"include_in_map_data": true,
@@ -2358,14 +2355,12 @@
 				"hooke",
 				"oscillation",
 				"walk-in",
-				"large",
-				"installation"
+				"installation",
+				"large"
 			],
 			"parameters": {
-				"stiffness": "0..1 spring k",
+				"stiffness": "0..1 spring stiffness k",
 				"top_y": "gantry height (default 5.6)",
-				"coil_color": "the coil",
-				"mass_color": "the mass",
 				"emissive": "Bool"
 			},
 			"dev_themes": [
@@ -2377,18 +2372,16 @@
 				"platform": "none",
 				"footprint_cells": 9,
 				"clearance": {
-					"front": 4,
-					"back": 4,
-					"left": 4,
-					"right": 4
+					"front": 3,
+					"back": 3,
+					"left": 3,
+					"right": 3
 				},
 				"player_position": "any",
 				"wall_backing": false,
 				"orientation": "any",
 				"isolation": 2,
-				"cluster_with": [
-					"spring_bob"
-				],
+				"cluster_with": [],
 				"preferred_zone": "center",
 				"measured_footprint_cells": 9,
 				"footprint_source": "designed"
