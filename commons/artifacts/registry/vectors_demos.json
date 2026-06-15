@@ -2123,6 +2123,113 @@
 				"measured_footprint_cells": 4,
 				"footprint_source": "designed"
 			}
+		},
+		"calder_mobile": {
+			"lookup_name": "calder_mobile",
+			"scene": "res://commons/artifacts/calder_mobile/calder_mobile.tscn",
+			"class_name": "CalderMobile",
+			"name": "Calder Mobile (balanced, real weights)",
+			"description": "A large hanging Calder mobile that is actually balanced. Every arm obeys the lever law τ = w·d: the two children of each rod are weighed, then the pivot is placed so w_left·d_left = w_right·d_right - the heavier shape rides the shorter arm - and the whole thing hangs level from a single ceiling point. Leaf masses are real: each flat painted disc is sheet aluminium, mass = π r²·t·ρ (t = 3 mm, ρ = 2700 kg/m³). Calder's primaries - red, yellow, blue, black, white. A plaque states the real total mass and the balance principle. Improves on the project's earlier calder_mobile_primaries, which was only a palette totem, not a balanced mobile.",
+			"category": "vectors",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"lever",
+				"torque",
+				"balance",
+				"calder",
+				"mobile",
+				"sculpture",
+				"art"
+			],
+			"parameters": {
+				"seed": "tree shape (default 4)",
+				"depth": "tree depth (default 4)",
+				"use_objects": "false = discs, true = project primitives",
+				"top_y": "ceiling mount height (default 3.6)",
+				"emissive": "Bool"
+			},
+			"dev_themes": [
+				"forces",
+				"lever",
+				"balance",
+				"art"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 3,
+					"back": 3,
+					"left": 3,
+					"right": 3
+				},
+				"player_position": "any",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "center",
+				"measured_footprint_cells": 9,
+				"footprint_source": "designed"
+			}
+		},
+		"calder_object_mobile": {
+			"lookup_name": "calder_object_mobile",
+			"scene": "res://commons/artifacts/calder_mobile/calder_object_mobile.tscn",
+			"class_name": "CalderMobile",
+			"name": "Calder Mobile (project primitives)",
+			"description": "The balanced Calder mobile (τ = w·d at every arm) but hung with the project's own ordinary objects - point, sphere, pyramid, arch - as the weights instead of painted discs. Each primitive carries a plausible mass and the arms balance those masses by the lever law, so the foundational shapes of the curriculum drift in equilibrium. A plaque states the total mass. Same CalderMobile script with use_objects = true.",
+			"category": "vectors",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"tags": [
+				"force",
+				"lever",
+				"balance",
+				"calder",
+				"mobile",
+				"primitives",
+				"sculpture"
+			],
+			"parameters": {
+				"seed": "tree shape (default 13)",
+				"depth": "tree depth (default 3)",
+				"emissive": "Bool"
+			},
+			"dev_themes": [
+				"forces",
+				"lever",
+				"balance",
+				"primitives"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 3,
+					"back": 3,
+					"left": 3,
+					"right": 3
+				},
+				"player_position": "any",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "center",
+				"measured_footprint_cells": 9,
+				"footprint_source": "designed"
+			}
 		}
 	}
 }
