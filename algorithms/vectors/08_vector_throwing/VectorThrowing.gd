@@ -42,7 +42,7 @@ var throw_balls: Array[Node3D] = []
 var target_cubes: Array[Node3D] = []
 var score_label: Label3D = null
 var instructions_label: Label3D = null
-var info_panel: Label3D = null
+var info_panel: Label = null
 var drone_container: Node3D = null
 
 # Trajectory Visualization

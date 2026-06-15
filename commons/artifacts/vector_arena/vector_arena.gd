@@ -70,8 +70,8 @@ var _ab_label: Label3D = null            # billboard beside the live arrow
 var _a_label: Label3D = null
 var _b_label: Label3D = null
 var _readout_label: Label3D = null       # big centered billboard
-var _info_label: Label3D = null          # two-column data | formula panel
-var _reflect_label: Label3D = null       # flashes the reflection arithmetic
+var _info_label: Label = null          # two-column data | formula panel
+var _reflect_label: Label = null         # flashes the reflection arithmetic
 var _wall_mesh: MeshInstance3D = null
 var _projectile_container: Node3D = null
 
