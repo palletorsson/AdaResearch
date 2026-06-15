@@ -1,10 +1,10 @@
 {
   "map_info": {
-    "name": "Vectors_Act4a_KineticForces",
-    "lookup_name": "Vectors_Act4a_KineticForces",
-    "title": "Kinetic Forces",
-    "description": "Act IV (part a) of the Vector & Forces field — the kinetic forces, at the size of your body. A park of five walk-in installations: push the mower and watch work fall as the handle rises (W = F d cos θ); walk air → water → honey and feel drag bill you for speed; step on the pad and be launched; stand inside the centrifuge ring and feel the inward pull grow with v²/r; stand at a barycenter while two bodies wheel around you. This is the act that closes at body scale. Teleporter onward to Act IV-b — oscillation and balance.",
-    "version": "vf-field-act4a",
+    "name": "Vectors_Act4b_Oscillation",
+    "lookup_name": "Vectors_Act4b_Oscillation",
+    "title": "Oscillation & Balance",
+    "description": "Act IV (part b) of the Vector & Forces field — the forces that keep time and hold the beam level. A park around a central Calder mobile (the lever law, drifting): a tall pendulum and a tall spring tower bracket it, a Newton's cradle hands momentum across, a bounce well taxes each fall, a weather vane bends to wind ∝ v², and a balance beam trades force for distance. Where Act IV-a's forces edit a path, these keep a rhythm. Teleporter onward to Act V — force as place.",
+    "version": "vf-field-act4b",
     "format": "json",
     "dimensions": {
       "width": 30,
@@ -15,43 +15,48 @@
       "difficulty": "intermediate",
       "category": "vectors_forces_field",
       "estimated_time": "10-14 minutes",
-      "act": "IV-a — kinetic forces",
-      "learning_objectives": ["Work (F·d cos θ)","Drag (F = −b·v)","Projectile launch","Centripetal (a = v²/r)","Gravity / orbit"]
+      "act": "IV-b — oscillation and balance",
+      "learning_objectives": ["Spring / Hooke (F = −kx)","Pendulum (T = 2π√(L/g))","Momentum / collision","Restitution / bounce","Lever / balance (τ = F·d)","Wind / drag ∝ v²"]
     }
   },
   "subtitles": {
     "intro": {
-      "text": "The forces, at the size of your body. Walk among them — each one a force bending a path.",
+      "text": "Oscillation and balance — the forces that keep time and hold the beam level.",
       "speaker": "Act IV",
       "level": 1
     },
-    "truth_work": {
-      "text": "The world only feels the part of a force that goes its way — W = F d cos θ.",
-      "speaker": "Work",
+    "truth_spring": {
+      "text": "A spring is honest — it returns exactly what it's given, which is why it keeps time.",
+      "speaker": "Spring",
       "level": 1
     },
-    "truth_drag": {
-      "text": "Drag is the world charging you rent on speed — pay in honey, glide free in air.",
-      "speaker": "Drag",
+    "truth_pendulum": {
+      "text": "A pendulum keeps time because the pull back is proportional to how far it's pulled.",
+      "speaker": "Pendulum",
       "level": 1
     },
-    "truth_projectile": {
-      "text": "A launch is a velocity you're given; gravity writes the rest.",
-      "speaker": "Projectile",
+    "truth_momentum": {
+      "text": "Momentum is motion that refuses to be destroyed, only handed on.",
+      "speaker": "Momentum",
       "level": 1
     },
-    "truth_centripetal": {
-      "text": "Going in a circle is constant acceleration toward a centre you never reach.",
-      "speaker": "Centripetal",
+    "truth_restitution": {
+      "text": "Every bounce is a tax on a fall — h' = e·h.",
+      "speaker": "Restitution",
       "level": 1
     },
-    "truth_gravity": {
-      "text": "An orbit is two things falling toward each other and missing, around a centre that belongs to neither.",
-      "speaker": "Gravity",
+    "truth_lever": {
+      "text": "A lever trades force for distance and never gets something for nothing — F₁d₁ = F₂d₂.",
+      "speaker": "Lever",
       "level": 1
     },
-    "truth_kinetic": {
-      "text": "Work, drag, launch, turn, fall — every one is a force bending a path. Forces are what edit motion.",
+    "truth_wind": {
+      "text": "Wind is air with somewhere to be; the force is in the speed, squared.",
+      "speaker": "Wind",
+      "level": 1
+    },
+    "truth_oscillation": {
+      "text": "Spring, pendulum, cradle, bounce, lever, wind — forces that repeat, conserve, and balance. These keep a rhythm.",
       "speaker": "Reflection",
       "level": 1
     }
@@ -114,9 +119,9 @@
     "utilities": [
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","t:Vectors_Act4b_Oscillation","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","t:Vectors_Act5_ForceAsPlace","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","an","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","sub:truth_kinetic","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","sub:truth_oscillation","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
@@ -124,19 +129,19 @@
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","sub:truth_pendulum","","","","","","","","","","","","","","sub:truth_spring","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","sub:truth_centripetal","","","","","","","","","","","","sub:truth_gravity","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","sub:truth_projectile","","","","","","","","","","","","","",""],
+      ["","","","","","","","sub:truth_wind","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","sub:truth_work","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","sub:truth_drag","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","sub:truth_momentum","","","","sub:truth_lever","","","","sub:truth_restitution","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","sub:intro","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","s","","","","","","","","","","","","","",""],
@@ -152,20 +157,20 @@
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","centrifuge_ring","","","","","","","","","","","","orbit_walk","","","","","","","",""],
+      ["","","","","","","","","pendulum_hall","","","","","","","","","","","","","","spring_tower","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","force_pad","","","","","","","","","","","","","",""],
+      ["","","","","","weather_vane","","","","","","","","","","calder_mobile","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-      ["","","","","","","","","force_mower","","","","","","","","","","","","drag_corridor","","","","","","","","",""],
+      ["","","","","","","","","","","","","","","","lever_balance","","","","","","","","","","","","","",""],
+      ["","","","","","","","","momentum_cradle","","","","","","","","","","","","","bounce_well","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
       ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
