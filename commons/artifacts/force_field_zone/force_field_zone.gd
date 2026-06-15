@@ -27,6 +27,7 @@ var _central: Node3D
 var _readout: Label3D
 var _scale_mat: StandardMaterial3D
 var _restore: Dictionary = {}            # body -> original gravity_scale
+var _pb: CharacterBody3D                  # cached player body (the thing with .velocity)
 
 
 func _ready() -> void:
@@ -135,18 +136,48 @@ func _physics_process(delta: float) -> void:
 				rb.gravity_scale = _restore[rb]
 			_restore.erase(rb)
 	# the player: while inside, net acceleration = the field (override its gravity)
-	var pb := get_tree().get_first_node_in_group("player_body")
-	if pb is Node3D and _point_inside((pb as Node3D).global_position):
+	var pb := _player_body()
+	if pb != null and _point_inside(pb.global_position):
 		var pg := Vector3(0.0, -9.8, 0.0)
 		var g = pb.get("gravity")
 		if g is Vector3: pg = g
-		pb.set("velocity", pb.get("velocity") + (f - pg) * delta)
+		pb.velocity += (f - pg) * delta
 
 
 func _point_inside(world_pos: Vector3) -> bool:
 	var local: Vector3 = to_local(world_pos) - Vector3(0, size * 0.5, 0)
 	var h := size * 0.5
 	return absf(local.x) < h and absf(local.y) < h and absf(local.z) < h
+
+
+# The "player_body" group can hold the XROrigin3D (a plain Node3D, no .velocity) rather
+# than the CharacterBody3D — so search for the body itself, then cache it.
+func _player_body() -> CharacterBody3D:
+	if is_instance_valid(_pb):
+		return _pb
+	for n in get_tree().get_nodes_in_group("player_body"):
+		if n is CharacterBody3D:
+			_pb = n as CharacterBody3D
+			return _pb
+	_pb = _find_charbody(get_tree().get_first_node_in_group("player_body"))
+	return _pb
+
+
+func _find_charbody(node: Node) -> CharacterBody3D:
+	if node == null:
+		return null
+	if node is CharacterBody3D:
+		return node as CharacterBody3D
+	for c in node.get_children():
+		var r := _find_charbody(c)
+		if r != null:
+			return r
+	var par := node.get_parent()
+	if par != null:
+		for c in par.get_children():
+			if c is CharacterBody3D:
+				return c as CharacterBody3D
+	return null
 
 
 func _haze(col: Color) -> StandardMaterial3D:
