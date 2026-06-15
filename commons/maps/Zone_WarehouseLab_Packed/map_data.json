@@ -1,0 +1,90 @@
+{
+  "map_info": {
+    "name": "Zone_WarehouseLab — packed",
+    "lookup_name": "Zone_WarehouseLab_Packed",
+    "title": "Packed",
+    "description": "The same artifact set as Zone_WarehouseLab, packed into the smallest walkable footprint: a corridor spine with bays sized to each artifact's body + front clearance. Spatial economy as the objective.",
+    "version": "pack-experiment-0.1",
+    "format": "json",
+    "created_from": "tools/pack_experiment.py",
+    "dimensions": {
+      "width": 7,
+      "depth": 8,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "lab",
+      "difficulty": "intermediate",
+      "archetype": "packed_spine",
+      "artifacts_placed": ["catapult","ForceMagnitudeDemo","exercise_1_8_solution_attraction_magnitude_vr","example_6_6_grab_vr","normal_force_demo","combined_forces_demo","centripetal_force_demo","force_vortex"],
+      "zone_legend": {
+        "E": "entry",
+        "T": "teaching",
+        "X": "exploration",
+        "Z": "exit",
+        ".": "void",
+        " ": "floor"
+      },
+      "zone_grid": [".XXX...",".XTX...",".XXX...",".XXX...",".XXXXX.","E     Z",".XXXXX.",".TTT..."]
+    }
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.3,0.32,0.4],
+    "ambient_energy": 0.85,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true
+  },
+  "layers": {
+    "structure": [
+      ["0","1","1","1","0","0","0"],
+      ["0","1","1","1","0","0","0"],
+      ["0","1","1","1","0","0","0"],
+      ["0","1","1","1","0","0","0"],
+      ["0","1","1","1","1","1","0"],
+      ["1","1","1","1","1","1","1"],
+      ["0","1","1","1","1","1","0"],
+      ["0","1","1","1","0","0","0"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      ["sp"," "," "," "," "," ","t"],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "],
+      [" "," ","catapult:180:0.0"," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," ","normal_force_demo:180:0.0","centripetal_force_demo:180:0.0"," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," ","combined_forces_demo:180:0.0","force_vortex:180:0.0"," "],
+      [" ","ForceMagnitudeDemo:180:0.0","exercise_1_8_solution_attraction_magnitude_vr:180:0.0","example_6_6_grab_vr:180:0.0"," "," "," "]
+    ]
+  }
+}
