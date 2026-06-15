@@ -1,0 +1,111 @@
+{
+  "map_info": {
+    "name": "Temporal Storage — the deeper shelf is the older one",
+    "lookup_name": "Zone_TemporalStorage",
+    "title": "Temporal Storage",
+    "description": "Tiered shelving where storage runs back in time: the pedestals grow taller the deeper you go, the oldest records held highest at the back.",
+    "version": "zone-grammar-0.1",
+    "format": "json",
+    "created_from": "tools/zone_grammar.py",
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "max_height": 5
+    },
+    "metadata": {
+      "category": "datastructures",
+      "difficulty": "intermediate",
+      "estimated_time": "3-6 minutes",
+      "spatial_temperature": 0.4,
+      "archetype": "temporal_storage",
+      "seed": 3,
+      "artifacts_placed": ["sparse_array_demo","rotate_grid_cubes","grid3d_kruskal","bar_array_merge_sort","grid3d_random_graph","grid3d_bfs","complexity_pattern","grid3d_force_directed","wall_pattern_gallery","index_sentinel","vector_field_grid","bar_array_bubble_sort"],
+      "zone_legend": {
+        "E": "entry",
+        "T": "teaching",
+        "X": "exploration",
+        "R": "reflection/threshold",
+        "Z": "exit",
+        "#": "wall",
+        ".": "void",
+        " ": "floor"
+      },
+      "zone_grid": ["######Z#####","#          #","# X X X X  #","#          #","#          #","# X X X X  #","#          #","#          #","# T T T T  #","#          #","#          #","######E#####"]
+    }
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.3,0.32,0.4],
+    "ambient_energy": 0.85,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": true
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","4","1","4","1","4","1","4","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","4","1","4","1","4","1","4","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," ","t"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","sp"," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","sparse_array_demo:180:0.0"," ","rotate_grid_cubes:180:0.0"," ","grid3d_kruskal:180:0.0"," ","bar_array_merge_sort:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","grid3d_random_graph:180:0.0"," ","grid3d_bfs:180:0.0"," ","complexity_pattern:180:0.0"," ","grid3d_force_directed:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","wall_pattern_gallery:180:0.0"," ","index_sentinel:180:0.0"," ","vector_field_grid:180:0.0"," ","bar_array_bubble_sort:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

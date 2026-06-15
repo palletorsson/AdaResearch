@@ -1,0 +1,111 @@
+{
+  "map_info": {
+    "name": "Archive of Machines — aisles of pattern engines",
+    "lookup_name": "Zone_ArchiveofMachines",
+    "title": "Archive of Machines",
+    "description": "Dense parallel aisles of machines on raised racks. Walk the narrow lanes between rows of pattern engines, grammars, and transforms, end to end.",
+    "version": "zone-grammar-0.1",
+    "format": "json",
+    "created_from": "tools/zone_grammar.py",
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "max_height": 5
+    },
+    "metadata": {
+      "category": "dna_grammar",
+      "difficulty": "intermediate",
+      "estimated_time": "3-6 minutes",
+      "spatial_temperature": 0.5,
+      "archetype": "archive_of_machines",
+      "seed": 3,
+      "artifacts_placed": ["pattern_mill","pattern_machine_a","pattern_machine_c","pattern_loom","mesh_grammar_budding","room_grammar","lsystem_editor","mesh_grammar_riveted"],
+      "zone_legend": {
+        "E": "entry",
+        "T": "teaching",
+        "X": "exploration",
+        "R": "reflection/threshold",
+        "Z": "exit",
+        "#": "wall",
+        ".": "void",
+        " ": "floor"
+      },
+      "zone_grid": ["######Z#####","#          #","# T T T T  #","# X X X X  #","# X X X X  #","# X X X X  #","# X X X X  #","# X X X X  #","# X X X X  #","# X X X X  #","#          #","######E#####"]
+    }
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.3,0.32,0.4],
+    "ambient_energy": 0.85,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": true
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","3","1","3","1","3","1","3","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," ","t"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","sp"," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","pattern_machine_a:180:0.0"," ","pattern_loom:180:0.0"," ","room_grammar:180:0.0"," ","mesh_grammar_riveted:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","pattern_mill:180:0.0"," ","pattern_machine_c:180:0.0"," ","mesh_grammar_budding:180:0.0"," ","lsystem_editor:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

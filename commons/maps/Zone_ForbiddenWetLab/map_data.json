@@ -1,0 +1,120 @@
+{
+  "map_info": {
+    "name": "Forbidden Wet Lab — life behind toxic glass",
+    "lookup_name": "Zone_ForbiddenWetLab",
+    "title": "Forbidden Wet Lab",
+    "description": "Sealed containment cells off a clean corridor. Living, growing specimens sit behind toxic thresholds; you may look, but lingering inside costs you.",
+    "version": "zone-grammar-0.1",
+    "format": "json",
+    "created_from": "tools/zone_grammar.py",
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "max_height": 5
+    },
+    "metadata": {
+      "category": "emergence",
+      "difficulty": "intermediate",
+      "estimated_time": "3-6 minutes",
+      "spatial_temperature": 0.7,
+      "archetype": "forbidden_wet_lab",
+      "seed": 3,
+      "artifacts_placed": ["ca_growth_network","ca_bridge","pulsing_ca","game_of_life_petri"],
+      "zone_legend": {
+        "E": "entry",
+        "T": "teaching",
+        "X": "exploration",
+        "R": "reflection/threshold",
+        "Z": "exit",
+        "#": "wall",
+        ".": "void",
+        " ": "floor"
+      },
+      "zone_grid": ["######Z#####","###### #####","####XR RX###","####XX XX###","###### #####","###### #####","#          #","###### #####","####XR RX###","####XX XX###","###### #####","######E#####"]
+    }
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "h:toxic": {
+      "name": "Toxic Zone",
+      "description": "Containment hazard — do not linger",
+      "type": "hazard",
+      "properties": {
+        "damage": 18,
+        "interval": 0.4
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.3,0.32,0.4],
+    "ambient_energy": 0.85,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": true
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","2","2","2","1","1","1","1","1","2","2","2"],
+      ["2","2","2","2","1","1","1","1","1","2","2","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","2","2","2","1","1","1","1","1","2","2","2"],
+      ["2","2","2","2","1","1","1","1","1","2","2","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," ","t"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","h:toxic"," ","h:toxic"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","h:toxic"," ","h:toxic"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","sp"," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","ca_growth_network:180:0.0"," "," "," ","ca_bridge:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","pulsing_ca:180:0.0"," "," "," ","game_of_life_petri:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

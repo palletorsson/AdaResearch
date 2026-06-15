@@ -1,0 +1,111 @@
+{
+  "map_info": {
+    "name": "Observation Chamber — cross the void to the thing you watch",
+    "lookup_name": "Zone_ObservationChamber",
+    "title": "Observation Chamber",
+    "description": "A ring catwalk around a central void. One centrepiece waits at the end of a thin bridge over emptiness — the thing you cross nothing to contemplate.",
+    "version": "zone-grammar-0.1",
+    "format": "json",
+    "created_from": "tools/zone_grammar.py",
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "max_height": 5
+    },
+    "metadata": {
+      "category": "qfep",
+      "difficulty": "intermediate",
+      "estimated_time": "3-6 minutes",
+      "spatial_temperature": 0.6,
+      "archetype": "observation_chamber",
+      "seed": 3,
+      "artifacts_placed": ["oscillation_controlled_cube","RackSineBasic","VRAudioMonitor","edge_of_chaos_unlocked"],
+      "zone_legend": {
+        "E": "entry",
+        "T": "teaching",
+        "X": "exploration",
+        "R": "reflection/threshold",
+        "Z": "exit",
+        "#": "wall",
+        ".": "void",
+        " ": "floor"
+      },
+      "zone_grid": ["      Z     ","  X  X  X   ","  ........  ","  ........  ","  ........  ","  ....TT..  ","  ....TT..  ","  ....X...  ","  ....X...  ","  ....X...  ","            ","      E     "]
+    }
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.3,0.32,0.4],
+    "ambient_energy": 0.85,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": true
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","0","0","0","0","0","0","0","0","1","1"],
+      ["1","1","0","0","0","0","0","0","0","0","1","1"],
+      ["1","1","0","0","0","0","0","0","0","0","1","1"],
+      ["1","1","0","0","0","0","1","1","0","0","1","1"],
+      ["1","1","0","0","0","0","1","1","0","0","1","1"],
+      ["1","1","0","0","0","0","1","0","0","0","1","1"],
+      ["1","1","0","0","0","0","1","0","0","0","1","1"],
+      ["1","1","0","0","0","0","1","0","0","0","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," ","t"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","sp"," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","RackSineBasic:180:0.0"," "," ","VRAudioMonitor:180:0.0"," "," ","edge_of_chaos_unlocked:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","oscillation_controlled_cube:180:0.0"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

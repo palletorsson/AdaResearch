@@ -1,0 +1,111 @@
+{
+  "map_info": {
+    "name": "Warehouse Lab — open hall of instruments",
+    "lookup_name": "Zone_WarehouseLab",
+    "title": "Warehouse Lab",
+    "description": "A wide, high-ceilinged hall. Working instruments stand in two clean aisles; nothing is hidden, everything is at hand. The lab as a place you move through.",
+    "version": "zone-grammar-0.1",
+    "format": "json",
+    "created_from": "tools/zone_grammar.py",
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "max_height": 5
+    },
+    "metadata": {
+      "category": "lab",
+      "difficulty": "intermediate",
+      "estimated_time": "3-6 minutes",
+      "spatial_temperature": 0.3,
+      "archetype": "warehouse_lab",
+      "seed": 3,
+      "artifacts_placed": ["catapult","normal_force_demo","ForceMagnitudeDemo","exercise_1_8_solution_attraction_magnitude_vr","combined_forces_demo","centripetal_force_demo","force_vortex","example_6_6_grab_vr"],
+      "zone_legend": {
+        "E": "entry",
+        "T": "teaching",
+        "X": "exploration",
+        "R": "reflection/threshold",
+        "Z": "exit",
+        "#": "wall",
+        ".": "void",
+        " ": "floor"
+      },
+      "zone_grid": ["######Z#####","#          #","#          #","#          #","# T T T T  #","#          #","#          #","#          #","# X X X X  #","#          #","#          #","######E#####"]
+    }
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.3,0.32,0.4],
+    "ambient_energy": 0.85,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": true
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","1","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","1","1","2"],
+      ["2","2","2","2","2","2","1","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," ","t"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","sp"," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","catapult:180:0.0"," ","ForceMagnitudeDemo:180:0.0"," ","combined_forces_demo:180:0.0"," ","force_vortex:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","normal_force_demo:180:0.0"," ","exercise_1_8_solution_attraction_magnitude_vr:180:0.0"," ","centripetal_force_demo:180:0.0"," ","example_6_6_grab_vr:180:0.0"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}
