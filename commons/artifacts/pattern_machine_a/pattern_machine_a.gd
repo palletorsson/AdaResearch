@@ -77,16 +77,119 @@ const PALETTE: Array[Color] = [
 	Color(0.10, 0.12, 0.18),  # 5 near-black
 ]
 
+# ── PRESETS — ported from the web Italy study pack (italy-study-pack.ts) ──
+# Each is a whole rule-combo, exactly like selecting a SITE in /pattern-maker:
+# a wallpaper group + a motif card (the site's field motif domain) + a period
+# palette. Picking one loads group+card+palette and pushes a fresh band, so the
+# carpet records "the loom was set to Casa del Fauno here". Index 0 of every
+# palette is the woven ground (unpunched); 1..N are the period's tesserae colors.
+const PRESETS: Array = [
+	{   # Casa del Fauno, Pompeii — perspective cubes (P3M1), Roman Imperial
+		"name": "FAUNO",
+		"group": "p3m1",
+		"palette": ["#EBE6D9", "#141418", "#B32719", "#C09933"],
+		"motif_size": 6,
+		"motif": [
+			[0, 0, 1, 1, 2, 2],
+			[0, 0, 1, 1, 2, 2],
+			[2, 2, 0, 0, 1, 1],
+			[2, 2, 0, 0, 1, 1],
+			[1, 1, 2, 2, 0, 0],
+			[1, 1, 2, 2, 0, 0],
+		],
+	},
+	{   # Casa dei Vettii, Pompeii — checkerboard (P4M), Roman Imperial
+		"name": "VETTII",
+		"group": "p4m",
+		"palette": ["#EBE6D9", "#141418", "#B32719", "#C09933"],
+		"motif_size": 2,
+		"motif": [
+			[0, 1],
+			[1, 0],
+		],
+	},
+	{   # Casa dei Cervi, Herculaneum — diamond lozenge (CMM), Roman Imperial
+		"name": "CERVI",
+		"group": "cmm",
+		"palette": ["#EBE6D9", "#141418", "#267366", "#B32719"],
+		"motif_size": 4,
+		"motif": [
+			[0, 0, 1, 0],
+			[0, 1, 1, 1],
+			[1, 1, 0, 1],
+			[0, 1, 0, 0],
+		],
+	},
+	{   # Santa Chiara Cloister, Naples — floral cross (P4M), Baroque majolica
+		"name": "CHIARA",
+		"group": "p4m",
+		"palette": ["#F5F0E1", "#1F3380", "#D9B333", "#2D6633"],
+		"motif_size": 8,
+		"motif": [
+			[0, 0, 0, 1, 1, 0, 0, 0],
+			[0, 0, 2, 1, 1, 2, 0, 0],
+			[0, 2, 3, 2, 2, 3, 2, 0],
+			[1, 1, 2, 0, 0, 2, 1, 1],
+			[1, 1, 2, 0, 0, 2, 1, 1],
+			[0, 2, 3, 2, 2, 3, 2, 0],
+			[0, 0, 2, 1, 1, 2, 0, 0],
+			[0, 0, 0, 1, 1, 0, 0, 0],
+		],
+	},
+	{   # Villa San Michele, Capri — octagon & square (P4M), Cosmatesque marble
+		"name": "MICHELE",
+		"group": "p4m",
+		"palette": ["#E8E0D4", "#8C1A26", "#264D26", "#1A3399"],
+		"motif_size": 6,
+		"motif": [
+			[0, 1, 1, 1, 1, 0],
+			[1, 1, 0, 0, 1, 1],
+			[1, 0, 0, 0, 0, 1],
+			[1, 0, 0, 0, 0, 1],
+			[1, 1, 0, 0, 1, 1],
+			[0, 1, 1, 1, 1, 0],
+		],
+	},
+	{   # Museo Archeologico, Naples — nested diamonds (PMM), Roman Imperial
+		"name": "MUSEO",
+		"group": "pmm",
+		"palette": ["#EBE6D9", "#141418", "#B32719", "#C09933"],
+		"motif_size": 8,
+		"motif": [
+			[0, 0, 0, 1, 1, 0, 0, 0],
+			[0, 0, 1, 0, 0, 1, 0, 0],
+			[0, 1, 0, 0, 0, 0, 1, 0],
+			[1, 0, 0, 1, 1, 0, 0, 1],
+			[1, 0, 0, 1, 1, 0, 0, 1],
+			[0, 1, 0, 0, 0, 0, 1, 0],
+			[0, 0, 1, 0, 0, 1, 0, 0],
+			[0, 0, 0, 1, 1, 0, 0, 0],
+		],
+	},
+]
+
 const COL_PEG_HOLE := Color(0.05, 0.05, 0.06)   # empty peg socket
+const COL_SEAM := Color(0.04, 0.04, 0.05)       # dark seam line between rule-bands
 
 # ── Card geometry on the machine head ────────────────────────────────────
 const CARD_CELL := 0.075         # meters per peg cell
 const CARD_Z := 0.06             # how far the card sits in front of the head
 
+# ── Banded chronicle ─────────────────────────────────────────────────────
+# The carpet is a TIMELINE: each horizontal band is a frozen snapshot of the
+# rule (group + card + palette) at the moment it was woven. Newest band sits at
+# the production end (nearest the loom head / console); older bands trail off
+# toward the far end. When the history overflows BAND_CAP, the oldest is dropped.
+const BAND_CAP := 6              # how many rule-bands the fabric remembers
+const BAND_ROWS := 2            # how many card-heights tall each band is woven
+const BAND_SEAM_PX := 2         # thickness (px) of the dark seam between bands
+
 # ── State ────────────────────────────────────────────────────────────────
 var _card: Array = []             # 2D array [y][x] of color indices (0 = hole)
 var _paint_color: int = 1         # color punched in on touch
 var _group_index: int = 0
+var _palette: Array[Color] = []   # the live palette (a band snapshots whatever this is)
+var _bands: Array = []            # capped history; each = {group_index, card(deep copy), palette}
 
 # ── Scene refs ────────────────────────────────────────────────────────────
 var _card_root: Node3D
@@ -107,6 +210,7 @@ var _elapsed: float = 0.0
 
 func _ready() -> void:
 	_read_overrides()
+	_palette = PALETTE.duplicate()    # live palette; bands snapshot whatever this is at the time
 	_group_index = clampi(GROUP_NAMES.find(group.to_lower()), 0, GROUP_NAMES.size() - 1)
 	if _group_index < 0:
 		_group_index = 0
@@ -115,6 +219,11 @@ func _ready() -> void:
 		motif_seed = 1 + randi() % 8
 		density = randf_range(0.3, 0.7)
 	_seed_card()
+
+	# Seed an initial timeline from the presets so the carpet is ALREADY a
+	# chronicle at build — it remembers rules from before the player arrived.
+	# The live rule (current card/group/palette) becomes the newest band on top.
+	_seed_initial_bands()
 
 	_card_root = Node3D.new()
 	_card_root.name = "CardHead"
@@ -170,6 +279,8 @@ func apply_grid_config(config: Dictionary) -> void:
 	_peg_meshes.clear(); _peg_mats.clear()
 	_weave_mats.clear(); _warp_mats.clear()
 	_card.clear()
+	_bands.clear()
+	_palette.clear()
 	call_deferred("_ready")
 
 func _read_overrides() -> void:
@@ -200,10 +311,14 @@ func _build_control_plate() -> void:
 		var gnames: Array = []
 		for g in GROUP_NAMES:
 			gnames.append(String(g).to_upper())
+		var pnames: Array = []
+		for p in PRESETS:
+			pnames.append(String(p["name"]))
 		plate.call("configure", "JACQUARD  LOOM", [
 			{"key": "group",   "label": "GROUP",   "names": gnames, "init": _group_index},
 			{"key": "motif",   "label": "MOTIF",   "names": ["I","II","III","IV","V","VI","VII","VIII"], "init": clampi(motif_seed - 1, 0, 7)},
 			{"key": "density", "label": "DENSITY", "names": [], "min": 0.0, "max": 1.0, "init": density},
+			{"key": "preset",  "label": "PRESET",  "names": pnames, "init": 0},
 		])
 	# operator station: a step the player stands on (the carpet weaves out toward -Z), with
 	# the console at its front edge facing the player, so they look DOWN past the console at
@@ -244,6 +359,9 @@ func _on_plate(key: String, value: float) -> void:
 	match key:
 		"group":
 			_group_index = clampi(int(value), 0, GROUP_NAMES.size() - 1)
+			group = GROUP_NAMES[_group_index]
+			if _group_label:
+				_group_label.text = group.to_upper()
 		"motif":
 			motif_seed = int(value) + 1
 			_seed_card()
@@ -252,15 +370,25 @@ func _on_plate(key: String, value: float) -> void:
 			density = clampf(value, 0.0, 1.0)
 			_seed_card()
 			_refresh_pegs()
+		"preset":
+			_apply_preset(int(value))
+			return   # _apply_preset pushes its own band + reweaves
+	# Any rule change writes a new band into the timeline (newest = the live rule).
+	_push_band(_current_snapshot())
 	_reweave()
 
 
 func _on_plate_random() -> void:
+	_palette = PALETTE.duplicate()
 	_group_index = randi() % GROUP_NAMES.size()
+	group = GROUP_NAMES[_group_index]
+	if _group_label:
+		_group_label.text = group.to_upper()
 	motif_seed = 1 + randi() % 8
 	density = randf_range(0.25, 0.78)
 	_seed_card()
 	_refresh_pegs()
+	_push_band(_current_snapshot())
 	_reweave()
 
 
@@ -296,6 +424,106 @@ func _seed_card() -> void:
 			else:
 				row.append(0)
 		_card.append(row)
+
+# ═══════════════════════════════════════════════════════════════════════
+# BANDED CHRONICLE — the fabric remembers every rule it was set to
+# ═══════════════════════════════════════════════════════════════════════
+
+func _deep_copy_card(card: Array) -> Array:
+	## A real 2D copy (rows duplicated) so a band can't be mutated by later edits.
+	var out: Array = []
+	for row in card:
+		out.append((row as Array).duplicate())
+	return out
+
+func _current_snapshot() -> Dictionary:
+	## Freeze the live rule (group + card + palette) as a band.
+	return {
+		"group_index": _group_index,
+		"card": _deep_copy_card(_card),
+		"size": card_size,
+		"palette": _palette.duplicate(),
+	}
+
+func _push_band(snapshot: Dictionary) -> void:
+	## Append the newest rule; drop the oldest if we exceed the memory cap.
+	_bands.append(snapshot)
+	while _bands.size() > BAND_CAP:
+		_bands.pop_front()
+
+func _update_live_band() -> void:
+	## The newest band IS the live rule being woven now — replace it in place
+	## (used for fine hand-edits so each peg toggle doesn't spawn a new band).
+	if _bands.is_empty():
+		_push_band(_current_snapshot())
+	else:
+		_bands[_bands.size() - 1] = _current_snapshot()
+
+func _seed_initial_bands() -> void:
+	## Plant a few preset bands BEFORE the live rule so the carpet is already a
+	## timeline at build (it remembers rules from before the player arrived).
+	## Newest = the live rule (current card/group/palette) on top of the stack.
+	_bands.clear()
+	# three historical preset bands (oldest first), distinct groups/palettes
+	for idx in [1, 0, 5]:   # VETTII, FAUNO, MUSEO — three clearly different rules
+		_bands.append(_band_from_preset(idx))
+	# then the current live rule as the newest band at the production end
+	_bands.append(_current_snapshot())
+	while _bands.size() > BAND_CAP:
+		_bands.pop_front()
+
+func _band_from_preset(preset_index: int) -> Dictionary:
+	## Build a band snapshot from a preset WITHOUT touching the live rule.
+	var p: Dictionary = PRESETS[clampi(preset_index, 0, PRESETS.size() - 1)]
+	var card := _fit_motif_to_card(p["motif"], int(p["motif_size"]))
+	return {
+		"group_index": clampi(GROUP_NAMES.find(String(p["group"]).to_lower()), 0, GROUP_NAMES.size() - 1),
+		"card": card,
+		"size": card_size,
+		"palette": _palette_from_hex(p["palette"]),
+	}
+
+func _apply_preset(preset_index: int) -> void:
+	## Load a whole rule-combo (group + motif card + palette) in one move, exactly
+	## like picking a SITE in the web editor — then push it as a new band.
+	var p: Dictionary = PRESETS[clampi(preset_index, 0, PRESETS.size() - 1)]
+	_group_index = clampi(GROUP_NAMES.find(String(p["group"]).to_lower()), 0, GROUP_NAMES.size() - 1)
+	group = GROUP_NAMES[_group_index]
+	_palette = _palette_from_hex(p["palette"])
+	_card = _fit_motif_to_card(p["motif"], int(p["motif_size"]))
+	if _group_label:
+		_group_label.text = group.to_upper()
+	_refresh_pegs()
+	_push_band(_current_snapshot())
+	_reweave()
+	print("[PatternMachineA] Loaded preset -> %s (%s)" % [String(p["name"]), group])
+
+func _fit_motif_to_card(motif: Array, motif_size: int) -> Array:
+	## Resample any motif grid into the loom's fixed card_size via nearest-neighbour,
+	## clamping color indices into the live palette so pegs/weave stay valid.
+	var out: Array = []
+	var max_ci := maxi(0, _palette.size() - 1)
+	for y in card_size:
+		var row: Array = []
+		var sy := clampi(int(float(y) / float(card_size) * float(motif_size)), 0, motif_size - 1)
+		for x in card_size:
+			var sx := clampi(int(float(x) / float(card_size) * float(motif_size)), 0, motif_size - 1)
+			var ci := 0
+			if sy < motif.size() and sx < (motif[sy] as Array).size():
+				ci = int(motif[sy][sx])
+			row.append(clampi(ci, 0, max_ci))
+		out.append(row)
+	return out
+
+func _palette_from_hex(hex_list: Array) -> Array[Color]:
+	## Period palette -> the loom's color table. Index 0 is the woven ground; the
+	## rest are the period's tesserae. Pad to PALETTE's length so every index is safe.
+	var pal: Array[Color] = []
+	for h in hex_list:
+		pal.append(Color(String(h)))
+	while pal.size() < PALETTE.size():
+		pal.append(pal[pal.size() - 1] if pal.size() > 0 else Color.WHITE)
+	return pal
 
 # ═══════════════════════════════════════════════════════════════════════
 # MACHINE BUILDERS
@@ -559,6 +787,10 @@ func _toggle_peg(gx: int, gy: int) -> void:
 	else:
 		_card[gy][gx] = 0
 	_refresh_peg(gx, gy)
+	# Editing the card by hand is a rule change too — update the newest band in
+	# place so the live edit shows at the production end without flooding the
+	# history on every single peg toggle.
+	_update_live_band()
 	_reweave()
 
 func _refresh_peg(gx: int, gy: int) -> void:
@@ -588,6 +820,7 @@ func _cycle_group() -> void:
 	group = GROUP_NAMES[_group_index]
 	if _group_label:
 		_group_label.text = group.to_upper()
+	_push_band(_current_snapshot())
 	_reweave()
 	print("[PatternMachineA] Program -> %s" % group)
 
@@ -606,6 +839,7 @@ func _reroll_card() -> void:
 	motif_seed = (motif_seed * 1103515245 + 12345) & 0x7fffffff
 	_seed_card()
 	_refresh_all_pegs()
+	_push_band(_current_snapshot())
 	_reweave()
 	print("[PatternMachineA] Re-wove fresh card (seed %d)" % motif_seed)
 
@@ -614,6 +848,7 @@ func _clear_card() -> void:
 		for x in card_size:
 			_card[y][x] = 0
 	_refresh_all_pegs()
+	_push_band(_current_snapshot())
 	_reweave()
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -630,27 +865,62 @@ func _build_carpet() -> void:
 	_carpet_mesh.position = Vector3(0, 0.01, CARD_Z + 0.12 + carpet_length * 0.5)
 	_carpet_mat = StandardMaterial3D.new()
 	_carpet_mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST  # crisp tiles
+	_carpet_mat.texture_repeat = true   # the timeline scrolls as a loop (wraps)
 	_carpet_mat.roughness = 0.88
 	_carpet_mat.metallic = 0.0
-	# uv1_scale.y > 1 so the carpet shows several courses along its length.
-	_carpet_mat.uv1_scale = Vector3(1.0, carpet_length / carpet_width, 1.0)
+	# The banded texture already contains the whole timeline (bands stacked +
+	# horizontal repeats baked in), so it maps ONCE down the carpet's length.
+	# uv1_scale.y is NEGATIVE so the newest band (bottom of the image) sits at the
+	# production end (near the feed roller / console) and history trails to the floor.
+	_carpet_mat.uv1_scale = Vector3(1.0, -1.0, 1.0)
+	_carpet_mat.uv1_offset = Vector3(0.0, 1.0, 0.0)
 	_carpet_mesh.material_override = _carpet_mat
 	add_child(_carpet_mesh)
 
 func _reweave() -> void:
-	## CPU-tile the punch card through the active wallpaper group into a texture.
-	## Identical engine call to pattern_maker_station's CPU path.
-	var group_enum: int = _group_enum_for(group)
-	var tex_size: int = carpet_repeats * card_size
-	if tex_size <= 0:
+	## Weave the carpet as a BANDED CHRONICLE: one tall texture in which each
+	## horizontal band is a different rule from the history, rendered with that
+	## band's own punch card / wallpaper group / palette (same per-cell engine
+	## as before, just run band-by-band instead of one uniform fill). A thin dark
+	## seam separates the bands so the rule transitions read as a timeline.
+	##
+	## Image rows run top->bottom = OLDEST band -> NEWEST band. The carpet's UV is
+	## flipped (uv1_scale.y = -1) so the newest band lands at the production end
+	## (nearest the loom head / console) and history trails off toward the floor.
+	if _bands.is_empty():
+		_push_band(_current_snapshot())
+
+	var tex_w: int = maxi(1, carpet_repeats * card_size)   # horizontal repeats baked in
+	var band_h: int = maxi(1, BAND_ROWS * card_size)        # weave height of one band
+	var n: int = _bands.size()
+	var tex_h: int = n * band_h + (n - 1) * BAND_SEAM_PX
+	if tex_w <= 0 or tex_h <= 0:
 		return
-	var image := Image.create(tex_size, tex_size, false, Image.FORMAT_RGBA8)
-	for py in tex_size:
-		for px in tex_size:
-			var ci: int = WallpaperGroups.get_symmetric_color(
-				px, py, card_size, _card, group_enum)
-			var color: Color = PALETTE[ci] if ci >= 0 and ci < PALETTE.size() else PALETTE[0]
-			image.set_pixel(px, py, color)
+
+	var image := Image.create(tex_w, tex_h, false, Image.FORMAT_RGBA8)
+	var y0: int = 0
+	for bi in range(n):
+		var band: Dictionary = _bands[bi]
+		var bcard: Array = band["card"]
+		var bsize: int = int(band.get("size", card_size))
+		var bpal: Array = band["palette"]
+		var genum: int = _group_enum_for(GROUP_NAMES[int(band["group_index"])])
+		var ground: Color = bpal[0] if bpal.size() > 0 else PALETTE[0]
+		for ry in range(band_h):
+			var py: int = y0 + ry
+			for px in range(tex_w):
+				var ci: int = WallpaperGroups.get_symmetric_color(px, ry, bsize, bcard, genum)
+				var color: Color = bpal[ci] if ci >= 0 and ci < bpal.size() else ground
+				image.set_pixel(px, py, color)
+		y0 += band_h
+		# dark seam line marking the rule change (skip after the last band)
+		if bi < n - 1:
+			for sy in range(BAND_SEAM_PX):
+				var py2: int = y0 + sy
+				for px2 in range(tex_w):
+					image.set_pixel(px2, py2, COL_SEAM)
+			y0 += BAND_SEAM_PX
+
 	var tex := ImageTexture.create_from_image(image)
 	if _carpet_mat:
 		_carpet_mat.albedo_texture = tex
