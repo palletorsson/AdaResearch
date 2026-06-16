@@ -1,0 +1,178 @@
+{
+  "id": "vectorforces",
+  "title": "Vectors & Forces: From Direction to Dynamics",
+  "subtitle": "An expanded, VR-embodied Nature of Code — every vector & force principle as a walkable room",
+  "source": "doc/vector_forces_tutorial_scripts.md",
+  "note": "Canonical tutorial spine: the perfect concept order. The single source of truth for /api/scrabble-gen?order=tutorial and the /tutorials pages. One best artifact per concept.",
+  "concept_count": 24,
+  "concepts": [
+    {
+      "n": 1,
+      "act": "I — what a vector is",
+      "concept": "Coordinate system",
+      "artifact": "CoordinateSystem3M",
+      "truth": "space is a promise three numbers keep"
+    },
+    {
+      "n": 2,
+      "act": "I — what a vector is",
+      "concept": "Vector basics",
+      "artifact": "VectorBasics",
+      "truth": "a vector is a journey with no starting address"
+    },
+    {
+      "n": 3,
+      "act": "I — what a vector is",
+      "concept": "Magnitude / length",
+      "artifact": "length_lantern",
+      "truth": "magnitude is how far the arrow would carry you if you walked it"
+    },
+    {
+      "n": 4,
+      "act": "I — what a vector is",
+      "concept": "Unit vector / normalize",
+      "artifact": "vector_normalize_demo",
+      "truth": "to normalise is to ask \"which way?\" and refuse \"how far?\""
+    },
+    {
+      "n": 5,
+      "act": "II — vector arithmetic",
+      "concept": "Addition",
+      "artifact": "vector_add",
+      "truth": "forces add by walking, not by counting"
+    },
+    {
+      "n": 6,
+      "act": "II — vector arithmetic",
+      "concept": "Subtraction",
+      "artifact": "vector_sub",
+      "truth": "subtraction is the direction of the gap"
+    },
+    {
+      "n": 7,
+      "act": "II — vector arithmetic",
+      "concept": "Scaling",
+      "artifact": "example_2_3_gravity_scaled_by_mass_vr",
+      "truth": "a scalar is a volume knob for a direction"
+    },
+    {
+      "n": 8,
+      "act": "II — vector arithmetic",
+      "concept": "Dot product",
+      "artifact": "dot_aligner",
+      "truth": "the dot product is how much two directions agree — and here, agreeing is mercy"
+    },
+    {
+      "n": 9,
+      "act": "II — vector arithmetic",
+      "concept": "Projection / reflection",
+      "artifact": "projection_shadow",
+      "truth": "projection is the part of you that lives along someone else's line"
+    },
+    {
+      "n": 10,
+      "act": "II — vector arithmetic",
+      "concept": "Cross product / torque",
+      "artifact": "torque_crank",
+      "truth": "the cross product is the turn left over when two directions disagree"
+    },
+    {
+      "n": 11,
+      "act": "III — fields and motion",
+      "concept": "Vector field / flow",
+      "artifact": "weather_vector_field",
+      "truth": "a field is force that has decided to be everywhere at once"
+    },
+    {
+      "n": 12,
+      "act": "III — fields and motion",
+      "concept": "Motion / velocity",
+      "artifact": "launch_arc",
+      "truth": "motion is a vector the world keeps editing"
+    },
+    {
+      "n": 13,
+      "act": "IV — forces",
+      "concept": "Work (F·d)",
+      "artifact": "force_mower",
+      "truth": "the world only feels the part of a force that goes its way"
+    },
+    {
+      "n": 14,
+      "act": "IV — forces",
+      "concept": "Friction / drag",
+      "artifact": "drag_lane",
+      "truth": "drag is the world charging you rent on speed"
+    },
+    {
+      "n": 15,
+      "act": "IV — forces",
+      "concept": "Projectile / launch",
+      "artifact": "force_pad",
+      "truth": "a launch is a velocity you're given; gravity writes the rest"
+    },
+    {
+      "n": 16,
+      "act": "IV — forces",
+      "concept": "Centripetal",
+      "artifact": "circle_train",
+      "truth": "going in a circle is constant acceleration toward a centre you never reach"
+    },
+    {
+      "n": 17,
+      "act": "IV — forces",
+      "concept": "Gravity / orbit",
+      "artifact": "orbit_pair",
+      "truth": "an orbit is two things falling toward each other and missing, forever"
+    },
+    {
+      "n": 18,
+      "act": "IV — forces",
+      "concept": "Spring / Hooke",
+      "artifact": "spring_bob",
+      "truth": "a spring is honest — it returns exactly what it's given, which is why it keeps time"
+    },
+    {
+      "n": 19,
+      "act": "IV — forces",
+      "concept": "Pendulum",
+      "artifact": "pendulum_swing",
+      "truth": "a pendulum keeps time because the pull back is proportional to how far it's pulled"
+    },
+    {
+      "n": 20,
+      "act": "IV — forces",
+      "concept": "Momentum / collision",
+      "artifact": "momentum_cradle",
+      "truth": "momentum is motion that refuses to be destroyed, only handed on"
+    },
+    {
+      "n": 21,
+      "act": "IV — forces",
+      "concept": "Restitution / bounce",
+      "artifact": "bounce_well",
+      "truth": "every bounce is a tax on a fall"
+    },
+    {
+      "n": 22,
+      "act": "IV — forces",
+      "concept": "Lever / balance",
+      "artifact": "lever_balance",
+      "truth": "a lever trades force for distance and never gets something for nothing. *(The Calder mobile is this law, drifting — every arm balanced by real weights.)*"
+    },
+    {
+      "n": 23,
+      "act": "IV — forces",
+      "concept": "Wind / weather",
+      "artifact": "weather_vane",
+      "truth": "wind is air with somewhere to be; the force is in the speed, squared"
+    },
+    {
+      "n": 24,
+      "act": "V — force as place",
+      "concept": "Force field (zone)",
+      "artifact": "force_field_zone",
+      "truth": "falling isn't a property of the void; it's a property of the field over it — and the field is a vector you can turn"
+    }
+  ]
+}
