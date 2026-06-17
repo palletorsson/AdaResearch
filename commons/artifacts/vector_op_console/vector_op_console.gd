@@ -75,28 +75,30 @@ func _build_demo() -> void:
 	var b_eff: Vector2 = (-b) if sub else b
 	var c: Vector2 = a + b_eff
 
-	var lift := 0.04
-	var O := Vector3(0.0, lift, 0.0)
-	var pa := _v3(a, lift)
-	var pc := _v3(c, lift)
+	var O := Vector3.ZERO
+	var pa := _v3(a)
+	var pc := _v3(c)
 	var mat_g := _glow_mat(color_guide, 0.5)
 
-	# ground cross-hair so the plane reads
-	rig.add_child(_dashed(O + Vector3(-SPAN, 0, 0), O + Vector3(SPAN, 0, 0), 0.006, mat_g))
-	rig.add_child(_dashed(O + Vector3(0, 0, -SPAN), O + Vector3(0, 0, SPAN), 0.006, mat_g))
+	# a faint backing panel so the standing board reads as a surface (not floating arrows)
+	rig.add_child(_box(Vector3(0, 0, -0.02), Vector3(2.0 * SPAN + 0.4, 2.0 * SPAN + 0.4, 0.02), _screen_mat()))
 
-	# component rectangle: cx = ax±bx along X, then cy up to c
+	# cross-hair on the VERTICAL board plane (x across, y up) so the plane stands and reads
+	rig.add_child(_dashed(O + Vector3(-SPAN, 0, 0), O + Vector3(SPAN, 0, 0), 0.006, mat_g))
+	rig.add_child(_dashed(O + Vector3(0, -SPAN, 0), O + Vector3(0, SPAN, 0), 0.006, mat_g))
+
+	# component rectangle: cx = ax±bx across, then cy up to c
 	rig.add_child(_dashed(O, O + Vector3(c.x, 0, 0), 0.007, mat_g))
 	rig.add_child(_dashed(O + Vector3(c.x, 0, 0), pc, 0.007, mat_g))
 
-	# the head-to-tail construction
+	# the head-to-tail construction, standing on the board
 	rig.add_child(_arrow(O, pa, 0.026, _glow_mat(color_a, 1.4)))               # a from origin
 	rig.add_child(_arrow(pa, pc, 0.024, _glow_mat(color_b, 1.4)))              # b (or −b) from a's tip
 	rig.add_child(_arrow(O, pc, 0.032, _glow_mat(color_c, 1.8)))              # resultant
 
 	# subtraction: ghost the original +b at the origin so −b reads as a flip
 	if sub:
-		rig.add_child(_arrow(O, _v3(b, lift), 0.018, _glow_mat(color_neg, 0.8)))
+		rig.add_child(_arrow(O, _v3(b), 0.018, _glow_mat(color_neg, 0.8)))
 
 	rig.add_child(_sphere(O, 0.05, _glow_mat(Color(0.82, 0.86, 0.95), 0.5)))   # shared tail
 	rig.add_child(_sphere(pc, 0.055, _glow_mat(color_c, 1.6)))                 # resultant head
@@ -112,6 +114,6 @@ func _build_demo() -> void:
 	_settle(rig)
 
 
-# math plane (x, y) -> console-top plane (x, lift, y)
-func _v3(v: Vector2, lift: float) -> Vector3:
-	return Vector3(v.x, lift, v.y)
+# math plane (x, y) -> the standing board's plane (x across, y up)
+func _v3(v: Vector2) -> Vector3:
+	return Vector3(v.x, v.y, 0.0)

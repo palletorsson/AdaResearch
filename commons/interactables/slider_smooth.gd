@@ -84,9 +84,16 @@ func _enforce_handle_constraints(_delta: float, _is_vertical: bool) -> void:
 	if s_max == null: s_max = 0.14
 
 	# Handle always moves along X in slider-local space (SliderOrigin rotation
-	# converts this to Y in world space for vertical sliders)
+	# converts this to Y in world space for vertical sliders).
+	# The handle's local x is an OFFSET from the slider's current position, so
+	# its legal range is [s_min - pos, s_max - pos] — clamping to [s_min, s_max]
+	# (always ≥ 0) made dragging toward smaller values impossible (one-way bug).
+	var cur_pos: float = 0.0
+	var cur_raw = _slider.get("slider_position")
+	if cur_raw is float or cur_raw is int:        # scalar sliders only; 2D slider_plane (Vector2) drives its own constraints
+		cur_pos = float(cur_raw)
 	var handle_local_pos = _handle.transform.origin
-	var clamped_x = clamp(handle_local_pos.x, s_min, s_max)
+	var clamped_x = clamp(handle_local_pos.x, s_min - cur_pos, s_max - cur_pos)
 	_handle.transform.origin = Vector3(clamped_x, 0.0, 0.0)
 
 	# Lock rotation

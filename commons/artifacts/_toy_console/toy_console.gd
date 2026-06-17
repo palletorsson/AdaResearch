@@ -209,13 +209,11 @@ func _build_pad(spec: Dictionary, x: float) -> void:
 	var pad := Node3D.new()
 	pad.name = "Pad_" + String(spec.get("label", ""))
 	add_child(pad)
-	pad.position = Vector3(x, 0.90, 0.32)
-	pad.rotation = Vector3(deg_to_rad(-52.0), 0.0, 0.0)   # face tilts up toward the player
-	pad.scale = Vector3.ONE * 1.4
+	pad.position = Vector3(x, 1.02, 0.34)                  # lifted onto the front lip, toward the player
+	pad.rotation = Vector3(deg_to_rad(-50.0), 0.0, 0.0)   # face tilts up toward the player
+	pad.scale = Vector3.ONE * 1.3
 
-	# The PLATE is its own node; the knob is parented UNDER it, so the knob inherits the
-	# plate's transform and can only ever sit on its surface (this is exactly what
-	# slider_plane got wrong — there the knob was a sibling on a separate branch).
+	# Braun bezel + recessed face + cross-hair (the look) — the moveable handle sits ON the face.
 	var plate := Node3D.new()
 	plate.name = "Plate"
 	pad.add_child(plate)
@@ -224,16 +222,35 @@ func _build_pad(spec: Dictionary, x: float) -> void:
 	plate.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.20, 0.004, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))  # cross-hair
 	plate.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.004, 0.20, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
 
-	# the knob — a child of the plate — at the vector's value on the face (clamped)
-	var knob := Node3D.new()
-	knob.name = "Knob"
-	knob.position = Vector3(clampf(iv.x, -1.0, 1.0) * 0.09, clampf(iv.y, -1.0, 1.0) * 0.09, 0.0)
-	plate.add_child(knob)
-	knob.add_child(_cylinder_between(Vector3(0, 0, 0.016), Vector3(0, 0, 0.05), 0.014, _accent_mat()))  # stem
-	knob.add_child(_sphere(Vector3(0, 0, 0.056), 0.028, _accent_mat()))                                 # knob
+	# the WORKING 2D control: slider_plane's grabbable handle, moving in the plate face. Its own
+	# base/track are hidden so only the handle shows inside the Braun bezel; it emits slider_moved
+	# (a Vector2 in ±PAD_LIMIT) → _make_pad_handler pushes the vector tip and rebuilds the demo.
+	var wired := false
+	if ResourceLoader.exists(PAD_SCENE):
+		var ctl: Node = load(PAD_SCENE).instantiate()
+		ctl.name = "Ctl_" + String(spec.get("label", ""))
+		plate.add_child(ctl)
+		(ctl as Node3D).rotation = Vector3(0.0, deg_to_rad(-90.0), 0.0)   # map the slider's Y-Z plane onto the plate's X-Y face
+		(ctl as Node3D).position = Vector3(0.0, 0.0, 0.016)
+		for p in ["Frame/BaseMesh", "Frame/TrackMesh", "Frame/Label3DValue"]:
+			var n: Node = ctl.get_node_or_null(p)
+			if n and n is Node3D: (n as Node3D).visible = false
+		if "limit_y_min" in ctl:
+			ctl.set("limit_y_min", -PAD_LIMIT); ctl.set("limit_y_max", PAD_LIMIT)
+			ctl.set("limit_z_min", -PAD_LIMIT); ctl.set("limit_z_max", PAD_LIMIT)
+		if "slider_position" in ctl:
+			ctl.set("slider_position", Vector2(clampf(iv.x, -1.0, 1.0) * PAD_LIMIT, clampf(iv.y, -1.0, 1.0) * PAD_LIMIT))
+		if ctl.has_signal("slider_moved"):
+			ctl.connect("slider_moved", _make_pad_handler(spec)); wired = true
+	if not wired:                                          # fallback: a static knob if the control is missing
+		var knob := Node3D.new(); knob.name = "Knob"
+		knob.position = Vector3(clampf(iv.x, -1.0, 1.0) * 0.09, clampf(iv.y, -1.0, 1.0) * 0.09, 0.0)
+		plate.add_child(knob)
+		knob.add_child(_cylinder_between(Vector3(0, 0, 0.016), Vector3(0, 0, 0.05), 0.014, _accent_mat()))
+		knob.add_child(_sphere(Vector3(0, 0, 0.056), 0.028, _accent_mat()))
 
 	_controls_built.append(pad)
-	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.04, 0.30), 18, TEXT_DARK))
+	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.18, 0.30), 18, TEXT_DARK))
 
 
 func _build_scalar(spec: Dictionary, kind: String, x: float) -> void:
