@@ -563,23 +563,12 @@
         "spines": []
       },
       {
-        "lookup": "VectorAddition",
-        "name": "VectorAddition",
-        "registry": "vectors.json",
-        "category": "unknown",
-        "map_ready": true,
-        "has_image": true,
-        "score": 12,
-        "recommended": false,
-        "spines": []
-      },
-      {
         "lookup": "vector_addition_xl",
         "name": "Vector Addition (Walk-Inside)",
         "registry": "vectors.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 12,
         "recommended": false,
         "spines": []
@@ -590,7 +579,18 @@
         "registry": "vectors.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
+        "score": 12,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "VectorAddition",
+        "name": "VectorAddition",
+        "registry": "vectors.json",
+        "category": "unknown",
+        "map_ready": true,
+        "has_image": true,
         "score": 12,
         "recommended": false,
         "spines": []
@@ -634,6 +634,17 @@
         "spines": []
       },
       {
+        "lookup": "vector_subtraction_xl_laser",
+        "name": "Vector Subtraction (Laser, 4 m+)",
+        "registry": "vectors.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 12,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "VectorSubtraction",
         "name": "VectorSubtraction",
         "registry": "vectors.json",
@@ -641,17 +652,6 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "vector_subtraction_xl_laser",
-        "name": "Vector Subtraction (Laser, 4 m+)",
-        "registry": "vectors.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 12,
         "recommended": false,
         "spines": []
       }
@@ -764,6 +764,17 @@
         "spines": []
       },
       {
+        "lookup": "vector_dot_product_xl",
+        "name": "Dot Product (Walk-Inside)",
+        "registry": "vectors.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "vector_joint_playground",
         "name": "Vector-Joint Playground",
         "registry": "vectors.json",
@@ -815,17 +826,6 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "vector_dot_product_xl",
-        "name": "Dot Product (Walk-Inside)",
-        "registry": "vectors.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 10,
         "recommended": false,
         "spines": []
       }
@@ -937,6 +937,17 @@
         "spines": []
       },
       {
+        "lookup": "vector_cross_product_xl",
+        "name": "Cross Product (Walk-Inside)",
+        "registry": "vectors.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 13,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "VectorCrossProduct",
         "name": "VectorCrossProduct",
         "registry": "vectors.json",
@@ -955,17 +966,6 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "vector_cross_product_xl",
-        "name": "Cross Product (Walk-Inside)",
-        "registry": "vectors.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 13,
         "recommended": false,
         "spines": []
       }
