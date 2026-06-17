@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/coin_dice_bench/coin_dice_bench.gd" id="1"]
+
+[node name="CoinDiceBench" type="Node3D"]
+script = ExtResource("1")

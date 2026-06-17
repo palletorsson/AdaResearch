@@ -161,6 +161,24 @@ def tier_of(lookup, name, fp):
     return "small"
 
 
+# The 31 gap-filling artifacts built 2026-06-17 — explicit (concept, tier) so they land in their
+# intended ladder rung deterministically, regardless of keyword/footprint heuristics.
+FORCE = {
+ "rejection_toy": ("Custom / rejection sampling", "small"), "rejection_bench": ("Custom / rejection sampling", "medium"), "rejection_room": ("Custom / rejection sampling", "large"),
+ "pi_dart_toy": ("Monte Carlo", "small"), "pi_dart_bench": ("Monte Carlo", "medium"), "pi_dart_room": ("Monte Carlo", "large"),
+ "coin_dice_bench": ("Coin / dice / discrete chance", "medium"), "dice_rain_room": ("Coin / dice / discrete chance", "large"),
+ "random_walk_bench": ("Random walk", "medium"), "distribution_bench": ("Probability distribution", "medium"),
+ "perlin_bench": ("Perlin noise", "medium"), "noise_compare_bench": ("Simplex / Worley / value noise", "medium"), "noise_displacer": ("Simplex / Worley / value noise", "applied"),
+ "noise_flow_drones": ("Noise fields & textures", "applied"),
+ "noise_height_toy": ("Noise terrain / landscapes", "small"), "noise_dunes_bench": ("Noise terrain / landscapes", "medium"), "noise_terrain_forge": ("Noise terrain / landscapes", "applied"),
+ "blue_noise_toy": ("Blue noise / sampling", "small"), "blue_noise_bench": ("Blue noise / sampling", "medium"), "blue_noise_planter": ("Blue noise / sampling", "applied"),
+ "seed_toy": ("Seeds / PRNG vs TRNG", "small"), "seed_bench": ("Seeds / PRNG vs TRNG", "medium"),
+ "entropy_bench": ("Entropy", "medium"), "markov_melody": ("Markov chains", "applied"), "jitter_bench": ("Random transformations", "medium"),
+ "ten_print_toy": ("10 PRINT / generative grid", "small"), "ten_print_bench": ("10 PRINT / generative grid", "medium"), "ten_print_textile": ("10 PRINT / generative grid", "applied"),
+ "scatter_bench": ("Random art / scatter", "medium"), "random_fireworks": ("Particle randomness", "applied"), "lottery_drum": ("Uniform random / RNG", "applied"),
+}
+
+
 def _hit(text, kw):
     if kw.startswith("re:"):
         return re.search(kw[3:], text) is not None
@@ -190,13 +208,17 @@ def main():
             text = " ".join([k, lookup, name, str(v.get("category","")), str(v.get("class_name","")),
                              " ".join(str(t) for t in tags), str(v.get("description",""))[:200]]).lower()
             low_lookup = lookup.lower()
-            best, bestscore = None, 0
-            for cname, strong, weak, _truth in CONCEPTS:
-                sc = score(text, strong, weak)
-                if any(_hit(low_lookup, kk) for kk in strong):
-                    sc += 3   # a strong match in the lookup NAME dominates description-only matches
-                if sc > bestscore:
-                    best, bestscore = cname, sc
+            forced = FORCE.get(lookup)
+            if forced:
+                best, bestscore = forced[0], 99   # explicit gap-filler — skip keyword classification
+            else:
+                best, bestscore = None, 0
+                for cname, strong, weak, _truth in CONCEPTS:
+                    sc = score(text, strong, weak)
+                    if any(_hit(low_lookup, kk) for kk in strong):
+                        sc += 3   # a strong match in the lookup NAME dominates description-only matches
+                    if sc > bestscore:
+                        best, bestscore = cname, sc
             if best and bestscore >= 3:           # require at least one strong (or 3 weak) match
                 seen.add(k)
                 snfp = (v.get("spatial_needs", {}) or {}).get("footprint_cells", 1)
@@ -212,7 +234,7 @@ def main():
                     "has_image": os.path.exists(os.path.join(IMG_DIR, lookup + ".png")),
                     "score": bestscore,
                     "fp": snfp,
-                    "tier": tier_of(lookup, name, snfp),
+                    "tier": forced[1] if forced else tier_of(lookup, name, snfp),
                 })
     for c in groups:
         # has-image, then map-ready, then higher score, then name
