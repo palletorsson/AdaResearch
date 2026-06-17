@@ -40,22 +40,25 @@
       "count": 9,
       "map_ready": 9,
       "best": "CoordinateSystem3M",
+      "truth": "Before a vector, a where: three axes, an origin, an agreed order (x, y, z).",
       "act": "Act I — what a vector is",
       "kind": "vector",
       "thin": false
     },
     "Vector basics": {
-      "count": 1,
-      "map_ready": 1,
+      "count": 2,
+      "map_ready": 2,
       "best": "VectorBasics",
+      "truth": "A vector is a step, not a place - a direction and a length you can carry anywhere.",
       "act": "Act I — what a vector is",
       "kind": "vector",
-      "thin": true
+      "thin": false
     },
     "Magnitude / length": {
       "count": 3,
       "map_ready": 3,
       "best": null,
+      "truth": "",
       "act": "Act I — what a vector is",
       "kind": "vector",
       "thin": false
@@ -64,6 +67,7 @@
       "count": 7,
       "map_ready": 7,
       "best": "vector_normalize_demo",
+      "truth": "Divide by length and every direction gets a unit twin.",
       "act": "Act I — what a vector is",
       "kind": "vector",
       "thin": false
@@ -72,6 +76,7 @@
       "count": 7,
       "map_ready": 7,
       "best": "vector_add",
+      "truth": "a + b is where you land if you walk a then b - tip to tail.",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
       "thin": false
@@ -80,6 +85,7 @@
       "count": 5,
       "map_ready": 5,
       "best": "vector_sub",
+      "truth": "b - a is the arrow of the gap, pointing from here to there.",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
       "thin": false
@@ -88,6 +94,7 @@
       "count": 7,
       "map_ready": 7,
       "best": "example_2_3_gravity_scaled_by_mass_vr",
+      "truth": "A scalar is a volume knob for a direction - same line, new length.",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
       "thin": false
@@ -96,6 +103,7 @@
       "count": 8,
       "map_ready": 8,
       "best": "dot_aligner",
+      "truth": "the dot product is how much two directions agree — and here, agreeing is mercy",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
       "thin": false
@@ -104,6 +112,7 @@
       "count": 4,
       "map_ready": 4,
       "best": "projection_shadow",
+      "truth": "projection is the part of you that lives along someone else's line",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
       "thin": false
@@ -112,6 +121,7 @@
       "count": 8,
       "map_ready": 8,
       "best": "torque_crank",
+      "truth": "the cross product is the turn left over when two directions disagree",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
       "thin": false
@@ -120,6 +130,7 @@
       "count": 11,
       "map_ready": 11,
       "best": "weather_vector_field",
+      "truth": "a field is force that has decided to be everywhere at once",
       "act": "Act III — fields & motion",
       "kind": "vector",
       "thin": false
@@ -127,23 +138,26 @@
     "Motion / velocity": {
       "count": 12,
       "map_ready": 11,
-      "best": "VectorMotion",
+      "best": "bubble_blaster",
+      "truth": "Every bubble leaves along the vector you point.",
       "act": "Act III — fields & motion",
       "kind": "vector",
       "thin": false
     },
     "Work (F.d)": {
-      "count": 1,
-      "map_ready": 1,
+      "count": 2,
+      "map_ready": 2,
       "best": "force_mower",
+      "truth": "Only the part along the motion does work: W = F*d*cos(t).",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": true
+      "thin": false
     },
     "Friction / drag": {
       "count": 7,
       "map_ready": 7,
       "best": "drag_corridor",
+      "truth": "Resistance grows with speed: F = -b*v.",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -152,6 +166,7 @@
       "count": 12,
       "map_ready": 11,
       "best": "launch_arc",
+      "truth": "Gravity applied each frame bends a straight launch into a parabola.",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -160,6 +175,7 @@
       "count": 3,
       "map_ready": 3,
       "best": "centrifuge_ring",
+      "truth": "Constant acceleration toward a centre you never reach: a = v2/r.",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -168,6 +184,7 @@
       "count": 17,
       "map_ready": 17,
       "best": "orbit_pair",
+      "truth": "Every mass pulls every other: F = G*m1*m2/r2.",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -176,6 +193,7 @@
       "count": 16,
       "map_ready": 16,
       "best": "spring_bob",
+      "truth": "a spring is honest — it returns exactly what it's given, which is why it keeps time",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -184,6 +202,7 @@
       "count": 17,
       "map_ready": 17,
       "best": "pendulum_swing",
+      "truth": "a pendulum keeps time because the pull back is proportional to how far it's pulled",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -192,6 +211,7 @@
       "count": 5,
       "map_ready": 4,
       "best": "momentum_cradle",
+      "truth": "momentum is motion that refuses to be destroyed, only handed on",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -200,6 +220,7 @@
       "count": 5,
       "map_ready": 5,
       "best": "bounce_well",
+      "truth": "every bounce is a tax on a fall",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -208,6 +229,7 @@
       "count": 3,
       "map_ready": 3,
       "best": "lever_balance",
+      "truth": "a lever trades force for distance and never gets something for nothing. *(The Calder mobile is this law, drifting — every arm balanced by real weights.)*",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -216,6 +238,7 @@
       "count": 3,
       "map_ready": 3,
       "best": "weather_vane",
+      "truth": "wind is air with somewhere to be; the force is in the speed, squared",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
@@ -224,6 +247,7 @@
       "count": 5,
       "map_ready": 5,
       "best": "force_field_zone",
+      "truth": "falling isn't a property of the void; it's a property of the field over it — and the field is a vector you can turn",
       "act": "Act V — force as place",
       "kind": "force",
       "thin": false
@@ -232,14 +256,15 @@
       "count": 9,
       "map_ready": 9,
       "best": "force_cube",
+      "truth": "A force is a vector on a mass: F = m*a.",
       "act": "Act V — force as place",
       "kind": "force",
       "thin": false
     }
   },
-  "total": 185,
+  "total": 187,
   "recommended_total": 29,
-  "map_ready_total": 182,
+  "map_ready_total": 184,
   "groups": {
     "Coordinate system": [
       {
@@ -359,6 +384,17 @@
           "noc",
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "free_vector",
+        "name": "Free Vector (direction + length)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 12,
+        "recommended": false,
+        "spines": []
       }
     ],
     "Magnitude / length": [
@@ -374,6 +410,17 @@
         "spines": []
       },
       {
+        "lookup": "vector_arena",
+        "name": "Vector Arena",
+        "registry": "vector_arena.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 3,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "vector_magnitude_demo",
         "name": "Vector Magnitude",
         "registry": "vectors.json",
@@ -381,17 +428,6 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "vector_arena",
-        "name": "Vector Arena",
-        "registry": "vector_arena.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 3,
         "recommended": false,
         "spines": []
       }
@@ -485,7 +521,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 12,
         "recommended": true,
         "spines": [
@@ -516,6 +552,17 @@
         "spines": []
       },
       {
+        "lookup": "vector_addition_walk",
+        "name": "Vector Addition Walk (Room Scale)",
+        "registry": "vectors.json",
+        "category": "mathematics",
+        "map_ready": true,
+        "has_image": true,
+        "score": 15,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "VectorAddition",
         "name": "VectorAddition",
         "registry": "vectors.json",
@@ -523,17 +570,6 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "vector_addition_walk",
-        "name": "Vector Addition Walk (Room Scale)",
-        "registry": "vectors.json",
-        "category": "mathematics",
-        "map_ready": true,
-        "has_image": false,
-        "score": 15,
         "recommended": false,
         "spines": []
       },
@@ -567,7 +603,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 9,
         "recommended": true,
         "spines": [
@@ -658,6 +694,17 @@
         "spines": []
       },
       {
+        "lookup": "quantum_field",
+        "name": "Quantum Field",
+        "registry": "transforms.json",
+        "category": "transforms",
+        "map_ready": true,
+        "has_image": true,
+        "score": 3,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "scale_lines",
         "name": "scale_lines",
         "registry": "primitives.json",
@@ -689,17 +736,6 @@
         "score": 6,
         "recommended": false,
         "spines": []
-      },
-      {
-        "lookup": "quantum_field",
-        "name": "Quantum Field",
-        "registry": "transforms.json",
-        "category": "transforms",
-        "map_ready": true,
-        "has_image": false,
-        "score": 3,
-        "recommended": false,
-        "spines": []
       }
     ],
     "Dot product": [
@@ -709,7 +745,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 10,
         "recommended": true,
         "spines": [
@@ -735,6 +771,17 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "vector_reflection_demo",
+        "name": "Vector Reflection Demo",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 3,
         "recommended": false,
         "spines": []
       },
@@ -781,17 +828,6 @@
         "score": 10,
         "recommended": false,
         "spines": []
-      },
-      {
-        "lookup": "vector_reflection_demo",
-        "name": "Vector Reflection Demo",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 3,
-        "recommended": false,
-        "spines": []
       }
     ],
     "Projection / reflection": [
@@ -801,12 +837,23 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 7,
         "recommended": true,
         "spines": [
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "reflection_hall",
+        "name": "Reflection Hall",
+        "registry": "reflection_hall.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
+        "recommended": false,
+        "spines": []
       },
       {
         "lookup": "vector_projection_demo",
@@ -829,17 +876,6 @@
         "score": 12,
         "recommended": false,
         "spines": []
-      },
-      {
-        "lookup": "reflection_hall",
-        "name": "Reflection Hall",
-        "registry": "reflection_hall.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 7,
-        "recommended": false,
-        "spines": []
       }
     ],
     "Cross product / torque": [
@@ -849,7 +885,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 12,
         "recommended": true,
         "spines": [
@@ -949,6 +985,17 @@
         ]
       },
       {
+        "lookup": "drag_coefficient_wind_tunnel",
+        "name": "Drag Coefficient Wind Tunnel",
+        "registry": "commons_artifacts.json",
+        "category": "physics",
+        "map_ready": true,
+        "has_image": true,
+        "score": 3,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "flow_field_painter",
         "name": "Flow Field Painter",
         "registry": "commons_artifacts.json",
@@ -971,6 +1018,28 @@
         "spines": []
       },
       {
+        "lookup": "noc_5_04_flow_field",
+        "name": "Flow Field Following",
+        "registry": "steering.json",
+        "category": "steering",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "particle_flow_swarm",
+        "name": "Particle Flow Swarm",
+        "registry": "change.json",
+        "category": "change",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "vector_field",
         "name": "vector_field",
         "registry": "transforms.json",
@@ -978,6 +1047,17 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "vector_field_grid",
+        "name": "Vector Field Grid",
+        "registry": "change.json",
+        "category": "change",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
         "recommended": false,
         "spines": []
       },
@@ -1013,58 +1093,14 @@
         "score": 12,
         "recommended": false,
         "spines": []
-      },
-      {
-        "lookup": "drag_coefficient_wind_tunnel",
-        "name": "Drag Coefficient Wind Tunnel",
-        "registry": "commons_artifacts.json",
-        "category": "physics",
-        "map_ready": true,
-        "has_image": false,
-        "score": 3,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "noc_5_04_flow_field",
-        "name": "Flow Field Following",
-        "registry": "steering.json",
-        "category": "steering",
-        "map_ready": true,
-        "has_image": false,
-        "score": 10,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "particle_flow_swarm",
-        "name": "Particle Flow Swarm",
-        "registry": "change.json",
-        "category": "change",
-        "map_ready": true,
-        "has_image": false,
-        "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "vector_field_grid",
-        "name": "Vector Field Grid",
-        "registry": "change.json",
-        "category": "change",
-        "map_ready": true,
-        "has_image": false,
-        "score": 9,
-        "recommended": false,
-        "spines": []
       }
     ],
     "Motion / velocity": [
       {
-        "lookup": "VectorMotion",
-        "name": "VectorMotion",
-        "registry": "vectors.json",
-        "category": "unknown",
+        "lookup": "bubble_blaster",
+        "name": "Bubble Blaster (output velocity vector)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
         "map_ready": true,
         "has_image": true,
         "score": 9,
@@ -1074,12 +1110,12 @@
         ]
       },
       {
-        "lookup": "bubble_blaster",
-        "name": "Bubble Blaster (output velocity vector)",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
+        "lookup": "VectorMotion",
+        "name": "VectorMotion",
+        "registry": "vectors.json",
+        "category": "unknown",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 9,
         "recommended": true,
         "spines": [
@@ -1153,6 +1189,28 @@
         "spines": []
       },
       {
+        "lookup": "SliderPress",
+        "name": "SliderPress",
+        "registry": "physics_simulation.json",
+        "category": "forces",
+        "map_ready": true,
+        "has_image": true,
+        "score": 3,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "velocity_arrow",
+        "name": "Velocity Arrow",
+        "registry": "change.json",
+        "category": "change",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "verlet_integration",
         "name": "Verlet Integration",
         "registry": "physics_simulation.json",
@@ -1164,34 +1222,12 @@
         "spines": []
       },
       {
-        "lookup": "SliderPress",
-        "name": "SliderPress",
-        "registry": "physics_simulation.json",
-        "category": "forces",
-        "map_ready": true,
-        "has_image": false,
-        "score": 3,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "velocity_arrow",
-        "name": "Velocity Arrow",
-        "registry": "change.json",
-        "category": "change",
-        "map_ready": true,
-        "has_image": false,
-        "score": 10,
-        "recommended": false,
-        "spines": []
-      },
-      {
         "lookup": "IKArm",
         "name": "IKArm",
         "registry": "physics_simulation.json",
         "category": "",
         "map_ready": false,
-        "has_image": false,
+        "has_image": true,
         "score": 3,
         "recommended": false,
         "spines": []
@@ -1204,13 +1240,24 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 10,
         "recommended": true,
         "spines": [
           "noc",
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "work_meter",
+        "name": "Work Meter (W = F·d·cosθ)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 16,
+        "recommended": false,
+        "spines": []
       }
     ],
     "Friction / drag": [
@@ -1220,7 +1267,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 11,
         "recommended": true,
         "spines": [
@@ -1233,7 +1280,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 10,
         "recommended": true,
         "spines": [
@@ -1291,7 +1338,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 3,
         "recommended": false,
         "spines": []
@@ -1304,13 +1351,24 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 14,
         "recommended": true,
         "spines": [
           "noc",
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "catapult",
+        "name": "Catapult",
+        "registry": "catapult.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 13,
+        "recommended": false,
+        "spines": []
       },
       {
         "lookup": "cube_projectile_spawner",
@@ -1320,6 +1378,17 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "firework_burst",
+        "name": "Firework Burst (projectile fountain)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
         "recommended": false,
         "spines": []
       },
@@ -1335,6 +1404,39 @@
         "spines": []
       },
       {
+        "lookup": "human_catapult",
+        "name": "Human Catapult",
+        "registry": "human_catapult.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 16,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "mortar_vector_siege",
+        "name": "Mortar Vector Siege",
+        "registry": "mortar_vector_siege.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 15,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "return_launcher",
+        "name": "Return Launcher (the way home)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 16,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "slingshot_launcher",
         "name": "Slingshot Launcher",
         "registry": "physics_simulation.json",
@@ -1342,6 +1444,17 @@
         "map_ready": true,
         "has_image": true,
         "score": 16,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "slingshot_pull",
+        "name": "Slingshot (elastic launch, PE = 1/2 k x^2)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
         "recommended": false,
         "spines": []
       },
@@ -1357,78 +1470,12 @@
         "spines": []
       },
       {
-        "lookup": "catapult",
-        "name": "Catapult",
-        "registry": "catapult.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 13,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "firework_burst",
-        "name": "Firework Burst (projectile fountain)",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 10,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "human_catapult",
-        "name": "Human Catapult",
-        "registry": "human_catapult.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 16,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "mortar_vector_siege",
-        "name": "Mortar Vector Siege",
-        "registry": "mortar_vector_siege.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 15,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "return_launcher",
-        "name": "Return Launcher (the way home)",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 16,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "slingshot_pull",
-        "name": "Slingshot (elastic launch, PE = 1/2 k x^2)",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 7,
-        "recommended": false,
-        "spines": []
-      },
-      {
         "lookup": "sub_emitters",
         "name": "sub_emitters",
         "registry": "physics_simulation.json",
         "category": "",
         "map_ready": false,
-        "has_image": false,
+        "has_image": true,
         "score": 3,
         "recommended": false,
         "spines": []
@@ -1441,7 +1488,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 12,
         "recommended": true,
         "spines": [
@@ -1454,7 +1501,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 9,
         "recommended": true,
         "spines": [
@@ -1467,7 +1514,7 @@
         "registry": "commons_artifacts.json",
         "category": "physics",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 9,
         "recommended": false,
         "spines": []
@@ -1480,7 +1527,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 12,
         "recommended": true,
         "spines": [
@@ -1494,7 +1541,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 15,
         "recommended": true,
         "spines": [
@@ -1674,7 +1721,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 14,
         "recommended": true,
         "spines": [
@@ -1737,10 +1784,32 @@
         "spines": []
       },
       {
+        "lookup": "spring_chain",
+        "name": "Spring Chain",
+        "registry": "commons_artifacts.json",
+        "category": "physics",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "spring_demo",
         "name": "Spring Demo",
         "registry": "commons_artifacts.json",
         "category": "physics",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "spring_hopper",
+        "name": "Spring Hopper",
+        "registry": "hazards.json",
+        "category": "hazards",
         "map_ready": true,
         "has_image": true,
         "score": 10,
@@ -1792,6 +1861,17 @@
         "spines": []
       },
       {
+        "lookup": "spring_tower",
+        "name": "Spring Tower (walk-in Hooke)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 17,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "SpringSuspension",
         "name": "SpringSuspension",
         "registry": "physics_simulation.json",
@@ -1812,39 +1892,6 @@
         "score": 3,
         "recommended": false,
         "spines": []
-      },
-      {
-        "lookup": "spring_chain",
-        "name": "Spring Chain",
-        "registry": "commons_artifacts.json",
-        "category": "physics",
-        "map_ready": true,
-        "has_image": false,
-        "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "spring_hopper",
-        "name": "Spring Hopper",
-        "registry": "hazards.json",
-        "category": "hazards",
-        "map_ready": true,
-        "has_image": false,
-        "score": 10,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "spring_tower",
-        "name": "Spring Tower (walk-in Hooke)",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 17,
-        "recommended": false,
-        "spines": []
       }
     ],
     "Pendulum": [
@@ -1854,7 +1901,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 6,
         "recommended": true,
         "spines": [
@@ -1961,6 +2008,28 @@
         "spines": []
       },
       {
+        "lookup": "pendulum",
+        "name": "Pendulum",
+        "registry": "lab.json",
+        "category": "lab_prop",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "pendulum_hall",
+        "name": "Pendulum Hall (walk-in)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "pendulum_slap",
         "name": "Pendulum Slap",
         "registry": "soft_bodies.json",
@@ -2014,28 +2083,6 @@
         "score": 6,
         "recommended": false,
         "spines": []
-      },
-      {
-        "lookup": "pendulum",
-        "name": "Pendulum",
-        "registry": "lab.json",
-        "category": "lab_prop",
-        "map_ready": true,
-        "has_image": false,
-        "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "pendulum_hall",
-        "name": "Pendulum Hall (walk-in)",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 6,
-        "recommended": false,
-        "spines": []
       }
     ],
     "Momentum / collision": [
@@ -2045,12 +2092,34 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 9,
         "recommended": true,
         "spines": [
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "collision_carts",
+        "name": "Collision Carts (momentum exchange)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "impulse_collision_demo",
+        "name": "Impulse Collision Demo",
+        "registry": "commons_artifacts.json",
+        "category": "physics",
+        "map_ready": true,
+        "has_image": true,
+        "score": 12,
+        "recommended": false,
+        "spines": []
       },
       {
         "lookup": "newton_cradle",
@@ -2064,34 +2133,12 @@
         "spines": []
       },
       {
-        "lookup": "collision_carts",
-        "name": "Collision Carts (momentum exchange)",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 9,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "impulse_collision_demo",
-        "name": "Impulse Collision Demo",
-        "registry": "commons_artifacts.json",
-        "category": "physics",
-        "map_ready": true,
-        "has_image": false,
-        "score": 12,
-        "recommended": false,
-        "spines": []
-      },
-      {
         "lookup": "momentum_collision",
         "name": "Momentum Collision",
         "registry": "physics_simulation.json",
         "category": "physics",
         "map_ready": false,
-        "has_image": false,
+        "has_image": true,
         "score": 6,
         "recommended": false,
         "spines": []
@@ -2104,7 +2151,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 10,
         "recommended": true,
         "spines": [
@@ -2163,7 +2210,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 13,
         "recommended": true,
         "spines": [
@@ -2176,7 +2223,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 16,
         "recommended": false,
         "spines": []
@@ -2187,7 +2234,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 13,
         "recommended": false,
         "spines": []
@@ -2200,7 +2247,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 10,
         "recommended": true,
         "spines": [
@@ -2224,7 +2271,7 @@
         "registry": "arrays.json",
         "category": "primitives",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 6,
         "recommended": false,
         "spines": []
@@ -2237,7 +2284,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 12,
         "recommended": true,
         "spines": [
@@ -2272,7 +2319,7 @@
         "registry": "force_vortex.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 9,
         "recommended": false,
         "spines": []
@@ -2283,7 +2330,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 9,
         "recommended": false,
         "spines": []
@@ -2296,7 +2343,7 @@
         "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 7,
         "recommended": true,
         "spines": [
@@ -2309,13 +2356,24 @@
         "registry": "force_pad.json",
         "category": "vectors",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 7,
         "recommended": true,
         "spines": [
           "noc",
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "example_2_1_forces_vr",
+        "name": "Forces (2.1)",
+        "registry": "physics_simulation.json",
+        "category": "forces",
+        "map_ready": true,
+        "has_image": true,
+        "score": 11,
+        "recommended": false,
+        "spines": []
       },
       {
         "lookup": "example_2_2_forces_mass_variation_vr",
@@ -2380,17 +2438,6 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "example_2_1_forces_vr",
-        "name": "Forces (2.1)",
-        "registry": "physics_simulation.json",
-        "category": "forces",
-        "map_ready": true,
-        "has_image": false,
-        "score": 11,
         "recommended": false,
         "spines": []
       }

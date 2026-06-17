@@ -42,7 +42,7 @@ def is_candidate(reg, lookup):
 # ties break to the earlier (more specific) concept. "General force / pad" is the catch-all.
 CONCEPTS = [
  ("Coordinate system", ["coordinate","basis vector","basis_vector","cartesian","coordinatesystem","homogeneous_coordinates","xyz_coordinates","polar_to_cartesian"], []),
- ("Vector basics", ["vectorbasics","vector basics","what is a vector","build a vector","build_a_vector","vector_intro"], []),
+ ("Vector basics", ["vectorbasics","vector basics","what is a vector","build a vector","build_a_vector","vector_intro","free_vector"], []),
  ("Magnitude / length", ["magnitude","length_lantern","vector length","vector_magnitude","stretch_bench"], [r"re:\bnorm\b"]),
  ("Unit vector / normalize", ["normalize","normaliz","unit vector","vector_normalize"], []),
  ("Addition", ["vector_add","vectoraddition","vector addition","adder_board","vector_addition",r"re:\bresultant\b","head to tail","tip to tail"], []),
@@ -53,7 +53,7 @@ CONCEPTS = [
  ("Cross product / torque", ["cross_product","crossproduct","vectorcross","vectortorque","torque_crank","cross product","torque"], ["perpendicular"]),
  ("Vector field / flow", ["vector_field","vectorfield","vectorfieldflow","flow_field","flowfield","weather_vector_field","vector field","flow field","streamline"], [r"re:\bflow field\b"]),
  ("Motion / velocity", ["vectormotion","vector_motion","velocity","kinematic","motion vector","bubble_blaster","smart_rocket"], [r"re:\bmotion\b","accelerat"]),
- ("Work (F.d)", ["force_mower","work done","f.d","f·d","cos_theta_work","mower"], [r"re:\bwork\b"]),
+ ("Work (F.d)", ["force_mower","work_meter","work done","f.d","f·d","cos_theta_work","mower"], [r"re:\bwork\b"]),
  ("Friction / drag", ["friction","drag_lane","drag_corridor","fluid_resistance","fluid resistance","air resistance","example_2_5"], [r"re:\bdrag\b","resistance","damper"]),
  ("Projectile / launch", ["projectile","launch_arc","launcher","catapult","ballistic","vectorthrowing","projectile motion","trajectory","return_launcher","human_catapult","mortar_vector"], [r"re:\blaunch\b",r"re:\bthrow"]),
  ("Centripetal", ["centripet","centrifuge","circle_train","circular motion","uniform circular"], []),
@@ -114,6 +114,7 @@ def main():
                 })
     # mark the recommended artifact per concept, read from the tutorial spines (the curated pick)
     recommended = {}
+    truth_by_art = {}
     for sp in glob.glob(os.path.join(ROOT, "doc", "*_tutorial_spine.json")):
         try:
             s = json.load(open(sp, encoding="utf-8"))
@@ -124,6 +125,8 @@ def main():
             art = cc.get("artifact")
             if art:
                 recommended.setdefault(art, []).append(sid)
+                if cc.get("truth") and art not in truth_by_art:
+                    truth_by_art[art] = cc["truth"]
     for c in groups:
         for a in groups[c]:
             a["recommended"] = a["lookup"] in recommended
@@ -145,10 +148,12 @@ def main():
     for c in groups:
         arts = groups[c]
         act = concept_act.get(c, "")
+        best = next((a["lookup"] for a in arts if a["recommended"]), None)
         meta[c] = {
             "count": len(arts),
             "map_ready": sum(1 for a in arts if a["map_ready"]),
-            "best": next((a["lookup"] for a in arts if a["recommended"]), None),
+            "best": best,
+            "truth": truth_by_art.get(best, ""),
             "act": act,
             "kind": "vector" if act in vector_acts else "force",
             "thin": len(arts) <= 1 or not any(a["map_ready"] for a in arts),
