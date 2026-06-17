@@ -175,7 +175,8 @@ func _build_single_slider(meta: Dictionary) -> void:
 		var s: Node = load(SLIDER_SCENE).instantiate()
 		s.name = "ParamSlider"
 		add_child(s)
-		(s as Node3D).position = Vector3(0.46, 0.95, 0.16)
+		(s as Node3D).position = Vector3(0.46, 1.03, 0.30)              # lifted off the console top, on the front lip
+		(s as Node3D).rotation = Vector3(deg_to_rad(-32.0), 0.0, 0.0)   # tilted up toward the player, not sunk flat in the surface
 		if s.has_method("set_param_name"): s.call("set_param_name", String(meta.get("slider", "PARAM")))
 		if s.has_method("set_range"): s.call("set_range", 0.0, 1.0)
 		if s.has_method("set_normalized_value"): s.call("set_normalized_value", _param_get())
@@ -183,7 +184,7 @@ func _build_single_slider(meta: Dictionary) -> void:
 			s.connect("slider_moved", _on_slider_moved)
 		_accent_handles(s)
 		_slider = s
-	add_child(_label_plate(String(meta.get("slider", "PARAM")) + "  (drag →)", Vector3(0.46, 1.06, 0.16), 20, TEXT_DARK))
+	add_child(_label_plate(String(meta.get("slider", "PARAM")) + "  (drag →)", Vector3(0.46, 1.24, 0.22), 20, TEXT_DARK))
 
 
 # --- the multi-control bank (sliders / dials / 2D pads in a row) -------------
@@ -260,7 +261,8 @@ func _build_scalar(spec: Dictionary, kind: String, x: float) -> void:
 	var c: Node = load(scene_path).instantiate()
 	c.name = "Ctl_" + String(spec.get("label", ""))
 	add_child(c)
-	(c as Node3D).position = Vector3(x, 0.95, 0.18)
+	(c as Node3D).position = Vector3(x, 1.03, 0.30)               # lifted off the console top, on the front lip
+	(c as Node3D).rotation = Vector3(deg_to_rad(-32.0), 0.0, 0.0) # tilted up toward the player, not sunk flat in the surface
 	if c.has_method("set_param_name"): c.call("set_param_name", String(spec.get("label", "")))
 	if c.has_method("set_range"): c.call("set_range", 0.0, 1.0)
 	if c.has_method("set_normalized_value"): c.call("set_normalized_value", clampf(spec["get"].call(), 0.0, 1.0))
@@ -270,7 +272,7 @@ func _build_scalar(spec: Dictionary, kind: String, x: float) -> void:
 		c.connect(sig, handler)
 	_accent_handles(c)
 	_controls_built.append(c)
-	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.06, 0.18), 18, TEXT_DARK))
+	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.24, 0.22), 18, TEXT_DARK))
 
 
 # pad signal carries a Vector2 in ±PAD_LIMIT → normalize to -1..1, push, rebuild.
