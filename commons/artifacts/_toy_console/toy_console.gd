@@ -212,27 +212,29 @@ func _build_pad(spec: Dictionary, x: float) -> void:
 	add_child(pad)
 	pad.position = Vector3(x, 1.02, 0.34)                  # lifted onto the front lip, toward the player
 	pad.rotation = Vector3(deg_to_rad(-50.0), 0.0, 0.0)   # face tilts up toward the player
-	pad.scale = Vector3.ONE * 1.3
+	# interactable_demo principle: the grabbable control must sit at UNIT world scale — a scaled
+	# ancestor breaks XR handle-driven grab (the offset is read through global_transform.basis). So
+	# the pad stays unit scale; the Braun bezel is a scaled DECORATIVE sub-node (size/look unchanged),
+	# and slider_plane is a direct child of the unit pad so its ball actually moves.
+	var bezel := Node3D.new()
+	bezel.name = "Bezel"
+	bezel.scale = Vector3.ONE * 1.3                                                                  # decorative meshes only — scale here is harmless
+	pad.add_child(bezel)
+	bezel.add_child(_box(Vector3.ZERO, Vector3(0.24, 0.24, 0.02), _panel_mat(PANEL_TRIM)))           # bezel
+	bezel.add_child(_box(Vector3(0.0, 0.0, 0.013), Vector3(0.20, 0.20, 0.004), _screen_mat()))       # recessed face
+	bezel.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.20, 0.004, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))  # cross-hair
+	bezel.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.004, 0.20, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
 
-	# Braun bezel + recessed face + cross-hair (the look) — the moveable handle sits ON the face.
-	var plate := Node3D.new()
-	plate.name = "Plate"
-	pad.add_child(plate)
-	plate.add_child(_box(Vector3.ZERO, Vector3(0.24, 0.24, 0.02), _panel_mat(PANEL_TRIM)))          # bezel
-	plate.add_child(_box(Vector3(0.0, 0.0, 0.013), Vector3(0.20, 0.20, 0.004), _screen_mat()))      # recessed face
-	plate.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.20, 0.004, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))  # cross-hair
-	plate.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.004, 0.20, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
-
-	# the WORKING 2D control: slider_plane's grabbable handle, moving in the plate face. Its own
-	# base/track are hidden so only the handle shows inside the Braun bezel; it emits slider_moved
-	# (a Vector2 in ±PAD_LIMIT) → _make_pad_handler pushes the vector tip and rebuilds the demo.
+	# the WORKING 2D control: slider_plane's grabbable handle at UNIT scale, a DIRECT child of the
+	# unit pad (correct grab math), resting on the scaled plate face. Its base/track are hidden so
+	# only the handle shows in the bezel; it emits slider_moved (Vector2 in ±PAD_LIMIT) → _make_pad_handler.
 	var wired := false
 	if ResourceLoader.exists(PAD_SCENE):
 		var ctl: Node = load(PAD_SCENE).instantiate()
 		ctl.name = "Ctl_" + String(spec.get("label", ""))
-		plate.add_child(ctl)
-		(ctl as Node3D).rotation = Vector3(0.0, deg_to_rad(-90.0), 0.0)   # map the slider's Y-Z plane onto the plate's X-Y face
-		(ctl as Node3D).position = Vector3(0.0, 0.0, 0.016)
+		pad.add_child(ctl)                                               # direct child of the UNIT pad → unit world scale
+		(ctl as Node3D).rotation = Vector3(0.0, deg_to_rad(-90.0), 0.0)  # map the slider's Y-Z plane onto the plate's X-Y face
+		(ctl as Node3D).position = Vector3(0.0, 0.0, 0.016 * 1.3)        # rest on the scaled plate face
 		for p in ["Frame/BaseMesh", "Frame/TrackMesh", "Frame/Label3DValue"]:
 			var n: Node = ctl.get_node_or_null(p)
 			if n and n is Node3D: (n as Node3D).visible = false
@@ -246,7 +248,7 @@ func _build_pad(spec: Dictionary, x: float) -> void:
 	if not wired:                                          # fallback: a static knob if the control is missing
 		var knob := Node3D.new(); knob.name = "Knob"
 		knob.position = Vector3(clampf(iv.x, -1.0, 1.0) * 0.09, clampf(iv.y, -1.0, 1.0) * 0.09, 0.0)
-		plate.add_child(knob)
+		bezel.add_child(knob)
 		knob.add_child(_cylinder_between(Vector3(0, 0, 0.016), Vector3(0, 0, 0.05), 0.014, _accent_mat()))
 		knob.add_child(_sphere(Vector3(0, 0, 0.056), 0.028, _accent_mat()))
 
