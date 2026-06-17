@@ -42,18 +42,18 @@ def is_candidate(reg, lookup):
 # ties break to the earlier (more specific) concept. "General force / pad" is the catch-all.
 CONCEPTS = [
  ("Coordinate system", ["coordinate","basis vector","basis_vector","cartesian","coordinatesystem","homogeneous_coordinates","xyz_coordinates","polar_to_cartesian"], []),
- ("Vector basics", ["vectorbasics","vector basics","what is a vector","build a vector","build_a_vector","vector_intro","free_vector","route_vector"], []),
+ ("Vector basics", ["vectorbasics","vector basics","what is a vector","build a vector","build_a_vector","vector_intro","free_vector","route_vector","vector_bench"], []),
  ("Magnitude / length", ["magnitude","length_lantern","vector length","vector_magnitude","stretch_bench"], [r"re:\bnorm\b"]),
  ("Unit vector / normalize", ["normalize","normaliz","unit vector","vector_normalize"], []),
  ("Addition", ["vector_add","vectoraddition","vector addition","adder_board","vector_addition","tug_of_war",r"re:\bresultant\b","head to tail","tip to tail"], []),
  ("Subtraction", ["vector_sub","vectorsubtraction","vector subtraction","vector_subtraction","river_crossing","difference vector"], []),
- ("Scaling", ["scaleme","scale_me","scalar","vector multiplication","multiplication_vr","scaled_by_mass","pickup_cube_scaling","array_scale","scale_lines","throttle_gain"], ["scaling"]),
+ ("Scaling", ["scaleme","scale_me","scalar","vector multiplication","multiplication_vr","scaled_by_mass","pickup_cube_scaling","array_scale","scale_lines","throttle_gain","scaling_bench"], ["scaling"]),
  ("Dot product", ["dot_product","dotproduct","dot_aligner","dot product","vectordotproduct"], ["agreement","alignment"]),
- ("Projection / reflection", ["projection_shadow","projectionreflection","vectorprojection","projection vector","reflection vector","reflection_hall"], [r"re:\bprojection\b",r"re:\breflect"]),
+ ("Projection / reflection", ["projection_shadow","projectionreflection","vectorprojection","projection vector","reflection vector","reflection_hall","projection_toy"], [r"re:\bprojection\b",r"re:\breflect"]),
  ("Cross product / torque", ["cross_product","crossproduct","vectorcross","vectortorque","torque_crank","cross product","torque"], ["perpendicular"]),
  ("Vector field / flow", ["vector_field","vectorfield","vectorfieldflow","flow_field","flowfield","weather_vector_field","vector field","flow field","streamline"], [r"re:\bflow field\b"]),
  ("Motion / velocity", ["vectormotion","vector_motion","velocity","kinematic","motion vector","bubble_blaster","smart_rocket"], [r"re:\bmotion\b","accelerat"]),
- ("Work (F.d)", ["force_mower","work_meter","work done","f.d","f·d","cos_theta_work","mower"], [r"re:\bwork\b"]),
+ ("Work (F.d)", ["force_mower","work_meter","work done","f.d","f·d","cos_theta_work","mower","work_toy","work_room"], [r"re:\bwork\b"]),
  ("Friction / drag", ["friction","drag_lane","drag_corridor","fluid_resistance","fluid resistance","air resistance","example_2_5","brake_skid"], [r"re:\bdrag\b","resistance","damper"]),
  ("Projectile / launch", ["projectile","launch_arc","launcher","catapult","ballistic","vectorthrowing","projectile motion","trajectory","return_launcher","human_catapult","mortar_vector"], [r"re:\blaunch\b",r"re:\bthrow"]),
  ("Centripetal", ["centripet","centrifuge","circle_train","circular motion","uniform circular"], []),
@@ -64,8 +64,8 @@ CONCEPTS = [
  ("Restitution / bounce", ["restitution","bounce_well","coefficient of restitution","bounce height","bouncing ball"], [r"re:\bbounce\b","rebound"]),
  ("Lever / balance", ["lever","calder","seesaw","fulcrum","torque balance","balance_puzzle","lever_balance","calder_mobile","calder_object"], [r"re:\bbalance\b"]),
  ("Wind / weather", ["weather_vane","windmill","wind_toy","wind_bench","wind_room",r"re:\bwind\b","breeze","weather vector"], ["flag"]),
- ("Force field (zone)", ["force_field","force_field_zone","field zone","void crossing","force_vortex","vector_machine"], []),
- ("General force / pad", ["force_pad","force_cube","forcemagnitude","newton_bench","f = ma","f=ma","newtons_laws","applied force","vectorforces","example_2_1","example_2_2","example_2_3","example_3_2","exercise_1"], [r"re:\bforce\b",r"re:\bnewton\b"]),
+ ("Force field (zone)", ["force_field","force_field_zone","field zone","void crossing","force_vortex","vector_machine","field_bench"], []),
+ ("General force / pad", ["force_pad","force_cube","forcemagnitude","newton_bench","force_room","f = ma","f=ma","newtons_laws","applied force","vectorforces","example_2_1","example_2_2","example_2_3","example_3_2","exercise_1"], [r"re:\bforce\b",r"re:\bnewton\b"]),
 ]
 
 # Four slots per concept, smallest→biggest in space and abstract→applied:

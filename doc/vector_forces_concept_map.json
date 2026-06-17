@@ -67,8 +67,8 @@
       "missing_tiers": []
     },
     "Vector basics": {
-      "count": 3,
-      "map_ready": 3,
+      "count": 4,
+      "map_ready": 4,
       "best": "VectorBasics",
       "truth": "A vector is a step, not a place - a direction and a length you can carry anywhere.",
       "act": "Act I — what a vector is",
@@ -78,7 +78,9 @@
         "small": [
           "VectorBasics"
         ],
-        "medium": [],
+        "medium": [
+          "vector_bench"
+        ],
         "large": [
           "free_vector"
         ],
@@ -86,13 +88,11 @@
           "route_vector"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Magnitude / length": {
-      "count": 4,
-      "map_ready": 4,
+      "count": 5,
+      "map_ready": 5,
       "best": null,
       "truth": "",
       "act": "Act I — what a vector is",
@@ -106,14 +106,14 @@
         "medium": [
           "magnitude_bench"
         ],
-        "large": [],
+        "large": [
+          "magnitude_hall"
+        ],
         "applied": [
           "vector_arena"
         ]
       },
-      "missing_tiers": [
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Unit vector / normalize": {
       "count": 7,
@@ -197,8 +197,8 @@
       "missing_tiers": []
     },
     "Scaling": {
-      "count": 8,
-      "map_ready": 8,
+      "count": 9,
+      "map_ready": 9,
       "best": "example_2_3_gravity_scaled_by_mass_vr",
       "truth": "A scalar is a volume knob for a direction - same line, new length.",
       "act": "Act II — vector arithmetic",
@@ -213,7 +213,9 @@
           "scale_lines",
           "scale_me"
         ],
-        "medium": [],
+        "medium": [
+          "scaling_bench"
+        ],
         "large": [
           "scaleme"
         ],
@@ -221,9 +223,7 @@
           "throttle_gain"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Dot product": {
       "count": 8,
@@ -254,15 +254,17 @@
       "missing_tiers": []
     },
     "Projection / reflection": {
-      "count": 4,
-      "map_ready": 4,
+      "count": 5,
+      "map_ready": 5,
       "best": "projection_shadow",
       "truth": "projection is the part of you that lives along someone else's line",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
       "thin": false,
       "tiers": {
-        "small": [],
+        "small": [
+          "projection_toy"
+        ],
         "medium": [
           "VectorProjectionReflection"
         ],
@@ -274,9 +276,7 @@
           "projection_shadow"
         ]
       },
-      "missing_tiers": [
-        "small"
-      ]
+      "missing_tiers": []
     },
     "Cross product / torque": {
       "count": 9,
@@ -372,27 +372,28 @@
       "missing_tiers": []
     },
     "Work (F.d)": {
-      "count": 2,
-      "map_ready": 2,
+      "count": 4,
+      "map_ready": 4,
       "best": "force_mower",
       "truth": "Only the part along the motion does work: W = F*d*cos(t).",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false,
       "tiers": {
-        "small": [],
+        "small": [
+          "work_toy"
+        ],
         "medium": [
           "work_meter"
         ],
-        "large": [],
+        "large": [
+          "work_room"
+        ],
         "applied": [
           "force_mower"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Friction / drag": {
       "count": 8,
@@ -640,28 +641,29 @@
       "missing_tiers": []
     },
     "Lever / balance": {
-      "count": 3,
-      "map_ready": 3,
+      "count": 5,
+      "map_ready": 5,
       "best": "lever_balance",
       "truth": "a lever trades force for distance and never gets something for nothing. *(The Calder mobile is this law, drifting — every arm balanced by real weights.)*",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false,
       "tiers": {
-        "small": [],
+        "small": [
+          "lever_toy"
+        ],
         "medium": [
           "lever_balance"
         ],
-        "large": [],
+        "large": [
+          "lever_room"
+        ],
         "applied": [
           "calder_mobile",
           "calder_object_mobile"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Wind / weather": {
       "count": 6,
@@ -690,8 +692,8 @@
       "missing_tiers": []
     },
     "Force field (zone)": {
-      "count": 5,
-      "map_ready": 5,
+      "count": 6,
+      "map_ready": 6,
       "best": "force_field_zone",
       "truth": "falling isn't a property of the void; it's a property of the field over it — and the field is a vector you can turn",
       "act": "Act V — force as place",
@@ -702,7 +704,9 @@
           "force_field_visualizer",
           "vector_machine"
         ],
-        "medium": [],
+        "medium": [
+          "field_bench"
+        ],
         "large": [
           "force_field"
         ],
@@ -711,13 +715,11 @@
           "force_vortex"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "General force / pad": {
-      "count": 10,
-      "map_ready": 10,
+      "count": 11,
+      "map_ready": 11,
       "best": "force_cube",
       "truth": "A force is a vector on a mass: F = m*a.",
       "act": "Act V — force as place",
@@ -737,19 +739,19 @@
         "medium": [
           "newton_bench"
         ],
-        "large": [],
+        "large": [
+          "force_room"
+        ],
         "applied": [
           "force_pad"
         ]
       },
-      "missing_tiers": [
-        "large"
-      ]
+      "missing_tiers": []
     }
   },
-  "total": 202,
+  "total": 212,
   "recommended_total": 29,
-  "map_ready_total": 199,
+  "map_ready_total": 209,
   "groups": {
     "Coordinate system": [
       {
@@ -928,6 +930,19 @@
         "tier": "applied",
         "recommended": false,
         "spines": []
+      },
+      {
+        "lookup": "vector_bench",
+        "name": "Vector Bench (direction + length)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 4,
+        "tier": "medium",
+        "recommended": false,
+        "spines": []
       }
     ],
     "Magnitude / length": [
@@ -954,6 +969,19 @@
         "score": 6,
         "fp": 4,
         "tier": "medium",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "magnitude_hall",
+        "name": "Magnitude Hall (walk-in |v|)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1368,6 +1396,19 @@
         "spines": []
       },
       {
+        "lookup": "scaling_bench",
+        "name": "Scaling Bench (k x v)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 4,
+        "tier": "medium",
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "throttle_gain",
         "name": "Throttle Gain (applied scaling)",
         "registry": "vectors_demos.json",
@@ -1504,6 +1545,19 @@
         "spines": [
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "projection_toy",
+        "name": "Projection Toy (held, onto a line)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 8,
+        "fp": 2,
+        "tier": "small",
+        "recommended": false,
+        "spines": []
       },
       {
         "lookup": "reflection_hall",
@@ -2015,6 +2069,32 @@
         "score": 16,
         "fp": 6,
         "tier": "medium",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "work_room",
+        "name": "Work Room (walk-in F.d)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 9,
+        "tier": "large",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "work_toy",
+        "name": "Work Toy (held W = F.d.cos th)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -3206,6 +3286,32 @@
         "tier": "applied",
         "recommended": false,
         "spines": []
+      },
+      {
+        "lookup": "lever_room",
+        "name": "Lever Room (walk-in balance beam)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 9,
+        "tier": "large",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "lever_toy",
+        "name": "Lever Toy (held seesaw)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 16,
+        "fp": 2,
+        "tier": "small",
+        "recommended": false,
+        "spines": []
       }
     ],
     "Wind / weather": [
@@ -3305,6 +3411,19 @@
         "spines": [
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "field_bench",
+        "name": "Field Bench (a vector at every point)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "fp": 4,
+        "tier": "medium",
+        "recommended": false,
+        "spines": []
       },
       {
         "lookup": "force_field",
@@ -3440,6 +3559,19 @@
         "score": 6,
         "fp": 1,
         "tier": "small",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "force_room",
+        "name": "Force Room (walk-in F = m.a)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 14,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },

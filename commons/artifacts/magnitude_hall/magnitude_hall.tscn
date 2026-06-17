@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/magnitude_hall/magnitude_hall.gd" id="1"]
+
+[node name="MagnitudeHall" type="Node3D"]
+script = ExtResource("1")

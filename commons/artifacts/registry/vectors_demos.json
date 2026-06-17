@@ -3273,6 +3273,455 @@
         "measured_footprint_cells": 9,
         "footprint_source": "designed"
       }
+    },
+    "work_toy": {
+      "lookup_name": "work_toy",
+      "scene": "res://commons/artifacts/work_toy/work_toy.tscn",
+      "class_name": "WorkToy",
+      "name": "Work Toy (held W = F.d.cos th)",
+      "description": "Hand-scale Work: a small block pushed a short distance at an angle; the useful along-the-ground part does work, the perpendicular part is wasted. The world only feels the part of a force that goes its way.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "work",
+        "energy"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "work_room": {
+      "lookup_name": "work_room",
+      "scene": "res://commons/artifacts/work_room/work_room.tscn",
+      "class_name": "WorkRoom",
+      "name": "Work Room (walk-in F.d)",
+      "description": "Room-scale Work: push a big cart down a long floor and watch the work accumulate as force paid out over distance. Only the part along the motion counts.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "work",
+        "walk-in",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "lever_toy": {
+      "lookup_name": "lever_toy",
+      "scene": "res://commons/artifacts/lever_toy/lever_toy.tscn",
+      "class_name": "LeverToy",
+      "name": "Lever Toy (held seesaw)",
+      "description": "Hand-scale lever: a beam on a fulcrum with a weight each side; it tips toward the larger moment and settles. tau = F.d; a lever trades force for distance.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "lever",
+        "torque",
+        "balance"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "lever_room": {
+      "lookup_name": "lever_room",
+      "scene": "res://commons/artifacts/lever_room/lever_room.tscn",
+      "class_name": "LeverRoom",
+      "name": "Lever Room (walk-in balance beam)",
+      "description": "Room-scale lever: a big balance beam on a tall fulcrum, heavy near the pivot vs light far out, settling at F1.d1 = F2.d2. Far out, a small weight outweighs a big one near in.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "lever",
+        "balance",
+        "walk-in",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "vector_bench": {
+      "lookup_name": "vector_bench",
+      "scene": "res://commons/artifacts/vector_bench/vector_bench.tscn",
+      "class_name": "VectorBench",
+      "name": "Vector Bench (direction + length)",
+      "description": "Bench-scale vector basics: an arrow that sweeps both its direction and its length, with its components drawn. A vector is two facts only - a direction and a length.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "vector",
+        "basics",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "scaling_bench": {
+      "lookup_name": "scaling_bench",
+      "scene": "res://commons/artifacts/scaling_bench/scaling_bench.tscn",
+      "class_name": "ScalingBench",
+      "name": "Scaling Bench (k x v)",
+      "description": "Bench-scale scaling: a base vector and an output = k.v that grows and shrinks along the same line as the dial turns. A scalar is a volume knob for a direction.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "vector",
+        "scaling",
+        "scalar",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "field_bench": {
+      "lookup_name": "field_bench",
+      "scene": "res://commons/artifacts/field_bench/field_bench.tscn",
+      "class_name": "FieldBench",
+      "name": "Field Bench (a vector at every point)",
+      "description": "Bench-scale force field: a grid of little arrows all pointing one slowly-rotating direction, with a test dot drifting in the field. A field is force that has decided to be everywhere at once.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "field",
+        "flow",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "magnitude_hall": {
+      "lookup_name": "magnitude_hall",
+      "scene": "res://commons/artifacts/magnitude_hall/magnitude_hall.tscn",
+      "class_name": "MagnitudeHall",
+      "name": "Magnitude Hall (walk-in |v|)",
+      "description": "Room-scale magnitude: a giant vector spanning the floor with its component box as walkable dashed edges; walk the diagonal and read |v| = sqrt(x2+y2+z2).",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "vector",
+        "magnitude",
+        "walk-in",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "force_room": {
+      "lookup_name": "force_room",
+      "scene": "res://commons/artifacts/force_room/force_room.tscn",
+      "class_name": "ForceRoom",
+      "name": "Force Room (walk-in F = m.a)",
+      "description": "Room-scale Newton's second law: a big mass with an applied force arrow and the acceleration it produces, a = F/m at body scale. A force is a vector applied to a mass.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "newton",
+        "f=ma",
+        "walk-in",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "projection_toy": {
+      "lookup_name": "projection_toy",
+      "scene": "res://commons/artifacts/projection_toy/projection_toy.tscn",
+      "class_name": "ProjectionToy",
+      "name": "Projection Toy (held, onto a line)",
+      "description": "Hand-scale projection: a vector and a rail; the shadow of the vector along the rail is the projection (v.n_hat), the perpendicular drop is the rejection. Projection is the part of you that lives along someone else's line.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "vector",
+        "projection",
+        "reflection"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "forces"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
     }
   }
 }
