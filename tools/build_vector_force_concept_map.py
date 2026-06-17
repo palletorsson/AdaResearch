@@ -68,6 +68,23 @@ CONCEPTS = [
  ("General force / pad", ["force_pad","force_cube","forcemagnitude","f = ma","f=ma","newtons_laws","applied force","vectorforces","example_2_1","example_2_2","example_2_3","example_3_2","exercise_1"], [r"re:\bforce\b",r"re:\bnewton\b"]),
 ]
 
+# Four slots per concept, smallest→biggest in space and abstract→applied:
+#   small   — intimate, held (footprint <=2)
+#   medium  — bench / console (footprint 3-8)
+#   large   — room-scale walk-in installation (footprint >=9 or a walk-in name)
+#   applied — the concept doing a real job (a tool or scenario), regardless of size
+# Heuristic only — the picker UI lets the human override per slot.
+APPLIED_KW = ["mower", "catapult", "launcher", "slingshot", "mobile", "weather_vane", "windmill",
+              "cradle", "bounce_well", "force_field_zone", "vortex", "_gun", "gun_test", "siege",
+              "mortar", "return_", "human_", "wind_tunnel", "drone", "arena", "_game"]
+LARGE_KW = ["_xl", "xl_", "_walk", "_hall", "_tower", "_ring", "corridor", "chamber", "storm", "centrifuge"]
+def tier_of(lookup, name, fp):
+    low = (lookup + " " + name).lower()
+    if any(k in low for k in APPLIED_KW): return "applied"
+    if any(k in low for k in LARGE_KW) or fp >= 9: return "large"
+    if fp >= 3: return "medium"
+    return "small"
+
 def _hit(text, kw):
     if kw.startswith("re:"):
         return re.search(kw[3:], text) is not None
@@ -105,12 +122,20 @@ def main():
                     best, bestscore = cname, sc
             if best and bestscore >= 3:           # require at least one strong (or 3 weak) match
                 seen.add(k)
+                snfp = (v.get("spatial_needs", {}) or {}).get("footprint_cells", 1)
+                if isinstance(snfp, list):
+                    nums = [int(x) for x in snfp if x]
+                    snfp = max(nums) if nums else 1
+                else:
+                    snfp = int(snfp or 1)
                 groups[best].append({
                     "lookup": lookup, "name": name, "registry": reg,
                     "category": str(v.get("category","")),
                     "map_ready": bool(v.get("map_ready")),
                     "has_image": os.path.exists(os.path.join(IMG_DIR, lookup + ".png")),
                     "score": bestscore,
+                    "fp": snfp,
+                    "tier": tier_of(lookup, name, snfp),
                 })
     # mark the recommended artifact per concept, read from the tutorial spines (the curated pick)
     recommended = {}
@@ -149,6 +174,8 @@ def main():
         arts = groups[c]
         act = concept_act.get(c, "")
         best = next((a["lookup"] for a in arts if a["recommended"]), None)
+        TIERS = ["small", "medium", "large", "applied"]
+        by_tier = {t: [a["lookup"] for a in arts if a["tier"] == t] for t in TIERS}
         meta[c] = {
             "count": len(arts),
             "map_ready": sum(1 for a in arts if a["map_ready"]),
@@ -157,6 +184,8 @@ def main():
             "act": act,
             "kind": "vector" if act in vector_acts else "force",
             "thin": len(arts) <= 1 or not any(a["map_ready"] for a in arts),
+            "tiers": by_tier,
+            "missing_tiers": [t for t in TIERS if not by_tier[t]],
         }
     total = sum(len(v) for v in groups.values())
     out = {

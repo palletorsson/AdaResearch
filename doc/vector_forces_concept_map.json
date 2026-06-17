@@ -43,7 +43,28 @@
       "truth": "Before a vector, a where: three axes, an origin, an agreed order (x, y, z).",
       "act": "Act I — what a vector is",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "coordinate_axes_xy",
+          "coordinate_lines",
+          "coordinate_system_switcher",
+          "coordinates",
+          "example_3_4_polar_to_cartesian_vr",
+          "homogeneous_coordinates"
+        ],
+        "medium": [
+          "basis_vectors_rig",
+          "xyz_coordinates"
+        ],
+        "large": [
+          "CoordinateSystem3M"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Vector basics": {
       "count": 2,
@@ -52,7 +73,21 @@
       "truth": "A vector is a step, not a place - a direction and a length you can carry anywhere.",
       "act": "Act I — what a vector is",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "VectorBasics"
+        ],
+        "medium": [],
+        "large": [
+          "free_vector"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "medium",
+        "applied"
+      ]
     },
     "Magnitude / length": {
       "count": 3,
@@ -61,7 +96,22 @@
       "truth": "",
       "act": "Act I — what a vector is",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "example_1_5_vector_magnitude_vr",
+          "vector_magnitude_demo"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "vector_arena"
+        ]
+      },
+      "missing_tiers": [
+        "medium",
+        "large"
+      ]
     },
     "Unit vector / normalize": {
       "count": 7,
@@ -70,7 +120,25 @@
       "truth": "Divide by length and every direction gets a unit twin.",
       "act": "Act I — what a vector is",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "vector_normalize_demo",
+          "example_1_6_vector_normalize_vr",
+          "turret_targeting"
+        ],
+        "medium": [
+          "turret_boll_infoboard"
+        ],
+        "large": [
+          "hl_turret_vectors",
+          "laser_turret"
+        ],
+        "applied": [
+          "vector_drone"
+        ]
+      },
+      "missing_tiers": []
     },
     "Addition": {
       "count": 7,
@@ -79,7 +147,26 @@
       "truth": "a + b is where you land if you walk a then b - tip to tail.",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "combined_forces_demo",
+          "VectorAddition"
+        ],
+        "medium": [
+          "vector_add"
+        ],
+        "large": [
+          "vector_addition_demo",
+          "vector_addition_walk",
+          "vector_addition_xl",
+          "vector_addition_xl_laser"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Subtraction": {
       "count": 5,
@@ -88,7 +175,24 @@
       "truth": "b - a is the arrow of the gap, pointing from here to there.",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "example_1_3_vector_subtraction_vr",
+          "VectorSubtraction"
+        ],
+        "medium": [
+          "vector_sub"
+        ],
+        "large": [
+          "vector_subtraction_demo",
+          "vector_subtraction_xl_laser"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Scaling": {
       "count": 7,
@@ -97,7 +201,26 @@
       "truth": "A scalar is a volume knob for a direction - same line, new length.",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "example_2_3_gravity_scaled_by_mass_vr",
+          "array_scale",
+          "example_1_4_vector_multiplication_vr",
+          "quantum_field",
+          "scale_lines",
+          "scale_me"
+        ],
+        "medium": [],
+        "large": [
+          "scaleme"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "medium",
+        "applied"
+      ]
     },
     "Dot product": {
       "count": 8,
@@ -106,7 +229,27 @@
       "truth": "the dot product is how much two directions agree — and here, agreeing is mercy",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "dot_aligner",
+          "vector_reflection_demo",
+          "VectorDotProduct",
+          "work_energy_demo"
+        ],
+        "medium": [
+          "VectorWorkbench"
+        ],
+        "large": [
+          "dot_product_projector",
+          "vector_dot_product_xl",
+          "vector_joint_playground"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Projection / reflection": {
       "count": 4,
@@ -115,7 +258,23 @@
       "truth": "projection is the part of you that lives along someone else's line",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "projection_shadow"
+        ],
+        "medium": [
+          "VectorProjectionReflection"
+        ],
+        "large": [
+          "reflection_hall",
+          "vector_projection_demo"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Cross product / torque": {
       "count": 8,
@@ -124,7 +283,27 @@
       "truth": "the cross product is the turn left over when two directions disagree",
       "act": "Act II — vector arithmetic",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "torque_crank",
+          "torque_demo",
+          "VectorCrossProduct",
+          "VectorTorque"
+        ],
+        "medium": [],
+        "large": [
+          "cross_product_demo",
+          "DrawbridgeHinge",
+          "rigid_body",
+          "vector_cross_product_xl"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "medium",
+        "applied"
+      ]
     },
     "Vector field / flow": {
       "count": 11,
@@ -133,7 +312,29 @@
       "truth": "a field is force that has decided to be everywhere at once",
       "act": "Act III — fields & motion",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "flow_field_painter",
+          "noc_5_04_flow_field",
+          "particle_flow_swarm",
+          "vector_field_grid",
+          "vector_field_visualizer"
+        ],
+        "medium": [
+          "VectorFieldFlow"
+        ],
+        "large": [
+          "weather_vector_field",
+          "FlowFieldMain",
+          "vector_field",
+          "vector_fields"
+        ],
+        "applied": [
+          "drag_coefficient_wind_tunnel"
+        ]
+      },
+      "missing_tiers": []
     },
     "Motion / velocity": {
       "count": 12,
@@ -142,7 +343,31 @@
       "truth": "Every bubble leaves along the vector you point.",
       "act": "Act III — fields & motion",
       "kind": "vector",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "VectorMotion",
+          "example_1_7_motion_101_velocity_vr",
+          "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+          "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "example_3_3_pointing_in_the_direction_of_motion_vr",
+          "velocity_arrow",
+          "IKArm"
+        ],
+        "medium": [
+          "bubble_blaster",
+          "HingeCrank"
+        ],
+        "large": [
+          "fluid_simulation",
+          "SliderPress",
+          "verlet_integration"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Work (F.d)": {
       "count": 2,
@@ -151,7 +376,21 @@
       "truth": "Only the part along the motion does work: W = F*d*cos(t).",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "work_meter"
+        ],
+        "large": [],
+        "applied": [
+          "force_mower"
+        ]
+      },
+      "missing_tiers": [
+        "small",
+        "large"
+      ]
     },
     "Friction / drag": {
       "count": 7,
@@ -160,7 +399,26 @@
       "truth": "Resistance grows with speed: F = -b*v.",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "example_2_4_friction_vr",
+          "friction_ramp",
+          "viscosity_layers"
+        ],
+        "medium": [
+          "drag_lane",
+          "example_2_5_fluid_resistance_vr",
+          "wedge_slide"
+        ],
+        "large": [
+          "drag_corridor"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Projectile / launch": {
       "count": 12,
@@ -169,7 +427,30 @@
       "truth": "Gravity applied each frame bends a straight launch into a parabola.",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "sub_emitters"
+        ],
+        "medium": [
+          "launch_arc",
+          "firework_burst",
+          "VectorThrowing"
+        ],
+        "large": [
+          "cube_projectile_spawner"
+        ],
+        "applied": [
+          "catapult",
+          "firework_launcher",
+          "human_catapult",
+          "mortar_vector_siege",
+          "return_launcher",
+          "slingshot_launcher",
+          "slingshot_pull"
+        ]
+      },
+      "missing_tiers": []
     },
     "Centripetal": {
       "count": 3,
@@ -178,7 +459,22 @@
       "truth": "Constant acceleration toward a centre you never reach: a = v2/r.",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "centripetal_force_demo"
+        ],
+        "medium": [
+          "circle_train"
+        ],
+        "large": [
+          "centrifuge_ring"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Gravity / orbit": {
       "count": 17,
@@ -187,7 +483,35 @@
       "truth": "Every mass pulls every other: F = G*m1*m2/r2.",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "cloth_simulation",
+          "example_2_6_single_attractor_vr",
+          "example_2_7_multiple_attractors_vr",
+          "example_2_8_two_body_attraction_vr",
+          "example_2_9_n_body_attraction_vr",
+          "example_3_2_forces_with_arbitrary_angular_motion_vr",
+          "exercise_1_8_solution_attraction_magnitude_vr",
+          "gravity_well",
+          "nbody_simulation",
+          "orbital_mechanics_demo",
+          "rockfactory_gravity",
+          "three_body_problem"
+        ],
+        "medium": [
+          "orbit_pair",
+          "attractorsphere"
+        ],
+        "large": [
+          "orbit_walk",
+          "force_fields"
+        ],
+        "applied": [
+          "algo_gun"
+        ]
+      },
+      "missing_tiers": []
     },
     "Spring / Hooke": {
       "count": 16,
@@ -196,7 +520,35 @@
       "truth": "a spring is honest — it returns exactly what it's given, which is why it keeps time",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "chord_tension_spring",
+          "example_3_11_a_spring_connection_vr",
+          "spring_chain",
+          "spring_demo",
+          "spring_hopper",
+          "spring_mass_bouncer",
+          "spring_network"
+        ],
+        "medium": [
+          "spring_bob",
+          "SpringSuspension"
+        ],
+        "large": [
+          "force_directed_layout",
+          "forcedirected3d",
+          "mass_spring_damper",
+          "spring_mass_system",
+          "spring_system",
+          "spring_tower",
+          "surreal_kinetic_sculpture"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Pendulum": {
       "count": 17,
@@ -205,7 +557,36 @@
       "truth": "a pendulum keeps time because the pull back is proportional to how far it's pulled",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "control_pendulum",
+          "coupled_pendulums",
+          "example_3_10_swinging_pendulum_vr",
+          "exercise_3_15_double_pendulum_vr",
+          "pendulum",
+          "PendulumPin"
+        ],
+        "medium": [
+          "pendulum_swing",
+          "ChainSwing",
+          "ConeTwistBag",
+          "parametric_pendulum_waves",
+          "pendulum_slap"
+        ],
+        "large": [
+          "DoublePendulum",
+          "foucault_pendulum",
+          "pendulum_hall",
+          "PendulumCircle",
+          "PendulumGrid3x3",
+          "PendulumWave"
+        ],
+        "applied": []
+      },
+      "missing_tiers": [
+        "applied"
+      ]
     },
     "Momentum / collision": {
       "count": 5,
@@ -214,7 +595,23 @@
       "truth": "momentum is motion that refuses to be destroyed, only handed on",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "impulse_collision_demo"
+        ],
+        "medium": [
+          "collision_carts"
+        ],
+        "large": [
+          "momentum_collision"
+        ],
+        "applied": [
+          "momentum_cradle",
+          "newton_cradle"
+        ]
+      },
+      "missing_tiers": []
     },
     "Restitution / bounce": {
       "count": 5,
@@ -223,7 +620,24 @@
       "truth": "every bounce is a tax on a fall",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "example_1_1_bouncing_ball_with_no_vectors_vr",
+          "example_1_2_bouncing_ball_with_vectors_vr",
+          "normal_force_demo"
+        ],
+        "medium": [],
+        "large": [
+          "bouncing_ball"
+        ],
+        "applied": [
+          "bounce_well"
+        ]
+      },
+      "missing_tiers": [
+        "medium"
+      ]
     },
     "Lever / balance": {
       "count": 3,
@@ -232,7 +646,22 @@
       "truth": "a lever trades force for distance and never gets something for nothing. *(The Calder mobile is this law, drifting — every arm balanced by real weights.)*",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "lever_balance"
+        ],
+        "large": [],
+        "applied": [
+          "calder_mobile",
+          "calder_object_mobile"
+        ]
+      },
+      "missing_tiers": [
+        "small",
+        "large"
+      ]
     },
     "Wind / weather": {
       "count": 3,
@@ -241,7 +670,22 @@
       "truth": "wind is air with somewhere to be; the force is in the speed, squared",
       "act": "Act IV — forces",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "weather_vane",
+          "example_6_4_windmill_vr",
+          "windmill_floor"
+        ]
+      },
+      "missing_tiers": [
+        "small",
+        "medium",
+        "large"
+      ]
     },
     "Force field (zone)": {
       "count": 5,
@@ -250,7 +694,24 @@
       "truth": "falling isn't a property of the void; it's a property of the field over it — and the field is a vector you can turn",
       "act": "Act V — force as place",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "force_field_visualizer",
+          "vector_machine"
+        ],
+        "medium": [],
+        "large": [
+          "force_field"
+        ],
+        "applied": [
+          "force_field_zone",
+          "force_vortex"
+        ]
+      },
+      "missing_tiers": [
+        "medium"
+      ]
     },
     "General force / pad": {
       "count": 9,
@@ -259,7 +720,28 @@
       "truth": "A force is a vector on a mass: F = m*a.",
       "act": "Act V — force as place",
       "kind": "force",
-      "thin": false
+      "thin": false,
+      "tiers": {
+        "small": [
+          "force_cube",
+          "force_pad",
+          "example_2_1_forces_vr",
+          "example_2_2_forces_mass_variation_vr",
+          "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "ForceMagnitudeDemo",
+          "newtons_laws",
+          "VectorForces"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "missing_tiers": [
+        "medium",
+        "large",
+        "applied"
+      ]
     }
   },
   "total": 187,
@@ -275,6 +757,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 9,
+        "tier": "large",
         "recommended": true,
         "spines": [
           "noc",
@@ -289,6 +773,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 4,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -300,6 +786,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -311,6 +799,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -322,6 +812,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -333,6 +825,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -344,6 +838,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -355,6 +851,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -366,6 +864,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 4,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       }
@@ -379,6 +879,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "noc",
@@ -393,6 +895,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       }
@@ -406,6 +910,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -417,6 +923,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 8,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -428,6 +936,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -441,6 +951,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "noc",
@@ -455,6 +967,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -466,6 +980,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -477,6 +993,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -488,6 +1006,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 3,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -499,6 +1019,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -510,6 +1032,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 4,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       }
@@ -523,6 +1047,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 3,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "noc",
@@ -537,6 +1063,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -548,6 +1076,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 15,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -559,6 +1089,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 15,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -570,6 +1102,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -581,6 +1115,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -592,6 +1128,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -605,6 +1143,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 3,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "noc",
@@ -619,6 +1159,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -630,6 +1172,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 18,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -641,6 +1185,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -652,6 +1198,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -665,6 +1213,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "noc",
@@ -679,6 +1229,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -690,6 +1242,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -701,6 +1255,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -712,6 +1268,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -723,6 +1281,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -734,6 +1294,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       }
@@ -747,6 +1309,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 2,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -760,6 +1324,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -771,6 +1337,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -782,6 +1350,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -793,6 +1363,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -804,6 +1376,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 16,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -815,6 +1389,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 3,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -826,6 +1402,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -839,6 +1417,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 2,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -852,6 +1432,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 1,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -863,6 +1445,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 4,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -874,6 +1458,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 4,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       }
@@ -887,6 +1473,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 2,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -900,6 +1488,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -911,6 +1501,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -922,6 +1514,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -933,6 +1527,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -944,6 +1540,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -955,6 +1553,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 19,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -966,6 +1566,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -979,6 +1581,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 15,
+        "fp": 36,
+        "tier": "large",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -992,6 +1596,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 1,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1003,6 +1609,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 16,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1014,6 +1622,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1025,6 +1635,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1036,6 +1648,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1047,6 +1661,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1058,6 +1674,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1069,6 +1687,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1080,6 +1700,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1091,6 +1713,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 8,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       }
@@ -1104,6 +1728,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 3,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "noc"
@@ -1117,6 +1743,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "noc"
@@ -1130,6 +1758,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1141,6 +1771,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 8,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1152,6 +1784,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 8,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1163,6 +1797,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 4,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1174,6 +1810,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1185,6 +1823,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 8,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1196,6 +1836,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1207,6 +1849,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1218,6 +1862,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 4,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1229,6 +1875,8 @@
         "map_ready": false,
         "has_image": true,
         "score": 3,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -1242,6 +1890,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 4,
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "noc",
@@ -1256,6 +1906,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 16,
+        "fp": 6,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       }
@@ -1269,6 +1921,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 11,
+        "fp": 12,
+        "tier": "large",
         "recommended": true,
         "spines": [
           "noc"
@@ -1282,6 +1936,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 3,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "noc",
@@ -1296,6 +1952,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1307,6 +1965,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 14,
+        "fp": 4,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1318,6 +1978,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1329,6 +1991,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 4,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1340,6 +2004,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 3,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       }
@@ -1353,6 +2019,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 14,
+        "fp": 3,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "noc",
@@ -1367,6 +2035,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 6,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1378,6 +2048,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1389,6 +2061,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 3,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1400,6 +2074,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 1,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1411,6 +2087,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 16,
+        "fp": 1,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1422,6 +2100,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 15,
+        "fp": 1,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1433,6 +2113,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 16,
+        "fp": 4,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1444,6 +2126,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 16,
+        "fp": 9,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1455,6 +2139,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 3,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1466,6 +2152,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 8,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1477,6 +2165,8 @@
         "map_ready": false,
         "has_image": true,
         "score": 3,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -1490,6 +2180,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 12,
+        "tier": "large",
         "recommended": true,
         "spines": [
           "noc"
@@ -1503,6 +2195,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 3,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -1516,6 +2210,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -1529,6 +2225,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 3,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "noc",
@@ -1543,6 +2241,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 15,
+        "fp": 9,
+        "tier": "large",
         "recommended": true,
         "spines": [
           "noc"
@@ -1556,6 +2256,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 1,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1567,6 +2269,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 6,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1578,6 +2282,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1589,6 +2295,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1600,6 +2308,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1611,6 +2321,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1622,6 +2334,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1633,6 +2347,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1644,6 +2360,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1655,6 +2373,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1666,6 +2386,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1677,6 +2399,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 15,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1688,6 +2412,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1699,6 +2425,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1710,6 +2438,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -1723,6 +2453,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 14,
+        "fp": 4,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -1736,6 +2468,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1747,6 +2481,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1758,6 +2494,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1769,6 +2507,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1780,6 +2520,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1791,6 +2533,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1802,6 +2546,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1813,6 +2559,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1824,6 +2572,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1835,6 +2585,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1846,6 +2598,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1857,6 +2611,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1868,6 +2624,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 17,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1879,6 +2637,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 8,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1890,6 +2650,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       }
@@ -1903,6 +2665,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 4,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -1916,6 +2680,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 5,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1927,6 +2693,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 4,
+        "fp": 6,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1938,6 +2706,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1949,6 +2719,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1960,6 +2732,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -1971,6 +2745,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1982,6 +2758,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -1993,6 +2771,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -2004,6 +2784,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 5,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -2015,6 +2797,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2026,6 +2810,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 12,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -2037,6 +2823,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 4,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -2048,6 +2836,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -2059,6 +2849,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -2070,6 +2862,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2081,6 +2875,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       }
@@ -2094,6 +2890,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 3,
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -2107,6 +2905,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 3,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -2118,6 +2918,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2129,6 +2931,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 15,
+        "fp": 2,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -2140,6 +2944,8 @@
         "map_ready": false,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       }
@@ -2153,6 +2959,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 3,
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -2166,6 +2974,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -2177,6 +2987,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2188,6 +3000,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 3,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2199,6 +3013,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 4,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -2212,6 +3028,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 6,
+        "tier": "medium",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -2225,6 +3043,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 16,
+        "fp": 9,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -2236,6 +3056,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 13,
+        "fp": 9,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       }
@@ -2249,6 +3071,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 10,
+        "fp": 4,
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -2262,6 +3086,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -2273,6 +3099,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       }
@@ -2286,6 +3114,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 12,
+        "fp": 16,
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -2299,6 +3129,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 9,
+        "tier": "large",
         "recommended": false,
         "spines": []
       },
@@ -2310,6 +3142,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2321,6 +3155,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 1,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -2332,6 +3168,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }
@@ -2345,6 +3183,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 2,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "noc"
@@ -2358,6 +3198,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 7,
+        "fp": 1,
+        "tier": "small",
         "recommended": true,
         "spines": [
           "noc",
@@ -2372,6 +3214,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 11,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2383,6 +3227,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2394,6 +3240,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2405,6 +3253,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2416,6 +3266,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 11,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2427,6 +3279,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 11,
+        "fp": 1,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
@@ -2438,6 +3292,8 @@
         "map_ready": true,
         "has_image": true,
         "score": 6,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       }

@@ -1,0 +1,122 @@
+{
+  "Coordinate system": {
+    "small": "coordinate_axes_xy",
+    "medium": "basis_vectors_rig",
+    "large": "CoordinateSystem3M"
+  },
+  "Vector basics": {
+    "small": "VectorBasics",
+    "large": "free_vector"
+  },
+  "Magnitude / length": {
+    "small": "example_1_5_vector_magnitude_vr",
+    "applied": "vector_arena"
+  },
+  "Unit vector / normalize": {
+    "small": "vector_normalize_demo",
+    "medium": "turret_boll_infoboard",
+    "large": "hl_turret_vectors",
+    "applied": "vector_drone"
+  },
+  "Addition": {
+    "small": "combined_forces_demo",
+    "medium": "vector_add",
+    "large": "vector_addition_demo"
+  },
+  "Subtraction": {
+    "small": "example_1_3_vector_subtraction_vr",
+    "medium": "vector_sub",
+    "large": "vector_subtraction_demo"
+  },
+  "Scaling": {
+    "small": "example_2_3_gravity_scaled_by_mass_vr",
+    "large": "scaleme"
+  },
+  "Dot product": {
+    "small": "dot_aligner",
+    "medium": "VectorWorkbench",
+    "large": "dot_product_projector"
+  },
+  "Projection / reflection": {
+    "small": "projection_shadow",
+    "medium": "VectorProjectionReflection",
+    "large": "reflection_hall"
+  },
+  "Cross product / torque": {
+    "small": "torque_crank",
+    "large": "cross_product_demo"
+  },
+  "Vector field / flow": {
+    "small": "flow_field_painter",
+    "medium": "VectorFieldFlow",
+    "large": "weather_vector_field",
+    "applied": "drag_coefficient_wind_tunnel"
+  },
+  "Motion / velocity": {
+    "small": "VectorMotion",
+    "medium": "bubble_blaster",
+    "large": "fluid_simulation"
+  },
+  "Work (F.d)": {
+    "medium": "work_meter",
+    "applied": "force_mower"
+  },
+  "Friction / drag": {
+    "small": "example_2_4_friction_vr",
+    "medium": "drag_lane",
+    "large": "drag_corridor"
+  },
+  "Projectile / launch": {
+    "small": "sub_emitters",
+    "medium": "launch_arc",
+    "large": "cube_projectile_spawner",
+    "applied": "catapult"
+  },
+  "Centripetal": {
+    "small": "centripetal_force_demo",
+    "medium": "circle_train",
+    "large": "centrifuge_ring"
+  },
+  "Gravity / orbit": {
+    "small": "cloth_simulation",
+    "medium": "orbit_pair",
+    "large": "orbit_walk",
+    "applied": "algo_gun"
+  },
+  "Spring / Hooke": {
+    "small": "chord_tension_spring",
+    "medium": "spring_bob",
+    "large": "force_directed_layout"
+  },
+  "Pendulum": {
+    "small": "control_pendulum",
+    "medium": "pendulum_swing",
+    "large": "DoublePendulum"
+  },
+  "Momentum / collision": {
+    "small": "impulse_collision_demo",
+    "medium": "collision_carts",
+    "large": "momentum_collision",
+    "applied": "momentum_cradle"
+  },
+  "Restitution / bounce": {
+    "small": "example_1_1_bouncing_ball_with_no_vectors_vr",
+    "large": "bouncing_ball",
+    "applied": "bounce_well"
+  },
+  "Lever / balance": {
+    "medium": "lever_balance",
+    "applied": "calder_mobile"
+  },
+  "Wind / weather": {
+    "applied": "weather_vane"
+  },
+  "Force field (zone)": {
+    "small": "force_field_visualizer",
+    "large": "force_field",
+    "applied": "force_field_zone"
+  },
+  "General force / pad": {
+    "small": "force_cube"
+  }
+}
