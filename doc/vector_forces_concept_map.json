@@ -91,8 +91,8 @@
       ]
     },
     "Magnitude / length": {
-      "count": 3,
-      "map_ready": 3,
+      "count": 4,
+      "map_ready": 4,
       "best": null,
       "truth": "",
       "act": "Act I — what a vector is",
@@ -103,14 +103,15 @@
           "example_1_5_vector_magnitude_vr",
           "vector_magnitude_demo"
         ],
-        "medium": [],
+        "medium": [
+          "magnitude_bench"
+        ],
         "large": [],
         "applied": [
           "vector_arena"
         ]
       },
       "missing_tiers": [
-        "medium",
         "large"
       ]
     },
@@ -278,8 +279,8 @@
       ]
     },
     "Cross product / torque": {
-      "count": 8,
-      "map_ready": 8,
+      "count": 9,
+      "map_ready": 9,
       "best": "torque_crank",
       "truth": "the cross product is the turn left over when two directions disagree",
       "act": "Act II — vector arithmetic",
@@ -291,7 +292,9 @@
           "VectorCrossProduct",
           "VectorTorque"
         ],
-        "medium": [],
+        "medium": [
+          "torque_bench"
+        ],
         "large": [
           "cross_product_demo",
           "DrawbridgeHinge",
@@ -302,9 +305,7 @@
           "torque_crank"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Vector field / flow": {
       "count": 11,
@@ -338,8 +339,8 @@
       "missing_tiers": []
     },
     "Motion / velocity": {
-      "count": 12,
-      "map_ready": 11,
+      "count": 13,
+      "map_ready": 12,
       "best": "bubble_blaster",
       "truth": "Every bubble leaves along the vector you point.",
       "act": "Act III — fields & motion",
@@ -355,7 +356,9 @@
           "velocity_arrow",
           "IKArm"
         ],
-        "medium": [],
+        "medium": [
+          "velocity_bench"
+        ],
         "large": [
           "fluid_simulation",
           "SliderPress",
@@ -366,9 +369,7 @@
           "HingeCrank"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Work (F.d)": {
       "count": 2,
@@ -454,8 +455,8 @@
       "missing_tiers": []
     },
     "Centripetal": {
-      "count": 3,
-      "map_ready": 3,
+      "count": 4,
+      "map_ready": 4,
       "best": "centrifuge_ring",
       "truth": "Constant acceleration toward a centre you never reach: a = v2/r.",
       "act": "Act IV — forces",
@@ -465,7 +466,9 @@
         "small": [
           "centripetal_force_demo"
         ],
-        "medium": [],
+        "medium": [
+          "centripetal_bench"
+        ],
         "large": [
           "centrifuge_ring"
         ],
@@ -473,9 +476,7 @@
           "circle_train"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Gravity / orbit": {
       "count": 17,
@@ -613,8 +614,8 @@
       "missing_tiers": []
     },
     "Restitution / bounce": {
-      "count": 5,
-      "map_ready": 5,
+      "count": 6,
+      "map_ready": 6,
       "best": "bounce_well",
       "truth": "every bounce is a tax on a fall",
       "act": "Act IV — forces",
@@ -626,7 +627,9 @@
           "example_1_2_bouncing_ball_with_vectors_vr",
           "normal_force_demo"
         ],
-        "medium": [],
+        "medium": [
+          "restitution_bench"
+        ],
         "large": [
           "bouncing_ball"
         ],
@@ -634,9 +637,7 @@
           "bounce_well"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Lever / balance": {
       "count": 3,
@@ -713,8 +714,8 @@
       ]
     },
     "General force / pad": {
-      "count": 9,
-      "map_ready": 9,
+      "count": 10,
+      "map_ready": 10,
       "best": "force_cube",
       "truth": "A force is a vector on a mass: F = m*a.",
       "act": "Act V — force as place",
@@ -731,21 +732,22 @@
           "newtons_laws",
           "VectorForces"
         ],
-        "medium": [],
+        "medium": [
+          "newton_bench"
+        ],
         "large": [],
         "applied": [
           "force_pad"
         ]
       },
       "missing_tiers": [
-        "medium",
         "large"
       ]
     }
   },
-  "total": 193,
+  "total": 199,
   "recommended_total": 29,
-  "map_ready_total": 190,
+  "map_ready_total": 196,
   "groups": {
     "Coordinate system": [
       {
@@ -937,6 +939,19 @@
         "score": 9,
         "fp": 2,
         "tier": "small",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "magnitude_bench",
+        "name": "Magnitude Bench (|v| = sqrt(x2+y2+z2))",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "fp": 4,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -1584,6 +1599,19 @@
         "spines": []
       },
       {
+        "lookup": "torque_bench",
+        "name": "Torque Bench (tau = |r||F| sin th)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
+        "fp": 4,
+        "tier": "medium",
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "torque_demo",
         "name": "Torque Demo",
         "registry": "vectors_demos.json",
@@ -1915,6 +1943,19 @@
         "score": 10,
         "fp": 1,
         "tier": "small",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "velocity_bench",
+        "name": "Velocity Bench (v = vx + vy)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
+        "fp": 4,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },
@@ -2278,6 +2319,19 @@
         "spines": [
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "centripetal_bench",
+        "name": "Centripetal Bench (a = v2/r)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "fp": 5,
+        "tier": "medium",
+        "recommended": false,
+        "spines": []
       },
       {
         "lookup": "centripetal_force_demo",
@@ -3094,6 +3148,19 @@
         "tier": "small",
         "recommended": false,
         "spines": []
+      },
+      {
+        "lookup": "restitution_bench",
+        "name": "Restitution Bench (h' = e h)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 4,
+        "tier": "medium",
+        "recommended": false,
+        "spines": []
       }
     ],
     "Lever / balance": [
@@ -3345,6 +3412,19 @@
         "score": 11,
         "fp": 1,
         "tier": "small",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "newton_bench",
+        "name": "Newton Bench (F = m a)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 11,
+        "fp": 4,
+        "tier": "medium",
         "recommended": false,
         "spines": []
       },

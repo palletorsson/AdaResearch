@@ -2862,6 +2862,276 @@
         "measured_footprint_cells": 6,
         "footprint_source": "designed"
       }
+    },
+    "magnitude_bench": {
+      "lookup_name": "magnitude_bench",
+      "scene": "res://commons/artifacts/magnitude_bench/magnitude_bench.tscn",
+      "class_name": "MagnitudeBench",
+      "name": "Magnitude Bench (|v| = sqrt(x2+y2+z2))",
+      "description": "Bench-scale magnitude: a tabletop vector whose x, y, z component edges build the box whose space diagonal is its length. |v| = sqrt(x2+y2+z2), read live as the components breathe.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "vector",
+        "magnitude",
+        "length",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "bench"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "torque_bench": {
+      "lookup_name": "torque_bench",
+      "scene": "res://commons/artifacts/torque_bench/torque_bench.tscn",
+      "class_name": "TorqueBench",
+      "name": "Torque Bench (tau = |r||F| sin th)",
+      "description": "Bench-scale torque: a lever on a pivot and a force at its end; push along the arm and nothing turns, push across it and it spins hardest. Only the perpendicular part makes torque. tau = |r||F| sin theta.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "vector",
+        "torque",
+        "cross-product",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "bench"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "centripetal_bench": {
+      "lookup_name": "centripetal_bench",
+      "scene": "res://commons/artifacts/centripetal_bench/centripetal_bench.tscn",
+      "class_name": "CentripetalBench",
+      "name": "Centripetal Bench (a = v2/r)",
+      "description": "Bench-scale centripetal: a tabletop turntable, a mass circling a hub, velocity tangent and force inward. a = v2/r - the inward arrow is the only thing bending the straight line into a circle.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "centripetal",
+        "circular",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "bench"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 5,
+        "footprint_source": "designed"
+      }
+    },
+    "restitution_bench": {
+      "lookup_name": "restitution_bench",
+      "scene": "res://commons/artifacts/restitution_bench/restitution_bench.tscn",
+      "class_name": "RestitutionBench",
+      "name": "Restitution Bench (h' = e h)",
+      "description": "Bench-scale restitution: a strobe of one ball's bounces, each peak a fixed fraction of the last, with a live ball hopping through them. h' = e*h - the coefficient of restitution is the tax on every fall.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "restitution",
+        "bounce",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "bench"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "newton_bench": {
+      "lookup_name": "newton_bench",
+      "scene": "res://commons/artifacts/newton_bench/newton_bench.tscn",
+      "class_name": "NewtonBench",
+      "name": "Newton Bench (F = m a)",
+      "description": "Bench-scale Newton's second law: a mass on a table, a force pushing it, the acceleration it produces. a = F/m, dialed live. The cleanest statement of what a force does.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "force",
+        "newton",
+        "f=ma",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "bench"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "velocity_bench": {
+      "lookup_name": "velocity_bench",
+      "scene": "res://commons/artifacts/velocity_bench/velocity_bench.tscn",
+      "class_name": "VelocityBench",
+      "name": "Velocity Bench (v = vx + vy)",
+      "description": "Bench-scale velocity: a puck crossing a table with its velocity drawn and split into the part that carries it across (vx) and the part that lifts it (vy). Motion is a vector the world keeps editing.",
+      "category": "vectors",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "vector",
+        "velocity",
+        "motion",
+        "bench"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "vectors",
+        "bench"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
     }
   }
 }

@@ -65,7 +65,7 @@ CONCEPTS = [
  ("Lever / balance", ["lever","calder","seesaw","fulcrum","torque balance","balance_puzzle","lever_balance","calder_mobile","calder_object"], [r"re:\bbalance\b"]),
  ("Wind / weather", ["weather_vane","windmill",r"re:\bwind\b","breeze","weather vector"], ["flag"]),
  ("Force field (zone)", ["force_field","force_field_zone","field zone","void crossing","force_vortex","vector_machine"], []),
- ("General force / pad", ["force_pad","force_cube","forcemagnitude","f = ma","f=ma","newtons_laws","applied force","vectorforces","example_2_1","example_2_2","example_2_3","example_3_2","exercise_1"], [r"re:\bforce\b",r"re:\bnewton\b"]),
+ ("General force / pad", ["force_pad","force_cube","forcemagnitude","newton_bench","f = ma","f=ma","newtons_laws","applied force","vectorforces","example_2_1","example_2_2","example_2_3","example_3_2","exercise_1"], [r"re:\bforce\b",r"re:\bnewton\b"]),
 ]
 
 # Four slots per concept, smallest→biggest in space and abstract→applied:
