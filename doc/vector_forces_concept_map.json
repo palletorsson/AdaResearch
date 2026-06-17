@@ -165,16 +165,16 @@
       "thin": false
     },
     "Gravity / orbit": {
-      "count": 22,
-      "map_ready": 22,
+      "count": 17,
+      "map_ready": 17,
       "best": "orbit_pair",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false
     },
     "Spring / Hooke": {
-      "count": 18,
-      "map_ready": 17,
+      "count": 16,
+      "map_ready": 16,
       "best": "spring_bob",
       "act": "Act IV — forces",
       "kind": "force",
@@ -221,8 +221,8 @@
       "thin": false
     },
     "Force field (zone)": {
-      "count": 4,
-      "map_ready": 4,
+      "count": 5,
+      "map_ready": 5,
       "best": "force_field_zone",
       "act": "Act V — force as place",
       "kind": "force",
@@ -237,9 +237,9 @@
       "thin": false
     }
   },
-  "total": 191,
+  "total": 185,
   "recommended_total": 29,
-  "map_ready_total": 187,
+  "map_ready_total": 182,
   "groups": {
     "Coordinate system": [
       {
@@ -1612,17 +1612,6 @@
         "spines": []
       },
       {
-        "lookup": "gravity_gun_test_scene",
-        "name": "gravity_gun_test_scene",
-        "registry": "vectors.json",
-        "category": "unknown",
-        "map_ready": true,
-        "has_image": true,
-        "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
         "lookup": "gravity_well",
         "name": "Gravity Well",
         "registry": "physics_simulation.json",
@@ -1667,28 +1656,6 @@
         "spines": []
       },
       {
-        "lookup": "rule_30_110_gravity",
-        "name": "Rule 30/110 Gravity",
-        "registry": "cellular_automata.json",
-        "category": "emergence",
-        "map_ready": true,
-        "has_image": true,
-        "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "strange_attractors",
-        "name": "Strange Attractors",
-        "registry": "chaos.json",
-        "category": "chaos",
-        "map_ready": true,
-        "has_image": true,
-        "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
         "lookup": "three_body_problem",
         "name": "Three-Body Problem",
         "registry": "physics_simulation.json",
@@ -1696,28 +1663,6 @@
         "map_ready": true,
         "has_image": true,
         "score": 9,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "chaos_attractor",
-        "name": "Chaos Attractor",
-        "registry": "primitives.json",
-        "category": "unknown",
-        "map_ready": true,
-        "has_image": false,
-        "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "vector_machine",
-        "name": "Vector Machine (the dial of gravity)",
-        "registry": "vectors_demos.json",
-        "category": "vectors",
-        "map_ready": true,
-        "has_image": false,
-        "score": 3,
         "recommended": false,
         "spines": []
       }
@@ -1869,17 +1814,6 @@
         "spines": []
       },
       {
-        "lookup": "profile_spring",
-        "name": "Profile — Spring-Mass System",
-        "registry": "profile.json",
-        "category": "substrate",
-        "map_ready": true,
-        "has_image": false,
-        "score": 6,
-        "recommended": false,
-        "spines": []
-      },
-      {
         "lookup": "spring_chain",
         "name": "Spring Chain",
         "registry": "commons_artifacts.json",
@@ -1909,17 +1843,6 @@
         "map_ready": true,
         "has_image": false,
         "score": 17,
-        "recommended": false,
-        "spines": []
-      },
-      {
-        "lookup": "simulation_instability",
-        "name": "simulation_instability",
-        "registry": "physics_simulation.json",
-        "category": "",
-        "map_ready": false,
-        "has_image": false,
-        "score": 4,
         "recommended": false,
         "spines": []
       }
@@ -2347,6 +2270,17 @@
         "lookup": "force_vortex",
         "name": "Force Vortex",
         "registry": "force_vortex.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": false,
+        "score": 9,
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "vector_machine",
+        "name": "Vector Machine (the dial of gravity)",
+        "registry": "vectors_demos.json",
         "category": "vectors",
         "map_ready": true,
         "has_image": false,

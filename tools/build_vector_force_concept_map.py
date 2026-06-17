@@ -22,7 +22,16 @@ GATE = re.compile(r"vector|force|pendulum|spring|orbit|gravit|momentum|torque|dr
                   r"restitution|coordinate|basis_vector|normaliz|magnitude|scale|scalar|"
                   r"dot_product|cross_product|projection|reflection|weather_vane|windmill|"
                   r"attractor|nbody|n_body|velocit|cradle|impulse|workbench|field|flow", re.I)
+# clear strays that match a keyword but aren't vector/force curriculum examples
+EXCLUDE = {
+    "strange_attractors", "chaos_attractor",          # dynamical-systems attractors, not gravity
+    "rule_30_110_gravity",                            # a cellular automaton
+    "simulation_instability", "profile_spring", "profile_gradient_descent",  # profiling/test scenes
+    "gravity_gun_test_scene",                         # test scene
+}
 def is_candidate(reg, lookup):
+    if lookup in EXCLUDE:
+        return False
     if reg in HIGH_SIGNAL:
         return True
     if re.fullmatch(r"[a-z0-9_]+\.json", reg) and GATE.search(lookup):  # per-artifact / gated reg
@@ -55,7 +64,7 @@ CONCEPTS = [
  ("Restitution / bounce", ["restitution","bounce_well","coefficient of restitution","bounce height","bouncing ball"], [r"re:\bbounce\b","rebound"]),
  ("Lever / balance", ["lever","calder","seesaw","fulcrum","torque balance","balance_puzzle","lever_balance","calder_mobile","calder_object"], [r"re:\bbalance\b"]),
  ("Wind / weather", ["weather_vane","windmill",r"re:\bwind\b","breeze","weather vector"], ["flag"]),
- ("Force field (zone)", ["force_field","force_field_zone","field zone","void crossing","force_vortex"], []),
+ ("Force field (zone)", ["force_field","force_field_zone","field zone","void crossing","force_vortex","vector_machine"], []),
  ("General force / pad", ["force_pad","force_cube","forcemagnitude","f = ma","f=ma","newtons_laws","applied force","vectorforces","example_2_1","example_2_2","example_2_3","example_3_2","exercise_1"], [r"re:\bforce\b",r"re:\bnewton\b"]),
 ]
 
