@@ -1,0 +1,126 @@
+"""Build the comprehensive Vector & Force concept map.
+
+Scans every artifact registry, classifies each genuine vector/force artifact into one of
+25 concepts (keeping ALL duplicates that solve the same problem), records whether a
+scene-catalog image exists, and writes doc/vector_forces_concept_map.json — the data
+behind the encyclopedia /vector-force-map page.
+
+Run from repo root:  python tools/build_vector_force_concept_map.py
+"""
+import json, glob, os, sys, re
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+IMG_DIR = os.path.normpath(os.path.join(ROOT, "..", "ada_encyclopedia", "public", "scene-catalog"))
+
+# Candidate gating — keep precision high. Registries that are dominantly vector/force get all
+# their concept-matching artifacts; every other registry must have a force/vector token in the
+# LOOKUP name (so a fractal/hashmap/window that merely mentions a keyword in its description is
+# excluded). The concept-score requirement then filters the gate-passers.
+HIGH_SIGNAL = {"vectors.json", "vectors_demos.json", "physics_simulation.json"}
+GATE = re.compile(r"vector|force|pendulum|spring|orbit|gravit|momentum|torque|drag|friction|"
+                  r"projectile|centrifug|centripet|launch|catapult|lever|calder|bounce|"
+                  r"restitution|coordinate|basis_vector|normaliz|magnitude|scale|scalar|"
+                  r"dot_product|cross_product|projection|reflection|weather_vane|windmill|"
+                  r"attractor|nbody|n_body|velocit|cradle|impulse|workbench|field|flow", re.I)
+def is_candidate(reg, lookup):
+    if reg in HIGH_SIGNAL:
+        return True
+    if re.fullmatch(r"[a-z0-9_]+\.json", reg) and GATE.search(lookup):  # per-artifact / gated reg
+        return True
+    return bool(GATE.search(lookup))
+
+# concept -> (strong keywords [weight 3], weak keywords [weight 1]). Order = specific first;
+# ties break to the earlier (more specific) concept. "General force / pad" is the catch-all.
+CONCEPTS = [
+ ("Coordinate system", ["coordinate","basis vector","basis_vector","cartesian","coordinatesystem","homogeneous_coordinates","xyz_coordinates","polar_to_cartesian"], []),
+ ("Vector basics", ["vectorbasics","vector basics","what is a vector","build a vector","build_a_vector","vector_intro"], []),
+ ("Magnitude / length", ["magnitude","length_lantern","vector length","vector_magnitude","stretch_bench"], [r"re:\bnorm\b"]),
+ ("Unit vector / normalize", ["normalize","normaliz","unit vector","vector_normalize"], []),
+ ("Addition", ["vector_add","vectoraddition","vector addition","adder_board","vector_addition",r"re:\bresultant\b","head to tail","tip to tail"], []),
+ ("Subtraction", ["vector_sub","vectorsubtraction","vector subtraction","vector_subtraction","difference vector"], []),
+ ("Scaling", ["scaleme","scale_me","scalar","vector multiplication","multiplication_vr","scaled_by_mass","pickup_cube_scaling","array_scale","scale_lines"], ["scaling"]),
+ ("Dot product", ["dot_product","dotproduct","dot_aligner","dot product","vectordotproduct"], ["agreement","alignment"]),
+ ("Projection / reflection", ["projection_shadow","projectionreflection","vectorprojection","projection vector","reflection vector","reflection_hall"], [r"re:\bprojection\b",r"re:\breflect"]),
+ ("Cross product / torque", ["cross_product","crossproduct","vectorcross","vectortorque","torque_crank","cross product","torque"], ["perpendicular"]),
+ ("Vector field / flow", ["vector_field","vectorfield","vectorfieldflow","flow_field","flowfield","weather_vector_field","vector field","flow field","streamline"], [r"re:\bflow field\b"]),
+ ("Motion / velocity", ["vectormotion","vector_motion","velocity","kinematic","motion vector","bubble_blaster","smart_rocket"], [r"re:\bmotion\b","accelerat"]),
+ ("Work (F.d)", ["force_mower","work done","f.d","f·d","cos_theta_work","mower"], [r"re:\bwork\b"]),
+ ("Friction / drag", ["friction","drag_lane","drag_corridor","fluid_resistance","fluid resistance","air resistance","example_2_5"], [r"re:\bdrag\b","resistance","damper"]),
+ ("Projectile / launch", ["projectile","launch_arc","launcher","catapult","ballistic","vectorthrowing","projectile motion","trajectory","return_launcher","human_catapult","mortar_vector"], [r"re:\blaunch\b",r"re:\bthrow"]),
+ ("Centripetal", ["centripet","centrifuge","circle_train","circular motion","uniform circular"], []),
+ ("Gravity / orbit", ["gravit","attractor","attraction","barycenter","orbital","n-body","n_body","nbody","two_body","three_body","kepler","gravity_well","orbit_pair","orbit_walk"], []),
+ ("Spring / Hooke", ["spring","hooke","springsuspension","mass_spring","spring_bob","spring_tower"], ["oscillat","coil"]),
+ ("Pendulum", ["pendulum","chainswing","coupled_pendulum","doublependulum"], [r"re:\bswing\b"]),
+ ("Momentum / collision", ["momentum","newton_cradle","newton cradle","cradle","impulse","collision_cart","collision_crasher","impulse_collision"], []),
+ ("Restitution / bounce", ["restitution","bounce_well","coefficient of restitution","bounce height","bouncing ball"], [r"re:\bbounce\b","rebound"]),
+ ("Lever / balance", ["lever","calder","seesaw","fulcrum","torque balance","balance_puzzle","lever_balance","calder_mobile","calder_object"], [r"re:\bbalance\b"]),
+ ("Wind / weather", ["weather_vane","windmill",r"re:\bwind\b","breeze","weather vector"], ["flag"]),
+ ("Force field (zone)", ["force_field","force_field_zone","field zone","void crossing","force_vortex"], []),
+ ("General force / pad", ["force_pad","force_cube","forcemagnitude","f = ma","f=ma","newtons_laws","applied force","vectorforces","example_2_1","example_2_2","example_2_3","example_3_2","exercise_1"], [r"re:\bforce\b",r"re:\bnewton\b"]),
+]
+
+def _hit(text, kw):
+    if kw.startswith("re:"):
+        return re.search(kw[3:], text) is not None
+    return kw in text
+
+def score(text, strong, weak):
+    return sum(3 for k in strong if _hit(text, k)) + sum(1 for k in weak if _hit(text, k))
+
+def main():
+    groups = {c[0]: [] for c in CONCEPTS}
+    seen = set()
+    for r in sorted(glob.glob(os.path.join(ROOT, "commons", "artifacts", "registry", "*.json"))):
+        try:
+            d = json.load(open(r, encoding="utf-8"))
+        except Exception:
+            continue
+        reg = os.path.basename(r)
+        for k, v in (d.get("artifacts", {}) or {}).items():
+            if not isinstance(v, dict) or k in seen:
+                continue
+            lookup = v.get("lookup_name", k)
+            if not is_candidate(reg, lookup):
+                continue
+            name = str(v.get("name", lookup))
+            tags = v.get("tags", []) if isinstance(v.get("tags"), list) else []
+            text = " ".join([k, lookup, name, str(v.get("category","")), str(v.get("class_name","")),
+                             " ".join(str(t) for t in tags), str(v.get("description",""))[:200]]).lower()
+            low_lookup = lookup.lower()
+            best, bestscore = None, 0
+            for cname, strong, weak in CONCEPTS:
+                sc = score(text, strong, weak)
+                if any(_hit(low_lookup, k) for k in strong):
+                    sc += 3   # a strong match in the lookup NAME dominates description-only matches
+                if sc > bestscore:
+                    best, bestscore = cname, sc
+            if best and bestscore >= 3:           # require at least one strong (or 3 weak) match
+                seen.add(k)
+                groups[best].append({
+                    "lookup": lookup, "name": name, "registry": reg,
+                    "category": str(v.get("category","")),
+                    "map_ready": bool(v.get("map_ready")),
+                    "has_image": os.path.exists(os.path.join(IMG_DIR, lookup + ".png")),
+                    "score": bestscore,
+                })
+    for c in groups:
+        groups[c].sort(key=lambda a: (not a["has_image"], not a["map_ready"], a["lookup"].lower()))
+    total = sum(len(v) for v in groups.values())
+    out = {
+        "title": "Vectors & Forces — every example, by concept",
+        "note": "Comprehensive map of all vector and force artifacts, grouped by the problem each solves. Duplicates (multiple artifacts for the same concept) are kept on purpose. Generated by tools/build_vector_force_concept_map.py.",
+        "concepts": [c[0] for c in CONCEPTS],
+        "total": total,
+        "groups": groups,
+    }
+    outpath = os.path.join(ROOT, "doc", "vector_forces_concept_map.json")
+    json.dump(out, open(outpath, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+    print(f"wrote {outpath}")
+    print(f"TOTAL {total} artifacts across {len(CONCEPTS)} concepts")
+    for c in CONCEPTS:
+        arts = groups[c[0]]
+        imgs = sum(1 for a in arts if a["has_image"])
+        print(f"  {len(arts):2d} ({imgs} img)  {c[0]}")
+
+if __name__ == "__main__":
+    main()
