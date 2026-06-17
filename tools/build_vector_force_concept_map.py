@@ -63,7 +63,7 @@ CONCEPTS = [
  ("Momentum / collision", ["momentum","newton_cradle","newton cradle","cradle","impulse","collision_cart","collision_crasher","impulse_collision"], []),
  ("Restitution / bounce", ["restitution","bounce_well","coefficient of restitution","bounce height","bouncing ball"], [r"re:\bbounce\b","rebound"]),
  ("Lever / balance", ["lever","calder","seesaw","fulcrum","torque balance","balance_puzzle","lever_balance","calder_mobile","calder_object"], [r"re:\bbalance\b"]),
- ("Wind / weather", ["weather_vane","windmill",r"re:\bwind\b","breeze","weather vector"], ["flag"]),
+ ("Wind / weather", ["weather_vane","windmill","wind_toy","wind_bench","wind_room",r"re:\bwind\b","breeze","weather vector"], ["flag"]),
  ("Force field (zone)", ["force_field","force_field_zone","field zone","void crossing","force_vortex","vector_machine"], []),
  ("General force / pad", ["force_pad","force_cube","forcemagnitude","newton_bench","f = ma","f=ma","newtons_laws","applied force","vectorforces","example_2_1","example_2_2","example_2_3","example_3_2","exercise_1"], [r"re:\bforce\b",r"re:\bnewton\b"]),
 ]

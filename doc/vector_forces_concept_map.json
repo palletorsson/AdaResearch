@@ -664,28 +664,30 @@
       ]
     },
     "Wind / weather": {
-      "count": 3,
-      "map_ready": 3,
+      "count": 6,
+      "map_ready": 6,
       "best": "weather_vane",
       "truth": "wind is air with somewhere to be; the force is in the speed, squared",
       "act": "Act IV — forces",
       "kind": "force",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "wind_toy"
+        ],
+        "medium": [
+          "wind_bench"
+        ],
+        "large": [
+          "wind_room"
+        ],
         "applied": [
           "weather_vane",
           "example_6_4_windmill_vr",
           "windmill_floor"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Force field (zone)": {
       "count": 5,
@@ -745,9 +747,9 @@
       ]
     }
   },
-  "total": 199,
+  "total": 202,
   "recommended_total": 29,
-  "map_ready_total": 196,
+  "map_ready_total": 199,
   "groups": {
     "Coordinate system": [
       {
@@ -3232,6 +3234,45 @@
         "score": 6,
         "fp": 9,
         "tier": "applied",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "wind_bench",
+        "name": "Wind Bench (fan + windsock)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 4,
+        "tier": "medium",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "wind_room",
+        "name": "Wind Room (walk-in field)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 9,
+        "tier": "large",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "wind_toy",
+        "name": "Wind Toy (held vane)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 2,
+        "tier": "small",
         "recommended": false,
         "spines": []
       },
