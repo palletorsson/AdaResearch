@@ -42,19 +42,19 @@ def is_candidate(reg, lookup):
 # ties break to the earlier (more specific) concept. "General force / pad" is the catch-all.
 CONCEPTS = [
  ("Coordinate system", ["coordinate","basis vector","basis_vector","cartesian","coordinatesystem","homogeneous_coordinates","xyz_coordinates","polar_to_cartesian"], []),
- ("Vector basics", ["vectorbasics","vector basics","what is a vector","build a vector","build_a_vector","vector_intro","free_vector"], []),
+ ("Vector basics", ["vectorbasics","vector basics","what is a vector","build a vector","build_a_vector","vector_intro","free_vector","route_vector"], []),
  ("Magnitude / length", ["magnitude","length_lantern","vector length","vector_magnitude","stretch_bench"], [r"re:\bnorm\b"]),
  ("Unit vector / normalize", ["normalize","normaliz","unit vector","vector_normalize"], []),
- ("Addition", ["vector_add","vectoraddition","vector addition","adder_board","vector_addition",r"re:\bresultant\b","head to tail","tip to tail"], []),
- ("Subtraction", ["vector_sub","vectorsubtraction","vector subtraction","vector_subtraction","difference vector"], []),
- ("Scaling", ["scaleme","scale_me","scalar","vector multiplication","multiplication_vr","scaled_by_mass","pickup_cube_scaling","array_scale","scale_lines"], ["scaling"]),
+ ("Addition", ["vector_add","vectoraddition","vector addition","adder_board","vector_addition","tug_of_war",r"re:\bresultant\b","head to tail","tip to tail"], []),
+ ("Subtraction", ["vector_sub","vectorsubtraction","vector subtraction","vector_subtraction","river_crossing","difference vector"], []),
+ ("Scaling", ["scaleme","scale_me","scalar","vector multiplication","multiplication_vr","scaled_by_mass","pickup_cube_scaling","array_scale","scale_lines","throttle_gain"], ["scaling"]),
  ("Dot product", ["dot_product","dotproduct","dot_aligner","dot product","vectordotproduct"], ["agreement","alignment"]),
  ("Projection / reflection", ["projection_shadow","projectionreflection","vectorprojection","projection vector","reflection vector","reflection_hall"], [r"re:\bprojection\b",r"re:\breflect"]),
  ("Cross product / torque", ["cross_product","crossproduct","vectorcross","vectortorque","torque_crank","cross product","torque"], ["perpendicular"]),
  ("Vector field / flow", ["vector_field","vectorfield","vectorfieldflow","flow_field","flowfield","weather_vector_field","vector field","flow field","streamline"], [r"re:\bflow field\b"]),
  ("Motion / velocity", ["vectormotion","vector_motion","velocity","kinematic","motion vector","bubble_blaster","smart_rocket"], [r"re:\bmotion\b","accelerat"]),
  ("Work (F.d)", ["force_mower","work_meter","work done","f.d","f·d","cos_theta_work","mower"], [r"re:\bwork\b"]),
- ("Friction / drag", ["friction","drag_lane","drag_corridor","fluid_resistance","fluid resistance","air resistance","example_2_5"], [r"re:\bdrag\b","resistance","damper"]),
+ ("Friction / drag", ["friction","drag_lane","drag_corridor","fluid_resistance","fluid resistance","air resistance","example_2_5","brake_skid"], [r"re:\bdrag\b","resistance","damper"]),
  ("Projectile / launch", ["projectile","launch_arc","launcher","catapult","ballistic","vectorthrowing","projectile motion","trajectory","return_launcher","human_catapult","mortar_vector"], [r"re:\blaunch\b",r"re:\bthrow"]),
  ("Centripetal", ["centripet","centrifuge","circle_train","circular motion","uniform circular"], []),
  ("Gravity / orbit", ["gravit","attractor","attraction","barycenter","orbital","n-body","n_body","nbody","two_body","three_body","kepler","gravity_well","orbit_pair","orbit_walk"], []),
@@ -76,7 +76,12 @@ CONCEPTS = [
 # Heuristic only — the picker UI lets the human override per slot.
 APPLIED_KW = ["mower", "catapult", "launcher", "slingshot", "mobile", "weather_vane", "windmill",
               "cradle", "bounce_well", "force_field_zone", "vortex", "_gun", "gun_test", "siege",
-              "mortar", "return_", "human_", "wind_tunnel", "drone", "arena", "_game"]
+              "mortar", "return_", "human_", "wind_tunnel", "drone", "arena", "_game",
+              # applied = the concept doing a real job, even when small/medium in size:
+              "aligner", "crank", "blaster", "shadow", "_train", "suspension", "foucault",
+              "force_pad", "_vane", "sail", "brake", "wind_turbine", "pinwheel", "sundial",
+              # the six applied artifacts built 2026-06-17 to fill the gaps:
+              "coordinate_locator", "route_vector", "tug_of_war", "river_crossing", "throttle_gain", "brake_skid"]
 LARGE_KW = ["_xl", "xl_", "_walk", "_hall", "_tower", "_ring", "corridor", "chamber", "storm", "centrifuge"]
 def tier_of(lookup, name, fp):
     low = (lookup + " " + name).lower()

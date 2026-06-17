@@ -37,8 +37,8 @@
   ],
   "concept_meta": {
     "Coordinate system": {
-      "count": 9,
-      "map_ready": 9,
+      "count": 10,
+      "map_ready": 10,
       "best": "CoordinateSystem3M",
       "truth": "Before a vector, a where: three axes, an origin, an agreed order (x, y, z).",
       "act": "Act I — what a vector is",
@@ -60,15 +60,15 @@
         "large": [
           "CoordinateSystem3M"
         ],
-        "applied": []
+        "applied": [
+          "coordinate_locator"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Vector basics": {
-      "count": 2,
-      "map_ready": 2,
+      "count": 3,
+      "map_ready": 3,
       "best": "VectorBasics",
       "truth": "A vector is a step, not a place - a direction and a length you can carry anywhere.",
       "act": "Act I — what a vector is",
@@ -82,11 +82,12 @@
         "large": [
           "free_vector"
         ],
-        "applied": []
+        "applied": [
+          "route_vector"
+        ]
       },
       "missing_tiers": [
-        "medium",
-        "applied"
+        "medium"
       ]
     },
     "Magnitude / length": {
@@ -141,8 +142,8 @@
       "missing_tiers": []
     },
     "Addition": {
-      "count": 7,
-      "map_ready": 7,
+      "count": 8,
+      "map_ready": 8,
       "best": "vector_add",
       "truth": "a + b is where you land if you walk a then b - tip to tail.",
       "act": "Act II — vector arithmetic",
@@ -162,15 +163,15 @@
           "vector_addition_xl",
           "vector_addition_xl_laser"
         ],
-        "applied": []
+        "applied": [
+          "tug_of_war"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Subtraction": {
-      "count": 5,
-      "map_ready": 5,
+      "count": 6,
+      "map_ready": 6,
       "best": "vector_sub",
       "truth": "b - a is the arrow of the gap, pointing from here to there.",
       "act": "Act II — vector arithmetic",
@@ -188,15 +189,15 @@
           "vector_subtraction_demo",
           "vector_subtraction_xl_laser"
         ],
-        "applied": []
+        "applied": [
+          "river_crossing"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Scaling": {
-      "count": 7,
-      "map_ready": 7,
+      "count": 8,
+      "map_ready": 8,
       "best": "example_2_3_gravity_scaled_by_mass_vr",
       "truth": "A scalar is a volume knob for a direction - same line, new length.",
       "act": "Act II — vector arithmetic",
@@ -215,11 +216,12 @@
         "large": [
           "scaleme"
         ],
-        "applied": []
+        "applied": [
+          "throttle_gain"
+        ]
       },
       "missing_tiers": [
-        "medium",
-        "applied"
+        "medium"
       ]
     },
     "Dot product": {
@@ -232,7 +234,6 @@
       "thin": false,
       "tiers": {
         "small": [
-          "dot_aligner",
           "vector_reflection_demo",
           "VectorDotProduct",
           "work_energy_demo"
@@ -245,11 +246,11 @@
           "vector_dot_product_xl",
           "vector_joint_playground"
         ],
-        "applied": []
+        "applied": [
+          "dot_aligner"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Projection / reflection": {
       "count": 4,
@@ -260,9 +261,7 @@
       "kind": "vector",
       "thin": false,
       "tiers": {
-        "small": [
-          "projection_shadow"
-        ],
+        "small": [],
         "medium": [
           "VectorProjectionReflection"
         ],
@@ -270,10 +269,12 @@
           "reflection_hall",
           "vector_projection_demo"
         ],
-        "applied": []
+        "applied": [
+          "projection_shadow"
+        ]
       },
       "missing_tiers": [
-        "applied"
+        "small"
       ]
     },
     "Cross product / torque": {
@@ -286,7 +287,6 @@
       "thin": false,
       "tiers": {
         "small": [
-          "torque_crank",
           "torque_demo",
           "VectorCrossProduct",
           "VectorTorque"
@@ -298,11 +298,12 @@
           "rigid_body",
           "vector_cross_product_xl"
         ],
-        "applied": []
+        "applied": [
+          "torque_crank"
+        ]
       },
       "missing_tiers": [
-        "medium",
-        "applied"
+        "medium"
       ]
     },
     "Vector field / flow": {
@@ -354,19 +355,19 @@
           "velocity_arrow",
           "IKArm"
         ],
-        "medium": [
-          "bubble_blaster",
-          "HingeCrank"
-        ],
+        "medium": [],
         "large": [
           "fluid_simulation",
           "SliderPress",
           "verlet_integration"
         ],
-        "applied": []
+        "applied": [
+          "bubble_blaster",
+          "HingeCrank"
+        ]
       },
       "missing_tiers": [
-        "applied"
+        "medium"
       ]
     },
     "Work (F.d)": {
@@ -393,8 +394,8 @@
       ]
     },
     "Friction / drag": {
-      "count": 7,
-      "map_ready": 7,
+      "count": 8,
+      "map_ready": 8,
       "best": "drag_corridor",
       "truth": "Resistance grows with speed: F = -b*v.",
       "act": "Act IV — forces",
@@ -414,11 +415,11 @@
         "large": [
           "drag_corridor"
         ],
-        "applied": []
+        "applied": [
+          "brake_skid"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Projectile / launch": {
       "count": 12,
@@ -464,16 +465,16 @@
         "small": [
           "centripetal_force_demo"
         ],
-        "medium": [
-          "circle_train"
-        ],
+        "medium": [],
         "large": [
           "centrifuge_ring"
         ],
-        "applied": []
+        "applied": [
+          "circle_train"
+        ]
       },
       "missing_tiers": [
-        "applied"
+        "medium"
       ]
     },
     "Gravity / orbit": {
@@ -532,8 +533,7 @@
           "spring_network"
         ],
         "medium": [
-          "spring_bob",
-          "SpringSuspension"
+          "spring_bob"
         ],
         "large": [
           "force_directed_layout",
@@ -544,11 +544,11 @@
           "spring_tower",
           "surreal_kinetic_sculpture"
         ],
-        "applied": []
+        "applied": [
+          "SpringSuspension"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Pendulum": {
       "count": 17,
@@ -576,17 +576,16 @@
         ],
         "large": [
           "DoublePendulum",
-          "foucault_pendulum",
           "pendulum_hall",
           "PendulumCircle",
           "PendulumGrid3x3",
           "PendulumWave"
         ],
-        "applied": []
+        "applied": [
+          "foucault_pendulum"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Momentum / collision": {
       "count": 5,
@@ -724,7 +723,6 @@
       "tiers": {
         "small": [
           "force_cube",
-          "force_pad",
           "example_2_1_forces_vr",
           "example_2_2_forces_mass_variation_vr",
           "exercise_1_3_solution_3_d_bouncing_ball_vr",
@@ -735,18 +733,19 @@
         ],
         "medium": [],
         "large": [],
-        "applied": []
+        "applied": [
+          "force_pad"
+        ]
       },
       "missing_tiers": [
         "medium",
-        "large",
-        "applied"
+        "large"
       ]
     }
   },
-  "total": 187,
+  "total": 193,
   "recommended_total": 29,
-  "map_ready_total": 184,
+  "map_ready_total": 190,
   "groups": {
     "Coordinate system": [
       {
@@ -801,6 +800,19 @@
         "score": 6,
         "fp": 1,
         "tier": "small",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "coordinate_locator",
+        "name": "Coordinate Locator (applied coordinates)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "fp": 6,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -897,6 +909,19 @@
         "score": 12,
         "fp": 9,
         "tier": "large",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "route_vector",
+        "name": "Route Vector (applied displacement)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 6,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       }
@@ -1069,6 +1094,19 @@
         "spines": []
       },
       {
+        "lookup": "tug_of_war",
+        "name": "Tug of War (applied addition)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 12,
+        "fp": 6,
+        "tier": "applied",
+        "recommended": false,
+        "spines": []
+      },
+      {
         "lookup": "vector_addition_demo",
         "name": "Vector Addition",
         "registry": "vectors.json",
@@ -1161,6 +1199,19 @@
         "score": 12,
         "fp": 1,
         "tier": "small",
+        "recommended": false,
+        "spines": []
+      },
+      {
+        "lookup": "river_crossing",
+        "name": "River Crossing (applied subtraction)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 9,
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1298,6 +1349,19 @@
         "tier": "large",
         "recommended": false,
         "spines": []
+      },
+      {
+        "lookup": "throttle_gain",
+        "name": "Throttle Gain (applied scaling)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 4,
+        "tier": "applied",
+        "recommended": false,
+        "spines": []
       }
     ],
     "Dot product": [
@@ -1310,7 +1374,7 @@
         "has_image": true,
         "score": 10,
         "fp": 2,
-        "tier": "small",
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -1418,7 +1482,7 @@
         "has_image": true,
         "score": 7,
         "fp": 2,
-        "tier": "small",
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -1474,7 +1538,7 @@
         "has_image": true,
         "score": 12,
         "fp": 2,
-        "tier": "small",
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -1729,7 +1793,7 @@
         "has_image": true,
         "score": 9,
         "fp": 3,
-        "tier": "medium",
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "noc"
@@ -1824,7 +1888,7 @@
         "has_image": true,
         "score": 6,
         "fp": 8,
-        "tier": "medium",
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -1943,6 +2007,19 @@
           "noc",
           "vectorforces"
         ]
+      },
+      {
+        "lookup": "brake_skid",
+        "name": "Brake Skid (applied friction)",
+        "registry": "vectors_demos.json",
+        "category": "vectors",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 6,
+        "tier": "applied",
+        "recommended": false,
+        "spines": []
       },
       {
         "lookup": "example_2_4_friction_vr",
@@ -2196,7 +2273,7 @@
         "has_image": true,
         "score": 9,
         "fp": 3,
-        "tier": "medium",
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "vectorforces"
@@ -2638,7 +2715,7 @@
         "has_image": true,
         "score": 13,
         "fp": 8,
-        "tier": "medium",
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -2772,7 +2849,7 @@
         "has_image": true,
         "score": 7,
         "fp": 9,
-        "tier": "large",
+        "tier": "applied",
         "recommended": false,
         "spines": []
       },
@@ -3199,7 +3276,7 @@
         "has_image": true,
         "score": 7,
         "fp": 1,
-        "tier": "small",
+        "tier": "applied",
         "recommended": true,
         "spines": [
           "noc",
