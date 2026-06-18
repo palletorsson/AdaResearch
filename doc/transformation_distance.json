@@ -1,0 +1,488 @@
+{
+  "domain": "transformation",
+  "title": "Transformations - Mental Model",
+  "note": "Nodes are the transform artifacts; edges are cosine distance over a 10-feature embedding. Axes follow the transformation beat score (T1-T7): the three rigid motions, their composition, the matrix representation that unifies them, and what each preserves. Walking distance in a Trans_* map = conceptual distance.",
+  "feature_names": [
+    "translation",
+    "rotation",
+    "scale",
+    "shear",
+    "composition",
+    "matrix_repr",
+    "axis_specific",
+    "invariance",
+    "dynamism",
+    "dim3d"
+  ],
+  "spacing": {
+    "base": 2,
+    "k": 10
+  },
+  "order": [
+    "transformation_workbench",
+    "translation_cube_demo",
+    "axis_translation_cube",
+    "rotation_gimbal",
+    "spin",
+    "scaleme",
+    "shear_matrix_demo",
+    "transform_composition",
+    "matrix_4x4_viewer",
+    "homogeneous_coordinates",
+    "invariants_demo"
+  ],
+  "nodes": [
+    {
+      "id": "T1",
+      "lookup": "transformation_workbench",
+      "name": "the three rigid motions"
+    },
+    {
+      "id": "T2",
+      "lookup": "translation_cube_demo",
+      "name": "translation"
+    },
+    {
+      "id": "T3",
+      "lookup": "axis_translation_cube",
+      "name": "axis decomposition (x/y/z)"
+    },
+    {
+      "id": "T4",
+      "lookup": "rotation_gimbal",
+      "name": "rotation"
+    },
+    {
+      "id": "T5",
+      "lookup": "spin",
+      "name": "rotation spectacle"
+    },
+    {
+      "id": "T6",
+      "lookup": "scaleme",
+      "name": "scale (uniform / non-uniform)"
+    },
+    {
+      "id": "Ts",
+      "lookup": "shear_matrix_demo",
+      "name": "shear"
+    },
+    {
+      "id": "T7",
+      "lookup": "transform_composition",
+      "name": "composition of transforms"
+    },
+    {
+      "id": "Tm",
+      "lookup": "matrix_4x4_viewer",
+      "name": "the 4x4 matrix"
+    },
+    {
+      "id": "Th",
+      "lookup": "homogeneous_coordinates",
+      "name": "homogeneous coordinates"
+    },
+    {
+      "id": "Ti",
+      "lookup": "invariants_demo",
+      "name": "what is preserved (invariants)"
+    }
+  ],
+  "matrix": [
+    [
+      0.0,
+      0.2772,
+      0.3936,
+      0.277,
+      0.2863,
+      0.2771,
+      0.5134,
+      0.0647,
+      0.2629,
+      0.242,
+      0.2537
+    ],
+    [
+      0.2772,
+      0.0,
+      0.1612,
+      0.408,
+      0.3726,
+      0.4055,
+      0.4816,
+      0.3111,
+      0.4214,
+      0.3736,
+      0.3481
+    ],
+    [
+      0.3936,
+      0.1612,
+      0.0,
+      0.4136,
+      0.4899,
+      0.508,
+      0.5659,
+      0.426,
+      0.5102,
+      0.4658,
+      0.4476
+    ],
+    [
+      0.277,
+      0.408,
+      0.4136,
+      0.0,
+      0.0384,
+      0.414,
+      0.4401,
+      0.2945,
+      0.3541,
+      0.3741,
+      0.3039
+    ],
+    [
+      0.2863,
+      0.3726,
+      0.4899,
+      0.0384,
+      0.0,
+      0.3917,
+      0.4853,
+      0.3071,
+      0.4426,
+      0.474,
+      0.374
+    ],
+    [
+      0.2771,
+      0.4055,
+      0.508,
+      0.414,
+      0.3917,
+      0.0,
+      0.3957,
+      0.3119,
+      0.4047,
+      0.4213,
+      0.3105
+    ],
+    [
+      0.5134,
+      0.4816,
+      0.5659,
+      0.4401,
+      0.4853,
+      0.3957,
+      0.0,
+      0.398,
+      0.2097,
+      0.2517,
+      0.2574
+    ],
+    [
+      0.0647,
+      0.3111,
+      0.426,
+      0.2945,
+      0.3071,
+      0.3119,
+      0.398,
+      0.0,
+      0.1353,
+      0.149,
+      0.1737
+    ],
+    [
+      0.2629,
+      0.4214,
+      0.5102,
+      0.3541,
+      0.4426,
+      0.4047,
+      0.2097,
+      0.1353,
+      0.0,
+      0.0129,
+      0.1127
+    ],
+    [
+      0.242,
+      0.3736,
+      0.4658,
+      0.3741,
+      0.474,
+      0.4213,
+      0.2517,
+      0.149,
+      0.0129,
+      0.0,
+      0.0972
+    ],
+    [
+      0.2537,
+      0.3481,
+      0.4476,
+      0.3039,
+      0.374,
+      0.3105,
+      0.2574,
+      0.1737,
+      0.1127,
+      0.0972,
+      0.0
+    ]
+  ],
+  "consecutive": [
+    {
+      "from": "transformation_workbench",
+      "to": "translation_cube_demo",
+      "id_from": "T1",
+      "id_to": "T2",
+      "d": 0.2772,
+      "gap": 5
+    },
+    {
+      "from": "translation_cube_demo",
+      "to": "axis_translation_cube",
+      "id_from": "T2",
+      "id_to": "T3",
+      "d": 0.1612,
+      "gap": 4
+    },
+    {
+      "from": "axis_translation_cube",
+      "to": "rotation_gimbal",
+      "id_from": "T3",
+      "id_to": "T4",
+      "d": 0.4136,
+      "gap": 6
+    },
+    {
+      "from": "rotation_gimbal",
+      "to": "spin",
+      "id_from": "T4",
+      "id_to": "T5",
+      "d": 0.0384,
+      "gap": 2
+    },
+    {
+      "from": "spin",
+      "to": "scaleme",
+      "id_from": "T5",
+      "id_to": "T6",
+      "d": 0.3917,
+      "gap": 6
+    },
+    {
+      "from": "scaleme",
+      "to": "shear_matrix_demo",
+      "id_from": "T6",
+      "id_to": "Ts",
+      "d": 0.3957,
+      "gap": 6
+    },
+    {
+      "from": "shear_matrix_demo",
+      "to": "transform_composition",
+      "id_from": "Ts",
+      "id_to": "T7",
+      "d": 0.398,
+      "gap": 6
+    },
+    {
+      "from": "transform_composition",
+      "to": "matrix_4x4_viewer",
+      "id_from": "T7",
+      "id_to": "Tm",
+      "d": 0.1353,
+      "gap": 3
+    },
+    {
+      "from": "matrix_4x4_viewer",
+      "to": "homogeneous_coordinates",
+      "id_from": "Tm",
+      "id_to": "Th",
+      "d": 0.0129,
+      "gap": 2
+    },
+    {
+      "from": "homogeneous_coordinates",
+      "to": "invariants_demo",
+      "id_from": "Th",
+      "id_to": "Ti",
+      "d": 0.0972,
+      "gap": 3
+    }
+  ],
+  "corridor_cells": 43,
+  "uniform_cells": 20,
+  "extremes": {
+    "closest": {
+      "a": "matrix_4x4_viewer",
+      "b": "homogeneous_coordinates",
+      "d": 0.0129
+    },
+    "farthest": {
+      "a": "axis_translation_cube",
+      "b": "shear_matrix_demo",
+      "d": 0.5659
+    }
+  },
+  "nearest": {
+    "transformation_workbench": [
+      {
+        "lookup": "transform_composition",
+        "d": 0.0647
+      },
+      {
+        "lookup": "homogeneous_coordinates",
+        "d": 0.242
+      },
+      {
+        "lookup": "invariants_demo",
+        "d": 0.2537
+      }
+    ],
+    "translation_cube_demo": [
+      {
+        "lookup": "axis_translation_cube",
+        "d": 0.1612
+      },
+      {
+        "lookup": "transformation_workbench",
+        "d": 0.2772
+      },
+      {
+        "lookup": "transform_composition",
+        "d": 0.3111
+      }
+    ],
+    "axis_translation_cube": [
+      {
+        "lookup": "translation_cube_demo",
+        "d": 0.1612
+      },
+      {
+        "lookup": "transformation_workbench",
+        "d": 0.3936
+      },
+      {
+        "lookup": "rotation_gimbal",
+        "d": 0.4136
+      }
+    ],
+    "rotation_gimbal": [
+      {
+        "lookup": "spin",
+        "d": 0.0384
+      },
+      {
+        "lookup": "transformation_workbench",
+        "d": 0.277
+      },
+      {
+        "lookup": "transform_composition",
+        "d": 0.2945
+      }
+    ],
+    "spin": [
+      {
+        "lookup": "rotation_gimbal",
+        "d": 0.0384
+      },
+      {
+        "lookup": "transformation_workbench",
+        "d": 0.2863
+      },
+      {
+        "lookup": "transform_composition",
+        "d": 0.3071
+      }
+    ],
+    "scaleme": [
+      {
+        "lookup": "transformation_workbench",
+        "d": 0.2771
+      },
+      {
+        "lookup": "invariants_demo",
+        "d": 0.3105
+      },
+      {
+        "lookup": "transform_composition",
+        "d": 0.3119
+      }
+    ],
+    "shear_matrix_demo": [
+      {
+        "lookup": "matrix_4x4_viewer",
+        "d": 0.2097
+      },
+      {
+        "lookup": "homogeneous_coordinates",
+        "d": 0.2517
+      },
+      {
+        "lookup": "invariants_demo",
+        "d": 0.2574
+      }
+    ],
+    "transform_composition": [
+      {
+        "lookup": "transformation_workbench",
+        "d": 0.0647
+      },
+      {
+        "lookup": "matrix_4x4_viewer",
+        "d": 0.1353
+      },
+      {
+        "lookup": "homogeneous_coordinates",
+        "d": 0.149
+      }
+    ],
+    "matrix_4x4_viewer": [
+      {
+        "lookup": "homogeneous_coordinates",
+        "d": 0.0129
+      },
+      {
+        "lookup": "invariants_demo",
+        "d": 0.1127
+      },
+      {
+        "lookup": "transform_composition",
+        "d": 0.1353
+      }
+    ],
+    "homogeneous_coordinates": [
+      {
+        "lookup": "matrix_4x4_viewer",
+        "d": 0.0129
+      },
+      {
+        "lookup": "invariants_demo",
+        "d": 0.0972
+      },
+      {
+        "lookup": "transform_composition",
+        "d": 0.149
+      }
+    ],
+    "invariants_demo": [
+      {
+        "lookup": "homogeneous_coordinates",
+        "d": 0.0972
+      },
+      {
+        "lookup": "matrix_4x4_viewer",
+        "d": 0.1127
+      },
+      {
+        "lookup": "transform_composition",
+        "d": 0.1737
+      }
+    ]
+  }
+}

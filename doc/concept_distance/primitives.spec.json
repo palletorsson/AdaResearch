@@ -1,0 +1,24 @@
+{
+  "domain": "primitives",
+  "title": "Primitives - Mental Model",
+  "note": "Nodes are the core geometric primitives; edges are cosine distance over a 10-feature embedding. Axes follow PRIMITIVE_ONTOLOGY.md and the primitives beat score (P1 point -> P2 line -> P5 triangle -> P4 grid -> P6 solids -> P7 motion): the dimensional ladder, closure, curvature, how composite it is, whether it discretizes, genus (a hole), symmetry, motion, directedness, and atomicity (how irreducibly primitive it is). Walking distance in a Point_*/Primitives_* map = conceptual distance.",
+  "feature_names": ["dimensionality", "closure", "curvature", "composition", "discretization", "genus_hole", "symmetry", "motion", "directedness", "atomicity"],
+  "spacing": {"base": 2, "k": 10},
+  "order": [
+    {"id": "P1",  "lookup": "origin",             "name": "the point - a chosen location",   "embedding": [0.10, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 1.00]},
+    {"id": "P2",  "lookup": "grabbable_line",     "name": "the line - length and measure",   "embedding": [0.35, 0.0, 0.0, 0.1, 0.0, 0.0, 0.1, 0.0, 0.0, 0.80]},
+    {"id": "P2b", "lookup": "arrow",              "name": "the directed line - a vector",    "embedding": [0.35, 0.0, 0.0, 0.1, 0.0, 0.0, 0.1, 0.0, 1.0, 0.70]},
+    {"id": "P5",  "lookup": "interactivetriangle","name": "the triangle - minimum enclosure","embedding": [0.60, 1.0, 0.0, 0.3, 0.0, 0.0, 0.6, 0.0, 0.0, 0.60]},
+    {"id": "P5b", "lookup": "plane",              "name": "the plane - a flat surface",      "embedding": [0.60, 1.0, 0.0, 0.1, 0.0, 0.0, 0.4, 0.0, 0.0, 0.70]},
+    {"id": "P4",  "lookup": "grid_lines",         "name": "the grid - commitment to discretize", "embedding": [0.60, 0.3, 0.0, 0.8, 1.0, 0.0, 0.5, 0.0, 0.0, 0.30]},
+    {"id": "P6a", "lookup": "cube",               "name": "the cube - the faceted solid",    "embedding": [1.00, 1.0, 0.0, 0.3, 0.0, 0.0, 0.8, 0.0, 0.0, 0.60]},
+    {"id": "P7",  "lookup": "animated_cube",      "name": "the animated cube - motion enters","embedding": [1.00, 1.0, 0.0, 0.3, 0.0, 0.0, 0.8, 1.0, 0.0, 0.50]},
+    {"id": "P6b", "lookup": "capsule",            "name": "the capsule - a curved solid",    "embedding": [1.00, 1.0, 1.0, 0.2, 0.0, 0.0, 0.7, 0.0, 0.0, 0.60]},
+    {"id": "P6c", "lookup": "cylinder",           "name": "the cylinder - swept circle",     "embedding": [1.00, 1.0, 1.0, 0.2, 0.0, 0.0, 0.7, 0.0, 0.0, 0.60]},
+    {"id": "P6d", "lookup": "torus",              "name": "the torus - a solid with a hole", "embedding": [1.00, 1.0, 1.0, 0.3, 0.0, 1.0, 0.8, 0.0, 0.0, 0.50]},
+    {"id": "P6e", "lookup": "tetrahedron",        "name": "the tetrahedron - platonic solid","embedding": [1.00, 1.0, 0.0, 0.4, 0.0, 0.0, 0.9, 0.0, 0.0, 0.55]},
+    {"id": "P6f", "lookup": "octahedron",         "name": "the octahedron - platonic solid", "embedding": [1.00, 1.0, 0.0, 0.4, 0.0, 0.0, 0.95, 0.0, 0.0, 0.55]},
+    {"id": "P6g", "lookup": "bipyramid",          "name": "the bipyramid - mirrored solid",  "embedding": [1.00, 1.0, 0.0, 0.4, 0.0, 0.0, 0.7, 0.0, 0.0, 0.50]},
+    {"id": "P10", "lookup": "arch",               "name": "the arch - a composed structure", "embedding": [1.00, 0.5, 0.5, 0.7, 0.0, 0.6, 0.3, 0.0, 0.0, 0.20]}
+  ]
+}

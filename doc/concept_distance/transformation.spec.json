@@ -1,0 +1,20 @@
+{
+  "domain": "transformation",
+  "title": "Transformations - Mental Model",
+  "note": "Nodes are the transform artifacts; edges are cosine distance over a 10-feature embedding. Axes follow the transformation beat score (T1-T7): the three rigid motions, their composition, the matrix representation that unifies them, and what each preserves. Walking distance in a Trans_* map = conceptual distance.",
+  "feature_names": ["translation", "rotation", "scale", "shear", "composition", "matrix_repr", "axis_specific", "invariance", "dynamism", "dim3d"],
+  "spacing": {"base": 2, "k": 10},
+  "order": [
+    {"id": "T1", "lookup": "transformation_workbench", "name": "the three rigid motions",        "embedding": [1.0, 1.0, 1.0, 0.0, 0.5, 0.3, 0.0, 0.3, 0.7, 1.0]},
+    {"id": "T2", "lookup": "translation_cube_demo",    "name": "translation",                    "embedding": [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.7, 1.0]},
+    {"id": "T3", "lookup": "axis_translation_cube",    "name": "axis decomposition (x/y/z)",     "embedding": [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.2, 0.6, 1.0]},
+    {"id": "T4", "lookup": "rotation_gimbal",          "name": "rotation",                       "embedding": [0.0, 1.0, 0.0, 0.0, 0.0, 0.2, 0.3, 0.3, 0.7, 1.0]},
+    {"id": "T5", "lookup": "spin",                     "name": "rotation spectacle",             "embedding": [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 1.0, 1.0]},
+    {"id": "T6", "lookup": "scaleme",                  "name": "scale (uniform / non-uniform)",  "embedding": [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.6, 1.0]},
+    {"id": "Ts", "lookup": "shear_matrix_demo",        "name": "shear",                          "embedding": [0.0, 0.0, 0.2, 1.0, 0.0, 0.6, 0.0, 0.4, 0.4, 1.0]},
+    {"id": "T7", "lookup": "transform_composition",    "name": "composition of transforms",      "embedding": [0.7, 0.7, 0.7, 0.2, 1.0, 0.5, 0.0, 0.4, 0.8, 1.0]},
+    {"id": "Tm", "lookup": "matrix_4x4_viewer",        "name": "the 4x4 matrix",                 "embedding": [0.3, 0.3, 0.3, 0.3, 0.6, 1.0, 0.0, 0.5, 0.3, 1.0]},
+    {"id": "Th", "lookup": "homogeneous_coordinates",  "name": "homogeneous coordinates",        "embedding": [0.5, 0.3, 0.3, 0.2, 0.5, 1.0, 0.0, 0.6, 0.2, 1.0]},
+    {"id": "Ti", "lookup": "invariants_demo",          "name": "what is preserved (invariants)", "embedding": [0.3, 0.3, 0.3, 0.2, 0.4, 0.4, 0.0, 1.0, 0.3, 1.0]}
+  ]
+}

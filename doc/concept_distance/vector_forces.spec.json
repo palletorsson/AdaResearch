@@ -1,0 +1,329 @@
+{
+  "domain": "vector_forces",
+  "title": "Vectors & Forces - Mental Model",
+  "note": "Extracted from the Obsidian mental-model graph (brain-vault). Nodes are artifacts; edges are cosine distance over a 10-feature embedding. The short Nature-of-Code path: Vectors (motion-first) then Forces.",
+  "feature_names": [
+    "domain",
+    "additive",
+    "scaling",
+    "magnitude",
+    "direction",
+    "motion",
+    "resistance",
+    "attraction",
+    "scale",
+    "dynamism"
+  ],
+  "spacing": {
+    "base": 2,
+    "k": 10
+  },
+  "order": [
+    {
+      "id": "V0",
+      "lookup": "coordinatesystem3m",
+      "name": "axes & origin",
+      "embedding": [
+        0.0,
+        0.0,
+        0.0,
+        0.3,
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.6,
+        0.1
+      ]
+    },
+    {
+      "id": "V1",
+      "lookup": "vectorbasics",
+      "name": "what is a vector",
+      "embedding": [
+        0.05,
+        0.0,
+        0.0,
+        0.4,
+        0.6,
+        0.1,
+        0.0,
+        0.0,
+        0.2,
+        0.3
+      ]
+    },
+    {
+      "id": "V2",
+      "lookup": "vector_add",
+      "name": "addition",
+      "embedding": [
+        0.1,
+        1.0,
+        0.0,
+        0.2,
+        0.3,
+        0.2,
+        0.0,
+        0.0,
+        0.2,
+        0.4
+      ]
+    },
+    {
+      "id": "V3",
+      "lookup": "vector_sub",
+      "name": "subtraction",
+      "embedding": [
+        0.1,
+        1.0,
+        0.0,
+        0.2,
+        0.4,
+        0.1,
+        0.0,
+        0.0,
+        0.2,
+        0.4
+      ]
+    },
+    {
+      "id": "V4",
+      "lookup": "example_2_3_gravity_scaled_by_mass_vr",
+      "name": "multiplication (scaling)",
+      "embedding": [
+        0.3,
+        0.0,
+        1.0,
+        0.5,
+        0.1,
+        0.1,
+        0.0,
+        0.3,
+        0.15,
+        0.5
+      ]
+    },
+    {
+      "id": "V5",
+      "lookup": "length_lantern",
+      "name": "magnitude",
+      "embedding": [
+        0.05,
+        0.0,
+        0.0,
+        1.0,
+        0.1,
+        0.0,
+        0.0,
+        0.0,
+        0.2,
+        0.3
+      ]
+    },
+    {
+      "id": "V6",
+      "lookup": "vector_normalize_demo",
+      "name": "normalize",
+      "embedding": [
+        0.05,
+        0.0,
+        0.3,
+        0.5,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.15,
+        0.3
+      ]
+    },
+    {
+      "id": "V7",
+      "lookup": "vectormotion",
+      "name": "velocity",
+      "embedding": [
+        0.15,
+        0.2,
+        0.0,
+        0.2,
+        0.3,
+        0.9,
+        0.0,
+        0.0,
+        0.2,
+        0.8
+      ]
+    },
+    {
+      "id": "V8",
+      "lookup": "bubble_blaster",
+      "name": "velocity, embodied",
+      "embedding": [
+        0.25,
+        0.0,
+        0.0,
+        0.3,
+        0.5,
+        0.9,
+        0.0,
+        0.0,
+        0.25,
+        1.0
+      ]
+    },
+    {
+      "id": "V9",
+      "lookup": "launch_arc",
+      "name": "acceleration",
+      "embedding": [
+        0.4,
+        0.2,
+        0.0,
+        0.3,
+        0.4,
+        1.0,
+        0.0,
+        0.3,
+        0.3,
+        0.9
+      ]
+    },
+    {
+      "id": "F1",
+      "lookup": "force_cube",
+      "name": "force = m*a",
+      "embedding": [
+        0.7,
+        0.3,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.0,
+        0.2,
+        0.25,
+        0.7
+      ]
+    },
+    {
+      "id": "F2",
+      "lookup": "force_pad",
+      "name": "net force",
+      "embedding": [
+        0.75,
+        0.4,
+        0.0,
+        0.3,
+        0.4,
+        0.8,
+        0.0,
+        0.0,
+        0.3,
+        0.8
+      ]
+    },
+    {
+      "id": "F3",
+      "lookup": "force_mower",
+      "name": "applying a force (work)",
+      "embedding": [
+        0.8,
+        0.3,
+        0.0,
+        0.4,
+        0.5,
+        0.4,
+        0.3,
+        0.0,
+        0.4,
+        0.6
+      ]
+    },
+    {
+      "id": "F4",
+      "lookup": "drag_lane",
+      "name": "friction",
+      "embedding": [
+        0.85,
+        0.0,
+        0.0,
+        0.3,
+        0.3,
+        0.6,
+        1.0,
+        0.0,
+        0.2,
+        0.7
+      ]
+    },
+    {
+      "id": "F5",
+      "lookup": "drag_corridor",
+      "name": "fluid resistance (drag)",
+      "embedding": [
+        0.85,
+        0.0,
+        0.0,
+        0.3,
+        0.3,
+        0.6,
+        1.0,
+        0.0,
+        0.9,
+        0.8
+      ]
+    },
+    {
+      "id": "F6",
+      "lookup": "orbit_pair",
+      "name": "gravitational attraction",
+      "embedding": [
+        1.0,
+        0.2,
+        0.2,
+        0.4,
+        0.5,
+        0.8,
+        0.0,
+        1.0,
+        0.2,
+        0.9
+      ]
+    },
+    {
+      "id": "F7",
+      "lookup": "orbit_walk",
+      "name": "everything attracts (n-body)",
+      "embedding": [
+        1.0,
+        0.2,
+        0.2,
+        0.4,
+        0.5,
+        0.8,
+        0.0,
+        1.0,
+        0.95,
+        0.9
+      ]
+    },
+    {
+      "id": "F8",
+      "lookup": "centrifuge_ring",
+      "name": "circular motion",
+      "embedding": [
+        0.9,
+        0.2,
+        0.0,
+        0.4,
+        0.6,
+        0.9,
+        0.0,
+        0.6,
+        0.9,
+        1.0
+      ]
+    }
+  ]
+}
