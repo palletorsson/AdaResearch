@@ -12,6 +12,8 @@ Run:  python tools/build_concept_map.py transformation
       python tools/build_concept_map.py primitives
 """
 import json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import concept_distance_text as T   # reuse tokens / tfidf / cos_d for the concept-text distance
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REG = os.path.join(ROOT, "commons", "artifacts", "registry")
@@ -134,6 +136,7 @@ def build(domain):
         meta[c[0]] = {"act": c[1], "truth": c[2]}
     meta[cfg["catch_all"][0]] = {"act": cfg["catch_all"][1], "truth": cfg["catch_all"][2]}
     groups = {k: [] for k in concept_keys}
+    concept_text = {k: meta[k].get("truth", "") for k in concept_keys}   # accrue each concept's prose
 
     for lk, (a, fn) in sorted(arts.items()):
         name = (a.get("name") or lk).lower()
@@ -151,6 +154,7 @@ def build(domain):
             "has_image": os.path.exists(os.path.join(IMG_DIR, lk + ".png")),
             "recommended": bool(a.get("map_ready", False)),
         })
+        concept_text[best] += " " + name + " " + (a.get("description") or "")
 
     for k in concept_keys:
         tiers = {"small": [], "medium": [], "large": [], "applied": []}
@@ -162,12 +166,21 @@ def build(domain):
     # drop empty concepts (keep order)
     concept_keys = [k for k in concept_keys if groups[k]]
     total = sum(len(groups[k]) for k in concept_keys)
+    # concept-level distance: TF-IDF cosine over each concept's accrued text, min-max rescaled
+    vecs, _ = T.tfidf([concept_text[k] for k in concept_keys])
+    nc = len(concept_keys)
+    CD = [[0.0 if i == j else T.cos_d(vecs[i], vecs[j]) for j in range(nc)] for i in range(nc)]
+    _raw = [CD[i][j] for i in range(nc) for j in range(i + 1, nc)]
+    if _raw and max(_raw) > min(_raw):
+        lo, hi = min(_raw), max(_raw)
+        CD = [[0.0 if i == j else round((CD[i][j] - lo) / (hi - lo), 4) for j in range(nc)] for i in range(nc)]
     out = {
         "title": cfg["title"], "domain": domain,
         "note": "Auto-classified by tools/build_concept_map.py — heuristic keyword scoring, tier by footprint.",
         "acts": [],
         "concepts": concept_keys,
         "concept_meta": {k: meta[k] for k in concept_keys},
+        "concept_distance": CD,
         "groups": {k: groups[k] for k in concept_keys},
         "total": total, "total_concepts": len(concept_keys),
         "recommended_total": sum(1 for k in concept_keys for x in groups[k] if x["recommended"]),

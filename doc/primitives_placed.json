@@ -680,45 +680,45 @@
       0.0
     ]
   ],
-  "conceptual_corr": 1.0,
+  "conceptual_corr": -0.043,
   "pulled_apart": [
     {
-      "a": "Interactive tool",
-      "b": "Other primitives",
-      "placed": 0.05,
-      "conceptual": 0.05
-    },
-    {
-      "a": "Assembly / SDF / boolean",
-      "b": "Other primitives",
-      "placed": 0.1,
-      "conceptual": 0.1
-    },
-    {
-      "a": "Assembly / SDF / boolean",
+      "a": "Line / edge",
       "b": "Interactive tool",
-      "placed": 0.05,
-      "conceptual": 0.05
+      "placed": 0.9,
+      "conceptual": 0.36
+    },
+    {
+      "a": "Point",
+      "b": "Text / glyph",
+      "placed": 0.85,
+      "conceptual": 0.35
+    },
+    {
+      "a": "Plane / quad",
+      "b": "Interactive tool",
+      "placed": 0.75,
+      "conceptual": 0.32
     }
   ],
   "jammed_together": [
     {
-      "a": "Point",
-      "b": "Line / edge",
+      "a": "Arch / structure",
+      "b": "Curve / organic",
       "placed": 0.05,
-      "conceptual": 0.05
+      "conceptual": 0.98
     },
     {
-      "a": "Point",
-      "b": "Arrow / vector",
-      "placed": 0.1,
-      "conceptual": 0.1
+      "a": "Helix / spiral",
+      "b": "Arch / structure",
+      "placed": 0.05,
+      "conceptual": 0.97
     },
     {
-      "a": "Point",
-      "b": "Triangle",
-      "placed": 0.15,
-      "conceptual": 0.15
+      "a": "Prism / extrusion",
+      "b": "Helix / spiral",
+      "placed": 0.05,
+      "conceptual": 0.96
     }
   ]
 }

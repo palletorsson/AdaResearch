@@ -58,10 +58,13 @@ def build(domain):
     groups = D["groups"]
     order_idx = {c: i for i, c in enumerate(concepts)}
 
-    # concept-distance matrix (heuristic): reuse the tutorial distance, aligned by order index
+    # concept-distance: prefer the concept map's own concept-text distance, then a tutorial
+    # distance aligned by order, then order-only proximity.
+    cdist = D.get("concept_distance")
+    if not (cdist and len(cdist) == len(concepts)):
+        cdist = None
     dist_path = os.path.join(DOC, domain + "_distance.json")
-    cdist = None
-    if os.path.exists(dist_path):
+    if cdist is None and os.path.exists(dist_path):
         dd = json.load(open(dist_path, encoding="utf-8")).get("matrix")
         if dd and len(dd) >= len(concepts):
             cdist = [row[:len(concepts)] for row in dd[:len(concepts)]]

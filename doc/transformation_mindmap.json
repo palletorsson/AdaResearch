@@ -27,7 +27,7 @@
       "act": "rigid motions",
       "truth": "translation preserves everything except position.",
       "count": 5,
-      "x_spread": -0.8182,
+      "x_spread": -0.4752,
       "tiers": {
         "small": [],
         "medium": [
@@ -47,7 +47,7 @@
       "act": "rigid motions",
       "truth": "rotation turns without resizing — the circle hidden in motion.",
       "count": 2,
-      "x_spread": -0.6364,
+      "x_spread": -0.314,
       "tiers": {
         "small": [],
         "medium": [
@@ -64,7 +64,7 @@
       "act": "rigid motions",
       "truth": "scale resizes; a shape is a ratio held against a unit.",
       "count": 2,
-      "x_spread": -0.4546,
+      "x_spread": -0.6517,
       "tiers": {
         "small": [
           "rotatescalecubes",
@@ -81,7 +81,7 @@
       "act": "beyond rigid",
       "truth": "shear slides parallel layers past each other.",
       "count": 1,
-      "x_spread": -0.2728,
+      "x_spread": -0.4614,
       "tiers": {
         "small": [],
         "medium": [
@@ -97,7 +97,7 @@
       "act": "beyond rigid",
       "truth": "transforms compose, and the order is the meaning.",
       "count": 2,
-      "x_spread": -0.091,
+      "x_spread": -0.3262,
       "tiers": {
         "small": [],
         "medium": [],
@@ -114,7 +114,7 @@
       "act": "representation",
       "truth": "every transform is a matrix; homogeneous coordinates unify them.",
       "count": 2,
-      "x_spread": 0.091,
+      "x_spread": -0.9429,
       "tiers": {
         "small": [],
         "medium": [
@@ -131,7 +131,7 @@
       "act": "representation",
       "truth": "what a transform leaves unchanged names its kind.",
       "count": 1,
-      "x_spread": 0.2728,
+      "x_spread": -0.065,
       "tiers": {
         "small": [],
         "medium": [
@@ -147,7 +147,7 @@
       "act": "operations on space",
       "truth": "a transform repeated fills a plane.",
       "count": 1,
-      "x_spread": 0.4546,
+      "x_spread": 1.0,
       "tiers": {
         "small": [],
         "medium": [],
@@ -163,7 +163,7 @@
       "act": "operations on space",
       "truth": "a transform assigned to every point is a field.",
       "count": 2,
-      "x_spread": 0.6364,
+      "x_spread": -0.0685,
       "tiers": {
         "small": [],
         "medium": [],
@@ -180,7 +180,7 @@
       "act": "operations on space",
       "truth": "add and subtract solids to carve new form.",
       "count": 1,
-      "x_spread": 0.8182,
+      "x_spread": -0.0067,
       "tiers": {
         "small": [],
         "medium": [],
@@ -196,7 +196,7 @@
       "act": "operations on space",
       "truth": "transform the space itself, not the object in it.",
       "count": 18,
-      "x_spread": 1.0,
+      "x_spread": -0.1084,
       "tiers": {
         "small": [
           "curvature_slider",
@@ -229,170 +229,170 @@
   "concept_distance": [
     [
       0.0,
-      0.0909,
-      0.1818,
-      0.2727,
-      0.3636,
-      0.4545,
-      0.5455,
-      0.6364,
-      0.7273,
-      0.8182,
-      0.9091,
-      1.0
+      0.5248,
+      0.686,
+      0.3483,
+      0.5386,
+      0.5599,
+      0.0,
+      0.8026,
+      1.0,
+      0.8704,
+      0.8231,
+      0.7892
     ],
     [
-      0.0909,
+      0.5248,
       0.0,
-      0.0909,
-      0.1818,
-      0.2727,
-      0.3636,
-      0.4545,
-      0.5455,
-      0.6364,
-      0.7273,
-      0.8182,
-      0.9091
+      0.6533,
+      0.7809,
+      0.8779,
+      0.5126,
+      0.619,
+      0.8574,
+      1.0,
+      0.9787,
+      0.6978,
+      0.7096
     ],
     [
-      0.1818,
-      0.0909,
+      0.686,
+      0.6533,
       0.0,
-      0.0909,
-      0.1818,
-      0.2727,
-      0.3636,
-      0.4545,
-      0.5455,
-      0.6364,
-      0.7273,
-      0.8182
+      0.8814,
+      0.764,
+      0.106,
+      0.6103,
+      0.775,
+      1.0,
+      0.9661,
+      0.7084,
+      0.6052
     ],
     [
-      0.2727,
-      0.1818,
-      0.0909,
+      0.3483,
+      0.7809,
+      0.8814,
       0.0,
-      0.0909,
-      0.1818,
-      0.2727,
-      0.3636,
-      0.4545,
-      0.5455,
-      0.6364,
-      0.7273
+      0.5835,
+      0.643,
+      0.5079,
+      0.8042,
+      1.0,
+      1.0,
+      0.8128,
+      0.9078
     ],
     [
-      0.3636,
-      0.2727,
-      0.1818,
-      0.0909,
+      0.5386,
+      0.8779,
+      0.764,
+      0.5835,
       0.0,
-      0.0909,
-      0.1818,
-      0.2727,
-      0.3636,
-      0.4545,
-      0.5455,
-      0.6364
+      0.5946,
+      0.4188,
+      0.6946,
+      1.0,
+      1.0,
+      0.9638,
+      0.8357
     ],
     [
-      0.4545,
-      0.3636,
-      0.2727,
-      0.1818,
-      0.0909,
+      0.5599,
+      0.5126,
+      0.106,
+      0.643,
+      0.5946,
       0.0,
-      0.0909,
-      0.1818,
-      0.2727,
-      0.3636,
-      0.4545,
-      0.5455
+      0.4622,
+      0.6824,
+      0.8861,
+      0.8455,
+      0.6225,
+      0.7474
     ],
     [
-      0.5455,
-      0.4545,
-      0.3636,
-      0.2727,
-      0.1818,
-      0.0909,
       0.0,
-      0.0909,
-      0.1818,
-      0.2727,
-      0.3636,
-      0.4545
+      0.619,
+      0.6103,
+      0.5079,
+      0.4188,
+      0.4622,
+      0.0,
+      0.6304,
+      0.9429,
+      0.9417,
+      0.8893,
+      0.762
     ],
     [
-      0.6364,
-      0.5455,
-      0.4545,
-      0.3636,
-      0.2727,
-      0.1818,
-      0.0909,
+      0.8026,
+      0.8574,
+      0.775,
+      0.8042,
+      0.6946,
+      0.6824,
+      0.6304,
       0.0,
-      0.0909,
-      0.1818,
-      0.2727,
-      0.3636
-    ],
-    [
-      0.7273,
-      0.6364,
-      0.5455,
-      0.4545,
-      0.3636,
-      0.2727,
-      0.1818,
-      0.0909,
-      0.0,
-      0.0909,
-      0.1818,
-      0.2727
-    ],
-    [
-      0.8182,
-      0.7273,
-      0.6364,
-      0.5455,
-      0.4545,
-      0.3636,
-      0.2727,
-      0.1818,
-      0.0909,
-      0.0,
-      0.0909,
-      0.1818
-    ],
-    [
-      0.9091,
-      0.8182,
-      0.7273,
-      0.6364,
-      0.5455,
-      0.4545,
-      0.3636,
-      0.2727,
-      0.1818,
-      0.0909,
-      0.0,
-      0.0909
+      0.8676,
+      0.9448,
+      0.972,
+      0.8054
     ],
     [
       1.0,
-      0.9091,
-      0.8182,
-      0.7273,
-      0.6364,
-      0.5455,
-      0.4545,
-      0.3636,
-      0.2727,
-      0.1818,
-      0.0909,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8861,
+      0.9429,
+      0.8676,
+      0.0,
+      0.9389,
+      0.8298,
+      0.8976
+    ],
+    [
+      0.8704,
+      0.9787,
+      0.9661,
+      1.0,
+      1.0,
+      0.8455,
+      0.9417,
+      0.9448,
+      0.9389,
+      0.0,
+      1.0,
+      0.8688
+    ],
+    [
+      0.8231,
+      0.6978,
+      0.7084,
+      0.8128,
+      0.9638,
+      0.6225,
+      0.8893,
+      0.972,
+      0.8298,
+      1.0,
+      0.0,
+      0.6269
+    ],
+    [
+      0.7892,
+      0.7096,
+      0.6052,
+      0.9078,
+      0.8357,
+      0.7474,
+      0.762,
+      0.8054,
+      0.8976,
+      0.8688,
+      0.6269,
       0.0
     ]
   ],
@@ -1142,45 +1142,45 @@
         0.0
       ]
     ],
-    "conceptual_corr": 1.0,
+    "conceptual_corr": 0.219,
     "pulled_apart": [
       {
-        "a": "Boolean / CSG",
-        "b": "Curved space (non-Euclidean)",
-        "placed": 0.09,
-        "conceptual": 0.09
+        "a": "Three rigid motions",
+        "b": "Matrix / homogeneous",
+        "placed": 0.55,
+        "conceptual": 0.0
       },
       {
-        "a": "Field / flow",
+        "a": "Rotation",
         "b": "Curved space (non-Euclidean)",
-        "placed": 0.18,
-        "conceptual": 0.18
+        "placed": 0.82,
+        "conceptual": 0.61
       },
       {
-        "a": "Field / flow",
-        "b": "Boolean / CSG",
-        "placed": 0.09,
-        "conceptual": 0.09
+        "a": "Three rigid motions",
+        "b": "Curved space (non-Euclidean)",
+        "placed": 1.0,
+        "conceptual": 0.79
       }
     ],
     "jammed_together": [
       {
-        "a": "Three rigid motions",
-        "b": "Translation",
+        "a": "Field / flow",
+        "b": "Boolean / CSG",
         "placed": 0.09,
-        "conceptual": 0.09
+        "conceptual": 1.0
       },
       {
-        "a": "Three rigid motions",
-        "b": "Rotation",
-        "placed": 0.18,
-        "conceptual": 0.18
+        "a": "Tiling / pattern",
+        "b": "Field / flow",
+        "placed": 0.09,
+        "conceptual": 0.94
       },
       {
-        "a": "Three rigid motions",
+        "a": "Rotation",
         "b": "Scale",
-        "placed": 0.27,
-        "conceptual": 0.27
+        "placed": 0.09,
+        "conceptual": 0.88
       }
     ]
   }
