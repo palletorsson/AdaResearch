@@ -1,0 +1,3896 @@
+{
+  "domain": "vector_forces",
+  "title": "Vectors & Forces — every example, by concept",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Coordinate system",
+      "order": 0,
+      "act": "Act I — what a vector is",
+      "truth": "Before a vector, a where: three axes, an origin, an agreed order (x, y, z).",
+      "count": 10,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "coordinate_axes_xy",
+          "coordinate_lines",
+          "coordinate_system_switcher",
+          "coordinates",
+          "example_3_4_polar_to_cartesian_vr",
+          "homogeneous_coordinates"
+        ],
+        "medium": [
+          "basis_vectors_rig",
+          "xyz_coordinates"
+        ],
+        "large": [
+          "CoordinateSystem3M"
+        ],
+        "applied": [
+          "coordinate_locator"
+        ]
+      }
+    },
+    {
+      "key": "Vector basics",
+      "order": 1,
+      "act": "Act I — what a vector is",
+      "truth": "A vector is a step, not a place - a direction and a length you can carry anywhere.",
+      "count": 4,
+      "x_spread": -0.9166,
+      "tiers": {
+        "small": [
+          "VectorBasics"
+        ],
+        "medium": [
+          "vector_bench"
+        ],
+        "large": [
+          "free_vector"
+        ],
+        "applied": [
+          "route_vector"
+        ]
+      }
+    },
+    {
+      "key": "Magnitude / length",
+      "order": 2,
+      "act": "Act I — what a vector is",
+      "truth": "",
+      "count": 5,
+      "x_spread": -0.8334,
+      "tiers": {
+        "small": [
+          "example_1_5_vector_magnitude_vr",
+          "vector_magnitude_demo"
+        ],
+        "medium": [
+          "magnitude_bench"
+        ],
+        "large": [
+          "magnitude_hall"
+        ],
+        "applied": [
+          "vector_arena"
+        ]
+      }
+    },
+    {
+      "key": "Unit vector / normalize",
+      "order": 3,
+      "act": "Act I — what a vector is",
+      "truth": "Divide by length and every direction gets a unit twin.",
+      "count": 7,
+      "x_spread": -0.75,
+      "tiers": {
+        "small": [
+          "vector_normalize_demo",
+          "example_1_6_vector_normalize_vr",
+          "turret_targeting"
+        ],
+        "medium": [
+          "turret_boll_infoboard"
+        ],
+        "large": [
+          "hl_turret_vectors",
+          "laser_turret"
+        ],
+        "applied": [
+          "vector_drone"
+        ]
+      }
+    },
+    {
+      "key": "Addition",
+      "order": 4,
+      "act": "Act II — vector arithmetic",
+      "truth": "a + b is where you land if you walk a then b - tip to tail.",
+      "count": 8,
+      "x_spread": -0.6666,
+      "tiers": {
+        "small": [
+          "combined_forces_demo",
+          "VectorAddition"
+        ],
+        "medium": [
+          "vector_add"
+        ],
+        "large": [
+          "vector_addition_demo",
+          "vector_addition_walk",
+          "vector_addition_xl",
+          "vector_addition_xl_laser"
+        ],
+        "applied": [
+          "tug_of_war"
+        ]
+      }
+    },
+    {
+      "key": "Subtraction",
+      "order": 5,
+      "act": "Act II — vector arithmetic",
+      "truth": "b - a is the arrow of the gap, pointing from here to there.",
+      "count": 6,
+      "x_spread": -0.5834,
+      "tiers": {
+        "small": [
+          "example_1_3_vector_subtraction_vr",
+          "VectorSubtraction"
+        ],
+        "medium": [
+          "vector_sub"
+        ],
+        "large": [
+          "vector_subtraction_demo",
+          "vector_subtraction_xl_laser"
+        ],
+        "applied": [
+          "river_crossing"
+        ]
+      }
+    },
+    {
+      "key": "Scaling",
+      "order": 6,
+      "act": "Act II — vector arithmetic",
+      "truth": "A scalar is a volume knob for a direction - same line, new length.",
+      "count": 9,
+      "x_spread": -0.5,
+      "tiers": {
+        "small": [
+          "example_2_3_gravity_scaled_by_mass_vr",
+          "array_scale",
+          "example_1_4_vector_multiplication_vr",
+          "quantum_field",
+          "scale_lines",
+          "scale_me"
+        ],
+        "medium": [
+          "scaling_bench"
+        ],
+        "large": [
+          "scaleme"
+        ],
+        "applied": [
+          "throttle_gain"
+        ]
+      }
+    },
+    {
+      "key": "Dot product",
+      "order": 7,
+      "act": "Act II — vector arithmetic",
+      "truth": "the dot product is how much two directions agree — and here, agreeing is mercy",
+      "count": 8,
+      "x_spread": -0.4166,
+      "tiers": {
+        "small": [
+          "vector_reflection_demo",
+          "VectorDotProduct",
+          "work_energy_demo"
+        ],
+        "medium": [
+          "VectorWorkbench"
+        ],
+        "large": [
+          "dot_product_projector",
+          "vector_dot_product_xl",
+          "vector_joint_playground"
+        ],
+        "applied": [
+          "dot_aligner"
+        ]
+      }
+    },
+    {
+      "key": "Projection / reflection",
+      "order": 8,
+      "act": "Act II — vector arithmetic",
+      "truth": "projection is the part of you that lives along someone else's line",
+      "count": 5,
+      "x_spread": -0.3334,
+      "tiers": {
+        "small": [
+          "projection_toy"
+        ],
+        "medium": [
+          "VectorProjectionReflection"
+        ],
+        "large": [
+          "reflection_hall",
+          "vector_projection_demo"
+        ],
+        "applied": [
+          "projection_shadow"
+        ]
+      }
+    },
+    {
+      "key": "Cross product / torque",
+      "order": 9,
+      "act": "Act II — vector arithmetic",
+      "truth": "the cross product is the turn left over when two directions disagree",
+      "count": 9,
+      "x_spread": -0.25,
+      "tiers": {
+        "small": [
+          "torque_demo",
+          "VectorCrossProduct",
+          "VectorTorque"
+        ],
+        "medium": [
+          "torque_bench"
+        ],
+        "large": [
+          "cross_product_demo",
+          "DrawbridgeHinge",
+          "rigid_body",
+          "vector_cross_product_xl"
+        ],
+        "applied": [
+          "torque_crank"
+        ]
+      }
+    },
+    {
+      "key": "Vector field / flow",
+      "order": 10,
+      "act": "Act III — fields & motion",
+      "truth": "a field is force that has decided to be everywhere at once",
+      "count": 11,
+      "x_spread": -0.1666,
+      "tiers": {
+        "small": [
+          "flow_field_painter",
+          "noc_5_04_flow_field",
+          "particle_flow_swarm",
+          "vector_field_grid",
+          "vector_field_visualizer"
+        ],
+        "medium": [
+          "VectorFieldFlow"
+        ],
+        "large": [
+          "weather_vector_field",
+          "FlowFieldMain",
+          "vector_field",
+          "vector_fields"
+        ],
+        "applied": [
+          "drag_coefficient_wind_tunnel"
+        ]
+      }
+    },
+    {
+      "key": "Motion / velocity",
+      "order": 11,
+      "act": "Act III — fields & motion",
+      "truth": "Every bubble leaves along the vector you point.",
+      "count": 13,
+      "x_spread": -0.0834,
+      "tiers": {
+        "small": [
+          "VectorMotion",
+          "example_1_7_motion_101_velocity_vr",
+          "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+          "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "example_3_3_pointing_in_the_direction_of_motion_vr",
+          "velocity_arrow",
+          "IKArm"
+        ],
+        "medium": [
+          "velocity_bench"
+        ],
+        "large": [
+          "fluid_simulation",
+          "SliderPress",
+          "verlet_integration"
+        ],
+        "applied": [
+          "bubble_blaster",
+          "HingeCrank"
+        ]
+      }
+    },
+    {
+      "key": "Work (F.d)",
+      "order": 12,
+      "act": "Act IV — forces",
+      "truth": "Only the part along the motion does work: W = F*d*cos(t).",
+      "count": 4,
+      "x_spread": 0.0,
+      "tiers": {
+        "small": [
+          "work_toy"
+        ],
+        "medium": [
+          "work_meter"
+        ],
+        "large": [
+          "work_room"
+        ],
+        "applied": [
+          "force_mower"
+        ]
+      }
+    },
+    {
+      "key": "Friction / drag",
+      "order": 13,
+      "act": "Act IV — forces",
+      "truth": "Resistance grows with speed: F = -b*v.",
+      "count": 8,
+      "x_spread": 0.0834,
+      "tiers": {
+        "small": [
+          "example_2_4_friction_vr",
+          "friction_ramp",
+          "viscosity_layers"
+        ],
+        "medium": [
+          "drag_lane",
+          "example_2_5_fluid_resistance_vr",
+          "wedge_slide"
+        ],
+        "large": [
+          "drag_corridor"
+        ],
+        "applied": [
+          "brake_skid"
+        ]
+      }
+    },
+    {
+      "key": "Projectile / launch",
+      "order": 14,
+      "act": "Act IV — forces",
+      "truth": "Gravity applied each frame bends a straight launch into a parabola.",
+      "count": 12,
+      "x_spread": 0.1666,
+      "tiers": {
+        "small": [
+          "sub_emitters"
+        ],
+        "medium": [
+          "launch_arc",
+          "firework_burst",
+          "VectorThrowing"
+        ],
+        "large": [
+          "cube_projectile_spawner"
+        ],
+        "applied": [
+          "catapult",
+          "firework_launcher",
+          "human_catapult",
+          "mortar_vector_siege",
+          "return_launcher",
+          "slingshot_launcher",
+          "slingshot_pull"
+        ]
+      }
+    },
+    {
+      "key": "Centripetal",
+      "order": 15,
+      "act": "Act IV — forces",
+      "truth": "Constant acceleration toward a centre you never reach: a = v2/r.",
+      "count": 4,
+      "x_spread": 0.25,
+      "tiers": {
+        "small": [
+          "centripetal_force_demo"
+        ],
+        "medium": [
+          "centripetal_bench"
+        ],
+        "large": [
+          "centrifuge_ring"
+        ],
+        "applied": [
+          "circle_train"
+        ]
+      }
+    },
+    {
+      "key": "Gravity / orbit",
+      "order": 16,
+      "act": "Act IV — forces",
+      "truth": "Every mass pulls every other: F = G*m1*m2/r2.",
+      "count": 17,
+      "x_spread": 0.3334,
+      "tiers": {
+        "small": [
+          "cloth_simulation",
+          "example_2_6_single_attractor_vr",
+          "example_2_7_multiple_attractors_vr",
+          "example_2_8_two_body_attraction_vr",
+          "example_2_9_n_body_attraction_vr",
+          "example_3_2_forces_with_arbitrary_angular_motion_vr",
+          "exercise_1_8_solution_attraction_magnitude_vr",
+          "gravity_well",
+          "nbody_simulation",
+          "orbital_mechanics_demo",
+          "rockfactory_gravity",
+          "three_body_problem"
+        ],
+        "medium": [
+          "orbit_pair",
+          "attractorsphere"
+        ],
+        "large": [
+          "orbit_walk",
+          "force_fields"
+        ],
+        "applied": [
+          "algo_gun"
+        ]
+      }
+    },
+    {
+      "key": "Spring / Hooke",
+      "order": 17,
+      "act": "Act IV — forces",
+      "truth": "a spring is honest — it returns exactly what it's given, which is why it keeps time",
+      "count": 16,
+      "x_spread": 0.4166,
+      "tiers": {
+        "small": [
+          "chord_tension_spring",
+          "example_3_11_a_spring_connection_vr",
+          "spring_chain",
+          "spring_demo",
+          "spring_hopper",
+          "spring_mass_bouncer",
+          "spring_network"
+        ],
+        "medium": [
+          "spring_bob"
+        ],
+        "large": [
+          "force_directed_layout",
+          "forcedirected3d",
+          "mass_spring_damper",
+          "spring_mass_system",
+          "spring_system",
+          "spring_tower",
+          "surreal_kinetic_sculpture"
+        ],
+        "applied": [
+          "SpringSuspension"
+        ]
+      }
+    },
+    {
+      "key": "Pendulum",
+      "order": 18,
+      "act": "Act IV — forces",
+      "truth": "a pendulum keeps time because the pull back is proportional to how far it's pulled",
+      "count": 17,
+      "x_spread": 0.5,
+      "tiers": {
+        "small": [
+          "control_pendulum",
+          "coupled_pendulums",
+          "example_3_10_swinging_pendulum_vr",
+          "exercise_3_15_double_pendulum_vr",
+          "pendulum",
+          "PendulumPin"
+        ],
+        "medium": [
+          "pendulum_swing",
+          "ChainSwing",
+          "ConeTwistBag",
+          "parametric_pendulum_waves",
+          "pendulum_slap"
+        ],
+        "large": [
+          "DoublePendulum",
+          "pendulum_hall",
+          "PendulumCircle",
+          "PendulumGrid3x3",
+          "PendulumWave"
+        ],
+        "applied": [
+          "foucault_pendulum"
+        ]
+      }
+    },
+    {
+      "key": "Momentum / collision",
+      "order": 19,
+      "act": "Act IV — forces",
+      "truth": "momentum is motion that refuses to be destroyed, only handed on",
+      "count": 5,
+      "x_spread": 0.5834,
+      "tiers": {
+        "small": [
+          "impulse_collision_demo"
+        ],
+        "medium": [
+          "collision_carts"
+        ],
+        "large": [
+          "momentum_collision"
+        ],
+        "applied": [
+          "momentum_cradle",
+          "newton_cradle"
+        ]
+      }
+    },
+    {
+      "key": "Restitution / bounce",
+      "order": 20,
+      "act": "Act IV — forces",
+      "truth": "every bounce is a tax on a fall",
+      "count": 6,
+      "x_spread": 0.6666,
+      "tiers": {
+        "small": [
+          "example_1_1_bouncing_ball_with_no_vectors_vr",
+          "example_1_2_bouncing_ball_with_vectors_vr",
+          "normal_force_demo"
+        ],
+        "medium": [
+          "restitution_bench"
+        ],
+        "large": [
+          "bouncing_ball"
+        ],
+        "applied": [
+          "bounce_well"
+        ]
+      }
+    },
+    {
+      "key": "Lever / balance",
+      "order": 21,
+      "act": "Act IV — forces",
+      "truth": "a lever trades force for distance and never gets something for nothing. *(The Calder mobile is this law, drifting — every arm balanced by real weights.)*",
+      "count": 5,
+      "x_spread": 0.75,
+      "tiers": {
+        "small": [
+          "lever_toy"
+        ],
+        "medium": [
+          "lever_balance"
+        ],
+        "large": [
+          "lever_room"
+        ],
+        "applied": [
+          "calder_mobile",
+          "calder_object_mobile"
+        ]
+      }
+    },
+    {
+      "key": "Wind / weather",
+      "order": 22,
+      "act": "Act IV — forces",
+      "truth": "wind is air with somewhere to be; the force is in the speed, squared",
+      "count": 6,
+      "x_spread": 0.8334,
+      "tiers": {
+        "small": [
+          "wind_toy"
+        ],
+        "medium": [
+          "wind_bench"
+        ],
+        "large": [
+          "wind_room"
+        ],
+        "applied": [
+          "weather_vane",
+          "example_6_4_windmill_vr",
+          "windmill_floor"
+        ]
+      }
+    },
+    {
+      "key": "Force field (zone)",
+      "order": 23,
+      "act": "Act V — force as place",
+      "truth": "falling isn't a property of the void; it's a property of the field over it — and the field is a vector you can turn",
+      "count": 6,
+      "x_spread": 0.9166,
+      "tiers": {
+        "small": [
+          "force_field_visualizer",
+          "vector_machine"
+        ],
+        "medium": [
+          "field_bench"
+        ],
+        "large": [
+          "force_field"
+        ],
+        "applied": [
+          "force_field_zone",
+          "force_vortex"
+        ]
+      }
+    },
+    {
+      "key": "General force / pad",
+      "order": 24,
+      "act": "Act V — force as place",
+      "truth": "A force is a vector on a mass: F = m*a.",
+      "count": 11,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "force_cube",
+          "example_2_1_forces_vr",
+          "example_2_2_forces_mass_variation_vr",
+          "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "ForceMagnitudeDemo",
+          "newtons_laws",
+          "VectorForces"
+        ],
+        "medium": [
+          "newton_bench"
+        ],
+        "large": [
+          "force_room"
+        ],
+        "applied": [
+          "force_pad"
+        ]
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667,
+      0.7083,
+      0.75,
+      0.7917,
+      0.8333,
+      0.875,
+      0.9167,
+      0.9583,
+      1.0
+    ],
+    [
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667,
+      0.7083,
+      0.75,
+      0.7917,
+      0.8333,
+      0.875,
+      0.9167,
+      0.9583
+    ],
+    [
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667,
+      0.7083,
+      0.75,
+      0.7917,
+      0.8333,
+      0.875,
+      0.9167
+    ],
+    [
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667,
+      0.7083,
+      0.75,
+      0.7917,
+      0.8333,
+      0.875
+    ],
+    [
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667,
+      0.7083,
+      0.75,
+      0.7917,
+      0.8333
+    ],
+    [
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667,
+      0.7083,
+      0.75,
+      0.7917
+    ],
+    [
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667,
+      0.7083,
+      0.75
+    ],
+    [
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667,
+      0.7083
+    ],
+    [
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625,
+      0.6667
+    ],
+    [
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833,
+      0.625
+    ],
+    [
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417,
+      0.5833
+    ],
+    [
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5,
+      0.5417
+    ],
+    [
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583,
+      0.5
+    ],
+    [
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167,
+      0.4583
+    ],
+    [
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375,
+      0.4167
+    ],
+    [
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333,
+      0.375
+    ],
+    [
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917,
+      0.3333
+    ],
+    [
+      0.7083,
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25,
+      0.2917
+    ],
+    [
+      0.75,
+      0.7083,
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083,
+      0.25
+    ],
+    [
+      0.7917,
+      0.75,
+      0.7083,
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667,
+      0.2083
+    ],
+    [
+      0.8333,
+      0.7917,
+      0.75,
+      0.7083,
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125,
+      0.1667
+    ],
+    [
+      0.875,
+      0.8333,
+      0.7917,
+      0.75,
+      0.7083,
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833,
+      0.125
+    ],
+    [
+      0.9167,
+      0.875,
+      0.8333,
+      0.7917,
+      0.75,
+      0.7083,
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417,
+      0.0833
+    ],
+    [
+      0.9583,
+      0.9167,
+      0.875,
+      0.8333,
+      0.7917,
+      0.75,
+      0.7083,
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0,
+      0.0417
+    ],
+    [
+      1.0,
+      0.9583,
+      0.9167,
+      0.875,
+      0.8333,
+      0.7917,
+      0.75,
+      0.7083,
+      0.6667,
+      0.625,
+      0.5833,
+      0.5417,
+      0.5,
+      0.4583,
+      0.4167,
+      0.375,
+      0.3333,
+      0.2917,
+      0.25,
+      0.2083,
+      0.1667,
+      0.125,
+      0.0833,
+      0.0417,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "CoordinateSystem3M",
+      "name": "CoordinateSystem3M",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "basis_vectors_rig",
+      "name": "Basis Vectors Rig",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "coordinate_axes_xy",
+      "name": "coordinate_axes_xy",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "coordinate_lines",
+      "name": "coordinate_lines",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "coordinate_locator",
+      "name": "Coordinate Locator (applied coordinates)",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "applied",
+      "fp": 6,
+      "size": 10,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "coordinate_system_switcher",
+      "name": "Coordinate System Switcher",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "coordinates",
+      "name": "coordinates",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_3_4_polar_to_cartesian_vr",
+      "name": "example_3_4_polar_to_cartesian_vr",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "homogeneous_coordinates",
+      "name": "Homogeneous Coordinates",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "xyz_coordinates",
+      "name": "XYZ coordinates",
+      "concept": "Coordinate system",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorBasics",
+      "name": "VectorBasics",
+      "concept": "Vector basics",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "free_vector",
+      "name": "Free Vector (direction + length)",
+      "concept": "Vector basics",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "route_vector",
+      "name": "Route Vector (applied displacement)",
+      "concept": "Vector basics",
+      "concept_order": 1,
+      "tier": "applied",
+      "fp": 6,
+      "size": 10,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_bench",
+      "name": "Vector Bench (direction + length)",
+      "concept": "Vector basics",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_1_5_vector_magnitude_vr",
+      "name": "Vector Magnitude VR",
+      "concept": "Magnitude / length",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "magnitude_bench",
+      "name": "Magnitude Bench (|v| = sqrt(x2+y2+z2))",
+      "concept": "Magnitude / length",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "magnitude_hall",
+      "name": "Magnitude Hall (walk-in |v|)",
+      "concept": "Magnitude / length",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_arena",
+      "name": "Vector Arena",
+      "concept": "Magnitude / length",
+      "concept_order": 2,
+      "tier": "applied",
+      "fp": 8,
+      "size": 10,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_magnitude_demo",
+      "name": "Vector Magnitude",
+      "concept": "Magnitude / length",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_normalize_demo",
+      "name": "Vector Normalization",
+      "concept": "Unit vector / normalize",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "example_1_6_vector_normalize_vr",
+      "name": "Vector Normalize VR",
+      "concept": "Unit vector / normalize",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "hl_turret_vectors",
+      "name": "Half-Life Turret - Vector Compendium",
+      "concept": "Unit vector / normalize",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "laser_turret",
+      "name": "Laser Turret",
+      "concept": "Unit vector / normalize",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "turret_boll_infoboard",
+      "name": "Turret-Boll Vector Diagram",
+      "concept": "Unit vector / normalize",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "turret_targeting",
+      "name": "Turret Targeting (Combined)",
+      "concept": "Unit vector / normalize",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_drone",
+      "name": "vector_drone",
+      "concept": "Unit vector / normalize",
+      "concept_order": 3,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act I — what a vector is",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_add",
+      "name": "Vector Addition (a + b, two-pad console)",
+      "concept": "Addition",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "combined_forces_demo",
+      "name": "Combined Forces Demo",
+      "concept": "Addition",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "tug_of_war",
+      "name": "Tug of War (applied addition)",
+      "concept": "Addition",
+      "concept_order": 4,
+      "tier": "applied",
+      "fp": 6,
+      "size": 10,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_addition_demo",
+      "name": "Vector Addition",
+      "concept": "Addition",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_addition_walk",
+      "name": "Vector Addition Walk (Room Scale)",
+      "concept": "Addition",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_addition_xl",
+      "name": "Vector Addition (Walk-Inside)",
+      "concept": "Addition",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_addition_xl_laser",
+      "name": "Vector Addition (Laser, 4 m+)",
+      "concept": "Addition",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 1,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorAddition",
+      "name": "VectorAddition",
+      "concept": "Addition",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_sub",
+      "name": "Vector Subtraction (a − b, two-pad console)",
+      "concept": "Subtraction",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "example_1_3_vector_subtraction_vr",
+      "name": "Vector Subtraction VR",
+      "concept": "Subtraction",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "river_crossing",
+      "name": "River Crossing (applied subtraction)",
+      "concept": "Subtraction",
+      "concept_order": 5,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_subtraction_demo",
+      "name": "Vector Subtraction",
+      "concept": "Subtraction",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_subtraction_xl_laser",
+      "name": "Vector Subtraction (Laser, 4 m+)",
+      "concept": "Subtraction",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 1,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorSubtraction",
+      "name": "VectorSubtraction",
+      "concept": "Subtraction",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_2_3_gravity_scaled_by_mass_vr",
+      "name": "example_2_3_gravity_scaled_by_mass_vr",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "array_scale",
+      "name": "array_scale",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_1_4_vector_multiplication_vr",
+      "name": "Vector Multiplication VR",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "quantum_field",
+      "name": "Quantum Field",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "scale_lines",
+      "name": "scale_lines",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "scale_me",
+      "name": "scale_me",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "scaleme",
+      "name": "scaleme",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "scaling_bench",
+      "name": "Scaling Bench (k x v)",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "throttle_gain",
+      "name": "Throttle Gain (applied scaling)",
+      "concept": "Scaling",
+      "concept_order": 6,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "dot_aligner",
+      "name": "Dot-Aligner (aim · foe = mercy)",
+      "concept": "Dot product",
+      "concept_order": 7,
+      "tier": "applied",
+      "fp": 2,
+      "size": 10,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dot_product_projector",
+      "name": "Dot Product Projector",
+      "concept": "Dot product",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_dot_product_xl",
+      "name": "Dot Product (Walk-Inside)",
+      "concept": "Dot product",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_joint_playground",
+      "name": "Vector-Joint Playground",
+      "concept": "Dot product",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_reflection_demo",
+      "name": "Vector Reflection Demo",
+      "concept": "Dot product",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorDotProduct",
+      "name": "VectorDotProduct",
+      "concept": "Dot product",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorWorkbench",
+      "name": "Vector Workbench",
+      "concept": "Dot product",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "work_energy_demo",
+      "name": "Work-Energy Demo",
+      "concept": "Dot product",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "projection_shadow",
+      "name": "Projection Shadow ((a·n̂)n̂ as a shadow)",
+      "concept": "Projection / reflection",
+      "concept_order": 8,
+      "tier": "applied",
+      "fp": 2,
+      "size": 10,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "projection_toy",
+      "name": "Projection Toy (held, onto a line)",
+      "concept": "Projection / reflection",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "reflection_hall",
+      "name": "Reflection Hall",
+      "concept": "Projection / reflection",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 1,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_projection_demo",
+      "name": "Vector Projection",
+      "concept": "Projection / reflection",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorProjectionReflection",
+      "name": "VectorProjectionReflection",
+      "concept": "Projection / reflection",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "torque_crank",
+      "name": "Torque Crank (r × F you can feel)",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "applied",
+      "fp": 2,
+      "size": 10,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "cross_product_demo",
+      "name": "Cross Product Demo",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "DrawbridgeHinge",
+      "name": "DrawbridgeHinge",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rigid_body",
+      "name": "Rigid Body Dynamics",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "torque_bench",
+      "name": "Torque Bench (tau = |r||F| sin th)",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "torque_demo",
+      "name": "Torque Demo",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_cross_product_xl",
+      "name": "Cross Product (Walk-Inside)",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorCrossProduct",
+      "name": "VectorCrossProduct",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorTorque",
+      "name": "VectorTorque",
+      "concept": "Cross product / torque",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — vector arithmetic",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "weather_vector_field",
+      "name": "Weather Vector Field — Storm Chamber",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 36,
+      "size": 14,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "drag_coefficient_wind_tunnel",
+      "name": "Drag Coefficient Wind Tunnel",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "flow_field_painter",
+      "name": "Flow Field Painter",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "FlowFieldMain",
+      "name": "FlowFieldMain",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noc_5_04_flow_field",
+      "name": "Flow Field Following",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "particle_flow_swarm",
+      "name": "Particle Flow Swarm",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_field",
+      "name": "vector_field",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_field_grid",
+      "name": "Vector Field Grid",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_field_visualizer",
+      "name": "Vector Field Visualizer",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_fields",
+      "name": "Vector Fields",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorFieldFlow",
+      "name": "VectorFieldFlow",
+      "concept": "Vector field / flow",
+      "concept_order": 10,
+      "tier": "medium",
+      "fp": 8,
+      "size": 8,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "bubble_blaster",
+      "name": "Bubble Blaster (output velocity vector)",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "applied",
+      "fp": 3,
+      "size": 10,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "VectorMotion",
+      "name": "VectorMotion",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "example_1_7_motion_101_velocity_vr",
+      "name": "Motion 101 Velocity VR",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+      "name": "Motion 101 Velocity and Constant Acceleration VR",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+      "name": "Motion 101 Velocity and Random Acceleration VR",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
+      "name": "Pointing in Direction of Motion",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "fluid_simulation",
+      "name": "Fluid Simulation (SPH)",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "HingeCrank",
+      "name": "HingeCrank",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "applied",
+      "fp": 8,
+      "size": 10,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "SliderPress",
+      "name": "SliderPress",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "velocity_arrow",
+      "name": "Velocity Arrow",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "velocity_bench",
+      "name": "Velocity Bench (v = vx + vy)",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "verlet_integration",
+      "name": "Verlet Integration",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "IKArm",
+      "name": "IKArm",
+      "concept": "Motion / velocity",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — fields & motion",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_mower",
+      "name": "Force Mower (W = F d cos θ)",
+      "concept": "Work (F.d)",
+      "concept_order": 12,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "work_meter",
+      "name": "Work Meter (W = F·d·cosθ)",
+      "concept": "Work (F.d)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "work_room",
+      "name": "Work Room (walk-in F.d)",
+      "concept": "Work (F.d)",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "work_toy",
+      "name": "Work Toy (held W = F.d.cos th)",
+      "concept": "Work (F.d)",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "drag_corridor",
+      "name": "Drag Corridor (walk-in air/water/honey)",
+      "concept": "Friction / drag",
+      "concept_order": 13,
+      "tier": "large",
+      "fp": 12,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "drag_lane",
+      "name": "Drag Lane (F = -b·v you feel)",
+      "concept": "Friction / drag",
+      "concept_order": 13,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "brake_skid",
+      "name": "Brake Skid (applied friction)",
+      "concept": "Friction / drag",
+      "concept_order": 13,
+      "tier": "applied",
+      "fp": 6,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_2_4_friction_vr",
+      "name": "example_2_4_friction_vr",
+      "concept": "Friction / drag",
+      "concept_order": 13,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_2_5_fluid_resistance_vr",
+      "name": "example_2_5_fluid_resistance_vr",
+      "concept": "Friction / drag",
+      "concept_order": 13,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "friction_ramp",
+      "name": "Friction Ramp",
+      "concept": "Friction / drag",
+      "concept_order": 13,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "viscosity_layers",
+      "name": "Viscosity Layers",
+      "concept": "Friction / drag",
+      "concept_order": 13,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "wedge_slide",
+      "name": "Wedge Slide (inclined-plane free body)",
+      "concept": "Friction / drag",
+      "concept_order": 13,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "launch_arc",
+      "name": "Launch Arc (projectile motion)",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "catapult",
+      "name": "Catapult",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 6,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cube_projectile_spawner",
+      "name": "cube_projectile_spawner",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "firework_burst",
+      "name": "Firework Burst (projectile fountain)",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "firework_launcher",
+      "name": "Firework Launcher",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "human_catapult",
+      "name": "Human Catapult",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "mortar_vector_siege",
+      "name": "Mortar Vector Siege",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "return_launcher",
+      "name": "Return Launcher (the way home)",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "slingshot_launcher",
+      "name": "Slingshot Launcher",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "slingshot_pull",
+      "name": "Slingshot (elastic launch, PE = 1/2 k x^2)",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 3,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorThrowing",
+      "name": "VectorThrowing",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 8,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "sub_emitters",
+      "name": "sub_emitters",
+      "concept": "Projectile / launch",
+      "concept_order": 14,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "centrifuge_ring",
+      "name": "Centrifuge Ring (walk-in centripetal)",
+      "concept": "Centripetal",
+      "concept_order": 15,
+      "tier": "large",
+      "fp": 12,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "circle_train",
+      "name": "Circle Train (centripetal force, a = v²/r)",
+      "concept": "Centripetal",
+      "concept_order": 15,
+      "tier": "applied",
+      "fp": 3,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "centripetal_bench",
+      "name": "Centripetal Bench (a = v2/r)",
+      "concept": "Centripetal",
+      "concept_order": 15,
+      "tier": "medium",
+      "fp": 5,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "centripetal_force_demo",
+      "name": "Centripetal Force Demo",
+      "concept": "Centripetal",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "orbit_pair",
+      "name": "Orbit Pair (gravity, F = G m₁m₂/r²)",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "orbit_walk",
+      "name": "Orbit Walk (walk-in two-body)",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "algo_gun",
+      "name": "Algo-Gun",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "attractorsphere",
+      "name": "Attractor Sphere",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cloth_simulation",
+      "name": "Cloth Simulation",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_2_6_single_attractor_vr",
+      "name": "example_2_6_single_attractor_vr",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_2_7_multiple_attractors_vr",
+      "name": "example_2_7_multiple_attractors_vr",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_2_8_two_body_attraction_vr",
+      "name": "example_2_8_two_body_attraction_vr",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_2_9_n_body_attraction_vr",
+      "name": "example_2_9_n_body_attraction_vr",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+      "name": "Arbitrary Angular Motion",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
+      "name": "Attraction and Orbit",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_fields",
+      "name": "Force Fields",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "gravity_well",
+      "name": "Gravity Well",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "nbody_simulation",
+      "name": "N-Body Gravitational Simulation",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "orbital_mechanics_demo",
+      "name": "Orbital Mechanics Demo",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rockfactory_gravity",
+      "name": "Rock Factory (Gravity)",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "three_body_problem",
+      "name": "Three-Body Problem",
+      "concept": "Gravity / orbit",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_bob",
+      "name": "Spring (F = −k x)",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "chord_tension_spring",
+      "name": "Chord Tension Spring",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_3_11_a_spring_connection_vr",
+      "name": "example_3_11_a_spring_connection_vr",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_directed_layout",
+      "name": "force_directed_layout",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "forcedirected3d",
+      "name": "forcedirected3d",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "mass_spring_damper",
+      "name": "Mass-Spring-Damper",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_chain",
+      "name": "Spring Chain",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_demo",
+      "name": "Spring Demo",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_hopper",
+      "name": "Spring Hopper",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_mass_bouncer",
+      "name": "Spring Mass Bouncer",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_mass_system",
+      "name": "Spring-Mass Network",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_network",
+      "name": "Spring Network",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_system",
+      "name": "Spring System",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spring_tower",
+      "name": "Spring Tower (walk-in Hooke)",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "SpringSuspension",
+      "name": "SpringSuspension",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "applied",
+      "fp": 8,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "surreal_kinetic_sculpture",
+      "name": "Surreal Kinetic Sculpture",
+      "concept": "Spring / Hooke",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pendulum_swing",
+      "name": "Pendulum (T = 2π√(L/g))",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "ChainSwing",
+      "name": "ChainSwing",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "medium",
+      "fp": 5,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ConeTwistBag",
+      "name": "ConeTwistBag",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "control_pendulum",
+      "name": "Control Pendulum",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "coupled_pendulums",
+      "name": "Coupled Pendulums",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "DoublePendulum",
+      "name": "Double Pendulum",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_3_10_swinging_pendulum_vr",
+      "name": "example_3_10_swinging_pendulum_vr",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "exercise_3_15_double_pendulum_vr",
+      "name": "exercise_3_15_double_pendulum_vr",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "foucault_pendulum",
+      "name": "Foucault Pendulum",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "parametric_pendulum_waves",
+      "name": "ParametricPendulumWaves",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "medium",
+      "fp": 5,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pendulum",
+      "name": "Pendulum",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pendulum_hall",
+      "name": "Pendulum Hall (walk-in)",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 12,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pendulum_slap",
+      "name": "Pendulum Slap",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "PendulumCircle",
+      "name": "PendulumCircle",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "PendulumGrid3x3",
+      "name": "Pendulum Grid 3x3",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "PendulumPin",
+      "name": "PendulumPin",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "PendulumWave",
+      "name": "PendulumWave",
+      "concept": "Pendulum",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "momentum_cradle",
+      "name": "Momentum Cradle (p = mv conserved)",
+      "concept": "Momentum / collision",
+      "concept_order": 19,
+      "tier": "applied",
+      "fp": 3,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "collision_carts",
+      "name": "Collision Carts (momentum exchange)",
+      "concept": "Momentum / collision",
+      "concept_order": 19,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "impulse_collision_demo",
+      "name": "Impulse Collision Demo",
+      "concept": "Momentum / collision",
+      "concept_order": 19,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "newton_cradle",
+      "name": "Newton's Cradle",
+      "concept": "Momentum / collision",
+      "concept_order": 19,
+      "tier": "applied",
+      "fp": 2,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "momentum_collision",
+      "name": "Momentum Collision",
+      "concept": "Momentum / collision",
+      "concept_order": 19,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "bounce_well",
+      "name": "Bounce Well (restitution)",
+      "concept": "Restitution / bounce",
+      "concept_order": 20,
+      "tier": "applied",
+      "fp": 3,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "bouncing_ball",
+      "name": "Bouncing Ball",
+      "concept": "Restitution / bounce",
+      "concept_order": 20,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_1_1_bouncing_ball_with_no_vectors_vr",
+      "name": "Bouncing Ball with No Vectors VR",
+      "concept": "Restitution / bounce",
+      "concept_order": 20,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_1_2_bouncing_ball_with_vectors_vr",
+      "name": "Bouncing Ball with Vectors VR",
+      "concept": "Restitution / bounce",
+      "concept_order": 20,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "normal_force_demo",
+      "name": "Normal Force & Reflection Demo",
+      "concept": "Restitution / bounce",
+      "concept_order": 20,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "restitution_bench",
+      "name": "Restitution Bench (h' = e h)",
+      "concept": "Restitution / bounce",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lever_balance",
+      "name": "Lever (τ = F·d)",
+      "concept": "Lever / balance",
+      "concept_order": 21,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "calder_mobile",
+      "name": "Calder Mobile (balanced, real weights)",
+      "concept": "Lever / balance",
+      "concept_order": 21,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "calder_object_mobile",
+      "name": "Calder Mobile (project primitives)",
+      "concept": "Lever / balance",
+      "concept_order": 21,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lever_room",
+      "name": "Lever Room (walk-in balance beam)",
+      "concept": "Lever / balance",
+      "concept_order": 21,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lever_toy",
+      "name": "Lever Toy (held seesaw)",
+      "concept": "Lever / balance",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "weather_vane",
+      "name": "Weather Vane (wind ∝ v²)",
+      "concept": "Wind / weather",
+      "concept_order": 22,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "example_6_4_windmill_vr",
+      "name": "Windmill VR",
+      "concept": "Wind / weather",
+      "concept_order": 22,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "wind_bench",
+      "name": "Wind Bench (fan + windsock)",
+      "concept": "Wind / weather",
+      "concept_order": 22,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "wind_room",
+      "name": "Wind Room (walk-in field)",
+      "concept": "Wind / weather",
+      "concept_order": 22,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "wind_toy",
+      "name": "Wind Toy (held vane)",
+      "concept": "Wind / weather",
+      "concept_order": 22,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "windmill_floor",
+      "name": "Windmill Floor",
+      "concept": "Wind / weather",
+      "concept_order": 22,
+      "tier": "applied",
+      "fp": 2,
+      "size": 10,
+      "act": "Act IV — forces",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_field_zone",
+      "name": "Force Field Zone (a force made into a place)",
+      "concept": "Force field (zone)",
+      "concept_order": 23,
+      "tier": "applied",
+      "fp": 16,
+      "size": 10,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "field_bench",
+      "name": "Field Bench (a vector at every point)",
+      "concept": "Force field (zone)",
+      "concept_order": 23,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_field",
+      "name": "Force Field",
+      "concept": "Force field (zone)",
+      "concept_order": 23,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_field_visualizer",
+      "name": "Force Field Visualizer",
+      "concept": "Force field (zone)",
+      "concept_order": 23,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_vortex",
+      "name": "Force Vortex",
+      "concept": "Force field (zone)",
+      "concept_order": 23,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vector_machine",
+      "name": "Vector Machine (the dial of gravity)",
+      "concept": "Force field (zone)",
+      "concept_order": 23,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_cube",
+      "name": "Force Cube (a vector you hold)",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "force_pad",
+      "name": "Force Pad",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "example_2_1_forces_vr",
+      "name": "Forces (2.1)",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "example_2_2_forces_mass_variation_vr",
+      "name": "example_2_2_forces_mass_variation_vr",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+      "name": "3D Bouncing Ball",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+      "name": "Accelerate and Decelerate",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "force_room",
+      "name": "Force Room (walk-in F = m.a)",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ForceMagnitudeDemo",
+      "name": "ForceMagnitudeDemo",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "newton_bench",
+      "name": "Newton Bench (F = m a)",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "newtons_laws",
+      "name": "Newton's Laws",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VectorForces",
+      "name": "VectorForces",
+      "concept": "General force / pad",
+      "concept_order": 24,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act V — force as place",
+      "has_image": true,
+      "recommended": false
+    }
+  ],
+  "total_artifacts": 212,
+  "total_concepts": 25
+}

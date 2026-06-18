@@ -1,0 +1,2410 @@
+{
+  "domain": "ca",
+  "title": "Cellular Automata — every example, by concept",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Elementary CA (1D rules)",
+      "order": 0,
+      "act": "Act I — one dimension (the rule)",
+      "truth": "256 rules, each a tiny universe with its own physics; the rule is a worldview you can dial.",
+      "count": 11,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "cellular_automata_basic",
+          "cellular_automata_grabable",
+          "line_network_ca"
+        ],
+        "medium": [
+          "elementary_ca_bench"
+        ],
+        "large": [
+          "7_1_elementary_ca_vr",
+          "elementary_ca_vr",
+          "cellular_automata_1d",
+          "CrosswayCA"
+        ],
+        "applied": [
+          "ca_rules_workbench",
+          "ca_rule_explorer",
+          "ca_showcase"
+        ]
+      }
+    },
+    {
+      "key": "Rule 30 — order to randomness",
+      "order": 1,
+      "act": "Act I — one dimension (the rule)",
+      "truth": "Pure order, run forward, becomes indistinguishable from chance — determinism no shortcut can outrun. The run is the only oracle.",
+      "count": 6,
+      "x_spread": -0.9,
+      "tiers": {
+        "small": [
+          "living_paper_rule30",
+          "rule_30_110",
+          "rule_30_110_gravity"
+        ],
+        "medium": [
+          "rule30_bench"
+        ],
+        "large": [
+          "grid2d_rule30"
+        ],
+        "applied": [
+          "rule30_rng"
+        ]
+      }
+    },
+    {
+      "key": "Rule 90 — Sierpinski",
+      "order": 2,
+      "act": "Act I — one dimension (the rule)",
+      "truth": "The same local step, drawn through time, IS the Sierpinski triangle — the fractal was hiding in the rule all along.",
+      "count": 5,
+      "x_spread": -0.8,
+      "tiers": {
+        "small": [
+          "rule90_toy"
+        ],
+        "medium": [
+          "rule90_bench"
+        ],
+        "large": [
+          "grid2d_rule90",
+          "sierpinski_pyramid"
+        ],
+        "applied": [
+          "rule90_loom"
+        ]
+      }
+    },
+    {
+      "key": "Rule 110 — universal computation",
+      "order": 3,
+      "act": "Act I — one dimension (the rule)",
+      "truth": "Four cells of memory are enough to compute anything — the universe needs almost nothing to become everything. Origination from a rule that never meant to originate.",
+      "count": 4,
+      "x_spread": -0.7,
+      "tiers": {
+        "small": [
+          "living_paper_rule110"
+        ],
+        "medium": [
+          "rule110_bench"
+        ],
+        "large": [
+          "grid2d_rule110"
+        ],
+        "applied": [
+          "rule110_computer"
+        ]
+      }
+    },
+    {
+      "key": "Conway's Game of Life",
+      "order": 4,
+      "act": "Act II — two dimensions (life)",
+      "truth": "Three numbers — born on 3, live on 2 or 3 — and gliders walk, guns fire, computers run. No designer, only neighbours.",
+      "count": 9,
+      "x_spread": -0.6,
+      "tiers": {
+        "small": [
+          "game_of_life_petri",
+          "7_3_game_of_life_oop_vr",
+          "7_2_game_of_life_vr",
+          "game_of_life_oop_vr",
+          "game_of_life_vr"
+        ],
+        "medium": [
+          "life_bench"
+        ],
+        "large": [
+          "cellular_automata_2d",
+          "mirrored_cellular_automata"
+        ],
+        "applied": [
+          "ca_conway_city"
+        ]
+      }
+    },
+    {
+      "key": "Life patterns & variants",
+      "order": 5,
+      "act": "Act II — two dimensions (life)",
+      "truth": "Same neighbour-count, a different birth rule, a different zoo — life-like is a family of laws, not the law.",
+      "count": 5,
+      "x_spread": -0.5,
+      "tiers": {
+        "small": [
+          "pulsing_ca"
+        ],
+        "medium": [
+          "life_zoo_bench"
+        ],
+        "large": [
+          "life_rules_room"
+        ],
+        "applied": [
+          "ca_bridge",
+          "ca_columns"
+        ]
+      }
+    },
+    {
+      "key": "Brian's Brain / multi-state",
+      "order": 6,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "truth": "Add a dying state and the field never rests — perpetual motion from a rule that only knows on, fading, off.",
+      "count": 4,
+      "x_spread": -0.4,
+      "tiers": {
+        "small": [
+          "living_paper_brians_brain"
+        ],
+        "medium": [
+          "brians_brain_bench"
+        ],
+        "large": [
+          "grid2d_brians_brain"
+        ],
+        "applied": [
+          "brians_brain_display"
+        ]
+      }
+    },
+    {
+      "key": "Wireworld / CA circuits",
+      "order": 7,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "truth": "Four states make wires, and wires make logic — a universe whose entire physics is electronics.",
+      "count": 4,
+      "x_spread": -0.3,
+      "tiers": {
+        "small": [
+          "wireworld_toy"
+        ],
+        "medium": [
+          "wireworld_bench"
+        ],
+        "large": [
+          "grid2d_wireworld"
+        ],
+        "applied": [
+          "wireworld_circuit"
+        ]
+      }
+    },
+    {
+      "key": "Langton's ant / turmites",
+      "order": 8,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "truth": "One ant, two rules; ten thousand steps of chaos, then it builds a highway — order that arrives only if you are willing to wait for it.",
+      "count": 4,
+      "x_spread": -0.2,
+      "tiers": {
+        "small": [
+          "langton_toy"
+        ],
+        "medium": [
+          "langton_bench"
+        ],
+        "large": [
+          "grid2d_langtons_ant"
+        ],
+        "applied": [
+          "langton_swarm"
+        ]
+      }
+    },
+    {
+      "key": "Alternative neighbourhoods (hex)",
+      "order": 9,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "truth": "Change the shape of 'nearby' and you change what can live — the neighbourhood is a politics, not a given.",
+      "count": 5,
+      "x_spread": -0.1,
+      "tiers": {
+        "small": [
+          "hex_ca_toy"
+        ],
+        "medium": [
+          "neighbourhood_bench"
+        ],
+        "large": [
+          "7_8_hexagon_ca_vr",
+          "hexagon_ca_vr"
+        ],
+        "applied": [
+          "hexagon_cave_vr"
+        ]
+      }
+    },
+    {
+      "key": "Continuous CA (Lenia)",
+      "order": 10,
+      "act": "Act IV — matter & chemistry",
+      "truth": "Let the cells be fractions, not bits, and the gliders grow soft bodies — life at the edge, made smooth.",
+      "count": 4,
+      "x_spread": 0.0,
+      "tiers": {
+        "small": [
+          "lenia_continuous"
+        ],
+        "medium": [
+          "CA_sphere"
+        ],
+        "large": [
+          "lenia_room"
+        ],
+        "applied": [
+          "lenia_aquarium"
+        ]
+      }
+    },
+    {
+      "key": "Reaction-diffusion (Turing)",
+      "order": 11,
+      "act": "Act IV — matter & chemistry",
+      "truth": "Two chemicals and two numbers paint every animal's coat — Turing's answer to how a uniform egg becomes a striped thing. Form from a seed, with no blueprint.",
+      "count": 9,
+      "x_spread": 0.1,
+      "tiers": {
+        "small": [
+          "reaction_diffusion",
+          "reaction_diffusion_vr",
+          "reaction_diffusion_intro",
+          "living_paper_reaction_diffusion",
+          "turing_pattern"
+        ],
+        "medium": [
+          "reaction_diffusion_bench"
+        ],
+        "large": [
+          "shader_10_reactiondiffusion"
+        ],
+        "applied": [
+          "turing_pattern_generator",
+          "gray_scott_comparison"
+        ]
+      }
+    },
+    {
+      "key": "Lattice gas / physical CA",
+      "order": 12,
+      "act": "Act IV — matter & chemistry",
+      "truth": "Make the cells conserve momentum and the grid becomes a fluid — physics as bookkeeping on a lattice.",
+      "count": 4,
+      "x_spread": 0.2,
+      "tiers": {
+        "small": [
+          "lattice_gas_automata"
+        ],
+        "medium": [
+          "lattice_gas_bench"
+        ],
+        "large": [
+          "lattice_gas_room"
+        ],
+        "applied": [
+          "lattice_gas_pump"
+        ]
+      }
+    },
+    {
+      "key": "The four Wolfram classes",
+      "order": 13,
+      "act": "Act V — the edge of chaos",
+      "truth": "Frozen, periodic, chaotic, complex — Wolfram's four weathers. The Principle of Computational Equivalence says they are all the same; the queer reading says only the fourth, the edge, is alive.",
+      "count": 4,
+      "x_spread": 0.3,
+      "tiers": {
+        "small": [
+          "four_classes_toy"
+        ],
+        "medium": [
+          "four_classes_bench"
+        ],
+        "large": [
+          "four_classes_room"
+        ],
+        "applied": [
+          "ca_rule_comparison"
+        ]
+      }
+    },
+    {
+      "key": "Edge of chaos / self-organisation",
+      "order": 14,
+      "act": "Act V — the edge of chaos",
+      "truth": "Between the rule that dies and the rule that screams is a narrow band where structure persists by moving — lambda_edge, the queer middle that refuses both order and noise.",
+      "count": 5,
+      "x_spread": 0.4,
+      "tiers": {
+        "small": [
+          "self_organization_ca"
+        ],
+        "medium": [
+          "edge_of_chaos_bench"
+        ],
+        "large": [
+          "ca_screen"
+        ],
+        "applied": [
+          "ecosystem_ca",
+          "recrystallization_ca"
+        ]
+      }
+    },
+    {
+      "key": "3D / volumetric CA",
+      "order": 15,
+      "act": "Act V — the edge of chaos",
+      "truth": "Stack the rule into a third dimension and the pattern stops being a picture and becomes a place you can walk.",
+      "count": 8,
+      "x_spread": 0.5,
+      "tiers": {
+        "small": [
+          "cellular_automata_3d"
+        ],
+        "medium": [
+          "ca_sphere"
+        ],
+        "large": [
+          "cellular_automata_3d_stacked",
+          "cellular_automata_3d_tree",
+          "CellularAutomata3DStacked",
+          "CellularAutomata3DTree",
+          "crossway_ca"
+        ],
+        "applied": [
+          "volumetric_fog_ca"
+        ]
+      }
+    },
+    {
+      "key": "Growth & dendrites",
+      "order": 16,
+      "act": "Act VI — structure & world",
+      "truth": "Local accretion with no plan grows a coral, a crack, a chair — structure as frozen history, the run you cannot un-run.",
+      "count": 7,
+      "x_spread": 0.6,
+      "tiers": {
+        "small": [
+          "dendrite_toy"
+        ],
+        "medium": [
+          "dendrite_bench"
+        ],
+        "large": [
+          "structure_growth"
+        ],
+        "applied": [
+          "ca_growth_network",
+          "dendrite_growth_ca",
+          "ca_chair_test",
+          "decaying_bridge"
+        ]
+      }
+    },
+    {
+      "key": "Caves / percolation / cracks",
+      "order": 17,
+      "act": "Act VI — structure & world",
+      "truth": "Vote with your neighbours and a noise field becomes a walkable cave — randomness smoothed, by a rule, into a place. (Bridges back to the randomness ladder.)",
+      "count": 5,
+      "x_spread": 0.7,
+      "tiers": {
+        "small": [
+          "percolation_ca"
+        ],
+        "medium": [
+          "cave_bench"
+        ],
+        "large": [
+          "percolationnetwork_ca"
+        ],
+        "applied": [
+          "crack_propagation_ca",
+          "crackpropagation_ca"
+        ]
+      }
+    },
+    {
+      "key": "Stigmergy & ecological CA",
+      "order": 18,
+      "act": "Act VI — structure & world",
+      "truth": "The trail IS the memory — agents that write on the world and read it back are a cellular automaton wearing legs.",
+      "count": 6,
+      "x_spread": 0.8,
+      "tiers": {
+        "small": [
+          "stigmergy_toy"
+        ],
+        "medium": [
+          "stigmergy_bench"
+        ],
+        "large": [
+          "stigmergy_room"
+        ],
+        "applied": [
+          "stigmergy_grid",
+          "disease_spread_ca",
+          "mold_network"
+        ]
+      }
+    },
+    {
+      "key": "CA materials & texture",
+      "order": 19,
+      "act": "Act VI — structure & world",
+      "truth": "A rule run to equilibrium is a texture; the Persian rug is an algorithm that forgot it was ever running.",
+      "count": 5,
+      "x_spread": 0.9,
+      "tiers": {
+        "small": [
+          "ca_texture_toy"
+        ],
+        "medium": [
+          "ca_texture_bench"
+        ],
+        "large": [
+          "ca_texture_wall"
+        ],
+        "applied": [
+          "mirror_cellular_texture_for_3d",
+          "persian_rug"
+        ]
+      }
+    },
+    {
+      "key": "Morphogenesis (DNA -> pattern)",
+      "order": 20,
+      "act": "Act VII — CA as morphogenesis (DNA bridge)",
+      "truth": "The same chemistry two numbers apart is a leopard or a zebra — the coat is the genome run forward by reaction-diffusion. Form by L-system, pattern by RD: one DNA, two grammars. The CA twin of the seed->form bridge.",
+      "count": 4,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "morpho_egg"
+        ],
+        "medium": [
+          "morphogenesis_bench"
+        ],
+        "large": [
+          "morpho_menagerie"
+        ],
+        "applied": [
+          "rd_artifact"
+        ]
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+    ],
+    [
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ],
+    [
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9
+    ],
+    [
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85
+    ],
+    [
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8
+    ],
+    [
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75
+    ],
+    [
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
+    ],
+    [
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65
+    ],
+    [
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6
+    ],
+    [
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55
+    ],
+    [
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5
+    ],
+    [
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45
+    ],
+    [
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4
+    ],
+    [
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35
+    ],
+    [
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
+    ],
+    [
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25
+    ],
+    [
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2
+    ],
+    [
+      0.85,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15
+    ],
+    [
+      0.9,
+      0.85,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05,
+      0.1
+    ],
+    [
+      0.95,
+      0.9,
+      0.85,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05
+    ],
+    [
+      1.0,
+      0.95,
+      0.9,
+      0.85,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "elementary_ca_bench",
+      "name": "Elementary CA Bench (256 universes)",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_rules_workbench",
+      "name": "CA Rules Workbench",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "7_1_elementary_ca_vr",
+      "name": "7_1_elementary_ca_vr",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_rule_explorer",
+      "name": "Cellular Automata Rule Explorer",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "elementary_ca_vr",
+      "name": "Elementary CA VR",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cellular_automata_1d",
+      "name": "Cellular Automata 1D",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_showcase",
+      "name": "CA Showcase",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cellular_automata_basic",
+      "name": "Cellular Automata Basic",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cellular_automata_grabable",
+      "name": "Cellular Automata Grabable",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "line_network_ca",
+      "name": "Line Network CA",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "CrosswayCA",
+      "name": "CrosswayCA",
+      "concept": "Elementary CA (1D rules)",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule30_bench",
+      "name": "Rule 30 Bench (order becomes chance)",
+      "concept": "Rule 30 — order to randomness",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule30_rng",
+      "name": "Rule 30 RNG (determinism as a dice)",
+      "concept": "Rule 30 — order to randomness",
+      "concept_order": 1,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "grid2d_rule30",
+      "name": "Grid2D — Rule 30",
+      "concept": "Rule 30 — order to randomness",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "living_paper_rule30",
+      "name": "Living Paper — Rule 30",
+      "concept": "Rule 30 — order to randomness",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule_30_110",
+      "name": "Rule 30/110",
+      "concept": "Rule 30 — order to randomness",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule_30_110_gravity",
+      "name": "Rule 30/110 Gravity",
+      "concept": "Rule 30 — order to randomness",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule90_bench",
+      "name": "Rule 90 Bench (Sierpinski forms)",
+      "concept": "Rule 90 — Sierpinski",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule90_loom",
+      "name": "Rule 90 Loom (Sierpinski fabric)",
+      "concept": "Rule 90 — Sierpinski",
+      "concept_order": 2,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule90_toy",
+      "name": "Rule 90 Toy (the fractal in the rule)",
+      "concept": "Rule 90 — Sierpinski",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "grid2d_rule90",
+      "name": "Grid2D — Rule 90",
+      "concept": "Rule 90 — Sierpinski",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "sierpinski_pyramid",
+      "name": "Sierpinski Pyramid",
+      "concept": "Rule 90 — Sierpinski",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule110_bench",
+      "name": "Rule 110 Bench (gliders)",
+      "concept": "Rule 110 — universal computation",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rule110_computer",
+      "name": "Rule 110 Computer (universal)",
+      "concept": "Rule 110 — universal computation",
+      "concept_order": 3,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "grid2d_rule110",
+      "name": "Grid2D — Rule 110",
+      "concept": "Rule 110 — universal computation",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "living_paper_rule110",
+      "name": "Living Paper — Rule 110",
+      "concept": "Rule 110 — universal computation",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — one dimension (the rule)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "life_bench",
+      "name": "Life Bench (glider gun)",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "game_of_life_petri",
+      "name": "Game of Life Petri Dish",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "7_3_game_of_life_oop_vr",
+      "name": "7_3_game_of_life_oop_vr",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "7_2_game_of_life_vr",
+      "name": "7_2_game_of_life_vr",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_conway_city",
+      "name": "Conway Emergent City",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "game_of_life_oop_vr",
+      "name": "Game of Life OOP VR",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "game_of_life_vr",
+      "name": "Game of Life VR",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cellular_automata_2d",
+      "name": "Cellular Automata 2D",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "mirrored_cellular_automata",
+      "name": "Mirrored Cellular Automata",
+      "concept": "Conway's Game of Life",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "life_rules_room",
+      "name": "Life Rules Room (a family of laws)",
+      "concept": "Life patterns & variants",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "life_zoo_bench",
+      "name": "Life Zoo Bench (still / pulse / travel)",
+      "concept": "Life patterns & variants",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_bridge",
+      "name": "CA Bridge",
+      "concept": "Life patterns & variants",
+      "concept_order": 5,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_columns",
+      "name": "CA Columns",
+      "concept": "Life patterns & variants",
+      "concept_order": 5,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pulsing_ca",
+      "name": "Pulsing CA",
+      "concept": "Life patterns & variants",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — two dimensions (life)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "brians_brain_bench",
+      "name": "Brian's Brain Bench (on, fading, off)",
+      "concept": "Brian's Brain / multi-state",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "brians_brain_display",
+      "name": "Brian's Brain Display (shimmer screen)",
+      "concept": "Brian's Brain / multi-state",
+      "concept_order": 6,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "grid2d_brians_brain",
+      "name": "Grid2D — Brian's Brain",
+      "concept": "Brian's Brain / multi-state",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "living_paper_brians_brain",
+      "name": "Living Paper — Brian's Brain",
+      "concept": "Brian's Brain / multi-state",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "wireworld_bench",
+      "name": "Wireworld Bench (a logic gate)",
+      "concept": "Wireworld / CA circuits",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "wireworld_toy",
+      "name": "Wireworld Toy (electrons run a loop)",
+      "concept": "Wireworld / CA circuits",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "grid2d_wireworld",
+      "name": "Grid2D — Wireworld",
+      "concept": "Wireworld / CA circuits",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "wireworld_circuit",
+      "name": "Wireworld Circuit",
+      "concept": "Wireworld / CA circuits",
+      "concept_order": 7,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "langton_bench",
+      "name": "Langton's Ant Bench (the highway)",
+      "concept": "Langton's ant / turmites",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "langton_swarm",
+      "name": "Turmite Swarm (generative paint)",
+      "concept": "Langton's ant / turmites",
+      "concept_order": 8,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "langton_toy",
+      "name": "Langton's Ant Toy (held)",
+      "concept": "Langton's ant / turmites",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "grid2d_langtons_ant",
+      "name": "Grid2D — Langton's Ant",
+      "concept": "Langton's ant / turmites",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "hex_ca_toy",
+      "name": "Hex CA Toy (six neighbours)",
+      "concept": "Alternative neighbourhoods (hex)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "neighbourhood_bench",
+      "name": "Neighbourhood Bench (a politics)",
+      "concept": "Alternative neighbourhoods (hex)",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "7_8_hexagon_ca_vr",
+      "name": "7_8_hexagon_ca_vr",
+      "concept": "Alternative neighbourhoods (hex)",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "hexagon_cave_vr",
+      "name": "Hexagon Cave VR",
+      "concept": "Alternative neighbourhoods (hex)",
+      "concept_order": 9,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "hexagon_ca_vr",
+      "name": "Hexagon CA VR",
+      "concept": "Alternative neighbourhoods (hex)",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — beyond binary (states & neighbours)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lenia_aquarium",
+      "name": "Lenia Tank (creature aquarium)",
+      "concept": "Continuous CA (Lenia)",
+      "concept_order": 10,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lenia_room",
+      "name": "Lenia Room (soft gliders)",
+      "concept": "Continuous CA (Lenia)",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lenia_continuous",
+      "name": "Lenia Continuous",
+      "concept": "Continuous CA (Lenia)",
+      "concept_order": 10,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "CA_sphere",
+      "name": "CA_sphere",
+      "concept": "Continuous CA (Lenia)",
+      "concept_order": 10,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "reaction_diffusion_bench",
+      "name": "Reaction-Diffusion Bench (Turing)",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "reaction_diffusion",
+      "name": "Reaction Diffusion",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "turing_pattern_generator",
+      "name": "Turing Pattern Generator",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "reaction_diffusion_vr",
+      "name": "Reaction Diffusion (VR)",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "gray_scott_comparison",
+      "name": "Gray-Scott Comparison Garden",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "reaction_diffusion_intro",
+      "name": "Reaction-Diffusion Intro",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "living_paper_reaction_diffusion",
+      "name": "Living Paper — Reaction-Diffusion",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "turing_pattern",
+      "name": "Turing Pattern",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "shader_10_reactiondiffusion",
+      "name": "Shader 10 — Reaction Diffusion",
+      "concept": "Reaction-diffusion (Turing)",
+      "concept_order": 11,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lattice_gas_bench",
+      "name": "Lattice Gas Bench (fluid from cells)",
+      "concept": "Lattice gas / physical CA",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lattice_gas_pump",
+      "name": "Lattice Wind Tunnel (vortices)",
+      "concept": "Lattice gas / physical CA",
+      "concept_order": 12,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lattice_gas_room",
+      "name": "Lattice Gas Room (flow + obstacle)",
+      "concept": "Lattice gas / physical CA",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "lattice_gas_automata",
+      "name": "Lattice Gas Automata",
+      "concept": "Lattice gas / physical CA",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — matter & chemistry",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "four_classes_bench",
+      "name": "Four Classes Bench (four weathers)",
+      "concept": "The four Wolfram classes",
+      "concept_order": 13,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "four_classes_room",
+      "name": "Four Classes Room (the edge is alive)",
+      "concept": "The four Wolfram classes",
+      "concept_order": 13,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "four_classes_toy",
+      "name": "Four Classes Toy (held strips)",
+      "concept": "The four Wolfram classes",
+      "concept_order": 13,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_rule_comparison",
+      "name": "CA Rule Comparison Garden",
+      "concept": "The four Wolfram classes",
+      "concept_order": 13,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "edge_of_chaos_bench",
+      "name": "Edge of Chaos Bench (lambda dial)",
+      "concept": "Edge of chaos / self-organisation",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "self_organization_ca",
+      "name": "Self Organization CA",
+      "concept": "Edge of chaos / self-organisation",
+      "concept_order": 14,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_screen",
+      "name": "CA Screen",
+      "concept": "Edge of chaos / self-organisation",
+      "concept_order": 14,
+      "tier": "large",
+      "fp": 1,
+      "size": 14,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ecosystem_ca",
+      "name": "Ecosystem CA",
+      "concept": "Edge of chaos / self-organisation",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "recrystallization_ca",
+      "name": "Recrystallization CA",
+      "concept": "Edge of chaos / self-organisation",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cellular_automata_3d_stacked",
+      "name": "Cellular Automata 3D Stacked",
+      "concept": "3D / volumetric CA",
+      "concept_order": 15,
+      "tier": "large",
+      "fp": 4,
+      "size": 14,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cellular_automata_3d_tree",
+      "name": "Cellular Automata 3D Tree",
+      "concept": "3D / volumetric CA",
+      "concept_order": 15,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "CellularAutomata3DStacked",
+      "name": "CellularAutomata3DStacked",
+      "concept": "3D / volumetric CA",
+      "concept_order": 15,
+      "tier": "large",
+      "fp": 4,
+      "size": 14,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "volumetric_fog_ca",
+      "name": "Volumetric Fog CA",
+      "concept": "3D / volumetric CA",
+      "concept_order": 15,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_sphere",
+      "name": "CA Sphere",
+      "concept": "3D / volumetric CA",
+      "concept_order": 15,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cellular_automata_3d",
+      "name": "Cellular Automata 3D",
+      "concept": "3D / volumetric CA",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "CellularAutomata3DTree",
+      "name": "CellularAutomata3DTree",
+      "concept": "3D / volumetric CA",
+      "concept_order": 15,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "crossway_ca",
+      "name": "Crossway CA",
+      "concept": "3D / volumetric CA",
+      "concept_order": 15,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — the edge of chaos",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "dendrite_bench",
+      "name": "Dendrite Bench (coral growth)",
+      "concept": "Growth & dendrites",
+      "concept_order": 16,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "dendrite_toy",
+      "name": "Dendrite Toy (DLA crystal)",
+      "concept": "Growth & dendrites",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_growth_network",
+      "name": "CA Growth Network",
+      "concept": "Growth & dendrites",
+      "concept_order": 16,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "dendrite_growth_ca",
+      "name": "Dendrite Growth CA",
+      "concept": "Growth & dendrites",
+      "concept_order": 16,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "structure_growth",
+      "name": "Structure Growth",
+      "concept": "Growth & dendrites",
+      "concept_order": 16,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_chair_test",
+      "name": "CA Chair Test",
+      "concept": "Growth & dendrites",
+      "concept_order": 16,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "decaying_bridge",
+      "name": "Decaying Bridge",
+      "concept": "Growth & dendrites",
+      "concept_order": 16,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cave_bench",
+      "name": "Cave CA Bench (noise to place)",
+      "concept": "Caves / percolation / cracks",
+      "concept_order": 17,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "crack_propagation_ca",
+      "name": "Crack Propagation CA",
+      "concept": "Caves / percolation / cracks",
+      "concept_order": 17,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "crackpropagation_ca",
+      "name": "crackpropagation_ca",
+      "concept": "Caves / percolation / cracks",
+      "concept_order": 17,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "percolation_ca",
+      "name": "Percolation CA",
+      "concept": "Caves / percolation / cracks",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "percolationnetwork_ca",
+      "name": "percolationnetwork_ca",
+      "concept": "Caves / percolation / cracks",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "stigmergy_bench",
+      "name": "Stigmergy Bench (self-reinforcing trails)",
+      "concept": "Stigmergy & ecological CA",
+      "concept_order": 18,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "stigmergy_room",
+      "name": "Stigmergy Room (slime-mould network)",
+      "concept": "Stigmergy & ecological CA",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "stigmergy_toy",
+      "name": "Stigmergy Toy (ant trails)",
+      "concept": "Stigmergy & ecological CA",
+      "concept_order": 18,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "stigmergy_grid",
+      "name": "Stigmergy Grid",
+      "concept": "Stigmergy & ecological CA",
+      "concept_order": 18,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "disease_spread_ca",
+      "name": "Disease Spread CA",
+      "concept": "Stigmergy & ecological CA",
+      "concept_order": 18,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "mold_network",
+      "name": "Mold Network",
+      "concept": "Stigmergy & ecological CA",
+      "concept_order": 18,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_texture_bench",
+      "name": "CA Texture Bench (settle to texture)",
+      "concept": "CA materials & texture",
+      "concept_order": 19,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_texture_toy",
+      "name": "CA Texture Toy (frozen swatch)",
+      "concept": "CA materials & texture",
+      "concept_order": 19,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ca_texture_wall",
+      "name": "CA Texture Wall (the rug is an algorithm)",
+      "concept": "CA materials & texture",
+      "concept_order": 19,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "mirror_cellular_texture_for_3d",
+      "name": "Mirror Cellular Texture for 3D",
+      "concept": "CA materials & texture",
+      "concept_order": 19,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "persian_rug",
+      "name": "Persian Rug",
+      "concept": "CA materials & texture",
+      "concept_order": 19,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act VI — structure & world",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "morpho_egg",
+      "name": "Morpho Egg (DNA paints a coat)",
+      "concept": "Morphogenesis (DNA -> pattern)",
+      "concept_order": 20,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act VII — CA as morphogenesis (DNA bridge)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "morpho_menagerie",
+      "name": "Morpho Menagerie (one genome, many coats)",
+      "concept": "Morphogenesis (DNA -> pattern)",
+      "concept_order": 20,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act VII — CA as morphogenesis (DNA bridge)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "morphogenesis_bench",
+      "name": "Morphogenesis Bench (scrub the coat)",
+      "concept": "Morphogenesis (DNA -> pattern)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act VII — CA as morphogenesis (DNA bridge)",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rd_artifact",
+      "name": "Reaction-Diffusion Artifact",
+      "concept": "Morphogenesis (DNA -> pattern)",
+      "concept_order": 20,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act VII — CA as morphogenesis (DNA bridge)",
+      "has_image": true,
+      "recommended": false
+    }
+  ],
+  "total_artifacts": 118,
+  "total_concepts": 21
+}

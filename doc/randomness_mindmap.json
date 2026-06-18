@@ -1,0 +1,2947 @@
+{
+  "domain": "randomness",
+  "title": "Randomness & Noise — every example, by concept",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Uniform random / RNG",
+      "order": 0,
+      "act": "Act I — pure chance",
+      "truth": "Flat chance — every outcome equally likely; the rectangle of pure ignorance before structure arrives.",
+      "count": 13,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "randompoints_uniform",
+          "randompoints",
+          "randompoints_gaussian",
+          "randompoint",
+          "spawn_randomcubes"
+        ],
+        "medium": [
+          "2d_in_3d_randomness_vis",
+          "random_number_book_page_1955",
+          "randomlines"
+        ],
+        "large": [
+          "random_number_book_page_collection",
+          "randomup",
+          "plane_random",
+          "random_space"
+        ],
+        "applied": [
+          "lottery_drum"
+        ]
+      }
+    },
+    {
+      "key": "Coin / dice / discrete chance",
+      "order": 1,
+      "act": "Act I — pure chance",
+      "truth": "Discrete chance — a finite set of faces, each with its slice of certainty.",
+      "count": 5,
+      "x_spread": -0.8948,
+      "tiers": {
+        "small": [
+          "dice_throw",
+          "coin_toss"
+        ],
+        "medium": [
+          "coin_dice_bench"
+        ],
+        "large": [
+          "dice_rain_room"
+        ],
+        "applied": [
+          "slot_machine"
+        ]
+      }
+    },
+    {
+      "key": "Random walk",
+      "order": 2,
+      "act": "Act I — pure chance",
+      "truth": "A path with no plan — each step a fresh coin, the whole a drunkard's signature.",
+      "count": 11,
+      "x_spread": -0.7894,
+      "tiers": {
+        "small": [
+          "random_walk_grab_paper",
+          "random_walk_leash",
+          "walk_random",
+          "living_paper_random_walk"
+        ],
+        "medium": [
+          "random_walk_bench"
+        ],
+        "large": [
+          "crystal_random_walk_demo",
+          "random_walk_128",
+          "random_walk_collection",
+          "pixel_cloud"
+        ],
+        "applied": [
+          "random_walk_terrarium",
+          "random_walker_machine"
+        ]
+      }
+    },
+    {
+      "key": "Probability distribution",
+      "order": 3,
+      "act": "Act II — distributions",
+      "truth": "Not all outcomes are equal — a distribution is the shape chance prefers.",
+      "count": 6,
+      "x_spread": -0.6842,
+      "tiers": {
+        "small": [
+          "distribution_sampler",
+          "height_random"
+        ],
+        "medium": [
+          "distribution_bench"
+        ],
+        "large": [
+          "probability_distributions_3d",
+          "distribution_visualization"
+        ],
+        "applied": [
+          "distribution_comparator"
+        ]
+      }
+    },
+    {
+      "key": "Gaussian / normal",
+      "order": 4,
+      "act": "Act II — distributions",
+      "truth": "The bell is what many small accidents add up to — the central-limit attractor.",
+      "count": 10,
+      "x_spread": -0.579,
+      "tiers": {
+        "small": [
+          "gaussian_random"
+        ],
+        "medium": [
+          "GaussianBlurShader",
+          "GaussianPaintSplatter",
+          "random_gaussian_texture",
+          "RandomGaussianTexture",
+          "normal_distribution"
+        ],
+        "large": [
+          "random_bell_curve",
+          "bell_alley",
+          "GaussianBlurCircle"
+        ],
+        "applied": [
+          "galton_board"
+        ]
+      }
+    },
+    {
+      "key": "Custom / rejection sampling",
+      "order": 5,
+      "act": "Act II — distributions",
+      "truth": "Throw darts, keep the ones under the curve — sample any shape by refusing the rest.",
+      "count": 4,
+      "x_spread": -0.4736,
+      "tiers": {
+        "small": [
+          "rejection_toy"
+        ],
+        "medium": [
+          "rejection_bench"
+        ],
+        "large": [
+          "rejection_room"
+        ],
+        "applied": [
+          "rejection_sampling_demo"
+        ]
+      }
+    },
+    {
+      "key": "Monte Carlo",
+      "order": 6,
+      "act": "Act II — distributions",
+      "truth": "Estimate the unknowable by throwing enough random darts at it.",
+      "count": 7,
+      "x_spread": -0.3684,
+      "tiers": {
+        "small": [
+          "pi_dart_toy"
+        ],
+        "medium": [
+          "pi_dart_bench"
+        ],
+        "large": [
+          "pi_dart_room"
+        ],
+        "applied": [
+          "monte_carlo_dartboard",
+          "monte_carlo_estimator",
+          "monte_carlo_protein",
+          "monte_carlo"
+        ]
+      }
+    },
+    {
+      "key": "Perlin noise",
+      "order": 7,
+      "act": "Act III — noise",
+      "truth": "Smooth, coherent randomness — noise with neighbours, the texture of the natural world.",
+      "count": 10,
+      "x_spread": -0.2632,
+      "tiers": {
+        "small": [
+          "perlin_noise_clouds",
+          "living_paper_perlin"
+        ],
+        "medium": [
+          "perlin_bench"
+        ],
+        "large": [
+          "perlin_noise_terrain",
+          "particle_randomness_perlin",
+          "perlin_noise",
+          "perlinvolume",
+          "noise_field"
+        ],
+        "applied": [
+          "perlin_noise_bridge",
+          "perlin_terrain_sculptor"
+        ]
+      }
+    },
+    {
+      "key": "Simplex / Worley / value noise",
+      "order": 8,
+      "act": "Act III — noise",
+      "truth": "Other ways to make coherent noise — lattices, cells, and gradients beyond Perlin.",
+      "count": 6,
+      "x_spread": -0.1578,
+      "tiers": {
+        "small": [
+          "shader_08_cellularnoise",
+          "worley_noise"
+        ],
+        "medium": [
+          "noise_compare_bench"
+        ],
+        "large": [
+          "simplex_noise",
+          "value_noise"
+        ],
+        "applied": [
+          "noise_displacer"
+        ]
+      }
+    },
+    {
+      "key": "Noise fields & textures",
+      "order": 9,
+      "act": "Act III — noise",
+      "truth": "Noise becomes a field — every point in space assigned a value that flows.",
+      "count": 20,
+      "x_spread": -0.0526,
+      "tiers": {
+        "small": [
+          "curl_noise_particles",
+          "noise_mixer",
+          "noiselayers",
+          "noisetext",
+          "shader_07_noise"
+        ],
+        "medium": [
+          "VoxelNoiseROIs"
+        ],
+        "large": [
+          "marchingcubes_voxel_noise_demo",
+          "shader_noise_space",
+          "voxel_noise_demo",
+          "cloudvolume",
+          "neon_wave_grid",
+          "noise_space",
+          "NoiseColors3D",
+          "noisesphere",
+          "noisetorus",
+          "noisetorus_ex_1",
+          "pool_hole_noise",
+          "voxelnoise",
+          "WhiteNoiseGallery"
+        ],
+        "applied": [
+          "noise_flow_drones"
+        ]
+      }
+    },
+    {
+      "key": "Noise terrain / landscapes",
+      "order": 10,
+      "act": "Act III — noise",
+      "truth": "Let noise be height — and randomness becomes landscape.",
+      "count": 6,
+      "x_spread": 0.0526,
+      "tiers": {
+        "small": [
+          "noise_height_toy"
+        ],
+        "medium": [
+          "noise_dunes_bench"
+        ],
+        "large": [
+          "noise_terrain_with_blobs",
+          "pheromone_terrain",
+          "noise_terrain"
+        ],
+        "applied": [
+          "noise_terrain_forge"
+        ]
+      }
+    },
+    {
+      "key": "Blue noise / sampling",
+      "order": 11,
+      "act": "Act III — noise",
+      "truth": "Random but evenly spaced — chance without clumping, the eye's preferred scatter.",
+      "count": 5,
+      "x_spread": 0.1578,
+      "tiers": {
+        "small": [
+          "blue_noise_toy"
+        ],
+        "medium": [
+          "blue_noise_bench"
+        ],
+        "large": [
+          "blue_noise",
+          "instancingscatter"
+        ],
+        "applied": [
+          "blue_noise_planter"
+        ]
+      }
+    },
+    {
+      "key": "Markov chains",
+      "order": 12,
+      "act": "Act IV — process & measure",
+      "truth": "The next state remembers only the last — memoryless chains that still make patterns.",
+      "count": 6,
+      "x_spread": 0.2632,
+      "tiers": {
+        "small": [
+          "grammar_markov"
+        ],
+        "medium": [
+          "markov_chain"
+        ],
+        "large": [
+          "markov_chains_tree",
+          "markov_chains",
+          "puls_markov"
+        ],
+        "applied": [
+          "markov_melody"
+        ]
+      }
+    },
+    {
+      "key": "Seeds / PRNG vs TRNG",
+      "order": 13,
+      "act": "Act IV — process & measure",
+      "truth": "Pseudo-randomness is deterministic in disguise — same seed, same 'chance' every time.",
+      "count": 6,
+      "x_spread": 0.3684,
+      "tiers": {
+        "small": [
+          "seed_toy"
+        ],
+        "medium": [
+          "seed_bench"
+        ],
+        "large": [
+          "grid2d_seeds"
+        ],
+        "applied": [
+          "trng_vs_prng",
+          "prng_crank_machine",
+          "seed_replay_demo"
+        ]
+      }
+    },
+    {
+      "key": "Entropy",
+      "order": 14,
+      "act": "Act IV — process & measure",
+      "truth": "Randomness measured — how many bits of surprise a source actually carries.",
+      "count": 8,
+      "x_spread": 0.4736,
+      "tiers": {
+        "small": [
+          "entropy_axiom",
+          "digital_materiality_glitch"
+        ],
+        "medium": [
+          "entropy_bench"
+        ],
+        "large": [
+          "entropy_morphogenesis",
+          "extreme_randomness"
+        ],
+        "applied": [
+          "entropy_jar",
+          "shannon_entropy_meter",
+          "hardware_entropy_decay"
+        ]
+      }
+    },
+    {
+      "key": "Random transformations",
+      "order": 15,
+      "act": "Act V — randomness as material",
+      "truth": "Perturb the regular — rotation, position, decay drawn from chance.",
+      "count": 15,
+      "x_spread": 0.579,
+      "tiers": {
+        "small": [
+          "Random_Rotate_Random_XYZ",
+          "randomize_cubes_over_Z",
+          "random_transformations",
+          "random_transformations_geometric",
+          "random_transformations_matrices",
+          "random_transformations_noise",
+          "random_transformations_stochastic",
+          "random_edge_profile",
+          "rotate_grid_cubes",
+          "rotate_random_y"
+        ],
+        "medium": [
+          "jitter_bench"
+        ],
+        "large": [
+          "random_edge_profile_collection"
+        ],
+        "applied": [
+          "random_decay_multimesh",
+          "random_decay_objects",
+          "remove_random"
+        ]
+      }
+    },
+    {
+      "key": "10 PRINT / generative grid",
+      "order": 16,
+      "act": "Act V — randomness as material",
+      "truth": "One line of chance per cell builds a maze — the smallest generative grammar.",
+      "count": 5,
+      "x_spread": 0.6842,
+      "tiers": {
+        "small": [
+          "ten_print_toy"
+        ],
+        "medium": [
+          "ten_print_bench"
+        ],
+        "large": [
+          "ten_print_maze_3d",
+          "ten_print"
+        ],
+        "applied": [
+          "ten_print_textile"
+        ]
+      }
+    },
+    {
+      "key": "Random art / scatter",
+      "order": 17,
+      "act": "Act V — randomness as material",
+      "truth": "Chance as a brush — Pollock's drips, Molnar's disorder, the aesthetics of the unplanned.",
+      "count": 11,
+      "x_spread": 0.7894,
+      "tiers": {
+        "small": [
+          "random_butterflies"
+        ],
+        "medium": [
+          "scatter_bench"
+        ],
+        "large": [
+          "random_color_book_page_collection",
+          "bubbles_random",
+          "omoss",
+          "random_plants",
+          "sculpt_one",
+          "env_one"
+        ],
+        "applied": [
+          "pollock_3d",
+          "pollock_painting_in_3d",
+          "vera_molnar_des_ordres"
+        ]
+      }
+    },
+    {
+      "key": "Particle randomness",
+      "order": 18,
+      "act": "Act V — randomness as material",
+      "truth": "Give a thousand particles their own dice — emergent texture from individual chance.",
+      "count": 6,
+      "x_spread": 0.8948,
+      "tiers": {
+        "small": [
+          "bubble_particles"
+        ],
+        "medium": [
+          "particle_randomness_evolutionary"
+        ],
+        "large": [
+          "particle_randomness_emergent",
+          "particle_randomness_patterns",
+          "particle_randomness_pure"
+        ],
+        "applied": [
+          "random_fireworks"
+        ]
+      }
+    },
+    {
+      "key": "Seeded growth / DNA -> form",
+      "order": 19,
+      "act": "Act VI — randomness as growth",
+      "truth": "The deep end of randomness: a short genome (CritterDNA) grown by an L-system into a unique, reproducible organism. Not flat chance — store the seed, replay the costly growth. Same seed, same form.",
+      "count": 4,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "dna_sprout"
+        ],
+        "medium": [
+          "genome_bench"
+        ],
+        "large": [
+          "seed_vs_random"
+        ],
+        "applied": [
+          "genetic_tree_sculptor"
+        ]
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789,
+      0.6316,
+      0.6842,
+      0.7368,
+      0.7895,
+      0.8421,
+      0.8947,
+      0.9474,
+      1.0
+    ],
+    [
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789,
+      0.6316,
+      0.6842,
+      0.7368,
+      0.7895,
+      0.8421,
+      0.8947,
+      0.9474
+    ],
+    [
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789,
+      0.6316,
+      0.6842,
+      0.7368,
+      0.7895,
+      0.8421,
+      0.8947
+    ],
+    [
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789,
+      0.6316,
+      0.6842,
+      0.7368,
+      0.7895,
+      0.8421
+    ],
+    [
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789,
+      0.6316,
+      0.6842,
+      0.7368,
+      0.7895
+    ],
+    [
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789,
+      0.6316,
+      0.6842,
+      0.7368
+    ],
+    [
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789,
+      0.6316,
+      0.6842
+    ],
+    [
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789,
+      0.6316
+    ],
+    [
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263,
+      0.5789
+    ],
+    [
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737,
+      0.5263
+    ],
+    [
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211,
+      0.4737
+    ],
+    [
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684,
+      0.4211
+    ],
+    [
+      0.6316,
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158,
+      0.3684
+    ],
+    [
+      0.6842,
+      0.6316,
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632,
+      0.3158
+    ],
+    [
+      0.7368,
+      0.6842,
+      0.6316,
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105,
+      0.2632
+    ],
+    [
+      0.7895,
+      0.7368,
+      0.6842,
+      0.6316,
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579,
+      0.2105
+    ],
+    [
+      0.8421,
+      0.7895,
+      0.7368,
+      0.6842,
+      0.6316,
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053,
+      0.1579
+    ],
+    [
+      0.8947,
+      0.8421,
+      0.7895,
+      0.7368,
+      0.6842,
+      0.6316,
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526,
+      0.1053
+    ],
+    [
+      0.9474,
+      0.8947,
+      0.8421,
+      0.7895,
+      0.7368,
+      0.6842,
+      0.6316,
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0,
+      0.0526
+    ],
+    [
+      1.0,
+      0.9474,
+      0.8947,
+      0.8421,
+      0.7895,
+      0.7368,
+      0.6842,
+      0.6316,
+      0.5789,
+      0.5263,
+      0.4737,
+      0.4211,
+      0.3684,
+      0.3158,
+      0.2632,
+      0.2105,
+      0.1579,
+      0.1053,
+      0.0526,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "lottery_drum",
+      "name": "Lottery Drum (uniform raffle)",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "randompoints_uniform",
+      "name": "randompoints_uniform",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "randompoints",
+      "name": "randompoints",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "2d_in_3d_randomness_vis",
+      "name": "2D in 3D Randomness Visualization",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "randompoints_gaussian",
+      "name": "randompoints_gaussian",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_number_book_page_1955",
+      "name": "Random Number Book Page 1955",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_number_book_page_collection",
+      "name": "Random Number Book — Live Cascade",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 1,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "randomlines",
+      "name": "Random Lines",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "randomup",
+      "name": "Random Up",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "plane_random",
+      "name": "Plane Random",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_space",
+      "name": "random_space",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "randompoint",
+      "name": "randompoint",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "spawn_randomcubes",
+      "name": "spawn_randomcubes",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "coin_dice_bench",
+      "name": "Coin & Dice Bench (discrete tallies)",
+      "concept": "Coin / dice / discrete chance",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "dice_rain_room",
+      "name": "Dice Rain Room (raining histogram)",
+      "concept": "Coin / dice / discrete chance",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "dice_throw",
+      "name": "Dice Throw",
+      "concept": "Coin / dice / discrete chance",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "coin_toss",
+      "name": "Coin Toss",
+      "concept": "Coin / dice / discrete chance",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "slot_machine",
+      "name": "Slot Machine",
+      "concept": "Coin / dice / discrete chance",
+      "concept_order": 1,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_walk_bench",
+      "name": "Random Walk Bench (drunkard path)",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_walk_terrarium",
+      "name": "Random Walk Terrarium",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "crystal_random_walk_demo",
+      "name": "Crystal Random Walk Demo",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_walk_128",
+      "name": "Random Walk 128x128",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 4,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_walk_collection",
+      "name": "Random Walk Grab Paper",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_walk_grab_paper",
+      "name": "Random Walk Grab Paper",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_walk_leash",
+      "name": "Random Walk Leash",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_walker_machine",
+      "name": "Random Walker Machine",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "walk_random",
+      "name": "Random Walker",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "living_paper_random_walk",
+      "name": "Living Paper — Random Walk",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pixel_cloud",
+      "name": "pixel_cloud",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "distribution_bench",
+      "name": "Distribution Bench (live histogram)",
+      "concept": "Probability distribution",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "distribution_comparator",
+      "name": "Distribution Comparator",
+      "concept": "Probability distribution",
+      "concept_order": 3,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "distribution_sampler",
+      "name": "Distribution Sampler",
+      "concept": "Probability distribution",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "probability_distributions_3d",
+      "name": "Probability Distributions 3D",
+      "concept": "Probability distribution",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "distribution_visualization",
+      "name": "Distribution Visualization",
+      "concept": "Probability distribution",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "height_random",
+      "name": "Height Distributor",
+      "concept": "Probability distribution",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "galton_board",
+      "name": "Galton Board",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_bell_curve",
+      "name": "Random Bell Curve Terrain",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "bell_alley",
+      "name": "Bell Curve Alley",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "gaussian_random",
+      "name": "Gaussian Generator",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "GaussianBlurCircle",
+      "name": "Gaussian Blur Circle",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "GaussianBlurShader",
+      "name": "Gaussian Blur Shader",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "GaussianPaintSplatter",
+      "name": "Gaussian Paint Splatter",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_gaussian_texture",
+      "name": "Random Gaussian Texture",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "RandomGaussianTexture",
+      "name": "Random Gaussian Texture",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "normal_distribution",
+      "name": "Normal Distribution",
+      "concept": "Gaussian / normal",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 7,
+      "size": 8,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rejection_bench",
+      "name": "Rejection Bench (accept / reject)",
+      "concept": "Custom / rejection sampling",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rejection_room",
+      "name": "Rejection Room (walk-in accept / reject)",
+      "concept": "Custom / rejection sampling",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rejection_toy",
+      "name": "Rejection Toy (held - under the curve)",
+      "concept": "Custom / rejection sampling",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rejection_sampling_demo",
+      "name": "Rejection Sampling Demo",
+      "concept": "Custom / rejection sampling",
+      "concept_order": 5,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pi_dart_bench",
+      "name": "Pi Dart Bench (pi convergence)",
+      "concept": "Monte Carlo",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pi_dart_room",
+      "name": "Pi Dart Room (stand in the square)",
+      "concept": "Monte Carlo",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pi_dart_toy",
+      "name": "Pi Dart Toy (held Monte Carlo)",
+      "concept": "Monte Carlo",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "monte_carlo_dartboard",
+      "name": "Monte Carlo Dart Board",
+      "concept": "Monte Carlo",
+      "concept_order": 6,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "monte_carlo_estimator",
+      "name": "Monte Carlo Estimator",
+      "concept": "Monte Carlo",
+      "concept_order": 6,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "monte_carlo_protein",
+      "name": "Monte Carlo Protein Folding",
+      "concept": "Monte Carlo",
+      "concept_order": 6,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "monte_carlo",
+      "name": "Monte Carlo Simulation",
+      "concept": "Monte Carlo",
+      "concept_order": 6,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act II — distributions",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "perlin_bench",
+      "name": "Perlin Bench (coherent curve)",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "perlin_noise_bridge",
+      "name": "Perlin Noise Bridge",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "perlin_noise_clouds",
+      "name": "Perlin Noise Clouds",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "perlin_noise_terrain",
+      "name": "Perlin Noise Terrain",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 4,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "perlin_terrain_sculptor",
+      "name": "Perlin Terrain Sculptor",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "particle_randomness_perlin",
+      "name": "Particle Randomness - Perlin",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "perlin_noise",
+      "name": "Perlin Noise",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "perlinvolume",
+      "name": "Perlin Volume",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "living_paper_perlin",
+      "name": "Living Paper — Perlin Noise",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_field",
+      "name": "Noise Field",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_compare_bench",
+      "name": "Noise Compare Bench (value / simplex / worley)",
+      "concept": "Simplex / Worley / value noise",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_displacer",
+      "name": "Noise Displacer (surface displacement)",
+      "concept": "Simplex / Worley / value noise",
+      "concept_order": 8,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "shader_08_cellularnoise",
+      "name": "Cellular Noise Shader",
+      "concept": "Simplex / Worley / value noise",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "worley_noise",
+      "name": "Worley Noise",
+      "concept": "Simplex / Worley / value noise",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "simplex_noise",
+      "name": "Simplex Noise",
+      "concept": "Simplex / Worley / value noise",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "value_noise",
+      "name": "Value Noise",
+      "concept": "Simplex / Worley / value noise",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_flow_drones",
+      "name": "Noise Flow Drones (flow-field navigation)",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "marchingcubes_voxel_noise_demo",
+      "name": "Marching Cubes Voxel Noise",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "shader_noise_space",
+      "name": "Shader Noise Space",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "voxel_noise_demo",
+      "name": "voxel_noise_demo",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "VoxelNoiseROIs",
+      "name": "Voxel Noise ROIs",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "cloudvolume",
+      "name": "Cloud Volume",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "curl_noise_particles",
+      "name": "Curl Noise Particles",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "neon_wave_grid",
+      "name": "Neon Wave Grid",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_mixer",
+      "name": "Noise Mixer",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_space",
+      "name": "Noise Space Explorer",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "NoiseColors3D",
+      "name": "Noise Colors 3D",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noiselayers",
+      "name": "Noise Layers",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noisesphere",
+      "name": "noisesphere",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noisetext",
+      "name": "noisetext",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noisetorus",
+      "name": "noisetorus",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noisetorus_ex_1",
+      "name": "noisetorus_ex_1",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pool_hole_noise",
+      "name": "Pool Hole Noise",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "shader_07_noise",
+      "name": "Shader Noise Functions",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "voxelnoise",
+      "name": "Voxel Noise",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "WhiteNoiseGallery",
+      "name": "White Noise Gallery",
+      "concept": "Noise fields & textures",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_dunes_bench",
+      "name": "Noise Dunes Bench (tabletop landscape)",
+      "concept": "Noise terrain / landscapes",
+      "concept_order": 10,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_height_toy",
+      "name": "Noise Height Toy (held heightfield)",
+      "concept": "Noise terrain / landscapes",
+      "concept_order": 10,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_terrain_forge",
+      "name": "Noise Terrain Forge (stamps ground)",
+      "concept": "Noise terrain / landscapes",
+      "concept_order": 10,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_terrain_with_blobs",
+      "name": "Noise Terrain with Animated Blobs",
+      "concept": "Noise terrain / landscapes",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 1,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pheromone_terrain",
+      "name": "Pheromone Terrain",
+      "concept": "Noise terrain / landscapes",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "noise_terrain",
+      "name": "Noise Terrain",
+      "concept": "Noise terrain / landscapes",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 1,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "blue_noise_bench",
+      "name": "Blue Noise Bench (white vs blue)",
+      "concept": "Blue noise / sampling",
+      "concept_order": 11,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "blue_noise_planter",
+      "name": "Blue Noise Planter (even placement)",
+      "concept": "Blue noise / sampling",
+      "concept_order": 11,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "blue_noise_toy",
+      "name": "Blue Noise Toy (even-spaced points)",
+      "concept": "Blue noise / sampling",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "blue_noise",
+      "name": "Blue Noise",
+      "concept": "Blue noise / sampling",
+      "concept_order": 11,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "instancingscatter",
+      "name": "Instancing Scatter",
+      "concept": "Blue noise / sampling",
+      "concept_order": 11,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "markov_melody",
+      "name": "Markov Melody (chain composes)",
+      "concept": "Markov chains",
+      "concept_order": 12,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "markov_chains_tree",
+      "name": "Markov Chains Tree",
+      "concept": "Markov chains",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "markov_chains",
+      "name": "Markov Chains",
+      "concept": "Markov chains",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "grammar_markov",
+      "name": "Grammar Markov",
+      "concept": "Markov chains",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "puls_markov",
+      "name": "Pulsing Markov Blanket",
+      "concept": "Markov chains",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "markov_chain",
+      "name": "Markov Chain",
+      "concept": "Markov chains",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "seed_bench",
+      "name": "Seed Bench (same seed, same stream)",
+      "concept": "Seeds / PRNG vs TRNG",
+      "concept_order": 13,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "seed_toy",
+      "name": "Seed Toy (same seed, same glyph)",
+      "concept": "Seeds / PRNG vs TRNG",
+      "concept_order": 13,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "trng_vs_prng",
+      "name": "TRNG vs PRNG",
+      "concept": "Seeds / PRNG vs TRNG",
+      "concept_order": 13,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "prng_crank_machine",
+      "name": "PRNG Crank Machine",
+      "concept": "Seeds / PRNG vs TRNG",
+      "concept_order": 13,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "seed_replay_demo",
+      "name": "Seed Replay Demo",
+      "concept": "Seeds / PRNG vs TRNG",
+      "concept_order": 13,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "grid2d_seeds",
+      "name": "Grid2D — Seeds",
+      "concept": "Seeds / PRNG vs TRNG",
+      "concept_order": 13,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "entropy_bench",
+      "name": "Entropy Bench (bits of surprise)",
+      "concept": "Entropy",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "entropy_axiom",
+      "name": "Entropy Axiom",
+      "concept": "Entropy",
+      "concept_order": 14,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "entropy_jar",
+      "name": "Entropy Jar",
+      "concept": "Entropy",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "shannon_entropy_meter",
+      "name": "Shannon Entropy Meter",
+      "concept": "Entropy",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "entropy_morphogenesis",
+      "name": "entropy_morphogenesis",
+      "concept": "Entropy",
+      "concept_order": 14,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "hardware_entropy_decay",
+      "name": "Hardware Entropy Decay",
+      "concept": "Entropy",
+      "concept_order": 14,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "digital_materiality_glitch",
+      "name": "Digital Materiality Glitch",
+      "concept": "Entropy",
+      "concept_order": 14,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "extreme_randomness",
+      "name": "Extreme Randomness",
+      "concept": "Entropy",
+      "concept_order": 14,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV — process & measure",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "jitter_bench",
+      "name": "Jitter Bench (perturb the grid)",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "Random_Rotate_Random_XYZ",
+      "name": "Random Rotate XYZ",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_decay_multimesh",
+      "name": "Random Decay MultiMesh",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_decay_objects",
+      "name": "Random Decay Objects",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "randomize_cubes_over_Z",
+      "name": "Randomize Cubes Over Z",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_transformations",
+      "name": "Random Transformations",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_transformations_geometric",
+      "name": "Random Transformations - Geometric",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_transformations_matrices",
+      "name": "Random Transformations - Matrices",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_transformations_noise",
+      "name": "Random Transformations - Noise",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_transformations_stochastic",
+      "name": "Random Transformations - Stochastic",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_edge_profile",
+      "name": "Random Edge Profile",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_edge_profile_collection",
+      "name": "Random Edge Profile Collection",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "large",
+      "fp": 1,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "remove_random",
+      "name": "Random Destructor",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rotate_grid_cubes",
+      "name": "Rotate Grid Cubes",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "rotate_random_y",
+      "name": "Rotate Random Y",
+      "concept": "Random transformations",
+      "concept_order": 15,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ten_print_bench",
+      "name": "Ten Print Bench (bias dial)",
+      "concept": "10 PRINT / generative grid",
+      "concept_order": 16,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ten_print_textile",
+      "name": "Ten Print Textile (fabric loom)",
+      "concept": "10 PRINT / generative grid",
+      "concept_order": 16,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ten_print_toy",
+      "name": "Ten Print Toy (maze of slashes)",
+      "concept": "10 PRINT / generative grid",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ten_print_maze_3d",
+      "name": "ten_print_maze_3d",
+      "concept": "10 PRINT / generative grid",
+      "concept_order": 16,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "ten_print",
+      "name": "10 PRINT",
+      "concept": "10 PRINT / generative grid",
+      "concept_order": 16,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "scatter_bench",
+      "name": "Scatter Bench (Pollock drips)",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pollock_3d",
+      "name": "Pollock 3D",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "pollock_painting_in_3d",
+      "name": "Pollock Painting in 3D",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_color_book_page_collection",
+      "name": "Random Color Book Page Collection",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "vera_molnar_des_ordres",
+      "name": "Vera Molnar Des-Ordres",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "applied",
+      "fp": 1,
+      "size": 10,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "bubbles_random",
+      "name": "Random Bubbles",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "omoss",
+      "name": "Omoss",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_butterflies",
+      "name": "Random Butterflies",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_plants",
+      "name": "Random Plants",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "sculpt_one",
+      "name": "Sculpt One",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "env_one",
+      "name": "Environment One",
+      "concept": "Random art / scatter",
+      "concept_order": 17,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "random_fireworks",
+      "name": "Random Fireworks (per-particle chance)",
+      "concept": "Particle randomness",
+      "concept_order": 18,
+      "tier": "applied",
+      "fp": 4,
+      "size": 10,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "particle_randomness_emergent",
+      "name": "Particle Randomness - Emergent",
+      "concept": "Particle randomness",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "particle_randomness_evolutionary",
+      "name": "Particle Randomness - Evolutionary",
+      "concept": "Particle randomness",
+      "concept_order": 18,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "particle_randomness_patterns",
+      "name": "Particle Randomness - Patterns",
+      "concept": "Particle randomness",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "particle_randomness_pure",
+      "name": "Particle Randomness - Pure",
+      "concept": "Particle randomness",
+      "concept_order": 18,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "bubble_particles",
+      "name": "Bubble Particles",
+      "concept": "Particle randomness",
+      "concept_order": 18,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "dna_sprout",
+      "name": "DNA Sprout (held seed -> plant)",
+      "concept": "Seeded growth / DNA -> form",
+      "concept_order": 19,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act VI — randomness as growth",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "genetic_tree_sculptor",
+      "name": "Genetic Tree Sculptor",
+      "concept": "Seeded growth / DNA -> form",
+      "concept_order": 19,
+      "tier": "applied",
+      "fp": 9,
+      "size": 10,
+      "act": "Act VI — randomness as growth",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "genome_bench",
+      "name": "Genome Bench (scrub -> regrow)",
+      "concept": "Seeded growth / DNA -> form",
+      "concept_order": 19,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act VI — randomness as growth",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "seed_vs_random",
+      "name": "Seed vs Random (the thesis bed)",
+      "concept": "Seeded growth / DNA -> form",
+      "concept_order": 19,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act VI — randomness as growth",
+      "has_image": true,
+      "recommended": false
+    }
+  ],
+  "total_artifacts": 164,
+  "total_concepts": 20
+}
