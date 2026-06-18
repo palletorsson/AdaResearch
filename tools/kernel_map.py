@@ -42,9 +42,12 @@ def build_footprints(root="."):
                 if (not w or not d) and sn and sn.get("footprint_cells"):
                     side = max(1, round(math.sqrt(sn["footprint_cells"])))
                     w = w or side; d = d or side
-                plat = (sn or {}).get("platform", "none")
+                sn2 = sn or {}
+                plat = sn2.get("platform", "none")
+                wall = bool(sn2.get("wall_backing"))
+                iso = int(sn2.get("isolation", 0) or 0)
                 if tok and w and d:
-                    FP.setdefault(str(tok), (max(1, int(w)), max(1, int(d)), str(plat)))
+                    FP.setdefault(str(tok), (max(1, int(w)), max(1, int(d)), str(plat), wall, iso))
             for k, v in o.items():
                 rec(v, k)
         elif isinstance(o, list):
@@ -69,19 +72,21 @@ def pack(bag, FP, s=1, width=9):
     """Rules 1-3: footprints, pack from origin, width=9 unless an artifact demands more."""
     items = []
     for t in bag:
-        w, d, plat = FP.get(t, (1, 1, "none"))
+        w, d, plat, wall, iso = FP.get(t, (1, 1, "none", False, 0))
+        iso = min(int(iso), 3)
         if w > d and w > width:                  # too wide to fit: lay long side along depth
             w, d = d, w
-        items.append([t, w, d, plat])
-    maxw = max(w for _, w, d, _ in items)
+        items.append([t, w, d, plat, wall, iso])
+    maxw = max(it[1] for it in items)
     W = max(width, maxw + 1 + s)                  # default 9; widen only to keep a lane past a wide item
     order = sorted(items, key=lambda it: -it[2])  # deepest first
     placed, cx, cy, shelf_d = [], 0, 0, 0
-    for t, w, d, plat in order:
+    for t, w, d, plat, wall, iso in order:
         if cx + w > W and cx > 0:
             cy += shelf_d + s; cx = 0; shelf_d = 0
-        placed.append((t, cy, cx, w, d, plat))
-        cx += w + s; shelf_d = max(shelf_d, d)
+        placed.append((t, cy, cx, w, d, plat, wall))
+        cx += w + s + iso                          # isolation = extra walking gap after the item
+        shelf_d = max(shelf_d, d + iso)
     return placed, W, cy + shelf_d
 
 
@@ -91,13 +96,19 @@ def build(placed, W, D):
     occ = [[0] * W for _ in range(D)]
     inter = [[""] * W for _ in range(D)]
     util = [[""] * W for _ in range(D)]
-    for t, r, c, w, d, plat in placed:
+    for t, r, c, w, d, plat, wall in placed:
         h = PLAT_H.get(plat, 1)                    # exception: pedestal/table=2, sunken=0
         for rr in range(r, r + d):
             for cc in range(c, c + w):
                 if 0 <= rr < D and 0 <= cc < W:
                     occ[rr][cc] = 1; height[rr][cc] = h
         inter[r][c] = t
+        if wall:                                   # wall_backing: raised backing panel behind (deeper side)
+            wr = r + d
+            if wr < D:
+                for cc in range(c, c + w):
+                    if not occ[wr][cc]:
+                        occ[wr][cc] = 1; height[wr][cc] = 3
     free = [(r, c) for r in range(D) for c in range(W) if not occ[r][c]]
     start = min(free, key=lambda p: p[0] + p[1])
     end = max(free, key=lambda p: p[0] + p[1])
@@ -109,7 +120,7 @@ def build(placed, W, D):
             nr, nc = r + dr, c + dc
             if 0 <= nr < D and 0 <= nc < W and not occ[nr][nc] and (nr, nc) not in seen:
                 seen.add((nr, nc)); q.append((nr, nc))
-    unreached = [t for t, r, c, w, d, _ in placed
+    unreached = [t for t, r, c, w, d, _, _ in placed
                  if not any((r + dr, c + dc) in seen
                             for dr in range(-1, d + 1) for dc in range(-1, w + 1))]
     return height, inter, util, occ, start, end, (end in seen), len(seen), unreached
@@ -184,19 +195,22 @@ def write_compact(path, d):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--map", required=True, help="source map to borrow the artifact bag from")
+    ap.add_argument("--map", default=None, help="source map to borrow the artifact bag from")
+    ap.add_argument("--bag", default=None, help="comma-separated artifact tokens (instead of --map)")
     ap.add_argument("--s", type=int, default=1, help="separation / walking gap")
     ap.add_argument("--width", type=int, default=9, help="default map width (artifact may widen it)")
     ap.add_argument("--out", default=None, help="optional map_data.json output path")
     ap.add_argument("--name", default=None, help="lookup_name for the emitted map")
     a = ap.parse_args()
     FP = build_footprints()
-    bag = bag_from_map(a.map)
+    bag = [t.strip() for t in a.bag.split(",")] if a.bag else bag_from_map(a.map)
     placed, W, D = pack(bag, FP, a.s, a.width)
     height, inter, util, occ, start, end, ok, nfree, unreached = build(placed, W, D)
     relief = sorted({p[5] for p in placed if PLAT_H.get(p[5], 1) != 1})
-    print(f"KERNEL {a.map} {W}x{D} (default w={a.width}) s={a.s} artifacts={len(bag)} "
-          f"path_ok={ok} free={nfree} relief={relief or 'flat'} unreached={unreached}")
+    walls = sum(1 for p in placed if p[6])
+    src = a.map or "bag"
+    print(f"KERNEL {src} {W}x{D} (default w={a.width}) s={a.s} artifacts={len(bag)} "
+          f"path_ok={ok} free={nfree} relief={relief or 'flat'} walls={walls} unreached={unreached}")
     print("<<ROWS")
     for r in grid_rows(height, inter, util, occ, W, D):
         print(r)
