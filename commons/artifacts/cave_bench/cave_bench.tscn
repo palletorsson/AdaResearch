@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/cave_bench/cave_bench.gd" id="1"]
+
+[node name="CaveBench" type="Node3D"]
+script = ExtResource("1")

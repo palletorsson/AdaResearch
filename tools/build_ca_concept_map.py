@@ -140,7 +140,47 @@ def tier_of(lookup, name, fp):
     return "small"
 
 # explicit (concept, tier) overrides — gap-fillers / re-homings land deterministically here
-FORCE = {}
+FORCE = {
+  "elementary_ca_bench": ("Elementary CA (1D rules)", "medium"),
+  "rule30_bench": ("Rule 30 — order to randomness", "medium"),
+  "rule30_rng": ("Rule 30 — order to randomness", "applied"),
+  "rule90_toy": ("Rule 90 — Sierpinski", "small"),
+  "rule90_bench": ("Rule 90 — Sierpinski", "medium"),
+  "rule90_loom": ("Rule 90 — Sierpinski", "applied"),
+  "rule110_bench": ("Rule 110 — universal computation", "medium"),
+  "rule110_computer": ("Rule 110 — universal computation", "applied"),
+  "life_bench": ("Conway's Game of Life", "medium"),
+  "life_zoo_bench": ("Life patterns & variants", "medium"),
+  "life_rules_room": ("Life patterns & variants", "large"),
+  "brians_brain_bench": ("Brian's Brain / multi-state", "medium"),
+  "brians_brain_display": ("Brian's Brain / multi-state", "applied"),
+  "wireworld_toy": ("Wireworld / CA circuits", "small"),
+  "wireworld_bench": ("Wireworld / CA circuits", "medium"),
+  "langton_toy": ("Langton's ant / turmites", "small"),
+  "langton_bench": ("Langton's ant / turmites", "medium"),
+  "langton_swarm": ("Langton's ant / turmites", "applied"),
+  "hex_ca_toy": ("Alternative neighbourhoods (hex)", "small"),
+  "neighbourhood_bench": ("Alternative neighbourhoods (hex)", "medium"),
+  "lenia_room": ("Continuous CA (Lenia)", "large"),
+  "lenia_aquarium": ("Continuous CA (Lenia)", "applied"),
+  "reaction_diffusion_bench": ("Reaction-diffusion (Turing)", "medium"),
+  "lattice_gas_bench": ("Lattice gas / physical CA", "medium"),
+  "lattice_gas_room": ("Lattice gas / physical CA", "large"),
+  "lattice_gas_pump": ("Lattice gas / physical CA", "applied"),
+  "four_classes_toy": ("The four Wolfram classes", "small"),
+  "four_classes_bench": ("The four Wolfram classes", "medium"),
+  "four_classes_room": ("The four Wolfram classes", "large"),
+  "edge_of_chaos_bench": ("Edge of chaos / self-organisation", "medium"),
+  "dendrite_toy": ("Growth & dendrites", "small"),
+  "dendrite_bench": ("Growth & dendrites", "medium"),
+  "cave_bench": ("Caves / percolation / cracks", "medium"),
+  "stigmergy_toy": ("Stigmergy & ecological CA", "small"),
+  "stigmergy_bench": ("Stigmergy & ecological CA", "medium"),
+  "stigmergy_room": ("Stigmergy & ecological CA", "large"),
+  "ca_texture_toy": ("CA materials & texture", "small"),
+  "ca_texture_bench": ("CA materials & texture", "medium"),
+  "ca_texture_wall": ("CA materials & texture", "large"),
+}
 
 
 def _hit(text, kw):

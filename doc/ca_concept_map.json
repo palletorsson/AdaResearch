@@ -33,8 +33,8 @@
   ],
   "concept_meta": {
     "Elementary CA (1D rules)": {
-      "count": 10,
-      "map_ready": 10,
+      "count": 11,
+      "map_ready": 11,
       "has_image": 10,
       "best": "ca_rules_workbench",
       "truth": "256 rules, each a tiny universe with its own physics; the rule is a worldview you can dial.",
@@ -46,7 +46,9 @@
           "cellular_automata_grabable",
           "line_network_ca"
         ],
-        "medium": [],
+        "medium": [
+          "elementary_ca_bench"
+        ],
         "large": [
           "7_1_elementary_ca_vr",
           "elementary_ca_vr",
@@ -59,13 +61,11 @@
           "ca_showcase"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Rule 30 — order to randomness": {
-      "count": 4,
-      "map_ready": 4,
+      "count": 6,
+      "map_ready": 6,
       "has_image": 4,
       "best": "grid2d_rule30",
       "truth": "Pure order, run forward, becomes indistinguishable from chance — determinism no shortcut can outrun. The run is the only oracle.",
@@ -77,43 +77,46 @@
           "rule_30_110",
           "rule_30_110_gravity"
         ],
-        "medium": [],
+        "medium": [
+          "rule30_bench"
+        ],
         "large": [
           "grid2d_rule30"
         ],
-        "applied": []
+        "applied": [
+          "rule30_rng"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Rule 90 — Sierpinski": {
-      "count": 2,
-      "map_ready": 2,
+      "count": 5,
+      "map_ready": 5,
       "has_image": 2,
       "best": "grid2d_rule90",
       "truth": "The same local step, drawn through time, IS the Sierpinski triangle — the fractal was hiding in the rule all along.",
       "act": "Act I — one dimension (the rule)",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "rule90_toy"
+        ],
+        "medium": [
+          "rule90_bench"
+        ],
         "large": [
           "grid2d_rule90",
           "sierpinski_pyramid"
         ],
-        "applied": []
+        "applied": [
+          "rule90_loom"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Rule 110 — universal computation": {
-      "count": 2,
-      "map_ready": 2,
+      "count": 4,
+      "map_ready": 4,
       "has_image": 2,
       "best": "grid2d_rule110",
       "truth": "Four cells of memory are enough to compute anything — the universe needs almost nothing to become everything. Origination from a rule that never meant to originate.",
@@ -123,20 +126,21 @@
         "small": [
           "living_paper_rule110"
         ],
-        "medium": [],
+        "medium": [
+          "rule110_bench"
+        ],
         "large": [
           "grid2d_rule110"
         ],
-        "applied": []
+        "applied": [
+          "rule110_computer"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Conway's Game of Life": {
-      "count": 8,
-      "map_ready": 8,
+      "count": 9,
+      "map_ready": 9,
       "has_image": 8,
       "best": "game_of_life_petri",
       "truth": "Three numbers — born on 3, live on 2 or 3 — and gliders walk, guns fire, computers run. No designer, only neighbours.",
@@ -150,7 +154,9 @@
           "game_of_life_oop_vr",
           "game_of_life_vr"
         ],
-        "medium": [],
+        "medium": [
+          "life_bench"
+        ],
         "large": [
           "cellular_automata_2d",
           "mirrored_cellular_automata"
@@ -159,13 +165,11 @@
           "ca_conway_city"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Life patterns & variants": {
-      "count": 3,
-      "map_ready": 3,
+      "count": 5,
+      "map_ready": 5,
       "has_image": 3,
       "best": "ca_bridge",
       "truth": "Same neighbour-count, a different birth rule, a different zoo — life-like is a family of laws, not the law.",
@@ -175,21 +179,22 @@
         "small": [
           "pulsing_ca"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "life_zoo_bench"
+        ],
+        "large": [
+          "life_rules_room"
+        ],
         "applied": [
           "ca_bridge",
           "ca_columns"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Brian's Brain / multi-state": {
-      "count": 2,
-      "map_ready": 2,
+      "count": 4,
+      "map_ready": 4,
       "has_image": 2,
       "best": "grid2d_brians_brain",
       "truth": "Add a dying state and the field never rests — perpetual motion from a rule that only knows on, fading, off.",
@@ -199,28 +204,33 @@
         "small": [
           "living_paper_brians_brain"
         ],
-        "medium": [],
+        "medium": [
+          "brians_brain_bench"
+        ],
         "large": [
           "grid2d_brians_brain"
         ],
-        "applied": []
+        "applied": [
+          "brians_brain_display"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Wireworld / CA circuits": {
-      "count": 2,
-      "map_ready": 2,
+      "count": 4,
+      "map_ready": 4,
       "has_image": 2,
       "best": "grid2d_wireworld",
       "truth": "Four states make wires, and wires make logic — a universe whose entire physics is electronics.",
       "act": "Act III — beyond binary (states & neighbours)",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "wireworld_toy"
+        ],
+        "medium": [
+          "wireworld_bench"
+        ],
         "large": [
           "grid2d_wireworld"
         ],
@@ -228,44 +238,47 @@
           "wireworld_circuit"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Langton's ant / turmites": {
-      "count": 1,
-      "map_ready": 1,
+      "count": 4,
+      "map_ready": 4,
       "has_image": 1,
       "best": "grid2d_langtons_ant",
       "truth": "One ant, two rules; ten thousand steps of chaos, then it builds a highway — order that arrives only if you are willing to wait for it.",
       "act": "Act III — beyond binary (states & neighbours)",
-      "thin": true,
+      "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "langton_toy"
+        ],
+        "medium": [
+          "langton_bench"
+        ],
         "large": [
           "grid2d_langtons_ant"
         ],
-        "applied": []
+        "applied": [
+          "langton_swarm"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Alternative neighbourhoods (hex)": {
-      "count": 3,
-      "map_ready": 3,
+      "count": 5,
+      "map_ready": 5,
       "has_image": 3,
       "best": "7_8_hexagon_ca_vr",
       "truth": "Change the shape of 'nearby' and you change what can live — the neighbourhood is a politics, not a given.",
       "act": "Act III — beyond binary (states & neighbours)",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "hex_ca_toy"
+        ],
+        "medium": [
+          "neighbourhood_bench"
+        ],
         "large": [
           "7_8_hexagon_ca_vr",
           "hexagon_ca_vr"
@@ -274,14 +287,11 @@
           "hexagon_cave_vr"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Continuous CA (Lenia)": {
-      "count": 2,
-      "map_ready": 2,
+      "count": 4,
+      "map_ready": 4,
       "has_image": 2,
       "best": "lenia_continuous",
       "truth": "Let the cells be fractions, not bits, and the gliders grow soft bodies — life at the edge, made smooth.",
@@ -294,17 +304,18 @@
         "medium": [
           "CA_sphere"
         ],
-        "large": [],
-        "applied": []
+        "large": [
+          "lenia_room"
+        ],
+        "applied": [
+          "lenia_aquarium"
+        ]
       },
-      "missing_tiers": [
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Reaction-diffusion (Turing)": {
-      "count": 8,
-      "map_ready": 7,
+      "count": 9,
+      "map_ready": 8,
       "has_image": 8,
       "best": "reaction_diffusion",
       "truth": "Two chemicals and two numbers paint every animal's coat — Turing's answer to how a uniform egg becomes a striped thing. Form from a seed, with no blueprint.",
@@ -318,7 +329,9 @@
           "living_paper_reaction_diffusion",
           "turing_pattern"
         ],
-        "medium": [],
+        "medium": [
+          "reaction_diffusion_bench"
+        ],
         "large": [
           "shader_10_reactiondiffusion"
         ],
@@ -327,57 +340,59 @@
           "gray_scott_comparison"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Lattice gas / physical CA": {
-      "count": 1,
-      "map_ready": 1,
+      "count": 4,
+      "map_ready": 4,
       "has_image": 1,
       "best": "lattice_gas_automata",
       "truth": "Make the cells conserve momentum and the grid becomes a fluid — physics as bookkeeping on a lattice.",
       "act": "Act IV — matter & chemistry",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "lattice_gas_automata"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "lattice_gas_bench"
+        ],
+        "large": [
+          "lattice_gas_room"
+        ],
+        "applied": [
+          "lattice_gas_pump"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "The four Wolfram classes": {
-      "count": 1,
-      "map_ready": 1,
+      "count": 4,
+      "map_ready": 4,
       "has_image": 1,
       "best": "ca_rule_comparison",
       "truth": "Frozen, periodic, chaotic, complex — Wolfram's four weathers. The Principle of Computational Equivalence says they are all the same; the queer reading says only the fourth, the edge, is alive.",
       "act": "Act V — the edge of chaos",
-      "thin": true,
+      "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "four_classes_toy"
+        ],
+        "medium": [
+          "four_classes_bench"
+        ],
+        "large": [
+          "four_classes_room"
+        ],
         "applied": [
           "ca_rule_comparison"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Edge of chaos / self-organisation": {
-      "count": 4,
-      "map_ready": 4,
+      "count": 5,
+      "map_ready": 5,
       "has_image": 4,
       "best": "self_organization_ca",
       "truth": "Between the rule that dies and the rule that screams is a narrow band where structure persists by moving — lambda_edge, the queer middle that refuses both order and noise.",
@@ -387,7 +402,9 @@
         "small": [
           "self_organization_ca"
         ],
-        "medium": [],
+        "medium": [
+          "edge_of_chaos_bench"
+        ],
         "large": [
           "ca_screen"
         ],
@@ -396,9 +413,7 @@
           "recrystallization_ca"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "3D / volumetric CA": {
       "count": 8,
@@ -429,16 +444,20 @@
       "missing_tiers": []
     },
     "Growth & dendrites": {
-      "count": 5,
-      "map_ready": 5,
+      "count": 7,
+      "map_ready": 7,
       "has_image": 5,
       "best": "ca_growth_network",
       "truth": "Local accretion with no plan grows a coral, a crack, a chair — structure as frozen history, the run you cannot un-run.",
       "act": "Act VI — structure & world",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "dendrite_toy"
+        ],
+        "medium": [
+          "dendrite_bench"
+        ],
         "large": [
           "structure_growth"
         ],
@@ -449,14 +468,11 @@
           "decaying_bridge"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Caves / percolation / cracks": {
-      "count": 4,
-      "map_ready": 4,
+      "count": 5,
+      "map_ready": 5,
       "has_image": 4,
       "best": "crack_propagation_ca",
       "truth": "Vote with your neighbours and a noise field becomes a walkable cave — randomness smoothed, by a rule, into a place. (Bridges back to the randomness ladder.)",
@@ -466,7 +482,9 @@
         "small": [
           "percolation_ca"
         ],
-        "medium": [],
+        "medium": [
+          "cave_bench"
+        ],
         "large": [
           "percolationnetwork_ca"
         ],
@@ -475,62 +493,64 @@
           "crackpropagation_ca"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Stigmergy & ecological CA": {
-      "count": 3,
-      "map_ready": 3,
+      "count": 6,
+      "map_ready": 6,
       "has_image": 3,
       "best": "stigmergy_grid",
       "truth": "The trail IS the memory — agents that write on the world and read it back are a cellular automaton wearing legs.",
       "act": "Act VI — structure & world",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "stigmergy_toy"
+        ],
+        "medium": [
+          "stigmergy_bench"
+        ],
+        "large": [
+          "stigmergy_room"
+        ],
         "applied": [
           "stigmergy_grid",
           "disease_spread_ca",
           "mold_network"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "CA materials & texture": {
-      "count": 2,
-      "map_ready": 2,
+      "count": 5,
+      "map_ready": 5,
       "has_image": 2,
       "best": "mirror_cellular_texture_for_3d",
       "truth": "A rule run to equilibrium is a texture; the Persian rug is an algorithm that forgot it was ever running.",
       "act": "Act VI — structure & world",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "ca_texture_toy"
+        ],
+        "medium": [
+          "ca_texture_bench"
+        ],
+        "large": [
+          "ca_texture_wall"
+        ],
         "applied": [
           "mirror_cellular_texture_for_3d",
           "persian_rug"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     }
   },
-  "total": 75,
-  "map_ready_total": 74,
+  "total": 114,
+  "map_ready_total": 113,
   "image_total": 75,
-  "empty_slots": 39,
+  "empty_slots": 0,
   "groups": {
     "Elementary CA (1D rules)": [
       {
@@ -642,6 +662,17 @@
         "score": 3,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "elementary_ca_bench",
+        "name": "Elementary CA Bench (256 universes)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
       }
     ],
     "Rule 30 — order to randomness": [
@@ -688,6 +719,28 @@
         "score": 7,
         "fp": 1,
         "tier": "small"
+      },
+      {
+        "lookup": "rule30_bench",
+        "name": "Rule 30 Bench (order becomes chance)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "rule30_rng",
+        "name": "Rule 30 RNG (determinism as a dice)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
       }
     ],
     "Rule 90 — Sierpinski": [
@@ -712,6 +765,39 @@
         "score": 7,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "rule90_bench",
+        "name": "Rule 90 Bench (Sierpinski forms)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "rule90_loom",
+        "name": "Rule 90 Loom (Sierpinski fabric)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "rule90_toy",
+        "name": "Rule 90 Toy (the fractal in the rule)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
       }
     ],
     "Rule 110 — universal computation": [
@@ -736,6 +822,28 @@
         "score": 9,
         "fp": 1,
         "tier": "small"
+      },
+      {
+        "lookup": "rule110_bench",
+        "name": "Rule 110 Bench (gliders)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "rule110_computer",
+        "name": "Rule 110 Computer (universal)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
       }
     ],
     "Conway's Game of Life": [
@@ -826,6 +934,17 @@
         "score": 6,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "life_bench",
+        "name": "Life Bench (glider gun)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
       }
     ],
     "Life patterns & variants": [
@@ -861,6 +980,28 @@
         "score": 6,
         "fp": 1,
         "tier": "small"
+      },
+      {
+        "lookup": "life_rules_room",
+        "name": "Life Rules Room (a family of laws)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "life_zoo_bench",
+        "name": "Life Zoo Bench (still / pulse / travel)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
       }
     ],
     "Brian's Brain / multi-state": [
@@ -885,6 +1026,28 @@
         "score": 12,
         "fp": 1,
         "tier": "small"
+      },
+      {
+        "lookup": "brians_brain_bench",
+        "name": "Brian's Brain Bench (on, fading, off)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "brians_brain_display",
+        "name": "Brian's Brain Display (shimmer screen)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
       }
     ],
     "Wireworld / CA circuits": [
@@ -909,6 +1072,28 @@
         "score": 11,
         "fp": 1,
         "tier": "applied"
+      },
+      {
+        "lookup": "wireworld_bench",
+        "name": "Wireworld Bench (a logic gate)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "wireworld_toy",
+        "name": "Wireworld Toy (electrons run a loop)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
       }
     ],
     "Langton's ant / turmites": [
@@ -922,6 +1107,39 @@
         "score": 11,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "langton_bench",
+        "name": "Langton's Ant Bench (the highway)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "langton_swarm",
+        "name": "Turmite Swarm (generative paint)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "langton_toy",
+        "name": "Langton's Ant Toy (held)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
       }
     ],
     "Alternative neighbourhoods (hex)": [
@@ -957,6 +1175,28 @@
         "score": 7,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "hex_ca_toy",
+        "name": "Hex CA Toy (six neighbours)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "neighbourhood_bench",
+        "name": "Neighbourhood Bench (a politics)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
       }
     ],
     "Continuous CA (Lenia)": [
@@ -981,6 +1221,28 @@
         "score": 6,
         "fp": 4,
         "tier": "medium"
+      },
+      {
+        "lookup": "lenia_aquarium",
+        "name": "Lenia Tank (creature aquarium)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "lenia_room",
+        "name": "Lenia Room (soft gliders)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
       }
     ],
     "Reaction-diffusion (Turing)": [
@@ -1071,6 +1333,17 @@
         "score": 12,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "reaction_diffusion_bench",
+        "name": "Reaction-Diffusion Bench (Turing)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
       }
     ],
     "Lattice gas / physical CA": [
@@ -1084,6 +1357,39 @@
         "score": 11,
         "fp": 1,
         "tier": "small"
+      },
+      {
+        "lookup": "lattice_gas_bench",
+        "name": "Lattice Gas Bench (fluid from cells)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "lattice_gas_pump",
+        "name": "Lattice Wind Tunnel (vortices)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "lattice_gas_room",
+        "name": "Lattice Gas Room (flow + obstacle)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
       }
     ],
     "The four Wolfram classes": [
@@ -1097,6 +1403,39 @@
         "score": 7,
         "fp": 9,
         "tier": "applied"
+      },
+      {
+        "lookup": "four_classes_bench",
+        "name": "Four Classes Bench (four weathers)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "four_classes_room",
+        "name": "Four Classes Room (the edge is alive)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "four_classes_toy",
+        "name": "Four Classes Toy (held strips)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
       }
     ],
     "Edge of chaos / self-organisation": [
@@ -1143,6 +1482,17 @@
         "score": 7,
         "fp": 1,
         "tier": "applied"
+      },
+      {
+        "lookup": "edge_of_chaos_bench",
+        "name": "Edge of Chaos Bench (lambda dial)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
       }
     ],
     "3D / volumetric CA": [
@@ -1290,6 +1640,28 @@
         "score": 6,
         "fp": 9,
         "tier": "applied"
+      },
+      {
+        "lookup": "dendrite_bench",
+        "name": "Dendrite Bench (coral growth)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "dendrite_toy",
+        "name": "Dendrite Toy (DLA crystal)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
       }
     ],
     "Caves / percolation / cracks": [
@@ -1336,6 +1708,17 @@
         "score": 7,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "cave_bench",
+        "name": "Cave CA Bench (noise to place)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
       }
     ],
     "Stigmergy & ecological CA": [
@@ -1371,6 +1754,39 @@
         "score": 6,
         "fp": 4,
         "tier": "applied"
+      },
+      {
+        "lookup": "stigmergy_bench",
+        "name": "Stigmergy Bench (self-reinforcing trails)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "stigmergy_room",
+        "name": "Stigmergy Room (slime-mould network)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "stigmergy_toy",
+        "name": "Stigmergy Toy (ant trails)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
       }
     ],
     "CA materials & texture": [
@@ -1395,6 +1811,39 @@
         "score": 7,
         "fp": 9,
         "tier": "applied"
+      },
+      {
+        "lookup": "ca_texture_bench",
+        "name": "CA Texture Bench (settle to texture)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "ca_texture_toy",
+        "name": "CA Texture Toy (frozen swatch)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "ca_texture_wall",
+        "name": "CA Texture Wall (the rug is an algorithm)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": false,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
       }
     ]
   }

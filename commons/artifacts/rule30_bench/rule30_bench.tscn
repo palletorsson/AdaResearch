@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/rule30_bench/rule30_bench.gd" id="1"]
+
+[node name="Rule30Bench" type="Node3D"]
+script = ExtResource("1")
