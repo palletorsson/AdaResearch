@@ -18,6 +18,7 @@ Recipes can be composed via union()/subtract() to build complex shapes:
 """
 from __future__ import annotations
 
+import random
 from typing import Callable
 
 FRAME_ROWS = 16
@@ -158,6 +159,95 @@ def island_chain(params: dict | None = None) -> list[list[str]]:
     return grid
 
 
+# ─── Jitter field (levels + voids) ─────────────────────────────────────────
+
+def jittered_corridor(params: dict | None = None) -> list[list[str]]:
+    """A height FIELD driven by one `jitter` knob (0..1) + a seed.
+
+    jitter 0   -> flat floor (height 1), identical to flat_corridor.
+    jitter 0.5 -> gentle relief, 1-2 levels.
+    jitter 1   -> 1-3 levels with occasional voids.
+
+    This is the "levels + voids" half of the central question: you set the
+    roughness, the field generates. The "slopes + bridges" half is derived
+    separately by derive_connectors() so the result stays walkable.
+    The spine column (spawn..teleport) is kept floor so the corridor is never
+    severed; voids only appear off the centre line.
+    """
+    params = params or {}
+    jitter = max(0.0, min(1.0, float(params.get("jitter", 0.0))))
+    if jitter <= 0.001:
+        return flat_corridor()
+    seed = int(params.get("seed", 0))
+    spine_col = int(params.get("spine_col", FRAME_COLS // 2 - 1))
+    rng = random.Random(seed)
+    max_level = 1 + max(1, round(jitter * 2))      # 2 at low jitter, 3 at high
+    void_thresh = 0.10 * jitter                     # how much may drop to void
+
+    # 1. random field, then smooth so levels form contiguous, climbable regions
+    f = [[rng.random() for _ in range(FRAME_COLS)] for _ in range(FRAME_ROWS)]
+    for _ in range(2):
+        g = [[0.0] * FRAME_COLS for _ in range(FRAME_ROWS)]
+        for r in range(FRAME_ROWS):
+            for c in range(FRAME_COLS):
+                s, n = f[r][c], 1
+                for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                    rr, cc = r + dr, c + dc
+                    if 0 <= rr < FRAME_ROWS and 0 <= cc < FRAME_COLS:
+                        s += f[rr][cc]; n += 1
+                g[r][c] = s / n
+        f = g
+    # normalise smoothed field to span [0,1] so quantisation uses the full range
+    lo = min(min(row) for row in f); hi = max(max(row) for row in f)
+    span = max(1e-6, hi - lo)
+
+    grid = _blank("")
+    for r in range(FRAME_ROWS):
+        for c in range(FRAME_COLS):
+            v = (f[r][c] - lo) / span
+            on_spine = abs(c - spine_col) <= 1
+            if v < void_thresh and not on_spine:
+                grid[r][c] = "0"                    # void off the spine
+            else:
+                lvl = 1 + int(round(v * (max_level - 1)))
+                grid[r][c] = str(max(1, min(max_level, lvl)))
+    return grid
+
+
+def _h(grid: list[list[str]], r: int, c: int) -> int:
+    if r < 0 or r >= FRAME_ROWS or c < 0 or c >= FRAME_COLS:
+        return 0
+    try:
+        return int(grid[r][c])
+    except (ValueError, TypeError):
+        return 0
+
+
+def derive_connectors(grid: list[list[str]]) -> tuple[list[tuple[int, int]], list[tuple[int, int]]]:
+    """The "slopes + bridges" half — solved, never authored, so the field walks.
+
+    Returns (wedges, bridges):
+      wedge  = a floor cell with an orthogonal neighbour one+ level higher
+               (a ramp UP to it) -> place a `wp` there.
+      bridge = a void cell with floor on opposite sides -> span it with a `tc`.
+    """
+    wedges: list[tuple[int, int]] = []
+    bridges: list[tuple[int, int]] = []
+    for r in range(FRAME_ROWS):
+        for c in range(FRAME_COLS):
+            hv = _h(grid, r, c)
+            if hv >= 1:
+                for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                    if _h(grid, r + dr, c + dc) > hv:
+                        wedges.append((r, c)); break
+            else:
+                lr, rr = _h(grid, r, c - 1), _h(grid, r, c + 1)
+                up, dn = _h(grid, r - 1, c), _h(grid, r + 1, c)
+                if (lr > 0 and rr > 0) or (up > 0 and dn > 0):
+                    bridges.append((r, c))
+    return wedges, bridges
+
+
 # ─── Composition ──────────────────────────────────────────────────────────
 
 def union(a: list[list[str]], b: list[list[str]]) -> list[list[str]]:
@@ -203,6 +293,7 @@ RECIPES: dict[str, Callable[[dict | None], list[list[str]]]] = {
     "amphitheater":      amphitheater,
     "split_level":       split_level,
     "island_chain":      island_chain,
+    "jittered_corridor": jittered_corridor,
 }
 
 

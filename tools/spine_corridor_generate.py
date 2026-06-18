@@ -424,7 +424,7 @@ def try_place_artifacts(tokens: list[dict], hints_map: dict, rng: random.Random)
     return placements, score_layout(placements, hints_map)
 
 
-def generate_corridor(tokens: list[dict], hints_map: dict, candidates: int, base_seed: int, verbose: bool, style: dict | None = None) -> dict | None:
+def generate_corridor(tokens: list[dict], hints_map: dict, candidates: int, base_seed: int, verbose: bool, style: dict | None = None, jitter: float = 0.0) -> dict | None:
     best = None
     best_score = -1e9
     for i in range(candidates):
@@ -439,7 +439,7 @@ def generate_corridor(tokens: list[dict], hints_map: dict, candidates: int, base
                 print(f"    candidate {i}: score={score:.2f}, placed={len(placements)}/{len(tokens)}")
     if best is None:
         return None
-    data = build_map_data(best, best_score, style)
+    data = build_map_data(best, best_score, style, jitter, base_seed)
     if style:
         data["_generated"]["style"] = {
             "structure_recipe": style.get("structure_recipe", "flat_corridor"),
@@ -449,11 +449,17 @@ def generate_corridor(tokens: list[dict], hints_map: dict, candidates: int, base
     return data
 
 
-def build_map_data(placements: list[dict], score: float, style: dict | None = None) -> dict:
+def build_map_data(placements: list[dict], score: float, style: dict | None = None, jitter: float = 0.0, seed: int = 0) -> dict:
     """Turn a placement list into the map_data.json shape GridSystem consumes."""
     style = style or {}
-    recipe_name = str(style.get("structure_recipe", "flat_corridor"))
-    recipe_params = style.get("structure_params", {}) or {}
+    if jitter and jitter > 0.001:
+        # jitter overrides the style recipe: a height FIELD (levels + voids), with
+        # slopes + bridges derived below so it stays walkable. The central question, applied.
+        recipe_name = "jittered_corridor"
+        recipe_params = {"jitter": jitter, "seed": seed, "spine_col": SPAWN_COL}
+    else:
+        recipe_name = str(style.get("structure_recipe", "flat_corridor"))
+        recipe_params = style.get("structure_params", {}) or {}
     structure = structure_recipes.build_structure(recipe_name, recipe_params)
     # Guarantee spawn + teleport cells walkable regardless of recipe
     structure = structure_recipes.guarantee_walkable(structure, [
@@ -478,6 +484,19 @@ def build_map_data(placements: list[dict], score: float, style: dict | None = No
             cell += "#" + p["extra_cfg"]
         interactables[p["row"]][p["col"]] = cell
 
+    # derive slopes (wp) + bridges (tc) so the jittered height field stays walkable
+    n_wedge = n_bridge = 0
+    if jitter and jitter > 0.001:
+        wedges, bridges = structure_recipes.derive_connectors(structure)
+        for (r, c) in bridges:
+            structure[r][c] = "1"                          # a bridged void becomes walkable floor
+        for (r, c) in wedges:
+            if utilities[r][c] == "" and interactables[r][c] == "":
+                utilities[r][c] = "wp"; n_wedge += 1       # ramp up a level step
+        for (r, c) in bridges:
+            if utilities[r][c] == "" and interactables[r][c] == "":
+                utilities[r][c] = "tc"; n_bridge += 1      # transport cube over the gap
+
     return {
         "_generated": {
             "generator": "spine_corridor_generate.py",
@@ -485,6 +504,9 @@ def build_map_data(placements: list[dict], score: float, style: dict | None = No
             "frame": [FRAME_ROWS, FRAME_COLS],
             "placements": len(placements),
             "score": round(score, 2),
+            "jitter": jitter,
+            "wedges": n_wedge,
+            "bridges": n_bridge,
         },
         "map_info": {
             "name": "SpineCorridor",
@@ -518,6 +540,7 @@ def main() -> int:
     ap.add_argument("--map", help="restrict to one map in the sequence")
     ap.add_argument("--candidates", type=int, default=50)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--jitter", type=float, default=0.0, help="height-field roughness 0..1 — levels + voids, with slopes/bridges auto-derived")
     ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
@@ -564,7 +587,7 @@ def main() -> int:
                 h = hints_map[t["token"]]
                 print(f"    {t['token']:<36s} role={h['role']:<11s} fp={h['footprint']} budget={h['budget_ms']}")
 
-        result = generate_corridor(tokens, hints_map, args.candidates, args.seed, args.verbose, style)
+        result = generate_corridor(tokens, hints_map, args.candidates, args.seed, args.verbose, style, args.jitter)
         if result is None:
             print(f"[FAIL] {map_name} -- no viable layout in {args.candidates} candidates")
             fail.append(map_name)
