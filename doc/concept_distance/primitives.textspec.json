@@ -1,0 +1,17 @@
+{
+  "domain": "primitives",
+  "title": "Primitives - from the map tutorials",
+  "note": "Distance derived from the existing Point_*/Primitives_* maps' blurb.md + intent.md, in beat order P1-P7. Cosine over TF-IDF.",
+  "mode": "maps",
+  "spacing": {"base": 2, "k": 10},
+  "nodes": [
+    {"id": "P1",  "map": "Point_One",               "lookup": "origin",             "name": "the point"},
+    {"id": "P2",  "map": "Point_Lines",             "lookup": "grabbable_line",     "name": "the line"},
+    {"id": "P3",  "map": "Point_Trace",             "lookup": "coordinate_lines",   "name": "the trace"},
+    {"id": "P4",  "map": "Point_Line_Grid",         "lookup": "grid_lines",         "name": "the grid"},
+    {"id": "P5",  "map": "Point_Triangle",          "lookup": "interactivetriangle","name": "the triangle"},
+    {"id": "P5b", "map": "Point_Triangle_Context",  "lookup": "draw_triangle_faces","name": "the triangle in context"},
+    {"id": "P6",  "map": "Primitives_Polythedra",   "lookup": "tetrahedron",        "name": "the platonic solids"},
+    {"id": "P7",  "map": "Point_Animatedcube",      "lookup": "animated_cube",      "name": "the animated cube"}
+  ]
+}

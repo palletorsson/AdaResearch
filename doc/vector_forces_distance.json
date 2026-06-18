@@ -1,19 +1,9 @@
 {
   "domain": "vector_forces",
-  "title": "Vectors & Forces - Mental Model",
-  "note": "Extracted from the Obsidian mental-model graph (brain-vault). Nodes are artifacts; edges are cosine distance over a 10-feature embedding. The short Nature-of-Code path: Vectors (motion-first) then Forces.",
-  "feature_names": [
-    "domain",
-    "additive",
-    "scaling",
-    "magnitude",
-    "direction",
-    "motion",
-    "resistance",
-    "attraction",
-    "scale",
-    "dynamism"
-  ],
+  "title": "Vectors & Forces - from the tutorial scripts",
+  "note": "Distance derived from doc/vector_forces_tutorial_scripts.md — each ### concept section's Hook/Do/See/Truth prose is one node. Cosine over TF-IDF: two concepts are close when the tutorial teaches them with the same language.",
+  "method": "tfidf-cosine",
+  "derived_from": "doc/vector_forces_tutorial_scripts.md",
   "spacing": {
     "base": 2,
     "k": 10
@@ -21,474 +11,990 @@
   "order": [
     "coordinatesystem3m",
     "vectorbasics",
-    "vector_add",
-    "vector_sub",
-    "example_2_3_gravity_scaled_by_mass_vr",
     "length_lantern",
     "vector_normalize_demo",
-    "vectormotion",
-    "bubble_blaster",
+    "vector_add",
+    "vector_sub",
+    "example_2_3_gravity_scaled_by_mass",
+    "dot_aligner",
+    "projection_shadow",
+    "torque_crank",
+    "weather_vector_field",
     "launch_arc",
-    "force_cube",
-    "force_pad",
     "force_mower",
     "drag_lane",
-    "drag_corridor",
+    "launch_arc",
+    "circle_train",
     "orbit_pair",
-    "orbit_walk",
-    "centrifuge_ring"
+    "spring_bob",
+    "pendulum_swing",
+    "momentum_cradle",
+    "bounce_well",
+    "lever_balance",
+    "weather_vane",
+    "force_field_zone"
   ],
   "nodes": [
     {
-      "id": "V0",
+      "id": "01",
       "lookup": "coordinatesystem3m",
-      "name": "axes & origin"
+      "name": "Coordinate system",
+      "source": "### 01. Coordinate system — `CoordinateSystem3M`",
+      "top_terms": [
+        "axe",
+        "number",
+        "coordinate",
+        "system",
+        "meet",
+        "origin"
+      ]
     },
     {
-      "id": "V1",
+      "id": "02",
       "lookup": "vectorbasics",
-      "name": "what is a vector"
+      "name": "Vector basics",
+      "source": "### 02. Vector basics — `VectorBasics`  **[needs scale]**",
+      "top_terms": [
+        "vector",
+        "arrow",
+        "basic",
+        "displacement",
+        "grab",
+        "follow"
+      ]
     },
     {
-      "id": "V2",
-      "lookup": "vector_add",
-      "name": "addition"
-    },
-    {
-      "id": "V3",
-      "lookup": "vector_sub",
-      "name": "subtraction"
-    },
-    {
-      "id": "V4",
-      "lookup": "example_2_3_gravity_scaled_by_mass_vr",
-      "name": "multiplication (scaling)"
-    },
-    {
-      "id": "V5",
+      "id": "03",
       "lookup": "length_lantern",
-      "name": "magnitude"
+      "name": "Magnitude / length",
+      "source": "### 03. Magnitude / length — `length_lantern`",
+      "top_terms": [
+        "magnitude",
+        "length",
+        "arrow",
+        "stretch",
+        "lantern",
+        "brighten"
+      ]
     },
     {
-      "id": "V6",
+      "id": "04",
       "lookup": "vector_normalize_demo",
-      "name": "normalize"
+      "name": "Unit vector / normalize",
+      "source": "### 04. Unit vector / normalize — `vector_normalize_demo`  **[needs scale]**",
+      "top_terms": [
+        "unit",
+        "length",
+        "direction",
+        "vector",
+        "normalize",
+        "away"
+      ]
     },
     {
-      "id": "V7",
-      "lookup": "vectormotion",
-      "name": "velocity"
+      "id": "05",
+      "lookup": "vector_add",
+      "name": "Addition",
+      "source": "### 05. Addition — `vector_add`  (intimate) + `vector_addition_walk` (walk-in)",
+      "top_terms": [
+        "walk",
+        "addition",
+        "end",
+        "dual",
+        "resultant",
+        "arrive"
+      ]
     },
     {
-      "id": "V8",
-      "lookup": "bubble_blaster",
-      "name": "velocity, embodied"
+      "id": "06",
+      "lookup": "vector_sub",
+      "name": "Subtraction",
+      "source": "### 06. Subtraction — `vector_sub`",
+      "top_terms": [
+        "subtraction",
+        "flip",
+        "difference",
+        "appear",
+        "b",
+        "add"
+      ]
     },
     {
-      "id": "V9",
+      "id": "07",
+      "lookup": "example_2_3_gravity_scaled_by_mass",
+      "name": "Scaling",
+      "source": "### 07. Scaling — `example_2_3_gravity_scaled_by_mass`",
+      "top_terms": [
+        "twice",
+        "scalar",
+        "scaling",
+        "heavy",
+        "proportionally",
+        "change"
+      ]
+    },
+    {
+      "id": "08",
+      "lookup": "dot_aligner",
+      "name": "Dot product",
+      "source": "### 08. Dot product — `dot_aligner`  (turret) + `vector_dot_product_xl` (walk-in)",
+      "top_terms": [
+        "foe",
+        "dot",
+        "aim",
+        "charge",
+        "product",
+        "agreement"
+      ]
+    },
+    {
+      "id": "09",
+      "lookup": "projection_shadow",
+      "name": "Projection / reflection",
+      "source": "### 09. Projection / reflection — `projection_shadow`  + `vector_projection_reflection_xl`",
+      "top_terms": [
+        "rail",
+        "projection",
+        "object",
+        "perpendicular",
+        "along",
+        "reflection"
+      ]
+    },
+    {
+      "id": "10",
+      "lookup": "torque_crank",
+      "name": "Cross product / torque",
+      "source": "### 10. Cross product / torque — `torque_crank`  + `vector_cross_product_xl`",
+      "top_terms": [
+        "spin",
+        "cro",
+        "product",
+        "push",
+        "direction",
+        "torque"
+      ]
+    },
+    {
+      "id": "11",
+      "lookup": "weather_vector_field",
+      "name": "Vector field / flow",
+      "source": "### 11. Vector field / flow — `weather_vector_field`  **[needs scale]**",
+      "top_terms": [
+        "field",
+        "push",
+        "vector",
+        "flow",
+        "whole",
+        "function"
+      ]
+    },
+    {
+      "id": "12",
       "lookup": "launch_arc",
-      "name": "acceleration"
+      "name": "Motion / velocity",
+      "source": "### 12. Motion / velocity — `launch_arc`  **[needs scale]**",
+      "top_terms": [
+        "straight",
+        "launch",
+        "motion",
+        "velocity",
+        "ever",
+        "power"
+      ]
     },
     {
-      "id": "F1",
-      "lookup": "force_cube",
-      "name": "force = m*a"
-    },
-    {
-      "id": "F2",
-      "lookup": "force_pad",
-      "name": "net force"
-    },
-    {
-      "id": "F3",
+      "id": "13",
       "lookup": "force_mower",
-      "name": "applying a force (work)"
+      "name": "Work (F·d)",
+      "source": "### 13. Work (F·d) — `force_mower`  **[needs scale]**",
+      "top_terms": [
+        "work",
+        "handle",
+        "part",
+        "push",
+        "mower",
+        "angled"
+      ]
     },
     {
-      "id": "F4",
+      "id": "14",
       "lookup": "drag_lane",
-      "name": "friction"
+      "name": "Friction / drag",
+      "source": "### 14. Friction / drag — `drag_lane`  **[needs scale]**",
+      "top_terms": [
+        "drag",
+        "run",
+        "honey",
+        "enter",
+        "media",
+        "rising"
+      ]
     },
     {
-      "id": "F5",
-      "lookup": "drag_corridor",
-      "name": "fluid resistance (drag)"
+      "id": "15",
+      "lookup": "launch_arc",
+      "name": "Projectile / launch",
+      "source": "### 15. Projectile / launch — `launch_arc` / `force_pad`",
+      "top_terms": [
+        "launch",
+        "projectile",
+        "arc",
+        "peaking",
+        "write",
+        "pad"
+      ]
     },
     {
-      "id": "F6",
+      "id": "16",
+      "lookup": "circle_train",
+      "name": "Centripetal",
+      "source": "### 16. Centripetal — `circle_train`  **[needs scale]**",
+      "top_terms": [
+        "speed",
+        "high",
+        "train",
+        "lean",
+        "curve",
+        "inward"
+      ]
+    },
+    {
+      "id": "17",
       "lookup": "orbit_pair",
-      "name": "gravitational attraction"
+      "name": "Gravity / orbit",
+      "source": "### 17. Gravity / orbit — `orbit_pair`  **[needs scale]**",
+      "top_terms": [
+        "orbit",
+        "falling",
+        "bodie",
+        "around",
+        "belong",
+        "neither"
+      ]
     },
     {
-      "id": "F7",
-      "lookup": "orbit_walk",
-      "name": "everything attracts (n-body)"
+      "id": "18",
+      "lookup": "spring_bob",
+      "name": "Spring / Hooke",
+      "source": "### 18. Spring / Hooke — `spring_bob`  **[needs scale]**",
+      "top_terms": [
+        "spring",
+        "hooke",
+        "coil",
+        "stiffen",
+        "give",
+        "le"
+      ]
     },
     {
-      "id": "F8",
-      "lookup": "centrifuge_ring",
-      "name": "circular motion"
+      "id": "19",
+      "lookup": "pendulum_swing",
+      "name": "Pendulum",
+      "source": "### 19. Pendulum — `pendulum_swing`  **[needs scale]**",
+      "top_terms": [
+        "string",
+        "pendulum",
+        "swing",
+        "oldest",
+        "clock",
+        "lengthen"
+      ]
+    },
+    {
+      "id": "20",
+      "lookup": "momentum_cradle",
+      "name": "Momentum / collision",
+      "source": "### 20. Momentum / collision — `momentum_cradle`  **[needs scale]**",
+      "top_terms": [
+        "momentum",
+        "ball",
+        "collision",
+        "lift",
+        "release",
+        "passe"
+      ]
+    },
+    {
+      "id": "21",
+      "lookup": "bounce_well",
+      "name": "Restitution / bounce",
+      "source": "### 21. Restitution / bounce — `bounce_well`  **[needs scale]**",
+      "top_terms": [
+        "bounce",
+        "quite",
+        "bouncine",
+        "fraction",
+        "last",
+        "tax"
+      ]
+    },
+    {
+      "id": "22",
+      "lookup": "lever_balance",
+      "name": "Lever / balance",
+      "source": "### 22. Lever / balance — `lever_balance`  (+ `calder_mobile` as showpiece)",
+      "top_terms": [
+        "weight",
+        "balanced",
+        "balance",
+        "beam",
+        "lever",
+        "tip"
+      ]
+    },
+    {
+      "id": "23",
+      "lookup": "weather_vane",
+      "name": "Wind / weather",
+      "source": "### 23. Wind / weather — `weather_vane`  **[needs scale]**",
+      "top_terms": [
+        "wind",
+        "force",
+        "weather",
+        "can't",
+        "crank",
+        "flag"
+      ]
+    },
+    {
+      "id": "24",
+      "lookup": "force_field_zone",
+      "name": "Force field (zone)",
+      "source": "### 24. Force field (zone) — `force_field_zone` + `vector_machine`",
+      "top_terms": [
+        "field",
+        "concept",
+        "cube",
+        "artifact",
+        "map",
+        "act"
+      ]
     }
   ],
   "matrix": [
     [
       0.0,
-      0.2545,
-      0.6442,
-      0.6153,
-      0.6712,
-      0.3945,
-      0.3628,
-      0.6362,
-      0.5619,
-      0.5857,
-      0.5569,
-      0.5859,
-      0.4439,
-      0.7014,
-      0.4401,
-      0.6756,
-      0.4301,
-      0.3923
+      0.5943,
+      0.9624,
+      0.7676,
+      0.7868,
+      0.9515,
+      0.8009,
+      0.6933,
+      0.9726,
+      0.8924,
+      0.6455,
+      0.8216,
+      0.9722,
+      0.9621,
+      0.9605,
+      0.9679,
+      0.8803,
+      0.8752,
+      0.8826,
+      0.9621,
+      0.9601,
+      0.9785,
+      0.9589,
+      0.7727
     ],
     [
-      0.2545,
+      0.5943,
       0.0,
-      0.5346,
-      0.4897,
-      0.5647,
-      0.319,
-      0.0604,
-      0.3962,
-      0.2893,
-      0.3629,
-      0.3381,
-      0.3759,
-      0.2888,
-      0.5203,
-      0.4755,
-      0.4457,
-      0.4138,
-      0.3314
+      0.5129,
+      0.0164,
+      0.829,
+      0.4879,
+      0.4198,
+      0.9038,
+      0.8775,
+      0.8396,
+      0.1745,
+      0.7117,
+      0.8963,
+      0.8693,
+      0.9558,
+      0.885,
+      0.6275,
+      0.8752,
+      0.8826,
+      0.8693,
+      0.8635,
+      0.6029,
+      0.7645,
+      0.6025
     ],
     [
-      0.6442,
-      0.5346,
+      0.9624,
+      0.5129,
       0.0,
-      0.007,
-      0.7341,
-      0.6854,
-      0.6083,
-      0.4192,
-      0.5118,
-      0.4332,
-      0.3625,
-      0.3354,
-      0.3779,
-      0.6562,
-      0.6223,
-      0.5349,
-      0.5203,
-      0.4653
+      0.4343,
+      0.9585,
+      0.7656,
+      0.4597,
+      0.8408,
+      0.8134,
+      0.9707,
+      0.8247,
+      0.9664,
+      0.9683,
+      0.9577,
+      0.9558,
+      0.964,
+      0.9664,
+      0.9601,
+      0.8427,
+      0.9577,
+      0.9554,
+      0.7743,
+      0.9542,
+      0.8908
     ],
     [
-      0.6153,
-      0.4897,
-      0.007,
+      0.7676,
+      0.0164,
+      0.4343,
       0.0,
-      0.7378,
-      0.682,
-      0.5443,
-      0.4663,
-      0.541,
-      0.4735,
-      0.378,
-      0.3667,
-      0.3806,
+      0.966,
+      0.6835,
+      0.3901,
+      0.8748,
+      0.8388,
+      0.5986,
+      0.4261,
+      0.6358,
+      0.9112,
+      0.8873,
+      0.8224,
+      0.9014,
+      0.9069,
+      0.8083,
+      0.7144,
+      0.7512,
+      0.7786,
+      0.7148,
+      0.6667,
+      0.4722
+    ],
+    [
+      0.7868,
+      0.829,
+      0.9585,
+      0.966,
+      0.0,
+      0.5657,
+      0.8955,
+      0.8396,
+      0.6952,
+      0.9714,
+      0.723,
+      0.9073,
+      0.9112,
+      0.6972,
+      0.7629,
+      0.9644,
+      0.9671,
+      0.9605,
+      0.6624,
+      0.9581,
+      0.9562,
+      0.7723,
+      0.5336,
+      0.7496
+    ],
+    [
+      0.9515,
+      0.4879,
+      0.7656,
+      0.6835,
+      0.5657,
+      0.0,
+      0.5853,
+      0.8807,
+      0.9597,
+      0.6788,
+      0.8537,
+      0.9562,
+      0.9585,
+      0.9456,
+      0.9433,
+      0.9531,
+      0.9562,
+      0.9484,
+      0.7813,
+      0.9456,
+      0.9429,
+      0.6475,
+      0.9417,
+      0.8224
+    ],
+    [
+      0.8009,
+      0.4198,
+      0.4597,
+      0.3901,
+      0.8955,
+      0.5853,
+      0.0,
+      0.9096,
+      0.7664,
+      0.752,
+      0.6964,
+      0.6346,
+      0.9159,
+      0.9609,
+      0.9589,
+      0.7034,
+      0.8443,
+      0.7304,
+      0.6843,
+      0.9609,
+      0.9589,
+      0.9308,
+      0.8357,
+      0.7379
+    ],
+    [
+      0.6933,
+      0.9038,
+      0.8408,
+      0.8748,
+      0.8396,
+      0.8807,
+      0.9096,
+      0.0,
+      0.9828,
+      0.5908,
+      0.9034,
+      0.8662,
+      0.8721,
+      0.9746,
+      0.973,
+      0.9789,
+      0.9808,
+      0.9761,
+      0.9785,
+      0.9746,
+      0.973,
+      0.734,
+      0.9722,
+      0.8302
+    ],
+    [
+      0.9726,
+      0.8775,
+      0.8134,
+      0.8388,
+      0.6952,
+      0.9597,
+      0.7664,
+      0.9828,
+      0.0,
+      0.858,
+      0.973,
+      0.8689,
+      0.6381,
+      0.9687,
+      0.9671,
+      0.9738,
+      0.9761,
+      0.9707,
+      0.6369,
+      0.9687,
+      0.9671,
+      0.874,
+      0.966,
+      1.0
+    ],
+    [
+      0.8924,
+      0.8396,
+      0.9707,
+      0.5986,
+      0.9714,
+      0.6788,
+      0.752,
+      0.5908,
+      0.858,
+      0.0,
+      0.3568,
+      0.7531,
+      0.6647,
+      0.9707,
+      0.8435,
+      0.9754,
+      0.9018,
+      0.9722,
+      0.7833,
+      0.7457,
+      0.9687,
       0.6761,
-      0.6407,
-      0.5541,
-      0.5386,
-      0.485
+      0.7406,
+      0.4577
     ],
     [
-      0.6712,
-      0.5647,
-      0.7341,
-      0.7378,
+      0.6455,
+      0.1745,
+      0.8247,
+      0.4261,
+      0.723,
+      0.8537,
+      0.6964,
+      0.9034,
+      0.973,
+      0.3568,
       0.0,
-      0.4974,
-      0.471,
-      0.5917,
-      0.5441,
-      0.5147,
-      0.361,
-      0.532,
-      0.5093,
-      0.601,
-      0.5927,
-      0.3851,
-      0.4036,
-      0.4758
+      0.5794,
+      0.4245,
+      0.8807,
+      0.9605,
+      0.8951,
+      0.8118,
+      0.8862,
+      0.8333,
+      0.8807,
+      0.766,
+      0.8595,
+      0.1299,
+      0.0
     ],
     [
-      0.3945,
-      0.319,
-      0.6854,
-      0.682,
-      0.4974,
+      0.8216,
+      0.7117,
+      0.9664,
+      0.6358,
+      0.9073,
+      0.9562,
+      0.6346,
+      0.8662,
+      0.8689,
+      0.7531,
+      0.5794,
       0.0,
-      0.4396,
-      0.6267,
-      0.5581,
-      0.5867,
-      0.546,
-      0.5859,
-      0.4923,
-      0.6515,
-      0.6152,
-      0.6201,
-      0.5919,
-      0.5582
+      0.7551,
+      0.5653,
+      0.1862,
+      0.9038,
+      0.8263,
+      0.813,
+      0.6796,
+      0.6987,
+      0.7175,
+      0.939,
+      0.5646,
+      0.5595
     ],
     [
-      0.3628,
-      0.0604,
-      0.6083,
-      0.5443,
-      0.471,
-      0.4396,
+      0.9722,
+      0.8963,
+      0.9683,
+      0.9112,
+      0.9112,
+      0.9585,
+      0.9159,
+      0.8721,
+      0.6381,
+      0.6647,
+      0.4245,
+      0.7551,
       0.0,
-      0.567,
-      0.4504,
-      0.5303,
-      0.4346,
-      0.5274,
-      0.4121,
-      0.6366,
-      0.6267,
-      0.5387,
-      0.5394,
-      0.4912
+      0.7672,
+      0.8059,
+      0.9081,
+      0.9135,
+      0.9002,
+      0.7676,
+      0.8951,
+      0.7574,
+      0.8764,
+      0.6381,
+      0.7461
     ],
     [
-      0.6362,
-      0.3962,
-      0.4192,
-      0.4663,
-      0.5917,
-      0.6267,
-      0.567,
+      0.9621,
+      0.8693,
+      0.9577,
+      0.8873,
+      0.6972,
+      0.9456,
+      0.9609,
+      0.9746,
+      0.9687,
+      0.9707,
+      0.8807,
+      0.5653,
+      0.7672,
       0.0,
-      0.025,
-      0.0327,
-      0.1723,
-      0.0971,
-      0.2581,
-      0.346,
-      0.3448,
-      0.2658,
-      0.2818,
-      0.1776
+      0.8177,
+      0.5896,
+      0.8905,
+      0.874,
+      0.8815,
+      0.8678,
+      0.8623,
+      0.975,
+      0.5133,
+      0.8376
     ],
     [
-      0.5619,
-      0.2893,
-      0.5118,
-      0.541,
-      0.5441,
-      0.5581,
-      0.4504,
-      0.025,
+      0.9605,
+      0.9558,
+      0.9558,
+      0.8224,
+      0.7629,
+      0.9433,
+      0.9589,
+      0.973,
+      0.9671,
+      0.8435,
+      0.9605,
+      0.1862,
+      0.8059,
+      0.8177,
       0.0,
-      0.0386,
-      0.1501,
-      0.1022,
-      0.218,
-      0.3087,
-      0.3058,
-      0.239,
-      0.2536,
-      0.1481
+      0.9621,
+      0.8635,
+      0.7688,
+      0.7054,
+      0.7586,
+      0.9531,
+      0.9738,
+      0.7825,
+      0.6213
     ],
     [
-      0.5857,
-      0.3629,
-      0.4332,
-      0.4735,
-      0.5147,
-      0.5867,
-      0.5303,
-      0.0327,
-      0.0386,
+      0.9679,
+      0.885,
+      0.964,
+      0.9014,
+      0.9644,
+      0.9531,
+      0.7034,
+      0.9789,
+      0.9738,
+      0.9754,
+      0.8951,
+      0.9038,
+      0.9081,
+      0.5896,
+      0.9621,
       0.0,
-      0.0925,
-      0.0631,
-      0.1847,
-      0.2951,
-      0.289,
-      0.124,
-      0.1403,
-      0.0761
+      0.7848,
+      0.8893,
+      0.7688,
+      0.8838,
+      0.7332,
+      0.8818,
+      0.2254,
+      0.7508
     ],
     [
-      0.5569,
-      0.3381,
-      0.3625,
-      0.378,
-      0.361,
-      0.546,
-      0.4346,
-      0.1723,
-      0.1501,
-      0.0925,
+      0.8803,
+      0.6275,
+      0.9664,
+      0.9069,
+      0.9671,
+      0.9562,
+      0.8443,
+      0.9808,
+      0.9761,
+      0.9018,
+      0.8118,
+      0.8263,
+      0.9135,
+      0.8905,
+      0.8635,
+      0.7848,
       0.0,
-      0.0364,
-      0.0656,
-      0.2478,
-      0.2504,
-      0.0807,
-      0.1015,
-      0.0675
+      0.7676,
+      0.813,
+      0.8905,
+      0.8858,
+      0.6052,
+      0.7836,
+      0.7195
     ],
     [
-      0.5859,
-      0.3759,
-      0.3354,
-      0.3667,
-      0.532,
-      0.5859,
-      0.5274,
-      0.0971,
-      0.1022,
-      0.0631,
-      0.0364,
+      0.8752,
+      0.8752,
+      0.9601,
+      0.8083,
+      0.9605,
+      0.9484,
+      0.7304,
+      0.9761,
+      0.9707,
+      0.9722,
+      0.8862,
+      0.813,
+      0.9002,
+      0.874,
+      0.7688,
+      0.8893,
+      0.7676,
       0.0,
-      0.0734,
-      0.2386,
-      0.2413,
-      0.1583,
-      0.1701,
-      0.09
+      0.633,
+      0.874,
+      0.6788,
+      0.9769,
+      0.8826,
+      0.8196
     ],
     [
-      0.4439,
-      0.2888,
-      0.3779,
-      0.3806,
-      0.5093,
-      0.4923,
-      0.4121,
-      0.2581,
-      0.218,
-      0.1847,
-      0.0656,
-      0.0734,
+      0.8826,
+      0.8826,
+      0.8427,
+      0.7144,
+      0.6624,
+      0.7813,
+      0.6843,
+      0.9785,
+      0.6369,
+      0.7833,
+      0.8333,
+      0.6796,
+      0.7676,
+      0.8815,
+      0.7054,
+      0.7688,
+      0.813,
+      0.633,
       0.0,
-      0.1383,
-      0.125,
-      0.1984,
-      0.1747,
-      0.1119
+      0.8815,
+      0.8764,
+      0.6768,
+      0.7719,
+      0.7277
     ],
     [
-      0.7014,
-      0.5203,
-      0.6562,
+      0.9621,
+      0.8693,
+      0.9577,
+      0.7512,
+      0.9581,
+      0.9456,
+      0.9609,
+      0.9746,
+      0.9687,
+      0.7457,
+      0.8807,
+      0.6987,
+      0.8951,
+      0.8678,
+      0.7586,
+      0.8838,
+      0.8905,
+      0.874,
+      0.8815,
+      0.0,
+      0.527,
+      0.975,
+      0.8772,
+      0.7923
+    ],
+    [
+      0.9601,
+      0.8635,
+      0.9554,
+      0.7786,
+      0.9562,
+      0.9429,
+      0.9589,
+      0.973,
+      0.9671,
+      0.9687,
+      0.766,
+      0.7175,
+      0.7574,
+      0.8623,
+      0.9531,
+      0.7332,
+      0.8858,
+      0.6788,
+      0.8764,
+      0.527,
+      0.0,
+      0.7766,
+      0.8717,
+      0.7813
+    ],
+    [
+      0.9785,
+      0.6029,
+      0.7743,
+      0.7148,
+      0.7723,
+      0.6475,
+      0.9308,
+      0.734,
+      0.874,
       0.6761,
-      0.601,
-      0.6515,
-      0.6366,
-      0.346,
-      0.3087,
-      0.2951,
-      0.2478,
-      0.2386,
-      0.1383,
+      0.8595,
+      0.939,
+      0.8764,
+      0.975,
+      0.9738,
+      0.8818,
+      0.6052,
+      0.9769,
+      0.6768,
+      0.975,
+      0.7766,
       0.0,
-      0.0675,
-      0.3191,
-      0.3419,
-      0.287
+      0.8822,
+      0.6866
     ],
     [
-      0.4401,
-      0.4755,
-      0.6223,
-      0.6407,
-      0.5927,
-      0.6152,
-      0.6267,
-      0.3448,
-      0.3058,
-      0.289,
-      0.2504,
-      0.2413,
-      0.125,
-      0.0675,
+      0.9589,
+      0.7645,
+      0.9542,
+      0.6667,
+      0.5336,
+      0.9417,
+      0.8357,
+      0.9722,
+      0.966,
+      0.7406,
+      0.1299,
+      0.5646,
+      0.6381,
+      0.5133,
+      0.7825,
+      0.2254,
+      0.7836,
+      0.8826,
+      0.7719,
+      0.8772,
+      0.8717,
+      0.8822,
       0.0,
-      0.3496,
-      0.2512,
-      0.2
+      0.6952
     ],
     [
-      0.6756,
-      0.4457,
-      0.5349,
-      0.5541,
-      0.3851,
-      0.6201,
-      0.5387,
-      0.2658,
-      0.239,
-      0.124,
-      0.0807,
-      0.1583,
-      0.1984,
-      0.3191,
-      0.3496,
+      0.7727,
+      0.6025,
+      0.8908,
+      0.4722,
+      0.7496,
+      0.8224,
+      0.7379,
+      0.8302,
+      1.0,
+      0.4577,
       0.0,
-      0.0593,
-      0.0867
-    ],
-    [
-      0.4301,
-      0.4138,
-      0.5203,
-      0.5386,
-      0.4036,
-      0.5919,
-      0.5394,
-      0.2818,
-      0.2536,
-      0.1403,
-      0.1015,
-      0.1701,
-      0.1747,
-      0.3419,
-      0.2512,
-      0.0593,
-      0.0,
-      0.025
-    ],
-    [
-      0.3923,
-      0.3314,
-      0.4653,
-      0.485,
-      0.4758,
-      0.5582,
-      0.4912,
-      0.1776,
-      0.1481,
-      0.0761,
-      0.0675,
-      0.09,
-      0.1119,
-      0.287,
-      0.2,
-      0.0867,
-      0.025,
+      0.5595,
+      0.7461,
+      0.8376,
+      0.6213,
+      0.7508,
+      0.7195,
+      0.8196,
+      0.7277,
+      0.7923,
+      0.7813,
+      0.6866,
+      0.6952,
       0.0
     ]
   ],
@@ -496,406 +1002,529 @@
     {
       "from": "coordinatesystem3m",
       "to": "vectorbasics",
-      "id_from": "V0",
-      "id_to": "V1",
-      "d": 0.2545,
-      "gap": 5
+      "id_from": "01",
+      "id_to": "02",
+      "d": 0.5943,
+      "gap": 8
     },
     {
       "from": "vectorbasics",
-      "to": "vector_add",
-      "id_from": "V1",
-      "id_to": "V2",
-      "d": 0.5346,
-      "gap": 7
-    },
-    {
-      "from": "vector_add",
-      "to": "vector_sub",
-      "id_from": "V2",
-      "id_to": "V3",
-      "d": 0.007,
-      "gap": 2
-    },
-    {
-      "from": "vector_sub",
-      "to": "example_2_3_gravity_scaled_by_mass_vr",
-      "id_from": "V3",
-      "id_to": "V4",
-      "d": 0.7378,
-      "gap": 9
-    },
-    {
-      "from": "example_2_3_gravity_scaled_by_mass_vr",
       "to": "length_lantern",
-      "id_from": "V4",
-      "id_to": "V5",
-      "d": 0.4974,
+      "id_from": "02",
+      "id_to": "03",
+      "d": 0.5129,
       "gap": 7
     },
     {
       "from": "length_lantern",
       "to": "vector_normalize_demo",
-      "id_from": "V5",
-      "id_to": "V6",
-      "d": 0.4396,
+      "id_from": "03",
+      "id_to": "04",
+      "d": 0.4343,
       "gap": 6
     },
     {
       "from": "vector_normalize_demo",
-      "to": "vectormotion",
-      "id_from": "V6",
-      "id_to": "V7",
-      "d": 0.567,
+      "to": "vector_add",
+      "id_from": "04",
+      "id_to": "05",
+      "d": 0.966,
+      "gap": 12
+    },
+    {
+      "from": "vector_add",
+      "to": "vector_sub",
+      "id_from": "05",
+      "id_to": "06",
+      "d": 0.5657,
       "gap": 8
     },
     {
-      "from": "vectormotion",
-      "to": "bubble_blaster",
-      "id_from": "V7",
-      "id_to": "V8",
-      "d": 0.025,
-      "gap": 2
+      "from": "vector_sub",
+      "to": "example_2_3_gravity_scaled_by_mass",
+      "id_from": "06",
+      "id_to": "07",
+      "d": 0.5853,
+      "gap": 8
     },
     {
-      "from": "bubble_blaster",
+      "from": "example_2_3_gravity_scaled_by_mass",
+      "to": "dot_aligner",
+      "id_from": "07",
+      "id_to": "08",
+      "d": 0.9096,
+      "gap": 11
+    },
+    {
+      "from": "dot_aligner",
+      "to": "projection_shadow",
+      "id_from": "08",
+      "id_to": "09",
+      "d": 0.9828,
+      "gap": 12
+    },
+    {
+      "from": "projection_shadow",
+      "to": "torque_crank",
+      "id_from": "09",
+      "id_to": "10",
+      "d": 0.858,
+      "gap": 11
+    },
+    {
+      "from": "torque_crank",
+      "to": "weather_vector_field",
+      "id_from": "10",
+      "id_to": "11",
+      "d": 0.3568,
+      "gap": 6
+    },
+    {
+      "from": "weather_vector_field",
       "to": "launch_arc",
-      "id_from": "V8",
-      "id_to": "V9",
-      "d": 0.0386,
-      "gap": 2
+      "id_from": "11",
+      "id_to": "12",
+      "d": 0.5794,
+      "gap": 8
     },
     {
       "from": "launch_arc",
-      "to": "force_cube",
-      "id_from": "V9",
-      "id_to": "F1",
-      "d": 0.0925,
-      "gap": 3
-    },
-    {
-      "from": "force_cube",
-      "to": "force_pad",
-      "id_from": "F1",
-      "id_to": "F2",
-      "d": 0.0364,
-      "gap": 2
-    },
-    {
-      "from": "force_pad",
       "to": "force_mower",
-      "id_from": "F2",
-      "id_to": "F3",
-      "d": 0.0734,
-      "gap": 3
+      "id_from": "12",
+      "id_to": "13",
+      "d": 0.7551,
+      "gap": 10
     },
     {
       "from": "force_mower",
       "to": "drag_lane",
-      "id_from": "F3",
-      "id_to": "F4",
-      "d": 0.1383,
-      "gap": 3
+      "id_from": "13",
+      "id_to": "14",
+      "d": 0.7672,
+      "gap": 10
     },
     {
       "from": "drag_lane",
-      "to": "drag_corridor",
-      "id_from": "F4",
-      "id_to": "F5",
-      "d": 0.0675,
-      "gap": 3
+      "to": "launch_arc",
+      "id_from": "14",
+      "id_to": "15",
+      "d": 0.8177,
+      "gap": 10
     },
     {
-      "from": "drag_corridor",
+      "from": "launch_arc",
+      "to": "circle_train",
+      "id_from": "15",
+      "id_to": "16",
+      "d": 0.9621,
+      "gap": 12
+    },
+    {
+      "from": "circle_train",
       "to": "orbit_pair",
-      "id_from": "F5",
-      "id_to": "F6",
-      "d": 0.3496,
-      "gap": 5
+      "id_from": "16",
+      "id_to": "17",
+      "d": 0.7848,
+      "gap": 10
     },
     {
       "from": "orbit_pair",
-      "to": "orbit_walk",
-      "id_from": "F6",
-      "id_to": "F7",
-      "d": 0.0593,
-      "gap": 3
+      "to": "spring_bob",
+      "id_from": "17",
+      "id_to": "18",
+      "d": 0.7676,
+      "gap": 10
     },
     {
-      "from": "orbit_walk",
-      "to": "centrifuge_ring",
-      "id_from": "F7",
-      "id_to": "F8",
-      "d": 0.025,
-      "gap": 2
+      "from": "spring_bob",
+      "to": "pendulum_swing",
+      "id_from": "18",
+      "id_to": "19",
+      "d": 0.633,
+      "gap": 8
+    },
+    {
+      "from": "pendulum_swing",
+      "to": "momentum_cradle",
+      "id_from": "19",
+      "id_to": "20",
+      "d": 0.8815,
+      "gap": 11
+    },
+    {
+      "from": "momentum_cradle",
+      "to": "bounce_well",
+      "id_from": "20",
+      "id_to": "21",
+      "d": 0.527,
+      "gap": 7
+    },
+    {
+      "from": "bounce_well",
+      "to": "lever_balance",
+      "id_from": "21",
+      "id_to": "22",
+      "d": 0.7766,
+      "gap": 10
+    },
+    {
+      "from": "lever_balance",
+      "to": "weather_vane",
+      "id_from": "22",
+      "id_to": "23",
+      "d": 0.8822,
+      "gap": 11
+    },
+    {
+      "from": "weather_vane",
+      "to": "force_field_zone",
+      "id_from": "23",
+      "id_to": "24",
+      "d": 0.6952,
+      "gap": 9
     }
   ],
-  "corridor_cells": 72,
-  "uniform_cells": 34,
+  "corridor_cells": 215,
+  "uniform_cells": 46,
   "extremes": {
     "closest": {
-      "a": "vector_add",
-      "b": "vector_sub",
-      "d": 0.007
+      "a": "weather_vector_field",
+      "b": "force_field_zone",
+      "d": 0.0
     },
     "farthest": {
-      "a": "vector_sub",
-      "b": "example_2_3_gravity_scaled_by_mass_vr",
-      "d": 0.7378
+      "a": "projection_shadow",
+      "b": "force_field_zone",
+      "d": 1.0
     }
   },
   "nearest": {
     "coordinatesystem3m": [
       {
         "lookup": "vectorbasics",
-        "d": 0.2545
+        "d": 0.5943
       },
       {
-        "lookup": "vector_normalize_demo",
-        "d": 0.3628
+        "lookup": "weather_vector_field",
+        "d": 0.6455
       },
       {
-        "lookup": "centrifuge_ring",
-        "d": 0.3923
+        "lookup": "dot_aligner",
+        "d": 0.6933
       }
     ],
     "vectorbasics": [
       {
         "lookup": "vector_normalize_demo",
-        "d": 0.0604
+        "d": 0.0164
       },
       {
-        "lookup": "coordinatesystem3m",
-        "d": 0.2545
+        "lookup": "weather_vector_field",
+        "d": 0.1745
       },
       {
-        "lookup": "force_mower",
-        "d": 0.2888
-      }
-    ],
-    "vector_add": [
-      {
-        "lookup": "vector_sub",
-        "d": 0.007
-      },
-      {
-        "lookup": "force_pad",
-        "d": 0.3354
-      },
-      {
-        "lookup": "force_cube",
-        "d": 0.3625
-      }
-    ],
-    "vector_sub": [
-      {
-        "lookup": "vector_add",
-        "d": 0.007
-      },
-      {
-        "lookup": "force_pad",
-        "d": 0.3667
-      },
-      {
-        "lookup": "force_cube",
-        "d": 0.378
-      }
-    ],
-    "example_2_3_gravity_scaled_by_mass_vr": [
-      {
-        "lookup": "force_cube",
-        "d": 0.361
-      },
-      {
-        "lookup": "orbit_pair",
-        "d": 0.3851
-      },
-      {
-        "lookup": "orbit_walk",
-        "d": 0.4036
+        "lookup": "example_2_3_gravity_scaled_by_mass",
+        "d": 0.4198
       }
     ],
     "length_lantern": [
       {
-        "lookup": "vectorbasics",
-        "d": 0.319
-      },
-      {
-        "lookup": "coordinatesystem3m",
-        "d": 0.3945
-      },
-      {
         "lookup": "vector_normalize_demo",
-        "d": 0.4396
+        "d": 0.4343
+      },
+      {
+        "lookup": "example_2_3_gravity_scaled_by_mass",
+        "d": 0.4597
+      },
+      {
+        "lookup": "vectorbasics",
+        "d": 0.5129
       }
     ],
     "vector_normalize_demo": [
       {
         "lookup": "vectorbasics",
-        "d": 0.0604
+        "d": 0.0164
+      },
+      {
+        "lookup": "example_2_3_gravity_scaled_by_mass",
+        "d": 0.3901
+      },
+      {
+        "lookup": "weather_vector_field",
+        "d": 0.4261
+      }
+    ],
+    "vector_add": [
+      {
+        "lookup": "weather_vane",
+        "d": 0.5336
+      },
+      {
+        "lookup": "vector_sub",
+        "d": 0.5657
+      },
+      {
+        "lookup": "pendulum_swing",
+        "d": 0.6624
+      }
+    ],
+    "vector_sub": [
+      {
+        "lookup": "vectorbasics",
+        "d": 0.4879
+      },
+      {
+        "lookup": "vector_add",
+        "d": 0.5657
+      },
+      {
+        "lookup": "example_2_3_gravity_scaled_by_mass",
+        "d": 0.5853
+      }
+    ],
+    "example_2_3_gravity_scaled_by_mass": [
+      {
+        "lookup": "vector_normalize_demo",
+        "d": 0.3901
+      },
+      {
+        "lookup": "vectorbasics",
+        "d": 0.4198
+      },
+      {
+        "lookup": "length_lantern",
+        "d": 0.4597
+      }
+    ],
+    "dot_aligner": [
+      {
+        "lookup": "torque_crank",
+        "d": 0.5908
       },
       {
         "lookup": "coordinatesystem3m",
-        "d": 0.3628
+        "d": 0.6933
+      },
+      {
+        "lookup": "lever_balance",
+        "d": 0.734
+      }
+    ],
+    "projection_shadow": [
+      {
+        "lookup": "pendulum_swing",
+        "d": 0.6369
       },
       {
         "lookup": "force_mower",
-        "d": 0.4121
+        "d": 0.6381
+      },
+      {
+        "lookup": "vector_add",
+        "d": 0.6952
       }
     ],
-    "vectormotion": [
+    "torque_crank": [
       {
-        "lookup": "bubble_blaster",
-        "d": 0.025
+        "lookup": "weather_vector_field",
+        "d": 0.3568
       },
       {
-        "lookup": "launch_arc",
-        "d": 0.0327
+        "lookup": "force_field_zone",
+        "d": 0.4577
       },
       {
-        "lookup": "force_pad",
-        "d": 0.0971
+        "lookup": "dot_aligner",
+        "d": 0.5908
       }
     ],
-    "bubble_blaster": [
+    "weather_vector_field": [
       {
-        "lookup": "vectormotion",
-        "d": 0.025
+        "lookup": "force_field_zone",
+        "d": 0.0
       },
       {
-        "lookup": "launch_arc",
-        "d": 0.0386
+        "lookup": "weather_vane",
+        "d": 0.1299
       },
       {
-        "lookup": "force_pad",
-        "d": 0.1022
+        "lookup": "vectorbasics",
+        "d": 0.1745
       }
     ],
     "launch_arc": [
       {
-        "lookup": "vectormotion",
-        "d": 0.0327
-      },
-      {
-        "lookup": "bubble_blaster",
-        "d": 0.0386
-      },
-      {
-        "lookup": "force_pad",
-        "d": 0.0631
-      }
-    ],
-    "force_cube": [
-      {
-        "lookup": "force_pad",
-        "d": 0.0364
-      },
-      {
-        "lookup": "force_mower",
-        "d": 0.0656
-      },
-      {
-        "lookup": "centrifuge_ring",
-        "d": 0.0675
-      }
-    ],
-    "force_pad": [
-      {
-        "lookup": "force_cube",
-        "d": 0.0364
-      },
-      {
         "lookup": "launch_arc",
-        "d": 0.0631
+        "d": 0.1862
       },
       {
-        "lookup": "force_mower",
-        "d": 0.0734
+        "lookup": "force_field_zone",
+        "d": 0.6213
+      },
+      {
+        "lookup": "pendulum_swing",
+        "d": 0.7054
       }
     ],
     "force_mower": [
       {
-        "lookup": "force_cube",
-        "d": 0.0656
+        "lookup": "weather_vector_field",
+        "d": 0.4245
       },
       {
-        "lookup": "force_pad",
-        "d": 0.0734
+        "lookup": "projection_shadow",
+        "d": 0.6381
       },
       {
-        "lookup": "centrifuge_ring",
-        "d": 0.1119
+        "lookup": "weather_vane",
+        "d": 0.6381
       }
     ],
     "drag_lane": [
       {
-        "lookup": "drag_corridor",
-        "d": 0.0675
+        "lookup": "weather_vane",
+        "d": 0.5133
       },
       {
-        "lookup": "force_mower",
-        "d": 0.1383
+        "lookup": "launch_arc",
+        "d": 0.5653
       },
       {
-        "lookup": "force_pad",
-        "d": 0.2386
+        "lookup": "circle_train",
+        "d": 0.5896
       }
     ],
-    "drag_corridor": [
+    "circle_train": [
+      {
+        "lookup": "weather_vane",
+        "d": 0.2254
+      },
       {
         "lookup": "drag_lane",
-        "d": 0.0675
+        "d": 0.5896
       },
       {
-        "lookup": "force_mower",
-        "d": 0.125
-      },
-      {
-        "lookup": "centrifuge_ring",
-        "d": 0.2
+        "lookup": "example_2_3_gravity_scaled_by_mass",
+        "d": 0.7034
       }
     ],
     "orbit_pair": [
       {
-        "lookup": "orbit_walk",
-        "d": 0.0593
+        "lookup": "lever_balance",
+        "d": 0.6052
       },
       {
-        "lookup": "force_cube",
-        "d": 0.0807
+        "lookup": "vectorbasics",
+        "d": 0.6275
       },
       {
-        "lookup": "centrifuge_ring",
-        "d": 0.0867
+        "lookup": "force_field_zone",
+        "d": 0.7195
       }
     ],
-    "orbit_walk": [
+    "spring_bob": [
       {
-        "lookup": "centrifuge_ring",
-        "d": 0.025
+        "lookup": "pendulum_swing",
+        "d": 0.633
       },
       {
-        "lookup": "orbit_pair",
-        "d": 0.0593
+        "lookup": "bounce_well",
+        "d": 0.6788
       },
       {
-        "lookup": "force_cube",
-        "d": 0.1015
+        "lookup": "example_2_3_gravity_scaled_by_mass",
+        "d": 0.7304
       }
     ],
-    "centrifuge_ring": [
+    "pendulum_swing": [
       {
-        "lookup": "orbit_walk",
-        "d": 0.025
+        "lookup": "spring_bob",
+        "d": 0.633
       },
       {
-        "lookup": "force_cube",
-        "d": 0.0675
+        "lookup": "projection_shadow",
+        "d": 0.6369
+      },
+      {
+        "lookup": "vector_add",
+        "d": 0.6624
+      }
+    ],
+    "momentum_cradle": [
+      {
+        "lookup": "bounce_well",
+        "d": 0.527
       },
       {
         "lookup": "launch_arc",
-        "d": 0.0761
+        "d": 0.6987
+      },
+      {
+        "lookup": "torque_crank",
+        "d": 0.7457
+      }
+    ],
+    "bounce_well": [
+      {
+        "lookup": "momentum_cradle",
+        "d": 0.527
+      },
+      {
+        "lookup": "spring_bob",
+        "d": 0.6788
+      },
+      {
+        "lookup": "launch_arc",
+        "d": 0.7175
+      }
+    ],
+    "lever_balance": [
+      {
+        "lookup": "vectorbasics",
+        "d": 0.6029
+      },
+      {
+        "lookup": "orbit_pair",
+        "d": 0.6052
+      },
+      {
+        "lookup": "vector_sub",
+        "d": 0.6475
+      }
+    ],
+    "weather_vane": [
+      {
+        "lookup": "weather_vector_field",
+        "d": 0.1299
+      },
+      {
+        "lookup": "circle_train",
+        "d": 0.2254
+      },
+      {
+        "lookup": "drag_lane",
+        "d": 0.5133
+      }
+    ],
+    "force_field_zone": [
+      {
+        "lookup": "weather_vector_field",
+        "d": 0.0
+      },
+      {
+        "lookup": "torque_crank",
+        "d": 0.4577
+      },
+      {
+        "lookup": "vector_normalize_demo",
+        "d": 0.4722
       }
     ]
-  }
+  },
+  "raw_cosine_range": [
+    0.74,
+    0.996
+  ],
+  "rescaled": true
 }

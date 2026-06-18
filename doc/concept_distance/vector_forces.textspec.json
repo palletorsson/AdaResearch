@@ -1,0 +1,9 @@
+{
+  "domain": "vector_forces",
+  "title": "Vectors & Forces - from the tutorial scripts",
+  "note": "Distance derived from doc/vector_forces_tutorial_scripts.md — each ### concept section's Hook/Do/See/Truth prose is one node. Cosine over TF-IDF: two concepts are close when the tutorial teaches them with the same language.",
+  "mode": "doc_headings",
+  "source_md": "doc/vector_forces_tutorial_scripts.md",
+  "heading_regex": "^### (\\d+)\\. (.+)",
+  "spacing": {"base": 2, "k": 10}
+}

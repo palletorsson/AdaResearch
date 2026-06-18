@@ -1,19 +1,24 @@
 {
   "domain": "primitives",
-  "title": "Primitives - Mental Model",
-  "note": "Nodes are the core geometric primitives; edges are cosine distance over a 10-feature embedding. Axes follow PRIMITIVE_ONTOLOGY.md and the primitives beat score (P1 point -> P2 line -> P5 triangle -> P4 grid -> P6 solids -> P7 motion): the dimensional ladder, closure, curvature, how composite it is, whether it discretizes, genus (a hole), symmetry, motion, directedness, and atomicity (how irreducibly primitive it is). Walking distance in a Point_*/Primitives_* map = conceptual distance.",
-  "feature_names": [
-    "dimensionality",
-    "closure",
-    "curvature",
-    "composition",
-    "discretization",
-    "genus_hole",
-    "symmetry",
-    "motion",
-    "directedness",
-    "atomicity"
-  ],
+  "title": "Primitives - meta distance",
+  "note": "Distance projected across three relations: the order of things (tutorial sequence), what each primitive IS (intent.md), and its spatial poetics (blurb.md). Adjust weights to project; add overrides to decide.",
+  "method": "meta-projection",
+  "weights": {
+    "order": 0.34,
+    "concept": 0.33,
+    "spatial": 0.33
+  },
+  "channel_raw_cosine_ranges": {
+    "concept": [
+      0.769,
+      0.948
+    ],
+    "spatial": [
+      0.836,
+      1.0
+    ]
+  },
+  "overrides": [],
   "spacing": {
     "base": 2,
     "k": 10
@@ -21,351 +26,206 @@
   "order": [
     "origin",
     "grabbable_line",
-    "arrow",
-    "interactivetriangle",
-    "plane",
+    "coordinate_lines",
     "grid_lines",
-    "cube",
-    "animated_cube",
-    "capsule",
-    "cylinder",
-    "torus",
+    "interactivetriangle",
+    "draw_triangle_faces",
     "tetrahedron",
-    "octahedron",
-    "bipyramid",
-    "arch"
+    "animated_cube"
   ],
   "nodes": [
     {
       "id": "P1",
       "lookup": "origin",
-      "name": "the point - a chosen location"
+      "name": "the point",
+      "map": "Point_One",
+      "top_terms": [
+        "already",
+        "origin",
+        "loop",
+        "learner",
+        "infrastructure",
+        "render"
+      ]
     },
     {
       "id": "P2",
       "lookup": "grabbable_line",
-      "name": "the line - length and measure"
+      "name": "the line",
+      "map": "Point_Lines",
+      "top_terms": [
+        "parallel",
+        "perspective",
+        "modulor",
+        "line",
+        "direction",
+        "metric"
+      ]
     },
     {
-      "id": "P2b",
-      "lookup": "arrow",
-      "name": "the directed line - a vector"
-    },
-    {
-      "id": "P5",
-      "lookup": "interactivetriangle",
-      "name": "the triangle - minimum enclosure"
-    },
-    {
-      "id": "P5b",
-      "lookup": "plane",
-      "name": "the plane - a flat surface"
+      "id": "P3",
+      "lookup": "coordinate_lines",
+      "name": "the trace",
+      "map": "Point_Trace",
+      "top_terms": [
+        "trace",
+        "data",
+        "embodied",
+        "residue",
+        "accumulate",
+        "error"
+      ]
     },
     {
       "id": "P4",
       "lookup": "grid_lines",
-      "name": "the grid - commitment to discretize"
+      "name": "the grid",
+      "map": "Point_Line_Grid",
+      "top_terms": [
+        "resolution",
+        "grid",
+        "continuou",
+        "snap",
+        "discrete",
+        "path"
+      ]
     },
     {
-      "id": "P6a",
-      "lookup": "cube",
-      "name": "the cube - the faceted solid"
+      "id": "P5",
+      "lookup": "interactivetriangle",
+      "name": "the triangle",
+      "map": "Point_Triangle",
+      "top_terms": [
+        "inside",
+        "triangle",
+        "outside",
+        "gpu",
+        "area",
+        "front"
+      ]
+    },
+    {
+      "id": "P5b",
+      "lookup": "draw_triangle_faces",
+      "name": "the triangle in context",
+      "map": "Point_Triangle_Context",
+      "top_terms": [
+        "quad",
+        "pythagorean",
+        "rigidity",
+        "triangle",
+        "theorem",
+        "decomposition"
+      ]
+    },
+    {
+      "id": "P6",
+      "lookup": "tetrahedron",
+      "name": "the platonic solids",
+      "map": "Primitives_Polythedra",
+      "top_terms": [
+        "junction",
+        "solid",
+        "vertex",
+        "face",
+        "trihedron",
+        "corner"
+      ]
     },
     {
       "id": "P7",
       "lookup": "animated_cube",
-      "name": "the animated cube - motion enters"
-    },
-    {
-      "id": "P6b",
-      "lookup": "capsule",
-      "name": "the capsule - a curved solid"
-    },
-    {
-      "id": "P6c",
-      "lookup": "cylinder",
-      "name": "the cylinder - swept circle"
-    },
-    {
-      "id": "P6d",
-      "lookup": "torus",
-      "name": "the torus - a solid with a hole"
-    },
-    {
-      "id": "P6e",
-      "lookup": "tetrahedron",
-      "name": "the tetrahedron - platonic solid"
-    },
-    {
-      "id": "P6f",
-      "lookup": "octahedron",
-      "name": "the octahedron - platonic solid"
-    },
-    {
-      "id": "P6g",
-      "lookup": "bipyramid",
-      "name": "the bipyramid - mirrored solid"
-    },
-    {
-      "id": "P10",
-      "lookup": "arch",
-      "name": "the arch - a composed structure"
+      "name": "the animated cube",
+      "map": "Point_Animatedcube",
+      "top_terms": [
+        "net",
+        "cube",
+        "quad",
+        "animated",
+        "dragging",
+        "polyhedron"
+      ]
     }
   ],
   "matrix": [
     [
       0.0,
-      0.0677,
-      0.4291,
-      0.4563,
-      0.4096,
-      0.6881,
-      0.4901,
-      0.5985,
-      0.5601,
-      0.5601,
-      0.6411,
-      0.5151,
-      0.514,
-      0.5465,
-      0.7639
+      0.4793,
+      0.3858,
+      0.4301,
+      0.6976,
+      0.7296,
+      0.88,
+      0.8169
     ],
     [
-      0.0677,
+      0.4793,
       0.0,
-      0.3784,
-      0.4014,
-      0.3478,
-      0.5794,
-      0.3955,
-      0.5127,
-      0.4727,
-      0.4727,
-      0.5643,
-      0.4251,
-      0.43,
-      0.4291,
-      0.5621
+      0.2077,
+      0.3669,
+      0.5843,
+      0.6564,
+      0.8376,
+      0.8725
     ],
     [
-      0.4291,
-      0.3784,
+      0.3858,
+      0.2077,
       0.0,
-      0.6175,
-      0.587,
-      0.7239,
-      0.6082,
-      0.6822,
-      0.6587,
-      0.6587,
-      0.7159,
-      0.6258,
-      0.6288,
-      0.6277,
-      0.7068
+      0.1992,
+      0.5296,
+      0.5991,
+      0.714,
+      0.8206
     ],
     [
-      0.4563,
-      0.4014,
-      0.6175,
+      0.4301,
+      0.3669,
+      0.1992,
       0.0,
-      0.0209,
-      0.399,
-      0.023,
-      0.1595,
-      0.1602,
-      0.1602,
-      0.2486,
-      0.0281,
-      0.0304,
-      0.0273,
-      0.306
+      0.5728,
+      0.606,
+      0.6933,
+      0.6472
     ],
     [
-      0.4096,
-      0.3478,
-      0.587,
-      0.0209,
+      0.6976,
+      0.5843,
+      0.5296,
+      0.5728,
       0.0,
-      0.4809,
-      0.0514,
-      0.1888,
-      0.1724,
-      0.1724,
-      0.2748,
-      0.0724,
-      0.0775,
-      0.0621,
-      0.3611
+      0.0795,
+      0.4771,
+      0.4403
     ],
     [
-      0.6881,
-      0.5794,
-      0.7239,
-      0.399,
-      0.4809,
+      0.7296,
+      0.6564,
+      0.5991,
+      0.606,
+      0.0795,
       0.0,
-      0.3723,
-      0.4566,
-      0.4828,
-      0.4828,
-      0.5142,
-      0.3493,
-      0.3495,
-      0.3521,
-      0.3808
+      0.3712,
+      0.1318
     ],
     [
-      0.4901,
-      0.3955,
-      0.6082,
-      0.023,
-      0.0514,
-      0.3723,
+      0.88,
+      0.8376,
+      0.714,
+      0.6933,
+      0.4771,
+      0.3712,
       0.0,
-      0.136,
-      0.1405,
-      0.1405,
-      0.2276,
-      0.0031,
-      0.0045,
-      0.0045,
-      0.2522
+      0.3228
     ],
     [
-      0.5985,
-      0.5127,
-      0.6822,
-      0.1595,
-      0.1888,
-      0.4566,
-      0.136,
-      0.0,
-      0.2579,
-      0.2579,
-      0.3306,
-      0.1369,
-      0.1379,
-      0.1376,
-      0.3475
-    ],
-    [
-      0.5601,
-      0.4727,
-      0.6587,
-      0.1602,
-      0.1724,
-      0.4828,
-      0.1405,
-      0.2579,
-      0.0,
-      0.0,
-      0.1094,
-      0.148,
-      0.1501,
-      0.1455,
-      0.2048
-    ],
-    [
-      0.5601,
-      0.4727,
-      0.6587,
-      0.1602,
-      0.1724,
-      0.4828,
-      0.1405,
-      0.2579,
-      0.0,
-      0.0,
-      0.1094,
-      0.148,
-      0.1501,
-      0.1455,
-      0.2048
-    ],
-    [
-      0.6411,
-      0.5643,
-      0.7159,
-      0.2486,
-      0.2748,
-      0.5142,
-      0.2276,
-      0.3306,
-      0.1094,
-      0.1094,
-      0.0,
-      0.2284,
-      0.2293,
-      0.229,
-      0.1037
-    ],
-    [
-      0.5151,
-      0.4251,
-      0.6258,
-      0.0281,
-      0.0724,
-      0.3493,
-      0.0031,
-      0.1369,
-      0.148,
-      0.148,
-      0.2284,
-      0.0,
-      0.0003,
-      0.0051,
-      0.2418
-    ],
-    [
-      0.514,
-      0.43,
-      0.6288,
-      0.0304,
-      0.0775,
-      0.3495,
-      0.0045,
-      0.1379,
-      0.1501,
-      0.1501,
-      0.2293,
-      0.0003,
-      0.0,
-      0.0076,
-      0.2471
-    ],
-    [
-      0.5465,
-      0.4291,
-      0.6277,
-      0.0273,
-      0.0621,
-      0.3521,
-      0.0045,
-      0.1376,
-      0.1455,
-      0.1455,
-      0.229,
-      0.0051,
-      0.0076,
-      0.0,
-      0.2207
-    ],
-    [
-      0.7639,
-      0.5621,
-      0.7068,
-      0.306,
-      0.3611,
-      0.3808,
-      0.2522,
-      0.3475,
-      0.2048,
-      0.2048,
-      0.1037,
-      0.2418,
-      0.2471,
-      0.2207,
+      0.8169,
+      0.8725,
+      0.8206,
+      0.6472,
+      0.4403,
+      0.1318,
+      0.3228,
       0.0
     ]
   ],
@@ -375,338 +235,477 @@
       "to": "grabbable_line",
       "id_from": "P1",
       "id_to": "P2",
-      "d": 0.0677,
-      "gap": 3
+      "d": 0.4793,
+      "gap": 7
     },
     {
       "from": "grabbable_line",
-      "to": "arrow",
+      "to": "coordinate_lines",
       "id_from": "P2",
-      "id_to": "P2b",
-      "d": 0.3784,
-      "gap": 6
+      "id_to": "P3",
+      "d": 0.2077,
+      "gap": 4
     },
     {
-      "from": "arrow",
+      "from": "coordinate_lines",
+      "to": "grid_lines",
+      "id_from": "P3",
+      "id_to": "P4",
+      "d": 0.1992,
+      "gap": 4
+    },
+    {
+      "from": "grid_lines",
       "to": "interactivetriangle",
-      "id_from": "P2b",
+      "id_from": "P4",
       "id_to": "P5",
-      "d": 0.6175,
+      "d": 0.5728,
       "gap": 8
     },
     {
       "from": "interactivetriangle",
-      "to": "plane",
+      "to": "draw_triangle_faces",
       "id_from": "P5",
       "id_to": "P5b",
-      "d": 0.0209,
-      "gap": 2
+      "d": 0.0795,
+      "gap": 3
     },
     {
-      "from": "plane",
-      "to": "grid_lines",
+      "from": "draw_triangle_faces",
+      "to": "tetrahedron",
       "id_from": "P5b",
-      "id_to": "P4",
-      "d": 0.4809,
-      "gap": 7
-    },
-    {
-      "from": "grid_lines",
-      "to": "cube",
-      "id_from": "P4",
-      "id_to": "P6a",
-      "d": 0.3723,
+      "id_to": "P6",
+      "d": 0.3712,
       "gap": 6
     },
     {
-      "from": "cube",
-      "to": "animated_cube",
-      "id_from": "P6a",
-      "id_to": "P7",
-      "d": 0.136,
-      "gap": 3
-    },
-    {
-      "from": "animated_cube",
-      "to": "capsule",
-      "id_from": "P7",
-      "id_to": "P6b",
-      "d": 0.2579,
-      "gap": 5
-    },
-    {
-      "from": "capsule",
-      "to": "cylinder",
-      "id_from": "P6b",
-      "id_to": "P6c",
-      "d": 0.0,
-      "gap": 2
-    },
-    {
-      "from": "cylinder",
-      "to": "torus",
-      "id_from": "P6c",
-      "id_to": "P6d",
-      "d": 0.1094,
-      "gap": 3
-    },
-    {
-      "from": "torus",
-      "to": "tetrahedron",
-      "id_from": "P6d",
-      "id_to": "P6e",
-      "d": 0.2284,
-      "gap": 4
-    },
-    {
       "from": "tetrahedron",
-      "to": "octahedron",
-      "id_from": "P6e",
-      "id_to": "P6f",
-      "d": 0.0003,
-      "gap": 2
-    },
-    {
-      "from": "octahedron",
-      "to": "bipyramid",
-      "id_from": "P6f",
-      "id_to": "P6g",
-      "d": 0.0076,
-      "gap": 2
-    },
-    {
-      "from": "bipyramid",
-      "to": "arch",
-      "id_from": "P6g",
-      "id_to": "P10",
-      "d": 0.2207,
-      "gap": 4
+      "to": "animated_cube",
+      "id_from": "P6",
+      "id_to": "P7",
+      "d": 0.3228,
+      "gap": 5
     }
   ],
-  "corridor_cells": 57,
-  "uniform_cells": 28,
+  "corridor_cells": 37,
+  "uniform_cells": 14,
   "extremes": {
     "closest": {
-      "a": "capsule",
-      "b": "cylinder",
-      "d": 0.0
+      "a": "interactivetriangle",
+      "b": "draw_triangle_faces",
+      "d": 0.0795
     },
     "farthest": {
       "a": "origin",
-      "b": "arch",
-      "d": 0.7639
+      "b": "tetrahedron",
+      "d": 0.88
     }
   },
   "nearest": {
     "origin": [
       {
+        "lookup": "coordinate_lines",
+        "d": 0.3858
+      },
+      {
+        "lookup": "grid_lines",
+        "d": 0.4301
+      },
+      {
         "lookup": "grabbable_line",
-        "d": 0.0677
-      },
-      {
-        "lookup": "plane",
-        "d": 0.4096
-      },
-      {
-        "lookup": "arrow",
-        "d": 0.4291
+        "d": 0.4793
       }
     ],
     "grabbable_line": [
       {
+        "lookup": "coordinate_lines",
+        "d": 0.2077
+      },
+      {
+        "lookup": "grid_lines",
+        "d": 0.3669
+      },
+      {
         "lookup": "origin",
-        "d": 0.0677
-      },
-      {
-        "lookup": "plane",
-        "d": 0.3478
-      },
-      {
-        "lookup": "arrow",
-        "d": 0.3784
+        "d": 0.4793
       }
     ],
-    "arrow": [
+    "coordinate_lines": [
+      {
+        "lookup": "grid_lines",
+        "d": 0.1992
+      },
       {
         "lookup": "grabbable_line",
-        "d": 0.3784
+        "d": 0.2077
       },
       {
         "lookup": "origin",
-        "d": 0.4291
-      },
-      {
-        "lookup": "plane",
-        "d": 0.587
-      }
-    ],
-    "interactivetriangle": [
-      {
-        "lookup": "plane",
-        "d": 0.0209
-      },
-      {
-        "lookup": "cube",
-        "d": 0.023
-      },
-      {
-        "lookup": "bipyramid",
-        "d": 0.0273
-      }
-    ],
-    "plane": [
-      {
-        "lookup": "interactivetriangle",
-        "d": 0.0209
-      },
-      {
-        "lookup": "cube",
-        "d": 0.0514
-      },
-      {
-        "lookup": "bipyramid",
-        "d": 0.0621
+        "d": 0.3858
       }
     ],
     "grid_lines": [
       {
-        "lookup": "tetrahedron",
-        "d": 0.3493
+        "lookup": "coordinate_lines",
+        "d": 0.1992
       },
       {
-        "lookup": "octahedron",
-        "d": 0.3495
+        "lookup": "grabbable_line",
+        "d": 0.3669
       },
       {
-        "lookup": "bipyramid",
-        "d": 0.3521
+        "lookup": "origin",
+        "d": 0.4301
       }
     ],
-    "cube": [
+    "interactivetriangle": [
       {
-        "lookup": "tetrahedron",
-        "d": 0.0031
+        "lookup": "draw_triangle_faces",
+        "d": 0.0795
       },
       {
-        "lookup": "octahedron",
-        "d": 0.0045
-      },
-      {
-        "lookup": "bipyramid",
-        "d": 0.0045
-      }
-    ],
-    "animated_cube": [
-      {
-        "lookup": "cube",
-        "d": 0.136
+        "lookup": "animated_cube",
+        "d": 0.4403
       },
       {
         "lookup": "tetrahedron",
-        "d": 0.1369
-      },
-      {
-        "lookup": "bipyramid",
-        "d": 0.1376
+        "d": 0.4771
       }
     ],
-    "capsule": [
+    "draw_triangle_faces": [
       {
-        "lookup": "cylinder",
-        "d": 0.0
+        "lookup": "interactivetriangle",
+        "d": 0.0795
       },
       {
-        "lookup": "torus",
-        "d": 0.1094
+        "lookup": "animated_cube",
+        "d": 0.1318
       },
       {
-        "lookup": "cube",
-        "d": 0.1405
-      }
-    ],
-    "cylinder": [
-      {
-        "lookup": "capsule",
-        "d": 0.0
-      },
-      {
-        "lookup": "torus",
-        "d": 0.1094
-      },
-      {
-        "lookup": "cube",
-        "d": 0.1405
-      }
-    ],
-    "torus": [
-      {
-        "lookup": "arch",
-        "d": 0.1037
-      },
-      {
-        "lookup": "capsule",
-        "d": 0.1094
-      },
-      {
-        "lookup": "cylinder",
-        "d": 0.1094
+        "lookup": "tetrahedron",
+        "d": 0.3712
       }
     ],
     "tetrahedron": [
       {
-        "lookup": "octahedron",
-        "d": 0.0003
+        "lookup": "animated_cube",
+        "d": 0.3228
       },
       {
-        "lookup": "cube",
-        "d": 0.0031
+        "lookup": "draw_triangle_faces",
+        "d": 0.3712
       },
       {
-        "lookup": "bipyramid",
-        "d": 0.0051
+        "lookup": "interactivetriangle",
+        "d": 0.4771
       }
     ],
-    "octahedron": [
+    "animated_cube": [
       {
-        "lookup": "tetrahedron",
-        "d": 0.0003
-      },
-      {
-        "lookup": "cube",
-        "d": 0.0045
-      },
-      {
-        "lookup": "bipyramid",
-        "d": 0.0076
-      }
-    ],
-    "bipyramid": [
-      {
-        "lookup": "cube",
-        "d": 0.0045
+        "lookup": "draw_triangle_faces",
+        "d": 0.1318
       },
       {
         "lookup": "tetrahedron",
-        "d": 0.0051
+        "d": 0.3228
       },
       {
-        "lookup": "octahedron",
-        "d": 0.0076
-      }
-    ],
-    "arch": [
-      {
-        "lookup": "torus",
-        "d": 0.1037
-      },
-      {
-        "lookup": "capsule",
-        "d": 0.2048
-      },
-      {
-        "lookup": "cylinder",
-        "d": 0.2048
+        "lookup": "interactivetriangle",
+        "d": 0.4403
       }
     ]
+  },
+  "channels": {
+    "order": {
+      "weight": 0.34,
+      "matrix": [
+        [
+          0.0,
+          0.1429,
+          0.2857,
+          0.4286,
+          0.5714,
+          0.7143,
+          0.8571,
+          1.0
+        ],
+        [
+          0.1429,
+          0.0,
+          0.1429,
+          0.2857,
+          0.4286,
+          0.5714,
+          0.7143,
+          0.8571
+        ],
+        [
+          0.2857,
+          0.1429,
+          0.0,
+          0.1429,
+          0.2857,
+          0.4286,
+          0.5714,
+          0.7143
+        ],
+        [
+          0.4286,
+          0.2857,
+          0.1429,
+          0.0,
+          0.1429,
+          0.2857,
+          0.4286,
+          0.5714
+        ],
+        [
+          0.5714,
+          0.4286,
+          0.2857,
+          0.1429,
+          0.0,
+          0.1429,
+          0.2857,
+          0.4286
+        ],
+        [
+          0.7143,
+          0.5714,
+          0.4286,
+          0.2857,
+          0.1429,
+          0.0,
+          0.1429,
+          0.2857
+        ],
+        [
+          0.8571,
+          0.7143,
+          0.5714,
+          0.4286,
+          0.2857,
+          0.1429,
+          0.0,
+          0.1429
+        ],
+        [
+          1.0,
+          0.8571,
+          0.7143,
+          0.5714,
+          0.4286,
+          0.2857,
+          0.1429,
+          0.0
+        ]
+      ],
+      "extremes": {
+        "closest": {
+          "a": "origin",
+          "b": "grabbable_line",
+          "d": 0.1429
+        },
+        "farthest": {
+          "a": "origin",
+          "b": "animated_cube",
+          "d": 1.0
+        }
+      }
+    },
+    "concept": {
+      "weight": 0.33,
+      "matrix": [
+        [
+          0.0,
+          0.56,
+          0.55,
+          0.5181,
+          0.8169,
+          0.9218,
+          1.0,
+          0.7867
+        ],
+        [
+          0.56,
+          0.0,
+          0.445,
+          0.4947,
+          0.4707,
+          0.5902,
+          0.8023,
+          0.976
+        ],
+        [
+          0.55,
+          0.445,
+          0.0,
+          0.0145,
+          0.5623,
+          0.7811,
+          0.88,
+          0.8827
+        ],
+        [
+          0.5181,
+          0.4947,
+          0.0145,
+          0.0,
+          0.6901,
+          0.7482,
+          0.7298,
+          0.7945
+        ],
+        [
+          0.8169,
+          0.4707,
+          0.5623,
+          0.6901,
+          0.0,
+          0.0,
+          0.3825,
+          0.4495
+        ],
+        [
+          0.9218,
+          0.5902,
+          0.7811,
+          0.7482,
+          0.0,
+          0.0,
+          0.3423,
+          0.105
+        ],
+        [
+          1.0,
+          0.8023,
+          0.88,
+          0.7298,
+          0.3825,
+          0.3423,
+          0.0,
+          0.0017
+        ],
+        [
+          0.7867,
+          0.976,
+          0.8827,
+          0.7945,
+          0.4495,
+          0.105,
+          0.0017,
+          0.0
+        ]
+      ],
+      "extremes": {
+        "closest": {
+          "a": "interactivetriangle",
+          "b": "draw_triangle_faces",
+          "d": 0.0
+        },
+        "farthest": {
+          "a": "origin",
+          "b": "tetrahedron",
+          "d": 1.0
+        }
+      }
+    },
+    "spatial": {
+      "weight": 0.33,
+      "matrix": [
+        [
+          0.0,
+          0.7453,
+          0.3246,
+          0.3435,
+          0.7082,
+          0.5532,
+          0.7836,
+          0.6584
+        ],
+        [
+          0.7453,
+          0.0,
+          0.0371,
+          0.3228,
+          0.8584,
+          0.8103,
+          1.0,
+          0.7848
+        ],
+        [
+          0.3246,
+          0.0371,
+          0.0,
+          0.4419,
+          0.7483,
+          0.5927,
+          0.6948,
+          0.8681
+        ],
+        [
+          0.3435,
+          0.3228,
+          0.4419,
+          0.0,
+          0.8985,
+          0.7939,
+          0.9295,
+          0.5781
+        ],
+        [
+          0.7082,
+          0.8584,
+          0.7483,
+          0.8985,
+          0.0,
+          0.0936,
+          0.769,
+          0.4432
+        ],
+        [
+          0.5532,
+          0.8103,
+          0.5927,
+          0.7939,
+          0.0936,
+          0.0,
+          0.6353,
+          0.0
+        ],
+        [
+          0.7836,
+          1.0,
+          0.6948,
+          0.9295,
+          0.769,
+          0.6353,
+          0.0,
+          0.8292
+        ],
+        [
+          0.6584,
+          0.7848,
+          0.8681,
+          0.5781,
+          0.4432,
+          0.0,
+          0.8292,
+          0.0
+        ]
+      ],
+      "extremes": {
+        "closest": {
+          "a": "draw_triangle_faces",
+          "b": "animated_cube",
+          "d": 0.0
+        },
+        "farthest": {
+          "a": "grabbable_line",
+          "b": "tetrahedron",
+          "d": 1.0
+        }
+      }
+    }
   }
 }

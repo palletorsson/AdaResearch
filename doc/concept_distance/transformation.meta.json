@@ -1,0 +1,13 @@
+{
+  "domain": "transformation",
+  "title": "Transformations - meta distance",
+  "note": "Distance projected across three relations: the order of things (tutorial sequence), what each transform IS (intent.md), and its spatial poetics (blurb.md). Adjust weights to project; add overrides to decide.",
+  "nodes_from": "transformation.textspec.json",
+  "spacing": {"base": 2, "k": 10},
+  "channels": {
+    "order":   {"weight": 0.34},
+    "concept": {"weight": 0.33, "sources": ["intent.md"]},
+    "spatial": {"weight": 0.33, "sources": ["blurb.md"]}
+  },
+  "overrides": []
+}

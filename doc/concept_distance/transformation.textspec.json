@@ -1,0 +1,17 @@
+{
+  "domain": "transformation",
+  "title": "Transformations - from the map tutorials",
+  "note": "Distance derived from the existing Trans_* maps' blurb.md + intent.md (the in-world tutorial text), in beat order T1-T7 + the Trans_Pit limit. Cosine over TF-IDF.",
+  "mode": "maps",
+  "spacing": {"base": 2, "k": 10},
+  "nodes": [
+    {"id": "T1", "map": "Trans_Introduction",     "lookup": "transformation_workbench", "name": "the three rigid motions"},
+    {"id": "T2", "map": "Trans_Translation",       "lookup": "translation_cube_demo",    "name": "translation"},
+    {"id": "T3", "map": "Trans_AxisDecomposition", "lookup": "axis_translation_cube",    "name": "axis decomposition"},
+    {"id": "T4", "map": "Trans_Rotation",          "lookup": "rotation_gimbal",          "name": "rotation"},
+    {"id": "T5", "map": "Trans_RotationSpectacle", "lookup": "spin",                     "name": "rotation spectacle"},
+    {"id": "T6", "map": "Trans_Scale",             "lookup": "scaleme",                  "name": "scale"},
+    {"id": "T7", "map": "Trans_Composition",       "lookup": "transform_composition",    "name": "composition"},
+    {"id": "Tp", "map": "Trans_Pit",               "lookup": "boolean_tunnel",           "name": "the limit (Trans_Pit)"}
+  ]
+}
