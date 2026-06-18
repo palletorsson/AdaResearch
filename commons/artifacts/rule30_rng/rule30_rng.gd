@@ -66,7 +66,7 @@ func _make_field(cols_n: int, rows_n: int, cell_sz: float, plane_xy: bool = true
 	mat.vertex_color_use_as_albedo = true
 	mat.emission_enabled = true
 	mat.emission = Color.WHITE
-	mat.emission_energy_multiplier = 0.6 if emissive else 0.0
+	mat.emission_energy_multiplier = 0.18 if emissive else 0.0
 	mi.material_override = mat
 	return mi
 
