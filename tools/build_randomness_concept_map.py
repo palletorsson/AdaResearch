@@ -34,6 +34,8 @@ EXCLUDE = {
 def is_candidate(reg, lookup):
     if lookup in EXCLUDE or lookup.startswith("profile_"):   # profile_* are profiling test scenes
         return False
+    if lookup in FORCE:   # explicit gap-fillers / bridges always pass, even from non-randomness registries
+        return True
     if reg in HIGH_SIGNAL:
         return True
     if re.fullmatch(r"[a-z0-9_]+\.json", reg) and GATE.search(lookup):  # gated per-artifact reg
@@ -136,6 +138,11 @@ CONCEPTS = [
    "instancingscatter","spawn_randomcubes"],
   ["particle","emergent","swarm"],
   "Give a thousand particles their own dice — emergent texture from individual chance."),
+ ("Seeded growth / DNA -> form",
+  ["dna_sprout","genome_bench","seed_vs_random","genetic_tree_sculptor"],
+  ["dna","genome","l-system","morphology","seeded growth"],
+  "The deep end of randomness: a short genome (CritterDNA) grown by an L-system into a unique, "
+  "reproducible organism. Not flat chance — store the seed, replay the costly growth. Same seed, same form."),
 ]
 
 # Four slots per concept, smallest->biggest in space and abstract->applied:
@@ -176,6 +183,9 @@ FORCE = {
  "entropy_bench": ("Entropy", "medium"), "markov_melody": ("Markov chains", "applied"), "jitter_bench": ("Random transformations", "medium"),
  "ten_print_toy": ("10 PRINT / generative grid", "small"), "ten_print_bench": ("10 PRINT / generative grid", "medium"), "ten_print_textile": ("10 PRINT / generative grid", "applied"),
  "scatter_bench": ("Random art / scatter", "medium"), "random_fireworks": ("Particle randomness", "applied"), "lottery_drum": ("Uniform random / RNG", "applied"),
+ # the seed -> form bridge (2026-06-18): randomness ladder meets the CritterDNA / L-system galleries
+ "dna_sprout": ("Seeded growth / DNA -> form", "small"), "genome_bench": ("Seeded growth / DNA -> form", "medium"),
+ "seed_vs_random": ("Seeded growth / DNA -> form", "large"), "genetic_tree_sculptor": ("Seeded growth / DNA -> form", "applied"),
 }
 
 
@@ -247,6 +257,7 @@ def main():
         "Act III — noise": ["Perlin noise", "Simplex / Worley / value noise", "Noise fields & textures", "Noise terrain / landscapes", "Blue noise / sampling"],
         "Act IV — process & measure": ["Markov chains", "Seeds / PRNG vs TRNG", "Entropy"],
         "Act V — randomness as material": ["Random transformations", "10 PRINT / generative grid", "Random art / scatter", "Particle randomness"],
+        "Act VI — randomness as growth": ["Seeded growth / DNA -> form"],
     }
     concept_act = {cc: act for act, cs in ACTS.items() for cc in cs}
     meta = {}

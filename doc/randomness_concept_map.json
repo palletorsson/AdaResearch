@@ -6,7 +6,8 @@
     "Act II — distributions",
     "Act III — noise",
     "Act IV — process & measure",
-    "Act V — randomness as material"
+    "Act V — randomness as material",
+    "Act VI — randomness as growth"
   ],
   "concepts": [
     "Uniform random / RNG",
@@ -27,14 +28,15 @@
     "Random transformations",
     "10 PRINT / generative grid",
     "Random art / scatter",
-    "Particle randomness"
+    "Particle randomness",
+    "Seeded growth / DNA -> form"
   ],
   "concept_meta": {
     "Uniform random / RNG": {
       "count": 13,
       "map_ready": 13,
-      "has_image": 12,
-      "best": "randompoints_uniform",
+      "has_image": 13,
+      "best": "lottery_drum",
       "truth": "Flat chance — every outcome equally likely; the rectangle of pure ignorance before structure arrives.",
       "act": "Act I — pure chance",
       "thin": false,
@@ -66,8 +68,8 @@
     "Coin / dice / discrete chance": {
       "count": 5,
       "map_ready": 5,
-      "has_image": 3,
-      "best": "dice_throw",
+      "has_image": 5,
+      "best": "coin_dice_bench",
       "truth": "Discrete chance — a finite set of faces, each with its slice of certainty.",
       "act": "Act I — pure chance",
       "thin": false,
@@ -91,8 +93,8 @@
     "Random walk": {
       "count": 11,
       "map_ready": 11,
-      "has_image": 9,
-      "best": "random_walk_terrarium",
+      "has_image": 11,
+      "best": "random_walk_bench",
       "truth": "A path with no plan — each step a fresh coin, the whole a drunkard's signature.",
       "act": "Act I — pure chance",
       "thin": false,
@@ -122,8 +124,8 @@
     "Probability distribution": {
       "count": 6,
       "map_ready": 6,
-      "has_image": 4,
-      "best": "distribution_sampler",
+      "has_image": 6,
+      "best": "distribution_bench",
       "truth": "Not all outcomes are equal — a distribution is the shape chance prefers.",
       "act": "Act II — distributions",
       "thin": false,
@@ -148,7 +150,7 @@
     "Gaussian / normal": {
       "count": 10,
       "map_ready": 9,
-      "has_image": 8,
+      "has_image": 10,
       "best": "galton_board",
       "truth": "The bell is what many small accidents add up to — the central-limit attractor.",
       "act": "Act II — distributions",
@@ -160,8 +162,8 @@
         "medium": [
           "GaussianBlurShader",
           "GaussianPaintSplatter",
-          "RandomGaussianTexture",
           "random_gaussian_texture",
+          "RandomGaussianTexture",
           "normal_distribution"
         ],
         "large": [
@@ -178,8 +180,8 @@
     "Custom / rejection sampling": {
       "count": 4,
       "map_ready": 4,
-      "has_image": 1,
-      "best": "rejection_sampling_demo",
+      "has_image": 4,
+      "best": "rejection_bench",
       "truth": "Throw darts, keep the ones under the curve — sample any shape by refusing the rest.",
       "act": "Act II — distributions",
       "thin": false,
@@ -202,8 +204,8 @@
     "Monte Carlo": {
       "count": 7,
       "map_ready": 6,
-      "has_image": 3,
-      "best": "monte_carlo_dartboard",
+      "has_image": 7,
+      "best": "pi_dart_bench",
       "truth": "Estimate the unknowable by throwing enough random darts at it.",
       "act": "Act II — distributions",
       "thin": false,
@@ -229,8 +231,8 @@
     "Perlin noise": {
       "count": 10,
       "map_ready": 10,
-      "has_image": 7,
-      "best": "perlin_noise_clouds",
+      "has_image": 10,
+      "best": "perlin_bench",
       "truth": "Smooth, coherent randomness — noise with neighbours, the texture of the natural world.",
       "act": "Act III — noise",
       "thin": false,
@@ -250,8 +252,8 @@
           "noise_field"
         ],
         "applied": [
-          "perlin_terrain_sculptor",
-          "perlin_noise_bridge"
+          "perlin_noise_bridge",
+          "perlin_terrain_sculptor"
         ]
       },
       "missing_tiers": []
@@ -259,8 +261,8 @@
     "Simplex / Worley / value noise": {
       "count": 6,
       "map_ready": 6,
-      "has_image": 4,
-      "best": "shader_08_cellularnoise",
+      "has_image": 6,
+      "best": "noise_compare_bench",
       "truth": "Other ways to make coherent noise — lattices, cells, and gradients beyond Perlin.",
       "act": "Act III — noise",
       "thin": false,
@@ -285,8 +287,8 @@
     "Noise fields & textures": {
       "count": 20,
       "map_ready": 20,
-      "has_image": 18,
-      "best": "marchingcubes_voxel_noise_demo",
+      "has_image": 20,
+      "best": "noise_flow_drones",
       "truth": "Noise becomes a field — every point in space assigned a value that flows.",
       "act": "Act III — noise",
       "thin": false,
@@ -304,6 +306,7 @@
         "large": [
           "marchingcubes_voxel_noise_demo",
           "shader_noise_space",
+          "voxel_noise_demo",
           "cloudvolume",
           "neon_wave_grid",
           "noise_space",
@@ -313,8 +316,7 @@
           "noisetorus_ex_1",
           "pool_hole_noise",
           "voxelnoise",
-          "WhiteNoiseGallery",
-          "voxel_noise_demo"
+          "WhiteNoiseGallery"
         ],
         "applied": [
           "noise_flow_drones"
@@ -325,8 +327,8 @@
     "Noise terrain / landscapes": {
       "count": 6,
       "map_ready": 6,
-      "has_image": 3,
-      "best": "noise_terrain_with_blobs",
+      "has_image": 6,
+      "best": "noise_dunes_bench",
       "truth": "Let noise be height — and randomness becomes landscape.",
       "act": "Act III — noise",
       "thin": false,
@@ -351,8 +353,8 @@
     "Blue noise / sampling": {
       "count": 5,
       "map_ready": 5,
-      "has_image": 2,
-      "best": "blue_noise",
+      "has_image": 5,
+      "best": "blue_noise_bench",
       "truth": "Random but evenly spaced — chance without clumping, the eye's preferred scatter.",
       "act": "Act III — noise",
       "thin": false,
@@ -376,8 +378,8 @@
     "Markov chains": {
       "count": 6,
       "map_ready": 5,
-      "has_image": 4,
-      "best": "markov_chains_tree",
+      "has_image": 6,
+      "best": "markov_melody",
       "truth": "The next state remembers only the last — memoryless chains that still make patterns.",
       "act": "Act IV — process & measure",
       "thin": false,
@@ -402,8 +404,8 @@
     "Seeds / PRNG vs TRNG": {
       "count": 6,
       "map_ready": 6,
-      "has_image": 2,
-      "best": "trng_vs_prng",
+      "has_image": 6,
+      "best": "seed_bench",
       "truth": "Pseudo-randomness is deterministic in disguise — same seed, same 'chance' every time.",
       "act": "Act IV — process & measure",
       "thin": false,
@@ -428,8 +430,8 @@
     "Entropy": {
       "count": 8,
       "map_ready": 8,
-      "has_image": 7,
-      "best": "entropy_axiom",
+      "has_image": 8,
+      "best": "entropy_bench",
       "truth": "Randomness measured — how many bits of surprise a source actually carries.",
       "act": "Act IV — process & measure",
       "thin": false,
@@ -456,8 +458,8 @@
     "Random transformations": {
       "count": 15,
       "map_ready": 15,
-      "has_image": 14,
-      "best": "Random_Rotate_Random_XYZ",
+      "has_image": 15,
+      "best": "jitter_bench",
       "truth": "Perturb the regular — rotation, position, decay drawn from chance.",
       "act": "Act V — randomness as material",
       "thin": false,
@@ -491,8 +493,8 @@
     "10 PRINT / generative grid": {
       "count": 5,
       "map_ready": 5,
-      "has_image": 2,
-      "best": "ten_print_maze_3d",
+      "has_image": 5,
+      "best": "ten_print_bench",
       "truth": "One line of chance per cell builds a maze — the smallest generative grammar.",
       "act": "Act V — randomness as material",
       "thin": false,
@@ -516,8 +518,8 @@
     "Random art / scatter": {
       "count": 11,
       "map_ready": 11,
-      "has_image": 9,
-      "best": "pollock_3d",
+      "has_image": 11,
+      "best": "scatter_bench",
       "truth": "Chance as a brush — Pollock's drips, Molnar's disorder, the aesthetics of the unplanned.",
       "act": "Act V — randomness as material",
       "thin": false,
@@ -547,8 +549,8 @@
     "Particle randomness": {
       "count": 6,
       "map_ready": 6,
-      "has_image": 4,
-      "best": "particle_randomness_emergent",
+      "has_image": 6,
+      "best": "random_fireworks",
       "truth": "Give a thousand particles their own dice — emergent texture from individual chance.",
       "act": "Act V — randomness as material",
       "thin": false,
@@ -569,14 +571,49 @@
         ]
       },
       "missing_tiers": []
+    },
+    "Seeded growth / DNA -> form": {
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "dna_sprout",
+      "truth": "The deep end of randomness: a short genome (CritterDNA) grown by an L-system into a unique, reproducible organism. Not flat chance — store the seed, replay the costly growth. Same seed, same form.",
+      "act": "Act VI — randomness as growth",
+      "thin": false,
+      "tiers": {
+        "small": [
+          "dna_sprout"
+        ],
+        "medium": [
+          "genome_bench"
+        ],
+        "large": [
+          "seed_vs_random"
+        ],
+        "applied": [
+          "genetic_tree_sculptor"
+        ]
+      },
+      "missing_tiers": []
     }
   },
-  "total": 160,
-  "map_ready_total": 157,
-  "image_total": 116,
+  "total": 164,
+  "map_ready_total": 161,
+  "image_total": 164,
   "empty_slots": 0,
   "groups": {
     "Uniform random / RNG": [
+      {
+        "lookup": "lottery_drum",
+        "name": "Lottery Drum (uniform raffle)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
       {
         "lookup": "randompoints_uniform",
         "name": "randompoints_uniform",
@@ -708,20 +745,31 @@
         "score": 6,
         "fp": 1,
         "tier": "small"
-      },
-      {
-        "lookup": "lottery_drum",
-        "name": "Lottery Drum (uniform raffle)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "applied"
       }
     ],
     "Coin / dice / discrete chance": [
+      {
+        "lookup": "coin_dice_bench",
+        "name": "Coin & Dice Bench (discrete tallies)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "dice_rain_room",
+        "name": "Dice Rain Room (raining histogram)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "dice_throw",
         "name": "Dice Throw",
@@ -754,31 +802,20 @@
         "score": 6,
         "fp": 1,
         "tier": "applied"
-      },
+      }
+    ],
+    "Random walk": [
       {
-        "lookup": "coin_dice_bench",
-        "name": "Coin & Dice Bench (discrete tallies)",
+        "lookup": "random_walk_bench",
+        "name": "Random Walk Bench (drunkard path)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 4,
         "tier": "medium"
       },
-      {
-        "lookup": "dice_rain_room",
-        "name": "Dice Rain Room (raining histogram)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 9,
-        "tier": "large"
-      }
-    ],
-    "Random walk": [
       {
         "lookup": "random_walk_terrarium",
         "name": "Random Walk Terrarium",
@@ -868,6 +905,17 @@
         "tier": "small"
       },
       {
+        "lookup": "living_paper_random_walk",
+        "name": "Living Paper — Random Walk",
+        "registry": "living_paper.json",
+        "category": "substrate",
+        "map_ready": true,
+        "has_image": true,
+        "score": 6,
+        "fp": 1,
+        "tier": "small"
+      },
+      {
         "lookup": "pixel_cloud",
         "name": "pixel_cloud",
         "registry": "randomness.json",
@@ -877,31 +925,31 @@
         "score": 3,
         "fp": 9,
         "tier": "large"
-      },
+      }
+    ],
+    "Probability distribution": [
       {
-        "lookup": "random_walk_bench",
-        "name": "Random Walk Bench (drunkard path)",
+        "lookup": "distribution_bench",
+        "name": "Distribution Bench (live histogram)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 4,
         "tier": "medium"
       },
       {
-        "lookup": "living_paper_random_walk",
-        "name": "Living Paper — Random Walk",
-        "registry": "living_paper.json",
-        "category": "substrate",
+        "lookup": "distribution_comparator",
+        "name": "Distribution Comparator",
+        "registry": "randomness.json",
+        "category": "randomness",
         "map_ready": true,
-        "has_image": false,
-        "score": 6,
+        "has_image": true,
+        "score": 11,
         "fp": 1,
-        "tier": "small"
-      }
-    ],
-    "Probability distribution": [
+        "tier": "applied"
+      },
       {
         "lookup": "distribution_sampler",
         "name": "Distribution Sampler",
@@ -945,28 +993,6 @@
         "score": 6,
         "fp": 1,
         "tier": "small"
-      },
-      {
-        "lookup": "distribution_bench",
-        "name": "Distribution Bench (live histogram)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "medium"
-      },
-      {
-        "lookup": "distribution_comparator",
-        "name": "Distribution Comparator",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 11,
-        "fp": 1,
-        "tier": "applied"
       }
     ],
     "Gaussian / normal": [
@@ -1048,6 +1074,17 @@
         "tier": "medium"
       },
       {
+        "lookup": "random_gaussian_texture",
+        "name": "Random Gaussian Texture",
+        "registry": "randomness.json",
+        "category": "emergence",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
         "lookup": "RandomGaussianTexture",
         "name": "Random Gaussian Texture",
         "registry": "randomness.json",
@@ -1059,23 +1096,12 @@
         "tier": "medium"
       },
       {
-        "lookup": "random_gaussian_texture",
-        "name": "Random Gaussian Texture",
-        "registry": "randomness.json",
-        "category": "emergence",
-        "map_ready": true,
-        "has_image": false,
-        "score": 9,
-        "fp": 4,
-        "tier": "medium"
-      },
-      {
         "lookup": "normal_distribution",
         "name": "Normal Distribution",
         "registry": "statistics.json",
         "category": "statistics",
         "map_ready": false,
-        "has_image": false,
+        "has_image": true,
         "score": 6,
         "fp": 7,
         "tier": "medium"
@@ -1083,23 +1109,12 @@
     ],
     "Custom / rejection sampling": [
       {
-        "lookup": "rejection_sampling_demo",
-        "name": "Rejection Sampling Demo",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": true,
-        "score": 10,
-        "fp": 1,
-        "tier": "applied"
-      },
-      {
         "lookup": "rejection_bench",
         "name": "Rejection Bench (accept / reject)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 4,
         "tier": "medium"
@@ -1110,7 +1125,7 @@
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 9,
         "tier": "large"
@@ -1121,13 +1136,57 @@
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 2,
         "tier": "small"
+      },
+      {
+        "lookup": "rejection_sampling_demo",
+        "name": "Rejection Sampling Demo",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 1,
+        "tier": "applied"
       }
     ],
     "Monte Carlo": [
+      {
+        "lookup": "pi_dart_bench",
+        "name": "Pi Dart Bench (pi convergence)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "pi_dart_room",
+        "name": "Pi Dart Room (stand in the square)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "pi_dart_toy",
+        "name": "Pi Dart Toy (held Monte Carlo)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "monte_carlo_dartboard",
         "name": "Monte Carlo Dart Board",
@@ -1162,51 +1221,40 @@
         "tier": "applied"
       },
       {
-        "lookup": "pi_dart_bench",
-        "name": "Pi Dart Bench (pi convergence)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "medium"
-      },
-      {
-        "lookup": "pi_dart_room",
-        "name": "Pi Dart Room (stand in the square)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 9,
-        "tier": "large"
-      },
-      {
-        "lookup": "pi_dart_toy",
-        "name": "Pi Dart Toy (held Monte Carlo)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 2,
-        "tier": "small"
-      },
-      {
         "lookup": "monte_carlo",
         "name": "Monte Carlo Simulation",
         "registry": "statistics.json",
         "category": "statistics",
         "map_ready": false,
-        "has_image": false,
+        "has_image": true,
         "score": 7,
         "fp": 4,
         "tier": "applied"
       }
     ],
     "Perlin noise": [
+      {
+        "lookup": "perlin_bench",
+        "name": "Perlin Bench (coherent curve)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "perlin_noise_bridge",
+        "name": "Perlin Noise Bridge",
+        "registry": "randomness.json",
+        "category": "procedural",
+        "map_ready": true,
+        "has_image": true,
+        "score": 14,
+        "fp": 1,
+        "tier": "applied"
+      },
       {
         "lookup": "perlin_noise_clouds",
         "name": "Perlin Noise Clouds",
@@ -1274,6 +1322,17 @@
         "tier": "large"
       },
       {
+        "lookup": "living_paper_perlin",
+        "name": "Living Paper — Perlin Noise",
+        "registry": "living_paper.json",
+        "category": "substrate",
+        "map_ready": true,
+        "has_image": true,
+        "score": 7,
+        "fp": 1,
+        "tier": "small"
+      },
+      {
         "lookup": "noise_field",
         "name": "Noise Field",
         "registry": "hazards.json",
@@ -1283,42 +1342,31 @@
         "score": 4,
         "fp": 9,
         "tier": "large"
-      },
+      }
+    ],
+    "Simplex / Worley / value noise": [
       {
-        "lookup": "perlin_bench",
-        "name": "Perlin Bench (coherent curve)",
+        "lookup": "noise_compare_bench",
+        "name": "Noise Compare Bench (value / simplex / worley)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 4,
         "tier": "medium"
       },
       {
-        "lookup": "perlin_noise_bridge",
-        "name": "Perlin Noise Bridge",
+        "lookup": "noise_displacer",
+        "name": "Noise Displacer (surface displacement)",
         "registry": "randomness.json",
-        "category": "procedural",
+        "category": "randomness",
         "map_ready": true,
-        "has_image": false,
-        "score": 14,
-        "fp": 1,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
         "tier": "applied"
       },
-      {
-        "lookup": "living_paper_perlin",
-        "name": "Living Paper — Perlin Noise",
-        "registry": "living_paper.json",
-        "category": "substrate",
-        "map_ready": true,
-        "has_image": false,
-        "score": 7,
-        "fp": 1,
-        "tier": "small"
-      }
-    ],
-    "Simplex / Worley / value noise": [
       {
         "lookup": "shader_08_cellularnoise",
         "name": "Cellular Noise Shader",
@@ -1362,31 +1410,20 @@
         "score": 7,
         "fp": 9,
         "tier": "large"
-      },
-      {
-        "lookup": "noise_compare_bench",
-        "name": "Noise Compare Bench (value / simplex / worley)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "medium"
-      },
-      {
-        "lookup": "noise_displacer",
-        "name": "Noise Displacer (surface displacement)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "applied"
       }
     ],
     "Noise fields & textures": [
+      {
+        "lookup": "noise_flow_drones",
+        "name": "Noise Flow Drones (flow-field navigation)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
       {
         "lookup": "marchingcubes_voxel_noise_demo",
         "name": "Marching Cubes Voxel Noise",
@@ -1403,6 +1440,17 @@
         "name": "Shader Noise Space",
         "registry": "randomness.json",
         "category": "procedural",
+        "map_ready": true,
+        "has_image": true,
+        "score": 10,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "voxel_noise_demo",
+        "name": "voxel_noise_demo",
+        "registry": "isosurfaces.json",
+        "category": "proceduralgeneration",
         "map_ready": true,
         "has_image": true,
         "score": 10,
@@ -1584,31 +1632,42 @@
         "score": 7,
         "fp": 9,
         "tier": "large"
-      },
+      }
+    ],
+    "Noise terrain / landscapes": [
       {
-        "lookup": "noise_flow_drones",
-        "name": "Noise Flow Drones (flow-field navigation)",
+        "lookup": "noise_dunes_bench",
+        "name": "Noise Dunes Bench (tabletop landscape)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "noise_height_toy",
+        "name": "Noise Height Toy (held heightfield)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "noise_terrain_forge",
+        "name": "Noise Terrain Forge (stamps ground)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
         "score": 99,
         "fp": 4,
         "tier": "applied"
       },
-      {
-        "lookup": "voxel_noise_demo",
-        "name": "voxel_noise_demo",
-        "registry": "isosurfaces.json",
-        "category": "proceduralgeneration",
-        "map_ready": true,
-        "has_image": false,
-        "score": 10,
-        "fp": 9,
-        "tier": "large"
-      }
-    ],
-    "Noise terrain / landscapes": [
       {
         "lookup": "noise_terrain_with_blobs",
         "name": "Noise Terrain with Animated Blobs",
@@ -1641,42 +1700,42 @@
         "score": 7,
         "fp": 1,
         "tier": "large"
-      },
+      }
+    ],
+    "Blue noise / sampling": [
       {
-        "lookup": "noise_dunes_bench",
-        "name": "Noise Dunes Bench (tabletop landscape)",
+        "lookup": "blue_noise_bench",
+        "name": "Blue Noise Bench (white vs blue)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 4,
         "tier": "medium"
       },
       {
-        "lookup": "noise_height_toy",
-        "name": "Noise Height Toy (held heightfield)",
+        "lookup": "blue_noise_planter",
+        "name": "Blue Noise Planter (even placement)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "blue_noise_toy",
+        "name": "Blue Noise Toy (even-spaced points)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
         "score": 99,
         "fp": 2,
         "tier": "small"
       },
-      {
-        "lookup": "noise_terrain_forge",
-        "name": "Noise Terrain Forge (stamps ground)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "applied"
-      }
-    ],
-    "Blue noise / sampling": [
       {
         "lookup": "blue_noise",
         "name": "Blue Noise",
@@ -1698,42 +1757,20 @@
         "score": 7,
         "fp": 9,
         "tier": "large"
-      },
+      }
+    ],
+    "Markov chains": [
       {
-        "lookup": "blue_noise_bench",
-        "name": "Blue Noise Bench (white vs blue)",
+        "lookup": "markov_melody",
+        "name": "Markov Melody (chain composes)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "medium"
-      },
-      {
-        "lookup": "blue_noise_planter",
-        "name": "Blue Noise Planter (even placement)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 4,
         "tier": "applied"
       },
-      {
-        "lookup": "blue_noise_toy",
-        "name": "Blue Noise Toy (even-spaced points)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 2,
-        "tier": "small"
-      }
-    ],
-    "Markov chains": [
       {
         "lookup": "markov_chains_tree",
         "name": "Markov Chains Tree",
@@ -1779,29 +1816,40 @@
         "tier": "large"
       },
       {
-        "lookup": "markov_melody",
-        "name": "Markov Melody (chain composes)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "applied"
-      },
-      {
         "lookup": "markov_chain",
         "name": "Markov Chain",
         "registry": "statistics.json",
         "category": "statistics",
         "map_ready": false,
-        "has_image": false,
+        "has_image": true,
         "score": 7,
         "fp": 6,
         "tier": "medium"
       }
     ],
     "Seeds / PRNG vs TRNG": [
+      {
+        "lookup": "seed_bench",
+        "name": "Seed Bench (same seed, same stream)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "seed_toy",
+        "name": "Seed Toy (same seed, same glyph)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "trng_vs_prng",
         "name": "TRNG vs PRNG",
@@ -1825,34 +1873,12 @@
         "tier": "applied"
       },
       {
-        "lookup": "seed_bench",
-        "name": "Seed Bench (same seed, same stream)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "medium"
-      },
-      {
-        "lookup": "seed_toy",
-        "name": "Seed Toy (same seed, same glyph)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 2,
-        "tier": "small"
-      },
-      {
         "lookup": "seed_replay_demo",
         "name": "Seed Replay Demo",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 11,
         "fp": 1,
         "tier": "applied"
@@ -1863,13 +1889,24 @@
         "registry": "grid2d.json",
         "category": "substrate",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 7,
         "fp": 9,
         "tier": "large"
       }
     ],
     "Entropy": [
+      {
+        "lookup": "entropy_bench",
+        "name": "Entropy Bench (bits of surprise)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "entropy_axiom",
         "name": "Entropy Axiom",
@@ -1946,20 +1983,20 @@
         "score": 6,
         "fp": 9,
         "tier": "large"
-      },
-      {
-        "lookup": "entropy_bench",
-        "name": "Entropy Bench (bits of surprise)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "medium"
       }
     ],
     "Random transformations": [
+      {
+        "lookup": "jitter_bench",
+        "name": "Jitter Bench (perturb the grid)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "Random_Rotate_Random_XYZ",
         "name": "Random Rotate XYZ",
@@ -2113,20 +2150,42 @@
         "score": 6,
         "fp": 1,
         "tier": "small"
-      },
-      {
-        "lookup": "jitter_bench",
-        "name": "Jitter Bench (perturb the grid)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "medium"
       }
     ],
     "10 PRINT / generative grid": [
+      {
+        "lookup": "ten_print_bench",
+        "name": "Ten Print Bench (bias dial)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "ten_print_textile",
+        "name": "Ten Print Textile (fabric loom)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "ten_print_toy",
+        "name": "Ten Print Toy (maze of slashes)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "ten_print_maze_3d",
         "name": "ten_print_maze_3d",
@@ -2148,42 +2207,20 @@
         "score": 8,
         "fp": 9,
         "tier": "large"
-      },
+      }
+    ],
+    "Random art / scatter": [
       {
-        "lookup": "ten_print_bench",
-        "name": "Ten Print Bench (bias dial)",
+        "lookup": "scatter_bench",
+        "name": "Scatter Bench (Pollock drips)",
         "registry": "randomness.json",
         "category": "randomness",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 99,
         "fp": 4,
         "tier": "medium"
       },
-      {
-        "lookup": "ten_print_textile",
-        "name": "Ten Print Textile (fabric loom)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "applied"
-      },
-      {
-        "lookup": "ten_print_toy",
-        "name": "Ten Print Toy (maze of slashes)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 2,
-        "tier": "small"
-      }
-    ],
-    "Random art / scatter": [
       {
         "lookup": "pollock_3d",
         "name": "Pollock 3D",
@@ -2216,6 +2253,17 @@
         "score": 9,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "vera_molnar_des_ordres",
+        "name": "Vera Molnar Des-Ordres",
+        "registry": "commons_artifacts.json",
+        "category": "art",
+        "map_ready": true,
+        "has_image": true,
+        "score": 9,
+        "fp": 1,
+        "tier": "applied"
       },
       {
         "lookup": "bubbles_random",
@@ -2282,31 +2330,20 @@
         "score": 3,
         "fp": 9,
         "tier": "large"
-      },
-      {
-        "lookup": "scatter_bench",
-        "name": "Scatter Bench (Pollock drips)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "medium"
-      },
-      {
-        "lookup": "vera_molnar_des_ordres",
-        "name": "Vera Molnar Des-Ordres",
-        "registry": "commons_artifacts.json",
-        "category": "art",
-        "map_ready": true,
-        "has_image": false,
-        "score": 9,
-        "fp": 1,
-        "tier": "applied"
       }
     ],
     "Particle randomness": [
+      {
+        "lookup": "random_fireworks",
+        "name": "Random Fireworks (per-particle chance)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
       {
         "lookup": "particle_randomness_emergent",
         "name": "Particle Randomness - Emergent",
@@ -2352,26 +2389,61 @@
         "tier": "large"
       },
       {
-        "lookup": "random_fireworks",
-        "name": "Random Fireworks (per-particle chance)",
-        "registry": "randomness.json",
-        "category": "randomness",
-        "map_ready": true,
-        "has_image": false,
-        "score": 99,
-        "fp": 4,
-        "tier": "applied"
-      },
-      {
         "lookup": "bubble_particles",
         "name": "Bubble Particles",
         "registry": "randomness.json",
         "category": "procedural",
         "map_ready": true,
-        "has_image": false,
+        "has_image": true,
         "score": 7,
         "fp": 1,
         "tier": "small"
+      }
+    ],
+    "Seeded growth / DNA -> form": [
+      {
+        "lookup": "dna_sprout",
+        "name": "DNA Sprout (held seed -> plant)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "genetic_tree_sculptor",
+        "name": "Genetic Tree Sculptor",
+        "registry": "lsystems.json",
+        "category": "procedural",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "applied"
+      },
+      {
+        "lookup": "genome_bench",
+        "name": "Genome Bench (scrub -> regrow)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "seed_vs_random",
+        "name": "Seed vs Random (the thesis bed)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
       }
     ]
   }

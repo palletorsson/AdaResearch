@@ -13477,6 +13477,147 @@
         "measured_footprint_cells": 4,
         "footprint_source": "designed"
       }
+    },
+    "dna_sprout": {
+      "lookup_name": "dna_sprout",
+      "scene": "res://commons/artifacts/dna_sprout/dna_sprout.tscn",
+      "class_name": "DnaSprout",
+      "name": "DNA Sprout (held seed -> plant)",
+      "description": "The held end of seed -> form: a deterministic CritterDNA genome grown by an L-system into one plant. Same seed always grows the same plant - the deep seed, not flat randomness. Bridges seed_toy to the DNA galleries.",
+      "category": "randomness",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "randomness",
+        "dna",
+        "seeded-growth",
+        "small"
+      ],
+      "parameters": {
+        "emissive": "Bool",
+        "seed_value": "Int"
+      },
+      "dev_themes": [
+        "randomness",
+        "nature_system",
+        "dna"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "genome_bench": {
+      "lookup_name": "genome_bench",
+      "scene": "res://commons/artifacts/genome_bench/genome_bench.tscn",
+      "class_name": "GenomeBench",
+      "name": "Genome Bench (scrub -> regrow)",
+      "description": "Bench genotype-to-phenotype: a CritterDNA genome drifts by small mutations and the plant re-grows each change. The row of gene-bars is the seed - store the numbers and the form returns.",
+      "category": "randomness",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "randomness",
+        "dna",
+        "seeded-growth",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool",
+        "seed_value": "Int"
+      },
+      "dev_themes": [
+        "randomness",
+        "nature_system",
+        "dna"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "seed_vs_random": {
+      "lookup_name": "seed_vs_random",
+      "scene": "res://commons/artifacts/seed_vs_random/seed_vs_random.tscn",
+      "class_name": "SeedVsRandom",
+      "name": "Seed vs Random (the thesis bed)",
+      "description": "The payoff: two beds. LEFT grows from fresh randomness every few seconds - never the same, nothing to store. RIGHT grows from fixed CritterDNA seeds - store the seed, regrow it exactly. Flat randomness vs the deep, side by side.",
+      "category": "randomness",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "randomness",
+        "dna",
+        "seeded-growth",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool",
+        "seed_value": "Int"
+      },
+      "dev_themes": [
+        "randomness",
+        "nature_system",
+        "dna"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
     }
   }
 }
