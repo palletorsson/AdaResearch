@@ -855,5 +855,333 @@
     }
   ],
   "total_artifacts": 38,
-  "total_concepts": 12
+  "total_concepts": 12,
+  "placed": {
+    "map": "MindMap_Transformation",
+    "grid": [
+      11,
+      40
+    ],
+    "positions": [
+      {
+        "concept": "Three rigid motions",
+        "order": 0,
+        "lookup": "transformation_workbench",
+        "row": 2,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.0513
+      },
+      {
+        "concept": "Translation",
+        "order": 1,
+        "lookup": "axis_translation_cube",
+        "row": 5,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.1282
+      },
+      {
+        "concept": "Rotation",
+        "order": 2,
+        "lookup": "rotation_gimbal",
+        "row": 8,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.2051
+      },
+      {
+        "concept": "Scale",
+        "order": 3,
+        "lookup": "rotatescalecubes",
+        "row": 11,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.2821
+      },
+      {
+        "concept": "Shear",
+        "order": 4,
+        "lookup": "shear_matrix_demo",
+        "row": 14,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.359
+      },
+      {
+        "concept": "Composition",
+        "order": 5,
+        "lookup": "carousel_cake",
+        "row": 17,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.4359
+      },
+      {
+        "concept": "Matrix / homogeneous",
+        "order": 6,
+        "lookup": "homogeneous_coordinates",
+        "row": 20,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.5128
+      },
+      {
+        "concept": "Invariants",
+        "order": 7,
+        "lookup": "invariants_demo",
+        "row": 23,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.5897
+      },
+      {
+        "concept": "Tiling / pattern",
+        "order": 8,
+        "lookup": "floor_tiles",
+        "row": 26,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.6667
+      },
+      {
+        "concept": "Field / flow",
+        "order": 9,
+        "lookup": "quantum_field",
+        "row": 29,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.7436
+      },
+      {
+        "concept": "Boolean / CSG",
+        "order": 10,
+        "lookup": "boolean_tunnel",
+        "row": 32,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.8205
+      },
+      {
+        "concept": "Curved space (non-Euclidean)",
+        "order": 11,
+        "lookup": "bulging_tunnel",
+        "row": 35,
+        "col": 5,
+        "x": 0.5,
+        "y": 0.8974
+      }
+    ],
+    "matrix": [
+      [
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727,
+        0.3636,
+        0.4545,
+        0.5455,
+        0.6364,
+        0.7273,
+        0.8182,
+        0.9091,
+        1.0
+      ],
+      [
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727,
+        0.3636,
+        0.4545,
+        0.5455,
+        0.6364,
+        0.7273,
+        0.8182,
+        0.9091
+      ],
+      [
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727,
+        0.3636,
+        0.4545,
+        0.5455,
+        0.6364,
+        0.7273,
+        0.8182
+      ],
+      [
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727,
+        0.3636,
+        0.4545,
+        0.5455,
+        0.6364,
+        0.7273
+      ],
+      [
+        0.3636,
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727,
+        0.3636,
+        0.4545,
+        0.5455,
+        0.6364
+      ],
+      [
+        0.4545,
+        0.3636,
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727,
+        0.3636,
+        0.4545,
+        0.5455
+      ],
+      [
+        0.5455,
+        0.4545,
+        0.3636,
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727,
+        0.3636,
+        0.4545
+      ],
+      [
+        0.6364,
+        0.5455,
+        0.4545,
+        0.3636,
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727,
+        0.3636
+      ],
+      [
+        0.7273,
+        0.6364,
+        0.5455,
+        0.4545,
+        0.3636,
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818,
+        0.2727
+      ],
+      [
+        0.8182,
+        0.7273,
+        0.6364,
+        0.5455,
+        0.4545,
+        0.3636,
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909,
+        0.1818
+      ],
+      [
+        0.9091,
+        0.8182,
+        0.7273,
+        0.6364,
+        0.5455,
+        0.4545,
+        0.3636,
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0,
+        0.0909
+      ],
+      [
+        1.0,
+        0.9091,
+        0.8182,
+        0.7273,
+        0.6364,
+        0.5455,
+        0.4545,
+        0.3636,
+        0.2727,
+        0.1818,
+        0.0909,
+        0.0
+      ]
+    ],
+    "conceptual_corr": 1.0,
+    "pulled_apart": [
+      {
+        "a": "Boolean / CSG",
+        "b": "Curved space (non-Euclidean)",
+        "placed": 0.09,
+        "conceptual": 0.09
+      },
+      {
+        "a": "Field / flow",
+        "b": "Curved space (non-Euclidean)",
+        "placed": 0.18,
+        "conceptual": 0.18
+      },
+      {
+        "a": "Field / flow",
+        "b": "Boolean / CSG",
+        "placed": 0.09,
+        "conceptual": 0.09
+      }
+    ],
+    "jammed_together": [
+      {
+        "a": "Three rigid motions",
+        "b": "Translation",
+        "placed": 0.09,
+        "conceptual": 0.09
+      },
+      {
+        "a": "Three rigid motions",
+        "b": "Rotation",
+        "placed": 0.18,
+        "conceptual": 0.18
+      },
+      {
+        "a": "Three rigid motions",
+        "b": "Scale",
+        "placed": 0.27,
+        "conceptual": 0.27
+      }
+    ]
+  }
 }
