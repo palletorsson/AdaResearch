@@ -123,6 +123,11 @@ CONCEPTS = [
   ["mirror_cellular_texture", "mirrored_cellular_automata", "persian_rug", "cellular_texture"],
   ["texture", "material", "rug", "tile"],
   "A rule run to equilibrium is a texture; the Persian rug is an algorithm that forgot it was ever running."),
+ ("Morphogenesis (DNA -> pattern)",
+  ["morpho_egg", "morphogenesis_bench", "morpho_menagerie", "rd_artifact", "reaction_diffusion_dna"],
+  ["morphogenesis", "coat", "pattern gene"],
+  "The same chemistry two numbers apart is a leopard or a zebra — the coat is the genome run forward by "
+  "reaction-diffusion. Form by L-system, pattern by RD: one DNA, two grammars. The CA twin of the seed->form bridge."),
 ]
 
 # small (held, fp<=2) -> medium (bench, 3-8) -> large (room, fp>=9 / walk-in) -> applied (a tool/scenario)
@@ -180,6 +185,10 @@ FORCE = {
   "ca_texture_toy": ("CA materials & texture", "small"),
   "ca_texture_bench": ("CA materials & texture", "medium"),
   "ca_texture_wall": ("CA materials & texture", "large"),
+  "morpho_egg": ("Morphogenesis (DNA -> pattern)", "small"),
+  "morphogenesis_bench": ("Morphogenesis (DNA -> pattern)", "medium"),
+  "morpho_menagerie": ("Morphogenesis (DNA -> pattern)", "large"),
+  "rd_artifact": ("Morphogenesis (DNA -> pattern)", "applied"),
 }
 
 
@@ -249,6 +258,7 @@ def main():
         "Act IV — matter & chemistry": ["Continuous CA (Lenia)", "Reaction-diffusion (Turing)", "Lattice gas / physical CA"],
         "Act V — the edge of chaos": ["The four Wolfram classes", "Edge of chaos / self-organisation", "3D / volumetric CA"],
         "Act VI — structure & world": ["Growth & dendrites", "Caves / percolation / cracks", "Stigmergy & ecological CA", "CA materials & texture"],
+        "Act VII — CA as morphogenesis (DNA bridge)": ["Morphogenesis (DNA -> pattern)"],
     }
     concept_act = {cc: act for act, cs in ACTS.items() for cc in cs}
     meta = {}

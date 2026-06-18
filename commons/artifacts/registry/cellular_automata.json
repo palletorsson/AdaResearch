@@ -7184,6 +7184,147 @@
         "measured_footprint_cells": 9,
         "footprint_source": "designed"
       }
+    },
+    "morpho_egg": {
+      "lookup_name": "morpho_egg",
+      "scene": "res://commons/artifacts/morpho_egg/morpho_egg.tscn",
+      "class_name": "MorphoEgg",
+      "name": "Morpho Egg (DNA paints a coat)",
+      "description": "The held end of the CA->DNA morphogenesis bridge: CritterDNA pattern genes drive a Gray-Scott reaction-diffusion that grows the markings on the egg. Same genome, same coat. The CA twin of the seed->form bridge.",
+      "category": "cellular_automata",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "tags": [
+        "cellular-automata",
+        "morphogenesis",
+        "dna",
+        "small"
+      ],
+      "parameters": {
+        "emissive": "Bool",
+        "seed_value": "Int"
+      },
+      "dev_themes": [
+        "cellular_automata",
+        "dna",
+        "morphogenesis"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "morphogenesis_bench": {
+      "lookup_name": "morphogenesis_bench",
+      "scene": "res://commons/artifacts/morphogenesis_bench/morphogenesis_bench.tscn",
+      "class_name": "MorphogenesisBench",
+      "name": "Morphogenesis Bench (scrub the coat)",
+      "description": "Bench morphogenesis: the pattern gene drifts and the reaction-diffusion coat morphs spots->stripes->maze. The gene-bars are the genome; the markings are downstream. Turing 1952.",
+      "category": "cellular_automata",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "tags": [
+        "cellular-automata",
+        "morphogenesis",
+        "dna",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool",
+        "seed_value": "Int"
+      },
+      "dev_themes": [
+        "cellular_automata",
+        "dna",
+        "morphogenesis"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "morpho_menagerie": {
+      "lookup_name": "morpho_menagerie",
+      "scene": "res://commons/artifacts/morpho_menagerie/morpho_menagerie.tscn",
+      "class_name": "MorphoMenagerie",
+      "name": "Morpho Menagerie (one genome, many coats)",
+      "description": "Room morphogenesis: a lineage of specimens, each an RD coat from the same genome with pattern_type swept 0..1 - the spotted-to-striped continuum is one allele moving.",
+      "category": "cellular_automata",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "tags": [
+        "cellular-automata",
+        "morphogenesis",
+        "dna",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool",
+        "seed_value": "Int"
+      },
+      "dev_themes": [
+        "cellular_automata",
+        "dna",
+        "morphogenesis"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
     }
   }
 }

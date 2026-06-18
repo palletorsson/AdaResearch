@@ -7,7 +7,8 @@
     "Act III — beyond binary (states & neighbours)",
     "Act IV — matter & chemistry",
     "Act V — the edge of chaos",
-    "Act VI — structure & world"
+    "Act VI — structure & world",
+    "Act VII — CA as morphogenesis (DNA bridge)"
   ],
   "concepts": [
     "Elementary CA (1D rules)",
@@ -29,7 +30,8 @@
     "Growth & dendrites",
     "Caves / percolation / cracks",
     "Stigmergy & ecological CA",
-    "CA materials & texture"
+    "CA materials & texture",
+    "Morphogenesis (DNA -> pattern)"
   ],
   "concept_meta": {
     "Elementary CA (1D rules)": {
@@ -545,11 +547,35 @@
         ]
       },
       "missing_tiers": []
+    },
+    "Morphogenesis (DNA -> pattern)": {
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "morpho_egg",
+      "truth": "The same chemistry two numbers apart is a leopard or a zebra — the coat is the genome run forward by reaction-diffusion. Form by L-system, pattern by RD: one DNA, two grammars. The CA twin of the seed->form bridge.",
+      "act": "Act VII — CA as morphogenesis (DNA bridge)",
+      "thin": false,
+      "tiers": {
+        "small": [
+          "morpho_egg"
+        ],
+        "medium": [
+          "morphogenesis_bench"
+        ],
+        "large": [
+          "morpho_menagerie"
+        ],
+        "applied": [
+          "rd_artifact"
+        ]
+      },
+      "missing_tiers": []
     }
   },
-  "total": 114,
-  "map_ready_total": 113,
-  "image_total": 114,
+  "total": 118,
+  "map_ready_total": 117,
+  "image_total": 118,
   "empty_slots": 0,
   "groups": {
     "Elementary CA (1D rules)": [
@@ -1843,6 +1869,52 @@
         "has_image": true,
         "score": 7,
         "fp": 9,
+        "tier": "applied"
+      }
+    ],
+    "Morphogenesis (DNA -> pattern)": [
+      {
+        "lookup": "morpho_egg",
+        "name": "Morpho Egg (DNA paints a coat)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "morpho_menagerie",
+        "name": "Morpho Menagerie (one genome, many coats)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "morphogenesis_bench",
+        "name": "Morphogenesis Bench (scrub the coat)",
+        "registry": "cellular_automata.json",
+        "category": "cellular_automata",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "rd_artifact",
+        "name": "Reaction-Diffusion Artifact",
+        "registry": "dna_grammar_artifacts.json",
+        "category": "dna_grammar",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 1,
         "tier": "applied"
       }
     ]
