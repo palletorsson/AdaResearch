@@ -1,0 +1,590 @@
+{
+  "title": "Transformations",
+  "domain": "transformation",
+  "note": "Auto-classified by tools/build_concept_map.py — heuristic keyword scoring, tier by footprint.",
+  "acts": [],
+  "concepts": [
+    "Three rigid motions",
+    "Translation",
+    "Rotation",
+    "Scale",
+    "Shear",
+    "Composition",
+    "Matrix / homogeneous",
+    "Invariants",
+    "Tiling / pattern",
+    "Field / flow",
+    "Boolean / CSG",
+    "Curved space (non-Euclidean)"
+  ],
+  "concept_meta": {
+    "Three rigid motions": {
+      "act": "rigid motions",
+      "truth": "translation, rotation, scale: the grammar of motion.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "transformation_workbench"
+        ]
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Translation": {
+      "act": "rigid motions",
+      "truth": "translation preserves everything except position.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "axis_translation_cube",
+          "translation_cube_demo",
+          "x_translation_cube",
+          "y_translation_cube",
+          "z_translation_cube"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 5,
+      "thin": false
+    },
+    "Rotation": {
+      "act": "rigid motions",
+      "truth": "rotation turns without resizing — the circle hidden in motion.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "rotation_gimbal",
+          "spin"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 2,
+      "thin": false
+    },
+    "Scale": {
+      "act": "rigid motions",
+      "truth": "scale resizes; a shape is a ratio held against a unit.",
+      "tiers": {
+        "small": [
+          "rotatescalecubes",
+          "scaleme"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 2,
+      "thin": false
+    },
+    "Shear": {
+      "act": "beyond rigid",
+      "truth": "shear slides parallel layers past each other.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "shear_matrix_demo"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Composition": {
+      "act": "beyond rigid",
+      "truth": "transforms compose, and the order is the meaning.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "carousel_cake",
+          "transform_composition"
+        ]
+      },
+      "count": 2,
+      "thin": false
+    },
+    "Matrix / homogeneous": {
+      "act": "representation",
+      "truth": "every transform is a matrix; homogeneous coordinates unify them.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "homogeneous_coordinates",
+          "matrix_4x4_viewer"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 2,
+      "thin": false
+    },
+    "Invariants": {
+      "act": "representation",
+      "truth": "what a transform leaves unchanged names its kind.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "invariants_demo"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Tiling / pattern": {
+      "act": "operations on space",
+      "truth": "a transform repeated fills a plane.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "floor_tiles"
+        ],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Field / flow": {
+      "act": "operations on space",
+      "truth": "a transform assigned to every point is a field.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "quantum_field",
+          "vector_field"
+        ],
+        "applied": []
+      },
+      "count": 2,
+      "thin": false
+    },
+    "Boolean / CSG": {
+      "act": "operations on space",
+      "truth": "add and subtract solids to carve new form.",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "boolean_tunnel"
+        ],
+        "applied": []
+      },
+      "count": 1,
+      "thin": true
+    },
+    "Curved space (non-Euclidean)": {
+      "act": "operations on space",
+      "truth": "transform the space itself, not the object in it.",
+      "tiers": {
+        "small": [
+          "curvature_slider",
+          "elliptic_surface",
+          "entropy_morphogenesis",
+          "gyroid_cheese",
+          "hyperbolic_surface",
+          "riemann_sphere"
+        ],
+        "medium": [],
+        "large": [
+          "bulging_tunnel",
+          "marching_cubes",
+          "mobius_strip_altgeo",
+          "mobius_world",
+          "non_euclidean_space",
+          "organic_space",
+          "rhizomatic_maze_space",
+          "rhizomatic_structure",
+          "riemann_pi",
+          "riemann_torus",
+          "toruscylinder"
+        ],
+        "applied": [
+          "triangle_curvature_workbench"
+        ]
+      },
+      "count": 18,
+      "thin": false
+    }
+  },
+  "groups": {
+    "Three rigid motions": [
+      {
+        "lookup": "transformation_workbench",
+        "name": "Transformation Workbench",
+        "registry": "transforms.json",
+        "tier": "applied",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Translation": [
+      {
+        "lookup": "axis_translation_cube",
+        "name": "Axis Translation Cube",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "translation_cube_demo",
+        "name": "Translation Cube Demo",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false
+      },
+      {
+        "lookup": "x_translation_cube",
+        "name": "X-Translation Cube",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "y_translation_cube",
+        "name": "Y-Translation Cube",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "z_translation_cube",
+        "name": "Z-Translation Cube",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Rotation": [
+      {
+        "lookup": "rotation_gimbal",
+        "name": "Rotation Gimbal",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "spin",
+        "name": "spin",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Scale": [
+      {
+        "lookup": "rotatescalecubes",
+        "name": "Rotate Scale Cubes",
+        "registry": "transforms.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "scaleme",
+        "name": "scaleme",
+        "registry": "transforms.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Shear": [
+      {
+        "lookup": "shear_matrix_demo",
+        "name": "Shear Matrix Demo",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Composition": [
+      {
+        "lookup": "carousel_cake",
+        "name": "carousel_cake",
+        "registry": "transforms.json",
+        "tier": "applied",
+        "fp": 9,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "transform_composition",
+        "name": "Transform Composition",
+        "registry": "transforms.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Matrix / homogeneous": [
+      {
+        "lookup": "homogeneous_coordinates",
+        "name": "Homogeneous Coordinates",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "matrix_4x4_viewer",
+        "name": "Matrix 4x4 Viewer",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Invariants": [
+      {
+        "lookup": "invariants_demo",
+        "name": "Invariants Demo",
+        "registry": "transforms.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Tiling / pattern": [
+      {
+        "lookup": "floor_tiles",
+        "name": "floor_tiles",
+        "registry": "transforms.json",
+        "tier": "large",
+        "fp": 54,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Field / flow": [
+      {
+        "lookup": "quantum_field",
+        "name": "Quantum Field",
+        "registry": "transforms.json",
+        "tier": "large",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "vector_field",
+        "name": "vector_field",
+        "registry": "transforms.json",
+        "tier": "large",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Boolean / CSG": [
+      {
+        "lookup": "boolean_tunnel",
+        "name": "Boolean Tunnel",
+        "registry": "transforms.json",
+        "tier": "large",
+        "fp": 12,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Curved space (non-Euclidean)": [
+      {
+        "lookup": "bulging_tunnel",
+        "name": "Bulging Tunnel",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 30,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "curvature_slider",
+        "name": "Curvature Slider",
+        "registry": "alternative_geometries.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "elliptic_surface",
+        "name": "Elliptic Surface",
+        "registry": "alternative_geometries.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "entropy_morphogenesis",
+        "name": "entropy_morphogenesis",
+        "registry": "alternative_geometries.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "gyroid_cheese",
+        "name": "gyroid_cheese",
+        "registry": "alternative_geometries.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "hyperbolic_surface",
+        "name": "Hyperbolic Surface",
+        "registry": "alternative_geometries.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "marching_cubes",
+        "name": "Marching Cubes Test",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 11,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "mobius_strip_altgeo",
+        "name": "Möbius Strip (Walkable)",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 9,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "mobius_world",
+        "name": "MÃ¶bius World",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 4968,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "non_euclidean_space",
+        "name": "Non-Euclidean Space",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 56,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "organic_space",
+        "name": "Organic Space",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 13,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rhizomatic_maze_space",
+        "name": "Rhizomatic Maze Space",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 2500,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rhizomatic_structure",
+        "name": "Rhizomatic Structure",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 280,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "riemann_pi",
+        "name": "riemann_pi",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 92,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "riemann_sphere",
+        "name": "Riemann Sphere",
+        "registry": "alternative_geometries.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "riemann_torus",
+        "name": "riemann_torus",
+        "registry": "alternative_geometries.json",
+        "tier": "large",
+        "fp": 30,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "toruscylinder",
+        "name": "Torus Cylinder",
+        "registry": "transforms.json",
+        "tier": "large",
+        "fp": 20,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "triangle_curvature_workbench",
+        "name": "Triangle Curvature Workbench",
+        "registry": "alternative_geometries.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ]
+  },
+  "total": 38,
+  "total_concepts": 12,
+  "recommended_total": 37,
+  "map_ready_total": 37
+}

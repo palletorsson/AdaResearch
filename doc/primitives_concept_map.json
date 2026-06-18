@@ -1,0 +1,2911 @@
+{
+  "title": "Primitives",
+  "domain": "primitives",
+  "note": "Auto-classified by tools/build_concept_map.py — heuristic keyword scoring, tier by footprint.",
+  "acts": [],
+  "concepts": [
+    "Point",
+    "Line / edge",
+    "Arrow / vector",
+    "Triangle",
+    "Plane / quad",
+    "Grid / array",
+    "Cube / box",
+    "Sphere / ball",
+    "Cylinder",
+    "Capsule",
+    "Torus / ring",
+    "Platonic / polyhedra",
+    "Cone / pyramid",
+    "Prism / extrusion",
+    "Helix / spiral",
+    "Arch / structure",
+    "Curve / organic",
+    "Text / glyph",
+    "Assembly / SDF / boolean",
+    "Interactive tool",
+    "Other primitives"
+  ],
+  "concept_meta": {
+    "Point": {
+      "act": "0D · point",
+      "truth": "a point is a decision: here, not there — but only inside a system.",
+      "tiers": {
+        "small": [
+          "automatic_writing_desk",
+          "draw_dot",
+          "draw_dot_time_domain",
+          "grab_sphere_point",
+          "grab_sphere_point_with_color",
+          "hand_telemetry_diptych",
+          "hand_telemetry_display",
+          "interactive_point_origin",
+          "interactive_point_origin_force",
+          "klee_walking_point",
+          "living_paper",
+          "pixel_thumb",
+          "redline",
+          "sliding_door",
+          "star_primitive",
+          "static_point",
+          "you_are_here",
+          "zigzagprofile"
+        ],
+        "medium": [
+          "origin",
+          "perspective_lines"
+        ],
+        "large": [],
+        "applied": [
+          "grab_sphere_point_snap"
+        ]
+      },
+      "count": 21,
+      "thin": false
+    },
+    "Line / edge": {
+      "act": "1D · line",
+      "truth": "a line is the claim two things are connected — and the ruler that measures it.",
+      "tiers": {
+        "small": [
+          "coordinate_lines",
+          "cross_lines",
+          "grab_line",
+          "grab_line_drawer",
+          "grab_line_music",
+          "grabbable_line",
+          "horizon_plumb_lines",
+          "knowledge_prism",
+          "line_collection",
+          "line_demo",
+          "one_meter_line",
+          "plus_lines",
+          "rockfactory_gravity",
+          "two_points_line"
+        ],
+        "medium": [
+          "parallel_lines"
+        ],
+        "large": [
+          "grid_lines",
+          "scale_lines"
+        ],
+        "applied": []
+      },
+      "count": 17,
+      "thin": false
+    },
+    "Arrow / vector": {
+      "act": "1D · line",
+      "truth": "a line with a direction is an instruction, not a place.",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "arrow"
+        ],
+        "large": [],
+        "applied": [
+          "laser_sword"
+        ]
+      },
+      "count": 2,
+      "thin": false
+    },
+    "Triangle": {
+      "act": "2D · surface",
+      "truth": "three lines make the minimum enclosure — the first closed thing.",
+      "tiers": {
+        "small": [
+          "draw_triangle_faces",
+          "folded_strip",
+          "geometric_crystal",
+          "lefttriangle",
+          "pink_triangle",
+          "quest_controller",
+          "right_triangle_lines",
+          "righttriangle",
+          "spatial_compass",
+          "tensegrity_triangle",
+          "three_points_triangle",
+          "triangle_chalkboard",
+          "triangle_whiteboard",
+          "triangleprofiles",
+          "triangularblock",
+          "trihedron"
+        ],
+        "medium": [
+          "interactivetriangle",
+          "parasol_triangle",
+          "pythagorean_proof",
+          "triangle"
+        ],
+        "large": [
+          "parametric_surface",
+          "pythagorean_triangle",
+          "pythagorean_triangle_angles"
+        ],
+        "applied": []
+      },
+      "count": 23,
+      "thin": false
+    },
+    "Plane / quad": {
+      "act": "2D · surface",
+      "truth": "a flat surface: the field a shape is drawn upon.",
+      "tiers": {
+        "small": [
+          "glass_planes_2_5d",
+          "glass_planes_empty",
+          "grab_trihedron",
+          "plane",
+          "quad",
+          "quad_chalkboard",
+          "square_pyramid",
+          "triangular_cupola"
+        ],
+        "medium": [
+          "crystal"
+        ],
+        "large": [],
+        "applied": [
+          "quad_line_puzzle"
+        ]
+      },
+      "count": 10,
+      "thin": false
+    },
+    "Grid / array": {
+      "act": "2D · surface",
+      "truth": "the grid is the commitment to discretize — to count space.",
+      "tiers": {
+        "small": [
+          "array_rotate",
+          "array_scale",
+          "array_translate",
+          "array_visualizer",
+          "chalkboard",
+          "circle_chalkboard",
+          "cube_chalkboard",
+          "dgrid",
+          "diamond",
+          "elevator_platform",
+          "endlessness_chalkboard",
+          "grid_chalkboard",
+          "ignorance_chalkboard",
+          "line_chalkboard",
+          "melencolia_chalkboard",
+          "mesh_chalkboard",
+          "network_chalkboard",
+          "player_trace",
+          "point_chalkboard",
+          "polyhedra_chalkboard",
+          "qfep_chalkboard",
+          "rockfactory",
+          "thrownness_chalkboard",
+          "trace_chalkboard",
+          "transform_staircase_fibonacci",
+          "transform_staircase_mobius"
+        ],
+        "medium": [],
+        "large": [
+          "transform_staircase_showcase"
+        ],
+        "applied": []
+      },
+      "count": 27,
+      "thin": false
+    },
+    "Cube / box": {
+      "act": "3D · solids",
+      "truth": "the cube: six faces, the faceted unit of volume.",
+      "tiers": {
+        "small": [
+          "animated_cube",
+          "combo_cube_visual",
+          "cube",
+          "cube_scene",
+          "cube_with_shader",
+          "falling_cube",
+          "folding_cube",
+          "folding_cube_interactive",
+          "grab_cube",
+          "grab_cube_show",
+          "halocube",
+          "menu",
+          "oscillation_cube",
+          "pickup_cube_combo",
+          "pickup_cube_rotating",
+          "pickup_cube_scaling",
+          "pickup_cube_static",
+          "pickup_cube_transforming",
+          "rectcube",
+          "rotating_cube",
+          "small_subdivision_cube",
+          "transformation_cube",
+          "translation_demo",
+          "unitcube",
+          "wood_cube"
+        ],
+        "medium": [
+          "cube_lines"
+        ],
+        "large": [
+          "cube_projectile_spawner"
+        ],
+        "applied": [
+          "animatedcubebuilder",
+          "cube_scene_drag_points"
+        ]
+      },
+      "count": 29,
+      "thin": false
+    },
+    "Sphere / ball": {
+      "act": "3D · solids",
+      "truth": "the sphere: every point equidistant from a centre.",
+      "tiers": {
+        "small": [
+          "grab_line_pusher",
+          "light_sphere",
+          "line",
+          "point",
+          "probability_sphere",
+          "proceduralrock",
+          "simple_rock",
+          "sphere",
+          "sphere_high",
+          "sphere_low",
+          "sphere_mid"
+        ],
+        "medium": [
+          "combine_sphere"
+        ],
+        "large": [
+          "dome",
+          "floating_sphere_field"
+        ],
+        "applied": []
+      },
+      "count": 14,
+      "thin": false
+    },
+    "Cylinder": {
+      "act": "3D · solids",
+      "truth": "a circle swept along a line.",
+      "tiers": {
+        "small": [
+          "cylinder",
+          "cylinder_low",
+          "cylinder_mid",
+          "cylinder_radials_rings",
+          "queer_cylinder_target"
+        ],
+        "medium": [],
+        "large": [
+          "PipeLayout"
+        ],
+        "applied": []
+      },
+      "count": 6,
+      "thin": false
+    },
+    "Capsule": {
+      "act": "3D · solids",
+      "truth": "a cylinder with hemispherical caps — the soft solid.",
+      "tiers": {
+        "small": [
+          "capsule_radials_rings",
+          "capsules"
+        ],
+        "medium": [
+          "capsule",
+          "combine_capsule"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 4,
+      "thin": false
+    },
+    "Torus / ring": {
+      "act": "3D · solids",
+      "truth": "a solid with a hole — genus one, the first topology.",
+      "tiers": {
+        "small": [
+          "hollowrock",
+          "noisetorus_ex_1",
+          "torus",
+          "torus_low",
+          "torus_radials_rings"
+        ],
+        "medium": [
+          "combine_torus"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 6,
+      "thin": false
+    },
+    "Platonic / polyhedra": {
+      "act": "3D · solids",
+      "truth": "the regular solids: symmetry made into volume.",
+      "tiers": {
+        "small": [
+          "diamonds",
+          "dodecahedron",
+          "grab_dodecahedron",
+          "grab_icosahedron",
+          "icosahedron",
+          "octahedron",
+          "tetrahedron",
+          "truncatedtetrahedron"
+        ],
+        "medium": [],
+        "large": [
+          "platonic_demo",
+          "platonic_grabbables"
+        ],
+        "applied": []
+      },
+      "count": 10,
+      "thin": false
+    },
+    "Cone / pyramid": {
+      "act": "3D · solids",
+      "truth": "a base tapering to a point.",
+      "tiers": {
+        "small": [
+          "bipyramid",
+          "hole_with_cones",
+          "pyramid",
+          "pyramidlong",
+          "rock_primitive",
+          "steppedpyramid",
+          "trafficcone"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "pyramid_edit"
+        ]
+      },
+      "count": 8,
+      "thin": false
+    },
+    "Prism / extrusion": {
+      "act": "3D · solids",
+      "truth": "a 2D profile pushed through the third dimension.",
+      "tiers": {
+        "small": [
+          "prism",
+          "prism_block",
+          "prismblock"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 3,
+      "thin": false
+    },
+    "Helix / spiral": {
+      "act": "3D · solids",
+      "truth": "a line that climbs as it turns.",
+      "tiers": {
+        "small": [
+          "transform_staircase_dna",
+          "transform_staircase_spiral"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 2,
+      "thin": false
+    },
+    "Arch / structure": {
+      "act": "structures",
+      "truth": "primitives composed into something that stands.",
+      "tiers": {
+        "small": [
+          "arch",
+          "horizon_line",
+          "mystic_writing_pad",
+          "portal_frame"
+        ],
+        "medium": [],
+        "large": [
+          "bigframe"
+        ],
+        "applied": []
+      },
+      "count": 5,
+      "thin": false
+    },
+    "Curve / organic": {
+      "act": "structures",
+      "truth": "the smooth and the grown — designed and botanical form.",
+      "tiers": {
+        "small": [
+          "aalto_vase",
+          "alessi_tree",
+          "bucket_of_tulips",
+          "grab_aalto_vase",
+          "grab_alessi_tree"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 5,
+      "thin": false
+    },
+    "Text / glyph": {
+      "act": "meta",
+      "truth": "a primitive that carries a symbol.",
+      "tiers": {
+        "small": [
+          "grab_sphere_point_color_with_text",
+          "grab_sphere_point_with_text",
+          "pixel_heart",
+          "point_collection",
+          "wall_placard"
+        ],
+        "medium": [
+          "coordinate_axes_xy",
+          "level_entrance"
+        ],
+        "large": [],
+        "applied": [
+          "code_evolution_screen"
+        ]
+      },
+      "count": 8,
+      "thin": false
+    },
+    "Assembly / SDF / boolean": {
+      "act": "meta",
+      "truth": "primitives combined: union, subtraction, the assembler.",
+      "tiers": {
+        "small": [
+          "fontana_puncture"
+        ],
+        "medium": [
+          "combine_primitives"
+        ],
+        "large": [
+          "combine_portals",
+          "primitive_assembler"
+        ],
+        "applied": [
+          "SDFDrawTool"
+        ]
+      },
+      "count": 5,
+      "thin": false
+    },
+    "Interactive tool": {
+      "act": "meta",
+      "truth": "a primitive you grab, drag, snap or edit.",
+      "tiers": {
+        "small": [
+          "foldedpaper",
+          "grab_octahedron",
+          "grab_tetrahedron",
+          "laser_measure",
+          "reality_modifier"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": [
+          "cross_line_puzzle",
+          "editable_bezier",
+          "editable_catmull_rom",
+          "editable_curve",
+          "mesh_builder_demo",
+          "parallel_line_puzzle",
+          "plus_line_puzzle",
+          "primitive_combo_puzzle",
+          "rotation_match_puzzle",
+          "snap_demo",
+          "snap_octahedron_puzzle",
+          "snap_pyramid_puzzle",
+          "snap_tetrahedron_puzzle",
+          "snap_triangle_puzzle",
+          "snap_wedge_puzzle",
+          "tetrahedron_edit",
+          "triangle_line_puzzle",
+          "xyz_slider_plate"
+        ]
+      },
+      "count": 23,
+      "thin": false
+    },
+    "Other primitives": {
+      "act": "meta",
+      "truth": "primitive artifacts not yet sorted.",
+      "tiers": {
+        "small": [
+          "achilles_tortoise",
+          "chaos_attractor",
+          "concept_synthesizer",
+          "crystalcluster",
+          "dimension_lens",
+          "dynamic_rock",
+          "folding_past",
+          "kochsnowflake",
+          "lightrod",
+          "lshape",
+          "mengersponge",
+          "modernchair",
+          "modernpolysolid",
+          "plus",
+          "profile_chair",
+          "quantum_dice",
+          "random_object_spawner",
+          "rock_spawner",
+          "roughrock",
+          "scifi_panel_wall"
+        ],
+        "medium": [
+          "doublestick",
+          "grab_long_stick",
+          "grab_rainbow_stick"
+        ],
+        "large": [
+          "cavetest",
+          "rock_scanner"
+        ],
+        "applied": []
+      },
+      "count": 25,
+      "thin": false
+    }
+  },
+  "groups": {
+    "Point": [
+      {
+        "lookup": "automatic_writing_desk",
+        "name": "Automatic Writing Desk",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "draw_dot",
+        "name": "draw_dot",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "draw_dot_time_domain",
+        "name": "draw_dot_time_domain",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_sphere_point",
+        "name": "grab_sphere_point",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_sphere_point_snap",
+        "name": "grab_sphere_point_snap",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_sphere_point_with_color",
+        "name": "grab_sphere_point_with_color_text",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "hand_telemetry_diptych",
+        "name": "Hand Telemetry Diptych",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "hand_telemetry_display",
+        "name": "Hand Telemetry Display",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "interactive_point_origin",
+        "name": "1.0.1 Interactive Point with Origin Line",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "interactive_point_origin_force",
+        "name": "1.0.2 Interactive Point — Force Catalyst",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "klee_walking_point",
+        "name": "Klee Walking Point",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "living_paper",
+        "name": "Living Paper",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "origin",
+        "name": "Point Zero",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "perspective_lines",
+        "name": "perspective_lines",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pixel_thumb",
+        "name": "Pixel Thumb",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "redline",
+        "name": "Redline",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sliding_door",
+        "name": "Sliding Door",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "star_primitive",
+        "name": "Star",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "static_point",
+        "name": "Static Point",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "you_are_here",
+        "name": "You Are Here",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "zigzagprofile",
+        "name": "1.2: A zigzagprofile",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Line / edge": [
+      {
+        "lookup": "coordinate_lines",
+        "name": "coordinate_lines",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cross_lines",
+        "name": "cross_lines",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_line",
+        "name": "grab_line",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_line_drawer",
+        "name": "grab_line_drawer",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_line_music",
+        "name": "grab_line_music",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grabbable_line",
+        "name": "Grabbable Line",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grid_lines",
+        "name": "grid_lines",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 25,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "horizon_plumb_lines",
+        "name": "horizon_plumb_lines",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "knowledge_prism",
+        "name": "Knowledge Prism",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "line_collection",
+        "name": "line_collection",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "line_demo",
+        "name": "line_demo",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "one_meter_line",
+        "name": "one_meter_line",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "parallel_lines",
+        "name": "parallel_lines",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "plus_lines",
+        "name": "plus_lines",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rockfactory_gravity",
+        "name": "Rock Factory (Gravity)",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "scale_lines",
+        "name": "scale_lines",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 21,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "two_points_line",
+        "name": "Two Points Line",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Arrow / vector": [
+      {
+        "lookup": "arrow",
+        "name": "arrow",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "laser_sword",
+        "name": "Laser Sword",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Triangle": [
+      {
+        "lookup": "draw_triangle_faces",
+        "name": "draw_triangle_faces",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "folded_strip",
+        "name": "1.2: folded_strip",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "geometric_crystal",
+        "name": "Geometric Crystal",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "interactivetriangle",
+        "name": "1.2: A triangle",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "lefttriangle",
+        "name": "lefttriangle",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "parametric_surface",
+        "name": "Parametric Surface",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 9,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "parasol_triangle",
+        "name": "Parasol Triangle",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pink_triangle",
+        "name": "Pink Triangle",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pythagorean_proof",
+        "name": "pythagorean_proof",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pythagorean_triangle",
+        "name": "pythagorean_triangle",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 12,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pythagorean_triangle_angles",
+        "name": "1.2: A pythagorean_triangle_angles",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 12,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "quest_controller",
+        "name": "Quest Controller",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "right_triangle_lines",
+        "name": "right_triangle_lines",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "righttriangle",
+        "name": "righttriangle",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "spatial_compass",
+        "name": "Spatial Compass",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tensegrity_triangle",
+        "name": "Tensegrity Triangle",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "three_points_triangle",
+        "name": "Three Points Triangle",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "triangle",
+        "name": "triangle",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "triangle_chalkboard",
+        "name": "Triangle Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "triangle_whiteboard",
+        "name": "Triangle Whiteboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "triangleprofiles",
+        "name": "1.2: A triangleprofilese",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "triangularblock",
+        "name": "triangularblock",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "trihedron",
+        "name": "trihedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Plane / quad": [
+      {
+        "lookup": "crystal",
+        "name": "crystal",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "glass_planes_2_5d",
+        "name": "glass_planes_2_5d",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "glass_planes_empty",
+        "name": "glass_planes_empty",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_trihedron",
+        "name": "grab_trihedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "plane",
+        "name": "plane",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "quad",
+        "name": "quad",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "quad_chalkboard",
+        "name": "Quad Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "quad_line_puzzle",
+        "name": "Quad Line Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "square_pyramid",
+        "name": "square_pyramid",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "triangular_cupola",
+        "name": "triangular_cupola",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Grid / array": [
+      {
+        "lookup": "array_rotate",
+        "name": "array_rotate",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "array_scale",
+        "name": "array_scale",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "array_translate",
+        "name": "array_translate",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "array_visualizer",
+        "name": "Array Visualizer",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "chalkboard",
+        "name": "Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "circle_chalkboard",
+        "name": "Circle Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cube_chalkboard",
+        "name": "Cube Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "dgrid",
+        "name": "DÃ¼rer Grid",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "diamond",
+        "name": "diamond",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "elevator_platform",
+        "name": "Elevator Platform",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "endlessness_chalkboard",
+        "name": "Endlessness Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grid_chalkboard",
+        "name": "Grid Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "ignorance_chalkboard",
+        "name": "Ignorance Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "line_chalkboard",
+        "name": "Line Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "melencolia_chalkboard",
+        "name": "Melencolia Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "mesh_chalkboard",
+        "name": "Mesh Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "network_chalkboard",
+        "name": "Network Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "player_trace",
+        "name": "player_trace",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "point_chalkboard",
+        "name": "Point Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "polyhedra_chalkboard",
+        "name": "Polyhedra Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "qfep_chalkboard",
+        "name": "QFEP Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rockfactory",
+        "name": "Rock Factory",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "thrownness_chalkboard",
+        "name": "Thrownness Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "trace_chalkboard",
+        "name": "Trace Chalkboard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "transform_staircase_fibonacci",
+        "name": "transform_staircase_fibonacci",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "transform_staircase_mobius",
+        "name": "transform_staircase_mobius",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "transform_staircase_showcase",
+        "name": "transform_staircase_showcase",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 35,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Cube / box": [
+      {
+        "lookup": "animated_cube",
+        "name": "Animated Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "animatedcubebuilder",
+        "name": "animatedcubebuilder",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "combo_cube_visual",
+        "name": "Transformation Rotation Scale Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cube",
+        "name": "cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cube_lines",
+        "name": "cube_lines",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cube_projectile_spawner",
+        "name": "cube_projectile_spawner",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 64,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cube_scene",
+        "name": "Basic Cube Scene",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cube_scene_drag_points",
+        "name": "cube_scene_drag_points",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cube_with_shader",
+        "name": "Cube with shader",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "falling_cube",
+        "name": "Falling Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "folding_cube",
+        "name": "folding_cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "folding_cube_interactive",
+        "name": "folding_cube_interactive",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_cube",
+        "name": "grab_cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_cube_show",
+        "name": "grab_cube_show",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "halocube",
+        "name": "Halo Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "menu",
+        "name": "menu",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "oscillation_cube",
+        "name": "Oscillation Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pickup_cube_combo",
+        "name": "Combo Pickup Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pickup_cube_rotating",
+        "name": "Rotating Pickup Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pickup_cube_scaling",
+        "name": "Scaling Pickup Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pickup_cube_static",
+        "name": "Static Pickup Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pickup_cube_transforming",
+        "name": "Transforming Pickup Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rectcube",
+        "name": "Rectangular Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rotating_cube",
+        "name": "Rotating Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "small_subdivision_cube",
+        "name": "small_subdivision_cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "transformation_cube",
+        "name": "transformation_cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "translation_demo",
+        "name": "Translation Demo",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "unitcube",
+        "name": "Unit Cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "wood_cube",
+        "name": "wood_cube",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Sphere / ball": [
+      {
+        "lookup": "combine_sphere",
+        "name": "combine_sphere",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "dome",
+        "name": "dome",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 11,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "floating_sphere_field",
+        "name": "Floating Sphere Field",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_line_pusher",
+        "name": "grab_line_pusher",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "light_sphere",
+        "name": "light_sphere",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "line",
+        "name": "1.1 A Line",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "point",
+        "name": "1.0 A Point",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "probability_sphere",
+        "name": "Probability Sphere",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "proceduralrock",
+        "name": "Procedural Rock",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "simple_rock",
+        "name": "Simple Dynamic Rock",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sphere",
+        "name": "sphere",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sphere_high",
+        "name": "sphere_high",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sphere_low",
+        "name": "sphere_low",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "sphere_mid",
+        "name": "sphere_mid",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Cylinder": [
+      {
+        "lookup": "PipeLayout",
+        "name": "PipeLayout",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cylinder",
+        "name": "cylinder",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cylinder_low",
+        "name": "cylinder_low",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cylinder_mid",
+        "name": "cylinder_mid",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cylinder_radials_rings",
+        "name": "Cylinder Radials Rings",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "queer_cylinder_target",
+        "name": "queer_cylinder_target",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Capsule": [
+      {
+        "lookup": "capsule",
+        "name": "capsule",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "capsule_radials_rings",
+        "name": "Capsule Radials Rings",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "capsules",
+        "name": "capsules",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "combine_capsule",
+        "name": "combine_capsule",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Torus / ring": [
+      {
+        "lookup": "combine_torus",
+        "name": "combine_torus",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "hollowrock",
+        "name": "Hollow Rock",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "noisetorus_ex_1",
+        "name": "noisetorus_ex_1",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "torus",
+        "name": "torus",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "torus_low",
+        "name": "torus_low",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "torus_radials_rings",
+        "name": "Torus Radials Rings",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Platonic / polyhedra": [
+      {
+        "lookup": "diamonds",
+        "name": "diamonds",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "dodecahedron",
+        "name": "dodecahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_dodecahedron",
+        "name": "grab_dodecahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_icosahedron",
+        "name": "grab_icosahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "icosahedron",
+        "name": "icosahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "octahedron",
+        "name": "octahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "platonic_demo",
+        "name": "platonic_demo",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 36,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "platonic_grabbables",
+        "name": "platonic_grabbables",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 18,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tetrahedron",
+        "name": "tetrahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "truncatedtetrahedron",
+        "name": "truncatedtetrahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Cone / pyramid": [
+      {
+        "lookup": "bipyramid",
+        "name": "bipyramid",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "hole_with_cones",
+        "name": "Hole With Cones",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pyramid",
+        "name": "pyramid",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pyramid_edit",
+        "name": "pyramid_edit",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pyramidlong",
+        "name": "pyramidlong",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rock_primitive",
+        "name": "Rock",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "steppedpyramid",
+        "name": "Stepped Pyramid",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "trafficcone",
+        "name": "Traffic Cone",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Prism / extrusion": [
+      {
+        "lookup": "prism",
+        "name": "prism",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "prism_block",
+        "name": "prism_block",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "prismblock",
+        "name": "prismblock",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Helix / spiral": [
+      {
+        "lookup": "transform_staircase_dna",
+        "name": "transform_staircase_dna",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "transform_staircase_spiral",
+        "name": "transform_staircase_spiral",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Arch / structure": [
+      {
+        "lookup": "arch",
+        "name": "Arch",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "bigframe",
+        "name": "bigframe",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "horizon_line",
+        "name": "Horizon Line",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "mystic_writing_pad",
+        "name": "Mystic Writing Pad",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "portal_frame",
+        "name": "Portal Frame",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Curve / organic": [
+      {
+        "lookup": "aalto_vase",
+        "name": "aalto_vase",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "alessi_tree",
+        "name": "alessi_tree",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "bucket_of_tulips",
+        "name": "Bucket of Tulips",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_aalto_vase",
+        "name": "grab_aalto_vase",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_alessi_tree",
+        "name": "grab_alessi_tree",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Text / glyph": [
+      {
+        "lookup": "code_evolution_screen",
+        "name": "Code Evolution Screen",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "coordinate_axes_xy",
+        "name": "coordinate_axes_xy",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_sphere_point_color_with_text",
+        "name": "grab_sphere_point_color_with_text",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_sphere_point_with_text",
+        "name": "grab_sphere_point_with_text",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "level_entrance",
+        "name": "Level Entrance",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "pixel_heart",
+        "name": "Pixel Heart",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "point_collection",
+        "name": "point_collection",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "wall_placard",
+        "name": "Wall Placard",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Assembly / SDF / boolean": [
+      {
+        "lookup": "SDFDrawTool",
+        "name": "SDFDrawTool",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "combine_portals",
+        "name": "combine_portals",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 20,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "combine_primitives",
+        "name": "combine_primitives",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "fontana_puncture",
+        "name": "Fontana Puncture",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "primitive_assembler",
+        "name": "Primitive Assembler",
+        "registry": "primitive_assembler.json",
+        "tier": "large",
+        "fp": 18,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Interactive tool": [
+      {
+        "lookup": "cross_line_puzzle",
+        "name": "Cross Line Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "editable_bezier",
+        "name": "editable_bezier",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "editable_catmull_rom",
+        "name": "editable_catmull_rom",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "editable_curve",
+        "name": "editable_curve",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "foldedpaper",
+        "name": "1.2: A foldedpaper",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_octahedron",
+        "name": "grab_octahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_tetrahedron",
+        "name": "grab_tetrahedron",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "laser_measure",
+        "name": "laser_measure",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "mesh_builder_demo",
+        "name": "Mesh Builder Demo",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "parallel_line_puzzle",
+        "name": "Parallel Line Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "plus_line_puzzle",
+        "name": "Plus Line Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "primitive_combo_puzzle",
+        "name": "Primitive Combo Puzzle",
+        "registry": "primitive_combo_puzzle.json",
+        "tier": "applied",
+        "fp": 6,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "reality_modifier",
+        "name": "Reality Modifier",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rotation_match_puzzle",
+        "name": "Rotation Match Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "snap_demo",
+        "name": "snap_demo",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "snap_octahedron_puzzle",
+        "name": "Snap Octahedron Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "snap_pyramid_puzzle",
+        "name": "Snap Pyramid Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "snap_tetrahedron_puzzle",
+        "name": "Snap Tetrahedron Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "snap_triangle_puzzle",
+        "name": "Snap Triangle Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "snap_wedge_puzzle",
+        "name": "Snap Wedge Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tetrahedron_edit",
+        "name": "Editable Tetrahedron",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "triangle_line_puzzle",
+        "name": "Triangle Line Puzzle",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "xyz_slider_plate",
+        "name": "XYZ Slider Plate",
+        "registry": "primitives.json",
+        "tier": "applied",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Other primitives": [
+      {
+        "lookup": "achilles_tortoise",
+        "name": "Achilles and the Tortoise",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "cavetest",
+        "name": "cavetest",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 396,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "chaos_attractor",
+        "name": "Chaos Attractor",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "concept_synthesizer",
+        "name": "Concept Synthesizer",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "crystalcluster",
+        "name": "crystalcluster",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "dimension_lens",
+        "name": "Dimension Lens",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "doublestick",
+        "name": "doublestick",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "dynamic_rock",
+        "name": "Dynamic Rock",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "folding_past",
+        "name": "Folding Past",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_long_stick",
+        "name": "grab_long_stick",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "grab_rainbow_stick",
+        "name": "grab_rainbow_stick",
+        "registry": "primitives.json",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "kochsnowflake",
+        "name": "kochsnowflake",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "lightrod",
+        "name": "Light Rod",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "lshape",
+        "name": "L Shape",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "mengersponge",
+        "name": "Menger Sponge",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "modernchair",
+        "name": "Modern Chair",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "modernpolysolid",
+        "name": "modernpolysolid",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "plus",
+        "name": "Plus",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "profile_chair",
+        "name": "Profile Chair",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "quantum_dice",
+        "name": "Quantum Dice",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "random_object_spawner",
+        "name": "Random Object Spawner",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rock_scanner",
+        "name": "Rock Scanner",
+        "registry": "primitives.json",
+        "tier": "large",
+        "fp": 16,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "rock_spawner",
+        "name": "Rock Spawner",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "roughrock",
+        "name": "roughrock",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "scifi_panel_wall",
+        "name": "Sci-Fi Panel Wall",
+        "registry": "primitives.json",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ]
+  },
+  "total": 253,
+  "total_concepts": 21,
+  "recommended_total": 253,
+  "map_ready_total": 253
+}
