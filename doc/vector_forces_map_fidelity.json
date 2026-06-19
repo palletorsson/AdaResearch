@@ -1,0 +1,6566 @@
+{
+  "domain": "vector_forces",
+  "title": "Vectors & Forces — every example, by concept",
+  "acts": [
+    "Act I — what a vector is",
+    "Act II — vector arithmetic",
+    "Act III — fields & motion",
+    "Act IV — forces",
+    "Act V — force as place"
+  ],
+  "maps": [
+    {
+      "name": "Vectors_Act1_WhatAVectorIs",
+      "score": 1.0,
+      "tag": "curated",
+      "grid": [
+        14,
+        22
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 0,
+          "col": 7,
+          "row": 5,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 8,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 14,
+          "lk": "vector_normalize_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_Act2_VectorArithmetic",
+      "score": 0.943,
+      "tag": "curated",
+      "grid": [
+        20,
+        38
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 4,
+          "lk": "vector_addition_walk",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 13,
+          "row": 4,
+          "lk": "vector_add",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 8,
+          "row": 8,
+          "lk": "vector_sub",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 11,
+          "row": 11,
+          "lk": "example_2_3_gravity_scaled_by_mass_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 15,
+          "lk": "dot_aligner",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 14,
+          "row": 15,
+          "lk": "vector_dot_product_xl",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 6,
+          "row": 21,
+          "lk": "projection_shadow",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 9,
+          "col": 6,
+          "row": 27,
+          "lk": "torque_crank",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 9,
+          "col": 14,
+          "row": 27,
+          "lk": "vector_cross_product_xl",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "VFM_06_Springs",
+      "score": 0.645,
+      "tag": "curated",
+      "grid": [
+        26,
+        20
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 12,
+      "arts": [
+        {
+          "co": 17,
+          "col": 21,
+          "row": 2,
+          "lk": "mass_spring_damper",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 6,
+          "row": 5,
+          "lk": "slingshot_pull",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 18,
+          "col": 21,
+          "row": 7,
+          "lk": "ChainSwing",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 17,
+          "col": 12,
+          "row": 8,
+          "lk": "surreal_kinetic_sculpture",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 9,
+          "lk": "vector_joint_playground",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 17,
+          "row": 12,
+          "lk": "bounce_well",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 18,
+          "col": 21,
+          "row": 12,
+          "lk": "ConeTwistBag",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 16,
+          "lk": "HingeCrank",
+          "ai": 2,
+          "t": "a"
+        },
+        {
+          "co": 11,
+          "col": 8,
+          "row": 16,
+          "lk": "SliderPress",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 12,
+          "row": 16,
+          "lk": "spring_demo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 15,
+          "row": 16,
+          "lk": "spring_network",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 18,
+          "row": 16,
+          "lk": "coupled_pendulums",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorApplied",
+      "score": 0.53,
+      "tag": "curated",
+      "grid": [
+        22,
+        19
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 23,
+          "col": 20,
+          "row": 1,
+          "lk": "force_field_visualizer",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 16,
+          "row": 2,
+          "lk": "VectorForces",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 3,
+          "lk": "hl_turret_vectors",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 2,
+          "row": 8,
+          "lk": "VectorFieldFlow",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 10,
+          "col": 17,
+          "row": 13,
+          "lk": "weather_vector_field",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 13,
+          "row": 16,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 14,
+          "row": 18,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Transforms",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        11,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 0,
+          "col": 4,
+          "row": 2,
+          "lk": "homogeneous_coordinates",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 2,
+          "lk": "quantum_field",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 4,
+          "lk": "scaleme",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 2,
+          "row": 6,
+          "lk": "vector_field",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Sky_Climb",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        12,
+        32
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 21,
+          "col": 7,
+          "row": 3,
+          "lk": "calder_object_mobile",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 24,
+          "col": 5,
+          "row": 5,
+          "lk": "force_pad",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 24,
+          "col": 2,
+          "row": 12,
+          "lk": "force_pad",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 21,
+          "col": 5,
+          "row": 13,
+          "lk": "calder_mobile",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 24,
+          "col": 5,
+          "row": 20,
+          "lk": "force_pad",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 5,
+          "row": 27,
+          "lk": "return_launcher",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Vectors",
+      "score": 0.468,
+      "tag": "partial",
+      "grid": [
+        11,
+        8
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 0,
+          "col": 4,
+          "row": 2,
+          "lk": "coordinates",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 6,
+          "row": 2,
+          "lk": "cross_product_demo",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 8,
+          "row": 2,
+          "lk": "example_1_2_bouncing_ball_with_vectors_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 4,
+          "lk": "turret_boll_infoboard",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 4,
+          "lk": "turret_targeting",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 4,
+          "lk": "vector_joint_playground",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ForcesArena",
+      "score": 0.465,
+      "tag": "partial",
+      "grid": [
+        31,
+        34
+      ],
+      "n_concepts": 7,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 14,
+          "col": 4,
+          "row": 8,
+          "lk": "catapult",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 3,
+          "col": 10,
+          "row": 9,
+          "lk": "vector_drone",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 23,
+          "row": 13,
+          "lk": "human_catapult",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 20,
+          "row": 14,
+          "lk": "VectorThrowing",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 26,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 26,
+          "lk": "VectorAddition",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 5,
+          "row": 26,
+          "lk": "VectorSubtraction",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 7,
+          "row": 26,
+          "lk": "vector_magnitude_demo",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 9,
+          "row": 26,
+          "lk": "vector_normalize_demo",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 10,
+          "row": 26,
+          "lk": "VectorCrossProduct",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_01_Foundations",
+      "score": 0.429,
+      "tag": "partial",
+      "grid": [
+        22,
+        16
+      ],
+      "n_concepts": 8,
+      "n_artifacts": 13,
+      "arts": [
+        {
+          "co": 0,
+          "col": 3,
+          "row": 3,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 10,
+          "row": 3,
+          "lk": "vector_subtraction_demo",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 17,
+          "row": 3,
+          "lk": "vector_addition_xl",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 10,
+          "row": 5,
+          "lk": "vector_sub",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 17,
+          "row": 5,
+          "lk": "vector_add",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 7,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 7,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 9,
+          "row": 7,
+          "lk": "vector_magnitude_demo",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 12,
+          "row": 7,
+          "lk": "vector_normalize_demo",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 18,
+          "row": 7,
+          "lk": "example_1_4_vector_multiplication_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 10,
+          "lk": "coordinate_system_switcher",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 15,
+          "row": 10,
+          "lk": "newtons_laws",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 18,
+          "row": 10,
+          "lk": "example_2_1_forces_vr",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vector_Exhibition",
+      "score": 0.328,
+      "tag": "partial",
+      "grid": [
+        13,
+        19
+      ],
+      "n_concepts": 12,
+      "n_artifacts": 26,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 1,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 1,
+          "lk": "VectorAddition",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 5,
+          "row": 1,
+          "lk": "VectorSubtraction",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 7,
+          "row": 1,
+          "lk": "vector_magnitude_demo",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 9,
+          "row": 1,
+          "lk": "vector_normalize_demo",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 10,
+          "row": 1,
+          "lk": "VectorCrossProduct",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 11,
+          "row": 1,
+          "lk": "vector_magnitude_demo",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 2,
+          "row": 4,
+          "lk": "example_2_2_forces_mass_variation_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 4,
+          "lk": "example_2_3_gravity_scaled_by_mass_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 1,
+          "row": 6,
+          "lk": "example_1_1_bouncing_ball_with_no_vectors_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 9,
+          "row": 6,
+          "lk": "example_2_5_fluid_resistance_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 1,
+          "row": 8,
+          "lk": "example_1_3_vector_subtraction_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 8,
+          "lk": "example_1_4_vector_multiplication_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 1,
+          "row": 10,
+          "lk": "example_1_5_vector_magnitude_vr",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 10,
+          "lk": "example_1_6_vector_normalize_vr",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 7,
+          "row": 10,
+          "lk": "example_2_6_single_attractor_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 9,
+          "row": 10,
+          "lk": "example_2_7_multiple_attractors_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 1,
+          "row": 12,
+          "lk": "example_1_7_motion_101_velocity_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 12,
+          "lk": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 7,
+          "row": 12,
+          "lk": "example_2_8_two_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 9,
+          "row": 12,
+          "lk": "example_2_9_n_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 1,
+          "row": 14,
+          "lk": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 3,
+          "row": 14,
+          "lk": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 1,
+          "row": 16,
+          "lk": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 3,
+          "row": 16,
+          "lk": "exercise_1_8_solution_attraction_magnitude_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 8,
+          "row": 16,
+          "lk": "attractorsphere",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ForcesSystems",
+      "score": 0.277,
+      "tag": "partial",
+      "grid": [
+        22,
+        17
+      ],
+      "n_concepts": 8,
+      "n_artifacts": 11,
+      "arts": [
+        {
+          "co": 10,
+          "col": 16,
+          "row": 1,
+          "lk": "vector_fields",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 23,
+          "col": 18,
+          "row": 1,
+          "lk": "force_field_visualizer",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 16,
+          "col": 17,
+          "row": 3,
+          "lk": "force_fields",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 10,
+          "lk": "force_fields",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 16,
+          "row": 10,
+          "lk": "mass_spring_damper",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 18,
+          "row": 10,
+          "lk": "spring_system",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 13,
+          "lk": "firework_launcher",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 16,
+          "col": 16,
+          "row": 13,
+          "lk": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 18,
+          "row": 13,
+          "lk": "example_3_3_pointing_in_the_direction_of_motion_vr",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_02_Operations",
+      "score": 0.203,
+      "tag": "partial",
+      "grid": [
+        24,
+        16
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 3,
+          "lk": "vector_dot_product_xl",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 19,
+          "row": 3,
+          "lk": "vector_cross_product_xl",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 5,
+          "lk": "dot_aligner",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 9,
+          "col": 19,
+          "row": 5,
+          "lk": "torque_crank",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 9,
+          "lk": "VectorWorkbench",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 16,
+          "row": 11,
+          "lk": "projection_shadow",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 13,
+          "lk": "work_energy_demo",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 12,
+          "row": 13,
+          "lk": "torque_demo",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 16,
+          "row": 13,
+          "lk": "normal_force_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ForcesComposition",
+      "score": 0.116,
+      "tag": "uncurated",
+      "grid": [
+        20,
+        16
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 1,
+          "col": 4,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 15,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 4,
+          "lk": "combined_forces_demo",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 16,
+          "row": 4,
+          "lk": "work_energy_demo",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 6,
+          "lk": "vector_addition_walk",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 3,
+          "row": 10,
+          "lk": "momentum_collision",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 23,
+          "col": 15,
+          "row": 10,
+          "lk": "force_field_visualizer",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Force_Props_Sandbox",
+      "score": 0.068,
+      "tag": "uncurated",
+      "grid": [
+        20,
+        12
+      ],
+      "n_concepts": 7,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 24,
+          "col": 3,
+          "row": 4,
+          "lk": "force_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 7,
+          "row": 4,
+          "lk": "bubble_blaster",
+          "ai": 2,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 4,
+          "lk": "vector_add",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 7,
+          "lk": "dot_aligner",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 7,
+          "lk": "circle_train",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 12,
+          "col": 10,
+          "row": 7,
+          "lk": "force_mower",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 9,
+          "lk": "wedge_slide",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorOperations",
+      "score": 0.029,
+      "tag": "uncurated",
+      "grid": [
+        22,
+        17
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 11,
+      "arts": [
+        {
+          "co": 7,
+          "col": 2,
+          "row": 1,
+          "lk": "VectorDotProduct",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 2,
+          "lk": "VectorCrossProduct",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 16,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 18,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 4,
+          "lk": "dot_product_projector",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 5,
+          "lk": "vector_dot_product_xl",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 7,
+          "row": 7,
+          "lk": "vector_cross_product_xl",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 15,
+          "row": 8,
+          "lk": "vector_projection_demo",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 18,
+          "row": 8,
+          "lk": "normal_force_demo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 16,
+          "row": 12,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 18,
+          "row": 12,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_Act4b_Oscillation",
+      "score": -0.025,
+      "tag": "uncurated",
+      "grid": [
+        30,
+        30
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 18,
+          "col": 8,
+          "row": 8,
+          "lk": "pendulum_hall",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 22,
+          "row": 8,
+          "lk": "spring_tower",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 22,
+          "col": 5,
+          "row": 14,
+          "lk": "weather_vane",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 21,
+          "col": 15,
+          "row": 14,
+          "lk": "calder_mobile",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 21,
+          "col": 15,
+          "row": 20,
+          "lk": "lever_balance",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 21,
+          "lk": "momentum_cradle",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 20,
+          "col": 21,
+          "row": 21,
+          "lk": "bounce_well",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "VFM_05_Launch",
+      "score": -0.028,
+      "tag": "uncurated",
+      "grid": [
+        34,
+        24
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 13,
+      "arts": [
+        {
+          "co": 14,
+          "col": 14,
+          "row": 2,
+          "lk": "catapult",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 3,
+          "col": 28,
+          "row": 3,
+          "lk": "hl_turret_vectors",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 32,
+          "row": 3,
+          "lk": "turret_boll_infoboard",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 4,
+          "row": 4,
+          "lk": "mortar_vector_siege",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 14,
+          "row": 4,
+          "lk": "launch_arc",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 18,
+          "row": 5,
+          "lk": "firework_burst",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 14,
+          "row": 6,
+          "lk": "VectorThrowing",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 24,
+          "row": 9,
+          "lk": "firework_launcher",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 3,
+          "row": 15,
+          "lk": "human_catapult",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 24,
+          "col": 28,
+          "row": 16,
+          "lk": "force_pad",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 13,
+          "col": 3,
+          "row": 17,
+          "lk": "drag_lane",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 15,
+          "col": 28,
+          "row": 18,
+          "lk": "circle_train",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 3,
+          "row": 20,
+          "lk": "slingshot_launcher",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Build_A_Vector",
+      "score": -0.045,
+      "tag": "uncurated",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 3,
+          "lk": "vector_add",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 6,
+          "row": 3,
+          "lk": "vector_sub",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 5,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "vector_arena",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Vector_Exhibition_Placed",
+      "score": -0.109,
+      "tag": "uncurated",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 12,
+      "n_artifacts": 25,
+      "arts": [
+        {
+          "co": 24,
+          "col": 9,
+          "row": 1,
+          "lk": "example_2_2_forces_mass_variation_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 2,
+          "lk": "VectorAddition",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 11,
+          "row": 2,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 2,
+          "row": 4,
+          "lk": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 11,
+          "row": 4,
+          "lk": "VectorSubtraction",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 7,
+          "lk": "example_1_6_vector_normalize_vr",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 5,
+          "row": 7,
+          "lk": "example_2_9_n_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 1,
+          "row": 8,
+          "lk": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 7,
+          "row": 8,
+          "lk": "example_2_7_multiple_attractors_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 11,
+          "row": 9,
+          "lk": "example_2_6_single_attractor_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 1,
+          "row": 10,
+          "lk": "VectorCrossProduct",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 10,
+          "lk": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 1,
+          "row": 11,
+          "lk": "example_1_5_vector_magnitude_vr",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 9,
+          "row": 11,
+          "lk": "attractorsphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 12,
+          "lk": "example_1_7_motion_101_velocity_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 13,
+          "lk": "example_1_1_bouncing_ball_with_no_vectors_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 1,
+          "row": 17,
+          "lk": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 10,
+          "row": 17,
+          "lk": "exercise_1_8_solution_attraction_magnitude_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 6,
+          "row": 18,
+          "lk": "example_2_8_two_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 7,
+          "row": 18,
+          "lk": "example_1_3_vector_subtraction_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 10,
+          "row": 18,
+          "lk": "example_2_5_fluid_resistance_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 19,
+          "lk": "vector_normalize_demo",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 19,
+          "lk": "example_1_4_vector_multiplication_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 19,
+          "lk": "example_2_3_gravity_scaled_by_mass_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 12,
+          "row": 19,
+          "lk": "vector_magnitude_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_3",
+      "score": -0.143,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 24,
+          "col": 0,
+          "row": 0,
+          "lk": "VectorForces",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 4,
+          "row": 1,
+          "lk": "VectorCrossProduct",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 0,
+          "row": 5,
+          "lk": "example_1_5_vector_magnitude_vr",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 7,
+          "lk": "example_1_6_vector_normalize_vr",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ForcesFoundations",
+      "score": -0.154,
+      "tag": "uncurated",
+      "grid": [
+        22,
+        17
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 24,
+          "col": 2,
+          "row": 1,
+          "lk": "newtons_laws",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 18,
+          "row": 3,
+          "lk": "bouncing_ball",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 4,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 16,
+          "row": 6,
+          "lk": "example_2_5_fluid_resistance_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 20,
+          "row": 7,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 21,
+          "row": 7,
+          "lk": "friction_ramp",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 14,
+          "row": 9,
+          "lk": "example_2_1_forces_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 17,
+          "row": 10,
+          "lk": "example_2_3_gravity_scaled_by_mass_vr",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Zone_WarehouseLab",
+      "score": -0.172,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 7,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 14,
+          "col": 2,
+          "row": 4,
+          "lk": "catapult",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 24,
+          "col": 4,
+          "row": 4,
+          "lk": "ForceMagnitudeDemo",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 4,
+          "lk": "combined_forces_demo",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 23,
+          "col": 8,
+          "row": 4,
+          "lk": "force_vortex",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 20,
+          "col": 2,
+          "row": 8,
+          "lk": "normal_force_demo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 8,
+          "lk": "exercise_1_8_solution_attraction_magnitude_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 8,
+          "lk": "centripetal_force_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_PhysicsSimulation",
+      "score": -0.204,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 13,
+          "col": 4,
+          "row": 2,
+          "lk": "example_2_4_friction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 2,
+          "lk": "example_3_4_polar_to_cartesian_vr",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 2,
+          "row": 4,
+          "lk": "gravity_well",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 4,
+          "lk": "newton_cradle",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 8,
+          "row": 4,
+          "lk": "slingshot_launcher",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 13,
+          "col": 6,
+          "row": 8,
+          "lk": "viscosity_layers",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_03_Motion",
+      "score": -0.236,
+      "tag": "uncurated",
+      "grid": [
+        24,
+        18
+      ],
+      "n_concepts": 7,
+      "n_artifacts": 12,
+      "arts": [
+        {
+          "co": 20,
+          "col": 4,
+          "row": 4,
+          "lk": "bouncing_ball",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 10,
+          "lk": "VectorMotion",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 6,
+          "row": 10,
+          "lk": "ForceMagnitudeDemo",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 9,
+          "row": 10,
+          "lk": "VectorForces",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 12,
+          "row": 10,
+          "lk": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 15,
+          "row": 10,
+          "lk": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 18,
+          "row": 10,
+          "lk": "example_2_5_fluid_resistance_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 16,
+          "col": 3,
+          "row": 13,
+          "lk": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 6,
+          "row": 13,
+          "lk": "example_3_3_pointing_in_the_direction_of_motion_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 9,
+          "row": 13,
+          "lk": "friction_ramp",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 12,
+          "row": 13,
+          "lk": "newton_cradle",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 15,
+          "row": 13,
+          "lk": "combined_forces_demo",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Force_Preview",
+      "score": -0.257,
+      "tag": "uncurated",
+      "grid": [
+        60,
+        22
+      ],
+      "n_concepts": 7,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 4,
+          "col": 10,
+          "row": 4,
+          "lk": "vector_addition_xl_laser",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 46,
+          "row": 4,
+          "lk": "vector_subtraction_xl_laser",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 24,
+          "col": 18,
+          "row": 6,
+          "lk": "force_pad",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 10,
+          "col": 10,
+          "row": 11,
+          "lk": "weather_vector_field",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 30,
+          "row": 11,
+          "lk": "mortar_vector_siege",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 23,
+          "col": 40,
+          "row": 11,
+          "lk": "force_vortex",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 8,
+          "col": 50,
+          "row": 11,
+          "lk": "reflection_hall",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 20,
+          "row": 16,
+          "lk": "human_catapult",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "VFM_08_Arena",
+      "score": -0.257,
+      "tag": "uncurated",
+      "grid": [
+        26,
+        20
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 2,
+          "lk": "turret_targeting",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 22,
+          "row": 3,
+          "lk": "reflection_hall",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 9,
+          "lk": "vector_arena",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 6,
+          "row": 11,
+          "lk": "collision_carts",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 19,
+          "col": 16,
+          "row": 13,
+          "lk": "momentum_cradle",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Forces_Playground",
+      "score": -0.263,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 15,
+          "col": 3,
+          "row": 4,
+          "lk": "circle_train",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 16,
+          "col": 8,
+          "row": 4,
+          "lk": "orbit_pair",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 3,
+          "row": 6,
+          "lk": "launch_arc",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 13,
+          "col": 8,
+          "row": 6,
+          "lk": "drag_lane",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 24,
+          "col": 5,
+          "row": 8,
+          "lk": "force_pad",
+          "ai": 4,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "VectorAdvanced",
+      "score": -0.283,
+      "tag": "uncurated",
+      "grid": [
+        22,
+        19
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 10,
+          "col": 16,
+          "row": 1,
+          "lk": "VectorFieldFlow",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 9,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorTorque",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 18,
+          "row": 3,
+          "lk": "VectorTorque",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 16,
+          "row": 4,
+          "lk": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 18,
+          "row": 5,
+          "lk": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 2,
+          "row": 12,
+          "lk": "torque_demo",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 3,
+          "row": 12,
+          "lk": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 12,
+          "lk": "exercise_1_8_solution_attraction_magnitude_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 17,
+          "row": 12,
+          "lk": "VectorThrowing",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Zone_WarehouseLab_Packed",
+      "score": -0.285,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 7,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 14,
+          "col": 2,
+          "row": 1,
+          "lk": "catapult",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 4,
+          "lk": "normal_force_demo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 4,
+          "lk": "centripetal_force_demo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 6,
+          "lk": "combined_forces_demo",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 23,
+          "col": 5,
+          "row": 6,
+          "lk": "force_vortex",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 24,
+          "col": 1,
+          "row": 7,
+          "lk": "ForceMagnitudeDemo",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 2,
+          "row": 7,
+          "lk": "exercise_1_8_solution_attraction_magnitude_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_5",
+      "score": -0.324,
+      "tag": "uncurated",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 10,
+          "col": 2,
+          "row": 1,
+          "lk": "VectorFieldFlow",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 9,
+          "col": 4,
+          "row": 3,
+          "lk": "VectorTorque",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 2,
+          "row": 4,
+          "lk": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 4,
+          "row": 5,
+          "lk": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ForcesChaos",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        22,
+        19
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 16,
+          "col": 2,
+          "row": 1,
+          "lk": "three_body_problem",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 6,
+          "row": 1,
+          "lk": "nbody_simulation",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 18,
+          "row": 2,
+          "lk": "forcedirected3d",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 1,
+          "row": 3,
+          "lk": "example_2_8_two_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 15,
+          "row": 5,
+          "lk": "spring_system",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 18,
+          "row": 5,
+          "lk": "vector_field_visualizer",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 15,
+          "row": 13,
+          "lk": "example_2_9_n_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_1",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 15,
+          "col": 8,
+          "row": 8,
+          "lk": "centripetal_force_demo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 2,
+          "row": 12,
+          "lk": "coupled_pendulums",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 2,
+          "row": 14,
+          "lk": "drag_coefficient_wind_tunnel",
+          "ai": 2,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_Act3_FieldsAndMotion",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        18,
+        30
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 10,
+          "col": 4,
+          "row": 4,
+          "lk": "VectorFieldFlow",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 10,
+          "col": 9,
+          "row": 10,
+          "lk": "weather_vector_field",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 4,
+          "row": 17,
+          "lk": "launch_arc",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 11,
+          "col": 13,
+          "row": 17,
+          "lk": "bubble_blaster",
+          "ai": 2,
+          "t": "a"
+        },
+        {
+          "co": 11,
+          "col": 9,
+          "row": 20,
+          "lk": "VectorMotion",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_04_Fields",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        30,
+        22
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 10,
+          "col": 4,
+          "row": 8,
+          "lk": "weather_vector_field",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 23,
+          "col": 26,
+          "row": 8,
+          "lk": "force_vortex",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 10,
+          "col": 15,
+          "row": 10,
+          "lk": "vector_field",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 15,
+          "lk": "force_fields",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 26,
+          "row": 15,
+          "lk": "VectorFieldFlow",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 23,
+          "col": 8,
+          "row": 19,
+          "lk": "force_field_visualizer",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 11,
+          "row": 19,
+          "lk": "flow_field_painter",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 17,
+          "row": 19,
+          "lk": "vector_field_visualizer",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 20,
+          "row": 19,
+          "lk": "noc_5_04_flow_field",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_Act4a_KineticForces",
+      "score": -0.517,
+      "tag": "uncurated",
+      "grid": [
+        30,
+        30
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 15,
+          "col": 9,
+          "row": 8,
+          "lk": "centrifuge_ring",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 21,
+          "row": 8,
+          "lk": "orbit_walk",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 24,
+          "col": 15,
+          "row": 14,
+          "lk": "force_pad",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 12,
+          "col": 8,
+          "row": 21,
+          "lk": "force_mower",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 13,
+          "col": 20,
+          "row": 21,
+          "lk": "drag_corridor",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_Intro",
+      "score": -0.667,
+      "tag": "uncurated",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 1,
+          "lk": "vector_addition_demo",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 1,
+          "lk": "vector_subtraction_demo",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 2,
+          "lk": "VectorWorkbench",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 3,
+          "lk": "dot_product_projector",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "vector_magnitude_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_5",
+      "score": -0.866,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 10,
+          "col": 2,
+          "row": 1,
+          "lk": "vector_fields",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 23,
+          "col": 4,
+          "row": 1,
+          "lk": "force_field_visualizer",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 3,
+          "row": 3,
+          "lk": "force_fields",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_2",
+      "score": -0.866,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 7,
+          "col": 0,
+          "row": 0,
+          "lk": "VectorDotProduct",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 1,
+          "lk": "VectorSubtraction",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 0,
+          "row": 4,
+          "lk": "example_1_3_vector_subtraction_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 7,
+          "lk": "example_1_4_vector_multiplication_vr",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "test_batch_1",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        9,
+        16
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 0,
+          "col": 6,
+          "row": 2,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 17,
+          "col": 2,
+          "row": 4,
+          "lk": "chord_tension_spring",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 10,
+          "lk": "vector_normalize_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Forces_Lab",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 20,
+          "col": 3,
+          "row": 4,
+          "lk": "bounce_well",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 6,
+          "row": 4,
+          "lk": "firework_burst",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 19,
+          "col": 9,
+          "row": 4,
+          "lk": "momentum_cradle",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 4,
+          "row": 8,
+          "lk": "slingshot_pull",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 8,
+          "lk": "collision_carts",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Forces_6",
+      "score": 0.0,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 1,
+          "lk": "mass_spring_damper",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 4,
+          "row": 1,
+          "lk": "spring_system",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 2,
+          "row": 4,
+          "lk": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 4,
+          "row": 4,
+          "lk": "example_3_3_pointing_in_the_direction_of_motion_vr",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Operations_Playground",
+      "score": 0.0,
+      "tag": "uncurated",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 7,
+          "col": 2,
+          "row": 5,
+          "lk": "dot_aligner",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 9,
+          "col": 5,
+          "row": 5,
+          "lk": "torque_crank",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 8,
+          "col": 7,
+          "row": 5,
+          "lk": "projection_shadow",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "AdvancedLaboratory_Systems_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        6,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "spring_network",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Annotation_Hold_Sample",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 24,
+          "col": 8,
+          "row": 4,
+          "lk": "example_2_1_forces_vr",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Change_Velocity",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 4,
+          "row": 7,
+          "lk": "velocity_arrow",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Flow_Field",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 4,
+          "row": 7,
+          "lk": "vector_field_grid",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Flow_Particle_Pulse",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 10,
+          "col": 2,
+          "row": 5,
+          "lk": "particle_flow_swarm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 4,
+          "row": 7,
+          "lk": "vector_field_grid",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Forces_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Forces_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Forces_4",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Forces_7",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 16,
+          "col": 4,
+          "row": 1,
+          "lk": "force_fields",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 4,
+          "lk": "firework_launcher",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Forces_8",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 16,
+          "col": 2,
+          "row": 1,
+          "lk": "three_body_problem",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 1,
+          "lk": "nbody_simulation",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 1,
+          "row": 3,
+          "lk": "example_2_8_two_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "forcedirected3d",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 5,
+          "lk": "example_2_9_n_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_Destruct",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 10,
+          "row": 1,
+          "lk": "VectorThrowing",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Forces_Drone_Game",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 10,
+          "row": 17,
+          "lk": "vector_drone",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Arrays_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 22,
+          "col": 2,
+          "row": 2,
+          "lk": "windmill_floor",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 19,
+          "col": 2,
+          "row": 8,
+          "lk": "impulse_collision_demo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 2,
+          "row": 16,
+          "lk": "orbital_mechanics_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 8,
+          "row": 10,
+          "lk": "spring_chain",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Hazards",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 6,
+          "lk": "spring_hopper",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Primitives_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 6,
+          "col": 6,
+          "row": 4,
+          "lk": "array_scale",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 8,
+          "lk": "coordinate_axes_xy",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 8,
+          "row": 8,
+          "lk": "coordinate_lines",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Primitives_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 4,
+          "row": 12,
+          "lk": "rockfactory_gravity",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Steering",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 6,
+          "row": 6,
+          "lk": "noc_5_04_flow_field",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_WaveFunctions",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        24
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 18,
+          "col": 4,
+          "row": 10,
+          "lk": "PendulumCircle",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 10,
+          "lk": "PendulumGrid3x3",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "GraphTheory_Force_Directed_3d",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "forcedirected3d",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "GraphTheory_Force_Directed_Graph_Layout",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "force_directed_layout",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "gridagent_puzzle01_copy",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 1,
+          "row": 1,
+          "lk": "algo_gun",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "gridagent_puzzle02_translate",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 1,
+          "row": 1,
+          "lk": "algo_gun",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "gridagent_puzzle03_rotate",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 1,
+          "row": 1,
+          "lk": "algo_gun",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Grown_primitives_w0",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 7,
+          "row": 4,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "GT_Layout",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 3,
+          "lk": "force_directed_layout",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 23,
+          "col": 7,
+          "row": 3,
+          "lk": "force_field",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_5",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "spring_mass_bouncer",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Joints_BallSocket",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 1,
+          "lk": "ConeTwistBag",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Joints_ConstrainedMotion",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 1,
+          "lk": "PendulumPin",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 4,
+          "row": 4,
+          "lk": "DoublePendulum",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Joints_HingeAxis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 2,
+          "row": 1,
+          "lk": "HingeCrank",
+          "ai": 2,
+          "t": "a"
+        },
+        {
+          "co": 9,
+          "col": 4,
+          "row": 4,
+          "lk": "DrawbridgeHinge",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Joints_Kinematics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 4,
+          "row": 5,
+          "lk": "IKArm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Joints_SliderRail",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 2,
+          "row": 1,
+          "lk": "SliderPress",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "SpringSuspension",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Joints_SoftConstraints",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 1,
+          "lk": "ChainSwing",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Kernel_Demo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        27
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 0,
+          "row": 20,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Kernel_Demo2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 3,
+          "row": 11,
+          "lk": "scale_me",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "MiniScene_basis_vectors_rig",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        2,
+        2
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "MiniScene_CoordinateSystem3M",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 2,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MiniScene_Oscillation_Trio",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        18,
+        7
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 3,
+          "lk": "coupled_pendulums",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 13,
+          "row": 3,
+          "lk": "mass_spring_damper",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MiniScene_Spring",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        3,
+        3
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 1,
+          "lk": "spring_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "MiniScene_vector_magnitude_demo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        3,
+        3
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 1,
+          "row": 1,
+          "lk": "vector_magnitude_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "MiniScene_vector_normalize_demo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        3,
+        3
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 1,
+          "lk": "vector_normalize_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "MiniScene_vector_sub",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        4,
+        4
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 2,
+          "row": 2,
+          "lk": "vector_sub",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 4,
+          "row": 4,
+          "lk": "example_3_10_swinging_pendulum_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 1,
+          "lk": "example_3_11_a_spring_connection_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_7",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 1,
+          "lk": "exercise_3_15_double_pendulum_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Particles_Emitters",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 5,
+          "row": 5,
+          "lk": "sub_emitters",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Particles_Forces",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 16,
+          "col": 1,
+          "row": 2,
+          "lk": "force_fields",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 3,
+          "row": 4,
+          "lk": "example_2_6_single_attractor_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Bouncing_Ball_Physics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 20,
+          "col": 4,
+          "row": 3,
+          "lk": "bouncing_ball",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Cloth_Simulation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        6,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 3,
+          "row": 4,
+          "lk": "cloth_simulation",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Fluid_Simulation_SPH",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 0,
+          "row": 1,
+          "lk": "fluid_simulation",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Force_Fields",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 4,
+          "row": 4,
+          "lk": "force_fields",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Mass_Spring_Damper",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 4,
+          "lk": "mass_spring_damper",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Newton_s_Laws",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 24,
+          "col": 3,
+          "row": 3,
+          "lk": "newtons_laws",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Rigid_Body_Dynamics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 4,
+          "row": 3,
+          "lk": "rigid_body",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Spring_Mass_Systems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "spring_mass_system",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Three_Body_Problem",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 5,
+          "row": 4,
+          "lk": "three_body_problem",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Vector_Fields",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 5,
+          "row": 5,
+          "lk": "vector_fields",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Verlet_Integration",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 3,
+          "row": 3,
+          "lk": "verlet_integration",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSim_Bodies",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 9,
+          "col": 2,
+          "row": 2,
+          "lk": "rigid_body",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 7,
+          "lk": "bouncing_ball",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSim_Continuum",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 2,
+          "row": 2,
+          "lk": "fluid_simulation",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 4,
+          "row": 5,
+          "lk": "surreal_kinetic_sculpture",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSim_Fields",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 16,
+          "col": 2,
+          "row": 2,
+          "lk": "force_fields",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 6,
+          "row": 2,
+          "lk": "vector_fields",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 5,
+          "lk": "three_body_problem",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 6,
+          "row": 8,
+          "lk": "nbody_simulation",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSim_Foundations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 24,
+          "col": 1,
+          "row": 2,
+          "lk": "newtons_laws",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 7,
+          "lk": "verlet_integration",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSim_Springs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 2,
+          "lk": "mass_spring_damper",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 5,
+          "row": 4,
+          "lk": "spring_mass_system",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 1,
+          "row": 7,
+          "lk": "spring_system",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 5,
+          "row": 9,
+          "lk": "cloth_simulation",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Physics_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 22,
+          "col": 5,
+          "row": 4,
+          "lk": "example_6_4_windmill_vr",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Circle_Packing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 7,
+          "row": 4,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Fold",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 6,
+          "row": 4,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 2,
+          "row": 1,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Paradoxical",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 2,
+          "row": 0,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Random",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 8,
+          "row": 1,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Rule_Based",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 8,
+          "row": 4,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Sdf",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 8,
+          "row": 4,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Simulated_Annealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 3,
+          "row": 2,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Voronoi",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 3,
+          "row": 1,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Warehouse",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 3,
+          "row": 4,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Point_Lines",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        27
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 3,
+          "row": 23,
+          "lk": "scale_lines",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Line_Context",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        17
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 6,
+          "col": 0,
+          "row": 9,
+          "lk": "scale_lines",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 1,
+          "row": 14,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_One",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 0,
+          "row": 14,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Point_Zero",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 6,
+          "row": 8,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Point_Zero_",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 6,
+          "row": 8,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_Part1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 18,
+          "col": 6,
+          "row": 2,
+          "lk": "pendulum_slap",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 11,
+          "row": 2,
+          "lk": "pendulum_slap",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 2,
+          "row": 6,
+          "lk": "pendulum_slap",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 6,
+          "lk": "pendulum_slap",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 10,
+          "lk": "pendulum_slap",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 10,
+          "row": 10,
+          "lk": "pendulum_slap",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SwarmIntelligence_FlowFields",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 5,
+          "row": 3,
+          "lk": "FlowFieldMain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_12",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 3,
+          "row": 1,
+          "lk": "parametric_pendulum_waves",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_26",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 1,
+          "lk": "spring_network",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "test_gridagent_algogun",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 1,
+          "row": 1,
+          "lk": "algo_gun",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Introduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 8,
+          "lk": "homogeneous_coordinates",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Scale",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 3,
+          "row": 8,
+          "lk": "scale_me",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_2D_Build",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 7,
+          "row": 22,
+          "lk": "xyz_coordinates",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_2D_Color",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 0,
+          "lk": "xyz_coordinates",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_App",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 3,
+          "row": 12,
+          "lk": "xyz_coordinates",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Col",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        3
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 6,
+          "row": 2,
+          "lk": "xyz_coordinates",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Row",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 7,
+          "lk": "xyz_coordinates",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Single",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        4,
+        3
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 2,
+          "lk": "xyz_coordinates",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorAddition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "VectorAddition",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 3,
+          "lk": "vector_addition_demo",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 24,
+          "col": 7,
+          "row": 3,
+          "lk": "ForceMagnitudeDemo",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorBasics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorCrossProduct",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorDotProduct",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 2,
+          "row": 1,
+          "lk": "VectorDotProduct",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 4,
+          "lk": "dot_product_projector",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "VectorFieldFlow",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorFieldFlow",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorForces",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 24,
+          "col": 2,
+          "row": 2,
+          "lk": "VectorForces",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 23,
+          "col": 4,
+          "row": 3,
+          "lk": "force_field_visualizer",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorMotion",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorProjectionReflection",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorSubtraction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 5,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorSubtraction",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 3,
+          "lk": "vector_subtraction_demo",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "VectorBasics",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "basis_vectors_rig",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_4",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 0,
+          "lk": "VectorProjectionReflection",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 1,
+          "lk": "VectorMotion",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 1,
+          "row": 4,
+          "lk": "example_1_7_motion_101_velocity_vr",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 7,
+          "lk": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_6",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 24,
+          "col": 2,
+          "row": 2,
+          "lk": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 3,
+          "lk": "exercise_1_8_solution_attraction_magnitude_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_Act5_ForceAsPlace",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        24
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 23,
+          "col": 8,
+          "row": 11,
+          "lk": "force_field_zone",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 23,
+          "col": 4,
+          "row": 17,
+          "lk": "vector_machine",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 8,
+          "row": 17,
+          "lk": "force_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 10,
+          "row": 17,
+          "lk": "force_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 9,
+          "row": 18,
+          "lk": "force_cube",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorThrowing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 3,
+          "row": 3,
+          "lk": "VectorThrowing",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorTorque",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 3,
+          "row": 2,
+          "lk": "VectorTorque",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_07_Gravity",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        16
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 16,
+          "col": 6,
+          "row": 2,
+          "lk": "three_body_problem",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 14,
+          "row": 3,
+          "lk": "forcedirected3d",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 8,
+          "lk": "exercise_1_8_solution_attraction_magnitude_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 8,
+          "row": 8,
+          "lk": "example_2_8_two_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 12,
+          "row": 8,
+          "lk": "example_2_9_n_body_attraction_vr",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 8,
+          "row": 10,
+          "lk": "orbit_pair",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 11,
+          "lk": "gravity_well",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 8,
+          "row": 11,
+          "lk": "orbital_mechanics_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Catalyst_Chamber",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 8,
+          "row": 7,
+          "lk": "mortar_vector_siege",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Field",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 23,
+          "col": 5,
+          "row": 5,
+          "lk": "force_vortex",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 10,
+          "col": 2,
+          "row": 6,
+          "lk": "vector_field_grid",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Velocity",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 3,
+          "row": 5,
+          "lk": "velocity_arrow",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Void_Crossing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        18
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 24,
+          "col": 7,
+          "row": 2,
+          "lk": "force_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 8,
+          "row": 2,
+          "lk": "force_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 9,
+          "row": 2,
+          "lk": "force_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 23,
+          "col": 3,
+          "row": 3,
+          "lk": "vector_machine",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 24,
+          "col": 8,
+          "row": 3,
+          "lk": "force_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 23,
+          "col": 6,
+          "row": 8,
+          "lk": "force_field_zone",
+          "ai": 4,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Effect_Sound",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 7,
+          "lk": "chord_tension_spring",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Effect_Sound_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 7,
+          "lk": "chord_tension_spring",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Effect_Sound_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 7,
+          "lk": "chord_tension_spring",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Effect_Sound_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 7,
+          "lk": "chord_tension_spring",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 11,
+          "lk": "control_pendulum",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 11,
+          "lk": "control_pendulum",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 11,
+          "lk": "control_pendulum",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 11,
+          "lk": "control_pendulum",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 18,
+          "col": 9,
+          "row": 0,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 10,
+          "row": 1,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 9,
+          "row": 2,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 12,
+          "lk": "foucault_pendulum",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 18,
+          "col": 5,
+          "row": 0,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 2,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 5,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 12,
+          "lk": "foucault_pendulum",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 18,
+          "col": 5,
+          "row": 0,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 1,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 4,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 12,
+          "lk": "foucault_pendulum",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 18,
+          "col": 8,
+          "row": 0,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 1,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 3,
+          "lk": "PendulumWave",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 12,
+          "lk": "foucault_pendulum",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 8,
+          "lk": "spring_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 7,
+          "row": 10,
+          "lk": "spring_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 7,
+          "row": 10,
+          "lk": "spring_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 7,
+          "row": 10,
+          "lk": "spring_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 8,
+          "lk": "spring_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Zone_TemporalStorage",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 6,
+          "row": 8,
+          "lk": "vector_field_grid",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "_Example_Branch",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 2,
+          "lk": "CoordinateSystem3M",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    }
+  ],
+  "total_maps": 176
+}

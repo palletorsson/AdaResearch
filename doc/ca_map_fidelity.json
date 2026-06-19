@@ -1,0 +1,1535 @@
+{
+  "domain": "ca",
+  "title": "Cellular Automata — every example, by concept",
+  "acts": [
+    "Act I — one dimension (the rule)",
+    "Act II — two dimensions (life)",
+    "Act III — beyond binary (states & neighbours)",
+    "Act IV — matter & chemistry",
+    "Act V — the edge of chaos",
+    "Act VI — structure & world",
+    "Act VII — CA as morphogenesis (DNA bridge)"
+  ],
+  "maps": [
+    {
+      "name": "Zone_ForbiddenWetLab",
+      "score": 0.866,
+      "tag": "curated",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 16,
+          "col": 4,
+          "row": 3,
+          "lk": "ca_growth_network",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 5,
+          "col": 8,
+          "row": 3,
+          "lk": "ca_bridge",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 9,
+          "lk": "pulsing_ca",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 9,
+          "lk": "game_of_life_petri",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "CA_EdgeOfChaos",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 14,
+          "col": 2,
+          "row": 2,
+          "lk": "ca_screen",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 4,
+          "row": 2,
+          "lk": "self_organization_ca",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 2,
+          "lk": "disease_spread_ca",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "volumetric_fog_ca",
+          "ai": 4,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "CA_BeyondBinary",
+      "score": -0.116,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 18,
+          "col": 0,
+          "row": 0,
+          "lk": "mold_network",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 1,
+          "lk": "game_of_life_petri",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 3,
+          "lk": "hexagon_ca_vr",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 2,
+          "row": 4,
+          "lk": "ca_growth_network",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_CellularAutomata",
+      "score": -0.211,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        16
+      ],
+      "n_concepts": 10,
+      "n_artifacts": 22,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 2,
+          "lk": "7_1_elementary_ca_vr",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 2,
+          "lk": "7_2_game_of_life_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 2,
+          "lk": "7_3_game_of_life_oop_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 8,
+          "row": 2,
+          "lk": "7_8_hexagon_ca_vr",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 2,
+          "row": 4,
+          "lk": "CA_sphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 4,
+          "lk": "CellularAutomata3DTree",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 4,
+          "lk": "CrosswayCA",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 8,
+          "row": 4,
+          "lk": "ca_showcase",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 6,
+          "lk": "cellular_automata_1d",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 6,
+          "lk": "cellular_automata_basic",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 6,
+          "row": 6,
+          "lk": "crack_propagation_ca",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 16,
+          "col": 8,
+          "row": 6,
+          "lk": "dendrite_growth_ca",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 8,
+          "lk": "ecosystem_ca",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 8,
+          "lk": "elementary_ca_vr",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 8,
+          "lk": "game_of_life_oop_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 8,
+          "lk": "game_of_life_vr",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 2,
+          "row": 10,
+          "lk": "hexagon_cave_vr",
+          "ai": 2,
+          "t": "a"
+        },
+        {
+          "co": 10,
+          "col": 4,
+          "row": 10,
+          "lk": "lenia_continuous",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 6,
+          "row": 10,
+          "lk": "percolation_ca",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 8,
+          "row": 10,
+          "lk": "pulsing_ca",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 12,
+          "lk": "recrystallization_ca",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 12,
+          "lk": "wireworld_circuit",
+          "ai": 2,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Grid2D",
+      "score": -0.441,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        8
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 6,
+          "col": 4,
+          "row": 2,
+          "lk": "grid2d_brians_brain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 2,
+          "lk": "grid2d_rule110",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 2,
+          "lk": "grid2d_rule30",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 4,
+          "lk": "grid2d_rule90",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "CA_AgentsCircuits",
+      "score": -0.866,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 0,
+          "col": 3,
+          "row": 1,
+          "lk": "ca_rule_explorer",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "CellularAutomata3DStacked",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 5,
+          "lk": "sierpinski_pyramid",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_LivingPaper",
+      "score": 0.0,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        18
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 6,
+          "col": 4,
+          "row": 2,
+          "lk": "living_paper_brians_brain",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 2,
+          "row": 12,
+          "lk": "living_paper_reaction_diffusion",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 12,
+          "lk": "living_paper_rule110",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 12,
+          "lk": "living_paper_rule30",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "AutoGenTest2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 12,
+          "row": 4,
+          "lk": "reaction_diffusion",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "BG_Crack_Propagation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "crackpropagation_ca",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "CA_ElementaryRules",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 0,
+          "row": 0,
+          "lk": "structure_growth",
+          "ai": 5,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "CA_ExpandingSpace",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 16,
+          "col": 3,
+          "row": 1,
+          "lk": "ca_chair_test",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "cellular_automata_3d_tree",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 15,
+          "col": 2,
+          "row": 7,
+          "lk": "crossway_ca",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 5,
+          "row": 7,
+          "lk": "decaying_bridge",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "CA_GameOfLife",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        16
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 5,
+          "col": 4,
+          "row": 6,
+          "lk": "ca_columns",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 12,
+          "lk": "mirrored_cellular_automata",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 15,
+          "lk": "ca_bridge",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "CA_Introduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        17
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 19,
+          "col": 3,
+          "row": 3,
+          "lk": "persian_rug",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 11,
+          "lk": "line_network_ca",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "CA_Rules_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 3,
+          "row": 1,
+          "lk": "ca_rules_workbench",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "CA_SoftRules",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "ca_sphere",
+          "ai": 4,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 7,
+          "lk": "rule_30_110_gravity",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Context_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        35
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 14,
+          "lk": "crackpropagation_ca",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Disposition_Test_Hub",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 9,
+          "row": 4,
+          "lk": "persian_rug",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Disposition_Test_Maze",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 9,
+          "row": 3,
+          "lk": "ca_bridge",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_CrossSequence",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 15,
+          "col": 2,
+          "row": 6,
+          "lk": "cellular_automata_3d_stacked",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_KochSierpinski",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "sierpinski_pyramid",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_ProceduralGeneration",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 6,
+          "row": 12,
+          "lk": "reaction_diffusion_vr",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_SwarmIntelligence",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 6,
+          "row": 4,
+          "lk": "stigmergy_grid",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Morphogenesis_Intro",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 1,
+          "row": 1,
+          "lk": "turing_pattern_generator",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 1,
+          "lk": "reaction_diffusion",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Mirrored_Patterns",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 0,
+          "row": 3,
+          "lk": "mirror_cellular_texture_for_3d",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "PG_Mirrored_Patterns_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 0,
+          "row": 3,
+          "lk": "mirror_cellular_texture_for_3d",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "PG_Mirrored_Patterns_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 0,
+          "row": 3,
+          "lk": "mirror_cellular_texture_for_3d",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "PG_Mirrored_Patterns_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 0,
+          "row": 3,
+          "lk": "mirror_cellular_texture_for_3d",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "PG_Percolation_Network",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 10,
+          "lk": "percolationnetwork_ca",
+          "ai": 5,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PG_Percolation_Network_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 10,
+          "lk": "percolationnetwork_ca",
+          "ai": 5,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PG_Percolation_Network_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 10,
+          "lk": "percolationnetwork_ca",
+          "ai": 5,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PG_Percolation_Network_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 10,
+          "lk": "percolationnetwork_ca",
+          "ai": 5,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Fluid_Simulation_SPH",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 12,
+          "col": 4,
+          "row": 1,
+          "lk": "lattice_gas_automata",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Eight",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 9,
+          "row": 2,
+          "lk": "mirror_cellular_texture_for_3d",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Eleven",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 10,
+          "lk": "rule_30_110",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 3,
+          "row": 3,
+          "lk": "turing_pattern_generator",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 6,
+          "lk": "reaction_diffusion",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Reaction_Diffusion_Systems_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 3,
+          "row": 3,
+          "lk": "turing_pattern_generator",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 6,
+          "lk": "reaction_diffusion",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Reaction_Diffusion_Systems_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 3,
+          "row": 3,
+          "lk": "turing_pattern_generator",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 6,
+          "lk": "reaction_diffusion",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Reaction_Diffusion_Systems_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 3,
+          "row": 3,
+          "lk": "turing_pattern_generator",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 6,
+          "lk": "reaction_diffusion",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_Edge_Of_Chaos",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 4,
+          "row": 3,
+          "lk": "turing_pattern",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 8,
+          "row": 3,
+          "lk": "turing_pattern",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Mushrooms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 6,
+          "row": 8,
+          "lk": "reaction_diffusion_intro",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Cellular_Automata_1D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 19,
+          "col": 3,
+          "row": 1,
+          "lk": "mirror_cellular_texture_for_3d",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 4,
+          "lk": "cellular_automata_grabable",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Cellular_Automata_2D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 3,
+          "lk": "cellular_automata_2d",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 12,
+          "col": 5,
+          "row": 5,
+          "lk": "lattice_gas_automata",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Cellular_Automata_3D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "cellular_automata_3d",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 6,
+          "lk": "cellular_automata_3d_stacked",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Julia_Set",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 2,
+          "lk": "sierpinski_pyramid",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Lattice_Gas_Automata",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 12,
+          "col": 2,
+          "row": 4,
+          "lk": "lattice_gas_automata",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Rule_30_110",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        6,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 4,
+          "lk": "rule_30_110_gravity",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Reformed_Instruments",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 6,
+          "lk": "ca_rules_workbench",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Shader_10_ReactionDiffusion",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 5,
+          "row": 5,
+          "lk": "shader_10_reactiondiffusion",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Test_Substrates",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 1,
+          "row": 1,
+          "lk": "grid2d_wireworld",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 1,
+          "row": 4,
+          "lk": "grid2d_langtons_ant",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Test_Substrates_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 1,
+          "row": 1,
+          "lk": "grid2d_wireworld",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 1,
+          "row": 4,
+          "lk": "grid2d_langtons_ant",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Voxel_Grammar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 15,
+          "col": 4,
+          "row": 5,
+          "lk": "cellular_automata_3d_tree",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    }
+  ],
+  "total_maps": 51
+}

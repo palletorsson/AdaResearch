@@ -1,0 +1,7165 @@
+{
+  "domain": "primitives",
+  "title": "Primitives",
+  "acts": [
+    "0D · point",
+    "1D · line",
+    "2D · surface",
+    "3D · solids",
+    "structures",
+    "meta"
+  ],
+  "maps": [
+    {
+      "name": "Primitives_Melencolia",
+      "score": 0.569,
+      "tag": "curated",
+      "grid": [
+        7,
+        14
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 13,
+      "arts": [
+        {
+          "co": 12,
+          "col": 1,
+          "row": 1,
+          "lk": "pyramid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 3,
+          "row": 1,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 12,
+          "col": 5,
+          "row": 1,
+          "lk": "pyramid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 2,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 3,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 3,
+          "row": 3,
+          "lk": "pyramidlong",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 3,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 6,
+          "row": 3,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 5,
+          "lk": "pyramid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 5,
+          "row": 5,
+          "lk": "pyramid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 0,
+          "row": 8,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 8,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Constellation",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 19,
+          "col": 18,
+          "row": 4,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 7,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 17,
+          "row": 10,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 14,
+          "row": 14,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 17,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Point_Line_Grid",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        8,
+        14
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 5,
+          "col": 0,
+          "row": 0,
+          "lk": "player_trace",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 3,
+          "lk": "grid_lines",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 8,
+          "lk": "grab_sphere_point_snap",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Point_Triangle_Context",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        7,
+        22
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 6,
+          "lk": "parasol_triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 19,
+          "col": 3,
+          "row": 7,
+          "lk": "triangle_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 10,
+          "lk": "triangleprofiles",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 12,
+          "lk": "folded_strip",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 1,
+          "row": 13,
+          "lk": "draw_triangle_faces",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 14,
+          "lk": "triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 14,
+          "lk": "pythagorean_triangle_angles",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 15,
+          "lk": "quad",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 16,
+          "lk": "interactivetriangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 17,
+          "lk": "quad_line_puzzle",
+          "ai": 2,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Portals",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        7,
+        35
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 9,
+          "col": 5,
+          "row": 2,
+          "lk": "capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 3,
+          "row": 4,
+          "lk": "combine_portals",
+          "ai": 5,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 5,
+          "lk": "achilles_tortoise",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Godot",
+      "score": 0.358,
+      "tag": "partial",
+      "grid": [
+        9,
+        5
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 11,
+      "arts": [
+        {
+          "co": 7,
+          "col": 0,
+          "row": 1,
+          "lk": "sphere_low",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 1,
+          "lk": "sphere_mid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 1,
+          "lk": "sphere_high",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 4,
+          "row": 1,
+          "lk": "cylinder_low",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 1,
+          "lk": "cylinder_mid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 7,
+          "row": 1,
+          "lk": "torus_low",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 0,
+          "row": 3,
+          "lk": "sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 3,
+          "lk": "cylinder",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 4,
+          "row": 3,
+          "lk": "capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 10,
+          "col": 6,
+          "row": 3,
+          "lk": "torus",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 3,
+          "lk": "cube",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Polythedra",
+      "score": 0.329,
+      "tag": "partial",
+      "grid": [
+        7,
+        11
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 3,
+          "lk": "interactive_point_origin_force",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 3,
+          "row": 4,
+          "lk": "snap_tetrahedron_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 5,
+          "lk": "grab_trihedron",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 9,
+          "lk": "pyramid_edit",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Primitives_2",
+      "score": 0.323,
+      "tag": "partial",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 12,
+      "n_artifacts": 30,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 2,
+          "lk": "folding_cube_interactive",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 2,
+          "lk": "geometric_crystal",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 2,
+          "lk": "glass_planes_2_5d",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 2,
+          "lk": "glass_planes_empty",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 2,
+          "row": 4,
+          "lk": "grab_aalto_vase",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 4,
+          "lk": "grab_alessi_tree",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 4,
+          "lk": "grab_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 4,
+          "lk": "grab_cube_show",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 2,
+          "row": 6,
+          "lk": "grab_dodecahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 4,
+          "row": 6,
+          "lk": "grab_icosahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 6,
+          "lk": "grab_line",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 6,
+          "lk": "grab_line_drawer",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 8,
+          "lk": "grab_line_music",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 8,
+          "lk": "grab_line_pusher",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 6,
+          "row": 8,
+          "lk": "grab_sphere_point_color_with_text",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 8,
+          "row": 8,
+          "lk": "grab_sphere_point_with_color",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 2,
+          "row": 10,
+          "lk": "grab_sphere_point_with_text",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 10,
+          "lk": "grab_tetrahedron",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 6,
+          "row": 10,
+          "lk": "hollowrock",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 10,
+          "lk": "horizon_plumb_lines",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 12,
+          "lk": "knowledge_prism",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 12,
+          "lk": "kochsnowflake",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 12,
+          "lk": "lefttriangle",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 8,
+          "row": 12,
+          "lk": "level_entrance",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 14,
+          "lk": "line_collection",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 14,
+          "lk": "mengersponge",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 14,
+          "lk": "menu",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 8,
+          "row": 14,
+          "lk": "modernchair",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 2,
+          "row": 16,
+          "lk": "modernpolysolid",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 4,
+          "row": 16,
+          "lk": "noisetorus_ex_1",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_One",
+      "score": 0.236,
+      "tag": "partial",
+      "grid": [
+        20,
+        21
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 20,
+          "col": 2,
+          "row": 0,
+          "lk": "folding_past",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 0,
+          "lk": "grid_lines",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 7,
+          "lk": "you_are_here",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 2,
+          "row": 10,
+          "lk": "fontana_puncture",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 12,
+          "lk": "floating_sphere_field",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Point_Line_Context",
+      "score": 0.15,
+      "tag": "partial",
+      "grid": [
+        7,
+        17
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 11,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 4,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 5,
+          "lk": "cross_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 5,
+          "lk": "one_meter_line",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 0,
+          "row": 8,
+          "lk": "parallel_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 0,
+          "row": 9,
+          "lk": "scale_lines",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 0,
+          "row": 10,
+          "lk": "parallel_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 11,
+          "lk": "grid_lines",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 12,
+          "lk": "cube_lines",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 14,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 16,
+          "lk": "perspective_lines",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Point_Tests_SimulatedAnnealing",
+      "score": 0.143,
+      "tag": "uncurated",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 9,
+          "col": 4,
+          "row": 4,
+          "lk": "combine_capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 12,
+          "row": 6,
+          "lk": "doublestick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 11,
+          "row": 13,
+          "lk": "combine_sphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 17,
+          "lk": "cube_scene_drag_points",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Primitives_4",
+      "score": 0.133,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 8,
+      "n_artifacts": 15,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 2,
+          "lk": "square_pyramid",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 4,
+          "row": 2,
+          "lk": "steppedpyramid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 6,
+          "row": 2,
+          "lk": "tetrahedron_edit",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 12,
+          "col": 8,
+          "row": 2,
+          "lk": "trafficcone",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 4,
+          "lk": "transform_staircase_dna",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 4,
+          "lk": "transform_staircase_fibonacci",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 6,
+          "row": 4,
+          "lk": "transform_staircase_mobius",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 8,
+          "row": 4,
+          "lk": "transform_staircase_showcase",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 6,
+          "lk": "transform_staircase_spiral",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 6,
+          "lk": "translation_demo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 6,
+          "lk": "triangular_cupola",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 8,
+          "row": 6,
+          "lk": "trihedron",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 8,
+          "lk": "unitcube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 8,
+          "lk": "wood_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 8,
+          "lk": "zigzagprofile",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_2",
+      "score": 0.031,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        13
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 11,
+      "arts": [
+        {
+          "co": 6,
+          "col": 1,
+          "row": 2,
+          "lk": "cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 3,
+          "row": 2,
+          "lk": "pyramid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 2,
+          "lk": "octahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 1,
+          "row": 4,
+          "lk": "dodecahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 4,
+          "lk": "icosahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 1,
+          "row": 6,
+          "lk": "lshape",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 3,
+          "row": 6,
+          "lk": "bipyramid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 6,
+          "lk": "halocube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 1,
+          "row": 8,
+          "lk": "roughrock",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 3,
+          "row": 8,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 8,
+          "lk": "truncatedtetrahedron",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Tests_Hybrid",
+      "score": 0.029,
+      "tag": "uncurated",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 9,
+          "col": 10,
+          "row": 10,
+          "lk": "combine_capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 13,
+          "lk": "combine_sphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 15,
+          "row": 15,
+          "lk": "cube_scene_drag_points",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 20,
+          "col": 12,
+          "row": 16,
+          "lk": "doublestick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Grown_primitives_w0",
+      "score": 0.006,
+      "tag": "uncurated",
+      "grid": [
+        14,
+        9
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 4,
+          "col": 7,
+          "row": 0,
+          "lk": "quad",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 7,
+          "row": 7,
+          "lk": "dgrid",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 8,
+          "lk": "sphere_high",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 8,
+          "row": 8,
+          "lk": "righttriangle",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 11,
+          "row": 8,
+          "lk": "lshape",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Primitives_1",
+      "score": -0.006,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 13,
+      "n_artifacts": 30,
+      "arts": [
+        {
+          "co": 8,
+          "col": 2,
+          "row": 2,
+          "lk": "PipeLayout",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 4,
+          "row": 2,
+          "lk": "SDFDrawTool",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 16,
+          "col": 6,
+          "row": 2,
+          "lk": "aalto_vase",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 8,
+          "row": 2,
+          "lk": "alessi_tree",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 2,
+          "row": 4,
+          "lk": "arch",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 4,
+          "lk": "array_rotate",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 6,
+          "row": 4,
+          "lk": "array_scale",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 8,
+          "row": 4,
+          "lk": "array_translate",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 6,
+          "lk": "arrow",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 6,
+          "lk": "bucket_of_tulips",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 6,
+          "row": 6,
+          "lk": "capsules",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 8,
+          "row": 6,
+          "lk": "cavetest",
+          "ai": 5,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 2,
+          "row": 8,
+          "lk": "combine_primitives",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 8,
+          "lk": "concept_synthesizer",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 6,
+          "row": 8,
+          "lk": "coordinate_axes_xy",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 8,
+          "lk": "coordinate_lines",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 10,
+          "lk": "cross_lines",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 10,
+          "lk": "crystal",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 10,
+          "lk": "crystalcluster",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 8,
+          "row": 10,
+          "lk": "cylinder_radials_rings",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 2,
+          "row": 12,
+          "lk": "diamond",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 12,
+          "lk": "dimension_lens",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 12,
+          "lk": "dynamic_rock",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 12,
+          "lk": "editable_bezier",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 14,
+          "lk": "editable_catmull_rom",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 14,
+          "lk": "editable_curve",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 5,
+          "col": 6,
+          "row": 14,
+          "lk": "elevator_platform",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 14,
+          "lk": "falling_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 16,
+          "lk": "foldedpaper",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 16,
+          "lk": "folding_cube",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Ignorance",
+      "score": -0.008,
+      "tag": "uncurated",
+      "grid": [
+        9,
+        27
+      ],
+      "n_concepts": 11,
+      "n_artifacts": 37,
+      "arts": [
+        {
+          "co": 6,
+          "col": 1,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 0,
+          "lk": "sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 4,
+          "lk": "platonic_grabbables",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 11,
+          "lk": "hole_with_cones",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 11,
+          "lk": "sphere_high",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 11,
+          "lk": "sphere_high",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 7,
+          "row": 11,
+          "lk": "star_primitive",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 1,
+          "row": 13,
+          "lk": "righttriangle",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 13,
+          "lk": "sphere_mid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 13,
+          "lk": "sphere_mid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 7,
+          "row": 13,
+          "lk": "truncatedtetrahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 1,
+          "row": 15,
+          "lk": "roughrock",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 15,
+          "lk": "sphere_low",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 15,
+          "lk": "sphere_low",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 7,
+          "row": 15,
+          "lk": "capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 17,
+          "lk": "grab_octahedron",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 17,
+          "lk": "snap_octahedron_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 6,
+          "row": 17,
+          "lk": "grab_octahedron",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 3,
+          "row": 20,
+          "lk": "lshape",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 20,
+          "lk": "lshape",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 0,
+          "row": 21,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 1,
+          "row": 21,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 2,
+          "row": 21,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 3,
+          "row": 21,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 5,
+          "row": 21,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 6,
+          "row": 21,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 7,
+          "row": 21,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 8,
+          "row": 21,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 0,
+          "row": 23,
+          "lk": "torus_radials_rings",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 2,
+          "row": 23,
+          "lk": "capsule_radials_rings",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 23,
+          "lk": "capsule_radials_rings",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 5,
+          "row": 23,
+          "lk": "capsule_radials_rings",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 6,
+          "row": 23,
+          "lk": "capsule_radials_rings",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 8,
+          "row": 23,
+          "lk": "torus_radials_rings",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 1,
+          "row": 25,
+          "lk": "plus",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 4,
+          "row": 25,
+          "lk": "diamonds",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 7,
+          "row": 25,
+          "lk": "plus",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Kernel_Demo",
+      "score": -0.018,
+      "tag": "uncurated",
+      "grid": [
+        9,
+        27
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 0,
+          "row": 7,
+          "lk": "grid_lines",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 14,
+          "lk": "folding_past",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 20,
+          "lk": "origin",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 25,
+          "lk": "you_are_here",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 4,
+          "row": 25,
+          "lk": "fontana_puncture",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 25,
+          "lk": "floating_sphere_field",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Grown_PointTestsClone",
+      "score": -0.029,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 9,
+          "col": 0,
+          "row": 0,
+          "lk": "combine_capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 7,
+          "row": 3,
+          "lk": "doublestick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 4,
+          "lk": "cube_scene_drag_points",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 7,
+          "row": 6,
+          "lk": "combine_sphere",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Primitives_3",
+      "score": -0.051,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 14,
+      "n_artifacts": 30,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 2,
+          "lk": "parametric_surface",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 2,
+          "lk": "pickup_cube_combo",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 2,
+          "lk": "pickup_cube_scaling",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 2,
+          "lk": "plane",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 2,
+          "row": 4,
+          "lk": "platonic_demo",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 4,
+          "lk": "plus_lines",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 4,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 8,
+          "row": 4,
+          "lk": "point_collection",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 2,
+          "row": 6,
+          "lk": "portal_frame",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 6,
+          "lk": "prismblock",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 6,
+          "lk": "proceduralrock",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 8,
+          "row": 6,
+          "lk": "profile_chair",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 8,
+          "lk": "pythagorean_proof",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 8,
+          "lk": "pythagorean_triangle",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 8,
+          "lk": "quantum_dice",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 8,
+          "row": 8,
+          "lk": "quest_controller",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 10,
+          "lk": "reality_modifier",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 10,
+          "lk": "rectcube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 10,
+          "lk": "right_triangle_lines",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 8,
+          "row": 10,
+          "lk": "rock_primitive",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 2,
+          "row": 12,
+          "lk": "rockfactory",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 12,
+          "lk": "rockfactory_gravity",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 6,
+          "row": 12,
+          "lk": "rotation_match_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 20,
+          "col": 8,
+          "row": 12,
+          "lk": "scifi_panel_wall",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 14,
+          "lk": "simple_rock",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 14,
+          "lk": "sliding_door",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 6,
+          "row": 14,
+          "lk": "snap_demo",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 14,
+          "lk": "snap_triangle_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 16,
+          "lk": "snap_wedge_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 16,
+          "lk": "spatial_compass",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Grown_primitives_w2",
+      "score": -0.058,
+      "tag": "uncurated",
+      "grid": [
+        8,
+        5
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 0,
+          "lk": "parasol_triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 12,
+          "col": 4,
+          "row": 0,
+          "lk": "pyramid_edit",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 1,
+          "lk": "player_trace",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 3,
+          "lk": "laser_measure",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 4,
+          "lk": "draw_triangle_faces",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Tests",
+      "score": -0.116,
+      "tag": "uncurated",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 9,
+          "col": 10,
+          "row": 10,
+          "lk": "combine_capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 10,
+          "row": 13,
+          "lk": "doublestick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 14,
+          "lk": "cube_scene_drag_points",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 16,
+          "lk": "combine_sphere",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Point_Tests_HumanoidWalker",
+      "score": -0.116,
+      "tag": "uncurated",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 9,
+          "col": 10,
+          "row": 10,
+          "lk": "combine_capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 10,
+          "row": 13,
+          "lk": "doublestick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 14,
+          "lk": "cube_scene_drag_points",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 16,
+          "lk": "combine_sphere",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Point_Tests_Placed",
+      "score": -0.116,
+      "tag": "uncurated",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 9,
+          "col": 10,
+          "row": 10,
+          "lk": "combine_capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 10,
+          "row": 13,
+          "lk": "doublestick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 14,
+          "lk": "cube_scene_drag_points",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 16,
+          "lk": "combine_sphere",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Grown_primitives_w1",
+      "score": -0.226,
+      "tag": "uncurated",
+      "grid": [
+        9,
+        8
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 3,
+          "col": 3,
+          "row": 3,
+          "lk": "triangleprofiles",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 5,
+          "lk": "combine_portals",
+          "ai": 5,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 6,
+          "lk": "plus_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 6,
+          "lk": "capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 11,
+          "col": 2,
+          "row": 7,
+          "lk": "truncatedtetrahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 7,
+          "lk": "grab_sphere_point_snap",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Point_Lines",
+      "score": -0.297,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        27
+      ],
+      "n_concepts": 9,
+      "n_artifacts": 25,
+      "arts": [
+        {
+          "co": 7,
+          "col": 0,
+          "row": 3,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 10,
+          "lk": "plus_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 10,
+          "lk": "parallel_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 11,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 11,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 13,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 13,
+          "lk": "floating_sphere_field",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 13,
+          "lk": "laser_measure",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 14,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 14,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 14,
+          "lk": "laser_measure",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 15,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 15,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 15,
+          "lk": "grabbable_line",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 15,
+          "lk": "laser_measure",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 1,
+          "row": 19,
+          "lk": "lightrod",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 19,
+          "lk": "lightrod",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 1,
+          "row": 21,
+          "lk": "fontana_puncture",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 22,
+          "lk": "laser_sword",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 22,
+          "lk": "laser_sword",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 23,
+          "lk": "perspective_lines",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 23,
+          "lk": "scale_lines",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 23,
+          "lk": "perspective_lines",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 24,
+          "lk": "klee_walking_point",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 6,
+          "row": 26,
+          "lk": "dgrid",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Useful",
+      "score": -0.486,
+      "tag": "uncurated",
+      "grid": [
+        8,
+        5
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 13,
+          "col": 0,
+          "row": 1,
+          "lk": "prism",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 2,
+          "row": 1,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 1,
+          "lk": "triangularblock",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 2,
+          "lk": "pyramid",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 2,
+          "lk": "cube",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Triangle",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        11
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 19,
+          "col": 3,
+          "row": 5,
+          "lk": "triangle_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 6,
+          "lk": "parasol_triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 8,
+          "lk": "triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 9,
+          "lk": "triangleprofiles",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "_Example_Island",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        9,
+        7
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 2,
+          "lk": "origin",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 3,
+          "lk": "sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 4,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Promenade",
+      "score": 0.0,
+      "tag": "uncurated",
+      "grid": [
+        9,
+        32
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 3,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 2,
+          "row": 18,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 18,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 28,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Annotation_Demo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 5,
+          "row": 5,
+          "lk": "interactive_point_origin",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Amphitheater",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 19,
+          "col": 8,
+          "row": 6,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 14,
+          "row": 6,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 6,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 16,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 6,
+          "row": 14,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 16,
+          "row": 14,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 16,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 14,
+          "row": 16,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Atrium",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        21
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 15,
+          "col": 2,
+          "row": 10,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 15,
+          "col": 18,
+          "row": 10,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 2,
+          "row": 18,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Cathedral",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        30
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 15,
+          "col": 5,
+          "row": 24,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 15,
+          "col": 9,
+          "row": 24,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Cave",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 15,
+          "col": 17,
+          "row": 5,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 20,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 20,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Citadel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 19,
+          "col": 14,
+          "row": 5,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 17,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Crossroads",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 7,
+          "col": 11,
+          "row": 6,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 11,
+          "row": 8,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 3,
+          "row": 11,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 11,
+          "row": 14,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 11,
+          "row": 16,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Dungeon",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        27,
+        27
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 5,
+          "row": 5,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 5,
+          "row": 22,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Forum",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 19,
+          "col": 12,
+          "row": 5,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 16,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 5,
+          "row": 12,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 19,
+          "row": 12,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 16,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 16,
+          "row": 16,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 12,
+          "row": 19,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_HubSpokes",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 19,
+          "col": 10,
+          "row": 9,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 14,
+          "row": 9,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 1,
+          "row": 12,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 12,
+          "row": 22,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Maze",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 19,
+          "col": 21,
+          "row": 1,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 1,
+          "row": 21,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Quadrants",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 19,
+          "col": 18,
+          "row": 4,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 11,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 11,
+          "row": 14,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 18,
+          "row": 18,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Spiral",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 19,
+          "col": 18,
+          "row": 2,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 16,
+          "row": 4,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Stacks",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        19
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 19,
+          "col": 4,
+          "row": 6,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 9,
+          "lk": "bigframe",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Theater",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 19,
+          "col": 7,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 13,
+          "row": 8,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 7,
+          "row": 11,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 13,
+          "row": 11,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 7,
+          "row": 14,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 13,
+          "row": 14,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Change_Velocity",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 6,
+          "row": 5,
+          "lk": "player_trace",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Context_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        35
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 18,
+          "col": 5,
+          "row": 2,
+          "lk": "primitive_assembler",
+          "ai": 5,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 8,
+          "row": 4,
+          "lk": "primitive_combo_puzzle",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 2,
+          "row": 18,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 18,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_cardinal",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 4,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 7,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_cluster_center",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 3,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_linear_path",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 3,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_nearest_role",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 3,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_perimeter",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 4,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 7,
+          "row": 0,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 3,
+          "row": 17,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 18,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 5,
+          "row": 17,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 2,
+          "row": 18,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 5,
+          "row": 17,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 2,
+          "row": 18,
+          "lk": "grab_rainbow_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Directionality_Examples",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 6,
+          "col": 20,
+          "row": 3,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 16,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 16,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 16,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 11,
+          "row": 16,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Euclid_Parallel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 1,
+          "col": 3,
+          "row": 5,
+          "lk": "parallel_lines",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Euclid_Parallel_composed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        33,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 1,
+          "col": 13,
+          "row": 6,
+          "lk": "parallel_lines",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "F11_Comparison",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 6,
+          "col": 1,
+          "row": 1,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 1,
+          "lk": "animated_cube",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "F14_Lab_Bench",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        4
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 3,
+          "row": 2,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "F17_Zen_Garden",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 2,
+          "lk": "probability_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "F4_Amphitheater",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 3,
+          "lk": "light_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ForcesArena",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        31,
+        34
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 8,
+          "col": 1,
+          "row": 7,
+          "lk": "queer_cylinder_target",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 10,
+          "row": 7,
+          "lk": "queer_cylinder_target",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 19,
+          "row": 18,
+          "lk": "grab_sphere_point",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ForcesChaos",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 20,
+          "col": 15,
+          "row": 2,
+          "lk": "chaos_attractor",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_8",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 20,
+          "col": 2,
+          "row": 4,
+          "lk": "chaos_attractor",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_Destruct",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 10,
+          "row": 6,
+          "lk": "grab_sphere_point",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_Drone_Game",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 1,
+          "row": 8,
+          "lk": "queer_cylinder_target",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 11,
+          "row": 8,
+          "lk": "queer_cylinder_target",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_RecursiveTrees",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        12
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 0,
+          "col": 6,
+          "row": 0,
+          "lk": "living_paper",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 1,
+          "row": 3,
+          "lk": "small_subdivision_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 3,
+          "lk": "small_subdivision_cube",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Grown_MultiDisplay",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 3,
+          "row": 0,
+          "lk": "xyz_slider_plate",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Kernel_Demo2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 6,
+          "row": 5,
+          "lk": "perspective_lines",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 0,
+          "row": 11,
+          "lk": "origin",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        19
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 6,
+          "col": 8,
+          "row": 1,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 4,
+          "lk": "cube_lines",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 4,
+          "lk": "light_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 5,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "MiniScene_Point",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        3,
+        3
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 1,
+          "row": 1,
+          "lk": "point",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "One_Adapt_7",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 3,
+          "row": 2,
+          "lk": "transformation_cube",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Oscillation_Animated_Cube",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 6,
+          "col": 0,
+          "row": 3,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 1,
+          "row": 3,
+          "lk": "transformation_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 3,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 3,
+          "lk": "combo_cube_visual",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 5,
+          "lk": "pickup_cube_static",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 8,
+          "lk": "pickup_cube_transforming",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 9,
+          "lk": "pickup_cube_rotating",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Sculpted_Forms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 8,
+          "row": 1,
+          "lk": "dome",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PG_Sculpted_Forms_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 11,
+          "row": 0,
+          "lk": "dome",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PG_Sculpted_Forms_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 11,
+          "row": 0,
+          "lk": "dome",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PG_Sculpted_Forms_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 11,
+          "row": 0,
+          "lk": "dome",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Point_Animatedcube",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 4,
+          "lk": "animatedcubebuilder",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 4,
+          "lk": "animatedcubebuilder",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 8,
+          "lk": "animatedcubebuilder",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 8,
+          "lk": "animatedcubebuilder",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Point_Context",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 3,
+          "row": 4,
+          "lk": "grab_sphere_point_snap",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 4,
+          "lk": "draw_dot",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Line",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        15
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 4,
+          "row": 1,
+          "lk": "line_demo",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 8,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Trace",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        17
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 15,
+          "col": 4,
+          "row": 5,
+          "lk": "mystic_writing_pad",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 8,
+          "lk": "draw_dot",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Zero",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 0,
+          "row": 0,
+          "lk": "origin",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 2,
+          "row": 2,
+          "lk": "folding_past",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Zero_",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 0,
+          "row": 0,
+          "lk": "origin",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Fiver",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 13,
+      "arts": [
+        {
+          "co": 13,
+          "col": 2,
+          "row": 2,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 3,
+          "row": 2,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 2,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 1,
+          "row": 3,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 5,
+          "row": 3,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 1,
+          "row": 4,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 4,
+          "lk": "diamonds",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 5,
+          "row": 4,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 1,
+          "row": 5,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 5,
+          "row": 5,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 2,
+          "row": 6,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 3,
+          "row": 6,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 6,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Irregular",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 20,
+          "col": 4,
+          "row": 5,
+          "lk": "rock_scanner",
+          "ai": 5,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Platonic",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 11,
+          "col": 1,
+          "row": 1,
+          "lk": "tetrahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 1,
+          "lk": "cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 1,
+          "lk": "octahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 4,
+          "row": 1,
+          "lk": "dodecahedron",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 5,
+          "row": 1,
+          "lk": "icosahedron",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Torus",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 0,
+          "row": 0,
+          "lk": "combine_torus",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Dome",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 5,
+          "row": 7,
+          "lk": "dome",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Eleven",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 5,
+          "row": 6,
+          "lk": "array_visualizer",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Seven",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 5,
+          "row": 6,
+          "lk": "array_visualizer",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PromptDemo_Trans_Translation_Echo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        24
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 0,
+          "row": 0,
+          "lk": "player_trace",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PromptDemo_Tweaked",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        28
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 5,
+          "row": 4,
+          "lk": "player_trace",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 5,
+          "row": 6,
+          "lk": "random_object_spawner",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 6,
+          "lk": "random_object_spawner",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 20,
+          "col": 6,
+          "row": 6,
+          "lk": "random_object_spawner",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 20,
+          "col": 4,
+          "row": 16,
+          "lk": "random_object_spawner",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "snappoint_octahedron_puzzle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 1,
+          "row": 3,
+          "lk": "snap_pyramid_puzzle",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Carusell",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Carusell_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Carusell_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Carusell_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_Part1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_Part2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_Part2_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        30,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_Part2_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        30,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_Part2_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        30,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_Part3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 20,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 5,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Structure_Examples",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        33,
+        26
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 1,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 25,
+          "row": 1,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 27,
+          "row": 1,
+          "lk": "animated_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 13,
+          "row": 3,
+          "lk": "light_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 27,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 11,
+          "row": 15,
+          "lk": "probability_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Structure_Examples_VoxelGrammar_Principles",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        33,
+        32
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 7,
+          "col": 18,
+          "row": 1,
+          "lk": "light_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 2,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 2,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 27,
+          "row": 21,
+          "lk": "probability_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "test_cctv",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 0,
+          "row": 0,
+          "lk": "origin",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Trans_AxisDecomposition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 6,
+          "col": 0,
+          "row": 12,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 1,
+          "row": 12,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 12,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 13,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 13,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 14,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 14,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 15,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 15,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_RotationSpectacle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        54
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 0,
+          "row": 4,
+          "lk": "righttriangle",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Scale",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        21
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 13,
+          "col": 0,
+          "row": 10,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 1,
+          "row": 10,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 10,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 10,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 10,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 5,
+          "row": 10,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 6,
+          "row": 10,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 1,
+          "row": 15,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 5,
+          "row": 15,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 3,
+          "row": 16,
+          "lk": "prism_block",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Translation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        24
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 0,
+          "row": 0,
+          "lk": "player_trace",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Translation_edit826",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        24
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 0,
+          "row": 0,
+          "lk": "player_trace",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_2D_Color",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 3,
+          "row": 3,
+          "lk": "cube_with_shader",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Start",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        3,
+        3
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 6,
+          "col": 0,
+          "row": 2,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 1,
+          "row": 2,
+          "lk": "oscillation_cube",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_04_Fields",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        30,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 14,
+          "row": 19,
+          "lk": "interactive_point_origin_force",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_08_Arena",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        26,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 13,
+          "row": 8,
+          "lk": "queer_cylinder_target",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 6,
+          "col": 4,
+          "row": 2,
+          "lk": "pickup_cube_static",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 4,
+          "lk": "transformation_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 7,
+          "lk": "pickup_cube_transforming",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 8,
+          "lk": "pickup_cube_rotating",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 6,
+          "col": 4,
+          "row": 2,
+          "lk": "pickup_cube_static",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 4,
+          "lk": "transformation_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 7,
+          "lk": "pickup_cube_transforming",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 8,
+          "lk": "pickup_cube_rotating",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 6,
+          "col": 4,
+          "row": 2,
+          "lk": "pickup_cube_static",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 4,
+          "lk": "transformation_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 7,
+          "lk": "pickup_cube_transforming",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 8,
+          "lk": "pickup_cube_rotating",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 6,
+          "col": 4,
+          "row": 2,
+          "lk": "pickup_cube_static",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 4,
+          "lk": "transformation_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "rotating_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 7,
+          "lk": "pickup_cube_transforming",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 8,
+          "lk": "pickup_cube_rotating",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "draw_dot_time_domain",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "draw_dot_time_domain",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "draw_dot_time_domain",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "draw_dot_time_domain",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Sky_Stairs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 14,
+      "arts": [
+        {
+          "co": 6,
+          "col": 5,
+          "row": 3,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 5,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Sky_Stairs_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 14,
+      "arts": [
+        {
+          "co": 6,
+          "col": 5,
+          "row": 3,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 5,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Sky_Stairs_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 14,
+      "arts": [
+        {
+          "co": 6,
+          "col": 5,
+          "row": 3,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 5,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 5,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 9,
+          "row": 5,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 9,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Sky_Stairs_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 14,
+      "arts": [
+        {
+          "co": 6,
+          "col": 5,
+          "row": 3,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 5,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 8,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 9,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 9,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 9,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 9,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 9,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "_Example_Branch",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 6,
+          "col": 1,
+          "row": 4,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 7,
+          "row": 4,
+          "lk": "perspective_lines",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "_Example_Linear",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 2,
+          "lk": "origin",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 4,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 4,
+          "lk": "interactive_point_origin",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    }
+  ],
+  "total_maps": 142
+}

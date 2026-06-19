@@ -1,0 +1,5590 @@
+{
+  "domain": "randomness",
+  "title": "Randomness & Noise — every example, by concept",
+  "acts": [
+    "Act I — pure chance",
+    "Act II — distributions",
+    "Act III — noise",
+    "Act IV — process & measure",
+    "Act V — randomness as material",
+    "Act VI — randomness as growth"
+  ],
+  "maps": [
+    {
+      "name": "Noise_Perlin_Simplex_Hybrid",
+      "score": 1.0,
+      "tag": "curated",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 7,
+          "col": 9,
+          "row": 2,
+          "lk": "perlin_noise_terrain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 3,
+          "row": 3,
+          "lk": "noise_terrain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 5,
+          "lk": "simplex_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 9,
+          "lk": "perlin_noise",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Mushrooms",
+      "score": 1.0,
+      "tag": "curated",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "bubbles_random",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 6,
+          "lk": "bubble_particles",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 12,
+          "lk": "random_number_book_page_collection",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_23",
+      "score": 0.866,
+      "tag": "curated",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 1,
+          "lk": "sculpt_one",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 1,
+          "row": 3,
+          "lk": "shader_noise_space",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 3,
+          "row": 3,
+          "lk": "simplex_noise",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_28",
+      "score": 0.866,
+      "tag": "curated",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 8,
+          "col": 1,
+          "row": 1,
+          "lk": "value_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 1,
+          "lk": "voxelnoise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 1,
+          "row": 3,
+          "lk": "walk_random",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Grammar_florence",
+      "score": 0.771,
+      "tag": "curated",
+      "grid": [
+        15,
+        14
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 2,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 5,
+          "row": 2,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 5,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 8,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 5,
+          "row": 8,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 11,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Grammar_venice",
+      "score": 0.714,
+      "tag": "curated",
+      "grid": [
+        15,
+        14
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 2,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 6,
+          "row": 2,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 5,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 8,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 8,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 11,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex_HumanoidWalker",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 10,
+          "col": 6,
+          "row": 9,
+          "lk": "noise_terrain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 10,
+          "lk": "perlin_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 3,
+          "row": 11,
+          "lk": "simplex_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 12,
+          "lk": "perlin_noise_terrain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex_Placed",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 10,
+          "col": 6,
+          "row": 9,
+          "lk": "noise_terrain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 10,
+          "lk": "perlin_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 3,
+          "row": 11,
+          "lk": "simplex_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 12,
+          "lk": "perlin_noise_terrain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Grammar_halflife",
+      "score": 0.493,
+      "tag": "partial",
+      "grid": [
+        15,
+        17
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 2,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 6,
+          "row": 2,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 5,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 8,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 6,
+          "row": 11,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 14,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Grammar_linear",
+      "score": 0.493,
+      "tag": "partial",
+      "grid": [
+        15,
+        17
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 2,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 6,
+          "row": 2,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 5,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 8,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 6,
+          "row": 11,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 14,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Grammar_zelda",
+      "score": 0.493,
+      "tag": "partial",
+      "grid": [
+        15,
+        17
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 2,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 6,
+          "row": 2,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 5,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 8,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 6,
+          "row": 11,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 14,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Grammar_vatican",
+      "score": 0.486,
+      "tag": "partial",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 5,
+          "row": 2,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 8,
+          "row": 2,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 5,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 5,
+          "row": 5,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 5,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 8,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "RoundTrip_Random_Definition",
+      "score": 0.311,
+      "tag": "partial",
+      "grid": [
+        5,
+        30
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 1,
+          "col": 0,
+          "row": 2,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 2,
+          "lk": "prng_crank_machine",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 5,
+          "lk": "entropy_axiom",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 9,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 17,
+          "col": 2,
+          "row": 10,
+          "lk": "random_butterflies",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 2,
+          "row": 11,
+          "lk": "seed_replay_demo",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 0,
+          "row": 15,
+          "lk": "digital_materiality_glitch",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 15,
+          "lk": "trng_vs_prng",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 19,
+          "lk": "random_number_book_page_1955",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "RoundTrip_Random_Definition_v2",
+      "score": 0.311,
+      "tag": "partial",
+      "grid": [
+        5,
+        30
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 1,
+          "col": 0,
+          "row": 2,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 2,
+          "lk": "prng_crank_machine",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 5,
+          "lk": "entropy_axiom",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 9,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 17,
+          "col": 2,
+          "row": 10,
+          "lk": "random_butterflies",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 2,
+          "row": 11,
+          "lk": "seed_replay_demo",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 0,
+          "row": 15,
+          "lk": "digital_materiality_glitch",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 15,
+          "lk": "trng_vs_prng",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 19,
+          "lk": "random_number_book_page_1955",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Astar_T00",
+      "score": 0.257,
+      "tag": "partial",
+      "grid": [
+        15,
+        15
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 3,
+          "row": 3,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 3,
+          "row": 5,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 6,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 8,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 9,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 11,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Astar_T03",
+      "score": 0.257,
+      "tag": "partial",
+      "grid": [
+        15,
+        15
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 3,
+          "row": 3,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 3,
+          "row": 5,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 6,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 8,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 9,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 11,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Astar_T08",
+      "score": 0.2,
+      "tag": "partial",
+      "grid": [
+        15,
+        15
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 3,
+          "row": 3,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 4,
+          "row": 5,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 6,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 8,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 9,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 7,
+          "row": 11,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Random_Space_Geometry",
+      "score": 0.177,
+      "tag": "partial",
+      "grid": [
+        12,
+        24
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 15,
+          "col": 2,
+          "row": 2,
+          "lk": "random_transformations_geometric",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 6,
+          "row": 15,
+          "lk": "curl_noise_particles",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 17,
+          "col": 6,
+          "row": 17,
+          "lk": "sculpt_one",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 18,
+          "lk": "perlin_noise_bridge",
+          "ai": 2,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Random_Definition",
+      "score": 0.165,
+      "tag": "partial",
+      "grid": [
+        5,
+        21
+      ],
+      "n_concepts": 5,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 1,
+          "col": 0,
+          "row": 2,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 2,
+          "lk": "prng_crank_machine",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 5,
+          "lk": "entropy_axiom",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 7,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 9,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 17,
+          "col": 2,
+          "row": 10,
+          "lk": "random_butterflies",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 2,
+          "row": 11,
+          "lk": "seed_replay_demo",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 0,
+          "row": 15,
+          "lk": "digital_materiality_glitch",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 4,
+          "row": 15,
+          "lk": "trng_vs_prng",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 19,
+          "lk": "random_number_book_page_1955",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Randomness",
+      "score": 0.07,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        8
+      ],
+      "n_concepts": 6,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 9,
+          "col": 2,
+          "row": 2,
+          "lk": "noise_mixer",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 2,
+          "lk": "random_transformations",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 2,
+          "lk": "randompoints_gaussian",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 8,
+          "row": 2,
+          "lk": "randompoints_uniform",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 2,
+          "row": 4,
+          "lk": "rejection_sampling_demo",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 4,
+          "row": 4,
+          "lk": "shannon_entropy_meter",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 8,
+          "col": 6,
+          "row": 4,
+          "lk": "worley_noise",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Grammar_metropolitan",
+      "score": -0.058,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 14,
+          "col": 5,
+          "row": 3,
+          "lk": "entropy_jar",
+          "ai": 3,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 3,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 6,
+          "lk": "slot_machine",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 6,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Statistics",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 12,
+          "col": 6,
+          "row": 4,
+          "lk": "markov_chain",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 4,
+          "lk": "monte_carlo",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 6,
+          "lk": "normal_distribution",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Randomness_Examples_of_Randomness",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        17
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 3,
+          "lk": "pollock_painting_in_3d",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 7,
+          "lk": "monte_carlo_dartboard",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 5,
+          "row": 10,
+          "lk": "extreme_randomness",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Space",
+      "score": -0.58,
+      "tag": "uncurated",
+      "grid": [
+        13,
+        15
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 9,
+          "col": 4,
+          "row": 3,
+          "lk": "noise_mixer",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 8,
+          "row": 4,
+          "lk": "worley_noise",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 6,
+          "lk": "random_space",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 4,
+          "row": 9,
+          "lk": "shannon_entropy_meter",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_18",
+      "score": -0.828,
+      "tag": "uncurated",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 15,
+          "col": 1,
+          "row": 1,
+          "lk": "random_edge_profile_collection",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 1,
+          "lk": "random_gaussian_texture",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 3,
+          "lk": "random_number_book_page_collection",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "random_plants",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_16",
+      "score": -0.866,
+      "tag": "uncurated",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 1,
+          "lk": "pollock_3d",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 1,
+          "lk": "pool_hole_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 1,
+          "row": 3,
+          "lk": "probability_distributions_3d",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_17",
+      "score": -0.866,
+      "tag": "uncurated",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 1,
+          "lk": "random_bell_curve",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 3,
+          "row": 1,
+          "lk": "random_color_book_page_collection",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 15,
+          "col": 1,
+          "row": 3,
+          "lk": "random_decay_objects",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 8,
+          "col": 2,
+          "row": 3,
+          "lk": "simplex_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 7,
+          "row": 3,
+          "lk": "perlin_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 5,
+          "row": 6,
+          "lk": "noise_terrain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 10,
+          "lk": "perlin_noise_terrain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex_SimulatedAnnealing",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 2,
+          "lk": "perlin_noise_terrain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 5,
+          "row": 6,
+          "lk": "noise_terrain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 7,
+          "row": 8,
+          "lk": "perlin_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 1,
+          "row": 11,
+          "lk": "simplex_noise",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "AutoGenTest",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 10,
+          "row": 3,
+          "lk": "genetic_tree_sculptor",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "AutoGenTest2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 8,
+          "row": 8,
+          "lk": "genetic_tree_sculptor",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Convex_Hull_Algorithms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Distance_Fields_SDF",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Euclidean_Distance_Transform",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Line_Intersection",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Medial_Axis_Transform",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 5,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Morphological_Operations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Point_in_Polygon",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_BSP_Trees",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 5,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Graph_Structures",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Hash_Maps",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Heap_Operations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Linked_Lists",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 2,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Quadtrees_Octrees",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Segment_Tree",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 2,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Suffix_Array_Tree",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 2,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Trie_Operations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Union_Find_Disjoint_Set",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Disposition_Test_Rooms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 3,
+          "row": 8,
+          "lk": "entropy_axiom",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "F17_Zen_Garden",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 7,
+          "row": 2,
+          "lk": "noisetorus",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 8,
+          "row": 14,
+          "lk": "monte_carlo_estimator",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 6,
+          "row": 14,
+          "lk": "vera_molnar_des_ordres",
+          "ai": 4,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_ComputationalBiology",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 6,
+          "row": 2,
+          "lk": "monte_carlo_protein",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_LivingPaper",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 10,
+          "lk": "living_paper_perlin",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Neuroscience",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 12,
+          "col": 4,
+          "row": 2,
+          "lk": "puls_markov",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Primitives_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 4,
+          "row": 16,
+          "lk": "noisetorus_ex_1",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "GraphTheory_Maximum_Flow_Algorithms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_6",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 12,
+          "col": 3,
+          "row": 3,
+          "lk": "grammar_markov",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 7,
+          "lk": "noise_field",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_Introduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 3,
+          "row": 3,
+          "lk": "voxel_noise_demo",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Backus_Naur_Form_BNF",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Different_Grammar_Types",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Living",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 19,
+          "col": 4,
+          "row": 4,
+          "lk": "genetic_tree_sculptor",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Shape_Grammars",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Stochastic_L_Systems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Attention_Mechanisms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Classification_Algorithms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Clustering_Algorithms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Dimensionality_Reduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Fine_tuning",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Generative_Adversarial_Networks_GANs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Random_Walker_Machine",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "random_walker_machine",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Recommendation_Systems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Recurrent_Neural_Networks_RNNs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Transfer_Learning",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Transformers",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Variational_Autoencoders_VAEs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Meshes_Two",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 3,
+          "row": 3,
+          "lk": "noisesphere",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Morphogenesis_Intro",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 2,
+          "row": 2,
+          "lk": "entropy_morphogenesis",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_6_Wall",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 5,
+          "row": 5,
+          "lk": "shader_noise_space",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Blue",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 5,
+          "row": 6,
+          "lk": "blue_noise",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Functions",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 5,
+          "row": 6,
+          "lk": "shader_noise_space",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Inside_Noise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 5,
+          "row": 6,
+          "lk": "noisesphere",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_One",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 9,
+          "col": 5,
+          "row": 5,
+          "lk": "noisetorus",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 5,
+          "row": 6,
+          "lk": "noiselayers",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Space_10",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 5,
+          "row": 6,
+          "lk": "noise_space",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Volume",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 5,
+          "row": 6,
+          "lk": "VoxelNoiseROIs",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Voxel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 1,
+          "row": 1,
+          "lk": "perlin_terrain_sculptor",
+          "ai": 2,
+          "t": "a"
+        },
+        {
+          "co": 9,
+          "col": 1,
+          "row": 2,
+          "lk": "voxelnoise",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "One_Adapt_5",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 9,
+          "col": 3,
+          "row": 2,
+          "lk": "cloudvolume",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 3,
+          "lk": "perlinvolume",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "One_Adapt_6",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 3,
+          "row": 2,
+          "lk": "instancingscatter",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PatternGeneration_Narrative_Generation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        4,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 12,
+          "col": 1,
+          "row": 5,
+          "lk": "markov_chains",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PatternGeneration_Typography_Generation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PatternGeneration_Wang_Tiles",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Circle_Packing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 0,
+          "row": 0,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 4,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Fold",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 6,
+          "row": 1,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 4,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 0,
+          "row": 4,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 4,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Paradoxical",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 0,
+          "row": 0,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 1,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Random",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 6,
+          "row": 3,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 7,
+          "row": 4,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Rule_Based",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 0,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 2,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Sdf",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 7,
+          "row": 0,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 3,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Simulated_Annealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 2,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 4,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Voronoi",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 3,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 4,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Placement_Warehouse",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 4,
+          "lk": "2d_in_3d_randomness_vis",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 4,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Tron_Grid_Navigation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralAudio_Audio_Effects",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralAudio_Sound_Synthesis_Drone_Effects",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGenerationCrystalRandom",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "crystal_random_walk_demo",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGenerationMarchingCubesVovelNoise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 5,
+          "row": 6,
+          "lk": "marchingcubes_voxel_noise_demo",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Markov_Chains",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 12,
+          "col": 3,
+          "row": 3,
+          "lk": "markov_chains",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 12,
+          "col": 7,
+          "row": 6,
+          "lk": "markov_chains_tree",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_N_grams",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 12,
+          "col": 5,
+          "row": 5,
+          "lk": "markov_chains",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Randomness_10_PRINT_Algorithm",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 15,
+          "col": 1,
+          "row": 1,
+          "lk": "remove_random",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 16,
+          "col": 1,
+          "row": 2,
+          "lk": "ten_print_maze_3d",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 11,
+          "row": 2,
+          "lk": "ten_print_maze_3d",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 1,
+          "row": 12,
+          "lk": "ten_print_maze_3d",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 50,
+      "arts": [
+        {
+          "co": 1,
+          "col": 3,
+          "row": 2,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 2,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 8,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 8,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 8,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 8,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 8,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 8,
+          "row": 8,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 9,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 9,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 9,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 9,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 9,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 8,
+          "row": 9,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 10,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 10,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 10,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 10,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 10,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 8,
+          "row": 10,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 11,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 11,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 11,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 11,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 11,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 8,
+          "row": 11,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 12,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 12,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 12,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 12,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 12,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 8,
+          "row": 12,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 13,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 13,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 13,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 13,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 13,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 8,
+          "row": 13,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 14,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 14,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 14,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 14,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 14,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 8,
+          "row": 14,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 15,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 15,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 15,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 6,
+          "row": 15,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 7,
+          "row": 15,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 8,
+          "row": 15,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 15,
+          "col": 3,
+          "row": 10,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 13,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 15,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 15,
+          "col": 4,
+          "row": 7,
+          "lk": "random_edge_profile",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 7,
+          "row": 17,
+          "lk": "coin_toss",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 10,
+          "row": 17,
+          "lk": "dice_throw",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "GaussianBlurShader",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 5,
+          "lk": "GaussianPaintSplatter",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 7,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 13,
+          "lk": "random_bell_curve",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 17,
+          "lk": "distribution_comparator",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 17,
+          "lk": "gaussian_random",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 10,
+          "row": 18,
+          "lk": "distribution_sampler",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 19,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian_HumanoidWalker",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 1,
+          "lk": "GaussianPaintSplatter",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 1,
+          "lk": "GaussianBlurShader",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 1,
+          "lk": "gaussian_random",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 9,
+          "row": 1,
+          "lk": "distribution_comparator",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 11,
+          "row": 1,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 14,
+          "lk": "random_bell_curve",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 17,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 20,
+          "lk": "distribution_sampler",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 3,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 6,
+          "lk": "GaussianBlurShader",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 9,
+          "lk": "GaussianPaintSplatter",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 9,
+          "lk": "distribution_comparator",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 13,
+          "lk": "random_bell_curve",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 14,
+          "lk": "distribution_sampler",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 16,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 19,
+          "lk": "gaussian_random",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "GaussianBlurShader",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 5,
+          "lk": "GaussianPaintSplatter",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 7,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 13,
+          "lk": "random_bell_curve",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 17,
+          "lk": "distribution_comparator",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 17,
+          "lk": "gaussian_random",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 10,
+          "row": 18,
+          "lk": "distribution_sampler",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 19,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 2,
+          "lk": "gaussian_random",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 3,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 0,
+          "row": 4,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 5,
+          "lk": "distribution_sampler",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 6,
+          "lk": "GaussianBlurShader",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 11,
+          "row": 8,
+          "lk": "GaussianPaintSplatter",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 15,
+          "lk": "distribution_comparator",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 1,
+          "row": 19,
+          "lk": "random_bell_curve",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Noise_Types",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 0,
+          "col": 4,
+          "row": 0,
+          "lk": "randompoint",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 3,
+          "lk": "randompoints",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 3,
+          "lk": "WhiteNoiseGallery",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 5,
+          "row": 3,
+          "lk": "NoiseColors3D",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Pheromone",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 5,
+          "row": 5,
+          "lk": "pheromone_terrain",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Plane",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 0,
+          "row": 1,
+          "lk": "plane_random",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Random_Bell_Curve",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 0,
+          "row": 1,
+          "lk": "random_bell_curve",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Remove",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 15,
+          "col": 6,
+          "row": 7,
+          "lk": "remove_random",
+          "ai": 4,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Random_Rotate_Random_XYZ",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 15,
+          "col": 1,
+          "row": 1,
+          "lk": "Random_Rotate_Random_XYZ",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 9,
+          "lk": "random_decay_multimesh",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 14,
+          "col": 8,
+          "row": 10,
+          "lk": "hardware_entropy_decay",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Random_Rotate_Random_Y",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 15,
+          "col": 1,
+          "row": 1,
+          "lk": "rotate_random_y",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 10,
+          "lk": "randomup",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Walk",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 1,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 1,
+          "lk": "random_walk_collection",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 12,
+          "row": 1,
+          "lk": "pixel_cloud",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 6,
+          "row": 6,
+          "lk": "random_walk_128",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 8,
+          "row": 8,
+          "lk": "random_walk_leash",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 0,
+          "row": 11,
+          "lk": "pixel_cloud",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 12,
+          "row": 11,
+          "lk": "pixel_cloud",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Shader_07_Noise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 6,
+          "row": 5,
+          "lk": "shader_07_noise",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_08_CellularNoise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 5,
+          "row": 5,
+          "lk": "shader_08_cellularnoise",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Structure_Examples",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        33,
+        26
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 15,
+          "row": 15,
+          "lk": "noisetorus",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_10",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 9,
+          "col": 1,
+          "row": 1,
+          "lk": "neon_wave_grid",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 3,
+          "row": 3,
+          "lk": "noise_terrain_with_blobs",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_11",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 9,
+          "col": 1,
+          "row": 1,
+          "lk": "noiselayers",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 1,
+          "lk": "noisesphere",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 1,
+          "row": 3,
+          "lk": "noisetext",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 3,
+          "lk": "noisetorus",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_12",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 1,
+          "lk": "omoss",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 3,
+          "row": 3,
+          "lk": "particle_randomness_emergent",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_13",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 18,
+          "col": 1,
+          "row": 1,
+          "lk": "particle_randomness_evolutionary",
+          "ai": 4,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 3,
+          "row": 1,
+          "lk": "particle_randomness_patterns",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 3,
+          "lk": "particle_randomness_perlin",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 3,
+          "row": 3,
+          "lk": "particle_randomness_pure",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_14",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 7,
+          "col": 1,
+          "row": 1,
+          "lk": "perlin_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 1,
+          "lk": "perlin_noise_clouds",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 3,
+          "lk": "perlin_noise_terrain",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 3,
+          "lk": "perlinvolume",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_15",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 1,
+          "lk": "pixel_cloud",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 3,
+          "lk": "plane_random",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_19",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 15,
+          "col": 1,
+          "row": 1,
+          "lk": "random_transformations_geometric",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 1,
+          "lk": "random_transformations_matrices",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 1,
+          "row": 3,
+          "lk": "random_transformations_noise",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "random_transformations_stochastic",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 1,
+          "lk": "RandomGaussianTexture",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 1,
+          "lk": "Random_Rotate_Random_XYZ",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_20",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 2,
+          "col": 1,
+          "row": 1,
+          "lk": "random_walk_128",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 1,
+          "lk": "random_walk_collection",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 1,
+          "row": 3,
+          "lk": "random_walk_grab_paper",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "randomize_cubes_over_Z",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_21",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "randomlines",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 1,
+          "lk": "randompoint",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 3,
+          "lk": "randomup",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "remove_random",
+          "ai": 4,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_22",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "rotate_random_y",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_25",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "spawn_randomcubes",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_26",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 3,
+          "row": 3,
+          "lk": "ten_print",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_27",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 1,
+          "row": 1,
+          "lk": "ten_print_maze_3d",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 9,
+          "col": 3,
+          "row": 1,
+          "lk": "VoxelNoiseROIs",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 1,
+          "row": 3,
+          "lk": "bell_alley",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_4",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 11,
+          "col": 1,
+          "row": 1,
+          "lk": "blue_noise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 3,
+          "row": 1,
+          "lk": "bubbles_random",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_5",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 1,
+          "lk": "crystal_random_walk_demo",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 1,
+          "row": 3,
+          "lk": "distribution_visualization",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_6",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 1,
+          "lk": "env_one",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 3,
+          "row": 3,
+          "lk": "extreme_randomness",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_8",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 1,
+          "lk": "height_random",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 3,
+          "row": 1,
+          "lk": "instancingscatter",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Test_13",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 11,
+          "lk": "random_color_book_page_collection",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Test_15",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 11,
+          "lk": "random_color_book_page_collection",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Test_5",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 11,
+          "lk": "random_color_book_page_collection",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Test_7",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 7,
+          "lk": "random_plants",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Test_8",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 7,
+          "lk": "random_plants",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "test_batch_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 8,
+          "lk": "random_walk_terrarium",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Test_Substrates",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 13,
+          "col": 5,
+          "row": 7,
+          "lk": "grid2d_seeds",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 9,
+          "row": 9,
+          "lk": "living_paper_random_walk",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Test_Substrates_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 13,
+          "col": 5,
+          "row": 7,
+          "lk": "grid2d_seeds",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 9,
+          "row": 9,
+          "lk": "living_paper_random_walk",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Topology_Entropy_Morphogenesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 3,
+          "row": 4,
+          "lk": "entropy_morphogenesis",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Topology_Entropy_Morphogenesis_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 3,
+          "row": 4,
+          "lk": "entropy_morphogenesis",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Topology_Entropy_Morphogenesis_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 3,
+          "row": 4,
+          "lk": "entropy_morphogenesis",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Topology_Entropy_Morphogenesis_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 3,
+          "row": 4,
+          "lk": "entropy_morphogenesis",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Rotation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        40
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 15,
+          "col": 3,
+          "row": 3,
+          "lk": "rotate_grid_cubes",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Voxel_Grammar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 9,
+          "col": 2,
+          "row": 8,
+          "lk": "voxelnoise",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 6,
+          "row": 8,
+          "lk": "VoxelNoiseROIs",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Zone_TemporalStorage",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 15,
+          "col": 4,
+          "row": 2,
+          "lk": "rotate_grid_cubes",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    }
+  ],
+  "total_maps": 163
+}
