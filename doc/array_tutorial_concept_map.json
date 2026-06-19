@@ -1,0 +1,424 @@
+{
+  "title": "array_tutorial",
+  "domain": "array_tutorial",
+  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
+  "acts": [],
+  "concepts": [
+    "Basics",
+    "Buren Courtyard",
+    "Patterns",
+    "Soane Plaza"
+  ],
+  "concept_meta": {
+    "Basics": {
+      "truth": "Basics",
+      "map": "Array_Basics",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "IndexVisualizer",
+          "pick_up_cube"
+        ],
+        "medium": [
+          "t"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Buren Courtyard": {
+      "truth": "Buren Courtyard",
+      "map": "Array_Buren_Courtyard",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "buren_col_01_01",
+          "buren_col_01_04",
+          "buren_col_01_07",
+          "buren_col_01_10",
+          "buren_col_04_01",
+          "buren_col_04_04",
+          "buren_col_04_07",
+          "buren_col_04_10",
+          "buren_col_07_01",
+          "buren_col_07_04",
+          "buren_col_07_07",
+          "buren_col_07_10",
+          "buren_col_10_01",
+          "buren_col_10_04",
+          "buren_col_10_07",
+          "buren_col_10_10"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 16
+    },
+    "Patterns": {
+      "truth": "Patterns",
+      "map": "Array_Patterns",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "panel_bridge_loom"
+        ],
+        "medium": [
+          "pattern_tile_4x4",
+          "vr_tile_editor_mirror",
+          "pattern_tile_mirror",
+          "science_screen",
+          "tiling_demo",
+          "pattern_tile_plate",
+          "grid_model",
+          "facade_grammar_demo",
+          "pattern_tile_brick",
+          "pattern_tile_herringbone"
+        ],
+        "large": [
+          "pattern_tunnel_machine"
+        ],
+        "applied": []
+      },
+      "count": 13
+    },
+    "Soane Plaza": {
+      "truth": "Soane Plaza",
+      "map": "Array_Soane_Plaza",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "array_disco_substrate",
+          "array_slow_substrate",
+          "array_random_substrate"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 3
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      0.6355,
+      1.0,
+      0.9484
+    ],
+    [
+      0.6355,
+      0.0,
+      0.8262,
+      0.0
+    ],
+    [
+      1.0,
+      0.8262,
+      0.0,
+      0.9186
+    ],
+    [
+      0.9484,
+      0.0,
+      0.9186,
+      0.0
+    ]
+  ],
+  "groups": {
+    "Basics": [
+      {
+        "lookup": "IndexVisualizer",
+        "name": "IndexVisualizer",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "pick_up_cube",
+        "name": "Pick Up Cube",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "t",
+        "name": "t",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": false
+      }
+    ],
+    "Buren Courtyard": [
+      {
+        "lookup": "buren_col_01_01",
+        "name": "Buren Column (1,1)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_01_04",
+        "name": "Buren Column (1,4)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_01_07",
+        "name": "Buren Column (1,7)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_01_10",
+        "name": "Buren Column (1,10)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_04_01",
+        "name": "Buren Column (4,1)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_04_04",
+        "name": "Buren Column (4,4)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_04_07",
+        "name": "Buren Column (4,7)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_04_10",
+        "name": "Buren Column (4,10)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_07_01",
+        "name": "Buren Column (7,1)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_07_04",
+        "name": "Buren Column (7,4)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_07_07",
+        "name": "Buren Column (7,7)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_07_10",
+        "name": "Buren Column (7,10)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_10_01",
+        "name": "Buren Column (10,1)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_10_04",
+        "name": "Buren Column (10,4)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_10_07",
+        "name": "Buren Column (10,7)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "buren_col_10_10",
+        "name": "Buren Column (10,10)",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Patterns": [
+      {
+        "lookup": "pattern_tile_4x4",
+        "name": "pattern_tile_4x4",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "vr_tile_editor_mirror",
+        "name": "VR Tile Editor Mirror",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "pattern_tile_mirror",
+        "name": "pattern_tile_mirror",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "tiling_demo",
+        "name": "Tiling System Demo",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "dark_sphere",
+        "name": "Dark Sphere",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "pattern_tile_plate",
+        "name": "Pattern Tile Plate",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "pattern_tunnel_machine",
+        "name": "Pattern Tunnel Machine",
+        "fp": 30,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "panel_bridge_loom",
+        "name": "Panel Bridge — Loom Simulator",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "grid_model",
+        "name": "Grid Model",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "facade_grammar_demo",
+        "name": "Facade Grammar Demo",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "pattern_tile_brick",
+        "name": "pattern_tile_brick",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "pattern_tile_herringbone",
+        "name": "pattern_tile_herringbone",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Soane Plaza": [
+      {
+        "lookup": "array_disco_substrate",
+        "name": "Array DISCO Substrate",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "array_slow_substrate",
+        "name": "Array SLOW Substrate",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "array_random_substrate",
+        "name": "Array RANDOM Substrate",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ]
+  },
+  "total": 35,
+  "total_concepts": 4,
+  "recommended_total": 35,
+  "map_ready_total": 35
+}

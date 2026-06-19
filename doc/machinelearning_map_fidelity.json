@@ -1,0 +1,1277 @@
+{
+  "domain": "machinelearning",
+  "title": "machinelearning",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "ComputationalGeometry_Convex_Hull_Algorithms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Distance_Fields_SDF",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Euclidean_Distance_Transform",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Line_Intersection",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Medial_Axis_Transform",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 5,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Morphological_Operations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ComputationalGeometry_Point_in_Polygon",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_BSP_Trees",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 5,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Graph_Structures",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Hash_Maps",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Heap_Operations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Linked_Lists",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 1,
+          "row": 2,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Quadtrees_Octrees",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Segment_Tree",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 2,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Suffix_Array_Tree",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 2,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Trie_Operations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Union_Find_Disjoint_Set",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 2,
+          "row": 4,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Disposition_Test_Rooms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 1,
+          "row": 7,
+          "lk": "gradient_descent_visualization",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "GraphTheory_Maximum_Flow_Algorithms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Backus_Naur_Form_BNF",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Different_Grammar_Types",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Shape_Grammars",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Stochastic_L_Systems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Attention_Mechanisms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Classification_Algorithms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Clustering_Algorithms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Convolutional_Neural_Networks_CNNs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 6,
+          "lk": "convolutional_neural_networks",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Dimensionality_Reduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Evolving_Creatures",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 5,
+          "col": 5,
+          "row": 6,
+          "lk": "evolved_creatures",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 11,
+          "row": 12,
+          "lk": "gradient_descent_visualization",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Evolving_Flowers",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 5,
+          "row": 6,
+          "lk": "evolvingflowers",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Explainable_AI_XAI",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 7,
+          "col": 1,
+          "row": 2,
+          "lk": "explainable_ai_xai_vr",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 6,
+          "lk": "convolutional_neural_networks_cnns_vr",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 11,
+          "lk": "computer_vision_vr",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Fine_tuning",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Generative_Adversarial_Networks_GANs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_LSTMs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 10,
+          "col": 1,
+          "row": 2,
+          "lk": "generative_adversarial_networks_gans_vr",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 5,
+          "row": 6,
+          "lk": "lstms_vr",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 2,
+          "row": 10,
+          "lk": "fine_tuning_vr",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Neural_Networks",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 11,
+          "col": 1,
+          "row": 2,
+          "lk": "neural_networks_vr",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 11,
+          "col": 9,
+          "row": 10,
+          "lk": "transformers_vr",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 11,
+          "col": 1,
+          "row": 11,
+          "lk": "variational_autoencoders_vaes_vr",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Random_Walker_Machine",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 12,
+          "col": 5,
+          "row": 6,
+          "lk": "random_walker_machine",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Recommendation_Systems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Recurrent_Neural_Networks_RNNs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Transfer_Learning",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Transformers",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "MachineLearning_Variational_Autoencoders_VAEs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Evolution",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 5,
+          "col": 3,
+          "row": 1,
+          "lk": "evolved_creatures",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 2,
+          "lk": "evolvingflowers",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 7,
+          "lk": "gradient_descent_visualization",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Generative",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 1,
+          "row": 2,
+          "lk": "generative_adversarial_networks_gans_vr",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Gradient_Landscape",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 2,
+          "row": 2,
+          "lk": "gradient_descent_visualization",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Neural_Networks",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 1,
+          "row": 1,
+          "lk": "neural_networks_vr",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Perception",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 5,
+          "row": 1,
+          "lk": "computer_vision_vr",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 3,
+          "lk": "convolutional_neural_networks_cnns_vr",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Sequence_Memory",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        4,
+        12
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 10,
+          "col": 1,
+          "row": 2,
+          "lk": "lstms_vr",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 11,
+          "col": 1,
+          "row": 6,
+          "lk": "transformers_vr",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 5,
+          "row": 5,
+          "lk": "explainable_ai_xai_vr",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PatternGeneration_Typography_Generation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PatternGeneration_Wang_Tiles",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 3,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Tron_Grid_Navigation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralAudio_Audio_Effects",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralAudio_Sound_Synthesis_Drone_Effects",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Space_Geometry",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        24
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 5,
+          "row": 6,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "TestMap_Unused_6",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 1,
+          "lk": "env_one",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    }
+  ],
+  "total_maps": 56
+}

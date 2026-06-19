@@ -1,0 +1,1974 @@
+{
+  "title": "proceduralgeneration",
+  "domain": "proceduralgeneration",
+  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
+  "acts": [],
+  "concepts": [
+    "21",
+    "BranchingGrowthAlgorithm",
+    "CaveRandomWalk",
+    "CubeMound",
+    "Delaunay Triangulation",
+    "Dome",
+    "Eight",
+    "Eleven",
+    "Five",
+    "Four",
+    "Genetic Algorithms",
+    "Genetic Programming",
+    "MarchingGallery",
+    "Marching Cubes Algorithm",
+    "Markov Chains",
+    "Maze",
+    "N grams",
+    "Poisson Disk Sampling",
+    "Reaction Diffusion Systems",
+    "Reaction Diffusion Systems p1",
+    "Reaction Diffusion Systems p2",
+    "Reaction Diffusion Systems p3",
+    "Seven",
+    "Space Colonization Algorithms",
+    "Space Partitioning",
+    "Ten",
+    "Three",
+    "Two",
+    "Voronoi Diagrams",
+    "Wave Function Collapse"
+  ],
+  "concept_meta": {
+    "21": {
+      "truth": "21",
+      "map": "ProceduralGeneration_21",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "sixteen_cell_net_space_showcase"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "BranchingGrowthAlgorithm": {
+      "truth": "BranchingGrowthAlgorithm",
+      "map": "ProceduralGeneration_BranchingGrowthAlgorithm",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "branching_growth_algorithm"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "CaveRandomWalk": {
+      "truth": "CaveRandomWalk",
+      "map": "ProceduralGeneration_CaveRandomWalk",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "caverandomwalk"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "CubeMound": {
+      "truth": "CubeMound",
+      "map": "ProceduralGeneration_CubeMound",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "cube_mound_scene_sphere",
+          "cube_mound_scene"
+        ],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Delaunay Triangulation": {
+      "truth": "Delaunay Triangulation",
+      "map": "ProceduralGeneration_Delaunay_Triangulation",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "delaunay_triangulation_3d_cell"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Dome": {
+      "truth": "Dome",
+      "map": "ProceduralGeneration_Dome",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "voronoi_grid_3d",
+          "interactable_demo"
+        ],
+        "medium": [],
+        "large": [
+          "dome"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Eight": {
+      "truth": "Eight",
+      "map": "ProceduralGeneration_Eight",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "grab_stick"
+        ],
+        "medium": [
+          "mirror_cellular_texture_for_3d"
+        ],
+        "large": [
+          "rhizomatic_maze_space"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Eleven": {
+      "truth": "Eleven",
+      "map": "ProceduralGeneration_Eleven",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "array_visualizer"
+        ],
+        "medium": [],
+        "large": [
+          "organic_space",
+          "rule_30_110"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Five": {
+      "truth": "Five",
+      "map": "ProceduralGeneration_Five",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "lsystem_tree",
+          "layered_membrane"
+        ],
+        "medium": [],
+        "large": [
+          "implicit_surface_modeling"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Four": {
+      "truth": "Four",
+      "map": "ProceduralGeneration_Four",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "fibonacci_sequences"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Genetic Algorithms": {
+      "truth": "Genetic Algorithms",
+      "map": "ProceduralGeneration_Genetic_Algorithms",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "GeneticProgramming"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Genetic Programming": {
+      "truth": "Genetic Programming",
+      "map": "ProceduralGeneration_Genetic_Programming",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "GeneticProgramming"
+        ],
+        "medium": [
+          "clipboard#genetic_algorithms_axioms"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
+    },
+    "MarchingGallery": {
+      "truth": "MarchingGallery",
+      "map": "ProceduralGeneration_MarchingGallery",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "mc",
+          "portal"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Marching Cubes Algorithm": {
+      "truth": "Marching Cubes Algorithm",
+      "map": "ProceduralGeneration_Marching_Cubes_Algorithm",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "mc"
+        ],
+        "large": [
+          "marching_cubes"
+        ],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Markov Chains": {
+      "truth": "Markov Chains",
+      "map": "ProceduralGeneration_Markov_Chains",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "clipboard#markov_chains_axioms"
+        ],
+        "large": [
+          "markov_chains",
+          "markov_chains_tree"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Maze": {
+      "truth": "Maze",
+      "map": "ProceduralGeneration_Maze",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "maze_generation"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "N grams": {
+      "truth": "N grams",
+      "map": "ProceduralGeneration_N_grams",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "markov_chains"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Poisson Disk Sampling": {
+      "truth": "Poisson Disk Sampling",
+      "map": "ProceduralGeneration_Poisson_Disk_Sampling",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "poisson_disk_sampling_3d"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Reaction Diffusion Systems": {
+      "truth": "Reaction Diffusion Systems",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "turing_pattern_generator",
+          "reaction_diffusion"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Reaction Diffusion Systems p1": {
+      "truth": "Reaction Diffusion Systems p1",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems_p1",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "turing_pattern_generator",
+          "reaction_diffusion"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Reaction Diffusion Systems p2": {
+      "truth": "Reaction Diffusion Systems p2",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems_p2",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "turing_pattern_generator",
+          "reaction_diffusion"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Reaction Diffusion Systems p3": {
+      "truth": "Reaction Diffusion Systems p3",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems_p3",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "turing_pattern_generator",
+          "reaction_diffusion"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Seven": {
+      "truth": "Seven",
+      "map": "ProceduralGeneration_Seven",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "array_visualizer"
+        ],
+        "medium": [],
+        "large": [
+          "organic_space",
+          "recursive_tree"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Space Colonization Algorithms": {
+      "truth": "Space Colonization Algorithms",
+      "map": "ProceduralGeneration_Space_Colonization_Algorithms",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "space_colonization_algorithm"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Space Partitioning": {
+      "truth": "Space Partitioning",
+      "map": "ProceduralGeneration_Space_Partitioning",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "binary_space_partitioning"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Ten": {
+      "truth": "Ten",
+      "map": "ProceduralGeneration_Ten",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "tree_gen",
+          "fibonacci_sequences",
+          "context_free_grammars"
+        ],
+        "medium": [],
+        "large": [
+          "julia_set"
+        ],
+        "applied": []
+      },
+      "count": 4
+    },
+    "Three": {
+      "truth": "Three",
+      "map": "ProceduralGeneration_Three",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "voronoi_space"
+        ],
+        "medium": [],
+        "large": [
+          "voronoi_diagrams"
+        ],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Two": {
+      "truth": "Two",
+      "map": "ProceduralGeneration_Two",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "boolean_patterns_demo"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Voronoi Diagrams": {
+      "truth": "Voronoi Diagrams",
+      "map": "ProceduralGeneration_Voronoi_Diagrams",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "voronoi_diagram_3d"
+        ],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Wave Function Collapse": {
+      "truth": "Wave Function Collapse",
+      "map": "ProceduralGeneration_Wave_Function_Collapse",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "wave_function_collapse",
+          "wfc_3d_demo"
+        ],
+        "applied": []
+      },
+      "count": 2
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      0.9403,
+      0.8773,
+      0.8218,
+      0.9524,
+      0.7847,
+      0.8178,
+      0.8774,
+      0.86,
+      0.8756,
+      0.9466,
+      0.9652,
+      0.9186,
+      0.9897,
+      0.8956,
+      0.9273,
+      0.962,
+      0.8551,
+      0.9425,
+      1.0,
+      1.0,
+      1.0,
+      0.782,
+      0.9234,
+      0.9579,
+      0.8651,
+      0.9135,
+      0.8295,
+      0.9209,
+      0.958
+    ],
+    [
+      0.9403,
+      0.0,
+      0.8708,
+      0.9162,
+      0.915,
+      0.8952,
+      0.9364,
+      0.909,
+      0.8905,
+      0.8872,
+      0.9442,
+      0.9166,
+      0.9315,
+      0.9462,
+      0.8863,
+      0.9247,
+      0.9299,
+      0.9167,
+      0.9357,
+      0.9731,
+      0.9731,
+      0.9731,
+      0.8889,
+      0.8694,
+      0.8933,
+      0.8681,
+      0.9139,
+      0.9428,
+      0.9573,
+      0.9646
+    ],
+    [
+      0.8773,
+      0.8708,
+      0.0,
+      0.8787,
+      0.9566,
+      0.915,
+      0.9352,
+      0.9257,
+      0.9199,
+      0.9128,
+      0.9466,
+      0.9756,
+      0.9315,
+      0.9836,
+      0.9035,
+      0.8014,
+      0.9311,
+      0.9299,
+      0.9493,
+      0.9733,
+      0.9733,
+      0.9733,
+      0.9347,
+      0.9259,
+      0.8817,
+      0.949,
+      0.9099,
+      0.9074,
+      0.9481,
+      0.9887
+    ],
+    [
+      0.8218,
+      0.9162,
+      0.8787,
+      0.0,
+      0.9302,
+      0.8375,
+      0.8422,
+      0.8681,
+      0.8262,
+      0.8574,
+      0.9687,
+      0.9547,
+      0.8637,
+      0.9012,
+      0.9196,
+      0.962,
+      0.934,
+      0.899,
+      0.9241,
+      0.9709,
+      0.9709,
+      0.9709,
+      0.8707,
+      0.9375,
+      0.9647,
+      0.9331,
+      0.9089,
+      0.8156,
+      0.9516,
+      0.964
+    ],
+    [
+      0.9524,
+      0.915,
+      0.9566,
+      0.9302,
+      0.0,
+      0.897,
+      0.9535,
+      0.9682,
+      0.9599,
+      0.9576,
+      0.9764,
+      0.9723,
+      0.8962,
+      0.954,
+      0.9298,
+      0.9385,
+      0.9781,
+      0.9173,
+      0.9528,
+      1.0,
+      1.0,
+      1.0,
+      0.9737,
+      0.9577,
+      0.9614,
+      0.9263,
+      0.9014,
+      0.9433,
+      0.8906,
+      0.9264
+    ],
+    [
+      0.7847,
+      0.8952,
+      0.915,
+      0.8375,
+      0.897,
+      0.0,
+      0.7999,
+      0.9031,
+      0.8207,
+      0.8422,
+      0.9872,
+      0.9662,
+      0.8715,
+      0.9714,
+      0.9524,
+      0.9659,
+      0.96,
+      0.8935,
+      0.9241,
+      1.0,
+      1.0,
+      1.0,
+      0.7801,
+      0.8855,
+      0.9105,
+      0.9193,
+      0.7262,
+      0.8344,
+      0.8167,
+      0.9376
+    ],
+    [
+      0.8178,
+      0.9364,
+      0.9352,
+      0.8422,
+      0.9535,
+      0.7999,
+      0.0,
+      0.846,
+      0.8133,
+      0.867,
+      0.957,
+      0.9728,
+      0.895,
+      0.9146,
+      0.9165,
+      0.8906,
+      0.9613,
+      0.9087,
+      0.9259,
+      0.9689,
+      0.9689,
+      0.9689,
+      0.8201,
+      0.9528,
+      0.9704,
+      0.8862,
+      0.9276,
+      0.8592,
+      0.953,
+      0.9689
+    ],
+    [
+      0.8774,
+      0.909,
+      0.9257,
+      0.8681,
+      0.9682,
+      0.9031,
+      0.846,
+      0.0,
+      0.8993,
+      0.8889,
+      0.9409,
+      0.9367,
+      0.8602,
+      0.9033,
+      0.9418,
+      0.9844,
+      0.9171,
+      0.9308,
+      0.9252,
+      1.0,
+      1.0,
+      1.0,
+      0.9056,
+      0.978,
+      0.9377,
+      0.9154,
+      0.9633,
+      0.8555,
+      0.9539,
+      0.932
+    ],
+    [
+      0.86,
+      0.8905,
+      0.9199,
+      0.8262,
+      0.9599,
+      0.8207,
+      0.8133,
+      0.8993,
+      0.0,
+      0.8006,
+      0.9646,
+      0.9646,
+      0.9336,
+      0.8774,
+      0.9112,
+      0.973,
+      0.9846,
+      0.9282,
+      0.9641,
+      0.9671,
+      0.9671,
+      0.9671,
+      0.8296,
+      0.8862,
+      0.9512,
+      0.8307,
+      0.899,
+      0.8439,
+      0.9726,
+      0.9658
+    ],
+    [
+      0.8756,
+      0.8872,
+      0.9128,
+      0.8574,
+      0.9576,
+      0.8422,
+      0.867,
+      0.8889,
+      0.8006,
+      0.0,
+      0.9324,
+      0.9824,
+      0.9337,
+      0.9677,
+      0.918,
+      0.964,
+      0.8917,
+      0.9332,
+      0.9165,
+      1.0,
+      1.0,
+      1.0,
+      0.8602,
+      0.9518,
+      0.938,
+      0.8347,
+      0.9418,
+      0.8702,
+      0.9637,
+      0.9532
+    ],
+    [
+      0.9466,
+      0.9442,
+      0.9466,
+      0.9687,
+      0.9764,
+      0.9872,
+      0.957,
+      0.9409,
+      0.9646,
+      0.9324,
+      0.0,
+      0.7781,
+      0.9941,
+      0.9931,
+      0.9534,
+      0.9773,
+      0.9839,
+      0.9565,
+      0.9743,
+      1.0,
+      1.0,
+      1.0,
+      0.9863,
+      0.9087,
+      0.9472,
+      0.9565,
+      0.9911,
+      0.9093,
+      0.997,
+      0.9873
+    ],
+    [
+      0.9652,
+      0.9166,
+      0.9756,
+      0.9547,
+      0.9723,
+      0.9662,
+      0.9728,
+      0.9367,
+      0.9646,
+      0.9824,
+      0.7781,
+      0.0,
+      0.9564,
+      0.9618,
+      0.9649,
+      0.991,
+      0.966,
+      0.9722,
+      0.9838,
+      1.0,
+      1.0,
+      1.0,
+      0.9643,
+      0.9355,
+      0.9453,
+      0.9546,
+      0.9945,
+      0.9866,
+      1.0,
+      0.9874
+    ],
+    [
+      0.9186,
+      0.9315,
+      0.9315,
+      0.8637,
+      0.8962,
+      0.8715,
+      0.895,
+      0.8602,
+      0.9336,
+      0.9337,
+      0.9941,
+      0.9564,
+      0.0,
+      0.6121,
+      0.9411,
+      0.9699,
+      0.9462,
+      0.9343,
+      0.9187,
+      1.0,
+      1.0,
+      1.0,
+      0.9508,
+      0.9368,
+      0.9306,
+      0.9297,
+      0.9551,
+      0.8898,
+      0.9783,
+      0.9494
+    ],
+    [
+      0.9897,
+      0.9462,
+      0.9836,
+      0.9012,
+      0.954,
+      0.9714,
+      0.9146,
+      0.9033,
+      0.8774,
+      0.9677,
+      0.9931,
+      0.9618,
+      0.6121,
+      0.0,
+      0.9807,
+      0.9894,
+      0.9862,
+      0.9431,
+      0.9722,
+      1.0,
+      1.0,
+      1.0,
+      0.9784,
+      0.9716,
+      0.9427,
+      0.9319,
+      0.9744,
+      0.9389,
+      0.9943,
+      0.953
+    ],
+    [
+      0.8956,
+      0.8863,
+      0.9035,
+      0.9196,
+      0.9298,
+      0.9524,
+      0.9165,
+      0.9418,
+      0.9112,
+      0.918,
+      0.9534,
+      0.9649,
+      0.9411,
+      0.9807,
+      0.0,
+      0.9364,
+      0.819,
+      0.919,
+      0.9516,
+      0.9596,
+      0.9596,
+      0.9596,
+      0.9458,
+      0.9351,
+      0.9099,
+      0.944,
+      0.9639,
+      0.916,
+      0.9861,
+      0.9588
+    ],
+    [
+      0.9273,
+      0.9247,
+      0.8014,
+      0.962,
+      0.9385,
+      0.9659,
+      0.8906,
+      0.9844,
+      0.973,
+      0.964,
+      0.9773,
+      0.991,
+      0.9699,
+      0.9894,
+      0.9364,
+      0.0,
+      0.9495,
+      0.9594,
+      0.9745,
+      1.0,
+      1.0,
+      1.0,
+      0.941,
+      0.9395,
+      0.9263,
+      0.9447,
+      0.9559,
+      0.9473,
+      0.9653,
+      0.9281
+    ],
+    [
+      0.962,
+      0.9299,
+      0.9311,
+      0.934,
+      0.9781,
+      0.96,
+      0.9613,
+      0.9171,
+      0.9846,
+      0.8917,
+      0.9839,
+      0.966,
+      0.9462,
+      0.9862,
+      0.819,
+      0.9495,
+      0.0,
+      0.9623,
+      0.9533,
+      1.0,
+      1.0,
+      1.0,
+      0.9521,
+      0.9557,
+      0.934,
+      0.92,
+      0.9661,
+      0.9637,
+      0.9708,
+      0.9758
+    ],
+    [
+      0.8551,
+      0.9167,
+      0.9299,
+      0.899,
+      0.9173,
+      0.8935,
+      0.9087,
+      0.9308,
+      0.9282,
+      0.9332,
+      0.9565,
+      0.9722,
+      0.9343,
+      0.9431,
+      0.919,
+      0.9594,
+      0.9623,
+      0.0,
+      0.9718,
+      0.9697,
+      0.9697,
+      0.9697,
+      0.8969,
+      0.9127,
+      0.9526,
+      0.9451,
+      0.899,
+      0.9097,
+      0.9318,
+      0.9528
+    ],
+    [
+      0.9425,
+      0.9357,
+      0.9493,
+      0.9241,
+      0.9528,
+      0.9241,
+      0.9259,
+      0.9252,
+      0.9641,
+      0.9165,
+      0.9743,
+      0.9838,
+      0.9187,
+      0.9722,
+      0.9516,
+      0.9745,
+      0.9533,
+      0.9718,
+      0.0,
+      0.8194,
+      0.8194,
+      0.8194,
+      0.9377,
+      0.9465,
+      0.9538,
+      0.9248,
+      0.9134,
+      0.9448,
+      0.9518,
+      0.9755
+    ],
+    [
+      1.0,
+      0.9731,
+      0.9733,
+      0.9709,
+      1.0,
+      1.0,
+      0.9689,
+      1.0,
+      0.9671,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.9596,
+      1.0,
+      1.0,
+      0.9697,
+      0.8194,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.9661,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.9731,
+      0.9733,
+      0.9709,
+      1.0,
+      1.0,
+      0.9689,
+      1.0,
+      0.9671,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.9596,
+      1.0,
+      1.0,
+      0.9697,
+      0.8194,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.9661,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.9731,
+      0.9733,
+      0.9709,
+      1.0,
+      1.0,
+      0.9689,
+      1.0,
+      0.9671,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.9596,
+      1.0,
+      1.0,
+      0.9697,
+      0.8194,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.9661,
+      1.0,
+      1.0
+    ],
+    [
+      0.782,
+      0.8889,
+      0.9347,
+      0.8707,
+      0.9737,
+      0.7801,
+      0.8201,
+      0.9056,
+      0.8296,
+      0.8602,
+      0.9863,
+      0.9643,
+      0.9508,
+      0.9784,
+      0.9458,
+      0.941,
+      0.9521,
+      0.8969,
+      0.9377,
+      1.0,
+      1.0,
+      1.0,
+      0.0,
+      0.8943,
+      0.9337,
+      0.9024,
+      0.8845,
+      0.875,
+      0.949,
+      0.9878
+    ],
+    [
+      0.9234,
+      0.8694,
+      0.9259,
+      0.9375,
+      0.9577,
+      0.8855,
+      0.9528,
+      0.978,
+      0.8862,
+      0.9518,
+      0.9087,
+      0.9355,
+      0.9368,
+      0.9716,
+      0.9351,
+      0.9395,
+      0.9557,
+      0.9127,
+      0.9465,
+      1.0,
+      1.0,
+      1.0,
+      0.8943,
+      0.0,
+      0.8685,
+      0.9399,
+      0.8854,
+      0.9315,
+      0.9008,
+      0.9886
+    ],
+    [
+      0.9579,
+      0.8933,
+      0.8817,
+      0.9647,
+      0.9614,
+      0.9105,
+      0.9704,
+      0.9377,
+      0.9512,
+      0.938,
+      0.9472,
+      0.9453,
+      0.9306,
+      0.9427,
+      0.9099,
+      0.9263,
+      0.934,
+      0.9526,
+      0.9538,
+      1.0,
+      1.0,
+      1.0,
+      0.9337,
+      0.8685,
+      0.0,
+      0.9269,
+      0.9374,
+      0.9642,
+      0.9824,
+      0.9481
+    ],
+    [
+      0.8651,
+      0.8681,
+      0.949,
+      0.9331,
+      0.9263,
+      0.9193,
+      0.8862,
+      0.9154,
+      0.8307,
+      0.8347,
+      0.9565,
+      0.9546,
+      0.9297,
+      0.9319,
+      0.944,
+      0.9447,
+      0.92,
+      0.9451,
+      0.9248,
+      1.0,
+      1.0,
+      1.0,
+      0.9024,
+      0.9399,
+      0.9269,
+      0.0,
+      0.9532,
+      0.9114,
+      0.9583,
+      0.9719
+    ],
+    [
+      0.9135,
+      0.9139,
+      0.9099,
+      0.9089,
+      0.9014,
+      0.7262,
+      0.9276,
+      0.9633,
+      0.899,
+      0.9418,
+      0.9911,
+      0.9945,
+      0.9551,
+      0.9744,
+      0.9639,
+      0.9559,
+      0.9661,
+      0.899,
+      0.9134,
+      1.0,
+      1.0,
+      1.0,
+      0.8845,
+      0.8854,
+      0.9374,
+      0.9532,
+      0.0,
+      0.923,
+      0.7423,
+      0.9818
+    ],
+    [
+      0.8295,
+      0.9428,
+      0.9074,
+      0.8156,
+      0.9433,
+      0.8344,
+      0.8592,
+      0.8555,
+      0.8439,
+      0.8702,
+      0.9093,
+      0.9866,
+      0.8898,
+      0.9389,
+      0.916,
+      0.9473,
+      0.9637,
+      0.9097,
+      0.9448,
+      0.9661,
+      0.9661,
+      0.9661,
+      0.875,
+      0.9315,
+      0.9642,
+      0.9114,
+      0.923,
+      0.0,
+      0.9623,
+      0.9662
+    ],
+    [
+      0.9209,
+      0.9573,
+      0.9481,
+      0.9516,
+      0.8906,
+      0.8167,
+      0.953,
+      0.9539,
+      0.9726,
+      0.9637,
+      0.997,
+      1.0,
+      0.9783,
+      0.9943,
+      0.9861,
+      0.9653,
+      0.9708,
+      0.9318,
+      0.9518,
+      1.0,
+      1.0,
+      1.0,
+      0.949,
+      0.9008,
+      0.9824,
+      0.9583,
+      0.7423,
+      0.9623,
+      0.0,
+      0.9799
+    ],
+    [
+      0.958,
+      0.9646,
+      0.9887,
+      0.964,
+      0.9264,
+      0.9376,
+      0.9689,
+      0.932,
+      0.9658,
+      0.9532,
+      0.9873,
+      0.9874,
+      0.9494,
+      0.953,
+      0.9588,
+      0.9281,
+      0.9758,
+      0.9528,
+      0.9755,
+      1.0,
+      1.0,
+      1.0,
+      0.9878,
+      0.9886,
+      0.9481,
+      0.9719,
+      0.9818,
+      0.9662,
+      0.9799,
+      0.0
+    ]
+  ],
+  "groups": {
+    "21": [
+      {
+        "lookup": "sixteen_cell_net_space_showcase",
+        "name": "sixteen_cell_net_space_showcase",
+        "fp": 441,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "BranchingGrowthAlgorithm": [
+      {
+        "lookup": "branching_growth_algorithm",
+        "name": "Branching Growth Algorithm",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "CaveRandomWalk": [
+      {
+        "lookup": "caverandomwalk",
+        "name": "caverandomwalk",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "CubeMound": [
+      {
+        "lookup": "cube_mound_scene_sphere",
+        "name": "cube_mound_scene_sphere",
+        "fp": 169,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "cube_mound_scene",
+        "name": "cube_mound_scene",
+        "fp": 169,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Delaunay Triangulation": [
+      {
+        "lookup": "delaunay_triangulation_3d_cell",
+        "name": "delaunay_triangulation_3d_cell",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Dome": [
+      {
+        "lookup": "voronoi_grid_3d",
+        "name": "voronoi_grid_3d",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "interactable_demo",
+        "name": "interactable_demo",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "dome",
+        "name": "dome",
+        "fp": 11,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Eight": [
+      {
+        "lookup": "mirror_cellular_texture_for_3d",
+        "name": "Mirror Cellular Texture for 3D",
+        "fp": 6,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "rhizomatic_maze_space",
+        "name": "Rhizomatic Maze Space",
+        "fp": 2500,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "grab_stick",
+        "name": "grab_stick",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Eleven": [
+      {
+        "lookup": "organic_space",
+        "name": "Organic Space",
+        "fp": 13,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "array_visualizer",
+        "name": "Array Visualizer",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "rule_30_110",
+        "name": "rule_30_110",
+        "fp": 273,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Five": [
+      {
+        "lookup": "implicit_surface_modeling",
+        "name": "Implicit Surface Modeling",
+        "fp": 144,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "lsystem_tree",
+        "name": "L-System Tree",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "layered_membrane",
+        "name": "Layered Membrane",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Four": [
+      {
+        "lookup": "fibonacci_sequences",
+        "name": "Fibonacci Sequences",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Genetic Algorithms": [
+      {
+        "lookup": "GeneticProgramming",
+        "name": "GeneticProgramming",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Genetic Programming": [
+      {
+        "lookup": "clipboard#genetic_algorithms_axioms",
+        "name": "clipboard#genetic_algorithms_axioms",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": false
+      },
+      {
+        "lookup": "GeneticProgramming",
+        "name": "GeneticProgramming",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "MarchingGallery": [
+      {
+        "lookup": "mc",
+        "name": "mc",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": false
+      },
+      {
+        "lookup": "portal",
+        "name": "Portal",
+        "fp": 3,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Marching Cubes Algorithm": [
+      {
+        "lookup": "mc",
+        "name": "mc",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": false
+      },
+      {
+        "lookup": "marching_cubes",
+        "name": "Marching Cubes Test",
+        "fp": 11,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Markov Chains": [
+      {
+        "lookup": "clipboard#markov_chains_axioms",
+        "name": "clipboard#markov_chains_axioms",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": false
+      },
+      {
+        "lookup": "markov_chains",
+        "name": "Markov Chains",
+        "fp": 17,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "markov_chains_tree",
+        "name": "Markov Chains Tree",
+        "fp": 10,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Maze": [
+      {
+        "lookup": "maze_generation",
+        "name": "Maze Generation",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "N grams": [
+      {
+        "lookup": "markov_chains",
+        "name": "Markov Chains",
+        "fp": 17,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Poisson Disk Sampling": [
+      {
+        "lookup": "poisson_disk_sampling_3d",
+        "name": "poisson_disk_sampling_3d",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Reaction Diffusion Systems": [
+      {
+        "lookup": "turing_pattern_generator",
+        "name": "Turing Pattern Generator",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "reaction_diffusion",
+        "name": "Reaction Diffusion",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Reaction Diffusion Systems p1": [
+      {
+        "lookup": "turing_pattern_generator",
+        "name": "Turing Pattern Generator",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "reaction_diffusion",
+        "name": "Reaction Diffusion",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Reaction Diffusion Systems p2": [
+      {
+        "lookup": "turing_pattern_generator",
+        "name": "Turing Pattern Generator",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "reaction_diffusion",
+        "name": "Reaction Diffusion",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Reaction Diffusion Systems p3": [
+      {
+        "lookup": "turing_pattern_generator",
+        "name": "Turing Pattern Generator",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "reaction_diffusion",
+        "name": "Reaction Diffusion",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Seven": [
+      {
+        "lookup": "organic_space",
+        "name": "Organic Space",
+        "fp": 13,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "array_visualizer",
+        "name": "Array Visualizer",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "recursive_tree",
+        "name": "recursive_tree",
+        "fp": 13,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Space Colonization Algorithms": [
+      {
+        "lookup": "space_colonization_algorithm",
+        "name": "space_colonization_algorithm",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Space Partitioning": [
+      {
+        "lookup": "binary_space_partitioning",
+        "name": "binary_space_partitioning",
+        "fp": 121,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Ten": [
+      {
+        "lookup": "tree_gen",
+        "name": "Tree Generator",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "julia_set",
+        "name": "Julia Set",
+        "fp": 357,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "fibonacci_sequences",
+        "name": "Fibonacci Sequences",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "context_free_grammars",
+        "name": "Context-Free Grammars",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Three": [
+      {
+        "lookup": "voronoi_diagrams",
+        "name": "Voronoi Diagrams",
+        "fp": 272,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "voronoi_space",
+        "name": "voronoi_space",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Two": [
+      {
+        "lookup": "boolean_patterns_demo",
+        "name": "boolean_patterns_demo",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": false
+      }
+    ],
+    "Voronoi Diagrams": [
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "voronoi_diagram_3d",
+        "name": "voronoi_diagram_3d",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Wave Function Collapse": [
+      {
+        "lookup": "wave_function_collapse",
+        "name": "Wave Function Collapse",
+        "fp": 17,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "wfc_3d_demo",
+        "name": "wfc_3d_demo",
+        "fp": 484,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ]
+  },
+  "total": 56,
+  "total_concepts": 30,
+  "recommended_total": 56,
+  "map_ready_total": 56
+}

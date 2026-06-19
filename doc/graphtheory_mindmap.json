@@ -1,0 +1,657 @@
+{
+  "domain": "graphtheory",
+  "title": "graphtheory",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Edmonds Algorithm",
+      "order": 0,
+      "act": "Act I",
+      "truth": "Edmonds Algorithm",
+      "count": 1,
+      "x_spread": 0.9769,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "edmonds_algorithm"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Force Directed 3d",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Force Directed 3d",
+      "count": 1,
+      "x_spread": 0.8614,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "forcedirected3d"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Force Directed Graph Layout",
+      "order": 2,
+      "act": "Act I",
+      "truth": "Force Directed Graph Layout",
+      "count": 1,
+      "x_spread": -0.0216,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "force_directed_layout"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Graphspace",
+      "order": 3,
+      "act": "Act I",
+      "truth": "Graphspace",
+      "count": 2,
+      "x_spread": 0.9238,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "graphspace",
+          "KonigsbergBridge"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Graphspace 3d",
+      "order": 4,
+      "act": "Act II",
+      "truth": "Graphspace 3d",
+      "count": 1,
+      "x_spread": 0.5836,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "graphspace3d"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Karger s Algorithm",
+      "order": 5,
+      "act": "Act II",
+      "truth": "Karger s Algorithm",
+      "count": 1,
+      "x_spread": 0.0888,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "karger_algorithm"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Kosaraju s Algorithm",
+      "order": 6,
+      "act": "Act II",
+      "truth": "Kosaraju s Algorithm",
+      "count": 1,
+      "x_spread": 0.0201,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "kosaraju_algorithm"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Maximum Flow Algorithms",
+      "order": 7,
+      "act": "Act III",
+      "truth": "Maximum Flow Algorithms",
+      "count": 1,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Minimum Spanning Tree",
+      "order": 8,
+      "act": "Act III",
+      "truth": "Minimum Spanning Tree",
+      "count": 1,
+      "x_spread": 0.1097,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "mst_visualization"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Network Analysis",
+      "order": 9,
+      "act": "Act III",
+      "truth": "Network Analysis",
+      "count": 2,
+      "x_spread": -0.2967,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "networkflow3d",
+          "network_analysis"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Path Finding 3d",
+      "order": 10,
+      "act": "Act III",
+      "truth": "Path Finding 3d",
+      "count": 1,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "pathfinding3d"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Push Relabel Algorithm",
+      "order": 11,
+      "act": "Act IV",
+      "truth": "Push Relabel Algorithm",
+      "count": 1,
+      "x_spread": -0.0175,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "push_relabel_algorithm"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Tarjan s Algorithm",
+      "order": 12,
+      "act": "Act IV",
+      "truth": "Tarjan s Algorithm",
+      "count": 1,
+      "x_spread": 0.069,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "tarjan_algorithm"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Topological Sort",
+      "order": 13,
+      "act": "Act IV",
+      "truth": "Topological Sort",
+      "count": 1,
+      "x_spread": 0.1239,
+      "tiers": {
+        "small": [
+          "topological_sort_algorithm"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.212,
+      0.8995,
+      0.1297,
+      0.1663,
+      0.7621,
+      0.9634,
+      0.9769,
+      0.9307,
+      0.9528,
+      0.0,
+      0.8809,
+      0.8335,
+      0.8132
+    ],
+    [
+      0.212,
+      0.0,
+      0.671,
+      0.2793,
+      0.2463,
+      0.8624,
+      0.8944,
+      0.9939,
+      0.8083,
+      0.9276,
+      0.1325,
+      0.8637,
+      0.8291,
+      0.8528
+    ],
+    [
+      0.8995,
+      0.671,
+      0.0,
+      0.9094,
+      0.9515,
+      0.8761,
+      0.8276,
+      0.868,
+      0.8743,
+      0.7801,
+      0.8896,
+      0.8982,
+      0.8507,
+      0.8228
+    ],
+    [
+      0.1297,
+      0.2793,
+      0.9094,
+      0.0,
+      0.2691,
+      0.8662,
+      0.9601,
+      0.9868,
+      0.8847,
+      0.9134,
+      0.063,
+      0.8337,
+      0.8662,
+      0.8601
+    ],
+    [
+      0.1663,
+      0.2463,
+      0.9515,
+      0.2691,
+      0.0,
+      0.818,
+      0.8962,
+      0.9012,
+      0.9342,
+      0.9749,
+      0.3176,
+      0.8901,
+      0.8408,
+      0.92
+    ],
+    [
+      0.7621,
+      0.8624,
+      0.8761,
+      0.8662,
+      0.818,
+      0.0,
+      0.771,
+      0.8682,
+      0.7972,
+      0.7383,
+      0.7794,
+      0.9799,
+      0.9,
+      0.7862
+    ],
+    [
+      0.9634,
+      0.8944,
+      0.8276,
+      0.9601,
+      0.8962,
+      0.771,
+      0.0,
+      0.9744,
+      0.8624,
+      0.9228,
+      0.9543,
+      0.9002,
+      0.5126,
+      0.8309
+    ],
+    [
+      0.9769,
+      0.9939,
+      0.868,
+      0.9868,
+      0.9012,
+      0.8682,
+      0.9744,
+      0.0,
+      0.9716,
+      0.6337,
+      1.0,
+      0.8741,
+      0.8903,
+      0.9624
+    ],
+    [
+      0.9307,
+      0.8083,
+      0.8743,
+      0.8847,
+      0.9342,
+      0.7972,
+      0.8624,
+      0.9716,
+      0.0,
+      0.801,
+      0.8619,
+      0.8302,
+      0.8878,
+      0.8558
+    ],
+    [
+      0.9528,
+      0.9276,
+      0.7801,
+      0.9134,
+      0.9749,
+      0.7383,
+      0.9228,
+      0.6337,
+      0.801,
+      0.0,
+      0.9304,
+      0.6608,
+      0.833,
+      0.9195
+    ],
+    [
+      0.0,
+      0.1325,
+      0.8896,
+      0.063,
+      0.3176,
+      0.7794,
+      0.9543,
+      1.0,
+      0.8619,
+      0.9304,
+      0.0,
+      0.8916,
+      0.8213,
+      0.8385
+    ],
+    [
+      0.8809,
+      0.8637,
+      0.8982,
+      0.8337,
+      0.8901,
+      0.9799,
+      0.9002,
+      0.8741,
+      0.8302,
+      0.6608,
+      0.8916,
+      0.0,
+      0.8741,
+      0.9111
+    ],
+    [
+      0.8335,
+      0.8291,
+      0.8507,
+      0.8662,
+      0.8408,
+      0.9,
+      0.5126,
+      0.8903,
+      0.8878,
+      0.833,
+      0.8213,
+      0.8741,
+      0.0,
+      0.7367
+    ],
+    [
+      0.8132,
+      0.8528,
+      0.8228,
+      0.8601,
+      0.92,
+      0.7862,
+      0.8309,
+      0.9624,
+      0.8558,
+      0.9195,
+      0.8385,
+      0.9111,
+      0.7367,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "edmonds_algorithm",
+      "name": "Edmonds' Algorithm",
+      "concept": "Edmonds Algorithm",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 49,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "forcedirected3d",
+      "name": "forcedirected3d",
+      "concept": "Force Directed 3d",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 483,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "force_directed_layout",
+      "name": "force_directed_layout",
+      "concept": "Force Directed Graph Layout",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 34,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "graphspace",
+      "name": "graphspace",
+      "concept": "Graphspace",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 6800,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "KonigsbergBridge",
+      "name": "KonigsbergBridge",
+      "concept": "Graphspace",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 1600,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "graphspace3d",
+      "name": "graphspace3d",
+      "concept": "Graphspace 3d",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 576,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "karger_algorithm",
+      "name": "Karger's Algorithm",
+      "concept": "Karger s Algorithm",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 16,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "kosaraju_algorithm",
+      "name": "Kosaraju's Algorithm",
+      "concept": "Kosaraju s Algorithm",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 25,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "env_one",
+      "name": "env_one",
+      "concept": "Maximum Flow Algorithms",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 3422,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mst_visualization",
+      "name": "mst_visualization",
+      "concept": "Minimum Spanning Tree",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 1050,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "networkflow3d",
+      "name": "networkflow3d",
+      "concept": "Network Analysis",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 1024,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "network_analysis",
+      "name": "network_analysis",
+      "concept": "Network Analysis",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 50,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pathfinding3d",
+      "name": "pathfinding3d",
+      "concept": "Path Finding 3d",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 100,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "push_relabel_algorithm",
+      "name": "Push-Relabel Algorithm",
+      "concept": "Push Relabel Algorithm",
+      "concept_order": 11,
+      "tier": "large",
+      "fp": 20,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tarjan_algorithm",
+      "name": "Tarjan's Algorithm",
+      "concept": "Tarjan s Algorithm",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 49,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "topological_sort_algorithm",
+      "name": "Topological Sort",
+      "concept": "Topological Sort",
+      "concept_order": 13,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 16,
+  "total_concepts": 14
+}

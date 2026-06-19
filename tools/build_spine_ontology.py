@@ -111,6 +111,11 @@ def build(seq, FP, NM):
         meta[key] = {"truth": concept[:220], "role": b.get("role", ""), "id": b.get("id", "")}
         texts.append(ctext)
 
+    return finalize(seq, concepts, meta, groups, texts,
+                    "Ontology derived from the beat score (concepts = beats, artifacts = their maps').")
+
+
+def finalize(seq, concepts, meta, groups, texts, note):
     n = len(concepts)
     for idx, key in enumerate(concepts):
         meta[key]["act"] = ACTS[min(3, int(idx * 4 / max(1, n)))]
@@ -119,14 +124,10 @@ def build(seq, FP, NM):
             tiers[a["tier"]].append(a["lookup"])
         meta[key]["tiers"] = tiers
         meta[key]["count"] = len(groups[key])
-
     vecs, _ = T.tfidf(texts) if texts else ([], [])
     CD = rescale([[0.0 if i == j else T.cos_d(vecs[i], vecs[j]) for j in range(n)] for i in range(n)]) if n else []
-
     return {
-        "title": seq, "domain": seq,
-        "note": "Ontology derived from the beat score by tools/build_spine_ontology.py (concepts = beats, artifacts = their maps').",
-        "acts": [], "concepts": concepts,
+        "title": seq, "domain": seq, "note": note, "acts": [], "concepts": concepts,
         "concept_meta": {k: meta[k] for k in concepts},
         "concept_distance": CD,
         "groups": {k: groups[k] for k in concepts},
@@ -136,18 +137,62 @@ def build(seq, FP, NM):
     }
 
 
+# Sequences with no beat score: find their maps by name prefix; each map becomes a concept.
+PREFIX = {
+    "fractals": ["Fractal_"], "graphtheory": ["GraphTheory_"], "machinelearning": ["MachineLearning_"],
+    "lsystems": ["LSystems_"], "swarmintelligence": ["SwarmIntelligence_"], "change": ["Change_"],
+    "array_tutorial": ["Array_"], "qfeplaboratory": ["QFEP_"], "proceduralgeneration": ["ProceduralGeneration_", "Procedural_"],
+}
+
+
+def build_from_maps(seq, prefixes, FP, NM):
+    allmaps = sorted({os.path.basename(os.path.dirname(p)) for p in glob.glob(os.path.join(MAPS, "*", "map_data.json"))})
+    mine = [m for m in allmaps if not m.startswith("MindMap_") and any(m.startswith(pre) for pre in prefixes)]
+    concepts, meta, groups, texts, used = [], {}, {}, [], set()
+    for m in mine:
+        arts, seen = [], set()
+        for lk in map_artifacts(m):
+            if lk in seen:
+                continue
+            seen.add(lk)
+            fp = FP.get(lk, 4)
+            arts.append({"lookup": lk, "name": NM.get(lk, lk), "fp": fp, "recommended": True,
+                         "tier": "large" if fp >= 9 else "medium" if fp >= 3 else "small",
+                         "has_image": os.path.exists(os.path.join(IMG_DIR, lk + ".png"))})
+        if not arts:
+            continue
+        key = m
+        for pre in prefixes:
+            if key.startswith(pre):
+                key = key[len(pre):]
+                break
+        key = (key.replace("_", " ").strip()[:38]) or m
+        if key in used:
+            key = "%s (%d)" % (key, len(concepts))
+        used.add(key)
+        concepts.append(key)
+        groups[key] = arts
+        meta[key] = {"truth": key, "map": m}
+        texts.append(key + " " + map_text(m))
+    return finalize(seq, concepts, meta, groups, texts,
+                    "Ontology derived from the sequence's maps (no beat score; each map is a concept).")
+
+
 def main():
     args = sys.argv[1:]
     have = {os.path.basename(p)[:-len("_concept_map.json")] for p in glob.glob(os.path.join(DOC, "*_concept_map.json"))}
     beat_seqs = [os.path.basename(p).replace(".beats.json", "") for p in sorted(glob.glob(os.path.join(SEQ, "*.beats.json")))]
-    targets = args if args else [s for s in beat_seqs if s not in have]
+    targets = args if args else [s for s in beat_seqs if s not in have] + [s for s in PREFIX if s not in have]
     FP, NM = load_registry_maps()
     for seq in targets:
-        if not os.path.exists(os.path.join(SEQ, seq + ".beats.json")):
-            print("skip %s: no beats file" % seq); continue
-        out = build(seq, FP, NM)
+        if os.path.exists(os.path.join(SEQ, seq + ".beats.json")):
+            out = build(seq, FP, NM)
+        elif seq in PREFIX:
+            out = build_from_maps(seq, PREFIX[seq], FP, NM)
+        else:
+            print("skip %s: no beats file and no map prefix" % seq); continue
         if out["total_concepts"] == 0:
-            print("skip %s: no beats with placed artifacts" % seq); continue
+            print("skip %s: no concepts with placed artifacts" % seq); continue
         json.dump(out, open(os.path.join(DOC, seq + "_concept_map.json"), "w", encoding="utf-8"), indent=2, ensure_ascii=False)
         print("%-22s %2d concepts · %3d artifacts -> doc/%s_concept_map.json" % (seq, out["total_concepts"], out["total"], seq))
 

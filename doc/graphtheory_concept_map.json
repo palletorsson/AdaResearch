@@ -1,0 +1,610 @@
+{
+  "title": "graphtheory",
+  "domain": "graphtheory",
+  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
+  "acts": [],
+  "concepts": [
+    "Edmonds Algorithm",
+    "Force Directed 3d",
+    "Force Directed Graph Layout",
+    "Graphspace",
+    "Graphspace 3d",
+    "Karger s Algorithm",
+    "Kosaraju s Algorithm",
+    "Maximum Flow Algorithms",
+    "Minimum Spanning Tree",
+    "Network Analysis",
+    "Path Finding 3d",
+    "Push Relabel Algorithm",
+    "Tarjan s Algorithm",
+    "Topological Sort"
+  ],
+  "concept_meta": {
+    "Edmonds Algorithm": {
+      "truth": "Edmonds Algorithm",
+      "map": "GraphTheory_Edmonds_Algorithm",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "edmonds_algorithm"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Force Directed 3d": {
+      "truth": "Force Directed 3d",
+      "map": "GraphTheory_Force_Directed_3d",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "forcedirected3d"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Force Directed Graph Layout": {
+      "truth": "Force Directed Graph Layout",
+      "map": "GraphTheory_Force_Directed_Graph_Layout",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "force_directed_layout"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Graphspace": {
+      "truth": "Graphspace",
+      "map": "GraphTheory_Graphspace",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "graphspace",
+          "KonigsbergBridge"
+        ],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Graphspace 3d": {
+      "truth": "Graphspace 3d",
+      "map": "GraphTheory_Graphspace_3d",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "graphspace3d"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Karger s Algorithm": {
+      "truth": "Karger s Algorithm",
+      "map": "GraphTheory_Karger_s_Algorithm",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "karger_algorithm"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Kosaraju s Algorithm": {
+      "truth": "Kosaraju s Algorithm",
+      "map": "GraphTheory_Kosaraju_s_Algorithm",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "kosaraju_algorithm"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Maximum Flow Algorithms": {
+      "truth": "Maximum Flow Algorithms",
+      "map": "GraphTheory_Maximum_Flow_Algorithms",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Minimum Spanning Tree": {
+      "truth": "Minimum Spanning Tree",
+      "map": "GraphTheory_Minimum_Spanning_Tree",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "mst_visualization"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Network Analysis": {
+      "truth": "Network Analysis",
+      "map": "GraphTheory_Network_Analysis",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "networkflow3d",
+          "network_analysis"
+        ],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Path Finding 3d": {
+      "truth": "Path Finding 3d",
+      "map": "GraphTheory_Path_Finding_3d",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "pathfinding3d"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Push Relabel Algorithm": {
+      "truth": "Push Relabel Algorithm",
+      "map": "GraphTheory_Push_Relabel_Algorithm",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "push_relabel_algorithm"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Tarjan s Algorithm": {
+      "truth": "Tarjan s Algorithm",
+      "map": "GraphTheory_Tarjan_s_Algorithm",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "tarjan_algorithm"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Topological Sort": {
+      "truth": "Topological Sort",
+      "map": "GraphTheory_Topological_Sort",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "topological_sort_algorithm"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      0.212,
+      0.8995,
+      0.1297,
+      0.1663,
+      0.7621,
+      0.9634,
+      0.9769,
+      0.9307,
+      0.9528,
+      0.0,
+      0.8809,
+      0.8335,
+      0.8132
+    ],
+    [
+      0.212,
+      0.0,
+      0.671,
+      0.2793,
+      0.2463,
+      0.8624,
+      0.8944,
+      0.9939,
+      0.8083,
+      0.9276,
+      0.1325,
+      0.8637,
+      0.8291,
+      0.8528
+    ],
+    [
+      0.8995,
+      0.671,
+      0.0,
+      0.9094,
+      0.9515,
+      0.8761,
+      0.8276,
+      0.868,
+      0.8743,
+      0.7801,
+      0.8896,
+      0.8982,
+      0.8507,
+      0.8228
+    ],
+    [
+      0.1297,
+      0.2793,
+      0.9094,
+      0.0,
+      0.2691,
+      0.8662,
+      0.9601,
+      0.9868,
+      0.8847,
+      0.9134,
+      0.063,
+      0.8337,
+      0.8662,
+      0.8601
+    ],
+    [
+      0.1663,
+      0.2463,
+      0.9515,
+      0.2691,
+      0.0,
+      0.818,
+      0.8962,
+      0.9012,
+      0.9342,
+      0.9749,
+      0.3176,
+      0.8901,
+      0.8408,
+      0.92
+    ],
+    [
+      0.7621,
+      0.8624,
+      0.8761,
+      0.8662,
+      0.818,
+      0.0,
+      0.771,
+      0.8682,
+      0.7972,
+      0.7383,
+      0.7794,
+      0.9799,
+      0.9,
+      0.7862
+    ],
+    [
+      0.9634,
+      0.8944,
+      0.8276,
+      0.9601,
+      0.8962,
+      0.771,
+      0.0,
+      0.9744,
+      0.8624,
+      0.9228,
+      0.9543,
+      0.9002,
+      0.5126,
+      0.8309
+    ],
+    [
+      0.9769,
+      0.9939,
+      0.868,
+      0.9868,
+      0.9012,
+      0.8682,
+      0.9744,
+      0.0,
+      0.9716,
+      0.6337,
+      1.0,
+      0.8741,
+      0.8903,
+      0.9624
+    ],
+    [
+      0.9307,
+      0.8083,
+      0.8743,
+      0.8847,
+      0.9342,
+      0.7972,
+      0.8624,
+      0.9716,
+      0.0,
+      0.801,
+      0.8619,
+      0.8302,
+      0.8878,
+      0.8558
+    ],
+    [
+      0.9528,
+      0.9276,
+      0.7801,
+      0.9134,
+      0.9749,
+      0.7383,
+      0.9228,
+      0.6337,
+      0.801,
+      0.0,
+      0.9304,
+      0.6608,
+      0.833,
+      0.9195
+    ],
+    [
+      0.0,
+      0.1325,
+      0.8896,
+      0.063,
+      0.3176,
+      0.7794,
+      0.9543,
+      1.0,
+      0.8619,
+      0.9304,
+      0.0,
+      0.8916,
+      0.8213,
+      0.8385
+    ],
+    [
+      0.8809,
+      0.8637,
+      0.8982,
+      0.8337,
+      0.8901,
+      0.9799,
+      0.9002,
+      0.8741,
+      0.8302,
+      0.6608,
+      0.8916,
+      0.0,
+      0.8741,
+      0.9111
+    ],
+    [
+      0.8335,
+      0.8291,
+      0.8507,
+      0.8662,
+      0.8408,
+      0.9,
+      0.5126,
+      0.8903,
+      0.8878,
+      0.833,
+      0.8213,
+      0.8741,
+      0.0,
+      0.7367
+    ],
+    [
+      0.8132,
+      0.8528,
+      0.8228,
+      0.8601,
+      0.92,
+      0.7862,
+      0.8309,
+      0.9624,
+      0.8558,
+      0.9195,
+      0.8385,
+      0.9111,
+      0.7367,
+      0.0
+    ]
+  ],
+  "groups": {
+    "Edmonds Algorithm": [
+      {
+        "lookup": "edmonds_algorithm",
+        "name": "Edmonds' Algorithm",
+        "fp": 49,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Force Directed 3d": [
+      {
+        "lookup": "forcedirected3d",
+        "name": "forcedirected3d",
+        "fp": 483,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Force Directed Graph Layout": [
+      {
+        "lookup": "force_directed_layout",
+        "name": "force_directed_layout",
+        "fp": 34,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Graphspace": [
+      {
+        "lookup": "graphspace",
+        "name": "graphspace",
+        "fp": 6800,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "KonigsbergBridge",
+        "name": "KonigsbergBridge",
+        "fp": 1600,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Graphspace 3d": [
+      {
+        "lookup": "graphspace3d",
+        "name": "graphspace3d",
+        "fp": 576,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Karger s Algorithm": [
+      {
+        "lookup": "karger_algorithm",
+        "name": "Karger's Algorithm",
+        "fp": 16,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Kosaraju s Algorithm": [
+      {
+        "lookup": "kosaraju_algorithm",
+        "name": "Kosaraju's Algorithm",
+        "fp": 25,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Maximum Flow Algorithms": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Minimum Spanning Tree": [
+      {
+        "lookup": "mst_visualization",
+        "name": "mst_visualization",
+        "fp": 1050,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Network Analysis": [
+      {
+        "lookup": "networkflow3d",
+        "name": "networkflow3d",
+        "fp": 1024,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "network_analysis",
+        "name": "network_analysis",
+        "fp": 50,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Path Finding 3d": [
+      {
+        "lookup": "pathfinding3d",
+        "name": "pathfinding3d",
+        "fp": 100,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Push Relabel Algorithm": [
+      {
+        "lookup": "push_relabel_algorithm",
+        "name": "Push-Relabel Algorithm",
+        "fp": 20,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Tarjan s Algorithm": [
+      {
+        "lookup": "tarjan_algorithm",
+        "name": "Tarjan's Algorithm",
+        "fp": 49,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Topological Sort": [
+      {
+        "lookup": "topological_sort_algorithm",
+        "name": "Topological Sort",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ]
+  },
+  "total": 16,
+  "total_concepts": 14,
+  "recommended_total": 16,
+  "map_ready_total": 16
+}

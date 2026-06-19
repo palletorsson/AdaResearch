@@ -1,0 +1,337 @@
+{
+  "domain": "change",
+  "title": "change",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Bench",
+      "order": 0,
+      "act": "Act I",
+      "truth": "Bench",
+      "count": 3,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "ftc_bridge"
+        ],
+        "medium": [
+          "tangent_slope_workbench",
+          "riemann_sum_workbench"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Intro",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Intro",
+      "count": 4,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "derivative_pair",
+          "code_display",
+          "slope_tangent_demo"
+        ],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Reconciliation",
+      "order": 2,
+      "act": "Act II",
+      "truth": "Reconciliation",
+      "count": 3,
+      "x_spread": 0.9601,
+      "tiers": {
+        "small": [
+          "code_display",
+          "ftc_bridge"
+        ],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Slope Surface",
+      "order": 3,
+      "act": "Act III",
+      "truth": "Slope Surface",
+      "count": 2,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "partial_derivative_terrain"
+        ],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Velocity",
+      "order": 4,
+      "act": "Act IV",
+      "truth": "Velocity",
+      "count": 4,
+      "x_spread": 0.7854,
+      "tiers": {
+        "small": [
+          "code_display",
+          "derivative_pair",
+          "player_trace",
+          "velocity_arrow"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0399,
+      0.0,
+      0.2146
+    ],
+    [
+      1.0,
+      0.0399,
+      0.0,
+      0.2436,
+      0.319
+    ],
+    [
+      1.0,
+      0.0,
+      0.2436,
+      0.0,
+      0.1388
+    ],
+    [
+      1.0,
+      0.2146,
+      0.319,
+      0.1388,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "tangent_slope_workbench",
+      "name": "Tangent Slope Workbench",
+      "concept": "Bench",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "ftc_bridge",
+      "name": "FTC Bridge",
+      "concept": "Bench",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "riemann_sum_workbench",
+      "name": "Riemann Sum Workbench",
+      "concept": "Bench",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Intro",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "derivative_pair",
+      "name": "Derivative Pair",
+      "concept": "Intro",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "code_display",
+      "name": "Code Display",
+      "concept": "Intro",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "slope_tangent_demo",
+      "name": "Slope Tangent Demo",
+      "concept": "Intro",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "code_display",
+      "name": "Code Display",
+      "concept": "Reconciliation",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Reconciliation",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "ftc_bridge",
+      "name": "FTC Bridge",
+      "concept": "Reconciliation",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Slope Surface",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "partial_derivative_terrain",
+      "name": "Partial Derivative Terrain",
+      "concept": "Slope Surface",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "code_display",
+      "name": "Code Display",
+      "concept": "Velocity",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "derivative_pair",
+      "name": "Derivative Pair",
+      "concept": "Velocity",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "player_trace",
+      "name": "player_trace",
+      "concept": "Velocity",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "velocity_arrow",
+      "name": "Velocity Arrow",
+      "concept": "Velocity",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 16,
+  "total_concepts": 5
+}

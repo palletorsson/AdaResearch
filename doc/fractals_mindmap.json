@@ -1,0 +1,1148 @@
+{
+  "domain": "fractals",
+  "title": "fractals",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "CantorSet",
+      "order": 0,
+      "act": "Act I",
+      "truth": "CantorSet",
+      "count": 5,
+      "x_spread": -0.0368,
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "stochastic_tree_separated"
+        ],
+        "medium": [
+          "example_8_4_cantor_set_vr"
+        ],
+        "large": [
+          "cantor_set",
+          "example_8_4_cantor_pagoda_vr"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "CrossSequence",
+      "order": 1,
+      "act": "Act I",
+      "truth": "CrossSequence",
+      "count": 6,
+      "x_spread": 0.237,
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "fractal_stochastic_tree"
+        ],
+        "medium": [
+          "space_filling_curve_gallery",
+          "evolutionary_algorithms",
+          "cellular_automata_3d_stacked"
+        ],
+        "large": [
+          "Hilbert3D"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "GoldenSpiral",
+      "order": 2,
+      "act": "Act I",
+      "truth": "GoldenSpiral",
+      "count": 5,
+      "x_spread": -0.009,
+      "tiers": {
+        "small": [
+          "fibonacci_sequences",
+          "dark_sphere"
+        ],
+        "medium": [
+          "golden_rectangle#preset",
+          "fibonacci_terrain#preset"
+        ],
+        "large": [
+          "romanesco"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "JuliaSet",
+      "order": 3,
+      "act": "Act II",
+      "truth": "JuliaSet",
+      "count": 4,
+      "x_spread": -0.7885,
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "julia_set_explorer"
+        ],
+        "medium": [
+          "lyapunov_fractal"
+        ],
+        "large": [
+          "julia_set"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "KochSierpinski",
+      "order": 4,
+      "act": "Act II",
+      "truth": "KochSierpinski",
+      "count": 9,
+      "x_spread": 0.1031,
+      "tiers": {
+        "small": [
+          "cube_cabin",
+          "dark_sphere",
+          "sierpinski_triangle",
+          "cube_bookshelf",
+          "sierpinski_pyramid"
+        ],
+        "medium": [
+          "fractal_koch_curve",
+          "science_screen",
+          "koch_curve_3d",
+          "box_counting_dimension"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "MandelbrotSet",
+      "order": 5,
+      "act": "Act III",
+      "truth": "MandelbrotSet",
+      "count": 3,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [
+          "mandelbrot_dive"
+        ],
+        "large": [
+          "mandelbrot_set"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "MengerSponge",
+      "order": 6,
+      "act": "Act III",
+      "truth": "MengerSponge",
+      "count": 3,
+      "x_spread": -0.1141,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [],
+        "large": [
+          "diffusion_limited_aggregation",
+          "menger_sponge"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Recursion",
+      "order": 7,
+      "act": "Act III",
+      "truth": "Recursion",
+      "count": 10,
+      "x_spread": 0.377,
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "cube_staircase"
+        ],
+        "medium": [
+          "science_screen",
+          "fractal_recursion_2",
+          "example_8_3_recursion_circles_vr",
+          "cube_subdivision"
+        ],
+        "large": [
+          "fibonacci_pagoda",
+          "recursive_chair",
+          "recursive_table",
+          "recursive_boolean_cube"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "RecursiveTrees",
+      "order": 8,
+      "act": "Act IV",
+      "truth": "RecursiveTrees",
+      "count": 10,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "living_paper",
+          "recursive_tree_2",
+          "small_subdivision_cube",
+          "dark_sphere",
+          "cube_desk"
+        ],
+        "medium": [
+          "fractal_lsystem_tree"
+        ],
+        "large": [
+          "inverted_tree_cloud",
+          "recursive_tree",
+          "fractal_scene",
+          "mobius_world"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Synthesis",
+      "order": 9,
+      "act": "Act IV",
+      "truth": "Synthesis",
+      "count": 10,
+      "x_spread": 0.0095,
+      "tiers": {
+        "small": [
+          "koch_curve",
+          "dark_sphere",
+          "fibonacci_sequences",
+          "sierpinski_triangle"
+        ],
+        "medium": [
+          "fractal_recursion_1",
+          "strange_attractors"
+        ],
+        "large": [
+          "cantor_set",
+          "recursive_tree",
+          "fractal_clouds",
+          "romanesco"
+        ],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.8296,
+      0.7483,
+      0.7253,
+      0.4937,
+      0.7273,
+      0.4141,
+      0.6167,
+      0.7641,
+      0.3934
+    ],
+    [
+      0.8296,
+      0.0,
+      0.8236,
+      0.9106,
+      0.9414,
+      0.8494,
+      0.9411,
+      0.8216,
+      0.6124,
+      0.4259
+    ],
+    [
+      0.7483,
+      0.8236,
+      0.0,
+      0.8279,
+      0.9029,
+      0.9034,
+      0.9115,
+      0.7362,
+      0.9124,
+      0.6132
+    ],
+    [
+      0.7253,
+      0.9106,
+      0.8279,
+      0.0,
+      0.8172,
+      0.0,
+      0.819,
+      0.8638,
+      0.7885,
+      0.5537
+    ],
+    [
+      0.4937,
+      0.9414,
+      0.9029,
+      0.8172,
+      0.0,
+      0.8563,
+      0.4609,
+      0.8026,
+      0.7532,
+      0.5644
+    ],
+    [
+      0.7273,
+      0.8494,
+      0.9034,
+      0.0,
+      0.8563,
+      0.0,
+      0.7822,
+      0.8678,
+      1.0,
+      0.6348
+    ],
+    [
+      0.4141,
+      0.9411,
+      0.9115,
+      0.819,
+      0.4609,
+      0.7822,
+      0.0,
+      0.773,
+      0.8963,
+      0.5733
+    ],
+    [
+      0.6167,
+      0.8216,
+      0.7362,
+      0.8638,
+      0.8026,
+      0.8678,
+      0.773,
+      0.0,
+      0.4908,
+      0.579
+    ],
+    [
+      0.7641,
+      0.6124,
+      0.9124,
+      0.7885,
+      0.7532,
+      1.0,
+      0.8963,
+      0.4908,
+      0.0,
+      0.6253
+    ],
+    [
+      0.3934,
+      0.4259,
+      0.6132,
+      0.5537,
+      0.5644,
+      0.6348,
+      0.5733,
+      0.579,
+      0.6253,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "cantor_set",
+      "name": "cantor_set",
+      "concept": "CantorSet",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 182,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "CantorSet",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "example_8_4_cantor_set_vr",
+      "name": "example_8_4_cantor_set_vr",
+      "concept": "CantorSet",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "example_8_4_cantor_pagoda_vr",
+      "name": "example_8_4_cantor_pagoda_vr",
+      "concept": "CantorSet",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 117,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "stochastic_tree_separated",
+      "name": "stochastic_tree_separated",
+      "concept": "CantorSet",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "space_filling_curve_gallery",
+      "name": "Space-Filling Curve Gallery",
+      "concept": "CrossSequence",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 8,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "CrossSequence",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fractal_stochastic_tree",
+      "name": "Stochastic Tree",
+      "concept": "CrossSequence",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "Hilbert3D",
+      "name": "Hilbert3D",
+      "concept": "CrossSequence",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 36,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "evolutionary_algorithms",
+      "name": "evolutionary_algorithms",
+      "concept": "CrossSequence",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "cellular_automata_3d_stacked",
+      "name": "cellular_automata_3d_stacked",
+      "concept": "CrossSequence",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fibonacci_sequences",
+      "name": "Fibonacci Sequences",
+      "concept": "GoldenSpiral",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "golden_rectangle#preset",
+      "name": "golden_rectangle#preset",
+      "concept": "GoldenSpiral",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": false,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "GoldenSpiral",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fibonacci_terrain#preset",
+      "name": "fibonacci_terrain#preset",
+      "concept": "GoldenSpiral",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": false,
+      "recommended": true
+    },
+    {
+      "lookup": "romanesco",
+      "name": "romanesco",
+      "concept": "GoldenSpiral",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 64,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "julia_set",
+      "name": "Julia Set",
+      "concept": "JuliaSet",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 357,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "JuliaSet",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "julia_set_explorer",
+      "name": "Julia Set Explorer",
+      "concept": "JuliaSet",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "lyapunov_fractal",
+      "name": "Lyapunov Fractal",
+      "concept": "JuliaSet",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "cube_cabin",
+      "name": "Cube Cabin",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fractal_koch_curve",
+      "name": "Koch Curve",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "koch_curve_3d",
+      "name": "3D Koch Curve",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "sierpinski_triangle",
+      "name": "sierpinski_triangle",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "cube_bookshelf",
+      "name": "Cube Bookshelf",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "box_counting_dimension",
+      "name": "box_counting_dimension",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "sierpinski_pyramid",
+      "name": "sierpinski_pyramid",
+      "concept": "KochSierpinski",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mandelbrot_set",
+      "name": "Mandelbrot Set",
+      "concept": "MandelbrotSet",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 153,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "MandelbrotSet",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mandelbrot_dive",
+      "name": "mandelbrot_dive",
+      "concept": "MandelbrotSet",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "diffusion_limited_aggregation",
+      "name": "diffusion_limited_aggregation",
+      "concept": "MengerSponge",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 85,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "menger_sponge",
+      "name": "menger_sponge",
+      "concept": "MengerSponge",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 90,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "MengerSponge",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fibonacci_pagoda",
+      "name": "fibonacci_pagoda",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 25,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "recursive_chair",
+      "name": "Recursive Chair",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 24,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fractal_recursion_2",
+      "name": "Fractal Recursion 2",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "recursive_table",
+      "name": "recursive_table",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 24,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "example_8_3_recursion_circles_vr",
+      "name": "example_8_3_recursion_circles_vr",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "cube_subdivision",
+      "name": "cube_subdivision",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "recursive_boolean_cube",
+      "name": "recursive_boolean_cube",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "cube_staircase",
+      "name": "Cube Staircase",
+      "concept": "Recursion",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "living_paper",
+      "name": "living_paper",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fractal_lsystem_tree",
+      "name": "L-System Tree",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "recursive_tree_2",
+      "name": "recursive_tree_2",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "small_subdivision_cube",
+      "name": "small_subdivision_cube",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "inverted_tree_cloud",
+      "name": "inverted_tree_cloud",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 117,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "recursive_tree",
+      "name": "recursive_tree",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 13,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "cube_desk",
+      "name": "Cube Desk",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fractal_scene",
+      "name": "fractal_scene",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 156,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mobius_world",
+      "name": "MÃ¶bius World",
+      "concept": "RecursiveTrees",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 4968,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fractal_recursion_1",
+      "name": "Fractal Recursion 1",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "koch_curve",
+      "name": "Koch Curve",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "cantor_set",
+      "name": "cantor_set",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 182,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "strange_attractors",
+      "name": "Strange Attractors",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "recursive_tree",
+      "name": "recursive_tree",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 13,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fibonacci_sequences",
+      "name": "Fibonacci Sequences",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fractal_clouds",
+      "name": "Fractal Clouds",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 225,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "sierpinski_triangle",
+      "name": "sierpinski_triangle",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "romanesco",
+      "name": "romanesco",
+      "concept": "Synthesis",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 64,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 65,
+  "total_concepts": 10
+}

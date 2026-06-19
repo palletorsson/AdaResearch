@@ -1,0 +1,557 @@
+{
+  "domain": "array_tutorial",
+  "title": "array_tutorial",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Basics",
+      "order": 0,
+      "act": "Act I",
+      "truth": "Basics",
+      "count": 3,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "IndexVisualizer",
+          "pick_up_cube"
+        ],
+        "medium": [
+          "t"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Buren Courtyard",
+      "order": 1,
+      "act": "Act II",
+      "truth": "Buren Courtyard",
+      "count": 16,
+      "x_spread": -0.1907,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "buren_col_01_01",
+          "buren_col_01_04",
+          "buren_col_01_07",
+          "buren_col_01_10",
+          "buren_col_04_01",
+          "buren_col_04_04",
+          "buren_col_04_07",
+          "buren_col_04_10",
+          "buren_col_07_01",
+          "buren_col_07_04",
+          "buren_col_07_07",
+          "buren_col_07_10",
+          "buren_col_10_01",
+          "buren_col_10_04",
+          "buren_col_10_07",
+          "buren_col_10_10"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Patterns",
+      "order": 2,
+      "act": "Act III",
+      "truth": "Patterns",
+      "count": 13,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "panel_bridge_loom"
+        ],
+        "medium": [
+          "pattern_tile_4x4",
+          "vr_tile_editor_mirror",
+          "pattern_tile_mirror",
+          "science_screen",
+          "tiling_demo",
+          "pattern_tile_plate",
+          "grid_model",
+          "facade_grammar_demo",
+          "pattern_tile_brick",
+          "pattern_tile_herringbone"
+        ],
+        "large": [
+          "pattern_tunnel_machine"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Soane Plaza",
+      "order": 3,
+      "act": "Act IV",
+      "truth": "Soane Plaza",
+      "count": 3,
+      "x_spread": 0.0298,
+      "tiers": {
+        "small": [
+          "array_disco_substrate",
+          "array_slow_substrate",
+          "array_random_substrate"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.6355,
+      1.0,
+      0.9484
+    ],
+    [
+      0.6355,
+      0.0,
+      0.8262,
+      0.0
+    ],
+    [
+      1.0,
+      0.8262,
+      0.0,
+      0.9186
+    ],
+    [
+      0.9484,
+      0.0,
+      0.9186,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "IndexVisualizer",
+      "name": "IndexVisualizer",
+      "concept": "Basics",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pick_up_cube",
+      "name": "Pick Up Cube",
+      "concept": "Basics",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "t",
+      "name": "t",
+      "concept": "Basics",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": false,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_01_01",
+      "name": "Buren Column (1,1)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_01_04",
+      "name": "Buren Column (1,4)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_01_07",
+      "name": "Buren Column (1,7)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_01_10",
+      "name": "Buren Column (1,10)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_04_01",
+      "name": "Buren Column (4,1)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_04_04",
+      "name": "Buren Column (4,4)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_04_07",
+      "name": "Buren Column (4,7)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_04_10",
+      "name": "Buren Column (4,10)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_07_01",
+      "name": "Buren Column (7,1)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_07_04",
+      "name": "Buren Column (7,4)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_07_07",
+      "name": "Buren Column (7,7)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_07_10",
+      "name": "Buren Column (7,10)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_10_01",
+      "name": "Buren Column (10,1)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_10_04",
+      "name": "Buren Column (10,4)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_10_07",
+      "name": "Buren Column (10,7)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "buren_col_10_10",
+      "name": "Buren Column (10,10)",
+      "concept": "Buren Courtyard",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pattern_tile_4x4",
+      "name": "pattern_tile_4x4",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "vr_tile_editor_mirror",
+      "name": "VR Tile Editor Mirror",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pattern_tile_mirror",
+      "name": "pattern_tile_mirror",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tiling_demo",
+      "name": "Tiling System Demo",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pattern_tile_plate",
+      "name": "Pattern Tile Plate",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pattern_tunnel_machine",
+      "name": "Pattern Tunnel Machine",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 30,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "panel_bridge_loom",
+      "name": "Panel Bridge — Loom Simulator",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grid_model",
+      "name": "Grid Model",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "facade_grammar_demo",
+      "name": "Facade Grammar Demo",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pattern_tile_brick",
+      "name": "pattern_tile_brick",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pattern_tile_herringbone",
+      "name": "pattern_tile_herringbone",
+      "concept": "Patterns",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "array_disco_substrate",
+      "name": "Array DISCO Substrate",
+      "concept": "Soane Plaza",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "array_slow_substrate",
+      "name": "Array SLOW Substrate",
+      "concept": "Soane Plaza",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "array_random_substrate",
+      "name": "Array RANDOM Substrate",
+      "concept": "Soane Plaza",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 35,
+  "total_concepts": 4
+}

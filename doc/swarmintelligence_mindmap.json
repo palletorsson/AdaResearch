@@ -1,0 +1,355 @@
+{
+  "domain": "swarmintelligence",
+  "title": "swarmintelligence",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Agent Based Modeling ABM",
+      "order": 0,
+      "act": "Act I",
+      "truth": "Agent Based Modeling ABM",
+      "count": 1,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "ant_colony_optimization"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Ant Colony Optimization",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Ant Colony Optimization",
+      "count": 1,
+      "x_spread": 0.2619,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "AntColonyV2"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Boids Algorithm",
+      "order": 2,
+      "act": "Act II",
+      "truth": "Boids Algorithm",
+      "count": 5,
+      "x_spread": -0.6421,
+      "tiers": {
+        "small": [
+          "boids_aquarium",
+          "boid_flocking"
+        ],
+        "medium": [
+          "science_screen",
+          "boids_2d_in_3d"
+        ],
+        "large": [
+          "boid_manager"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "FlowFields",
+      "order": 3,
+      "act": "Act II",
+      "truth": "FlowFields",
+      "count": 1,
+      "x_spread": 0.0097,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "FlowFieldMain"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Particle Swarm Optimization",
+      "order": 4,
+      "act": "Act III",
+      "truth": "Particle Swarm Optimization",
+      "count": 2,
+      "x_spread": -0.2968,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "fitness_landscape_politics",
+          "self_organizing_patterns"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "PhysarumColony",
+      "order": 5,
+      "act": "Act III",
+      "truth": "PhysarumColony",
+      "count": 2,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [
+          "PhysarumColony"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Swarm Intelligence Algorithms",
+      "order": 6,
+      "act": "Act IV",
+      "truth": "Swarm Intelligence Algorithms",
+      "count": 1,
+      "x_spread": -0.16,
+      "tiers": {
+        "small": [
+          "ecosystem_simulation"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.5306,
+      0.1552,
+      0.7274,
+      0.6828,
+      1.0,
+      0.582
+    ],
+    [
+      0.5306,
+      0.0,
+      0.8817,
+      0.7769,
+      0.0,
+      0.2687,
+      0.3734
+    ],
+    [
+      0.1552,
+      0.8817,
+      0.0,
+      0.4462,
+      0.644,
+      0.7973,
+      0.4821
+    ],
+    [
+      0.7274,
+      0.7769,
+      0.4462,
+      0.0,
+      0.7352,
+      0.7177,
+      0.7701
+    ],
+    [
+      0.6828,
+      0.0,
+      0.644,
+      0.7352,
+      0.0,
+      0.9796,
+      0.3725
+    ],
+    [
+      1.0,
+      0.2687,
+      0.7973,
+      0.7177,
+      0.9796,
+      0.0,
+      0.742
+    ],
+    [
+      0.582,
+      0.3734,
+      0.4821,
+      0.7701,
+      0.3725,
+      0.742,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "ant_colony_optimization",
+      "name": "Ant Colony Optimization",
+      "concept": "Agent Based Modeling ABM",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 153,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "AntColonyV2",
+      "name": "AntColonyV2",
+      "concept": "Ant Colony Optimization",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 66,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "boids_aquarium",
+      "name": "Boids Aquarium",
+      "concept": "Boids Algorithm",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "boid_flocking",
+      "name": "Boid Flocking",
+      "concept": "Boids Algorithm",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Boids Algorithm",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "boid_manager",
+      "name": "boid_manager",
+      "concept": "Boids Algorithm",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 400,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "boids_2d_in_3d",
+      "name": "boids_2d_in_3d",
+      "concept": "Boids Algorithm",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "FlowFieldMain",
+      "name": "FlowFieldMain",
+      "concept": "FlowFields",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 176,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fitness_landscape_politics",
+      "name": "Fitness Landscape Politics",
+      "concept": "Particle Swarm Optimization",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "self_organizing_patterns",
+      "name": "Self-Organizing Patterns",
+      "concept": "Particle Swarm Optimization",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 256,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "PhysarumColony",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "PhysarumColony",
+      "name": "PhysarumColony",
+      "concept": "PhysarumColony",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 11,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "ecosystem_simulation",
+      "name": "Ecosystem Simulation",
+      "concept": "Swarm Intelligence Algorithms",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 13,
+  "total_concepts": 7
+}

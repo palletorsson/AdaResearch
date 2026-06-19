@@ -1,0 +1,313 @@
+{
+  "title": "swarmintelligence",
+  "domain": "swarmintelligence",
+  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
+  "acts": [],
+  "concepts": [
+    "Agent Based Modeling ABM",
+    "Ant Colony Optimization",
+    "Boids Algorithm",
+    "FlowFields",
+    "Particle Swarm Optimization",
+    "PhysarumColony",
+    "Swarm Intelligence Algorithms"
+  ],
+  "concept_meta": {
+    "Agent Based Modeling ABM": {
+      "truth": "Agent Based Modeling ABM",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "ant_colony_optimization"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Ant Colony Optimization": {
+      "truth": "Ant Colony Optimization",
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "AntColonyV2"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Boids Algorithm": {
+      "truth": "Boids Algorithm",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "boids_aquarium",
+          "boid_flocking"
+        ],
+        "medium": [
+          "science_screen",
+          "boids_2d_in_3d"
+        ],
+        "large": [
+          "boid_manager"
+        ],
+        "applied": []
+      },
+      "count": 5
+    },
+    "FlowFields": {
+      "truth": "FlowFields",
+      "map": "SwarmIntelligence_FlowFields",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "FlowFieldMain"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Particle Swarm Optimization": {
+      "truth": "Particle Swarm Optimization",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "fitness_landscape_politics",
+          "self_organizing_patterns"
+        ],
+        "applied": []
+      },
+      "count": 2
+    },
+    "PhysarumColony": {
+      "truth": "PhysarumColony",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [
+          "PhysarumColony"
+        ],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Swarm Intelligence Algorithms": {
+      "truth": "Swarm Intelligence Algorithms",
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "ecosystem_simulation"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      0.5306,
+      0.1552,
+      0.7274,
+      0.6828,
+      1.0,
+      0.582
+    ],
+    [
+      0.5306,
+      0.0,
+      0.8817,
+      0.7769,
+      0.0,
+      0.2687,
+      0.3734
+    ],
+    [
+      0.1552,
+      0.8817,
+      0.0,
+      0.4462,
+      0.644,
+      0.7973,
+      0.4821
+    ],
+    [
+      0.7274,
+      0.7769,
+      0.4462,
+      0.0,
+      0.7352,
+      0.7177,
+      0.7701
+    ],
+    [
+      0.6828,
+      0.0,
+      0.644,
+      0.7352,
+      0.0,
+      0.9796,
+      0.3725
+    ],
+    [
+      1.0,
+      0.2687,
+      0.7973,
+      0.7177,
+      0.9796,
+      0.0,
+      0.742
+    ],
+    [
+      0.582,
+      0.3734,
+      0.4821,
+      0.7701,
+      0.3725,
+      0.742,
+      0.0
+    ]
+  ],
+  "groups": {
+    "Agent Based Modeling ABM": [
+      {
+        "lookup": "ant_colony_optimization",
+        "name": "Ant Colony Optimization",
+        "fp": 153,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Ant Colony Optimization": [
+      {
+        "lookup": "AntColonyV2",
+        "name": "AntColonyV2",
+        "fp": 66,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Boids Algorithm": [
+      {
+        "lookup": "boids_aquarium",
+        "name": "Boids Aquarium",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "boid_flocking",
+        "name": "Boid Flocking",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "boid_manager",
+        "name": "boid_manager",
+        "fp": 400,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "boids_2d_in_3d",
+        "name": "boids_2d_in_3d",
+        "fp": 3,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "FlowFields": [
+      {
+        "lookup": "FlowFieldMain",
+        "name": "FlowFieldMain",
+        "fp": 176,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Particle Swarm Optimization": [
+      {
+        "lookup": "fitness_landscape_politics",
+        "name": "Fitness Landscape Politics",
+        "fp": 9,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "self_organizing_patterns",
+        "name": "Self-Organizing Patterns",
+        "fp": 256,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "PhysarumColony": [
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "PhysarumColony",
+        "name": "PhysarumColony",
+        "fp": 11,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Swarm Intelligence Algorithms": [
+      {
+        "lookup": "ecosystem_simulation",
+        "name": "Ecosystem Simulation",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ]
+  },
+  "total": 13,
+  "total_concepts": 7,
+  "recommended_total": 13,
+  "map_ready_total": 13
+}

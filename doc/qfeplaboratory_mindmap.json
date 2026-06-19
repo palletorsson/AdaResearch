@@ -1,0 +1,959 @@
+{
+  "domain": "qfeplaboratory",
+  "title": "qfeplaboratory",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "E Term",
+      "order": 0,
+      "act": "Act I",
+      "truth": "E Term",
+      "count": 4,
+      "x_spread": -0.432,
+      "tiers": {
+        "small": [
+          "lambda_slider"
+        ],
+        "medium": [
+          "random_cubes",
+          "particle_chaos",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Edge Of Chaos",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Edge Of Chaos",
+      "count": 6,
+      "x_spread": -0.216,
+      "tiers": {
+        "small": [
+          "turing_pattern",
+          "lambda_slider"
+        ],
+        "medium": [
+          "edge_core",
+          "edge_of_chaos_unlocked",
+          "emergence_zone",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "F Term",
+      "order": 2,
+      "act": "Act I",
+      "truth": "F Term",
+      "count": 8,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "lambda_slider",
+          "dark_sphere"
+        ],
+        "medium": [
+          "shannon_workbench",
+          "snap_cube_puzzle",
+          "snap_tetra_puzzle",
+          "science_screen",
+          "crystal_cluster",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Introduction",
+      "order": 3,
+      "act": "Act II",
+      "truth": "Introduction",
+      "count": 9,
+      "x_spread": -0.5736,
+      "tiers": {
+        "small": [
+          "qfep_formula_3d",
+          "lambda_slider",
+          "phi_slider",
+          "grab_sphere_F",
+          "grab_sphere_E",
+          "grab_sphere_lambda"
+        ],
+        "medium": [
+          "qfep_balance_workbench",
+          "science_screen",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Lambda Spectrum",
+      "order": 4,
+      "act": "Act II",
+      "truth": "Lambda Spectrum",
+      "count": 7,
+      "x_spread": -0.3452,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "crystal_formation",
+          "ordered_grid",
+          "edge_particles",
+          "complexity_pattern",
+          "dissolving_form",
+          "chaos_particles"
+        ],
+        "large": [
+          "bifurcation_walkway"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Phase Chamber",
+      "order": 5,
+      "act": "Act III",
+      "truth": "Phase Chamber",
+      "count": 1,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "lab_room#accent_color"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Phi Term",
+      "order": 6,
+      "act": "Act III",
+      "truth": "Phi Term",
+      "count": 6,
+      "x_spread": -0.3631,
+      "tiers": {
+        "small": [
+          "phi_slider"
+        ],
+        "medium": [
+          "rigid_sculpture",
+          "fluid_form",
+          "preserved_pattern",
+          "transforming_pattern",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Sandbox",
+      "order": 7,
+      "act": "Act IV",
+      "truth": "Sandbox",
+      "count": 6,
+      "x_spread": -0.3631,
+      "tiers": {
+        "small": [
+          "lambda_slider",
+          "phi_slider",
+          "qfep_reactor",
+          "qfep_formula_3d"
+        ],
+        "medium": [
+          "reactive_particles",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Synthesis",
+      "order": 8,
+      "act": "Act IV",
+      "truth": "Synthesis",
+      "count": 7,
+      "x_spread": -0.4026,
+      "tiers": {
+        "small": [
+          "queer_morphology_specimen",
+          "grab_sphere_F",
+          "grab_sphere_E",
+          "grab_sphere_lambda",
+          "grab_sphere_phi",
+          "qfep_formula_3d"
+        ],
+        "medium": [
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.4887,
+      0.4646,
+      0.4699,
+      0.2917,
+      0.8966,
+      0.6103,
+      0.5458,
+      0.5551
+    ],
+    [
+      0.4887,
+      0.0,
+      0.6859,
+      0.5567,
+      0.0,
+      0.9019,
+      0.4971,
+      0.4178,
+      0.6195
+    ],
+    [
+      0.4646,
+      0.6859,
+      0.0,
+      0.4264,
+      0.6548,
+      1.0,
+      0.6369,
+      0.6369,
+      0.5974
+    ],
+    [
+      0.4699,
+      0.5567,
+      0.4264,
+      0.0,
+      0.5962,
+      1.0,
+      0.4158,
+      0.16,
+      0.1883
+    ],
+    [
+      0.2917,
+      0.0,
+      0.6548,
+      0.5962,
+      0.0,
+      1.0,
+      0.5789,
+      0.466,
+      0.6629
+    ],
+    [
+      0.8966,
+      0.9019,
+      1.0,
+      1.0,
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      0.6103,
+      0.4971,
+      0.6369,
+      0.4158,
+      0.5789,
+      1.0,
+      0.0,
+      0.4685,
+      0.5161
+    ],
+    [
+      0.5458,
+      0.4178,
+      0.6369,
+      0.16,
+      0.466,
+      1.0,
+      0.4685,
+      0.0,
+      0.3416
+    ],
+    [
+      0.5551,
+      0.6195,
+      0.5974,
+      0.1883,
+      0.6629,
+      1.0,
+      0.5161,
+      0.3416,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "random_cubes",
+      "name": "random_cubes",
+      "concept": "E Term",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "particle_chaos",
+      "name": "particle_chaos",
+      "concept": "E Term",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "lambda_slider",
+      "name": "lambda_slider",
+      "concept": "E Term",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "E Term",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "turing_pattern",
+      "name": "turing_pattern",
+      "concept": "Edge Of Chaos",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "edge_core",
+      "name": "edge_core",
+      "concept": "Edge Of Chaos",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "edge_of_chaos_unlocked",
+      "name": "Edge of Chaos Unlocked",
+      "concept": "Edge Of Chaos",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "emergence_zone",
+      "name": "emergence_zone",
+      "concept": "Edge Of Chaos",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "lambda_slider",
+      "name": "lambda_slider",
+      "concept": "Edge Of Chaos",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "Edge Of Chaos",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "shannon_workbench",
+      "name": "Shannon Workbench",
+      "concept": "F Term",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "snap_cube_puzzle",
+      "name": "Snap Cube Puzzle",
+      "concept": "F Term",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "snap_tetra_puzzle",
+      "name": "Snap Tetra Puzzle",
+      "concept": "F Term",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "F Term",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "crystal_cluster",
+      "name": "crystal_cluster",
+      "concept": "F Term",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "lambda_slider",
+      "name": "lambda_slider",
+      "concept": "F Term",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "F Term",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "F Term",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "qfep_balance_workbench",
+      "name": "QFEP Balance Workbench",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "qfep_formula_3d",
+      "name": "qfep_formula_3d",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "lambda_slider",
+      "name": "lambda_slider",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "phi_slider",
+      "name": "phi_slider",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_sphere_F",
+      "name": "grab_sphere_F",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_sphere_E",
+      "name": "grab_sphere_E",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_sphere_lambda",
+      "name": "grab_sphere_lambda",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "Introduction",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "crystal_formation",
+      "name": "crystal_formation",
+      "concept": "Lambda Spectrum",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "ordered_grid",
+      "name": "ordered_grid",
+      "concept": "Lambda Spectrum",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "bifurcation_walkway",
+      "name": "bifurcation_walkway",
+      "concept": "Lambda Spectrum",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 20,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "edge_particles",
+      "name": "edge_particles",
+      "concept": "Lambda Spectrum",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "complexity_pattern",
+      "name": "complexity_pattern",
+      "concept": "Lambda Spectrum",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dissolving_form",
+      "name": "dissolving_form",
+      "concept": "Lambda Spectrum",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "chaos_particles",
+      "name": "chaos_particles",
+      "concept": "Lambda Spectrum",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "lab_room#accent_color",
+      "name": "lab_room#accent_color",
+      "concept": "Phase Chamber",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": false,
+      "recommended": true
+    },
+    {
+      "lookup": "rigid_sculpture",
+      "name": "rigid_sculpture",
+      "concept": "Phi Term",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fluid_form",
+      "name": "fluid_form",
+      "concept": "Phi Term",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "phi_slider",
+      "name": "phi_slider",
+      "concept": "Phi Term",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "preserved_pattern",
+      "name": "preserved_pattern",
+      "concept": "Phi Term",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "transforming_pattern",
+      "name": "transforming_pattern",
+      "concept": "Phi Term",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "Phi Term",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "lambda_slider",
+      "name": "lambda_slider",
+      "concept": "Sandbox",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "phi_slider",
+      "name": "phi_slider",
+      "concept": "Sandbox",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "qfep_reactor",
+      "name": "qfep_reactor",
+      "concept": "Sandbox",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "reactive_particles",
+      "name": "reactive_particles",
+      "concept": "Sandbox",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "Sandbox",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "qfep_formula_3d",
+      "name": "qfep_formula_3d",
+      "concept": "Sandbox",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "queer_morphology_specimen",
+      "name": "Queer Morphology Specimen",
+      "concept": "Synthesis",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_sphere_F",
+      "name": "grab_sphere_F",
+      "concept": "Synthesis",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_sphere_E",
+      "name": "grab_sphere_E",
+      "concept": "Synthesis",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_sphere_lambda",
+      "name": "grab_sphere_lambda",
+      "concept": "Synthesis",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_sphere_phi",
+      "name": "grab_sphere_phi",
+      "concept": "Synthesis",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "qfep_formula_3d",
+      "name": "qfep_formula_3d",
+      "concept": "Synthesis",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "Synthesis",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 54,
+  "total_concepts": 9
+}

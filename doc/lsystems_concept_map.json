@@ -1,0 +1,877 @@
+{
+  "title": "lsystems",
+  "domain": "lsystems",
+  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
+  "acts": [],
+  "concepts": [
+    "Architecture",
+    "Backus Naur Form BNF",
+    "CityGenerator",
+    "Competition",
+    "ContextSensitiveTree",
+    "Context Free Grammars CFG",
+    "Different Grammar Types",
+    "ForestCompetition",
+    "Grammar Lab",
+    "Grammars And Curves",
+    "Growth",
+    "Hilbert3D",
+    "Living",
+    "Shape Grammars",
+    "Stochastic L Systems",
+    "Tree L Systems"
+  ],
+  "concept_meta": {
+    "Architecture": {
+      "truth": "Architecture",
+      "map": "LSystems_Architecture",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "lsystem_dungeon"
+        ],
+        "medium": [],
+        "large": [
+          "CityGenerator"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Backus Naur Form BNF": {
+      "truth": "Backus Naur Form BNF",
+      "map": "LSystems_Backus_Naur_Form_BNF",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "CityGenerator": {
+      "truth": "CityGenerator",
+      "map": "LSystems_CityGenerator",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "CityGenerator"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Competition": {
+      "truth": "Competition",
+      "map": "LSystems_Competition",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [
+          "branching_coral"
+        ],
+        "large": [
+          "ForestCompetition"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "ContextSensitiveTree": {
+      "truth": "ContextSensitiveTree",
+      "map": "LSystems_ContextSensitiveTree",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "ContextSensitiveTree"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Context Free Grammars CFG": {
+      "truth": "Context Free Grammars CFG",
+      "map": "LSystems_Context_Free_Grammars_CFG",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "context_free_grammars"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Different Grammar Types": {
+      "truth": "Different Grammar Types",
+      "map": "LSystems_Different_Grammar_Types",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "ForestCompetition": {
+      "truth": "ForestCompetition",
+      "map": "LSystems_ForestCompetition",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "ForestCompetition"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Grammar Lab": {
+      "truth": "Grammar Lab",
+      "map": "LSystems_Grammar_Lab",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "lsystem_editor",
+          "lsystem_tree",
+          "dark_sphere"
+        ],
+        "medium": [
+          "science_screen",
+          "grammar_provenance",
+          "fractal_lsystem_string"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 6
+    },
+    "Grammars And Curves": {
+      "truth": "Grammars And Curves",
+      "map": "LSystems_Grammars_And_Curves",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "ContextFreeGrammars"
+        ],
+        "medium": [
+          "space_filling_curve_gallery"
+        ],
+        "large": [
+          "Hilbert3D"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Growth": {
+      "truth": "Growth",
+      "map": "LSystems_Growth",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "lsystem_tree"
+        ],
+        "medium": [
+          "ContextSensitiveTree",
+          "parametric_lsystem"
+        ],
+        "large": [
+          "AnimatedTree"
+        ],
+        "applied": []
+      },
+      "count": 4
+    },
+    "Hilbert3D": {
+      "truth": "Hilbert3D",
+      "map": "LSystems_Hilbert3D",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "Hilbert3D"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Living": {
+      "truth": "Living",
+      "map": "LSystems_Living",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "lsystem_tree"
+        ],
+        "medium": [
+          "genetic_tree_sculptor",
+          "branching_coral"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Shape Grammars": {
+      "truth": "Shape Grammars",
+      "map": "LSystems_Shape_Grammars",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Stochastic L Systems": {
+      "truth": "Stochastic L Systems",
+      "map": "LSystems_Stochastic_L_Systems",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Tree L Systems": {
+      "truth": "Tree L Systems",
+      "map": "LSystems_Tree_L_Systems",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "lsystem_editor",
+          "tree_generation",
+          "lsystem_tree"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 3
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      0.8612,
+      0.3157,
+      0.4056,
+      0.5978,
+      0.5484,
+      0.7794,
+      0.8134,
+      0.1913,
+      0.4049,
+      0.3671,
+      0.7809,
+      0.2579,
+      0.7992,
+      0.6643,
+      0.8105
+    ],
+    [
+      0.8612,
+      0.0,
+      1.0,
+      0.8833,
+      0.9641,
+      0.9504,
+      0.0,
+      0.9348,
+      0.9235,
+      0.7926,
+      0.9248,
+      0.8662,
+      0.7604,
+      0.0074,
+      0.7268,
+      0.8617
+    ],
+    [
+      0.3157,
+      1.0,
+      0.0,
+      0.8583,
+      0.787,
+      0.7466,
+      0.9702,
+      0.9504,
+      0.8005,
+      0.8657,
+      0.8675,
+      0.9121,
+      0.6387,
+      0.9842,
+      0.8184,
+      0.9248
+    ],
+    [
+      0.4056,
+      0.8833,
+      0.8583,
+      0.0,
+      0.7369,
+      0.6606,
+      0.882,
+      0.2573,
+      0.3663,
+      0.5561,
+      0.4492,
+      0.8422,
+      0.2101,
+      0.8374,
+      0.7448,
+      0.835
+    ],
+    [
+      0.5978,
+      0.9641,
+      0.787,
+      0.7369,
+      0.0,
+      0.4999,
+      0.8902,
+      0.6931,
+      0.5329,
+      0.6102,
+      0.3019,
+      0.8665,
+      0.6989,
+      0.8617,
+      0.7105,
+      0.7435
+    ],
+    [
+      0.5484,
+      0.9504,
+      0.7466,
+      0.6606,
+      0.4999,
+      0.0,
+      0.8044,
+      0.8469,
+      0.4006,
+      0.497,
+      0.6619,
+      0.7654,
+      0.6899,
+      0.7965,
+      0.8081,
+      0.6809
+    ],
+    [
+      0.7794,
+      0.0,
+      0.9702,
+      0.882,
+      0.8902,
+      0.8044,
+      0.0,
+      0.9258,
+      0.8242,
+      0.7493,
+      0.8643,
+      0.8266,
+      0.7279,
+      0.0662,
+      0.8242,
+      0.9784
+    ],
+    [
+      0.8134,
+      0.9348,
+      0.9504,
+      0.2573,
+      0.6931,
+      0.8469,
+      0.9258,
+      0.0,
+      0.7572,
+      0.7714,
+      0.6767,
+      0.8931,
+      0.6508,
+      0.9311,
+      0.7981,
+      0.8928
+    ],
+    [
+      0.1913,
+      0.9235,
+      0.8005,
+      0.3663,
+      0.5329,
+      0.4006,
+      0.8242,
+      0.7572,
+      0.0,
+      0.3526,
+      0.162,
+      0.797,
+      0.3566,
+      0.8823,
+      0.7403,
+      0.706
+    ],
+    [
+      0.4049,
+      0.7926,
+      0.8657,
+      0.5561,
+      0.6102,
+      0.497,
+      0.7493,
+      0.7714,
+      0.3526,
+      0.0,
+      0.412,
+      0.1578,
+      0.4706,
+      0.8116,
+      0.7582,
+      0.8752
+    ],
+    [
+      0.3671,
+      0.9248,
+      0.8675,
+      0.4492,
+      0.3019,
+      0.6619,
+      0.8643,
+      0.6767,
+      0.162,
+      0.412,
+      0.0,
+      0.7406,
+      0.2803,
+      0.8084,
+      0.6809,
+      0.7495
+    ],
+    [
+      0.7809,
+      0.8662,
+      0.9121,
+      0.8422,
+      0.8665,
+      0.7654,
+      0.8266,
+      0.8931,
+      0.797,
+      0.1578,
+      0.7406,
+      0.0,
+      0.7765,
+      0.8596,
+      0.9422,
+      0.9319
+    ],
+    [
+      0.2579,
+      0.7604,
+      0.6387,
+      0.2101,
+      0.6989,
+      0.6899,
+      0.7279,
+      0.6508,
+      0.3566,
+      0.4706,
+      0.2803,
+      0.7765,
+      0.0,
+      0.7472,
+      0.6482,
+      0.8089
+    ],
+    [
+      0.7992,
+      0.0074,
+      0.9842,
+      0.8374,
+      0.8617,
+      0.7965,
+      0.0662,
+      0.9311,
+      0.8823,
+      0.8116,
+      0.8084,
+      0.8596,
+      0.7472,
+      0.0,
+      0.8261,
+      0.9842
+    ],
+    [
+      0.6643,
+      0.7268,
+      0.8184,
+      0.7448,
+      0.7105,
+      0.8081,
+      0.8242,
+      0.7981,
+      0.7403,
+      0.7582,
+      0.6809,
+      0.9422,
+      0.6482,
+      0.8261,
+      0.0,
+      0.7004
+    ],
+    [
+      0.8105,
+      0.8617,
+      0.9248,
+      0.835,
+      0.7435,
+      0.6809,
+      0.9784,
+      0.8928,
+      0.706,
+      0.8752,
+      0.7495,
+      0.9319,
+      0.8089,
+      0.9842,
+      0.7004,
+      0.0
+    ]
+  ],
+  "groups": {
+    "Architecture": [
+      {
+        "lookup": "dark_sphere",
+        "name": "Dark Sphere",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "CityGenerator",
+        "name": "CityGenerator",
+        "fp": 11,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "lsystem_dungeon",
+        "name": "L-System Dungeon",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Backus Naur Form BNF": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "CityGenerator": [
+      {
+        "lookup": "CityGenerator",
+        "name": "CityGenerator",
+        "fp": 11,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Competition": [
+      {
+        "lookup": "ForestCompetition",
+        "name": "ForestCompetition",
+        "fp": 24,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "branching_coral",
+        "name": "Branching Coral",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "dark_sphere",
+        "name": "Dark Sphere",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "ContextSensitiveTree": [
+      {
+        "lookup": "ContextSensitiveTree",
+        "name": "ContextSensitiveTree",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Context Free Grammars CFG": [
+      {
+        "lookup": "context_free_grammars",
+        "name": "Context-Free Grammars",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Different Grammar Types": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "ForestCompetition": [
+      {
+        "lookup": "ForestCompetition",
+        "name": "ForestCompetition",
+        "fp": 24,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Grammar Lab": [
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "lsystem_editor",
+        "name": "L-System Editor",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "grammar_provenance",
+        "name": "Grammar Provenance",
+        "fp": 8,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "lsystem_tree",
+        "name": "L-System Tree",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "fractal_lsystem_string",
+        "name": "L-System String Expansion",
+        "fp": 3,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "dark_sphere",
+        "name": "Dark Sphere",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Grammars And Curves": [
+      {
+        "lookup": "Hilbert3D",
+        "name": "Hilbert3D",
+        "fp": 36,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "space_filling_curve_gallery",
+        "name": "Space-Filling Curve Gallery",
+        "fp": 8,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "ContextFreeGrammars",
+        "name": "Context-Free Grammars",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Growth": [
+      {
+        "lookup": "AnimatedTree",
+        "name": "AnimatedTree",
+        "fp": 9,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "ContextSensitiveTree",
+        "name": "ContextSensitiveTree",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "lsystem_tree",
+        "name": "L-System Tree",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "parametric_lsystem",
+        "name": "Parametric L-System",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Hilbert3D": [
+      {
+        "lookup": "Hilbert3D",
+        "name": "Hilbert3D",
+        "fp": 36,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Living": [
+      {
+        "lookup": "lsystem_tree",
+        "name": "L-System Tree",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "genetic_tree_sculptor",
+        "name": "Genetic Tree Sculptor",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "branching_coral",
+        "name": "Branching Coral",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Shape Grammars": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Stochastic L Systems": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Tree L Systems": [
+      {
+        "lookup": "lsystem_editor",
+        "name": "L-System Editor",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "tree_generation",
+        "name": "Tree Generation",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "lsystem_tree",
+        "name": "L-System Tree",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ]
+  },
+  "total": 34,
+  "total_concepts": 16,
+  "recommended_total": 34,
+  "map_ready_total": 34
+}

@@ -1,0 +1,9314 @@
+{
+  "domain": "qfeplaboratory",
+  "title": "qfeplaboratory",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "QFEP_Introduction",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        9,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 0,
+          "lk": "qfep_balance_workbench",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 4,
+          "row": 2,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 4,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 4,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 7,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 1,
+          "row": 6,
+          "lk": "grab_sphere_F",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 4,
+          "row": 6,
+          "lk": "grab_sphere_E",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 7,
+          "row": 6,
+          "lk": "grab_sphere_lambda",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 6,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_Phi_Term",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 2,
+          "lk": "rigid_sculpture",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 2,
+          "lk": "fluid_form",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 4,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 1,
+          "row": 6,
+          "lk": "preserved_pattern",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 6,
+          "lk": "transforming_pattern",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 6,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_F_Term",
+      "score": -0.714,
+      "tag": "uncurated",
+      "grid": [
+        10,
+        12
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 0,
+          "lk": "shannon_workbench",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 2,
+          "lk": "snap_cube_puzzle",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 7,
+          "row": 2,
+          "lk": "snap_tetra_puzzle",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 8,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "crystal_cluster",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 7,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 8,
+          "row": 7,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_Edge_Of_Chaos",
+      "score": -0.866,
+      "tag": "uncurated",
+      "grid": [
+        14,
+        13
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 1,
+          "col": 4,
+          "row": 3,
+          "lk": "turing_pattern",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 3,
+          "lk": "turing_pattern",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 6,
+          "lk": "edge_core",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 8,
+          "lk": "edge_of_chaos_unlocked",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 9,
+          "lk": "emergence_zone",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 9,
+          "lk": "emergence_zone",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 11,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 9,
+          "row": 11,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_E_Term",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "random_cubes",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 7,
+          "row": 3,
+          "lk": "random_cubes",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 5,
+          "lk": "particle_chaos",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 7,
+          "lk": "random_cubes",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 7,
+          "row": 7,
+          "lk": "random_cubes",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 9,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 9,
+          "row": 9,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Accumulation_Area",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Atrium",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 18,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Bridge",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        35
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 7,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 1,
+          "row": 17,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 7,
+          "row": 17,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 1,
+          "row": 29,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 7,
+          "row": 29,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Cathedral",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        30
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 19,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 12,
+          "row": 19,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Cave",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 16,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Citadel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 11,
+          "row": 20,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Constellation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Crossroads",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 11,
+          "row": 19,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Dungeon",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        27,
+        27
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 22,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 13,
+          "row": 22,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_HubSpokes",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 12,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Maze",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 11,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Pit",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        27
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 3,
+          "col": 3,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 17,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 23,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 17,
+          "row": 23,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Promenade",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        32
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 13,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 23,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Quadrants",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Spiral",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 17,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Stacks",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        23,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Tower",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 17,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 14,
+          "row": 17,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Archetype_Ziggurat",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 13,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 13,
+          "row": 13,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Array_Patterns",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 9,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "AutoGenTest",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "BG_Slime_Mold",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Bracelet_Zoo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 2,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 6,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 10,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Bricolage_Affordances",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Bricolage_Arrays_as_Probes",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Bricolage_Chair",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Bricolage_Constraints",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Bricolage_Dome",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Bricolage_Inventory",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Bricolage_Sculpture",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "CA_BeyondBinary",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "CA_ElementaryRules",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "CA_ExpandingSpace",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "CA_GameOfLife",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "CA_Introduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Arrays",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_CA",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Color",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Color.bak.20260429T110640",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Facade",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        6,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Forces",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Foundations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Foundations_composed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 6,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Fractals",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_LSystems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_ML",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Noise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Primitives",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Primitives_HumanoidWalker",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 0,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Primitives_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Primitives_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Primitives_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_ProcGen",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_ProcGen_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_ProcGen_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_ProcGen_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_QFEP",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Random",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_SoftBodies",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_SoftBodies_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_SoftBodies_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_SoftBodies_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Swarm",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Transformation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Waves",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Waves_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Waves_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Chamber_Waves_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Change_Intro",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Change_Reconciliation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Change_Slope_Surface",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Context",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        35
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 14,
+          "row": 27,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Grabbable",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Grid_Pallet",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 10,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Nails",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        13
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 6,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Overlay",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Paint",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_cardinal",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 0,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_cluster_center",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_linear_path",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_nearest_role",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_compare_perimeter",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 9,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Rainbow",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Spectrum",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Sphere",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Walls",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        31
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Console_Test",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "shannon_workbench",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Control_Board_Demo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 3,
+          "row": 3,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Crisis_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        17,
+        18
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 8,
+          "col": 8,
+          "row": 8,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 11,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 11,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Crisis_Synthesis_composed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        57,
+        13
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 8,
+          "col": 19,
+          "row": 6,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 25,
+          "row": 6,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 31,
+          "row": 6,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "CriticalAlgorithms_Applied_Ethics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 6,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "DataStructures_Linked_Lists",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Dialectic_Automation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        30
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Directionality_Examples",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        25,
+        25
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 22,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 22,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 8,
+          "row": 22,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 11,
+          "row": 22,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 15,
+          "row": 22,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 18,
+          "row": 22,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 21,
+          "row": 22,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Euclid_Parallel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 9,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Euclid_Parallel_composed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        33,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 6,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_Assembly_Principle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_baroque",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_classical",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_Critique",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_florence_marble",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_nyc_tenement",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_Rustication",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_venetian_gothic",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Facade_Wall_Basics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 10,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Flower_Anatomy",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Flow_Field",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ForcesChaos",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 17,
+          "row": 16,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ForcesComposition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 9,
+          "row": 12,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ForcesSystems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Forces_4",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Force_Props_Sandbox",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Foundations_Crisis_Hall",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 4,
+          "row": 6,
+          "lk": "lab_room#accent_color",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_CantorSet",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        17,
+        21
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_CrossSequence",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_GoldenSpiral",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_JuliaSet",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_KochSierpinski",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 9,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_MandelbrotSet",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_MengerSponge",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_Recursion",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        13
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_RecursiveTrees",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 10,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Geometric_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Grand_Pattern_Museum",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        40,
+        40
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 38,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 2,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 6,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 2,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 6,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 2,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 6,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_4",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 2,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 6,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_5",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 2,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 6,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_6",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 2,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 6,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_7",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 0,
+          "row": 2,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 0,
+          "row": 6,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ISO_Introduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 12,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Joints_ConstrainedMotion",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Lab_Path",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Architecture",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Competition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Grammar_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ML_Evolution",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Monte_Carlo_Room",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 4,
+          "row": 3,
+          "lk": "lab_room#accent_color",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Morphogenesis_Intro",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 3,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 1,
+          "row": 3,
+          "lk": "queer_morphology_specimen",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_6_Wall",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Blue",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Columns",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Functions",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Inside_Noise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_One",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex_HumanoidWalker",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 11,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 10,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 11,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Space_10",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Volume",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Voxel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_4",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_5",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_6",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "oscillation_7",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Oscillation_Animated_Cube",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Particles_Collision",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Particles_Emitters",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Particles_Forces",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Particles_LifetimeAndTypes",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Particles_SingleAndArrays",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Pattern_Generation_One",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Pattern_Generation_Seven",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Pattern_Generation_Six",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Pattern_Generation_Three",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Pattern_Generation_Two",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PearlDrop_Test",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 7,
+          "col": 10,
+          "row": 14,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 12,
+          "row": 18,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 16,
+          "row": 18,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Genetic_Evolution",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 9,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "PG_Genetic_Evolution_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "PG_Genetic_Evolution_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "PG_Genetic_Evolution_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "PG_Percolation_Network",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Percolation_Network_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Percolation_Network_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Percolation_Network_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSimulation_Vector_Fields",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PhysicsSim_Foundations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Physics_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Physics_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Physics_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Physics_4",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Physics_5",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Animatedcube",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 2,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 6,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Point_Context",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Lines",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        27
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 2,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 9,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Point_Line_Context",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Trace",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 12,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Point_Triangle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 9,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Point_Triangle_Context",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 2,
+          "col": 0,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 14,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Point_Zero_",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PostCrisis_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 8,
+          "col": 6,
+          "row": 6,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 4,
+          "row": 11,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 9,
+          "row": 11,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Fiver",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Ignorance",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        27
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Irregular",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Load",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        4
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Melencolia",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Portals",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        35
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Torus",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralAudio_Additive_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 10,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGenerationMarchingCubesInsideCave",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGenerationMarchingCubesVovelNoise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGenerationTesseractErrorTunnel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 10,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGenerationWfcDungeonGenerator",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 8,
+          "row": 11,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Voronoi_Diagrams",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 10,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "PromptDemo_Trans_Translation_Echo",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        24
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PromptDemo_Tweaked",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        28
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 11,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 8,
+          "row": 11,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 24,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_Lambda_Spectrum",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "crystal_formation",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 4,
+          "lk": "ordered_grid",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 0,
+          "row": 6,
+          "lk": "bifurcation_walkway",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 7,
+          "lk": "edge_particles",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 9,
+          "lk": "complexity_pattern",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 12,
+          "lk": "dissolving_form",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 15,
+          "lk": "chaos_particles",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_Phase_Chamber",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 4,
+          "row": 4,
+          "lk": "lab_room#accent_color",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_Sandbox",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 7,
+          "col": 2,
+          "row": 2,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 2,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "qfep_reactor",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 7,
+          "lk": "reactive_particles",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 7,
+          "lk": "reactive_particles",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 10,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 10,
+          "row": 10,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 12,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "QFEP_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 8,
+          "col": 2,
+          "row": 2,
+          "lk": "queer_morphology_specimen",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 3,
+          "row": 3,
+          "lk": "grab_sphere_F",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 7,
+          "row": 3,
+          "lk": "grab_sphere_E",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 3,
+          "row": 5,
+          "lk": "grab_sphere_lambda",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 5,
+          "lk": "queer_morphology_specimen",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 7,
+          "row": 5,
+          "lk": "grab_sphere_phi",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 6,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 9,
+          "lk": "queer_morphology_specimen",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 10,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 8,
+          "row": 10,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Randomness_10_PRINT_Algorithm",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Randomness_Examples_of_Randomness",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Cubes_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 1,
+          "row": 15,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Definition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        21
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 8,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 12,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian_HumanoidWalker",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 18,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 8,
+          "row": 14,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Mushrooms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Pheromone",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Plane",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Random_Bell_Curve",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Random_Over_Z",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Remove",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Rotate_Random_XYZ",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Rotate_Random_Y",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Space",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Space_Geometry",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        24
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Walk",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Cellular_Automata_1D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 11,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Reformed_Instruments",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 2,
+          "lk": "qfep_balance_workbench",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "RoundTrip_Random_Definition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        30
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 8,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 12,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "RoundTrip_Random_Definition_v2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        30
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 8,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 12,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_01_Shaping",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 14,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 7,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_02_Colors",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_03_Shapes",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_04_Matrices",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_05_Patterns",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_06_Random",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_07_Noise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_08_CellularNoise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_09_FBM",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_10_ReactionDiffusion",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_11_QueerRubber",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shader_12_PinkExtravaganza",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Shannon_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 4,
+          "row": 3,
+          "lk": "lab_room#accent_color",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Soft_Body_Deformation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Soft_Body_Deformation_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Soft_Body_Deformation_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Soft_Body_Deformation_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SpeculativeComputation_Paraconsistent_Engineering",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 5,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SwarmIntelligence_Boids_Algorithm",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 9,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SwarmIntelligence_PhysarumColony",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 8,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "TestComposed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        27,
+        13
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 7,
+          "row": 6,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 13,
+          "row": 6,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Test_Composer",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 4,
+          "row": 6,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 7,
+          "row": 9,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Test_Substrates",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 9,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Test_Substrates_Pearl",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 8,
+          "col": 3,
+          "row": 3,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 6,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 9,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Test_Substrates_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 9,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Trans_AxisDecomposition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Composition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Introduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 14,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Rotation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        40
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 17,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_RotationSpectacle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        54
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Rotation_2_",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        37
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 12,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Scale",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        21
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Translation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        24
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Translation_edit826",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        24
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Turing_Machine_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 4,
+          "row": 3,
+          "lk": "lab_room#accent_color",
+          "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_2D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        6,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_2D_Build",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        23
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_2D_Color",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_3D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Col",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        3
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Disco",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        18,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Game",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        22
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Pattern",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Row",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Single",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        4,
+        3
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 3,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 0,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorAddition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 7,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorBasics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorCrossProduct",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorDotProduct",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorFieldFlow",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorForces",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorMotion",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorOperations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 20,
+          "row": 3,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VectorProjectionReflection",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorSubtraction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_4",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_5",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vectors_6",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorThrowing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VectorTorque",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vector_Exhibition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 8,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Vector_Exhibition_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 8,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Build_A_Vector",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Catalyst_Chamber",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Field",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Forces_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Forces_Playground",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Operations_Playground",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Velocity",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "VitrineShowcase",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        27,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 7,
+          "row": 6,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VitrineTest",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 7,
+          "row": 6,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_3D_Wave_Propagation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_3D_Wave_Propagation_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 8,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_3D_Wave_Propagation_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 8,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_3D_Wave_Propagation_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 8,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_AirMusic",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_AirMusic_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_AirMusic_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_AirMusic_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_AudioLib",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Bernini",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Bernini_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Bernini_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Bernini_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Cables",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_ColoredLinesVRCorridor",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        33
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Colors",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Effect_Sound",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 9,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Effect_Sound_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 9,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Effect_Sound_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 9,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Effect_Sound_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 9,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Form_Slide",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Fourier_Form",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 7,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Intro_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 6,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_John_Cage",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_John_Cage_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_John_Cage_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_John_Cage_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Kusama",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Pendulum_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Sine_Space",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        28
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Sine_Space_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        28
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 11,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Sine_Space_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        28
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 0,
+          "row": 18,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Sine_Space_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        28
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 11,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Sky_Stairs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Sky_Stairs_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Sky_Stairs_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Wavefunctions_Sky_Stairs_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_SpaceDystopiaPreview",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Spherical_Harmonics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 3,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Synthesis_Lab_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_TrigWalkingPath",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_TrigWalkingPath_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_TrigWalkingPath_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_TrigWalkingPath_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 4,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 6,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Zone_ObservationChamber",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 1,
+          "col": 8,
+          "row": 1,
+          "lk": "edge_of_chaos_unlocked",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Zone_TemporalStorage",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 6,
+          "row": 5,
+          "lk": "complexity_pattern",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "_Example_Branch",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "_Example_Island",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "_Example_Linear",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    }
+  ],
+  "total_maps": 393
+}

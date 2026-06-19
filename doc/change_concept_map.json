@@ -1,0 +1,281 @@
+{
+  "title": "change",
+  "domain": "change",
+  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
+  "acts": [],
+  "concepts": [
+    "Bench",
+    "Intro",
+    "Reconciliation",
+    "Slope Surface",
+    "Velocity"
+  ],
+  "concept_meta": {
+    "Bench": {
+      "truth": "Bench",
+      "map": "Change_Bench",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "ftc_bridge"
+        ],
+        "medium": [
+          "tangent_slope_workbench",
+          "riemann_sum_workbench"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Intro": {
+      "truth": "Intro",
+      "map": "Change_Intro",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "derivative_pair",
+          "code_display",
+          "slope_tangent_demo"
+        ],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 4
+    },
+    "Reconciliation": {
+      "truth": "Reconciliation",
+      "map": "Change_Reconciliation",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "code_display",
+          "ftc_bridge"
+        ],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Slope Surface": {
+      "truth": "Slope Surface",
+      "map": "Change_Slope_Surface",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "partial_derivative_terrain"
+        ],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Velocity": {
+      "truth": "Velocity",
+      "map": "Change_Velocity",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "code_display",
+          "derivative_pair",
+          "player_trace",
+          "velocity_arrow"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 4
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0399,
+      0.0,
+      0.2146
+    ],
+    [
+      1.0,
+      0.0399,
+      0.0,
+      0.2436,
+      0.319
+    ],
+    [
+      1.0,
+      0.0,
+      0.2436,
+      0.0,
+      0.1388
+    ],
+    [
+      1.0,
+      0.2146,
+      0.319,
+      0.1388,
+      0.0
+    ]
+  ],
+  "groups": {
+    "Bench": [
+      {
+        "lookup": "tangent_slope_workbench",
+        "name": "Tangent Slope Workbench",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "ftc_bridge",
+        "name": "FTC Bridge",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "riemann_sum_workbench",
+        "name": "Riemann Sum Workbench",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Intro": [
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "derivative_pair",
+        "name": "Derivative Pair",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "code_display",
+        "name": "Code Display",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "slope_tangent_demo",
+        "name": "Slope Tangent Demo",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Reconciliation": [
+      {
+        "lookup": "code_display",
+        "name": "Code Display",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "ftc_bridge",
+        "name": "FTC Bridge",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Slope Surface": [
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      },
+      {
+        "lookup": "partial_derivative_terrain",
+        "name": "Partial Derivative Terrain",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ],
+    "Velocity": [
+      {
+        "lookup": "code_display",
+        "name": "Code Display",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "derivative_pair",
+        "name": "Derivative Pair",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "player_trace",
+        "name": "player_trace",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      },
+      {
+        "lookup": "velocity_arrow",
+        "name": "Velocity Arrow",
+        "fp": 1,
+        "recommended": true,
+        "tier": "small",
+        "has_image": true
+      }
+    ]
+  },
+  "total": 16,
+  "total_concepts": 5,
+  "recommended_total": 16,
+  "map_ready_total": 16
+}

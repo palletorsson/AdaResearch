@@ -1,0 +1,893 @@
+{
+  "title": "machinelearning",
+  "domain": "machinelearning",
+  "note": "Ontology derived from the sequence's maps (no beat score; each map is a concept).",
+  "acts": [],
+  "concepts": [
+    "Attention Mechanisms",
+    "Classification Algorithms",
+    "Clustering Algorithms",
+    "Convolutional Neural Networks CNNs",
+    "Dimensionality Reduction",
+    "Evolving Creatures",
+    "Evolving Flowers",
+    "Explainable AI XAI",
+    "Fine tuning",
+    "Generative Adversarial Networks GANs",
+    "LSTMs",
+    "Neural Networks",
+    "Random Walker Machine",
+    "Recommendation Systems",
+    "Recurrent Neural Networks RNNs",
+    "Transfer Learning",
+    "Transformers",
+    "Variational Autoencoders VAEs"
+  ],
+  "concept_meta": {
+    "Attention Mechanisms": {
+      "truth": "Attention Mechanisms",
+      "map": "MachineLearning_Attention_Mechanisms",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Classification Algorithms": {
+      "truth": "Classification Algorithms",
+      "map": "MachineLearning_Classification_Algorithms",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Clustering Algorithms": {
+      "truth": "Clustering Algorithms",
+      "map": "MachineLearning_Clustering_Algorithms",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Convolutional Neural Networks CNNs": {
+      "truth": "Convolutional Neural Networks CNNs",
+      "map": "MachineLearning_Convolutional_Neural_Networks_CNNs",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "convolutional_neural_networks"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Dimensionality Reduction": {
+      "truth": "Dimensionality Reduction",
+      "map": "MachineLearning_Dimensionality_Reduction",
+      "act": "Act I",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Evolving Creatures": {
+      "truth": "Evolving Creatures",
+      "map": "MachineLearning_Evolving_Creatures",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "evolved_creatures",
+          "gradient_descent_visualization"
+        ],
+        "applied": []
+      },
+      "count": 2
+    },
+    "Evolving Flowers": {
+      "truth": "Evolving Flowers",
+      "map": "MachineLearning_Evolving_Flowers",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "evolvingflowers"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Explainable AI XAI": {
+      "truth": "Explainable AI XAI",
+      "map": "MachineLearning_Explainable_AI_XAI",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "computer_vision_vr"
+        ],
+        "large": [
+          "explainable_ai_xai_vr",
+          "convolutional_neural_networks_cnns_vr"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Fine tuning": {
+      "truth": "Fine tuning",
+      "map": "MachineLearning_Fine_tuning",
+      "act": "Act II",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Generative Adversarial Networks GANs": {
+      "truth": "Generative Adversarial Networks GANs",
+      "map": "MachineLearning_Generative_Adversarial_Networks_GANs",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "LSTMs": {
+      "truth": "LSTMs",
+      "map": "MachineLearning_LSTMs",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "generative_adversarial_networks_gans_vr",
+          "lstms_vr",
+          "fine_tuning_vr"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Neural Networks": {
+      "truth": "Neural Networks",
+      "map": "MachineLearning_Neural_Networks",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "variational_autoencoders_vaes_vr"
+        ],
+        "large": [
+          "neural_networks_vr",
+          "transformers_vr"
+        ],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Random Walker Machine": {
+      "truth": "Random Walker Machine",
+      "map": "MachineLearning_Random_Walker_Machine",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "random_walker_machine"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Recommendation Systems": {
+      "truth": "Recommendation Systems",
+      "map": "MachineLearning_Recommendation_Systems",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Recurrent Neural Networks RNNs": {
+      "truth": "Recurrent Neural Networks RNNs",
+      "map": "MachineLearning_Recurrent_Neural_Networks_RNNs",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Transfer Learning": {
+      "truth": "Transfer Learning",
+      "map": "MachineLearning_Transfer_Learning",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Transformers": {
+      "truth": "Transformers",
+      "map": "MachineLearning_Transformers",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Variational Autoencoders VAEs": {
+      "truth": "Variational Autoencoders VAEs",
+      "map": "MachineLearning_Variational_Autoencoders_VAEs",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "env_one"
+        ],
+        "applied": []
+      },
+      "count": 1
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      0.4289,
+      0.374,
+      0.7907,
+      0.2167,
+      0.8393,
+      0.8529,
+      0.918,
+      0.3163,
+      0.1016,
+      0.8603,
+      0.6934,
+      0.3129,
+      0.3833,
+      0.3069,
+      0.3126,
+      0.389,
+      0.3847
+    ],
+    [
+      0.4289,
+      0.0,
+      0.4682,
+      0.8475,
+      0.2215,
+      0.8433,
+      0.8815,
+      0.9199,
+      0.4212,
+      0.4495,
+      0.9332,
+      0.8229,
+      0.488,
+      0.2421,
+      0.2645,
+      0.3505,
+      0.2651,
+      0.3494
+    ],
+    [
+      0.374,
+      0.4682,
+      0.0,
+      0.8317,
+      0.1779,
+      0.9239,
+      0.9426,
+      0.9918,
+      0.1675,
+      0.3013,
+      0.8625,
+      0.8099,
+      0.4223,
+      0.4178,
+      0.613,
+      0.4636,
+      0.3165,
+      0.3697
+    ],
+    [
+      0.7907,
+      0.8475,
+      0.8317,
+      0.0,
+      0.7279,
+      0.8093,
+      0.9256,
+      0.4905,
+      0.927,
+      0.8837,
+      0.8337,
+      0.8388,
+      0.7771,
+      0.8789,
+      0.8472,
+      0.8719,
+      0.7955,
+      0.9788
+    ],
+    [
+      0.2167,
+      0.2215,
+      0.1779,
+      0.7279,
+      0.0,
+      0.8107,
+      0.8025,
+      0.9151,
+      0.0,
+      0.3887,
+      0.8337,
+      0.6736,
+      0.4424,
+      0.4215,
+      0.3496,
+      0.3912,
+      0.2144,
+      0.2314
+    ],
+    [
+      0.8393,
+      0.8433,
+      0.9239,
+      0.8093,
+      0.8107,
+      0.0,
+      0.7796,
+      0.9389,
+      0.9151,
+      0.783,
+      0.8209,
+      0.7129,
+      0.9081,
+      0.8325,
+      0.8249,
+      0.8175,
+      0.8113,
+      0.888
+    ],
+    [
+      0.8529,
+      0.8815,
+      0.9426,
+      0.9256,
+      0.8025,
+      0.7796,
+      0.0,
+      0.9935,
+      0.9853,
+      0.9154,
+      0.9901,
+      0.9355,
+      0.8563,
+      0.9533,
+      0.9129,
+      0.8868,
+      0.9027,
+      0.8628
+    ],
+    [
+      0.918,
+      0.9199,
+      0.9918,
+      0.4905,
+      0.9151,
+      0.9389,
+      0.9935,
+      0.0,
+      0.9661,
+      0.9211,
+      0.7779,
+      0.832,
+      0.8792,
+      0.9825,
+      0.9403,
+      0.9641,
+      1.0,
+      0.9429
+    ],
+    [
+      0.3163,
+      0.4212,
+      0.1675,
+      0.927,
+      0.0,
+      0.9151,
+      0.9853,
+      0.9661,
+      0.0,
+      0.4583,
+      0.897,
+      0.7788,
+      0.3825,
+      0.4362,
+      0.3395,
+      0.3686,
+      0.3926,
+      0.3115
+    ],
+    [
+      0.1016,
+      0.4495,
+      0.3013,
+      0.8837,
+      0.3887,
+      0.783,
+      0.9154,
+      0.9211,
+      0.4583,
+      0.0,
+      0.7969,
+      0.8257,
+      0.6274,
+      0.6272,
+      0.4119,
+      0.387,
+      0.4733,
+      0.4144
+    ],
+    [
+      0.8603,
+      0.9332,
+      0.8625,
+      0.8337,
+      0.8337,
+      0.8209,
+      0.9901,
+      0.7779,
+      0.897,
+      0.7969,
+      0.0,
+      0.7064,
+      0.8939,
+      0.9522,
+      0.7728,
+      0.8583,
+      0.8322,
+      0.9808
+    ],
+    [
+      0.6934,
+      0.8229,
+      0.8099,
+      0.8388,
+      0.6736,
+      0.7129,
+      0.9355,
+      0.832,
+      0.7788,
+      0.8257,
+      0.7064,
+      0.0,
+      0.7482,
+      0.882,
+      0.7013,
+      0.8331,
+      0.8526,
+      0.7216
+    ],
+    [
+      0.3129,
+      0.488,
+      0.4223,
+      0.7771,
+      0.4424,
+      0.9081,
+      0.8563,
+      0.8792,
+      0.3825,
+      0.6274,
+      0.8939,
+      0.7482,
+      0.0,
+      0.5536,
+      0.4996,
+      0.4781,
+      0.5341,
+      0.5598
+    ],
+    [
+      0.3833,
+      0.2421,
+      0.4178,
+      0.8789,
+      0.4215,
+      0.8325,
+      0.9533,
+      0.9825,
+      0.4362,
+      0.6272,
+      0.9522,
+      0.882,
+      0.5536,
+      0.0,
+      0.3714,
+      0.3946,
+      0.5016,
+      0.4178
+    ],
+    [
+      0.3069,
+      0.2645,
+      0.613,
+      0.8472,
+      0.3496,
+      0.8249,
+      0.9129,
+      0.9403,
+      0.3395,
+      0.4119,
+      0.7728,
+      0.7013,
+      0.4996,
+      0.3714,
+      0.0,
+      0.3898,
+      0.4874,
+      0.4187
+    ],
+    [
+      0.3126,
+      0.3505,
+      0.4636,
+      0.8719,
+      0.3912,
+      0.8175,
+      0.8868,
+      0.9641,
+      0.3686,
+      0.387,
+      0.8583,
+      0.8331,
+      0.4781,
+      0.3946,
+      0.3898,
+      0.0,
+      0.4286,
+      0.4569
+    ],
+    [
+      0.389,
+      0.2651,
+      0.3165,
+      0.7955,
+      0.2144,
+      0.8113,
+      0.9027,
+      1.0,
+      0.3926,
+      0.4733,
+      0.8322,
+      0.8526,
+      0.5341,
+      0.5016,
+      0.4874,
+      0.4286,
+      0.0,
+      0.286
+    ],
+    [
+      0.3847,
+      0.3494,
+      0.3697,
+      0.9788,
+      0.2314,
+      0.888,
+      0.8628,
+      0.9429,
+      0.3115,
+      0.4144,
+      0.9808,
+      0.7216,
+      0.5598,
+      0.4178,
+      0.4187,
+      0.4569,
+      0.286,
+      0.0
+    ]
+  ],
+  "groups": {
+    "Attention Mechanisms": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Classification Algorithms": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Clustering Algorithms": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Convolutional Neural Networks CNNs": [
+      {
+        "lookup": "convolutional_neural_networks",
+        "name": "Convolutional Neural Networks (CNNs)",
+        "fp": 224,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Dimensionality Reduction": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Evolving Creatures": [
+      {
+        "lookup": "evolved_creatures",
+        "name": "Evolved Creatures (Karl Sims)",
+        "fp": 1600,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "gradient_descent_visualization",
+        "name": "Gradient Descent",
+        "fp": 64,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Evolving Flowers": [
+      {
+        "lookup": "evolvingflowers",
+        "name": "evolvingflowers",
+        "fp": 400,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Explainable AI XAI": [
+      {
+        "lookup": "explainable_ai_xai_vr",
+        "name": "ExplainableAIXAI_VR",
+        "fp": 42,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "convolutional_neural_networks_cnns_vr",
+        "name": "ConvolutionalNeuralNetworksCNNs_VR",
+        "fp": 150,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "computer_vision_vr",
+        "name": "ComputerVision_VR",
+        "fp": 8,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Fine tuning": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Generative Adversarial Networks GANs": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "LSTMs": [
+      {
+        "lookup": "generative_adversarial_networks_gans_vr",
+        "name": "GenerativeAdversarialNetworksGANs_VR",
+        "fp": 104,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "lstms_vr",
+        "name": "LSTMs_VR",
+        "fp": 121,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "fine_tuning_vr",
+        "name": "FineTuning_VR",
+        "fp": 9,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Neural Networks": [
+      {
+        "lookup": "neural_networks_vr",
+        "name": "NeuralNetworks_VR",
+        "fp": 184,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "transformers_vr",
+        "name": "Transformers_VR",
+        "fp": 99,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      },
+      {
+        "lookup": "variational_autoencoders_vaes_vr",
+        "name": "VariationalAutoencodersVAEs_VR",
+        "fp": 4,
+        "recommended": true,
+        "tier": "medium",
+        "has_image": true
+      }
+    ],
+    "Random Walker Machine": [
+      {
+        "lookup": "random_walker_machine",
+        "name": "Random Walker Machine",
+        "fp": 625,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Recommendation Systems": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Recurrent Neural Networks RNNs": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Transfer Learning": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Transformers": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ],
+    "Variational Autoencoders VAEs": [
+      {
+        "lookup": "env_one",
+        "name": "env_one",
+        "fp": 3422,
+        "recommended": true,
+        "tier": "large",
+        "has_image": true
+      }
+    ]
+  },
+  "total": 25,
+  "total_concepts": 18,
+  "recommended_total": 25,
+  "map_ready_total": 25
+}
