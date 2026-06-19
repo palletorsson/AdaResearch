@@ -106,9 +106,9 @@ func _build() -> void:
 		var seg := _cylinder_between(a, b, 0.015, _glow_mat(silhouette_color, 0.55))
 		_silhouette.add_child(seg)
 		_edges.append({"a": i, "b": (i + 1) % pts.size(), "node": seg})
-	# the vertices — small subtle aim points (brighten when drawn through)
+	# the vertices — minimal corner dots (brighten when drawn through)
 	for i in range(pts.size()):
-		var cp := _sphere(pts[i], hit_radius * 0.3, _glow_mat(silhouette_color, 0.7))
+		var cp := _sphere(pts[i], 0.015, _glow_mat(silhouette_color, 0.9))
 		add_child(cp)
 		_checkpoints.append({"pos": pts[i], "node": cp, "hit": false})
 	if show_label:
