@@ -23443,7 +23443,7 @@
     "silhouette_gate": {
       "name": "Silhouette Gate (draw to open)",
       "lookup_name": "silhouette_gate",
-      "description": "A ghost silhouette of a form (triangle, square, pentagon, circle). Take the drawing point and trace the form; pass through every vertex and the form dissolves as a sliding door opens behind it. Configurable: form, form_size, ring_points, ordered, door_tag.",
+      "description": "A ghost silhouette of a form. Take the drawing point and trace the form by passing through every vertex; complete it and the form dissolves as a sliding door opens. 2D forms (triangle, square/quad, pentagon, hexagon, circle) AND 3D forms — a cube is a green wireframe whose 8 corners must all be drawn through. Configurable: form, form_size, hit_radius, ordered, ring_points, rotation_offset_deg, door_tag.",
       "scene": "res://commons/artifacts/silhouette_gate/silhouette_gate.tscn",
       "category": "puzzle",
       "footprint": [

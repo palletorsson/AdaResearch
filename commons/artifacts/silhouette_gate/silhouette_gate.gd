@@ -78,21 +78,49 @@ func _ring(n: int) -> Array:
 	return pts
 
 
-func _form_points() -> Array:                    # the checkpoints the draw point must hit
-	return _ring(_n_sides())
-
-
-func _outline_points() -> Array:                 # the visual outline/fill — smooth for circle/sphere
+func _form_geometry() -> Dictionary:
+	# returns { points (checkpoints), outline? (visual verts if != checkpoints), edges [[i,j]], fill_tris [[a,b,c]] }
+	if form == "cube":
+		var s := form_size * 0.7
+		var c := Vector3(0.0, PLANE_Y, PLANE_Z)
+		var pts: Array = []
+		for sx in [-1.0, 1.0]:
+			for sy in [-1.0, 1.0]:
+				for sz in [-1.0, 1.0]:
+					pts.append(c + Vector3(sx, sy, sz) * s)
+		var edges: Array = []
+		var el := 2.0 * s                        # a cube edge joins corners that differ on exactly one axis
+		for i in range(8):
+			for j in range(i + 1, 8):
+				if absf(pts[i].distance_to(pts[j]) - el) < el * 0.1:
+					edges.append([i, j])
+		return {"points": pts, "edges": edges, "fill_tris": []}   # wireframe — minimal/abstract
+	# 2D forms: a polygon ring (with a smooth outline for circle/sphere)
+	var n := _n_sides()
+	var ring := _ring(n)
 	if form == "circle" or form == "sphere":
-		return _ring(max(40, ring_points))
-	return _ring(_n_sides())
+		var op := _ring(max(40, ring_points))
+		var oe: Array = []
+		var of: Array = []
+		for i in range(op.size()):
+			oe.append([i, (i + 1) % op.size()])
+		for i in range(1, op.size() - 1):
+			of.append([0, i, i + 1])
+		return {"points": ring, "outline": op, "edges": oe, "fill_tris": of}
+	var pe: Array = []
+	var pf: Array = []
+	for i in range(n):
+		pe.append([i, (i + 1) % n])
+	for i in range(1, n - 1):
+		pf.append([0, i, i + 1])
+	return {"points": ring, "edges": pe, "fill_tris": pf}
 
 
-func _filled_form(pts: Array, centroid: Vector3, mat: Material) -> MeshInstance3D:
+func _filled_tris(verts: Array, tris: Array, mat: Material) -> MeshInstance3D:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for i in range(pts.size()):
-		st.add_vertex(centroid); st.add_vertex(pts[i]); st.add_vertex(pts[(i + 1) % pts.size()])
+	for t in tris:
+		st.add_vertex(verts[t[0]]); st.add_vertex(verts[t[1]]); st.add_vertex(verts[t[2]])
 	var mi := MeshInstance3D.new()
 	mi.mesh = st.commit()
 	mi.material_override = mat
@@ -112,20 +140,20 @@ func _fill_mat(c: Color, alpha: float) -> StandardMaterial3D:
 
 
 func _build() -> void:
-	var pts := _form_points()
-	var outline := _outline_points()
-	var centroid := Vector3(0.0, PLANE_Y, PLANE_Z)
-	var poly := outline.size() == pts.size()     # polygons: edges map 1:1 to checkpoints for progress fill
-	# the silhouette — an abstract green form: a translucent filled face + a clean outline
+	var g := _form_geometry()
+	var pts: Array = g["points"]                  # the checkpoints the draw point must hit
+	var verts: Array = g.get("outline", pts)      # vertices the edges + fill index into
+	# the silhouette — an abstract green form: translucent fill (2D) or a clean wireframe (cube)
 	_silhouette = Node3D.new(); _silhouette.name = "Silhouette"; add_child(_silhouette)
-	_silhouette.add_child(_filled_form(outline, centroid, _fill_mat(silhouette_color, 0.16)))
-	for i in range(outline.size()):
-		var a: Vector3 = outline[i]
-		var b: Vector3 = outline[(i + 1) % outline.size()]
-		var seg := _cylinder_between(a, b, 0.015, _glow_mat(silhouette_color, 0.55))
+	var fill: Array = g.get("fill_tris", [])
+	if fill.size() > 0:
+		_silhouette.add_child(_filled_tris(verts, fill, _fill_mat(silhouette_color, 0.16)))
+	var edges_are_checkpoints := verts.size() == pts.size()
+	for e in g["edges"]:
+		var seg := _cylinder_between(verts[e[0]], verts[e[1]], 0.015, _glow_mat(silhouette_color, 0.55))
 		_silhouette.add_child(seg)
-		if poly:
-			_edges.append({"a": i, "b": (i + 1) % outline.size(), "node": seg})
+		if edges_are_checkpoints:
+			_edges.append({"a": e[0], "b": e[1], "node": seg})
 	# the vertices — minimal corner dots (brighten when drawn through)
 	for i in range(pts.size()):
 		var cp := _sphere(pts[i], 0.015, _glow_mat(silhouette_color, 0.9))
