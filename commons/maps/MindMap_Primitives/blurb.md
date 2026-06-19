@@ -1,0 +1,5 @@
+This map is not a room someone designed — it is a thought laid flat and made walkable. The primitives concept map, the 2D arrangement of how the shapes relate, has been projected down onto a floor: nearness on the diagram becomes nearness underfoot, and the order of the diagram becomes the order you walk.
+
+You spawn at `Point` — position without extension, the first mark — and the path opens outward through `Line / edge`, `Arrow / vector`, `Triangle`, `Plane / quad`, into the solid family: `Cube`, `Sphere`, `Cylinder`, `Capsule`, `Torus`, the `Platonic` polyhedra, the `Cone`, the `Prism`. Then the things that bend and assemble — `Helix`, `Arch`, `Curve`, `Text / glyph`, the boolean `SDF` assemblies — before the teleporter waits at `Other primitives`, the open drawer the taxonomy could not close.
+
+One representative artifact stands for each concept. The walk is the argument: that the primitives are not a list but a neighbourhood, and that you can feel the shape of the whole vocabulary by moving through it.

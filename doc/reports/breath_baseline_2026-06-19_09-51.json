@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-06-19T09:51",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "randomness": "COMPLETE (HEAD 8)",
+    "all_other_spine": "HEAD stage 6 vr_testing",
+    "mean_head": 6.0909,
+    "note": "VR-gated; cannot advance autonomously"
+  },
+  "heat_map_top_5": [
+    "primitive 70 (active, 2 commits)",
+    "pattern 65 (active)",
+    "capture 65 (active)",
+    "forces documentation regression 60 (follow-up)",
+    "release_gates 60 (follow-up, now PASS)"
+  ],
+  "garden_health": {
+    "voice_coverage_pct": 52,
+    "embodiment_rate_pct": 33,
+    "phantom_limbs": 830,
+    "total_artifacts": 2389,
+    "voiced": 1250,
+    "primitives_state": "SCATTERED 73/106 voiced"
+  },
+  "release_gates": {
+    "overall": "PASS",
+    "A_sequence_contract": "PASS",
+    "B_registry_integrity": "PASS",
+    "C_map_validation": "PASS (944A/146B/162C/0F)",
+    "D_lab_progression": "PASS"
+  }
+}

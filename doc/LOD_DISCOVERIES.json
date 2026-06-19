@@ -324,6 +324,36 @@
       "topic": "voicing",
       "insight": "HEAD-sum saturated at vr_testing across all 22 spine seqs; voicing 5 artifacts/breath is the only autonomous lever. Track absolute voiced count not rounded coverage %.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-06-14T07:11:04.314810+00:00",
+      "topic": "pipeline documentation regression",
+      "insight": "Adding maps to a sequence without blurb.md/intent.md silently regresses that sequence from stage 6 back to stage 2 (documentation). Pattern_Foundry and Reformed_Instruments (added 2026-06-13) dropped color and forces. Always write docs in the same commit that declares a map.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-06-15T07:09:34.604018+00:00",
+      "topic": "forces documentation regression",
+      "insight": "A new map shipped without blurb/intent drops the whole sequence head to stage 2. Void_Crossing fixed; forces 2->6.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-06-16T07:18:13.529145+00:00",
+      "topic": "forces documentation",
+      "insight": "Vectors_Act* maps are self-documenting: subtitles{} (intro+truth_<concept>+reflection, lifted from doc/vector_forces_tutorial_scripts.md) + map_info.description embed the full pedagogy, so doc-regression recovery needs no external research. Sky_Climb is the exception (empty desc/subtitles, force-pad ascent inferred from artifacts).",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-06-17T07:17:29.580007+00:00",
+      "topic": "release_gates",
+      "insight": "Gate A blocks only on duplicate/missing declared maps (not undeclared folders); Gate B blocks only on missing/unsupported scene_path. 48 missing_scene_path were delegate_to false positives - audit now treats delegation as a valid scene source. Gates 2/4->4/4.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-06-19T07:58:33.037903+00:00",
+      "topic": "mindmap maps",
+      "insight": "tools/mindmap_to_map.py emits commons/maps/MindMap_*/map_data.json with NO blurb/intent — same doc-regression family as Vectors_Act. Docs writable straight from doc/<domain>_concept_map.json concept order + map_info spawn/teleporter names. Maps are undeclared-by-design so they never show as pipeline doc% regression; detect via new map folders lacking blurb.",
+      "lod": 3
     }
   ]
 }

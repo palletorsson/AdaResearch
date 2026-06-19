@@ -1,0 +1,5 @@
+Every vector idea and every force the curriculum teaches, laid out not as a syllabus but as a single neighbourhood you can walk. This map projects the vectors-and-forces concept map — the 2D diagram of how 25 problems relate — onto a floor, so adjacency on the diagram becomes adjacency in space.
+
+You spawn at `Coordinate system`, the frame everything is measured against, and move through the vector grammar — `Vector basics`, `Magnitude`, `Unit vector`, `Addition`, `Subtraction`, `Scaling`, `Dot product`, `Projection / reflection`, `Cross product / torque` — the operations that turn arrows into a language. Then the language meets the world: `Vector field`, `Motion`, `Work`, `Friction`, `Projectile`, `Centripetal`, `Gravity / orbit`, `Spring`, `Pendulum`, `Momentum`, `Restitution`, `Lever`, `Wind`. The teleporter waits at `General force / pad` — the abstraction that contains all the rest.
+
+One representative artifact per concept. The walk runs from the coordinate frame to the general force, from "how we describe" to "what acts."
