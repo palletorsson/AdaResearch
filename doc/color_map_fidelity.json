@@ -1,0 +1,451 @@
+{
+  "domain": "color",
+  "title": "color",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "Color_Nails",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        13
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 5,
+          "col": 3,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 5,
+          "lk": "nail_color_controller",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 5,
+          "lk": "hand_model",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 5,
+          "lk": "hand_color_controller",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 6,
+          "lk": "science_screen",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 7,
+          "lk": "dark_side_prism",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 8,
+          "lk": "grab_stick_scanner",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 8,
+          "lk": "colorballs",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 0,
+          "row": 9,
+          "lk": "brick_wall_factory",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 9,
+          "lk": "colorballs",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Grid_Pallet",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        13
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 1,
+          "col": 0,
+          "row": 0,
+          "lk": "gridcolorizer",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 10,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 5,
+          "row": 6,
+          "lk": "spectrum_forest",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Color_Paint",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        17
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 5,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 6,
+          "lk": "ball_painting_demo",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 8,
+          "lk": "pattern_mill",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 14,
+          "lk": "albers_wall_gallery",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Pillar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 3,
+          "lk": "pillarcolorcollection",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 8,
+          "row": 3,
+          "lk": "loom_drum_persian_p6",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 5,
+          "lk": "visual_color_mixing",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 11,
+          "lk": "color_sets_overview",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 18,
+          "lk": "grab_rainbow_stick",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 18,
+          "lk": "grab_rainbow_stick",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 20,
+          "lk": "SpectrumVisualizer",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Rainbow",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        18
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 13,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 0,
+          "lk": "mario_cube",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 4,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 5,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 6,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 7,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 8,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 9,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 10,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 11,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 12,
+          "lk": "rainbow",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 17,
+          "lk": "pick_up_cube",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Color_Walls",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        31
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 5,
+          "col": 1,
+          "row": 0,
+          "lk": "color_space_navigator",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 7,
+          "row": 2,
+          "lk": "loom_bolt_memphis_p4g",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 3,
+          "lk": "color_constellation_office",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 5,
+          "lk": "gradient_interpolator",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 5,
+          "row": 7,
+          "lk": "rainbow_hallway",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    }
+  ],
+  "total_maps": 6
+}

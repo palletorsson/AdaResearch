@@ -1,0 +1,453 @@
+{
+  "domain": "postfoundationscrisis",
+  "title": "postfoundationscrisis",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "A room divided. The left half",
+      "order": 0,
+      "act": "Act I",
+      "truth": "A room divided. The left half: spacious, five columns wide. The right half: cramped, two columns, same population. The bias is architectural before it is mathematical. Walk through it. Feel the allocation.",
+      "count": 3,
+      "x_spread": 0.1679,
+      "tiers": {
+        "small": [
+          "bias_visualizer"
+        ],
+        "medium": [
+          "science_screen",
+          "bias_from_inside"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Every classifier has an outside.",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Every classifier has an outside.",
+      "count": 3,
+      "x_spread": -0.0999,
+      "tiers": {
+        "small": [
+          "godel_statement_plaque"
+        ],
+        "medium": [
+          "bias_from_inside",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "The Florensky sphere, wired into produ",
+      "order": 2,
+      "act": "Act II",
+      "truth": "The Florensky sphere, wired into production.",
+      "count": 4,
+      "x_spread": -0.3449,
+      "tiers": {
+        "small": [
+          "superposition_display",
+          "schrodinger_box"
+        ],
+        "medium": [
+          "florensky_sphere",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "There is no view from nowhere.",
+      "order": 3,
+      "act": "Act II",
+      "truth": "There is no view from nowhere.",
+      "count": 1,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "situated_readout"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "No one system is complete. A commons m",
+      "order": 4,
+      "act": "Act III",
+      "truth": "No one system is complete. A commons might be.",
+      "count": 1,
+      "x_spread": -0.2102,
+      "tiers": {
+        "small": [
+          "wiki_fragment"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Deleuze and Guattari proposed a struct",
+      "order": 5,
+      "act": "Act III",
+      "truth": "Deleuze and Guattari proposed a structure with no root, no trunk, no privileged path. The rhizome: any point connects to any other. Not a tree. Not a hierarchy. A cave system that grows the way thought should.",
+      "count": 1,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "rhizome_cave_demo"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "A laboratory. Benches at regulation he",
+      "order": 6,
+      "act": "Act IV",
+      "truth": "A laboratory. Benches at regulation height. Surfaces clean. Tools organized. The molecular designer sits at the center — a formal system made tangible, atoms snapping to valence rules, bonds obeying electron logic.",
+      "count": 1,
+      "x_spread": 0.3879,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "MolecularDesigner"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Knowing the limits of formalization, w",
+      "order": 7,
+      "act": "Act IV",
+      "truth": "Knowing the limits of formalization, what do we build?",
+      "count": 4,
+      "x_spread": -0.4187,
+      "tiers": {
+        "small": [
+          "qfep_formula_3d"
+        ],
+        "medium": [
+          "bias_from_inside",
+          "florensky_sphere",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.0,
+      0.766,
+      0.7631,
+      0.7619,
+      0.5952,
+      0.572,
+      0.5087
+    ],
+    [
+      0.0,
+      0.0,
+      0.579,
+      0.6103,
+      0.4913,
+      0.7102,
+      0.8473,
+      0.4286
+    ],
+    [
+      0.766,
+      0.579,
+      0.0,
+      0.4954,
+      0.2265,
+      0.8403,
+      0.806,
+      0.3856
+    ],
+    [
+      0.7631,
+      0.6103,
+      0.4954,
+      0.0,
+      0.41,
+      1.0,
+      0.939,
+      0.2985
+    ],
+    [
+      0.7619,
+      0.4913,
+      0.2265,
+      0.41,
+      0.0,
+      0.6202,
+      0.6121,
+      0.2468
+    ],
+    [
+      0.5952,
+      0.7102,
+      0.8403,
+      1.0,
+      0.6202,
+      0.0,
+      0.5511,
+      0.7172
+    ],
+    [
+      0.572,
+      0.8473,
+      0.806,
+      0.939,
+      0.6121,
+      0.5511,
+      0.0,
+      0.3961
+    ],
+    [
+      0.5087,
+      0.4286,
+      0.3856,
+      0.2985,
+      0.2468,
+      0.7172,
+      0.3961,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "A room divided. The left half",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "bias_visualizer",
+      "name": "Bias Visualizer",
+      "concept": "A room divided. The left half",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "bias_from_inside",
+      "name": "Bias From Inside",
+      "concept": "A room divided. The left half",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "bias_from_inside",
+      "name": "Bias From Inside",
+      "concept": "Every classifier has an outside.",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "godel_statement_plaque",
+      "name": "godel_statement_plaque",
+      "concept": "Every classifier has an outside.",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "Every classifier has an outside.",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "florensky_sphere",
+      "name": "florensky_sphere",
+      "concept": "The Florensky sphere, wired into produ",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "superposition_display",
+      "name": "Superposition Display",
+      "concept": "The Florensky sphere, wired into produ",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "schrodinger_box",
+      "name": "schrodinger_box",
+      "concept": "The Florensky sphere, wired into produ",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "The Florensky sphere, wired into produ",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "situated_readout",
+      "name": "Situated Readout",
+      "concept": "There is no view from nowhere.",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "wiki_fragment",
+      "name": "Wiki Fragment",
+      "concept": "No one system is complete. A commons m",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "rhizome_cave_demo",
+      "name": "rhizome_cave_demo",
+      "concept": "Deleuze and Guattari proposed a struct",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 26,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "MolecularDesigner",
+      "name": "Molecular Designer",
+      "concept": "A laboratory. Benches at regulation he",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 8,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "qfep_formula_3d",
+      "name": "qfep_formula_3d",
+      "concept": "Knowing the limits of formalization, w",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "bias_from_inside",
+      "name": "Bias From Inside",
+      "concept": "Knowing the limits of formalization, w",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "florensky_sphere",
+      "name": "florensky_sphere",
+      "concept": "Knowing the limits of formalization, w",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "tt",
+      "name": "Tutorial Text Display",
+      "concept": "Knowing the limits of formalization, w",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 18,
+  "total_concepts": 8
+}

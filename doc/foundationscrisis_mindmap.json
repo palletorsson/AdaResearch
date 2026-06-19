@@ -1,0 +1,583 @@
+{
+  "domain": "foundationscrisis",
+  "title": "foundationscrisis",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Five axioms. Four are obvious. The fif",
+      "order": 0,
+      "act": "Act I",
+      "truth": "Five axioms. Four are obvious. The fifth is not.",
+      "count": 4,
+      "x_spread": -0.5349,
+      "tiers": {
+        "small": [
+          "angle_sum_triangle",
+          "euclid_postulates_plaque"
+        ],
+        "medium": [
+          "science_screen",
+          "parallel_lines"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Euclid's fifth postulate held for two ",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Euclid's fifth postulate held for two millennia. Then Bolyai, Lobachevsky, and Riemann asked: what if parallel lines don't behave?",
+      "count": 5,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "hyperbolic_surface",
+          "elliptic_surface",
+          "curvature_slider",
+          "poincare_disk",
+          "riemann_sphere"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "A set collects things. The set of even",
+      "order": 2,
+      "act": "Act II",
+      "truth": "A set collects things. The set of even numbers. The set of red objects. Most sets don't contain themselves — the set of even numbers is not itself an even number.",
+      "count": 1,
+      "x_spread": 0.6706,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "russell_set_box"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "In 1931, Kurt Gödel fed mathematics to",
+      "order": 3,
+      "act": "Act II",
+      "truth": "In 1931, Kurt Gödel fed mathematics to itself.",
+      "count": 1,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "godel_statement_plaque"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Each step makes sense. North side, hei",
+      "order": 4,
+      "act": "Act III",
+      "truth": "Each step makes sense. North side, height one. East side, height two. South, three. West, four. Climb the perimeter clockwise and every transition feels valid — just stairs, just geometry, just one foot after the other.",
+      "count": 3,
+      "x_spread": 0.2978,
+      "tiers": {
+        "small": [
+          "escher_staircase",
+          "penrose_triangle",
+          "magritte_pipe"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Classical mathematics lets you prove a",
+      "order": 5,
+      "act": "Act III",
+      "truth": "Classical mathematics lets you prove a bridge exists by showing that its absence is absurd. You never build the bridge. You never cross it. You just know, somewhere, it must be.",
+      "count": 3,
+      "x_spread": -0.1266,
+      "tiers": {
+        "small": [
+          "excluded_middle_demo",
+          "constructive_proof",
+          "brouwer_choice_sequence"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Classical logic has a rule",
+      "order": 6,
+      "act": "Act IV",
+      "truth": "Classical logic has a rule: if a contradiction exists, everything follows. One false step and the entire system collapses into triviality. Pavel Florensky — mathematician, priest, executed by Stalin — rejected this.",
+      "count": 3,
+      "x_spread": 0.1804,
+      "tiers": {
+        "small": [
+          "schrodinger_box",
+          "superposition_display"
+        ],
+        "medium": [
+          "florensky_sphere"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Gödel's plaque. Russell's boxes. Esche",
+      "order": 7,
+      "act": "Act IV",
+      "truth": "Gödel's plaque. Russell's boxes. Escher's staircase. Florensky's sphere. Four wings of a single argument, radiating from a summit where the formula stands complete: QFE = F - λE(S) + φΔE(S,t).",
+      "count": 8,
+      "x_spread": 0.2085,
+      "tiers": {
+        "small": [
+          "godel_statement_plaque",
+          "qfep_formula_3d",
+          "lambda_slider",
+          "phi_slider",
+          "escher_staircase"
+        ],
+        "medium": [
+          "russell_set_box",
+          "florensky_sphere"
+        ],
+        "large": [
+          "bifurcation_diagram"
+        ],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.0,
+      0.8018,
+      0.5349,
+      0.5601,
+      0.6163,
+      0.9656,
+      0.866
+    ],
+    [
+      0.0,
+      0.0,
+      0.7216,
+      1.0,
+      0.8505,
+      0.6088,
+      0.9593,
+      0.63
+    ],
+    [
+      0.8018,
+      0.7216,
+      0.0,
+      0.051,
+      0.445,
+      0.8259,
+      0.6077,
+      0.3895
+    ],
+    [
+      0.5349,
+      1.0,
+      0.051,
+      0.0,
+      0.5527,
+      0.7354,
+      0.7789,
+      0.4215
+    ],
+    [
+      0.5601,
+      0.8505,
+      0.445,
+      0.5527,
+      0.0,
+      0.6501,
+      0.8677,
+      0.1523
+    ],
+    [
+      0.6163,
+      0.6088,
+      0.8259,
+      0.7354,
+      0.6501,
+      0.0,
+      0.4777,
+      0.7199
+    ],
+    [
+      0.9656,
+      0.9593,
+      0.6077,
+      0.7789,
+      0.8677,
+      0.4777,
+      0.0,
+      0.4622
+    ],
+    [
+      0.866,
+      0.63,
+      0.3895,
+      0.4215,
+      0.1523,
+      0.7199,
+      0.4622,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Five axioms. Four are obvious. The fif",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "parallel_lines",
+      "name": "parallel_lines",
+      "concept": "Five axioms. Four are obvious. The fif",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "angle_sum_triangle",
+      "name": "angle_sum_triangle",
+      "concept": "Five axioms. Four are obvious. The fif",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "euclid_postulates_plaque",
+      "name": "euclid_postulates_plaque",
+      "concept": "Five axioms. Four are obvious. The fif",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "hyperbolic_surface",
+      "name": "Hyperbolic Surface",
+      "concept": "Euclid's fifth postulate held for two ",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "elliptic_surface",
+      "name": "Elliptic Surface",
+      "concept": "Euclid's fifth postulate held for two ",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "curvature_slider",
+      "name": "Curvature Slider",
+      "concept": "Euclid's fifth postulate held for two ",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "poincare_disk",
+      "name": "poincare_disk",
+      "concept": "Euclid's fifth postulate held for two ",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "riemann_sphere",
+      "name": "Riemann Sphere",
+      "concept": "Euclid's fifth postulate held for two ",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "russell_set_box",
+      "name": "russell_set_box",
+      "concept": "A set collects things. The set of even",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "godel_statement_plaque",
+      "name": "godel_statement_plaque",
+      "concept": "In 1931, Kurt Gödel fed mathematics to",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "escher_staircase",
+      "name": "escher_staircase",
+      "concept": "Each step makes sense. North side, hei",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "penrose_triangle",
+      "name": "penrose_triangle",
+      "concept": "Each step makes sense. North side, hei",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "magritte_pipe",
+      "name": "magritte_pipe",
+      "concept": "Each step makes sense. North side, hei",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "excluded_middle_demo",
+      "name": "excluded_middle_demo",
+      "concept": "Classical mathematics lets you prove a",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "constructive_proof",
+      "name": "constructive_proof",
+      "concept": "Classical mathematics lets you prove a",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "brouwer_choice_sequence",
+      "name": "brouwer_choice_sequence",
+      "concept": "Classical mathematics lets you prove a",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "florensky_sphere",
+      "name": "florensky_sphere",
+      "concept": "Classical logic has a rule",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "schrodinger_box",
+      "name": "schrodinger_box",
+      "concept": "Classical logic has a rule",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "superposition_display",
+      "name": "Superposition Display",
+      "concept": "Classical logic has a rule",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "godel_statement_plaque",
+      "name": "godel_statement_plaque",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "russell_set_box",
+      "name": "russell_set_box",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "qfep_formula_3d",
+      "name": "qfep_formula_3d",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "lambda_slider",
+      "name": "lambda_slider",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "phi_slider",
+      "name": "phi_slider",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "escher_staircase",
+      "name": "escher_staircase",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "bifurcation_diagram",
+      "name": "bifurcation_diagram",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 25,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "florensky_sphere",
+      "name": "florensky_sphere",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 28,
+  "total_concepts": 8
+}

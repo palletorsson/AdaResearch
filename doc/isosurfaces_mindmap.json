@@ -1,0 +1,717 @@
+{
+  "domain": "isosurfaces",
+  "title": "isosurfaces",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "A 3D noise field fills invisible space",
+      "order": 0,
+      "act": "Act I",
+      "truth": "A 3D noise field fills invisible space with density values. Marching cubes walks the grid cube by cube — 256 possible configurations, one lookup table — and extracts geometry wherever density crosses a threshold.",
+      "count": 2,
+      "x_spread": -0.6949,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "science_screen"
+        ],
+        "large": [
+          "voxel_noise_demo"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Two hundred and fifty",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Two hundred and fifty-six configurations collapse to fifteen. Every possible corner arrangement — vertex inside or outside — reduces through symmetry to a handful of cases. The lookup table is the entire algorithm.",
+      "count": 2,
+      "x_spread": -0.4663,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "fifteen_cases_demo",
+          "mc_cave"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Seven sculptures stand in a row. Each ",
+      "order": 2,
+      "act": "Act I",
+      "truth": "Seven sculptures stand in a row. Each one computed from the same algorithm, different parameters — sphere, torus, strange attractors made solid.",
+      "count": 3,
+      "x_spread": -0.1643,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "mc_shapes_gallery",
+          "gyroid_demo",
+          "mc_torus_sculpture"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "A cube has eight corners. Each corner ",
+      "order": 3,
+      "act": "Act II",
+      "truth": "A cube has eight corners. Each corner is inside or outside. Eight binary states: 256 configurations. For each configuration, a lookup table says where the surface cuts through.",
+      "count": 2,
+      "x_spread": -0.3924,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "mc_torus_sculpture",
+          "GyroidDemo"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Two modes of summoning form from nothi",
+      "order": 4,
+      "act": "Act II",
+      "truth": "Two modes of summoning form from nothing. The fountain rises — marching cubes extract a vertical shape from a scalar field, geometry crystallizing where density crosses threshold.",
+      "count": 2,
+      "x_spread": -0.0973,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "mc_sculpt_vr"
+        ],
+        "large": [
+          "fountain_demo"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Two terrains. Same algorithm, differen",
+      "order": 5,
+      "act": "Act II",
+      "truth": "Two terrains. Same algorithm, different noise. The flat landscape rolls gently — marching cubes tracing where density crosses zero, converting a scalar field into walkable ground.",
+      "count": 3,
+      "x_spread": -0.7966,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "mc_flat_landscape",
+          "mc_overhang_landscape",
+          "mc_terrain_demo"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Marching cubes at landscape scale. A t",
+      "order": 6,
+      "act": "Act III",
+      "truth": "Marching cubes at landscape scale. A terrain field — noise-driven, continuous — gets sliced at a threshold. Where the function crosses zero, triangles appear. Ground forms.",
+      "count": 1,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "marchingcubes_portal_landscape"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Two views of the same algorithm. Outsi",
+      "order": 7,
+      "act": "Act III",
+      "truth": "Two views of the same algorithm. Outside: terrain stretches under open sky, stone arches rise from the ground like thresholds to nowhere — portals carved by mathematics, not erosion. Inside: the cave closes around you.",
+      "count": 3,
+      "x_spread": -0.9109,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "mc_portal_landscape",
+          "mc_inside_cave",
+          "queer_marching_cave"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Noise becomes architecture. A 3D scala",
+      "order": 8,
+      "act": "Act III",
+      "truth": "Noise becomes architecture. A 3D scalar field — Perlin, simplex, whatever turbulence you choose — fills a volume with densities. Marching cubes walks through, voxel by voxel, checking each corner against a threshold.",
+      "count": 2,
+      "x_spread": -0.5445,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "marchingcave",
+          "marchingcubes_cave"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Noise evolves. The isosurface chases i",
+      "order": 9,
+      "act": "Act IV",
+      "truth": "Noise evolves. The isosurface chases it.",
+      "count": 2,
+      "x_spread": -0.412,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "mc_base",
+          "animated_noise_explorer"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Each metaball is a point radiating inf",
+      "order": 10,
+      "act": "Act IV",
+      "truth": "Each metaball is a point radiating influence. A distance field — strongest at center, fading outward. One sphere alone is trivial. But place two near each other and their fields sum.",
+      "count": 4,
+      "x_spread": 0.1017,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "raymarched_metaballs",
+          "nakama_metaballs"
+        ],
+        "large": [
+          "metaball_world",
+          "metaballs"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "A sphere is where distance from center",
+      "order": 11,
+      "act": "Act IV",
+      "truth": "A sphere is where distance from center equals radius. Not a mesh. Not vertices. A condition. Implicit surfaces define shape as equation — every point in space returns a signed distance. Negative means inside.",
+      "count": 1,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "implicit_surface_modeling"
+        ],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.385,
+      0.6875,
+      0.4107,
+      0.5467,
+      0.7784,
+      0.1239,
+      0.7058,
+      0.2842,
+      0.1521,
+      0.6454,
+      0.8188
+    ],
+    [
+      0.385,
+      0.0,
+      0.721,
+      0.5571,
+      0.9279,
+      0.9652,
+      0.5041,
+      0.6741,
+      0.6193,
+      0.638,
+      0.8353,
+      0.9704
+    ],
+    [
+      0.6875,
+      0.721,
+      0.0,
+      0.4316,
+      0.5059,
+      0.7666,
+      0.7488,
+      0.6141,
+      0.7949,
+      0.2403,
+      0.6958,
+      0.9131
+    ],
+    [
+      0.4107,
+      0.5571,
+      0.4316,
+      0.0,
+      0.5919,
+      0.7931,
+      0.1517,
+      0.9722,
+      0.3272,
+      0.1486,
+      0.6236,
+      0.5441
+    ],
+    [
+      0.5467,
+      0.9279,
+      0.5059,
+      0.5919,
+      0.0,
+      0.7566,
+      0.6706,
+      0.8501,
+      0.8318,
+      0.5732,
+      0.5093,
+      0.7679
+    ],
+    [
+      0.7784,
+      0.9652,
+      0.7666,
+      0.7931,
+      0.7566,
+      0.0,
+      0.163,
+      0.3959,
+      0.5463,
+      0.6984,
+      0.8866,
+      0.9596
+    ],
+    [
+      0.1239,
+      0.5041,
+      0.7488,
+      0.1517,
+      0.6706,
+      0.163,
+      0.0,
+      0.0,
+      0.2208,
+      0.5563,
+      0.6141,
+      1.0
+    ],
+    [
+      0.7058,
+      0.6741,
+      0.6141,
+      0.9722,
+      0.8501,
+      0.3959,
+      0.0,
+      0.0,
+      0.5154,
+      0.6858,
+      0.8857,
+      0.9109
+    ],
+    [
+      0.2842,
+      0.6193,
+      0.7949,
+      0.3272,
+      0.8318,
+      0.5463,
+      0.2208,
+      0.5154,
+      0.0,
+      0.5476,
+      0.8266,
+      0.7653
+    ],
+    [
+      0.1521,
+      0.638,
+      0.2403,
+      0.1486,
+      0.5732,
+      0.6984,
+      0.5563,
+      0.6858,
+      0.5476,
+      0.0,
+      0.6901,
+      0.9683
+    ],
+    [
+      0.6454,
+      0.8353,
+      0.6958,
+      0.6236,
+      0.5093,
+      0.8866,
+      0.6141,
+      0.8857,
+      0.8266,
+      0.6901,
+      0.0,
+      0.5124
+    ],
+    [
+      0.8188,
+      0.9704,
+      0.9131,
+      0.5441,
+      0.7679,
+      0.9596,
+      1.0,
+      0.9109,
+      0.7653,
+      0.9683,
+      0.5124,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "A 3D noise field fills invisible space",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "voxel_noise_demo",
+      "name": "voxel_noise_demo",
+      "concept": "A 3D noise field fills invisible space",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 31,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fifteen_cases_demo",
+      "name": "fifteen_cases_demo",
+      "concept": "Two hundred and fifty",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 11,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_cave",
+      "name": "mc_cave",
+      "concept": "Two hundred and fifty",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 2300,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_shapes_gallery",
+      "name": "mc_shapes_gallery",
+      "concept": "Seven sculptures stand in a row. Each ",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 50,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "gyroid_demo",
+      "name": "gyroid_demo",
+      "concept": "Seven sculptures stand in a row. Each ",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 1681,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "mc_torus_sculpture",
+      "name": "mc_torus_sculpture",
+      "concept": "Seven sculptures stand in a row. Each ",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false
+    },
+    {
+      "lookup": "mc_torus_sculpture",
+      "name": "mc_torus_sculpture",
+      "concept": "A cube has eight corners. Each corner ",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "GyroidDemo",
+      "name": "GyroidDemo",
+      "concept": "A cube has eight corners. Each corner ",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 1681,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "fountain_demo",
+      "name": "fountain_demo",
+      "concept": "Two modes of summoning form from nothi",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 50,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_sculpt_vr",
+      "name": "mc_sculpt_vr",
+      "concept": "Two modes of summoning form from nothi",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_flat_landscape",
+      "name": "mc_flat_landscape",
+      "concept": "Two terrains. Same algorithm, differen",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 1800,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_overhang_landscape",
+      "name": "mc_overhang_landscape",
+      "concept": "Two terrains. Same algorithm, differen",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_terrain_demo",
+      "name": "mc_terrain_demo",
+      "concept": "Two terrains. Same algorithm, differen",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 11,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "marchingcubes_portal_landscape",
+      "name": "marchingcubes_portal_landscape",
+      "concept": "Marching cubes at landscape scale. A t",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_portal_landscape",
+      "name": "mc_portal_landscape",
+      "concept": "Two views of the same algorithm. Outsi",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_inside_cave",
+      "name": "mc_inside_cave",
+      "concept": "Two views of the same algorithm. Outsi",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "queer_marching_cave",
+      "name": "queer_marching_cave",
+      "concept": "Two views of the same algorithm. Outsi",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 961,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "marchingcave",
+      "name": "marchingcave",
+      "concept": "Noise becomes architecture. A 3D scala",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 350,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "marchingcubes_cave",
+      "name": "marchingcubes_cave",
+      "concept": "Noise becomes architecture. A 3D scala",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 2300,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mc_base",
+      "name": "mc_base",
+      "concept": "Noise evolves. The isosurface chases i",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 350,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "animated_noise_explorer",
+      "name": "animated_noise_explorer",
+      "concept": "Noise evolves. The isosurface chases i",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 16,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "metaball_world",
+      "name": "metaball_world",
+      "concept": "Each metaball is a point radiating inf",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 441,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "metaballs",
+      "name": "Metaballs",
+      "concept": "Each metaball is a point radiating inf",
+      "concept_order": 10,
+      "tier": "large",
+      "fp": 144,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "raymarched_metaballs",
+      "name": "raymarched_metaballs",
+      "concept": "Each metaball is a point radiating inf",
+      "concept_order": 10,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "nakama_metaballs",
+      "name": "nakama_metaballs",
+      "concept": "Each metaball is a point radiating inf",
+      "concept_order": 10,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "implicit_surface_modeling",
+      "name": "Implicit Surface Modeling",
+      "concept": "A sphere is where distance from center",
+      "concept_order": 11,
+      "tier": "large",
+      "fp": 144,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 27,
+  "total_concepts": 12
+}

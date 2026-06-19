@@ -1,0 +1,959 @@
+{
+  "domain": "softbodies",
+  "title": "softbodies",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "Chamber_SoftBodies",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        7
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 9,
+          "col": 8,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 9,
+          "col": 1,
+          "row": 2,
+          "lk": "catalyst_target",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 2,
+          "lk": "catalyst_target",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 7,
+          "row": 2,
+          "lk": "catalyst_target",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 9,
+          "row": 2,
+          "lk": "catalyst_target",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 5,
+          "row": 3,
+          "lk": "proximity_spawner#type",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 3,
+          "lk": "turing_pattern_generator",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 6,
+          "lk": "reaction_diffusion",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Affect_Theory_Visualization",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 3,
+          "row": 5,
+          "lk": "radiolaria",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Carusell",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 3,
+          "col": 0,
+          "row": 3,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 5,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 8,
+          "row": 6,
+          "lk": "revolving_joy_ride",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 7,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 5,
+          "row": 9,
+          "lk": "cloth_straps",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 5,
+          "row": 11,
+          "lk": "cloth_straps",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 10,
+          "row": 12,
+          "lk": "soft_mushroom",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Cloth_Physics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        6,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 3,
+          "lk": "softstopscene",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 2,
+          "col": 10,
+          "row": 1,
+          "lk": "breathing_room",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 3,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 5,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 7,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 10,
+          "lk": "flagdancer",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Obsticals_Part2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        20,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 1,
+          "lk": "softbody_gallery_part2",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 3,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 4,
+          "lk": "grab_long_stick",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 5,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 6,
+          "lk": "grab_long_stick",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 7,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 5,
+          "col": 1,
+          "row": 1,
+          "lk": "rounded_softbody_test",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 1,
+          "lk": "branching_growth_algorithm",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 1,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Soft_Body_Deformation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 9,
+          "col": 7,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 3,
+          "lk": "jelly_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 6,
+          "lk": "softmill",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gl01_classic_bulb",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gl02_long_bottle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gl03_wide_bowl",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gl04_lopsided_vase",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gl05_collapsed_sag",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gm01_bottle_in_cylinder_mould",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gm02_vase_in_tapered_mould",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gm03_box_in_cube_mould",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_gm04_pressed_onto_sphere",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb01_cloth_drape_corners",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb02_cloth_drape_top_row",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb03_cloth_flag_sideways",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb04_cloth_tablecloth",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb05_jelly_box_bounce",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb06_jelly_grid_settle",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb07_jelly_grid_tall_stiff",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb08_jelly_grid_floppy",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb_ca01_conway_cloth",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb_ca02_life_without_death_cloth",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb_ls01_plant_skeleton",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb_ls02_plant_wind_collapse",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb_noise01_jelly_crystal",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb_rd01_coral_cloth",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBody_sb_rd02_stripes_flag",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 33,
+          "col": 6,
+          "row": 6,
+          "lk": "gallery_marker_soft-body",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Topology_Entropy_Morphogenesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 3,
+          "row": 4,
+          "lk": "entropy_morphogenesis",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    }
+  ],
+  "total_maps": 34
+}

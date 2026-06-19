@@ -1,0 +1,118 @@
+{
+  "domain": "boolean_surfaces",
+  "title": "boolean_surfaces",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "Boolean_Architecture_Cavity",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 5,
+          "row": 5,
+          "lk": "csg_architecture_cavity",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Boolean_Compose_Workbench",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 5,
+          "lk": "csg_compose_workbench",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Boolean_Difference",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "csg_difference_demo",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Boolean_Intersection",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 1,
+          "col": 5,
+          "row": 5,
+          "lk": "csg_intersection_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Boolean_Union",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 5,
+          "row": 5,
+          "lk": "csg_union_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    }
+  ],
+  "total_maps": 5
+}

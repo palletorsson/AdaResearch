@@ -58,10 +58,22 @@ def build(domain):
     actIdx = {a: i for i, a in enumerate(acts)}
     c2act = {c["order"]: actIdx[c["act"]] for c in mm["concepts"]}
 
+    # when the sequence has a beat score, only score ITS OWN maps — otherwise a sequence whose
+    # artifacts are shared (generic primitives/transforms) matches unrelated maps and scores them.
+    seq_maps = None
+    bp = os.path.join(MAPS, "sequences", domain + ".beats.json")
+    if os.path.exists(bp):
+        seq_maps = set()
+        for b in json.load(open(bp, encoding="utf-8")).get("beats", []):
+            for m in b.get("maps") or []:
+                seq_maps.add(m)
+
     maps = []
     for p in glob.glob(os.path.join(MAPS, "*", "map_data.json")):
         name = os.path.basename(os.path.dirname(p))
         if name.startswith("MindMap_"):
+            continue
+        if seq_maps is not None and name not in seq_maps:
             continue
         try:
             d = json.load(open(p, encoding="utf-8"))

@@ -1,0 +1,385 @@
+{
+  "domain": "isosurfaces",
+  "title": "isosurfaces",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "ISO_AnimatedNoise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 9,
+          "col": 3,
+          "row": 3,
+          "lk": "mc_base",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 9,
+          "col": 10,
+          "row": 3,
+          "lk": "animated_noise_explorer",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_CaveGeneration",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 5,
+          "row": 6,
+          "lk": "marchingcave",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 1,
+          "row": 10,
+          "lk": "marchingcubes_cave",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_Caves",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 3,
+          "lk": "mc_portal_landscape",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 3,
+          "lk": "mc_inside_cave",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 6,
+          "lk": "queer_marching_cave",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_FlatTerrain",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 5,
+          "col": 3,
+          "row": 3,
+          "lk": "mc_flat_landscape",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 10,
+          "row": 3,
+          "lk": "mc_overhang_landscape",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 6,
+          "row": 6,
+          "lk": "mc_terrain_demo",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_ImplicitModeling",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 11,
+          "col": 5,
+          "row": 8,
+          "lk": "implicit_surface_modeling",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_Introduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 12,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 3,
+          "lk": "voxel_noise_demo",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_LookupTable",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 1,
+          "col": 3,
+          "row": 3,
+          "lk": "fifteen_cases_demo",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 1,
+          "col": 10,
+          "row": 3,
+          "lk": "mc_cave",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_Metaballs",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 10,
+          "col": 8,
+          "row": 2,
+          "lk": "metaball_world",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 4,
+          "row": 4,
+          "lk": "metaballs",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 4,
+          "row": 7,
+          "lk": "raymarched_metaballs",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 10,
+          "col": 7,
+          "row": 9,
+          "lk": "nakama_metaballs",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ISO_PortalLandscape",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 1,
+          "row": 1,
+          "lk": "marchingcubes_portal_landscape",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_Sculpting",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 3,
+          "lk": "fountain_demo",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 3,
+          "lk": "mc_sculpt_vr",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "ISO_ShapesGallery",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 3,
+          "lk": "mc_shapes_gallery",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 6,
+          "row": 6,
+          "lk": "gyroid_demo",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 8,
+          "lk": "mc_torus_sculpture",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ISO_TorusGyroid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 4,
+          "lk": "mc_torus_sculpture",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 11,
+          "row": 10,
+          "lk": "GyroidDemo",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    }
+  ],
+  "total_maps": 12
+}

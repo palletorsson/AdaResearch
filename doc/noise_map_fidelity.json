@@ -1,0 +1,338 @@
+{
+  "domain": "noise",
+  "title": "noise",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "Lab_Path",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 2,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_6_Wall",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 5,
+          "row": 5,
+          "lk": "shader_noise_space",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Columns",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 5,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 5,
+          "row": 6,
+          "lk": "MeltingBerniniScene",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Inside_Noise",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 5,
+          "row": 6,
+          "lk": "noisesphere",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_One",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 5,
+          "lk": "noisetorus",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "noiselayers",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Perlin_Simplex",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 7,
+          "col": 2,
+          "row": 3,
+          "lk": "simplex_noise",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 7,
+          "row": 3,
+          "lk": "perlin_noise",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 6,
+          "lk": "noise_terrain",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 10,
+          "lk": "perlin_noise_terrain",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 12,
+          "lk": "configurable_portal#dest_map",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Space_10",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        15
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 8,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 6,
+          "lk": "noise_space",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Noise_Voxel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 3,
+          "col": 1,
+          "row": 1,
+          "lk": "perlin_terrain_sculptor",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 11,
+          "row": 1,
+          "lk": "science_screen",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 1,
+          "row": 2,
+          "lk": "voxelnoise",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 5,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Random_Noise_Types",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 0,
+          "col": 4,
+          "row": 0,
+          "lk": "randompoint",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 3,
+          "lk": "randompoints",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 3,
+          "lk": "WhiteNoiseGallery",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 3,
+          "lk": "NoiseColors3D",
+          "ai": 0,
+          "t": "l"
+        }
+      ]
+    }
+  ],
+  "total_maps": 9
+}

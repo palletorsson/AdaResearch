@@ -1,0 +1,597 @@
+{
+  "domain": "noise",
+  "title": "noise",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "White noise screams chaos",
+      "order": 0,
+      "act": "Act I",
+      "truth": "White noise screams chaos — every frequency, every sample independent, pure static. Blue noise whispers structure — random but refusing to clump, maintaining distance. Between them: the spectrum of coherent randomness.",
+      "count": 4,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "randompoint",
+          "randompoints"
+        ],
+        "medium": [],
+        "large": [
+          "WhiteNoiseGallery",
+          "NoiseColors3D"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Noise extruded vertically. Sample the ",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Noise extruded vertically. Sample the 2D function, lift the result into height. Mountains rise from mathematics, valleys fall from continuous variation.",
+      "count": 2,
+      "x_spread": 0.0115,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [],
+        "large": [
+          "MeltingBerniniScene"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Before Perlin, noise was static",
+      "order": 2,
+      "act": "Act I",
+      "truth": "Before Perlin, noise was static — random values with no memory, no structure. Then came coherent noise: smooth, continuous, organic. Sample adjacent points and get adjacent values.",
+      "count": 3,
+      "x_spread": 0.1697,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [],
+        "large": [
+          "noisetorus",
+          "noiselayers"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Three",
+      "order": 3,
+      "act": "Act II",
+      "truth": "Three-dimensional noise carved into blocks. Where the function exceeds threshold: solid. Where it falls below: void. Caves, overhangs, floating islands — topologies impossible with heightmaps alone.",
+      "count": 4,
+      "x_spread": 0.0115,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [
+          "perlin_terrain_sculptor",
+          "science_screen"
+        ],
+        "large": [
+          "voxelnoise"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Six octaves layered. Low frequency for",
+      "order": 4,
+      "act": "Act II",
+      "truth": "Six octaves layered. Low frequency for large features, high frequency for fine detail. Each octave adds texture at a different scale.",
+      "count": 2,
+      "x_spread": 0.2726,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [],
+        "large": [
+          "shader_noise_space"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Noise controlling noise. The output of",
+      "order": 5,
+      "act": "Act III",
+      "truth": "Noise controlling noise. The output of one function becomes the input coordinate of another. Warped, distorted, folded space. What was smooth becomes turbulent. What was regular becomes organic.",
+      "count": 2,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [],
+        "large": [
+          "noisesphere"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Expand the canvas. Ten dimensions of p",
+      "order": 6,
+      "act": "Act III",
+      "truth": "Expand the canvas. Ten dimensions of parameters: position, time, octaves, persistence, lacunarity, seed. Each dimension adds variation, adds control, adds possibility.",
+      "count": 2,
+      "x_spread": 0.1713,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [],
+        "large": [
+          "noise_space"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Perlin noise",
+      "order": 7,
+      "act": "Act IV",
+      "truth": "Perlin noise: the original coherent gradient noise, 1983. Simplex noise: Ken Perlin's improved version, 2001. Compare them side by side. Perlin has axis-aligned artifacts; Simplex is cleaner in higher dimensions.",
+      "count": 6,
+      "x_spread": -0.0315,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [
+          "perlin_noise_terrain",
+          "configurable_portal#dest_map"
+        ],
+        "large": [
+          "simplex_noise",
+          "perlin_noise",
+          "noise_terrain"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "The corridor back. Every sequence ends",
+      "order": 8,
+      "act": "Act IV",
+      "truth": "The corridor back. Every sequence ends here — nine maps of noise, and now the return. A dark sphere pulses in purple light, slow rotation, breathing emission. Not a lesson. A threshold.",
+      "count": 1,
+      "x_spread": 0.0921,
+      "tiers": {
+        "small": [
+          "dark_sphere"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.5868,
+      0.48,
+      0.7258,
+      0.7826,
+      1.0,
+      0.8687,
+      0.8656,
+      0.8041
+    ],
+    [
+      0.5868,
+      0.0,
+      0.4155,
+      0.3487,
+      0.679,
+      0.5753,
+      0.712,
+      0.7066,
+      0.9601
+    ],
+    [
+      0.48,
+      0.4155,
+      0.0,
+      0.6037,
+      0.0261,
+      0.3103,
+      0.3395,
+      0.8641,
+      0.8579
+    ],
+    [
+      0.7258,
+      0.3487,
+      0.6037,
+      0.0,
+      0.5806,
+      0.7143,
+      0.6359,
+      0.4908,
+      0.6052
+    ],
+    [
+      0.7826,
+      0.679,
+      0.0261,
+      0.5806,
+      0.0,
+      0.51,
+      0.0,
+      0.6237,
+      0.626
+    ],
+    [
+      1.0,
+      0.5753,
+      0.3103,
+      0.7143,
+      0.51,
+      0.0,
+      0.6974,
+      0.8971,
+      0.712
+    ],
+    [
+      0.8687,
+      0.712,
+      0.3395,
+      0.6359,
+      0.0,
+      0.6974,
+      0.0,
+      0.3986,
+      0.6475
+    ],
+    [
+      0.8656,
+      0.7066,
+      0.8641,
+      0.4908,
+      0.6237,
+      0.8971,
+      0.3986,
+      0.0,
+      0.563
+    ],
+    [
+      0.8041,
+      0.9601,
+      0.8579,
+      0.6052,
+      0.626,
+      0.712,
+      0.6475,
+      0.563,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "randompoint",
+      "name": "randompoint",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "randompoints",
+      "name": "randompoints",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "WhiteNoiseGallery",
+      "name": "WhiteNoiseGallery",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 400,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "NoiseColors3D",
+      "name": "NoiseColors3D",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 90,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Noise extruded vertically. Sample the ",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "MeltingBerniniScene",
+      "name": "Melting Bernini Columns",
+      "concept": "Noise extruded vertically. Sample the ",
+      "concept_order": 1,
+      "tier": "large",
+      "fp": 12,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "noisetorus",
+      "name": "noisetorus",
+      "concept": "Before Perlin, noise was static",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 25,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "noiselayers",
+      "name": "noiselayers",
+      "concept": "Before Perlin, noise was static",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 44000,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Before Perlin, noise was static",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "perlin_terrain_sculptor",
+      "name": "Perlin Terrain Sculptor",
+      "concept": "Three",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "Three",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "voxelnoise",
+      "name": "voxelnoise",
+      "concept": "Three",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 1024,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Three",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "shader_noise_space",
+      "name": "shader_noise_space",
+      "concept": "Six octaves layered. Low frequency for",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 532,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Six octaves layered. Low frequency for",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Noise controlling noise. The output of",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "noisesphere",
+      "name": "noisesphere",
+      "concept": "Noise controlling noise. The output of",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 960,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Expand the canvas. Ten dimensions of p",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "noise_space",
+      "name": "Noise Space Explorer",
+      "concept": "Expand the canvas. Ten dimensions of p",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 100,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "simplex_noise",
+      "name": "simplex_noise",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 100,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "perlin_noise",
+      "name": "perlin_noise",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 100,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "noise_terrain",
+      "name": "noise_terrain",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "large",
+      "fp": 10000,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "perlin_noise_terrain",
+      "name": "perlin_noise_terrain",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "configurable_portal#dest_map",
+      "name": "configurable_portal#dest_map",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": false,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "The corridor back. Every sequence ends",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 26,
+  "total_concepts": 9
+}

@@ -1,0 +1,341 @@
+{
+  "domain": "foundationscrisis",
+  "title": "foundationscrisis",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "Brouwer_Intuitionism",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 5,
+          "col": 2,
+          "row": 4,
+          "lk": "excluded_middle_demo",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 9,
+          "row": 4,
+          "lk": "constructive_proof",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 5,
+          "row": 7,
+          "lk": "brouwer_choice_sequence",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Crisis_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        17,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 3,
+          "lk": "godel_statement_plaque",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 12,
+          "row": 3,
+          "lk": "russell_set_box",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 8,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 11,
+          "lk": "lambda_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 11,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 13,
+          "lk": "escher_staircase",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 13,
+          "lk": "bifurcation_diagram",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 12,
+          "row": 13,
+          "lk": "florensky_sphere",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Escher_Impossible",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 7,
+          "col": 0,
+          "row": 4,
+          "lk": "escher_staircase",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 7,
+          "lk": "penrose_triangle",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 10,
+          "lk": "magritte_pipe",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Euclid_Parallel",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        15
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 0,
+          "col": 9,
+          "row": 4,
+          "lk": "science_screen",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 5,
+          "lk": "parallel_lines",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 7,
+          "row": 5,
+          "lk": "angle_sum_triangle",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 7,
+          "lk": "euclid_postulates_plaque",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Florensky_Paraconsistent",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        12
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "florensky_sphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 7,
+          "lk": "schrodinger_box",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 9,
+          "row": 7,
+          "lk": "superposition_display",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Godel_Incompleteness",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 9,
+          "lk": "godel_statement_plaque",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "NonEuclidean_Spaces",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 1,
+          "col": 4,
+          "row": 4,
+          "lk": "hyperbolic_surface",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 10,
+          "row": 4,
+          "lk": "elliptic_surface",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 7,
+          "row": 6,
+          "lk": "curvature_slider",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 8,
+          "lk": "poincare_disk",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 11,
+          "row": 8,
+          "lk": "riemann_sphere",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Russell_Paradox",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 5,
+          "row": 5,
+          "lk": "russell_set_box",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    }
+  ],
+  "total_maps": 8
+}

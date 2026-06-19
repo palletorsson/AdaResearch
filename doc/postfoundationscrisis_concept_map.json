@@ -1,0 +1,400 @@
+{
+  "title": "postfoundationscrisis",
+  "domain": "postfoundationscrisis",
+  "note": "Ontology derived from the beat score by tools/build_spine_ontology.py (concepts = beats, artifacts = their maps').",
+  "acts": [],
+  "concepts": [
+    "A room divided. The left half",
+    "Every classifier has an outside.",
+    "The Florensky sphere, wired into produ",
+    "There is no view from nowhere.",
+    "No one system is complete. A commons m",
+    "Deleuze and Guattari proposed a struct",
+    "A laboratory. Benches at regulation he",
+    "Knowing the limits of formalization, w"
+  ],
+  "concept_meta": {
+    "A room divided. The left half": {
+      "truth": "A room divided. The left half: spacious, five columns wide. The right half: cramped, two columns, same population. The bias is architectural before it is mathematical. Walk through it. Feel the allocation.",
+      "role": "INTRODUCE",
+      "id": "Z1",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "bias_visualizer"
+        ],
+        "medium": [
+          "science_screen",
+          "bias_from_inside"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 3
+    },
+    "Every classifier has an outside.": {
+      "truth": "Every classifier has an outside.",
+      "role": "DEMONSTRATE",
+      "id": "Z2",
+      "act": "Act I",
+      "tiers": {
+        "small": [
+          "godel_statement_plaque"
+        ],
+        "medium": [
+          "bias_from_inside",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 3
+    },
+    "The Florensky sphere, wired into produ": {
+      "truth": "The Florensky sphere, wired into production.",
+      "role": "DEMONSTRATE",
+      "id": "Z3",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "superposition_display",
+          "schrodinger_box"
+        ],
+        "medium": [
+          "florensky_sphere",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 4
+    },
+    "There is no view from nowhere.": {
+      "truth": "There is no view from nowhere.",
+      "role": "DEMONSTRATE",
+      "id": "Z4",
+      "act": "Act II",
+      "tiers": {
+        "small": [
+          "situated_readout"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "No one system is complete. A commons m": {
+      "truth": "No one system is complete. A commons might be.",
+      "role": "DEMONSTRATE",
+      "id": "Z5",
+      "act": "Act III",
+      "tiers": {
+        "small": [
+          "wiki_fragment"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Deleuze and Guattari proposed a struct": {
+      "truth": "Deleuze and Guattari proposed a structure with no root, no trunk, no privileged path. The rhizome: any point connects to any other. Not a tree. Not a hierarchy. A cave system that grows the way thought should.",
+      "role": "DEMONSTRATE",
+      "id": "Z6",
+      "act": "Act III",
+      "tiers": {
+        "small": [],
+        "medium": [],
+        "large": [
+          "rhizome_cave_demo"
+        ],
+        "applied": []
+      },
+      "count": 1
+    },
+    "A laboratory. Benches at regulation he": {
+      "truth": "A laboratory. Benches at regulation height. Surfaces clean. Tools organized. The molecular designer sits at the center — a formal system made tangible, atoms snapping to valence rules, bonds obeying electron logic.",
+      "role": "SYNTHESIZE",
+      "id": "Z7",
+      "act": "Act IV",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "MolecularDesigner"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 1
+    },
+    "Knowing the limits of formalization, w": {
+      "truth": "Knowing the limits of formalization, what do we build?",
+      "role": "SYNTHESIZE",
+      "id": "Z8",
+      "act": "Act IV",
+      "tiers": {
+        "small": [
+          "qfep_formula_3d"
+        ],
+        "medium": [
+          "bias_from_inside",
+          "florensky_sphere",
+          "tt"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 4
+    }
+  },
+  "concept_distance": [
+    [
+      0.0,
+      0.0,
+      0.766,
+      0.7631,
+      0.7619,
+      0.5952,
+      0.572,
+      0.5087
+    ],
+    [
+      0.0,
+      0.0,
+      0.579,
+      0.6103,
+      0.4913,
+      0.7102,
+      0.8473,
+      0.4286
+    ],
+    [
+      0.766,
+      0.579,
+      0.0,
+      0.4954,
+      0.2265,
+      0.8403,
+      0.806,
+      0.3856
+    ],
+    [
+      0.7631,
+      0.6103,
+      0.4954,
+      0.0,
+      0.41,
+      1.0,
+      0.939,
+      0.2985
+    ],
+    [
+      0.7619,
+      0.4913,
+      0.2265,
+      0.41,
+      0.0,
+      0.6202,
+      0.6121,
+      0.2468
+    ],
+    [
+      0.5952,
+      0.7102,
+      0.8403,
+      1.0,
+      0.6202,
+      0.0,
+      0.5511,
+      0.7172
+    ],
+    [
+      0.572,
+      0.8473,
+      0.806,
+      0.939,
+      0.6121,
+      0.5511,
+      0.0,
+      0.3961
+    ],
+    [
+      0.5087,
+      0.4286,
+      0.3856,
+      0.2985,
+      0.2468,
+      0.7172,
+      0.3961,
+      0.0
+    ]
+  ],
+  "groups": {
+    "A room divided. The left half": [
+      {
+        "lookup": "science_screen",
+        "name": "Science Screen",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "bias_visualizer",
+        "name": "Bias Visualizer",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "bias_from_inside",
+        "name": "Bias From Inside",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Every classifier has an outside.": [
+      {
+        "lookup": "bias_from_inside",
+        "name": "Bias From Inside",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "godel_statement_plaque",
+        "name": "godel_statement_plaque",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tt",
+        "name": "Tutorial Text Display",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "The Florensky sphere, wired into produ": [
+      {
+        "lookup": "florensky_sphere",
+        "name": "florensky_sphere",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "superposition_display",
+        "name": "Superposition Display",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "schrodinger_box",
+        "name": "schrodinger_box",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tt",
+        "name": "Tutorial Text Display",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "There is no view from nowhere.": [
+      {
+        "lookup": "situated_readout",
+        "name": "Situated Readout",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "No one system is complete. A commons m": [
+      {
+        "lookup": "wiki_fragment",
+        "name": "Wiki Fragment",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Deleuze and Guattari proposed a struct": [
+      {
+        "lookup": "rhizome_cave_demo",
+        "name": "rhizome_cave_demo",
+        "tier": "large",
+        "fp": 26,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "A laboratory. Benches at regulation he": [
+      {
+        "lookup": "MolecularDesigner",
+        "name": "Molecular Designer",
+        "tier": "medium",
+        "fp": 8,
+        "has_image": true,
+        "recommended": true
+      }
+    ],
+    "Knowing the limits of formalization, w": [
+      {
+        "lookup": "qfep_formula_3d",
+        "name": "qfep_formula_3d",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "bias_from_inside",
+        "name": "Bias From Inside",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "florensky_sphere",
+        "name": "florensky_sphere",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      },
+      {
+        "lookup": "tt",
+        "name": "Tutorial Text Display",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": true
+      }
+    ]
+  },
+  "total": 18,
+  "total_concepts": 8,
+  "recommended_total": 18,
+  "map_ready_total": 18
+}

@@ -1,0 +1,190 @@
+{
+  "domain": "boolean_surfaces",
+  "title": "boolean_surfaces",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "Union",
+      "order": 0,
+      "act": "Act I",
+      "truth": "Union: every cell that belongs to either shape belongs to the result. Two squares overlap; the boundary between them disappears. What was 'one and the other' becomes 'one'.",
+      "count": 1,
+      "x_spread": -0.6852,
+      "tiers": {
+        "small": [
+          "csg_union_demo"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Intersection",
+      "order": 1,
+      "act": "Act I",
+      "truth": "Intersection: a cell belongs to the result only if it belongs to BOTH inputs. Two volumes meet; everything outside their shared region vanishes.",
+      "count": 1,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "csg_intersection_demo"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Difference",
+      "order": 2,
+      "act": "Act II",
+      "truth": "Difference: subtract the second volume from the first. Where they met, a cavity opens. The first shape keeps everything except the region it shared with the second.",
+      "count": 1,
+      "x_spread": -0.0096,
+      "tiers": {
+        "small": [
+          "csg_difference_demo"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "AND, OR, NOT",
+      "order": 3,
+      "act": "Act III",
+      "truth": "AND, OR, NOT — stack them. Boolean operations compose. A union of two intersections. A difference between two unions. Every complex shape is a sentence in this grammar.",
+      "count": 1,
+      "x_spread": 0.4527,
+      "tiers": {
+        "small": [
+          "csg_compose_workbench"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Every room is a difference operation",
+      "order": 4,
+      "act": "Act IV",
+      "truth": "Every room is a difference operation: a solid mass minus the volume of a room. Every window: glass minus a rectangle. Every doorway: wall minus a vertical opening.",
+      "count": 1,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "csg_architecture_cavity"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.0,
+      0.6025,
+      0.272,
+      0.6852
+    ],
+    [
+      0.0,
+      0.0,
+      0.3615,
+      0.9437,
+      1.0
+    ],
+    [
+      0.6025,
+      0.3615,
+      0.0,
+      0.6745,
+      0.3711
+    ],
+    [
+      0.272,
+      0.9437,
+      0.6745,
+      0.0,
+      0.491
+    ],
+    [
+      0.6852,
+      1.0,
+      0.3711,
+      0.491,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "csg_union_demo",
+      "name": "CSG Union Demo",
+      "concept": "Union",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "csg_intersection_demo",
+      "name": "CSG Intersection Demo",
+      "concept": "Intersection",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "csg_difference_demo",
+      "name": "CSG Difference Demo",
+      "concept": "Difference",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "csg_compose_workbench",
+      "name": "CSG Compose Workbench",
+      "concept": "AND, OR, NOT",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "csg_architecture_cavity",
+      "name": "CSG Architecture Cavity",
+      "concept": "Every room is a difference operation",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 5,
+  "total_concepts": 5
+}

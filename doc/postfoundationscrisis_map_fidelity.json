@@ -1,0 +1,317 @@
+{
+  "domain": "postfoundationscrisis",
+  "title": "postfoundationscrisis",
+  "acts": [
+    "Act I",
+    "Act II",
+    "Act III",
+    "Act IV"
+  ],
+  "maps": [
+    {
+      "name": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 4,
+          "row": 3,
+          "lk": "MolecularDesigner",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        9
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 0,
+          "col": 7,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 4,
+          "lk": "bias_visualizer",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 7,
+          "row": 7,
+          "lk": "bias_from_inside",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "CriticalAlgorithms_Applied_Ethics",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 2,
+          "lk": "bias_from_inside",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 5,
+          "lk": "godel_statement_plaque",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "PostCrisis_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 6,
+          "lk": "qfep_formula_3d",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 2,
+          "row": 9,
+          "lk": "bias_from_inside",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 10,
+          "row": 9,
+          "lk": "florensky_sphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 11,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 9,
+          "row": 11,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SpeculativeComputation_Collective_Knowledge",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 4,
+          "col": 5,
+          "row": 2,
+          "lk": "wiki_fragment",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 1,
+          "row": 5,
+          "lk": "wiki_fragment",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 5,
+          "lk": "wiki_fragment",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 8,
+          "lk": "wiki_fragment",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SpeculativeComputation_Paraconsistent_Engineering",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 7,
+          "col": 5,
+          "row": 2,
+          "lk": "florensky_sphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 5,
+          "lk": "superposition_display",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 7,
+          "row": 5,
+          "lk": "schrodinger_box",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SpeculativeComputation_Rhizome_Network",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 2,
+          "row": 5,
+          "lk": "rhizome_cave_demo",
+          "ai": 2,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "SpeculativeComputation_Situated_Computation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 3,
+          "col": 2,
+          "row": 2,
+          "lk": "situated_readout",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 7,
+          "row": 2,
+          "lk": "situated_readout",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 7,
+          "lk": "situated_readout",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 7,
+          "row": 7,
+          "lk": "situated_readout",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    }
+  ],
+  "total_maps": 8
+}

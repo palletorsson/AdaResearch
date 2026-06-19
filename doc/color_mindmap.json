@@ -1,0 +1,603 @@
+{
+  "domain": "color",
+  "title": "color",
+  "note": "Artifact-level mind-map: every artifact placed heuristically from concept + tier + reading order. y = concept_order (timeline); x morphs from a single column (order) to concept clusters (x_spread).",
+  "level": "artifact",
+  "heuristic": true,
+  "concepts": [
+    {
+      "key": "A salon for digital fingers. The nail ",
+      "order": 0,
+      "act": "Act I",
+      "truth": "A salon for digital fingers. The nail color controller offers precise hue selection while color balls scatter like polish bottles on a shelf. Choose a color, apply it to the hand model, watch pigment become identity.",
+      "count": 9,
+      "x_spread": 0.2293,
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "nail_color_controller",
+          "hand_model",
+          "hand_color_controller",
+          "dark_side_prism",
+          "grab_stick_scanner",
+          "brick_wall_factory"
+        ],
+        "medium": [
+          "science_screen",
+          "colorballs"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "The grid becomes a canvas. Each cell a",
+      "order": 1,
+      "act": "Act I",
+      "truth": "The grid becomes a canvas. Each cell awaits its color assignment, a pixel in a larger pattern you construct. The gridcolorizer transforms the floor into a palette - systematic, addressable, yours to paint.",
+      "count": 4,
+      "x_spread": -0.1313,
+      "tiers": {
+        "small": [
+          "gridcolorizer",
+          "dark_sphere"
+        ],
+        "medium": [
+          "science_screen",
+          "spectrum_forest"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Walk through light itself. Rainbow emi",
+      "order": 2,
+      "act": "Act II",
+      "truth": "Walk through light itself. Rainbow emitters line the corridor, cycling through the spectrum in slow waves. Red fades to orange fades to yellow - the continuous gradient made temporal.",
+      "count": 4,
+      "x_spread": -1.0,
+      "tiers": {
+        "small": [
+          "mario_cube",
+          "dark_sphere",
+          "pick_up_cube"
+        ],
+        "medium": [],
+        "large": [
+          "rainbow"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "Pillars of color rise along the runway",
+      "order": 3,
+      "act": "Act III",
+      "truth": "Pillars of color rise along the runway, each a collection point for chromatic data. Grab the color sticks, watch the flashlight demo reveal how light creates color from darkness.",
+      "count": 7,
+      "x_spread": 0.1662,
+      "tiers": {
+        "small": [
+          "pillarcolorcollection",
+          "dark_sphere",
+          "SpectrumVisualizer"
+        ],
+        "medium": [
+          "loom_drum_persian_p6",
+          "visual_color_mixing",
+          "color_sets_overview",
+          "grab_rainbow_stick"
+        ],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "Paint meets physics. The ball painting",
+      "order": 4,
+      "act": "Act III",
+      "truth": "Paint meets physics. The ball painting demo turns spheres into canvases, color into gesture. Throw paint, watch it splash, see how color accumulates on curved surfaces.",
+      "count": 4,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "albers_wall_gallery"
+        ],
+        "medium": [
+          "pattern_mill"
+        ],
+        "large": [
+          "ball_painting_demo"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "The hallway dissolves into rainbow. Co",
+      "order": 5,
+      "act": "Act IV",
+      "truth": "The hallway dissolves into rainbow. Color transitions seamlessly from hue to hue, boundary to boundary, without the discrete steps of individual emitters.",
+      "count": 6,
+      "x_spread": -0.8896,
+      "tiers": {
+        "small": [
+          "color_constellation_office",
+          "dark_sphere"
+        ],
+        "medium": [
+          "color_space_navigator",
+          "loom_bolt_memphis_p4g",
+          "gradient_interpolator"
+        ],
+        "large": [
+          "rainbow_hallway"
+        ],
+        "applied": []
+      }
+    }
+  ],
+  "concept_distance": [
+    [
+      0.0,
+      0.6453,
+      0.8363,
+      0.8562,
+      0.607,
+      0.9821
+    ],
+    [
+      0.6453,
+      0.0,
+      0.7682,
+      0.7468,
+      0.8995,
+      0.7035
+    ],
+    [
+      0.8363,
+      0.7682,
+      0.0,
+      0.7886,
+      1.0,
+      0.0
+    ],
+    [
+      0.8562,
+      0.7468,
+      0.7886,
+      0.0,
+      0.6224,
+      0.6791
+    ],
+    [
+      0.607,
+      0.8995,
+      1.0,
+      0.6224,
+      0.0,
+      0.8896
+    ],
+    [
+      0.9821,
+      0.7035,
+      0.0,
+      0.6791,
+      0.8896,
+      0.0
+    ]
+  ],
+  "artifacts": [
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "nail_color_controller",
+      "name": "nail_color_controller",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "hand_model",
+      "name": "hand_model",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "hand_color_controller",
+      "name": "hand_color_controller",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_side_prism",
+      "name": "dark_side_prism",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_stick_scanner",
+      "name": "grab_stick_scannerk",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "colorballs",
+      "name": "colorballs",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "brick_wall_factory",
+      "name": "brick_wall_factory",
+      "concept": "A salon for digital fingers. The nail ",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "gridcolorizer",
+      "name": "gridcolorizer",
+      "concept": "The grid becomes a canvas. Each cell a",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "science_screen",
+      "name": "Science Screen",
+      "concept": "The grid becomes a canvas. Each cell a",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "The grid becomes a canvas. Each cell a",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "spectrum_forest",
+      "name": "spectrum_forest",
+      "concept": "The grid becomes a canvas. Each cell a",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "mario_cube",
+      "name": "Mario Cube",
+      "concept": "Walk through light itself. Rainbow emi",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Walk through light itself. Rainbow emi",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "rainbow",
+      "name": "rainbow",
+      "concept": "Walk through light itself. Rainbow emi",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 50,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pick_up_cube",
+      "name": "Pick Up Cube",
+      "concept": "Walk through light itself. Rainbow emi",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pillarcolorcollection",
+      "name": "pillarcolorcollection",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "loom_drum_persian_p6",
+      "name": "Loom: Persian p6 (rotary drum)",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": false,
+      "recommended": true
+    },
+    {
+      "lookup": "visual_color_mixing",
+      "name": "visual_color_mixing",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "color_sets_overview",
+      "name": "Color Sets Overview",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "grab_rainbow_stick",
+      "name": "grab_rainbow_stick",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "SpectrumVisualizer",
+      "name": "SpectrumVisualizer",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Paint meets physics. The ball painting",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "ball_painting_demo",
+      "name": "ball_painting_demo",
+      "concept": "Paint meets physics. The ball painting",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 20,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "pattern_mill",
+      "name": "Pattern Mill",
+      "concept": "Paint meets physics. The ball painting",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "albers_wall_gallery",
+      "name": "albers_wall_gallery",
+      "concept": "Paint meets physics. The ball painting",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "color_space_navigator",
+      "name": "Color Space Navigator",
+      "concept": "The hallway dissolves into rainbow. Co",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "loom_bolt_memphis_p4g",
+      "name": "Loom: Memphis p4g (wall bolt)",
+      "concept": "The hallway dissolves into rainbow. Co",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": false,
+      "recommended": true
+    },
+    {
+      "lookup": "color_constellation_office",
+      "name": "color_constellation_office",
+      "concept": "The hallway dissolves into rainbow. Co",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "gradient_interpolator",
+      "name": "Gradient Interpolator",
+      "concept": "The hallway dissolves into rainbow. Co",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "rainbow_hallway",
+      "name": "rainbow_hallway",
+      "concept": "The hallway dissolves into rainbow. Co",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 13,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "The hallway dissolves into rainbow. Co",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": true
+    }
+  ],
+  "total_artifacts": 34,
+  "total_concepts": 6
+}
