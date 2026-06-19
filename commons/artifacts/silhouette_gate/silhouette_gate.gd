@@ -15,8 +15,9 @@ class_name SilhouetteGate
 @export var hit_radius: float = 0.16           # how close the draw point must pass to a vertex
 @export var ordered: bool = false              # true = hit vertices in sequence; false = any order
 @export var ring_points: int = 8               # vertex count for circle / sphere
-@export var silhouette_color: Color = Color(0.55, 0.85, 1.0)
-@export var hit_color: Color = Color(0.30, 1.0, 0.45)
+@export var silhouette_color: Color = Color(0.30, 0.95, 0.5)   # the abstract green form
+@export var hit_color: Color = Color(0.70, 1.0, 0.8)           # brighter green where it has been drawn
+@export var show_label: bool = true
 @export var open_door: bool = true             # spawn + open a built-in SlidingDoor on completion
 @export var door_tag: String = ""              # also trigger a tagged node via TagSystem ("open")
 
@@ -70,27 +71,54 @@ func _form_points() -> Array:
 	return pts
 
 
+func _filled_form(pts: Array, centroid: Vector3, mat: Material) -> MeshInstance3D:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in range(pts.size()):
+		st.add_vertex(centroid); st.add_vertex(pts[i]); st.add_vertex(pts[(i + 1) % pts.size()])
+	var mi := MeshInstance3D.new()
+	mi.mesh = st.commit()
+	mi.material_override = mat
+	return mi
+
+
+func _fill_mat(c: Color, alpha: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	m.albedo_color = Color(c.r, c.g, c.b, alpha)
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = 0.4
+	return m
+
+
 func _build() -> void:
-	add_child(_box(Vector3(0, 0.05, 0), Vector3(0.5, 0.1, 0.5), _steel_mat(Color(0.30, 0.32, 0.38))))
-	add_child(_billboard_label("draw the %s" % form, Vector3(0, PLANE_Y + form_size + 0.35, 0), 22, silhouette_color.lerp(Color.WHITE, 0.3)))
 	var pts := _form_points()
-	# the silhouette — a faint ghost outline of the form (closed loop)
+	var centroid := Vector3(0.0, PLANE_Y, PLANE_Z)
+	# the silhouette — an abstract green form: a translucent filled face + a clean outline
 	_silhouette = Node3D.new(); _silhouette.name = "Silhouette"; add_child(_silhouette)
+	_silhouette.add_child(_filled_form(pts, centroid, _fill_mat(silhouette_color, 0.16)))
 	for i in range(pts.size()):
 		var a: Vector3 = pts[i]
 		var b: Vector3 = pts[(i + 1) % pts.size()]
-		var seg := _cylinder_between(a, b, 0.012, _glow_mat(silhouette_color, 0.22))
+		var seg := _cylinder_between(a, b, 0.015, _glow_mat(silhouette_color, 0.55))
 		_silhouette.add_child(seg)
 		_edges.append({"a": i, "b": (i + 1) % pts.size(), "node": seg})
-	# the vertices — the checkpoints the draw point must pass through
+	# the vertices — small subtle aim points (brighten when drawn through)
 	for i in range(pts.size()):
-		var cp := _sphere(pts[i], hit_radius * 0.55, _glow_mat(silhouette_color, 0.8))
+		var cp := _sphere(pts[i], hit_radius * 0.3, _glow_mat(silhouette_color, 0.7))
 		add_child(cp)
 		_checkpoints.append({"pos": pts[i], "node": cp, "hit": false})
-	# the drawing instrument — the point in front of the form
+	if show_label:
+		add_child(_billboard_label(form, Vector3(0, PLANE_Y + form_size + 0.3, 0), 18, silhouette_color.lerp(Color.WHITE, 0.4)))
+	# the drawing instrument — the point in front of the form (clean: no reference frame, green trail)
 	if ResourceLoader.exists(DRAW_DOT):
 		var dd: Node = load(DRAW_DOT).instantiate()
 		(dd as Node3D).position = Vector3(0.0, PLANE_Y, 0.55)
+		if "show_reference_frame" in dd: dd.set("show_reference_frame", false)
+		if "trail_color" in dd: dd.set("trail_color", silhouette_color)
 		add_child(dd)
 		_draw_sphere = dd.get_node_or_null("GrabPoint/DrawSphere")
 	# the door it guards — closed, behind the form
@@ -123,11 +151,11 @@ func _process(_dt: float) -> void:
 
 func _mark(i: int) -> void:
 	_checkpoints[i]["hit"] = true
-	(_checkpoints[i]["node"] as MeshInstance3D).material_override = _glow_mat(hit_color, 1.3)
+	(_checkpoints[i]["node"] as MeshInstance3D).material_override = _glow_mat(hit_color, 1.8)
 	# fill any edge whose both endpoints are now drawn
 	for e in _edges:
 		if _checkpoints[e["a"]]["hit"] and _checkpoints[e["b"]]["hit"]:
-			(e["node"] as MeshInstance3D).material_override = _glow_mat(hit_color, 1.0)
+			(e["node"] as MeshInstance3D).material_override = _glow_mat(hit_color, 1.4)
 
 
 func _all_hit() -> bool:
