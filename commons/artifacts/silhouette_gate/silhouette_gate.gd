@@ -14,7 +14,8 @@ class_name SilhouetteGate
 @export var form_size: float = 0.7
 @export var hit_radius: float = 0.16           # how close the draw point must pass to a vertex
 @export var ordered: bool = false              # true = hit vertices in sequence; false = any order
-@export var ring_points: int = 8               # vertex count for circle / sphere
+@export var ring_points: int = 8               # checkpoint count for circle / sphere
+@export var rotation_offset_deg: float = 0.0   # rotate the form in its plane
 @export var silhouette_color: Color = Color(0.30, 0.95, 0.5)   # the abstract green form
 @export var hit_color: Color = Color(0.70, 1.0, 0.8)           # brighter green where it has been drawn
 @export var show_label: bool = true
@@ -55,20 +56,36 @@ func apply_grid_config(config: Dictionary) -> void:
 	_build()
 
 
-func _form_points() -> Array:
-	var n := 3
+func _n_sides() -> int:
 	match form:
-		"triangle": n = 3
-		"square": n = 4
-		"pentagon": n = 5
-		"hexagon": n = 6
-		_: n = max(3, ring_points)              # circle / sphere -> a ring of points
+		"triangle": return 3
+		"square", "quad": return 4
+		"pentagon": return 5
+		"hexagon": return 6
+		_: return max(3, ring_points)            # circle / sphere -> checkpoints around the ring
+
+
+func _ring(n: int) -> Array:
+	# point-up for odd polygons; flat-top (axis-aligned) for even ones (so a square reads as a quad)
+	var start := PI / 2.0
+	if n % 2 == 0:
+		start += PI / float(n)
+	start += deg_to_rad(rotation_offset_deg)
 	var pts: Array = []
-	var start := -PI / 2.0                       # first vertex at the top
 	for i in range(n):
 		var a: float = start + TAU * float(i) / float(n)
 		pts.append(Vector3(cos(a) * form_size, PLANE_Y + sin(a) * form_size, PLANE_Z))
 	return pts
+
+
+func _form_points() -> Array:                    # the checkpoints the draw point must hit
+	return _ring(_n_sides())
+
+
+func _outline_points() -> Array:                 # the visual outline/fill — smooth for circle/sphere
+	if form == "circle" or form == "sphere":
+		return _ring(max(40, ring_points))
+	return _ring(_n_sides())
 
 
 func _filled_form(pts: Array, centroid: Vector3, mat: Material) -> MeshInstance3D:
@@ -96,16 +113,19 @@ func _fill_mat(c: Color, alpha: float) -> StandardMaterial3D:
 
 func _build() -> void:
 	var pts := _form_points()
+	var outline := _outline_points()
 	var centroid := Vector3(0.0, PLANE_Y, PLANE_Z)
+	var poly := outline.size() == pts.size()     # polygons: edges map 1:1 to checkpoints for progress fill
 	# the silhouette — an abstract green form: a translucent filled face + a clean outline
 	_silhouette = Node3D.new(); _silhouette.name = "Silhouette"; add_child(_silhouette)
-	_silhouette.add_child(_filled_form(pts, centroid, _fill_mat(silhouette_color, 0.16)))
-	for i in range(pts.size()):
-		var a: Vector3 = pts[i]
-		var b: Vector3 = pts[(i + 1) % pts.size()]
+	_silhouette.add_child(_filled_form(outline, centroid, _fill_mat(silhouette_color, 0.16)))
+	for i in range(outline.size()):
+		var a: Vector3 = outline[i]
+		var b: Vector3 = outline[(i + 1) % outline.size()]
 		var seg := _cylinder_between(a, b, 0.015, _glow_mat(silhouette_color, 0.55))
 		_silhouette.add_child(seg)
-		_edges.append({"a": i, "b": (i + 1) % pts.size(), "node": seg})
+		if poly:
+			_edges.append({"a": i, "b": (i + 1) % outline.size(), "node": seg})
 	# the vertices — minimal corner dots (brighten when drawn through)
 	for i in range(pts.size()):
 		var cp := _sphere(pts[i], 0.015, _glow_mat(silhouette_color, 0.9))
