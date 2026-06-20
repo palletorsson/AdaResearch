@@ -31,10 +31,10 @@
   ],
   "concept_meta": {
     "Axiom & production rules": {
-      "count": 6,
-      "map_ready": 6,
-      "has_image": 6,
-      "best": "lsystem_editor",
+      "count": 8,
+      "map_ready": 8,
+      "has_image": 8,
+      "best": "axiom_bench",
       "truth": "An axiom and a handful of replace-rules; run them and a sentence becomes a forest. The whole plant is in the rules, not the picture.",
       "act": "Act I — the rewriting rule",
       "thin": false,
@@ -44,46 +44,49 @@
           "fractal_lsystem_string",
           "exact_meander_floor"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "axiom_bench"
+        ],
+        "large": [
+          "axiom_room"
+        ],
         "applied": [
           "lsystem_editor",
           "grammar_provenance",
           "axiom_garden"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Parallel rewriting / generations": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "AnimatedTree",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "generations_bench",
       "truth": "Every symbol rewrites at once, each generation — not a serial head but a field dividing, which is why it grows like life and not like a list.",
       "act": "Act I — the rewriting rule",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "AnimatedTree"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "generations_bench"
+        ],
+        "large": [
+          "generations_room"
+        ],
+        "applied": [
+          "growth_animator"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Formal grammars (Chomsky)": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "ContextFreeGrammars",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "chomsky_room",
       "truth": "Where Chomsky's hierarchy meets biology — a context-free grammar is a parse tree is a plant.",
       "act": "Act I — the rewriting rule",
       "thin": false,
@@ -92,21 +95,23 @@
           "ContextFreeGrammars",
           "context_free_grammars"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "grammar_bench"
+        ],
+        "large": [
+          "chomsky_room"
+        ],
+        "applied": [
+          "parse_tree_tool"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Turtle interpretation": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "turtle_meander_floor",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "turtle_bench",
       "truth": "Read the string as a turtle — forward, turn, branch. The grammar is the genotype; the drawn path is the phenotype.",
       "act": "Act II — the turtle",
       "thin": false,
@@ -115,21 +120,23 @@
           "turtle_meander_floor",
           "free_meander_floor"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "turtle_bench"
+        ],
+        "large": [
+          "turtle_room"
+        ],
+        "applied": [
+          "turtle_plotter"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Koch & fractal curves": {
-      "count": 6,
-      "map_ready": 6,
-      "has_image": 6,
-      "best": "fractal_koch_curve",
+      "count": 7,
+      "map_ready": 7,
+      "has_image": 7,
+      "best": "koch_loom",
       "truth": "Replace every edge with a smaller copy of the whole — infinite length around a finite area, the coastline that never ends.",
       "act": "Act II — the turtle",
       "thin": false,
@@ -146,39 +153,41 @@
           "koch_curve",
           "koch_curve_1"
         ],
-        "applied": []
+        "applied": [
+          "koch_loom"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Dragon & classic curves": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "living_paper_dragon",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "curve_plotter",
       "truth": "Fold a strip the same way forever and a dragon uncurls — order so deep it reads as chaos.",
       "act": "Act II — the turtle",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "living_paper_dragon"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "dragon_bench"
+        ],
+        "large": [
+          "dragon_room"
+        ],
+        "applied": [
+          "curve_plotter"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Space-filling curves (Hilbert)": {
-      "count": 3,
-      "map_ready": 3,
-      "has_image": 3,
-      "best": "space_filling_curve_gallery",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "hilbert_bench",
       "truth": "A line that visits every point of a square — one dimension reaching, by recursion, to fill two.",
       "act": "Act II — the turtle",
       "thin": false,
@@ -187,22 +196,23 @@
           "space_filling_floor",
           "Hilbert3D"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "hilbert_bench"
+        ],
+        "large": [
+          "hilbert_room"
+        ],
         "applied": [
           "space_filling_curve_gallery"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Bracketed branching": {
-      "count": 8,
-      "map_ready": 8,
-      "has_image": 8,
-      "best": "grammar_negative_space_bracket_pair",
+      "count": 11,
+      "map_ready": 11,
+      "has_image": 11,
+      "best": "bracket_bench",
       "truth": "The bracket is the trick: push the turtle's state, draw a limb, pop back. [ ] is where the line becomes a tree.",
       "act": "Act III — branching plants",
       "thin": false,
@@ -217,21 +227,23 @@
           "grammar_recursive_branching_tree_d4",
           "grammar_recursive_branching_tree_d5"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "bracket_bench"
+        ],
+        "large": [
+          "bracket_room"
+        ],
+        "applied": [
+          "bracket_pruner"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "L-system trees": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
-      "best": "fractal_lsystem_tree",
+      "count": 7,
+      "map_ready": 7,
+      "has_image": 7,
+      "best": "lsystem_tree_room",
       "truth": "A few rules and a branching angle, and the same grammar grows a fir, an oak, a willow — the whole tree latent in a line of symbols.",
       "act": "Act III — branching plants",
       "thin": false,
@@ -245,19 +257,20 @@
           "lindenmayer_tube_tree",
           "modulor_cypress"
         ],
-        "large": [],
-        "applied": []
+        "large": [
+          "lsystem_tree_room"
+        ],
+        "applied": [
+          "tree_nursery"
+        ]
       },
-      "missing_tiers": [
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Ferns & self-similar plants": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "barnsley_fern",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "fern_bench",
       "truth": "Barnsley's fern: the leaf is the plant is the frond — self-similarity all the way down, from four affine maps.",
       "act": "Act III — branching plants",
       "thin": false,
@@ -266,199 +279,240 @@
           "barnsley_fern",
           "living_paper_fern"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "fern_bench"
+        ],
+        "large": [
+          "fern_room"
+        ],
+        "applied": [
+          "fern_press"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Coral & vines": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "branching_coral",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "coral_bench",
       "truth": "Branching is cheaper than planning; the coral and the vine grow by the same greedy local rule.",
       "act": "Act III — branching plants",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "branching_coral"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "coral_bench"
+        ],
+        "large": [
+          "coral_room"
+        ],
+        "applied": [
+          "vine_grower"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Stochastic L-systems": {
-      "count": 0,
-      "map_ready": 0,
-      "has_image": 0,
-      "best": null,
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "stochastic_bench",
       "truth": "Roll the dice on which rule fires and no two plants are the same — randomness is how a grammar makes a population, not a clone.",
       "act": "Act IV — variation",
-      "thin": true,
+      "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "small": [
+          "stochastic_toy"
+        ],
+        "medium": [
+          "stochastic_bench"
+        ],
+        "large": [
+          "stochastic_room"
+        ],
+        "applied": [
+          "stochastic_seeder"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Parametric L-systems": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "parametric_lsystem",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "parametric_bench",
       "truth": "Hang numbers on the symbols — a length, an angle, an age — and the grammar can taper, bend, and grow old.",
       "act": "Act IV — variation",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "parametric_lsystem"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "parametric_bench"
+        ],
+        "large": [
+          "parametric_room"
+        ],
+        "applied": [
+          "parametric_designer"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Context-sensitive L-systems": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "ContextSensitiveTree",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "context_pruner",
       "truth": "Let a symbol read its neighbours and the plant answers its world — light, crowding, a signal passing up the stem.",
       "act": "Act IV — variation",
-      "thin": true,
+      "thin": false,
       "tiers": {
-        "small": [],
+        "small": [
+          "context_toy"
+        ],
         "medium": [
           "ContextSensitiveTree"
         ],
-        "large": [],
-        "applied": []
+        "large": [
+          "context_room"
+        ],
+        "applied": [
+          "context_pruner"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Many substrates (the bridge)": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "mesh_grammar_branching_coral",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "substrate_bench",
       "truth": "The same string is a line, a tube, a graph, a soft body, a Bauhaus sculpture — the grammar is the DNA, the material is a choice.",
       "act": "Act V — substrates & architecture",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "mesh_grammar_branching_coral"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "substrate_bench"
+        ],
+        "large": [
+          "substrate_room"
+        ],
+        "applied": [
+          "substrate_switcher"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Grammar architecture (cities/dungeons)": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "lsystem_dungeon",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "city_bench",
       "truth": "Point the rules at right angles instead of leaves and the same engine grows a city, a dungeon, a pipe network.",
       "act": "Act V — substrates & architecture",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "city_toy"
+        ],
+        "medium": [
+          "city_bench"
+        ],
+        "large": [
+          "city_room"
+        ],
         "applied": [
           "lsystem_dungeon",
           "CityGenerator"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "CritterDNA -> L-system tree": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "genetic_tree_sculptor",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "dna_sprout",
       "truth": "The genome IS the grammar's parameters — segments, branch angle, decay — so a CritterDNA grows a unique tree through the L-system. Store the seed, regrow the plant. The body to the morphogenesis bridge's skin.",
       "act": "Act VI — DNA & biome",
-      "thin": true,
+      "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "dna_sprout"
+        ],
+        "medium": [
+          "genome_bench"
+        ],
+        "large": [
+          "seed_vs_random"
+        ],
         "applied": [
           "genetic_tree_sculptor"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Forest & ecology (biome)": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "ForestCompetition",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "forest_bench",
       "truth": "Many grammars in one world, competing for light — the L-system stops being a plant and becomes the biome that plants it.",
       "act": "Act VI — DNA & biome",
-      "thin": true,
+      "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "sapling_toy"
+        ],
+        "medium": [
+          "forest_bench"
+        ],
+        "large": [
+          "grove_room"
+        ],
         "applied": [
           "ForestCompetition"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     }
   },
-  "total": 44,
-  "map_ready_total": 44,
-  "image_total": 44,
-  "empty_slots": 50,
+  "total": 94,
+  "map_ready_total": 94,
+  "image_total": 94,
+  "empty_slots": 0,
   "groups": {
     "Axiom & production rules": [
+      {
+        "lookup": "axiom_bench",
+        "name": "Axiom Bench (rules -> a plant)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "axiom_room",
+        "name": "Axiom Room (the plant is in the rules)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "lsystem_editor",
         "name": "L-System Editor",
@@ -528,6 +582,39 @@
     ],
     "Parallel rewriting / generations": [
       {
+        "lookup": "generations_bench",
+        "name": "Generations Bench (1..4)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "generations_room",
+        "name": "Generations Room (sprout to tree)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "growth_animator",
+        "name": "Growth Animator (watch it grow)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "AnimatedTree",
         "name": "Animated Tree Growth",
         "registry": "lsystems.json",
@@ -540,6 +627,39 @@
       }
     ],
     "Formal grammars (Chomsky)": [
+      {
+        "lookup": "chomsky_room",
+        "name": "Chomsky Room (the hierarchy)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "grammar_bench",
+        "name": "Grammar Bench (parse tree)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "parse_tree_tool",
+        "name": "Parser (string -> tree)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
       {
         "lookup": "ContextFreeGrammars",
         "name": "Context-Free Grammars",
@@ -565,6 +685,39 @@
     ],
     "Turtle interpretation": [
       {
+        "lookup": "turtle_bench",
+        "name": "Turtle Bench (forward, turn, branch)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "turtle_plotter",
+        "name": "Turtle Plotter (pen on an arm)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "turtle_room",
+        "name": "Turtle Room (walk the curve)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "turtle_meander_floor",
         "name": "Turtle Meander Floor",
         "registry": "arrays.json",
@@ -588,6 +741,17 @@
       }
     ],
     "Koch & fractal curves": [
+      {
+        "lookup": "koch_loom",
+        "name": "Koch Loom (edge fabric)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
       {
         "lookup": "fractal_koch_curve",
         "name": "Koch Curve",
@@ -657,6 +821,39 @@
     ],
     "Dragon & classic curves": [
       {
+        "lookup": "curve_plotter",
+        "name": "Curve Plotter (dragon/Levy/Gosper)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "dragon_bench",
+        "name": "Dragon Bench (order as chaos)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "dragon_room",
+        "name": "Dragon Room (the big dragon)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "living_paper_dragon",
         "name": "Living Paper — Dragon Curve",
         "registry": "living_paper.json",
@@ -669,6 +866,28 @@
       }
     ],
     "Space-filling curves (Hilbert)": [
+      {
+        "lookup": "hilbert_bench",
+        "name": "Hilbert Bench (a line fills a square)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "hilbert_room",
+        "name": "Hilbert Room (one line, every point)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "space_filling_curve_gallery",
         "name": "Space-Filling Curve Gallery",
@@ -704,6 +923,39 @@
       }
     ],
     "Bracketed branching": [
+      {
+        "lookup": "bracket_bench",
+        "name": "Bracket Bench (the tree trick)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "bracket_pruner",
+        "name": "Branch Pruner (trim by depth)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "bracket_room",
+        "name": "Bracket Room (push, branch, pop)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "grammar_negative_space_bracket_pair",
         "name": "grammar_negative_space_bracket_pair",
@@ -795,6 +1047,28 @@
     ],
     "L-system trees": [
       {
+        "lookup": "lsystem_tree_room",
+        "name": "L-system Tree Room (a whole tree)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "tree_nursery",
+        "name": "Tree Nursery (grow them)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "fractal_lsystem_tree",
         "name": "L-System Tree",
         "registry": "procgen_extra.json",
@@ -852,6 +1126,39 @@
     ],
     "Ferns & self-similar plants": [
       {
+        "lookup": "fern_bench",
+        "name": "Fern Bench (the frond)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "fern_press",
+        "name": "Fern Press (pressed flat)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "fern_room",
+        "name": "Fern Room (self-similarity)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "barnsley_fern",
         "name": "Barnsley Fern",
         "registry": "commons_artifacts.json",
@@ -876,6 +1183,39 @@
     ],
     "Coral & vines": [
       {
+        "lookup": "coral_bench",
+        "name": "Coral Bench (greedy local rule)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "coral_room",
+        "name": "Coral Room (the reef)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "vine_grower",
+        "name": "Vine Trellis (climbing rule)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "branching_coral",
         "name": "Branching Coral",
         "registry": "lsystems.json",
@@ -887,8 +1227,86 @@
         "tier": "small"
       }
     ],
-    "Stochastic L-systems": [],
+    "Stochastic L-systems": [
+      {
+        "lookup": "stochastic_bench",
+        "name": "Stochastic Bench (no two alike)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "stochastic_room",
+        "name": "Stochastic Room (a meadow)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "stochastic_seeder",
+        "name": "Stochastic Seeder (a new plant each time)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "stochastic_toy",
+        "name": "Stochastic Toy (same seed, same plant)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      }
+    ],
     "Parametric L-systems": [
+      {
+        "lookup": "parametric_bench",
+        "name": "Parametric Bench (numbers on symbols)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "parametric_designer",
+        "name": "Parametric Designer (tune the params)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "parametric_room",
+        "name": "Parametric Room (taper, bend, grow old)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "parametric_lsystem",
         "name": "Parametric L-System",
@@ -903,6 +1321,39 @@
     ],
     "Context-sensitive L-systems": [
       {
+        "lookup": "context_pruner",
+        "name": "Context Pruner (trims at the obstacle)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "context_room",
+        "name": "Context Room (pruned by its world)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "context_toy",
+        "name": "Context Toy (a signal up the stem)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
         "lookup": "ContextSensitiveTree",
         "name": "Context-Sensitive Tree",
         "registry": "lsystems.json",
@@ -916,6 +1367,39 @@
     ],
     "Many substrates (the bridge)": [
       {
+        "lookup": "substrate_bench",
+        "name": "Substrate Bench (one string, three materials)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "substrate_room",
+        "name": "Substrate Room (the grammar is the DNA)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "substrate_switcher",
+        "name": "Substrate Switcher (cycle the material)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "mesh_grammar_branching_coral",
         "name": "MeshGrammar — Branching Coral",
         "registry": "mesh_grammar.json",
@@ -928,6 +1412,39 @@
       }
     ],
     "Grammar architecture (cities/dungeons)": [
+      {
+        "lookup": "city_bench",
+        "name": "City Bench (a street plan)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "city_room",
+        "name": "City Room (streets and dungeons)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "city_toy",
+        "name": "City Toy (a held block)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "lsystem_dungeon",
         "name": "L-System Dungeon",
@@ -953,6 +1470,39 @@
     ],
     "CritterDNA -> L-system tree": [
       {
+        "lookup": "dna_sprout",
+        "name": "DNA Sprout (held seed -> plant)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "genome_bench",
+        "name": "Genome Bench (scrub -> regrow)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "seed_vs_random",
+        "name": "Seed vs Random (the thesis bed)",
+        "registry": "randomness.json",
+        "category": "randomness",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "genetic_tree_sculptor",
         "name": "Genetic Tree Sculptor",
         "registry": "lsystems.json",
@@ -965,6 +1515,39 @@
       }
     ],
     "Forest & ecology (biome)": [
+      {
+        "lookup": "forest_bench",
+        "name": "Forest Bench (many grammars, one world)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "grove_room",
+        "name": "Grove Room (grammar becomes biome)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "sapling_toy",
+        "name": "Sapling Toy (the start of a forest)",
+        "registry": "lsystems.json",
+        "category": "lsystems",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "ForestCompetition",
         "name": "Forest Ecosystem",
