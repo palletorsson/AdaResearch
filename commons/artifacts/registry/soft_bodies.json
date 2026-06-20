@@ -1,1897 +1,3508 @@
 {
-	"version": "1.0",
-	"format": "lab_artifacts",
-	"description": "Registry of Soft Body simulations and experiments.",
-	"artifacts": {
-		"cloth_simulation": {
-			"name": "Cloth Simulation",
-			"lookup_name": "cloth_simulation",
-			"description": "Soft body physics simulation using spring-mass systems",
-			"scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					8,
-					12,
-					10
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "hybrid",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "unknown",
-					"primitives": [
-						"sphere"
-					],
-					"operations": []
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~36"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"mass_spring_damper",
-					"single",
-					"spring",
-					"springs",
-					"soft_bodies"
-				],
-				"preferred_zone": "end"
-			},
-			"measurements": {
-				"aabb_size": [
-					3.9,
-					1.6,
-					4.1
-				],
-				"aabb_center": [
-					1.55,
-					1.2,
-					1.55
-				],
-				"grid_cells": [
-					4.0,
-					5.0
-				],
-				"max_dimension_m": 4.1,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				4.0,
-				1,
-				5.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 10,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"flagdancer": {
-			"name": "Flag Dancer",
-			"lookup_name": "flagdancer",
-			"description": "Animated soft body flag that waves and dances using cloth physics simulation with wind forces.",
-			"scene": "res://algorithms/physicssimulation/softbodies/flagdancer/flagdancer.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"sequence": "softbodies",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "particle_system",
-					"affects": [
-						"transform",
-						"color",
-						"visibility"
-					]
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"extends",
-					"cloth_straps",
-					"static",
-					"draping",
-					"animated"
-				],
-				"preferred_zone": "end"
-			},
-			"measurements": {
-				"aabb_size": [
-					6.0,
-					4.0,
-					0.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					6.0,
-					1.0
-				],
-				"max_dimension_m": 6.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				6.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "panel",
-				"range": 18,
-				"density": "high",
-				"min_clearance": 1,
-				"stack_priority": 0.85,
-				"approach_dir": "front",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"softbody3d": {
-			"name": "SoftBody 3D",
-			"lookup_name": "softbody3d",
-			"description": "Core soft body physics demonstration using Godot's SoftBody3D node for deformable mesh simulation.",
-			"scene": "res://algorithms/physicssimulation/softbody3d/softbody3d.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					12,
-					10,
-					19
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"3d",
-				"graph",
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "terrain_deformation",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "heightmap_displacement",
-					"primitives": [],
-					"operations": [
-						"create_plane",
-						"compute_heights",
-						"displace_vertices"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			]
-		},
-		"squishy_ball_pit": {
-			"name": "Squishy Ball Pit",
-			"lookup_name": "squishy_ball_pit",
-			"description": "A glass container filled with squishy, glowing soft body spheres.",
-			"scene": "res://algorithms/softbodies/advanced_concepts/squishy_ball_pit.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~256"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			},
-			"measurements": {
-				"aabb_size": [
-					15.0,
-					13.0,
-					15.0
-				],
-				"aabb_center": [
-					0.0,
-					1.5,
-					0.0
-				],
-				"grid_cells": [
-					15.0,
-					15.0
-				],
-				"max_dimension_m": 15.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				15.0,
-				1,
-				15.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 35,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"soft_trampoline": {
-			"name": "Soft Trampoline",
-			"lookup_name": "soft_trampoline",
-			"description": "A large, bouncy soft body sheet pinned at the edges.",
-			"scene": "res://algorithms/softbodies/advanced_concepts/soft_trampoline.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"plane"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~200"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			},
-			"measurements": {
-				"aabb_size": [
-					20.0,
-					4.0,
-					20.0
-				],
-				"aabb_center": [
-					0.0,
-					1.0,
-					0.0
-				],
-				"grid_cells": [
-					20.0,
-					20.0
-				],
-				"max_dimension_m": 20.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				20.0,
-				1,
-				20.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 35,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"breathing_room": {
-			"name": "Breathing Room",
-			"lookup_name": "breathing_room",
-			"description": "A corridor with soft body walls that rhythmically expand and contract.",
-			"scene": "res://algorithms/softbodies/advanced_concepts/breathing_room.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"sequence": "softbodies",
-			"parameters": {
-				"footprint": [
-					7,
-					2,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"extends",
-					"static",
-					"demos",
-					"jelly_cube",
-					"cloth_straps"
-				],
-				"preferred_zone": "any"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.0,
-					4.0,
-					7.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					7.0
-				],
-				"max_dimension_m": 7.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				7.0
-			],
-			"spatial_profile": {
-				"dir_group": "panel",
-				"range": 18,
-				"density": "high",
-				"min_clearance": 1,
-				"stack_priority": 0.85,
-				"approach_dir": "front",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"soft_mushrooms": {
-			"name": "Soft Mushrooms",
-			"lookup_name": "soft_mushrooms",
-			"description": "Procedurally generated mushrooms with wobbly soft body caps.",
-			"scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere",
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~256"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"extends",
-					"jelly_cube",
-					"single",
-					"object",
-					"deformation"
-				],
-				"preferred_zone": "any"
-			},
-			"measurements": {
-				"aabb_size": [
-					17.89,
-					2.34,
-					17.33
-				],
-				"aabb_center": [
-					0.23,
-					0.31,
-					0.34
-				],
-				"grid_cells": [
-					18.0,
-					18.0
-				],
-				"max_dimension_m": 17.89,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				18.0,
-				1,
-				18.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 35,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"cloth_straps": {
-			"name": "Cloth Straps",
-			"lookup_name": "cloth_straps",
-			"description": "Hanging soft body cloth straps that the player can walk through.",
-			"scene": "res://algorithms/softbodies/cloth_straps/cloth_straps.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"sequence": "softbodies",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"follows",
-					"jelly_cube",
-					"softmill",
-					"cloth",
-					"specific"
-				],
-				"preferred_zone": "any"
-			},
-			"measurements": {
-				"aabb_size": [
-					2.85,
-					4.8,
-					0.5
-				],
-				"aabb_center": [
-					0.0,
-					1.4,
-					0.0
-				],
-				"grid_cells": [
-					3.0,
-					1.0
-				],
-				"max_dimension_m": 4.8,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				3.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "panel",
-				"range": 10,
-				"density": "high",
-				"min_clearance": 1,
-				"stack_priority": 0.85,
-				"approach_dir": "front",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"revolving_joy_ride": {
-			"name": "Revolving Joy Ride",
-			"lookup_name": "revolving_joy_ride",
-			"description": "A rotating ride with hanging soft bodies colliding with obstacles.",
-			"scene": "res://algorithms/softbodies/joyride/revolving_joy_ride.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"sequence": "softbodies",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"torus",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~256"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"builds",
-					"jelly_cube",
-					"spring",
-					"intro",
-					"adding"
-				],
-				"preferred_zone": "any"
-			},
-			"measurements": {
-				"aabb_size": [
-					9.25,
-					5.0,
-					9.25
-				],
-				"aabb_center": [
-					0.0,
-					2.5,
-					0.0
-				],
-				"grid_cells": [
-					10.0,
-					10.0
-				],
-				"max_dimension_m": 9.25,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				10.0,
-				1,
-				10.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 18,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"pendulum_slap": {
-			"name": "Pendulum Slap",
-			"lookup_name": "pendulum_slap",
-			"description": "A double pendulum that slaps soft bodies.",
-			"scene": "res://algorithms/softbodies/slap_test/pendulum_slap.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"pendulum",
-				"physics",
-				"wave"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.5,
-					7.79,
-					1.51
-				],
-				"aabb_center": [
-					0.0,
-					4.13,
-					0.46
-				],
-				"grid_cells": [
-					2.0,
-					2.0
-				],
-				"max_dimension_m": 7.79,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				2.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 18,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"softbody_gallery_part1": {
-			"name": "SoftBody Gallery Part 1",
-			"lookup_name": "softbody_gallery_part1",
-			"description": "Part 1 of the soft body test gallery.",
-			"scene": "res://algorithms/softbodies/softbody_gallery_part1.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"art",
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"torus",
-						"prism",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~128"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			},
-			"measurements": {
-				"aabb_size": [
-					26.0,
-					1.6,
-					6.0
-				],
-				"aabb_center": [
-					12.5,
-					0.2,
-					2.5
-				],
-				"grid_cells": [
-					26.0,
-					6.0
-				],
-				"max_dimension_m": 26.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				26.0,
-				1,
-				6.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 60,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"softbody_gallery_part2": {
-			"name": "SoftBody Gallery Part 2",
-			"lookup_name": "softbody_gallery_part2",
-			"description": "Part 2 of the soft body test gallery.",
-			"scene": "res://algorithms/softbodies/softbody_gallery_part2.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"sequence": "softbodies",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"art",
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"torus",
-						"prism",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~128"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			},
-			"measurements": {
-				"aabb_size": [
-					26.0,
-					2.4,
-					6.98
-				],
-				"aabb_center": [
-					12.5,
-					0.0,
-					2.69
-				],
-				"grid_cells": [
-					26.0,
-					7.0
-				],
-				"max_dimension_m": 26.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				26.0,
-				1,
-				7.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 60,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"softbody_gallery_part3": {
-			"name": "SoftBody Gallery Part 3",
-			"lookup_name": "softbody_gallery_part3",
-			"description": "Part 3 of the soft body test gallery.",
-			"scene": "res://algorithms/softbodies/softbody_gallery_part3.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"sequence": "softbodies",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"art",
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"torus",
-						"prism",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~128"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			},
-			"measurements": {
-				"aabb_size": [
-					26.0,
-					1.0,
-					6.3
-				],
-				"aabb_center": [
-					12.5,
-					0.0,
-					2.35
-				],
-				"grid_cells": [
-					26.0,
-					7.0
-				],
-				"max_dimension_m": 26.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				26.0,
-				1,
-				7.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 60,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"rounded_softbody_test": {
-			"name": "Rounded SoftBody \u2014 Strain Energy",
-			"lookup_name": "rounded_softbody_test",
-			"description": "Deformable rounded cube with 3 modes: strain energy heatmap coloring by vertex displacement, collision-response force arrows with impact bursts, and volume preservation with real-time ratio chart. VR hand squeeze interaction pushes vertices. ImmediateMesh overlays for all visualizations.",
-			"scene": "res://algorithms/softbodies/rounded_softbody_test.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"sequence": "softbodies",
-			"interactions": [
-				"squeeze"
-			],
-			"parameters": {
-				"footprint": [
-					9,
-					7,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"physics",
-				"soft_body",
-				"strain",
-				"deformable",
-				"interactive"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body",
-				"visualization"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			},
-			"measurements": {
-				"aabb_size": [
-					2.0,
-					3.55,
-					2.0
-				],
-				"aabb_center": [
-					0.0,
-					1.52,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					2.0
-				],
-				"max_dimension_m": 3.55,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				2.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 10,
-				"density": "medium",
-				"min_clearance": 2,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"jelly_cube": {
-			"name": "Jelly Cube",
-			"lookup_name": "jelly_cube",
-			"description": "A soft, deformable cube that jiggles when touched. VR-enabled with physics parameter controls for stiffness, damping, and pressure.",
-			"scene": "res://commons/artifacts/jelly_cube/jelly_cube.tscn",
-			"category": "physics",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"sequence": "softbodies",
-			"interactions": [
-				"grab"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"interaction": "grab",
-			"qfep_connection": "Low stiffness = high \u00ce\u00bb territory. Form becomes fluid, resists fixed categories.",
-			"complexity": "beginner",
-			"tags": [
-				"softbody",
-				"physics",
-				"deformable",
-				"jelly",
-				"queer_morphology",
-				"interactive"
-			],
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"introduces",
-					"spring",
-					"foundation",
-					"before",
-					"cloth_straps"
-				],
-				"preferred_zone": "entry"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.48,
-					0.3,
-					0.65
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.12
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.65,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 2,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"softbodytest": {
-			"lookup_name": "softbodytest",
-			"name": "softbodytest",
-			"description": "softbodytest",
-			"scene": "res://algorithms/softbodies/softbodytest.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"tags": [
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"torus",
-						"prism",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~128"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			},
-			"measurements": {
-				"aabb_size": [
-					26.0,
-					1.6,
-					6.0
-				],
-				"aabb_center": [
-					12.5,
-					0.2,
-					2.5
-				],
-				"grid_cells": [
-					26.0,
-					6.0
-				],
-				"max_dimension_m": 26.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 60,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"soft_mushroom": {
-			"lookup_name": "soft_mushroom",
-			"name": "soft_mushroom",
-			"description": "soft_mushroom",
-			"scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"footprint": [
-				5,
-				3,
-				5
-			],
-			"size_group": "environment",
-			"parameters": {
-				"footprint": [
-					5,
-					3,
-					5
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"soft_body"
-			],
-			"tags": [
-				"soft_body"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere",
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~256"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"extends",
-					"jelly_cube",
-					"single",
-					"object",
-					"deformation"
-				],
-				"preferred_zone": "entry"
-			},
-			"measurements": {
-				"aabb_size": [
-					19.45,
-					2.37,
-					20.07
-				],
-				"aabb_center": [
-					-0.22,
-					0.29,
-					-0.17
-				],
-				"grid_cells": [
-					20.0,
-					21.0
-				],
-				"max_dimension_m": 20.07,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 60,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.273850Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"frozen_glass_vessel": {
-			"lookup_name": "frozen_glass_vessel",
-			"name": "Frozen Glass Vessel",
-			"description": "Walkable glass vessel whose shape emerged from physics, not design. Sphere + top-pin ring + pre-inflation pulse + gravity + N settle steps = a drooping amphora, long bottle, wide bowl, or slumped vase depending on force balance. The clock is part of the genome \u2014 duration as design parameter. Walkable twin of gl01_classic_bulb from the soft-body gallery.",
-			"scene": "res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.tscn",
-			"category": "soft_body",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies",
-				"morphogenesis"
-			],
-			"sequence": "softbodies",
-			"parameters": {
-				"footprint": [
-					2,
-					3,
-					2
-				],
-				"size_group": "medium"
-			},
-			"footprint": [
-				2,
-				3,
-				2
-			],
-			"size_group": "medium",
-			"complexity": "advanced",
-			"tags": [
-				"soft_body",
-				"glass",
-				"vessel",
-				"frozen_process",
-				"walkable",
-				"physics"
-			],
-			"dev_themes": [
-				"soft_body",
-				"physics",
-				"frozen_process",
-				"dna_bridge"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "around",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 1,
-				"cluster_with": [
-					"jelly_cube",
-					"rd_coral_garden",
-					"soft_mushrooms"
-				],
-				"preferred_zone": "end"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.76,
-					1.82,
-					0.76
-				],
-				"aabb_center": [
-					0.0,
-					-0.36,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 1.82,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.274361Z",
-				"derived_from": "aabb_size + category"
-			}
-		}
-	}
+  "version": "1.0",
+  "format": "lab_artifacts",
+  "description": "Registry of Soft Body simulations and experiments.",
+  "artifacts": {
+    "cloth_simulation": {
+      "name": "Cloth Simulation",
+      "lookup_name": "cloth_simulation",
+      "description": "Soft body physics simulation using spring-mass systems",
+      "scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "physicssimulation"
+      ],
+      "sequence": "physicssimulation",
+      "parameters": {
+        "footprint": [
+          8,
+          12,
+          10
+        ],
+        "size_group": "world_scale"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "hybrid",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "unknown",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": []
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~36"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "mass_spring_damper",
+          "single",
+          "spring",
+          "springs",
+          "soft_bodies"
+        ],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 20,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          3.9,
+          1.6,
+          4.1
+        ],
+        "aabb_center": [
+          1.55,
+          1.2,
+          1.55
+        ],
+        "grid_cells": [
+          4.0,
+          5.0
+        ],
+        "max_dimension_m": 4.1,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        4.0,
+        1,
+        5.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 10,
+        "density": "high",
+        "min_clearance": 2,
+        "stack_priority": 0.85,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "flagdancer": {
+      "name": "Flag Dancer",
+      "lookup_name": "flagdancer",
+      "description": "Animated soft body flag that waves and dances using cloth physics simulation with wind forces.",
+      "scene": "res://algorithms/physicssimulation/softbodies/flagdancer/flagdancer.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "sequence": "softbodies",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          2
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "particle_system",
+          "affects": [
+            "transform",
+            "color",
+            "visibility"
+          ]
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 6,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "extends",
+          "cloth_straps",
+          "static",
+          "draping",
+          "animated"
+        ],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 6,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          6.0,
+          4.0,
+          0.0
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "grid_cells": [
+          6.0,
+          1.0
+        ],
+        "max_dimension_m": 6.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        6.0,
+        1,
+        1.0
+      ],
+      "spatial_profile": {
+        "dir_group": "panel",
+        "range": 18,
+        "density": "high",
+        "min_clearance": 1,
+        "stack_priority": 0.85,
+        "approach_dir": "front",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "softbody3d": {
+      "name": "SoftBody 3D",
+      "lookup_name": "softbody3d",
+      "description": "Core soft body physics demonstration using Godot's SoftBody3D node for deformable mesh simulation.",
+      "scene": "res://algorithms/physicssimulation/softbody3d/softbody3d.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "parameters": {
+        "footprint": [
+          12,
+          10,
+          19
+        ],
+        "size_group": "world_scale"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "3d",
+        "graph",
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "terrain_deformation",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "heightmap_displacement",
+          "primitives": [],
+          "operations": [
+            "create_plane",
+            "compute_heights",
+            "displace_vertices"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 1,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "grid_cells": [
+          1.0,
+          1.0
+        ],
+        "max_dimension_m": 0.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        1.0,
+        1,
+        1.0
+      ]
+    },
+    "squishy_ball_pit": {
+      "name": "Squishy Ball Pit",
+      "lookup_name": "squishy_ball_pit",
+      "description": "A glass container filled with squishy, glowing soft body spheres.",
+      "scene": "res://algorithms/softbodies/advanced_concepts/squishy_ball_pit.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "complexity": "intermediate",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~256"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 225,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          15.0,
+          13.0,
+          15.0
+        ],
+        "aabb_center": [
+          0.0,
+          1.5,
+          0.0
+        ],
+        "grid_cells": [
+          15.0,
+          15.0
+        ],
+        "max_dimension_m": 15.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        15.0,
+        1,
+        15.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 35,
+        "density": "high",
+        "min_clearance": 2,
+        "stack_priority": 0.85,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "soft_trampoline": {
+      "name": "Soft Trampoline",
+      "lookup_name": "soft_trampoline",
+      "description": "A large, bouncy soft body sheet pinned at the edges.",
+      "scene": "res://algorithms/softbodies/advanced_concepts/soft_trampoline.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "complexity": "intermediate",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder",
+            "plane"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~200"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 400,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          20.0,
+          4.0,
+          20.0
+        ],
+        "aabb_center": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "grid_cells": [
+          20.0,
+          20.0
+        ],
+        "max_dimension_m": 20.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        20.0,
+        1,
+        20.0
+      ],
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 35,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "breathing_room": {
+      "name": "Breathing Room",
+      "lookup_name": "breathing_room",
+      "description": "A corridor with soft body walls that rhythmically expand and contract.",
+      "scene": "res://algorithms/softbodies/advanced_concepts/breathing_room.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "sequence": "softbodies",
+      "parameters": {
+        "footprint": [
+          7,
+          2,
+          11
+        ],
+        "size_group": "world_scale"
+      },
+      "complexity": "intermediate",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 7,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "extends",
+          "static",
+          "demos",
+          "jelly_cube",
+          "cloth_straps"
+        ],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 7,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          1.0,
+          4.0,
+          7.0
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "grid_cells": [
+          1.0,
+          7.0
+        ],
+        "max_dimension_m": 7.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        1.0,
+        1,
+        7.0
+      ],
+      "spatial_profile": {
+        "dir_group": "panel",
+        "range": 18,
+        "density": "high",
+        "min_clearance": 1,
+        "stack_priority": 0.85,
+        "approach_dir": "front",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "soft_mushrooms": {
+      "name": "Soft Mushrooms",
+      "lookup_name": "soft_mushrooms",
+      "description": "Procedurally generated mushrooms with wobbly soft body caps.",
+      "scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "complexity": "intermediate",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "sphere",
+            "cylinder"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~256"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "extends",
+          "jelly_cube",
+          "single",
+          "object",
+          "deformation"
+        ],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 324,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          17.89,
+          2.34,
+          17.33
+        ],
+        "aabb_center": [
+          0.23,
+          0.31,
+          0.34
+        ],
+        "grid_cells": [
+          18.0,
+          18.0
+        ],
+        "max_dimension_m": 17.89,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        18.0,
+        1,
+        18.0
+      ],
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 35,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "cloth_straps": {
+      "name": "Cloth Straps",
+      "lookup_name": "cloth_straps",
+      "description": "Hanging soft body cloth straps that the player can walk through.",
+      "scene": "res://algorithms/softbodies/cloth_straps/cloth_straps.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "sequence": "softbodies",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "intermediate",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 3,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "follows",
+          "jelly_cube",
+          "softmill",
+          "cloth",
+          "specific"
+        ],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 3,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          2.85,
+          4.8,
+          0.5
+        ],
+        "aabb_center": [
+          0.0,
+          1.4,
+          0.0
+        ],
+        "grid_cells": [
+          3.0,
+          1.0
+        ],
+        "max_dimension_m": 4.8,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        3.0,
+        1,
+        1.0
+      ],
+      "spatial_profile": {
+        "dir_group": "panel",
+        "range": 10,
+        "density": "high",
+        "min_clearance": 1,
+        "stack_priority": 0.85,
+        "approach_dir": "front",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "revolving_joy_ride": {
+      "name": "Revolving Joy Ride",
+      "lookup_name": "revolving_joy_ride",
+      "description": "A rotating ride with hanging soft bodies colliding with obstacles.",
+      "scene": "res://algorithms/softbodies/joyride/revolving_joy_ride.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "sequence": "softbodies",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "intermediate",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "torus",
+            "capsule"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~256"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "builds",
+          "jelly_cube",
+          "spring",
+          "intro",
+          "adding"
+        ],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 100,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          9.25,
+          5.0,
+          9.25
+        ],
+        "aabb_center": [
+          0.0,
+          2.5,
+          0.0
+        ],
+        "grid_cells": [
+          10.0,
+          10.0
+        ],
+        "max_dimension_m": 9.25,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        10.0,
+        1,
+        10.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 18,
+        "density": "high",
+        "min_clearance": 2,
+        "stack_priority": 0.85,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "pendulum_slap": {
+      "name": "Pendulum Slap",
+      "lookup_name": "pendulum_slap",
+      "description": "A double pendulum that slaps soft bodies.",
+      "scene": "res://algorithms/softbodies/slap_test/pendulum_slap.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "parameters": {
+        "footprint": [
+          2,
+          2,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "intermediate",
+      "tags": [
+        "pendulum",
+        "physics",
+        "wave"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "capsule"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          1.5,
+          7.79,
+          1.51
+        ],
+        "aabb_center": [
+          0.0,
+          4.13,
+          0.46
+        ],
+        "grid_cells": [
+          2.0,
+          2.0
+        ],
+        "max_dimension_m": 7.79,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        2.0,
+        1,
+        2.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 18,
+        "density": "high",
+        "min_clearance": 2,
+        "stack_priority": 0.85,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "softbody_gallery_part1": {
+      "name": "SoftBody Gallery Part 1",
+      "lookup_name": "softbody_gallery_part1",
+      "description": "Part 1 of the soft body test gallery.",
+      "scene": "res://algorithms/softbodies/softbody_gallery_part1.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "art",
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder",
+            "torus",
+            "prism",
+            "capsule"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~128"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 156,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          26.0,
+          1.6,
+          6.0
+        ],
+        "aabb_center": [
+          12.5,
+          0.2,
+          2.5
+        ],
+        "grid_cells": [
+          26.0,
+          6.0
+        ],
+        "max_dimension_m": 26.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        26.0,
+        1,
+        6.0
+      ],
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 60,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "softbody_gallery_part2": {
+      "name": "SoftBody Gallery Part 2",
+      "lookup_name": "softbody_gallery_part2",
+      "description": "Part 2 of the soft body test gallery.",
+      "scene": "res://algorithms/softbodies/softbody_gallery_part2.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "sequence": "softbodies",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "art",
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder",
+            "torus",
+            "prism",
+            "capsule"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~128"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 182,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          26.0,
+          2.4,
+          6.98
+        ],
+        "aabb_center": [
+          12.5,
+          0.0,
+          2.69
+        ],
+        "grid_cells": [
+          26.0,
+          7.0
+        ],
+        "max_dimension_m": 26.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        26.0,
+        1,
+        7.0
+      ],
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 60,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "softbody_gallery_part3": {
+      "name": "SoftBody Gallery Part 3",
+      "lookup_name": "softbody_gallery_part3",
+      "description": "Part 3 of the soft body test gallery.",
+      "scene": "res://algorithms/softbodies/softbody_gallery_part3.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "sequence": "softbodies",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "tags": [
+        "physics"
+      ],
+      "dev_themes": [
+        "art",
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder",
+            "torus",
+            "prism",
+            "capsule"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~128"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 182,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          26.0,
+          1.0,
+          6.3
+        ],
+        "aabb_center": [
+          12.5,
+          0.0,
+          2.35
+        ],
+        "grid_cells": [
+          26.0,
+          7.0
+        ],
+        "max_dimension_m": 26.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        26.0,
+        1,
+        7.0
+      ],
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 60,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "rounded_softbody_test": {
+      "name": "Rounded SoftBody — Strain Energy",
+      "lookup_name": "rounded_softbody_test",
+      "description": "Deformable rounded cube with 3 modes: strain energy heatmap coloring by vertex displacement, collision-response force arrows with impact bursts, and volume preservation with real-time ratio chart. VR hand squeeze interaction pushes vertices. ImmediateMesh overlays for all visualizations.",
+      "scene": "res://algorithms/softbodies/rounded_softbody_test.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "sequence": "softbodies",
+      "interactions": [
+        "squeeze"
+      ],
+      "parameters": {
+        "footprint": [
+          9,
+          7,
+          6
+        ],
+        "size_group": "environment"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "physics",
+        "soft_body",
+        "strain",
+        "deformable",
+        "interactive"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body",
+        "visualization"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 4,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          2.0,
+          3.55,
+          2.0
+        ],
+        "aabb_center": [
+          0.0,
+          1.52,
+          0.0
+        ],
+        "grid_cells": [
+          2.0,
+          2.0
+        ],
+        "max_dimension_m": 3.55,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        2.0,
+        1,
+        2.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 10,
+        "density": "medium",
+        "min_clearance": 2,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "jelly_cube": {
+      "name": "Jelly Cube",
+      "lookup_name": "jelly_cube",
+      "description": "A soft, deformable cube that jiggles when touched. VR-enabled with physics parameter controls for stiffness, damping, and pressure.",
+      "scene": "res://commons/artifacts/jelly_cube/jelly_cube.tscn",
+      "category": "physics",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "sequence": "softbodies",
+      "interactions": [
+        "grab"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "interaction": "grab",
+      "qfep_connection": "Low stiffness = high Î» territory. Form becomes fluid, resists fixed categories.",
+      "complexity": "beginner",
+      "tags": [
+        "softbody",
+        "physics",
+        "deformable",
+        "jelly",
+        "queer_morphology",
+        "interactive"
+      ],
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "cylinder"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "introduces",
+          "spring",
+          "foundation",
+          "before",
+          "cloth_straps"
+        ],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 1,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          0.48,
+          0.3,
+          0.65
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.12
+        ],
+        "grid_cells": [
+          1.0,
+          1.0
+        ],
+        "max_dimension_m": 0.65,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        1.0,
+        1,
+        1.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 2,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "softbodytest": {
+      "lookup_name": "softbodytest",
+      "name": "softbodytest",
+      "description": "softbodytest",
+      "scene": "res://algorithms/softbodies/softbodytest.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "tags": [
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder",
+            "torus",
+            "prism",
+            "capsule"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~128"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 156,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          26.0,
+          1.6,
+          6.0
+        ],
+        "aabb_center": [
+          12.5,
+          0.2,
+          2.5
+        ],
+        "grid_cells": [
+          26.0,
+          6.0
+        ],
+        "max_dimension_m": 26.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 60,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "soft_mushroom": {
+      "lookup_name": "soft_mushroom",
+      "name": "soft_mushroom",
+      "description": "soft_mushroom",
+      "scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "footprint": [
+        5,
+        3,
+        5
+      ],
+      "size_group": "environment",
+      "parameters": {
+        "footprint": [
+          5,
+          3,
+          5
+        ],
+        "size_group": "environment"
+      },
+      "complexity": "beginner",
+      "dev_themes": [
+        "physics",
+        "soft_body"
+      ],
+      "tags": [
+        "soft_body"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "sphere",
+            "cylinder"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~256"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "extends",
+          "jelly_cube",
+          "single",
+          "object",
+          "deformation"
+        ],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 420,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          19.45,
+          2.37,
+          20.07
+        ],
+        "aabb_center": [
+          -0.22,
+          0.29,
+          -0.17
+        ],
+        "grid_cells": [
+          20.0,
+          21.0
+        ],
+        "max_dimension_m": 20.07,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 60,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.273850Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "frozen_glass_vessel": {
+      "lookup_name": "frozen_glass_vessel",
+      "name": "Frozen Glass Vessel",
+      "description": "Walkable glass vessel whose shape emerged from physics, not design. Sphere + top-pin ring + pre-inflation pulse + gravity + N settle steps = a drooping amphora, long bottle, wide bowl, or slumped vase depending on force balance. The clock is part of the genome — duration as design parameter. Walkable twin of gl01_classic_bulb from the soft-body gallery.",
+      "scene": "res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.tscn",
+      "category": "soft_body",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies",
+        "morphogenesis"
+      ],
+      "sequence": "softbodies",
+      "parameters": {
+        "footprint": [
+          2,
+          3,
+          2
+        ],
+        "size_group": "medium"
+      },
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "size_group": "medium",
+      "complexity": "advanced",
+      "tags": [
+        "soft_body",
+        "glass",
+        "vessel",
+        "frozen_process",
+        "walkable",
+        "physics"
+      ],
+      "dev_themes": [
+        "soft_body",
+        "physics",
+        "frozen_process",
+        "dna_bridge"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "around",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 1,
+        "cluster_with": [
+          "jelly_cube",
+          "rd_coral_garden",
+          "soft_mushrooms"
+        ],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 1,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          0.76,
+          1.82,
+          0.76
+        ],
+        "aabb_center": [
+          0.0,
+          -0.36,
+          0.0
+        ],
+        "grid_cells": [
+          1.0,
+          1.0
+        ],
+        "max_dimension_m": 1.82,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 4,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.274361Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "spring_node_toy": {
+      "lookup_name": "spring_node_toy",
+      "scene": "res://commons/artifacts/spring_node_toy/spring_node_toy.tscn",
+      "class_name": "SpringNodeToy",
+      "name": "Spring Node Toy (the atom of a soft body)",
+      "description": "A held two-mass-one-spring: the spring pulls toward its rest length. A soft body is just this, many times over.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "small",
+        "mass-spring"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "mass_spring_bench": {
+      "lookup_name": "mass_spring_bench",
+      "scene": "res://commons/artifacts/mass_spring_bench/mass_spring_bench.tscn",
+      "class_name": "MassSpringBench",
+      "name": "Mass-Spring Bench (a shape nobody specified)",
+      "description": "A grid of masses and springs settling on a bench - each spring pulling to rest length, the whole finding a shape nobody specified.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "medium",
+        "mass-spring"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "verlet_workbench": {
+      "lookup_name": "verlet_workbench",
+      "scene": "res://commons/artifacts/verlet_workbench/verlet_workbench.tscn",
+      "class_name": "VerletWorkbench",
+      "name": "Verlet Workbench (constraints that hold themselves)",
+      "description": "A cloth relaxing under a Verlet integrator with a constraint-pass dial - integrate position from position, and the constraints hold without ever being solved.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "verlet"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "pressure_dome_room": {
+      "lookup_name": "pressure_dome_room",
+      "scene": "res://commons/artifacts/pressure_dome_room/pressure_dome_room.tscn",
+      "class_name": "PressureDomeRoom",
+      "name": "Pressure Dome Room (pushing out, pulling back)",
+      "description": "A room-scale pressurised soft dome you stand under: internal pressure pushing out against strain energy pulling back - a balance held, not a skeleton imposed.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "strain,"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "elasticity_press": {
+      "lookup_name": "elasticity_press",
+      "scene": "res://commons/artifacts/elasticity_press/elasticity_press.tscn",
+      "class_name": "ElasticityPress",
+      "name": "Elasticity Press (strain energy, stored and returned)",
+      "description": "A press squeezing a soft block, a strain-energy readout climbing as it compresses and springing back on release.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "strain,"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "descent_marble_toy": {
+      "lookup_name": "descent_marble_toy",
+      "scene": "res://commons/artifacts/descent_marble_toy/descent_marble_toy.tscn",
+      "class_name": "DescentMarbleToy",
+      "name": "Descent Marble Toy (finding a shape is rolling downhill)",
+      "description": "A held marble-in-a-bowl rolling down to its minimum: finding a shape is rolling downhill on an energy landscape.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "small",
+        "settling:"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "energy_landscape_bench": {
+      "lookup_name": "energy_landscape_bench",
+      "scene": "res://commons/artifacts/energy_landscape_bench/energy_landscape_bench.tscn",
+      "class_name": "EnergyLandscapeBench",
+      "name": "Energy Landscape Bench (height is energy)",
+      "description": "A soft body settling on a wavy energy-landscape surface where height is energy, descending into the nearest basin.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "medium",
+        "settling:"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "max_q_basin_room": {
+      "lookup_name": "max_q_basin_room",
+      "scene": "res://commons/artifacts/max_q_basin_room/max_q_basin_room.tscn",
+      "class_name": "MaxQBasinRoom",
+      "name": "Max-Q Basin Room (the liveliest minimum)",
+      "description": "A room with a deep narrow DEAD well (rigid, one shape) and a shallow wide ALIVE well (soft, a shape it keeps re-finding). Max Q is the liveliest minimum, not the deepest.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "settling:"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "gradient_descent_optimizer": {
+      "lookup_name": "gradient_descent_optimizer",
+      "scene": "res://commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.tscn",
+      "class_name": "GradientDescentOptimizer",
+      "name": "Gradient Descent Optimizer (the bridge to learning)",
+      "description": "A soft body descending an energy landscape toward max Q with a step/energy readout - the same motion as training a model. Soft bodies are gradient descent you can poke.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "settling:"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "jelly_room": {
+      "lookup_name": "jelly_room",
+      "scene": "res://commons/artifacts/jelly_room/jelly_room.tscn",
+      "class_name": "JellyRoom",
+      "name": "Jelly Room (push it, it forgets)",
+      "description": "A room of wobbling jelly pillars you walk among: push it and it pushes back, then forgets - elastic deformation, the body that returns to itself.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "jelly"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "cloth_loom": {
+      "lookup_name": "cloth_loom",
+      "scene": "res://commons/artifacts/cloth_loom/cloth_loom.tscn",
+      "class_name": "ClothLoom",
+      "name": "Cloth Loom (all surface, no inside)",
+      "description": "A loom draping a flag or sail under gravity and breeze - cloth is the simplest soft body, all surface and no inside, learning to fold from its own weight.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "cloth"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "bounce_egg_toy": {
+      "lookup_name": "bounce_egg_toy",
+      "scene": "res://commons/artifacts/bounce_egg_toy/bounce_egg_toy.tscn",
+      "class_name": "BounceEggToy",
+      "name": "Bounce Egg Toy (store it, give it back)",
+      "description": "A held squishy egg that bounces and squashes: store the impact in the springs and give it back.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "small",
+        "bounce"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "bounce_arena_room": {
+      "lookup_name": "bounce_arena_room",
+      "scene": "res://commons/artifacts/bounce_arena_room/bounce_arena_room.tscn",
+      "class_name": "BounceArenaRoom",
+      "name": "Bounce Arena Room (bounce instead of break)",
+      "description": "A room-scale bounce arena of trampolines and soft pillars - the joy of a body that bounces instead of breaking.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "bounce"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "viscous_bench": {
+      "lookup_name": "viscous_bench",
+      "scene": "res://commons/artifacts/viscous_bench/viscous_bench.tscn",
+      "class_name": "ViscousBench",
+      "name": "Viscous Bench (where soft becomes fluid)",
+      "description": "A bench of viscous blobs oozing, merging, slumping - turn down the stiffness and the soft body starts to flow.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "medium",
+        "viscous"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "lava_lamp_tool": {
+      "lookup_name": "lava_lamp_tool",
+      "scene": "res://commons/artifacts/lava_lamp_tool/lava_lamp_tool.tscn",
+      "class_name": "LavaLampTool",
+      "name": "Lava Lamp Tool (viscosity as a tool)",
+      "description": "A lava-lamp device: viscous blobs rising and falling in a glass column on a heat loop - viscosity put to use.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "viscous"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "membrane_toy": {
+      "lookup_name": "membrane_toy",
+      "scene": "res://commons/artifacts/membrane_toy/membrane_toy.tscn",
+      "class_name": "MembraneToy",
+      "name": "Membrane Toy (an inside, and a way across)",
+      "description": "A held lipid-bilayer patch that lets a particle cross: the boundary that makes an inside while letting the world across.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "small",
+        "the"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "membrane_bench": {
+      "lookup_name": "membrane_bench",
+      "scene": "res://commons/artifacts/membrane_bench/membrane_bench.tscn",
+      "class_name": "MembraneBench",
+      "name": "Membrane Bench (the Markov blanket made flesh)",
+      "description": "A selectively-permeable membrane on a bench: small particles cross, big ones bounce - the Markov blanket made flesh, the edge an organism holds by exchanging.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "medium",
+        "the"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "membrane_filter": {
+      "lookup_name": "membrane_filter",
+      "scene": "res://commons/artifacts/membrane_filter/membrane_filter.tscn",
+      "class_name": "MembraneFilter",
+      "name": "Membrane Filter (the boundary as a tool)",
+      "description": "A membrane as a dialysis filter: mixed particles in, only some pass, sorted out the other side.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "the"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "breathing_toy": {
+      "lookup_name": "breathing_toy",
+      "scene": "res://commons/artifacts/breathing_toy/breathing_toy.tscn",
+      "class_name": "BreathingToy",
+      "name": "Breathing Toy (a boundary that holds by moving)",
+      "description": "A held breathing sac that swells and shrinks - a boundary that holds its shape only by moving.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "small",
+        "breathing"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "breathing_hall_room": {
+      "lookup_name": "breathing_hall_room",
+      "scene": "res://commons/artifacts/breathing_hall_room/breathing_hall_room.tscn",
+      "class_name": "BreathingHallRoom",
+      "name": "Breathing Hall Room (it could burst)",
+      "description": "A room whose soft walls and columns breathe - bulging in and out around you. It breathes, it bulges, it could burst.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "breathing"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "pressure_valve_tool": {
+      "lookup_name": "pressure_valve_tool",
+      "scene": "res://commons/artifacts/pressure_valve_tool/pressure_valve_tool.tscn",
+      "class_name": "PressureValveTool",
+      "name": "Pressure Valve Tool (the abject, regulated)",
+      "description": "A valve regulating a breathing soft body: a gauge, the body swelling until released - the abject boundary as a regulated tool.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "breathing"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "miura_press": {
+      "lookup_name": "miura_press",
+      "scene": "res://commons/artifacts/miura_press/miura_press.tscn",
+      "class_name": "MiuraPress",
+      "name": "Miura Press (a solid packed into a line)",
+      "description": "A press folding a flat sheet into a Miura-ori packed solid and back - the crease pattern that packs a map, a solar array, a wing into a line.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "origami"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "folding_menagerie_room": {
+      "lookup_name": "folding_menagerie_room",
+      "scene": "res://commons/artifacts/folding_menagerie_room/folding_menagerie_room.tscn",
+      "class_name": "FoldingMenagerieRoom",
+      "name": "Folding Menagerie Room (walks by folding)",
+      "description": "A room of folding creatures unfolding and re-folding, each moving by changing its shape - structure that walks by folding, not by pushing against bone.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "folding"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "octopus_bench": {
+      "lookup_name": "octopus_bench",
+      "scene": "res://commons/artifacts/octopus_bench/octopus_bench.tscn",
+      "class_name": "OctopusBench",
+      "name": "Octopus Bench (no bone, all middle)",
+      "description": "An octopus arm curling and coiling on a bench, suckers along its length - distributed soft cognition, no bone.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "medium",
+        "tentacle"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "octopus_room": {
+      "lookup_name": "octopus_room",
+      "scene": "res://commons/artifacts/octopus_room/octopus_room.tscn",
+      "class_name": "OctopusRoom",
+      "name": "Octopus Room (the queer body)",
+      "description": "A room-scale octopus: a soft mantle, eight curling arms, colour-shifting skin. No skeleton, not a puddle - the queer body par excellence.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "tentacle"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "rigidity_toy": {
+      "lookup_name": "rigidity_toy",
+      "scene": "res://commons/artifacts/rigidity_toy/rigidity_toy.tscn",
+      "class_name": "RigidityToy",
+      "name": "Rigidity Toy (the alive middle)",
+      "description": "Crystal, soft blob, puddle side by side - only the middle breathes. Rigid is dead, fluid is dead; soft is the only state that holds a form and still flows.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "small",
+        "soft"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "rigidity_dial_bench": {
+      "lookup_name": "rigidity_dial_bench",
+      "scene": "res://commons/artifacts/rigidity_dial_bench/rigidity_dial_bench.tscn",
+      "class_name": "RigidityDialBench",
+      "name": "Rigidity Dial Bench (sweep the stiffness)",
+      "description": "A row of bodies swept along a stiffness dial - crystal (frozen) through soft (alive) to puddle (slumped). The pointer rides to the live middle.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "medium",
+        "soft"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "lambda_edge_room": {
+      "lookup_name": "lambda_edge_room",
+      "scene": "res://commons/artifacts/lambda_edge_room/lambda_edge_room.tscn",
+      "class_name": "LambdaEdgeRoom",
+      "name": "Lambda-Edge Room (made flesh)",
+      "description": "A rigid crystalline wall on one side, a fluid pool on the other, and the soft alive forms breathing in the band between. You stand in the lambda_edge made flesh.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "soft"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "aliveness_meter": {
+      "lookup_name": "aliveness_meter",
+      "scene": "res://commons/artifacts/aliveness_meter/aliveness_meter.tscn",
+      "class_name": "AlivenessMeter",
+      "name": "Aliveness Meter (peaks in the middle)",
+      "description": "A meter reading how alive a body is by where it sits on the rigid-fluid axis - the needle peaks in the soft middle and drops to dead at both ends.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "soft"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "abject_toy": {
+      "lookup_name": "abject_toy",
+      "scene": "res://commons/artifacts/abject_toy/abject_toy.tscn",
+      "class_name": "AbjectToy",
+      "name": "Abject Toy (won't stay inside its line)",
+      "description": "A held abject blob that troubles its own boundary - a membrane that bulges and weeps a droplet, never quite staying bounded.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "small",
+        "the"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "abject_bench": {
+      "lookup_name": "abject_bench",
+      "scene": "res://commons/artifacts/abject_bench/abject_bench.tscn",
+      "class_name": "AbjectBench",
+      "name": "Abject Bench (softness as a feeling)",
+      "description": "A soft body that leaks across its boundary - drips, seeps, reaches past its edge, pulls back. Abjection as a generative force; softness as a feeling.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "medium",
+        "the"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "abject_room": {
+      "lookup_name": "abject_room",
+      "scene": "res://commons/artifacts/abject_room/abject_room.tscn",
+      "class_name": "AbjectRoom",
+      "name": "Abject Room (inside and out)",
+      "description": "A room of the abject: membranes leaking, boundaries troubled, soft forms reaching past their edges - the edge that troubles the line between inside and out.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "large",
+        "the"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "becoming_toy": {
+      "lookup_name": "becoming_toy",
+      "scene": "res://commons/artifacts/becoming_toy/becoming_toy.tscn",
+      "class_name": "BecomingToy",
+      "name": "Becoming Toy (form emerges)",
+      "description": "A held scatter of particles drifting from noise into a coherent shape and back - form is not imposed, it emerges.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "small",
+        "matter"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "becoming_bench": {
+      "lookup_name": "becoming_bench",
+      "scene": "res://commons/artifacts/becoming_bench/becoming_bench.tscn",
+      "class_name": "BecomingBench",
+      "name": "Becoming Bench (entropy becoming morphology)",
+      "description": "A field of particles settling from disorder into an organized form - entropy becoming morphology.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "medium",
+        "matter"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "self_shaping_forge": {
+      "lookup_name": "self_shaping_forge",
+      "scene": "res://commons/artifacts/self_shaping_forge/self_shaping_forge.tscn",
+      "class_name": "SelfShapingForge",
+      "name": "Self-Shaping Forge (the thesis made flesh)",
+      "description": "A forge where raw matter descends toward max Q, its liveliest form, and emerges - the project's thesis made flesh: gradient descent toward the shape that persists by moving.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "applied",
+        "matter"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "morphology",
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    }
+  }
 }

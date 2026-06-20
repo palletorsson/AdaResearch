@@ -199,8 +199,8 @@ static func _cloth_mesh(sim, color: Color, roughness: float, double_sided: bool)
 	return mi
 
 
-static func _particle_spheres(sim, color: Color, roughness: float, radius: float) -> MeshInstance3D:
-	var mmi := MeshInstance3D.new()
+static func _particle_spheres(sim, color: Color, roughness: float, radius: float) -> MultiMeshInstance3D:
+	var mmi := MultiMeshInstance3D.new()
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.use_colors = false
