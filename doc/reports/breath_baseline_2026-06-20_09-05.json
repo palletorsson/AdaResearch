@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-06-20T09:05",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "mean_head": 6.0909,
+    "note": "all 22 seq HEAD>=6 (vr_testing, human-blocked); randomness COMPLETE; head saturated"
+  },
+  "heat_map_top_5": [
+    "primitive 70 (active, 2 commits)",
+    "pattern 65 (active)",
+    "forces documentation 60",
+    "release_gates 60",
+    "mindmap maps 60"
+  ],
+  "garden_health": {
+    "voice_coverage_pct": 52,
+    "embodiment_rate_pct": 33,
+    "phantom_limbs": 830,
+    "primitives": "106 arts / 73 voice / SCATTERED"
+  },
+  "release_gates": {
+    "A": "PASS",
+    "B": "PASS",
+    "C": "PASS (945A/146B/162C/0F)",
+    "D": "PASS",
+    "overall": "PASS"
+  }
+}

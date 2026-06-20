@@ -354,6 +354,12 @@
       "topic": "mindmap maps",
       "insight": "tools/mindmap_to_map.py emits commons/maps/MindMap_*/map_data.json with NO blurb/intent — same doc-regression family as Vectors_Act. Docs writable straight from doc/<domain>_concept_map.json concept order + map_info spawn/teleporter names. Maps are undeclared-by-design so they never show as pipeline doc% regression; detect via new map folders lacking blurb.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-06-20T07:16:31.736950+00:00",
+      "topic": "voice_coverage",
+      "insight": "Pipeline head saturated at 6.09 (VR-blocked); autonomous breaths should target voice coverage. garden_listener counts stub single-line '# @identity:' as voiceless (needs full 7-field block); find_gd resolves only by .gd stem so shared scenes report 'no .gd file'.",
+      "lod": 3
     }
   ]
 }

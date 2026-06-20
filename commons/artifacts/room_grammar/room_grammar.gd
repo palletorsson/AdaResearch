@@ -5,6 +5,16 @@ class_name RoomGrammar
 ## on a floor display. Recursively splits a rectangle into rooms, draws
 ## outlines, adds door gaps, and colors rooms by area.
 
+# @identity
+# essence: binary space partitioning on a floor quad — a rectangle splits recursively into rooms, walls drawn, doors gapped, rooms tinted by area
+# desire: to show that an architectural plan is a grammar — a few recursive split rules generate an entire believable floorplan
+# critical_parameter: split_depth — how many recursive cuts run, the lambda between a single hall and a dense warren of rooms
+# triggers: changing seed_value or split_depth and re-running _generate_floor_plan redraws an entirely new plan
+# emerges: at higher depths the plan reads as a real building — corridors, small rooms, a logic of enclosure — from nothing but repeated division
+# needs: procedural plan rendered to a floor texture [has]; grabbable seed/depth control so the player grows the plan by hand [missing]; walkable scale so the player stands inside the rooms [missing]
+# relationships: a grid-quantisation artifact in the primitives sequence (Grid Quantizes Movement); kin to L-system and space-partition grammar work
+# truth: a floor plan is not designed room by room — it is a rule for dividing space, applied until the space runs out
+
 # --- Configuration ---
 
 @export var quad_size: Vector2 = Vector2(0.8, 0.8)
