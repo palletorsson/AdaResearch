@@ -19,7 +19,7 @@ import json, glob, os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_DIR = os.path.normpath(os.path.join(ROOT, "..", "ada_encyclopedia", "public", "scene-catalog"))
 
-HIGH_SIGNAL = set()   # no dedicated fractals.json registry — gate-driven
+HIGH_SIGNAL = {"fractals.json"}   # no dedicated fractals.json registry — gate-driven
 GATE = re.compile(r"fractal|mandelbrot|julia|sierpinski|menger|cantor|koch|recursi|barnsley|"
                   r"strange_attractor|lyapunov|box_count|golden_rectangle|romanesco|fibonacci|"
                   r"diffusion_limited|\bdla\b|space_filling|hilbert3d|snowflake|newton_fractal|burning_ship|"
@@ -133,7 +133,50 @@ def tier_of(lookup, name, fp):
     if fp >= 3: return "medium"
     return "small"
 
-FORCE = {}
+FORCE = {
+  "fractal_antenna_toy": ("Fractal antennas & structures", "small"),
+  "fractal_heat_exchanger": ("Fractal antennas & structures", "medium"),
+  "fractal_truss_tower": ("Fractal antennas & structures", "large"),
+  "fractal_antenna": ("Fractal antennas & structures", "applied"),
+  "fractal_stool_toy": ("Fractal furniture", "small"),
+  "furniture_recursion_bench": ("Fractal furniture", "medium"),
+  "fractal_furniture_room": ("Fractal furniture", "large"),
+  "fractal_facade_toy": ("Fractal architecture", "small"),
+  "fractal_arch_bench": ("Fractal architecture", "medium"),
+  "fractal_skyline_room": ("Fractal architecture", "large"),
+  "recursion_bench": ("Recursion (calls itself)", "medium"),
+  "recursive_tree_bench": ("Recursive trees", "medium"),
+  "recursion_animator": ("Recursive trees", "applied"),
+  "dimension_bench": ("Fractal dimension", "medium"),
+  "dimension_room": ("Fractal dimension", "large"),
+  "dimension_meter": ("Fractal dimension", "applied"),
+  "cantor_bench": ("Cantor set", "medium"),
+  "koch_snowflake_press": ("Koch curve & snowflake", "applied"),
+  "sierpinski_bench": ("Sierpinski", "medium"),
+  "sierpinski_stamp": ("Sierpinski", "applied"),
+  "menger_toy": ("Menger sponge", "small"),
+  "menger_bench": ("Menger sponge", "medium"),
+  "menger_filter": ("Menger sponge", "applied"),
+  "mandelbrot_bench": ("Mandelbrot set", "medium"),
+  "julia_bench": ("Julia sets", "medium"),
+  "lyapunov_bench": ("Lyapunov & escape-time", "medium"),
+  "escape_time_room": ("Lyapunov & escape-time", "large"),
+  "newton_fractal_tool": ("Lyapunov & escape-time", "applied"),
+  "ifs_bench": ("Iterated function systems (IFS)", "medium"),
+  "ifs_room": ("Iterated function systems (IFS)", "large"),
+  "chaos_game_tool": ("Iterated function systems (IFS)", "applied"),
+  "golden_spiral_bench": ("Golden spiral & phyllotaxis", "medium"),
+  "dla_bench": ("Diffusion-limited aggregation", "medium"),
+  "dla_grower": ("Diffusion-limited aggregation", "applied"),
+  "attractor_bench": ("Strange attractors", "medium"),
+  "attractor_room": ("Strange attractors", "large"),
+  "attractor_plotter": ("Strange attractors", "applied"),
+  "terrain_toy": ("Fractal terrain & clouds", "small"),
+  "terrain_bench": ("Fractal terrain & clouds", "medium"),
+  "terrain_forge": ("Fractal terrain & clouds", "applied"),
+  "space_filling_bench": ("Space-filling curves", "medium"),
+  "space_filling_room": ("Space-filling curves", "large"),
+}
 
 
 def _hit(text, kw):

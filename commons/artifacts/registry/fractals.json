@@ -1,0 +1,1899 @@
+{
+  "registry_info": {
+    "name": "fractals",
+    "description": "Fractal artifacts - recursion, classic sets, escape-time, IFS, chaos, and useful structures (the /fractal-map chapter).",
+    "created": "2026-06-20"
+  },
+  "artifacts": {
+    "fractal_antenna_toy": {
+      "lookup_name": "fractal_antenna_toy",
+      "scene": "res://commons/artifacts/fractal_antenna_toy/fractal_antenna_toy.tscn",
+      "class_name": "FractalAntennaToy",
+      "name": "Fractal Antenna Toy (hears every band)",
+      "description": "A held Sierpinski-gasket antenna: a self-similar conductor that resonates at many frequencies at once. A fractal hears every band.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "small",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "fractal_heat_exchanger": {
+      "lookup_name": "fractal_heat_exchanger",
+      "scene": "res://commons/artifacts/fractal_heat_exchanger/fractal_heat_exchanger.tscn",
+      "class_name": "FractalHeatExchanger",
+      "name": "Fractal Heat Exchanger (all surface)",
+      "description": "A bench heat-exchanger of recursive branching fins - self-similarity maximises surface area in a finite volume. All surface, no volume.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "fractal_truss_tower": {
+      "lookup_name": "fractal_truss_tower",
+      "scene": "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.tscn",
+      "class_name": "FractalTrussTower",
+      "name": "Fractal Truss Tower (max strength, min material)",
+      "description": "A room-scale branching truss whose struts split into thinner struts - the Eiffel trick: span the most with the least.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "large",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "fractal_antenna": {
+      "lookup_name": "fractal_antenna",
+      "scene": "res://commons/artifacts/fractal_antenna/fractal_antenna.tscn",
+      "class_name": "FractalAntenna",
+      "name": "Fractal Antenna (multi-band)",
+      "description": "A working multi-band Koch/Sierpinski antenna with a frequency-response readout - the engineering payoff of self-similarity.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "fractal_stool_toy": {
+      "lookup_name": "fractal_stool_toy",
+      "scene": "res://commons/artifacts/fractal_stool_toy/fractal_stool_toy.tscn",
+      "class_name": "FractalStoolToy",
+      "name": "Fractal Stool Toy (legs of legs)",
+      "description": "A held stool whose leg recursively forks into legs - the branching that holds a tree up holds a seat up too.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "small",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "furniture_recursion_bench": {
+      "lookup_name": "furniture_recursion_bench",
+      "scene": "res://commons/artifacts/furniture_recursion_bench/furniture_recursion_bench.tscn",
+      "class_name": "FurnitureRecursionBench",
+      "name": "Furniture Recursion Bench (a chair that is chairs)",
+      "description": "A bench showing a chair assembled by recursion: a frame whose corners are smaller frames, down to a real seat.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "fractal_furniture_room": {
+      "lookup_name": "fractal_furniture_room",
+      "scene": "res://commons/artifacts/fractal_furniture_room/fractal_furniture_room.tscn",
+      "class_name": "FractalFurnitureRoom",
+      "name": "Fractal Furniture Room (recurse a strut)",
+      "description": "A room of fractal furniture - a recursive chair, a recursive table, a branching shelf. Recurse a strut and you get a chair.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "large",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "fractal_facade_toy": {
+      "lookup_name": "fractal_facade_toy",
+      "scene": "res://commons/artifacts/fractal_facade_toy/fractal_facade_toy.tscn",
+      "class_name": "FractalFacadeToy",
+      "name": "Fractal Facade Toy (tracery)",
+      "description": "A held Gothic facade panel: an arch filled with smaller arches filled with smaller still. The whole is in the part.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "small",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "fractal_arch_bench": {
+      "lookup_name": "fractal_arch_bench",
+      "scene": "res://commons/artifacts/fractal_arch_bench/fractal_arch_bench.tscn",
+      "class_name": "FractalArchBench",
+      "name": "Fractal Arch Bench (span the most)",
+      "description": "A recursive arch built of smaller arches - self-similar structure spans the most with the least.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "fractal_skyline_room": {
+      "lookup_name": "fractal_skyline_room",
+      "scene": "res://commons/artifacts/fractal_skyline_room/fractal_skyline_room.tscn",
+      "class_name": "FractalSkylineRoom",
+      "name": "Fractal Skyline Room (self-similar structure)",
+      "description": "A room-scale fractal skyline of recursive branching towers and spires - the Eiffel structure at city scale.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "large",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "recursion_bench": {
+      "lookup_name": "recursion_bench",
+      "scene": "res://commons/artifacts/recursion_bench/recursion_bench.tscn",
+      "class_name": "RecursionBench",
+      "name": "Recursion Bench (contains itself)",
+      "description": "A bench of recursion: rings within rings within rings, the call happening before each is drawn. A rule that contains itself.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "recursion"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "recursive_tree_bench": {
+      "lookup_name": "recursive_tree_bench",
+      "scene": "res://commons/artifacts/recursive_tree_bench/recursive_tree_bench.tscn",
+      "class_name": "RecursiveTreeBench",
+      "name": "Recursive Tree Bench (two smaller trees)",
+      "description": "A bench recursive tree: split, rotate, recurse - a trunk that is two smaller trees, forever, down to the base case.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "recursive"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "recursion_animator": {
+      "lookup_name": "recursion_animator",
+      "scene": "res://commons/artifacts/recursion_animator/recursion_animator.tscn",
+      "class_name": "RecursionAnimator",
+      "name": "Recursion Animator (watch the depth)",
+      "description": "A device that grows the tree one recursion level deeper each tick, with a depth readout - recursion made watchable.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "recursive"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "dimension_bench": {
+      "lookup_name": "dimension_bench",
+      "scene": "res://commons/artifacts/dimension_bench/dimension_bench.tscn",
+      "class_name": "DimensionBench",
+      "name": "Dimension Bench (box-counting)",
+      "description": "A fractal under a covering grid: count the filled boxes at a scale and read D = log N / log S. The coastline between 1D and 2D.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "dimension_room": {
+      "lookup_name": "dimension_room",
+      "scene": "res://commons/artifacts/dimension_room/dimension_room.tscn",
+      "class_name": "DimensionRoom",
+      "name": "Dimension Room (between 1D and 2D)",
+      "description": "A room measuring a coastline by box grids at finer and finer scales - the dimension that refuses to be an integer.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "large",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "dimension_meter": {
+      "lookup_name": "dimension_meter",
+      "scene": "res://commons/artifacts/dimension_meter/dimension_meter.tscn",
+      "class_name": "DimensionMeter",
+      "name": "Dimension Meter (scan a shape)",
+      "description": "A scanner device that measures a shape's fractal dimension - point it at a fractal, read the D.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "cantor_bench": {
+      "lookup_name": "cantor_bench",
+      "scene": "res://commons/artifacts/cantor_bench/cantor_bench.tscn",
+      "class_name": "CantorBench",
+      "name": "Cantor Bench (remove the middle third)",
+      "description": "The Cantor set on a bench: remove the middle third, recurse, generations stacked - a dust of zero length, uncountably many points.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "cantor"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "koch_snowflake_press": {
+      "lookup_name": "koch_snowflake_press",
+      "scene": "res://commons/artifacts/koch_snowflake_press/koch_snowflake_press.tscn",
+      "class_name": "KochSnowflakePress",
+      "name": "Koch Snowflake Press (infinite perimeter)",
+      "description": "A press stamping out Koch snowflakes - infinite perimeter around a finite area, made on demand.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "koch"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "sierpinski_bench": {
+      "lookup_name": "sierpinski_bench",
+      "scene": "res://commons/artifacts/sierpinski_bench/sierpinski_bench.tscn",
+      "class_name": "SierpinskiBench",
+      "name": "Sierpinski Bench (the same hole)",
+      "description": "The Sierpinski triangle recursed on a bench - D ~ 1.585, the same hole at every scale, exactly what Rule 90 draws.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "sierpinski"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "sierpinski_stamp": {
+      "lookup_name": "sierpinski_stamp",
+      "scene": "res://commons/artifacts/sierpinski_stamp/sierpinski_stamp.tscn",
+      "class_name": "SierpinskiStamp",
+      "name": "Sierpinski Stamp (triangle of triangles)",
+      "description": "A stamp device tiling Sierpinski gaskets onto a surface - the triangle of triangles of triangles, as a pattern tool.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "sierpinski"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "menger_toy": {
+      "lookup_name": "menger_toy",
+      "scene": "res://commons/artifacts/menger_toy/menger_toy.tscn",
+      "class_name": "MengerToy",
+      "name": "Menger Toy (held sponge)",
+      "description": "A held Menger sponge: a cube with its middles removed, recursively. Infinite surface around vanishing volume.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "small",
+        "menger"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "menger_bench": {
+      "lookup_name": "menger_bench",
+      "scene": "res://commons/artifacts/menger_bench/menger_bench.tscn",
+      "class_name": "MengerBench",
+      "name": "Menger Bench (zero volume)",
+      "description": "The Menger sponge forming through its iterations on a bench - D ~ 2.73, infinite surface, zero volume.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "menger"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "menger_filter": {
+      "lookup_name": "menger_filter",
+      "scene": "res://commons/artifacts/menger_filter/menger_filter.tscn",
+      "class_name": "MengerFilter",
+      "name": "Menger Filter (all surface)",
+      "description": "A Menger sponge as a 3D filter/scaffold in a housing - the useful side of all-surface, zero-volume.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "menger"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "mandelbrot_bench": {
+      "lookup_name": "mandelbrot_bench",
+      "scene": "res://commons/artifacts/mandelbrot_bench/mandelbrot_bench.tscn",
+      "class_name": "MandelbrotBench",
+      "name": "Mandelbrot Bench (z -> z^2 + c)",
+      "description": "The Mandelbrot set on a bench: z -> z^2 + c asked of every point, the master fractal's infinitely intricate boundary.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "mandelbrot"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "julia_bench": {
+      "lookup_name": "julia_bench",
+      "scene": "res://commons/artifacts/julia_bench/julia_bench.tscn",
+      "class_name": "JuliaBench",
+      "name": "Julia Bench (move c, it breathes)",
+      "description": "A Julia set on a bench: one c, a whole set; move c and it breathes between connected and dust.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "julia"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "lyapunov_bench": {
+      "lookup_name": "lyapunov_bench",
+      "scene": "res://commons/artifacts/lyapunov_bench/lyapunov_bench.tscn",
+      "class_name": "LyapunovBench",
+      "name": "Lyapunov Bench (stability landscape)",
+      "description": "A Lyapunov fractal: colour by how fast nearby paths diverge, and stability itself becomes a fractal landscape.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "lyapunov"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "escape_time_room": {
+      "lookup_name": "escape_time_room",
+      "scene": "res://commons/artifacts/escape_time_room/escape_time_room.tscn",
+      "class_name": "EscapeTimeRoom",
+      "name": "Escape-Time Room (edge of chaos)",
+      "description": "A room of escape-time fractals - Mandelbrot, Julia, Newton on the walls - the edge between staying and escaping.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "large",
+        "lyapunov"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "newton_fractal_tool": {
+      "lookup_name": "newton_fractal_tool",
+      "scene": "res://commons/artifacts/newton_fractal_tool/newton_fractal_tool.tscn",
+      "class_name": "NewtonFractalTool",
+      "name": "Newton Fractal Tool (root basins)",
+      "description": "A Newton's-method fractal device: z^3-1 basins coloured by which root they fall to - root-finding made visible.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "lyapunov"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "ifs_bench": {
+      "lookup_name": "ifs_bench",
+      "scene": "res://commons/artifacts/ifs_bench/ifs_bench.tscn",
+      "class_name": "IfsBench",
+      "name": "IFS Bench (four maps, a fern)",
+      "description": "The chaos game on a bench: four affine maps, a point thrown thousands of times, and a Barnsley fern with no fern ever drawn.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "iterated"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "ifs_room": {
+      "lookup_name": "ifs_room",
+      "scene": "res://commons/artifacts/ifs_room/ifs_room.tscn",
+      "class_name": "IfsRoom",
+      "name": "IFS Room (a point, folded)",
+      "description": "A room of IFS attractors - fern, Sierpinski, tree - each a point folded by affine maps, forever.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "large",
+        "iterated"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "chaos_game_tool": {
+      "lookup_name": "chaos_game_tool",
+      "scene": "res://commons/artifacts/chaos_game_tool/chaos_game_tool.tscn",
+      "class_name": "ChaosGameTool",
+      "name": "Chaos Game Tool (throw, fold, repeat)",
+      "description": "A chaos-game device: a die picks a map, a point bounces, and the attractor accumulates out of pure repetition.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "iterated"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "golden_spiral_bench": {
+      "lookup_name": "golden_spiral_bench",
+      "scene": "res://commons/artifacts/golden_spiral_bench/golden_spiral_bench.tscn",
+      "class_name": "GoldenSpiralBench",
+      "name": "Golden Spiral Bench (137.5 degrees)",
+      "description": "Sunflower seeds packed at the 137.5 degree golden angle - how a plant packs the most seeds, the fractal that grows.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "golden"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "dla_bench": {
+      "lookup_name": "dla_bench",
+      "scene": "res://commons/artifacts/dla_bench/dla_bench.tscn",
+      "class_name": "DlaBench",
+      "name": "DLA Bench (stick where you land)",
+      "description": "Diffusion-limited aggregation: random walkers stick where they land and grow a coral, a frost - fractal branching from pure chance.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "diffusion-limited"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "dla_grower": {
+      "lookup_name": "dla_grower",
+      "scene": "res://commons/artifacts/dla_grower/dla_grower.tscn",
+      "class_name": "DlaGrower",
+      "name": "DLA Frost Generator",
+      "description": "A frost/lightning generator: walkers accrete a branching crystal over time - DLA as a growth device.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "diffusion-limited"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "attractor_bench": {
+      "lookup_name": "attractor_bench",
+      "scene": "res://commons/artifacts/attractor_bench/attractor_bench.tscn",
+      "class_name": "AttractorBench",
+      "name": "Attractor Bench (chaos with a shape)",
+      "description": "A Lorenz attractor on a bench: a deterministic path that never repeats and never escapes - chaos given a fractal shape.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "strange"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "attractor_room": {
+      "lookup_name": "attractor_room",
+      "scene": "res://commons/artifacts/attractor_room/attractor_room.tscn",
+      "class_name": "AttractorRoom",
+      "name": "Attractor Room (never repeats)",
+      "description": "A room-scale Lorenz butterfly you walk around - the strange attractor that never repeats and never escapes.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "large",
+        "strange"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "attractor_plotter": {
+      "lookup_name": "attractor_plotter",
+      "scene": "res://commons/artifacts/attractor_plotter/attractor_plotter.tscn",
+      "class_name": "AttractorPlotter",
+      "name": "Lorenz Plotter",
+      "description": "A plotter tracing the Lorenz path with the equations beside it - the butterfly drawn by its own dynamics.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "strange"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "terrain_toy": {
+      "lookup_name": "terrain_toy",
+      "scene": "res://commons/artifacts/terrain_toy/terrain_toy.tscn",
+      "class_name": "TerrainToy",
+      "name": "Terrain Toy (held mountain)",
+      "description": "A held fractal terrain tile: noise stacked at every scale (fBm) becomes a little mountain in the hand.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "small",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "terrain_bench": {
+      "lookup_name": "terrain_bench",
+      "scene": "res://commons/artifacts/terrain_bench/terrain_bench.tscn",
+      "class_name": "TerrainBench",
+      "name": "Terrain Bench (noise at every scale)",
+      "description": "A fractal landscape on a bench: stack noise octave on octave and randomness becomes a mountain, a coastline.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "terrain_forge": {
+      "lookup_name": "terrain_forge",
+      "scene": "res://commons/artifacts/terrain_forge/terrain_forge.tscn",
+      "class_name": "TerrainForge",
+      "name": "Terrain Forge (stamp a landscape)",
+      "description": "A terrain forge that stamps a fresh fBm landscape patch on demand - the fractal as a level-generation tool.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "applied",
+        "fractal"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "space_filling_bench": {
+      "lookup_name": "space_filling_bench",
+      "scene": "res://commons/artifacts/space_filling_bench/space_filling_bench.tscn",
+      "class_name": "SpaceFillingBench",
+      "name": "Space-Filling Bench (a line fills a square)",
+      "description": "A Hilbert curve filling a square on a bench - one dimension reaching, by recursion, to fill two.",
+      "category": "fractals",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "medium",
+        "space-filling"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "space_filling_room": {
+      "lookup_name": "space_filling_room",
+      "scene": "res://commons/artifacts/space_filling_room/space_filling_room.tscn",
+      "class_name": "SpaceFillingRoom",
+      "name": "Space-Filling Room (every point, one line)",
+      "description": "A room-scale 3D Hilbert curve you walk around - a single line that visits every point of a volume.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "fractal",
+        "large",
+        "space-filling"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "fractals",
+        "recursion",
+        "applications"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    }
+  }
+}

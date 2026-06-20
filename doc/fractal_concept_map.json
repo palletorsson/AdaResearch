@@ -32,10 +32,10 @@
   ],
   "concept_meta": {
     "Recursion (calls itself)": {
-      "count": 6,
-      "map_ready": 6,
-      "has_image": 6,
-      "best": "example_8_3_recursion_circles_vr",
+      "count": 7,
+      "map_ready": 7,
+      "has_image": 7,
+      "best": "recursion_bench",
       "truth": "A rule that contains itself: the whole is in the part, and the part is in the part, with no bottom but the base case.",
       "act": "Act I — recursion & dimension",
       "thin": false,
@@ -45,7 +45,9 @@
           "fractal_recursion_2",
           "recursion_spiral"
         ],
-        "medium": [],
+        "medium": [
+          "recursion_bench"
+        ],
         "large": [
           "example_8_3_recursion_circles_vr",
           "fractal_recursion_circles"
@@ -54,15 +56,13 @@
           "recursive_boolean_cube"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Recursive trees": {
-      "count": 11,
-      "map_ready": 11,
-      "has_image": 11,
-      "best": "fractal_recursive_tree",
+      "count": 13,
+      "map_ready": 13,
+      "has_image": 13,
+      "best": "recursion_animator",
       "truth": "Split, rotate, recurse: the simplest recursion that looks alive — a trunk that is two smaller trees, forever.",
       "act": "Act I — recursion & dimension",
       "thin": false,
@@ -78,45 +78,48 @@
           "fractal_stochastic_tree",
           "recursive_tree_2"
         ],
-        "medium": [],
+        "medium": [
+          "recursive_tree_bench"
+        ],
         "large": [
           "inverted_tree_cloud",
           "recursive_tree"
         ],
-        "applied": []
+        "applied": [
+          "recursion_animator"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Fractal dimension": {
-      "count": 1,
-      "map_ready": 0,
-      "has_image": 1,
-      "best": "box_counting_dimension",
+      "count": 4,
+      "map_ready": 3,
+      "has_image": 4,
+      "best": "dimension_bench",
       "truth": "D = log N / log S — the coastline that refuses to be 1D or 2D, measured by how the detail multiplies when you zoom.",
       "act": "Act I — recursion & dimension",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "box_counting_dimension"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "dimension_bench"
+        ],
+        "large": [
+          "dimension_room"
+        ],
+        "applied": [
+          "dimension_meter"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Cantor set": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
-      "best": "example_8_4_cantor_pagoda_vr",
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
+      "best": "cantor_bench",
       "truth": "Remove the middle third, forever: a set with zero length that still has as many points as the line. Existence without extension.",
       "act": "Act II — the classic sets",
       "thin": false,
@@ -125,7 +128,9 @@
           "example_8_4_cantor_set_vr",
           "fractal_cantor_set"
         ],
-        "medium": [],
+        "medium": [
+          "cantor_bench"
+        ],
         "large": [
           "cantor_set"
         ],
@@ -134,15 +139,13 @@
           "cantor_diagonal_workbench"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Koch curve & snowflake": {
-      "count": 7,
-      "map_ready": 7,
-      "has_image": 7,
-      "best": "fractal_koch_curve",
+      "count": 8,
+      "map_ready": 8,
+      "has_image": 8,
+      "best": "koch_snowflake_press",
       "truth": "Infinite perimeter around a finite area — D ≈ 1.26, the edge that never resolves no matter how close you look.",
       "act": "Act II — the classic sets",
       "thin": false,
@@ -160,17 +163,17 @@
           "koch_curve",
           "koch_curve_1"
         ],
-        "applied": []
+        "applied": [
+          "koch_snowflake_press"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Sierpinski": {
-      "count": 4,
-      "map_ready": 4,
-      "has_image": 4,
-      "best": "living_paper_sierpinski",
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
+      "best": "sierpinski_bench",
       "truth": "The triangle of triangles of triangles — D ≈ 1.585, and exactly what Rule 90 draws. The same hole at every scale.",
       "act": "Act II — the classic sets",
       "thin": false,
@@ -178,47 +181,50 @@
         "small": [
           "living_paper_sierpinski"
         ],
-        "medium": [],
+        "medium": [
+          "sierpinski_bench"
+        ],
         "large": [
           "sierpinski_pyramid",
           "sierpinski_triangle",
           "SierpinskiPyramid"
         ],
-        "applied": []
+        "applied": [
+          "sierpinski_stamp"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Menger sponge": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "menger_sponge",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "menger_bench",
       "truth": "A cube with its middles removed forever — D ≈ 2.73, infinite surface around zero volume, a solid you can walk inside.",
       "act": "Act II — the classic sets",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "menger_toy"
+        ],
+        "medium": [
+          "menger_bench"
+        ],
         "large": [
           "menger_sponge",
           "mengersponge"
         ],
-        "applied": []
+        "applied": [
+          "menger_filter"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Mandelbrot set": {
-      "count": 3,
-      "map_ready": 3,
-      "has_image": 3,
-      "best": "mandelbrot_dive",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "mandelbrot_bench",
       "truth": "z -> z² + c, asked of every point: the master fractal, an infinitely intricate boundary between staying and escaping.",
       "act": "Act III — escape-time",
       "thin": false,
@@ -226,7 +232,9 @@
         "small": [
           "living_paper_mandelbrot"
         ],
-        "medium": [],
+        "medium": [
+          "mandelbrot_bench"
+        ],
         "large": [
           "mandelbrot_set"
         ],
@@ -234,15 +242,13 @@
           "mandelbrot_dive"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Julia sets": {
-      "count": 3,
-      "map_ready": 3,
-      "has_image": 3,
-      "best": "julia_set_explorer",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "julia_bench",
       "truth": "One c, a whole Julia set; move c and the set breathes between connected and dust. Parameter space made visible.",
       "act": "Act III — escape-time",
       "thin": false,
@@ -250,7 +256,9 @@
         "small": [
           "living_paper_julia"
         ],
-        "medium": [],
+        "medium": [
+          "julia_bench"
+        ],
         "large": [
           "julia_set"
         ],
@@ -258,15 +266,13 @@
           "julia_set_explorer"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Lyapunov & escape-time": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "lyapunov_fractal",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "escape_time_room",
       "truth": "Colour by how fast nearby paths diverge, and stability itself becomes a fractal landscape.",
       "act": "Act III — escape-time",
       "thin": false,
@@ -275,43 +281,47 @@
           "lyapunov_fractal",
           "lyapunov_exponents"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "lyapunov_bench"
+        ],
+        "large": [
+          "escape_time_room"
+        ],
+        "applied": [
+          "newton_fractal_tool"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Iterated function systems (IFS)": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "barnsley_fern",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "chaos_game_tool",
       "truth": "Four affine maps and a chaos game: throw a point, fold it, repeat — and a fern appears with no fern ever drawn.",
       "act": "Act IV — IFS, spirals & growth",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "barnsley_fern"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "ifs_bench"
+        ],
+        "large": [
+          "ifs_room"
+        ],
+        "applied": [
+          "chaos_game_tool"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Golden spiral & phyllotaxis": {
-      "count": 9,
-      "map_ready": 9,
-      "has_image": 9,
-      "best": "fibonacci_terrain",
+      "count": 10,
+      "map_ready": 10,
+      "has_image": 10,
+      "best": "golden_spiral_bench",
       "truth": "137.5° and the golden ratio: how a sunflower packs seeds and a romanesco stacks cones — the fractal that grows.",
       "act": "Act IV — IFS, spirals & growth",
       "thin": false,
@@ -323,7 +333,9 @@
           "fibonacci_snake",
           "romanesco"
         ],
-        "medium": [],
+        "medium": [
+          "golden_spiral_bench"
+        ],
         "large": [
           "fibonacci_terrain",
           "golden_rectangle"
@@ -333,15 +345,13 @@
           "transform_staircase_fibonacci"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Diffusion-limited aggregation": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "diffusion_limited_aggregation",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "dla_bench",
       "truth": "Random walkers that stick where they land grow a coral, a frost, a lightning — fractal branching from pure chance.",
       "act": "Act IV — IFS, spirals & growth",
       "thin": false,
@@ -349,67 +359,72 @@
         "small": [
           "fractal_hydra"
         ],
-        "medium": [],
+        "medium": [
+          "dla_bench"
+        ],
         "large": [
           "diffusion_limited_aggregation"
         ],
-        "applied": []
+        "applied": [
+          "dla_grower"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Strange attractors": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "strange_attractors",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "attractor_bench",
       "truth": "A deterministic path that never repeats and never escapes — chaos with a fractal shape, the butterfly given structure.",
       "act": "Act V — chaos & landscapes",
-      "thin": true,
+      "thin": false,
       "tiers": {
         "small": [
           "strange_attractors"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "attractor_bench"
+        ],
+        "large": [
+          "attractor_room"
+        ],
+        "applied": [
+          "attractor_plotter"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Fractal terrain & clouds": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "fractal_clouds",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "terrain_bench",
       "truth": "Stack noise at every scale (fractional Brownian motion) and randomness becomes a mountain, a cloud, a coastline.",
       "act": "Act V — chaos & landscapes",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "terrain_toy"
+        ],
+        "medium": [
+          "terrain_bench"
+        ],
         "large": [
           "fractal_clouds",
           "fractal_space"
         ],
-        "applied": []
+        "applied": [
+          "terrain_forge"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Space-filling curves": {
-      "count": 3,
-      "map_ready": 3,
-      "has_image": 3,
-      "best": "space_filling_curve_gallery",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "space_filling_bench",
       "truth": "A line, recursed, that visits every point of a volume — the bridge to L-systems and to efficient traversal.",
       "act": "Act V — chaos & landscapes",
       "thin": false,
@@ -418,29 +433,36 @@
           "space_filling_floor",
           "Hilbert3D"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "space_filling_bench"
+        ],
+        "large": [
+          "space_filling_room"
+        ],
         "applied": [
           "space_filling_curve_gallery"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Fractal furniture": {
-      "count": 6,
-      "map_ready": 6,
-      "has_image": 6,
-      "best": "cube_bookshelf",
+      "count": 9,
+      "map_ready": 9,
+      "has_image": 9,
+      "best": "fractal_furniture_room",
       "truth": "Recurse a strut and you get a chair that is chairs; the branching that holds a tree up holds a shelf up too.",
       "act": "Act VI — useful structures",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "fractal_stool_toy"
+        ],
+        "medium": [
+          "furniture_recursion_bench"
+        ],
+        "large": [
+          "fractal_furniture_room"
+        ],
         "applied": [
           "cube_bookshelf",
           "cube_chair",
@@ -450,64 +472,76 @@
           "cube_desk"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Fractal architecture": {
-      "count": 3,
-      "map_ready": 3,
-      "has_image": 3,
-      "best": "cantor_pagoda_vr",
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
+      "best": "fractal_arch_bench",
       "truth": "From Gothic tracery to the Eiffel tower: self-similar structure is how you span the most with the least.",
       "act": "Act VI — useful structures",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "fractal_facade_toy"
+        ],
+        "medium": [
+          "fractal_arch_bench"
+        ],
+        "large": [
+          "fractal_skyline_room"
+        ],
         "applied": [
           "cantor_pagoda_vr",
           "cube_staircase",
           "fractal_scene"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Fractal antennas & structures": {
-      "count": 0,
-      "map_ready": 0,
-      "has_image": 0,
-      "best": null,
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "fractal_antenna",
       "truth": "A self-similar antenna hears every band; a space-filling pipe is all surface; the fractal is the engineer's trick for infinite edge in finite room.",
       "act": "Act VI — useful structures",
-      "thin": true,
+      "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "small": [
+          "fractal_antenna_toy"
+        ],
+        "medium": [
+          "fractal_heat_exchanger"
+        ],
+        "large": [
+          "fractal_truss_tower"
+        ],
+        "applied": [
+          "fractal_antenna"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     }
   },
-  "total": 71,
-  "map_ready_total": 70,
-  "image_total": 71,
-  "empty_slots": 42,
+  "total": 113,
+  "map_ready_total": 112,
+  "image_total": 113,
+  "empty_slots": 0,
   "groups": {
     "Recursion (calls itself)": [
+      {
+        "lookup": "recursion_bench",
+        "name": "Recursion Bench (contains itself)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "example_8_3_recursion_circles_vr",
         "name": "example_8_3_recursion_circles_vr",
@@ -576,6 +610,28 @@
       }
     ],
     "Recursive trees": [
+      {
+        "lookup": "recursion_animator",
+        "name": "Recursion Animator (watch the depth)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "recursive_tree_bench",
+        "name": "Recursive Tree Bench (two smaller trees)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "fractal_recursive_tree",
         "name": "Recursive Tree",
@@ -700,6 +756,39 @@
     ],
     "Fractal dimension": [
       {
+        "lookup": "dimension_bench",
+        "name": "Dimension Bench (box-counting)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "dimension_meter",
+        "name": "Dimension Meter (scan a shape)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "dimension_room",
+        "name": "Dimension Room (between 1D and 2D)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "box_counting_dimension",
         "name": "Box Counting Dimension",
         "registry": "chaos.json",
@@ -712,6 +801,17 @@
       }
     ],
     "Cantor set": [
+      {
+        "lookup": "cantor_bench",
+        "name": "Cantor Bench (remove the middle third)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "example_8_4_cantor_pagoda_vr",
         "name": "example_8_4_cantor_pagoda_vr",
@@ -769,6 +869,17 @@
       }
     ],
     "Koch curve & snowflake": [
+      {
+        "lookup": "koch_snowflake_press",
+        "name": "Koch Snowflake Press (infinite perimeter)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
       {
         "lookup": "fractal_koch_curve",
         "name": "Koch Curve",
@@ -849,6 +960,28 @@
     ],
     "Sierpinski": [
       {
+        "lookup": "sierpinski_bench",
+        "name": "Sierpinski Bench (the same hole)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "sierpinski_stamp",
+        "name": "Sierpinski Stamp (triangle of triangles)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "living_paper_sierpinski",
         "name": "Living Paper — Sierpinski Triangle",
         "registry": "living_paper.json",
@@ -895,6 +1028,39 @@
     ],
     "Menger sponge": [
       {
+        "lookup": "menger_bench",
+        "name": "Menger Bench (zero volume)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "menger_filter",
+        "name": "Menger Filter (all surface)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "menger_toy",
+        "name": "Menger Toy (held sponge)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
         "lookup": "menger_sponge",
         "name": "menger_sponge",
         "registry": "procgen_extra.json",
@@ -918,6 +1084,17 @@
       }
     ],
     "Mandelbrot set": [
+      {
+        "lookup": "mandelbrot_bench",
+        "name": "Mandelbrot Bench (z -> z^2 + c)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "mandelbrot_dive",
         "name": "Mandelbrot Dive",
@@ -954,6 +1131,17 @@
     ],
     "Julia sets": [
       {
+        "lookup": "julia_bench",
+        "name": "Julia Bench (move c, it breathes)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
         "lookup": "julia_set_explorer",
         "name": "Julia Set Explorer",
         "registry": "commons_artifacts.json",
@@ -989,6 +1177,39 @@
     ],
     "Lyapunov & escape-time": [
       {
+        "lookup": "escape_time_room",
+        "name": "Escape-Time Room (edge of chaos)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "lyapunov_bench",
+        "name": "Lyapunov Bench (stability landscape)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "newton_fractal_tool",
+        "name": "Newton Fractal Tool (root basins)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "lyapunov_fractal",
         "name": "Lyapunov Fractal",
         "registry": "chaos.json",
@@ -1013,6 +1234,39 @@
     ],
     "Iterated function systems (IFS)": [
       {
+        "lookup": "chaos_game_tool",
+        "name": "Chaos Game Tool (throw, fold, repeat)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "ifs_bench",
+        "name": "IFS Bench (four maps, a fern)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "ifs_room",
+        "name": "IFS Room (a point, folded)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "barnsley_fern",
         "name": "Barnsley Fern",
         "registry": "commons_artifacts.json",
@@ -1025,6 +1279,17 @@
       }
     ],
     "Golden spiral & phyllotaxis": [
+      {
+        "lookup": "golden_spiral_bench",
+        "name": "Golden Spiral Bench (137.5 degrees)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "fibonacci_terrain",
         "name": "Fibonacci Terrain",
@@ -1127,6 +1392,28 @@
     ],
     "Diffusion-limited aggregation": [
       {
+        "lookup": "dla_bench",
+        "name": "DLA Bench (stick where you land)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "dla_grower",
+        "name": "DLA Frost Generator",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "diffusion_limited_aggregation",
         "name": "diffusion_limited_aggregation",
         "registry": "procgen_extra.json",
@@ -1151,6 +1438,39 @@
     ],
     "Strange attractors": [
       {
+        "lookup": "attractor_bench",
+        "name": "Attractor Bench (chaos with a shape)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "attractor_plotter",
+        "name": "Lorenz Plotter",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "attractor_room",
+        "name": "Attractor Room (never repeats)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "strange_attractors",
         "name": "Strange Attractors",
         "registry": "chaos.json",
@@ -1163,6 +1483,39 @@
       }
     ],
     "Fractal terrain & clouds": [
+      {
+        "lookup": "terrain_bench",
+        "name": "Terrain Bench (noise at every scale)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "terrain_forge",
+        "name": "Terrain Forge (stamp a landscape)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "terrain_toy",
+        "name": "Terrain Toy (held mountain)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "fractal_clouds",
         "name": "Fractal Clouds",
@@ -1187,6 +1540,28 @@
       }
     ],
     "Space-filling curves": [
+      {
+        "lookup": "space_filling_bench",
+        "name": "Space-Filling Bench (a line fills a square)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "space_filling_room",
+        "name": "Space-Filling Room (every point, one line)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "space_filling_curve_gallery",
         "name": "Space-Filling Curve Gallery",
@@ -1222,6 +1597,39 @@
       }
     ],
     "Fractal furniture": [
+      {
+        "lookup": "fractal_furniture_room",
+        "name": "Fractal Furniture Room (recurse a strut)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "fractal_stool_toy",
+        "name": "Fractal Stool Toy (legs of legs)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "furniture_recursion_bench",
+        "name": "Furniture Recursion Bench (a chair that is chairs)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "cube_bookshelf",
         "name": "Cube Bookshelf",
@@ -1291,6 +1699,39 @@
     ],
     "Fractal architecture": [
       {
+        "lookup": "fractal_arch_bench",
+        "name": "Fractal Arch Bench (span the most)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "fractal_facade_toy",
+        "name": "Fractal Facade Toy (tracery)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "fractal_skyline_room",
+        "name": "Fractal Skyline Room (self-similar structure)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "cantor_pagoda_vr",
         "name": "cantor_pagoda_vr",
         "registry": "procgen_extra.json",
@@ -1324,6 +1765,51 @@
         "tier": "applied"
       }
     ],
-    "Fractal antennas & structures": []
+    "Fractal antennas & structures": [
+      {
+        "lookup": "fractal_antenna",
+        "name": "Fractal Antenna (multi-band)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "fractal_antenna_toy",
+        "name": "Fractal Antenna Toy (hears every band)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "fractal_heat_exchanger",
+        "name": "Fractal Heat Exchanger (all surface)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "fractal_truss_tower",
+        "name": "Fractal Truss Tower (max strength, min material)",
+        "registry": "fractals.json",
+        "category": "fractals",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      }
+    ]
   }
 }
